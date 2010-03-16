@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition name="content-publishing"> 
+
+  <description>
+   	This process validate document then public it, and backup it when publish time is expired
+  </description>
+
+  <!-- SWIMLANES -->
+  <swimlane name="initiator" />    
+  <!-- START-STATE -->
+  <start-state name="start">  
+    <task swimlane="initiator"/>    
+    <event type="node-leave">
+      <action class="org.exoplatform.processes.publishing.InitialActionHandler"/>
+    </event>  
+    <transition to="evaluation"/>
+  </start-state>
+  
+  <!-- NODES -->
+  <task-node name="evaluation">  	
+    <task name="evaluation" description="evaluate document">
+      <assignment class="org.exoplatform.processes.publishing.ValidatorAssignmentHandler"/>
+    </task>  
+    <transition name="approve" to="manage-publication"/>
+    <transition name="disapprove" to="change-request"/>
+    <transition name="delegate" to="delegate"/>    
+    <transition name="refuse" to="trash-movement"/>    
+  </task-node>  
+
+  <task-node name="change-request">
+    <task name="change-request" description="update and request for validation again">
+      <assignment class="org.exoplatform.processes.publishing.AuthorAssignmentHandler"/>
+    </task> 
+    <transition name="submit" to="evaluation"/>
+    <transition name="cancel" to="trash-movement"/>
+  </task-node>
+  
+  <state name="trash-movement">
+    <event type="node-enter">
+      <action class="org.exoplatform.processes.publishing.TrashMovementActionHandler"/>
+    </event>
+    <transition name="move-done" to="end"/>  
+  </state>
+  
+  <process-state name="delegate">
+  	<event type="node-enter">
+      <action class="org.exoplatform.processes.publishing.DelegateActionHandler"/>
+    </event>
+    <sub-process name="content-publishing" />
+    <variable name="delegate_flg" access="read,write" mapped-name="delegate_flg" />
+    <variable name="delegator" access="read,write" mapped-name="initiator" />
+    <variable name="delegator" access="read,write" mapped-name="exo:validator" />
+    <variable name="document-type" access="read,write" mapped-name="document-type" />    
+    <variable name="nodePath" access="read,write" mapped-name="nodePath" />   
+    <variable name="repository" access="read,write" mapped-name="repository" />
+    <variable name="srcWorkspace" access="read,write" mapped-name="srcWorkspace" />   
+    <variable name="srcPath" access="read,write" mapped-name="srcPath" />                        
+    <variable name="actionName" access="read,write" mapped-name="actionName" />    
+    <transition name="end" to="end"/>  
+  </process-state>   
+ 
+  <state name="manage-publication">
+    <event type="node-enter">
+      <action class="org.exoplatform.processes.publishing.SchedulePublicationTimerActionHandler"/>
+    </event>
+    <transition name="publication-done" to="manage-backup"/>  
+  </state>    
+  
+  <state name="manage-backup">
+    <event type="node-enter">
+      <action class="org.exoplatform.processes.publishing.ScheduleBackupTimerActionHandler"/>
+    </event>
+    <transition name="backup-done" to="end"/>  
+  </state>
+
+  <!-- END-STATE -->
+  <end-state name="end" />
+
+</process-definition>

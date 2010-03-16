@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>update document</task-name>
+  <title>update document</title>
+  <submit>
+    <submit>Modify</submit>
+    <value>Modify document</value>
+  </submit>
+  <cancel>
+    <submit>Disagree</submit>
+    <value>Disagree</value>
+  </cancel>
+  <comment>
+    <title>Some comments...</title>
+    <label>Comment:</label>
+  </comment>
+  <document-id>
+    <title>Document</title>
+    <label>Document:</label>
+  </document-id>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

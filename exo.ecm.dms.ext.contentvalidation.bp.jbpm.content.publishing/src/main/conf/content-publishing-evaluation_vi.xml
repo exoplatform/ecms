@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Đánh giá tài liệu</task-name>
+  <title>Đánh giá tài liệu</title>
+  <approve>
+    <submit>Phê duyệt</submit>
+    <value>Phê duyệt tài liệu</value>
+  </approve>
+  <disapprove>
+    <submit>Không phê duyệt</submit>
+    <value>Không phê duyệt tài liệu</value>
+  </disapprove>
+  <refuse>
+    <submit>Từ chối</submit>
+    <value>Từ chối tài liệu</value>
+  </refuse>
+  <delegate>
+    <submit>Ủy nhiệm</submit>
+    <value>Được ủy nhiệm phê duyệt</value>
+  </delegate>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Người tạo ra tài liệu này</title>
+    <label>Người tạo:</label>
+  </initiator>
+  <startDate>
+    <title>Khi nào thực hiện công bố</title>
+    <label>Sự công bố bắt đầu vào :</label>
+  </startDate>
+  <endDate>
+    <title>Khi nào dừng công bố</title>
+    <label>Sự công bố bắt đầu vào :</label>
+  </endDate>
+  <delegator>
+    <title>Ủy nhiệm phê duyệt</title>
+    <label>Ủy nhiệm phê duyệt: </label>
+  </delegator>
+  <document-id>
+    <title>Tài liệu</title>
+    <label>Tài liệu:</label>
+  </document-id>
+  <reason>
+    <label>Lý do:</label>
+    <title>Lý do</title>
+  </reason>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

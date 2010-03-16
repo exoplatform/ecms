@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Cập nhật tài liệu</task-name>
+  <title>Cập nhật tài liệu</title>
+  <submit>
+    <submit>Sửa</submit>
+    <value>Sửa tài liệu</value>
+  </submit>
+  <cancel>
+    <submit>Không đồng ý</submit>
+    <value>Không đồng ý</value>
+  </cancel>
+  <comment>
+    <title>Một vài bình luận...</title>
+    <label>Bình luận:</label>
+  </comment>
+  <document-id>
+    <title>Tài liệu</title>
+    <label>Tài liệu:</label>
+  </document-id>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+
