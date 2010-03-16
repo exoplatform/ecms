@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <portal>
+    <acme>
+      <overview>Giới thiệu</overview>
+      <news>Tin tức</news>
+      <contactus>Liên hệ</contactus>
+      <newsletters>Thư giới thiệu</newsletters>
+      <confirmation>Xác nhận</confirmation>
+      <pcv>Chi tiết</pcv>
+      <printviewer>Trang in</printviewer>
+      <searchResult>Kết quả tìm kiếm</searchResult>
+      <newAccount>Đăng ký</newAccount>
+      <groupnavigation>Quản lý thanh điều hướng cho nhóm</groupnavigation>
+      <portalnavigation>Quản lý thanh điều hướng chung</portalnavigation>
+    </acme>
+  </portal>
+</bundle>
+

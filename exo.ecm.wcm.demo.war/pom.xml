@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecm</groupId>
+    <artifactId>wcm</artifactId>
+    <version>2.0.0-Beta01-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo.ecm.wcm.demo.war</artifactId>
+  <packaging>war</packaging>
+  <name>eXo WCM Demo configuration war</name>
+  <build>
+    <finalName>gatein-exo-ecm-${project.version}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+</project>

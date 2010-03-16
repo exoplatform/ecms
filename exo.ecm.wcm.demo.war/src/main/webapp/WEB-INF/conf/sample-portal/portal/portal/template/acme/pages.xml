@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<page-set>
+  <page>
+    <page-id>portal::@owner@::overview</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>@owner@</owner-id>
+    <name>overview</name>
+    <title>Overview</title>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>editor:/platform/web-contributors</edit-permission>
+  </page>
+
+  <page>
+    <page-id>portal::@owner@::searchResult</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>@owner@</owner-id>
+    <name>searchResult</name>
+    <title>SearchResult</title>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>editor:/platform/web-contributors</edit-permission>
+    <portlet-application>
+      <portlet>
+        <application-ref>searches</application-ref>
+        <portlet-ref>WCMAdvanceSearchPortlet</portlet-ref>
+        <preferences>
+          <preference>
+            <name>repository</name>
+            <value>repository</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>workspace</name>
+            <value>collaboration</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>searchFormTemplatePath</name>
+            <value>/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>searchResultTemplatePath</name>
+            <value>/exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>searchPaginatorTemplatePath</name>
+            <value>/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>searchPageLayoutTemplatePath</name>
+            <value>/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>itemsPerPage</name>
+            <value>5</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>showQuickEditButton</name>
+            <value>true</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>basePath</name>
+            <value>products/presentation/pcv</value>
+            <read-only>false</read-only>
+          </preference>
+        </preferences>
+      </portlet>
+      <access-permissions>Everyone</access-permissions>
+    </portlet-application>
+  </page>
+
+  <page>
+    <page-id>portal::@owner@::pcv</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>@owner@</owner-id>
+    <name>pcv</name>
+    <title>Parameterized content viewer portlet</title>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <portlet-application>
+      <portlet>
+        <application-ref>presentation</application-ref>
+        <portlet-ref>SingleContentViewer</portlet-ref>
+        <preferences></preferences>
+      </portlet>
+      <access-permissions>Everyone</access-permissions>
+    </portlet-application>
+  </page>
+
+  <page>
+    <page-id>portal::@owner@::printviewer</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>@owner@</owner-id>
+    <name>printviewer</name>
+    <title>Print viewer</title>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <show-max-window>true</show-max-window>
+    <portlet-application>
+      <portlet>
+        <application-ref>presentation</application-ref>
+        <portlet-ref>SingleContentViewer</portlet-ref>
+        <preferences></preferences>
+      </portlet>
+      <access-permissions>Everyone</access-permissions>
+    </portlet-application>
+  </page>
+
+  <page>
+    <page-id>portal::@owner@::newAccount</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>@owner@</owner-id>
+    <name>newAccount</name>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <portlet-application>
+      <portlet>
+        <application-ref>exoadmin</application-ref>
+        <portlet-ref>AccountPortlet</portlet-ref>
+        <preferences></preferences>
+      </portlet>
+      <access-permissions>Everyone</access-permissions>
+    </portlet-application>
+  </page>
+
+</page-set>

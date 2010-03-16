@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <portal>
+    <classic>
+      <home>Overview</home>
+      <sitemap>Site map</sitemap>
+      <searchResult>Search</searchResult>
+      <parameterizedviewer>Details</parameterizedviewer>
+      <newAccount>New Account</newAccount>
+      <groupnavigation>Group Navigation</groupnavigation>
+      <portalnavigation>Portal Navigation</portalnavigation>
+    </classic>
+  </portal>
+</bundle>
