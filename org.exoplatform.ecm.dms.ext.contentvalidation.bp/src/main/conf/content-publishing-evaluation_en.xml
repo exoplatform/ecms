@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>evaluate document</task-name>
+  <title>evaluate document</title>
+  <decision>
+    <label>Decision :</label>
+    <radiobox-0>Approve document</radiobox-0>
+    <radiobox-1>Disapprove document</radiobox-1>
+    <radiobox-2>Delegate the validation</radiobox-2>
+    <radiobox-3>Refuse document</radiobox-3>
+  </decision>
+  <approve>
+    <submit>Approve</submit>
+    <value>Approve document</value>
+  </approve>
+  <disapprove>
+    <submit>Disapprove</submit>
+    <value>Disapprove document</value>
+  </disapprove>
+  <refuse>
+    <submit>Refuse</submit>
+    <value>Refuse document</value>
+  </refuse>
+  <delegate>
+    <submit>Delegate</submit>
+    <value>Delegate the validation</value>
+  </delegate>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Who created the document</title>
+    <label>Creator:</label>
+  </initiator>
+  <startDate>
+    <title>When to start the publication</title>
+    <label>Publication starts on :</label>
+  </startDate>
+  <endDate>
+    <title>When to stop the publication</title>
+    <label>Publication ends on:</label>
+  </endDate>
+  <delegator>
+    <title>Delegate the validation</title>
+    <label>Delegate the validation:</label>
+  </delegator>
+  <document-id>
+    <title>Document</title>
+    <label>Document:</label>
+  </document-id>
+  <reason>
+    <label>Reason:</label>
+    <title>Reason</title>
+  </reason>
+  <submit>
+    <submit>Submit</submit>
+  </submit>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

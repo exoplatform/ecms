@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Evaluer le document</task-name>
+  <title>Evaluer le document</title>
+  <decision>
+    <label>D\u00e9cision :</label>
+    <radiobox-0>Approuver le document</radiobox-0>
+    <radiobox-1>D\u00e9sapprouver le document</radiobox-1>
+    <radiobox-2>D\u00e9l\u00e9guer la validation</radiobox-2>
+    <radiobox-3>Refuser document</radiobox-3>
+  </decision>
+  <approve>
+    <submit>Approuver</submit>
+    <value>Approuver le document</value>
+  </approve>
+  <disapprove>
+    <submit>D\u00e9sapprouver</submit>
+    <value>D\u00e9sapprouver le document</value>
+  </disapprove>
+  <refuse>
+    <submit>Refuser</submit>
+    <value>Refuser document</value>
+  </refuse>
+  <delegate>
+    <submit>D\u00e9l\u00e9guer</submit>
+    <value>D\u00e9l\u00e9guer la validation</value>
+  </delegate>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Qui a cr\u00e9\u00e9 le document</title>
+    <label>Cr\u00e9ateur :</label>
+  </initiator>
+  <startDate>
+    <title>Quand d\u00e9buter la publication</title>
+    <label>D\u00e9but de la publication le :</label>
+  </startDate>
+  <endDate>
+    <title>Quand arr\u00eater la publication</title>
+    <label>Fin de la publication le :</label>
+  </endDate>
+  <delegator>
+    <title>D\u00e9l\u00e9guer la validation</title>
+    <label>D\u00e9l\u00e9guer la validation :</label>
+  </delegator>
+  <document-id>
+    <title>Document</title>
+    <label>Document :</label>
+  </document-id>
+  <reason>
+    <label>Raison:</label>
+    <title>Raison</title>
+  </reason>
+  <submit>
+    <submit>Valider</submit>
+  </submit>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+
