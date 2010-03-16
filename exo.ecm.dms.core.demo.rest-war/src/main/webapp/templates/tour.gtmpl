@@ -1,0 +1,290 @@
+<%
+  import org.exoplatform.services.resources.ResourceBundleService ;
+  import org.exoplatform.container.PortalContainer;
+  import org.exoplatform.portal.webui.util.Util;
+  import java.util.Locale;
+  import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+  import java.util.ResourceBundle;
+  
+  ResourceBundleService service = 
+      (ResourceBundleService)PortalContainer.getComponent(ResourceBundleService.class) ;
+  Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
+  
+  /*
+    Using a specific bundle and not the one provided by WebUI, 
+    so that each project can specify its own messages and translations
+  */
+  ResourceBundle res = service.getResourceBundle("locale.ecm.homepage", locale) ;
+
+  String registeruri = Util.getPortalRequestContext().getPortalURI() + "register";
+%>
+<div class="UIDMSGuidedTour" id="UIDMSGuidedTour">
+	<div class="LeftDMSGuidedTour">
+		<div class="Header"><span></span></div>
+		<div class="Button HightLineButton" onclick="showContent(this)" onmouseover="onMouseOverButton(this)" onmouseout="onMouseOutButton(this)">
+			<div class="ButtonL">
+				<div class="ButtonR">
+					<div class="ButtonC">
+						<%=res.getString("Homepage.ecm.label.FE.name")%>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="Button NormalButton"	onclick="showContent(this)" onmouseover="onMouseOverButton(this)" onmouseout="onMouseOutButton(this)">
+			<div class="ButtonL">
+				<div class="ButtonR">
+					<div class="ButtonC">
+						<%=res.getString("Homepage.ecm.label.CB.name")%>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="Button NormalButton"	onclick="showContent(this)" onmouseover="onMouseOverButton(this)" onmouseout="onMouseOutButton(this)">
+			<div class="ButtonL">
+				<div class="ButtonR">
+					<div class="ButtonC">
+						<%=res.getString("Homepage.ecm.label.ECMA.name")%>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="$registeruri">
+			<div class="SignUpButton">
+				<div>Sign up Now</div>
+			</div>
+		</a>
+	</div>
+	<div class="RightDMSGuidedTour">
+		<div class="ContentTour DMSGuidedTour1" style="display:block;">
+			<div class="HeadTitle">
+				<div class="HeadTitleL">
+					<div class="HeadTitleR">
+						<div class="HeadTitleC">
+							How do I manage my documents?
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="CheckTitleIcon">The File Explorer has been designed to allow you to manage your documents as you do everyday with your favorite Operating System. 
+			</div>
+			<table>
+				<tr>
+					<td>
+						<div class="TitleBar">
+							<div class="TitleBarTL">
+								<div class="TitleBarTR">
+									<div class="TitleBarTC"><span></span></div>
+								</div>
+							</div>
+							<div class="TitleBarML">
+								<div class="TitleBarMR">
+									<div class="TitleBarMC">
+										<div style="width: 80%;margin: auto; align:left">
+											The <strong>Right-Click</strong>, the <strong>Drag and Drop</strong>, the <strong>Multi-Selection</strong>, 
+											the <strong>Double-Click</strong> and more are available.
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="TitleBarBL">
+								<div class="TitleBarBR">
+									<div class="TitleBarBC"><span></span></div>
+								</div>
+							</div>
+						</div>
+						<div class="H1">
+							<img class="ImageDMS" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="TitleBar">
+							<div class="TitleBarTL">
+								<div class="TitleBarTR">
+									<div class="TitleBarTC"><span></span></div>
+								</div>
+							</div>
+							<div class="TitleBarML">
+								<div class="TitleBarMR">
+									<div class="TitleBarMC">
+										<div style="width: 80%;margin: auto;">
+										    To execute a specific action on a document or a folder, just double-click on it, and click on the icon of your action in the action bar.
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="TitleBarBL">
+								<div class="TitleBarBR">
+									<div class="TitleBarBC"><span></span></div>
+								</div>
+							</div>
+						</div>
+						<div class="H2">
+							<img class="ImageDMS" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="TitleBar">
+							<div class="TitleBarTL">
+								<div class="TitleBarTR">
+									<div class="TitleBarTC"><span></span></div>
+								</div>
+							</div>
+							<div class="TitleBarML">
+								<div class="TitleBarMR">
+									<div class="TitleBarMC">
+										<div style="width: 80%;margin: auto;">
+											Only the <strong>appropriate actions</strong> are displayed and they allow the user to focus on what he really cans do
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="TitleBarBL">
+								<div class="TitleBarBR">
+									<div class="TitleBarBC"><span></span></div>
+								</div>
+							</div>
+						</div>
+						<div class="H3">
+							<img class="ImageDMS" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="TitleBar">
+							<div class="TitleBarTL">
+								<div class="TitleBarTR">
+									<div class="TitleBarTC"><span></span></div>
+								</div>
+							</div>
+							<div class="TitleBarML">
+								<div class="TitleBarMR">
+									<div class="TitleBarMC">
+										<div style="width: 80%;margin: auto;">
+										    Use <strong>symbolic links</strong> (also called shortcuts) to access your favorite documents faster 
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="TitleBarBL">
+								<div class="TitleBarBR">
+									<div class="TitleBarBC"><span></span></div>
+								</div>
+							</div>
+						</div>
+						<div class="H4">
+							<img class="ImageDMS" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="TitleBar">
+							<div class="TitleBarTL">
+								<div class="TitleBarTR">
+									<div class="TitleBarTC"><span></span></div>
+								</div>
+							</div>
+							<div class="TitleBarML">
+								<div class="TitleBarMR">
+									<div class="TitleBarMC">
+										<div style="width: 80%;margin: auto;">
+										    The <strong>new</strong> User Interface 
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="TitleBarBL">
+								<div class="TitleBarBR">
+									<div class="TitleBarBC"><span></span></div>
+								</div>
+							</div>
+						</div>
+						<div class="H5">
+							<img class="ImageDMS" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>
+						</div>
+					</td>
+				</tr>
+			</table>			
+		</div>
+		<div class="ContentTour DMSGuidedTour2" style="display:none;">
+			<div class="HeadTitle">
+				<div class="HeadTitleL">
+					<div class="HeadTitleR">
+						<div class="HeadTitleC">
+							How do I display my content?
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="CheckTitleIcon">The Content Browser allows you to show contents that you created thanks to the File Explorer. To display dynamically your content, just choose the source 
+			(a specific document, a folder, documents matching a query or a groovy script) and the view</div>
+			
+			<div class="ShowImageDMS2">
+				<div class="ShowImageDMS1"><span></span></div>
+			</div>
+			<div class="ShowImageDMS3"><span></span></div>
+		</div>
+		<div class="ContentTour DMSGuidedTour3" style="display:none;">
+			<div class="HeadTitle">
+				<div class="HeadTitleL">
+					<div class="HeadTitleR">
+						<div class="HeadTitleC">
+							How do I customize my DMS?
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="CheckTitleIcon">The ECM Administration is the place where you can customize all the technical aspects of your platform, such as the taxonomy, folksonomy, forms, views, scripts and more
+			</div>
+			<div class="ShowImageDMS5">
+				<div class="ShowImageDMS6"><span></span></div>
+			</div>
+			<div class="ShowImageDMS4"><span></span></div>
+		</div>
+	</div>
+	<div style="clear: left;"><span></span></div>
+</div>
+<script type="text/javascript">
+ 	var parent_ = document.getElementById('UIDMSGuidedTour');
+	var childBts = eXo.core.DOMUtil.findDescendantsByClass(parent_, 'div', 'Button');
+ 	var t = 0;
+	function showContent(obj) {
+ 		var childContents = eXo.core.DOMUtil.findDescendantsByClass(parent_, 'div', 'ContentTour');
+ 		for(var i=0; i<childBts.length; i++) {
+ 			var child = childBts[i];
+ 			if(child === obj) {
+ 				child.className = "Button HightLineButton";
+ 				childContents[i].style.display = "block";
+ 				t = i;
+ 			} else {
+ 				child.className = "Button NormalButton";
+ 				childContents[i].style.display = "none";
+ 			}
+ 		}
+	}
+	function onMouseOverButton(obj) {
+		for(var i=0; i<childBts.length; i++) {
+ 			var child = childBts[i];
+ 			if(child.className != "Button HightLineButton"){
+	 			if(child === obj) {
+	 				child.className = "Button OverButton";
+	 			} else if(i != t){
+	 				child.className = "Button NormalButton";
+	 			}
+ 			}
+ 		}
+	}
+	function onMouseOutButton(obj) {
+		for(var i=0; i<childBts.length; i++) {
+ 			var child = childBts[i];
+ 			if(child.className != "Button HightLineButton" && i != t){
+ 				child.className = "Button NormalButton";
+ 			}
+ 		}
+	}
+</script>

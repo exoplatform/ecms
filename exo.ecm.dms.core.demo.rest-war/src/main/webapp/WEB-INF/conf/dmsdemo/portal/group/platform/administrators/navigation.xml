@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<node-navigation>
+  <priority>2</priority>
+  
+  <page-nodes>   
+    <node>
+	    <uri>ECMAdmin</uri>
+	    <name>ECMAdmin</name>
+	    <label>#{contentAdministration.ECMAdmin}</label>
+	    <page-reference>group::platform/administrators::ECMAdmin</page-reference>
+    </node>
+  </page-nodes>
+</node-navigation>

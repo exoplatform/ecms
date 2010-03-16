@@ -1,0 +1,122 @@
+<%
+  import org.exoplatform.services.resources.ResourceBundleService ;
+  import org.exoplatform.container.PortalContainer;
+  import org.exoplatform.portal.webui.util.Util;
+  import java.util.Locale;
+  import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+  import java.util.ResourceBundle;
+  
+  ResourceBundleService service = 
+      (ResourceBundleService)PortalContainer.getComponent(ResourceBundleService.class) ;
+  Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
+  
+  /*
+    Using a specific bundle and not the one provided by WebUI, 
+    so that each project can specify its own messages and translations
+  */
+  ResourceBundle res = service.getResourceBundle("locale.ecm.homepage", locale) ;
+%>
+<div class="UIHomePagePortlet" id="$uicomponent.id">
+	<div class="PortletDecoration">
+		<div class="HomePortletAdBackround">
+			<div class="AdImageRight">
+				<div class="AdImageLeft">
+					<div class="EmptyBlock"><span></span></div>
+					<div class="ProductSlogan"><%=res.getString("Homepage.ecm.label.slogan")%></div>
+					<div class="ProductIntro"><%=res.getString("Homepage.ecm.label.productIntro")%></div>
+				</div>
+			</div>
+		</div>
+		<table style="table-layout: fixed; width: 100%;-width: auto;">
+			<tr>
+				<td>
+					<div class="HomePortletContainer" style="margin: 10px 0px 0px 0px">
+						<div class="BgReat">
+							<div class="FE LabelProduct"><%=res.getString("Homepage.ecm.label.FE.name")%></div>
+						</div>
+						<div class="ContentProductsDMS">
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.FE.bullet1")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.FE.bullet2")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.FE.bullet3")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.FE.bullet4")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.FE.bullet5")%></div>
+							</div>
+						</div>
+						<div class="CenterBottom">
+							<div class="LeftBottom">
+								<div class="RightBottom"><span></span></div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td>
+					<div class="HomePortletContainer" style="margin: 10px 5px 0px 5px">
+						<div class="BgReat">
+							<div class="CB LabelProduct"><%=res.getString("Homepage.ecm.label.CB.name")%></div>
+						</div>
+						<div class="ContentProductsDMS">
+						<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.CB.bullet1")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.CB.bullet2")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.CB.bullet3")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.CB.bullet4")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.CB.bullet5")%></div>
+							</div>
+						</div>
+						<div class="CenterBottom">
+							<div class="LeftBottom">
+								<div class="RightBottom"><span></span></div>
+							</div>
+						</div>
+					</div>	
+				</td>
+				<td>
+					<div class="HomePortletContainer" style="margin: 10px 0px 0px 0px">
+						<div class="BgReat">
+							<div class="ECMA LabelProduct"><%=res.getString("Homepage.ecm.label.ECMA.name")%></div>
+						</div>
+						<div class="ContentProductsDMS">
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.ECMA.bullet1")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.ECMA.bullet2")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.ECMA.bullet3")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.ECMA.bullet4")%></div>
+							</div>
+							<div class="Bullet">
+								<div class="Text"><%=res.getString("Homepage.ecm.label.ECMA.bullet5")%></div>
+							</div>
+						</div>
+						<div class="CenterBottom">
+							<div class="LeftBottom">
+								<div class="RightBottom"><span></span></div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>		
+	</div>
+</div>

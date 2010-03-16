@@ -1,0 +1,45 @@
+<%      
+import org.exoplatform.portal.webui.util.Util;
+String toururi = Util.getPortalRequestContext().getPortalURI() + "tour";
+String registeruri = Util.getPortalRequestContext().getPortalURI() + "register";
+%>
+
+<div class="SideBar">
+        <div class="PortletDecoration">
+                <div class="PortletDecorationTL">
+                        <div class="PortletDecorationTR">
+                                <div class="PortletDecorationTC"><span></span></div>
+                        </div>
+                </div>
+                <div class="PortletDecorationML">
+                        <div class="PortletDecorationMR">
+                                <div class="HomePortletAdBackround">                                       
+                                		<div class="ArowIcon">To test, you can either <a href="$registeruri" style="font-weight: bold">register</a> or <span style="color: black; font-weight: bold"">use the Demo Account</span> <b style="color: #f95106">Login:</b> <i>demo</i>, <b style="color: #f95106">Password:</b> <i>exo</i></div>
+                                        <div class="DotLine"><span></span></div>
+                                        <a href="http://forge.ow2.org/project/showfiles.php?group_id=151"><div class="DownloadButton"><span></span></div></a>
+                                        <div class="ArowIcon">eXo DMS is open source and FREE for download</div>
+                                        <div class="DotLine"><span></span></div>
+                                        <div class="VersionIcon"><span></span></div>
+                                        <div class="ArowIcon" style="margin-bottom: 0px;">For support, check our </div>
+                                        <a href="http://www.exoplatform.com/portal/public/website/product/__downloadcompare" class="ProVersion">professional version</a>
+                                        <div class="DotLine"><span></span></div>                                
+                                        <div class="LeftButton">
+                                                <div class="RightButton">
+                                                        <div class="CenterButton"><a href="$toururi" style="color: white;">Take a tour</a></div>
+                                                </div>
+                                        </div>
+                                        <div class="LeftButton">
+                                                <div class="RightButton">
+                                                        <div class="CenterButton"><a href="mailto:dms@exoplatform.com?subject=DMS demo feedback" style="color: white;">Feedback</a></div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <div class="PortletDecorationBL">
+                        <div class="PortletDecorationBR">
+                                <div class="PortletDecorationBC">
+                                </div>
+                        </div>
+                </div>
+</div>

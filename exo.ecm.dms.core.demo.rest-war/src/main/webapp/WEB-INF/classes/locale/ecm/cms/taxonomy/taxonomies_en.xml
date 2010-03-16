@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+		  #####Since version 2.6#######
+  -->
+  <eXoTaxonomies>
+    <System>
+      <label>System</label>
+      <cms>
+      		<label>Cms</label>
+								<sports>
+									<label>Sport</label>
+									<football>
+										<label>Football</label>
+										<champions-league>
+											<label>Champion League</label>
+										</champions-league>
+										<uefa>
+											<label>Europa League</label>
+										</uefa>
+									</football>
+								</sports>
+								<news>
+									<label>News</label>
+									<World>
+										<label>World</label>
+									</World>
+									<economy>
+										<label>Economy</label>
+									</economy>
+								</news>
+      </cms>
+      <calendar>
+      		<label>Calendar</label>
+      		<Birthday>
+									<label>Birthday</label>
+								</Birthday>
+      		<Breakfast>
+									<label>Breakfast</label>
+								</Breakfast>
+      		<Breakfast>
+									<label>Breakfast</label>
+								</Breakfast>
+      		<Call>
+									<label>Call</label>
+								</Call>
+      		<Lunch>
+									<label>Lunch</label>
+								</Lunch>
+      		<Meeting>
+									<label>Meeting</label>
+								</Meeting>
+      		<Other>
+									<label>Other</label>
+								</Other>
+      		<Personal>
+									<label>Personal</label>
+								</Personal>
+      		<Professional>
+									<label>Professional</label>
+								</Professional>
+      		<Vacations>
+									<label>Vacations</label>
+								</Vacations>
+      </calendar>
+    </System>
+  </eXoTaxonomies>
+</bundle>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <home>Trang chủ</home>
+  <register>Đăng kí</register>
+  <content-management>
+    <file-explorer>Quản lý tài liệu</file-explorer>
+    <content-creator>Tạo nhanh nội dung</content-creator>
+    <content-browser>Quản lý nội dung</content-browser>
+  </content-management>
+</bundle>

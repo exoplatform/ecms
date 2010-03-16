@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <home>Home</home>
+  <register>Register</register>
+  <content-management>
+    <file-explorer>File Explorer</file-explorer>
+    <content-creator>Fast Content Creator</content-creator>
+    <content-browser>Content Browser</content-browser>
+  </content-management>
+</bundle>

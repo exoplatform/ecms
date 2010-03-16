@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <home>استقبال</home>
+  <register>تسجيل</register>
+  <content-management>
+    <file-explorer>مستكشف الملفات</file-explorer>
+    <content-creator>خالق سريع للمحتوى</content-creator>
+    <content-browser>مستعرض المحتوى</content-browser>
+  </content-management>
+</bundle>

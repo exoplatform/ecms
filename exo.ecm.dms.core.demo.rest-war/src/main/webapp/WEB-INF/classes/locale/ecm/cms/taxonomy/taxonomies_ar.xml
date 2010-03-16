@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+		  #####Since version 2.6#######
+  -->
+  <eXoTaxonomies>
+    <System>
+      <label>System</label>
+      <cms>
+      		<label>Cms</label>
+      </cms>
+      <calendar>
+      		<label>Calendar</label>
+      </calendar>
+    </System>
+  </eXoTaxonomies>
+</bundle>

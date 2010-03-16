@@ -1,0 +1,72 @@
+<%
+ import org.exoplatform.web.application.JavascriptManager;
+
+  def rcontext = _ctx.getRequestContext() ;
+  JavascriptManager jsmanager = rcontext.getJavascriptManager();
+  
+  jsmanager.importJavascript('eXo.portal.PortalDragDrop');
+%>
+<div class="UIContainer" id="UIContainer-${uicomponent.id}">
+  <div class="META-DATA-BLOCK" style="display: none">
+    <div class="id">$uicomponent.id</div>
+    <div class="title"><%=_ctx.appRes("UITableColumnContainer.label.title")%></div>
+    <div class="description"><%=_ctx.appRes("UITableColumnContainer.label.description")%></div>
+  </div>
+  
+  <div class="CONTROL-CONTAINER CONTROL-BLOCK" style="display: none">
+    <%/*Begin InfoBar*/%>
+     <div class="UIInfoBar">
+      <div class="BlueRoundedStyle">
+        <div class="LeftBar">
+          <div class="RightBar">
+            <div class="MiddleBar">
+            	<div class="FixHeight">
+	              <div class="DragControlArea" title="<%=_ctx.appRes("UIContainer.tooltip.drag")%>"><span></span></div>
+	              <div class="ContainerIcon DefaultContainer16x16Icon"><span></span></div>
+	              <div class="Title">
+	                <% 
+	                  if(uicomponent.getTitle() != null) {
+	                    println(uicomponent.getTitle()) ; 
+	                  } else {
+	                %>
+	                    <%=_ctx.appRes("UIContainer.title.Container")%>
+	                <%}%>
+	              </div>
+	              
+	              <a href="<%=uicomponent.event("DeleteComponent","$uicomponent.id")%>" class="DeleteContainerIcon" title="<%=_ctx.appRes("UIContainer.tooltip.closeContainer")%>"><span></span></a>
+	              <a href="<%=uicomponent.event("EditContainer","$uicomponent.id")%>" class="EditContainerIcon" title="<%=_ctx.appRes("UIContainer.tooltip.editContainer")%>"><span></span></a>
+	              <div style="clear: both"><span></span></div>
+	            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%/*End InfoBar*/ %>
+  </div>
+  
+  <div class="LAYOUT-CONTAINER" style="display: none;"><span></span></div>
+  <% 
+     String style = "";
+     String width  = uicomponent.getWidth();
+     String height  = uicomponent.getHeight();
+     if(width != null) style += "width:"+width+";";
+     if(height != null) style += "height:"+height+";";
+  %>
+  <div class="VIEW-CONTAINER" >
+    <div id="$uicomponent.id">    
+      <table class="UITableColumnContainer" style="table-layout: fixed; width: 100%;_width: auto; $style">
+        <tr class="TRContainer" style="background:#ECEDEE;">
+          <% for(uiChild in uicomponent.getChildren()) { %>
+          <% String cw = uiChild.getWidth();
+             String cstyle = "";
+             if (cw != null) {cstyle = "style=\"" + cw + "\"";}
+           %>
+            <td class="${uiChild.id}TDContainer" $cstyle><% uicomponent.renderUIComponent(uiChild) %></td>
+          <% } %>
+       </tr>
+      </table>
+    </div>    
+  </div>
+  <%/*Debug On IE  -----For DND */%>
+</div>
