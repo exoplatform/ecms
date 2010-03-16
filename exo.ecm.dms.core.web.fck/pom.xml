@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecm.dms.core</groupId>
+    <artifactId>config</artifactId>
+    <version>3.0.0-Beta01-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo.ecm.dms.core.web.fck</artifactId>
+  <packaging>war</packaging>
+  <name>eXo Platform Web FCK</name>
+  <build>
+    <finalName>fck</finalName>
+  </build>
+</project>
