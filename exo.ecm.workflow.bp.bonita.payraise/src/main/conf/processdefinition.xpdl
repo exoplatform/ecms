@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd" Id="payraise" Name="payraise">
+  <PackageHeader>
+    <XPDLVersion>1.0</XPDLVersion>
+    <Vendor>Bonita Project Team</Vendor>
+    <Created>2008-11-20 16:42:45</Created>
+    <Description>Pay raise management</Description>
+  </PackageHeader>
+  <RedefinableHeader>
+    <Version>1.0</Version>
+  </RedefinableHeader>
+  <ConformanceClass GraphConformance="NON_BLOCKED" />
+  <WorkflowProcesses>
+    <WorkflowProcess AccessLevel="PUBLIC" Name="payraise" Id="payraise">
+      <ProcessHeader />
+      <RedefinableHeader>
+        <Version>1.0</Version>
+      </RedefinableHeader>
+      <DataFields>
+        <DataField Id="amount-asked" Name="amount-asked">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+          <InitialValue>0</InitialValue>
+          <Description>Amout asked for the pay raise</Description>
+        </DataField>
+        <DataField Id="priority" Name="priority">
+          <DataType>
+            <EnumerationType>
+              <EnumerationValue Name="not_important" />
+              <EnumerationValue Name="important" />
+              <EnumerationValue Name="critical" />
+            </EnumerationType>
+          </DataType>
+          <InitialValue>not_important</InitialValue>
+          <Description>Priority of the pay raise</Description>
+        </DataField>
+        <DataField Id="rewarded" Name="rewarded">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+          <Description>If the user is rewarded or not</Description>
+        </DataField>
+        <DataField Id="reason" Name="reason">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+          <Description>Reason of the pay raise</Description>
+        </DataField>
+        <DataField Id="initiator" Name="initiator">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+          <Description>User who started the pay raise</Description>
+        </DataField>
+        <DataField Id="amount-granted" Name="amount-granted">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+          <InitialValue>0</InitialValue>
+          <Description>Amout granted by the superior</Description>
+        </DataField>
+        <DataField Id="decisionEvaluation" Name="decisionEvaluation">
+          <DataType>
+            <EnumerationType>
+              <EnumerationValue Name="grant" />
+              <EnumerationValue Name="deny" />
+            </EnumerationType>
+          </DataType>
+          <InitialValue>deny</InitialValue>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="PropertyActivity" />
+          </ExtendedAttributes>
+        </DataField>
+      </DataFields>
+      <Participants>
+        <Participant Id="SYSTEM" Name="SYSTEM">
+          <ParticipantType Type="SYSTEM" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+            <ExtendedAttribute Name="XOffset" Value="0" />
+            <ExtendedAttribute Name="YOffset" Value="0" />
+          </ExtendedAttributes>
+        </Participant>
+        <Participant Id="executive-board" Name="*:/organization/management/executive-board">
+          <ParticipantType Type="ROLE" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Mapper" Value="Custom" />
+            <ExtendedAttribute Name="MapperClassName" Value="hero.mapper.ExoOrganizationMapper" />
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+            <ExtendedAttribute Name="XOffset" Value="0" />
+            <ExtendedAttribute Name="YOffset" Value="150" />
+          </ExtendedAttributes>
+        </Participant>
+        <Participant Id="human-resources" Name="*:/organization/management/human-resources">
+          <ParticipantType Type="ROLE" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Mapper" Value="Custom" />
+            <ExtendedAttribute Name="MapperClassName" Value="hero.mapper.ExoOrganizationMapper" />
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+            <ExtendedAttribute Name="XOffset" Value="0" />
+            <ExtendedAttribute Name="YOffset" Value="300" />
+          </ExtendedAttributes>
+        </Participant>
+      </Participants>
+      <Activities>
+        <Activity Id="BonitaEnd" Name="BonitaEnd">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="XOR" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="109" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="34" />
+            <ExtendedAttribute Name="XOffset" Value="217" />
+            <ExtendedAttribute Name="YOffset" Value="311" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="start" Name="start">
+          <Description>Start the pay raise process</Description>
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>SYSTEM</Performer>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="27" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="2" />
+            <ExtendedAttribute Name="XOffset" Value="125" />
+            <ExtendedAttribute Name="YOffset" Value="54" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="80" />
+            <ExtendedAttribute Name="hook" Value="hero.hook.PayRaiseUserNameHook">
+              <HookEventName>automatic:onEnter</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="hr" Name="hr">
+          <Description>Human resources make the final decision</Description>
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>human-resources</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="27" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="302" />
+            <ExtendedAttribute Name="XOffset" Value="59" />
+            <ExtendedAttribute Name="YOffset" Value="237" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="80" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="evaluation" Name="evaluation">
+          <Description>Company's direction evaluate pay raise</Description>
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>executive-board</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="27" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="152" />
+            <ExtendedAttribute Name="XOffset" Value="134" />
+            <ExtendedAttribute Name="YOffset" Value="128" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="70" />
+            <ExtendedAttribute Name="property" Value="decisionEvaluation" />
+          </ExtendedAttributes>
+        </Activity>
+      </Activities>
+      <Transitions>
+        <Transition Id="evaluation_BonitaEnd" Name="evaluation_BonitaEnd" From="evaluation" To="BonitaEnd">
+          <Condition Type="CONDITION">decisionEvaluation.compareTo("deny") == 0</Condition>
+        </Transition>
+        <Transition Id="start_evaluation" Name="start_evaluation" From="start" To="evaluation" />
+        <Transition Id="evaluation_hr" Name="evaluation_hr" From="evaluation" To="hr">
+          <Condition Type="CONDITION">decisionEvaluation.compareTo("grant") == 0</Condition>
+        </Transition>
+        <Transition Id="hr_BonitaEnd" Name="hr_BonitaEnd" From="hr" To="BonitaEnd" />
+      </Transitions>
+    </WorkflowProcess>
+  </WorkflowProcesses>
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="MadeBy" Value="ProEd" />
+    <ExtendedAttribute Name="View" Value="Activity" />
+  </ExtendedAttributes>
+</Package>
+

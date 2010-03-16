@@ -1,0 +1,63 @@
+<%
+  public void writeAction(String label, String action, String param) {
+    println """
+	    <div class="ActionButton">
+	      <div class="LightBlueStyle" >
+					<div class="ButtonLeft">
+					  <div class="ButtonRight">
+						  <div class="ButtonMiddle">
+	  """;
+		if(param != null)
+		  println " <a href=\"" + uicomponent.event(action, param) + "\">" ;
+		else
+  		println " <a href=\"" + uicomponent.event(action) + "\">" ;
+    println """
+							    $label
+							  </a>
+				      </div>
+				    </div>
+			    </div>
+				</div>
+			</div>
+		""" ;
+  }
+%>
+
+<div class="UITask UIFormWithTitle">
+  <% 
+    uiform.begin() 
+    def resWorkflow = uicomponent.getWorkflowBundle() ;
+  %>
+  <div class="TitleBar"><%=resWorkflow.getString("title")%></div>
+  <div class="HorizontalLayout">
+    <table class="UIFormGrid">
+    	<tr>
+		    <th colspan="2" height="50" align="center">
+		      <%=resWorkflow.getString("my-custom-groovy-form")%><br>
+		      <img src="http://wiki.bonita.objectweb.org/xwiki/bin/download/XWiki/MySkin/banniere" border="0">
+		    </th>
+		  </tr>    	
+			<%for(inputInfo in uicomponent.getInputInfo())  {%>
+					<tr>
+					  <td class="FieldLabel"><%=inputInfo.getLabel()%></td>
+					  <td class="FieldComponent"><% uicomponent.renderField(inputInfo.getInput()); %></td>
+					</tr>
+			<%}%>
+		</table>
+	  <div class="UIAction"> 
+	     <table class="ActionContainer">
+	    	<tr>
+	    		<td>
+			  <%
+			  	finishit = resWorkflow.getString("finish-it");
+			  	cancel = resWorkflow.getString("cancel");
+			  	writeAction(finishit, "EndOfState", null);
+			    writeAction(cancel, "Cancel", null);
+		    %>
+	      </td>
+				</tr>
+			</table>
+	  </div>
+  </div>
+  <%uiform.end()%>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Yêu cầu tăng lương</task-name>
+  <title>Yêu cầu tăng lương</title>
+  <submit>Đăng kí</submit>
+  <!--
+  #variable title and label
+  -->
+  <amount-asked>
+    <label>Số tiền :</label>
+  </amount-asked>
+  <priority>
+    <label>Ưu tiên :</label>
+    <select-0>Không quan trọng</select-0>
+    <valueselect-0>Không quan trọng</valueselect-0>
+    <select-1>Quan trọng</select-1>
+    <valueselect-1>Quan trọng</valueselect-1>
+    <select-2>Rất quan trọng</select-2>
+    <valueselect-2>Rất quan trọng</valueselect-2>
+  </priority>
+  <rewarded>
+    <label>Thưởng :</label>
+    <checkbox>Tôi đã được thưởng!</checkbox>
+  </rewarded>
+  <reason>
+    <label>Lý do:</label>
+  </reason>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Cập nhật lương</task-name>
+  <title>Cập nhật lương</title>
+  <submit>Xác nhận cập nhật</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <label>Nhân viên:</label>
+  </initiator>
+  <amount-granted>
+    <label>Số lượng được cộng thêm:</label>
+  </amount-granted>  
+  <my-custom-groovy-form>Dùng groovy form</my-custom-groovy-form>
+  <cancel>Thoát</cancel>
+  <finish-it>Đồng ý</finish-it>
+</bundle>
+

@@ -1,0 +1,31 @@
+#jsfForm()
+<table border="0">
+  <tr>
+    <th colspan="2" height="50" align="center">
+      My custom velocity form<br>
+      <img src="http://wiki.bonita.objectweb.org/xwiki/bin/download/XWiki/MySkin/banniere" border="0">
+    </th>
+  </tr>
+  <tr>
+    <td>
+      #foreach($inputInfo in $uicomponent.getInputInfo())
+      <tr>
+        <td>$inputInfo.getLabel()</td>
+        <td>
+          #jsfFormField($inputInfo.getInput().getName())
+          #if($inputInfo.isMandatory())
+            $res.getString("UITask.label.mandatory")
+          #end
+        </td>
+      </tr>
+      #end
+    </td>
+  </tr>
+  <tr>
+    <td>
+      #jsfFormButton("finish it" $uicomponent.endOfState)
+      #jsfFormButton("@UITask.cancel" $uicomponent.cancelProcess)
+    </td>
+  </tr>
+</table>
+#end
