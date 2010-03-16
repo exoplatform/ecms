@@ -1,0 +1,14 @@
+<% uicomponent.begin(); %>
+	<div class="UIAction"> 
+		<% 
+			for(action in uicomponent.getActions()) { 
+				String link = uicomponent.event(action) ;
+				if (action.contains("Add")) {
+					%><div title="<%= _ctx.appRes("UIPublicationAction.action.add"); %>" onmouseover="this.style.backgroundColor='#e4edf3'" onmouseout="this.style.backgroundColor='#bfd3df'" onclick="$link" class="ArrowNext"><span></span></div><br><%
+				} else if (action.contains("Remove")) {
+					%><div title="<%= _ctx.appRes("UIPublicationAction.action.remove"); %>" onmouseover="this.style.backgroundColor='#e4edf3'" onmouseout="this.style.backgroundColor='#bfd3df'" onclick="$link" class="ArrowBack"><span></span></div><%
+				}
+			}
+		%>          
+	</div>
+<% uicomponent.end(); %>

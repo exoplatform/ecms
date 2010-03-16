@@ -1,0 +1,61 @@
+<%
+	String currentPortal = uiform.getCurrentPortal();
+	currentPortal = currentPortal == null ? _ctx.appRes("UIPublishingPanel.currentPortal.none") : currentPortal;
+	String currentTreeNode = uiform.getCurrentTreeNode();
+	currentTreeNode = currentTreeNode == null ? _ctx.appRes("UIPublishingPanel.currentNode.none") : currentTreeNode;
+%>
+<div class="WCMPublication">
+	<div class="PanelContainer">
+		<div class="PanelLeft">
+			<dir class="Title"><%= _ctx.appRes("UIPublishingPanel.panelLeft.title"); %></dir>
+			<div class="SubTitle">
+				<span><%= _ctx.appRes("UIPublishingPanel.currentPortal.title"); %>: $currentPortal </span>
+				<span><%= _ctx.appRes("UIPublishingPanel.currentNode.title"); %>: $currentTreeNode </span>
+			</div>
+		</div>
+		<div class="PanelRight">
+			<div class="Title"><%= _ctx.appRes("UIPublishingPanel.panelRight.title"); %></div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	
+	<div class="PanelContainer">
+		<div class="PanelLeft">
+			<div class="PanelBox">
+				<div class="PanelContent">
+					<% uiform.renderChild("UIPortalNavigationExplorer") %>
+				</div>
+			</div>
+		</div>
+		<div class="PanelRight">
+			<div class="PanelBox">
+				<div class="PanelContent">
+					<% uiform.renderChild("UIPublishedPages") %>
+				</div>
+			</div>
+		</div>
+		<div class="PanelCenter">
+			<% uiform.renderChild("UIPublicationAction") %>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+	<% uicomponent.begin(); %>
+		<div class="UIAction"> 
+	    	<table align="center" class="ActionContainer">
+		      	<tr>
+		        	<td align="center">
+		            	<a href="<%= uicomponent.event("Close") %>" class="ActionButton LightBlueStyle">
+		              		<div class="ButtonLeft">
+		                		<div class="ButtonRight">
+		                  			<div class="ButtonMiddle">
+		                    			<%=_ctx.appRes("UIPublicationPanel.button.close")%>
+		                  			</div>
+		                		</div>
+		              		</div>
+		            	</a>
+		        	</td>
+		      	</tr>
+	    	</table>
+	  	</div>
+	<% uicomponent.end(); %>
+</div>
