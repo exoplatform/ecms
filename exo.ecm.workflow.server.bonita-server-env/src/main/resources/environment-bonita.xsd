@@ -1,0 +1,71 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Descriptors contains the descriptors of the PVM and the descriptors of Bonita -->
+  <xsd:redefine schemaLocation="classpath://environment-pvm.xsd">
+    <xsd:group name="descriptor">
+      <xsd:sequence>
+        <xsd:choice>
+          <!-- Pvm bindings -->
+          <xsd:group ref="descriptor" minOccurs="1"
+            maxOccurs="1" />
+          <!-- Bonita bindings -->
+          <xsd:element
+            name="runtime-db-session"
+            type="tHibernate-xpdl-persistence-service" maxOccurs="unbounded" />
+          <xsd:element
+            name="querier-db-session"
+            type="tHibernate-xpdl-persistence-service" maxOccurs="unbounded" />
+          <xsd:element name="repository"
+            type="tRepository.Bonita" />
+          <xsd:element name="security"
+            type="tRepository.Bonita" />
+          <xsd:element name="finished-instance-handler"
+            type="tRepository.Bonita" />
+          <xsd:element name="undeployed-package-handler"
+            type="tRepository.Bonita" />
+          <xsd:element name="recorder"
+            type="tRepository.Bonita" />
+          <xsd:element name="journal"
+            type="tRepository.Bonita" />
+          <xsd:element name="chainer" type="tListSet.Bonita" />
+          <xsd:element name="history"
+            type="tRepository.Bonita" />
+          <xsd:element name="archiver"
+            type="tRepository.Bonita" />
+          <xsd:element name="queryApi" type="tListSet.Bonita" />
+        </xsd:choice>
+      </xsd:sequence>
+    </xsd:group>
+  </xsd:redefine>
+
+  <xsd:element name="environment-definition"
+    type="environmentDefinitionData" />
+
+  <xsd:complexType name="tRepository.Bonita">
+    <xsd:sequence>
+      <xsd:element name="arg" type="tArg" minOccurs="0"
+        maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="class" />
+    <xsd:attribute name="name" />
+    <xsd:attribute name="init" />
+  </xsd:complexType>
+
+  <xsd:complexType name="tHibernate-xpdl-persistence-service">
+    <xsd:attribute name="session" />
+    <xsd:attribute name="name" />
+    <xsd:attribute name="init" />
+  </xsd:complexType>
+
+  <xsd:complexType name="tListSet.Bonita">
+    <xsd:sequence>
+      <xsd:group ref="descriptor" minOccurs="0"
+        maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="class" />
+    <xsd:attribute name="synchronized" />
+    <xsd:attribute name="name" />
+    <xsd:attribute name="init" />
+  </xsd:complexType>
+
+</xsd:schema>

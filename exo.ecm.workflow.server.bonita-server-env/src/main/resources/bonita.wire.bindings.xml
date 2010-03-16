@@ -1,0 +1,20 @@
+<wire-bindings>
+
+  <!-- ########################### -->
+  <!-- ### Descriptor bindings ### -->
+  <!-- ########################### -->
+  <binding class="org.ow2.bonita.env.binding.RuntimeDbSessionBinding" />
+  <binding class="org.ow2.bonita.env.binding.QuerierDbSessionBinding" />
+  <binding class="org.ow2.bonita.env.binding.ChainerBinding" />
+  <binding class="org.ow2.bonita.env.binding.QuerierListAccessorBinding" />
+  <binding class="org.ow2.bonita.env.binding.APIBinding" />
+  <binding class="org.ow2.bonita.env.binding.RepositoryBinding" />
+  <binding class="org.ow2.bonita.env.binding.SecurityBinding" />
+  <binding class="org.ow2.bonita.env.binding.RecorderBinding" />
+  <binding class="org.ow2.bonita.env.binding.ArchiverBinding" />
+  <binding class="org.ow2.bonita.env.binding.JournalBinding" />
+  <binding class="org.ow2.bonita.env.binding.HistoryBinding" />
+  <binding class="org.ow2.bonita.env.binding.FinishedInstanceHandlerBinding" />
+  <binding class="org.ow2.bonita.env.binding.UndeployedPackageHandlerBinding" />
+
+</wire-bindings>
