@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #			org.exoplatform.workflow.webui.component.monitor											#
+  #############################################################################
+  -->
+  <UIWorkflowAdministrationPortlet>
+    <tab>
+      <label>Quản trị</label>
+      <text>Quản trị nghiệp vụ</text>
+    </tab>
+    <msg>
+      <refresh-session-success>Phiên làm việc vừa được cập nhật thành công</refresh-session-success>
+    </msg>
+    <label>
+      <refresh>Câp nhật</refresh>
+    </label>    
+  </UIWorkflowAdministrationPortlet>
+  <UITabPane>
+    <title>
+      <UIMonitor>Giám sát quá trình</UIMonitor>
+    </title>
+  </UITabPane>
+  <UIMonitor>
+    <header>
+      <id>Id quá trình</id>
+      <name>Tên quá trình</name>
+      <version>Phiên bản quá trình</version>
+      <action>Hành động</action>
+    </header>
+    <msg>
+      <empty>Không có quá trình để giám sát</empty>
+    </msg>
+  </UIMonitor>
+  <UIAdministrationManager>
+    <tab>
+      <label>
+        <UITimers>Hẹn giờ</UITimers>
+        <UIMonitor>Giám sát</UIMonitor>
+      </label>
+    </tab>
+    <msg>
+      <confirm-delete-process>Bạn có muốn xóa quá trình này không?</confirm-delete-process>
+    </msg>
+    <action>
+      <UploadProcess>Quá trình tải lên</UploadProcess>
+      <title>
+        <View>Xem</View>
+        <Delete>Xóa</Delete>
+      </title>
+    </action>
+  </UIAdministrationManager>
+  <UITimers>
+    <header>
+      <id>Id</id>
+      <name>Tên</name>
+      <dueDate>Ngày đáo hạn</dueDate>
+    </header>
+    <msg>
+      <empty>Không đặt hẹn giờ</empty>
+    </msg>
+  </UITimers>
+  <AdministrationPopup>
+    <title>
+      <UIProcessDetail>Chi tiết quá trình</UIProcessDetail>
+    </title>
+  </AdministrationPopup>
+  <UploadProcessPopup>
+    <title>
+      <UIUploadProcess>Quá trình tải lên</UIUploadProcess>
+    </title>
+  </UploadProcessPopup>
+  <UIUploadProcess>
+    <label>
+      <name>Tên</name>
+      <upload>Lựa chọn file</upload>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <fileName-error>Không tìm thấy đường dẫn file</fileName-error>
+      <fileName-invalid>Tên file chứa một số kí tự không phù hợp. Hãy nhập tên khác hoặc upload một file khác</fileName-invalid>
+      <process-successful>Upload thành công!</process-successful>
+      <data-invalid>Dữ liệu của bạn có vấn đề. Không thể tìm thấy file định nghĩa quá trình hoặc dữ liệu bị sai (quá trình đã tồn tại hay sai định dạng...)</data-invalid>
+    </msg>
+  </UIUploadProcess>
+  <UIProcessDetailGrid>
+    <header>
+      <processInstanceId>Id thể hiện của quá trình</processInstanceId>
+      <processId>Id của quá trình</processId>
+      <processName>Tên của quá trình</processName>
+      <startDate>Ngày bắt đầu</startDate>
+      <endDate>Ngày kết thúc</endDate>
+      <action>Hành động</action>
+    </header>
+    <msg>
+      <empty>Không có quá trình để xem</empty>
+    </msg>
+  </UIProcessDetailGrid>
+  <UIProcessDetail>
+    <msg>
+      <confirm-delete-process>Bạn có muốn xóa thể hiện của quá trình này không?</confirm-delete-process>      
+    </msg>
+  </UIProcessDetail>
+  <UITasksGrid>
+    <header>
+      <id>Id</id>
+      <taskName>Tên nhiệm vụ</taskName>
+      <actorId>Id của tác nhân</actorId>
+      <end>Kết thúc</end>
+    </header>
+  </UITasksGrid>
+  
+  <!--
+  #############################################################################
+  #			Since 2.3.x tobe translate											#
+  #############################################################################
+  -->
+  <UIProcessDetail>
+    <tab>
+      <label>
+        <UICompletedProcessGrid>Đã hoàn thành</UICompletedProcessGrid>
+        <UIRunningProcessGrid>Đang thực hiện</UIRunningProcessGrid>
+        <UITasksGrid>Nhiệm vụ</UITasksGrid>
+      </label>
+    </tab>
+    <msg>
+      <confirm-delete-completed-process>Bạn có muốn xóa những xử lý đã hoàn thành không?</confirm-delete-completed-process>
+      <result-delete-completed-process>Không có quá trình nào đã hoàn thành để xóa</result-delete-completed-process>
+    </msg>
+    <action>
+      <FlushAll>Xóa hết</FlushAll>
+      <Cancel>Thoát</Cancel>
+			<title>
+    		<View>Xem</View>
+				<Delete>Xóa</Delete>
+    	</title>
+    </action>
+  </UIProcessDetail>
+  <TaskListOfProcessPopup>
+    <title>
+      <UITaskListOfProcess>Danh sách nhiệm vụ</UITaskListOfProcess>            
+    </title>
+    <tab>
+      <label>
+        <UITasksGrid>Nhiệm vụ</UITasksGrid>
+      </label>
+    </tab>
+    <header>
+      <id>Id</id>
+      <taskName>Tên nhiệm vụ</taskName>
+      <actorId>Id của tác nhân</actorId>
+      <end>Kết thúc</end>    
+    </header>    
+  </TaskListOfProcessPopup>
+  <UIRunningProcessGrid>
+    <header>
+      <processInstanceId>Id thể hiện của quá trình</processInstanceId>
+      <processId>Id của quá trình</processId>
+      <processName>Tên của quá trình</processName>
+      <startDate>Ngày bắt đầu</startDate>
+      <endDate>Ngày kết thúc</endDate>
+      <action>Hành động</action>
+    </header>
+    <msg>
+      <empty>Không có quá trình đang thực hiện để xem</empty>
+    </msg>
+  </UIRunningProcessGrid>
+  <UICompletedProcessGrid>
+    <header>
+      <processInstanceId>Id thể hiện của quá trình</processInstanceId>
+      <processId>Id của quá trình</processId>
+      <processName>Tên của quá trình</processName>
+      <startDate>Ngày bắt đầu</startDate>
+      <endDate>Ngày kết thúc</endDate>
+      <action>Hành động</action>
+    </header>
+    <msg>
+      <empty>Không có quá trình đã hoàn thành để xem</empty>
+    </msg>
+  </UICompletedProcessGrid>
+  <UITaskListOfProcess>    
+    <tab>
+      <label>
+        <UITasksGrid>Danh sách nhiệm vụ</UITasksGrid>
+      </label>
+    </tab>    
+    <action>      
+      <Cancel>Thoát</Cancel>
+    </action>
+  </UITaskListOfProcess>
+</bundle>
+

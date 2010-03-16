@@ -1,0 +1,18 @@
+<div class="UIApplication UIWorkflowPortlet" id="$uicomponent.id">
+  <div class="ApplicationMinWidth">
+	  <div class="Toolbar">
+	  	<div class="Separator"><span></span></div>
+	  	<div class="TextAdmin"><%=_ctx.appRes(uicomponent.getId() + ".tab.text")%></div>
+	  	<div class="Separator"><span></span></div>
+	  	<div class="ButtonContainerSelected">
+	  		<div class="ToolbarIcon Monitor24x24Icon"><span></span></div>
+	  		<div class="TextButton"><%=_ctx.appRes(uicomponent.getId() + ".tab.label")%></div>
+	  	</div>
+	  	<div class="Separator"><span></span></div>
+ 			<a class="RefreshSessionButton" href="<%=uicomponent.event("RefreshSession")%>" title="<%=_ctx.appRes(uicomponent.getId() + ".label.refresh")%>"></a>
+	  </div>	  
+	  <div class="WorkflowPortletContent">
+	    <% uicomponent.renderChildren(); %>
+	  </div>
+	</div>
+</div>

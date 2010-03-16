@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #			org.exoplatform.workflow.webui.component.controller										#
+  #############################################################################
+  -->
+  <UIWorkflowControllerPortlet>
+    <tab>
+      <label>Điều khiển</label>
+      <text>Quản lý workflow</text>
+    </tab>
+    <msg>
+      <refresh-session-success>Phiên làm việc vừa được cập nhật thành công</refresh-session-success>
+    </msg>
+    <label>
+      <refresh>Câp nhật</refresh>
+    </label>
+  </UIWorkflowControllerPortlet>
+  <ControllerPopup>
+    <title>
+      <UITaskManager>Quản lí nhiệm vụ</UITaskManager>
+    </title>
+  </ControllerPopup>
+  <UITabPane>
+    <title>
+      <UITaskList>Điều khiển nhiệm vụ</UITaskList>
+      <UIBPDefinition>Điều khiển định nghĩa quá trình</UIBPDefinition>
+      <UIDocumentContent>Xem nội dung</UIDocumentContent>
+      <UIDocumentForm>Chỉnh sửa nội dung</UIDocumentForm>
+      <UITask>Nhiệm vụ</UITask>
+    </title>
+  </UITabPane>
+  <UITaskList>
+    <header>
+      <id>Id của nhiệm vụ</id>
+      <processName>Tên quá trình</processName>
+      <taskName>Tên nhiệm vụ</taskName>
+      <actor>Tác nhân</actor>
+      <description>Mô tả</description>
+      <actorId>Id của tác nhân</actorId>
+      <taskVariables>Các thuộc tính của tác nhân</taskVariables>
+      <processDateStart>Ngày bắt đầu quá trình</processDateStart>
+      <action>Hành động</action>
+    </header>
+    <label>
+      <managerState>Quản lý</managerState>
+    </label>
+    <msg>
+      <task-not-found>Không thể quản lý nhiệm vụ này. Rất có thể là đã có một người dùng khác quản lý.</task-not-found>
+      <task-change>Nhiệm vụ bạn vừa chọn đã bị thay đổi hoặc di chuyển</task-change>
+    </msg>
+  </UITaskList>
+  <UITaksList>
+    <msg>
+      <no-task>Không có nhiệm vụ nào được đăng kí</no-task>
+    </msg>
+  </UITaksList>
+  <UITask>
+    <label>
+      <hide-process-link>Ẩn quá trình</hide-process-link>
+      <show-process-link>Hiện thị quá trình</show-process-link>
+    </label>
+  </UITask>
+  <UIBPDefinition>
+    <header>
+      <id>Id</id>
+      <name>Tên</name>
+      <version>Phiên bản</version>
+      <action>Hành động</action>
+    </header>
+    <msg>
+      <empty>Không có quá trình nào được bắt đầu</empty>
+    </msg>
+  </UIBPDefinition>
+  <UIControllerManager>
+    <action>
+      <title>
+        <ManageStart>Bắt đầu quản lý</ManageStart>
+      </title>
+    </action>
+  </UIControllerManager>
+  <UIDocumentForm>
+    <msg>
+      <cannot-save>Một số ràng buộc bị vi phạm trong hành động này</cannot-save>
+      <in-versioning>Bạn cần check out nút hiện tại trước khi thêm vào một nút mới.</in-versioning>
+      <not-support>Không thể tải được mẫu của '{0}'.</not-support>
+      <value-invalid>'{0}' là một giá trị cần thiết</value-invalid>
+    </msg>
+  </UIDocumentForm>
+  
+  <PopupDelegatedSelectorId>
+    <title>
+      <UIUserSelectContainer>Chọn người dùng</UIUserSelectContainer>
+    </title>
+  </PopupDelegatedSelectorId>
+    
+</bundle>
+
