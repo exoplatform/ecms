@@ -1,0 +1,29 @@
+<div class="UIForm FormLayout">  
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">
+    <table class="UIFormGrid">
+			<tr>
+	  		<td class="FieldLabel"><%=_ctx.appRes("Accessionable.dialog.label.accession-executed")%></td>
+	  		<td class="FieldComponent">
+		      <%
+		        String[] fieldAccessionExecuted = ["jcrPath=/node/rma:accessionExecuted", "false", "options=false,true"] ;
+		        uicomponent.addSelectBoxField("accessionExecuted", fieldAccessionExecuted) ;
+		      %>
+				</td>
+			</tr>
+			<tr>
+	  		<td class="FieldLabel"><%=_ctx.appRes("Accessionable.dialog.label.accession-date")%></td>
+	  		<td class="FieldComponent">
+		      <%
+		        String[] fieldTransferDate = ["jcrPath=/node/rma:accessionDate", "visible=true"] ;
+		        uicomponent.addCalendarField("accessionDate", fieldTransferDate) ;
+		      %>
+				</td>
+			</tr>
+		</table>
+		<%/* start render action*/%>
+		<%uiform.processRenderAction()%>
+		<%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

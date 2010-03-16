@@ -1,0 +1,55 @@
+<% uicomponent.addInterceptor("ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy", "prev") ; %>
+<div class="UIForm FormLayout"> 
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">	  
+   <table class="UIFormGrid">
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.name")%></td>
+			  <td class="FieldComponent">
+			  <%
+	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
+	        uicomponent.addTextField("name", fieldName) ; 
+      	%>	      
+        </td>
+			</tr>
+			
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.title")%></td>
+			  <td class="FieldComponent">
+				<%
+	        String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
+	        uicomponent.addTextField("title", fieldTitle) ;
+	      %>
+				</td>
+			</tr>  
+			
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.summary")%></td>
+			  <td class="FieldComponent">
+			    <div class="UIFCKEditor">					
+						<%
+			        String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=basic", ""] ;
+			        uicomponent.addWYSIWYGField("summary", fieldSummary) ;
+		      	%>
+		      </div>
+				</td>
+			</tr>  
+			
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.content")%></td>
+			  <td class="FieldComponent">
+			    <div class="UIFCKEditor">
+						<%
+			        String[] fieldContent = ["jcrPath=/node/exo:text", "options=default", ""] ;
+			        uicomponent.addWYSIWYGField("content", fieldContent) ;        
+			      %>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<%/* start render action*/%>
+		<%uiform.processRenderAction()%>
+		<%/* end render action*/%>		
+  </div>
+  <%uiform.end()%>
+</div>

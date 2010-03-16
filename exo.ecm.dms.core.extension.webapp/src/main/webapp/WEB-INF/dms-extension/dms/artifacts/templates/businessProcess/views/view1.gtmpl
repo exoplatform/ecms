@@ -1,0 +1,106 @@
+<style>
+  ul.menu img {cursor: pointer; width: 16px; height: 16px; margin-left: -20px;}
+  ul.menu, ul.menu ul {text-align: left; list-style-type: none;}
+  ul.menu li {list-style-type: none; list-style-image: none; margin-left: -20px;}
+  ul.menu ul {display: none;}
+</style>
+
+<script>
+  var currentObject;
+  function expand(n)
+  {
+    var img = n.firstChild;
+    while ( img.nodeName != "IMG" )
+      img = img.nextSibling;
+    var ul = n;
+    while ( ul.nodeName != "UL" )
+      ul = ul.nextSibling;
+    if(ul.style.display == 'block') {
+      img.src = "/cms-content/images/small/collapsed.gif";
+      ul.style.display = 'none';
+    }
+    else {
+      img.src = "/cms-content/images/small/expanded.gif";
+      ul.style.display = 'block';
+    }
+  }
+</script>
+</head>
+<body bgcolor="#FFFFFF">
+
+#set($node = $uicomponent.getNode())
+<div style="width: 100%;background:url('/cms-content/images/title-bg.gif') repeat-x ; height:20px; float: left; border-bottom: 1px solid #a3abb6;margin-bottom:1px" >
+  <label class="text"><font size="2" color="black"><b>Business Process:</b></font></label>
+  <label class="text"><font size="2" color="black">$node.getName()</font></label>
+</div>
+#set($childs = $node.getChildNodes())<br><br>
+<ul class="menu">
+  <li>
+    <>
+      <img onclick="javascript:expand(this)" alt="" src="/cms-content/images/small/collapsed.gif"/>
+      <a href="#" onclick="javascript:expand(this)">Properties</a>
+    <ul>
+      #if($childs.size() > 0)
+        #foreach($child in $childs)
+          #set($type = $child.getProperty("jcr:primaryType").getString())
+          #if($type.equals("nt:file"))
+            #set($name = $child.getName())
+            #set($content = $child.getNode("jcr:content"))
+            #set($data = $content.getProperty("jcr:data").getString())
+            #set($mime = $content.getProperty("jcr:mimeType").getString())
+            #set($inputname = "component_${velocityCount}" )
+            #if($mime.startsWith("text/plain"))
+              <li>
+                <div style="text-align: left; margin-top: 5px; border: 1px solid #a3abb6">
+                  <div syle="width: 100%; height: 20px; float: left;border-bottom: 1px solid #a3abb6; margin-bottom:1px" >
+                    <b><font color="black">${name}</font></b>
+                  </div>		
+                  <div style="width: 95%; font-size: 12px; color: gray; padding: 5px">
+                    #set($text = $uicomponent.toHTML($data))
+                    <br>$text
+                  </div>
+                </div>
+              </li>
+            #end
+          #end
+        #end
+      #end
+    </ul>
+  </li>
+</ul>
+
+<ul class="menu">
+  <li>
+    <>
+      <img onclick="javascript:expand(this)" alt="" src="/cms-content/images/small/collapsed.gif"/>
+      <a href="#" onclick="javascript:expand(this)">XML</a>
+    <ul>
+      #if($childs.size() > 0)
+        #foreach($child in $childs)
+          #set($type = $child.getProperty("jcr:primaryType").getString())
+          #if($type.equals("nt:file"))
+            #set($name = $child.getName())
+            #set($content = $child.getNode("jcr:content"))
+            #set($data = $content.getProperty("jcr:data").getString())
+            #set($mime = $content.getProperty("jcr:mimeType").getString())
+            #set( $inputname = "component_${velocityCount}" )
+	      #if($mime.startsWith("text/xml"))
+              <li>
+                <div style="text-align: left; margin-top: 5px; border: 1px solid #a3abb6">
+                  <div style="width: 100%; height: 20px; float: left;border-bottom: 1px solid #a3abb6; margin-bottom:1px" >
+                    <b><font color="black">${name}</font></b>
+                  </div>	
+                  <div style="width: 95%; font-size: 12px; color: gray; padding: 5px">
+                    #set($text = $uicomponent.toHTML($data))
+                    <br>$text
+                  </div>
+                </div>
+              </li>
+            #end
+          #end
+        #end
+      #end <br>
+    </ul>
+  </li>
+ </ul><br>
+</body>
