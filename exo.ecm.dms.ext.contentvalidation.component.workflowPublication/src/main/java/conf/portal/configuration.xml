@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>		       
+  
+  <component>
+    <key>org.exoplatform.services.ecm.publication.PublicationService</key>
+    <type>org.exoplatform.services.ecm.publication.impl.PublicationServiceImpl</type>    
+  </component>
+
+  <component>
+    <key>org.exoplatform.services.ecm.publication.PublicationPresentationService</key>
+    <type>org.exoplatform.services.ecm.publication.impl.PublicationPresentationServiceImpl</type>
+  </component> 
+  	
+	<external-component-plugins>
+  	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+	  <component-plugin>
+	    <name>add.nodeType</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+	    <priority>122</priority>
+	    <init-params>
+	      <values-param>
+	        <name>autoCreatedInNewRepository</name>
+	        <description>Node types configuration file</description>
+	        <value>jar:/conf/nodetypes-workflow-publication-config.xml</value>
+	      </values-param>
+	    </init-params>
+	  </component-plugin>
+	</external-component-plugins>
+  
+  <external-component-plugins>
+	  <target-component>org.exoplatform.services.ecm.publication.PublicationService</target-component>      
+	  <component-plugin>
+	    <name>Workflow</name>
+	    <set-method>addPublicationPlugin</set-method>
+	    <type>org.exoplatform.services.ecm.publication.plugins.workflow.WorkflowPublicationPlugin</type>
+	    <description>Workflow Publication</description>	    	    	   
+	    <init-params>
+	      <value-param>
+		      <name>validator</name>
+		      <value>*:/platform/administrators</value>
+	      </value-param>
+	      <value-param>
+		      <name>to_workspace</name>
+		      <value>collaboration</value>
+	      </value-param>
+	      <value-param>
+		      <name>destPath</name>
+		      <value>/Documents/Live</value>
+	      </value-param>
+	      <value-param>
+		      <name>destPath_currentFolder</name>
+		      <value>true</value>
+	      </value-param>
+	      <value-param>
+		      <name>isEditable</name>
+		      <value>false</value>
+	      </value-param>
+	      <value-param>
+		      <name>backupWorkspace</name>
+		      <value>backup</value>
+	      </value-param>
+	    </init-params>
+	  </component-plugin>
+	</external-component-plugins>	
+</configuration>

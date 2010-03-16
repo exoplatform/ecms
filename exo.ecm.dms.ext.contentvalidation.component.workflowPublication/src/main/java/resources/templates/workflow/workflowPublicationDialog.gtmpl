@@ -1,0 +1,97 @@
+<%
+  import org.exoplatform.portal.webui.util.Util;
+  import java.util.Locale;
+  import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+  String fieldName;
+%>
+
+<div class="UIForm $uicomponent.id">
+  <%uiform.begin()%>
+  <div class="HorizontalLayout">
+    <div class="FormContainer">
+      <table class="UIFormGrid">
+	      <% 
+	        for (field in uiform.getChildren()) { 
+	          if (field.isRendered()) {
+	      %>
+              <tr>
+	              <% fieldName = uicomponent.getLabel(field.getName(), "label");%>
+	              <%
+	              	if(fieldName != null && fieldName.length() > 0 && !fieldName.equals(uicomponent.getId())) {
+	              %>                        
+  	              <td class="FieldLabel">
+                      <%=uicomponent.getLabel(field.getName(), "label") %>
+                  </td>
+  	              <td class="FieldComponent"><% uiform.renderField(field)%></td>
+	              <%} else {%>
+	                <td class="FieldComponent" colspan="2"><% uiform.renderField(field) %></td>
+	              <%}%>
+	            </tr>
+	      <%
+	          }
+	        }
+	      %>
+      </table>
+      <div class="UIAction"> 
+        <table class="ActionContainer">
+        	<tr>
+        		<td>
+		          <% for(action in uicomponent.getActions()) { 
+	                 String actionLabel = uicomponent.getLabel(action, "action");
+                   String link = uicomponent.event(action) ;
+          		%>
+          		<div onclick="$link" class="ActionButton LightBlueStyle" onmouseover="this.style.color = '#058ee6'" onmouseout="this.style.color='black'">
+                <div class="ButtonLeft">
+                  <div class="ButtonRight">
+                    <div class="ButtonMiddle">
+                      <a href="javascript:void(0);">$actionLabel</a>
+                    </div>
+                  </div>
+                </div>
+           		</div>
+          		<%}%>        
+          	</td>
+          </tr>  
+        </table>
+      </div>
+      
+      <%
+		  	def hideProcess = uicomponent.getLabel("hide-process-link", "label");
+		  	def showProcess = uicomponent.getLabel("show-process-link", "label");
+		  %>
+		  <div onclick="(function(ele) {
+		  										var parent = ele.parentNode;
+			  								 	if (parent.className == 'Hide') {
+			  								 		parent.className = 'Show';
+			  								 		ele.innerHTML = '$showProcess';
+			  								 	} else {
+			  								 		parent.className = 'Hide'; 
+			  								 		ele.innerHTML = '$hideProcess';								 	
+			  								 	}
+		  							})(this);" style="cursor: pointer; text-align: center; height: 23px; margin: 3px;font-weight:bold;text-decoration:underline;" >
+		  	$showProcess
+		  </div>
+			<%if (uicomponent.getLinkStateImage(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale()) != "") {%>
+		    <div class="DefaultHide ActionContainer">	
+		      <div style="margin: auto; width:447px;">
+		        <img src="<%=uicomponent.getLinkStateImage(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale())%>" height="450" width="447" border="0" alt=""/><br />
+		      </div>
+				</div>
+			<%}%>  
+      
+    </div>
+  </div>
+  <%uiform.end()%>
+</div>
+
+<style type="text/css">
+	.HorizontalLayout .DefaultHide, .DefaultShow {
+		display: none;
+	}
+	.Hide .DefaultHide {
+		display: block;
+	}
+	.Show .DefaultShow {
+		display: block;
+	}
+</style>
