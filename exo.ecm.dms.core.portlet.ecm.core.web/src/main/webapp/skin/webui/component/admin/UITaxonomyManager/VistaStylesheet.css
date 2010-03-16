@@ -1,0 +1,89 @@
+/**
+ * Created by The eXo Platform SAS
+ * Modifier : Vu Duy Tu
+ *           duytucntt@gmail.com
+ * January 03, 2006
+ * version: $Id$
+ */
+
+.UIECMAdminPortlet .UITaxonomyContainer {
+  background-color: white;
+  border: solid 1px #d9d8d8;
+  padding: 5px;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .Icon16x16 {
+  float: left;
+  margin: 3px 7px 0px 0px;
+  cursor: pointer;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .Icon24x24 {
+  float: left;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .SubTaxonomyContainer {
+		border: solid 1px #d9d8d8;
+		border-bottom: none;
+		width: 100%;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .HomeNode {
+  background: url('VistaSkin/background/HomeNodeBG1x20.gif') repeat-x top;
+  font-weight: bold; line-height: 30px;
+  border-bottom: solid 1px #d9d8d8;  
+  padding: 0px 7px;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .Node {
+  line-height: 29px;
+  background-color: #efefef;
+  border-bottom: solid 1px #d9d8d8;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .NodeEven {
+  line-height: 29px;
+  background-color: #f9f9f9;
+  border-bottom: solid 1px #e4e4e4;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .NoneIcon {
+  float: left;
+  width: 16px; height: 16px;  
+  margin: 7px 2px;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .ExpandIcon {
+  float: left;
+  margin: 7px 0px;
+  cursor: pointer;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .ColapseIcon {
+  float: left;
+  margin: 7px 0px;
+  cursor: pointer;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .NodeActionsContainer {
+  float: right;
+}
+
+.UIECMAdminPortlet .TrueFalseContainer{
+  width: 65px;
+  margin: auto;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .UITaxonomyForm {
+	padding: 10px;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .UITaxonomyForm .HorizontalLayout {
+	width: 500px;
+	margin: auto;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .HorizontalLayout label {
+  width: 120px;
+  padding-right: 3px;
+}

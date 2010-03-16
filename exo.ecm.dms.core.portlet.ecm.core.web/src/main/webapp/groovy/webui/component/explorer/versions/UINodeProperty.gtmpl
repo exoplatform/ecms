@@ -1,0 +1,38 @@
+<%
+	/**
+	 * Created by The eXo Platform SARL
+	 * Author : lxchiati
+	 *          lebienthuy@gmail.com
+	 * Oct 19, 2006
+	 * 8:50:23 AM
+	 */
+%>
+
+<table class="UIGrid">
+  <thead>
+    <tr>
+      <th><%=_ctx.appRes("UIViewVersion.label.PropertyName")%></th>
+      <th><%=_ctx.appRes("UIViewVersion.label.PropertyValue")%></th>
+    </tr>
+  </thead>
+  <tbody>
+  	<%for(bean in uicomponent.getVersionedNodeProperties()) { %>
+	  	<tr>
+		  	<td>$bean.name</td>
+		  	<%if(uicomponent.isMultiValue(bean)) { %>			  
+			  	<td style="padding: 0px;">
+					  <table class="UIGrid" >
+						  <%for(value in uicomponent.getPropertyMultiValues(bean)) {%> 
+			  			  <tr>
+								  <td style="border-top:none; border-left:none; border-right:none">$value</td>
+		  					</tr>
+	            <%}%>
+				  	</table>								
+	  			</td>	
+	  		<%} else { %>
+		  	  <td><%=uicomponent.getPropertyValue(bean)%></td>
+			  <%}%>						
+			</tr>
+		<%}%>  
+  </tbody>
+</table>

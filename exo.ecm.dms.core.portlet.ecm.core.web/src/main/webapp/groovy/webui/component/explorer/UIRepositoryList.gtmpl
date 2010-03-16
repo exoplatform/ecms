@@ -1,0 +1,43 @@
+<%
+  /**
+ * Created by The eXo Platform SARL
+ * Author : Hoang Van Hung
+ *          hunghvit@gmail.com;
+ * Nov 11, 2008
+ * 
+ */
+%>
+<% 
+  String repoName = uicomponent.getRepository();
+  uicomponent.initRepoList(repoName);
+%>
+
+<% uiform.begin(); %>
+<div class="UIDrivesRepoList" id="<%=uicomponent.getId()%>">
+  <div class="UIDrivesBrowser">
+		<div class="UIDrivesList">
+			<div class="DrivesListTitleBG">
+				<div class="DrivesListTitleBGRight">
+					<div class="DrivesListTitle">
+					 <span><%=_ctx.appRes("UIDrivesBrowser.title.repository" )%>:</span>
+						<span>
+							<%
+								if (uiform.getRepoItem().size() == 1) out.println(repoName);
+								else { 
+								%>
+								<% 
+								  def field = uiform.getChild(0);
+								  uiform.renderField(field);
+							  %>
+							  <%
+								}
+							%>
+						</span>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%uiform.end()%>

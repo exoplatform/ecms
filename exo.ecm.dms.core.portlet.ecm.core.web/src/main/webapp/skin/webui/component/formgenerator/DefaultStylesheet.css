@@ -1,0 +1,24 @@
+body {
+	background : #ebedf2;
+	margin : 0px; padding : 0px;
+	font-family: Tahoma, Verdana, 	Arial, Helvetica, sans-serif ;
+	font-size : 11px;
+	overflow-x: hidden;
+}
+
+table {
+}
+
+.LeftContainer {
+}
+
+.UIComponent {
+}
+
+.ComponentItem {
+}
+
+.RightComponentItem {
+	width:100%;
+	border:solid 1px #000;
+}

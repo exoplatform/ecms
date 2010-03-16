@@ -1,0 +1,119 @@
+<%
+/**
+ * Created by The eXo Platform SARL
+ * Author : Dang Van Minh
+ *          minh.dang@exoplatform.com
+ * Jan 4, 2006
+ * 4:28:26 PM 
+ */
+%>
+<%
+  import org.exoplatform.webui.core.UIPopupWindow;
+  import javax.jcr.query.Query;
+  import javax.jcr.Node;
+  import org.exoplatform.ecm.webui.utils.Utils ;
+  int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
+%>
+<div class="UISavedQuery" id="UISavedQuery">
+  <table class="UIGrid">
+    <thead>
+      <tr>
+  	    <th><%=_ctx.appRes("UISavedQuery.header.name")%></th>
+  	    <th><%=_ctx.appRes("UISavedQuery.header.type")%></th>
+  	    <th><%=_ctx.appRes("UISavedQuery.header.statement")%></th>
+  	    <th><%=_ctx.appRes("UISavedQuery.header.permission")%></th>
+  	    <th><%=_ctx.appRes("UISavedQuery.header.action")%></th>
+      </tr>
+    </thead>
+    <%
+    	def hasPrivateQueries = uicomponent.hasQueries() ;
+	    def hasSharedQueries = uicomponent.hasSharedQueries() ;
+    %>
+    <tbody>
+      <%if(!hasPrivateQueries && !hasSharedQueries) { %>
+	        <tr class="EvenRow">
+		        <td colspan="5"><%=_ctx.appRes("UISavedQuery.label.no-children")%></td>
+		      </tr>
+      <%} else {   
+	        def rowClass = null ;
+	  	    boolean even = true ;
+	  	    for(object in uicomponent.getQueryList()) {
+	  	      if(even) rowClass = "EvenRow" ;  
+	  	      else rowClass =  "OddRow" ; 
+	  	      even = !even ;
+      %>
+	          <%if(object instanceof Query) { %>
+		          <tr class="$rowClass">
+		            <%
+		              String storedQueryPath = object.getStoredQueryPath() ;
+		              storedQueryPath =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1, storedQueryPath.length()) ;
+		            %>
+		            <td><div class="Text" title="<%=object.getStoredQueryPath()%>"><%=storedQueryPath%></div></td>
+		            <td><div class="Text"><%=object.getLanguage()%></div></td>
+		            <td>
+		            	<%
+		            		String statement = object.getStatement() ;
+		            		if(statement.length() > 30) statement = "..." + statement.substring(10) ;
+		            	%>
+		            	<div class="Text" title="<%=object.getStatement()%>"><%=statement%></div>
+		            </td>
+		            <td><%=uicomponent.getCurrentUserId()%></td>
+			          <td style="width:100px;">
+			          	<div class="ActionContainer">
+				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
+				            <img onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
+				            <img onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
+			            </div>
+			          </td>	                    
+		          </tr>
+		        <%}%>
+		        <%
+		        	if(object instanceof Node) { 
+		        		if(object.hasProperty("jcr:language")) {
+		        %>
+				  	   <tr class="$rowClass">
+		            <td><div class="Text"><%=object.getName()%></div></td>
+		            <td><div class="Text"><%=object.getProperty("jcr:language").getString()%></div></td>
+		            <td>
+		            	<div class="Text" title="<%=object.getProperty("jcr:statement").getString()%>">
+			            	<%
+				            		String sharedStatement = object.getProperty("jcr:statement").getString() ;
+				            		if(sharedStatement.length() > 40) sharedStatement = "..." + sharedStatement.substring(20) ;
+				            %>
+		            		<%=sharedStatement%>
+		            	</div>
+		            </td>
+		            <td>
+		            <%
+		            	String sharedPermissions = null ;
+		            	for(per in object.getProperty("exo:accessPermissions").getValues()) {
+		            		if(sharedPermissions == null) sharedPermissions = per.getString() ;
+		            		else sharedPermissions = sharedPermissions + "," + per.getString() ;
+		            	}
+		            %>
+		            	<div class="Text"><%=sharedPermissions%></div>
+		            </td>
+			          <td style="width:80px;">
+			          	<div class="ActionContainer">
+				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getPath()))%>" alt="" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
+			            </div>
+			          </td>	                    
+		          </tr>
+	      	 <%
+	      	    }
+	      		}  
+	      	}
+	      }
+	    %>
+    </tbody>
+  </table>
+  <% if(totalPages>1){ %>
+  <div style="margin:1px 0px 5px 0px;">
+    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+  </div>
+  <% } %>
+</div>
+<%
+if(uicomponent.getChild(UIPopupWindow.class) != null) { %>
+  <%uicomponent.renderChild(UIPopupWindow.class)%>    
+<%}%>

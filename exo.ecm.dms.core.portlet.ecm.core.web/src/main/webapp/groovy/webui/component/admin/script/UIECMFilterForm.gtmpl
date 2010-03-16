@@ -1,0 +1,35 @@
+<%
+	/**
+ * Created by The eXo Platform SARL
+ * Author : Pham Tuan
+ *          phamtuanchip@yahoo.de ;
+ * Sep 29, 2006
+ * 03:40:24 PM 
+ */
+%>
+<div class="UIScriptFilterForm">
+  <div class="UIBarStyle">
+    <div class="BarStyle2">
+      <div class="LeftBar">
+        <div class="RightBar">
+          <div class="MiddleBar">
+	          <%uiform.begin()%>
+              <table class="UIFormGrid">
+							  <%for(field in uiform.getChildren()) { 
+							      if(field.isRendered()) {%>
+			              <tr>
+				              <td class="FieldLabel"><%=uicomponent.getLabel(field.getName())+ ": " %></td>
+									    <td class="FieldComponent"><% uiform.renderField(field) %></td>
+									  </tr>
+							  <%  
+							      }
+							    }%>
+  						</table>
+  				  <%uiform.end()%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          

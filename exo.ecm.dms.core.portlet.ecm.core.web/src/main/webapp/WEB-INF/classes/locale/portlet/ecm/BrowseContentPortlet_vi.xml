@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIConfigTabPane #
+  ###################################################################
+  -->
+  <UIConfigTabPane>
+    <tab>
+      <label>
+        <UIPathConfig>Cấu hình đường dẫn</UIPathConfig>
+        <UINewConfigForm>Tạo mới</UINewConfigForm>
+      </label>
+    </tab>
+  </UIConfigTabPane>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPathConfig #
+  ###################################################################
+  -->
+  <!--
+    ###################################################################
+		#	    FROM VERSION DMS 2.3-SNAPSHOT, we add filterCategory        #
+		#	    to display checkbox for filtering category tree             #
+		#	    base on permission of user                                  #
+    ###################################################################
+   -->
+  <UIPathConfig>
+    <label>
+      <categoryPath>Đường dẫn các danh mục</categoryPath>
+      <workspace>Không gian làm việc</workspace>
+      <repository>Kho</repository>
+      <path>UIPathConfig</path>
+      <template>Mẫu</template>
+      <itemPerPage>Số mục trong một trang</itemPerPage>
+      <detailBoxTemp>Chi tiết hộp mẫu</detailBoxTemp>
+      <enableToolBar>Xem thanh công cụ</enableToolBar>
+      <enableRefDoc>Tài liệu tham khảo</enableRefDoc>
+      <filterCategory>Lọc các danh mục dựa trên thuộc tính phân quyền</filterCategory>
+      <enableChildDoc>Tài liệu con</enableChildDoc>
+      <enableTagMap>Tagmap</enableTagMap>
+      <enableComment>Có thể nhận xét</enableComment>
+      <enableVote>Có thể bình chọn</enableVote>
+      <isAllowPublish>Chỉ cho phép tài liệu được publish</isAllowPublish>
+    </label>
+    <title>Cấu hình đường dẫn</title>
+    <action>
+      <Add>Cấu hình mới</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Chỉnh sửa</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <require-path>Bạn phải lựa chọn đường dẫn tới danh mục</require-path>
+      <invalid-path>Đường dẫn tới danh mục không hợp lệ</invalid-path>
+      <invalid-value>Số trang không đúng</invalid-value>
+      <invalid-number>Bạn phải nhập vào 1 số</invalid-number>
+      <access-denied>Truy nhập bị từ chối! Bạn không có quyền truy nhập vào đường dẫn này.</access-denied>
+    </msg>
+  </UIPathConfig>
+  <UIQueryConfig>
+    <msg>
+      <repostoryException>Câu truy vấn có thể không hợp lệ. Hãy kiểm tra lại</repostoryException>
+      <noSuchNodeTypeException>Câu truy vấn có thể không hợp lệ. Hãy kiểm tra lại</noSuchNodeTypeException>
+      <invalid-value>Bạn phải nhập vào số mục trong một trang</invalid-value>
+      <invalid-query>Câu truy vấn không hợp lệ</invalid-query>
+      <invalid-name>Không tìm thấy tên truy vấn, hãy thử với kiểu, ngôn ngữ hoặc trạng thái khác</invalid-name>
+    </msg>
+    <title>Cấu hình cho chức năng truy vấn</title>
+    <label>
+      <repository>Kho</repository>
+      <workspace>Không gian làm việc</workspace>
+      <queryLanguage>Ngôn ngữ truy vấn</queryLanguage>
+      <queryStatus>Trạng thái truy vấn</queryStatus>
+      <queryType>Kiểu truy vấn</queryType>
+      <queryStore>Tên truy vấn</queryStore>
+      <query>Truy vấn</query>
+      <template>Mẫu</template>
+      <itemPerPage>Số mục trong một trang</itemPerPage>
+      <detailBoxTemp>Chi tiết hộp mẫu</detailBoxTemp>
+      <enableTagMap>Tagmap</enableTagMap>
+      <enableComment>Có thể nhận xét</enableComment>
+      <enableVote>Có thể bình chọn</enableVote>
+      <isAllowPublish>Chỉ cho phép tài liệu được publish</isAllowPublish>
+    </label>
+    <action>
+      <Add>Cấu hình mới</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Chỉnh sửa</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIQueryConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIQueryConfig #
+  ###################################################################
+  -->
+  <path>
+    <title>
+      <AddPath>Thêm đường dẫn</AddPath>
+    </title>
+  </path>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Thêm nút gốc</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl		#
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Bình thường/Click để bình chọn</normal>
+      <good>Tốt/Click để bình chọn</good>
+      <verygood>Rất Tốt/Click để bình chọn</verygood>
+      <excellent>Tuyệt vời/Click để bình chọn</excellent>
+      <best>Tốt nhất/Click để bình chọn</best>
+    </title>
+    <button>
+      <label>
+        <cancel>Hủy</cancel>
+      </label>
+    </button>
+  </UIVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIScriptConfig #
+  ###################################################################
+  -->
+  <UIScriptConfig>
+    <title>Cấu hình đoạn mã</title>
+    <label>
+      <repository>Kho</repository>
+      <workspace>Không gian làm việc</workspace>
+      <scriptName>Tên đoạn mã</scriptName>
+      <template>Mẫu</template>
+      <detailBoxTemp>Chi tiết hộp mẫu</detailBoxTemp>
+      <enableTagMap>Tagmap</enableTagMap>
+      <enableComment>Có thể nhận xét</enableComment>
+      <enableVote>Có thể bình chọn</enableVote>
+      <isAllowPublish>Chỉ cho phép tài liệu được publish</isAllowPublish>
+    </label>
+    <action>
+      <Add>Cấu hình mới</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Chỉnh sửa</Edit>
+      <Back>#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIScriptConfig>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIDocumentConfig #
+  ###################################################################
+  -->
+  <UIDocumentConfig>
+    <title>Cấu hình tài liệu</title>
+    <label>
+      <repository>Kho</repository>
+      <workspace>Không gian làm việc</workspace>
+      <categoryPath>Đường dẫn các danh mục</categoryPath>
+      <path>UIDocumentConfig</path>
+      <doc>UIDocumentConfig</doc>
+      <docName>Tên tài liệu</docName>
+      <detailBoxTemp>Chi tiết hộp mẫu</detailBoxTemp>
+      <enableComment>Có thể nhận xét</enableComment>
+      <enableVote>Có thể bình chọn</enableVote>
+      <isAllowPublish>Chỉ cho phép tài liệu được publish</isAllowPublish>
+    </label>
+    <action>
+      <Add>Cấu hình mới</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Chỉnh sửa</Edit>
+      <Back>#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <require-path>Trước tiên hãy lựa chọn đường dẫn tới danh mục</require-path>
+      <invalid-path>Đường dẫn không hợp lệ,hãy chọn lại đường dẫn</invalid-path>
+      <require-doc>Bạn phải lựa chọn tài liệu</require-doc>
+      <invalid-doc>Tài liệu đã bị xóa hoặc thay đổi hoặc ban không có quyền truy nhập</invalid-doc>
+    </msg>
+  </UIDocumentConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UINewConfigForm #
+  ###################################################################
+  -->
+  <UINewConfigForm>
+    <label>
+      <repository>Hãy lựa chọn kho</repository>
+      <workspace>Không gian làm việc</workspace>
+      <browseType>Trình duyệt nội dung</browseType>
+    </label>
+    <title>Tạo mới</title>
+    <action>
+      <Next>Đi tiếp</Next>
+      <Back>#{word.back}</Back>
+    </action>
+  </UINewConfigForm>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UIToolBar      #
+  ###################################################################
+  -->
+  <UIToolBar>
+    <label>
+      <RootNode>Gốc</RootNode>
+    </label>
+    <tooltip>
+      <Hidden>Ẩn cây</Hidden>
+      <Show>Hiển thị cây</Show>
+      <showSearch>Hiển thị/Ẩn màn hình tìm kiếm</showSearch>
+      <Back>Quay lại</Back>
+      <Vote>Bình chọn</Vote>
+      <Comment>Viết nhận xét</Comment>
+    </tooltip>
+    <msg>
+      <back-view-search>Quay lại màn hình trước để tìm kiếm</back-view-search>
+      <select-doc>Không có tại liệu nào được chọn hoặc tài liệu đó đã bị hủy bỏ</select-doc>
+      <node-removed>Nút đã bị loại bỏ</node-removed>
+      <readonly-doc>Tài liệu hiện thời đang được checked in, hãy thực hiện check out!</readonly-doc>
+      <not-support-vote>Không được phép bình chọn cho loại tài liệu này</not-support-vote>
+      <not-support-comment>Không được phép viết nhận xét cho loại tài liệu này</not-support-comment>
+      <node-is-locked>Nút đã bị khóa! Hãy thực hiện mở khóa.</node-is-locked>
+      <access-add-denied>Truy nhập bị từ chối. Bạn không có quyền trên nút này</access-add-denied>
+    </msg>
+  </UIToolBar>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UISearchController #
+  ###################################################################
+  -->
+  <UISearchController>
+    <label>
+      <nodePath>Bạn đang xem</nodePath>
+      <searchTime>Kết quả</searchTime>
+      <duration>Khoảng thời gian</duration>
+      <nodeName>Nút</nodeName>
+    </label>
+  </UISearchController>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBSearchForm #
+  ###################################################################
+  -->
+  <UICBSearchForm>
+    <label>
+      <inputValue>Từ khóa để tìm kiếm</inputValue>
+      <option>nolabel</option>
+      <search>Tìm kiếm</search>
+      <referencesDoc>Tham chiếu</referencesDoc>
+      <childDoc>Con</childDoc>
+    </label>
+    <title>
+      <search>Tìm kiếm</search>
+    </title>
+    <msg>
+      <not-empty>Bạn hãy nhập từ khóa</not-empty>
+      <suggestion-keyword>Đề xuất: '{0}' Không tìm thấy. Hãy thử với từ khóa khác</suggestion-keyword>
+    </msg>
+  </UICBSearchForm>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UICBSearchResults #
+  ###################################################################
+  -->
+  <UICBSearchResults>
+    <header>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <node-removed>Không thấy nút: nút đã được di chuyển hoặc bị xóa</node-removed>
+      <not-support>Không hỗ trợ xem mẫu của nút</not-support>
+      <not-permission>Truy nhập bị từ chối. Bạn không có quyền trên nút này!</not-permission>
+      <empty>Không tìm thấy!</empty>
+    </msg>
+    <tooltip>
+      <Goto>Đi tới thư mục</Goto>
+      <View>Xem</View>
+    </tooltip>
+  </UICBSearchResults>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIBrowseContainer #
+  ###################################################################
+  -->
+  <UIBrowseContainer>
+    <label>
+      <NoDocument>Không có tài liệu</NoDocument>
+      <author>Tác giả</author>
+      <summary>Sơ lược</summary>
+      <more>Thêm tài liệu</more>
+      <previous>Quay lại</previous>
+      <path-Previous>Quay lại</path-Previous>
+      <path-Root>Gốc</path-Root>
+      <home>Home</home>
+      <cannot-access>Truy nhập bị từ chối. Có thể bạn không có quyền truy nhập trong cấu hình của portlet này.</cannot-access>
+    </label>
+    <title>
+      <home>Home</home>
+      <prevTabs>Tab trước</prevTabs>
+      <moreTabs>Thêm Tab</moreTabs>
+    </title>
+    <msg>
+      <template-notsupported>Không có mẫu</template-notsupported>
+      <invalid-node>Không thấy nút: nút đã được di chuyển hoặc bị xóa</invalid-node>
+    </msg>
+  </UIBrowseContainer>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.JCRBrowser #
+  ###################################################################
+  -->
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Lựa chọn đường dẫn</UIOneNodePathSelector>
+      <pathSelector>Lựa chọn đường dẫn</pathSelector>
+    </title>
+  </pathSelector>
+  <documentSelector>
+    <title>
+      <UIOneNodePathSelector>Lựa chọn tài liệu</UIOneNodePathSelector>
+    </title>
+  </documentSelector>
+  <UITreeList>
+    <header>
+      <name>Tên</name>
+      <action>Hành động</action>
+    </header>
+    <info>
+      <child-not-found>Không có nút con</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBCommentForm #
+  ###################################################################
+  -->
+  <UICBCommentForm>
+    <label>
+      <title>Thêm nhận xét</title>
+      <name>Tên</name>
+      <email>Hòm thư điện tử</email>
+      <website>Website</website>
+      <comment>Nhận xét</comment>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <locked-doc>Tài liệu đã bị khóa</locked-doc>
+      <versioning-doc>Tài liệu đang được phiên bản hóa</versioning-doc>
+      <error-vote>Lỗi trong khi nhận xét</error-vote>
+      <comment-required>Comment is required</comment-required>
+    </msg>
+  </UICBCommentForm>
+  <UICBVoteForm>
+    <msg>
+      <locked-doc>Tài liệu đã bị khóa</locked-doc>
+      <versioning-doc>Tài liệu đang được phiên bản hóa</versioning-doc>
+      <error-vote>ỗi trong khi bình chọn</error-vote>
+    </msg>
+  </UICBVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPopupWindow #
+  ###################################################################
+  -->
+  <UICBPopupWindow>
+    <title>
+      <UICBCommentForm>Thêm nhận xét</UICBCommentForm>
+      <UICBVoteForm>Bình chọn</UICBVoteForm>
+      <UIDocumentDetail>Xem tài liệu</UIDocumentDetail>
+    </title>
+  </UICBPopupWindow>
+  <!--
+  ###################################################################################
+  # JCR Browser																			  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Không gian làm việc</workspaceName>
+      <rootNodeInfo>Đường dẫn gốc</rootNodeInfo>
+      <rootPath>Đường dẫn gốc</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # UITagList																		  #
+  ###################################################################################
+  -->
+  <UITagList>
+    <label>
+      <tagTitle>Tag Map</tagTitle>
+    </label>
+  </UITagList>
+  <UICategoryTree>
+    <label>
+      <title>Các danh mục</title>
+    </label>
+    <msg>
+      <invalid-node>Không thấy nút: nút đã được di chuyển hoặc bị xóa</invalid-node>
+    </msg>
+  </UICategoryTree>
+  <!--
+  ###################################################################################
+  #  org.exoplatform.ecm.webui.component.browse.UIBrowseContentHelp																  #
+  ###################################################################################
+  -->
+  <UIBrowseContentHelp>
+    <label>
+      <info>Bạn đang trong chế độ Giúp đỡ, có thể cấu hình cho portlet của bạn bằng cách lựa chọn chế độ Chỉnh sửa</info>
+    </label>
+  </UIBrowseContentHelp>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Bạn có thực sự muốn xóa?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator																			#
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>Giá trị của trường này là null hoặc trống!</empty-input>
+      <Invalid-char>Kí tự không hợp lệ, xin mời nhập lại!</Invalid-char>
+      <Invalid-char2>Các số phải được theo sau bởi kí tự '~'</Invalid-char2>
+      <Invalid-char1>Các số sau kí tự '~' nằm giữa 0 và 1</Invalid-char1>
+      <Invalid-char3>Các số phải được theo sau bởi kí tự '~'</Invalid-char3>
+      <Invalid-char4>Gần kí tự '~' không được phép có khoảng trống</Invalid-char4>
+      <Invalid-char5>Gần kí tự '~' không được phép có khoảng trống</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ######################################################################################
+  # Since ECM 2.3
+  ######################################################################################
+  -->
+  <UIPathConfig>
+    <label>
+      <searchEnable>Cho phép chọn vị trí tìm kiếm</searchEnable>
+      <searchLocation>Vị trí tìm kiếm</searchLocation>
+      <searchPath>UIPathConfig</searchPath>
+      <explain></explain>
+    </label>
+    <msg>
+      <enter-search-location>Bạn phải chỉ ra vị trí tìm kiếm</enter-search-location>
+      <explain>Khi các tài liệu được hiển thị tương ứng với với cấp bậc các danh mục. Đường dẫn nơi chứa các tài liệu cần phải được chỉ rõ, có như vậy thì những tài liệu mới có thể được tìm thấy dựa vào chức năng tìm kiếm ở trong portlet này.</explain> 
+    </msg>
+  </UIPathConfig>
+  
+  <UIDocumentForm>
+  	<msg>
+  		<not-support>Không thể tải mẫu của '{0}'.</not-support>
+  		<do-not-permission>Bạn không có quyền để thao tác trên template này</do-not-permission>
+  	</msg>
+  </UIDocumentForm>
+  <!--
+	  ######################################################################################
+	  # Since ECM 2.6
+	  ######################################################################################
+	  -->
+  <Comments>
+	  <tooltip>
+	    <remove-comment>Xóa bình luận này</remove-comment>
+	    <edit-comment>Chỉnh sửa bình luận này</edit-comment>
+	  </tooltip>
+		</Comments>
+		<UIDocumentDetail>
+		  <msg>
+		    <confirm-deletecomment>Bạn có muốn xóa bình luận này không?</confirm-deletecomment>
+		  </msg>
+		</UIDocumentDetail>
+		<UIPopupWindow>
+			<title>
+				<UICBCommentForm>Nhập bình luận</UICBCommentForm>
+			</title> 
+		</UIPopupWindow>
+	<UIBrowseContainer>
+    <msg>
+			<symlinkNode-no-targetNode>Không thấy nút: Nút thực đã được di chuyển hoặc bị xóa, hoặc bạn không có quyền truy cập nút thực này</symlinkNode-no-targetNode>
+    </msg>
+  </UIBrowseContainer>
+  <UIDocumentDetail>
+  	<tooltip>
+  		<remove-attachment>Xóa file đính kèm này</remove-attachment>
+  	</tooltip>
+  </UIDocumentDetail>
+  <DocumentDetail>
+  	<tooltip>
+  		<remove-attachment>Xóa file đính kèm này</remove-attachment>
+  	</tooltip>
+  </DocumentDetail>
+
+  <UITagList>
+   <label>
+     <PublicTags>Nhãn chung</PublicTags>
+     <PrivateTags>Nhãn riêng</PrivateTags>
+    </label>
+  </UITagList>
+
+</bundle>

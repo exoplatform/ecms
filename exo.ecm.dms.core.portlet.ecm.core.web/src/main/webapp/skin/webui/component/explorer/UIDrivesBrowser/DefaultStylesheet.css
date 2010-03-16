@@ -1,0 +1,266 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Tran The Trong
+ *          trongtt@gmail.com
+ * August 01, 2006
+ * version: $Id$
+ */
+ 
+/*############################## -- Begin UIDrivesBrowser -- ##############################*/
+
+.UIJCRExplorerPortlet .UIDrivesBrowser {
+  overflow: auto;
+  padding: 0px 10px 10px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesRepoList .UIDrivesBrowser {
+  overflow: auto;
+  padding: 10px 10px 0px;
+}
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDropDownControl {
+	width: 99%;
+}
+
+.UIJCRExplorerPortlet .UIRepository {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 210px;
+  border: solid 1px #d9d9d9;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryContainer {
+  border: solid 1px #ffffff;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList {
+  width: 202px;
+  border: solid 1px #e3e3e3;
+  margin: 3px auto 1px auto;
+  padding: 1px;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList a{
+	color: #116EAA;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList a:hover{
+	color: orange;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList .RepositoryDecorater {
+  background: #f5f5f5 url('DefaultSkin/background/BottomRepositoryList1x10.gif') repeat-x bottom;
+  height: 10px;
+  line-height: 10px;
+  margin: 80px 0px 1px 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDrivesList  {
+  margin: 0px; 
+  border: 1px solid #d9d9d9;
+  border-top: 0px solid #d9d9d9; 
+  padding: 1px;
+  _height: 100%;
+}
+
+.UIJCRExplorerPortlet .UIDrivesRepoList .UIDrivesBrowser .UIDrivesList  {
+  margin: 0px; 
+  border: 1px solid #d9d9d9; 
+  border-bottom: 0px solid #d9d9d9; 
+  padding: 1px;
+  _height: 100%;
+  
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDrivesList .EmptyDrives {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 95%;
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px 0px;
+  color: #ef5604;
+}
+
+.UIJCRExplorerPortlet .EmptyDrives {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 95%;
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px 0px;
+  color: #ef5604;
+}
+
+.UIDrivesBrowser .UIDropDownControl .DropDownSelectLabel {
+  line-height: 23px;
+  color: black;
+  font-weight: bold;
+  font-size: 12px;
+  white-space: nowrap;
+	width:150px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle {
+  background: #b0cfea url('DefaultSkin/background/DrivesTitle338x23.gif') no-repeat left; /* orientation=lt */
+  background: #b0cfea url('DefaultSkin/background/DrivesTitle338x23_rt.gif') no-repeat right; /* orientation=rt */
+  line-height: 23px;
+  color: white;
+  font-weight: bold;
+  padding-left: 10px; /* orientation=lt */
+  padding-right: 10px; /* orientation=rt */
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListContainer {
+  border: 1px solid #d9d9d9; 
+  background: #f3f3f3;
+  margin: 3px 1px 1px 1px;
+  padding: 7px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent {
+	border: 1px solid #d9d9d9;
+	padding: 1px 2px 2px 2px;
+	margin: 0px auto 5px auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .DrivesListTitle {
+	line-height: 21px;
+	padding-right: 5px; /* orientation=lt */
+	padding-left: 5px; /* orientation=rt */
+	height: 21px;
+	border: 1px solid #F3F3F3;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .DropDownArrow16x16Icon {
+	padding-right: 20px; /* orientation=lt */
+	padding-left: 20px; /* orientation=rt */
+	height: 21px;
+	width: auto; 
+	background-position: right center; /* orientation=lt */
+	background-position: left center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .Icon {
+	padding-left: 20px; /* orientation=lt */
+	padding-right: 20px; /* orientation=rt */
+	width: auto; height: auto;
+	margin: 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .PersonalDrivesIcon {
+	background: url('DefaultSkin/background/Personal.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/background/Personal.png') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .GroupDrivesIcon {
+	background: url('DefaultSkin/background/Group.png') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/background/Group.png') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .GeneralDriveIcon {
+	background: url('DefaultSkin/background/Earth.gif') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/background/Earth.gif') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .BrowserDecorator {
+	border: 1px solid #d9d9d9;
+	margin-top: 1px;
+	height: 100%;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Drive {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  border: solid 1px #ffffff;
+  margin: 6px;
+  width: 160px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveContainer {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 158px; height: 80px;
+  border: solid 1px #d1d1d1;
+  background: white;
+  padding: 8px 0px 5px 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Icon {
+  cursor: pointer;
+  width: 58px; height: 45px;
+  margin: 2px auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel {
+  line-height: 14px;
+  text-align: center;
+  margin: 3px auto 0px auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel a {
+  color: #116eaa;
+  text-decoration: none;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel a:hover {
+  color: orange;
+  text-decoration: none;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DefaultDriveIcon {
+  background: url('DefaultSkin/background/DefaultDrive.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .GroupDriveIcon {
+  background: url('DefaultSkin/background/GroupManagement58x45.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserDriveIcon {
+  background: url('DefaultSkin/background/UserManagement58x45.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdminproductionIcon {
+  background: url('DefaultSkin/background/AdminProduction.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdmindraftIcon {
+  background: url('DefaultSkin/background/AdminDraft.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdminbackupIcon {
+  background: url('DefaultSkin/background/AdminBackup.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdmintaxonomyIcon {
+  background: url('DefaultSkin/background/AdminTaxonomy.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdminsystemIcon {
+  background: url('DefaultSkin/background/AdminSystem.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Admindigital-assetsIcon {
+  background: url('DefaultSkin/background/AdminDigitalAssets.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserproductionIcon {
+  background: url('DefaultSkin/background/UserProduction.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserdraftIcon {
+  background: url('DefaultSkin/background/UserDraft.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserbackupIcon {
+  background: url('DefaultSkin/background/UserBackup.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UsertaxonomyIcon {
+  background: url('DefaultSkin/background/UserTaxonomy.gif') no-repeat;
+}
+
+/*############################## -- End UIDrivesBrowser -- ##############################*/

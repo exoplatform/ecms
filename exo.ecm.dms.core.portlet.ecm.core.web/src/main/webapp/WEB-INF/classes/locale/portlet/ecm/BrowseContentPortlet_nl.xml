@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIConfigTabPane #
+  ###################################################################
+  -->
+  <UIConfigTabPane>
+    <tab>
+      <label>
+        <UIPathConfig>Configuratie pad</UIPathConfig>
+        <UINewConfigForm>Nieuwe</UINewConfigForm>
+      </label>
+    </tab>
+  </UIConfigTabPane>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPathConfig #
+  ###################################################################
+  -->
+  <!--
+    ###################################################################
+		#	    FROM VERSION DMS 2.3-SNAPSHOT, we add filterCategory        #
+		#	    to display checkbox for filtering category tree             #
+		#	    base on permission of user                                  #
+    ###################################################################
+   -->
+  <UIPathConfig>
+    <label>
+      <categoryPath>Categories Pad</categoryPath>
+      <workspace>Werkruimte</workspace>
+      <repository>Bewaarplaats</repository>
+      <path>UIPathConfig</path>
+      <template>Sjabloon</template>
+      <itemPerPage>Items Per Pagina</itemPerPage>
+      <detailBoxTemp>Detail Box Sjabloon</detailBoxTemp>
+      <enableToolBar>Bekijk Toolbar</enableToolBar>
+      <enableRefDoc>Referentie Document</enableRefDoc>
+      <filterCategory>Filtert categorieën gebaseerd op de huidige gebruiker machtigingen</filterCategory>
+      <enableChildDoc>Kinderen Document</enableChildDoc>
+      <enableTagMap>Tagmap</enableTagMap>
+      <enableComment>Commentaar</enableComment>
+      <enableVote>Stembaar</enableVote>
+      <isAllowPublish>Toon alleen documenten in "gepubliceerd" state</isAllowPublish>
+    </label>
+    <title>Configuratie pad</title>
+    <action>
+      <Add>Nieuw config</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Wijzigen</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <require-path>U moet categoriepad kiezen</require-path>
+      <invalid-path>Ongeldig categorie pad</invalid-path>
+      <invalid-value>Ongeldige pagina nummer</invalid-value>
+      <invalid-value>Ongeldig paginae nummer</invalid-value>
+      <access-denied>Toegang geweigerd! u hebt geen rechten in deze categoriepad</access-denied>
+    </msg>
+  </UIPathConfig>
+  <UIQueryConfig>
+    <msg>
+      <repostoryException>Misschien hebt u een probleem met de query. Controleer</repostoryException>
+      <noSuchNodeTypeException>Misschien hebt u een probleem met de query. Controleer</noSuchNodeTypeException>
+      <invalid-value>Ongeldig pagina nummer</invalid-value>
+      <invalid-query>Ongeldig query string</invalid-query>
+      <invalid-name>Querynaam niet gevonden, probeer opnieuw</invalid-name>
+    </msg>
+    <title>Query Configuratie</title>
+    <label>
+      <repository>repository</repository>
+      <workspace>Werkruimte</workspace>
+      <queryLanguage>Query taal</queryLanguage>
+      <queryStatus>Query Status</queryStatus>
+      <queryType>Query Type</queryType>
+      <queryStore>Query Naam</queryStore>
+      <query>Query</query>
+      <template>Sjabloon</template>
+      <itemPerPage>Items Per Pagina</itemPerPage>
+      <detailBoxTemp>Detail Box Sjabloon</detailBoxTemp>
+      <enableTagMap>Tagmap</enableTagMap>
+      <enableComment>Commentaar</enableComment>
+      <enableVote>Stembaar</enableVote>
+      <isAllowPublish>Toon alleen documenten in "gepubliceerd" state</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nieuw config</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Wijzigen</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIQueryConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIQueryConfig #
+  ###################################################################
+  -->
+  <path>
+    <title>
+      <AddPath>Pad toevoegen</AddPath>
+    </title>
+  </path>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Toevoegen Root Node</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl		#
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Normaal/klik om te stemmen</normal>
+      <good>Goed/klik om te stemmen</good>
+      <verygood>Heel goed/klik om te stemmen</verygood>
+      <excellent>Uitstekend/klik om te stemmen</excellent>
+      <best>Best/klik om te stemmen</best>
+    </title>
+    <button>
+      <label>
+        <cancel>Annuleren</cancel>
+      </label>
+    </button>
+  </UIVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIScriptConfig #
+  ###################################################################
+  -->
+  <UIScriptConfig>
+    <title>Script Config</title>
+    <label>
+      <repository>Repository</repository>
+      <workspace>Werkruimte</workspace>
+      <scriptName>Scriptnaam</scriptName>
+      <template>Sjabloon</template>
+      <detailBoxTemp>Detail Box Sjabloon</detailBoxTemp>
+      <enableTagMap>Tagmap</enableTagMap>
+      <enableComment>Commentaar</enableComment>
+      <enableVote>Stembaar</enableVote>
+      <isAllowPublish>Toon alleen documenten in "gepubliceerd" state</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nieuw config</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Wijzigen</Edit>
+      <Back>#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIScriptConfig>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIDocumentConfig #
+  ###################################################################
+  -->
+  <UIDocumentConfig>
+    <title>Document Config</title>
+    <label>
+      <repository>Repository</repository>
+      <workspace>Werkruimte</workspace>
+      <categoryPath>Categoriespad</categoryPath>
+      <path>UIDocumentConfig</path>
+      <doc>UIDocumentConfig</doc>
+      <docName>Documentnaam</docName>
+      <detailBoxTemp>Detail Box Sjabloon</detailBoxTemp>
+      <enableComment>Commentaar</enableComment>
+      <enableVote>Stembaar</enableVote>
+      <isAllowPublish>Toon alleen documenten in "gepubliceerd" state</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nieuw config</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Wijzigen</Edit>
+      <Back>#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <require-path>U moet eerst categoriepad selecteren</require-path>
+      <invalid-path>Ongeldig categoriepad, probeer opnieuw</invalid-path>
+      <require-doc>U moet een document selecteren</require-doc>
+      <invalid-doc>Document is verwijderd of gewijzigd of u hebt geen toegang</invalid-doc>
+    </msg>
+  </UIDocumentConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UINewConfigForm #
+  ###################################################################
+  -->
+  <UINewConfigForm>
+    <label>
+      <repository>Selecteer repository</repository>
+      <workspace>Werkruimte</workspace>
+      <browseType>Inhoud navigeren</browseType>
+    </label>
+    <title>Nieuwe</title>
+    <action>
+      <Next>Volgende</Next>
+      <Back>#{word.back}</Back>
+    </action>
+  </UINewConfigForm>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UIToolBar      #
+  ###################################################################
+  -->
+  <UIToolBar>
+    <label>
+      <RootNode>Root</RootNode>
+    </label>
+    <tooltip>
+      <Hidden>Verborgen Tree</Hidden>
+      <Show>Toon Tree</Show>
+      <showSearch>Toon/Verberg zoek formulier</showSearch>
+      <Back>Terug</Back>
+      <Vote>Stem</Vote>
+      <Comment>Schrijf commentaar</Comment>
+    </tooltip>
+    <msg>
+      <back-view-search>Terug naar vorige zicht voor het zoeken</back-view-search>
+      <select-doc>Geen document geselecteerd of werd verwijderd</select-doc>
+      <node-removed>Node verwijderd</node-removed>
+      <readonly-doc>Huidig document checked in, checkout eerst !</readonly-doc>
+      <not-support-vote>Niet toelaten om voor dit type document te stemmen</not-support-vote>
+      <not-support-comment>Geen commentaar toegelaten voor dit type document</not-support-comment>
+      <node-is-locked>Node is op slot! gelieve node vrij te maken</node-is-locked>
+      <access-add-denied>Toegang geweigerd. u hebt geen 'toevoegen' recht aan deze node</access-add-denied>
+    </msg>
+  </UIToolBar>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UISearchController #
+  ###################################################################
+  -->
+  <UISearchController>
+    <label>
+      <nodePath>U kijkt in</nodePath>
+      <searchTime>Resultaat</searchTime>
+      <duration>Duur</duration>
+      <nodeName>knoop</nodeName>
+    </label>
+  </UISearchController>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBSearchForm #
+  ###################################################################
+  -->
+  <UICBSearchForm>
+    <label>
+      <inputValue>Sleutelwoorden zoeken</inputValue>
+      <option>Geen etiket</option>
+      <search>Zoek nu</search>
+      <referencesDoc>Referenties</referencesDoc>
+      <childDoc>Kinderen</childDoc>
+    </label>
+    <title>
+      <search>Zoek nu</search>
+    </title>
+    <msg>
+      <not-empty>U moet sleutelwoord ingeven</not-empty>
+      <suggestion-keyword>Suggesties: '{0}' niet gevonden. Probeer andere sleutelwoorden.</suggestion-keyword>
+    </msg>
+  </UICBSearchForm>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UICBSearchResults #
+  ###################################################################
+  -->
+  <UICBSearchResults>
+    <header>
+      <name>Naam</name>
+      <path>Pad</path>
+      <action>Actie</action>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <node-removed>Vermiste node : werd verplaatst of verwijderd</node-removed>
+      <not-support>View template van deze node is niet ondersteund</not-support>
+      <not-permission>Access denied, maybe you don't have privileges to access this node!</not-permission>
+      <empty>Geen resultaten gevonden!</empty>
+    </msg>
+    <tooltip>
+      <Goto>Ga naar folder</Goto>
+      <View>Toon</View>
+    </tooltip>
+  </UICBSearchResults>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIBrowseContainer #
+  ###################################################################
+  -->
+  <UIBrowseContainer>
+    <label>
+      <NoDocument>Geen documenten in deze categorie</NoDocument>
+      <author>Auteur</author>
+      <summary>Samenvatting</summary>
+      <more>Meer documenten</more>
+      <previous>Vorige zicht</previous>
+      <path-Previous>Vorige</path-Previous>
+      <path-Root>Root</path-Root>
+      <home>Home</home>
+      <cannot-access>Toegang geweigerd. Misschien hoeft u geen oog toestemming deze portlet configuratie.</cannot-access>
+    </label>
+    <title>
+      <home>Home</home>
+      <prevTabs>Vorige Tabbladen</prevTabs>
+      <moreTabs>Meer Tabbladen</moreTabs>
+    </title>
+    <msg>
+      <template-notsupported>Geen view template om te laden</template-notsupported>
+      <invalid-node>Vermiste node : werd verplaatst of verwijderd</invalid-node>
+    </msg>
+  </UIBrowseContainer>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.JCRBrowser #
+  ###################################################################
+  -->
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Pad Kiezen</UIOneNodePathSelector>
+      <pathSelector>Pad Kiezer</pathSelector>
+    </title>
+  </pathSelector>
+  <documentSelector>
+    <title>
+      <UIOneNodePathSelector>Document Slecteren</UIOneNodePathSelector>
+    </title>
+  </documentSelector>
+  <UITreeList>
+    <header>
+      <name>Naam</name>
+      <action>Actie</action>
+    </header>
+    <info>
+      <child-not-found>Heeft geen child</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBCommentForm #
+  ###################################################################
+  -->
+  <UICBCommentForm>
+    <label>
+      <title>commentaar toevoegen</title>
+      <name>Naam</name>
+      <email>E-mailadres</email>
+      <website>Website</website>
+      <comment>Commentaar</comment>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <locked-doc>Document is op slot</locked-doc>
+      <versioning-doc>Document is versie</versioning-doc>
+      <error-vote>Probleem bij het toevoegen van commentaar</error-vote>
+      <comment-required>Commentaar is vereist</comment-required>
+    </msg>
+  </UICBCommentForm>
+  <UICBVoteForm>
+    <msg>
+      <locked-doc>Document is op slot</locked-doc>
+      <versioning-doc>Document is versie</versioning-doc>
+      <error-vote>Probleem bij het stemmen</error-vote>
+    </msg>
+  </UICBVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPopupWindow #
+  ###################################################################
+  -->
+  <UICBPopupWindow>
+    <title>
+      <UICBCommentForm>commentaar toevoegen</UICBCommentForm>
+      <UICBVoteForm>Stem</UICBVoteForm>
+      <UIDocumentDetail>Toon Document</UIDocumentDetail>
+    </title>
+  </UICBPopupWindow>
+  <!--
+  ###################################################################################
+  # JCR Browser																			  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Werkruimte</workspaceName>
+      <rootNodeInfo>Root pad</rootNodeInfo>
+      <rootPath>Root pad</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # UITagList																		  #
+  ###################################################################################
+  -->
+  <UITagList>
+    <label>
+      <tagTitle>Tag Map</tagTitle>
+    </label>
+  </UITagList>
+  <UICategoryTree>
+    <label>
+      <title>Categories</title>
+    </label>
+    <msg>
+      <invalid-node>Vermiste node : werd verplaatst of verwijderd</invalid-node>
+    </msg>
+  </UICategoryTree>
+  <!--
+  ###################################################################################
+  #  org.exoplatform.ecm.webui.component.browse.UIBrowseContentHelp																  #
+  ###################################################################################
+  -->
+  <UIBrowseContentHelp>
+    <label>
+      <info>U bent in help mode, u kunt wijzig mode selecteren om uw portlet te configureren</info>
+    </label>
+  </UIBrowseContentHelp>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Bent u zeker om te verwijderen?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator																			#
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>De waarde van dit veld is leeg of leeg !</empty-input>
+      <Invalid-char>Er zijn een aantal ongeldige tekens in dit veld. Typ een andere waarde, alsjeblieft !</Invalid-char>
+      <Invalid-char2>Aantal moet worden na de char '~'</Invalid-char2>
+      <Invalid-char1>Aantal volg de char '~' moet tussen 0 en 1</Invalid-char1>
+      <Invalid-char3>Aantal moet worden na het teken '^'</Invalid-char3>
+      <Invalid-char4>Geen ruimte is toegestaan in de buurt van de char '~'</Invalid-char4>
+      <Invalid-char5>Geen ruimte is toegestaan in de buurt van het teken '^'</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ######################################################################################
+  # Since ECM 2.3
+  ######################################################################################
+  -->
+  <UIPathConfig>
+    <label>
+      <searchEnable>Inschakelen zoek locatie</searchEnable>
+      <searchLocation>Zoek locatie</searchLocation>
+      <searchPath>UIPathConfig</searchPath>
+      <explain></explain>
+    </label>
+    <msg>
+      <enter-search-location>Je moet de locatie zoeken</enter-search-location>
+      <explain>Als het pad in Dadaïsten inhoud komt overeen met een hiërarchie van de categorieën, is het nodig om het pad waar de documenten zijn opgeslagen, zodat ze kunnen worden gevonden door de zoekfunctie van de portletrepository.</explain>
+    </msg>
+  </UIPathConfig>
+  
+  <UIDocumentForm>
+  	<msg>
+  		<not-support>Kan niet laden sjabloon van '{0}'.</not-support>
+  		<do-not-permission>U heeft geen toestemming voor het laden van de sjabloon '(0)'.</do-not-permission>
+  	</msg>
+  </UIDocumentForm>
+  <!--
+	  ######################################################################################
+	  # Since ECM 2.6
+	  ######################################################################################
+	  -->
+  <Comments>
+	  <tooltip>
+	    <remove-comment>Remove this comment</remove-comment>
+	    <edit-comment>Edit this comment</edit-comment>
+	  </tooltip>
+		</Comments>
+		<UIDocumentDetail>
+		  <msg>
+		    <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+		  </msg>
+		</UIDocumentDetail>
+		<UIPopupWindow>
+			<title>
+				<UICBCommentForm>Input comment</UICBCommentForm>
+			</title> 
+		</UIPopupWindow>
+	<UIBrowseContainer>
+    <msg>
+			<symlinkNode-no-targetNode>Missing node : The target node has been moved or deleted or You don't have enough permission to access</symlinkNode-no-targetNode>
+    </msg>
+  </UIBrowseContainer>
+  <RemoveAttachmentComponent>
+			<msg>
+				<confirm-deleteattachment>Do you want to remove this attachment file??</confirm-deleteattachment>
+			</msg>
+		</RemoveAttachmentComponent>
+  <UIDocumentDetail>
+  	<tooltip>
+  		<remove-attachment>Delete this attached file</remove-attachment>
+  	</tooltip>
+  </UIDocumentDetail>
+  <DocumentDetail>
+  	<tooltip>
+  		<remove-attachment>Delete this attached file</remove-attachment>
+  	</tooltip>
+  </DocumentDetail>
+</bundle>

@@ -1,0 +1,97 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Vu Duy Tu
+ *          duytucntt@gmail.com
+ * DEC 19, 2006
+ * version: $Id$
+ */
+
+.UICategoryTree {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  border: solid 1px #e1e1e1 ;	
+  padding: 1px;
+  width: 200px;
+}
+
+.UICategoryTree a {
+  text-decoration: none;
+	color: #058ee6;
+	font-size: 11px;
+}
+
+.UICategoryTree .TitleCategoryTree {
+  height: 24px; line-height: 24px;
+	margin: 0px;
+	background: url('VistaSkin/background/TagmapTitleBG1x24.png') repeat-x;
+}
+
+.UICategoryTree .TitleCategoryTree .CategoryTreeIcon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+	margin: 0px;
+}
+
+.UICategoryTree .TiteLabel {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */	
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+.UICategoryTree .MiddleCategoryTree {
+	border: solid 1px #e1e1e1 ;	
+  background: #ffffff;
+	padding: 9px 0px 10px 0px;
+	overflow: auto;
+	white-space: nowrap;
+	width: 99%;
+}
+
+.UICategoryTree .MiddleCategoryTree .TreeRootIcon{
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  margin: 2px 3px 0px 5px; /* orientation=lt */
+  margin: 2px 5px 0px 3px; /* orientation=rt */
+  width: 16px; 
+  height: 22px;
+}
+
+.UICategoryTree .MiddleCategoryTree .RootTreeNode{
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+	font-weight:  bold;
+	font-size: 11px;
+	line-height: 24px; height: 24px;		
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu {
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu .ParentSupMenu {
+	margin: 5px 0px 0px 18px; /* orientation=lt */
+	margin: 5px 18px 0px 0px; /* orientation=rt */
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu .SelectIcon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+	margin-top: 2px;
+	width: 16px; 
+	height: 22px;
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu .CategoryTreeLabel {
+	margin-left: 20px; /* orientation=lt */
+	margin-right: 20px; /* orientation=rt */
+	line-height: 20px;
+	font-size: 11px;
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu .CategorySelectLabel {
+	margin-left: 20px; /* orientation=lt */
+	margin-right: 20px; /* orientation=rt */
+	line-height: 20px;
+	font-weight:  bold;
+	font-size: 11px;
+}

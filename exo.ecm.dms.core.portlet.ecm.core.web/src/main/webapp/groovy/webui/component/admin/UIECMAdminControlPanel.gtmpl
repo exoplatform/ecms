@@ -1,0 +1,65 @@
+<%
+  import java.util.ArrayList;
+  def managers = uicomponent.getManagers();
+  def typeManage = new ArrayList();
+  String catego = null;
+  def managersGroup = new ArrayList();
+  def lGroups = null;
+  if (managers == null) {
+	return;
+  }
+  for (manager in managers) {
+	if (catego == null || !catego.equals(manager.getUIExtensionCategory())) {
+		// new category
+		catego = manager.getUIExtensionCategory();
+		typeManage.add(catego);
+		lGroups = new ArrayList();
+		managersGroup.add(lGroups);
+	}
+	lGroups.add(manager);
+  }
+%>
+<div class="UIECMAdminControlPanel">
+	<div class="UIVerticalSlideTabs">
+    <%
+    	int i = 0;
+    	for(type in typeManage) {
+    %>
+	    <div class="UIVTab VTabStyle3">
+		    <div class="NormalTab">
+		      <div class="TabLeft">
+		        <div class="TabRight">
+		          <div class="TabRepeat" onclick="eXo.webui.UIVerticalSlideTabs.switchVTab(this, 'VTabStyle3', 'SelectedVTabStyle3');">
+	              <div class="TabIcon ${type}Icon"><span></span></div>
+	              <div class="TabLabel">
+	                <%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%>
+	              </div>
+	              <div class="SwitchButton"><span></span></div>
+	            </div>
+		        </div>
+		      </div>
+				</div>
+				<div class="UIVTabContent" style="display:none; height: 0px;"><div>
+			    <%
+			    	def groups = managersGroup.get(i) ;
+			    	for(group in groups) {
+			    %>
+				    <div class="FunctionItem">
+				      <a href="<%=group.event(group.getUIExtensionName())%>">
+  				      <div class="ItemIcon <%=group.getUIExtensionName()%>Icon"><span></span></div>
+				      </a>
+				      <a class="ItemLabel" href="<%=group.event(group.getUIExtensionName())%>">
+				        <%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>
+				      </a>
+				    </div>
+			    <%} %>
+			    <div style="clear: both;"><span></span></div>
+			    </div>
+			  </div>
+			</div>
+		<%
+				i++ ;
+			}
+		%>
+	</div>
+</div>
