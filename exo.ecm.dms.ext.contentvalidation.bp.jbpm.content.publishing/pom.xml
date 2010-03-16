@@ -27,6 +27,25 @@
     </dependency>
   </dependencies>
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/conf</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.gtmpl</include>
+          <include>**/*.xpdl</include>
+          <include>**/*.properties</include>
+          <include>**/*.gif</include>
+        </includes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
