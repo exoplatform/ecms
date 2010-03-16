@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="1.0"
+   xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+   
+  <portlet>
+    <description xml:lang="EN">Advanced Search</description>
+    <portlet-name>WCMAdvanceSearchPortlet</portlet-name>
+    <display-name>Advanced Search</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/wcm-search/webui/configuration.xml</value>
+    </init-param>
+
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+      <portlet-mode>edit</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.search.AdvanceSearch</resource-bundle>
+
+    <portlet-info>
+      <title>WCM Advanced Search</title>
+      <short-title>Advanced Search</short-title>
+      <keywords>Search</keywords>
+    </portlet-info>
+
+    <portlet-preferences>
+      <preference>
+        <name>repository</name>
+        <value>repository</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>workspace</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>searchFormTemplatePath</name>
+        <value>/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>searchResultTemplatePath</name>
+        <value>/exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>searchPaginatorTemplatePath</name>
+        <value>/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>searchPageLayoutTemplatePath</name>
+        <value>/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>itemsPerPage</name>
+        <value>5</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showQuickEditButton</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>basePath</name>
+        <value>parameterizedviewer</value>
+        <read-only>false</read-only>
+      </preference>
+    </portlet-preferences>
+
+    <security-role-ref>
+      <role-name>admin</role-name>
+      <role-link>admin</role-link>
+    </security-role-ref>
+  </portlet>
+</portlet-app>

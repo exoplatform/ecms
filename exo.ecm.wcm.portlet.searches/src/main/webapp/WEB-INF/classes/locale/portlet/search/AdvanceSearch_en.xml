@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Keyword</keyword>
+      <portal>Portal</portal>
+      <Page>Page</Page>
+      <Document>Document</Document>
+    </label>
+    <action>
+      <Search>Search</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <resutlsCaption>Results</resutlsCaption>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <forCaption>for</forCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
+      <editor>Editor</editor>
+    </label>
+    <action>
+      <edit>Edit</edit>
+    </action>
+    <msg>
+      <your-search>Your search</your-search>
+      <did-not-match>did not match any</did-not-match>
+      <new-suggestion>Suggestions: </new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Items per page</itemsPerPageSelector>
+      <searchFormSelector>Search form template</searchFormSelector>
+      <searchResultSelector>Search result template</searchResultSelector>
+      <searchPaginatorSelector>Search paginator template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search page layout template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base path</searchResultBasePathInputSetAction>
+    </label>
+    <action>
+      <Save>Save</Save>
+      <Cancel>Cancel</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+</bundle>
