@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecm.dms.core</groupId>
+    <artifactId>config</artifactId>
+    <version>3.0.0-Beta01-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo.ecm.dms.core.extension.ear</artifactId>
+  <packaging>ear</packaging>
+  <name>eXo DMS Extension configuration ear</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.ecm.dms.core</groupId>
+      <artifactId>exo.ecm.dms.core.extension.config</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecm.dms.core</groupId>
+      <artifactId>exo.ecm.dms.core.extension.webapp</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>gatein-exo-dms-${project.version}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <configuration>
+          <displayName>dms-extension</displayName>
+          <defaultLibBundleDir>lib</defaultLibBundleDir>
+          <modules>
+            <jarModule>
+              <groupId>org.exoplatform.ecm.dms.core</groupId>
+              <artifactId>exo.ecm.dms.core.extension.config</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <webModule>
+              <groupId>org.exoplatform.ecm.dms.core</groupId>
+              <artifactId>exo.ecm.dms.core.extension.webapp</artifactId>
+              <contextRoot>dms</contextRoot>
+              <bundleFileName>dms.war</bundleFileName>
+            </webModule>
+          </modules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
