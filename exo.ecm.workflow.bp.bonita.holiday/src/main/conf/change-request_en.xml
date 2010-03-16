@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Update holidays</task-name>
+  <title>Update holidays</title>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <label>Start (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <label>End (dd/mm/yyyy) :</label>
+  </end>
+  <changedecision>
+    <label>Decision:</label>
+    <radiobox-0>Modify</radiobox-0>
+    <radiobox-1>Cancel Holiday Request</radiobox-1>
+  </changedecision>
+  <ModifyRequest>
+    <submit>Modify Resquest</submit>
+  </ModifyRequest>
+  <CancelRequest>
+    <submit>Cancel Resquest</submit>
+  </CancelRequest>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

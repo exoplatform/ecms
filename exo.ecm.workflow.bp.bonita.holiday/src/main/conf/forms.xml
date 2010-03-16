@@ -1,0 +1,49 @@
+<forms>
+  <form>
+    <!-- The Start name is an empty String in the Bonita implementation -->
+    <resource-bundle>request</resource-bundle>
+    <state-name></state-name>
+    <variable name="start" component="date"/>
+    <variable name="end" component="date"/>
+    <!-- No need to specify Submit buttons in the Bonita implementation -->
+  </form>
+
+  <form>
+    <resource-bundle>evaluation</resource-bundle>
+    <state-name>evaluation</state-name>
+    <variable name="initiator" editable="false"/>
+    <variable name="start" component="date"/>
+    <variable name="end" component="date"/>
+    <submitbutton name="Approve" variable="decision" />
+    <submitbutton name="Disapprove" variable="decision" />
+    <submitbutton name="Refuse" variable="decision" />
+  </form>
+
+ <form>
+    <resource-bundle>change-request</resource-bundle>
+    <state-name>change_request</state-name>
+    <variable name="start" component="date"/>
+    <variable name="end" component="date"/>
+    <submitbutton name="ModifyRequest" variable="changedecision" />
+    <submitbutton name="CancelRequest" variable="changedecision" />
+  </form>
+
+  <form>
+    <resource-bundle>hr-acknoledgement</resource-bundle>
+    <state-name>hr_acknowledgement</state-name>
+    <variable name="initiator" editable="false"/>
+    <variable name="start" component="date" editable="false"/>
+    <variable name="end" component="date" editable="false"/>
+    <!-- No need to specify Submit buttons in the Bonita implementation -->
+  </form>
+  
+  <form>
+    <resource-bundle>assign-replacement</resource-bundle>
+    <state-name>assign_replacement</state-name>
+    <variable name="initiator" editable="false"/>
+    <variable name="start" component="date" editable="false"/>
+    <variable name="end" component="date" editable="false"/>
+    <variable name="replacement"/>
+    <!-- No need to specify Submit buttons in the Bonita implementation -->
+  </form>
+</forms>

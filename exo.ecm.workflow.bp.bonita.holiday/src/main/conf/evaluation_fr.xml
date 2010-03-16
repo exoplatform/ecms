@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Evaluer les cong\u00e9s</task-name>
+  <title>Evaluer les cong\u00e9s</title>
+  <submit>Valider</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Who asked for more money?</title>
+    <label>Initiateur :</label>
+  </initiator>
+  <start>
+    <label>D\u00e9but (jj/mm/aaaa) :</label>
+  </start>
+  <end>
+    <label>Fin (jj/mm/aaaa) :</label>
+  </end>
+  <Approve>
+    <submit>Approuver</submit>
+    <value>Approve</value>
+  </Approve>
+  <Disapprove>
+    <submit>D\u00e9sapprouver</submit>
+    <value>Disapprove</value>
+  </Disapprove>
+  <Refuse>
+    <submit>Refuser</submit>
+    <value>Refuse</value>
+  </Refuse>
+  
+  <grant>
+    <submit>Grant</submit>
+    <value>Grant Pay Raise</value>
+  </grant>
+  <deny>
+    <submit>Deny</submit>
+    <value>Deny Pay Raise</value>
+  </deny>
+  <reason>
+    <title>Reason given by the initiator</title>
+    <label>Reason :</label>
+  </reason>
+  <amount-asked>
+    <title>Amount asked :</title>
+    <label>Amount :</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Amount granted :</title>
+    <label>Grant :</label>
+  </amount-granted>
+  <priority>
+    <title>Set the priority</title>
+    <label>Priority:</label>
+  </priority>
+  <rewarded>
+    <title>Was the initiator rewarded</title>
+    <label>Rewarded:</label>
+    <checkbox>Yes the initiator was rewarded!</checkbox>
+  </rewarded>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

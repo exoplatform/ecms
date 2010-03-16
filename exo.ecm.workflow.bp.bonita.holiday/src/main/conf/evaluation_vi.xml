@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Đánh giá các kì nghỉ</task-name>
+  <title>Đánh giá các kì nghỉ</title>
+  <submit>Đồng ý</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Nguyên nhân đưa ra bởi người tạo</title>
+    <label>Người khởi tạo :</label>
+  </initiator>
+  <start>
+    <label>Bắt đầu (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <label>Kết thúc (dd/mm/yyyy) :</label>
+  </end>
+  <Approve>
+    <submit>Đồng ý</submit>
+    <value>Đồng ý</value>
+  </Approve>
+  <Disapprove>
+    <submit>Không đồng ý</submit>
+    <value>Không đồng ý</value>
+  </Disapprove>
+  <Refuse>
+    <submit>Từ chối</submit>
+    <value>Từ chối</value>
+  </Refuse>
+  
+  <grant>
+    <submit>Cấp phép</submit>
+    <value>Cấp phép tăng lương</value>
+  </grant>
+  <deny>
+    <submit>Từ chối</submit>
+    <value>Từ chối tăng lương</value>
+  </deny>
+  <reason>
+    <title>Nguyên nhân đưa ra bởi người tạo</title>
+    <label>Lý do :</label>
+  </reason>
+  <amount-asked>
+    <title>Số lượng được hỏi :</title>
+    <label>Số lượng :</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Số lượng được cấp phép :</title>
+    <label>Cấp phép :</label>
+  </amount-granted>
+  <priority>
+    <title>Thiết lập ưu tiên</title>
+    <label>Ưu tiên:</label>
+  </priority>
+  <rewarded>
+    <title>Người khởi tạo được thưởng</title>
+    <label>Thưởng:</label>
+    <checkbox>Người khởi tạo được thưởng!</checkbox>
+  </rewarded>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

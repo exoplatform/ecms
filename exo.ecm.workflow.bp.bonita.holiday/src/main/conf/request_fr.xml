@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Demande de vacances</task-name>
+  <title>Demande de vacances</title>
+  <submit>Valider</submit>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <label>D\u00e9but (jj/mm/aaaa) :</label>
+  </start>
+  <end>
+    <label>Fin (jj/mm/aaaa) :</label>
+  </end>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+
