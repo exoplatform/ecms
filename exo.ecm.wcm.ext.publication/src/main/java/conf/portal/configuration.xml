@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
+   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.wcm.publication.WCMPublicationService</target-component>
+    <component-plugin>
+      <name>Date time publication</name>
+      <set-method>addPublicationPlugin</set-method>
+      <type>org.exoplatform.services.wcm.publication.lifecycle.datetime.DateTimePublicationPlugin</type>
+      <description>This publication lifecycle publish a web content or DMS document to a portal page with more states, version and date time.</description>
+      <init-params>
+        <values-param>
+          <name>repository</name>
+          <value>repository</value>
+        </values-param>
+        <values-param>
+          <name>workspace</name>
+          <value>collaboration</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
+    <component-plugin>
+      <name>DateTimePublicationJob</name>
+      <set-method>addCronJob</set-method>
+      <type>org.exoplatform.services.scheduler.CronJob</type>
+      <description>add DateTimePublicationJob to the JobSchedulerService</description>
+      <init-params>
+        <properties-param>
+          <name>cronjob.info</name>
+          <description>Publish content by date and time</description>
+          <property name="jobName" value="job" />
+          <property name="groupName" value="publication" />
+          <property name="job" value="org.exoplatform.services.wcm.publication.lifecycle.datetime.DateTimePublicationJob" />
+          <property name="expression" value="0 0/01 * * * ?" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <priority>99</priority>
+      <init-params>
+        <values-param>
+          <name>autoCreatedInNewRepository</name>
+          <description>Node types configuration file</description>
+          <value>jar:/conf/wcm-datetime-publication-nodetypes.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+</configuration>
