@@ -1,0 +1,40 @@
+<%
+/**
+ * Created by The eXo Platform SARL
+ * Author : Hoang Van Hung
+ *          hunghvit@gmail.com
+ * Dec 22, 2009
+ * 11:00:48 AM 
+ */
+%>
+<div class="UINodeTypeSearh $uicomponent.id">
+  <div class="UIBarStyle">
+    <div class="NormalBarStyle">
+      <div class="LeftBar">
+        <div class="RightBar">
+          <div class="MiddleBar">
+            <table style="margin: auto; width: auto;">
+              <tr>
+                <td class="FieldLabel">
+                    <%=uicomponent.getResource('UINodeTypeSearh.msg.NodeType')%>
+                </td>
+                <td class="GroupInput">
+                    <%
+                      uicomponent.renderChildren();
+                    %>
+                </td>
+                <td>
+                    <a class="SearchIcon" href="<%=uicomponent.event('SearchNodeType')%>" title="<%=uicomponent.getResource('UINodeTypeSearh.msg.title')%>"><span></span></a>
+                </td>
+               </tr>
+            </table>
+          </div>
+        </div>        
+      </div>        
+    </div>
+  </div>
+  <div class="ClearBoth"><span></span></div>
+</div>
+
+
+

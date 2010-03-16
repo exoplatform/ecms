@@ -1,0 +1,126 @@
+<%
+/**
+ * Created by The eXo Platform SARL
+ * Author : Hoang Van Hung
+ *          hunghvit@gmail.com
+ * Dec 22, 2009
+ * 11:00:48 AM 
+ */
+%>
+<% 
+  def nodeTypes = uicomponent.getNodeTypeList() ; 
+  if(nodeTypes == null) return ;
+  int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
+%>
+<div class="UINodeTypeList $uicomponent.id">
+<% uiform.begin() %>
+<%
+   uicomponent.renderChild("SearchNodeType");
+%>
+ <div class="UINodTypeList AllDocument">
+   <table style="margin: auto; width: auto;">
+     <tr>
+       <td style="line-height:32px">
+          <%=uicomponent.getResource('UINodeTypeSearh.msg.ALL_DOCUMENT_TYPE')%>
+       </td>
+       <td class="FieldLabel">
+        <%
+         uicomponent.renderChild("ALL_DOCUMENT_TYPES");
+        %>
+       </td>
+     </tr>
+  </table>
+ </div>
+ <div>
+    <table class="UIGrid">
+      <thead>
+        <tr>
+          <th><%=uicomponent.getResource("UINodeTypeList.header.icon")%></th>
+          <th><%=uicomponent.getResource("UINodeTypeList.header.nodeType")%></th>
+          <th><%=uicomponent.getResource("UINodeTypeList.header.mixinType")%></th>
+          <th><%=uicomponent.getResource("UINodeTypeList.header.select")%></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%
+          if (nodeTypes.size() > 0) {
+            def rowClass = null ;
+            boolean even = true ;
+            boolean found = false ;
+            for (node in nodeTypes) {
+              found = true  ;
+              if(even) rowClass = "EvenRow" ;  
+              else rowClass =  "OddRow" ; 
+              even = !even ;
+        %>
+            <tr class="$rowClass">
+              <%
+                String nodeType = node.getName();
+                nodeType = nodeType.replace(":", "_");
+              %>
+              <td width="40px" align="center">
+                <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"><span></span></div>
+              </td>
+              <td align="center"><div class="Text"><%=node.getName()%></div></td>
+              <td align="center">
+                  <%
+                    String booleanText ;
+                    String iconType ;
+                    if(node.isMixin()) {
+                      booleanText = uicomponent.getResource("UINodeTypeList.label.true");
+                      iconType = "True";
+                    } else {
+                      booleanText = uicomponent.getResource("UINodeTypeList.label.false");
+                      iconType = "False";
+                    }
+                  %>
+                  <div class="TrueFalseContainer">
+                    <div class="Icon16x16 ${iconType}16x16Icon IconNodeType"><span></span></div>
+                    <div class="Text">$booleanText</div>
+                  </div>
+              </td>
+              <td align="center">
+                <%
+                  uicomponent.renderChild(node.getName());
+                %>
+              </td>
+            </tr>
+        <%
+          }
+        } else {%>
+          <tr class="EvenRow"> 
+            <td colspan="4" style="text-align:center;font-style:italic; color: #EF5604;"><%=uicomponent.getResource("UINodeTypeSelector.msg.no-list")%></td>
+          </tr>
+        <%}%>
+      </tbody>
+    </table>
+  </div>
+  <% if(totalPages>1){ %>
+  <div style="margin:1px 0px 20px 0px;">
+    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+  </div>
+  <% } %>
+  <div class="UIAction">
+    <table class="ActionContainer">
+      <tr>
+        <td>
+          <% for(action in uicomponent.getActions()) { %>
+            <div onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" >
+              <div class="ButtonLeft">
+                <div class="ButtonRight">
+                  <div class="ButtonMiddle">
+                    <a href="javascript:void(0);"><%=uicomponent.getResource("UINodeTypeList.action." + action)%></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <%uiform.end()%>
+</div>
+
+
+

@@ -1,0 +1,108 @@
+<%
+  import org.exoplatform.webui.core.UIComponent ;
+  String[] beanFields =  uicomponent.getBeanFields() ;
+  String[] beanActions =  uicomponent.getBeanActions() ;
+  UIComponent uiParent = uicomponent.getParent() ;
+  String name = uicomponent.getId() ;
+%>
+<div id="$uicomponent.id" class="$uicomponent.id">
+	<table class="UIGrid">
+	  <thead>
+	    <tr>
+	      <%if(name != null) { %>
+	        <%for(field in beanFields) { %>
+	          <th><%=_ctx.appRes(name+".header."+field)%></th>
+	        <%}%>
+	        <%if(beanActions != null) { %>
+	          <th><%=_ctx.appRes(name+".header.action")%></th>
+	        <%}%>
+	      <%}%>
+	      <%if(name == null) {%>
+	        <%for(field in beanFields) { %>
+	          <th><%=_ctx.appRes(uiParent.getName()+".header."+field)%></th>
+	        <%}%>
+	        <%if(beanActions != null && beanActions.length > 0) { %>
+	          <th><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
+	        <%}%>
+	      <%}%>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <%
+	    def rowClass = null ;
+	    boolean even = true ;
+	    for (bean in uicomponent.getBeans())  {
+	      if(even) rowClass = "EvenRow" ;  
+	      else rowClass =  "OddRow" ; 
+	      even = !even ;
+	  %>
+	    <tr class="$rowClass">
+	      <%
+	        for(field in beanFields) { 
+	          def fieldValue = uicomponent.getFieldValue(bean, field) ;
+	          def cssClass = "" ;
+	          if(fieldValue != null) {
+	            def fieldClass = fieldValue.getClass() ;
+	            if(fieldClass == Integer.class)  cssClass = "number" ;
+	            else if(fieldClass == java.util.Date.class)  cssClass = "Date" ;
+	            else cssClass = "Text" ;
+	          } else {
+	            fieldValue = "";
+	          }
+	      %>
+	          <td class="$cssClass">$fieldValue</td>
+	          
+	      <%}%>
+	      <%if(beanActions != null && beanActions.length > 0) { %>
+	        <td>         
+	          <div class="ActionContainer">
+	            <%def beanIdField = uicomponent.getBeanIdField() ; %>          
+	            <%for(action in beanActions) { %>
+	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>               
+	              <% 
+	                if(action != null) { 
+	                  if(uicomponent.isUseAjax()){
+	              %>             
+	                    <img onclick="<%=uicomponent.event(action, beanId)%>" title = "$action" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="${action}Icon" />
+	              <%  }else{ %>
+	                    <img onclick="<%=uicomponent.url(action, beanId)%>" title = "$action" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" class="${action}Icon" />
+	              <%  } %> 
+	              <%} %> 
+	            <%}%>                 
+	            </div>
+	          </div>
+	        </td>
+	      <% } %>  
+	    </tr>
+	  <%}%>
+	  </tbody>
+	</table> 
+	<!--End UIGrid-->
+	<% if(uicomponent.getUIPageIterator().getAvailablePage() > 1){ %>
+	<%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+	<% } %>
+</div>
+<% if (uicomponent.getActions() != null) { %>
+  <div class="$uicomponent.id">
+    <div class="UIAction"> 
+      <table class="ActionContainer">
+      	<tr>
+      		<td>
+	        <% for(action in uicomponent.getActions()) { %>
+            <div onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" >
+              <div class="ButtonLeft">
+                <div class="ButtonRight">
+                  <div class="ButtonMiddle">
+                    <a href="javascript:void(0);"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+	        <% } %>
+					</td>
+				</tr>	       
+      </table>
+    </div>
+  </div>
+<% }%>
+
