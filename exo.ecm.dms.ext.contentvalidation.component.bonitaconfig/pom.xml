@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecm.dms.ext</groupId>
+    <artifactId>contentvalidation</artifactId>
+    <version>3.0.0-Beta01-SNAPSHOT</version>
+  </parent>
+  <groupId>org.exoplatform.ecm.dms.ext.contentvalidation</groupId>
+  <artifactId>exo.ecm.dms.ext.contentvalidation.component.bonitaconfig</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo Content Validation with Bonita workflow</name>
+  <description>eXo Content Validation with Bonita workflow</description>
+  <url>http://www.exoplatform.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all-minimal</artifactId>
+      <version>1.5.4</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.txt</include>
+          <include>**/*.groovy</include>
+          <include>**/*.gtmpl</include>
+        </includes>
+      </resource>
+    </resources>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <outputDirectory>target/classes</outputDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <testOutputDirectory>target/test-classes</testOutputDirectory>
+  </build>
+</project>
