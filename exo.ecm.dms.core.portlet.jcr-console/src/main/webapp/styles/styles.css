@@ -1,0 +1,10 @@
+.term {
+	font-family: Lucida Console;
+	font-size: 12px;
+	color: #000000;
+	background: #E0DFE3;
+}
+.termReverse {
+	color: #111111;
+	background: #33d011;
+}

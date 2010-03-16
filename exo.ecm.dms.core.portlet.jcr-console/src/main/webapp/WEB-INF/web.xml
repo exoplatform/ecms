@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+                         "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+    <display-name>jcr-console</display-name>
+    <listener>
+        <listener-class>org.exoplatform.services.portletcontainer.impl.servlet.PortletApplicationListener</listener-class>
+    </listener>
+    
+    <filter>
+      <filter-name>IdentifyFilter</filter-name>
+      <filter-class>org.exoplatform.portlets.jcrconsole.IdentifyFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>IdentifyFilter</filter-name>
+      <!-- url-pattern>/PortletWrapper/*</url-pattern -->
+      <servlet-name>PortletWrapper</servlet-name>
+      <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    
+    <servlet>
+        <servlet-name>PortletWrapper</servlet-name>
+        <servlet-class>org.exoplatform.services.portletcontainer.impl.servlet.ServletWrapper</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PortletWrapper</servlet-name>
+        <url-pattern>/PortletWrapper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PortletWrapper</servlet-name>
+        <url-pattern>/PortletWrapper/*</url-pattern>
+    </servlet-mapping>
+    <security-role>
+        <role-name>auth-user</role-name>
+    </security-role>
+</web-app>
