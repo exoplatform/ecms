@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>
+
+  <component>
+    <key>org.exoplatform.services.cms.CmsService</key>
+    <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
+  </component>
+     
+  <component>
+	  <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>  
+	  <type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
+	  <init-params>
+      <value-param>
+        <name>workspace</name>
+        <value>system</value>
+      </value-param>
+      <value-param>
+        <name>repository</name>
+        <value>repository</value>
+      </value-param>            
+    </init-params>    
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.cms.CmsService</key>
+    <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
+  </component>
+  
+	<component>
+		<key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>
+		<type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
+	</component>
+	
+	<component>
+    <key>org.exoplatform.services.cms.templates.TemplateService</key>
+    <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>    
+  </component>
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
+      <component-plugin>
+        <name>addTemplates</name>
+        <set-method>addTemplates</set-method>
+        <type>org.exoplatform.services.cms.templates.impl.TemplatePlugin</type>    
+        <init-params>
+	        <value-param>
+	        	<name>autoCreateInNewRepository</name>
+	        	<value>true</value>
+	        </value-param>
+	        <value-param>
+	        	<name>storedLocation</name>
+	        	<value>jar:/resources/templates</value>
+	        </value-param>
+	        <value-param>
+	        	<name>repository</name>
+	        	<value>repository</value>
+	        </value-param>	        
+          <object-param>
+            <name>template.configuration</name>
+            <description>configuration for the localtion of templates to inject in jcr</description>
+            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig">            	
+              <field  name="nodeTypes">
+                <collection type="java.util.ArrayList">               
+                  <value>
+                    <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
+                      <field  name="nodetypeName"><string>exo:publishingProcess</string></field>
+                      <field  name="documentTemplate"><boolean>false</boolean></field>
+                      <field  name="label"><string>Content Publishing Workflow Action</string></field>
+                      <field  name="referencedView">
+                        <collection type="java.util.ArrayList">
+                          <value>
+                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">             
+                              <field name="templateFile"><string>/actions/bp/contentPublishing/views/view1.gtmpl</string></field>
+                              <field name="roles"><string>*</string></field>                
+                            </object>                           
+                          </value>  
+                        </collection>
+                      </field>                  
+                      <field  name="referencedDialog">
+                        <collection type="java.util.ArrayList">
+                          <value>
+                            <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">             
+                              <field name="templateFile"><string>/actions/bp/contentPublishing/dialogs/dialog1.gtmpl</string></field>
+                              <field name="roles"><string>*</string></field>                
+                            </object>                           
+                          </value>                      
+                        </collection>
+                      </field>                                    
+                    </object>
+                  </value>
+                </collection>
+              </field>
+            </object>
+          </object-param>
+        </init-params>       
+      </component-plugin>
+  </external-component-plugins>
+  <external-component-plugins>
+	  <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>      
+	  <component-plugin>
+	    <name>add.nodeType</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+	    <priority>111</priority>
+	    <init-params>
+	      <values-param>
+	        <name>autoCreatedInNewRepository</name>
+	        <description>Node types configuration file</description>
+	        <value>jar:/conf/plugin-nodetypes-config.xml</value>
+	        <value>jar:/conf/bussiness-process-nodetypes.xml</value>
+	      </values-param>
+	    </init-params>
+	  </component-plugin>
+	</external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.actions.ActionServiceContainer</target-component>       
+	  <component-plugin>
+	    <name>exo:businessProcessAction</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.plugin.actions.impl.BPActionPlugin</type>
+					<priority>112</priority>
+	    <init-params>
+	      <object-param>
+	        <name>predefined.actions</name>
+	        <description>description</description>
+	        <object type="org.exoplatform.services.cms.actions.impl.ActionConfig">
+	        	<field  name="repository"><string>repository</string></field>
+	          <field  name="workspace"><string>collaboration</string></field>
+	          <field  name="actions">
+	            <collection type="java.util.ArrayList">                                   
+	              <value>
+	                <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Action">
+	                  <field  name="type"><string>exo:publishingProcess</string></field>
+	                  <field  name="name"><string>content publishing</string></field>                  
+	                  <field  name="description"><string>content publishing workflow</string></field>
+	                  <field  name="srcWorkspace"><string>collaboration</string></field>
+	                  <field  name="srcPath"><string>/Documents/Validation Requests</string></field>
+																			<field  name="lifecyclePhase">
+																				<collection type="java.util.ArrayList">
+									           	<value><string>node_added</string></value>		
+									           </collection>
+																			</field>
+	                  <field  name="roles"><string>*:/platform/users</string></field>                     
+	                  <field  name="variables">
+	                    <string>exo:supervisor=*:/organization/management/executive-board;exo:validator=*:/platform/administrators</string>
+	                  </field>              
+	                  <field name="mixins">
+	                    <collection type="java.util.ArrayList">
+	                      <value>
+	                        <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+	                          <field  name="name"><string>exo:publishLocation</string></field>
+	                          <field  name="properties">
+	                            <string>exo:publishWorkspace=collaboration;exo:publishPath=/Documents/Live;exo:validator=*:/platform/administrators</string>
+	                          </field>
+	                        </object>
+	                      </value>
+	                      <value>
+	                        <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+	                          <field  name="name"><string>exo:pendingLocation</string></field>
+	                          <field  name="properties">
+	                            <string>exo:pendingWorkspace=collaboration;exo:pendingPath=/Documents/Pending</string>
+	                          </field>
+	                        </object>
+	                      </value>
+	                      <value>
+	                        <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+	                          <field  name="name"><string>exo:backupLocation</string></field>
+	                          <field  name="properties">
+	                            <string>exo:backupWorkspace=backup;exo:backupPath=/Expired Documents</string>
+	                          </field>
+	                        </object>
+	                      </value>
+	                      <value>
+	                        <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+	                          <field  name="name"><string>exo:trashLocation</string></field>
+	                          <field  name="properties">
+	                            <string>exo:trashWorkspace=collaboration;exo:trashPath=/Documents/Trash</string>
+	                          </field>
+	                        </object>
+	                      </value>
+																							<value>
+                    						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+                    							<field  name="name"><string>mix:affectedNodeTypes</string></field>
+                    							<field  name="properties">
+                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+																												</field>
+																										</object>
+                    	 	</value>		
+	                    </collection>     
+	                  </field>    
+	                </object>  
+	              </value>
+	            </collection>   
+	          </field>  
+	        </object>
+	      </object-param>
+	    </init-params>          
+	  </component-plugin>
+	  <component-plugin>
+	    <name>exo:scriptAction</name>   
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.cms.actions.impl.ScriptActionPlugin</type>
+	    <init-params>
+	      <object-param>
+	        <name>predefined.actions</name>
+	        <description>description</description>
+	        <object type="org.exoplatform.services.cms.actions.impl.ActionConfig">
+	        	<field  name="repository"><string>repository</string></field>
+	          <field  name="workspace"><string>collaboration</string></field>
+	          <field  name="actions">
+	            <collection type="java.util.ArrayList">
+	              <value>
+	                <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Action">
+	                  <field  name="type"><string>exo:sendMailAction</string></field>
+	                  <field  name="name"><string>sendMail</string></field>                  
+	                  <field  name="description"><string>send a notification mail</string></field>
+	                  <field  name="srcWorkspace"><string>collaboration</string></field>
+	                  <field  name="srcPath"><string>/Documents/Validation Requests</string></field>
+	                  <field  name="lifecyclePhase"><string>read</string></field>
+	                  <field  name="roles"><string>*:/platform/administrators</string></field>
+	                  <field  name="variables">
+	                    <string>exo:to=benjamin.mestrallet@exoplatform.com</string>
+	                  </field>
+																			<field  name="mixins">
+												            <collection type="java.util.ArrayList">
+												            	<value>
+                    						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+                    							<field  name="name"><string>mix:affectedNodeTypes</string></field>
+                    							<field  name="properties">
+                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+																												</field>
+																										</object>
+                    					</value>		
+												            </collection>
+												          </field>                        
+	                </object>  
+	              </value>
+	              <value>
+	                <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Action">
+	                  <field  name="type"><string>exo:publishingRequest</string></field>
+	                  <field  name="name"><string>publishing request</string></field>                  
+	                  <field  name="description"><string>request for publishing a document</string></field>
+	                  <field  name="srcWorkspace"><string>collaboration</string></field>
+	                  <field  name="srcPath"><string>/Users/marry/Private/Documents</string></field>
+	                  <field  name="lifecyclePhase"><string>read</string></field>
+	                  <field  name="roles"><string>marry</string></field>
+	                  <field  name="variables">
+	                    <string>exo:requestPath=/Documents/Validation Requests;exo:reservePath=/Users/marry/Private/Documents/Publishing Requested</string>
+	                  </field>
+																			<field  name="mixins">
+												            <collection type="java.util.ArrayList">
+												            	<value>
+                    						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+                    							<field  name="name"><string>mix:affectedNodeTypes</string></field>
+                    							<field  name="properties">
+                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+																												</field>
+																										</object>
+                    					</value>		
+												            </collection>
+												          </field>                        
+	                </object>  
+	              </value>
+	              <value>
+	                <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Action">
+	                  <field  name="type"><string>exo:publishingRequest</string></field>
+	                  <field  name="name"><string>publishing request</string></field>                  
+	                  <field  name="description"><string>request for publishing a document</string></field>
+	                  <field  name="srcWorkspace"><string>collaboration</string></field>
+	                  <field  name="srcPath"><string>/Users/root/Private/Documents</string></field>
+	                  <field  name="lifecyclePhase"><string>read</string></field>
+	                  <field  name="roles"><string>root</string></field>
+	                  <field  name="variables">
+	                    <string>exo:requestPath=/Documents/Validation Requests;exo:reservePath=/Users/root/Private/Documents/Publishing Requested</string>
+	                  </field>
+																			<field  name="mixins">
+												            <collection type="java.util.ArrayList">
+												            	<value>
+                    						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+                    							<field  name="name"><string>mix:affectedNodeTypes</string></field>
+                    							<field  name="properties">
+                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+																												</field>
+																										</object>
+                    					</value>		
+												            </collection>
+												          </field>                        
+	                </object>  
+	              </value>                                  
+	            </collection>   
+	          </field>  
+	        </object>
+	      </object-param>
+	    </init-params>    
+	  </component-plugin>
+ </external-component-plugins>
+</configuration>

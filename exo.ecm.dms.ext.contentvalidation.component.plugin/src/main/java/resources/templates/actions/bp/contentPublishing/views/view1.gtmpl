@@ -1,0 +1,99 @@
+<%def node = uicomponent.getNode() ;%>
+<style>
+	.ContentPublishing {
+		margin: 10px;
+	}
+	
+</style>
+<div class="WorkWorkFlow">
+	<table class="UIGrid">      	 			
+	  <tr>
+	    <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.name")%></td>
+	    <td>
+	      <%if(node.hasProperty("exo:name")) {%>
+			    <%=node.getProperty("exo:name").getString()%>
+			  <%}%>
+	    </td>
+	  </tr>
+	  <tr>
+			<td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.lifecycle")%></td>
+			<td>
+	      <%if(node.hasProperty("exo:lifecyclePhase")) {%>
+			    <%=node.getProperty("exo:lifecyclePhase").getString()%>
+			  <%}%>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.description")%></td>
+	    <td>
+			  <%if(node.hasProperty("exo:description")) {%>
+			    <%=node.getProperty("exo:description").getString()%>
+			  <%}%>
+			</td>
+	  </tr>
+	  <tr>
+      <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.supervisor")%></td>
+      <td>
+        <%if(node.hasProperty("exo:supervisor")) {%>
+          <%=node.getProperty("exo:supervisor").getString()%>
+        <%}%>
+      </td>
+    </tr>
+	  <tr>
+	    <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.validator")%></td>
+	    <td>
+	      <%if(node.hasProperty("exo:validator")) {%>
+			    <%=node.getProperty("exo:validator").getString()%>
+			  <%}%>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.public-workspace")%></td>
+	    <td>
+	      <%if(node.hasProperty("exo:publishWorkspace")) {%>
+			    <%=node.getProperty("exo:publishWorkspace").getString()%>
+			  <%}%>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.public-path")%></td>
+	    <td>
+	      <%if(node.hasProperty("exo:publishPath")) {%>
+			    <%=node.getProperty("exo:publishPath").getString()%>
+			  <%}%>
+	    </td>
+	  </tr>
+	  <tr>
+    <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.pending-workspace")%></td>
+    <td>
+      <%if(node.hasProperty("exo:pendingWorkspace")) {%>
+        <%=node.getProperty("exo:pendingWorkspace").getString()%>
+      <%}%>
+    </td>
+  </tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.pending-path")%></td>
+    <td>
+      <%if(node.hasProperty("exo:pendingPath")) {%>
+        <%=node.getProperty("exo:pendingPath").getString()%>
+      <%}%>
+    </td>
+  </tr>
+  <tr>
+  <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.backup-workspace")%></td>
+  <td>
+    <%if(node.hasProperty("exo:backupWorkspace")) {%>
+      <%=node.getProperty("exo:backupWorkspace").getString()%>
+    <%}%>
+  </td>
+</tr>
+<tr>
+  <td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.backup-path")%></td>
+  <td>
+    <%if(node.hasProperty("exo:backupPath")) {%>
+      <%=node.getProperty("exo:backupPath").getString()%>
+    <%}%>
+  </td>
+</tr>
+	</table>
+</div>

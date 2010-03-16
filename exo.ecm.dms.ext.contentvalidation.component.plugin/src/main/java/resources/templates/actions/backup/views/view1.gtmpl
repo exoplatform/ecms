@@ -1,0 +1,44 @@
+<%def node = uicomponent.getNode() ;%>
+<table class="UIGrid">
+
+	<tr>
+	    <td style="width:25%"><%=_ctx.appRes("Backup.view.label.name")%></td>
+	    <td>
+	      <%if(node.hasProperty("exo:name")) {%>
+			    <%=node.getProperty("exo:name").getString()%>
+			  <%}%>
+	    </td>
+	</tr>	
+	<tr>
+		<td style="width:25%"><%=_ctx.appRes("Backup.view.label.lifecycle")%></td>
+		<td>
+	      <%if(node.hasProperty("exo:lifecyclePhase")) {%>
+			    <%=node.getProperty("exo:lifecyclePhase").getString()%>
+			  <%}%>
+	    </td>
+   </tr>	
+   <tr>
+	    <td style="width:25%"><%=_ctx.appRes("Backup.view.label.description")%></td>
+	    <td>
+			  <%if(node.hasProperty("exo:description")) {%>
+			    <%=node.getProperty("exo:description").getString()%>
+			  <%}%>
+		</td>
+	</tr>	
+	<tr>
+	    <td style="width:25%"><%=_ctx.appRes("Backup.view.label.to-workspace")%></td>
+	    <td>
+	      <%if(node.hasProperty("exo:destWorkspace")) {%>
+			    <%=node.getProperty("exo:destWorkspace").getString()%>
+			  <%}%>
+	    </td>
+	</tr>	 
+	<tr>
+	    <td style="width:25%"><%=_ctx.appRes("Backup.view.label.at-location")%></td>
+	    <td>
+	      <%if(node.hasProperty("exo:destPath")) {%>
+			    <%=node.getProperty("exo:destPath").getString()%>
+			  <%}%>
+	    </td>
+	 </tr>
+</table>
