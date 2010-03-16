@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node-navigation>
+	<owner-type>portal</owner-type>
+	<owner-id>empty</owner-id>
+	<priority>1</priority>
+	<page-nodes>
+		<node>
+			<uri>home</uri>
+			<name>home</name>
+			<label>Home</label>
+			<page-reference>portal::empty::homepage</page-reference>	    
+		</node>	         	  	  	  	 	     	  	    
+		<node>
+			<uri>search</uri>
+			<name>search</name>
+			<label>Search</label>
+			<page-reference>portal::empty::search</page-reference>	    
+		</node>
+		<node>
+			<uri>searchResult</uri>
+			<name>searchResult</name>
+			<label>SearchResults</label>
+			<visible>false</visible>			
+			<page-reference>portal::empty::searchResult</page-reference>	    
+		</node>
+		<node>
+			<uri>parameterizedviewer</uri>
+			<name>parameterizedviewer</name>
+			<label>PCV</label>
+			<visible>false</visible>
+			<page-reference>portal::empty::parameterizedviewer</page-reference>
+		</node> 
+		<node>
+			<uri>contentviewer</uri>
+			<name>contentviewer</name>
+			<label>ContentViewer</label>
+			<visible>false</visible>
+			<page-reference>portal::empty::contentviewer</page-reference>
+		</node> 	   
+		<node>
+			<uri>printviewer</uri>
+			<name>printviewer</name>
+			<label>Print View</label>
+			<visible>false</visible>
+			<page-reference>portal::empty::printviewer</page-reference>
+		</node>	     	    
+	</page-nodes>
+</node-navigation>

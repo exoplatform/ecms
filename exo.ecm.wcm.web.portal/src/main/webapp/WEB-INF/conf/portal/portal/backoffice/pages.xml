@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<page-set>  
+  <page>
+  	<page-id>portal::backoffice::dashboard</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>backoffice</owner-id>
+    <name>dashboard</name>
+    <title>Dashboard</title>
+	  <access-permissions>*:/platform/users</access-permissions>
+	  <edit-permission>*:/platform/administrators</edit-permission>
+	    <application>
+	      <instance-id>portal#classic:/dashboard/DashboardPortlet/classic-dashboard</instance-id>
+	      <title>Dashboard</title>
+	      <show-info-bar>false</show-info-bar>      
+	      <show-application-state>false</show-application-state>
+	      <show-application-mode>false</show-application-mode>
+	    </application>
+  </page>
+</page-set>

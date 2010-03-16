@@ -1,0 +1,130 @@
+<%
+	 /**
+	 	* Created by The eXo Platform SAS
+	 	* Author : eXoPlatform
+	 	*          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+	 	* Aug 20, 2009  
+	 	*/
+
+	 	import javax.jcr.Node;
+		import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
+		import org.exoplatform.wcm.webui.clv.UICLVPortlet;
+		import org.exoplatform.wcm.webui.Utils;
+%>
+
+<div id="$uicomponent.id" class="OneColumnCLVTemplate">
+	<div class="CLV">
+		<%
+			def header = uicomponent.getHeader();
+			def isShowHeader = uicomponent.isShowHeader() && header != null && header.trim().length() != 0;
+			if (isShowHeader) {
+				%>
+					<div class="TitleBarL">
+						<div class="TitleBarR">
+							<div class="TitleBarM">$header</div>
+						</div>
+					</div>
+				<%
+			}
+	
+			if (uicomponent.getUIPageIterator().getAvailable() == 0) {
+				%>
+					<div style="height: 20px; text-align: center; font-size: 13px; background: white; padding: 10px; margin: 5px;">
+						<%= uicomponent.getParent().getMessage() %>
+					</div>
+				<%
+			} else {
+			  def currentPageData = uicomponent.getCurrentPageData();
+			  %>
+			  	<div class="Contents">
+			  		<%
+							for (viewNode in currentPageData) {
+								def isShowTitle = uicomponent.isShowField(UICLVPortlet.SHOW_TITLE);
+								def isShowDate = uicomponent.isShowField(UICLVPortlet.SHOW_DATE_CREATED);
+								def isShowLink = uicomponent.isShowField(UICLVPortlet.SHOW_LINK);
+								def isShowReadmore = uicomponent.isShowField(UICLVPortlet.SHOW_READMORE);
+								
+								def itemLink = uicomponent.getURL(viewNode);			
+								def itemDateCreated = uicomponent.getCreatedDate(viewNode);
+								def itemOwner = uicomponent.getAuthor(viewNode);			
+								
+								def imgSrc = uicomponent.getIllustrativeImage(viewNode);
+								def isShowImage = uicomponent.isShowField(UICLVPortlet.SHOW_THUMBNAILS_VIEW) && imgSrc != null;
+
+								def itemName = viewNode.getName();
+								def itemTitle = uicomponent.getTitle(viewNode);
+								if (itemTitle != null && itemTitle.trim().length() != 0)
+									itemName = itemTitle;
+
+								def itemSummary = uicomponent.getSummary(viewNode);
+								def isShowSummary = uicomponent.isShowField(UICLVPortlet.SHOW_SUMMARY) && itemSummary != null;
+								
+								def contentEditLink = uicomponent.event("EditContent", viewNode.getPath());
+						    %>
+									<div class="Column1">
+										<%
+											if (isShowImage) {
+											  %><a class="Image"><img alt="$imgSrc" src="$imgSrc" /></a><%
+											}
+											%>
+												<div class="Content">
+													<%
+													if (isShowTitle) {
+														if (isShowLink) {
+															%><div class="Title"><a href="$itemLink">$itemName</a></div><%
+														} else {
+															%><div class="Title">$itemName</div><%
+														}
+													}
+													if(Utils.isShowDraft(viewNode)) { 
+														%>
+															<span>[ </span>
+															<a class="CaptionDraft"><%= _ctx.appRes("UICLVPresentation.label.draft") %></a>
+															<%
+																if(Utils.isShowQuickEdit(viewNode)) {
+																	%>, <a class="CaptionEdit" href="$contentEditLink"><%= _ctx.appRes("UICLVPresentation.action.edit") %></a><%
+																}
+															%>
+															<span> ]</span>
+														<% 
+													}
+													if (isShowDate) {
+													  %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%
+													}
+													if (isShowSummary) { 
+														%><div class="Summary">$itemSummary</div><% 
+													}
+													if (isShowReadmore) {
+													  %><div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
+													}
+													%>
+												</div>
+											<%
+										%>
+									</div>
+				    		<%
+				  		}
+				  	%>
+			  	</div>
+			  <%	
+			}
+		%>
+		<div class="CaptionFunc">
+			<% 	
+				String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+				if (uicomponent.showRefreshButton()) { 
+					String link = uicomponent.event("Refresh");
+					%>				
+						<div class="CaptionRefresh">
+							<a href="$link">$labelRefreshAction</a>
+						</div>
+					<% 
+				}
+				if (uicomponent.showPaginator()) { 
+						uicomponent.renderChild(UICustomizeablePaginator.class)
+				} 
+			%>
+			<div style="clear: left;"><span></span></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+<%
+	/**
+	 * Created by The eXo Platform SAS
+	 * Author : eXoPlatform
+	 *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+	 * Modified: Add width=100% for iframe element to fix bug don't display upload icon
+	 * Jun 25, 2009  
+	 */
+
+  String uploadId = uicomponent.getUploadId() ;
+  boolean isAutoUpload = uicomponent.isAutoUpload();
+  def rcontext = _ctx.getRequestContext() ;
+  rcontext.getJavascriptManager().importJavascript('eXo.webui.UIUpload') ;
+  rcontext.getJavascriptManager().addJavascript("eXo.webui.UIUpload.initUploadEntry('"+uploadId+"',"+isAutoUpload+");") ;
+%>
+<div class="UIFormUploadInput" id="$uploadId">
+  <input type="hidden" id="input$uploadId" name="<%=uicomponent.getName();%>" value="false"/>
+  <div id="<%=uploadId;%>UploadIframe" class="UploadIframe">
+    <iframe height="23px" width="100%" allowTransparency="true" scrolling="no" frameborder="0" framespacing="0" id="<%=uploadId;%>uploadFrame"></iframe>
+  </div>
+  <div id="<%=uploadId;%>ProgressIframe" class="ProgressIframe" style="display: none;"></div>      
+  <div class="ProgressBarFrame" style="display: none;">
+		<div class="ProgressBar">
+			<div class="ProgressBarLeft">
+				<div class="ProgressBarMiddle">
+					<div class="BlueProgressBar">
+						<div class="ProgressBarLabel">0%</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="DeleteFileFrame">
+			<div class="DeleteFileLable" onclick="eXo.webui.UIUpload.abortUpload($uploadId);"><%=_ctx.appRes("UIFormUploadInput.label.Cancel")%></div>
+		</div>
+	</div>
+	<div class="SelectFileFrame" style="display: none;">
+		<div class="FileName">
+			<div class="FileNameLabel"></div>
+		</div>
+		<div class="RemoveFile" title="Remove Uploaded" onclick="eXo.webui.UIUpload.deleteUpload($uploadId);"></div>
+	</div>
+</div>

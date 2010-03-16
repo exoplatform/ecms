@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portal-config>
+  <portal-name>backoffice</portal-name>
+  <locale>en</locale>
+  <access-permissions>Everyone</access-permissions>
+  <edit-permission>*:/platform/administrators</edit-permission>
+  <creator>root</creator>
+    
+ 	<portal-layout> 		
+ 	  <application>
+	    <instance-id>portal#backoffice:/presentation/SiteAdministrationPortlet/backoffice-admintoolbar</instance-id>
+	    <show-info-bar>false</show-info-bar>
+  	</application>	  
+  	
+  	<application>
+			<instance-id>portal#backoffice:/presentation/SingleContentViewer/backoffice-breadcrumb</instance-id>
+	  	<show-info-bar>false</show-info-bar>
+	  </application>
+		
+	  <page-body> </page-body>
+	  
+  </portal-layout>
+  
+</portal-config>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <WebContent>
+  <dialog>
+   <label>
+    <MainContent>Contenu principal</MainContent>
+    <cssFile>default.css</cssFile>
+    <jsFile>default.js</jsFile>
+    <Advanced>Avancé</Advanced>
+    <Summary>Résumé</Summary>
+    <name>Nom</name>
+    <title>Titre</title>
+    <ContentCSS>CSS données</ContentCSS>
+    <hintCSS>Dans ce panneau, vous pouvez spécifier la feuille de style principale pour votre contenu web. Ce style surchargera celui défini au niveau du site et au niveau partagé.</hintCSS>
+    <ContentJS>JS données</ContentJS>
+    <hintJS>Dans ce panneau, vous pouvez spécifier du code JavaScript qui sera exécuté avant que votre contenu web est affiché sur la page.</hintJS>
+    <WebContentHtml>Contenu principal</WebContentHtml>
+    <Illustration>Illustration</Illustration>
+    <hintIllustration>Dans ce panneau, vous pouvez spécifier une image qui sera affichée lorsque votre contenu web sera affiché dans les listes. En plus, vous pouvez spécifier un résumé accompagnant cette image.</hintIllustration>
+    <illustrationImage>Illustration Vignette</illustrationImage>
+    <imageMimeType>Type d'image</imageMimeType>
+    <image>Transférer l'image</image>
+    <imageWidth>Largeur de l'image</imageWidth>
+    <imageHeight>Hauteur de l'image</imageHeight>
+    <Synchronize>Synchroniser avec le style CSS et le code HTML</Synchronize>
+   </label>
+  </dialog>
+ </WebContent>
+
+ <CSSFile>
+  <dialog>
+   <label>
+    <name>Nom</name>
+    <active>Actif</active>
+    <priority>Priorité</priority>
+    <content>Contenu CSS</content>
+   </label>
+  </dialog>
+ </CSSFile>
+
+ <JSFile>
+  <dialog>
+   <label>
+    <name>Nom</name>
+    <active>Actif</active>
+    <priority>Priorité</priority>
+    <content>Contenu JavaScript</content>
+   </label>
+  </dialog>
+ </JSFile>
+
+ <WebLink>
+  <dialog>
+   <label>
+    <name>Nom</name>
+    <url>URL</url>
+    <description>Description</description>
+   </label>
+  </dialog>
+ </WebLink>
+
+ <SiteMetadata>
+  <dialog>
+   <label>
+    <title>Titre du site</title>
+    <description>Description du site</description>
+    <keywords>Mots clés du site</keywords>
+    <robots>Comportement des moteurs de recherche</robots>
+   </label>
+  </dialog>
+ </SiteMetadata>
+</bundle>

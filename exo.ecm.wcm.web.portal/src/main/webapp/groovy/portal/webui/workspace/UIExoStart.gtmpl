@@ -1,0 +1,22 @@
+<%
+  String onclickhome = "javascript:eXo.portal.UIControlWorkspace.showWorkspace();";
+  
+  navigations = uicomponent.getNavigations() ;
+  if (navigations != null && navigations.size() > 0) {
+  	navigation = navigations.get(0);
+    nodes = navigation.getNodes() ;
+  	if (nodes.size()>0) {
+  		 node = nodes.get(0);
+  		onclickhome += uicomponent.event("ChangePage",  navigation.getId() + "::" + node.getUri()) ;
+  	}
+  }
+%>
+<div class="UIExoStart" id="UIExoStart" title="<%= _ctx.appRes("UIExoStart.tooltip.homepage") %>">
+  <div class="StartBarContainer">
+    <div class="ExoHomeButton ButtonNormal" onclick="$onclickhome" title=""><span></span></div>
+    <div class="ClearBoth"><span></span></div>
+  </div>
+  <div id="StartMenuContainer" class="StartMenuContainer" style="display: none; top: 0px;">
+  </div>
+  
+</div>

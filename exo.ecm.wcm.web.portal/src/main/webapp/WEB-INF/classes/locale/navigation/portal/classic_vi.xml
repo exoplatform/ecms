@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <portal>
+    <classic>
+      <home>Trang chủ</home>
+      <dashboard>Dashboard</dashboard>
+      <presentation>Trình bày đơn nội dung</presentation>
+      <listViewer>Trình bày đa nội dung</listViewer>
+      <search>Tìm kiếm</search>
+      <searchResult>Kết quả tìm kiếm</searchResult>
+      <products>Sản phẩm</products>
+      <register>Đăng ký</register>
+      <sitemap>Sơ đồ trang</sitemap>
+      <parameterizedviewer>Ứng dụng trình bày nội dung theo tham số</parameterizedviewer>
+      <viewer>Những bộ hiển thị</viewer>
+			<categories>Hệ thống phân loại</categories>
+			<formgenerator>Form Generator</formgenerator>
+      <newsletter>Thư báo</newsletter>
+      <newsletterviewer>Hiển thị thư báo</newsletterviewer>
+      <newslettermanager>Quản lý thư báo</newslettermanager>
+      <printviewer>Ứng dụng hiện thị trang in</printviewer>
+    </classic>
+  </portal>
+</bundle>
+

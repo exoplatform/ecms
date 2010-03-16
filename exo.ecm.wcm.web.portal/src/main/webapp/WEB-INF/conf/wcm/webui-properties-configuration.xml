@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>
+	<component>
+    <key>org.exoplatform.wcm.webui.WebUIPropertiesConfigService</key>
+    <type>org.exoplatform.wcm.webui.WebUIPropertiesConfigService</type>
+    <init-params>
+			<properties-param>
+			  <name>SCV.popup.size.in.edit.portlet.mode</name>
+			  <description>size of popup in edit mode of portlet</description>
+			  <property name="width" value="850"/>
+			  <property name="height" value="525"/>			                             
+			</properties-param>
+			<properties-param>
+			  <name>SCV.popup.size.in.quickdedit</name>
+			  <description>size of popup in edit mode of portlet</description>
+			  <property name="width" value="950"/>
+			  <property name="height" value="750"/>			                             
+			</properties-param>			
+	 	</init-params>    
+  </component>	   
+  
+</configuration>

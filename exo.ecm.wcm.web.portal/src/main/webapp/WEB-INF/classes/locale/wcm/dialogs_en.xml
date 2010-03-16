@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <WebContent>
+  <dialog>
+   <label>
+    <MainContent>Main Content</MainContent>
+    <cssFile>default.css</cssFile>
+    <jsFile>default.js</jsFile>
+    <Advanced>Advanced</Advanced>
+    <Summary>summary</Summary>
+    <name>Name</name>
+    <title>Title</title>
+    <ContentCSS>CSS data</ContentCSS>
+    <hintCSS>In this panel, you can specify the main stylesheet for your web content. This style will override the one defined at the site level and at the shared level.</hintCSS>
+    <ContentJS>JS data</ContentJS>
+    <hintJS>In this panel, you can specify some Java Script code that can be executed before your web content is rendered.</hintJS>
+    <WebContentHtml>Main content</WebContentHtml>
+    <Illustration>Illustration</Illustration>
+    <hintIllustration>In this panel, you can specify an image that will be shown when your web content is displayed in lists. In addition, you can specify some summary text to come with this image.</hintIllustration>
+    <illustrationImage>Illustration Image</illustrationImage>
+    <imageMimeType>Image Type</imageMimeType>
+    <image>Upload image</image>
+    <imageWidth>Image width</imageWidth>
+    <imageHeight>Image height</imageHeight>
+    <Synchronize>Synchronize with CSS and HTML</Synchronize>
+   </label>
+  </dialog>
+ </WebContent>
+
+ <CSSFile>
+  <dialog>
+   <label>
+    <name>Name</name>
+    <active>Active</active>
+    <priority>Priority</priority>
+    <content>CSS data</content>
+   </label>
+  </dialog>
+ </CSSFile>
+
+ <JSFile>
+  <dialog>
+   <label>
+    <name>Name</name>
+    <active>Active</active>
+    <priority>Priority</priority>
+    <content>JS data</content>
+   </label>
+  </dialog>
+ </JSFile>
+
+ <WebLink>
+  <dialog>
+   <label>
+    <name>Name</name>
+    <url>URL</url>
+    <description>Description</description>
+   </label>
+  </dialog>
+ </WebLink>
+
+ <SiteMetadata>
+  <dialog>
+   <label>
+    <title>Site Title</title>
+    <description>Site Description</description>
+    <keywords>Site Keywords</keywords>
+    <robots>Search Engines Behavior</robots>
+   </label>
+  </dialog>
+ </SiteMetadata>
+</bundle>

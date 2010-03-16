@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portlet-preferences-set>
+  <portlet-preferences>
+    <owner-type>portal</owner-type>
+    <owner-id>backoffice</owner-id>
+    <window-id>portal#backoffice:/presentation/SingleContentViewer/backoffice-breadcrumb</window-id>
+    <preference>
+      <name>repository</name>
+      <value>repository</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>workspace</name>
+      <value>collaboration</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>nodeIdentifier</name>
+      <value>/sites content/live/backoffice/web contents/site artifacts/breadcrumb/Default</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>ShowQuickEdit</name>
+      <value>false</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+    	<name>ShowPrintAction</name>
+    	<value>false</value>
+    	<read-only>false</read-only>
+    </preference>
+  </portlet-preferences>
+    
+    
+</portlet-preferences-set>

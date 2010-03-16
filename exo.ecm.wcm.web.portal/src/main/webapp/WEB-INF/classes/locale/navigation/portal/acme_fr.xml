@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <portal>
+    <acme>
+      <home>Accueil</home>
+      <news>Actualités</news>
+      <services>Services</services>
+      <search>Recherche</search>
+      <contact>Contact</contact>
+      <about>A propos</about>
+      <contentviewer>Visualiseur de contenu simple</contentviewer>
+      <parameterizedviewer>Visualiseur de contenus multiple</parameterizedviewer>
+      <searchResult>Résultats de recherche</searchResult>
+      <printviewer>Imprimer Viewer</printviewer>
+      
+      <products>Produits</products>
+      <category>Catégorie de navigation</category>
+      <pclv>Parameterized Contenu Liste Viewer</pclv>
+      <clv>Contenu de la visionneuse</clv>
+      <scv>Simple Content Viewer</scv>
+      <pcv>Parameterized Content Viewer</pcv>
+      <sitemap>Plan du site</sitemap>
+      <overview>Présentation</overview>
+      <events>Evénements</events>
+      <publications>Publications</publications>
+      <newsletters>Newsletters</newsletters>
+      <newslettermanager>Newsletter Manager</newslettermanager>
+      <fastcontentcreator>Fast Content Creator</fastcontentcreator>
+      <formgenerator>Générateur de formulaires</formgenerator>
+      <presentation>Présentation</presentation>
+      <contactus>Contactez Nous</contactus>
+      <confirmation>Confirmation de contact</confirmation>
+      <newAccount>Nouveau compte</newAccount>
+    </acme>
+  </portal>
+</bundle>
+

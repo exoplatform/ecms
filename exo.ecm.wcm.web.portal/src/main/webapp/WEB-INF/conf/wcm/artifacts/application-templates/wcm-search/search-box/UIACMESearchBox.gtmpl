@@ -1,0 +1,15 @@
+<% 
+	import org.exoplatform.wcm.webui.search.UISearchBox;
+	String link = uiform.url(uiform.getActions()[0]); 
+	uiform.begin();
+%>
+<div class="UIACMESearchBox">
+	<div class="Search">
+		<div class="KeywordInput">
+			<% uiform.renderField(uiform.getChildById(UISearchBox.KEYWORD_INPUT)) %>
+		</div>
+		<div class="SearchBoxIcon" onclick="$link"><span></span></div>
+		<div style="clear: right;"></div>
+	</div>
+</div>
+<% uiform.end(); %>

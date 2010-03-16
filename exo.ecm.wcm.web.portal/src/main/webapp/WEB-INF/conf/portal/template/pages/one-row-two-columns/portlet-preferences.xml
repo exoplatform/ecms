@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portlet-preferences-set>
+	<portlet-preferences>
+		<owner-type></owner-type>
+		<owner-id></owner-id>
+		<window-id>/presentation/SingleContentViewer</window-id>
+      <preference>
+        <name>ShowTOC</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowTags</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowCategories</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+	    	<name>ShowPrintAction</name>
+	    	<value>true</value>
+	    	<read-only>false</read-only>
+		  </preference>
+		  <preference>
+	    	<name>ShowTitle</name>
+	    	<value>true</value>
+	    	<read-only>false</read-only>
+		  </preference>
+    </portlet-preferences>
+</portlet-preferences-set>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portlet-preferences-set>
+  <portlet-preferences>
+    <owner-type>portal</owner-type>
+    <owner-id>empty</owner-id>
+    <window-id>portal#empty:/presentation/SingleContentViewer/empty-banner</window-id>
+    <preference>
+      <name>repository</name>
+      <value>repository</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>workspace</name>
+      <value>collaboration</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>nodeIdentifier</name>
+      <value>/sites content/live/empty/web contents/site artifacts/banner/Default</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+    	<name>ShowPrintAction</name>
+    	<value>false</value>
+    	<read-only>false</read-only>
+    </preference>
+  </portlet-preferences>
+  
+  <portlet-preferences>
+    <owner-type>portal</owner-type>
+    <owner-id>empty</owner-id>
+    <window-id>portal#empty:/presentation/SingleContentViewer/empty-navigation</window-id>
+    <preference>
+      <name>repository</name>
+      <value>repository</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>workspace</name>
+      <value>collaboration</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>nodeIdentifier</name>
+      <value>/sites content/live/empty/web contents/site artifacts/navigation/Default</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>ShowQuickEdit</name>
+      <value>true</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+    	<name>ShowPrintAction</name>
+    	<value>false</value>
+    	<read-only>false</read-only>
+    </preference>
+  </portlet-preferences>
+  
+  <portlet-preferences>
+    <owner-type>portal</owner-type>
+    <owner-id>empty</owner-id>
+    <window-id>portal#empty:/presentation/SingleContentViewer/empty-breadcrumb</window-id>
+    <preference>
+      <name>repository</name>
+      <value>repository</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>workspace</name>
+      <value>collaboration</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>nodeIdentifier</name>
+      <value>/sites content/live/empty/web contents/site artifacts/breadcrumb/Default</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>ShowQuickEdit</name>
+      <value>true</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+    	<name>ShowPrintAction</name>
+    	<value>false</value>
+    	<read-only>false</read-only>
+    </preference>
+  </portlet-preferences>
+  
+  <portlet-preferences>
+    <owner-type>portal</owner-type>
+    <owner-id>empty</owner-id>
+    <window-id>portal#empty:/presentation/SingleContentViewer/empty-footer</window-id>
+    <preference>
+      <name>repository</name>
+      <value>repository</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>workspace</name>
+      <value>collaboration</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>nodeIdentifier</name>
+      <value>/sites content/live/empty/web contents/site artifacts/footer/Default</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>ShowQuickEdit</name>
+      <value>true</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+    	<name>ShowPrintAction</name>
+    	<value>false</value>
+    	<read-only>false</read-only>
+    </preference>
+  </portlet-preferences>
+  
+  <portlet-preferences>
+    <owner-type>portal</owner-type>
+    <owner-id>empty</owner-id>
+    <window-id>portal#empty:/presentation/SingleContentViewer/empty-homepage</window-id>
+    <preference>
+      <name>repository</name>
+      <value>repository</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>workspace</name>
+      <value>collaboration</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>nodeIdentifier</name>
+      <value>/sites content/live/empty/web contents/site artifacts/homepage/Default</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>ShowQuickEdit</name>
+      <value>true</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+    	<name>ShowPrintAction</name>
+    	<value>false</value>
+    	<read-only>false</read-only>
+    </preference>
+  </portlet-preferences>
+  
+  
+  <portlet-preferences>
+    <owner-type>portal</owner-type>
+    <owner-id>empty</owner-id>
+    <window-id>portal#empty:/presentation/SingleContentViewer/empty-searchbox</window-id>
+    <preference>
+      <name>repository</name>
+      <value>repository</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>workspace</name>
+      <value>collaboration</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>nodeIdentifier</name>
+      <value>/sites content/live/empty/web contents/site artifacts/searchbox/Default</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>ShowQuickEdit</name>
+      <value>true</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+    	<name>ShowPrintAction</name>
+    	<value>false</value>
+    	<read-only>false</read-only>
+    </preference>
+  </portlet-preferences>
+  
+  <portlet-preferences>
+	  <owner-type>portal</owner-type>
+	  <owner-id>empty</owner-id>
+	  <window-id>portal#empty:/searches/WCMAdvanceSearchPortlet/empty-search</window-id>
+	  <preference>
+	    <name>searchPageLayoutTemplatePath</name>
+	    <value>/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl</value>
+	  </preference>
+	  <preference>
+	    <name>searchFormTemplatePath</name>
+	    <value>/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl</value>
+	  </preference>
+	  <preference>
+	    <name>searchBoxTemplatePath</name>
+	    <value>/exo:ecm/views/templates/WCM Advance Search/search-box/UIemptySearchBox.gtmpl</value>
+	  </preference>
+	  <preference>
+	    <name>searchPaginatorTemplatePath</name>
+	    <value>/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl</value>
+	  </preference>
+	  <preference>
+	    <name>searchMode</name>
+	    <value>searchPageMode</value>
+	  </preference>
+	  <preference>
+	    <name>showQuickEditButton</name>
+	    <value>false</value>
+	  </preference>
+	  <preference>
+	    <name>itemsPerPage</name>
+	    <value>20</value>
+	  </preference>
+	  <preference>
+	    <name>repository</name>
+	    <value>repository</value>
+	  </preference>
+	  <preference>
+	    <name>workspace</name>
+	    <value>collaboration</value>
+	  </preference>
+	  <preference>
+	    <name>searchResultTemplatePath</name>
+	    <value>/exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl</value>
+	  </preference>
+	</portlet-preferences>
+  
+</portlet-preferences-set>

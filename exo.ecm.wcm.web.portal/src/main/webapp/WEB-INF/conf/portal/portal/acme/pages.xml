@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<page-set>  
+  <page>
+  	<page-id>portal::acme::overview</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>acme</owner-id>
+    <name>overview</name>
+    <title>Overview</title>
+	  <access-permissions>Everyone</access-permissions>
+	  <edit-permission>editor:/platform/web-contributors</edit-permission>
+	  <container id="ACMEBody" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
+			<container id="ACMELeft" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" width="640px">
+	  			<application>
+				    <instance-id>portal#acme:/presentation/SingleContentViewer/acme-introduce</instance-id>
+				    <title>Homepage</title>
+				  </application>
+	  			<application>
+			    	<instance-id>portal#acme:/presentation/ContentListViewerPortlet/acme-company-events</instance-id>
+			    	<title>Events</title>
+			  	</application>
+	  			<application>
+				    <instance-id>portal#acme:/presentation/ContentListViewerPortlet/acme-company-news</instance-id>
+				    <title>News</title>
+				  </application>
+	  		</container>
+	 	 	<container id="ACMERight" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" width="230px">
+	  			<application>
+				    <instance-id>portal#acme:/presentation/ContentListViewerPortlet/acme-latest-documents</instance-id>
+				    <title>Documents</title>
+				  </application>
+	  			<application>
+			    	<instance-id>portal#acme:/presentation/ContentListViewerPortlet/acme-latest-news</instance-id>
+			    	<title>Latest news</title>
+			  	</application>
+		  	</container>
+	  </container>
+  </page>
+  
+  <page>
+  	<page-id>portal::acme::news</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>acme</owner-id>
+    <name>news</name>
+    <title>News</title>
+	  <access-permissions>Everyone</access-permissions>
+	  <edit-permission>editor:/platform/web-contributors</edit-permission>
+	  <container id="ACMEBody" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
+	  	<container id="ACMECategories" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" width="200px">
+	  		<application>
+			    <instance-id>portal#acme:/presentation/CategoryNavigationPortlet/acme-categories</instance-id>
+			    <title>Categories</title>
+			  </application>
+	  	</container>
+	  	<container id="ACMEParameterized" template="system:/groovy/portal/webui/container/UIContainer.gtmpl" width="680px">
+	  		<application>
+			    <instance-id>portal#acme:/presentation/ParameterizedContentListViewerPortlet/acme-parameterized</instance-id>
+			    <title>Parameterized</title>
+			  </application>
+	  	</container>
+	  </container>
+  </page>
+  
+  <page>
+  	<page-id>portal::acme::events</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>acme</owner-id>
+    <name>events</name>
+    <title>Events</title>
+	  <access-permissions>Everyone</access-permissions>
+	  <edit-permission>editor:/platform/web-contributors</edit-permission>
+	  <application>
+	    <instance-id>portal#acme:/presentation/SingleContentViewer/acme-events</instance-id>
+	    <title>Events</title>
+	  </application>
+  </page>
+  
+  <page>
+  	<page-id>portal::acme::publications</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>acme</owner-id>
+    <name>publications</name>
+    <title>Publications</title>
+	  <access-permissions>Everyone</access-permissions>
+	  <edit-permission>editor:/platform/web-contributors</edit-permission>
+	  <application>
+	    <instance-id>portal#acme:/presentation/SingleContentViewer/acme-publications</instance-id>
+	    <title>Publications</title>
+	  </application>
+  </page>
+  
+  <page>
+  	<page-id>portal::acme::searchResult</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>acme</owner-id>
+    <name>searchResult</name>
+    <title>SearchResult</title>
+	  <access-permissions>Everyone</access-permissions>
+	  <edit-permission>editor:/platform/web-contributors</edit-permission>
+    <application>
+      <instance-id>portal#acme:/searches/WCMAdvanceSearchPortlet/acme-searchResult</instance-id>
+      <title>SearchResult</title>
+      <show-info-bar>false</show-info-bar>      
+      <show-application-state>false</show-application-state>
+      <show-application-mode>false</show-application-mode>
+    </application>
+  </page>
+  
+	<page>
+		<page-id>portal::acme::pcv</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>acme</owner-id>
+		<name>pcv</name>
+		<title>Parameterized content viewer portlet</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<application>
+			<instance-id>portal#acme:/presentation/ParameterizedContentViewerPortlet/acme-pcv</instance-id>
+			<title>Parameterized content viewer portlet</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+	<page>
+		<page-id>portal::acme::printviewer</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>acme</owner-id>
+		<name>printviewer</name>
+		<title>Print viewer</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<show-max-window>true</show-max-window>
+		<application>
+			<instance-id>portal#acme:/presentation/ParameterizedContentViewerPortlet/acme-printviewer</instance-id>
+			<title>Print viewer</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+	<page>
+		<page-id>portal::acme::pclv</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>acme</owner-id>
+		<name>pclv</name>
+		<title>Parameterized Content List Viewer Portlet</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<application>
+			<instance-id>portal#acme:/presentation/ParameterizedContentListViewerPortlet/acme-pclv</instance-id>
+			<title>Parameterized Content List Viewer Portlet</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+	<page>
+		<page-id>portal::acme::category</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>acme</owner-id>
+		<name>category</name>
+		<title>Category navigation portlet</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<application>
+			<instance-id>portal#acme:/presentation/CategoryNavigationPortlet/acme-category</instance-id>
+			<title>Category navigation portlet</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+	<page>
+		<page-id>portal::acme::clv</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>acme</owner-id>
+		<name>clv</name>
+		<title>Content List Viewer Portlet</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<application>
+			<instance-id>portal#acme:/presentation/ContentListViewerPortlet/acme-clv</instance-id>
+			<title>Content List Viewer Portlet</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+	<page>
+		<page-id>portal::acme::scv</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>acme</owner-id>
+		<name>scv</name>
+		<title>Single Content Viewer Portlet</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<application>
+			<instance-id>portal#acme:/presentation/SingleContentViewer/acme-scv</instance-id>
+			<title>Single Content Viewer Portlet</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+	<page>
+		<page-id>portal::acme::newsletters</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>acme</owner-id>
+		<name>newsletters</name>
+		<title>Newsletter Viewer</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<application>
+			<instance-id>portal#acme:/presentation/SingleContentViewer/acme-newsletter-header</instance-id>
+			<title>Newsletter Header</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+		<application>
+			<instance-id>portal#acme:/newsletter/NewsletterViewerPortlet/acme-newsletterviewer</instance-id>
+			<title>Newsletter Viewer</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+	<page>
+		<page-id>portal::acme::contactus</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>acme</owner-id>
+		<name>contactus</name>
+		<title>Contact Us</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/web-contributors</edit-permission>
+		<application>
+			<instance-id>portal#acme:/formgenerator/FastContentCreatorBasicPortlet/acme-contactus</instance-id>
+			<title>Contact Us</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>true</show-application-mode>
+		</application>
+	</page>
+
+	 <page>
+	 	<page-id>portal::acme::confirmation</page-id>
+	   <owner-type>portal</owner-type>
+	   <owner-id>acme</owner-id>
+	   <name>confirmation</name>
+	   <title>Contact Form Confirmation</title>
+	  <access-permissions>Everyone</access-permissions>
+	  <edit-permission>editor:/platform/web-contributors</edit-permission>
+	  <application>
+	    <instance-id>portal#acme:/presentation/SingleContentViewer/acme-confirmation</instance-id>
+	    <title>Contact Form Confirmation</title>
+	  </application>
+	 </page>
+	 
+	   
+  <page>
+  	<page-id>portal::acme::newAccount</page-id>
+  	<owner-type>portal</owner-type>
+    <owner-id>acme</owner-id>
+    <name>newAccount</name>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <application>
+      <instance-id>portal#acme:/exoadmin/AccountPortlet/Account</instance-id>
+      <title>New Account</title>
+      <show-info-bar>false</show-info-bar>
+      <show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+    </application>  
+  </page>     
+	
+</page-set>

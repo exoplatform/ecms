@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<page-set>  
+  <page>
+  	<page-id>portal::@owner@::overview</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>@owner@</owner-id>
+    <name>overview</name>
+    <title>Overview</title>
+	  <access-permissions>Everyone</access-permissions>
+	  <edit-permission>editor:/platform/web-contributors</edit-permission>
+  </page>
+  
+  
+  <page>
+  	<page-id>portal::@owner@::searchResult</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>@owner@</owner-id>
+    <name>searchResult</name>
+    <title>SearchResult</title>
+	  <access-permissions>Everyone</access-permissions>
+	  <edit-permission>editor:/platform/web-contributors</edit-permission>
+    <application>
+      <instance-id>portal#@owner@:/searches/WCMAdvanceSearchPortlet/@owner@-searchResult</instance-id>
+      <title>SearchResult</title>
+      <show-info-bar>false</show-info-bar>      
+      <show-application-state>false</show-application-state>
+      <show-application-mode>false</show-application-mode>
+    </application>
+  </page>
+  
+	<page>
+		<page-id>portal::@owner@::pcv</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>@owner@</owner-id>
+		<name>pcv</name>
+		<title>Parameterized content viewer portlet</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<application>
+			<instance-id>portal#@owner@:/presentation/ParameterizedContentViewerPortlet/@owner@-pcv</instance-id>
+			<title>Parameterized content viewer portlet</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+	<page>
+		<page-id>portal::@owner@::printviewer</page-id>
+		<owner-type>portal</owner-type>
+		<owner-id>@owner@</owner-id>
+		<name>printviewer</name>
+		<title>Print viewer</title>
+		<access-permissions>Everyone</access-permissions>
+		<edit-permission>*:/platform/administrators</edit-permission>
+		<show-max-window>true</show-max-window>
+		<application>
+			<instance-id>portal#@owner@:/presentation/ParameterizedContentViewerPortlet/@owner@-printviewer</instance-id>
+			<title>Print viewer</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	
+  <page>
+  	<page-id>portal::@owner@::newAccount</page-id>
+  	<owner-type>portal</owner-type>
+    <owner-id>@owner@</owner-id>
+    <name>newAccount</name>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <application>
+      <instance-id>protal#@owner@:/exoadmin/AccountPortlet/Account</instance-id>
+      <title>New Account</title>
+      <show-info-bar>false</show-info-bar>
+      <show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+    </application>  
+  </page>
+	
+</page-set>

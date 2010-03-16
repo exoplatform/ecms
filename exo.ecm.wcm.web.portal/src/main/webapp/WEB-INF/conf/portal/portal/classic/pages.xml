@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<page-set>
+  <page>
+    <page-id>portal::classic::homepage</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>classic</owner-id>
+    <name>homepage</name>
+    <title>Home Page</title>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <container id="ClassicBody" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
+      <container id="ClassicLeft" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+        <application>
+          <instance-id>portal#classic:/presentation/SingleContentViewer/classic-introduce</instance-id>
+          <title>Introduce</title>
+        </application>
+        <application>
+          <instance-id>portal#classic:/presentation/ContentListViewerPortlet/classic-news</instance-id>
+          <title>News</title>
+        </application>
+      </container>
+      <container id="ClassicRight" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+        <application>
+          <instance-id>portal#classic:/presentation/SingleContentViewer/classic-howto</instance-id>
+          <title>How to</title>
+        </application>
+        <application>
+          <instance-id>portal#classic:/presentation/SingleContentViewer/classic-test</instance-id>
+          <title>Test</title>
+        </application>
+      </container>
+    </container>
+  </page>
+  <page>
+    <page-id>portal::classic::searchResult</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>classic</owner-id>
+    <name>searchResult</name>
+    <title>SearchResult</title>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>editor:/platform/web-contributors</edit-permission>
+    <application>
+      <instance-id>portal#classic:/searches/WCMAdvanceSearchPortlet/classic-searchResult</instance-id>
+      <title>SearchResult</title>
+      <show-info-bar>false</show-info-bar>      
+      <show-application-state>false</show-application-state>
+      <show-application-mode>false</show-application-mode>
+    </application>
+  </page>
+  
+  <page>
+    <page-id>portal::classic::parameterizedviewer</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>classic</owner-id>
+    <name>parameterizedviewer</name>
+    <title>ParameterizedViewer</title>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <application>
+      <instance-id>portal#classic:/presentation/ParameterizedContentViewerPortlet/classic-parameterizedviewer</instance-id>
+      <title>parameterizedviewer</title>
+      <show-info-bar>false</show-info-bar>
+      <show-application-state>false</show-application-state>
+      <show-application-mode>false</show-application-mode>
+    </application>
+  </page>
+  <page>
+    <page-id>portal::classic::printviewer</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>classic</owner-id>
+    <name>printviewer</name>
+    <title>printviewer</title>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <show-max-window>true</show-max-window>
+    <application>
+      <instance-id>portal#classic:/presentation/ParameterizedContentViewerPortlet/classic-printviewer</instance-id>
+      <title>printviewer</title>
+      <show-info-bar>false</show-info-bar>
+      <show-application-state>false</show-application-state>
+      <show-application-mode>false</show-application-mode>
+    </application>
+  </page>
+  
+  <page>
+    <page-id>portal::classic::newAccount</page-id>
+    <owner-type>portal</owner-type>
+    <owner-id>classic</owner-id>
+    <name>newAccount</name>
+    <access-permissions>Everyone</access-permissions>
+    <edit-permission>*:/platform/administrators</edit-permission>
+    <application>
+      <instance-id>protal#classic:/exoadmin/AccountPortlet/Account</instance-id>
+      <title>New Account</title>
+      <show-info-bar>false</show-info-bar>
+      <show-application-state>false</show-application-state>
+      <show-application-mode>false</show-application-mode>
+    </application>  
+  </page>     
+  
+</page-set>

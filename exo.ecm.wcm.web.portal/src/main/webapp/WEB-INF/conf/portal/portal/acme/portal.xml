@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portal-config>
+  <portal-name>acme</portal-name>
+  <locale>en</locale>
+  <access-permissions>Everyone</access-permissions>
+  <edit-permission>*:/platform/web-contributors</edit-permission>
+  <creator>root</creator>
+    
+ 	<portal-layout> 		
+ 	  <application>
+	    <instance-id>portal#acme:/presentation/SiteAdministrationPortlet/acme-admintoolbar</instance-id>
+	    <show-info-bar>false</show-info-bar>
+  	</application>	  
+  	
+  	<container id="ACMEBanner" template="system:/groovy/wcm/webui/container/UITableColumnContainer.gtmpl">
+  		<container id="ACMELogo" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+  			<application>
+			    <instance-id>portal#acme:/presentation/SingleContentViewer/acme-logo</instance-id>
+			    <title>Banner</title>
+			  </application>
+  		</container>
+  		<container id="ACMESearch" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+	  		<application>
+			    <instance-id>portal#acme:/presentation/SingleContentViewer/acme-searchbox</instance-id>
+			    <title>Access</title>
+			  </application>
+  		</container>
+  		<container id="ACMESignin" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+	  		<application>
+			    <instance-id>portal#acme:/presentation/SingleContentViewer/acme-signin</instance-id>
+			    <title>Search box</title>
+			  </application>
+  		</container>
+  	</container>
+  		
+  	<application>
+		 	<instance-id>portal#acme:/presentation/SingleContentViewer/acme-navigation</instance-id>
+  	  <title>Navigation</title>
+		</application>
+  	
+	  <page-body> </page-body>
+	  
+	  <application>
+	    <instance-id>portal#acme:/presentation/SingleContentViewer/acme-footer</instance-id>
+	    <title>Footer</title>
+	  </application>
+  </portal-layout>
+  
+</portal-config>

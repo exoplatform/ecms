@@ -1,0 +1,52 @@
+<%
+	/**
+	 * Created by The eXo Platform SAS
+	 * Author : eXoPlatform
+	 *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+	 * Jun 27, 2009  
+	 */
+	 
+	/**
+	 * Render sub categories
+	 */
+	public void renderChild(def categoryUri, def categories, int level) {
+  	def categoryPath = categories.get(level);
+  	def subcategories = uicomponent.getSubcategories(categoryPath);
+  	for (subcategory in subcategories) {
+      def subcategoryName = subcategory.getName();
+      def margin = 16 * (level - 1) + "px";
+      def selectedClass = "";
+      if (categoryUri.equals("/" + categoryPath + "/" + subcategoryName)) selectedClass = "SubCategorySelected";
+      def categoryLink = uicomponent.renderCategoryLink(subcategory);
+      %><a style="margin-left: $margin" class="SubCategory $selectedClass" href="$categoryLink">$subcategoryName</a><%
+      if (subcategory.hasNodes() && categoryUri.startsWith("/" + categoryPath + "/" + subcategoryName)) 
+        renderChild(categoryUri, categories, level + 1);
+    }
+	}
+%>
+
+<div id="$uicomponent.id" class="SimpleVerticalHierachy">
+	<div class="CategoriesContainer">
+		<div class="TitleBarL">
+			<div class="TitleBarR">
+				<div class="TitleBarM">
+					CATEGORIES
+				</div>
+			</div>
+		</div>
+		<div class="NewContent">
+			<%
+				def categoryUri = uicomponent.resolveCategoryPathByUri(_ctx.getRequestContext());
+				def categories = uicomponent.getCategoriesByUri(categoryUri);
+				def rootCategory = categories.get(0);
+		    def subcategories = uicomponent.getSubcategories(rootCategory);
+			  for (subcategory in subcategories) {
+			    def subcategoryName = subcategory.getName();
+			    def categoryLink = uicomponent.renderCategoryLink(subcategory);
+			    %><a class="CategoryLabel" href="$categoryLink">$subcategoryName</a><%
+			    if (categoryUri.startsWith("/" + subcategoryName)) renderChild(categoryUri, categories, 1);
+			  }
+			%>
+		</div>
+	</div>
+</div>

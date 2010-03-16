@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portlet-preferences-set>
+	<portlet-preferences>
+		<owner-type></owner-type>
+		<owner-id></owner-id>
+		<window-id>/searches/WCMAdvanceSearchPortlet</window-id>
+		<preference>
+    	<name>repository</name>
+    	<value>repository</value>
+    	<read-only>false</read-only>
+    </preference>
+    <preference>
+    	<name>workspace</name>
+    	<value>collaboration</value>
+    	<read-only>false</read-only>
+    </preference>
+	<preference>
+		<name>searchFormTemplatePath</name>
+		<value>/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl</value>
+		<read-only>false</read-only>
+	</preference>
+	<preference>
+		<name>searchResultTemplatePath</name>
+		<value>/exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl</value>
+		<read-only>false</read-only>
+	</preference>	
+	<preference>
+		<name>searchPaginatorTemplatePath</name>
+		<value>/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl</value>
+		<read-only>false</read-only>
+	</preference>	
+	<preference>
+		<name>searchPageLayoutTemplatePath</name>
+		<value>/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UIResultPageLayoutDefault.gtmpl</value>
+		<read-only>false</read-only>
+	</preference>		
+	<preference>
+		<name>itemsPerPage</name>
+		<value>10</value>
+		<read-only>false</read-only>
+	</preference>		
+    <preference>
+    	<name>showQuickEditButton</name>
+    	<value>true</value>	    	
+    	<read-only>false</read-only>
+    </preference>	
+	</portlet-preferences>
+</portlet-preferences-set>	

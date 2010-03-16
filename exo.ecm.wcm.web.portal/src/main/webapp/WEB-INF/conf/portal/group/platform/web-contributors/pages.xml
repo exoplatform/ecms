@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<page-set>  
+  
+  <page>
+  	<page-id>group::platform/web-contributors::wcm</page-id>
+  	<owner-type>group</owner-type>
+    <owner-id>platform/web-contributors</owner-id>
+    <name>wcm</name>
+    <access-permissions>*:/platform/web-contributors</access-permissions>
+    <edit-permission>manager:/platform/web-contributors</edit-permission>
+    
+    <application>
+      <instance-id>group#platform/users:/ecm/FileExplorerPortlet/siteExplorer</instance-id>
+      <title>Sites Explorer</title>
+      <show-info-bar>false</show-info-bar>
+    </application>  
+  </page>
+  
+  <page>
+  	<page-id>group::platform/web-contributors::SiteExplorer</page-id>
+  	<owner-type>group</owner-type>
+    <owner-id>platform/web-contributors</owner-id>
+    <name>SiteExplorer</name>
+    <access-permissions>*:/platform/web-contributors</access-permissions>
+    <edit-permission>manager:/platform/web-contributors</edit-permission>
+    
+    <application>
+      <instance-id>group#platform/users:/ecm/FileExplorerPortlet/siteExplorer</instance-id>
+      <title>Sites Explorer</title>
+      <show-info-bar>false</show-info-bar>
+    </application>  
+  </page>
+    
+  <page>
+  	<page-id>group::platform/web-contributors::WcmAdmin</page-id>
+  	<owner-type>group</owner-type>
+    <owner-id>platform/web-contributors</owner-id>
+    <name>WcmAdmin</name>
+    <access-permissions>manager:/platform/web-contributors</access-permissions>
+    <edit-permission>manager:/platform/web-contributors</edit-permission>
+    <application>
+      <instance-id>group#platform/web-contributors:/ecm/ECMAdminPortlet/ecmadmin</instance-id>
+      <title>Web Content Administration</title>
+      <show-info-bar>false</show-info-bar>      
+    </application>
+  </page>
+
+	<page>
+		<page-id>group::platform/web-contributors::newslettermanager</page-id>
+		<owner-type>group</owner-type>
+		<owner-id>platform/web-contributors</owner-id>
+		<name>newslettermanager</name>
+		<title>Newsletter Manager Portlet</title>
+		<access-permissions>*:/platform/web-contributors</access-permissions>
+		<edit-permission>manager:/platform/web-contributors</edit-permission>
+		<application>
+			<instance-id>group#platform/web-contributors:/newsletter/NewsletterManagerPortlet/acme-newslettermanager</instance-id>
+			<title>Newsletter Manager</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+
+	<page>
+		<page-id>group::platform/web-contributors::formgenerator</page-id>
+		<owner-type>group</owner-type>
+		<owner-id>platform/web-contributors</owner-id>
+		<name>formgenerator</name>
+		<title>Form Generator Portlet</title>
+		<access-permissions>manager:/platform/web-contributors</access-permissions>
+		<edit-permission>manager:/platform/web-contributors</edit-permission>
+		<application>
+			<instance-id>group#platform/web-contributors:/formgenerator/FormGeneratorPortlet/acme-fg</instance-id>
+			<title>Form Generator</title>
+			<show-info-bar>false</show-info-bar>
+			<show-application-state>false</show-application-state>
+			<show-application-mode>false</show-application-mode>
+		</application>
+	</page>
+	         
+</page-set>

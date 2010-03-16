@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <portal>
+    <acme>
+      <home>Trang chủ</home>
+      <news>Tin tức</news>
+      <services>Dịch vụ</services>
+      <search>Tìm kiếm</search>
+      <contact>Liên hệ</contact>
+      <about>Về chúng tôi</about>
+      <contentviewer>Ứng dụng hiển thị đơn nội dung</contentviewer>
+      <parameterizedviewer>Ứng dụng hiển thị nội dung theo tham số</parameterizedviewer>
+      <searchResult>Kết quả tìm kiếm</searchResult>
+      <printviewer>Ứng dụng hiện thị trang in</printviewer>
+      <products>Sản Phẩm</products>
+      <category>Category Navigation</category>
+      <pclv>Parameterized Content List Viewer</pclv>
+      <clv>Content List Viewer</clv>
+      <scv>Single Content Viewer</scv>
+      <pcv>Parameterized Content Viewer</pcv>
+      <sitemap>Site Map</sitemap>
+      <overview>Overview</overview>
+      <events>Events</events>
+      <newsletters>Newsletters</newsletters>
+      <publications>Publications</publications>
+      <presentation>Presentation</presentation>
+      <contactus>Contact Us</contactus>
+    </acme>
+  </portal>
+</bundle>
+

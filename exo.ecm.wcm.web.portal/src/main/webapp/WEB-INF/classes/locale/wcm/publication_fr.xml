@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <UIPublishingPanel>
+  <panelLeft>
+   <title>Ci-dessous sont les pages possibles où le contenu peut être affiché</title>
+  </panelLeft>
+  <panelRight>
+   <title>Ci-dessous sont les pages où le contenu est affiché</title>
+  </panelRight>
+  <currentPortal>
+   <title>Site courant</title>
+   <none>Aucun</none>
+  </currentPortal>
+  <currentNode>
+   <title>Noeud courant</title>
+   <none>Aucun</none>
+  </currentNode>
+ </UIPublishingPanel>
+ <UIPublicationComponentStatus>
+  <action>
+   <Close>Fermer</Close>
+  </action>
+ </UIPublicationComponentStatus>
+ <UIPopupWindow>
+  <title>
+   <UIPublicationContainer>Gérer la publication</UIPublicationContainer>
+   <UIPublishingPanel>Gérer la publication</UIPublishingPanel>
+  </title>
+ </UIPopupWindow>
+ <UITabPane>
+  <title>
+   <UIPublishingPanel>Panneau de publication</UIPublishingPanel>
+   <UIPublicationPanel>Publication de l'état</UIPublicationPanel>
+   <UIPublicationPagesContainer>Publication des pages</UIPublicationPagesContainer>
+   <UIPublicationHistory>Historique de Publication</UIPublicationHistory>
+   <UIVersionViewer>Visualiseur de version</UIVersionViewer>
+  </title>
+ </UITabPane>
+ <UIClvPopupContainer>
+  <title>
+   <UIClvPopupContainer>Conteneur de list de contenus</UIClvPopupContainer>
+   <UIPublishClvChooser>Choisir un bloc de contenus</UIPublishClvChooser>
+  </title>
+  <action>
+    <close>Fermer</close>
+   </action>
+ </UIClvPopupContainer>
+ <UIPublicationAction>
+  <msg>
+   <none>Aucun noeud de navigation sélectionné</none>
+   <duplicate>Le contenu a déjà été ajouté à la page</duplicate>
+   <wrongNode>Ceci n'est pas un noeud de page. Veuillez sélectionner un autre noeud.</wrongNode>
+  </msg>
+  <action>
+   <add>Publier le contenu dans la page</add>
+   <remove>Annuler la publication du contenu dans la page</remove>
+  </action>
+ </UIPublicationAction>
+ <UIPublishedPages>
+  <label>
+   <noitem>Ce contenu n'a été publié dans aucune page pour le moment</noitem>
+  </label>
+ </UIPublishedPages>
+ <UIPublicationPanel>
+  <button>
+   <close>Fermer</close>
+  </button>
+  <revisions>
+   <version>Versions</version>
+   <date>Date</date>
+   <author>Auteur</author>
+   <status>Etat</status>
+   <action>Action</action>
+   <label>Version</label>
+   <none>Aucune version</none>
+   <seeall>Voir toutes les versions</seeall>
+   <currentVersion>Version courante</currentVersion>
+   <confirm>Vous allez perdre votre brouillon, voulez-vous restaurer cette version et remplacer le brouillon courant ?</confirm>
+  </revisions>
+  <status>
+   <version>Révision</version>
+   <title>Etat</title>
+   <enrolled>Créé</enrolled>
+   <draft>Brouillon</draft>
+   <awaiting>En attente</awaiting>
+   <live>Publié</live>
+   <obsolete>Obsolète</obsolete>
+  </status>
+  <scheduled>
+   <title>Planifier</title>
+   <from>de</from>
+   <to>à</to>
+  </scheduled>
+  <title>
+   <preview>Prévisualiser</preview>
+   <restore>Restaurer</restore>
+  </title>
+  <msg>
+   <have-no-view-template>Le formulaire de consultation n'est pas supporté</have-no-view-template>
+   <restore-complete>Restauration complète</restore-complete>
+  </msg>
+ </UIPublicationPanel>
+ <UIPublicationHistory>
+  <header>
+   <date>La date</date>
+   <versionName>Le nom de version</versionName>
+   <currentState>L'état courant</currentState>
+   <user>L'auteur</user>
+   <description>La description</description>
+  </header>
+ </UIPublicationHistory>
+ 
+ <UIPublicationPanel>
+  <label>
+   <header>Le temps de publication</header>
+   <start>Début de la publication</start>
+   <end>Fin de la publication</end>
+  </label>
+  <action>
+   <Save>Sauver</Save>
+  </action>
+  <msg>
+   <invalid-format>Format incorrect. S'il vous plaît vérifier à nouveau</invalid-format>
+  </msg>
+ </UIPublicationPanel>
+</bundle>

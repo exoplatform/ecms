@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portlet-preferences-set>
+	<portlet-preferences>
+		<owner-type></owner-type>
+		<owner-id></owner-id>
+		<window-id>/web/SiteMapPortlet</window-id>
+		<preference>
+			<name>Sitemap</name>
+			<value>Preference value for Sitemap portlet</value>
+			<read-only>false</read-only>
+		</preference>
+	</portlet-preferences>
+</portlet-preferences-set>	

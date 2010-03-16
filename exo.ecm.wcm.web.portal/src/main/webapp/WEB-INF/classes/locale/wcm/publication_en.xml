@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <UIPublishingPanel>
+  <panelLeft>
+   <title>Below are the possible pages where the content can be shown</title>
+  </panelLeft>
+  <panelRight>
+   <title>Below are the pages where the content is shown</title>
+  </panelRight>
+  <currentPortal>
+   <title>Current site</title>
+   <none>None</none>
+  </currentPortal>
+  <currentNode>
+   <title>Current node</title>
+   <none>None</none>
+  </currentNode>
+ </UIPublishingPanel>
+ <UIPublicationComponentStatus>
+  <action>
+   <Close>Close</Close>
+  </action>
+ </UIPublicationComponentStatus>
+ <UIPopupWindow>
+  <title>
+   <UIPublicationContainer>Manage publication</UIPublicationContainer>
+   <UIPublishingPanel>Manage publication</UIPublishingPanel>
+  </title>
+ </UIPopupWindow>
+ <UITabPane>
+  <title>
+   <UIPublishingPanel>Publication Panel</UIPublishingPanel>
+   <UIPublicationPanel>Publication status</UIPublicationPanel>
+   <UIPublicationPagesContainer>Publication pages</UIPublicationPagesContainer>
+   <UIPublicationHistory>Publication history</UIPublicationHistory>
+   <UIVersionViewer>Version viewer</UIVersionViewer>
+  </title>
+ </UITabPane>
+ <UIClvPopupContainer>
+  <title>
+   <UIClvPopupContainer>Content list viewer popup container</UIClvPopupContainer>
+   <UIPublishClvChooser>Choose Content List Viewer portlet</UIPublishClvChooser>
+  </title>
+  <action>
+    <close>Close</close>
+   </action>
+ </UIClvPopupContainer>
+ <UIPublicationAction>
+  <msg>
+   <none>No page node is selected</none>
+   <duplicate>The content is already published to the page</duplicate>
+   <wrongNode>This is not a page node, please choose another one.</wrongNode>
+  </msg>
+  <action>
+   <add>Publish content to page</add>
+   <remove>Suspend content from page</remove>
+  </action>
+ </UIPublicationAction>
+ <UIPublishedPages>
+  <label>
+   <noitem>This content is not published in any page node yet</noitem>
+  </label>
+ </UIPublishedPages>
+ <UIPublicationPanel>
+  <button>
+   <Close>Close</Close>
+  </button>
+  <revisions>
+   <version>Revisions</version>
+   <date>Date</date>
+   <author>Author</author>
+   <status>Status</status>
+   <action>Action</action>
+   <label>Revision</label>
+   <none>No revisions</none>
+   <seeall>See all versions</seeall>
+   <currentVersion>current revision</currentVersion>
+   <confirm>You will lost your draft work, do you really want to restore this revision and replace the current revision ?</confirm>
+  </revisions>
+  <status>
+   <version>Revision</version>
+   <title>Status</title>
+   <enrolled>Enrolled</enrolled>
+   <draft>Draft</draft>
+   <awaiting>Awaiting</awaiting>
+   <published>Published</published>
+   <obsolete>Obsolete</obsolete>
+  </status>
+  <scheduled>
+   <title>Scheduled</title>
+   <from>from</from>
+   <to>to</to>
+  </scheduled>
+  <title>
+   <preview>Preview</preview>
+   <restore>Restore</restore>
+  </title>
+  <msg>
+   <have-no-view-template>View template of this is not supported</have-no-view-template>
+   <restore-complete>Restore completed</restore-complete>
+  </msg>
+ </UIPublicationPanel>
+ <UIPublicationHistory>
+  <header>
+   <date>Date</date>
+   <versionName>Revision name</versionName>
+   <currentState>Current state</currentState>
+   <user>Author</user>
+   <description>Description</description>
+  </header>
+ </UIPublicationHistory>
+ 
+ <UIPublicationPanel>
+  <label>
+   <header>Publication date time</header>
+   <start>Start publication</start>
+   <end>End publication</end>
+  </label>
+  <action>
+   <Save>Save</Save>
+  </action>
+  <msg>
+   <invalid-format>Invalid datetime format. Please check again</invalid-format>
+  </msg>
+ </UIPublicationPanel>
+</bundle>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <portal>
+    <classic>
+      <home>Accueil</home>
+      <dashboard>Dashboard</dashboard>
+      <presentation>Contenu simple</presentation>
+      <listViewer>Contenus multiples</listViewer>
+      <search>Recherche</search>
+      <searchResult>Résultats de recherche</searchResult>
+      <products>Produit</products>
+      <register>S'enregistrer</register>
+      <sitemap>Plan du site</sitemap>
+      <parameterizedviewer>Visualiseur de contenu paramétré</parameterizedviewer>
+      <viewer>Visualiseurs</viewer>
+			<categories>Catégories</categories>
+			<formgenerator>Form Generator</formgenerator>
+      <newsletter>Newsletter</newsletter>
+      <newsletterviewer>Newsletter Viewer</newsletterviewer>
+      <newslettermanager>Newsletter Gestionnaire</newslettermanager>
+      <printviewer></printviewer>
+      <newAccount>Nouveau compte</newAccount>
+    </classic>
+  </portal>
+</bundle>
+

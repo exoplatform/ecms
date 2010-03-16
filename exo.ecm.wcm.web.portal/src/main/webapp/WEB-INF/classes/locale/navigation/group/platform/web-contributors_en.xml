@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <administration>
+    <wcm>Sites Management</wcm>
+    <siteExplorer>Sites Explorer</siteExplorer>
+    <wcmAdmin>Sites Administration</wcmAdmin>
+    <newslettermanager>Newsletter Manager</newslettermanager>
+    <formgenerator>Form Generator</formgenerator>
+  </administration>
+</bundle>
+

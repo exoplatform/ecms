@@ -1,0 +1,227 @@
+/**
+  RTL skin for exo:article template
+*/
+.UIArticle {
+	background: white;
+	padding: 8px;
+	overflow: hidden;
+}
+	
+.UIArticle .ArticleTLDecorator {
+	background: url('/eXoDMSResources/skin/images/article/BackgroundArticle-rt.gif') no-repeat right top;
+	padding-right: 51px;
+}
+
+.UIArticle .ArticleTRDecorator {
+	background: url('/eXoDMSResources/skin/images/article/BackgroundArticle-rt.gif') no-repeat left top;
+	padding-left:154px;
+}
+
+.UIArticle .ArticleTCDecorator {
+	background: url('/eXoDMSResources/skin/images/article/BackgroundArticle.gif') repeat-x right -100px;
+	height: 100px;
+}
+
+.UIArticle .ArticleTCDecorator .TitleLabel {
+	padding-top: 38px;
+	font: normal bold 16px Arial;
+	color: #0467e2;
+	text-align: right;
+}
+
+.UIArticle .ArticleMLDecorator {
+	background: url('/eXoDMSResources/skin/images/article/MiddleLeftArticle3x1-rt.gif') repeat-y right;
+	padding-right: 3px;
+}
+
+.UIArticle .ArticleMCDecorator {
+	background: #fcfcfc;
+}
+
+.UIArticle .ArticleMRDecorator {
+	background: url('/eXoDMSResources/skin/images/article/MiddleRightArticle10x1-rt.gif') repeat-y left;
+	padding: 0px 3px 0px 10px;
+}
+
+.UIArticle .ArticleBLDecorator {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle-rt.gif') no-repeat right top;
+	padding-right: 3px;
+}
+
+.UIArticle .ArticleBCDecorator {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x right -8px;
+	height: 8px;
+	line-height: 8px;
+}
+
+.UIArticle .ArticleBRDecorator {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle-rt.gif') no-repeat left top;
+	padding-left: 10px ;
+}
+
+.UIArticle .ArticleFrame {
+	background: white;
+	padding: 0px 10px;
+}
+	
+.UIArticle .ArticleFrame .TopLeftArticleFrame {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle-rt.gif') no-repeat right -16px;
+	padding-right: 9px;
+}
+
+.UIArticle .ArticleFrame .TopRightArtictleFrame {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle-rt.gif') no-repeat left -16px;
+	padding-left: 2px;
+}
+
+.UIArticle .ArticleFrame .TopCenterArticleFrame {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') repeat-x left -32px;
+	height: 16px; 
+}
+
+.UIArticle .ArticleFrame .ArticleFrameContainer {
+	border: solid 1px #e0e0e0;
+	border-top: none;
+}
+
+.UIArticle .TopCenterArticleFrame .ArticleField {
+	padding: 0px 5px 0px 0px;
+	width: 120px;
+	background: #fff;
+	height: 16px;
+	float: right;
+}
+
+.UIArticle .MidlleLeftArticleFrame  {
+	background: white;
+}
+
+.UIArticle .FieldLabel {
+	float: right;
+	font-weight: bold;
+}
+
+.UIArticle  .FieldIcon {
+	float: right;
+	margin-left: 5px;
+	width: 16px; 
+	height: 16px;
+}
+
+.UIArticle .SummaryIcon {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -48px;
+}
+
+.UIArticle .AttachmentsIcon {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -64px;
+}
+
+.UIArticle .RatingIcon {
+	background: url('/eXoDMSResources/skin/images/article/Artitcle.gif') no-repeat right -64px;
+}
+
+.UIArticle .AttachmentsContainer .AttachmentsContentIcon {
+	background: url('/eXoDMSResources/skin/images/article/AttachmentsIcon.gif') no-repeat right top;
+	margin: 0px 3px 0px 5px;
+	padding-right: 18px;
+	height: 15px;
+	float: right;
+}
+
+.UIArticle .AttachmentsContainer .RemoveAttachments {
+	background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat right top;
+	margin: 0px 3px 0px 5px;
+	padding-right: 18px;
+	height: 16px;
+	cursor: pointer;
+}
+
+.UIArticle .ContentIcon {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -96px;
+}
+
+.UIArticle .LinksIcon {
+	background: url('/eXoDMSResources/skin/images/article/ImageArticle.gif') no-repeat right -80px;
+}
+
+.UIArticle .FieldContent {
+	padding: 1px 0px 5px 7px;
+	width: 90%;
+}
+
+.UIArticle .FieldContent .FieldContainerContent {
+	font: normal 11px Verdana;
+	background: white;
+	margin: 5px 5px 3px 2px;
+}
+
+.UIArticle .FieldContent .LabelContent{
+	padding: 5px 5px 0px 0px;
+	overflow: auto;
+	text-align: right;
+}
+
+.UIArticle .LabelContent p a {
+	color: #058EE6;
+	text-decoration: underline;
+}
+
+.UIArticle .DocumentRating {
+	margin-right: 150px;
+	width: 300px;
+} 
+
+.UIArticle .ContainerLinks {
+	border-top: dotted 1px #dcdcdc;
+	margin: 12px  10px 12px 3px;
+	padding: 5px;
+}
+
+.UIArticle .ContentLinks {
+	float: right;
+	width: 75px;
+}
+
+.UIArticle .WorkContentLinks {
+	float: right;
+	padding-right: 5px;
+}
+
+.UIArticle .Links div {
+	padding-bottom: 3px;
+}
+
+.UIArticle .Links a {
+	text-decortaion: none;
+	color: #058ee6;
+}
+
+.UIArticle .Links a:hover {
+	text-decortaion: underline;
+	color: orange;
+}
+
+.UIArticle .ArticleTCDecorator .Language {
+	text-align: right;
+	color: #7d7d7d;
+	padding: 12px 10px 0px 0px;
+	font-weight: bold;
+}
+
+.UIArticle  .Language a.LanguageTitle {
+	text-align: right;
+	color: #058ee6;
+	font-weight: normal;
+}
+
+.UIArticle  .Language a:hover.LanguageTitle {
+	text-align: right;
+	color: #ffa21d;
+	font-weight: normal;
+}
+
+.UIArticle  .Language a:hover.DefaultLanguageTitle {
+	text-align: right;
+	color: #ffa21d;
+	font-weight: bold;
+}

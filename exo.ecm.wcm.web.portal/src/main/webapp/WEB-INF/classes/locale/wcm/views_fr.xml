@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <WebLink>
+  <view>
+   <label>
+    <url>URL</url>
+    <description>Description</description>
+   </label>
+  </view>
+ </WebLink>
+
+ <SiteMetadata>
+  <view>
+   <label>
+    <title>Titre du site</title>
+    <description>Description du site</description>
+    <keywords>Mots clés du site</keywords>
+    <robots>Comportement des moteurs de recherche</robots>
+   </label>
+   <tooltip>
+    <add-edit>Ajouter/Editer une métadonnée</add-edit>
+    <cancel>Annuler</cancel>
+   </tooltip>
+   <action>
+    <add-edit>Ajouter/Editer</add-edit>
+    <cancel>Annuler</cancel>
+   </action>
+  </view>
+ </SiteMetadata>
+
+ <Category>
+  <view>
+   <label>Catégorie</label>
+	</view>
+ </Category>
+ 
+ <Tag>
+  <view>
+	 <label>Tag</label>
+	</view>
+ </Tag>
+</bundle>
