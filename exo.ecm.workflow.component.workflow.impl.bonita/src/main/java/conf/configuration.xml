@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+  <!--external-component-plugins>
+    <target-component>org.exoplatform.services.templates.velocity.VelocityService</target-component>
+    <component-plugin>
+      <name>par.resource.loader</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.workflow.impl.bonita.PARResourceLoaderImpl</type>
+      <description>resource loader for the velocity files inside a process archive</description>
+    </component-plugin>
+  </external-component-plugins-->
+</configuration>

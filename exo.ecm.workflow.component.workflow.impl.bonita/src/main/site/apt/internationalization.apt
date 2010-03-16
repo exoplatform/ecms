@@ -1,0 +1,20 @@
+Internationalization
+  
+  To display forms in a specific language according to the user's web browser 
+  configuration, you can write one properties file per language. eXo is able to
+  select the right file.
+
+  For that, just append the language to the file name.
+
+  <example:>
+
+  *default file: evaluation.properties
+  
+  *french file:  evaluation_fr.properties
+  
+  *spanish file: evaluation_es.properties
+  
+  etc..
+  
+  Refer to {{{http://ftp.ics.uci.edu/pub/ietf/http/related/iso639.txt}ISO-639}} for the representation of names of languages.
+  

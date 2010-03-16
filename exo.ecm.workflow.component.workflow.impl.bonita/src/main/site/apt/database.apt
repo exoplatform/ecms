@@ -1,0 +1,138 @@
+Changing the database provider
+  
+  eXo-Bonita is configured to work with HSQLDB out of the box. Although this
+  database has great features for development and demonstration purposes, it is
+  recommanded to use another one in production environments.
+  
+  We give in this section some information on how to change the database
+  backend. eXo-Bonita supports virtually any database that provides a JDBC
+  driver thanks to the abstraction level brought by Hibernate and the EJB
+  Container Managed Persistence. As an initiatory trail, we focus on PostgreSQL.
+  Configuration of other databases look the same, provided the appropriate JDBC
+  Connection URL and JDBC driver are brought.
+  
+  As eXo-Bonita is a bundle of many products, it is needed to change the
+  configuration in each one as follows.
+
+* Database configuration in the Workflow engine
+
+  In Bonita, the persistence is handled by the application server, thanks
+  to the EJB Container. This is why JOnAS configuration files need to be
+  changed. The required steps are:
+  
+  [[1]] Download the JDBC 3.0 driver matching your database vendor. For
+        PostgreSQL, the file can be found at {{http://jdbc.postgresql.org}}.
+        Copy this file to $JONAS_ROOT/lib/ext/ so that it can be retrieved by
+        JOnAS.
+        
+  [[1]] Rename $JONAS_ROOT/conf/bonita.properties to
+        $JONAS_ROOT/conf/bonita.properties.old.
+        
+  [[1]] JOnAS comes with predefined datasource configuration files, matching
+        many vendor databases. Retrieve the one corresponding to your vendor.
+        The one provided for PostgreSQL is named PostgreSQL1.properties. Create
+        a file named bonita.properties having the same content. The following
+        keys need to be customized:
+  
+--------------------------------------------------------------------------------
+datasource.name         bonita
+datasource.url          [Specify the host, port and database name information, eg:
+                        jdbc:postgresql://localhost:5432/mydb]
+datasource.username     [Specify the user name to connect with your database]
+datasource.password     [Specify the corresponding password]
+--------------------------------------------------------------------------------
+  
+  For more information on datasource configuration, we recommand reading the
+  "Configuring JDBC DataSources" section in the
+  {{{http://wiki.jonas.objectweb.org}JOnAS user documentation}}.
+  
+* Database configuration in the Portal
+
+  In eXo Platform, you need to change the configuration file of the database
+  service. The required steps are:
+  
+  [[1]] With a zip utility, extract the file
+        $JONAS_ROOT/apps/autoload/exoplatform.ear/ecm.war in a temporary
+        directory.
+
+  [[1]] Edit the content of the extracted file
+        WEB-INF/conf/database-configuration.xml as follows:
+
+--------------------------------------------------------------------------------
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+  ...
+  
+  <component> 
+    ...
+    <init-params>
+      <properties-param>
+        ...
+        <property name="hibernate.connection.url" value="[Specify the database connection URL, eg: jdbc:postgresql://localhost:5432/mydb. This should be the same as the one used in bonita.properties.]"/>
+        <property name="hibernate.connection.driver_class" value="[Specify the JDBC driver class, eg: org.postgresql.Driver]"/>
+        ...
+        <property name="hibernate.connection.username" value="[Specify the user name used to connect with your database]"/>
+        <property name="hibernate.connection.password" value="[Specify the corresponding password]"/>
+        <property name="hibernate.dialect" value="[Specify the Hibernate database dialect, eg: org.hibernate.dialect.PostgreSQLDialect]"/>
+        ...
+      </properties-param>
+    </init-params>
+  </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.naming.InitialContextInitializer</target-component>
+    <component-plugin>
+      ...
+      <init-params>
+        ...
+        <properties-param>
+          ...
+          <property name="driverClassName" value="[Specify the JDBC driver class, eg: org.postgresql.Driver]"/>
+          <property name="url" value="[Specify the database connection URL, eg: jdbc:postgresql://localhost:5432/mydb. This should be the same as the one used in bonita.properties.]"/>
+          <property name="username" value="[Specify the user name used to connect with your database]"/>              
+          <property name="password" value="[Specify the corresponding password]"/>
+          ...
+        </properties-param>
+      </init-params>       
+    </component-plugin>
+
+    <component-plugin>
+      ...
+      <init-params>
+        ...
+        <properties-param>
+          ...
+          <property name="driverClassName" value="[Specify the JDBC driver class, eg: org.postgresql.Driver]"/>
+          <property name="url" value="[Specify the database connection URL, eg: jdbc:postgresql://localhost:5432/mydb. This should be the same as the one used in bonita.properties.]"/>
+          <property name="username" value="[Specify the user name used to connect with your database]"/>
+          <property name="password" value="[Specify the corresponding password]"/>
+          ...
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.database.jdbc.DBSchemaCreator</target-component>
+    <component-plugin>
+      ...
+      <init-params>
+        ...
+        <value-param>
+          <name>script-file</name>
+          <value>[Specify the path to the JDBC script matching your database, in conf/storage/]</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>
+--------------------------------------------------------------------------------
+
+  [[1]] Recreate ecm.war to take into account the modified configuration file.
+        You might want to backup the original ecm.war in
+        $JONAS_ROOT/apps/autoload/exoplatform.ear/ before replacing it.
+
+  For more information on database configuration, we recommand reading the
+  {{{../exo-platform.site/hibernate.html}eXo Platform database configuration section}}
+  and the {{{../exo-jcr.site/dbcontainer.html}eXo Platform JCR configuration section}}
+  in this site.

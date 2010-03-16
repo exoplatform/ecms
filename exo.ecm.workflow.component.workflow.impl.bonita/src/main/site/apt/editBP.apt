@@ -1,0 +1,120 @@
+How to edit a Business Process in the JCR
+
+
+   Every business process deployed is automatically stored in the JCR.
+   All the information can be found in the production workspace, in the "business processes" folder. 
+   The path is jcr:system/exo:ecm/business processes
+    
+[images/editBP1.jpg]
+ 
+* View business processes files
+ 
+  By default the business processes are hidden. This is because the ECM Explorer only shows nodes which are
+  considered as documents in the enterprise.
+ 
+[images/editBP2.jpg]
+ 
+ You need to change the display preferences to see them.
+
+
+
+  - Click on the "preferences" icon
+
+[images/pref.jpg]
+
+
+  The preferences panel is displayed
+  
+[images/editBP3.jpg]
+
+  
+  - check "Show non document type" as above
+  
+  
+  - Save
+  
+  
+   Now you can see every business processes stored in the JCR.
+   
+   
+[images/bp_list.jpg]
+
+   
+  - Click on a business process icon
+  
+  
+  - Select which type of file you want to view "Properties" or "XML".
+   
+      
+[images/editBP4.jpg]
+
+
+   In the "Properties" section you will find *.properties *.vm files, in "XML" section forms.xml and *.XPDL files.
+
+ 
+ 
+* Edit a business process
+
+  The best way to explain how to edit a BP is to see an example. In the following 
+  we are going to change a component in the first "holiday" business process form.
+  
+  <<What we have>>: "end" attribute is associated to a "date" type component
+  
+[images/holiday_old.jpg]
+
+  <<What we want>>: a textarea component
+  
+[images/holiday_new.jpg]
+
+  
+  - First, be sure to select the "admin-view" mode.
+  
+  
+[images/editBP5.jpg]
+
+
+
+  - Click on the pen icon to edit "holiday" BP.
+  
+
+[images/editBP6.jpg]
+
+
+  
+  - Click on "XML" and go to "forms.xml" file.
+  
+  
+  - Change this
+  
+--------------------------------------------------------------------------------
+       <variable name="end" component="date"/>
+--------------------------------------------------------------------------------
+
+  to 
+  
+--------------------------------------------------------------------------------  
+       <variable name="end" component="textarea"/>
+--------------------------------------------------------------------------------       
+       
+       
+  - Click on "save"
+  
+  
+  - <<IMPORTANT:>> You have to commit all changes by clicking on the little floppy disk
+    as shown here.
+
+
+[images/editBP7.jpg]
+
+
+* Make change effective in Bonita
+
+  At this point all the changes made in the BP are commited in the JCR, we now need 
+  to make change effective in bonita. For that simply start the "reload" action.
+
+[images/editBP8.jpg]
+
+
+  Then go to the workflow porlet and start "holiday" BP, the "end date" component should have changed.
+  Please note that the component type should also be changed in subsequent Workflow dialogs to avoid
+  conversion errors.

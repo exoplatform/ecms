@@ -1,0 +1,51 @@
+Resource bundle 
+  
+  You can associate an activity to a resource-bundle and customize the 
+  form display. You have to define a file .properties for each activity 
+  requiring a form.
+
+  For example, in forms.xml the tag:
+
+---------------------------------------------
+<resource-bundle>evaluation</resource-bundle>
+---------------------------------------------
+
+  refers to a file named "evaluation.properties" in src/conf directory.
+
+
+ * evaluation.properties file:
+
+--------------------------------------------------------------------------------
+# information used for the "workflow" portlet's display.
+task-name=evaluate holidays
+title=evaluate holidays
+
+# the next two lignes are required for bonita
+submit.submit=Submit
+submit.value=Submit
+
+# variable label
+initiator.label=Initiator :
+start.label=Start (dd/mm/yyyy) :
+end.label=End (dd/mm/yyyy) :
+
+# "decision" attribut is an enumerate type used with a radiobox component.
+# it can takes three values: "Approve", "Disapprove" and "Refuse" as (defined
+# in the xpdl).
+decision.label=Decision:
+decision.radiobox-0=Approve
+decision.radiobox-1=Disapprove
+decision.radiobox-2=Refuse
+-------------------------------------------------------------------------------
+
+
+  How we use the attribute "decision" is a perfect example of how to manage decisions
+  in eXo Bonita.
+
+  In Bonita decisions are made in activities and not in edges. You have to define an
+  attribute which contains the decision value (which activity will be the next one) and then
+  make conditional transitions to the others activities.
+
+  As we saw previously, the value of the attribute can be set by the user in the Form or
+  set programmatically by a hook.
+

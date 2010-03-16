@@ -1,0 +1,30 @@
+Directory structure
+
+  
+
+
+
+  The directory structure for the example is:
+  
+--------------------------------------------------------------
+/holiday-standalone/
+                    src/conf
+                    src/java/hero/hook
+                  
+--------------------------------------------------------------
+  src/conf contains configuration files used during the deployment of the process in eXo, that is:
+  
+        - processdefinition.xpdl is the description of the workflow model in XPDL
+        
+        - forms.xml is the description of the forms
+        
+        - resource bundles files (*.properties) contains textual information that can be translated
+          in other languages
+
+  java/hook: contains Bonita hooks. A Bonita hook is a kind of callback invoked by the engine during
+  the execution of a Workflow process.
+
+  You will implement those files soon. The root directory also contains a standalone version of Bonita
+  implementation artifact. Refer to the readme file included in the example for more details.
+
+

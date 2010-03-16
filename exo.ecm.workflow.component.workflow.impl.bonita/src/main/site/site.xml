@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+  <bannerLeft>
+    <src>http://www.exoplatform.com/resources/community/images/banner-left-390x69.jpg</src>
+    <href>http://www.exoplatform.org/</href>  
+  </bannerLeft>
+  <bannerRight>
+    <name>eXo Bonita</name>
+    <src>images/logoexobonita.jpg</src>
+  </bannerRight>
+  <body>
+    <links>
+      <item name="Home" href="../exo.site/index.html"/>
+      <item name="ObjectWeb Forge" href="http://forge.objectweb.org/projects/exoplatform" />
+      <item name="Community Portal" href="http://www.exoplatform.org"/>
+      <item name="Company Portal" href="http://www.exoplatform.com"/>
+      <item name="Bonita" href="http://bonita.objectweb.org"/>
+    </links>
+
+    <menu name="eXo Bonita">
+      <item name="Introduction" href="index.html"/>
+      <item name="What you will be able to do after reading" href="abletodo.html"/>
+    </menu>
+
+    <menu name="Workflow package creation tutorial">
+      <item name="Create a workflow package" href="create.html"/>
+      <item name="Directory structure" href="directory.html"/>
+      <item name="Maven build descriptor" href="maven.html"/>
+      <item name="Process Definition (XPDL)" href="process.html"/>
+      <item name="Hooks" href="hooks.html"/>
+      <item name="Roles" href="roles.html"/>
+      <item name="Forms defintion" href="forms.html"/>
+      <item name="Resource bundle" href="resourcebundle.html"/>
+      <item name="Internationalization" href="internationalization.html"/>
+      <item name="Packaging" href="packaging.html"/>
+    </menu>
+    
+    <menu name="Workflow portlets">
+      <item name="Introduction" href="../exo-ecm.portlets.workflow/index.html"/>
+      <item name="Get the Workflow portlets" href="../exo-ecm.portlets.workflow/get.html"/>
+      <item name="Upload and Start process" href="../exo-ecm.portlets.workflow/startproc.html"/>
+      <item name="Manage process" href="../exo-ecm.portlets.workflow/manage.html"/>
+    </menu>
+    
+    <menu name="Bonita Business Processes">
+      <item name="Content Backup" href="../exo-ecm.business-process.content-backup.bonita/index.html"/>
+      <item name="Content Validation" href="../exo-ecm.business-process.content-validation.bonita/index.html"/>
+      <item name="Holiday" href="../exo-ecm.business-process.holiday.bonita/index.html"/>
+      <item name="Pay raise" href="../exo-ecm.business-process.payraise.bonita/index.html"/>    
+    </menu>
+
+    <menu name="Advanced topics">
+      <item name="Database configuration" href="database.html"/>
+      <item name="Linking with eXo users" href="users.html"/>
+      <item name="Bonita tools" href="bonitatools.html"/>
+      <item name="Edit BP definitions in the JCR" href="editBP.html"/>
+    </menu>
+
+    ${reports}
+  </body>
+</project>

@@ -1,0 +1,47 @@
+Roles
+  
+  BONITA roles are related to activities access in processes. Each Process has its specific role 
+  management. This allows to have different semantics associated to the same role name in the 
+  scope of two different processes. 
+  
+  Activities are associated to roles, that is each activity can be taken over only by a user 
+  assuming a given role. There is a single role associated to each activity. 
+  Users participate to a project, and in the scope of this project, a user can assume one or 
+  several roles. 
+
+  
+  Four types of roles are defined: 
+  
+  - all users in a group
+  
+  - initiator of the workflow project instance
+  
+  - user known by his exo's login
+  
+  - system: to execute automatic ativity
+  
+  
+  We saw how to use the first two types of users in the xpdl part of the
+  document. To define a user known by his eXo login, set his type to HUMAN
+  and his name to the login you want to use.
+  
+  The last role define is "SYSTEM", usually it is automatically created when you 
+  define  an automatic activity in your xpdl editor. 
+ 
+
+
+*---------*----------*-----------*-----------------------*---------------*
+ <<Name>> | <<Type>> | <<Value>> | <<Extented Attribute>> | <<RoleMapper>>
+*---------*----------*-----------*-----------------------*---------------*
+ initiator | Role | Properties | Yes | No
+*----------*------*------------*-----*----*
+ exoadmin | Human | Name of the eXo account | No | No
+*----------*---------*------------*-----*----*
+ member:/compagny/hr | Role | hero.mapper.ExoOrganizationMapper | Yes | Yes
+*--------------------*------*-----------------------------------*-----*----*
+ SYSTEM | Automatic | N/A | No | No
+*-------*-----------*-----*----*---*
+Role Summary
+
+
+ 

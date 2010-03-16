@@ -1,0 +1,42 @@
+Linking with eXo users
+  
+  One added value of eXo-Bonita is to allow leveraging the eXo Organization service from the Workflow.
+  That way, administrators have a unified user repository. In addition, users Portals don't have to
+  sign on twice when working with the Workflow Portlets. Two bridges are provided when designing Workflow
+  models.
+
+User base
+
+  The first bridge is a user base. A Bonita user base is a class that allows retrieving user information
+  from the environment. eXo-Bonita provides a specific implementation that connects with the Portal Organization
+  service. The name of the corresponding class is org.exoplatform.services.workflow.impl.bonita.ExoUserBase.
+
+  The following code snippet illustrates how to use this class from a Bonita Hook.
+
+--------------------------------------------------------------------------------
+      /*
+       * Retrieve a reference to the User Base service in Bonita. This
+       * service communicates with eXo to retrieve information on users.
+       */
+      UserBaseService userBaseService = UserBaseService.getInstance();
+      UserBase userBase = (UserBase) userBaseService.getUserBases().toArray()[0];      
+      
+      // Retrieve workflow session creator
+      String userName = projectSession.getCreator();
+
+      // Retrieve the email address from eXo and store it in a Workflow Property
+      String emailAddress = (String) userBase.getUserInfos(userName).get("email");
+      projectSession.setProperty("Email_address", emailAddress);
+--------------------------------------------------------------------------------
+
+  This code basically retrieves the name of the user who created the current Process Instance, fetches his
+  email address from the eXo Organization service and finally stores it in a Workflow Property.
+
+eXo Organization Role Mapper
+
+  Another bridge available is the eXo Organization Role Mapper. It allows to
+  map Bonita roles with eXo groups. When designing the Workflow model in XPDL, it makes it possible to
+  directly reference eXo groups, such as "member:/company/direction". The name of the corresponding class to use is
+  hero.mapper.ExoOrganizationMapper.
+
+[]

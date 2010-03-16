@@ -1,0 +1,35 @@
+Create a workflow package tutorial
+
+  The following is a tutorial that shows how to create a workflow package deployable in eXo
+  and that models a sample procedure to approve holidays. This workflow is a basic example
+  and covers fundamental aspects that can be reused while developing your own business processes
+  in eXo.
+  
+  The tutorial describes all the steps to reproduce and compile the example. The final source tree
+  to be obtained is available at {{{holiday-standalone.zip}here}}.
+  
+  Note: this workflow's name is "holiday business process standalone", so you could 
+  load it even if you already have the "holiday" Business Process bundled by default in eXo.
+  
+  
+
+  The guide is divided in nine part: 
+
+  [[1]] {{{directory.html}Directory structure}}
+  
+  [[1]] {{{maven.html}Maven build descriptor}}
+  
+  [[1]] {{{process.html}Process Definition (XDPDL)}}
+  
+  [[1]] {{{hooks.html}Hooks}}
+  
+  [[1]] {{{roles.html}Roles}}
+  
+  [[1]] {{{forms.html}Forms definition}}
+  
+  [[1]] {{{resourcebundle.html}Resource bundles}}
+  
+  [[1]] {{{internationalization.html}Internationalization}}
+  
+  [[1]] {{{packaging.html}Packaging}}
+  
