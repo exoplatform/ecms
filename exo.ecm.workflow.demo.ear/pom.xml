@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecm.workflow</groupId>
+    <artifactId>demo</artifactId>
+    <version>2.0.0-Beta02-SNAPSHOT</version>
+  </parent>
+  <groupId>org.exoplatform.ecm.workflow.demo</groupId>
+  <artifactId>exo.ecm.workflow.demo.ear</artifactId>
+  <packaging>ear</packaging>
+  <name>eXo WORKFLOW Demo EAR for GateIn</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.ecm.workflow.demo</groupId>
+      <artifactId>exo.ecm.workflow.demo.config</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecm.workflow.demo</groupId>
+      <artifactId>exo.ecm.workflow.demo.webapp</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>gatein-exo-workflow-${project.version}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <configuration>
+          <displayName>ecmworkflow-demo</displayName>
+          <defaultLibBundleDir>lib</defaultLibBundleDir>
+          <modules>
+            <jarModule>
+              <groupId>org.exoplatform.ecm.workflow.demo</groupId>
+              <artifactId>exo.ecm.workflow.demo.config</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <webModule>
+              <groupId>org.exoplatform.ecm.workflow.demo</groupId>
+              <artifactId>exo.ecm.workflow.demo.webapp</artifactId>
+              <contextRoot>ecmworkflowdemo</contextRoot>
+            </webModule>
+          </modules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
