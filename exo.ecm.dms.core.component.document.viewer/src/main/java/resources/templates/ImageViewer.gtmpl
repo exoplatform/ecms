@@ -1,0 +1,78 @@
+<%
+	import java.util.List;
+	import java.util.ArrayList;
+	import javax.jcr.Node;
+	import javax.jcr.NodeIterator;
+	import org.exoplatform.webui.core.UIComponent;
+  import org.exoplatform.services.jcr.util.Text;
+
+	UIComponent uiParent = uicomponent.getParent();
+	
+	public boolean isVersionable(Node node) throws Exception {
+    return node.isNodeType("mix:versionable");
+  }	
+
+	public Node getFileLangNode(Node currentNode) throws Exception {
+    if(currentNode.isNodeType("nt:unstructured")) {
+      if(currentNode.getNodes().getSize() > 0) {
+        NodeIterator nodeIter = currentNode.getNodes() ;
+        while(nodeIter.hasNext()) {
+          Node ntFile = nodeIter.nextNode() ;
+          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+            return ntFile ;
+          }
+        }
+        return currentNode ;
+      }
+    }
+    return currentNode ;
+  }
+
+  def originalNode = uiParent.getOriginalNode();
+  def currentNode = getFileLangNode(uiParent.getNode()) ;
+  def contentNode = currentNode.getNode("jcr:content") ;
+  def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  List<String> unsupportMimeTypeText = new ArrayList<String>();
+  unsupportMimeTypeText.add("text/rtf");
+  public String formatNodeName(String text) {
+    return text.replaceAll("'", "\\\\'") ;
+  }
+  
+  public long getFileSize(Node contentNode) throws Exception {
+    long size = contentNode.getProperty("jcr:data").getLength()/1024;      	        
+    return size;
+  }
+  
+  String rndString = String.valueOf(new Date().getTime());
+//  String imgSrc = "";
+//  if(isVersionable(originalNode)) {
+	String imgSrc = uiParent.getDownloadLink(currentNode) ;
+//	} else {
+//	  imgSrc = "/" + uiParent.getPortalName() + "/rest/jcr/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + currentNode.getPath();
+//	} 
+	def dcTitle = "";
+	if(contentNode.hasProperty("dc:title")) {
+    StringBuilder sB = new StringBuilder();
+	  def i=0;
+	  for(title in contentNode.getProperty("dc:title").getValues()) {
+		  if (i > 0) sB.append("; ");
+			sB.append(title.getString());
+			i++;			        	    
+		}
+	  dcTitle=sB.toString();
+  }
+  
+  def rqcontext = _ctx.getRequestContext() ;
+  rqcontext.getJavascriptManager().addOnLoadJavascript('initLightbox');
+%>
+<div class="NavigationContainer">       
+  <div class="TopTitle"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></div>
+	<div class="Content">
+  	<div class="TextContent">
+		  <div class="ContentDetail">
+			  <a href="$imgSrc" rel="lightbox" title="$dcTitle"><image src="$imgSrc"/></a>              
+			</div>
+		</div>
+	</div>
+</div>
+		
