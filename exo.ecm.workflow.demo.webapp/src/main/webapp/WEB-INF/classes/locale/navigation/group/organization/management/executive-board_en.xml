@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+	  <organization>
+  	<title>Organization</title>
+    <newstaff>New Staff</newstaff>
+    <management>Users and groups management</management>
+  </organization>
+  <contentAdministration>
+    <WorkflowAdministration>Business Process Admin</WorkflowAdministration>
+  </contentAdministration>
+</bundle>
+

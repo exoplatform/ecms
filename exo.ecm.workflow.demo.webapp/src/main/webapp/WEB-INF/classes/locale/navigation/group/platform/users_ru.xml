@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################
+  -->
+  <platform>
+    <users>
+      <iframe>IFrame</iframe>
+			<mylink>ÐÐ¾Ð¸ ÑÑÑÐ»ÐºÐ¸</mylink>
+			<mylink-blog>Blog</mylink-blog>
+			<mylink-google>Google</mylink-google>
+			<mylink-facebook>Facebook</mylink-facebook>
+      <businessprocess>
+        <title>Business Process</title>
+        <controller>Business Process Controller</controller>
+      </businessprocess>
+      <sitemap>Карта сайта</sitemap>
+    </users>
+  </platform>
+</bundle>
+

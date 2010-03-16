@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################
+  #      WARNING THIS FILE MUST BE ENCODED IN UTF-8 FORMAT          #
+  ###################################################################
+  -->
+  <platform-guests>
+    <register>S'enregistrer</register>
+    <link>Lien</link>
+    <sitemap>Plan du Site</sitemap>
+  </platform-guests>
+</bundle>
+

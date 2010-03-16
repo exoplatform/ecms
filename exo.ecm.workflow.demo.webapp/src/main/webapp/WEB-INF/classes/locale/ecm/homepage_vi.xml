@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <Homepage>
+    <ecm>
+      <label>
+        <slogan>"Công việc là một chu trình khép kín"</slogan>
+        <productIntro></productIntro>
+        <instructionTitle>Thử nghiệm eXo Workflow với những tài khoản người dùng sẵn có sau</instructionTitle>
+        <admin>Quản trị</admin>
+        <userName>Tên đăng nhập</userName>
+        <password>Mật khẩu</password>
+        <manager>Quản lý</manager>
+        <hr-manager>Nhân lực</hr-manager>
+        <user>Người dùng</user>
+        <demo>Thử nghiệm</demo>
+      </label>
+    </ecm>
+  </Homepage>
+</bundle>
+

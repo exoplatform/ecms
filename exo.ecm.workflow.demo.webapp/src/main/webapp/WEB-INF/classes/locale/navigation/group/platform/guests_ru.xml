@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <platform-guests>
+    <register>Регистрация</register>
+    <link>ссылка</link>
+    <sitemap>Карта сайта</sitemap>
+  </platform-guests>
+</bundle>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <platform>
+    <users>
+      <iframe>IFrame</iframe>
+      <sitemap>Sơ đồ trang</sitemap>
+      <mylink>Liên kết của tôi</mylink>
+			<mylink-blog>Blog</mylink-blog>
+			<mylink-google>Google</mylink-google>
+			<mylink-facebook>Facebook</mylink-facebook>
+      <businessprocess>
+        <title>Quá trình nghiệp vụ</title>
+        <controller>Quản lý quá trình nghiệp vụ</controller>
+      </businessprocess>
+      <sitemap>Bản đồ site</sitemap>
+    </users>
+  </platform>
+</bundle>
+

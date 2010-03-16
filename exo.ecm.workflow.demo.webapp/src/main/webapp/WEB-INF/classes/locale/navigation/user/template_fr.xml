@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################
+  #      WARNING THIS FILE MUST BE ENCODED IN UTF-8 FORMAT          #
+  ###################################################################
+  -->
+  <home>Accueil</home>
+  <register>S'enregistrer</register>
+  <sitemap>Plan du Site</sitemap>
+  <news>Actualités</news>
+  <ideas>
+    Idées
+    <read>Consulter les Idées</read>
+    <write>Proposer des Idées</write>
+  </ideas>
+  <welcome>Centre d'Accueil</welcome>
+</bundle>
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.services.cms.publication.PublicationService			 #
+  ################################################################################
+  -->
+  <PublicationService>
+    <test>
+      <test>Test FR</test>
+    </test>
+    <StaticAndDirectPublicationPlugin>
+      <nodePublished>Le noeud a été publié en version %s et avec la visibilité %s</nodePublished>
+      <nodeUnpublished>Le noeud a été dépublié</nodeUnpublished>
+      <nodeNotPublished>Ce document n'est pas publié</nodeNotPublished>
+      <versionPublishedWithLabel>La version %s (labellée %s) est actuellement publiée.</versionPublishedWithLabel>
+      <versionPublishedWithoutLabel>La version %s est actuellement publiée.</versionPublishedWithoutLabel>
+      <visibilityPublic>Sa visibilité est publique. Tous les utilisateurs peuvent consulter ce document.</visibilityPublic>
+      <visibilityPrivate>Sa visibilité est privée. Seuls les utilisateurs authorisés peuvent consulter ce document.</visibilityPrivate>
+    </StaticAndDirectPublicationPlugin>
+  </PublicationService>
+</bundle>
+

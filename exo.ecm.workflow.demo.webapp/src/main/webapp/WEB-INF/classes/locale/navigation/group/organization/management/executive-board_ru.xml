@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+	<organization>
+  	<title>ÐÐ¾Ð»ÑÐ·Ð¾Ð²Ð°ÑÐµÐ»Ð¸</title>
+    <newstaff>ÐÐ¾Ð±Ð°Ð²Ð¸ÑÑ</newstaff>
+    <management>Ð£Ð¿ÑÐ°Ð²Ð»ÐµÐ½Ð¸Ðµ</management>
+  </organization>
+  <contentAdministration>
+    <WorkflowAdministration>Администрирование бизнесс процессов</WorkflowAdministration>
+  </contentAdministration>
+</bundle>
+
+

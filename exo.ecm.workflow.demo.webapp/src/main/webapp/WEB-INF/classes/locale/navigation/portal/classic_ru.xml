@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <portal>
+    <classic>
+      <home>Домой</home>
+		  <sitemap>Карта Сайта</sitemap>
+    </classic>
+  </portal>
+  <register>Регистрация</register>
+  <welcome>Welcome Center</welcome>
+</bundle>
+
