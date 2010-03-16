@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Nhận nhân sự</task-name>
+  <title>Nhận nhân sự</title>
+  <submit>Đọc</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Người yêu cầu kì nghỉ</title>
+    <label>Người khởi tạo :</label>
+  </initiator>
+  <start>
+    <title>Bắt đầu kỳ nghỉ :</title>
+    <label>Bắt đầu (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <title>Kết thúc kỳ nghỉ :</title>
+    <label>Kết thúc (dd/mm/yyyy) :</label>
+  </end>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Evaluer les congés</task-name>
+  <title>Evaluer les congés</title>
+  <approve>
+    <submit>Approuver</submit>
+    <value>Approuver les congés</value>
+  </approve>
+  <disapprove>
+    <submit>Désapprouver</submit>
+    <value>Désapprouver les congés</value>
+  </disapprove>
+  <refuse>
+    <submit>Refuser</submit>
+    <value>Refuser les congés</value>
+  </refuse>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Qui demande des congés</title>
+    <label>Initiateur :</label>
+  </initiator>
+  <start>
+    <title>Début des congés :</title>
+    <label>Début (jj/mm/aaaa) :</label>
+  </start>
+  <end>
+    <title>Fin des congés :</title>
+    <label>Fin (jj/mm/aaaa) :</label>
+  </end>
+  
+  <grant>
+    <submit>Grant</submit>
+    <value>Grant Pay Raise</value>
+  </grant>
+  <deny>
+    <submit>Deny</submit>
+    <value>Deny Pay Raise</value>
+  </deny>
+  <reason>
+    <title>Reason given by the initiator</title>
+    <label>Reason :</label>
+  </reason>
+  <amount-asked>
+    <title>Amount asked :</title>
+    <label>Amount :</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Amount granted :</title>
+    <label>Grant :</label>
+  </amount-granted>
+  <priority>
+    <title>Set the priority</title>
+    <label>Priority:</label>
+  </priority>
+  <rewarded>
+    <title>Was the initiator rewarded</title>
+    <label>Rewarded:</label>
+    <checkbox>Yes the initiator was rewarded!</checkbox>
+  </rewarded>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

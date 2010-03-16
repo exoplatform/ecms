@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Cập nhật các ngày nghỉ</task-name>
+  <title>Cập nhật các ngày nghỉ</title>
+  <submit>
+    <submit>Điều chỉnh</submit>
+    <value>Điều chỉnh các ngày nghỉ</value>
+  </submit>
+  <cancel>
+    <submit>Không đồng ý</submit>
+    <value>Không đồng ý</value>
+  </cancel>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <title>Bắt đầu ngày nghỉ :</title>
+    <label>Bắt đầu (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <title>Kết thúc ngày nghỉ :</title>
+    <label>Kết thúc (dd/mm/yyyy) :</label>
+  </end>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

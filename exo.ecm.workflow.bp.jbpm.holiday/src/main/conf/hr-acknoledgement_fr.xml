@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Accusé de réception RH</task-name>
+  <title>Accusé de réception RH</title>
+  <submit>Lire</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Qui demande les congés</title>
+    <label>Initiateur :</label>
+  </initiator>
+  <start>
+    <title>Début des congés :</title>
+    <label>Début (jj/mm/aaaa) :</label>
+  </start>
+  <end>
+    <title>Fin des congés :</title>
+    <label>Fin (jj/mm/aaaa) :</label>
+  </end>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

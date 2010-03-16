@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Assigner un remplacement</task-name>
+  <title>Assigner un remplacement</title>
+  <submit>Assigner</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Qui demande les congés</title>
+    <label>Initiateur :</label>
+  </initiator>
+  <start>
+    <title>Début des congés :</title>
+    <label>Début (jj/mm/aaaa) :</label>
+  </start>
+  <end>
+    <title>Fin de congés :</title>
+    <label>Fin (jj/mm/aaaa) :</label>
+  </end>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>HR acknowledgement</task-name>
+  <title>HR acknowledgement</title>
+  <submit>Read</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Who asked for vacations</title>
+    <label>Initiator :</label>
+  </initiator>
+  <start>
+    <title>Start of vacations :</title>
+    <label>Start (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <title>End of vacations :</title>
+    <label>End (dd/mm/yyyy) :</label>
+  </end>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+
