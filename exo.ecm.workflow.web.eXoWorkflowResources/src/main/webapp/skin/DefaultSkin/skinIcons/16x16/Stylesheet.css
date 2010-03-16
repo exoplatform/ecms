@@ -1,0 +1,730 @@
+/**
+ * Created by The eXo Platform SARL
+ * Modif : Tran The Trong
+ *          trongtt@gmail.com
+ * March 14, 2007
+ * version: $Id$
+ */
+ 
+/*************************** NodeType Icon ***********************/
+
+.CBDefaultFolder16x16Icon {
+  background: url('icons/NodeTypes/DefaultFolderIcon.gif') no-repeat;
+}
+
+.SelectFolder16x16Icon  {
+  background: url('icons/NodeTypes/SmallSelectFolderIcon.gif') no-repeat;
+}
+
+.NormalFolder16x16Icon  {
+  background: url('icons/NodeTypes/SmallNormalFolderIcon.gif') no-repeat;
+}
+
+.CBDefaultDocument16x16Icon {
+  background: url('icons/NodeTypes/DefaultDocumentIcon.gif') no-repeat;
+}
+
+.default16x16Icon {
+  background: url('icons/NodeTypes/default.gif') no-repeat;  
+  width: 16px; height: 16px;
+}
+
+.dc_elementSet16x16Icon {
+  background: url('icons/NodeTypes/dc-elementSet.gif') no-repeat;  
+}
+
+.exo_sample16x16Icon {
+  background: url('icons/NodeTypes/default.gif') no-repeat;  
+}
+
+.exo_accessControllable16x16Icon {
+  background: url('icons/NodeTypes/exo-accessControllable.gif') no-repeat;  
+}
+
+.exo_action16x16Icon {
+  background: url('icons/NodeTypes/exo-action.gif') no-repeat;  
+}
+
+.exo_actionable16x16Icon {
+  background: url('icons/NodeTypes/exo-actionable.gif') no-repeat;  
+}
+
+.exo_article16x16Icon {
+  background: url('icons/NodeTypes/exo-article.gif') no-repeat;  
+}
+
+.exo_article_reference16x16Icon {
+  background: url('icons/NodeTypes/exo-article-reference.gif') no-repeat;  
+}
+
+.exo_backupAction16x16Icon {
+  background: url('icons/NodeTypes/exo-backupAction.gif') no-repeat;  
+}
+
+.exo_businessProcessAction16x16Icon {
+  background: url('icons/NodeTypes/exo-businessProcessAction.gif') no-repeat;  
+}
+
+.exo_categorized16x16Icon {
+  background: url('icons/NodeTypes/exo-categorized.gif') no-repeat;  
+}
+
+.exo_mockNodeType16x16Icon {
+  background: url('icons/NodeTypes/exo-mockNodeType.gif') no-repeat;  
+}
+
+.exo_move16x16Icon {
+  background: url('icons/NodeTypes/exo-move.gif') no-repeat;  
+}
+
+.exo_namespace16x16Icon {
+  background: url('icons/NodeTypes/exo-namespace.gif') no-repeat;  
+}
+
+.exo_published16x16Icon {
+  background: url('icons/NodeTypes/exo-published.gif') no-repeat;  
+}
+
+.exo_relationable16x16Icon {
+  background: url('icons/NodeTypes/exo-relationable.gif') no-repeat;  
+}
+
+.exo_ruleAction16x16Icon {
+  background: url('icons/NodeTypes/exo-ruleAction.gif') no-repeat;  
+}
+
+.exo_scriptAction16x16Icon {
+  background: url('icons/NodeTypes/exo-scriptAction.gif') no-repeat;  
+}
+
+.exo_sendMailAction16x16Icon {
+  background: url('icons/NodeTypes/exo-sendMailAction.gif') no-repeat;  
+}
+
+.exo_tab16x16Icon {
+  background: url('icons/NodeTypes/exo-tab.gif') no-repeat;  
+}
+
+.exo_taxonomy16x16Icon {
+  background: url('icons/NodeTypes/exo-taxonomy.gif') no-repeat;  
+}
+
+.exo_template16x16Icon {
+  background: url('icons/NodeTypes/exo-template.gif') no-repeat;  
+}
+
+.exo_tag16x16Icon {
+  background: url('icons/NodeTypes/exo-tag.gif') no-repeat;  
+}
+
+.exo_tagStyle16x16Icon {
+  background: url('icons/NodeTypes/exo-tagStyle.gif') no-repeat;  
+}
+
+.exo_versionStorage16x16Icon {
+  background: url('icons/NodeTypes/exo-versionStorage.gif') no-repeat;  
+}
+
+.exo_transformBinaryToTextAction16x16Icon {
+  background: url('icons/NodeTypes/exo-transformBinaryToTextAction.gif') no-repeat;  
+}
+
+.exo_view16x16Icon {
+  background: url('icons/NodeTypes/exo-view.gif') no-repeat;  
+}
+
+.exo_workflowAction16x16Icon {
+  background: url('icons/NodeTypes/exo-workflowAction.gif') no-repeat;  
+}
+
+.exo_createRSSFeedAction16x16Icon {
+  background: url('icons/NodeTypes/exo-createRSSFeedAction.gif') no-repeat;  
+}
+
+.exo_documentFolder16x16Icon {
+  background: url('icons/NodeTypes/exo-documentFolder.gif') no-repeat;  
+}
+
+.exo_pictureFolder16x16Icon {
+  background: url('icons/NodeTypes/exo-pictureFolder.gif') no-repeat;  
+}
+
+.exo_videoFolder16x16Icon {
+  background: url('icons/NodeTypes/exo-videoFolder.gif') no-repeat;  
+}
+
+.exo_searchFolder16x16Icon {
+  background: url('icons/NodeTypes/exo-searchFolder.gif') no-repeat;  
+}
+
+.exo_musicFolder16x16Icon {
+  background: url('icons/NodeTypes/exo-musicFolder.gif') no-repeat;  
+}
+
+.exo_registry16x16Icon {
+	background: url('icons/NodeTypes/nt-unstructured.gif') no-repeat;   
+}
+
+.exo_registryGroup16x16Icon {
+	background: url('icons/NodeTypes/nt-unstructured.gif') no-repeat;  
+}
+
+.exo_registryEntry16x16Icon {
+	background: url('icons/NodeTypes/nt-unstructured.gif') no-repeat;  
+}
+
+.mix_lockable16x16Icon {
+  background: url('icons/NodeTypes/mix-lockable.gif') no-repeat;  
+}
+
+.mix_referenceable16x16Icon {
+  background: url('icons/NodeTypes/mix-referenceable.gif') no-repeat;  
+}
+
+.mix_versionable16x16Icon {
+  background: url('icons/NodeTypes/mix-versionable.gif') no-repeat;  
+}
+
+.nt_base16x16Icon {
+  background: url('icons/NodeTypes/nt-base.gif') no-repeat;  
+}
+
+.nt_childNodeDefinition16x16Icon {
+  background: url('icons/NodeTypes/nt-childNodeDefinition.gif') no-repeat;  
+}
+
+.nt_file16x16Icon {
+  background: url('icons/NodeTypes/nt-file.gif') no-repeat;  
+}
+
+.nt_folder16x16Icon {
+  background: url('icons/NodeTypes/nt-folder.gif') no-repeat;  
+}
+
+.Collapsent_folder16x16Icon {
+  background: url('icons/NodeTypes/open-nt-folder.gif') no-repeat;  
+}
+
+.nt_frozenNode16x16Icon {
+  background: url('icons/NodeTypes/nt-frozenNode.gif') no-repeat;  
+}
+
+.nt_hierarchyNode16x16Icon {
+  background: url('icons/NodeTypes/nt-hierarchyNode.gif') no-repeat;  
+}
+
+.nt_linkedFile16x16Icon {
+  background: url('icons/NodeTypes/nt-linkedFile.gif') no-repeat;  
+}
+
+.nt_nodeType16x16Icon {
+  background: url('icons/NodeTypes/nt-nodeType.gif') no-repeat;  
+}
+
+.nt_propertyDefinition16x16Icon {
+  background: url('icons/NodeTypes/nt-propertyDefinition.gif') no-repeat;  
+}
+
+.nt_query16x16Icon {
+  background: url('icons/NodeTypes/nt-query.gif') no-repeat;  
+}
+
+.nt_resource16x16Icon {
+  background: url('icons/NodeTypes/nt-resource.gif') no-repeat;  
+}
+
+.nt_unstructured16x16Icon {
+  background: url('icons/NodeTypes/nt-unstructured.gif') no-repeat;  
+}
+
+.Collapsent_unstructured16x16Icon {
+  background: url('icons/NodeTypes/open-nt-unstructured.gif') no-repeat;  
+}
+
+.nt_version16x16Icon {
+  background: url('icons/NodeTypes/nt-version.gif') no-repeat;  
+}
+
+.nt_versionedChild16x16Icon {
+  background: url('../DefaultSkin/nt-versionedChild.gif') no-repeat;  
+}
+
+.nt_versionHistory16x16Icon {
+  background: url('icons/NodeTypes/nt-versionHistory.gif') no-repeat;  
+}
+
+.nt_query16x16Icon {
+  background: url('icons/NodeTypes/nt-query.gif') no-repeat;  
+}
+
+.nt_versionLabels16x16Icon {
+  background: url('icons/NodeTypes/nt-versionLabels.gif') no-repeat;  
+}
+
+.rma_filePlan16x16Icon {
+  background: url('icons/NodeTypes/rma-filePlan.gif') no-repeat;  
+}
+
+.kfx_document16x16Icon {
+  background: url('icons/NodeTypes/kfx-document.gif') no-repeat;  
+}
+/*############################## -- End NodeType Icon -- ########################*/
+.application_msword16x16Icon {
+  background: url('icons/NodeTypes/doc.gif') no-repeat;  
+}
+
+.application_xls16x16Icon {
+  background: url('icons/NodeTypes/xls.gif') no-repeat;  
+}
+
+.application_ppt16x16Icon {
+  background: url('icons/NodeTypes/ppt.gif') no-repeat;  
+}
+
+.application_pdf16x16Icon {
+  background: url('icons/NodeTypes/pdf.gif') no-repeat;  
+}
+
+.application_vnd_oasis_opendocument_text16x16Icon {
+  background: url('icons/NodeTypes/odt.gif') no-repeat;
+}
+
+.application_vnd_oasis_opendocument_spreadsheet16x16Icon {
+  background: url('icons/NodeTypes/ods.gif') no-repeat;  
+}
+
+.application_vnd_oasis_opendocument_presentation16x16Icon {
+  background: url('icons/NodeTypes/odp.gif') no-repeat;  
+}
+
+.application_zip16x16Icon {
+  background: url('icons/NodeTypes/zip.gif') no-repeat;  
+}
+
+.application_rar16x16Icon {
+  background: url('icons/NodeTypes/rar.gif') no-repeat;  
+}
+
+.text_rtf16x16Icon {
+  background: url('icons/NodeTypes/rtf.gif') no-repeat;  
+}
+
+.text_plain16x16Icon {
+  background: url('icons/NodeTypes/txt.gif') no-repeat;  
+}
+
+.audio_mp316x16Icon {
+  background: url('icons/NodeTypes/mp3.gif') no-repeat;  
+}
+
+.audio_mp416x16Icon {
+  background: url('icons/NodeTypes/mp4.gif') no-repeat;  
+}
+
+.text_xml16x16Icon {
+  background: url('icons/NodeTypes/xml.gif') no-repeat;  
+}
+
+.image_gif16x16Icon {
+  background: url('icons/NodeTypes/gif.gif') no-repeat;  
+}
+
+.image_bmp16x16Icon {
+  background: url('icons/NodeTypes/bmp.gif') no-repeat;  
+}
+
+.image_jpeg16x16Icon {
+  background: url('icons/NodeTypes/jpg.gif') no-repeat;  
+}
+
+.image_png16x16Icon {
+  background: url('icons/NodeTypes/png.gif') no-repeat;  
+}
+
+.application_octet-stream16x16Icon {
+  background: url('icons/NodeTypes/exe.gif') no-repeat;
+}
+
+.text_html16x16Icon {
+  background: url('icons/NodeTypes/html.gif') no-repeat;
+}
+ 
+.text_css16x16Icon {
+  background: url('icons/NodeTypes/css.gif') no-repeat;
+}
+ 
+.application_x-javascript16x16Icon {
+  background: url('icons/NodeTypes/js.gif') no-repeat;
+}
+
+.application_postscript16x16Icon {
+  background: url('icons/NodeTypes/ai.gif') no-repeat;
+}
+
+.UIRightClickPopupMenu .exo_createRSSFeedAction16x16Icon {
+  background: url('icons/NodeTypes/exo-createRSSFeedAction.gif') no-repeat left center;
+}
+
+.UIRightClickPopupMenu .exo_createRSSFeedAction16x16Icon {
+  background: url('icons/NodeTypes/exo-createRSSFeedAction.gif') no-repeat left center;
+}
+
+.UIRightClickPopupMenu .exo_transformBinaryToTextAction16x16Icon {
+  background: url('icons/NodeTypes/exo-transformBinaryToTextAction.gif') no-repeat left center;
+}
+
+.UIRightClickPopupMenu .exo_ReloadBPAction16x16Icon {
+  background: url('icons/NodeTypes/DefaultDocumentIcon.gif') no-repeat left center;
+}
+
+.UIRightClickPopupMenu .exo_workflowAction16x16Icon {
+  background: url('icons/NodeTypes/exo-workflowAction.gif') no-repeat left center;
+}
+
+.UIRightClickPopupMenu .exo_iCalendarGenerateAction16x16Icon {
+  background: url('icons/NodeTypes/DefaultDocumentIcon.gif') no-repeat left center;
+}
+
+.UIRightClickPopupMenu .exo_getMailAction16x16Icon {
+  background: url('icons/NodeTypes/exo-sendMailAction.gif') no-repeat left center;
+}
+
+.UIRightClickPopupMenu .exo_autoVersioning16x16Icon {
+  background: url('icons/NodeTypes/exo-versionStorage.gif') no-repeat left center;
+}
+
+.UIRightClickPopupMenu .exo_publishingRequest16x16Icon {
+  background: url('icons/NodeTypes/exo-publishingRequest.gif') no-repeat left center;
+}
+
+/*############################## -- Begin Properties Icon -- ########################*/
+.dc_contributor16x16Icon {
+  background: url('icons/Properties/dc-contributor.gif') no-repeat;  
+}
+
+.dc_coverage16x16Icon {
+  background: url('icons/Properties/dc-coverage.gif') no-repeat;  
+}
+
+.dc_creator16x16Icon {
+  background: url('icons/Properties/dc-creator.gif') no-repeat;  
+}
+
+.dc_date16x16Icon {
+  background: url('icons/Properties/dc-date.gif') no-repeat;  
+}
+
+.dc_description16x16Icon {
+  background: url('icons/Properties/dc-description.gif') no-repeat;  
+}
+
+.dc_format16x16Icon {
+  background: url('icons/Properties/dc-format.gif') no-repeat;  
+}
+
+.dc_identifier16x16Icon {
+  background: url('icons/Properties/dc-identifier.gif') no-repeat;  
+}
+
+.dc_language16x16Icon {
+  background: url('icons/Properties/dc-language.gif') no-repeat;  
+}
+
+.dc_publisher16x16Icon {
+  background: url('icons/Properties/dc-publisher.gif') no-repeat;  
+}
+
+.dc_relation16x16Icon {
+  background: url('icons/Properties/dc-relation.gif') no-repeat;  
+}
+
+.dc_resourceType16x16Icon {
+  background: url('icons/Properties/dc-resourceType.gif') no-repeat;  
+}
+
+.dc_rights16x16Icon {
+  background: url('icons/Properties/dc-rights.gif') no-repeat;  
+}
+
+.dc_source16x16Icon {
+  background: url('icons/Properties/dc-source.gif') no-repeat;  
+}
+
+.dc_subject16x16Icon {
+  background: url('icons/Properties/dc-subject.gif') no-repeat;  
+}
+
+.dc_title16x16Icon {
+  background: url('icons/Properties/dc-title.gif') no-repeat;  
+}
+
+.exo_businessProcess16x16Icon {
+  background: url('icons/Properties/exo-businessProcess.gif') no-repeat;  
+}
+
+.exo_buttons16x16Icon {
+  background: url('icons/Properties/exo-buttons.gif') no-repeat;  
+}
+
+.exo_date16x16Icon {
+  background: url('icons/Properties/exo-date.gif') no-repeat;  
+}
+
+.exo_datetime16x16Icon {
+  background: url('icons/Properties/exo-datetime.gif') no-repeat;  
+}
+
+.exo_description16x16Icon {
+  background: url('icons/Properties/exo-description.gif') no-repeat;  
+}
+
+.exo_destPath16x16Icon {
+  background: url('icons/Properties/exo-destPath.gif') no-repeat;  
+}
+
+.exo_destWorkspace16x16Icon {
+  background: url('icons/Properties/exo-destWorkspace.gif') no-repeat;  
+}
+
+.exo_image16x16Icon {
+  background: url('icons/Properties/exo-image.gif') no-repeat;  
+}
+
+.exo_lifecyclePhase16x16Icon {
+  background: url('icons/Properties/exo-lifecyclePhase.gif') no-repeat;  
+}
+
+.exo_name16x16Icon {
+  background: url('icons/Properties/exo-name.gif') no-repeat;  
+}
+
+.exo_owner16x16Icon {
+  background: url('icons/Properties/exo-owner.gif') no-repeat;  
+}
+
+.exo_permissions16x16Icon {
+  background: url('icons/Properties/exo-permissions.gif') no-repeat;  
+}
+
+.exo_prefix16x16Icon {
+  background: url('icons/Properties/exo-prefix.gif') no-repeat;  
+}
+
+.exo_relation16x16Icon {
+  background: url('icons/Properties/exo-relation.gif') no-repeat;  
+}
+
+.exo_roles16x16Icon {
+  background: url('icons/Properties/exo-roles.gif') no-repeat;  
+}
+
+.exo_rule16x16Icon {
+  background: url('icons/Properties/exo-rule.gif') no-repeat;  
+}
+
+.exo_script16x16Icon {
+  background: url('icons/Properties/exo-script.gif') no-repeat;  
+}
+
+.exo_summary16x16Icon {
+  background: url('icons/Properties/exo-summary.gif') no-repeat;  
+}
+
+.exo_template16x16Icon {
+  background: url('icons/Properties/exo-template.gif') no-repeat;  
+}
+
+.exo_templateFile16x16Icon {
+  background: url('icons/Properties/exo-templateFile.gif') no-repeat;  
+}
+
+.exo_text16x16Icon {
+  background: url('icons/Properties/exo-text.gif') no-repeat;  
+}
+
+.exo_title16x16Icon {
+  background: url('icons/Properties/exo-title.gif') no-repeat;  
+}
+.exo_uri16x16Icon {
+  background: url('icons/Properties/exo-uri.gif') no-repeat;  
+}
+
+.exo_validator16x16Icon {
+  background: url('icons/Properties/exo-validator.gif') no-repeat;  
+}
+
+.jcr_autoCreated16x16Icon {
+  background: url('icons/Properties/jcr-autoCreated.gif') no-repeat;  
+}
+
+.jcr_baseVersion16x16Icon {
+  background: url('icons/Properties/jcr-baseVersion.gif') no-repeat;  
+}
+
+.jcr_childNodeDefinition16x16Icon {
+  background: url('icons/Properties/jcr-childNodeDefinition.gif') no-repeat;  
+}
+
+.jcr_content16x16Icon {
+  background: url('icons/Properties/jcr-content.gif') no-repeat;  
+}
+
+.jcr_created16x16Icon {
+  background: url('icons/Properties/jcr-created.gif') no-repeat;  
+}
+
+.jcr_data16x16Icon {
+  background: url('icons/Properties/jcr-data.gif') no-repeat;  
+}
+
+.jcr_defaultPrimaryType16x16Icon {
+  background: url('icons/Properties/jcr-defaultPrimaryType.gif') no-repeat;  
+}
+
+.jcr_defaultValues16x16Icon {
+  background: url('icons/Properties/jcr-defaultValues.gif') no-repeat;  
+}
+
+.jcr_encoding16x16Icon {
+  background: url('icons/Properties/jcr-encoding.gif') no-repeat;  
+}
+
+.jcr_frozenMixinTypes16x16Icon {
+  background: url('icons/Properties/jcr-frozenMixinTypes.gif') no-repeat;  
+}
+
+.jcr_frozenPrimaryType16x16Icon {
+  background: url('icons/Properties/jcr-frozenPrimaryType.gif') no-repeat;  
+}
+
+.jcr_frozenUuid16x16Icon {
+  background: url('icons/Properties/jcr-frozenUuid.gif') no-repeat;  
+}
+
+.jcr_hasOrderableChildNodes16x16Icon {
+  background: url('icons/Properties/jcr-hasOrderableChildNodes.gif') no-repeat;  
+}
+
+.jcr_isCheckedOut16x16Icon {
+  background: url('icons/Properties/jcr-isCheckedOut.gif') no-repeat;  
+}
+
+.jcr_isMixin16x16Icon {
+  background: url('icons/Properties/jcr-isMixin.gif') no-repeat;  
+}
+
+.jcr_language16x16Icon {
+  background: url('icons/Properties/jcr-language.gif') no-repeat;  
+}
+
+.jcr_lastModified16x16Icon {
+  background: url('icons/Properties/jcr-lastModified.gif') no-repeat;  
+}
+
+.jcr_lockIsDeep16x16Icon {
+  background: url('icons/Properties/jcr-lockIsDeep.gif') no-repeat;  
+}
+
+.jcr_lockOwner16x16Icon {
+  background: url('icons/Properties/jcr-lockOwner.gif') no-repeat;  
+}
+
+.jcr_mandatory16x16Icon {
+  background: url('icons/Properties/jcr-mandatory.gif') no-repeat;  
+}
+
+.jcr_mergeFailed16x16Icon {
+  background: url('icons/Properties/jcr-mergeFailed.gif') no-repeat;  
+}
+
+.jcr_mimeType16x16Icon {
+  background: url('icons/Properties/jcr-mimeType.gif') no-repeat;  
+}
+
+.jcr_mixinTypes16x16Icon {
+  background: url('icons/Properties/jcr-mixinTypes.gif') no-repeat;  
+}
+
+.jcr_multiple16x16Icon {
+  background: url('icons/Properties/jcr-multiple.gif') no-repeat;  
+}
+
+.jcr_name16x16Icon {
+  background: url('icons/Properties/jcr-name.gif') no-repeat;  
+}
+
+.jcr_nodeTypeName16x16Icon {
+  background: url('icons/Properties/jcr-nodeTypeName.gif') no-repeat;  
+}
+
+.jcr_onParentVersion16x16Icon {
+  background: url('icons/Properties/jcr-onParentVersion.gif') no-repeat;  
+}
+
+.jcr_predecessors16x16Icon {
+  background: url('icons/Properties/jcr-predecessors.gif') no-repeat;  
+}
+
+.jcr_primaryItemName16x16Icon {
+  background: url('icons/Properties/jcr-primaryItemName.gif') no-repeat;  
+}
+
+.jcr_primaryType16x16Icon {
+  background: url('icons/Properties/jcr-primaryType.gif') no-repeat;  
+}
+
+.jcr_propertyDefinition16x16Icon {
+  background: url('icons/Properties/jcr-propertyDefinition.gif') no-repeat;  
+}
+
+.jcr_protected16x16Icon {
+  background: url('icons/Properties/jcr-protected.gif') no-repeat;  
+}
+
+.jcr_requiredPrimaryTypes16x16Icon {
+  background: url('icons/Properties/jcr-requiredPrimaryTypes.gif') no-repeat;  
+}
+
+.jcr_requiredType16x16Icon {
+  background: url('icons/Properties/jcr-requiredType.gif') no-repeat;  
+}
+
+.jcr_rootVersion16x16Icon {
+  background: url('icons/Properties/jcr-rootVersion.gif') no-repeat;  
+}
+
+.jcr_sameNameSiblings16x16Icon {
+  background: url('icons/Properties/jcr-sameNameSiblings.gif') no-repeat;  
+}
+
+.jcr_statement16x16Icon {
+  background: url('icons/Properties/jcr-statement.gif') no-repeat;  
+}
+
+.jcr_successors16x16Icon {
+  background: url('icons/Properties/jcr-successors.gif') no-repeat;  
+}
+
+.jcr_supertypes16x16Icon {
+  background: url('icons/Properties/jcr-supertypes.gif') no-repeat;  
+}
+
+.jcr_uuid16x16Icon {
+  background: url('icons/Properties/jcr-uuid.gif') no-repeat;  
+}
+
+.jcr_valueConstraints16x16Icon {
+  background: url('icons/Properties/jcr-valueConstraints.gif') no-repeat;  
+}
+
+.jcr_versionableUuid16x16Icon {
+  background: url('icons/Properties/jcr-versionableUuid.gif') no-repeat;  
+}
+
+.jcr_versionHistory16x16Icon {
+  background: url('icons/Properties/jcr-versionHistory.gif') no-repeat;  
+}
+
+.jcr_versionLabels16x16Icon {
+  background: url('icons/Properties/jcr-versionLabels.gif') no-repeat;  
+}
