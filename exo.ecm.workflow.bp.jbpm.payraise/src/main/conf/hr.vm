@@ -1,0 +1,28 @@
+#jsfForm()
+<table>
+  <tr>
+    <th colspan="2">My custom velocity form</th>
+  </tr>
+  <tr>
+    <td>
+	#foreach($inputInfo in $uicomponent.getInputInfo())
+	<tr>
+		<td>$inputInfo.getLabel()</td>
+		<td>
+		  #jsfFormField($inputInfo.getInput().getName())
+		  #if($inputInfo.isMandatory())
+		    $res.getString("UITask.label.mandatory")
+		  #end
+		</td>
+	</tr>	
+	#end    
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      #jsfFormButton("finish it" $uicomponent.endOfState)
+    	  #jsfFormButton("@UITask.cancel" $uicomponent.cancelProcess)
+    </td>
+  </tr>
+</table>
+#end

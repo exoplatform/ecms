@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Evaluer l'augmentation</task-name>
+  <title>Evaluer l'augmentation</title>
+  <grant>
+    <submit>Accorder</submit>
+    <value>Accorder l'augmentation</value>
+  </grant>
+  <deny>
+    <submit>Refuser</submit>
+    <value>Refuser l'augmentation</value>
+  </deny>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Qui a demandé plus d'argent ?</title>
+    <label>Initiateur :</label>
+  </initiator>
+  <reason>
+    <title>La raison invoquée par l'initiateur</title>
+    <label>Raison :</label>
+  </reason>
+  <amount-asked>
+    <title>Montant demandé :</title>
+    <label>Montant :</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Montant accordé :</title>
+    <label>Accord :</label>
+  </amount-granted>
+  <priority>
+    <title>Spécifier la prioritée</title>
+    <label>Priorité:</label>
+  </priority>
+  <rewarded>
+    <title>L'initiateur a t'il été augmenté</title>
+    <label>Augmenté:</label>
+    <checkbox>Oui il a été augmenté !</checkbox>
+  </rewarded>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

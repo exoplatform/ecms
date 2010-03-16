@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Modification du salaire</task-name>
+  <title>Modifier le salaire</title>
+  <submit>Confirmation de la modification</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>l'employé qui demande une augmentation de salaire</title>
+    <label>Employé :</label>
+  </initiator>
+  <amount-granted>
+    <title>le montant accordé</title>
+    <label>Montant à ajouter :</label>
+  </amount-granted>
+  <my-custom-groovy-form>My custom groovy form</my-custom-groovy-form>
+  <cancel>Cancel</cancel>
+  <finish-it>Finish it</finish-it>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+
