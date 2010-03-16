@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+  <component>
+    <key>org.exoplatform.services.workflow.WorkflowServiceContainer</key>
+    <type>org.exoplatform.services.workflow.impl.jbpm.WorkflowServiceContainerImpl</type>
+    <init-params>
+      <value-param>
+        <name>hibernate.service</name>
+        <description>if  this param is not existed or the value is empty, null or default.
+          The workflow service will use the default Hibernate service.  If you modify the value,
+          You need to  update the external plugin for  the hibernate service that you use as well</description>
+        <value>exo.workflow.datasource</value>
+      </value-param>
+      <object-param>
+        <name>workflow.configuration</name>
+        <description>load of default business processes</description>
+        <object type="org.exoplatform.services.workflow.api.ProcessesConfig">
+          <field  name="processLocation"><string>war:/conf/bp</string></field>
+          <field  name="predefinedProcess">
+            <collection type="java.util.HashSet">
+            </collection>
+          </field>
+        </object>
+      </object-param>    
+    </init-params>      
+  </component>
+  
+  <component> 
+    <key>exo.workflow.datasource</key>
+    <type>org.exoplatform.services.database.impl.HibernateServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>hibernate.properties</name>
+        <description>Default Hibernate Service</description>
+        <property name="hibernate.show_sql" value="false"/>
+        <property name="hibernate.cglib.use_reflection_optimizer" value="true"/>
+        <property name="hibernate.connection.url" value="jdbc:hsqldb:file:./target/data/workflow"/>
+        <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
+        <property name="hibernate.connection.autocommit" value="true"/>
+        <property name="hibernate.connection.username" value="sa"/>
+        <property name="hibernate.connection.password" value=""/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+        <property name="hibernate.c3p0.min_size" value="5"/>
+        <property name="hibernate.c3p0.max_size" value="20"/>
+        <property name="hibernate.c3p0.timeout" value="1800"/>
+        <property name="hibernate.c3p0.max_statements" value="50"/>
+      </properties-param>
+    </init-params>
+  </component>
+
+  <external-component-plugins>
+    <target-component>exo.workflow.datasource</target-component>
+    <component-plugin> 
+      <name>add.hibernate.mapping</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.database.impl.AddHibernateMappingPlugin</type>
+      <init-params>
+        <values-param>
+          <name>hibernate.mapping</name>
+            <value>org/jbpm/graph/def/ProcessDefinition.hbm.xml</value>
+            <value>org/jbpm/graph/def/Node.hbm.xml</value>
+            <value>org/jbpm/graph/def/Transition.hbm.xml</value>
+            <value>org/jbpm/graph/def/Event.hbm.xml</value>
+            <value>org/jbpm/graph/def/Action.hbm.xml</value>
+            <value>org/jbpm/graph/def/SuperState.hbm.xml</value>
+            <value>org/jbpm/graph/def/ExceptionHandler.hbm.xml</value>
+            <value>org/jbpm/instantiation/Delegation.hbm.xml</value>
+            <value>org/jbpm/graph/node/StartState.hbm.xml</value>
+            <value>org/jbpm/graph/node/EndState.hbm.xml</value>
+            <value>org/jbpm/graph/node/ProcessState.hbm.xml</value>
+            <value>org/jbpm/graph/node/Decision.hbm.xml</value>
+            <value>org/jbpm/graph/node/Fork.hbm.xml</value> 
+            <value>org/jbpm/graph/node/Join.hbm.xml</value>
+            <value>org/jbpm/graph/node/State.hbm.xml</value>
+            <value>org/jbpm/graph/node/TaskNode.hbm.xml</value>
+            <value>org/jbpm/context/def/ContextDefinition.hbm.xml</value>
+            <value>org/jbpm/context/def/VariableAccess.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/def/TaskMgmtDefinition.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/def/Swimlane.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/def/Task.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/def/TaskController.hbm.xml</value>
+            <value>org/jbpm/module/def/ModuleDefinition.hbm.xml</value>
+            <value>org/jbpm/bytes/ByteArray.hbm.xml</value>
+            <value>org/jbpm/file/def/FileDefinition.hbm.xml</value>
+            <value>org/jbpm/scheduler/def/CreateTimerAction.hbm.xml</value>
+            <value>org/jbpm/scheduler/def/CancelTimerAction.hbm.xml</value>
+            <value>org/jbpm/graph/exe/Comment.hbm.xml</value>
+            <value>org/jbpm/graph/exe/ProcessInstance.hbm.xml</value>
+            <value>org/jbpm/graph/exe/Token.hbm.xml</value>
+            <value>org/jbpm/graph/exe/RuntimeAction.hbm.xml</value>
+            <value>org/jbpm/module/exe/ModuleInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/ContextInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/TokenVariableMap.hbm.xml</value>
+            <value>org/jbpm/context/exe/VariableInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/variableinstance/ByteArrayInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/variableinstance/DateInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/variableinstance/DoubleInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/variableinstance/HibernateLongInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/variableinstance/HibernateStringInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/variableinstance/LongInstance.hbm.xml</value>
+            <value>org/jbpm/context/exe/variableinstance/StringInstance.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/exe/TaskMgmtInstance.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/exe/TaskInstance.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/exe/PooledActor.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/exe/SwimlaneInstance.hbm.xml</value>
+            <value>org/jbpm/scheduler/exe/Timer.hbm.xml</value>
+            <value>org/jbpm/logging/log/ProcessLog.hbm.xml</value>
+            <value>org/jbpm/logging/log/MessageLog.hbm.xml</value>
+            <value>org/jbpm/logging/log/CompositeLog.hbm.xml</value>
+            <value>org/jbpm/graph/log/ActionLog.hbm.xml</value>
+            <value>org/jbpm/graph/log/NodeLog.hbm.xml</value>
+            <value>org/jbpm/graph/log/ProcessInstanceCreateLog.hbm.xml</value>
+            <value>org/jbpm/graph/log/ProcessInstanceEndLog.hbm.xml</value>
+            <value>org/jbpm/graph/log/SignalLog.hbm.xml</value>
+            <value>org/jbpm/graph/log/TokenCreateLog.hbm.xml</value>
+            <value>org/jbpm/graph/log/TokenEndLog.hbm.xml</value>
+            <value>org/jbpm/graph/log/TransitionLog.hbm.xml</value>
+            <value>org/jbpm/context/log/VariableLog.hbm.xml</value>
+            <value>org/jbpm/context/log/VariableCreateLog.hbm.xml</value>
+            <value>org/jbpm/context/log/VariableDeleteLog.hbm.xml</value>
+            <value>org/jbpm/context/log/VariableUpdateLog.hbm.xml</value>
+            <value>org/jbpm/context/log/variableinstance/ByteArrayUpdateLog.hbm.xml</value>
+            <value>org/jbpm/context/log/variableinstance/DateUpdateLog.hbm.xml</value>
+            <value>org/jbpm/context/log/variableinstance/DoubleUpdateLog.hbm.xml</value>
+            <value>org/jbpm/context/log/variableinstance/HibernateLongUpdateLog.hbm.xml</value>
+            <value>org/jbpm/context/log/variableinstance/HibernateStringUpdateLog.hbm.xml</value>
+            <value>org/jbpm/context/log/variableinstance/LongUpdateLog.hbm.xml</value>
+            <value>org/jbpm/context/log/variableinstance/StringUpdateLog.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/log/TaskLog.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/log/TaskCreateLog.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/log/TaskAssignLog.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/log/TaskEndLog.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/log/SwimlaneLog.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/log/SwimlaneCreateLog.hbm.xml</value>
+            <value>org/jbpm/taskmgmt/log/SwimlaneAssignLog.hbm.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>

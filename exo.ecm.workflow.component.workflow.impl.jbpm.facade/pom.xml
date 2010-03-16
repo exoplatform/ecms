@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecm.workflow</groupId>
+    <artifactId>exo.ecm.workflow.compnent</artifactId>
+    <version>2.0.0-Beta02-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo.ecm.workflow.component.workflow.impl.jbpm.facade</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo WORKFLOW Service Impl for jBPM</name>
+  <description>eXo WORKFLOW Impl for jBPM</description>
+  <url>http://www.exoplatform.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.ecm.workflow</groupId>
+      <artifactId>exo.ecm.workflow.component.workflow.api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.core</groupId>
+      <artifactId>exo.core.component.security.core</artifactId>
+      <version>${org.exoplatform.core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.core</groupId>
+      <artifactId>exo.core.component.database</artifactId>
+      <version>${org.exoplatform.core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecm.workflow</groupId>
+      <artifactId>exo.ecm.workflow.component.workflow.impl.jbpm.engine</artifactId>
+      <version>${org.exoplatform.ecm.jbpm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.web</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+    </dependency>
+  </dependencies>
+</project>
