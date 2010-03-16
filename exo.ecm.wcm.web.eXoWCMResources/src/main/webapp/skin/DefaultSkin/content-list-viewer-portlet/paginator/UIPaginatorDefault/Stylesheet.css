@@ -1,0 +1,69 @@
+.UIPaginatorDefault {
+  text-align: right;
+}
+
+.UIPaginatorDefault a {
+  padding: 5px;
+  font-size: 12px;
+  margin-left: 3px;
+}
+
+.UIPaginatorDefault a:hover {
+  color: #ff4200;
+}
+
+.UIPaginatorDefault a.Item {
+  color: black;
+}
+
+.UIPaginatorDefault a.Current {
+  font-weight: bold;
+  color: red;
+}
+
+.UIPaginatorDefault a.Prev,.UIPaginatorDefault a.First,.UIPaginatorDefault a.Next,.UIPaginatorDefault a.Last,.UIPaginatorDefault a.PrevDis,.UIPaginatorDefault a.FirstDis,.UIPaginatorDefault a.NextDis,.UIPaginatorDefault a.LastDis {
+  padding-right: 13px;
+  font-weight: bold;
+}
+
+/* Enabled Item */
+.UIPaginatorDefault a.Prev {
+  background: url(icons/icoPrevEna.gif) no-repeat right;
+}
+
+.UIPaginatorDefault a.First {
+  background: url(icons/icoFirstEna.gif) no-repeat right;
+}
+
+.UIPaginatorDefault a.Next {
+  background: url(icons/icoNextEna.gif) no-repeat right;
+}
+
+.UIPaginatorDefault a.Last {
+  background: url(icons/icoLastEna.gif) no-repeat right;
+}
+
+/* Disabled Item */
+.UIPaginatorDefault a.PrevDis,.UIPaginatorDefault a.FirstDis {
+  color: #666;
+}
+
+.UIPaginatorDefault a.NextDis,.UIPaginatorDefault a.LastDis {
+  color: #196697;
+}
+
+.UIPaginatorDefault a.PrevDis {
+  background: url(icons/icoPrevDis.gif) no-repeat right;
+}
+
+.UIPaginatorDefault a.FirstDis {
+  background: url(icons/icoFirstDis.gif) no-repeat right;
+}
+
+.UIPaginatorDefault a.NextDis {
+  background: url(icons/icoNextDis.gif) no-repeat right;
+}
+
+.UIPaginatorDefault a.LastDis {
+  background: url(icons/icoLastDis.gif) no-repeat right;
+}

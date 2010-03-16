@@ -1,0 +1,31 @@
+.UIWCMSearchPortlet .UIPaginatorDefault {
+  margin: 0 10px 0 210px;
+  text-align: center;
+}
+
+.UIWCMSearchPortlet .UIPaginatorDefault a {
+  padding: 5px;
+  font-size: 14px;
+  margin-left: 3px;
+  text-decoration: underline;
+  color: #3A3AE7;
+}
+
+.UIWCMSearchPortlet .UIPaginatorDefault a.Current {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.UIWCMSearchPortlet .UIPaginatorDefault a.Prev,.UIWCMSearchPortlet .UIPaginatorDefault a.Next {
+  padding-right: 16px;
+  font-weight: bold;
+}
+
+.UIWCMSearchPortlet .UIPaginatorDefault a.Prev {
+  background: url(icons/prev.gif) no-repeat right;
+}
+
+.UIWCMSearchPortlet .UIPaginatorDefault a.Next {
+  background: url(icons/next.gif) no-repeat right;
+}

@@ -1,0 +1,65 @@
+.exo_cssFolder48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-cssFolder.gif') no-repeat;
+}
+
+.exo_jsFolder48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-jsFolder.gif') no-repeat;
+}
+
+.exo_webFolder48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-webFolder.gif') no-repeat;
+}
+
+.exo_portalFolder48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-portalFolder.gif') no-repeat;
+}
+
+.exo_linkFolder48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-linkFolder.gif') no-repeat;
+}
+
+.exo_themeFolder48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-themeFolder.gif') no-repeat;
+}
+
+.exo_link48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-webLink.gif') no-repeat;
+}
+
+.exo_webContent48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-webContent.gif') no-repeat;
+}
+
+.exo_multimediaFolder48x48Icon {
+  width: auto;
+  height: 24px;
+  background: url('icons/exo-mediaFolder.gif') no-repeat;
+}
+
+.exo_pictureOnHeadWebcontent48x48con {
+  width: auto;
+  height: 16px;
+  background: url('icons/exo-topPictureContent.png') no-repeat;
+}
+
+.exo_twoColumnsWebcontent48x48Icon {
+  width: auto;
+  height: 16px;
+  background: url('icons/exo-twoColumnContent.png') no-repeat;
+}

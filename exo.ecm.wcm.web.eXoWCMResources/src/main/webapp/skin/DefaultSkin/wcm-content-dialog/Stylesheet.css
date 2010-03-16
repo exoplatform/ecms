@@ -1,0 +1,60 @@
+.FormHint {
+  border: 1px solid #B7B7B7;
+  color: #4D627D;
+  font-weight: bold;
+  padding: 10px 5px 10px 25px;
+  background: white url('icons/Hint.gif') no-repeat 5px 9px;
+}
+
+.WebContentMain {
+  float: right;
+  line-height: 16px;
+}
+
+.WebContentSynchronize {
+  float: right;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.WebContentInformation {
+  padding-bottom: 10px;
+}
+
+#UIContentDialogForm .UIFormGrid {
+  width: 100%;
+}
+
+.UIPermissionManager .SelectUserIcon {
+  width: 16px;
+  height: 16px;
+  background: url('icons/SelectUser.gif') no-repeat;
+  cursor: pointer;
+}
+
+.UIPermissionManager .SelectMemberIcon {
+  width: 16px;
+  height: 16px;
+  background: url('icons/SelectMember.gif') no-repeat;
+  cursor: pointer;
+}
+
+.UIPermissionManager .AddAnyIcon {
+  width: 16px;
+  height: 16px;
+  background: url('icons/SelectAny.gif') no-repeat;
+  cursor: pointer;
+}
+
+.UIPermissionManager .HorizontalLayout .UIFormInputSet {
+  padding: 0;
+  width: auto;
+}
+
+.UIPermissionManager .HorizontalLayout .UIFormGrid {
+  table-layout: fixed;
+}
+
+.UIPermissionManager .HorizontalLayout td.FieldLabel {
+  width: 38%;
+}

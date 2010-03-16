@@ -1,0 +1,129 @@
+#DefaultPortalContainer .UIWCMColumnContainer {
+  background: white url('/portal/rest/jcr/repository/collaboration/sites content/live/classic/web contents/site artifacts/banner/Default/medias/images/BgBanner.png') repeat-x;
+}
+
+td {
+  min-width: 20px;
+}
+
+
+.UIWCMColumnContainer {
+  margin: auto;
+  overflow: hidden;
+}
+
+.UIWCMColumnContainer .BannerTDContainer {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+}
+
+.UIWCMColumnContainer .AccessContainerTDContainer {
+  float: right;
+}
+
+#UIContainer-DefaultPortalContainer {
+  padding: 0;
+}
+
+#UIContainer-DefaultPortalContainer .UITableColumnContainer {
+  _width: 99%;
+  _position: relative;
+}
+
+#UIContainer-DefaultPortalContainer .UIContainer {
+  padding: 0;
+}
+
+.UIWorkingWorkspace {
+  zoom: 100%;
+}
+
+.WCMTRContainer .CategoryNavigationPortletContainerTDContainer {
+  float: left;
+  width: 30%;
+}
+
+.WCMTRContainer .ParameterizedContentListViewerPortletContainerTDContainer {
+  float: right;
+  width: 70%;
+}
+
+
+.UIItemSelector .Presentation {
+  height: 170px;
+  margin: auto;
+  width: 270px;
+  background: url('background/presentation.gif') no-repeat center;
+}
+
+.UIItemSelector .Search {
+  height: 170px;
+  margin: auto;
+  width: 270px;
+  background: url('background/search.gif') no-repeat center;
+}
+
+.UIItemSelector .Sitemap {
+  height: 170px;
+  margin: auto;
+  width: 270px;
+  background: url('background/sitemap.gif') no-repeat center;
+}
+
+.QuickEdit {
+  background: url('background/quickEdit.png') no-repeat scroll left top;
+  height: 30px;
+  width: 65px;
+  padding-left: 0px;
+  float: right;
+}
+
+.UIItemSelector .ItemDetailList .TemplateContainer .ClassicPortalImage {
+  background: transparent url(background/classic.png) scroll center;
+  height: 222px;
+  margin-top: 9px;
+}
+
+.UIItemSelector .ItemDetailList .TemplateContainer .ACMEPortalImage {
+  background: transparent url(background/Acme.png) no-repeat center;
+  height: 235px;
+  width: 296px;
+  margin: 3px auto;
+}
+
+.ACMECategoriesTDContainer {
+  padding: 10px;
+}
+
+.ACMEParameterizedTDContainer {
+  padding: 10px;
+  width: 730px;
+}
+
+.UIToolbarContainer  .EditingPortletTDContainer {
+  float: right;
+  margin: 7px 0px 0px 5px;
+}
+
+.UISiteAdminToolBar {
+  height: 32px;
+  padding-right: 10px;
+  float: right;
+}
+
+.UISiteAdminToolBar .Editing {
+  float:left;
+  font-weight:bold;
+  margin-top:3px;
+}
+
+.UISiteAdminToolBar .LeftSelect {
+  float:left;
+}
+.UICategoryForm .UIForm .HorizontalLayout .UIFormInputSet {
+	padding: 0px;
+}
+.UISubcriptionForm .UIForm .HorizontalLayout .UIFormInputSet {
+	padding: 0px;
+}

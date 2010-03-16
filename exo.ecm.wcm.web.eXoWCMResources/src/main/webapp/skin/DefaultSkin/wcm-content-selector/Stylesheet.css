@@ -1,0 +1,263 @@
+.UIWCMSearchContent {
+  padding: 10px 0px;
+}
+
+.UIWCMSearchContent .Label {
+  float: left;
+  padding: 0px 5px 0px 10px;
+}
+
+.UIWCMSearchContent select.selectbox {
+  float: left;
+  width: 90px;
+  margin: 8px 5px;
+}
+
+.UIWCMSearchContent input {
+  float: left;
+  width: 200px;
+  margin: 8px 5px;
+}
+
+.UIWCMSearchContent a {
+  display: block;
+  background: url('background/SearchIcon.png') no-repeat center;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin: 6px;
+}
+
+.UIWCMSearchContent .title {
+  width: 55%;
+}
+
+.UIWCMSearchContent .score {
+  width: 15%;
+}
+
+.UIWCMSearchContent .publicationstate {
+  width: 15%;
+}
+
+.UIWebSearchResult .action {
+  width: 15%;
+}
+
+/******************************************************/
+.UIWCMSearchContainer {
+  
+}
+
+.UIWCMSearchContainer .UIBreadcumbs .LeftBreadcumbsBar {
+  background: white;
+  border: 1px solid #b7b7b7;
+}
+
+.UIWCMSearchContainer .UITreeBuilder {
+  float: left;
+  border: 1px solid #B1B0B0;
+  width: 300px;
+}
+
+.UIWCMSearchContainer .UITreeBuilder .ExplorerTree {
+  float: none;
+  width: auto;
+}
+
+.UIWCMSearchContainer .UISelectPathPanel {
+  margin-left: 310px;
+  border: 1px solid #B1B0B0;
+  background: white;
+}
+
+.UIWCMSearchContainer .UISelectPathPanel .UITreeList {
+  padding: 16px 0px 16px 16px;
+  margin: 0px;
+}
+
+.UIWCMSearchContainer .UISelectPathPanel .UITreeList .UIGrid {
+  width: 96%;
+  margin: 0px;
+}
+
+.UIWCMSearchContainer .UIContentSelected {
+  height: 200px;
+}
+
+.UIWCMSearchContainer .UIContentSelected .UICLVContentSelectedGrid {
+  padding: 16px;
+  margin: 0px;
+}
+
+.UIWCMSearchContainer .SelectContent .Title {
+  background: #D2DDF1 url(/eXoResources/skin/DefaultSkin/webui/component/UIGrid/background/ThGridRepeatBg1x19.jpg) repeat-x;
+  height: 20px;
+  line-height: 20px;
+  padding: 0px 10px;
+  font-weight: bold;
+  border-bottom: 1px solid #B1B0B0;
+  overflow: hidden;
+}
+
+.UIWCMSearchContainer .ExplorerTree .InnerExplorerTree {
+  border: none;
+  padding: 10px;
+}
+
+.UIWCMSearchContainer .ExplorerTree .UITrees {
+  background: white;
+}
+
+.AddMetadataTypeIcon {
+  width: 24px;
+  height: 24px;
+  background: url('background/ManageMetadataIcon.gif') no-repeat;
+}
+
+.IconConstraint {
+  cursor: pointer;
+}
+
+/* ############################### WebContentSearchForm ########################*/
+.UIWebContentSearchForm {
+  padding: 10px 20px;
+}
+
+.ContentSearchForm {
+  padding: 4px 0px;
+}
+
+.ContentSearchForm .TitleTextBox {
+  float: left;
+  line-height: 20px;
+  margin: 0px 5px;
+}
+
+.ContentSearchForm .DateInput {
+  position: relative;
+  float: left;
+}
+
+/********************  UIDocumentPathSelector  ***************************/
+.UIDocumentPathSelector {
+  
+}
+
+.UIDocumentPathSelector .UIBreadcumbs .LeftBreadcumbsBar {
+  background: white;
+  border: 1px solid #b7b7b7;
+}
+
+.UIDocumentPathSelector .ExplorerTree .UITrees {
+  background: white;
+}
+
+.UIDocumentPathSelector .UIBreadcumbs {
+  margin: 5px 0px;
+}
+
+/*********************** UIWebContentSelector *********************************/
+.UIWebContentPathSelector .UIBreadcumbs {
+  margin: 5px 0px;
+}
+
+/*********************** UITreeView ********************************************/
+.UIWebContentTreeView {
+  overflow: auto;
+  padding: 10px;
+  height: 250px;
+}
+
+.UIWebContentTreeView .ViewChildNodes {
+  padding-left: 20px;
+  display: none;
+}
+
+.UIWebContentTreeView .SelectNodeIcon {
+  background: url(background/CollapseIcon.gif) no-repeat left center;
+  height: auto;
+  padding-left: 18px;
+  white-space: nowrap;
+  width: auto;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.UIWebContentTreeView .NoneSelectNodeIcon {
+  background: url(background/ExpandIcon.gif) no-repeat left center;
+  height: auto;
+  padding-left: 18px;
+  white-space: nowrap;
+  width: auto;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.UIWebContentTreeView .DefaultPageIcon {
+  background: transparent url(background/DefaultPageIcon.gif) no-repeat scroll left center;
+  background-position: left center;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  padding-left: 20px;
+  white-space: nowrap;
+  width: auto;
+}
+
+/******************* UITreeViewBreadcumbs ******************************************/
+.UITreeViewBreadcumbs {
+  border: 1px solid gray;
+  margin: 10px 0px;
+  height: 25px;
+  line-height: 25px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.UITreeViewBreadcumbs .TreeHomeIcon {
+  background: transparent url(background/HomeIcon.gif) no-repeat scroll left center;
+  line-height: 16px;
+  height: 16px;
+  margin-top: 5px;
+  margin-left: 5px;
+  padding-left: 25px;
+  float: left;
+  width: 100%;
+}
+
+.UITreeViewBreadcumbs .FirstNode {
+  line-height: 13px;
+  padding: 0px 5px;
+  float: left;
+  cursor: pointer;
+}
+
+.UITreeViewBreadcumbs .RightArrowIcon {
+  background: transparent url(background/RightArrowIcon.gif) no-repeat scroll left center;
+  line-height: 13px;
+  padding: 0px 5px;
+  float: left;
+  cursor: pointer;
+}
+
+.UISingleContentViewerPortlet .UIContentNodeTypeSelector .UIFormGrid {
+  width: 50%;
+}
+
+.UISingleContentViewerPortlet .UIContentNodeTypeSelector .UIFormGrid td.FieldLabel {
+  text-align: left;
+}
+
+#UIContentSelectorFolder {
+  padding: 10px;
+}
+
+#UIContentSelectorMulti .UIHorizontalTabs .TabsContainer, #UIContentSelectorFolder .UIHorizontalTabs .TabsContainer {
+  background: url(/eXoResources/skin/DefaultSkin/webui/component/UIPopup/UIPopupWindow/background/CenterHorizontalTabs.gif) repeat-x scroll left bottom;
+  height: 25px;
+}
+
+#UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent {
+  background: white;
+}

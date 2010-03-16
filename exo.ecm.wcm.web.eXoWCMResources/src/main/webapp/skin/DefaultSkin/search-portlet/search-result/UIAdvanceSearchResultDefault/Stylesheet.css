@@ -1,0 +1,106 @@
+.UIWCMSearchPortlet {
+  background: white;
+  padding: 1px;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault {
+  margin: 10px;
+  border: 1px solid #b7b7b7;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault p {
+  padding: 0px 10px;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ResultHeader {
+  background: url(/eXoWCMResources/skin/DefaultSkin/content-list-viewer-portlet/list-contents/UIPCLVDefault/icons/BgCategoryTitle1x25.gif) repeat-x;
+  border-bottom: 1px solid #B7B7B7;
+  line-height: 25px;
+  overflow: hidden;
+  padding: 0px 5px;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ResultHeader .CaptionSearchType {
+  float: left;
+  padding: 0px 0.5em 0 4px;
+  font-size: 12px;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ResultHeader .SearchSummary {
+  padding: 0px 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .SearchItem {
+  padding: 10px 10px 5px;
+  line-height: 20px;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault  .ItemTitle a {
+  font-size: 14px;
+  color: #0385d9;
+  font-weight: bold;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault  .ItemTitle .CaptionDraft {
+  color: gray;
+  font-size: 11px;
+  height: 16px;
+  padding: 0 3px 3px 20px;
+  width: 50px;
+  background: url(icons/DraftIcon.gif) no-repeat;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault  .ItemTitle .CaptionEdit {
+  width: 16px;
+  height: 16px;
+  font-size: 11px;
+  font-weight: normal;
+  padding: 0 3px 3px 20px;
+  background: url(icons/EditIcon.gif) no-repeat;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ItemExcerpt {
+  color: black;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ItemInfo {
+  color: green;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ItemUrl {
+  
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ItemSize {
+  
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ItemSame a {
+  color: #9977DF;
+  text-decoration: underline;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ItemDetails {
+  display: none;
+  padding-left: 15px;
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault  .ItemScore {
+  
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ItemNone {
+  
+}
+
+.UIWCMSearchPortlet .UIAdvanceSearchResultDefault .ItemFunc {
+  padding: 10px 0;
+  height: 1%;
+  overflow: hidden;
+}
+
+.UIWCMSearchPortlet .UISearchedContentEdittingPopup .UIForm .UIFormGrid td.FieldLabel {
+  width: 160px;
+}
