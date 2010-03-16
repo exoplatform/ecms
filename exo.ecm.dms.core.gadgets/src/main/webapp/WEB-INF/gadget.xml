@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<gadgets>
+
+	<gadget name="PublishedDocuments">
+		<path>/gadgets/PublishedDocuments.xml</path>
+	</gadget>
+
+	<gadget name="LastEditedDocuments">
+		<path>/gadgets/LastEditedDocuments.xml</path>
+	</gadget>
+			
+</gadgets>
