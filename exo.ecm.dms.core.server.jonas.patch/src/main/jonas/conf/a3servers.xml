@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <server id="0" name="S0" hostname="localhost">
+    <service class="org.objectweb.joram.mom.proxies.ConnectionManager"
+             args="root root"/>
+    <service class="org.objectweb.joram.mom.proxies.tcp.TcpProxyService" 
+             args="16015"/>
+  </server>
+</config>
