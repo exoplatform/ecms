@@ -1,0 +1,63 @@
+<%def node = uicomponent.getViewNode("metadata:siteMetadata") ;%>
+<table class="UIGrid">
+	<tr>
+	    <td style="width:25%"><%=_ctx.appRes("SiteMetadata.view.label.siteTitle")%></td>
+	    <td>
+	      <%if(node.hasProperty("siteTitle")) {%>
+			    <%=node.getProperty("siteTitle").getString()%>
+			  <%}%>
+	    </td>
+	</tr>
+	<tr>
+	    <td style="width:25%"><%=_ctx.appRes("SiteMetadata.view.label.description")%></td>
+	    <td>
+			  <%if(node.hasProperty("description")) {%>
+			    <%=node.getProperty("description").getString()%>
+			  <%}%>
+		</td>
+	</tr>	
+	<tr>
+		<td style="width:25%"><%=_ctx.appRes("SiteMetadata.view.label.keywords")%></td>
+		<td>
+	      <%if(node.hasProperty("keywords")) {%>
+			    <%=node.getProperty("keywords").getString()%>
+			  <%}%>
+	    </td>
+   </tr>
+   <tr>
+	    <td style="width:25%"><%=_ctx.appRes("SiteMetadata.view.label.robots")%></td>
+	    <td>
+	      <%if(node.hasProperty("robots")) {%>
+			    <%=node.getProperty("robots").getString()%>
+			  <%}%>
+	    </td>
+	</tr>	 				 	
+</table>
+<%/* start render action*/%>
+<div class="UIAction"> 
+  <table class="ActionContainer">
+  	<tr>
+  		<td>
+		  	<div onclick="<%=uicomponent.event("EditProperty", "metadata:siteMetadata")%>" class="ActionButton LightBlueStyle">
+					<div class="ButtonLeft">
+						 <div class="ButtonRight">
+						  <div class="ButtonMiddle"  title="<%=_ctx.appRes("SiteMetadata.view.tooltip.add-edit")%>">
+						    <a href="javascript:void(0);"><%=_ctx.appRes("SiteMetadata.view.action.add-edit")%></a>
+					    </div>
+				    </div>
+				  </div>
+				</div>
+		  	<div onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle">
+					<div class="ButtonLeft">
+					  <div class="ButtonRight">
+						  <div class="ButtonMiddle" title="<%=_ctx.appRes("SiteMetadata.view.tooltip.cancel")%>">
+						    <a href="javascript:void(0);"><%=_ctx.appRes("SiteMetadata.view.action.cancel")%></a>
+				      </div>
+				    </div>
+			    </div>
+				</div>
+  		</td>
+  	</tr>
+  </table>
+</div>
+<%/* end render action*/%>

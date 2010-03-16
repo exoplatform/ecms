@@ -1,0 +1,78 @@
+<style>
+	.UIForm .HorizontalLayout textarea { 
+	  font-size:11px;
+	  height:275px;
+	  width:525px;
+	 }
+</style>
+<div class="UIForm">  
+  <% uiform.begin() %>
+  <div class="HorizontalLayout">
+    <table class="UIFormGrid">
+        <tr>
+          <td class="FieldLabel"><%=_ctx.appRes("WebLink.dialog.label.name")%></td>
+          <td class="FieldComponent">
+            <%
+              String[] fieldName = ["jcrPath=/node", "nodetype=exo:link", "editable=if-null", "validate=name,empty"] ;
+              uicomponent.addTextField("name", fieldName) ; 
+            %>
+          </td>
+        </tr>
+        
+        <tr>
+        	<td class="FieldLabel"><%=_ctx.appRes("WebLink.dialog.label.url")%></td>
+        	<td class="FieldComponent">
+            <%
+              String[] fieldUrl = ["jcrPath=/node/exo:linkURL", "validate=empty"] ;
+              uicomponent.addTextField("LinkURL", fieldUrl) ; 
+            %>
+        	</td>
+        </tr>
+        
+        <tr>
+          <td class="FieldLabel"><%=_ctx.appRes("WebLink.dialog.label.description")%></td>
+          <td class="FieldComponent">
+            <%
+              if(uicomponent.isEditing()) { 
+                def curNode = uicomponent.getNode() ;
+                if(curNode.hasProperty("exo:linkDescription")) {
+                  def content = curNode.getProperty("exo:linkDescription") ;                                      
+                  String[] fieldDescription = ["jcrPath=/node/exo:linkDescription"] ;
+                  uicomponent.addTextAreaField("LinkDescription", fieldDescription) ;                                                       
+                } 
+              } else {                           
+                String[] fieldDescription = ["jcrPath=/node/exo:linkDescription"] ;
+                uicomponent.addTextAreaField("LinkDescription", fieldDescription) ;                
+              }
+            %>      
+          </td>
+        </tr>
+               
+    </table>       
+    <%/* start render action*/%>
+    <div class="UIAction" style="display:block;"> 
+      <table class="ActionContainer" align="center">
+        <tr>
+          <td align="center">
+            <% for(action in uicomponent.getActions()) { 
+                 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+                 String link = uicomponent.event(action) ;
+            %>
+              <a href="$link" class="ActionButton LightBlueStyle">
+                <div class="ButtonLeft">
+                  <div class="ButtonRight">
+                    <div class="ButtonMiddle">
+                      $actionLabel
+                    </div>
+                  </div>
+                </div>
+              </a>
+            <%}%>          
+          </td>
+        </tr>
+      </table>
+    </div>
+    <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

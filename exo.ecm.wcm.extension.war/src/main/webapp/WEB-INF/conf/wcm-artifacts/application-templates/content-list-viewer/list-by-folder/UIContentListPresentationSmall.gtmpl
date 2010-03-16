@@ -1,0 +1,112 @@
+<% 
+	import javax.jcr.Node;
+	import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
+	import org.exoplatform.wcm.webui.clv.UICLVPortlet;
+	import org.exoplatform.wcm.webui.Utils;
+%>
+
+<div id="$uicomponent.id" class="UICLVPresentation">
+	<%	
+		String header = uicomponent.getHeader();
+		if (uicomponent.isShowHeader() && header != null && header.trim().length() != 0 ) {
+			%><div class="Header"><%= header %></div>		<%
+		}
+	%>
+	<div class="Caption">
+		<% 	
+			String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");		
+			if (uicomponent.getUIPageIterator().getAvailable() == 0) {
+				%>
+					<div style="height: 20px; text-align: center; font-size: 13px; background: white; padding: 10px; margin: 5px;">
+						<span><%= _ctx.appRes(uicomponent.getParent().getMessageKey()) %></span>
+					</div>
+				<%
+			} else {			
+				def currentPageData = uicomponent.getCurrentPageData();							
+				String labelReadMore = _ctx.appRes("UICLVPresentation.label.readmore");
+				String draftLabel = _ctx.appRes("UICLVPresentation.label.draft");
+				String editActionLabel = _ctx.appRes("UICLVPresentation.action.edit");
+				
+				for (viewNode in currentPageData) {
+					String itemLink = uicomponent.getURL(viewNode);			
+					String itemName = viewNode.getName();
+					String itemSummary = uicomponent.getSummary(viewNode);
+			    	String itemTitle = uicomponent.getTitle(viewNode);
+					String itemDateCreated = uicomponent.getCreatedDate(viewNode);
+					String itemOwner = uicomponent.getAuthor(viewNode);			
+					String imgSrc = uicomponent.getIllustrativeImage(viewNode);								
+					if (itemTitle != null && itemTitle.trim().length() != 0) {
+						itemName = itemTitle;
+					}						
+					String contentkEdittingLink = uicomponent.event("EditContent", viewNode.getPath());		
+					%>	
+						<div class="CaptionItem" style="border-bottom: 0px;">
+							<% 
+                                if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.SHOW_THUMBNAILS_VIEW)) {
+                                    %><img src="$imgSrc" width="30" style="float:left; padding-right:5px;" /><%
+                                }
+								if (uicomponent.isShowField(UICLVPortlet.SHOW_TITLE)) {
+									%>
+										<div class="CaptionTitle" >
+											<% 
+												if (uicomponent.isShowField(UICLVPortlet.SHOW_LINK)) {
+													%><a href="$itemLink">$itemName</a><% 
+												} else { 
+													%>$itemName<% 
+												} 
+												if(Utils.isShowDraft(viewNode)) { 
+													%>
+														<span>[ </span>
+														<a class="CaptionDraft"><%=draftLabel%></a>
+														<%
+															if(Utils.isShowQuickEdit(viewNode)) {
+																%>, <a class="CaptionEdit" href="$contentkEdittingLink"><%=editActionLabel%></a><%
+															}
+														%>
+														<span> ]</span>
+													<% 
+												}
+											%> 
+										</div>
+									<%							
+								} 
+								if (itemDateCreated != null && uicomponent.isShowField(UICLVPortlet.SHOW_DATE_CREATED)) { 
+									%><div class="CaptionDate"><%=itemDateCreated%></div><% 
+								} 
+							%>											
+							<div class="CaptionContent">				
+								<% 
+									if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.SHOW_SUMMARY)) {
+										%><pre><%=itemSummary%></pre><% 
+									} 
+								%>															
+							</div>			
+                            <%
+                            if (uicomponent.isShowField(UICLVPortlet.SHOW_READMORE)) {
+                            %>
+                            <div class="CaptionViewMore"><a href="$itemLink"><%=labelReadMore%>&raquo;</a></div>
+                            <%
+                            }
+                            %>
+						</div>
+					<%							
+				} //end for
+			} //end else	
+		%>
+		<div class="CaptionFunc">
+			<% 
+				if (uicomponent.showRefreshButton()) { 
+					String link = uicomponent.event("Refresh");
+					%>				
+						<div class="CaptionRefresh">
+							<a href="$link">$labelRefreshAction</a>
+						</div>
+					<% 
+				}
+				if (uicomponent.showPaginator()) { 
+						uicomponent.renderChild(UICustomizeablePaginator.class)
+				} 
+			%>
+		</div>
+	</div>
+</div>

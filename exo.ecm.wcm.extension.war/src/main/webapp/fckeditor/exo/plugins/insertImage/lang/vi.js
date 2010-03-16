@@ -1,0 +1,1 @@
+FCKLang.WCMInsertImagePlugins = "Chèn ảnh";
