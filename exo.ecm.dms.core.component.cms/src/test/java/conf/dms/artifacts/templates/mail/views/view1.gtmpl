@@ -1,0 +1,49 @@
+#set($node = $uicomponent.getNode())
+<table class="UIGrid">      	 			
+  <tr>
+    <td style="width:10%; background:RGB(225,235,251)"><%= _ctx.appRes("Mail.view.label.from") %></td>
+    <td>$node.getProperty("exo:from").getString()</td>
+  </tr>
+  <tr>
+    <td style="width:10%; background:RGB(225,235,251)"><%= _ctx.appRes("Mail.view.label.to") %></td>
+    <td>$node.getProperty("exo:to").getString()</td>
+  </tr>
+  #set($cc = $node.getProperty("exo:cc").getString())
+  #if($cc.length() > 0)
+  	<tr>
+			<td style="width:10%; background:RGB(225,235,251)"><%= _ctx.appRes("Mail.view.label.cc") %></td>
+			<td>$node.getProperty("exo:cc").getString()</td>
+  	</tr>
+  #end
+  <tr>
+		<td style="width:10%; background:RGB(225,235,251)"><%= _ctx.appRes("Mail.view.label.subject") %></td>
+		<td>
+			$node.getProperty("exo:subject").getString()			
+		</td>
+  </tr>
+  <tr>
+		<td style="width:10%; background:RGB(225,235,251)"><%= -ctx.appRes("Mail.view.label.date") %></td>
+		<td>
+			$node.getProperty("exo:sendDate").getString()			
+		</td>
+  </tr>  
+  #set($attachments = $uicomponent.getAttachments())
+  #if($attachments.size() > 0)
+  	<tr>
+			<td style="width:10%; background:RGB(225,235,251)"><%= _ctx.appRes("Mail.view.label.attachment") %></td>
+			<td>
+				#foreach($att in $attachments)
+					<div>
+						<a href="/${uicomponent.getPortalName()}/jcr?workspace=${uicomponent.getWorkspaceName()}&path=${att.getPath()}">$att.getName()</a>				 
+					</div>
+				#end		  		
+			</td>
+  	</tr>  
+  #end  
+</table>
+
+<div style="padding: 10px"> 
+	#if($node.hasProperty("exo:content"))
+	  <td>$node.getProperty("exo:content").getString()</td>		  
+  #end
+</div>

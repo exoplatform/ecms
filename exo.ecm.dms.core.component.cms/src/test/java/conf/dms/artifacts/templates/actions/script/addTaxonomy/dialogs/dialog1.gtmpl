@@ -1,0 +1,92 @@
+<%
+	def repository = uicomponent.getRepositoryName();
+	String[] repositoryField = ["jcrPath=/node/exo:repository", "visible=false", repository] ;
+	uicomponent.addHiddenField("repository", repositoryField) ;
+%>
+<div class="UIFormWithTitle">
+  <div class="TitleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></div>
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">	  
+		<table class="UIFormGrid">	
+  		<tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.id")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldId = ["jcrPath=/node", "mixintype=exo:move", "editable=false", "visible=if-not-null"] ;
+		        uicomponent.addMixinField("id", fieldId) ;  
+		      %>
+		    </td>
+		  </tr>
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.name")%></td>
+			  <td class="FieldComponent">
+				  <% 
+						String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty"];
+						uicomponent.addTextField("actionName", fieldName);
+				  %>
+				</td>
+			</tr>		          					
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.lifecycle")%></td>
+			  <td class="FieldComponent">
+				  <% 
+						String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", "options=add"] ;
+						uicomponent.addSelectBoxField("lifecycle", fieldLifecycle) 
+				  %>
+				</td>
+			</tr>
+      <tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.homePath")%></td>
+			  <td class="FieldComponent">
+				  <% 
+						String[] fieldHomePath = ["jcrPath=/node/exo:storeHomePath", "validate=empty", "editable=false"];
+						uicomponent.addTextField("homePath", fieldHomePath);
+				  %>
+				</td>
+			</tr>			
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.targetWorkspace")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldWorkspace = ["jcrPath=/node/exo:targetWorkspace", "script=ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy", "scriptParams=repository", "onchange=true"] ;
+		        uicomponent.addSelectBoxField("targetWorkspace", fieldWorkspace) ;
+		      %>
+		    </td>
+		  </tr>				
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.targetPath")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldPath = ["jcrPath=/node/exo:targetPath", "selectorAction=selectDestPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=targetWorkspace", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"] ;
+		        uicomponent.addActionField("targetPath", fieldPath)  ;
+		      %>
+		    </td>
+		  </tr>
+ 		</table>
+		<%/* start render action*/%>
+		<div class="UIAction"> 
+			<table align="center" class="ActionContainer">
+				<tr>
+					<td align="center">
+					  <% for(action in uicomponent.getActions()) { 
+					  		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+								 String link = uicomponent.event(action) ;
+					  %>
+						  <a href="$link" class="ActionButton LightBlueStyle">
+								<div class="ButtonLeft">
+								  <div class="ButtonRight">
+									  <div class="ButtonMiddle">
+											$actionLabel
+								    </div>
+								  </div>
+							  </div>
+						  </a>
+					  <%}%>   
+			  	</td>
+			  </tr>       
+			</table>
+		</div>
+		<%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

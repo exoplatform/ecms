@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>		
+	<component>
+	   <key>org.exoplatform.services.cms.queries.QueryService</key>  
+	   <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
+	   <init-params>
+		    <value-param>
+		      <name>workspace</name>
+		      <value>system</value>
+		    </value-param>   
+		    <value-param>
+		      <name>relativePath</name>
+		      <value>Private/Searches</value>
+		    </value-param>
+		    <value-param>
+		      <name>group</name>
+		      <value>*:/platform/administrators</value>
+		    </value-param>            
+	  	</init-params>	         
+	</component>	
+	
+	<external-component-plugins>
+		<target-component>org.exoplatform.services.cms.queries.QueryService</target-component>        		        
+    <component-plugin> 
+      <name>query.plugin</name>
+      <set-method>setQueryPlugin</set-method>
+      <type>org.exoplatform.services.cms.queries.impl.QueryPlugin</type>
+      <description>Nothing</description>
+      <init-params>
+      	<value-param>
+       	<name>autoCreateInNewRepository</name>
+       	<value>true</value>
+       </value-param>	        
+       <value-param>
+       	<name>repository</name>
+       	<value>repository</value>
+       </value-param>	        		        		    		    
+       <object-param>        
+         <name>CreatedDocuments</name>
+         <description>documents created by the current user</description>
+         <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
+           <field  name="name"><string>Created Documents</string></field>
+           <field  name="language"><string>xpath</string></field>
+           <field  name="statement"><string>//*[(@jcr:primaryType = 'exo:article' or @jcr:primaryType = 'nt:file') and @exo:owner='${UserId}$'] order by @exo:dateCreated descending</string></field>
+           <field  name="permissions">
+             <collection type="java.util.ArrayList">
+               <value><string>*:/platform/users</string></value>
+             </collection>
+           </field>
+		   <!-- Don't cache this query as it is sensitive to user -->
+           <field  name="cachedResult"><boolean>false</boolean></field>             
+         </object>
+       </object-param>
+       <object-param>        
+         <name>CreatedDocumentsDayBefore</name>
+         <description>documents created the day before</description>
+         <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
+           <field  name="name"><string>CreatedDocumentDayBefore</string></field>
+           <field  name="language"><string>xpath</string></field>
+           <field  name="statement"><string>//element(*,exo:article)[@exo:dateCreated &lt; xs:dateTime('${Date}$')] order by @exo:dateCreated descending</string></field>
+           <field  name="permissions">
+             <collection type="java.util.ArrayList">
+               <value><string>*:/platform/users</string></value>
+             </collection>
+           </field>
+           <field  name="cachedResult"><boolean>true</boolean></field>             
+         </object>
+       </object-param>
+       
+       <object-param>        
+         <name>AllArticles</name>
+         <description>All articles</description>
+         <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
+           <field  name="name"><string>All Articles</string></field>
+           <field  name="language"><string>xpath</string></field>
+           <field  name="statement"><string>//element(*,exo:article) order by @exo:dateCreated descending</string></field>
+           <field  name="permissions">
+             <collection type="java.util.ArrayList">
+               <value><string>*:/platform/users</string></value>
+             </collection>
+           </field>
+           <field  name="cachedResult"><boolean>true</boolean></field>             
+         </object>
+       </object-param>
+      
+      </init-params>  
+		</component-plugin>  		
+ </external-component-plugins>	      
+</configuration>

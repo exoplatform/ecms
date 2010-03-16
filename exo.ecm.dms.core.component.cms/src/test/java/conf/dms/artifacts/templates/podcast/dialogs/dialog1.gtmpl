@@ -1,0 +1,185 @@
+<%  
+  String[] hiddenField1 = ["jcrPath=/node/jcr:content", "nodetype=nt:resource", "visible=false"] ; 
+  String[] hiddenField2 = ["jcrPath=/node/jcr:content/jcr:encoding", "visible=false", "UTF-8"] ;
+  String[] hiddenField3 = ["jcrPath=/node/jcr:content/jcr:lastModified", "visible=false"] ;
+  uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
+  uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
+  uicomponent.addHiddenField("hiddenInput3", hiddenField3) ;
+%>
+<div class="UIForm FormLayout">
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">	
+  	<table class="UIFormGrid">      
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.name")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
+		        uicomponent.addTextField("name", fieldName) ;   
+		      %>
+		    </td>
+	    </tr>	    
+	    <%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
+		    <tr>
+		      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.categories")%></td>
+		      <td class="FieldComponent">
+			      <% 
+			        String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true"];
+			        uicomponent.addTextField("categories", fieldCategories);
+			      %>
+			    </td>
+			  </tr>
+      <%}%>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.title")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldTitle = ["jcrPath=/node/exo:title"] ;
+		        uicomponent.addTextField("title", fieldTitle) ;  
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.link")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldLink = ["jcrPath=/node/exo:link", "validate=empty"] ;
+		        uicomponent.addTextField("link", fieldLink) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.author")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldAuthor = ["jcrPath=/node/exo:author"] ;
+		        uicomponent.addTextField("author", fieldAuthor) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.explicit")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldExplicit = ["jcrPath=/node/exo:explicit", "no", "options=no,yes"] ;
+		        uicomponent.addSelectBoxField("explicit", fieldExplicit) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.category")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldCategory = ["jcrPath=/node/exo:podcastCategory"] ;
+		        uicomponent.addTextField("category", fieldCategory) ;  
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.keywords")%></td>
+	      <td class="FieldComponent">
+		      <%
+			      String[] fieldKeywords = ["jcrPath=/node/exo:keywords"] ;
+			      uicomponent.addTextField("keywords", fieldKeywords) ;  
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.publish-date")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldPublishedDate = ["jcrPath=/node/exo:publishedDate", "options=displaytime", "validate=datetime", "visible=true"] ;
+		        uicomponent.addCalendarField("publishedDate", fieldPublishedDate) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.description")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldDescription = ["jcrPath=/node/exo:description"] ;
+		        uicomponent.addTextAreaField("description", fieldDescription) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.upload-file")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        if (uicomponent.isEditing()) { 
+							def curNode = uicomponent.getNode() ;
+							if (curNode.hasNode("jcr:content")) {
+								def imageNode = curNode.getNode("jcr:content") ;
+								if (imageNode.getProperty("jcr:data").getStream().available() > 0) {
+									def actionLink = uicomponent.event("RemoveData", "/jcr:content");
+						%>		
+									<div>
+									  <div style="font-size:12px; font-weight: bold; line-height: 17px;">
+									    <%=_ctx.appRes("File.dialog.label.re-upload")%>
+									  </div>
+										<a href="$actionLink">
+											<img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" class="ActionIcon Remove16x16Icon"/>
+										</a>
+									</div>
+						<%
+								} else {
+					        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data"] ;
+				  	      uicomponent.addUploadField("media", fieldMedia) ;				
+								}
+							}
+						} else if (uicomponent.dataRemoved()) {
+			        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data"] ;
+				  	  uicomponent.addUploadField("media", fieldMedia) ;
+						}	else {
+			        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data"] ;
+					    uicomponent.addUploadField("media", fieldMedia) ;
+						}
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.mime-type")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldMediamimetype = ["jcrPath=/node/jcr:content/jcr:mimeType", "audio/mp3", "options=audio/mp3,audio/x-m4a,video/mpeg,video/x-m4v,video/quicktime"] ;
+		        uicomponent.addSelectBoxField("mediamimetype", fieldMediamimetype) ;
+		      %>
+		    </td>
+	    </tr>
+	    <tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.lenght")%></td>
+	      <td class="FieldComponent">
+		      <%
+		       String[] fieldSize = ["jcrPath=/node/exo:length", "validate=number"] ;
+		       uicomponent.addTextField("lenth", fieldSize) ; 
+		      %>
+		    </td>
+	    </tr>
+	  </table>
+		<%/* start render action*/%>
+		<div class="UIAction"> 
+	    <table class="ActionContainer">
+	    	<tr>
+	    		<td>
+			      <% for(action in uicomponent.getActions()) { 
+			      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+								 String link = uicomponent.event(action) ;
+			      %>
+		          <div onclick="$link" class="ActionButton LightBlueStyle">
+								<div class="ButtonLeft">
+								  <div class="ButtonRight">
+									  <div class="ButtonMiddle">
+									    <a href="javascript:void(0);">$actionLabel</a>
+							      </div>
+							    </div>
+						    </div>
+							</div>
+			      <%}%>          
+	      	</td>
+	      </tr>
+	    </table>
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

@@ -1,0 +1,20 @@
+<%def node = uicomponent.getNode();%>
+<table class="UIGrid">      	 			
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("AddMetadata.view.label.action-name")%></td>
+    <td>
+  		<%if(node.hasProperty("exo:name")){%>
+  			<%=node.getProperty("exo:name").getString()%>
+  		<%}%>	
+ 		</td>
+  </tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("AddMetadata.view.label.lifecycle")%></td>
+    <td>
+    	<%if(node.hasProperty("exo:lifecyclePhase")){%>
+    		<%=node.getProperty("exo:lifecyclePhase").getString()%>    		
+    	<%}%>
+    </td>					
+  </tr>
+  
+</table>

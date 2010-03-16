@@ -1,0 +1,101 @@
+<%
+	import org.exoplatform.ecm.webui.component.browsecontent.UIToolBar ;
+	import org.exoplatform.ecm.webui.component.browsecontent.UIDocumentDetail ;
+	import org.exoplatform.ecm.webui.component.browsecontent.UITagList ;
+	import org.exoplatform.ecm.webui.utils.Utils ;
+	
+	String componentName = uicomponent.getName() ;
+	def subDocumentList = uicomponent.getCurrentList() ;
+	boolean hasNoDocument = subDocumentList.isEmpty() ;
+	boolean isShowTagmap = uicomponent.isShowTagmap() ;
+	boolean isShowDocByTag = uicomponent.isShowDocumentByTag() ;
+	int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
+	
+%>
+<div class="UIBrowseContainer" id="$uicomponent.id">
+	<%
+		if(uicomponent.isShowDocumentDetail() && uicomponent.isCommentAndVote()) {
+			uicomponent.renderChild(UIToolBar.class);
+		}
+	%>
+   <div class="ContentHolder">
+ 	<%/*Begin TagMap*/   
+		 	String styleWithTag = "margin-right: 0px" ;
+		 	if(isShowTagmap) {	
+		 		styleWithTag = "margin-right: 210px;"	 ;  
+		 	 	uicomponent.renderChild(UITagList.class);
+	 		} 
+	/*End TagMap*/%>
+  <div style="$styleWithTag">
+  <%/*Begin UIEventViewer*/%>
+  <div class="UIEventViewer">
+  	<%if(hasNoDocument){%>
+    <div class="UISubContent">
+      <div class ="UIDocumentContentInfo">
+        <div class="NoneDocumentMessage">
+          <div class="MessageContainer">
+            <div class="Info16x16Icon"><span></span></div>
+            <div class="Message"><%=_ctx.appRes(componentName + ".label.NoDocument")%></div>
+            <div style="clear:left;"><span></span></div>
+          </div>
+        </div>
+      </div>  
+    </div>  
+  <%} else {%>
+    <div class="EventContent">
+      <%
+        for (Node doc in subDocumentList) {
+          String viewAction = uicomponent.event("ChangeNode",Utils.formatNodeName(doc.getPath()));
+          String icon = uicomponent.getIcons(doc,"16x16Icon") ;
+      %>
+          <div class="EventContentDetail">
+            <div class="TopEventContentDetail">
+              <table>  
+                 <tr>
+                  <td>
+                    <div class="DocNodeIcon CBDefaultDocument16x16Icon $icon">
+                    <%if(Utils.isSymLink(doc)) {%>
+	                    <div class="LinkSmall"></div>
+	                  <%}%>
+                    </div>
+                    <div class="EventDocumentLabel">
+                      <a href="$viewAction"><%=doc.getName()%></a>
+                    </div>  
+                  </td>
+                  <td class="EventAuthorNameLabel">
+                    <%=_ctx.appRes(componentName + ".label.author")%>:<%=uicomponent.getOwner(doc)%>
+                  </td>                  
+                </tr>        
+              </table>
+            </div>
+            <div class="MainEventContent">
+              <div class="SummaryTitleLabel">
+              	<%=_ctx.appRes(componentName + ".label.summary")%>
+                <%if(doc.hasProperty("exo:summary")){%>
+                 <%=doc.getProperty("exo:summary").getString()%>
+               <%}%>
+              </div>
+            </div>
+          </div>
+      <%}%>
+    </div>
+    <%if(isShowDocByTag) {%>
+    <div class="ViewPreviousDocument"> 
+      <div class="BackIcon"><span></span></div>
+      <a href="<%=uicomponent.event('Back')%>">
+      	<%=_ctx.appRes(componentName + ".label.previous")%>
+      </a>
+      <div style="clear:left"><span></span></div>
+    </div>
+    <div style="clear:left"><span></span></div>
+    <%}%>
+    <% if(totalPages>1){ %>
+    <div class="DocumentsPageIterator"><%_ctx.renderUIComponent(uicomponent.getUIPageIterator());%></div>
+    <% } %>
+    <div style="clear:left"><span></span></div>
+    <%}%>    
+  </div>  
+  <%/*End UIEventViewer*/%>
+  </div>
+ </div> 
+</div>

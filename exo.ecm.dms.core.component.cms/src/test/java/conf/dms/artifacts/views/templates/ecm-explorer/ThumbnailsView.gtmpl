@@ -1,0 +1,188 @@
+<%
+  import org.exoplatform.ecm.webui.utils.Utils ;
+  import org.exoplatform.web.application.Parameter ;
+  import org.exoplatform.webui.core.UIRightClickPopupMenu ;
+    
+  UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu() ;
+  String componentId = uicomponent.getId();
+  String serverUrl= uicomponent.getWebDAVServerPrefix();
+  String portalName = uicomponent.getPortalName();
+  String repository = uicomponent.getRepository(); 
+  
+  def viewComponentId  = new Date().getTime();
+  def rcontext = _ctx.getRequestContext() ;
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UISimpleView','/ecm/javascript/'); 
+  rcontext.getJavascriptManager().addOnLoadJavascript("function(){eXo.ecm.UISimpleView.initAllEvent('${componentId}-$viewComponentId');}");
+	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UISimpleView.setHeight");
+%>
+<div id="$componentId">
+	<div id="${componentId}-$viewComponentId">
+		<div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
+			<div class="JCRMoveIcon" style="display: none;"><div class="MoveNode"><span>{number}</span></div></div>
+			<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
+			<div class="JCRMoveAction" style="display: none;" request="<%=contextMenu.event('MoveNode', 'MultiSelection')%>" symlink="<%=contextMenu.event('CreateLink', 'MultiSelection')%>"></div>
+			<div class="ItemContextMenu" style="background: #F6F6F6; position: absolute;	top: 0px; display: none;" >
+				<div class="UIRightClickPopupMenu" style="display: block;">
+					<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">									
+						<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UISimpleView.postGroupAction("<%=contextMenu.event('Copy', 'MultiSelection')%>")> 	
+							<div class="ItemIcon Copy16x16Icon">
+								<%=_ctx.appRes("ECMContextMenu.event.Copy")%>
+							</div>
+					 	</a>
+					 	<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UISimpleView.postGroupAction("<%=contextMenu.event('Cut', 'MultiSelection')%>")> 	
+							<div class="ItemIcon Cut16x16Icon">
+								<%=_ctx.appRes("ECMContextMenu.event.Cut")%>
+							</div>
+					 	</a>
+					 	<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UISimpleView.postGroupAction("<%=contextMenu.event('Delete', 'MultiSelection')%>")> 	
+							<div class="ItemIcon Delete16x16Icon">
+								<%=_ctx.appRes("ECMContextMenu.event.Delete")%>
+							</div>
+					 	</a>
+					 	<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UISimpleView.postGroupAction("<%=contextMenu.event('Lock', 'MultiSelection')%>")> 	
+							<div class="ItemIcon Lock16x16Icon">
+								<%=_ctx.appRes("ECMContextMenu.event.Lock")%>
+							</div>
+					 	</a>
+					 	<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UISimpleView.postGroupAction("<%=contextMenu.event('Unlock', 'MultiSelection')%>")> 	
+							<div class="ItemIcon Unlock16x16Icon">
+								<%=_ctx.appRes("ECMContextMenu.event.Unlock")%>
+							</div>
+					 	</a>
+					 	<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UISimpleView.postGroupAction("<%=contextMenu.event('AddSymLink', 'MultiSelection')%>")>  
+              <div class="ItemIcon AddSymLink16x16Icon">
+                <%=_ctx.appRes("ECMContextMenu.event.AddSymLink")%>
+              </div>
+            </a>
+					 </div>	
+				 </div>
+			</div>
+			<div class="GroundContextMenu" style="background: #F6F6F6; position: absolute;	top: 0px; display: none;">
+				<div class="UIRightClickPopupMenu" style="display: block;">
+					<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">									
+						<a class="MenuItem" href="<%=contextMenu.event("AddFolder")%>" style="display: block;"> 	
+							<div class="MenuIcon AddFolder16x16Icon">
+								<%=_ctx.appRes("ECMContextMenu.event.AddFolder")%>
+							</div>
+					 	</a>
+					 	<a class="MenuItem" href="<%=contextMenu.event("AddDocument")%>" style="display: block;"> 	
+							<div class="MenuIcon AddDocument16x16Icon">
+								<%=_ctx.appRes("ECMContextMenu.event.AddDocument")%>
+							</div>
+					 	</a>
+					 	<a class="MenuItem" href="<%=contextMenu.event("Upload")%>" style="display: block;"> 	
+							<div class="MenuIcon Upload16x16Icon">
+								<%=_ctx.appRes("ECMContextMenu.event.Upload")%>
+							</div>
+					 	</a>
+					 	<a class="MenuItem" href="<%=contextMenu.event("AddSymLink")%>" style="display: block;">   
+              <div class="MenuIcon AddSymLink16x16Icon">
+                <%=_ctx.appRes("ECMContextMenu.event.AddSymLink")%>
+              </div>
+            </a>
+					 	<%if(uicomponent.isCanPaste()) {%>
+						 	<a class="MenuItem" href="<%=contextMenu.event("Paste")%>" style="display: block;"> 	
+								<div class="MenuIcon Paste16x16Icon">
+									<%=_ctx.appRes("ECMContextMenu.event.Paste")%>
+								</div>
+						 	</a>
+					  <%}%>
+					 </div>	
+				 </div>
+			</div>
+		</div>
+		<div class="UIThumbnailsView" style="overflow-y: auto; overflow-x: hidden;">
+		  <div class="ActionIconsContainer">
+		    <%
+		      for(data in uicomponent.getChildrenList()) { %>
+		        <%
+		          def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
+		          def preferenceWS = data.getSession().getWorkspace().getName() ;
+		          String name = data.getPath().substring(data.getPath().lastIndexOf("/") + 1) ;
+		          String nodePath = data.getPath() + "&workspaceName=" + preferenceWS ;
+		          String actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
+		          //Begin WebDav Action
+		          String strActs = "<div class=\"RightClickCustomItem\" style=\"display: none;\">" ;
+			        if(data.getPrimaryNodeType().getName().equals("nt:file")) {
+						  	String mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+						  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+portalName+"','"+repository+"','"+ preferenceWS+ "','" +data.getPath()+"','"+mimeType+"')";				  					  					  	
+			        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(this);\" href=\"" + link + "\">" ;	        
+						  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">Download And Allow Edition</div>" ;
+						  	strActs += 		"</a>" ;				  	
+						  }else {
+						  	String link = serverUrl + "/" + portalName + "/rest/jcr/" + repository + "/" + preferenceWS + data.getPath(); 
+			        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(this);\"  style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
+						  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">Download And Allow Edition</div>" ;
+						  	strActs += 		"</a>" ;				  	
+						  }
+						  //End WebDav Action
+		          String subName ;
+		          List customActs = uicomponent.getCustomActions(data) ;
+		          Parameter[] params  ;
+		          if(customActs.size() > 0) {            
+		            for(act in customActs) {
+		              String actName = act.getProperty("exo:name").getValue().getString() ;
+		              params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",act.getName())] ;
+		              strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(this);\" href=\"" + contextMenu.event("Custom",nodePath,params) + "\">" ;
+		              strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
+		              strActs += "</a>" ;
+		            }            
+		          }
+		          String clipboardLink = serverUrl + "/" + portalName + "/rest/jcr/" + repository + "/" + preferenceWS + data.getPath();
+		          strActs +=	"<a class='MenuItem' style='display: block;' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
+							strActs +=  "	<div class='MenuURLIcon GetURL16x16Icon'>" ;
+							strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
+							strActs +=  "	</div>" ;
+					 		strActs +=  "</a>";
+		          strActs += "</div>" ;
+		          
+		          def rightClickMenu = "" ;
+		          String isLocked = "false";
+		          if(data.isLocked()) isLocked = "true";     
+		          if(!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uicomponent.getActionsList(data)) ;
+		        %>   
+		      <div class="ActionIconBox" locked="<%=isLocked%>" <%=rightClickMenu%> style="padding: 4px 0px 4px 0px; height: auto;"
+		       				objectId="<%=data.getPath()%>" workspaceName="<%=preferenceWS%>" ondblclick="$actionLink">
+		        <div style="height: auto; width: auto; border: none; -moz-user-select: none;" unselectable="on">
+							<div class="NodeLabel">
+								<div class="ThumbnailImage">
+									<%
+									  String thumbnailImage = "/" + uicomponent.getPortalName() + "/rest/thumbnailImage/" + uicomponent.getRepository() + "/" + preferenceWS + data.getPath() + "/?size=medium&reloadnum=" + Math.random();
+									%>
+								    <div style="display: block;" class="LoadingProgressIcon">
+								        <%if(uicomponent.isSymLink(data)) {%>
+								          <div class="Link"></div>
+								        <%}%>
+								        <img src="$thumbnailImage" onerror='eXo.ecm.UISimpleView.errorCallback(this);' onload="this.parentNode.style.backgroundImage='none'" />
+								    </div>
+								    <div style="display: none;" class="Icon48x48 default48x48Icon <%=Utils.getNodeTypeIcon(data, "48x48Icon")%>">
+								      	<%if(uicomponent.isSymLink(data)) {%>
+								          <div class="Link"></div>
+								        <%}%>
+								    </div>
+								</div>
+							</div>
+			        <%
+			          if(name.length() < 20) subName = name ;
+			          else subName = name.substring(0,15) + "..." ;
+			        %>
+			        <div class="ActionIconLabel" style="width: auto;">
+			          <a class="ActionLabel" title="$name">$subName</a>
+			        </div>
+			      </div>
+			      $strActs
+		      </div>
+		    <%}%>
+		    
+		  </div>  
+		</div>
+	</div>	
+	<% 
+	  int availablePage = uicomponent.getContentPageIterator().getAvailablePage();
+	  if (availablePage > 1) { 
+	%>	
+		<div class="PageAvailable" pageAvailable='$availablePage'>
+			<%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
+		</div>
+	<% } %>
+</div>

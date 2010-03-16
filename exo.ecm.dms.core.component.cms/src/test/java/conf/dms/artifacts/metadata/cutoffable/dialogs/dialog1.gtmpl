@@ -1,0 +1,86 @@
+<div class="UIForm FormLayout">  
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">
+  	<table class="UIFormGrid">
+  		<tr>
+      	<td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-executed")%></td>
+      	<td class="FieldComponent">
+		      <%
+		        String[] fieldCutoffExecuted = ["jcrPath=/node/rma:cutoffExecuted", "false", "options=false,true"] ;
+		        uicomponent.addSelectBoxField("cutoffExecuted", fieldCutoffExecuted) ;
+		      %>
+		    </td>
+		  </tr>
+    	<tr>		          					
+	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-now")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldCutoffNow = ["jcrPath=/node/rma:cutoffNow", "false", "options=false,true"] ;
+		        uicomponent.addSelectBoxField("cutoffNow", fieldCutoffNow) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-date-time")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldCutoffDateTime = ["jcrPath=/node/rma:cutoffDateTime", "options=displaytime", "visible=true"] ;
+		        uicomponent.addCalendarField("cutoffDateTime", fieldCutoffDateTime) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-event")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldCutoffEvent = ["jcrPath=/node/rma:cutoffEvent"] ;
+		        uicomponent.addTextField("cutoffEvent", fieldCutoffEvent) ;
+		      %>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-obsolete")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldCutoffObsolete = ["jcrPath=/node/rma:cutoffObsolete", "false", "options=false,true"] ;
+		        uicomponent.addSelectBoxField("cutoffObsolete", fieldCutoffObsolete) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Cutoffable.dialog.label.cutoff-superseded")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldCutoffSupereded = ["jcrPath=/node/rma:cutoffSuperseded", "false", "options=false,true"] ;
+		        uicomponent.addSelectBoxField("cutoffSuperseded", fieldCutoffSupereded) ;
+		      %>
+		    </td>
+		  </tr>
+		</table>
+		<%/* start render action*/%>
+		<div class="UIAction"> 
+	    <table class="ActionContainer">
+	    	<tr>
+	    		<td>
+		      <% for(action in uicomponent.getActions()) {
+		      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+							 String link = uicomponent.event(action) ;	
+		      %>
+	          <div onclick="$link" class="ActionButton LightBlueStyle">
+							<div class="ButtonLeft">
+							  <div class="ButtonRight">
+								  <div class="ButtonMiddle">
+								    <a href="javascript:void(0);">$actionLabel</a>
+						      </div>
+						    </div>
+					    </div>
+						</div>
+		      <%}%>          
+	      	</td>
+	      </tr>
+	    </table>
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

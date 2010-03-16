@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+  <component>
+    <key>org.exoplatform.services.cms.documents.DocumentTypeService</key>  
+    <type>org.exoplatform.services.cms.documents.impl.DocumentTypeServiceImpl</type>
+		<init-params>
+			<object-param>
+				<name>Images</name>
+				<object type="org.exoplatform.services.cms.documents.impl.DocumentType">
+					<field name="mimeTypes">
+						<collection type="java.util.ArrayList">
+							<value><string>image/jpeg</string></value>
+							<value><string>image/png</string></value>
+							<value><string>image/gif</string></value>
+							<value><string>image/bmp</string></value>
+							<value><string>image/tiff</string></value>
+						</collection>
+					</field>
+				</object>
+			</object-param>
+			<object-param>
+				<name>Video</name>
+				<object type="org.exoplatform.services.cms.documents.impl.DocumentType">
+					<field name="mimeTypes">
+						<collection type="java.util.ArrayList">
+							<value><string>video/mpeg</string></value>
+							<value><string>audio/mpeg</string></value>
+						</collection>
+					</field>
+				</object>
+			</object-param>			
+		</init-params>
+  </component>	
+</configuration>

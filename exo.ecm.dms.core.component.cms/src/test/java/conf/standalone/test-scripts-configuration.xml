@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>    
+   <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.scripts.ScriptService</target-component>
+    	<component-plugin> 
+        <name>manage.script.plugin</name>
+        <set-method>addScriptPlugin</set-method>
+        <type>org.exoplatform.services.cms.scripts.impl.ScriptPlugin</type>
+        <description>Nothing</description>
+		    <init-params>		    	
+	        <value-param>
+	        	<name>autoCreateInNewRepository</name>
+	        	<value>true</value>
+	        </value-param>	        
+	        <value-param>
+	        	<name>repository</name>
+	        	<value>repository</value>
+	        </value-param>
+	        <value-param>
+	        	<name>predefinedScriptsLocation</name>
+	        	<value>jar:/conf/dms/artifacts</value>
+	        </value-param>	        
+		      <object-param>
+		        <name>predefined.scripts</name>
+		        <description>description</description>
+		        <object type="org.exoplatform.services.cms.impl.ResourceConfig">		        	
+		          <field  name="resources">
+		            <collection type="java.util.ArrayList">
+		              <!-- ecm-explorer/action -->		              
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/action/RSSScript.groovy</string></field>
+		                </object>  
+		              </value> 
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/action/SendMailScript.groovy</string></field>
+		                </object>  
+		              </value> 
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/action/EnableVersioningScript.groovy</string></field>
+		                </object>  
+		              </value> 
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/action/AutoVersioningScript.groovy</string></field>
+		                </object>  
+		              </value> 		              		              
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/action/AddMetadataScript.groovy</string></field>
+		                </object>  
+		              </value> 
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/action/TransformBinaryChildrenToTextScript.groovy</string></field>
+		                </object>  
+		              </value> 		              
+		              <value>
+										<object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+											<field  name="name"><string>ecm-explorer/action/GetMailScript.groovy</string></field>
+										</object>  
+		              </value> 		              
+		              <value>
+										<object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+											<field  name="name"><string>ecm-explorer/action/ProcessRecordsScript.groovy</string></field>
+										</object>  
+		              </value>
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/action/PublishingRequestScript.groovy</string></field>
+		                </object>  
+		              </value>
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/action/AddTaxonomyActionScript.groovy</string></field>
+		                </object>  
+		              </value>		               		              
+		              <!-- ecm-explorer/widget -->
+	                <value>
+	                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+	                    <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithCalendarCategories.groovy</string></field>
+	                  </object>  
+	                </value> 
+	                <value>
+	                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+	                    <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithMetadatas.groovy</string></field>
+	                  </object>  
+	                </value> 
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy</string></field>
+		                </object>  
+		              </value> 
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithNodeChildren.groovy</string></field>
+		                </object>  
+		              </value> 
+		              <!-- ecm-explorer/interceptor -->
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy</string></field>
+		                </object>  
+		              </value> 
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/interceptor/PostNodeSaveInterceptor.groovy</string></field>
+		                </object>  
+		              </value> 
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/interceptor/PostFilePlanInterceptor.groovy</string></field>
+		                </object>  
+		              </value> 		              
+		              <!-- content-browser -->
+		              <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>content-browser/GetDocuments.groovy</string></field>
+		                </object>  
+		              </value> 
+		            </collection>   
+		          </field>
+		        </object>
+		      </object-param>
+		    </init-params> 
+		   </component-plugin> 
+  </external-component-plugins>
+  
+</configuration>

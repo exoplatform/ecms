@@ -1,0 +1,365 @@
+<%
+	uicomponent.addInterceptor("ecm-explorer/interceptor/PostFilePlanInterceptor.groovy", "post") ;
+  def rcontext = _ctx.getRequestContext() ;
+	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
+%>
+
+<%/*Begin UITabPane*/%>
+<div class="UITabPane">
+  <%/*Begin TabPaneContent*/%>
+  <div class="TabPaneContent"> 
+    <%/*Begin WorkingArea*/%>
+    <div class="WorkingAreaWithHelp">
+    	<%/*Begin Tabs*/%>
+      <div class="UIHorizontalTabs" style="margin-top:5px;">
+        <div class="LeftHorizontalTabs">
+	     	  <div class="RightHorizontalTabs">
+	     	    <div class="CenterHorizontalTabs">
+			        <div class="TabsContainer">
+
+			            <div class="UITab NormalTabStyle">
+			              <div class="SelectedTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("FilePlan.dialog.label.name")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>  
+			            
+			            <div class="UITab NormalTabStyle">
+			              <div class="NormalTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("FilePlan.dialog.label.record-properties")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>                
+									
+									 <div class="UITab NormalTabStyle">
+			              <div class="NormalTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("FilePlan.dialog.label.process-properties")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>  
+			            
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+      </div>
+      <%/*End UIHorizontalTabs*/%>
+      <%/*Start UITabContentContainer*/%>
+      
+			<%uiform.begin()%>
+				<div class="HorizontalLayout">	  
+      
+		      <div class="UITabContentContainer">
+		      	<div class="UITabContent" style="display: block;">
+						    <table class="UIFormGrid">
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.name")%></td>
+									  <td class="FieldComponent">
+							      <%
+							        String[] fieldName = ["jcrPath=/node", "editable=if-null", "mixintype=mix:i18n", "validate=empty,name"] ;
+							        uicomponent.addTextField("name", fieldName) ; 
+							      %>									  							      
+									  </td>
+									</tr>
+									<%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
+									<tr>
+							      <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.categories")%></td>
+							      <td class="FieldComponent">
+								      <% 
+								        String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true"];
+								        uicomponent.addTextField("categories", fieldCategories);
+								      %>
+								    </td>
+								  </tr>
+								  <%}%>									
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.note")%></td>
+									  <td class="FieldComponent">							      							  							      
+										<%
+							        String[] fieldPlanNode = ["jcrPath=/node/rma:filePlanNote"] ;
+							        uicomponent.addTextAreaField("filePlanNote", fieldPlanNode) ; 
+							      %>
+									  </td>
+									</tr>
+								</table>
+		      	</div> 
+		      	
+		      	<div class="UITabContent" style="display: none;">
+		      		  <table class="UIFormGrid">
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.record-category-identifier")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldCateIdentifier = ["jcrPath=/node/rma:recordCategoryIdentifier"] ;
+							        uicomponent.addTextField("recordCategoryIdentifier", fieldCateIdentifier) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.disposition-author")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldDispotionAuthor = ["jcrPath=/node/rma:dispositionAuthority"] ;
+							        uicomponent.addTextField("dispositionAuthority", fieldDispotionAuthor) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.permanent-record-indicator")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldPermanentRecord = ["jcrPath=/node/rma:permanentRecordIndicator", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("permanentRecordIndicator", fieldPermanentRecord) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.disposition-instruction")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldDispositionInstruction = ["jcrPath=/node/rma:dispositionInstructions"] ;
+							        uicomponent.addTextAreaField("dispositionInstructions", fieldDispositionInstruction) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.contain-record-folder")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldContainsRecord = ["jcrPath=/node/rma:containsRecordFolders", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("containsRecordFolders", fieldContainsRecord) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.default-media-type")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldDefaultMedia = ["jcrPath=/node/rma:defaultMediaType", "options=Electronic,Paper"] ;
+							        uicomponent.addSelectBoxField("defaultMediaType", fieldDefaultMedia) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.default-marking-list")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldDefaultMarking = ["jcrPath=/node/rma:defaultMarkingList", "options=NONE,CLASSIFIED,UNCLASSIFIED,NOCONTRACT"] ;
+							        uicomponent.addSelectBoxField("defaultMarkingList", fieldDefaultMarking) ; 
+							      %>										
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.default-originating-organization")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldDefaultOriginating = ["jcrPath=/node/rma:defaultOriginatingOrganization"] ;
+							        uicomponent.addTextField("defaultOriginatingOrganization", fieldDefaultOriginating) ; 
+							      %>										
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.vital-record-indicator")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldVitalRecord = ["jcrPath=/node/rma:vitalRecordIndicator", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("vitalRecordIndicator", fieldVitalRecord) ; 
+							      %>										
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.vital-record-review-period")%></td>
+									  <td class="FieldComponent">
+										<%
+							        String[] fieldVitalRecordReview = ["jcrPath=/node/rma:vitalRecordReviewPeriod", "options=one minute,hourly,daily,quarterly,yearly,ten years"] ;
+							        uicomponent.addSelectBoxField("vitalRecordReviewPeriod", fieldVitalRecordReview) ; 
+							      %>										
+									  </td>
+									</tr>
+								</table>
+		      	</div> 
+		      	
+		        <div class="UITabContent" style="display: none;">
+		        	<table class="UIFormGrid">
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.process-cutoff")%></td>
+									  <td class="FieldComponent">							     							  							      
+										<%
+							        String[] fieldProcessCutoff = ["jcrPath=/node/rma:processCutoff", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("processCutoff", fieldProcessCutoff) ; 
+							      %>
+									  </td>
+									</tr>	
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.event-trigger")%></td>
+									  <td class="FieldComponent">							     							  							      
+										<%
+							        String[] fieldEventTrigger = ["jcrPath=/node/rma:eventTrigger"] ;
+							        uicomponent.addTextField("eventTrigger", fieldEventTrigger) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.cutoff-period")%></td>
+									  <td class="FieldComponent">							     							  							      
+										<%
+							        String[] fieldCutoffPeriod = ["jcrPath=/node/rma:cutoffPeriod", "options=one minute,hourly,daily,quarterly,yearly,ten years"] ;
+							        uicomponent.addSelectBoxField("cutoffPeriod", fieldCutoffPeriod) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.cutoff-on-obsolete")%></td>
+									  <td class="FieldComponent">							     							  							      
+										<%
+							        String[] fieldCutoffObsolete = ["jcrPath=/node/rma:cutoffOnObsolete", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("cutoffOnObsolete", fieldCutoffObsolete) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.cutoff-on-superseded")%></td>
+									  <td class="FieldComponent">							     							  							      
+										<%
+							        String[] fieldCutoffSupereseded = ["jcrPath=/node/rma:cutoffOnSuperseded", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("cutoffOnSuperseded", fieldCutoffSupereseded) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.process-hold")%></td>
+									  <td class="FieldComponent">							     							  							      
+										<%
+							        String[] fieldProcessHold = ["jcrPath=/node/rma:processHold", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("processHold", fieldProcessHold) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.hold-period")%></td>
+									  <td class="FieldComponent">							     							  							      
+										<%
+							        String[] fieldHoldPeriod = ["jcrPath=/node/rma:holdPeriod", "options=one minute,hourly,daily,quarterly,yearly,ten years"] ;
+							        uicomponent.addSelectBoxField("holdPeriod", fieldHoldPeriod) ; 
+							      %>
+									  </td>
+									</tr>	
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.discretionary-hold")%></td>
+									  <td class="FieldComponent">							     							  							      										
+										<%
+							        String[] fieldDiscretionaryHold = ["jcrPath=/node/rma:discretionaryHold", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("discretionaryHold", fieldDiscretionaryHold) ; 
+							      %>
+									  </td>
+									</tr>
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.process-transfer")%></td>
+									  <td class="FieldComponent">							     							  							      										
+										<%
+							        String[] fieldProcessTransfer = ["jcrPath=/node/rma:processTransfer", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("processTransfer", fieldProcessTransfer) ; 
+							      %>
+									  </td>
+									</tr>	
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.default-transfer-location")%></td>
+									  <td class="FieldComponent">							     							  							      										
+										<%
+							        String[] fieldDefaultTransfer = ["jcrPath=/node/rma:defaultTransferLocation"] ;
+							        uicomponent.addTextField("defaultTransferLocation", fieldDefaultTransfer) ; 
+							      %>
+									  </td>
+									</tr>	
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.transfer-block-size")%></td>
+									  <td class="FieldComponent">							     							  							      										
+										<%
+							        String[] fieldTransferBlock = ["jcrPath=/node/rma:transferBlockSize","validate=number"] ;
+							        uicomponent.addTextField("transferBlockSize", fieldTransferBlock) ; 
+							      %>
+									  </td>
+									</tr>	
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.process-accession")%></td>
+									  <td class="FieldComponent">							     							  							      										
+										<%
+							        String[] fieldProcessAccession = ["jcrPath=/node/rma:processAccession", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("processAccession", fieldProcessAccession) ; 
+							      %>
+									  </td>
+									</tr>	
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.accession-location")%></td>
+									  <td class="FieldComponent">							     							  							      										
+										<%
+							        String[] fieldAccessionLocation = ["jcrPath=/node/rma:accessionLocation"] ;
+							        uicomponent.addTextField("accessionLocation", fieldAccessionLocation) ; 
+							      %>
+									  </td>
+									</tr>	
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.accession-block-size")%></td>
+									  <td class="FieldComponent">							     							  							      										
+										<%
+							        String[] fieldAccessionBlockSize = ["jcrPath=/node/rma:accessionBlockSize","validate=number"] ;
+							        uicomponent.addTextField("accessionBlockSize", fieldAccessionBlockSize) ; 
+							      %>
+									  </td>
+									</tr>	
+									<tr>
+									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.process-destruction")%></td>
+									  <td class="FieldComponent">							     							  							      										
+										<%
+							        String[] fieldProcessDestruction = ["jcrPath=/node/rma:processDestruction", "options=true,false"] ;
+							        uicomponent.addSelectBoxField("processDestruction", fieldProcessDestruction) ; 
+							      %>
+									  </td>
+									</tr>										
+							</table>							
+		      	</div> 	
+		      		        
+		      </div>        	
+      		<%/*start render action*/%>
+					<div class="UIAction"> 
+				    <table class="ActionContainer">
+				    	<tr>
+				    		<td>
+					      <% for(action in uicomponent.getActions()) { 
+					      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+										 String link = uicomponent.event(action) ;
+					      %>
+				          <div onclick="$link" class="ActionButton LightBlueStyle">
+										<div class="ButtonLeft">
+										  <div class="ButtonRight">
+											  <div class="ButtonMiddle">
+											    <a href="javascript:void(0);">$actionLabel</a>
+									      </div>
+									    </div>
+								    </div>
+									</div>
+				      	<%}%>          
+				      	</td>
+				      </tr>
+				    </table>
+				  </div>
+			  	<%/*end render action*/%>      	
+      	</div>  
+      <%uiform.end()%>						 
+      <%/*End UITabContentContainer*/%>
+      
+    </div>  
+    <%/*End WorkingArea*/%>
+  </div>  
+  <%/*End TabPaneContent*/%>
+</div>  
+<%/*End UITabPane*/%>

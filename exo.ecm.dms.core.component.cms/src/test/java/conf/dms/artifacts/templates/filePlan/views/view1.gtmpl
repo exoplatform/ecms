@@ -1,0 +1,647 @@
+<%
+	import java.text.SimpleDateFormat ;
+	import org.exoplatform.web.application.Parameter ;
+	
+	def node = uicomponent.getNode() ;
+	def originalNode = uicomponent.getOriginalNode();
+	String name = node.getPrimaryNodeType().getName() ;
+	String iconName = uicomponent.getIcons(node,"16x16Icon") ;
+	String pattern = "MMMMM dd yyyy" ;
+	SimpleDateFormat dateFormat = new SimpleDateFormat() ;
+  dateFormat.applyPattern(pattern) ;
+  
+  def className = "org.exoplatform.services.cms.records.RecordsService" ;
+	def recordsService = uicomponent.getComponentInstanceOfType(className) ;
+	def recordList = recordsService.getRecords(node) ;
+  def rcontext = _ctx.getRequestContext() ;
+	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecm/javascript/');
+  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIJCRExplorer.loadViewNodeScroll()');
+  //rcontext.getJavascriptManager().addOnResizeJavascript('eXo.ecm.UIJCRExplorer.initViewNodeScroll()');
+%>
+<style>
+	.UIDivInfo {
+		margin: auto; padding: 10px;
+	}
+	
+	.UIDivInfo .Title {
+		font-size: 13px; font-weight: bold;
+		padding-bottom: 3px;
+		height: 20px;
+		overflow: hidden;
+		float:right; /* orientation=lt */
+		float:left; /* orientation=rt */
+	}	
+	
+	.UIDivInfo .Title  .TextTitleFilePlan{
+		float:left; /* orientation=lt */
+		float:right; /* orientation=rt */
+	}
+	
+	.UIDivInfo .Title .LabelFielPlan {
+  	padding-left: 5px; /* orientation=lt */
+  	padding-right: 5px; /* orientation=rt */
+  	font-weight: normal;
+  	
+  }
+	
+	.UIDivInfo .FilePlanContentTable {
+		width: 96%;
+		border-collapse: collapse;
+		border-top: 1px solid #dbdbdb;
+    font-size:11px;
+    margin: auto;
+	}
+	
+	.UIDivInfo .FilePlanContentTable td {
+		border: 1px solid #dbdbdb;
+		border-top: none;
+		height: 25px;
+		padding-left: 7px; /* orientation=lt */
+		padding-right: 7px; /* orientation=rt */
+		background: white;
+		line-height: 25px;
+	}
+	
+  .UIDivInfo .UIHorizontalTabs .TabsContainer {
+		overflow-y: hidden;
+  }
+  
+  .UIDivInfo .NavigationButtonContainer {
+    cursor: pointer;  	
+    display: none;
+    float: right; /* orientation=lt */
+    float: left; /* orientation=rt */
+		height: 20px;
+		padding-top: 4px;
+		z-index: 1;
+  }
+  
+ 
+      	
+  .UIDivInfo a:hover {		 
+		color: blue;
+	}  
+	.UIDivInfo .ColIcon{
+		padding: 5px 5px 5px 2px; /* orientation=lt */
+		padding: 5px 2px 5px 5px; /* orientation=rt */
+	}
+	.UIDivInfo .Icon{
+		float:left; /* orientation=lt */ 
+		float:right; /* orientation=rt */
+		margin: 0px 5px 0px 0px; /* orientation=lt */
+		margin: 0px 2px 0px 5px; /* orientation=rt */
+	}
+	.UIDivInfo .FilePlanContentTable .RTLTitle{
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 30%;
+	}
+		
+</style>		
+
+<div class="UIDivInfo" id="UIFilePlanView">
+	<div>
+		<div class="ColIcon">
+			<div class="$iconName Icon"><span></span></div>
+			<div class="Title"><label class="TextTitleFilePlan"><%=_ctx.appRes("FilePlan.view.label.content")%>:</label><label class="LabelFielPlan"><%=originalNode.getName()%></label></div>
+			<div style="clear:left;"><span></span></div>
+		</div>
+		<table class="FilePlanContentTable">    
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.record-category-identifier")%></td>
+				<%
+					String recordCateIdentifier = "" ;
+					if(node.hasProperty("rma:recordCategoryIdentifier")) recordCateIdentifier = node.getProperty("rma:recordCategoryIdentifier").getString() ;
+				%>
+				<td><%=recordCateIdentifier%></td>
+			</tr>
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.disposition-author")%></td>				
+				<%
+					String disPositionAuthor = "" ;
+					if(node.hasProperty("rma:dispositionAuthority")) disPositionAuthor = node.getProperty("rma:dispositionAuthority").getString() ;
+				%>
+				<td><%=disPositionAuthor%></td>		
+			</tr>
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.disposition-instruction")%></td>
+				<%
+					String disInstruction = "" ;
+					if(node.hasProperty("rma:dispositionInstructions")) disInstruction = node.getProperty("rma:dispositionInstructions").getString() ;
+				%>
+				<td><%=disInstruction%></td>  	      
+			</tr>
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.permanent-record-indicator")%></td>
+				<%
+					boolean permanetRecord = false;
+					if(node.hasProperty("rma:permanentRecordIndicator")) permanetRecord = node.getProperty("rma:permanentRecordIndicator").getBoolean() ;
+				%>
+				<td><%=permanetRecord%></td>
+			</tr>
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.contain-record-folder")%></td>
+				<%
+					boolean containsRecord = false;
+					if(node.hasProperty("rma:containsRecordFolders")) containsRecord = node.getProperty("rma:containsRecordFolders").getBoolean() ;
+				%>
+				<td><%=containsRecord%></td>
+			</tr>
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.default-media-type")%></td>
+				<%
+					String defaultMedia = "" ;
+					if(node.hasProperty("rma:defaultMediaType")) defaultMedia = node.getProperty("rma:defaultMediaType").getString() ;
+				%>
+				<td><%=defaultMedia%></td>
+			</tr>
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.default-marking-list")%></td>
+				<%
+					String defaultMarkingList = "" ;
+					if(node.hasProperty("rma:defaultMarkingList")) defaultMarkingList = node.getProperty("rma:defaultMarkingList").getString() ;
+				%>
+				<td><%=defaultMarkingList%></td>
+			</tr>			
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.default-originating-organization")%></td>
+				<%
+					String defaultOriginating = "" ;
+					if(node.hasProperty("rma:defaultOriginatingOrganization")) defaultOriginating = node.getProperty("rma:defaultOriginatingOrganization").getString() ;
+				%>
+				<td><%=defaultOriginating%></td>
+			</tr>
+			<tr>
+				<td style="width: 30%"><%=_ctx.appRes("FilePlan.view.label.number-of-record")%></td>
+				<%
+					String numberOfRecord = "" ;
+//					if(node.hasProperty("rma:recordCounter")) numberOfRecord = node.getProperty("rma:recordCounter").getString() ;
+          if(node.hasProperty("rma:recordCounter")) numberOfRecord = recordList.size() ;
+				%>				
+				<td><%=numberOfRecord%></td>
+			</tr>
+		</table>
+	</div>
+
+	<%/*Begin UITabPane*/%>
+	<div class="UITabPane" style="margin-top: 15px;">
+	  <%/*Begin TabPaneContent*/%>
+	  <div class="TabPaneContent"> 
+	    <%/*Begin WorkingArea*/%>
+	    <div class="WorkingAreaWithHelp">
+	    	<%/*Begin Tabs*/%>
+	      <div class="UIHorizontalTabs">
+	        <div class="LeftHorizontalTabs">
+		     	  <div class="RightHorizontalTabs">
+		     	    <div class="CenterHorizontalTabs">
+				        <div class="TabsContainer">
+
+				          <div class="UITab NormalTabStyle">
+				            <div class="SelectedTab">
+				              <div class="LeftTab">
+				                <div class="RightTab">                
+				                  <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.record")%></div>
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+				            
+				          <div class="UITab NormalTabStyle">
+				            <div class="NormalTab">
+				              <div class="LeftTab">
+				                <div class="RightTab">                
+				                  <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.obsolete-record")%></div>
+				                </div>
+				              </div>
+				            </div>
+				          </div> 
+				            
+			            <div class="UITab NormalTabStyle">
+			              <div class="NormalTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.supreseded-record")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>   
+				            
+			            <div class="UITab NormalTabStyle">
+			              <div class="NormalTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.vital-record")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div> 
+				            
+			            <div class="UITab NormalTabStyle">
+			              <div class="NormalTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.cutoff-record")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>  
+				            
+			            <div class="UITab NormalTabStyle">
+			              <div class="NormalTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.holdable-record")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>  
+				            
+			            <div class="UITab NormalTabStyle">
+			              <div class="NormalTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.transferable-record")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div> 
+				            
+		              <div class="UITab NormalTabStyle">
+		                <div class="NormalTab">
+		                  <div class="LeftTab">
+		                    <div class="RightTab">                
+		                      <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.accessionable-record")%></div>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>   
+			            
+			            <div class="UITab NormalTabStyle">
+			              <div class="NormalTab">
+			                <div class="LeftTab">
+			                  <div class="RightTab">                
+			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("FilePlan.view.label.destroyable-record")%></div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div> 
+									
+									<div class="NavigationButtonContainer">
+	                  <div title="Previous Tabs" class="NavigationIcon ScrollBackArrow16x16Icon">
+	                    <div title="More Tabs" class="NavigationIcon ScrollNextArrow16x16Icon"><span/></div>
+	                  </div>
+	                </div>
+				    </div>
+
+				      </div>
+				    </div>
+				  </div>
+	      </div>
+	      <%/*End UIHorizontalTabs*/%>
+	      <%/*Start UITabContentContainer*/%>
+	      <div class="UITabContentContainer">
+	        <div class="UITabContent" style="display: block;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>		
+								<th width="30px;"><span></span></th>	
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.originator")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.date-received")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.originating-organization")%></th>				
+							</tr>   
+							<%for(record in recordList) { %>
+									<tr>
+										<td>
+											<div class="Icon16x16 default16x16Icon <%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+					            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+					            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+					            </a>					            
+				              <%}%>
+					          </td>
+					          <td><%=record.getName()%></td>
+					          <td>
+					            <%if(record.hasProperty("rma:originator")) {%>
+					            <%= record.getProperty("rma:originator").getString()%>
+					            <%}%>
+					          </td>
+					          <td>
+					            <%if(record.hasProperty("rma:dateReceived")) {%>
+					            <%=dateFormat.format(record.getProperty("rma:dateReceived").getDate().getTime())%>
+					            <%}%>
+					          </td>     
+					          <td>
+					            <%if(record.hasProperty("rma:originatingOrganization")) {%>
+					            <%=record.getProperty("rma:originatingOrganization").getString()%>
+					            <%}%>
+					          </td>
+									</tr>
+							<%} %>
+						</table>
+	        </div>
+	        <div class="UITabContent" style="display: none;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>		
+								<th width="30px;"><span></span></th>			
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.originator")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.date-received")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.originating-organization")%></th>
+							</tr>   
+							<%for(record in recordsService.getObsoleteRecords(node)) { %>
+									<tr>
+										<td>
+											<div class="<%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+						            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+						            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+						            </a>
+				              <%}%>
+					          </td>
+					          <td><%=record.getName()%></td>
+					          <td>
+					            <%if(record.hasProperty("rma:originator")) {%>
+					            <%= record.getProperty("rma:originator").getString()%>
+					            <%}%>
+					          </td>
+					          <td>
+					            <%if(record.hasProperty("rma:dateReceived")) {%>			
+					            <%=dateFormat.format(record.getProperty("rma:dateReceived").getDate().getTime())%>	            
+					            <%}%>
+					          </td>    
+					          <td>
+					            <%if(record.hasProperty("rma:originatingOrganization")) {%>
+					            <%=record.getProperty("rma:originatingOrganization").getString()%>
+					            <%}%>
+					          </td>
+									</tr>
+							<%}	%>
+						</table>
+	        </div>
+	        
+	        <div class="UITabContent" style="display: none;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>	
+								<th width="30px;"><span></span></th>				
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.originator")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.date-received")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.originating-organization")%></th>		
+							</tr>   
+							<%for(record in recordsService.getSupersededRecords(node)) { %>
+									<tr>
+										<td>
+											<div class="<%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+					            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+					            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+					            </a>
+				              <%}%>
+					          </td>
+					          <td><a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>"><%=record.getName()%></a></td>
+					          <td>
+					            <%if(record.hasProperty("rma:originator")) {%>
+					            <%= record.getProperty("rma:originator").getString()%>
+					            <%}%>
+					          </td>
+					          <td>
+					            <%if(record.hasProperty("rma:dateReceived")) {%>
+					            <%=dateFormat.format(record.getProperty("rma:dateReceived").getDate().getTime())%>	       
+					            <%}%>
+					          </td>    
+					          <td>
+					            <%if(record.hasProperty("rma:originatingOrganization")) {%>
+					            <%=record.getProperty("rma:originatingOrganization").getString()%>
+					            <%}%>
+					          </td>
+									</tr>
+							<%}	%>
+						</table>
+	        </div>
+	        
+	       	<div class="UITabContent" style="display: none;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>
+								<th width="30px;"><span></span></th>	
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.next-review-date")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.previous-review-date")%></th>	
+							</tr>   
+							<%for(record in recordsService.getVitalRecords(node)) { %>
+									<tr>
+										<td>
+											<div class="<%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+					            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+					            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+					            </a>
+				              <%}%>
+					          </td>
+					          <td><a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>"><%=record.getName()%></a></td>
+					          <td>
+					            <%if(record.hasProperty("rma:nextReviewDate")) {%>
+					            <%=dateFormat.format(record.getProperty("rma:nextReviewDate").getDate().getTime())%>
+					            <%}%>
+					          </td>
+					          <td>
+					            <%if(record.hasProperty("rma:prevReviewDate")) {
+					              try{
+					              	println dateFormat.format(record.getProperty("rma:prevReviewDate").getDate().getTime()) ;
+					              }catch(Exception e) {}	              	            
+					            }%>
+					          </td>
+									</tr>
+							<%}%>
+						</table>
+	        </div>
+	        
+	        <div class="UITabContent" style="display: none;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>
+								<th width="30px;"><span></span></th>	
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+					      <th><%=_ctx.appRes("FilePlan.view.label.cutoff-date")%></th>
+							</tr> 
+							<%for(record in recordsService.getCutoffRecords(node)) { %>
+									<tr>
+										<td>
+											<div class="<%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+					            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+					            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+					            </a>
+				              <%}%>
+					          </td>
+					          <td><%=record.getName()%></td>
+					          <td>
+					            <%if(record.hasProperty("rma:cutoffDateTime")) {%>
+					            <%=dateFormat.format(record.getProperty("rma:cutoffDateTime").getDate().getTime())%>
+					            <%}%>
+					          </td>
+									</tr>
+							<%}%>
+						</table>
+	        </div>
+	        
+	        <div class="UITabContent" style="display: none;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>
+								<th width="30px;"><span></span></th>	
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+					      <th><%=_ctx.appRes("FilePlan.view.label.hold-until")%></th>
+							</tr> 
+							<%for(record in recordsService.getHolableRecords(node)) { %>
+									<tr>
+										<td>
+											<div class="<%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+					            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+					            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+					            </a>
+				              <%}%>
+					          </td>
+					          <td><%=record.getName()%></td>
+					          <td>
+					            <%if(record.hasProperty("rma:holdUntil")) {%>
+					            <%= record.getProperty("rma:holdUntil").getString()%>
+					            <%}%>
+					          </td>
+									</tr>
+							<%}	%>
+						</table>
+	        </div>
+	        
+	        <div class="UITabContent" style="display: none;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>
+								<th width="30px;"><span></span></th>	
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+					      <th><%=_ctx.appRes("FilePlan.view.label.transfer-date")%></th>
+					      <th><%=_ctx.appRes("FilePlan.view.label.transfer-location")%></th>
+							</tr>
+							<%for(record in recordsService.getTransferableRecords(node)) { %>
+									<tr>
+										<td>
+											<div class="<%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+						            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+						            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+						            </a>
+				              <%}%>
+					          </td>
+					          <td><%=record.getName()%></td>
+					          <td>
+					            <%if(record.hasProperty("rma:transferDate")) {%>
+					            <%=dateFormat.format(record.getProperty("rma:transferDate").getDate().getTime())%>
+					            <%}%>
+					          </td>
+					          <td>
+					            <%if(record.hasProperty("rma:transferLocation")) {%>
+					            <%= record.getProperty("rma:transferLocation").getString()%>
+					            <%}%>
+					          </td>
+									</tr>
+							<%}	%>
+						</table>
+	        </div>
+	        
+	        <div class="UITabContent" style="display: none;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>
+								<th width="30px;"><span></span></th>	
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+					      <th><%=_ctx.appRes("FilePlan.view.label.accession-date")%></th>
+					      <th><%=_ctx.appRes("FilePlan.view.label.accession-location")%></th>
+							</tr>
+							<%for(record in recordsService.getAccessionableRecords(node)) { %>
+									<tr>
+										<td>
+											<div class="<%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+						            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+						            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+						            </a>
+				              <%}%>
+					          </td>
+					          <td><%=record.getName()%></td>
+					          <td>
+					            <%if(record.hasProperty("rma:accessionDate")) {%>
+					            <%=dateFormat.format(record.getProperty("rma:accessionDate").getDate().getTime())%>
+					            <%}%>
+					          </td>
+					          <td>
+					            <%if(record.hasProperty("rma:accessionLocation")) {%>
+					            <%= record.getProperty("rma:accessionLocation").getString()%>
+					            <%}%>
+					          </td>
+									</tr>
+							<%}	%>
+						</table>
+	        </div>
+	        
+	        <div class="UITabContent" style="display: none;"> 
+	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto; border:solid 1px #7EAAD0;">
+							<tr>
+								<th width="30px;"><span></span></th>	
+								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
+								<th><%=_ctx.appRes("FilePlan.view.label.record-name")%></th>
+					      <th><%=_ctx.appRes("FilePlan.view.label.destruction-date")%></th>
+					    </tr> 
+							<%for(record in recordsService.getDestroyableRecords(node)) { %>
+									<tr>
+										<td>
+											<div class="<%=uicomponent.getIcons(record,"16x16Icon")%>"></div>
+										</td>
+					          <td>
+					            <%if(record.hasProperty("rma:recordIdentifier")) {%>
+						            <a href="<%=uicomponent.event("ChangeNode", record.getPath(), new Parameter("workspaceName", node.getSession().getWorkspace().getName()))%>">
+						            	<%=record.getProperty("rma:recordIdentifier").getString()%>
+						            </a>
+				              <%}%>
+					          </td>
+					          <td><%=record.getName()%></td>
+					          <td>
+					            <%if(record.hasProperty("rma:destructionDate")) {%>
+					            <%=dateFormat.format(record.getProperty("rma:destructionDate").getDate().getTime())%>
+					            <%}%>
+					          </td>
+									</tr>
+							<%} %>
+						</table>
+	        </div>
+	        
+	      </div>  
+	      <%/*End UITabContentContainer*/%>
+	    </div>  
+	    <%/*End WorkingArea*/%>
+	  </div>  
+	  <%/*End TabPaneContent*/%>
+	</div>  
+	<%/*End UITabPane*/%>
+	 
+</div>
