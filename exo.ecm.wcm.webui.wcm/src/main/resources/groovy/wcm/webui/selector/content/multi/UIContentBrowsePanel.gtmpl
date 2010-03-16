@@ -1,0 +1,48 @@
+<%
+	import org.exoplatform.wcm.webui.selector.UISelectPathPanel; 
+	import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
+	import org.exoplatform.wcm.webui.selector.content.multi.UICLVContentSelectedGrid;
+%>
+<div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
+	<div style="padding:10px;float:left">
+		<%String selected = "";%>
+		<div style="float:left;padding:5px;">
+			<%= _ctx.appRes("UIContentBrowsePanelMulti.selectBoxValues.FilterBy")%> :
+		</div>
+		<div style="float:left;padding:5px;">
+			<select>
+				<%
+					for(String type : uicomponent.types){
+						if(type.equals(uicomponent.selectedValues)) selected = "selected";
+						else selected = "";
+				%>
+						<option id="$type" $selected value="$type" onclick="<%=uicomponent.event("ChangeContentType", type)%>">
+							<%= _ctx.appRes("UIContentBrowsePanelMulti.selectBoxValues." + type) %>
+						</option>
+				<%}%>
+			</select>
+		</div>
+	</div>
+	<div style="clear:left"><span></span></div>
+	<div>
+		<div class="UITreeViewBreadcumbs" id = "UIWCMTreeViewBreadcumbs">
+			<div id="UIWCMTreeViewBreadcumbsHomeIcon" class="TreeHomeIcon"></div>
+			<div style="clear:left"><span></span></div>
+		</div>
+	</div>
+	<div class="SelectContent"> 
+		<div class="UITreeBuilder">
+			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelMulti.label.LeftColumn") %></div>
+			<% uicomponent.renderChild(UIContentTreeBuilder.class); %>
+		</div>
+		<div class="UISelectPathPanel">
+			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelMulti.label.RightColumn") %></div>
+			<% uicomponent.renderChild(UISelectPathPanel.class); %>
+			<div class= "UIContentSelected">
+				<% uicomponent.renderChild(UICLVContentSelectedGrid.class); %>
+			</div>
+		</div>
+		<div>
+		</div>
+	</div>
+</div>

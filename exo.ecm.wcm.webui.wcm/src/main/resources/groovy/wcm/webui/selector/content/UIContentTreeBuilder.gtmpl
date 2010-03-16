@@ -1,0 +1,57 @@
+<%
+	import java.util.List;
+	import java.util.ArrayList;
+  import org.exoplatform.wcm.webui.selector.content.UIContentTreeNode ;
+  import org.exoplatform.web.application.JavascriptManager;
+  import java.util.Date;
+  
+  def rcontext = _ctx.getRequestContext() ;
+	JavascriptManager jsManager = rcontext.getJavascriptManager();
+	jsManager.importJavascript('eXo.wcm.backoffice.private.UIWCMTreeView', '/eXoWCMResources/javascript/') ;
+%>
+<div class="UIWebContentTreeView $uicomponent.id" id = "$uicomponent.id">
+	<%UIContentTreeNode treeNode = null;
+		List listTrees = uicomponent.getTreeNode();
+		int sub = 0;
+		String action = null;
+		String restAction = "";
+		String id;
+		for(int i = 0; i < listTrees.size(); i ++){
+			treeNode = listTrees.get(i);
+			try{
+				sub = listTrees.get(i-1).getDeep() - treeNode.getDeep();
+			}catch(Exception ex){
+				sub = 0;
+			}
+			for(int j = 0; j <= sub && i > 0; j ++){
+	%>
+				</div>
+	<%	}
+		id = treeNode.getTreePath().replaceAll("/", "rp").replaceAll(" ", "");;
+		if(treeNode.getNodePath() != null)action = uicomponent.event("ChangeNode",treeNode.getNodePath()+"/"+treeNode.getWorkSpaceName()+"/" + id);
+		else action = "javaScript:void(0)";
+		if(treeNode.getDeep() > 0) restAction = "eXo.ecm.UIWCMTreeView.selectNode('"+id+"','"+treeNode.getNodePath()+"', '"+treeNode.getWorkSpaceName()+"', '"+uicomponent.repositoryName+"')";
+		else restAction = "eXo.ecm.UIWCMTreeView.selectNode('"+id+"')";
+		%>
+		<div onclick="$restAction;$action" treePath="<%=treeNode.getTreePath()%>" style="" id="UIWCMTreeParentNode$id" class="NoneSelectNodeIcon">
+			<div class="DefaultPageIcon"><%=((i != 2)?treeNode.getName():treeNode.getName().replaceAll("\\.", "/"))%></div>
+		</div>
+		<div id="UIWCMTreeChildNode$id" class="ViewChildNodes">
+	<%
+	}
+	for(int i = 0; i <= treeNode.getDeep(); i ++){%>
+		</div>
+<%}%>
+</div>
+<%
+	if(uicomponent.path != null && !uicomponent.path.isEmpty()) {
+		String path = "";
+		for(String str : uicomponent.path){
+			if(path.length() > 0) path += "/";
+			path += str;
+		}
+		println "<script type=\"text/javascript\">";
+		println "eXo.ecm.UIWCMTreeView.OpenPath('" + path + "');";
+		println "</script>"
+	}
+%>

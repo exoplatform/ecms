@@ -1,0 +1,22 @@
+<%
+	import org.exoplatform.wcm.webui.selector.UISelectPathPanel; 
+	import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
+%>
+<div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
+	<div>
+		<div class="UITreeViewBreadcumbs" id = "UIWCMTreeViewBreadcumbs">
+			<div id="UIWCMTreeViewBreadcumbsHomeIcon" class="TreeHomeIcon"></div>
+			<div style="clear:left"><span></span></div>
+		</div>
+	</div>
+	<div class="SelectContent"> 
+		<div class="UITreeBuilder">
+			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelFolder.label.LeftColumn") %></div>
+			<% uicomponent.renderChild(UIContentTreeBuilder.class); %>
+		</div>
+		<div class="UISelectPathPanel">
+			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelFolder.label.RightColumn") %></div>
+			<% uicomponent.renderChild(UISelectPathPanel.class); %>
+		</div>
+	</div>
+</div>
