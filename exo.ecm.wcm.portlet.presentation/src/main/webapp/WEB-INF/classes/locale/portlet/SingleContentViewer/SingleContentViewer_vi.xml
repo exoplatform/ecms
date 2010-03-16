@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <UIPresentationContainer>
+  <title>
+   <QuickEdit>Sửa nhanh</QuickEdit>
+   <print>In trang này</print>
+  </title>
+  <label>
+   <draft>Nháp</draft>
+   <print>In</print>
+  </label>
+  <msg>
+   <no-content>Không có nội dung nào</no-content>
+  </msg>
+ </UIPresentationContainer>
+
+ <UIWelcomeScreen>
+  <label>
+   <WelcomeLabel>Chào mừng đến với Single Content Viewer</WelcomeLabel>
+   <WelcomeText>Hãy lựa chọn</WelcomeText>
+  </label>
+  <action>
+   <Abort>Hủy</Abort>
+   <CreateNewContent>Tạo nội dung mới</CreateNewContent>
+   <SelectContent>Lựa chọn một nội dung</SelectContent>
+  </action>
+ </UIWelcomeScreen>
+
+ <UINameWebContentForm>
+  <action>
+   <Save>Lưu</Save>
+   <Abort>Hủy</Abort>
+  </action>
+  <label>
+   <name>Tiêu đề</name>
+   <selectTemplate>Chọn mẫu</selectTemplate>
+   <option>
+    <exo:siteBreadcrumb>Site Breadcrumb</exo:siteBreadcrumb>
+    <exo:siteNavigationWebContent>Site Navigation</exo:siteNavigationWebContent>
+    <exo:pictureOnHeadWebcontent>Picture on head layout webcontent</exo:pictureOnHeadWebcontent>
+    <exo:siteSearchBox>Site search box webcontent</exo:siteSearchBox>
+    <exo:webContent>Free layout webcontent</exo:webContent>
+   </option>
+  </label>
+ </UINameWebContentForm>
+
+ <UITabPane>
+   <title>
+    <UIContentDialogConfig>Cấu hình cho Single content viewer</UIContentDialogConfig>
+   </title>
+  </UITabPane>
+  
+  <UIContentDialogConfig>
+   <action>
+    <SaveToPortletPreference>Lưu</SaveToPortletPreference>
+   </action>
+   <label>
+    <ShowTitle>Hiển thị tiêu đề</ShowTitle>
+    <ShowPrintAction>Hiển thị biểu tượng in</ShowPrintAction>
+   </label>
+   <msg>
+    <saved-successfully>Tùy chọn của bạn đã được lưu lại</saved-successfully>
+   </msg>
+  </UIContentDialogConfig>
+  
+  <UIContentDialogFormPopupWindow>
+   <title>
+    <UIWelcomeScreen>Chào mừng đến với Single content viewer</UIWelcomeScreen>
+    <UINameWebContentForm>Chọn mẫu</UINameWebContentForm>
+    <UIContentDialogForm>Nhập nội dung</UIContentDialogForm>
+    <UIContentSelectorOne>Single content selector panel</UIContentSelectorOne>
+   </title>
+  </UIContentDialogFormPopupWindow>
+</bundle>

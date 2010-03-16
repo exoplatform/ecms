@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath></SelectTargetPath>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Page selector</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Taxonomy tree</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTargetPathFormInputSet>Target Path</UICategoryNavigationTargetPathFormInputSet>
+      <UICategoryNavigationTreeNameFormSelectBox>Tree name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+    </label>
+    <msg>
+      <not-support-encoding>Encoding is not support.</not-support-encoding>
+      <render>Error when process render.</render>
+      <saving-success>This portlet has been updated</saving-success>
+    </msg>
+    <action>
+      <Save>Save</Save>
+    </action>
+  </UICategoryNavigationConfig>
+</bundle>

@@ -1,0 +1,12 @@
+<div class="UISiteAdminToolBar">
+	<% uiform.begin(); %>
+	<div>
+		<div class="LeftSelect">
+	    	<div>
+		    	<%uiform.renderChild(uiform.EDITING_OPTIONS); %>
+		    </div>
+	    </div>
+	    <div style="clear:both"><span></span></div>
+	</div>
+	<% uiform.end(); %>
+</div>

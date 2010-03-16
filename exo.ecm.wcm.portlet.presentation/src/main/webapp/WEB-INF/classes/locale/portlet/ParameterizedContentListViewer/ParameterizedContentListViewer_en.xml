@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPCLVContainer>
+    <title>
+      <QuickEdit>Quick edit</QuickEdit>
+    </title>
+  </UIPCLVContainer>
+
+  <UIParameterizedManagerPopupWindow>
+    <title>
+      <UIPCLVConfig>Parameterized content list viewer configuration</UIPCLVConfig>
+    </title>
+  </UIParameterizedManagerPopupWindow>
+
+  <UIPCLVConfig>
+    <label>
+      <Title>Parameterized content list viewer configuration</Title>
+      <ContentSelectionBlock>Contents selection</ContentSelectionBlock>
+      <OrderBy>Order by</OrderBy>
+      <option>
+        <exo:dateCreated>Date created</exo:dateCreated>
+      </option>
+      <DisplaySettingBlock>Display setting</DisplaySettingBlock>
+      <Header>Header</Header>
+      <AutomaticDetection>Automatic Detection</AutomaticDetection>
+      <FormViewTemplate>Viewer template</FormViewTemplate>
+      <PaginatorTemplate>Paginator template</PaginatorTemplate>
+      <UICategoryNavigationTreeNameFormSelectBox>Taxonomy tree</UICategoryNavigationTreeNameFormSelectBox>
+      <ItemsPerPage>Items per page</ItemsPerPage>
+      <ViewerTitle>Show title</ViewerTitle>
+      <ViewerHeader>Show header</ViewerHeader>
+      <ViewerButtonRefresh>Show refresh button</ViewerButtonRefresh>
+      <ViewerThumbnailsView>Show illustration</ViewerThumbnailsView>
+      <ViewerDateCreated>Show date created</ViewerDateCreated>
+      <ShowReadMore>Show read more</ShowReadMore>
+      <ViewerSummary>Show summary</ViewerSummary>
+      <ShowRSSLink>Show RSS link</ShowRSSLink>
+      <ShowLink>Show link</ShowLink>
+      <LinkFormatBlock>Link Format</LinkFormatBlock>
+      <UIParameterizedTagetPageInputSetAction>Target page</UIParameterizedTagetPageInputSetAction>
+    </label>
+    <action>
+      <Save>Save</Save>
+      <Cancel>Cancel</Cancel>
+    </action>
+  </UIPCLVConfig>
+
+  <OrderTypes>
+    <label>
+      <OrderDesc>Descendant</OrderDesc>
+      <OrderAsc>Ascendant</OrderAsc>
+    </label>
+  </OrderTypes>
+
+  <UIParameterizedTagetPageInputSetAction>
+    <title>
+      <SelectTargetPage>Select target page</SelectTargetPage>
+    </title>
+  </UIParameterizedTagetPageInputSetAction>
+</bundle>

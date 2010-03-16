@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="1.0" xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+	
+	<portlet>
+		<description xml:lang="EN">Single Content Viewer Portlet</description>
+		<portlet-name>SingleContentViewer</portlet-name>
+		<display-name>Content Detail</display-name>
+		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+		
+		<init-param>
+			<name>webui.configuration</name>
+			<value>/WEB-INF/conf/portlet/SingleContentViewer/webui/configuration.xml</value>
+		</init-param>
+		
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>help</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.SingleContentViewer.SingleContentViewer</resource-bundle>
+		
+		<portlet-info>
+			<title>Content Detail</title>
+			<short-title>Content Detail</short-title>
+			<keywords>Contents</keywords>
+		</portlet-info>
+		
+		<portlet-preferences>
+			<preference>
+				<name>repository</name>
+				<value>repository</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>workspace</name>
+				<value>collaboration</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowTOC</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowTags</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowCategories</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowTitle</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowPrintAction</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowVote</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowComments</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>isQuickCreate</name>
+				<value>false</value>
+				<read-only>true</read-only>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>admin</role-name>
+			<role-link>admin</role-link>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<description xml:lang="EN">Editing Toolbar</description>
+		<portlet-name>EditingPortlet</portlet-name>
+		<display-name>Editing Toolbar</display-name>
+		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+		<init-param>
+			<name>webui.configuration</name>
+			<value>/WEB-INF/conf/portlet/Editing/webui/configuration.xml</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>help</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.EditingPortlet.EditingPortlet</resource-bundle>
+		
+		<portlet-info>
+			<title>Editing Toolbar</title>
+			<short-title>Editing Toolbar</short-title>
+			<keywords>WCM Admin</keywords>
+		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>repository</name>
+				<value>repository</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>workspace</name>
+				<value>collaboration</value>
+				<read-only>false</read-only>
+			</preference>
+		</portlet-preferences>
+	</portlet>
+	
+	<portlet>
+		<description xml:lang="EN">Content List</description>
+		<portlet-name>ContentListViewerPortlet</portlet-name>
+		<display-name>Content List</display-name>
+		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+		<init-param>
+			<name>webui.configuration</name>
+			<value>/WEB-INF/conf/portlet/ContentListViewer/webui/configuration.xml</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>help</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.ContentListViewer.ContentListViewer</resource-bundle>
+		<portlet-info>
+			<title>Content List</title>
+			<short-title>Content List</short-title>
+			<keywords>Contents</keywords>
+		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>repository</name>
+				<value>repository</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>workspace</name>
+				<value>collaboration</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>folderPath</name>
+				<value></value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>formViewTemplatePath</name>
+				<value></value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>paginatorTemplatePath</name>
+				<value></value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>itemsPerPage</name>
+				<value>10</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showQuickEditButton</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showRefreshButton</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showThumbnailsView</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showTitle</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showDateCreated</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showSummary</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showHeader</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showReadmore</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showLink</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>source</name>
+				<value>folder</value>
+				<read-only>true</read-only>
+			</preference>
+			<preference>
+				<name>mode</name>
+				<value></value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>orderBy</name>
+				<value></value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>orderType</name>
+				<value></value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>contents</name>
+				<value></value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>basePath</name>
+				<value>products/presentation/pcv</value>
+				<read-only>false</read-only>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>admin</role-name>
+			<role-link>admin</role-link>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<description xml:lang="EN">Content by URL</description>
+		<portlet-name>ParameterizedContentViewerPortlet</portlet-name>
+		<display-name xml:lang="EN">Content by URL</display-name>
+		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+		
+		<init-param>
+			<name>webui.configuration</name>
+			<value>/WEB-INF/conf/portlet/ParameterizedContentViewer/webui/configuration.xml</value>
+		</init-param>
+		
+		<expiration-cache>0</expiration-cache>
+		
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>help</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.ParameterizedContentViewer.ParameterizedContentViewer</resource-bundle>
+		
+		<portlet-info>
+			<title>Content by URL</title>
+			<short-title>Content by URL</short-title>
+			<keywords>Contents</keywords>
+		</portlet-info>
+		
+		<portlet-preferences>
+			<preference>
+				<name>repository</name>
+				<value>repository</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showTitle</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showDateCreated</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showBar</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+		</portlet-preferences>
+	</portlet>
+	
+	<!--portlet>
+		<description xml:lang="EN">Wiki Mode</description>
+		<portlet-name>wikipresentation</portlet-name>
+		<display-name xml:lang="EN">Wiki mode portlet</display-name>
+		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+		
+		<init-param>
+			<name>webui.configuration</name>
+			<value>/WEB-INF/conf/portlet/WikiPresentation/webui/configuration.xml</value>
+		</init-param>
+		
+		<expiration-cache>0</expiration-cache>
+		
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>help</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.WikiPresentation.WikiPresentation</resource-bundle>
+		
+		<portlet-info>
+			<title>Wiki Presentation</title>
+			<short-title>Wiki Presentation</short-title>
+			<keywords>portlet, content</keywords>
+		</portlet-info>
+	</portlet-->
+	
+	<portlet>
+		<description xml:lang="EN">Category Navigation</description>
+		<portlet-name>CategoryNavigationPortlet</portlet-name>
+		<display-name xml:lang="EN">Category Navigation</display-name>
+		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+		<init-param>
+			<name>webui.configuration</name>
+			<value>/WEB-INF/conf/portlet/CategoryNavigation/webui/configuration.xml</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>edit</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.CategoryNavigation.CategoryNavigation</resource-bundle>
+		<portlet-info>
+			<title>Category Navigation</title>
+			<short-title>Category Navigation</short-title>
+			<keywords>Contents</keywords>
+		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>portletName</name>
+				<value>Category Navigation Portlet</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>repository</name>
+				<value>repository</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>treeName</name>
+				<value>acme</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>treeTitle</name>
+				<value>Categories</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>templateCategory</name>
+				<value>vertical-hierachy</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>templatePath</name>
+				<value>/exo:ecm/views/templates/Category Navigation Portlet/vertical-hierachy/SimpleVerticalHierachy.gtmpl</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>targetPath</name>
+				<value>products/presentation/pclv</value>
+				<read-only>false</read-only>
+			</preference>
+		</portlet-preferences>
+	</portlet>
+	
+	<portlet>
+		<description xml:lang="EN">Category Contents</description>
+		<portlet-name>ParameterizedContentListViewerPortlet</portlet-name>
+		<display-name xml:lang="EN">Category Contents</display-name>
+		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+		<init-param>
+			<name>webui.configuration</name>
+			<value>/WEB-INF/conf/portlet/ParameterizedContentListViewer/webui/configuration.xml</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>edit</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<resource-bundle>locale.portlet.ParameterizedContentListViewer.ParameterizedContentListViewer</resource-bundle>
+		<portlet-info>
+			<title>Category Contents</title>
+			<short-title>Category Contents</short-title>
+			<keywords>Contents</keywords>
+		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>repository</name>
+				<value>repository</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>workspace</name>
+				<value>collaboration</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>header</name>
+				<value>Parameterize Content List Viewer</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>formViewTemplatePath</name>
+				<value>/exo:ecm/views/templates/Parameterized Content List Viewer/list-by-folder/UIParameterizedContentListViewerDefault.gtmpl</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>paginatorTemplatePath</name>
+				<value>/exo:ecm/views/templates/Parameterized Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>itemsPerPage</name>
+				<value>10</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showQuickEditButton</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showRefreshButton</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showThumbnailsView</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showTitle</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showDateCreated</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showSummary</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showHeader</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showLink</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>orderBy</name>
+				<value>exo:title</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>orderType</name>
+				<value>DESC</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showReadMore</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showRssLink</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showAutoDetect</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>targetPage</name>
+				<value>products/presentation/pcv</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>treeName</name>
+				<value>acme</value>
+				<read-only>false</read-only>
+			</preference>
+		</portlet-preferences>
+	</portlet>
+	
+</portlet-app>

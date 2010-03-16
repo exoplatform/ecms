@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <title>
+      <QuickEdit>Quick edit</QuickEdit>
+    </title>
+  </UICLVContainer>
+
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Content list viewer configuration</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+
+  <UICLVConfig>
+    <label>
+      <Title>Content list viewer configuration</Title>
+      <ContentSelectionBlock>Contents selection</ContentSelectionBlock>
+      <ViewerMode>Mode</ViewerMode>
+      <FolderPathInputSet>Folder path</FolderPathInputSet>
+      <OrderBy>Order by</OrderBy>
+      <option>
+        <exo:title>Title</exo:title>
+        <exo:dateCreated>Date created</exo:dateCreated>
+        <exo:dateModified>Date modified</exo:dateModified>
+        <publication:liveDate>Date published</publication:liveDate>
+      </option>
+      <DisplaySettingBlock>Display settings</DisplaySettingBlock>
+      <Header>Header</Header>
+      <FormViewTemplate>Viewer template</FormViewTemplate>
+      <PaginatorTemplate>Paginator template</PaginatorTemplate>
+      <UICLVBasePathInputSetAction>Base path</UICLVBasePathInputSetAction>
+      <UICLVBasePathInput></UICLVBasePathInput>
+      <ItemsPerPage>Items per page</ItemsPerPage>
+      <ViewerThumbnailsView>Show illustration</ViewerThumbnailsView>
+      <ViewerSummary>Show summary</ViewerSummary>
+      <ViewerHeader>Show header</ViewerHeader>
+      <ViewerButtonRefresh>Show refresh button</ViewerButtonRefresh>
+      <ViewerTitle>Show title</ViewerTitle>
+      <ViewerDateCreated>Show date created</ViewerDateCreated>
+      <ViewerLink>Show link</ViewerLink>
+      <ViewerReadmore>Read more</ViewerReadmore>
+    </label>
+    <action>
+      <Save>Save</Save>
+      <Cancel>Cancel</Cancel>
+    </action>
+  </UICLVConfig>
+
+  <ViewerMode>
+    <label>
+      <AutoViewerMode>By Folder</AutoViewerMode>
+      <ManualViewerMode>By Contents</ManualViewerMode>
+    </label>
+  </ViewerMode>
+
+  <FolderPathInputSet>
+    <title>
+      <SelectFolderPath>Select folder path</SelectFolderPath>
+    </title>
+  </FolderPathInputSet>
+
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Folder browser</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+
+  <OrderTypes>
+    <label>
+      <OrderDesc>Descendant</OrderDesc>
+      <OrderAsc>Ascendant</OrderAsc>
+    </label>
+  </OrderTypes>
+
+  <UICLVBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Select base path</SelectBasePath>
+    </title>
+  </UICLVBasePathInputSetAction>
+
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Page selector</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+
+  <UICLVPresentation>
+    <label>
+      <readmore>Read more</readmore>
+    </label>
+    <action>
+      <refresh>Refresh</refresh>
+      <edit>Edit</edit>
+    </action>
+    <label>
+      <draft>Draft</draft>
+    </label>
+  </UICLVPresentation>
+
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiple content selector panel</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Web content form</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  
+  <UIMessageBoard>
+    <msg>
+      <contents-not-found>This content does not found or deleted.</contents-not-found>
+      <add-node-error>An error when perform add new node.</add-node-error> 	 
+ 	  <folder-empty>This folder is empty</folder-empty>	 
+    </msg>
+  </UIMessageBoard>
+</bundle>

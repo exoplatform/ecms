@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <UIPresentationContainer>
+  <title>
+   <QuickEdit>Éditer rapidement</QuickEdit>
+   <print>Imprimer cette page</print>
+  </title>
+  <label>
+   <draft>brouillon</draft>
+   <print>Imprimer</print>
+  </label>
+  <msg>
+   <no-content>Il n'ya pas de contenu à afficher</no-content>
+  </msg>
+ </UIPresentationContainer>
+
+ <UIWelcomeScreen>
+  <label>
+   <WelcomeLabel>Bienvenue dans Single Content Viewer</WelcomeLabel>
+   <WelcomeText>Faites votre choix</WelcomeText>
+  </label>
+  <action>
+   <Abort>Annuler</Abort>
+   <CreateNewContent>Créer un nouveau contenu</CreateNewContent>
+   <SelectContent>Sélectionnez un contenu</SelectContent>
+  </action>
+ </UIWelcomeScreen>
+
+ <UINameWebContentForm>
+  <action>
+   <Save>Sauver</Save>
+   <Abort>Annuler</Abort>
+  </action>
+  <label>
+   <name>Titre</name>
+   <selectTemplate>Sélectionnez un modèle</selectTemplate>
+   <option>
+    <exo:siteBreadcrumb>Site Breadcrumb</exo:siteBreadcrumb>
+    <exo:siteNavigationWebContent>Site Navigation</exo:siteNavigationWebContent>
+    <exo:pictureOnHeadWebcontent>Picture on head layout webcontent</exo:pictureOnHeadWebcontent>
+    <exo:siteSearchBox>Site search box webcontent</exo:siteSearchBox>
+    <exo:webContent>Free layout webcontent</exo:webContent>
+   </option>
+  </label>
+ </UINameWebContentForm>
+
+ <UITabPane>
+   <title>
+    <UIContentDialogConfig>Configuration pour Single content viewer</UIContentDialogConfig>
+   </title>
+  </UITabPane>
+  
+  <UIContentDialogConfig>
+   <action>
+    <SaveToPortletPreference>Sauver</SaveToPortletPreference>
+   </action>
+   <label>
+    <ShowTitle>Afficher le titre</ShowTitle>
+    <ShowPrintAction>Afficher l'imprimer</ShowPrintAction>
+   </label>
+   <msg>
+    <saved-successfully>Vos préférences sont enregistrées</saved-successfully>
+   </msg>
+  </UIContentDialogConfig>
+  
+  <UIContentDialogFormPopupWindow>
+   <title>
+    <UIWelcomeScreen>Bienvenue dans Single content viewer</UIWelcomeScreen>
+    <UINameWebContentForm>Suivant un modèle</UINameWebContentForm>
+    <UIContentDialogForm>Web content form</UIContentDialogForm>
+    <UIContentSelectorOne>Single content selector panel</UIContentSelectorOne>
+   </title>
+  </UIContentDialogFormPopupWindow>
+</bundle>

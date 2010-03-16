@@ -1,0 +1,15 @@
+<%
+	/**
+	 * Created by The eXo Platform SAS
+	 * Author : eXoPlatform
+	 *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+	 * Jun 29, 2009  
+	 */
+%>
+
+<div id="$uicomponent.id" class="$uicomponent.id">
+	<% 
+		uicomponent.buildTree();
+		uicomponent.renderChildren(); 
+	%>
+</div>

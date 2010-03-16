@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath></SelectTargetPath>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Page sélecteur</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Arbre taxonomique</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Titre</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTargetPathFormInputSet>Target Path</UICategoryNavigationTargetPathFormInputSet>
+      <UICategoryNavigationTreeNameFormSelectBox>Nom de l'arbre</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+    </label>
+    <msg>
+      <not-support-encoding>L'encodage est prend pas en charge.</not-support-encoding>
+      <render> erreur lorsque processus de rendu. </render>
+      <saving-success>Ce portlet a été mis à jour</saving-success>
+    </msg>
+    <action>
+      <Save>Sauver</Save>
+    </action>
+  </UICategoryNavigationConfig>
+</bundle>

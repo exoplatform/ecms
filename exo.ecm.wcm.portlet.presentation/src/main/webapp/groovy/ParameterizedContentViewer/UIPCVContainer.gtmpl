@@ -1,0 +1,88 @@
+<%
+	import javax.jcr.Node;
+	import javax.portlet.PortletPreferences;	
+	import org.exoplatform.portal.application.PortalRequestContext;
+	import org.exoplatform.portal.webui.util.Util;
+	import org.exoplatform.services.wcm.core.WCMConfigurationService;
+	import org.exoplatform.wcm.webui.pcv.UIPCVPresentation;
+	import org.exoplatform.wcm.webui.Utils;
+
+	def node = uicomponent.getNode();
+	def isPrint = uicomponent.getIsPrint();
+	def wcmConfigurationService = uicomponent.getApplicationComponent(WCMConfigurationService.class);
+	def parameterizedPageURI = wcmConfigurationService.getRuntimeContextParam("parameterizedPageURI");
+	def printPreviewPageURI = wcmConfigurationService.getRuntimeContextParam("printPageURI");
+	
+%>
+<div id="$uicomponent.id" class="$uicomponent.id">
+	<div class="PCV">
+	<%
+		if (node != null) {
+			def title = uicomponent.getTitle(node);
+			def dateCreated = uicomponent.getCreatedDate(node);
+			boolean isEditMode = false;
+			if(uicomponent.isShowTitle()) {
+					%>	<div class="Title">$title</div> <%   
+			} 
+			if(uicomponent.isShowDateCreated()) { 
+					%>	<div class="DateAndMail">$dateCreated</div> <%   
+			} 
+			if(uicomponent.isShowBar()) {
+				if(!isPrint) {
+					%>
+					<div class="UIOptionBar">
+					<div class="BackButton" title="<%= _ctx.appRes("UIPCVContainer.title.Back") %>" onclick="history.go(-1)"><span></span></div>
+					<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open(location.href.replace('<%=parameterizedPageURI%>','<%=printPreviewPageURI%>') + '?isPrint=true')" title="<%= _ctx.appRes("UIPCVContainer.title.print")%>"><%= _ctx.appRes("UIPCVContainer.label.print")%></a>
+					</div>
+					<%
+				}
+			}
+			if (Utils.isShowQuickEdit() && !isPrint) {
+			  %>
+				 <a class="DocumentQuickEdit" href="<%= uicomponent.event("QuickEdit") %>" title="<%= _ctx.appRes("UIPCVContainer.title.QuickEdit") %>"></a>
+				 <%
+	      	}
+			if(Utils.isShowDraft(node) && !isPrint){
+    		%>
+  			<div style="padding: 5px 10px; line-height: 16px; ">
+				[ <span class="DraftIcon" style="padding-left: 20px"><%= _ctx.appRes("UIPCVContainer.label.draft") %>, </span>
+				<a style="padding-left: 1px" href="<%= uicomponent.event("Edit") %>"> <%= _ctx.appRes("UIPCVContainer.label.edit") %></a>]
+	 		</div>  
+		<% 
+  		}
+			uicomponent.renderChildren();
+			if(isPrint) {
+				%>
+					<div class="ActionContainer">
+						<a class="PrintFrameIcon PrintIcon" href="javascript: void(0)" onclick="window.print();"><%= _ctx.appRes("UIPCVContainer.action.Print") %></a>
+						<a class="PrintFrameIcon CloseIcon" id="CloseIcon" href="javascript: void(0)" onclick="window.close();"><%= _ctx.appRes("UIPCVContainer.action.Close") %></a>
+					</div>
+				<%
+			}
+		} else {%>
+		  	<div style="padding-bottom: 20px; font-size: 13px; text-align: center;">
+		  		<div class="Message" id="ContentNotFound"><!-- <%= _ctx.appRes("UIPCVContainer.msg.content-not-found") %> --></div>
+		  	</div>
+		<%} %>
+	</div>
+</div>
+<%
+if (isPrint) {
+	%>
+	 <script type="text/javascript">
+  var allElements = document.getElementsByTagName('*');
+  for (i in allElements) {
+   if (allElements[i].nodeName == 'HTML') continue;
+   if (allElements[i].style) allElements[i].style.overflow = 'visible';
+   allElements[i].overflow = 'visible';
+  }
+	 </script>
+ <style type="text/css">
+  @media print{
+   a{ display:none; }
+   overflow{ display:none;}
+  }
+ </style>
+	<%
+}
+%>

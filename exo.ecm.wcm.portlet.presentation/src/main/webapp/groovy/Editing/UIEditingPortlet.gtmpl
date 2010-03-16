@@ -1,0 +1,5 @@
+<div id="$uicomponent.id" class="$uicomponent.id">
+  <%
+    uicomponent.renderChildren();
+  %>
+</div>

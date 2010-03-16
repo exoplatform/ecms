@@ -1,0 +1,24 @@
+<div class="$uicomponent.id" id="$uicomponent.id">
+	<%
+		import org.exoplatform.wcm.webui.clv.UICLVPresentation;
+		import	org.exoplatform.wcm.webui.Utils;
+	
+		def rcontext = _ctx.getRequestContext() ;
+		String portletId = Utils.getRealPortletId(rcontext);
+		def quickEditingBlockId = portletId + "-QuickEditingBlock";
+		def jsManager = rcontext.getJavascriptManager();
+		jsManager.importJavascript('eXo.wcm.frontoffice.private.QuickEdit', '/eXoWCMResources/javascript/') ;
+		jsManager.addOnLoadJavascript('eXo.ecm.QuickEdit.insertQuickeditingBlock("' + portletId + '","' + quickEditingBlockId + '")');
+		if (Utils.isShowQuickEdit()) {					
+	%>
+			<div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>">
+				<div style="position: absolute; right: 0px; top: 0px; z-index: 1">
+					<a href="<%=uicomponent.event("QuickEdit")%>" title="<%= _ctx.appRes("UICLVContainer.title.QuickEdit");%>"><div class="QuickEdit"><span></span></div></a>					 
+				</div>
+			</div>
+	<% } %>		
+
+	<% 			
+		uicomponent.renderChild(UICLVPresentation.class);
+	%>
+</div>

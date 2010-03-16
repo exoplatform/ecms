@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath></SelectTargetPath>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Chọn trang</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Cây phân loại</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Tiêu đề</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTargetPathFormInputSet>Trang đích</UICategoryNavigationTargetPathFormInputSet>
+      <UICategoryNavigationTreeNameFormSelectBox>Cây phân loại</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Mẫu hiển thị cây phân loại</UICategoryNavigationTemplateFormSelectBox>
+    </label>
+    <msg>
+      <not-support-encoding>Không hỗ trợ</not-support-encoding>
+      <render>Có lỗi khi đang hiển thị</render>
+      <saving-success>Portlet đã được cập nhật</saving-success>
+    </msg>
+    <action>
+      <Save>Lưu</Save>
+    </action>
+  </UICategoryNavigationConfig>
+</bundle>

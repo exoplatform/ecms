@@ -1,0 +1,216 @@
+<%
+	import org.exoplatform.webui.application.WebuiRequestContext;
+	import org.exoplatform.webui.application.portlet.PortletRequestContext;
+	import org.exoplatform.wcm.webui.clv.config.UICLVConfig;
+	import org.exoplatform.wcm.webui.Utils;
+	
+  	def rcontext = _ctx.getRequestContext();
+  	String portletId = Utils.getRealPortletId(rcontext);
+  	def quickEditingBlockId = portletId + "-QuickEditingBlock";
+	def jsManager = rcontext.getJavascriptManager();
+	jsManager.importJavascript("eXo.wcm.frontoffice.private.CLV", "/eXoWCMResources/javascript");
+	jsManager.addOnLoadJavascript("eXo.ecm.CLV.showHideOrderBy");
+%>
+<div class="UIForm $uicomponent.id">
+	<div class="TitleBar">
+		<b><%=_ctx.appRes("UICLVConfig.label.Title")%></b>	
+	</div>
+  <%uiform.begin()%>
+  <div class="HorizontalLayout">
+    <div class="FormContainer">
+      <fieldset style=" margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
+				<legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.ContentSelectionBlock") %></legend>
+	      <table class="UIFormGrid">
+	      		   <tr>
+				      <td class="FieldLabel">
+					      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_MODES).getName()) %>
+				      </td>
+						<td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_MODES)) %></td>
+					</tr>
+						<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.FOLDER_PATH_INPUTSET).getName()) %>
+			      </td>
+				  <td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.FOLDER_PATH_INPUTSET)) %></td>
+				</tr>			
+					<% if (uiform.getChildById(uicomponent.ORDER_BY).isRendered()) { %>
+					<tr class="OrderBlock">
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.ORDER_BY).getName()) %>
+			      </td>
+						<td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.ORDER_BY)) %></td>														
+					</tr>
+					<tr class="OrderBlock">	
+						<td><span></span></td>
+						<td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.ORDER_TYPES)) %></td>													
+					</tr>
+
+					<% } else {
+								List<String> contents = uiform.getViewAbleContentList();							
+								if (contents != null && contents.size() != 0) {
+				  %>
+				  			<table class="UIContentGrid">
+									<thead>
+										<tr>
+											<th><%=_ctx.appRes("UICLVConfig.label.ContentPath")%></th>
+											<th><%=_ctx.appRes("UISelectedContentGrid.action.Down")%></th>											
+											<th><%=_ctx.appRes("UISelectedContentGrid.action.Up")%></th>
+										</tr>
+									</thead>
+				  <% 
+			  				if (contents.size() == 1) {
+									String delLink = uicomponent.event("Delete", "0");											
+  				%>
+  								<tr class="EvenRow">
+  									<td><%= contents.get(0) %></td>
+  									<td><span></span></td>
+  									<td><span></span></td>  									
+  								</tr>
+  				<%
+			  				} else {
+				  				
+				  				String rowClass = "";
+									for (int i = 0; i < contents.size(); i++) {
+										if ((i % 2) == 0) {
+											rowClass = "EvenRow";											
+										} else {
+											rowClass = "OddRow";										
+										}
+										String content = contents.get(i);									
+										String upLink = uicomponent.event("Increase", Integer.toString(i));
+										String downLink = uicomponent.event("Decrease", Integer.toString(i));	
+					%>
+										<tr class="$rowClass">
+											<td>$content</td>
+											<td width="25px"><div class="DownRowIcon" onclick="$downLink"><span></span></div></td>
+											<td width="25px"><div class="UpRowIcon" onclick="$upLink"><span></span></div></td>
+										</tr>
+					<%				
+									}//end for
+								}
+					%>
+								</table>
+					<%				
+								}//end if
+						}//edn else
+					%>
+	      </table>                 
+      </fieldset>   
+      
+			<fieldset style=" margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
+				<legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.DisplaySettingBlock") %></legend>        
+	      <table class="UIFormGrid">
+	      	<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.HEADER).getName()) %>
+			      </td>
+						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.HEADER)) %></td>
+					</tr>
+					<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.FORM_VIEW_TEMPLATES_SELECTOR).getName()) %>
+			      </td>
+						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.FORM_VIEW_TEMPLATES_SELECTOR)) %></td>				
+					</tr>
+					<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.PAGINATOR_TEMPLATES_SELECTOR).getName()) %>
+			      </td>
+						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.PAGINATOR_TEMPLATES_SELECTOR)) %></td>								
+					</tr>
+					
+					<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION).getName()) %>
+			      </td>
+						<td class="FieldComponent" colspan="2">
+							<% uiform.renderField(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION)) %>
+						</td>								
+					</tr>	
+					
+					<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.ITEMS_PER_PAGE_INPUT).getName()) %>
+			      </td>
+						<td class="FieldComponent ItemsPerPage" colspan="2">
+							<% uiform.renderField(uiform.getChildById(uicomponent.ITEMS_PER_PAGE_INPUT)) %>
+						</td>								
+					</tr>					
+	      </table>   					      
+				<table class="UIFormGrid">
+					<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_THUMBNAILS_IMAGE).getName()) %>
+			      </td>
+						<td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_THUMBNAILS_IMAGE)) %></td>								
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_TITLE).getName()) %>
+			      </td>
+						<td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_TITLE)) %></td>														
+					</tr>								
+					<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_SUMMARY).getName()) %>
+			      </td>
+						<td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_SUMMARY)) %></td>								
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_DATE_CREATED).getName()) %>
+			      </td>
+						<td class="FieldComponent"><% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_DATE_CREATED)) %></td>														
+					</tr>																
+					<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_HEADER).getName()) %>
+			      </td>
+						<td class="FieldComponent">
+							<% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_HEADER)) %>
+						</td>								
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_LINK).getName()) %>
+			      </td>
+						<td class="FieldComponent">
+							<% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_LINK)) %>
+						</td>								
+					</tr>																												
+					<tr>
+			      <td class="FieldLabel">
+				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_BUTTON_REFRESH).getName()) %>
+			      </td>
+						<td class="FieldComponent">
+							<% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_BUTTON_REFRESH)) %>
+						</td>								
+			      <td class="FieldLabel">
+                      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.VIEWER_READMORE).getName()) %>
+			      </td>
+						<td class="FieldComponent">
+                            <% uiform.renderField(uiform.getChildById(uicomponent.VIEWER_READMORE)) %>
+						</td>
+					</tr>																												
+	      </table>   					      	      
+      </fieldset>       
+      <div class="UIAction"> 
+        <table class="ActionContainer">
+        	<tr>
+        		<td>
+		          <% for(action in uicomponent.getActions()) { 
+                	 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+                   String link = uicomponent.event(action) ;
+          		%>
+          		<div onclick="$link" class="ActionButton LightBlueStyle" onmouseover="this.style.color = '#058ee6'" onmouseout="this.style.color='black'">
+                <div class="ButtonLeft">
+                  <div class="ButtonRight">
+                    <div class="ButtonMiddle">
+                      <a href="javascript:void(0);">$actionLabel</a>
+                    </div>
+                  </div>
+                </div>
+           		</div>
+          		<%}%>        
+          	</td>
+          </tr>  
+        </table>
+      </div>
+    </div>
+  </div>
+  <%uiform.end()%>
+</div>

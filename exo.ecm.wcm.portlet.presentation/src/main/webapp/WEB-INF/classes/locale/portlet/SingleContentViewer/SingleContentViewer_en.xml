@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <UIPresentationContainer>
+  <title>
+   <QuickEdit>Quick edit</QuickEdit>
+   <print>Print this page</print>
+  </title>
+  <label>
+   <draft>Draft</draft>
+   <print>Print</print>
+  </label>
+  <msg>
+   <no-content>There is no content to show</no-content>
+  </msg>
+ </UIPresentationContainer>
+
+ <UIWelcomeScreen>
+  <label>
+   <WelcomeLabel>Welcome to Single Content Viewer</WelcomeLabel>
+   <WelcomeText>Make your choice</WelcomeText>
+  </label>
+  <action>
+   <Abort>Abort</Abort>
+   <CreateNewContent>Create new content</CreateNewContent>
+   <SelectContent>Select a content</SelectContent>
+  </action>
+ </UIWelcomeScreen>
+
+ <UINameWebContentForm>
+  <action>
+   <Save>Save</Save>
+   <Abort>Abort</Abort>
+  </action>
+  <label>
+   <name>Title</name>
+   <selectTemplate>Select a template</selectTemplate>
+   <option>
+    <exo:siteBreadcrumb>Site Breadcrumb</exo:siteBreadcrumb>
+    <exo:siteNavigationWebContent>Site Navigation</exo:siteNavigationWebContent>
+    <exo:pictureOnHeadWebcontent>Picture on head layout webcontent</exo:pictureOnHeadWebcontent>
+    <exo:siteSearchBox>Site search box webcontent</exo:siteSearchBox>
+    <exo:webContent>Free layout webcontent</exo:webContent>
+   </option>
+  </label>
+ </UINameWebContentForm>
+
+ <UITabPane>
+   <title>
+    <UIContentDialogConfig>Configuration for Single content viewer</UIContentDialogConfig>
+   </title>
+  </UITabPane>
+  
+  <UIContentDialogConfig>
+   <action>
+    <SaveToPortletPreference>Save</SaveToPortletPreference>
+   </action>
+   <label>
+    <ShowTitle>Show title</ShowTitle>
+    <ShowPrintAction>Show print</ShowPrintAction>
+   </label>
+   <msg>
+     <saved-successfully>Your preferences is saved</saved-successfully>
+   </msg>
+  </UIContentDialogConfig>
+  
+  <UIContentDialogFormPopupWindow>
+   <title>
+    <UIWelcomeScreen>Welcome to Single content viewer</UIWelcomeScreen>
+    <UINameWebContentForm>Template form</UINameWebContentForm>
+    <UIContentDialogForm>Web content form</UIContentDialogForm>
+    <UIContentSelectorOne>Single content selector panel</UIContentSelectorOne>
+   </title>
+  </UIContentDialogFormPopupWindow>
+</bundle>
