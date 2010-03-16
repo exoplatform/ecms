@@ -1,0 +1,81 @@
+.UIJCRBrowser {
+	padding: 10px;
+}
+
+.ExplorerTree {
+	float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 230px;
+  background: url(/eXoSkinMac/skin/MacSkin/background/Background1x4.png);
+}
+
+.ExplorerTree .InnerExplorerTree {
+  border: solid 1px #b1b0b0;
+  padding: 10px;
+}
+
+.UITreeList {
+  margin-left: 240px; /* orientation=lt */
+  margin-right: 240px; /* orientation=rt */
+}
+
+.UITreeList table {
+	*width: 93%;
+}
+
+.UITreeList table .Icon16x16 {
+	float: none;
+	margin: 5px;
+}
+
+.UITreeList .Text {
+	width: auto; height: 24px;
+	line-height: 24px;
+	padding-left: 28px; /* orientation=lt */
+	padding-right: 28px; /* orientation=rt */
+	width: 100%;
+}
+
+.UIRelationManager .UITreeList .Text {
+	width: auto; height: 20px;
+	line-height: 20px;
+	padding-left: 28px; /* orientation=lt */
+	padding-right: 28px; /* orientation=rt */
+}
+
+.UIOneNodePathSelector {
+	padding: 10px;
+}
+
+.UICategoriesSelector .UITabPane .TabPaneContent {
+  overflow: hidden;
+  padding: 8px;
+}
+
+.UICategoriesSelector .ExplorerTree {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 230px;
+  background: #f3f3f3;
+  margin: 10px;
+}
+
+.UICategoriesSelector .UIBreadcumbs {
+	padding: 10px 10px 0px 10px;
+}
+
+.UICategoriesSelector .UISelectedCategoriesGrid {
+	padding: 10px 10px 0px 10px;
+}
+
+.UICategoriesSelector .UICategoriesSelectPanel {
+	padding: 10px 10px 0px 250px;
+}
+
+.UIOneNodePathSelector .UIBreadcumbs {
+	padding-bottom: 10px;
+}
+
+.UITaxonomyManager .UIBreadcumbs {
+	padding-bottom: 10px;
+}
