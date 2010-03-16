@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="1.0"
+   xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+
+  <portlet>
+    <description xml:lang="EN">Newsletter</description>
+    <portlet-name>NewsletterViewerPortlet</portlet-name>
+    <display-name>Newsletter</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/NewsletterViewer/webui/configuration.xml</value>
+    </init-param>
+
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.NewsletterViewer.NewsletterViewer</resource-bundle>
+
+    <portlet-info>
+      <title>Newsletter</title>
+      <short-title>Newsletter</short-title>
+      <keywords>Newsletter</keywords>
+    </portlet-info>
+  </portlet>
+
+  <portlet>
+    <description xml:lang="EN">Newsletter Manager</description>
+    <portlet-name>NewsletterManagerPortlet</portlet-name>
+    <display-name>Newsletter Manager</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/NewsletterManager/webui/configuration.xml</value>
+    </init-param>
+
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.NewsletterManager.NewsletterManager</resource-bundle>
+
+    <portlet-info>
+      <title>Newsletter Manager</title>
+      <short-title>Newsletter Manager</short-title>
+      <keywords>Newsletter</keywords>
+    </portlet-info>
+  </portlet>
+</portlet-app>

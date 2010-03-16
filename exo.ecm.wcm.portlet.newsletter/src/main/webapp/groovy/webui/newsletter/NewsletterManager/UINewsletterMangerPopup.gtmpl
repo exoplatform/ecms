@@ -1,0 +1,30 @@
+<div class="UINewsletterCategoryForm $uicomponent.id">
+	<% uiform.begin() %>
+		<div class="HorizontalLayout" style="padding:10px 0px;margin:5px;height:400px;overflow:auto;">
+			<div class="UIFormInput" style="padding:5px">
+			  <%=uicomponent.newsletterEntryContent_%>
+			</div>
+		</div>
+		
+		<div class="UIAction"> 
+			<table class="ActionContainer" style="text-align:center">
+				<tr>
+					<td>
+	        <%String actionLabel = "Close"; 
+	          String link = uicomponent.event("Close") ;
+	        %>
+						<div onclick="$link" class="ActionButton LightBlueStyle">
+		      	  	<div class="ButtonLeft">
+		        	  	<div class="ButtonRight">
+		          	  	<div class="ButtonMiddle">
+		          	  		<a href="javascript:void(0);">$actionLabel</a>
+		          	  	</div>
+		            	</div>
+		          	</div>
+						</div>
+	      	</td>
+				</tr>
+		  </table> 
+		</div>
+	<%uiform.end()%>
+</div>

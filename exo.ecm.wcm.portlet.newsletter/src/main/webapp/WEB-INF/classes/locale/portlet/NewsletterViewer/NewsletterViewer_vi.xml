@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UINewsletterViewerForm>
+    <msg>
+      <updateSuccess>Những mục bạn chọn đã được cập nhật</updateSuccess>
+      <subcribed>Bạn đã đăng ký nhận thư tin tức tại những mục đã chọn</subcribed>
+      <email-not-empty>Bạn phải nhập email</email-not-empty>
+      <checkSubscriptionToProcess>Hãy chọn ít nhất một mục trược khi đăng ký</checkSubscriptionToProcess>
+      <alreadyExistedEmail>Email này đã tồn tại, hãy chọn một email khác</alreadyExistedEmail>
+      <canNotSubcribed>Không thể đăng ký, hãy thử lại</canNotSubcribed>
+      <get-checked>Không thể lẫy những mục đã được chọn, hãy thử lại</get-checked>
+    </msg>
+    <action>
+      <Subcribe>Đăng ký</Subcribe>
+      <ForgetEmail>Hủy bỏ email này</ForgetEmail>
+      <ChangeSubcriptions>Thay đổi mục đã đăng ký</ChangeSubcriptions>
+    </action>
+    <title>
+      <userEmail>Email của bạn</userEmail>
+      <subscription>Mục</subscription>
+      <yourStatus>Hãy chọn để đăng ký</yourStatus>
+    </title>
+    <Email>
+      <ConfirmUser>
+        <Subject>Yêu cầu xác nhận hệ thống nhận thư tự động</Subject>
+        <Content>Bấm vào #đây# để xác nhận đăng ký của bạn</Content>
+      </ConfirmUser>
+    </Email>
+  </UINewsletterViewerForm>
+</bundle>

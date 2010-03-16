@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UINewsletterViewerForm>
+    <msg>
+      <updateSuccess>Your subcription has been updated.</updateSuccess>
+      <subcribed>You are now subscribed to the selected newletters.</subcribed>
+      <email-not-empty>Email cannot be empty</email-not-empty>
+      <checkSubscriptionToProcess>Please check one or more subscriptions before submit!</checkSubscriptionToProcess>
+      <alreadyExistedEmail>This Email already exists. Please input another email</alreadyExistedEmail>
+      <canNotSubcribed>Can't subcribe. Please try again!</canNotSubcribed>
+      <get-checked>Error when perform get subscription are checked.</get-checked>
+    </msg>
+    <action>
+      <Subcribe>Subscribe</Subcribe>
+      <ForgetEmail>Forget this email</ForgetEmail>
+      <ChangeSubcriptions>Change your subcriptions</ChangeSubcriptions>
+    </action>
+    <title>
+      <userEmail>Your Email</userEmail>
+      <subscription>Subscription</subscription>
+      <yourStatus>Check to subscribe</yourStatus>
+    </title>
+    <Email>
+      <ConfirmUser>
+        <Subject>Newsletter confirmation request</Subject>
+        <Content>Click #here# to confirm your subscription.</Content>
+      </ConfirmUser>
+    </Email>
+  </UINewsletterViewerForm>
+</bundle>
