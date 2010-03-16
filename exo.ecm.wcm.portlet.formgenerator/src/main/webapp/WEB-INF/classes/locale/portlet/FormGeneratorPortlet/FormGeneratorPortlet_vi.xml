@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFormGeneratorTabPane>
+    <label>
+      <UIFormGeneratorGeneralTab>Thông tin chung</UIFormGeneratorGeneralTab>
+      <FormGeneratorName>Tên form</FormGeneratorName>
+      <UIFormGeneratorNodetypeFormSelectBox>Kiểu cơ bản</UIFormGeneratorNodetypeFormSelectBox>
+      <UIFormGeneratorJsonObjectStringInput></UIFormGeneratorJsonObjectStringInput>
+      <UIFormGeneratorDescriptionFormWYSIWYGInput>Mô tả</UIFormGeneratorDescriptionFormWYSIWYGInput>
+      <UIFormGeneratorIconFormUploadInput>Biểu tượng</UIFormGeneratorIconFormUploadInput>
+      <UIFormGeneratorDnDTab>Xây dựng form</UIFormGeneratorDnDTab>
+      <UIFormGeneratorOptionsTab>Tùy chọn</UIFormGeneratorOptionsTab>
+      <UIFormGeneratorVoteFormCheckboxInput>Cho phép bình chọn</UIFormGeneratorVoteFormCheckboxInput>
+      <UIFormGeneratorCommentFormCheckboxInput>Cho phép binh luận</UIFormGeneratorCommentFormCheckboxInput>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Reset>Làm lại</Reset>
+    </action>
+    <msg>
+      <register-failed>Nodeype chưa được đăng ký thành công. Đã có nodetype cùng tên hoặc supertype không đúng</register-failed>
+      <AddNewsSuccessful>Mẫu của nodetype {0}'đã được tạo thành công</AddNewsSuccessful>
+      <duplicate-name>Tên của trường này đã tồn tại, hãy sử dụng tên khác</duplicate-name>
+      <select-value-empty>Giá trị mặc định của trường này phải có giá trị.</select-value-empty>
+    </msg>
+  </UIFormGeneratorTabPane>
+  <FormGeneratorDialog>
+    <label>
+      <Download>Download tài liệu này</Download>
+    </label>
+  </FormGeneratorDialog>
+</bundle>

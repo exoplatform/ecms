@@ -1,0 +1,112 @@
+<%
+	/**
+	 * Created by The eXo Platform SAS
+	 * Author : eXoPlatform
+	 *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+	 * Jun 25, 2009  
+	 */
+	 
+	import org.exoplatform.webui.core.UIPageIterator;
+	import org.exoplatform.webui.core.UIGrid;
+	UIPageIterator uiIterator = uicomponent.getChild(UIGrid.class).getUIPageIterator() ;
+%>
+<div class="$uicomponent.id" id="$uicomponent.id">
+	<table class="UIGrid">
+		<thead>
+	    	<tr>
+	      		<th><%=_ctx.appRes("UIFCCActionList.header.name")%></th>
+			    <th><%=_ctx.appRes("UIFCCActionList.header.description")%></th>
+	 		    <th><%=_ctx.appRes("UIFCCActionList.header.instanceOf")%></th>
+	 		    <th>
+	 		    	<%=_ctx.appRes("UIFCCActionList.header.action")%>
+	<% if (!"basic".equals(uicomponent.getMode())) { %>
+ 		    		<img class="Add16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" title="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" onclick="<%=uicomponent.event("Add")%>"/>
+  	<% } %>
+	 		    </th>
+	    	</tr>
+	  	</thead>
+	  	<tbody>
+      		<%
+      			if(uiIterator.getAvailable() < 1) {
+      				%>
+	    				<tr>
+	      					<td style="font-style:italic; color: #FF5604; text-align: center;" colspan="4">
+	        					<%=_ctx.appRes("UIFCCActionList.msg.empty")%>
+	      					</td>
+	    				</tr>  
+	  				<%
+	  			} else { 
+	        		def rowClass = "OddRow" ;
+			    	boolean even = true ;
+// if(uicomponent.hasActions()) {
+				    	for(action in uicomponent.getListActions()) {
+		      			if(even) rowClass = "EvenRow" ;  
+		      			else rowClass =  "OddRow" ; 
+			      		even = !even ;
+	  					%>
+		      				<tr class="$rowClass">
+	    	    				<td>
+	        	  					<div class="Text">
+	          							<%
+	          								if(action.hasProperty("exo:name")){
+	          									%><%=action.getProperty("exo:name").getString()%><%
+	          								}
+	          							%>
+		          					</div>
+		        				</td>
+		        				<td>
+		          					<div class="Text">
+		          						<%
+		          							if(action.hasProperty("exo:description")){
+		          								%><%=action.getProperty("exo:description").getString()%><%
+		          							}
+		          						%>
+		          					</div>
+		          				</td>
+		        				<td>
+		          					<div class="Text">[<%=action.getPrimaryNodeType().getName()%>]</div>
+		        				</td>
+		        				<td>
+		        					<div class="ActionContainer">
+			        					<%
+			          						for(act in uicomponent.getActions()) { 
+			        							%>
+	            									<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" onclick="<%=uicomponent.event(act, action.getName())%>"  title="$act"/>
+	            								<%
+	            							} 
+	            						%>
+	            					</div>
+	            				</td>
+	            			</tr>
+	            		<%
+	        		}
+//}
+		      	}
+		    %>
+	    </tbody>
+  	</table>
+	<% 
+		if(uiIterator.getAvailablePage() > 1) {
+			uicomponent.renderChild(UIPageIterator.class);
+		} 
+	%>
+	<% if (!"basic".equals(uicomponent.getMode())) { %>
+  	<div class="UIAction"> 
+    	<table class="ActionContainer">
+    		<tr>
+    			<td>
+		      		<div onclick="<%=uicomponent.event("Add")%>" class="ActionButton LightBlueStyle" >
+						<div class="ButtonLeft">
+						  	<div class="ButtonRight">
+							  	<div class="ButtonMiddle">
+									<a href="javascript:void(0);"><%=_ctx.appRes("UIFCCActionList.action.Add")%></a>
+					      		</div>
+					    	</div>
+				    	</div>
+					</div>
+    			</td>
+    		</tr>
+    	</table>
+  	</div>
+  	<% } %>
+</div>
