@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecm.dms.ext</groupId>
+    <artifactId>contentvalidation</artifactId>
+    <version>3.0.0-Beta01-SNAPSHOT</version>
+  </parent>
+  <groupId>org.exoplatform.ecm.dms.ext.contentvalidation</groupId>
+  <artifactId>exo.ecm.dms.ext.contentvalidation.component.webui</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo contentvalidation webui</name>
+  <description>eXo contentvalidation webui</description>
+  <url>http://www.exoplatform.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.portal</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecm.dms.core</groupId>
+      <artifactId>exo.ecm.dms.core.webui.dms</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecm.dms.core</groupId>
+      <artifactId>exo.ecm.dms.core.webui.ext</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecm.workflow</groupId>
+      <artifactId>exo.ecm.workflow.webui.workflow</artifactId>
+      <version>${org.exoplatform.ecm.workflow.version}</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

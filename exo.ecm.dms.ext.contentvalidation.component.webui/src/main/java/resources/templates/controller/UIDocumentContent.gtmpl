@@ -1,0 +1,8 @@
+<h3>No Data Available For The Node Type nt:base</h3>
+<% node = uicomponent.getNode()%>
+node path: $node.path <br/>
+node name: $node.name <br/>
+
+<%for(property in node.getProperties()) {%>
+  property: $property.name ; value = $property.string <br/>
+<%}%>
