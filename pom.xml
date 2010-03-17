@@ -382,8 +382,7 @@
     <!-- http://jira.exoplatform.org/browse/ECMS-97 -->
     <!--<module>exo.ecm.dms.ext.contentvalidation.component.webui</module>-->
     <module>exo.ecm.dms.ext.contentvalidation.component.workflowPublication</module>
-    <!-- http://jira.exoplatform.org/browse/ECMS-98 -->
-    <!--<module>exo.ecm.wcm.component.migration.1.2.data</module>-->
+    <module>exo.ecm.wcm.component.migration.1.2.data</module>
     <!-- http://jira.exoplatform.org/browse/ECMS-99 -->
     <!--<module>exo.ecm.wcm.component.migration.1.2.workspaces</module>-->
     <module>exo.ecm.wcm.component.newsletter</module>
