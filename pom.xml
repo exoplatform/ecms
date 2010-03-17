@@ -344,6 +344,30 @@
         <workflowEngine>jbpm</workflowEngine>
       </properties>
     </profile>
+    <profile>
+      <id>wkf</id>
+      <modules>
+        <module>workflow.packaging.module</module>
+        <module>workflow.packaging.product</module>
+        <module>exo.ecm.workflow.packaging.assembly</module>  
+      </modules>
+    <profile>
+    <profile>
+      <id>dms</id>
+      <modules>
+        <module>dms.packaging.module</module>
+        <module>dms.packaging.product</module>  
+        <module>exo.ecm.dms.packaging</module>
+      </modules>
+    <profile>
+    <profile>
+      <id>wcm</id>
+      <modules>
+        <module>wcm.packaging.module</module>
+        <module>wcm.packaging.product</module>
+        <module>exo.ecm.wcm.packaging.assembly</module>
+      </modules>
+    <profile>
   </profiles>
   <modules>
     <module>exo.ecm.dms.core.component.cms</module>
@@ -423,15 +447,5 @@
     <module>exo.ecm.workflow.server.tomcat.patch</module>
     <module>exo.ecm.workflow.web.eXoWorkflowResources</module>
     <module>exo.ecm.workflow.webui.workflow</module>
-    <!-- Packaging -->
-    <module>dms.packaging.module</module>
-    <module>dms.packaging.product</module>
-    <module>wcm.packaging.module</module>
-    <module>wcm.packaging.product</module>
-    <module>workflow.packaging.module</module>
-    <module>workflow.packaging.product</module>
-    <module>exo.ecm.dms.packaging</module>
-    <module>exo.ecm.wcm.packaging.assembly</module>
-    <module>exo.ecm.workflow.packaging.assembly</module>
   </modules>
 </project>
