@@ -6,6 +6,7 @@
     <artifactId>exo.ecms</artifactId>
     <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
+  <groupId>org.exoplatform.ecm.dms.core</groupId>
   <artifactId>exo.ecm.dms.core.web.fck</artifactId>
   <packaging>war</packaging>
   <name>eXo Platform Web FCK</name>

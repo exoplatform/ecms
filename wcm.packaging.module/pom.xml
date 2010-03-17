@@ -6,7 +6,7 @@
     <artifactId>exo.ecms</artifactId>
     <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecm.workflow</groupId>
+  <groupId>org.exoplatform.ecm.wcm</groupId>
   <artifactId>wcm.packaging.module</artifactId>
   <packaging>pom</packaging>
   <name>eXo WCM eXoBuild module</name>

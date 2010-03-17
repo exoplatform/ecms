@@ -6,6 +6,7 @@
     <artifactId>exo.ecms</artifactId>
     <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
+  <groupId>org.exoplatform.ecm</groupId>
   <artifactId>exo.ecm.wcm.portlet.newsletter</artifactId>
   <packaging>war</packaging>
   <name>eXo WCM Newsletter Portlet Suites</name>

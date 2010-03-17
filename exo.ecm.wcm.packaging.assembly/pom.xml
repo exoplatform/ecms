@@ -26,6 +26,7 @@
     <artifactId>exo.ecms</artifactId>
     <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
+
   <artifactId>exo.ecm.wcm.packaging.assembly</artifactId>
   <packaging>pom</packaging>
   <name>eXo WCM Assemblies</name>
@@ -84,14 +85,24 @@
     <dependency>
       <groupId>org.exoplatform.ecm.wcm</groupId>
       <artifactId>wcm.packaging.module</artifactId>
-      <version>2.0.0-Beta01-SNAPSHOT</version>
+      <version>${project.version}</version>
       <type>js</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecm.wcm</groupId>
       <artifactId>wcm.packaging.product</artifactId>
-      <version>2.0.0-Beta01-SNAPSHOT</version>
+      <version>${project.version}</version>
       <type>js</type>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecm</groupId>
+      <artifactId>exo.ecm.wcm.server.tomcat.patch</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecm</groupId>
+      <artifactId>exo.ecm.wcm.server.jonas.patch</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
   <build>

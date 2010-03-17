@@ -415,8 +415,7 @@
     <module>exo.ecm.workflow.demo.config</module>
     <module>exo.ecm.workflow.demo.ear</module>
     <module>exo.ecm.workflow.demo.webapp</module>
-    <!-- http://jira.exoplatform.org/browse/ECMS-103 -->
-    <!--<module>exo.ecm.workflow.portlet.workflow</module>-->
+    <module>exo.ecm.workflow.portlet.workflow</module>
     <module>exo.ecm.workflow.server.bonita-server-env</module>
     <module>exo.ecm.workflow.server.jboss.patch</module>
     <module>exo.ecm.workflow.server.jboss.patch-ear</module>
@@ -424,6 +423,7 @@
     <module>exo.ecm.workflow.server.tomcat-demo.patch</module>
     <module>exo.ecm.workflow.server.tomcat.patch</module>
     <module>exo.ecm.workflow.web.eXoWorkflowResources</module>
+    <module>exo.ecm.workflow.webui.workflow</module>
     <!-- Packaging -->
     <module>dms.packaging.module</module>
     <module>dms.packaging.product</module>
