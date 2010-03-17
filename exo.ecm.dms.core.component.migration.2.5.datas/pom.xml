@@ -2,11 +2,11 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <parent>
-  <groupId>org.exoplatform.ecms</groupId>
-  <artifactId>exo.ecms</artifactId>
-  <version>3.0.0-Beta02-SNAPSHOT</version>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo.ecms</artifactId>
+    <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
-<groupId>org.exoplatform.ecm.dms.core</groupId>
+  <groupId>org.exoplatform.ecm.dms.core</groupId>
   <artifactId>exo.ecm.dms.core.component.migration.2.5.datas</artifactId>
   <packaging>jar</packaging>
   <name>eXo ECM Migration for datas</name>

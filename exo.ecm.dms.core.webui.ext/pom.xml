@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-  <groupId>org.exoplatform.ecms</groupId>
-  <artifactId>exo.ecms</artifactId>
-  <version>3.0.0-Beta02-SNAPSHOT</version>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo.ecms</artifactId>
+    <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
   <groupId>org.exoplatform.ecm.dms.core</groupId>
   <artifactId>exo.ecm.dms.core.webui.ext</artifactId>
@@ -27,9 +27,9 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>${org.slf4j.slf4j-simple.version}</version>
-    </dependency>		
+    </dependency>
   </dependencies>
-	<build>
+  <build>
     <resources>
       <resource>
         <directory>src/main/java</directory>
@@ -94,6 +94,5 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    
   </build>
 </project>
