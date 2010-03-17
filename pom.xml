@@ -351,7 +351,7 @@
         <module>workflow.packaging.product</module>
         <module>exo.ecm.workflow.packaging.assembly</module>  
       </modules>
-    <profile>
+    </profile>
     <profile>
       <id>dms</id>
       <modules>
@@ -359,7 +359,7 @@
         <module>dms.packaging.product</module>  
         <module>exo.ecm.dms.packaging</module>
       </modules>
-    <profile>
+    </profile>
     <profile>
       <id>wcm</id>
       <modules>
@@ -367,7 +367,7 @@
         <module>wcm.packaging.product</module>
         <module>exo.ecm.wcm.packaging.assembly</module>
       </modules>
-    <profile>
+    </profile>
   </profiles>
   <modules>
     <module>exo.ecm.dms.core.component.cms</module>
