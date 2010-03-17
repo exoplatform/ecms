@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.jcr.RepositoryException;
 
-import org.apache.commons.logging.Log;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.CacheEntry;
 import org.exoplatform.services.jcr.config.ContainerEntry;
@@ -35,6 +34,8 @@ import org.exoplatform.services.jcr.config.ValueStorageFilterEntry;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 import org.picocontainer.Startable;
 
 /**
@@ -139,9 +140,12 @@ public class WorkspaceMigrationService implements Startable{
     String maxSize = systemWorkspace.getCache().getParameterValue(KEY_MAXSIZE);
     String liveTime = systemWorkspace.getCache().getParameterValue(KEY_LIVETIME);
     String systemQueryHandler = systemWorkspace.getQueryHandler().getType();
-    String systemIndexPath = systemWorkspace.getQueryHandler().getIndexDir();
-    boolean systemSupportHighLighting = systemWorkspace.getQueryHandler().getSupportHighlighting();
-    String excerptClass = systemWorkspace.getQueryHandler().getExcerptProviderClass();
+    //String systemIndexPath = systemWorkspace.getQueryHandler().getIndexDir(); --> 3.0.0-Beta02
+    String systemIndexPath = "";
+    //boolean systemSupportHighLighting = systemWorkspace.getQueryHandler().getSupportHighlighting(); --> 3.0.0-Beta02
+    boolean systemSupportHighLighting = true;
+    //String excerptClass = systemWorkspace.getQueryHandler().getExcerptProviderClass(); --> 3.0.0-Beta02
+    String excerptClass = "";
     
     //Init information for wcm-system workspace
     String lockPath = systemLockPath.substring(0, systemLockPath.lastIndexOf("/") +1 ) + WCM_SYSTEM; 
