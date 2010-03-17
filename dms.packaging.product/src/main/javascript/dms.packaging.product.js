@@ -10,7 +10,7 @@ function getProduct(version) {
   product.useContentvalidation = true;
   product.version = "${project.version}" ;
   product.contentvalidationVersion = "${project.version}";
-  product.workflowVersion = "${org.exoplatform.ecm.workflow.version}" ;
+  product.workflowVersion = "${org.exoplatform.ecms.version}" ;
   product.serverPluginVersion = "${org.exoplatform.portal.version}" ;
   product.workflowJbpmVersion = "${org.exoplatform.ecm.jbpm.version}";
   product.workflowBonitaVersion = "${org.bonita.version}";

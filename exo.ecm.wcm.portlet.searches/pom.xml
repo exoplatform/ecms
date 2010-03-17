@@ -4,9 +4,9 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo.ecms</artifactId>
-    <version>3.0.0-Beta02-SNAPSHOT</version>
+    <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecm</groupId>
+  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.wcm.portlet.searches</artifactId>
   <packaging>war</packaging>
   <name>eXo WCM Search Portlet Suites</name>
@@ -30,15 +30,15 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm.dms.core</groupId>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.dms.core.component.cms</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm</groupId>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.wcm.component.wcm</artifactId>
-      <version>2.0.0-Beta01-SNAPSHOT</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -60,21 +60,21 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm.dms.core</groupId>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.dms.core.webui.dms</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm</groupId>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.wcm.component.search</artifactId>
-      <version>2.0.0-Beta01-SNAPSHOT</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm</groupId>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.wcm.webui.wcm</artifactId>
-      <version>2.0.0-Beta01-SNAPSHOT</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

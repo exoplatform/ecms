@@ -4,9 +4,9 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo.ecms</artifactId>
-    <version>3.0.0-Beta02-SNAPSHOT</version>
+    <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecm.workflow</groupId>
+  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>workflow.packaging.module</artifactId>
   <packaging>pom</packaging>
   <name>eXo WORKFLOW eXoBuild module</name>

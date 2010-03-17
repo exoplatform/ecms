@@ -21,21 +21,21 @@ function getModule(params) {
 
 module.web = {}
   module.web.eXoWorkflowResources = 
-    new Project("org.exoplatform.ecm.workflow", "exo.ecm.workflow.web.eXoWorkflowResources", "war", module.version) ;  
+    new Project("org.exoplatform.ecms", "exo.ecm.workflow.web.eXoWorkflowResources", "war", module.version) ;  
   module.web.eXoWorkflowResources.deployName = "eXoWorkflowResources" ;
   
 	module.demo = {};
    // demo portal
    module.demo.portal = 
-	   new Project("org.exoplatform.ecm.workflow.demo", "exo.ecm.workflow.demo.webapp", "war", module.version).
-	   addDependency(new Project("org.exoplatform.ecm.workflow.demo", "exo.ecm.workflow.demo.config", "jar", module.version));
+	   new Project("org.exoplatform.ecms.demo", "exo.ecm.workflow.demo.webapp", "war", module.version).
+	   addDependency(new Project("org.exoplatform.ecms.demo", "exo.ecm.workflow.demo.config", "jar", module.version));
 	   module.demo.portal.deployName = "ecmworkflowdemo";  
 	   	
   module.server = {};
 
    module.server.tomcat = {};
-   module.server.tomcat.patch = new Project("org.exoplatform.ecm.workflow", "exo.ecm.workflow.server.tomcat.patch", "jar", module.version);
+   module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo.ecm.workflow.server.tomcat.patch", "jar", module.version);
    module.server.tomcatdemo = {}
-   module.server.tomcatdemo.patch = new Project("org.exoplatform.ecm.workflow", "exo.ecm.workflow.server.tomcat-demo.patch", "jar", module.version);
+   module.server.tomcatdemo.patch = new Project("org.exoplatform.ecms", "exo.ecm.workflow.server.tomcat-demo.patch", "jar", module.version);
   return module;
 }

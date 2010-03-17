@@ -9,8 +9,8 @@ function getProduct(version) {
   product.codeRepo = "ecm/wcm" ;
   product.useContentvalidation = true;
   product.version = "${project.version}" ;
-  product.contentvalidationVersion = "${org.exoplatform.ecm.dms.version}";
-  product.workflowVersion = "${org.exoplatform.ecm.workflow.version}" ;
+  product.contentvalidationVersion = "${org.exoplatform.ecms.version}";
+  product.workflowVersion = "${org.exoplatform.ecms.version}" ;
   product.serverPluginVersion = "${org.exoplatform.portal.version}" ;
   product.workflowJbpmVersion = "${org.exoplatform.ecm.jbpm.version}";
   product.workflowBonitaVersion = "${org.bonita.version}";

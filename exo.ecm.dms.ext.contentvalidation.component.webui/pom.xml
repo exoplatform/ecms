@@ -4,9 +4,9 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo.ecms</artifactId>
-    <version>3.0.0-Beta02-SNAPSHOT</version>
+    <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecm.dms.ext.contentvalidation</groupId>
+  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.dms.ext.contentvalidation.component.webui</artifactId>
   <packaging>jar</packaging>
   <name>eXo contentvalidation webui</name>
@@ -20,19 +20,19 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm.dms.core</groupId>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.dms.core.webui.dms</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm.dms.core</groupId>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.dms.core.webui.ext</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm.workflow</groupId>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.workflow.webui.workflow</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
