@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.ecm</groupId>
-    <artifactId>wcm</artifactId>
-    <version>2.0.0-Beta01-SNAPSHOT</version>
+  <groupId>org.exoplatform.ecms</groupId>
+  <artifactId>exo.ecms</artifactId>
+  <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
   <artifactId>exo.ecm.wcm.portlet.presentation</artifactId>
   <packaging>war</packaging>
@@ -31,7 +31,7 @@
     <dependency>
       <groupId>org.exoplatform.ecm.dms.core</groupId>
       <artifactId>exo.ecm.dms.core.component.cms</artifactId>
-      <version>${org.exoplatform.ecm.dms.version}</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -61,7 +61,7 @@
     <dependency>
       <groupId>org.exoplatform.ecm.dms.core</groupId>
       <artifactId>exo.ecm.dms.core.webui.dms</artifactId>
-      <version>${org.exoplatform.ecm.dms.version}</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -79,19 +79,19 @@
     <dependency>
       <groupId>org.exoplatform.ecm.dms.core</groupId>
       <artifactId>exo.ecm.dms.core.component.publication</artifactId>
-      <version>${org.exoplatform.ecm.dms.version}</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecm.dms.core</groupId>
       <artifactId>exo.ecm.dms.core.webui.ext</artifactId>
-      <version>${org.exoplatform.ecm.dms.version}</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecm.dms.core</groupId>
       <artifactId>exo.ecm.dms.core.component.document.viewer</artifactId>
-      <version>${org.exoplatform.ecm.dms.version}</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

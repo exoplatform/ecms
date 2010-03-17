@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.ecm.dms.ext</groupId>
-    <artifactId>contentvalidation</artifactId>
-    <version>3.0.0-Beta01-SNAPSHOT</version>
+  <groupId>org.exoplatform.ecms</groupId>
+  <artifactId>exo.ecms</artifactId>
+  <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
   <groupId>org.exoplatform.ecm.dms.ext.contentvalidation</groupId>
   <artifactId>exo.ecm.dms.ext.contentvalidation.component.webui</artifactId>
@@ -34,8 +34,8 @@
     <dependency>
       <groupId>org.exoplatform.ecm.workflow</groupId>
       <artifactId>exo.ecm.workflow.webui.workflow</artifactId>
-      <version>${org.exoplatform.ecm.workflow.version}</version>
-      <scope>compile</scope>
+      <version>${project.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
     <build>

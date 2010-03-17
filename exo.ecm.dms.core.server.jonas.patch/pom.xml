@@ -2,10 +2,11 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.ecm.core</groupId>
-    <artifactId>config</artifactId>
-    <version>3.0.0-Alpha01-SNAPSHOT</version>
+  <groupId>org.exoplatform.ecms</groupId>
+  <artifactId>exo.ecms</artifactId>
+  <version>3.0.0-Beta02-SNAPSHOT</version>
   </parent>
+<groupId>org.exoplatform.ecm.dms.core</groupId>
   <artifactId>exo.ecm.dms.core.server.jonas.patch</artifactId>
   <packaging>jar</packaging>
   <name>eXo JOnAS Server</name>
