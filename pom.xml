@@ -379,9 +379,12 @@
     <module>exo.ecm.dms.ext.contentvalidation.component.bonitaconfig</module>
     <module>exo.ecm.dms.ext.contentvalidation.component.jbpmconfig</module>
     <module>exo.ecm.dms.ext.contentvalidation.component.plugin</module>
+    <!-- http://jira.exoplatform.org/browse/ECMS-97 -->
     <!--<module>exo.ecm.dms.ext.contentvalidation.component.webui</module>-->
     <module>exo.ecm.dms.ext.contentvalidation.component.workflowPublication</module>
+    <!-- http://jira.exoplatform.org/browse/ECMS-98 -->
     <!--<module>exo.ecm.wcm.component.migration.1.2.data</module>-->
+    <!-- http://jira.exoplatform.org/browse/ECMS-99 -->
     <!--<module>exo.ecm.wcm.component.migration.1.2.workspaces</module>-->
     <module>exo.ecm.wcm.component.newsletter</module>
     <module>exo.ecm.wcm.component.publication</module>
@@ -392,6 +395,7 @@
     <module>exo.ecm.wcm.demo.ear</module>
     <module>exo.ecm.wcm.demo.rest-war</module>
     <module>exo.ecm.wcm.demo.war</module>
+    <!-- http://jira.exoplatform.org/browse/ECMS-100 -->
     <!--<module>exo.ecm.wcm.ext.publication</module>-->
     <module>exo.ecm.wcm.extension.config</module>
     <module>exo.ecm.wcm.extension.ear</module>
@@ -403,6 +407,7 @@
     <module>exo.ecm.wcm.server.jonas.patch</module>
     <module>exo.ecm.wcm.server.tomcat.patch</module>
     <module>exo.ecm.wcm.web.eXoWCMResources</module>
+    <!-- http://jira.exoplatform.org/browse/ECMS-101 -->
     <!--<module>exo.ecm.wcm.web.portal</module>-->
     <module>exo.ecm.wcm.webui.wcm</module>
     <module>exo.ecm.workflow.bp.bonita.holiday</module>
@@ -415,6 +420,7 @@
     <module>exo.ecm.workflow.demo.config</module>
     <module>exo.ecm.workflow.demo.ear</module>
     <module>exo.ecm.workflow.demo.webapp</module>
+    <!-- http://jira.exoplatform.org/browse/ECMS-103 -->
     <!--<module>exo.ecm.workflow.portlet.workflow</module>-->
     <module>exo.ecm.workflow.server.bonita-server-env</module>
     <module>exo.ecm.workflow.server.jboss.patch</module>
@@ -424,14 +430,14 @@
     <module>exo.ecm.workflow.server.tomcat.patch</module>
     <module>exo.ecm.workflow.web.eXoWorkflowResources</module>
     <!-- Packaging -->
-    <module>exo.ecm.dms.packaging</module>
-    <module>exo.ecm.wcm.packaging.assembly</module>
-    <module>exo.ecm.workflow.packaging.assembly</module>
     <module>dms.packaging.module</module>
     <module>dms.packaging.product</module>
     <module>wcm.packaging.module</module>
     <module>wcm.packaging.product</module>
     <module>workflow.packaging.module</module>
     <module>workflow.packaging.product</module>
+    <module>exo.ecm.dms.packaging</module>
+    <module>exo.ecm.wcm.packaging.assembly</module>
+    <module>exo.ecm.workflow.packaging.assembly</module>
   </modules>
 </project>
