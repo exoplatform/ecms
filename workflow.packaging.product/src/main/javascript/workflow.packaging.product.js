@@ -36,7 +36,6 @@ function getProduct(version) {
 
     product.addDependencies(workflow.web.eXoWorkflowResources);
     product.addDependencies(workflow.portlet.workflow);
-	product.addDependencies(workflow.extension.webapp);
     // Workflow demo
     product.addDependencies(workflow.demo.portal);
 
