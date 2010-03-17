@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.exoplatform.ecm</groupId>
+    <artifactId>workflow</artifactId>
+    <version>2.0.0-Beta02-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.exoplatform.ecm.workflow</groupId>
+  <artifactId>exo.ecm.workflow.webui.workflow</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo WORKFLOW Web UI</name>
+  <description>eXo WORKFLOW Web UI</description>
+
+  <dependencies>
+  	<dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.portal</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.exoplatform.ecm.workflow</groupId>
+      <artifactId>exo.ecm.workflow.component.workflow.api</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <outputDirectory>target/classes</outputDirectory>    
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>          
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+          <include>**/*.drl</include>
+          <include>**/*.vm</include>
+          <include>**/*.doc</include>
+          <include>**/*.xls</include>
+          <include>**/*.ppt</include>
+          <include>**/*.txt</include>
+          <include>**/*.jar</include>
+          <include>**/*.pom</include>
+          <include>**/*.sha1</include>
+          <include>**/*.conf</include>
+          <include>**/*.gtmpl</include>                 
+        </includes>
+      </resource>
+    </resources>        
+  </build>
+ </project>
