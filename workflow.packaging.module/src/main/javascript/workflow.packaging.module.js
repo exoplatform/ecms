@@ -27,8 +27,8 @@ module.web = {}
 	module.demo = {};
    // demo portal
    module.demo.portal = 
-	   new Project("org.exoplatform.ecms.demo", "exo.ecm.workflow.demo.webapp", "war", module.version).
-	   addDependency(new Project("org.exoplatform.ecms.demo", "exo.ecm.workflow.demo.config", "jar", module.version));
+	   new Project("org.exoplatform.ecms", "exo.ecm.workflow.demo.webapp", "war", module.version).
+	   addDependency(new Project("org.exoplatform.ecms", "exo.ecm.workflow.demo.config", "jar", module.version));
 	   module.demo.portal.deployName = "ecmworkflowdemo";  
 	   	
   module.server = {};
