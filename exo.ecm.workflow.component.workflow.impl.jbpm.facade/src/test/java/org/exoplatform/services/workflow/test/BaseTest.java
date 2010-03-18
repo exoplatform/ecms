@@ -39,7 +39,7 @@ import org.jbpm.jpdl.par.ProcessArchiveDeployer;
  */
 public abstract class BaseTest extends BasicTestCase {
 
-  protected static final String PROCESS_PATH = "file:./src/conf/processes/";
+  protected static final String PROCESS_PATH = "file:./src/main/java/conf/processes/";
   protected WorkflowServiceContainer workflowServiceContainer;
   protected WorkflowFormsService workflowFormsService;
 

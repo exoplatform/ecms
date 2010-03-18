@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Update holidays</task-name>
+  <title>Update holidays</title>
+  <submit>
+    <submit>Modify</submit>
+    <value>Modify holidays</value>
+  </submit>
+  <cancel>
+    <submit>Disagree</submit>
+    <value>Disagree</value>
+  </cancel>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <title>Start of vacations :</title>
+    <label>Start (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <title>End of vacations :</title>
+    <label>End (dd/mm/yyyy) :</label>
+  </end>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <configuration>
-  <component>
+
+	<component>
     <key>org.exoplatform.services.workflow.WorkflowServiceContainer</key>
     <type>org.exoplatform.services.workflow.impl.jbpm.WorkflowServiceContainerImpl</type>
     <init-params>
@@ -14,7 +15,7 @@
       <object-param>
         <name>workflow.configuration</name>
         <description>load of default business processes</description>
-        <object type="org.exoplatform.services.workflow.api.ProcessesConfig">
+        <object type="org.exoplatform.services.workflow.ProcessesConfig">
           <field  name="processLocation"><string>war:/conf/bp</string></field>
           <field  name="predefinedProcess">
             <collection type="java.util.HashSet">

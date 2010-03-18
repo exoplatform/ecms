@@ -39,6 +39,8 @@ import javax.security.auth.Subject;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.component.RequestLifeCycle;
@@ -124,7 +126,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
   private WorkflowFormsService                   formsService          = null;
 
   /** Reference to the Organization Service */
-  private OrganizationService                    organizationService   = null;
+//  private OrganizationService                    organizationService   = null;
 
   private String                                 superUser_            = "root";
   
@@ -145,13 +147,13 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
    * @param params                initialization parameters of the service
    */
   public WorkflowServiceContainerImpl(WorkflowFileDefinitionService fileDefinitionService,
-      WorkflowFormsService formsService, OrganizationService organizationService,
+      WorkflowFormsService formsService,
       ConfigurationManager configurationManager, InitParams params) {
 
     // Store references to dependent services
     this.fileDefinitionService = fileDefinitionService;
     this.formsService = formsService;
-    this.organizationService = organizationService;
+//    this.organizationService = organizationService;
     this.configurationManager = configurationManager;
     // Initialize some fields
     this.configurations = new ArrayList<ProcessesConfig>();
@@ -728,9 +730,11 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
   public void start() {
   	//Request life cycle begin/end
     LoginContext lc = null;
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    OrganizationService organizationService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
     try {
-    	RequestLifeCycle.begin((ComponentRequestLifecycle)this.organizationService);
-      UserHandler userHandler = this.organizationService.getUserHandler();
+    	RequestLifeCycle.begin((ComponentRequestLifecycle) organizationService);
+      UserHandler userHandler = organizationService.getUserHandler();
       User user = userHandler.findUserByName(superUser_);
       char[] password = user.getPassword() == null ? superPass_.toCharArray() : user.getPassword().toCharArray();
       BasicCallbackHandler handler = new BasicCallbackHandler(superUser_, password);
@@ -907,8 +911,10 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
         }
       } else {
       	try {
-      		RequestLifeCycle.begin((ComponentRequestLifecycle)this.organizationService);
-      		UserHandler userHandler = this.organizationService.getUserHandler();
+      	  ExoContainer container = ExoContainerContext.getCurrentContainer();
+      	  OrganizationService organizationService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
+      		RequestLifeCycle.begin((ComponentRequestLifecycle)organizationService);
+      		UserHandler userHandler = organizationService.getUserHandler();
       		User user = userHandler.findUserByName(identity.getUserId());
       		char[] password = user.getPassword() == null ? superPass_.toCharArray() : user.getPassword().toCharArray();
       		BasicCallbackHandler handler = new BasicCallbackHandler(identity.getUserId(), password);

@@ -72,19 +72,17 @@ public class WorkflowServiceContainerImpl implements
   private ConfigurationManager configurationManager_;
   private List<ProcessesConfig> configs_;
   private JbpmSessionFactory sessionFactory_;
-  private OrganizationService orgService_;
   private ThreadLocal threadLocal_;
   private String hibernateServiceName_;
   private WorkflowFileDefinitionService fileDefinitionService_ ;
   private static final Log LOG  = ExoLogger.getLogger(WorkflowServiceContainerImpl.class.getName());
   
-  public WorkflowServiceContainerImpl(OrganizationService orgService,WorkflowFileDefinitionService fileDefinitionService,
+  public WorkflowServiceContainerImpl(WorkflowFileDefinitionService fileDefinitionService,
       ConfigurationManager conf, InitParams params) throws Exception {
     hibernateServiceName_ = params.getValueParam("hibernate.service").getValue();
     configs_ =  new ArrayList<ProcessesConfig>();
     this.configurationManager_ = conf;
     threadLocal_ = new ThreadLocal();
-    orgService_ = orgService;
     this.fileDefinitionService_ = fileDefinitionService;
   }
 
@@ -238,13 +236,15 @@ public class WorkflowServiceContainerImpl implements
     List<Task> groupTasks = new ArrayList<Task>();
     HashSet<TaskInstance> hashSet = new HashSet<TaskInstance>();
     String key = null;
-    Collection groups = orgService_.getGroupHandler().findGroupsOfUser(user);
-    Collection<?> membershipCollection = orgService_.getMembershipTypeHandler().findMembershipTypes();
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    OrganizationService organizationService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
+    Collection groups = organizationService.getGroupHandler().findGroupsOfUser(user);
+    Collection<?> membershipCollection = organizationService.getMembershipTypeHandler().findMembershipTypes();
     JbpmSession session = openSession();
     for (Iterator iter = groups.iterator(); iter.hasNext();) {
       Group group = (Group) iter.next();
       Collection memberships = 
-        orgService_.getMembershipHandler().findMembershipsByUserAndGroup(user, group.getId());
+        organizationService.getMembershipHandler().findMembershipsByUserAndGroup(user, group.getId());
       for (Iterator iterator = memberships.iterator(); iterator.hasNext();) {
         Membership membership = (Membership) iterator.next();
         if(membership.getMembershipType().equals("*")) {
