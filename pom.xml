@@ -349,7 +349,7 @@
     <profile>
       <id>dms</id>
       <modules>
-        <module>exo.ecm.dms.packaging</module>
+        <module>exo.ecm.dms.packaging.assembly</module>
       </modules>
     </profile>
     <profile>
