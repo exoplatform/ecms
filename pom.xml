@@ -57,6 +57,13 @@
     <junit.version>3.8.2</junit.version>
     <xpp3.version>1.1.3.4.O</xpp3.version>
     <mockito.version>1.8.1</mockito.version>
+    <!-- ************** -->
+    <!-- Build settings -->
+    <!-- ************** -->
+    <!-- We enforce Java 6 to build to use Chromattic and APT -->
+    <jdk.min.version>1.6</jdk.min.version>
+    <!-- maven-release-plugin -->
+    <arguments>-Prelease,java-api-compat,pkg-tomcat,arc-tomcat,pkg-jbossas,arc-jbossas,dms,wkf,wcm,jbpm,run-its -Dgatein.working.dir=target</arguments>
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
