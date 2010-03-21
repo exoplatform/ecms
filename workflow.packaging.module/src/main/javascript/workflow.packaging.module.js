@@ -13,7 +13,7 @@ function getModule(params) {
   var module = new Module();
   
   module.version = "${project.version}" ;
-  module.relativeMavenRepo =  "org/exoplatform/ecm/workflow";
+  module.relativeMavenRepo =  "org/exoplatform/ecms";
   module.relativeSRCRepo =  "ecm/workflow";
   module.name =  "workflow";
   module.portlet = {}

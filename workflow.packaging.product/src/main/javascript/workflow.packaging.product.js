@@ -8,7 +8,7 @@ function getProduct(version) {
 	product.portalwar = "portal.war" ;
 	product.codeRepo = "ecm/workflow" ;
 	product.useWorkflow = true;
-	product.workflowVersion = "${project.version}" ;
+    product.workflowVersion = "${project.version}" ;
 	product.serverPluginVersion = "${org.exoplatform.portal.version}" ;
 	product.workflowJbpmVersion = "${org.exoplatform.jbpm.version}";
 	product.workflowBonitaVersion = "${bonita.version}";

@@ -9,11 +9,11 @@ function getProduct(version) {
   product.codeRepo = "ecm/wcm" ;
   product.useContentvalidation = true;
   product.version = "${project.version}" ;
+  product.workflowVersion = "${project.version}" ;
   product.contentvalidationVersion = "${org.exoplatform.ecms.version}";
-  product.workflowVersion = "${org.exoplatform.ecms.version}" ;
   product.serverPluginVersion = "${org.exoplatform.portal.version}" ;
   product.workflowJbpmVersion = "${org.exoplatform.jbpm.version}";
-  product.workflowBonitaVersion = "${org.bonita.version}";
+  product.workflowBonitaVersion = "${bonita.version}";
   
   var kernel = Module.GetModule("kernel") ;
   var core = Module.GetModule("core") ;

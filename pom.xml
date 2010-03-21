@@ -26,19 +26,18 @@
     <url>http://builder.exoplatform.org/hudson/job/ecms-trunk-ci/</url>
   </ciManagement>
   <properties>
-    <exo.product.name>exo-wcm</exo.product.name>
-    <exo.product.specification>2.0</exo.product.specification>
+    <!-- Dependencies versions -->
     <org.exoplatform.kernel.version>2.2.0-CR2</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.3.0-CR2</org.exoplatform.core.version>
     <org.exoplatform.ws.version>2.1.0-CR2</org.exoplatform.ws.version>
     <org.exoplatform.jcr.version>1.12.0-CR2</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.12.0-Beta01</org.exoplatform.jcr-services.version>
     <org.exoplatform.portal.version>3.0.0-CR01-CP01</org.exoplatform.portal.version>
-    <org.exoplatform.exopackage.version>1.1.0-Beta06</org.exoplatform.exopackage.version>
-    <org.exoplatform.jbpm.version>3.0.2</org.exoplatform.jbpm.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
-    <bonita.version>4.1</bonita.version>
     <chromattic.version>1.0.0-cr2</chromattic.version>
+    <!-- workflow implementations -->
+    <org.exoplatform.jbpm.version>3.0.2</org.exoplatform.jbpm.version>
+    <bonita.version>4.1</bonita.version>
     <!-- 3rd parties -->
     <org.shindig.version>SNAPSHOT-r790473</org.shindig.version>
     <commons-lang.version>2.3</commons-lang.version>
@@ -60,6 +59,10 @@
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
+    <exo.product.name>exo-wcm</exo.product.name>
+    <exo.product.specification>2.0</exo.product.specification>
+    <!-- exopackage -->
+    <org.exoplatform.exopackage.version>1.1.0-Beta07-SNAPSHOT</org.exoplatform.exopackage.version>
     <!-- We enforce Java 6 to build to use Chromattic and APT -->
     <jdk.min.version>1.6</jdk.min.version>
     <!-- maven-release-plugin -->
