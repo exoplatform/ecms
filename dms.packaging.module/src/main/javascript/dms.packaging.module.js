@@ -25,7 +25,6 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.connector.fckeditor", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.webui.dms", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.webui.ext", "jar", module.version)).
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.portlet.ecm.ext.config", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.server.tomcat.patch", "jar", module.version)).
     addDependency(new Project("org.exoplatform", "exo-jcr-services", "jar", "1.12.0-Beta01")).
     addDependency(new Project("rome", "rome", "jar", "0.9")) .
