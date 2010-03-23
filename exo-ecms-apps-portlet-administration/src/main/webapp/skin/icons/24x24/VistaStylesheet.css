@@ -1,0 +1,548 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Tran The Trong
+ *          trongtt@gmail.com
+ * August 01, 2006
+ * version: $Id$
+ */
+ 
+.BlueFolderMagnifier24x24Icon {
+  width: 24px; height: 24px;
+  background: url('VistaSkin/BlueFolderMagnifier.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/BlueFolderMagnifier.gif') no-repeat left center; /* orientation=rt */
+}
+
+.Relations24x24Icon {
+  width: 24px; height: 24px;
+  background: url('VistaSkin/RelationsIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/RelationsIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.SavedQueries {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+  width: 24px; height: 24px;
+  background: url('VistaSkin/SavedQueries.gif') no-repeat;
+  cursor: pointer;
+  margin: 0px 0px 0px 5px;
+}
+
+.JCRExplorer24x24Icon {
+  width: 24px; height: 24px;
+  background: url('VistaSkin/JCRExplorerIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/JCRExplorerIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.CloseSidebar24x24Icon {
+  width: 24px; height: 24px;
+  background: url('VistaSkin/CloseSidebarIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/CloseSidebarIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.CollapseFolder24x24Icon {
+  width: 30px; height: 30px;
+  background: url('VistaSkin/BlueOpenFolder.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/BlueOpenFolder.png') no-repeat right center; /* orientation=rt */
+}
+
+.AddNodeTypeIcon {
+	width: 24px;	height: 24px;
+  background: url('zSkin/ManageNodeTypeIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('zSkin/ManageNodeTypeIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.AddCategoryIcon {
+	 height: 24px;
+  background: url('DefaultSkin/AddCategoryIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddCategoryIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ExpandFolder24x24Icon {
+  width: 28px; height: 28px;
+  background: url('VistaSkin/BlueClosedFolder.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/BlueClosedFolder.png') no-repeat right center; /* orientation=rt */
+}
+
+.Style1NextArrow24x24Icon  {
+  width: 24px; height: 24px;
+  background: url('VistaSkin/BlueCircleRightArrow.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/BlueCircleRightArrow.gif') no-repeat right center; /* orientation=rt */
+}
+
+.Style1BackArrow24x24Icon {
+  width: 24px; height: 24px;
+  background: url('VistaSkin/BlueCircleLeftArrow.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/BlueCircleLeftArrow.png') no-repeat right center; /* orientation=rt */
+}
+
+.Clipboard24x24Icon {
+  background: url('DefaultSkin/Clipboard.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/Clipboard.gif') no-repeat right center; /* orientation=rt */
+  width: 24px; height: 24px;
+}
+
+.EditDocumentIcon {
+	height: 22px;
+	background: url('VistaSkin/EditDocument.png') no-repeat left center; /* orientation=lt */
+	background: url('VistaSkin/EditDocument.png') no-repeat right center; /* orientation=rt */
+}
+
+.WatchDocumentIcon {
+	height: 28px;
+	background: url('VistaSkin/PagePreview.png') no-repeat left center; /* orientation=lt */
+	background: url('VistaSkin/PagePreview.png') no-repeat right center; /* orientation=rt */
+}
+
+.ViewMetadatasIcon {
+	height:22px;
+	background: url('VistaSkin/ViewMetadatasIcon.gif') no-repeat left center; /* orientation=lt */
+	background: url('VistaSkin/ViewMetadatasIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.VoteIcon {
+	height: 22px;
+	background: url('VistaSkin/VoteDocument.png') no-repeat left center; /* orientation=lt */
+	background: url('VistaSkin/VoteDocument.png') no-repeat right center; /* orientation=rt */
+}
+
+.CommentIcon {
+	height: 24px;
+	background: url('VistaSkin/Comment.png') no-repeat left center; /* orientation=lt */
+	background: url('VistaSkin/Comment.png') no-repeat right center; /* orientation=rt */
+}
+
+.TaggingDocumentIcon {
+	height: 21px;
+  background: url('VistaSkin/TaggingDocumentIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/TaggingDocumentIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.MultiLanguageIcon {
+	height: 22px;
+  background: url('VistaSkin/MultiLanguages.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/MultiLanguages.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageVersionsIcon {
+	height: 22px;
+  background: url('VistaSkin/ManageVersionsIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ManageVersionsIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.ManageAuditingIcon {
+	height: 24px;
+  background: url('VistaSkin/ManageAuditing.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ManageAuditing.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageActionsIcon {
+	height: 22px;
+  background: url('VistaSkin/HammerDataBox.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/HammerDataBox.png') no-repeat right center; /* orientation=rt */
+}
+
+.ManageCategoriesIcon {
+	height: 24px;
+  background: url('VistaSkin/ManageCategoriesIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ManageCategoriesIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.ManageSimpleCategoriesIcon {
+  width: 32px; height: 30px;
+  background: url('VistaSkin/ManageCategoriesIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ManageCategoriesIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.ManageRelationsIcon {
+	height: 24px;
+  background: url('VistaSkin/ManageRelationsIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ManageRelationsIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.ImportNodeIcon {
+	height: 23px;
+  background: url('VistaSkin/ImportNodeIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ImportNodeIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageHiddenIcon {
+	height: 24px;
+  background: url('DefaultSkin/AddRemoveHidden.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddRemoveHidden.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ExportNodeIcon {
+	height: 22px;
+  background: url('VistaSkin/ExportNodeIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ExportNodeIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.SearchIcon {
+	height: 28px;
+  background: url('VistaSkin/BlackMagnifier.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/BlackMagnifier.png') no-repeat right center; /* orientation=rt */
+}
+
+.SwitchSearch  {
+  height: 24px;
+  background: url('VistaSkin/AdvancedSearch.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/AdvancedSearch.png') no-repeat right center; /* orientation=rt */
+  cursor: pointer;
+}
+
+.AddDocumentIcon {
+	height:22px;
+  background: url('VistaSkin/AddDocument.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/AddDocument.gif') no-repeat right center; /* orientation=rt */
+}
+
+.CreateTicketIcon {
+	height: 24px;
+  background: url('VistaSkin/AddTicket.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/AddTicket.gif') no-repeat right center; /* orientation=rt */
+}
+
+.OverloadThumbnailIcon {
+	height: 24px;
+  background: url('VistaSkin/OverloadThumbnailIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/OverloadThumbnailIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.AddFolderIcon {
+	height: 22px;
+  background: url('VistaSkin/AddFolder.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/AddFolder.gif') no-repeat right center; /* orientation=rt */
+}
+
+.UploadIcon {
+	height: 21px;
+  background: url('VistaSkin/UploadFile.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/UploadFile.gif') no-repeat right center; /* orientation=rt */
+}
+
+.AddSymLinkIcon {
+  height: 24px;
+  background: url('VistaSkin/AddSymLink.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/AddSymLink.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ViewReferencesIcon {
+	height: 23px;
+  background: url('VistaSkin/ViewReferencesIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ViewReferencesIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+/* <ECM-1543>
+	* minh.js.exo 
+	* add to manage group icon 
+	*/
+
+.ShowHideBoxContainer {
+	display: none;
+}
+
+a:hover .ShowHideBoxContainer {
+	display: block;
+}
+
+/* </ECM-1543> */
+
+.ShowJCRStructureIcon {
+	height: 20px;
+  background: url('VistaSkin/ShowJCRStructure.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ShowJCRStructure.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ViewNodeTypeIcon {
+	height: 24px;
+  background: url('VistaSkin/ViewNodeTypeIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ViewNodeTypeIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ViewPropertiesIcon {
+	height: 21px;
+  background: url('VistaSkin/SmallBallColorPlate.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/SmallBallColorPlate.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ViewRelationsIcon {
+	height: 23px;
+  background: url('VistaSkin/ViewRelationsIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ViewRelationsIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.ViewPermissionsIcon {
+	height: 23px;
+  background: url('VistaSkin/ViewPermissionsIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/ViewPermissionsIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.HardDisk24x24Icon {
+	width: 27px; height: 24px;
+  background: url('VistaSkin/HardDisk.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/HardDisk.png') no-repeat right center; /* orientation=rt */
+}
+
+.BlueDiamond24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/BlueDiamond.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/BlueDiamond.gif') no-repeat right center; /* orientation=rt */
+}
+
+.PermissionIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/PermissionIcon.gif') no-repeat;
+}
+
+.Permission24x24Icon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 21px;	height: 23px;
+  background: url('VistaSkin/PermissionSetting.png') no-repeat;
+}
+
+.OntologiesIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/ManageOntologiesIcon.gif') no-repeat;
+}
+
+.UITemplatesManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/TemplatesManager.png') no-repeat;
+}
+
+.UIViewManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/ViewManager.png') no-repeat;
+}
+
+.UIDriveManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/DriveManager.png') no-repeat;
+}
+
+.UIQueriesManagerIcon {
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/ManageQueries.png') no-repeat;
+}
+
+.UIActionManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/ActionManager.png') no-repeat;
+}
+
+.UIScriptManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/ScriptManager.png') no-repeat;
+}
+
+.UIRuleManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/RuleManager.png') no-repeat;
+}
+
+.UIFolksonomyManagerIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/ManageFolksonomyIcon.png') no-repeat;
+}
+
+.UITaxonomyManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/ManageTaxonomyIcon.png') no-repeat;
+}
+
+.UITaxonomyManagerTreesIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/ManageTaxonomyIcon.png') no-repeat;
+}
+
+.UIMetadataManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/ManageMetadataIcon.png') no-repeat;
+}
+
+.UINamespaceManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/NamespaceManager.png') no-repeat;
+}
+
+.UINodeTypeManagerIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 32px;	height: 28px;
+  background: url('VistaSkin/NodeTypeManager.png') no-repeat;
+}
+
+.TypesOfContentIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/CreateDocumentTypes.gif') no-repeat;
+}
+
+.ContentPresentationIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/DisplayDocuments.gif') no-repeat;
+}
+
+.AdvanceConfiguarationIcon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/ManageDynamicContent.gif') no-repeat;
+}
+
+.RefreshSession24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/MetalSync.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/MetalSync.gif') no-repeat right center; /* orientation=rt */
+}
+
+.HomeIcon {
+  width: 26px;	height: 24px;
+  background: url('VistaSkin/HardDisk.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/HardDisk.png') no-repeat right center; /* orientation=rt */
+}
+
+.ViewPortlet24x24Icon {
+  width: 32px;	height: 28px;
+  background: url('VistaSkin/DisplayDocuments.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/DisplayDocuments.png') no-repeat right center; /* orientation=rt */
+}
+
+.ConfigPortlet24x24Icon {
+  width: 32px;	height: 28px;
+  background: url('VistaSkin/HammerDataBox.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/HammerDataBox.png') no-repeat right center; /* orientation=rt */
+}
+
+.AddNewConfig24x24Icon {
+  width: 32px;	height: 28px;
+  background: url('VistaSkin/AddDocument.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/AddDocument.png') no-repeat right center; /* orientation=rt */
+}
+
+.SmallNote24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/SmallNote.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/SmallNote.gif') no-repeat right center; /* orientation=rt */
+}
+
+.GreenLeftArrowFolder24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/GreenLeftArrowFolder.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/GreenLeftArrowFolder.gif') no-repeat right center; /* orientation=rt */
+}
+
+.GreenLeftArrow24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/GreenLeftArrow.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/GreenLeftArrow.gif') no-repeat right center; /* orientation=rt */
+}
+
+.GreenRightArrow24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/GreenRightArrow.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/GreenRightArrow.gif') no-repeat right center; /* orientation=rt */
+}
+
+.Categories24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('VistaSkin/Categories.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/Categories.gif') no-repeat right center; /* orientation=rt */
+}
+
+.BlackMonitor24x24Icon {
+	width: 24px;	height: 19px;
+  background: url('VistaSkin/BlackMonitor.gif') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/BlackMonitor.gif') no-repeat right center; /* orientation=rt */
+}
+
+.AddRepository24x24Icon {
+	width: 24px;	height: 19px;
+  background: url('VistaSkin/AddRepositoryIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/AddRepositoryIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.EditRepository24x24Icon {
+	width: 24px;	height: 19px;
+  background: url('VistaSkin/EditRepositoryIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/EditRepositoryIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.RemoveRepository24x24Icon {
+	width: 24px;	height: 19px;
+  background: url('VistaSkin/RemoveRepositoryIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/RemoveRepositoryIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.TagExplorer24x24Icon {
+	width: 26px; height: 26px;
+  background: url('VistaSkin/TaggingDocumentIcon.png') no-repeat left center; /* orientation=lt */
+  background: url('VistaSkin/TaggingDocumentIcon.png') no-repeat right center; /* orientation=rt */
+}
+
+.ManagePublicationsIcon {
+	height: 24px;
+  background: url('DefaultSkin/ManagerPuplication.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ManagerPuplication.gif') no-repeat right center; /* orientation=rt */
+}
+
+.AddNodeTypeIcon {
+	height: 24px;
+  background: url('DefaultSkin/ManageNodeTypeIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ManageNodeTypeIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.SelectPath24x24Icon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 16px;	height: 16px;
+  background: url('DefaultSkin/MagnifierIconNews.png') no-repeat;
+}
+
+.AddMetadataTypeIcon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/ManageMetadataIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ManageMetadataIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.GreenUpArrowFolder24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/GreenUpArrowFolder.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/GreenUpArrowFolder.gif') no-repeat right center; /* orientation=rt */
+}
+
+.UIUnLockManagerIcon {
+		width: 32px;	height: 28px;
+  background: url('VistaSkin/ManageUnLock.png') no-repeat;
+}
+
