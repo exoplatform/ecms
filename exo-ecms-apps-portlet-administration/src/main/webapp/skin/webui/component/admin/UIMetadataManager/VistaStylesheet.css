@@ -1,0 +1,46 @@
+/**
+ * Created by The eXo Platform SAS
+ * Modifile : Vu Duy Tu
+ *           duytucntt@gmail.com
+ * January 03, 2006
+ * version: $Id$
+ */
+ 
+/*############################## -- UIMetadataManager-- ########################*/
+
+.UIECMAdminPortlet .UIMetadataManager  {
+  padding: 0px 10px;
+}
+
+.UIECMAdminPortlet .UIMetadataManager .Icon16x16 {
+	float: none;
+}
+
+.UIECMAdminPortlet .MetadataInfo .GridTitleBar {
+  width: 220px;
+  padding-top: 10px ;
+}
+
+.UIECMAdminPortlet .MetadataInfo .GridTitleBar .GridTitleLeftBar  {
+  line-height: 21px;
+  background: url('DefaultSkin/background/InfoBar.gif') no-repeat left top;
+  padding-left: 5px;
+}
+
+.UIECMAdminPortlet .MetadataInfo .GridTitleBar .GridTitleRightBar {
+  line-height: 21px;
+  background: url('DefaultSkin/background/InfoBar.gif') no-repeat right -21px;
+  padding-right: 21px;
+}
+
+.UIECMAdminPortlet .MetadataInfo .GridTitleBar .GridTitleMiddleBar {
+  background: url('DefaultSkin/background/InfoBar.gif') repeat-x left -42px;
+  line-height: 21px; vertical-align: middle;
+  padding: 0px 10px;
+}
+
+.UIECMAdminPortlet .UIMetadataManager textarea {
+	width: 400px;
+	height: 300px;
+}
+/*############################## -- End UIMetadataManager-- ########################*/
