@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="1.0" xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd"> 
+  
+  
+  <portlet>
+    <description xml:lang="EN">Content Explorer</description>
+    <portlet-name>FileExplorerPortlet</portlet-name>
+    <display-name xml:lang="EN">Content Explorer</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>    
+    
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/JCRExplorerPortlet/webui/configuration.xml</value>
+    </init-param>    
+
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+      <portlet-mode>edit</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>    
+    <resource-bundle>locale.portlet.ecm.JCRExplorerPortlet</resource-bundle>    																														
+    
+    <portlet-info>
+      <title>Content Explorer</title>
+      <short-title>Content Explorer</short-title>
+      <keywords>Contents</keywords>
+    </portlet-info>
+    <portlet-preferences>
+    	<preference>
+        <name>repository</name>
+        <value>repository</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>workspace</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>path</name>     
+        <value></value>        
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>drive</name>     
+        <value></value>        
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>views</name>     
+        <value></value>        
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>allowCreateFolders</name>     
+        <value></value>        
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>categoryMandatoryWhenFileUpload</name>     
+        <value>false</value>        
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>uploadFileSizeLimitMB</name>     
+        <value>30</value>        
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>usecase</name>
+        <value>selection</value> 
+        <read-only>false</read-only> 
+      </preference>
+      <preference>
+        <name>driveName</name>     
+        <value>Private</value>        
+        <read-only>false</read-only>
+      </preference>
+
+      <preference>
+        <name>trashHomeNodePath</name>     
+        <value>/Trash</value>        
+        <read-only>false</read-only>
+      </preference>   
+      <preference>
+        <name>trashRepository</name>     
+        <value>repository</value>        
+        <read-only>false</read-only>
+      </preference>   
+      <preference>
+        <name>trashWorkspace</name>     
+        <value>collaboration</value>        
+        <read-only>false</read-only>
+      </preference>   
+      
+    </portlet-preferences>
+  </portlet>  
+  
+</portlet-app>
