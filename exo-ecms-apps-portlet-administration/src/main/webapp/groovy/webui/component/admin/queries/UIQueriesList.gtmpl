@@ -1,0 +1,83 @@
+<%
+/**
+ * Created by The eXo Platform SARL
+ * Author : Dang Van Minh
+ *          minh.dang@exoplatform.com
+ * Dec 29, 2006
+ * 3:28:26 PM 
+ */
+%>
+<% 
+  def sharedQueries = uicomponent.getQueryList() ; 
+  if(sharedQueries == null) return ;
+  int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
+%>
+<div class="UIQueriesList" id="$uicomponent.id">
+  <table class="UIGrid">
+    <thead>
+      <tr>
+  	    <th><%=_ctx.appRes("UIQueriesList.header.name")%></th>
+  	    <th><%=_ctx.appRes("UIQueriesList.header.type")%></th>
+  	    <th><%=_ctx.appRes("UIQueriesList.header.statement")%></th>
+  	    <th><%=_ctx.appRes("UIQueriesList.header.permission")%></th>
+  	    <th><%=_ctx.appRes("UIQueriesList.header.action")%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+        def rowClass = null ;
+  	    boolean even = true ;
+  	    for (node in sharedQueries) {
+  	      if(even) rowClass = "EvenRow" ;  
+  	      else rowClass =  "OddRow" ; 
+  	      even = !even ;
+      %>
+          <tr class="$rowClass">
+            <td><div class="Text">$node.name</div></td>
+            <td><div class="Text"><%=node.getProperty("jcr:language").getString()%></div></td>
+            <td><div class="Text"><%=node.getProperty("jcr:statement").getString()%></div></td>
+            <td>
+            <%
+            	String permissions = null ;
+            	for(per in node.getProperty("exo:accessPermissions").getValues()) {
+            		if(permissions == null) permissions = per.getString() ;
+            		else permissions = permissions + "," + per.getString() ;
+            	}
+            %>
+            	<div class="Text"><%=permissions%></div>
+            </td>
+	          <td>
+	          	<div class="ActionContainer">
+			          <img onclick="<%=uicomponent.event("Edit", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon">
+	              <img onclick="<%=uicomponent.event("Delete", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon">
+		          </div>
+	          </td>	                    
+          </tr>
+      <%}%>  
+    </tbody>
+  </table>
+  <% if(totalPages>1){ %>
+  <div style="margin:1px 0px 5px 0px;">
+    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+  </div>
+  <% } %>
+	<div class="UIAction">
+    <table class="ActionContainer">
+    	<tr>
+    		<td>
+		      <% for(action in uicomponent.getActions()) { %>
+	          <div onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle">
+	  					<div class="ButtonLeft">
+	  					  <div class="ButtonRight">
+	  						  <div class="ButtonMiddle">
+	  							  <a href="javascript:void(0);"><%=_ctx.appRes("UIQueriesList.action." + action)%></a>
+	  				      </div>
+	  				    </div>
+	  			    </div>
+	  				</div>
+		      <% } %>
+    		</td>
+    	</tr>
+    </table>
+  </div>
+</div>
