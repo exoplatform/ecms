@@ -8,7 +8,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.dms.core.portlet.ecm.core.main</artifactId>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <name>eXo DMS Portlet Java Content</name>
   <description>eXo DMS Portlet Java Content: File Explorer, Browser Content, ECM Admin</description>
   <url>http://www.exoplatform.org</url>

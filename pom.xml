@@ -378,8 +378,6 @@
     <module>exo.ecm.dms.core.extension.webapp</module>
     <module>exo.ecm.dms.core.gadgets</module>
     <module>exo.ecm.dms.core.portlet.ecm.core.main</module>
-    <module>exo.ecm.dms.core.portlet.ecm.core.web</module>
-    <module>exo.ecm.dms.core.portlet.ecm.ext.main</module>
     <module>exo.ecm.dms.core.portlet.jcr-console</module>
     <module>exo.ecm.dms.core.server.jonas.patch</module>
     <module>exo.ecm.dms.core.server.tomcat.patch</module>
