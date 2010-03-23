@@ -1,0 +1,14 @@
+<%
+/**
+ * Created by The eXo Platform SARL
+ * Author : Dang Van Minh
+ *          minhdv@exoplatform.com
+ * Sep 16, 2008
+ * 10:45:01 AM 
+ */
+%>
+<div class="ExplorerTree">
+	<div class="InnerExplorerTree">
+		<% uicomponent.renderChildren();%>
+	</div>
+</div>

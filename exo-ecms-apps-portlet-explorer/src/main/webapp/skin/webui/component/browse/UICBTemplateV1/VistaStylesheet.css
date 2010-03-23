@@ -1,0 +1,203 @@
+/**
+ * Created by The eXo Platform SARL
+ * Modif : Vu Duy Tu
+ *          duytucntt@gmail.com
+ * DEC 28, 2006
+ * version: $Id$
+ */
+
+.UICBTemplateV1 {
+ 	padding: 5px;
+}
+
+.UICBTemplateV1 .Path {
+	height: 25px;
+}
+
+.UICBTemplateV1 .Path .HomeIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	margin: 3px; 
+}
+
+.UICBTemplateV1 .Path .ArrowTiny {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */	
+	width: 16px; height: 16px;
+	margin: 3px 0px;
+	background: url('DefaultSkin/background/ArrowTiny.gif') no-repeat left; /* orientation=lt */
+	background: url('DefaultSkin/background/ArrowTiny-rt.gif') no-repeat right; /* orientation=rt */
+}
+
+.UICBTemplateV1 .Path .HomeLabel {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	margin-left: 7px; /* orientation=lt */
+	margin-right: 7px; /* orientation=rt */
+	line-height: 20px;
+	font-size: 11px;
+	color: red;
+}
+
+.UICBTemplateV1 .TempDecorator {
+	border: solid 1px #a3abb6;
+  padding: 0px 10px 10px 10px;
+  background: #f3f3f5;
+}
+
+.UICBTemplateV1 .TempDecorator .Title {
+  border-bottom: solid 1px #bfbfbf; 
+  height: 24px;
+  margin-bottom: 10px;
+}
+
+.UICBTemplateV1 .TempDecorator .Title .TitleIcon {
+	margin-top: 2px;
+	padding-left: 26px; /* orientation=lt */
+	padding-right: 26px; /* orientation=rt */
+	font-weight: bold;
+	line-height: 24px;
+}
+
+.UICBTemplateV1 .TempDecorator .SubDecorator {
+  border: solid 1px #a3abb6; 
+  margin-top: 1px;
+  background: #f8f8f8;
+}
+
+.UICBTemplateV1 .SubDecorator .List {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+  width: 24%;
+  padding: 7px 0px;
+}
+
+.UICBTemplateV1   .SubDecorator .IconEmpty{
+ 	width: 16px;	height: 16px;
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+}
+
+.UICBTemplateV1 .SubDecorator .NodeIcon {
+  width: 50%;
+  margin: auto;
+  line-height: 16px;
+}
+
+.UICBTemplateV1 .SubDecorator .CategoryIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+}
+
+.UICBTemplateV1 .SubDecorator .NodeLabel {
+	white-space: nowrap;
+	font-weight: bold;
+	color: #1d75ca;
+	margin-left: 20px;
+}
+
+.UICBTemplateV1 .SubDecorator .NodeLabel a {
+	text-decoration: none;
+	color: black;
+}
+
+.UICBTemplateV1 .SubDecorator .NodeLabel a:hover { 
+	text-decoration: none;
+	color: blue;
+}
+
+.UICBTemplateV1 .SubDecorator .NodeEmptyIcon {
+	padding: 10px 0px;
+	width: 40%;
+	margin: auto;
+	line-height: 16px;
+	font-size: 11px;
+}
+
+.UICBTemplateV1 .SubDecorator .EmptyIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	padding-left: 4px; /* orientation=lt */
+	padding-right: 4px; /* orientation=rt */
+}
+
+.UICBTemplateV1 .ContainerButton {
+	margin-top: 10px;
+}
+
+.UICBTemplateV1 .ContainerButton .NodeButtonIcon {
+	height: 24px;
+}
+
+.UICBTemplateV1 .NodeButtonIcon .ButtonIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	margin-left: 5px; /* orientation=lt */
+	margin-right: 5px; /* orientation=rt */
+	padding-left: 8px; /* orientation=lt */
+	padding-right: 8px; /* orientation=rt */
+}
+
+.UICBTemplateV1 .NodeButtonIcon .LeftButtonCategory {
+	margin-top: 5px;
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	background: url('DefaultSkin/background/ButtonLeft5x19.gif') no-repeat left; /* orientation=lt */
+	background: url('DefaultSkin/background/ButtonLeft5x19-rt.gif') no-repeat right; /* orientation=rt */
+	padding-left: 4px; /* orientation=lt */
+	padding-right: 4px; /* orientation=rt */
+}
+
+.UICBTemplateV1 .NodeButtonIcon .RightButtonCategory {
+	background: url('DefaultSkin/background/ButtonRight17x19.gif') no-repeat right; /* orientation=lt */
+	background: url('DefaultSkin/background/ButtonRight17x19-rt.gif') no-repeat left; /* orientation=rt */
+	padding-right: 17px; /* orientation=lt */
+	padding-left: 17px; /* orientation=rt */
+}
+
+.UICBTemplateV1 .NodeButtonIcon .MiddleButtonCategory {
+	background: url('DefaultSkin/background/MiddleButton1x19.gif') repeat-x;
+}
+
+.UICBTemplateV1 .NodeButtonIcon .ButtonCategoryLabel {
+	line-height: 19px;
+	white-space: nowrap;
+	font-weight: bold;
+	color: #1d75ca;	
+	padding: 0px 10px;
+}
+
+.UICBTemplateV1 .ContainerButton .LeftSubMenu {
+	background: url('DefaultSkin/background/MenuLeft5x23.gif') no-repeat left;
+	padding-left: 4px;
+}
+
+.UICBTemplateV1 .ContainerButton .RightSubMenu {
+	background: url('DefaultSkin/background/MenuRight5x23.gif') no-repeat right;
+	padding-right: 4px;
+}
+
+.UICBTemplateV1 .ContainerButton .MiddleSubMenu {
+	height: 23px;
+	background: url('DefaultSkin/background/MiddleMenu1x23.gif') repeat-x;
+}
+
+.UICBTemplateV1 .ContainerButton .MiddleSubMenu .Label {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	line-height: 23px;
+	font-size: 11px;
+	color: #1d75ca;	
+	padding: 0px 10px;
+	white-space: nowrap;
+}
+
+.UICBTemplateV1 .ContainerButton .MiddleSubMenu .Label a {
+	text-decoration: none;
+	color: black;
+}
+
+.UICBTemplateV1 .ContainerButton .MiddleSubMenu .Label a:hover { 
+	text-decoration: none;
+	color: blue;
+}

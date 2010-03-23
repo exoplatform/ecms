@@ -1,0 +1,372 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Tran The Trong
+ *          trongtt@gmail.com
+ * August 01, 2006
+ * version: $Id$
+ */
+ 
+/*############################## -- Begin UISideBar   -- ##############################*/
+
+.UIJCRExplorerPortlet .UISideBar {
+  background: url('VistaSkin/background/BgSideBar.gif') repeat-y top right; /* orientation=lt */
+  background: url('VistaSkin/background/BgSideBar-rt.gif') repeat-y top left; /* orientation=rt */
+}
+
+
+.UIJCRExplorerPortlet .UISideBar .SideBarContent{
+  margin:4px;
+}
+
+.UIJCRExplorerPortlet .UISideBar .BarContent{
+  border: 1px solid #c2deee;
+  background: url('VistaSkin/background/BarContent.gif') repeat-x;
+  padding: 0px 4px;
+  height: 24px;
+  line-height: 24px;
+  overflow: hidden;
+}
+
+.UIJCRExplorerPortlet .UISideBar .SideContent{
+	 padding: 0px 4px;
+	 background: #f0f5fc;
+	 overflow: auto;
+}
+
+.UIJCRExplorerPortlet .UISideBar .ResizeTreeExplorer{
+  background: url('VistaSkin/background/ResizeTreeExplorer.gif') repeat-x;
+	height: 7px;
+	cursor: row-resize;
+}
+
+.UIJCRExplorerPortlet .UISideBar .ResizeTreeExplorer .ResizeTreeButton{
+  background: url('DefaultSkin/background/ResizeTreeButton.gif') no-repeat center;
+	height: 7px;
+	width: 7px;
+	margin: auto;
+}
+
+
+
+.UIJCRExplorerPortlet .UISideBar .SideContent .ArrowSidContent{
+  background: url('DefaultSkin/background/ArrowSideBar.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/background/ArrowSideBar-rt.gif') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UISideBar .SideContent .TextSiderContent {
+	padding-left:15px; /* orientation=lt */
+	padding-right:15px; /* orientation=rt */
+	line-height: 20px;
+	margin-left:20px; /* orientation=lt */
+	margin-right:20px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UISideBar .SideContent .TrueSelectIcon {
+  background: url('DefaultSkin/background/SelectCheck.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/background/SelectCheck-rt.gif') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UISideBar .SideContent .TrueSelectIcon {
+  background: url('DefaultSkin/background/SelectCheck.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/background/SelectCheck-rt.gif') no-repeat right center; /* orientation=rt */
+}
+
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .NormalItem {
+  line-height: 26px;
+  cursor: pointer;
+  padding: 8px 0px 8px 5px; /* orientation=lt */
+  padding: 8px 5px 8px 0px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .SelectedItem {
+  line-height: 26px;
+  cursor: pointer;
+  padding: 8px 0px 8px 0px; /* orientation=lt */
+  padding: 8px 0px 8px 0px; /* orientation=rt */
+  background: url('VistaSkin/background/SelectedItem.gif') no-repeat 2px; /* orientation=lt */
+  background: url('VistaSkin/background/SelectedItem-rt.gif') no-repeat 2px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .ItemIcon {
+	margin: auto;
+}
+
+.UIJCRExplorerPortlet .UISideBar .BarContent .Title{
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+  line-height: 24px;
+  color: #666666;
+  padding-left: 4px; /* orientation=lt */
+  padding-right: 4px; /* orientation=rt */
+  font-weight: bold;
+  width: 140px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISideBarContainer {
+  width: 100%;
+	height: 475px;
+	/*
+  * minh.js.exo
+  */
+}
+
+.UIJCRExplorerPortlet .UISideBar .SideGeneratal {
+	background: url('DefaultSkin/icons/Generatal.png') no-repeat center;
+	width: 17px; height: 17px;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UIResizableBlock {
+	width: 204px;
+	height: 100%;
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	overflow: auto;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent {
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	padding: 5px 0px 0px;
+	width: 30px;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .ItemIcon {
+	margin: auto;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .FileExplorerIcon {
+	background: url('VistaSkin/icons/FileExplorer.gif') no-repeat center;
+	width: 18px; height: 16px;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .RelationsIcon {
+	background: url('VistaSkin/icons/Relations.gif') no-repeat center;
+	width: 21px; height: 20px;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .ClipboardIcon {
+	background: url('VistaSkin/icons/Clipboard.gif') no-repeat center;
+	width: 19px; height: 16px;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .TagExplorerIcon {
+	background: url('VistaSkin/icons/Tags.gif') no-repeat center;
+	width: 20px; height: 17px;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UIViewRelationList .FrameContent {
+  padding: 5px 3px 5px 15px; /* orientation=lt */
+  padding: 5px 15px 5px 3px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UISideBar .UIViewRelationList .TitleLabel {
+  padding: 5px 0px 5px 8px; /* orientation=lt */
+  padding: 5px 8px 5px 0px; /* orientation=rt */
+  font: normal bold 11px Verdana;
+}
+
+/*############################## -- UIViewRelationList   -- ##############################*/
+
+.UIJCRExplorerPortlet .UISideBar .UIViewRelationList {
+	width:auto;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UIViewRelationList .RelationFrame {
+  margin-top: 2px;
+  border: solid 1px #bdbdbd;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UIViewRelationList .RelationFrame .TitleLabel {
+  height: 18px;
+  padding: 2px 0px 0px 15px; /* orientation=lt */
+  padding: 2px 15px 0px 0px; /* orientation=rt */
+  font: normal bold 11px Verdana;
+  background: url('/eXoDMSResources/skin/images/article/EventFrameBG.gif') repeat-x;
+}
+
+.UIJCRExplorerPortlet .UISideBar .UIViewRelationList .RelationFrame .FrameContent {
+  padding: 10px;
+}
+
+/*############################## -- End UISideBar   -- ##############################*/
+/*############################## -- Begin UITreeExplorer   -- ##############################*/
+.UIJCRExplorerPortlet .UITreeExplorer {
+	padding-bottom: 20px;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .Icon16x16 {
+  float: none;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+	padding-left: 22px; /* orientation=lt */
+	padding-right: 22px; /* orientation=rt */
+	background-position: left top; /* orientation=lt */
+	background-position: right top; /* orientation=rt */
+	height: 24px;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .IconSymLink {
+	padding: 0px;
+	height: 22px;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .IconSymLink .NodeLabel {
+	background: url('DefaultSkin/background/LinkSmall.gif') no-repeat 9px bottom; /* orientation=lt */
+	background: url('DefaultSkin/background/LinkSmall.gif') no-repeat 94% bottom; /* orientation=rt */
+	padding-left: 22px; /* orientation=lt */
+	padding-right: 22px; /* orientation=rt */
+	height: 22px;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .HardDisk24x24Icon {
+  background: url('DefaultSkin/background/HardDisk.gif') no-repeat center bottom;
+  height: 15px;
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .HomeNode {
+	padding-left: 10px; /* orientation=lt */
+	padding-right: 10px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .HomeNode .NodeLabel {
+  font-weight: bold;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .NodeGroup .PageIterator {
+	padding: 0px;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .Node {
+  background: url('DefaultSkin/background/Dotted.gif') repeat-y left; /* orientation=lt */
+  background: url('DefaultSkin/background/Dotted-rt.gif') repeat-y right; /* orientation=rt */
+  clear: both; 
+  margin-left: 14px; /* orientation=lt */
+  margin-right: 14px; /* orientation=rt */
+  padding: 8px 0px 0px 0px;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .Node a {
+	display: block;
+	/*white-space: normal;*/
+	}
+
+.UIJCRExplorerPortlet .UITreeExplorer .LastNode {
+  background: url('DefaultSkin/background/Dotted.gif') no-repeat left 1px ; /* orientation=lt */
+  background: url('DefaultSkin/background/Dotted-rt.gif') no-repeat right 1px ; /* orientation=rt */
+}
+  
+.UIJCRExplorerPortlet .UITreeExplorer .NodeLabel {
+  line-height: 16px;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .ExpandIcon {
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  padding-left: 19px; /* orientation=lt */
+  padding-right: 19px; /* orientation=rt */
+  display: block;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer .CollapseIcon {
+  width: auto;
+  cursor: pointer;
+  padding-left: 19px; /* orientation=lt */
+  padding-right: 19px; /* orientation=rt */
+  display: block;
+}
+
+.UIJCRExplorerPortlet .UITreeExplorer a:hover {
+  color: blue;
+}
+
+/*############################## -- End UITreeExplorer   -- ##############################*/
+
+/*############################## -- UITreeNodePageIterator   -- ##############################*/
+
+.UITreeNodePageIterator {
+	margin: 0px 0px 0px 9px; /* orientation=lt */
+	margin: 0px 9px 0px 0px; /* orientation=rt */
+	padding: 9px 0px 0px 0px;
+}
+
+.UITreeNodePageIterator .NodePageIterator {
+	background: #ededed;
+	border-right: 1px solid #d7d7d7; /* orientation=lt */
+	border-left: 1px solid #d7d7d7; /* orientation=rt */
+	border-bottom: 1px solid #d7d7d7;
+	padding-left: 1px; /* orientation=lt */
+	padding-right: 1px; /* orientation=rt */
+	width: auto;
+}
+
+.UITreeNodePageIterator .DisablePage {
+	filter:alpha(opacity=40); -moz-opacity:.40; opacity:.40;
+	cursor: normal;
+}
+
+.UITreeNodePageIterator .Icon {
+	margin: 0px 4px;
+	padding: 0px;
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+}
+
+.UITreeNodePageIterator a {
+	color: #2f7bc9;
+	padding: 0px 3px;
+	display: block;
+	line-height: 18px;
+}
+
+.UITreeNodePageIterator a.PageSelected {
+	color: #fd2020;
+}
+
+/*############################## -- UITagExplorer   -- ##############################*/
+
+.UISideBar .UITagExplorer .TagmapHolder .TagmapTitle{
+	height: 19px; line-height: 19px;
+	margin: 0px;
+	background: url('DefaultSkin/background/TagmapTitleBG1x19.gif') repeat-x;
+	border: solid 1px #e1e1e1;
+	border-bottom: none;
+}
+
+.UISideBar .UITagExplorer .TagmapHolder .TagLabel {
+	padding: 0px 8px;
+	line-height: 19px;
+	font-weight: bold;
+}
+	
+.UISideBar .UITagExplorer .TagmapHolder .TagmapContent {
+   padding: 5px;
+   text-align: left; /* orientation=lt */
+   text-align: right; /* orientation=rt */
+   line-height: 22px;
+}
+
+.UISideBar .UITagExplorer .TagmapHolder .TagmapContent a{
+   color: red;
+   padding: 3px 7px 3px 0px; /* orientation=lt */
+   padding: 3px 0px 3px 7px; /* orientation=rt */
+}
+
+.UISideBar .UITagExplorer .TagmapHolder .TagmapContent a:hover {
+   color: yellow;
+   padding: 3px 7px 3px 0px; /* orientation=lt */
+   padding: 3px 0px 3px 7px; /* orientation=rt */
+}
+
+.UIBrowseContentPortlet .TagmapHolder .Icon {
+	float: left; /* orientation=lt */
+	width: 19px; height: 16px; 
+	margin: 2px 5px 0px 5px;
+	background: url('DefaultSkin/background/TagMapIcon19x16.gif') no-repeat; 
+}

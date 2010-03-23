@@ -1,0 +1,19 @@
+<%
+	import org.exoplatform.ecm.webui.component.browsecontent.UICBSearchForm ;
+	import org.exoplatform.ecm.webui.component.browsecontent.UICBSearchResults ;
+%>
+<div class="UISearchController" id="$uicomponent.id">
+	<%uicomponent.renderChild(UICBSearchForm.class);%>
+	<div class="SearchResult">
+		<div class="ResultInfo">
+			<%=_ctx.appRes(uicomponent.name + ".label.nodePath")%>: <%=uicomponent.getNodeName()%>	 
+		</div>
+		<div class="ResultInfo">
+			<%=_ctx.appRes(uicomponent.name + ".label.searchTime")%>
+			<%=uicomponent.getResultRecord()%> <%=_ctx.appRes(uicomponent.name + ".label.nodeName")%> ; 
+			<%=_ctx.appRes(uicomponent.name + ".label.duration")%>
+			 <%=uicomponent.getSearchTime()%> ms
+		</div>
+		<%uicomponent.renderChild(UICBSearchResults.class);%>
+	</div>
+</div>
