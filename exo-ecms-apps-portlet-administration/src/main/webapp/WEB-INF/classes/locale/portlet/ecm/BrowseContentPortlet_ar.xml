@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIConfigTabPane #
+  ###################################################################
+  -->
+  <UIConfigTabPane>
+    <tab>
+      <label>
+        <UIPathConfig>تهيئة المجلد</UIPathConfig>
+        <UINewConfigForm> تهيئة جديدة</UINewConfigForm>
+      </label>
+    </tab>
+  </UIConfigTabPane>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPathConfig #
+  ###################################################################
+  -->
+  <!--
+    ###################################################################
+		#	    FROM VERSION DMS 2.3-SNAPSHOT, we add filterCategory        #
+		#	    to display checkbox for filtering category tree             #
+		#	    base on permission of user                                  #
+    ###################################################################
+   -->
+  <UIPathConfig>
+    <label>
+      <categoryPath>فئات الطريق</categoryPath>
+      <workspace>فضاء العمل</workspace>
+      <repository>مستودع البيانات </repository>
+      <path>تهيئة المسار</path>
+      <template>قالب</template>
+      <itemPerPage>العناصر لكل صفحة</itemPerPage>
+      <detailBoxTemp>نوع النظرة التفصيلية</detailBoxTemp>
+      <enableToolBar>اظهر شريط الأدوات</enableToolBar>
+      <enableRefDoc>وثيقة ذات صلة</enableRefDoc>
+      <filterCategory>تصنيف الفئات حسب  صلاحيّات المستخدم الحالي</filterCategory>
+      <enableChildDoc>وثيقة الابن</enableChildDoc>
+      <enableTagMap>خريطة العلامات</enableTagMap>
+      <enableComment>امكانية اضافة تعليق</enableComment>
+      <enableVote>امكانية التصويت </enableVote>
+      <isAllowPublish>عرض الوثائق ذات النمط ''العمومي'' فقط</isAllowPublish>
+    </label>
+    <title>تهيئة المسار</title>
+    <action>
+      <Add>التهيئة الجديدة</Add>
+      <Save>#{word.save}</Save>
+      <Edit>تغيير</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <require-path>عليك أن تختارمسارالفئات </require-path>
+      <invalid-path>مسارالفئات غير صالح</invalid-path>
+      <invalid-value>رقم الصفحة غير صالح</invalid-value>
+      <invalid-number>يجب عليك ادخال عدد</invalid-number>
+      <access-denied>غير مسموح بالدخول، ليس لديك الصلاحية الكافية للوصول إلى مجلد الفئات</access-denied>
+    </msg>
+  </UIPathConfig>
+  <UIQueryConfig>
+    <msg>
+      <repostoryException>ربما لديك مشكلة مع استفسارك، الرجاء التحقق من الاستبيان مرة أخرى </repostoryException>
+      <noSuchNodeTypeException>ربما لديك مشكلة مع استفسارك، الرجاء التحقق من الاستبيان مرة أخرى</noSuchNodeTypeException>
+      <invalid-value>رقم الصفحة غير صالح</invalid-value>
+      <invalid-query>صيغة الاستبيان  غير صحيحة</invalid-query>
+      <invalid-name>استبيان غير موجود ، حاول مع نوع آخر ، أو لغة استبيانات اخرى ، أو وضع آخر </invalid-name>
+    </msg>
+    <title>تكوين الاستبيان</title>
+    <label>
+      <repository>مستودع البيانات</repository>
+      <workspace>فضاء العمل</workspace>
+      <queryLanguage>لغة الاستبيان </queryLanguage>
+      <queryStatus>وضع الاستبيان</queryStatus>
+      <queryType>نوع الاستبيان</queryType>
+      <queryStore>اسم الاستبيان</queryStore>
+      <query>الاستبيان</query>
+      <template>قالب</template>
+      <itemPerPage>العناصر لكل صفحة</itemPerPage>
+      <detailBoxTemp>نوع النظرة التفصيلية</detailBoxTemp>
+      <enableTagMap>خريطة العلامات</enableTagMap>
+      <enableComment>امكانية اضافة تعليق</enableComment>
+      <enableVote>امكانية التصويت</enableVote>
+      <isAllowPublish>عرض الوثائق ذات النمط ''العمومي'' فقط</isAllowPublish>
+    </label>
+    <action>
+      <Add>التهيئة الجديدة</Add>
+      <Save>#{word.save}</Save>
+      <Edit>تحرير</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIQueryConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIQueryConfig #
+  ###################################################################
+  -->
+  <path>
+    <title>
+      <AddPath>إضافة مسار</AddPath>
+    </title>
+  </path>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>إضافة عقدة جذر</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl		#
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>متوسط / اضغط للتصويت</normal>
+      <good>حسن / اضغط للتصويت</good>
+      <verygood>حسن جدا / اضغط للتصويت</verygood>
+      <excellent>ممتاز / اضغط للتصويت</excellent>
+      <best>الأفضل / اضغط للتصويت</best>
+    </title>
+    <button>
+      <label>
+        <cancel>الغاء</cancel>
+      </label>
+    </button>
+  </UIVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIScriptConfig #
+  ###################################################################
+  -->
+  <UIScriptConfig>
+    <title>تكوين السكريبت</title>
+    <label>
+      <repository>مجلد</repository>
+      <workspace>فضاء العمل</workspace>
+      <scriptName>اسم السكريبت</scriptName>
+      <template>القالب</template>
+      <detailBoxTemp>تفاصيل صندوق القالب</detailBoxTemp>
+      <enableTagMap>خريطة العلامات</enableTagMap>
+      <enableComment>امكانية اضافة تعليق</enableComment>
+      <enableVote> امكانية التصويت </enableVote>
+      <isAllowPublish>عرض الوثائق ذات النمط ''العمومي'' فقط</isAllowPublish> 
+    </label>
+    <action>
+      <Add>التهيئة الجديدة</Add>
+      <Save>#{word.save}</Save>
+      <Edit>تغيير</Edit>
+      <Back>#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIScriptConfig>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIDocumentConfig #
+  ###################################################################
+  -->
+  <UIDocumentConfig>
+    <title>تهيئة الوثيقة</title>
+    <label>
+      <repository>مستودع البيانات </repository>
+      <workspace>فضاء العمل</workspace>
+      <categoryPath>مسار الفئات</categoryPath>
+      <path>UIDocumentConfig</path>
+      <doc>UIDocumentConfig</doc>
+      <docName>اسم الوثيقة</docName>
+      <detailBoxTemp>تفاصيل صندوق القالب</detailBoxTemp>  
+      <enableComment>امكانية اضافة تعليق</enableComment>
+      <enableVote>امكانية التصويت</enableVote>
+      <isAllowPublish>عرض الوثائق ذات النمط ''العمومي'' فقط</isAllowPublish>
+    </label>
+    <action>
+      <Add>تهيئة جديدة</Add>
+      <Save>#{word.save}</Save>
+      <Edit>تغيير</Edit>
+      <Back>#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <require-path>يجب عليك ان تختار مسار الفئة أولا </require-path>
+      <invalid-path> مسار الفئات غيرصالح ،الرجاء تحديد مسار جديد</invalid-path>
+      <require-doc>يجب عليك اختيار وثيقة</require-doc>
+      <invalid-doc>تم حذف أو تغيير هذه الوثيقة أو أنك لا تملك الإذن للوصول إليها </invalid-doc>
+    </msg>
+  </UIDocumentConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UINewConfigForm #
+  ###################################################################
+  -->
+  <UINewConfigForm>
+    <label>
+      <repository>اختر مستودع البيانات</repository>
+      <workspace>فضاء العمل</workspace>
+      <browseType>محتوى المستكشف</browseType>
+    </label>
+    <title>انشاء جديد</title>
+    <action>
+      <Next>تالي</Next>
+      <Back>#{word.back}</Back>
+    </action>
+  </UINewConfigForm>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UIToolBar      #
+  ###################################################################
+  -->
+  <UIToolBar>
+    <label>
+      <RootNode>الجذر</RootNode>
+    </label>
+    <tooltip>
+      <Hidden>الفروع المخفية</Hidden>
+      <Show>عرض الفروع</Show>
+      <showSearch>عرض / إخفاء نموذج البحث </showSearch>
+      <Back>العودة</Back>
+      <Vote>قم بالتصويت</Vote>
+      <Comment>أضف تعليقك</Comment>
+    </tooltip>
+    <msg>
+      <back-view-search>العودة إلى المشهد السابق للبحث</back-view-search>
+      <select-doc>لم يتم اختيار أي وثيقة أو قد تكون حُذفت</select-doc>
+      <node-removed>لقد تم حذف العقدة</node-removed>
+      <readonly-doc>!الوثيقة الحالية في حالة ''مراجعة'', قـُم بعملية ''إنهاء المراجعة'' أولا</readonly-doc>
+      <not-support-vote>عملية ''التصويت'' غير مسموح بها لهذا النوع من الوثيقة </not-support-vote>
+      <not-support-comment>عملية ''اضافة تعليق'' غير مسموح بها لهذا النوع من الوثيقة</not-support-comment>
+      <node-is-locked>العقدة مُـقفلة، قـُـم بفتحها أولا</node-is-locked>
+      <access-add-denied>غير مسموح بالدخول، ليست لديك صلاحية ''الإظافة'' تحت هذه العقدة</access-add-denied>
+    </msg>
+  </UIToolBar>
+  <!--
+  ###################################################################
+  #         org.exoplatform.ecm.webui.component.browse.UISearchController             #
+  ###################################################################
+  -->
+  <UISearchController>
+    <label>
+      <nodePath>أنت الآن هـنا</nodePath>
+      <searchTime>النتيجة</searchTime>
+      <duration>المدة</duration>
+      <nodeName>عقدة</nodeName>
+    </label>
+  </UISearchController>
+  <!--
+  ###################################################################
+  #             org.exoplatform.ecm.webui.component.browse.UICBSearchForm 	      #
+  ###################################################################
+  -->
+  <UICBSearchForm>
+    <label>
+      <inputValue>بحث الكلمات المفاتيح</inputValue>
+      <option>بدون رمز </option>
+      <search>ابحث الآن</search>
+      <referencesDoc>موصولة</referencesDoc>
+      <childDoc>الإبن</childDoc>
+    </label>
+    <title>
+      <search>ابحث الآن </search>
+    </title>
+    <msg>
+      <not-empty>يجب عليك إدخال الكلمة المفتاح </not-empty>
+      <suggestion-keyword>لا توجد نتائج لـ'{0}'٫  </suggestion-keyword>
+    </msg>
+  </UICBSearchForm>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UICBSearchResults #
+  ###################################################################
+  -->
+  <UICBSearchResults>
+    <header>
+      <name>الاسم</name>
+      <path>المسار</path>
+      <action> العمل</action>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <node-removed>عقدة مفقودة، تم نقلها أوحذفها</node-removed>   
+      <not-support>لا يمكن مشاهدة هذه العقدة (قالب المشهد غير متوفر)٫</not-support>
+      <not-permission>غير مسموح بالدخول، ليست لديك صلاحية  امتياز تحت هذه العقدة</not-permission>
+      <empty>لم يتم العثور على أي نتيجة </empty>
+    </msg>
+    <tooltip>
+      <Goto>اذهب الى المجلد</Goto>
+      <View>شاهد</View>
+    </tooltip>
+  </UICBSearchResults>
+  <!--
+  ###################################################################
+  #         org.exoplatform.ecm.webui.component.browse.UIBrowseContainer 	      #
+  ###################################################################
+  -->
+  <UIBrowseContainer>
+    <label>
+      <NoDocument>لا توجد اي وثيقة ضمن هذه الفئة</NoDocument>
+      <author>المؤلف </author>
+      <summary>المُلخص</summary>
+      <more>أكثر وثائق</more>
+      <previous> المظهر السابق</previous>
+      <path-Previous>السابق</path-Previous>
+      <path-Root>الجذر</path-Root>
+      <home>الاستقبال</home>
+      <cannot-access>غير مسموح بالدخول  ربما لم يكن لديك الإذن لرؤية التّهيئة الخاصّة بهذا المدخل</cannot-access>
+    </label>
+    <title>
+      <home>الاستقبال</home>
+      <prevTabs>التبويبات السابقة</prevTabs>
+      <moreTabs>أكثر تبويبات</moreTabs>
+    </title>
+    <msg>
+      <template-notsupported>لا يمكن تحميل قالب العرض  </template-notsupported>
+      <invalid-node>عقدة مفقودة : تم نقلها أو حذفها</invalid-node>
+    </msg>
+  </UIBrowseContainer>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.JCRBrowser #
+  ###################################################################
+  -->
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>اختر مسارًا</UIOneNodePathSelector>
+      <pathSelector>اختيار مجلد </pathSelector>
+    </title>
+  </pathSelector>
+  <documentSelector>
+    <title>
+      <UIOneNodePathSelector>اختر وثيقة</UIOneNodePathSelector>
+    </title>
+  </documentSelector>
+  <UITreeList>
+    <header>
+      <name>الاسم</name>
+      <action>الحركة</action>
+    </header>
+    <info>
+      <child-not-found>وثيقة ليس لها فروع</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBCommentForm             #
+  ###################################################################
+  -->
+  <UICBCommentForm>
+    <label>
+      <title>اضافة تعليق</title>
+      <name>الاسم</name>
+      <email>البريد الاكتروني</email>
+      <website>الموقع الالكتروني</website>
+      <comment>تعليقات</comment>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <locked-doc> الوثيقة مقفلة</locked-doc>
+      <versioning-doc>الوثيقة في حالة اصدار</versioning-doc> 
+      <error-vote>وقع خطأ في عملية اضافة التعليق</error-vote>
+      <comment-required> ضرورة اضافة ''تعليق"٫ </comment-required>
+    </msg>
+  </UICBCommentForm>
+  <UICBVoteForm>
+    <msg>
+      <locked-doc> الوثيقة مقفلة</locked-doc>
+      <versioning-doc> الوثيقة في حالة اصدار</versioning-doc>
+      <error-vote> وقع خطأ أثناء عملية تسجيل التصويت </error-vote>
+    </msg>
+  </UICBVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPopupWindow #
+  ###################################################################
+  -->
+  <UICBPopupWindow>
+    <title>
+      <UICBCommentForm>أضف تعليق</UICBCommentForm>
+      <UICBVoteForm>تصويت</UICBVoteForm>
+      <UIDocumentDetail>عرض الوثيقة</UIDocumentDetail>
+    </title>
+  </UICBPopupWindow>
+  <!--
+  ###################################################################################
+  # JCR Browser																			  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>فضاء العمل</workspaceName>
+      <rootNodeInfo>الجذر</rootNodeInfo>
+      <rootPath>الجذر</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # UITagList																		  #
+  ###################################################################################
+  -->
+  <UITagList>
+    <label>
+      <tagTitle>خريطة العلامات</tagTitle>
+    </label>
+  </UITagList>
+  <UICategoryTree>
+    <label>
+      <title>الفئات</title>
+    </label>
+    <msg>
+      <invalid-node>عقدة مفقودة : تم نقلها أو حذفها</invalid-node>
+    </msg>
+  </UICategoryTree>
+  <!--
+  ###################################################################################
+  #  org.exoplatform.ecm.webui.component.browse.UIBrowseContentHelp																  #
+  ###################################################################################
+  -->
+  <UIBrowseContentHelp>
+    <label>
+      <info>أنت الآن بصدد استعمال نمط ''المساعدة''، إذا كنت ترغب في تهيئة المدخل انقر على نمط '' تغيير''٫</info>
+    </label>
+  </UIBrowseContentHelp>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>هل أنت متأكد من عملية الحذف ؟  </confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator																			#
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>الحقل لا يحتوي على قيمة أو يمكن أن يكون فارغا</empty-input>
+      <Invalid-char>لقد أدخلت أحرف غير صحيحة في هذا الحقل. الرجاء ادخال قيمة اخرى!٫ </Invalid-char>
+      <Invalid-char2>'~' يجب أن يأتي العدد مباشرة بعد هذا الحرف </Invalid-char2>
+      <Invalid-char1>  الأعداد التي تلي الحرف '~' يجب أن تكون إما 0 أو1  </Invalid-char1>
+      <Invalid-char3>'^' يجب أن يأتي العدد مباشرة بعد هذا الحرف </Invalid-char3>     
+      <Invalid-char4>'~' غير مسموح بترك فراغ بجانب الحرف</Invalid-char4>
+      <Invalid-char5>'^' غير مسموح بترك فراغ بجانب الحرف</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ######################################################################################
+  # Since ECM 2.3
+  ######################################################################################
+  -->
+  <UIPathConfig>
+    <label>
+      <searchEnable>امكانية البحث على مكان</searchEnable>
+      <searchLocation>البحث على مكان</searchLocation>
+      <searchPath>UIPathConfig</searchPath>
+      <explain></explain>
+    </label>
+    <msg>
+      <enter-search-location>يجب عليك أن تحدد مكان البحث </enter-search-location>
+      <explain>عندما تتوافق رؤية مسار ''مستكشف المحتوى''  مع التسلسل الهرمي للفئات ، من الضروري أن تحدد المسارالذي يحتوي فعلا على الوثائق المخزنة، ولكي تتمكن من العثور عليها، يمكنك استعمال وظيفة ''البحث'' المتوفرة في المدخل</explain>
+    </msg>
+  </UIPathConfig>
+  
+  <UIDocumentForm>
+  	<msg>
+  		<not-support>Cannot load template of '{0}'.</not-support>
+  		<do-not-permission>You don't have permission to load template of '{0}'.</do-not-permission>
+  	</msg>
+  </UIDocumentForm>
+  <!--
+	  ######################################################################################
+	  # Since ECM 2.6
+	  ######################################################################################
+	  -->
+  <Comments>
+	  <tooltip>
+	    <remove-comment>Remove this comment</remove-comment>
+	    <edit-comment>Edit this comment</edit-comment>
+	  </tooltip>
+	</Comments>
+	<UIDocumentDetail>
+	  <msg>
+	    <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+	  </msg>
+	</UIDocumentDetail>
+	<UIPopupWindow>
+			<title>
+				<UICBCommentForm>Input comment</UICBCommentForm>
+			</title> 
+	</UIPopupWindow>
+	<UIBrowseContainer>
+    <msg>
+			<symlinkNode-no-targetNode>Missing node : The target node has been moved or deleted or You don't have enough permission to access</symlinkNode-no-targetNode>
+    </msg>
+  </UIBrowseContainer>
+  <UIDocumentDetail>
+  	<tooltip>
+  		<remove-attachment>Delete this attached file</remove-attachment>
+  	</tooltip>
+  </UIDocumentDetail>
+  <DocumentDetail>
+  	<tooltip>
+  		<remove-attachment>Delete this attached file</remove-attachment>
+  	</tooltip>
+  </DocumentDetail>
+</bundle>

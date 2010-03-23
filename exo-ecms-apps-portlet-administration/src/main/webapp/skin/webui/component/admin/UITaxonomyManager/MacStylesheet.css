@@ -1,0 +1,102 @@
+/**
+ * Created by The eXo Platform SAS
+ * Modifier : Vu Duy Tu
+ *           duytucntt@gmail.com
+ * January 03, 2006
+ * version: $Id$
+ */
+
+
+.UIECMAdminPortlet .UITaxonomyContainer {
+  border: solid 1px #d9d8d8;
+  padding: 5px;
+  background-color: white;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .Icon16x16 {
+  margin: 7px 7px 0px 0px;
+  float: left;
+  cursor: pointer;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .Icon24x24 {
+  margin: 3px 3px;
+  float: left;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .SubTaxonomyContainer {
+		border: solid 1px #d9d8d8;
+		width: 100%;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .HomeNode {
+  padding: 0px 7px;
+  line-height: 30px;
+  background-color: #eaeaea;
+  border-bottom: solid 1px #d9d8d8;  
+  font-weight: bold;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .Node {
+  line-height: 29px;
+  background-color: #eaeaea;
+  border-bottom: solid 1px #d9d8d8;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .NodeEven {
+  line-height: 29px;
+  background-color: #f4f3f3;
+  border-bottom: solid 1px #d9d8d8;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .NoneIcon {
+  margin: 7px 2px;
+  float: left;
+  width: 16px;
+  height: 16px;  
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .ExpandIcon {
+  margin: 7px 0px;
+  float: left;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  background: url(/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/SmallGray.gif') no-repeat left -16px;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .ColapseIcon {
+  margin: 7px 0px;
+  float: left;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  background: url(/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/SmallGray.gif') no-repeat left top;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .NodeActionsContainer {
+  float: right;
+}
+
+.UIECMAdminPortlet .TrueFalseContainer{
+  width: 65px;
+  margin: auto;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .UITaxonomyForm {
+	padding: 10px;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .UITaxonomyForm .HorizontalLayout {
+	background:  url(MacSkin/background/Background1x4.png) repeat 0%;
+	padding-top: 10px;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .UITaxonomyForm .FormContainer {
+	width: 500px;
+	margin: auto;
+}
+
+.UIECMAdminPortlet .UITaxonomyManager .UITaxonomyForm .FieldContainer .parentPath {
+	margin-left: 7px;
+}

@@ -1,0 +1,267 @@
+/**
+ * Created by The eXo Platform SARL
+ * Modifile : Luong Trung Hieu
+ *           hieu2b1@yahoo.com
+ * May 10, 2007
+ * version: $Id$
+ */
+ 
+ 
+.UIJCRExplorerPortlet .UIDrivesBrowser {
+  padding: 0px 15px 15px;
+  *width: 96.6%;
+  margin: auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesRepoList .UIDrivesBrowser {
+  padding: 15px;
+  padding: 15px 15px 0px;
+  *width: 96.6%;
+  margin: auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDropDownControl {
+	width: 100%;
+}
+
+.UIJCRExplorerPortlet .UIRepository {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 217px;
+  border: solid 1px #b7b7b7;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryTitle {
+  background: url('VistaSkin/background/RepositoryTitle217x26.gif') no-repeat center center;
+  height: 26px;
+  line-height: 26px;
+  font-weight: bold;
+  padding-left: 10px; /* orientation=lt */
+  padding-right: 10px; /* orientation=rt */
+  font-family: Verdana;
+  font-size: 11px;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList {
+  margin: 10px auto 1px auto;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList .RepositoryDecorater {
+  background: #f5f5f5 url('VistaSkin/background/ItemListBg1x13.png') repeat-x ;
+  height: 13px;
+  line-height: 13px;
+  margin: 80px 0px 1px 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesTitle {
+  padding: 10px 0px 6px 0px ;
+  text-align: center;
+  color: #f9a606;
+  font-weight: bold;
+  font-size: 17px;
+  font-family: arial;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDrivesList .EmptyDrives {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 95%;
+  margin: auto;
+  text-align: center;
+  padding: 8px 0px;
+  color: #ef5604;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDrivesList  {
+  margin: 0px;
+  border: 1px solid #dfdfdf;
+  border-top: none;
+  padding: 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesRepoList .UIDrivesBrowser .UIDrivesList  {
+  margin: 0px;
+  border: solid 1px #dfdfdf;
+  border-bottom: none;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitleBG {
+  background: url('VistaSkin/background/DrivesListTitleBG1x26.gif') repeat-x center;
+  line-height: 26px;
+  height: 26px;
+	width: auto;
+	white-space: nowrap;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitleBGRight {
+  background: url('VistaSkin/background/DrivesListTitleBGRight31x26.gif') no-repeat right; /* orientation=lt */
+  background: url('VistaSkin/background/DrivesListTitleBGRight31x26-rt.gif') no-repeat left; /* orientation=rt */
+  line-height: 26px; height: 26px;
+  padding-right: 31px; /* orientation=lt */
+  padding-left: 31px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle {
+  background: url('VistaSkin/background/DrivesListTitle161x26.gif') no-repeat left; /* orientation=lt */
+  background: url('VistaSkin/background/DrivesListTitle161x26-rt.gif') no-repeat right; /* orientation=rt */
+  line-height: 26px; height: 26px;
+  font-weight: bold;
+  padding-left: 10px; /* orientation=lt */
+  padding-right: 10px; /* orientation=rt */
+  font-family: Verdana;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListContainer {
+  margin: 0px 1px 1px 1px;
+  padding: 7px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent {
+	border: 1px solid #d9d9d9;
+	padding: 1px 0px 0px 0px;
+	margin-bottom: 5px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .DrivesListTitleBG {
+	line-height: 21px;
+	height: auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .DrivesListTitleBGRight {
+	line-height: 21px;
+	height: auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .DrivesListTitle {
+	line-height: 21px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .DropDownArrow16x16Icon {
+	padding-right: 20px; /* orientation=lt */
+	padding-left: 20px; /* orientation=rt */
+	width: auto; height: 26px;
+	background-position: right center; /* orientation=lt */
+	background-position: left center; /* orientation=rt */
+	line-height: 25px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .Icon {
+	padding-left: 20px; /* orientation=lt */
+	padding-right: 20px; /* orientation=rt */
+	width: auto; height: auto;
+	margin: 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .PersonalDrivesIcon {
+	background: url('VistaSkin/background/Personal.png') no-repeat left center; /* orientation=lt */
+	background: url('VistaSkin/background/Personal.png') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .GroupDrivesIcon {
+	background: url('VistaSkin/background/Group.png') no-repeat left center; /* orientation=lt */
+	background: url('VistaSkin/background/Group.png') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .GeneralDriveIcon {
+	background: url('VistaSkin/background/Earth.gif') no-repeat left center; /* orientation=lt */
+	background: url('VistaSkin/background/Earth.gif') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .BrowserDecorator {
+	border: 1px solid #d9d9d9;
+	margin: 1px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Drive {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  margin: 7px ;
+  padding: 0px 10px;
+  width: 162px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DecoratorMiddle {
+	background: white;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveContainer {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 160px; height:83px;
+  border: solid 1px #e4e4e4;
+  background: white url('VistaSkin/background/DriverContainerBG1x20.gif') repeat-x bottom;
+  padding: 10px 5px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DecoratorMiddle {
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Icon {
+  cursor: pointer;
+  width: 65px; height: 48px;
+  margin: 2px auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel {
+  line-height: 14px;
+  margin: auto;
+  text-align: center;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel a {
+  color: #116eaa;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel a:hover {
+  color: orange;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .GroupDriveIcon {
+  background: url('VistaSkin/background/GroupManagement58x45.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserDriveIcon {
+  background: url('VistaSkin/background/UserManagement58x45.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DefaultDriveIcon {
+  background: url('VistaSkin/background/DefaultDrive.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdminproductionIcon {
+  background: url('VistaSkin/background/AdminProduction.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdmindraftIcon {
+  background: url('VistaSkin/background/AdminDraft.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdminbackupIcon {
+  background: url('VistaSkin/background/AdminBackup.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdmintaxonomyIcon {
+  background: url('VistaSkin/background/AdminProduction.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Admindigital-assetsIcon {
+  background: url('VistaSkin/background/AdminDigitalAssets.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserproductionIcon {
+  background: url('VistaSkin/background/AdminProduction.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserdraftIcon {
+  background: url('VistaSkin/background/AdminProduction.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserbackupIcon {
+  background: url('VistatSkin/background/AdminProduction.png') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UsertaxonomyIcon {
+  background: url('DefaultSkin/background/UserTaxonomy.gif') no-repeat;
+}
+
+/*############################## -- End UIDrivesBrowser -- ##############################*/

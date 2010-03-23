@@ -1,0 +1,31 @@
+<%
+	/**
+	 * Created by The eXo Platform SARL
+	 * Author : Tran The Trong
+	 *          trongtt@gmail.com
+	 * August 02, 2006
+	 * version: $Id$	 
+	 */
+%>
+<div class="UIViewBar">
+  <div class="SelectViewBox">
+    <% uiform.begin() %>
+    <div class="SelectBox">
+      <label class="SelectViewLabel"><%=_ctx.appRes("UIViewBar.label.selectView")%></label><% uicomponent.renderChildren(); %>
+    </div>
+    <%uiform.end()%>    
+  </div>
+  <%if(uicomponent.isShowSaveSession()) {%>
+   <a class="Icon BlueFloppyDisk24x24Icon" href="<%=uicomponent.event("SaveSession")%>" title="<%=_ctx.appRes("UIViewBar.label.saveSession")%>"><span></span></a>
+  <%}%>
+  <a class="Icon SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><span></span></a>
+  <% if (!uicomponent.isDirectlyDrive()) {%>
+  <a class="Icon BackToMainDriveButton" href="<%=uicomponent.event("Back")%>" title="<%=_ctx.appRes("UIViewBar.label.backToJCR")%>"><span></span></a>
+  <%}%>		
+  <a class="Icon RefreshSessionButton" href="<%=uicomponent.event("RefreshSession")%>" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><span></span></a>
+	<%if (!uicomponent.isShowSideBar()) {%>
+	  <a class="Icon ShowSideBarButton" href="<%=uicomponent.event("ShowSideBar")%>" title="<%=_ctx.appRes("UIViewBar.label.showSideBar")%>"><span></span></a>
+	<%}%>		
+	<div class="Separator ViewBarSeparator"><span></span></div>		
+  <div class="ClearBoth"><span></span></div>
+</div>

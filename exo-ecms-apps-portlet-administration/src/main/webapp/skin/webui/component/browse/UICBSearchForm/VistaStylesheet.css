@@ -1,0 +1,84 @@
+/**
+ * Created by The eXo Platform SAS
+ * Modified : Vu Duy Tu
+ *          duytucntt@gmail.com
+ * DEC 26, 2006
+ * version: $Id$
+ **/
+ 
+ 
+.UICBSearchForm {
+  
+  border: solid 1px #b7b7b7;
+  background: #efefef;
+  margin: 2px 0px 5px 0px;  
+}
+
+.UICBSearchForm .HorizontalLayout .FieldContainer a {
+  color: #058ee6;
+  font-size: 11px; font-weight: bold;
+}
+
+.UICBSearchForm .HorizontalLayout .FieldContainer a:hover {
+  text-decoration: underline;
+}
+
+.UICBSearchForm .SearchIcon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 24px; height: 24px;
+  margin-left: 10px; /* orientation=lt */
+  margin-right: 10px; /* orientation=rt */
+  background: url('../DefaultSkin/background/CBSearchButton.gif') no-repeat left top; /* orientation=lt */
+  background: url('../DefaultSkin/background/CBSearchButton-rt.gif') no-repeat right top; /* orientation=rt */
+}
+
+.UICBSearchForm form {
+  margin: 0px;
+  padding: 0px;
+}
+
+.UICBSearchForm .HorizontalLayout {
+  border: solid 2px #ffffff;
+  padding: 3px 0px 2px 0px;
+  line-height: 20px;
+  height: 25px;
+}
+
+.UICBSearchForm .HorizontalLayout .FieldContainer {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+}
+
+.UICBSearchForm .HorizontalLayout .Input {
+  padding-left: 5px; /* orientation=lt */
+  padding-right: 5px; /* orientation=rt */
+  margin: 0px;
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+}
+
+.UICBSearchForm .HorizontalLayout label {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+	text-align: right; /* orientation=lt */
+	text-align: left; /* orientation=rt */
+	margin: 0px 5px 0px 10px; /* orientation=lt */
+	margin: 0px 10px 0px 5px; /* orientation=rt */
+	font-size: 11px;
+}
+
+.UICBSearchForm .HorizontalLayout .Nolabel {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 0px;
+	text-align: left; /* orientation=lt */
+	text-align: right; /* orientation=rt */
+	margin: 0px 0px;
+}
+
+.UICBSearchForm select {
+  padding-left: 4px; /* orientation=lt */
+  padding-right: 4px; /* orientation=rt */
+  width: 90px;
+}

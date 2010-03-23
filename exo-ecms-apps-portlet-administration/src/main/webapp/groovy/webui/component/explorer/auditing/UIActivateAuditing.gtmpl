@@ -1,0 +1,39 @@
+<% 
+	/**
+	 * 
+	 * Author : CPop Bull SA
+	 * 
+	 * version: $Id$	 
+	 */
+%>
+
+<div class="UIActivateAuditing">
+  <div style="text-align: center; margin: 10px;"><%=_ctx.appRes(uicomponent.getId() + ".label.note")%></div>
+  <div style="text-align: center; margin: 10px;"><%=_ctx.appRes(uicomponent.getId() + ".label.question")%></div>
+	<div class="UIAction">
+	  <table class="ActionContainer"> 
+	    <tr>
+	    	<td>
+		      <div onclick="<%=uicomponent.event("EnableAuditing")%>" class="ActionButton LightBlueStyle">
+		        <div class="ButtonLeft">
+		          <div class="ButtonRight">
+		            <div class="ButtonMiddle">
+		              <a href="javascript:void(0);"><%=_ctx.appRes("UIActivateAuditing.action.activate")%></a>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		      <div onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle">
+		        <div class="ButtonLeft">
+		          <div class="ButtonRight">
+		            <div class="ButtonMiddle">
+		              <a href="javascript:void(0);"><%=_ctx.appRes("UIActivateAuditing.action.cancel")%> </a>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+	  		</td>
+	  	</tr>
+	  </table>
+	</div>  
+</div>

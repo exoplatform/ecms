@@ -1,0 +1,118 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Tran The Trong
+ *          trongtt@gmail.com
+ * August 01, 2006
+ * version: $Id$
+ */
+
+@import url("../../../icons/DefaultStylesheet.css");
+
+.UIPageDesktop .UIDialogPortlet {
+  overflow: hidden;
+}
+
+.UIWindow .UIFastContentCreatorPortlet {
+	border: none;
+	margin: 0px;
+	border: none;
+}
+
+.UIFastContentCreatorPortlet {
+	background: white;
+	border: 1px solid #b7b7b7;
+	margin: 5px;
+}
+
+.UIFastContentCreatorPortlet .UIFormGrid {
+	width: 100%;
+}
+
+.UIFastContentCreatorPortlet .MsgLable {
+	text-align: center;
+	line-height: 60px;
+	color: #E80C00;
+}
+
+.UIFastContentCreatorPortlet .UITrees .Node .NodeIcon {
+	padding-left: 25px;
+}
+
+.UIFastContentCreatorPortlet .UIFormGrid .FieldLabel {
+	width: 160px;
+}
+
+.UIFastContentCreatorPortlet .UIFormWithTitle {
+  border: 1px solid #939393;
+  width: 598px;
+  margin: 15px auto;
+  background: url('MacSkin/background/Background1x4.png') repeat;
+}
+
+.UIFastContentCreatorPortlet .MultiValueContainer a  {
+  margin: 0px 5px;
+}
+
+.UIFastContentCreatorPortlet .UIFormUploadInput .ProgressBarFrame { 
+	width: 330px;
+	overflow: hidden;
+	margin: 0px;
+}
+
+.UIFastContentCreatorPortlet .UIFormUploadInput .SelectFileFrame { 
+	width: 330px;
+	overflow: hidden;
+	margin: 0px;
+}
+
+.UIFastContentCreatorPortlet .UIFormUploadInput  .FileNameLabel {
+	padding: 0px;
+	width: auto;
+}
+
+.UIFastContentCreatorPortlet .UIFormUploadInput  .ProgressBar {
+	margin: 0px;
+}
+
+.UIFastContentCreatorPortlet .UIOneNodePathSelector .rootNodeInfo .UIFormInputSet {
+	padding: 0px;
+}
+
+.UIFastContentCreatorPortlet .UIEditModeConfiguration {
+  margin: 15px auto;
+  width: 600px;
+  background: url('MacSkin/background/Background1x4.png') repeat;
+}
+
+.UIFastContentCreatorPortlet .UIOneNodePathSelector {
+  padding: 10px;
+}
+
+.UIFastContentCreatorPortlet .UIEditModeConfiguration .HorizontalLayout .UIFormInputSet{
+	width: 555px;
+	padding: 0px;
+	margin: auto;
+}
+
+.UIFastContentCreatorPortlet .UIEditModeConfiguration .FieldComponent .actionInput {
+	width: 555px;
+	padding: 0px;
+}
+
+.UIFastContentCreatorPortlet .UIEditModeConfiguration .HorizontalLayout .FormContainer {
+	width: 555px;
+	margin: auto;
+}
+
+.UIFastContentCreatorPortlet .UIForm td.FieldComponent {
+  padding: 4px 0px;
+}
+
+.UIFastContentCreatorPortlet .UIForm .rootNodeInfo td.FieldComponent {
+	padding: 0px;
+}
+
+.UIFastContentCreatorPortlet .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td.FieldLabel {
+  padding: 0px 4px 0px 4px;
+  vertical-align: middle;
+}

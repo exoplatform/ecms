@@ -1,0 +1,124 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Vu Duy Tu
+ *          duytucntt@gmail.com
+ * DEC 18, 2006
+ * version: $Id$
+ */
+
+.UIContentView {
+	margin: 10px;
+}
+
+.UIContentView .TiteContentView {
+  margin: 8px 0px 3px 0px;
+  height: 18px;
+}
+
+.UIContentView .TiteContentIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	margin: 0px 5px;
+  width: 16px;
+	height: 16px;
+}
+
+.UIContentView .TiteContentView a {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	margin-left: 6px; /* orientation=lt */
+	margin-right: 6px; /* orientation=rt */
+	line-height: 18px;
+	font-size: 11px; font-weight: bold;
+	color: #058ee6;
+}
+
+.UIContentView .TiteContentView a:hover{
+	text-decoration: none;
+	color: orange;
+}
+
+.UIContentView .FormContentView {
+  margin-left: 0px; /* orientation=lt */
+  margin-right: 0px; /* orientation=rt */
+	border: 1px solid #dee7ef;
+}
+
+.UIContentView .SubFormContent {
+	padding: 10px;
+	overflow: hidden;
+	height: 100%;
+}
+
+.UIContentView .SubFormContent a {
+	color: #333333;
+}
+
+.UIContentView .SubFormContent a:hover {
+	color: #058ff8;
+}
+
+.UIContentView .SubFormContent .ChildrenContent {
+  width: 99.5%;
+}
+
+.UIContentView .SubFormContent .ChildrenContentHolder {
+	width: auto;
+	margin: 5px;
+	padding: 1px;
+}
+.UIContentView .SubFormContent .ChildrenContentHolderLeft{
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 46%;
+	margin: 5px 0px;
+	padding: 1px;
+} 
+
+.UIContentView .SubFormContent .ChildrenContentHolderRight{
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	width: 46%;
+	margin: 5px 0px;
+	padding: 1px;
+} 
+
+.UIContentView .SubFormContent .ImageNote {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	height: 34px;
+  width: 28px;
+	background: url('DefaultSkin/background/Note28x34.gif');
+}
+
+.UIContentView .SubFormContent .DefaultIconImage {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+}
+
+.UIContentView .SubFormContent .ContentLabel {
+	margin-left: 30px; /* orientation=lt */
+	margin-right: 30px; /* orientation=rt */
+}
+
+.UIContentView .SubFormContent .UserName {
+	margin: 0px 8px 3px 8px;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.UIContentView .SubFormContent .Author {
+	margin: 0px 8px;
+	height: 16px;
+	line-height: 16px;
+	font-size: 10px;
+}
+
+.UIContentView .SubFormContent .UIDocumentContentInfo {
+	border: none;
+}
+
+.UISubContent .MessageContainer {
+	height: 18px;
+}
+
