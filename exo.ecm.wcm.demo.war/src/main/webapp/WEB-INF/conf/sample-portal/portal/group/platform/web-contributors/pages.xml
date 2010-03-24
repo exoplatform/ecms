@@ -32,7 +32,7 @@
     <edit-permission>manager:/platform/web-contributors</edit-permission>
     <portlet-application>
       <portlet>
-        <application-ref>ecm</application-ref>
+        <application-ref>ecmexplorer</application-ref>
         <portlet-ref>FileExplorerPortlet</portlet-ref>
         <preferences></preferences>
       </portlet>
@@ -54,7 +54,7 @@
     <edit-permission>manager:/platform/web-contributors</edit-permission>
     <portlet-application>
       <portlet>
-        <application-ref>ecm</application-ref>
+        <application-ref>ecmexplorer</application-ref>
         <portlet-ref>FileExplorerPortlet</portlet-ref>
         <preferences></preferences>
       </portlet>
@@ -76,7 +76,7 @@
     <edit-permission>manager:/platform/web-contributors</edit-permission>
     <portlet-application>
       <portlet>
-        <application-ref>ecm</application-ref>
+        <application-ref>ecmadmin</application-ref>
         <portlet-ref>ECMAdminPortlet</portlet-ref>
         <preferences></preferences>
       </portlet>
