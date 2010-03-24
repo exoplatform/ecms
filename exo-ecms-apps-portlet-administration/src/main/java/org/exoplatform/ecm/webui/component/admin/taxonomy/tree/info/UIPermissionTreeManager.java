@@ -19,7 +19,7 @@ package org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info;
 
 import javax.jcr.Node;
 
-import org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInputSet;
+import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
