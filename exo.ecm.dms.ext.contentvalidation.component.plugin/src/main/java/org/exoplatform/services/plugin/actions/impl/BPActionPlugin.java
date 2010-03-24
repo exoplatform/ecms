@@ -37,7 +37,7 @@ import org.exoplatform.services.cms.actions.impl.BaseActionPlugin;
 import org.exoplatform.services.cms.actions.impl.ActionConfig;
 import org.exoplatform.services.cms.actions.impl.ECMEventListener;
 import org.exoplatform.services.cms.actions.impl.BaseActionLauncherListener;
-import org.exoplatform.services.cms.actions.impl.WorkflowActionLauncherListener;
+import org.exoplatform.services.ecm.publication.actions.WorkflowActionLauncherListener;
 import org.exoplatform.services.plugin.actions.activation.BPActionActivationJob;
 
 public class BPActionPlugin extends BaseActionPlugin implements ComponentPlugin {

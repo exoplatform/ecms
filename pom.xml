@@ -397,7 +397,6 @@
     <module>exo.ecm.wcm.component.migration.1.2.data</module>
     <module>exo.ecm.wcm.component.migration.1.2.workspaces</module>
     <module>exo.ecm.wcm.component.newsletter</module>
-    <module>exo.ecm.wcm.component.publication</module>
     <module>exo.ecm.wcm.component.search</module>
     <module>exo.ecm.wcm.component.wcm</module>
     <module>exo.ecm.wcm.connector.fckeditor</module>

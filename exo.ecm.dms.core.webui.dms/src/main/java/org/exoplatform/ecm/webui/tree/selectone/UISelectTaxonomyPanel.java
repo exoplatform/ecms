@@ -21,6 +21,7 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
+import org.exoplatform.ecm.webui.tree.selectone.UISelectPathPanel;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;

@@ -50,6 +50,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo.ecm.dms.core.component.publication</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>		
+    <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all-minimal</artifactId>
       <version>1.5.4</version>

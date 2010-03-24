@@ -23,7 +23,7 @@ import javax.jcr.Node ;
 
 import org.exoplatform.ecm.webui.popup.UIPopupComponent ;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector ;
-import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder ;
+import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder;
 import org.exoplatform.portal.webui.util.SessionProviderFactory ;
 import org.exoplatform.services.cms.categories.CategoriesService ;
 import org.exoplatform.services.jcr.RepositoryService ;

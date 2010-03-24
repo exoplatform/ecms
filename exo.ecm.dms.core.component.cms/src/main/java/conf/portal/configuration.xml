@@ -137,11 +137,6 @@
   </component>
   
   <component>
-    <key>org.exoplatform.services.cms.jcrext.lock.LockTokenHolderService</key>
-    <type>org.exoplatform.services.cms.jcrext.lock.LockTokenHolderService</type>
-  </component>
-  
-  <component>
     <key>org.exoplatform.services.cms.link.LinkManager</key>
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
   </component>
@@ -237,21 +232,8 @@
   </component>  
   
   <component>
-    <type>org.exoplatform.services.cms.REST.presentation.document.edit.GetEditedDocumentRESTService</type>
-  </component>  
-  
-  <component>
-    <type>org.exoplatform.services.cms.REST.presentation.document.publication.PublicationGetDocumentRESTService</type>
-  </component>  
-  
-  <component>
     <key>org.exoplatform.services.cms.documents.DocumentTypeService</key>  
     <type>org.exoplatform.services.cms.documents.impl.DocumentTypeServiceImpl</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.cms.documents.FavoriteService</key>  
-    <type>org.exoplatform.services.cms.documents.impl.FavoriteServiceImpl</type>
   </component>
   
   <component>
