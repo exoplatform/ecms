@@ -21,11 +21,8 @@ import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 

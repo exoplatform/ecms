@@ -16,8 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManager;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 /**
  * Created by The eXo Platform SARL

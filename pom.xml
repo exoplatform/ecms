@@ -374,7 +374,10 @@
     <module>exo.ecm.dms.core.demo.rest-war</module>
     <module>exo.ecm.dms.core.demo.webapp</module>
     <module>exo.ecm.dms.core.extension.config</module>
-    <module>exo.ecm.dms.core.extension.ear</module>
+   <module>exo-ecms-apps-portlet-administration</module> 
+   <module>exo-ecms-apps-portlet-explorer</module> 
+   <module>exo-ecms-ext-deprecated-portlet-browsecontent</module> 
+   <module>exo.ecm.dms.core.extension.ear</module>
     <module>exo.ecm.dms.core.extension.webapp</module>
     <module>exo.ecm.dms.core.gadgets</module>
     <module>exo.ecm.dms.core.portlet.jcr-console</module>

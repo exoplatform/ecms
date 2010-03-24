@@ -16,8 +16,10 @@ function getModule(params) {
   module.name =  "dms" ;
     
   module.portlet = {}
-  module.portlet.dms = 
-    new Project("org.exoplatform.ecms", "exo.ecm.dms.core.portlet.ecm.core.web", "exo-portlet", module.version).
+  module.portlet.ecmadmin = 
+    new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-administration", "exo-portlet", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.cms", "jar",  module.version)) .     
+    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.cms", "jar",  module.version)) .     
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.cms", "jar",  module.version)) .     
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.deployment", "jar",  module.version)) .    
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.publication", "jar", module.version)).
@@ -37,8 +39,18 @@ function getModule(params) {
     addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "3.0")).
 		addDependency(new Project("org.fontbox", "fontbox", "jar", "0.1.0"));
     
-    module.portlet.dms.deployName = "ecm";
+    module.portlet.ecmadmin.deployName = "ecmadmin";
   
+  module.portlet.ecmexplorer = 
+    new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-explorer", "exo-portlet", module.version);
+  
+  module.portlet.ecmexplorer.deployName = "ecmexplorer";
+
+  module.portlet.ecmbrowsecontent = 
+    new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-browsecontent", "exo-portlet", module.version);
+  
+  module.portlet.ecmbrowsecontent.deployName = "ecmbrowsecontent";
+
   module.portlet.jcr_console = 
     new Project("org.exoplatform.ecms", "exo.ecm.dms.core.portlet.jcr-console", "exo-portlet", module.version).
     addDependency(new Project("exo-weblogic", "exo-weblogic-authproviders", "jar", "1.0")).

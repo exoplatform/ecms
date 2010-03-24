@@ -26,12 +26,12 @@ import javax.jcr.Node;
 
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.permission.PermissionBean;
+import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyManagerTrees;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionForm;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTaxonomyManager;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.info.UIPermissionForm;
-import org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;

@@ -20,7 +20,6 @@ package org.exoplatform.ecm.webui.component.admin.taxonomy;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManager;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionForm;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
@@ -35,6 +34,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 /**
  * Created by The eXo Platform SARL

@@ -34,14 +34,12 @@ import javax.jcr.Value;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
-import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.NodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
@@ -58,6 +56,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -159,9 +158,6 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
       Object[] arg = { template };
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.do-not-permission", arg, 
           ApplicationMessage.ERROR));
-      UIDocumentFormController uiFormController = getAncestorOfType(UIDocumentFormController.class);
-      WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
-      context.addUIComponentToUpdateByAjax(uiFormController);
       return null;
     }catch(Exception e) {
       LOG.error("Exception when get template ", e);

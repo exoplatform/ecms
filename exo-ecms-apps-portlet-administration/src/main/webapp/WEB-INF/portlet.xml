@@ -20,7 +20,7 @@
       <portlet-mode>help</portlet-mode>
     </supports>
     <supported-locale>en</supported-locale>    
-    <resource-bundle>locale.portlet.ecm.ECMAdminPortlet</resource-bundle>    																														
+    <resource-bundle>locale.portlet.administration.ECMAdminPortlet</resource-bundle>    																														
     
     <portlet-info>
       <title>ECM Admin</title>

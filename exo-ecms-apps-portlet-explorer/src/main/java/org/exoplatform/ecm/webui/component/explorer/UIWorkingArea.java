@@ -32,7 +32,6 @@ import javax.jcr.Value;
 
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
@@ -54,6 +53,7 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * Created by The eXo Platform SARL Author : Tran The Trong trongtt@gmail.com

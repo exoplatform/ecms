@@ -20,13 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.exoplatform.services.log.Log;
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * Created by The eXo Platform SARL

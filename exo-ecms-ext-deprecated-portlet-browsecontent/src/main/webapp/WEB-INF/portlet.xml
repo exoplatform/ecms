@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="1.0" xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd"> 
+  
+  <portlet>
+    <description xml:lang="EN">Content Browser</description>
+    <portlet-name>ContentBrowserPortlet</portlet-name>
+    <display-name xml:lang="EN">Content Browser</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>   
+                   
+    
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/BrowseContentPortlet/webui/configuration.xml</value>
+    </init-param>    
+
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+      <portlet-mode>edit</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>    
+    <resource-bundle>locale.portlet.browsecontent.BrowseContentPortlet</resource-bundle>    																														
+    
+    <portlet-info>
+      <title>Content Browser</title>
+      <short-title>Content Browser</short-title>
+      <keywords>ECM</keywords>
+    </portlet-info>
+    
+    <portlet-preferences> 
+			<!-- Setup the default repository name for content browser portlet -->
+    	<preference>
+        <name>repository</name>
+        <value>repository</value>
+        <read-only>false</read-only>
+      </preference>
+			<!-- Specify the workspace name will be use in repository	-->      
+      <preference>
+        <name>workspace</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>            
+      <!-- Specify the root path and you will see all child nodes when browse the portlet	-->  
+      <preference>
+        <name>path</name>     
+        <value>/Groups/platform/users/Documents</value>
+        <read-only>false</read-only>
+      </preference>            
+      <!-- Specify the name of document in category when you choose the usecase is detail-document	-->
+      <preference>
+        <name>documentName</name>     
+        <value></value>
+        <read-only>false</read-only>
+      </preference>            
+      <!-- 
+      	When you choose usecase is path you can use this preference to allow show reference 
+      	documents or not	
+      -->
+      <preference>
+        <name>reference</name>     
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>      
+      <!-- 
+      	When you choose usecase is path you can use this preference to allow show child node 
+      	is document or not
+      -->
+      <preference>
+        <name>child</name>     
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>            
+      <!-- 
+      	When you choose usecase is query you have to use this preference to setup the type 
+      	of query will be use is xpath or sql
+      -->
+      <preference>
+        <name>queryLanguage</name>
+        <value>xpath</value>
+        <read-only>false</read-only>
+      </preference>      
+      <!-- 
+      	When you choose usecase is query you have to use this preference to init the query statement
+      -->
+      <preference>
+        <name>queryStatement</name>
+        <value>/jcr:root/Documents/Live//element(*, exo:article)</value>
+        <read-only>false</read-only>
+      </preference>      
+      <!-- 
+      	When you choose usecase is query you should use this preference to specify the status 
+      	of query is new query or existing query.
+      -->
+      <preference>
+        <name>isAddNew</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>      
+      <!-- 
+      	When you choose usecase is query and query status is existing then you have to use this 
+      	preference to specify the query type is personal or shared query.
+      -->
+      <preference>
+        <name>queryType</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference> 
+      <!--
+      	When you choose usecase is query and query status is existing then you have to use this 
+      	preference to specify the query location.
+      	Normaly all existing shared queries stored in folder: /exo:ecm/queries
+      	personal queries stored in folder: /Users/$username/Private/Queries
+      -->
+      <preference>
+        <name>queryStore</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>
+      <!--
+      	When you choose usecase is any type you should specify the template type which will be show
+      	in the UI
+      	Check for detail in ecm-views-configuration.xml
+      --> 
+      <preference>
+        <name>template</name>
+        <value>PathList</value>        
+        <read-only>false</read-only>
+      </preference>      
+      <!--
+      	This preference related to template, this one specify the template which will be use to 
+      	display child node document. 
+      --> 
+      <preference>
+        <name>boxTemplate</name>
+        <value>DocumentView</value>
+        <read-only>false</read-only>
+      </preference>      
+      <!--
+      	This preference will be use when choose usecase is path or query. This one specify the
+      	number of item for each page. 
+      --> 
+      <preference>
+        <name>nbPerPage</name>
+        <value>20</value>
+        <read-only>false</read-only>
+      </preference>                  
+      <!--
+      	This preference will be use when choose usecase is path. This one allow show or not the
+      	tool bar. 
+      --> 
+      <preference>
+        <name>viewToolbar</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <!--
+      	This preference will be use when choose any usecase except detail-document. 
+      	This one allow show or not the tag map. 
+      --> 
+      <preference>
+        <name>viewTagMap</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>   
+      <!--
+      	This preference will be use when choose any usecase. This one allow show or not the comment action. 
+      -->       
+      <preference>
+        <name>viewComment</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>   
+      <!--
+      	This preference will be use when choose any usecase. This one allow show or not the vote action. 
+      -->       
+      <preference>
+        <name>viewVote</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>                               
+      <!--
+      	This preference will be use with usecase is script. You have to choose one script 
+      	which will be executed when porlet init. 
+      -->       
+      <preference>
+        <name>scriptName</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>
+      <!--
+      	Specify the usecase will be use
+      -->      
+      <preference>      
+        <name>usecase</name>
+        <value>path</value>
+        <!--
+        <value>Document</value>
+        <value>Using a JCR query</value>
+        <value>Using a script</value>
+         -->
+        <read-only>false</read-only>
+      </preference>
+      <!--
+        Enable search root location
+      -->
+      <preference>
+        <name>enableSearch</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>
+      <!--
+        Specify the search root location. This preference affect only when enableSearch is true
+        Notice: Have to specify the workspace name
+      -->
+      <preference>
+        <name>searchLocation</name>
+        <value>collaboration:/Documents/Live</value>
+        <read-only>false</read-only>
+      </preference>    
+      
+      <preference>
+        <name>isAllowPublish</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference> 
+      <!-- 
+        When filterCategory is true, then we need check permission in the taxonomy tree
+      -->             
+      <preference>
+        <name>filterCategory</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>              
+    </portlet-preferences>    
+  </portlet>
+      
+</portlet-app>

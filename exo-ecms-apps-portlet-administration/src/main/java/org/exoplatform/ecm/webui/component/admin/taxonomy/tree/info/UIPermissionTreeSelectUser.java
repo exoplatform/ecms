@@ -17,7 +17,7 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info;
 
-import org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInputSet;
+import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;

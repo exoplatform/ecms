@@ -22,8 +22,6 @@ import java.util.List;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.services.log.Log;
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManager;
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
@@ -32,6 +30,8 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * Created by The eXo Platform SARL

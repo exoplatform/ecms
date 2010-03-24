@@ -24,7 +24,6 @@ import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -44,6 +43,7 @@ import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 /**
  * Created by The eXo Platform SARL

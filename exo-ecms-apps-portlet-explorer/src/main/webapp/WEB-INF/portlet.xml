@@ -22,7 +22,7 @@
       <portlet-mode>edit</portlet-mode>
     </supports>
     <supported-locale>en</supported-locale>    
-    <resource-bundle>locale.portlet.ecm.JCRExplorerPortlet</resource-bundle>    																														
+    <resource-bundle>locale.portlet.explorer.JCRExplorerPortlet</resource-bundle>    																														
     
     <portlet-info>
       <title>Content Explorer</title>

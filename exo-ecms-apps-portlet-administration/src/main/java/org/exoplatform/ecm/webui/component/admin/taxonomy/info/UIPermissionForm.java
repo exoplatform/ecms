@@ -24,7 +24,7 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
 import org.exoplatform.services.log.Log;
-import org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionInputSet;
+import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.LockUtil;

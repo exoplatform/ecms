@@ -22,8 +22,6 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManager;
-import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
@@ -35,6 +33,8 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * Created by The eXo Platform SARL Author : Hoang Van Hung hunghvit@gmail.com

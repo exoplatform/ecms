@@ -24,6 +24,8 @@ import org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanel
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * Created by The eXo Platform SAS
