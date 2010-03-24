@@ -1,0 +1,79 @@
+<% 
+	import java.text.SimpleDateFormat;
+	
+	SimpleDateFormat dateFormat = new SimpleDateFormat();
+	dateFormat.applyPattern("MM/dd/yyyy HH:mm:ss");
+%>
+
+<div class="UIVersionInfo" id="$uicomponent.id">
+  <table class="UIGrid" id="$uicomponent.id">  
+		<tbody>
+	    <tr>
+	      <th><%=_ctx.appRes("UIAuditingInfo.label.operation")%></th>
+	      <th><%=_ctx.appRes("UIAuditingInfo.label.userName") %></th>    
+	      <th><%=_ctx.appRes("UIAuditingInfo.label.date")     %></th> 
+	      <th><%=_ctx.appRes("UIAuditingInfo.label.version")  %></th>   
+	    </tr>
+		    
+	  <div class="HomeNode">
+	    <%
+	      def listRec = uicomponent.getListRecords();
+	      if (listRec != null && listRec.size() > 0) {
+	        def rowClass = null;
+  	      boolean even = true;
+  		    for (ar in listRec) {
+  	 	      if (even) rowClass = "EvenRow";  
+	  	      else rowClass = "OddRow"; 
+	  	      even = !even;
+	  	      String versionName = uicomponent.getVersionName(ar);
+	  	      String labelName = "UIAuditingInfo.eventName.e_" + ar.getEventType();
+	     %>
+	          <tr class="$rowClass">
+	            <td><%=_ctx.appRes(labelName)%></td>
+	            <td><%=ar.getUserId()%></td>
+	            <td><%=dateFormat.format(ar.getDate().getTime())%></td>
+	            <%
+	              if (versionName == null || versionName.equalsIgnoreCase("jcr:rootVersion")) {
+	            %>
+	              <td><%=_ctx.appRes("UIAuditingInfo.msg.noVersion")%></td>
+	            <%} else { %>
+	              <td><%=versionName%></td>
+	            <%}%>  
+	          </tr>
+	     <% 
+	        }
+	      } else { %>
+	         <tr class="EvenRow">
+	           <td style="font-style:italic; text-align: center; color: #FF5604" colspan="4">
+	             <%=_ctx.appRes("UIGrid.msg.empty")%>
+	           </td>
+	         </tr>
+	    <%}%>
+	  </div>
+	  </tbody>
+	</table> 
+  
+  <% if(uicomponent.getUIPageIterator().getAvailablePage() > 1) { %>
+  <div style="margin:1px 0px 5px 0px;">
+    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+  </div>
+  <% } %>
+     
+  <div class="UIAction">
+    <table class="ActionContainer"> 
+      <tr>
+        <td>
+          <div onclick="<%=uicomponent.event("Close")%>" class="ActionButton LightBlueStyle">
+            <div class="ButtonLeft">
+              <div class="ButtonRight">
+                <div class="ButtonMiddle">
+                  <a href="javascript:void(0);">Close</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
