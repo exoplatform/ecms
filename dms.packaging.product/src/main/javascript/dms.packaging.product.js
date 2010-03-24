@@ -38,7 +38,9 @@ function getProduct(version) {
 	
 	product.addDependencies(dms.web.eXoDMSResources);
 	product.addDependencies(dms.web.fck);
-  product.addDependencies(dms.portlet.dms);
+  product.addDependencies(dms.portlet.ecmadmin);
+product.addDependencies(dms.portlet.ecmexplorer);
+product.addDependencies(dms.portlet.ecmbrowsecontent);
   product.addDependencies(dms.portlet.jcr_console);
   product.addDependencies(dms.gadgets);
 	product.addDependencies(dms.extension.webapp);

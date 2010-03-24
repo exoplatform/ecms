@@ -7,7 +7,7 @@
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
-  <artifactId>exo.ecm.dms.core.portlet.ecm.core.main</artifactId>
+  <artifactId>exo-ecms-apps-portlet-explorer</artifactId>
   <packaging>war</packaging>
   <name>eXo DMS Portlet Java Content</name>
   <description>eXo DMS Portlet Java Content: File Explorer, Browser Content, ECM Admin</description>
