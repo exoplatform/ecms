@@ -19,9 +19,6 @@ function getModule(params) {
   module.portlet.ecmadmin = 
     new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-administration", "exo-portlet", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.cms", "jar",  module.version)) .     
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.cms", "jar",  module.version)) .     
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.cms", "jar",  module.version)) .     
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.deployment", "jar",  module.version)) .    
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.publication", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.document.viewer", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.connector.fckeditor", "jar", module.version)).

@@ -11,6 +11,10 @@
   </component>
   
   <component>
+    <type>org.exoplatform.services.deployment.ContentInitializerService</type>
+  </component>
+  
+  <component>
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
   </component>
@@ -335,4 +339,6 @@
 				</component-plugin>
 		</external-component-plugins>
 	-->
+	
+	<import>jar:/conf/portal/wcm-configuration.xml</import>
 </configuration>

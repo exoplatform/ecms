@@ -361,7 +361,6 @@
   </profiles>
   <modules>
     <module>exo.ecm.dms.core.component.cms</module>
-    <module>exo.ecm.dms.core.component.deployment</module>
     <module>exo.ecm.dms.core.component.document.viewer</module>
     <module>exo.ecm.dms.core.component.migration.2.3.drives</module>
     <module>exo.ecm.dms.core.component.migration.2.5.datas</module>
@@ -398,7 +397,6 @@
     <module>exo.ecm.wcm.component.migration.1.2.workspaces</module>
     <module>exo.ecm.wcm.component.newsletter</module>
     <module>exo.ecm.wcm.component.search</module>
-    <module>exo.ecm.wcm.component.wcm</module>
     <module>exo.ecm.wcm.connector.fckeditor</module>
     <module>exo.ecm.wcm.demo.config</module>
     <module>exo.ecm.wcm.demo.ear</module>
