@@ -1,0 +1,24 @@
+<div class="UISelectedPages" id="$uicomponent.id">
+	  <div class="ListPage">
+      <div class="OverflowContainer">
+	      <%
+					List<String> list = uicomponent.getListNavigationNodeURI();
+					if (list.size() == 0) {
+						%>
+							<div class="NoItem"><%= _ctx.appRes("UIPublishedPages.label.noitem"); %></div>
+						<%
+					} else {
+			      for(navigationURI in list){
+				      String selectedClass = "";
+							if (uicomponent.getSelectedNavigationNodeURI() != null) {
+								selectedClass = uicomponent.getSelectedNavigationNodeURI().equals(navigationURI) ? "Selected" : "";
+							}
+			      	%>
+		        		<div class="ItemIcon $selectedClass" onclick="<%=uicomponent.event("SelectNavigationNodeURI", navigationURI)%>" title="$navigationURI">$navigationURI</div>
+		      		<%
+		      	}
+	      	}
+	      %>
+      </div>
+	  </div>
+</div> 		

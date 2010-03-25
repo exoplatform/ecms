@@ -23,7 +23,7 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.connector.fckeditor", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.cms", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.wcm.webui.wcm", "jar",  module.version)).
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.publication", "jar",  module.version)).    
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar",  module.version)).    
     addDependency(ws.frameworks.json).
     addDependency(jcr.frameworks.command).
     addDependency(jcr.frameworks.web).

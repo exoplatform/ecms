@@ -366,7 +366,7 @@
     <module>exo.ecm.dms.core.component.migration.2.5.datas</module>
     <module>exo.ecm.dms.core.component.migration.2.5.workspaces</module>
     <module>exo.ecm.dms.core.component.migration.2.6.folksonomies</module>
-    <module>exo.ecm.dms.core.component.publication</module>
+    <module>exo-ecms-core-publication</module>
     <module>exo.ecm.dms.core.connector.fckeditor</module>
     <module>exo.ecm.dms.core.demo.config</module>
     <module>exo.ecm.dms.core.demo.ear</module>
