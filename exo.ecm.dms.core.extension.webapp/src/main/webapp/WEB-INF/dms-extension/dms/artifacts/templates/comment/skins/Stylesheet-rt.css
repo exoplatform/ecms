@@ -123,7 +123,7 @@
 }
 
 .CommentInfo .EditComment {
-	background: url('/ecm/skin/icons/16x16/DefaultSkin/EditDocument.gif') no-repeat right top;
+	background: url('/ecmexplorer/skin/icons/16x16/DefaultSkin/EditDocument.gif') no-repeat right top;
 	margin: auto;
 	padding: 2px;
 	height: 16px;

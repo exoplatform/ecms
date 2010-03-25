@@ -374,7 +374,7 @@
 }
 
 .UIJCRExplorerPortlet .UIListGrid .LineLeft {
-	background: url('/ecm/skin/icons/24x24/DefaultSkin/Split.gif') no-repeat center;
+	background: url('/ecmexplorer/skin/icons/24x24/DefaultSkin/Split.gif') no-repeat center;
   width: 3px;
   height: 19px;
   float: left;/* orientation=lt */

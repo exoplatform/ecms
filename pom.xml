@@ -383,7 +383,7 @@
     <module>exo.ecm.dms.core.web.fck</module>
     <module>exo.ecm.dms.core.webui.dms</module>
     <module>exo.ecm.dms.core.webui.ext</module>
-    <module>exo.ecm.dms.ext.contentvalidation.bp.bonita.content-publishing</module>
+    <!--module>exo.ecm.dms.ext.contentvalidation.bp.bonita.content-publishing</module>
     <module>exo.ecm.dms.ext.contentvalidation.bp.jbpm.content.publishing</module>
     <module>exo.ecm.dms.ext.contentvalidation.component.bonitaconfig</module>
     <module>exo.ecm.dms.ext.contentvalidation.component.jbpmconfig</module>
@@ -391,7 +391,7 @@
     <module>exo.ecm.dms.ext.contentvalidation.component.webui</module>
     <module>exo.ecm.dms.ext.contentvalidation.component.workflowPublication</module>
     <module>exo.ecm.wcm.component.migration.1.2.data</module>
-    <module>exo.ecm.wcm.component.migration.1.2.workspaces</module>
+    <module>exo.ecm.wcm.component.migration.1.2.workspaces</module-->
     <module>exo.ecm.wcm.component.newsletter</module>
     <module>exo.ecm.wcm.component.search</module>
     <module>exo.ecm.wcm.demo.config</module>
@@ -410,7 +410,7 @@
     <module>exo.ecm.wcm.server.tomcat.patch</module>
     <module>exo.ecm.wcm.web.eXoWCMResources</module>
     <module>exo.ecm.wcm.webui.wcm</module>
-    <module>exo.ecm.workflow.bp.bonita.holiday</module>
+    <!--module>exo.ecm.workflow.bp.bonita.holiday</module>
     <module>exo.ecm.workflow.bp.bonita.payraise</module>
     <module>exo.ecm.workflow.bp.jbpm.holiday</module>
     <module>exo.ecm.workflow.bp.jbpm.payraise</module>
@@ -432,7 +432,7 @@
     <module>workflow.packaging.module</module>
     <module>workflow.packaging.product</module>
     <module>dms.packaging.module</module>
-    <module>dms.packaging.product</module>
+    <module>dms.packaging.product</module-->
     <module>wcm.packaging.module</module>
     <module>wcm.packaging.product</module>
   </modules>

@@ -35,7 +35,7 @@ import org.exoplatform.webui.event.EventListener;
  */
 
 @ComponentConfig(
-    template = "app:/groovy/webui/component/UIGridWithButton.gtmpl",
+    template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
     events = {
         @EventConfig(listeners = UIRepositoryValueSelect.SelectActionListener.class),
         @EventConfig(listeners = UIRepositoryValueSelect.CloseActionListener.class)

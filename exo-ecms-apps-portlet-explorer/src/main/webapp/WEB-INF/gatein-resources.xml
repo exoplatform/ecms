@@ -66,6 +66,10 @@
       <js-path>/javascript/eXo/ecm/ExoEditor.js</js-path>
     </param>
 	<param>
+      <js-module>eXo.ecm.Mootools</js-module>
+      <js-path>/javascript/eXo/ecm/Mootools.js</js-path>
+    </param>
+	<param>
       <js-module>eXo.ecm.Select_fix</js-module>
       <js-path>/javascript/eXo/ecm/Select_fix.js</js-path>
     </param>

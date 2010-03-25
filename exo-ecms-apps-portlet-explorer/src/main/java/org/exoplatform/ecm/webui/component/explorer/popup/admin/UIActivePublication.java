@@ -52,7 +52,7 @@ import org.exoplatform.webui.form.UIForm;
 /**
  * The Class UIActivePublication.
  */
-@ComponentConfig(template = "app:/groovy/webui/component/UIGridWithButton.gtmpl", events = {
+@ComponentConfig(template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl", events = {
     @EventConfig(listeners = UIActivePublication.EnrolActionListener.class),
     @EventConfig(listeners = UIActivePublication.CancelActionListener.class) })
     public class UIActivePublication extends UIGrid implements UIPopupComponent {

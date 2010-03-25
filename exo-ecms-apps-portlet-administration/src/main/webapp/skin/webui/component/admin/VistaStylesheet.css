@@ -911,7 +911,7 @@
 }
 
 .UINodeTypeSearh .UIBarStyle .SearchIcon {
-		background: transparent url(/ecm/skin/icons/24x24/DefaultSkin/Search.gif) no-repeat scroll left center;
+		background: transparent url(/ecmadmin/skin/icons/24x24/DefaultSkin/Search.gif) no-repeat scroll left center;
 		height: 24px;
 		width: 24px;
 		padding: 10px;

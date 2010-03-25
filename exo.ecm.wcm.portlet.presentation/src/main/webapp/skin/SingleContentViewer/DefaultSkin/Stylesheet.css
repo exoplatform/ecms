@@ -35,7 +35,7 @@
 }
 
 .UISingleContentViewerPortlet .UIWelcomeScreen .FormContainer .CreateNewContent {
-  background: transparent url(/ecm/skin/icons/24x24/DefaultSkin/AddDocument.gif) no-repeat scroll left center;
+  background: transparent url(/ecmexplorer/skin/icons/24x24/DefaultSkin/AddDocument.gif) no-repeat scroll left center;
   height: 22px;
   line-height: 22px;
   margin: 5px 0px 5px 250px;
