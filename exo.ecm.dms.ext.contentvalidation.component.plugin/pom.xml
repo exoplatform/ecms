@@ -54,7 +54,7 @@
       <artifactId>exo-ecms-core-publication</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
-    </dependency>		
+    </dependency>
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all-minimal</artifactId>

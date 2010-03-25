@@ -343,7 +343,7 @@
     <profile>
       <id>wkf</id>
       <modules>
-        <module>exo.ecm.workflow.packaging.assembly</module>  
+        <module>exo.ecm.workflow.packaging.assembly</module>
       </modules>
     </profile>
     <profile>
@@ -372,9 +372,9 @@
     <module>exo.ecm.dms.core.demo.ear</module>
     <module>exo.ecm.dms.core.demo.rest-war</module>
     <module>exo.ecm.dms.core.demo.webapp</module>
-    <module>exo-ecms-apps-portlet-administration</module> 
-    <module>exo-ecms-apps-portlet-explorer</module> 
-    <module>exo-ecms-ext-deprecated-portlet-browsecontent</module> 
+    <module>exo-ecms-apps-portlet-administration</module>
+    <module>exo-ecms-apps-portlet-explorer</module>
+    <module>exo-ecms-ext-deprecated-portlet-browsecontent</module>
     <module>exo.ecm.dms.core.gadgets</module>
     <module>exo.ecm.dms.core.portlet.jcr-console</module>
     <module>exo.ecm.dms.core.server.jonas.patch</module>
