@@ -25,6 +25,30 @@
    xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
    xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
+  
+  <import>war:/conf/dms-extension/jcr/jcr-configuration.xml</import>
+  <import>war:/conf/dms-extension/common/resource-bundle-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/jcr-component-plugins-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-system-configuration.xml</import>  
+  <import>war:/conf/dms-extension/dms/cms-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-templates-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-scripts-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-actions-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-categories-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-taxonomies-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-ext-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-views-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-drives-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-metadata-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-folksonomy-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-records-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-queries-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/organization-component-plugins-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/publication-configuration.xml</import>  
+  <import>war:/conf/dms-extension/dms/dms-thumbnail-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-common-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-document-type-configuration.xml</import>  
+  
   <import>war:/conf/wcm-extension/core/organization-configuration.xml</import>
   <import>war:/conf/wcm-extension/jcr/jcr-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/resource-bundle-configuration.xml</import>
@@ -33,7 +57,6 @@
   <import>war:/conf/wcm-extension/dms/application-templates-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/drives-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/ext-configuration.xml</import>
-
   <import>war:/conf/wcm-extension/wcm/system-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/publication-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/taxonomies-configuration.xml</import>

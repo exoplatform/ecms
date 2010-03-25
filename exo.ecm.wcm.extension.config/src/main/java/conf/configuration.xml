@@ -63,9 +63,12 @@
                 </value>
                 <value>
                   <string>eXoWCMResources</string>
+                </value>
+                <value>
+                  <string>ecm-wcm-extension</string>
                 </value>  
                 <value>
-                  <string>dms-extension</string>
+                  <string>ecmadmin</string>
                 </value>
 				<value>
                   <string>ecmadmin</string>
@@ -74,7 +77,7 @@
                   <string>ecmexplorer</string>
                 </value>
                 <value>
-                  <string>ecm-wcm-extension</string>
+                  <string>ecmbrowsecontent</string>
                 </value>
                 <value>
                   <string>presentation</string>

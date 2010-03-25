@@ -16,8 +16,7 @@ function getModule(params) {
   module.name =  "dms" ;
     
   module.portlet = {}
-  module.portlet.ecmadmin = 
-    new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-administration", "exo-portlet", module.version).
+  module.portlet.ecmadmin = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-administration", "exo-portlet", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.cms", "jar",  module.version)) .     
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.publication", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.document.viewer", "jar", module.version)).
@@ -34,66 +33,50 @@ function getModule(params) {
     addDependency(new Project("com.sun.xml.stream", "sjsxp", "jar", "1.0")).
     addDependency(new Project("org.icepdf", "icepdf-core", "jar", "3.0")).
     addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "3.0")).
-		addDependency(new Project("org.fontbox", "fontbox", "jar", "0.1.0"));
-    
-    module.portlet.ecmadmin.deployName = "ecmadmin";
+    addDependency(new Project("org.fontbox", "fontbox", "jar", "0.1.0"));
+  module.portlet.ecmadmin.deployName = "ecmadmin";
   
-  module.portlet.ecmexplorer = 
-    new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-explorer", "exo-portlet", module.version);
-  
+  module.portlet.ecmexplorer = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-explorer", "exo-portlet", module.version);
   module.portlet.ecmexplorer.deployName = "ecmexplorer";
 
-  module.portlet.ecmbrowsecontent = 
-    new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-browsecontent", "exo-portlet", module.version);
-  
+  module.portlet.ecmbrowsecontent = new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-browsecontent", "exo-portlet", module.version);
   module.portlet.ecmbrowsecontent.deployName = "ecmbrowsecontent";
 
-  module.portlet.jcr_console = 
-    new Project("org.exoplatform.ecms", "exo.ecm.dms.core.portlet.jcr-console", "exo-portlet", module.version).
+  module.portlet.jcr_console = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.portlet.jcr-console", "exo-portlet", module.version).
     addDependency(new Project("exo-weblogic", "exo-weblogic-authproviders", "jar", "1.0")).
-	  addDependency(new Project("exo-weblogic", "exo-weblogic-loginmodule", "jar", "1.0")).  
-	  addDependency(new Project("commons-logging", "commons-logging", "jar", "1.0.4"));
+    addDependency(new Project("exo-weblogic", "exo-weblogic-loginmodule", "jar", "1.0")).  
+    addDependency(new Project("commons-logging", "commons-logging", "jar", "1.0.4"));
   
-  module.gadgets = 
-    new Project("org.exoplatform.ecms", "exo.ecm.dms.core.gadgets", "war", module.version).
+  module.gadgets = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.gadgets", "war", module.version).
     addDependency(ws.frameworks.json);  
-    module.gadgets.deployName = "eXoDMSGadgets";
+  module.gadgets.deployName = "eXoDMSGadgets";
   
   module.application = {}
+  
   module.application.rest = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.publication","jar", module.version).
-  	addDependency(ws.frameworks.json);
+    addDependency(ws.frameworks.json);
   
   module.web = {}
-  module.web.eXoDMSResources = 
-    new Project("org.exoplatform.ecms", "exo.ecm.dms.core.web.eXoDMSResources", "war", module.version) ;  
+  
+  module.web.eXoDMSResources = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.web.eXoDMSResources", "war", module.version) ;  
   module.web.eXoDMSResources.deployName = "eXoDMSResources" ;
 	
-	module.web.fck = 
-    new Project("org.exoplatform.ecms", "exo.ecm.dms.core.web.fck", "war", module.version) ;  
+  module.web.fck = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.web.fck", "war", module.version) ;  
   module.web.fck.deployName = "fck" ;
-      
-	module.extension = {};
-  module.extension.webapp = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.extension.webapp", "war", module.version).
-		addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.extension.config", "jar", module.version));
-  module.extension.webapp.deployName = "dms-extension";	
 
-	module.demo = {};
-   // demo portal
-   module.demo.portal = 
-	   new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.webapp", "war", module.version).
-	   addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.config", "jar", module.version));
-	   module.demo.portal.deployName = "dmsdemo";  
-	   
-   // demo rest endpoint	   
-   module.demo.rest = 
-       new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.rest-war", "war", module.version);
-       module.demo.rest.deployName = "rest-dmsdemo"; 
-       
-	
+  module.demo = {};
+  
+  module.demo.portal = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.webapp", "war", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.config", "jar", module.version));
+  module.demo.portal.deployName = "dmsdemo";  
+
+  module.demo.rest = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.rest-war", "war", module.version);
+    module.demo.rest.deployName = "rest-dmsdemo";
+
   module.server = {}
 
-   module.server.tomcat = {}
-   module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.server.tomcat.patch", "jar", module.version);
+  module.server.tomcat = {}
+  module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.server.tomcat.patch", "jar", module.version);
 
   return module;
 }

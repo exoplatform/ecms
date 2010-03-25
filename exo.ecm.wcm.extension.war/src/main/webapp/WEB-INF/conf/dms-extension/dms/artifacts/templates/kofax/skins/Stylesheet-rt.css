@@ -1,0 +1,14 @@
+/**
+  RTL skin for kfx:document template
+*/
+.WorkKofax {
+	margin: 10px;
+}
+
+.WorkKofax .UIGrid {
+	width: 97%;
+}
+
+.WorkKofax .UIGrid td {
+	border: 1px solid #CCCCCC
+}

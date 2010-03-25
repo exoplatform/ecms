@@ -1,0 +1,89 @@
+<%
+  def node = uicomponent.getNode();
+  StringBuilder sB;
+%>
+<table class="UIGrid">      	    
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("SendMail.view.label.action-name")%></td>
+    <td>
+      <% if(node.hasProperty("exo:name")) {%>
+        <%=node.getProperty("exo:name").getString()%>
+      <%}%>
+    </td>
+  </tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("SendMail.view.label.isDeep")%></td>
+    <td>
+    <%if(node.hasProperty("exo:isDeep")){%>
+      <%=node.getProperty("exo:isDeep").getString()%>
+    <%}%> 
+    </td>
+  </tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("SendMail.view.label.nodeTypeName")%></td>
+    <td>
+    <%if(node.hasProperty("exo:nodeTypeName")){
+      sB = new StringBuilder();
+      def values = node.getProperty("exo:nodeTypeName").getValues();          
+      for(value in values) {
+        sB.append(value.getString()).append(",");
+      } 
+      if (sB.length() > 0) {
+        %>
+        <%= sB.deleteCharAt(sB.length()-1)%>        
+      <%
+        }
+      }%>
+    </td> 
+  </tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("SendMail.view.label.lifecycle")%></td>
+    <td>
+      <%if(node.hasProperty("exo:lifecyclePhase")){
+        sB = new StringBuilder();
+        def values = node.getProperty("exo:lifecyclePhase").getValues();          
+        for(value in values) {
+          sB.append(value.getString()).append(",");
+        } 
+        if (sB.length() > 0) {
+          %>
+          <%= sB.deleteCharAt(sB.length()-1)%>        
+        <%
+          }
+        }%>
+    </td>         
+  </tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("SendMail.view.label.affectedNodeTypeNames")%></td>
+    <td>
+    <%if(node.hasProperty("exo:affectedNodeTypeNames")){
+      sB = new StringBuilder();
+      def values = node.getProperty("exo:affectedNodeTypeNames").getValues();          
+      for(value in values) {
+        sB.append(value.getString()).append(",");
+      } 
+      if (sB.length() > 0) {
+      %>
+        <%= sB.deleteCharAt(sB.length()-1)%>        
+      <%
+        }
+      }%>
+    </td> 
+  </tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("SendMail.view.label.description")%></td>
+    <td>
+      <% if(node.hasProperty("exo:description")) {%>
+        <%=node.getProperty("exo:description").getString()%>
+      <%}%>
+     </td>
+  </tr>
+  <tr>
+    <td style="width:25%"><%=_ctx.appRes("SendMail.view.label.mail-to")%></td>
+    <td>
+      <% if(node.hasProperty("exo:to")) {%>
+        <%=node.getProperty("exo:to").getString()%>
+      <%}%>
+    </td>
+  </tr>
+</table>

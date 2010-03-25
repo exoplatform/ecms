@@ -1,0 +1,87 @@
+/**
+  LTR skin for exo:sample template
+*/
+.WorkSample {
+	padding: 8px;
+}
+
+.WorkSample label.text { 
+	font: normal bold 11px Verdana;
+	color: black; 
+	line-height: 18px;
+}
+
+.WorkSample span.text  { 
+	font-size: 11px; 
+	vertical-align:bottom; 
+	color: #00000; 
+}
+
+.WorkSample div.summary { 
+	width: 96%; 
+	height: 160px ; 
+	font-size: 11px; 
+	padding: 5px 5px 5px 10px;
+	color: black ; 
+	font-weight: normal;
+	overflow: auto;
+} 
+
+.WorkSample div.content { 
+	width: 96%; 
+	height: 160px ; 
+	font-size: 11px; 
+	padding: 5px 5px 5px 10px;
+	color: black ; 
+	font-weight: normal;
+	overflow: auto;
+}
+
+.WorkSample .HeaderSampleBG {
+	background: url('/eXoDMSResources/skin/images/event/EventFrameBG.gif') repeat-x;
+	margin-bottom: 2px;
+	padding: 0px 5px 0px 5px; 
+	height: 18px;
+	border: solid 1px #bdbdbd;
+	border-bottom: none;
+	line-height: 18px;
+}
+
+.WorkSample .SampleBG {
+	height: 25px;
+	line-height: 25px;
+	border-bottom: solid 1px #BDBDBD;
+}
+.WorkSample .RemoveAttachments {
+	background: url('/eXoDMSResources/skin/images/article/DustBin.gif') no-repeat left top;
+	margin: 0px 5px 0px 3px;
+	padding-left: 18px;
+	height: 16px;
+	cursor: pointer;
+}
+
+.WorkSample .RemoveNodeFloat{
+	float: left;
+}
+.WorkSample .LableLeftDescription{
+	width: 47.5%; 
+	float: left;
+	margin-top: 5px; 
+	border: 1px solid #bdbdbd
+}
+.WorkSample .LableRightDescription{
+	width: 47.5%; 
+	float: right;
+	margin-top: 5px; 
+	border: 1px solid #bdbdbd
+}
+
+.WorkSample .LableLeftDescription p a {
+	color: #058EE6;
+	text-decoration: underline;
+}
+
+.WorkSample .LableRightDescription p a {
+	color: #058EE6;
+	text-decoration: underline;
+}
