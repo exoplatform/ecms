@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+	<component>
+	  <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
+	  <type>org.exoplatform.services.wcm.extensions.publication.WCMPublicationServiceImpl</type>
+    <component-plugins>
+		  <component-plugin>
+		    <name>States and versions based publication</name>
+		    <set-method>addPublicationPlugin</set-method>
+		    <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin</type>
+		    <description>This publication lifecycle publish a web content or DMS document to a portal page with more state and version.</description>	    	    	   
+		  </component-plugin>
+		  <component-plugin>
+		    <name>Authoring publication</name>
+		    <set-method>addPublicationPlugin</set-method>
+		    <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin</type>
+		    <description>This publication lifecycle publish a web content or DMS document to a portal page with more states and version.</description>	    	    	   
+		  </component-plugin>
+		  <component-plugin>
+		    <name>Simple publication</name>
+		    <set-method>addPublicationPlugin</set-method>
+		    <type>org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin</type>
+		    <description>This publication lifecycle publish a web content or DMS document to a portal page without version</description>	    	    	   
+		  </component-plugin>
+	  </component-plugins>
+   </component>
+<component>
+	  <key>org.exoplatform.services.wcm.extensions.publication.PublicationManager</key>
+	  <type>org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl</type>
+</component>	
+
+<external-component-plugins>
+  <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+  <component-plugin>
+    <name>PublicationService.event.postUpdateState</name>
+    <set-method>addListener</set-method>
+    <type>org.exoplatform.services.wcm.extensions.publication.listener.post.PostUpdateStateEventListener</type>
+    <description>this listener will be called every time a content changes its current state</description>
+  </component-plugin>
+</external-component-plugins>
+
+<external-component-plugins>
+  	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>		
+	  <component-plugin>
+	    <name>add.nodeType</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+	    <priority>100</priority>
+	    <init-params>
+	      <values-param>
+	        <name>autoCreatedInNewRepository</name>
+	        <description>Node types configuration file</description>
+	        <value>jar:/conf/wcm-extensions-nodetypes.xml</value>
+	      </values-param>
+	    </init-params>
+	  </component-plugin>
+	</external-component-plugins>
+</configuration>
