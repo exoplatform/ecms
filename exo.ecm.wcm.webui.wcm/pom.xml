@@ -47,11 +47,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo.ecm.wcm.component.wcm</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.wcm.component.search</artifactId>
       <version>${project.version}</version>
     </dependency>

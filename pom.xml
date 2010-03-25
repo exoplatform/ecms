@@ -397,7 +397,6 @@
     <module>exo.ecm.wcm.component.migration.1.2.workspaces</module>
     <module>exo.ecm.wcm.component.newsletter</module>
     <module>exo.ecm.wcm.component.search</module>
-    <module>exo.ecm.wcm.connector.fckeditor</module>
     <module>exo.ecm.wcm.demo.config</module>
     <module>exo.ecm.wcm.demo.ear</module>
     <module>exo.ecm.wcm.demo.rest-war</module>

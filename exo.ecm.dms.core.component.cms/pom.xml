@@ -61,12 +61,6 @@
       <version>${org.exoplatform.portal.version}</version>
       <scope>compile</scope>
     </dependency>
-    <!--dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo.ecm.dms.core.component.publication</artifactId>
-      <version>${project.version}</version>
-      <scope>compile</scope>
-    </dependency-->
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.dms.core.webui.ext</artifactId>
