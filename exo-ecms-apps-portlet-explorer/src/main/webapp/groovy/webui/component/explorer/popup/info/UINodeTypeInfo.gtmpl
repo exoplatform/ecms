@@ -27,7 +27,7 @@
  %>
  <%
   def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecm/javascript/');
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
   rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIJCRExplorer.loadNodeTypeScroll()');
   
 %>

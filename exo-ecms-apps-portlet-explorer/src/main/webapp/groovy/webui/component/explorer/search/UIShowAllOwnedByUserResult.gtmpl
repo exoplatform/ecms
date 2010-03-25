@@ -19,8 +19,8 @@
   def ownedByUserNodesList = uicomponent.getAllOwnedByUserNodes(); 
   if(ownedByUserNodesList == null) return;
   def rcontext = _ctx.getRequestContext();
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecm/javascript/');
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm/javascript/');
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecmexplorer/javascript/');
   java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage();
 %>

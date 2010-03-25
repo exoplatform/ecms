@@ -59,7 +59,10 @@
                   <string>dms-extension</string>
                 </value>
                 <value>
-                  <string>ecm</string>
+                  <string>ecmexplorer</string>
+                </value>
+				<value>
+                  <string>ecmadmin</string>
                 </value>
                 <value>
                   <string>ecm-wcm-extension</string>

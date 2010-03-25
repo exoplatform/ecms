@@ -22,9 +22,9 @@
 	def rcontext = _ctx.getRequestContext() ;
 	def data = "";
 	String imgSrc = "";
-	rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm/javascript/');
-	rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm/javascript/');    
-	rcontext.getJavascriptManager().importJavascript('eXo.ecm.UICoverFlow','/ecm/javascript/');
+	rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecmexplorer/javascript/');
+	rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecmexplorer/javascript/');    
+	rcontext.getJavascriptManager().importJavascript('eXo.ecm.UICoverFlow','/ecmexplorer/javascript/');
 	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
 %>
   <div id="$uicomponent.id" class="UISlideShowView UICoverFlowView">

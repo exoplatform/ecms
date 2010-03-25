@@ -27,7 +27,7 @@
 
   <!-- ContentBrowserPortlet skin -->
   <portlet-skin>
-    <application-name>ecm</application-name>
+    <application-name>ecmbrowsecontent</application-name>
     <portlet-name>ContentBrowserPortlet</portlet-name>
     <skin-name>Default</skin-name>
     <css-path>/skin/webui/component/browse/DefaultStylesheet.css</css-path>

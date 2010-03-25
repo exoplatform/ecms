@@ -24,7 +24,7 @@
   }
 	
   def rcontext = _ctx.getRequestContext() ;	
-  rcontext.getJavascriptManager().importJavascript('eXo.core.Browser','/ecm/javascript/') ;  
+  rcontext.getJavascriptManager().importJavascript('eXo.core.Browser','/ecmexplorer/javascript/') ;  
   rcontext.getJavascriptManager().addJavascript("eXo.core.Browser.onResize();");
 	
 	
