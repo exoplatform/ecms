@@ -420,6 +420,9 @@
     <module>exo.ecm.workflow.demo.config</module>
     <module>exo.ecm.workflow.demo.ear</module>
     <module>exo.ecm.workflow.demo.webapp</module>
+    <module>exo.ecm.workflow.extension.config</module>
+    <module>exo.ecm.workflow.extension.ear</module>
+    <module>exo.ecm.workflow.extension.webapp</module>
     <module>exo.ecm.workflow.portlet.workflow</module>
     <module>exo.ecm.workflow.server.bonita-server-env</module>
     <module>exo.ecm.workflow.server.jboss.patch</module>

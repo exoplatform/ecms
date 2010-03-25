@@ -1,42 +1,59 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.ecm.workflow</groupId>
-    <artifactId>extension</artifactId>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo.ecms</artifactId>
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.exoplatform.ecm.workflow.extension</groupId>
   <artifactId>exo.ecm.workflow.extension.webapp</artifactId>
   <packaging>war</packaging>
   <name>eXo WORKFLOW Extension configuration war</name>
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>exo.ecm.workflow.bp.${workflowEngine}.payraise</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>exo.ecm.workflow.bp.${workflowEngine}.holiday</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>      
+  </dependencies>
   <build>
 	<plugins>
-		  <plugin>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-war-plugin</artifactId>
-		    <version>2.0.2</version>
-		    <configuration>
-				<webResources>
-				   <resource>
-					   <directory>${basedir}/src/main/webapp</directory>
-					   <filtering>true</filtering>
-					 </resource>
-					 <resource>
-				      <directory>${exo.projects.app.mvn.repo}/org/exoplatform/ecm/workflow/bp/exo.ecm.workflow.bp.${workflowEngine}.payraise/${project.version}</directory>
-				      <targetPath>WEB-INF/conf/bp</targetPath>
-				      <includes><include>*.jar</include></includes>
-				      <excludes><exclude>*-sources.jar</exclude></excludes>
-				    </resource>
-				    <resource>
-				      <directory>${exo.projects.app.mvn.repo}/org/exoplatform/ecm/workflow/bp/exo.ecm.workflow.bp.${workflowEngine}.holiday/${project.version}</directory>
-				      <targetPath>WEB-INF/conf/bp</targetPath>
-				      <includes><include>*.jar</include></includes>
-		 			  <excludes><exclude>*-sources.jar</exclude></excludes>
-				    </resource>
-				</webResources>
-	 		</configuration>
-       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+ 		        <artifactId>maven-dependency-plugin</artifactId>
+ 		        <executions>
+ 		          <execution>
+ 		            <id>copy</id>
+ 		            <phase>prepare-package</phase>
+ 		            <goals>
+ 		              <goal>copy</goal>
+ 		            </goals>
+ 		            <configuration>
+ 		              <artifactItems>
+ 		                <artifactItem>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>exo.ecm.workflow.bp.${workflowEngine}.payraise</artifactId>
+      <version>${project.version}</version>
+                     </artifactItem>
+ 		                <artifactItem>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>exo.ecm.workflow.bp.${workflowEngine}.holiday</artifactId>
+      <version>${project.version}</version>
+ 		                </artifactItem>
+ 		              </artifactItems>
+ 		              <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/conf/bp</outputDirectory>
+ 		              <overWriteSnapshots>true</overWriteSnapshots>
+ 		            </configuration>
+ 		          </execution>
+ 		        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>
