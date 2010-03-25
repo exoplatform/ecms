@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<configuration>  
+	
+	<component>
+    <key>org.exoplatform.services.workflow.WorkflowFormsService</key>
+    <type>org.exoplatform.services.workflow.impl.bonita.WorkflowFormsServiceImpl</type>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.workflow.WorkflowFileDefinitionService</key>
+    <type>org.exoplatform.services.workflow.impl.bonita.JCRFileDefinitionServiceImpl</type>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.workflow.WorkflowServiceContainer</key>
+    <type>org.exoplatform.services.workflow.impl.bonita.WorkflowServiceContainerImpl</type>
+    <init-params>
+			<value-param>
+	    	<name>super.user</name>
+	    	<value>root</value>
+	    </value-param>
+			<value-param>
+	    	<name>super.pass</name>
+	    	<value>gtn</value>
+	    </value-param>	        
+	    <value-param>
+	    	<name>jaas.login.context</name>
+	    	<value>gatein-domain</value>
+	    </value-param>
+    </init-params>
+	</component>
+	
+	<external-component-plugins>
+		<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>	
+	  <component-plugin>
+	    <name>deploy.predefined.processes</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.workflow.PredefinedProcessesPlugin</type>
+	    <init-params>
+	      <object-param>
+	        <name>predefined.processes</name>
+	        <description>load of default business processes</description>
+	        <object type="org.exoplatform.services.workflow.ProcessesConfig">
+	          <field name="processLocation"><string>war:/conf/bp</string></field>
+	          <field name="predefinedProcess">
+	            <collection type="java.util.HashSet">
+	            <value><string>/exo.ecm.workflow.bp.bonita.payraise-${project.version}.jar</string></value>
+	            <value><string>/exo.ecm.workflow.bp.bonita.holiday-${project.version}.jar</string></value>
+	            </collection>
+	          </field>
+	        </object>
+	      </object-param>
+	    </init-params>
+	  </component-plugin>
+	</external-component-plugins>
+</configuration>

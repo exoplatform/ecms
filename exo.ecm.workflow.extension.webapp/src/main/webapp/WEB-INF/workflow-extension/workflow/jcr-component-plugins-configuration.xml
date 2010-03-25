@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+  
+  <external-component-plugins>
+  	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+		<component-plugin>
+	    <name>add.namespaces</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+	    <init-params>
+	      <properties-param>
+	        <name>namespaces</name>
+	        <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
+	        <property name="rma" value="http://www.rma.com/jcr/"/>
+			<property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/"/>
+	        <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/"/>
+	        <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/"/>
+	        <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/"/>
+	      </properties-param>
+	    </init-params>
+	  </component-plugin>
+	  <component-plugin>
+	    <name>add.nodeType</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+	    <init-params>
+	      <values-param>
+	        <name>autoCreatedInNewRepository</name>
+	        <description>Node types configuration file</description>
+	        <value>war:/workflow-extension/workflow/workflow-nodetypes-configuration.xml</value>
+	      </values-param>
+	    </init-params>
+	  </component-plugin>
+	</external-component-plugins>
+	   
+</configuration>
