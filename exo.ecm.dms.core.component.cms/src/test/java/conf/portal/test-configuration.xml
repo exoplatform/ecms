@@ -93,6 +93,10 @@
 	<component>
 		<type>org.exoplatform.groovyscript.text.TemplateService</type>
 	</component>
+
+  <component>
+    <type>org.exoplatform.portal.resource.SkinService</type>
+  </component>
 	
   <component>
     <type>org.exoplatform.container.xml.PortalContainerInfo</type>
@@ -104,6 +108,7 @@
 	<import>classpath:/conf/standalone/portal/test-portal-configuration.xml</import>
 	<import>classpath:/conf/standalone/core/test-core-configuration.xml</import>
 	<import>classpath:/conf/standalone/jcr/test-jcr-configuration.xml</import>
+	<import>classpath:/conf/standalone/jcr/test-wcmjcr-configuration.xml</import>
 	
 	<import>classpath:/conf/standalone/system-configuration.xml</import>
 	<import>classpath:/conf/standalone/test-organization-configuration.xml</import>
@@ -119,4 +124,5 @@
 	<import>classpath:/conf/standalone/test-scripts-configuration.xml</import>  
   <import>classpath:/conf/standalone/jcr-component-plugins-configuration.xml</import>
   <import>classpath:/conf/standalone/dms-document-type-configuration.xml</import>
+  <import>classpath:/conf/standalone/wcm/test-configuration.xml</import>
 </configuration>
