@@ -356,7 +356,6 @@
   <modules>
     <module>exo.ecm.dms.core.component.cms</module>
     <module>exo.ecm.dms.core.component.document.viewer</module>
-    <module>exo.ecm.dms.core.component.migration.2.3.drives</module>
     <module>exo.ecm.dms.core.component.migration.2.5.datas</module>
     <module>exo.ecm.dms.core.component.migration.2.5.workspaces</module>
     <module>exo-ecms-core-publication</module>
