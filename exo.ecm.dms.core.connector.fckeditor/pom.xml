@@ -6,12 +6,10 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.dms.core.connector.fckeditor</artifactId>
   <packaging>jar</packaging>
   <name>eXo DMS FCKEditor Connector</name>
   <description>eXo FCKConnector Service</description>
-  <url>http://www.exoplatform.org</url>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>
@@ -96,7 +94,5 @@
         </includes>
       </resource>
     </resources>
-    <sourceDirectory>src/main/java</sourceDirectory>
-    <outputDirectory>target/classes</outputDirectory>
   </build>
 </project>

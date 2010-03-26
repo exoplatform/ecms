@@ -6,12 +6,9 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.dms.core.component.cms</artifactId>
-  <packaging>jar</packaging>
   <name>eXo CMS Service</name>
   <description>eXo CMS Service</description>
-  <url>http://www.exoplatform.org</url>
   <dependencies>
     <dependency>
       <groupId>org.chromattic</groupId>
@@ -205,9 +202,5 @@
         </configuration>
       </plugin>
     </plugins>
-    <sourceDirectory>src/main/java</sourceDirectory>
-    <outputDirectory>target/classes</outputDirectory>
-    <testSourceDirectory>src/test/java</testSourceDirectory>
-    <testOutputDirectory>target/test-classes</testOutputDirectory>
   </build>
 </project>

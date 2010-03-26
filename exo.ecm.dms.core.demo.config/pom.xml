@@ -6,9 +6,7 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.dms.core.demo.config</artifactId>
-  <packaging>jar</packaging>
   <name>eXo DMS Demo configuration jar</name>
   <build>
     <resources>
@@ -27,7 +25,5 @@
         </includes>
       </resource>
     </resources>
-    <sourceDirectory>src/main/java</sourceDirectory>
-    <outputDirectory>target/classes</outputDirectory>
   </build>
 </project>

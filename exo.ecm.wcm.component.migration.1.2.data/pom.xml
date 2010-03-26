@@ -7,10 +7,8 @@
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
   <artifactId>exo.ecm.wcm.component.migration.1.2.data</artifactId>
-  <packaging>jar</packaging>
   <name>eXo WCM Migration Data Service</name>
   <description>eXo WCM Migration Data Service</description>
-  <url>http://www.exoplatform.org</url>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>

@@ -301,6 +301,7 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <!-- To be removed : http://jira.exoplatform.org/browse/ECMS-120 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>

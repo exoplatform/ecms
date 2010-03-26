@@ -6,12 +6,9 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.dms.ext.contentvalidation.bp.bonita.content-publishing</artifactId>
-  <packaging>jar</packaging>
   <name>eXo content publishing BP for Bonita</name>
   <description>eXo content publishing BP for Bonita</description>
-  <url>http://www.exoplatform.org</url>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>

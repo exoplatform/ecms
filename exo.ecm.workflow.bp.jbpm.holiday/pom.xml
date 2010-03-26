@@ -6,12 +6,9 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.workflow.bp.jbpm.holiday</artifactId>
-  <packaging>jar</packaging>
   <name>eXo WORKFLOW holidays BP for jBPM</name>
   <description>eXo holidays BP for jBPM</description>
-  <url>http://www.exoplatform.org</url>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>

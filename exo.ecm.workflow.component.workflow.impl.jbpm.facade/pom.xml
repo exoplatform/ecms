@@ -6,12 +6,9 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-Beta02-SNAPSHOT</version>
   </parent>
-  <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo.ecm.workflow.component.workflow.impl.jbpm.facade</artifactId>
-  <packaging>jar</packaging>
   <name>eXo WORKFLOW Service Impl for jBPM</name>
   <description>eXo WORKFLOW Impl for jBPM</description>
-  <url>http://www.exoplatform.org</url>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
