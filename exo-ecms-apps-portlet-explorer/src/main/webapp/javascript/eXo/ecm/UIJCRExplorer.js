@@ -78,21 +78,6 @@ UIJCRExplorer.prototype.initNodeTypeScroll = function() {
 	scrollMgr.renderElements();
 };
 
-UIJCRExplorer.prototype.initEvent = function(uniqueId) {
-	var store =	eXo.portal.UIControlWorkspace.showWorkspace;
-	eXo.portal.UIControlWorkspace.showWorkspace = function() {
-		store.call(eXo.portal.UIControlWorkspace);
-		eXo.ecm.UIJCRExplorer.dropDownIconList(uniqueId);
-	}
-	eXo.ecm.UIJCRExplorer.dropDownIconList(uniqueId);
-	if (eXo.core.Browser.isFF()) {
-		eXo.core.Browser.addOnResizeCallback(
-			'ECMresize', 
-			function(){eXo.ecm.UIJCRExplorer.dropDownIconList(uniqueId)}
-		);
-	}
-};
-
 UIJCRExplorer.prototype.dropDownIconList = function(uniqueId) {
  	var DOMUtil = eXo.core.DOMUtil;
 	var actionBar = document.getElementById(uniqueId);

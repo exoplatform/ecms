@@ -1,7 +1,5 @@
 <%
 	uicomponent.addInterceptor("ecm-explorer/interceptor/PostFilePlanInterceptor.groovy", "post") ;
-  def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
 %>
 
 <%/*Begin UITabPane*/%>

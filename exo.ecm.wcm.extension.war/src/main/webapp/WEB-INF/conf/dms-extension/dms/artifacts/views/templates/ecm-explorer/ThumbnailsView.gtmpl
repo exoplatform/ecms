@@ -30,8 +30,6 @@
   def size = uicomponent.getChildrenList().size();
   def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UISimpleView','/ecmexplorer/javascript/');
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecmexplorer/javascript/') ;  
   rcontext.getJavascriptManager().addOnLoadJavascript("function(){eXo.ecm.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');}");
 	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UISimpleView.setHeight");
 	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");

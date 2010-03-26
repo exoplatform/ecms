@@ -19,8 +19,6 @@
   def hiddenNodesList = uicomponent.getAllHiddenNodes(); 
   if(hiddenNodesList == null) return;
   def rcontext = _ctx.getRequestContext();
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecmexplorer/javascript/');
   java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage();
 %>

@@ -1,6 +1,5 @@
 <%
   def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs') ;
 	int step = uicomponent.getSelectedStep();
 	String compName = uicomponent.getName() ;
 %>

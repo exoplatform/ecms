@@ -3,7 +3,6 @@
 	import org.exoplatform.portal.webui.util.Util;
 	def rcontext = _ctx.getRequestContext() ;
 	def docBase = Util.getPortalRequestContext().getRequestContextPath();
-	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
 	def String htmlWYSIWYGFormId = "htmlData[" + uicomponent.hashCode() + "]";
 	def String cssFormId = "ContentCSS[" + uicomponent.hashCode() + "]";
 	def String jsFormId = "ContentJS[" + uicomponent.hashCode() + "]";

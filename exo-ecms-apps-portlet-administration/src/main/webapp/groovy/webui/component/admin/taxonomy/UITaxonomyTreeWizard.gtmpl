@@ -8,8 +8,6 @@
 %>
 
 <%
-  def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs') ;
 	String compName = uicomponent.getName() ;
 %>
 <div class="UITaxonomyTreeWizard">

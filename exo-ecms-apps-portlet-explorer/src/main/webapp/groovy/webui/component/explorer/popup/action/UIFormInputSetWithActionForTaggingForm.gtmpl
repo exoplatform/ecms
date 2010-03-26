@@ -12,8 +12,6 @@
 	import org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm;
 
 	def context = _ctx.getRequestContext() ;
-  context.getJavascriptManager().importJavascript('eXo.ecm.AutoComplete','/ecmexplorer/javascript/') ;
-//  context.getJavascriptManager().addJavascript("eXo.ecm.AutoComplete.createTags('UITaggingForm');") ;
 	context.getJavascriptManager().addOnLoadJavascript("eXo.ecm.AutoComplete.disposeCount"); 
 	
 %>

@@ -27,8 +27,6 @@
   
   def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext();
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIListView','/ecmexplorer/javascript/');
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecmexplorer/javascript/') ;  
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
 %>
 <div id="$componentId">

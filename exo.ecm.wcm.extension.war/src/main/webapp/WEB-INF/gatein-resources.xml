@@ -25,11 +25,28 @@
   xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_0 http://www.gatein.org/xml/ns/gatein_resources_1_0" 
   xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_0">
 
-	<javascript>
+  <javascript>
+    <param>
+      <js-module>eXo.ecm.ExoEditor</js-module>
+      <js-path>/javascript/eXo/ecm/ExoEditor.js</js-path>
+    </param>
+	<param>
+      <js-module>eXo.ecm.DMSBrowser</js-module>
+      <js-path>/javascript/eXo/ecm/DMSBrowser.js</js-path>
+    </param>
     <param>
       <js-module>FCKEditor</js-module>
       <js-path>/fckeditor/fckeditor.js</js-path>
       <js-priority>50</js-priority>
+    </param>
+	<param>
+      <js-module>eXo.ecm.ECMUtils</js-module>
+      <js-path>/javascript/eXo/ecm/ECMUtils.js</js-path>
+	  <js-priority>100</js-priority>
+    </param>
+	<param>
+      <js-module>eXo.ecm.Select_fix</js-module>
+      <js-path>/javascript/eXo/ecm/Select_fix.js</js-path>
     </param>
   </javascript>
 </gatein-resources>

@@ -5,9 +5,11 @@
 	var DOM = eXo.core.DOMUtil;
 	var Browser = eXo.core.Browser;
 	var RightClick = eXo.webui.UIRightClickPopupMenu;
-	
+	if (eXo.require && !RightClick) {
+		eXo.require('eXo.webui.UIRightClickPopupMenu');
+	    RightClick = eXo.webui.UIRightClickPopupMenu;
+	}
 	ECMUtils.prototype.popupArray = [];
-	
 	ECMUtils.prototype.init = function(portletId) {
 		var portlet = document.getElementById(portletId) ;
 		if(!portlet) return ;

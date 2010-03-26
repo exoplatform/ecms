@@ -46,10 +46,6 @@
       <js-path>/javascript/eXo/ecm/flowplayer.playlist-3.0.7.js</js-path>
     </param>
 	<param>
-      <js-module>eXo.ecm.ECMUtils</js-module>
-      <js-path>/javascript/eXo/ecm/ECMUtils.js</js-path>
-    </param>
-	<param>
       <js-module>eXo.ecm.AutoComplete</js-module>
       <js-path>/javascript/eXo/ecm/AutoComplete.js</js-path>
     </param>
@@ -58,20 +54,8 @@
       <js-path>/javascript/eXo/ecm/CoverFlowLib.js</js-path>
     </param>
 	<param>
-      <js-module>eXo.ecm.DMSBrowser</js-module>
-      <js-path>/javascript/eXo/ecm/DMSBrowser.js</js-path>
-    </param>
-	<param>
-      <js-module>eXo.ecm.ExoEditor</js-module>
-      <js-path>/javascript/eXo/ecm/ExoEditor.js</js-path>
-    </param>
-	<param>
       <js-module>eXo.ecm.Mootools</js-module>
       <js-path>/javascript/eXo/ecm/Mootools.js</js-path>
-    </param>
-	<param>
-      <js-module>eXo.ecm.Select_fix</js-module>
-      <js-path>/javascript/eXo/ecm/Select_fix.js</js-path>
     </param>
 	<param>
       <js-module>eXo.ecm.Slideshow</js-module>
@@ -80,10 +64,6 @@
 	<param>
       <js-module>eXo.ecm.UICoverFlow</js-module>
       <js-path>/javascript/eXo/ecm/UICoverFlow.js</js-path>
-    </param>
-	<param>
-      <js-module>eXo.ecm.UIDMSWorkspace</js-module>
-      <js-path>/javascript/eXo/ecm/UIDMSWorkspace.js</js-path>
     </param>
    	<param>
       <js-module>eXo.ecm.UIJCRExplorer</js-module>

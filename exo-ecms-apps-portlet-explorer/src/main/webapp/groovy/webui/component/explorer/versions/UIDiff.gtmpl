@@ -2,8 +2,6 @@
 	import org.exoplatform.services.document.diff.Delta ;
 	
 	def rcontext = _ctx.getRequestContext() ;
-	def jm = rcontext.getJavascriptManager();
-  jm.importJavascript('eXo.ecm.ECMUtils','/ecm/javascript/') ;
 %>
 <div class="UIDiff">
 	<div class="FileContent">

@@ -14,7 +14,6 @@
   if(uicomponent.getChildrenList().size() > 0) {
     def viewComponentId  = new Date().getTime();
 	  def rcontext = _ctx.getRequestContext() ;
-	  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UICoverFlow','/ecm/javascript/'); 
 	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
 %>
 	<div id="$uicomponent.id" class="UICoverFlowView">

@@ -24,8 +24,6 @@
   }
   
   if(mimeType.equals("text/html") || mimeType.equals("application/rss+xml")) { 
-	  def rqcontext = _ctx.getRequestContext() ;
-	  rqcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
 %>
 
 	<div class="UITabPane">

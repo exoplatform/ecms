@@ -1,8 +1,4 @@
 <%
-  def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
-%>
-<%
   if(uicomponent.isShowViewFile() && !uicomponent.isJcrEnable()) {
 %>
 <div class="UIResizableBlock">

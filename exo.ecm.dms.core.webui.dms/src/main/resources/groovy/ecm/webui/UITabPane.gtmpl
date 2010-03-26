@@ -1,8 +1,6 @@
 <%
   import org.exoplatform.webui.core.UIPopupWindow;
   
-  def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
 %>
 
 <div class="UITabPane" id="$uicomponent.id">

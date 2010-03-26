@@ -16,7 +16,6 @@ UIFormCheckBoxInput uiDocumentCheckBox = uicomponent.getUIFormCheckBoxInput(UISe
 String actionLabel = _ctx.appRes("UIDefaultSearchForm.action.Search");
 String link = uicomponent.event("Search");
 def context = _ctx.getRequestContext();
-context.getJavascriptManager().importJavascript("eXo.wcm.frontoffice.public.Search", "/eXoWCMResources/javascript/");
 context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + uicomponent.id + '");');
 %>
 

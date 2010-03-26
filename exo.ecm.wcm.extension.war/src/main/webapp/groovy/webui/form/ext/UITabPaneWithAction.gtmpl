@@ -5,7 +5,6 @@
 	 *          chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
 	 * Oct 29, 2009  
 	 */
-	 _ctx.getRequestContext().getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
 %>
 
 <div class="UITabPane" id="$uicomponent.id">
