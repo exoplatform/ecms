@@ -518,25 +518,38 @@ public class UIPublicationPanel
    */
   boolean isAuthorizedByRole(State state, Identity currentUser, NodeImpl node) {
     try {
-      String role = state.getRole();
-      AccessControlList acl = node.getACL();
-      if (acl.hasPermissions()) {
-        List<AccessControlEntry> entries = acl.getPermissionEntries();
-        for (AccessControlEntry accessControlEntry : entries) {
-          String identity = accessControlEntry.getIdentity();
-          if (identity.indexOf(':') > 0) {
-            // write access on node is defined by 'set_property' in exo JCR
-            if (PermissionType.SET_PROPERTY.equals(accessControlEntry.getPermission())) {
-              String authorizedGroup = identity.split(":")[1];
-              // user must have the configured role in one of the node's
-              // authorized groups
-              if (currentUser.isMemberOf(authorizedGroup, role)) {
-                return true;
+      String role_ = state.getRole();
+
+      List<String> roles = new ArrayList<String>();
+      if (role_ != null) {
+        roles.add(role_);
+      }
+      if (state.getRoles() != null) {
+        roles.addAll(state.getRoles());
+      }
+      for (String role : roles) {
+
+        AccessControlList acl = node.getACL();
+        if (acl.hasPermissions()) {
+          List<AccessControlEntry> entries = acl.getPermissionEntries();
+          for (AccessControlEntry accessControlEntry : entries) {
+            String identity = accessControlEntry.getIdentity();
+            if (identity.indexOf(':') > 0) {
+              // write access on node is defined by 'set_property' in exo JCR
+              if (PermissionType.SET_PROPERTY.equals(accessControlEntry.getPermission())) {
+                String authorizedGroup = identity.split(":")[1];
+                // user must have the configured role in one of the node's
+                // authorized groups
+                if (currentUser.isMemberOf(authorizedGroup, role)) {
+                  return true;
+                }
               }
             }
           }
         }
+
       }
+
     } catch (Exception e) {
       LOG.error("Failed to extract node permissions", e);
     }

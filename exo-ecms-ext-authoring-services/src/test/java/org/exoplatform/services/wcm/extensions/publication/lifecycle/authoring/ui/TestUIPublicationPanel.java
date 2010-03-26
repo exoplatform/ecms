@@ -29,6 +29,8 @@ import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
+
 import junit.framework.TestCase;
 import static org.mockito.Mockito.*;
 
@@ -65,6 +67,33 @@ public class TestUIPublicationPanel extends TestCase {
     assertTrue("tom should be allowed", panel.isAuthorizedByRole(state, tom, node)); 
     assertFalse("bill should not be allowed", panel.isAuthorizedByRole(state, bill, node));
 
+  }
+  
+  
+  public void testIsAuthorizedByRoles() throws Exception {
+    UIPublicationPanel panel = mock(UIPublicationPanel.class);
+
+    Identity tom = createIdentity("tom","validator:/org/human-resources");
+    Identity bill = createIdentity("bill","redactor:/org/human-resources","validator:/org/finances");    
+    Identity bart = createIdentity("bart","member:/org/human-resources"); 
+    
+    // configuring a mock node with the expected ACL
+    List<AccessControlEntry> entries = new ArrayList<AccessControlEntry>();
+    entries.add(new AccessControlEntry("*:/org/finance", PermissionType.READ));
+    entries.add(new AccessControlEntry("*:/org/human-resources", PermissionType.SET_PROPERTY));
+    AccessControlList acl = new AccessControlList("foo", entries);
+    NodeImpl node = mock(NodeImpl.class);
+    when(node.getACL()).thenReturn(acl);
+    
+    State state = new State();
+    state.setRoles(Arrays.asList(new String[] {"validator", "redactor"})); //
+    
+    // make sure the actual code we test is not mocked!
+    when(panel.isAuthorizedByRole(any(State.class), any(Identity.class), any(NodeImpl.class))).thenCallRealMethod();
+    
+    assertTrue("tom should be allowed", panel.isAuthorizedByRole(state, tom, node)); 
+    assertTrue("bill should be allowed", panel.isAuthorizedByRole(state, bill, node));
+    assertFalse("bart should not be allowed", panel.isAuthorizedByRole(state, bart, node));
   }
   
   

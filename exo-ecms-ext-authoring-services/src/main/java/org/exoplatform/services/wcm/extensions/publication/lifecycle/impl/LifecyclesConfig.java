@@ -56,6 +56,16 @@ public class LifecyclesConfig {
     private String       membership;
 
     private String       role;
+    
+    private List<String> roles;
+
+    public List<String> getRoles() {
+      return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+      this.roles = roles;
+    }
 
     private List<String> memberships;
 
