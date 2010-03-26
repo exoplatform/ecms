@@ -384,7 +384,6 @@
     <module>exo.ecm.dms.ext.contentvalidation.component.plugin</module>
     <module>exo.ecm.dms.ext.contentvalidation.component.webui</module>
     <module>exo.ecm.dms.ext.contentvalidation.component.workflowPublication</module>
-    <module>exo.ecm.wcm.component.migration.1.2.workspaces</module>
     <module>exo.ecm.wcm.component.newsletter</module>
     <module>exo.ecm.wcm.component.search</module>
     <module>exo.ecm.wcm.demo.config</module>
