@@ -38,6 +38,8 @@
     <!-- workflow implementations -->
     <org.exoplatform.jbpm.version>3.0.2</org.exoplatform.jbpm.version>
     <bonita.version>4.1</bonita.version>
+    <!-- Default wkf impl to use -->
+    <workflowEngine>bonita</workflowEngine>
     <!-- 3rd parties -->
     <org.shindig.version>SNAPSHOT-r790473</org.shindig.version>
     <commons-lang.version>2.3</commons-lang.version>
@@ -325,15 +327,6 @@
     </plugins>
   </build>
   <profiles>
-    <profile>
-      <id>bonita</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <workflowEngine>bonita</workflowEngine>
-      </properties>
-    </profile>
     <profile>
       <id>jbpm</id>
       <properties>
