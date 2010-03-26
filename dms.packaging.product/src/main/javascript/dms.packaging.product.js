@@ -43,7 +43,6 @@ function getProduct(version) {
   product.addDependencies(dms.portlet.ecmbrowsecontent);
   product.addDependencies(dms.portlet.jcr_console);
   product.addDependencies(dms.gadgets);
-  product.addDependencies(dms.extension.webapp);
   
   product.addServerPatch("jboss",  portal.server.jboss.patch) ;
   product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
