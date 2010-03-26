@@ -393,7 +393,6 @@
     <module>exo.ecm.wcm.portlet.newsletter</module>
     <module>exo.ecm.wcm.portlet.presentation</module>
     <module>exo.ecm.wcm.portlet.searches</module>
-    <module>exo.ecm.wcm.server.jonas.patch</module>
     <module>exo.ecm.wcm.server.tomcat.patch</module>
     <module>exo.ecm.wcm.web.eXoWCMResources</module>
     <module>exo.ecm.workflow.bp.bonita.holiday</module>
