@@ -44,6 +44,7 @@ function getProduct(version) {
   product.addDependencies(dms.portlet.jcr_console);
   product.addDependencies(dms.gadgets);
   
+  product.addServerPatch("tomcat",  portal.server.tomcat.patch) ;
   product.addServerPatch("jboss",  portal.server.jboss.patch) ;
   product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
   
