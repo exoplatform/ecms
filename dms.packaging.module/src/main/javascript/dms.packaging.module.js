@@ -62,15 +62,6 @@ function getModule(params) {
 	
   module.web.fck = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.web.fck", "war", module.version) ;  
   module.web.fck.deployName = "fck" ;
-
-  module.demo = {};
-  
-  module.demo.portal = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.webapp", "war", module.version).
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.config", "jar", module.version));
-  module.demo.portal.deployName = "dmsdemo";  
-
-  module.demo.rest = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.rest-war", "war", module.version);
-    module.demo.rest.deployName = "rest-dmsdemo";
     
   return module;
 }
