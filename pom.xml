@@ -367,7 +367,6 @@
     <module>exo-ecms-ext-deprecated-portlet-browsecontent</module>
     <module>exo.ecm.dms.core.gadgets</module>
     <module>exo.ecm.dms.core.portlet.jcr-console</module>
-    <module>exo.ecm.dms.core.server.tomcat.patch</module>
     <module>exo.ecm.dms.core.web.eXoDMSResources</module>
     <module>exo.ecm.dms.core.web.fck</module>
     <module>exo.ecm.dms.core.webui.dms</module>

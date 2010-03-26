@@ -23,7 +23,6 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.connector.fckeditor", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.webui.dms", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.webui.ext", "jar", module.version)).
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.server.tomcat.patch", "jar", module.version)).
     addDependency(new Project("org.exoplatform", "exo-jcr-services", "jar", "1.12.0-Beta01")).
     addDependency(new Project("rome", "rome", "jar", "0.9")) .
     addDependency(new Project("com.totsp.feedpod", "itunes-com-podcast", "jar", "0.2")) .
@@ -72,11 +71,6 @@ function getModule(params) {
 
   module.demo.rest = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.demo.rest-war", "war", module.version);
     module.demo.rest.deployName = "rest-dmsdemo";
-
-  module.server = {}
-
-  module.server.tomcat = {}
-  module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.server.tomcat.patch", "jar", module.version);
-
+    
   return module;
 }
