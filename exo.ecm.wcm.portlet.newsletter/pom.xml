@@ -66,12 +66,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo.ecm.wcm.webui.wcm</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo.ecm.wcm.component.newsletter</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>

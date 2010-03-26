@@ -56,6 +56,12 @@
       <artifactId>exo-jcr-services</artifactId>
       <version>${org.exoplatform.jcr-services.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo.ecm.wcm.component.search</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
   </dependencies>
   <build>
     <resources>
