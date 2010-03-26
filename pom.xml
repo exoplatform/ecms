@@ -356,7 +356,6 @@
   <modules>
     <module>exo.ecm.dms.core.component.cms</module>
     <module>exo.ecm.dms.core.component.document.viewer</module>
-    <module>exo.ecm.dms.core.component.migration.2.5.datas</module>
     <module>exo-ecms-core-publication</module>
     <module>exo.ecm.dms.core.connector.fckeditor</module>
     <module>exo.ecm.dms.core.demo.config</module>
