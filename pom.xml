@@ -386,7 +386,6 @@
     <module>exo.ecm.wcm.demo.ear</module>
     <module>exo.ecm.wcm.demo.rest-war</module>
     <module>exo.ecm.wcm.demo.war</module>
-    <module>exo.ecm.wcm.ext.publication</module>
     <module>exo.ecm.wcm.extension.config</module>
     <module>exo.ecm.wcm.extension.ear</module>
     <module>exo.ecm.wcm.extension.war</module>
