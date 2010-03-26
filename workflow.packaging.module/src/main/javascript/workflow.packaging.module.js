@@ -24,6 +24,11 @@ module.web = {}
     new Project("org.exoplatform.ecms", "exo.ecm.workflow.web.eXoWorkflowResources", "war", module.version) ;  
   module.web.eXoWorkflowResources.deployName = "eXoWorkflowResources" ;
   
+	module.extension = {};
+  module.extension.webapp = new Project("org.exoplatform.ecms", "exo.ecm.workflow.extension.webapp", "war", module.version).
+		addDependency(new Project("org.exoplatform.ecms", "exo.ecm.workflow.extension.config", "jar", module.version));
+  module.extension.webapp.deployName = "ecmworkflow-extension";		
+	
 	module.demo = {};
    // demo portal
    module.demo.portal = 
