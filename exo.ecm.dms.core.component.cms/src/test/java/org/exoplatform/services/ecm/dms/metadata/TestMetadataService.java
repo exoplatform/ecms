@@ -157,7 +157,7 @@ public class TestMetadataService extends BaseDMSTestCase {
    */
   public void testGetExternalMetadataType() throws Exception {
     List<String> extenalMetaTypes = metadataService.getExternalMetadataType(REPO_NAME);
-    assertEquals(1, extenalMetaTypes.size());
+    assertEquals(2, extenalMetaTypes.size());
   }
   
   /**
