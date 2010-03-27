@@ -197,6 +197,7 @@ public class RSSServiceImpl implements RSSService{
           entry.getEnclosures() ;
         }        
       }      
+      feed.setFeedType(feedType);
       feed.setEntries(entries);      
       feed.setEncoding("UTF-8");     
       SyndFeedOutput output = new SyndFeedOutput();      

@@ -104,12 +104,13 @@
       <init-params>
         <properties-param>
           <name>namespaces</name>
-          <property name="dc" value="http://purl.org/dc/elements/1.1/" />
-          <property name="rma" value="http://www.rma.com/jcr/" />
-          <property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/" />
-          <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/" />
-          <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/" />
-          <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/" />
+	          <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
+	          <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/"/>
+	          <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
+	          <property name="app" value="http://www.gatein.org/jcr/application-registry/1.0/"/>
+	          <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/"/>
+	          <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/"/>
+	          <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/"/>
         </properties-param>
       </init-params>
     </component-plugin>
