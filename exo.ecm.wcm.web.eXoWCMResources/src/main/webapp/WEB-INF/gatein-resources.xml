@@ -33,10 +33,40 @@
   </portal-skin>
   
   <javascript>
-	  <param>
+    <param>
       <js-module>eXo.ecm.WCMUtils</js-module>
       <js-path>/javascript/eXo/wcm/backoffice/private/WCMUtils.js</js-path>
       <js-priority>50</js-priority>
+    </param>
+    <param>
+      <js-module>eXo.ecm.BackPrivate</js-module>
+      <js-path>/javascript/eXo/wcm/backoffice/private/UIWCMTreeView.js</js-path>
+      <js-priority>60</js-priority>
+    </param>
+    <param>
+      <js-module>eXo.ecm.BackPrivate</js-module>
+      <js-path>/javascript/eXo/wcm/backoffice/private/Newsletter.js</js-path>
+      <js-priority>60</js-priority>
+    </param>
+    <param>
+      <js-module>eXo.ecm.BackPrivate</js-module>
+      <js-path>/javascript/eXo/wcm/backoffice/private/UIFormGeneratorPortlet.js</js-path>
+      <js-priority>60</js-priority>
+    </param>
+    <param>
+      <js-module>eXo.ecm.FrontPrivate</js-module>
+      <js-path>/javascript/eXo/wcm/frontoffice/private/CLV.js</js-path>
+      <js-priority>60</js-priority>
+    </param>
+    <param>
+      <js-module>eXo.ecm.FrontPrivate</js-module>
+      <js-path>/javascript/eXo/wcm/frontoffice/private/FCKEditor.js</js-path>
+      <js-priority>65</js-priority>
+    </param>
+    <param>
+      <js-module>eXo.ecm.FrontPrivate</js-module>
+      <js-path>/javascript/eXo/wcm/frontoffice/private/QuickEdit.js</js-path>
+      <js-priority>70</js-priority>
     </param>
   </javascript>
   
