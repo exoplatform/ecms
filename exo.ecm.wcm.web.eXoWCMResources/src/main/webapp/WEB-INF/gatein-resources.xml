@@ -33,79 +33,11 @@
   </portal-skin>
   
   <javascript>
-    <param>
-      <js-module>eXo.ecm.Newsletter</js-module>
-      <js-path>/javascript/eXo/wcm/backoffice/private/Newsletter.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.UIFormGeneratorPortlet</js-module>
-      <js-path>/javascript/eXo/wcm/backoffice/private/UIFormGeneratorPortlet.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.UIWCMTreeView</js-module>
-      <js-path>/javascript/eXo/wcm/backoffice/private/UIWCMTreeView.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.WCMPatch</js-module>
-      <js-path>/javascript/eXo/wcm/backoffice/private/WCMPatch.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
+	  <param>
       <js-module>eXo.ecm.WCMUtils</js-module>
       <js-path>/javascript/eXo/wcm/backoffice/private/WCMUtils.js</js-path>
       <js-priority>50</js-priority>
     </param>
-	<param>
-      <js-module>eXo.ecm.CLV</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/CLV.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.WCMFCKEditor</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/FCKEditor.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.QuickEdit</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/QuickEdit.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.WCMUtils</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/Vote.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.Breadcumb</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/public/Breadcrumb.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.Navigation</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/public/Navigation.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.Search</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/public/Search.js</js-path>
-      <js-priority>40</js-priority>
-    </param>
-	<param>
-      <js-module>eXo.ecm.Services</js-module>
-      <js-path>/javascript/eXo/wcm/Services.js</js-path>
-    </param>
-	<param>
-      <js-module>eXo.ecm.Navigation</js-module>
-      <js-path>/javascript/eXo/wcm/Navigation.js</js-path>
-    </param>
-	<param>
-      <js-module>eXo.ecm.Util</js-module>
-      <js-path>/javascript/eXo/wcm/Util.js</js-path>
-    </param>
-	
   </javascript>
   
 </gatein-resources>
