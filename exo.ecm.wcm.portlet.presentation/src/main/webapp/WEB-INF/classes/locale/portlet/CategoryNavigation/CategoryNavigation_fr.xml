@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>Préférences</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Configuration des Catégories</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
   <UICategoryNavigationTargetPathFormInputSet>
     <title>
       <SelectTargetPath></SelectTargetPath>

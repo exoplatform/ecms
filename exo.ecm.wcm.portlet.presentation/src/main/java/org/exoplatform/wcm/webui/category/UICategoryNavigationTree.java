@@ -33,6 +33,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.wcm.webui.category.config.UICategoryNavigationConfig;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -52,6 +53,7 @@ import org.exoplatform.webui.event.EventListener;
     lifecycle = Lifecycle.class,
     template = "app:/groovy/CategoryNavigation/UICategoryNavigationTree.gtmpl",
     events = {
+      @EventConfig(listeners = UICategoryNavigationTree.QuickEditActionListener.class),
       @EventConfig(listeners = UICategoryNavigationTree.ChangeNodeActionListener.class)
     }
 )
@@ -337,4 +339,29 @@ public class UICategoryNavigationTree extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(categoryNavigationTree.getParent());
     }
   }
+  
+  /**
+   * The listener interface for receiving quickEditAction events. The class
+   * that is interested in processing a quickEditAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's
+   * <code>addQuickEditActionListener<code> method. When
+   * the quickEditAction event occurs, that object's appropriate
+   * method is invoked.
+   * 
+   * @see QuickEditActionEvent
+   */
+  public static class QuickEditActionListener extends EventListener<UICategoryNavigationTree> {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UICategoryNavigationTree> event) throws Exception {
+      UICategoryNavigationTree uiContainer = event.getSource();
+      UICategoryNavigationConfig configForm = uiContainer.createUIComponent(UICategoryNavigationConfig.class, null, null);
+      org.exoplatform.wcm.webui.Utils.createPopupWindow(uiContainer, configForm, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW, 600);
+    }
+  }
+
 }

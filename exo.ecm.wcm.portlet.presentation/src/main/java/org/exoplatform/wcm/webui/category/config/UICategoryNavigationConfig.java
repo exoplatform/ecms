@@ -63,6 +63,7 @@ import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
     template = "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
         @EventConfig(listeners = UICategoryNavigationConfig.SaveActionListener.class),
+        @EventConfig(listeners = UICategoryNavigationConfig.CancelActionListener.class),
         @EventConfig(listeners = UICategoryNavigationConfig.ChangeRepositoryActionListener.class),
         @EventConfig(listeners = UICategoryNavigationConfig.SelectTargetPathActionListener.class)
     }
@@ -116,7 +117,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
     targetPathFormInputSet.addUIFormInput(targetPathFormStringInput);
     addChild(targetPathFormInputSet);
     
-    setActions(new String[] {"Save"});
+    setActions(new String[] {"Save", "Cancel"});
   }
   
   /**
@@ -242,10 +243,38 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
         ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
         event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + portalURI + pageNodeSelected + "');");
       } else {
-      	Utils.createPopupMessage(categoryNavigationConfig, "UICategoryNavigationConfig.msg.saving-success", null, ApplicationMessage.INFO);
+        if (Utils.isQuickEditMode(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW)) {
+          Utils.closePopupWindow(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
+        } else {
+          Utils.createPopupMessage(categoryNavigationConfig, "UICategoryNavigationConfig.msg.saving-success", null, ApplicationMessage.INFO);
+        }
       }
     }
   }
+  
+  /**
+   * The listener interface for receiving cancelAction events.
+   * The class that is interested in processing a cancelAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addCancelActionListener<code> method. When
+   * the cancelAction event occurs, that object's appropriate
+   * method is invoked.
+   * 
+   * @see CancelActionEvent
+   */
+  public static class CancelActionListener extends EventListener<UICategoryNavigationConfig> {
+    
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UICategoryNavigationConfig> event) throws Exception {
+    	UICategoryNavigationConfig viewerManagementForm = event.getSource();
+      Utils.closePopupWindow(viewerManagementForm, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
+      ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
+    }
+  }
+  
   
   /**
    * The listener interface for receiving changeRepositoryAction events.

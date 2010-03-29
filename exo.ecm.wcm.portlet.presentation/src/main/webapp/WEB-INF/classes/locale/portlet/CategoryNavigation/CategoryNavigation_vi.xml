@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>Sửa nhanh</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
   <UICategoryNavigationTargetPathFormInputSet>
     <title>
       <SelectTargetPath></SelectTargetPath>

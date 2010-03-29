@@ -17,6 +17,9 @@
   padding: 0;
 }
 
+.UICategoryNavigationPortlet {
+  min-width: 0 !important;
+}
 .UICategoryNavigationPortlet .UIPageSelector {
   margin: 0;
   width: auto;

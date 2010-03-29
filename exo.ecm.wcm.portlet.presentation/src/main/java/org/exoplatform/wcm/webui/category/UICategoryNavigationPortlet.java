@@ -38,6 +38,9 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 )
 public class UICategoryNavigationPortlet extends UIPortletApplication {
   
+  /** The Constant MANAGEMENT_PORTLET_POPUP_WINDOW. */
+  public static final String CONFIG_POPUP_WINDOW = "UICNConfigPopupWindow";
+
   /** The mode. */
   private PortletMode mode = PortletMode.VIEW;
   
