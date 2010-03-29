@@ -5,9 +5,9 @@
   import org.exoplatform.web.application.JavascriptManager;
   import java.util.Date;
   
-  def rcontext = _ctx.getRequestContext() ;
-	JavascriptManager jsManager = rcontext.getJavascriptManager();
-	jsManager.importJavascript('eXo.wcm.backoffice.private.UIWCMTreeView', '/eXoWCMResources/javascript/') ;
+  //def rcontext = _ctx.getRequestContext() ;
+//	JavascriptManager jsManager = rcontext.getJavascriptManager();
+//	jsManager.importJavascript('eXo.wcm.backoffice.private.UIWCMTreeView', '/eXoWCMResources/javascript/') ;
 %>
 <div class="UIWebContentTreeView $uicomponent.id" id = "$uicomponent.id">
 	<%UIContentTreeNode treeNode = null;

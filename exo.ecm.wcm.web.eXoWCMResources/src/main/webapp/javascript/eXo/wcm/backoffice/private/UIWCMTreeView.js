@@ -39,7 +39,7 @@ UIWCMTreeView.prototype.request = function(urlRequestXML, objChild) {
 						list = list[0].getElementsByTagName("childNode");
 						objChild.innerHTML="";
 						parentPath = document.getElementById(
-													objChild.id.replace(eXo.ecm.WCMUtils.UIWCMTreeView.constChildNode, 
+													objChild.id.replace(eXo.ecm.UIWCMTreeView.constChildNode, 
 																		eXo.ecm.UIWCMTreeView.constParentNode)
 																		).getAttribute("treePath");
 						var restAction = "";
