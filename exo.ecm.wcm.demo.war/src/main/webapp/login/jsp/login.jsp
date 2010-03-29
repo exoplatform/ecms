@@ -26,49 +26,55 @@
 <%@ page import="java.util.ResourceBundle"%>
 <%@ page import="org.exoplatform.web.login.InitiateLoginServlet"%>
 <%@ page language="java" %>
-<%@ page contentType="text/html; charset=utf-8" %>
 <%
   String contextPath = request.getContextPath() ;
 
-  String username = (String)request.getParameter("j_username");
+  String username = request.getParameter("j_username");
   if(username == null) username = "";
- 	String password = (String)request.getParameter("j_password");
+ 	String password = request.getParameter("j_password");
  	if(password == null) password = "";
 
- PortalContainer portalContainer = PortalContainer.getCurrentInstance(session.getServletContext());	
-  ResourceBundleService service = (ResourceBundleService) portalContainer.getComponentInstanceOfType(ResourceBundleService.class);
+  ResourceBundleService service = (ResourceBundleService) PortalContainer.getCurrentInstance(session.getServletContext())
+  														.getComponentInstanceOfType(ResourceBundleService.class);
   ResourceBundle res = service.getResourceBundle(service.getSharedResourceBundleNames(), request.getLocale()) ;
   
   Cookie cookie = new Cookie(InitiateLoginServlet.COOKIE_NAME, "");
 	cookie.setPath(request.getContextPath());
 	cookie.setMaxAge(0);
 	response.addCookie(cookie);
+
+  String uri = (String)request.getAttribute("org.gatein.portal.login.initial_uri");
+
+  response.setCharacterEncoding("UTF-8"); 
+  response.setContentType("text/html; charset=UTF-8");
 %>
 <!DOCTYPE html 
     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Login</title>
-    <link rel="shortcut icon" type="image/x-icon"  href="/<%=portalContainer.getName()%>/favicon.ico" />
-    <link rel='stylesheet' type='text/css' href='/<%=portalContainer.getName()%>/login/skin/Stylesheet.css'/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>   
+    <link rel="shortcut icon" type="image/x-icon"  href="<%=contextPath%>/favicon.ico" />
+    <link rel='stylesheet' type='text/css' href='<%=contextPath%>/login/skin/Stylesheet.css'/>
     <script type="text/javascript" src="/eXoResources/javascript/eXo.js"></script>
     <script type="text/javascript" src="/eXoResources/javascript/eXo/portal/UIPortalControl.js"></script>
   </head>
-  <body style="text-align: center; background: #f5f5f5; font-family: arial, tahoma, verdana">
+  <body style="text-align: center; background: #b5b6b6; font-family: arial, tahoma, verdana">
     <div class="UILogin">
-      <div class="LoginHeader">Sign In</div>
+      <div class="LoginHeader"></div>
       <div class="LoginContent">
-        <div class="WelcomeText">Welcome to GateIn Portal</div>
         <div class="CenterLoginContent">
           <%/*Begin form*/%>
           <%
             if(username.length() > 0 || password.length() > 0) {
           %>
-            <font color="red">Sign in failed. Wrong username or password.</font><%}%>
-          <form name="loginForm" action="<%= contextPath + "/login"%>" method="post" style="margin: 0px;">    
-          		<input type="hidden" name="uri" value="<%=session.getAttribute("initialURI") %>"/>   
+          <font color="red"><%=res.getString("UILoginForm.label.SigninFail")%></font><%}%>
+          <form name="loginForm" action="<%= contextPath + "/login"%>" method="post" style="margin: 0px;">
+                <% if (uri != null) { %>
+          		<input type="hidden" name="initialURI" value="<%=uri%>"/>
+                <% } %>
           		<table> 
 	              <tr class="FieldContainer">
 		              <td class="FieldLabel"><%=res.getString("UILoginForm.label.UserName")%></td>
@@ -78,23 +84,25 @@
 		              <td class="FieldLabel"><%=res.getString("UILoginForm.label.password")%></td>
 		              <td><input class="Password" type="password" name="password" value=""/></td>
 		            </tr>
-		            <tr class="FieldContainer">
+		            <tr class="FieldContainer" onkeypress="eXo.portal.UIPortalControl.onEnterPress(event);">
 		              <td class="FieldLabel"><input type="checkbox" name="rememberme" value="true"/></td>
 		              <td><%=res.getString("UILoginForm.label.RememberOnComputer")%></td>
 		            </tr>
 		          </table>
 		          <div id="UIPortalLoginFormAction" class="LoginButton" onclick="login();">
-		            <div class="LoginButtonContainer">
-		              <div class="Button">
-		                <div class="LeftButton">
-		                  <div class="RightButton">
-		                    <div class="MiddleButton">
-		                    	<a href="#"><%=res.getString("UILoginForm.label.Signin")%></a>
-		                    </div>
-		                  </div>
-		                </div>
-		              </div>
-		            </div>
+		            <table class="LoginButtonContainer">
+		            	<tr>
+			              <td class="Button">
+			                <div class="LeftButton">
+			                  <div class="RightButton">
+			                    <div class="MiddleButton">
+			                    	<a href="#"><%=res.getString("UILoginForm.label.Signin")%></a>
+			                    </div>
+			                  </div>
+			                </div>
+			              </td>
+			             </tr>
+		            </table>
 		          </div>
 		          <div class="ClearLeft"><span></span></div>
 		          <script type='text/javascript'>			            
@@ -107,6 +115,6 @@
         </div>
       </div>
     </div>
-    <span style="margin: 10px 0px 0px 5px; font-size: 11px; color: #6f6f6f; text-align: center">Copyright &copy 2010. All rights Reserved, eXo Platform SAS and Red Hat, Inc.</span>
+    <span style="font-size: 11px; color: #3f3f3f; text-align: center"><%=res.getString("UILoginForm.label.Copyright")%></span>
   </body>
 </html>
