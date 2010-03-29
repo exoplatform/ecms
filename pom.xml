@@ -354,7 +354,7 @@
     </profile>
   </profiles>
   <modules>
-    <module>exo.ecm.dms.core.component.cms</module>
+    <module>exo-ecms-core-services</module>
     <module>exo.ecm.dms.core.component.document.viewer</module>
     <module>exo-ecms-core-publication</module>
     <module>exo.ecm.dms.core.connector.fckeditor</module>
