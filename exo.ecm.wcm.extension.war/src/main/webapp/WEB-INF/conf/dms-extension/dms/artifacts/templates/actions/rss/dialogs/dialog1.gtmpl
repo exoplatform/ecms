@@ -6,7 +6,7 @@
   */ 
 %>
 <%
-  String[] fieldURL = ["jcrPath=/node/exo:url", "http://localhost:8080/ecm/rss"] ;
+  String[] fieldURL = ["jcrPath=/node/exo:url", "http://localhost:8080/ecmexplorer/rss"] ;
   uicomponent.addHiddenField("url", fieldURL) ; 
 %>
 <div class="UIFormWithTitle">

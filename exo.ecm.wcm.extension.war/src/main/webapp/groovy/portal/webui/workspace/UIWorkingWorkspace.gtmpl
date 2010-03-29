@@ -5,10 +5,6 @@
   import org.exoplatform.services.wcm.navigation.NavigationService;
 
   def rcontext = _ctx.getRequestContext() ;
-  def jsmanager = rcontext.getJavascriptManager();
-  jsmanager.importJavascript('eXo.portal.UIWorkspace');
-  jsmanager.addOnLoadJavascript('eXo.portal.UIWorkingWorkspace.onResize') ;
-  jsmanager.addOnResizeJavascript('eXo.portal.UIWorkingWorkspace.onResize') ;
   
   def navigations = Util.getUIPortal().getNavigations();
   def navigationService = uicomponent.getApplicationComponent(NavigationService.class);

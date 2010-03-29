@@ -19,6 +19,8 @@
 	  String restContextName = Utils.getRestContextName(portalName);
       def viewComponentId  = new Date().getTime();
 	  def rcontext = _ctx.getRequestContext() ;
+	  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UICoverFlow','/ecmexplorer/javascript/');
+	  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');    
 	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
 	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.setHeight");
 %>
@@ -100,7 +102,7 @@
 										height: 32px;	
 									 }
 								</style>
-								<script type="text/javascript" src="/ecm/javascript/eXo/ecm/CoverFlowLib.js"></script>
+								<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/CoverFlowLib.js"></script>
 							</head>
 							<body>
 								<div id="imageflow">

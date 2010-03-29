@@ -26,8 +26,7 @@
   def rcontext = _ctx.getRequestContext() ;	
   rcontext.getJavascriptManager().addJavascript("eXo.core.Browser.onResize();");
 	
-	
-	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
+  UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
   if(uiPopupWindow != null) resizeBlock = ""; 
 

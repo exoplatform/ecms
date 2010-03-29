@@ -14,6 +14,8 @@
   def resultList = uicomponent.getCurrentList() ; 
   if(resultList == null) return ;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
+  def rcontext = _ctx.getRequestContext() ;
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
 %>
 <div class="UICBSearchResults" id="$uicomponent.id">
   <table class="UIGrid">

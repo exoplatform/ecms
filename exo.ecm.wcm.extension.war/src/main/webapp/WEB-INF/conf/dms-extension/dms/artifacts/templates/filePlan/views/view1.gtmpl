@@ -9,15 +9,15 @@
 	String iconName = uicomponent.getIcons(node,"16x16Icon") ;
 	String pattern = "MMMMM dd yyyy" ;
 	SimpleDateFormat dateFormat = new SimpleDateFormat() ;
-  dateFormat.applyPattern(pattern) ;
+	dateFormat.applyPattern(pattern) ;
   
-  def className = "org.exoplatform.services.cms.records.RecordsService" ;
+	def className = "org.exoplatform.services.cms.records.RecordsService" ;
 	def recordsService = uicomponent.getComponentInstanceOfType(className) ;
 	def recordList = recordsService.getRecords(node) ;
-  def rcontext = _ctx.getRequestContext() ;
-	Parameter[] params = [new Parameter("workspaceName", node.getSession().getWorkspace().getName()), new Parameter("findDrive","true")];
-  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIJCRExplorer.loadViewNodeScroll()');
-
+    def rcontext = _ctx.getRequestContext() ;
+    Parameter[] params = [new Parameter("workspaceName", node.getSession().getWorkspace().getName()), new Parameter("findDrive","true")];
+    rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
+    rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIJCRExplorer.loadViewNodeScroll()');
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("rma:filePlan", "Stylesheet")); %>    
