@@ -37,7 +37,6 @@ function getProduct(version) {
   product.addDependencies(portal.web.eXoResources);
   
   product.addDependencies(dms.web.eXoDMSResources);
-  product.addDependencies(dms.web.fck);
   product.addDependencies(dms.portlet.ecmadmin);
   product.addDependencies(dms.portlet.ecmexplorer);
   product.addDependencies(dms.portlet.ecmbrowsecontent);

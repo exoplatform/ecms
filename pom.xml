@@ -364,7 +364,6 @@
     <module>exo.ecm.dms.core.gadgets</module>
     <module>exo.ecm.dms.core.portlet.jcr-console</module>
     <module>exo.ecm.dms.core.web.eXoDMSResources</module>
-    <module>exo.ecm.dms.core.web.fck</module>
     <module>exo.ecm.dms.core.webui.dms</module>
     <module>exo.ecm.dms.core.webui.ext</module>
     <module>exo.ecm.dms.ext.contentvalidation.bp.bonita.content-publishing</module>

@@ -18,7 +18,7 @@ function getModule(params) {
   module.portlet = {}
   module.portlet.ecmadmin = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-administration", "exo-portlet", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version)) .     
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.publication", "jar", module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.document.viewer", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.connector.fckeditor", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.webui.dms", "jar", module.version)).
@@ -52,16 +52,13 @@ function getModule(params) {
   
   module.application = {}
   
-  module.application.rest = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.publication","jar", module.version).
+  module.application.rest = new Project("org.exoplatform.ecms", "exo-ecms-core-publication","jar", module.version).
     addDependency(ws.frameworks.json);
   
   module.web = {}
   
   module.web.eXoDMSResources = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.web.eXoDMSResources", "war", module.version) ;  
   module.web.eXoDMSResources.deployName = "eXoDMSResources" ;
-	
-  module.web.fck = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.web.fck", "war", module.version) ;  
-  module.web.fck.deployName = "fck" ;
     
   return module;
 }
