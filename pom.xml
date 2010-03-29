@@ -357,7 +357,7 @@
     <module>exo-ecms-core-services</module>
     <module>exo.ecm.dms.core.component.document.viewer</module>
     <module>exo-ecms-core-publication</module>
-    <module>exo.ecm.dms.core.connector.fckeditor</module>
+    <module>exo-ecms-core-connector</module>
     <module>exo-ecms-apps-portlet-administration</module>
     <module>exo-ecms-apps-portlet-explorer</module>
     <module>exo-ecms-ext-deprecated-portlet-browsecontent</module>

@@ -20,7 +20,7 @@ function getModule(params) {
   module.portlet = {};
   
   module.portlet.webpresentation = new Project("org.exoplatform.ecms", "exo.ecm.wcm.portlet.presentation", "exo-portlet", module.version).       
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.connector.fckeditor", "jar",  module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-connector", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.webui.dms", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar",  module.version)).    
