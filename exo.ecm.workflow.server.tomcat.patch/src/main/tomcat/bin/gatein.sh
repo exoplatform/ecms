@@ -28,7 +28,7 @@ cd `dirname "$0"`
 BONITA_OPTS="-Dorg.ow2.bonita.environment=../conf/bonita.environnement.xml"
 LOG_OPTS="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog"
 SECURITY_OPTS="-Djava.security.auth.login.config=../conf/jaas.conf"
-EXO_OPTS="-Dexo.product.developing=false"
+EXO_OPTS="-Dexo.product.developing=false -Dexo.conf.dir.name=gatein/conf"
 
 JAVA_OPTS="-Xshare:auto -Xms128m -Xmx512m -XX:MaxPermSize=256m $JAVA_OPTS $LOG_OPTS $SECURITY_OPTS $EXO_OPTS $BONITA_OPTS"
 export JAVA_OPTS

@@ -126,7 +126,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
   private WorkflowFormsService                   formsService          = null;
 
   /** Reference to the Organization Service */
-//  private OrganizationService                    organizationService   = null;
+  private OrganizationService                    organizationService   = null;
 
   private String                                 superUser_            = "root";
   
@@ -147,13 +147,13 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
    * @param params                initialization parameters of the service
    */
   public WorkflowServiceContainerImpl(WorkflowFileDefinitionService fileDefinitionService,
-      WorkflowFormsService formsService,
+      WorkflowFormsService formsService, OrganizationService organizationService,
       ConfigurationManager configurationManager, InitParams params) {
 
     // Store references to dependent services
     this.fileDefinitionService = fileDefinitionService;
     this.formsService = formsService;
-//    this.organizationService = organizationService;
+    this.organizationService = organizationService;
     this.configurationManager = configurationManager;
     // Initialize some fields
     this.configurations = new ArrayList<ProcessesConfig>();
@@ -730,8 +730,6 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
   public void start() {
   	//Request life cycle begin/end
     LoginContext lc = null;
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    OrganizationService organizationService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
     try {
     	RequestLifeCycle.begin((ComponentRequestLifecycle) organizationService);
       UserHandler userHandler = organizationService.getUserHandler();
@@ -911,8 +909,6 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
         }
       } else {
       	try {
-      	  ExoContainer container = ExoContainerContext.getCurrentContainer();
-      	  OrganizationService organizationService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
       		RequestLifeCycle.begin((ComponentRequestLifecycle)organizationService);
       		UserHandler userHandler = organizationService.getUserHandler();
       		User user = userHandler.findUserByName(identity.getUserId());

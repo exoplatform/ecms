@@ -75,14 +75,17 @@ public class WorkflowServiceContainerImpl implements
   private ThreadLocal threadLocal_;
   private String hibernateServiceName_;
   private WorkflowFileDefinitionService fileDefinitionService_ ;
+  private OrganizationService organizationService;
   private static final Log LOG  = ExoLogger.getLogger(WorkflowServiceContainerImpl.class.getName());
   
   public WorkflowServiceContainerImpl(WorkflowFileDefinitionService fileDefinitionService,
+      OrganizationService organizationService,
       ConfigurationManager conf, InitParams params) throws Exception {
     hibernateServiceName_ = params.getValueParam("hibernate.service").getValue();
     configs_ =  new ArrayList<ProcessesConfig>();
     this.configurationManager_ = conf;
     threadLocal_ = new ThreadLocal();
+    this.organizationService = organizationService;
     this.fileDefinitionService_ = fileDefinitionService;
   }
 
@@ -236,8 +239,6 @@ public class WorkflowServiceContainerImpl implements
     List<Task> groupTasks = new ArrayList<Task>();
     HashSet<TaskInstance> hashSet = new HashSet<TaskInstance>();
     String key = null;
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    OrganizationService organizationService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
     Collection groups = organizationService.getGroupHandler().findGroupsOfUser(user);
     Collection<?> membershipCollection = organizationService.getMembershipTypeHandler().findMembershipTypes();
     JbpmSession session = openSession();
