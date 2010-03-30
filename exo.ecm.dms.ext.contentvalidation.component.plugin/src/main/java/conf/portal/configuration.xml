@@ -136,11 +136,12 @@
 	                  <field  name="description"><string>content publishing workflow</string></field>
 	                  <field  name="srcWorkspace"><string>collaboration</string></field>
 	                  <field  name="srcPath"><string>/Documents/Validation Requests</string></field>
-																			<field  name="lifecyclePhase">
-																				<collection type="java.util.ArrayList">
-									           	<value><string>node_added</string></value>		
-									           </collection>
-																			</field>
+										<field  name="isDeep"><boolean>true</boolean></field>
+										<field  name="lifecyclePhase">
+											<collection type="java.util.ArrayList">
+						           	<value><string>node_added</string></value>		
+						           </collection>
+										</field>
 	                  <field  name="roles"><string>*:/platform/users</string></field>                     
 	                  <field  name="variables">
 	                    <string>exo:supervisor=*:/organization/management/executive-board;exo:validator=*:/platform/administrators</string>
@@ -179,13 +180,13 @@
 	                          </field>
 	                        </object>
 	                      </value>
-																							<value>
-                    						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
-                    							<field  name="name"><string>mix:affectedNodeTypes</string></field>
-                    							<field  name="properties">
-                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
-																												</field>
-																										</object>
+												<value>
+              						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+              							<field  name="name"><string>mix:affectedNodeTypes</string></field>
+              							<field  name="properties">
+              								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+														</field>
+													</object>
                     	 	</value>		
 	                    </collection>     
 	                  </field>    
@@ -217,23 +218,28 @@
 	                  <field  name="description"><string>send a notification mail</string></field>
 	                  <field  name="srcWorkspace"><string>collaboration</string></field>
 	                  <field  name="srcPath"><string>/Documents/Validation Requests</string></field>
-	                  <field  name="lifecyclePhase"><string>read</string></field>
+	                  <field  name="isDeep"><boolean>true</boolean></field>
+										<field  name="lifecyclePhase">
+	                  	<collection type="java.util.ArrayList">
+												<value><string>read</string></value>
+											</collection>
+										</field>
 	                  <field  name="roles"><string>*:/platform/administrators</string></field>
 	                  <field  name="variables">
 	                    <string>exo:to=benjamin.mestrallet@exoplatform.com</string>
 	                  </field>
-																			<field  name="mixins">
-												            <collection type="java.util.ArrayList">
-												            	<value>
-                    						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
-                    							<field  name="name"><string>mix:affectedNodeTypes</string></field>
-                    							<field  name="properties">
-                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
-																												</field>
-																										</object>
-                    					</value>		
-												            </collection>
-												          </field>                        
+										<field  name="mixins">
+					            <collection type="java.util.ArrayList">
+					            	<value>
+						  						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+						  							<field  name="name"><string>mix:affectedNodeTypes</string></field>
+						  							<field  name="properties">
+						  								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+														</field>
+													</object>
+						  					</value>		
+					            </collection>
+					          </field>                        
 	                </object>  
 	              </value>
 	              <value>
@@ -243,23 +249,28 @@
 	                  <field  name="description"><string>request for publishing a document</string></field>
 	                  <field  name="srcWorkspace"><string>collaboration</string></field>
 	                  <field  name="srcPath"><string>/Users/marry/Private/Documents</string></field>
-	                  <field  name="lifecyclePhase"><string>read</string></field>
+	                  <field  name="isDeep"><boolean>true</boolean></field>
+										<field  name="lifecyclePhase">
+	                  	<collection type="java.util.ArrayList">
+												<value><string>read</string></value>
+											</collection>
+										</field>
 	                  <field  name="roles"><string>marry</string></field>
 	                  <field  name="variables">
 	                    <string>exo:requestPath=/Documents/Validation Requests;exo:reservePath=/Users/marry/Private/Documents/Publishing Requested</string>
 	                  </field>
-																			<field  name="mixins">
-												            <collection type="java.util.ArrayList">
-												            	<value>
-                    						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
-                    							<field  name="name"><string>mix:affectedNodeTypes</string></field>
-                    							<field  name="properties">
-                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
-																												</field>
-																										</object>
-                    					</value>		
-												            </collection>
-												          </field>                        
+										<field  name="mixins">
+					            <collection type="java.util.ArrayList">
+					            	<value>
+						  						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+						  							<field  name="name"><string>mix:affectedNodeTypes</string></field>
+						  							<field  name="properties">
+						  								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+														</field>
+													</object>
+		  									</value>		
+					            </collection>
+					          </field>                        
 	                </object>  
 	              </value>
 	              <value>
@@ -269,23 +280,28 @@
 	                  <field  name="description"><string>request for publishing a document</string></field>
 	                  <field  name="srcWorkspace"><string>collaboration</string></field>
 	                  <field  name="srcPath"><string>/Users/root/Private/Documents</string></field>
-	                  <field  name="lifecyclePhase"><string>read</string></field>
+	                  <field  name="isDeep"><boolean>true</boolean></field>
+										<field  name="lifecyclePhase">
+	                  	<collection type="java.util.ArrayList">
+												<value><string>read</string></value>
+											</collection>
+										</field>
 	                  <field  name="roles"><string>root</string></field>
 	                  <field  name="variables">
 	                    <string>exo:requestPath=/Documents/Validation Requests;exo:reservePath=/Users/root/Private/Documents/Publishing Requested</string>
 	                  </field>
-																			<field  name="mixins">
-												            <collection type="java.util.ArrayList">
-												            	<value>
-                    						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
-                    							<field  name="name"><string>mix:affectedNodeTypes</string></field>
-                    							<field  name="properties">
-                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
-																												</field>
-																										</object>
-                    					</value>		
-												            </collection>
-												          </field>                        
+										<field  name="mixins">
+					            <collection type="java.util.ArrayList">
+					            	<value>
+						  						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+						  							<field  name="name"><string>mix:affectedNodeTypes</string></field>
+						  							<field  name="properties">
+						  								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+														</field>
+													</object>
+              					</value>		
+					            </collection>
+					          </field>                        
 	                </object>  
 	              </value>                                  
 	            </collection>   
