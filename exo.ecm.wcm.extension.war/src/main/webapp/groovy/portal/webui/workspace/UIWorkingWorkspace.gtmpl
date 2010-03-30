@@ -2,11 +2,18 @@
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.web.application.JavascriptManager;
   import org.exoplatform.portal.webui.util.Util;  
+  import org.exoplatform.portal.webui.navigation.PageNavigationUtils;
   import org.exoplatform.services.wcm.navigation.NavigationService;
+  import org.exoplatform.portal.config.model.PageNavigation;
+  import javax.servlet.http.HttpSession;
 
   def rcontext = _ctx.getRequestContext() ;
+  def userName = rcontext.getRemoteUser();
   
-  def navigations = Util.getUIPortal().getNavigations();
+  List<PageNavigation>  navigations = new ArrayList<PageNavigation>();
+  for(PageNavigation nav: Util.getUIPortal().getNavigations()){
+    navigations.add(PageNavigationUtils.filter(nav, userName ));
+  }
   def navigationService = uicomponent.getApplicationComponent(NavigationService.class);
   def JSONnavigation = navigationService.getNavigationsAsJSON(navigations);
   def selectedNodeUri = Util.getUIPortal().getSelectedNode().getUri();
@@ -15,7 +22,7 @@
   session.setAttribute("previousURI", selectedNodeUri);
 %>
 <script type="text/javascript">
-  eXo.env.portal.userName='<%= rcontext.getRemoteUser() %>';
+  eXo.env.portal.userName='<%= userName %>';
   eXo.env.portal.language='<%= rcontext.getLocale().getLanguage() %>'
   eXo.env.portal.navigations = <%= JSONnavigation %> ;
   eXo.env.portal.selectedNodeUri = '<%= selectedNodeUri %>';
