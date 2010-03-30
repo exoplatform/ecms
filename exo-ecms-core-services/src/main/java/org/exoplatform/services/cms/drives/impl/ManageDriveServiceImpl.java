@@ -459,6 +459,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     for(DriveData drive : getDriveByUserRoles(repository, userId, userRoles)) {
       if(drive.getHomePath().startsWith(userPath + "/${userId}/")) {
         personalDrives.add(drive);
+      } else if(drive.getHomePath().startsWith(userPath + "/" + userId + "/")){
+        personalDrives.add(drive);
       }
     }
     Collections.sort(personalDrives);
