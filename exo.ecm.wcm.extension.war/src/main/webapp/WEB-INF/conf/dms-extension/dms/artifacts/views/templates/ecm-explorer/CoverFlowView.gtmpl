@@ -141,13 +141,13 @@
 	  						    if(isShowCoverFlow) {
 	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
 	  						    } else {
-  	  						    println "<image src=\"/ecm/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigFolder.gif\" longdesc=\""+actionLink+"\" w=\"208\" h=\"218\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
+  	  						    println "<image src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigFolder.gif\" longdesc=\""+actionLink+"\" w=\"208\" h=\"218\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
 	  						    }
 							    } else {
 							      if(isShowCoverFlow) {
 	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
 	  						    } else {
-	  						      println "<image src=\"/ecm/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigDocument.gif\" longdesc=\""+actionLink+"\" w=\"115\" h=\"144\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
+	  						      println "<image src=\"/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigDocument.gif\" longdesc=\""+actionLink+"\" w=\"115\" h=\"144\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";
 	                  }
 							    }
 							  }
