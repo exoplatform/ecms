@@ -21,15 +21,21 @@
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo.ecm.wcm.demo.rest-war</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
   </dependencies>
   <build>
-    <finalName>gatein-exo-dms-${project.version}</finalName>
+    <finalName>gatein-exo-wcm-sample-${project.version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-ear-plugin</artifactId>
         <configuration>
-          <displayName>ecm-demo</displayName>
+          <displayName>ecmdemo</displayName>
           <defaultLibBundleDir>lib</defaultLibBundleDir>
           <modules>
             <jarModule>
@@ -41,6 +47,11 @@
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo.ecm.wcm.demo.war</artifactId>
               <contextRoot>ecmdemo</contextRoot>
+            </webModule>
+            <webModule>
+              <groupId>org.exoplatform.ecms</groupId>
+              <artifactId>exo.ecm.wcm.demo.rest-war</artifactId>
+              <contextRoot>rest-ecmdemo</contextRoot>
             </webModule>
           </modules>
         </configuration>
