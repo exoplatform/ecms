@@ -464,17 +464,14 @@ public class UIDialogForm extends UIForm {
     List<SelectItemOption<String>> optionsList = new ArrayList<SelectItemOption<String>>();
     UIFormRadioBoxInput uiRadioBox = findComponentById(name);
     if(uiRadioBox == null){
-      String value = defaultValue.trim().substring(1, defaultValue.length()-1).split(",")[1];
-      uiRadioBox = new UIFormRadioBoxInput(name, value, null);
+      uiRadioBox = new UIFormRadioBoxInput(name, defaultValue, null);
       if(options != null && options.length() > 0){
         String[] array = options.split(";");
         for(int i = 0; i < array.length; i++) {
-          String[] arrayChild = array[i].trim().substring(1, array[i].length()-1).split(",");
-          List<String> listValue = new ArrayList<String>();
+          String[] arrayChild = array[i].trim().split(",");
           for(int j=0; j<arrayChild.length; j++) {
-            listValue.add(arrayChild[j].trim());
-          }
-          optionsList.add(new SelectItemOption<String>(listValue.get(0), listValue.get(1)));
+            optionsList.add(new SelectItemOption<String>(arrayChild[j], arrayChild[j]));
+          }          
         }
         uiRadioBox.setOptions(optionsList);        
       } else {
@@ -483,7 +480,30 @@ public class UIDialogForm extends UIForm {
       if(defaultValue != null) uiRadioBox.setDefaultValue(defaultValue);
     }
     uiRadioBox.setValue(uiRadioBox.getValue());
-    addUIComponentInput(uiRadioBox);
+    addUIFormInput(uiRadioBox);
+    String propertyName = getPropertyName(jcrPath);
+    propertiesName.put(name, propertyName);
+    fieldNames.put(propertyName, name);
+    JcrInputProperty inputProperty = new JcrInputProperty();
+    inputProperty.setJcrPath(jcrPath);
+    setInputProperty(name, inputProperty);
+    Node node = getNode();
+    Node childNode = getChildNode();
+    if(childNode != null) {
+      if(childNode.hasProperty(propertyName)) {
+        uiRadioBox.setValue(childNode.getProperty(propertyName).getValue().getString());
+      } 
+    } else {
+      if(node != null && node.hasProperty(propertyName)) {              
+        uiRadioBox.setValue(node.getProperty(propertyName).getString());
+      }
+    }    
+    if(isNotEditNode) {      
+      Node child = getChildNode();
+      if(child != null && child.hasProperty(propertyName)) {
+        uiRadioBox.setValue(DialogFormUtil.getPropertyValueAsString(child,propertyName));
+      }  
+    }
     renderField(name);
   }
   
