@@ -1,22 +1,48 @@
 <%
 	import org.exoplatform.wcm.webui.selector.UISelectPathPanel; 
 	import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
+	
+	def rcontext = _ctx.getRequestContext();
+	def jsManager = rcontext.getJavascriptManager();
+	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
+	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
+	jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('folder')");
 %>
+
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
-	<div>
-		<div class="UITreeViewBreadcumbs" id = "UIWCMTreeViewBreadcumbs">
-			<div id="UIWCMTreeViewBreadcumbsHomeIcon" class="TreeHomeIcon"></div>
-			<div style="clear:left"><span></span></div>
+	<div class="ActionBar">
+		<div class="FilterTitle">Filter</div>
+		<div class="FilterInput">
+			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter">
+				<option selected="selected" value="Web Contents">Web Contents</option>
+				<option value="DMS Documents">DMS Documents</option>
+				<option value="Medias">Medias</option>
+			</select>
 		</div>
+		<div class="SeparatorLineL"><span></span></div>
+		<div style="clear: both;"><span></span></div>
 	</div>
-	<div class="SelectContent"> 
-		<div class="UITreeBuilder">
-			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelFolder.label.LeftColumn") %></div>
-			<% uicomponent.renderChild(UIContentTreeBuilder.class); %>
-		</div>
-		<div class="UISelectPathPanel">
-			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelFolder.label.RightColumn") %></div>
-			<% uicomponent.renderChild(UISelectPathPanel.class); %>
-		</div>
+	<div class="BreadcumbsPortlet">
+		<div class="HomeIcon"><span></span></div> 
+		<div id="BreadcumbsContainer" class="BreadcumbsContainer"><span>Home</span></div>
 	</div>
+	<div class="LeftWorkspace" id="LeftWorkspace">
+		
+	</div>
+	<div class="RightWorkspace" id="RightWorkspace">
+		<div class="ListView">
+		  	<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListRecords">
+		    	<thead>
+		    		<tr>
+		    		  <th class="THBar" > Name </th>
+		    	 	</tr>
+		    	</thead>
+		    	<tr>
+		    		<td class="Item TRNoContent">There is no content</td>
+		    	</tr>
+		  	</table>
+		</div>
+		<div class="PageIterator" id="pageNavPosition"></div>
+	</div>	
+	<div style="clear: left;"><span></span></div>
 </div>

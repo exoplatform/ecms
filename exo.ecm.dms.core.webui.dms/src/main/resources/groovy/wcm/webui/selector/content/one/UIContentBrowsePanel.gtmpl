@@ -1,42 +1,49 @@
 <%
 	import org.exoplatform.wcm.webui.selector.UISelectPathPanel; 
 	import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
+	
+	def rcontext = _ctx.getRequestContext();
+	def jsManager = rcontext.getJavascriptManager();
+	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
+	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
+	jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('one')");
 %>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
-	<div style="padding:10px;float:left">
-		<%String selected = "";%>
-		<div style="float:left;padding:5px;">
-			<%= _ctx.appRes("UIContentBrowsePanelOne.selectBoxValues.FilterBy")%> :
-		</div>
-		<div style="float:left;padding:5px;">
-			<select>
-				<%
-					for(String type : uicomponent.types){
-						if(type.equals(uicomponent.selectedValues)) selected = "selected";
-						else selected = "";
-				%>
-						<option id="$type" $selected value="$type" onclick="<%=uicomponent.event("ChangeContentType", type)%>">
-							<%= _ctx.appRes("UIContentBrowsePanelOne.selectBoxValues." + type) %>
-						</option>
-				<%}%>
+	<div class="ActionBar">
+		<div class="FilterTitle">Filter</div>
+		<div class="FilterInput">
+			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter">
+				<option selected="selected" value="Web Contents">Web Contents</option>
+				<option value="DMS Documents">DMS Documents</option>
+				<option value="Medias">Medias</option>
 			</select>
 		</div>
+		<div class="SeparatorLineL"><span></span></div>
+		<div style="clear: both;"><span></span></div>
 	</div>
-	<div style="clear:left"><span></span></div>
-	<div>
-		<div class="UITreeViewBreadcumbs" id = "UIWCMTreeViewBreadcumbs">
-			<div id="UIWCMTreeViewBreadcumbsHomeIcon" class="TreeHomeIcon"></div>
-			<div style="clear:left"><span></span></div>
-		</div>
+	<div class="BreadcumbsPortlet">
+		<div class="HomeIcon"><span></span></div> 
+		<div id="BreadcumbsContainer" class="BreadcumbsContainer"><span>Home</span></div>
 	</div>
-	<div class="SelectContent"> 
-		<div class="UITreeBuilder">
-			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelOne.label.LeftColumn") %></div>
-			<% uicomponent.renderChild(UIContentTreeBuilder.class); %>
+	<div class="ListContainer">
+		<div class="LeftWorkspace" id="LeftWorkspace"></div>
+		<div class="RightWorkspace" id="RightWorkspace">
+			<div class="MultiListContainer">
+				<div class="ListView">
+		  			<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListRecords">
+		    			<thead>
+		    				<tr>
+			    		  		<th class="THBar"> Name </th>
+			    	 		</tr>
+				    	</thead>
+			    		<tr>
+				    		<td class="Item TRNoContent">There is no content</td>
+		    			</tr>
+		  			</table>
+				</div>
+				<div class="PageIterator" id="pageNavPosition"></div>
+			</div>
 		</div>
-		<div class="UISelectPathPanel">
-			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelOne.label.RightColumn") %></div>
-			<% uicomponent.renderChild(UISelectPathPanel.class); %>
-		</div>
+		<div style="clear: left;"><span></span></div>
 	</div>
 </div>

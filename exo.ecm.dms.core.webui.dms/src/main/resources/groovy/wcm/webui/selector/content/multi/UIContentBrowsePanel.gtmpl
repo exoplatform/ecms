@@ -2,47 +2,78 @@
 	import org.exoplatform.wcm.webui.selector.UISelectPathPanel; 
 	import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
 	import org.exoplatform.wcm.webui.selector.content.multi.UICLVContentSelectedGrid;
+	
+	def rcontext = _ctx.getRequestContext();
+	def jsManager = rcontext.getJavascriptManager();
+	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
+	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
+	jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi')");
 %>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
-	<div style="padding:10px;float:left">
-		<%String selected = "";%>
-		<div style="float:left;padding:5px;">
-			<%= _ctx.appRes("UIContentBrowsePanelMulti.selectBoxValues.FilterBy")%> :
-		</div>
-		<div style="float:left;padding:5px;">
-			<select>
-				<%
-					for(String type : uicomponent.types){
-						if(type.equals(uicomponent.selectedValues)) selected = "selected";
-						else selected = "";
-				%>
-						<option id="$type" $selected value="$type" onclick="<%=uicomponent.event("ChangeContentType", type)%>">
-							<%= _ctx.appRes("UIContentBrowsePanelMulti.selectBoxValues." + type) %>
-						</option>
-				<%}%>
+	<div class="ActionBar">
+		<div class="FilterTitle">Filter</div>
+		<div class="FilterInput">
+			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter">
+				<option selected="selected" value="Web Contents">Web Contents</option>
+				<option value="DMS Documents">DMS Documents</option>
+				<option value="Medias">Medias</option>
 			</select>
 		</div>
+		<div class="SeparatorLineL"><span></span></div>
+		<div style="clear: both;"><span></span></div>
 	</div>
-	<div style="clear:left"><span></span></div>
-	<div>
-		<div class="UITreeViewBreadcumbs" id = "UIWCMTreeViewBreadcumbs">
-			<div id="UIWCMTreeViewBreadcumbsHomeIcon" class="TreeHomeIcon"></div>
-			<div style="clear:left"><span></span></div>
-		</div>
+	<div class="BreadcumbsPortlet">
+		<div class="HomeIcon"><span></span></div> 
+		<div id="BreadcumbsContainer" class="BreadcumbsContainer"><span>Home</span></div>
 	</div>
-	<div class="SelectContent"> 
-		<div class="UITreeBuilder">
-			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelMulti.label.LeftColumn") %></div>
-			<% uicomponent.renderChild(UIContentTreeBuilder.class); %>
+	<div class="ListContainer">
+		<div class="LeftWorkspace" id="LeftWorkspace">
 		</div>
-		<div class="UISelectPathPanel">
-			<div class="Title"><%= _ctx.appRes("UIContentBrowsePanelMulti.label.RightColumn") %></div>
-			<% uicomponent.renderChild(UISelectPathPanel.class); %>
-			<div class= "UIContentSelected">
-				<% uicomponent.renderChild(UICLVContentSelectedGrid.class); %>
+		<div class="RightWorkspace" id="RightWorkspace">
+			<div class="MultiListContainer">
+				<div class="ListView">
+		  			<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListRecords">
+		    			<thead>
+		    				<tr>
+			    		  		<th class="THBar"> Name </th>
+				   	    		<th class="THBar" style="width: 55px;"> Actions</th>
+			    	 		</tr>
+				    	</thead>
+			    		<tr>
+				    		<td class="Item TRNoContent">There is no content</td>
+			    			<td width='55px'><input type="checkbox" class="Input"/></td>
+		    			</tr>
+		  			</table>
+				</div>
+				<div class="PageIterator" id="pageNavPosition"></div>
 			</div>
 		</div>
-		<div>
-		</div>
+		<div class="UIAction"> 
+      		<table class="ActionContainer" align="center">
+      			<tr>
+      				<td align="center">
+        				<a href="#" class="ActionButton LightBlueStyle">
+              				<div class="ButtonLeft">
+                				<div class="ButtonRight">
+                  					<div class="ButtonMiddle" onclick="eXo.ecm.ECS.insertMultiContent();">
+                    					Save
+                  					</div>
+                				</div>
+              				</div>
+         				</a>    
+         				<a href="#" class="ActionButton LightBlueStyle">
+              				<div class="ButtonLeft">
+                				<div class="ButtonRight">
+                  					<div class="ButtonMiddle">
+                    					Cancel
+                  					</div>
+				                </div>
+              				</div>
+         				</a>          
+        			</td>
+        		</tr>  
+      		</table>
+    	</div>
+		<div style="clear: left;"><span></span></div>
 	</div>
 </div>

@@ -25,11 +25,12 @@
 	<div style="clear:left"><span></span></div>
 	<div>
 		<div class="UITreeViewBreadcumbs" id = "UIWCMTreeViewBreadcumbs">
-			<div id="UIWCMTreeViewBreadcumbsHomeIcon" class="TreeHomeIcon"></div>
+			<div id="UIWCMTreeViewBreadcumbsHomeIcon" class="TreeHomeIcon"> Home</div>
 			<div style="clear:left"><span></span></div>
 		</div>
 	</div>
 	<div class="SelectContent"> 
+		<!--
 		<div class="UITreeBuilder">
 			<div class="Title" title="<%= _ctx.appRes("UIContentBrowsePanel.SelectContent.leftcolumn.title") %>"><%= _ctx.appRes("UIContentBrowsePanel.SelectContent.leftcolumn.title") %></div>
 			<% uicomponent.renderChild(UIContentTreeBuilder.class); %>
@@ -38,5 +39,6 @@
 			<div class="Title" title="<%= _ctx.appRes("UIContentBrowsePanel.SelectContent.rightcolumn.title") %>"><%= _ctx.appRes("UIContentBrowsePanel.SelectContent.rightcolumn.title") %></div>
 			<% uicomponent.renderChild(UISelectPathPanel.class); %>
 		</div>
+		-->
 	</div>
 </div>

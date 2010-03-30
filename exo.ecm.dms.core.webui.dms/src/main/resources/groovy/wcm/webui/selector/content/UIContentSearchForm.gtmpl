@@ -4,9 +4,12 @@
 
   def rcontext = _ctx.getRequestContext();
   def checkedRadioId = uicomponent.getCheckedRadioId();
-  rcontext.getJavascriptManager().addJavascript("initCheckedRadio('$checkedRadioId');");
-  rcontext.getJavascriptManager().addOnLoadJavascript("setHiddenValue");
-  rcontext.getJavascriptManager().addJavascript("initCondition('$uiform.id');");
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.importJavascript("eXo.wcm.frontoffice.private.CLV", "/eXoWCMResources/javascript");
+  
+  jsManager.addJavascript("eXo.ecm.CLV.initCheckedRadio('$checkedRadioId');");
+  jsManager.addJavascript("eXo.ecm.CLV.initCondition('$uiform.id');");
+  jsManager.addOnLoadJavascript("eXo.ecm.CLV.setHiddenValue");
 %>
 
 <div class="$uicomponent.id">

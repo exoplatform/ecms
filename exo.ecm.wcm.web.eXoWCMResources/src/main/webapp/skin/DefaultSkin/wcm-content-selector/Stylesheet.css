@@ -163,18 +163,13 @@
 }
 
 /*********************** UITreeView ********************************************/
-.UIWebContentTreeView {
-  overflow: auto;
-  padding: 10px;
-  height: 250px;
-}
 
-.UIWebContentTreeView .ViewChildNodes {
+.LeftWorkspace .ViewChildNodesContainer {
   padding-left: 20px;
   display: none;
 }
 
-.UIWebContentTreeView .SelectNodeIcon {
+.LeftWorkspace .SelectNodeIcon {
   background: url(background/CollapseIcon.gif) no-repeat left center;
   height: auto;
   padding-left: 18px;
@@ -184,7 +179,7 @@
   cursor: pointer;
 }
 
-.UIWebContentTreeView .NoneSelectNodeIcon {
+.LeftWorkspace .NoneSelectNodeIcon {
   background: url(background/ExpandIcon.gif) no-repeat left center;
   height: auto;
   padding-left: 18px;
@@ -194,7 +189,7 @@
   cursor: pointer;
 }
 
-.UIWebContentTreeView .DefaultPageIcon {
+.LeftWorkspace .DefaultPageIcon {
   background: transparent url(background/DefaultPageIcon.gif) no-repeat scroll left center;
   background-position: left center;
   display: block;
@@ -260,4 +255,301 @@
 
 #UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent {
   background: white;
+}
+
+/* ===========================*/
+
+/* Tree */
+.Tree .HomeNode {
+	background: url('background/TreeRoot24x18.gif') no-repeat left;
+	padding-left: 24px; 
+	height: 18px;
+	line-height: 18px;
+}
+
+.Tree .Node {
+	background: url('background/Dotted.gif') repeat-y 5px top;
+	line-height: 18px;
+	padding-top: 7px;	
+	white-space: nowrap;
+}
+
+.Tree .NodeGroup {
+	display: none;
+	padding-left: 20px;
+}
+
+.Tree .LastNode{
+	background: url('background/Dotted.gif') no-repeat 5px top;
+}
+
+.Tree .IconNode {
+	padding-left: 20px;
+}
+
+.Tree .Expand {
+	background: url('background/ExpandIcon.gif') no-repeat 5px top;
+	height: auto;
+	padding-left: 23px;
+}
+
+.Tree .Collapse {
+	background: url('background/CollapseIcon.gif') no-repeat 5px top;
+	height: auto;
+	padding-left: 23px;
+	border: 1px solid white;
+}
+
+.Tree .IconClose {
+	padding-left: 25px;
+	margin-left: 5px;
+}
+
+.exo_portalFolder16x16Icon {
+	background:transparent url('background/nt-unstructured.gif') no-repeat scroll 0% 0%;
+	height:16px;
+	width:16px;
+}
+
+.exo_webContent16x16Icon {
+	background:transparent url('background/nt-unstructured.gif') no-repeat scroll 0% 0%;
+	height:16px;
+	width:16px;
+}
+
+.ListContainer .CheckIcon {
+	background:transparent url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/SelectIcon.gif') no-repeat scroll 0% 0%;
+	height:20px;
+	width:16px;
+	margin: auto;
+}
+
+.ListContainer .DeleteIcon {
+	background:transparent url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/NavigationIcons/Delete.gif') no-repeat scroll 0% 0%;
+	height:20px;
+	width:16px;
+	margin: auto;
+}
+
+.UIWCMSearchContainer .LeftWorkspace{
+	 width: 210px;
+	 float: left;
+	 border: 1px solid #f4f4f4;
+	 background:#fafafa;
+	 overflow: auto;
+	 height: 461px;
+}
+
+.UIWCMSearchContainer .RightWorkspace{
+	 margin-left: 218px;
+}
+
+.UIContentBrowsePanelFolder .ListContainer .RightWorkspace .ListView th {
+	border:1px solid #C7C7C7;
+	vertical-align:middle;
+	height: 24px;
+	padding-left: 7px;
+}
+
+.UIContentBrowsePanelFolder .ListContainer .RightWorkspace .ListView td {
+	border:1px solid #C7C7C7;
+	vertical-align:middle;
+	height: 24px;
+	padding-left: 7px;
+}
+
+
+.ListContainer .RightWorkspace .MultiListContainer .ListView th {
+	border:1px solid #C7C7C7;
+	vertical-align:middle;
+	height: 24px;
+	padding-left: 7px;
+}
+
+.ListContainer .RightWorkspace .MultiListContainer .ListView td {
+	border:1px solid #C7C7C7;
+	vertical-align:middle;
+	height: 24px;
+	padding-left: 7px;
+}
+
+
+
+
+.UIWCMSearchContainer .LeftWorkspace .Node {
+	line-height:18px;
+	margin-left:15px;
+	padding-top:7px;
+	white-space:nowrap;
+}
+
+.UIWCMSearchContainer .LeftWorkspace .ChildrenContainer {
+	margin-left:15px;
+}
+
+.UIWCMSearchContainer .LeftWorkspace .Node .ExpandIcon {
+	background: url('background/ExpandIcon.gif') no-repeat scroll left center;
+	height:auto;
+	padding-left:18px;
+}
+
+.UIWCMSearchContainer .LeftWorkspace .Node .CollapseIcon {
+	background: url('background/CollapseIcon.gif') no-repeat scroll left center;
+	height:auto;
+	padding-left:18px;
+}
+
+.UIWCMSearchContainer .LeftWorkspace .Node .NodeIcon {
+	background-position:left center;
+	height:20px;
+	padding-left:20px;
+	display: block;
+}
+
+.UIWCMSearchContainer .BreadcumbsPortlet{
+	background: #fbfbfb;
+	border: 1px solid #f4f4f4;
+	padding: 4px 8px 4px 16px;
+	margin: 0px 0px 8px 0px;
+	height: 18px;
+}
+
+.UIWCMSearchContainer .BreadcumbsPortlet .BreadcumbsContainer{
+	Float: left;
+}
+
+.UIWCMSearchContainer .BreadcumbsPortlet .BreadcumbTab{
+	Float: left;
+}
+
+.UIWCMSearchContainer .BreadcumbsPortlet .HomeIcon{
+	background: url('background/HomeIcon.gif') no-repeat center;
+	float: left;
+	margin: 0px 8px 0px 0px;
+	height: 16px;
+	width: 16px;
+}
+
+
+.UIWCMSearchContainer .BreadcumbsPortlet .RightArrowIcon{
+	background: url('background/RightArrowIcon.gif') no-repeat center;
+	float: left;
+	margin: 0px 8px 0px 0px;
+	height: 16px;
+	width: 16px;
+}
+
+.UIWCMSearchContainer .BreadcumbsPortlet .Selected{
+	float: left;
+	display: block;
+	margin: 0px 8px 0px 0px;
+	color: #1b59aa;
+}
+
+.UIWCMSearchContainer .BreadcumbsPortlet .Nomal{
+	float: left;
+	display: block;
+	margin: 0px 8px 0px 0px;
+	text-decoration: none;
+	color: black;
+}
+
+.UIWCMSearchContainer .RightWorkspace table{
+	border: 1px solid #f4f4f4;
+}
+
+.UIWCMSearchContainer .RightWorkspace td{
+	border: 1px solid #f4f4f4;
+}
+
+
+.UIWCMSearchContainer .RightWorkspace .THBar{
+	background: #dee0e4;
+	text-align: center;
+	padding-left: 12px;
+	border-left: 1px solid #f4f4f4;
+	line-height: 20px;
+}
+
+.UIWCMSearchContainer .RightWorkspace .TRNoContent{
+	font-style: italic;
+	color: #FF5604;
+	text-align: center;
+}
+
+.UIWCMSearchContainer .RightWorkspace .EvenItem{
+	background: #f5f4ee;
+	text-align: left;
+}
+
+.UIWCMSearchContainer .RightWorkspace .SelectItem{
+	background: #fffadc;
+	text-align: left;
+}
+
+.UIWCMSearchContainer .RightWorkspace .OddItem{
+	text-align: left;
+	background: #f1f1f1;
+}
+
+.UIWCMSearchContainer .RightWorkspace .Item{
+	background-position:left 3px;
+	border-left:1px solid #F4F4F4;
+	cursor:pointer;
+	height:20px;
+	line-height:20px;
+	padding-left:20px;
+	width:auto;
+}
+
+
+
+
+
+.UIWCMSearchContainer .ActionBar {
+	background:none repeat scroll 0 0 #F5F5F5;
+	border:1px solid #D7D7D7;
+	height:30px;
+	padding:0 8px 0 16px;
+	margin-bottom: 6px;
+}
+.UIWCMSearchContainer .ActionBar .FilterTitle {
+	float:left;
+	line-height:26px;
+}
+.UIWCMSearchContainer .ActionBar .FilterInput {
+	float:left;
+	line-height:20px;
+	margin:4px 0;
+}
+.UIWCMSearchContainer .ActionBar .FilterInput .Filter {
+	background: white;
+	border:1px solid #D7D7D7;
+	width:120px;
+}
+.UIWCMSearchContainer .ActionBar .SeparatorLineL {
+	border-left:1px solid #D7D7D7;
+	float:left;
+	height:30px;
+	margin:0 8px;
+}
+
+.UIWCMSearchContainer .ActionBar .ControlButton {
+	float:left;
+	line-height:20px;
+	margin:6px 18px 2px 0;
+	padding-left:20px;
+}
+
+.UICLVPortlet .UIPopupWindow .UITabPane {
+	padding: 8px;
+}
+
+.UISingleContentViewerPortlet .UIPopupWindow .UIHorizontalTabs {
+	height: 24px;
+	border-bottom: 1px solid #c7c7c7;
+}
+
+.UISingleContentViewerPortlet .UIPopupWindow .UITabPane {
+	padding: 8px;
 }

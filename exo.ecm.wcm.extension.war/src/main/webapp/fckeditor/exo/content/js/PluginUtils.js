@@ -144,7 +144,6 @@ PluginUtils.prototype.actionColExp = function(objNode) {
 };
 
 PluginUtils.prototype.listFiles = function(list) {
-
 	var rightWS = document.getElementById('RightWorkspace');
 	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
 	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
