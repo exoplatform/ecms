@@ -35,10 +35,10 @@ import org.exoplatform.webui.config.annotation.EventConfig;
  * Jun 23, 2008
  */
 @ComponentConfig(
-                 template =  "classpath:groovy/wcm/webui/selector/UISelectPathPanel.gtmpl",
-                 events = {
-                     @EventConfig(listeners = UISelectPathPanel.SelectActionListener.class)
-                 }
+  template =  "classpath:groovy/wcm/webui/selector/UISelectPathPanel.gtmpl",
+  events = {
+    @EventConfig(listeners = UISelectPathPanel.SelectActionListener.class)
+  }
 )
 public class UISelectPathPanelFolder extends UISelectPathPanel {
 

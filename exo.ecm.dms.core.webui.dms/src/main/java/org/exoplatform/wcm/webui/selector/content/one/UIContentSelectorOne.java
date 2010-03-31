@@ -2,9 +2,6 @@ package org.exoplatform.wcm.webui.selector.content.one;
 
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.ComponentConfigs;
-import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIPopupWindow;
 
 /**
  * Author : TAN DUNG DANG
@@ -12,19 +9,9 @@ import org.exoplatform.webui.core.UIPopupWindow;
  * Jan 20, 2009
  */
 
-@ComponentConfigs ({
-  @ComponentConfig(
-      template = "system:/groovy/webui/core/UITabPane_New.gtmpl"
-  ),
-  @ComponentConfig(
-      type = UIPopupWindow.class,
-      id = "UIWebContentSearchPopup",
-      template = "system:/groovy/webui/core/UIPopupWindow.gtmpl",
-      events = {
-        @EventConfig(listeners = UIContentSelectorOne.CloseActionListener.class, name = "ClosePopup")
-      }
-  )
-})
+@ComponentConfig(
+  template = "system:/groovy/webui/core/UITabPane_New.gtmpl"
+)
 
 public class UIContentSelectorOne extends UIContentSelector {
 

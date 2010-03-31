@@ -202,7 +202,7 @@ public class UIContentSearchForm extends UIForm {
 
   private QueryCriteria getInitialQueryCriteria(String siteName) {
     QueryCriteria qCriteria = new QueryCriteria();
-    String contentType = getAncestorOfType(UIContentSelector.class).getChild(UIContentBrowsePanel.class).contentType;
+    String contentType = getAncestorOfType(UIContentSelector.class).getChild(UIContentBrowsePanel.class).getContentType();
     if (UIContentBrowsePanel.WEBCONTENT.equals(contentType)) {
     	qCriteria.setSearchDocument(false);
     	qCriteria.setSearchWebContent(true);
@@ -282,7 +282,7 @@ public class UIContentSearchForm extends UIForm {
     public void execute(Event<UIContentSearchForm> event) throws Exception {
       UIContentSearchForm uiWCSearch = event.getSource();
       String typeSearch = uiWCSearch.getAncestorOfType(UIContentSelector.class)
-                                      .getChild(UIContentBrowsePanel.class).contentType;
+                                      .getChild(UIContentBrowsePanel.class).getContentType();
       int pageSize = 5;
       String radioValue = event.getRequestContext().getRequestParameter(RADIO_NAME);
       String siteName = uiWCSearch.getUIStringInput(UIContentSearchForm.LOCATION).getValue();

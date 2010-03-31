@@ -42,9 +42,6 @@ public class UICLVPortlet extends UIPortletApplication {
   /** The Constant REPOSITORY. */
   public final static String REPOSITORY              = "repository";
 
-  /** The Constant WORKSPACE. */
-  public final static String WORKSPACE               = "workspace";
-
   /** The Constant ITEMS_PER_PAGE. */
   public final static String ITEMS_PER_PAGE          = "itemsPerPage";
 

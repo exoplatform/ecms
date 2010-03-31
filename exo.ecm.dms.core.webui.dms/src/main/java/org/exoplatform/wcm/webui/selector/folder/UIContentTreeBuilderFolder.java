@@ -37,8 +37,10 @@ import org.exoplatform.webui.event.EventListener;
  */
 
 @ComponentConfig(
-                 template = "classpath:groovy/wcm/webui/selector/content/UIContentTreeBuilder.gtmpl",
-                 events = @EventConfig(listeners = UIContentTreeBuilderFolder.ChangeNodeActionListener.class)
+  template = "classpath:groovy/wcm/webui/selector/content/UIContentTreeBuilder.gtmpl",
+  events = {
+    @EventConfig(listeners = UIContentTreeBuilderFolder.ChangeNodeActionListener.class)
+  }
 )
 public class UIContentTreeBuilderFolder extends UIContentTreeBuilder {
 

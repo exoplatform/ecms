@@ -19,6 +19,7 @@ package org.exoplatform.wcm.webui;
 import java.util.HashMap;
 
 import javax.jcr.Node;
+import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.portal.UIPortal;
@@ -339,9 +340,12 @@ public class Utils {
     requestContext.addUIComponentToUpdateByAjax(application.getUIPopupMessages()) ;
   }
 
+  @Deprecated
   /**
-   * Gets the service.
+   * Gets the service.  Try to use WCMCoreUtils.getService(Class<T> clazz).
+   * 
    * @param clazz the class of the service
+   * 
    * @return the service
    */
   public static <T> T getService(Class<T> clazz) {
@@ -349,20 +353,47 @@ public class Utils {
   	return clazz.cast(portalApplication.getApplicationComponent(clazz));
   }
   
+  @Deprecated
   /**
-   * Gets the session provider.
+   * Gets the session provider. Try to use WCMCoreUtils.getUserSessionProvider().
+   * 
    * @return the session provider
    */
   public static SessionProvider getSessionProvider() {
   	return WCMCoreUtils.getUserSessionProvider();
   }
   
+  @Deprecated
   /**
-   * Gets the system session provider.
+   * Gets the system session provider. Try to use WCMCoreUtils.getSystemSessionProvider().
+   * 
    * @return the system session provider
    */
   public static SessionProvider getSystemSessionProvider() {
     return WCMCoreUtils.getSystemSessionProvider();
+  }
+  
+  /**
+   * Get one portlet preference by name
+   * 
+   * @param preferenceName the name of preference
+   * 
+   * @return the portlet preference's value
+   */
+  public static String getPortletPreference(String preferenceName) {
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
+    return preferences.getValue(preferenceName, null);
+  }
+  
+  /**
+   * Get all portlet preferences
+   * 
+   * @return all portlet preferences
+   */
+  public static PortletPreferences getAllPortletPreferences() {
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    return portletRequestContext.getRequest().getPreferences();
   }
   
 }

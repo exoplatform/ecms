@@ -20,9 +20,9 @@ import javax.jcr.Node;
 
 import org.exoplatform.wcm.webui.selector.UISelectPathPanel;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
+import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 
@@ -31,21 +31,13 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  * 
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-@ComponentConfigs({
-  @ComponentConfig(
-      lifecycle = Lifecycle.class,
-      template = "classpath:groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl",
-      events = {
-        @EventConfig(listeners = UIContentBrowsePanelMulti.ChangeContentTypeActionListener.class)
-      }
-  ),
-  @ComponentConfig(
-      type = UISelectPathPanel.class,
-      id = "UIContentBrowsePathSelector",
-      template = "classpath:groovy/wcm/webui/selector/content/UIContentBrowsePathSelector.gtmpl",
-      events = @EventConfig(listeners = UISelectPathPanel.SelectActionListener.class)
-  )
-})
+@ComponentConfig(
+  lifecycle = Lifecycle.class,
+  template = "classpath:groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl",
+  events = {
+    @EventConfig(listeners = UIContentBrowsePanelMulti.ChangeContentTypeActionListener.class)
+  }
+)
 public class UIContentBrowsePanelMulti extends UIContentBrowsePanel{
 
   /**
@@ -55,23 +47,9 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel{
    */
   public UIContentBrowsePanelMulti() throws Exception {
     super();
-    addChild(org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder.class,null, org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder.class.getName()+hashCode());
-    addChild(UISelectPathPanel.class, "UIContentBrowsePathSelector", "UIContentBrowsePathSelector");
-    addChild(UICLVContentSelectedGrid.class, null, null);
+    addChild(UIContentTreeBuilder.class, null, null);
+    addChild(UISelectPathPanel.class, null, null);
   }
   
-	/* (non-Javadoc)
-	 * @see org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel#doSelect(javax.jcr.Node, org.exoplatform.webui.application.WebuiRequestContext)
-	 */
-	@Override
-  public void doSelect(Node node, WebuiRequestContext requestContext) throws Exception {
-    UICLVContentSelectedGrid uiSelectedContentGrid = getChild(UICLVContentSelectedGrid.class);
-    String value = node.getPath();
-    if (!uiSelectedContentGrid.getSelectedCategories().contains(value)) {
-      uiSelectedContentGrid.addCategory(value);
-    }
-    uiSelectedContentGrid.updateGrid(uiSelectedContentGrid.getUIPageIterator().getCurrentPage());
-    uiSelectedContentGrid.setRendered(true);
-    requestContext.addUIComponentToUpdateByAjax(this);
-  }
+  public void doSelect(Node node, WebuiRequestContext requestContext) throws Exception {}
 }

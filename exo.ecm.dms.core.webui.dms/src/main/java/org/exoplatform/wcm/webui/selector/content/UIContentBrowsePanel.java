@@ -21,20 +21,13 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
-import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.services.wcm.portal.LivePortalManagerService;
-import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.selector.UISelectPathPanel;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -44,22 +37,15 @@ import org.exoplatform.webui.event.EventListener;
  * 
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-@ComponentConfigs({
-  @ComponentConfig(
-      lifecycle = Lifecycle.class,
-      template = "classpath:groovy/wcm/webui/selector/content/UIContentBrowsePanel.gtmpl",
-      events = {
-        @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class)
-      }
-  ),
-  @ComponentConfig(
-      type = UISelectPathPanel.class,
-      id = "UIContentBrowsePathSelector",
-      template = "classpath:groovy/wcm/webui/selector/content/UIContentBrowsePathSelector.gtmpl",
-      events = @EventConfig(listeners = UISelectPathPanel.SelectActionListener.class)
-  )
-})
-public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector implements UIPopupComponent{
+
+@ComponentConfig(
+  lifecycle = Lifecycle.class,
+  events = {
+	@EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class)
+  }
+)
+  
+public abstract class UIContentBrowsePanel extends UIContainer {
   public static final String[] WEBCONTENT_NODERTYPE = new String[]{"exo:webContent", "exo:article"};
   public static final String[] MEDIA_MIMETYPE = new String[]{"application", "image", "audio", "video"};
   public static final String WEBCONTENT = "WebContent";
@@ -74,20 +60,37 @@ public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector implem
    * 
    * @throws Exception the exception
    */
-  private NodeLocation currentPortalLocation;
-  public String contentType;
+  private String contentType;
+  
+  private String popupId; 
 
+  public String getPopupId() {
+	return popupId;
+  }
+  
+  public void setPopupId(String popupId) {
+	this.popupId = popupId;
+  }
+  
+  public String getContentType() {
+	return contentType;
+  }
+  
+  public void setContentType(String contentType) {
+	this.contentType = contentType;
+  }
+  
   public UIContentBrowsePanel() throws Exception {
     contentType = WEBCONTENT;
   }
   
   public void reRenderChild(String typeContent) throws Exception{
     if(typeContent == null || typeContent.equals(WEBCONTENT)){
-      this.contentType = WEBCONTENT;
-    }else if(typeContent.equals(DMSDOCUMENT)){
-      this.contentType = DMSDOCUMENT;
+      contentType = WEBCONTENT;
+    } else if (typeContent.equals(DMSDOCUMENT)){
+      contentType = DMSDOCUMENT;
     } else {
-      this.contentType = MEDIA;
+      contentType = MEDIA;
     }
   }
 
@@ -99,7 +102,6 @@ public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector implem
    * @throws Exception the exception
    */
   public void init() throws Exception {
-    Node currentPortal = getCurrentPortal();
     UISelectPathPanel selectPathPanel = getChild(UISelectPathPanel.class);
     String[] acceptedNodeTypes = null;
     String[] acceptedMimeTypes = null;
@@ -114,7 +116,7 @@ public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector implem
       selectPathPanel.setWebContent(false);
       selectPathPanel.setDMSDocument(false);
     } else if(contentType.equals(DMSDOCUMENT)){
-      String repositoryName = ((ManageableRepository)(currentPortal.getSession().getRepository())).getConfiguration().getName();
+      String repositoryName = WCMCoreUtils.getRepository(null).getConfiguration().getName();
       List<String> listAcceptedNodeTypes = getApplicationComponent(TemplateService.class).getDocumentTemplates(repositoryName);
       List<String> listAcceptedNodeTypesTemp = new ArrayList<String>();
       for(String nodeType : listAcceptedNodeTypes) {
@@ -130,34 +132,8 @@ public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector implem
     }
     selectPathPanel.setAcceptedNodeTypes(acceptedNodeTypes);
     selectPathPanel.setAcceptedMimeTypes(acceptedMimeTypes);
-    LivePortalManagerService livePortalManagerService = getApplicationComponent(LivePortalManagerService.class);
-    String currentPortalName = Util.getUIPortalApplication().getOwner();
-    SessionProvider provider = Utils.getSessionProvider();
-    currentPortal = livePortalManagerService.getLivePortal(provider, currentPortalName);
-    currentPortalLocation = NodeLocation.make(currentPortal);
   }
 
-  @Override
-  public void onChange(Node node, Object context) throws Exception {  }
-
-  public void activate() throws Exception {  }
-
-  public void deActivate() throws Exception {  }
-
-  /**
-   * @return the currentPortal
-   */
-  public Node getCurrentPortal() {
-    return NodeLocation.getNodeByLocation(currentPortalLocation);
-  }
-
-  /**
-   * @param currentPortal the currentPortal to set
-   */
-  public void setCurrentPortal(Node currentPortal) {
-    currentPortalLocation = NodeLocation.make(currentPortal);
-  }
-  
   public static class ChangeContentTypeActionListener extends EventListener<UIContentBrowsePanel> {
     public void execute(Event<UIContentBrowsePanel> event) throws Exception {
       UIContentBrowsePanel contentBrowsePanel = event.getSource();

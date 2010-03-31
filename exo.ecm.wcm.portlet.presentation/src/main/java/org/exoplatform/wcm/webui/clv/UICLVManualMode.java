@@ -24,6 +24,7 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -51,9 +52,7 @@ public class UICLVManualMode extends UICLVContainer {
    */
 	@SuppressWarnings("unchecked")
   public void init() throws Exception {                       
-    PortletPreferences portletPreferences = getPortletPreference();
-    String repositoryName = portletPreferences.getValue(UICLVPortlet.REPOSITORY, null);
-    String workspaceName = portletPreferences.getValue(UICLVPortlet.WORKSPACE, null);
+    PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
     String[] listContent = portletPreferences.getValues(UICLVPortlet.CONTENT_LIST, null);
     if (listContent == null || listContent.length == 0) {
       messageKey = "UIMessageBoard.msg.contents-not-found";
@@ -62,9 +61,10 @@ public class UICLVManualMode extends UICLVContainer {
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.ITEMS_PER_PAGE, null));
     List<Node> nodes = new ArrayList<Node>();
     if (listContent != null && listContent.length != 0) {
-      for (String path : listContent) {
+      for (String itemPath : listContent) {
         try {
-        	Node viewNode = Utils.getViewableNodeByComposer(repositoryName, workspaceName, path);
+        	NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
+        	Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath());
         	if (viewNode != null) nodes.add(viewNode);    
         } catch (Exception e) {
           Utils.createPopupMessage(this, "UIMessageBoard.msg.add-node-error", null, ApplicationMessage.ERROR);

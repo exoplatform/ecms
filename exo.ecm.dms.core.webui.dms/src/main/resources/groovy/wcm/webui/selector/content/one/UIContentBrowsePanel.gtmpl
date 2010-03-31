@@ -27,7 +27,7 @@
 	</div>
 	<div class="ListContainer">
 		<div class="LeftWorkspace" id="LeftWorkspace"></div>
-		<div class="RightWorkspace" id="RightWorkspace">
+		<div class="RightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>">
 			<div class="MultiListContainer">
 				<div class="ListView">
 		  			<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListRecords">

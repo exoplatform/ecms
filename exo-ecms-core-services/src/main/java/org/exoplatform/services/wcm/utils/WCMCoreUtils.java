@@ -26,6 +26,8 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -151,6 +153,25 @@ public class WCMCoreUtils {
       return Arrays.asList(listAccess.load(0, listAccess.getSize()));
     } catch (Exception e) {
       log.error("getAllElementsOfListAccess() failed because of ", e);
+    }
+    return null;
+  }
+
+  /**
+   * Get the repository by name
+   * 
+   * @param repository the repository name
+   *  
+   * @return the manageable repository by name, the current repository if name is null 
+   */
+  public static ManageableRepository getRepository(String repository) {
+    try {
+      RepositoryService repositoryService = getService(RepositoryService.class);
+      if (repository == null)
+        return repositoryService.getCurrentRepository(); 
+      return repositoryService.getRepository(repository);
+    } catch (Exception e) {
+      log.error("getRepository(" + repository + ") failed because of ", e);
     }
     return null;
   }

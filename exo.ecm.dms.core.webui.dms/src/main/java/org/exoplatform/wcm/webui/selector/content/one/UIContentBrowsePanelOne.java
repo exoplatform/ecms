@@ -20,7 +20,6 @@ import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.page.UIPageBody;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
@@ -31,35 +30,27 @@ import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.selector.UISelectPathPanel;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
+import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
-import org.exoplatform.wcm.webui.Utils;
 
 /**
  * Created by The eXo Platform SAS.
  * 
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-@ComponentConfigs({
-  @ComponentConfig(
-      lifecycle = Lifecycle.class,
-      template = "classpath:groovy/wcm/webui/selector/content/one/UIContentBrowsePanel.gtmpl",
-      events = {
-        @EventConfig(listeners = UIContentBrowsePanelOne.ChangeContentTypeActionListener.class)
-      }
-  ),
-  @ComponentConfig(
-      type = UISelectPathPanel.class,
-      id = "UIContentBrowsePathSelector",
-      template = "classpath:groovy/wcm/webui/selector/content/UIContentBrowsePathSelector.gtmpl",
-      events = @EventConfig(listeners = UISelectPathPanel.SelectActionListener.class)
-  )
-})
+@ComponentConfig(
+  lifecycle = Lifecycle.class,
+  template = "classpath:groovy/wcm/webui/selector/content/one/UIContentBrowsePanel.gtmpl",
+  events = {
+    @EventConfig(listeners = UIContentBrowsePanelOne.ChangeContentTypeActionListener.class),
+    @EventConfig(listeners = UISelectPathPanel.SelectActionListener.class)
+  }
+)
 public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
 
   /**
@@ -69,8 +60,8 @@ public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
    */
   public UIContentBrowsePanelOne() throws Exception {
     super();
-    addChild(org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder.class,null, org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder.class.getName()+hashCode());
-    addChild(UISelectPathPanel.class, "UIContentBrowsePathSelector", "UIContentBrowsePathSelector");
+    addChild(UIContentTreeBuilder.class, null, null);
+    addChild(UISelectPathPanel.class, null, null);
   }
   
   /* (non-Javadoc)

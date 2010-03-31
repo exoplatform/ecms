@@ -25,7 +25,6 @@ import java.util.Locale;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -35,11 +34,10 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserHandler;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.images.RESTImagesRendererService;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
@@ -338,11 +336,10 @@ import org.exoplatform.webui.event.EventListener;
     PortletRequest portletRequest = portletRequestContext.getRequest();
     String portalURI = portalRequestContext.getPortalURI();
     PortletPreferences portletPreferences = getPortletPreferences();
-    String repository = portletPreferences.getValue(UICLVPortlet.REPOSITORY, null);
-    String workspace = portletPreferences.getValue(UICLVPortlet.WORKSPACE, null);
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
     String basePath = portletPreferences.getValue(UICLVPortlet.BASE_PATH, null);
-    link = baseURI + portalURI + basePath + "?path=/" + repository + "/" + workspace + node.getPath();
+    link = baseURI + portalURI + basePath + "?path=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
     return link;
   }
 
@@ -358,9 +355,9 @@ import org.exoplatform.webui.event.EventListener;
   public String getWebdavURL(Node node) throws Exception {
   	PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
   	PortletRequest portletRequest = portletRequestContext.getRequest();
-  	PortletPreferences portletPreferences = getPortletPreferences();
-  	String repository = portletPreferences.getValue(UICLVPortlet.REPOSITORY, null);
-  	String workspace = portletPreferences.getValue(UICLVPortlet.WORKSPACE, null);
+  	NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+  	String repository = nodeLocation.getRepository();
+  	String workspace = nodeLocation.getWorkspace();
   	String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
   	
   	String portalName = PortalContainer.getCurrentPortalContainerName();
@@ -599,15 +596,8 @@ import org.exoplatform.webui.event.EventListener;
      */
     public void execute(Event<UICLVPresentation> event) throws Exception {
       UICLVPresentation contentListPresentation = event.getSource();
-      PortletRequestContext context = (PortletRequestContext) event.getRequestContext();
-      PortletPreferences preferences = context.getRequest().getPreferences();
-      String path = event.getRequestContext().getRequestParameter(OBJECTID);      
-      String repository = preferences.getValue(UICLVPortlet.REPOSITORY, null);
-      String worksapce = preferences.getValue(UICLVPortlet.WORKSPACE, null);      
-      RepositoryService repositoryService = contentListPresentation.getApplicationComponent(RepositoryService.class);      
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
-      Session session = Utils.getSessionProvider().getSession(worksapce, manageableRepository);
-  	  Node node = (Node) session.getItem(path);
+      String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
+      Node node = NodeLocation.getNodeByExpression(itemPath);
       UIContentDialogForm uiDocumentDialogForm = contentListPresentation.createUIComponent(UIContentDialogForm.class, null, null);
       uiDocumentDialogForm.init(node, false);
       Utils.createPopupWindow(contentListPresentation, uiDocumentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);

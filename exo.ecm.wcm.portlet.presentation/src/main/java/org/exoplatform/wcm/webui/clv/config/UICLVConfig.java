@@ -25,7 +25,6 @@ import javax.jcr.Session;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
@@ -41,8 +40,6 @@ import org.exoplatform.wcm.webui.clv.UICLVContainer;
 import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
 import org.exoplatform.wcm.webui.clv.UICLVManualMode;
 import org.exoplatform.wcm.webui.clv.UICLVPortlet;
-import org.exoplatform.wcm.webui.selector.UISourceGridUpdatable;
-import org.exoplatform.wcm.webui.selector.content.multi.UICLVContentSelectedGrid;
 import org.exoplatform.wcm.webui.selector.content.multi.UIContentBrowsePanelMulti;
 import org.exoplatform.wcm.webui.selector.content.multi.UIContentSelectorMulti;
 import org.exoplatform.wcm.webui.selector.folder.UIContentBrowsePanelFolder;
@@ -88,7 +85,7 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
     @EventConfig(listeners = UICLVConfig.DeleteActionListener.class)
   }
 )
-public class UICLVConfig extends UIForm implements UISelectable, UISourceGridUpdatable {
+public class UICLVConfig extends UIForm {
 
   /** The content list. */
   private List<String>       contentList                  = new ArrayList<String>();
@@ -375,17 +372,6 @@ public class UICLVConfig extends UIForm implements UISelectable, UISourceGridUpd
   public List<String> getOldContentList() {
   	return this.oldContentList;
   }
-  
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String,
-   *      java.lang.Object)
-   */
-  public void doSelect(String selectField, Object value) throws Exception {
-    getUIStringInput(selectField).setValue((String) value);
-    Utils.closePopupWindow(this, popupId);
-  }
 
   /**
    * Checks if is manual mode.
@@ -517,7 +503,6 @@ public class UICLVConfig extends UIForm implements UISelectable, UISourceGridUpd
         return;
       }
       portletPreferences.setValue(UICLVPortlet.REPOSITORY, repository);
-      portletPreferences.setValue(UICLVPortlet.WORKSPACE, workspace);
       portletPreferences.setValue(UICLVPortlet.FOLDER_PATH, folderPath);
       portletPreferences.setValue(UICLVPortlet.FORM_VIEW_TEMPLATE_PATH, formViewTemplatePath);
       portletPreferences.setValue(UICLVPortlet.PAGINATOR_TEMPlATE_PATH, paginatorTemplatePath);
@@ -727,22 +712,17 @@ public class UICLVConfig extends UIForm implements UISelectable, UISourceGridUpd
         UIContentSelectorFolder contentSelector = uiViewerManagementForm.createUIComponent(UIContentSelectorFolder.class, null, null);
         contentSelector.init();
         UIContentBrowsePanelFolder contentBrowserPanel= contentSelector.getChild(UIContentBrowsePanelFolder.class);
-        contentBrowserPanel.setSourceComponent(uiViewerManagementForm, new String[] { UICLVConfig.FOLDER_PATH_INPUT });
         contentBrowserPanel.init();
+        contentBrowserPanel.setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
         Utils.createPopupWindow(uiViewerManagementForm, contentSelector, FOLDER_PATH_SELECTOR_POPUP_WINDOW, 800);
-        uiViewerManagementForm.setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
       } else {
         orderBySelector.setRendered(false);
         UIContentSelectorMulti contentSelector = uiViewerManagementForm.createUIComponent(UIContentSelectorMulti.class, null, null);
         contentSelector.init();
         UIContentBrowsePanelMulti contentBrowserPanel= contentSelector.getChild(UIContentBrowsePanelMulti.class);
-        contentBrowserPanel.setSourceComponent(uiViewerManagementForm, new String[] { UICLVConfig.FOLDER_PATH_INPUT });
+        contentBrowserPanel.setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
         contentBrowserPanel.init();
-        
-        UICLVContentSelectedGrid uiclvContentSelectedGrid = contentBrowserPanel.getChild(UICLVContentSelectedGrid.class);
-        uiclvContentSelectedGrid.init(uiViewerManagementForm.getViewAbleContentList());
         Utils.createPopupWindow(uiViewerManagementForm, contentSelector, CORRECT_CONTENT_SELECTOR_POPUP_WINDOW, 800);
-        uiViewerManagementForm.setPopupId(CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
       }
     }
   }
@@ -827,13 +807,6 @@ public class UICLVConfig extends UIForm implements UISelectable, UISourceGridUpd
     }
   }
 
-	/* (non-Javadoc)
-	 * @see org.exoplatform.wcm.webui.selector.UISourceGridUpdatable#doSave(java.util.List)
-	 */
-	public void doSave(List<String> returnRecords) {
-		setViewAbleContentList(returnRecords);
-  }
-  
   /**
    * The listener interface for receiving selectTargetPageAction events.
    * The class that is interested in processing a selectTargetPageAction

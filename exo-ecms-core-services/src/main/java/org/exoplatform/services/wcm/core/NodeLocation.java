@@ -20,89 +20,245 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-/*
- * Created by The eXo Platform SAS
+/**
+ * Created by The eXo Platform SAS.
+ * 
  * @author : Hoa.Pham
- *          hoa.pham@exoplatform.com
- * Jun 20, 2008  
+ * hoa.pham@exoplatform.com
+ * Jun 20, 2008
  */
 public class NodeLocation {
   
+  /** The log. */
   private static Log log = ExoLogger.getLogger("wcm:NodeLocation");
   
+  /** The repository. */
   private String repository;
+  
+  /** The workspace. */
   private String workspace;
+  
+  /** The path. */
   private String path;
   
+  /**
+   * Instantiates a new node location.
+   */
   public NodeLocation() { }
+  
+  /**
+   * Instantiates a new node location.
+   * 
+   * @param repository the repository
+   * @param workspace the workspace
+   * @param path the path
+   */
   public NodeLocation(final String repository, final String workspace, final String path) {
     this.repository = repository;
     this.workspace = workspace;
     this.path = path; 
   }
 
-  public String getRepository() { return repository; }
-  public void setRepository(final String repository) { this.repository = repository; }
-
-  public String getWorkspace() { return workspace; }
-  public void setWorkspace(final String workspace) { this.workspace = workspace; }
-
-  public String getPath() { return path; }
-  public void setPath(final String path) { this.path = path; }
-
-  public static final NodeLocation parse(final String exp) {
-    String[] temp = exp.split("::");
-    if (temp.length == 3 && temp[2].indexOf("/")>-1) {
-      return new NodeLocation(temp[0], temp[1], temp[2]);
-    }
-    return null;
+  /**
+   * Gets the repository.
+   * 
+   * @return the repository
+   */
+  public String getRepository() {
+    return repository;
   }
 
+  /**
+   * Sets the repository.
+   * 
+   * @param repository the new repository
+   */
+  public void setRepository(String repository) {
+    this.repository = repository;
+  }
+
+  /**
+   * Gets the workspace.
+   * 
+   * @return the workspace
+   */
+  public String getWorkspace() {
+    return workspace;
+  }
+
+  /**
+   * Sets the workspace.
+   * 
+   * @param workspace the new workspace
+   */
+  public void setWorkspace(String workspace) {
+    this.workspace = workspace;
+  }
+
+  /**
+   * Gets the path.
+   * 
+   * @return the path
+   */
+  public String getPath() {
+    return path;
+  }
+
+  /**
+   * Sets the path.
+   * 
+   * @param path the new path
+   */
+  public void setPath(String path) {
+    this.path = path;
+  }
+  
+  /**
+   * Parses the.
+   * 
+   * @param exp the exp
+   * @return the node location
+   */
+  @Deprecated
+  /**
+   * Get an NodeLocation object by an expression.
+   * 
+   * @param exp the expression with pattern repository:workspace:path
+   * 
+   * @return a NodeLocation object
+   */
+  public static final NodeLocation parse(final String exp) {
+    String[] temp = exp.split(":");
+    if (temp.length == 3 && temp[2].indexOf("/") == 0) {
+      return new NodeLocation(temp[0], temp[1], temp[2]);
+    } else {
+      throw new IllegalArgumentException("Invalid expression: " + exp + ". An valid expression has pattern repository:workspace:path");
+    }
+  }
+
+  /**
+   * Make.
+   * 
+   * @param node the node
+   * @return the node location
+   */
+  @Deprecated
+  /**
+   * Get an NodeLocation object by a node. Try to use toNodeLocation() instead.
+   * 
+   * @param node the node
+   * 
+   * @return a NodeLocation object
+   */
   public static final NodeLocation make(final Node node) {
-    if (node == null) return null;
+    Session session = null;
     try {
-      Session session = node.getSession();
+      session = node.getSession();
       String repository = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
       String workspace = session.getWorkspace().getName();
       String path = node.getPath();
+      session.logout();
       return new NodeLocation(repository, workspace, path);
     } catch (RepositoryException e) {
-      log.error("Exception in getNodeByLocation: ", e.fillInStackTrace());
+      log.error("make() failed because of ", e);
+    } finally {
+      if (session != null) session.logout();
     }
     return null;
   }
 
-  public static Node getNodeByLocation(NodeLocation nodeLocation) {
-    if (nodeLocation == null) return null; 
+  /**
+   * Get an NodeLocation object by an expression.
+   * 
+   * @param exp the expression with pattern repository:workspace:path
+   * 
+   * @return a NodeLocation object
+   */
+  public static final NodeLocation getNodeLocationByExpression(final String exp) {
+    String[] temp = exp.split(":");
+    if (temp.length >= 3 && temp[2].indexOf("/") == 0) {
+      String repository = temp[0];
+      String workspace = temp[1];
+      String nodepath = exp.substring(repository.length() + workspace.length() + 2);
+      return new NodeLocation(repository, workspace, nodepath);
+    } else {
+      throw new IllegalArgumentException("Invalid expression: " + exp + ". An valid expression has pattern repository:workspace:path");
+    }
+  }
+  
+  /**
+   * Get an NodeLocation object by a node.
+   * 
+   * @param node the node
+   * 
+   * @return a NodeLocation object
+   */
+  public static final NodeLocation getNodeLocationByNode(final Node node) {
+    Session session = null;
     try {
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
-      SessionProviderService sessionProviderService = (SessionProviderService)container.getComponentInstanceOfType(SessionProviderService.class);
-      ManageableRepository repository = repositoryService.getRepository(nodeLocation.getRepository());
-      SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
-      Session session = sessionProvider.getSession(nodeLocation.getWorkspace(), repository);
-      Node node = (Node)session.getItem(nodeLocation.getPath());
-      return node;
-    } catch (Exception e) {
-      log.error("Exception in getNodeByLocation: ", e.fillInStackTrace());
+      session = node.getSession();
+      String repository = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
+      String workspace = session.getWorkspace().getName();
+      String path = node.getPath();
+      session.logout();
+      return new NodeLocation(repository, workspace, path);
+    } catch (RepositoryException e) {
+      log.error("getNodeLocationByNode() failed because of ", e);
+    } finally {
+      if (session != null) session.logout();
     }
     return null;
   }
   
-  public static final String serialize(final NodeLocation location) {
+  /**
+   * Get a node by a NodeLocation object.
+   * 
+   * @param nodeLocation the NodeLocation object
+   * 
+   * @return a node
+   */
+  public static final Node getNodeByLocation(final NodeLocation nodeLocation) {
+    Session session = null;
+    try {
+      ManageableRepository repository = WCMCoreUtils.getRepository(nodeLocation.getRepository());
+      session = WCMCoreUtils.getSystemSessionProvider().getSession(nodeLocation.getWorkspace(), repository);
+      Node node = (Node)session.getItem(nodeLocation.getPath());
+      session.logout();
+      return node;
+    } catch (Exception e) {
+      log.error("getNodeByNodeLocation() failed because of ", e);
+    } finally {
+      if (session != null) session.logout();
+    }
+    return null;
+  }
+  
+  /**
+   * Get a node by an expression.
+   * 
+   * @param expression the expression
+   * @return a node
+   */
+  public static final Node getNodeByExpression(final String expression) {
+    return getNodeByLocation(parse(expression));
+  }
+
+  
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  public String toString() {
     StringBuffer buffer = new StringBuffer();
-    buffer.append(location.getRepository()).append("::")
-    .append(location.getWorkspace()).append("::")
-    .append(location.getPath());
+    buffer.append(repository);
+    buffer.append(":");
+    buffer.append(workspace);
+    buffer.append(":");
+    buffer.append(path);
     return buffer.toString();
   }
 }

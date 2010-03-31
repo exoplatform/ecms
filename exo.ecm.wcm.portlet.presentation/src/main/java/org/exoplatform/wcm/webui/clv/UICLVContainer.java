@@ -16,8 +16,6 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -79,22 +77,12 @@ public abstract class UICLVContainer extends UIContainer implements RefreshDeleg
   }
   
   /**
-   * Gets the portlet preference.
-   * 
-   * @return the portlet preference
-   */
-  protected PortletPreferences getPortletPreference() {
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    return portletRequestContext.getRequest().getPreferences();
-  }
-
-  /**
    * Gets the form view template path.
    * 
    * @return the form view template path
    */
   protected String getFormViewTemplatePath() {
-    return getPortletPreference().getValue(UICLVPortlet.FORM_VIEW_TEMPLATE_PATH, null);
+    return Utils.getPortletPreference(UICLVPortlet.FORM_VIEW_TEMPLATE_PATH);
   }
 
   /**
@@ -105,7 +93,7 @@ public abstract class UICLVContainer extends UIContainer implements RefreshDeleg
    * @throws Exception the exception
    */
   public ResourceResolver getTemplateResourceResolver() throws Exception {
-    String repository = getPortletPreference().getValue(UICLVPortlet.REPOSITORY, null);
+    String repository = Utils.getPortletPreference(UICLVPortlet.REPOSITORY);
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
     return new JCRResourceResolver(repository, workspace, "exo:templateFile");
