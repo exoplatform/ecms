@@ -151,16 +151,16 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
 																																itemsPerPageList);
 		UIFormSelectBox searchFormTemplateSelector = new UIFormSelectBox(	SEARCH_FORM_TEMPLATE_SELECTOR,
 																																			SEARCH_FORM_TEMPLATE_SELECTOR,
-																																			searchFormTemplateList).setRendered(false);
+																																			searchFormTemplateList);
 		UIFormSelectBox searchResultTemplateSelector = new UIFormSelectBox(	SEARCH_RESULT_TEMPLATE_SELECTOR,
 																																				SEARCH_RESULT_TEMPLATE_SELECTOR,
-																																				searchResultTemplateList).setRendered(false);
+																																				searchResultTemplateList);
 		UIFormSelectBox searchPaginatorTemplateSelector = new UIFormSelectBox(SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
 																																					SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
-																																					searchPaginatorTemplateList).setRendered(false);
+																																					searchPaginatorTemplateList);
 		UIFormSelectBox searchPageLayoutTemplateSelector = new UIFormSelectBox(	SEARCH_PAGE_LAYOUT_SELECTOR,
 																																						SEARCH_PAGE_LAYOUT_SELECTOR,
-																																						searchPageLayoutTemplateList).setRendered(false);		
+																																						searchPageLayoutTemplateList);		
 
 		String preferenceBasePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
     UIFormInputSetWithAction targetPathFormInputSet = new UIFormInputSetWithAction(BASE_PATH_INPUT_SET_ACTION);
