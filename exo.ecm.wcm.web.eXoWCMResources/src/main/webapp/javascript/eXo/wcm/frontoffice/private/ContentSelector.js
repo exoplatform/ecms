@@ -97,6 +97,7 @@ EcmContentSelector.prototype.initRequestXmlTree = function(typeObj){
 			eXo.ecm.ECS.typeObj = false;
 			break;
 	}
+	eXo.ecm.ECS.isShowFilter();
 	var ECS = eXo.ecm.ECS;
 	this.initCommand	=  "repositoryName=repository&workspaceName=collaboration&userId=" + this.userId;
 	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver+"repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName+"&userId="+ ECS.userId;
@@ -392,7 +393,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<div class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+node+'</div>';
+		newRow.insertCell(0).innerHTML = '<a class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+node+'</a>';
 		
 		if(i > 13) {
 			var numberRecords = 0;
@@ -439,7 +440,7 @@ EcmContentSelector.prototype.listFolders = function(list) {
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<div class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+node+'</div>';
+		newRow.insertCell(0).innerHTML = '<a class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+node+'</a>';
 		
 		if(i > 13) {
 			var numberRecords = 0;
@@ -489,7 +490,7 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<div class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+node+'</div>';
+		newRow.insertCell(0).innerHTML = '<a class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+node+'</a>';
 		newRow.insertCell(1).innerHTML = '<input type="checkbox" class="AddContent"/>';
 		
 		if(i > 13) {
@@ -612,11 +613,13 @@ Pager.prototype.showPageNav = function(positionId) {
 
 EcmContentSelector.prototype.insertContent = function(objNode) {
 	if(!objNode) return;
+	var rws = document.getElementById("RightWorkspace");
 	if(eXo.ecm.ECS.typeObj == "folder") {
 		var formObj = document.getElementById("UICLVConfig");
 		var uiFormGrid = eXo.core.DOMUtil.findFirstDescendantByClass(formObj, "table", "UIFormGrid");
 		var folderPath = eXo.core.DOMUtil.findDescendantById(uiFormGrid, "FolderPathInput");
 		folderPath.value = eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+objNode.getAttribute("path");
+		eval(rws.getAttribute("action"));
 	} else if(eXo.ecm.ECS.typeObj == "one") {
 		
 		// need to improve...
@@ -646,6 +649,7 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 };
 
 EcmContentSelector.prototype.insertMultiContent = function() {
+	var rws = document.getElementById("RightWorkspace");
 	var formObj = document.getElementById("UICLVConfig");
 	var uiFormGrid = eXo.core.DOMUtil.findFirstDescendantByClass(formObj, "table", "UIFormGrid");
 	var folderPath = eXo.core.DOMUtil.findDescendantById(uiFormGrid, "FolderPathInput");
@@ -654,13 +658,14 @@ EcmContentSelector.prototype.insertMultiContent = function() {
 	var strContent = "";
 	for(var i = 0; i < rowsContent.length; i++) {
 		var inputContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "input", "AddContent");
-		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "div", "Item");
+		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "a", "Item");
 		if(nodeContent && inputContent.checked) {
 			var path = nodeContent.getAttribute("path");
 			strContent +=  eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+path+";";
 		}
 	}
 	folderPath.value = strContent;
+	eval(rws.getAttribute("action"));
 };
 
 EcmContentSelector.prototype.changeFilter = function() {
@@ -715,6 +720,14 @@ EcmContentSelector.prototype.fixHeightTrees = function() {
 	var actionBar = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "ActionBar");
 	var breadcumbsPortlet = eXo.core.DOMUtil.findFirstDescendantByClass(uiWorkingWorkspace, "div", "BreadcumbsPortlet");
 	leftWS.style.height = windowHeight - (titleBar.offsetHeight + actionBar.offsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
+};
+
+EcmContentSelector.prototype.isShowFilter = function() {
+	var selectFilter = document.getElementById("Filter");
+	var filterContainer = eXo.core.DOMUtil.findAncestorByClass(selectFilter, "ActionBar");
+	if(eXo.ecm.ECS.typeObj == "folder") {
+		filterContainer.style.display = "none";
+	} 
 };
 
 eXo.ecm.ECS = new EcmContentSelector();

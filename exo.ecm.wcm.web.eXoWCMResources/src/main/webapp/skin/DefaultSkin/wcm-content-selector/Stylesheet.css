@@ -373,7 +373,9 @@
 	padding-left: 7px;
 }
 
-
+.UIWCMSearchContainer .LeftWorkspace a:hover {
+	font-weight: bold;
+}
 
 
 .UIWCMSearchContainer .LeftWorkspace .Node {
@@ -454,17 +456,21 @@
 	color: black;
 }
 
+.UIWCMSearchContainer .BreadcumbsPortlet .BreadcumbTab a:hover{
+	font-weight: bold;
+}
+
 .UIWCMSearchContainer .RightWorkspace table{
 	border: 1px solid #f4f4f4;
 }
 
 .UIWCMSearchContainer .RightWorkspace td{
-	border: 1px solid #f4f4f4;
+	border: 1px solid #e9e9e9;
 }
 
 
 .UIWCMSearchContainer .RightWorkspace .THBar{
-	background: #dee0e4;
+	background: #c9c9c9;
 	text-align: center;
 	padding-left: 12px;
 	border-left: 1px solid #f4f4f4;
@@ -489,22 +495,26 @@
 
 .UIWCMSearchContainer .RightWorkspace .OddItem{
 	text-align: left;
-	background: #f1f1f1;
+	background: #e9e9e9;
 }
 
 .UIWCMSearchContainer .RightWorkspace .Item{
 	background-position:left 3px;
 	border-left:1px solid #F4F4F4;
 	cursor:pointer;
-	height:20px;
-	line-height:20px;
+	height:24px;
+	line-height:24px;
 	padding-left:20px;
 	width:auto;
 }
 
+.UIWCMSearchContainer .RightWorkspace .EventItem a:hover{
+	font-weight: bold;
+}
 
-
-
+.UIWCMSearchContainer .RightWorkspace .OddItem a:hover{
+	font-weight: bold;
+}
 
 .UIWCMSearchContainer .ActionBar {
 	background:none repeat scroll 0 0 #F5F5F5;
