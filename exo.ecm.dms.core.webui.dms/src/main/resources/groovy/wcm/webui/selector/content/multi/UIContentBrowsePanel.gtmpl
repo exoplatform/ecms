@@ -1,8 +1,4 @@
 <%
-	import org.exoplatform.wcm.webui.selector.UISelectPathPanel; 
-	import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
-	import org.exoplatform.wcm.webui.selector.content.multi.UICLVContentSelectedGrid;
-	
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
 	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");

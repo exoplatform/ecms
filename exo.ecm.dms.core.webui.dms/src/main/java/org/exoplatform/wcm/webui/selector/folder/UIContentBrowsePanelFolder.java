@@ -16,11 +16,7 @@
  */
 package org.exoplatform.wcm.webui.selector.folder;
 
-import javax.jcr.Node;
-
-import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
@@ -35,28 +31,9 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
   lifecycle = Lifecycle.class,
   template = "classpath:groovy/wcm/webui/selector/folder/UIContentBrowsePanel.gtmpl",
   events = {
-    @EventConfig(listeners = UIContentBrowsePanelFolder.ChangeContentTypeActionListener.class),
-    @EventConfig(listeners = UISelectPathPanelFolder.SelectActionListener.class)
+    @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class),
+    @EventConfig(listeners = UIContentBrowsePanel.SelectActionListener.class)
   }
 )
 
-public class UIContentBrowsePanelFolder extends UIContentBrowsePanel{
-
-  /**
-   * Instantiates a new uI content browse panel folder.
-   * 
-   * @throws Exception the exception
-   */
-  public UIContentBrowsePanelFolder() throws Exception {
-    super();
-    addChild(UIContentTreeBuilderFolder.class, null, null);
-    addChild(UISelectPathPanelFolder.class, null, null);
-  }
-  
-  /* (non-Javadoc)
-   * @see org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel#doSelect(javax.jcr.Node, org.exoplatform.webui.application.WebuiRequestContext)
-   */
-  public void doSelect(Node node, WebuiRequestContext requestContext) throws Exception{
-	  Utils.closePopupWindow(this, getPopupId());
-  }
-}
+public class UIContentBrowsePanelFolder extends UIContentBrowsePanel{}

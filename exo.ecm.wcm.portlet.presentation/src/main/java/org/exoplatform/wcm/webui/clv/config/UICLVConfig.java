@@ -710,10 +710,7 @@ public class UICLVConfig extends UIForm {
       if (mode.equals(UICLVConfig.VIEWER_AUTO_MODE)) {
       	orderBySelector.setRendered(true);
         UIContentSelectorFolder contentSelector = uiViewerManagementForm.createUIComponent(UIContentSelectorFolder.class, null, null);
-        contentSelector.init();
-        UIContentBrowsePanelFolder contentBrowserPanel= contentSelector.getChild(UIContentBrowsePanelFolder.class);
-        contentBrowserPanel.init();
-        contentBrowserPanel.setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
+        contentSelector.getChild(UIContentBrowsePanelFolder.class).setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
         Utils.createPopupWindow(uiViewerManagementForm, contentSelector, FOLDER_PATH_SELECTOR_POPUP_WINDOW, 800);
       } else {
         orderBySelector.setRendered(false);
@@ -721,7 +718,6 @@ public class UICLVConfig extends UIForm {
         contentSelector.init();
         UIContentBrowsePanelMulti contentBrowserPanel= contentSelector.getChild(UIContentBrowsePanelMulti.class);
         contentBrowserPanel.setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
-        contentBrowserPanel.init();
         Utils.createPopupWindow(uiViewerManagementForm, contentSelector, CORRECT_CONTENT_SELECTOR_POPUP_WINDOW, 800);
       }
     }

@@ -24,19 +24,20 @@ import org.exoplatform.portal.webui.page.UIPageBody;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeIdentifier;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.NotInWCMPublicationException;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
-import org.exoplatform.wcm.webui.selector.UISelectPathPanel;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
-import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS.
@@ -47,69 +48,60 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
   lifecycle = Lifecycle.class,
   template = "classpath:groovy/wcm/webui/selector/content/one/UIContentBrowsePanel.gtmpl",
   events = {
-    @EventConfig(listeners = UIContentBrowsePanelOne.ChangeContentTypeActionListener.class),
-    @EventConfig(listeners = UISelectPathPanel.SelectActionListener.class)
+    @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class),
+    @EventConfig(listeners = UIContentBrowsePanelOne.SelectActionListener.class)
   }
 )
 public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
 
-  /**
-   * Instantiates a new uI content browse panel one.
-   * 
-   * @throws Exception the exception
-   */
-  public UIContentBrowsePanelOne() throws Exception {
-    super();
-    addChild(UIContentTreeBuilder.class, null, null);
-    addChild(UISelectPathPanel.class, null, null);
-  }
+  public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
+    public void execute(Event<UIContentBrowsePanel> event) throws Exception {
+      UIContentBrowsePanel contentBrowsePanel = event.getSource();
+      String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
+      Node node = NodeLocation.getNodeByExpression(itemPath);
+      Node realNode = node;
+      if (node.isNodeType("exo:symlink")) {
+    	String uuid = node.getProperty("exo:uuid").getString();
+    	realNode = node.getSession().getNodeByUUID(uuid);
+      }
+      if(!realNode.isCheckedOut()){
+        Utils.createPopupMessage(contentBrowsePanel, "UIContentBrowsePanelOne.msg.node-checkout", null, ApplicationMessage.WARNING);
+        return;
+      }  	
+      NodeIdentifier nodeIdentifier = NodeIdentifier.make(realNode);
+      PortletRequestContext pContext = (PortletRequestContext) event.getRequestContext();
+      PortletPreferences prefs = pContext.getRequest().getPreferences();
+      prefs.setValue("repository", nodeIdentifier.getRepository());
+      prefs.setValue("workspace", nodeIdentifier.getWorkspace());
+      prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
+      prefs.store();
   
-  /* (non-Javadoc)
-   * @see org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel#doSelect(javax.jcr.Node, org.exoplatform.webui.application.WebuiRequestContext)
-   */
-  public void doSelect(Node node, WebuiRequestContext requestContext) throws Exception{
-  	Node realNode = node;
-  	if (node.isNodeType("exo:symlink")) {
-  		String uuid = node.getProperty("exo:uuid").getString();
-  		realNode = node.getSession().getNodeByUUID(uuid);
-  	}
-  	if(!realNode.isCheckedOut()){
-  	  Utils.createPopupMessage(this, "UIContentBrowsePanelOne.msg.node-checkout", null, ApplicationMessage.WARNING);
-  	  return;
-  	}  	
-	  NodeIdentifier nodeIdentifier = NodeIdentifier.make(realNode);
-	  PortletRequestContext pContext = (PortletRequestContext) requestContext;
-	  PortletPreferences prefs = pContext.getRequest().getPreferences();
-	  prefs.setValue("repository", nodeIdentifier.getRepository());
-	  prefs.setValue("workspace", nodeIdentifier.getWorkspace());
-	  prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
-	  prefs.store();
-	  
-	  String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-	  String portalOwner = Util.getPortalRequestContext().getPortalOwner();
-	  
-	  WCMPublicationService wcmPublicationService = this.getApplicationComponent(WCMPublicationService.class);
-	  
-	  try {
-	    wcmPublicationService.isEnrolledInWCMLifecycle(realNode);
-	  } catch (NotInWCMPublicationException e){
-	    wcmPublicationService.unsubcribeLifecycle(realNode);
-	    wcmPublicationService.enrollNodeInLifecycle(realNode, portalOwner, remoteUser);          
-	  }
-	  
-	  wcmPublicationService.updateLifecyleOnChangeContent(realNode, portalOwner, remoteUser, null);
-	  if (!Utils.isEditPortletInCreatePageWizard()) {
-	    String pageId = Util.getUIPortal().getSelectedNode().getPageReference();
-	    UserPortalConfigService upcService = getApplicationComponent(UserPortalConfigService.class);
-	    wcmPublicationService.updateLifecyleOnChangePage(upcService.getPage(pageId), remoteUser);
-	  }
-	  
-	  // Update Page And Close PopUp
-	  UIPortal uiPortal = Util.getUIPortal();
-	  UIPageBody uiPageBody = uiPortal.findFirstComponentOfType(UIPageBody.class);
-	  uiPageBody.setUIComponent(null);
-	  uiPageBody.setMaximizedUIComponent(null);
-	  Utils.updatePortal((PortletRequestContext)requestContext);
-	  Utils.closePopupWindow(this, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+      String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+      String portalOwner = Util.getPortalRequestContext().getPortalOwner();
+  
+      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
+  
+      try {
+        wcmPublicationService.isEnrolledInWCMLifecycle(realNode);
+      } catch (NotInWCMPublicationException e){
+        wcmPublicationService.unsubcribeLifecycle(realNode);
+        wcmPublicationService.enrollNodeInLifecycle(realNode, portalOwner, remoteUser);          
+      }
+  
+      wcmPublicationService.updateLifecyleOnChangeContent(realNode, portalOwner, remoteUser, null);
+      if (!Utils.isEditPortletInCreatePageWizard()) {
+        String pageId = Util.getUIPortal().getSelectedNode().getPageReference();
+        UserPortalConfigService upcService = WCMCoreUtils.getService(UserPortalConfigService.class);
+        wcmPublicationService.updateLifecyleOnChangePage(upcService.getPage(pageId), remoteUser);
+      }
+  
+      // Update Page And Close PopUp
+      UIPortal uiPortal = Util.getUIPortal();
+      UIPageBody uiPageBody = uiPortal.findFirstComponentOfType(UIPageBody.class);
+      uiPageBody.setUIComponent(null);
+      uiPageBody.setMaximizedUIComponent(null);
+      Utils.updatePortal((PortletRequestContext) event.getRequestContext());
+      Utils.closePopupWindow(contentBrowsePanel, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+    }
   }
 }

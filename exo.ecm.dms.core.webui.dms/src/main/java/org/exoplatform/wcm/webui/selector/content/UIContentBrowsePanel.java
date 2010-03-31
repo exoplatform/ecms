@@ -16,16 +16,8 @@
  */
 package org.exoplatform.wcm.webui.selector.content;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.portal.webui.container.UIContainer;
-import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.selector.UISelectPathPanel;
-import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
@@ -41,25 +33,19 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
   lifecycle = Lifecycle.class,
   events = {
-	@EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class)
+	@EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class),
+	@EventConfig(listeners = UIContentBrowsePanel.SelectActionListener.class)
   }
 )
   
 public abstract class UIContentBrowsePanel extends UIContainer {
-  public static final String[] WEBCONTENT_NODERTYPE = new String[]{"exo:webContent", "exo:article"};
-  public static final String[] MEDIA_MIMETYPE = new String[]{"application", "image", "audio", "video"};
-  public static final String WEBCONTENT = "WebContent";
-  public static final String DMSDOCUMENT = "DMSDocument";
-  public static final String MEDIA = "Media";
-  public final String SELECT_TYPE_CONTENT = "selectTypeContent";
-  public String[] types = new String[]{WEBCONTENT, DMSDOCUMENT, MEDIA};
-  public String selectedValues = WEBCONTENT;
   
-  /**
-   * Instantiates a new uI web content path selector.
-   * 
-   * @throws Exception the exception
-   */
+  public static final String WEBCONTENT = "WebContent";
+  
+  public static final String DMSDOCUMENT = "DMSDocument";
+  
+  public static final String MEDIA = "Media";
+  
   private String contentType;
   
   private String popupId; 
@@ -80,72 +66,17 @@ public abstract class UIContentBrowsePanel extends UIContainer {
 	this.contentType = contentType;
   }
   
-  public UIContentBrowsePanel() throws Exception {
-    contentType = WEBCONTENT;
-  }
-  
-  public void reRenderChild(String typeContent) throws Exception{
-    if(typeContent == null || typeContent.equals(WEBCONTENT)){
-      contentType = WEBCONTENT;
-    } else if (typeContent.equals(DMSDOCUMENT)){
-      contentType = DMSDOCUMENT;
-    } else {
-      contentType = MEDIA;
-    }
-  }
-
-  public abstract void doSelect(Node node, WebuiRequestContext requestContext) throws Exception;
-  
-  /**
-   * Inits the.
-   * 
-   * @throws Exception the exception
-   */
-  public void init() throws Exception {
-    UISelectPathPanel selectPathPanel = getChild(UISelectPathPanel.class);
-    String[] acceptedNodeTypes = null;
-    String[] acceptedMimeTypes = null;
-    if(contentType == null || contentType.equals(WEBCONTENT)){
-      acceptedNodeTypes = WEBCONTENT_NODERTYPE;
-      acceptedMimeTypes = null;
-      selectPathPanel.setWebContent(true);
-      selectPathPanel.setDMSDocument(false);
-    } else if(contentType.equals(MEDIA)){
-      acceptedNodeTypes = new String[]{"nt:file"};
-      acceptedMimeTypes = MEDIA_MIMETYPE;
-      selectPathPanel.setWebContent(false);
-      selectPathPanel.setDMSDocument(false);
-    } else if(contentType.equals(DMSDOCUMENT)){
-      String repositoryName = WCMCoreUtils.getRepository(null).getConfiguration().getName();
-      List<String> listAcceptedNodeTypes = getApplicationComponent(TemplateService.class).getDocumentTemplates(repositoryName);
-      List<String> listAcceptedNodeTypesTemp = new ArrayList<String>();
-      for(String nodeType : listAcceptedNodeTypes) {
-        for(int i = 0; i < WEBCONTENT_NODERTYPE.length; i++) {
-          if(nodeType.equalsIgnoreCase(WEBCONTENT_NODERTYPE[i])) continue;
-        }
-        listAcceptedNodeTypesTemp.add(nodeType);
-      }
-      acceptedNodeTypes = new String[listAcceptedNodeTypesTemp.size()];
-      listAcceptedNodeTypesTemp.toArray(acceptedNodeTypes);
-      selectPathPanel.setWebContent(false);
-      selectPathPanel.setDMSDocument(true);
-    }
-    selectPathPanel.setAcceptedNodeTypes(acceptedNodeTypes);
-    selectPathPanel.setAcceptedMimeTypes(acceptedMimeTypes);
-  }
-
   public static class ChangeContentTypeActionListener extends EventListener<UIContentBrowsePanel> {
-    public void execute(Event<UIContentBrowsePanel> event) throws Exception {
-      UIContentBrowsePanel contentBrowsePanel = event.getSource();
-      String type = event.getRequestContext().getRequestParameter(OBJECTID);
-      if(type.equals(contentBrowsePanel.selectedValues)) return;
-      contentBrowsePanel.selectedValues = type;
-      UISelectPathPanel selectPathPanel = contentBrowsePanel.getChild(UISelectPathPanel.class);
-      selectPathPanel.setParentNode(null);
-      selectPathPanel.updateGrid();
-      contentBrowsePanel.reRenderChild(contentBrowsePanel.selectedValues);
-      contentBrowsePanel.init();
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentBrowsePanel);
-    }
+	public void execute(Event<UIContentBrowsePanel> event) throws Exception {
+		UIContentBrowsePanel contentBrowsePanel = event.getSource();
+		contentBrowsePanel.contentType = event.getRequestContext().getRequestParameter(OBJECTID);
+	}
+  }
+
+  public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
+	public void execute(Event<UIContentBrowsePanel> event) throws Exception {
+		UIContentBrowsePanel contentBrowsePanel = event.getSource();
+		Utils.closePopupWindow(contentBrowsePanel, contentBrowsePanel.getPopupId());
+	}
   }
 }

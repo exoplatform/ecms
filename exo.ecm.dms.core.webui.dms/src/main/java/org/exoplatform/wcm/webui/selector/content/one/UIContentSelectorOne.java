@@ -1,5 +1,7 @@
 package org.exoplatform.wcm.webui.selector.content.one;
 
+import org.exoplatform.wcm.webui.selector.content.UIContentSearchForm;
+import org.exoplatform.wcm.webui.selector.content.UIContentSearchResult;
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 
@@ -22,8 +24,8 @@ public class UIContentSelectorOne extends UIContentSelector {
    */
   public UIContentSelectorOne() throws Exception {
     addChild(UIContentBrowsePanelOne.class, null, null);
-    addChild(org.exoplatform.wcm.webui.selector.content.UIContentSearchForm.class,null,null);
-    addChild(org.exoplatform.wcm.webui.selector.content.UIContentSearchResult.class,null,null);
+    addChild(UIContentSearchForm.class,null,null);
+    addChild(UIContentSearchResult.class,null,null);
     setSelectedTab(1);
   }
 
@@ -33,7 +35,6 @@ public class UIContentSelectorOne extends UIContentSelector {
    * @throws Exception the exception
    */
   public void init() throws Exception {
-    getChild(UIContentBrowsePanelOne.class).init();
-    getChild(org.exoplatform.wcm.webui.selector.content.UIContentSearchForm.class).init();
+    getChild(UIContentSearchForm.class).init();
   }
 }

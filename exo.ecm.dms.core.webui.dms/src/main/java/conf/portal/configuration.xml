@@ -5,9 +5,6 @@
    xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
    xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
-  <component>
-    <type>org.exoplatform.wcm.webui.selector.content.UpdateTreeConnector</type>
-  </component>
   <!--
   <component>
     <key>org.exoplatform.wcm.webui.WebUIPropertiesConfigService</key>

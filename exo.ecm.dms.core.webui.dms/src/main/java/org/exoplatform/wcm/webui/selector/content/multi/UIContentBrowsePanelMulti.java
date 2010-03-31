@@ -16,12 +16,7 @@
  */
 package org.exoplatform.wcm.webui.selector.content.multi;
 
-import javax.jcr.Node;
-
-import org.exoplatform.wcm.webui.selector.UISelectPathPanel;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
-import org.exoplatform.wcm.webui.selector.content.UIContentTreeBuilder;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
@@ -35,21 +30,8 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
   lifecycle = Lifecycle.class,
   template = "classpath:groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl",
   events = {
-    @EventConfig(listeners = UIContentBrowsePanelMulti.ChangeContentTypeActionListener.class)
+    @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class)
   }
 )
-public class UIContentBrowsePanelMulti extends UIContentBrowsePanel{
 
-  /**
-   * Instantiates a new uI content browse panel multi.
-   * 
-   * @throws Exception the exception
-   */
-  public UIContentBrowsePanelMulti() throws Exception {
-    super();
-    addChild(UIContentTreeBuilder.class, null, null);
-    addChild(UISelectPathPanel.class, null, null);
-  }
-  
-  public void doSelect(Node node, WebuiRequestContext requestContext) throws Exception {}
-}
+public class UIContentBrowsePanelMulti extends UIContentBrowsePanel{}
