@@ -5,7 +5,7 @@
 }
 
 .UIPCLVDefault .TopBoxParameterized {
-  background: url('DefaultSkin/images/BGTopBox.gif') repeat-x left top;
+  background: url('background/BGTopBox.gif') repeat-x left top;
   line-height: 30px;
   padding: 0px 10px;
   margin-bottom: 1px;
@@ -19,7 +19,7 @@
 }
 
 .UIPCLVDefault .Header {
-  background: url(icons/BgCategoryTitle1x25.gif) repeat-x;
+  background: url(background/BgCategoryTitle1x25.gif) repeat-x;
   line-height: 25px;
   padding-left: 10px;
   font-weight: bold;
@@ -58,7 +58,7 @@
 }
 
 .UIPCLVDefault .CaptionItem .HotNews {
-  background: #edf5fb url('DefaultSkin/images/BGHotNews.gif') repeat-x left bottom;
+  background: #edf5fb url('background/BGHotNews.gif') repeat-x left bottom;
   padding: 25px;
 }
 
