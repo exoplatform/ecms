@@ -39,6 +39,8 @@
 			  	<div class="Contents">
 			  		<%
 							for (viewNode in currentPageData) {
+								if(!Utils.isViewable(viewNode)) continue;
+								
 								def isShowTitle = uicomponent.isShowField(UICLVPortlet.SHOW_TITLE);
 								def isShowDate = uicomponent.isShowField(UICLVPortlet.SHOW_DATE_CREATED);
 								def isShowLink = uicomponent.isShowField(UICLVPortlet.SHOW_LINK);

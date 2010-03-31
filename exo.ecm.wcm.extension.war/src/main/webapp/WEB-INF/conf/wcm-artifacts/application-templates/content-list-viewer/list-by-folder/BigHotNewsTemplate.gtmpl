@@ -8,6 +8,7 @@
  
 	import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 	import org.exoplatform.wcm.webui.pclv.UIPCLVPortlet;
+	import org.exoplatform.wcm.webui.Utils;
 %>
 <div class="UIPCLVHotNews">
  	<%
@@ -44,10 +45,12 @@
 						def count = 0;
 						def currentPageData = uicomponent.getCurrentPageData();
 						for (viewNode in currentPageData) {
-					    def itemName = viewNode.getName();
-					    def itemLink = uicomponent.generateLink(viewNode);
+							if(!Utils.isViewable(viewNode)) continue;
+						
+					    	def itemName = viewNode.getName();
+					    	def itemLink = uicomponent.generateLink(viewNode);
 							def itemSummary = uicomponent.getSummary(viewNode);
-			        def itemTitle = uicomponent.getTitle(viewNode);
+			        		def itemTitle = uicomponent.getTitle(viewNode);
 							def itemDateCreated = uicomponent.getCreatedDate(viewNode);
 							def imgSrc = uicomponent.getIllustrativeImage(viewNode);
 							

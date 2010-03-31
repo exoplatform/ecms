@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -205,7 +206,12 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 * @throws Exception the exception
 	 */
 	private Node getViewableContent(Node node, HashMap<String, String> filters) throws Exception {
-		if (node.isNodeType("exo:taxonomyLink")) node = linkManager.getTarget(node);
+	  if (node.isNodeType("exo:taxonomyLink"))
+	     try {
+	       return node = linkManager.getTarget(node);
+	     }catch(AccessDeniedException ade) {
+	     return null;
+	   }
 		HashMap<String, Object> context = new HashMap<String, Object>();
 		String mode = filters.get(FILTER_MODE);
 		context.put(WCMComposer.FILTER_MODE, mode);

@@ -27,10 +27,12 @@
 				String editActionLabel = _ctx.appRes("UICLVPresentation.action.edit");
 				
 				for (viewNode in currentPageData) {
+					if(!Utils.isViewable(viewNode)) continue;
+					
 					String itemLink = uicomponent.getURL(viewNode);			
 					String itemName = viewNode.getName();
 					String itemSummary = uicomponent.getSummary(viewNode);
-			    String itemTitle = uicomponent.getTitle(viewNode);
+			   		String itemTitle = uicomponent.getTitle(viewNode);
 					String itemDateCreated = uicomponent.getCreatedDate(viewNode);
 					String itemOwner = uicomponent.getAuthor(viewNode);			
 					String imgSrc = uicomponent.getIllustrativeImage(viewNode);								

@@ -291,7 +291,7 @@ public class Utils {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
   }
-  
+ 
   /**
    * Close popup window.
    * @param container the current container
@@ -394,6 +394,21 @@ public class Utils {
   public static PortletPreferences getAllPortletPreferences() {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     return portletRequestContext.getRequest().getPreferences();
+  }
+  
+  /**
+   * Check if the node is viewable for the current user or not viewable. <br/>
+   * return True if the node is viewable, otherwise will return False
+   * @param node: The node to check
+   */
+  public static boolean isViewable(Node node) {
+    try {
+        node.refresh(true);
+        ((ExtendedNode) node).checkPermission(PermissionType.READ);
+    }catch(Exception e){
+        return false;
+    }
+    return true;
   }
   
 }
