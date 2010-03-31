@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 
 import org.exoplatform.services.jcr.ext.classify.impl.AlphabetClassifyPlugin;
@@ -157,21 +158,22 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
 
     session.save();
 
-    assertEquals(5, test.getNodes().getSize());
+    NodeIterator nodes = test.getNodes();
+    assertEquals(5, nodes.getSize());
 
     dateClassifyPlugin.classifyChildrenNode(test);
 
     //test node has 2 child nodes: "2012-2016" and "2017-2020"
-    assertEquals(2, test.getNodes().getSize());
+    assertEquals(5, nodes.getSize());
     Node n_2012 = test.getNode("2012-2016");
     Node n_2017 = test.getNode("2017-2020");
     assertNotNull(n_2012);
     assertNotNull(n_2017);
 
-    //n_2012 node has 3 child nodes: "11" , "5" and "9" 
+    //n_2012 node has 3 child nodes: "12" , "5" and "10" 
     assertEquals(3, n_2012.getNodes().getSize());
-    Node n_2012_11 = n_2012.getNode("11");
-    Node n_2012_9 = n_2012.getNode("9");
+    Node n_2012_11 = n_2012.getNode("12");
+    Node n_2012_9 = n_2012.getNode("10");
     Node n_2012_5 = n_2012.getNode("5");
     assertNotNull(n_2012_11);
     assertNotNull(n_2012_9);
