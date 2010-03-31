@@ -16,8 +16,9 @@
  */
 package org.exoplatform.wcm.webui.selector.content;
 
-import org.exoplatform.portal.webui.container.UIContainer;
-import org.exoplatform.wcm.webui.Utils;
+import javax.jcr.Node;
+
+import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
@@ -33,12 +34,11 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
   lifecycle = Lifecycle.class,
   events = {
-	@EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class),
-	@EventConfig(listeners = UIContentBrowsePanel.SelectActionListener.class)
+	@EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class)
   }
 )
   
-public abstract class UIContentBrowsePanel extends UIContainer {
+public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector {
   
   public static final String WEBCONTENT = "WebContent";
   
@@ -48,16 +48,6 @@ public abstract class UIContentBrowsePanel extends UIContainer {
   
   private String contentType;
   
-  private String popupId; 
-
-  public String getPopupId() {
-	return popupId;
-  }
-  
-  public void setPopupId(String popupId) {
-	this.popupId = popupId;
-  }
-  
   public String getContentType() {
 	return contentType;
   }
@@ -66,17 +56,12 @@ public abstract class UIContentBrowsePanel extends UIContainer {
 	this.contentType = contentType;
   }
   
+  public void onChange(Node node, Object context) throws Exception {}
+  
   public static class ChangeContentTypeActionListener extends EventListener<UIContentBrowsePanel> {
 	public void execute(Event<UIContentBrowsePanel> event) throws Exception {
 		UIContentBrowsePanel contentBrowsePanel = event.getSource();
 		contentBrowsePanel.contentType = event.getRequestContext().getRequestParameter(OBJECTID);
-	}
-  }
-
-  public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
-	public void execute(Event<UIContentBrowsePanel> event) throws Exception {
-		UIContentBrowsePanel contentBrowsePanel = event.getSource();
-		Utils.closePopupWindow(contentBrowsePanel, contentBrowsePanel.getPopupId());
 	}
   }
 }

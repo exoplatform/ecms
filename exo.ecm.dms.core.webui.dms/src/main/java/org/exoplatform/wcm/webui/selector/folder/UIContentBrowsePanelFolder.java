@@ -16,10 +16,13 @@
  */
 package org.exoplatform.wcm.webui.selector.folder;
 
+import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS.
@@ -32,8 +35,17 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
   template = "classpath:groovy/wcm/webui/selector/folder/UIContentBrowsePanel.gtmpl",
   events = {
     @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class),
-    @EventConfig(listeners = UIContentBrowsePanel.SelectActionListener.class)
+    @EventConfig(listeners = UIContentBrowsePanelFolder.SelectActionListener.class)
   }
 )
 
-public class UIContentBrowsePanelFolder extends UIContentBrowsePanel{}
+public class UIContentBrowsePanelFolder extends UIContentBrowsePanel{
+
+  public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
+    public void execute(Event<UIContentBrowsePanel> event) throws Exception {
+      UIContentBrowsePanel contentBrowsePanel = event.getSource();
+      String returnFieldName = contentBrowsePanel.getReturnFieldName();
+      ((UISelectable)(contentBrowsePanel.getSourceComponent())).doSelect(returnFieldName, event.getRequestContext().getRequestParameter(OBJECTID));
+    }
+  }
+}

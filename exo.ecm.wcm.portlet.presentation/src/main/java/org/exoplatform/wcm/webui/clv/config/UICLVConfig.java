@@ -25,6 +25,7 @@ import javax.jcr.Session;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
@@ -40,7 +41,6 @@ import org.exoplatform.wcm.webui.clv.UICLVContainer;
 import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
 import org.exoplatform.wcm.webui.clv.UICLVManualMode;
 import org.exoplatform.wcm.webui.clv.UICLVPortlet;
-import org.exoplatform.wcm.webui.selector.content.multi.UIContentBrowsePanelMulti;
 import org.exoplatform.wcm.webui.selector.content.multi.UIContentSelectorMulti;
 import org.exoplatform.wcm.webui.selector.folder.UIContentBrowsePanelFolder;
 import org.exoplatform.wcm.webui.selector.folder.UIContentSelectorFolder;
@@ -85,7 +85,7 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
     @EventConfig(listeners = UICLVConfig.DeleteActionListener.class)
   }
 )
-public class UICLVConfig extends UIForm {
+public class UICLVConfig extends UIForm  implements UISelectable {
 
   /** The content list. */
   private List<String>       contentList                  = new ArrayList<String>();
@@ -204,23 +204,23 @@ public class UICLVConfig extends UIForm {
    * @return the popup id
    */
   public String getPopupId() {
-		return popupId;
-	}
+	return popupId;
+  }
 
-	/**
-	 * Sets the popup id.
-	 * 
-	 * @param popupId the new popup id
-	 */
-	public void setPopupId(String popupId) {
-		this.popupId = popupId;
-	}
+  /**
+   * Sets the popup id.
+   * 
+   * @param popupId the new popup id
+   */
+  public void setPopupId(String popupId) {
+	this.popupId = popupId;
+  }
 
-	/**
-	 * Instantiates a new uI viewer management form.
-	 * 
-	 * @throws Exception the exception
-	 */
+  /**
+   * Instantiates a new uI viewer management form.
+   * 
+   * @throws Exception the exception
+   */
   public UICLVConfig() throws Exception {
     PortletRequestContext context = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPreferences = context.getRequest().getPreferences();
@@ -442,6 +442,17 @@ public class UICLVConfig extends UIForm {
     uiViewer.init();
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String,
+   *      java.lang.Object)
+   */
+  public void doSelect(String selectField, Object value) throws Exception {
+    getUIStringInput(selectField).setValue((String) value);
+    Utils.closePopupWindow(this, popupId);
+  }
+  
   /**
    * The listener interface for receiving saveAction events. The class that is
    * interested in processing a saveAction event implements this interface, and
@@ -710,15 +721,16 @@ public class UICLVConfig extends UIForm {
       if (mode.equals(UICLVConfig.VIEWER_AUTO_MODE)) {
       	orderBySelector.setRendered(true);
         UIContentSelectorFolder contentSelector = uiViewerManagementForm.createUIComponent(UIContentSelectorFolder.class, null, null);
-        contentSelector.getChild(UIContentBrowsePanelFolder.class).setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
+        UIContentBrowsePanelFolder contentBrowserPanel= contentSelector.getChild(UIContentBrowsePanelFolder.class);
+        contentBrowserPanel.setSourceComponent(uiViewerManagementForm, new String[] { UICLVConfig.FOLDER_PATH_INPUT });
         Utils.createPopupWindow(uiViewerManagementForm, contentSelector, FOLDER_PATH_SELECTOR_POPUP_WINDOW, 800);
+        uiViewerManagementForm.setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
       } else {
         orderBySelector.setRendered(false);
         UIContentSelectorMulti contentSelector = uiViewerManagementForm.createUIComponent(UIContentSelectorMulti.class, null, null);
         contentSelector.init();
-        UIContentBrowsePanelMulti contentBrowserPanel= contentSelector.getChild(UIContentBrowsePanelMulti.class);
-        contentBrowserPanel.setPopupId(FOLDER_PATH_SELECTOR_POPUP_WINDOW);
         Utils.createPopupWindow(uiViewerManagementForm, contentSelector, CORRECT_CONTENT_SELECTOR_POPUP_WINDOW, 800);
+        uiViewerManagementForm.setPopupId(CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
       }
     }
   }
@@ -827,4 +839,5 @@ public class UICLVConfig extends UIForm {
       viewerManagementForm.setPopupId(BASE_PATH_SELECTOR_POPUP_WINDOW);
     }
   }
+  
 }
