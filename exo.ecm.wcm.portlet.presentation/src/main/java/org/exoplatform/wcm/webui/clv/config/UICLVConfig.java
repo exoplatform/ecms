@@ -33,6 +33,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -549,8 +550,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
       				portletRequestContext, oldContentList, portletId);
       	}
       	if (newViewerMode.equals(UICLVConfig.VIEWER_MANUAL_MODE)) {
-      		uiViewerManagementForm.doPublication(repository, workspace,
-      				portletRequestContext, selectedList, portletId);
+      		uiViewerManagementForm.doPublication(portletRequestContext, selectedList, portletId);
       	}
       	Utils.createPopupMessage(uiViewerManagementForm, "UIMessageBoard.msg.saving-success", null, ApplicationMessage.INFO);
       } else {
@@ -567,7 +567,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
             uiContentListViewerPortlet.removeChild(UICLVFolderMode.class);
             uiCorrectContentsViewer = uiContentListViewerPortlet.addChild(UICLVManualMode.class, null, null);            
             uiCorrectContentsViewer.init();
-            uiViewerManagementForm.doPublication(repository, workspace, portletRequestContext, selectedList, portletId);
+            uiViewerManagementForm.doPublication(portletRequestContext, selectedList, portletId);
           }
          } else if (currentViewerMode.equals(UICLVConfig.VIEWER_MANUAL_MODE)) {
         	 uiViewerManagementForm.doSuspendPublication(repository, workspace,
@@ -576,7 +576,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
             uiCorrectContentsViewer = uiContentListViewerPortlet.getChild(UICLVManualMode.class);            
             uiCorrectContentsViewer.getChildren().clear();
             uiCorrectContentsViewer.init();
-            uiViewerManagementForm.doPublication(repository, workspace, portletRequestContext, selectedList, portletId);
+            uiViewerManagementForm.doPublication(portletRequestContext, selectedList, portletId);
           } else if (newViewerMode.equals(UICLVConfig.VIEWER_AUTO_MODE)) {            
             uiContentListViewerPortlet.removeChild(UICLVManualMode.class);
             uiFolderViewer = uiContentListViewerPortlet.addChild(UICLVFolderMode.class, null, null);
@@ -599,13 +599,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
    * 
    * @throws Exception the exception
    */
-  private void doPublication(
-  		String repository, String workspaceName, PortletRequestContext portletRequestContext,
-  		List<String> selectedList, String portletId)
-  throws Exception {
-  	RepositoryService repositoryService = (RepositoryService)getApplicationComponent(RepositoryService.class);
-  	ManageableRepository manageableRepository = repositoryService.getRepository(repository);
-  	Session session = Utils.getSessionProvider().getSession(workspaceName, manageableRepository);
+  private void doPublication(PortletRequestContext portletRequestContext, List<String> selectedList, String portletId) throws Exception {
   	WCMPublicationService publicationService = this.getApplicationComponent(WCMPublicationService.class);
   	String pageId = Util.getUIPortal().getSelectedNode().getPageReference();
   	UserPortalConfigService upcService = getApplicationComponent(UserPortalConfigService.class);
@@ -616,7 +610,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
   	String remoteUser = portletRequestContext.getRemoteUser();
   	
   	for(String nodePath : selectedList) {
-  		tempNode = (Node)session.getItem(nodePath);
+  		tempNode = NodeLocation.getNodeByExpression(nodePath);
   		if (!publicationService.isEnrolledInWCMLifecycle(tempNode)) {
   			publicationService.updateLifecyleOnChangeContent(tempNode, siteName, remoteUser);
   		}
