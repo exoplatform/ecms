@@ -735,6 +735,11 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
         orderBySelector.setRendered(false);
         UIContentSelectorMulti contentSelector = uiViewerManagementForm.createUIComponent(UIContentSelectorMulti.class, null, null);
         UIContentBrowsePanelMulti contentBrowserPanel= contentSelector.getChild(UIContentBrowsePanelMulti.class);
+        String itemPaths = "";
+        for (String content : uiViewerManagementForm.contentList) {
+        	itemPaths += content + ";";
+        }
+        contentBrowserPanel.setItemPaths(itemPaths);
         contentBrowserPanel.setSourceComponent(uiViewerManagementForm, new String[] { UICLVConfig.FOLDER_PATH_INPUT });
         contentSelector.init();
         Utils.createPopupWindow(uiViewerManagementForm, contentSelector, CORRECT_CONTENT_SELECTOR_POPUP_WINDOW, 800);

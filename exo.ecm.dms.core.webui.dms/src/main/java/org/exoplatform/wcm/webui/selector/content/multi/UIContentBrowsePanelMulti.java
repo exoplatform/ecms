@@ -43,7 +43,17 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
-	
+
+  private String itemPaths;
+  
+  public String getItemPaths() {
+    return itemPaths;
+  }
+  
+  public void setItemPaths(String itemPaths) {
+    this.itemPaths = itemPaths;
+  }
+
   public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
     public void execute(Event<UIContentBrowsePanel> event) throws Exception {
       UIContentBrowsePanel contentBrowsePanel = event.getSource();

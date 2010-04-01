@@ -650,7 +650,7 @@ EcmContentSelector.prototype.insertMultiContent = function() {
 	var folderPath = eXo.core.DOMUtil.findDescendantById(uiFormGrid, "FolderPathInput");
 	var tblContent = document.getElementById("ListFilesContent");
 	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblContent, "tr");
-	var strContent = "objectId=";
+	var strContent = "";
 	for(var i = 0; i < rowsContent.length; i++) {
 		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "a", "Item");
 		if(nodeContent) {
