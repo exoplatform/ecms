@@ -170,10 +170,10 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
     assertNotNull(n_2012);
     assertNotNull(n_2017);
 
-    //n_2012 node has 3 child nodes: "12" , "5" and "10" 
+    //n_2012 node has 3 child nodes: "11" , "5" and "9" 
     assertEquals(3, n_2012.getNodes().getSize());
-    Node n_2012_11 = n_2012.getNode("12");
-    Node n_2012_9 = n_2012.getNode("10");
+    Node n_2012_11 = n_2012.getNode("11");
+    Node n_2012_9 = n_2012.getNode("9");
     Node n_2012_5 = n_2012.getNode("5");
     assertNotNull(n_2012_11);
     assertNotNull(n_2012_9);
