@@ -41,6 +41,8 @@ import org.exoplatform.wcm.webui.clv.UICLVContainer;
 import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
 import org.exoplatform.wcm.webui.clv.UICLVManualMode;
 import org.exoplatform.wcm.webui.clv.UICLVPortlet;
+import org.exoplatform.wcm.webui.selector.UISourceGridUpdatable;
+import org.exoplatform.wcm.webui.selector.content.multi.UIContentBrowsePanelMulti;
 import org.exoplatform.wcm.webui.selector.content.multi.UIContentSelectorMulti;
 import org.exoplatform.wcm.webui.selector.folder.UIContentBrowsePanelFolder;
 import org.exoplatform.wcm.webui.selector.folder.UIContentSelectorFolder;
@@ -85,7 +87,7 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
     @EventConfig(listeners = UICLVConfig.DeleteActionListener.class)
   }
 )
-public class UICLVConfig extends UIForm  implements UISelectable {
+public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUpdatable {
 
   /** The content list. */
   private List<String>       contentList                  = new ArrayList<String>();
@@ -453,6 +455,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     Utils.closePopupWindow(this, popupId);
   }
   
+  public void doSave(List<String> returnRecords) {
+    setViewAbleContentList(returnRecords);
+  }
+  
   /**
    * The listener interface for receiving saveAction events. The class that is
    * interested in processing a saveAction event implements this interface, and
@@ -728,6 +734,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       } else {
         orderBySelector.setRendered(false);
         UIContentSelectorMulti contentSelector = uiViewerManagementForm.createUIComponent(UIContentSelectorMulti.class, null, null);
+        UIContentBrowsePanelMulti contentBrowserPanel= contentSelector.getChild(UIContentBrowsePanelMulti.class);
+        contentBrowserPanel.setSourceComponent(uiViewerManagementForm, new String[] { UICLVConfig.FOLDER_PATH_INPUT });
         contentSelector.init();
         Utils.createPopupWindow(uiViewerManagementForm, contentSelector, CORRECT_CONTENT_SELECTOR_POPUP_WINDOW, 800);
         uiViewerManagementForm.setPopupId(CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);

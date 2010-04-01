@@ -615,11 +615,10 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 	if(!objNode) return;
 	var rws = document.getElementById("RightWorkspace");
 	if(eXo.ecm.ECS.typeObj == "folder") {
-//		var formObj = document.getElementById("UICLVConfig");
-//		var uiFormGrid = eXo.core.DOMUtil.findFirstDescendantByClass(formObj, "table", "UIFormGrid");
-//		var folderPath = eXo.core.DOMUtil.findDescendantById(uiFormGrid, "FolderPathInput");
-//		folderPath.value = eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+objNode.getAttribute("path");
-		eval(rws.getAttribute("action") + '&objectId=' + objNode.getAttribute("path"));
+		var action = rws.getAttribute("action");
+		action = action.substring(0, action.length - 2);
+		action += '&objectId=' + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\');';
+		eval(action);
 	} else if(eXo.ecm.ECS.typeObj == "one") {
 		
 		// need to improve...

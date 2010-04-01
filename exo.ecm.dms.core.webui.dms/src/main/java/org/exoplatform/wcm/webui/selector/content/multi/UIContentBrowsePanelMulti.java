@@ -16,10 +16,17 @@
  */
 package org.exoplatform.wcm.webui.selector.content.multi;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.exoplatform.ecm.webui.selector.UISelectable;
+import org.exoplatform.wcm.webui.selector.UISourceGridUpdatable;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS.
@@ -30,8 +37,26 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
   lifecycle = Lifecycle.class,
   template = "classpath:groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl",
   events = {
-    @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class)
+    @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class),
+    @EventConfig(listeners = UIContentBrowsePanelMulti.SelectActionListener.class)
   }
 )
 
-public class UIContentBrowsePanelMulti extends UIContentBrowsePanel{}
+public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
+	
+  public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
+    public void execute(Event<UIContentBrowsePanel> event) throws Exception {
+      UIContentBrowsePanel contentBrowsePanel = event.getSource();
+      String returnFieldName = contentBrowsePanel.getReturnFieldName();
+      String itemPaths = event.getRequestContext().getRequestParameter(OBJECTID);
+      ((UISelectable)(contentBrowsePanel.getSourceComponent())).doSelect(returnFieldName, itemPaths);
+      
+      List<String> selectedItems = new ArrayList<String>();
+      for (String selectedItem : itemPaths.split(";")) {
+    	  selectedItems.add(selectedItem);
+      }
+      ((UISourceGridUpdatable)contentBrowsePanel.getSourceComponent()).doSave(selectedItems);
+	}
+  }
+	
+}
