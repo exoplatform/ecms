@@ -22,6 +22,7 @@ import java.util.regex.Matcher;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -48,6 +49,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
+import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -61,6 +63,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
+import org.jmock.core.constraint.IsInstanceOf;
 
 /**
  * Created by The eXo Platform SAS
@@ -83,6 +86,11 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
+  }
+  
+  private static void refresh(Node node) throws Exception {
+    node.getSession().itemExists(node.getPath());
+	node.refresh(true);
   }
 
   public static void editDocument(Event<? extends UIComponent> event,
@@ -124,18 +132,24 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      selectedNode.refresh(true);
+      refresh(selectedNode);
+      Node parent = selectedNode.getParent();
+      NodeIterator nodes = parent.getNodes();
+      while (nodes.hasNext()) {
+    	  parent.getSession().getItem(((Node) nodes.next()).getPath());
+      }
       // Check document is lock for editing
       uiDocumentForm.setIsKeepinglock(false);
-      if (!selectedNode.isLocked()) {
+/*      if (!selectedNode.isLocked()) {
         synchronized (EditDocumentActionComponent.class) {
-          selectedNode.refresh(true);
+          refresh(selectedNode);
           if (!selectedNode.isLocked()) {
             if(selectedNode.canAddMixin(Utils.MIX_LOCKABLE)){
               selectedNode.addMixin(Utils.MIX_LOCKABLE);
               selectedNode.save();
             }
             Lock lock = selectedNode.lock(false, false);
+            System.out.println("Now this is lock or not? " + selectedNode.isLocked());
             LockUtil.keepLock(lock);
             LockService lockService = uiExplorer.getApplicationComponent(LockService.class);
             List<String> settingLockList = lockService.getAllGroupsOrUsersForLock();
@@ -156,17 +170,17 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
             uiDocumentForm.setIsKeepinglock(true);
           }
         }
-      }
+      }*/
       // Update data avoid concurrent modification by other session
-      selectedNode.refresh(true);      
+      //refresh(selectedNode);      
       // Check again after node is locking by current user or another
-      if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
+      /*if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
         Object[] arg = { selectedNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }
+      }*/
       uiDocumentForm.setNodePath(selectedNode.getPath());
       uiDocumentForm.addNew(false);
       uiDocumentForm.setWorkspace(selectedNode.getSession().getWorkspace().getName());

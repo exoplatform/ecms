@@ -160,7 +160,7 @@ public class UIDialogForm extends UIForm {
   }
 
   public void releaseLock() throws Exception {
-    if (isKeepinglock()) {
+    /*if (isKeepinglock()) {
       Node currentNode = getNode();
       if (currentNode.isLocked()) {
         try {
@@ -180,7 +180,7 @@ public class UIDialogForm extends UIForm {
         }
       }
     }
-    setIsKeepinglock(false);
+    setIsKeepinglock(false);*/
   }
   
   public List<String> getListTaxonomy() {
