@@ -16,10 +16,10 @@
 			%>
 				<div class="TopBoxParameterized">
 					<div class="Title">
-						<div class="Header">$header</div>
+						<div class="Header"><%=header%></div>
 						<%
 						if (isShowRSSLink) {
-							%><a class="RssIcon" href="$rssLink" target="_newrss">RSS Feed</a><%
+							%><a class="RssIcon" href="<%=rssLink%>" target="_newrss">RSS Feed</a><%
 						}
 						%>
 					</div>
@@ -69,31 +69,31 @@
 												<div class="HotNews">
 													<%
 														if (isShowIllustrationImg) {
-															%><a class="ImageHotNews" href="$itemLink"><img width="248" alt="$imgSrc" src="$imgSrc" /></a><%
+															%><a class="ImageHotNews" href="<%=itemLink%>"><img width="248" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
 														} 
 													%>
 													<div class="ContentHotNews">
 														<% 
 															if (isShowTitle) {
 																if (isShowLink) {
-																	%><a class="TitleContentHotNews" href="$itemLink">$itemName</a><%
+																	%><a class="TitleContentHotNews" href="<%=itemLink%>"><%=itemName%></a><%
 																} else {
-																	%>$itemName<%
+																	%><%=itemName%><%
 																} 
 															}
 														
 															if (isShowSumary) {
-																%><div>$itemSummary</div><%
+																%><div><%=itemSummary%></div><%
 															} 
 													
 															if (isShowCreatedDate) {
-																%><div style="color: red;">$itemDateCreated</div><%
+																%><div style="color: red;"><%=itemDateCreated%></div><%
 															}
 														%>
 													</div>
 													<div class="ClearBoth"><span></span></div>
 													<% if (isShowReadmore) { %>
-												  		<div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
+												  		<div class="ReadLink"><a href="<%=itemLink%>"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
 													}%>
 												</div>
 											<%
@@ -103,7 +103,7 @@
 												<div class="NormalNews">
 													<% 
 														if (isShowIllustrationImg) {
-															%><a class="ImageNormalNews" href="$itemLink"><img width="190" alt="$imgSrc" src="$imgSrc" /></a><%
+															%><a class="ImageNormalNews" href="<%=itemLink%>"><img width="190" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
 														} 
 													%>
 													<div class="ContentNormalNews">
@@ -113,9 +113,9 @@
 																	<div style="font-size: 12px;">
 																		<%
 																			if (isShowLink) {
-																				%><a class="TitleContentNormalNews" href="$itemLink">$itemName</a><%
+																				%><a class="TitleContentNormalNews" href="<%=itemLink%>"><%=itemName%></a><%
 																			} else {
-																					%>$itemName<%
+																					%><%=itemName%><%
 																			} 
 																		%>
 																	</div>
@@ -123,7 +123,7 @@
 															}
 														
 															if (isShowSumary) {
-																%><div>$itemSummary</div><%
+																%><div><%=itemSummary%></div><%
 															} 
 															
 															if (isShowCreatedDate) {
@@ -134,7 +134,7 @@
 													<div style="clear: both;"><span></span></div>
 												</div>
 												<% if (isShowReadmore) { %>
-												  		<div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
+												  		<div class="ReadLink"><a href="<%=itemLink%>"><%= _ctx.appRes("UIPCLVConfig.label.readmore") %></a></div><%
 													}%>
 												<div class="LineNormalNews"><span></span></div>
 											<%
