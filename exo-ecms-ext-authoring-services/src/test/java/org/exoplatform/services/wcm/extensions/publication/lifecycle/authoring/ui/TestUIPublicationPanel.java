@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,8 +29,6 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 import junit.framework.TestCase;
 import static org.mockito.Mockito.*;
