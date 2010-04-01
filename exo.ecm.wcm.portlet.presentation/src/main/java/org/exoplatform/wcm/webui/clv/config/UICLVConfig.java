@@ -307,7 +307,6 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
     itemsPerPageStringInput.addValidator(PositiveNumberFormatValidator.class);
     itemsPerPageStringInput.setMaxLength(3);    
     if (isManualMode()) {
-      orderBySelectBox.setRendered(false);
       viewerModeRadioBoxInput.setValue(VIEWER_MANUAL_MODE);
       String [] listContent = portletPreferences.getValues(UICLVPortlet.CONTENT_LIST, null);
       if (listContent != null && listContent.length != 0) {
@@ -316,7 +315,6 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
       }
     } else {
       viewerModeRadioBoxInput.setValue(VIEWER_AUTO_MODE);
-      orderBySelectBox.setRendered(true);
     }
     
     String basepath = portletPreferences.getValue(UICLVPortlet.BASE_PATH, null);
