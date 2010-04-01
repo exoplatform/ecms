@@ -30,7 +30,7 @@
     <org.exoplatform.kernel.version>2.2.0-GA</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.3.0-GA</org.exoplatform.core.version>
     <org.exoplatform.ws.version>2.1.0-GA</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.12.0-GA</org.exoplatform.jcr.version>
+    <org.exoplatform.jcr.version>1.12.0-CP01</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.12.0-GA</org.exoplatform.jcr-services.version>
     <org.exoplatform.portal.version>3.0.0-GA</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
