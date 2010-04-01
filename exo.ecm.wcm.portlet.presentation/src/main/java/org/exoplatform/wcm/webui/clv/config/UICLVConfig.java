@@ -643,7 +643,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
 
   	for(String nodePath : oldList) {
   		publicationService.suspendPublishedContentFromPage(
-  				(Node)session.getItem(nodePath), page, portletRequestContext.getRemoteUser());
+  				NodeLocation.getNodeByExpression(nodePath), page, portletRequestContext.getRemoteUser());
   	}
   }
   
