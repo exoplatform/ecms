@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -101,8 +102,7 @@ public class UICLVFolderMode extends UICLVContainer {
    */
   public List<Node> getRenderedContentNodes() throws Exception {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
-
+    PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();      
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
@@ -113,6 +113,9 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     
+    if(preferences.getValue(UICLVPortlet.FOLDER_PATH, null) == null){
+        return new ArrayList<Node>();
+    }      
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(preferences.getValue(UICLVPortlet.FOLDER_PATH, null));
     return wcmComposer.getContents(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getUserSessionProvider());
   }
