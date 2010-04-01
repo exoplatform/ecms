@@ -483,7 +483,7 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		}
 		var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 		var url 			= list[i].getAttribute("url");
-		var path 			= list[i].getAttribute("path");
+		var path 			= eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+list[i].getAttribute("path");
 		var nodeType	= list[i].getAttribute("nodeType");
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
@@ -645,9 +645,6 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 
 EcmContentSelector.prototype.insertMultiContent = function() {
 	var rws = document.getElementById("RightWorkspace");
-	var formObj = document.getElementById("UICLVConfig");
-	var uiFormGrid = eXo.core.DOMUtil.findFirstDescendantByClass(formObj, "table", "UIFormGrid");
-	var folderPath = eXo.core.DOMUtil.findDescendantById(uiFormGrid, "FolderPathInput");
 	var tblContent = document.getElementById("ListFilesContent");
 	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblContent, "tr");
 	var strContent = "";
@@ -655,10 +652,9 @@ EcmContentSelector.prototype.insertMultiContent = function() {
 		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "a", "Item");
 		if(nodeContent) {
 			var path = nodeContent.getAttribute("path");
-			strContent +=  eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+path+";";
+			strContent +=  path+";";
 		}
 	}
-	folderPath.value = strContent;
 	var action = rws.getAttribute("action");
 	action = action.substring(0, action.length - 2);
 	action += '&objectId=' + strContent + '\')';
@@ -688,6 +684,30 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 };
 
 EcmContentSelector.prototype.addFileSearchListSearch = function() {
+};
+
+EcmContentSelector.prototype.loadListContent = function(strArray) {
+	if(!strArray) return;
+	var tblListFilesContent = document.getElementById("ListFilesContent");
+	var arrContent = strArray.split(";");
+	if(arrContent.length > 0) {
+		var trNoContent = eXo.core.DOMUtil.findFirstDescendantByClass(tblListFilesContent, "td", "TRNoContent");
+		if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
+		var clazz = 'OddItem';
+		for(var i = 0; i < arrContent.length-1; i++) {
+			var path = arrContent[i];
+			var newRow = tblListFilesContent.insertRow(1);
+			if(clazz == 'EventItem') {
+				clazz = 'OddItem';
+			} else if(clazz == 'OddItem') {
+				clazz = 'EventItem';
+			}
+			newRow.className = clazz;
+			var strTmpArr = arrContent[i].split('/');
+			var nodeName = strTmpArr[strTmpArr.length-1];
+			newRow.insertCell(0).innerHTML = '<a class="Item" path="'+path+'">'+nodeName+'</a>';
+		}
+	}
 };
 
 EcmContentSelector.prototype.changeFilter = function() {

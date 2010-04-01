@@ -1,10 +1,11 @@
 <%
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
-  def itemPaths = uicomponent.getItemPaths();
+  	def itemPaths = uicomponent.getItemPaths();
 	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
 	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
-	jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi', '$itemPaths')");
+	jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi');");
+	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent("+itemPaths+");");
 %>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
 	<div class="ActionBar">
