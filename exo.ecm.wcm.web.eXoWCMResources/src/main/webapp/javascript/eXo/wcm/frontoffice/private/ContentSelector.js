@@ -470,8 +470,6 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var tdNoContent = rowTmp.insertCell(0);
 		tdNoContent.innerHTML = "There is no content";
 		tdNoContent.className = "Item TRNoContent";
-		var inputContent = rowTmp.insertCell(1);
-		inputContent.innerHTML = '<input type="checkbox" class="AddContent" />';
 		document.getElementById("pageNavPosition").innerHTML = "";
 		return;
 	}
@@ -490,8 +488,7 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<a class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+node+'</a>';
-		newRow.insertCell(1).innerHTML = '<input type="checkbox" class="AddContent"/>';
+		newRow.insertCell(0).innerHTML = '<a class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node+'</a>';
 		
 		if(i > 13) {
 			var numberRecords = 0;
@@ -617,13 +614,12 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 	if(eXo.ecm.ECS.typeObj == "folder") {
 		var action = rws.getAttribute("action");
 		action = action.substring(0, action.length - 2);
-		action += '&objectId=' + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\');';
+		action += '&objectId=' + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';
 		eval(action);
 	} else if(eXo.ecm.ECS.typeObj == "one") {
 		
 		// need to improve...
 		var path = nodeContent.getAttribute("path");
-		
 		
 	} if(eXo.ecm.ECS.typeObj == "fck") {
 		if(!objContent) return;
@@ -652,19 +648,46 @@ EcmContentSelector.prototype.insertMultiContent = function() {
 	var formObj = document.getElementById("UICLVConfig");
 	var uiFormGrid = eXo.core.DOMUtil.findFirstDescendantByClass(formObj, "table", "UIFormGrid");
 	var folderPath = eXo.core.DOMUtil.findDescendantById(uiFormGrid, "FolderPathInput");
-	var tblContent = document.getElementById("ListRecords");
+	var tblContent = document.getElementById("ListFilesContent");
 	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblContent, "tr");
-	var strContent = "";
+	var strContent = "objectId=";
 	for(var i = 0; i < rowsContent.length; i++) {
-		var inputContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "input", "AddContent");
 		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "a", "Item");
-		if(nodeContent && inputContent.checked) {
+		if(nodeContent) {
 			var path = nodeContent.getAttribute("path");
 			strContent +=  eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+path+";";
 		}
 	}
 	folderPath.value = strContent;
-	eval(rws.getAttribute("action"));
+	var action = rws.getAttribute("action");
+	action = action.substring(0, action.length - 2);
+	action += '&objectId=' + strContent + '\')';
+	eval(action);
+};
+
+EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
+	var tblListFilesContent = document.getElementById("ListFilesContent");
+	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblListFilesContent, "tr");
+	var trNoContent = eXo.core.DOMUtil.findFirstDescendantByClass(tblListFilesContent, "td", "TRNoContent");
+	var clazzNode = eXo.core.DOMUtil.findAncestorByTagName(objNode, "tr");
+	if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
+	var clazz = clazzNode.className;
+	if(clazz == 'EventItem') {
+		clazz = 'OddItem';
+	} else if(clazz == 'OddItem') {
+		clazz = 'EventItem';
+	}
+	var url = objNode.getAttribute("url");
+	var nodeType	= objNode.getAttribute("nodeType");
+	var node = objNode.innerHTML;
+	var path = objNode.getAttribute("path");
+	var	clazzItem = objNode.className;
+	var newRow = tblListFilesContent.insertRow(1);
+	newRow.className = clazz;
+	newRow.insertCell(0).innerHTML = '<a class="'+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+node+'</a>';
+};
+
+EcmContentSelector.prototype.addFileSearchListSearch = function() {
 };
 
 EcmContentSelector.prototype.changeFilter = function() {

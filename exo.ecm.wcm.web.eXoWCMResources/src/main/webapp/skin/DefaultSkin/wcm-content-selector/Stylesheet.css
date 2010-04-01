@@ -373,6 +373,10 @@
 	padding-left: 7px;
 }
 
+.ListContainer .RightWorkspace .MultiListContainer .ListFileContainer {
+	margin-top:6px;
+}
+
 .UIWCMSearchContainer .LeftWorkspace a:hover {
 	font-weight: bold;
 }

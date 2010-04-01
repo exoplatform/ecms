@@ -32,12 +32,22 @@
 		    			<thead>
 		    				<tr>
 			    		  		<th class="THBar"> Name </th>
-				   	    		<th class="THBar" style="width: 55px;"> Actions</th>
 			    	 		</tr>
 				    	</thead>
 			    		<tr>
 				    		<td class="Item TRNoContent">There is no content</td>
-			    			<td width='55px'><input type="checkbox" class="Input"/></td>
+		    			</tr>
+		  			</table>
+				</div>
+				<div class="ListFileContainer">
+		  			<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListFilesContent">
+		    			<thead>
+		    				<tr>
+			    		  		<th class="THBar"> List Content </th>
+			    	 		</tr>
+				    	</thead>
+			    		<tr>
+				    		<td class="Item TRNoContent">There is no file</td>
 		    			</tr>
 		  			</table>
 				</div>
