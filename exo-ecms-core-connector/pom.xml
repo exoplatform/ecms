@@ -53,7 +53,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo.ecm.wcm.component.publication</artifactId>
+      <artifactId>exo-ecms-core-publication</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
