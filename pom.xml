@@ -68,8 +68,9 @@
     <!-- We enforce Java 6 to build to use Chromattic and APT -->
     <jdk.min.version>1.6</jdk.min.version>
     <!-- maven-release-plugin -->
-    <arguments>-Prelease,java-api-compat,pkg-tomcat,arc-tomcat,pkg-jbossas,arc-jbossas,dms,wkf,wcm,jbpm,run-its -Dgatein.working.dir=target</arguments>
-    
+    <arguments>-Dgatein.working.dir=target</arguments>
+    <!-- For 2.0.0 Beta 01 we release only tomcat package for WCM -->
+    <releaseProfiles>${defaulteXoReleaseProfiles},pkg-tomcat,arc-tomcat,wcm,jbpm</releaseProfiles>    
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
