@@ -53,7 +53,7 @@ function getModule(params) {
   module.demo = {};
   
   module.demo.portal = new Project("org.exoplatform.ecms", "exo.ecm.wcm.demo.war", "war", module.version).
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.wcm.demo.config", "jar", module.version));
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-packaging-ecmdemo-config", "jar", module.version));
   module.demo.portal.deployName = "ecmdemo";	      
     
   module.demo.rest = new Project("org.exoplatform.ecms", "exo.ecm.wcm.demo.rest-war", "war", module.version);
