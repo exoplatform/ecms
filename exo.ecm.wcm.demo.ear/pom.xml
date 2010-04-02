@@ -12,7 +12,7 @@
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo.ecm.wcm.demo.config</artifactId>
+      <artifactId>exo-ecms-packaging-ecmdemo-config</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
