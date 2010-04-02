@@ -32,7 +32,7 @@
         <executions>
           <execution>
             <id>unpack-dependencies</id>
-            <phase>prepare-resources</phase>
+            <phase>compile</phase>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
