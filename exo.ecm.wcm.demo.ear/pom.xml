@@ -40,7 +40,7 @@
           <modules>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo.ecm.wcm.demo.config</artifactId>
+              <artifactId>exo-ecms-packaging-ecmdemo-config</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <webModule>
