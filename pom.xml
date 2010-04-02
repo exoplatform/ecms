@@ -329,6 +329,7 @@
       </plugin>
     </plugins>
   </build>
+  <!--
   <profiles>
     <profile>
       <id>jbpm</id>
@@ -355,6 +356,7 @@
       </modules>
     </profile>
   </profiles>
+  -->
   <modules>
     <module>exo-ecms-core-services</module>
     <module>exo.ecm.dms.core.component.document.viewer</module>
@@ -419,5 +421,6 @@
     <module>dms.packaging.product</module>
     <module>wcm.packaging.module</module>
     <module>wcm.packaging.product</module>
+    <module>exo.ecm.wcm.packaging.assembly</module>    
   </modules>
 </project>
