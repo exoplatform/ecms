@@ -12,8 +12,10 @@
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+  import org.exoplatform.services.cms.link.LinkManager;
 %>
 <%
+  def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
   def childList = uicomponent.getChildrenList();
   if(childList.size() > 0) {
     String portalName = uicomponent.getPortalName();
@@ -271,7 +273,7 @@
                     isShowSlideShow = false;
                   }
                   imgSrc = "/".concat(portalName).concat("/").concat(restContextName).concat("/thumbnailImage/{size}/").concat(uicomponent.getRepository()).concat("/").concat(wsName).concat(image.getPath());
-                  if(uicomponent.isSupportedThumbnailImage(image)) {
+                  if((!linkManager.isLink(image) || linkManager.isTargetReachable(image)) && uicomponent.isSupportedThumbnailImage(image)) {
                     imgSrc = imgSrc.replace("{size}","origin").concat("/?reloadnum=").concat(String.valueOf(Math.random())); 
                   } else if (isShowSlideShow) {
                     imgSrc = imgSrc.replace("{size}","big").concat("/?reloadnum=").concat(String.valueOf(Math.random()));

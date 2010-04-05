@@ -8,7 +8,9 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.services.cms.link.LinkManager;
      
+  def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");  
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();
@@ -105,7 +107,7 @@
               } 
 	            if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {	            
 			          //Begin WebDav Action
-				        if(data.getPrimaryNodeType().getName().equals("nt:file")) {
+	              if ((!linkManager.isLink(data) || linkManager.isTargetReachable(data)) && data.getPrimaryNodeType().getName().equals("nt:file")) {
 							  	String mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
 							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+portalName+"','"+restContextName+"','"+repository+"','"+ preferenceWS+ "','" +data.getPath()+"','"+mimeType+"')";				  					  					  	
 				        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\">" ;	        

@@ -350,7 +350,9 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   
   public Node getThumbnailNode(Node node) throws Exception {
     ThumbnailService thumbnailService = getApplicationComponent(ThumbnailService.class);
-    node = node instanceof NodeLinkAware ? ((NodeLinkAware) node).getTargetNode().getRealNode() : node;
+    LinkManager linkManager = this.getApplicationComponent(LinkManager.class);
+    if (!linkManager.isLink(node) || linkManager.isTargetReachable(node))
+      node = node instanceof NodeLinkAware ? ((NodeLinkAware) node).getTargetNode().getRealNode() : node;
     return thumbnailService.getThumbnailNode(node);
   }
 
