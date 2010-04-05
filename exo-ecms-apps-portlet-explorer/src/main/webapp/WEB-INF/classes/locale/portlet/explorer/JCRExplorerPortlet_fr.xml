@@ -493,6 +493,8 @@
         <auditing><![CDATA[Tra&ccedil;abilit&eacute;]]></auditing>
         <exo_dateCreated>Date de création</exo_dateCreated>
         <exo_dateModified>Date de modification</exo_dateModified>
+        <true>vrai</true>
+        <false>faux</false>
       </label>
     </view>
   </ListView>
