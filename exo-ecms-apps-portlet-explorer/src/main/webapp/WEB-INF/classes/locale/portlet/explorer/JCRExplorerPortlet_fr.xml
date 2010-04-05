@@ -1404,7 +1404,7 @@
       <filetype-error>Import impossible. Le fichier uploadé est probablement corrompu.</filetype-error>
       <mimetype-invalid>Seuls les fichier xml ou zip sont supportés pour l'import.</mimetype-invalid>
       <access-denied>Accès interdit ! Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
-      <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autotisé</constraint-violation-exception>
+      <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autorisé</constraint-violation-exception>
     </msg>
   </UIImportNode>
   <!--
