@@ -361,11 +361,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 	  Element folders = document.createElement("Folders");
 	  folders.setAttribute("name", groupName);
 	  createAtributeUpload(folders, false);
-    for (DriveData driver : driversList) {
+    for (DriveData driver : driversList) {      
+      String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
+      String workspace  = driver.getWorkspace();      
       Element folder = document.createElement("Folder");
       folder.setAttribute("name", driver.getName());
       folder.setAttribute("driverPath", driver.getHomePath());
-      createAtributeUpload(folder, true);
+      folder.setAttribute("repository", repository);
+      folder.setAttribute("workspace", workspace);
+      createAtributeUpload(folder, true);      
       folders.appendChild(folder);  
     }
 	  return folders;
