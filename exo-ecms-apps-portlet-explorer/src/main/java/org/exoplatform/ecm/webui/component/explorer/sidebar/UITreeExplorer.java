@@ -30,15 +30,11 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.services.log.Log;
 import org.apache.ws.commons.util.Base64;
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
-import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -51,6 +47,7 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -286,7 +283,7 @@ public class UITreeExplorer extends UIContainer {
         continue;
       temp = temp.getChildByName(nodeName);
       if (temp == null) {
-        LOG.error("The node '" + nodeName + "' cannot be found");
+        LOG.error("The node '" + nodeName + "' has not child node");
         treeRoot_ = treeRoot;
         return;
       }
