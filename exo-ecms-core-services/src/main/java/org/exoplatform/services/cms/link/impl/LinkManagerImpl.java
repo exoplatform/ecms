@@ -116,7 +116,6 @@ public class LinkManagerImpl implements LinkManager {
     String uuid = link.getProperty(UUID).getString();
     Session session = getSession(link, system);
     Node targetNode = session.getNodeByUUID(uuid);
-    session.logout();
     return targetNode;
   }
 

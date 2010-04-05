@@ -22,7 +22,6 @@ import java.util.regex.Matcher;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -49,7 +48,6 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
-import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -63,7 +61,6 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
-import org.jmock.core.constraint.IsInstanceOf;
 
 /**
  * Created by The eXo Platform SAS
@@ -89,8 +86,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
   }
   
   private static void refresh(Node node) throws Exception {
-    node.getSession().itemExists(node.getPath());
-	node.refresh(true);
+  	node.refresh(true);
   }
 
   public static void editDocument(Event<? extends UIComponent> event,
@@ -133,14 +129,9 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         return;
       }
       refresh(selectedNode);
-      Node parent = selectedNode.getParent();
-      NodeIterator nodes = parent.getNodes();
-      while (nodes.hasNext()) {
-    	  parent.getSession().getItem(((Node) nodes.next()).getPath());
-      }
       // Check document is lock for editing
       uiDocumentForm.setIsKeepinglock(false);
-/*      if (!selectedNode.isLocked()) {
+      if (!selectedNode.isLocked()) {
         synchronized (EditDocumentActionComponent.class) {
           refresh(selectedNode);
           if (!selectedNode.isLocked()) {
@@ -149,7 +140,6 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
               selectedNode.save();
             }
             Lock lock = selectedNode.lock(false, false);
-            System.out.println("Now this is lock or not? " + selectedNode.isLocked());
             LockUtil.keepLock(lock);
             LockService lockService = uiExplorer.getApplicationComponent(LockService.class);
             List<String> settingLockList = lockService.getAllGroupsOrUsersForLock();
@@ -170,17 +160,17 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
             uiDocumentForm.setIsKeepinglock(true);
           }
         }
-      }*/
+      }
       // Update data avoid concurrent modification by other session
-      //refresh(selectedNode);      
+      refresh(selectedNode);      
       // Check again after node is locking by current user or another
-      /*if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
+      if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
         Object[] arg = { selectedNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }*/
+      }
       uiDocumentForm.setNodePath(selectedNode.getPath());
       uiDocumentForm.addNew(false);
       uiDocumentForm.setWorkspace(selectedNode.getSession().getWorkspace().getName());
@@ -197,6 +187,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       EditDocumentActionComponent uicomp = event.getSource();
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
       UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class);
+      Node selectedNode = null;
       if (nodePath != null && nodePath.length() != 0) {
         Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
         String wsName = null;
@@ -208,7 +199,6 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         }
         Session session = uiExplorer.getSessionByWorkspace(wsName);
         UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
-        Node selectedNode = null;
         try {
           // Use the method getNodeByPath because it is link aware
           if (!uiExplorer.getCurrentPath().equals(nodePath)) {
@@ -232,7 +222,6 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
           return;
         }
       }
-      Node selectedNode = uiExplorer.getCurrentNode();        
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
       editDocument(event, uicomp, uiExplorer, selectedNode, uiApp);
     }
