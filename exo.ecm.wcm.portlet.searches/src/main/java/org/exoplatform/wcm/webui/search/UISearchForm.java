@@ -11,17 +11,14 @@
  */
 package org.exoplatform.wcm.webui.search;
 
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.model.PortalConfig;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
@@ -106,23 +103,6 @@ public class UISearchForm extends UIForm {
 		addUIFormInput(uiPortalSelectBox);
 		addUIFormInput(uiPageCheckBox);
 		addUIFormInput(uiDocumentCheckBox);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @seeorg.exoplatform.webui.form.UIForm#processRender(org.exoplatform.webui.
-	 * application.WebuiRequestContext)
-	 */
-	public void processRender(WebuiRequestContext context) throws Exception {
-		UIFormStringInput keywordInput = getUIStringInput(KEYWORD_INPUT);
-		PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
-		String portal = URLDecoder.decode(portalRequestContext.getRequestParameter("portal"), "UTF-8");
-		String keyword = URLDecoder.decode(portalRequestContext.getRequestParameter("keyword"), "UTF-8");
-		if (portal != null && keyword != null) {
-			keywordInput.setValue(keyword);
-			getUIFormSelectBox(PORTALS_SELECTOR).setValue(portal);
-		}
-		super.processRender(context);
 	}
 
 	/**

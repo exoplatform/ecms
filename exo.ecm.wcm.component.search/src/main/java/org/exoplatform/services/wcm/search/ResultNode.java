@@ -75,8 +75,9 @@ public class ResultNode implements Node{
    * @throws RepositoryException the repository exception
    */
   public ResultNode(Node node, Row row) throws RepositoryException{
-    this.node = node;      
-    this.excerpt = row.getValue("rep:excerpt(.)").getString();
+    this.node = node;
+    Value excerpt = row.getValue("rep:excerpt(.)");
+    this.excerpt = excerpt == null ? "" : excerpt.getString();
     this.score = row.getValue("jcr:score").getLong();
   }
 

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
+import javax.jcr.Value;
 import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
@@ -137,8 +138,9 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
      * @throws RepositoryException the repository exception
      */
     public ResultNode(Node node, Row row) throws RepositoryException{
-      this.node = node;      
-      this.excerpt = row.getValue("rep:excerpt(.)").getString();
+      this.node = node;
+      Value excerpt = row.getValue("rep:excerpt(.)");
+      this.excerpt = excerpt == null ? "" : excerpt.getString();
       this.spellSuggestion = row.getValue("rep:spellcheck()").getString();
       this.score = row.getValue("jcr:score").getLong();
     }

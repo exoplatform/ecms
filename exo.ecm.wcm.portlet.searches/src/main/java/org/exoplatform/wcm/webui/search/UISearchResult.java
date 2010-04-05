@@ -129,6 +129,11 @@ public class UISearchResult extends UIContainer {
 		String portal = portalRequestContext.getRequestParameter("portal");
 		String keyword = portalRequestContext.getRequestParameter("keyword");
 		if (portal != null && keyword != null) {
+			UISearchPageLayout uiSearchPageContainer = getAncestorOfType(UISearchPageLayout.class);
+			UISearchForm searchForm = uiSearchPageContainer.getChild(UISearchForm.class);
+			searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).setSelectedValues(new String[] {portal});
+			searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
+			
 			setKeyword(keyword);
 			SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
 			QueryCriteria queryCriteria = new QueryCriteria();
