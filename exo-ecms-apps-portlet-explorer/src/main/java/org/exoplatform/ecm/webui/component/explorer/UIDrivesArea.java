@@ -44,7 +44,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -198,13 +197,13 @@ public class UIDrivesArea extends UIContainer {
       UIJcrExplorerContainer explorerContainer = uiParent.getChild(UIJcrExplorerContainer.class);
       UIJCRExplorer uiJCRExplorer = explorerContainer.getChild(UIJCRExplorer.class);
 
-      Preference pref = new Preference();
+      Preference pref = uiJCRExplorer.getPreference();
       pref.setShowSideBar(drive.getViewSideBar());
       pref.setShowNonDocumentType(drive.getViewNonDocument());
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
       pref.setAllowCreateFoder(drive.getAllowCreateFolders()); 
       pref.setShowHiddenNode(drive.getShowHiddenNode());
-      uiJCRExplorer.setPreferences(pref);
+//      uiJCRExplorer.setPreferences(pref);
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
       

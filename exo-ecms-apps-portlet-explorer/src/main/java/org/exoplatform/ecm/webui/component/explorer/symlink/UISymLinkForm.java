@@ -120,6 +120,9 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
     UIFormMultiValueInputSet uiFormMultiValueInputSet = getChild(UIFormMultiValueInputSet.class);
     uiFormMultiValueInputSet.setValue(listNodeName);
     String symLinkName = valueNodeName.substring(valueNodeName.lastIndexOf("/") + 1);
+    int squareBracketIndex = symLinkName.indexOf('[');
+    if (squareBracketIndex > -1)
+      symLinkName = symLinkName.substring(0, squareBracketIndex);
     if (!(symLinkName.indexOf(".lnk") > -1)) symLinkName += ".lnk";
     symLinkName = Text.unescapeIllegalJcrChars(symLinkName);
     getUIStringInput(FIELD_NAME).setValue(symLinkName);

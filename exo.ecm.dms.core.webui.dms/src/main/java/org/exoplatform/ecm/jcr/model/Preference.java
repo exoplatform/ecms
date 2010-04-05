@@ -42,6 +42,7 @@ public class Preference {
   
   public static final String BLUE_DOWN_ARROW = "BlueDownArrow" ;
   public static final String BLUE_UP_ARROW = "BlueUpArrow" ;
+  public static final String NODES_PER_PAGE = "nbPerPage".intern();
     
   private String sortType = SORT_BY_NODENAME ;
   private String order = ASCENDING_ORDER ;  

@@ -332,15 +332,15 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
 
     setFlagSelect(true);
-    Preference pref = new Preference();
+    UIJCRExplorer uiExplorer = findFirstComponentOfType(UIJCRExplorer.class);
+    Preference pref = uiExplorer.getPreference();
     pref.setShowSideBar(driveData.getViewSideBar());
     pref.setShowNonDocumentType(driveData.getViewNonDocument());
     pref.setShowPreferenceDocuments(driveData.getViewPreferences());
     pref.setAllowCreateFoder(driveData.getAllowCreateFolders()); 
     pref.setShowHiddenNode(driveData.getShowHiddenNode());
 
-    UIJCRExplorer uiExplorer = findFirstComponentOfType(UIJCRExplorer.class);
-    uiExplorer.setPreferences(pref);
+//    uiExplorer.setPreferences(pref);
     uiExplorer.setDriveData(driveData);
     uiExplorer.setIsReferenceNode(false);
 

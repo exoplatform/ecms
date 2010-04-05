@@ -73,6 +73,7 @@ public class UIJcrExplorerContainer extends UIContainer {
     try {
       UIJCRExplorerPortlet uiFEPortlet = getParent();
       PortletPreferences preference = uiFEPortlet.getPortletPreferences();
+      initExplorerPreference(preference);
       String driveName = preference.getValue("driveName", "");
       String repoName = preference.getValue(Utils.REPOSITORY, "");
       RepositoryService rservice = getApplicationComponent(RepositoryService.class);
@@ -122,13 +123,13 @@ public class UIJcrExplorerContainer extends UIContainer {
       if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
       UIJCRExplorer uiJCRExplorer = getChild(UIJCRExplorer.class);
   
-      Preference pref = new Preference();
+      Preference pref = uiJCRExplorer.getPreference();
       pref.setShowSideBar(drive.getViewSideBar());
       pref.setShowNonDocumentType(drive.getViewNonDocument());
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
       pref.setAllowCreateFoder(drive.getAllowCreateFolders()); 
       pref.setShowHiddenNode(drive.getShowHiddenNode());
-      uiJCRExplorer.setPreferences(pref);
+//      uiJCRExplorer.setPreferences(pref);
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
       
@@ -170,6 +171,18 @@ public class UIJcrExplorerContainer extends UIContainer {
       uiActionbar.setTabOptions(viewList.get(0));
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
+    }
+  }
+  
+  private void initExplorerPreference(PortletPreferences portletPref) {
+    UIJCRExplorer uiExplorer = getChild(UIJCRExplorer.class);
+    if (uiExplorer != null) {
+      Preference pref = uiExplorer.getPreference();
+      if (pref == null) {
+        pref = new Preference();
+        pref.setNodesPerPage(Integer.parseInt(portletPref.getValue(Preference.NODES_PER_PAGE, "10")));
+        uiExplorer.setPreferences(pref);
+      }
     }
   }
 } 
