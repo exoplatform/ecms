@@ -60,7 +60,7 @@ var SimpleView = function() {
 					"div",
 					UITreeExplorer,
 					function(element) {
-						if (element.getAttribute("onmousedown")) {
+						if (element.getAttribute("onmousedown") && !element.getAttribute("mousedown")) {
 							mousedown = element.getAttributeNode("onmousedown").value;
 							element.setAttribute("mousedown", mousedown);
 						}

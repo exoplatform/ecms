@@ -84,7 +84,7 @@ var ListView = function() {
 					"div",
 					UITreeExplorer,
 					function(element) {
-						if (element.getAttribute("onmousedown")) {
+						if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
 							mousedown = element.getAttributeNode("onmousedown").value;
 							element.setAttribute("mousedown", mousedown);
 						}
@@ -140,6 +140,7 @@ var ListView = function() {
 		resetArrayItemsSelected();
 		
 		var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
+		document.title= "" + rightClick;
 		if (rightClick) {
 			eval(element.getAttribute("mousedown"));
 		} else {
@@ -182,7 +183,7 @@ var ListView = function() {
 		revertResizableBlock();
 		Self.enableDragDrop = null;
 		var mobileElement = document.getElementById(Self.mobileId);
-		if (!mobileElement)
+		if (!mobileElement && eXo.ecm.UISimpleView && eXo.ecm.UISimpleView.mobileId)
 			mobileElement = document.getElementById(eXo.ecm.UISimpleView.mobileId);
 		
 //		Self.clickItem(event, element);		
