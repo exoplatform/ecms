@@ -63,6 +63,13 @@
   background: url('MacSkin/SelectPermission.png') no-repeat; 
   cursor: pointer;
 }
+
+.RemovePermissionIcon {
+	width: 16px; height: 16px;
+ margin: 0px 4px 0px 4px;
+ background: url('MacSkin/DustBin.gif') no-repeat; 
+ cursor: pointer;
+}
  
 .Remove16x16Icon {
 	width: 16px; height: 16px;

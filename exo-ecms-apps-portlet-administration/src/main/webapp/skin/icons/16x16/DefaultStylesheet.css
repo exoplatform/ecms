@@ -67,6 +67,15 @@
   cursor: pointer;
 }
 
+.RemovePermissionIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 16px; height: 16px;
+ margin: 2px 4px 0px 4px;
+ background: url('DefaultSkin/DustBin.gif') no-repeat center; 
+ cursor: pointer; 
+}
+
 .UIGrid .ViewIcon {
 	width: 16px; height: 16px;
 	background: url('DefaultSkin/YellowLight.gif') no-repeat;

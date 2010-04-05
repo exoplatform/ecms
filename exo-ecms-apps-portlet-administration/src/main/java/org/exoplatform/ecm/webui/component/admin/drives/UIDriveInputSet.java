@@ -86,7 +86,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     addUIFormInput(new UIFormCheckBoxInput<String>(SHOW_HIDDEN_NODE, SHOW_HIDDEN_NODE, null));
     
     addUIFormInput(new UIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS, FIELD_ALLOW_CREATE_FOLDERS, null));
-    setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"});
+    setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission", "RemovePermission"});
     setActionInfo(FIELD_HOMEPATH, new String[] {"AddPath"});
     setActionInfo(FIELD_WORKSPACEICON, new String[] {"AddIcon"});
   }

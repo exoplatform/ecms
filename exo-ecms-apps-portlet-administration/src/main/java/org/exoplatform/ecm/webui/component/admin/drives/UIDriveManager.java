@@ -58,7 +58,7 @@ public class UIDriveManager extends UIAbstractManager {
     UIPopupWindow uiPopup = getChildById(id) ;
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, id) ;
-      uiPopup.setWindowSize(560,420) ;      
+      uiPopup.setWindowSize(580,420) ;      
       uiDriveForm = createUIComponent(UIDriveForm.class, null, null) ;
     } else {
       uiDriveForm = uiPopup.findFirstComponentOfType(UIDriveForm.class) ;
@@ -72,7 +72,7 @@ public class UIDriveManager extends UIAbstractManager {
   public void initPopupPermission(String membership) throws Exception {
     removeChildById(UIDriveForm.POPUP_DRIVEPERMISSION) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIDriveForm.POPUP_DRIVEPERMISSION);
-    uiPopup.setWindowSize(560, 300);
+    uiPopup.setWindowSize(580, 300);
     UIPermissionSelector uiECMPermission = 
       createUIComponent(UIPermissionSelector.class, null, null) ;
     uiECMPermission.setSelectedMembership(true);

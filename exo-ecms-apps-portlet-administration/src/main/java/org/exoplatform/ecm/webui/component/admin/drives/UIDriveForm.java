@@ -68,6 +68,7 @@ import org.exoplatform.webui.form.UIFormTabPane;
       @EventConfig(listeners = UIDriveForm.RefreshActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.CancelActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.AddPermissionActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDriveForm.RemovePermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.AddPathActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.AddIconActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.ChangeActionListener.class, phase = Phase.DECODE)
@@ -334,6 +335,15 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       
       uiManager.initPopupPermission(uiDriveForm.membershipString);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
+    }
+  }
+  
+  static public class RemovePermissionActionListener extends EventListener<UIDriveForm> {
+    public void execute(Event<UIDriveForm> event) throws Exception {
+      UIDriveForm uiDriveForm = event.getSource();
+      uiDriveForm.membershipString = ""; 
+      uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).setValue(null);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveForm);
     }
   }
 

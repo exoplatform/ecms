@@ -68,6 +68,15 @@
   cursor: pointer;
   margin: 2px 4px 0px 4px;
 }
+
+.RemovePermissionIcon {
+ float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 16px; height: 17px;
+ background: url('VistaSkin/DustBin.png') no-repeat; 
+ cursor: pointer;
+ margin: 2px 4px 0px 4px;
+}
  
 .PermissionIcon16x16 {
   float:left;
