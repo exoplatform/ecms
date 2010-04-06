@@ -20,9 +20,11 @@ import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.WCMPaginatedQueryResult;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -218,6 +220,13 @@ public class UISearchForm extends UIForm {
 			String selectedPortal = (uiPortalSelectBox.getValue().equals(UISearchForm.ALL_OPTION)) ? null
 																																														: uiPortalSelectBox.getValue();
 			QueryCriteria queryCriteria = new QueryCriteria();
+			
+	    String repository = portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);                                                   
+	    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes(repository);
+	     
+	    queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
+			
 			queryCriteria.setSiteName(selectedPortal);
 			queryCriteria.setKeyword(keyword);
 			if (Boolean.parseBoolean(documentChecked)) {

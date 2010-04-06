@@ -32,9 +32,11 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.WCMPaginatedQueryResult;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -137,12 +139,19 @@ public class UISearchResult extends UIContainer {
 			setKeyword(keyword);
 			SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
 			QueryCriteria queryCriteria = new QueryCriteria();
+			
+			 
+	    String repository = portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);                                                   
+	    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes(repository);
+
+	    queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
 			queryCriteria.setSiteName(portal);
-			queryCriteria.setKeyword(keyword.toLowerCase());
-			//queryCriteria.setSearchWebpage(true);
+			queryCriteria.setKeyword(keyword.toLowerCase());			
 			queryCriteria.setSearchWebpage(false);
 			queryCriteria.setSearchDocument(true);
 			queryCriteria.setSearchWebContent(true);
+			
 			if (Boolean.parseBoolean(Utils.getCurrentMode())) {
         queryCriteria.setLiveMode(true);
       } else {
