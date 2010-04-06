@@ -26,15 +26,15 @@
    xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
   <component>
-    <type>org.exoplatform.services.wcm.deployment.WCMContentInitializerService</type>
+    <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
   </component>
 
   <external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.deployment.WCMContentInitializerService</target-component>
+    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
     <component-plugin>
       <name>Content Initializer Service</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.wcm.deployment.plugins.XMLDeploymentPlugin</type>
+      <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
       <description>XML Deployment Plugin</description>
       <init-params>
         <object-param>
@@ -409,17 +409,17 @@
 
 
   <external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.deployment.WCMContentInitializerService</target-component>
+    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
     <component-plugin>
       <name>Content Initializer Service</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.wcm.deployment.plugins.LinkDeploymentPlugin</type>
+      <type>org.exoplatform.services.deployment.plugins.LinkDeploymentPlugin</type>
       <description>Link Deployment Plugin</description>
       <init-params>
         <object-param>
           <name>link01</name>
           <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.wcm.deployment.plugins.LinkDeploymentDescriptor">
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
               <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News1</string>
             </field>
@@ -431,7 +431,7 @@
         <object-param>
           <name>link02</name>
           <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.wcm.deployment.plugins.LinkDeploymentDescriptor">
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
               <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News2</string>
             </field>
@@ -443,7 +443,7 @@
         <object-param>
           <name>link03</name>
           <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.wcm.deployment.plugins.LinkDeploymentDescriptor">
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
               <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News3</string>
             </field>
@@ -455,7 +455,7 @@
         <object-param>
           <name>link04</name>
           <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.wcm.deployment.plugins.LinkDeploymentDescriptor">
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
               <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News4</string>
             </field>
@@ -467,7 +467,7 @@
         <object-param>
           <name>link11</name>
           <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.wcm.deployment.plugins.LinkDeploymentDescriptor">
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
               <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News1</string>
             </field>

@@ -154,11 +154,11 @@
   </component>
 
   <external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.deployment.WCMContentInitializerService</target-component>
+    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
     <component-plugin>
       <name>Content Initializer Service</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.wcm.deployment.plugins.XMLDeploymentPlugin</type>
+      <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
       <description>XML Deployment Plugin</description>
       <init-params>
         <object-param>
