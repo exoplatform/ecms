@@ -110,12 +110,12 @@
 							  	String mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
 							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+portalName+"','"+restContextName+"','"+repository+"','"+ preferenceWS+ "','" +data.getPath()+"','"+mimeType+"')";				  					  					  	
 				        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\">" ;	        
-							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">Download And Allow Edition</div>" ;
+							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
 							  	strActs += 		"</a>" ;				  	
 							  }else {
 							  	String link = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + preferenceWS + data.getPath(); 
 				        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\"  style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
-							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">Download And Allow Edition</div>" ;
+							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
 							  	strActs += 		"</a>" ;				  	
 							  }
 							  //End WebDav Action
