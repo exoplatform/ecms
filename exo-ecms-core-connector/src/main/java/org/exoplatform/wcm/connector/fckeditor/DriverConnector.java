@@ -189,8 +189,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       ManageDriveService manageDriveService = (ManageDriveService)ExoContainerContext.getCurrentContainer()
       	.getComponentInstanceOfType(ManageDriveService.class);
       
-      String itemPath = manageDriveService.getDriveByName(driverName, repositoryName).getHomePath()
-                        + ((currentFolder != null && currentFolder.length() != 0) ? "/" : "")
+      String driverHomePath = manageDriveService.getDriveByName(driverName, repositoryName).getHomePath();
+      String itemPath = driverHomePath
+                        + ((currentFolder != null && !"".equals(currentFolder) && !driverHomePath.endsWith("/")) ? "/" : "")
                         + currentFolder;
       itemPath = StringUtils.replaceOnce(itemPath, "${userId}", userId);
       Node node = (Node)session.getItem(itemPath);
