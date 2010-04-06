@@ -16,7 +16,9 @@
  */
 package org.exoplatform.wcm.webui.pcv;
 
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
+import javax.portlet.RenderResponse;
 
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.pcv.config.UIPCVConfig;
@@ -27,6 +29,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+import org.w3c.dom.Element;
 
 /*
  * Created by The eXo Platform SAS 
@@ -97,6 +100,14 @@ public class UIPCVPortlet extends UIPortletApplication {
       activateMode(newMode) ;
       mode = newMode ;
     }
+    UIPCVContainer container =  this.getChild(UIPCVContainer.class);
+    if (container!=null && container.getNode()!=null) {
+        RenderResponse response = context.getResponse();
+    	Element title = response.createElement("title");
+    	title.setTextContent(container.getTitle(container.getNode()));
+    	response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
+    }
+    
     super.processRender(app, context) ;
   }
   
