@@ -28,6 +28,12 @@
   margin: 6px;
 }
 
+.UIWCMSearchContent .DeleteIcon {
+  background: url('background/DustBin.gif') no-repeat center;
+  width: 20px;
+  height: 20px;
+}
+
 .UIWCMSearchContent .title {
   width: 55%;
 }

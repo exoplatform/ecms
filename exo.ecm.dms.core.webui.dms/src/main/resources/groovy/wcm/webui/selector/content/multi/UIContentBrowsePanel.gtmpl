@@ -46,10 +46,12 @@
 		    			<thead>
 		    				<tr>
 			    		  		<th class="THBar"> List Content </th>
+			    		  		<th width='60px' class="THBar"> Action </th>
 			    	 		</tr>
 				    	</thead>
 			    		<tr>
 				    		<td class="Item TRNoContent">There is no file</td>
+				    		<td class="Item"></td>
 		    			</tr>
 		  			</table>
 				</div>

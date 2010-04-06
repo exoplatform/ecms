@@ -44,20 +44,20 @@ EcmContentSelector.prototype.loadScript = function() {
 EcmContentSelector.prototype.ajaxRequest = function(url) {
   if(window.XMLHttpRequest && !(window.ActiveXObject)) {
   	try {
-			eXo.ecm.ECS.xmlHttpRequest = new XMLHttpRequest();
+		eXo.ecm.ECS.xmlHttpRequest = new XMLHttpRequest();
     } catch(e) {
-				eXo.ecm.ECS.xmlHttpRequest = false;
+		eXo.ecm.ECS.xmlHttpRequest = false;
     }
   } else if(window.ActiveXObject) {
      	try {
       	eXo.ecm.ECS.xmlHttpRequest = new ActiveXObject("Msxml2.XMLHTTP");
     	} catch(e) {
       	try {
-        		eXo.ecm.ECS.xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        	eXo.ecm.ECS.xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
       	} catch(e) {
-        		eXo.ecm.ECS.xmlHttpRequest = false;
+        	eXo.ecm.ECS.xmlHttpRequest = false;
       	}
-			}
+	}
   }
 	if(eXo.ecm.ECS.xmlHttpRequest) {
 		eXo.ecm.ECS.xmlHttpRequest.onreadystatechange = eXo.ecm.ECS.processResponse;
@@ -99,7 +99,6 @@ EcmContentSelector.prototype.initRequestXmlTree = function(typeObj){
 	}
 	eXo.ecm.ECS.isShowFilter();
 	var ECS = eXo.ecm.ECS;
-	this.initCommand	=  "repositoryName=repository&workspaceName=collaboration&userId=" + this.userId;
 	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver+"repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName+"&userId="+ ECS.userId;
 	var url = ECS.hostName+ECS.connector+ command + "&currentPortal=" + ECS.portalName;
 	eXo.ecm.ECS.ajaxRequest(url);
@@ -129,6 +128,10 @@ EcmContentSelector.prototype.buildECSTreeView = function() {
 EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	var ECS = eXo.ecm.ECS;
 	eXo.ecm.ECS.eventNode = event;
+	var repoName = currentNode.getAttribute("repository");
+	if(repoName) eXo.ecm.ECS.repositoryName = repoName;
+	var wsName	= currentNode.getAttribute("workspace");
+	if(wsName) eXo.ecm.ECS.workspaceName =  wsName;
 	var connector = ECS.connector;
 	var currentFolder;
 	var driverName;
@@ -159,13 +162,10 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	eXo.ecm.ECS.currentFolder = currentFolder;
 	eXo.ecm.ECS.currentNode = currentNode;
 	driverName = eXo.ecm.ECS.driverName;
-	
-
 	var filter = '';
 	var dropdownlist = document.getElementById("Filter");
 	if(dropdownlist) filter = dropdownlist.options[dropdownlist.selectedIndex].value;
 	else filter = 'Web Contents';
-
 
 	var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+currentFolder+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
 	var url = ECS.hostName + ECS.connector+command+"&userId=" + ECS.userId+"&filterBy="+filter;
@@ -186,9 +186,11 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 			var id = eXo.ecm.ECS.generateIdDriver(nodeList[i]);
 			var strName = nodeList[i].getAttribute("name");
 			var driverPath = nodeList[i].getAttribute("driverPath");
+			var repository =  nodeList[i].getAttribute("repository");
+			var workspace =  nodeList[i].getAttribute("workspace");
 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+strName+'" href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+strName+'" id="'+id+'"  driverPath="'+driverPath+'">';
+			treeHTML +=			'<a title="'+strName+'" href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+strName+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
 			treeHTML +=				strName;	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
@@ -665,22 +667,24 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var tblListFilesContent = document.getElementById("ListFilesContent");
 	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblListFilesContent, "tr");
 	var trNoContent = eXo.core.DOMUtil.findFirstDescendantByClass(tblListFilesContent, "td", "TRNoContent");
-	var clazzNode = eXo.core.DOMUtil.findAncestorByTagName(objNode, "tr");
 	if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
-	var clazz = clazzNode.className;
-	if(clazz == 'EventItem') {
-		clazz = 'OddItem';
-	} else if(clazz == 'OddItem') {
-		clazz = 'EventItem';
-	}
 	var url = objNode.getAttribute("url");
 	var nodeType	= objNode.getAttribute("nodeType");
 	var node = objNode.innerHTML;
 	var path = objNode.getAttribute("path");
+	var selectedNodeList = eXo.core.DOMUtil.findDescendantsByClass(tblListFilesContent, "a", "Item");
+	for(var i = 0; i < selectedNodeList.length; i++) {
+		var selectedNodePath = selectedNodeList[i].getAttribute("path");
+		if(path == selectedNodePath) {
+			alert("Sorry, this content is already in the list content.");
+			return;
+		}
+	} 
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(1);
-	newRow.className = clazz;
-	newRow.insertCell(0).innerHTML = '<a class="'+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+node+'</a>';
+	newRow.className = "Item";
+	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+node+'</a>';
+	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';	
 };
 
 EcmContentSelector.prototype.addFileSearchListSearch = function() {
@@ -706,9 +710,17 @@ EcmContentSelector.prototype.loadListContent = function(strArray) {
 			var strTmpArr = arrContent[i].split('/');
 			var nodeName = strTmpArr[strTmpArr.length-1];
 			newRow.insertCell(0).innerHTML = '<a class="Item" path="'+path+'">'+nodeName+'</a>';
+			newRow.insertCell(1).innerHTML = '<div  class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 		}
 	}
 };
+
+EcmContentSelector.prototype.removeContent = function(objNode) {
+	var tblListFilesContent = document.getElementById("ListFilesContent"); 
+	var objRow = eXo.core.DOMUtil.findAncestorByTagName(objNode, "tr");
+	tblListFilesContent.deleteRow(objRow.rowIndex);	
+	eXo.ecm.ECS.pathContent = false;
+}
 
 EcmContentSelector.prototype.changeFilter = function() {
 	var rightWS = document.getElementById('RightWorkspace');
