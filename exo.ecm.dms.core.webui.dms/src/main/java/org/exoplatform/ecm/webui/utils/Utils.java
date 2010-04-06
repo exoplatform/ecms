@@ -248,6 +248,20 @@ public class Utils {
 	public static boolean isAuditable(Node node) throws RepositoryException {
 		return node.isNodeType(EXO_AUDITABLE);
 	}
+	
+	public static String getIndexName(Node node) throws RepositoryException {
+    StringBuilder buffer = new StringBuilder(128);
+    buffer.append(node.getName());
+    int index = node.getIndex();
+    if (index > 1) {
+      buffer.append('[');
+      buffer.append(index);
+      buffer.append(']');
+    
+    }
+    return buffer.toString();     
+  }
+
 
 	public static List<String> getListAllowedFileType(Node currentNode,
 			String repository, TemplateService templateService) throws Exception {
