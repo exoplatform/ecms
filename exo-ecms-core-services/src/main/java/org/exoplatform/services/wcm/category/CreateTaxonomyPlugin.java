@@ -26,6 +26,8 @@ import java.util.Set;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.configuration.ConfigurationManager;
@@ -56,6 +58,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.portal.artifacts.CreatePortalPlugin;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -65,8 +68,14 @@ import org.exoplatform.services.wcm.portal.artifacts.CreatePortalPlugin;
  */
 public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
-	protected static final Log log = ExoLogger.getLogger("wcm:CreateTaxonomyPlugin");
-	
+  protected static final Log log = ExoLogger.getLogger("wcm:CreateTaxonomyPlugin");
+
+  public static final String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes".intern();
+  
+  public static final String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames".intern();
+  
+  public static final String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES".intern();
+
   /** The workspace. */
   private String                  workspace                  = "";
 
@@ -89,7 +98,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
   private TaxonomyService         taxonomyService;
   
   /** The link manager service_. */
-  private LinkManager 						linkManager;
+  private LinkManager             linkManager;
 
   /** The base taxonomies storage_. */
   private String                  baseTaxonomiesStorage;
@@ -109,7 +118,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
   /** The name. */
   private String                  name;
   
-  private String 									portalName;
+  private String                   portalName;
   
   /**
    * Instantiates a new initial taxonomy plugin.
@@ -148,8 +157,8 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    * @see org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin#deployToPortal(java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void deployToPortal(SessionProvider sessionProvider, String portalName) throws Exception {
-  	this.portalName = portalName;
-  	ValueParam autoCreated = params.getValueParam("autoCreateInNewRepository");
+    this.portalName = portalName;
+    ValueParam autoCreated = params.getValueParam("autoCreateInNewRepository");
     ValueParam workspaceParam = params.getValueParam("workspace");
     ValueParam pathParam = params.getValueParam("path");
     ValueParam nameParam = params.getValueParam("treeName");
@@ -170,43 +179,43 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
     Session session = null;
     try {
-    	// Get source information
-    	String repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
-    	Node srcTaxonomy = taxonomyService.getTaxonomyTree(repositoryName, portalName);
-    	String srcWorkspace = srcTaxonomy.getSession().getWorkspace().getName();
-    	
-    	// Get destination information
-    	ManageableRepository repository = repositoryService.getRepository(repositoryName);
-    	session = sessionProvider.getSession(this.workspace, repository);
-    	Workspace destWorkspace = session.getWorkspace();
-    	String destPath = path + "/" + srcTaxonomy.getName();
-    	
-    	// If same workspace
-    	if (srcWorkspace.equals(destWorkspace.getName())) {
-    		destWorkspace.move(srcTaxonomy.getPath(), destPath);
-    	} else {
-    		// Clone taxonomy tree across workspace
-    		destWorkspace.clone(srcWorkspace, srcTaxonomy.getPath(), destPath, true);
-    		
-    		// Remove old link taxonomy tree in definition
-    		String dmsSystemWorkspaceName = dmsConfiguration.getConfig(repositoryName).getSystemWorkspace();
-    		Node taxonomyDefinition = (Node) sessionProvider.getSession(dmsSystemWorkspaceName, repository).getItem(baseTaxonomiesDefinition);
-    		Node srcLinkTaxonomy = taxonomyDefinition.getNode(srcTaxonomy.getName());
-    		srcLinkTaxonomy.remove();
-    		
-    		// Remove old taxonomy tree
-    		srcTaxonomy.remove();
-    		
-    		// Register new taxonomy tree in definition
-    		Node destTaxonomy = (Node) session.getItem(destPath);
-    		linkManager.createLink(taxonomyDefinition, destTaxonomy);
-    	}
-    	session.save();
-    	return;
+      // Get source information
+      String repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
+      Node srcTaxonomy = taxonomyService.getTaxonomyTree(repositoryName, portalName);
+      String srcWorkspace = srcTaxonomy.getSession().getWorkspace().getName();
+      
+      // Get destination information
+      ManageableRepository repository = repositoryService.getRepository(repositoryName);
+      session = sessionProvider.getSession(this.workspace, repository);
+      Workspace destWorkspace = session.getWorkspace();
+      String destPath = path + "/" + srcTaxonomy.getName();
+      
+      // If same workspace
+      if (srcWorkspace.equals(destWorkspace.getName())) {
+        destWorkspace.move(srcTaxonomy.getPath(), destPath);
+      } else {
+        // Clone taxonomy tree across workspace
+        destWorkspace.clone(srcWorkspace, srcTaxonomy.getPath(), destPath, true);
+        
+        // Remove old link taxonomy tree in definition
+        String dmsSystemWorkspaceName = dmsConfiguration.getConfig(repositoryName).getSystemWorkspace();
+        Node taxonomyDefinition = (Node) sessionProvider.getSession(dmsSystemWorkspaceName, repository).getItem(baseTaxonomiesDefinition);
+        Node srcLinkTaxonomy = taxonomyDefinition.getNode(srcTaxonomy.getName());
+        srcLinkTaxonomy.remove();
+        
+        // Remove old taxonomy tree
+        srcTaxonomy.remove();
+        
+        // Register new taxonomy tree in definition
+        Node destTaxonomy = (Node) session.getItem(destPath);
+        linkManager.createLink(taxonomyDefinition, destTaxonomy);
+      }
+      session.save();
+      return;
     } catch (Exception e) {
-    	init();
+      init();
     } finally {
-    	if (session != null) session.logout();
+      if (session != null) session.logout();
     }
   }
 
@@ -376,7 +385,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     try {
       taxonomyService.addTaxonomyTree(taxonomyStorageNodeSystem);
     } catch (TaxonomyAlreadyExistsException e) {
-    	if (log.isInfoEnabled()) log.error("Cannot add taxonomy tree", e);
+      if (log.isInfoEnabled()) log.error("Cannot add taxonomy tree", e);
     }
     session.save();
     session.logout();
@@ -406,7 +415,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     
     JcrInputProperty jcrInputLife = new JcrInputProperty();
     jcrInputLife.setJcrPath("/node/exo:lifecyclePhase");
-    jcrInputLife.setValue(action.getLifecyclePhase());
+    jcrInputLife.setValue(action.getLifecyclePhase().toArray(new String[0]));
     sortedInputs.put("/node/exo:lifecyclePhase", jcrInputLife);
     
     JcrInputProperty jcrInputHomePath = new JcrInputProperty();
@@ -446,14 +455,30 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     }
     
     Iterator mixins = action.getMixins().iterator();
+    NodeType nodeType;
+    String value;
+    ManageableRepository manageableRepository = WCMCoreUtils.getRepository(repository);
     while (mixins.hasNext()) {
       ActionConfig.Mixin mixin = (ActionConfig.Mixin) mixins.next();
       actionNode.addMixin(mixin.getName());
       Map<String, String> props = mixin.getParsedProperties();
       Set keys = props.keySet();
+      nodeType = manageableRepository.getNodeTypeManager().getNodeType(mixin.getName());
       for (Iterator iterator = keys.iterator(); iterator.hasNext();) {
         String key = (String) iterator.next();
-        actionNode.setProperty(key, props.get(key));
+        for(PropertyDefinition pro : nodeType.getPropertyDefinitions()) {
+          if (pro.getName().equals(key)) {
+            if (pro.isMultiple()) {
+              value = props.get(key);
+              if (value != null) {
+                actionNode.setProperty(key, value.split(","));
+              }  
+            } else {
+              actionNode.setProperty(key, props.get(key));
+            }
+            break;
+          }
+        }
       }
     }
     actionNode.getSession().save();

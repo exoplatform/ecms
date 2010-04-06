@@ -12,30 +12,10 @@
 		</node>	         	  	  	  	 	     	  	    
 
 		<node>
-			<uri>products</uri>
-			<name>products</name>
-			<label>#{portal.@owner@.products}</label>
-			<visible>false</visible>
-			<page-reference>portal::@owner@::pcv</page-reference>
-			<node>
-				<uri>products/presentation</uri>
-				<name>presentation</name>
-				<label>#{portal.@owner@.presentation}</label>
-				<page-reference>portal::@owner@::pcv</page-reference>
-				<node>
-					<uri>products/presentation/pcv</uri>
-					<name>pcv</name>
-					<label>#{portal.@owner@.pcv}</label>
-					<page-reference>portal::@owner@::pcv</page-reference>
-				</node>
-			</node>
-		</node>
-		
-		<node>
 			<uri>printviewer</uri>
 			<name>printviewer</name>
 			<label>#{portal.@owner@.printviewer}</label>
-			<visible>false</visible>
+			<visibility>HIDDEN</visibility>
 			<page-reference>portal::@owner@::printviewer</page-reference>
 		</node>
 
@@ -43,7 +23,7 @@
 			<uri>searchResult</uri>
 			<name>searchResult</name>
 			<label>#{portal.@owner@.searchResult}</label>
-			<visible>false</visible>			
+			<visibility>HIDDEN</visibility>			
 			<page-reference>portal::@owner@::searchResult</page-reference>	    
 		</node>
 		
@@ -51,7 +31,7 @@
 	    <uri>newAccount</uri>
 	    <name>newAccount</name>
 	    <label>#{portal.@owner@.newAccount}</label>
-	    <visible>false</visible>
+	    <visibility>HIDDEN</visibility>
 	    <page-reference>portal::@owner@::newAccount</page-reference>
     </node>
 		
