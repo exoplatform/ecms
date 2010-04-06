@@ -2554,7 +2554,7 @@
 	</UIConfirmMessage>
 	<UIUploadForm>
 	  <msg>
-	    <confirm-behavior>Il existe déjà un fichier portant le même nom '{0}' dans cette ville. S'il vous plaît choisir un comportement que vous souhaitez conserver</confirm-behavior>
+	    <confirm-behavior>Il existe déjà un fichier portant le même nom '{0}' dans cet emplacement. Veuillez s'il vous plaît choisir l'action souhaitée sur ce fichier.</confirm-behavior>
 	  </msg>
 	</UIUploadForm>
 	<SameNamePopup>
