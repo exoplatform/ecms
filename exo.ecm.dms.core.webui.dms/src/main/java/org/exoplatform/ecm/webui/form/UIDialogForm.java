@@ -413,12 +413,16 @@ public class UIDialogForm extends UIForm {
     UIFormCheckBoxField formCheckBoxField =  new UIFormCheckBoxField(name, lable, arguments);
     String jcrPath = formCheckBoxField.getJcrPath();
     String defaultValue = formCheckBoxField.getDefaultValue();
+    if (defaultValue == null) defaultValue = "false";
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
+    Value value = null;
+    if (getNode() != null && getNode().hasProperty(propertyName))
+      value = getNode().getProperty(propertyName).getValue();
     UIFormCheckBoxInput uiCheckBoxInput = findComponentById(name);
     
     if (formCheckBoxField.validateType != null) {
@@ -433,16 +437,7 @@ public class UIDialogForm extends UIForm {
     
     if(uiCheckBoxInput == null){
       uiCheckBoxInput = new UIFormCheckBoxInput(name, name, null);
-      Node  node = getNode();
-      if(node != null && node.hasProperty(propertyName)) {
-        uiCheckBoxInput.setChecked(node.getProperty(propertyName).getBoolean());
-        uiCheckBoxInput.setValue(uiCheckBoxInput.isChecked());
-      } else {
-        if(defaultValue != null) {
-          uiCheckBoxInput.setChecked(Boolean.valueOf(defaultValue));
-          uiCheckBoxInput.setValue(defaultValue);
-        }
-      }
+      uiCheckBoxInput.setChecked(value != null?value.getBoolean() : Boolean.valueOf(defaultValue));
     }
     if(formCheckBoxField.isOnchange()){
       uiCheckBoxInput.setOnChange("Onchange");
