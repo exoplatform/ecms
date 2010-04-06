@@ -62,5 +62,22 @@
 	    <visibility>HIDDEN</visibility>
 	    <page-reference>portal::classic::newAccount</page-reference>
     </node>
+    
+    <node>
+      <uri>groupnavigation</uri>
+      <name>groupnavigation</name>
+      <label>#{portal.classic.groupnavigation}</label>
+      <visibility>SYSTEM</visibility>
+      <page-reference>portal::classic::groupnavigation</page-reference>     
+    </node>
+    
+    <node>
+      <uri>portalnavigation</uri>
+      <name>portalnavigation</name>
+      <label>#{portal.classic.portalnavigation}</label>
+      <visibility>SYSTEM</visibility>
+      <page-reference>portal::classic::portalnavigation</page-reference>      
+    </node>
+    
 	</page-nodes>
 </node-navigation>

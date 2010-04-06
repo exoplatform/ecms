@@ -101,7 +101,7 @@
       <name>groupnavigation</name>
       <label>#{portal.acme.groupnavigation}</label>
       <visibility>SYSTEM</visibility>
-      <page-reference>portal::classic::groupnavigation</page-reference>     
+      <page-reference>portal::acme::groupnavigation</page-reference>     
     </node>
     
     <node>
@@ -109,7 +109,7 @@
       <name>portalnavigation</name>
       <label>#{portal.acme.portalnavigation}</label>
       <visibility>SYSTEM</visibility>
-      <page-reference>portal::classic::portalnavigation</page-reference>      
+      <page-reference>portal::acme::portalnavigation</page-reference>      
     </node>
 
   </page-nodes>
