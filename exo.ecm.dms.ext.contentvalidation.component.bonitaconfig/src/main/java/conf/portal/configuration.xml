@@ -15,14 +15,18 @@
     <component>
     <key>org.exoplatform.services.workflow.WorkflowServiceContainer</key>
     <type>org.exoplatform.services.workflow.impl.bonita.WorkflowServiceContainerImpl</type>
-    <init-params>
+	<init-params>
 			<value-param>
 	    	<name>super.user</name>
 	    	<value>root</value>
+	    </value-param>
+			<value-param>
+	    	<name>super.pass</name>
+	    	<value>gtn</value>
 	    </value-param>	        
 	    <value-param>
 	    	<name>jaas.login.context</name>
-	    	<value>exo-domain</value>
+	    	<value>gatein-domain</value>
 	    </value-param>
     </init-params>
 	</component>
