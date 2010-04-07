@@ -248,7 +248,7 @@
 	                  <field  name="name"><string>publishing request</string></field>                  
 	                  <field  name="description"><string>request for publishing a document</string></field>
 	                  <field  name="srcWorkspace"><string>collaboration</string></field>
-	                  <field  name="srcPath"><string>/Users/marry/Private/Documents</string></field>
+	                  <field  name="srcPath"><string>/Users/mary/Private/Documents</string></field>
 	                  <field  name="isDeep"><boolean>true</boolean></field>
 										<field  name="lifecyclePhase">
 	                  	<collection type="java.util.ArrayList">
