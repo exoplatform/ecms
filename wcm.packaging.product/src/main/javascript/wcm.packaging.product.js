@@ -6,6 +6,7 @@ function getProduct(version) {
   
   product.name = "eXoWCM" ;
   product.portalwar = "portal.war" ;
+	product.ecmdemowar = "ecmdemo.war";
   product.codeRepo = "ecm/wcm" ;
   product.useContentvalidation = true;
   product.version = "${project.version}" ;
