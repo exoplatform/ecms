@@ -248,17 +248,49 @@ public class NodeLocation {
     return getNodeByLocation(parse(expression));
   }
 
+  /**
+   * Get node's expression by a node.
+   * 
+   * @param Node the node to get expression
+   * @return The node's expression
+   */
+  public static final String getExpressionByNode(final Node node) {
+    NodeLocation location = NodeLocation.getNodeLocationByNode(node);        
+    return mergeString(location.getRepository(), location.getWorkspace(), location.getPath());
+  }
+  
+  /**
+   * Get node's expression by a NodeLocation.
+   * 
+   * @param NodeLocation location
+   * @return The node's expression
+   */
+  public static final String getExpressionByNodeLocation(final NodeLocation location) {           
+    return mergeString(location.getRepository(), location.getWorkspace(), location.getPath());
+  }
   
   /* (non-Javadoc)
    * @see java.lang.Object#toString()
    */
   public String toString() {
+    return mergeString(repository, workspace, path);
+  }
+  
+  /**
+   * Get the merged string
+   * 
+   * @param repository: The node's repository
+   * @param workspace: The node's workspace
+   * @param path: The node's path
+   * @return A merged string of the parameters
+   */
+  private static String mergeString(String repository, String workspace, String path) {
     StringBuffer buffer = new StringBuffer();
     buffer.append(repository);
     buffer.append(":");
     buffer.append(workspace);
     buffer.append(":");
     buffer.append(path);
-    return buffer.toString();
-  }
+    return buffer.toString();  
+  }   
 }

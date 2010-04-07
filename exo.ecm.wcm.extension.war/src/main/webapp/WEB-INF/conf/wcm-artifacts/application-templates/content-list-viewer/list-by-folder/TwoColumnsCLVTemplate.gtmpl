@@ -10,6 +10,7 @@
 		import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 		import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 		import org.exoplatform.wcm.webui.Utils;
+		import org.exoplatform.services.wcm.core.NodeLocation;
 %>
 
 <div id="$uicomponent.id" class="TwoColumnsCLVTemplate">
@@ -61,8 +62,8 @@
 
 					def itemSummary = uicomponent.getSummary(viewNode);
 					def isShowSummary = uicomponent.isShowField(UICLVPortlet.SHOW_SUMMARY) && itemSummary != null;
-					
-					def contentEditLink = uicomponent.event("EditContent", viewNode.getPath());
+										
+					def contentEditLink = uicomponent.event("EditContent", NodeLocation.getExpressionByNode(viewNode));
 								%>
 								<div class="Column2">
 								<%

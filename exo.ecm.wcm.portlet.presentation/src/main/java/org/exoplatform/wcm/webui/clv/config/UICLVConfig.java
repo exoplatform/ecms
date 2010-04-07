@@ -30,6 +30,7 @@ import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -201,6 +202,9 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
   /** The popup id. */
   private String popupId;
   
+  /**An instance of LinkManager to get Node from a symlink**/
+  private LinkManager linkManager;
+  
   /**
    * Gets the popup id.
    * 
@@ -225,6 +229,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
    * @throws Exception the exception
    */
   public UICLVConfig() throws Exception {
+    linkManager = WCMCoreUtils.getService(LinkManager.class);
     PortletRequestContext context = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPreferences = context.getRequest().getPreferences();
     String folderPath = portletPreferences.getValue(UICLVPortlet.FOLDER_PATH, UICLVPortlet.FOLDER_PATH);
@@ -535,12 +540,12 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
       portletPreferences.setValue(UICLVPortlet.VIEWER_MODE, newViewerMode);
       portletPreferences.setValue(UICLVPortlet.ORDER_TYPE, orderType);
       portletPreferences.setValue(UICLVPortlet.BASE_PATH, basePath);
+      portletPreferences.setValue(UICLVPortlet.ORDER_BY, orderBy);
       
       if (uiViewerManagementForm.isManualMode()) {   
         String[] sl = (String[]) uiViewerManagementForm.getViewAbleContentList().toArray(new String[0]);
         portletPreferences.setValues(UICLVPortlet.CONTENT_LIST, sl);
-      } else {
-        portletPreferences.setValue(UICLVPortlet.ORDER_BY, orderBy);
+      } else {        
         portletPreferences.setValues(UICLVPortlet.CONTENT_LIST, new String [] {""});
       }
       portletPreferences.store();
@@ -611,6 +616,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
   	
   	for(String nodePath : selectedList) {
   		tempNode = NodeLocation.getNodeByExpression(nodePath);
+  		if(tempNode.isNodeType("exo:symlink")) tempNode = linkManager.getTarget(tempNode);
   		if (!publicationService.isEnrolledInWCMLifecycle(tempNode)) {
   			publicationService.updateLifecyleOnChangeContent(tempNode, siteName, remoteUser);
   		}
