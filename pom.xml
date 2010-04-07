@@ -399,9 +399,6 @@
     <module>exo.ecm.workflow.component.workflow.api</module>
     <module>exo.ecm.workflow.component.workflow.impl.bonita</module>
     <module>exo.ecm.workflow.component.workflow.impl.jbpm.facade</module>
-    <module>exo.ecm.workflow.demo.config</module>
-    <module>exo.ecm.workflow.demo.ear</module>
-    <module>exo.ecm.workflow.demo.webapp</module>
     <module>exo.ecm.workflow.extension.config</module>
     <module>exo.ecm.workflow.extension.ear</module>
     <module>exo.ecm.workflow.extension.webapp</module>
@@ -410,7 +407,6 @@
     <module>exo.ecm.workflow.server.jboss.patch</module>
     <module>exo.ecm.workflow.server.jboss.patch-ear</module>
     <module>exo.ecm.workflow.server.jonas.patch</module>
-    <module>exo.ecm.workflow.server.tomcat-demo.patch</module>
     <module>exo.ecm.workflow.server.tomcat.patch</module>
     <module>exo.ecm.workflow.web.eXoWorkflowResources</module>
     <module>exo.ecm.workflow.webui.workflow</module>

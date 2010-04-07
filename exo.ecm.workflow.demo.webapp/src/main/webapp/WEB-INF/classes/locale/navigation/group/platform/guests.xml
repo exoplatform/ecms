@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bundle>
-  <platform-guests>
-    <register>Register</register>
-    <link>Link</link>
-    <sitemap>Site Map</sitemap>
-  </platform-guests>
-</bundle>
-
