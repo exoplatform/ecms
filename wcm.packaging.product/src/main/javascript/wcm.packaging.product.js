@@ -22,7 +22,7 @@ function getProduct(version) {
   var portal = Module.GetModule("portal", {kernel : kernel, ws:ws, core : core, eXoJcr : eXoJcr});         
   var dms = Module.GetModule("dms", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr , portal : portal});
   var wcm = Module.GetModule("wcm", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal, dms : dms});
-  
+  	
   portal.starter = new Project("org.exoplatform.portal", "exo.portal.starter.war", "war", portal.version);
   portal.starter.deployName = "starter";
   product.addDependencies(portal.starter);
@@ -49,7 +49,11 @@ function getProduct(version) {
   product.addDependencies(wcm.portlet.newsletter); 
   product.addDependencies(wcm.portlet.formgenerator);
   product.addDependencies(wcm.web.eXoWCMResources) ;
-
+	if(enableWorkflow) {
+		var workflow = Module.GetModule("workflow", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal});
+		product.addDependencies(workflow.web.eXoWorkflowResources);
+		product.addDependencies(workflow.portlet.workflow);
+	}
   product.addDependencies(wcm.demo.portal);
   product.addDependencies(wcm.demo.rest);
   

@@ -37,10 +37,7 @@ function getProduct(version) {
 	product.addDependencies(workflow.web.eXoWorkflowResources);
 	product.addDependencies(workflow.portlet.workflow);
 	product.addDependencies(workflow.extension.webapp);
-	// Workflow demo
-	product.addDependencies(workflow.demo.portal);
 
-	product.addServerPatch("tomcat", workflow.server.tomcatdemo.patch) ;
 	product.addServerPatch("jboss",  portal.server.jboss.patch) ;
 	product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
 	

@@ -19,7 +19,7 @@ function getModule(params) {
   module.portlet = {}
   module.portlet.workflow = new Workflow("",module.version).getPortlet();
 
-module.web = {}
+	module.web = {}
   module.web.eXoWorkflowResources = 
     new Project("org.exoplatform.ecms", "exo.ecm.workflow.web.eXoWorkflowResources", "war", module.version) ;  
   module.web.eXoWorkflowResources.deployName = "eXoWorkflowResources" ;
@@ -28,19 +28,11 @@ module.web = {}
   module.extension.webapp = new Project("org.exoplatform.ecms", "exo.ecm.workflow.extension.webapp", "war", module.version).
 		addDependency(new Project("org.exoplatform.ecms", "exo.ecm.workflow.extension.config", "jar", module.version));
   module.extension.webapp.deployName = "ecmworkflow-extension";		
-	
-	module.demo = {};
-   // demo portal
-   module.demo.portal = 
-	   new Project("org.exoplatform.ecms", "exo.ecm.workflow.demo.webapp", "war", module.version).
-	   addDependency(new Project("org.exoplatform.ecms", "exo.ecm.workflow.demo.config", "jar", module.version));
-	   module.demo.portal.deployName = "ecmworkflowdemo";  
 	   	
   module.server = {};
 
    module.server.tomcat = {};
    module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo.ecm.workflow.server.tomcat.patch", "jar", module.version);
-   module.server.tomcatdemo = {}
-   module.server.tomcatdemo.patch = new Project("org.exoplatform.ecms", "exo.ecm.workflow.server.tomcat-demo.patch", "jar", module.version);
+   
   return module;
 }

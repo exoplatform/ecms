@@ -42,8 +42,8 @@
 	          <field name="predefinedProcess">
 	            <collection type="java.util.HashSet">
 	              <value><string>/exo.ecm.dms.ext.contentvalidation.bp.bonita.content-publishing-${project.version}.jar</string></value>
-	              <value><string>/exo.ecm.workflow.bp.bonita.payraise-${org.exoplatform.ecm.workflow.version}.jar</string></value>
-	              <value><string>/exo.ecm.workflow.bp.bonita.holiday-${org.exoplatform.ecm.workflow.version}.jar</string></value>
+	              <value><string>/exo.ecm.workflow.bp.bonita.payraise-${project.version}.jar</string></value>
+	              <value><string>/exo.ecm.workflow.bp.bonita.holiday-${project.version}.jar</string></value>
 	            </collection>
 	          </field>
 	        </object>
