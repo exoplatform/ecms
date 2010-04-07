@@ -133,14 +133,15 @@ public class UISearchResult extends UIContainer {
 		if (portal != null && keyword != null) {
 			UISearchPageLayout uiSearchPageContainer = getAncestorOfType(UISearchPageLayout.class);
 			UISearchForm searchForm = uiSearchPageContainer.getChild(UISearchForm.class);
-			searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).setSelectedValues(new String[] {portal});
-			searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
-			
-			setKeyword(keyword);
+			//searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).setSelectedValues(new String[] {portal});
+			//searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
+									
 			SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
-			QueryCriteria queryCriteria = new QueryCriteria();
+			QueryCriteria queryCriteria = new QueryCriteria();			
 			
-			 
+	    boolean isSearchDocument  = searchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING).isChecked();	   
+	    boolean isWebPage  = searchForm.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING).isChecked();
+			
 	    String repository = portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);                                                   
 	    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
 	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes(repository);
@@ -148,9 +149,9 @@ public class UISearchResult extends UIContainer {
 	    queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
 			queryCriteria.setSiteName(portal);
 			queryCriteria.setKeyword(keyword.toLowerCase());			
-			queryCriteria.setSearchWebpage(false);
-			queryCriteria.setSearchDocument(true);
-			queryCriteria.setSearchWebContent(true);
+			queryCriteria.setSearchWebpage(isWebPage);
+			queryCriteria.setSearchDocument(isSearchDocument);
+			queryCriteria.setSearchWebContent(isSearchDocument);
 			
 			if (Boolean.parseBoolean(Utils.getCurrentMode())) {
         queryCriteria.setLiveMode(true);
