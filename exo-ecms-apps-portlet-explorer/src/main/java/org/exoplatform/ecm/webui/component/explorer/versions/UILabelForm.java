@@ -65,7 +65,7 @@ public class UILabelForm extends UIForm {
   static  public class SaveActionListener extends EventListener<UILabelForm> {
     public void execute(Event<UILabelForm> event) throws Exception {
       UILabelForm uiLabelForm = event.getSource();
-      String label = uiLabelForm.getUIStringInput(FIELD_LABEL).getValue();    
+      String label = uiLabelForm.getUIStringInput(FIELD_LABEL).getValue().trim();    
       UIVersionInfo uiVersionInfo = uiLabelForm.getParent();
       VersionNode currentVersion = uiVersionInfo.getCurrentVersionNode();
       UIJCRExplorer uiExplorer = uiLabelForm.getAncestorOfType(UIJCRExplorer.class) ;
