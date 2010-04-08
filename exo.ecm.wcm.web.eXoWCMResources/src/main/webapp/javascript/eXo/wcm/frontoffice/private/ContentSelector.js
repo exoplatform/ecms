@@ -613,17 +613,12 @@ Pager.prototype.showPageNav = function(positionId) {
 EcmContentSelector.prototype.insertContent = function(objNode) {
 	if(!objNode) return;
 	var rws = document.getElementById("RightWorkspace");
-	if(eXo.ecm.ECS.typeObj == "folder") {
+	if(eXo.ecm.ECS.typeObj == "folder" || eXo.ecm.ECS.typeObj == "one") {
 		var action = rws.getAttribute("action");
 		action = action.substring(0, action.length - 2);
 		action += '&objectId=' + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';
 		eval(action);
-	} else if(eXo.ecm.ECS.typeObj == "one") {
-		
-		// need to improve...
-		var path = nodeContent.getAttribute("path");
-		
-	} if(eXo.ecm.ECS.typeObj == "fck") {
+	} else if(eXo.ecm.ECS.typeObj == "fck") {
 		if(!objContent) return;
 		var hostName = eXoPlugin.hostName;
 		var nodeType = objContent.getAttribute('nodeType');
