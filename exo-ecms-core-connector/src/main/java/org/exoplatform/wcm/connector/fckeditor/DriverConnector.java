@@ -61,6 +61,7 @@ import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -101,7 +102,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   
   private PortalContainer manager;
   
-  private OrganizationService organizationService;
+  private OrganizationService organizationService; 
   
   /**
    * Instantiates a new driver connector.
@@ -128,14 +129,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/getDrivers/")
-//  @OutputTransformer(XMLOutputTransformer.class)
-  public Response getDrivers(
-  		@QueryParam("repositoryName") String repositoryName,
-  		@QueryParam("workspaceName") String workspaceName,
-  		@QueryParam("userId") String userId)
-  		throws Exception {
-  	List<DriveData> listDriver = getDriversByUserId(repositoryName, userId);
-  	
+  public Response getDrivers()throws Exception {    
+    String repositoryName = WCMCoreUtils.getRepository(null).getConfiguration().getName();
+    ConversationState conversationState = ConversationState.getCurrent();
+    String userId = conversationState.getIdentity().getUserId();
+    List<DriveData> listDriver = getDriversByUserId(repositoryName, userId);  	
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document document = builder.newDocument();
@@ -177,8 +175,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("currentPortal") String currentPortal,
   		@QueryParam("repositoryName") String repositoryName,
   		@QueryParam("workspaceName") String workspaceName,
-  		@QueryParam("filterBy") String filterBy,
-  		@QueryParam("userId") String userId)
+  		@QueryParam("filterBy") String filterBy)
   		throws Exception {
     try {
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
@@ -193,6 +190,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       String itemPath = driverHomePath
                         + ((currentFolder != null && !"".equals(currentFolder) && !driverHomePath.endsWith("/")) ? "/" : "")
                         + currentFolder;
+      ConversationState conversationState = ConversationState.getCurrent();
+      String userId = conversationState.getIdentity().getUserId();      
       itemPath = StringUtils.replaceOnce(itemPath, "${userId}", userId);
       Node node = (Node)session.getItem(itemPath);
       
