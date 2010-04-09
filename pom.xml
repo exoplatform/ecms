@@ -332,6 +332,12 @@
   </build>
   <profiles>
     <profile>
+      <id>bonita</id>
+      <properties>
+        <workflowEngine>bonita</workflowEngine>
+      </properties>
+    </profile>
+    <profile>
       <id>jbpm</id>
       <properties>
         <workflowEngine>jbpm</workflowEngine>
