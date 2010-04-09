@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo.ecms</artifactId>
-    <version>2.0.0-Beta02-SNAPSHOT</version>
+    <version>2.0.0-Beta02</version>
   </parent>
   <artifactId>exo.ecm.wcm.demo.rest-war</artifactId>
   <packaging>war</packaging>

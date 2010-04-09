@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo.ecms</artifactId>
-    <version>2.0.0-Beta02-SNAPSHOT</version>
+    <version>2.0.0-Beta02</version>
   </parent>
   <artifactId>exo.ecm.wcm.packaging.assembly</artifactId>
   <packaging>pom</packaging>
@@ -156,17 +156,17 @@
                   <rules>
                     <requireProperty>
                       <property>exo.projects.directory.dependencies</property>
-                      <message>&quot;You must define the property exo.projects.directory.dependencies to give the path to the directory where you store your applications servers&quot;</message>
+                      <message>"You must define the property exo.projects.directory.dependencies to give the path to the directory where you store your applications servers"</message>
                     </requireProperty>
                     <requireProperty>
                       <property>exo.projects.app.tomcat.version</property>
-                      <message>&quot;You must define the property exo.projects.app.tomcat.version to give the name of the directory where is stored tomcat&quot;</message>
+                      <message>"You must define the property exo.projects.app.tomcat.version to give the name of the directory where is stored tomcat"</message>
                     </requireProperty>
                     <requireFilesExist>
                       <files>
                         <file>${exo.projects.directory.dependencies}/${exo.projects.app.tomcat.version}/</file>
                       </files>
-                      <message>&quot;The following Tomcat directory doesn't exist : ${exo.projects.directory.dependencies}/${exo.projects.app.tomcat.version}&quot;</message>
+                      <message>"The following Tomcat directory doesn't exist : ${exo.projects.directory.dependencies}/${exo.projects.app.tomcat.version}"</message>
                     </requireFilesExist>
                   </rules>
                   <fail>true</fail>
@@ -239,17 +239,17 @@
                   <rules>
                     <requireProperty>
                       <property>exo.projects.directory.dependencies</property>
-                      <message>&quot;You must define the property exo.projects.directory.dependencies to give the path to the directory where you store your applications servers&quot;</message>
+                      <message>"You must define the property exo.projects.directory.dependencies to give the path to the directory where you store your applications servers"</message>
                     </requireProperty>
                     <requireProperty>
                       <property>exo.projects.app.jboss.version</property>
-                      <message>&quot;You must define the property exo.projects.app.jboss.version to give the name of the directory where is stored JBossAS&quot;</message>
+                      <message>"You must define the property exo.projects.app.jboss.version to give the name of the directory where is stored JBossAS"</message>
                     </requireProperty>
                     <requireFilesExist>
                       <files>
                         <file>${exo.projects.directory.dependencies}/${exo.projects.app.jboss.version}/</file>
                       </files>
-                      <message>&quot;The following JBossAS directory doesn't exist : ${exo.projects.directory.dependencies}/${exo.projects.app.tomcat.version}&quot;</message>
+                      <message>"The following JBossAS directory doesn't exist : ${exo.projects.directory.dependencies}/${exo.projects.app.tomcat.version}"</message>
                     </requireFilesExist>
                   </rules>
                   <fail>true</fail>
