@@ -131,7 +131,7 @@ exo.ecm.wcm.demo.war
 -->
   
   <build>
-    <finalName>gatein-exo-wcm-${project.version}</finalName>
+    <finalName>gatein-ecmdemo-extension-${project.version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
