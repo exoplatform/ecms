@@ -62,6 +62,7 @@ import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -141,10 +142,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     Element rootElement = document.createElement("Connector");
     document.appendChild(rootElement);
 
-    createAtributeUpload(rootElement, false);
+    rootElement.setAttribute("isUpload", "false");
     rootElement.appendChild(appendDrivers(document, generalDrivers(listDriver), "General Drives"));
     rootElement.appendChild(appendDrivers(document, groupDrivers(listDriver, userId), "Group Drives"));
-    rootElement.appendChild(appendDrivers(document, personalDrivers(listDriver), "Personal Drives"));
+    rootElement.appendChild(appendDrivers(document, personalDrivers(listDriver, userId), "Personal Drives"));
     
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
@@ -357,21 +358,27 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 	 * 
 	 * @return the element
 	 */
-	private Element appendDrivers(Document document, List<DriveData> driversList, String groupName) {
+	private Element appendDrivers(Document document, List<DriveData> driversList, String groupName) throws Exception {
 	  Element folders = document.createElement("Folders");
 	  folders.setAttribute("name", groupName);
-	  createAtributeUpload(folders, false);
-    for (DriveData driver : driversList) {      
-      String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
-      String workspace  = driver.getWorkspace();      
-      Element folder = document.createElement("Folder");
-      folder.setAttribute("name", driver.getName());
-      folder.setAttribute("driverPath", driver.getHomePath());
-      folder.setAttribute("repository", repository);
-      folder.setAttribute("workspace", workspace);
-      createAtributeUpload(folder, true);      
-      folders.appendChild(folder);  
-    }
+	  folders.setAttribute("isUpload", "false");
+      for (DriveData driver : driversList) {      
+        String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
+        String workspace  = driver.getWorkspace();
+        String path = driver.getHomePath();
+        Element folder = document.createElement("Folder");
+
+        NodeLocation nodeLocation = new NodeLocation(repository, workspace, path);
+        Node driverNode = NodeLocation.getNodeByLocation(nodeLocation);
+        folder.setAttribute("name", driver.getName());
+        folder.setAttribute("url", FCKUtils.createWebdavURL(driverNode));
+        folder.setAttribute("folderType", "exo:drive");
+        folder.setAttribute("path", path);
+        folder.setAttribute("repository", repository);
+        folder.setAttribute("workspace", workspace);
+        folder.setAttribute("isUpload", "true");      
+        folders.appendChild(folder);  
+      }
 	  return folders;
   }
   
@@ -382,13 +389,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * 
    * @return the list< drive data>
    */
-  private List<DriveData> personalDrivers(List<DriveData> driveList) {
+  private List<DriveData> personalDrivers(List<DriveData> driveList, String userId) {
     List<DriveData> personalDrivers = new ArrayList<DriveData>();
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
     	ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
     String userPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
     for(DriveData drive : driveList) {
-      if(drive.getHomePath().startsWith(userPath + "/${userId}/")) {
+      String driveHomePath = drive.getHomePath();
+      if(driveHomePath.startsWith(userPath + "/${userId}/")) {
+    	drive.setHomePath(StringUtils.replaceOnce(driveHomePath, "${userId}", userId));
         personalDrivers.add(drive);
       }
     }
@@ -517,12 +526,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   	Element rootElement = FCKUtils.createRootElement(command, node, folderHandler.getFolderType(node));
   	NodeList nodeList = rootElement.getElementsByTagName("CurrentFolder");
   	Element currentFolder = (Element) nodeList.item(0);
-  	createAtributeUpload(currentFolder, true);
+  	currentFolder.setAttribute("isUpload", "true");
   	Document document = rootElement.getOwnerDocument();
   	Element folders = document.createElement("Folders");
-  	createAtributeUpload(folders, true);
+  	folders.setAttribute("isUpload", "true");
   	Element files = document.createElement("Files");
-  	createAtributeUpload(files, true);
+  	files.setAttribute("isUpload", "true");
   	Node sourceNode = null;
   	Node checkNode = null;
 
@@ -789,21 +798,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   	folder.setAttribute("url", FCKUtils.createWebdavURL(child));
   	folder.setAttribute("folderType", folderType);
   	folder.setAttribute("path", child.getPath());
-  	createAtributeUpload(folder, true);
+  	folder.setAttribute("isUpload", "true");
   	return folder;
   }
   
-  /**
-   * Creates the atribute upload.
-   * 
-   * @param element the element
-   * @param isUpload the is upload
-   */
-  private void createAtributeUpload(Element element, boolean isUpload) {
-    try{
-      element.setAttribute("isUpload", String.valueOf(isUpload));
-    }catch(Exception e) {
-      element.setAttribute("isUpload", String.valueOf(false));
-    }
-  }
 }
