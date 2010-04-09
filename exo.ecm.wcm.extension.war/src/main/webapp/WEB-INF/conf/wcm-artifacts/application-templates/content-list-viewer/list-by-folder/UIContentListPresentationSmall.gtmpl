@@ -3,6 +3,7 @@
 	import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 	import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 	import org.exoplatform.wcm.webui.Utils;
+	import org.exoplatform.services.wcm.core.NodeLocation;
 %>
 
 <div id="$uicomponent.id" class="UICLVPresentation">
