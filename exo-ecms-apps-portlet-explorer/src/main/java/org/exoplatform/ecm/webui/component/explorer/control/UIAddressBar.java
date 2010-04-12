@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -39,7 +40,16 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
+import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.link.LinkUtils;
+import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -76,6 +86,9 @@ public class UIAddressBar extends UIForm {
   
   public final static String WS_NAME = "workspaceName";  
   public final static String FIELD_ADDRESS = "address";
+  public final static String ACTION_TAXONOMY = "exo:taxonomyAction";
+  public final static String EXO_TARGETPATH = "exo:targetPath"; 
+  public final static String EXO_TARGETWORKSPACE = "exo:targetWorkspace";
   
   private String selectedViewName_;
   
@@ -230,6 +243,55 @@ public class UIAddressBar extends UIForm {
       UIJCRExplorer uiExplorer = uiAddressBar.getAncestorOfType(UIJCRExplorer.class);
       String text = uiAddressBar.getUIStringInput(FIELD_SIMPLE_SEARCH).getValue();
       Node currentNode = uiExplorer.getCurrentNode();
+      if (currentNode.isNodeType(Utils.EXO_TAXANOMY)) {
+        TaxonomyService taxonomyService = uiAddressBar.getApplicationComponent(TaxonomyService.class);
+        List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
+        for (Node taxonomyNode : TaxonomyTrees) {
+          if (currentNode.getPath().startsWith(taxonomyNode.getPath())) {
+            ActionServiceContainer actionService = uiAddressBar.getApplicationComponent(ActionServiceContainer.class);
+            List<Node> listAction = actionService.getActions(taxonomyNode);
+            for (Node actionNode : listAction) {
+              if (actionNode.isNodeType(ACTION_TAXONOMY)) {
+                String searchPath = actionNode.getProperty(EXO_TARGETPATH).getString();
+                String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();                
+                uiExplorer.setSelectNode(searchWorkspace, searchPath);                
+                String queryStatement = null;
+                if("/".equals(searchPath)) {
+                  queryStatement = ROOT_SQL_QUERY;        
+                }else {
+                  queryStatement = StringUtils.replace(SQL_QUERY,"$0", searchPath);
+                }
+                queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));            
+                uiExplorer.removeChildById("ViewSearch");
+                UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class);
+                
+                RepositoryService repositoryService = 
+                  Util.getUIPortal().getApplicationComponent(RepositoryService.class);
+                SessionProviderService sessionProviderService = 
+                  Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
+                SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);                
+                Session session = sessionProvider.getSession(searchWorkspace, 
+                    repositoryService.getRepository(uiExplorer.getRepositoryName()));      
+                UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
+                QueryManager queryManager =session.getWorkspace().getQueryManager();
+                        
+                long startTime = System.currentTimeMillis();
+                Query query = queryManager.createQuery(queryStatement, Query.SQL);        
+                QueryResult queryResult = query.execute();                  
+                uiSearchResult.clearAll();
+                uiSearchResult.setQueryResults(queryResult);            
+                uiSearchResult.updateGrid(true);
+                long time = System.currentTimeMillis() - startTime;
+                uiSearchResult.setSearchTime(time);
+                uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
+                event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
+                if (session != null) session.logout();
+                return;
+              }
+            }
+          }
+        }
+      }
       String queryStatement = null;
       if("/".equals(currentNode.getPath())) {
         queryStatement = ROOT_SQL_QUERY;        
@@ -244,8 +306,11 @@ public class UIAddressBar extends UIForm {
         uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
+      SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());
+      Session session = sessionProvider.getSession(currentNode.getSession().getWorkspace().getName(), 
+          (ManageableRepository)currentNode.getSession().getRepository());
       UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
-      QueryManager queryManager = uiExplorer.getSession().getWorkspace().getQueryManager();
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
       long startTime = System.currentTimeMillis();
       Query query = queryManager.createQuery(queryStatement, Query.SQL);        
       QueryResult queryResult = query.execute();                  
@@ -258,6 +323,7 @@ public class UIAddressBar extends UIForm {
       if(!uiDocumentWorkspace.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
       }
+      if (session != null) session.logout();
     }
   }
   
