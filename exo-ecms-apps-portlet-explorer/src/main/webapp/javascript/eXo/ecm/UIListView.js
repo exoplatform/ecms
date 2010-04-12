@@ -140,7 +140,7 @@ var ListView = function() {
 		resetArrayItemsSelected();
 		
 		var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
-		document.title= "" + rightClick;
+
 		if (rightClick) {
 			eval(element.getAttribute("mousedown"));
 		} else {
