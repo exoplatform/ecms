@@ -38,6 +38,8 @@ import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.rss.RSSService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -103,6 +105,7 @@ public class RSSServiceImpl implements RSSService{
   static private String NT_RESOURCE = "nt:resource".intern() ;  
   static private String RSS = "/rss".intern() ;
   static private String MIX_VERSIONABLE = "mix:versionable".intern() ;
+  static private String DATE_MODIFIED = "exo:dateModified".intern();  
 
   private RepositoryService repositoryService_;
   private static final Log LOG  = ExoLogger.getLogger(RSSServiceImpl.class);
@@ -135,6 +138,7 @@ public class RSSServiceImpl implements RSSService{
    * @see               Map
    */
   private void generateRSS(Map context) {  
+                 
     String actionName = (String)context.get("actionName") ;
     String srcWorkspace = (String)context.get(SRC_WORKSPACE);                   
     String rssVersion = (String) context.get(RSS_VERSION) ;
@@ -149,6 +153,12 @@ public class RSSServiceImpl implements RSSService{
     String title = (String) context.get(TITLE) ;
     String feedLink = (String) context.get(LINK) ;
     String repository = (String) context.get("repository") ;
+    Date pubDate ; 
+    try{
+      pubDate = ((GregorianCalendar)context.get(PUBDATE)).getTime() ;
+    }catch (Exception e) {
+      pubDate= new Date() ;
+    }    
     storePath = storePath + "/" + feedType ;
     if(feedName == null || feedName.length() == 0) feedName = actionName ;
     if(feedTitle == null || feedTitle.length() == 0) feedTitle = actionName ;        
@@ -157,26 +167,27 @@ public class RSSServiceImpl implements RSSService{
       session = repositoryService_.getRepository(repository).getSystemSession(srcWorkspace);
       session.refresh(true) ;
       QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery(queryPath, Query.XPATH);
+      Query query = queryManager.createQuery(queryPath, Query.SQL);
       QueryResult queryResult = query.execute();            
       SyndFeed feed = new SyndFeedImpl();      
       feed.setFeedType(rssVersion);      
       feed.setTitle(feedTitle.replaceAll("&nbsp;", " "));
+      feed.setPublishedDate(pubDate);      
       feed.setLink(feedLink);
       feed.setDescription(feedDescription.replaceAll("&nbsp;", " "));     
       List<SyndEntry> entries = new ArrayList<SyndEntry>();
       SyndEntry entry;
       SyndContent description;
-      ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-      PortalContainerInfo containerInfo = 
-        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;      
-      String portalName = containerInfo.getContainerName() ; 
-      String wsName = session.getWorkspace().getName() ;
+//      ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+//      PortalContainerInfo containerInfo = 
+//        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;      
+//      String portalName = containerInfo.getContainerName() ; 
+//      String wsName = session.getWorkspace().getName() ;
       NodeIterator iter = queryResult.getNodes() ;
       while (iter.hasNext()) {        
         Node child = iter.nextNode();
         if(child.isNodeType("exo:rss-enable")) {
-          String url = getEntryUrl(portalName, wsName, child.getPath(), rssUrl) ;
+          String url = rssUrl + child.getPath();
           entry = new SyndEntryImpl();
           try {
             entry.setTitle(child.getProperty(title).getString());                
@@ -192,12 +203,17 @@ public class RSSServiceImpl implements RSSService{
           } catch(PathNotFoundException path) {
             description.setValue("") ;
           }
-          entry.setDescription(description);        
+          entry.setDescription(description);
+          try{
+            Date udate = child.getProperty(PUBLISHED_DATE).getDate().getTime() ;
+            entry.setPublishedDate(udate) ;
+          }catch (Exception e) {
+            entry.setPublishedDate(new Date());
+          }          
           entries.add(entry);
           entry.getEnclosures() ;
         }        
       }      
-      feed.setFeedType(feedType);
       feed.setEntries(entries);      
       feed.setEncoding("UTF-8");     
       SyndFeedOutput output = new SyndFeedOutput();      
@@ -221,6 +237,7 @@ public class RSSServiceImpl implements RSSService{
   private void generatePodcast(Map context){
     Session session = null;
     try{
+      
       String actionName = (String)context.get("actionName") ;
       String srcWorkspace = (String)context.get(SRC_WORKSPACE);                   
       String feedTitle = (String) context.get(FEED_TITLE) ;      
@@ -254,13 +271,13 @@ public class RSSServiceImpl implements RSSService{
       session = repositoryService_.getRepository(repository).getSystemSession(srcWorkspace);
       session.refresh(true) ;
       QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery(queryPath, Query.XPATH);
+      Query query = queryManager.createQuery(queryPath, Query.SQL);
       QueryResult queryResult = query.execute();            
       SyndFeed feed = new SyndFeedImpl() ;
       FeedInformation infor = new FeedInformationImpl() ;
       infor.setExplicit(false) ;
 
-      Category cat = new Category() ;
+      Category cat = new Category();
       if(categories != null && categories.length() > 0) {
         if(categories.indexOf(",") > -1) {
           String[] arrCategories = categories.split(",") ;
@@ -324,7 +341,7 @@ public class RSSServiceImpl implements RSSService{
         enc.setType(mimeType) ;
         String path = child.getPath().trim() + "." + ext.trim() ; 
         if(child.hasProperty(LENGTH)) enc.setLength(child.getProperty(LENGTH).getLong()) ;
-        String encUrl = getEntryUrl(portalName, srcWorkspace, path, rssUrl) ;
+        String encUrl = rssUrl + path;
         enc.setUrl(encUrl) ;
         enclosureList.add(enc) ;
         entry.setEnclosures(enclosureList) ;
@@ -467,27 +484,4 @@ public class RSSServiceImpl implements RSSService{
     }
   }
   
-  /**
-   * Return entry url of specified path
-   * @param portalName        String
-   *                          The name of specified portal
-   * @param wsName            String
-   *                          The name of specified workspace
-   * @param path              String
-   * @param rssUrl            String
-   *                          The url of given RSS 
-   * @throws Exception
-   */
-  private String getEntryUrl(String portalName, String wsName, String path, String rssUrl) throws Exception{
-    String driverName = rssUrl;
-    PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance();
-    rssUrl = portletRequestContext.getRequest().getScheme() + "://" + 
-    portletRequestContext.getRequest().getServerName() + ":" +
-    String.format("%s",portletRequestContext.getRequest().getServerPort());
-    
-    StringBuilder url = new StringBuilder(rssUrl);
-    url.append("/").append(portalName).append("/").append("private/classic/fileexplorer");    
-    url.append("/").append(driverName).append(path);           
-    return url.toString();
-  }
 }

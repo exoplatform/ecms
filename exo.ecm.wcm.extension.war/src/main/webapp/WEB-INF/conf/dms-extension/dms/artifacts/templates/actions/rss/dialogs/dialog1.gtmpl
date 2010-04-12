@@ -179,12 +179,14 @@
 	      <td class="FieldComponent">
 		      <%
 		        if(feedTypeValue.equals("rss")) {
-		        	String s1 = "/jcr:root" + uicomponent.getCurrentPath() + "//element(*, exo:article)";
+		          String s1 = "SELECT * FROM exo:article WHERE jcr:path LIKE '" + 
+		          uicomponent.getCurrentPath() + "/%' AND NOT jcr:path LIKE '" + uicomponent.getCurrentPath() + "/%/%'";
 		          String[] fieldQueryPathRss = ["jcrPath=/node/exo:queryPath", s1] ;
 		          uicomponent.addTextAreaField("queryPathRss", fieldQueryPathRss) ; 
 		          uicomponent.removeComponent("queryPathPodcast") ;
 		        } else {
-		        	String s2 = "/jcr:root" + uicomponent.getCurrentPath() + "//element(*, exo:podcast)";
+              String s2 = "SELECT * FROM exo:podcast WHERE jcr:path LIKE '" + 
+              uicomponent.getCurrentPath() + "/%' AND NOT jcr:path LIKE '" + uicomponent.getCurrentPath() + "/%/%'";
 		          String[] fieldQueryPathPodcast = ["jcrPath=/node/exo:queryPath", s2] ;
 		          uicomponent.addTextAreaField("queryPathPodcast", fieldQueryPathPodcast) ; 
 		          uicomponent.removeComponent("queryPathRss") ;

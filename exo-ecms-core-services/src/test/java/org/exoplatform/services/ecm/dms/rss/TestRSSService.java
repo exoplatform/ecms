@@ -79,7 +79,7 @@ public class TestRSSService extends BaseDMSTestCase {
       assertTrue(jcrData.indexOf("<title>Hello Feed</title>") > 0);
       assertTrue(jcrData.indexOf("<description>Hello Description</description>") > 0);
       assertTrue(jcrData.indexOf("<description>Not data</description>") < 0);
-      assertEquals("text/xml", myJcrContent.getProperty("jcr:mimeType").getString());
+      assertEquals("application/rss+xml", myJcrContent.getProperty("jcr:mimeType").getString());
     }
   }
   
