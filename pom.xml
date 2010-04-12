@@ -408,7 +408,7 @@
     <module>exo-ecms-packaging-workflow-config</module>
     <module>exo-ecms-packaging-workflow-ear</module>
     <module>exo-ecms-packaging-workflow-webapp</module>
-    <module>exo-ecms-ext-workflow-portlet-administation</module>
+    <module>exo-ecms-ext-workflow-portlet-administration</module>
     <module>exo-ecms-delivery-wkf-wcm-server-bonita</module>
     <module>exo-ecms-delivery-wkf-wcm-server-jboss</module>
     <module>exo-ecms-delivery-wkf-wcm-server-jboss-ear</module>

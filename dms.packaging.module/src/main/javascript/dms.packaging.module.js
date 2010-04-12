@@ -45,6 +45,7 @@ function getModule(params) {
     addDependency(new Project("exo-weblogic", "exo-weblogic-authproviders", "jar", "1.0")).
     addDependency(new Project("exo-weblogic", "exo-weblogic-loginmodule", "jar", "1.0")).  
     addDependency(new Project("commons-logging", "commons-logging", "jar", "1.0.4"));
+  module.portlet.jcr_console.deployName = "jcr_console";
   
   module.gadgets = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget-publication", "war", module.version).
     addDependency(ws.frameworks.json);  

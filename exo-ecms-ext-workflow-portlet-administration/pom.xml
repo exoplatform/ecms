@@ -6,7 +6,7 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-ext-workflow-portlet-administation</artifactId>
+  <artifactId>exo-ecms-ext-workflow-portlet-administration</artifactId>
   <packaging>war</packaging>
   <name>eXo WORKFLOW Portlet</name>
   <description>eXo WORKFLOW Portlet</description>

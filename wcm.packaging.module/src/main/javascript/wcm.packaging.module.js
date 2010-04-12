@@ -28,22 +28,27 @@ function getModule(params) {
     addDependency(jcr.frameworks.command).
     addDependency(jcr.frameworks.web).
     addDependency(portal.webui.portal);
+  module.portlet.webpresentation.deployName = "presentation";
     
   module.portlet.websearches = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-search", "exo-portlet", module.version).    
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-search", "jar",  module.version));
-    
+  module.portlet.websearches.deployName = "searches";
+
   module.portlet.newsletter = new Project("org.exoplatform.ecms", "exo-ecms-ext-newsletter-portlet", "exo-portlet", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-newsletter-services", "jar",  module.version));
-    
+  module.portlet.newsletter.deployName = "newsletter";
+
   module.portlet.formgenerator = new Project("org.exoplatform.ecms", "exo-ecms-ext-formgenerator-portlet", "exo-portlet", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
+  module.portlet.formgenerator.deployName = "formgenerator";
 
   module.web = {};
   
   module.web.eXoWCMResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-wcm", "war", module.version).
     addDependency(portal.web.eXoResources);
-  
+  module.web.eXoWCMResources.deployName = "eXoWCMResources";
+    
   module.extension = {};
   
   module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).
