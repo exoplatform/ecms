@@ -21,18 +21,18 @@ function getModule(params) {
 
 	module.web = {}
   module.web.eXoWorkflowResources = 
-    new Project("org.exoplatform.ecms", "exo.ecm.workflow.web.eXoWorkflowResources", "war", module.version) ;  
+    new Project("org.exoplatform.ecms", "exo-ecms-ext-workflow-resources", "war", module.version) ;  
   module.web.eXoWorkflowResources.deployName = "eXoWorkflowResources" ;
   
 	module.extension = {};
-  module.extension.webapp = new Project("org.exoplatform.ecms", "exo.ecm.workflow.extension.webapp", "war", module.version).
-		addDependency(new Project("org.exoplatform.ecms", "exo.ecm.workflow.extension.config", "jar", module.version));
+  module.extension.webapp = new Project("org.exoplatform.ecms", "exo-ecms-packaging-workflow-webapp", "war", module.version).
+		addDependency(new Project("org.exoplatform.ecms", "exo-ecms-packaging-workflow-config", "jar", module.version));
   module.extension.webapp.deployName = "ecmworkflow-extension";		
 	   	
   module.server = {};
 
    module.server.tomcat = {};
-   module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo.ecm.workflow.server.tomcat.patch", "jar", module.version);
+   module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wkf-wcm-server-tomcat", "jar", module.version);
    
   return module;
 }

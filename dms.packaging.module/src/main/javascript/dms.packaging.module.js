@@ -19,10 +19,10 @@ function getModule(params) {
   module.portlet.ecmadmin = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-administration", "exo-portlet", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version)) .     
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar", module.version)).
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.component.document.viewer", "jar", module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-viewer", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-connector", "jar", module.version)).
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.webui.dms", "jar", module.version)).
-    addDependency(new Project("org.exoplatform.ecms", "exo.ecm.dms.core.webui.ext", "jar", module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui", "jar", module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-ext", "jar", module.version)).
     addDependency(new Project("org.exoplatform", "exo-jcr-services", "jar", "1.12.0-Beta01")).
     addDependency(new Project("rome", "rome", "jar", "0.9")) .
     addDependency(new Project("com.totsp.feedpod", "itunes-com-podcast", "jar", "0.2")) .
@@ -41,12 +41,12 @@ function getModule(params) {
   module.portlet.ecmbrowsecontent = new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-browsecontent", "exo-portlet", module.version);
   module.portlet.ecmbrowsecontent.deployName = "ecmbrowsecontent";
 
-  module.portlet.jcr_console = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.portlet.jcr-console", "exo-portlet", module.version).
+  module.portlet.jcr_console = new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-jcrconsole", "exo-portlet", module.version).
     addDependency(new Project("exo-weblogic", "exo-weblogic-authproviders", "jar", "1.0")).
     addDependency(new Project("exo-weblogic", "exo-weblogic-loginmodule", "jar", "1.0")).  
     addDependency(new Project("commons-logging", "commons-logging", "jar", "1.0.4"));
   
-  module.gadgets = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.gadgets", "war", module.version).
+  module.gadgets = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget-publication", "war", module.version).
     addDependency(ws.frameworks.json);  
   module.gadgets.deployName = "eXoDMSGadgets";
   
@@ -57,7 +57,7 @@ function getModule(params) {
   
   module.web = {}
   
-  module.web.eXoDMSResources = new Project("org.exoplatform.ecms", "exo.ecm.dms.core.web.eXoDMSResources", "war", module.version) ;  
+  module.web.eXoDMSResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-dms", "war", module.version) ;  
   module.web.eXoDMSResources.deployName = "eXoDMSResources" ;
     
   return module;

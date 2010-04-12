@@ -6,9 +6,9 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-services</artifactId>
-  <name>eXo CMS Service</name>
-  <description>eXo CMS Service</description>
+  <artifactId>exo-ecms-ext-newsletter-services</artifactId>
+  <name>eXo WCM Newsletter Service</name>
+  <description>eXo WCM Newsletter Service</description>
   <dependencies>
     <dependency>
       <groupId>org.chromattic</groupId>
@@ -23,9 +23,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.security.core</artifactId>
-      <version>${org.exoplatform.core.version}</version>
+      <groupId>org.exoplatform.ws</groupId>
+      <artifactId>exo.ws.frameworks.json</artifactId>
+      <version>${org.exoplatform.ws.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -36,44 +36,8 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
-      <artifactId>exo.jcr.component.webdav</artifactId>
-      <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.ext</artifactId>
       <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform</groupId>
-      <artifactId>exo-jcr-services</artifactId>
-      <version>${org.exoplatform.jcr-services.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.scripting</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-ext</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.resources</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.webui.core</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -101,49 +65,21 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ws</groupId>
-      <artifactId>exo.ws.rest.core</artifactId>
-      <version>${org.exoplatform.ws.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ws</groupId>
-      <artifactId>exo.ws.frameworks.json</artifactId>
-      <version>${org.exoplatform.ws.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all-minimal</artifactId>
-      <version>1.5.4</version>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-services</artifactId>
+      <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>rome</groupId>
-      <artifactId>rome</artifactId>
-      <version>0.9</version>
-      <scope>compile</scope>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-ext</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.totsp.feedpod</groupId>
-      <artifactId>itunes-com-podcast</artifactId>
-      <version>0.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>ical4j</groupId>
-      <artifactId>ical4j</artifactId>
-      <version>0.9.20</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.icepdf</groupId>
-      <artifactId>icepdf-viewer</artifactId>
-      <version>3.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.icepdf</groupId>
-      <artifactId>icepdf-core</artifactId>
-      <version>3.0</version>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-publication</artifactId>
+      <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -153,7 +89,6 @@
         <directory>src/main/java</directory>
         <includes>
           <include>**/*.xml</include>
-          <include>**/*.properties</include>
         </includes>
       </resource>
     </resources>
@@ -174,16 +109,12 @@
           <include>**/*.sha1</include>
           <include>**/*.conf</include>
           <include>**/*.gtmpl</include>
-          <include>**/*.groovy</include>
         </includes>
       </testResource>
       <testResource>
         <directory>src/test/java</directory>
         <includes>
           <include>**/*.xml</include>
-          <include>**/*.gtmpl</include>
-          <include>**/*.groovy</include>
-          <include>**/*.jpg</include>
         </includes>
       </testResource>
     </testResources>
@@ -192,12 +123,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <includes />
-          <!--include>The file path need to run unit test by default</include-->
+          <includes>
+            <include>**/TestNewsletterSubscriptionHandler.java</include>
+          </includes>
           <excludes>
             <exclude>**/*$*</exclude>
             <!--nested classes prb, http://jira.codehaus.org/browse/SUREFIRE-288-->
-            <exclude>**/BaseDMSTestCase.java</exclude>
+            <exclude>**/BaseWCMTestCase</exclude>
           </excludes>
         </configuration>
       </plugin>

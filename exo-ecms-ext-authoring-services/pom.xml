@@ -24,7 +24,7 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo.ecm.dms.core.webui.dms</artifactId>
+      <artifactId>exo-ecms-core-webui</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>

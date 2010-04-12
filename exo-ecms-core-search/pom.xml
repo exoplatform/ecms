@@ -6,10 +6,8 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-publication</artifactId>
-  <packaging>jar</packaging>
-  <name>eXo Publication Service</name>
-  <description>eXo Publication Service</description>
+  <artifactId>exo-ecms-core-search</artifactId>
+  <name>eXo WCM Search Service</name>
   <dependencies>
     <dependency>
       <groupId>org.chromattic</groupId>
@@ -24,39 +22,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.security.core</artifactId>
-      <version>${org.exoplatform.core.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.core</artifactId>
       <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.jcr</groupId>
-      <artifactId>exo.jcr.component.ext</artifactId>
-      <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.resources</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.webui.core</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.xml-parser</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -78,14 +46,10 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ws</groupId>
-      <artifactId>exo.ws.rest.core</artifactId>
-      <version>${org.exoplatform.ws.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ws</groupId>
-      <artifactId>exo.ws.frameworks.json</artifactId>
-      <version>${org.exoplatform.ws.version}</version>
+      <groupId>org.exoplatform.jcr</groupId>
+      <artifactId>exo.jcr.component.ext</artifactId>
+      <version>${org.exoplatform.jcr.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
@@ -93,17 +57,17 @@
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
-    <!--dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency-->
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-ext</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-publication</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <build>
@@ -112,29 +76,6 @@
         <directory>src/main/java</directory>
         <includes>
           <include>**/*.xml</include>
-          <include>**/*.properties</include>
-          <include>**/*.xsl</include>
-          <include>**/*.dtd</include>
-        </includes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-          <include>**/*.drl</include>
-          <include>**/*.doc</include>
-          <include>**/*.xls</include>
-          <include>**/*.ppt</include>
-          <include>**/*.txt</include>
-          <include>**/*.jar</include>
-          <include>**/*.pom</include>
-          <include>**/*.sha1</include>
-          <include>**/*.conf</include>
-          <include>**/*.gtmpl</include>
-          <include>**/*.gif</include>
-          <include>**/*.jpg</include>
-          <include>**/*.png</include>
         </includes>
       </resource>
     </resources>
@@ -171,6 +112,7 @@
         <configuration>
           <excludes>
             <exclude>**/*$*</exclude>
+            <!--nested classes prb, http://jira.codehaus.org/browse/SUREFIRE-288-->
             <exclude>**/BaseWCMTestCase</exclude>
           </excludes>
         </configuration>

@@ -6,15 +6,33 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-ext-deprecated-portlet-browsecontent</artifactId>
+  <artifactId>exo-ecms-ext-formgenerator-portlet</artifactId>
   <packaging>war</packaging>
-  <name>eXo DMS Portlet Java Content</name>
-  <description>eXo DMS Portlet Java Content: Browser Content</description>
+  <name>eXo WCM Form Generator Portlet</name>
+  <description>eXo WCM Form Generator Portlet Suites</description>
   <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.core</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.eXo</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.portal</artifactId>
       <version>${org.exoplatform.portal.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-services</artifactId>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -24,9 +42,15 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform</groupId>
-      <artifactId>exo-jcr-services</artifactId>
-      <version>${org.exoplatform.jcr-services.version}</version>
+      <groupId>org.exoplatform.jcr</groupId>
+      <artifactId>exo.jcr.component.webdav</artifactId>
+      <version>${org.exoplatform.jcr.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.jcr</groupId>
+      <artifactId>exo.jcr.component.ftp</artifactId>
+      <version>${org.exoplatform.jcr.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -37,13 +61,13 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-ext</artifactId>
+      <artifactId>exo-ecms-core-search</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-viewer</artifactId>
+      <artifactId>exo-ecms-ext-newsletter-services</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>

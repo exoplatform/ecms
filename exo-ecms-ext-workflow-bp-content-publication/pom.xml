@@ -6,17 +6,10 @@
     <artifactId>exo.ecms</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-publication</artifactId>
-  <packaging>jar</packaging>
-  <name>eXo Publication Service</name>
-  <description>eXo Publication Service</description>
+  <artifactId>exo-ecms-ext-workflow-bp-content-publication</artifactId>
+  <name>eXo workflow publication</name>
+  <description>eXo workflow Publication</description>
   <dependencies>
-    <dependency>
-      <groupId>org.chromattic</groupId>
-      <artifactId>chromattic.core</artifactId>
-      <version>${chromattic.version}</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>
       <artifactId>exo.kernel.container</artifactId>
@@ -55,37 +48,27 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.xml-parser</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.web</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.portal</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.portal</artifactId>
       <version>${org.exoplatform.portal.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ws</groupId>
-      <artifactId>exo.ws.rest.core</artifactId>
-      <version>${org.exoplatform.ws.version}</version>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-publication</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ws</groupId>
-      <artifactId>exo.ws.frameworks.json</artifactId>
-      <version>${org.exoplatform.ws.version}</version>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-api</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-webui</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
@@ -93,17 +76,23 @@
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
-    <!--dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency-->
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-ext</artifactId>
+      <artifactId>exo-ecms-ext-workflow-bp-content-plugin</artifactId>
       <version>${project.version}</version>
-      <scope>provided</scope>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all-minimal</artifactId>
+      <version>1.5.4</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>rome</groupId>
+      <artifactId>rome</artifactId>
+      <version>0.8</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <build>
@@ -111,55 +100,18 @@
       <resource>
         <directory>src/main/java</directory>
         <includes>
-          <include>**/*.xml</include>
-          <include>**/*.properties</include>
-          <include>**/*.xsl</include>
-          <include>**/*.dtd</include>
-        </includes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
-          <include>**/*.drl</include>
-          <include>**/*.doc</include>
-          <include>**/*.xls</include>
-          <include>**/*.ppt</include>
-          <include>**/*.txt</include>
-          <include>**/*.jar</include>
-          <include>**/*.pom</include>
-          <include>**/*.sha1</include>
-          <include>**/*.conf</include>
           <include>**/*.gtmpl</include>
           <include>**/*.gif</include>
-          <include>**/*.jpg</include>
-          <include>**/*.png</include>
         </includes>
       </resource>
     </resources>
     <testResources>
       <testResource>
-        <directory>src/test/resources</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-          <include>**/*.drl</include>
-          <include>**/*.vm</include>
-          <include>**/*.doc</include>
-          <include>**/*.xls</include>
-          <include>**/*.ppt</include>
-          <include>**/*.txt</include>
-          <include>**/*.jar</include>
-          <include>**/*.pom</include>
-          <include>**/*.sha1</include>
-          <include>**/*.conf</include>
-          <include>**/*.gtmpl</include>
-        </includes>
-      </testResource>
-      <testResource>
         <directory>src/test/java</directory>
         <includes>
+          <include>**/*.properties</include>
           <include>**/*.xml</include>
         </includes>
       </testResource>
@@ -167,12 +119,10 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
+        <artifactId>maven-war-plugin</artifactId>
         <configuration>
-          <excludes>
-            <exclude>**/*$*</exclude>
-            <exclude>**/BaseWCMTestCase</exclude>
-          </excludes>
+          <archiveClasses>false</archiveClasses>
+          <warSourceExcludes>WEB-INF/lib/*.jar</warSourceExcludes>
         </configuration>
       </plugin>
     </plugins>

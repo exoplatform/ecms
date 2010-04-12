@@ -64,7 +64,7 @@
     <exo.product.name>exo-wcm</exo.product.name>
     <exo.product.specification>2.0</exo.product.specification>
     <!-- exopackage -->
-    <org.exoplatform.exopackage.version>1.1.0-Beta08</org.exoplatform.exopackage.version>
+    <org.exoplatform.exopackage.version>1.1.0-Beta09-SNAPSHOT</org.exoplatform.exopackage.version>
     <!-- We enforce Java 6 to build to use Chromattic and APT -->
     <jdk.min.version>1.6</jdk.min.version>
     <!-- maven-release-plugin -->
@@ -346,76 +346,76 @@
     <profile>
       <id>wkf</id>
       <modules>
-        <module>exo.ecm.workflow.packaging.assembly</module>
+        <module>exo-ecms-delivery-wkf-wcm-assembly</module>
       </modules>
     </profile>
     <profile>
       <id>dms</id>
       <modules>
-        <module>exo.ecm.dms.packaging.assembly</module>
+        <module>exo-ecms-delivery-dms-wcm-assembly</module>
       </modules>
     </profile>
     <profile>
       <id>wcm</id>
       <modules>
-        <module>exo.ecm.wcm.packaging.assembly</module>
+        <module>exo-ecms-delivery-wcm-assembly</module>
       </modules>
     </profile>
   </profiles>
   <modules>
     <module>exo-ecms-core-services</module>
-    <module>exo.ecm.dms.core.component.document.viewer</module>
+    <module>exo-ecms-core-viewer</module>
     <module>exo-ecms-core-publication</module>
     <module>exo-ecms-core-connector</module>
     <module>exo-ecms-apps-portlet-administration</module>
     <module>exo-ecms-apps-portlet-explorer</module>
     <module>exo-ecms-ext-deprecated-portlet-browsecontent</module>
-    <module>exo.ecm.dms.core.gadgets</module>
-    <module>exo.ecm.dms.core.portlet.jcr-console</module>
-    <module>exo.ecm.dms.core.web.eXoDMSResources</module>
-    <module>exo.ecm.dms.core.webui.dms</module>
-    <module>exo.ecm.dms.core.webui.ext</module>
-    <module>exo.ecm.dms.ext.contentvalidation.bp.bonita.content-publishing</module>
-    <module>exo.ecm.dms.ext.contentvalidation.bp.jbpm.content.publishing</module>
-    <module>exo.ecm.dms.ext.contentvalidation.component.bonitaconfig</module>
-    <module>exo.ecm.dms.ext.contentvalidation.component.jbpmconfig</module>
-    <module>exo.ecm.dms.ext.contentvalidation.component.plugin</module>
-    <module>exo.ecm.dms.ext.contentvalidation.component.webui</module>
-    <module>exo.ecm.dms.ext.contentvalidation.component.workflowPublication</module>
-    <module>exo.ecm.wcm.component.newsletter</module>
-    <module>exo.ecm.wcm.component.search</module>
+    <module>exo-ecms-apps-gadget-publication</module>
+    <module>exo-ecms-ext-deprecated-portlet-jcrconsole</module>
+    <module>exo-ecms-apps-resources-dms</module>
+    <module>exo-ecms-core-webui</module>
+    <module>exo-ecms-core-ext</module>
+    <module>exo-ecms-ext-workflow-bp-bonita-content</module>
+    <module>exo-ecms-ext-workflow-bp-jbpm-content</module>
+    <module>exo-ecms-ext-workflow-bp-bonita-content-config</module>
+    <module>exo-ecms-ext-workflow-bp-jbpm-content-config</module>
+    <module>exo-ecms-ext-workflow-bp-content-plugin</module>
+    <module>exo-ecms-ext-workflow-bp-content-webui</module>
+    <module>exo-ecms-ext-workflow-bp-content-publication</module>
+    <module>exo-ecms-ext-newsletter-services</module>
+    <module>exo-ecms-core-search</module>
     <module>exo-ecms-packaging-ecmdemo-config</module>
-    <module>exo.ecm.wcm.demo.ear</module>
-    <module>exo.ecm.wcm.demo.rest-war</module>
-    <module>exo.ecm.wcm.demo.war</module>
-    <module>exo.ecm.wcm.extension.config</module>
-    <module>exo.ecm.wcm.extension.ear</module>
-    <module>exo.ecm.wcm.extension.war</module>
-    <module>exo.ecm.wcm.portlet.formgenerator</module>
-    <module>exo.ecm.wcm.portlet.newsletter</module>
-    <module>exo.ecm.wcm.portlet.presentation</module>
-    <module>exo.ecm.wcm.portlet.searches</module>
-    <module>exo.ecm.wcm.server.jonas.patch</module>
-    <module>exo.ecm.wcm.server.tomcat.patch</module>
-    <module>exo.ecm.wcm.web.eXoWCMResources</module>
-    <module>exo.ecm.workflow.bp.bonita.holiday</module>
-    <module>exo.ecm.workflow.bp.bonita.payraise</module>
-    <module>exo.ecm.workflow.bp.jbpm.holiday</module>
-    <module>exo.ecm.workflow.bp.jbpm.payraise</module>
-    <module>exo.ecm.workflow.component.workflow.api</module>
-    <module>exo.ecm.workflow.component.workflow.impl.bonita</module>
-    <module>exo.ecm.workflow.component.workflow.impl.jbpm.facade</module>
-    <module>exo.ecm.workflow.extension.config</module>
-    <module>exo.ecm.workflow.extension.ear</module>
-    <module>exo.ecm.workflow.extension.webapp</module>
-    <module>exo.ecm.workflow.portlet.workflow</module>
-    <module>exo.ecm.workflow.server.bonita-server-env</module>
-    <module>exo.ecm.workflow.server.jboss.patch</module>
-    <module>exo.ecm.workflow.server.jboss.patch-ear</module>
-    <module>exo.ecm.workflow.server.jonas.patch</module>
-    <module>exo.ecm.workflow.server.tomcat.patch</module>
-    <module>exo.ecm.workflow.web.eXoWorkflowResources</module>
-    <module>exo.ecm.workflow.webui.workflow</module>
+    <module>exo-ecms-packaging-ecmdemo-ear</module>
+    <module>exo-ecms-packaging-ecmdemo-rest-webapp</module>
+    <module>exo-ecms-packaging-ecmdemo-webapp</module>
+    <module>exo-ecms-packaging-wcm-config</module>
+    <module>exo-ecms-packaging-wcm-ear</module>
+    <module>exo-ecms-packaging-wcm-webapp</module>
+    <module>exo-ecms-ext-formgenerator-portlet</module>
+    <module>exo-ecms-ext-newsletter-portlet</module>
+    <module>exo-ecms-apps-portlet-presentation</module>
+    <module>exo-ecms-apps-portlet-search</module>
+    <module>exo-ecms-delivery-wcm-server-jonas</module>
+    <module>exo-ecms-delivery-wcm-server-tomcat</module>
+    <module>exo-ecms-apps-resources-wcm</module>
+    <module>exo-ecms-ext-workflow-bp-bonita-holiday</module>
+    <module>exo-ecms-ext-workflow-bp-bonita-payraise</module>
+    <module>exo-ecms-ext-workflow-bp-jbpm-holiday</module>
+    <module>exo-ecms-ext-workflow-bp-jbpm-payraise</module>
+    <module>exo-ecms-ext-workflow-api</module>
+    <module>exo-ecms-ext-workflow-facade-bonita</module>
+    <module>exo-ecms-ext-workflow-facade-jbpm</module>
+    <module>exo-ecms-packaging-workflow-config</module>
+    <module>exo-ecms-packaging-workflow-ear</module>
+    <module>exo-ecms-packaging-workflow-webapp</module>
+    <module>exo-ecms-ext-workflow-portlet-administation</module>
+    <module>exo-ecms-delivery-wkf-wcm-server-bonita</module>
+    <module>exo-ecms-delivery-wkf-wcm-server-jboss</module>
+    <module>exo-ecms-delivery-wkf-wcm-server-jboss-ear</module>
+    <module>exo-ecms-delivery-wkf-wcm-server-jonas</module>
+    <module>exo-ecms-delivery-wkf-wcm-server-tomcat</module>
+    <module>exo-ecms-ext-workflow-resources</module>
+    <module>exo-ecms-ext-workflow-webui</module>
     <module>workflow.packaging.module</module>
     <module>workflow.packaging.product</module>
     <module>dms.packaging.module</module>
