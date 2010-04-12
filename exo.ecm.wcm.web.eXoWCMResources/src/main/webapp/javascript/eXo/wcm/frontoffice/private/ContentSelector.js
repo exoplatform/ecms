@@ -2,7 +2,6 @@ function EcmContentSelector() {
 	this.portalName = eXo.env.portal.portalName;
 	this.context = eXo.env.portal.context;
 	this.accessMode = eXo.env.portal.accessMode;
-	this.userId = eXo.env.portal.userName; 
 	this.userLanguage = eXo.env.portal.language;
 	var parentLocation = window.parent.location;
 	this.hostName = parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
@@ -99,8 +98,8 @@ EcmContentSelector.prototype.initRequestXmlTree = function(typeObj){
 	}
 	eXo.ecm.ECS.isShowFilter();
 	var ECS = eXo.ecm.ECS;
-	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver+"repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName+"&userId="+ ECS.userId;
-	var url = ECS.hostName+ECS.connector+ command + "&currentPortal=" + ECS.portalName;
+	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver;
+	var url = ECS.hostName+ECS.connector+ command ;
 	eXo.ecm.ECS.ajaxRequest(url);
 };
 
@@ -168,7 +167,7 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	else filter = 'Web Contents';
 
 	var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+currentFolder+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
-	var url = ECS.hostName + ECS.connector+command+"&userId=" + ECS.userId+"&filterBy="+filter;
+	var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter;
 	if(eXo.ecm.ECS.strConnection == url) return;	
 	eXo.ecm.ECS.strConnection = url;
 	eXo.ecm.ECS.renderSubTrees(currentNode, event, url);
@@ -206,8 +205,8 @@ EcmContentSelector.prototype.listRootFolder = function(rootNode) {
 	var nodeName = rootNode.getAttribute("name");
 	var nodeOnBreadcrumb = document.getElementById(rootNode.getAttribute("id"));
 	var ECS = eXo.ecm.ECS;
-	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver+"repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName+"&userId="+ ECS.userId;
-	var url = ECS.hostName+ECS.connector+ command + "&currentPortal=" + ECS.portalName;
+	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver;
+	var url = ECS.hostName+ECS.connector+ command;
 	var xmlTreeNodes = eXo.ecm.WCMUtils.request(url);
 	var nodeList = xmlTreeNodes.getElementsByTagName("Folders");
 	for(var i = 0; i < nodeList.length; i++) {
@@ -368,7 +367,7 @@ EcmContentSelector.prototype.actionBreadcrumbs = function(nodeId) {
 	else filter = 'Web Contents';
 	if(currentFolder == null) currentFolder = '';
 	var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+currentFolder+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
-	var url = ECS.hostName + ECS.connector+command+"&userId=" + ECS.userId+"&filterBy="+filter;
+	var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter;
 	if(eXo.ecm.ECS.strConnection == url) return;	
 	eXo.ecm.ECS.strConnection = url;
 	var xmlDoc = eXo.ecm.WCMUtils.request(url);
