@@ -343,45 +343,12 @@
         <workflowEngine>jbpm</workflowEngine>
       </properties>
     </profile>
-    <profile>
-      <id>wkf</id>
-      <modules>
-        <module>exo-ecms-delivery-wkf-wcm-assembly</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>dms</id>
-      <modules>
-        <module>exo-ecms-delivery-dms-wcm-assembly</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>wcm</id>
-      <modules>
-        <module>exo-ecms-delivery-wcm-assembly</module>
-      </modules>
-    </profile>
   </profiles>
   <modules>
     <module>exo-ecms-core</module>
     <module>exo-ecms-apps</module>
     <module>exo-ecms-ext</module>
-    <module>exo-ecms-packaging-ecmdemo-config</module>
-    <module>exo-ecms-packaging-ecmdemo-ear</module>
-    <module>exo-ecms-packaging-ecmdemo-rest-webapp</module>
-    <module>exo-ecms-packaging-ecmdemo-webapp</module>
-    <module>exo-ecms-packaging-wcm-config</module>
-    <module>exo-ecms-packaging-wcm-ear</module>
-    <module>exo-ecms-packaging-wcm-webapp</module>
     <module>exo-ecms-delivery</module>
-    <module>exo-ecms-packaging-workflow-config</module>
-    <module>exo-ecms-packaging-workflow-ear</module>
-    <module>exo-ecms-packaging-workflow-webapp</module>
-    <module>workflow.packaging.module</module>
-    <module>workflow.packaging.product</module>
-    <module>dms.packaging.module</module>
-    <module>dms.packaging.product</module>
-    <module>wcm.packaging.module</module>
-    <module>wcm.packaging.product</module>
+    <module>exo-ecms-packaging</module>
   </modules>
 </project>

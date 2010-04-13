@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo.ecms</artifactId>
+    <version>2.0.0-CR01-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo-ecms-packaging</artifactId>
+  <packaging>pom</packaging>
+  <name>eXo ECM Suite :: Packaging</name>
+  <description>eXo Entreprise Content Management Suite :: Packaging</description>
+  <profiles>
+    <profile>
+      <id>wkf</id>
+      <modules>
+        <module>exo-ecms-delivery-wkf-wcm-assembly</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>dms</id>
+      <modules>
+        <module>exo-ecms-delivery-dms-wcm-assembly</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>wcm</id>
+      <modules>
+        <module>exo-ecms-delivery-wcm-assembly</module>
+      </modules>
+    </profile>
+  </profiles>
+  <modules>
+    <module>exo-ecms-packaging-ecmdemo-config</module>
+    <module>exo-ecms-packaging-ecmdemo-ear</module>
+    <module>exo-ecms-packaging-ecmdemo-rest-webapp</module>
+    <module>exo-ecms-packaging-ecmdemo-webapp</module>
+    <module>exo-ecms-packaging-wcm-config</module>
+    <module>exo-ecms-packaging-wcm-ear</module>
+    <module>exo-ecms-packaging-wcm-webapp</module>
+    <module>exo-ecms-packaging-workflow-config</module>
+    <module>exo-ecms-packaging-workflow-ear</module>
+    <module>exo-ecms-packaging-workflow-webapp</module>
+    <module>workflow.packaging.module</module>
+    <module>workflow.packaging.product</module>
+    <module>dms.packaging.module</module>
+    <module>dms.packaging.product</module>
+    <module>wcm.packaging.module</module>
+    <module>wcm.packaging.product</module>
+  </modules>
+</project>
