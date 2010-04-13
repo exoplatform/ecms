@@ -363,18 +363,13 @@
     </profile>
   </profiles>
   <modules>
-    <module>exo-ecms-core-services</module>
-    <module>exo-ecms-core-viewer</module>
-    <module>exo-ecms-core-publication</module>
-    <module>exo-ecms-core-connector</module>
+    <module>exo-ecms-core</module>
     <module>exo-ecms-apps-portlet-administration</module>
     <module>exo-ecms-apps-portlet-explorer</module>
     <module>exo-ecms-ext-deprecated-portlet-browsecontent</module>
     <module>exo-ecms-apps-gadget-publication</module>
     <module>exo-ecms-ext-deprecated-portlet-jcrconsole</module>
     <module>exo-ecms-apps-resources-dms</module>
-    <module>exo-ecms-core-webui</module>
-    <module>exo-ecms-core-ext</module>
     <module>exo-ecms-ext-workflow-bp-bonita-content</module>
     <module>exo-ecms-ext-workflow-bp-jbpm-content</module>
     <module>exo-ecms-ext-workflow-bp-bonita-content-config</module>
@@ -383,7 +378,6 @@
     <module>exo-ecms-ext-workflow-bp-content-webui</module>
     <module>exo-ecms-ext-workflow-bp-content-publication</module>
     <module>exo-ecms-ext-newsletter-services</module>
-    <module>exo-ecms-core-search</module>
     <module>exo-ecms-packaging-ecmdemo-config</module>
     <module>exo-ecms-packaging-ecmdemo-ear</module>
     <module>exo-ecms-packaging-ecmdemo-rest-webapp</module>

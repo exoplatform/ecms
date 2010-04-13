@@ -3,31 +3,47 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo.ecms</artifactId>
+    <artifactId>exo-ecms-core</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-connector</artifactId>
-  <packaging>jar</packaging>
-  <name>eXo DMS FCKEditor Connector</name>
-  <description>eXo FCKConnector Service</description>
+  <artifactId>exo-ecms-core-search</artifactId>
+  <name>eXo WCM Search Service</name>
   <dependencies>
+    <dependency>
+      <groupId>org.chromattic</groupId>
+      <artifactId>chromattic.core</artifactId>
+      <version>${chromattic.version}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>
       <artifactId>exo.kernel.container</artifactId>
       <version>${org.exoplatform.kernel.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.security.core</artifactId>
-      <version>${org.exoplatform.core.version}</version>
-      <scope>provided</scope>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.core</artifactId>
       <version>${org.exoplatform.jcr.version}</version>
-      <scope>provided</scope>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.web</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.portal</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.portal</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
@@ -36,18 +52,14 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.portal</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.web</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-services</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
+      <artifactId>exo-ecms-core-ext</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
@@ -57,12 +69,6 @@
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.webui.core</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
   <build>
     <resources>
@@ -70,13 +76,12 @@
         <directory>src/main/java</directory>
         <includes>
           <include>**/*.xml</include>
-          <include>**/*.properties</include>
-          <include>**/*.xsl</include>
-          <include>**/*.dtd</include>
         </includes>
       </resource>
-      <resource>
-        <directory>src/main/resources</directory>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
@@ -92,7 +97,26 @@
           <include>**/*.conf</include>
           <include>**/*.gtmpl</include>
         </includes>
-      </resource>
-    </resources>
+      </testResource>
+      <testResource>
+        <directory>src/test/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </testResource>
+    </testResources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/*$*</exclude>
+            <!--nested classes prb, http://jira.codehaus.org/browse/SUREFIRE-288-->
+            <exclude>**/BaseWCMTestCase</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

@@ -3,65 +3,37 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo.ecms</artifactId>
+    <artifactId>exo-ecms-core</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-core-search</artifactId>
-  <name>eXo WCM Search Service</name>
+  <artifactId>exo-ecms-core-webui</artifactId>
+  <name>eXo DMS webui component</name>
+  <description>eXo DMS webui extension</description>
   <dependencies>
     <dependency>
-      <groupId>org.chromattic</groupId>
-      <artifactId>chromattic.core</artifactId>
-      <version>${chromattic.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.kernel</groupId>
-      <artifactId>exo.kernel.container</artifactId>
-      <version>${org.exoplatform.kernel.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.jcr</groupId>
-      <artifactId>exo.jcr.component.core</artifactId>
-      <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.core</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.web</artifactId>
+      <artifactId>exo.portal.webui.eXo</artifactId>
       <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.portal</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.portal</artifactId>
       <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.jcr</groupId>
-      <artifactId>exo.jcr.component.ext</artifactId>
-      <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.portal</artifactId>
+      <version>${org.exoplatform.portal.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-services</artifactId>
       <version>${project.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-ext</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
@@ -69,6 +41,27 @@
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-connector</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.jcr</groupId>
+      <artifactId>exo.jcr.component.ext</artifactId>
+      <version>${org.exoplatform.jcr.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform</groupId>
+      <artifactId>exo-jcr-services</artifactId>
+      <version>${org.exoplatform.jcr-services.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-search</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
   </dependencies>
   <build>
     <resources>
@@ -78,10 +71,8 @@
           <include>**/*.xml</include>
         </includes>
       </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>src/test/resources</directory>
+      <resource>
+        <directory>src/main/resources</directory>
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
@@ -97,26 +88,7 @@
           <include>**/*.conf</include>
           <include>**/*.gtmpl</include>
         </includes>
-      </testResource>
-      <testResource>
-        <directory>src/test/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-      </testResource>
-    </testResources>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>**/*$*</exclude>
-            <!--nested classes prb, http://jira.codehaus.org/browse/SUREFIRE-288-->
-            <exclude>**/BaseWCMTestCase</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-    </plugins>
+      </resource>
+    </resources>
   </build>
 </project>
