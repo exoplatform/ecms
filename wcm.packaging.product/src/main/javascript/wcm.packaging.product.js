@@ -53,7 +53,6 @@ function getProduct(version) {
 	if(enableWorkflow) {
 		var workflow = Module.GetModule("workflow", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal});
 		product.addDependencies(workflow.web.eXoWorkflowResources);
-		product.addDependencies(workflow.portlet.workflow);
 	}
   product.addDependencies(wcm.demo.portal);
   product.addDependencies(wcm.demo.rest);

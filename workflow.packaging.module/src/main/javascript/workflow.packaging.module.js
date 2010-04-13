@@ -16,8 +16,10 @@ function getModule(params) {
   module.relativeMavenRepo =  "org/exoplatform/ecms";
   module.relativeSRCRepo =  "ecm/workflow";
   module.name =  "workflow";
-  module.portlet = {}
-  module.portlet.workflow = new Workflow("",module.version).getPortlet();
+  module.portlet = {};
+	
+	var workflow = new Workflow("",module.version, module.name);
+  module.portlet.workflow = workflow.getPortlet();
 
 	module.web = {}
   module.web.eXoWorkflowResources = 
