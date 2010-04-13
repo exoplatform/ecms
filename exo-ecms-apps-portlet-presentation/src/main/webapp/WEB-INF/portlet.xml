@@ -241,7 +241,7 @@
 			</preference>
 			<preference>
 				<name>basePath</name>
-				<value>products/presentation/pcv</value>
+				<value>detail</value>
 				<read-only>false</read-only>
 			</preference>
 		</portlet-preferences>
@@ -509,7 +509,7 @@
 			</preference>
 			<preference>
 				<name>targetPage</name>
-				<value>products/presentation/pcv</value>
+				<value>detail</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
