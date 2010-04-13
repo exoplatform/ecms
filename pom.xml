@@ -7,7 +7,7 @@
     <version>8</version>
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
-  <artifactId>exo.ecms</artifactId>
+  <artifactId>exo-ecms</artifactId>
   <version>2.0.0-CR01-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo ECM Suite</name>
