@@ -177,21 +177,30 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		String orderFilter = getOrderSQLFilter(filters);
 		String recursive = filters.get(FILTER_RECURSIVE);
 		String primaryType = filters.get(FILTER_PRIMARY_TYPE);
-		if (primaryType == null) {
-		  primaryType = "nt:base";
-		  Node currentFolder = session.getRootNode().getNode(path.substring(1));
-		  if (currentFolder.isNodeType("exo:taxonomy")) {
-        primaryType = "exo:taxonomyLink";
-      }
-		}
+		String queryFilter = filters.get(FILTER_QUERY);
+		String queryFilterFull = filters.get(FILTER_QUERY_FULL);
 		StringBuffer statement = new StringBuffer();
-
-		statement.append("SELECT * FROM " + primaryType + " WHERE (jcr:path LIKE '" + path + "/%'");
-		if (recursive==null) {
-			statement.append(" AND NOT jcr:path LIKE '" + path + "/%/%')");
+		if (queryFilterFull!=null) {
+			statement.append(queryFilterFull);
+		} else {
+			if (primaryType == null) {
+				primaryType = "nt:base";
+				Node currentFolder = session.getRootNode().getNode(path.substring(1));
+				if (currentFolder.isNodeType("exo:taxonomy")) {
+					primaryType = "exo:taxonomyLink";
+				}
+			}
+			
+			statement.append("SELECT * FROM " + primaryType + " WHERE (jcr:path LIKE '" + path + "/%'");
+			if (recursive==null) {
+				statement.append(" AND NOT jcr:path LIKE '" + path + "/%/%')");
+			}
+			statement.append(" AND " + getTemplatesSQLFilter(repository));
+			if (queryFilter!=null) {
+				statement.append(queryFilter);
+			}
+			statement.append(orderFilter);
 		}
-		statement.append(" AND " + getTemplatesSQLFilter(repository));
-		statement.append(orderFilter);
 		Query query = manager.createQuery(statement.toString(), Query.SQL);
 		return query.execute().getNodes();
 	}
