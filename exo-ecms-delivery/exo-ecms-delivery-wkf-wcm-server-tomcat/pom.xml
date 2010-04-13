@@ -3,16 +3,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo.ecms</artifactId>
+    <artifactId>exo-ecms-delivery</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-delivery-wkf-wcm-server-jboss</artifactId>
-  <name>eXo WORKFLOW JBoss Server</name>
-  <description>eXo WORKFLOW Jboss Server patch</description>
+  <artifactId>exo-ecms-delivery-wkf-wcm-server-tomcat</artifactId>
+  <name>eXo WORKFLOW Tomcat Server</name>
+  <description>eXo WORKFLOW Tomcat Server</description>
   <build>
     <resources>
       <resource>
-        <directory>src/main/jboss</directory>
+        <directory>src/main/tomcat</directory>
         <includes>
           <include>**/*</include>
         </includes>

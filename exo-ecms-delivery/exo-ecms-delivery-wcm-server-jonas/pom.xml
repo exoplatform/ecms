@@ -3,12 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo.ecms</artifactId>
+    <artifactId>exo-ecms-delivery</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-delivery-wkf-wcm-server-jonas</artifactId>
-  <name>eXo WORKFLOW JOnAS Server</name>
-  <description>eXo WORKFLOW JOnAS server patch</description>
+  <artifactId>exo-ecms-delivery-wcm-server-jonas</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo JOnAS Server</name>
+  <description>eXo JOnAS server patch</description>
+  <url>http://www.exoplatform.org</url>
   <build>
     <resources>
       <resource>

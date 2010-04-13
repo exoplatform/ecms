@@ -373,16 +373,10 @@
     <module>exo-ecms-packaging-wcm-config</module>
     <module>exo-ecms-packaging-wcm-ear</module>
     <module>exo-ecms-packaging-wcm-webapp</module>
-    <module>exo-ecms-delivery-wcm-server-jonas</module>
-    <module>exo-ecms-delivery-wcm-server-tomcat</module>
+    <module>exo-ecms-delivery</module>
     <module>exo-ecms-packaging-workflow-config</module>
     <module>exo-ecms-packaging-workflow-ear</module>
     <module>exo-ecms-packaging-workflow-webapp</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-bonita</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-jboss</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-jboss-ear</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-jonas</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-tomcat</module>
     <module>workflow.packaging.module</module>
     <module>workflow.packaging.product</module>
     <module>dms.packaging.module</module>

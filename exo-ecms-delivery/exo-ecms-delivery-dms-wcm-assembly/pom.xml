@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo.ecms</artifactId>
+    <artifactId>exo-ecms-delivery</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-delivery-wkf-wcm-assembly</artifactId>
+  <artifactId>exo-ecms-delivery-dms-wcm-assembly</artifactId>
   <packaging>pom</packaging>
-  <name>eXo WCM and WORKFLOW extension Assemblies</name>
+  <name>eXo DMS Assemblies</name>
   <properties>
     <gatein.working.dir>${basedir}/target</gatein.working.dir>
   </properties>
@@ -51,37 +51,15 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>workflow.packaging.module</artifactId>
-      <version>${project.version}</version>
-      <type>js</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>dms.packaging.module</artifactId>
       <version>${project.version}</version>
       <type>js</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>wcm.packaging.module</artifactId>
+      <artifactId>dms.packaging.product</artifactId>
       <version>${project.version}</version>
       <type>js</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>wcm.packaging.product</artifactId>
-      <version>${project.version}</version>
-      <type>js</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-delivery-wcm-server-tomcat</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-delivery-wcm-server-jonas</artifactId>
-      <version>${project.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -140,7 +118,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <build>
-        <finalName>eXoWCM-Workflow-${project.version}</finalName>
+        <finalName>eXoDMS-${project.version}</finalName>
         <plugins>
           <!-- Ensure your environment is correctly setup -->
           <plugin>
@@ -207,9 +185,8 @@
                     <argument>org.mozilla.javascript.tools.shell.Main</argument>
                     <argument>${basedir}/target/exopackage/javascript/eXo/eXo.js</argument>
                     <argument>exobuild</argument>
-                    <argument>--product=wcm</argument>
+                    <argument>--product=dms</argument>
                     <argument>--deploy=tomcat</argument>
-										<argument>--enable-workflow=${workflowEngine}</argument>
                   </arguments>
                 </configuration>
                 <goals>
@@ -224,7 +201,7 @@
     <profile>
       <id>pkg-jbossas</id>
       <build>
-        <finalName>eXoWCM-Workflow-${project.version}</finalName>
+        <finalName>eXoDMS-${project.version}</finalName>
         <plugins>
           <!-- Ensure your environment is correctly setup -->
           <plugin>
@@ -289,7 +266,7 @@
                     <argument>org.mozilla.javascript.tools.shell.Main</argument>
                     <argument>${basedir}/target/exopackage/javascript/eXo/eXo.js</argument>
                     <argument>exobuild</argument>
-                    <argument>--product=wcm</argument>
+                    <argument>--product=dms</argument>
                     <argument>--deploy=jbossear</argument>
                   </arguments>
                 </configuration>
