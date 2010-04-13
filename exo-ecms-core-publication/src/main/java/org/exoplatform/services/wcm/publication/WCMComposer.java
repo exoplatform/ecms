@@ -61,6 +61,15 @@ public interface WCMComposer {
 	/** Filter parameter to filter results by user. We will return only contents authored by this user. ex: */
 	public final static String FILTER_REMOTE_USER = "filter-remote-user";
 	
+	/** Filter parameter to filter results by language. We will return only contents in this language. ex: fr, en, de */
+	public final static String FILTER_LANGUAGE = "filter-language";
+	
+	/** Filter parameter to add a parameter in the executed query. ex: "AND exo:myproperty like 'cat1%'"*/
+	public final static String FILTER_QUERY = "filter-query";
+	
+	/** Filter parameter to execute a specific query. ex: "SELECT * from nt:base"*/
+	public final static String FILTER_QUERY_FULL = "filter-query-full";
+	
 	/** The Constant MODE_EDIT. */
 	public final static String MODE_EDIT = "Edit";
 	
