@@ -364,12 +364,9 @@
   </profiles>
   <modules>
     <module>exo-ecms-core</module>
-    <module>exo-ecms-apps-portlet-administration</module>
-    <module>exo-ecms-apps-portlet-explorer</module>
+    <module>exo-ecms-apps</module>
     <module>exo-ecms-ext-deprecated-portlet-browsecontent</module>
-    <module>exo-ecms-apps-gadget-publication</module>
     <module>exo-ecms-ext-deprecated-portlet-jcrconsole</module>
-    <module>exo-ecms-apps-resources-dms</module>
     <module>exo-ecms-ext-workflow-bp-bonita-content</module>
     <module>exo-ecms-ext-workflow-bp-jbpm-content</module>
     <module>exo-ecms-ext-workflow-bp-bonita-content-config</module>
@@ -387,11 +384,8 @@
     <module>exo-ecms-packaging-wcm-webapp</module>
     <module>exo-ecms-ext-formgenerator-portlet</module>
     <module>exo-ecms-ext-newsletter-portlet</module>
-    <module>exo-ecms-apps-portlet-presentation</module>
-    <module>exo-ecms-apps-portlet-search</module>
     <module>exo-ecms-delivery-wcm-server-jonas</module>
     <module>exo-ecms-delivery-wcm-server-tomcat</module>
-    <module>exo-ecms-apps-resources-wcm</module>
     <module>exo-ecms-ext-workflow-bp-bonita-holiday</module>
     <module>exo-ecms-ext-workflow-bp-bonita-payraise</module>
     <module>exo-ecms-ext-workflow-bp-jbpm-holiday</module>
