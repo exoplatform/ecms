@@ -307,14 +307,6 @@
     </title>
   </UINewsletterEntryViewForm>
 
-  <WebContent>
-    <dialog>
-      <label>
-        <Advanced>Advanced</Advanced>
-      </label>
-    </dialog>
-  </WebContent>
-
   <UIRemoveModeratorsFormPopupWindow>
     <title>
       <UIRemoveModerators>Retirer Modérateurs</UIRemoveModerators>
