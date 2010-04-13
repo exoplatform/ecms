@@ -38,9 +38,12 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.commons.utils.ISO8601;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.impl.core.value.DateValue;
 import org.exoplatform.services.jcr.impl.core.value.StringValue;
 
@@ -989,7 +992,14 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
    * {@inheritDoc}
    */
   public Node getLanguage(Node node, String language) throws Exception {
-    if(node.hasNode(LANGUAGES + "/"+ language)) return node.getNode(LANGUAGES + "/"+ language) ;
+    if(node.hasNode(LANGUAGES + "/"+ language)) {
+    	Node target = node.getNode(LANGUAGES + "/"+ language) ;
+    	if (target.isNodeType("exo:symlink")) {
+    		LinkManager linkManager = (LinkManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LinkManager.class);
+    		target = linkManager.getTarget(target);
+    	}
+    	return target;
+    }
     return null;
   }
 
