@@ -106,13 +106,10 @@ public class UIPCLVContainer extends UIContainer {
 //    if (requestURI.endsWith(selectedPage)) return null;
 //    String[] param = requestURI.split("/");
 //    String header = param[param.length - 1];
-	  String header=null;
+	categoryPath = URLDecoder.decode(categoryPath, "UTF-8");
+	String header=null;
 	if (categoryPath!=null && !"".equals(categoryPath))
-	  header = categoryPath.substring(categoryPath.lastIndexOf("/")+1);
-	else 
-		return null;
-
-    header = header.replaceAll("%20", " ");
+	  header = categoryPath.substring(categoryPath.lastIndexOf("/") + 1);
     return header;
   }
   
