@@ -573,3 +573,10 @@
 .UISingleContentViewerPortlet .UIPopupWindow .UITabPane {
 	padding: 8px;
 }
+
+.SelectIcon {
+  background: url('background/SelectIcon.gif') repeat scroll 0 0 transparent;
+  height: 16px;
+  width: 16px;
+  margin: auto;
+}
