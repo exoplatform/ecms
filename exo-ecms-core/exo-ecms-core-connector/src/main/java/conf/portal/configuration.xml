@@ -14,6 +14,9 @@
   </component>
   
   <component>
+    <type>org.exoplatform.ecm.connector.MigrationConnector</type>
+  </component>
+  <component>
     <type>org.exoplatform.wcm.connector.collaboration.VoteConnector</type>
   </component>
   <component>
