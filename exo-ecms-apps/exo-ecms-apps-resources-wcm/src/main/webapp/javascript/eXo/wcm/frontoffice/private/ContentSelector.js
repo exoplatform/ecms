@@ -756,6 +756,12 @@ EcmContentSelector.prototype.changeFilter = function() {
 	}
 	
 	if(eXo.ecm.ECS.currentNode)	 eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
+	
+	var filter = document.getElementById('Filter');
+	var action = filter.getAttribute("action");
+	action = action.substring(0, action.length - 2);
+	action += '&objectId=' + filter.options[filter.selectedIndex].value + '\')';
+	eval(action);
 };
 
 EcmContentSelector.prototype.generateIdDriver = function(objNode) {

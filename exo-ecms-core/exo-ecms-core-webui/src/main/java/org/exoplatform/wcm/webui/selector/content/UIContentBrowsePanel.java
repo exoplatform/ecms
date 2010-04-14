@@ -40,13 +40,13 @@ import org.exoplatform.webui.event.EventListener;
   
 public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector {
   
-  public static final String WEBCONTENT = "WebContent";
+  public static final String WEBCONTENT = "Web Contents";
   
-  public static final String DMSDOCUMENT = "DMSDocument";
+  public static final String DMSDOCUMENT = "DMS Documents";
   
-  public static final String MEDIA = "Media";
+  public static final String MEDIA = "Medias";
   
-  private String contentType;
+  private String contentType = WEBCONTENT;
   
   public String getContentType() {
 	return contentType;
@@ -62,6 +62,7 @@ public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector {
 	public void execute(Event<UIContentBrowsePanel> event) throws Exception {
 		UIContentBrowsePanel contentBrowsePanel = event.getSource();
 		contentBrowsePanel.contentType = event.getRequestContext().getRequestParameter(OBJECTID);
+		event.getRequestContext().addUIComponentToUpdateByAjax(contentBrowsePanel.getAncestorOfType(UIContentSelector.class).getChild(UIContentSearchForm.class));
 	}
   }
 }

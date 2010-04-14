@@ -11,7 +11,7 @@
 	<div class="ActionBar">
 		<div class="FilterTitle">Filter</div>
 		<div class="FilterInput">
-			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter">
+			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter" action="<%= uicomponent.event("ChangeContentType") %>">
 				<option selected="selected" value="Web Contents">Web Contents</option>
 				<option value="DMS Documents">DMS Documents</option>
 				<option value="Medias">Medias</option>
