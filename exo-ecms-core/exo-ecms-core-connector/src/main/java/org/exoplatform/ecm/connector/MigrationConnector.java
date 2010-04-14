@@ -27,7 +27,7 @@ public class MigrationConnector implements ResourceContainer {
 			Document document =
 				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			Element element = document.createElement("ecm");
-			element.setAttribute("version", ProductVersions.WCM_2_0_0);
+			element.setAttribute("version", ProductVersions.getCurrentVersion());
 			document.appendChild(element);
 			Element drives = document.createElement("drives");
 			element.appendChild(drives);
