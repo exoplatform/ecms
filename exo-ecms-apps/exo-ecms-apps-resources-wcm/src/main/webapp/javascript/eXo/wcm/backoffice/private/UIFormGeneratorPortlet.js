@@ -19,7 +19,7 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 	var fieldComponent 	= "";
 	var advancedOption 	= "";
 	var multivalue 		= false;
-	
+
 //============================================ Begin of render component ===============================================	
 
 	switch(typeComp){
@@ -35,9 +35,10 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 			fieldComponent  +=		"<td class='FieldLabel' value='Textarea'>Textarea field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><textarea class='Textarea'>Textarea value</textarea></td>";
 			break;			
-		case "wysiwyg"		: 
+		case "wysiwyg"		:
+			if(!eXo.ecm.UIFormGeneratorPortlet.countFCK) eXo.ecm.UIFormGeneratorPortlet.countFCK = 1;
 			fieldComponent  +=		"<td class='FieldLabel' value='WYSIWYG'>WYSIWYG field</td>";
-			fieldComponent  +=		"<td class='FieldComponent'><textarea class='Textarea' id='RichTextEditorContent'>WYSIWYG value</textarea></td>";
+			fieldComponent  +=		"<td class='FieldComponent'><textarea class='Textarea' id='RichTextEditorContent_"+eXo.ecm.UIFormGeneratorPortlet.countFCK+"'>WYSIWYG value</textarea></td>";
 
 			advancedOption  +=	"<tr>";
 			advancedOption  +=		"<td class='FieldLabel'>Advance Options</td>";
@@ -45,14 +46,11 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 			advancedOption  += 			"Toolbar: <select class='SelectBox'><option>SuperBasicWCM</option><option>BasicWCM</option><option>CompleteWCM</option><option>Basic</option></select>";
 			advancedOption  +=		"</td>";
 			advancedOption  +=	"</tr>";
-
 			break;			
 		case "select"		: 
 			fieldComponent  +=		"<td class='FieldLabel' value='Select'>Select field</td>";
 			fieldComponent  +=		"<td class='FieldComponent'><select class='SelectBox'><option index='1' value='option1'>Option 1</option></select></td>";
-			
 			multivalue		= true;
-			
 			break;			
 		case "checkbox"	: 
 			fieldComponent  +=		"<td class='FieldLabel' value='Checkbox'>Checkbox field</td>";
@@ -167,7 +165,8 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 	document.getElementById('MiddleCenterViewBoxStyle').appendChild(node);
 
 	if(typeComp == 'wysiwyg' && !FCKeditorAPI.GetInstance('RichTextEditorContent')) {
-		var oFCKEditor = new FCKeditor('RichTextEditorContent');
+		var oFCKEditor = new FCKeditor('RichTextEditorContent_'+eXo.ecm.UIFormGeneratorPortlet.countFCK);
+		eXo.ecm.UIFormGeneratorPortlet.countFCK++;
 		oFCKEditor.BasePath = '/ecm-wcm-extension/fckeditor/';
 		oFCKEditor.ToolbarSet = 'SuperBasicWCM';
 		oFCKEditor.ReplaceTextarea();
