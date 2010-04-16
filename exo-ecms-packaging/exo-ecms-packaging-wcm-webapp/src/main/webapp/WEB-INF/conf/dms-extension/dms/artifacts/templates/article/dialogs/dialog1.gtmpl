@@ -3,25 +3,36 @@
 	<% uiform.begin() %>
   <div class="HorizontalLayout">	  
    <table class="UIFormGrid">
+      <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.title")%></td>
+        <td class="FieldComponent">
+        <%
+          String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
+          uicomponent.addTextField("title", fieldTitle) ;
+        %>
+        </td>
+      </tr>  
+
 			<tr>
 			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.name")%></td>
 			  <td class="FieldComponent">
 			  <%
-	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null", "validate=empty,name"] ;
+	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,mix:versionable", "editable=if-null", "validate=empty,name"] ;
 	        uicomponent.addTextField("name", fieldName) ; 
       	%>	      
         </td>
 			</tr>
 			
-			<tr>
-			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.title")%></td>
-			  <td class="FieldComponent">
-				<%
-	        String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
-	        uicomponent.addTextField("title", fieldTitle) ;
-	      %>
-				</td>
-			</tr>  
+      <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+        <td class="FieldComponent">
+        <%
+          String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
+          String[] fieldLang = ["jcrPath=/node/exo:language", "options=en,fr,de", lang] ;
+          uicomponent.addSelectBoxField("lang", fieldLang) ;
+        %>
+        </td>
+      </tr>  
 			
 			<tr>
 			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.summary")%></td>
@@ -53,3 +64,17 @@
   </div>
   <%uiform.end()%>
 </div>
+<script>
+function cleanName(title) {
+  nameField = document.getElementById("name");
+  if (!nameField.readOnly) {
+    var portalContext = eXo.env.portal.context;
+    var portalRest = eXo.env.portal.rest
+    var retText = ajaxAsyncGetRequest(portalContext+"/"+portalRest+"/l11n/cleanName?name="+title, false);
+    nameField.value = retText;
+  }
+}
+titleField = document.getElementById("title");
+titleField.onchange = function() { cleanName(this.value); } ;
+
+</script>

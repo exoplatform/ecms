@@ -24,27 +24,6 @@
 				<div class="ArticleTRDecorator">
 					<div class="ArticleTCDecorator">
 		        <div class="TitleLabel"><%=node.getProperty("exo:title").getString()%></div>
-		        <%
-								def locals = uicomponent.getSupportedLocalise() ;
-								if(locals.size() > 0) {
-									println "<div class=\"Language\">" ;
-						%>
-									<%=_ctx.appRes("Article.view.label.languages")%>&nbsp;
-						<%
-									def actionChangeLang ;
-									def i = 0;
-									for(local in locals) {
-									  def title = "LanguageTitle" ;
-									  i = i + 1 ;
-									  actionChangeLang = uicomponent.event("ChangeLanguage", local) ;
-										if(i == 1) title = "DefaultLanguageTitle" ;
-										println "<a href=\"$actionChangeLang\" class=\"$title\">" ;
-										println  _ctx.appRes("View.label.languages." + local);
-										println "&nbsp;&nbsp;</a>" ;
-									}
-									println "</div>" ;
-								}	
-						%>
 	        </div>
 				</div>
 			</div>
