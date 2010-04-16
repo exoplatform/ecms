@@ -111,7 +111,7 @@
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Date created -->
-        <div class="ColumnDatetime Column" style="width: 123px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Datetime")%>">
+        <div class="ColumnDatetime Column" style="width: 123px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
           <%
             if (selectedSortType.equals("Datetime")) {
               %>
@@ -124,7 +124,7 @@
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Author --> 
-        <div class="ColumnAuthor Column" style="width: 123px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Author")%>">
+        <div class="ColumnAuthor Column" style="width: 123px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:owner")%>">
           <%
             if (selectedSortType.equals("Author")) {
               %>
@@ -137,7 +137,7 @@
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Status -->
-        <div class="ColumnStatus Column" style="width: 123px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Status")%>">
+        <div class="ColumnStatus Column" style="width: 123px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
           <%
             if (selectedSortType.equals("Status")) {
               %>
