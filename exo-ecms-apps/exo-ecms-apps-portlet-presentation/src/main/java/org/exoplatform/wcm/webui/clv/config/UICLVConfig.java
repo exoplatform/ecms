@@ -232,7 +232,7 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
     linkManager = WCMCoreUtils.getService(LinkManager.class);
     PortletRequestContext context = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPreferences = context.getRequest().getPreferences();
-    String folderPath = portletPreferences.getValue(UICLVPortlet.FOLDER_PATH, UICLVPortlet.FOLDER_PATH);
+    String folderPath = portletPreferences.getValue(UICLVPortlet.FOLDER_PATH, null);    
     UIFormStringInput headerInput = new UIFormStringInput(HEADER, HEADER, null);
     String headerValue = portletPreferences.getValue(UICLVPortlet.HEADER, null);
     headerInput.setValue(headerValue);
@@ -264,9 +264,17 @@ public class UICLVConfig extends UIForm  implements UISelectable, UISourceGridUp
     orderBySelectBox.setValue(orderByPref); 
     
     UIFormInputSetWithAction folderPathInputSet = new UIFormInputSetWithAction(FOLDER_PATH_INPUTSET);
-    UIFormStringInput folderPathInput = new UIFormStringInput(FOLDER_PATH_INPUT, FOLDER_PATH_INPUT, folderPath);
+    UIFormStringInput folderPathInput =  null;
+    try{
+    	NodeLocation.getNodeByExpression(folderPath);
+    	folderPathInput = new UIFormStringInput(FOLDER_PATH_INPUT, FOLDER_PATH_INPUT, folderPath);            	
+    } catch(Exception e){
+    	folderPathInput = new UIFormStringInput(FOLDER_PATH_INPUT, FOLDER_PATH_INPUT, null);
+    }
+    
     folderPathInput.setEditable(false);
-    folderPathInput.setValue(folderPath);
+        
+               
     
     folderPathInputSet.setActionInfo(FOLDER_PATH_INPUT, new String[] { "SelectFolderPath" }) ;
     folderPathInputSet.addUIFormInput(folderPathInput);
