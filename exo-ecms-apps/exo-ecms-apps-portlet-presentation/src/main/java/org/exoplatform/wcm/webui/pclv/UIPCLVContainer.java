@@ -304,6 +304,7 @@ public class UIPCLVContainer extends UIContainer {
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
+    filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
     List<Node> nodes = wcmComposer.getContents(repository, workspace, categoryPath, filters, Utils.getSessionProvider());
 		return nodes;
 	}

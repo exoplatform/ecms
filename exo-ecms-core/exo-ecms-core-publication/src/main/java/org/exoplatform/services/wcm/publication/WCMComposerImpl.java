@@ -20,6 +20,7 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -31,6 +32,8 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.resources.LocaleConfig;
+import org.exoplatform.services.resources.LocaleConfigService;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
@@ -55,6 +58,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	private TemplateService templateService;
 	
 	private WCMService wcmService;
+	
+	private MultiLanguageService multiLanguageService;
 	
 	/** The cache. */
 	private ExoCache<String, Object> cache;
@@ -87,8 +92,10 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		publicationService = WCMCoreUtils.getService(PublicationService.class);
 		templateService = WCMCoreUtils.getService(TemplateService.class);
 		wcmService = WCMCoreUtils.getService(WCMService.class);
+		multiLanguageService = WCMCoreUtils.getService(MultiLanguageService.class);
 		cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.composer");
 //		cache.setLiveTime(60);
+		
 	}
 	
 	/* (non-Javadoc)
@@ -97,6 +104,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	public Node getContent(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception {
 		String mode = filters.get(FILTER_MODE); 
   		String version = filters.get(FILTER_VERSION);
+  		String language = filters.get(FILTER_LANGUAGE);
   		String remoteUser = null;
   		try {
   			remoteUser = Util.getPortalRequestContext().getRemoteUser();
@@ -114,7 +122,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		  if (nodeIdentifier.lastIndexOf("/") == 0) nodeIdentifier = nodeIdentifier.substring(1); 
 		}
 		if (MODE_LIVE.equals(mode) && isCached) {
-			String hash = getHash(nodeIdentifier, version, remoteUser);
+			String hash = getHash(nodeIdentifier, version, remoteUser, language);
 			Node cachedNode = (Node)cache.get(hash);
 			if (cachedNode != null) return cachedNode;
 		}
@@ -128,7 +136,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 			node = getViewableContent(node, filters);
 		}
 		if (MODE_LIVE.equals(mode) && isCached) {
-			String hash = getHash(nodeIdentifier, version, remoteUser);
+			String hash = getHash(nodeIdentifier, version, remoteUser, language);
 			cache.remove(hash);
 			cache.put(hash, node);
 		}
@@ -139,13 +147,14 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	public List<Node> getContents(String repository, String workspace, String path, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception {
 		String mode = filters.get(FILTER_MODE);
 		String version = filters.get(FILTER_VERSION);
+  		String language = filters.get(FILTER_LANGUAGE);
   		String remoteUser = null;
   		try {
   			remoteUser = Util.getPortalRequestContext().getRemoteUser();
   		} catch (Exception e) {}
 
 		if (MODE_LIVE.equals(mode) && isCached) {
-			String hash = getHash(path, version, remoteUser);
+			String hash = getHash(path, version, remoteUser, language);
 			List<Node> cachedNodes = (List<Node>)cache.get(hash);
 			if (cachedNodes != null) return cachedNodes;
 		}
@@ -160,7 +169,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 			}
 		}
 		if (MODE_LIVE.equals(mode) && isCached) {
-			String hash = getHash(path, version, remoteUser);
+			String hash = getHash(path, version, remoteUser, language);
 			cache.remove(hash);
 			cache.put(hash, nodes);
 		}
@@ -221,6 +230,14 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	     }catch(AccessDeniedException ade) {
 	     return null;
 	   }
+	   String languageFilter = filters.get(FILTER_LANGUAGE);
+	   if (languageFilter!=null) {
+		   Node lnode = multiLanguageService.getLanguage(node, languageFilter);
+		   if (lnode!=null) {
+			   node = lnode;
+		   }
+	   }
+
 		HashMap<String, Object> context = new HashMap<String, Object>();
 		String mode = filters.get(FILTER_MODE);
 		context.put(WCMComposer.FILTER_MODE, mode);
@@ -260,41 +277,49 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 				 * END quick fix
 				 */
 				Node node = wcmService.getReferencedContent(sessionProvider, repository, workspace, path);
-				if (node!=null) oid = node.getUUID();
+				if (node!=null) {
+					oid = node.getUUID();
+					/* remove parent cache */
+					updateContents(repository, workspace, part, filters);
+					TaxonomyService taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
+					for (Node catnode : taxonomyService.getAllCategories(node)) {
+						updateContents(repository, catnode.getSession().getWorkspace().getName(), catnode.getPath(), filters);
+					}
+					
+				}
 			} catch (RepositoryException e) {
 				if (log.isInfoEnabled()) log.info("Can't find UUID for path : "+workspace+":"+path);
 			}
-	  		
-			/* remove live cache */
-			String hash = getHash(path, null);
-			cache.remove(hash);
-			/* remove base content cache */
-			hash = getHash(path, BASE_VERSION);
-			cache.remove(hash);
-			/* remove parent cache */
-			hash = getHash(part, null);
-			cache.remove(hash);
-			if (oid!=null) {
-				/* remove live cache */
-				hash = getHash(oid, null);
-				cache.remove(hash);
-			}
-			if (remoteUser!=null) {
-				/* remove live cache for current user */
-				hash = getHash(path, null, remoteUser);
-				cache.remove(hash);
-				/* remove base content cache for current user */
-				hash = getHash(path, BASE_VERSION, remoteUser);
-				cache.remove(hash);
-				/* remove parent cache for current user */
-				hash = getHash(part, null, remoteUser);
-				cache.remove(hash);
-				if (oid!=null) {
-					/* remove live cache */
-					hash = getHash(oid, null, remoteUser);
-					cache.remove(hash);
-				}
-			}
+
+	  		LocaleConfigService localeService = WCMCoreUtils.getService(LocaleConfigService.class);
+	  		for (LocaleConfig localeConfig : localeService.getLocalConfigs()) {
+	  	         String lang = localeConfig.getLanguage();
+	 			/* remove live cache */
+	 			String hash = getHash(path, null, null, lang);
+	 			cache.remove(hash);
+	 			/* remove base content cache */
+	 			hash = getHash(path, BASE_VERSION, null, lang);
+	 			cache.remove(hash);
+	 			if (oid!=null) {
+	 				/* remove live cache */
+	 				hash = getHash(oid, null, null, lang);
+	 				cache.remove(hash);
+	 			}
+	 			if (remoteUser!=null) {
+	 				/* remove live cache for current user */
+	 				hash = getHash(path, null, remoteUser, lang);
+	 				cache.remove(hash);
+	 				/* remove base content cache for current user */
+	 				hash = getHash(path, BASE_VERSION, remoteUser, lang);
+	 				cache.remove(hash);
+	 				if (oid!=null) {
+	 					/* remove live cache */
+	 					hash = getHash(oid, null, remoteUser, lang);
+	 					cache.remove(hash);
+	 				}
+	 			}
+	  		}
+
 		}
 		return true;
 	}
@@ -310,16 +335,24 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	  		} catch (Exception e) {}
 
 	  		if (log.isInfoEnabled()) log.info("updateContents : "+path);
-			String hash = getHash(path, null);
-			cache.remove(hash);
-			hash = getHash(path, BASE_VERSION);
-			cache.remove(hash);
-			if (remoteUser!=null) {
-				hash = getHash(path, null, remoteUser);
-				cache.remove(hash);
-				hash = getHash(path, BASE_VERSION, remoteUser);
-				cache.remove(hash);
-			}
+	  		
+	  		LocaleConfigService localeService = WCMCoreUtils.getService(LocaleConfigService.class);
+	  		for (LocaleConfig localeConfig : localeService.getLocalConfigs()) {
+	  	         String lang = localeConfig.getLanguage();
+
+	  	         String hash = getHash(path, null, null, lang);
+	  	         cache.remove(hash);
+	  	         hash = getHash(path, BASE_VERSION, null, lang);
+	  	         cache.remove(hash);
+	  	         if (remoteUser!=null) {
+	  	        	 hash = getHash(path, null, remoteUser, lang);
+	  	        	 cache.remove(hash);
+	  	        	 hash = getHash(path, BASE_VERSION, remoteUser, lang);
+	  	        	 cache.remove(hash);
+	  	         }
+	  	         
+	        }
+	  		
 		}
 		return true;
 	}
@@ -430,15 +463,16 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		}
 	}
 
-	  private String getHash(String path, String version, String remoteUser) throws Exception {
+	  private String getHash(String path, String version, String remoteUser, String language) throws Exception {
 		  String key = path;
 		  if (version!=null) key += "::"+version;
 		  if (remoteUser!=null) key += ";;"+remoteUser;
+		  if (language!=null) key += ";;"+language;
 		  return MessageDigester.getHash(key);
 	  }
 	  
-	  private String getHash(String path, String version) throws Exception {
-		  return getHash(path, version, null);
-	  }
+//	  private String getHash(String path, String version) throws Exception {
+//		  return getHash(path, version, null, null);
+//	  }
 
 }

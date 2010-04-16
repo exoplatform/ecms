@@ -195,6 +195,7 @@ public class Utils {
 	public static Node getViewableNodeByComposer(String repository, String workspace, String nodeIdentifier, String version) {
 		try {
 			HashMap<String, String> filters = new HashMap<String, String>();
+		    filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
 			filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
 			if (version != null) filters.put(WCMComposer.FILTER_VERSION, version);
 			return getService(WCMComposer.class).getContent(repository, workspace, nodeIdentifier, filters, getSessionProvider());
