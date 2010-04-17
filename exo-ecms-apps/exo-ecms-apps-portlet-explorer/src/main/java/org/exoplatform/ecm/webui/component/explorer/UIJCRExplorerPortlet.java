@@ -30,8 +30,10 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
+import javax.portlet.RenderResponse;
 
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.utils.text.Text;
@@ -61,6 +63,7 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
+import org.w3c.dom.Element;
 
 @ComponentConfig(
     lifecycle = UIApplicationLifecycle.class
@@ -146,6 +149,13 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       explorerContainer.setRendered(false);
       getChild(UIJcrExplorerEditContainer.class).setRendered(true);
     }
+    
+    RenderResponse response = context.getResponse();
+    Element elementS = response.createElement("script");
+    elementS.setAttribute("type", "text/javascript");
+    elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/backoffice/public/Components.js");
+    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS); 
+    
     super.processRender(app, context);
   }
 

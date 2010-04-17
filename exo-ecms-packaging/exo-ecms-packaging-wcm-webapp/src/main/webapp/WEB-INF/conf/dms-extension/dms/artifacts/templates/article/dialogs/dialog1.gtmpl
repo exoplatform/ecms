@@ -20,6 +20,10 @@
 	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,mix:versionable", "editable=if-null", "validate=empty,name"] ;
 	        uicomponent.addTextField("name", fieldName) ; 
       	%>	      
+          <script>
+          titleField = document.getElementById("title");
+          titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
+          </script>
         </td>
 			</tr>
 			
@@ -64,17 +68,3 @@
   </div>
   <%uiform.end()%>
 </div>
-<script>
-function cleanName(title) {
-  nameField = document.getElementById("name");
-  if (!nameField.readOnly) {
-    var portalContext = eXo.env.portal.context;
-    var portalRest = eXo.env.portal.rest
-    var retText = ajaxAsyncGetRequest(portalContext+"/"+portalRest+"/l11n/cleanName?name="+title, false);
-    nameField.value = retText;
-  }
-}
-titleField = document.getElementById("title");
-titleField.onchange = function() { cleanName(this.value); } ;
-
-</script>
