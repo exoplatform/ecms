@@ -345,10 +345,10 @@
     </profile>
   </profiles>
   <modules>
-    <module>exo-ecms-core</module>
-    <module>exo-ecms-apps</module>
-    <module>exo-ecms-ext</module>
-    <module>exo-ecms-delivery</module>
-    <module>exo-ecms-packaging</module>
+    <module>core</module>
+    <module>apps</module>
+    <module>ext</module>
+    <module>delivery</module>
+    <module>packaging</module>
   </modules>
 </project>
