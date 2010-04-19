@@ -674,12 +674,12 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
           ActionPlugin actionService = getActionPlugin(actionServiceName);
           if (actionService.isActionTypeSupported(actionType)) {
             if (DMSEvent.getEventTypes(lifecyclePhase) == DMSEvent.READ)
-              return;
+              continue;
             if ((DMSEvent.getEventTypes(lifecyclePhase) & DMSEvent.SCHEDULE) > 0) {
               actionService.reScheduleActivations(actionNode, repository);
             }
             if (DMSEvent.getEventTypes(lifecyclePhase) == DMSEvent.SCHEDULE)
-              return;
+            	continue;
               actionService.initiateActionObservation(actionNode, repository);
           }
         }

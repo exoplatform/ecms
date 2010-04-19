@@ -439,17 +439,17 @@ abstract public class BaseActionPlugin implements ActionPlugin {
         for (Iterator iterator = keys.iterator(); iterator.hasNext();) {
           String key = (String) iterator.next();
           for(PropertyDefinition pro : nodeType.getPropertyDefinitions()) {
-        	  if (pro.getName().equals(key)) {
-        		  if (pro.isMultiple()) {
-    			  	value = props.get(key);
-    	            if (value != null) {
-    	              actionNode.setProperty(key, value.split(";"));
-    	            }		  
-        		  } else {
-        			  actionNode.setProperty(key, props.get(key));
-        		  }
-        		  break;
-        	  }
+          	if (pro.getName().equals(key)) {
+          		if (pro.isMultiple()) {
+  	        		value = props.get(key);
+  	                if (value != null) {
+  	                  actionNode.setProperty(key, value.split(","));
+  	                }	
+                  } else {
+              		actionNode.setProperty(key, props.get(key));
+              	}
+          		break;
+          	}
           }
         }
       }

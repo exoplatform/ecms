@@ -170,9 +170,9 @@ public class ActionConfig {
     private String srcWorkspace;
     private String srcPath;
     private boolean isDeep = true;
-    private List<String> uuid = new ArrayList<String>();
-    private List<String> nodeTypeName = new ArrayList<String>();
-    private List<String> lifecyclePhase = new ArrayList<String>();
+    private List<String> uuid;
+    private List<String> nodeTypeName;
+    private List<String> lifecyclePhase;
     private String roles;
     private String variables;
     private List<String> affectedNodeTypes;
