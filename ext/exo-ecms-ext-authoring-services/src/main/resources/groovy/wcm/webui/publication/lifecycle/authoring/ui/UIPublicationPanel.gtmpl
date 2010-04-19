@@ -248,8 +248,8 @@
   	<legend class="Legend"><%=_ctx.appRes("UIPublicationPanel.scheduled.title")%></legend>
   	<table class="">
   		<tr>
-  			<td><%=_ctx.appRes("UIPublicationPanel.scheduled.from")%>&nbsp;<% uicomponent.renderChild(UIPublicationPanel.START_PUBLICATION); %></td>
-  			<td><%=_ctx.appRes("UIPublicationPanel.scheduled.to")%>&nbsp;<% uicomponent.renderChild(UIPublicationPanel.END_PUBLICATION); %></td>
+  			<td><%=_ctx.appRes("UIPublicationPanel.scheduled.from")%>&nbsp;<% uicomponent.renderChild(uicomponent.START_PUBLICATION); %></td>
+  			<td><%=_ctx.appRes("UIPublicationPanel.scheduled.to")%>&nbsp;<% uicomponent.renderChild(uicomponent.END_PUBLICATION); %></td>
   		</tr>
   	</table>
   </fieldset>
