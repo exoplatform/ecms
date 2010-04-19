@@ -11,12 +11,12 @@
   <name>eXo ECM Suite :: Core</name>
   <description>eXo Entreprise Content Management Suite :: Core Components</description>
   <modules>
-    <module>exo-ecms-core-services</module>
-    <module>exo-ecms-core-viewer</module>
-    <module>exo-ecms-core-publication</module>
-    <module>exo-ecms-core-connector</module>
-    <module>exo-ecms-core-webui</module>
-    <module>exo-ecms-core-ext</module>
-    <module>exo-ecms-core-search</module>
+    <module>services</module>
+    <module>viewer</module>
+    <module>publication</module>
+    <module>connector</module>
+    <module>webui</module>
+    <module>ext</module>
+    <module>search</module>
   </modules>
 </project>
