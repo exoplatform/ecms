@@ -11,15 +11,8 @@
   <name>eXo ECM Suite :: Packaging</name>
   <description>eXo Entreprise Content Management Suite :: Packaging</description>
   <modules>
-    <module>ecmdemo-config</module>
-    <module>ecmdemo-ear</module>
-    <module>ecmdemo-rest-webapp</module>
-    <module>ecmdemo-webapp</module>
-    <module>wcm-config</module>
-    <module>wcm-ear</module>
-    <module>wcm-webapp</module>
-    <module>workflow-config</module>
-    <module>workflow-ear</module>
-    <module>workflow-webapp</module>
+    <module>ecmdemo</module>
+    <module>wcm</module>
+    <module>workflow</module>
   </modules>
 </project>

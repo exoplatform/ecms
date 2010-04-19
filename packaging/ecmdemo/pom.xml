@@ -11,9 +11,9 @@
   <name>eXo ECM Suite :: Packaging :: ECM Demo</name>
   <description>eXo Entreprise Content Management Suite :: Packaging :: ECM Demo</description>
   <modules>
-    <module>ecmdemo-config</module>
-    <module>ecmdemo-ear</module>
-    <module>ecmdemo-rest-webapp</module>
-    <module>ecmdemo-webapp</module>
+    <module>config</module>
+    <module>ear</module>
+    <module>rest-webapp</module>
+    <module>webapp</module>
   </modules>
 </project>

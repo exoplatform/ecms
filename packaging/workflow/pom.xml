@@ -11,8 +11,8 @@
   <name>eXo ECM Suite :: Packaging :: Workflow</name>
   <description>eXo Entreprise Content Management Suite :: Packaging :: Workflow</description>
   <modules>
-    <module>workflow-config</module>
-    <module>workflow-ear</module>
-    <module>workflow-webapp</module>
+    <module>config</module>
+    <module>ear</module>
+    <module>webapp</module>
   </modules>
 </project>

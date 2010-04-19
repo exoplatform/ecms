@@ -11,8 +11,8 @@
   <name>eXo ECM Suite :: Packaging :: WCM</name>
   <description>eXo Entreprise Content Management Suite :: Packaging :: WCM</description>
   <modules>
-    <module>wcm-config</module>
-    <module>wcm-ear</module>
-    <module>wcm-webapp</module>
+    <module>config</module>
+    <module>ear</module>
+    <module>webapp</module>
   </modules>
 </project>
