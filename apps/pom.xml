@@ -11,14 +11,14 @@
   <name>eXo ECM Suite :: Apps</name>
   <description>eXo Entreprise Content Management Suite :: Applications</description>
   <modules>
-    <module>exo-ecms-apps-portlet-administration</module>
-    <module>exo-ecms-apps-portlet-explorer</module>
-    <module>exo-ecms-apps-gadget-publication</module>
-    <module>exo-ecms-apps-resources-dms</module>
-    <module>exo-ecms-apps-portlet-presentation</module>
-    <module>exo-ecms-apps-portlet-search</module>
-    <module>exo-ecms-apps-resources-wcm</module>
+    <module>portlet-administration</module>
+    <module>portlet-explorer</module>
+    <module>gadget-publication</module>
+    <module>resources-dms</module>
+    <module>portlet-presentation</module>
+    <module>portlet-search</module>
+    <module>resources-wcm</module>
     <!-- Why isn't it in reactor ??? -->
-    <!--<module>exo-ecms-apps-resources-static</module>-->
+    <!--<module>resources-static</module>-->
   </modules>
 </project>
