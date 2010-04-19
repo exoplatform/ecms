@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-packaging</artifactId>
+    <artifactId>exo-ecms-delivery</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>workflow.packaging.product</artifactId>
+  <artifactId>dms.packaging.product</artifactId>
   <packaging>pom</packaging>
-  <name>eXo WORKFLOW Packaging Product</name>
+  <name>eXo DMS Packaging Product</name>
   <properties>
-    <exobuild.name>workflow</exobuild.name>
+    <exobuild.name>dms</exobuild.name>
     <exobuild.type>product</exobuild.type>
   </properties>
   <dependencies>

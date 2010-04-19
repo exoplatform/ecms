@@ -38,5 +38,11 @@
     <module>wkf-wcm-server-jboss-ear</module>
     <module>wkf-wcm-server-jonas</module>
     <module>wkf-wcm-server-tomcat</module>
+    <module>workflow-module</module>
+    <module>workflow-product</module>
+    <module>dms-module</module>
+    <module>dms-product</module>
+    <module>wcm-module</module>
+    <module>wcm-product</module>
   </modules>
 </project>

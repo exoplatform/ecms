@@ -3,17 +3,17 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-packaging</artifactId>
+    <artifactId>exo-ecms-delivery</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>wcm.packaging.module</artifactId>
+  <artifactId>wcm.packaging.product</artifactId>
   <packaging>pom</packaging>
-  <name>eXo WCM eXoBuild module</name>
+  <name>eXo WCM Packaging Product</name>
   <properties>
     <exobuild.name>wcm</exobuild.name>
-    <exobuild.type>module</exobuild.type>
+    <exobuild.type>product</exobuild.type>
   </properties>
-  <!-- Replace versions and attach the module.js in maven repo for exobuild -->
+  <!-- Attach .js to the pom -->
   <build>
     <plugins>
       <plugin>

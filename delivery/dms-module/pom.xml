@@ -3,31 +3,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-packaging</artifactId>
+    <artifactId>exo-ecms-delivery</artifactId>
     <version>2.0.0-CR01-SNAPSHOT</version>
   </parent>
-  <artifactId>dms.packaging.product</artifactId>
+  <artifactId>dms.packaging.module</artifactId>
   <packaging>pom</packaging>
-  <name>eXo DMS Packaging Product</name>
+  <name>eXo DMS eXoBuild module</name>
   <properties>
     <exobuild.name>dms</exobuild.name>
-    <exobuild.type>product</exobuild.type>
+    <exobuild.type>module</exobuild.type>
   </properties>
-  <dependencies>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.server.tomcat.patch</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <type>jar</type>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform</groupId>
-      <artifactId>exo-jcr-services</artifactId>
-      <version>${org.exoplatform.jcr-services.version}</version>
-      <type>jar</type>
-    </dependency>
-  </dependencies>
-  <!-- Attach .js to the pom -->
   <build>
     <plugins>
       <plugin>
