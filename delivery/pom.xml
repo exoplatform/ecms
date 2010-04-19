@@ -10,39 +10,9 @@
   <packaging>pom</packaging>
   <name>eXo ECM Suite :: Delivery</name>
   <description>eXo Entreprise Content Management Suite :: Delivery</description>
-  <profiles>
-    <profile>
-      <id>wkf</id>
-      <modules>
-        <module>wkf-wcm-assembly</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>dms</id>
-      <modules>
-        <module>dms-wcm-assembly</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>wcm</id>
-      <modules>
-        <module>wcm-assembly</module>
-      </modules>
-    </profile>
-  </profiles>
   <modules>
-    <module>wcm-server-jonas</module>
-    <module>wcm-server-tomcat</module>
-    <module>wkf-wcm-server-bonita</module>
-    <module>wkf-wcm-server-jboss</module>
-    <module>wkf-wcm-server-jboss-ear</module>
-    <module>wkf-wcm-server-jonas</module>
-    <module>wkf-wcm-server-tomcat</module>
-    <module>workflow-module</module>
-    <module>workflow-product</module>
-    <module>dms-module</module>
-    <module>dms-product</module>
-    <module>wcm-module</module>
-    <module>wcm-product</module>
+    <module>wcm</module>
+    <module>wkf-wcm</module>
+    <module>dms-wcm</module>
   </modules>
 </project>
