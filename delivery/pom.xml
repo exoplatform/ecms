@@ -14,29 +14,29 @@
     <profile>
       <id>wkf</id>
       <modules>
-        <module>exo-ecms-delivery-wkf-wcm-assembly</module>
+        <module>wkf-wcm-assembly</module>
       </modules>
     </profile>
     <profile>
       <id>dms</id>
       <modules>
-        <module>exo-ecms-delivery-dms-wcm-assembly</module>
+        <module>dms-wcm-assembly</module>
       </modules>
     </profile>
     <profile>
       <id>wcm</id>
       <modules>
-        <module>exo-ecms-delivery-wcm-assembly</module>
+        <module>wcm-assembly</module>
       </modules>
     </profile>
   </profiles>
   <modules>
-    <module>exo-ecms-delivery-wcm-server-jonas</module>
-    <module>exo-ecms-delivery-wcm-server-tomcat</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-bonita</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-jboss</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-jboss-ear</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-jonas</module>
-    <module>exo-ecms-delivery-wkf-wcm-server-tomcat</module>
+    <module>wcm-server-jonas</module>
+    <module>wcm-server-tomcat</module>
+    <module>wkf-wcm-server-bonita</module>
+    <module>wkf-wcm-server-jboss</module>
+    <module>wkf-wcm-server-jboss-ear</module>
+    <module>wkf-wcm-server-jonas</module>
+    <module>wkf-wcm-server-tomcat</module>
   </modules>
 </project>
