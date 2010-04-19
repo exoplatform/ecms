@@ -11,6 +11,7 @@
   <name>eXo ECM Suite :: Ext</name>
   <description>eXo Entreprise Content Management Suite :: Extensions</description>
   <modules>
+    <module>exo-ecms-ext-authoring-services</module>
     <module>exo-ecms-ext-deprecated-portlet-browsecontent</module>
     <module>exo-ecms-ext-deprecated-portlet-jcrconsole</module>
     <module>exo-ecms-ext-workflow-bp-bonita-content</module>
