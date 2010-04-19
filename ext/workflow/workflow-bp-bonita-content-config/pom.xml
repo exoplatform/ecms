@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo-ecms-ext-workflow</artifactId>
+    <version>2.0.0-CR01-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo-ecms-ext-workflow-bp-bonita-content-config</artifactId>
+  <name>eXo Content Validation with Bonita workflow</name>
+  <description>eXo Content Validation with Bonita workflow</description>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+				<filtering>true</filtering>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.txt</include>
+          <include>**/*.groovy</include>
+          <include>**/*.gtmpl</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+</project>

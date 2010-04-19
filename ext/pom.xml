@@ -11,28 +11,10 @@
   <name>eXo ECM Suite :: Ext</name>
   <description>eXo Entreprise Content Management Suite :: Extensions</description>
   <modules>
-    <module>exo-ecms-ext-authoring-services</module>
-    <module>exo-ecms-ext-deprecated-portlet-browsecontent</module>
-    <module>exo-ecms-ext-deprecated-portlet-jcrconsole</module>
-    <module>exo-ecms-ext-workflow-bp-bonita-content</module>
-    <module>exo-ecms-ext-workflow-bp-jbpm-content</module>
-    <module>exo-ecms-ext-workflow-bp-bonita-content-config</module>
-    <module>exo-ecms-ext-workflow-bp-jbpm-content-config</module>
-    <module>exo-ecms-ext-workflow-bp-content-plugin</module>
-    <module>exo-ecms-ext-workflow-bp-content-webui</module>
-    <module>exo-ecms-ext-workflow-bp-content-publication</module>
-    <module>exo-ecms-ext-newsletter-services</module>
-    <module>exo-ecms-ext-formgenerator-portlet</module>
-    <module>exo-ecms-ext-newsletter-portlet</module>
-    <module>exo-ecms-ext-workflow-bp-bonita-holiday</module>
-    <module>exo-ecms-ext-workflow-bp-bonita-payraise</module>
-    <module>exo-ecms-ext-workflow-bp-jbpm-holiday</module>
-    <module>exo-ecms-ext-workflow-bp-jbpm-payraise</module>
-    <module>exo-ecms-ext-workflow-api</module>
-    <module>exo-ecms-ext-workflow-facade-bonita</module>
-    <module>exo-ecms-ext-workflow-facade-jbpm</module>
-    <module>exo-ecms-ext-workflow-portlet-administration</module>
-    <module>exo-ecms-ext-workflow-resources</module>
-    <module>exo-ecms-ext-workflow-webui</module>
+    <module>authoring</module>
+    <module>deprecated</module>
+    <module>workflow</module>
+    <module>newsletter</module>
+    <module>formgenerator</module>
   </modules>
 </project>
