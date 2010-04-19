@@ -11,21 +11,21 @@
   <name>eXo ECM Suite :: Packaging</name>
   <description>eXo Entreprise Content Management Suite :: Packaging</description>
   <modules>
-    <module>exo-ecms-packaging-ecmdemo-config</module>
-    <module>exo-ecms-packaging-ecmdemo-ear</module>
-    <module>exo-ecms-packaging-ecmdemo-rest-webapp</module>
-    <module>exo-ecms-packaging-ecmdemo-webapp</module>
-    <module>exo-ecms-packaging-wcm-config</module>
-    <module>exo-ecms-packaging-wcm-ear</module>
-    <module>exo-ecms-packaging-wcm-webapp</module>
-    <module>exo-ecms-packaging-workflow-config</module>
-    <module>exo-ecms-packaging-workflow-ear</module>
-    <module>exo-ecms-packaging-workflow-webapp</module>
-    <module>workflow.packaging.module</module>
-    <module>workflow.packaging.product</module>
-    <module>dms.packaging.module</module>
-    <module>dms.packaging.product</module>
-    <module>wcm.packaging.module</module>
-    <module>wcm.packaging.product</module>
+    <module>ecmdemo-config</module>
+    <module>ecmdemo-ear</module>
+    <module>ecmdemo-rest-webapp</module>
+    <module>ecmdemo-webapp</module>
+    <module>wcm-config</module>
+    <module>wcm-ear</module>
+    <module>wcm-webapp</module>
+    <module>workflow-config</module>
+    <module>workflow-ear</module>
+    <module>workflow-webapp</module>
+    <module>workflow-module</module>
+    <module>workflow-product</module>
+    <module>dms-module</module>
+    <module>dms-product</module>
+    <module>wcm-module</module>
+    <module>wcm-product</module>
   </modules>
 </project>
