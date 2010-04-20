@@ -57,7 +57,7 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
     try {
       return res.getString("UINodeTypeSelectForm.label." + id) ;
     } catch (MissingResourceException ex) {
-      return id ;
+      return id + " "; // Need for changed in gatein !fieldName.equals(field.getName())
     }
   }
   
