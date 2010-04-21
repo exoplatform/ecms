@@ -6,10 +6,25 @@
   uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
   uicomponent.addHiddenField("hiddenInput3", hiddenField3) ;
 %>
+<script type="text/javascript" src="/static/ckeditor/wcmeditor.js"></script>
+
 <div class="UIForm LayoutContent">
 	<% uiform.begin() %>
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">	  
+      <tr>                        
+        <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.title")%></td>
+        <td class="FieldComponent">
+          <%
+            String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
+            uicomponent.addTextField("title", fieldTitle) ;
+          %>
+          <script>
+          titleField = document.getElementById("title");
+          titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
+          </script>
+        </td>
+      </tr>
 	    <tr>		          					
 	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.name")%></td>
 	      <td class="FieldComponent">
@@ -30,15 +45,6 @@
 			    </td>
 			  </tr>
 		  <%}%>
-	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.title")%></td>
-	      <td class="FieldComponent">
-		      <%
-		        String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
-		        uicomponent.addTextField("title", fieldTitle) ;
-		      %>
-		    </td>
-	    </tr>
 	    <tr>		          					
 	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.description")%></td>
 	      <td class="FieldComponent">
@@ -112,25 +118,21 @@
 	    <tr>		          					
 	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.summary")%></td>
 	      <td class="FieldComponent">
-			    <div class="UIFCKEditor">
-			      <%
-			        String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=basic", ""] ;
-			        uicomponent.addWYSIWYGField("summary", fieldSummary) ;        
-			      %>
-			    </div>
+		      <%
+		        String[] fieldSummary = ["jcrPath=/node/exo:summary"] ;
+		        uicomponent.addTextAreaField("summary", fieldSummary) ;        
+		      %>
 		    </td>
 	    </tr>
 	    <tr>		          					
 	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.content")%></td>
 	      <td class="FieldComponent">
-			    <div class="UIFCKEditor">
-			      <%
-			        String[] fieldContent = ["jcrPath=/node/exo:content", "options=default", ""] ;
-			        uicomponent.addWYSIWYGField("content", fieldContent) ;
-			      %>
-			    </div>
+		      <%
+		        String[] fieldContent = ["jcrPath=/node/exo:content"] ;
+		        uicomponent.addTextAreaField("content", fieldContent) ;
+		      %>
 		    </td>
-	    </tr>
+      </tr>
 	  </table>
 		<%/* start render action*/%>
 		<%uiform.processRenderAction()%>
@@ -138,3 +140,9 @@
   </div>
   <% uiform.end() %>
 </div>
+
+<script type="text/javascript">
+  // With Ajax Loading, we must use setTimeout to initialize for Chrome and Safari compliance
+  setTimeout( "CKEDITOR.replace( 'summary' ,{toolbar : 'Basic'})", 100) ;
+  setTimeout( "CKEDITOR.replace( 'content' ,{toolbar : 'Basic'})", 100) ;
+</script>
