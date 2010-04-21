@@ -830,10 +830,10 @@ var ListView = function() {
 		var page = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "PageAvailable");
 		var title = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "TitleTable");				
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
-		var resizeButton = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeButton");		
+		var resizeSizeBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");		
 		var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");		
 		sizeBarContainer.style.height = workingArea.offsetHeight + 'px';	
-		resizeButton.style.height = workingArea.offsetHeight + 'px';
+		resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
 						
 	  if (page) {
 				if (parseInt(page.getAttribute('pageAvailable')) > 1) {

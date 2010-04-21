@@ -11,11 +11,11 @@
         String[] arrComp = [uicomponent.getCurrentComp()];
         uicomponent.renderSideBarChild(arrComp); 
        %>        
-     <div class="ResizeTreeExplorer" onmousedown="eXo.ecm.ECMUtils.resizeTreeInSideBar(event)" onclick="eXo.ecm.ECMUtils.showHideItemsInSideBar(this)">
-      <div class="ResizeTreeButton"><span></span></div>
-     </div>
-    
-      
+	
+    <div class="ResizeTreeExplorer" onmousedown="eXo.ecm.ECMUtils.resizeTreeInSideBar(event)">
+		<div class="ResizeTreeButton" onclick="eXo.ecm.ECMUtils.showHideItemsInSideBar(this)"><span></span></div>
+	</div>          
+	
       <div class="SelectItem" id ="SelectItemArea">
         <% 
           String[] arrAllItems = ["UIAllItems", "UIAllItemsByType"];

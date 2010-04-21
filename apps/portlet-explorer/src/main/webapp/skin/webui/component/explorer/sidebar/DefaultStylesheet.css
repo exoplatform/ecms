@@ -25,6 +25,21 @@
 	margin: 0px 3px 0px 0px;
 }
 
+.UIJCRExplorerPortlet .UISideBar .ResizeTreeButton{
+  background: url('DefaultSkin/background/ResizeTreeButton.gif') no-repeat center;
+	height: 7px;
+	width: 10px;
+	margin: auto;
+	cursor : pointer;
+}
+
+.UIJCRExplorerPortlet .UISideBar .ShowContentButton{
+  background: url('DefaultSkin/background/ShowContentButton.gif') no-repeat center;
+	height: 7px;
+	width: 10px;	
+	margin: auto;		
+}
+
 .UIJCRExplorerPortlet .UISideBar .SideBarContent{
   border: 1px solid #e4e4e4;
   margin: 4px 7px 4px 4px;
@@ -107,20 +122,6 @@
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */
 	margin-top:4px;
-}
-
-.UIJCRExplorerPortlet .UISideBar .ResizeTreeExplorer .ResizeTreeButton{
-  background: url('DefaultSkin/background/ResizeTreeButton.gif') no-repeat center;
-	height: 7px;
-	width: 10px;
-	margin: auto;
-}
-
-.UIJCRExplorerPortlet .UISideBar .ResizeTreeExplorer .ShowContentButton{
-  background: url('DefaultSkin/background/ShowContentButton.gif') no-repeat center;
-	height: 7px;
-	width: 10px;	
-	margin: auto;		
 }
 
 .UIJCRExplorerPortlet .UISideBar .UISelectContent .NormalItem {
