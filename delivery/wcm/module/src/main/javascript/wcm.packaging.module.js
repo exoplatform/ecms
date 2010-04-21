@@ -49,6 +49,9 @@ function getModule(params) {
     addDependency(portal.web.eXoResources);
   module.web.eXoWCMResources.deployName = "eXoWCMResources";
     
+  module.web.eXoStaticResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-static", "war", module.version);
+  module.web.eXoStaticResources.deployName = "static";
+    
   module.extension = {};
   
   module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).

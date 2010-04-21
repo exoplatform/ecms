@@ -50,6 +50,7 @@ function getProduct(version) {
   product.addDependencies(wcm.portlet.newsletter); 
   product.addDependencies(wcm.portlet.formgenerator);
   product.addDependencies(wcm.web.eXoWCMResources) ;
+  product.addDependencies(wcm.web.eXoStaticResources) ;
 	if(enableWorkflow) {
 		var workflow = Module.GetModule("workflow", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal});
 		product.addDependencies(workflow.web.eXoWorkflowResources);
