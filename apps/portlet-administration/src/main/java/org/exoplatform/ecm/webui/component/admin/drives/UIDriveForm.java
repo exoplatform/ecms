@@ -71,7 +71,9 @@ import org.exoplatform.webui.form.UIFormTabPane;
       @EventConfig(listeners = UIDriveForm.RemovePermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.AddPathActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.AddIconActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIDriveForm.ChangeActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = UIDriveForm.ChangeActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDriveForm.ChooseNodeTypeActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDriveForm.RemoveNodeTypeActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UIDriveForm extends UIFormTabPane implements UISelectable {
@@ -79,7 +81,9 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
   private boolean isAddNew_ = true;  
   final static public String[] ACTIONS = {"Save", "Refresh", "Cancel"};
   final static public String POPUP_DRIVEPERMISSION = "PopupDrivePermission";
+  final static public String POPUP_NODETYPE_SELECTOR = "PopupNodeTypeSelector";
   private String membershipString = "";
+  private String nodeTypes = "";
 
   public UIDriveForm() throws Exception {
     super("UIDriveForm");
@@ -140,6 +144,21 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     getChild(UIDriveInputSet.class).update(drive);
     getChild(UIViewsInputSet.class).update(drive);
   }
+  
+  public String getWorkspaceEntries(String selectedWorkspace, String repository) throws Exception {
+    RepositoryService repositoryService = 
+      getApplicationComponent(RepositoryService.class);
+    List<WorkspaceEntry> wsEntries = 
+      repositoryService.getRepository(repository).getConfiguration().getWorkspaceEntries();
+    String wsInitRootNodeType = null;
+    for(WorkspaceEntry wsEntry : wsEntries) {
+      if(wsEntry.getName().equals(selectedWorkspace)) {
+        wsInitRootNodeType = wsEntry.getAutoInitializedRootNt();
+        break;
+      }
+    }
+    return wsInitRootNodeType;
+  }  
 
   static public class SaveActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
@@ -418,18 +437,32 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     }
   }
   
-  public String getWorkspaceEntries(String selectedWorkspace, String repository) throws Exception {
-    RepositoryService repositoryService = 
-      getApplicationComponent(RepositoryService.class);
-    List<WorkspaceEntry> wsEntries = 
-      repositoryService.getRepository(repository).getConfiguration().getWorkspaceEntries();
-    String wsInitRootNodeType = null;
-    for(WorkspaceEntry wsEntry : wsEntries) {
-      if(wsEntry.getName().equals(selectedWorkspace)) {
-        wsInitRootNodeType = wsEntry.getAutoInitializedRootNt();
-        break;
-      }
+  static public class ChooseNodeTypeActionListener extends EventListener<UIDriveForm> {
+    public void execute(Event<UIDriveForm> event) throws Exception {
+      UIDriveForm uiDriveForm = event.getSource();
+      UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
+      String nodeTypes = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_FILTERNODETYPES).getValue();
+      if ((nodeTypes != null) && (uiDriveForm.membershipString.indexOf(nodeTypes) < 0)){
+        if (uiDriveForm.nodeTypes.length() > 0)
+          uiDriveForm.nodeTypes += "," + nodeTypes;
+        else
+          uiDriveForm.nodeTypes += nodeTypes;
+      }        
+      uiDriveForm.getUIStringInput(
+          UIDriveInputSet.FIELD_FILTERNODETYPES).setValue(uiDriveForm.nodeTypes);
+      
+      uiManager.initPopupNodeTypeSelector(uiDriveForm.nodeTypes);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }
-    return wsInitRootNodeType;
   }
+  
+  static public class RemoveNodeTypeActionListener extends EventListener<UIDriveForm> {
+    public void execute(Event<UIDriveForm> event) throws Exception {
+      UIDriveForm uiDriveForm = event.getSource();
+      uiDriveForm.nodeTypes = ""; 
+      uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_FILTERNODETYPES).setValue(null);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveForm);
+    }
+  }  
+
 }

@@ -2401,6 +2401,25 @@
   		<timeline-view>Timeline View</timeline-view>
   		<cover-flow>Cover Flow</cover-flow>	
   	</label>
-  </UIDriveForm>	
+  </UIDriveForm>
+	
+	<UIDriveForm>
+		<label>
+			<filterNodeTypes>Kiểu dữ liệu cho phép hiển thị</filterNodeTypes>
+		</label>
+	</UIDriveForm>
+	<DriveInputSet>
+		<title>
+			<RemovePermission>Xóa bỏ quyền</RemovePermission>
+			<ChooseNodeType>Chọn kiểu dữ liệu</ChooseNodeType>
+			<RemoveNodeType>Xóa bỏ</RemoveNodeType>
+		</title>
+	</DriveInputSet>
+	<PopupNodeTypeSelector>
+		<title>
+			<UINodeTypeSelector>Chọn kiểu dữ liệu</UINodeTypeSelector>
+			<PopupNodeTypeSelector>Chọn kiểu dữ liệu</PopupNodeTypeSelector>
+		</title>
+	</PopupNodeTypeSelector>	
 </bundle>
 

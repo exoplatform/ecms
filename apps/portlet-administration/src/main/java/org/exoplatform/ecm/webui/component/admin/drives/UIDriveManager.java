@@ -16,6 +16,10 @@
  */
 package org.exoplatform.ecm.webui.component.admin.drives;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
@@ -85,6 +89,24 @@ public class UIDriveManager extends UIAbstractManager {
     uiECMPermission.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_PERMISSION}) ;
     uiPopup.setShow(true) ;
   }
+  
+  public void initPopupNodeTypeSelector(String nodeTypes) throws Exception {
+    removeChildById(UIDriveForm.POPUP_NODETYPE_SELECTOR) ;
+    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIDriveForm.POPUP_NODETYPE_SELECTOR);
+    uiPopup.setWindowSize(580, 300);
+    UINodeTypeSelector uiNodeTypeSelector = 
+      createUIComponent(UINodeTypeSelector.class, null, null) ;
+    uiNodeTypeSelector.setRepositoryName(getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository());
+    List<String> nodeList = new ArrayList<String>();
+    if(nodeTypes != null && nodeTypes.indexOf(",") > -1) {
+      nodeList = Arrays.asList(nodeTypes.split(","));
+    }
+    uiNodeTypeSelector.init(1, nodeList);
+    uiPopup.setUIComponent(uiNodeTypeSelector);
+    UIDriveForm uiDriveForm = findFirstComponentOfType(UIDriveForm.class) ;
+    uiNodeTypeSelector.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_FILTERNODETYPES}) ;
+    uiPopup.setShow(true) ;
+  }  
   
   private String getSystemWorkspaceName(String repository) throws RepositoryException, RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);

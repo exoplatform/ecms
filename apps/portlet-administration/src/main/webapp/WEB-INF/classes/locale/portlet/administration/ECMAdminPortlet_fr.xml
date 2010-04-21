@@ -2397,5 +2397,24 @@
   		<timeline-view>Timeline View</timeline-view>
   		<cover-flow>Cover Flow</cover-flow>	
   	</label>
-  </UIDriveForm>	
+  </UIDriveForm>
+	
+	<UIDriveForm>
+		<label>
+			<filterNodeTypes>Allowance nodetype on left tree</filterNodeTypes>
+		</label>
+	</UIDriveForm>
+	<DriveInputSet>
+		<title>
+			<RemovePermission>Remove permission</RemovePermission>
+			<ChooseNodeType>Choose node types</ChooseNodeType>
+			<RemoveNodeType>Remove</RemoveNodeType>
+		</title>
+	</DriveInputSet>
+	<PopupNodeTypeSelector>
+		<title>
+			<UINodeTypeSelector>Select node types</UINodeTypeSelector>
+			<PopupNodeTypeSelector>Select node types</PopupNodeTypeSelector>
+		</title>
+	</PopupNodeTypeSelector>	
 </bundle>

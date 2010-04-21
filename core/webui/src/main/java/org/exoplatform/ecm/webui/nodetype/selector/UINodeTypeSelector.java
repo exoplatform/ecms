@@ -165,7 +165,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
     return nodeList ;
   }
   
-  private boolean getCheckedValue(List<String> values, String name) {
+  protected boolean getCheckedValue(List<String> values, String name) {
     if (values.contains(name))
       return true;
     return false;
@@ -179,7 +179,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
     init(currentPage, values, lstNodetype);
   }
 
-  private void init(int currentPage, List<String> values, List<NodeType> lstNodetype) throws Exception {
+  protected void init(int currentPage, List<String> values, List<NodeType> lstNodetype) throws Exception {
     if (lstNodetype == null) return;
     PageList pageList = new ObjectPageList(lstNodetype, 5);
     uiPageIterator_.setPageList(pageList);
