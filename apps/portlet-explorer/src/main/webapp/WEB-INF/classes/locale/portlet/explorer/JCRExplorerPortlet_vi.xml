@@ -3178,5 +3178,10 @@
       <homePath-emty>Đường dẫn nguồn đang trống</homePath-emty>
       <targetPath-emty>Đường dẫn đích đang trống</targetPath-emty>
     </msg>
-		</UIActionForm>   	
+		</UIActionForm>
+		<UIActionBar>
+				<msg>
+				  <not-exist-categories>Không tồn tại bất kỳ danh mục phân loại nào</not-exist-categories>
+				</msg>
+		</UIActionBar>   	
 </bundle>

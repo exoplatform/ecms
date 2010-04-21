@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.MissingResourceException;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
@@ -114,8 +115,11 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
 					.getRootNode();
 		} else {
 			NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
-			rootNode = (Node) nodeFinder.getItem(repositoryName, workspaceName,
-					rootTreePath);
+			try {
+			  rootNode = (Node) nodeFinder.getItem(repositoryName, workspaceName, rootTreePath);
+      } catch (PathNotFoundException pathNotFoundException) {
+        rootNode = null;
+      }
 		}
 	
 		UITreeTaxonomyList uiTreeTaxonomyList = getChild(UITreeTaxonomyList.class);
@@ -124,7 +128,7 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
 		builder.setAllowPublish(allowPublish, publicationService, templates);
 		builder.setAcceptedNodeTypes(acceptedNodeTypesInTree);
 		builder.setDefaultExceptedNodeTypes(defaultExceptedNodeTypes);
-		builder.setRootTreeNode(rootNode);
+		if (rootNode != null) builder.setRootTreeNode(rootNode);
 		UISelectTaxonomyPanel selectPathPanel = getChild(UISelectTaxonomyPanel.class);
 		selectPathPanel.setAllowPublish(allowPublish, publicationService, templates);
 		selectPathPanel.setAcceptedNodeTypes(acceptedNodeTypesInPathPanel);

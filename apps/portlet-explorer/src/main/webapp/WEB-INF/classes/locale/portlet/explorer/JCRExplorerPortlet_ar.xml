@@ -2777,5 +2777,10 @@
       <homePath-emty>The Home path is empty</homePath-emty>
       <targetPath-emty>The target path is empty</targetPath-emty>
     </msg>
-		</UIActionForm>		  					
+		</UIActionForm>
+		<UIActionBar>
+				<msg>
+				  <not-exist-categories>There isn't any category</not-exist-categories>
+				</msg>
+		</UIActionBar>		  					
 </bundle>
