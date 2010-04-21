@@ -63,11 +63,13 @@
       <js-path>/javascript/eXo/wcm/frontoffice/private/FCKEditor.js</js-path>
       <js-priority>65</js-priority>
     </param>
+    <!-- 
     <param>
       <js-module>eXo.ecm.FrontPrivate</js-module>
       <js-path>/javascript/eXo/wcm/frontoffice/private/QuickEdit.js</js-path>
       <js-priority>70</js-priority>
     </param>
+     -->
   </javascript>
   
 </gatein-resources>

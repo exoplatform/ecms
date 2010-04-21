@@ -6,13 +6,9 @@
 <div class="$uicomponent.id">
 	<%
 		def rcontext = _ctx.getRequestContext() ;
-    	String portletId = Utils.getRealPortletId(rcontext);
+    String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
-		def jsManager = rcontext.getJavascriptManager();
-		jsManager.importJavascript('eXo.wcm.frontoffice.private.QuickEdit', '/eXoWCMResources/javascript/') ;
-		jsManager.addOnLoadJavascript('eXo.ecm.QuickEdit.insertQuickeditingBlock("' + portletId + '","' + quickEditingBlockId + '")');
-		
-		//def scvPortlet = uicomponent.getAncestorOfType(UISingleContentViewerPortlet.class); 
+
 		def node = uicomponent.getNodeView();
 		if (node != null) {
 			def preferences = rcontext.getRequest().getPreferences();

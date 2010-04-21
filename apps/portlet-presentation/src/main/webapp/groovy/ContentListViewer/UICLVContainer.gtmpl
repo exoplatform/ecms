@@ -6,9 +6,6 @@
 		def rcontext = _ctx.getRequestContext() ;
 		String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
-		def jsManager = rcontext.getJavascriptManager();
-		jsManager.importJavascript('eXo.wcm.frontoffice.private.QuickEdit', '/eXoWCMResources/javascript/') ;
-		jsManager.addOnLoadJavascript('eXo.ecm.QuickEdit.insertQuickeditingBlock("' + portletId + '","' + quickEditingBlockId + '")');
 		if (Utils.isShowQuickEdit()) {					
 	%>
 			<div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>">
