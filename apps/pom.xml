@@ -18,7 +18,6 @@
     <module>portlet-presentation</module>
     <module>portlet-search</module>
     <module>resources-wcm</module>
-    <!-- Why isn't it in reactor ??? -->
-    <!--<module>resources-static</module>-->
+    <module>resources-static</module>
   </modules>
 </project>
