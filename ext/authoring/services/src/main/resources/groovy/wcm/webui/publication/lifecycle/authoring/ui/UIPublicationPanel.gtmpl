@@ -49,6 +49,7 @@
  
 	if(states.indexOf(state)==states.size()-1) lastState=true;
 		 String membership = state.getMembership();
+		 String status = state.getState();
 		 boolean isAutomatic = false;
 		 if(!"automatic".equals(membership)){
            enableState = uicomponent.canReachState(state, remoteUser, cNode) ;
@@ -56,191 +57,37 @@
 		 else{
 		    isAutomatic=true;
 		 }
-		if (PublicationDefaultStates.DRAFT.equals(state.getState())) {
-			if (isCurrentRevision("draft",currentRevision)){		
-			isBeforeCurrentState=false;
+		 if (isCurrentRevision(status,currentRevision)){		
+  			isBeforeCurrentState=false;
+  			
+  			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals(status)){
+  			%>
+  			<a class="ActiveStatus" href="<%= uicomponent.event("ChangeState", status)%>">
+  			<%}
+  			else{%>
+  			<a class="CurrentStatus">
+  			<%}
+  			
+  			}else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {
+  			
+  			%>
+  			<a class="DisableStatus">
+  			<%}
+  			
+  			else  if(!isAutomatic&&enableState){
+  			%>	
+  			<a class="ActiveStatus" href="<%= uicomponent.event("ChangeState", status)%>">
+  			
+  			<%}%>
+  			<%=_ctx.appRes("UIPublicationPanel.status."+status)%></a>
+  			<%if(!lastState){%>
+  			
+  			<span class="StatusArrow"></span>
+  			<%}else{%>
+  			<div style="clear: left;"><span></span></div>  
+  			<%}
 			
-			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals("draft")){
-			%>
-			<a class="ActiveStatus" href="<%= uicomponent.event("Draft")%>">
-			<%}
-			else{%>
-			<a class="CurrentStatus">
-			<%}
-			
-			}else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {
-			
-			%>
-			<a class="DisableStatus">
-			<%}
-			
-			else  if(!isAutomatic&&enableState){
-			%>	
-			<a class="ActiveStatus" href="<%= uicomponent.event("Draft")%>">
-			
-			<%}%>
-			<%=_ctx.appRes("UIPublicationPanel.status.draft")%></a>
-			<%if(!lastState){%>
-			
-			<span class="StatusArrow"></span>
-			<%}else{%>
-			<div style="clear: left;"><span></span></div>  
-			<%}
-			
-		} else if (PublicationDefaultStates.PENDING.equals(state.getState())) {
-			if (isCurrentRevision("pending",currentRevision)){
-			isBeforeCurrentState = false;
-			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals("pending")){
-			%>
-			<a class="ActiveStatus" href="<%= uicomponent.event("Pending")%>">
-			<%}
-			else{%>
-			<a class="CurrentStatus">
-			<%}
-			} else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {%>
-			<a class="DisableStatus">
-			<%} 
-			else  if(!isAutomatic&&enableState){
-			%>	
-			<a class="ActiveStatus" href="<%= uicomponent.event("Pending")%>">
-			
-			<%}%>
-			<%=_ctx.appRes("UIPublicationPanel.status.pending")%></a>
-			<%if(!lastState){%>
-			
-			<span class="StatusArrow"></span>
-			<%}else{%>
-			<div style="clear: left;"><span></span></div>  
-			<%}
-			
-		    } else if (PublicationDefaultStates.APPROVED.equals(state.getState())) {
-			if (isCurrentRevision("approved",currentRevision)){
-			 isBeforeCurrentState = false;
-			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals("approved")){
-			%>
-			<a class="ActiveStatus" href="<%= uicomponent.event("Approved")%>">
-			<%}
-			else{%>
-			<a class="CurrentStatus">
-			<%}
-			} else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {%>
-			<a class="DisableStatus">
-			<%} 
-			else  if(!isAutomatic&&enableState){
-			%>	
-			<a class="ActiveStatus" href="<%= uicomponent.event("Approved")%>">
-			<%}%>
-			<%=_ctx.appRes("UIPublicationPanel.status.approved")%></a>
-			<%if(!lastState){%>
-			
-			<span class="StatusArrow"></span>
-			<%}else{%>
-			<div style="clear: left;"><span></span></div>  
-			<%}
-			
-		   } else if (PublicationDefaultStates.ARCHIVED.equals(state.getState())) {
-			if (isCurrentRevision("archived",currentRevision)){
-			isBeforeCurrentState = false;
-			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals("archived")){
-			%>
-			<a class="ActiveStatus" href="<%= uicomponent.event("Archived")%>">
-			<%}
-			else{%>
-			<a class="CurrentStatus">
-			<%}
-			} else if((!isBaseVersion&&isBeforeCurrentState)||isBaseVersion||isAutomatic||!enableState) {%>
-			<a class="DisableStatus">
-			<%}
-			else  if(!isAutomatic&&enableState){
-			%>	
-			<a class="ActiveStatus" href="<%= uicomponent.event("Archived")%>">
-			
-			<%}%>
-			<%=_ctx.appRes("UIPublicationPanel.status.archived")%></a>
-			<%if(!lastState){%>
-			
-			<span class="StatusArrow"></span>
-			<%}else{%>
-			<div style="clear: left;"><span></span></div>  
-			<%}
-		} 
-		else if (PublicationDefaultStates.PUBLISHED.equals(state.getState())) {
-			if (isCurrentRevision("published",currentRevision)){
-
-			isBeforeCurrentState = false;
-			%>
-			<a class="CurrentStatus">
-			<%} else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {
-			
-			%>
-			<a class="DisableStatus">
-			<%}
-			else  if(!isAutomatic&&enableState){
-			%>	
-			<a class="ActiveStatus" href="<%= uicomponent.event("Live")%>">
-			
-			<%}%>
-			<%=_ctx.appRes("UIPublicationPanel.status.published")%></a>
-			<%if(!lastState){%>
-			
-			<span class="StatusArrow"></span>
-			<%}else{%>
-			<div style="clear: left;"><span></span></div>  
-			<%}
-		} else if (PublicationDefaultStates.STAGED.equals(state.getState())) {
-
-			if (isCurrentRevision("staged",currentRevision)){
-			isBeforeCurrentState = false;
-			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals("staged")){
-			%>
-			<a class="ActiveStatus" href="<%= uicomponent.event("Staged")%>">
-			<%}
-			else{%>
-			<a class="CurrentStatus">
-			<%}
-			}else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {%>
-			<a class="DisableStatus">
-			<%}
-			else  if(!isAutomatic&&enableState){
-			%>	
-			<a class="ActiveStatus" href="<%= uicomponent.event("Staged")%>">
-			
-			<%}%>
-			<%=_ctx.appRes("UIPublicationPanel.status.staged")%></a>
-			<%if(!lastState){%>
-			
-			<span class="StatusArrow"></span>
-			<%}else{%>
-			<div style="clear: left;"><span></span></div>  
-			<%}
-		}else if (PublicationDefaultStates.UNPUBLISHED.equals(state.getState())) {
-			if (isCurrentRevision("unpublished",currentRevision)){
-			isBeforeCurrentState = false;
-			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals("unpublished")){
-			%>
-			<a class="ActiveStatus" href="<%= uicomponent.event("Unpublished")%>">
-			<%}
-			else{%>
-			<a class="CurrentStatus">
-			<%}
-			} else if((!isBaseVersion&&isBeforeCurrentState)||isBaseVersion||isAutomatic||!enableState) {%>
-			<a class="DisableStatus">
-			<%}
-			else  if(!isAutomatic&&enableState){
-			%>	
-			<a class="ActiveStatus" href="<%= uicomponent.event("Unpublished")%>">
-			
-			<%}%>
-			<%=_ctx.appRes("UIPublicationPanel.status.unpublished")%></a>
-			<%if(!lastState){%>
-			
-			<span class="StatusArrow"></span>
-			<%}else{%>
-			<div style="clear: left;"><span></span></div>  
-			<%}
-			}
-		
-	    }%>
+	   }%>
       </div>
     </div>
   </fieldset>

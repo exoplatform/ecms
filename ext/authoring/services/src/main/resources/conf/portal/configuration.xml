@@ -16,12 +16,6 @@
 		    <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin</type>
 		    <description>This publication lifecycle publish a web content or DMS document to a portal page with more states and version.</description>	    	    	   
 		  </component-plugin>
-		  <component-plugin>
-		    <name>Simple publication</name>
-		    <set-method>addPublicationPlugin</set-method>
-		    <type>org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin</type>
-		    <description>This publication lifecycle publish a web content or DMS document to a portal page without version</description>	    	    	   
-		  </component-plugin>
 	  </component-plugins>
    </component>
 <component>
@@ -46,9 +40,38 @@
               <value>
                 <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
                   <field name="name"><string>lifecycle1</string></field>
-                  <field name="publicationPlugin"><string>States and versions based publication</string></field>
+                  <field name="publicationPlugin"><string>Authoring publication</string></field>
+                  <field  name="states">
+                    <collection type="java.util.ArrayList">
+                      <value>
+                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                          <field name="state"><string>draft</string></field>
+                          <field name="membership"><string>author:/platform/web-contributors</string></field>
+                        </object>
+                      </value>
+                      <value>
+                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                          <field name="state"><string>pending</string></field>
+                          <field name="membership"><string>author:/platform/web-contributors</string></field>
+                        </object>
+                      </value>
+                      <value>
+                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                          <field name="state"><string>published</string></field>
+                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
+                        </object>
+                      </value>                      
+                      <value>
+                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                          <field name="state"><string>unpublished</string></field>
+                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
+                        </object>
+                      </value>
+                    </collection>
+                  </field>
                 </object>
               </value>
+
               <value>
                 <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
                   <field name="name"><string>lifecycle2</string></field>
@@ -58,102 +81,31 @@
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>draft</string></field>
-                          <field name="membership"><string>author:/platform/web-contributors</string></field>
-                          <field name="memberships">                  
-                          <collection type="java.util.ArrayList">
-                            <value><string>author:/platform/web-contributors</string></value>
-                          </collection>
-                      </field>
-                          
+                          <field name="role"><string>author</string></field>
                         </object>
                       </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>pending</string></field>
-                          <field name="membership"><string>author:/platform/web-contributors</string></field>
-                          <field name="memberships">                  
-                          <collection type="java.util.ArrayList">
-                            <value><string>author:/platform/web-contributors</string></value>
-                          </collection>
-                        </field>
+                          <field name="role"><string>author</string></field>
                         </object>
                       </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>approved</string></field>
-                          <field name="membership"><string>manager:/platform/web-contributors</string></field>
-                          <field name="memberships">                  
-                          <collection type="java.util.ArrayList">
-                            <value><string>author:/platform/web-contributors</string></value>
-                          </collection>
-                        </field>
+                          <field name="role"><string>manager</string></field>
                         </object>
                       </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>staged</string></field>
-                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
-                          <field name="memberships">                  
-                          <collection type="java.util.ArrayList">
-                            <value><string>author:/platform/web-contributors</string></value>
-                          </collection>
-                        </field>
-                        </object>
-                      </value>
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>published</string></field>
-                          <field name="membership"><string>author:/platform/web-contributors</string></field>
-                          <field name="memberships">                  
-                          <collection type="java.util.ArrayList">
-                            <value><string>author:/platform/web-contributors</string></value>
-                          </collection>
-                        </field>
-                        </object>
-                      </value>
-                    </collection>
-                  </field>
-                </object>
-              </value>
-              <value>
-                <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
-                  <field name="name"><string>lifecycle3</string></field>
-                  <field name="publicationPlugin"><string>Authoring publication</string></field>
-                  <field  name="states">
-                    <collection type="java.util.ArrayList">
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>draft</string></field>
-                          <field name="membership"><string>jjjjj:/hhhhhh/web-contributors</string></field>
-                          <field name="memberships">                  
-                          <collection type="java.util.ArrayList">
-                            <value><string>author:/platform/web-contributors</string></value>
-                          </collection>
-                       </field>
-                        </object>
-                      </value>
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>staged</string></field>
-                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
+                          <field name="role"><string>publisher</string></field>
                         </object>
                       </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>published</string></field>
                           <field name="membership"><string>automatic</string></field>
-                        </object>
-                      </value>                      
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>unpublished</string></field>
-                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
-                        </object>
-                      </value>
-                       <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>archived</string></field>
-                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
                         </object>
                       </value>
                     </collection>
@@ -185,6 +137,15 @@
               </value>
               <value>
                 <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+                  <field name="name"><string>context2</string></field>
+                  <field name="priority"><string>100</string></field>
+                  <field name="lifecycle"><string>lifecycle2</string></field>
+                  <field name="site"><string>acme</string></field>
+                </object>
+              </value>
+              <!-- 
+              <value>
+                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
                   <field name="name"><string>context1</string></field>
                   <field name="priority"><string>100</string></field>
                   <field name="lifecycle"><string>lifecycle1</string></field>
@@ -202,7 +163,7 @@
                 <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
                   <field name="name"><string>context2</string></field>
                   <field name="priority"><string>100</string></field>
-                  <field name="lifecycle"><string>lifecycle3</string></field>
+                  <field name="lifecycle"><string>lifecycle2</string></field>
                   <field name="site"><string>classic</string></field>
                 </object>
               </value>
@@ -210,7 +171,7 @@
                 <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
                   <field name="name"><string>context3</string></field>
                   <field name="priority"><string>80</string></field>
-                  <field name="lifecycle"><string>lifecycle3</string></field>
+                  <field name="lifecycle"><string>lifecycle2</string></field>
                   <field name="membership"><string>*:/platform/web-contributors</string></field>
                   <field name="site"><string>acme</string></field>
                 </object>
@@ -219,12 +180,13 @@
                 <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
                   <field name="name"><string>context4</string></field>
                   <field name="priority"><string>50</string></field>
-                  <field name="lifecycle"><string>lifecycle3</string></field>
+                  <field name="lifecycle"><string>lifecycle2</string></field>
                   <field name="membership"><string>*:/platform/web-contributors</string></field>
                   <field name="path"><string>repository:collaboration:/documents/company/finances</string></field>
                   <field name="nodetype"><string>exo:article</string></field>
                 </object>
               </value>
+               -->
             </collection>
           </field>
         </object>
@@ -260,4 +222,60 @@
 	    </init-params>
 	  </component-plugin>
 	</external-component-plugins>
+  
+    <external-component-plugins>
+    <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
+      <component-plugin>
+        <name>changeStateJobToPublished</name>
+        <set-method>addCronJob</set-method>
+        <type>org.exoplatform.services.wcm.extensions.scheduler.ChangeStateCronJob</type>
+        <description>add a job to change the state of content</description>
+        <init-params>         
+          <properties-param>
+            <name>cronjob.info</name>
+            <description>cron job info</description>
+              <property name="jobName" value="changeStateJobToPublished"/>
+              <property name="groupName" value="group"/>
+              <property name="job" value="org.exoplatform.services.wcm.extensions.scheduler.impl.ChangeStateCronJobImpl"/>
+              <property name="expression" value="15/120 * * * * ?"/>
+          </properties-param>
+          <properties-param>
+            <name>changeStateCronJob.generalParams</name>
+            <description>General parameters for job</description>
+              <property name="fromState" value="staged"/>
+              <property name="toState" value="published"/>
+              <property name="predefinedPath" value="repository:collaboration:/"/>
+          </properties-param>
+        </init-params>
+      </component-plugin>
+    </external-component-plugins> 
+    
+    <external-component-plugins>
+    <target-component>org.exoplatform.services.scheduler.JobSchedulerService</target-component>
+      <component-plugin>
+        <name>changeStateJobToUnpublished</name>
+        <set-method>addCronJob</set-method>
+        <type>org.exoplatform.services.wcm.extensions.scheduler.ChangeStateCronJob</type>
+        <description>add a job to change the state of content</description>
+        <init-params>         
+          <properties-param>
+            <name>cronjob.info</name>
+            <description>cron job info</description>
+              <property name="jobName" value="changeStateJobToUnpublished"/>
+              <property name="groupName" value="group"/>
+              <property name="job" value="org.exoplatform.services.wcm.extensions.scheduler.impl.ChangeStateCronJobImpl"/>
+              <property name="expression" value="59/100 * * * * ?"/>
+          </properties-param>
+          <properties-param>
+            <name>changeStateCronJob.generalParams</name>
+            <description>General parameters for job</description>
+              <property name="fromState" value="published"/>
+              <property name="toState" value="unpublished"/>
+              <property name="predefinedPath" value="repository:collaboration:/"/>
+          </properties-param>
+        </init-params>
+      </component-plugin>
+    </external-component-plugins>
+  
+  
 </configuration>

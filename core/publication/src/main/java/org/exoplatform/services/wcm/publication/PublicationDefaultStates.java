@@ -26,6 +26,9 @@ public interface PublicationDefaultStates {
 	/** The Constant APPROVED. */
 	public final static String APPROVED = "approved";
 	
+	/** The Constant INREVIEW. */
+	public final static String INREVIEW = "inreview";
+	
 	/** The Constant STAGED. */
 	public final static String STAGED = "staged";
 	

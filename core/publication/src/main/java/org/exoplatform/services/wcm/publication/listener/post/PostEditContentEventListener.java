@@ -22,6 +22,8 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 
 /**
@@ -32,7 +34,9 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
  */
 public class PostEditContentEventListener extends Listener<CmsService,Node> {
 
-  /** The pservice. */
+	  private static final Log log = ExoLogger.getLogger(PostEditContentEventListener.class);
+
+	  /** The pservice. */
   private WCMPublicationService publicationService;
 
   /**
@@ -55,6 +59,7 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
     }
     String siteName = Util.getPortalRequestContext().getPortalOwner();
     String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+    if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
     publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
   }
 }

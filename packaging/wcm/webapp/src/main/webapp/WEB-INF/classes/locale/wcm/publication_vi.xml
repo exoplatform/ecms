@@ -101,11 +101,16 @@
     <status>
       <version>Phiên bản</version>
       <title>Trạng thái</title>
-      <enrolled>Đã được biên soạn</enrolled>
-      <draft>Nháp</draft>
-      <awaiting>Đang chờ</awaiting>
-      <live>Live</live>
-      <obsolete>Hết hạn</obsolete>
+      <archived>Archived</archived>
+      <obsolete>Obsolete</obsolete>
+      <unpublished>Unpublished</unpublished>
+      <enrolled>Enrolled</enrolled>
+      <draft>Draft</draft>
+      <pending>Pending</pending>
+      <approved>Approved</approved>
+      <inreview>In Review</inreview>
+      <staged>Staged</staged>
+      <published>Published</published>
     </status>
     <scheduled>
       <title>Lịch</title>

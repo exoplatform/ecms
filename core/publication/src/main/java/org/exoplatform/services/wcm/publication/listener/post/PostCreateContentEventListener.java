@@ -23,6 +23,8 @@ import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
@@ -37,6 +39,8 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
  */
 public class PostCreateContentEventListener extends Listener<CmsService, Node>{
   
+  private static final Log log = ExoLogger.getLogger(PostCreateContentEventListener.class);
+
   /** The publication service. */
   private WCMPublicationService publicationService;
   
@@ -70,20 +74,14 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
         currentNode.setProperty("exo:title",currentNode.getName()); 
       }      
     }
-    if(webContentSchemaHandler.isWebcontentChildNode(currentNode) || currentNode.isNodeType("exo:cssFile") || 
+    if(currentNode.isNodeType("exo:cssFile") || 
         currentNode.isNodeType("exo:jsFile") || currentNode.getParent().isNodeType("exo:actionStorage")){
       return;    
     }
-    String repository = ((ManageableRepository)currentNode.getSession().getRepository()).getConfiguration().getName();
-    String workspace = currentNode.getSession().getWorkspace().getName();
-    NodeLocation nodeLocation = configurationService.getLivePortalsLocation(repository);
-    if(!workspace.equalsIgnoreCase(nodeLocation.getWorkspace()))
-      return;
-    if(!currentNode.getPath().startsWith(nodeLocation.getPath()))
-      return;
 
     String siteName = Util.getPortalRequestContext().getPortalOwner();
     String remoteUser = Util.getPortalRequestContext().getRemoteUser();    	
+    if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
     if (remoteUser != null) publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
   }
 }

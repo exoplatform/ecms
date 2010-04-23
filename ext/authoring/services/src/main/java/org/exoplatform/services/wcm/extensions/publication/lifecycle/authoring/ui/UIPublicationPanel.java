@@ -55,24 +55,17 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
  */
 @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/wcm/webui/publication/lifecycle/authoring/ui/UIPublicationPanel.gtmpl", events = {
-    @EventConfig(listeners = UIPublicationPanel.DraftActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.ArchivedActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.UnpublishedActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.StagedActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.ApprovedActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.PendingActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.LiveActionListener.class),
-    @EventConfig(name = "obsolete", listeners = UIPublicationPanel.ObsoleteActionListener.class),
+    @EventConfig(listeners = UIPublicationPanel.ChangeStateActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.ChangeVersionActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.PreviewVersionActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.RestoreVersionActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.SeeAllVersionActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.SaveActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.CloseActionListener.class) })
-public class UIPublicationPanel
-                               extends
-                               org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
-  public static final String START_PUBLICATION = "UIPublicationPanelStartDateInput";
+public class UIPublicationPanel extends org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
+	  final static public String OBJECTID = "objectId";
+
+	  public static final String START_PUBLICATION = "UIPublicationPanelStartDateInput";
 
   public static final String END_PUBLICATION   = "UIPublicationPanelEndDateInput";
 
@@ -128,7 +121,7 @@ public class UIPublicationPanel
    * 
    * @see DraftActionEvent
    */
-  public static class ArchivedActionListener extends EventListener<UIPublicationPanel> {
+  public static class ChangeStateActionListener extends EventListener<UIPublicationPanel> {
 
     /*
      * (non-Javadoc)
@@ -137,6 +130,7 @@ public class UIPublicationPanel
      */
     public void execute(Event<UIPublicationPanel> event) throws Exception {
       UIPublicationPanel publicationPanel = event.getSource();
+      String state = event.getRequestContext().getRequestParameter(OBJECTID) ;
       Node currentNode = publicationPanel.getCurrentNode();
       PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
@@ -147,7 +141,7 @@ public class UIPublicationPanel
         context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
       }
       try {
-        publicationPlugin.changeState(currentNode, PublicationDefaultStates.ARCHIVED, context);
+        publicationPlugin.changeState(currentNode, state, context);
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
         publicationPanel.updatePanel();
       } catch (Exception e) {
@@ -159,253 +153,6 @@ public class UIPublicationPanel
     }
   }
 
-  /**
-   * The listener interface for receiving draftAction events. The class that is
-   * interested in processing a draftAction event implements this interface, and
-   * the object created with that class is registered with a component using the
-   * component's <code>addDraftActionListener<code> method. When
-   * the draftAction event occurs, that object's appropriate
-   * method is invoked.
-   * 
-   * @see DraftActionEvent
-   */
-  public static class UnpublishedActionListener extends EventListener<UIPublicationPanel> {
-
-    /*
-     * (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform
-     * .webui.event.Event)
-     */
-    public void execute(Event<UIPublicationPanel> event) throws Exception {
-      UIPublicationPanel publicationPanel = event.getSource();
-      Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-                                                              .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String, String> context = new HashMap<String, String>();
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if (currentRevision != null) {
-        context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
-      }
-      try {
-        publicationPlugin.changeState(currentNode, PublicationDefaultStates.UNPUBLISHED, context);
-        currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
-        publicationPanel.updatePanel();
-      } catch (Exception e) {
-        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-        JCRExceptionManager.process(uiApp, e);
-      }
-      UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
-    }
-  }
-
-  /**
-   * The listener interface for receiving draftAction events. The class that is
-   * interested in processing a draftAction event implements this interface, and
-   * the object created with that class is registered with a component using the
-   * component's <code>addDraftActionListener<code> method. When
-   * the draftAction event occurs, that object's appropriate
-   * method is invoked.
-   * 
-   * @see DraftActionEvent
-   */
-  public static class StagedActionListener extends EventListener<UIPublicationPanel> {
-
-    /*
-     * (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform
-     * .webui.event.Event)
-     */
-    public void execute(Event<UIPublicationPanel> event) throws Exception {
-      UIPublicationPanel publicationPanel = event.getSource();
-      Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-                                                              .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String, String> context = new HashMap<String, String>();
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if (currentRevision != null) {
-        context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
-      }
-      try {
-        publicationPlugin.changeState(currentNode, PublicationDefaultStates.STAGED, context);
-        currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
-        publicationPanel.updatePanel();
-      } catch (Exception e) {
-        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-        JCRExceptionManager.process(uiApp, e);
-      }
-      UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
-    }
-  }
-
-  /**
-   * The listener interface for receiving ApprovedAction events. The class that
-   * is interested in processing a ApprovedAction event implements this
-   * interface, and the object created with that class is registered with a
-   * component using the component's
-   * <code>addApprovedActionListener<code> method. When
-   * the ApprovedAction event occurs, that object's appropriate
-   * method is invoked.
-   * 
-   * @see ApprovedActionEvent
-   */
-  public static class ApprovedActionListener extends EventListener<UIPublicationPanel> {
-
-    /*
-     * (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform
-     * .webui.event.Event)
-     */
-    public void execute(Event<UIPublicationPanel> event) throws Exception {
-      UIPublicationPanel publicationPanel = event.getSource();
-      Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-                                                              .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String, String> context = new HashMap<String, String>();
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if (currentRevision != null) {
-        context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
-      }
-      try {
-        publicationPlugin.changeState(currentNode, PublicationDefaultStates.APPROVED, context);
-        currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
-        publicationPanel.updatePanel();
-      } catch (Exception e) {
-        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-        JCRExceptionManager.process(uiApp, e);
-      }
-      UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
-    }
-  }
-
-  /**
-   * The listener interface for receiving PendingAction events. The class that
-   * is interested in processing a PendingAction event implements this
-   * interface, and the object created with that class is registered with a
-   * component using the component's
-   * <code>addPendingActionListener<code> method. When
-   * the PendingAction event occurs, that object's appropriate
-   * method is invoked.
-   * 
-   * @see PendingAction
-   */
-  public static class PendingActionListener extends EventListener<UIPublicationPanel> {
-
-    /*
-     * (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform
-     * .webui.event.Event)
-     */
-    public void execute(Event<UIPublicationPanel> event) throws Exception {
-      UIPublicationPanel publicationPanel = event.getSource();
-      Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-                                                              .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String, String> context = new HashMap<String, String>();
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if (currentRevision != null) {
-        context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
-      }
-      try {
-        publicationPlugin.changeState(currentNode, PublicationDefaultStates.PENDING, context);
-        currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
-        publicationPanel.updatePanel();
-      } catch (Exception e) {
-        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-        JCRExceptionManager.process(uiApp, e);
-      }
-      UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
-    }
-  }
-
-  /**
-   * The listener interface for receiving draftAction events. The class that is
-   * interested in processing a draftAction event implements this interface, and
-   * the object created with that class is registered with a component using the
-   * component's <code>addDraftActionListener<code> method. When
-   * the draftAction event occurs, that object's appropriate
-   * method is invoked.
-   * 
-   * @see DraftActionEvent
-   */
-  public static class DraftActionListener extends EventListener<UIPublicationPanel> {
-
-    /*
-     * (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform
-     * .webui.event.Event)
-     */
-    public void execute(Event<UIPublicationPanel> event) throws Exception {
-      UIPublicationPanel publicationPanel = event.getSource();
-      Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-                                                              .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String, String> context = new HashMap<String, String>();
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if (currentRevision != null) {
-        context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
-      }
-      try {
-        publicationPlugin.changeState(currentNode, PublicationDefaultStates.DRAFT, context);
-        currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
-        publicationPanel.updatePanel();
-      } catch (Exception e) {
-        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-        JCRExceptionManager.process(uiApp, e);
-      }
-      UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
-    }
-  }
-
-  /**
-   * The listener interface for receiving liveAction events. The class that is
-   * interested in processing a liveAction event implements this interface, and
-   * the object created with that class is registered with a component using the
-   * component's <code>addLiveActionListener<code> method. When
-   * the liveAction event occurs, that object's appropriate
-   * method is invoked.
-   * 
-   * @see LiveActionEvent
-   */
-  public static class LiveActionListener extends EventListener<UIPublicationPanel> {
-
-    /*
-     * (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform
-     * .webui.event.Event)
-     */
-    public void execute(Event<UIPublicationPanel> event) throws Exception {
-      UIPublicationPanel publicationPanel = event.getSource();
-      Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-                                                              .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String, String> context = new HashMap<String, String>();
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if (currentRevision != null) {
-        context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
-      }
-      try {
-        publicationPlugin.changeState(currentNode, PublicationDefaultStates.PUBLISHED, context);
-        currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
-        publicationPanel.updatePanel();
-      } catch (Exception e) {
-        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-        JCRExceptionManager.process(uiApp, e);
-      }
-      UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-      publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
-    }
-  }
 
   public static class SaveActionListener extends EventListener<UIPublicationPanel> {
     public void execute(Event<UIPublicationPanel> event) throws Exception {

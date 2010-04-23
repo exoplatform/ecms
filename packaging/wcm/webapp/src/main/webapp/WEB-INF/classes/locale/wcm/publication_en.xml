@@ -51,9 +51,9 @@
   <UITabPane>
     <title>
       <UIPublishingPanel>Publication Panel</UIPublishingPanel>
-      <UIPublicationPanel>Publication status</UIPublicationPanel>
-      <UIPublicationPagesContainer>Publication pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>Publication history</UIPublicationHistory>
+      <UIPublicationPanel>Revision</UIPublicationPanel>
+      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version viewer</UIVersionViewer>
     </title>
   </UITabPane>
@@ -101,11 +101,16 @@
     <status>
       <version>Revision</version>
       <title>Status</title>
+      <archived>Archived</archived>
+      <obsolete>Obsolete</obsolete>
+      <unpublished>Unpublished</unpublished>
       <enrolled>Enrolled</enrolled>
       <draft>Draft</draft>
-      <awaiting>Awaiting</awaiting>
+      <pending>Pending</pending>
+      <approved>Approved</approved>
+      <inreview>In Review</inreview>
+      <staged>Staged</staged>
       <published>Published</published>
-      <obsolete>Obsolete</obsolete>
     </status>
     <scheduled>
       <title>Scheduled</title>

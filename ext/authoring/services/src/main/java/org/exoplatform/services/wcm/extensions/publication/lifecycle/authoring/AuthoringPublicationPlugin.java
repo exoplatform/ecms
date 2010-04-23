@@ -291,10 +291,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       revisionsMap.put(liveVersion.getUUID(), liveRevisionData);
       addRevisionData(node, revisionsMap.values());
     }
+    node.setProperty("publication:lastUser", userId);
 
     if (!node.isNew())
       node.save();
-    node.setProperty("publication:lastUser", userId);
     ListenerService listenerService = (ListenerService) container.getComponentInstanceOfType(ListenerService.class);
     listenerService.broadcast(AuthoringPublicationConstant.POST_UPDATE_STATE_EVENT, null, node);
   }

@@ -101,11 +101,16 @@
     <status>
       <version>Révision</version>
       <title>Etat</title>
+      <archived>Archivé</archived>
+      <obsolete>Obsolète</obsolete>
+      <unpublished>Non Publié</unpublished>
       <enrolled>Créé</enrolled>
       <draft>Brouillon</draft>
-      <awaiting>En attente</awaiting>
-      <live>Publié</live>
-      <obsolete>Obsolète</obsolete>
+      <pending>Rédigé</pending>
+      <approved>Validé</approved>
+      <inreview>En revue</inreview>
+      <staged>Prêt à publier</staged>
+      <published>Publié</published>
     </status>
     <scheduled>
       <title>Planifier</title>

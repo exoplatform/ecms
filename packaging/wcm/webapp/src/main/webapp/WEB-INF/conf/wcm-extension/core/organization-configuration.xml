@@ -66,6 +66,18 @@
                     <field name="description"><string>webdesigner membership type</string></field>
                   </object>
                 </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type"><string>author</string></field>
+                    <field name="description"><string>author membership type</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type"><string>publisher</string></field>
+                    <field name="description"><string>publisher membership type</string></field>
+                  </object>
+                </value>
               </collection>
             </field>
 
@@ -112,7 +124,7 @@
                     <field name="firstName"><string>Mary</string></field>
                     <field name="lastName"><string>Kelly</string></field>
                     <field name="email"><string>mary@localhost</string></field>
-                    <field name="groups"><string>member:/platform/users,editor:/platform/web-contributors</string></field>
+                    <field name="groups"><string>member:/platform/users,editor:/platform/web-contributors,manager:/platform/web-contributors,publisher:/platform/web-contributors</string></field>
                   </object>
                 </value>
                 <value>
@@ -122,7 +134,7 @@
                     <field name="firstName"><string>James</string></field>
                     <field name="lastName"><string>Anderson</string></field>
                     <field name="email"><string>james@localhost</string></field>
-                    <field name="groups"><string>member:/platform/users,redactor:/platform/web-contributors</string></field>
+                    <field name="groups"><string>member:/platform/users,redactor:/platform/web-contributors,author:/platform/web-contributors</string></field>
                   </object>
                 </value>
                 <value>

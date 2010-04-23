@@ -74,6 +74,7 @@ public class WCMPublicationServiceImpl
    */
   public void enrollNodeInLifecycle(Node node, String siteName, String remoteUser) {
     try {
+      if (log.isInfoEnabled()) log.info(node.getPath() + "::" + siteName + "::"+remoteUser);
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
       ContextComparator comparator = new ContextComparator();
