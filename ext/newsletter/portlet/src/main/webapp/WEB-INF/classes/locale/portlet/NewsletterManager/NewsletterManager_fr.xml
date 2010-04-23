@@ -201,7 +201,7 @@
       <UIWCMFormSubscriptionRedactor>Rédacteur</UIWCMFormSubscriptionRedactor>
     </label>
     <action>
-    	<Save>Enregistrer</Save>
+    	<Save>Sauver</Save>
     	<Cancel>Annuler</Cancel>
     </action>
   </UISubcriptionForm>
@@ -216,7 +216,7 @@
     </action>
     <msg>
       <UpdateBeforeSave>
-        Merci de valider la date d'envoi envoyer d'enregistrer la lettre. 
+        Merci de valider la date d'envoi envoyer de sauver la lettre. 
 			</UpdateBeforeSave>
       <DateTimeIsNotNull>
         la date d'envoi est nulle. Merci de vérifier à nouveau!

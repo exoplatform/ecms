@@ -25,14 +25,14 @@
   <UIFCCConfig>
     <label>
       <select-repository>Sélectionner référentiel</select-repository>
-      <UIFCCSaveLocationField>Où enregistrer ?</UIFCCSaveLocationField>
+      <UIFCCSaveLocationField>Où sauver ?</UIFCCSaveLocationField>
       <UIFCCRepositoryFormSelectBox>Sélectionner référentiel</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Sélectionner espace de travail</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Répertoire de stockage</UIFCCLocationFormInputAction>
       <UIFCCLocationFormStringInput></UIFCCLocationFormStringInput>
       <UIFCCTemplateFormSelectBox>Sélectionner un modèle</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Personnaliser le bouton Enregistrer</UIFCCSaveFormStringInput>
+      <UIFCCSaveFormStringInput>Personnaliser le bouton Sauver</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Message de remerciement</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirection</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>URL de redirection</UIFCCRedirectPathFormStringInput>
@@ -42,7 +42,7 @@
     <msg>
       <save-successfully>Enregistré avec succès</save-successfully>
       <item-not-found>Ce chemin n'est pas valide!</item-not-found>
-      <fileType-empty>Vous devez choisir le type de fichier avant d'enregistrer</fileType-empty>
+      <fileType-empty>Vous devez choisir le type de fichier avant de sauver</fileType-empty>
       <ws-empty>Vous devez choisir l'espace de travail.</ws-empty>
       <get-template>Modèle non disponible</get-template>
       <set-template-option>Erreur sur le modèle</set-template-option>
@@ -123,8 +123,8 @@
       <Close>Fermer</Close>
     </action>
     <msg>
-      <repository-exception>Ne peut pas enregistrer cette action. Le nom fourni ne doit pas avoir un indice sur son dernier élément.</repository-exception>
-      <numberformat-exception>Ne peut pas enregistrer cette action. Le nom ne doit pas avoir fourni '[' ou ']'.</numberformat-exception>
+      <repository-exception>Ne peut pas sauver cette action. Le nom fourni ne doit pas avoir un indice sur son dernier élément.</repository-exception>
+      <numberformat-exception>Ne peut pas sauver cette action. Le nom ne doit pas avoir fourni '[' ou ']'.</numberformat-exception>
       <existed-action>Le nom de l'action '{0}' est en vigueur, afin de choisir un autre nom, s'il vous plaît!</existed-action>
       <unable-add-action>Impossible d'ajouter cette action</unable-add-action>
       <unable-add>Impossible d'ajouter cette action! Ce nœud est la racine ou vous n'avez pas assez de permission</unable-add>

@@ -374,7 +374,7 @@
     <login>Connexion</login>
     <logout>Déconnexion</logout>
     <language>Changer de langue</language>
-    <register>Enregistrer</register>
+    <register>S'inscrire</register>
   </Signin>
   
   <UIDriveForm>
