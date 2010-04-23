@@ -27,8 +27,8 @@
       </option>
       <DisplaySettingBlock>Réglages</DisplaySettingBlock>
       <Header>Entête</Header>
-      <FormViewTemplate>Template de vue</FormViewTemplate>
-      <PaginatorTemplate>Template de pagination</PaginatorTemplate>
+      <FormViewTemplate>Modèle de vue</FormViewTemplate>
+      <PaginatorTemplate>Modèle de pagination</PaginatorTemplate>
       <UICLVBasePathInputSetAction>URL de destination</UICLVBasePathInputSetAction>
       <UICLVBasePathInput></UICLVBasePathInput>
       <ItemsPerPage>Contenus par page</ItemsPerPage>

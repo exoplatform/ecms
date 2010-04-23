@@ -465,8 +465,8 @@
   
   <UIDocumentForm>
   	<msg>
-  		<not-support>Impossible de charger le template '{0}'.</not-support>
-  		<do-not-permission>Vous n'avez pas accès au template '{0}'.</do-not-permission>
+  		<not-support>Impossible de charger le modèle '{0}'.</not-support>
+  		<do-not-permission>Vous n'avez pas accès au modèle '{0}'.</do-not-permission>
   	</msg>
   </UIDocumentForm>
   <!--

@@ -22,9 +22,9 @@
       </option>
       <DisplaySettingBlock>L'écran de réglage</DisplaySettingBlock>
       <Header>Header</Header>
-      <AutomaticDetection>Automatic Detection</AutomaticDetection>
-      <FormViewTemplate>Viewer template</FormViewTemplate>
-      <PaginatorTemplate>Paginator template</PaginatorTemplate>
+      <AutomaticDetection>Détection automatique</AutomaticDetection>
+      <FormViewTemplate>Modèle de vue</FormViewTemplate>
+      <PaginatorTemplate>Modèle de pagination</PaginatorTemplate>
       <UICategoryNavigationTreeNameFormSelectBox>Arbre taxonomique</UICategoryNavigationTreeNameFormSelectBox>
       <ItemsPerPage>Articles par page</ItemsPerPage>
       <ViewerTitle>Afficher le titre</ViewerTitle>

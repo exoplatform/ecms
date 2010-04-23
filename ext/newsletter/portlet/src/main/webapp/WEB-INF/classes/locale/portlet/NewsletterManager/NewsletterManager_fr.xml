@@ -228,7 +228,7 @@
       <NodeNameInvalid>
         Impossible de créer la lettre car son titre existe déjà. Merci d'essayer à nouveau!
 			</NodeNameInvalid>
-      <get-template>erreur lorsque vous effectuez obtenir template. </get-template>
+      <get-template>erreur lorsque vous effectuez obtenir modèle. </get-template>
       <get-template-resource>erreur lorsque vous effectuez obtenir modèle de résolution de ressource </get-template-resource>
       <add-email-newsletter>erreur lorsque vous effectuez ajouter l'adresse e-mail liste. </add-email-newsletter>
       <send-newsletter>erreur lorsque vous effectuez envoyer des lettres d'informations. </send-newsletter>

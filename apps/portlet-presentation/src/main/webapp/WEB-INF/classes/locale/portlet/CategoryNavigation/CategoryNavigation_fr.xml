@@ -31,7 +31,7 @@
       <UICategoryNavigationTreeTitleFormStringInput>Titre</UICategoryNavigationTreeTitleFormStringInput>
       <UICategoryNavigationTargetPathFormInputSet>Target Path</UICategoryNavigationTargetPathFormInputSet>
       <UICategoryNavigationTreeNameFormSelectBox>Nom de l'arbre</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Le modèle de l'abre vue</UICategoryNavigationTemplateFormSelectBox>
     </label>
     <msg>
       <not-support-encoding>L'encodage est prend pas en charge.</not-support-encoding>
