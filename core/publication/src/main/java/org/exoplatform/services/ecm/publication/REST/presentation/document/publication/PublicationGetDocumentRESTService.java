@@ -168,8 +168,8 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
     Value[] history = currentNode.getProperty("publication:history").getValues();
     String time = currentNode.getProperty("exo:dateModified").getString();
     for (Value value : history) {
-      String[] arrHistory = value.getString().split(",");
-      time = arrHistory[0];
+      String[] arrHistory = value.getString().split(";");
+      time = arrHistory[3];
     }
     return String.valueOf(ISO8601.parse(time).getTimeInMillis());
   }
@@ -190,8 +190,8 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
     private String getDateTime(Node currentNode) throws Exception {
       Value[] history = currentNode.getProperty("publication:history").getValues();
       for (Value value : history) {
-        String[] arrHistory = value.getString().split(",");
-        return arrHistory[0];
+        String[] arrHistory = value.getString().split(";");
+        return arrHistory[3];
       }
       return currentNode.getProperty("exo:dateModified").getString();
     }

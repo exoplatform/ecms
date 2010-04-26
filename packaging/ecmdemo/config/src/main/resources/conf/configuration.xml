@@ -49,6 +49,9 @@
 				                <value>
 				                  <string>web</string>
 				                </value>
+                        <value>
+                          <string>eXoDMSGadgets</string>
+                        </value>
 				                <value>
 				                  <string>eXoDMSResources</string>
 				                </value>

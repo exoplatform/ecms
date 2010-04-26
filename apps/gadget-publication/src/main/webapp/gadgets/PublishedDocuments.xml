@@ -6,6 +6,7 @@
 		directory_title="Published documents"
 		title_url="http://www.exoplatform.org"
 		description="The last published documents"
+    thumbnail="http://localhost:8080/eXoDMSGadgets/skin/DefaultSkin/gadgetIcons/PublishedDocument.png"
 		height="227">
 	</ModulePrefs>
 	<Content type="html">
@@ -219,8 +220,8 @@
 				prefixUrl += ':' + location.port;
 			}
 
-			var siteUrl = prefixUrl + '/portal/rest/publication/presentation/repository/collaboration/state?showItems=5';
-			var accessUrl = prefixUrl + '/portal/private/classic/fileexplorer/repository/';
+			var siteUrl = prefixUrl + '/ecmdemo/rest-ecmdemo/publication/presentation/repository/collaboration/state?showItems=5';
+			var accessUrl = prefixUrl + '/ecmdemo/private/classic/siteExplorer/repository/';
 			
 			/**
 				* Time to refresh data in client and gadget server

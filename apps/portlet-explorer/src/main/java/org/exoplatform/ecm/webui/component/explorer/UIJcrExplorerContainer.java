@@ -180,7 +180,7 @@ public class UIJcrExplorerContainer extends UIContainer {
       Preference pref = uiExplorer.getPreference();
       if (pref == null) {
         pref = new Preference();
-        pref.setNodesPerPage(Integer.parseInt(portletPref.getValue(Preference.NODES_PER_PAGE, "10")));
+        pref.setNodesPerPage(Integer.parseInt(portletPref.getValue(Preference.NODES_PER_PAGE, "20")));
         uiExplorer.setPreferences(pref);
       }
     }

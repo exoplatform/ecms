@@ -17,6 +17,7 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
@@ -67,7 +68,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                                                                                       Exception {
     String versionName = context.get(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME);
     String logItemName = versionName;
-    String userId = node.getSession().getUserID();
+    String userId = Util.getPortalRequestContext().getRemoteUser();//node.getSession().getUserID();
     Node selectedRevision = null;
     if (node.getName().equals(versionName) || versionName == null) {
       selectedRevision = node;
@@ -85,7 +86,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
-                                  node.getSession().getUserID(),
+                                  userId,
                                   GregorianCalendar.getInstance(),
                                   StageAndVersionPublicationConstant.PUBLICATION_LOG_DRAFT);
       addLog(node, versionLog);
@@ -104,7 +105,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
-                                  node.getSession().getUserID(),
+                                  userId,
                                   GregorianCalendar.getInstance(),
                                   AuthoringPublicationConstant.CHANGE_TO_APPROVED);
       addLog(node, versionLog);
@@ -123,7 +124,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
-                                  node.getSession().getUserID(),
+                                  userId,
                                   GregorianCalendar.getInstance(),
                                   AuthoringPublicationConstant.CHANGE_TO_STAGED);
       addLog(node, versionLog);
@@ -141,7 +142,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     if (PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
       versionLog = new VersionLog(logItemName,
                                   newState,
-                                  node.getSession().getUserID(),
+                                  userId,
                                   GregorianCalendar.getInstance(),
                                   StageAndVersionPublicationConstant.PUBLICATION_LOG_LIFECYCLE);
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
@@ -209,7 +210,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
-                                  node.getSession().getUserID(),
+                                  userId,
                                   GregorianCalendar.getInstance(),
                                   StageAndVersionPublicationConstant.PUBLICATION_LOG_DRAFT);
       addLog(node, versionLog);
@@ -532,7 +533,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       return null;
 
     // if current mode is edit mode
-    if (context.get(WCMComposer.FILTER_MODE).equals(WCMComposer.MODE_EDIT))
+    if (context==null || context.get(WCMComposer.FILTER_MODE).equals(WCMComposer.MODE_EDIT))
       return node;
 
     // if current mode is live mode

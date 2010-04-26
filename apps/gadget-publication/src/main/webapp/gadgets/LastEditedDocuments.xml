@@ -13,6 +13,7 @@
 		directory_title="Last edited documents"
 		title_url="http://www.exoplatform.org"
 		description="The last edited documents"
+    thumbnail="http://localhost:8080/eXoDMSGadgets/skin/DefaultSkin/gadgetIcons/PublishedDocument.png"
 		height="230">
 	</ModulePrefs>
 	<Content type="html">
@@ -238,8 +239,8 @@
 				*	showItems: Maximum size of list documents
 				* showGadgetWs: =true: show data in gadgets workspace. In default we ignore this param.
 			 */
-			var siteUrl = prefixUrl + '/portal/rest/presentation/document/edit/repository?showItems=5';
-			var accessUrl = prefixUrl + '/portal/private/classic/fileexplorer/repository/';
+			var siteUrl = prefixUrl + '/ecmdemo/rest-ecmdemo/presentation/document/edit/repository?showItems=5';
+			var accessUrl = prefixUrl + '/ecmdemo/private/classic/siteExplorer/repository/';
 			var refreshInterval = 60000;
 			  
 			LastEditedDocument.prototype.makeRequest = function(url, callback) {
