@@ -20,6 +20,7 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.RenderResponse;
 
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.pcv.config.UIPCVConfig;
 import org.exoplatform.webui.application.WebuiApplication;
@@ -59,7 +60,9 @@ public class UIPCVPortlet extends UIPortletApplication {
   public final static String SHOW_DATE_CREATED       = "showDateCreated";
 
   /** The Constant SHOW_BAR. */
-  public final static String SHOW_BAR       = "showBar";
+  public final static String SHOW_BAR        		 = "showBar";
+  
+  private String currentNodePath;
   
   /** The mode_. */
   private PortletMode        mode                    = PortletMode.VIEW;
@@ -93,8 +96,12 @@ public class UIPCVPortlet extends UIPortletApplication {
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
    */
   
-  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
-    PortletRequestContext pContext = (PortletRequestContext) context ;
+  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {	
+	  if(Util.getPortalRequestContext().getRequestParameter("path") != null) {
+		  setCurrentNodePath(Util.getPortalRequestContext().getRequestParameter("path").substring(1));
+	  }
+
+	  PortletRequestContext pContext = (PortletRequestContext) context ;
     PortletMode newMode = pContext.getApplicationMode() ;
     if(!mode.equals(newMode)) {
       activateMode(newMode) ;
@@ -123,4 +130,13 @@ public class UIPCVPortlet extends UIPortletApplication {
     String userId = context.getRemoteUser();
     return Utils.canEditCurrentPortal(userId);
   }
+
+  public String getCurrentNodePath() {
+	return currentNodePath;
+  }
+
+  public void setCurrentNodePath(String currentNodePath) {
+	this.currentNodePath = currentNodePath;
+  }
+  
 }
