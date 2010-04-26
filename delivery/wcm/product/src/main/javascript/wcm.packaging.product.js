@@ -64,6 +64,10 @@ function getProduct(version) {
 
   product.module = wcm ;
   product.dependencyModule = [kernel, core, ws, eXoJcr, portal, dms];
-    
+  // Use new version of commons-logging override Product.preDeploy()
+  product.preDeploy = function() { 
+	  product.removeDependency(new Project("commons-logging", "commons-logging", "jar", "1.0.4"));
+	  product.addDependencies(new Project("commons-logging", "commons-logging", "jar", "1.1.1"));
+  }
   return product ;
 }
