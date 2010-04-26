@@ -44,7 +44,7 @@ public class BackupContentActionHandler implements ActionHandler {
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     } finally {
-      context.getSchedulerInstance().cancel("backupTimer", context.getToken());
+      ProcessUtil.deleteTimer(context, "backupTimer", context.getToken());
       context.getToken().signal("backup-done");      
     }
   }
@@ -56,8 +56,8 @@ public class BackupContentActionHandler implements ActionHandler {
     String currentPath = currentLocation[2];
     String backupWorkspace = (String)context.getVariable("exo:backupWorkspace");
     String backupPath = (String)context.getVariable("exo:backupPath");
-    String realBackupPath = ProcessUtil.computeDestinationPath(currentPath,backupPath);                
-    CmsService cmsService = ProcessUtil.getService(CmsService.class);
+    String realBackupPath = ProcessUtil.computeDestinationPath(context, currentPath,backupPath);                
+    CmsService cmsService = ProcessUtil.getService(context, CmsService.class);
     cmsService.moveNode(currentPath, currentWorkspace, backupWorkspace, realBackupPath, repository);
     ProcessUtil.setCurrentLocation(context,backupWorkspace,realBackupPath);    
     ProcessUtil.backup(context);

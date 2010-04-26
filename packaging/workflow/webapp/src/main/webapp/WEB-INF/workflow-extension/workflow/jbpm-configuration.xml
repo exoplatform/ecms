@@ -12,24 +12,7 @@
     <type>org.exoplatform.services.workflow.impl.jbpm.WorkflowFileDefinitionServiceImpl</type>
   </component>
 
-  <component>
-    <type>org.exoplatform.services.workflow.impl.jbpm.SchedulerService</type>
-  </component>  
-    
-  <component>
-    <key>org.exoplatform.services.workflow.WorkflowServiceContainer</key>
-    <type>org.exoplatform.services.workflow.impl.jbpm.WorkflowServiceContainerImpl</type>            
-    <init-params>
-      <value-param>
-        <name>hibernate.service</name>
-        <description>if  this param is not existed or the value is empty, null or default.
-          The workflow service will use the default Hibernate service.  If you modify the value,
-          You need to  update the external plugin for  the hibernate service that you use as well</description>
-        <value>default</value>
-      </value-param>
-    </init-params>
-  </component>  
- 	<external-component-plugins>
+  <external-component-plugins>
 		<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>	  
     <component-plugin>
       <name>deploy.predefined.processes</name>

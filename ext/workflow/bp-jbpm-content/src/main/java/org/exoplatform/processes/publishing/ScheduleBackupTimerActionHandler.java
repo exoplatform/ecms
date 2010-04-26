@@ -18,14 +18,13 @@ package org.exoplatform.processes.publishing;
 
 import java.util.Date;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.workflow.impl.jbpm.WorkflowServiceContainerImpl;
-import org.jbpm.db.JbpmSession;
+import org.jbpm.JbpmContext;
 import org.jbpm.graph.def.Action;
 import org.jbpm.graph.exe.ExecutionContext;
 import org.jbpm.instantiation.Delegation;
-import org.jbpm.scheduler.exe.Timer;
 
 /**
  * Created by The eXo Platform SAS
@@ -57,25 +56,23 @@ public class ScheduleBackupTimerActionHandler extends BackupContentActionHandler
           backupAction.setActionDelegation(delegation);
           backupAction.setProcessDefinition(context.getProcessDefinition());        
           context.getProcessDefinition().addAction(backupAction);
-          // create the timer               
-          //Token token = new Token(context.getToken(),context.getNode().getName());               
-          Timer timer = new Timer(context.getToken());        
-          timer.setName("backupTimer");
-          timer.setDueDate(endDate);
-          timer.setGraphElement(context.getEventSource());
-          timer.setTaskInstance(context.getTaskInstance());
-          timer.setAction(backupAction);
-          timer.setTransitionName("end");        
-          context.getSchedulerInstance().schedule(timer);
+          //create the timer      
+          org.jbpm.job.Timer jobTimer = new org.jbpm.job.Timer(context.getToken());
+          jobTimer.setName("backupTimer");            
+          jobTimer.setDueDate(endDate);
+          jobTimer.setGraphElement(context.getEventSource());
+          jobTimer.setTaskInstance(context.getTaskInstance());
+          jobTimer.setAction(backupAction);
+          jobTimer.setTransitionName("end");  
+          ProcessUtil.createTimer(context, jobTimer);
+          
           //TODO we should change this code to update process by asynchronys technichque
-          WorkflowServiceContainerImpl containerImpl = ProcessUtil.getService(WorkflowServiceContainerImpl.class);
-          JbpmSession session = containerImpl.openSession();
-          session.beginTransaction();
-          session.getGraphSession().saveProcessInstance(context.getProcessInstance());        
-          session.commitTransaction();
+          WorkflowServiceContainerImpl containerImpl = ProcessUtil.getService(context, WorkflowServiceContainerImpl.class);
+          JbpmContext jbpmContext = containerImpl.openJbpmContext();
+          jbpmContext.save(context.getProcessInstance());        
         } else {                
-          backupContent(context);        
-          context.getToken().signal("backup-done");
+          backupContent(context);      
+          context.getProcessInstance().getRootToken().signal("backup-done");
         }      
       }
     } catch (Exception ex) {

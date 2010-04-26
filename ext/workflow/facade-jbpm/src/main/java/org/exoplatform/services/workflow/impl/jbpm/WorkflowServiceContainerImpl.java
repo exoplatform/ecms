@@ -24,12 +24,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.jar.JarInputStream;
 import java.util.zip.ZipInputStream;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.component.ComponentLifecycle;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
@@ -51,14 +49,17 @@ import org.exoplatform.services.workflow.WorkflowFileDefinitionService;
 import org.exoplatform.services.workflow.WorkflowFormsService;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
 import org.hibernate.cfg.Configuration;
+import org.jbpm.JbpmConfiguration;
+import org.jbpm.JbpmContext;
 import org.jbpm.context.exe.ContextInstance;
 import org.jbpm.db.GraphSession;
 import org.jbpm.db.JbpmSchema;
-import org.jbpm.db.JbpmSession;
-import org.jbpm.db.JbpmSessionFactory;
 import org.jbpm.graph.def.ProcessDefinition;
-import org.jbpm.jpdl.par.ProcessArchiveDeployer;
+import org.jbpm.job.executor.JobExecutor;
+import org.jbpm.persistence.db.DbPersistenceServiceFactory;
+import org.jbpm.svc.Services;
 import org.jbpm.taskmgmt.exe.TaskInstance;
+import org.picocontainer.Startable;
 /**
  * Created by the eXo platform team
  * User: Benjamin Mestrallet
@@ -66,27 +67,29 @@ import org.jbpm.taskmgmt.exe.TaskInstance;
  */
 public class WorkflowServiceContainerImpl implements
     WorkflowServiceContainer,
-    ComponentLifecycle,
+    Startable,
     ComponentRequestLifecycle {
 
   private ConfigurationManager configurationManager_;
   private List<ProcessesConfig> configs_;
-  private JbpmSessionFactory sessionFactory_;
+  private JbpmConfiguration jbpmConfiguration;
+  private OrganizationService orgService_;
   private ThreadLocal threadLocal_;
   private String hibernateServiceName_;
   private WorkflowFileDefinitionService fileDefinitionService_ ;
-  private OrganizationService organizationService;
   private static final Log LOG  = ExoLogger.getLogger(WorkflowServiceContainerImpl.class.getName());
+  private String jbpm_cfg;
   
-  public WorkflowServiceContainerImpl(WorkflowFileDefinitionService fileDefinitionService,
-      OrganizationService organizationService,
+  
+  public WorkflowServiceContainerImpl(OrganizationService orgService,WorkflowFileDefinitionService fileDefinitionService,
       ConfigurationManager conf, InitParams params) throws Exception {
     hibernateServiceName_ = params.getValueParam("hibernate.service").getValue();
     configs_ =  new ArrayList<ProcessesConfig>();
     this.configurationManager_ = conf;
     threadLocal_ = new ThreadLocal();
-    this.organizationService = organizationService;
+    orgService_ = orgService;
     this.fileDefinitionService_ = fileDefinitionService;
+    jbpm_cfg = params.getValueParam("jbpm_cfg").getValue();
   }
 
   /**
@@ -119,42 +122,45 @@ public class WorkflowServiceContainerImpl implements
           .getComponentInstance(hibernateServiceName_);
     }
     Configuration hconf = hservice.getHibernateConfiguration();
-    sessionFactory_ = JbpmSessionFactory.buildJbpmSessionFactory(hconf);
-    JbpmSchema schema = sessionFactory_.getJbpmSchema();
-    if (!schema.hasJbpmTables()) {
-      schema.createSchema();
-    }
-    init();
+		jbpmConfiguration = JbpmConfiguration
+				.parseInputStream(configurationManager_.getInputStream(jbpm_cfg));
+		DbPersistenceServiceFactory persistenceServiceFactory = (DbPersistenceServiceFactory) openJbpmContext()
+				.getServiceFactory(Services.SERVICENAME_PERSISTENCE);
+		persistenceServiceFactory.setConfiguration(hconf);
+		JbpmSchema jbpmSchema = persistenceServiceFactory.getJbpmSchema();
+		if (jbpmSchema.getJbpmTables().size() == 0) 
+			jbpmSchema.createSchema();
+		init();
   }
 
-  public void startComponent(ExoContainer arg0) throws Exception {
-  }
-
-  public void stopComponent(ExoContainer arg0) throws Exception {
-  }
+	@Override
+	public void start() {
+		try {
+			initComponent(ExoContainerContext.getCurrentContainer());
+			// Start JobExecutor that replace old class file ExoScheduler
+			jbpmConfiguration.startJobExecutor();
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+	}
 
   public void destroyComponent(ExoContainer arg0) throws Exception {
   }
 
-  public JbpmSessionFactory getJbpmSessionFactory() {
-    return sessionFactory_;
+  public JbpmContext openJbpmContext() {
+  	JbpmContext currentJbpmcontext = (JbpmContext) threadLocal_.get();
+    if (currentJbpmcontext == null) {
+      threadLocal_.set(jbpmConfiguration.createJbpmContext());
+    }
+    return (JbpmContext)threadLocal_.get();
   }
 
-  public JbpmSession openSession() {
-    JbpmSession currentSession = (JbpmSession) threadLocal_.get();
-    if (currentSession == null) {
-      currentSession = this.sessionFactory_
-          .openJbpmSessionAndBeginTransaction();
-      threadLocal_.set(currentSession);
-    }
-    return currentSession;
-  }
 
   private void init() {
     // init the default processes
-    JbpmSession session = openSession();
+    JbpmContext jbpmContext = openJbpmContext();
     try {
-      if (!session.getGraphSession().findAllProcessDefinitions().isEmpty())
+      if (!jbpmContext.getGraphSession().findAllProcessDefinitions().isEmpty())
         return;
 
       // Iterate through each Processes Configuration to deploy
@@ -167,8 +173,8 @@ public class WorkflowServiceContainerImpl implements
           InputStream iS;
           try {
             iS = configurationManager_.getInputStream(processLoc + parFile);
-            ProcessArchiveDeployer.deployZipInputStream(new ZipInputStream(iS),
-              this.sessionFactory_);
+            ProcessDefinition processDefinition = ProcessDefinition.parseParZipInputStream(new ZipInputStream(iS));
+            jbpmContext.deployProcessDefinition(processDefinition);
           } catch (Exception e) {
             // process does not exist
           	LOG.error(e);
@@ -176,39 +182,24 @@ public class WorkflowServiceContainerImpl implements
         }
       }
     } finally {
-      closeSession();
+      closeJbpmContext();
     }
   }
 
-  public void closeSession() {
-    JbpmSession s = (JbpmSession) threadLocal_.get();
-    this.closeSession(s);
+  public void closeJbpmContext() {
+  	JbpmContext jbpmContext = (JbpmContext) threadLocal_.get();
+    this.closeJbpmContext(jbpmContext);
   }
-  
-  public void closeSession(JbpmSession session) {
-    if (session == null)
+
+  public void closeJbpmContext(JbpmContext jbpmContext) {
+  	if (jbpmContext == null)
       return;
     try {
-      if (session.getTransaction() != null)
-        session.commitTransactionAndClose();
+      jbpmContext.close();
+      jbpmContext = null;
     } catch (Throwable t) {
+    	jbpmContext.setRollbackOnly();
     	LOG.error(t);
-      session.rollbackTransactionAndClose();
-    }
-    threadLocal_.set(null);
-  }
-
-  public void rollback() {
-    JbpmSession s = (JbpmSession) threadLocal_.get();
-    this.rollback(s);
-  }
-
-  public void rollback(JbpmSession session) {
-    if (session == null)
-      return;
-    try {
-      session.rollbackTransactionAndClose();
-    } catch (Throwable t) {
     }
     threadLocal_.set(null);
   }
@@ -229,8 +220,8 @@ public class WorkflowServiceContainerImpl implements
   }
 
   public List<Task> getUserTaskList(String user) {
-    JbpmSession session = openSession();
-    List taskInstances = session.getTaskMgmtSession().findTaskInstances(user);    
+  	JbpmContext jbpmContext = openJbpmContext();
+    List taskInstances = jbpmContext.getTaskMgmtSession().findTaskInstances(user);    
     return wrapTasks(taskInstances);
 
   }
@@ -239,34 +230,34 @@ public class WorkflowServiceContainerImpl implements
     List<Task> groupTasks = new ArrayList<Task>();
     HashSet<TaskInstance> hashSet = new HashSet<TaskInstance>();
     String key = null;
-    Collection groups = organizationService.getGroupHandler().findGroupsOfUser(user);
-    Collection<?> membershipCollection = organizationService.getMembershipTypeHandler().findMembershipTypes();
-    JbpmSession session = openSession();
+    Collection groups = orgService_.getGroupHandler().findGroupsOfUser(user);
+    Collection<?> membershipCollection = orgService_.getMembershipTypeHandler().findMembershipTypes();
+    JbpmContext jbpmContext = openJbpmContext();
     for (Iterator iter = groups.iterator(); iter.hasNext();) {
       Group group = (Group) iter.next();
       Collection memberships = 
-        organizationService.getMembershipHandler().findMembershipsByUserAndGroup(user, group.getId());
+        orgService_.getMembershipHandler().findMembershipsByUserAndGroup(user, group.getId());
       for (Iterator iterator = memberships.iterator(); iterator.hasNext();) {
         Membership membership = (Membership) iterator.next();
         if(membership.getMembershipType().equals("*")) {
           for(Object obj : membershipCollection){
             key = ((MembershipType)obj).getName() + ACTOR_ID_KEY_SEPARATOR + group.getId();
-            List tasks = session.getTaskMgmtSession().findTaskInstances(key);
+            List tasks = jbpmContext.getTaskMgmtSession().findTaskInstances(key);
             if (tasks.size() > 0) {
               hashSet.addAll(tasks);
             }
           }
           key = membership.getMembershipType() + ACTOR_ID_KEY_SEPARATOR + group.getId();
-          List tasks = session.getTaskMgmtSession().findTaskInstances(key);
+          List tasks = jbpmContext.getTaskMgmtSession().findTaskInstances(key);
           if (tasks.size() > 0) {
             hashSet.addAll(tasks);
           }
         } else {
           key = membership.getMembershipType() + ACTOR_ID_KEY_SEPARATOR + group.getId();
-          List tasks = session.getTaskMgmtSession().findTaskInstances(key);
+          List tasks = jbpmContext.getTaskMgmtSession().findTaskInstances(key);
           if (tasks.size() > 0) hashSet.addAll(tasks);
           String starKey = "*" + ACTOR_ID_KEY_SEPARATOR + group.getId();
-          List tasksWithStar = session.getTaskMgmtSession().findTaskInstances(starKey);
+          List tasksWithStar = jbpmContext.getTaskMgmtSession().findTaskInstances(starKey);
           if(tasksWithStar.size() > 0) hashSet.addAll(tasksWithStar);
         }
     
@@ -290,8 +281,8 @@ public class WorkflowServiceContainerImpl implements
 
   public List<Process> getProcesses() {
     List<Process> processes = new ArrayList<Process>();
-    JbpmSession session = openSession();
-    List definitions = session.getGraphSession().findAllProcessDefinitions();
+    JbpmContext jbpmContext = openJbpmContext();
+    List definitions = jbpmContext.getGraphSession().findAllProcessDefinitions();
     for (Iterator iter = definitions.iterator(); iter.hasNext();) {
       ProcessDefinition def = (ProcessDefinition) iter.next();
       processes.add(new ProcessData(def));
@@ -300,8 +291,8 @@ public class WorkflowServiceContainerImpl implements
   }
 
   public boolean hasStartTask(String processId) {
-    JbpmSession session = openSession();
-    ProcessDefinition processDef = session.getGraphSession()
+    JbpmContext jbpmContext = openJbpmContext();
+    ProcessDefinition processDef = jbpmContext.getGraphSession()
         .loadProcessDefinition(Long.parseLong(processId));
     if (processDef.getTaskMgmtDefinition().getStartTask() != null)
       return true;
@@ -309,18 +300,18 @@ public class WorkflowServiceContainerImpl implements
   }
 
   public void startProcess(String processId) {
-    JbpmSession session = openSession();
-    ProcessDefinition processDef = session.getGraphSession()
+    JbpmContext jbpmContext = openJbpmContext();
+    ProcessDefinition processDef = jbpmContext.getGraphSession()
         .loadProcessDefinition(Long.parseLong(processId));
     org.jbpm.graph.exe.ProcessInstance processInstance = new org.jbpm.graph.exe.ProcessInstance(
         processDef);
     processInstance.signal();
-    session.getGraphSession().saveProcessInstance(processInstance);
+    jbpmContext.save(processInstance);
   }
 
   public void startProcess(String remoteUser, String processId, Map variables) {
-    JbpmSession session = openSession();
-    GraphSession graphSession = session.getGraphSession();
+  	JbpmContext jbpmContext = openJbpmContext();
+    GraphSession graphSession = jbpmContext.getGraphSession();
     ProcessDefinition processDef = graphSession.loadProcessDefinition(Long
         .parseLong(processId));
     org.jbpm.graph.exe.ProcessInstance instance = new org.jbpm.graph.exe.ProcessInstance(
@@ -336,13 +327,13 @@ public class WorkflowServiceContainerImpl implements
     taskInstance.end();
 
     // instance.signal();
-    graphSession.saveProcessInstance(instance);
+    jbpmContext.save(instance);
   }
   
   public void startProcessFromName(String remoteUser, String processName,
       Map variables) {
-    JbpmSession session = openSession();
-    GraphSession graphSession = session.getGraphSession();
+    JbpmContext jbpmContext = openJbpmContext();
+    GraphSession graphSession = jbpmContext.getGraphSession();
     ProcessDefinition processDef = graphSession.findLatestProcessDefinition(processName);
     org.jbpm.graph.exe.ProcessInstance instance = new org.jbpm.graph.exe.ProcessInstance(processDef);
     ContextInstance contextInstance = instance.getContextInstance();
@@ -351,13 +342,13 @@ public class WorkflowServiceContainerImpl implements
         .createStartTaskInstance();
     taskInstance.setActorId(remoteUser);
     taskInstance.end();
-    graphSession.saveProcessInstance(instance);
+    jbpmContext.save(instance);
   }
 
   public List<ProcessInstance> getProcessInstances(String processId) {
     List<ProcessInstance> processInstances = new ArrayList<ProcessInstance>();
-    JbpmSession session = openSession();
-    List jbpmProcessInstances = session.getGraphSession().findProcessInstances(
+    JbpmContext jbpmContext = openJbpmContext();
+    List jbpmProcessInstances = jbpmContext.getGraphSession().findProcessInstances(
         new Long(processId).longValue());
     for (Iterator iter = jbpmProcessInstances.iterator(); iter.hasNext();) {
       org.jbpm.graph.exe.ProcessInstance processInstance = (org.jbpm.graph.exe.ProcessInstance) iter
@@ -368,97 +359,87 @@ public class WorkflowServiceContainerImpl implements
     return processInstances;
   }
 
-  public List<Task> getTasks(String processInstanceId) {
-    List<Task> tasks = new ArrayList<Task>();
-    JbpmSession session = openSession();
-    org.jbpm.graph.exe.ProcessInstance processInstance = session
-        .getGraphSession().loadProcessInstance(
-            new Long(processInstanceId).longValue());
+	public List<Task> getTasks(String processInstanceId) {
+		List<Task> tasks = new ArrayList<Task>();
+		JbpmContext jbpmContext = openJbpmContext();
+		org.jbpm.graph.exe.ProcessInstance processInstance = jbpmContext
+				.getGraphSession().loadProcessInstance(
+						new Long(processInstanceId).longValue());
 
-    Collection taskInstances = processInstance.getTaskMgmtInstance()
-        .getTaskInstances();
-    for (Iterator iter = taskInstances.iterator(); iter.hasNext();) {
-      TaskInstance task = (TaskInstance) iter.next();
-      tasks.add(new TaskData(task));
-    }
-    return tasks;
+		Collection taskInstances = processInstance.getTaskMgmtInstance()
+				.getTaskInstances();
+		for (Iterator iter = taskInstances.iterator(); iter.hasNext();) {
+			TaskInstance task = (TaskInstance) iter.next();
+			tasks.add(new TaskData(task));
+		}
+		return tasks;
   }
 
   public Process getProcess(String processId) {
-    JbpmSession session = openSession();
-    ProcessDefinition processDef = session.getGraphSession()
+  	JbpmContext jbpmContext = openJbpmContext();
+  	ProcessDefinition processDef = jbpmContext.getGraphSession()
         .loadProcessDefinition(Long.parseLong(processId));
     return new ProcessData(processDef);
   }
 
   public Task getTask(String taskId) {
-    JbpmSession session = openSession();
-    TaskInstance task = session.getTaskMgmtSession().loadTaskInstance(
+  	JbpmContext jbpmContext = openJbpmContext();
+    TaskInstance task = jbpmContext.getTaskMgmtSession().loadTaskInstance(
         Long.parseLong(taskId));
     return new TaskData(task);
   }
 
   public ProcessInstance getProcessInstance(String processInstance) {
-    JbpmSession session = openSession();
-    org.jbpm.graph.exe.ProcessInstance jbpmProcessInstance = session
+  	JbpmContext jbpmContext = openJbpmContext();
+    org.jbpm.graph.exe.ProcessInstance jbpmProcessInstance = jbpmContext
         .getGraphSession().loadProcessInstance(Long.parseLong(processInstance));
     return new ProcessInstanceData(jbpmProcessInstance);
   }
 
   public Map getVariables(String processInstanceId, String taskId) {
-    JbpmSession session = openSession();
-    org.jbpm.graph.exe.ProcessInstance jbpmProcessInstance = session
+  	JbpmContext jbpmContext = openJbpmContext();
+    org.jbpm.graph.exe.ProcessInstance jbpmProcessInstance = jbpmContext
         .getGraphSession().loadProcessInstance(
             Long.parseLong(processInstanceId));
     return jbpmProcessInstance.getContextInstance().getVariables();
   }
 
   public void endTask(String taskId, Map variables) {
-    JbpmSession session = openSession();
-    TaskInstance taskInstance = session.getTaskMgmtSession().loadTaskInstance(
+  	JbpmContext jbpmContext = openJbpmContext();
+    TaskInstance taskInstance = jbpmContext.getTaskMgmtSession().loadTaskInstance(
         Long.parseLong(taskId));
     org.jbpm.graph.exe.ProcessInstance processInstance = taskInstance
         .getToken().getProcessInstance();
     ContextInstance contextInstance = processInstance.getContextInstance();
     contextInstance.addVariables(variables);
     taskInstance.end();
-    session.getGraphSession().saveProcessInstance(processInstance);
+    jbpmContext.save(processInstance);
   }
 
   public void endTask(String taskId, Map variables, String transition) {
-    JbpmSession session = openSession();
-    TaskInstance taskInstance = session.getTaskMgmtSession().loadTaskInstance(
+  	JbpmContext jbpmContext = openJbpmContext();
+    TaskInstance taskInstance = jbpmContext.getTaskMgmtSession().loadTaskInstance(
         Long.parseLong(taskId));
     org.jbpm.graph.exe.ProcessInstance processInstance = taskInstance
         .getToken().getProcessInstance();
     ContextInstance contextInstance = processInstance.getContextInstance();
     contextInstance.addVariables(variables);
     taskInstance.end(transition);
-    session.getGraphSession().saveProcessInstance(processInstance);
+    jbpmContext.save(processInstance);
   }
 
   public List<Timer> getTimers() {
     List<Timer> timers = new ArrayList<Timer>();
-    JbpmSession session = openSession();
-    Iterator jbpmTimers = session.getSchedulerSession().findTimersByDueDate();
-    while (jbpmTimers.hasNext()) {
-      org.jbpm.scheduler.exe.Timer jbpmTimer = (org.jbpm.scheduler.exe.Timer) jbpmTimers
-          .next();
-      timers.add(new TimerData(jbpmTimer));
-    }
     return timers;
   }
-
+  
   public void deployProcess(InputStream iS) throws IOException {
-    JbpmSession session = openSession();
-    session.getContextSession();
-    ProcessArchiveDeployer.deployZipInputStream(new JarInputStream(iS),
-        session.getJbpmSessionFactory());
+    openJbpmContext().deployProcessDefinition(ProcessDefinition.parseParZipInputStream(new ZipInputStream(iS)));
   }
 
   public void deleteProcess(String processId) {
-    JbpmSession session = openSession();
-    session.getGraphSession().deleteProcessDefinition(Long.parseLong(processId));
+	  JbpmContext jbpmContext = openJbpmContext();  
+	  jbpmContext.getGraphSession().deleteProcessDefinition(Long.parseLong(processId));
     
     /*
      * Notify the Forms Service. Its reference cannot be constructor injected
@@ -470,8 +451,8 @@ public class WorkflowServiceContainerImpl implements
   }
   
   public void deleteProcessInstance(String processInstanceId) {
-    JbpmSession session = openSession();
-    session.getGraphSession().deleteProcessInstance(Long.parseLong(processInstanceId));
+    JbpmContext jbpmContext = openJbpmContext();
+    jbpmContext.getGraphSession().deleteProcessInstance(Long.parseLong(processInstanceId));
   }
 
   public void startRequest(ExoContainer arg0) {
@@ -488,10 +469,17 @@ public class WorkflowServiceContainerImpl implements
     /*
      * Commit the changes. The jBPM session is created lazily by openSession().
      */
-    this.closeSession();
+    this.closeJbpmContext();
   }
 
   public WorkflowFileDefinitionService getFileDefinitionService() { 
     return fileDefinitionService_;
   }
+
+	@Override
+	public void stop() {
+		JobExecutor jobExecutor = jbpmConfiguration.getJobExecutor();
+		if (jobExecutor != null)
+			jobExecutor.stop();
+	}
 }

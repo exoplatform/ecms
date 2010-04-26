@@ -25,9 +25,7 @@ import org.exoplatform.services.workflow.WorkflowFormsService;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
 import org.exoplatform.services.workflow.impl.jbpm.WorkflowServiceContainerImpl;
 import org.exoplatform.test.BasicTestCase;
-import org.jbpm.db.JbpmSession;
 import org.jbpm.graph.def.ProcessDefinition;
-import org.jbpm.jpdl.par.ProcessArchiveDeployer;
 
 
 
@@ -39,7 +37,7 @@ import org.jbpm.jpdl.par.ProcessArchiveDeployer;
  */
 public abstract class BaseTest extends BasicTestCase {
 
-  protected static final String PROCESS_PATH = "file:./src/test/java/conf/processes/";
+  protected static final String PROCESS_PATH = "file:./src/conf/processes/";
   protected WorkflowServiceContainer workflowServiceContainer;
   protected WorkflowFormsService workflowFormsService;
 
@@ -66,8 +64,7 @@ public abstract class BaseTest extends BasicTestCase {
         processDefinition.getFileDefinition().addFile(file, url.openStream());        
       }
     }    
-    JbpmSession session = ((WorkflowServiceContainerImpl) workflowServiceContainer).openSession();
-    ProcessArchiveDeployer.deployProcessDefinition(processDefinition, session.getJbpmSessionFactory());
+    ((WorkflowServiceContainerImpl) workflowServiceContainer).openJbpmContext().deployProcessDefinition(processDefinition);
   }
 
 }

@@ -26,9 +26,9 @@
       <version>${org.exoplatform.core.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecm.workflow</groupId>
-      <artifactId>exo.ecm.workflow.component.workflow.impl.jbpm.engine</artifactId>
-      <version>${org.exoplatform.jbpm.version}</version>
+      <groupId>org.jbpm.jbpm3</groupId>
+  	  <artifactId>jbpm-jpdl</artifactId>
+      <version>${org.jbpm.jbpm3}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
@@ -44,6 +44,13 @@
           <include>**/*.properties</include>
           <include>**/*.xml</include>
           <include>**/*.gif</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
         </includes>
       </resource>
     </resources>

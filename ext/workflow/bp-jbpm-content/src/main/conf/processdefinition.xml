@@ -36,6 +36,12 @@
     <transition name="cancel" to="trash-movement"/>
   </task-node>
   
+  <node name="trash-movement">
+	  <action class="org.exoplatform.processes.publishing.TrashMovementActionHandler"/>
+	  <transition name="move-done" to="end"/> 
+  </node>
+  <!--
+	
   <state name="trash-movement">
     <event type="node-enter">
       <action class="org.exoplatform.processes.publishing.TrashMovementActionHandler"/>
@@ -43,6 +49,7 @@
     <transition name="move-done" to="end"/>  
   </state>
   
+  -->
   <process-state name="delegate">
   	<event type="node-enter">
       <action class="org.exoplatform.processes.publishing.DelegateActionHandler"/>
@@ -60,7 +67,16 @@
     <transition name="end" to="end"/>  
   </process-state>   
  
-  <state name="manage-publication">
+	<node name="manage-publication">
+	  <action class="org.exoplatform.processes.publishing.SchedulePublicationTimerActionHandler"/>
+	  <transition name="publication-done" to="manage-backup"/>
+	</node>
+	<node name="manage-backup">
+	  <action class="org.exoplatform.processes.publishing.ScheduleBackupTimerActionHandler"/>
+	  <transition name="backup-done" to="end"/>
+	</node>
+  
+  <!-- state name="manage-publication">
     <event type="node-enter">
       <action class="org.exoplatform.processes.publishing.SchedulePublicationTimerActionHandler"/>
     </event>
@@ -72,7 +88,7 @@
       <action class="org.exoplatform.processes.publishing.ScheduleBackupTimerActionHandler"/>
     </event>
     <transition name="backup-done" to="end"/>  
-  </state>
+  </state -->
 
   <!-- END-STATE -->
   <end-state name="end" />

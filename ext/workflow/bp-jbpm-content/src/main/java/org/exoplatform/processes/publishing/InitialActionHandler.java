@@ -23,9 +23,12 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.jbpm.context.exe.ContextInstance;
 import org.jbpm.graph.def.ActionHandler;
 import org.jbpm.graph.exe.ExecutionContext;
 
@@ -50,15 +53,18 @@ public class InitialActionHandler implements ActionHandler {
     String srcPath = (String) context.getVariable("srcPath");
     String srcWorkspace = (String) context.getVariable("srcWorkspace");    
     String repository = (String) context.getVariable("repository");    
+    ContextInstance contextInstance = context.getContextInstance();
+    contextInstance.setVariable("exocontainer", ((PortalContainer)ExoContainerContext.getCurrentContainer()).getName());
     ProcessUtil.setCurrentLocation(context,srcWorkspace,nodePath);    
-    RepositoryService repositoryService = ProcessUtil.getService(RepositoryService.class);
-    ActionServiceContainer actionServiceContainer = ProcessUtil.getService(ActionServiceContainer.class);
+    RepositoryService repositoryService = ProcessUtil.getService(context, RepositoryService.class);
+    ActionServiceContainer actionServiceContainer = ProcessUtil.getService(context, ActionServiceContainer.class);
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = manageableRepository.getSystemSession(srcWorkspace);   
     Node actionableNode = (Node) session.getItem(srcPath);
     if(!actionableNode.isNodeType("exo:actionable")) {
         actionableNode = (Node) session.getItem(nodePath);
     } 
+    
     Node actionNode = actionServiceContainer.getAction(actionableNode, actionName);
     /* incase of workflow publication */
     if (actionNode == null) actionNode = actionableNode;

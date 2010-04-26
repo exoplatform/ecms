@@ -45,7 +45,7 @@ public class ManagePublicationActionHandler implements ActionHandler {
       LOG.error("Unexpected error", e);
       ExoLogger.getLogger(this.getClass()).error(e);
     } finally {               
-      context.getSchedulerInstance().cancel("publicationTimer", context.getToken());      
+      ProcessUtil.deleteTimer(context, "publicationTimer", context.getToken());      
       context.getToken().signal("publication-done");            
     }
   }
@@ -57,8 +57,8 @@ public class ManagePublicationActionHandler implements ActionHandler {
     String currentPath = currentLocation[2];                    
     String publishWorkspace=(String)context.getVariable("exo:publishWorkspace");
     String publishPath = (String)context.getVariable("exo:publishPath");
-    String realPublishPath = ProcessUtil.computeDestinationPath(currentPath,publishPath);
-    CmsService cmsService = ProcessUtil.getService(CmsService.class);            
+    String realPublishPath = ProcessUtil.computeDestinationPath(context, currentPath,publishPath);
+    CmsService cmsService = ProcessUtil.getService(context, CmsService.class);            
     cmsService.moveNode(currentPath, currentWorkspace, publishWorkspace, realPublishPath, repository);    
     context.setVariable(ProcessUtil.CURRENT_STATE,ProcessUtil.LIVE);    
     ProcessUtil.setCurrentLocation(context,publishWorkspace,realPublishPath);

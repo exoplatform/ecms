@@ -18,7 +18,8 @@ package org.exoplatform.services.workflow.impl.jbpm;
 
 import java.util.Date;
 
-import org.jbpm.scheduler.exe.Timer;
+import org.jbpm.job.Timer;
+
 
 public class TimerData implements org.exoplatform.services.workflow.Timer {
   

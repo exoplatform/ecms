@@ -27,7 +27,6 @@ import java.util.Locale;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -35,8 +34,14 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.LocaleConfigService;
+import org.jbpm.context.exe.ContextInstance;
 import org.jbpm.graph.exe.ExecutionContext;
+import org.jbpm.graph.exe.Token;
+import org.jbpm.job.Timer;
+import org.jbpm.scheduler.SchedulerService;
+import org.jbpm.svc.Services;
 
 /**
  * Created by The eXo Platform SARL
@@ -80,6 +85,16 @@ public class ProcessUtil {
   
   private static Log log = ExoLogger.getLogger(ProcessUtil.class);
   
+  public static void createTimer(ExecutionContext context, Timer timer) {
+  	SchedulerService schedulerService = (SchedulerService) Services.getCurrentService(Services.SERVICENAME_SCHEDULER);
+    schedulerService.createTimer(timer);
+  }
+  
+  public static void deleteTimer(ExecutionContext context, String timer, Token token) {
+  	SchedulerService schedulerService = (SchedulerService) Services.getCurrentService(Services.SERVICENAME_SCHEDULER);
+    schedulerService.deleteTimersByName(timer, token);
+  }
+  
   public static void requestForValidation(ExecutionContext context) {
     context.setVariable(CURRENT_STATE,REQUEST_FOR_VALIDATION);
     String[] location = getCurrentLocation(context);
@@ -88,7 +103,7 @@ public class ProcessUtil {
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try{
-      Node requestNode = getNode(repository,workspace,path,provider);
+      Node requestNode = getNode(context, repository,workspace,path,provider);
       if(!requestNode.isNodeType(EXO_CONENT_STATE)) {
         requestNode.addMixin(EXO_CONENT_STATE) ;   
         requestNode.save();
@@ -115,7 +130,7 @@ public class ProcessUtil {
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node validatedNode = getNode(repository,workspace,path,provider) ;
+      Node validatedNode = getNode(context, repository,workspace,path,provider) ;
       if(!validatedNode.isNodeType("exo:approved")) {
         validatedNode.addMixin("exo:approved");
         validatedNode.save();
@@ -142,7 +157,7 @@ public class ProcessUtil {
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node disapprovedNode = getNode(repository,workspace,path,provider) ;
+      Node disapprovedNode = getNode(context, repository,workspace,path,provider) ;
       if(!disapprovedNode.isNodeType("exo:disapproved")) {
         disapprovedNode.addMixin("exo:disapproved");
         disapprovedNode.save();
@@ -169,7 +184,7 @@ public class ProcessUtil {
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node publishedNode = getNode(repository,workspace,path,provider) ;
+      Node publishedNode = getNode(context, repository,workspace,path,provider) ;
       if(!publishedNode.isNodeType("exo:published")) {
         publishedNode.addMixin("exo:published");
         publishedNode.save();
@@ -199,7 +214,7 @@ public class ProcessUtil {
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node pendingNode = getNode(repository,workspace,path,provider) ;
+      Node pendingNode = getNode(context, repository,workspace,path,provider) ;
       if(!pendingNode.isNodeType("exo:pending")) {
         pendingNode.addMixin("exo:pending");
         pendingNode.save();
@@ -225,7 +240,7 @@ public class ProcessUtil {
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node delegateNode = getNode(repository,workspace,path,provider) ;
+      Node delegateNode = getNode(context, repository,workspace,path,provider) ;
       if(!delegateNode.isNodeType("exo:delegated")) {
         delegateNode.addMixin("exo:delegated");
         delegateNode.save();
@@ -254,7 +269,7 @@ public class ProcessUtil {
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node backupNode = getNode(repository,workspace,path,provider) ;
+      Node backupNode = getNode(context, repository,workspace,path,provider) ;
       if(!backupNode.isNodeType("exo:backup")) {
         backupNode.addMixin("exo:backup");
         backupNode.save();
@@ -278,7 +293,7 @@ public class ProcessUtil {
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node trashNode = getNode(repository,workspace,path,provider) ;
+      Node trashNode = getNode(context, repository,workspace,path,provider) ;
       if(!trashNode.isNodeType("exo:trashMovement")) {
         trashNode.addMixin("exo:trashMovement");
         trashNode.save();
@@ -293,8 +308,8 @@ public class ProcessUtil {
     provider.close();
   } 
   
-  public static Node getNode(String repositoryName, String workspace, String path, SessionProvider provider) throws Exception {
-    RepositoryService repositoryService = getService(RepositoryService.class);
+  public static Node getNode(ExecutionContext context, String repositoryName, String workspace, String path, SessionProvider provider) throws Exception {
+    RepositoryService repositoryService = getService(context, RepositoryService.class);
     ManageableRepository repository= repositoryService.getRepository(repositoryName);
     Session session = provider.getSession(workspace,repository);    
     return (Node)session.getItem(path);
@@ -316,16 +331,17 @@ public class ProcessUtil {
     return currentLocation.split("::");
   }
   
-  public static <T> T getService(Class<T> type) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();    
-    return  type.cast(container.getComponentInstanceOfType(type)) ;       
+  public static <T> T getService(ExecutionContext context, Class<T> type) {
+  	ContextInstance contextInstance = context.getContextInstance();
+    ExoContainer container = ExoContainerContext.getContainerByName((String)contextInstance.getVariable("exocontainer"));
+    return  type.cast(container.getComponentInstanceOfType(type));       
   }
   
   public static String getAuthor(ExecutionContext context){
     String[] location = getCurrentLocation(context);
     SessionProvider provider = SessionProvider.createSystemProvider();    
     try{
-      Node node = getNode(location[0],location[1],location[2],provider);
+      Node node = getNode(context, location[0],location[1],location[2],provider);
       return node.getProperty("exo:owner").getString();
     }catch (Exception e) {
     }finally {
@@ -334,9 +350,9 @@ public class ProcessUtil {
     return getActorId(context);
   }
   
-  public static String computeDestinationPath(String srcPath,String destPath) {
+  public static String computeDestinationPath(ExecutionContext context, String srcPath,String destPath) {
     String realDestPath;
-    String datePath = getDateLocation();
+    String datePath = getDateLocation(context);
     String nodeName = srcPath.substring(srcPath.lastIndexOf("/")+1);
     if(destPath.endsWith("/")) {
       realDestPath = destPath.concat(datePath).concat(nodeName);
@@ -346,8 +362,8 @@ public class ProcessUtil {
     return realDestPath;
   }
   
-  public static String getDateLocation() { 
-    LocaleConfigService configService = getService(LocaleConfigService.class);
+  public static String getDateLocation(ExecutionContext context) { 
+    LocaleConfigService configService = getService(context, LocaleConfigService.class);
     Locale locale = configService.getDefaultLocaleConfig().getLocale();
     Calendar calendar = new GregorianCalendar(locale);
     String[] monthNames = new DateFormatSymbols().getMonths();

@@ -30,7 +30,7 @@ import org.dom4j.io.SAXReader;
 import org.exoplatform.services.workflow.Form;
 import org.exoplatform.services.workflow.WorkflowFormsService;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
-import org.jbpm.db.JbpmSession;
+import org.jbpm.JbpmContext;
 import org.jbpm.file.def.FileDefinition;
 import org.jbpm.graph.def.ProcessDefinition;
 
@@ -72,10 +72,11 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
   private void addForms(long definitionId, Locale locale) {
     if (!allForms.containsKey(new Long(definitionId))) {
       Map stateNameToForms = new HashMap();
-      JbpmSession session = null;
+      //JbpmSession session = null;
       try {
-        session = container.openSession();
-        ProcessDefinition pD = session.getGraphSession().loadProcessDefinition(definitionId);
+        // session = container.openSession();
+        JbpmContext jbpmContext = container.openJbpmContext();
+        ProcessDefinition pD = jbpmContext.getGraphSession().loadProcessDefinition(definitionId);
         FileDefinition fD = pD.getFileDefinition();
         InputStream iS = fD.getInputStream("forms.xml");
         SAXReader reader = new SAXReader();

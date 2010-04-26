@@ -36,7 +36,7 @@
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <chromattic.version>1.0.0</chromattic.version>
     <!-- workflow implementations -->
-    <org.exoplatform.jbpm.version>3.0.2</org.exoplatform.jbpm.version>
+    <org.jbpm.jbpm3>3.2.8</org.jbpm.jbpm3>
     <bonita.version>4.1</bonita.version>
     <!-- Default wkf impl to use -->
     <workflowEngine>jbpm</workflowEngine>
@@ -64,7 +64,7 @@
     <exo.product.name>exo-wcm</exo.product.name>
     <exo.product.specification>2.0</exo.product.specification>
     <!-- exopackage -->
-    <org.exoplatform.exopackage.version>1.1.0-Beta09-SNAPSHOT</org.exoplatform.exopackage.version>
+    <org.exoplatform.exopackage.version>1.1.0-Beta10-SNAPSHOT</org.exoplatform.exopackage.version>
     <!-- We enforce Java 6 to build to use Chromattic and APT -->
     <jdk.min.version>1.6</jdk.min.version>
     <!-- maven-release-plugin -->

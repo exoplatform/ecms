@@ -22,7 +22,7 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.workflow.FileDefinition;
 import org.exoplatform.services.workflow.WorkflowFileDefinitionService;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
-import org.jbpm.db.JbpmSession;
+import org.jbpm.JbpmContext;
 import org.jbpm.graph.def.ProcessDefinition;
 
 /**
@@ -46,9 +46,10 @@ public class WorkflowFileDefinitionServiceImpl implements WorkflowFileDefinition
     try{
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       WorkflowServiceContainerImpl containerImpl = (WorkflowServiceContainerImpl)container.getComponentInstanceOfType(WorkflowServiceContainer.class);      
-      JbpmSession jbpmSession = containerImpl.openSession();
+      // JbpmSession jbpmSession = containerImpl.openSession();
+      JbpmContext jbpmContext = containerImpl.openJbpmContext();
       ProcessDefinition processDefinition = 
-        jbpmSession.getGraphSession().loadProcessDefinition(Long.parseLong(processId));
+        jbpmContext.getGraphSession().loadProcessDefinition(Long.parseLong(processId));
       FileDefinitionWapper fileDefinitionWapper = new FileDefinitionWapper(processDefinition.getFileDefinition());
       return fileDefinitionWapper;
     }catch (Exception e) {

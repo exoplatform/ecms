@@ -10,7 +10,7 @@ function getProduct(version) {
 	product.useWorkflow = true;
 	product.workflowVersion = "${project.version}" ;
 	product.serverPluginVersion = "${org.exoplatform.portal.version}" ;
-	product.workflowJbpmVersion = "${org.exoplatform.jbpm.version}";
+	product.workflowJbpmVersion = "${org.jbpm.jbpm3}";
 	product.workflowBonitaVersion = "${bonita.version}";
 
 	var kernel = Module.GetModule("kernel") ;
