@@ -361,7 +361,7 @@ import org.exoplatform.webui.event.EventListener;
   	String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
   	
   	String portalName = PortalContainer.getCurrentPortalContainerName();
-	String restContextName = PortalContainer.getCurrentRestContextName();
+  	String restContextName = PortalContainer.getCurrentRestContextName();
   	if (node.isNodeType("nt:frozenNode")){
   		String uuid = node.getProperty("jcr:frozenUuid").getString();
   		Node originalNode = node.getSession().getNodeByUUID(uuid);  		

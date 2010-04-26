@@ -322,7 +322,16 @@ public class UISearchResult extends UIContainer {
 		String workspace = portletPreferences.getValue(UIWCMSearchPortlet.WORKSPACE, null);
 		String baseURI = portletRequest.getScheme() + "://"	+ portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
 		String basePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
-		link = baseURI + portalURI + basePath + "/" + repository + "/" + workspace + node.getPath();
+		
+    link = baseURI + portalURI + basePath + "/" + repository + "/" + workspace;		
+    if (node.isNodeType("nt:frozenNode")){
+      String uuid = node.getProperty("jcr:frozenUuid").getString();
+      Node originalNode = node.getSession().getNodeByUUID(uuid);      
+      link += originalNode.getPath() + "?version=" + node.getParent().getName();
+    } else {
+      link += node.getPath();
+    }
+		
 		return link;
 	}
 
