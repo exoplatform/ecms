@@ -8,6 +8,19 @@
   this.cols = cols;
   this.rows = rows;
   this.json = {};
+  this.newLine = false;
+}
+
+UITable.prototype.setTypes = function(types) {
+	this.types = types;
+}
+
+UITable.prototype.enableNewLine = function() {
+	this.newLine = true;
+}
+
+UITable.prototype.disableNewLine = function() {
+	this.newLine = false;
 }
 
 UITable.prototype.generateInputs = function() {
@@ -22,7 +35,21 @@ UITable.prototype.generateInputs = function() {
       out += '<td class="FieldLabel">'+this.cols[j-1]+'</td>';
       var s = '';
       if (data!=undefined) s=eval('data[i-1].col'+j);
-      out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update(this);" type="text" value="'+s+'"></input></td>';
+      if (this.types!=undefined) {
+    	  switch (this.types[j-1]) {
+    	  case "TEXT":
+    		  out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update(this);" type="text" value="'+s+'"></input></td>';
+    		  break;
+    	  case "TEXTAREA":
+    		  out += '<td class="FieldComponent"><textarea id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update(this);">'+s+'</textarea></td>';
+    		  break;
+    	  }	  
+      } else {
+        out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update(this);" type="text" value="'+s+'"></input></td>';
+      }
+      if (this.newLine) {
+    	  out += '</tr><tr>';
+      }
     }
     out += '</tr>';
   }
@@ -75,6 +102,12 @@ UITable.prototype.getValue = function(col, row) {
 }
 
 /*
+
+HOW TO USE IT IN WCM :
+1/ import it in your template :
+<script type="text/javascript" src="/static/table.js"></script>
+
+2/ add the following in your template (dialog or view)
 DIALOG EXAMPLE
 <tr>                        
   <td colspan="2">
@@ -87,6 +120,8 @@ DIALOG EXAMPLE
   <script type="text/javascript">
     // new UITable ( array of cols, number of rows, div id for inputs, input id where to load/save data )
     eXo.ecm.UITable = new UITable(["Title", "Description"], 3, "wcmtable", "description");
+    eXo.ecm.UITable.setTypes(["TEXT", "TEXTAREA"]);
+    eXo.ecm.UITable.enableNewLine(); 
     eXo.ecm.UITable.generateInputs();
   </script>
 </tr>
