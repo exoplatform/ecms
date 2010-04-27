@@ -365,15 +365,16 @@ public class UITreeExplorer extends UIContainer {
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       if(!uiDocumentWorkspace.isRendered()) {
         uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
-        uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
+        uiDocumentWorkspace.setRendered(true);
       }
       uiExplorer.setSelectNode(workspaceName, path) ;
-      
+      uiExplorer.setClickExpand(true);
 //      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
 //      UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
       
       uiExplorer.updateAjax(event);
     }
+    
   }
   
   private static boolean isInTrash(Item item) throws RepositoryException {

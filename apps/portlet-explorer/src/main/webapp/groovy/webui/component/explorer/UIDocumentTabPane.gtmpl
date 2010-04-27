@@ -1,4 +1,6 @@
 <%
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+
   if(uicomponent.isShowViewFile() && !uicomponent.isJcrEnable()) {
 %>
 <div class="UIResizableBlock">
@@ -47,7 +49,10 @@
 	  </div>  
 	</div>  
 </div>
-<%} else { %>
+<%
+  UIJCRExplorer uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
+  uiExplorer.setClickExpand(false);
+  } else { %>
   <div id="$uicomponent.id">
 <%
 	def uiDocumentInfo = uicomponent.getChildById("UIDocumentInfo") ;

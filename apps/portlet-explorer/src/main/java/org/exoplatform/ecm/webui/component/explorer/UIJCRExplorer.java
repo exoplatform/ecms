@@ -63,6 +63,7 @@ import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.link.ItemLinkAware;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.link.NodeLinkAware;
@@ -125,6 +126,7 @@ public class UIJCRExplorer extends UIContainer {
   private DriveData driveData_ ;
     
   private boolean isFilterSave_ ;
+  private boolean isClickExpand_;
   
   private int tagScope;
 
@@ -145,6 +147,9 @@ public class UIJCRExplorer extends UIContainer {
   public void setFilterSave(boolean isFilterSave) {
     isFilterSave_ = isFilterSave;
   }
+  
+  public boolean isClickExpand() { return isClickExpand_; }
+  public void setClickExpand(boolean value) { isClickExpand_ = value; }
   
   public List<String> getCheckedSupportType() {
     return checkedSupportType;
@@ -422,9 +427,9 @@ public class UIJCRExplorer extends UIContainer {
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocumentWorkspace.isRendered()) {
-      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class) ;
-      if(isShowViewFile()) {
-        UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
+      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
+      UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
+      if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isClickExpand())) {
         uiDocumentWithTree.updatePageListData();
         uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
       } else {
@@ -432,6 +437,8 @@ public class UIJCRExplorer extends UIContainer {
         uiDocumentInfo.updatePageListData();
         uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
       }
+      if (isExoWebContent(getCurrentNode(), this))
+        uiDocumentWithTree.updatePageListData();
       uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
     }
     if(preferences_.isShowSideBar()) {
@@ -559,8 +566,8 @@ public class UIJCRExplorer extends UIContainer {
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocWorkspace.isRendered()) {
       UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
-      if(isShowViewFile()) {
-        UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
+      UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");      
+      if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isClickExpand())) {
         uiDocumentWithTree.updatePageListData();
         uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
       } else {
@@ -568,6 +575,8 @@ public class UIJCRExplorer extends UIContainer {
         uiDocumentInfo.updatePageListData();
         uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
       }
+      if(isExoWebContent(getCurrentNode(), this)) 
+        uiDocumentWithTree.updatePageListData();
       uiDocWorkspace.setRenderedChild(UIDocumentContainer.class) ;
     }
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
@@ -580,6 +589,22 @@ public class UIJCRExplorer extends UIContainer {
       }
     }    
     isHidePopup_ = false ;
+  }
+  
+  private boolean isExoWebContent(Item item, UIJCRExplorer uiExplorer) throws Exception {
+    if (item == null) return false;
+    Node node = (Node)item;
+    LinkManager linkManager = uiExplorer.getApplicationComponent(LinkManager.class);
+    if (node.isNodeType(Utils.EXO_WEBCONTENT)) 
+//    if (node.isNodeType("exo:webContent"))
+        return true;
+    if (linkManager.isLink(node)) {
+      node = linkManager.getTarget(node, true);
+      if (node.isNodeType(Utils.EXO_WEBCONTENT))        
+//      if (node.isNodeType("exo:webContent"))
+        return true;
+    }
+    return false;
   }
   
   public boolean isShowViewFile() throws Exception {
