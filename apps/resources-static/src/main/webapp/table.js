@@ -1,14 +1,18 @@
 ﻿function UITable(cols, rows, id, hidden) {
+  this.json = {};
+  this.id = id;
+  this.cols = cols;
+  this.rows = rows;
+  this.newLine = false;
   if (hidden!=undefined) {
     this.hidden = hidden;
     var glob = document.getElementById(this.hidden);
     glob.style.display = 'none';
+    this.json = eval(glob.value);
+    if (this.json!=undefined) {
+    	this.rows = this.json.length;
+    }
   }
-  this.id = id;
-  this.cols = cols;
-  this.rows = rows;
-  this.json = {};
-  this.newLine = false;
 }
 
 UITable.prototype.setTypes = function(types) {
@@ -34,18 +38,23 @@ UITable.prototype.generateInputs = function() {
     for (j=1 ; j<(this.cols.length+1) ; j++) {
       out += '<td class="FieldLabel">'+this.cols[j-1]+'</td>';
       var s = '';
-      if (data!=undefined) s=eval('data[i-1].col'+j);
+      if (data!=undefined) {
+    	  var obj = data[i-1];
+    	  if (obj != undefined) {
+    		  s=eval('data[i-1].col'+j);
+    	  }
+      } 
       if (this.types!=undefined) {
     	  switch (this.types[j-1]) {
     	  case "TEXT":
-    		  out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update(this);" type="text" value="'+s+'"></input></td>';
+    		  out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();" type="text" value="'+s+'"></input></td>';
     		  break;
     	  case "TEXTAREA":
-    		  out += '<td class="FieldComponent"><textarea id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update(this);">'+s+'</textarea></td>';
+    		  out += '<td class="FieldComponent"><textarea id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();">'+s+'</textarea></td>';
     		  break;
     	  }	  
       } else {
-        out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update(this);" type="text" value="'+s+'"></input></td>';
+        out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();" type="text" value="'+s+'"></input></td>';
       }
       if (this.newLine) {
     	  out += '</tr><tr>';
@@ -55,24 +64,45 @@ UITable.prototype.generateInputs = function() {
   }
   out += '</table>';
 
+  out += '<div style="float:right;">';
+  out += '<img src="/eXoResources/skin/sharedImages/Blank.gif" class="MultiFieldAction Remove16x16Icon" alt="" title="Remove Item" onclick="javascript:eXo.ecm.UITable.removeRow();">';  
+  out += '<img src="/eXoResources/skin/sharedImages/Blank.gif" class="MultiFieldAction AddNewNodeIcon" alt="" title="Add Item" onclick="javascript:eXo.ecm.UITable.addRow();">';
+  out += '</div>';
+  
   inp.innerHTML = out;
+  this.update();
 };
 
-UITable.prototype.update = function(inp) {
+UITable.prototype.addRow = function() {
+	this.rows = this.rows + 1;
+	this.generateInputs();
+}
+
+UITable.prototype.removeRow = function() {
+	if (this.rows>1) {
+		this.rows = this.rows - 1;
+		delete this.json[this.rows];
+		this.generateInputs();
+	}
+}
+
+UITable.prototype.update = function() {
   var glob = document.getElementById(this.hidden);
-  glob.value = inp.id + '::' + inp.value;
   var out = '[';
   for (i=1 ; i<(this.rows+1) ; i++) {
     if (i!=1) out += ',';
     out += '{';
     for (j=1 ; j<(this.cols.length+1) ; j++) {
       var s = this.id+'-'+i+'-'+j;
+      var str = '';
+      if (document.getElementById(s)!=undefined) str = document.getElementById(s).value; 
       if (j!=1) out += ',';
-      out += '"col'+j+'":"'+document.getElementById(s).value+'"';
+      out += '"col'+j+'":"'+str+'"';
     }
     out += '}';
   }
   out += ']';
+  this.json = eval(out);
   glob.value = out;
 };
 
@@ -82,7 +112,12 @@ UITable.prototype.setJson = function(json) {
 
 UITable.prototype.generateTable = function() {  
   var outinp = document.getElementById(this.id);
-  out = '<table border=1>';
+  out = '<table class="UITable">';
+  out += '<tr>';
+  for (j=1 ; j<(this.cols.length+1) ; j++) {
+      out += '<th>'+this.cols[j-1]+'</th>';
+  }
+  out += '</tr>';
   for (i=1 ; i<(this.json.length+1) ; i++) {
     out += '<tr>';
     for (j=1 ; j<(this.cols.length+1) ; j++) {
