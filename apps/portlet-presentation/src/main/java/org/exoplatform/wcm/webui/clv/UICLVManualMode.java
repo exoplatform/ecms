@@ -26,7 +26,6 @@ import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
@@ -51,28 +50,20 @@ public class UICLVManualMode extends UICLVContainer {
    * @see org.exoplatform.wcm.webui.clv.UICLVContainer#init()
    */
 	@SuppressWarnings("unchecked")
-  public void init() throws Exception {                       
-    PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
-    String[] listContent = portletPreferences.getValues(UICLVPortlet.CONTENT_LIST, null);
-    if (listContent == null || listContent.length == 0) {
-      messageKey = "UIMessageBoard.msg.contents-not-found";
-      return;
-    }
-    int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.ITEMS_PER_PAGE, null));
+  public void init() throws Exception {
+	  PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
+    String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
+    int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
     List<Node> nodes = new ArrayList<Node>();
     if (listContent != null && listContent.length != 0) {
       for (String itemPath : listContent) {
-        try {
-        	NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
-        	Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath());
-        	if (viewNode != null) nodes.add(viewNode);    
-        } catch (Exception e) {
-          Utils.createPopupMessage(this, "UIMessageBoard.msg.add-node-error", null, ApplicationMessage.ERROR);
-        }
+      	NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
+      	Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath());
+      	if (viewNode != null) nodes.add(viewNode);    
       }
     }
     if (nodes.size() == 0) {
-      messageKey = "UIMessageBoard.msg.contents-not-found";
+      messageKey = "UICLVContainer.msg.non-contents";
     }    
     getChildren().clear();
     ObjectPageList pageList = new ObjectPageList(nodes, itemsPerPage);    
@@ -80,10 +71,5 @@ public class UICLVManualMode extends UICLVContainer {
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, null);
     clvPresentation.init(templatePath, resourceResolver, pageList);    
-    clvPresentation.setContentColumn(portletPreferences.getValue(UICLVPortlet.HEADER, null));
-    clvPresentation.setShowLink(Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.SHOW_LINK, null)));
-    clvPresentation.setShowHeader(Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.SHOW_HEADER, null)));
-    clvPresentation.setShowReadmore(Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.SHOW_READMORE, null)));
-    clvPresentation.setHeader(portletPreferences.getValue(UICLVPortlet.HEADER, null));
   }  
 }

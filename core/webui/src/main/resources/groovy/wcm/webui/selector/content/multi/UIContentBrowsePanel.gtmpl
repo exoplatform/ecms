@@ -74,7 +74,7 @@
          				<a href="#" class="ActionButton LightBlueStyle">
               				<div class="ButtonLeft">
                 				<div class="ButtonRight">
-                  					<div class="ButtonMiddle">
+                  					<div class="ButtonMiddle" onclick="<%= uicomponent.event("Close") %>">
                     					Cancel
                   					</div>
 				                </div>

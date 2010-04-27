@@ -4,6 +4,11 @@
     <title>
       <QuickEdit>Éditer rapidement</QuickEdit>
     </title>
+    <msg>
+      <non-contents>Il n'ya pas de contenu ici</non-contents>
+      <item-not-found>Cet article ne peut pas trouver</item-not-found>
+      <no-permission>Vous n'avez pas la permission d'accéder à ce noeud</no-permission>
+    </msg>
   </UICLVContainer>
 
   <UIViewerManagementPopupWindow>
@@ -16,9 +21,9 @@
     <label>
       <Title>Configuration d'une liste de contenu</Title>
       <ContentSelectionBlock>Sélection de contenus</ContentSelectionBlock>
-      <ViewerMode>Mode</ViewerMode>
-      <FolderPathInput>Chemin du dossier</FolderPathInput>
-      <OrderBy>Classement par</OrderBy>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Chemin du dossier</UICLVConfigItemPathFormInputSet>
+      <UICLVConfigOrderByFormSelectBox>Classement par</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Titre</exo:title>
         <exo:dateCreated>Date de création</exo:dateCreated>
@@ -26,39 +31,43 @@
         <publication:liveDate>Date de publication</publication:liveDate>
       </option>
       <DisplaySettingBlock>Réglages</DisplaySettingBlock>
-      <Header>Entête</Header>
-      <FormViewTemplate>Modèle de vue</FormViewTemplate>
-      <PaginatorTemplate>Modèle de pagination</PaginatorTemplate>
-      <UICLVBasePathInputSetAction>URL de destination</UICLVBasePathInputSetAction>
-      <UICLVBasePathInput></UICLVBasePathInput>
-      <ItemsPerPage>Contenus par page</ItemsPerPage>
-      <ViewerThumbnailsView>Afficher l'illustration</ViewerThumbnailsView>
-      <ViewerSummary>Afficher le résumé</ViewerSummary>
-      <ViewerHeader>Afficher l'entête</ViewerHeader>
-      <ViewerButtonRefresh>Afficher le bouton actualiser</ViewerButtonRefresh>
-      <ViewerTitle>Afficher le titre</ViewerTitle>
-      <ViewerDateCreated>Afficher la date</ViewerDateCreated>
-      <ViewerLink>Afficher le lien</ViewerLink>
-      <ViewerReadmore>Lire la suite</ViewerReadmore>
+      <UICLVConfigHeaderFormStringInput>Entête</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Modèle de vue</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Modèle de pagination</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigTargetPageFormInputSet>URL de destination</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Contenus par page</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Afficher l'illustration</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Afficher le résumé</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Afficher l'entête</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Afficher le bouton actualiser</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Afficher le titre</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Afficher la date</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Afficher le lien</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Lire la suite</UICLVConfigShowReadmoreFormCheckboxInput>
     </label>
     <action>
       <Save>Sauver</Save>
       <Cancel>Annuler</Cancel>
     </action>
+    <msg>
+      <not-valid-path>Le chemin élément est invalide</not-valid-path>
+      <saving-success>Les préférences du portlet sont enregistrés</saving-success>
+    </msg>
   </UICLVConfig>
 
-  <ViewerMode>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
       <AutoViewerMode>Par Répertoire</AutoViewerMode>
       <ManualViewerMode>Par Contenus</ManualViewerMode>
     </label>
-  </ViewerMode>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
 
-  <FolderPathInputSet>
+  <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Sélectionner le dossier chemin</SelectFolderPath>
     </title>
-  </FolderPathInputSet>
+  </UICLVConfigItemPathFormInputSet>
 
   <FolderPathSelectorPopupWindow>
     <title>
@@ -66,18 +75,18 @@
     </title>
   </FolderPathSelectorPopupWindow>
 
-  <OrderTypes>
+  <UICLVConfigOrderTypeFormRadioBoxInput>
     <label>
       <OrderDesc>Descendant</OrderDesc>
       <OrderAsc>Ascendant</OrderAsc>
     </label>
-  </OrderTypes>
+  </UICLVConfigOrderTypeFormRadioBoxInput>
 
-  <UICLVBasePathInputSetAction>
+  <UICLVConfigTargetPageFormInputSet>
     <title>
       <SelectBasePath>Sélectionnez le chemin de base</SelectBasePath>
     </title>
-  </UICLVBasePathInputSetAction>
+  </UICLVConfigTargetPageFormInputSet>
 
   <UICLVBasePathPopupWindow>
     <title>
@@ -109,11 +118,5 @@
       <UIContentDialogForm>Web content form</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
-  <UIMessageBoard>
-    <msg>
-      <contents-not-found>Ce contenu n'a pas été trouvé ou supprimé.</contents-not-found>
-      <add-node-error>Une erreur lorsque vous voulez ajouter un nouveau noeud.</add-node-error>
- 	  <folder-empty>Ce dossier est vide</folder-empty>	
-    </msg>
-  </UIMessageBoard>
+
 </bundle>

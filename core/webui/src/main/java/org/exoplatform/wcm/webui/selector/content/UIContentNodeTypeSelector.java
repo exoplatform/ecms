@@ -2,13 +2,12 @@ package org.exoplatform.wcm.webui.selector.content;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.NodeTypeIterator;
-import javax.jcr.nodetype.NodeTypeManager;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -36,6 +35,8 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
 
 public class UIContentNodeTypeSelector extends UIForm {
 
+  public final static String WEB_CONTENT_NODETYPE_POPUP = "WebContentNodeTypePopup";
+  
   /**
    * Instantiates a new uIWCM node type select form.
    * 
@@ -51,16 +52,9 @@ public class UIContentNodeTypeSelector extends UIForm {
    */
   public void init() throws Exception {
     getChildren().clear();
-    UIFormCheckBoxInput<String> uiCheckBox;
-    UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class);
-    UIContentSelector uiWCTabSelector = 
-      uiPopup.getAncestorOfType(UIContentSelector.class);
-    List<String> nodeTypes = new ArrayList<String>();
-    if(uiWCTabSelector != null) {
-      nodeTypes = getWebContentNodeTypes();
-    } else {
-      nodeTypes = getDocumentNodeTypes();
-    }
+    TemplateService tempService = getApplicationComponent(TemplateService.class);
+    List<String> nodeTypes = tempService.getAllDocumentNodeTypes(WCMCoreUtils.getRepository(null).getConfiguration().getName());
+    UIFormCheckBoxInput<String> uiCheckBox = null;
     for(String nodeType : nodeTypes) {
       uiCheckBox = new UIFormCheckBoxInput<String>(nodeType, nodeType, "");
       if(propertiesSelected(nodeType)) uiCheckBox.setChecked(true);
@@ -69,6 +63,15 @@ public class UIContentNodeTypeSelector extends UIForm {
     }
   }
 
+  /** TODO: Need for changed in gatein !fieldName.equals(field.getName()) */
+  public String getLabel(ResourceBundle res, String id)  {
+    try {
+      return res.getString("UIContentNodeTypeSelector.label." + id) ;
+    } catch (MissingResourceException ex) {
+      return id + " "; 
+    }
+  }
+  
   /**
    * Properties selected.
    * 
@@ -77,8 +80,8 @@ public class UIContentNodeTypeSelector extends UIForm {
    * @return true, if successful
    */
   private boolean propertiesSelected(String name) {
-    UIPopupWindow uiPopupWindow = getParent();
-    UIContentSelector contentSelector = uiPopupWindow.getAncestorOfType(UIContentSelector.class);
+    UIPopupWindow popupWindow = Utils.getPopupContainer(this).getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
+    UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
     UIContentSearchForm contentSearchForm = contentSelector.getChild(UIContentSearchForm.class);
     String typeValues = contentSearchForm.getUIStringInput(UIContentSearchForm.DOC_TYPE).getValue() ;
     if(typeValues == null) return false ;
@@ -109,46 +112,6 @@ public class UIContentNodeTypeSelector extends UIForm {
   }
 
   /**
-   * Gets the web content node types.
-   * 
-   * @return the web content node types
-   * 
-   * @throws Exception the exception
-   */
-  private List<String> getWebContentNodeTypes() throws Exception {
-    List<String> webContentNodeTypes = new ArrayList<String>();
-    RepositoryService repoService = getApplicationComponent(RepositoryService.class);
-    NodeTypeManager nodeTypeManager = repoService.getCurrentRepository().getNodeTypeManager();
-    for(NodeTypeIterator nodeTypeIterator = nodeTypeManager.getAllNodeTypes();nodeTypeIterator.hasNext();) {
-      NodeType nodeType = nodeTypeIterator.nextNodeType();
-      if(nodeType.isNodeType("exo:webContent")) webContentNodeTypes.add(nodeType.getName());
-    }
-    return webContentNodeTypes;
-  }
-
-  /**
-   * Gets the document node types.
-   * 
-   * @return the document node types
-   * 
-   * @throws Exception the exception
-   */
-  private List<String> getDocumentNodeTypes() throws Exception {
-    List<String> documentNodeTypes = new ArrayList<String>();
-    RepositoryService repoService = getApplicationComponent(RepositoryService.class);
-    String repositoryName = repoService.getCurrentRepository().getConfiguration().getName();
-    TemplateService tempService = getApplicationComponent(TemplateService.class);
-    documentNodeTypes = tempService.getDocumentTemplates(repositoryName);
-    NodeTypeManager nodeTypeManager = repoService.getCurrentRepository().getNodeTypeManager();
-    List<String> resultNodeTypes = new ArrayList<String>();
-    for(String documentNodeType : documentNodeTypes) {
-      NodeType nodeType = nodeTypeManager.getNodeType(documentNodeType);
-      if(!nodeType.isNodeType("exo:webContent")) resultNodeTypes.add(nodeType.getName());
-    }
-    return resultNodeTypes;
-  }
-
-  /**
    * The listener interface for receiving saveAction events.
    * The class that is interested in processing a saveAction
    * event implements this interface, and the object created
@@ -167,8 +130,8 @@ public class UIContentNodeTypeSelector extends UIForm {
     @SuppressWarnings("unchecked")
     public void execute(Event<UIContentNodeTypeSelector> event) throws Exception {
       UIContentNodeTypeSelector contentNodetypeSelector = event.getSource();
-      UIPopupWindow uiPopup = contentNodetypeSelector.getAncestorOfType(UIPopupWindow.class);
-      UIContentSelector contentSelector = uiPopup.getAncestorOfType(UIContentSelector.class);
+      UIPopupWindow popupWindow = Utils.getPopupContainer(contentNodetypeSelector).getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
+      UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
       List<String> selectedNodeTypes = new ArrayList<String>();
       List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
       contentNodetypeSelector.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
@@ -176,8 +139,7 @@ public class UIContentNodeTypeSelector extends UIForm {
       String nodeTypesValue = contentSearchForm.getUIStringInput(UIContentSearchForm.DOC_TYPE).getValue();
       contentNodetypeSelector.makeSelectedNode(nodeTypesValue, selectedNodeTypes, listCheckbox);
       contentNodetypeSelector.setNodeTypes(selectedNodeTypes, contentSearchForm);
-      contentSelector.removeChild(UIPopupWindow.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
+      Utils.closePopupWindow(contentNodetypeSelector, WEB_CONTENT_NODETYPE_POPUP);
       contentSelector.setSelectedTab(contentSearchForm.getId());
     }
   }
@@ -231,11 +193,10 @@ public class UIContentNodeTypeSelector extends UIForm {
      */
     public void execute(Event<UIContentNodeTypeSelector> event) throws Exception {
       UIContentNodeTypeSelector contentNodetypeSelector = event.getSource();
-      UIPopupWindow uiPopupWindow = contentNodetypeSelector.getAncestorOfType(UIPopupWindow.class);
-      UIContentSelector contentSelector = uiPopupWindow.getAncestorOfType(UIContentSelector.class);
+      UIPopupWindow popupWindow = Utils.getPopupContainer(contentNodetypeSelector).getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
+      UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
       UIContentSearchForm contentSearchForm = contentSelector.getChild(UIContentSearchForm.class);
-      contentSelector.removeChild(UIPopupWindow.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
+      Utils.closePopupWindow(contentNodetypeSelector, WEB_CONTENT_NODETYPE_POPUP);
       contentSelector.setSelectedTab(contentSearchForm.getId());
     }
   }

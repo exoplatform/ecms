@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.wcm.webui.selector.folder;
+package org.exoplatform.wcm.webui.selector.content.folder;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
@@ -32,7 +32,7 @@ import org.exoplatform.webui.event.EventListener;
 
 @ComponentConfig(
   lifecycle = Lifecycle.class,
-  template = "classpath:groovy/wcm/webui/selector/folder/UIContentBrowsePanel.gtmpl",
+  template = "classpath:groovy/wcm/webui/selector/content/folder/UIContentBrowsePanel.gtmpl",
   events = {
     @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class),
     @EventConfig(listeners = UIContentBrowsePanelFolder.SelectActionListener.class)

@@ -1,0 +1,169 @@
+<%
+  import org.exoplatform.wcm.webui.Utils;
+  
+  def rcontext = _ctx.getRequestContext();
+  String portletId = Utils.getRealPortletId(rcontext);
+  def quickEditingBlockId = portletId + "-QuickEditingBlock";
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.importJavascript("eXo.wcm.frontoffice.private.CLV", "/eXoWCMResources/javascript");
+  jsManager.addJavascript("eXo.ecm.CLV.checkModeViewer();");
+%>
+<div class="UIForm $uicomponent.id">
+  <div class="TitleBar">
+    <b><%=_ctx.appRes("UICLVConfig.label.Title")%></b>  
+  </div>
+  <%
+    uiform.begin()
+      %>
+        <div class="HorizontalLayout">
+          <div class="FormContainer">
+            <fieldset style=" margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
+              <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.ContentSelectionBlock") %></legend>
+              <table class="UIFormGrid">
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                </tr>
+                <tr class="OrderBlock">
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
+                </tr>
+                <tr class="OrderBlock">
+                  <td class="FieldLabel">&nbsp;</td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.ORDER_TYPE_FORM_RADIO_BOX_INPUT) %></td>
+                </tr>
+                <% 
+                  List<String> contents = uiform.getItems();
+                  if (contents != null && !contents.isEmpty()) {
+                    %>
+                      <table class="UIContentGrid">
+                        <thead>
+                          <tr>
+                            <th><%=_ctx.appRes("UICLVConfig.label.ContentPath")%></th>
+                            <th><%=_ctx.appRes("UISelectedContentGrid.action.Down")%></th>
+                            <th><%=_ctx.appRes("UISelectedContentGrid.action.Up")%></th>
+                          </tr>
+                        </thead>
+                        <% 
+                          if (contents.size() == 1) {
+                            String delLink = uicomponent.event("Delete", "0");
+                            %>
+                              <tr class="EvenRow">
+                                <td><%= contents.get(0) %></td>
+                                <td><span></span></td>
+                                <td><span></span></td>
+                              </tr>
+                            <%
+                          } else {
+                            String rowClass = "";
+                            for (int i = 0; i < contents.size(); i++) {
+                              if ((i % 2) == 0) {
+                                rowClass = "EvenRow";
+                              } else {
+                                rowClass = "OddRow";
+                              }
+                              String content = contents.get(i);                  
+                              String upLink = uicomponent.event("Increase", Integer.toString(i));
+                              String downLink = uicomponent.event("Decrease", Integer.toString(i));  
+                              %>
+                                <tr class="$rowClass">
+                                  <td>$content</td>
+                                  <td width="25px"><div class="DownRowIcon" onclick="$downLink"><span></span></div></td>
+                                  <td width="25px"><div class="UpRowIcon" onclick="$upLink"><span></span></div></td>
+                                </tr>
+                              <%
+                            }
+                          }
+                        %>
+                      </table>
+                    <%
+                  }
+                %>
+              </table>
+            </fieldset>   
+            <fieldset style=" margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
+              <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.DisplaySettingBlock") %></legend>
+              <table class="UIFormGrid">
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.HEADER_FORM_STRING_INPUT) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></td>
+                </tr>
+              </table>
+              <table class="UIFormGrid">
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %></td>
+                </tr>
+              </table>
+            </fieldset>
+            <div class="UIAction"> 
+              <table class="ActionContainer">
+                <tr>
+                  <td>
+                    <% 
+                      for(action in uicomponent.getActions()) { 
+                        String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+                        String link = uicomponent.event(action) ;
+                        %>
+                          <div onclick="$link" class="ActionButton LightBlueStyle" onmouseover="this.style.color = '#058ee6'" onmouseout="this.style.color='black'">
+                            <div class="ButtonLeft">
+                              <div class="ButtonRight">
+                                <div class="ButtonMiddle">
+                                  <a href="javascript:void(0);">$actionLabel</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <%
+                      }
+                    %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      <%
+    uiform.end()
+  %>
+</div>

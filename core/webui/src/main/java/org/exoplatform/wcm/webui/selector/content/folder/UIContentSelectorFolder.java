@@ -1,4 +1,4 @@
-package org.exoplatform.wcm.webui.selector.folder;
+package org.exoplatform.wcm.webui.selector.content.folder;
 
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;

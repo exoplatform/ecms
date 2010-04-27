@@ -4,6 +4,11 @@
     <title>
       <QuickEdit>Sửa nhanh</QuickEdit>
     </title>
+    <msg>
+      <non-contents>Không có nội dung nào</non-contents>
+      <item-not-found>Nội dung này không tồn tại</item-not-found>
+      <no-permission>Bạn không có quyền xem nội dung này</no-permission>	
+    </msg>
   </UICLVContainer>
 
   <UIViewerManagementPopupWindow>
@@ -16,9 +21,9 @@
     <label>
       <Title>Cấu hình cho Content list viewer</Title>
       <ContentSelectionBlock>Chọn nội dung</ContentSelectionBlock>
-      <ViewerMode>Chế độ</ViewerMode>
-      <FolderPathInput>Đường dẫn</FolderPathInput>
-      <OrderBy>Sắp xếp theo</OrderBy>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Chế độ</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Đường dẫn</UICLVConfigItemPathFormInputSet>
+      <UICLVConfigOrderByFormSelectBox>Sắp xếp theo</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Tiêu đề</exo:title>
         <exo:dateCreated>Ngày tạo</exo:dateCreated>
@@ -26,39 +31,43 @@
         <publication:liveDate>Ngày xuất bản</publication:liveDate>
       </option>
       <DisplaySettingBlock>Lựa chọn hiển thị</DisplaySettingBlock>
-      <Header>Tiêu đề portlet</Header>
-      <FormViewTemplate>Mẫu hiển thị</FormViewTemplate>
-      <PaginatorTemplate>Mẫu phân trang</PaginatorTemplate>
-      <UICLVBasePathInputSetAction>Trang đích</UICLVBasePathInputSetAction>
-      <UICLVBasePathInput></UICLVBasePathInput>
-      <ItemsPerPage>Số lượng mỗi trang</ItemsPerPage>
-      <ViewerThumbnailsView>Hiển thị hình minh hoạ</ViewerThumbnailsView>
-      <ViewerSummary>Hiển thị tóm tắt</ViewerSummary>
-      <ViewerHeader>Hiển thị tiêu đề portlet</ViewerHeader>
-      <ViewerButtonRefresh>Hiển thị nút làm mới</ViewerButtonRefresh>
-      <ViewerTitle>Hiển thị tiêu đề nội dung</ViewerTitle>
-      <ViewerDateCreated>Hiển thị ngày tạo</ViewerDateCreated>
-      <ViewerLink>Hiển thị liên kết</ViewerLink>
-      <ViewerReadmore>Hiển thị Đọc thêm</ViewerReadmore>
+      <UICLVConfigHeaderFormStringInput>Tiêu đề portlet</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Mẫu hiển thị</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Mẫu phân trang</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigTargetPageFormInputSet>Trang đích</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Số lượng mỗi trang</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Hiển thị hình minh hoạ</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Hiển thị tóm tắt</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Hiển thị tiêu đề portlet</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Hiển thị nút làm mới</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Hiển thị tiêu đề nội dung</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Hiển thị ngày tạo</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Hiển thị liên kết</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Hiển thị Đọc thêm</UICLVConfigShowReadmoreFormCheckboxInput>
     </label>
     <action>
       <Save>Lưu</Save>
       <Cancel>Hủy</Cancel>
     </action>
+    <msg>
+      <not-valid-path>Đường dẫn không đúng</not-valid-path>
+      <saving-success>Cấu hình cho portlet đã được lưu lại</saving-success>
+    </msg>
   </UICLVConfig>
 
-  <ViewerMode>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
       <AutoViewerMode>Tự động</AutoViewerMode>
       <ManualViewerMode>Tùy chọn</ManualViewerMode>
     </label>
-  </ViewerMode>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
 
-  <FolderPathInputSet>
+  <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Chọn thư mục</SelectFolderPath>
     </title>
-  </FolderPathInputSet>
+  </UICLVConfigItemPathFormInputSet>
 
   <FolderPathSelectorPopupWindow>
     <title>
@@ -66,18 +75,18 @@
     </title>
   </FolderPathSelectorPopupWindow>
 
-  <OrderTypes>
+  <UICLVConfigOrderTypeFormRadioBoxInput>
     <label>
       <OrderDesc>Giảm dần</OrderDesc>
       <OrderAsc>Tăng dần</OrderAsc>
     </label>
-  </OrderTypes>
+  </UICLVConfigOrderTypeFormRadioBoxInput>
 
-  <UICLVBasePathInputSetAction>
+  <UICLVConfigTargetPageFormInputSet>
     <title>
       <SelectBasePath>Chọn trang đích</SelectBasePath>
     </title>
-  </UICLVBasePathInputSetAction>
+  </UICLVConfigTargetPageFormInputSet>
 
   <UICLVBasePathPopupWindow>
     <title>
@@ -109,12 +118,5 @@
       <UIContentDialogForm>Web content form</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
-  <UIMessageBoard>
-    <msg>
-      <contents-not-found>Nội dung này không được tìm thấy hoặc đã bị xóa</contents-not-found>
-      <add-node-error>Một lỗi xảy ra khi thêm mới node</add-node-error>
- 	  <folder-empty>Thư mục này không có nội dung</folder-empty>	
-    </msg>
-  </UIMessageBoard>
-  
+
 </bundle>

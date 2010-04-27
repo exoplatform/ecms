@@ -25,7 +25,6 @@ import java.util.Locale;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.utils.PageList;
@@ -59,17 +58,25 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
  * Oct 21, 2008
  */
+/**
+ * The Class UICLVPresentation.
+ */
 @SuppressWarnings("deprecation")
-@ComponentConfigs( {
+@ComponentConfigs({
   @ComponentConfig(
-      lifecycle = Lifecycle.class, 
-      events = {
-        @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
-        @EventConfig(listeners = UICLVPresentation.EditContentActionListener.class)
-      }
+    lifecycle = Lifecycle.class, 
+    events = {
+      @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
+      @EventConfig(listeners = UICLVPresentation.EditContentActionListener.class)
+    }
   ),
-  @ComponentConfig(type = UICustomizeablePaginator.class, events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)) })
-  public class UICLVPresentation extends UIContainer {
+  @ComponentConfig(
+    type = UICustomizeablePaginator.class, 
+    events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)
+  ) 
+})
+
+public class UICLVPresentation extends UIContainer {
 
   /** The template path. */
   private String                   templatePath;
@@ -80,26 +87,11 @@ import org.exoplatform.webui.event.EventListener;
   /** The ui paginator. */
   private UICustomizeablePaginator uiPaginator;
 
-  /** The content column. */
-  private String                   contentColumn;
-
-  /** The show link. */
-  private boolean                  showLink;
-
-  /** The show header. */
-  private boolean                  showHeader;
-  
-  /** The show readmore. */
-  private boolean                  showReadmore;
-
-  /** The header. */
-  private String                   header;
-
   /** The date formatter. */
   private DateFormat               dateFormatter = null;
   
   /**
-   * Instantiates a new uI content list presentation.
+   * Instantiates a new uICLV presentation.
    */
   public UICLVPresentation() {
   }
@@ -110,14 +102,11 @@ import org.exoplatform.webui.event.EventListener;
    * @param templatePath the template path
    * @param resourceResolver the resource resolver
    * @param dataPageList the data page list
-   * 
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
   public void init(String templatePath, ResourceResolver resourceResolver, PageList dataPageList) throws Exception {
-    PortletPreferences portletPreferences = getPortletPreferences();
-    String paginatorTemplatePath = portletPreferences.getValue(UICLVPortlet.PAGINATOR_TEMPlATE_PATH,
-        null);
+    String paginatorTemplatePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_PAGINATOR_TEMPLATE);
     this.templatePath = templatePath;
     this.resourceResolver = resourceResolver;
     uiPaginator = addChild(UICustomizeablePaginator.class, null, null);
@@ -125,57 +114,28 @@ import org.exoplatform.webui.event.EventListener;
     uiPaginator.setResourceResolver(resourceResolver);
     uiPaginator.setPageList(dataPageList);
     Locale locale = Util.getPortalRequestContext().getLocale();
-    dateFormatter = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM,
-        SimpleDateFormat.MEDIUM,
-        locale);
-  }
-
-  /**
-   * Gets the portlet preferences.
-   * 
-   * @return the portlet preferences
-   */
-  private PortletPreferences getPortletPreferences() {
-    PortletRequestContext context = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-    PortletPreferences portletPreferences = context.getRequest().getPreferences();
-    return portletPreferences;
-  }
-
-  /**
-   * Show refresh button.
-   * 
-   * @return true, if successful
-   */
-  public boolean showRefreshButton() {
-    PortletPreferences portletPreferences = getPortletPreferences();
-    String isShow = portletPreferences.getValue(UICLVPortlet.SHOW_REFRESH_BUTTON, null);
-    return (isShow != null) ? Boolean.parseBoolean(isShow) : false;
+    dateFormatter = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
   }
 
   /**
    * Checks if is show field.
    * 
    * @param field the field
-   * 
    * @return true, if is show field
    */
   public boolean isShowField(String field) {
-    PortletPreferences portletPreferences = getPortletPreferences();
-    String showAble = portletPreferences.getValue(field, null);
-    return (showAble != null) ? Boolean.parseBoolean(showAble) : false;
+    String visible = Utils.getPortletPreference(field);
+    return (visible != null) ? Boolean.parseBoolean(visible) : false;
   }
 
   /**
    * Show paginator.
    * 
    * @return true, if successful
-   * 
    * @throws Exception the exception
    */
   public boolean showPaginator() throws Exception {
-    PortletPreferences portletPreferences = getPortletPreferences();
-    String itemsPerPage = portletPreferences.getValue(UICLVPortlet.ITEMS_PER_PAGE,
-        null);
+    String itemsPerPage = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE);
     int totalItems = uiPaginator.getTotalItems();
     if (totalItems > Integer.parseInt(itemsPerPage)) {
       return true;
@@ -185,87 +145,25 @@ import org.exoplatform.webui.event.EventListener;
 
   /*
    * (non-Javadoc)
-   * 
    * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
    */
   public String getTemplate() {
     return templatePath;
   }
 
-  /**
-   * Gets the datetime fommatter.
-   * 
-   * @return the datetime fommatter
-   */
-  public DateFormat getDatetimeFommatter() {
-    return dateFormatter;
-  }
-
-  /**
-   * Sets the date time format.
-   * 
-   * @param format the new date time format
-   */
-  public void setDateTimeFormat(String format) {
-    ((SimpleDateFormat) dateFormatter).applyPattern(format);
-  }
-
-  /**
-   * Gets the content column.
-   * 
-   * @return the content column
-   */
-  public String getContentColumn() {
-    return this.contentColumn;
-  }
-
-  /**
-   * Sets the content column.
-   * 
-   * @param column the new content column
-   */
-  public void setContentColumn(String column) {
-    this.contentColumn = column;
-  }
-
-  /**
-   * Gets the uI page iterator.
-   * 
-   * @return the uI page iterator
-   */
-  public UIPageIterator getUIPageIterator() {
-    return uiPaginator;    
-  }
-
   /*
    * (non-Javadoc)
-   * 
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext,
-   *      java.lang.String)
+   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return resourceResolver;
   }
 
   /**
-   * Gets the current page data.
-   * 
-   * @return the current page data
-   * 
-   * @throws Exception the exception
-   */
-  @SuppressWarnings("unchecked")
-	public List getCurrentPageData() throws Exception {
-    return uiPaginator.getCurrentPageData();
-  }
-
-  /**
    * Gets the title.
    * 
    * @param node the node
-   * 
    * @return the title
-   * 
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
@@ -298,9 +196,7 @@ import org.exoplatform.webui.event.EventListener;
    * Gets the summary.
    * 
    * @param node the node
-   * 
    * @return the summary
-   * 
    * @throws Exception the exception
    */
   public String getSummary(Node node) throws Exception {
@@ -324,9 +220,7 @@ import org.exoplatform.webui.event.EventListener;
    * Gets the uRL.
    * 
    * @param node the node
-   * 
    * @return the uRL
-   * 
    * @throws Exception the exception
    */
   public String getURL(Node node) throws Exception {
@@ -335,21 +229,18 @@ import org.exoplatform.webui.event.EventListener;
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletRequest portletRequest = portletRequestContext.getRequest();
     String portalURI = portalRequestContext.getPortalURI();
-    PortletPreferences portletPreferences = getPortletPreferences();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
-    String basePath = portletPreferences.getValue(UICLVPortlet.BASE_PATH, null);
+    String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
     link = baseURI + portalURI + basePath + "?path=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
     return link;
   }
 
   /**
-   * Gets the WebDAV uRL.
+   * Gets the webdav url.
    * 
    * @param node the node
-   * 
-   * @return the WebDAV URL
-   * 
+   * @return the webdav url
    * @throws Exception the exception
    */
   public String getWebdavURL(Node node) throws Exception {
@@ -376,9 +267,7 @@ import org.exoplatform.webui.event.EventListener;
    * Gets the author.
    * 
    * @param node the node
-   * 
    * @return the author
-   * 
    * @throws Exception the exception
    */
   public String getAuthor(Node node) throws Exception {
@@ -397,9 +286,7 @@ import org.exoplatform.webui.event.EventListener;
    * Gets the created date.
    * 
    * @param node the node
-   * 
    * @return the created date
-   * 
    * @throws Exception the exception
    */
   public String getCreatedDate(Node node) throws Exception {
@@ -414,9 +301,7 @@ import org.exoplatform.webui.event.EventListener;
    * Gets the modified date.
    * 
    * @param node the node
-   * 
    * @return the modified date
-   * 
    * @throws Exception the exception
    */
   public String getModifiedDate(Node node) throws Exception {
@@ -428,21 +313,9 @@ import org.exoplatform.webui.event.EventListener;
   }
 
   /**
-   * Gets the content type.
-   * 
-   * @param node the node
-   * 
-   * @return the content type
-   */
-  public String getContentType(Node node) {
-    return null;
-  }
-
-  /**
    * Gets the content icon.
    * 
    * @param node the node
-   * 
    * @return the content icon
    */
   public String getContentIcon(Node node) {
@@ -461,25 +334,28 @@ import org.exoplatform.webui.event.EventListener;
     return null;
   }
 
-  /**
-   * Gets the content size.
-   * 
-   * @param node the node
-   * 
-   * @return the content size
-   */
-  public String getContentSize(Node node) {
-    return null;
+  public String getHeader() {
+    return Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
   }
-
+  
+  public UIPageIterator getUIPageIterator() {
+    return uiPaginator;
+  }
+  
+  @SuppressWarnings("unchecked")
+  public List getCurrentPageData() throws Exception {
+    return uiPaginator.getCurrentPageData();
+  }
+  
+  public void setDateTimeFormat(String format) {
+    ((SimpleDateFormat) dateFormatter).applyPattern(format);
+  }
+  
   /**
    * Gets the illustrative image.
    * 
    * @param node the node
-   * 
    * @return the illustrative image
-   * 
-   * @throws Exception the exception
    */
   public String getIllustrativeImage(Node node) {
     WebSchemaConfigService schemaConfigService = getApplicationComponent(WebSchemaConfigService.class);
@@ -499,66 +375,11 @@ import org.exoplatform.webui.event.EventListener;
   }
 
   /**
-   * Gets the categories.
-   * 
-   * @param node the node
-   * 
-   * @return the categories
-   */
-  public List<String> getCategories(Node node) {
-    return null;
-  }
-
-  /**
-   * Gets the tags.
-   * 
-   * @param node the node
-   * 
-   * @return the tags
-   */
-  public List<String> getTags(Node node) {
-    return null;
-  }
-
-  /**
-   * Gets the voting rate.
-   * 
-   * @param node the node
-   * 
-   * @return the voting rate
-   */
-  public float getVotingRate(Node node) {
-    return 0;
-  }
-
-  /**
-   * Gets the number of comments.
-   * 
-   * @param node the node
-   * 
-   * @return the number of comments
-   */
-  public int getNumberOfComments(Node node) {
-    return 0;
-  }
-
-  /**
-   * Gets the related contents.
-   * 
-   * @param node the node
-   * 
-   * @return the related contents
-   */
-  public List<Node> getRelatedContents(Node node) {
-    return null;
-  }
-
-  /**
-   * The listener interface for receiving refreshAction events. The class that
-   * is interested in processing a refreshAction event implements this
-   * interface, and the object created with that class is registered with a
-   * component using the component's
-   * <code>addRefreshActionListener<code> method. When
+   * The listener interface for receiving refreshAction events.
+   * The class that is interested in processing a refreshAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addRefreshActionListener<code> method. When
    * the refreshAction event occurs, that object's appropriate
    * method is invoked.
    * 
@@ -568,13 +389,11 @@ import org.exoplatform.webui.event.EventListener;
 
     /*
      * (non-Javadoc)
-     * 
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UICLVPresentation> event) throws Exception {
-      UICLVPresentation contentListPresentation = event.getSource();
-      RefreshDelegateActionListener refreshListener = (RefreshDelegateActionListener) contentListPresentation.getParent();
-      refreshListener.onRefresh(event);
+      UICLVPresentation clvPresentation = event.getSource();
+      clvPresentation.getAncestorOfType(UICLVContainer.class).onRefresh(event);
     }
   }
 
@@ -602,77 +421,5 @@ import org.exoplatform.webui.event.EventListener;
       uiDocumentDialogForm.init(node, false);
       Utils.createPopupWindow(contentListPresentation, uiDocumentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
     }
-  }
-
-  /**
-   * Checks if is show link.
-   * 
-   * @return true, if is show link
-   */
-  public boolean isShowLink() {
-    return showLink;
-  }
-
-  /**
-   * Sets the show link.
-   * 
-   * @param showLink the new show link
-   */
-  public void setShowLink(boolean showLink) {
-    this.showLink = showLink;
-  }
-  
-  /**
-   * Checks if is show header.
-   * 
-   * @return true, if is show header
-   */
-  public boolean isShowHeader() {
-	  return showHeader;
-  }
-  
-  /**
-   * Checks if is show readmore.
-   * 
-   * @return true, if is show readmore
-   */
-  public boolean isShowReadmore() {
-	  return showReadmore;
-  }
-
-  /**
-   * Sets the show header.
-   * 
-   * @param showHeader the new show header
-   */
-  public void setShowHeader(boolean showHeader) {
-	  this.showHeader = showHeader;
-  }
-
-  /**
-   * Sets the show readmore.
-   * 
-   * @param showReadmore the new show readmore
-   */
-  public void setShowReadmore(boolean showReadmore) {
-	  this.showReadmore = showReadmore;
-  }
-
-  /**
-   * Sets the header.
-   * 
-   * @param header the new header
-   */
-  public void setHeader(String header) {
-    this.header = header;
-  }
-
-  /**
-   * Gets the header.
-   * 
-   * @return the header
-   */
-  public String getHeader() {
-    return this.header;
   }
 }

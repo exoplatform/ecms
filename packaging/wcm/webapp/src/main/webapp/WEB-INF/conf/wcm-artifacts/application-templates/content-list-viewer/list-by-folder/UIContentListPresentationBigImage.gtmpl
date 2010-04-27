@@ -9,7 +9,8 @@
 <div id="$uicomponent.id" class="UICLVPresentation">
 	<%	
 		String header = uicomponent.getHeader();
-		if (uicomponent.isShowHeader() && header != null && header.trim().length() != 0 ) {
+	  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
+    if (isShowHeader) {
 			%><div class="Header"><%= header %></div>		<%
 		}
 	%>
@@ -45,14 +46,14 @@
 					%>	
 						<div class="CaptionItem" style="border-bottom: 0px;">
 							<% 
-                                if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.SHOW_THUMBNAILS_VIEW)) {
+                                if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION)) {
                                     %><img src="$imgSrc" width="270px" style="padding-bottom:10px;" /><%
                                 }
-								if (uicomponent.isShowField(UICLVPortlet.SHOW_TITLE)) {
+								if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE)) {
 									%>
 										<div class="CaptionTitle" >
 											<% 
-												if (uicomponent.isShowField(UICLVPortlet.SHOW_LINK)) {
+												if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_LINK)) {
 													%><a href="$itemLink">$itemName</a><% 
 												} else { 
 													%>$itemName<% 
@@ -73,19 +74,19 @@
 										</div>
 									<%							
 								} 
-								if (itemDateCreated != null && uicomponent.isShowField(UICLVPortlet.SHOW_DATE_CREATED)) { 
+								if (itemDateCreated != null && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED)) { 
 									%><div class="CaptionDate"><%=itemDateCreated%></div><% 
 								} 
 							%>											
 							<div class="CaptionContent">				
 								<% 
-									if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.SHOW_SUMMARY)) {
+									if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY)) {
 										%><pre><%=itemSummary%></pre><% 
 									} 
 								%>															
 							</div>			
                             <%
-                            if (uicomponent.isShowField(UICLVPortlet.SHOW_READMORE)) {
+                            if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_READMORE)) {
                             %>
                             <div class="CaptionViewMore"><a href="$itemLink"><%=labelReadMore%>&raquo;</a></div>
                             <%
@@ -98,7 +99,8 @@
 		%>
 		<div class="CaptionFunc">
 			<% 
-				if (uicomponent.showRefreshButton()) { 
+			  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
+        if (isShowRefresh) { 
 					String link = uicomponent.event("Refresh");
 					%>				
 						<div class="CaptionRefresh">

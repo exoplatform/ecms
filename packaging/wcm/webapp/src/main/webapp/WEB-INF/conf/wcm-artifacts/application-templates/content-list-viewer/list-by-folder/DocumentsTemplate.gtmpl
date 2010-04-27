@@ -17,7 +17,7 @@
 	<div class="CLV">
 		<%
 			def header = uicomponent.getHeader();
-			def isShowHeader = uicomponent.isShowHeader() && header != null && header.trim().length() != 0;
+		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 			if (isShowHeader) {
 				%>
 					<div class="TitleBarL">
@@ -42,10 +42,10 @@
 							for (viewNode in currentPageData) {
 								if(!Utils.isViewable(viewNode)) continue;
 								
-								def isShowTitle = uicomponent.isShowField(UICLVPortlet.SHOW_TITLE);
-								def isShowDate = uicomponent.isShowField(UICLVPortlet.SHOW_DATE_CREATED);
-								def isShowLink = uicomponent.isShowField(UICLVPortlet.SHOW_LINK);
-								def isShowReadmore = uicomponent.isShowField(UICLVPortlet.SHOW_READMORE);
+								def isShowTitle = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE);
+								def isShowDate = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED);
+								def isShowLink = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_LINK);
+								def isShowReadmore = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_READMORE);
 								
 								def itemLink = uicomponent.getURL(viewNode);			
 								def itemWebdavLink = uicomponent.getWebdavURL(viewNode);
@@ -54,7 +54,7 @@
 								def itemOwner = uicomponent.getAuthor(viewNode);			
 								
 								def imgSrc = uicomponent.getIllustrativeImage(viewNode);
-								def isShowImage = uicomponent.isShowField(UICLVPortlet.SHOW_THUMBNAILS_VIEW) && imgSrc != null;
+								def isShowImage = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION) && imgSrc != null;
 
 								def itemName = viewNode.getName();
 								def itemTitle = uicomponent.getTitle(viewNode);
@@ -62,7 +62,7 @@
 									itemName = itemTitle;
 
 								def itemSummary = uicomponent.getSummary(viewNode);
-								def isShowSummary = uicomponent.isShowField(UICLVPortlet.SHOW_SUMMARY) && itemSummary != null;
+								def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;
 								
 								def itemIcon = uicomponent.getContentIcon(viewNode);
 								
@@ -121,8 +121,9 @@
 	</div>
 	<div class="CaptionFunc">
 		<% 
-		String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
-			if (uicomponent.showRefreshButton()) { 
+		  String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+		  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
+      if (isShowRefresh) { 
 				String link = uicomponent.event("Refresh");
 				%>				
 					<div class="CaptionRefresh">

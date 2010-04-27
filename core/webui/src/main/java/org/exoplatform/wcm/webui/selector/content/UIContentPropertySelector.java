@@ -17,9 +17,9 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.core.UIPopupWindow;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
@@ -46,6 +46,8 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 )
 public class UIContentPropertySelector extends UIForm{
 
+  public final static String WEB_CONTENT_METADATA_POPUP = "WebContentMetadataPopup";
+  
   final static public String METADATA_TYPE = "metadataType" ;
   final static public String PROPERTY_SELECT = "property_select" ;
 
@@ -109,11 +111,10 @@ public class UIContentPropertySelector extends UIForm{
   static  public class CancelActionListener extends EventListener<UIContentPropertySelector> {
     public void execute(Event<UIContentPropertySelector> event) throws Exception {
       UIContentPropertySelector contentPropertySelector = event.getSource();
-      UIPopupWindow uiPopupWindow = contentPropertySelector.getAncestorOfType(UIPopupWindow.class);
-      UIContentSelector contentSelector = uiPopupWindow.getAncestorOfType(UIContentSelector.class);
-      contentSelector.removeChild(UIPopupWindow.class);
+      UIPopupWindow popupWindow = Utils.getPopupContainer(contentPropertySelector).getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
+      UIContentSelector contentSelector = popupWindow.getAncestorOfType(UIContentSelector.class);
       UIContentSearchForm contentSearchForm = contentSelector.getChild(UIContentSearchForm.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
+      Utils.closePopupWindow(contentPropertySelector, WEB_CONTENT_METADATA_POPUP);
       contentSelector.setSelectedTab(contentSearchForm.getId());
     }
   }
@@ -122,12 +123,11 @@ public class UIContentPropertySelector extends UIForm{
     public void execute(Event<UIContentPropertySelector> event) throws Exception {
       UIContentPropertySelector contentPropertySelector = event.getSource();
       String property = contentPropertySelector.<UIFormRadioBoxInput>getUIInput(PROPERTY_SELECT).getValue();
-      UIPopupWindow uiPopupWindow = contentPropertySelector.getAncestorOfType(UIPopupWindow.class);
-      UIContentSelector contentSelector = uiPopupWindow.getAncestorOfType(UIContentSelector.class);
+      UIPopupWindow popupWindow = Utils.getPopupContainer(contentPropertySelector).getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
+      UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
       UIContentSearchForm contentSearchForm =contentSelector.findFirstComponentOfType(UIContentSearchForm.class);
       contentSearchForm.getUIStringInput(contentPropertySelector.getFieldName()).setValue(property);
-      contentSelector.removeChild(UIPopupWindow.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
+      Utils.closePopupWindow(contentPropertySelector, WEB_CONTENT_METADATA_POPUP);
       contentSelector.setSelectedTab(contentSearchForm.getId());
     }
   }

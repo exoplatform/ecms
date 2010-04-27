@@ -4,6 +4,11 @@
     <title>
       <QuickEdit>Quick edit</QuickEdit>
     </title>
+    <msg>
+      <non-contents>There are no content here</non-contents>
+      <item-not-found>Item not found</item-not-found>
+      <no-permission>You don't have permission to access this node</no-permission>
+    </msg>
   </UICLVContainer>
 
   <UIViewerManagementPopupWindow>
@@ -16,9 +21,9 @@
     <label>
       <Title>Content list viewer configuration</Title>
       <ContentSelectionBlock>Contents selection</ContentSelectionBlock>
-      <ViewerMode>Mode</ViewerMode>
-      <FolderPathInputSet>Folder path</FolderPathInputSet>
-      <OrderBy>Order by</OrderBy>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Folder path</UICLVConfigItemPathFormInputSet>
+      <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Title</exo:title>
         <exo:dateCreated>Date created</exo:dateCreated>
@@ -26,39 +31,43 @@
         <publication:liveDate>Date published</publication:liveDate>
       </option>
       <DisplaySettingBlock>Display settings</DisplaySettingBlock>
-      <Header>Header</Header>
-      <FormViewTemplate>Viewer template</FormViewTemplate>
-      <PaginatorTemplate>Paginator template</PaginatorTemplate>
-      <UICLVBasePathInputSetAction>Base path</UICLVBasePathInputSetAction>
-      <UICLVBasePathInput></UICLVBasePathInput>
-      <ItemsPerPage>Items per page</ItemsPerPage>
-      <ViewerThumbnailsView>Show illustration</ViewerThumbnailsView>
-      <ViewerSummary>Show summary</ViewerSummary>
-      <ViewerHeader>Show header</ViewerHeader>
-      <ViewerButtonRefresh>Show refresh button</ViewerButtonRefresh>
-      <ViewerTitle>Show title</ViewerTitle>
-      <ViewerDateCreated>Show date created</ViewerDateCreated>
-      <ViewerLink>Show link</ViewerLink>
-      <ViewerReadmore>Read more</ViewerReadmore>
+      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Viewer template</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator template</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigTargetPageFormInputSet>Base path</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Items per page</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show illustration</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Show summary</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Show header</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Show refresh button</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Show title</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Show date created</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Show link</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Read more</UICLVConfigShowReadmoreFormCheckboxInput>
     </label>
     <action>
       <Save>Save</Save>
       <Cancel>Cancel</Cancel>
     </action>
+    <msg>
+      <not-valid-path>The item path is invalid</not-valid-path>
+      <saving-success>The portlet's preferences are saved</saving-success>
+    </msg>
   </UICLVConfig>
 
-  <ViewerMode>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
       <AutoViewerMode>By Folder</AutoViewerMode>
       <ManualViewerMode>By Contents</ManualViewerMode>
     </label>
-  </ViewerMode>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
 
-  <FolderPathInputSet>
+  <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Select folder path</SelectFolderPath>
     </title>
-  </FolderPathInputSet>
+  </UICLVConfigItemPathFormInputSet>
 
   <FolderPathSelectorPopupWindow>
     <title>
@@ -66,18 +75,18 @@
     </title>
   </FolderPathSelectorPopupWindow>
 
-  <OrderTypes>
+  <UICLVConfigOrderTypeFormRadioBoxInput>
     <label>
       <OrderDesc>Descendant</OrderDesc>
       <OrderAsc>Ascendant</OrderAsc>
     </label>
-  </OrderTypes>
+  </UICLVConfigOrderTypeFormRadioBoxInput>
 
-  <UICLVBasePathInputSetAction>
+  <UICLVConfigTargetPageFormInputSet>
     <title>
       <SelectBasePath>Select base path</SelectBasePath>
     </title>
-  </UICLVBasePathInputSetAction>
+  </UICLVConfigTargetPageFormInputSet>
 
   <UICLVBasePathPopupWindow>
     <title>
@@ -110,11 +119,4 @@
     </title>
   </UIContentDialogFormPopupWindow>
   
-  <UIMessageBoard>
-    <msg>
-      <contents-not-found>This content does not found or deleted.</contents-not-found>
-      <add-node-error>An error when perform add new node.</add-node-error> 	 
- 	  <folder-empty>This folder is empty</folder-empty>	 
-    </msg>
-  </UIMessageBoard>
 </bundle>

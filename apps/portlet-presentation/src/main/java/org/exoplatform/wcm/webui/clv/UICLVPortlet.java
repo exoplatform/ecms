@@ -17,10 +17,7 @@
 package org.exoplatform.wcm.webui.clv;
 
 import javax.portlet.PortletMode;
-import javax.portlet.PortletPreferences;
 
-import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.clv.config.UICLVConfig;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -33,79 +30,98 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
  * Oct 15, 2008
  */
+/**
+ * The Class UICLVPortlet.
+ */
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class)
 public class UICLVPortlet extends UIPortletApplication {
 
-  /** The mode. */
-  private PortletMode        mode                    = PortletMode.VIEW;
+  /** The Constant PREFERENCE_ITEMS_PER_PAGE. */
+  public final static String PREFERENCE_ITEMS_PER_PAGE          = "itemsPerPage";
 
-  /** The Constant REPOSITORY. */
-  public final static String REPOSITORY              = "repository";
-
-  /** The Constant ITEMS_PER_PAGE. */
-  public final static String ITEMS_PER_PAGE          = "itemsPerPage";
-
-  /** The Constant FOLDER_PATH. */
-  public final static String FOLDER_PATH             = "folderPath";
-
-  /** The Constant HEADER. */
-  public final static String HEADER                  = "header";
-
-  /** The Constant FORM_VIEW_TEMPLATE_PATH. */
-  public final static String FORM_VIEW_TEMPLATE_PATH = "formViewTemplatePath";
-
-  /** The Constant PAGINATOR_TEMPlATE_PATH. */
-  public final static String PAGINATOR_TEMPlATE_PATH = "paginatorTemplatePath";
-
-  /** The Constant SHOW_REFRESH_BUTTON. */
-  public final static String SHOW_REFRESH_BUTTON     = "showRefreshButton";
-
-  /** The Constant SHOW_THUMBNAILS_VIEW. */
-  public final static String SHOW_THUMBNAILS_VIEW    = "showThumbnailsView";
-
-  /** The Constant SHOW_TITLE. */
-  public final static String SHOW_TITLE              = "showTitle";
-
-  /** The Constant SHOW_SUMMARY. */
-  public final static String SHOW_SUMMARY            = "showSummary";
-
-  /** The Constant SHOW_DATE_CREATED. */
-  public final static String SHOW_DATE_CREATED       = "showDateCreated";
-
-  /** The Constant SHOW_HEADER. */
-  public final static String SHOW_HEADER             = "showHeader";
+  /** The Constant PREFERENCE_ITEM_PATH. */
+  public final static String PREFERENCE_ITEM_PATH               = "folderPath";
   
-  /** The Constant SHOW_HEADER. */
-  public final static String SHOW_READMORE             = "showReadmore";
+  /** The Constant PREFERENCE_HEADER. */
+  public final static String PREFERENCE_HEADER                  = "header";
 
-  /** The Constant SHOW_LINK. */
-  public final static String SHOW_LINK             = "showLink";
+  /** The Constant PREFERENCE_DISPLAY_TEMPLATE. */
+  public final static String PREFERENCE_DISPLAY_TEMPLATE        = "formViewTemplatePath";
+
+  /** The Constant PREFERENCE_PAGINATOR_TEMPLATE. */
+  public final static String PREFERENCE_PAGINATOR_TEMPLATE      = "paginatorTemplatePath";
+
+  /** The Constant PREFERENCE_SHOW_REFRESH_BUTTON. */
+  public final static String PREFERENCE_SHOW_REFRESH_BUTTON     = "showRefreshButton";
+
+  /** The Constant PREFERENCE_SHOW_ILLUSTRATION. */
+  public final static String PREFERENCE_SHOW_ILLUSTRATION       = "showThumbnailsView";
+
+  /** The Constant PREFERENCE_SHOW_TITLE. */
+  public final static String PREFERENCE_SHOW_TITLE              = "showTitle";
+
+  /** The Constant PREFERNECE_SHOW_SUMMARY. */
+  public final static String PREFERENCE_SHOW_SUMMARY            = "showSummary";
+
+  /** The Constant PREFERENCE_SHOW_DATE_CREATED. */
+  public final static String PREFERENCE_SHOW_DATE_CREATED       = "showDateCreated";
+
+  /** The Constant PREFERENCE_SHOW_HEADER. */
+  public final static String PREFERENCE_SHOW_HEADER             = "showHeader";
   
-  /** The Constant CONTENT_SOURCE. */
-  public static final String CONTENT_SOURCE = "source";
+  /** The Constant PREFERENCE_SHOW_READMORE. */
+  public final static String PREFERENCE_SHOW_READMORE           = "showReadmore";
+
+  /** The Constant PREFERENCE_SHOW_LINK. */
+  public final static String PREFERENCE_SHOW_LINK               = "showLink";
   
-  /** The Constant VIEWER_MODE. */
-  public static final String VIEWER_MODE = "mode";
+  /** The Constant PREFERENCE_TARGET_PAGE. */
+  public final static String  PREFERENCE_TARGET_PAGE            = "basePath";
   
-  /** The Constant ORDER_BY. */
-  public static final String ORDER_BY = "orderBy";
+  /** The Constant PREFERENCE_DISPLAY_MODE. */
+  public static final String PREFERENCE_DISPLAY_MODE            = "mode";
   
-  /** The Constant ORDER_TYPE. */
-  public static final String ORDER_TYPE = "orderType";
+  /** The Constant DISPLAY_MODE_MANUAL. */
+  public static final String DISPLAY_MODE_MANUAL                = "ManualViewerMode";
+
+  /** The Constant DISPLAY_MODE_AUTOMATIC. */
+  public static final String DISPLAY_MODE_AUTOMATIC             = "AutoViewerMode";
   
-  /** The Constant CONTENT_LIST. */
-  public static final String CONTENT_LIST = "contents";
+  /** The Constant PREFERENCE_ORDER_BY. */
+  public static final String PREFERENCE_ORDER_BY                = "orderBy";
   
-  /** The Constant SHOW_DATE_CREATED. */
-  public final static String  BASE_PATH                          = "basePath";
+  /** The Constant ORDER_BY_TITLE. */
+  public static final String ORDER_BY_TITLE                     = "OrderByTitle";
+
+  /** The Constant ORDER_BY_DATE_CREATED. */
+  public static final String ORDER_BY_DATE_CREATED              = "OrderByDateCreated";
+
+  /** The Constant ORDER_BY_DATE_MODIFIED. */
+  public static final String ORDER_BY_DATE_MODIFIED             = "OrderByDateModified";
+
+  /** The Constant ORDER_BY_DATE_PUBLISHED. */
+  public static final String ORDER_BY_DATE_PUBLISHED            = "OrderByDatePublished";
+  
+  /** The Constant PREFERENCE_ORDER_TYPE. */
+  public static final String PREFERENCE_ORDER_TYPE              = "orderType";
+  
+  /** The Constant ORDER_TYPE_DESCENDENT. */
+  public static final String ORDER_TYPE_DESCENDENT              = "OrderDesc";
+  
+  /** The Constant ORDER_TYPE_ASCENDENT. */
+  public static final String ORDER_TYPE_ASCENDENT               = "OrderAsc";
+  
   
   /**
-   * Instantiates a new uI content list viewer portlet.
+   * Instantiates a new uICLV portlet.
    * 
    * @throws Exception the exception
    */
   public UICLVPortlet() throws Exception {
-    activateMode(mode);
+    addChild(UIPopupContainer.class, null, null);
+    addChild(UICLVFolderMode.class, null, null).setRendered(false);
+    addChild(UICLVManualMode.class, null, null).setRendered(false);
+    addChild(UICLVConfig.class, null, null).setRendered(false);
   }
 
   /* (non-Javadoc)
@@ -113,51 +129,23 @@ public class UICLVPortlet extends UIPortletApplication {
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
-    PortletMode newMode = pContext.getApplicationMode();
-    if (!mode.equals(newMode)) {
-      activateMode(newMode);
-      mode = newMode;
+    PortletMode mode = pContext.getApplicationMode();
+    if (mode == PortletMode.VIEW) {
+      String displayMode = pContext.getRequest().getPreferences().getValue(PREFERENCE_DISPLAY_MODE, null);
+      if (displayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
+        getChild(UICLVManualMode.class).setRendered(false);
+        UICLVFolderMode clvFolderMode = getChild(UICLVFolderMode.class);
+        clvFolderMode.init();
+        clvFolderMode.setRendered(true);
+      } else if (displayMode.equals(DISPLAY_MODE_MANUAL)) {
+        getChild(UICLVFolderMode.class).setRendered(false);
+        UICLVManualMode clvManualMode = getChild(UICLVManualMode.class);
+        clvManualMode.init();
+        clvManualMode.setRendered(true);
+      }
+    } else if (mode == PortletMode.EDIT) {
+      getChild(UICLVConfig.class).setRendered(true);
     }
     super.processRender(app, context);
-  }
-
-  /**
-   * Activate mode.
-   * 
-   * @param mode the mode
-   * 
-   * @throws Exception the exception
-   */
-  private void activateMode(PortletMode mode) throws Exception {
-    getChildren().clear();
-    addChild(UIPopupContainer.class, null, null);
-    PortletRequestContext context = WebuiRequestContext.getCurrentInstance();
-    PortletPreferences preferences = context.getRequest().getPreferences();
-    String viewerMode = preferences.getValue(VIEWER_MODE, null);        
-    if (PortletMode.VIEW.equals(mode)) {
-      if (viewerMode == null) viewerMode = UICLVConfig.VIEWER_AUTO_MODE;
-      if (viewerMode.equals(UICLVConfig.VIEWER_AUTO_MODE)) {        
-        UICLVFolderMode uiFolderViewer = addChild(UICLVFolderMode.class, null, UIPortletApplication.VIEW_MODE);
-        uiFolderViewer.init(); 
-      } else if (viewerMode.equals(UICLVConfig.VIEWER_MANUAL_MODE)) {        
-        UICLVManualMode uiCorrectContentsViewer = addChild(UICLVManualMode.class, null, UIPortletApplication.VIEW_MODE);
-        uiCorrectContentsViewer.init();
-      }
-    } else if (PortletMode.EDIT.equals(mode)) {
-    	addChild(UICLVConfig.class, null, null);
-    }
-  }
-
-  /**
-   * Can edit portlet.
-   * 
-   * @return true, if successful
-   * 
-   * @throws Exception the exception
-   */
-  public boolean canEditPortlet() throws Exception {
-    PortletRequestContext context = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();    
-    String userId = context.getRemoteUser();       
-    return Utils.canEditCurrentPortal(userId);
   }
 }

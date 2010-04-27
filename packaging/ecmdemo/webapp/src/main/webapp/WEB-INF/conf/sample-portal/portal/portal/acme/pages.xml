@@ -94,23 +94,13 @@
             <portlet-ref>ContentListViewerPortlet</portlet-ref>
             <preferences>
               <preference>
-                <name>repository</name>
-                <value>repository</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>header</name>
-                <value></value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showHeader</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/web contents/site artifacts/Events</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>orderType</name>
+                <value>ASC</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -119,28 +109,13 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
-                <name>paginatorTemplatePath</name>
-                <value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
+                <name>basePath</name>
+                <value>detail</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
                 <name>itemsPerPage</name>
                 <value>5</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showQuickEditButton</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showRefreshButton</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showThumbnailsView</name>
-                <value>true</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -154,33 +129,13 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
-                <name>showSummary</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>orderBy</name>
-                <value>exo:title</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>orderType</name>
-                <value>ASC</value>
+                <name>showHeader</name>
+                <value>false</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
                 <name>showLink</name>
                 <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showReadmore</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>basePath</name>
-                <value>detail</value>
                 <read-only>false</read-only>
               </preference>
             </preferences>
@@ -197,73 +152,8 @@
             <portlet-ref>ContentListViewerPortlet</portlet-ref>
             <preferences>
               <preference>
-                <name>repository</name>
-                <value>repository</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>header</name>
-                <value>COMPANY NEWS</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showHeader</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>formViewTemplatePath</name>
-                <value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>paginatorTemplatePath</name>
-                <value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>itemsPerPage</name>
-                <value>5</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showQuickEditButton</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showRefreshButton</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showThumbnailsView</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showTitle</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showDateCreated</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showSummary</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>orderBy</name>
-                <value>exo:title</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -272,18 +162,28 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
-                <name>showLink</name>
-                <value>true</value>
+                <name>header</name>
+                <value>COMPANY NEWS</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
-                <name>showReadmore</name>
-                <value>true</value>
+                <name>formViewTemplatePath</name>
+                <value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
                 <name>basePath</name>
                 <value>detail</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>itemsPerPage</name>
+                <value>5</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>showThumbnailsView</name>
+                <value>false</value>
                 <read-only>false</read-only>
               </preference>
             </preferences>
@@ -303,73 +203,8 @@
             <portlet-ref>ContentListViewerPortlet</portlet-ref>
             <preferences>
               <preference>
-                <name>repository</name>
-                <value>repository</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>header</name>
-                <value>DOCUMENTS</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showHeader</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/documents</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>formViewTemplatePath</name>
-                <value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/DocumentsTemplate.gtmpl</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>paginatorTemplatePath</name>
-                <value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>itemsPerPage</name>
-                <value>5</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showQuickEditButton</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showRefreshButton</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showThumbnailsView</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showTitle</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showDateCreated</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showSummary</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>orderBy</name>
-                <value>exo:title</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -378,18 +213,33 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
-                <name>showLink</name>
-                <value>true</value>
+                <name>header</name>
+                <value>DOCUMENTS</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
-                <name>showReadmore</name>
-                <value>false</value>
+                <name>formViewTemplatePath</name>
+                <value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/DocumentsTemplate.gtmpl</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
                 <name>basePath</name>
                 <value>detail</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>itemsPerPage</name>
+                <value>5</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>showThumbnailsView</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>showReadmore</name>
+                <value>false</value>
                 <read-only>false</read-only>
               </preference>
             </preferences>
@@ -406,73 +256,8 @@
             <portlet-ref>ContentListViewerPortlet</portlet-ref>
             <preferences>
               <preference>
-                <name>repository</name>
-                <value>repository</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>header</name>
-                <value>LATEST NEWS</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showHeader</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>formViewTemplatePath</name>
-                <value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>paginatorTemplatePath</name>
-                <value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>itemsPerPage</name>
-                <value>5</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showQuickEditButton</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showRefreshButton</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showThumbnailsView</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showTitle</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showDateCreated</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showSummary</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>orderBy</name>
-                <value>exo:title</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -481,18 +266,33 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
-                <name>showLink</name>
-                <value>true</value>
+                <name>header</name>
+                <value>LATEST NEWS</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
-                <name>showReadmore</name>
-                <value>false</value>
+                <name>formViewTemplatePath</name>
+                <value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
                 <name>basePath</name>
                 <value>detail</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>itemsPerPage</name>
+                <value>5</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>showDateCreated</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>showReadmore</name>
+                <value>false</value>
                 <read-only>false</read-only>
               </preference>
             </preferences>

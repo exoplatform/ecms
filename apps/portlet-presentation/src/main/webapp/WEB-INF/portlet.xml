@@ -144,16 +144,31 @@
 			<keywords>Contents</keywords>
 		</portlet-info>
 		<portlet-preferences>
-			<preference>
-				<name>repository</name>
-				<value>repository</value>
-				<read-only>false</read-only>
-			</preference>
+      <preference>
+        <name>mode</name>
+        <value>AutoViewerMode</value>
+        <read-only>false</read-only>
+      </preference>
 			<preference>
 				<name>folderPath</name>
 				<value></value>
 				<read-only>false</read-only>
 			</preference>
+      <preference>
+        <name>orderBy</name>
+        <value>exo:title</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>orderType</name>
+        <value>DESC</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>header</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>
 			<preference>
 				<name>formViewTemplatePath</name>
 				<value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/UIContentListPresentationDefault.gtmpl</value>
@@ -164,84 +179,54 @@
 				<value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
 				<read-only>false</read-only>
 			</preference>
+      <preference>
+        <name>basePath</name>
+        <value>detail</value>
+        <read-only>false</read-only>
+      </preference>
 			<preference>
 				<name>itemsPerPage</name>
 				<value>10</value>
 				<read-only>false</read-only>
 			</preference>
-			<preference>
-				<name>showQuickEditButton</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
+      <preference>
+        <name>showThumbnailsView</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showTitle</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showSummary</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showDateCreated</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showHeader</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showLink</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showReadmore</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
 			<preference>
 				<name>showRefreshButton</name>
 				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showThumbnailsView</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showTitle</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showDateCreated</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showSummary</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showHeader</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showReadmore</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showLink</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>source</name>
-				<value>folder</value>
-				<read-only>true</read-only>
-			</preference>
-			<preference>
-				<name>mode</name>
-				<value></value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>orderBy</name>
-				<value></value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>orderType</name>
-				<value></value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>contents</name>
-				<value></value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>basePath</name>
-				<value>detail</value>
 				<read-only>false</read-only>
 			</preference>
 		</portlet-preferences>

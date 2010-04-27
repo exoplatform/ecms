@@ -41,11 +41,10 @@ import org.exoplatform.webui.event.EventListener;
  */
 
 @ComponentConfig(
-                 template = "classpath:groovy/wcm/webui/selector/content/UIContentSearchResult.gtmpl",
-                 events = {
-                     @EventConfig(listeners = UIContentSearchResult.SelectActionListener.class),
-                     @EventConfig(listeners = UIContentSearchResult.ViewActionListener.class)
-                 }
+  events = {
+    @EventConfig(listeners = UIContentSearchResult.SelectActionListener.class),
+    @EventConfig(listeners = UIContentSearchResult.ViewActionListener.class)
+  }
 )
 
 public class UIContentSearchResult extends UIGrid {

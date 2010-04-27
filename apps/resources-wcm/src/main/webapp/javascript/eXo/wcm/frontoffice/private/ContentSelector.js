@@ -664,6 +664,9 @@ EcmContentSelector.prototype.insertMultiContent = function() {
 	var rws = document.getElementById("RightWorkspace");
 	var tblContent = document.getElementById("ListFilesContent");
 	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblContent, "tr");
+	if (rowsContent.length <= 1) {
+		alert("There are no content for now. You have to select at least one.");
+	}
 	var strContent = "";
 	for(var i = 0; i < rowsContent.length; i++) {
 		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "a", "Item");
@@ -685,20 +688,19 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
 	var url = objNode.getAttribute("url");
 	var nodeType	= objNode.getAttribute("nodeType");
-	var node = objNode.innerHTML;
 	var path = objNode.getAttribute("path");
 	var selectedNodeList = eXo.core.DOMUtil.findDescendantsByClass(tblListFilesContent, "a", "Item");
 	for(var i = 0; i < selectedNodeList.length; i++) {
 		var selectedNodePath = selectedNodeList[i].getAttribute("path");
 		if(path == selectedNodePath) {
-			alert("Sorry, this content is already in the list content.");
+			alert("This content is already in the list content.");
 			return;
 		}
 	} 
 	var	clazzItem = objNode.className;
-	var newRow = tblListFilesContent.insertRow(1);
+	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+node+'</a>';
+	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+path+'</a>';
 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';	
 };
 
@@ -715,7 +717,7 @@ EcmContentSelector.prototype.loadListContent = function(strArray) {
 		var clazz = 'OddItem';
 		for(var i = 0; i < arrContent.length-1; i++) {
 			var path = arrContent[i];
-			var newRow = tblListFilesContent.insertRow(1);
+			var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 			if(clazz == 'EventItem') {
 				clazz = 'OddItem';
 			} else if(clazz == 'OddItem') {

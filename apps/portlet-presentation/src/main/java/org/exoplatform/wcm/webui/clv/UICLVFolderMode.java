@@ -19,7 +19,6 @@ package org.exoplatform.wcm.webui.clv;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
@@ -69,30 +68,22 @@ public class UICLVFolderMode extends UICLVContainer {
     try {
       nodes = getRenderedContentNodes();
     } catch (ItemNotFoundException e) {
-      messageKey = "UIMessageBoard.msg.folder-not-found";
+      messageKey = "UICLVContainer.msg.item-not-found";
       return;
     } catch (AccessDeniedException e) {
-      messageKey = "UIMessageBoard.msg.no-permission";
-      return;
-    } catch (Exception e) {
-      messageKey = "UIMessageBoard.msg.error-nodetype";
+      messageKey = "UICLVContainer.msg.no-permission";
       return;
     }
     if (nodes.size() == 0) {
-      messageKey = "UIMessageBoard.msg.folder-empty";
+      messageKey = "UICLVContainer.msg.non-contents";
     }    
-    int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.ITEMS_PER_PAGE, null));
+    int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
     PaginatedNodeIterator paginatedNodeIterator = new PaginatedNodeIterator(nodes, itemsPerPage);
     getChildren().clear();
     clvPresentation = addChild(UICLVPresentation.class, null, null);    
     String templatePath = getFormViewTemplatePath();
     ResourceResolver resourceResolver = getTemplateResourceResolver();    
     clvPresentation.init(templatePath, resourceResolver, paginatedNodeIterator);    
-    clvPresentation.setContentColumn(portletPreferences.getValue(UICLVPortlet.HEADER, null));
-    clvPresentation.setShowLink(Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.SHOW_LINK, null)));
-    clvPresentation.setShowHeader(Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.SHOW_HEADER, null)));
-    clvPresentation.setShowReadmore(Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.SHOW_READMORE, null)));
-    clvPresentation.setHeader(portletPreferences.getValue(UICLVPortlet.HEADER, null));
   }
   
   /**
@@ -108,18 +99,18 @@ public class UICLVFolderMode extends UICLVContainer {
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
-    String orderBy = preferences.getValue(UICLVPortlet.ORDER_BY, null);
-    String orderType = preferences.getValue(UICLVPortlet.ORDER_TYPE, null);
+    String orderBy = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, null);
+    String orderType = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
     if (orderType == null) orderType = "DESC";
     if (orderBy == null) orderBy = "exo:title";
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
     
-    if(preferences.getValue(UICLVPortlet.FOLDER_PATH, null) == null){
+    if(preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
         return new ArrayList<Node>();
     }      
-    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(preferences.getValue(UICLVPortlet.FOLDER_PATH, null));
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
     return wcmComposer.getContents(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getUserSessionProvider());
   }
 }

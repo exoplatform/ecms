@@ -19,8 +19,8 @@ package org.exoplatform.wcm.webui.clv;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.clv.config.UICLVConfig;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIContainer;
@@ -33,7 +33,7 @@ import org.exoplatform.webui.event.EventListener;
  * anh.do@exoplatform.com, anhdn86@gmail.com
  * Feb 23, 2009
  */
-public abstract class UICLVContainer extends UIContainer implements RefreshDelegateActionListener {
+public abstract class UICLVContainer extends UIContainer {
 
   /** The message key. */
   protected String  messageKey;
@@ -82,7 +82,7 @@ public abstract class UICLVContainer extends UIContainer implements RefreshDeleg
    * @return the form view template path
    */
   protected String getFormViewTemplatePath() {
-    return Utils.getPortletPreference(UICLVPortlet.FORM_VIEW_TEMPLATE_PATH);
+    return Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_TEMPLATE);
   }
 
   /**
@@ -93,7 +93,7 @@ public abstract class UICLVContainer extends UIContainer implements RefreshDeleg
    * @throws Exception the exception
    */
   public ResourceResolver getTemplateResourceResolver() throws Exception {
-    String repository = Utils.getPortletPreference(UICLVPortlet.REPOSITORY);
+    String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
     return new JCRResourceResolver(repository, workspace, "exo:templateFile");
@@ -116,18 +116,15 @@ public abstract class UICLVContainer extends UIContainer implements RefreshDeleg
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UICLVFolderMode> event) throws Exception {
-      UICLVContainer uiListViewerBase = event.getSource();
-      UICLVConfig viewerManagementForm = uiListViewerBase.createUIComponent(UICLVConfig.class, null, null);
-      Utils.createPopupWindow(uiListViewerBase, viewerManagementForm, "UIViewerManagementPopupWindow", 800);
+      UICLVContainer clvContainer = event.getSource();
+      UICLVConfig viewerManagementForm = clvContainer.createUIComponent(UICLVConfig.class, null, null);
+      Utils.createPopupWindow(clvContainer, viewerManagementForm, "UIViewerManagementPopupWindow", 800);
     }    
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.wcm.webui.clv.RefreshDelegateActionListener#onRefresh(org.exoplatform.webui.event.Event)
-   */
   public void onRefresh(Event<UICLVPresentation> event) throws Exception {
-    UICLVPresentation contentListPresentation = event.getSource();
-    UICLVContainer uiListViewerBase = contentListPresentation.getParent();
+    UICLVPresentation clvPresentation = event.getSource();
+    UICLVContainer uiListViewerBase = clvPresentation.getParent();
     uiListViewerBase.getChildren().clear();
     uiListViewerBase.init();
   }

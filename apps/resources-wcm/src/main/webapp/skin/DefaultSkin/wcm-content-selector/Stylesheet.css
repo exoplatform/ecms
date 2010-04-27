@@ -518,6 +518,10 @@
 	width:auto;
 }
 
+.UIWCMSearchContainer .RightWorkspace .Item td {
+  vertical-align: middle;
+}
+
 .UIWCMSearchContainer .RightWorkspace .EventItem a:hover{
 	font-weight: bold;
 }

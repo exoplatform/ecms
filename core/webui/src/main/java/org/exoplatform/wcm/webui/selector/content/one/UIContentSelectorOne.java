@@ -4,6 +4,8 @@ import org.exoplatform.wcm.webui.selector.content.UIContentSearchForm;
 import org.exoplatform.wcm.webui.selector.content.UIContentSearchResult;
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
+import org.exoplatform.webui.config.annotation.EventConfig;
 
 /**
  * Author : TAN DUNG DANG
@@ -11,9 +13,19 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
  * Jan 20, 2009
  */
 
-@ComponentConfig(
-  template = "system:/groovy/webui/core/UITabPane_New.gtmpl"
-)
+@ComponentConfigs ({
+  @ComponentConfig(
+    template = "system:/groovy/webui/core/UITabPane_New.gtmpl"
+  ),
+  @ComponentConfig(
+    type = UIContentSearchResult.class,
+    template = "classpath:groovy/wcm/webui/selector/content/one/UIContentSearchResult.gtmpl",
+    events = {
+      @EventConfig(listeners = UIContentSearchResult.SelectActionListener.class),
+      @EventConfig(listeners = UIContentSearchResult.ViewActionListener.class)
+    }
+  )
+})
 
 public class UIContentSelectorOne extends UIContentSelector {
 

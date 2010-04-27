@@ -58,6 +58,7 @@ public class Utils {
 	/** The Quick edit attribute for HTTPSession */
 	public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
 	
+	@Deprecated
   /**
    * Checks if is edits the portlet in create page wizard.
    * @return true, if is edits the portlet in create page wizard
@@ -71,6 +72,7 @@ public class Utils {
     return false;
   }
   
+	@Deprecated
   /**
    * Checks if is quick editmode.
    * 
@@ -85,6 +87,10 @@ public class Utils {
     UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
     if (popupWindow == null) return false;
     return true;
+  }
+  
+  public static boolean isPortalEditMode() {
+    return Util.getUIPortalApplication().getModeState() != UIPortalApplication.NORMAL_MODE;
   }
   
   public static String getRealPortletId(PortletRequestContext portletRequestContext) {
