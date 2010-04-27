@@ -24,6 +24,9 @@ import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -81,7 +84,7 @@ public class LifecycleConnector implements ResourceContainer {
   
   /**
    * 
-   * example : http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bydate/?fromstate=staged&date=2010-06-04T00:00:00.000Z&lang=en&workspace=collaboration
+   * example : http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bydate/?fromstate=staged&date=2&lang=en&workspace=collaboration
    * 
    * @param fromstate
    * @param user
@@ -156,13 +159,9 @@ public class LifecycleConnector implements ResourceContainer {
 		  
 		  if (date!=null) {
 			  Calendar cal = new GregorianCalendar();
-//			  cal.add(Calendar.DAY_OF_YEAR, 1);
-			  Date now = cal.getTime();
-			  // 2006-08-19T10:11:38.281+02:00
-			  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-			  query.append(" and publication:startPublishedDate>='"+sdf.format(now)+"'");
+			  cal.add(Calendar.DAY_OF_YEAR, Integer.parseInt(date));
+			  query.append(" and publication:startPublishedDate<=TIMESTAMP '"+getISO8601Date(cal)+"'");
 			  query.append(" order by publication:startPublishedDate asc");
-//			  query.append(" and publication:startPublishedDate>='"+date+"'";
 		  }
 		  filters.put(WCMComposer.FILTER_QUERY_FULL, query.toString());
 		  if (log.isInfoEnabled()) log.info("query="+query.toString());
@@ -201,6 +200,26 @@ public class LifecycleConnector implements ResourceContainer {
 		  Response.serverError().build();
 	  }
 	  return Response.ok().build();
+  }
+  
+  private String getISO8601Date(Calendar cal) {
+	  // 2006-08-19T10:11:38.281+02:00
+//	  Date date = cal.getTime();
+//	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.sssZ");
+//	  int tz = cal.getTimeZone().getDSTSavings()/3600000;
+//	  String sdate = sdf.format(date);
+//	  sdate+=(tz<0)?"-":"+";
+//	  tz = Math.abs(tz);
+//	  sdate+=(tz<10)?"0"+tz:""+tz;
+//	  sdate+=":00";
+//	  
+//	  return sdate;
+	  
+	  DateTime dt = new DateTime(cal.getTimeInMillis()); 
+	  DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+	  String str = fmt.print(dt);
+	  return str;
+
   }
   
 }
