@@ -189,8 +189,8 @@
   <UIRenameForm>
     <title>Renommer</title>
     <label>
-      <oldName>Ancien nom</oldName>
-      <newName>Nouveau nom</newName>
+      <nameField>Name</nameField>
+      <titleField>Title</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>

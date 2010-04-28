@@ -36,6 +36,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.validator.IllegalDMSCharValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -76,9 +77,9 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
    */
   private static final Log LOG  = ExoLogger.getLogger("explorer.popup.actions.UIRenameForm");
   
-  final static public String  FIELD_OLDNAME     = "oldName";
-
-  final static public String  FIELD_NEWNAME     = "newName";
+  final static public String FIELD_NAME          = "nameField";
+  
+  final static public String FIELD_TITLE        = "titleField";
 
   final static private String RELATION_PROP     = "exo:relation";
   
@@ -87,9 +88,10 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
   private Node                renameNode_;
 
   public UIRenameForm() throws Exception {
-    addUIFormInput(new UIFormStringInput(FIELD_OLDNAME, FIELD_OLDNAME, null));
-    addUIFormInput(new UIFormStringInput(FIELD_NEWNAME, FIELD_NEWNAME, null)
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME)
         .addValidator(MandatoryValidator.class).addValidator(IllegalDMSCharValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_TITLE, FIELD_TITLE)
+        .addValidator(IllegalDMSCharValidator.class));
   }
 
   public void update(Node renameNode) throws Exception {
@@ -97,9 +99,14 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
     String renamePath = renameNode.getPath() ;
     String oldName = Text.unescapeIllegalJcrChars(
         renamePath.substring(renamePath.lastIndexOf("/") + 1, renamePath.length())) ;   
-    getUIStringInput(FIELD_OLDNAME).setValue(oldName) ;
-    getUIStringInput(FIELD_OLDNAME).setEditable(false) ;
-    getUIStringInput(FIELD_NEWNAME).setValue("") ;    
+    getUIStringInput(FIELD_NAME).setValue(oldName);
+    UIFormStringInput titleInput = getUIStringInput(FIELD_TITLE);
+    if (renameNode.hasProperty(Utils.EXO_TITLE)) 
+      titleInput.setValue(renameNode.getProperty(Utils.EXO_TITLE).getString());
+    else     
+      titleInput.setValue("");
+    if (renameNode.hasProperty(Utils.EXO_TITLE))
+      titleInput.addValidator(MandatoryValidator.class);
   }
   
   private void changeLockForChild(String srcPath, Node parentNewNode) throws Exception {
@@ -126,7 +133,7 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
       UIApplication uiApp = uiRenameForm.getAncestorOfType(UIApplication.class);
       Session nodeSession = null;
       String newName = Text.escapeIllegalJcrChars(
-          uiRenameForm.getUIStringInput(FIELD_NEWNAME).getValue().trim());
+          uiRenameForm.getUIStringInput(FIELD_NAME).getValue().trim());
 //      String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'", "#", ";", "}", "{", "/", "|", "\""}; 
 //      if (!Utils.isNameValid(newName, arrFilterChar)) {
 //        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-not-allowed", null,
@@ -134,12 +141,15 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
 //        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
 //        return;
 //      }
-      if (uiRenameForm.renameNode_.getName().equals(newName)) {
+      Node currentNode = uiRenameForm.renameNode_;      
+      if (uiRenameForm.renameNode_.getName().equals(newName) && sameTitle(uiRenameForm, currentNode)) {
         uiJCRExplorer.cancelAction();
         return;
       }
+      nodeSession = uiRenameForm.renameNode_.getSession();
       String srcPath = uiRenameForm.renameNode_.getPath();
       String destPath;
+      //test lock
       if (uiJCRExplorer.nodeIsLocked(uiRenameForm.renameNode_)) {
         
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null,
@@ -147,51 +157,66 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         uiJCRExplorer.updateAjax(event);
         return;
-      }    
+      }
+      //change name and title main process
       try {
-        try {
-          references = uiRenameForm.renameNode_.getReferences();
-          isReference = true;
-        } catch (RepositoryException e) {
-          isReference = false;
-        }        
-        if (isReference && references != null) {
-          if (references.getSize() > 0) {
-            while (references.hasNext()) {
-              Property pro = references.nextProperty();
-              Node refNode = pro.getParent();
-              if (refNode.hasProperty(RELATION_PROP)) {
-                refList.add(refNode);
-                relationsService.removeRelation(refNode, uiRenameForm.renameNode_.getPath(),
-                    uiJCRExplorer.getRepositoryName());
-                refNode.save();
+        //change name
+        if (!uiRenameForm.renameNode_.getName().equals(newName)) {
+          // get list of nodes that have reference to this node        
+          try {
+            references = uiRenameForm.renameNode_.getReferences();
+            isReference = true;
+          } catch (RepositoryException e) {
+            isReference = false;
+          }        
+          if (isReference && references != null) {
+            if (references.getSize() > 0) {
+              while (references.hasNext()) {
+                Property pro = references.nextProperty();
+                Node refNode = pro.getParent();
+                if (refNode.hasProperty(RELATION_PROP)) {
+                  refList.add(refNode);
+                  relationsService.removeRelation(refNode, uiRenameForm.renameNode_.getPath(),
+                      uiJCRExplorer.getRepositoryName());
+                  refNode.save();
+                }
               }
             }
           }
+          Node parent = uiRenameForm.renameNode_.getParent();
+          if(parent.getPath().equals("/")) destPath = "/" + newName; 
+          else destPath = parent.getPath() + "/" + newName;
+          uiJCRExplorer.addLockToken(parent);        
+          nodeSession.getWorkspace().move(srcPath,destPath);
+          String currentPath = uiJCRExplorer.getCurrentPath();
+          if(srcPath.equals(uiJCRExplorer.getCurrentPath())) {
+            uiJCRExplorer.setCurrentPath(destPath) ;
+          } else if(currentPath.startsWith(srcPath)) {
+            uiJCRExplorer.setCurrentPath(destPath + currentPath.substring(currentPath.lastIndexOf("/")));
+          }
+          nodeSession.save();
+          for(int i = 0; i < refList.size(); i ++) {
+            Node addRef = refList.get(i);
+            relationsService.addRelation(addRef, destPath, nodeSession.getWorkspace().getName(),uiJCRExplorer.getRepositoryName());
+            addRef.save();
+          }
+          Node destNode = (Node) nodeSession.getItem(destPath);
+          if (destNode.isLocked())
+            LockUtil.changeLockToken(uiRenameForm.renameNode_, destNode);
+          uiRenameForm.changeLockForChild(srcPath, destNode);
+          destNode.setProperty(EXO_LASTMODIFIER, nodeSession.getUserID());
+          currentNode = destNode;
         }
-        Node parent = uiRenameForm.renameNode_.getParent();
-        if(parent.getPath().equals("/")) destPath = "/" + newName; 
-        else destPath = parent.getPath() + "/" + newName;
-        nodeSession = uiRenameForm.renameNode_.getSession();
-        uiJCRExplorer.addLockToken(parent);        
-        nodeSession.getWorkspace().move(srcPath,destPath);
-        String currentPath = uiJCRExplorer.getCurrentPath();
-        if(srcPath.equals(uiJCRExplorer.getCurrentPath())) {
-          uiJCRExplorer.setCurrentPath(destPath) ;
-        } else if(currentPath.startsWith(srcPath)) {
-          uiJCRExplorer.setCurrentPath(destPath + currentPath.substring(currentPath.lastIndexOf("/")));
+        //change title
+        if (!sameTitle(uiRenameForm, currentNode)) {
+          String newTitle = uiRenameForm.getUIStringInput(FIELD_TITLE).getValue();
+          if (newTitle.length() > 0) {
+            if (!currentNode.hasProperty(Utils.EXO_TITLE))
+              currentNode.addMixin(Utils.EXO_RSS_ENABLE);
+            currentNode.setProperty(Utils.EXO_TITLE, newTitle);
+          }
         }
-        nodeSession.save();
-        for(int i = 0; i < refList.size(); i ++) {
-          Node addRef = refList.get(i);
-          relationsService.addRelation(addRef, destPath, nodeSession.getWorkspace().getName(),uiJCRExplorer.getRepositoryName());
-          addRef.save();
-        }
-        Node destNode = (Node) nodeSession.getItem(destPath);
-        if (destNode.isLocked())
-          LockUtil.changeLockToken(uiRenameForm.renameNode_, destNode);
-        uiRenameForm.changeLockForChild(srcPath, destNode);
-        destNode.setProperty(EXO_LASTMODIFIER, nodeSession.getUserID());
+        
         if (!uiJCRExplorer.getPreference().isJcrEnable()) nodeSession.save();
         uiJCRExplorer.updateAjax(event);
       } catch (AccessDeniedException ace) {
@@ -230,11 +255,18 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
         if(nodeSession != null) nodeSession.logout();
       }
     }
+    
+    private boolean sameTitle(UIRenameForm uiRenameForm, Node node) throws Exception {
+      String newTitle = uiRenameForm.getUIStringInput(FIELD_TITLE).getValue();
+      if (!node.hasProperty(Utils.EXO_TITLE))
+        return (newTitle == null || newTitle.length() == 0);
+      return node.getProperty(Utils.EXO_TITLE).getString().equals(newTitle);
+    }
   }
 
   static  public class CancelActionListener extends EventListener<UIRenameForm> {
     public void execute(Event<UIRenameForm> event) throws Exception {
-      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.cancelAction() ;
     }
   }

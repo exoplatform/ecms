@@ -190,8 +190,8 @@
   <UIRenameForm>
     <title>Wiederbenennen</title>
     <label>
-      <oldName>Alter Name</oldName>
-      <newName>Neuer Name</newName>
+      <nameField>Name</nameField>
+      <titleField>Title</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>

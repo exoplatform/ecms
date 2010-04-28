@@ -169,6 +169,7 @@ public class Utils {
 	final static public String EXO_TRASH_FOLDER = "exo:trashFolder";
 	final static public String EXO_TOTAL = "exo:total";
 	final static public String EXO_WEBCONTENT = "exo:webContent";
+	final static public String EXO_RSS_ENABLE = "exo:rss-enable";
 
 	final static public String EXO_MUSICFOLDER = "exo:musicFolder";
 	final static public String EXO_VIDEOFOLDER = "exo:videoFolder";

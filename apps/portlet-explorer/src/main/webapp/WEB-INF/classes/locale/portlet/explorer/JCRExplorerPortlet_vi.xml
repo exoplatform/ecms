@@ -213,8 +213,8 @@
   <UIRenameForm>
     <title>đổi tên</title>
     <label>
-      <oldName>Tên cũ</oldName>
-      <newName>Tên mới</newName>
+      <nameField>Tên</nameField>
+      <titleField>Tiêu đề</titleField>
     </label>
     <action>
       <Cancel>Hủy bỏ</Cancel>
