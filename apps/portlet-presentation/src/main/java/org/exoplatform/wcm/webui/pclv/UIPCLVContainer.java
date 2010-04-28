@@ -172,9 +172,14 @@ public class UIPCLVContainer extends UIContainer {
 		
 		String autoDetect = portletPreferences.getValue(UIPCLVPortlet.SHOW_AUTO_DETECT, null);
 		String currentHeader = getHeader(categoryPath);
-		if (treeNode != null && "true".equals(autoDetect) && currentHeader != null)
+		if (treeNode != null && "true".equals(autoDetect) && currentHeader != null) {
 		  parameterizedContentListViewer.setHeader(currentHeader);
-		else 
+		  if (categoryNode!=null) {
+			  if (categoryNode.hasProperty("exo:title")) {
+				  parameterizedContentListViewer.setHeader(categoryNode.getProperty("exo:title").getString());
+			  }
+		  }
+		} else 
 		  parameterizedContentListViewer.setHeader(portletPreferences.getValue(UIPCLVPortlet.HEADER, null));
 		
 		parameterizedContentListViewer.setShowHeader(Boolean.parseBoolean(portletPreferences.getValue(UIPCLVPortlet.SHOW_HEADER, null)));
