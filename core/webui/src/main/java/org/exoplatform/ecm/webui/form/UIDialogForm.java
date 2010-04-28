@@ -220,7 +220,8 @@ public class UIDialogForm extends UIForm {
 
   public String geti18nNodePath() { return i18nNodePath; }
   
-  public void addActionField(String name,String label,String[] arguments) throws Exception {
+  @SuppressWarnings("unchecked")
+public void addActionField(String name,String label,String[] arguments) throws Exception {
     UIFormActionField formActionField = new UIFormActionField(name,label,arguments);    
     if(formActionField.useSelector()) {
       componentSelectors.put(name, formActionField.getSelectorInfo()); 
@@ -312,8 +313,9 @@ public class UIDialogForm extends UIForm {
     addActionField(name,null,arguments);
   }
 
-  public void addCalendarField(String name, String label, String[] arguments) throws Exception {
-    UIFormCalendarField calendarField = new UIFormCalendarField(name,label,arguments);    
+  @SuppressWarnings("unchecked")
+public void addCalendarField(String name, String label, String[] arguments) throws Exception {
+    UIFormCalendarField calendarField = new UIFormCalendarField(name,label,arguments);  
     String jcrPath = calendarField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
@@ -323,7 +325,18 @@ public class UIDialogForm extends UIForm {
       return;
     }
     UIFormDateTimeInput uiDateTime = findComponentById(name);
-    if (uiDateTime == null) uiDateTime = calendarField.createUIFormInput();
+    if (uiDateTime == null) {
+    	uiDateTime = calendarField.createUIFormInput();
+    	if (calendarField.validateType != null) {
+            String validateType = calendarField.validateType;
+            String[] validatorList = null;
+            if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
+            else validatorList = new String[] {validateType};
+            for (String validator : validatorList) {
+            	uiDateTime.addValidator(DialogFormUtil.getValidator(validator.trim()));
+            }              
+          }
+    }
     uiDateTime.setDisplayTime(calendarField.isDisplayTime());
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
@@ -506,7 +519,8 @@ public class UIDialogForm extends UIForm {
     addRadioBoxField(name, null, arguments);
   }
   
-  public void addSelectBoxField(String name, String label, String[] arguments) throws Exception {
+  @SuppressWarnings("unchecked")
+public void addSelectBoxField(String name, String label, String[] arguments) throws Exception {
     UIFormSelectBoxField formSelectBoxField = new UIFormSelectBoxField(name,label,arguments);
     String jcrPath = formSelectBoxField.getJcrPath();
     String editable = formSelectBoxField.getEditable();
@@ -754,7 +768,8 @@ public class UIDialogForm extends UIForm {
     return ((Node)session.getItem(nodeHierarchyCreator.getJcrPath(TAXONOMIES_ALIAS))).getPath();
   }
 
-  public void addTextField(String name, String label, String[] arguments) throws Exception {
+  @SuppressWarnings("unchecked")
+public void addTextField(String name, String label, String[] arguments) throws Exception {
     UIFormTextField formTextField = new UIFormTextField(name,label,arguments);
     String jcrPath = formTextField.getJcrPath();
     String mixintype = formTextField.getMixinTypes();
@@ -1276,12 +1291,14 @@ public class UIDialogForm extends UIForm {
   } 
 
   
-  private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
+  @SuppressWarnings("unchecked")
+private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
     addMultiValuesInput(type, name, label);
     renderField(name);
   }
 
-  private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
+  @SuppressWarnings({ "unchecked", "unchecked" })
+private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
     UIFormMultiValueInputSet uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
     uiMulti.setId(name);
     uiMulti.setName(name);
