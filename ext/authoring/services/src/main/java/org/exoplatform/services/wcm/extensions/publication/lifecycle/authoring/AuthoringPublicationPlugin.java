@@ -15,6 +15,7 @@ import javax.jcr.version.Version;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.RootContainer;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PageNavigation;
 import org.exoplatform.portal.webui.util.Util;
@@ -68,7 +69,12 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                                                                                       Exception {
     String versionName = context.get(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME);
     String logItemName = versionName;
-    String userId = Util.getPortalRequestContext().getRemoteUser();//node.getSession().getUserID();
+    String userId = "";
+    try {
+    	userId = Util.getPortalRequestContext().getRemoteUser();
+    } catch (Exception e) {
+		userId = node.getSession().getUserID();
+	}
     Node selectedRevision = null;
     if (node.getName().equals(versionName) || versionName == null) {
       selectedRevision = node;
@@ -262,6 +268,11 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       if (editableRevision != null) {
 
         PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
+        if (publicationManagerImpl==null) {
+        	String containerName = context.get("containerName");
+            container = RootContainer.getInstance().getPortalContainer(containerName);
+            publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
+        }
         String lifecycleName = node.getProperty("publication:lifecycle").getString();
         Lifecycle lifecycle = publicationManagerImpl.getLifecycle(lifecycleName);
         List<State> states = lifecycle.getStates();

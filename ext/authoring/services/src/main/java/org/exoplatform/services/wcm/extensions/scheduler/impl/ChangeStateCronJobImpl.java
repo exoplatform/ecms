@@ -57,7 +57,7 @@ public class ChangeStateCronJobImpl implements Job {
     Session session = null;
     try {
 
-      log.debug("Start Execute ChangeStateCronJob");
+      if (log.isInfoEnabled()) log.info("Start Execute ChangeStateCronJob");
       if (fromState == null) {
 
         JobDataMap jdatamap = context.getJobDetail().getJobDataMap();
@@ -70,91 +70,93 @@ public class ChangeStateCronJobImpl implements Job {
         workspace = pathTab[1];
         contentPath = pathTab[2];
       }
-      log.debug("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
+      if (log.isInfoEnabled()) log.info("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
           + toState);
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-
-      ExoContainer container = RootContainer.getInstance().getPortalContainer(context.getJobDetail().getGroup().split(":")[0]);
+      String containerName = context.getJobDetail().getGroup().split(":")[0];
+      ExoContainer container = RootContainer.getInstance().getPortalContainer(containerName);
       RepositoryService repositoryService_ = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
       PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
       ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
       if (manageableRepository == null) {
-        if (log.isDebugEnabled())
-          log.debug("Repository '" + repository + "' not found., ignoring");
-        return;
+    	  if (log.isInfoEnabled()) log.info("Repository '" + repository + "' not found., ignoring");
+    	  return;
       }
       session = sessionProvider.getSession(workspace, manageableRepository);
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       String property = null;
       if ("staged".equals(fromState) && "published".equals(toState)) {
-        property = START_TIME_PROPERTY;
+    	  property = START_TIME_PROPERTY;
       } else if ("published".equals(fromState) && "unpublished".equals(toState)) {
-        property = END_TIME_PROPERTY;
-
+    	  property = END_TIME_PROPERTY;
+    	  
       }
       if (property != null) {
-
-        // appends trailing / if missing
-        if (contentPath != null) {
-          if (!contentPath.endsWith("/")) {
-            contentPath += "/";
-          }
-        }
-
-        Query query = queryManager.createQuery("select * from nt:base where publication:currentState='"
-                                                   + fromState
-                                                   + "' and jcr:path like '"
-                                                   + contentPath + "%'",
-                                               Query.SQL);
-        QueryResult queryResult = query.execute();
-        long numberOfItemsToChange = queryResult.getNodes().getSize();
-
-        if (numberOfItemsToChange > 0) {
-
-          log.debug(numberOfItemsToChange + " '" + fromState + "' candidates for state '" + toState
-              + "' found in " + predefinedPath);
-          PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-                                                                  .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
-          HashMap<String, String> context_ = new HashMap<String, String>();
-          for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
-            Node node_ = iter.nextNode();
-            if (node_.hasProperty(property)) {
-
-              SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy - HH:mm");
-              Date now = Calendar.getInstance().getTime();
-              Date nodeDate = node_.getProperty(property).getDate().getTime();
-              if (now.compareTo(nodeDate) >= 0) {
-                log.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
-                    + format.format(nodeDate) + ")");
-
-                if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
-                  if (node_.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-                    String liveRevisionProperty = node_.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
-                                                       .getString();
-                    if (!"".equals(liveRevisionProperty)) {
-                      Node liveRevision = session.getNodeByUUID(liveRevisionProperty);
-                      if (liveRevision != null) {
-                        context_.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME,
-                                     liveRevision.getName());
-                      }
-                    }
-                  }
-
-                }
-                publicationPlugin.changeState(node_, toState, context_);
-              }
-            } else if (START_TIME_PROPERTY.equals(property)) {
-              log.info("'" + toState + "' " + node_.getPath());
-              publicationPlugin.changeState(node_, toState, context_);
-            }
-          }
-        } else {
-          log.debug("no '" + fromState + "' content found in " + predefinedPath);
-        }
+    	  
+    	  // appends trailing / if missing
+    	  if (contentPath != null) {
+    		  if (!contentPath.endsWith("/")) {
+    			  contentPath += "/";
+    		  }
+    	  }
+    	  
+    	  Query query = queryManager.createQuery("select * from nt:base where " +
+    	  		"publication:currentState='" + fromState + "'" + 
+    	  		" and jcr:path like '" + contentPath + "%'", 
+    			  Query.SQL); 
+    	  QueryResult queryResult = query.execute();
+    	  long numberOfItemsToChange = queryResult.getNodes().getSize();
+    	  
+    	  if (numberOfItemsToChange > 0) {
+    		  
+    		  if (log.isInfoEnabled()) log.info(numberOfItemsToChange + " '" + fromState + "' candidates for state '" + toState
+    				  + "' found in " + predefinedPath);
+    		  PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
+    		  .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
+    		  HashMap<String, String> context_ = new HashMap<String, String>();
+			  context_.put("containerName", containerName);
+    		  for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
+    			  Node node_ = iter.nextNode();
+    			  String path = node_.getPath();
+    			  if (!path.startsWith("/jcr:system")) {
+    				  if (node_.hasProperty(property)) {
+    					  
+    					  SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy - HH:mm");
+    					  Date now = Calendar.getInstance().getTime();
+    					  Date nodeDate = node_.getProperty(property).getDate().getTime();
+    					  if (now.compareTo(nodeDate) >= 0) {
+    						  if (log.isInfoEnabled()) log.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
+    								  + format.format(nodeDate) + ")");
+    						  
+    						  if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
+    							  if (node_.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
+    								  String liveRevisionProperty = node_.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+    								  .getString();
+    								  if (!"".equals(liveRevisionProperty)) {
+    									  Node liveRevision = session.getNodeByUUID(liveRevisionProperty);
+    									  if (liveRevision != null) {
+    										  context_.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME,
+    												  liveRevision.getName());
+    									  }
+    								  }
+    							  }
+    							  
+    						  }
+    						  publicationPlugin.changeState(node_, toState, context_);
+    					  }
+    				  } else if (START_TIME_PROPERTY.equals(property)) {
+    					  if (log.isInfoEnabled()) log.info("'" + toState + "' " + node_.getPath());
+    					  publicationPlugin.changeState(node_, toState, context_);
+    				  }
+    			  }
+    		  }
+    	  } else {
+    		  if (log.isInfoEnabled()) log.info("no '" + fromState + "' content found in " + predefinedPath);
+    	  }
       }
-      log.debug("End Execute ChangeStateCronJob");
+      if (log.isInfoEnabled()) log.info("End Execute ChangeStateCronJob");
     } catch (RepositoryException ex) {
-      log.debug("Repository '" + repository + "' not found., ignoring");
+      if (log.isInfoEnabled()) log.info("Repository '" + repository + "' not found., ignoring");
     } catch (Exception ex) {
       log.error("error when changing the state of the content : " + ex.getMessage(), ex);
     } finally {
