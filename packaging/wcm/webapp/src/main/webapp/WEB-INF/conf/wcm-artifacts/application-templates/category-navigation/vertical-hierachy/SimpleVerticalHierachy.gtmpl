@@ -14,11 +14,12 @@
   	def subcategories = uicomponent.getSubcategories(categoryPath);
   	for (subcategory in subcategories) {
       def subcategoryName = subcategory.getName();
+      def subcategoryTitle = uicomponent.getTitle(subcategory);
       def margin = 16 * (level - 1) + "px";
       def selectedClass = "";
       if (categoryUri.equals("/" + categoryPath + "/" + subcategoryName)) selectedClass = "SubCategorySelected";
       def categoryLink = uicomponent.renderCategoryLink(subcategory);
-      %><a style="margin-left: $margin" class="SubCategory $selectedClass" href="$categoryLink">$subcategoryName</a><%      
+      %><a style="margin-left: $margin" class="SubCategory $selectedClass" href="$categoryLink" title="$subcategoryTitle">$subcategoryTitle</a><%      
       if (subcategory.hasNodes() && (categoryUri+"/").startsWith("/" + categoryPath + "/" + subcategoryName + "/"))       
         renderChild(categoryUri, categories, level + 1);
     }
@@ -42,8 +43,9 @@
 		    def subcategories = uicomponent.getSubcategories(rootCategory);
 			  for (subcategory in subcategories) {
 			    def subcategoryName = subcategory.getName();
+			    def subcategoryTitle = uicomponent.getTitle(subcategory);
 			    def categoryLink = uicomponent.renderCategoryLink(subcategory);
-			    %><a class="CategoryLabel" href="$categoryLink">$subcategoryName</a><%
+			    %><a class="CategoryLabel" href="$categoryLink">$subcategoryTitle</a><%
 			    if ((categoryUri+"/").startsWith("/" + subcategoryName + "/")) renderChild(categoryUri, categories, 1);
 			  }
 			%>

@@ -270,4 +270,19 @@ public class UICategoryNavigationTreeBase extends UITree {
     
     return portalURI + preferenceTargetPage + "?path=" + categoryPath;
   }
+  
+  /**
+   * get content's title if exists (from exo:title property)
+   * 
+   * @param node
+   * @return the title
+   * @throws Exception
+   */
+  public String getTitle(Node node) throws Exception {
+	  if (node.hasProperty("exo:title")) 
+		  return node.getProperty("exo:title").getString();
+	  else 
+		  return node.getName();
+	  
+  }
 }
