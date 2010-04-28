@@ -532,12 +532,12 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
         } else {
           ntFileLangNode = addNewFileNode(fileName, newLanguageNode, value, 
               new GregorianCalendar(), mimeType, repositoryName) ;
+          
         }
       }
       Node newJcrContent = ntFileLangNode.getNode(JCRCONTENT) ;
-      if(isDefault) newJcrContent.setProperty(JCRDATA, oldValue);
-      else newJcrContent.setProperty(JCRDATA, value);
-      newJcrContent.setProperty(JCR_LASTMODIFIED, new GregorianCalendar()) ;
+      if(isDefault) newJcrContent.setProperty(JCRDATA, oldValue);   
+      newJcrContent.setProperty(JCR_LASTMODIFIED, new GregorianCalendar());
       setMixin(node, ntFileLangNode) ;
     } else {
       node.getNode(JCRCONTENT).setProperty(JCRDATA, value) ;   
