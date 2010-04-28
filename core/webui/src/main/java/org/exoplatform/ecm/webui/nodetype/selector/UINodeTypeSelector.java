@@ -34,10 +34,8 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -104,6 +102,14 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
     } catch (Exception e) {
       return key;
     }
+  }
+  
+  public List<NodeType> getLSTNodetype() {
+    return lstNodetype;
+  }
+
+  public void setLSTNodetype(List<NodeType> lstNodetype) {
+    this.lstNodetype = lstNodetype;
   }
 
   public List<String> getDocumentNodetypes() {

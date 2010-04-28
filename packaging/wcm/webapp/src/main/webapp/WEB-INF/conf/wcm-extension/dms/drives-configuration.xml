@@ -71,6 +71,9 @@
             <field name="allowCreateFolders">
               <string>nt:folder,nt:unstructured</string>
             </field>
+            <field name="allowNodeTypesOnTree">
+            		<string>*</string>
+            </field>
           </object>
         </object-param>
 
@@ -114,6 +117,9 @@
             <field name="allowCreateFolders">
               <string>nt:folder,nt:unstructured</string>
             </field>
+            <field name="allowNodeTypesOnTree">
+            		<string>*</string>
+            </field>
           </object>
         </object-param>
 
@@ -156,6 +162,9 @@
             </field>
             <field name="allowCreateFolders">
               <string>nt:folder,nt:unstructured</string>
+            </field>
+            <field name="allowNodeTypesOnTree">
+            		<string>*</string>
             </field>
           </object>
         </object-param -->

@@ -76,8 +76,9 @@ public class NewGroupListener extends GroupEventListener {
     boolean viewSideBar = Boolean.parseBoolean(initParams_.getValueParam("viewSideBar").getValue());
     boolean showHiddenNode = Boolean.parseBoolean(initParams_.getValueParam("showHiddenNode").getValue());
     String allowCreateFolder = initParams_.getValueParam("allowCreateFolder").getValue();
+    String allowNodeTypesOnTree = initParams_.getValueParam("allowNodeTypesOnTree").getValue();
     driveService_.addDrive(name, workspace, permissions, homePath, views, icon, viewPreferences,
-        viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder) ;
+        viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder, allowNodeTypesOnTree);
   }
   
   public void preDelete(Group group) throws Exception {

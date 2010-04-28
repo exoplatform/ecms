@@ -50,7 +50,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
   final static public String FIELD_HOMEPATH = "homePath";
   final static public String FIELD_WORKSPACEICON = "icon";
   final static public String FIELD_PERMISSION = "permissions";
-  final static public String FIELD_FILTERNODETYPES = "filterNodeTypes";
+  final static public String FIELD_ALLOW_NODETYPES_ON_TREE = "allowNodeTypesOnTree";
   final static public String FIELD_VIEWPREFERENCESDOC = "viewPreferences";
   final static public String FIELD_VIEWNONDOC = "viewNonDocument";
   final static public String FIELD_VIEWSIDEBAR = "viewSideBar";
@@ -86,10 +86,10 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     addUIFormInput(new UIFormCheckBoxInput<String>(SHOW_HIDDEN_NODE, SHOW_HIDDEN_NODE, null));
     
     addUIFormInput(new UIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS, FIELD_ALLOW_CREATE_FOLDERS, null));
-//    UIFormStringInput filterNodeTypes = 
-//      new UIFormStringInput(FIELD_FILTERNODETYPES , FIELD_FILTERNODETYPES , null);
-//    addUIFormInput(filterNodeTypes);
-//    setActionInfo(FIELD_FILTERNODETYPES, new String[] {"ChooseNodeType", "RemoveNodeType"});
+    UIFormStringInput filterNodeTypes = 
+      new UIFormStringInput(FIELD_ALLOW_NODETYPES_ON_TREE , FIELD_ALLOW_NODETYPES_ON_TREE , null);
+    addUIFormInput(filterNodeTypes);
+    setActionInfo(FIELD_ALLOW_NODETYPES_ON_TREE, new String[] {"ChooseNodeType", "RemoveNodeType"});
     setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission", "RemovePermission"});
     setActionInfo(FIELD_HOMEPATH, new String[] {"AddPath"});
     setActionInfo(FIELD_WORKSPACEICON, new String[] {"AddIcon"});

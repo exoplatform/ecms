@@ -42,6 +42,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -132,7 +133,18 @@ public class UITreeExplorer extends UIContainer {
     } catch (MissingResourceException ex) {
       return id.replace(".", " / ");
     }    
-  }    
+  }
+  
+  public boolean isAllowNodeTypesOnTree(Node node) throws RepositoryException {
+    DriveData currentDrive = getAncestorOfType(UIJCRExplorer.class).getDriveData();
+    String allowNodeTypesOnTree = currentDrive.getAllowNodeTypesOnTree();
+    if ((allowNodeTypesOnTree == null) || (allowNodeTypesOnTree.equals("*"))) return true;
+    String[] arrayAllowNodeTypesOnTree = allowNodeTypesOnTree.split(",");
+    for (String itemAllowNodeTypes : arrayAllowNodeTypesOnTree) {
+      if ((itemAllowNodeTypes.trim().length() > 0) && node.isNodeType(itemAllowNodeTypes.trim())) return true;
+    }
+    return false;
+  }
     
   public String getActionsList(Node node) throws Exception {
     if(node == null) return "" ;

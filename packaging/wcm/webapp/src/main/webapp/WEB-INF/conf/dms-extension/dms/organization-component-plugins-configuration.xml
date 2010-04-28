@@ -344,6 +344,10 @@
 	      <value-param>
 	        <name>allowCreateFolder</name>
 	        <value>Both</value>
+	      </value-param>
+	      <value-param>
+	        <name>allowNodeTypesOnTree</name>
+	        <value>*</value>
 	      </value-param>	      	      	      	      	      	      	      	      	      	      
 	    </init-params>
 	  </component-plugin>	  	  
@@ -397,6 +401,10 @@
 	      <value-param>
 	        <name>allowCreateFolder</name>
 	        <value>both</value>
+	      </value-param>
+	      <value-param>
+	        <name>allowNodeTypesOnTree</name>
+	        <value>*</value>
 	      </value-param>	      	      	      	      	      	      	      	      	      	      
 	    </init-params>
 	  </component-plugin>	  

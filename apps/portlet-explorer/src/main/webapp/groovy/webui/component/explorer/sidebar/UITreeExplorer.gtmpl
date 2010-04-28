@@ -34,8 +34,10 @@
 		def realChildrenTrees = new ArrayList<TreeNode>();
 		for(tempNode in childrenNodes) {
 			try {
-				rootTree.getNode().getSession().getItem(tempNode.getNodePath());
-				realChildrenTrees.add(tempNode);
+				if (uicomponent.isAllowNodeTypesOnTree(tempNode.getNode())) {
+					rootTree.getNode().getSession().getItem(tempNode.getNodePath());
+					realChildrenTrees.add(tempNode);
+				}
 			} catch(PathNotFoundException pne) {
 				continue;
 			}			

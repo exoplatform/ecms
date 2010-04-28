@@ -30,7 +30,8 @@
               <field  name="viewNonDocument"><boolean>false</boolean></field>
               <field  name="viewSideBar"><boolean>true</boolean></field>
               <field  name="showHiddenNode"><boolean>false</boolean></field>
-              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>       
+              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+														<field name="allowNodeTypesOnTree"><string>*</string></field> 
             </object>
           </object-param> 
           <object-param>        
@@ -50,7 +51,8 @@
               <field  name="viewNonDocument"><boolean>true</boolean></field>
               <field  name="viewSideBar"><boolean>true</boolean></field>
               <field  name="showHiddenNode"><boolean>true</boolean></field>
-              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>       
+              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+              <field name="allowNodeTypesOnTree"><string>*</string></field>       
             </object>
           </object-param>                                                                                  
           <object-param>        
@@ -70,7 +72,8 @@
               <field  name="viewNonDocument"><boolean>false</boolean></field>
               <field  name="viewSideBar"><boolean>true</boolean></field>
               <field  name="showHiddenNode"><boolean>false</boolean></field>
-              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>       
+              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+              <field name="allowNodeTypesOnTree"><string>*</string></field>       
             </object>
           </object-param>
           <object-param>        
@@ -90,7 +93,8 @@
               <field  name="viewNonDocument"><boolean>true</boolean></field>
               <field  name="viewSideBar"><boolean>true</boolean></field>
               <field  name="showHiddenNode"><boolean>false</boolean></field>
-              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>       
+              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+              <field name="allowNodeTypesOnTree"><string>*</string></field>       
             </object>
           </object-param>
           
@@ -111,7 +115,8 @@
               <field  name="viewNonDocument"><boolean>true</boolean></field>
               <field  name="viewSideBar"><boolean>true</boolean></field>
               <field  name="showHiddenNode"><boolean>false</boolean></field>
-              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>       
+              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+              <field name="allowNodeTypesOnTree"><string>*</string></field>       
             </object>
           </object-param>
           
@@ -132,7 +137,8 @@
               <field  name="viewNonDocument"><boolean>false</boolean></field>
               <field  name="viewSideBar"><boolean>true</boolean></field>
               <field  name="showHiddenNode"><boolean>false</boolean></field>
-              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>       
+              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
+              <field name="allowNodeTypesOnTree"><string>*</string></field>       
             </object>
           </object-param> 
           

@@ -104,7 +104,7 @@ public class UIDriveManager extends UIAbstractManager {
     uiNodeTypeSelector.init(1, nodeList);
     uiPopup.setUIComponent(uiNodeTypeSelector);
     UIDriveForm uiDriveForm = findFirstComponentOfType(UIDriveForm.class) ;
-    uiNodeTypeSelector.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_FILTERNODETYPES}) ;
+    uiNodeTypeSelector.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE}) ;
     uiPopup.setShow(true) ;
   }  
   

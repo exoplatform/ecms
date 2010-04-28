@@ -123,11 +123,11 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     UIDriveManager uiContainer = getAncestorOfType(UIDriveManager.class) ;
     for(UIComponent uiChild : uiContainer.getChildren()) {
       if(uiChild.getId().equals(POPUP_DRIVEPERMISSION) || uiChild.getId().equals("JCRBrowser")
-          || uiChild.getId().equals("JCRBrowserAssets")) {
+          || uiChild.getId().equals("JCRBrowserAssets") || uiChild.getId().equals(POPUP_NODETYPE_SELECTOR)) {
         UIPopupWindow uiPopup = uiContainer.getChildById(uiChild.getId()) ;
         uiPopup.setRendered(false) ;
         uiPopup.setShow(false) ;
-      }
+      } 
     }
   }
 
@@ -306,8 +306,10 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       } else {
         iconPath = "";
       }
+      String allowNodeTypesOnTree = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).getValue();
+      if ((allowNodeTypesOnTree==null) || (allowNodeTypesOnTree.length()==0)) allowNodeTypesOnTree = "*";
       dservice_.addDrive(name, workspace, permissions, path, views, iconPath, viewReferences, 
-          viewNonDocument, viewSideBar, showHiddenNode, repository, foldertypes.toString());
+          viewNonDocument, viewSideBar, showHiddenNode, repository, foldertypes.toString(), allowNodeTypesOnTree);
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       UIDriveList uiDriveList = uiManager.getChild(UIDriveList.class);
       uiDriveList.updateDriveListGrid(uiDriveList.getUIPageIterator().getCurrentPage());
@@ -441,7 +443,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
-      String nodeTypes = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_FILTERNODETYPES).getValue();
+      String nodeTypes = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).getValue();
       if ((nodeTypes != null) && (uiDriveForm.membershipString.indexOf(nodeTypes) < 0)){
         if (uiDriveForm.nodeTypes.length() > 0)
           uiDriveForm.nodeTypes += "," + nodeTypes;
@@ -449,7 +451,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
           uiDriveForm.nodeTypes += nodeTypes;
       }        
       uiDriveForm.getUIStringInput(
-          UIDriveInputSet.FIELD_FILTERNODETYPES).setValue(uiDriveForm.nodeTypes);
+          UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).setValue(uiDriveForm.nodeTypes);
       
       uiManager.initPopupNodeTypeSelector(uiDriveForm.nodeTypes);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
@@ -460,7 +462,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
       uiDriveForm.nodeTypes = ""; 
-      uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_FILTERNODETYPES).setValue(null);
+      uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveForm);
     }
   }  

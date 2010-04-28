@@ -330,6 +330,12 @@
       <propertyDefinition name="exo:allowCreateFolders" requiredType="String" autoCreated="false" mandatory="true"
         onParentVersion="IGNORE" protected="false" multiple="false">
         <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:allowNodeTypesOnTree" requiredType="String" autoCreated="true" mandatory="false"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <defaultValues>
+          <defaultValue>*</defaultValue>
+        </defaultValues>
       </propertyDefinition>      
     </propertyDefinitions>
     <childNodeDefinitions>

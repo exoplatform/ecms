@@ -2405,7 +2405,7 @@
 	
 	<UIDriveForm>
 		<label>
-			<filterNodeTypes>Kiểu dữ liệu cho phép hiển thị</filterNodeTypes>
+			<allowNodeTypesOnTree>Kiểu dữ liệu cho phép hiển thị</allowNodeTypesOnTree>
 		</label>
 	</UIDriveForm>
 	<DriveInputSet>
@@ -2420,6 +2420,11 @@
 			<UINodeTypeSelector>Chọn kiểu dữ liệu</UINodeTypeSelector>
 			<PopupNodeTypeSelector>Chọn kiểu dữ liệu</PopupNodeTypeSelector>
 		</title>
-	</PopupNodeTypeSelector>	
+	</PopupNodeTypeSelector>
+	<UINodeTypeSelector>
+		<label>
+			<selectedAllNodeTypes>Chọn tất cả kiểu dữ liệu</selectedAllNodeTypes>
+		</label>
+	</UINodeTypeSelector>	
 </bundle>
 

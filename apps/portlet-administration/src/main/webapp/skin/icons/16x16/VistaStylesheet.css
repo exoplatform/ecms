@@ -286,12 +286,16 @@
 
 .False16x16Icon {
   width: 16px;  height: 16px;
-  background: url('VistaSkin/False.png') no-repeat;  
+  background: url('VistaSkin/False.png') no-repeat;
+  padding-left: 20px; /* orientation=lt */
+  padding-right: 20px; /* orientation=rt */  
 }
 
 .True16x16Icon {
   width: 16px;  height: 16px;
-  background: url('VistaSkin/True.png') no-repeat;  
+  background: url('VistaSkin/True.png') no-repeat;
+  padding-left: 20px; /* orientation=lt */
+  padding-right: 20px; /* orientation=rt */  
 }
 
 .false16x16Icon {

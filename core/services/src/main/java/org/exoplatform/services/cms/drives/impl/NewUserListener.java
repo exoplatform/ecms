@@ -78,14 +78,15 @@ public class NewUserListener extends UserEventListener {
     boolean viewSideBar = Boolean.parseBoolean(initParams_.getValueParam("viewSideBar").getValue());
     boolean showHiddenNode = Boolean.parseBoolean(initParams_.getValueParam("showHiddenNode").getValue());
     String allowCreateFolder = initParams_.getValueParam("allowCreateFolder").getValue();
+    String allowNodeTypesOnTree = initParams_.getValueParam("allowNodeTypesOnTree").getValue();
     //Only user can access private drive
     String publicPath = nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS) ;
     String privatePath = nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS) ;
     driveService_.addDrive(user.getUserName() + "|" + privatePath, workspace, user.getUserName(), homePath + "/" + privatePath, views, icon, 
-        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder) ;
+        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder, allowNodeTypesOnTree);
     //User and everyone can see public drive for user
     driveService_.addDrive(user.getUserName() + "|" + publicPath, workspace, permissions, homePath + "/" + publicPath, views, icon, 
-        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder) ;
+        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder, allowNodeTypesOnTree);
   }
   
   /**

@@ -103,6 +103,7 @@
           <field name="allowCreateFolders">
             <string>Both</string>
           </field>
+          <field name="allowNodeTypesOnTree"><string>*</string></field>
         </object>
       </object-param>
     </init-params>

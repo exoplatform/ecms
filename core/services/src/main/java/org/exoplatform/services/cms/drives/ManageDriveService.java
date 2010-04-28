@@ -44,7 +44,8 @@ public interface ManageDriveService {
    */
   public void addDrive(String name, String workspace, String permissions, String homePath, 
                         String views, String icon, boolean viewReferences, boolean viewNonDocument,
-                        boolean viewSideBar, boolean showHiddenNode, String repository, String allowCreateFolder)throws Exception ;
+                        boolean viewSideBar, boolean showHiddenNode, String repository, String allowCreateFolder,
+                        String allowNodeTypesOnTree)throws Exception ;
   /**
    * Return an DriveData Object
    * @param driveName  the string contain the drive name 

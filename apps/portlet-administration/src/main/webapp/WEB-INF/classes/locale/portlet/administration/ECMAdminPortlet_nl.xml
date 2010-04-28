@@ -2339,7 +2339,7 @@
 	
 	<UIDriveForm>
 		<label>
-			<filterNodeTypes>Allowance nodetype on left tree</filterNodeTypes>
+			<allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
 		</label>
 	</UIDriveForm>
 	<DriveInputSet>
@@ -2354,6 +2354,11 @@
 			<UINodeTypeSelector>Select node types</UINodeTypeSelector>
 			<PopupNodeTypeSelector>Select node types</PopupNodeTypeSelector>
 		</title>
-	</PopupNodeTypeSelector>	
+	</PopupNodeTypeSelector>
+	<UINodeTypeSelector>
+		<label>
+			<selectedAllNodeTypes>Choose all node types</selectedAllNodeTypes>
+		</label>
+	</UINodeTypeSelector>	
 </bundle>
 
