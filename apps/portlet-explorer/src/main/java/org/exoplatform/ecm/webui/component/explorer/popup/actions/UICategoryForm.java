@@ -23,11 +23,12 @@ import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeDefinition;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -72,7 +73,8 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
       UICategoryForm uiFolderForm = event.getSource();
       UIJCRExplorer uiExplorer = uiFolderForm.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiFolderForm.getAncestorOfType(UIApplication.class);
-      String name = uiFolderForm.getUIStringInput(FIELD_NAME).getValue();
+      String title = uiFolderForm.getUIStringInput(FIELD_NAME).getValue();
+      String name = Utils.cleanString(title);
       Node node = uiExplorer.getCurrentNode();                 
       if (uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null));
@@ -86,7 +88,11 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
       }  
       String type = "exo:taxonomy";
       try {
-        node.addNode(Text.escapeIllegalJcrChars(name), type);
+        Node newNode = node.addNode(Text.escapeIllegalJcrChars(name), type);
+        if (newNode.canAddMixin("exo:rss-enable")) {
+        	newNode.addMixin("exo:rss-enable");
+        	newNode.setProperty("exo:title", title);
+        }
         node.save();
         node.getSession().save();
         if(!uiExplorer.getPreference().isJcrEnable())  { node.getSession().save(); }

@@ -145,19 +145,19 @@ public class Utils {
       for(int i = 0; i < cleanedStr.length(); i++) {
         char c = cleanedStr.charAt(i);
         if(c == ' ') {
-          if (i > 0 && cleanedStr.charAt(i - 1) == '_') {
+          if (i > 0 && cleanedStr.charAt(i - 1) == '-') {
             cleanedStr.deleteCharAt(i--);
           } else {
-            c = '_';
+            c = '-';
             cleanedStr.setCharAt(i, c);
           }
           continue;
         }
-        if(i > 0 && !(Character.isLetterOrDigit(c) || c == '_')) {
+        if(i > 0 && !(Character.isLetterOrDigit(c) || c == '-')) {
           cleanedStr.deleteCharAt(i--);
           continue;
         }
-        if(i > 0 && c == '_' && cleanedStr.charAt(i-1) == '_')
+        if(i > 0 && c == '-' && cleanedStr.charAt(i-1) == '-')
           cleanedStr.deleteCharAt(i--);
       }
       return cleanedStr.toString().toLowerCase();
