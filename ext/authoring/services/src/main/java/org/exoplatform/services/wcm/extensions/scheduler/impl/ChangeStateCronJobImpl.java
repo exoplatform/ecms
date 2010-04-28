@@ -15,6 +15,7 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.RootContainer;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -73,7 +74,7 @@ public class ChangeStateCronJobImpl implements Job {
           + toState);
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
 
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      ExoContainer container = RootContainer.getInstance().getPortalContainer(context.getJobDetail().getGroup().split(":")[0]);
       RepositoryService repositoryService_ = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
       PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
       ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
