@@ -47,6 +47,8 @@
   def rqcontext = _ctx.getRequestContext();
   def size = links.size();
 %>
+<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.4.min.js"></script>
+<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer.playlist-3.0.7.js"></script>
 <div class="NavigationContainer">       
   <div class="TopTitle">$title</div>
   <div class="Content">
@@ -55,11 +57,11 @@
         <script>
         <% print "\$" %> (function() { 
           // install flowplayer into container 
-        flowplayer("player", {wmode: 'transparent', src: "/ecm/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, { 
+        	flowplayer("player", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, { 
           // fullscreen button not needed here 
             plugins: { 
               controls: { 
-                url: '/ecm/javascript/eXo/ecm/flowplayer.controls-tube-3.1.5.swf',
+                url: '/ecmexplorer/javascript/eXo/ecm/flowplayer.controls-tube-3.1.5.swf',
                 fullscreen: false, 
                 height: 30,
                 // setup auto hide 
