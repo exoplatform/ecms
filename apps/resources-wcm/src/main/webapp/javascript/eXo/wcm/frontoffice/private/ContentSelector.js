@@ -696,7 +696,8 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 			alert("This content is already in the list content.");
 			return;
 		}
-	} 
+	}
+	alert("This content is successfully added into the list content.");
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
