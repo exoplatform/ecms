@@ -82,38 +82,42 @@
 					<div class="UITabContentContainer">
 						<div class="UITabContent" style="display: block;">
 							<table class="UIFormGrid">
-		        	    		<tr>
-		        					<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.name")%></td>
-		          					<td class="FieldComponent">
-		            					<%
-					              	 		String[] webContentFieldName = ["jcrPath=/node", "nodetype=exo:webContent", "mixintype=mix:votable,mix:commentable", "editable=if-null","validate=name,empty"] ;
-					              	 		uicomponent.addTextField("name", webContentFieldName) ; 
-					              	 		String[] cssFolder = ["jcrPath=/node/css", "nodetype=exo:cssFolder", "defaultValues=css"] ;
-					              	 		String[] jsFolder = ["jcrPath=/node/js", "nodetype=exo:jsFolder", "defaultValues=js"] ;
-					              	 		String[] documentsFolder = ["jcrPath=/node/documents", "nodetype=nt:unstructured","mixintype=exo:documentFolder","defaultValues=documents"] ;
-					              	 		String[] mediasFolder = ["jcrPath=/node/medias", "nodetype=exo:multimediaFolder", "defaultValues=medias"] ;
-					              	 		String[] imagesFolder = ["jcrPath=/node/medias/images", "nodetype=nt:folder", "defaultValues=images"] ;
-					              	 		String[] videoFolder = ["jcrPath=/node/medias/videos", "nodetype=nt:folder", "defaultValues=videos"] ;
-					              	 		String[] audioFolder = ["jcrPath=/node/medias/videos", "nodetype=nt:folder", "defaultValues=audio"] ;
-					              	 		uicomponent.addHiddenField("cssFolder", cssFolder) ;
-					              	 		uicomponent.addHiddenField("jsFolder", jsFolder);
-					              	 		uicomponent.addHiddenField("documentsFolder", documentsFolder);
-					              	 		uicomponent.addHiddenField("mediasFolder", mediasFolder);
-					              	 		uicomponent.addHiddenField("imagesFolder", imagesFolder);
-					              	 		uicomponent.addHiddenField("videoFolder", videoFolder);
-					              	 		uicomponent.addHiddenField("audioFolder", audioFolder);
-				            	   		%>
-			          			 	</td>
-			        			</tr>
-								<tr>
-									<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.title")%></td>
-								  	<td class="FieldComponent">
-										<%
-									        String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
-									        uicomponent.addTextField("title", webContentFieldTitle) ;
-								    	%>
-									</td>
-								</tr>
+                <tr>
+                  <td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.title")%></td>
+                    <td class="FieldComponent">
+                    <%
+                          String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
+                          uicomponent.addTextField("title", webContentFieldTitle) ;
+                      %>
+                  </td>
+                </tr>
+        	    	<tr>
+        					<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.name")%></td>
+          					<td class="FieldComponent">
+            					<%
+			              	 		String[] webContentFieldName = ["jcrPath=/node", "nodetype=exo:webContent", "mixintype=mix:votable,mix:commentable", "editable=if-null","validate=name,empty"] ;
+			              	 		uicomponent.addTextField("name", webContentFieldName) ; 
+			              	 		String[] cssFolder = ["jcrPath=/node/css", "nodetype=exo:cssFolder", "defaultValues=css"] ;
+			              	 		String[] jsFolder = ["jcrPath=/node/js", "nodetype=exo:jsFolder", "defaultValues=js"] ;
+			              	 		String[] documentsFolder = ["jcrPath=/node/documents", "nodetype=nt:unstructured","mixintype=exo:documentFolder","defaultValues=documents"] ;
+			              	 		String[] mediasFolder = ["jcrPath=/node/medias", "nodetype=exo:multimediaFolder", "defaultValues=medias"] ;
+			              	 		String[] imagesFolder = ["jcrPath=/node/medias/images", "nodetype=nt:folder", "defaultValues=images"] ;
+			              	 		String[] videoFolder = ["jcrPath=/node/medias/videos", "nodetype=nt:folder", "defaultValues=videos"] ;
+			              	 		String[] audioFolder = ["jcrPath=/node/medias/videos", "nodetype=nt:folder", "defaultValues=audio"] ;
+			              	 		uicomponent.addHiddenField("cssFolder", cssFolder) ;
+			              	 		uicomponent.addHiddenField("jsFolder", jsFolder);
+			              	 		uicomponent.addHiddenField("documentsFolder", documentsFolder);
+			              	 		uicomponent.addHiddenField("mediasFolder", mediasFolder);
+			              	 		uicomponent.addHiddenField("imagesFolder", imagesFolder);
+			              	 		uicomponent.addHiddenField("videoFolder", videoFolder);
+			              	 		uicomponent.addHiddenField("audioFolder", audioFolder);
+		            	   		%>
+                    <script>
+                    titleField = document.getElementById("title");
+                    titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
+                    </script>
+	          			 	</td>
+	        			</tr>
 								<tr>
 						 			<td class="FieldLabel">
 						 				<div title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" class="WebContentSynchronize Refresh16x16Icon" onclick="eXo.ecm.WCMFCKEditor.insertCSSFromTextArea2FCK('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"></div>
