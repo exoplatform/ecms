@@ -14,7 +14,7 @@ import org.exoplatform.webui.form.validator.Validator;
 public class UINewsletterViewerEmailAddressValidator implements Validator {
 
 	/** The Constant EMAIL_REGEX. */
-	static private final String EMAIL_REGEX = "[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-]+\\.[a-zA-Z0-9]+";
+	static private final String EMAIL_REGEX = "[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-]+(.([a-zA-Z0-9])+)*";
 
 	/* (non-Javadoc)
 	 * @see org.exoplatform.webui.form.validator.Validator#validate(org.exoplatform.webui.form.UIFormInput)
