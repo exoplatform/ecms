@@ -93,11 +93,11 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
     ResourceBundle resourceBundle = context.getApplicationResourceBundle();
     List<SelectItemOption<String>> formatItem = new ArrayList<SelectItemOption<String>>() ;
     formatItem.add(new SelectItemOption<String>(
-        resourceBundle.getString("Import.label." + DOC_VIEW), DOC_VIEW));
+    		resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
     formatItem.add(new SelectItemOption<String>(
-        resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
+        resourceBundle.getString("Import.label." + DOC_VIEW), DOC_VIEW));
     addUIFormInput(new UIFormInputInfo(NODE_PATH, NODE_PATH, null)) ;
-    addUIFormInput(new UIFormRadioBoxInput(FORMAT, DOC_VIEW, formatItem).
+    addUIFormInput(new UIFormRadioBoxInput(FORMAT, SYS_VIEW, formatItem).
                    setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN)) ;
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(ZIP, ZIP, null)) ;
   }
