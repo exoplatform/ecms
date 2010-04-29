@@ -106,12 +106,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   }
   
   @CHECKIN
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response checkin(@PathParam("repoName") String repoName,
                           @PathParam("repoPath") String repoPath,
                           @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
-                          @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
-                          HierarchicalProperty body) {
+                          @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
       Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
@@ -124,17 +123,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.checkin(repoName, repoPath, lockTokenHeader, ifHeader, body);
     return super.checkin(repoName, repoPath, lockTokenHeader, ifHeader);
   }
 
   @CHECKOUT
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response checkout(@PathParam("repoName") String repoName,
                            @PathParam("repoPath") String repoPath,
                            @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
-                           @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
-                           HierarchicalProperty body) {
+                           @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
     try {
       Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
@@ -146,12 +143,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.checkout(repoName, repoPath, lockTokenHeader, ifHeader, body);
     return super.checkout(repoName, repoPath, lockTokenHeader, ifHeader);
   }
 
   @COPY
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response copy(@PathParam("repoName") String repoName,
                        @PathParam("repoPath") String repoPath,
                        @HeaderParam(ExtHttpHeaders.DESTINATION) String destinationHeader,
@@ -159,7 +155,6 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
                        @HeaderParam(ExtHttpHeaders.DEPTH) String depthHeader,
                        @HeaderParam(ExtHttpHeaders.OVERWRITE) String overwriteHeader,
-//                       @ContextParam(ResourceDispatcher.CONTEXT_PARAM_BASE_URI) String baseURI,
                        @Context UriInfo uriInfo,
                        HierarchicalProperty body) {
 
@@ -174,22 +169,20 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    String realDestinationHeader = getRealDestinationHeader(baseURI, repoName, destinationHeader);
     String realDestinationHeader = getRealDestinationHeader(uriInfo.getPath(), repoName, destinationHeader);
     if (realDestinationHeader != null) {
       destinationHeader = realDestinationHeader;
     }
-//    return super.copy(repoName, repoPath, destinationHeader, lockTokenHeader, ifHeader, depthHeader, overwriteHeader, baseURI, body);
     return super.copy(repoName, repoPath, destinationHeader, lockTokenHeader, ifHeader, depthHeader, overwriteHeader, uriInfo, body);
   }
 
   @GET
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response get(@PathParam("repoName") String repoName,
                       @PathParam("repoPath") String repoPath,
                       @HeaderParam(ExtHttpHeaders.RANGE) String rangeHeader,
+                      @HeaderParam(ExtHttpHeaders.IF_MODIFIED_SINCE) String ifModifiedSince,
                       @QueryParam("version") String version,
-//                      @ContextParam(ResourceDispatcher.CONTEXT_PARAM_BASE_URI) String baseURI
                       @Context UriInfo uriInfo) {
 
     try {
@@ -203,16 +196,13 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.get(repoName, repoPath, rangeHeader, version, baseURI);
     return super.get(repoName, repoPath, rangeHeader, null, version, uriInfo);
   }
 
   @HEAD
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response head(@PathParam("repoName") String repoName,
                        @PathParam("repoPath") String repoPath,
-                       @QueryParam("version") String version,
-//                       @ContextParam(ResourceDispatcher.CONTEXT_PARAM_BASE_URI) String baseURI
                        @Context UriInfo uriInfo) {
 
     try {
@@ -226,18 +216,16 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.head(repoName, repoPath, version, baseURI);
     return super.head(repoName, repoPath, uriInfo);
   }
 
   @LOCK
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response lock(@PathParam("repoName") String repoName,
                        @PathParam("repoPath") String repoPath,
                        @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                        @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
                        @HeaderParam(ExtHttpHeaders.DEPTH) String depthHeader,
-                       @HeaderParam(ExtHttpHeaders.TIMEOUT) String timeout,
                        HierarchicalProperty body) {
 
     try {
@@ -251,17 +239,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.lock(repoName, repoPath, lockTokenHeader, ifHeader, depthHeader, timeout, body);
     return super.lock(repoName, repoPath, lockTokenHeader, ifHeader, depthHeader, body);
   }
 
   @UNLOCK
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response unlock(@PathParam("repoName") String repoName,
                          @PathParam("repoPath") String repoPath,
                          @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
-                         @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
-                         HierarchicalProperty body) {
+                         @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
       Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
@@ -274,24 +260,21 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.unlock(repoName, repoPath, lockTokenHeader, ifHeader, body);
     return super.unlock(repoName, repoPath, lockTokenHeader, ifHeader);
   }
 
   @OPTIONS
-  @Path("/{repoName}/")
-  public Response options(@PathParam("repoName") String repoName, HierarchicalProperty body) {
-//	return super.options(repoName, body);
-    return super.options(repoName);
+  @Path("/{repoName}/{path:.*}/")
+  public Response options(@PathParam("path") String path) {
+    return super.options(path);
   }
 
   @ORDERPATCH
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response order(@PathParam("repoName") String repoName,
                         @PathParam("repoPath") String repoPath,
                         @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                         @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
-//                        @ContextParam(ResourceDispatcher.CONTEXT_PARAM_BASE_URI) String baseURI,
                         @Context UriInfo uriInfo,
                         HierarchicalProperty body) {
 
@@ -306,16 +289,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.order(repoName, repoPath, lockTokenHeader, ifHeader, baseURI, body);
     return super.order(repoName, repoPath, lockTokenHeader, ifHeader, uriInfo, body);
   }
 
   @PROPFIND
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response propfind(@PathParam("repoName") String repoName,
                            @PathParam("repoPath") String repoPath,
                            @HeaderParam(ExtHttpHeaders.DEPTH) String depthHeader,
-//                           @ContextParam(ResourceDispatcher.CONTEXT_PARAM_BASE_URI) String baseURI,
                            @Context UriInfo uriInfo,
                            HierarchicalProperty body) {
 
@@ -330,17 +311,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.propfind(repoName, repoPath, depthHeader, baseURI, body);
     return super.propfind(repoName, repoPath, depthHeader, uriInfo, body);
   }
 
   @PROPPATCH
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response proppatch(@PathParam("repoName") String repoName,
                             @PathParam("repoPath") String repoPath,
                             @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                             @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
-//                            @ContextParam(ResourceDispatcher.CONTEXT_PARAM_BASE_URI) String baseURI,
                             @Context UriInfo uriInfo,
                             HierarchicalProperty body) {
 
@@ -355,20 +334,18 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.proppatch(repoName, repoPath, lockTokenHeader, ifHeader, baseURI, body);
     return super.proppatch(repoName, repoPath, lockTokenHeader, ifHeader, uriInfo, body);
   }
 
   @PUT
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response put(@PathParam("repoName") String repoName,
                       @PathParam("repoPath") String repoPath,
                       @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                       @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
+                      @HeaderParam(ExtHttpHeaders.FILE_NODETYPE) String fileNodeTypeHeader,
                       @HeaderParam(ExtHttpHeaders.CONTENT_NODETYPE) String nodeTypeHeader,
-//                      @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypesHeader,
                       @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) List<String> mixinTypes,
-//                      @HeaderParam(ExtHttpHeaders.CONTENTTYPE) String mimeType,
                       @HeaderParam(ExtHttpHeaders.CONTENTTYPE) MediaType mediaType,
                       InputStream inputStream) {
 
@@ -383,16 +360,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.put(repoName, repoPath, lockTokenHeader, ifHeader, nodeTypeHeader, mixinTypesHeader, mimeType, inputStream);
     return super.put(repoName, repoPath, lockTokenHeader, ifHeader, nodeTypeHeader, null, mixinTypes, mediaType, inputStream);
   }
 
   @REPORT
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response report(@PathParam("repoName") String repoName,
                          @PathParam("repoPath") String repoPath,
                          @HeaderParam(ExtHttpHeaders.DEPTH) String depthHeader,
-//                         @ContextParam(ResourceDispatcher.CONTEXT_PARAM_BASE_URI) String baseURI,
                          @Context UriInfo uriInfo,
                          HierarchicalProperty body) {
 
@@ -407,15 +382,13 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.report(repoName, repoPath, depthHeader, baseURI, body);
     return super.report(repoName, repoPath, depthHeader, uriInfo, body);
   }
 
   @SEARCH
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response search(@PathParam("repoName") String repoName,
                          @PathParam("repoPath") String repoPath,
-//                         @ContextParam(ResourceDispatcher.CONTEXT_PARAM_BASE_URI) String baseURI,
                          @Context UriInfo uriInfo,
                          HierarchicalProperty body) {
 
@@ -430,17 +403,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.search(repoName, repoPath, baseURI, body);
     return super.search(repoName, repoPath, uriInfo, body);
   }
 
   @UNCHECKOUT
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response uncheckout(@PathParam("repoName") String repoName,
                              @PathParam("repoPath") String repoPath,
                              @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
-                             @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
-                             HierarchicalProperty body) {
+                             @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
       Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
@@ -453,12 +424,11 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-//    return super.uncheckout(repoName, repoPath, lockTokenHeader, ifHeader, body);
     return super.uncheckout(repoName, repoPath, lockTokenHeader, ifHeader);
   }
 
   @VERSIONCONTROL
-  @Path("/{repoName}/{repoPath}/")
+  @Path("/{repoName}/{repoPath:.*}/")
   public Response versionControl(@PathParam("repoName") String repoName,
                                  @PathParam("repoPath") String repoPath,
                                  @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
