@@ -248,7 +248,7 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/acme/web contents/site artifacts</string>
+                  <string>/sites content/live/acme/web contents</string>
                 </field>
               </object>
             </field>
@@ -270,7 +270,7 @@
                   <string>collaboration</string>
                 </field>
                 <field name="nodePath">
-                  <string>/sites content/live/acme/web contents/site artifacts</string>
+                  <string>/sites content/live/acme/web contents</string>
                 </field>
               </object>
             </field>
@@ -421,7 +421,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News1</string>
+              <string>repository:collaboration:/sites content/live/acme/web contents/News/News1</string>
             </field>
             <field name="targetPath">
               <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
@@ -433,7 +433,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News2</string>
+              <string>repository:collaboration:/sites content/live/acme/web contents/News/News2</string>
             </field>
             <field name="targetPath">
               <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
@@ -445,7 +445,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News3</string>
+              <string>repository:collaboration:/sites content/live/acme/web contents/News/News3</string>
             </field>
             <field name="targetPath">
               <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
@@ -457,7 +457,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News4</string>
+              <string>repository:collaboration:/sites content/live/acme/web contents/News/News4</string>
             </field>
             <field name="targetPath">
               <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
@@ -469,7 +469,7 @@
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
             <field name="sourcePath">
-              <string>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News/News1</string>
+              <string>repository:collaboration:/sites content/live/acme/web contents/News/News1</string>
             </field>
             <field name="targetPath">
               <string>repository:collaboration:/sites content/live/acme/categories/acme/World</string>

@@ -95,7 +95,7 @@
             <preferences>
               <preference>
                 <name>folderPath</name>
-                <value>repository:collaboration:/sites content/live/acme/web contents/site artifacts/Events</value>
+                <value>repository:collaboration:/sites content/live/acme/web contents/Events</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -153,7 +153,7 @@
             <preferences>
               <preference>
                 <name>folderPath</name>
-                <value>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News</value>
+                <value>repository:collaboration:/sites content/live/acme/web contents/News</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -257,7 +257,7 @@
             <preferences>
               <preference>
                 <name>folderPath</name>
-                <value>repository:collaboration:/sites content/live/acme/web contents/site artifacts/News</value>
+                <value>repository:collaboration:/sites content/live/acme/web contents/News</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
