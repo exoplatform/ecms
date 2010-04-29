@@ -9,6 +9,16 @@
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
   </component>
     
+   <component>
+      <key>org.exoplatform.services.document.diff.DiffService</key>
+      <type>org.exoplatform.services.document.impl.diff.DiffServiceImpl</type>
+   </component>
+   
+   <component>
+      <key>org.exoplatform.services.document.diff.DiffAlgorithm</key>
+      <type>org.exoplatform.services.document.impl.diff.SimpleDiff</type>
+   </component>
+    
   <component>
 	  <key>org.exoplatform.services.jcr.webdav.WebDavServiceImpl</key>
 	  <type>org.exoplatform.services.cms.webdav.WebDavServiceImpl</type>
