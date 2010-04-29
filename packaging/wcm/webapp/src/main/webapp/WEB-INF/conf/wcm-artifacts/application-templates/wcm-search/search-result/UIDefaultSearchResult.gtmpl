@@ -63,7 +63,7 @@
     %>
      <p>
       <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <b style="font-size: 15px; font-style: italic;"> <%= keyword %> </b> - 
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.did-not-match") %> <%= resultType.toLowerCase() %>
+      <%= _ctx.appRes("UIDefaultSearchResult.msg.did-not-match") %> <%= _ctx.appRes("UIDefaultSearchResult.label." + resultType.toLowerCase()) %>
      </p>
     <%
    } else {
