@@ -32,7 +32,7 @@
         <td class="FieldComponent">
         <%
           String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
-          String[] fieldLang = ["jcrPath=/node/exo:language", "options=en,fr,de", lang] ;
+          String[] fieldLang = ["jcrPath=/node/exo:language", "options=en,fr,es,de", lang] ;
           uicomponent.addSelectBoxField("lang", fieldLang) ;
         %>
         </td>
