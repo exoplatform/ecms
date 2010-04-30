@@ -39,13 +39,13 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.VersionHistoryImporter;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -59,7 +59,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormUploadInput;
 
@@ -75,9 +74,9 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
 
   public static final String FORMAT                      = "format";
 
-  public static final String DOC_VIEW                    = "docview";
+//  public static final String DOC_VIEW                    = "docview";
 
-  public static final String SYS_VIEW                    = "sysview";
+//  public static final String SYS_VIEW                    = "sysview";
 
   public static final String FILE_UPLOAD                 = "upload";
   
@@ -99,14 +98,14 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       new UIFormUploadInput(VERSION_HISTORY_FILE_UPLOAD, VERSION_HISTORY_FILE_UPLOAD, 0);
     uiHistoryFileUpload.setAutoUpload(true);
     addUIFormInput(uiHistoryFileUpload);
-    List<SelectItemOption<String>> formatItem = new ArrayList<SelectItemOption<String>>();
-    RequestContext context = RequestContext.getCurrentInstance();
-    ResourceBundle resourceBundle = context.getApplicationResourceBundle();
-    formatItem.add(new SelectItemOption<String>(
-    		resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
-    formatItem.add(new SelectItemOption<String>(
-        resourceBundle.getString("Import.label." + DOC_VIEW), DOC_VIEW));
-    addUIFormInput(new UIFormRadioBoxInput(FORMAT, SYS_VIEW, formatItem).setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN));
+//    List<SelectItemOption<String>> formatItem = new ArrayList<SelectItemOption<String>>();
+//    RequestContext context = RequestContext.getCurrentInstance();
+//    ResourceBundle resourceBundle = context.getApplicationResourceBundle();
+//    formatItem.add(new SelectItemOption<String>(
+//    		resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
+//    formatItem.add(new SelectItemOption<String>(
+//        resourceBundle.getString("Import.label." + DOC_VIEW), DOC_VIEW));
+//    addUIFormInput(new UIFormRadioBoxInput(FORMAT, SYS_VIEW, formatItem).setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN));
   }
 
   public void activate() throws Exception {
