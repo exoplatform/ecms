@@ -121,7 +121,7 @@ public class UIViewRelationList extends UIContainer{
 	  List<String> langs = langService.getSupportedLanguages(node);
 	  for(String lang: langs) {
 		  Node lnode = langService.getLanguage(node, lang);
-		  if (lnode!=null) {
+		  if (lnode!=null && lnode.hasProperty("exo:language")) {
 			  relations.add(lnode) ;
 		  }
 	  }

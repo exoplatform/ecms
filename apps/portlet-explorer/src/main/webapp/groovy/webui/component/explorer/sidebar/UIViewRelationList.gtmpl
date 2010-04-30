@@ -27,8 +27,8 @@
             String path = rel.getPath() ;
             actionLink = uicomponent.event("ChangeNode", path, new Parameter("workspaceName", preferenceWS)) ;
             String relName = path.substring(path.lastIndexOf("/") + 1, path.length()) ;
-            String relLang = rel.getProperty("exo:language").getString();
-            String relTitle = rel.getProperty("exo:title").getString();
+            String relLang = rel.hasProperty("exo:language")?rel.getProperty("exo:language").getString():"";
+            String relTitle = rel.hasProperty("exo:title")?rel.getProperty("exo:title").getString():"";
             if (relTitle!=null && !"".equals(relTitle)) relName = relTitle; 
         %>
             <div> - <a href="$actionLink">$relLang ($relName)</a></div>
