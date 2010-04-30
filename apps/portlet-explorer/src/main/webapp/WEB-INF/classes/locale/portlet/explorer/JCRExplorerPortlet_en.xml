@@ -156,8 +156,11 @@
   -->
   <UIViewRelationList>
     <label>
+      <languages-list>Languages List</languages-list>
+      <relation-list>Relations List</relation-list>
+      <references-list>References List</references-list>
       <no-related-document>No related document</no-related-document>
-      <related-document>Relation Documents</related-document>
+      <related-document>Related Documents</related-document>
     </label>
   </UIViewRelationList>
   <!--

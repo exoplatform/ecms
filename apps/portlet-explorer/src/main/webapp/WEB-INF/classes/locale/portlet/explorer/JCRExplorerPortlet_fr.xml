@@ -155,6 +155,9 @@
   -->
   <UIViewRelationList>
     <label>
+      <languages-list>Langues</languages-list>
+      <relation-list>Relations</relation-list>
+      <references-list>Références</references-list>
       <no-related-document>Aucun document connexe</no-related-document>
       <related-document>Documents liés</related-document>
     </label>

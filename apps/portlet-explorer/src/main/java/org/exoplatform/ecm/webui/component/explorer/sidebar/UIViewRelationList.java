@@ -22,13 +22,16 @@ import java.util.List;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.PropertyIterator;
 import javax.jcr.Session;
+import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.Value;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
+import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -78,6 +81,51 @@ public class UIViewRelationList extends UIContainer{
       }
     }
     return relations ;
+  }
+  
+  private List<Node> getReferences() throws Exception {
+	    List<Node> refNodes = new ArrayList<Node>() ; 
+	    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
+	    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
+	    Node currentNode = uiJCRExplorer.getCurrentNode() ;
+	    try {
+		    String uuid = currentNode.getUUID() ;        
+		    String repositoryName = uiJCRExplorer.getRepositoryName() ;
+		    ManageableRepository repository = repositoryService.getRepository(repositoryName) ;
+		    Session session = null ;
+		    for(String workspace : repository.getWorkspaceNames()) {
+		      session = repository.getSystemSession(workspace) ;
+		      try{
+		        Node lookupNode = session.getNodeByUUID(uuid) ;
+		        PropertyIterator iter = lookupNode.getReferences() ;
+		        if(iter != null) {
+		          while(iter.hasNext()) {
+		            Node refNode = iter.nextProperty().getParent() ;
+		            refNodes.add(refNode) ;
+		          }
+		        }
+		      } catch(Exception e) { }
+		     session.logout() ; 
+		    }
+	    } catch (UnsupportedRepositoryOperationException e) { 
+	    	// currentNode is not referenceable
+	    }
+	    return refNodes ;
+	  }
+  
+  public List<Node> getLanguages() throws Exception {
+	  UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
+	  Node node = uiExplorer.getCurrentNode();
+	  List<Node> relations = new ArrayList<Node>() ;
+	  MultiLanguageService langService = getApplicationComponent(MultiLanguageService.class) ;
+	  List<String> langs = langService.getSupportedLanguages(node);
+	  for(String lang: langs) {
+		  Node lnode = langService.getLanguage(node, lang);
+		  if (lnode!=null) {
+			  relations.add(lnode) ;
+		  }
+	  }
+	  return relations ;
   }
   
   public boolean isPreferenceNode(Node node) {
