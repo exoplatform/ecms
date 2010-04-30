@@ -29,18 +29,20 @@ import javax.jcr.Session;
 import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.nodetype.ConstraintViolationException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
+import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -54,7 +56,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
@@ -96,6 +97,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
   final static public String FIELD_PATH = "pathNode";
   final static public String FIELD_SYMLINK = "fieldPathNode";
   final static public String POPUP_SYMLINK = "UIPopupSymLink";
+  private boolean localizationMode = false;
   
   public UISymLinkForm() throws Exception {
   }
@@ -110,7 +112,11 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
     uiFormMultiValue.setEditable(false);
     uiFormMultiValue.setType(UIFormStringInput.class);
     addUIFormInput(uiFormMultiValue);
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class));
+    if (!localizationMode) addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class));
+  }
+  
+  public void enableLocalizationMode() {
+	  this.localizationMode = true;
   }
     
   public void doSelect(String selectField, Object value) throws Exception {
@@ -125,7 +131,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       symLinkName = symLinkName.substring(0, squareBracketIndex);
     if (!(symLinkName.indexOf(".lnk") > -1)) symLinkName += ".lnk";
     symLinkName = Text.unescapeIllegalJcrChars(symLinkName);
-    getUIStringInput(FIELD_NAME).setValue(symLinkName);
+    if (!localizationMode) getUIStringInput(FIELD_NAME).setValue(symLinkName);
     UISymLinkManager uiSymLinkManager = getParent();
     uiSymLinkManager.removeChildById(POPUP_SYMLINK);
   }
@@ -135,7 +141,8 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       UISymLinkForm uiSymLinkForm = event.getSource();
       UIJCRExplorer uiExplorer = uiSymLinkForm.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiSymLinkForm.getAncestorOfType(UIApplication.class);
-      String symLinkName = uiSymLinkForm.getUIStringInput(FIELD_NAME).getValue();
+      String symLinkName = "";
+      if (!uiSymLinkForm.localizationMode) symLinkName = uiSymLinkForm.getUIStringInput(FIELD_NAME).getValue();
       
       String pathNode = "";
       UIFormMultiValueInputSet uiSet = uiSymLinkForm.getChild(UIFormMultiValueInputSet.class);
@@ -153,7 +160,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      if(symLinkName == null || symLinkName.length() ==0) {
+      if(!uiSymLinkForm.localizationMode && (symLinkName == null || symLinkName.length() ==0)) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.name-invalid", null)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -206,8 +213,13 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       }
       try {        
         Node targetNode = (Node) nodeFinder.getItem(uiExplorer.getRepositoryName(), workspaceName, pathNode);
-        LinkManager linkManager = uiSymLinkForm.getApplicationComponent(LinkManager.class);        
-        linkManager.createLink(node, Utils.EXO_SYMLINK, targetNode, symLinkName);
+        if (uiSymLinkForm.localizationMode) {
+            MultiLanguageService langService = uiSymLinkForm.getApplicationComponent(MultiLanguageService.class);        
+            langService.addLinkedLanguage(node, targetNode);
+        } else {
+        	LinkManager linkManager = uiSymLinkForm.getApplicationComponent(LinkManager.class);        
+        	linkManager.createLink(node, Utils.EXO_SYMLINK, targetNode, symLinkName);
+        }
         uiExplorer.updateAjax(event);
       } catch (AccessControlException ace) {        
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.repository-exception", null, ApplicationMessage.WARNING));

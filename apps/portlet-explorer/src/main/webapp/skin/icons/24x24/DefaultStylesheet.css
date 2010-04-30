@@ -229,6 +229,12 @@
   background: url('DefaultSkin/AddSymLink.gif') no-repeat right center; /* orientation=rt */
 }
 
+.AddLocalizationLinkIcon {
+  height: 24px;
+  background: url('DefaultSkin/AddLocalizationLink.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddLocalizationLink.gif') no-repeat right center; /* orientation=rt */
+}
+
 .OverloadThumbnailIcon {
 	height: 24px;
   background: url('DefaultSkin/OverloadThumbnailIcon.gif') no-repeat left center; /* orientation=lt */

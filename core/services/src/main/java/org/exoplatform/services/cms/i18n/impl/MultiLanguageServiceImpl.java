@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
@@ -38,7 +39,6 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.commons.utils.ISO8601;
-import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
@@ -420,6 +420,27 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
     if(isDefault && languagesNode.hasNode(language)) languagesNode.getNode(language).remove() ;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public void addLinkedLanguage(Node node, Node translationNode) throws Exception {
+//  	String LANGUAGES = "languages"; 
+	Node languagesNode;
+	if(node.hasNode(LANGUAGES)) languagesNode = node.getNode(LANGUAGES) ;
+    else  {
+      languagesNode = node.addNode(LANGUAGES, "nt:unstructured") ;
+      if(languagesNode.canAddMixin("exo:hiddenable"))
+        languagesNode.addMixin("exo:hiddenable");
+    }
+	String lang = translationNode.getProperty("exo:language").getString();
+	if (languagesNode.hasNode(lang)) {
+		throw new ItemExistsException();
+	}
+	LinkManager linkManager = (LinkManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LinkManager.class);
+	linkManager.createLink(languagesNode, "exo:symlink", translationNode, lang);
+  }
+  
+  
   /**
    * {@inheritDoc}
    */

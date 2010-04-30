@@ -102,6 +102,14 @@
 						</object>
 					</object-param>
 					<object-param>
+						<name>AddLocalizationLink</name>
+						<object type="org.exoplatform.webui.ext.UIExtension">
+							<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+							<field name="name"><string>AddLocalizationLink</string></field>
+							<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.AddLocalizationLinkActionComponent</string></field>
+						</object>
+					</object-param>
+					<object-param>
 						<name>ViewReferences</name>
 						<object type="org.exoplatform.webui.ext.UIExtension">
 							<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>

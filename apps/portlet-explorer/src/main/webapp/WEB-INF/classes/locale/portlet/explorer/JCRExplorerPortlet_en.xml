@@ -2345,6 +2345,7 @@
   <UIActionBar>
     <tooltip>
       <AddSymLink>Add Sym Link</AddSymLink>
+      <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
   
@@ -2389,6 +2390,7 @@
   <ECMContextMenu>
     <event>
       <AddSymLink>Add Sym Link</AddSymLink>
+      <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </event>
   </ECMContextMenu>
   

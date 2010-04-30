@@ -39,6 +39,11 @@ public class UISymLinkManager extends UIContainer implements UIPopupComponent {
     addChild(UISymLinkContainer.class, null, null).setRendered(false);
   }
   
+  public void enableLocalizationMode() {
+	  UISymLinkForm linkForm = this.getChild(UISymLinkForm.class);
+	  linkForm.enableLocalizationMode();
+  }
+  
   public UIPopupWindow initPopupTaxonomy(String id) throws Exception {
     UIPopupWindow uiPopup = getChildById(id);
     if (uiPopup == null) {

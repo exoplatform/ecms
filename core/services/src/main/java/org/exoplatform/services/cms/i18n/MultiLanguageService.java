@@ -108,7 +108,16 @@ public interface MultiLanguageService {
    * @throws Exception
    */
   public void addFileLanguage(Node node, String language, Map mappings, boolean isDefault) throws Exception ;
+
   
+  /**
+   * Add newLanguageNode node with a symlink, based on exo:language targetNode property
+   * @param node              current node
+   * @param translationNode   target translation node
+   * @throws Exception
+   */
+  public void addLinkedLanguage(Node node, Node translationNode) throws Exception ;
+
   /**
    * Add new language node as a folder
    * @param node
@@ -135,5 +144,6 @@ public interface MultiLanguageService {
    *         null if not exist
    */
   public Node getLanguage(Node node, String language) throws Exception ;
+  
   
 }
