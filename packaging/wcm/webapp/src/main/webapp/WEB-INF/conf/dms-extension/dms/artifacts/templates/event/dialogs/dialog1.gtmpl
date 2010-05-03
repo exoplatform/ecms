@@ -81,7 +81,7 @@
         <td class="FieldLabel">URL</td>
         <td class="FieldComponent">
         <%
-          String[] fieldUrl = ["jcrPath=/node/exo:url", "validate=empty"] ;
+          String[] fieldUrl = ["jcrPath=/node/exo:url"] ;
           uicomponent.addTextField("url", fieldUrl) ;
         %>
         </td>
