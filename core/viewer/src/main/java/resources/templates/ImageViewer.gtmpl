@@ -5,6 +5,7 @@
 	import javax.jcr.NodeIterator;
 	import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;
+  import org.exoplatform.container.PortalContainer;
 
 	UIComponent uiParent = uicomponent.getParent();
 	
@@ -44,12 +45,8 @@
   }
   
   String rndString = String.valueOf(new Date().getTime());
-//  String imgSrc = "";
-//  if(isVersionable(originalNode)) {
-	String imgSrc = uiParent.getDownloadLink(currentNode) ;
-//	} else {
-//	  imgSrc = "/" + uiParent.getPortalName() + "/rest/jcr/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + currentNode.getPath();
-//	} 
+  def binarySrc = "/" + PortalContainer.getCurrentPortalContainerName() + "/" + PortalContainer.getCurrentRestContextName() + "/jcr/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + currentNode.getPath();
+
 	def dcTitle = "";
 	if(contentNode.hasProperty("dc:title")) {
     StringBuilder sB = new StringBuilder();
@@ -65,14 +62,5 @@
   def rqcontext = _ctx.getRequestContext() ;
   rqcontext.getJavascriptManager().addOnLoadJavascript('initLightbox');
 %>
-<div class="NavigationContainer">       
-  <div class="TopTitle"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></div>
-	<div class="Content">
-  	<div class="TextContent">
-		  <div class="ContentDetail">
-			  <a href="$imgSrc" rel="lightbox" title="$dcTitle"><image src="$imgSrc"/></a>              
-			</div>
-		</div>
-	</div>
-</div>
-		
+
+  <a href="$binarySrc" rel="lightbox" title="$dcTitle"><image src="$binarySrc" width="610"/></a>              

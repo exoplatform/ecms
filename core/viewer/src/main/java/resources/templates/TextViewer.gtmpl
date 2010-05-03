@@ -95,24 +95,17 @@
 	  </div>  
 	</div>  
 <%} else {%>
-  <div class="NavigationContainer">       
-    <div class="TopTitle">$originalNode.name</div>
-    <div class="Content">
-    	<div class="TextContent">
-	      <%        
-	        if(!unsupportMimeTypeText.contains(mimeType)&& mimeType.startsWith("text") && contentNode.hasProperty("jcr:data")) {
-	          if(getFileSize(contentNode) < 1024) {
-	            println "<pre>" + uiParent.encodeHTML(contentNode.getProperty("jcr:data").getString()) + "</pre>"; 
-	          } else {
-	       %>
-	            <div style="text-align:center; font-style:italic">
-						    <%=_ctx.appRes("File.view.label.file-size-too-big")%>
-						  </div>
-	       <%
-	          }
-	        } 
-	       %>
-	     </div>
-    </div>  
-  </div> 
+  <%        
+    if(!unsupportMimeTypeText.contains(mimeType)&& mimeType.startsWith("text") && contentNode.hasProperty("jcr:data")) {
+      if(getFileSize(contentNode) < 1024) {
+        println "<pre>" + uiParent.encodeHTML(contentNode.getProperty("jcr:data").getString()) + "</pre>"; 
+      } else {
+   %>
+        <div style="text-align:center; font-style:italic">
+			    <%=_ctx.appRes("File.view.label.file-size-too-big")%>
+			  </div>
+   <%
+      }
+    } 
+   %>
 <%}%>

@@ -784,6 +784,7 @@
 													<value><string>text/html</string></value>
 													<value><string>text/plain</string></value>
 													<value><string>text/xml</string></value>
+													<value><string>application/rss+xml</string></value>
 												</collection>
 											</field>
 										</object>
@@ -829,10 +830,81 @@
 										<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
 											<field name="mimeTypes">
 												<collection type="java.util.ArrayList">
-													<value><string>audio/mp3</string></value>
-													<value><string>video/quicktime</string></value>
 													<value><string>video/x-flv</string></value>
-													<value><string>video/mp4</string></value>
+													<value><string>audio/mp3</string></value>
+													<!-- <string>video/quicktime</string></value -->
+												</collection>
+											</field>
+										</object>
+									</value>
+								</collection>
+							</field>
+						</object>
+					</object-param>
+					<object-param>
+						<name>H264Video</name>
+						<object type="org.exoplatform.webui.ext.UIExtension">
+							<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
+							<field name="rank"><int>100</int></field>
+							<field name="name"><string>H264Video</string></field>
+							<field name="category"><string>FileViewer</string></field>
+							<field name="component"><string>org.exoplatform.ecm.webui.viewer.H264VideoViewer</string></field>
+							<field name="extendedFilters">
+								<collection type="java.util.ArrayList">
+									<value>
+										<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+											<field name="mimeTypes">
+												<collection type="java.util.ArrayList">
+                          <value><string>video/mp4</string></value>
+                          <value><string>video/quicktime</string></value>
+                          <value><string>video/ogg</string></value>
+												</collection>
+											</field>
+										</object>
+									</value>
+								</collection>
+							</field>
+						</object>
+					</object-param>
+					<object-param>
+						<name>MpegVideo</name>
+						<object type="org.exoplatform.webui.ext.UIExtension">
+							<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
+							<field name="rank"><int>100</int></field>
+							<field name="name"><string>MpegVideo</string></field>
+							<field name="category"><string>FileViewer</string></field>
+							<field name="component"><string>org.exoplatform.ecm.webui.viewer.MpegVideoViewer</string></field>
+							<field name="extendedFilters">
+								<collection type="java.util.ArrayList">
+									<value>
+										<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+											<field name="mimeTypes">
+												<collection type="java.util.ArrayList">
+                          <value><string>video/mpg</string></value>
+                          <value><string>video/mpeg</string></value>
+												</collection>
+											</field>
+										</object>
+									</value>
+								</collection>
+							</field>
+						</object>
+					</object-param>
+					<object-param>
+						<name>Flash</name>
+						<object type="org.exoplatform.webui.ext.UIExtension">
+							<field name="type"><string>org.exoplatform.ecm.dms.FileViewer</string></field>
+							<field name="rank"><int>100</int></field>
+							<field name="name"><string>Flash</string></field>
+							<field name="category"><string>FileViewer</string></field>
+							<field name="component"><string>org.exoplatform.ecm.webui.viewer.FlashViewer</string></field>
+							<field name="extendedFilters">
+								<collection type="java.util.ArrayList">
+									<value>
+										<object type="org.exoplatform.webui.ext.filter.impl.FileFilter">
+											<field name="mimeTypes">
+												<collection type="java.util.ArrayList">
+                          <value><string>application/x-shockwave-flash</string></value>
 												</collection>
 											</field>
 										</object>

@@ -49,89 +49,81 @@
 %>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.4.min.js"></script>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer.playlist-3.0.7.js"></script>
-<div class="NavigationContainer">       
-  <div class="TopTitle">$title</div>
-  <div class="Content">
-    <div class="TextContent">
-      <div class="ContentDetail">
-        <script>
-        <% print "\$" %> (function() { 
-          // install flowplayer into container 
-        	flowplayer("player", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, { 
-          // fullscreen button not needed here 
-            plugins: { 
-              controls: { 
-                url: '/ecmexplorer/javascript/eXo/ecm/flowplayer.controls-tube-3.1.5.swf',
-                fullscreen: false, 
-                height: 30,
-                // setup auto hide 
-                autoHide: 'always',
-                playlist: true
-              } 
-            }, 
-         
-            playlist: [ ${url} ],
-            canvas: { 
-              backgroundImage: 'url(/eXoDMSResources/skin/images/file/MP3Player.jpg)' 
-            }, 
-            clip: { 
-                autoPlay: false, 
-                autoBuffering: true,
-                // optional: when playback starts close the first audio playback 
-                onBeforeBegin: function() { 
-                  flowplayer("player").close(); 
-                } 
-            }
-          });
-        /*
-          here comes the magic plugin. It uses first div.clips element as the 
-          root for as playlist entries. loop parameter makes clips play
-          from the beginning to the end.
-        */
-        <% 
-          if (size > 1) {
-        %>
-            flowplayer("player").playlist("div.petrol", {loop:true});
-        <%
-          }
-        %>
+  <div class="ContentDetail">
+    <script>
+    <% print "\$" %> (function() { 
+      // install flowplayer into container 
+    	flowplayer("player", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, { 
+      // fullscreen button not needed here 
+        plugins: { 
+          controls: { 
+            url: '/ecmexplorer/javascript/eXo/ecm/flowplayer.controls-tube-3.1.5.swf',
+            fullscreen: false, 
+            height: 30,
+            // setup auto hide 
+            autoHide: 'always',
+            playlist: true
+          } 
+        }, 
+     
+        playlist: [ ${url} ],
+        canvas: { 
+          backgroundImage: 'url(/eXoDMSResources/skin/images/file/MP3Player.jpg)' 
+        }, 
+        clip: { 
+            autoPlay: false, 
+            autoBuffering: true,
+            // optional: when playback starts close the first audio playback 
+            onBeforeBegin: function() { 
+              flowplayer("player").close(); 
+            } 
+        }
       });
-      </script>
-      <% 
-        if (size > 1) {
-      %>
-      <div class="clips petrol ListPlayer" style="width: 271px;">
-      <!-- single playlist entry -->
-      <% 
-        def name = "";
-        for(int i = 0; i < links.size(); i++) {
-            link = links.get(i);
-            name = presentNodes.get(i).getName();
-     %>         
-          <a href="${link}" class="first">
-            ${name}
-          </a>
+    /*
+      here comes the magic plugin. It uses first div.clips element as the 
+      root for as playlist entries. loop parameter makes clips play
+      from the beginning to the end.
+    */
+    <% 
+      if (size > 1) {
+    %>
+        flowplayer("player").playlist("div.petrol", {loop:true});
     <%
-      } 
-     %>
-    </div>
-    <%
-      } 
-     %>
-     <%
-       def style = "float:none; margin:auto";
-       if (size > 1) {
-         style = "";
-       }
-     %>
-    <div id="player" class="PlayerContent" style="$style ; z-index:0;">
-    </div>    
-      <!-- let rest of the page float normally -->
-      <br clear="all"/>
-      </div>
-    </div>
-  </div>
+      }
+    %>
+  });
+  </script>
+  <% 
+    if (size > 1) {
+  %>
+  <div class="clips petrol ListPlayer" style="width: 271px;">
+  <!-- single playlist entry -->
+  <% 
+    def name = "";
+    for(int i = 0; i < links.size(); i++) {
+        link = links.get(i);
+        name = presentNodes.get(i).getName();
+ %>         
+      <a href="${link}" class="first">
+        ${name}
+      </a>
+<%
+  } 
+ %>
 </div>
+<%
+  } 
+ %>
+ <%
+   def style = "float:none; margin:auto";
+   if (size > 1) {
+     style = "";
+   }
+ %>
+<div id="player" class="PlayerContent" style="$style ; z-index:0;">
+</div>    
+<!-- let rest of the page float normally -->
+<br clear="all"/>
 <style>
 .NavigationContainer {
   padding-bottom: 5px;

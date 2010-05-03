@@ -67,7 +67,7 @@
       </preference>
       <preference>
         <name>uploadFileSizeLimitMB</name>     
-        <value>30</value>        
+        <value>150</value>        
         <read-only>false</read-only>
       </preference>
       <preference>
