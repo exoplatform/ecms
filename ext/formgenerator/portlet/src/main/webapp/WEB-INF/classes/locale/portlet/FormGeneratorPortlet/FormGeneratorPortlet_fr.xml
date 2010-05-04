@@ -8,7 +8,7 @@
       <UIFormGeneratorJsonObjectStringInput></UIFormGeneratorJsonObjectStringInput>
       <UIFormGeneratorDescriptionFormWYSIWYGInput>Description</UIFormGeneratorDescriptionFormWYSIWYGInput>
       <UIFormGeneratorIconFormUploadInput>Icon</UIFormGeneratorIconFormUploadInput>
-      <UIFormGeneratorDnDTab>Formulaire de constructeur</UIFormGeneratorDnDTab>
+      <UIFormGeneratorDnDTab>Constructeur de formulaire</UIFormGeneratorDnDTab>
       <UIFormGeneratorOptionsTab>Options</UIFormGeneratorOptionsTab>
       <UIFormGeneratorVoteFormCheckboxInput>Permettez-vote</UIFormGeneratorVoteFormCheckboxInput>
       <UIFormGeneratorCommentFormCheckboxInput>Laisser un commentaire</UIFormGeneratorCommentFormCheckboxInput>
