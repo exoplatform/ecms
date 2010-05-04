@@ -102,6 +102,9 @@ public class UICLVPortlet extends UIPortletApplication {
   /** The Constant ORDER_BY_DATE_PUBLISHED. */
   public static final String ORDER_BY_DATE_PUBLISHED            = "OrderByDatePublished";
   
+  /** The Constant ORDER_BY_DATE_START_EVENT. */
+  public static final String ORDER_BY_DATE_START_EVENT            = "OrderByDateStartEvent";
+  
   /** The Constant PREFERENCE_ORDER_TYPE. */
   public static final String PREFERENCE_ORDER_TYPE              = "orderType";
   

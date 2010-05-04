@@ -26,9 +26,10 @@
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Title</exo:title>
-        <exo:dateCreated>Date created</exo:dateCreated>
-        <exo:dateModified>Date modified</exo:dateModified>
-        <publication:liveDate>Date published</publication:liveDate>
+        <exo:dateCreated>Creation date</exo:dateCreated>
+        <exo:dateModified>Modification date</exo:dateModified>
+        <publication:liveDate>Publication date</publication:liveDate>
+        <exo:startEvent>Event date</exo:startEvent>
       </option>
       <DisplaySettingBlock>Display settings</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>

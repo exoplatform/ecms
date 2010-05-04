@@ -18,7 +18,11 @@
       <ContentSelectionBlock>Chọn nội dung</ContentSelectionBlock>
       <OrderBy>Sắp xếp theo</OrderBy>
       <option>
+        <exo:title>Tiêu đề</exo:title>
         <exo:dateCreated>Ngày tạo</exo:dateCreated>
+        <exo:dateModified>Ngày sửa</exo:dateModified>
+        <publication:liveDate>Ngày xuất bản</publication:liveDate>
+        <exo:startEvent>Event date</exo:startEvent>
       </option>
       <DisplaySettingBlock>Lựa chọn hiển thị</DisplaySettingBlock>
       <Header>Tiêu đề portlet</Header>

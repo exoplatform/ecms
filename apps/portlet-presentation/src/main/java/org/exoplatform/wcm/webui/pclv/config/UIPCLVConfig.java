@@ -29,9 +29,11 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.category.UICategoryNavigationConstant;
+import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 import org.exoplatform.wcm.webui.pclv.UIPCLVPortlet;
 import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
 import org.exoplatform.wcm.webui.validator.ZeroNumberValidator;
@@ -185,7 +187,11 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     }
 
     List<SelectItemOption<String>> orderByOptions = new ArrayList<SelectItemOption<String>>();
-    orderByOptions.add(new SelectItemOption<String>(ORDER_BY_DATE_CREATED, "exo:dateCreated"));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_TITLE, NodetypeConstant.EXO_TITLE));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_CREATED, NodetypeConstant.EXO_DATE_CREATED));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_MODIFIED, NodetypeConstant.EXO_DATE_MODIFIED));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_PUBLISHED,"publication:liveDate"));    
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_START_EVENT,"exo:startEvent"));    
     UIFormSelectBox orderBySelectBox = new UIFormSelectBox(ORDER_BY, ORDER_BY, orderByOptions);
     String orderByPref = portletPreferences.getValue(UIPCLVPortlet.ORDER_BY, null);
     orderBySelectBox.setValue(orderByPref);

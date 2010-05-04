@@ -18,7 +18,11 @@
       <ContentSelectionBlock>Contents selection</ContentSelectionBlock>
       <OrderBy>Order by</OrderBy>
       <option>
-        <exo:dateCreated>Date created</exo:dateCreated>
+        <exo:title>Title</exo:title>
+        <exo:dateCreated>Creation date</exo:dateCreated>
+        <exo:dateModified>Modification date</exo:dateModified>
+        <publication:liveDate>Publication date</publication:liveDate>
+        <exo:startEvent>Event date</exo:startEvent>
       </option>
       <DisplaySettingBlock>Display setting</DisplaySettingBlock>
       <Header>Header</Header>
