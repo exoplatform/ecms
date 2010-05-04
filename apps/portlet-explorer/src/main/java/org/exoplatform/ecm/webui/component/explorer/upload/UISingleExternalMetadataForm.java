@@ -66,7 +66,7 @@ public class UISingleExternalMetadataForm extends UIForm {
     UIFormCheckBoxInput<String> uiCheckBox ;
     for(NodeType nodeType : metadataService.getAllMetadatasNodeType(repository)) {
       uiCheckBox = new UIFormCheckBoxInput<String>(nodeType.getName(), nodeType.getName(), "") ;
-      if(isExternalUse(nodeType)) {
+      if(!isInternalUse(nodeType)) {
         if(hasExternalMetadata(nodeType.getName())) {
           uiCheckBox.setChecked(true) ;
           uiCheckBox.setEnable(false) ;
@@ -79,7 +79,7 @@ public class UISingleExternalMetadataForm extends UIForm {
     }
   }
   
-  private boolean isExternalUse(NodeType nodeType) throws Exception{
+  private boolean isInternalUse(NodeType nodeType) throws Exception{
     for(PropertyDefinition pro : nodeType.getPropertyDefinitions()) {
       if(pro.getName().equals("exo:internalUse")) {
         return pro.getDefaultValues()[0].getBoolean();
@@ -110,7 +110,7 @@ public class UISingleExternalMetadataForm extends UIForm {
     try {
       return res.getString("UIExternalMetadataForm.label." + id) ;
     } catch (MissingResourceException ex) {
-      return id ;
+      return '_' + id ;
     }
   }
   
@@ -145,7 +145,7 @@ public class UISingleExternalMetadataForm extends UIForm {
           }
           uploadedNode.addMixin(metadataName) ;
           uploadedNode.save() ;
-          UIUploadContent uiUploadContent = uiContainer.getChild(UIUploadContent.class) ;
+          UISingleUploadContent uiUploadContent = uiContainer.getChild(UISingleUploadContent.class);
           uiUploadContent.externalList_.add(metadataName) ;
         }
       }
@@ -153,7 +153,7 @@ public class UISingleExternalMetadataForm extends UIForm {
       UIPopupWindow uiPopup = uiUploadManager.getChildById(UIUploadManager.EXTARNAL_METADATA_POPUP) ;
       uiPopup.setShow(true);
       uiPopup.setRendered(false) ;
-      uiContainer.setRenderedChild(UIUploadContent.class) ;
+      uiContainer.setRenderedChild(UISingleUploadContent.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager) ;
     }
   }
