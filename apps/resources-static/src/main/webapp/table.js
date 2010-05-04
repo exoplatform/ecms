@@ -47,14 +47,14 @@ UITable.prototype.generateInputs = function() {
       if (this.types!=undefined) {
     	  switch (this.types[j-1]) {
     	  case "TEXT":
-    		  out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();" type="text" value="'+s+'"></input></td>';
+    		  out += '<td class="FieldComponent"><in'+'put id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();" type="text" value="'+s+'"></in'+'put></td>';
     		  break;
     	  case "TEXTAREA":
-    		  out += '<td class="FieldComponent"><textarea id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();">'+s+'</textarea></td>';
+    		  out += '<td class="FieldComponent"><text'+'area id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();">'+s+'</tex'+'tarea></td>';
     		  break;
     	  }	  
       } else {
-        out += '<td class="FieldComponent"><input id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();" type="text" value="'+s+'"></input></td>';
+        out += '<td class="FieldComponent"><in'+'put id="'+this.id+'-'+i+'-'+j+'" onchange="javascript:eXo.ecm.UITable.update();" type="text" value="'+s+'"></in'+'put></td>';
       }
       if (this.newLine) {
     	  out += '</tr><tr>';
