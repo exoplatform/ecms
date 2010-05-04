@@ -97,7 +97,7 @@ UITable.prototype.update = function() {
       var str = '';
       if (document.getElementById(s)!=undefined) {
     	  str = document.getElementById(s).value;
-    	  str = str.replace(/\n/gi, "<br/>"));
+    	  str = str.replace(/\n/gi, "<br/>");
       }
       if (j!=1) out += ',';
       out += '"col'+j+'":"'+str+'"';
