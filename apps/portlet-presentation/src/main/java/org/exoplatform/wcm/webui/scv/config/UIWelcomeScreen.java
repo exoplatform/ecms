@@ -146,6 +146,9 @@ public class UIWelcomeScreen extends UIForm {
         if (applicationObject instanceof Container) continue;
         Application application = Application.class.cast(applicationObject);
         String applicationId = application.getId();
+        if(applicationId == null) {
+        	continue;
+        }
         PortletPreferences portletPreferences = dataStorage.getPortletPreferences(applicationId);
         if (portletPreferences == null) continue;
         
