@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/static/ckeditor/wcmeditor.js"></script>
 <div class="UIForm FormLayout"> 
 	<% uiform.begin() %>
   <div class="HorizontalLayout">	  
@@ -48,7 +49,7 @@
       </tr>  
 
       <tr>                        
-        <td class="FieldLabel">Show Google Map</td>
+        <td class="FieldLabel">Google Maps ?</td>
         <td class="FieldComponent"> 
         <% 
           String[] fieldMaps = ["jcrPath=/node/exo:maps", "defaultValues=false"];         
@@ -94,7 +95,7 @@
 			    <div class="UIFCKEditor">					
 						<%
 			        String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=basic", ""] ;
-			        uicomponent.addWYSIWYGField("summary", fieldSummary) ;
+			        uicomponent.addTextAreaField("summary", fieldSummary) ;
 		      	%>
 		      </div>
 				</td>
@@ -106,7 +107,7 @@
 			    <div class="UIFCKEditor">
 						<%
 			        String[] fieldContent = ["jcrPath=/node/exo:text", "options=default", ""] ;
-			        uicomponent.addWYSIWYGField("content", fieldContent) ;        
+			        uicomponent.addTextAreaField("content", fieldContent) ;        
 			      %>
 					</div>
 				</td>
@@ -118,3 +119,9 @@
   </div>
   <%uiform.end()%>
 </div>
+
+<script type="text/javascript">
+  // With Ajax Loading, we must use setTimeout to initialize for Chrome and Safari compliance
+  setTimeout( "CKEDITOR.replace( 'summary' ,{toolbar : 'Basic'})", 100) ;
+  setTimeout( "CKEDITOR.replace( 'content' ,{toolbar : 'Basic'})", 100) ;
+</script>
