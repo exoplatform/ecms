@@ -25,6 +25,9 @@ function getModule(params) {
   module.web.eXoWorkflowResources = 
     new Project("org.exoplatform.ecms", "exo-ecms-ext-workflow-resources", "war", module.version) ;  
   module.web.eXoWorkflowResources.deployName = "eXoWorkflowResources" ;
+
+  module.web.eXoStaticResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-static", "war", module.version);
+  module.web.eXoStaticResources.deployName = "static";	
   
 	module.extension = {};
   module.extension.webapp = new Project("org.exoplatform.ecms", "exo-ecms-packaging-workflow-webapp", "war", module.version).
