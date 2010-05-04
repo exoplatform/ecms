@@ -101,7 +101,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     try {
       return res.getString("UIDriveForm.label." + id);
     } catch (MissingResourceException ex) {
-      return id;
+      return id + " ";
     }    
   }
 
