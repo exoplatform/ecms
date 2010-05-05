@@ -38,6 +38,12 @@ function getModule(params) {
 
    module.server.tomcat = {};
    module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wkf-wcm-server-tomcat", "jar", module.version);
+	 
+	 module.server.jboss = {};
+   module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wkf-wcm-server-jboss", "jar", module.version);
+	 
+	 module.server.jbossear = {};
+   module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wkf-wcm-server-jboss-ear", "jar", module.version);
    
   return module;
 }

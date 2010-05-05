@@ -59,8 +59,8 @@ function getProduct(version) {
   product.addDependencies(wcm.demo.rest);
   
   product.addServerPatch("tomcat", wcm.server.tomcat.patch) ;
-  product.addServerPatch("jboss",  portal.server.jboss.patch) ;
-  product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
+  //product.addServerPatch("jboss",  portal.server.jboss.patch) ;
+  //product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
 
   product.module = wcm ;
   product.dependencyModule = [kernel, core, ws, eXoJcr, portal, dms];

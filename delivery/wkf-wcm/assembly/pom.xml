@@ -319,6 +319,7 @@
                     <argument>exobuild</argument>
                     <argument>--product=wcm</argument>
                     <argument>--deploy=jbossear</argument>
+										<argument>--enable-workflow=${workflowEngine}</argument>
                   </arguments>
                 </configuration>
                 <goals>
