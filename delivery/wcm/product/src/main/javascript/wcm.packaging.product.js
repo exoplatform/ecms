@@ -51,17 +51,20 @@ function getProduct(version) {
   product.addDependencies(wcm.portlet.formgenerator);
   product.addDependencies(wcm.web.eXoWCMResources) ;
   product.addDependencies(wcm.web.eXoStaticResources) ;
-	if(enableWorkflow) {
-		var workflow = Module.GetModule("workflow", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal});
-		product.addDependencies(workflow.web.eXoWorkflowResources);
-	}
   product.addDependencies(wcm.demo.portal);
   product.addDependencies(wcm.demo.rest);
   
   product.addServerPatch("tomcat", wcm.server.tomcat.patch) ;
-  //product.addServerPatch("jboss",  portal.server.jboss.patch) ;
-  //product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
+  product.addServerPatch("jboss",  portal.server.jboss.patch) ;
+  product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
 
+	if(enableWorkflow) {
+		var workflow = Module.GetModule("workflow", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal});
+		product.addDependencies(workflow.web.eXoWorkflowResources);
+		product.addServerPatch("jbossear", new Project("org.exoplatform.ecms", "exo-ecms-delivery-wkf-wcm-server-jboss-ear", "jar", product.version));
+    product.addServerPatch("jboss", new Project("org.exoplatform.ecms", "exo-ecms-delivery-wkf-wcm-server-jboss", "jar", product.version));
+	}	
+	
   product.module = wcm ;
   product.dependencyModule = [kernel, core, ws, eXoJcr, portal, dms];
   // Use new version of commons-logging override Product.preDeploy()
