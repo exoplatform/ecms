@@ -39,15 +39,6 @@
   </filter>
   
   <filter>
-    <filter-name>AnonymousUserContextRedirectionFilter</filter-name>
-    <filter-class>org.exoplatform.ws.frameworks.servlet.AnonymousUserContextRedirectionFilter</filter-class>
-		<init-param>
-      <param-name>context-name</param-name>
-      <param-value>/rest-ecmdemo/private</param-value>
-    </init-param>
-  </filter>
-
-  <filter>
     <filter-name>RestEncodingFilter</filter-name>
     <filter-class>org.exoplatform.services.rest.servlet.RestEncodingFilter</filter-class>
     <init-param>
@@ -109,11 +100,6 @@
   <filter-mapping>
     <filter-name>ThreadLocalSessionProviderInitializedFilter</filter-name>
     <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  
-	<filter-mapping>
-    <filter-name>AnonymousUserContextRedirectionFilter</filter-name>
-    <url-pattern>/rest-ecmdemo/private/*</url-pattern>
   </filter-mapping>
   
   <filter-mapping>
@@ -225,6 +211,10 @@
   <servlet-mapping>
     <servlet-name>RestServer</servlet-name>
     <url-pattern>/rest-ecmdemo/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RestServer</servlet-name>
+    <url-pattern>/rest-ecmdemo/private/*</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
