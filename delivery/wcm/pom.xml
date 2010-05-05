@@ -21,6 +21,8 @@
   <modules>
     <module>server-jonas</module>
     <module>server-tomcat</module>
+    <module>server-jboss-ear</module>
+    <module>server-jboss</module>
     <module>module</module>
     <module>product</module>
   </modules>

@@ -70,6 +70,12 @@ function getModule(params) {
   module.server = {};
   module.server.tomcat = {};
   module.server.tomcat.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-tomcat", "jar", module.version);
+	
+  module.server.jbossear = {};
+  module.server.jbossear.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-jboss-ear", "jar", module.version);
+
+  module.server.jboss = {};
+  module.server.jboss.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-jboss", "jar", module.version);	
    
   return module;
 }

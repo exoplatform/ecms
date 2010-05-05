@@ -58,11 +58,12 @@ function getProduct(version) {
   product.addServerPatch("jboss",  portal.server.jboss.patch) ;
   product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
 
+	product.addServerPatch("jboss",  wcm.server.jboss.patch) ;
+  product.addServerPatch("jbossear", wcm.server.jbossear.patch) ;  
+	
 	if(enableWorkflow) {
 		var workflow = Module.GetModule("workflow", {kernel : kernel, core : core, ws : ws, eXoJcr : eXoJcr, portal : portal});
 		product.addDependencies(workflow.web.eXoWorkflowResources);
-		product.addServerPatch("jbossear", new Project("org.exoplatform.ecms", "exo-ecms-delivery-wkf-wcm-server-jboss-ear", "jar", product.version));
-    product.addServerPatch("jboss", new Project("org.exoplatform.ecms", "exo-ecms-delivery-wkf-wcm-server-jboss", "jar", product.version));
 	}	
 	
   product.module = wcm ;
