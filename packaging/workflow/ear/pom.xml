@@ -47,7 +47,7 @@
               <groupId>${project.groupId}</groupId>
               <artifactId>exo-ecms-packaging-workflow-webapp</artifactId>
               <contextRoot>workflow</contextRoot>
-              <bundleFileName>workflow.war</bundleFileName>
+              <bundleFileName>ecmworkflow-extension.war</bundleFileName>
             </webModule>
           </modules>
         </configuration>

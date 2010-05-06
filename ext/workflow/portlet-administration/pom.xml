@@ -27,6 +27,7 @@
       <groupId>org.jbpm.jbpm3</groupId>
   	  <artifactId>jbpm-jpdl</artifactId>
       <version>${org.jbpm.jbpm3}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
