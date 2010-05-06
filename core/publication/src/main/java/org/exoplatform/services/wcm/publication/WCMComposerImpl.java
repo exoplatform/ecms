@@ -224,19 +224,21 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 * @throws Exception the exception
 	 */
 	private Node getViewableContent(Node node, HashMap<String, String> filters) throws Exception {
-	  if (node.isNodeType("exo:taxonomyLink"))
-	     try {
-	       return node = linkManager.getTarget(node);
-	     }catch(AccessDeniedException ade) {
-	     return null;
-	   }
-	   String languageFilter = filters.get(FILTER_LANGUAGE);
-	   if (languageFilter!=null) {
+	    if (node.isNodeType("exo:taxonomyLink")) {
+	      try {
+	    	 node = linkManager.getTarget(node);
+	      }catch(AccessDeniedException ade) {	     
+	     	 return null;
+	      }
+	    }
+	   
+	    String languageFilter = filters.get(FILTER_LANGUAGE);
+	    if (languageFilter!=null) {
 		   Node lnode = multiLanguageService.getLanguage(node, languageFilter);
 		   if (lnode!=null) {
 			   node = lnode;
 		   }
-	   }
+	    }
 
 		HashMap<String, Object> context = new HashMap<String, Object>();
 		String mode = filters.get(FILTER_MODE);
