@@ -12,6 +12,12 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-content</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+		<dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-payraise</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
@@ -38,7 +44,7 @@
           </webResources>
         </configuration>          
       </plugin>
-      <!--<plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
@@ -51,6 +57,11 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-content</artifactId>
+                  <version>${project.version}</version>
+                </artifactItem>
+								<artifactItem>
                   <groupId>${project.groupId}</groupId>
                   <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-payraise</artifactId>
                   <version>${project.version}</version>
@@ -66,7 +77,7 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>-->
+      </plugin>
     </plugins>
   </build>
 </project>
