@@ -16,22 +16,52 @@
  */
 
 import java.util.Map;
-
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+import org.exoplatform.services.mail.MailService;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.cms.scripts.CmsScript;
+import org.exoplatform.services.jcr.RepositoryService;
 
 /*
-* Will need to get The MailService when it has been moved to exo-platform
-*/
-public class SendMailScript implements CmsScript {
-  
-  public SendMailScript() {
-  }
-  
-  public void execute(Object context) {
-    Map variables = (Map) context;       
 
-    //TODO Should send an email
-    println("Send message in SendMailScript to " + variables.get("exo:to"));
+* Will need to get The MailService when it has been moved to exo-platform
+
+*/
+
+public class SendMailScript implements CmsScript {
+  private RepositoryService repositoryService_;
+
+  public SendMailScript(RepositoryService repositoryService) {
+    repositoryService_ = repositoryService;
+  }
+
+  public void execute(Object context) {               
+     Map variables = (Map) context;                      
+     String to = variables.get("exo:to");     
+     String nodePath = (String) variables.get("nodePath");
+   
+     try {
+    	 String nodeName = nodePath.split("/")[nodePath.split("/").size() -1]
+       String subject = variables.get("actionName");              
+       String message = variables.get("exo:description");
+       MailService service = (MailService)PortalContainer.getComponent(MailService.class);
+       Session mailSession = service.getMailSession();
+       MimeMessage msg = new MimeMessage(mailSession);
+       msg.setFrom(new InternetAddress("alerte@secours-catholique.org"));
+       msg.setRecipient(RecipientType.TO, new InternetAddress(to));
+       msg.setSubject(subject);
+       msg.setContent(message, "text/html ; charset=ISO-8859-1");
+       service.sendMessage(msg);
+       println("Send message in SendMailScript from " + msg.getFrom() + "to " + variables.get("exo:to"));
+     } catch (Exception e) {
+         if (session != null) {
+       		 session.logout();
+         }
+         e.printStackTrace();
+     }
   }
 
   public void setParams(String[] params) {}
