@@ -71,7 +71,7 @@
     <preparationGoals>clean install</preparationGoals>
     <arguments>-Dgatein.working.dir=target</arguments>
     <!-- For 2.0.0 Beta 01 we release only tomcat package for WCM -->
-    <releaseProfiles>${defaulteXoReleaseProfiles},pkg-tomcat,arc-tomcat,wcm,wkf</releaseProfiles>    
+    <releaseProfiles>${defaulteXoReleaseProfiles},pkg-tomcat,arc-tomcat,pkg-jboss,arc-jboss,wcm,wkf</releaseProfiles>    
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
