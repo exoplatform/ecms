@@ -658,6 +658,7 @@
 						
 		var root = document.getElementById("UIDocumentInfo");
 		var uiListGrid = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
+		
 		// The block are updated by lampt
 		var workingArea = document.getElementById('UIWorkingArea');
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
@@ -709,11 +710,13 @@
 		}
 				
 		// The bellow block are updated		
-		sizeBarContainer.style.height = eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY + 20 + "px";
+		sizeBarContainer.style.height = eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY + 20 + "px";	
 		resizeSideBar.style.height = eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY + 20 + "px";		
-		if (eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY < eXo.ecm.ECMUtils.defaultHeight) {
-			sizeBarContainer.style.height =eXo.ecm.ECMUtils.defaultHeight + 20 + "px";
-			resizeSideBar.style.height = eXo.ecm.ECMUtils.defaultHeight + 20 + "px";
+		var root = document.getElementById("UIDocumentWorkspace");
+		root.style.height = eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY + "px";
+		if (eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY < eXo.ecm.ECMUtils.defaultHeight) {			
+			sizeBarContainer.style.height = eXo.ecm.ECMUtils.defaultHeight + 20 + "px";
+			resizeSideBar.style.height = eXo.ecm.ECMUtils.defaultHeight + 20 + "px";			
 		}
 				
 		var container = document.getElementById("UITreeExplorer");	
@@ -748,7 +751,8 @@
 	    eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = 'block';
 		resizeTreeButton.className = "ResizeTreeButton";
 	  } else {	  
-		container.style.height = eXo.ecm.ECMUtils.heightOfTree + eXo.ecm.ECMUtils.heightOfItemArea + "px";
+		//container.style.height = eXo.ecm.ECMUtils.heightOfTree + eXo.ecm.ECMUtils.heightOfItemArea + "px";
+		container.style.height = eXo.ecm.ECMUtils.heightOfTree + "px";				
 		itemArea.style.display = 'none';
 		eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = 'none';
 		resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
@@ -757,8 +761,7 @@
 	  eXo.ecm.ECMUtils.reloadHeight();
 	}
 	
-	ECMUtils.prototype.reloadHeight = function() {		
-		
+	ECMUtils.prototype.reloadHeight = function() {				
 		var workingArea = document.getElementById('UIWorkingArea');																
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
 		var resizeSizeBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");				

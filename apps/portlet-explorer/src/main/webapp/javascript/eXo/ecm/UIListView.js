@@ -814,6 +814,7 @@ var ListView = function() {
 		return false;
 	}
 	function revertResizableBlock() {
+	
 		//revert status overflow for UIResizableBlock;
 		var actionArea = document.getElementById(Self.actionAreaId);
 		var uiWorkingArea = DOM.findAncestorByClass(actionArea, "UIWorkingArea");
@@ -843,7 +844,7 @@ var ListView = function() {
 		} else {
 			  if (view) {
 					view.style.height = workingArea.offsetHeight + 'px';
-					documentWorkspace.style.height = workingArea.offsetHeight + 'px';
+					documentWorkspace.style.height = workingArea.offsetHeight + 'px';					
 				}				
 		}
 	}
@@ -895,6 +896,7 @@ var ListView = function() {
 		var resizeValue = event.clientX - eXo.ecm.UIListView.currentMouseX;		
 		var listGrid = DOM.findAncestorByClass(objResize, "UIListGrid");	
 				
+		// Case of resize width lower than allowable minimum.		
 		if (eXo.ecm.UIListView.objResizeValue + resizeValue < 8 ) return;				
 		var rightContainer = DOM.findAncestorByClass(objResize, "RightContainer");						
 		if (resizeValue > 0) 
@@ -913,9 +915,8 @@ var ListView = function() {
 			var documentInfo = document.getElementById('UIDocumentInfo');
 			DOM.findFirstDescendantByClass(documentInfo, "div", "UIListGrid").appendChild(resizeDiv);	
 		}
-				
 		var X_Resize = eXo.core.Browser.findMouseRelativeX(listGrid,event);				
-		eXo.core.Browser.setPositionInContainer(listGrid, resizeDiv, X_Resize, 0);		
+		eXo.core.Browser.setPositionInContainer(listGrid, resizeDiv, X_Resize, 0);
 	}
 			
 	ListView.prototype.resizeMouseUpListView = function(event) {
