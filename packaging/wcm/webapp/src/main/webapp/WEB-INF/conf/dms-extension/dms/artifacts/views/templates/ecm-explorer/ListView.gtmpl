@@ -49,7 +49,7 @@
 	
 	//Config to display columns with format: ["${column};${width}"]
 	//Default 
-	String[] arrColumns = ["exo:owner;123px","exo:dateModified;123px","exo:dateCreated;123px"];
+	String[] arrColumns = ["exo:owner;123px","exo:dateModified;123px","exo:dateCreated;121px"];
 %>
 <div id="$componentId">
 	<div id="${componentId}-$viewComponentId" class="UIListView">	
