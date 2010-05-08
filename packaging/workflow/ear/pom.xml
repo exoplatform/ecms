@@ -16,17 +16,77 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.jbpm.jbpm3</groupId>
+      <artifactId>jbpm-jpdl</artifactId>
+      <version>${org.jbpm.jbpm3}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-facade-${workflowEngine}</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-bp-content-plugin</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-bp-content-publication</artifactId>
+      <version>${project.version}</version>
+    </dependency>		
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-bp-content-webui</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-content</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-holiday</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-payraise</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-facade-${workflowEngine}</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+		
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-workflow-webui</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>exo-ecms-packaging-workflow-webapp</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
-		<dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>exo-ecms-ext-workflow-portlet-administration</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-apps-resources-static</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
+		
+		
   </dependencies>
   <build>
     <finalName>gatein-exo-workflow-${project.version}</finalName>
@@ -43,11 +103,70 @@
               <artifactId>exo-ecms-packaging-workflow-config</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
+						<jarModule>
+              <groupId>org.jbpm.jbpm3</groupId>
+              <artifactId>jbpm-jpdl</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+						
+						<jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-facade-${workflowEngine}</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+						
+						<jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-bp-content-plugin</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+						
+						<jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-bp-content-publication</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+						
+						<jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-bp-content-webui</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+						
+						<jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-content</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+						
+						<jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-holiday</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+						
+						<jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-bp-${workflowEngine}-payraise</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+						
+						<jarModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-webui</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
             <webModule>
               <groupId>${project.groupId}</groupId>
               <artifactId>exo-ecms-packaging-workflow-webapp</artifactId>
-              <contextRoot>workflow</contextRoot>
+              <contextRoot>ecmworkflow-extension</contextRoot>
               <bundleFileName>ecmworkflow-extension.war</bundleFileName>
+            </webModule>
+						<webModule>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>exo-ecms-ext-workflow-portlet-administration</artifactId>
+              <contextRoot>workflow</contextRoot>
+              <bundleFileName>workflow.war</bundleFileName>
             </webModule>
           </modules>
         </configuration>
