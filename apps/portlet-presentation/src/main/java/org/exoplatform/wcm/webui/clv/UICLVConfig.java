@@ -439,7 +439,12 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_READMORE, showReadmore);
       portletPreferences.store();
       
-      clvConfig.getAncestorOfType(UICLVPortlet.class).getChild(UICLVContainer.class).init();
+      UICLVPortlet portlet = clvConfig.getAncestorOfType(UICLVPortlet.class);
+      if (displayMode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) {
+        portlet.getChild(UICLVFolderMode.class).init();
+      } else if (displayMode.equals(UICLVPortlet.DISPLAY_MODE_MANUAL)) {
+        portlet.getChild(UICLVManualMode.class).init();
+      }
       
       if (Utils.isPortalEditMode()) {
       	Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);

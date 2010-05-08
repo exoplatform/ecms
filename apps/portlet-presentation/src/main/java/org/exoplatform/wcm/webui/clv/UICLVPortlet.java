@@ -114,6 +114,13 @@ public class UICLVPortlet extends UIPortletApplication {
   /** The Constant ORDER_TYPE_ASCENDENT. */
   public static final String ORDER_TYPE_ASCENDENT               = "OrderAsc";
   
+  private PortletMode     mode;
+  
+  private UICLVFolderMode folderMode;
+  
+  private UICLVManualMode manualMode;
+  
+  private UICLVConfig     config;
   
   /**
    * Instantiates a new uICLV portlet.
@@ -122,9 +129,9 @@ public class UICLVPortlet extends UIPortletApplication {
    */
   public UICLVPortlet() throws Exception {
     addChild(UIPopupContainer.class, null, null);
-    addChild(UICLVFolderMode.class, null, null).setRendered(false);
-    addChild(UICLVManualMode.class, null, null).setRendered(false);
-    addChild(UICLVConfig.class, null, null).setRendered(false);
+    folderMode = addChild(UICLVFolderMode.class, null, null).setRendered(false);
+    manualMode = addChild(UICLVManualMode.class, null, null).setRendered(false);
+    config = addChild(UICLVConfig.class, null, null).setRendered(false);
   }
 
   /* (non-Javadoc)
@@ -132,23 +139,32 @@ public class UICLVPortlet extends UIPortletApplication {
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
-    PortletMode mode = pContext.getApplicationMode();
-    if (mode == PortletMode.VIEW) {
-      String displayMode = pContext.getRequest().getPreferences().getValue(PREFERENCE_DISPLAY_MODE, null);
-      if (displayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-        getChild(UICLVManualMode.class).setRendered(false);
-        UICLVFolderMode clvFolderMode = getChild(UICLVFolderMode.class);
-        clvFolderMode.init();
-        clvFolderMode.setRendered(true);
-      } else if (displayMode.equals(DISPLAY_MODE_MANUAL)) {
-        getChild(UICLVFolderMode.class).setRendered(false);
-        UICLVManualMode clvManualMode = getChild(UICLVManualMode.class);
-        clvManualMode.init();
-        clvManualMode.setRendered(true);
+    String displayMode = pContext.getRequest().getPreferences().getValue(PREFERENCE_DISPLAY_MODE, null);
+    PortletMode currentMode = pContext.getApplicationMode();
+    if (displayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
+      if (currentMode != mode) {
+        folderMode.init();
+        mode = currentMode;
       }
-    } else if (mode == PortletMode.EDIT) {
-      getChild(UICLVConfig.class).setRendered(true);
+      folderMode.setRendered(true);
+      manualMode.setRendered(false);
+      config.setRendered(false);
+    } else if (displayMode.equals(DISPLAY_MODE_MANUAL)) {
+      if (currentMode != mode) {
+        manualMode.init();
+        mode = currentMode;
+      }
+      manualMode.setRendered(true);
+      folderMode.setRendered(false);
+      config.setRendered(false);
     }
+    
+    if (currentMode == PortletMode.EDIT) {
+      folderMode.setRendered(false);
+      manualMode.setRendered(false);
+      config.setRendered(true);
+    }
+    
     super.processRender(app, context);
   }
 }
