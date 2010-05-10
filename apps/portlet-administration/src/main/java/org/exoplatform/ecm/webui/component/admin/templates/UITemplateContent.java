@@ -203,9 +203,10 @@ public class UITemplateContent extends UIForm implements UISelectable {
   @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) {
     String viewPermission = getUIStringInput(FIELD_VIEWPERMISSION).getValue();
+    if (viewPermission == null) viewPermission = "";
     if ((viewPermission != null) && (viewPermission.length() == 0))
       viewPermission = value.toString();
-    else
+    else 
       viewPermission += "," + value.toString();
     getUIStringInput(FIELD_VIEWPERMISSION).setValue(viewPermission) ;
     UITemplatesManager uiManager = getAncestorOfType(UITemplatesManager.class) ;
