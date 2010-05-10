@@ -228,7 +228,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     displayModeRadioBoxInput.setValue(displayMode);
     
     /** ITEM PATH */
-    UIFormStringInput itemPathInput = new UIFormStringInput(ITEM_PATH_FORM_STRING_INPUT, ITEM_PATH_FORM_STRING_INPUT, itemPath);
+    UIFormStringInput itemPathInput = 
+      new UIFormStringInput(ITEM_PATH_FORM_STRING_INPUT, ITEM_PATH_FORM_STRING_INPUT, itemPath);
+    itemPathInput.addValidator(MandatoryValidator.class);
     itemPathInput.setEditable(false);
     itemPathInput.addValidator(MandatoryValidator.class);
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
@@ -396,7 +398,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       /** GET VALUES FROM UIFORM */
       String displayMode = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
       String itemPath = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
-      if ((itemPath.contains(";") && displayMode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) || (!itemPath.contains(";") && displayMode.equals(UICLVPortlet.DISPLAY_MODE_MANUAL))) {
+      if (itemPath == null || itemPath.length() == 0 || (itemPath.contains(";") && displayMode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) || (!itemPath.contains(";") && displayMode.equals(UICLVPortlet.DISPLAY_MODE_MANUAL))) {
         Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.not-valid-path", null, ApplicationMessage.WARNING);
         return;
       }
