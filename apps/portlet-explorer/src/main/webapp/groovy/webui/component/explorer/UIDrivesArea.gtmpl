@@ -15,9 +15,9 @@
     				println("<div class=\"Drive\">");
     				if(drive.getIcon() != null && drive.getIcon().length() > 0) {
   	          String[] mainIconPath = drive.getIcon().split(":/") ;
-  	    %>      
+  	    %>
   	          <div class="DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>">
-    	          <img src="/${uicomponent.getPortalName()}/rest/jcr/${uicomponent.getRepository()}/${mainIconPath[0]}/${mainIconPath[1]}" width="27" height="27" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
+    	          <img src="/${uicomponent.getPortalName()}/${uicomponent.getRestName()}/jcr/${uicomponent.getRepository()}/${mainIconPath[0]}/${mainIconPath[1]}" width="27" height="27" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
     	        </div>
 		          <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>"><%=uicomponent.getLabel(drive.getName())%></a>
 				<%

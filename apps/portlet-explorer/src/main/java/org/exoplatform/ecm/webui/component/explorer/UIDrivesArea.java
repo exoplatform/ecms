@@ -28,6 +28,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -110,6 +111,11 @@ public class UIDrivesArea extends UIContainer {
     PortalContainerInfo containerInfo = (PortalContainerInfo) container
         .getComponentInstanceOfType(PortalContainerInfo.class);
     return containerInfo.getContainerName(); 
+  }
+  
+  public String getRestName() {
+    PortalContainerConfig portalContainerConfig = this.getApplicationComponent(PortalContainerConfig.class);
+    return portalContainerConfig.getRestContextName(this.getPortalName());
   }
 
   public String getRepository() throws Exception {
