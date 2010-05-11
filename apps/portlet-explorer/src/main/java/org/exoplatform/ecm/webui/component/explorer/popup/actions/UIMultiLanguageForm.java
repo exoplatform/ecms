@@ -148,12 +148,28 @@ public class UIMultiLanguageForm extends UIForm {
   static public class ViewActionListener extends EventListener<UIMultiLanguageForm> {
     public void execute(Event<UIMultiLanguageForm> event) throws Exception {
       UIMultiLanguageForm uiForm = event.getSource() ;
-      UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class) ;
       UIJCRExplorer uiJCRExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class) ;
       UIDocumentInfo uiDocumentInfo = uiJCRExplorer.findFirstComponentOfType(UIDocumentInfo.class) ;
       String selectedLanguage = uiForm.getUIFormSelectBox(Utils.LANGUAGES).getValue() ;
-      uiDocumentInfo.setLanguage(selectedLanguage) ;
-      uiExplorer.updateAjax(event) ;
+      uiDocumentInfo.setLanguage(selectedLanguage);
+      uiJCRExplorer.setLanguage(selectedLanguage);
+      MultiLanguageService multiLanguageService = uiForm.getApplicationComponent(MultiLanguageService.class);
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+      try {
+        multiLanguageService.setDefault(uiJCRExplorer.getCurrentNode(), selectedLanguage, uiJCRExplorer.getRepositoryName()) ;
+      } catch(AccessDeniedException ace) {
+        uiApp.addMessage(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied", null, 
+                                                ApplicationMessage.WARNING)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
+      } catch(Exception e) {
+        LOG.error("Unexpected error", e);
+        JCRExceptionManager.process(uiApp, e) ;
+        return ;
+      }
+      uiJCRExplorer.setIsHidePopup(false);
+      uiJCRExplorer.refreshExplorer();      
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiJCRExplorer);
     }
   }
 }
