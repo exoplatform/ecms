@@ -39,6 +39,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.exception.MessageException;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -95,10 +96,14 @@ public class JCRExceptionManager {
       if(messageKey == null) messageKey = "AccessControlException.msg";      
     } else if(e instanceof UnsupportedRepositoryOperationException) {
       if(messageKey == null) messageKey = "UnsupportedRepositoryOperationException.msg";      
+    } else if(e instanceof MessageException) {
+      if(messageKey == null) messageKey = ((MessageException)e).getDetailMessage().getMessageKey();
     } else {
       throw e;
     }
-    uiApp.addMessage(new ApplicationMessage(Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, messageKey, JCRExceptionManager.class.getClassLoader()),null,ApplicationMessage.WARNING)) ;
+    uiApp.addMessage(new ApplicationMessage(Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, messageKey, JCRExceptionManager.class.getClassLoader()),
+                     null,
+                     ApplicationMessage.WARNING)) ;
   }
 
   /**

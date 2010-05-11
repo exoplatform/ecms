@@ -613,7 +613,11 @@ public class Utils {
 				.getComponentInstanceOfType(ResourceBundleService.class);
 		ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(
 				name, locale, cl);
-		return resourceBundle.getString(key);
+		try {
+		  return resourceBundle.getString(key);
+		} catch (MissingResourceException ex) {
+		  return key;
+		}
 	}
 
   public static String getRestContextName(String portalContainerName) {
