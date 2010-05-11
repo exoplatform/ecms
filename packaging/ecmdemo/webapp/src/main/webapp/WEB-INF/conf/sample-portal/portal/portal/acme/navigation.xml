@@ -43,6 +43,14 @@
     </node>
 
     <node>
+      <uri>events</uri>
+      <name>events</name>
+      <label>#{portal.acme.events}</label>
+      <visibility>DISPLAYED</visibility>
+      <page-reference>portal::acme::events</page-reference>
+    </node>
+
+    <node>
       <uri>newsletters</uri>
       <name>newsletters</name>
       <label>#{portal.acme.newsletters}</label>

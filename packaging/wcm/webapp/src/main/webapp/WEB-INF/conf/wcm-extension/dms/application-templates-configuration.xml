@@ -196,6 +196,18 @@
           </object>
         </object-param>
         <object-param>
+          <name>Events template</name>
+          <description>Events template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>EventsTemplate.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list-by-folder</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
           <name>default.paginator</name>
           <description>Default paginator groovy template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
@@ -307,10 +319,22 @@
           </object-param -->
         <object-param>
           <name>SimpleVerticalHierachy</name>
-          <description>Simple vertical hierachy with all levers</description>
+          <description>Simple vertical hierachy with all levels</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
             <field name="templateName">
               <string>SimpleVerticalHierachy.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>vertical-hierachy</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>SimpleHorizontal</name>
+          <description>Simple horizontal hierachy with one level</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>SimpleHorizontal.gtmpl</string>
             </field>
             <field name="category">
               <string>vertical-hierachy</string>
