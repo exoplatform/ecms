@@ -78,7 +78,7 @@ public class DMSMimeTypeResolver {
       else if (value.equals(mimeType) && (!ext.equals("")))
         return ext;
     }
-    return mimeTypes.getExtension(mimeType);
+    return ext;
   }
   
   

@@ -175,8 +175,11 @@
   </style>  
 </head>
 <%uiform.begin()%>
-<div class="UIPDFViewerContainer">       
-  <div class="PDFViewerBar">
+<%
+	if (maximumPage > 0) {
+%>    
+	<div class="UIPDFViewerContainer">   
+ 	 <div class="PDFViewerBar">
 		<div class="ControlButton">
 			<a href="<%=uicomponent.event("PreviousPage")%>" title="<%=uicomponent.getResourceBundle("PDFViewer.label.previousPage")%>"><div class="ButtonBack"><span></span></div></a>
 		</div>
@@ -232,18 +235,17 @@
 		<%}%>
 	</div>
 	<div class="PDFViewerContent">
-  	<div class="ImageView">
+  	<div class="ImageView" style="height:375px; overflow:auto">
 		<%
-			try {
 			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";
 		%>
 			  <a href="$pdfPageImage" rel="lightbox" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><image src="$pdfPageImage"></a>
-		<%}catch(Exception e) {%>	
-			  <div style="text-align:center; font-style:italic">
-			    <%=_ctx.appRes("File.view.label.not-viewable")%>
-			  </div>
-		<%}%>
 		</div>
 	</div>
-</div>
+  </div>
+<% }else {%>	
+	  <div style="text-align:center; font-style:italic">
+	    <%=_ctx.appRes("File.view.label.not-viewable")%>
+	  </div>
+<% }%>
 <%uiform.end()%>		

@@ -54,7 +54,7 @@ monitoring.
 	*	Rest service for cleanName in nodes
 	*	Authoring Plugin (as Tech Preview for RedHat)
 	*	L11n (as Tech Preview for RedHat)
-	
+	*  PDF View for almost document: MS Document, Openfice Document
 	Find more details at the RELEASE NOTEs part
 
 3. HOW TO SET UP EXO ECM
@@ -91,7 +91,11 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
 			+) On Unix/Linux/cygwin
 				 Open a terminal, go to jboss/bin and type the command:
 					 "./run.sh" for production
-
+3.6 Run Openoffice service to convert document to PDF file for using PDF View.
+		OpenOffice should available on your machine.
+      * Run command:
+		soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard
+		Please refer to: http://www.artofsolving.com for using JODCONVERTER
 
 4. RUNNING
 ---------------------------------------------------
