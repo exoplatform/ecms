@@ -283,7 +283,7 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 		eXo.ecm.ECS.listFolders(folderList);
 	} else if(eXo.ecm.ECS.typeObj == "multi"){
 		eXo.ecm.ECS.listMutilFiles(fileList);
-	} else {
+	} else {		
 		eXo.ecm.ECS.listFiles(fileList);
 	}
 };
@@ -414,7 +414,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 		var nodeType	= list[i].getAttribute("nodeType");
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
-		newRow.className = clazz;
+		newRow.className = clazz;		
 		newRow.insertCell(0).innerHTML = '<a class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+node+'</a>';
 		
 		if(i > 13) {
@@ -527,10 +527,14 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 };
 
 EcmContentSelector.prototype.getClazzIcon = function(nodeType) {
-	if(!nodeType) return;
 	var strClassIcon = '';
+	if(!nodeType) {
+		strClassIcon = "DefaultPageIcon";	
+		return strClassIcon;	
+	}
 	strClassIcon = nodeType.replace("/", "_").replace(":", "_") + "16x16Icon";
 	return strClassIcon;
+	
 };
 
 function Pager(objTable, itemsPerPage) {

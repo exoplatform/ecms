@@ -509,7 +509,7 @@
 }
 
 .UIWCMSearchContainer .RightWorkspace .Item{
-	background-position:left 3px;
+	/* background-position:left 3px; */
 	border-left:1px solid #F4F4F4;
 	cursor:pointer;
 	height:24px;
