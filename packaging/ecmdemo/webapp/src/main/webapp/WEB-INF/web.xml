@@ -147,6 +147,11 @@
   </servlet>
 
   <servlet>
+    <servlet-name>friendly</servlet-name>
+    <servlet-class>org.exoplatform.wcm.webui.friendly.FriendlyServlet</servlet-class>
+  </servlet>
+
+  <servlet>
     <servlet-name>Controller</servlet-name>
     <servlet-class>org.exoplatform.frameworks.jcr.web.CommandControllerServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
@@ -187,6 +192,10 @@
   <servlet-mapping>
     <servlet-name>javascript</servlet-name>
     <url-pattern>/javascript/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>friendly</servlet-name>
+    <url-pattern>/content/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>portal</servlet-name>

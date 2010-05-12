@@ -34,6 +34,7 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -267,8 +268,13 @@ public class UICategoryNavigationTreeBase extends UITree {
     String categoryPath = node.getPath().replaceFirst(portalNode.getPath(), "");
 //    categoryPath = categoryPath.substring(categoryPath.indexOf(preferenceTreeName) + preferenceTreeName.length());
     categoryPath = categoryPath.substring(categoryPath.indexOf(preferenceTreeName)-1);
+
+    String link = portalURI + preferenceTargetPage + "?path=" + categoryPath; 
     
-    return portalURI + preferenceTargetPage + "?path=" + categoryPath;
+    FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+    link = friendlyService.getFriendlyUri(link);
+    
+    return link;
   }
   
   /**

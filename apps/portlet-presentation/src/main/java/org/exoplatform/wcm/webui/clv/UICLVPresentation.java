@@ -38,6 +38,7 @@ import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserHandler;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
+import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.images.RESTImagesRendererService;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.Utils;
@@ -233,6 +234,10 @@ public class UICLVPresentation extends UIContainer {
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
     String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
     link = baseURI + portalURI + basePath + "?path=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+    
+    FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+    link = friendlyService.getFriendlyUri(link);
+    
     return link;
   }
 
@@ -251,15 +256,20 @@ public class UICLVPresentation extends UIContainer {
   	String workspace = nodeLocation.getWorkspace();
   	String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
   	
+    FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+    String link = "#";//friendlyService.getFriendlyUri(link);
+
   	String portalName = PortalContainer.getCurrentPortalContainerName();
   	String restContextName = PortalContainer.getCurrentRestContextName();
   	if (node.isNodeType("nt:frozenNode")){
   		String uuid = node.getProperty("jcr:frozenUuid").getString();
-  		Node originalNode = node.getSession().getNodeByUUID(uuid);  		
-  		return baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + originalNode.getPath() + "?version=" + node.getParent().getName();
+  		Node originalNode = node.getSession().getNodeByUUID(uuid);  
+  		link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + originalNode.getPath() + "?version=" + node.getParent().getName();
   	} else {
-  		return baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + node.getPath();
+  		link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + node.getPath();
   	}
+  	
+  	return friendlyService.getFriendlyUri(link);
 	  
   }
   

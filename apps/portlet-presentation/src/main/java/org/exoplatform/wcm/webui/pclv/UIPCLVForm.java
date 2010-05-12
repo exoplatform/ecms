@@ -38,6 +38,7 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
+import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.images.RESTImagesRendererService;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.Utils;
@@ -429,15 +430,18 @@ public class UIPCLVForm extends UIForm {
 		String link = null;
 		
 		String itemPath = path.substring(path.lastIndexOf(preferenceTreeName));
-		String backToCategory = "";
-		if (categoryPath.equals("")) {
-			backToCategory = pageNodeSelected;
-		} else {
-			backToCategory = itemPath.substring(0, itemPath.indexOf(newNode.getName()) - 1);
-		}
+//		String backToCategory = "";
+//		if (categoryPath.equals("")) {
+//			backToCategory = pageNodeSelected;
+//		} else {
+//			backToCategory = itemPath.substring(0, itemPath.indexOf(newNode.getName()) - 1);
+//		}
 		String portalURI = portalRequestContext.getPortalURI();
 //		link = portalURI + preferenceTargetPage + "?path=/" + itemPath + "&back" + "=" + "/" + backToCategory;
 		link = portalURI + preferenceTargetPage + "?path=/" + itemPath;
+
+	    FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+	    link = friendlyService.getFriendlyUri(link);
 
 		return link;
 	}
