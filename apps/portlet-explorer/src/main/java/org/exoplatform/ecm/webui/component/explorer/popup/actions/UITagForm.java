@@ -122,7 +122,7 @@ public class UITagForm extends UIForm {
           NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
           if (!existTag(tagName, repository, workspace, scope, uiForm, userName)) {
           	newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, repository, workspace);
-          } else {
+          } else if (!tagName.equals(uiForm.oldName_)) {
         	 uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null, 
           	              ApplicationMessage.ERROR));
 //           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
