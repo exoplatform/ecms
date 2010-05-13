@@ -81,9 +81,14 @@
 					%>
 				</div>
 				<%= html %>
+				<% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %>
+				<% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %>
 			</div>
 		<%
   } else {
-	  %><%= html %><%
+	  %><%= html %>
+    <% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %>
+    <% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %>
+	  <%
   }
 %>

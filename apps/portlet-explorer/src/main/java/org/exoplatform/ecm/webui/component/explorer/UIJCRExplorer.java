@@ -596,12 +596,10 @@ public class UIJCRExplorer extends UIContainer {
     Node node = (Node)item;
     LinkManager linkManager = uiExplorer.getApplicationComponent(LinkManager.class);
     if (node.isNodeType(Utils.EXO_WEBCONTENT)) 
-//    if (node.isNodeType("exo:webContent"))
-        return true;
+      return true;
     if (linkManager.isLink(node)) {
       node = linkManager.getTarget(node, true);
       if (node.isNodeType(Utils.EXO_WEBCONTENT))        
-//      if (node.isNodeType("exo:webContent"))
         return true;
     }
     return false;
