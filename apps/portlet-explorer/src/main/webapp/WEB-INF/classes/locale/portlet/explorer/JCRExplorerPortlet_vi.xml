@@ -622,6 +622,12 @@
   -->
   <UITabPane>
     <title>
+      <UIPublishingPanel>Publication Panel</UIPublishingPanel>
+      <UIPublicationPanel>Phiên bản</UIPublicationPanel>
+      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationHistory>Lịch sử</UIPublicationHistory>
+      <UIVersionViewer>Version viewer</UIVersionViewer>
+      
       <UIPropertyTab>Các thuộc tính</UIPropertyTab>
       <UIMetadataTab>Dữ liệu Metadata</UIMetadataTab>
       <UIPropertyForm>Thêm thuộc tính mới</UIPropertyForm>
@@ -3184,4 +3190,78 @@
 				  <not-exist-categories>Không tồn tại bất kỳ danh mục phân loại nào</not-exist-categories>
 				</msg>
 		</UIActionBar>   	
+		
+	<UIPublicationPanel>
+    <button>
+      <Close>Đóng</Close>
+    </button>
+    <revisions>
+      <version>Phiên bản</version>
+      <date>Ngày tháng</date>
+      <author>Tác giả</author>
+      <status>Trạng thái</status>
+      <action>Hành động</action>
+      <label>Phiên bản</label>
+      <none>Không có phiên bản nào</none>
+      <seeall>Xem tất cả các phiên bản</seeall>
+      <currentVersion>phiên bản hiện tại</currentVersion>
+      <confirm>Bạn sẽ mất những gì đã thay đổi trong phiên bản nháp, bạn có thực sự muốn khôi phục lại phiên bản này và thay thế cho phiên bản hiện tại ?</confirm>
+    </revisions>
+    <status>
+      <version>Phiên bản</version>
+      <title>Trạng thái</title>
+      <archived>Archived</archived>
+      <obsolete>Obsolete</obsolete>
+      <unpublished>Unpublished</unpublished>
+      <enrolled>Enrolled</enrolled>
+      <draft>Draft</draft>
+      <pending>Pending</pending>
+      <approved>Approved</approved>
+      <inreview>In Review</inreview>
+      <staged>Staged</staged>
+      <live>Published</live>
+    </status>
+    <scheduled>
+      <title>Lịch</title>
+      <from>từ</from>
+      <to>đến</to>
+    </scheduled>
+    <title>
+      <preview>Xem lại</preview>
+      <restore>Khôi phục</restore>
+    </title>
+    <msg>
+      <have-no-view-template>Mẫu hiển thị của nội dung này không được hỗ trợ</have-no-view-template>
+      <restore-complete>Khôi phục thành công</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Ngày tháng</date>
+      <versionName>Tên phiên bản</versionName>
+      <currentState>Trạng thái hiện tại</currentState>
+      <user>Người tạo</user>
+      <description>Mô tả</description>
+    </header>
+  </UIPublicationHistory>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Thời gian xuất bản</header>
+      <start>Bắt đầu xuất bản</start>
+      <end>Kết thúc xuất bản</end>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+    </action>
+    <msg>
+      <invalid-format>Sai định dạng ngày tháng, hãy kiểm tra lại</invalid-format>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Quản lý xuất bản</UIPublicationContainer>
+      <UIPublishingPanel>Quản lý xuất bản</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
 </bundle>

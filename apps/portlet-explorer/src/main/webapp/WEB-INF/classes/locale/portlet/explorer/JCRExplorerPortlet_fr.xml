@@ -589,6 +589,12 @@
   -->
   <UITabPane>
     <title>
+      <UIPublishingPanel>Publication Panel</UIPublishingPanel>
+      <UIPublicationPanel>Révision</UIPublicationPanel>
+      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationHistory>Histoire</UIPublicationHistory>
+      <UIVersionViewer>Version viewer</UIVersionViewer>
+      
       <UIPropertyTab>Propriétés</UIPropertyTab>
       <UIMetadataTab>Metadonnées</UIMetadataTab>
       <UIPropertyForm>Ajouter une nouvelle propriété</UIPropertyForm>
@@ -3186,4 +3192,78 @@
 				  <not-exist-categories>There isn't any category</not-exist-categories>
 				</msg>
 		</UIActionBar> 	
+		
+	<UIPublicationPanel>
+    <button>
+      <Close>Fermer</Close>
+    </button>
+    <revisions>
+      <version>Versions</version>
+      <date>Date</date>
+      <author>Auteur</author>
+      <status>Etat</status>
+      <action>Action</action>
+      <label>Version</label>
+      <none>Aucune version</none>
+      <seeall>Voir toutes les versions</seeall>
+      <currentVersion>Version courante</currentVersion>
+      <confirm>Vous allez perdre votre brouillon, voulez-vous restaurer cette version et remplacer le brouillon courant ?</confirm>
+    </revisions>
+    <status>
+      <version>Révision</version>
+      <title>Etat</title>
+      <archived>Archivé</archived>
+      <obsolete>Obsolète</obsolete>
+      <unpublished>Non Publié</unpublished>
+      <enrolled>Créé</enrolled>
+      <draft>Brouillon</draft>
+      <pending>Rédigé</pending>
+      <approved>Validé</approved>
+      <inreview>En revue</inreview>
+      <staged>Prêt à publier</staged>
+      <live>Publié</live>
+    </status>
+    <scheduled>
+      <title>Planifier</title>
+      <from>de</from>
+      <to>à</to>
+    </scheduled>
+    <title>
+      <preview>Prévisualiser</preview>
+      <restore>Restaurer</restore>
+    </title>
+    <msg>
+      <have-no-view-template>Le formulaire de consultation n'est pas supporté</have-no-view-template>
+      <restore-complete>Restauration complète</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>La date</date>
+      <versionName>Le nom de version</versionName>
+      <currentState>L'état courant</currentState>
+      <user>L'auteur</user>
+      <description>La description</description>
+    </header>
+  </UIPublicationHistory>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Le temps de publication</header>
+      <start>Début de la publication</start>
+      <end>Fin de la publication</end>
+    </label>
+    <action>
+      <Save>Sauver</Save>
+    </action>
+    <msg>
+      <invalid-format>Format incorrect. S'il vous plaît vérifier à nouveau</invalid-format>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Gérer la publication</UIPublicationContainer>
+      <UIPublishingPanel>Gérer la publication</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
 </bundle>

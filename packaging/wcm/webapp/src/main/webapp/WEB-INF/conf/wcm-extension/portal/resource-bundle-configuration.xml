@@ -38,15 +38,13 @@
         <name>init.resources</name>
         <value>locale.wcm.dialogs</value>
         <value>locale.wcm.views</value>
-        <value>locale.wcm.webui</value>
-        <value>locale.wcm.publication</value>
+        <value>locale.wcm.webui</value>        
       </values-param>
       <values-param>
         <name>portal.resource.names</name>
         <value>locale.wcm.dialogs</value>
         <value>locale.wcm.views</value>
-        <value>locale.wcm.webui</value>
-        <value>locale.wcm.publication</value>
+        <value>locale.wcm.webui</value>        
       </values-param>
     </init-params>
   </component>

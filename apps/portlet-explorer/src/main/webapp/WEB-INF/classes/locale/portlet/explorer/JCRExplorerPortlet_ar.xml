@@ -2782,5 +2782,78 @@
 				<msg>
 				  <not-exist-categories>There isn't any category</not-exist-categories>
 				</msg>
-		</UIActionBar>		  					
+		</UIActionBar>		 
+			<UIPublicationPanel>
+    <button>
+      <Close>Close</Close>
+    </button>
+    <revisions>
+      <version>Revisions</version>
+      <date>Date</date>
+      <author>Author</author>
+      <status>Status</status>
+      <action>Action</action>
+      <label>Revision</label>
+      <none>No revisions</none>
+      <seeall>See all versions</seeall>
+      <currentVersion>current revision</currentVersion>
+      <confirm>You will lost your draft work, do you really want to restore this revision and replace the current revision ?</confirm>
+    </revisions>
+    <status>
+      <version>Revision</version>
+      <title>Status</title>
+      <archived>Archived</archived>
+      <obsolete>Obsolete</obsolete>
+      <unpublished>Unpublished</unpublished>
+      <enrolled>Enrolled</enrolled>
+      <draft>Draft</draft>
+      <pending>Pending</pending>
+      <approved>Approved</approved>
+      <inreview>In Review</inreview>
+      <staged>Staged</staged>
+      <live>Published</live>
+    </status>
+    <scheduled>
+      <title>Scheduled</title>
+      <from>from</from>
+      <to>to</to>
+    </scheduled>
+    <title>
+      <preview>Preview</preview>
+      <restore>Restore</restore>
+    </title>
+    <msg>
+      <have-no-view-template>View template of this is not supported</have-no-view-template>
+      <restore-complete>Restore completed</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Date</date>
+      <versionName>Revision name</versionName>
+      <currentState>Current state</currentState>
+      <user>Author</user>
+      <description>Description</description>
+    </header>
+  </UIPublicationHistory>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Publication date time</header>
+      <start>Start publication</start>
+      <end>End publication</end>
+    </label>
+    <action>
+      <Save>Save</Save>
+    </action>
+    <msg>
+      <invalid-format>Invalid datetime format. Please check again</invalid-format>
+    </msg>
+  </UIPublicationPanel>     
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Manage publication</UIPublicationContainer>
+      <UIPublishingPanel>Manage publication</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>  					
 </bundle>
