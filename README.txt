@@ -96,6 +96,10 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
       * Run command:
 		soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard
 		Please refer to: http://www.artofsolving.com for using JODCONVERTER
+3.7 Using PDF Viewer
+		Now we using icepdf to enable viewing function in ECM
+		Some PDF document make Icet pdf generating image with wrong font. We can improve this by
+		installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
 
 4. RUNNING
 ---------------------------------------------------

@@ -89,7 +89,7 @@ public class PDFViewerRESTService implements ResourceContainer {
     repositoryService_ = repositoryService;
     jodConverter_ = jodConverter;
     pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
-    System.setProperty("org.icepdf.core.awtFontLoading", "true");
+    //System.setProperty("org.icepdf.core.awtFontLoading", "true");
   }
 
   @GET
@@ -168,6 +168,8 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
     
   private File buildFileImage(File input, String path, String pageNumber, String strRotation, String strScale) {
+  	 //System.setProperty("org.icepdf.core.awtFontLoading", "true");
+  	 //FontManager.getInstance().readSystemFonts(new String[] {"/usr/share/fonts/truetype/", "/usr/share/fonts/truetype/fonts1/", "/usr/share/fonts/truetype/fonts2"});
   	 Document document = buildDocumentImage(input, path);
      // save page capture to file.
      float scale = Float.parseFloat(strScale);
@@ -244,17 +246,21 @@ public class PDFViewerRESTService implements ResourceContainer {
   			try {
 	  			jodConverter_.convert(input, extension, out, "pdf");
   			} catch(ConnectException connection) {
+  				content.delete();
   				LOG.error("Cannot open connection to OpenOffice Service");
   			} catch(OpenOfficeException connection) {
+  				content.delete();
   				LOG.error("Exception when using OpenOffice Service");
   			} finally {
   				out.flush();
 	  			out.close();
   			}
   		}
-  		String lastModified = contentNode.getProperty("jcr:lastModified").getString();
-  		pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
-  		pdfCache.put(new ObjectKey(bd1.append(bd.toString()).append("/jcr:lastModified").toString()), lastModified);
+  		if (content.exists()) {
+  			String lastModified = contentNode.getProperty("jcr:lastModified").getString();
+  			pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
+  			pdfCache.put(new ObjectKey(bd1.append(bd.toString()).append("/jcr:lastModified").toString()), lastModified);
+  		}
   	}
   	return content;
   }
@@ -292,7 +298,7 @@ public class PDFViewerRESTService implements ResourceContainer {
 
 		@Override
 		public void finalize() {
-			String path = (String) pdfCache.get(key);
+			String path = (String) pdfCache.get(new ObjectKey(key));
 			File f = new File(path);
 			if (f.exists()) {
 				f.delete();
