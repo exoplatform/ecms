@@ -241,6 +241,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
         String portalURI = portalRequestContext.getPortalURI();
 
         ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
+        Utils.closePopupWindow(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
         event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + portalURI + pageNodeSelected + "');");
       } else {
         if (Utils.isQuickEditMode(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW)) {
