@@ -1,49 +1,46 @@
-/*------------------Overrite method eXo.webui.UIPopup.init to show popup display center-------------------------------
-UIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showCloseButton, isShowMask) {
-	window.scroll(0, 0);	
-	var DOMUtil = eXo.core.DOMUtil ;
-	this.superClass = eXo.webui.UIPopup ;
-	var popup = document.getElementById(popupId) ;
-	var portalApp = document.getElementById("UIPortalApplication") ;
-	if(popup == null) return;
-	popup.style.visibility = "hidden" ;
-	if(!isShowMask) isShowMask = false; 
-	popup.isShowMask = isShowMask ;
-	
-	//TODO Lambkin: this statement create a bug in select box component in Firefox
-	//this.superClass.init(popup) ;
-	var contentBlock = DOMUtil.findFirstDescendantByClass(popup, 'div' ,'PopupContent');
-	if((eXo.core.Browser.getBrowserHeight() - 100 ) < contentBlock.offsetHeight) {
-		contentBlock.style.height = (eXo.core.Browser.getBrowserHeight() - 100) + "px";
-	}
-	var popupBar = DOMUtil.findFirstDescendantByClass(popup, 'div' ,'PopupTitle') ;
+/**
+ * Created by The eXo Platform SAS
+ * Author : Phan Le Thanh Chuong
+ *          chuong.phan@exoplatform.com; phan.le.thanh.chuong@gmail.com
+ * Modified: Copy from portal's UIForm.js, add a condition to check with CKEditor
+ *           TODO: Should be removed when update to new version of GateIn.
+ * May 12, 2010  
+ */
 
-	popupBar.onmousedown = this.initDND ;
-	
-	if(isShow == false) {
-		this.superClass.hide(popup) ;
-		if(isShowMask) eXo.webui.UIPopupWindow.showMask(popup, false) ;
-	} 
-	
-	if(isResizable) {
-		var resizeBtn = DOMUtil.findFirstDescendantByClass(popup, "div", "ResizeButton");
-		resizeBtn.style.display = 'block' ;
-		resizeBtn.onmousedown = this.startResizeEvt ;
-		portalApp.onmouseup = this.endResizeEvt ;
-	}
-	
-	popup.style.visibility = "hidden" ;
-	if(isShow == true) {
-		var iframes = DOMUtil.findDescendantsByTagName(popup, "iframe") ;
-		if(iframes.length > 0) {
-			setTimeout("eXo.webui.UIPopupWindow.show('" + popupId + "'," + isShowMask + ")", 500) ;
-		} else {
-		if(popup.offsetHeight == 0){
-			setTimeout("eXo.webui.UIPopupWindow.show('" + popupId + "'," + isShowMask + ")", 500) ;
-			return ;
-		}
-			this.show(popup, isShowMask) ;
-		}
-	}
+/*ie bug  you cannot have more than one button tag*/
+/**
+ * A function that submits the form identified by formId, with the specified action
+ * If useAjax is true, calls the ajaxPost function from PortalHttpRequest, with the given callback function
+ */
+eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
+  if (!callback) callback = null;
+  var form = this.getFormElemt(formId) ;
+  //TODO need review try-cactch block for form doesn't use FCK
+  try {
+    if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
+      for ( var name in FCKeditorAPI.__Instances ) {
+        var oEditor ;
+        try {
+          oEditor = FCKeditorAPI.__Instances[name] ;
+          if (oEditor && oEditor.GetParentForm && oEditor.GetParentForm() == form ) {
+            oEditor.UpdateLinkedField() ;
+          }
+        } catch(e) {
+          continue ;
+        }
+      }
+    }
+  } catch(e) {}
+  
+  try {
+    if (CKEDITOR && typeof CKEDITOR == "object") {
+      for (var i in CKEDITOR.instances) {
+    	CKEDITOR.instances[i].updateElement();
+      }
+    }
+  } catch(e) {}
+
+  form.elements['formOp'].value = action ;
+  if(useAjax) ajaxPost(form, callback) ;
+  else  form.submit();
 } ;
-/*----------------------------------------------End of overrite-------------------------------------------------------*/

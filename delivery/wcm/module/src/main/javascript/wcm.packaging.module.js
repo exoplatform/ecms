@@ -50,7 +50,7 @@ function getModule(params) {
   module.web.eXoWCMResources.deployName = "eXoWCMResources";
     
   module.web.eXoStaticResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-static", "war", module.version);
-  module.web.eXoStaticResources.deployName = "static";
+  module.web.eXoStaticResources.deployName = "eXoStaticResources";
     
   module.extension = {};
   

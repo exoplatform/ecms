@@ -51,6 +51,9 @@
 								<value>
 								  <string>wsrp-producer</string>
 								</value>
+                <value>
+                  <string>eXoStaticResources</string>
+                </value>
 								<value>
                   <string>eXoDMSResources</string>
                 </value>

@@ -8,7 +8,7 @@ script.type = 'text/javascript';
 body.appendChild(script)
 }
 
-inc("/static/ckeditor/ckeditor.js");
+inc("/eXoStaticResources/ckeditor/ckeditor.js");
 
 function updateck() {
     for ( instance in CKEDITOR.instances ) {

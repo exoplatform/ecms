@@ -6,8 +6,6 @@
   uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
   uicomponent.addHiddenField("hiddenInput3", hiddenField3) ;
 %>
-<script type="text/javascript" src="/static/ckeditor/wcmeditor.js"></script>
-
 <div class="UIForm LayoutContent">
 	<% uiform.begin() %>
   <div class="HorizontalLayout">
@@ -140,9 +138,3 @@
   </div>
   <% uiform.end() %>
 </div>
-
-<script type="text/javascript">
-  // With Ajax Loading, we must use setTimeout to initialize for Chrome and Safari compliance
-  setTimeout( "CKEDITOR.replace( 'summary' ,{toolbar : 'Basic'})", 100) ;
-  setTimeout( "CKEDITOR.replace( 'content' ,{toolbar : 'Basic'})", 100) ;
-</script>

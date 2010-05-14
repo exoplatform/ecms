@@ -10,8 +10,7 @@
 	def String cssFormId = "ContentCSS[" + uicomponent.hashCode() + "]";
 	def String jsFormId = "ContentJS[" + uicomponent.hashCode() + "]";
 	jsManager.importJavascript('eXo.webui.UIHorizontalTabs');
-	jsManager.importJavascript('eXo.wcm.frontoffice.private.FCKEditor', '/eXoWCMResources/javascript/') ;
-	jsManager.addOnLoadJavascript("eXo.ecm.WCMFCKEditor.insertCSSFromTextArea2FCK('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
+	jsManager.addOnLoadJavascript("eXo.ecm.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
 	
 	private void setUploadFields() {
 			String[] illustrationHiddenField1 = ["jcrPath=/node/medias/images/illustration", "nodetype=nt:file", "mixintype=mix:referenceable", "defaultValues=illustration"];
@@ -182,7 +181,7 @@
 							</tr>
 							<tr>
 					 			<td class="FieldLabel">
-					 				<div title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" class="WebContentSynchronize Refresh16x16Icon" onclick="eXo.ecm.WCMFCKEditor.insertCSSFromTextArea2FCK('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"></div>
+					 				<div title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" class="WebContentSynchronize Refresh16x16Icon" onclick="eXo.ecm.CKEditor.insertCSS('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"></div>
 									<div class="WebContentMain"><%=_ctx.appRes("WebContent.dialog.label.WebContentHtml")%></div>
 					 			</td>
 				  			<td class="FieldComponent">
@@ -209,8 +208,8 @@
 									if(htmlContent == null || htmlContent.equals("")) {
 										htmlContent = "<div class=\"DropCap\">T</div>ype the text here <div style=\"clear: left; height: 20px;\"><span></span></div>";
 									}
-									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,width:100%,height:410px", htmlContent];
-			    					uicomponent.addWYSIWYGField(htmlWYSIWYGFormId, htmlArguments) ;
+									String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", htmlContent];
+			    					uicomponent.addRichtextField(htmlWYSIWYGFormId, htmlArguments) ;
 			      				%>
 								</td>
 							</tr>
@@ -268,7 +267,7 @@
 											summaryContent = webContentNode.getProperty("exo:summary").getValue().getString();
 									}
 									String[] fieldSummary = ["jcrPath=/node/exo:summary", "editable=if-null", summaryContent] ;
-									uicomponent.addWYSIWYGField("exo:summary", fieldSummary) ;
+									uicomponent.addRichtextField("exo:summary", fieldSummary) ;
 								%>
 								</td>
 							</tr>

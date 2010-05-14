@@ -43,6 +43,7 @@ import org.exoplatform.ecm.webui.form.field.UIFormCalendarField;
 import org.exoplatform.ecm.webui.form.field.UIFormCheckBoxField;
 import org.exoplatform.ecm.webui.form.field.UIFormHiddenField;
 import org.exoplatform.ecm.webui.form.field.UIFormRadioBoxField;
+import org.exoplatform.ecm.webui.form.field.UIFormRichtextField;
 import org.exoplatform.ecm.webui.form.field.UIFormSelectBoxField;
 import org.exoplatform.ecm.webui.form.field.UIFormTextAreaField;
 import org.exoplatform.ecm.webui.form.field.UIFormTextField;
@@ -53,6 +54,7 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.JcrInputProperty;
@@ -68,6 +70,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.wcm.webui.form.UIFormRichtextInput;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -80,7 +83,6 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormInput;
-import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -1017,6 +1019,61 @@ public void addTextField(String name, String label, String[] arguments) throws E
   public void addWYSIWYGField(String name, String[] arguments) throws Exception {
     addWYSIWYGField(name,null,arguments);
   }
+  
+  public void addRichtextField(String name, String label, String[] arguments) throws Exception {
+    UIFormRichtextField richtextField = new UIFormRichtextField(name,label,arguments);
+    String jcrPath = richtextField.getJcrPath();
+    JcrInputProperty inputProperty = new JcrInputProperty();
+    inputProperty.setJcrPath(jcrPath);       
+    setInputProperty(name, inputProperty);
+    if(richtextField.isMultiValues()) {
+      //TODO need add FCKEditorConfig for the service
+      renderMultiValuesInput(UIFormRichtextInput.class,name,label);      
+      return;
+    }            
+    UIFormRichtextInput richtextInput = findComponentById(name);
+    if(richtextInput == null) {
+      richtextInput = richtextField.createUIFormInput();      
+    }                 
+    addUIFormInput(richtextInput);
+    if(richtextInput.getValue() == null) richtextInput.setValue(richtextField.getDefaultValue());
+    String propertyName = getPropertyName(jcrPath);
+    propertiesName.put(name, propertyName);
+    fieldNames.put(propertyName, name);
+    Node node = getNode();
+
+    if(!isShowingComponent && !isRemovePreference) {
+      if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
+        Node jcrContentNode = node.getNode("jcr:content");
+        richtextInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
+      } else {
+        if(node != null && node.hasProperty(propertyName)) {
+          richtextInput.setValue(node.getProperty(propertyName).getValue().getString());
+        }
+      }
+    }
+    if(isNotEditNode && !isShowingComponent && !isRemovePreference) {
+      Node childNode = getChildNode();
+      if(node != null && node.hasNode("jcr:content") && childNode != null) {
+        Node jcrContentNode = node.getNode("jcr:content");
+        richtextInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
+      } else {
+        if(childNode != null) {
+          richtextInput.setValue(propertyName);
+        } else if(childNode == null && jcrPath.equals("/node") && node != null) {
+          richtextInput.setValue(node.getName());
+        } else {
+          richtextInput.setValue(null);
+        }
+      }
+    }
+    renderField(name);
+  }
+
+  public void addRichtextField(String name, String[] arguments) throws Exception {
+    addRichtextField(name,null,arguments);
+  }
+  
   public Node getChildNode() throws Exception { 
     if(childPath == null) return null;
     return (Node) getSession().getItem(childPath); 
