@@ -187,6 +187,22 @@ public class UIContentSearchResult extends UIGrid {
     Session session = Utils.getSessionProvider().getSession(workspace, maRepository);
     return session;
   }
+  
+  /**
+   * Gets the workspace name.
+   * @param node the node
+   * @return name of workspace
+   * @throws Exception the exception
+   */
+  public String getWorkspaceName(Node node) throws Exception {
+    return node.getSession().getWorkspace().getName();
+  }
+  
+  public String getRepository() throws Exception {
+    RepositoryService repoService = getApplicationComponent(RepositoryService.class);
+    ManageableRepository maRepository = repoService.getCurrentRepository();
+    return maRepository.getConfiguration().getName();
+  }
 
   /**
    * The listener interface for receiving selectAction events.

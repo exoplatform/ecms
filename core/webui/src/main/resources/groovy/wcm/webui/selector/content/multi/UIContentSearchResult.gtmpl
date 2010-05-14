@@ -14,6 +14,7 @@
   UIComponent uiParent = uicomponent.getParent() ;
   UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class);
   DateFormat dateFormat = uicomponent.getDateFormat();
+  String repositoryName = uicomponent.getRepository();  
 %>
 <div id="$uicomponent.id">
   <table class="UIGrid" cellspacing="0">
@@ -58,6 +59,9 @@
             String path = bean.getPath();
             float score = bean.getScore();
             Node node = bean.getNode();
+            String nodePath = node.getPath();
+            String workspaceName = uicomponent.getWorkspaceName(node);
+            nodePath = repositoryName + ":" + workspaceName + ":" + nodePath;
             String date = dateFormat.format(uicomponent.getCreateDate(node));
             WCMPublicationService wcmPublicationService = uicomponent.getApplicationComponent(WCMPublicationService.class);
             String publicationState = wcmPublicationService.getContentState(node);
@@ -82,7 +86,7 @@
     
           <td class="action">
             <div class="ActionContainer"> 
-              <img onclick="eXo.ecm.ECS.addFile2ListContent(this);" nodeType="<%= node.getPrimaryNodeType().getName() %>" path="<%= node.getPath() %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" />
+              <img onclick="eXo.ecm.ECS.addFile2ListContent(this);" nodeType="<%= node.getPrimaryNodeType().getName() %>" path="<%= nodePath %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" />
               <img onclick="<%= uicomponent.event("View", node.getPath()) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="ViewIcon" />
             </div>
           </td>
