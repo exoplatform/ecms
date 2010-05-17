@@ -6,8 +6,10 @@ import javax.jcr.lock.LockException;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -54,6 +56,9 @@ public class UIActivateAuditing extends UIContainer implements UIPopupComponent 
         Node currentNode = uiExplorer.getCurrentNode() ;
       
         currentNode.addMixin(Utils.EXO_AUDITABLE);
+        AuditService auditService = WCMCoreUtils.getService(AuditService.class);
+        if (!auditService.hasHistory(currentNode))
+          auditService.createHistory(currentNode);
         currentNode.save() ;
 
         currentNode.getSession().save();   
