@@ -54,6 +54,8 @@ import org.exoplatform.ws.frameworks.json.impl.JsonDefaultHandler;
 import org.exoplatform.ws.frameworks.json.impl.JsonParserImpl;
 import org.exoplatform.ws.frameworks.json.value.JsonValue;
 
+import com.ibm.icu.text.Transliterator;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -103,6 +105,40 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
   }
   
   /**
+   * Clean string.
+   * 
+   * @param str the str
+   * 
+   * @return the string
+   */
+  private static String cleanString(String str) {
+      Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
+      str = accentsconverter.transliterate(str); 
+      //the character ? seems to not be changed to d by the transliterate function 
+      StringBuffer cleanedStr = new StringBuffer(str.trim());
+      // delete special character
+      for(int i = 0; i < cleanedStr.length(); i++) {
+        char c = cleanedStr.charAt(i);
+        if(c == ' ') {
+          if (i > 0 && cleanedStr.charAt(i - 1) == '-') {
+            cleanedStr.deleteCharAt(i--);
+          } else {
+            c = '_';
+            cleanedStr.setCharAt(i, c);
+          }
+          continue;
+        }
+        if(i > 0 && !(Character.isLetterOrDigit(c) || c == '-')) {
+          cleanedStr.deleteCharAt(i--);
+          continue;
+        }
+        if(i > 0 && c == '-' && cleanedStr.charAt(i-1) == '-')
+          cleanedStr.deleteCharAt(i--);
+      }
+      return cleanedStr.toString().toLowerCase();
+  }
+  
+  /**
    * Gets the number require type.
    * 
    * @param formType the form type
@@ -133,7 +169,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
      * PREFIX is used to declare the nodetype inside "exo" namespace
      * SUFFIX is used to maintain a more logical alphabetic order by nodetype but preserves unicity.
      */
-    return NODE_PREFIX + Utils.cleanString(nodetypeName) + NODE_SUFFIX;
+    return NODE_PREFIX + cleanString(nodetypeName) + NODE_SUFFIX;
   }
   
   /**
@@ -144,7 +180,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
    * @return the property name
    */
   private String getPropertyName(String inputName) {
-    return PROPERTY_PREFIX + Utils.cleanString(inputName);
+    return PROPERTY_PREFIX + cleanString(inputName);
   }
   
   /**
@@ -240,7 +276,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       UIFormGeneratorInputBean form = forms.get(i);
       String inputName = form.getName();
       String inputType = form.getType();
-      String inputFieldName = Utils.cleanString(inputName) + "FieldName";
+      String inputFieldName = cleanString(inputName) + "FieldName";
       String validate = "validate=";
       String inputField = "";
       String guideline = form.getGuideline();
