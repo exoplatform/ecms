@@ -30,6 +30,32 @@ import org.exoplatform.webui.core.UIComponent;
 public interface NodePresentation {
   
   /**
+   * Sets enable vote
+   * 
+   * @param value value to set
+   */
+  public void setEnableVote(boolean value);
+  
+  /**
+   * checks if enable vote
+   * 
+   */  
+  public boolean isEnableVote();
+  
+  /**
+   * Sets enable comment
+   * 
+   * @param value value to set
+   */
+  public void setEnableComment(boolean value);
+  
+  /**
+   * checks if enable comment
+   * 
+   */  
+  public boolean isEnableComment();  
+  
+  /**
    * Sets the node.
    * 
    * @param node the new node

@@ -6,8 +6,7 @@
 	import org.exoplatform.services.wcm.core.NodeLocation;
 	import org.exoplatform.services.wcm.skin.XSkinService;
 	import org.exoplatform.services.wcm.javascript.XJavascriptService;
-	import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
-	
+		
 	public boolean getPortletPreference(String name) {
     String value = _ctx.getRequestContext().getRequest().getPreferences().getValue(name, null);
     if(value != null) return Boolean.parseBoolean(value);
@@ -82,19 +81,19 @@
 					%>
 				</div>
 				<%= html %>
-				<% if (uicomponent.getAncestorOfType(UIDocumentContainer.class) != null) {
-				     _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); 
-				     _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); 
-				   } 
-				%>
+		    <% if (uicomponent.isEnableVote()) 
+	           _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
+	         if (uicomponent.isEnableComment())
+	           _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); 
+	      %>
 			</div>
 		<%
   } else {
 	  %><%= html %>
-    <% if (uicomponent.getAncestorOfType(UIDocumentContainer.class) != null) {
-      _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); 
-      _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); 
-    } 
+    <% if (uicomponent.isEnableVote()) 
+        _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
+       if (uicomponent.isEnableComment())
+        _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); 
     %>
 	  <%
   }

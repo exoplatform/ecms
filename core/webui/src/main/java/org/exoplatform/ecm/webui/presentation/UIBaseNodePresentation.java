@@ -60,7 +60,10 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
 
   /** The language_. */
   private String language_ ;
+  private boolean enableVote;
+  private boolean enableComment;
   private static final Log LOG  = ExoLogger.getLogger("admin.UIBaseNodePresentation");
+  
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNode()
    */
@@ -386,6 +389,21 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   	
   	return ret.toString();
   }
-  
+
+  public boolean isEnableComment() {
+    return enableComment;
+  }
+
+  public boolean isEnableVote() {
+   return enableVote;
+  }
+
+  public void setEnableComment(boolean value) {
+    enableComment = value;
+  }
+
+  public void setEnableVote(boolean value) {
+    enableVote = value;
+  }
   
 }

@@ -376,4 +376,22 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     }
     return null;
   }
+
+  public boolean isEnableComment() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public boolean isEnableVote() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public void setEnableComment(boolean value) {
+    // TODO Auto-generated method stub
+  }
+
+  public void setEnableVote(boolean value) {
+    // TODO Auto-generated method stub
+  }
 }

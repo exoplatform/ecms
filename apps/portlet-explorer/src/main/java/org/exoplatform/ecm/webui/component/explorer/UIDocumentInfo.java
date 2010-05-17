@@ -1233,4 +1233,20 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       return 0;
     }
   }
+
+  public boolean isEnableComment() {
+    return true;
+  }
+
+  public boolean isEnableVote() {
+    return true;
+  }
+
+  public void setEnableComment(boolean value) {
+    // TODO Auto-generated method stub
+  }
+
+  public void setEnableVote(boolean value) {
+    // TODO Auto-generated method stub
+  }
 }

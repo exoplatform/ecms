@@ -492,4 +492,22 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
     }
   }
 
+  public boolean isEnableComment() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public boolean isEnableVote() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public void setEnableComment(boolean value) {
+    // TODO Auto-generated method stub
+  }
+
+  public void setEnableVote(boolean value) {
+    // TODO Auto-generated method stub
+  }
+
 }
