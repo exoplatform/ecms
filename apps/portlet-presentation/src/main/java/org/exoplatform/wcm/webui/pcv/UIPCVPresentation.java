@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.webui.pcv;
 
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,9 @@ import javax.jcr.Node;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
+import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
+import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -232,8 +235,10 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
   }
 
   public UIComponent getRemoveAttach() throws Exception {
-  	// TODO Auto-generated method stub
-  	return null;
+    removeChild(RemoveAttachmentComponent.class);
+    UIComponent uicomponent = addChild(RemoveAttachmentComponent.class, null, "DocumentInfoRemoveAttach");
+    ((AbstractActionComponent)uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPCVContainer.class}));
+    return uicomponent;
   }
   
   public UIComponent getRemoveComment() throws Exception {
