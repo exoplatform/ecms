@@ -217,7 +217,11 @@
           //Begin WebDav Action
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
             if ((!linkManager.isLink(data) || linkManager.isTargetReachable(data)) && data.getPrimaryNodeType().getName().equals("nt:file")) {
-	    		  	String mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+	    		  	String mimeType="";
+										try {
+											mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+										} catch (Exception e) {											
+										}
 	    		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" +Utils.formatNodeName(data.getPath())+"','"+mimeType+"')";				  					  					  	
 	    		  	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\" >" ;	        
 	    		  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
