@@ -34,18 +34,18 @@
     </node>                                           
 
     <node>
-      <uri>details</uri>
-      <name>details</name>
-      <label>#{portal.@owner@.details}</label>
-      <visibility>HIDDEN</visibility>
-      <page-reference>portal::@owner@::details</page-reference>
+      <uri>detail</uri>
+      <name>detail</name>
+      <label>#{portal.@owner@.detail}</label>
+      <visibility>SYSTEM</visibility>
+      <page-reference>portal::@owner@::detail</page-reference>
     </node>
     
     <node>
       <uri>printviewer</uri>
       <name>printviewer</name>
       <label>#{portal.@owner@.printviewer}</label>
-      <visibility>HIDDEN</visibility>
+      <visibility>SYSTEM</visibility>
       <page-reference>portal::@owner@::printviewer</page-reference>
     </node>
 

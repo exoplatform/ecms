@@ -75,16 +75,16 @@
     <node>
       <uri>detail</uri>
       <name>detail</name>
-      <label>#{portal.acme.pcv}</label>
-      <visibility>HIDDEN</visibility>
-      <page-reference>portal::acme::pcv</page-reference>
+      <label>#{portal.acme.detail}</label>
+      <visibility>SYSTEM</visibility>
+      <page-reference>portal::acme::detail</page-reference>
     </node>
 
     <node>
       <uri>printviewer</uri>
       <name>printviewer</name>
       <label>#{portal.acme.printviewer}</label>
-      <visibility>HIDDEN</visibility>
+      <visibility>SYSTEM</visibility>
       <page-reference>portal::acme::printviewer</page-reference>
     </node>
 

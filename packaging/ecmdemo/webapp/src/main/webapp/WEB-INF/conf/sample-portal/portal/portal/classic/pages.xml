@@ -296,8 +296,8 @@
   </page>
 
   <page>
-    <name>parameterizedviewer</name>
-    <title>ParameterizedViewer</title>
+    <name>detail</name>
+    <title>Detail</title>
     <access-permissions>Everyone</access-permissions>
     <edit-permission>*:/platform/administrators</edit-permission>
     <portlet-application>
@@ -317,7 +317,7 @@
           </preference>
         </preferences>
       </portlet>
-      <title>Parameterized viewer</title>
+      <title>Detail</title>
       <access-permissions>Everyone</access-permissions>
       <show-info-bar>false</show-info-bar>
       <show-application-state>false</show-application-state>

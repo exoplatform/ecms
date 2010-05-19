@@ -34,17 +34,17 @@
 			<page-reference>portal::classic::homepage</page-reference>	    
 		</node>
 		<node>
-			<uri>parameterizedviewer</uri>
-			<name>parameterizedviewer</name>
-			<label>#{portal.classic.parameterizedviewer}</label>
-			<visibility>HIDDEN</visibility>
-			<page-reference>portal::classic::parameterizedviewer</page-reference>
+			<uri>detail</uri>
+			<name>detail</name>
+			<label>#{portal.classic.detail}</label>
+			<visibility>SYSTEM</visibility>
+			<page-reference>portal::classic::detail</page-reference>
 		</node>
 		<node>
 			<uri>printviewer</uri>
 			<name>printviewer</name>
 			<label>#{portal.classic.printviewer}</label>
-			<visibility>HIDDEN</visibility>
+			<visibility>SYSTEM</visibility>
 			<page-reference>portal::classic::printviewer</page-reference>
 		</node>
 		<node>
