@@ -214,7 +214,7 @@ exo-ecms-packaging-ecmdemo-webapp
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-apps-resources-static</artifactId>
               <contextRoot>static</contextRoot>
-              <bundleFileName>static.war</bundleFileName>
+              <bundleFileName>eXoStaticResources.war</bundleFileName>
             </webModule>
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
