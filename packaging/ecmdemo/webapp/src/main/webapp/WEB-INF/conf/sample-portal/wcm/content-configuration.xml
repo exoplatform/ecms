@@ -32,7 +32,7 @@
   <init-params>
     <value-param>
       <name>enabled</name>
-      <value>true</value>
+      <value>false</value>
     </value-param>
     <value-param>
       <name>servletName</name>
@@ -69,8 +69,20 @@
             </value>
             <value>
               <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
-                <field name="friendlyUri"><string>files</string></field>
+                <field name="friendlyUri"><string>acme-documents</string></field>
                 <field name="unfriendlyUri"><string>/rest-ecmdemo/jcr/repository/collaboration/sites content/live/acme/documents</string></field>
+              </object>
+            </value>
+            <value>
+              <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
+                <field name="friendlyUri"><string>documents</string></field>
+                <field name="unfriendlyUri"><string>/public/acme/detail?path=/repository/collaboration</string></field>
+              </object>
+            </value>
+            <value>
+              <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
+                <field name="friendlyUri"><string>files</string></field>
+                <field name="unfriendlyUri"><string>/rest-ecmdemo/jcr/repository/collaboration</string></field>
               </object>
             </value>
           </collection>
