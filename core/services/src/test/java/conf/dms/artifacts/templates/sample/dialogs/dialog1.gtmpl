@@ -115,7 +115,7 @@
 			    <div class="UIFCKEditor">
 			      <%
 			        String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=basic", ""] ;
-			        uicomponent.addRichtextField("summary", fieldSummary) ;        
+			        uicomponent.addWYSIWYGField("summary", fieldSummary) ;        
 			      %>
 			    </div>
 		    </td>
@@ -126,7 +126,7 @@
 			    <div class="UIFCKEditor">
 			      <%
 			        String[] fieldContent = ["jcrPath=/node/exo:content", "options=default", ""] ;
-			        uicomponent.addRichtextField("content", fieldContent) ;
+			        uicomponent.addWYSIWYGField("content", fieldContent) ;
 			      %>
 			    </div>
 		    </td>
