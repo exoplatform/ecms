@@ -152,6 +152,7 @@ public class UIViewMetadataForm extends UIDialogForm {
       UIPopupWindow uiPopup = uiForm.getAncestorOfType(UIPopupWindow.class);
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
+      event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource().getParent());
     }
   }
 
