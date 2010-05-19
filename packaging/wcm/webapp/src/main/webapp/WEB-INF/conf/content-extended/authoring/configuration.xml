@@ -221,7 +221,7 @@
 	      <values-param>
 	        <name>autoCreatedInNewRepository</name>
 	        <description>Node types configuration file</description>
-	        <value>jar:/conf/wcm-extensions-nodetypes.xml</value>
+	        <value>war:/conf/content-extended/authoring/wcm-extensions-nodetypes.xml</value>
 	      </values-param>
 	    </init-params>
 	  </component-plugin>
