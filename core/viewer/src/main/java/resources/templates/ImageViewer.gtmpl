@@ -45,7 +45,7 @@
   }
   
   String rndString = String.valueOf(new Date().getTime());
-  def binarySrc = "/" + PortalContainer.getCurrentPortalContainerName() + "/" + PortalContainer.getCurrentRestContextName() + "/jcr/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + currentNode.getPath();
+  def binarySrc = "/" + PortalContainer.getCurrentPortalContainerName() + "/" + PortalContainer.getCurrentRestContextName() + "/jcr/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + currentNode.getPath() + "?time=" + System.currentTimeMillis();
 
 	def dcTitle = "";
 	if(contentNode.hasProperty("dc:title")) {
