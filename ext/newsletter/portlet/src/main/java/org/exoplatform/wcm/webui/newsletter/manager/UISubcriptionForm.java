@@ -239,7 +239,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
     public void execute(Event<UISubcriptionForm> event) throws Exception {
 
       UISubcriptionForm uiSubcriptionForm = event.getSource();
-
+      
       UINewsletterManagerPortlet newsletterPortlet = uiSubcriptionForm.getAncestorOfType(UINewsletterManagerPortlet.class);
       NewsletterManagerService newsletterManagerService = (NewsletterManagerService)newsletterPortlet.getApplicationComponent(NewsletterManagerService.class) ;
 
@@ -294,6 +294,12 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
         newsletterSubscriptionConfig.setTitle(subcriptionTitle);
         newsletterSubscriptionConfig.setRedactor(inputRedactorValue);
         subscriptionHandler.edit(sessionProvider, NewsLetterUtil.getPortalName(), newsletterSubscriptionConfig);
+      }
+      UISubscriptions uiSubscriptions = uiSubcriptionForm.getAncestorOfType(UINewsletterManagerPortlet.class).getChild(UISubscriptions.class);
+      if(uiSubscriptions != null) {
+    	  if(uiSubscriptions.categoryConfig != null) {
+    		  uiSubscriptions.init();
+    	  }
       }
       Utils.closePopupWindow(uiSubcriptionForm, UINewsletterConstant.SUBSCRIPTION_FORM_POPUP_WINDOW);
     }

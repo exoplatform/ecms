@@ -61,7 +61,9 @@ import org.exoplatform.webui.form.UIFormSelectBox;
         @EventConfig(listeners = UISubscriptions.OpenSubscriptionActionListener.class),
         @EventConfig(listeners = UISubscriptions.EditCategoryActionListener.class),
         @EventConfig(listeners = UISubscriptions.ManagerUsersActionListener.class),
-        @EventConfig(listeners = UISubscriptions.SelectSubscriptionActionListener.class)
+        @EventConfig(listeners = UISubscriptions.SelectSubscriptionActionListener.class),
+        @EventConfig(listeners = UISubscriptions.SelectSubscriptionCheckboxActionListener.class),
+        @EventConfig(listeners = UISubscriptions.SelectSubscriptionCheckboxHeaderActionListener.class)
     }
 )
 public class UISubscriptions extends UIForm {
@@ -76,6 +78,12 @@ public class UISubscriptions extends UIForm {
   
   /** The user handler. */
   NewsletterManageUserHandler userHandler = null;
+  
+  String selectSubscriptionCheckboxHeader = "SelectSubscriptionCheckboxHeader";
+  
+  String selectSubscriptionCheckbox 	  = "SelectSubscriptionCheckbox";
+  
+  List<NewsletterSubscriptionConfig> listSubs = null;
   
   /** The portal name. */
   String portalName;
@@ -108,13 +116,20 @@ public class UISubscriptions extends UIForm {
   /**
    * Inits the.
    * 
-   * @param listSubScritpions the list sub scritpions
+   * @param listSubScritpions the list subscriptions
    */
-  private void init(List<NewsletterSubscriptionConfig> listSubScritpions){
+  public void init() {
     this.getChildren().clear();
+       
+    updateListSubscription();
+    UIFormCheckBoxInput<Boolean> checkboxHeader =  new UIFormCheckBoxInput<Boolean>("UISubscriptionsCheckAll","UISubscriptionsCheckAll",false);
+    checkboxHeader.setOnChange(selectSubscriptionCheckboxHeader);
+    this.addChild(checkboxHeader);
+    
     UIFormCheckBoxInput<Boolean> checkBoxInput = null;
-    for(NewsletterSubscriptionConfig subscription : listSubScritpions){
+    for(NewsletterSubscriptionConfig subscription : listSubs){
       checkBoxInput = new UIFormCheckBoxInput<Boolean>(subscription.getName(), subscription.getName(), false);
+      checkBoxInput.setOnChange(selectSubscriptionCheckbox);
       this.addChild(checkBoxInput);
     }
   }
@@ -126,7 +141,7 @@ public class UISubscriptions extends UIForm {
    * 
    * @return the number of user
    */
-  @SuppressWarnings("unused")
+  @SuppressWarnings({ "unused", "deprecation" })
   private int getNumberOfUser(String subscriptionName){
     return userHandler.getQuantityUserBySubscription(
                                                      Utils.getSessionProvider(),
@@ -141,22 +156,30 @@ public class UISubscriptions extends UIForm {
    * @return the list subscription
    */
   @SuppressWarnings("unused")
-  private List<NewsletterSubscriptionConfig> getListSubscription(){
-    List<NewsletterSubscriptionConfig> listSubs = new ArrayList<NewsletterSubscriptionConfig>();
-    try{
-      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-      if(userHandler.isAdministrator(portalName, userId) || userHandler.isModerator(userId, categoryConfig)){
-        listSubs = subscriptionHandler.getSubscriptionsByCategory(sessionProvider, portalName, categoryConfig.getName());
-      } else {
-        listSubs = subscriptionHandler.getSubscriptionByRedactor(portalName, categoryConfig.getName(), userId, sessionProvider);
-      }
-      init(listSubs);
-    }catch(Exception e){
-      Utils.createPopupMessage(this, "UISubscription.msg.get-list-subscriptions", null, ApplicationMessage.ERROR);
-    }
+  public List<NewsletterSubscriptionConfig> getListSubscription(){    
     return listSubs;
+  }   
+  
+  /**
+   * Gets the list subscription.
+   * 
+   * @return the list subscription
+   */
+  @SuppressWarnings("unused")
+  public void updateListSubscription(){    
+	listSubs = new ArrayList<NewsletterSubscriptionConfig>();
+	try{
+	   SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+	   if(userHandler.isAdministrator(portalName, userId) || userHandler.isModerator(userId, categoryConfig)){
+	      listSubs = subscriptionHandler.getSubscriptionsByCategory(sessionProvider, portalName, categoryConfig.getName());
+	   } else {
+	        listSubs = subscriptionHandler.getSubscriptionByRedactor(portalName, categoryConfig.getName(), userId, sessionProvider);
+	   }         
+	}catch(Exception e){
+	     Utils.createPopupMessage(this, "UISubscription.msg.get-list-subscriptions", null, ApplicationMessage.ERROR);
+	}
   }
-
+  
   /**
    * Gets the number of waiting newsletter.
    * 
@@ -164,7 +187,7 @@ public class UISubscriptions extends UIForm {
    * 
    * @return the number of waiting newsletter
    */
-  @SuppressWarnings("unused")
+  @SuppressWarnings({ "unused", "deprecation" })
   private long getNumberOfWaitingNewsletter(String subscriptionName){
     try{
       return subscriptionHandler.getNumberOfNewslettersWaiting(Utils.getSessionProvider(), portalName, this.categoryConfig.getName(), subscriptionName);
@@ -272,7 +295,8 @@ public class UISubscriptions extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    public void execute(Event<UISubscriptions> event) throws Exception {
+    @SuppressWarnings("deprecation")
+	public void execute(Event<UISubscriptions> event) throws Exception {
       UISubscriptions subsriptions = event.getSource();
       NewsletterManagerService newsletterManagerService = subsriptions.getApplicationComponent(NewsletterManagerService.class);
       NewsletterCategoryHandler categoryHandler = newsletterManagerService.getCategoryHandler();
@@ -328,7 +352,8 @@ public class UISubscriptions extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    public void execute(Event<UISubscriptions> event) throws Exception {
+    @SuppressWarnings("deprecation")
+	public void execute(Event<UISubscriptions> event) throws Exception {
       UISubscriptions subsriptions = event.getSource();
       String subId = subsriptions.getChecked();
       if(subId == null){
@@ -361,7 +386,7 @@ public class UISubscriptions extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "deprecation" })
     public void execute(Event<UISubscriptions> event) throws Exception {
       UISubscriptions subsriptions = event.getSource();
       boolean isChecked = false;
@@ -410,7 +435,8 @@ public class UISubscriptions extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    public void execute(Event<UISubscriptions> event) throws Exception {
+    @SuppressWarnings("deprecation")
+	public void execute(Event<UISubscriptions> event) throws Exception {
       UISubscriptions uiSubscription = event.getSource();
       String subId = uiSubscription.getChecked();
       if(subId == null){
@@ -484,6 +510,82 @@ public class UISubscriptions extends UIForm {
   }
   
   /**
+   * The listener interface for receiving selectSubscriptionAction events.
+   * The class that is interested in processing a selectSubscriptionAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addSelectSubscriptionActionListener<code> method. When
+   * the selectSubscriptionAction event occurs, that object's appropriate
+   * method is invoked.
+   * 
+   * @see SelectSubscriptionActionEvent
+   */
+  public static class SelectSubscriptionCheckboxActionListener extends EventListener<UISubscriptions> {
+    
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    @SuppressWarnings("unchecked")
+	public void execute(Event<UISubscriptions> event) throws Exception {
+    	
+    	UISubscriptions uiSubscriptions = event.getSource();
+
+    	boolean checked = true;
+    	List<UIComponent> listSubscriptions = uiSubscriptions.getChildren();    	
+    	for(UIComponent subscriptionCheckbox : listSubscriptions) {
+    		UIFormCheckBoxInput<Boolean> objCheckbox = (UIFormCheckBoxInput<Boolean>) subscriptionCheckbox;
+    		if(objCheckbox.getName().equals("UISubscriptionsCheckAll")) {
+    			continue;
+    		} else {
+    			if( objCheckbox.isChecked() == false) {
+    				checked = false;
+    			}
+    		}       	 
+    	}    	
+    	uiSubscriptions.getUIFormCheckBoxInput("UISubscriptionsCheckAll").setChecked(checked); 	
+    	
+    	event.getRequestContext().addUIComponentToUpdateByAjax(uiSubscriptions);
+    	
+    }
+  }
+  
+  /**
+   * The listener interface for receiving selectSubscriptionAction events.
+   * The class that is interested in processing a selectSubscriptionAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addSelectSubscriptionActionListener<code> method. When
+   * the selectSubscriptionAction event occurs, that object's appropriate
+   * method is invoked.
+   * 
+   * @see SelectSubscriptionActionEvent
+   */
+  public static class SelectSubscriptionCheckboxHeaderActionListener extends EventListener<UISubscriptions> {
+    
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    @SuppressWarnings("unchecked")
+	public void execute(Event<UISubscriptions> event) throws Exception {
+    	
+    	UISubscriptions uiSubscriptions = event.getSource();
+
+    	List<UIComponent> listSubscriptions = uiSubscriptions.getChildren();
+    	UIFormCheckBoxInput<Boolean> uiSubscriptionsCheckAll = uiSubscriptions.getChildById("UISubscriptionsCheckAll");
+    	boolean checked = uiSubscriptionsCheckAll.isChecked();
+    	
+    	for(UIComponent subscriptionCheckbox : listSubscriptions) {
+    		if(subscriptionCheckbox.getName().equals("UISubscriptionsCheckAll")) {
+    			continue;		  
+    		} else {
+    			uiSubscriptions.getUIFormCheckBoxInput(subscriptionCheckbox.getName()).setChecked(checked);
+    		}       	 
+    	}    	
+    	event.getRequestContext().addUIComponentToUpdateByAjax(uiSubscriptions);
+    }
+  }
+  
+  /**
    * The listener interface for receiving managerUsersAction events.
    * The class that is interested in processing a managerUsersAction
    * event implements this interface, and the object created
@@ -530,5 +632,5 @@ public class UISubscriptions extends UIForm {
       entryContainer.getChild(UINewsletterEntryDialogSelector.class).init(uiSubscriptions.categoryConfig.getName(), null);
       Utils.createPopupWindow(uiSubscriptions, entryContainer, UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW, 800);
     }
-  }
+  }  
 }

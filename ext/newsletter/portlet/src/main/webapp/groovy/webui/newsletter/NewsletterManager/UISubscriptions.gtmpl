@@ -172,6 +172,7 @@ if(uicomponent.categoryConfig != null){
 					<div class="ClearLeft"><span></span></div>
 				</div>
 				<!-- All subscriptions -->
+				<%List<NewsletterSubscriptionConfig> listSubscriptions = uicomponent.getListSubscription(); %>
 				<div class="Subscriptions">
 					<table cellpadding="5" cellspacing="0" border="0">
 						<tr>
@@ -185,17 +186,17 @@ if(uicomponent.categoryConfig != null){
 								<%=_ctx.appRes("UICategories.title.AWaitingLetter")%>
 							</th>
 							<th class="thContent Title" style="border-right:none;">
-								<input id="UISubscriptionsCheckAll" type="checkbox" onclick="eXo.ecm.NewsletterManager.checkAllSelected(this);">
+								<%uicomponent.renderChild("UISubscriptionsCheckAll")%>
 							</th>
-						</tr>
-						<%List<NewsletterSubscriptionConfig> listSubscriptions = uicomponent.getListSubscription();
+						</tr>					
+						<%
 							if(listSubscriptions.size() > 0){
 								int i = 0;
 								String classTr = "";
-								for(NewsletterSubscriptionConfig subScription in listSubscriptions){
-									if(i % 2 == 0) classTr = "OddRow";
-									else classTr = "EvenRow";
-									i ++;
+								for(NewsletterSubscriptionConfig subScription in listSubscriptions){									
+										if(i % 2 == 0) classTr = "OddRow";
+										else classTr = "EvenRow";
+										i ++;
 								%>
 									<tr class="$classTr">
 										<td style="width:auto;">

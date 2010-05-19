@@ -223,13 +223,15 @@ public class UICategories extends UIContainer {
   	/* (non-Javadoc)
   	 * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
   	 */
-  	public void execute(Event<UICategories> event) throws Exception {
+  	@SuppressWarnings("deprecation")
+	public void execute(Event<UICategories> event) throws Exception {
 	    UICategories uiCategories = event.getSource();
 	    String categoryName = event.getRequestContext().getRequestParameter(OBJECTID);
 	    UINewsletterManagerPortlet newsletterManagerPortlet = uiCategories.getAncestorOfType(UINewsletterManagerPortlet.class);
 	    UISubscriptions subsriptions = newsletterManagerPortlet.getChild(UISubscriptions.class);
 	    subsriptions.setRendered(true);
 	    subsriptions.setCategory(uiCategories.categoryHandler.getCategoryByName(Utils.getSessionProvider(), NewsLetterUtil.getPortalName(), categoryName));
+	    subsriptions.init();
 	    newsletterManagerPortlet.getChild(UICategories.class).setRendered(false);
 	    event.getRequestContext().addUIComponentToUpdateByAjax(newsletterManagerPortlet);
 	  }
