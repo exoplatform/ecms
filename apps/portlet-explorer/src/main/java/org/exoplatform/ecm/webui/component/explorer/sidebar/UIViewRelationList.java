@@ -101,7 +101,8 @@ public class UIViewRelationList extends UIContainer{
 		        if(iter != null) {
 		          while(iter.hasNext()) {
 		            Node refNode = iter.nextProperty().getParent() ;
-		            refNodes.add(refNode) ;
+		            if (!refNode.isNodeType(Utils.EXO_RESTORELOCATION) && !refNode.isNodeType("exo:auditHistory")) 
+		              refNodes.add(refNode) ;
 		          }
 		        }
 		      } catch(Exception e) { }
