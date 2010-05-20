@@ -291,9 +291,15 @@
             %>
             <script type="text/javascript">
             //<![CDATA[
-              window.addEvent('domready', function(){
-                var myShow = new Slideshow('show', ${data}, {controller: true, height: 300, hu: '', thumbnails: true, width: 400});
-              });
+	            if (window.addEventListener) {
+	              window.addEventListener('load', function(){
+	                var myShow = new Slideshow('show', ${data}, {controller: true, height: 300, hu: '', thumbnails: true, width: 400});
+	              }, false);
+	            } else if (window.attachEvent) {
+	            	window.attachEvent('onload', function(){
+	                var myShow = new Slideshow('show', ${data}, {controller: true, height: 300, hu: '', thumbnails: true, width: 400});
+	              });
+	            }
             //]]>
             
             </script>
@@ -303,7 +309,6 @@
                <div id="show" class="slideshow">
                </div>
               </body>
-              <script type="text/javascript"> init() </script>
             </html>
           </textarea>
         </div>
