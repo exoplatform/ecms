@@ -129,7 +129,7 @@ if(uicomponent.categoryConfig != null){
 																							if(uicomponent.isAdministrator() || uicomponent.isModerator()){%>
 																								<div class="MenuItem" onclick="javaScript:void(0)">
 																									<div class="ItemIcon Remove16x16Icon" style="padding-left:30px;text-align:left;">
-																										<a href="javascript:if(eXo.ecm.NewsletterManager.checkBeforeDelete('UISubscriptionsCheckAll', '<%=_ctx.appRes("UISubscription.msg.checkOnlyOneSubScriptionToDelete")%>', '<%=_ctx.appRes("UISubscription.msg.confirmDeleteSubscription")%>')) <%=uicomponent.event("DeleteSubscription")%>">
+																										<a href="javascript:if(eXo.ecm.NewsletterManager.checkBeforeDelete('UISubscriptions', '<%=_ctx.appRes("UISubscription.msg.checkOnlyOneSubScriptionToDelete")%>', '<%=_ctx.appRes("UISubscription.msg.confirmDeleteSubscription")%>')) <%=uicomponent.event("DeleteSubscription")%>">
 																											<%=_ctx.appRes("UISubscription.title.Delete")%>
 																										</a>
 																									</div>

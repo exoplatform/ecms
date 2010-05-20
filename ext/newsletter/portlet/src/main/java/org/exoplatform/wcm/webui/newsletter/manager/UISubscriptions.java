@@ -83,6 +83,8 @@ public class UISubscriptions extends UIForm {
   
   String selectSubscriptionCheckbox 	  = "SelectSubscriptionCheckbox";
   
+  String uiSubscriptionsCheckAll = "UISubscriptionsCheckAll";
+  
   List<NewsletterSubscriptionConfig> listSubs = null;
   
   /** The portal name. */
@@ -122,7 +124,7 @@ public class UISubscriptions extends UIForm {
     this.getChildren().clear();
        
     updateListSubscription();
-    UIFormCheckBoxInput<Boolean> checkboxHeader =  new UIFormCheckBoxInput<Boolean>("UISubscriptionsCheckAll","UISubscriptionsCheckAll",false);
+    UIFormCheckBoxInput<Boolean> checkboxHeader =  new UIFormCheckBoxInput<Boolean>(uiSubscriptionsCheckAll,uiSubscriptionsCheckAll,false);
     checkboxHeader.setOnChange(selectSubscriptionCheckboxHeader);
     this.addChild(checkboxHeader);
     
@@ -389,33 +391,28 @@ public class UISubscriptions extends UIForm {
     @SuppressWarnings({ "unchecked", "deprecation" })
     public void execute(Event<UISubscriptions> event) throws Exception {
       UISubscriptions subsriptions = event.getSource();
-      boolean isChecked = false;
       UIFormCheckBoxInput<Boolean> checkbox = null;
       String portalName = NewsLetterUtil.getPortalName();
       for(UIComponent component : subsriptions.getChildren()){
-        checkbox = (UIFormCheckBoxInput<Boolean>)component;
-        if(checkbox.isChecked()){
-          isChecked = true;
-          SessionProvider sessionProvider = Utils.getSessionProvider();
-          NewsletterSubscriptionConfig subscriptionConfig = 
-            subsriptions.subscriptionHandler.getSubscriptionsByName(sessionProvider, portalName, subsriptions.categoryConfig.getName(), checkbox.getName());
-          if (subscriptionConfig != null) {
-            subsriptions.subscriptionHandler.delete(sessionProvider, NewsLetterUtil.getPortalName(), subsriptions.categoryConfig.getName(),subscriptionConfig);
-          } else {
-            UIApplication uiApp = subsriptions.getAncestorOfType(UIApplication.class);
-            uiApp.addMessage(new ApplicationMessage("UISubscription.msg.subscriptionNotfound", null, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-        }
+    	  if(component.getName().equals(subsriptions.uiSubscriptionsCheckAll)) {
+    		  continue;
+    	  }
+    	  checkbox = (UIFormCheckBoxInput<Boolean>)component;
+    	  if(checkbox.isChecked() == true){    		  
+    		  SessionProvider sessionProvider = Utils.getSessionProvider();
+    		  NewsletterSubscriptionConfig subscriptionConfig = 
+    		  subsriptions.subscriptionHandler.getSubscriptionsByName(sessionProvider, portalName, subsriptions.categoryConfig.getName(), checkbox.getName());
+    		  if (subscriptionConfig != null) {
+    			  subsriptions.subscriptionHandler.delete(sessionProvider, NewsLetterUtil.getPortalName(), subsriptions.categoryConfig.getName(),subscriptionConfig);    			  
+    		  } else {
+    			  UIApplication uiApp = subsriptions.getAncestorOfType(UIApplication.class);
+    			  uiApp.addMessage(new ApplicationMessage("UISubscription.msg.subscriptionNotfound", null, ApplicationMessage.WARNING));
+    			  event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+    			  return;
+    		  }
+    	  }
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(subsriptions);
-      if(isChecked == false){
-        UIApplication uiApp = subsriptions.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UISubscription.msg.checkOnlyOneSubScriptionToDelete", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      }
+      subsriptions.init();            
     }
   }
 

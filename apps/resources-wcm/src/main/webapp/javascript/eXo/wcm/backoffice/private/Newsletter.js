@@ -10,9 +10,9 @@ NewsletterManager.prototype.checkAllSelected = function(checkBox) {
 	}
 };
 
-NewsletterManager.prototype.checkBeforeDelete = function(checkBox, checkMess, confirmMess) {
+NewsletterManager.prototype.checkBeforeDelete = function(uiSubscriptionsForm, checkMess, confirmMess) {
 	var isChecked = false;
-	var elements = document.getElementById(checkBox).form.elements;
+	var elements = document.getElementById(uiSubscriptionsForm).elements;
 	for(var i = 0; i < elements.length; i ++){
 		if(elements[i].type == "checkbox" && elements[i].checked == true) isChecked = true;
 	}
