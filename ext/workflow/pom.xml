@@ -13,8 +13,8 @@
   <modules>
     <module>bp-bonita-content</module>
     <module>bp-jbpm-content</module>
-    <!--module>bp-bonita-content-config</module>
-    <module>bp-jbpm-content-config</module-->
+    <module>bp-bonita-content-config</module>
+    <module>bp-jbpm-content-config</module>
     <module>bp-content-plugin</module>
     <module>bp-content-webui</module>
     <module>bp-content-publication</module>
