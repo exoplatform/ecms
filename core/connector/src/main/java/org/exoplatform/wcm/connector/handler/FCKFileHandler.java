@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import javax.jcr.Node;
 
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
@@ -63,7 +65,7 @@ public class FCKFileHandler {
   }
   
   private static String getDocURL(final Node node, String currentPortal) throws Exception {
-  	String baseURI = "/portal";
+  	String baseURI = "/" + PortalContainer.getCurrentPortalContainerName();
     String accessMode = "private";
     AccessControlList acl = ((ExtendedNode) node).getACL();
     for (AccessControlEntry entry : acl.getPermissionEntries()) {
