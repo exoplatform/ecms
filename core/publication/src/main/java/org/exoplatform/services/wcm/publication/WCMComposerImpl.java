@@ -17,6 +17,12 @@ import javax.jcr.query.QueryManager;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
+import org.exoplatform.management.annotations.Managed;
+import org.exoplatform.management.annotations.ManagedDescription;
+import org.exoplatform.management.annotations.ManagedName;
+import org.exoplatform.management.jmx.annotations.NameTemplate;
+import org.exoplatform.management.jmx.annotations.Property;
+import org.exoplatform.management.rest.annotations.RESTEndpoint;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
@@ -43,6 +49,11 @@ import org.picocontainer.Startable;
  * 
  * @author benjamin
  */
+@Managed
+@NameTemplate({@Property(key = "view", value = "portal"), @Property(key = "service", value = "composer"),
+   @Property(key = "type", value = "content")})
+@ManagedDescription("WCM Composer service")
+@RESTEndpoint(path = "wcmcomposerservice")
 public class WCMComposerImpl implements WCMComposer, Startable {
 
 	/** The repository service. */
@@ -387,13 +398,31 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	}
 
 
+    @Managed
+    @ManagedDescription("Clean all templates in Composer")
 	public void cleanTemplates() throws Exception {
 		this.templatesFilter = null;
 		getTemplatesSQLFilter("repository");
 		if (log.isInfoEnabled()) log.info("WCMComposer templates have been cleaned !");
 	}
 
-	
+    @Managed
+    @ManagedDescription("Is the cache used ?")
+    public boolean isCached() {
+    	return isCached;
+    }
+    
+    @Managed
+    @ManagedDescription("How many nodes in the cache ?")
+    public int getCachedEntries() {
+    	return this.cache.getCacheSize();
+    }
+
+    @Managed
+    @ManagedDescription("Activate/deactivate the composer cache ?")
+    public void setCached(@ManagedDescription("Enable/Disable the cache ?") @ManagedName("isCached") boolean isCached) {
+    	this.isCached = isCached;
+    }
 	
 	/* (non-Javadoc)
 	 * @see org.picocontainer.Startable#start()
