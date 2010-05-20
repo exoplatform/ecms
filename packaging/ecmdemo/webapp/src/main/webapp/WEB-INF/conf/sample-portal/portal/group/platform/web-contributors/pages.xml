@@ -56,7 +56,13 @@
       <portlet>
         <application-ref>ecmexplorer</application-ref>
         <portlet-ref>FileExplorerPortlet</portlet-ref>
-        <preferences></preferences>
+        <preferences>
+			<preference>
+				<name>driveName</name>     
+				<value>Managed Sites</value>        
+				<read-only>false</read-only>
+			</preference>        	
+        </preferences>
       </portlet>
       <title>Site Explorer</title>
       <access-permissions>*:/platform/web-contributors</access-permissions>
