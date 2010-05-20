@@ -27,7 +27,7 @@
   <import>war:/conf/sample-portal/portal/application-registry-configuration.xml</import>
   <import>war:/conf/sample-portal/portal/resource-bundle-configuration.xml</import>
   
-  <import>war:/conf/sample-portal/wcm/content-configuration.xml</import>
+  <import profiles="friendly">war:/conf/sample-portal/wcm/content-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/newsletter-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/deployment/acme-deployment-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/deployment/classic-deployment-configuration.xml</import>

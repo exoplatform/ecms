@@ -25,6 +25,12 @@
    xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
    xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
+<component>
+  <key>org.exoplatform.services.wcm.friendly.FriendlyService</key>
+  <jmx-name>exo-service:type=FriendlyService</jmx-name>
+  <type>org.exoplatform.services.wcm.friendly.impl.FriendlyServiceImpl</type>
+</component>
+
 <external-component-plugins>
   <target-component>org.exoplatform.services.wcm.friendly.FriendlyService</target-component>
   <component-plugin>
@@ -34,21 +40,22 @@
     <description>Configures</description>
     <priority>1</priority>
     <init-params>
-      <!--
       <value-param>
         <name>enabled</name>
         <value>true</value>
       </value-param>
-       -->
+      <!--
       <value-param>
         <name>servletName</name>
         <value>content</value>
       </value-param>
+      -->
       <object-param>
         <name>friendlies.configuration</name>
         <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig">
           <field name="friendlies">
             <collection type="java.util.ArrayList">
+              <!--
               <value>
                 <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
                   <field name="friendlyUri"><string>acme</string></field>
@@ -79,7 +86,7 @@
                   <field name="unfriendlyUri"><string>/rest-ecmdemo/jcr/repository/collaboration/sites content/live/acme/documents</string></field>
                 </object>
               </value>
-              <!-- 
+              -->
               <value>
                 <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
                   <field name="friendlyUri"><string>documents</string></field>
@@ -92,7 +99,6 @@
                   <field name="unfriendlyUri"><string>/rest-ecmdemo/jcr/repository/collaboration</string></field>
                 </object>
               </value>
-               -->
             </collection>
           </field>
         </object>
