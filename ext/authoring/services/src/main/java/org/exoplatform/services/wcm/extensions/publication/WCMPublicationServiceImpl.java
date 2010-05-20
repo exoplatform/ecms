@@ -22,9 +22,12 @@ import java.util.List;
 import java.util.TreeSet;
 
 import javax.jcr.Node;
+import javax.jcr.lock.Lock;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -127,6 +130,7 @@ public class WCMPublicationServiceImpl
             node.addMixin("publication:authoring");
             node.setProperty("publication:lastUser", remoteUser);
             node.setProperty("publication:lifecycle", lifecycle.getName());
+            node.getSession().save();
 
           }
           enrollNodeInLifecycle(node, lifecycleName);
@@ -135,7 +139,7 @@ public class WCMPublicationServiceImpl
         }
       }
     } catch (Exception ex) {
-      ex.printStackTrace();
+      log.error("Couldn't complete the enrollement : ", ex);
     }
   }
 
@@ -158,7 +162,6 @@ public class WCMPublicationServiceImpl
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       HashMap<String, String> context = new HashMap<String, String>();
 
-      NodeLocation currentNodeLocation = NodeLocation.make(node);
       NodeLocation currentRevisionLocation = NodeLocation.make(node);
 
       Node currentRevision = getCurrentRevision(currentRevisionLocation);
@@ -166,8 +169,26 @@ public class WCMPublicationServiceImpl
         context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
       }
       try {
+    	if (node.isLocked()) {
+		  Lock lock = node.getLock();
+		  String owner = lock.getLockOwner();
+		  if (log.isInfoEnabled()) log.info("node is locked by owner, unlocking it for enrollement");
+		  if(node.holdsLock() && remoteUser.equals(owner)) {
+		    String lockToken = LockUtil.getLockToken(node);        
+		    if(lockToken != null) {
+		      node.getSession().addLockToken(lockToken);
+		    }
+		    node.unlock();   
+		    node.removeMixin(Utils.MIX_LOCKABLE);
+		    node.getSession().save();
+		    //remove lock from Cache
+		    LockUtil.removeLock(node);
+		  }
+		}
+    	  
         publicationPlugin.changeState(node, initialState, context);
         node.setProperty("publication:lastUser", remoteUser);
+        node.getSession().save();
       } catch (Exception e) {
         log.error("Error setting staged state : ", e);
       }

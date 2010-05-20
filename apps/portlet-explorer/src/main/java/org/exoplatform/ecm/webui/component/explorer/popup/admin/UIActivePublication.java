@@ -22,15 +22,17 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.AlreadyInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationPresentationService;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.ecm.publication.plugins.webui.UIPublicationLogList;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -120,7 +122,7 @@ import org.exoplatform.webui.form.UIForm;
     uiJCRExplorer.addLockToken(currentNode);
     Node parentNode = currentNode.getParent();
     uiJCRExplorer.addLockToken(parentNode);
-    PublicationService publicationService = getApplicationComponent(PublicationService.class);
+    WCMPublicationService wcmPublicationService = getApplicationComponent(WCMPublicationService.class);
     PublicationPresentationService publicationPresentationService = getApplicationComponent(PublicationPresentationService.class);
     try {            
       if(!currentNode.isCheckedOut()) {        
@@ -129,7 +131,9 @@ import org.exoplatform.webui.form.UIForm;
         requestContext.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }      
-      publicationService.enrollNodeInLifecycle(currentNode, lifecycleName);
+      String siteName = Util.getPortalRequestContext().getPortalOwner();
+      String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+      wcmPublicationService.enrollNodeInLifecycle(currentNode, siteName, remoteUser);
     } catch (AlreadyInPublicationLifecycleException e) {
       uiApp.addMessage(new ApplicationMessage("UIActivePublication.msg.already-enroled", null,
           ApplicationMessage.ERROR));
