@@ -22,11 +22,22 @@ import java.util.Map;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.ValueParam;
+import org.exoplatform.management.annotations.Managed;
+import org.exoplatform.management.annotations.ManagedDescription;
+import org.exoplatform.management.annotations.ManagedName;
+import org.exoplatform.management.jmx.annotations.NameTemplate;
+import org.exoplatform.management.jmx.annotations.Property;
+import org.exoplatform.management.rest.annotations.RESTEndpoint;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.friendly.impl.FriendlyConfig.Friendly;
 
+@Managed
+@NameTemplate({@Property(key = "view", value = "portal"), @Property(key = "service", value = "friendly"),
+   @Property(key = "type", value = "content")})
+@ManagedDescription("Friendly service")
+@RESTEndpoint(path = "friendlyservice")
 public class FriendlyServiceImpl implements FriendlyService {
 	
 	private String servletName = "content";
@@ -39,7 +50,7 @@ public class FriendlyServiceImpl implements FriendlyService {
     private static final Log log  = ExoLogger.getLogger(FriendlyServiceImpl.class);
 
 	public FriendlyServiceImpl(InitParams initParams) {
-		init(initParams);
+		if (initParams!=null) init(initParams);
 	}
 	
 	private void init(InitParams initParams) {
@@ -68,15 +79,26 @@ public class FriendlyServiceImpl implements FriendlyService {
 	    	}
 	    }
 	}
+
+	public void addConfiguration(FriendlyPlugin plugin) {
+		this.init(plugin.getInitParams());
+	}
+
 	
+    @Managed
+    @ManagedDescription("Is the service enabled ?")
 	public boolean isEnabled() {
 		return isEnabled;
 	}
 	
-	public void setEnabled(boolean isEnabled) {
+    @Managed
+    @ManagedDescription("Is the service enabled ?")
+	public void setEnabled(@ManagedDescription("Enable/Disable this service ?") @ManagedName("isEnabled") boolean isEnabled) {
 		this.isEnabled = isEnabled;
 	}
 	
+    @Managed
+    @ManagedDescription("The servlet name referenced in this service")
 	public String getServletName() {
 		return servletName;
 	}
@@ -85,7 +107,10 @@ public class FriendlyServiceImpl implements FriendlyService {
 		this.servletName = servletName;
 	}
 
-	public void addFriendly(String friendlyUri, String unfriendlyUri) {
+    @Managed
+    @ManagedDescription("Add a new friendly in the list")
+	public void addFriendly(@ManagedDescription("The friendly Uri") @ManagedName("friendlyUri") String friendlyUri, 
+			@ManagedDescription("The unfriendly Uri") @ManagedName("unfriendlyUri") String unfriendlyUri) {
 		if (!friendlies.containsKey(friendlyUri)) {
 		  if (log.isInfoEnabled()) log.info("addFriendly::"+friendlyUri+"::"+unfriendlyUri+ "::");
 		  this.friendlies.put(friendlyUri, unfriendlyUri);
@@ -124,7 +149,9 @@ public class FriendlyServiceImpl implements FriendlyService {
 		return friendlyUri;
 	}
 
-	public void removeFriendly(String friendlyUri) {
+    @Managed
+    @ManagedDescription("Remove a friendly in the list")
+	public void removeFriendly(@ManagedDescription("The friendly Uri") @ManagedName("friendlyUri") String friendlyUri) {
 		if (friendlies.containsKey(friendlyUri)) {
 			String unf = this.friendlies.get(friendlyUri);
 			friendlies.remove(friendlyUri);
@@ -132,6 +159,8 @@ public class FriendlyServiceImpl implements FriendlyService {
 		}
 	}
 
+    @Managed
+    @ManagedDescription("The list of registered friendlies")
 	public Map<String, String> getFriendlies() {
 		return friendlies;
 	}

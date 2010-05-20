@@ -18,6 +18,8 @@ package org.exoplatform.services.wcm.friendly;
 
 import java.util.Map;
 
+import org.exoplatform.services.wcm.friendly.impl.FriendlyPlugin;
+
 /**
  * This service provides support for friendly Url in eXo Content.
  * example : 
@@ -40,6 +42,20 @@ public interface FriendlyService {
 	 * @return the servlet name
 	 */
 	public String getServletName();
+	
+	/**
+	 * Allow to know if service is active and if we should use it.
+	 * 
+	 * @return true if service is active
+	 */
+	public boolean isEnabled();
+	
+	/**
+	 * Allows to add configuration in the service after instanciation
+	 * 
+	 * @param plugin
+	 */
+	public void addConfiguration(FriendlyPlugin plugin);
 	
 	/**
 	 * return the friendly uri corresponding to the unfriendly uri
