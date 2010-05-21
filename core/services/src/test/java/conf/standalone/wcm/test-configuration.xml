@@ -101,7 +101,7 @@
             <boolean>false</boolean>
           </field>
           <field name="allowCreateFolders">
-            <string>Both</string>
+            <string>nt:folder,nt:unstructured</string>
           </field>
           <field name="allowNodeTypesOnTree"><string>*</string></field>
         </object>

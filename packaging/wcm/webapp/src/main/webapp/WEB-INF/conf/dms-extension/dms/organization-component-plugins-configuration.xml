@@ -343,7 +343,7 @@
 	      </value-param>	      	      	      	      	      	      	      
 	      <value-param>
 	        <name>allowCreateFolder</name>
-	        <value>Both</value>
+	        <value>nt:folder,nt:unstructured</value>
 	      </value-param>
 	      <value-param>
 	        <name>allowNodeTypesOnTree</name>
@@ -400,7 +400,7 @@
 	      </value-param>	      	      	      	      	      	      	      
 	      <value-param>
 	        <name>allowCreateFolder</name>
-	        <value>both</value>
+	        <value>nt:folder,nt:unstructured</value>
 	      </value-param>
 	      <value-param>
 	        <name>allowNodeTypesOnTree</name>

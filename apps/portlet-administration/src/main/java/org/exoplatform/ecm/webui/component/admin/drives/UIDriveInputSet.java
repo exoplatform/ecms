@@ -118,8 +118,6 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
         foldertypeOptions.add(new SelectItemOption<String>(foldertype,  foldertype));
       }
     }
-    if (!foldertypeOptions.contains(new SelectItemOption<String>(FIELD_BOTH, FIELD_BOTH)))
-      foldertypeOptions.add(new SelectItemOption<String>(FIELD_BOTH, FIELD_BOTH));
     getUIFormSelectBox(FIELD_WORKSPACE).setOptions(workspace);
     getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setOptions(foldertypeOptions);
     getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setMultiple(true);        
