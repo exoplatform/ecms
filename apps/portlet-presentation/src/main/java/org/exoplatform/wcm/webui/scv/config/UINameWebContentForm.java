@@ -230,12 +230,18 @@ public class UINameWebContentForm extends UIForm {
       ArrayList<ModelObject> applicationsTmp = currentPage.getChildren(); 
       Collections.reverse(applicationsTmp);
       for (Object applicationObject : applicationsTmp) {
-        if (applicationObject instanceof Container) continue;
+        if (applicationObject instanceof Container) {
+        	continue;
+        }
         Application application = Application.class.cast(applicationObject);
-//        String applicationId = application.getInstanceId();
+        if(application.getId() == null) {
+        	continue;
+        }
         String applicationId = application.getId();
         org.exoplatform.portal.application.PortletPreferences portletPreferences = dataStorage.getPortletPreferences(applicationId);
-        if (portletPreferences == null) continue;
+        if (portletPreferences == null) {
+        	continue;
+        }
         
         boolean isQuickCreate = false;
         String nodeIdentifier = null;
