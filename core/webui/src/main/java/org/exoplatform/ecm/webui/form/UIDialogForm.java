@@ -233,8 +233,8 @@ public void addActionField(String name,String label,String[] arguments) throws E
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);    
     Node node = getNode();
-    if(formActionField.isReference()) isReference = true; 
-    else isReference = false;  
+//    if(formActionField.isReference()) isReference = true; 
+//    else isReference = false;  
     UIComponent uiInput;
     if(formActionField.isMultiValues()) {      
       uiInput = findComponentById(name);
