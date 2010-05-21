@@ -174,7 +174,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!"};
+      String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!", "\""};
       for(String filterChar : arrFilterChar) {
         if(name.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.fileName-invalid", null, 
