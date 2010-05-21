@@ -56,7 +56,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertTrue(driveData.getViewNonDocument());
     assertTrue(driveData.getViewSideBar());
     assertFalse(driveData.getShowHiddenNode());
-    assertEquals("Both", driveData.getAllowCreateFolders());
+    assertEquals("nt:folder,nt:unstructured", driveData.getAllowCreateFolders());
   }
   
   /**
