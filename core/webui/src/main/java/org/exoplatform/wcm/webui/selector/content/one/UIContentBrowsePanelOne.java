@@ -100,8 +100,8 @@ public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
       UIPageBody uiPageBody = uiPortal.findFirstComponentOfType(UIPageBody.class);
       uiPageBody.setUIComponent(null);
       uiPageBody.setMaximizedUIComponent(null);
-      Utils.updatePortal((PortletRequestContext) event.getRequestContext());
       Utils.closePopupWindow(contentBrowsePanel, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+      Utils.updatePortal((PortletRequestContext) event.getRequestContext());
     }
   }
 }
