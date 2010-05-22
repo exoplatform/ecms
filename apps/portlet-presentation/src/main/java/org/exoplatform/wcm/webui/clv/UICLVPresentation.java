@@ -283,11 +283,7 @@ public class UICLVPresentation extends UIContainer {
   public String getAuthor(Node node) throws Exception {
     if (node.hasProperty("exo:owner")) {
       String ownerId = node.getProperty("exo:owner").getValue().getString();
-      OrganizationService organizationService = getApplicationComponent(OrganizationService.class);
-      UserHandler handler = organizationService.getUserHandler();
-      User user = handler.findUserByName(ownerId);
-      if (user != null) return user.getFullName();
-      else return ownerId;
+      return ownerId;
     }
     return null;
   }
