@@ -14,7 +14,6 @@
       <node-isExist>Ce nœud existe déjà dans '{0}'</node-isExist>
       <get-dialog-path>Impossible de trouver le chemin demandé</get-dialog-path>
       <new-jcr-template>Impossible de trouver un gabarit d'affichage</new-jcr-template>
-      >
     </msg>
     <action>
       <Save>Sauver</Save>
@@ -44,10 +43,11 @@
       <item-not-found>Ce chemin n'est pas valide!</item-not-found>
       <fileType-empty>Vous devez choisir le type de fichier avant de sauver</fileType-empty>
       <ws-empty>Vous devez choisir l'espace de travail.</ws-empty>
+      <action-empty>Vous devez choisir un dossier avec une action</action-empty>
+      <message-empty>Le message ne peut pas être vide lorsque vous n'avez pas choisi l'option de redirection, ou le chemin est vide</message-empty>
       <get-template>Modèle non disponible</get-template>
       <set-template-option>Erreur sur le modèle</set-template-option>
       <do-select>Erreur de sélection</do-select>
-      <redirectpath-empty>Chemin de redirection est vide</redirectpath-empty>
     </msg>
     <action>
       <Save>Sauver</Save>

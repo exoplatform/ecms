@@ -466,6 +466,10 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       String isRedirect = String.valueOf(fastContentCreatorConfig.getUIFormCheckBoxInput(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT).isChecked());
       String redirectPath = fastContentCreatorConfig.getUIStringInput(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT).getValue() ;
       
+      if (("false".equals(isRedirect) || redirectPath == null) && saveMessage == null) {
+        Utils.createPopupMessage(fastContentCreatorConfig, "UIFCCConfig.msg.message-empty", null, ApplicationMessage.WARNING);
+      }
+      
 			if ("basic".equals(preferenceMode) && preferenceIsActionNeeded) {
 				UIFCCActionList actionList = ((UIFormFieldSet)fastContentCreatorConfig.getChildById("UIFCCActionField")).getChild(UIFCCActionList.class);
 				int nb = actionList.getChild(UIGrid.class).getUIPageIterator().getAvailable();

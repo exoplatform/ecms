@@ -44,7 +44,8 @@
       <fileType-empty>You have to choose file type before save this configuration.</fileType-empty>
       <ws-empty>You have to choose one workspace.</ws-empty>
       <action-empty>You have to choose a folder with an action</action-empty>
-   <get-template>Error when get template.</get-template>
+      <message-empty>The message cannot be empty when you didn't choose the redirect option, or the path is empty</message-empty>
+      <get-template>Error when get template.</get-template>
       <set-template-option>Error when set template option.</set-template-option>
       <do-select>Error when do select.</do-select>
       </msg>

@@ -43,10 +43,11 @@
       <item-not-found>Đường dẫn không đúng</item-not-found>
       <fileType-empty>Bạn phải chọn kiểu nội dung trược khi lưu</fileType-empty>
       <ws-empty>Bạn phải chọn workspace</ws-empty>
+      <action-empty>Hãy chọn một thư mục có sẵn action</action-empty>
+      <message-empty>Mục thông bào phải có giá trị khi bạn không lựa chọn chuyển trang hoặc đường dẫn bị rỗng</message-empty>
       <get-template>Có lỗi khi lấy mẫu</get-template>
       <set-template-option>Có lỗi khi chọn mẫu</set-template-option>
       <do-select>Có lỗi khi chọn</do-select>
-      <redirectpath-empty>Đường dẫn bị rỗng</redirectpath-empty>
     </msg>
     <action>
       <Save>Lưu</Save>
