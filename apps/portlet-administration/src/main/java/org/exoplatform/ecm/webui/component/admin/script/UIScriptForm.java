@@ -175,7 +175,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       String repository = uiForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       ScriptService scriptService = uiForm.getApplicationComponent(ScriptService.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      String name = uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue() ;
+      String name = uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue().trim();
       String content = uiForm.getUIFormTextAreaInput(FIELD_SCRIPT_CONTENT).getValue() ;
       if(content == null) content = "" ;
       if(name == null || name.trim().length() == 0) {
@@ -184,7 +184,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      String[] arrFilterChar = {"&", "$", "@", ":","]", "'", "[", "*", "%", "!"} ;
+      String[] arrFilterChar = {"&", "$", "@", ":","]", "'", "[", "*", "%", "!", "\""};
       for(String filterChar : arrFilterChar) {
         if(name.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.fileName-invalid", null, 
