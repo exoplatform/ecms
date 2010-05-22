@@ -26,6 +26,7 @@ import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValuesList;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -92,6 +93,7 @@ public class UINodeTypeUpload extends UIForm {
       DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
       String mimeType = resolver.getMimeType(fileName);
       InputStream is = null;
+      UINodeTypeImport uiNodeTypeImport = uiImportPopup.getChild(UINodeTypeImport.class);
       try {
         if(mimeType.trim().equals("text/xml")) {
           is = new BufferedInputStream(input.getUploadDataAsStream());
@@ -107,19 +109,37 @@ public class UINodeTypeUpload extends UIForm {
         IUnmarshallingContext uctx = factory.createUnmarshallingContext();
         NodeTypeValuesList nodeTypeValuesList = (NodeTypeValuesList)uctx.unmarshalDocument(is, null);
         ArrayList ntvList = nodeTypeValuesList.getNodeTypeValuesList();
-        
-        UINodeTypeImport uiImport = uiImportPopup.getChild(UINodeTypeImport.class) ; 
-        uiImport.update(ntvList) ;
-        Class[] childrenToRender = {UINodeTypeImport.class, UIPopupWindow.class} ;
-        uiImportPopup.setRenderedChildrenOfTypes(childrenToRender) ;
-        uiPopup.setShow(true) ;
-        
+        uiNodeTypeImport.update(ntvList);
+        String nodetype;
+        List<String> alreadyRegisterNodeType = new ArrayList<String>();
+        if (uiNodeTypeImport.getUndefinedNodeTypes().size() > 0) {
+        	for (int i = 0; i < ntvList.size(); i++) {
+        		nodetype = ((NodeTypeValue) ntvList.get(i)).getName(); 
+        		if (!uiNodeTypeImport.getUndefinedNodeTypes().contains(nodetype)) {
+        			alreadyRegisterNodeType.add(nodetype);
+        		}
+        	}
+        } else {
+        	for (int i = 0; i < ntvList.size(); i++) {
+        			alreadyRegisterNodeType.add(((NodeTypeValue) ntvList.get(i)).getName());
+        	}
+       	}
+        if (alreadyRegisterNodeType.size() <= ntvList.size()) {
+	        Class[] childrenToRender = {UINodeTypeImport.class, UIPopupWindow.class} ;
+	        uiImportPopup.setRenderedChildrenOfTypes(childrenToRender) ;
+	        uiPopup.setShow(true);
+	        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+        }
+        if (alreadyRegisterNodeType.size() > 0) {
+        	 uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.nodetype-exist", new Object[] {alreadyRegisterNodeType.toString()}, ApplicationMessage.INFO )) ;
+           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        }
       } catch(Exception e) {
-        
-        // Get undedefined node type and add to message updated by lampt
-        UINodeTypeImport uiNodeTypeImport = uiImportPopup.getChild(UINodeTypeImport.class);
-        Object[] args = { uiNodeTypeImport.getUndefinedNodeType() };
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-invalid",args, ApplicationMessage.ERROR )) ;
+        Object[] args = uiNodeTypeImport.getUndefinedNodeTypes().size() == 0 ? null : uiNodeTypeImport.getUndefinedNodeTypes().toArray();
+        if (args == null)
+        	uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-invalid", args, ApplicationMessage.ERROR )) ;
+        else
+        	uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.nodetype-invalid", args, ApplicationMessage.ERROR )) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } finally {
@@ -128,7 +148,6 @@ public class UINodeTypeUpload extends UIForm {
         uploadService.removeUpload(uiUploadInput.getUploadId());
         if (is != null) is.close();
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }    
   }
 

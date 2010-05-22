@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.admin.nodetype;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -27,6 +28,8 @@ import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -63,14 +66,15 @@ public class UINodeTypeImport extends UIForm {
   private List<NodeTypeValue> nodeTypeList_ = new ArrayList<NodeTypeValue>() ;
   final static String TABLE_NAME =  "UINodeTypeImport"; 
   final static String [] TABLE_COLUMNS = {"label", "input"};  
-
-  private String undefinedNodeType;
-  public String getUndefinedNodeType() {
-    return undefinedNodeType;
+  private static final Log LOG  = ExoLogger.getLogger(UINodeTypeImport.class);
+  
+  private List<String> definedNodeTypes = new ArrayList<String>();
+  public List<String> getUndefinedNodeTypes() {
+    return definedNodeTypes;
   }
   
-  public void setUndefinedNodeType(String undefinedNodeType) {
-    this.undefinedNodeType = undefinedNodeType;
+  public void setUndefinedNodeType(List<String> undefinedNodeType) {
+    this.definedNodeTypes = undefinedNodeType;
   }
 
   public UINodeTypeImport() throws Exception {
@@ -90,6 +94,7 @@ public class UINodeTypeImport extends UIForm {
     UIFormInputSet uiInputSet ;
     uiTableInputSet.setName(TABLE_NAME);
     uiTableInputSet.setColumns(TABLE_COLUMNS);
+    getUndefinedNodeTypes().clear();
     nodeTypeList_ = nodeTypeList ;
     for(int i = 0 ; i < nodeTypeList_.size() ; i ++) {
       NodeTypeValue nodeTypeValue = (NodeTypeValue)nodeTypeList_.get(i) ;
@@ -99,15 +104,10 @@ public class UINodeTypeImport extends UIForm {
       uiInputSet.addChild(uiInfo);
       UIFormCheckBoxInput<String> checkbox = new UIFormCheckBoxInput<String>(nodeTypeName, nodeTypeName, "") ;
       NodeType register ;
-      
-      // Get namespace from node type
-      String[] namespace = nodeTypeName.split(":");
       try {               
-        
-        // Store name space of node type updated by lampt
-        setUndefinedNodeType(namespace[0]);
         register = ntManager.getNodeType(nodeTypeValue.getName()) ;
       } catch(NoSuchNodeTypeException e) {        
+      	getUndefinedNodeTypes().add(nodeTypeName);
         register = null ;
       }
       if(register != null) checkbox.setEnable(false);
@@ -157,9 +157,13 @@ public class UINodeTypeImport extends UIForm {
       uiImport.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
       for(int i = 0 ; i < uiImport.nodeTypeList_.size() ; i ++){
         NodeTypeValue nodeTypeValue = (NodeTypeValue)uiImport.nodeTypeList_.get(i) ;
-        if(listCheckbox.get(i).isChecked()) {         
-          extManager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.IGNORE_IF_EXISTS) ;
-          counter += 1 ;          
+        if(listCheckbox.get(i).isChecked()) {
+        	try {
+	          extManager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.IGNORE_IF_EXISTS) ;
+	          counter += 1 ;
+        	} catch(RepositoryException re) {
+        		LOG.error("Cannot register nodetype " + nodeTypeValue + " cause by: " + re.getMessage());
+        	}
         }          
       }
       if(counter > 0) {

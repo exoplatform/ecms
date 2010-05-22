@@ -879,7 +879,6 @@
     <msg>
       <filename-error>إستكشف الملفات للإستيراد</filename-error>
       <data-file-error>   لا يمكن استيراد إلا الملفات ذات نوع 'zip' او 'XML'</data-file-error>
-      <data-invalid>Invalid Data: unknown namespace : '{0}'</data-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -2367,6 +2366,13 @@
 	  <msg>	
 		<child-invalid>Child node name contains invalid character</child-invalid>
 	  </msg>
-	</UIChildNodeDefinitionForm>	
+	</UIChildNodeDefinitionForm>
+	<UINodeTypeUpload>	
+		<msg>
+		  <data-invalid>Invalid Data when import nodetype</data-invalid>
+	      <nodetype-invalid>Invalid Data: unknown namespace : '{0}'</nodetype-invalid>
+	      <nodetype-exist>Invalid Data: NodeType exist : '{0}'</nodetype-exist>
+	    </msg>
+	 </UINodeTypeUpload>
 </bundle>
   

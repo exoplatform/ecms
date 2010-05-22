@@ -880,7 +880,6 @@
     <msg>
       <filename-error>Parcourir les fichiers pour l'import</filename-error>
       <data-file-error>Seuls les fichiers XML ou ZIP sont supportés pour l'import</data-file-error>
-      <data-invalid>Invalid Data: unknown namespace : '{0}'</data-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -2432,4 +2431,11 @@
 		<child-invalid>Child node name contains invalid character</child-invalid>
 	  </msg>
 	</UIChildNodeDefinitionForm>
+	<UINodeTypeUpload>	
+		<msg>
+		  <data-invalid>Invalid Data when import nodetype</data-invalid>
+	      <nodetype-invalid>Invalid Data: unknown namespace : '{0}'</nodetype-invalid>
+	      <nodetype-exist>Invalid Data: NodeType exist : '{0}'</nodetype-exist>
+	    </msg>
+	 </UINodeTypeUpload>
 </bundle>

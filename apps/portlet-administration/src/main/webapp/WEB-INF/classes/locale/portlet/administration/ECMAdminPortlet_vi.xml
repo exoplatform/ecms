@@ -2436,5 +2436,12 @@
 		<child-invalid>Tên node con chứa kí tự không hợp lệ</child-invalid>
 	  </msg>
 	</UIChildNodeDefinitionForm>
+	<UINodeTypeUpload>	
+		<msg>
+		  <data-invalid>Dữ liệu cho nodetype không phù hợp</data-invalid>
+	      <nodetype-invalid>Dữ liệu về nodetype không phù hợp: '{0}'</nodetype-invalid>
+	      <nodetype-exist>Dữ liệu không phù hợp, nodetype đã tồn tại : '{0}'</nodetype-exist>
+	    </msg>
+	 </UINodeTypeUpload>
 </bundle>
 
