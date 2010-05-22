@@ -161,7 +161,8 @@ public class UIViewList extends UIGrid {
       if(!viewList.canDelete(manageDrive.getAllDrives(repository), viewName)) {
         UIApplication app = viewList.getAncestorOfType(UIApplication.class) ;
         Object[] args = {viewName} ;
-        app.addMessage(new ApplicationMessage("UIViewList.msg.template-in-use", args)) ; 
+        app.addMessage(new ApplicationMessage("UIViewList.msg.template-in-use", args)) ;        
+        event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent()) ;
         return ;
       }
       viewList.getApplicationComponent(ManageViewService.class).removeView(viewName, repository) ;
