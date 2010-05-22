@@ -230,6 +230,7 @@
 .UICLVPortlet #UIPageSelectorPanel {
   float: left;
   width: 49%;
+  padding-left:10px;
 }
 
 .UIPageNodeSelector .UIVerticalSlideTabs {
