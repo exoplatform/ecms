@@ -22,8 +22,10 @@ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.groovyscript.text.TemplateService;
 import org.exoplatform.services.cms.metadata.MetadataService;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -47,7 +49,8 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     events = {
       @EventConfig(listeners = UIMetadataForm.SaveActionListener.class),
       @EventConfig(listeners = UIMetadataForm.CancelActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIMetadataForm.AddPermissionActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = UIMetadataForm.AddPermissionActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIMetadataForm.SelectTabActionListener.class, phase = Phase.DECODE)
     }
 )
 
@@ -152,5 +155,13 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       uiMetaManager.removeChildById(UIMetadataManager.METADATA_POPUP) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiMetaManager) ;
     }
+  }
+  
+  static public class SelectTabActionListener extends EventListener<UIMetadataForm> {
+     public void execute(Event<UIMetadataForm> event) throws Exception {
+       UIMetadataForm uiView = event.getSource() ;
+       UIMetadataManager uiMetaManager = uiView.getAncestorOfType(UIMetadataManager.class) ;
+       event.getRequestContext().addUIComponentToUpdateByAjax(uiMetaManager) ;
+     }
   }
 }

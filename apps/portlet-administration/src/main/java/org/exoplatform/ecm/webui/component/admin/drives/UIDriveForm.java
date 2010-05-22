@@ -73,7 +73,8 @@ import org.exoplatform.webui.form.UIFormTabPane;
       @EventConfig(listeners = UIDriveForm.AddIconActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.ChangeActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIDriveForm.ChooseNodeTypeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIDriveForm.RemoveNodeTypeActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = UIDriveForm.RemoveNodeTypeActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDriveForm.SelectTabActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UIDriveForm extends UIFormTabPane implements UISelectable {
@@ -399,6 +400,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       String repository = uiDriveForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
       String selectedWorkspace = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
+      UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       ManageDriveService manageDriveService = 
         uiDriveForm.getApplicationComponent(ManageDriveService.class);
       RepositoryService repositoryService = 
@@ -417,11 +419,16 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       List<SelectItemOption<String>> foldertypeOptions = new ArrayList<SelectItemOption<String>>();
       RequestContext context = RequestContext.getCurrentInstance();
       ResourceBundle res = context.getApplicationResourceBundle();
-      for(String foldertype : setFoldertypes) {
-        foldertypeOptions.add(new SelectItemOption<String>(res.getString(driveInputSet.getId() + ".label." + foldertype.replace(":", "_")),  foldertype));
+      String label = null;
+      for(String folderType : setFoldertypes) {
+        try {
+          label = res.getString(driveInputSet.getId() + ".label." + folderType.replace(":", "_"));
+        } catch(MissingResourceException mi) {
+          label = folderType;
+        }
+        foldertypeOptions.add(new SelectItemOption<String>(label,  folderType));
       }
       List<SelectItemOption<String>> folderOptions = new ArrayList<SelectItemOption<String>>();
-      //UIFormRadioBoxInput uiInput = driveInputSet.<UIFormRadioBoxInput>getUIInput(UIDriveInputSet.FIELD_ALLOW_CREATE_FOLDERS);
       UIFormSelectBox uiInput = driveInputSet.<UIFormSelectBox>getUIInput(UIDriveInputSet.FIELD_ALLOW_CREATE_FOLDERS);
 
       if(wsInitRootNodeType != null && wsInitRootNodeType.equals(Utils.NT_FOLDER)) {
@@ -436,6 +443,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         if(!drive.getWorkspace().equals(selectedWorkspace)) defaultPath = "/";
         uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_HOMEPATH).setValue(defaultPath);
       }
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }
   }
   
@@ -465,6 +473,14 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveForm);
     }
-  }  
+  }
+  
+  static public class SelectTabActionListener extends EventListener<UIDriveForm> {
+    public void execute(Event<UIDriveForm> event) throws Exception {
+      UIDriveForm uiView = event.getSource() ;
+      UIDriveManager uiMetaManager = uiView.getAncestorOfType(UIDriveManager.class) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiMetaManager) ;
+    }
+ }  
 
 }
