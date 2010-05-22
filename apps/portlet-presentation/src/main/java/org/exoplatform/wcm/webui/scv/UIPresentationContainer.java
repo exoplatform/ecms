@@ -149,7 +149,7 @@ public class UIPresentationContainer extends UIContainer{
 		String portalURI = Util.getPortalRequestContext().getPortalURI();
 		WCMConfigurationService wcmConfigurationService = getApplicationComponent(WCMConfigurationService.class);
 		String printPageUrl = wcmConfigurationService.getRuntimeContextParam("printViewerPage");
-		String printUrl = portalURI + printPageUrl + "/" + repository + "/" + workspace + path + "&isPrint=true";
+		String printUrl = portalURI + printPageUrl + "?path=/" + repository + "/" + workspace + path + "&isPrint=true";
 		return printUrl;
 	}
 
