@@ -2209,7 +2209,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Add Tab</AddTabForm>
-      <AddTab>Add Tab</AddTab>
+      <AddTab>Save</AddTab>
       <BackViewForm>Back</BackViewForm>
     </action>
   </UIViewFormTabPane> 

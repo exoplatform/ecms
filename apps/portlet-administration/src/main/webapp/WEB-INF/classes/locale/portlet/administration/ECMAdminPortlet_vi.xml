@@ -2206,7 +2206,7 @@
   <UIViewFormTabPane>
     <action>
       <AddTabForm>Thêm Tab</AddTabForm>
-      <AddTab>Thêm Tab</AddTab>
+      <AddTab>Lưu</AddTab>
       <BackViewForm>Quay lại</BackViewForm>
     </action>
   </UIViewFormTabPane>
