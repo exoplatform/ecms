@@ -2425,6 +2425,11 @@
 		<label>
 			<selectedAllNodeTypes>Chọn tất cả kiểu dữ liệu</selectedAllNodeTypes>
 		</label>
-	</UINodeTypeSelector>	
+	</UINodeTypeSelector>
+  <UITemplateList>
+		<msg>	
+	      <editing-template>Lỗi truy cập! Bạn không thể sửa và xóa mẫu đồng thời!</editing-template>
+    </msg>
+  </UITemplateList>
 </bundle>
 

@@ -142,6 +142,13 @@ public class UITemplateList extends UIGrid {
   static public class DeleteActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplateList nodeTypeList = event.getSource() ;
+      UITemplatesManager uiTemplatesManager = nodeTypeList.getParent() ;
+      if (uiTemplatesManager.isEditingTemplate()) {
+        UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
+        uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.editing-template", null, ApplicationMessage.WARNING)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
+      }
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
       TemplateService templateService = nodeTypeList.getApplicationComponent(TemplateService.class) ;
       String repository = nodeTypeList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;

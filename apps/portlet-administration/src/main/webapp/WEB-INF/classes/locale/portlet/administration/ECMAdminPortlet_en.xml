@@ -1644,6 +1644,7 @@
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
       <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
     </msg>
   </UITemplateList>
   <!--

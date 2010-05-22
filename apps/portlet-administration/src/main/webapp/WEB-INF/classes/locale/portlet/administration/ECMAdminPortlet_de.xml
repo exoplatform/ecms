@@ -2425,6 +2425,12 @@
 		<label>
 			<selectedAllNodeTypes>Choose all node types</selectedAllNodeTypes>
 		</label>
-	</UINodeTypeSelector>	
+	</UINodeTypeSelector>
+  <UITemplateList>
+		<msg>	
+	      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+    </msg>
+  </UITemplateList>
+		
 </bundle>
 
