@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
- <EditingPortlet>
-  <action>
-   <draft>Edition</draft>
-   <published>En ligne</published>
-  </action>
-  <label>
-  	<Editing>Mode : </Editing>
-  </label>
-  <msg>
-   <not-permission>Vous n'avez pas les droits nécessaires pour effectuer cette action.</not-permission>
-  </msg>
- </EditingPortlet>
+  <EditingPortlet>
+    <label>
+      <Editing>Mode : </Editing>
+    </label>
+    <msg>
+      <not-permission>Vous n'avez pas les droits nécessaires pour effectuer cette action.</not-permission>
+    </msg>
+  </EditingPortlet>
+
+  <UIEditingForm>
+    <label>
+      <option>
+        <Draft>Edition</Draft>
+        <Published>Publié</Published>
+      </option>
+    </label>
+  </UIEditingForm>
 </bundle>

@@ -58,19 +58,17 @@ public class UIEditingForm extends UIForm {
   public static final String EDITING_OPTIONS = "EditingOptions";
   
   public UIEditingForm() {
-    List<SelectItemOption<String>> editingOptions = new ArrayList<SelectItemOption<String>>();
-    WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
-    ResourceBundle resourceBundle = context.getApplicationResourceBundle() ;
-    try {
-      String livelabel = resourceBundle.getString("EditingPortlet.action.published");
-      String draftlabel = resourceBundle.getString("EditingPortlet.action.draft");
-    
-    editingOptions.add(new SelectItemOption<String>(livelabel, PUBLISHED));
-    editingOptions.add(new SelectItemOption<String>(draftlabel, DRAFT));
-    }catch(Exception e){}
-    UIFormSelectBox orderBySelectBox = new UIFormSelectBox(EDITING_OPTIONS, EDITING_OPTIONS, editingOptions);
+    UIFormSelectBox orderBySelectBox = new UIFormSelectBox(EDITING_OPTIONS, EDITING_OPTIONS, null);
     orderBySelectBox.setOnChange("ChangeEditing");
     addChild(orderBySelectBox);
+  }
+  
+  public void processRender(WebuiRequestContext context) throws Exception {
+    List<SelectItemOption<String>> editingOptions = new ArrayList<SelectItemOption<String>>();
+    editingOptions.add(new SelectItemOption<String>(PUBLISHED, PUBLISHED));
+    editingOptions.add(new SelectItemOption<String>(DRAFT, DRAFT));
+    ((UIFormSelectBox)getChildById(EDITING_OPTIONS)).setOptions(editingOptions);
+    super.processRender(context);
   }
   
   /**
