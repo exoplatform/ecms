@@ -2431,5 +2431,10 @@
 	      <editing-template>Lỗi truy cập! Bạn không thể sửa và xóa mẫu đồng thời!</editing-template>
     </msg>
   </UITemplateList>
+	<UIChildNodeDefinitionForm>
+	  <msg>	
+		<child-invalid>Tên node con chứa kí tự không hợp lệ</child-invalid>
+	  </msg>
+	</UIChildNodeDefinitionForm>
 </bundle>
 

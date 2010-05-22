@@ -41,6 +41,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
@@ -55,7 +56,6 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
-import org.exoplatform.webui.form.validator.NameValidator;
 
 /**
  * Created by The eXo Platform SARL
@@ -64,7 +64,8 @@ import org.exoplatform.webui.form.validator.NameValidator;
  * Sep 20, 2006
  * 5:33:13 PM 
  */
-@ComponentConfig(
+@ComponentConfigs ({
+	@ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template = "system:/groovy/webui/form/UIFormTabPane.gtmpl",
     events = {
@@ -97,6 +98,7 @@ import org.exoplatform.webui.form.validator.NameValidator;
       @EventConfig(listeners = UIPropertyDefinitionForm.RemoveActionListener.class, confirm = "UINodeTypeForm.msg.confirm-delete-property")
     }
 )
+})
 public class UINodeTypeForm extends UIFormTabPane {
 
   final static public String NAMESPACE = "namespace" ;
@@ -238,7 +240,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       propertyValues.append(property.getName()) ; 
     }
     UIFormInputSetWithAction nodeTypeTab = getChildById(NODETYPE_DEFINITION) ;
-    nodeTypeTab.setInfoField(PROPERTY_DEFINITIONS, propertyValues.toString()) ;
+    nodeTypeTab.setInfoField(PROPERTY_DEFINITIONS, propertyValues.toString());
     String[] actionInfor = {"EditProperty", "RemoveProperty"} ;
     nodeTypeTab.setActionInfo(PROPERTY_DEFINITIONS, actionInfor) ;
   }
@@ -252,7 +254,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       }
     }
     UIFormInputSetWithAction nodeTypeTab = getChildById(NODETYPE_DEFINITION) ;
-    nodeTypeTab.setInfoField(CHILDNODE_DEFINITIONS, childDefinitions.toString()) ;
+    nodeTypeTab.setInfoField(CHILDNODE_DEFINITIONS,  childDefinitions.toString());
     String[] actionInfor = {"ViewChildNode"} ;
     nodeTypeTab.setIsView(true) ;
     nodeTypeTab.setActionInfo(CHILDNODE_DEFINITIONS, actionInfor) ;
@@ -267,7 +269,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       }
     }
     UIFormInputSetWithAction nodeTypeTab = getChildById(NODETYPE_DEFINITION) ;
-    nodeTypeTab.setInfoField(PROPERTY_DEFINITIONS, propertyDefinitions.toString()) ;
+    nodeTypeTab.setInfoField(PROPERTY_DEFINITIONS, propertyDefinitions.toString());
     String[] actionInfor = {"ViewProperty"} ;
     nodeTypeTab.setIsView(true) ;
     nodeTypeTab.setActionInfo(PROPERTY_DEFINITIONS, actionInfor) ;

@@ -269,6 +269,13 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
       String propertyName = event.getRequestContext().getRequestParameter(OBJECTID);
+      if(propertyName == null || propertyName.trim().length() == 0) {
+        uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
+        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
       for(PropertyDefinitionValue property : uiForm.addedPropertiesDef_) {
         if(property.getName().equals(propertyName)) {
           uiForm.addedPropertiesDef_.remove(property);
@@ -286,6 +293,13 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       UINodeTypeForm uiForm = event.getSource();
       UIPropertyDefinitionForm uiPropertyForm = uiForm.getChild(UIPropertyDefinitionForm.class);
       String propertyName = event.getRequestContext().getRequestParameter(OBJECTID);
+      if(propertyName == null || propertyName.trim().length() == 0) {
+        uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
+        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
       PropertyDefinitionValue property = 
         uiPropertyForm.getPropertyByName(propertyName, uiForm.addedPropertiesDef_);
       uiPropertyForm.setValues(property);
@@ -316,7 +330,23 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
+      for(int i = 0; i < name.length(); i ++){
+        char c = name.charAt(i);
+        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
+          || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
+          continue ;
+        }
+				uiApp.addMessage(new ApplicationMessage(
+						"UIPropertyDefinitionForm.msg.property-name", null,
+						ApplicationMessage.WARNING));
+				event.getRequestContext().addUIComponentToUpdateByAjax(
+						uiApp.getUIPopupMessages());
+				return;
+			}
       if(prefix != null && prefix.length() > 0 ) name = prefix + ":" + name;
+      if (propertyInfo ==  null) {
+      	propertyInfo = new PropertyDefinitionValue();
+      }
       propertyInfo.setName(name);      
       String requiredType = uiForm.getUIFormSelectBox(REQUIRED_TYPE).getValue();
       propertyInfo.setRequiredType(Integer.parseInt(requiredType));
@@ -367,27 +397,20 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      if((prefix != null) && (prefix.trim().length() == 0) && (propertyName.trim().length()==1)){
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "%", "!"};
-        for(String filterChar : arrFilterChar) {
-          if(propertyName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
-                                                    ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
+      
+      for(int i = 0; i < propertyName.length(); i ++){
+        char c = propertyName.charAt(i);
+        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
+          || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
+          continue ;
         }
-      } else{
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!"};
-        for(String filterChar : arrFilterChar) {
-          if(propertyName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
-                                                    ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-        }
-      }
+				uiApp.addMessage(new ApplicationMessage(
+						"UIPropertyDefinitionForm.msg.property-name", null,
+						ApplicationMessage.WARNING));
+				event.getRequestContext().addUIComponentToUpdateByAjax(
+						uiApp.getUIPopupMessages());
+				return;
+			}
       if(prefix != null && prefix.length() > 0 ) propertyName = prefix + ":" + propertyName;
       UIPropertyDefinitionForm uiPropertyForm = uiForm.getChild(UIPropertyDefinitionForm.class);
       PropertyDefinitionValue propertyInfo = new PropertyDefinitionValue();      

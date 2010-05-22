@@ -258,6 +258,25 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
       UINodeTypeForm uiForm = event.getSource();
       UIChildNodeDefinitionForm uiChildNodeForm = uiForm.getChild(UIChildNodeDefinitionForm.class);
       String nodeName = event.getRequestContext().getRequestParameter(OBJECTID);
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+      if(nodeName == null || nodeName.trim().length() == 0) {
+        uiForm.setTabRender(UINodeTypeForm.CHILDNODE_DEFINITION);
+        uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-name", null));
+        return;
+      }
+      for(int i = 0; i < nodeName.length(); i ++){
+        char c = nodeName.charAt(i);
+        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
+          || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
+          continue ;
+        }
+				uiApp.addMessage(new ApplicationMessage(
+						"UIChildNodeDefinitionForm.msg.child-invalid", null,
+						ApplicationMessage.WARNING));
+				event.getRequestContext().addUIComponentToUpdateByAjax(
+						uiApp.getUIPopupMessages());
+				return;
+			}
       NodeDefinitionValue nodeDefValue = 
         uiChildNodeForm.getChildNodeByName(nodeName, uiForm.addedChildDef_);
       uiChildNodeForm.setValues(nodeDefValue);
@@ -276,9 +295,9 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
       UIChildNodeDefinitionForm uiChildNodeForm = uiForm.getChild(UIChildNodeDefinitionForm.class);
       String nodeName = event.getRequestContext().getRequestParameter(OBJECTID);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-      ApplicationMessage message;
       NodeDefinitionValue nodeTypeValue = 
-        uiChildNodeForm.getChildNodeByName(nodeName, uiForm.addedChildDef_);
+      	uiChildNodeForm.getChildNodeByName(nodeName, uiForm.addedChildDef_);
+      ApplicationMessage message;
       String prefix = uiForm.getUIFormSelectBox(UIChildNodeDefinitionForm.NAMESPACE).getValue();
       String childNodeName = 
         uiForm.getUIStringInput(UIChildNodeDefinitionForm.CHILD_NAME).getValue();
@@ -287,7 +306,23 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-name", null));
         return;
       }
+      for(int i = 0; i < childNodeName.length(); i ++){
+        char c = childNodeName.charAt(i);
+        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
+          || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
+          continue ;
+        }
+				uiApp.addMessage(new ApplicationMessage(
+						"UIChildNodeDefinitionForm.msg.child-invalid", null,
+						ApplicationMessage.WARNING));
+				event.getRequestContext().addUIComponentToUpdateByAjax(
+						uiApp.getUIPopupMessages());
+				return;
+			}
       if(prefix != null && prefix.length() > 0) childNodeName = prefix + ":" + childNodeName;
+      if (nodeTypeValue == null) {
+      	nodeTypeValue = new NodeDefinitionValue();
+      }
       nodeTypeValue.setName(childNodeName);
       String defaultType = 
         uiForm.getUIStringInput(UIChildNodeDefinitionForm.DEFAULT_PRIMARY_TYPE).getValue();
@@ -349,27 +384,19 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage("UIChildNodeDefinitionForm.msg.child-name", null));
         return;
       }
-      if((prefix != null) && (prefix.trim().length() == 0) && (childNodeName.trim().length()==1)){
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "%", "!"};
-        for(String filterChar : arrFilterChar) {
-          if(childNodeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
-                                                    ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
+      for(int i = 0; i < childNodeName.length(); i ++){
+        char c = childNodeName.charAt(i);
+        if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
+          || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
+          continue ;
         }
-      } else{
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!"};
-        for(String filterChar : arrFilterChar) {
-          if(childNodeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
-                                                    ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-        }
-      }      
+				uiApp.addMessage(new ApplicationMessage(
+						"UIChildNodeDefinitionForm.msg.child-invalid", null,
+						ApplicationMessage.WARNING));
+				event.getRequestContext().addUIComponentToUpdateByAjax(
+						uiApp.getUIPopupMessages());
+				return;
+			}
       if(prefix != null && prefix.length() > 0) childNodeName = prefix + ":" + childNodeName;
       nodeTypeValue.setName(childNodeName);
       String defaultType =
