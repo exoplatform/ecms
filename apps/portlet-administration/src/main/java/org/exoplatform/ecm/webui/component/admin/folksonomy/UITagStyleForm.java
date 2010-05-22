@@ -124,7 +124,7 @@ public class UITagStyleForm extends UIForm {
       try {
       	// add new tag
       	if (uiForm.getTagStyle() == null) {
-      		String tagStyleName = uiForm.getUIStringInput(STYLE_NAME).getValue();
+      		String tagStyleName = uiForm.getUIStringInput(STYLE_NAME).getValue().trim();
           NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
       		newFolksonomyService.addTagStyle(tagStyleName, "", "", repository, workspace);
           for(Node tagStyle: newFolksonomyService.getAllTagStyle(repository, workspace)) 

@@ -168,7 +168,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       RepositoryService rservice = uiDriveForm.getApplicationComponent(RepositoryService.class);
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
       UIApplication uiApp = uiDriveForm.getAncestorOfType(UIApplication.class);
-      String name = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_NAME).getValue();
+      String name = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_NAME).getValue().trim();
       if(name == null || name.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.name-null", null, 
                                                 ApplicationMessage.WARNING));

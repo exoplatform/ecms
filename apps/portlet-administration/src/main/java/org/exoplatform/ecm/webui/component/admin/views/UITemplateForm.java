@@ -245,7 +245,7 @@ public class UITemplateForm extends UIForm {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource();
       String repository = uiForm.getRepository();
-      String templateName = uiForm.getUIStringInput(FIELD_NAME).getValue();
+      String templateName = uiForm.getUIStringInput(FIELD_NAME).getValue().trim();
       String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue();
       String homeTemplate = uiForm.getUIFormSelectBox(FIELD_HOMETEMPLATE).getValue();
       UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);

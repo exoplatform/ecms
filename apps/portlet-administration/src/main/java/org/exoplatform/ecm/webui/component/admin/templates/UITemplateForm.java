@@ -197,8 +197,8 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   static public class SaveActionListener extends EventListener<UITemplateForm> {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource() ;
-      String name = uiForm.getUIFormSelectBox(FIELD_NAME).getValue() ;
-      String label = uiForm.getUIStringInput(FIELD_LABEL).getValue() ; 
+      String name = uiForm.getUIFormSelectBox(FIELD_NAME).getValue().trim() ;
+      String label = uiForm.getUIStringInput(FIELD_LABEL).getValue().trim() ; 
       String dialog = uiForm.getUIFormTextAreaInput(FIELD_DIALOG).getValue() ;
       String view = uiForm.getUIFormTextAreaInput(FIELD_VIEW).getValue();
       String skin = uiForm.getUIFormTextAreaInput(FIELD_SKIN).getValue();

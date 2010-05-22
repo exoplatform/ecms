@@ -637,7 +637,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       String systemWorkspace = mRepository.getConfiguration().getDefaultWorkspaceName() ;
       Session session = mRepository.getSystemSession(systemWorkspace) ;        
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue() ;
-      String nodeTypeName = uiForm.getUIStringInput(NODETYPE_NAME).getValue() ;
+      String nodeTypeName = uiForm.getUIStringInput(NODETYPE_NAME).getValue().trim();
       if(nodeTypeName == null || nodeTypeName.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.nodeType-name", null, 
                                                 ApplicationMessage.WARNING)) ;
@@ -647,7 +647,7 @@ public class UINodeTypeForm extends UIFormTabPane {
         return ;
       }
       if((prefix != null) && (prefix.trim().length() == 0) && (nodeTypeName.trim().length()==1)){
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "%", "!"};
+        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "%", "!", "\""};
         for(String filterChar : arrFilterChar) {
           if(nodeTypeName.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
@@ -657,7 +657,7 @@ public class UINodeTypeForm extends UIFormTabPane {
           }
         }
       } else{
-        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!"};
+        String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!", "\""};
         for(String filterChar : arrFilterChar) {
           if(nodeTypeName.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 

@@ -283,13 +283,13 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
 
   @SuppressWarnings("unchecked")
   public void save() throws Exception {
-    String viewName = getUIStringInput(FIELD_NAME).getValue() ;
+    String viewName = getUIStringInput(FIELD_NAME).getValue().trim();
     ApplicationMessage message ;
     if(viewName == null || viewName.trim().length() == 0){
       throw new MessageException(new ApplicationMessage("UIViewForm.msg.view-name-invalid", null, 
                                                         ApplicationMessage.WARNING)) ;
     }
-    String[] arrFilterChar = {"&", "$", "@", ",", ":","]", "[", "*", "%", "!", "#", "/", "\\"} ;
+    String[] arrFilterChar = {"&", "$", "@", ",", ":","]", "[", "*", "%", "!", "#", "/", "\\", "\""} ;
     for(String filterChar : arrFilterChar) {
       if(viewName.indexOf(filterChar) > -1) {
         throw new MessageException(new ApplicationMessage("UIViewForm.msg.fileName-invalid", null, 

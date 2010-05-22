@@ -24,12 +24,11 @@ import javax.jcr.Value;
 import javax.jcr.query.InvalidQueryException;
 import javax.jcr.query.Query;
 
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
-import org.exoplatform.ecm.webui.component.admin.templates.UITemplatesManager;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -163,7 +162,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       String repository = uiForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       QueryService queryService = uiForm.getApplicationComponent(QueryService.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      String queryName = uiForm.getUIStringInput(QUERY_NAME).getValue() ;
+      String queryName = uiForm.getUIStringInput(QUERY_NAME).getValue().trim();
       if(uiForm.isAddNew_) {
         for(Node queryNode : queryService.getSharedQueries(repository, SessionProviderFactory.createSystemProvider())) {
           if(queryNode.getName().equals(queryName)) {
