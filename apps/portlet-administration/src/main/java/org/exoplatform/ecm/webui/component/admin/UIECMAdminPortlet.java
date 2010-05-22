@@ -67,7 +67,7 @@ public class UIECMAdminPortlet extends UIPortletApplication {
   private String repoName_ = "" ;
   
   public UIECMAdminPortlet() throws Exception {
-    addChild(UIRepositoryControl.class, null, null) ;
+//    addChild(UIRepositoryControl.class, null, null) ;
     UIPopupContainer uiPopupAction = addChild(UIPopupContainer.class, null, "UIECMAdminUIPopupAction");
     uiPopupAction.getChild(UIPopupWindow.class).setId("UIECMAdminUIPopupWindow") ;
     String repo = getPreferenceRepository() ;
