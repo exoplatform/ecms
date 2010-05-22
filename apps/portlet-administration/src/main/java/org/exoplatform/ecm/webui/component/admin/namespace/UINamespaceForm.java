@@ -83,6 +83,13 @@ public class UINamespaceForm extends UIForm {
         return ;
       }
       UINamespaceManager uiManager = uiForm.getAncestorOfType(UINamespaceManager.class) ;
+      if (contains(namespaceRegistry.getPrefixes(), prefix) ||
+          contains(namespaceRegistry.getURIs(), uri)) {
+        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.register-unsuccessfull", null, 
+            ApplicationMessage.WARNING)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
+      }
       try {
         namespaceRegistry.registerNamespace(prefix, uri) ;
         uiManager.refresh() ;
@@ -94,6 +101,14 @@ public class UINamespaceForm extends UIForm {
         return ;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+    }
+    
+    private boolean contains(String[] arr, String st) {
+      if (st == null) return false;
+      for (String value : arr) 
+        if (st.equals(value))
+          return true;
+      return false;      
     }
   }
 
