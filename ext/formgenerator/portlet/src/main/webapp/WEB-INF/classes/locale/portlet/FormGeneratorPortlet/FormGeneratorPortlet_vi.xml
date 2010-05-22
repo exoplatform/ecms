@@ -29,4 +29,9 @@
       <Download>Download tài liệu này</Download>
     </label>
   </FormGeneratorDialog>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Có một số kí tự không hợp lệ trong trường '{0}'. Vui lòng nhập giá trị khác!</Invalid-char>
+    </msg>
+  </ECMNameValidator>
 </bundle>

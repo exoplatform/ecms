@@ -29,4 +29,9 @@
       <Download>Download this document</Download>
     </label>
   </FormGeneratorDialog>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>There are some invalid characters in field '{0}'. Type another value, please!</Invalid-char>
+    </msg>
+  </ECMNameValidator>
 </bundle>

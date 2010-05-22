@@ -29,4 +29,9 @@
       <Download>Télécharger ce document</Download>
     </label>
   </FormGeneratorDialog>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Caractères invalides détectés dans le champ '{0}'.</Invalid-char>
+    </msg>
+  </ECMNameValidator>
 </bundle>
