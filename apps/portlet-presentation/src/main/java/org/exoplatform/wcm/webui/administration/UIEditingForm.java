@@ -18,12 +18,10 @@ package org.exoplatform.wcm.webui.administration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -58,17 +56,13 @@ public class UIEditingForm extends UIForm {
   public static final String EDITING_OPTIONS = "EditingOptions";
   
   public UIEditingForm() {
-    UIFormSelectBox orderBySelectBox = new UIFormSelectBox(EDITING_OPTIONS, EDITING_OPTIONS, null);
-    orderBySelectBox.setOnChange("ChangeEditing");
-    addChild(orderBySelectBox);
-  }
-  
-  public void processRender(WebuiRequestContext context) throws Exception {
     List<SelectItemOption<String>> editingOptions = new ArrayList<SelectItemOption<String>>();
     editingOptions.add(new SelectItemOption<String>(PUBLISHED, PUBLISHED));
     editingOptions.add(new SelectItemOption<String>(DRAFT, DRAFT));
-    ((UIFormSelectBox)getChildById(EDITING_OPTIONS)).setOptions(editingOptions);
-    super.processRender(context);
+    
+    UIFormSelectBox orderBySelectBox = new UIFormSelectBox(EDITING_OPTIONS, EDITING_OPTIONS, editingOptions);
+    orderBySelectBox.setOnChange("ChangeEditing");
+    addChild(orderBySelectBox);
   }
   
   /**
