@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.jcr.Node;
 import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSearch;
@@ -51,6 +52,7 @@ public class UINodeTypeSearchForm extends UIForm {
     addChild(UINodeTypeSearch.class, null, "NodeTypeSearch").init();
   }
   
+  @SuppressWarnings("unchecked")
   public static class SearchNodeTypeActionListener extends EventListener<UINodeTypeSearchForm> {
     public void execute(Event<UINodeTypeSearchForm> event) throws Exception {
       UINodeTypeSearchForm uiForm = event.getSource();
@@ -61,11 +63,17 @@ public class UINodeTypeSearchForm extends UIForm {
       Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);
       UINodeTypeManager uiNodeTypeManager = uiForm.getAncestorOfType(UINodeTypeManager.class);
       UINodeTypeList uiNodeTypeList = uiNodeTypeManager.getChild(UINodeTypeList.class);
-      List<NodeType> lstAllNodetype = uiNodeTypeList.getAllNodeTypes();
-      List<NodeType> lstNodetype = new ArrayList<NodeType>();
-      for (NodeType nodeType : lstAllNodetype) {
-        if (p.matcher(nodeType.getName()).find()) {
-          lstNodetype.add(nodeType);
+      List lstAllNodetype = uiNodeTypeList.getAllNodeTypes();
+      List lstNodetype = new ArrayList<NodeType>();
+      for (Object nodeType : lstAllNodetype) {
+        if (nodeType instanceof NodeType) {
+          if (p.matcher(((NodeType) nodeType).getName()).find()) {
+            lstNodetype.add(nodeType);
+          }
+        } else if (nodeType instanceof Node) {
+          if (p.matcher(((Node) nodeType).getName()).find()) {
+            lstNodetype.add(nodeType);
+          }
         }
       }
       uiNodeTypeList.refresh(null, 1, lstNodetype);
