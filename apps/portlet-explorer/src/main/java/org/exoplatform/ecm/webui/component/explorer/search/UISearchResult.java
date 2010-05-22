@@ -384,13 +384,8 @@ public class UISearchResult extends UIContainer {
         LOG.error("Cannot access the node at " + folderPath, e);        
       }
 
-    	PortletPreferences portletPrefs = uiExplorer.getPortletPreferences();
-    	String trashHomeNodePath = portletPrefs.getValue(Utils.TRASH_HOME_NODE_PATH, "");
-
-      if (!node.getPath().startsWith(trashHomeNodePath)) {
-      	uiExplorer.setSelectNode(node.getSession().getWorkspace().getName(), folderPath);
-	      uiExplorer.updateAjax(event);
-      }
+    	uiExplorer.setSelectNode(node.getSession().getWorkspace().getName(), folderPath);
+      uiExplorer.updateAjax(event);
     }
   }
   
