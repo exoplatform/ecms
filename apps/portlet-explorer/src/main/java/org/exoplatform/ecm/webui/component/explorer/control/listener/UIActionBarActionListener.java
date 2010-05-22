@@ -21,16 +21,21 @@ import java.util.Map;
 import java.util.regex.Matcher;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.services.cms.views.ManageViewService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.UIExtensionEventListener;
 
 /**
@@ -41,6 +46,7 @@ import org.exoplatform.webui.ext.UIExtensionEventListener;
  */
 public abstract class UIActionBarActionListener<T extends UIComponent> extends UIExtensionEventListener<T> {
   
+  private static final Log LOG  = ExoLogger.getLogger(UIActionBarActionListener.class);
   /**
    * {@inheritDoc}
    */
@@ -50,30 +56,37 @@ public abstract class UIActionBarActionListener<T extends UIComponent> extends U
     UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     String nodePath = event.getRequestContext().getRequestParameter(UIComponent.OBJECTID);
-    Node currentNode;
-    if (nodePath != null && nodePath.length() != 0 && !nodePath.contains(";")) {
-      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
-      String wsName = null;
-      if (matcher.find()) {
-        wsName = matcher.group(1);
-        nodePath = matcher.group(2);
+    try {
+      Node currentNode;
+      if (nodePath != null && nodePath.length() != 0 && !nodePath.contains(";")) {
+        Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
+        String wsName = null;
+        if (matcher.find()) {
+          wsName = matcher.group(1);
+          nodePath = matcher.group(2);
+        } else {
+          throw new IllegalArgumentException("The ObjectId is invalid '" + nodePath + "'");
+        }
+        Session session = uiExplorer.getSessionByWorkspace(wsName);
+        // Use the method getNodeByPath because it is link aware
+        currentNode = uiExplorer.getNodeByPath(nodePath, session);
       } else {
-        throw new IllegalArgumentException("The ObjectId is invalid '" + nodePath + "'");
+        currentNode = uiExplorer.getCurrentNode();   
       }
-      Session session = uiExplorer.getSessionByWorkspace(wsName);
-      // Use the method getNodeByPath because it is link aware
-      currentNode = uiExplorer.getNodeByPath(nodePath, session);
-    } else {
-      currentNode = uiExplorer.getCurrentNode();   
+      
+      WebuiRequestContext requestContext = event.getRequestContext();
+      UIApplication uiApp = requestContext.getUIApplication();
+      context.put(UIActionBar.class.getName(), uiActionBar);
+      context.put(UIJCRExplorer.class.getName(), uiExplorer);
+      context.put(UIApplication.class.getName(), uiApp);
+      context.put(Node.class.getName(), currentNode);
+      context.put(WebuiRequestContext.class.getName(), requestContext);
+    } catch(PathNotFoundException pne) {
+      throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null, 
+          ApplicationMessage.WARNING)) ;
+    } catch(Exception e) {
+      LOG.error("Unexpected problem occurs", e);
     }
-       
-    WebuiRequestContext requestContext = event.getRequestContext();
-    UIApplication uiApp = requestContext.getUIApplication();
-    context.put(UIActionBar.class.getName(), uiActionBar);
-    context.put(UIJCRExplorer.class.getName(), uiExplorer);
-    context.put(UIApplication.class.getName(), uiApp);
-    context.put(Node.class.getName(), currentNode);
-    context.put(WebuiRequestContext.class.getName(), requestContext);
     return context;
   }
   

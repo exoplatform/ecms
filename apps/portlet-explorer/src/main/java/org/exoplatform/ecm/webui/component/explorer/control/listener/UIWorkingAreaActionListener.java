@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 
@@ -30,11 +31,13 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.UIExtensionEventListener;
 import org.exoplatform.webui.ext.UIExtensionManager;
 
@@ -109,14 +112,21 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
     String nodePath = event.getRequestContext().getRequestParameter(UIComponent.OBJECTID);
     if (nodePath == null || nodePath.length() == 0 || nodePath.contains(";")) return null;
     // Use the method getNodeByPath because it is link aware
-    Node currentNode = getNodeByPath(nodePath, uiExplorer, !inTrash(nodePath)); 
-    WebuiRequestContext requestContext = event.getRequestContext();
-    UIApplication uiApp = requestContext.getUIApplication();
-    context.put(UIWorkingArea.class.getName(), uiWorkingArea);
-    context.put(UIJCRExplorer.class.getName(), uiExplorer);
-    context.put(UIApplication.class.getName(), uiApp);
-    context.put(Node.class.getName(), currentNode);
-    context.put(WebuiRequestContext.class.getName(), requestContext);
+    try {
+      Node currentNode = getNodeByPath(nodePath, uiExplorer, !inTrash(nodePath)); 
+      WebuiRequestContext requestContext = event.getRequestContext();
+      UIApplication uiApp = requestContext.getUIApplication();
+      context.put(UIWorkingArea.class.getName(), uiWorkingArea);
+      context.put(UIJCRExplorer.class.getName(), uiExplorer);
+      context.put(UIApplication.class.getName(), uiApp);
+      context.put(Node.class.getName(), currentNode);
+      context.put(WebuiRequestContext.class.getName(), requestContext);
+    } catch(PathNotFoundException pte) {
+      throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null, 
+          ApplicationMessage.WARNING)) ;
+    } catch(Exception e) {
+      LOG.error("Unexpected problem occurs", e);
+    }
     return context;
   }
   
