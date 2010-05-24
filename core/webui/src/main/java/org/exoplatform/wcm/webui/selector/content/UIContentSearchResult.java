@@ -15,7 +15,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
 import org.exoplatform.services.wcm.core.NodeIdentifier;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -222,16 +221,8 @@ public class UIContentSearchResult extends UIGrid {
      */
     public void execute(Event<UIContentSearchResult> event) throws Exception {
       UIContentSearchResult contentSearchResult = event.getSource();
-      String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
-      RepositoryService repositoryService = contentSearchResult.getApplicationComponent(RepositoryService.class);
-      String repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
-      WCMConfigurationService configurationService = contentSearchResult.getApplicationComponent(WCMConfigurationService.class);
-      NodeLocation nodeLocation = configurationService.getLivePortalsLocation(repoName);
-
-      ManageableRepository manageableRepository = repositoryService.getRepository(nodeLocation.getRepository());
-      Session session = contentSearchResult.getApplicationComponent(ThreadLocalSessionProviderService.class).getSessionProvider(null)
-      .getSession(nodeLocation.getWorkspace(), manageableRepository);
-      Node webContent = (Node) session.getItem(nodePath);
+      String expression = event.getRequestContext().getRequestParameter(OBJECTID);
+      Node webContent = NodeLocation.getNodeByExpression(expression);
       NodeIdentifier nodeIdentifier = NodeIdentifier.make(webContent);
       PortletRequestContext pContext = (PortletRequestContext) event.getRequestContext();
       PortletPreferences prefs = pContext.getRequest().getPreferences();
@@ -280,10 +271,11 @@ public class UIContentSearchResult extends UIGrid {
      */
     public void execute(Event<UIContentSearchResult> event) throws Exception {
       UIContentSearchResult contentSearchResult = event.getSource();
-      String webcontentPath = event.getRequestContext().getRequestParameter(OBJECTID);
-      PortletPreferences prefs = ((PortletRequestContext)event.getRequestContext()).getRequest().getPreferences();
-      String workspace = prefs.getValue("workspace", null);
-      String repository = prefs.getValue("repository", null);
+      String expression = event.getRequestContext().getRequestParameter(OBJECTID);
+      NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(expression);
+      String repository = nodeLocation.getRepository();
+      String workspace = nodeLocation.getWorkspace();
+      String webcontentPath = nodeLocation.getPath();
       Node originalNode = Utils.getViewableNodeByComposer(repository, workspace, webcontentPath, WCMComposer.BASE_VERSION);
       Node viewNode = Utils.getViewableNodeByComposer(repository, workspace, webcontentPath);
       UIContentSelector contentSelector = contentSearchResult.getAncestorOfType(UIContentSelector.class);

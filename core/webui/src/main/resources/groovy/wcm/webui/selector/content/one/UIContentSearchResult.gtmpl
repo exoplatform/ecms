@@ -8,6 +8,7 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.services.ecm.publication.PublicationService;
   import org.exoplatform.services.wcm.publication.WCMPublicationService;
+  import org.exoplatform.services.wcm.core.NodeLocation;
 
   String[] beanFields =  uicomponent.getBeanFields();  
   String[] beanActions =  uicomponent.getBeanActions();
@@ -15,6 +16,7 @@
   UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class);
   DateFormat dateFormat = uicomponent.getDateFormat();
 %>
+
 <div id="$uicomponent.id">
   <table class="UIGrid" cellspacing="0">
     <thead>
@@ -58,6 +60,7 @@
             String path = bean.getPath();
             float score = bean.getScore();
             Node node = bean.getNode();
+            def nodeExpression = NodeLocation.getExpressionByNode(node);
             String date = dateFormat.format(uicomponent.getCreateDate(node));
             WCMPublicationService wcmPublicationService = uicomponent.getApplicationComponent(WCMPublicationService.class);
             String publicationState = wcmPublicationService.getContentState(node);
@@ -84,16 +87,8 @@
     %>
           <td class="action">
             <div class="ActionContainer">
-              <%
-                def beanIdField = uicomponent.getBeanIdField() ;           
-                for(action in beanActions) { 
-                  def beanId = uicomponent.getFieldValue(bean, beanIdField)  ;
-                  if(action == null) continue;
-                  String title = _ctx.appRes("UIContentSearchResult.title." + action);
-                  String actionLink = uicomponent.event(action, beanId);
-              %>             
-                  <img onclick="$actionLink" alt="" title="$title" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
-              <%}%>                 
+              <img onclick="<%= uicomponent.event("Select", nodeExpression) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="SelectIcon" />
+              <img onclick="<%= uicomponent.event("View", nodeExpression) %>" src="/eXoResources/skin/sharedImages/Blank.gif" class="ViewIcon" />                 
             </div>
           </td>
     <%
