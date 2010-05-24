@@ -39,7 +39,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
-import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -191,8 +190,7 @@ public class UITaggingForm extends UIForm {
   			ret.append(group).append(';');
   		ret.deleteCharAt(ret.length() - 1);
   	} else if (Utils.PUBLIC.equals(scope)) {
-  		NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-  				this.getApplicationComponent(NodeHierarchyCreator.class);
+  		NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
 			ret.append(nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH));
   	}
   	return ret.toString();

@@ -89,16 +89,26 @@ public class UITagForm extends UIForm {
       String userName = uiExplorer.getSession().getUserID();
       int scope = uiExplorer.getTagScope();
       
-//		TODO : check tag name      
-//      if(!uiForm.validateRange(documentRange)) {
-//        uiApp.addMessage(new ApplicationMessage("UITagStyleForm.msg.range-validator", null)) ;
-//        return ;
-//      }
+      NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
+      String tagName = uiForm.getUIStringInput(TAG_NAME).getValue().trim();
+      if(tagName.trim().length() > 20) {
+        uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long", null, 
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
+      String[] arrFilterChar = {"&", "'", "$", "@", ":","]", "[", "*", "%", "!", "/", "\\"};
+      for(String filterChar : arrFilterChar) {
+        if(tagName.indexOf(filterChar) > -1) {
+          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid", null, 
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
+      }
       try {
       	// add new tag
       	if (uiForm.getTag() == null) {
-      		String tagName = uiForm.getUIStringInput(TAG_NAME).getValue().trim();
-          NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
           if (scope == NewFolksonomyService.PRIVATE) { 
           	newFolksonomyService.addPrivateTag(new String[] { tagName }, 
           																		 null, 
@@ -118,8 +128,6 @@ public class UITagForm extends UIForm {
       	}
       	// rename tag
       	else {
-      		String tagName = uiForm.getUIStringInput(TAG_NAME).getValue().trim();      		
-          NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
           if (!existTag(tagName, repository, workspace, scope, uiForm, userName)) {
           	newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, repository, workspace);
           } else if (!tagName.equals(uiForm.oldName_)) {
@@ -164,7 +172,6 @@ public class UITagForm extends UIForm {
     }
   }
   
-
   static public class CancelActionListener extends EventListener<UITagForm> {
     public void execute(Event<UITagForm> event) throws Exception {
       UITagForm uiForm = event.getSource();
