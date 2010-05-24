@@ -207,7 +207,7 @@ public class UICategoryNavigationTreeBase extends UITree {
     // categoryPath: /News/France/Blah/Bom
     String categoryPath = parameters.indexOf("/") >= 0 ? parameters.substring(parameters.indexOf("/")) : "";
     
-    String gpath = getAncestorOfType(UICategoryNavigationPortlet.class).getCurrentPath();
+    String gpath  = Util.getPortalRequestContext().getRequestParameter("path");
 	if (gpath!=null) {
 	    PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
 	    String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");

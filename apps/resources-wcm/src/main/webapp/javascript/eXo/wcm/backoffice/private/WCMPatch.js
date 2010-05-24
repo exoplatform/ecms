@@ -44,3 +44,18 @@ eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
   if(useAjax) ajaxPost(form, callback) ;
   else  form.submit();
 } ;
+
+/*****************************************************************************************/
+/*
+* This is the main entry method for every Ajax calls to the eXo Portal
+*
+* It is simply a dispatcher method that fills some init fields before 
+* calling the doRequest() method
+* 
+* Modified: add all parameters in current URL to current request.
+*/
+function ajaxGet(url, callback) {
+  if (!callback) callback = null ;
+  url += "&" + location.search.substring(1);
+  doRequest("Get", url, null, callback) ;
+} ;
