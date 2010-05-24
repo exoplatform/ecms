@@ -201,12 +201,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
         try {
           // Use the method getNodeByPath because it is link aware
-          if (!uiExplorer.getCurrentPath().equals(nodePath)) {
-            uiExplorer.setCurrentPath(nodePath);
-            selectedNode = uiExplorer.getCurrentNode();
-          } else {
-            selectedNode = uiExplorer.getNodeByPath(nodePath, session);
-          }
+          selectedNode = uiExplorer.getNodeByPath(nodePath, session);
         } catch (PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
               ApplicationMessage.WARNING));
