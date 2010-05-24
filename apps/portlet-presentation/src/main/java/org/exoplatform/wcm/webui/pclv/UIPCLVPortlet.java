@@ -18,6 +18,7 @@ package org.exoplatform.wcm.webui.pclv;
 
 import javax.portlet.PortletMode;
 
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.wcm.webui.pclv.config.UIPCLVConfig;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -114,6 +115,8 @@ public class UIPCLVPortlet extends UIPortletApplication {
 	/** The mode. */
 	private PortletMode					mode																					= PortletMode.VIEW;
 
+	private String currentPath;
+	
 	/**
 	 * Instantiates a new uIPCLV portlet.
 	 * 
@@ -128,6 +131,10 @@ public class UIPCLVPortlet extends UIPortletApplication {
 	 */
 	public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
 		PortletRequestContext pContext = (PortletRequestContext) context;
+		if(Util.getPortalRequestContext().getRequestParameter("path") != null) {
+		  currentPath = Util.getPortalRequestContext().getRequestParameter("path").substring(1);
+		}
+		
 		PortletMode newMode = pContext.getApplicationMode();
 		if (!mode.equals(newMode)) {
 			activateMode(newMode);
@@ -153,4 +160,12 @@ public class UIPCLVPortlet extends UIPortletApplication {
         addChild(UIPCLVConfig.class, null, null);
     }
 	}
+	
+	public String getCurrentPath() {
+    return currentPath;
+  }
+	
+	public void setCurrentPath(String currentPath) {
+    this.currentPath = currentPath;
+  }
 }

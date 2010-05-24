@@ -18,6 +18,7 @@ package org.exoplatform.wcm.webui.category;
 
 import javax.portlet.PortletMode;
 
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.wcm.webui.category.config.UICategoryNavigationConfig;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -43,6 +44,8 @@ public class UICategoryNavigationPortlet extends UIPortletApplication {
 
   /** The mode. */
   private PortletMode mode = PortletMode.VIEW;
+  
+  private String currentPath;
   
   /**
    * Instantiates a new uI category navigation portlet.
@@ -75,11 +78,23 @@ public class UICategoryNavigationPortlet extends UIPortletApplication {
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
+    if(Util.getPortalRequestContext().getRequestParameter("path") != null) {
+      currentPath = Util.getPortalRequestContext().getRequestParameter("path").substring(1);
+    }
+    
     PortletMode newMode = pContext.getApplicationMode();
     if (!mode.equals(newMode)) {
       activateMode(newMode);
       mode = newMode;
     }
     super.processRender(app, context);
+  }
+  
+  public String getCurrentPath() {
+    return currentPath;
+  }
+  
+  public void setCurrentPath(String currentPath) {
+    this.currentPath = currentPath;
   }
 }

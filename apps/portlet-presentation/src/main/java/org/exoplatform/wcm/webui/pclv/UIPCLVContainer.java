@@ -131,7 +131,7 @@ public class UIPCLVContainer extends UIContainer {
 		} catch (Exception e) {
 		  Utils.createPopupMessage(this, "UIPCLVConfig.msg.decode", null, ApplicationMessage.ERROR);
 		}
-    	String gpath = Util.getPortalRequestContext().getRequestParameter("path");
+    	String gpath = getAncestorOfType(UIPCLVPortlet.class).getCurrentPath();
     	if (gpath!=null) {
     		categoryPath = gpath.substring(gpath.indexOf(preferenceTreeName)+preferenceTreeName.length()+1);
     	}
