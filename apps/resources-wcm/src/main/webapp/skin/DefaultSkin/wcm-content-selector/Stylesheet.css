@@ -565,16 +565,12 @@
 	padding-left:20px;
 }
 
-.UICLVPortlet .UIPopupWindow .UITabPane {
-	padding: 8px;
-}
-
-.UISingleContentViewerPortlet .UIPopupWindow .UIHorizontalTabs {
+#UIContentSelectorOne .UIHorizontalTabs {
 	height: 24px;
 	border-bottom: 1px solid #c7c7c7;
 }
 
-.UISingleContentViewerPortlet .UIPopupWindow .UITabPane {
+#UIContentSelectorMulti, #UIContentSelectorOne {
 	padding: 8px;
 }
 
