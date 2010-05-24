@@ -122,6 +122,11 @@ td {
 .UISiteAdminToolBar .LeftSelect {
   float:left;
 }
+
+.UIToolbarContainer .UserToolBarGroupPortletTDContainer {
+	z-index: 10;
+}
+
 .UICategoryForm .UIForm .HorizontalLayout .UIFormInputSet {
 	padding: 0px;
 }
