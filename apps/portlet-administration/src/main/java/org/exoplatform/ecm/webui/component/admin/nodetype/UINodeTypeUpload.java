@@ -18,15 +18,13 @@ package org.exoplatform.ecm.webui.component.admin.nodetype;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.zip.ZipInputStream;
 
-import javax.jcr.nodetype.NodeType;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
-import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValuesList;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -42,6 +40,7 @@ import org.exoplatform.webui.form.UIFormUploadInput;
 import org.jibx.runtime.BindingDirectory;
 import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IUnmarshallingContext;
+import org.jibx.runtime.JiBXException;
 
 /**
  * Created by The eXo Platform SARL
@@ -110,36 +109,28 @@ public class UINodeTypeUpload extends UIForm {
         NodeTypeValuesList nodeTypeValuesList = (NodeTypeValuesList)uctx.unmarshalDocument(is, null);
         ArrayList ntvList = nodeTypeValuesList.getNodeTypeValuesList();
         uiNodeTypeImport.update(ntvList);
-        String nodetype;
-        List<String> alreadyRegisterNodeType = new ArrayList<String>();
-        if (uiNodeTypeImport.getUndefinedNodeTypes().size() > 0) {
-        	for (int i = 0; i < ntvList.size(); i++) {
-        		nodetype = ((NodeTypeValue) ntvList.get(i)).getName(); 
-        		if (!uiNodeTypeImport.getUndefinedNodeTypes().contains(nodetype)) {
-        			alreadyRegisterNodeType.add(nodetype);
-        		}
-        	}
-        } else {
-        	for (int i = 0; i < ntvList.size(); i++) {
-        			alreadyRegisterNodeType.add(((NodeTypeValue) ntvList.get(i)).getName());
-        	}
-       	}
-        if (alreadyRegisterNodeType.size() <= ntvList.size()) {
-	        Class[] childrenToRender = {UINodeTypeImport.class, UIPopupWindow.class} ;
-	        uiImportPopup.setRenderedChildrenOfTypes(childrenToRender) ;
-	        uiPopup.setShow(true);
-	        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+        if (uiNodeTypeImport.getRegisteredNodeType().size() > 0 || uiNodeTypeImport.getUndefinedNodeTypes().size() > 0) {
+        	Class[] childrenToRender = {UINodeTypeImport.class, UIPopupWindow.class} ;
+        	uiImportPopup.setRenderedChildrenOfTypes(childrenToRender) ;
+        	uiPopup.setShow(true);
+        	event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
         }
-        if (alreadyRegisterNodeType.size() > 0) {
-        	 uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.nodetype-exist", new Object[] {alreadyRegisterNodeType.toString()}, ApplicationMessage.INFO )) ;
+        if (uiNodeTypeImport.getRegisteredNodeType().size() > 0) {
+        	 uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.nodetype-exist", 
+        			 new Object[] {uiNodeTypeImport.getRegisteredNodeType().toString()}, ApplicationMessage.WARNING )) ;
            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         }
-      } catch(Exception e) {
-        Object[] args = uiNodeTypeImport.getUndefinedNodeTypes().size() == 0 ? null : uiNodeTypeImport.getUndefinedNodeTypes().toArray();
-        if (args == null)
-        	uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-invalid", args, ApplicationMessage.ERROR )) ;
-        else
-        	uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.nodetype-invalid", args, ApplicationMessage.ERROR )) ;
+        if (uiNodeTypeImport.getUndefinedNamespace().size() > 0) {
+        	 uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.namespace-invalid",
+ 							new Object[] { uiNodeTypeImport.getUndefinedNamespace().toString() }, ApplicationMessage.WARNING));
+           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+         }
+      } catch(JiBXException e) {
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-invalid", null, ApplicationMessage.ERROR )) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
+      } catch(RepositoryException e) {
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-invalid", null, ApplicationMessage.ERROR )) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } finally {

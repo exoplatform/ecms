@@ -878,8 +878,8 @@
       <filename-error>Browse node type file for import</filename-error>
       <data-file-error>Only xml file or zip file are supported to import.</data-file-error>
       <data-invalid>Invalid data when import nodetype</data-invalid>
-      <nodetype-invalid>Invalid data: unknown namespace : '{0}'</nodetype-invalid>
 	  <nodetype-exist>Invalid data: NodeType exist : '{0}'</nodetype-exist>
+	  <namespace-invalid>Invalid data:  unknown namespace : '{0}'</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--

@@ -2439,8 +2439,8 @@
 	<UINodeTypeUpload>	
 		<msg>
 		  <data-invalid>Dữ liệu cho nodetype không phù hợp</data-invalid>
-	      <nodetype-invalid>Dữ liệu về nodetype không phù hợp: '{0}'</nodetype-invalid>
 	      <nodetype-exist>Dữ liệu không phù hợp, nodetype đã tồn tại : '{0}'</nodetype-exist>
+		  <namespace-invalid>Dữ liệu không phù hợp: Không gian tên bị sai: '{0}'</namespace-invalid>
 	    </msg>
 	 </UINodeTypeUpload>
 </bundle>

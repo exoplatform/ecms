@@ -2370,10 +2370,10 @@
 	  </msg>
 	</UIChildNodeDefinitionForm>
 	<UINodeTypeUpload>	
-		<msg>
-		  <data-invalid>Invalid Data when import nodetype</data-invalid>
-	      <nodetype-invalid>Invalid Data: unknown namespace : '{0}'</nodetype-invalid>
-	      <nodetype-exist>Invalid Data: NodeType exist : '{0}'</nodetype-exist>
+	  <msg>
+	      <data-invalid>Invalid data when import nodetype</data-invalid>
+		  <nodetype-exist>Invalid data: NodeType exist : '{0}'</nodetype-exist>
+		  <namespace-invalid>Invalid data:  unknown namespace : '{0}'</namespace-invalid>
 	    </msg>
 	 </UINodeTypeUpload>
 </bundle>
