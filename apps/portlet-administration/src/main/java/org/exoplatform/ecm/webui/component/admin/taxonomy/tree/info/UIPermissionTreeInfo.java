@@ -87,6 +87,8 @@ public class UIPermissionTreeInfo extends UIContainer {
   public void updateGrid() throws Exception {
     Map<String, List<String>> permsMap = new HashMap<String, List<String>>();
     int iSystemOwner = 0;
+    PermissionBean anyPermBean = new PermissionBean();
+    PermissionBean starPermBean = new PermissionBean();
     if (currentNode != null) {
       permBeans = new ArrayList<PermissionBean>();
       ExtendedNode node = (ExtendedNode) currentNode;
@@ -133,8 +135,33 @@ public class UIPermissionTreeInfo extends UIContainer {
           else if(PermissionType.SET_PROPERTY.equals(perm)) permBean.setSetProperty(true);
           else if(PermissionType.REMOVE.equals(perm)) permBean.setRemove(true);
         }
+        if (userOrGroup.equals("*")) starPermBean = permBean;
+        if (userOrGroup.equals("any")) anyPermBean = permBean;
         permBeans.add(permBean);
       }
+      PermissionBean asPermBean = new PermissionBean();
+      if ((starPermBean.getUsersOrGroups() != null) && (anyPermBean.getUsersOrGroups() != null)) {
+        asPermBean.setUsersOrGroups("*");
+        if (starPermBean.isRead() || anyPermBean.isRead()) asPermBean.setRead(true);
+        else asPermBean.setRead(false);      
+        if (starPermBean.isAddNode() || anyPermBean.isAddNode()) asPermBean.setAddNode(true);
+        else asPermBean.setAddNode(false);
+        if (starPermBean.isSetProperty() || anyPermBean.isSetProperty()) asPermBean.setSetProperty(true);
+        else asPermBean.setSetProperty(false);
+        if (starPermBean.isRemove() || anyPermBean.isRemove()) asPermBean.setRemove(true);
+        else asPermBean.setRemove(false);
+      } else if((starPermBean.getUsersOrGroups() == null) && (anyPermBean.getUsersOrGroups() != null)) {
+        asPermBean = anyPermBean;
+        asPermBean.setUsersOrGroups("*");
+      } else if((anyPermBean.getUsersOrGroups() == null) && (starPermBean.getUsersOrGroups() != null)) {
+        asPermBean = starPermBean;
+        asPermBean.setUsersOrGroups("*");
+      } else {
+        asPermBean = null;
+      }
+      if ((starPermBean.getUsersOrGroups() != null) && (permBeans != null)) permBeans.remove(starPermBean);
+      if ((anyPermBean.getUsersOrGroups() != null) && (permBeans != null)) permBeans.remove(anyPermBean);
+      if ((asPermBean != null) && !permBeans.contains(asPermBean)) permBeans.add(asPermBean);
     } else {
       UIPermissionTreeForm uiForm = ((UIContainer)getParent()).getChild(UIPermissionTreeForm.class);
       PermissionBean permBean = uiForm.getPermBean();
@@ -209,6 +236,8 @@ public class UIPermissionTreeInfo extends UIContainer {
           }
           try {
             node.removePermission(name);
+            if (name.equals("*")) node.removePermission("any");
+            if (name.equals("any")) node.removePermission("*");
             node.save();
           } catch(AccessDeniedException ace) {
             node.getSession().refresh(false) ;
