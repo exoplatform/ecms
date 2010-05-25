@@ -51,6 +51,7 @@ import org.exoplatform.services.resources.ResourceBundleService;
  */ 
 public class PublicationServiceImpl implements PublicationService {
 
+  private static final String  PUBLICATION_LIFECYCLE_TYPE = "publication:authoringPublication".intern();  
   private static final String PUBLICATION = "publication:publication".intern();
   private static final String LIFECYCLE_NAME = "publication:lifecycleName".intern();
   private static final String CURRENT_STATE = "publication:currentState".intern();
@@ -126,7 +127,9 @@ public class PublicationServiceImpl implements PublicationService {
     //current state = default state = enrolled
     //history : empty
     if(publicationPlugins_.get(lifecycle).canAddMixin(node)) publicationPlugins_.get(lifecycle).addMixin(node) ;
-    else throw new NoSuchNodeTypeException() ;
+    else
+      if (!node.isNodeType(PUBLICATION_LIFECYCLE_TYPE))
+      throw new NoSuchNodeTypeException() ;
     node.setProperty(LIFECYCLE_NAME, lifecycle);
     node.setProperty(CURRENT_STATE, "enrolled"); 
     List<Value> history = new ArrayList<Value>();
@@ -225,7 +228,9 @@ public class PublicationServiceImpl implements PublicationService {
    * @see org.exoplatform.services.cms.publication.PublicationService#isNodeEnrolledInLifecycle(javax.jcr.Node)
    */
   public boolean isNodeEnrolledInLifecycle(Node node) throws Exception {
-    return node.isNodeType(PUBLICATION);
+    return node.isNodeType(PUBLICATION) && 
+           node.getProperty(LIFECYCLE_NAME) != null &&
+           node.getProperty(LIFECYCLE_NAME).getString().length() > 0;
   }
 
   public String getLocalizedAndSubstituteLog(Locale locale, String key, String[] values){
