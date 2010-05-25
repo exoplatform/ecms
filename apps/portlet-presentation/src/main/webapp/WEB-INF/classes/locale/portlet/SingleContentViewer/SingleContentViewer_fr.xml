@@ -71,4 +71,10 @@
     <UIContentSelectorOne>Single content selector panel</UIContentSelectorOne>
    </title>
   </UIContentDialogFormPopupWindow>
+  
+  <UISingleContentViewerPortlet>
+  	 <msg>
+  	 		<AccessControlException>Vous n'avez pas la permission d'accéder à modifier le mode</AccessControlException>
+  	 </msg>
+  </UISingleContentViewerPortlet>
 </bundle>

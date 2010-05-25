@@ -16,6 +16,8 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
+import java.security.AccessControlException;
+
 import javax.jcr.Node;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
@@ -26,10 +28,12 @@ import org.exoplatform.wcm.webui.WebUIPropertiesConfigService;
 import org.exoplatform.wcm.webui.WebUIPropertiesConfigService.PopupWindowProperties;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.scv.config.UIPortletConfig;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
@@ -84,7 +88,17 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       PopupWindowProperties popupProperties = (PopupWindowProperties)propertiesConfigService.getProperties(WebUIPropertiesConfigService.SCV_POPUP_SIZE_EDIT_PORTLET_MODE);
       UIPortletConfig portletConfig = createUIComponent(UIPortletConfig.class,null,null);      
       Utils.createPopupWindow(this, portletConfig, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, popupProperties.getWidth());
-      portletConfig.init();
+      try {
+        portletConfig.init();
+      } catch (AccessControlException e) {        
+        Utils.closePopupWindow(this, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+        UIApplication uiApp = findFirstComponentOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UISingleContentViewerPortlet.msg.AccessControlException", null, 
+            ApplicationMessage.WARNING));
+        WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+        requestContext.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
     }
   }
 
