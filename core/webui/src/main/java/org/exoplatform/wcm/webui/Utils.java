@@ -21,6 +21,7 @@ import java.util.HashMap;
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
@@ -33,6 +34,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -418,4 +420,44 @@ public class Utils {
     return true;
   }
   
+  /**
+   * Get the real node from frozen node, symlink node
+   * return True if the node is viewable, otherwise will return False
+   * @param node: The node to check
+   */
+  public static Node getRealNode(Node node) throws Exception {
+    // TODO: Need to add to check symlink node
+    if (node.isNodeType("nt:frozenNode")){
+      String uuid = node.getProperty("jcr:frozenUuid").getString();
+      return node.getSession().getNodeByUUID(uuid);							
+    } else {
+      return node;
+    }
+  }
+  
+  public static String getRealNodePath(Node node) throws Exception {
+	  if (node.isNodeType("nt:frozenNode")) {
+	  	Node realNode = getRealNode(node);
+		  return realNode.getPath() + "?version=" + node.getParent().getName();
+	  } else {
+		  return node.getPath();
+	  }
+  }
+  
+  public static String getWebdavURL(Node node) throws Exception {
+    NodeLocation location = NodeLocation.getNodeLocationByNode(getRealNode(node));	  
+    String repository = location.getRepository();
+	  String workspace = location.getWorkspace();	
+	  String currentProtal = PortalContainer.getCurrentRestContextName();
+	  
+	  String originalNodePath = getRealNodePath(node);
+	  String imagePath = currentProtal + "/" + repository + "/" + workspace + originalNodePath;
+	  if (imagePath.contains("?")) {
+	  	imagePath += "&time=";
+	  } else { 
+	  	imagePath += "?time=";
+	  }
+	  imagePath += System.currentTimeMillis();
+	  return imagePath; 
+  }
 }
