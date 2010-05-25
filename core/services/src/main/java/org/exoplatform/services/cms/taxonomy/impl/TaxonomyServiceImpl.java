@@ -42,8 +42,11 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Permission;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -273,6 +276,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
             node.setPermission(entry.getKey(), entry.getValue());          	
           }
         }
+        if (!node.isNodeType("exo:privilegeable"))
+          node.addMixin("exo:privilegeable");
+        String systemUser = SystemIdentity.SYSTEM;
+        if (!containsUser(node.getACL().getPermissionEntries(), systemUser))
+          node.setPermission(systemUser, PermissionType.ALL);
       }
       systemSession.save();
     } catch (RepositoryConfigurationException e1) {
@@ -284,6 +292,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     }
   }  
 
+  private boolean containsUser(List<AccessControlEntry> entries, String userName) {
+    if (userName == null) return false;
+    for (AccessControlEntry entry : entries)
+      if (userName.equals(entry.getIdentity()))
+          return true;
+    return false;
+  }
+  
   /**
    * {@inheritDoc}
    */

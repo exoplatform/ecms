@@ -2358,7 +2358,12 @@
 		<label>
 			<selectedAllNodeTypes>Choose all node types</selectedAllNodeTypes>
 		</label>
-	</UINodeTypeSelector>	
+	</UINodeTypeSelector>
+  <UIPermissionInfo>  
+    <msg>
+      <no-permission-remove>You can not remove the owner or system</no-permission-remove>
+    </msg>
+  </UIPermissionInfo>		
 	<UITemplateList>
 		<msg>	
 	      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>

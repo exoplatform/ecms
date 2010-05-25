@@ -1563,7 +1563,6 @@
     <msg>
       <confirm-delete-permission>هل تريد أن تحذف هذه الصلاحية؟</confirm-delete-permission>
       <no-permission-tochange>ليس لديك الحق لحذف الصلاحية</no-permission-tochange>
-      <no-permission-remove>لا يمكن حذف المالك</no-permission-remove>
       <access-denied>.غير مسموح بالدخول!  لم تتحصل على الصلاحية في هذه المهمة</access-denied>
     </msg>
   </UIPermissionInfo>
@@ -2357,6 +2356,11 @@
 			<selectedAllNodeTypes>Choose all node types</selectedAllNodeTypes>
 		</label>
 	</UINodeTypeSelector>
+  <UIPermissionInfo>  
+    <msg>
+      <no-permission-remove>You can not remove the owner or system</no-permission-remove>
+    </msg>
+  </UIPermissionInfo>
 	  <UITemplateList>
 			<msg>	
 		      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>

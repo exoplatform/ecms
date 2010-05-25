@@ -1564,7 +1564,7 @@
     <msg>
       <confirm-delete-permission>Do you want to remove this permission?</confirm-delete-permission>
       <no-permission-tochange>You have no right to remove permission</no-permission-tochange>
-      <no-permission-remove>You can not remove the owner</no-permission-remove>
+      <no-permission-remove>You can not remove the owner or system</no-permission-remove>
       <access-denied>Access denied! You can not remove this permission.</access-denied>
     </msg>
   </UIPermissionInfo>

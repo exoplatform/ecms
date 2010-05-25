@@ -1561,7 +1561,7 @@
     <msg>
       <confirm-delete-permission>Bạn có muốn xóa quyền này?</confirm-delete-permission>
       <no-permission-tochange>Bạn không có quyền xóa</no-permission-tochange>
-      <no-permission-remove>Bạn không thể loại bỏ chính mình</no-permission-remove>
+      <no-permission-remove>Bạn không thể loại bỏ chính mình và hệ thống</no-permission-remove>
       <access-denied>Không thể truy nhập! Bạn không có quyền xóa</access-denied>
     </msg>
   </UIPermissionInfo>

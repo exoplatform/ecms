@@ -49,6 +49,7 @@ import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Taxonomy;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -194,6 +195,12 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
         for (Taxonomy taxonomy : config.getTaxonomies()) {
           Node taxonomyNode = Utils.makePath(taxonomyStorageNodeSystem, taxonomy.getPath(),
               "exo:taxonomy", getPermissions(taxonomy.getPermissions()));
+          String systemUser = SystemIdentity.SYSTEM;
+          if (!containsUser(taxonomy.getPermissions(), systemUser)) {
+            if (taxonomyNode.canAddMixin("exo:privilegeable"))
+              taxonomyNode.addMixin("exo:privilegeable");
+            ((ExtendedNode)taxonomyNode).setPermission(systemUser, PermissionType.ALL);
+          }          
           if (taxonomyNode.canAddMixin("mix:referenceable")) {
             taxonomyNode.addMixin("mix:referenceable");
           }
@@ -217,6 +224,14 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     }
     session.save();
     session.logout();
+  }
+  
+  private boolean containsUser(List<Permission> permissions, String userName) {
+    if (userName == null) return false;
+    for (Permission permission : permissions)
+      if (userName.equals(permission.getIdentity()))
+          return true;
+    return false;
   }
 
   private void addAction(ActionConfig.TaxonomyAction action, Node srcNode, String repository)

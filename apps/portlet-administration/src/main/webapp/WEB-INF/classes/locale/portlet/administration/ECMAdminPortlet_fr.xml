@@ -1564,7 +1564,6 @@
     <msg>
       <confirm-delete-permission>Souhaitez-vous supprimer cette permission ?</confirm-delete-permission>
       <no-permission-tochange>Vous n'avez pas les droits requis pour supprimer la permission</no-permission-tochange>
-      <no-permission-remove>Vous ne pouvez pas supprimer le propriétaire</no-permission-remove>
       <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionInfo>
@@ -2440,4 +2439,9 @@
 		  <namespace-invalid>Invalid data:  unknown namespace : '{0}'</namespace-invalid>
 	    </msg>
 	 </UINodeTypeUpload>
+  <UIPermissionInfo>  
+    <msg>
+      <no-permission-remove>You can not remove the owner or system</no-permission-remove>
+    </msg>
+  </UIPermissionInfo>  
 </bundle>
