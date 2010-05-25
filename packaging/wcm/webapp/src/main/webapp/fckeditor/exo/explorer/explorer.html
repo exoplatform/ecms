@@ -622,7 +622,7 @@
 				newTag.style.Float = "left";
 				newTag.innerHTML = "<span></span>";
 				var newScript = FCK.CreateElement("script");
-				newScript.text = "/*WCM gadgets random\"" + random + "\" metadata\"" + element.getAttribute('metadata') + "\" userprefs\"{}\" thumbnail\"" + element.src + "\" url\"" + element.lang + "\"*/eXo.core.Browser.addOnLoadCallback('" + random + "', function() {eXo.gadget.UIGadget.createGadget('" + element.lang + "','" + random + "', " + element.getAttribute('metadata').replace(/\${quote}/g, '"') + ", {}, 'home', 1, 0, 0)});";
+				newScript.text = "/*WCM gadgets random\"" + random + "\" metadata\"" + element.getAttribute('metadata') + "\" userprefs\"{}\" thumbnail\"" + element.src + "\" url\"" + element.lang + "\"*/eXo.core.Browser.addOnLoadCallback('" + random + "', function() {eXo.gadget.UIGadget.createGadget('" + element.lang + "','" + random + "', " + element.getAttribute('metadata').replace(/\${quote}/g, '"') + ", {}, 'home', '/eXoGadgetServer/gadgets', 0, 0)});";
 				if ( !newTag ) 	FCK.InsertElement(newTag);
 
 				var oFakeNode = FCK.EditorDocument.createElement( 'IMG' ) ;

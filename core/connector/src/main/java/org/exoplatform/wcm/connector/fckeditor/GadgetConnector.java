@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javax.ws.rs.GET;
@@ -41,12 +42,17 @@ import org.exoplatform.application.gadget.GadgetRegistryService;
 import org.exoplatform.application.registry.Application;
 import org.exoplatform.application.registry.ApplicationCategory;
 import org.exoplatform.application.registry.ApplicationRegistryService;
+import org.exoplatform.commons.chromattic.ChromatticManager;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.portal.config.model.ApplicationType;
+import org.exoplatform.portal.gadget.core.ExoDefaultSecurityTokenGenerator;
+import org.exoplatform.portal.webui.application.GadgetUtil;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -59,7 +65,7 @@ import org.w3c.dom.Element;
  * Jan 21, 2009
  */
 @Path("/wcmGadget/")
-public class GadgetConnector implements ResourceContainer {
+public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements ResourceContainer {
   
   /** The Constant FCK_RESOURCE_BUNDLE_FILE. */
   public static final String FCK_RESOURCE_BUNDLE_FILE   = "locale.services.fckeditor.FCKConnector".intern();
@@ -69,6 +75,8 @@ public class GadgetConnector implements ResourceContainer {
   
   /** The gadget registry service. */
   private GadgetRegistryService gadgetRegistryService;
+  
+  private ChromatticManager chromatticManager;
   
   /** The internal server path. */
   private String internalServerPath;
@@ -82,7 +90,8 @@ public class GadgetConnector implements ResourceContainer {
    * @param container the container
    * @param initParams the init params
    */
-  public GadgetConnector(InitParams initParams) {
+  public GadgetConnector(InitParams initParams) throws Exception {
+    chromatticManager = WCMCoreUtils.getService(ChromatticManager.class);
     applicationRegistryService = WCMCoreUtils.getService(ApplicationRegistryService.class);
     gadgetRegistryService = WCMCoreUtils.getService(GadgetRegistryService.class);
     readServerConfig(initParams);
@@ -115,14 +124,13 @@ public class GadgetConnector implements ResourceContainer {
    */
   @GET
   @Path("/getFoldersAndFiles/")
-//  @OutputTransformer(XMLOutputTransformer.class)
   public Response getFoldersAndFiles(@QueryParam("currentFolder") String currentFolder, @QueryParam("currentFolder") String language) throws Exception {
     try {
       Response response = buildXMLResponse(currentFolder, language);
       if (response != null)
         return response; 
     } catch (Exception e) {
-      log.error("Error when perform getFoldersAndFiles: ", e.fillInStackTrace());
+      log.error("Error when perform getFoldersAndFiles: ", e);
     }    
     return Response.ok().build();
   }
@@ -193,10 +201,12 @@ public class GadgetConnector implements ResourceContainer {
         Element foldersElement = createFolderElement(document, applicationCategories);
         rootElement.appendChild(foldersElement);
       } else {
+        chromatticManager.beginRequest();
         ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
         currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
         Element filesElement = createFileElement(document, applicationCategory);
         rootElement.appendChild(filesElement);
+        chromatticManager.endRequest(true);
       }
       rootElement.appendChild(currentFolderElement);
       return rootElement;
@@ -247,7 +257,7 @@ public class GadgetConnector implements ResourceContainer {
       
       String fullurl = "";
       if (gadget.isLocal()) {
-        fullurl = internalServerPath + "/rest/" + gadget.getUrl();
+        fullurl = internalServerPath + "/" + PortalContainer.getCurrentRestContextName() + "/" + gadget.getUrl();
       } else {
         fullurl = gadget.getUrl();
       }
@@ -263,6 +273,13 @@ public class GadgetConnector implements ResourceContainer {
       String strMetadata = IOUtils.toString(conn.getInputStream(), "UTF-8");
       wr.close();
       JSONObject metadata = new JSONObject(strMetadata.toString());
+      
+      ConversationState conversationState = ConversationState.getCurrent();
+      String userId = conversationState.getIdentity().getUserId();
+      String token = createToken(gadget.getUrl(), userId, userId, new Random().nextLong(), "default");
+      JSONObject obj = metadata.getJSONArray("gadgets").getJSONObject(0);
+      obj.put("secureToken", token);
+      
       file.setAttribute("metadata", metadata.toString());
       files.appendChild(file);
     }
@@ -277,6 +294,7 @@ public class GadgetConnector implements ResourceContainer {
    * @throws Exception the exception
    */
   private List<ApplicationCategory> getGadgetCategories() throws Exception {
+    chromatticManager.beginRequest();
     List<ApplicationCategory> applicationCategories = applicationRegistryService.getApplicationCategories();
     List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
     for (ApplicationCategory applicationCategory : applicationCategories) {
@@ -284,6 +302,7 @@ public class GadgetConnector implements ResourceContainer {
         gadgetCategories.add(applicationCategory);
       }
     }
+    chromatticManager.endRequest(true);
     return gadgetCategories;
   }
 }
