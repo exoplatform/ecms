@@ -6,6 +6,8 @@
 	import org.exoplatform.webui.core.UIPopupWindow;
 	import org.exoplatform.web.application.Parameter;
 	import org.exoplatform.ecm.webui.utils.Utils;
+	import org.exoplatform.services.wcm.core.NodeLocation;
+	
 	
 	public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -32,6 +34,7 @@
 
   def originalNode = uicomponent.getOriginalNode();
   def currentNode = getFileLangNode(uicomponent.getNode()) ;
+  def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();
@@ -49,7 +52,7 @@
 			  <div class="TopTitle" style="float:left;">
 			   $originalNode.name
 			  </div>
-        <div style="float:right;padding: 4px 10px;" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=Utils.getRestContextName(uicomponent.getPortalName())%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+        <div style="float:right;padding: 4px 10px;" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=Utils.getRestContextName(uicomponent.getPortalName())%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNodePath)%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
           <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
         </div>			  
         <div style="clear:both"</div>
