@@ -74,6 +74,8 @@ public class NewsletterManagerService {
 	
 	private RepositoryService repositoryService;
 	
+	private MailService mailService;
+	
 	/** The repository name. */
 	private String repositoryName;
 	
@@ -101,6 +103,7 @@ public class NewsletterManagerService {
 		templateHandler = new NewsletterTemplateHandler(repositoryName, workspaceName);
 		
 		repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+		this.mailService = WCMCoreUtils.getService(MailService.class);
 	}
 
 	/**
@@ -141,7 +144,7 @@ public class NewsletterManagerService {
 
   public List<String> getAllBannedUser()throws Exception{
     ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     List<String> listEmails = new ArrayList<String>();
     try{
@@ -157,7 +160,7 @@ public class NewsletterManagerService {
     }catch(RepositoryException repositoryException){
       log.info("User node is not created!");
     }catch(Exception ex){
-      log.error("Error when get all users who can't get newsletter: ", ex.fillInStackTrace());
+      log.error("Error when get all users who can't get newsletter: ", ex);
     }
     return listEmails;
   }
@@ -189,10 +192,8 @@ public class NewsletterManagerService {
 	  List<String> listBannedEmail = this.getAllBannedUser();
 	  
 		ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
-		SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+		SessionProvider sessionProvider = SessionProvider.createSystemProvider();
 		Session session = sessionProvider.getSession(workspaceName, manageableRepository);
-
-		MailService mailService = WCMCoreUtils.getService(MailService.class);
 
 		Message message = null;
 		QueryManager queryManager = session.getWorkspace().getQueryManager();
@@ -231,7 +232,7 @@ public class NewsletterManagerService {
 				try {
 					mailService.sendMessage(message);
 				} catch (Exception e) {
-					log.error("Error when send newsletter: ", e.fillInStackTrace());
+					log.error("Error when send newsletter: ", e);
 				}
 			}
 			newsletterEntry.setProperty(NewsletterConstant.ENTRY_PROPERTY_STATUS, NewsletterConstant.STATUS_SENT);
@@ -265,7 +266,7 @@ public class NewsletterManagerService {
 			  email = value.getString();
 			  if(!listBannedUser.contains(email)) listString.add(email);
 			} catch(Exception e) {
-			  log.error("Error when convert values to array: ", e.fillInStackTrace());
+			  log.error("Error when convert values to array: ", e);
 			}
 		}
 		return listString;

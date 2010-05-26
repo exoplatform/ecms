@@ -69,6 +69,8 @@ public class XSkinService implements Startable {
   /** The configuration service. */
   private WCMConfigurationService configurationService;
   
+  private RepositoryService repositoryService;
+  
   /** The skin service. */
   private SkinService skinService ;
   
@@ -92,6 +94,7 @@ public class XSkinService implements Startable {
     this.configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
     this.schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     this.servletContext = WCMCoreUtils.getService(ServletContext.class);
+    this.repositoryService = WCMCoreUtils.getService(RepositoryService.class);
   }
 
   /**
@@ -110,7 +113,6 @@ public class XSkinService implements Startable {
   	// Need re-login to get session because this node is get from template and the session is not live anymore.
   	// If node is version (which is stored in system workspace) we have to login to system workspace to get data 
   	NodeLocation webcontentLocation = NodeLocation.make(webcontent);
-  	RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);  
   	ManageableRepository repository = repositoryService.getRepository(webcontentLocation.getRepository());
   	Session session = null;
   	if (webcontentLocation.getPath().startsWith("/jcr:system")) 
@@ -232,7 +234,6 @@ public class XSkinService implements Startable {
   	// Get all css by query
   	Node cssFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class).getCSSFolder(portalNode);
   	String statement = StringUtils.replaceOnce(SHARED_CSS_QUERY, "{path}", cssFolder.getPath());
-  	RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
     ManageableRepository repository = repositoryService.getRepository(portalNodeLocation.getRepository());

@@ -16,11 +16,14 @@
  */
 package org.exoplatform.services.wcm.newsletter;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.RootContainer;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.scheduler.BaseJob;
 import org.exoplatform.services.scheduler.JobContext;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 /**
  * Created by The eXo Platform SAS
@@ -32,12 +35,20 @@ public class NewsletterEmailJob extends BaseJob {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterEmailJob.class);
+  
+  private ExoContainer container;
 
+  public void execute(JobExecutionContext context) throws JobExecutionException {
+    String containerName = context.getJobDetail().getGroup().split(":")[0];
+    container = RootContainer.getInstance().getPortalContainer(containerName);
+    super.execute(context);
+  }
+  
   /* (non-Javadoc)
    * @see org.exoplatform.services.scheduler.BaseJob#execute(org.exoplatform.services.scheduler.JobContext)
    */
-  public void execute(JobContext arg0) throws Exception {
-    NewsletterManagerService newsletterManagerService = WCMCoreUtils.getService(NewsletterManagerService.class);
+  public void execute(JobContext context) {
+    NewsletterManagerService newsletterManagerService = (NewsletterManagerService)container.getComponentInstanceOfType(NewsletterManagerService.class);
     if(newsletterManagerService == null) return;
     try {
       newsletterManagerService.sendNewsletter();
