@@ -533,7 +533,6 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     public void execute(Event<UIContentDialogForm> event) throws Exception {
       UIContentDialogForm contentDialogForm = event.getSource();
       String clickedField = event.getRequestContext().getRequestParameter(OBJECTID);
-      contentDialogForm.setSelectedTab(event.getRequestContext().getRequestParameter("selectedTab"));
       if (contentDialogForm.isReference) {
         UIApplication uiApp = contentDialogForm.getAncestorOfType(UIApplication.class);
         try{
@@ -646,7 +645,6 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     public void execute(Event<UIContentDialogForm> event) throws Exception {
       UIContentDialogForm contentDialogForm = event.getSource();
       contentDialogForm.isRemovePreference = true;
-      contentDialogForm.setSelectedTab(event.getRequestContext().getRequestParameter("selectedTab"));
       String fieldName = event.getRequestContext().getRequestParameter(OBJECTID);
       contentDialogForm.getUIStringInput(fieldName).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(contentDialogForm);
