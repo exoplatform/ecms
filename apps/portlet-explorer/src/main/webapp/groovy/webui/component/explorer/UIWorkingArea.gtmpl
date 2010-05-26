@@ -31,7 +31,7 @@
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
 %>
 
-<div class="UIWorkingArea" id="UIWorkingArea">
+<div class="UIWorkingArea ClearFix" id="UIWorkingArea">
   <%
 	  uicomponent.renderChild(UIRightClickPopupMenu.class) ;
 	  String className = "" ;

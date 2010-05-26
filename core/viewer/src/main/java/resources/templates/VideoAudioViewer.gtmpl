@@ -50,6 +50,13 @@
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.4.min.js"></script>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer.playlist-3.0.7.js"></script>
   <div class="ContentDetail">
+	  <%
+		  def style = "float:none; margin:auto;";
+		  if (size > 1) {
+		    style = "";
+		  }
+		%>
+  	<div id="player" class="PlayerContent" style="$style ; z-index:0;"></div>
     <script>
     <% print "\$" %> (function() { 
       // install flowplayer into container 
@@ -71,7 +78,7 @@
           backgroundImage: 'url(/eXoDMSResources/skin/images/file/MP3Player.jpg)' 
         }, 
         clip: { 
-            autoPlay: false, 
+            autoPlay: true, 
             autoBuffering: true,
             // optional: when playback starts close the first audio playback 
             onBeforeBegin: function() { 
@@ -96,7 +103,7 @@
   <% 
     if (size > 1) {
   %>
-  <div class="clips petrol ListPlayer" style="width: 271px;">
+  	<div class="clips petrol ListPlayer" style="width: 220px;">
   <!-- single playlist entry -->
   <% 
     def name = "";
@@ -110,27 +117,17 @@
 <%
   } 
  %>
-</div>
+		</div>
 <%
   } 
  %>
- <%
-   def style = "float:none; margin:auto";
-   if (size > 1) {
-     style = "";
-   }
- %>
-<div id="player" class="PlayerContent" style="$style ; z-index:0;">
-</div>    
-<!-- let rest of the page float normally -->
-<br clear="all"/>
+ </div>
 <style>
 .NavigationContainer {
   padding-bottom: 5px;
   color: #0e396c;
   background: url('/eXoDMSResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
   border: 1px solid #cbcbcb;
-  width: 880px;
   margin: auto;
 }
 
@@ -140,30 +137,6 @@
   color: #058ee6; font-weight: bold; 
 }
 
-.FileContent .NavigationContainer .Content .TextContent {
-	 background: url('/eXoDMSResources/skin/images/file/TextContentBG.gif') repeat-x top;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-   overflow: auto;
-   height: 100%;
-   margin: auto;
-   width: 850px;
-   padding: 3px;
-   border: 1px solid #c7c7c7;
-}
- 
- .TextContent {  
- 	 background: url('/eXoDMSResources/skin/images/file/TextContentBG.gif') repeat-x top;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-   overflow: auto;
-   height: 100%;
-   margin: auto;
-   width: 850px;
-   padding: 3px;
-   border: 1px solid #c7c7c7;
- }
- 
  .TextContent pre {  
    white-space: normal;
  }
@@ -178,14 +151,14 @@
 	overflow-y: auto;
 	overflow-x: hidden;
 	height: 420px;
-	
 }
 
 .PlayerContent{
+	padding: 10px;
 	display:block;
 	float:left;
-	height:420px;
-	width:560px;
+	height:320px;
+	width:475px;
 }
 
 div.clips.petrol a.playing {
