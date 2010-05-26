@@ -727,37 +727,42 @@
 		delete eXo.ecm.ECMUtils.resizableY;
 	}
 	
-	ECMUtils.prototype.showHideItemsInSideBar = function(event) {				
+		ECMUtils.prototype.showHideItemsInSideBar = function(event) {				
 	  var itemArea = document.getElementById("SelectItemArea");
 	  var container = document.getElementById("UITreeExplorer");
 	  eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea
 	  
-	  if(typeof(eXo.ecm.ECMUtils.heightOfItemArea) == "undefined") {
-		
+	  if(typeof(eXo.ecm.ECMUtils.heightOfItemArea) == "undefined") {		
 	    eXo.ecm.ECMUtils.heightOfItemArea = itemArea.offsetHeight;
 	  }
 	  
-      if(typeof(eXo.ecm.ECMUtils.heightOfTree) == "undefined") {		
+      if(typeof(eXo.ecm.ECMUtils.heightOfTree) == "undefined") {				
 		eXo.ecm.ECMUtils.heightOfTree = container.offsetHeight;
 	  }
 	  
 	  var workingArea = document.getElementById('UIWorkingArea');	  
 	  var resizeBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
 	  var resizeTreeButton = DOM.findFirstDescendantByClass(resizeBlock, "div", "ResizeTreeButton");
-	  
-	  if(itemArea.style.display == 'none') {	  
-		container.style.height = container.offsetHeight - eXo.ecm.ECMUtils.heightOfItemArea + "px";
+	  	  
+	  if(itemArea.style.display == 'none') {	  		
+		container.style.height = container.offsetHeight - eXo.ecm.ECMUtils.heightOfItemArea + "px";		
 	    itemArea.style.display = 'block';
 	    eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = 'block';
-		resizeTreeButton.className = "ResizeTreeButton";
-	  } else {	  
-		//container.style.height = eXo.ecm.ECMUtils.heightOfTree + eXo.ecm.ECMUtils.heightOfItemArea + "px";
-		container.style.height = eXo.ecm.ECMUtils.heightOfTree + "px";				
+		resizeTreeButton.className = "ResizeTreeButton";		
+		
+	  } else {	  		
+		container.style.height = eXo.ecm.ECMUtils.heightOfTree + eXo.ecm.ECMUtils.heightOfItemArea - 30 + "px";			
+		if (container.offsetHeight > workingArea.offsetHeight) {
+			var exceed = container.offsetHeight - workingArea.offsetHeight
+			if (exceed > 0) 
+							
+				// assign default value for treeExplorer div
+				container.style.height = 455 + "px";							
+		}
 		itemArea.style.display = 'none';
 		eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = 'none';
-		resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
-	  }
-	  
+		resizeTreeButton.className = "ResizeTreeButton ShowContentButton";		
+	  }	  
 	  eXo.ecm.ECMUtils.reloadHeight();
 	}
 	
