@@ -38,6 +38,7 @@ import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
+import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
@@ -56,6 +57,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -71,7 +73,6 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
-import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 
@@ -91,7 +92,8 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UIContentDialogForm.FastPublishActionListener.class),
       @EventConfig(listeners = UIContentDialogForm.PreferencesActionListener.class),
       @EventConfig(listeners = UIContentDialogForm.CloseActionListener.class),
-      @EventConfig(listeners = UIContentDialogForm.RemoveDataActionListener.class)
+      @EventConfig(listeners = UIContentDialogForm.RemoveDataActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIContentDialogForm.ChangeTabActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UIContentDialogForm extends UIDialogForm  implements UIPopupComponent, UISelectable {
@@ -116,6 +118,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   
   /** The template. */
   private String template;
+  
+  /** Selected Tab id */
+  private String selectedTab;
   
   /**
    * Gets the list taxonomy.
@@ -214,12 +219,12 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     if(webcontent.isNodeType("exo:symlink")) {
       LinkManager linkManager = getApplicationComponent(LinkManager.class);
       Node realNode = linkManager.getTarget(webcontent);
-      webcontentNodeLocation = NodeLocation.make(realNode);
+      webcontentNodeLocation = NodeLocation.getNodeLocationByNode(realNode);
       this.contentType = realNode.getPrimaryNodeType().getName();
       this.nodePath = realNode.getPath();
       setStoredPath(realNode.getParent().getPath());
     } else {
-      webcontentNodeLocation = NodeLocation.make(webcontent);
+      webcontentNodeLocation = NodeLocation.getNodeLocationByNode(webcontent);
       this.contentType = webcontent.getPrimaryNodeType().getName();
       this.nodePath = webcontent.getPath();
       setStoredPath(webcontent.getParent().getPath());
@@ -528,6 +533,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     public void execute(Event<UIContentDialogForm> event) throws Exception {
       UIContentDialogForm contentDialogForm = event.getSource();
       String clickedField = event.getRequestContext().getRequestParameter(OBJECTID);
+      contentDialogForm.setSelectedTab(event.getRequestContext().getRequestParameter("selectedTab"));
       if (contentDialogForm.isReference) {
         UIApplication uiApp = contentDialogForm.getAncestorOfType(UIApplication.class);
         try{
@@ -546,7 +552,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
               String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
               RepositoryService repositoryService = (RepositoryService)contentDialogForm.getApplicationComponent(RepositoryService.class);
               ManageableRepository manageableRepository = repositoryService.getRepository(repository);
-              Session session = Utils.getSessionProvider().getSession(workspaceName, manageableRepository);
+              Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, manageableRepository);
               Node rootTree = (Node) session.getItem(rootTreePath);
               NodeIterator childrenIterator = rootTree.getNodes();
               while (childrenIterator.hasNext()) {
@@ -556,7 +562,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
               }
               uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, rootTreePath);
               uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {"exo:symlink"});
-              uiOneTaxonomySelector.init(Utils.getSessionProvider());
+              uiOneTaxonomySelector.init(WCMCoreUtils.getUserSessionProvider());
               String param = "returnField=" + FIELD_TAXONOMY;
               uiOneTaxonomySelector.setSourceComponent(contentDialogForm, new String[]{param});
               Utils.createPopupWindow(contentDialogForm, uiOneTaxonomySelector, TAXONOMY_CONTENT_POPUP_WINDOW, 700);
@@ -613,7 +619,15 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     }
   }
   
-  /**
+  public void setSelectedTab(String selectedTab) {
+		this.selectedTab = selectedTab;
+	}
+
+	public String getSelectedTab() {
+		return selectedTab;
+	}
+
+	/**
    * The listener interface for receiving removeReferenceAction events.
    * The class that is interested in processing a removeReferenceAction
    * event implements this interface, and the object created
@@ -632,6 +646,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     public void execute(Event<UIContentDialogForm> event) throws Exception {
       UIContentDialogForm contentDialogForm = event.getSource();
       contentDialogForm.isRemovePreference = true;
+      contentDialogForm.setSelectedTab(event.getRequestContext().getRequestParameter("selectedTab"));
       String fieldName = event.getRequestContext().getRequestParameter(OBJECTID);
       contentDialogForm.getUIStringInput(fieldName).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(contentDialogForm);
@@ -666,7 +681,6 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   			}
   		} else {
   			Node currentNode = (Node) uiForm.getSession().getItem(uiForm.getNodePath());
-  			
       	if (currentNode.isLocked()) {
 	        Object[] args = { currentNode.getPath() };
 	        Utils.createPopupMessage(uiForm, "UIPermissionManagerGrid.msg.node-locked", args,
@@ -679,7 +693,19 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   				uiForm.setDataRemoved(true);
   			}
   		}
-  		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+  		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+  	}
+  }
+  
+  static public class ChangeTabActionListener extends EventListener<UIContentDialogForm> {
+  	
+	  /* (non-Javadoc)
+	   * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+	   */
+	  public void execute(Event<UIContentDialogForm> event) throws Exception {
+  		UIContentDialogForm uiForm = event.getSource();
+  		uiForm.setSelectedTab(event.getRequestContext().getRequestParameter(UIDialogForm.OBJECTID));
+  		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
   	}
   }
 }

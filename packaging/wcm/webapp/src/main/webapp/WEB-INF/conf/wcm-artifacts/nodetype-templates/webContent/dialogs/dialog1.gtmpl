@@ -1,11 +1,28 @@
 <% 
 	import javax.jcr.Node;
+	import org.exoplatform.web.application.Parameter;
+	
 	def rcontext = _ctx.getRequestContext() ;
 	def String htmlWYSIWYGFormId = "htmlData[" + uicomponent.hashCode() + "]";
 	def String cssFormId = "ContentCSS[" + uicomponent.hashCode() + "]";
 	def String jsFormId = "ContentJS[" + uicomponent.hashCode() + "]";
 	def jsManager = rcontext.getJavascriptManager();
 	jsManager.addOnLoadJavascript("eXo.ecm.WCMFCKEditor.insertCSSFromTextArea2FCK('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
+	
+	private String getDisplayTab(String selectedTab) {
+		if ((uicomponent.getSelectedTab() == null && selectedTab.equals("mainWebcontent"))
+				|| selectedTab.equals(uicomponent.getSelectedTab())) {
+			return "display:block";	
+		}
+		return "display:none";
+	}
+	
+	private String getSelectedTab(String selectedTab) {
+		if (getDisplayTab(selectedTab).equals("display:block")) {
+			return "SelectedTab";
+		}
+		return "NormalTab";
+	}
 	
 	private void setUploadFields() {
 		String[] illustrationHiddenField1 = ["jcrPath=/node/medias/images/illustration", "nodetype=nt:file", "mixintype=mix:referenceable", "defaultValues=illustration"];
@@ -37,6 +54,7 @@
 	 
 </style>
 <div class="UITabPane">
+<%uiform.begin()%>
 	<div class="TabPaneContent"> 
 		<div class="WorkingAreaWithHelp">
 			<div class="UIHorizontalTabs" style="margin-top:5px;">
@@ -45,28 +63,28 @@
 						<div class="CenterHorizontalTabs">
 							<div class="TabsContainer">
 								<div class="UITab NormalTabStyle">
-									<div class="SelectedTab">
+									<div class="<%= getSelectedTab("mainWebcontent")%>">
 										<div class="LeftTab">
 											<div class="RightTab">                
-												<div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></div>
+												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "mainWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></div>
 											</div>
 										</div>
 									</div>
 								</div>  
 								<div class="UITab NormalTabStyle">
-									<div class="NormalTab">
+									<div class="<%= getSelectedTab("illustrationWebcontent")%>">
 										<div class="LeftTab">
 											<div class="RightTab">                
-												<div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></div>
+												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "illustrationWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="UITab NormalTabStyle">
-									<div class="NormalTab">
+									<div class="<%= getSelectedTab("contentCSSWebcontent")%>">
 										<div class="LeftTab">
 											<div class="RightTab">                
-												<div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></div>
+												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "contentCSSWebcontent");%>"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></div>
 											</div>
 										</div>
 									</div>
@@ -77,10 +95,9 @@
 				</div>
 			</div> <!-- End of UIHorizontalTabs -->
 			<%/*Start UITabContentContainer*/%>
-			<%uiform.begin()%>
 				<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px">	  
 					<div class="UITabContentContainer">
-						<div class="UITabContent" style="display: block;">
+						<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
 							<table class="UIFormGrid">
                 <tr>
                   <td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.title")%></td>
@@ -150,7 +167,7 @@
 							</table>
 						</div>  <!-- End of UITabContent -->
 						<!-- Start of Illustration tab -->
-						<div class="UITabContent" style="display: none;">
+						<div class="UITabContent" style="<%=getDisplayTab("illustrationWebcontent")%>">
 							<div class="FormHint"><%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%></div>
 							<table class="UIFormGrid">
 								<tr>
@@ -162,7 +179,7 @@
 												def resourceNode = imageNode.getNode("jcr:content");
 												if(resourceNode.getProperty("jcr:data").getStream().available() > 0) {
 													def imgSrc = uicomponent.getImage(imageNode, "jcr:content");
-													def actionLink = uicomponent.event("RemoveData", "/medias/images/illustration/jcr:content");
+													def actionLink = uicomponent.event("RemoveData", "/medias/images/illustration/jcr:content&selectedTab=illustrationWebcontent");
 													%>		
 														<div>
 															<image src="$imgSrc" width="100px" height="80px"/>
@@ -204,7 +221,7 @@
 								</tr>
 							</table>
 						</div><!-- End of Illustration tab -->		
-						<div class="UITabContent" style="display: none;">
+						<div class="UITabContent" style="<%=getDisplayTab("contentCSSWebcontent")%>">
 							<table class="UIFormGrid">
 								<tr>
 									<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%></td>
@@ -295,7 +312,7 @@
 						</table>
 					</div>  <!-- End of UIAction-->    	
 				</div>  
-			<%uiform.end()%>						 
 		</div>   <!-- End of WorkingAreaWithHelp -->
 	</div>  <!-- End of TabPaneContent -->
+	<%uiform.end()%>						 
 </div>  <!-- End of UITabPane -->
