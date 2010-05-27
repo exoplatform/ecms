@@ -179,11 +179,11 @@
 												def resourceNode = imageNode.getNode("jcr:content");
 												if(resourceNode.getProperty("jcr:data").getStream().available() > 0) {
 													def imgSrc = uicomponent.getImage(imageNode, "jcr:content");
-													def actionLink = uicomponent.event("RemoveData", "/medias/images/illustration/jcr:content&selectedTab=illustrationWebcontent");
+													def actionLink = "if (confirm('" + _ctx.appRes("WebContent.dialog.label.confirm-delete") + "')) " + uicomponent.event("RemoveData", "/medias/images/illustration/jcr:content");
 													%>		
 														<div>
 															<image src="$imgSrc" width="100px" height="80px"/>
-															<a href="$actionLink">
+															<a onclick="$actionLink">
 																<img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" class="ActionIcon Remove16x16Icon"/>
 															</a>
 														</div>

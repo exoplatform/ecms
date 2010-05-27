@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.form;
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -40,17 +41,36 @@ public class DialogFormActionListeners {
         Node referenceNode = (Node)uiForm.getSession().getItem(uiForm.getNodePath() + referenceNodePath);
         if(referenceNode.hasProperty(Utils.JCR_DATA)) {
           referenceNode.setProperty(Utils.JCR_DATA, "");
+          referenceNode.save();
           uiForm.setDataRemoved(true);
         }
       } else {
         Node currentNode = uiForm.getNode();
+        if (currentNode.isLocked()) {
+	        Object[] args = { currentNode.getPath() };
+	        org.exoplatform.wcm.webui.Utils.createPopupMessage(uiForm, "UIPermissionManagerGrid.msg.node-locked", args,
+	            ApplicationMessage.WARNING);
+	        return;
+        }
         if (currentNode.hasProperty(referenceNodePath)) {
           currentNode.setProperty(referenceNodePath, "");
+          currentNode.save();
           uiForm.setDataRemoved(true);
         }
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
+  }
+  
+  static public class ChangeTabActionListener extends EventListener<UIDialogForm> {
+	  /* (non-Javadoc)
+	   * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+	   */
+	  public void execute(Event<UIDialogForm> event) throws Exception {
+	  	UIDialogForm uiForm = event.getSource();
+  		uiForm.setSelectedTab(event.getRequestContext().getRequestParameter(UIDialogForm.OBJECTID));
+  		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+  	}
   }
   
 }

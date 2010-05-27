@@ -74,7 +74,8 @@ import org.exoplatform.webui.form.UIFormSelectBox;
       @EventConfig (listeners = UINewsletterEntryForm.SaveActionListener.class),
       @EventConfig (listeners = UINewsletterEntryForm.SendActionListener.class),
       @EventConfig (listeners = UINewsletterEntryForm.CancelActionListener.class, phase = Phase.DECODE),
-      @EventConfig (listeners = DialogFormActionListeners.RemoveDataActionListener.class)
+      @EventConfig (listeners = DialogFormActionListeners.RemoveDataActionListener.class),
+      @EventConfig (listeners = DialogFormActionListeners.ChangeTabActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UINewsletterEntryForm extends UIDialogForm {

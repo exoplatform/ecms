@@ -74,7 +74,7 @@ import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormStringInput;
-
+import org.exoplatform.ecm.webui.form.DialogFormActionListeners;
 
 /**
  * Created by The eXo Platform SAS
@@ -92,8 +92,8 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UIContentDialogForm.FastPublishActionListener.class),
       @EventConfig(listeners = UIContentDialogForm.PreferencesActionListener.class),
       @EventConfig(listeners = UIContentDialogForm.CloseActionListener.class),
-      @EventConfig(listeners = UIContentDialogForm.RemoveDataActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIContentDialogForm.ChangeTabActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = DialogFormActionListeners.ChangeTabActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UIContentDialogForm extends UIDialogForm  implements UIPopupComponent, UISelectable {
@@ -652,11 +652,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    * 
    * @see RemoveDataActionEvent
    */
-  static public class RemoveDataActionListener extends EventListener<UIContentDialogForm> {
-  	
-	  /* (non-Javadoc)
-	   * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-	   */
+ /* static public class RemoveDataActionListener extends EventListener<UIContentDialogForm> {
 	  public void execute(Event<UIContentDialogForm> event) throws Exception {
   		UIContentDialogForm uiForm = event.getSource();
   		uiForm.isRemovePreference = true;
@@ -666,6 +662,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   			if(referenceNode.hasProperty("jcr:data")) {
   				referenceNode.setProperty("jcr:data", "");
   				uiForm.setDataRemoved(true);
+  				referenceNode.save();
   			}
   		} else {
   			Node currentNode = (Node) uiForm.getSession().getItem(uiForm.getNodePath());
@@ -678,22 +675,11 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       	
 				if (currentNode.hasProperty(referenceNodePath)) {
   				currentNode.setProperty(referenceNodePath, "");
+  				currentNode.save();
   				uiForm.setDataRemoved(true);
   			}
   		}
   		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
   	}
-  }
-  
-  static public class ChangeTabActionListener extends EventListener<UIContentDialogForm> {
-  	
-	  /* (non-Javadoc)
-	   * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-	   */
-	  public void execute(Event<UIContentDialogForm> event) throws Exception {
-  		UIContentDialogForm uiForm = event.getSource();
-  		uiForm.setSelectedTab(event.getRequestContext().getRequestParameter(UIDialogForm.OBJECTID));
-  		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
-  	}
-  }
+  }*/
 }

@@ -39,6 +39,7 @@
         <Illustration>Minh họa</Illustration>
         <hintIllustration>Tại bảng này, bạn có thể chọn ra một bức ảnh để hiển thị khi nội dung của bạn được hiển thị dưới dạng danh sách. Thêm vào đó, bạn có thể thêm vài dòng tóm tắt để hiển thị cùng ảnh minh họa.</hintIllustration>
         <illustrationImage>Ảnh minh họa</illustrationImage>
+		<confirm-delete>Xác nhận bạn muốn xóa dữ liêu?</confirm-delete>
         <imageMimeType>Kiểu ảnh</imageMimeType>
         <image>Tải ảnh lên</image>
         <imageWidth>Chiều rộng ảnh</imageWidth>

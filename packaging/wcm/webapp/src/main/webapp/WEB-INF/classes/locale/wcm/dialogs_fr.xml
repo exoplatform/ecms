@@ -39,6 +39,7 @@
         <Illustration>Illustration</Illustration>
         <hintIllustration>Dans ce panneau, vous pouvez spécifier une image qui sera affichée lorsque votre contenu web sera affiché dans les listes. En plus, vous pouvez spécifier un résumé accompagnant cette image.</hintIllustration>
         <illustrationImage>Illustration Vignette</illustrationImage>
+        <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
         <imageMimeType>Type d'image</imageMimeType>
         <image>Transférer l'image</image>
         <imageWidth>Largeur de l'image</imageWidth>

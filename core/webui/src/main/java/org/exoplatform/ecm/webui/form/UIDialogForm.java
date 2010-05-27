@@ -243,12 +243,14 @@ public void addActionField(String name,String label,String[] arguments) throws E
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);    
     Node node = getNode();
-//    if(formActionField.isReference()) isReference = true; 
-//    else isReference = false;  
     UIComponent uiInput;
+    boolean isFirstTimeRender = false;
     if(formActionField.isMultiValues()) {      
       uiInput = findComponentById(name);
-      if (uiInput == null) uiInput = addMultiValuesInput(UIFormStringInput.class,name,label);
+      if (uiInput == null) {
+      	isFirstTimeRender = true;
+      	uiInput = addMultiValuesInput(UIFormStringInput.class,name,label);
+      }
       ((UIFormMultiValueInputSet)uiInput).setEditable(formActionField.isEditable());
       if (node == null) {
         String defaultValue = formActionField.getDefaultValue();
@@ -268,6 +270,7 @@ public void addActionField(String name,String label,String[] arguments) throws E
     } else {
       uiInput = findComponentById(name);
       if(uiInput == null) {
+      	isFirstTimeRender = true;
         uiInput = formActionField.createUIFormInput();            
         addUIFormInput((UIFormInput)uiInput);
       }    
@@ -276,7 +279,7 @@ public void addActionField(String name,String label,String[] arguments) throws E
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
-    if(node != null && !isShowingComponent && !isRemovePreference && !isRemoveActionField) {
+    if(node != null && !isShowingComponent && !isRemovePreference && !isRemoveActionField && isFirstTimeRender) {
       if(jcrPath.equals("/node") && (!formActionField.isEditable() || formActionField.isEditableIfNull())) {
         ((UIFormStringInput)uiInput).setValue(node.getName());
         ((UIFormStringInput)uiInput).setEditable(false);
@@ -336,8 +339,10 @@ public void addCalendarField(String name, String label, String[] arguments) thro
       renderMultiValuesInput(UIFormDateTimeInput.class,name,label);      
       return;
     }
+    boolean isFirstTimeRender = false;
     UIFormDateTimeInput uiDateTime = findComponentById(name);
     if (uiDateTime == null) {
+    	isFirstTimeRender = true;
     	uiDateTime = calendarField.createUIFormInput();
     	if (calendarField.validateType != null) {
             String validateType = calendarField.validateType;
@@ -356,7 +361,7 @@ public void addCalendarField(String name, String label, String[] arguments) thro
     Node  node = getNode();
     uiDateTime.setCalendar(uiDateTime.getCalendar());
     if(node != null && node.hasProperty(propertyName) && !isShowingComponent && !isRemovePreference) {
-      if (findComponentById(name) == null)
+      if (isFirstTimeRender)
         uiDateTime.setCalendar(node.getProperty(propertyName).getDate());
     } 
     Node childNode = getChildNode();
@@ -422,9 +427,9 @@ public void addCalendarField(String name, String label, String[] arguments) thro
       if(uiMixin == null) {
         uiMixin = mixinField.createUIFormInput();        
         addUIFormInput(uiMixin);
-      }
-      uiMixin.setValue(node.getName());
-      uiMixin.setEditable(false);
+      } else
+				uiMixin.setValue(node.getName());
+			uiMixin.setEditable(false);
       renderField(name); 
     }
   }    
@@ -483,7 +488,9 @@ public void addCalendarField(String name, String label, String[] arguments) thro
     String defaultValue = formRadioBoxField.getDefaultValue();
     List<SelectItemOption<String>> optionsList = new ArrayList<SelectItemOption<String>>();
     UIFormRadioBoxInput uiRadioBox = findComponentById(name);
+    boolean isFirstTimeRender = false;
     if(uiRadioBox == null){
+    	isFirstTimeRender = true;
       uiRadioBox = new UIFormRadioBoxInput(name, defaultValue, null);
       if(options != null && options.length() > 0){
         String[] array = options.split(";");
@@ -499,7 +506,6 @@ public void addCalendarField(String name, String label, String[] arguments) thro
       }
       if(defaultValue != null) uiRadioBox.setDefaultValue(defaultValue);
     }
-    uiRadioBox.setValue(uiRadioBox.getValue());
     addUIFormInput(uiRadioBox);
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
@@ -510,17 +516,17 @@ public void addCalendarField(String name, String label, String[] arguments) thro
     Node node = getNode();
     Node childNode = getChildNode();
     if(childNode != null) {
-      if(childNode.hasProperty(propertyName)) {
+      if(childNode.hasProperty(propertyName) && isFirstTimeRender) {
         uiRadioBox.setValue(childNode.getProperty(propertyName).getValue().getString());
       } 
     } else {
-      if(node != null && node.hasProperty(propertyName)) {              
+      if(node != null && node.hasProperty(propertyName) && isFirstTimeRender) {              
         uiRadioBox.setValue(node.getProperty(propertyName).getString());
       }
     }    
     if(isNotEditNode) {      
       Node child = getChildNode();
-      if(child != null && child.hasProperty(propertyName)) {
+      if(child != null && child.hasProperty(propertyName) && isFirstTimeRender) {
         uiRadioBox.setValue(DialogFormUtil.getPropertyValueAsString(child,propertyName));
       }  
     }
@@ -543,7 +549,9 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
     if (editable == null) formSelectBoxField.setEditable("true");
     List<SelectItemOption<String>> optionsList = new ArrayList<SelectItemOption<String>>();
     UIFormSelectBox uiSelectBox = findComponentById(name);
+    boolean isFirstTimeRender = false;
     if(uiSelectBox == null || isResetForm) {
+    	isFirstTimeRender = true;
       uiSelectBox = new UIFormSelectBox(name, name, null);
       if (script != null) {
         try {
@@ -607,7 +615,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
       }
       uiSelectBox.setMultiple(true);      
       StringBuffer buffer = new StringBuffer();
-      if(childNode != null) {      
+      if(childNode != null && isFirstTimeRender) {      
         List<String> valueList = new ArrayList<String>();      
         Value[] values = childNode.getProperty(propertyName).getValues();
         for(Value value : values) {
@@ -642,7 +650,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
         }
       }      
     } else {
-      if(childNode != null) {
+      if(childNode != null && isFirstTimeRender) {
         uiSelectBox.setValue(childNode.getProperty(propertyName).getValue().getString());
       } else {
         if(node != null && node.hasProperty(propertyName)) {
@@ -700,8 +708,10 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
       renderMultiValuesInput(UIFormDateTimeInput.class,name,label);      
       return;
     }
+    boolean isFirstTimeRender = false;
     UIFormTextAreaInput uiTextArea = findComponentById(name);    
     if(uiTextArea == null) {
+    	isFirstTimeRender = true;
       uiTextArea = formTextAreaField.createUIFormInput();  
       if(formTextAreaField.getRowSize() != null){
         uiTextArea.setRows(Integer.parseInt(formTextAreaField.getRowSize()));
@@ -719,7 +729,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
     Node node = getNode();
-    if(node != null && !isShowingComponent && !isRemovePreference) {
+    if(node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       String value = null;
       if(node.hasProperty(propertyName)) {
         value = node.getProperty(propertyName).getValue().getString();
@@ -738,7 +748,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
       }
       uiTextArea.setValue(value);
     } 
-    if(isNotEditNode && !isShowingComponent && !isRemovePreference) {
+    if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       Node childNode = getChildNode();
       if(node != null && node.hasNode("jcr:content") && childNode != null) {
         Node jcrContentNode = node.getNode("jcr:content");
@@ -801,10 +811,12 @@ public void addTextField(String name, String label, String[] arguments) throws E
       if(formTextField.isReference()) isReference = true; 
       else isReference = false;
     } 
+    boolean isFirstTimeRender = false;
     if(formTextField.isMultiValues()) {
       UIFormMultiValueInputSet uiMulti;
       if(node == null &&childNode == null) {
         uiMulti = findComponentById(name);
+        isFirstTimeRender = true;
         if(uiMulti == null) {
           uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
           uiMulti.setId(name);
@@ -865,7 +877,7 @@ public void addTextField(String name, String label, String[] arguments) throws E
           uiMulti.setValue(valueList);
         }
       }
-      if(node != null && !isShowingComponent && !isRemovePreference) {
+      if(node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
         String propertyPath = jcrPath.substring("/node/".length());
         if(node.hasProperty(propertyPath)) {
           Value[] values = node.getProperty(propertyPath).getValues();
@@ -886,14 +898,16 @@ public void addTextField(String name, String label, String[] arguments) throws E
     } 
     UIFormStringInput uiInput = findComponentById(name);
     if(uiInput == null) {
+    	isFirstTimeRender = true;
       uiInput = formTextField.createUIFormInput();
       addUIFormInput(uiInput);      
     }
     uiInput.setEditable(formTextField.isEditable());
     if(uiInput.getValue() == null) uiInput.setValue(formTextField.getDefaultValue());       
     else uiInput.setEditable(true);
-    if(node != null && !isShowingComponent && !isRemovePreference) {
+    if(node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       if(jcrPath.equals("/node") && (!formTextField.isEditable() || formTextField.isEditableIfNull())) {
+      	String value = uiInput.getValue();
         if(i18nNodePath != null) {
           uiInput.setValue(i18nNodePath.substring(i18nNodePath.lastIndexOf("/") + 1));
         } else {
@@ -961,8 +975,10 @@ public void addTextField(String name, String label, String[] arguments) throws E
       renderMultiValuesInput(UIFormWYSIWYGInput.class,name,label);      
       return;
     }            
+    boolean isFirstTimeRender = false;
     UIFormWYSIWYGInput wysiwyg = findComponentById(name);
     if(wysiwyg == null) {
+    	isFirstTimeRender = true;
       wysiwyg = formWYSIWYGField.createUIFormInput();      
     }                 
     /**
@@ -998,7 +1014,7 @@ public void addTextField(String name, String label, String[] arguments) throws E
     fieldNames.put(propertyName, name);
     Node node = getNode();
 
-    if(!isShowingComponent && !isRemovePreference) {
+    if(!isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
         Node jcrContentNode = node.getNode("jcr:content");
         wysiwyg.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
@@ -1008,7 +1024,7 @@ public void addTextField(String name, String label, String[] arguments) throws E
         }
       }
     }
-    if(isNotEditNode && !isShowingComponent && !isRemovePreference) {
+    if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       Node childNode = getChildNode();
       if(node != null && node.hasNode("jcr:content") && childNode != null) {
         Node jcrContentNode = node.getNode("jcr:content");
@@ -1041,8 +1057,10 @@ public void addTextField(String name, String label, String[] arguments) throws E
       renderMultiValuesInput(UIFormRichtextInput.class,name,label);      
       return;
     }            
+    boolean isFirstTimeRender = false;
     UIFormRichtextInput richtextInput = findComponentById(name);
     if(richtextInput == null) {
+    	isFirstTimeRender = true;
       richtextInput = richtextField.createUIFormInput();      
     }                 
     addUIFormInput(richtextInput);
@@ -1052,7 +1070,7 @@ public void addTextField(String name, String label, String[] arguments) throws E
     fieldNames.put(propertyName, name);
     Node node = getNode();
 
-    if(!isShowingComponent && !isRemovePreference) {
+    if(!isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
         Node jcrContentNode = node.getNode("jcr:content");
         richtextInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
@@ -1062,7 +1080,7 @@ public void addTextField(String name, String label, String[] arguments) throws E
         }
       }
     }
-    if(isNotEditNode && !isShowingComponent && !isRemovePreference) {
+    if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       Node childNode = getChildNode();
       if(node != null && node.hasNode("jcr:content") && childNode != null) {
         Node jcrContentNode = node.getNode("jcr:content");
