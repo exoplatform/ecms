@@ -141,6 +141,9 @@ public class UIDialogForm extends UIForm {
   protected String workspaceName;
   protected boolean isReference;
   
+  /** Selected Tab id */
+  private String selectedTab;
+  
   final static private String TAXONOMIES_ALIAS = "exoTaxonomiesPath" ;
 
   private String SEPARATOR_VALUE = "::";
@@ -153,6 +156,13 @@ public class UIDialogForm extends UIForm {
   
   private boolean isKeepinglock = false;
   
+  public void setSelectedTab(String selectedTab) {
+		this.selectedTab = selectedTab;
+	}
+
+	public String getSelectedTab() {
+		return selectedTab;
+	}
   public boolean isKeepinglock() {
     return isKeepinglock;
   }

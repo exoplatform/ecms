@@ -119,8 +119,6 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   /** The template. */
   private String template;
   
-  /** Selected Tab id */
-  private String selectedTab;
   
   /**
    * Gets the list taxonomy.
@@ -618,14 +616,6 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     }
   }
   
-  public void setSelectedTab(String selectedTab) {
-		this.selectedTab = selectedTab;
-	}
-
-	public String getSelectedTab() {
-		return selectedTab;
-	}
-
 	/**
    * The listener interface for receiving removeReferenceAction events.
    * The class that is interested in processing a removeReferenceAction
