@@ -29,6 +29,7 @@
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$focusNode');") ;
   rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
+  rcontext.getJavascriptManager().addOnResizeJavascript("eXo.ecm.UIListView.setHeight");
 %>
 
 <div class="UIWorkingArea ClearFix" id="UIWorkingArea">
