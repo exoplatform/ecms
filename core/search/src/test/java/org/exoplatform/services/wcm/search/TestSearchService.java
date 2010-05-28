@@ -34,8 +34,6 @@ import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin;
 import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
 import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -85,8 +83,8 @@ public class TestSearchService extends BaseWCMTestCase {
     sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
     
-    publicationPlugin = new StageAndVersionPublicationPlugin();
-    publicationPlugin.setName(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
+    publicationPlugin = new DumpPublicationPlugin();
+    publicationPlugin.setName(DumpPublicationPlugin.LIFECYCLE_NAME);
     wcmPublicationService.addPublicationPlugin(publicationPlugin);
     
     addDocuments();
@@ -138,10 +136,10 @@ public class TestSearchService extends BaseWCMTestCase {
     for(int i = 0; i < 5; i++){
       webContentNode = createWebcontentNode(parentNode, "webcontent" + i, null, null, null);
       if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
-      wcmPublicationService.enrollNodeInLifecycle(webContentNode, StageAndVersionPublicationConstant.LIFECYCLE_NAME);
+      wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
       wcmPublicationService.publishContentSCV(webContentNode, page, parentNode.getName());
       context = new HashMap<String, String>();
-      context.put(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME, webContentNode.getName());
+//      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
       publicationPlugin.changeState(webContentNode, PublicationDefaultStates.PUBLISHED, context);
     }
 
@@ -149,10 +147,10 @@ public class TestSearchService extends BaseWCMTestCase {
     for(int i = 5; i < 10; i++){
       webContentNode = createWebcontentNode(parentNode, "webcontent" + i, null, null, null);
       if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
-      wcmPublicationService.enrollNodeInLifecycle(webContentNode, StageAndVersionPublicationConstant.LIFECYCLE_NAME);
+      wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
       wcmPublicationService.publishContentSCV(webContentNode, page, parentNode.getName());
       context = new HashMap<String, String>();
-      context.put(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME, webContentNode.getName());
+//      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
       publicationPlugin.changeState(webContentNode, PublicationDefaultStates.DRAFT, context);
     }
     session.save();
