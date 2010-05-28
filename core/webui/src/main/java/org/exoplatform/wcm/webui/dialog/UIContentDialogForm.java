@@ -56,7 +56,6 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -486,7 +485,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
 	      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins().get(publicationService.getNodeLifecycleName(webContentNode));
 	      HashMap<String, String> context = new HashMap<String, String>();
 	      if(webContentNode != null) {
-	    	  context.put(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME, webContentNode.getName());
+	    	  context.put("Publication.context.currentVersion", webContentNode.getName());
 	      }
 	      publicationPlugin.changeState(webContentNode, PublicationDefaultStates.PUBLISHED, context);
 	      

@@ -26,8 +26,6 @@ import org.exoplatform.portal.config.model.PageNavigation;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
-import org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -38,6 +36,12 @@ import org.picocontainer.Startable;
  * Sep 29, 2008
  */
 public class WCMPublicationServiceImpl implements WCMPublicationService, Startable {
+  
+  /** The Constant SIMPLE_LIFECYCLE_NAME. */
+  private static final String SIMPLE_LIFECYCLE_NAME = "Simple publication".intern();
+  
+  /** The Constant STATEVERSION_LIFECYCLE_NAME. */
+  public static final String STATEVERSION_LIFECYCLE_NAME = "States and versions based publication".intern();
   
   /** The publication plugins. */
   private HashMap<String, WebpagePublicationPlugin> publicationPlugins = 
@@ -236,9 +240,9 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
 		 * We choose to use a different publication plugin for testing only for now (test has to be created separetly)
 		 */
 		if ("test".equals(siteName)) {
-			enrollNodeInLifecycle(node, SimplePublicationPlugin.LIFECYCLE_NAME);
+			enrollNodeInLifecycle(node, SIMPLE_LIFECYCLE_NAME);
 		} else {
-			enrollNodeInLifecycle(node, StageAndVersionPublicationConstant.LIFECYCLE_NAME);
+			enrollNodeInLifecycle(node, STATEVERSION_LIFECYCLE_NAME);
 		}
 	}
 

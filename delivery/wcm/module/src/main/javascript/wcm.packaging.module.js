@@ -23,7 +23,8 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-connector", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui", "jar",  module.version)).
-    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar",  module.version)).    
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar",  module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication-plugins", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-authoring-services", "jar",  module.version)).    
     addDependency(ws.frameworks.json).
     addDependency(jcr.frameworks.command).

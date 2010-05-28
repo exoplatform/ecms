@@ -507,24 +507,24 @@ public class UIPublicationPanel extends UIForm {
     public void execute(Event<UIPublicationPanel> event) throws Exception {
       UIPublicationPanel publicationPanel = event.getSource();
       UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
-//      UIVersionViewer versionViewer = publicationContainer.createUIComponent(UIVersionViewer.class, null, "UIVersionViewer"); 
-//      String versionUUID = event.getRequestContext().getRequestParameter(OBJECTID);
-//      Node revision = publicationPanel.getRevisionByUUID(versionUUID);      
-//      Node frozenNode = revision;
-//      if(revision instanceof Version) {
-//        frozenNode = revision.getNode("jcr:frozenNode") ; 
-//      }        
-//      versionViewer.setOriginalNode(publicationPanel.getCurrentNode());
-//      versionViewer.setNode(frozenNode);
-//      if(versionViewer.getTemplate() == null || versionViewer.getTemplate().trim().length() == 0) {
-//        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class) ;
-//        uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.have-no-view-template", null)) ;
-//        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-//        return ;
-//      }
-//      if (publicationContainer.getChildById("UIVersionViewer") == null) publicationContainer.addChild(versionViewer);
-//      else publicationContainer.replaceChild("UIVersionViewer", versionViewer);
-//      publicationContainer.setActiveTab(versionViewer, event.getRequestContext());
+      UIVersionViewer versionViewer = publicationContainer.createUIComponent(UIVersionViewer.class, null, "UIVersionViewer"); 
+      String versionUUID = event.getRequestContext().getRequestParameter(OBJECTID);
+      Node revision = publicationPanel.getRevisionByUUID(versionUUID);      
+      Node frozenNode = revision;
+      if(revision instanceof Version) {
+        frozenNode = revision.getNode("jcr:frozenNode") ; 
+      }        
+      versionViewer.setOriginalNode(publicationPanel.getCurrentNode());
+      versionViewer.setNode(frozenNode);
+      if(versionViewer.getTemplate() == null || versionViewer.getTemplate().trim().length() == 0) {
+        UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class) ;
+        uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.have-no-view-template", null)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
+      }
+      if (publicationContainer.getChildById("UIVersionViewer") == null) publicationContainer.addChild(versionViewer);
+      else publicationContainer.replaceChild("UIVersionViewer", versionViewer);
+      publicationContainer.setActiveTab(versionViewer, event.getRequestContext());
     }
   }
 

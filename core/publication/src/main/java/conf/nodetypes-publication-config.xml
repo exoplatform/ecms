@@ -18,22 +18,6 @@
     </propertyDefinitions>
   </nodeType>
   
-  <nodeType name="publication:staticAndDirectPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
-		<supertypes>
-      <supertype>publication:publication</supertype>
-    </supertypes>
-    <propertyDefinitions>
-    	<propertyDefinition name="publication:visibility" requiredType="String" autoCreated="false" mandatory="true"
-        onParentVersion="IGNORE" protected="false" multiple="false">
-        <valueConstraints/>
-      </propertyDefinition>
-      <propertyDefinition name="publication:versionsPublicationStates" requiredType="String" autoCreated="false" mandatory="true"
-        onParentVersion="IGNORE" protected="false" multiple="true">
-        <valueConstraints/>
-      </propertyDefinition>
-    </propertyDefinitions>
-  </nodeType>
-  
 	<nodeType name="publication:webpagesPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>publication:publication</supertype>
@@ -51,27 +35,4 @@
     </propertyDefinitions>
   </nodeType>
 
-  <nodeType name="publication:simplePublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>publication:webpagesPublication</supertype>
-    </supertypes>
-  </nodeType>
-
-  <nodeType name="publication:stateAndVersionBasedPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>publication:publication</supertype>
-    </supertypes>
-    <propertyDefinitions>
-      <propertyDefinition name="publication:revisionData" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="true">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="publication:liveRevision" requiredType="Reference" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="publication:liveDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-    </propertyDefinitions>
-  </nodeType>  
-  
 </nodeTypes>
