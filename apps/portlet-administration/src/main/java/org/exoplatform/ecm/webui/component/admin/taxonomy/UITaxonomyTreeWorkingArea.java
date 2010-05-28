@@ -247,6 +247,9 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       try {
         taxonomyService.moveTaxonomyNode(taxoTreeData.getRepository(), taxoTreeData
             .getTaxoTreeWorkspace(), srcPath, destPath, type);
+        UITaxonomyTreeBrowser uiTaxonomyTreeBrowser = uiTaxonomyTreeCreateChild.getChild(UITaxonomyTreeBrowser.class);
+        if ((uiTaxonomyTreeBrowser != null) && (uiTaxonomyTreeBrowser.getSelectedNode() != null))
+          uiWorkingArea.setSelectedPath(uiTaxonomyTreeBrowser.getSelectedNode().getPath());
         uiTaxonomyTreeCreateChild.update();
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.referential-integrity",
