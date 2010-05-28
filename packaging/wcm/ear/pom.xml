@@ -178,6 +178,11 @@ exo-ecms-packaging-ecmdemo-webapp
             </jarModule>
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
+              <artifactId>exo-ecms-core-publication-plugins</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-ext-authoring-services</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
