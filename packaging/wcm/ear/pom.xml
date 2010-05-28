@@ -53,6 +53,11 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-webui-explorer</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-ext-newsletter-services</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -184,6 +189,11 @@ exo-ecms-packaging-ecmdemo-webapp
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-core-webui</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.exoplatform.ecms</groupId>
+              <artifactId>exo-ecms-core-webui-explorer</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>

@@ -41,7 +41,8 @@ function getModule(params) {
     addDependency(new Project("org.openoffice", "juh", "jar", "3.0.1"));
   module.portlet.ecmadmin.deployName = "ecmadmin";
   
-  module.portlet.ecmexplorer = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-explorer", "exo-portlet", module.version);
+  module.portlet.ecmexplorer = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-explorer", "exo-portlet", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui-explorer", "jar", module.version));
   module.portlet.ecmexplorer.deployName = "ecmexplorer";
 
   module.portlet.ecmbrowsecontent = new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-browsecontent", "exo-portlet", module.version);
