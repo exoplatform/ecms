@@ -6,6 +6,12 @@
  * version: $Id$
  */
  
+.DefaultActionIcon {
+	height: 24px;
+	background: url('DefaultSkin/DefaultActionIcon.gif') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/DefaultActionIcon.gif') no-repeat right center; /* orientation=rt */
+}
+ 
 .Relations24x24Icon {
   width: 24px; 
   height: 24px;

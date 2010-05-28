@@ -80,7 +80,7 @@
 								 <div class="NormalSubTabItemR">
 									 <div class="NormalSubTabItemM">
 									 	<div class="Split">
-										 	<a href="<%=action.event(button)%>" title="$title" class="SubTabIcon ${button}Icon">$title</a>
+										 	<a href="<%=action.event(button)%>" title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</a>
 										 </div>
 									 </div>
 								 </div>
