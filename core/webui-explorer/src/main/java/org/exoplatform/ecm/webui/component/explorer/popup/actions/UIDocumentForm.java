@@ -43,6 +43,7 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -70,7 +71,6 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
-import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
@@ -93,7 +93,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
     @EventConfig(listeners = UIDocumentForm.RemoveActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UIDocumentForm.ShowComponentActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UIDocumentForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
-    @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
+    @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = DialogFormActionListeners.ChangeTabActionListener.class, phase = Phase.DECODE)
   }
 )
@@ -133,13 +133,15 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     return dmsConfig.getConfig(repository).getSystemWorkspace();    
   }
   
-  public String getPathTaxonomy() throws Exception {
-    String wsName = getDMSWorkspace(); 
+  public Node getRootPathTaxonomy(Node node) throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
-    Session session = uiExplorer.getSessionByWorkspace(wsName);
     try {
-      return ((Node)session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH))).getPath();
+    	TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
+    	List<Node> allTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
+    	for (Node taxonomyTree : allTaxonomyTrees) {
+    		if (node.getPath().startsWith(taxonomyTree.getPath())) return taxonomyTree;
+    	}
+    	return null;
     } catch (AccessDeniedException accessDeniedException) {
       return null;
     } catch (Exception e) {
@@ -155,14 +157,15 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   public void initFieldInput() throws Exception {
     if (!isAddNew) {    
       TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-      UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-      Node currentNode = uiExplorer.getCurrentNode();    
-      List<Node> listCategories = taxonomyService.getAllCategories(currentNode);
+      List<Node> listCategories = taxonomyService.getAllCategories(getNode());
+      Node taxonomyTree;
       for (Node itemNode : listCategories) {
-        String categoryPath = itemNode.getPath().replaceAll(getPathTaxonomy() + "/", "");
-        if (!getListTaxonomy().contains(categoryPath)) {
-          listTaxonomyName.add(getCategoryLabel(categoryPath));
-          getListTaxonomy().add(categoryPath);
+      	taxonomyTree = getRootPathTaxonomy(itemNode);
+      	if (taxonomyTree == null) continue;
+        String categoryPath = itemNode.getPath().replaceAll(taxonomyTree.getPath() + "/", "/");
+        if (!getListTaxonomy().contains(taxonomyTree.getName() + categoryPath)) {
+          listTaxonomyName.add(getCategoryLabel(taxonomyTree.getName() + categoryPath));
+          getListTaxonomy().add(taxonomyTree.getName() + categoryPath);
         }
       }
     }
