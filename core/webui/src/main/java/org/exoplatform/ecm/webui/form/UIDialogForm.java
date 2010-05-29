@@ -1263,8 +1263,17 @@ public void addTextField(String name, String label, String[] arguments) throws E
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
   }
   
+  
+  @Deprecated
   public boolean dataRemoved() { return dataRemoved_; }
   
+  @Deprecated
+  /**
+   * Using dataRemoved_ to sign removing data (image or other some binary data.
+   * But if in one form we have more than one field (eg: contain 2 field) then 
+   * this code make potential bug. Simplest way is checking existence of UIFormInput
+   * Please refer to dialog of Sample Node or WebContent
+   */
   public void setDataRemoved(boolean dataRemoved) { dataRemoved_ = dataRemoved; }
 
   public void resetProperties() { properties.clear(); }

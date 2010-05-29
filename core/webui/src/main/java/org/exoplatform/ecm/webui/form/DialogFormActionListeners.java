@@ -41,7 +41,6 @@ public class DialogFormActionListeners {
         Node referenceNode = (Node)uiForm.getSession().getItem(uiForm.getNodePath() + referenceNodePath);
         if(referenceNode.hasProperty(Utils.JCR_DATA)) {
           referenceNode.setProperty(Utils.JCR_DATA, "");
-          referenceNode.save();
           uiForm.setDataRemoved(true);
         }
       } else {
@@ -54,7 +53,6 @@ public class DialogFormActionListeners {
         }
         if (currentNode.hasProperty(referenceNodePath)) {
           currentNode.setProperty(referenceNodePath, "");
-          currentNode.save();
           uiForm.setDataRemoved(true);
         }
       }

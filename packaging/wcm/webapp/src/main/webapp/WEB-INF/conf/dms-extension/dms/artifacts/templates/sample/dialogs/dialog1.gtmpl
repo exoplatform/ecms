@@ -75,10 +75,11 @@
 	      <td class="FieldComponent">
 		      <%
 		        if(uicomponent.isEditing()) { 
-							def curNode = uicomponent.getNode() ;
-							if(curNode.hasNode("exo:image")) {
+							def curNode = uicomponent.getNode();
+							def image = "image";
+							if (curNode.hasNode("exo:image")) {
 								def imageNode = curNode.getNode("exo:image") ;
-								if(imageNode.getProperty("jcr:data").getStream().available() > 0) {
+								if (imageNode.getProperty("jcr:data").getStream().available() > 0 && (uicomponent.findComponentById(image) == null)) {
 									def imgSrc = uicomponent.getImage(curNode, "exo:image");
 									def actionLink = uicomponent.event("RemoveData", "/exo:image");
 						%>		
@@ -91,15 +92,12 @@
 						<%
 								} else {
 					        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
-					        uicomponent.addUploadField("image", fieldImage) ;								
+					        uicomponent.addUploadField(image, fieldImage) ;								
 								}
 							}
-						} else if(uicomponent.dataRemoved()) {
-			        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
-			        uicomponent.addUploadField("image", fieldImage) ;						
 						}	else {
 			        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
-			        uicomponent.addUploadField("image", fieldImage) ;
+			        uicomponent.addUploadField(image, fieldImage) ;
 						}
 		      %>
 		    </td>

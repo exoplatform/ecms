@@ -24,7 +24,7 @@
 		return "NormalTab";
 	}
 	
-	private void setUploadFields() {
+	private void setUploadFields(name) {
 		String[] illustrationHiddenField1 = ["jcrPath=/node/medias/images/illustration", "nodetype=nt:file", "mixintype=mix:referenceable", "defaultValues=illustration"];
 		String[] illustrationHiddenField2 = ["jcrPath=/node/medias/images/illustration/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 
 		String[] illustrationHiddenField3 = ["jcrPath=/node/medias/images/illustration/jcr:content/jcr:encoding", "visible=false", "UTF-8"];  
@@ -36,7 +36,7 @@
 		uicomponent.addCalendarField("illustrationHiddenField4", illustrationHiddenField4);
 		uicomponent.addCalendarField("illustrationHiddenField5", illustrationHiddenField5);			
    		String[] fieldImage = ["jcrPath=/node/medias/images/illustration/jcr:content/jcr:data"] ;
-      	uicomponent.addUploadField("illustration", fieldImage) ;	
+      	uicomponent.addUploadField(name, fieldImage) ;	
 	}
 	
 	Node webContentNode = uicomponent.getNode();
@@ -143,7 +143,7 @@
 					  				<td class="FieldComponent">
 										<%
 											String[] htmlHiddenField1 = ["jcrPath=/node/default.html", "nodetype=nt:file", "defaultValues=default.html", "mixintype=exo:htmlFile"];
-					   						String[] htmlHiddenField2 = ["jcrPath=/node/default.html/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 
+					   					String[] htmlHiddenField2 = ["jcrPath=/node/default.html/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 
 											String[] htmlHiddenField3 = ["jcrPath=/node/default.html/jcr:content/jcr:encoding", "visible=false", "UTF-8"];
 											String[] htmlHiddenField4 = ["jcrPath=/node/default.html/jcr:content/jcr:lastModified", "visible=false"];
 											String[] htmlHiddenField5 = ["jcrPath=/node/default.html/jcr:content/dc:date", "visible=false"];
@@ -173,13 +173,14 @@
 								<tr>
 									<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.illustrationImage")%></td>
 									<td class="FieldComponent">
-										<%						
-											if(webContentNode != null && webContentNode.hasNode("medias/images/illustration")) {
+										<%					
+											String illustration = "illustration";
+											if(webContentNode != null && webContentNode.hasNode("medias/images/illustration") && (uicomponent.findComponentById(illustration) == null)) {
 												def imageNode = webContentNode.getNode("medias/images/illustration") ;
 												def resourceNode = imageNode.getNode("jcr:content");
 												if(resourceNode.getProperty("jcr:data").getStream().available() > 0) {
 													def imgSrc = uicomponent.getImage(imageNode, "jcr:content");
-													def actionLink = "if (confirm('" + _ctx.appRes("WebContent.dialog.label.confirm-delete") + "')) " + uicomponent.event("RemoveData", "/medias/images/illustration/jcr:content");
+													def actionLink = uicomponent.event("RemoveData", "/medias/images/illustration/jcr:content");
 													%>		
 														<div>
 															<image src="$imgSrc" width="100px" height="80px"/>
@@ -189,10 +190,10 @@
 														</div>
 													<%
 												} else {
-													setUploadFields();
+													setUploadFields(illustration);
 												}
 											} else {
-												setUploadFields();
+												setUploadFields(illustration);
 											}
 										%>
 									</td>
