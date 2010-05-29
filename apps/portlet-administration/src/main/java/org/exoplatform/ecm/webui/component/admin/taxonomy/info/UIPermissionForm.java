@@ -223,8 +223,8 @@ public class UIPermissionForm extends UIForm implements UISelectable {
           }
         } 
         if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
+        node.save();        
         uiParent.getChild(UIPermissionInfo.class).updateGrid();
-        node.save();
       } else {
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.not-change-permission", null, 
             ApplicationMessage.WARNING));

@@ -243,9 +243,13 @@ public class LinkManagerImpl implements LinkManager {
    * @throws RepositoryException
    */
   private void removeCurrentIdentites(Node linkNode) throws AccessControlException, RepositoryException {
-    ((ExtendedNode) linkNode).setPermission(SystemIdentity.SYSTEM, PermissionType.ALL);
+    String currentUser = linkNode.getSession().getUserID();
+    if (currentUser != null)
+      ((ExtendedNode)linkNode).setPermission(currentUser, PermissionType.ALL);
     for(AccessControlEntry accessEntry : ((ExtendedNode)linkNode).getACL().getPermissionEntries()) {
-      if(canRemovePermission(linkNode, accessEntry.getIdentity())) {
+      if(canRemovePermission(linkNode, accessEntry.getIdentity()) 
+          && ((ExtendedNode)linkNode).getACL().getPermissions(accessEntry.getIdentity()).size() > 0
+          && !accessEntry.getIdentity().equals(currentUser)) {
         ((ExtendedNode) linkNode).removePermission(accessEntry.getIdentity());
       }
     }
