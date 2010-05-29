@@ -26,10 +26,10 @@
 
   <UICategoryNavigationConfig>
     <label>
-      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationRepositoryFormSelectBox>Dépôt de données</UICategoryNavigationRepositoryFormSelectBox>
       <UICategoryNavigationTreeNameSelectBox>Arbre taxonomique</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Titre</UICategoryNavigationTreeTitleFormStringInput>
-      <UICategoryNavigationTargetPathFormInputSet>Target Path</UICategoryNavigationTargetPathFormInputSet>
+      <UICategoryNavigationTargetPathFormInputSet>Chemin cible</UICategoryNavigationTargetPathFormInputSet>
       <UICategoryNavigationTreeNameFormSelectBox>Nom de l'arbre</UICategoryNavigationTreeNameFormSelectBox>
       <UICategoryNavigationTemplateFormSelectBox>Le modèle de l'abre vue</UICategoryNavigationTemplateFormSelectBox>
     </label>

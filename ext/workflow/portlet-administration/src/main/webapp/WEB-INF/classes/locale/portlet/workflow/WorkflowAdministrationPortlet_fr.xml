@@ -84,6 +84,7 @@
       <fileName-error>Chemin de fichier introuvable</fileName-error>
       <fileName-invalid>Il existe des caractères interdits dans le nom de fichier. Veuillez saisir un autre nom ou uploader un autre fichier.</fileName-invalid>
       <process-successful>L'upload s'est correctement déroulé !</process-successful>
+      <data-invalid>Impossible de trouver la définition du processus dans l'archive ou les données sont invalides. Veuillez vérifier le contenu de l'archive </data-invalid>
     </msg>
   </UIUploadProcess>
   <UIProcessDetailGrid>
@@ -174,31 +175,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>    
   </UITaskListOfProcess>
-  <!--
-  #############################################################################
-  #			Since 2.0.0-Alpha02-SNAPSHOT tobe translate											#
-  #############################################################################
-  -->
-	<UIWorkflowAdministrationPortlet>
-		<msg>
-      <refresh-session-success>The session has been refreshed successfully</refresh-session-success>
-    </msg>
-    <label>
-      <refresh>Refresh</refresh>
-    </label>
-  </UIWorkflowAdministrationPortlet>
-	
 	<UIProcessDetail>
     <action>
     	<title>
-    		<View>View</View>
-				<Delete>Delete</Delete>
+    		<View>Visualiser</View>
+				<Delete>Supprimer</Delete>
     	</title>
     </action>  
   </UIProcessDetail>
-	<UIUploadProcess>
-    <msg>
-      <data-invalid>Have some problems with your data. Can't find process definition file inside process archive or data is invalid ( process are existed or wrong format...) </data-invalid>
-    </msg>
-  </UIUploadProcess>
 </bundle>

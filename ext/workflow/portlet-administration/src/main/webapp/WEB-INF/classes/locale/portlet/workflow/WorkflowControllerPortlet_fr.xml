@@ -48,6 +48,7 @@
     </label>
     <msg>
       <task-not-found>La tâche ne peut pas être gérée. La raison la plus probable est qu'un autre utilisateur a déjà géré la tâche.</task-not-found>
+      <task-change>La tâche que vous avez sélectionnée, a été modifiée ou supprimée</task-change>
     </msg>
   </UITaskList>
   <UITaksList>
@@ -60,13 +61,18 @@
       <hide-process-link>Cacher le lien vers le processus</hide-process-link>
       <show-process-link>Montrer le lien vers le processus</show-process-link>
     </label>
-    <msg>
-      <has-not-got-delegate>Veuillez choisir un utilisateur à qui déléguer</has-not-got-delegate>
-    </msg>
     <title>
       <Delegate>Saisir un utilisateur</Delegate>
     </title>
+    <msg>
+      <has-not-got-delegate>Veuillez choisir un utilisateur à qui déléguer</has-not-got-delegate>
+    </msg>
   </UITask>
+  <PopupDelegatedSelectorId>
+    <title>
+      <UIUserSelectContainer>Saisir un utilisateur</UIUserSelectContainer>
+    </title>
+  </PopupDelegatedSelectorId>
   <UIBPDefinition>
     <header>
       <id>Id</id>
@@ -93,29 +99,4 @@
       <value-invalid>'{0}' est une valeur requise</value-invalid>
     </msg>
   </UIDocumentForm>
-  <!--
-  #####################################################################
-  ## Need to be translated Since version ECM 2.3                      #
-  #####################################################################
-  -->
-  
-  <PopupDelegatedSelectorId>
-    <title>
-      <UIUserSelectContainer>Saisir un utilisateur</UIUserSelectContainer>
-    </title>
-  </PopupDelegatedSelectorId>
-  <!--
-  #############################################################################
-  #			     Since 2.0.0-Alpha02-SNAPSHOT tobe translate											#
-  #############################################################################
-  -->
-  <UIWorkflowControllerPortlet>
-    <msg>
-      <refresh-session-success>The session has been refreshed successfully</refresh-session-success>
-    </msg>
-    <label>
-      <refresh>Refesh</refresh>
-    </label>
-  </UIWorkflowControllerPortlet>
 </bundle>
-

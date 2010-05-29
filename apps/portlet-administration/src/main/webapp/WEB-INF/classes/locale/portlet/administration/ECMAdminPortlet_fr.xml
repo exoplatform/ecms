@@ -92,7 +92,8 @@
 		<msg>
   		<name-not-allowed>Nom non autorisé</name-not-allowed>
   		<name-emty>Le nom de l'arbre de taxonomies est vide</name-emty>
-  		<homePath-emty>le chemin de la racine de la taxonomie est vide</homePath-emty>
+  		<homePath-emty>Le chemin de la racine de la taxonomie est vide</homePath-emty>
+  		<targetPath-emty>Le chemin cible est vide</targetPath-emty>
   		<taxonomytree-existed>Une taxonomie du même nom existe déjà</taxonomytree-existed>
 		</msg>
 	</UITaxonomyTreeMainForm>
@@ -389,7 +390,7 @@
       <drive-views-invalid>Vue invalide !</drive-views-invalid>
       <icon-not-found>Icône non trouvé !</icon-not-found>
       <permission-null>Permissions invalides</permission-null>
-						<allowedCreateFolder>You must choose create folder type</allowedCreateFolder>
+						<allowedCreateFolder>Veuillez choisir le type de répertoire que l'on peut créer</allowedCreateFolder>
       <name-null>Veuillez saisir un nom de lecteur !</name-null>
       <fileName-invalid>Le nom du lecteur contient des caractères invalides</fileName-invalid>
     </msg>
@@ -801,6 +802,7 @@
   <UIChildNodeDefinitionForm>
     <msg>
       <child-name>Nom du noeud fils manquant</child-name>
+      <child-invalid>Le nom du noeud fils contient des caractères invalides</child-invalid>
       <default-node-type-not-found>Type de noeud par défaut non trouvé</default-node-type-not-found>
       <requiredPrimaryType>Type primaire requis manquant</requiredPrimaryType>
       <defaultPrimaryType>Type primaire par défaut manquant</defaultPrimaryType>
@@ -880,6 +882,9 @@
     <msg>
       <filename-error>Parcourir les fichiers pour l'import</filename-error>
       <data-file-error>Seuls les fichiers XML ou ZIP sont supportés pour l'import</data-file-error>
+            <data-invalid>Les données importées sont invalides</data-invalid>
+	  <nodetype-exist>Données invalides: Le type de noeud '{0}' existe déjà</nodetype-exist>
+	  <namespace-invalid>Données invalides:  L'espace de nommage '{0}' est inconnu</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -1564,6 +1569,7 @@
     <msg>
       <confirm-delete-permission>Souhaitez-vous supprimer cette permission ?</confirm-delete-permission>
       <no-permission-tochange>Vous n'avez pas les droits requis pour supprimer la permission</no-permission-tochange>
+      <no-permission-remove>Vous ne pouvez pas supprimer le propriétaire ni l'utilisateur "system"</no-permission-remove>
       <access-denied>Accès refusé ! Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionInfo>
@@ -1646,6 +1652,7 @@
     <msg>
       <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
       <access-denied>Accès interdit ! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
+      <editing-template>Accès interdit ! Vous ne pouvez pas supprimer et modifier le template en même temps.</editing-template>
     </msg>
   </UITemplateList>
   <!--
@@ -2073,24 +2080,24 @@
   --> 
   <UIWorkspaceWizard>
     <label>
-      <step1>Step 1</step1>
-      <step2>Step 2</step2>
-      <step3>Step 3</step3>
+      <step1>Etape 1</step1>
+      <step2>Etape 2</step2>
+      <step3>Etape 3</step3>
     </label>
   </UIWorkspaceWizard>
   
   <UIDriveForm>
 		<msg>
-  		<permission-path-invalid>Permission is invalid!</permission-path-invalid>	
+  		<permission-path-invalid>La permission est invalide !</permission-path-invalid>	
   	</msg>
   </UIDriveForm>
   
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>The Home path is empty</homepath-emty>
+      <homepath-emty>Le chemin d'accueil est vide</homepath-emty>
+      <targetpath-emty>Le chemin cible est vide</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
-  
   <UITaxonomyWorkingArea>
   	<msg>
   		<exist>Ce nœud de l'arbre est l'existence!</exist>
@@ -2116,6 +2123,7 @@
       <Close>#{word.Close}</Close>
     </label>
   </PermissionTreeSelectUser>      
+  
   <!--
   #########Since ECM 2.6 ##################
   -->   
@@ -2132,28 +2140,28 @@
   </UIDriveForm>
   <UIPermissionTreeInfo>
   	<msg>
-  		<confirm-delete-permission>Do you really want to delete this permission?</confirm-delete-permission>
+  		<confirm-delete-permission>Souhaitez-vous vraiement supprimer cette permission ?</confirm-delete-permission>
   	</msg>
   </UIPermissionTreeInfo>
   <UITaxonomyTreeMainForm>
 		<msg>
-			<no-right-target-path>You have to choose other home path</no-right-target-path>
+			<no-right-target-path>Vous devez choisir un autre chemin d'acceuil</no-right-target-path>
 		</msg>
 	</UITaxonomyTreeMainForm>
 	
 	<UIECMAdminControlPanel>
     <tab>
       <label>        
-        <ManageUnLock>Manage UnLocks</ManageUnLock>
+        <ManageUnLock>Gestion du déverouillage</ManageUnLock>
       </label>
     </tab>
     <label>
-      <UIUnLockManager>Manage UnLocks</UIUnLockManager>      
+      <UIUnLockManager>Gestion du déverouillage</UIUnLockManager>      
     </label>    
 	</UIECMAdminControlPanel>
 	<UIUnLockForm>
     <label>
-      <name>Path Node</name>      
+      <name>Chemin du noeud</name>      
       <permissions>Permissions</permissions>
       <PermissionButton>UIUnLockForm</PermissionButton>
     </label>
@@ -2162,62 +2170,56 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>You must select permissions</permission-require>      
+      <permission-require>Vous devez choisir une permission</permission-require>      
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
   	<header>
-  		<name>Groups Or Users</name>
+  		<name>Groupes Ou Utilisateurs</name>
   		<action>Action</action>
   	</header>
   	<tooltip>
-				<DeleteLock>Delete Group</DeleteLock>			
+				<DeleteLock>Supprimer Groupe</DeleteLock>			
   	</tooltip>
   	<msg>
-  		<can-not-delete-lock-holder>Can not delete group {0}</can-not-delete-lock-holder>
+  		<can-not-delete-lock-holder>Impossible de supprimer le groupe {0}</can-not-delete-lock-holder>
   	</msg>
   </UILockHolderList>
   <UILockNodeList>
   	<header>
-  		<name>Node Path</name>
-  		<hoderLock>User Lock</hoderLock>
+  		<name>Chemin du noeud</name>
+  		<hoderLock>Titulaire du Verrou</hoderLock>
   		<action>Action</action>
   	</header>
   	<tooltip>
-				<UnLock>UnLock</UnLock>			
+				<UnLock>Déverouiller</UnLock>			
   	</tooltip>
   	<msg>
-  		<access-denied-exception>You don't have permission to access node with path {0}  or this node is deleted</access-denied-exception>
+  		<access-denied-exception>Vous n'avez pas la permission d'accéder au noeud {0} ou ce noeud a été supprimé</access-denied-exception>
   	</msg>
   </UILockNodeList>
   <EditUnLockForm>
     <title>
-      <UIUnLockForm>Manage Lock</UIUnLockForm>
+      <UIUnLockForm>Gestion des Verrous</UIUnLockForm>
     </title>
   </EditUnLockForm>  
   <UITabPane>
     <action>
-      <Close>Close</Close>
+      <Close>Fermer</Close>
     </action>
     <title>
-    		<UILockHolderContainer>Manage Lock</UILockHolderContainer>
-    		<UILockNodeList>Locked Node</UILockNodeList>
+    		<UILockHolderContainer>Gestion des Verrous</UILockHolderContainer>
+    		<UILockNodeList>Noeud Verouillé</UILockNodeList>
     </title>
   </UITabPane> 
   
   <UIViewFormTabPane>
     <action>
-      <AddTabForm>Add Tab</AddTabForm>
-      <AddTab>Save</AddTab>
-      <BackViewForm>Back</BackViewForm>
+      <AddTabForm>Ajoute un Onglet</AddTabForm>
+      <AddTab>Sauver</AddTab>
+      <BackViewForm>Précédent</BackViewForm>
     </action>
   </UIViewFormTabPane>
-  
-  <UITabPane>
-    <title>
-      <UISkinTab>CSS</UISkinTab>
-    </title>
-  </UITabPane>
   
 	<UITemplateForm>
 		<tab>
@@ -2227,21 +2229,27 @@
 		</tab>
 	</UITemplateForm>
   
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
   <UISkinTab>
     <header>
-      <name>Name</name>
+      <name>Nom</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Actions</action>
     </header>
     <msg>
-      <undeletable>'{0}' can not be deleted, it is the default one!</undeletable>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <undeletable>'{0}' ne peut pas être supprimé, c'est celui qui est utilisé par défaut !</undeletable>
+      <confirm-delete>Souhaitez vous réellement supprimer?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Editer</Edit>
+        <Delete>Supprimer</Delete>
       </title>
     </action>
   </UISkinTab>
@@ -2249,199 +2257,183 @@
   <SkinForm>
     <label>
       <UITemplateContent>SkinForm</UITemplateContent>
-      <UIPopupWindow>Skin Permission</UIPopupWindow>
+      <UIPopupWindow>Permission de la feuille de style</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Content</content>
-      <name>Name</name>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <content>Contenu</content>
+      <name>Nom</name>
+      <isDocumentTemplate>Formulaire de document</isDocumentTemplate>
       <viewPermission>Permission</viewPermission>
-      <enableVersion>is Enable Version</enableVersion>
+      <enableVersion>Activer le versionning</enableVersion>
     </label>
-    <title>add/edit skin</title>
+    <title>Ajouter/Editer une feuille de style</title>
   </SkinForm>
 		
 	 <UITagManager>
 	   <action>
 	     <title>
-	       <RemoveStyle>Remove</RemoveStyle>
-         <AddStyle>Add style</AddStyle>
+	       <RemoveStyle>Supprimer</RemoveStyle>
+         <AddStyle>Ajouter un style</AddStyle>
 	     </title>
 	   </action>
 	   <msg>
-	     <confirm-delete>Are you sure want to delete this tag style?</confirm-delete>
+	     <confirm-delete>Etes-vous sûr de vouloir supprimer ce style ?</confirm-delete>
 	   </msg>
 	 </UITagManager>
 		
+<UITaxonomyTreeContainer>
+		<action>
+			<Cancel>Annuler</Cancel>
+		</action>
+	</UITaxonomyTreeContainer>
 	 <UITaxonomyTreeMainForm>			
-				<msg>	  		
-		  		<targetPath-emty>The target path is empty</targetPath-emty>	  		
-				</msg>
 				<action>
-					<NextViewPermission>Next</NextViewPermission>
-					<Reset>Reset</Reset>
+					<NextViewPermission>Suivant</NextViewPermission>
+					<Reset>Initialiser</Reset>
 				</action>
 			</UITaxonomyTreeMainForm>
 			  
-		<UITaxonomyTreeContainer>
-			<action>
-				<Cancel>Cancel</Cancel>
-			</action>
-		</UITaxonomyTreeContainer>
-	
 		<UIPermissionTreeForm>
 			<action>
-				<Save>Save</Save>
-				<Reset>Reset</Reset>
-				<NextAddAction>Next</NextAddAction>
-				<Previous>Previous</Previous>
+				<Save>Sauver</Save>
+				<Reset>Initialiser</Reset>
+				<NextAddAction>Suivant</NextAddAction>
+				<Previous>Précédent</Previous>
 			</action>
 		</UIPermissionTreeForm>	
 	
 		<UIActionForm>
 			<action>
-				<PreviousViewPermission>Previous</PreviousViewPermission>
-				<NextViewTree>Next</NextViewTree>
+				<PreviousViewPermission>Précédent</PreviousViewPermission>
+				<NextViewTree>Suivant</NextViewTree>
 			</action>
 		</UIActionForm>
 	
 		<UITaxonomyTreeWorkingArea>
 			<action>
-				<Previous>Previous</Previous>
+				<Previous>Précédent</Previous>
 			</action>
 		</UITaxonomyTreeWorkingArea>
 		
 	  <UITabPane>
 	    <title>
-	      <UITagManager>Tag manager</UITagManager>
-	      <UITagPermissionManager>Tag permission manager</UITagPermissionManager>
+	      <UITagManager>Gestion des Tags</UITagManager>
+	      <UITagPermissionManager>Gestion des permissions d'accès aux Tags</UITagPermissionManager>
 	    </title>
     </UITabPane>
     
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>Memberships</usersOrGroups>
+      <usersOrGroups>Rôles</usersOrGroups>
       <action>Action</action>
     </header>
       <action>
         <title>
-          <Delete>Delete</Delete>
+          <Delete>Supprimer</Delete>
         </title>
       </action>
     <msg>
-      <confirm-delete-permission>Are you sure want to delete?</confirm-delete-permission>
+      <confirm-delete-permission>Souhaitez-vous réellement supprimer?</confirm-delete-permission>
     </msg>   
   </UITagPermissionInfo>
   <UITagPermissionForm>
-    <title>Add a permission</title>
+    <title>Ajouter une permission</title>
     <action>
-      <Save>Save</Save>
+      <Save>Sauver</Save>
     </action>
     <label>
-      <userOrGroup>Memberships: </userOrGroup>
+      <userOrGroup>Rôles : </userOrGroup>
       <permission></permission>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>Membership already exists. Please choose another one!</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>Ce rôle existe déjà. Veuillez en choisir un autre</userOrGroup-alreadyExists>
     </msg>    
   </UITagPermissionForm>
 	 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Selectionner un groupe</selectGroup>
+      <selectMembership>Selectionner un rôle</selectMembership>
     </label>
   </UIGroupMemberSelector>
   
   <UIFolksonomyManager>
     <action>
       <title>
-        <AddStyle>Add style</AddStyle>
+        <AddStyle>Ajouter un style</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>  
 		<UIActionForm>
   	<title>
-  		<ShowComponent>Open Window</ShowComponent>
-  		<removeReference>Remove</removeReference>
+  		<ShowComponent>Ouvrir Fenêtre</ShowComponent>
+  		<removeReference>Supprimer</removeReference>
   	</title>
   </UIActionForm>		   
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Type another value, please!</Invalid-char>
-      <empty-input>The value of field is null or empty!</empty-input>
+      <Invalid-char>Il existe des caractères invalides. Veuillez saisir une autre valeur</Invalid-char>
+      <empty-input>La valeur du champ est vide</empty-input>
     </msg>
   </NodeTypeNameValidator>
   <UIActionForm>
   		<msg>
-  				<constraint-violation-exception>Can not add node '{0}' to '{1}' in workspace '{2}' because you have problem with permission or contraints condition</constraint-violation-exception>
+  				<constraint-violation-exception>Impossible d'ajoute le noeud '{0}' à '{1}' dans l'espace de travail '{2}' à cause d'un problème de droit d'accès ou d'une violation de contrainte</constraint-violation-exception>
   		</msg>	
   </UIActionForm>
   
+  <UIWorkspaceWizard>
+  		<msg>
+  				<name-not-allowed>Nom interdit</name-not-allowed>
+  		</msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+    		<not-complete-repository>Un dépôt de données est en cours de création. Veuillez attendre quelques minutes avant de pouvoir en créer un autre</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
   <UIViewFormTabPane>
   		<label>
-  				<addCategory>Add Category</addCategory>
+  				<addCategory>Ajouter une Catégorie</addCategory>
+          <addLocalizationLink>Ajoute une Traduction</addLocalizationLink>
   		</label>
   </UIViewFormTabPane>
   <UIDriveForm>
 			<label>
-  		<taxonomy-list>Taxonomy List</taxonomy-list>
-  		<admin-view>Admin View</admin-view>
-  		<taxonomy-icons>Taxonomy Icons</taxonomy-icons>
-  		<anonymous-view>Anonymous View</anonymous-view>
-  		<icon-view>Icon View</icon-view>
-  		<slide-show>Slide Show</slide-show>
-  		<simple-view>Simple View</simple-view>
-  		<system-view>System View</system-view>
-  		<timeline-view>Timeline View</timeline-view>
-  		<cover-flow>Cover Flow</cover-flow>	
+  		<taxonomy-list>Liste des Taxonomies</taxonomy-list>
+  		<admin-view>Détails</admin-view>
+  		<taxonomy-icons>Icônes des Taxonomies</taxonomy-icons>
+  		<anonymous-view>Icônes</anonymous-view>
+  		<icon-view>Icônes</icon-view>
+  		<slide-show>Diaporama</slide-show>
+  		<simple-view>Vignettes</simple-view>
+  		<system-view>Détails</system-view>
+  		<timeline-view>Chronologie</timeline-view>
+  		<cover-flow>Défilé</cover-flow>	
   	</label>
   </UIDriveForm>
-	
 	<UIDriveForm>
 		<label>
-			<allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
+			<allowNodeTypesOnTree>Type de noeuds autorisés dans l'arborescence de gauche</allowNodeTypesOnTree>
 		</label>
 	</UIDriveForm>
 	<DriveInputSet>
 		<title>
-			<RemovePermission>Remove permission</RemovePermission>
-			<ChooseNodeType>Choose node types</ChooseNodeType>
-			<RemoveNodeType>Remove</RemoveNodeType>
+			<RemovePermission>Supprimer permission</RemovePermission>
+			<ChooseNodeType>Choisir un type de noeud</ChooseNodeType>
+			<RemoveNodeType>Supprimer</RemoveNodeType>
 		</title>
 	</DriveInputSet>
 	<PopupNodeTypeSelector>
 		<title>
-			<UINodeTypeSelector>Select node types</UINodeTypeSelector>
-			<PopupNodeTypeSelector>Select node types</PopupNodeTypeSelector>
+			<UINodeTypeSelector>Choisir des types de noeuds</UINodeTypeSelector>
+			<PopupNodeTypeSelector>Choisir des types de noeuds</PopupNodeTypeSelector>
 		</title>
 	</PopupNodeTypeSelector>
 	<UINodeTypeSelector>
 		<label>
-			<selectedAllNodeTypes>Choose all node types</selectedAllNodeTypes>
+			<selectedAllNodeTypes>Selectionner tous les types de noeuds</selectedAllNodeTypes>
 		</label>
 	</UINodeTypeSelector>
-  	<UITemplateList>
-		<msg>	
-	      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-    	</msg>
-  	</UITemplateList>
-	<UIChildNodeDefinitionForm>
-	  <msg>	
-		<child-invalid>Child node name contains invalid character</child-invalid>
-	  </msg>
-	</UIChildNodeDefinitionForm>
-	<UINodeTypeUpload>	
-		<msg>
-	      <filename-error>Browse node type file for import</filename-error>
-	      <data-file-error>Only xml file or zip file are supported to import.</data-file-error>
-	      <data-invalid>Invalid data when import nodetype</data-invalid>
-		  <nodetype-exist>Invalid data: NodeType exist : '{0}'</nodetype-exist>
-		  <namespace-invalid>Invalid data:  unknown namespace : '{0}'</namespace-invalid>
-	    </msg>
-	 </UINodeTypeUpload>
-  <UIPermissionInfo>  
-    <msg>
-      <no-permission-remove>You can not remove the owner or system</no-permission-remove>
-    </msg>
-  </UIPermissionInfo>  
 </bundle>
+

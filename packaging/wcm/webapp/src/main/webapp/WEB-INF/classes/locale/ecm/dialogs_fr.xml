@@ -696,37 +696,38 @@
    	<DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor</DialogFormException>
    </form>
   </UIDialogForm>  
+  
   <!--
   #####Since version 2.6#######
     
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-  <no>No</no>
-	<yes>Yes</yes>
-	<true>True</true>
-	<false>False</false>	
-	<Electronic>Electronic</Electronic>
-	<Paper>Paper</Paper>
-	<NONE>None</NONE>
-	<CLASSIFIED>Classified</CLASSIFIED>
-	<UNCLASSIFIED>Un Classified</UNCLASSIFIED>
-	<NOCONTRACT>No Contract</NOCONTRACT>
-	<true>True</true>
-	<false>False</false>
-	<one-minute>One Minute</one-minute>
-	<hourly>Hourly</hourly>
-	<daily>Daily</daily>
-	<quarterly>Quarterly</quarterly>
-	<yearly>Yearly</yearly>
-	<ten-years>Ten Years</ten-years>
-	<read>User Action</read>
+  <no>Non</no>
+	<yes>Oui</yes>
+	<true>Vrai</true>
+	<false>Faux</false>	
+	<Electronic>Électronique</Electronic>
+	<Paper>Papier</Paper>
+	<NONE>Aucun</NONE>
+	<CLASSIFIED>Classé</CLASSIFIED>
+	<UNCLASSIFIED>Non classé</UNCLASSIFIED>
+	<NOCONTRACT>Aucun contrat</NOCONTRACT>
+	<true>Vrai</true>
+	<false>Faux</false>
+	<one-minute>Une fois par Minute</one-minute>
+	<hourly>Une fois par heure</hourly>
+	<daily>Journalier</daily>
+	<quarterly>Trimestriel</quarterly>
+	<yearly>Annuel</yearly>
+	<ten-years>Tous les 10 ans</ten-years>
+	<read>Action Utilisateur</read>
 
     <SendMail>
    <dialog>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes>
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
      </label> 
    </dialog>
   </SendMail>
@@ -734,9 +735,9 @@
   <ScriptAction>
    <dialog>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes>
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
      </label> 
    </dialog>
   </ScriptAction>
@@ -744,9 +745,9 @@
   <Getmail>
    <dialog>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes> 
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Getmail>
@@ -754,9 +755,9 @@
   <Rss>
    <dialog>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes>
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Rss>
@@ -764,9 +765,9 @@
   <AddMetadata>
    <dialog>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes> 
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
      </label> 
    </dialog>
   </AddMetadata>
@@ -774,9 +775,9 @@
   <ReloadAction>
    <dialog>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes> 
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
      </label> 
    </dialog>
   </ReloadAction>
@@ -784,9 +785,9 @@
   <Transform>
    <dialog>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes>
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Transform>
@@ -794,11 +795,10 @@
   <EnableVersioning>
    <dialog>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes> 
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
      </label> 
    </dialog>
   </EnableVersioning>
-  	
 </bundle>

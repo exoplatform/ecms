@@ -100,7 +100,7 @@
       <readmore>Lire la suite</readmore>
     </label>
     <action>
-      <refresh>Refresh</refresh>
+      <refresh>Rafraîchir</refresh>
       <edit>Modifier</edit>
     </action>
     <label>
@@ -116,7 +116,7 @@
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogForm>Web content form</UIContentDialogForm>
+      <UIContentDialogForm>Edition du contenu</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
 

@@ -31,7 +31,7 @@
     <msg>
       <your-search>Votre recherche</your-search>
       <did-not-match>ne correspond à aucun</did-not-match>
-      <new-suggestion>Suggestions: </new-suggestion>
+      <new-suggestion>Suggestions : </new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
