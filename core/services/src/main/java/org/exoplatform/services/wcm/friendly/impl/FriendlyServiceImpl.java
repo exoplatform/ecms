@@ -50,12 +50,12 @@ public class FriendlyServiceImpl implements FriendlyService {
     private static final Log log  = ExoLogger.getLogger(FriendlyServiceImpl.class);
 
 	public FriendlyServiceImpl(InitParams initParams) {
+		friendlies = new LinkedHashMap<String, String>(5);
+		unfriendlies = new LinkedHashMap<String, String>(5);
 		if (initParams!=null) init(initParams);
 	}
 	
 	private void init(InitParams initParams) {
-		friendlies = new LinkedHashMap<String, String>(5);
-		unfriendlies = new LinkedHashMap<String, String>(5);
 		
 	    ValueParam enabled = initParams.getValueParam("enabled");
 	    ValueParam servletName = initParams.getValueParam("servletName");

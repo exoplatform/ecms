@@ -32,7 +32,7 @@
     <set-method>addConfiguration</set-method>
     <type>org.exoplatform.services.wcm.friendly.impl.FriendlyPlugin</type>
     <description>Configures</description>
-    <priority>1</priority>
+    <priority>50</priority>
     <init-params>
       <!--
       <value-param>
