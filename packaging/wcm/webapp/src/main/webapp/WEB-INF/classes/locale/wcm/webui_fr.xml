@@ -50,15 +50,6 @@
     </label>
   </Views>
 
-  <WCMContentView>
-    <header>
-      <status>L'état</status>
-      <author>L'auteur</author>
-      <date>La date de création</date>
-      <title>Le titre du document</title>
-    </header>
-  </WCMContentView>
-
   <UIActionBar>
     <obtion>
       <Publication>Publication</Publication>

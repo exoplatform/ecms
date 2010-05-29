@@ -3219,4 +3219,12 @@
       <UIPublishingPanel>Manage publication</UIPublishingPanel>
     </title>
   </UIPopupWindow> 
+  <WCMContentView>
+    <header>
+      <status>Status</status>
+      <author>Author</author>
+      <date>Created date</date>
+      <title>Document title</title>
+    </header>
+  </WCMContentView>
 </bundle>

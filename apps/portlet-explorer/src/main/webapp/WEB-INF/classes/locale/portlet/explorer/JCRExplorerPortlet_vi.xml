@@ -3264,4 +3264,13 @@
       <UIPublishingPanel>Quản lý xuất bản</UIPublishingPanel>
     </title>
   </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Trạng thái</status>
+      <author>Tác giả</author>
+      <date>Ngày tạo</date>
+      <title>Tiêu đề của tài liệu</title>
+    </header>
+  </WCMContentView>
+  
 </bundle>

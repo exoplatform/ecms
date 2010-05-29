@@ -50,15 +50,6 @@
     </label>
   </Views>
 
-  <WCMContentView>
-    <header>
-      <status>Trạng thái</status>
-      <author>Tác giả</author>
-      <date>Ngày tạo</date>
-      <title>Tiêu đề của tài liệu</title>
-    </header>
-  </WCMContentView>
-
   <UIActionBar>
     <obtion>
       <Publication>Xuất bản</Publication>
