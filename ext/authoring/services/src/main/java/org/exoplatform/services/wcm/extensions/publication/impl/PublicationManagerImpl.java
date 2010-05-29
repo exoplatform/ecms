@@ -1,11 +1,22 @@
 package org.exoplatform.services.wcm.extensions.publication.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.jcr.Node;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
@@ -14,7 +25,15 @@ import org.exoplatform.services.wcm.extensions.publication.context.impl.ContextC
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
+import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.extensions.component.rest.LifecycleConnector;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.picocontainer.Startable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
@@ -24,6 +43,8 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
   private StatesLifecyclePlugin statesLifecyclePlugin;
 
   private ContextPlugin         contextPlugin;
+
+  private static final Log log         = ExoLogger.getLogger(PublicationManagerImpl.class);
 
   public void addLifecycle(ComponentPlugin plugin) {
     if (plugin instanceof StatesLifecyclePlugin) {
@@ -115,5 +136,58 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
 
     }
     return lifecycles;
+  }
+  
+  public List<Node> getContents(String fromstate, 
+		  String tostate, 
+		  String date,
+		  String user,
+		  String lang,
+		  String workspace) throws Exception {
+	  
+	  WCMComposer wcmComposer = (WCMComposer)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(WCMComposer.class);
+	  
+	  HashMap<String, String> filters = new HashMap<String, String>();
+	  filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_EDIT);
+	  filters.put(WCMComposer.FILTER_LANGUAGE, lang);
+	  StringBuffer query = new StringBuffer("select * from nt:base where publication:currentState='"+fromstate+"'");
+
+	  if (tostate!=null) {
+		  List<Lifecycle> lifecycles = this.getLifecyclesFromUser(user, tostate);
+		  if (lifecycles!=null && !lifecycles.isEmpty()) {
+			  query.append(" and (");
+			  boolean first = true;
+			  for (Lifecycle lifecycle:lifecycles) {
+				  if (!first) query.append(" or ");
+				  first = false;
+				  query.append("publication:lifecycle='"+lifecycle.getName()+"'");
+			  }
+			  query.append(")");
+		  } else {
+			  query.append(" and publication:lifecycle='_no_lifecycle'");
+		  }
+	  } else if (user!=null) {
+		  query.append(" and publication:lastUser='"+user+"'");
+	  }
+	  
+	  if (date!=null) {
+		  Calendar cal = new GregorianCalendar();
+		  cal.add(Calendar.DAY_OF_YEAR, Integer.parseInt(date));
+		  query.append(" and publication:startPublishedDate<=TIMESTAMP '"+getISO8601Date(cal)+"'");
+		  query.append(" order by publication:startPublishedDate asc");
+	  }
+	  filters.put(WCMComposer.FILTER_QUERY_FULL, query.toString());
+	  if (log.isInfoEnabled()) log.info("query="+query.toString());
+	  List<Node> nodes = wcmComposer.getContents("repository", workspace, "/", filters, WCMCoreUtils.getUserSessionProvider());
+	  
+	  return nodes;
+  }
+  
+  private String getISO8601Date(Calendar cal) {
+	  DateTime dt = new DateTime(cal.getTimeInMillis()); 
+	  DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+	  String str = fmt.print(dt);
+	  return str;
+
   }
 }

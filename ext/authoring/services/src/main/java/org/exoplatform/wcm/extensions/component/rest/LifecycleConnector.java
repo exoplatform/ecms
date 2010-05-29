@@ -130,41 +130,8 @@ public class LifecycleConnector implements ResourceContainer {
 		  document.appendChild(root);
 		  
 		  PublicationManager manager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
-		  WCMComposer wcmComposer = (WCMComposer)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(WCMComposer.class);
-		  
-		  HashMap<String, String> filters = new HashMap<String, String>();
-		  filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_EDIT);
-		  filters.put(WCMComposer.FILTER_LANGUAGE, lang);
-		  StringBuffer query = new StringBuffer("select * from nt:base where publication:currentState='"+fromstate+"'");
+		  List<Node> nodes = manager.getContents(fromstate, tostate, date, user, lang, workspace);
 
-		  if (tostate!=null) {
-			  List<Lifecycle> lifecycles = manager.getLifecyclesFromUser(user, tostate);
-			  if (lifecycles!=null && !lifecycles.isEmpty()) {
-				  query.append(" and (");
-				  boolean first = true;
-				  for (Lifecycle lifecycle:lifecycles) {
-					  if (!first) query.append(" or ");
-					  first = false;
-					  query.append("publication:lifecycle='"+lifecycle.getName()+"'");
-				  }
-				  query.append(")");
-			  } else {
-				  query.append(" and publication:lifecycle='_no_lifecycle'");
-			  }
-		  } else if (user!=null) {
-			  query.append(" and publication:lastUser='"+user+"'");
-		  }
-		  
-		  if (date!=null) {
-			  Calendar cal = new GregorianCalendar();
-			  cal.add(Calendar.DAY_OF_YEAR, Integer.parseInt(date));
-			  query.append(" and publication:startPublishedDate<=TIMESTAMP '"+getISO8601Date(cal)+"'");
-			  query.append(" order by publication:startPublishedDate asc");
-		  }
-		  filters.put(WCMComposer.FILTER_QUERY_FULL, query.toString());
-		  if (log.isInfoEnabled()) log.info("query="+query.toString());
-		  List<Node> nodes = wcmComposer.getContents("repository", workspace, "/", filters, WCMCoreUtils.getUserSessionProvider());
-		  
 		  json.append("[");
 		  boolean first=true;
 		  for (Node node:nodes) {
@@ -199,25 +166,5 @@ public class LifecycleConnector implements ResourceContainer {
 	  }
 	  return Response.ok().build();
   }
-  
-  private String getISO8601Date(Calendar cal) {
-	  // 2006-08-19T10:11:38.281+02:00
-//	  Date date = cal.getTime();
-//	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.sssZ");
-//	  int tz = cal.getTimeZone().getDSTSavings()/3600000;
-//	  String sdate = sdf.format(date);
-//	  sdate+=(tz<0)?"-":"+";
-//	  tz = Math.abs(tz);
-//	  sdate+=(tz<10)?"0"+tz:""+tz;
-//	  sdate+=":00";
-//	  
-//	  return sdate;
-	  
-	  DateTime dt = new DateTime(cal.getTimeInMillis()); 
-	  DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-	  String str = fmt.print(dt);
-	  return str;
-
-  }
-  
+    
 }

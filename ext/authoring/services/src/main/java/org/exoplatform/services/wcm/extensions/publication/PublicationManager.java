@@ -2,6 +2,8 @@ package org.exoplatform.services.wcm.extensions.publication;
 
 import java.util.List;
 
+import javax.jcr.Node;
+
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig.Context;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
@@ -24,4 +26,10 @@ public interface PublicationManager {
 
   public List<Lifecycle> getLifecyclesFromUser(String remoteUser, String state);
 
+  public List<Node> getContents(String fromstate, 
+		  String tostate, 
+		  String date,
+		  String user,
+		  String lang,
+		  String workspace) throws Exception;
 }
