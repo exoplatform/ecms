@@ -32,6 +32,7 @@ import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.lock.LockException;
 import javax.jcr.version.VersionException;
+import javax.portlet.PortletMode;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
@@ -60,6 +61,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -312,6 +314,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
 	   */
     public void execute(Event<UIContentDialogForm> event) throws Exception {
       UIContentDialogForm contentDialogForm = event.getSource();
+      ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
       Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);      
     }
   }
@@ -396,6 +399,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       }catch(Exception e) {
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.cannot-save", null, ApplicationMessage.WARNING);
       }
+      ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
       Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);      
     }
   }
@@ -507,6 +511,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.cannot-save", null, ApplicationMessage.WARNING);
       }
       
+      ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
       Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);
 	  }
   }
