@@ -42,6 +42,7 @@
       <ShowLink>Show link</ShowLink>
       <LinkFormatBlock>Link Format</LinkFormatBlock>
       <UIParameterizedTagetPageInputSetAction>Target page</UIParameterizedTagetPageInputSetAction>
+      <content-not-found>There is no content found</content-not-found>
     </label>
     <action>
       <Save>Save</Save>

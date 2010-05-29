@@ -42,6 +42,7 @@
       <ShowLink>Afficher le lien</ShowLink>
       <LinkFormatBlock>Le format de lien</LinkFormatBlock>
       <UIParameterizedTagetPageInputSetAction>Page cible</UIParameterizedTagetPageInputSetAction>
+      <content-not-found>Il n'ya pas de contenu trouvé</content-not-found>
     </label>
     <action>
       <Save>Sauver</Save>

@@ -42,6 +42,7 @@
       <ShowLink>Hiển thị liên kết</ShowLink>
       <LinkFormatBlock>Định dạng liên kết</LinkFormatBlock>
       <UIParameterizedTagetPageInputSetAction>Trang đích</UIParameterizedTagetPageInputSetAction>
+      <content-not-found>Không có nội dung nào</content-not-found>
     </label>
     <action>
       <Save>Lưu</Save>
