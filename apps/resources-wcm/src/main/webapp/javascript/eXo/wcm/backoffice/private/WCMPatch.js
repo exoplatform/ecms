@@ -59,3 +59,17 @@ function ajaxGet(url, callback) {
   url += "&" + location.search.substring(1);
   doRequest("Get", url, null, callback) ;
 } ;
+
+/*
+* This method is called when a HTTP POST should be done but in an AJAX
+* case some maniputalions are needed
+* Once the content of the form is placed into a string object, the call
+* is delegated to the doRequest() method 
+*/
+function ajaxPost(formElement, callback) {
+  if (!callback) callback = null ;
+  var queryString = eXo.webui.UIForm.serializeForm(formElement) ;
+  var url = formElement.action + "&ajaxRequest=true" ;
+  url += "&" + location.search.substring(1);
+  doRequest("POST", url, queryString, callback) ;
+} ;
