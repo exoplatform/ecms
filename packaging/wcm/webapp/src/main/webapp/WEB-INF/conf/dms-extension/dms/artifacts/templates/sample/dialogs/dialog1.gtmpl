@@ -74,9 +74,9 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("Sample.dialog.label.upload-image")%></td>
 	      <td class="FieldComponent">
 		      <%
+		      	def image = "image";
 		        if(uicomponent.isEditing()) { 
 							def curNode = uicomponent.getNode();
-							def image = "image";
 							if (curNode.hasNode("exo:image")) {
 								def imageNode = curNode.getNode("exo:image") ;
 								if (imageNode.getProperty("jcr:data").getStream().available() > 0 && (uicomponent.findComponentById(image) == null)) {
