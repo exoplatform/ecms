@@ -127,6 +127,11 @@
                 <value>false</value>
                 <read-only>false</read-only>
               </preference>
+              <preference>
+                <name>showThumbnailsView</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
             </preferences>
           </portlet>
           <title>News</title>
