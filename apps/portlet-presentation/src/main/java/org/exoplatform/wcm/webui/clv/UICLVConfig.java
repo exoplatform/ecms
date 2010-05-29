@@ -180,8 +180,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   public List<String> getItems() {
     String displayMode = ((UIFormRadioBoxInput) getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
     String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
-    if (items == null && UICLVPortlet.DISPLAY_MODE_MANUAL.equals(displayMode) && itemPath.contains(";")) {
-      items = Arrays.asList(itemPath.split(";"));
+    if (items == null && UICLVPortlet.DISPLAY_MODE_MANUAL.equals(displayMode) && itemPath != null) {
+      if(itemPath.contains(";")) {
+      	items = Arrays.asList(itemPath.split(";"));
+      }
     }
     return items;
   }
