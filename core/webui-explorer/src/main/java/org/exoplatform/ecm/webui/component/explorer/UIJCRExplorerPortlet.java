@@ -120,6 +120,12 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     UIJcrExplorerEditContainer editContainer = getChild(UIJcrExplorerEditContainer.class);
     PortletRequestContext portletReqContext = (PortletRequestContext) context ;
     HashMap<String, String> map = getElementByContext(context);
+    PortalRequestContext pcontext = Util.getPortalRequestContext();
+    HashMap<String, String> changeDrive = (HashMap<String, String>)pcontext.getAttribute("jcrexplorer-show-document");
+    if (changeDrive!=null) {
+    	map = changeDrive;
+    	context.setAttribute("jcrexplorer-show-document", null);
+    }
     if (portletReqContext.getApplicationMode() == PortletMode.VIEW) {
       if (map.size() > 0) {
         showDocument(context, map);
