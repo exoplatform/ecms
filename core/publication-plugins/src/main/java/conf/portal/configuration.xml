@@ -11,7 +11,7 @@
 	    <name>add.nodeType</name>
 	    <set-method>addPlugin</set-method>
 	    <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
-			<priority>99</priority>
+			<priority>100</priority>
 	    <init-params>
 	      <values-param>
 	        <name>autoCreatedInNewRepository</name>
