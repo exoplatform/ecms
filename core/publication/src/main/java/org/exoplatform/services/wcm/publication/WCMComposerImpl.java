@@ -316,6 +316,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 			/* remove base content cache */
 	 			hash = getHash(path, BASE_VERSION, null, lang, null);
 	 			cache.remove(hash);
+	 			/* remove parent cache */
+	 			hash = getHash(part, null, null, lang, null);
+	 			cache.remove(hash);
 	 			if (oid!=null) {
 	 				/* remove live cache */
 	 				hash = getHash(oid, null, null, lang, null);
@@ -327,6 +330,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 				cache.remove(hash);
 	 				/* remove base content cache for current user */
 	 				hash = getHash(path, BASE_VERSION, remoteUser, lang, null);
+	 				cache.remove(hash);
+	 				/* remove parent cache for current user */
+	 				hash = getHash(part, null, remoteUser, lang, null);
 	 				cache.remove(hash);
 	 				if (oid!=null) {
 	 					/* remove live cache */

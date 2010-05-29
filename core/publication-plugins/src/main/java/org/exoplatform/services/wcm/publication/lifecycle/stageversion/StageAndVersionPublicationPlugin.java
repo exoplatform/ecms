@@ -55,6 +55,7 @@ import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.IdGenerator;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
@@ -87,6 +88,8 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
   private POMSessionManager pomManager;
   
   private POMSession pomSession;
+  
+  private WCMComposer composer;
 
   /**
    * Instantiates a new stage and version publication plugin.
@@ -96,6 +99,7 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     navigationEventListenerDelegate = new NavigationEventListenerDelegate(StageAndVersionPublicationConstant.LIFECYCLE_NAME, ExoContainerContext.getCurrentContainer());
     dataStorage = WCMCoreUtils.getService(DataStorage.class);
     pomManager = WCMCoreUtils.getService(POMSessionManager.class);
+    composer = WCMCoreUtils.getService(WCMComposer.class);
   }
 
   public String getLifecycleType() {
@@ -219,6 +223,9 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     }
     if(!node.isNew())
       node.save();
+    
+    NodeLocation location = NodeLocation.make(node);
+    composer.updateContent(location.getRepository(), location.getWorkspace(), location.getPath(), new HashMap<String, String>());
   }  
 
   /**
