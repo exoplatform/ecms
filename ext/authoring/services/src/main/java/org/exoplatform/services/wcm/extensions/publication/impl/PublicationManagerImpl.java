@@ -7,10 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.dom.DOMSource;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -27,13 +23,10 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.extensions.component.rest.LifecycleConnector;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.picocontainer.Startable;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 /**
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
