@@ -85,25 +85,25 @@
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>draft</string></field>
-                          <field name="role"><string>author</string></field>
+                          <field name="membership"><string>author:/platform/web-contributors</string></field>
                         </object>
                       </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>pending</string></field>
-                          <field name="role"><string>author</string></field>
+                          <field name="membership"><string>author:/platform/web-contributors</string></field>
                         </object>
                       </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>approved</string></field>
-                          <field name="role"><string>manager</string></field>
+                          <field name="membership"><string>manager:/platform/web-contributors</string></field>
                         </object>
                       </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>staged</string></field>
-                          <field name="role"><string>publisher</string></field>
+                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
                         </object>
                       </value>
                       <value>

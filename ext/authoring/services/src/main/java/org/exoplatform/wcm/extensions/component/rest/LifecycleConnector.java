@@ -1,8 +1,5 @@
 package org.exoplatform.wcm.extensions.component.rest;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -15,23 +12,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
-import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
-import org.exoplatform.services.wcm.publication.WCMComposer;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @Path("/authoring/")
 public class LifecycleConnector implements ResourceContainer {
 
-  private static final Log log         = ExoLogger.getLogger(LifecycleConnector.class);
+//  private static final Log log         = ExoLogger.getLogger(LifecycleConnector.class);
 
   /**
    * 
@@ -137,15 +126,19 @@ public class LifecycleConnector implements ResourceContainer {
 		  for (Node node:nodes) {
 			  String name = node.getName();
 			  String path = node.getPath();
+			  String title = null;
+			  if (node.hasProperty("exo:title")) title = node.getProperty("exo:title").getString();
 			  String pubDate = (node.hasProperty("publication:startPublishedDate"))?node.getProperty("publication:startPublishedDate").getString():null;
 			  if (!first) json.append(",");
 			  first = false;
 			  json.append("{");
 			  json.append("\"name\":\""+name+"\"");
+			  if (title!=null) json.append(",\"title\":\""+title+"\"");
 			  json.append(",\"path\":\""+path+"\"");
 			  
 			  Element element = document.createElement("content");
 			  element.setAttribute("name", name);
+			  if (title!=null) element.setAttribute("title", title);
 			  element.setAttribute("path", path);
 			  if (pubDate!=null) {
 				  json.append(",\"publishedDate\":\""+pubDate+"\"");
