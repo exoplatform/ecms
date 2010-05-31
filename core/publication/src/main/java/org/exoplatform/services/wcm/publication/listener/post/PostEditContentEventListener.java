@@ -54,7 +54,9 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
   public void onEvent(Event<CmsService, Node> event) throws Exception {
   	Node currentNode = event.getData();
   	if( currentNode.isNodeType("exo:cssFile") || 
-        currentNode.isNodeType("exo:jsFile") || currentNode.getParent().isNodeType("exo:actionStorage")){
+  	    currentNode.isNodeType("exo:template") ||
+        currentNode.isNodeType("exo:jsFile") || 
+        currentNode.getParent().isNodeType("exo:actionStorage")){
       return;    
     }
     String siteName = Util.getPortalRequestContext().getPortalOwner();
