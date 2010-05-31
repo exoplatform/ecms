@@ -50,9 +50,6 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
   /** The publication service. */
   private PublicationService publicationService;
 
-  /** The content composer. */
-  private WCMComposer wcmComposer;
-  
   /**
    * Instantiates a new WCM publication service.
    * This service delegate to PublicationService to manage the publication
@@ -61,7 +58,6 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
    */
   public WCMPublicationServiceImpl() {
     this.publicationService = WCMCoreUtils.getService(PublicationService.class);
-    this.wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
   }
 
   /* (non-Javadoc)
@@ -277,8 +273,6 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
 	    	publicationPlugin.updateLifecyleOnChangeContent(node, remoteUser, newState);
 	    else
 	    	publicationPlugin.updateLifecyleOnChangeContent(node, remoteUser);
-	    
-	    wcmComposer.updateContent(node.getSession().getRepository().toString(), node.getSession().getWorkspace().getName(), node.getPath(), new HashMap<String, String>());
 	}
 
 	public String getContentState(Node node) throws Exception {
