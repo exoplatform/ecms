@@ -55,7 +55,7 @@
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">
 						<%
-  						String[] fieldContent = ["jcrPath=/node/exo:text", "options=default", ""] ;
+  						String[] fieldContent = ["jcrPath=/node/exo:text", "options=toolbar:CompleteWCM,width:100%,height:410px", ""] ;
   						uicomponent.addWYSIWYGField("content", fieldContent) ;        
 			      %>
 					</div>

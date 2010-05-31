@@ -310,15 +310,7 @@
 <!-- Title-->
               <div class="ColumnName" style="width: 220px;">
                 <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="$title">$title
-                    <%
-                      if (!title.equals(name)) { 
-                        %> 
-                          <span style="font-size:10px;color:#CCC;"> ($name)</span>
-                        <% 
-                      }
-                    %>
-                  </div>
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="$title">$title</div>
                 </div>
               </div>
 <!-- Date created -->
