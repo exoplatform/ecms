@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -139,7 +140,9 @@ public class UIPCLVContainer extends UIContainer {
 		Node treeNode = null;
 		try {
 		  treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
-		} catch(Exception ex){}
+		} catch(RepositoryException ex){
+		  return;
+		}
 		
 		Node categoryNode = null;
 		if (preferenceTreeName.equals(categoryPath) || "".equals(categoryPath)) categoryNode = treeNode;

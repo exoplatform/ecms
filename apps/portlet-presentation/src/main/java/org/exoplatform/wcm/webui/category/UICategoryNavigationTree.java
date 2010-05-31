@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 import javax.portlet.PortletPreferences;
 
@@ -110,7 +111,12 @@ public class UICategoryNavigationTree extends UIContainer {
     String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
     String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    Node rootTreeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
+    Node rootTreeNode = null;
+    try {
+      rootTreeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName); 
+    } catch (RepositoryException e) {
+      return;
+    }
     setRootTreeNode(rootTreeNode);
     setAcceptedNodeTypes(new String[] {"nt:folder", "nt:unstructured", "nt:file", "exo:taxonomy"});
     
