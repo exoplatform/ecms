@@ -7,7 +7,7 @@
 	import org.exoplatform.web.application.Parameter;
 	import org.exoplatform.ecm.webui.utils.Utils;
 	import org.exoplatform.services.wcm.core.NodeLocation;
-	
+	import org.exoplatform.ecm.utils.text.Text;
 	
 	public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -31,8 +31,7 @@
   UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
   if(uiPopupWindow != null) resizeBlock = ""; 
-
-  def originalNode = uicomponent.getOriginalNode();
+  
   def currentNode = getFileLangNode(uicomponent.getNode()) ;
   def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
   def contentNode = currentNode.getNode("jcr:content") ;
@@ -50,7 +49,7 @@
 	<div class="FileContent">
 			<div class="NavigationContainer">       
 			  <div class="TopTitle" style="float:left;">
-			   $originalNode.name
+			   <%=Text.unescapeIllegalJcrChars(currentNode.name) %>
 			  </div>
         <div style="float:right;padding: 4px 10px;" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=Utils.getRestContextName(uicomponent.getPortalName())%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNodePath)%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
           <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
