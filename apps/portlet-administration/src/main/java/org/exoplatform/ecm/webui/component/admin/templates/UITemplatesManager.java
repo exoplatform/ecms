@@ -43,7 +43,7 @@ public class UITemplatesManager extends UIAbstractManager {
 
   public boolean isEditingTemplate() {
     UIPopupWindow uiPopup = getChildById(EDIT_TEMPLATE);
-    return (uiPopup != null && uiPopup.isShow());    
+    return (uiPopup != null && uiPopup.isShow() && uiPopup.isRendered());    
   }
   
   public void initPopup(UIComponent uiComponent, String title) throws Exception {
