@@ -58,7 +58,7 @@
     	  continue;
     	}
 	    String path = node.getPath() ;
-	    String treeNodeName = uicomponent.getWorkingArea().getTitle(node);
+	    String treeNodeName = Text.unescapeIllegalJcrChars(uicomponent.getWorkingArea().getTitle(node));
 	    def isPreferenceNode = uicomponent.isPreferenceNode(node) ;
 	    def preferenceWS = node.getSession().getWorkspace().getName() ;
 	    String mode = "ExpandTree";
@@ -96,7 +96,8 @@
 	  	      if (node.hasNode("jcr:content")) {
 	  	        mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
 	  	      }
-	  		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+ serverPath+"','"+ portalName +"','"+ restContextName +"','"+ repository +"','"+ preferenceWS+ "','" +Utils.formatNodeName(node.getPath())+"','"+mimeType+"')";				  					  					  	
+	  	      String webDavPath = path.contains("%27") ? path.replaceAll("%27","%2527") : path;
+	  		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+ serverPath+"','"+ portalName +"','"+ restContextName +"','"+ repository +"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";				  					  					  	
 	  	    	strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\">" ;	        
 	  		  	strActs += "  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>";
 	  			  strActs += "</a>" ;				  	

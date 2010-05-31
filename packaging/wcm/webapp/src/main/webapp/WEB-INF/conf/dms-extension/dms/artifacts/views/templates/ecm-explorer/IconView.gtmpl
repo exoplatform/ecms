@@ -4,7 +4,7 @@
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-  import org.exoplatform.services.jcr.util.Text;
+  import org.exoplatform.ecm.utils.text.Text;
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -109,11 +109,12 @@
 			          //Begin WebDav Action
 	              if ((!linkManager.isLink(data) || linkManager.isTargetReachable(data)) && data.getPrimaryNodeType().getName().equals("nt:file")) {
 							  	String mimeType="";
-										try {
-											mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
-										} catch (Exception e) {											
-										}
-							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+portalName+"','"+restContextName+"','"+repository+"','"+ preferenceWS+ "','" +data.getPath()+"','"+mimeType+"')";				  					  					  	
+									try {
+										mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+									} catch (Exception e) {											
+									}
+									String webDavPath = data.getPath().contains("%27") ? data.getPath().replaceAll("%27","%2527") : data.getPath(); 
+							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+portalName+"','"+restContextName+"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";				  					  					  	
 				        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\">" ;	        
 							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
 							  	strActs += 		"</a>" ;				  	

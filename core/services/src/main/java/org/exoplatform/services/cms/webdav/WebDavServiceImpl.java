@@ -37,6 +37,7 @@ import javax.ws.rs.core.UriInfo;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.common.util.HierarchicalProperty;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -113,7 +114,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                           @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -133,7 +134,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                            @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -159,7 +160,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath));
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)));
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -186,7 +187,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @Context UriInfo uriInfo) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -206,7 +207,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        @Context UriInfo uriInfo) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -229,7 +230,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -250,7 +251,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -279,7 +280,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                         HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -301,7 +302,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -324,7 +325,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                             HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -350,7 +351,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       InputStream inputStream) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), LinkUtils.getParentPath(path(repoPath)), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))), true);
       repoPath = item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -372,7 +373,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -393,7 +394,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -414,7 +415,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                              @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -435,7 +436,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                                  @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(repoPath), true);
+      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
