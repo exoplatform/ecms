@@ -44,6 +44,7 @@ import org.exoplatform.services.log.Log;
 /**
  * The Class DateTimeClassifyPlugin.
  */
+@Deprecated
 public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
 
   /** The Constant MONTHS. */
