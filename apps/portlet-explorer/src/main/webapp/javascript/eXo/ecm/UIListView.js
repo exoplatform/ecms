@@ -822,7 +822,7 @@ var ListView = function() {
 		
 	}
 	
-	ListView.prototype.setHeight = function() {
+	ListView.prototype.setHeight = function() {		
 		var root = document.getElementById("UIDocumentInfo");
 		var view = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
 		var workingArea = document.getElementById('UIWorkingArea');		
@@ -847,6 +847,11 @@ var ListView = function() {
 					documentWorkspace.style.height = workingArea.offsetHeight + 'px';					
 				}				
 		}
+		var container = document.getElementById("UITreeExplorer");
+		if (!container) {
+			container = DOM.findFirstDescendantByClass(uiResizableBlock, "div", "SideBarContent");
+			eXo.ecm.UIListView.initialHeightOfContainer = container.offsetHeight;
+		}		
 	}
 	
 	ListView.prototype.hideColumn = function(obj, event) {
