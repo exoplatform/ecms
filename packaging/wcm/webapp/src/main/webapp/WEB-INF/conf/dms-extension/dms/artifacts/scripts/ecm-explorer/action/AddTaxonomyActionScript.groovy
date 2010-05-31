@@ -126,6 +126,8 @@ public class AddTaxonomyActionScript implements CmsScript {
     Node nodeLink = linkManager_.createLink((Node)storeNode.getSession().getItem(nodeLinkPath), "exo:taxonomyLink", targetNode, nodeName);
     // rename added node to recover official name
     sessionTargetNode.move(targetPath, targetParentPath.concat("/").concat(nodeName));
+    if (targetNode.canAddMixin("exo:privilegeable"))
+      targetNode.addMixin("exo:privilegeable");
     sessionTargetNode.save();
   }
   
