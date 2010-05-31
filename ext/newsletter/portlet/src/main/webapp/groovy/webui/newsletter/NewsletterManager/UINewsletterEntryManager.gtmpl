@@ -103,7 +103,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 																						</div>
 																						<div class="MenuItem" onclick="javaScript:void(0)">
 																							<div class="ItemIcon Remove16x16Icon" style="padding-left:30px;text-align:left;">
-																								<a href="javaScript:if(eXo.ecm.NewsletterManager.checkBeforeDelete('UIWCMNewsletterEntryManagerCheckAll', '<%=_ctx.appRes("UISubscription.msg.checkOnlyOneNewsletterToDelete")%>', '<%=_ctx.appRes("UINewsletterEntryManager.msg.confirmDeleteNewsletter")%>')){<%=uicomponent.event("DeleteNewsletterEntry")%>}">
+																								<a href="javaScript:if(eXo.ecm.NewsletterManager.checkBeforeDelete('UINewsletterEntryManager', '<%=_ctx.appRes("UISubscription.msg.checkOnlyOneNewsletterToDelete")%>', '<%=_ctx.appRes("UINewsletterEntryManager.msg.confirmDeleteNewsletter")%>')){<%=uicomponent.event("DeleteNewsletterEntry")%>}">
 																									<%=_ctx.appRes("NewsletterPortlet.action.Delete")%>
 																								</a>
 																							</div>
