@@ -133,3 +133,11 @@ td {
 .UISubcriptionForm .UIForm .HorizontalLayout .UIFormInputSet {
 	padding: 0px;
 }
+
+.UIPresentationContainer a {
+  color: blue;
+}
+
+.UIPresentationContainer a:hover {
+  text-decoration: underline;
+}
