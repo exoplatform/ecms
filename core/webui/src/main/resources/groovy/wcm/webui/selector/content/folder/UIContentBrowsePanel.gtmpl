@@ -21,7 +21,7 @@
 	</div>
 	<div class="BreadcumbsPortlet">
 		<div class="HomeIcon"><span></span></div> 
-		<div id="BreadcumbsContainer" class="BreadcumbsContainer"><span>Home</span></div>
+		<div id="BreadcumbsContainer" class="BreadcumbsContainer"></div>
 	</div>
 	<div class="LeftWorkspace" id="LeftWorkspace">
 		
