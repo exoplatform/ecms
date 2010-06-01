@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <administration>
-    <wcm>Quản lý site</wcm>
-    <siteExplorer>Sites Explorer</siteExplorer>
+    <siteExplorer>Quản lý nội dung trang web</siteExplorer>
     <wcmAdmin>Quản trị site</wcmAdmin>
-    <newslettermanager>Newsletter Manager</newslettermanager>
-    <formgenerator>Form Generator</formgenerator>
+    <newslettermanager>Quản lý newsletter</newslettermanager>
+    <formgenerator>Hệ thống sinh form tự động</formgenerator>
 		<workflowcontroller>Điều khiển luồng công việc</workflowcontroller>
 		<workflowAdministration>Quản trị luồng công việc</workflowAdministration>
   </administration>
