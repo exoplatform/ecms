@@ -1,0 +1,1 @@
+FCKLang.WCMInsertContent = "Insert contents";
