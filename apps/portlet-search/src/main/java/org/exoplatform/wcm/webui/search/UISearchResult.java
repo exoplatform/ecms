@@ -135,6 +135,12 @@ public class UISearchResult extends UIContainer {
 			UISearchForm searchForm = uiSearchPageContainer.getChild(UISearchForm.class);
 			//searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).setSelectedValues(new String[] {portal});
 			//searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
+			if (searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).getValue() != null) {
+			  portal = searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).getValue();
+			  portal = portal.equals(UISearchForm.ALL_OPTION)?Util.getPortalRequestContext().getPortalOwner():portal;
+			} 
+			if (searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue() != null)
+			  keyword = searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue();			
 									
 			SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
 			QueryCriteria queryCriteria = new QueryCriteria();			

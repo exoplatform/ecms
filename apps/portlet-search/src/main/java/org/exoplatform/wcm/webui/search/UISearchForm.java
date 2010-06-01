@@ -19,6 +19,7 @@ import javax.portlet.PortletPreferences;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
@@ -217,7 +218,7 @@ public class UISearchForm extends UIForm {
 			}
 			keyword = keyword.replace('-', ' ').toLowerCase(portletRequestContext.getLocale());
 			uiSearchResult.setResultType(resultType);
-			String selectedPortal = (uiPortalSelectBox.getValue().equals(UISearchForm.ALL_OPTION)) ? null
+			String selectedPortal = (uiPortalSelectBox.getValue().equals(UISearchForm.ALL_OPTION)) ? Util.getPortalRequestContext().getPortalOwner()
 																																														: uiPortalSelectBox.getValue();
 			QueryCriteria queryCriteria = new QueryCriteria();
 			
@@ -253,7 +254,10 @@ public class UISearchForm extends UIForm {
 				uiSearchResult.setPageList(paginatedQueryResult);
 				float timeSearch = paginatedQueryResult.getQueryTimeInSecond();
 				uiSearchResult.setSearchTime(timeSearch);
-				uiSearchResult.setSuggestion(paginatedQueryResult.getSpellSuggestion());
+				String suggestionURL = Util.getPortalRequestContext().getRequestURI();
+        suggestionURL += "?portal=" + selectedPortal + "&keyword=" + keyword;
+				uiSearchResult.setSuggestion(suggestionURL);
+				portletRequestContext.addUIComponentToUpdateByAjax(uiSearchResult);
 			} catch (Exception e) {
 				uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD,
 																								null,
