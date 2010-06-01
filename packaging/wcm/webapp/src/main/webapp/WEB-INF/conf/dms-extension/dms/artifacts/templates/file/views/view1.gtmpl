@@ -5,7 +5,7 @@
 	import javax.jcr.NodeIterator;
 	import org.exoplatform.webui.core.UIPopupWindow;
 	import org.exoplatform.web.application.Parameter;
-	import org.exoplatform.ecm.webui.utils.Utils;
+	import org.exoplatform.ecm.webui.utils.Utils;	
 	import org.exoplatform.services.wcm.core.NodeLocation;
 	import org.exoplatform.ecm.utils.text.Text;
 	
@@ -33,6 +33,7 @@
   if(uiPopupWindow != null) resizeBlock = ""; 
   
   def currentNode = getFileLangNode(uicomponent.getNode()) ;
+  currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentNode);
   def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
