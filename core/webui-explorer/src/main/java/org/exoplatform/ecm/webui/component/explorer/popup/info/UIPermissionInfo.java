@@ -187,6 +187,7 @@ public class UIPermissionInfo extends UIContainer {
       UIPermissionForm uiForm = uicomp.getAncestorOfType(UIPermissionManager.class).getChild(UIPermissionForm.class) ;
       uiForm.fillForm(name, node) ;
       uiForm.lockForm(name.equals(uicomp.getExoOwner(node)));
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
   static public class DeleteActionListener extends EventListener<UIPermissionInfo> {

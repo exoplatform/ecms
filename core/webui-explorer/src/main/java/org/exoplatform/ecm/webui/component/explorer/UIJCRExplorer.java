@@ -445,8 +445,8 @@ public class UIJCRExplorer extends UIContainer {
       UITreeExplorer treeExplorer = findFirstComponentOfType(UITreeExplorer.class);
       treeExplorer.buildTree();
     }
-    UIPopupContainer popupAction = getChild(UIPopupContainer.class);
-    popupAction.deActivate();
+//    UIPopupContainer popupAction = getChild(UIPopupContainer.class);
+//    popupAction.deActivate();
   }
 
   public boolean nodeIsLocked(String path, Session session) throws Exception {
