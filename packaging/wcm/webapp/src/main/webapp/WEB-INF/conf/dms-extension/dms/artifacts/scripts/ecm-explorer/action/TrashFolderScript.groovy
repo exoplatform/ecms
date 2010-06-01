@@ -37,9 +37,13 @@ public class TrashFolderScript implements CmsScript {
   
   final static public String EXO_RESTOREPATH = "exo:restorePath";
   final static public String EXO_RESTORELOCATION = "exo:restoreLocation";
-  final static public String EXO_RESTORE_WORKSPACE = "exo:restoreWorkspace";  
+  final static public String EXO_RESTORE_WORKSPACE = "exo:restoreWorkspace";
+  private RepositoryService repositoryService_;
+  private SessionProviderService seProviderService_;
   
-  public TrashFolderScript() {
+  public TrashFolderScript(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
+    repositoryService_ = repositoryService;
+    seProviderService_ = sessionProviderService;
   }
   
   public void execute(Object context) {
@@ -64,7 +68,7 @@ public class TrashFolderScript implements CmsScript {
       LOG.error("Exception when try to get node", e);
       throw e;
     }
-    System.out.println("type: " + evenType);
+    System.out.println("type: " + eventType);
     if ((eventType & Event.NODE_ADDED) > 0) {
     	if (!node.isNodeType(EXO_RESTORELOCATION)) {
     		System.out.println("srcPath: " + srcPath);
