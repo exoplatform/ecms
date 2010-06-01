@@ -421,16 +421,18 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       for (String categoryPath : categoryPaths) {        
         if (rootNodeTaxonomy.getPath().equals("/")) {
           category = categoryPath;
-        } else if (!categoryPath.startsWith("/")) {
+        } else if (!categoryPath.startsWith("/") && (categoryPath.length() != 0)) {
           category = rootNodeTaxonomy.getPath() + "/" + categoryPath;
         } else {
-          category = rootNodeTaxonomy.getPath() + categoryPath;
+          category = rootNodeTaxonomy.getPath();
         }
         Node categoryNode;
         if (categoryPath.startsWith(rootNodeTaxonomy.getPath())) {
           categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(categoryPath);
+        } else if (categoryPath.equals("")) {
+          categoryNode = rootNodeTaxonomy;
         } else {
-          categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(category);
+        	categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(category);
         }
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, node.getName());
       }

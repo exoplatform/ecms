@@ -51,6 +51,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -162,7 +163,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       for (Node itemNode : listCategories) {
       	taxonomyTree = getRootPathTaxonomy(itemNode);
       	if (taxonomyTree == null) continue;
-        String categoryPath = itemNode.getPath().replaceAll(taxonomyTree.getPath() + "/", "/");
+        String categoryPath = itemNode.getPath().replaceAll(taxonomyTree.getPath(), "");
         if (!getListTaxonomy().contains(taxonomyTree.getName() + categoryPath)) {
           listTaxonomyName.add(getCategoryLabel(taxonomyTree.getName() + categoryPath));
           getListTaxonomy().add(taxonomyTree.getName() + categoryPath);
@@ -271,12 +272,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               for (String categoryPath : listTaxonomy) {
                 index = categoryPath.indexOf("/");
                 if (index < 0) {
-                  uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, ApplicationMessage.WARNING));
-                  event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-                  return;
-                  //throw new PathNotFoundException();
+                	taxonomyService.getTaxonomyTree(repository, categoryPath);
+                } else {
+                	taxonomyService.getTaxonomyTree(repository, categoryPath.substring(0, index)).getNode(categoryPath.substring(index + 1));
                 }
-                taxonomyService.getTaxonomyTree(repository, categoryPath.substring(0, index)).getNode(categoryPath.substring(index + 1));
               }
             } catch (Exception e) {
               LOG.error("Unexpected error occurs", e);
@@ -316,9 +315,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         CmsService cmsService = documentForm.getApplicationComponent(CmsService.class);
         String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew(),documentForm.repositoryName);
         try {
-          homeNode.save();
           newNode = (Node)homeNode.getSession().getItem(addedPath);
-          
           // Begin delete listExistedTaxonomy
           if (hasCategories) {          
             List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
@@ -339,7 +336,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             for(String categoryPath : listTaxonomy) {
               index = categoryPath.indexOf("/");
               try {
-                taxonomyService.addCategory(newNode, categoryPath.substring(0, index), categoryPath.substring(index + 1));
+              	if (index != -1) {
+              		taxonomyService.addCategory(newNode, categoryPath.substring(0, index), categoryPath.substring(index + 1));
+              	} else {
+              		taxonomyService.addCategory(newNode, categoryPath, "");
+              	}
               } catch(AccessDeniedException accessDeniedException) {
                 uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null, 
                     ApplicationMessage.WARNING));
