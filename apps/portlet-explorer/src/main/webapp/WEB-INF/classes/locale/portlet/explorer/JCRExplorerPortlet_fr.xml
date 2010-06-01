@@ -131,6 +131,7 @@
       <anonymous-view>Icônes</anonymous-view>
       <taxonomy-list>Détails</taxonomy-list>
       <taxonomy-icons>Icônes</taxonomy-icons>
+      <timeline-view>Chronologie</timeline-view>
     </label>
   </Views>
   <!--
@@ -175,6 +176,8 @@
       <showHiddenNode>Afficher les éléments cachés</showHiddenNode>
       <showNonDocument>Afficher les "non documents"</showNonDocument>
       <showRefDocuments>Afficher les documents référencés</showRefDocuments>
+      <showItemsByUserInTimeline>Afficher les éléments par utilisateur dans la chronologie</showItemsByUserInTimeline>
+      <enableDragAndDrop>Activer le glisser-déposer</enableDragAndDrop>      
       <sortBy>Trier par</sortBy>
       <order>Trier</order>
       <nodesPerPage>Noeuds par page</nodesPerPage>
@@ -186,14 +189,26 @@
   </UIPreferencesForm>
   <!--
   #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Configurer les préférences</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>  
+  <!--
+  #########################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
   #########################################################################################
   -->
   <UIRenameForm>
     <title>Renommer</title>
     <label>
-      <nameField>Name</nameField>
-      <titleField>Title</titleField>
+      <nameField>Nom</nameField>
+      <titleField>Titre</titleField>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -242,13 +257,14 @@
       <UIPreferencesForm>Préférences</UIPreferencesForm>
       <UIPublicationManager>Gérer la publication</UIPublicationManager>
       <UIConfirmMessage>Confirmer la suppression</UIConfirmMessage>
+      <UIRestoreConfirmMessage>Confirmer la restauration</UIRestoreConfirmMessage>
       <UIActivePublication>Inscrire dans un cycle de publication</UIActivePublication>
       <UITaggingForm>Tagguer ce document</UITaggingForm>
       <UIMultiLanguageForm>Multilangues</UIMultiLanguageForm>
       <UIMultiLanguageManager>Multilangues</UIMultiLanguageManager>
       <UIThumbnailForm>Ajouter une vignette</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Préférences</UIAllItemsPreferenceForm>  
-      <UIDocumentFilterForm>Filter support type</UIDocumentFilterForm>    
+      <UISelectRestorePath>Selection le chemin de la restauration</UISelectRestorePath>    
     </title>
     <header>
       <workspace>Espace de travail</workspace>
@@ -349,8 +365,11 @@
       <SimpleSearch>Recherche Rapide</SimpleSearch>
       <AdvanceSearch>Recherche Avancée</AdvanceSearch>
       <SavedQueries>Requêtes Sauvegardées</SavedQueries>
-      <ShowImages>Show all images types</ShowImages>
-      <ShowVideo>Show all video types</ShowVideo>
+      <ShowAllOwnedByUser>Afficher tous les éléments</ShowAllOwnedByUser>
+      <ShowAllFavourite>Afficher tous les éléments favoris</ShowAllFavourite>      
+      <ShowImages>Voir tous les types d'images</ShowImages>
+			<ShowAllHidden>Afficher tous les objets cachés</ShowAllHidden>
+      <ShowVideo>Voir tous les types de vidéo</ShowVideo>
     </title>
   </UIActionBar>
   <UIPopupMenu>
@@ -395,9 +414,9 @@
       <access-denied>Accès interdit ! Vous n'avez pas les droits suffisants</access-denied>
       <remove-verion-exception>Impossible de supprimer ce noeud car lui même ou un de ses ancètres a le statut "check in"</remove-verion-exception>
       <remove-referentialIntegrityException>Impossible de le supprimer car il est référencé ailleurs</remove-referentialIntegrityException>
-      <constraintviolation-exception>Le jcr:uuid n'a pas été trouvé. Le noeud a peut être été modifié ou supprimé. Veuiller cliquer sur le bouton "Actualiser".</constraintviolation-exception>
-      <path-not-found-exception>Le noeud a été modifié ou supprimé. Veuiller cliquer sur le bouton "Actualiser".</path-not-found-exception>
-      <node-locked-other-person>Aucune catégorie</node-locked-other-person>
+      <constraintviolation-exception>Le jcr:uuid n'a pas été trouvé. Le noeud a peut être été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</constraintviolation-exception>
+      <path-not-found-exception>Le noeud a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</path-not-found-exception>
+      <not-exist-categories>La catégorie n'existe pas</not-exist-categories>
     </msg>
   </UIPopupMenu>
   <!--
@@ -439,7 +458,10 @@
     </title>
     <msg>
       <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <confirm-delete-permanently>Souhaitez-vous réellement supprimer le noeud '{0}' et tout son contenu définitivement?</confirm-delete-permanently>      
+      <confirm-restore>Un noeud du même nom existe déjà sous l'arborescence '{0}'. Souhaitez-vous réellement restaurer ce noeud ?</confirm-restore>      
       <confirm-delete-multi>Etes vous certains de vouloir déplacer ces {0} éléments vers la corbeille?</confirm-delete-multi>
+      <confirm-delete-permanently-multi>Souhaitez-vous réellement supprimer définitivement les éléments {0} ?</confirm-delete-permanently-multi>      
       <confirm-move>Souhaitez-vous vraiment déplacer ce(s) noeud(s)?</confirm-move>
       <node-cut>Le noeud '{0}' a été coupé.</node-cut>
       <execute-successfully>L'action '{0}' a été exécutée.</execute-successfully>
@@ -496,8 +518,6 @@
         <auditing><![CDATA[Tra&ccedil;abilit&eacute;]]></auditing>
         <exo_dateCreated>Date de création</exo_dateCreated>
         <exo_dateModified>Date de modification</exo_dateModified>
-        <true>vrai</true>
-        <false>faux</false>
       </label>
     </view>
   </ListView>
@@ -537,6 +557,11 @@
       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
       <GetURL>Copier l'URL dans le presse-papier</GetURL>
       <AddThumbnail>Ajouter/Supprimer une vignette</AddThumbnail>
+      <AddToFavourite>Ajouter aux favoris</AddToFavourite>
+      <RemoveFromFavourite>Supprimer le favori</RemoveFromFavourite>
+      <MoveToTrash>Déplacer dans la poubelle</MoveToTrash>
+      <RestoreFromTrash>Restaurer de la poubelle</RestoreFromTrash>
+      <EmptyTrash>Vider la poubelle</EmptyTrash>      
     </event>
   </ECMContextMenu>
   <!--
@@ -589,11 +614,11 @@
   -->
   <UITabPane>
     <title>
-      <UIPublishingPanel>Publication Panel</UIPublishingPanel>
+      <UIPublishingPanel>Publication</UIPublishingPanel>
       <UIPublicationPanel>Révision</UIPublicationPanel>
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
-      <UIPublicationHistory>Histoire</UIPublicationHistory>
-      <UIVersionViewer>Version viewer</UIVersionViewer>
+      <UIPublicationHistory>Historique</UIPublicationHistory>
+      <UIVersionViewer>Version</UIVersionViewer>
       
       <UIPropertyTab>Propriétés</UIPropertyTab>
       <UIMetadataTab>Metadonnées</UIMetadataTab>
@@ -834,6 +859,7 @@
       <name-is-exist>Le document '{0}' existe déjà. Vous ne pouvez pas uploader un fichier du même nom excepté pour les documents de type 'nt:file'</name-is-exist>
       <contraint-violation>Ajout du noeud '{0}' impossible. Le type de noeud fils dans le parent l'interdit</contraint-violation>
       <lock-exception>Ce noeud est verrouillé. Certaines actions ne pourront être lancées.</lock-exception>
+      <confirm-behavior>Il existe déjà un fichier portant le même nom '{0}' dans cet emplacement. Veuillez s'il vous plaît choisir l'action souhaitée sur ce fichier.</confirm-behavior>
     </msg>
   </UIUploadForm>
   <UIUploadContent>
@@ -1003,6 +1029,134 @@
       <OpenFolder>Ouvrir le dossier</OpenFolder>
     </tooltip>
   </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>Le formulaire de visualisation de ce noeud n'est pas supporté</not-support>
+      <empty>Aucun résultat trouvé !</empty>
+      <access-denied>Vous ne pouvez pas consulter ce noeud car le formulaire de consultation n'est pas supporté ou vous n'avez pas les droits requis !</access-denied>
+      <query-invalid>La requête est invalide</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Répertoire</path>
+      <action>Action</action>
+      <shortcutPath>Répertoire</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date de création</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Classer par type de document croissant</typeASC>
+      <typeDESC>Classer par type de document décroissant</typeDESC>
+      <scoreASC>Classer par score croissant</scoreASC>
+      <scoreDESC>Classer par score décroissant</scoreDESC>
+      <nameASC>Classer par nom croissant</nameASC>
+      <nameDESC>Classer par nom décroissant</nameDESC>
+      <datecreatedASC>Classer par date de création croissante</datecreatedASC>
+      <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Voir ce noeud</View>
+      <OpenFolder>Ouvrir le dossier</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Le formulaire de visualisation de ce noeud n'est pas supporté</not-support>
+      <empty>Aucun résultat trouvé !</empty>
+      <access-denied>Vous ne pouvez pas consulter ce noeud car le formulaire de consultation n'est pas supporté ou vous n'avez pas les droits requis !</access-denied>
+      <query-invalid>La requête est invalide</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Répertoire</path>
+      <action>Action</action>
+      <shortcutPath>Répertoire</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date de création</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Classer par type de document croissant</typeASC>
+      <typeDESC>Classer par type de document décroissant</typeDESC>
+      <scoreASC>Classer par score croissant</scoreASC>
+      <scoreDESC>Classer par score décroissant</scoreDESC>
+      <nameASC>Classer par nom croissant</nameASC>
+      <nameDESC>Classer par nom décroissant</nameDESC>
+      <datecreatedASC>Classer par date de création croissante</datecreatedASC>
+      <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Voir ce noeud</View>
+      <OpenFolder>Ouvrir le dossier</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>  
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>Le formulaire de visualisation de ce noeud n'est pas supporté</not-support>
+      <empty>Aucun résultat trouvé !</empty>
+      <access-denied>Vous ne pouvez pas consulter ce noeud car le formulaire de consultation n'est pas supporté ou vous n'avez pas les droits requis !</access-denied>
+      <query-invalid>La requête est invalide</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Répertoire</path>
+      <action>Action</action>
+      <shortcutPath>Répertoire</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date de création</dateCreated>
+      <score>Score</score>
+      <AddRemoveFavourite>Ajouter/supprimer un favori</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Classer par type de document croissant</typeASC>
+      <typeDESC>Classer par type de document décroissant</typeDESC>
+      <scoreASC>Classer par score croissant</scoreASC>
+      <scoreDESC>Classer par score décroissant</scoreDESC>
+      <nameASC>Classer par nom croissant</nameASC>
+      <nameDESC>Classer par nom décroissant</nameDESC>
+      <datecreatedASC>Classer par date de création croissante</datecreatedASC>
+      <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Voir ce noeud</View>
+      <OpenFolder>Ouvrir le dossier</OpenFolder>
+      <RemoveHiddenAttribute>Rendre visible</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>Le formulaire de visualisation de ce noeud n'est pas supporté</not-support>
+      <empty>Aucun résultat trouvé !</empty>
+      <access-denied>Vous ne pouvez pas consulter ce noeud car le formulaire de consultation n'est pas supporté ou vous n'avez pas les droits requis !</access-denied>
+      <query-invalid>La requête est invalide</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Répertoire</path>
+      <action>Action</action>
+      <shortcutPath>Répertoire</shortcutPath>
+      <type>Type</type>
+      <dateCreated>Date de création</dateCreated>
+      <score>Score</score>
+    </header>
+    <title>
+      <typeASC>Classer par type de document croissant</typeASC>
+      <typeDESC>Classer par type de document décroissant</typeDESC>
+      <scoreASC>Classer par score croissant</scoreASC>
+      <scoreDESC>Classer par score décroissant</scoreDESC>
+      <nameASC>Classer par nom croissant</nameASC>
+      <nameDESC>Classer par nom décroissant</nameDESC>
+      <datecreatedASC>Classer par date de création croissante</datecreatedASC>
+      <datecreatedDESC>Classer par date de création décroissante</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Voir ce noeud</View>
+      <OpenFolder>Ouvrir le dossier</OpenFolder>
+      <DeletePermanently>Supprimer définitivement</DeletePermanently>
+      <RestoreFromTrash>Restaurer de la poubelle</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
@@ -1615,7 +1769,7 @@
       <repository-exception-permission>Vous n'avez pas le droit d'ajouter un document à ce noeud</repository-exception-permission>
       <not-allowed-same-name-sibling>Impossible de sauvegarder ce document. Le nom du noeud existe déjà</not-allowed-same-name-sibling>
       <numberformat-exception>Sauvegarde du document impossible. Input must be a number format.</numberformat-exception>
-      <item-not-found>L'élément n'a pas été trouvé ! Peut être que ce noeud ou un de ses ancètres a été supprimé. Veuiller cliquer sur le bouton "Actualiser".</item-not-found>
+      <item-not-found>L'élément n'a pas été trouvé ! Peut être que ce noeud ou un de ses ancètres a été supprimé. Veuillez cliquer sur le bouton "Actualiser".</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1701,7 +1855,7 @@
         Deeper test on DMS 2.4 RC1
         ECM-3873 Error content of message when type name of action by special character
 	    -->
-      <repository-exception>Can not save this action. The name provided has some special character.</repository-exception>
+      <repository-exception>Impossible de sauver cette action. Le nom fourni contient des caractères invalides.</repository-exception>
       <numberformat-exception>Sauvegarde de cette action impossible. Input must be a number format.</numberformat-exception>
       <existed-action>Ce nom existe déjà, veuillez en choisir un autre!</existed-action>
       <unable-add-action>Impossible d'ajouter cette action</unable-add-action>
@@ -1771,7 +1925,7 @@
       <notificationType>Type de notification</notificationType>
     </label>
     <msg>
-      <not-support>Nous ne supportons pas cette notification. Veuiller en choisir une des notres.</not-support>
+      <not-support>Nous ne supportons pas cette notification. Veuillez en choisir une des notres.</not-support>
       <watching-successfully>Abonnement enregistré.</watching-successfully>
       <unwatching-successfully>Désabonnement enregistré.</unwatching-successfully>
       <node-iswatching>Ce document est suivi par abonnement</node-iswatching>
@@ -1916,6 +2070,9 @@
   <PathNotFoundException>
     <msg>Répertoire introuvable</msg>
   </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>Impossible d'exécuter l'action à cause d'une violation de contraintes</msg>
+  </ConstraintViolationException>
   <!--
   ###################################################################################
   # Publication Manage																														  #
@@ -2089,7 +2246,7 @@
   </UICategoriesSelector>
   <!--
   ###################################################################################
-  # Since ECM version 2.2 Need to be translated																			#
+  # Since ECM version 2.2                                                             #
   ###################################################################################
   -->
   <UIGroupMemberSelector>
@@ -2150,7 +2307,8 @@
       <isDirectlyDrive>Accès direct aux lecteurs</isDirectlyDrive>
       <driveName>Nom du lecteur</driveName>
       <usecase>Type d'accès</usecase>
-      <SelectNodePath>Select path</SelectNodePath>
+      <SelectNodePath>Sélectionner un répertoire</SelectNodePath>
+    <nodePath>Sélectionner un répertoire</nodePath>
     </label>
   </UIJcrExplorerEditForm>
   
@@ -2169,8 +2327,8 @@
     <msg>
       <not-have-social>Le type Social n'est pas disponible, le type Sélection sera utilisé.</not-have-social>
       <personal-usecase>Le lecteur privé de l'utilisateur courant sera utilisé quand vous choisissez le cas d'utilisation Personnel.</personal-usecase>
-						<drive-edit-permission>Can not edit drive name. Please, click on Edit button</drive-edit-permission>
-						<path-edit-permission>Can not edit path. Please, click on Edit button</path-edit-permission>
+						<drive-edit-permission>Impossible d'éditer le nom du lecteur. Veuillez cliquer sur le bouton d'édition</drive-edit-permission>
+						<path-edit-permission>Impossible d'éditer le chemin. Veuillez cliquer sur le bouton d'édition</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
   
@@ -2198,6 +2356,7 @@
   <UIActionBar>
     <tooltip>
       <AddSymLink>Ajouter un Raccourci</AddSymLink>
+      <AddLocalizationLink>Ajouter une Traduction</AddLocalizationLink>
 		</tooltip>
 	</UIActionBar>
 	
@@ -2242,6 +2401,7 @@
 	<ECMContextMenu>
 		<event>
 			<AddSymLink>Ajouter un Raccourci</AddSymLink>
+			<AddLocalizationLink>Ajouter une Traduction</AddLocalizationLink>
     </event>
   </ECMContextMenu>
   
@@ -2324,9 +2484,23 @@
 	  <label>
 	    <Close>#{word.close}</Close>
 	    <OK>OK</OK>
-	  </label>
+	    <ReplaceData>Remplacer les données</ReplaceData>
+	    <Back>Retour à renommer</Back>
+	    <Keepfile>Gardez les deux fichiers</Keepfile>
+    </label>
 	</UIConfirmMessage>
 	
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>OK</OK>
+	    <ReplaceData>Remplacer les données</ReplaceData>
+	    <Back>Retour à renommer</Back>
+	    <Keepfile>Gardez les deux fichiers</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+  
+  
 	<PopupComponent>
     <title>
 			<UIOneTaxonomySelector>Ajouter des catégories</UIOneTaxonomySelector>
@@ -2403,7 +2577,7 @@
   
   <UIPopupMenu>
   	<msg>
-			<can-not-unlock-node-is-checked-in>Can not unlock because node '{0}' or ancestor of '{0}' is checked-in</can-not-unlock-node-is-checked-in>
+			<can-not-unlock-node-is-checked-in>Impossible de déverouiller car le noeud '{0}' ou un ancètre de '{0}' est à l'état checked-in</can-not-unlock-node-is-checked-in>
 		</msg>
   </UIPopupMenu>
   
@@ -2412,38 +2586,39 @@
   -->
   <UIActionBar>
   	<msg>
-				<cannot-enable-version>Can not enable version node</cannot-enable-version>
+				<cannot-enable-version>Impossible d'activer le contrôle de version</cannot-enable-version>
 			</msg>
   </UIActionBar>
-  
   <UIPopupMenu>
   	<msg>
-				<cannot-readsource>Can not read data from source node</cannot-readsource>
+				<cannot-readsource>Impossible de lire des données du noeud source</cannot-readsource>
 	 	</msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>You need upload file before add category</upload-not-null>
+      <upload-not-null>Vous devez ajouter un fichier avec d'ajouter une catégorie</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must select set property for this group</allow-setProperty>
+      <allow-setProperty>Vous devez sélectionner la permission "set property" pour ce groupe</allow-setProperty>
     </msg>
   </UIActionBar>
+  
   <UIActionForm>
   	<msg>
-  		<name-not-allowed>This action name is not allowed.</name-not-allowed>
+  		<name-not-allowed>Ce nom d'action est interdit.</name-not-allowed>
   	</msg>
   </UIActionForm>
+  
   <UISaveQueryForm>
 		<msg>
-			<name-not-allowed>This query name is not allowed.</name-not-allowed>
+			<name-not-allowed>Ce nom de requête est interdit.</name-not-allowed>
 		</msg>
 	</UISaveQueryForm>
 	<UISimpleSearch>
 		<msg>
-			<name-not-allowed>A word or phrase in content is not allowed.</name-not-allowed>
+			<name-not-allowed>Un mot ou un phrase dans le contenu est interdit.</name-not-allowed>
 		</msg>
 	</UISimpleSearch>
 	<Drives>
@@ -2464,27 +2639,29 @@
 			<ValidationRequestsDocumentsCenter>Centre de Validation Des Documents Requêtes</ValidationRequestsDocumentsCenter>
 		</label>  
 	</Drives>
+
+  
 	<!-- 
  	 #############	From DMS 2.6 #############
   -->
 	<UIUploadContent>
 		<tooltip>
-			<ManageMetadata>Manage Metadata</ManageMetadata>
+			<ManageMetadata>Gérer les Métadonnées</ManageMetadata>
 		</tooltip>
 		<label>
-			<manageMetadata>Manage Metadata</manageMetadata>
+			<manageMetadata>Gérer les Métadonnées</manageMetadata>
 		</label>		
 	</UIUploadContent>
 	<UIUploadForm>
 		<action>
-			<AddUpload>Add Upload</AddUpload>
-			<RemoveUpload>Remove Upload</RemoveUpload>
+			<AddUpload>Ajouter Upload</AddUpload>
+			<RemoveUpload>Supprimer Upload</RemoveUpload>
 		</action>
 	</UIUploadForm>
 	<UIExternalMetadataForm>
 		<action>
-			<Add>Add</Add>
-			<Cancel>Cancel</Cancel>
+			<Add>Ajouter</Add>
+			<Cancel>Annuler</Cancel>
 		</action>
 	</UIExternalMetadataForm>	
 		<!-- 
@@ -2492,16 +2669,17 @@
 	 -->
   <ECMContextMenu>
 	    <event>
-	    	<Permlink>View Document</Permlink>
+	    	<Permlink>Voir Document</Permlink>
 	    </event>
   </ECMContextMenu>
   <UIUploadContainer>
   	<tab>
   		<label>
-  			<UIListMetadata>List external metadatas</UIListMetadata>
+  			<UIListMetadata>Liste des metadonnées externes</UIListMetadata>
   		</label>
   	</tab>
   </UIUploadContainer>
+  
   <!-- 
   	############  From DMS 2.6 ##############
    -->  
@@ -2511,61 +2689,48 @@
       <nt_unstructured>Répertoire de contenu</nt_unstructured>
     </label>
   </UIFolderForm>
+
   	<Comments>
 		  <tooltip>
-		    <remove-comment>Remove this comment</remove-comment>
-		    <edit-comment>Edit this comment</edit-comment>
+		    <remove-comment>Supprimer ce commentaire</remove-comment>
+		    <edit-comment>Editer ce commentaire</edit-comment>
 		  </tooltip>
 			</Comments>
 			<UIDocumentInfo>
 			  <msg>
-			    <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+			    <confirm-deletecomment>Souhaitez-vous réellement supprimer ce commentaire ?</confirm-deletecomment>
 			  </msg>
 			</UIDocumentInfo>
 		 <UIDrivesBrowser>
 		  <msg>
-		    <drive-not-exist>The drive '{0}' was not found or you don't have permission to access in this repository</drive-not-exist>
+		    <drive-not-exist>Le lecteur '{0}' est introuvable ou vous n'avez pas le droit d'accéder à ce dépôt de données</drive-not-exist>
 		  </msg>
 		 </UIDrivesBrowser>
 			 
 	 <UIExportNode>
 	  <msg>
-	    <OutOfMemoryError>You should choose SystemView when export large data</OutOfMemoryError>
+	    <OutOfMemoryError>Veuillez sélectionner la vue système pour exporter une grosse quantité de données</OutOfMemoryError>
 	  </msg>
 	 </UIExportNode>
  	 <Taxonomy>
 		<msg>
-			<AccessDeniedException>You don't have permission to access in these taxonomies</AccessDeniedException>		 	
+			<AccessDeniedException>Vous n'avez pas le droit d'accéder à ces taxonomies</AccessDeniedException>		 	
 		</msg>
 	 </Taxonomy>
+  
 	 <UIJcrExplorerEditForm>    
 		<msg>
-			<notNullDriveName>Drive Name is null or empty. Fill Drive Name, please!</notNullDriveName>
-			<notNullPath>Path is null or empty. Fill the path, please!</notNullPath>
+			<notNullDriveName>Le nom du lecteur est vide. Veuillez saisir une valeur</notNullDriveName>
+			<notNullPath>Le chemin est vide. Veuillez saisir une valeur</notNullPath>
 		</msg>
 	</UIJcrExplorerEditForm>	
- 	<RemoveAttachmentComponent>
-	  <msg>
-		  <confirm-deleteattachment>Confirmez-vous la suppression du fichier attaché?</confirm-deleteattachment>
-		</msg>
-	</RemoveAttachmentComponent>
+    
 	<UIViewSearchResult>
 	  <tooltip>
 		  <remove-attachment>Voulez-vous supprimer ce fichier de pièce jointe?</remove-attachment>
 		</tooltip>
 	</UIViewSearchResult>
-	<UIConfirmMessage>
-	  <label>
-	    <ReplaceData>Remplacer les données</ReplaceData>
-	    <Back>Retour à renommer</Back>
-	    <Keepfile>Gardez les deux fichiers</Keepfile>
-	  </label>
-	</UIConfirmMessage>
-	<UIUploadForm>
-	  <msg>
-	    <confirm-behavior>Il existe déjà un fichier portant le même nom '{0}' dans cet emplacement. Veuillez s'il vous plaît choisir l'action souhaitée sur ce fichier.</confirm-behavior>
-	  </msg>
-	</UIUploadForm>
+  
 	<SameNamePopup>
 	  <title>
 		  <UIUploadBehaviorWithSameName>Chargement de fichier</UIUploadBehaviorWithSameName>
@@ -2573,310 +2738,158 @@
 	</SameNamePopup>
 	
 	<UISingleUploadForm>
-    <title>Upload a file</title>
+    <title>Charger un fichier</title>
     <label>
-      <upload>Select a file</upload>
-      <name>Name</name>
-      <fieldListTaxonomy>List Taxonomy</fieldListTaxonomy>
+      <upload>Sélectionner un fichier</upload>
+      <name>Nom</name>
+      <fieldListTaxonomy>Liste des Taxonomies</fieldListTaxonomy>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Please make sure that you uploaded the selected file to the server using the upload icon.</fileName-error>
-      <taxonomyPath-error>Please choose the taxonomy!</taxonomyPath-error>
-      <fileName-invalid>Have some invalid characters in file name. Type file name or upload other file, please.</fileName-invalid>
-      <fileSize-too-big>File size is too big. You should split to some small files or use WebDav upload.</fileSize-too-big>
-      <name-is-exist>The name '{0}' is existing. You can not upload same name file except for 'nt:file'</name-is-exist>
-      <contraint-violation>Can't add node '{0}' to this node because it is not allowed as child's node type for parent node type</contraint-violation>
-      <lock-exception>This node is locked. Some action will be run unlikely.</lock-exception>
+      <fileName-error>Veuillez vous assurer que vous avez chargé le fichier en cliquant sur l'icône de chargement.</fileName-error>
+      <taxonomyPath-error>Veuillez choisir une taxonomie !</taxonomyPath-error>
+      <fileName-invalid>Le nom du fichier contient des caractères invalides. Veuillez changer le nom fichier avant de le charger.</fileName-invalid>
+      <fileSize-too-big>La taille du fichier est trop grande. Veuillez découper votre fichier en plusieurs parties ou utiliser l'accès webdav.</fileSize-too-big>
+      <name-is-exist>Le nom '{0}' existe déjà. Vous ne pouvez pas charger plusieurs fichiers du même nom</name-is-exist>
+      <contraint-violation>Impossible d'ajouter le noeud '{0}' car son type ne convient pas aux contraintes imposées par le noeud parent</contraint-violation>
+      <lock-exception>Ce noeud est verrouillé. Certaines actions ne marcheront pas correctement.</lock-exception>
     </msg>
   </UISingleUploadForm>
   <UISingleUploadContent>
     <label>
-      <fileName>File name</fileName>
-      <nodeName>Node name</nodeName>
-      <fileSize>File size</fileSize>
+      <fileName>Nom du fichier</fileName>
+      <nodeName>Nom du noeud</nodeName>
+      <fileSize>Taille du fichier</fileSize>
       <mimeType>Mime Type</mimeType>
     </label>
     <title>
-      <uploaded-file>Uploaded file</uploaded-file>
-      <external-metadata>External metadatas</external-metadata>
-      <metadata-name>Metadata name</metadata-name>
+      <uploaded-file>Fichier Chargé</uploaded-file>
+      <external-metadata>Metadonnées externes</external-metadata>
+      <metadata-name>Nom de la métadonnée</metadata-name>
       <action>Action</action>
     </title>
     <tooltip>
-      <Edit>Edit</Edit>
+      <Edit>Editer</Edit>
     </tooltip>
     <msg>
-      <has-not-template>Template of '{0}' is null or empty.</has-not-template>
+      <has-not-template>Le template de '{0}' est vide.</has-not-template>
     </msg>
   </UISingleUploadContent>
   <UISingleUploadContainer>
     <action>
       <Close>#{word.close}</Close>
-      <AddMetadata>Add metadata</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UIUploadContent>Information</UIUploadContent>
-        <UIAddMetadataForm>Metadata Form</UIAddMetadataForm>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <UISingleUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Add metadata</AddMetadata>
+      <AddMetadata>Ajouter une metadonnée</AddMetadata>
     </action>
     <tab>
       <label>
         <UISingleUploadContent>Information</UISingleUploadContent>
-        <UISingleAddMetadataForm>Metadata Form</UISingleAddMetadataForm>
+        <UISingleAddMetadataForm>Formulaire des Métadonnées</UISingleAddMetadataForm>
       </label>
     </tab>
   </UISingleUploadContainer>
   <UISingleExternalMetadataForm>
 		<action>
-			<Add>Add</Add>
-			<Cancel>Cancel</Cancel>
+			<Add>Ajouter</Add>
+			<Cancel>Annuler</Cancel>
 		</action>
 	</UISingleExternalMetadataForm>
 	<UISingleUploadContainer>
   	<tab>
   		<label>
-  			<UIListMetadata>List external metadatas</UIListMetadata>
+  			<UIListMetadata>Liste des métadonnées externes</UIListMetadata>
   		</label>
   	</tab>
   </UISingleUploadContainer>
   <AddMetadataPopup>
     <title>
-      <UISingleExternalMetadataForm>Add External Metadata</UISingleExternalMetadataForm>
+      <UISingleExternalMetadataForm>Ajouter des Métadonnées Externes</UISingleExternalMetadataForm>
     </title>
   </AddMetadataPopup>
   <UISingleExternalMetadataForm>
     <msg>
-      <can-not-add>This node can not add mixin.</can-not-add>
+      <can-not-add>Impossible d'ajouter un mixin à ce noeud.</can-not-add>
     </msg>
   </UISingleExternalMetadataForm>
   <UISingleAddMetadataForm>
     <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
+      <Cancel>Annuler</Cancel>
+      <Save>Sauver</Save>
     </action>
   </UISingleAddMetadataForm>
+
   <UIAllItems>
     <label>
-      <OwnedByMe>Owned by me</OwnedByMe>
-      <Favourites>Favorites</Favourites>
-      <Hidden>Hidden</Hidden>
-      <Trash>Trash</Trash>
-      <Configuration>Set up preferences</Configuration>      
+      <OwnedByMe>A moi</OwnedByMe>
+      <Favourites>Favoris</Favourites>
+      <Hidden>Caché</Hidden>
+      <Trash>Poubelle</Trash>
+      <Configuration>Configurer les préférences</Configuration>      
     </label>
     <title>
-      <allItems>All Items</allItems>
+      <allItems>Tous les éléments</allItems>
     </title>
   </UIAllItems>
-  <ECMContextMenu>
-    <event>
-      <AddToFavourite>Add to favourite</AddToFavourite>
-      <RemoveFromFavourite>Remove from favourite</RemoveFromFavourite>
-      <MoveToTrash>Move to Trash</MoveToTrash>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
-    </event>  
-  </ECMContextMenu>
-  <Views>
-    <label>
-      <timeline-view>Timeline view</timeline-view>
-    </label>
-  </Views>
-  <UIActionBar>
-    <title>
-      <ShowAllOwnedByUser>Show all my items</ShowAllOwnedByUser>
-      <ShowAllFavourite>Show all favourite items</ShowAllFavourite>
-      <ShowAllHidden>Show all hidden items</ShowAllHidden>
-      <ShowAllFromTrash>Show all items from Trash</ShowAllFromTrash>
-    </title>
-  </UIActionBar>
-  <UIShowAllOwnedByUserResult>
-    <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No result found!</empty>
-      <access-denied>You can not view this node because this template is not supported or access denied!</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
-    </msg>
-    <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date created</dateCreated>
-      <score>Score</score>
-    </header>
-    <title>
-      <typeASC>Sort by document type in ascending</typeASC>
-      <typeDESC>Sort by document type in descending</typeDESC>
-      <scoreASC>Sort by score in ascending</scoreASC>
-      <scoreDESC>Sort by score in descending</scoreDESC>
-      <nameASC>Sort by name in ascending</nameASC>
-      <nameDESC>Sort by name in descending</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
-    </title>
-    <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
-    </tooltip>
-  </UIShowAllOwnedByUserResult>    
-  <UIShowAllFavouriteResult>
-    <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No result found!</empty>
-      <access-denied>You can not view this node because this template is not supported or access denied!</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
-    </msg>
-    <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date created</dateCreated>
-      <score>Score</score>
-      <AddRemoveFavourite>Add/remove to favourite</AddRemoveFavourite>      
-    </header>
-    <title>
-      <typeASC>Sort by document type in ascending</typeASC>
-      <typeDESC>Sort by document type in descending</typeDESC>
-      <scoreASC>Sort by score in ascending</scoreASC>
-      <scoreDESC>Sort by score in descending</scoreDESC>
-      <nameASC>Sort by name in ascending</nameASC>
-      <nameDESC>Sort by name in descending</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
-    </title>
-    <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
-    </tooltip>
-  </UIShowAllFavouriteResult>
-  <UIShowAllHiddenResult>
-    <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No result found!</empty>
-      <access-denied>You can not view this node because this template is not supported or access denied!</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
-    </msg>
-    <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date created</dateCreated>
-      <score>Score</score>
-    </header>
-    <title>
-      <typeASC>Sort by document type in ascending</typeASC>
-      <typeDESC>Sort by document type in descending</typeDESC>
-      <scoreASC>Sort by score in ascending</scoreASC>
-      <scoreDESC>Sort by score in descending</scoreDESC>
-      <nameASC>Sort by name in ascending</nameASC>
-      <nameDESC>Sort by name in descending</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
-    </title>
-    <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
-      <RemoveHiddenAttribute>Remove hidden attribute</RemoveHiddenAttribute>      
-    </tooltip>
-  </UIShowAllHiddenResult>
-  <UIShowAllTrashResult>
-    <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No result found!</empty>
-      <access-denied>You can not view this node because this template is not supported or access denied!</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
-    </msg>
-    <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date created</dateCreated>
-      <score>Score</score>
-    </header>
-    <title>
-      <typeASC>Sort by document type in ascending</typeASC>
-      <typeDESC>Sort by document type in descending</typeDESC>
-      <scoreASC>Sort by score in ascending</scoreASC>
-      <scoreDESC>Sort by score in descending</scoreDESC>
-      <nameASC>Sort by name in ascending</nameASC>
-      <nameDESC>Sort by name in descending</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
-    </title>
-    <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
-      <DeletePermanently>Delete permanently</DeletePermanently>
-      <RestoreFromTrash>Restore from trash</RestoreFromTrash>      
-    </tooltip>
-  </UIShowAllTrashResult>
+  
   <UIPreferencesForm>
-  	<label>
-  	  <Alphabetic>Alphabétique</Alphabetic>
-  		<Type>Type</Type>
-  		<CreatedDate>Date de création</CreatedDate>
-  		<ModifiedDate>Date de modification</ModifiedDate>
-  		<Ascending>Ascendant</Ascending>
-  		<Descending>Descendant</Descending>
-  	</label>
+      <label>
+          <Alphabetic>Alphabétique</Alphabetic>
+          <Type>Type</Type>
+          <CreatedDate>Date de Création</CreatedDate>
+          <ModifiedDate>Date de Modification</ModifiedDate>
+          <Ascending>Ascendant</Ascending>
+          <Descending>Descendant</Descending>
+      </label>
   </UIPreferencesForm>
-  <!--
-  #########################################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
-  #########################################################################################
-  -->
-  <UIAllItemsPreferenceForm>
-    <title>Set up preferences</title>
-    <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Save>#{word.save}</Save>
-    </action>
-  </UIAllItemsPreferenceForm>  
+  
+  <UIDocumentInfo>
+    <label>
+      <Today>Aujourd'hui</Today>
+      <Yesterday>Hier</Yesterday>
+      <EarlierThisWeek>Plus tôt Cette Semaine</EarlierThisWeek>
+      <EarlierThisMonth>Plus tôt Ce mois-ci</EarlierThisMonth>
+      <EarlierThisYear>Plus tôt Cette Année</EarlierThisYear>
+    </label>
+    <header>
+      <dateTime>Date</dateTime>
+      <name>Nom</name>
+    </header>
+    <tooltip>
+      <View>Vue</View>
+      <RemoveFromFavourite>Supprimer des favoris</RemoveFromFavourite>
+      <AddToFavourite>Ajouter aux favoris</AddToFavourite>
+      <timelineFavouriteDESC>Classer par favori croissant</timelineFavouriteDESC>
+      <timelineFavouriteASC>Classer par favori décroissant</timelineFavouriteASC>
+      <timelineDateTimeASC>Classer par date de modification croissant</timelineDateTimeASC>
+      <timelineDateTimeDESC>Classer par date de modification décroissant</timelineDateTimeDESC>
+      <timelineNameASC>Classer par nom croissant</timelineNameASC>
+      <timelineNameDESC>Classer par nom décroissant</timelineNameDESC>
+    </tooltip>
+  </UIDocumentInfo> 
 		
   <UISavedSearches>
     <title>
-      <savedSearches>Requêtes Sauvegardées</savedSearches>
+      <savedSearches>Recherches Sauvées</savedSearches>
     </title>
   </UISavedSearches>  
-  <Views>
-    <label>
-      <slide-show>Slide show</slide-show>
-      <timeline-view>Timeline view</timeline-view>
-    </label>
-  </Views>
   <DocumentType>
     <label>
     	 <Images>Images</Images>
-    	 <Video>Video</Video>
-    	 <Music>Music</Music>
+    	 <Video>Vidéo</Video>
+    	 <Music>Musique</Music>
     	 <Documents>Documents</Documents>
-    	 <Contents>Contents</Contents>
+    	 <Contents>Contenus</Contents>
     </label>
   </DocumentType>
   
   <UIDocumentFilterForm>
   	<label>
     	<Images>Images</Images>
-    	<Video>Video</Video>
+    	<Video>Vidéo</Video>
     </label>
-    <title>Set up filter preferences</title>
+    <title>Configurer les filtres</title>
     <action>
   		<Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>      
@@ -2885,85 +2898,43 @@
   
   <UIAllItemsByType>
   	<label>
-  		<DocumentFilterConfiguration>Set up filter preferences</DocumentFilterConfiguration>
+  		<ByType>Filtrer Par Type</ByType>
+  		<DocumentFilterConfiguration>Configurer les filtres</DocumentFilterConfiguration>
   	</label>
    	<title>
-  	  <ShowVideo>Show all video files</ShowVideo>
-  	  <ShowMusic>Show all music files</ShowMusic>
-  	  <ShowImages>Show all image files</ShowImages>
-  	  <ShowDocuments>Show all document files</ShowDocuments>
-  	  <ShowContents>Show all contents type document</ShowContents>
+  	  <ShowVideo>Afficher les vidéos</ShowVideo>
+  	  <ShowMusic>Afficher les fichiers musicaux</ShowMusic>
+  	  <ShowImages>Afficher les images</ShowImages>
+  	  <ShowDocuments>Afficher tous les fichiers</ShowDocuments>
+  	  <ShowContents>Afficher tous types de documents</ShowContents>
   	</title> 	
   </UIAllItemsByType>
   
-	<UIDocumentInfo>
+  <Views>
     <label>
-      <Today>Today</Today>
-      <Yesterday>Yesterday</Yesterday>
-      <EarlierThisWeek>Earlier This Week</EarlierThisWeek>
-      <EarlierThisMonth>Earlier This Month</EarlierThisMonth>
-      <EarlierThisYear>Earlier This Year</EarlierThisYear>
+      <slide-show>Diaporama</slide-show>
+      <timeline-view>Chronologie</timeline-view>
     </label>
-    <header>
-      <dateTime>Date time</dateTime>
-      <name>Name</name>
-    </header>   
-    <tooltip>
-      <View>View</View>
-      <RemoveFromFavourite>Remove from favourite</RemoveFromFavourite>
-      <AddToFavourite>Add to favourite</AddToFavourite>
-      <timelineFavouriteDESC>Sort by favourite in descending order</timelineFavouriteDESC>
-      <timelineFavouriteASC>Sort by favourite in ascending order</timelineFavouriteASC>
-      <timelineDateTimeASC>Sort by modified time in ascending order</timelineDateTimeASC>
-      <timelineDateTimeDESC>Sort by modified time in descending order</timelineDateTimeDESC>
-      <timelineNameASC>Sort by name in ascending order</timelineNameASC>
-      <timelineNameDESC>Sort by name in descending order</timelineNameDESC>
-    </tooltip>    
-  </UIDocumentInfo>  
+  </Views>  
   <ECMContextMenu>
     <event>
-      <PlayMedia>Play media</PlayMedia>
+      <PlayMedia>Jouer le fichier</PlayMedia>
      </event>
   </ECMContextMenu> 
-  <UIPreferencesForm>
-    <label>
-      <showItemsByUserInTimeline>Show items by user in Timeline View</showItemsByUserInTimeline>
-      <enableDragAndDrop>Enable drag &amp; drop</enableDragAndDrop>      
-    </label>
-  </UIPreferencesForm>
-  
   <UIPopupWindow>
     <title>
-      <UIRestoreConfirmMessage>Confirm restore</UIRestoreConfirmMessage>
+      <UIDocumentFilterForm>Filtrer les types de documents</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
 
-  <UIRestoreConfirmMessage>
-    <label>
-      <Close>#{word.close}</Close>
-      <OK>OK</OK>
-      <ReplaceData>Replace data</ReplaceData>
-      <Back>Back to rename</Back>
-      <Keepfile>Keep both files</Keepfile>
-    </label>
-  </UIRestoreConfirmMessage>
-
-  <UIWorkingArea>
-    <msg>
-      <confirm-restore>A node with the same name also exists in node '{0}' 's old location. Are you sure want to restore this node?</confirm-restore>
-      <confirm-delete-permanently>Are you sure want to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>
-      <confirm-delete-permanently-multi>Are you sure want to move these {0} items permanently?</confirm-delete-permanently-multi>
-    </msg>
-  </UIWorkingArea>
-  
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Owned by me</showOwnedByUser>
-      <showFavourites>Favorites</showFavourites>
-      <showHiddens>Hidden</showHiddens>
-      <showTrash>Trash</showTrash>
+      <OwnedByMe>A moi</OwnedByMe>
+      <Favourites>Favoris</Favourites>
+      <Hidden>Caché</Hidden>
+      <Trash>Poubelle</Trash>
     </label>
-    <title>Set up filter preferences</title>
+    <title>Configurer les filtres</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>      
@@ -2972,77 +2943,73 @@
   
    <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Empty all items from trash?</confirm-delete>
+      <confirm-delete>Vider la poubelle ?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>  
-
-  <ECMContextMenu>
-    <event>
-      <EmptyTrash>Empty trash</EmptyTrash>
-    </event>
-  </ECMContextMenu>    
   <UICategoryForm>
 	  <label>
-	  	<name>Category Name</name>
+	  	<name>Nom de la catégorie</name>
 	  </label>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>      
+      <Save>Sauver</Save>
+      <Cancel>Annuler</Cancel>      
     </action>
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add category</UICategoryForm>
+      <UICategoryForm>Ajouter une catégorie</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add category</AddCategory>
+      <AddCategory>Ajouter une catégorie</AddCategory>
     </tooltip>
 	 </UIActionBar>
 	 
    <UITaggingForm>
     <label>
       <Public>Public</Public>
-      <Group>Group</Group>
+      <Group>Groupe</Group>
       <Site>Site</Site>
-      <Private>Private</Private>
-      <tagScopes>Tag Scopes</tagScopes>      
+      <Private>Privé</Private>
+      <tagScopes>Portées du Tag</tagScopes>      
     </label>
    </UITaggingForm>
 
 
+   
    <UITagExplorer>
     <title>
-      <EditPrivateTags>Edit private tags</EditPrivateTags>
-      <PublicTags>Public tags</PublicTags>
-      <EditPublicTags>Edit public tags</EditPublicTags>
-      <PrivateTags>Private tags</PrivateTags>
+      <EditPrivateTags>Editer les tags privés</EditPrivateTags>
+      <PublicTags>Tags publics</PublicTags>
+      <EditPublicTags>Editer les tags publics</EditPublicTags>
+      <PrivateTags>Tags privés</PrivateTags>
      </title>
    </UITagExplorer>
    
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
-      <relatedDocuments>Related documents</relatedDocuments>
+      <name>Nom</name>
+      <relatedDocuments>Documents relatifs</relatedDocuments>
       <action>Action</action>
     </header>
   
   <action>
     <title>
-      <EditTag>Edit tag</EditTag>
-      <RemoveTag>Remove tag</RemoveTag>
-      <AddTag>Add tag</AddTag>
+      <EditTag>Editer le tag</EditTag>
+      <RemoveTag>Supprimer le tag</RemoveTag>
+      <AddTag>Ajouter le tag</AddTag>
     </title>
   </action>
     <msg>
-      <confirm-remove>Are you sure want to delete?</confirm-remove>
+      <confirm-remove>Etes-vous sûr de vouloir supprimer?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
   
+  
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edit tag form</UIEditingTagsForm>
+      <UIEditingTagsForm>Edition du tag</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -3052,74 +3019,70 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <tagName>Tag name</tagName>
-      <relatedDocuments>Related documents</relatedDocuments>
+      <tagName>Nom du tag</tagName>
+      <relatedDocuments>Documents relatifs</relatedDocuments>
     </label>
-    
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Tag form</UITagForm>
+      <UITagForm>Edition du tag</UITagForm>
     </title>
   </TagPopup>
 
 		<UIPopupMenu>
   	<msg>
-  		<node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>	
+  		<node-locked-editing>Le noeud {0} est verouillé par un autre utilisateur !</node-locked-editing>	
     </msg>
   </UIPopupMenu>  
   <UITagStyleForm>
     <msg>
-      <error-update>Error when updating</error-update>
+      <error-update>Erreur lors de la mise à jour</error-update>
     </msg>
   </UITagStyleForm>
   
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Access denied!</editTagAccessDenied>
+      <editTagAccessDenied>Accès refusé !</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
   
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>Gestionnaire de Tags</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
 		<PopupComponent>
     <title>
-      <UINodeTypeSelector>Select node type</UINodeTypeSelector>
+      <UINodeTypeSelector>Sélectionner un type de noeud</UINodeTypeSelector>
     </title>
   </PopupComponent>
 		
-		<PopupComponent>
-    <title>
-      <UINodeTypeSelector>Select node type</UINodeTypeSelector>
-    </title>
-  </PopupComponent>      
 		<UIActionForm>
   	<title>
-  		<ShowComponent>Show component</ShowComponent>
-  		<removeReference>Remove</removeReference>
+  		<ShowComponent>Afficher le composant</ShowComponent>
+  		<removeReference>Supprimer</removeReference>
   	</title>
   </UIActionForm>		 
+    
 		<EditFormAction>
   	<title>
-  		<ShowComponent>Show component</ShowComponent>
-  		<removeReference>Remove</removeReference>
+  		<ShowComponent>Afficher le composant</ShowComponent>
+  		<removeReference>Supprimer</removeReference>
   	</title>
   </EditFormAction>
+    
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Type another value, please!</Invalid-char>
-      <empty-input>The value of field is null or empty!</empty-input>
+      <Invalid-char>Il existe des caractères invalides dans la saisie. Veuillez saisir une autre valeur</Invalid-char>
+      <empty-input>La valeur du champ est vide</empty-input>
     </msg>
   </NodeTypeNameValidator>
   
   <UIPreferencesForm>
   		<label>
-						<queryType>Query Type</queryType>
+						<queryType>Type de Requête</queryType>
 						<SQL>SQL</SQL>
 						<XPATH>XPATH</XPATH>  			
   		</label>
@@ -3127,69 +3090,65 @@
   
   <UIDocumentInfo>
     <msg>
-      <repository-error>Error, information about repository lost!</repository-error>
+      <repository-error>Erreur, l'information concernant le dépôt de données est perdue</repository-error>
     </msg>
   </UIDocumentInfo>
   
   <UITreeExplorer>
     <msg>
-      <repository-error>Error, information about repository lost!</repository-error>
+      <repository-error>Erreur, l'information concernant le dépôt de données est perdue</repository-error>
     </msg>
   </UITreeExplorer>  
   <UIDocumentForm>
   	<msg>
-  		<constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
+  		<constraintviolation-exception>Impossible de sauver le document. Les données saisies sont invalides ou vides</constraintviolation-exception>
   	</msg>
   </UIDocumentForm>
   <UIActionForm>
   	<msg>
-  		<constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
+  		<constraintviolation-exception>Impossible de sauver le document. Les données saisies sont invalides ou vides</constraintviolation-exception>
   	</msg>
   </UIActionForm>
-  <UIJcrExplorerEditForm>
-    <label>
-	  <nodePath>Select path</nodePath>
-    </label>
-  </UIJcrExplorerEditForm>
+  
    	  <UISelectRestorePath>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Sauver</Save>
+      <Cancel>Annuler</Cancel>
     </action>
     <label>
-      <formInput>Old path lost, please choose new one!</formInput>
+      <formInput>Ancien chemin perdu, veuillez en choisir un autre</formInput>
     </label>
   </UISelectRestorePath>         
   <PathNode>
     <title>
-      <Add>Add</Add>
+      <Add>Ajouter</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Choisir le noeud parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add root node</AddRootNode>
+      <AddRootNode>Ajouter le noeud racine</AddRootNode>
     </title>
   </rootNodeInfo>
   
   <UIPopupWindow>
     <title>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
+      <UISelectRestorePath>Choisir le répertoire de restauration</UISelectRestorePath>
     </title>
   </UIPopupWindow>
   <UIActionForm>
     <msg>
-      <homePath-emty>The Home path is empty</homePath-emty>
-      <targetPath-emty>The target path is empty</targetPath-emty>
+      <homePath-emty>Le chemin d'accueil est vide</homePath-emty>
+      <targetPath-emty>Le chemin cible est vide</targetPath-emty>
     </msg>
 		</UIActionForm>
 		<UIActionBar>
 				<msg>
-				  <not-exist-categories>There isn't any category</not-exist-categories>
+				  <not-exist-categories>Il n'y a pas de catégories</not-exist-categories>
 				</msg>
 		</UIActionBar> 	
 		
@@ -3266,12 +3225,4 @@
       <UIPublishingPanel>Gérer la publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
-  <WCMContentView>
-    <header>
-      <status>L'état</status>
-      <author>L'auteur</author>
-      <date>La date de création</date>
-      <title>Le titre du document</title>
-    </header>
-  </WCMContentView>
 </bundle>

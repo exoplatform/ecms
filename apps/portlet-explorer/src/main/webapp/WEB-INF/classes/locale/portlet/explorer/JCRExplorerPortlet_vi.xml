@@ -2881,6 +2881,7 @@
   
   <UIAllItemsByType>
   	<label>
+  		<ByType>Lọc Theo Kiểu</ByType>
   		<DocumentFilterConfiguration>Chọn thiết lập hiển thị</DocumentFilterConfiguration>
   	</label>
   	<title>

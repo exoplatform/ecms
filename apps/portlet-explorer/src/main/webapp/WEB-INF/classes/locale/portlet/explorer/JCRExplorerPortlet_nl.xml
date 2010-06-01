@@ -2988,6 +2988,7 @@
   
   <UIAllItemsByType>
   	<label>
+  		<ByType>Filter By Type</ByType>
   		<DocumentFilterConfiguration>Set up filter preferences</DocumentFilterConfiguration>
   	</label>
   	<title>
