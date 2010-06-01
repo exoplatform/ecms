@@ -375,4 +375,28 @@
 		<wcm-view>WCM content View</wcm-view>
 	</label>
   </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Personal drives</PersonalDrives>
+      <GeneralDrives>General drives</GeneralDrives>
+      <GroupDrives>Group drives</GroupDrives>
+      <Private>Private</Private>
+      <Public>Public</Public>
+      <BackupCenter>Backup Center</BackupCenter>
+      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
+      <CollaborationCenter>Collaboration Center</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS Administration</DMSAdministration>
+      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
+      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
+      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
+      <Systemfiles>System files</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Sites Management</ManagedSites>
+      <SharedSite>Shared Site</SharedSite>
+    </title>
+  </ContentSelector>
 </bundle>

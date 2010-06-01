@@ -376,4 +376,28 @@
 		<wcm-view>Theo nội dung</wcm-view>
 	</label>
   </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <GeneralDrives>Các ổ đĩa chung.</GeneralDrives>
+      <GroupDrives>Các ổ đĩa của nhóm.</GroupDrives>
+      <PersonalDrives>Các ổ đĩa cá nhân.</PersonalDrives>
+      <Private>Cá nhân</Private>
+      <Public>Công khai</Public>
+      <BackupCenter>Ổ đĩa sao lưu</BackupCenter>
+      <CategorizedDocumentsCenter>Tài liệu phân loại</CategorizedDocumentsCenter>
+      <CollaborationCenter>Cộng tác</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Quản lý dữ liệu kỹ thuật số</DigitalAssetsManagementCenter>
+      <DMSAdministration>Quản lý DMS</DMSAdministration>
+      <DocumentsManagementCenter>Ổ đĩa quản lý tài liệu</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Ổ đĩa chứa tài liệu có hiệu lực</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Ổ đĩa chứa tài liệu chưa xử lý</PendingDocumentsCenter>
+      <RecordsManagementCenter>Ổ đĩa quản lý hồ sơ</RecordsManagementCenter>
+      <SharedUsersSpace>Ổ đĩa chia sẻ cho người dùng</SharedUsersSpace>
+      <Systemfiles>Ổ đĩa chứa tệp hệ thống</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Ổ đĩa chứa tài liệu yêu cầu phê duyệt</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Quản trị các trang</ManagedSites>
+      <SharedSite>Tài nguyên chung</SharedSite>
+    </title>
+  </ContentSelector>
 </bundle>

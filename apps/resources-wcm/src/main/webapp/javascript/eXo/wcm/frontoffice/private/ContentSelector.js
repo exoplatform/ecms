@@ -98,7 +98,7 @@ EcmContentSelector.prototype.initRequestXmlTree = function(typeObj){
 	}
 	eXo.ecm.ECS.isShowFilter();
 	var ECS = eXo.ecm.ECS;
-	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver;
+	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver + "lang=" + ECS.userLanguage;
 	var url = ECS.hostName+ECS.connector+ command ;
 	eXo.ecm.ECS.ajaxRequest(url);
 };
@@ -205,7 +205,7 @@ EcmContentSelector.prototype.listRootFolder = function(rootNode) {
 	var nodeName = rootNode.getAttribute("name");
 	var nodeOnBreadcrumb = document.getElementById(rootNode.getAttribute("id"));
 	var ECS = eXo.ecm.ECS;
-	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver;
+	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver + "lang=" + ECS.userLanguage;
 	var url = ECS.hostName+ECS.connector+ command;
 	var xmlTreeNodes = eXo.ecm.WCMUtils.request(url);
 	var nodeList = xmlTreeNodes.getElementsByTagName("Folders");

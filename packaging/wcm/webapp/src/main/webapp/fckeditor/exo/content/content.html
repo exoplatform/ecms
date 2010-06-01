@@ -387,7 +387,8 @@ var eXp = {
 	}
 
 	function requestInit() {
-		var connector = eXoPlugin.hostName + eXp.connector+ eXp.command.init+"&currentPortal="+eXoPlugin.portalName;
+		var strConnector = eXp.connector.substr(0, eXp.connector.indexOf("?")+1);
+		var connector = eXoPlugin.hostName + strConnector+"lang="+eXoPlugin.userLanguage;
 		eXp.sendRequest(connector);
 	}
 

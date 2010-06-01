@@ -374,4 +374,28 @@
 		<wcm-view>Voir le contenu</wcm-view>
 	</label>
   </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <GeneralDrives>Lecteurs principaux</GeneralDrives>
+      <GroupDrives>Lecteurs vos groupes</GroupDrives>
+      <PersonalDrives>Lecteurs personnels</PersonalDrives>
+      <Private>Privé</Private>
+      <Public>Public</Public>
+      <BackupCenter>Centre de Sauvegarde</BackupCenter>
+      <CategorizedDocumentsCenter>Centre des documents catégorisés</CategorizedDocumentsCenter>
+      <CollaborationCenter>Centre de Collaboration</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Centre de gestion de Matériels Digitales</DigitalAssetsManagementCenter>
+      <DMSAdministration>Administrateur de DMS</DMSAdministration>
+      <DocumentsManagementCenter>Centre de gestion des Documents</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Centre des Documents publiés</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Centre des Documents en attente</PendingDocumentsCenter>
+      <RecordsManagementCenter>Centre de gestion des enregistrements</RecordsManagementCenter>
+      <SharedUsersSpace>Espace partagé des utilisateurs</SharedUsersSpace>
+      <Systemfiles>Fichiers système</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Centre des Documents en attente de validation</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Gestion des Sites</ManagedSites>
+      <SharedSite>Site Partagé</SharedSite>   
+    </title>
+   </ContentSelector>
 </bundle>

@@ -23,6 +23,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -60,6 +63,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -105,6 +109,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   
   private OrganizationService organizationService; 
   
+  private ResourceBundleService resourceBundleService;
+  
+  private String resourceBundleNames[];
+  
   /**
    * Instantiates a new driver connector.
    * 
@@ -115,6 +123,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
     manager = PortalContainer.getInstance() ;
     organizationService = WCMCoreUtils.getService(OrganizationService.class);
+    resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    resourceBundleNames = resourceBundleService.getSharedResourceBundleNames();
   }
 	
   /**
@@ -130,7 +140,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/getDrivers/")
-  public Response getDrivers()throws Exception {    
+  public Response getDrivers(@QueryParam("lang") String lang) throws Exception {    
     String repositoryName = WCMCoreUtils.getRepository(null).getConfiguration().getName();
     ConversationState conversationState = ConversationState.getCurrent();
     String userId = conversationState.getIdentity().getUserId();
@@ -143,9 +153,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     document.appendChild(rootElement);
 
     rootElement.setAttribute("isUpload", "false");
-    rootElement.appendChild(appendDrivers(document, generalDrivers(listDriver), "General Drives"));
-    rootElement.appendChild(appendDrivers(document, groupDrivers(listDriver, userId), "Group Drives"));
-    rootElement.appendChild(appendDrivers(document, personalDrivers(listDriver, userId), "Personal Drives"));
+    rootElement.appendChild(appendDrivers(document, generalDrivers(listDriver), "General Drives", lang));
+    rootElement.appendChild(appendDrivers(document, groupDrivers(listDriver, userId), "Group Drives", lang));
+    rootElement.appendChild(appendDrivers(document, personalDrivers(listDriver, userId), "Personal Drives", lang));
     
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
@@ -199,7 +209,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       return buildXMLResponseForChildren(node, null, repositoryName, filterBy, session, currentPortal);
 
     } catch (Exception e) {
-      log.error("Error when perform getFoldersAndFiles: ", e.fillInStackTrace());
+      log.error("Error when perform getFoldersAndFiles: ", e);
     }    
     return Response.ok().build();
   }
@@ -283,7 +293,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       return createProcessUploadResponse(repositoryName, workspaceName, currentFolderNode, siteName, userId, jcrPath,
           action, language, fileName, uploadId);  
     } catch (Exception e) {
-      log.error("Error when perform processUpload: ", e.fillInStackTrace());
+      log.error("Error when perform processUpload: ", e);
     }
     return Response.ok().build();
   }
@@ -358,19 +368,18 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 	 * 
 	 * @return the element
 	 */
-	private Element appendDrivers(Document document, List<DriveData> driversList, String groupName) throws Exception {
+	private Element appendDrivers(Document document, List<DriveData> driversList, String groupName, String lang) throws Exception {
 	  Element folders = document.createElement("Folders");
-	  folders.setAttribute("name", groupName);
+	  folders.setAttribute("name", resolveDriveLabel(groupName, lang));
 	  folders.setAttribute("isUpload", "false");
       for (DriveData driver : driversList) {      
         String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
         String workspace  = driver.getWorkspace();
         String path = driver.getHomePath();
         Element folder = document.createElement("Folder");
-
-        NodeLocation nodeLocation = new NodeLocation(repository, workspace, path);
+        NodeLocation nodeLocation = new NodeLocation(repository, workspace, path);  
         Node driverNode = NodeLocation.getNodeByLocation(nodeLocation);
-        folder.setAttribute("name", driver.getName());
+        folder.setAttribute("name", resolveDriveLabel(driver.getName(), lang));
         folder.setAttribute("url", FCKUtils.createWebdavURL(driverNode));
         folder.setAttribute("folderType", "exo:drive");
         folder.setAttribute("path", path);
@@ -382,6 +391,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 	  return folders;
   }
   
+	private String resolveDriveLabel(String name, String lang) {
+	  for (String resourceBundleName : resourceBundleNames) {
+	    try {
+	      ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(lang));
+	      return resourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
+      } catch (MissingResourceException e) {}
+	  }
+	  return name;
+	}
+	
   /**
    * Personal drivers.
    * 
@@ -395,9 +414,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     	ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
     String userPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
     for(DriveData drive : driveList) {
-      String driveHomePath = drive.getHomePath();
-      if(driveHomePath.startsWith(userPath + "/${userId}/")) {
-    	drive.setHomePath(StringUtils.replaceOnce(driveHomePath, "${userId}", userId));
+      String driveHomePath = StringUtils.replaceOnce(drive.getHomePath(), "${userId}", userId);
+      if(driveHomePath.startsWith(userPath + "/" + userId)) {
+        drive.setHomePath(driveHomePath);
         personalDrivers.add(drive);
       }
     }
