@@ -3200,6 +3200,7 @@
       <approved>Approved</approved>
       <inreview>In Review</inreview>
       <staged>Staged</staged>
+      <published>Published</published>
       <live>Published</live>
     </status>
     <scheduled>

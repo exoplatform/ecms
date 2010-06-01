@@ -3180,6 +3180,7 @@
       <approved>Validé</approved>
       <inreview>En revue</inreview>
       <staged>Prêt à publier</staged>
+      <published>Publié</published>
       <live>Publié</live>
     </status>
     <scheduled>
