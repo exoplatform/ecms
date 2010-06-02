@@ -261,19 +261,24 @@ ZeroClipboard.Client.prototype = {
 				this.movie.setText( this.clipText );
 				this.movie.setHandCursor( this.handCursorEnabled );
 				break;
-			
 			case 'mouseover':
-  			break;
+				var item = document.getElementById(this.domElement.id);
+				item.className = 'ItemSelected';
+			break;
 			
 			case 'mouseout':
+				var item = document.getElementById(this.domElement.id);
+				item.className = 'MenuItem';
   			break;
 			
 			case 'mousedown':
 				break;
-			
+
 			case 'mouseup':
 				this.movie.setText(this.clipText);
-	  		eXo.ecm.ECMUtils.closeContextMenu(this.domElement);
+				var item = document.getElementById(this.domElement.id);
+				item.className = 'MenuItem';
+	  			eXo.ecm.ECMUtils.closeContextMenu(this.domElement);
 		  	break;
 		} // switch eventName
 		
