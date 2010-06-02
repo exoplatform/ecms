@@ -60,7 +60,7 @@ public class ChangeStateCronJobImpl implements Job {
     try {
       RuntimeMXBean mx = ManagementFactory.getRuntimeMXBean();
       if (mx.getUptime()>120000) {
-    	  if (log.isInfoEnabled()) log.info("Start Execute ChangeStateCronJob");
+    	  if (log.isDebugEnabled()) log.debug("Start Execute ChangeStateCronJob");
     	  if (fromState == null) {
     		  
     		  JobDataMap jdatamap = context.getJobDetail().getJobDataMap();
@@ -73,7 +73,7 @@ public class ChangeStateCronJobImpl implements Job {
     		  workspace = pathTab[1];
     		  contentPath = pathTab[2];
     	  }
-    	  if (log.isInfoEnabled()) log.info("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
+    	  if (log.isDebugEnabled()) log.debug("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
     			  + toState);
     	  SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     	  String containerName = context.getJobDetail().getGroup().split(":")[0];
@@ -82,7 +82,7 @@ public class ChangeStateCronJobImpl implements Job {
     	  PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
     	  ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
     	  if (manageableRepository == null) {
-    		  if (log.isInfoEnabled()) log.info("Repository '" + repository + "' not found., ignoring");
+    		  if (log.isDebugEnabled()) log.debug("Repository '" + repository + "' not found., ignoring");
     		  return;
     	  }
     	  session = sessionProvider.getSession(workspace, manageableRepository);
@@ -112,7 +112,7 @@ public class ChangeStateCronJobImpl implements Job {
     		  
     		  if (numberOfItemsToChange > 0) {
     			  
-    			  if (log.isInfoEnabled()) log.info(numberOfItemsToChange + " '" + fromState + "' candidates for state '" + toState
+    			  if (log.isDebugEnabled()) log.debug(numberOfItemsToChange + " '" + fromState + "' candidates for state '" + toState
     					  + "' found in " + predefinedPath);
     			  PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
     			  .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
@@ -157,7 +157,7 @@ public class ChangeStateCronJobImpl implements Job {
     			  if (log.isInfoEnabled()) log.info("no '" + fromState + "' content found in " + predefinedPath);
     		  }
     	  }
-    	  if (log.isInfoEnabled()) log.info("End Execute ChangeStateCronJob");
+    	  if (log.isDebugEnabled()) log.debug("End Execute ChangeStateCronJob");
       }
       
     } catch (RepositoryException ex) {
