@@ -123,8 +123,25 @@ td {
   float:left;
 }
 
+.UIToolbarContainer .StarToolBarPortletTDContainer {
+	z-index: 10;
+	position: relative;
+}
+
 .UIToolbarContainer .UserToolBarGroupPortletTDContainer {
 	z-index: 10;
+	position: relative;
+}
+
+.UIToolbarContainer .UserToolBarDashboardPortletTDContainer  {
+	z-index: 10;
+	position: relative;
+}
+
+
+.UIToolbarContainer .AdminToolBarPortletTDContainer {
+	z-index: 10;
+	position: relative;
 }
 
 .UICategoryForm .UIForm .HorizontalLayout .UIFormInputSet {
