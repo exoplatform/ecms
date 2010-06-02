@@ -404,7 +404,11 @@ public class UIJCRExplorer extends UIContainer {
   }
 
   public void refreshExplorer() throws Exception {
-    refreshExplorer(null);
+    refreshExplorer(null, true);
+  }
+  
+  public void refreshExplorerWithoutClosingPopup() throws Exception {
+    refreshExplorer(null, false);
   }
   
   public void setPathToAddressBar(String path) throws Exception {
@@ -412,7 +416,11 @@ public class UIJCRExplorer extends UIContainer {
                                           UIAddressBar.FIELD_ADDRESS).setValue(filterPath(path)) ;
   } 
   
-  private void refreshExplorer(Node currentNode) throws Exception { 
+  private void refreshExplorer(Node currentNode) throws Exception {
+    refreshExplorer(currentNode, true);
+  }
+  
+  private void refreshExplorer(Node currentNode, boolean closePopup) throws Exception { 
     try {
       Node nodeGet = currentNode == null ? getCurrentNode() : currentNode;
       if(nodeGet.hasProperty(Utils.EXO_LANGUAGE)) {
@@ -445,8 +453,10 @@ public class UIJCRExplorer extends UIContainer {
       UITreeExplorer treeExplorer = findFirstComponentOfType(UITreeExplorer.class);
       treeExplorer.buildTree();
     }
-//    UIPopupContainer popupAction = getChild(UIPopupContainer.class);
-//    popupAction.deActivate();
+    if (closePopup) {
+      UIPopupContainer popupAction = getChild(UIPopupContainer.class);
+      popupAction.deActivate();
+    }
   }
 
   public boolean nodeIsLocked(String path, Session session) throws Exception {

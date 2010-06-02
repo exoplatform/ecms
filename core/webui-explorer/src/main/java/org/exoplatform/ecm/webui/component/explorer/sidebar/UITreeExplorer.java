@@ -153,7 +153,7 @@ public class UITreeExplorer extends UIContainer {
       uiExplorer.getSession().getItem(node.getPath());
       return getAncestorOfType(UIWorkingArea.class).getActionsExtensionList(node) ;
     } catch(PathNotFoundException pne) {
-      uiExplorer.refreshExplorer();
+      uiExplorer.refreshExplorerWithoutClosingPopup();
       return "";
     }
   }
