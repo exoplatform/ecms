@@ -844,7 +844,7 @@
     <label>
       <upload>Sélectionner un fichier</upload>
       <name>Nom</name>
-      <fieldTaxonomy>Ajouter une taxonomie</fieldTaxonomy>
+      <fieldListTaxonomy>Ajouter une taxonomie</fieldListTaxonomy>
     </label>
     <action>
       <Save>#{word.save}</Save>
