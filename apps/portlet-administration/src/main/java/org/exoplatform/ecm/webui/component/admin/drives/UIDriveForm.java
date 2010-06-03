@@ -121,7 +121,10 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         permissionsList = Arrays.asList(permissionsArray);
         if ((permissionsList != null) && (permissionsList.size() > 0)) {
           for (String permission : permissionsList) {
-            newsPermissions += permission.trim() + ",";  
+            if (newsPermissions.length() > 0)
+              newsPermissions += permission.trim() + ",";
+            else
+              newsPermissions += permission.trim();
           }
           if (!permissionsList.contains(membership)) {
             newsPermissions += membership.trim();
