@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.jcr.AccessDeniedException;
@@ -76,18 +77,27 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
     if (foldertypes.contains(",")) {
       addUIFormInput(new UIFormSelectBox(FIELD_TYPE, FIELD_TYPE, null));
       String[] arrFoldertypes = foldertypes.split(",");
+      String label = "";
       for (String foldertype : arrFoldertypes) {
-        options.add(new SelectItemOption<String>(res.getString(getId() + ".label." + foldertype.replace(":", "_")),  foldertype));
+        try {
+          label = res.getString(getId() + ".label." + foldertype.replace(":", "_"));
+        } catch(MissingResourceException e) {
+          label = foldertype;
+        }
+        options.add(new SelectItemOption<String>(label,  foldertype));
       }
       Collections.sort(options, new ItemOptionNameComparator());
       getUIFormSelectBox(FIELD_TYPE).setOptions(options);
     } else {
       allowCreateFolder_ = foldertypes;
     }
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null
-        ).addValidator(MandatoryValidator.class).addValidator(IllegalDMSCharValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
+        addValidator(MandatoryValidator.class).
+        addValidator(IllegalDMSCharValidator.class));
     setActions(new String[]{"Save", "Cancel"}) ;
     getUIStringInput(FIELD_NAME).setValue(null) ;
+    //TODO: This block code was hardcoded for nt:folder type. Impossible to do like that. 
+    //Because may have a lot of folders type has super type is nt:folder and it must be exist in list options
     if (getUIFormSelectBox(FIELD_TYPE) != null) {
       if (uiExplorer.getCurrentNode().isNodeType(Utils.NT_FOLDER)) {
         if (getAncestorOfType(UIJCRExplorer.class).getCurrentNode().isNodeType(Utils.NT_FOLDER)) {
