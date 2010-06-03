@@ -46,6 +46,14 @@ eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
 } ;
 
 /*****************************************************************************************/
+
+function getUrlParam(paramName) {
+	var oRegex = new RegExp("[\?&]" + paramName + "=([^&]+)", "i");
+	var oMatch = oRegex.exec(window.location.search) ; 
+	if (oMatch && oMatch.length > 1) return oMatch[1];
+	else return "";
+}
+
 /*
 * This is the main entry method for every Ajax calls to the eXo Portal
 *
@@ -56,7 +64,8 @@ eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
 */
 function ajaxGet(url, callback) {
   if (!callback) callback = null ;
-  url += "&" + location.search.substring(1);
+	var path = getUrlParam("path");
+	if(path) url += "&path="+path;
   doRequest("Get", url, null, callback) ;
 } ;
 
@@ -70,6 +79,8 @@ function ajaxPost(formElement, callback) {
   if (!callback) callback = null ;
   var queryString = eXo.webui.UIForm.serializeForm(formElement) ;
   var url = formElement.action + "&ajaxRequest=true" ;
-  url += "&" + location.search.substring(1);
+  //url += "&" + location.search.substring(1);
+	var path = getUrlParam("path");
+	if(path) url += "&path="+path;
   doRequest("POST", url, queryString, callback) ;
 } ;
