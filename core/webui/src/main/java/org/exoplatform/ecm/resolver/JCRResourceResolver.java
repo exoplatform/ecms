@@ -77,6 +77,7 @@ public class JCRResourceResolver extends ResourceResolver {
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
     Session session = provider.getSession(workspace,manageableRepository);
     Node node = (Node)session.getItem(removeScheme(url)) ;
+    session.logout();
     return new ByteArrayInputStream(node.getProperty(propertyName).getString().getBytes()) ;
   }
 
