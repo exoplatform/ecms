@@ -55,6 +55,8 @@ public class WCMServiceImpl implements WCMService {
 		  } catch(Exception exception) {
 		    content = null;
 		  }
+		} finally {
+		  if(session != null) session.logout();
 		}
 		return content;
 	}
