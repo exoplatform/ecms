@@ -268,6 +268,7 @@ public class XSkinService implements Startable {
     		buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
     	}  		
   	}
+  	session.logout();
     return buffer.toString();     
   }  
 
