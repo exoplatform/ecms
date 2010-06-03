@@ -504,5 +504,30 @@
 			</preference>
 		</portlet-preferences>
 	</portlet>
+
+   <portlet>
+      <description xml:lang="EN">Administration Toolbar Portlet</description>
+      <portlet-name>WCMAdminToolbarPortlet</portlet-name>
+      <display-name xml:lang="EN">WCM Administration Toolbar Portlet</display-name>
+      <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+
+      <init-param>
+         <name>webui.configuration</name>
+         <value>/WEB-INF/conf/portlet/Toolbar/webui/configuration.xml</value>
+      </init-param>
+
+      <expiration-cache>0</expiration-cache>
+      <supports>
+         <mime-type>text/html</mime-type>
+         <portlet-mode>help</portlet-mode>
+      </supports>
+      <supported-locale>en,fr,vi,ar</supported-locale>
+      <resource-bundle>locale.portlet.Toolbar.AdminToolbarPortlet</resource-bundle>
+      <portlet-info>
+         <title>WCM Administration Toolbar Portlet</title>
+         <short-title>WCM Administration Toolbar</short-title>
+         <keywords>gatein_internal</keywords>
+      </portlet-info>
+   </portlet>
 	
 </portlet-app>
