@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.admin.drives;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.MissingResourceException;
@@ -85,6 +86,8 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
   final static public String POPUP_NODETYPE_SELECTOR = "PopupNodeTypeSelector";
   private String membershipString = "";
   private String nodeTypes = "";
+  
+  final static public String ANY_PERMISSION = "*";
 
   public UIDriveForm() throws Exception {
     super("UIDriveForm");
@@ -110,14 +113,24 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     UIFormStringInput uiStringInput = getUIStringInput(selectField);
     if (selectField.equals(UIDriveInputSet.FIELD_PERMISSION)){
       String membership = value.toString(); 
-      String valuePermissions = uiStringInput.getValue(); 
-      if ((membership != null) && (valuePermissions.indexOf(membership) < 0)){
-        if (valuePermissions.length() > 0)
-          valuePermissions += "," + membership;
-        else
-          valuePermissions += membership;
-      }        
-      uiStringInput.setValue(valuePermissions);
+      String valuePermissions = uiStringInput.getValue();
+      List<String> permissionsList = new ArrayList<String>();
+      String newsPermissions="";      
+      if(valuePermissions != null) {
+        String[] permissionsArray = valuePermissions.split(","); 
+        permissionsList = Arrays.asList(permissionsArray);
+        if ((permissionsList != null) && (permissionsList.size() > 0)) {
+          for (String permission : permissionsList) {
+            newsPermissions += permission.trim() + ",";  
+          }
+          if (!permissionsList.contains(membership)) {
+            newsPermissions += membership.trim();
+          } else {
+            newsPermissions = newsPermissions.substring(0, newsPermissions.length()-1);
+          }
+        }        
+      }            
+      uiStringInput.setValue(newsPermissions);
     } else {
       uiStringInput.setValue(value.toString());
     }
