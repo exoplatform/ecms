@@ -118,6 +118,7 @@ public class LinkManagerImpl implements LinkManager {
     String uuid = link.getProperty(UUID).getString();
     Session session = getSession(link, system);
     Node targetNode = session.getNodeByUUID(uuid);
+    session.logout();
     if (targetNode.isNodeType(EXO_RESTORE_LOCATION)) return link;
     return targetNode;
   }
