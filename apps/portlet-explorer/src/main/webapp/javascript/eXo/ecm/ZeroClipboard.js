@@ -256,11 +256,15 @@ ZeroClipboard.Client.prototype = {
 					this.ready = true;
 					return;
 				}
-				
 				this.ready = true;
-				this.movie.setText( this.clipText );
-				this.movie.setHandCursor( this.handCursorEnabled );
-				break;
+                this.movie.setText( this.clipText );
+                this.movie.setHandCursor( this.handCursorEnabled );
+                var rightClickMenu = document.getElementById("ECMContextMenu");
+                var divMovie = eXo.core.DOMUtil.findAncestorByTagName(this.movie, 'div');
+                var style = divMovie.style;
+                this.movie.width=rightClickMenu.offsetWidth;
+                style.width = '' + this.movie.width + 'px';
+                break;
 			case 'mouseover':
 				var item = document.getElementById(this.domElement.id);
 				item.className = 'ItemSelected';

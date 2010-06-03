@@ -143,7 +143,7 @@
     <title>Explorateur</title>
     <label>
       <Root>Racine</Root>
-      <webDavView>Télécharger pour permettre l'édition</webDavView>
+      <webDavView>Télécharger pour éditer</webDavView>
     </label>
     <msg>
       <path-not-found>Ce noeud a été modifié ou supprimé, veuillez cliquer sur le bouton "Actualiser".</path-not-found>
