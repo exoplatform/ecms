@@ -133,7 +133,9 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     String portalsStoragePath = locationEntry.getPath();    
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace,manageableRepository);
-    return (Node)session.getItem(portalsStoragePath);
+    Node livePortal = (Node)session.getItem(portalsStoragePath);
+    session.logout();
+    return livePortal;
   }
 
   /* (non-Javadoc)

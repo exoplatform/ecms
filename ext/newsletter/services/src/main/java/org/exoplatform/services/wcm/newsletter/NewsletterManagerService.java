@@ -161,6 +161,8 @@ public class NewsletterManagerService {
       log.info("User node is not created!");
     }catch(Exception ex){
       log.error("Error when get all users who can't get newsletter: ", ex);
+    } finally {
+      if(session != null) session.logout();
     }
     return listEmails;
   }
@@ -238,6 +240,7 @@ public class NewsletterManagerService {
 			newsletterEntry.setProperty(NewsletterConstant.ENTRY_PROPERTY_STATUS, NewsletterConstant.STATUS_SENT);
 		}
 		session.save();
+		session.logout();
 	}
 
 	/**
