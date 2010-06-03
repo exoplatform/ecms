@@ -376,10 +376,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
         String workspace  = driver.getWorkspace();
         String path = driver.getHomePath();
+        String name = driver.getName();
         Element folder = document.createElement("Folder");
         NodeLocation nodeLocation = new NodeLocation(repository, workspace, path);  
         Node driverNode = NodeLocation.getNodeByLocation(nodeLocation);
-        folder.setAttribute("name", resolveDriveLabel(driver.getName(), lang));
+        folder.setAttribute("name", name);
+        folder.setAttribute("label", resolveDriveLabel(name, lang));
         folder.setAttribute("url", FCKUtils.createWebdavURL(driverNode));
         folder.setAttribute("folderType", "exo:drive");
         folder.setAttribute("path", path);
