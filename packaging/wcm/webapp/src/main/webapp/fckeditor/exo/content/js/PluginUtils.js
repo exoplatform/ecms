@@ -54,11 +54,13 @@ PluginUtils.prototype.renderSubTree = function(currentNode) {
 		for(var i = 0; i < nodeList.length; i++) {
 			var id = eXoWCM.PluginUtils.generateIdDriver(nodeList[i]);
 			var strName = nodeList[i].getAttribute("name");
+			var label = nodeList[i].getAttribute("label");
+			if (!label) label = strName;
 			var driverPath = nodeList[i].getAttribute("driverPath");
 			treeHTML += '<div class="Node" onclick="eXoWCM.PluginUtils.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+strName+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="getDir(this, event);" name="'+strName+'" id="'+id+'"  driverPath="'+driverPath+'">';
-			treeHTML +=				strName;	
+			treeHTML +=			'<a title="'+label+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="getDir(this, event);" name="'+strName+'" id="'+id+'"  driverPath="'+driverPath+'">';
+			treeHTML +=				label;	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
 			treeHTML +=	'</div>';
@@ -172,9 +174,11 @@ PluginUtils.prototype.listFiles = function(list) {
 		var url 			= list[i].getAttribute("url");
 		var nodeType	= list[i].getAttribute("nodeType");
 		var node = list[i].getAttribute("name");
+		var label = list[i].getAttribute("label");
+		if (!label) label = node;
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<div class="Item '+clazzItem+'" url="'+url+'" nodeType="'+nodeType+'" onclick="eXoWCM.PluginUtils.insertContent(this);">'+node+'</div>';
+		newRow.insertCell(0).innerHTML = '<div class="Item '+clazzItem+'" url="'+url+'" nodeType="'+nodeType+'" onclick="eXoWCM.PluginUtils.insertContent(this);">'+label+'</div>';
 		newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 		newRow.insertCell(2).innerHTML = '<div class="Item">'+ list[i].getAttribute("size")+'&nbsp;kb' +'</div>';
 		
@@ -306,6 +310,7 @@ PluginUtils.prototype.renderBreadcrumbs = function(currentNode) {
 	var beforeNode = null;
 	while(currentNode.className != "LeftWorkspace") {
 		var curName = currentNode.getAttribute('name');
+		var label = currentNode.getAttribute('title');
 		if(curName != null) {
 			var tmpNode = document.createElement("div");	
 			tmpNode.className = 'BreadcumbTab';
@@ -314,11 +319,11 @@ PluginUtils.prototype.renderBreadcrumbs = function(currentNode) {
 			var node = document.getElementById(currentNode.id);
 			if(node) strOnclick = "eXoWCM.PluginUtils.actionBreadcrumbs('"+node.id+"')";		
 			if(beforeNode == null) {
-				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+curName+'</a>';
+				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+label+'</a>';
 				tmpNode.innerHTML = strHTML;
 				breadscrumbsContainer.appendChild(tmpNode);
 			} else {
-				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+curName+'</a>';
+				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+label+'</a>';
 				strHTML += '<div class="RightArrowIcon"><span></span></div>';
 				tmpNode.innerHTML = strHTML;
 				breadscrumbsContainer.insertBefore(tmpNode, beforeNode);

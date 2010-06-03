@@ -187,10 +187,12 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 			var driverPath = nodeList[i].getAttribute("driverPath");
 			var repository =  nodeList[i].getAttribute("repository");
 			var workspace =  nodeList[i].getAttribute("workspace");
+			var label = nodeList[i].getAttribute("label");
+			if (!label) label = strName;
 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+strName+'" href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+strName+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
-			treeHTML +=				strName;	
+			treeHTML +=			'<a title="'+label+'" href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+strName+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
+			treeHTML +=				label;	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
 			treeHTML +=	'</div>';
@@ -311,6 +313,7 @@ EcmContentSelector.prototype.renderBreadcrumbs = function(currentNode) {
 	var beforeNode = null;
 	while(currentNode.className != "LeftWorkspace") {
 		var curName = currentNode.getAttribute('name');
+		var label = currentNode.getAttribute('title');
 		if(curName) {
 			var tmpNode = document.createElement("div");	
 			tmpNode.className = 'BreadcumbTab';
@@ -323,11 +326,11 @@ EcmContentSelector.prototype.renderBreadcrumbs = function(currentNode) {
 				strOnclick = "eXo.ecm.ECS.actionBreadcrumbs('"+node.id+"');";		
 			}
 			if(beforeNode == null) {
-				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+curName+'</a>';
+				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+label+'</a>';
 				tmpNode.innerHTML = strHTML;
 				breadcrumbContainer.appendChild(tmpNode);
 			} else {
-				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+curName+'</a>';
+				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+label+'</a>';
 				strHTML += '<div class="RightArrowIcon"><span></span></div>';
 				tmpNode.innerHTML = strHTML;
 				breadcrumbContainer.insertBefore(tmpNode, beforeNode);
@@ -460,9 +463,11 @@ EcmContentSelector.prototype.listFolders = function(list) {
 		var path 			= list[i].getAttribute("path");
 		var nodeType	= list[i].getAttribute("folderType");
 		var node = list[i].getAttribute("name");
+		var label = list[i].getAttribute("label");
+		if (!label) label = node;
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<a class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+node+'</a>';
+		newRow.insertCell(0).innerHTML = '<a class="Item '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+label+'</a>';
 		
 		if(i > 13) {
 			var numberRecords = 0;
