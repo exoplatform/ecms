@@ -3229,4 +3229,9 @@
       <title>Document title</title>
     </header>
   </WCMContentView>
+  <UITagForm>
+  		<msg>
+  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+  		</msg>
+  </UITagForm>  
 </bundle>

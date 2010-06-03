@@ -132,7 +132,7 @@ public class UITagForm extends UIForm {
           	newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, repository, workspace);
           } else if (!tagName.equals(uiForm.oldName_)) {
         	 uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null, 
-          	              ApplicationMessage.ERROR));
+          	              ApplicationMessage.WARNING));
 //           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           }
       	}

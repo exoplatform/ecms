@@ -3274,5 +3274,9 @@
       <title>Tiêu đề của tài liệu</title>
     </header>
   </WCMContentView>
-  
+  <UITagForm>
+  		<msg>
+  			 <NameAlreadyExist>Tên nhãn đã tồn tại</NameAlreadyExist> 
+  		</msg>
+  </UITagForm>
 </bundle>

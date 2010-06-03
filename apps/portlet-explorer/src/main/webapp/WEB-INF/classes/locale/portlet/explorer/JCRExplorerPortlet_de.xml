@@ -3245,5 +3245,10 @@
       <UIPublicationContainer>Manage publication</UIPublicationContainer>
       <UIPublishingPanel>Manage publication</UIPublishingPanel>
     </title>
-  </UIPopupWindow>    
+  </UIPopupWindow>
+  <UITagForm>
+  		<msg>
+  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+  		</msg>
+  </UITagForm>    
 </bundle>

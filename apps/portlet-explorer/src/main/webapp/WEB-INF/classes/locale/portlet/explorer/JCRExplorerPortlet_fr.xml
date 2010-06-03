@@ -3226,4 +3226,9 @@
       <UIPublishingPanel>Gérer la publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
+  <UITagForm>
+  		<msg>
+  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+  		</msg>
+  </UITagForm>
 </bundle>
