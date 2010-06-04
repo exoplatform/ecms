@@ -15,10 +15,6 @@
   along with this program; if not, see<http://www.gnu.org/licenses/>. 
 ================================================================================
 
-You may find it helpful to see the details at wiki place of ECM
-http://wiki.exoplatform.org/xwiki/bin/view/ECM/
-
-
 TABLE OF CONTENTS
 ---------------------------------------------------
 1. What is eXo ECM
