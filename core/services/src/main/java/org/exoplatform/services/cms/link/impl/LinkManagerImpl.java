@@ -116,9 +116,7 @@ public class LinkManagerImpl implements LinkManager {
   public Node getTarget(Node link, boolean system) throws ItemNotFoundException,
       RepositoryException {
     String uuid = link.getProperty(UUID).getString();
-    Session session = getSession(link, system);
-    Node targetNode = session.getNodeByUUID(uuid);
-    session.logout();
+    Node targetNode = getSession(link, system).getNodeByUUID(uuid);
     if (targetNode.isNodeType(EXO_RESTORE_LOCATION)) return link;
     return targetNode;
   }
