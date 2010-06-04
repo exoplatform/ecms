@@ -32,6 +32,8 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -41,6 +43,8 @@ public class JCRResourceResolver extends ResourceResolver {
   protected String repository ; 
   protected String workspace ;      
   protected String propertyName ;
+  /** The log. */
+  private static Log LOG = ExoLogger.getLogger("ecm:JCRResourceResolver");
 
   /**
    * Instantiates a new jCR resource resolver 
@@ -76,9 +80,16 @@ public class JCRResourceResolver extends ResourceResolver {
     //Use system session to access jcr resource
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
     Session session = provider.getSession(workspace,manageableRepository);
-    Node node = (Node)session.getItem(removeScheme(url)) ;
-    session.logout();
-    return new ByteArrayInputStream(node.getProperty(propertyName).getString().getBytes()) ;
+    ByteArrayInputStream inputStream = null;
+    try {
+      inputStream = 
+        new ByteArrayInputStream(((Node)session.getItem(removeScheme(url))).getProperty(propertyName).getString().getBytes()); 
+    } catch(Exception e) {
+      LOG.error("Unexpected problem happen when try to process with url");
+    } finally {
+      session.logout();
+    }
+    return inputStream;
   }
 
   /* (non-Javadoc)
