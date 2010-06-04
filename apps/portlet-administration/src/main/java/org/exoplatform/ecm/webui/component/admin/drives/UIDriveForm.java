@@ -115,22 +115,25 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       String membership = value.toString(); 
       String valuePermissions = uiStringInput.getValue();
       List<String> permissionsList = new ArrayList<String>();
-      String newsPermissions="";      
+      StringBuilder newsPermissions = new StringBuilder();      
       if(valuePermissions != null) {
         String[] permissionsArray = valuePermissions.split(","); 
         permissionsList = Arrays.asList(permissionsArray);
-        if ((permissionsList != null) && (permissionsList.size() > 0)) {
+        if (permissionsList.size() > 0) {
           for (String permission : permissionsList) {
-            newsPermissions += permission.trim() + ",";  
+            if(newsPermissions.length() > 0) newsPermissions.append(",");
+            newsPermissions.append(permission.trim());
           }
-          if (!permissionsList.contains(membership)) {
-            newsPermissions += membership.trim();
+        }
+        if(!permissionsList.contains(membership)) {
+          if(newsPermissions.length() > 0) {
+            newsPermissions.append(",").append(membership.trim());
           } else {
-            newsPermissions = newsPermissions.substring(0, newsPermissions.length()-1);
+            newsPermissions.append(membership.trim());
           }
-        }        
+        }
       }            
-      uiStringInput.setValue(newsPermissions);
+      uiStringInput.setValue(newsPermissions.toString());
     } else {
       uiStringInput.setValue(value.toString());
     }
@@ -233,7 +236,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      StringBuffer foldertypes = new StringBuffer();
+      StringBuilder foldertypes = new StringBuilder();
       for (String allowCreateFolder : allowCreateFolders) {
         foldertypes.append(allowCreateFolder).append(",");
       }
