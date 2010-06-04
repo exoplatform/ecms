@@ -23,18 +23,17 @@ TABLE OF CONTENTS
 4. Building from sources
 5. Running
 6. Release notes
-7. Migration guide
 
 
 1. WHAT IS EXO CONTENT
 ---------------------------------------------------
 	Enterprise Content Management is the strategies, methods and tools used to capture, manage, store, preserve and deliver 
 contents and documents related to organizational processes with the purpose of improving operational productivity and efficiency. 
-ECM tools and strategies allow the management of an organization's unstructured information, whether that information exists. 
-The eXo Platform ECM portlet provides you with a portal solution that can help you achieve these processes easily and it is carefully 
+eXo Content tools and strategies allow the management of an organization's unstructured information, whether that information exists. 
+The eXo Content portlet provides you with a portal solution that can help you achieve these processes easily and it is carefully 
 designed so that you can leverage your business content across all formats for competitive gain. An environment for employees is also 
 provided to share and collaborate digital contents as well as delivering a comprehensive unified solution with rich functionalities.
-ECM consists of three parts: 
+eXo Content consists of three parts: 
 	DMS (Document Management System): used to store, manage and track electronic documents and electronic images. DMS allows 
 documents to be modified and managed easily and conveniently by managing versions, properties, ect.
 	Workflow: is the way of looking at and controlling the processes presented in an organization such as service provision or 
@@ -94,7 +93,7 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
 		soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard
 		Please refer to: http://www.artofsolving.com for using JODCONVERTER
 3.7 Using PDF Viewer
-		Now we using icepdf to enable viewing function in ECM
+		Now we using icepdf to enable viewing function in eXo Content
 		Some PDF document make Icet pdf generating image with wrong font. We can improve this by
 		installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
 
@@ -315,15 +314,11 @@ Release Notes - exo-ecms - Version wcm-2.0.0-GA
     * [ECMS-675] - DMS - Unknown error when add new folder in a new drive
 
 
-7. MIGRATION GUIDE
----------------------------------------------------
 
 ** Other resources and links
 	Company site        http://www.exoplatform.com
 	Community JIRA      http://jira.exoplatform.org
-	Comminity site      http://www.exoplatform.org
-	Developers wiki     http://wiki.exoplatform.org
-	Documentation       http://docs.exoplatform.org 
+	Community site      http://www.exoplatform.org
 	
 For more documentation and latest updated news, please visit our websites:
 	www.exoplatform.com
