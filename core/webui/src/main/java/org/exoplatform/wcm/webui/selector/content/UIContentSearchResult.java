@@ -18,9 +18,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.NodeIdentifier;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
-import org.exoplatform.services.wcm.publication.NotInWCMPublicationException;
 import org.exoplatform.services.wcm.publication.WCMComposer;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.search.PaginatedQueryResult;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
@@ -231,18 +229,6 @@ public class UIContentSearchResult extends UIGrid {
       prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
       prefs.store();
 
-      String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-      String currentSite = Util.getPortalRequestContext().getPortalOwner();
-
-      WCMPublicationService wcmPublicationService = contentSearchResult.getApplicationComponent(WCMPublicationService.class);
-
-      try {
-        wcmPublicationService.isEnrolledInWCMLifecycle(webContent);
-      } catch (NotInWCMPublicationException e){
-        wcmPublicationService.unsubcribeLifecycle(webContent);
-        wcmPublicationService.enrollNodeInLifecycle(webContent, currentSite, remoteUser);          
-      }
-      
       // Update and Close
       UIPortal uiPortal = Util.getUIPortal();
       UIPageBody uiPageBody = uiPortal.findFirstComponentOfType(UIPageBody.class);

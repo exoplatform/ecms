@@ -19,15 +19,11 @@ package org.exoplatform.wcm.webui.selector.content.one;
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.webui.page.UIPageBody;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeIdentifier;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.services.wcm.publication.NotInWCMPublicationException;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
@@ -75,25 +71,6 @@ public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
       prefs.setValue("workspace", nodeIdentifier.getWorkspace());
       prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
       prefs.store();
-  
-      String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-      String portalOwner = Util.getPortalRequestContext().getPortalOwner();
-  
-      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
-  
-      try {
-        wcmPublicationService.isEnrolledInWCMLifecycle(realNode);
-      } catch (NotInWCMPublicationException e){
-        wcmPublicationService.unsubcribeLifecycle(realNode);
-        wcmPublicationService.enrollNodeInLifecycle(realNode, portalOwner, remoteUser);          
-      }
-  
-      wcmPublicationService.updateLifecyleOnChangeContent(realNode, portalOwner, remoteUser, null);
-      if (!Utils.isEditPortletInCreatePageWizard()) {
-        String pageId = Util.getUIPortal().getSelectedNode().getPageReference();
-        UserPortalConfigService upcService = WCMCoreUtils.getService(UserPortalConfigService.class);
-        wcmPublicationService.updateLifecyleOnChangePage(upcService.getPage(pageId), remoteUser);
-      }
   
       // Update Page And Close PopUp
       UIPortal uiPortal = Util.getUIPortal();
