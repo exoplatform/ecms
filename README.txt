@@ -24,9 +24,10 @@ TABLE OF CONTENTS
 1. What is eXo ECM
 2. What's new?
 3. How to set up eXo ECM
-4. Running
-5. Release notes
-6. Migration guide
+4. Installing
+5. Running
+6. Release notes
+7. Migration guide
 
 
 1. WHAT IS EXO ECM
@@ -101,128 +102,224 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
 		Some PDF document make Icet pdf generating image with wrong font. We can improve this by
 		installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
 
-4. RUNNING
+4. INSTALLING	
+		This will explain you how to build a package of WCM 2.0.0-GA with Tomcat
+
+		*****************
+		* COMPILATION
+		*****************
+
+		* mvn install
+		For example: mvn install
+
+		***********************
+		* PACKAGING FOR TOMCAT:
+		***********************
+		WCM only:
+		** mvn clean install in /delivery/wcm/assembly
+		*  Creates a Tomcat delivery in /delivery/wcm/assembly/target/tomcat/ 
+		
+		WCM + WKF:
+		** mvn clean install in /delivery/wkf-wcm/assembly
+		*  Creates a Tomcat delivery in /delivery/wkf-wcm/assembly/target/tomcat/ 
+		
+		***************************
+		* PACKAGING FOR JBOSS EARs:
+		***************************		
+		* WCM extension ear:
+		** mvn clean install in /packaging/wcm/ear
+		
+		* ECMDEMO ear
+		** mvn clean install in /packaging/ecmdemo/ear
+		
+		* Workflow ear(optional):
+		** mvn clean install in /packaging/workflow/ear
+
+		*****************
+		* STARTING:
+		*****************		
+		* On Tomcat: go to the tomcat directory (or unzip the archive in your favorite location) and execute 'bin/gatein.sh start' ('bin/gatein.bat start' on Windows)
+		* On EPP5: Copy WCM extension ear and ECMDEMO ear to folder /jboss-epp-5.0/jboss-as/server/default/deploy 
+			Go to /jboss-epp-5.0/jboss-as/bin and execute './run.sh' ('/run.bat start' on Windows)
+	
+5. RUNNING
 ---------------------------------------------------
-4.1 Open your web browsers, now eXo WCM can run on FireFox 2 or newer, Internet Explorer 7 or newer (we recommend using FireFox 3+ or Internet Explorer 7+ for the best result)
+5.1 Open your web browsers, now eXo WCM can run on FireFox 2 or newer, Internet Explorer 7 or newer (we recommend using FireFox 3+ or Internet Explorer 7+ for the best result)
 		Navigate to URL: http://localhost:8080/ecmdemo
 
-4.2 When the page has been loaded, click "Login" on the top right corner. Specify the username "root" and the password "gtn".
+5.2 When the page has been loaded, click "Login" on the top right corner. Specify the username "root" and the password "gtn".
 
-5. RELEASE NOTES 
+6. RELEASE NOTES 
 ---------------------------------------------------
 
-Release Notes - exo-ecms - Version wcm-2.0.0-CR01
+Release Notes - exo-ecms - Version wcm-2.0.0-GA
 
 ** Bug
-    * [ECMS-18] - other workspace then collaboration doesn't work in CLV
-    * [ECMS-37] - can't view symlink by webdav if this symlink is related to a folder which have 2 child nodes
-    * [ECMS-69] - Cannot create more than one Editor field in FormGenerator
-    * [ECMS-224] - Error occurs when trying to search a web content
-    * [ECMS-229] - Map network drive and WEBDAV do not work
-    * [ECMS-233] - Don't use userId as a parameter in the request URL of Content Selector
-    * [ECMS-239] - Impossible to change a Web content illustration
-    * [ECMS-240] - IE7: Lost some characters at ACME site
-    * [ECMS-241] - Title of Site Explorer is changed when perform to open a node
-    * [ECMS-242] - Unknown error when choose existing content for page in special case
-    * [ECMS-245] - Edit form of Content list viewer portlet is not disappeared when click Cancel button
-    * [ECMS-246] - error page is shown when go to manage site page if standing at new site
-    * [ECMS-278] - Can't create document in category folder
-    * [ECMS-279] - CLV portlet is broken
-    * [ECMS-280] - Unknown error if send letter without internet connection
-    * [ECMS-283] - Can't add symlnk for article
+    * [ECMS-183] - Can't add gadgets into  web content
+    * [ECMS-269] - Bad display font with pdf file when viewing
     * [ECMS-284] - link of document on folder which was add exo:taxonomy action is still displayed content when this document was deleted 
-    * [ECMS-285] - Search for nodes in the Advance search of DMSAdministration Driver
-    * [ECMS-289] - Content Explorer does not work
-    * [ECMS-292] - Change CLV default target page
-    * [ECMS-297] - Error UI in Single content viewer form. see file attach
-    * [ECMS-298] - unknown error and throw exception when click on "Abort" button in Single content viewer form
-    * [ECMS-299] - WebDAV doesn't work
-    * [ECMS-305] - Some content selector's bugs
-    * [ECMS-311] - IE7: Login function is invalid
-    * [ECMS-328] - Error when add new property for node with type is Binary
-    * [ECMS-339] - Any shouldn't see Document folder in groups contents
-    * [ECMS-342] - Problems with Sorting Mechanism
-    * [ECMS-344] - In Content Selector form, Uploaded file is not saved 
-    * [ECMS-346] - can't configure the content creator
+    * [ECMS-313] - User is logout when open  a file .pdf
+    * [ECMS-335] - DMS gadgets can not display
+    * [ECMS-343] - after closing the popup "Welcome to single content viewer" in edit mode, it's not possible to open it again
     * [ECMS-349] - View Image in the other language is not displayed
-    * [ECMS-350] - can not delete portal classic when create new extension
-    * [ECMS-355] - Can not view media file
-    * [ECMS-356] - Can not play  file with media format
-    * [ECMS-365] - Bug when add publishing process for document
-    * [ECMS-367] - can't see the title when editing it in the acme website.
-    * [ECMS-368] - when editing the configuration of an article, after clicking on cancel, the article disapear
-    * [ECMS-369] - Incorrect Window Title 
-    * [ECMS-372] - Content of article disappear after switch to edit mode
-    * [ECMS-373] - Label of ndoetype name doesn't display on nodetype selector component
-    * [ECMS-377] - Cannot upload OR create a document with child nodes inside a taxonomy node
-    * [ECMS-378] - Show content is empty  when print a web content
-    * [ECMS-379] - Selected contents list is not shown in CLV config
-    * [ECMS-380] - QuickEdit.js is loaded to many times... 
-    * [ECMS-381] - Manage Categories doesn't work without System tree
-    * [ECMS-383] - PCV does not support Edit/Live mode switch (blank page when switching)
-    * [ECMS-384] - Improve presentation of the banner to avoid 2 lines printing when we have long description
-    * [ECMS-385] - Site Explorer should show the "Document Viewer" by default and not the "File View" on Webcontent
-    * [ECMS-386] - French Translation: in the CLV/SCV edit preference we should use the word 'Modèle' instead of 'template'
-    * [ECMS-389] - Bad French Translation for "register" should be "S'inscrire" or "Inscription" instead of "Enregistrer" 
-    * [ECMS-390] - Bad French Translation for "register" should be "S'inscrire" or "Inscription" instead of "Enregistrer" 
-    * [ECMS-395] - Cannot print a document
-    * [ECMS-397] - Change search result template to avoid showint ugly URLs
-    * [ECMS-401] - Change languages is invalid
-    * [ECMS-405] - No validate argument for calendar fields
-    * [ECMS-422] - broken UI when compare Version
-    * [ECMS-424] - Add External Matadata form is been empty when add matadata for node  in special case
-    * [ECMS-427] - JobSchedulerService doesn't work
-    * [ECMS-428] - Authoring plugin cannot run
-    * [ECMS-433] - Lost  Edit Comment icon
-    * [ECMS-436] - New View is lost name when is displayed at add driver form
-    * [ECMS-437] - Still show title, name, illustration ... of webcontent/document(in draft status) when view in Live mode in News page
-    * [ECMS-455] - UITable js object doesn't allow return carret
-    * [ECMS-457] - Authoring CronJob exception when starting tomcat
+    * [ECMS-352] - Lose icon of node in Content selector
+    * [ECMS-370] - Delete Option 
+    * [ECMS-371] - Exception while creating Translations
+    * [ECMS-376] - Display empty space on sidebar resize
+    * [ECMS-388] - Update "How to use this demo ?" content to reflect good user and password
+    * [ECMS-400] - Modify Site Explorer home page (default view) to be understandable by the user
+    * [ECMS-404] - Error UI when print a document with image attach. see file attach
+    * [ECMS-421] - on Firefox, I have an error "Class is undefined" when loading the homepage
+    * [ECMS-423] - Can't activate auditing for node
+    * [ECMS-432] - Corresponding icon of driver is not shown
+    * [ECMS-435] - The first check-box is not uncheck automatically when uncheck on 1 subscription
+    * [ECMS-452] - Unknown error when edit CLV without selecting folder path 
+    * [ECMS-456] - The "Global CSS"of a newly created site is not active by default, when it should be
+    * [ECMS-458] - confirm message is not shown when activate version for document
+    * [ECMS-459] - broken UI at File View Tab of  File Plan
+    * [ECMS-461] - Permission for dialog of template is shown inexactly
+    * [ECMS-462] - Prosecc name is double
+    * [ECMS-473] - wrong message is shown when rename tag in special case
+    * [ECMS-476] - Error while creating content
+    * [ECMS-486] - Show CLV configuration form in a new CLV page
+    * [ECMS-488] - Edit CLV is invalid in special case
+    * [ECMS-490] - Category List Configuration form is not closed after clicking Save
+    * [ECMS-491] - Do not shown any node's property created by Form Generator when open form to create document
+    * [ECMS-494] - Name of Tab in Single Content Selector is shown inexactly
+    * [ECMS-498] - SCV Content not displayed after fresh start
+    * [ECMS-501] - Workflow portlets not running on WCM 2.0 CR01
+    * [ECMS-502] - Global Sites CSS is removed from then page when deleting a portlet in the site layout
+    * [ECMS-505] - Css is broken after editing Site Layout in Acme
+    * [ECMS-506] - UI error when view Or print a document with  a picture
+    * [ECMS-507] - Lost icon to print /close in print form when print  a page that includes an article
+    * [ECMS-511] - Error in Select field
+    * [ECMS-512] - Error in dialog Template
+    * [ECMS-514] - Rollback FCKEditor
+    * [ECMS-515] - Corrupted JCR export in EPP5 only
+    * [ECMS-517] - memberships not loaded properly
+    * [ECMS-518] - Broken UI when show/hide relation in special case
+    * [ECMS-522] - Unable to deploy JBPM process definitions on WCM 2.0 CR 01 (EPP)
+    * [ECMS-524] - Can not delete subscription 
+    * [ECMS-525] - Error when view content of link in SCV
+    * [ECMS-526] - Exception in authoringPublication
+    * [ECMS-532] - SlideShow cannot view in IE
+    * [ECMS-533] - Cannot enroll a predeployed content with Authoring Extension
+    * [ECMS-537] - Show error message when trying to select an exist content
+    * [ECMS-542] -  [WCM] Nothing happen when click on "Abort" button in Add new content form
+    * [ECMS-554] - When add new document, category field does not work correctly if there are also action fields in dialog template
+    * [ECMS-555] - can't add a gadget to a webResource
+    * [ECMS-598] - 'Null '  is shown in page which reference to an article/free webcontent
+    * [ECMS-600] - Unknown error when view permission of taxonomy in special case
+    * [ECMS-601] - Can't view picture
+    * [ECMS-603] - Site Explorer : left panel doesn't close
+    * [ECMS-604] - duplicate folders in wcm site contents
+    * [ECMS-608] - Problem with published document
+    * [ECMS-610] - Do not show category field when edit Sample node
+    * [ECMS-613] - Can not add template by Form Generator
+    * [ECMS-614] - Unknown error when remove permisson of a document in acme drive
+    * [ECMS-615] - Error while cancel create Content List Viewew by content
+    * [ECMS-616] - Can NOT add info for an image in acme
+    * [ECMS-617] - CLV configuration form disappears when select folder path
+    * [ECMS-619] - Cannot delete Image or reference data in WebContent or sample node
+    * [ECMS-623] - Display content-not-found in PCLV portlet
+    * [ECMS-624] - Display wrong icon in SE
+    * [ECMS-625] - cyclic problem when run WCM on top of EPP5
+    * [ECMS-626] - Missing resource bundle for category-view and wcm-view in Site explorer
+    * [ECMS-628] - Missing translations in Quick Edit (Inline Edit) FastPublish, SaveDraft, Preferences and Close (or translation does not work)
+    * [ECMS-634] - PublicationManager should return content to LifecycleConnector
+    * [ECMS-635] - JCRExplorer could change content from WebUI portlets
+    * [ECMS-636] - Friendly Service doesn't work with configuration setter
+    * [ECMS-637] - LifecycleConnector doesn't return content title
+    * [ECMS-638] - Search's results: suggestion always in plural
+    * [ECMS-639] - Picture is not shown in manage Publication form
+    * [ECMS-640] - In acme, we can't edit permission to a node in taxonomy tree twice
+    * [ECMS-643] - searched texts in search results are not highlighted
+    * [ECMS-644] - Links in viewMode are not underlined
+    * [ECMS-646] - Can't add Action for Document Folder
+    * [ECMS-647] - Inherited rights are lost after server restart
+    * [ECMS-648] - Impossible to download binary with name containing illegal jcr char using the right popup menu
+    * [ECMS-649] - Can not delete new letter
+    * [ECMS-650] - Error while setting a page with PCLV portlet
+    * [ECMS-651] - In Site Explorer: Wrongly displaying the name of an uploaded file if the name contains special characters.
+    * [ECMS-652] - Can't delete Template after edited this template
+    * [ECMS-654] - Still show previous results when searching 
+    * [ECMS-655] - Label categories are not translated in Content Selector
+    * [ECMS-657] - Cannot edit and save template
+    * [ECMS-659] - SE : Cannot load and merge the bundle
+    * [ECMS-661] - Article doesn't allow to link a doc with FCK
+    * [ECMS-662] - Cannot find repositoryService variable in TrashFolderScript
+    * [ECMS-663] - PCV displays jcr:frozenNode instead of the files names
+    * [ECMS-664] - Dark background in FCKEditor
+    * [ECMS-665] - Missing resource bundle for WCMInsertContent
+    * [ECMS-666] - Translate to Vietnamese for new navigation Events
+    * [ECMS-668] - SE : published state isn't translated
+    * [ECMS-669] - Localize for label "fieldListTaxonomy" in UIUploadForm
+    * [ECMS-686] - User with site edit permission can't create a new page
+    * [ECMS-705] - Published content back to draft state after select it
 
 ** Improvement
-    * [ECMS-30] - FE : Visible nodetypes on the left panel
-    * [ECMS-253] - FormGenerator : Add checkbox and radio fields
-    * [ECMS-290] - In CLV configuration, when user select a  content in search results, inform him that his content is correctly selected
-    * [ECMS-293] - L11n : MultiLanguage Service could be Symlink aware
-    * [ECMS-294] - WCMComposer : new filters
-    * [ECMS-348] - Some languages labels are display too short to understand
-    * [ECMS-351] - Being viewed language title should be bold rather than the default one
-    * [ECMS-408] - Refactor Content list viewer
-    * [ECMS-426] - UIAction : rename popup
-    * [ECMS-447] - Acme webcontent should be in web contents folder
-    * [ECMS-448] - SE : Support for i18n and references in Relation panel
-    * [ECMS-451] - Add Event content with map
+    * [ECMS-425] - Can't name a category with an apostrophe.
+    * [ECMS-472] - Add Category based page for event in ECMDEMO
+    * [ECMS-534] - Add JMX Support to WCMComposer
+    * [ECMS-535] - Add JMX Support to Friendly Service
+    * [ECMS-536] - use Kernel profiles to include Friendly extension in WCM
+    * [ECMS-541] - DMS: Should add * for mandatory fields in Add/Edit node type form
+    * [ECMS-599] - All the things related to extension should be in one jar
+    * [ECMS-620] - Separate publication plugins in one jar
+    * [ECMS-629] - Apply new style for Classic site
 
 ** New Feature
-    * [ECMS-314] - CKeditor: Add new plugin syntaxhighlighter
-    * [ECMS-359] - Test and Package Authoring Plugin
-    * [ECMS-430] - ext : Staging cronjob on Authoring extension
-    * [ECMS-450] - Add support for H264 videos using HTML5 video tag
-
+    * [ECMS-261] - Study CKEditor 3.0 adoption
+    * [ECMS-264] - Add the ability to Edit and Remove a node type
+    * [ECMS-286] - Accessibility : New site template focused on WCA Conformance Level A
+    * [ECMS-406] - DMS Document Converter: be able to convert any document in PDF for viewer (but also any type)
+    * [ECMS-409] - Improve File Explorer Viewer for various document types : PDF, DOC,FLASH, ...
+    * [ECMS-449] - SE : AddLocalizationSymLink UI in the SiteExplorer
+    * [ECMS-480] - Support for Friendly URL
 
 ** Task
-    * [ECMS-215] - Review modules not in the reactor
-    * [ECMS-226] - Upgrade to jBPM 3.2.x
-    * [ECMS-438] - Release WCM 2.0.0-CR01
-    * [ECMS-439] - EAR : add "static" project
-    * [ECMS-440] - EAR : check WCM+WKF
-    * [ECMS-442] - Make sure WCM 2.0 works on top of EPP5
-    * [ECMS-445] - Backport Dialog template for nt:file from WCM 1.2
-    * [ECMS-446] - Make System the default export/import format instead of Document
-    * [ECMS-453] - Update Release notes files
+    * [ECMS-129] - Some issues need  backport to trunk
+    * [ECMS-358] - duplicated folder in database when create new extension
+    * [ECMS-382] - Time Field in content entry template
+    * [ECMS-407] - fix the missing translations
+    * [ECMS-484] - Acessing a field in Pre Node Save Interceptor
+    * [ECMS-519] - Use SYSTEM navigation instead of HIDDEN for pcv detail page
+    * [ECMS-520] - Friendly Service shouldn't be active by default 
+    * [ECMS-521] - use Kernel profiles to include Authoring extension in WCM
+    * [ECMS-543] -  [WCM] Should change message when new node type's name contains special character 
+    * [ECMS-544] - Umbrella for issues come from Test Campaign
+    * [ECMS-557] -  [DMS] Always show message in ECM Templates after delete a view in case delete all ECM Templates 
+    * [ECMS-582] - Performance Test on WCM 2.0
+    * [ECMS-618] - Create mvn project for explorer portlet java classes
+    * [ECMS-621] - Add default icon for action on action bar
+    * [ECMS-630] - Active session leaks detector to check in WCM
+    * [ECMS-642] - Deprecate DateTimeClassifyPlugin and comment the test (not usable)
+    * [ECMS-673] - change trace logs in authoring cronjobs
+    * [ECMS-687] - Release WCM 2.0.0-GA
+    * [ECMS-719] - Update Readme file with Install process
 
 
 ** Sub-task
-    * [ECMS-94] - Create new hierarchy
-    * [ECMS-95] - Merge/Reorganize modules content
-    * [ECMS-118] - Rename artifactIDs
-    * [ECMS-157] - Adding an exo:createRSSFeedAction is not working
-    * [ECMS-295] - Query filters and impl
-    * [ECMS-360] - Add support for editing without popup
-    * [ECMS-366] - Language filters and impl
-    * [ECMS-443] - apply to WCM ear
+    * [ECMS-471] - Broken style with a popup message & WYSIWYG Field
+    * [ECMS-481] - Vote and Comment for Free webcontent layout document are not shown
+    * [ECMS-496] - Create an UIComponent for CKEditor
+    * [ECMS-538] - DMS: Unknown error when create new drive with " in name
+    * [ECMS-539] - DMS - Should set folder default in Allowance to create folder when Edit drive
+    * [ECMS-540] -  DMS: Unknown error when search draft node type
+    * [ECMS-547] - [WCM] Litter error in [Page Selector] form while select target path 
+    * [ECMS-548] - IE7: Menu item display under menu item bar
+    * [ECMS-550] - [WCM] Should require users put values in fields when configuration for Contact Us form
+    * [ECMS-565] -  [WCM] Page's content isn't displayed in Print Preview form
+    * [ECMS-568] - [WCM] Show code error in File explorer when update a file same name with existing file
+    * [ECMS-570] - Show exception in cygwin when start run Jboss
+    * [ECMS-575] - WCM: Label of edit mode is not changed by changing language of site
+    * [ECMS-576] - Invalid label add group permission form
+    * [ECMS-581] -  [DMS] Can not search when check all type to search
+    * [ECMS-591] -  IE7: Don't show "All item" and "By Type" in Site Explorer after click Resize tree button
+    * [ECMS-675] - DMS - Unknown error when add new folder in a new drive
 
-6. MIGRATION GUIDE
+
+7. MIGRATION GUIDE
 ---------------------------------------------------
 
 ** Other resources and links
