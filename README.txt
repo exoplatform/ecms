@@ -98,7 +98,9 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
 		installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
 
 4. BUILDING FROM SOURCES	
-		This will explain you how to build a package of WCM 2.0.0-GA with Tomcat
+		This will explain you how to build a package of WCM 2.0.0-GA with Tomcat.
+		For general information about installation, please refer to :
+		http://anonsvn.jboss.org/repos/gatein/portal/trunk/README.txt
 
 		*****************
 		* COMPILATION
