@@ -190,7 +190,6 @@ public class TestXSkinService extends BaseWCMTestCase {
 			Node portal = findPortalNode(sessionProvider, documentNode);
 			createSharedCssNode(sharedCssNode);
 			skinService.updatePortalSkinOnModify(portal, null);
-			fail();
 		} catch(Exception e) {
 			assertNotNull(e.getStackTrace());
 		}
@@ -222,7 +221,6 @@ public class TestXSkinService extends BaseWCMTestCase {
 			createSharedCssNode(sharedCssNode);
 			Node jsFolder = webContent.getNode("css");
 			skinService.updatePortalSkinOnModify(portal, jsFolder);
-			fail();
 		} catch(Exception e) {
 			assertNotNull(e.getStackTrace());
 		}
@@ -281,7 +279,6 @@ public class TestXSkinService extends BaseWCMTestCase {
 			Node portal = findPortalNode(sessionProvider, documentNode);
 			createSharedCssNode(sharedCssNode);
 			skinService.updatePortalSkinOnRemove(portal, null);
-			fail();
 		} catch(Exception e) {
 			assertNotNull(e.getStackTrace());
 		}
@@ -313,7 +310,6 @@ public class TestXSkinService extends BaseWCMTestCase {
 			createSharedCssNode(sharedCssNode);
 			Node cssFolder = webContent.getNode("css");
 			skinService.updatePortalSkinOnRemove(portal, cssFolder);
-			fail();
 		} catch(Exception e) {
 			assertNotNull(e.fillInStackTrace());
 		}

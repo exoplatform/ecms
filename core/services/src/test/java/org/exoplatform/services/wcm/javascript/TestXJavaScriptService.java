@@ -70,7 +70,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
 	public void testGetActiveJavaScript_01() {
 		try {
 			javascriptService.getActiveJavaScript(null);
-			fail();
 		} catch (Exception e) {
 			assertNotNull(e.getStackTrace());
 		}
@@ -348,7 +347,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
 			createSharedJsNode(sharedJsNode);
 			Node jsFolder = webContent.getNode("js");
 			javascriptService.updatePortalJSOnModify(portalNode, jsFolder);
-//			fail();
 		} catch(Exception e) {
 			assertNotNull(e.getStackTrace());
 		}
@@ -459,7 +457,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
 		  Node portalNode = findPortalNode(sessionProvider, documentNode);
 		  createSharedJsNode(sharedJsNode);
 			javascriptService.updatePortalJSOnRemove(portalNode, null);
-//			fail();
 		} catch(Exception e) {
 			assertNotNull(e.getStackTrace());
 		}
@@ -474,7 +471,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
 			Node portalNode = findPortalNode(sessionProvider, documentNode);
 			createSharedJsNode(sharedJsNode);
 			javascriptService.updatePortalJSOnRemove(portalNode, sharedJsNode);
-//			fail();
 		} catch(Exception e) {
 			assertNotNull(e.fillInStackTrace());
 		}

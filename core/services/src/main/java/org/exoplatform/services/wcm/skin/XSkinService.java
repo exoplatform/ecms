@@ -115,21 +115,26 @@ public class XSkinService implements Startable {
   	NodeLocation webcontentLocation = NodeLocation.make(webcontent);
   	ManageableRepository repository = repositoryService.getRepository(webcontentLocation.getRepository());
   	Session session = null;
-  	if (webcontentLocation.getPath().startsWith("/jcr:system")) 
-  		session = repository.getSystemSession(repository.getConfiguration().getSystemWorkspaceName());
-  	else {
-  		session = repository.getSystemSession(webcontentLocation.getWorkspace());
+  	try {
+  	  if (webcontentLocation.getPath().startsWith("/jcr:system")) 
+  	    session = repository.getSystemSession(repository.getConfiguration().getSystemWorkspaceName());
+  	  else {
+  	    session = repository.getSystemSession(webcontentLocation.getWorkspace());
+  	  }
+  	  
+  	  QueryManager queryManager = session.getWorkspace().getQueryManager();
+  	  Query query = queryManager.createQuery(cssQuery, Query.SQL);
+  	  QueryResult queryResult = query.execute();
+  	  NodeIterator iterator = queryResult.getNodes();
+  	  while(iterator.hasNext()) {
+  	    Node registeredCSSFile = iterator.nextNode();
+  	    buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
+  	  }
+  	} catch(Exception e) {
+  	  log.error("Unexpected problem happen when active stylesheet", e);
+  	} finally {
+  	  if(session != null) session.logout();
   	}
-  	
-  	QueryManager queryManager = session.getWorkspace().getQueryManager();
-  	Query query = queryManager.createQuery(cssQuery, Query.SQL);
-  	QueryResult queryResult = query.execute();
-  	NodeIterator iterator = queryResult.getNodes();
-		while(iterator.hasNext()) {
-  		Node registeredCSSFile = iterator.nextNode();
-  		buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-  	}
-		session.logout();
 		return buffer.toString();
   }  
 
@@ -238,37 +243,42 @@ public class XSkinService implements Startable {
     NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
     ManageableRepository repository = repositoryService.getRepository(portalNodeLocation.getRepository());
     Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
-  	QueryManager queryManager = session.getWorkspace().getQueryManager();
-  	Query query = queryManager.createQuery(statement, Query.SQL);
-  	QueryResult queryResult = query.execute();
-  	NodeIterator iterator = queryResult.getNodes();
-  	
-  	if (isStartup) {
-  		while(iterator.hasNext()) {
-    		Node registeredCSSFile = iterator.nextNode();
-    		buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-    	}
-  	} else {
-    	boolean isAdded = false;
-    	while(iterator.hasNext()) {
-    		Node registeredCSSFile = iterator.nextNode();
-    		// Add new
-    		long newCSSFilePriority = newCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-    		long registeredCSSFilePriority = registeredCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-    		if (!isAdded && newCSSFilePriority < registeredCSSFilePriority) {
-    			buffer.append(newCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString());
-    			isAdded = true;
-    			continue;
-    		}
-    		// Modify
-    		if (newCSSFile.getPath().equals(registeredCSSFile.getPath())) {
-    			buffer.append(newCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-    			continue;
-    		}
-    		buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-    	}  		
+  	try {
+  	  QueryManager queryManager = session.getWorkspace().getQueryManager();
+  	  Query query = queryManager.createQuery(statement, Query.SQL);
+  	  QueryResult queryResult = query.execute();
+  	  NodeIterator iterator = queryResult.getNodes();
+  	  
+  	  if (isStartup) {
+  	    while(iterator.hasNext()) {
+  	      Node registeredCSSFile = iterator.nextNode();
+  	      buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
+  	    }
+  	  } else {
+  	    boolean isAdded = false;
+  	    while(iterator.hasNext()) {
+  	      Node registeredCSSFile = iterator.nextNode();
+  	      // Add new
+  	      long newCSSFilePriority = newCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+  	      long registeredCSSFilePriority = registeredCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+  	      if (!isAdded && newCSSFilePriority < registeredCSSFilePriority) {
+  	        buffer.append(newCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString());
+  	        isAdded = true;
+  	        continue;
+  	      }
+  	      // Modify
+  	      if (newCSSFile.getPath().equals(registeredCSSFile.getPath())) {
+  	        buffer.append(newCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
+  	        continue;
+  	      }
+  	      buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
+  	    }  		
+  	  }
+  	} catch(Exception e) {
+  	  log.error("Unexpected problem happen when merge CSS data", e);
+  	} finally {
+  	  session.logout();
   	}
-  	session.logout();
     return buffer.toString();     
   }  
 
