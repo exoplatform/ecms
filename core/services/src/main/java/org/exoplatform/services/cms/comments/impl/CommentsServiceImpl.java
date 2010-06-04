@@ -33,6 +33,8 @@ import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 
 /**
@@ -43,6 +45,8 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
  */
 public class CommentsServiceImpl implements CommentsService {
 
+  private static Log LOG = ExoLogger.getLogger("ecm:CommentsService");
+  
   private final static String COMMENTS = "comments".intern() ;
   private final static String COMMENTABLE = "mix:commentable".intern() ;
   private final static String EXO_COMMENTS = "exo:comments".intern() ;
@@ -177,18 +181,23 @@ public class CommentsServiceImpl implements CommentsService {
     ManageableRepository  repository = (ManageableRepository)session.getRepository();
     //TODO check if really need delegate to system session
     Session systemSession = repository.getSystemSession(session.getWorkspace().getName()) ;
-    commentsNode = (Node)systemSession.getItem(languageNode.getPath() + "/" + COMMENTS) ;
-    String cacheKey = document.getPath().concat(commentsNode.getPath());
-    Object comments = commentsCache_.get(cacheKey) ;
-    if(comments !=null) return (List<Node>)comments ;        
     List<Node> list = new ArrayList<Node>() ;
-    for(NodeIterator iter = commentsNode.getNodes(); iter.hasNext();) {
-      list.add(iter.nextNode()) ;
-    }    
-    Collections.sort(list,new DateComparator()) ;
-    commentsCache_.put(commentsNode.getPath(),list) ;  
-    session.logout();
-    systemSession.logout();
+    try {
+      commentsNode = (Node)systemSession.getItem(languageNode.getPath() + "/" + COMMENTS) ;
+      String cacheKey = document.getPath().concat(commentsNode.getPath());
+      Object comments = commentsCache_.get(cacheKey) ;
+      if(comments !=null) return (List<Node>)comments ;        
+      for(NodeIterator iter = commentsNode.getNodes(); iter.hasNext();) {
+        list.add(iter.nextNode()) ;
+      }    
+      Collections.sort(list,new DateComparator()) ;
+      commentsCache_.put(commentsNode.getPath(),list) ;  
+    } catch(Exception e) {
+      LOG.error("Unexpected problem happen when try to get comments", e);
+    } finally {
+      session.logout();
+      systemSession.logout();
+    }
     return list;
   }  
 
