@@ -17,16 +17,16 @@
 
 TABLE OF CONTENTS
 ---------------------------------------------------
-1. What is eXo ECM
+1. What is eXo Content
 2. What's new?
-3. How to set up eXo ECM
+3. How to set up eXo Content
 4. Installing
 5. Running
 6. Release notes
 7. Migration guide
 
 
-1. WHAT IS EXO ECM
+1. WHAT IS EXO CONTENT
 ---------------------------------------------------
 	Enterprise Content Management is the strategies, methods and tools used to capture, manage, store, preserve and deliver 
 contents and documents related to organizational processes with the purpose of improving operational productivity and efficiency. 
@@ -54,9 +54,9 @@ monitoring.
 	*  PDF View for almost document: MS Document, Openfice Document
 	Find more details at the RELEASE NOTEs part
 
-3. HOW TO SET UP EXO ECM
+3. HOW TO SET UP EXO CONTENT
 ---------------------------------------------------
-eXo Enterprise Content Management requires the Java 2 Standard Edition Runtime
+eXo Content requires the Java 2 Standard Edition Runtime
 Environment (JRE) or Java Development Kit version 6.x
 
 3.1 Install Java SE 1.6 (Java Development Kit)
@@ -140,7 +140,7 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
 	
 5. RUNNING
 ---------------------------------------------------
-5.1 Open your web browsers, now eXo WCM can run on FireFox 2 or newer, Internet Explorer 7 or newer (we recommend using FireFox 3+ or Internet Explorer 7+ for the best result)
+5.1 Open your web browsers, now eXo Content can run on FireFox 2 or newer, Internet Explorer 7 or newer (we recommend using FireFox 3+ or Internet Explorer 7+ for the best result)
 		Navigate to URL: http://localhost:8080/ecmdemo
 
 5.2 When the page has been loaded, click "Login" on the top right corner. Specify the username "root" and the password "gtn".
@@ -331,5 +331,5 @@ For more documentation and latest updated news, please visit our websites:
 	
 If you have questions, please send a mail to the list exoplatform@objectweb.org.
 
-Thank your for using eXo WCM product!
-The eXo WCM team.
+Thank your for using eXo Content product!
+The eXo Content team.
