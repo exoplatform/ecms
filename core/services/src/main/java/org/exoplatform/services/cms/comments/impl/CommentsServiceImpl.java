@@ -81,67 +81,71 @@ public class CommentsServiceImpl implements CommentsService {
     ManageableRepository  repository = (ManageableRepository)session.getRepository();
     //TODO check if really need delegate to system session
     Session systemSession = repository.getSystemSession(session.getWorkspace().getName()) ;
-    Node document = (Node)systemSession.getItem(node.getPath()) ;
-    if(!document.isNodeType(COMMENTABLE)) {
-      if(document.canAddMixin(COMMENTABLE)) document.addMixin(COMMENTABLE) ;
-      else throw new Exception("This node does not support comments.") ;  
-    }        
-    Node multiLanguages =null, languageNode= null, commentNode = null ;
+    try {
+      Node document = (Node)systemSession.getItem(node.getPath()) ;
+      if(!document.isNodeType(COMMENTABLE)) {
+        if(document.canAddMixin(COMMENTABLE)) document.addMixin(COMMENTABLE) ;
+        else throw new Exception("This node does not support comments.") ;  
+      }        
+      Node multiLanguages =null, languageNode= null, commentNode = null ;
 
-    if(!document.hasNode(LANGUAGES) || language.equals(multiLangService_.getDefault(document))) {
-      if(document.hasNode(COMMENTS)) commentNode = document.getNode(COMMENTS) ;
-      else { 
-        commentNode = document.addNode(COMMENTS,NT_UNSTRUCTURE) ; 
-        commentNode.addMixin("exo:hiddenable");
-      }
-    } else {
-      multiLanguages = document.getNode(LANGUAGES) ;
-      if(multiLanguages.hasNode(language)) {
-        languageNode = multiLanguages.getNode(language) ;
+      if(!document.hasNode(LANGUAGES) || language.equals(multiLangService_.getDefault(document))) {
+        if(document.hasNode(COMMENTS)) commentNode = document.getNode(COMMENTS) ;
+        else { 
+          commentNode = document.addNode(COMMENTS,NT_UNSTRUCTURE) ; 
+          commentNode.addMixin("exo:hiddenable");
+        }
       } else {
-        languageNode = multiLanguages.addNode(language) ;
+        multiLanguages = document.getNode(LANGUAGES) ;
+        if(multiLanguages.hasNode(language)) {
+          languageNode = multiLanguages.getNode(language) ;
+        } else {
+          languageNode = multiLanguages.addNode(language) ;
+        }
+        if(languageNode.hasNode(COMMENTS)) {
+          commentNode = languageNode.getNode(COMMENTS) ;
+        } else{
+          commentNode = languageNode.addNode(COMMENTS,NT_UNSTRUCTURE) ;
+          commentNode.addMixin("exo:hiddenable");
+        }
       }
-      if(languageNode.hasNode(COMMENTS)) {
-        commentNode = languageNode.getNode(COMMENTS) ;
-      } else{
-        commentNode = languageNode.addNode(COMMENTS,NT_UNSTRUCTURE) ;
-        commentNode.addMixin("exo:hiddenable");
+
+      if(commentor == null || commentor.length() == 0) {
+        commentor = ANONYMOUS ;      
       }
-    }
 
-    if(commentor == null || commentor.length() == 0) {
-      commentor = ANONYMOUS ;      
+      Calendar commentDate = new GregorianCalendar() ;
+      String name = Long.toString(commentDate.getTimeInMillis()) ;    
+      Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;     
+      newComment.setProperty(COMMENTOR,commentor) ;
+      newComment.setProperty(CREATED_DATE,commentDate) ;
+      newComment.setProperty(MESSAGE,comment) ;
+      if(email!=null && email.length()>0) {
+        newComment.setProperty(COMMENTOR_EMAIL,email) ;
+      }
+      if(site !=null && site.length()>0) {
+        newComment.setProperty(COMMENTOR_SITE,site) ;
+      }          
+      document.save();
+      systemSession.save();    
+      commentsCache_.remove(commentNode.getPath()) ;
+    } catch(Exception e) {
+      LOG.error("Unexpected problem happen when try to add comment", e);
+    } finally {
+      session.logout();
+      systemSession.logout();
     }
-
-    Calendar commentDate = new GregorianCalendar() ;
-    String name = Long.toString(commentDate.getTimeInMillis()) ;    
-    Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;     
-    newComment.setProperty(COMMENTOR,commentor) ;
-    newComment.setProperty(CREATED_DATE,commentDate) ;
-    newComment.setProperty(MESSAGE,comment) ;
-    if(email!=null && email.length()>0) {
-      newComment.setProperty(COMMENTOR_EMAIL,email) ;
-    }
-    if(site !=null && site.length()>0) {
-      newComment.setProperty(COMMENTOR_SITE,site) ;
-    }          
-    document.save();
-    systemSession.save();
-    systemSession.logout();
-    commentsCache_.remove(commentNode.getPath()) ;
+    
   }
 
   /**
    * {@inheritDoc}
    */
   public void updateComment(Node commentNode, String newComment) throws Exception {
-    Session session = commentNode.getSession();
     Calendar commentDate = new GregorianCalendar() ;
     commentNode.setProperty(CREATED_DATE, commentDate);
     commentNode.setProperty(MESSAGE, newComment);
     commentNode.save();
-    session.save();
-    session.logout();
   }
   
   /**
@@ -151,7 +155,6 @@ public class CommentsServiceImpl implements CommentsService {
     Node document = commentNode.getParent();
     commentNode.remove();
     document.save();
-    document.getSession().save();
   }
   
   /**
@@ -235,6 +238,5 @@ public class CommentsServiceImpl implements CommentsService {
     if(Collections.frequency(locales,language) >0) return true ;
     return false ;
   }
-  
   
 }
