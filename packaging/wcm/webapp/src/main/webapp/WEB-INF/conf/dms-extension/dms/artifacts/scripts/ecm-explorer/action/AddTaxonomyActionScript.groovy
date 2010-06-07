@@ -19,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Map;
-
 import javax.jcr.Node;
 import javax.jcr.Session;
 
@@ -97,38 +96,46 @@ public class AddTaxonomyActionScript implements CmsScript {
       LOG.error("Exception when try to get node of target", e);
       throw e;
     }
-  	String[] subPaths = getDateLocation().split("/");
-  	Node cNode = targetNode;
-  	for (String subPath : subPaths) {
-  		if (!cNode.hasNode(subPath)) {
-  			cNode.addNode(subPath);
-  			cNode.save();
-  		}
-  		cNode = cNode.getNode(subPath);
-  	}
-  	String nodeName = nodePath.substring(nodePath.lastIndexOf("/") + 1);
-  	// defend node with same name is overwrited
-  	String generatedNodeName = idGenerator_.generateStringID(nodeName);
-  	String targetParentPath = cNode.getPath(); 
-  	targetPath = cNode.getPath().concat("/").concat(generatedNodeName).replaceAll("/+", "/");
-    if(!storeWorkspace.equals(targetWorkspace)) {
-      Node currentNode = (Node)storeNode.getSession().getItem(nodePath);
-      sessionTargetNode.getWorkspace().clone(storeWorkspace, nodePath, targetPath, true);
-      currentNode.remove();
-      storeNode.save();
-    } else {
-      sessionTargetNode.move(nodePath, targetPath);
+    try {
+	  	String[] subPaths = getDateLocation().split("/");
+	  	Node cNode = targetNode;
+	  	for (String subPath : subPaths) {
+	  		if (!cNode.hasNode(subPath)) {
+	  			cNode.addNode(subPath);
+	  			cNode.save();
+	  		}
+	  		cNode = cNode.getNode(subPath);
+	  	}
+	  	String nodeName = nodePath.substring(nodePath.lastIndexOf("/") + 1);
+	  	// defend node with same name is overwrited
+	  	String generatedNodeName = idGenerator_.generateStringID(nodeName);
+	  	String targetParentPath = cNode.getPath(); 
+	  	targetPath = cNode.getPath().concat("/").concat(generatedNodeName).replaceAll("/+", "/");
+	    if (!storeWorkspace.equals(targetWorkspace)) {
+	      Node currentNode = (Node)storeNode.getSession().getItem(nodePath);
+	      sessionTargetNode.getWorkspace().clone(storeWorkspace, nodePath, targetPath, true);
+	      currentNode.remove();
+	      storeNode.save();
+	    } else {
+	    	if (sessionHomeNode.itemExists(nodePath))
+	    		sessionHomeNode.move(nodePath, targetPath);
+	    	sessionHomeNode.save();
+	    }
+	    if (sessionTargetNode.itemExists(targetPath)) {
+	    	targetNode = (Node)sessionTargetNode.getItem(targetPath);
+		    String nodeLinkPath = nodePath.substring(0, nodePath.lastIndexOf("/"));
+		    if (!nodeLinkPath.startsWith("/")) nodeLinkPath = "/" + nodeLinkPath;     
+		    Node nodeLink = linkManager_.createLink((Node)storeNode.getSession().getItem(nodeLinkPath), "exo:taxonomyLink", targetNode, nodeName);
+		    //rename added node to recover official name
+		    sessionTargetNode.move(targetPath, targetParentPath.concat("/").concat(nodeName));
+		    if (targetNode.canAddMixin("exo:privilegeable"))
+		      targetNode.addMixin("exo:privilegeable");
+		    sessionTargetNode.save();
+	    }
+    } catch (Exception e) {
+    	LOG.error("Exception when try move node and create link", e);
+      throw e;
     }
-    sessionTargetNode.save();
-    targetNode = (Node)sessionTargetNode.getItem(targetPath);
-    String nodeLinkPath = nodePath.substring(0, nodePath.lastIndexOf("/"));
-    if (!nodeLinkPath.startsWith("/")) nodeLinkPath = "/" + nodeLinkPath;     
-    Node nodeLink = linkManager_.createLink((Node)storeNode.getSession().getItem(nodeLinkPath), "exo:taxonomyLink", targetNode, nodeName);
-    // rename added node to recover official name
-    sessionTargetNode.move(targetPath, targetParentPath.concat("/").concat(nodeName));
-    if (targetNode.canAddMixin("exo:privilegeable"))
-      targetNode.addMixin("exo:privilegeable");
-    sessionTargetNode.save();
   }
   
   private String getDateLocation() {
