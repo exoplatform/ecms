@@ -51,6 +51,9 @@ public interface AuthoringPublicationConstant {
 
   /** The Constant CHANGE_TO_UNPUBLISHED. */
   public static final String  CHANGE_TO_UNPUBLISHED      = "PublicationService.AuthoringPublicationPlugin.changeState.unpublished".intern();
+  
+  /** The Constant CHANGE_TO_OBSOLETE. */
+  public static final String  CHANGE_TO_OBSOLETED      = "PublicationService.AuthoringPublicationPlugin.changeState.obsoleted".intern();  
 
   /** The Constant CHANGE_TO_ARCHIVED. */
   public static final String  CHANGE_TO_ARCHIVED         = "PublicationService.AuthoringPublicationPlugin.changeState.archived".intern();

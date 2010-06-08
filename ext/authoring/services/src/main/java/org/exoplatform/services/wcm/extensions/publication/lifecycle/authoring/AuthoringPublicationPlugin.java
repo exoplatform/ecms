@@ -71,10 +71,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     String logItemName = versionName;
     String userId = "";
     try {
-    	userId = Util.getPortalRequestContext().getRemoteUser();
+      userId = Util.getPortalRequestContext().getRemoteUser();
     } catch (Exception e) {
-		userId = node.getSession().getUserID();
-	}
+    userId = node.getSession().getUserID();
+    }
     Node selectedRevision = null;
     if (node.getName().equals(versionName) || versionName == null) {
       selectedRevision = node;
@@ -124,7 +124,6 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       }
       revisionsMap.put(node.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
-
     } else if (PublicationDefaultStates.STAGED.equals(newState)) {
 
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
@@ -143,9 +142,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       }
       revisionsMap.put(node.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
-
-    }
-    if (PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
+    } else if (PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
       versionLog = new VersionLog(logItemName,
                                   newState,
                                   userId,
@@ -183,6 +180,30 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       // change base version to unpublished state
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.UNPUBLISHED);
+      addRevisionData(node, revisionsMap.values());
+    } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
+      Value value = valueFactory.createValue(selectedRevision);
+      Value liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+                               .getValue();
+      if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
+        node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
+                         valueFactory.createValue(""));
+      }
+      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
+      versionLog = new VersionLog(logItemName,
+                                  newState,
+                                  userId,
+                                  GregorianCalendar.getInstance(),
+                                  AuthoringPublicationConstant.CHANGE_TO_OBSOLETED);
+      addLog(node, versionLog);
+      VersionData versionData = revisionsMap.get(node.getUUID());
+      if (versionData != null) {
+        versionData.setAuthor(userId);
+        versionData.setState(newState);
+      } else {
+        versionData = new VersionData(node.getUUID(), newState, userId);
+      }
+      revisionsMap.put(node.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.ARCHIVED.equalsIgnoreCase(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
@@ -269,7 +290,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
         PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
         if (publicationManagerImpl==null) {
-        	String containerName = context.get("containerName");
+          String containerName = context.get("containerName");
             container = RootContainer.getInstance().getPortalContainer(containerName);
             publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
         }
@@ -535,6 +556,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
   public Node getNodeView(Node node, Map<String, Object> context) throws Exception {
     // don't display content if state is enrolled or obsolete
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
+    @SuppressWarnings("hiding")
     String name = node.getName();
     String uuid = node.getProperty("jcr:uuid").getString();
     String state = node.getProperty("publication:currentState").getString();
@@ -552,11 +574,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     if (liveNode != null) {
       if (liveNode.hasNode("jcr:frozenNode")) {
         return liveNode.getNode("jcr:frozenNode");
-      } else {
-        return liveNode;
       }
-    } else
-      return null;
+      return liveNode;
+    }
+    return null;
 
   }
 
