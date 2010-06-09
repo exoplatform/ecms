@@ -35,7 +35,7 @@ public class NodeTypeNameValidator implements Validator {
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = (String) uiInput.getValue();
     if (inputValue == null || inputValue.trim().length() == 0) {
-      throwException("NodeTypeNameValidator.msg.Invalid-input", uiInput);      
+      throwException("NodeTypeNameValidator.msg.empty-input", uiInput);      
     }
     switch (inputValue.length()) {
     case 1:
