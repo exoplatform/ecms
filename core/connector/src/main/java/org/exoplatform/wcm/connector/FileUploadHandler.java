@@ -177,6 +177,7 @@ public class FileUploadHandler {
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());    
     jcrContent.setProperty("jcr:mimeType",mimetype);
     parent.getSession().save();
+    parent.getSession().refresh(true); // Make refreshing data 
     uploadService.removeUpload(uploadId);
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
