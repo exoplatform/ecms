@@ -1,4 +1,7 @@
-<%def node = uicomponent.getNode() ;%>
+<%
+import javax.jcr.Value;
+
+def node = uicomponent.getNode() ;%>
 <style>
 	.ContentPublishing {
 		margin: 10px;
@@ -18,8 +21,13 @@
 	  <tr>
 			<td style="width:25%"><%=_ctx.appRes("ContentPublishing.view.label.lifecycle")%></td>
 			<td>
-	      <%if(node.hasProperty("exo:lifecyclePhase")) {%>
-			    <%=node.getProperty("exo:lifecyclePhase").getString()%>
+	      <%if(node.hasProperty("exo:lifecyclePhase")) {
+	        Value[] values = node.getProperty("exo:lifecyclePhase").getValues();
+	        String phases = (values != null && values.length > 0) ? values[0].getString() : "";
+	        for (int i = 1; i < values.length; i++)
+	          phases += ', ' + values[i].getString();
+	        %>
+			    <%=phases%>
 			  <%}%>
 	    </td>
 	  </tr>

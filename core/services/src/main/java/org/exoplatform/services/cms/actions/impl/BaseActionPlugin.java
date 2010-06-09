@@ -115,8 +115,10 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     String actionName = 
       (String) ((JcrInputProperty) mappings.get("/node/exo:name")).getValue();    
     mappings.remove("/node/exo:name");
-    String[] type = 
-      (String[]) ((JcrInputProperty) mappings.get("/node/exo:lifecyclePhase")).getValue();
+    Object typeObj = 
+      ((JcrInputProperty) mappings.get("/node/exo:lifecyclePhase")).getValue();
+    String[] type = (typeObj instanceof String) ? new String[] { (String)typeObj} : 
+      (String[]) typeObj;
     String actionExecutable = getActionExecutable(actionType);
     if (DMSEvent.getEventTypes(type) == DMSEvent.READ) return;
     if ((DMSEvent.getEventTypes(type) & DMSEvent.SCHEDULE) > 0) {
