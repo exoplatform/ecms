@@ -144,8 +144,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       revisionsMap.put(node.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
 
-    }
-    if (PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
+    } else if (PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
       versionLog = new VersionLog(logItemName,
                                   newState,
                                   userId,
@@ -183,6 +182,30 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       // change base version to unpublished state
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.UNPUBLISHED);
+      addRevisionData(node, revisionsMap.values());
+    } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
+      Value value = valueFactory.createValue(selectedRevision);
+      Value liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+                               .getValue();
+      if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
+        node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
+                         valueFactory.createValue(""));
+      }
+      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
+      versionLog = new VersionLog(logItemName,
+                                  newState,
+                                  userId,
+                                  GregorianCalendar.getInstance(),
+                                  AuthoringPublicationConstant.CHANGE_TO_OBSOLETED);
+      addLog(node, versionLog);
+      VersionData versionData = revisionsMap.get(node.getUUID());
+      if (versionData != null) {
+        versionData.setAuthor(userId);
+        versionData.setState(newState);
+      } else {
+        versionData = new VersionData(node.getUUID(), newState, userId);
+      }
+      revisionsMap.put(node.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.ARCHIVED.equalsIgnoreCase(newState)) {
       Value value = valueFactory.createValue(selectedRevision);

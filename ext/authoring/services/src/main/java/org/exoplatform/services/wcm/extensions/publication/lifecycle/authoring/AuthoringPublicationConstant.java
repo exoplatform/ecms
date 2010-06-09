@@ -46,6 +46,9 @@ public interface AuthoringPublicationConstant {
   /** The Constant CHANGE_TO_APPROVED. */
   public static final String  CHANGE_TO_APPROVED         = "PublicationService.AuthoringPublicationPlugin.changeState.approved".intern();
 
+  /** The Constant CHANGE_TO_OBSOLETE. */
+  public static final String  CHANGE_TO_OBSOLETED        = "PublicationService.AuthoringPublicationPlugin.changeState.obsoleted".intern();
+  
   /** The Constant CHANGE_TO_STAGED. */
   public static final String  CHANGE_TO_STAGED           = "PublicationService.AuthoringPublicationPlugin.changeState.staged".intern();
 
