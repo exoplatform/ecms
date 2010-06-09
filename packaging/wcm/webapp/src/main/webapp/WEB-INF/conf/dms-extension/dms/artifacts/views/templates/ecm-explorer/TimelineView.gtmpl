@@ -53,7 +53,7 @@ import org.exoplatform.ecm.jcr.model.Preference;
  	int listCount = 5;
  	
 %>
-<!--<div style="" class="UIListView" id="UIDocumentInfo-1256094770906">-->
+<div id="$componentId">
 <div id="${componentId}-$viewComponentId" class="UIListView" style="">
 	<div class="UITimelineView">
 		<div style="padding:4px 3px 0px 3px;">
@@ -173,4 +173,5 @@ import org.exoplatform.ecm.jcr.model.Preference;
 			<% } %>
 		</div>
 	</div>
+</div>
 </div>

@@ -1215,8 +1215,8 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       try {
         if (timeLineSortByFavourite.length() != 0) {
           int factor = (timeLineSortByFavourite.equals(Preference.BLUE_DOWN_ARROW)) ? 1 : -1;
-          if (node1.isNodeType(Utils.EXO_FAVOURITE)) return -1 * factor;
-          else if (node2.isNodeType(Utils.EXO_FAVOURITE)) return 1 * factor;
+          if (isFavouriter(node1)) return -1 * factor;
+          else if (isFavouriter(node2)) return 1 * factor;
           else return 0;
           
         } else if (timeLineSortByDate.length() != 0) {
