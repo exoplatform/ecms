@@ -2440,5 +2440,10 @@
 					<PathNotFoundException>A script with the path '{0}' is not already exists</PathNotFoundException>      
    </msg>
  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   		<no-list>Il n'y a aucun type de noeud à condition de recherche</no-list>
+   </msg>
+ </UINodeTypeList>
 </bundle>
 

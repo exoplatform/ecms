@@ -2448,5 +2448,10 @@
 					<PathNotFoundException>A script with the path '{0}' không tồn tại</PathNotFoundException>      
    </msg>
  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   		<no-list>Không có bất kỳ loại nút với điều kiện tìm kiếm</no-list>
+   </msg>
+ </UINodeTypeList>
 </bundle>
 

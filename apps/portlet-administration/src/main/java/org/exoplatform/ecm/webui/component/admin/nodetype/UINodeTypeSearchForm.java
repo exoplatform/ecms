@@ -20,6 +20,7 @@ package org.exoplatform.ecm.webui.component.admin.nodetype;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import javax.jcr.Node;
 import javax.jcr.nodetype.NodeType;
@@ -56,28 +57,33 @@ public class UINodeTypeSearchForm extends UIForm {
   public static class SearchNodeTypeActionListener extends EventListener<UINodeTypeSearchForm> {
     public void execute(Event<UINodeTypeSearchForm> event) throws Exception {
       UINodeTypeSearchForm uiForm = event.getSource();
-      UIFormStringInput uiInputNodeType = (UIFormStringInput)uiForm.findComponentById("NodeTypeText");
-      String nodeTypeName = uiInputNodeType.getValue();
-      if (nodeTypeName == null || nodeTypeName.length() == 0) return;
-      nodeTypeName = (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) ? nodeTypeName.replace("*", ".*") : nodeTypeName;
-      Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);
       UINodeTypeManager uiNodeTypeManager = uiForm.getAncestorOfType(UINodeTypeManager.class);
       UINodeTypeList uiNodeTypeList = uiNodeTypeManager.getChild(UINodeTypeList.class);
-      List lstAllNodetype = uiNodeTypeList.getAllNodeTypes();
-      List lstNodetype = new ArrayList<NodeType>();
-      for (Object nodeType : lstAllNodetype) {
-        if (nodeType instanceof NodeType) {
-          if (p.matcher(((NodeType) nodeType).getName()).find()) {
-            lstNodetype.add(nodeType);
-          }
-        } else if (nodeType instanceof Node) {
-          if (p.matcher(((Node) nodeType).getName()).find()) {
-            lstNodetype.add(nodeType);
+      try {      
+        UIFormStringInput uiInputNodeType = (UIFormStringInput)uiForm.findComponentById("NodeTypeText");
+        String nodeTypeName = uiInputNodeType.getValue();
+        if (nodeTypeName == null || nodeTypeName.length() == 0) return;
+        nodeTypeName = (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) ? nodeTypeName.replace("*", ".*") : nodeTypeName;
+        Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);      
+        List lstAllNodetype = uiNodeTypeList.getAllNodeTypes();
+        List lstNodetype = new ArrayList<NodeType>();
+        for (Object nodeType : lstAllNodetype) {
+          if (nodeType instanceof NodeType) {
+            if (p.matcher(((NodeType) nodeType).getName()).find()) {
+              lstNodetype.add(nodeType);
+            }
+          } else if (nodeType instanceof Node) {
+            if (p.matcher(((Node) nodeType).getName()).find()) {
+              lstNodetype.add(nodeType);
+            }
           }
         }
+        uiNodeTypeList.refresh(null, 1, lstNodetype);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiNodeTypeManager) ;
+      } catch (PatternSyntaxException pSyntaxException) {
+        uiNodeTypeList.refresh(null, 1, new ArrayList<NodeType>());
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiNodeTypeManager) ;
       }
-      uiNodeTypeList.refresh(null, 1, lstNodetype);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiNodeTypeManager) ;
     }
   }
 }
