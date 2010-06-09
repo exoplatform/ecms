@@ -794,6 +794,10 @@ public class UIJCRExplorer extends UIContainer {
       Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_VERSIONABLE));
     } else if (Preference.SORT_BY_AUDITING.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_AUDITING));
+    } else if (Preference.SORT_BY_CREATED_DATE.equals(preferences_.getSortType())) {
+        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));	
+    } else if (Preference.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
+        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));	
     } else {
       Collections.sort(childrenList, new PropertyValueComparator(preferences_.getSortType(), preferences_.getOrder()));
     }
