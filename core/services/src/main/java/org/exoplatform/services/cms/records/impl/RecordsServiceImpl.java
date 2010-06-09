@@ -126,7 +126,7 @@ public class RecordsServiceImpl implements RecordsService {
 
     JcrInputProperty lifeCycleInputProperty = new JcrInputProperty();
     lifeCycleInputProperty.setJcrPath("/node/exo:lifecyclePhase");
-    lifeCycleInputProperty.setValue("add");
+    lifeCycleInputProperty.setValue(new String[]{"node_added"});
     mappings.put("/node/exo:lifecyclePhase", lifeCycleInputProperty);
 
     JcrInputProperty descriptionInputProperty = new JcrInputProperty();
