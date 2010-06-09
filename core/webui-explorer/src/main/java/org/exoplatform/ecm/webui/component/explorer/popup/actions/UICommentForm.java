@@ -142,8 +142,11 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
         throw new MessageException(new ApplicationMessage("UICommentForm.msg.content-null", null, ApplicationMessage.WARNING)) ;
       }
       if (uiForm.isEdit()) {
-        Node commentNode = uiExplorer.getNodeByPath(uiForm.getNodeCommentPath(), uiForm.document_.getSession());
-        commentsService.updateComment(commentNode, comment);
+        try {
+          Node commentNode = uiExplorer.getNodeByPath(uiForm.getNodeCommentPath(), uiForm.document_.getSession());
+          commentsService.updateComment(commentNode, comment);
+        } catch (Exception e) {
+        }
       } else {
         String userName = event.getRequestContext().getRemoteUser() ;
         String website = null;

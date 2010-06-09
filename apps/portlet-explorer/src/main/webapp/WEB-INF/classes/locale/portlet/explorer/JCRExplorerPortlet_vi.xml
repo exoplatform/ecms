@@ -259,7 +259,7 @@
       <UIImportNode>Xuất node</UIImportNode>
       <UIViewMetadataManager>Hiển thị dữ liệu Metadata</UIViewMetadataManager>
       <UIVoteForm>Bình chọn tài liệu</UIVoteForm>
-      <UICommentForm>Thêm nhận xét</UICommentForm>
+      <UICommentForm>Viết nhận xét</UICommentForm>
       <UIPreferencesForm>Thiết lập lựa chọn</UIPreferencesForm>
       <UIPublicationManager>Quản lý xuất bản</UIPublicationManager>
       <UIConfirmMessage>Xác nhận xóa</UIConfirmMessage>

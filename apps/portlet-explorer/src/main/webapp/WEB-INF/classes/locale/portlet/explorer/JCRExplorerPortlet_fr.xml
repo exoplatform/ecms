@@ -253,7 +253,7 @@
       <UIImportNode>Importation de noeud</UIImportNode>
       <UIViewMetadataManager>Visualisation des métadonnées</UIViewMetadataManager>
       <UIVoteForm>Vote d'un document</UIVoteForm>
-      <UICommentForm>Ajout de commentaire</UICommentForm>
+      <UICommentForm>Ecrire un commentaire</UICommentForm>
       <UIPreferencesForm>Préférences</UIPreferencesForm>
       <UIPublicationManager>Gérer la publication</UIPublicationManager>
       <UIConfirmMessage>Confirmer la suppression</UIConfirmMessage>

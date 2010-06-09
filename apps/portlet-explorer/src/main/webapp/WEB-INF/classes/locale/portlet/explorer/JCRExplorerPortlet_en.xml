@@ -253,7 +253,7 @@
       <UIImportNode>Import Node</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>Add Comment</UICommentForm>
+      <UICommentForm>Write Comment</UICommentForm>
       <UIPreferencesForm>Preference Setting</UIPreferencesForm>
       <UIPublicationManager>Manage publication</UIPublicationManager>
       <UIConfirmMessage>Confirm delete</UIConfirmMessage>
