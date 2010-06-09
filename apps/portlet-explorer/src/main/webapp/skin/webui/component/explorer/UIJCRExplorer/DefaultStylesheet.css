@@ -213,7 +213,11 @@
 .UIJCRExplorerPortlet .rootNodeInfo .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td {
 	padding: 0px;
 }
-	
+
+.UIJCRExplorerPortlet .UITreeTaxonomyList .rootNodeInfo .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td {
+	padding: 4px;
+}
+
 /*############################## -- Begin UIDocumentWorkspace -- ##############################*/
  /*
 	* minh.js.exo

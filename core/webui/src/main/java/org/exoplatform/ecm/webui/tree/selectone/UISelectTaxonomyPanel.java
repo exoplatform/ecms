@@ -98,28 +98,27 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
       String returnField = ((UIBaseNodeTreeSelector)uiTreeSelector).getReturnFieldName();
       ((UISelectable)((UIBaseNodeTreeSelector)uiTreeSelector).getSourceComponent()).doSelect(returnField, value) ;
       
-      UIComponent uiOneNodePathSelector = uiSelectPathPanel.getParent();
-      if (uiOneNodePathSelector instanceof UIOneNodePathSelector) {
-        UIComponent uiComponent = uiOneNodePathSelector.getParent();
+      if (uiTreeSelector instanceof UIOneNodePathSelector) {
+        UIComponent uiComponent = uiTreeSelector.getParent();
         if (uiComponent instanceof UIPopupWindow) {
           ((UIPopupWindow)uiComponent).setShow(false);
           ((UIPopupWindow)uiComponent).setRendered(false);
           event.getRequestContext().addUIComponentToUpdateByAjax(uiComponent);
         }
-        UIComponent component = ((UIOneNodePathSelector)uiOneNodePathSelector).getSourceComponent().getParent();
+        UIComponent component = ((UIOneNodePathSelector) uiTreeSelector).getSourceComponent().getParent();
         if (component != null) {
           event.getRequestContext().addUIComponentToUpdateByAjax(component);
           return;
         }
       }
-      if (uiOneNodePathSelector instanceof UIOneTaxonomySelector) {
-        UIComponent uiComponent = uiOneNodePathSelector.getParent();
+      if (uiTreeSelector instanceof UIOneTaxonomySelector) {
+        UIComponent uiComponent = uiTreeSelector.getParent();
         if (uiComponent instanceof UIPopupWindow) {
           ((UIPopupWindow)uiComponent).setShow(false);
           ((UIPopupWindow)uiComponent).setRendered(false);
           event.getRequestContext().addUIComponentToUpdateByAjax(uiComponent);
         }
-        UIComponent component = ((UIOneTaxonomySelector)uiOneNodePathSelector).getSourceComponent().getParent();
+        UIComponent component = ((UIOneTaxonomySelector) uiTreeSelector).getSourceComponent().getParent();
         if (component != null) {
           event.getRequestContext().addUIComponentToUpdateByAjax(component);
         }

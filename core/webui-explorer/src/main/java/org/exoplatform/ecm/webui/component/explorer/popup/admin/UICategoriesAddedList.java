@@ -25,7 +25,6 @@ import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
@@ -35,6 +34,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -147,8 +147,12 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
     try {
       Node currentNode = uiJCRExplorer.getCurrentNode();
       uiJCRExplorer.addLockToken(currentNode);
-      String[] arrayCategoryPath = String.valueOf(value.toString()).split(rootTaxonomyName);
-      taxonomyService.addCategory(currentNode, rootTaxonomyName, arrayCategoryPath[1]);
+      if (rootTaxonomyName.equals(value)) {
+      	taxonomyService.addCategory(currentNode, rootTaxonomyName, "");
+      } else {
+      	String[] arrayCategoryPath = String.valueOf(value.toString()).split(rootTaxonomyName);
+      	taxonomyService.addCategory(currentNode, rootTaxonomyName, arrayCategoryPath[1]);
+      }
       uiJCRExplorer.getCurrentNode().save() ;
       uiJCRExplorer.getSession().save() ;
       updateGrid(1) ;

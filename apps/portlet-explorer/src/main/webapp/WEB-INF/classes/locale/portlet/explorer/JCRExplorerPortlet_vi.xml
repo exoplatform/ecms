@@ -3279,4 +3279,13 @@
   			 <NameAlreadyExist>Tên nhãn đã tồn tại</NameAlreadyExist> 
   		</msg>
   </UITagForm>
+<!-- 
+  	############  From WCM 2.1.0 ##############
+   -->  
+  <UITreeTaxonomyList>
+    <label>
+      <rootNodePath>Cây gốc</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
 </bundle>

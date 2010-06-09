@@ -3231,4 +3231,13 @@
   			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
   		</msg>
   </UITagForm>
+  <!-- 
+  	############  From WCM 2.1.0 ##############
+  -->  
+  <UITreeTaxonomyList>
+    <label>
+      <rootNodePath>Root tree</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
 </bundle>

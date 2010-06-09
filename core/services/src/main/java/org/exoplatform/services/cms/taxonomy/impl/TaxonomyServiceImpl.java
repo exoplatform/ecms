@@ -42,7 +42,6 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
-import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Permission;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -421,8 +420,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       for (String categoryPath : categoryPaths) {        
         if (rootNodeTaxonomy.getPath().equals("/")) {
           category = categoryPath;
-        } else if (!categoryPath.startsWith("/") && (categoryPath.length() != 0)) {
-          category = rootNodeTaxonomy.getPath() + "/" + categoryPath;
+        } else if (categoryPath.length() != 0) {
+        	if (!categoryPath.startsWith("/"))
+						category = rootNodeTaxonomy.getPath() + "/" + categoryPath;
+					else
+						category = rootNodeTaxonomy.getPath() + categoryPath;
         } else {
           category = rootNodeTaxonomy.getPath();
         }
