@@ -21,20 +21,21 @@ import java.util.List;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
@@ -139,7 +140,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(true) ;
         getUIFormSelectBox(FIELD_SELECT_VERSION).setOptions(getVersionValues(script)) ;         
         getUIFormSelectBox(FIELD_SELECT_VERSION).setValue(script.getBaseVersion().getName()) ;
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setEnable(true) ;
+        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setEnable(false) ;
         getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(true) ;
         setActions(new String[]{"Save", "Restore", "Refresh", "Cancel"})  ;
       } else {
@@ -235,13 +236,21 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           return ;          
         }
       } else {
-        Node node = curentList.getScriptNode(name) ; 
-        if(!node.isNodeType(Utils.MIX_VERSIONABLE)) node.addMixin(Utils.MIX_VERSIONABLE) ;
-        else node.checkout() ;  
-        scriptService.addScript(namePrefix + "/" + name, content, repository, 
+        try {       
+          Node node = curentList.getScriptNode(name) ; 
+          if(!node.isNodeType(Utils.MIX_VERSIONABLE)) node.addMixin(Utils.MIX_VERSIONABLE) ;
+          else node.checkout() ;  
+          scriptService.addScript(namePrefix + "/" + name, content, repository, 
             SessionProviderFactory.createSessionProvider()) ;
-        node.save() ;
-        node.checkin() ;
+          node.save() ;
+          node.checkin() ;
+        } catch (PathNotFoundException pathNotFoundException) {
+          Object[] args = { namePrefix + "/" + name };
+          uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args, 
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
       }
       uiForm.reset() ;
       UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class) ;
@@ -263,18 +272,28 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       } else if(uiForm.getId().equals(UICBScripts.SCRIPTFORM_NAME)){
         uiScriptList = uiManager.findComponentById(UICBScripts.SCRIPTLIST_NAME);
       }
-      Node node = uiScriptList.getScriptNode(name) ; 
-      String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
-      String baseVesion = node.getBaseVersion().getName() ;
-      if(!vesion.equals(baseVesion)) { 
-        node.checkout() ;
-        node.restore(vesion, true) ;
-        uiScriptList.refresh(1) ;
+      try {
+        Node node = uiScriptList.getScriptNode(name) ; 
+        String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
+        String baseVesion = node.getBaseVersion().getName() ;
+        if(!vesion.equals(baseVesion)) { 
+          node.checkout() ;
+          node.restore(vesion, true) ;
+          uiScriptList.refresh(1) ;
+        }
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiScriptList) ;
+        UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class) ;
+        uiPopupAction.deActivate() ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
+      } catch (PathNotFoundException pathNotFoundException) {
+        String namePrefix = uiScriptList.getScriptCategory();
+        Object[] args = { namePrefix + "/" + name };
+        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args, 
+            ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiScriptList) ;
-      UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class) ;
-      uiPopupAction.deActivate() ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
     }
   }
 
@@ -314,8 +333,18 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         } else {
           uiScriptList = uiScriptManager.findComponentById(UICBScripts.SCRIPTLIST_NAME) ;
         }
-        Node script = uiScriptList.getScriptNode(sciptName) ;  
-        uiForm.update(script, false) ;
+        try {
+          Node script = uiScriptList.getScriptNode(sciptName) ;  
+          uiForm.update(script, false) ;
+        } catch (PathNotFoundException pathNotFoundException) {
+          String namePrefix = uiScriptList.getScriptCategory();
+          Object[] args = { namePrefix + "/" + sciptName };
+          UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+          uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args, 
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class)) ;
     }

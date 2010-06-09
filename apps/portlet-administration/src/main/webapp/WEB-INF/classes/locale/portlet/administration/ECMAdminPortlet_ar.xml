@@ -2380,5 +2380,10 @@
 		  <namespace-invalid>Invalid data:  unknown namespace : '{0}'</namespace-invalid>
 	    </msg>
 	 </UINodeTypeUpload>
+	<UIScriptForm>
+ 		<msg>
+					<PathNotFoundException>A script with the path '{0}' is not already exists</PathNotFoundException>      
+   </msg>
+ </UIScriptForm>
 </bundle>
   

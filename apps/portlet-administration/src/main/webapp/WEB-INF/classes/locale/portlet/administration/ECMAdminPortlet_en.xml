@@ -2430,5 +2430,10 @@
 			<selectedAllNodeTypes>Choose all node types</selectedAllNodeTypes>
 		</label>
 	</UINodeTypeSelector>
+	<UIScriptForm>
+ 		<msg>
+					<PathNotFoundException>A script with the path '{0}' is not already exists</PathNotFoundException>      
+   </msg>
+ </UIScriptForm>
 </bundle>
 

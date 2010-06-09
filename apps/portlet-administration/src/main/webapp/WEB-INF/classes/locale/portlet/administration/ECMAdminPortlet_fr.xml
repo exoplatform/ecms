@@ -2435,5 +2435,10 @@
 			<selectedAllNodeTypes>Selectionner tous les types de noeuds</selectedAllNodeTypes>
 		</label>
 	</UINodeTypeSelector>
+	<UIScriptForm>
+ 		<msg>
+					<PathNotFoundException>A script with the path '{0}' is not already exists</PathNotFoundException>      
+   </msg>
+ </UIScriptForm>
 </bundle>
 

@@ -2443,5 +2443,10 @@
 		  <namespace-invalid>Dữ liệu không phù hợp: Không gian tên bị sai: '{0}'</namespace-invalid>
 	    </msg>
 	 </UINodeTypeUpload>
+	 <UIScriptForm>
+ 		<msg>
+					<PathNotFoundException>A script with the path '{0}' không tồn tại</PathNotFoundException>      
+   </msg>
+ </UIScriptForm>
 </bundle>
 
