@@ -46,7 +46,6 @@ import org.exoplatform.services.wcm.newsletter.handler.NewsletterManageUserHandl
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterPublicUserHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterSubscriptionHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterTemplateHandler;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform
@@ -72,9 +71,9 @@ public class NewsletterManagerService {
 	/** The public user handler. */
 	private NewsletterPublicUserHandler publicUserHandler;
 	
-	private RepositoryService repositoryService;
+	private RepositoryService repositoryService_;
 	
-	private MailService mailService;
+	private MailService mailService_;
 	
 	/** The repository name. */
 	private String repositoryName;
@@ -91,7 +90,7 @@ public class NewsletterManagerService {
 	 * @param initParams the init params
 	 * @param dmsConfiguration the dms configuration
 	 */
-	public NewsletterManagerService(InitParams initParams, DMSConfiguration dmsConfiguration) {
+	public NewsletterManagerService(InitParams initParams, DMSConfiguration dmsConfiguration, RepositoryService repositoryService, MailService mailService) {
 		log.info("Starting NewsletterManagerService ... ");
 		repositoryName = initParams.getValueParam("repository").getValue();
 		workspaceName = initParams.getValueParam("workspace").getValue();
@@ -102,8 +101,8 @@ public class NewsletterManagerService {
 		publicUserHandler = new NewsletterPublicUserHandler(repositoryName, workspaceName);
 		templateHandler = new NewsletterTemplateHandler(repositoryName, workspaceName);
 		
-		repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-		this.mailService = WCMCoreUtils.getService(MailService.class);
+		repositoryService_ = repositoryService;
+		mailService_ = mailService;
 	}
 
 	/**
@@ -143,7 +142,7 @@ public class NewsletterManagerService {
 	}
 
   public List<String> getAllBannedUser()throws Exception{
-    ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+    ManageableRepository manageableRepository = repositoryService_.getRepository(repositoryName);
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     List<String> listEmails = new ArrayList<String>();
@@ -191,9 +190,9 @@ public class NewsletterManagerService {
 	 * @throws Exception the exception
 	 */
 	public void sendNewsletter() throws Exception {
-	  List<String> listBannedEmail = this.getAllBannedUser();
+		List<String> listBannedEmail = this.getAllBannedUser();
 	  
-		ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+		ManageableRepository manageableRepository = repositoryService_.getRepository(repositoryName);
 		SessionProvider sessionProvider = SessionProvider.createSystemProvider();
 		Session session = sessionProvider.getSession(workspaceName, manageableRepository);
 
@@ -232,7 +231,7 @@ public class NewsletterManagerService {
 				message.setMimeType("text/html");
 				
 				try {
-					mailService.sendMessage(message);
+					mailService_.sendMessage(message);
 				} catch (Exception e) {
 					log.error("Error when send newsletter: ", e);
 				}
