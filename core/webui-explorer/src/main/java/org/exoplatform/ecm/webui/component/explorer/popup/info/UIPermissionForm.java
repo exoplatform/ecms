@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.info;
 
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -72,6 +73,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   final static public String PERMISSION   = "permission";
 
   final static public String POPUP_SELECT = "SelectUserOrGroup";
+  final static public String ANY_PERMISSION = "*";
 
   private Node               currentNode;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIPermissionForm");
@@ -112,6 +114,9 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         AccessControlEntry accessControlEntry = perIter.next();
         if(user.equals(accessControlEntry.getIdentity())) {
           userPermission.append(accessControlEntry.getPermission()).append(" ");
+        } else if(user.equals("*") || user.equals("any")) {
+          if (accessControlEntry.getIdentity().equals("*") || accessControlEntry.getIdentity().equals("any")) 
+            userPermission.append(accessControlEntry.getPermission()).append(" ");
         }
       }
       for (String perm : PermissionType.ALL) { 
@@ -202,14 +207,6 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       for (String perm : PermissionType.ALL) {
         if (uiForm.getUIFormCheckBoxInput(perm).isChecked()) permsList.add(perm);
         else {
-          if (uiForm.hasMembership(currentNode.getSession().getUserID(), userOrGroup)) {
-            if (perm.equals(PermissionType.SET_PROPERTY)) {
-              uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.allow-setProperty", null, 
-                  ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-              return;
-            }
-          } 
           permsRemoveList.add(perm);
         }
       }
@@ -248,11 +245,28 @@ public class UIPermissionForm extends UIForm implements UISelectable {
                                                     ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
+          } catch (AccessControlException accessControlException) {
+            uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, 
+                ApplicationMessage.WARNING));
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            return;
           }
-        } 
-        if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
+        }
+        try {
+          if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
+          node.save();
+        } catch (AccessDeniedException ade) {
+          uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, 
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch (AccessControlException accessControlException) {
+          uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, 
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
         uiParent.getChild(UIPermissionInfo.class).updateGrid(1);
-        node.save();
         if (uiExplorer.getRootNode().equals(node)) {
           if (!PermissionUtil.canRead(currentNode)) {
             uiForm.getAncestorOfType(UIJCRExplorerPortlet.class).reloadWhenBroken(uiExplorer);
@@ -291,8 +305,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
     public void execute(Event<UIPermissionForm> event) throws Exception {
       UIPermissionForm uiForm = event.getSource();
       UIPermissionInputSet uiInputSet = uiForm.getChildById(UIPermissionForm.PERMISSION);
-      uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(
-          SystemIdentity.ANY);
+      uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(ANY_PERMISSION);
       uiForm.checkAll(false);
       uiInputSet.getUIFormCheckBoxInput(PermissionType.READ).setChecked(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
