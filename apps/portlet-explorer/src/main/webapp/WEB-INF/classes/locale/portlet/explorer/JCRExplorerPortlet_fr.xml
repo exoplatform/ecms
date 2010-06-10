@@ -3226,6 +3226,14 @@
       <UIPublishingPanel>Gérer la publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
+  <WCMContentView>
+   <header>
+     <status>L'état</status>
+     <author>L'auteur</author>
+     <date>La date de création</date>
+     <title>Le titre du document</title>
+	</header>
+  </WCMContentView>
   <UITagForm>
   		<msg>
   			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
