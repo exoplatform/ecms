@@ -177,6 +177,7 @@ public class FileUploadHandler {
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());    
     jcrContent.setProperty("jcr:mimeType",mimetype);
     parent.getSession().save();
+    parent.getSession().refresh(true); // Refresh data
     uploadService.removeUpload(uploadId);
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
@@ -205,6 +206,7 @@ public class FileUploadHandler {
       percent = (resource.getUploadedSize() * 100) / resource.getEstimatedSize();      
     } else {
       percent = 100.0;
+
     } 
     Element rootElement = doc.createElement("UploadProgress");
     rootElement.setAttribute("uploadId", uploadId);
