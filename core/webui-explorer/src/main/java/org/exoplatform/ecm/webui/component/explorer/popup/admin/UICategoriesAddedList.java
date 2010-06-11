@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -35,6 +36,9 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -145,7 +149,7 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
     }
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     try {
-      Node currentNode = uiJCRExplorer.getCurrentNode();
+      Node currentNode = uiJCRExplorer.getCurrentNode();      
       uiJCRExplorer.addLockToken(currentNode);
       if (rootTaxonomyName.equals(value)) {
       	taxonomyService.addCategory(currentNode, rootTaxonomyName, "");
@@ -155,8 +159,13 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
       }
       uiJCRExplorer.getCurrentNode().save() ;
       uiJCRExplorer.getSession().save() ;
-      updateGrid(1) ;
+      updateGrid(1) ;           
       setRenderSibling(UICategoriesAddedList.class) ;
+      
+      NodeLocation location = NodeLocation.getNodeLocationByNode(currentNode);
+      WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);           
+      composer.updateContent(location.getRepository(), location.getWorkspace(), location.getPath(), new HashMap<String, String>());
+      
     } catch(AccessDeniedException accessDeniedException) {
       throw new MessageException(new ApplicationMessage("AccessControlException.msg",
           null, ApplicationMessage.WARNING));
