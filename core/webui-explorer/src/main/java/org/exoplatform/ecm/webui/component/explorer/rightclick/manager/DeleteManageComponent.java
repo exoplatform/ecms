@@ -181,6 +181,15 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     		LockUtil.removeLock(node);    		
     		node.unlock();
     	}
+    	
+    	if (node.getReferences().getSize() > 0 ) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-referentialIntegrityException", 
+            null,ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiExplorer.updateAjax(event);
+        return;
+      }
+    	
 			if (!node.isCheckedOut())
 				throw new VersionException("node is locked, can't move to trash node :" + node.getPath());
 			if (!PermissionUtil.canRemoveNode(node))
@@ -192,8 +201,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     	String trashRepository = portletPref.getValue(Utils.TRASH_REPOSITORY, "");
     	SessionProvider sessionProvider = uiExplorer.getSessionProvider();
     	Node currentNode = uiExplorer.getCurrentNode();
+    	    	    	    	
     	try {
-	    	trashService.moveToTrash(node, 
+	    	trashService.moveToTrash(node,  
 	    							 trashHomeNodePath, trashWorkspace, 
 	    							 trashRepository, sessionProvider);
     	} catch (PathNotFoundException ex) {}
