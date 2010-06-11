@@ -209,7 +209,7 @@ public class NodeFinderImpl implements NodeFinder {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     SessionProviderService service =
       (SessionProviderService)container.getComponentInstanceOfType(SessionProviderService.class);
-    return service.getSystemSessionProvider(null).getSession(workspace, manageableRepository);
+    return service.getSessionProvider(null).getSession(workspace, manageableRepository);
   }
   
   /**

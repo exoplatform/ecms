@@ -23,7 +23,6 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 
 /**
@@ -34,7 +33,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  */
 public class TestSymLink extends BaseDMSTestCase {
   
-  NodeFinder nodeFinder;
+  MockNodeFinderImpl nodeFinder;
   
   /**
    * Set up for testing
@@ -68,7 +67,7 @@ public class TestSymLink extends BaseDMSTestCase {
   public void setUp() throws Exception {
     System.out.println("========== Create root node  ========");
     super.setUp();
-    nodeFinder = (NodeFinder) container.getComponentInstanceOfType(NodeFinder.class);
+    nodeFinder = (MockNodeFinderImpl) container.getComponentInstanceOfType(MockNodeFinderImpl.class);
     createTreeInCollaboration();
     createTreeInSystem();
   }

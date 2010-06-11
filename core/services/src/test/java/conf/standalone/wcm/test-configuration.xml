@@ -108,6 +108,11 @@
       </object-param>
     </init-params>
   </component>
+  
+  	<component>
+    <key>org.exoplatform.services.cms.link.NodeFinder</key>
+    <type>org.exoplatform.services.ecm.dms.test.MockNodeFinderImpl</type>
+  </component>
 
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
