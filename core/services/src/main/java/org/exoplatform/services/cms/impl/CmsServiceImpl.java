@@ -775,7 +775,11 @@ public class CmsServiceImpl implements CmsService {
       break;
     case PropertyType.DATE:      
       if (value == null){        
-        node.setProperty(propertyName, new GregorianCalendar());
+        if (node.hasProperty(propertyName) && node.getProperty(propertyName).getDefinition().isMandatory()) {
+          node.setProperty(propertyName, new GregorianCalendar());
+        } else {
+          node.setProperty(propertyName, (Value)null);
+        }
       } else {
         if(isMultiple) {
           Session session = node.getSession();
