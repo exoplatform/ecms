@@ -86,9 +86,9 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     Map<String, VersionData> revisionsMap = getRevisionData(node);
     VersionLog versionLog = null;
     ValueFactory valueFactory = node.getSession().getValueFactory();
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    String containerName = context.get("containerName");
+    ExoContainer container = RootContainer.getInstance().getPortalContainer(containerName);
     if (PublicationDefaultStates.PENDING.equals(newState)) {
-
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
@@ -291,11 +291,6 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       if (editableRevision != null) {
 
         PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
-        if (publicationManagerImpl==null) {
-        	String containerName = context.get("containerName");
-            container = RootContainer.getInstance().getPortalContainer(containerName);
-            publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
-        }
         String lifecycleName = node.getProperty("publication:lifecycle").getString();
         Lifecycle lifecycle = publicationManagerImpl.getLifecycle(lifecycleName);
         List<State> states = lifecycle.getStates();
