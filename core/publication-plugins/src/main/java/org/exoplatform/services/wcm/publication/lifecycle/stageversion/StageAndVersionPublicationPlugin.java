@@ -55,6 +55,7 @@ import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.IdGenerator;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
@@ -130,7 +131,9 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
   public void changeState(Node node, String newState, HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,Exception {
     String versionName = context.get(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME);        
     String logItemName = versionName;
-    String userId = node.getSession().getUserID();
+    ConversationState conversationState = ConversationState.getCurrent();
+//    String userId = node.getSession().getUserID();
+    String userId = conversationState.getIdentity().getUserId();
     Node selectedRevision = null;
     if(node.getName().equals(versionName) || versionName == null) {
       selectedRevision = node;
