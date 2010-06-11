@@ -41,6 +41,7 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -74,7 +75,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInputBase;
-import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
@@ -215,9 +215,9 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         homPath = homPath.substring(0, homPath.length() - 1);
       ((UIFormStringInput) uiInput).setValue(homPath + "/" + taxoTreeData.getTaxoTreeName());
     }
-    if ("targetPath".equals(name) && (isOnchange()) && !isUpdateSelect) {
-      ((UIFormStringInput) uiInput).reset();
-    }
+    //if ("targetPath".equals(name) && (isOnchange()) && !isUpdateSelect) {
+    //  ((UIFormStringInput) uiInput).reset();
+    //}
     super.renderField(name);
   }
   
