@@ -38,7 +38,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UINodeTypeSelector.SearchNodeTypeActionListener.class),
       @EventConfig(listeners = UINodeTypeSelector.SaveActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UINodeTypeSelector.RefreshActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UINodeTypeSelector.SelectedAllNodeTypesActionListener.class),      
+      @EventConfig(listeners = UINodeTypeSelector.SelectedAllNodeTypesActionListener.class, phase = Phase.DECODE),      
       @EventConfig(listeners = UINodeTypeSelector.ShowPageActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UINodeTypeSelector.OnChangeActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UINodeTypeSelector.CloseActionListener.class, phase = Phase.DECODE)
