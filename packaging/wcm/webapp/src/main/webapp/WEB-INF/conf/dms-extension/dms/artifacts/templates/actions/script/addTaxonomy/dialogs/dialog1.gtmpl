@@ -59,8 +59,8 @@
 			  <td class="FieldLabel"><%=_ctx.appRes("ScriptAction.dialog.label.homePath")%></td>
 			  <td class="FieldComponent">
 				  <% 
-						String[] fieldHomePath = ["jcrPath=/node/exo:storeHomePath", "selectorAction=selectHomePath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];
-						uicomponent.addActionField("homePath", fieldHomePath);
+						String[] fieldHomePath = ["jcrPath=/node/exo:storeHomePath", "validate=empty", "editable=false"];
+						uicomponent.addTextField("homePath", fieldHomePath);
 				  %>
 				</td>
 			</tr>			
