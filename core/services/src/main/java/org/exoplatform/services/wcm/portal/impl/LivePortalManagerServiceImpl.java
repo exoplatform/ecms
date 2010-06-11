@@ -66,9 +66,12 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
    * @param configService the config service
    * @param repositoryService the repository service
    */
-  public LivePortalManagerServiceImpl(WebSchemaConfigService webSchemaConfigService) {
-    this.wcmConfigService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    this.repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+  public LivePortalManagerServiceImpl(
+			WebSchemaConfigService webSchemaConfigService,
+			WCMConfigurationService wcmConfigurationService,
+			RepositoryService repositoryService) {
+    this.wcmConfigService = wcmConfigurationService;
+    this.repositoryService = repositoryService;
   }  
 
   /* (non-Javadoc)
@@ -134,7 +137,6 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace,manageableRepository);
     Node livePortal = (Node)session.getItem(portalsStoragePath);
-    session.logout();
     return livePortal;
   }
 
@@ -183,7 +185,6 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     Session session = node.getSession();
     node.remove();
     session.save();
-    session.logout();
     livePortalPaths.remove(portalConfig.getName());
   }
 
@@ -215,11 +216,12 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
 
   public void start() {
     log.info("Start LivePortalManagementService....");
+    Session session = null;
     try {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-      ManageableRepository repository = repositoryService.getCurrentRepository();
-      NodeLocation nodeLocation = wcmConfigService.getLivePortalsLocation(repository.getConfiguration().getName());
-      Session session = sessionProvider.getSession(nodeLocation.getWorkspace(),repository);
+    	SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    	ManageableRepository repository = repositoryService.getCurrentRepository();
+    	NodeLocation nodeLocation = wcmConfigService.getLivePortalsLocation(repository.getConfiguration().getName());
+    	session = sessionProvider.getSession(nodeLocation.getWorkspace(),repository);
       String statement = "select * from exo:portalFolder where jcr:path like '" + nodeLocation.getPath() + "/%'";
       Query query = session.getWorkspace().getQueryManager().createQuery(statement,Query.SQL);
       QueryResult result = query.execute();
@@ -229,7 +231,10 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
       }
     } catch (Exception e) {
       log.error("Error when starting LivePortalManagerService: ", e.fillInStackTrace());
+    } finally {
+    	if(session != null) session.logout();
     }
+    
   }
 
   public void stop() {    
