@@ -42,6 +42,7 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -185,6 +186,18 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
     UIActionManager uiManager = getAncestorOfType(UIActionManager.class);
     uiManager.setRenderedChild(UIActionContainer.class);
     event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
+  }
+  
+  public void renderField(String name) throws Exception {
+    UIComponent uiInput = findComponentById(name);
+    if ("homePath".equals(name)) {
+      UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
+      Node currentNode = uiExplorer.getCurrentNode() ;
+      String homPath = uiExplorer.getCurrentWorkspace() + ":" + currentNode.getPath();      
+      ((UIFormStringInput) uiInput).setValue(homPath);
+    }
+    
+    super.renderField(name);
   }
   
   static public class SaveActionListener extends EventListener<UIActionForm> {
