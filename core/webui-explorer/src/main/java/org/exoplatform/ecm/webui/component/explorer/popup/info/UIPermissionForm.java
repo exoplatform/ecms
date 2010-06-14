@@ -253,6 +253,10 @@ public class UIPermissionForm extends UIForm implements UISelectable {
           }
         }
         try {
+          if (userOrGroup.equals(ANY_PERMISSION)) {
+            node.removePermission(ANY_PERMISSION);
+            node.removePermission("any");
+          }
           if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
           node.save();
         } catch (AccessDeniedException ade) {
