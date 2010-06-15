@@ -150,15 +150,25 @@ public class UITreeTaxonomyList extends UIForm {
           uiTreeJCRExplorer.setRootTreeNode(uiTreeTaxonomyList.getRootNode(uiOneTaxonomySelector
               .getRepositoryName(), workspaceName, pathTaxonomy));
           uiTreeJCRExplorer.buildTree();
-        } catch (AccessDeniedException ade) {        
+        } catch (AccessDeniedException ade) {
+          UIFormSelectBox uiTaxonomyTree = uiTreeTaxonomyList.getUIFormSelectBox(TAXONOMY_TREE);
+          List<SelectItemOption<String>> taxonomyTree = uiTaxonomyTree.getOptions();
+          if (taxonomyTree != null && taxonomyTree.size() > 0)
+            uiTaxonomyTree.setValue(taxonomyTree.get(0).getValue());
+          
           uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyTree.getParent());          
           return;
         } catch(Exception e) {
           LOG.error("Unexpected error", e);
           return;
         }
       } else {
+        UIFormSelectBox uiTaxonomyTree = uiTreeTaxonomyList.getUIFormSelectBox(TAXONOMY_TREE);
+        List<SelectItemOption<String>> taxonomyTree = uiTaxonomyTree.getOptions();
+        if (taxonomyTree != null && taxonomyTree.size() > 0)
+          uiTaxonomyTree.setValue(taxonomyTree.get(0).getValue());
         uiApp.addMessage(new ApplicationMessage("UITreeTaxonomyList.msg.NoChild", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
