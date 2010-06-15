@@ -210,6 +210,9 @@ public class UISubscriptions extends UIForm {
     for(UIComponent component : this.getChildren()){
       try{
         checkbox = (UIFormCheckBoxInput<Boolean>)component;
+        if(checkbox.getId().equals(uiSubscriptionsCheckAll)) {
+        	continue;
+        }        
         if(checkbox.isChecked()){
           if(subscriptionId == null)subscriptionId = checkbox.getName(); 
           else return null;
