@@ -214,10 +214,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       if (homPath.endsWith("/"))
         homPath = homPath.substring(0, homPath.length() - 1);
       ((UIFormStringInput) uiInput).setValue(homPath + "/" + taxoTreeData.getTaxoTreeName());
-    }
-    //if ("targetPath".equals(name) && (isOnchange()) && !isUpdateSelect) {
-    //  ((UIFormStringInput) uiInput).reset();
-    //}
+    }    
     super.renderField(name);
   }
   

@@ -22,10 +22,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
@@ -593,6 +595,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
       }      
       if(defaultValue != null) uiSelectBox.setValue(defaultValue);
     }
+                   
     propertiesName.put(name, getPropertyName(jcrPath));
     fieldNames.put(getPropertyName(jcrPath), name);
     if (formSelectBoxField.validateType != null) {
@@ -666,9 +669,6 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
         }
       }  
     }    
-    JcrInputProperty inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(jcrPath);
-    setInputProperty(name, inputProperty);
     uiSelectBox.setEditable(formSelectBoxField.isEditable());
     addUIFormInput(uiSelectBox);
     if(isNotEditNode) {      
@@ -687,9 +687,34 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
       }
     }
     if(formSelectBoxField.isOnchange()) uiSelectBox.setOnChange("Onchange");
-    if (findComponentById(name) == null) addUIFormInput(uiSelectBox);
+    if (findComponentById(name) == null) addUIFormInput(uiSelectBox);    
+    String newValue = ((UIFormStringInput)findComponentById(name)).getValue();
+    JcrInputProperty inputProperty = properties.get(name);    
+    if (inputProperty== null) {
+      inputProperty = new JcrInputProperty();
+      inputProperty.setJcrPath(jcrPath);
+      setInputProperty(name, inputProperty);
+		} else {
+		  String oldValue = (String) inputProperty.getValue();
+		  if ((oldValue != null) && (!oldValue.equals(newValue))) {
+				Iterator componentSelector = componentSelectors.keySet().iterator();
+				Map<String, String> obj = null;
+				while (componentSelector.hasNext()) {
+				  String componentName = (String)componentSelector.next();
+				  obj = (Map<String, String>) componentSelectors.get(componentName);					
+				  Set<String> set = obj.keySet();
+				  for (String key : set) {
+				    if (name.equals(obj.get(key))) {
+				    	UIComponent uiInput = findComponentById(componentName);
+				    	((UIFormStringInput) uiInput).reset();
+				    }
+				  }
+				}
+		  }
+		}
+    inputProperty.setValue(newValue);
     renderField(name);   
-  }    
+  }
 
   public void addSelectBoxField(String name, String[] arguments) throws Exception {
     addSelectBoxField(name,null,arguments);
