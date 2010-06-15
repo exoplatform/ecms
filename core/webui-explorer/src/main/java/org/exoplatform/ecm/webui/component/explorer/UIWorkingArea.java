@@ -369,7 +369,7 @@ public class UIWorkingArea extends UIContainer {
 	  } else if (node.hasProperty("exo:title")) {
 		  title = node.getProperty("exo:title").getValue().getString();
 	  }
-	  if (title==null) {
+	  if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
   		title = node.getName();
 	  }
 	  return Text.unescapeIllegalJcrChars(title);	  
