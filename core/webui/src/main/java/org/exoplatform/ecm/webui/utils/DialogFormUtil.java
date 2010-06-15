@@ -32,7 +32,7 @@ import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatCountValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatIntervalValidator;
-import org.exoplatform.portal.webui.form.UIFormMultiValueInputSet;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.webui.core.UIComponent;
