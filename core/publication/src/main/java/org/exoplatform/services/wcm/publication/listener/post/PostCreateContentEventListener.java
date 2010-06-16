@@ -86,29 +86,21 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
       return;    
     }
     
-    Node parentNode = currentNode.getParent();
-    String nodeName = currentNode.getName();
+    Session session = currentNode.getSession();
+    String nodePath = currentNode.getPath();
     currentNode.getSession().save();
     
     if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
-        NodeIterator nodeIter = parentNode.getNodes(nodeName);
-        currentNode = nodeIter.nextNode();
-        while (nodeIter.hasNext()) {
-          Node node = nodeIter.nextNode();
-          if (currentNode.getProperty("exo:lastModifiedDate").getDate().compareTo(
-              node.getProperty("exo:lastModifiedDate").getDate()) < 0) {
-            currentNode = node;
-          }
+      currentNode = (Node)session.getItem(nodePath);
+      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      LinkManager linkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+      if (linkManager.isLink(currentNode)) {
+        try {
+          currentNode = linkManager.getTarget(currentNode, false);
+        } catch (Exception ex) {
+          currentNode = linkManager.getTarget(currentNode, true);
         }
-        ExoContainer container = ExoContainerContext.getCurrentContainer();
-        LinkManager linkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
-        if (linkManager.isLink(currentNode)) {
-          try {
-            currentNode = linkManager.getTarget(currentNode, false);
-          } catch (Exception ex) {
-            currentNode = linkManager.getTarget(currentNode, true);
-          }
-        }
+      }
     }    
 
     String siteName = Util.getPortalRequestContext().getPortalOwner();

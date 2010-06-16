@@ -189,10 +189,12 @@ public class CmsServiceImpl implements CmsService {
         mixinTypes = new String[] {mixintypeName} ;
       }
     }
+    String currentNodePath;
     if (isAddNew) {
       //Broadcast CmsService.event.preCreate event
       listenerService.broadcast(PRE_CREATE_CONTENT_EVENT,storeHomeNode,mappings);
-      currentNode = storeHomeNode.addNode(nodeName, primaryType);            
+      currentNode = storeHomeNode.addNode(nodeName, primaryType);
+      currentNodePath = currentNode.getPath();
       if(mixinTypes != null){
         for(String type : mixinTypes){
           if(!currentNode.isNodeType(type)) {
@@ -209,7 +211,8 @@ public class CmsServiceImpl implements CmsService {
       //Broadcast CmsService.event.postCreate event
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
     } else {
-      currentNode = storeHomeNode.getNode(nodeName);      
+      currentNode = storeHomeNode.getNode(nodeName);
+      currentNodePath = currentNode.getPath();
       updateNodeRecursively(NODE, currentNode, nodeType, mappings);
       if(currentNode.isNodeType("exo:datetime")) {
         currentNode.setProperty("exo:dateModified",new GregorianCalendar()) ;
@@ -218,15 +221,7 @@ public class CmsServiceImpl implements CmsService {
     }
     //check if currentNode has been moved
     if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
-      NodeIterator nodeIter = storeHomeNode.getNodes(nodeName);
-      currentNode = nodeIter.nextNode();
-      while (nodeIter.hasNext()) {
-        Node node = nodeIter.nextNode();
-        if (currentNode.getProperty("exo:lastModifiedDate").getDate().compareTo(
-            node.getProperty("exo:lastModifiedDate").getDate()) < 0) {
-          currentNode = node;
-        }
-      }
+      currentNode = (Node)session.getItem(currentNodePath);
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       LinkManager linkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
       if (linkManager.isLink(currentNode)) {
