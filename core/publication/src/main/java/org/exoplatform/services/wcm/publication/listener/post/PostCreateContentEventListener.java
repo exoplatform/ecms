@@ -17,10 +17,17 @@
 package org.exoplatform.services.wcm.publication.listener.post;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
@@ -78,6 +85,31 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
         currentNode.isNodeType("exo:jsFile") || currentNode.getParent().isNodeType("exo:actionStorage")){
       return;    
     }
+    
+    Node parentNode = currentNode.getParent();
+    String nodeName = currentNode.getName();
+    currentNode.getSession().save();
+    
+    if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
+        NodeIterator nodeIter = parentNode.getNodes(nodeName);
+        currentNode = nodeIter.nextNode();
+        while (nodeIter.hasNext()) {
+          Node node = nodeIter.nextNode();
+          if (currentNode.getProperty("exo:lastModifiedDate").getDate().compareTo(
+              node.getProperty("exo:lastModifiedDate").getDate()) < 0) {
+            currentNode = node;
+          }
+        }
+        ExoContainer container = ExoContainerContext.getCurrentContainer();
+        LinkManager linkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+        if (linkManager.isLink(currentNode)) {
+          try {
+            currentNode = linkManager.getTarget(currentNode, false);
+          } catch (Exception ex) {
+            currentNode = linkManager.getTarget(currentNode, true);
+          }
+        }
+    }    
 
     String siteName = Util.getPortalRequestContext().getPortalOwner();
     String remoteUser = Util.getPortalRequestContext().getRemoteUser();    	

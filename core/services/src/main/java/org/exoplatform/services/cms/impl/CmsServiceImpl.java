@@ -44,12 +44,16 @@ import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.ISO8601;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.ItemDefinitionImpl;
 import org.exoplatform.services.listener.ListenerService;
 
@@ -212,6 +216,28 @@ public class CmsServiceImpl implements CmsService {
       }
       listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
     }
+    //check if currentNode has been moved
+    if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
+      NodeIterator nodeIter = storeHomeNode.getNodes(nodeName);
+      currentNode = nodeIter.nextNode();
+      while (nodeIter.hasNext()) {
+        Node node = nodeIter.nextNode();
+        if (currentNode.getProperty("exo:lastModifiedDate").getDate().compareTo(
+            node.getProperty("exo:lastModifiedDate").getDate()) < 0) {
+          currentNode = node;
+        }
+      }
+      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      LinkManager linkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+      if (linkManager.isLink(currentNode)) {
+        try {
+          currentNode = linkManager.getTarget(currentNode, false);
+        } catch (Exception ex) {
+          currentNode = linkManager.getTarget(currentNode, true);
+        }
+      }
+    }    
+    
     String uuid = currentNode.getUUID();
     session.save();
     session.logout();

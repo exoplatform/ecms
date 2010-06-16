@@ -111,7 +111,7 @@ public class AddTaxonomyActionScript implements CmsScript {
 	  	String generatedNodeName = idGenerator_.generateStringID(nodeName);
 	  	String targetParentPath = cNode.getPath(); 
 	  	targetPath = cNode.getPath().concat("/").concat(generatedNodeName).replaceAll("/+", "/");
-	    if (!storeWorkspace.equals(targetWorkspace)) {
+	    if (!storeWorkspace.equals(targetWorkspace) && storeNode.getSession().itemExists(nodePath)) {
 	      Node currentNode = (Node)storeNode.getSession().getItem(nodePath);
 	      sessionTargetNode.getWorkspace().clone(storeWorkspace, nodePath, targetPath, true);
 	      currentNode.remove();
