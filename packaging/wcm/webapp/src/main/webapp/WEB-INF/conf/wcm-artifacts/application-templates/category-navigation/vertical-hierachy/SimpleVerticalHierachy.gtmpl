@@ -31,7 +31,7 @@
 		<div class="TitleBarL">
 			<div class="TitleBarR">
 				<div class="TitleBarM">
-					CATEGORIES
+					<%= uicomponent.getTreeTitle() %>
 				</div>
 			</div>
 		</div>

@@ -288,7 +288,10 @@ public class UICategoryNavigationTreeBase extends UITree {
 	  if (node.hasProperty("exo:title")) 
 		  return node.getProperty("exo:title").getString();
 	  else 
-		  return node.getName();
-	  
+		  return node.getName();	  
+  }
+  
+  public String getTreeTitle() {
+	  return UICategoryNavigationUtils.getPortletPreferences().getValue(UICategoryNavigationConstant.PREFERENCE_TREE_TITLE, "");
   }
 }
