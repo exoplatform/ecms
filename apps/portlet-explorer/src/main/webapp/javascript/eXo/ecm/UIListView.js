@@ -836,16 +836,15 @@ var ListView = function() {
 		sizeBarContainer.style.height = workingArea.offsetHeight + 'px';	
 		resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
 						
-	  if (page) {
-				if (parseInt(page.getAttribute('pageAvailable')) > 1) {
-					if (view) 
-						view.style.height = workingContainer.offsetHeight - page.offsetHeight + 'px';											
-				}
+	 documentWorkspace.style.height = workingArea.offsetHeight + 'px';									
+	 if (page) {
+			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
+				if (view)
+					view.style.height = workingContainer.offsetHeight - page.offsetHeight + 'px';							
+			}
 		} else {
-			  if (view) {
-					view.style.height = workingArea.offsetHeight + 'px';
-					documentWorkspace.style.height = workingArea.offsetHeight + 'px';					
-				}				
+			  if (view) 
+					view.style.height = workingArea.offsetHeight + 'px';										
 		}
 		var container = document.getElementById("UITreeExplorer");
 		if (!container) {
