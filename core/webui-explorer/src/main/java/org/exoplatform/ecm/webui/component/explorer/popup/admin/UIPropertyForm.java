@@ -17,7 +17,9 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -226,7 +228,8 @@ public class UIPropertyForm extends UIForm {
             break;
           }
           case 5:  {
-            listValue.add(value.getDate().getTime().toString());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            listValue.add(dateFormat.format(value.getDate().getTime()));
             break;
           }
           case 6: {
@@ -258,7 +261,8 @@ public class UIPropertyForm extends UIForm {
         }
         case 5:  {
           UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
-          uiFormDateTimeInput.setValue(value.getDate().getTime().toString());
+          SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+          uiFormDateTimeInput.setValue(dateFormat.format(value.getDate().getTime()));
           break;
         }
         case 6: {
