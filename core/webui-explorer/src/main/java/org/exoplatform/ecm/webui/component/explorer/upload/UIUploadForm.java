@@ -60,6 +60,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.value.ValueFactoryImpl;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.upload.UploadResource;
@@ -541,6 +542,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 node.setProperty("exo:dateModified",new GregorianCalendar()) ;
               }
               node.save();
+              ListenerService listenerService = getApplicationComponent(ListenerService.class);
+              listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, this, node);
               if (listTaxonomyNameNew != null) {
                 for (String categoryPath : listTaxonomyNameNew) {
                   try {              
