@@ -56,7 +56,7 @@
         <div style="float:right;padding: 4px 10px;" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=Utils.getRestContextName(uicomponent.getPortalName())%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNodePath)%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
           <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
         </div>			  
-        <div style="clear:both"</div>
+        <div style="clear:both"></div>
 				<div class="Content" style="text-align:center; font-style:italic">
         <%
           def fileComponent = uicomponent.getUIComponent(mimeType);
