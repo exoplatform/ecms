@@ -78,7 +78,6 @@ public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
       uiPageBody.setUIComponent(null);
       uiPageBody.setMaximizedUIComponent(null);
       Utils.closePopupWindow(contentBrowsePanel, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
-      Utils.updatePortal((PortletRequestContext) event.getRequestContext());
     }
   }
 }
