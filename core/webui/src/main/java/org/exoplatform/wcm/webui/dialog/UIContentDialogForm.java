@@ -41,6 +41,7 @@ import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
@@ -314,7 +315,8 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
 	   */
     public void execute(Event<UIContentDialogForm> event) throws Exception {
       UIContentDialogForm contentDialogForm = event.getSource();
-      ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
+      if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE)
+        ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
       Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);      
     }
   }
@@ -399,7 +401,8 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       }catch(Exception e) {
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.cannot-save", null, ApplicationMessage.WARNING);
       }
-      ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
+      if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE)
+        ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
       Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);      
     }
   }
@@ -511,7 +514,8 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.cannot-save", null, ApplicationMessage.WARNING);
       }
       
-      ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
+      if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE)
+        ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
       Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);
 	  }
   }

@@ -270,7 +270,7 @@ public class Utils {
   	if (content == null) return true;
   	try {
   		boolean isEditMode = false;
-  		if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
+  		if (WCMComposer.MODE_EDIT.equals(getCurrentMode()) || Util.getUIPortalApplication().getModeState() != UIPortalApplication.NORMAL_MODE) isEditMode = true;
   		((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
   		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
       ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
