@@ -31,13 +31,13 @@ import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionIterator;
 
-//import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.services.ecm.publication.PublicationPlugin;
-import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionData;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -83,12 +83,22 @@ public class UIPublicationPanel extends UIForm {
   /** The viewed revisions. */
   private List<Node> viewedRevisions = new ArrayList<Node>(3);
   
+  private WCMPublicationService wcmPublicationService;
+  
+  private String sitename;
+  
+  private String remoteuser;
+  
   /**
    * Instantiates a new uI publication panel.
    * 
    * @throws Exception the exception
    */
-  public UIPublicationPanel() throws Exception {}
+  public UIPublicationPanel() throws Exception {
+    wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
+    sitename = Util.getPortalRequestContext().getPortalOwner();
+    remoteuser = Util.getPortalRequestContext().getRemoteUser();
+  }
   
   /**
    * Inits the.
@@ -393,15 +403,8 @@ public class UIPublicationPanel extends UIForm {
     public void execute(Event<UIPublicationPanel> event) throws Exception {
       UIPublicationPanel publicationPanel = event.getSource();
       Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins().get(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String,String> context = new HashMap<String,String>();
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if(currentRevision != null) {
-        context.put(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME,currentRevision.getName()); 
-      }      
+      publicationPanel.wcmPublicationService.updateLifecyleOnChangeContent(currentNode, publicationPanel.sitename, publicationPanel.remoteuser, PublicationDefaultStates.DRAFT);      
       try {
-        publicationPlugin.changeState(currentNode,PublicationDefaultStates.DRAFT,context);
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
@@ -431,15 +434,8 @@ public class UIPublicationPanel extends UIForm {
     public void execute(Event<UIPublicationPanel> event) throws Exception {
       UIPublicationPanel publicationPanel = event.getSource();      
       Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins().get(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String,String> context = new HashMap<String,String>();      
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if(currentRevision != null) {
-        context.put(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME,currentRevision.getName()); 
-      }
+      publicationPanel.wcmPublicationService.updateLifecyleOnChangeContent(currentNode, publicationPanel.sitename, publicationPanel.remoteuser, PublicationDefaultStates.PUBLISHED);
       try {
-        publicationPlugin.changeState(currentNode,PublicationDefaultStates.PUBLISHED,context); 
         publicationPanel.updatePanel();
       } catch (Exception e) {        
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
@@ -469,15 +465,8 @@ public class UIPublicationPanel extends UIForm {
     public void execute(Event<UIPublicationPanel> event) throws Exception {
       UIPublicationPanel publicationPanel = event.getSource();     
       Node currentNode = publicationPanel.getCurrentNode();
-      PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
-      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins().get(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
-      HashMap<String,String> context = new HashMap<String,String>();
-      Node currentRevision = publicationPanel.getCurrentRevision();
-      if(currentRevision != null) {
-        context.put(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME,currentRevision.getName()); 
-      }
+      publicationPanel.wcmPublicationService.updateLifecyleOnChangeContent(currentNode, publicationPanel.sitename, publicationPanel.remoteuser, PublicationDefaultStates.OBSOLETE);
       try {
-        publicationPlugin.changeState(currentNode,PublicationDefaultStates.OBSOLETE,context); 
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);

@@ -39,6 +39,7 @@
             <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/"/>
             <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/"/>
             <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/"/>
+            <property name="publication" value="http://www.exoplatform.com/jcr/publication/1.1/"/>
           </properties-param>
         </init-params>
       </component-plugin>

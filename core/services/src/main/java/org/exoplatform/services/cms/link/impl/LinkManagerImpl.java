@@ -102,8 +102,8 @@ public class LinkManagerImpl implements LinkManager {
         LOG.error("CAN NOT UPDATE ACCESS PERMISSIONS FROM TARGET NODE TO LINK NODE", e);
       }
       linkNode.setProperty(WORKSPACE, target.getSession().getWorkspace().getName());
-      linkNode.setProperty(UUID, target.getUUID());
       linkNode.setProperty(PRIMARY_TYPE, target.getPrimaryNodeType().getName());
+      linkNode.setProperty(UUID, target.getUUID());
       linkNode.getSession().save();
       return linkNode;
     }

@@ -133,7 +133,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		  if (nodeIdentifier.lastIndexOf("/") == 0) nodeIdentifier = nodeIdentifier.substring(1); 
 		}
 		if (MODE_LIVE.equals(mode) && isCached) {
-		  String hash = getHash(nodeIdentifier, version, remoteUser, language, null);
+		  String hash = getHash(nodeIdentifier, version, remoteUser, language, null, null, null);
 		  Node cachedNode = (Node)cache.get(hash);
 		  if (cachedNode != null) return cachedNode;
 		}
@@ -147,7 +147,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 			node = getViewableContent(node, filters);
 		}
 		if (MODE_LIVE.equals(mode) && isCached) {
-			String hash = getHash(nodeIdentifier, version, remoteUser, language, null);
+			String hash = getHash(nodeIdentifier, version, remoteUser, language, null, null, null);
 			cache.remove(hash);
 			cache.put(hash, node);
 		}
@@ -158,18 +158,30 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	public List<Node> getContents(String repository, String workspace, String path, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception {
 		String mode = filters.get(FILTER_MODE);
 		String version = filters.get(FILTER_VERSION);
-  		String language = filters.get(FILTER_LANGUAGE);
-  		String recursive = filters.get(FILTER_RECURSIVE);
-  		String remoteUser = null;
-  		try {
-  			remoteUser = Util.getPortalRequestContext().getRemoteUser();
-  		} catch (Exception e) {}
+		String orderBy = filters.get(FILTER_ORDER_BY);
+		String orderType = filters.get(FILTER_ORDER_TYPE);
+		String language = filters.get(FILTER_LANGUAGE);
+		String recursive = filters.get(FILTER_RECURSIVE);
+		String remoteUser = null;
+		try {
+			remoteUser = Util.getPortalRequestContext().getRemoteUser();
+		} catch (Exception e) {}
 
+		if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
+		  orderBy = "exo:dateModified";
+		  filters.put(FILTER_ORDER_BY, orderBy);
+		}
+		if (MODE_LIVE.equals(mode) && "exo:title".equals(orderBy)) {
+		  orderBy = "exo:titlePublished "+orderType+", exo:title";
+		  filters.put(FILTER_ORDER_BY, orderBy);
+		}
+		
 		if (MODE_LIVE.equals(mode) && isCached) {
-			String hash = getHash(path, version, remoteUser, language, recursive);
+			String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType);
 			List<Node> cachedNodes = (List<Node>)cache.get(hash);
 			if (cachedNodes != null) return cachedNodes;
 		}
+		if (log.isInfoEnabled()) log.info("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
 		NodeIterator nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider);
 		List<Node> nodes = new ArrayList<Node>();
 		Node node = null, viewNode = null;
@@ -181,7 +193,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 			}
 		}
 		if (MODE_LIVE.equals(mode) && isCached) {
-			String hash = getHash(path, version, remoteUser, language, recursive);
+			String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType);
 			cache.remove(hash);
 			cache.put(hash, nodes);
 		}
@@ -273,6 +285,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 * @see org.exoplatform.services.wcm.publication.WCMComposer#updateContent(java.lang.String, java.lang.String, java.lang.String, java.util.HashMap)
 	 */
 	public boolean updateContent(String repository, String workspace, String path, HashMap<String, String> filters) throws Exception {
+	  String orderBy = filters.get(FILTER_ORDER_BY);
+	  String orderType = filters.get(FILTER_ORDER_TYPE);
 		if (isCached) {
 			if (log.isInfoEnabled()) log.info("updateContent : "+path);
 			String part = path.substring(0, path.lastIndexOf("/"));
@@ -297,7 +311,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 					oid = node.getUUID();
 					/* remove parent cache */
 					updateContents(repository, workspace, part, filters);
-					TaxonomyService taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
+					taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
 					for (Node catnode : taxonomyService.getAllCategories(node)) {
 						updateContents(repository, catnode.getSession().getWorkspace().getName(), catnode.getPath(), filters);
 					}
@@ -311,32 +325,47 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	  		for (LocaleConfig localeConfig : localeService.getLocalConfigs()) {
 	  	         String lang = localeConfig.getLanguage();
 	 			/* remove live cache */
-	 			String hash = getHash(path, null, null, lang, null);
+	 			String hash = getHash(path, null, null, lang, null, orderBy, orderType);
 	 			cache.remove(hash);
 	 			/* remove base content cache */
-	 			hash = getHash(path, BASE_VERSION, null, lang, null);
+	 			hash = getHash(path, BASE_VERSION, null, lang, null, orderBy, orderType);
 	 			cache.remove(hash);
+	 			
+	 			Node node = wcmService.getReferencedContent(sessionProvider, repository, workspace, path);
+	 			List<Node> listCategory = getCategories(node, repository);
+	 			List<Node> lstTaxonomyTrees = getAllTaxonomyTrees(repository);
+	 			if (listCategory != null && listCategory.size() > 0) {
+	 			 for (Node categoryNode: listCategory) {
+	 			  String value = displayCategory(categoryNode, lstTaxonomyTrees);
+	 			  if(value!=null && !value.equals("")) {
+	 			    value = value + "/" + node.getName();
+	 			    hash = getHash(value, filters.get(FILTER_VERSION), remoteUser, lang, null, orderBy, orderType);
+	 			    cache.remove(hash);
+	 			  }
+	 			 }
+	 			}
+	 			
 	 			/* remove parent cache */
-	 			hash = getHash(part, null, null, lang, null);
+	 			hash = getHash(part, null, null, lang, null, orderBy, orderType);
 	 			cache.remove(hash);
 	 			if (oid!=null) {
 	 				/* remove live cache */
-	 				hash = getHash(oid, null, null, lang, null);
+	 				hash = getHash(oid, null, null, lang, null, orderBy, orderType);
 	 				cache.remove(hash);
 	 			}
 	 			if (remoteUser!=null) {
 	 				/* remove live cache for current user */
-	 				hash = getHash(path, null, remoteUser, lang, null);
+	 				hash = getHash(path, null, remoteUser, lang, null, orderBy, orderType);
 	 				cache.remove(hash);
 	 				/* remove base content cache for current user */
-	 				hash = getHash(path, BASE_VERSION, remoteUser, lang, null);
+	 				hash = getHash(path, BASE_VERSION, remoteUser, lang, null, orderBy, orderType);
 	 				cache.remove(hash);
 	 				/* remove parent cache for current user */
-	 				hash = getHash(part, null, remoteUser, lang, null);
+	 				hash = getHash(part, null, remoteUser, lang, null, orderBy, orderType);
 	 				cache.remove(hash);
 	 				if (oid!=null) {
 	 					/* remove live cache */
-	 					hash = getHash(oid, null, remoteUser, lang, null);
+	 					hash = getHash(oid, null, remoteUser, lang, null, orderBy, orderType);
 	 					cache.remove(hash);
 	 				}
 	 			}
@@ -346,10 +375,40 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		return true;
 	}
 
+	public List<Node> getCategories(Node node, String repository) throws Exception {
+	  if (taxonomyService==null) taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
+	  List<Node> listCategories = new ArrayList<Node>();
+	  List<Node> listNode = getAllTaxonomyTrees(repository);
+	  for(Node itemNode : listNode) {
+	    listCategories.addAll(taxonomyService.getCategories(node, itemNode.getName()));
+	  }
+	  return listCategories;
+	}
+	
+	List<Node> getAllTaxonomyTrees(String repository) throws RepositoryException {
+	  if (taxonomyService==null) taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
+	  return taxonomyService.getAllTaxonomyTrees(repository);
+	}
+	
+	String displayCategory(Node node, List<Node> taxonomyTrees) {
+	  try {
+	    for (Node taxonomyTree : taxonomyTrees) {
+	      if (node.getPath().contains(taxonomyTree.getPath())) {
+	        return node.getPath().replace(taxonomyTree.getPath(), taxonomyTree.getName());
+	      }
+	    }
+	  } catch (RepositoryException e) {
+	    log.error("Unexpected error when getting node taxonomies");
+	  }
+	  return "";
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.exoplatform.services.wcm.publication.WCMComposer#updateContents(java.lang.String, java.lang.String, java.lang.String, java.util.HashMap)
 	 */
 	public boolean updateContents(String repository, String workspace, String path, HashMap<String, String> filters) throws Exception {
+	  String[] orderBys = {"exo:title", "publication:liveDate", "exo:dateModified", "exo:dateCreated"};
+	  String[] orderTypes = {"ASC", "DESC"};
 		if (isCached) {
 	  		String remoteUser = null;
 	  		try {
@@ -362,16 +421,20 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	  		for (LocaleConfig localeConfig : localeService.getLocalConfigs()) {
 	  	         String lang = localeConfig.getLanguage();
 	  	         for (String recursive:new String[]{"true", "false"}) {
-		  	         String hash = getHash(path, null, null, lang, recursive);
-		  	         cache.remove(hash);
-		  	         hash = getHash(path, BASE_VERSION, null, lang, recursive);
-		  	         cache.remove(hash);
-		  	         if (remoteUser!=null) {
-		  	        	 hash = getHash(path, null, remoteUser, lang, recursive);
-		  	        	 cache.remove(hash);
-		  	        	 hash = getHash(path, BASE_VERSION, remoteUser, lang, recursive);
-		  	        	 cache.remove(hash);
-		  	         }
+	  	           for (String orderBy:orderBys) {
+	  	             for (String orderType:orderTypes) {
+	  	               String hash = getHash(path, null, null, lang, recursive, orderBy, orderType);
+	  	               cache.remove(hash);
+	  	               hash = getHash(path, BASE_VERSION, null, lang, recursive, orderBy, orderType);
+	  	               cache.remove(hash);
+	  	               if (remoteUser!=null) {
+	  	                 hash = getHash(path, null, remoteUser, lang, recursive, orderBy, orderType);
+	  	                 cache.remove(hash);
+	  	                 hash = getHash(path, BASE_VERSION, remoteUser, lang, recursive, orderBy, orderType);
+	  	                 cache.remove(hash);
+	  	               }
+	  	             }
+	  	           }
 	  	         }
 	  	         
 	        }
@@ -474,7 +537,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 					if (i != (documentTypes.size() - 1)) documentTypeClause.append(" OR ");
 				}
 				templatesFilter = documentTypeClause.toString();
-				templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink')";
+				templatesFilter += " OR jcr:primaryType = 'exo:taxonomyLink' OR jcr:primaryType = 'exo:symlink')";
 				return templatesFilter;
 			} catch (Exception e) {
 				log.error("Error when perform getTemlatesSQLFilter: ", e);
@@ -504,11 +567,13 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		}
 	}
 
-	  private String getHash(String path, String version, String remoteUser, String language, String recursive) throws Exception {
+	  private String getHash(String path, String version, String remoteUser, String language, String recursive, String orderBy, String orderType) throws Exception {
 		  String key = path;
 		  if (version!=null) key += "::"+version;
 		  if (remoteUser!=null) key += ";;"+remoteUser;
 		  if (language!=null) key += ";;"+language;
+		  if (orderBy!=null) key += ";;"+orderBy;
+		  if (orderType!=null) key += ";;"+orderType;
 		  return MessageDigester.getHash(key);
 	  }
 	  

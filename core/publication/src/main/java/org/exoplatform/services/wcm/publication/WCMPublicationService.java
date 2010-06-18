@@ -33,6 +33,8 @@ import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleExcepti
  * 		- added updateLifecyleOnChangeContent by context
  */
 public interface WCMPublicationService {   
+
+  public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
   
  /**
   * Add a Web Publication Plugin to the service.
