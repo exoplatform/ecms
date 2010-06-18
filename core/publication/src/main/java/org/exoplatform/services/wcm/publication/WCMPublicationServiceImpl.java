@@ -23,9 +23,11 @@ import javax.jcr.Node;
 
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -50,6 +52,10 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
   /** The publication service. */
   private PublicationService publicationService;
 
+  private ListenerService listenerService;
+  
+  private CmsService cmsService;
+  
   /**
    * Instantiates a new WCM publication service.
    * This service delegate to PublicationService to manage the publication
@@ -58,6 +64,8 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
    */
   public WCMPublicationServiceImpl() {
     this.publicationService = WCMCoreUtils.getService(PublicationService.class);
+    this.listenerService = WCMCoreUtils.getService(ListenerService.class);
+    this.cmsService = WCMCoreUtils.getService(CmsService.class);
   }
 
   /* (non-Javadoc)
@@ -273,6 +281,8 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
 	    	publicationPlugin.updateLifecyleOnChangeContent(node, remoteUser, newState);
 	    else
 	    	publicationPlugin.updateLifecyleOnChangeContent(node, remoteUser);
+	    
+	    listenerService.broadcast(UPDATE_EVENT, cmsService, node);
 	}
 
 	public String getContentState(Node node) throws Exception {

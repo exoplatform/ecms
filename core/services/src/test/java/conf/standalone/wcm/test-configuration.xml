@@ -218,4 +218,47 @@
     </component-plugin>
   </external-component-plugins>
   
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
+    <component-plugin>
+      <name>addActions</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin</type>
+      <description>Add mixin exo:sortable and property exo:title of TARGET NODE for SYMLINK NODE</description>
+      <init-params>
+        <object-param>
+          <name>actions</name>
+          <object type="org.exoplatform.services.jcr.impl.ext.action.AddActionsPlugin$ActionsConfig">
+            <field name="actions">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field name="nodeTypes">
+                      <string>exo:taxonomyLink</string>
+                    </field>
+                    <field name="eventTypes">
+                      <string>addProperty</string>
+                    </field>
+                    <field name="actionClassName">
+                      <string>org.exoplatform.services.wcm.symlink.CreateLinkAction</string>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>WCMPublicationService.event.updateState</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.symlink.PublicationUpdateStateListener</type>
+      <description>this listener will update the link's metadata</description>
+    </component-plugin>
+  </external-component-plugins>
 </configuration>

@@ -235,5 +235,22 @@
       </propertyDefinition>
     </propertyDefinitions>
   </nodeType>
+  
+  <nodeType name="exo:sortable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:title" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>       
+      </propertyDefinition>
+      <propertyDefinition name="exo:titlePublished" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>       
+      </propertyDefinition>
+      <propertyDefinition name="exo:name" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>       
+      </propertyDefinition>
+      <propertyDefinition name="publication:liveDate" requiredType="Date" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>       
+      </propertyDefinition>      
+    </propertyDefinitions>
+  </nodeType>
 
 </nodeTypes>
