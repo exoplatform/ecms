@@ -2445,5 +2445,15 @@
    		<no-list>Il n'y a aucun type de noeud à condition de recherche</no-list>
    </msg>
  </UINodeTypeList>
+ <UIActionForm>
+ 	<msg>
+ 			<canotChangeActionId>You can not change action id</canotChangeActionId>
+ 	</msg>
+ </UIActionForm>
+ <PopupComponent>
+ 	<title>
+ 	 <UINodeTypeSelector>NodeType Selector</UINodeTypeSelector>
+ 	</title>
+ </PopupComponent>
 </bundle>
 

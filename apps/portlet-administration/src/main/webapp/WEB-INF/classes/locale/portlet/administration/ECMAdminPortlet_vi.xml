@@ -2453,5 +2453,15 @@
    		<no-list>Không có bất kỳ loại nút với điều kiện tìm kiếm</no-list>
    </msg>
  </UINodeTypeList>
+ <UIActionForm>
+ 	<msg>
+ 			<canotChangeActionId>Bạn không thể thay đổi id hành động</canotChangeActionId>
+ 	</msg>
+ </UIActionForm>
+ <PopupComponent>
+ 	<title>
+ 	 <UINodeTypeSelector>Chọn NodeType</UINodeTypeSelector>
+ 	</title>
+ </PopupComponent>
 </bundle>
 

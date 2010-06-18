@@ -2458,5 +2458,15 @@
    		<no-list>There isn't any node type with condition search</no-list>
    </msg>
  </UINodeTypeList>
+ <UIActionForm>
+ 	<msg>
+ 			<canotChangeActionId>You can not change action name</canotChangeActionId>
+ 	</msg>
+ </UIActionForm>
+ <PopupComponent>
+ 	<title>
+ 	 <UINodeTypeSelector>NodeType Selector</UINodeTypeSelector>
+ 	</title>
+ </PopupComponent>
 </bundle>
 
