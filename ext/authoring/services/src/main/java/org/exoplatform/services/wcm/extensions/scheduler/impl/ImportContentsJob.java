@@ -18,8 +18,6 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 
 import org.exoplatform.commons.utils.MimeTypeResolver;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -67,11 +65,10 @@ public class ImportContentsJob implements Job {
         log.debug("Init parameters first time :");
       }
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService_ = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+      String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
+      RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);
       ManageableRepository manageableRepository = repositoryService_.getRepository("repository");
-
-      PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       XMLInputFactory factory = XMLInputFactory.newInstance();

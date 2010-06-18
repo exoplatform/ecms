@@ -25,6 +25,7 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.RootContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -34,6 +35,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
+import org.quartz.JobExecutionContext;
 
 /**
  * Created by The eXo Platform SAS
@@ -55,8 +57,7 @@ public class WCMCoreUtils {
    * @return the service
    */
   public static <T> T getService(Class<T> clazz) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    return clazz.cast(container.getComponentInstanceOfType(clazz));
+    return getService(clazz, null);
   }
   
   /**
@@ -86,6 +87,25 @@ public class WCMCoreUtils {
   
   
   
+  /**
+   * Gets the service.
+   * 
+   * @param clazz the class
+   * @param containerName the container's name
+   * 
+   * @return the service
+   */
+  public static <T> T getService(Class<T> clazz, String containerName) {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    if (containerName != null) {
+      container = RootContainer.getInstance().getPortalContainer(containerName);
+    }
+    return clazz.cast(container.getComponentInstanceOfType(clazz));
+  }
+  
+  public static String getContainerNameFromJobContext(JobExecutionContext context) {
+    return context.getJobDetail().getGroup().split(":")[0];
+  }
   
   /**
    * Check current user has permission to access a node or not 
