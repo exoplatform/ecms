@@ -176,7 +176,7 @@ public class UIDialogForm extends UIForm {
   public void releaseLock() throws Exception {
     if (isKeepinglock()) {
       Node currentNode = getNode();
-      if (currentNode.isLocked()) {
+      if ((currentNode!=null) && currentNode.isLocked()) {
         try {
           if(currentNode.holdsLock()) {
             String lockToken = LockUtil.getLockTokenOfUser(currentNode);        
@@ -427,7 +427,8 @@ public void addCalendarField(String name, String label, String[] arguments) thro
     if(node != null && mixinField.isVisibleIfNotNull()) {
       UIFormStringInput uiMixin = findComponentById(name);
       if(uiMixin == null) {
-        uiMixin = mixinField.createUIFormInput();        
+        uiMixin = mixinField.createUIFormInput();
+        uiMixin.setValue(node.getName());
         addUIFormInput(uiMixin);
       } else
 				uiMixin.setValue(node.getName());
@@ -1141,7 +1142,11 @@ public void addTextField(String name, String label, String[] arguments) throws E
 
   public Node getNode() throws Exception { 
     if(nodePath == null) return null;
-    return (Node) getSession().getItem(nodePath); 
+    try {    
+    return (Node) getSession().getItem(nodePath);
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   public String getPropertyName(String jcrPath) { 

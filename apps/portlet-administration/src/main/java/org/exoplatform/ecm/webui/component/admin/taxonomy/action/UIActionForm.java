@@ -214,7 +214,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       if (homPath.endsWith("/"))
         homPath = homPath.substring(0, homPath.length() - 1);
       ((UIFormStringInput) uiInput).setValue(homPath + "/" + taxoTreeData.getTaxoTreeName());
-    }    
+    } 
     super.renderField(name);
   }
   
@@ -343,11 +343,18 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       //Check existend action of node
       if (uiActionForm.nodeTypeName_.equals(taxoTreeData.getTaxoTreeActionTypeName()) && !isChangeLocation)  {
          //update action for taxonomy tree
+        try {
           CmsService cmsService = uiActionForm.getApplicationComponent(CmsService.class);
           Node storedHomeNode = uiActionForm.getNode().getParent();
           cmsService.storeNode(uiActionForm.nodeTypeName_, storedHomeNode, sortedInputs, false,
               repository);
           storedHomeNode.getSession().save();
+        } catch (Exception e) {
+          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.canotChangeActionId", null,
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
       } else {
         //Remove action if existed
         if (!isChangeLocation) {
