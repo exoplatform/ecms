@@ -258,6 +258,16 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           return;
         }
       }
+      String actionName = (String)(sortedInputs.get("/node/exo:name")).getValue();        
+      String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'", "#", ";", "}", "{", "/", "|", "\""};
+      for(String filterChar : arrFilterChar) {
+        if(actionName.indexOf(filterChar) > -1) {
+          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null, 
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
+      }
       try{
         if (uiExplorer.nodeIsLocked(currentNode)) return;
         if (!actionForm.isAddNew_) {
@@ -301,16 +311,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         } else {
           rootProp.setValue((sortedInputs.get("/node/exo:name")).getValue());
         }
-        String actionName = (String)(sortedInputs.get("/node/exo:name")).getValue();        
-        String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'", "#", ";", "}", "{", "/", "|", "\""};
-        for(String filterChar : arrFilterChar) {
-          if(actionName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null, 
-                ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-        }
+        
         Node parentNode = actionForm.getParentNode();
         if (actionForm.isAddNew_) {
           if(parentNode.hasNode(EXO_ACTIONS)) {

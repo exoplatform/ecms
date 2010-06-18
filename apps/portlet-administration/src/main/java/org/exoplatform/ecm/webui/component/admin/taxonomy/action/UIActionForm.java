@@ -342,6 +342,15 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
      
       //Check existend action of node
       if (uiActionForm.nodeTypeName_.equals(taxoTreeData.getTaxoTreeActionTypeName()) && !isChangeLocation)  {
+        String actionNameInput = (String) (sortedInputs.get("/node/exo:name")).getValue();
+        String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", 
+            "'", "#", ";", "}", "{", "/", "|", "\""};
+        if (!Utils.isNameValid(actionNameInput, arrFilterChar)) {
+          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null, 
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
          //update action for taxonomy tree
         try {
           CmsService cmsService = uiActionForm.getApplicationComponent(CmsService.class);
@@ -384,6 +393,11 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", 
               "'", "#", ";", "}", "{", "/", "|", "\""};
           if (!Utils.isNameValid(actionName,arrFilterChar)) {
+            if (!isEditTree) {
+              Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(repository, name, true);
+              actionServiceContainer.removeAction(taxonomyTreeNode, repository);
+              taxonomyService.removeTaxonomyTree(name);
+            }
             uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null, 
                 ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
