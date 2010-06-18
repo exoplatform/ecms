@@ -111,11 +111,7 @@ public class UIContentPropertySelector extends UIForm{
   static  public class CancelActionListener extends EventListener<UIContentPropertySelector> {
     public void execute(Event<UIContentPropertySelector> event) throws Exception {
       UIContentPropertySelector contentPropertySelector = event.getSource();
-      UIPopupWindow popupWindow = Utils.getPopupContainer(contentPropertySelector).getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
-      UIContentSelector contentSelector = popupWindow.getAncestorOfType(UIContentSelector.class);
-      UIContentSearchForm contentSearchForm = contentSelector.getChild(UIContentSearchForm.class);
       Utils.closePopupWindow(contentPropertySelector, WEB_CONTENT_METADATA_POPUP);
-      contentSelector.setSelectedTab(contentSearchForm.getId());
     }
   }
 
