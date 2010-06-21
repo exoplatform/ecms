@@ -96,6 +96,7 @@ public class UIAddMetadataForm extends UIDialogForm {
       NodeTypeManager ntManager = uiJCRExplorer.getSession().getWorkspace().getNodeTypeManager();
       PropertyDefinition[] props = ntManager.getNodeType(uiForm.getNodeType()).getPropertyDefinitions();
       List<Value> valueList = new ArrayList<Value>();
+      try {      
       for (PropertyDefinition prop : props) {
         String name = prop.getName();
         String inputName = uiForm.fieldNames.get(name) ;
@@ -126,6 +127,11 @@ public class UIAddMetadataForm extends UIDialogForm {
             }
           }
         }
+      }
+      } catch (Exception e) {
+        UIUploadManager uiUploadManager = uiUploadContainer.getParent();
+        uiUploadManager.initMetadataPopup();
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager);
       }
       node.save();
       node.getSession().save();

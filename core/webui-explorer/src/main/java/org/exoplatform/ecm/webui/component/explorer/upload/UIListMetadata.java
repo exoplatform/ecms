@@ -116,9 +116,11 @@ public class UIListMetadata extends UIContainer {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      uiUploadContainer.removeChild(UIAddMetadataForm.class) ;
-      UIAddMetadataForm uiAddMetadataForm = 
-        uiUploadContainer.createUIComponent(UIAddMetadataForm.class, null, null) ;
+      UIAddMetadataForm uiAddMetadataForm = uiUploadContainer.getChild(UIAddMetadataForm.class);
+      if (uiAddMetadataForm == null) {
+        uiAddMetadataForm = uiUploadContainer.createUIComponent(UIAddMetadataForm.class, null, null);
+        uiUploadContainer.addChild(uiAddMetadataForm);
+      }
       uiAddMetadataForm.getChildren().clear() ;
       uiAddMetadataForm.setNodeType(nodeType) ;
       uiAddMetadataForm.setIsNotEditNode(true) ;
@@ -126,7 +128,6 @@ public class UIListMetadata extends UIContainer {
       uiAddMetadataForm.setWorkspace(currentNode.getSession().getWorkspace().getName()) ;
       uiAddMetadataForm.setStoredPath(currentNode.getPath()) ;
       uiAddMetadataForm.setChildPath(uiUploadContainer.getEditNode(nodeType).getPath()) ;
-      uiUploadContainer.addChild(uiAddMetadataForm) ;
       uiUploadContainer.setRenderedChild(UIAddMetadataForm.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadContainer) ;
     }

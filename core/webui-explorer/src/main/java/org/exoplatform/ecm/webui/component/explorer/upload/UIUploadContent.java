@@ -181,14 +181,16 @@ public class UIUploadContent extends UIContainer {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      uiUploadContainer.setActions(new String[] {"AddMetadata","Close"});
-      uiUploadContainer.removeChild(UIAddMetadataForm.class);
-      uiUploadContainer.removeChild(UIListMetadata.class);
-      UIListMetadata uiListMetadata = 
-        uiUploadContainer.createUIComponent(UIListMetadata.class, null, null) ;
+      uiUploadContainer.setActions(new String[] {"AddMetadata","Close"});      
+      UIAddMetadataForm uiAddMetadataForm = uiUploadContainer.getChild(UIAddMetadataForm.class);
+      if (uiAddMetadataForm != null) uiUploadContainer.setRenderedChild(UIAddMetadataForm.class);
+      UIListMetadata uiListMetadata = uiUploadContainer.getChild(UIListMetadata.class);
+      if (uiListMetadata==null) {
+        uiListMetadata = uiUploadContainer.createUIComponent(UIListMetadata.class, null, null) ;
+        uiUploadContainer.addChild(uiListMetadata);
+      }
       uiListMetadata.setIsExternalMetadata(true);
-      uiUploadContainer.addChild(uiListMetadata);
-      uiUploadContainer.setRenderedChild(UIListMetadata.class) ;
+      uiUploadContainer.setRenderedChild(UIListMetadata.class) ;      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadContainer) ;
     }
   }
