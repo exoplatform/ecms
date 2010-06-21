@@ -51,10 +51,11 @@ public class PostFilePlanInterceptor implements CmsScript {
       session.save();
       session.logout();
 		}catch(Exception e) {
-      if(session != null) {
+      e.printStackTrace() ;
+		} finally {
+			if (session != null) {
         session.logout() ;
-      }
-			e.printStackTrace() ;
+      }			
 		}
   }
 

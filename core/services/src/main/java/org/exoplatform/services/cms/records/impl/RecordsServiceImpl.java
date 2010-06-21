@@ -26,6 +26,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
@@ -67,6 +68,11 @@ public class RecordsServiceImpl implements RecordsService {
   private SessionProviderService providerService_ ;
   
   /**
+   * Manage audit history;
+   */
+  private AuditService auditService_;
+
+  /**
    * RepositoryService object
    */
   private RepositoryService repositoryService_ ;
@@ -81,10 +87,11 @@ public class RecordsServiceImpl implements RecordsService {
    * @param repositoryService             RepositoryService object
    */
   public RecordsServiceImpl(ActionServiceContainer actionServiceContainer,
-                            SessionProviderService sessionProviderService, RepositoryService repositoryService) {
+                            SessionProviderService sessionProviderService, RepositoryService repositoryService, AuditService auditService) {
     actionsService_ = actionServiceContainer;
     providerService_ = sessionProviderService;
     repositoryService_ = repositoryService;
+    auditService_ = auditService;
   }
 
   /**
@@ -102,7 +109,9 @@ public class RecordsServiceImpl implements RecordsService {
     processCutoffInformation(filePlan, record);
 
     //make the record auditable
-    record.addMixin("exo:auditable");  
+    record.addMixin("exo:auditable");
+    if (!auditService_.hasHistory(record))
+        auditService_.createHistory(record);
     record.save() ;
     filePlan.save();    
     filePlan.getSession().save() ;
@@ -126,7 +135,7 @@ public class RecordsServiceImpl implements RecordsService {
 
     JcrInputProperty lifeCycleInputProperty = new JcrInputProperty();
     lifeCycleInputProperty.setJcrPath("/node/exo:lifecyclePhase");
-    lifeCycleInputProperty.setValue("add");
+    lifeCycleInputProperty.setValue(new String[]{"node_added"});
     mappings.put("/node/exo:lifecyclePhase", lifeCycleInputProperty);
 
     JcrInputProperty descriptionInputProperty = new JcrInputProperty();
