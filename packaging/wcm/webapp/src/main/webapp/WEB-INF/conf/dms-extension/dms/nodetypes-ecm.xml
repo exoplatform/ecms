@@ -226,7 +226,7 @@
         protected="false" multiple="false">
         <valueConstraints/>
         <defaultValues>
-          <defaultValue> </defaultValue>
+          <defaultValue></defaultValue>
         </defaultValues>        
       </propertyDefinition>
       <propertyDefinition name="rma:nextReviewDate" requiredType="Date" autoCreated="false" mandatory="true" onParentVersion="COPY"
