@@ -19,9 +19,6 @@ package org.exoplatform.wcm.webui.selector.content.one;
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.portal.webui.page.UIPageBody;
-import org.exoplatform.portal.webui.portal.UIPortal;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeIdentifier;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
@@ -72,11 +69,6 @@ public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
       prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
       prefs.store();
   
-      // Update Page And Close PopUp
-      UIPortal uiPortal = Util.getUIPortal();
-      UIPageBody uiPageBody = uiPortal.findFirstComponentOfType(UIPageBody.class);
-      uiPageBody.setUIComponent(null);
-      uiPageBody.setMaximizedUIComponent(null);
       Utils.closePopupWindow(contentBrowsePanel, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
     }
   }

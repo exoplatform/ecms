@@ -9,8 +9,6 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.portal.webui.page.UIPageBody;
-import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -229,12 +227,6 @@ public class UIContentSearchResult extends UIGrid {
       prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
       prefs.store();
 
-      // Update and Close
-      UIPortal uiPortal = Util.getUIPortal();
-      UIPageBody uiPageBody = uiPortal.findFirstComponentOfType(UIPageBody.class);
-      uiPageBody.setUIComponent(null);
-      uiPageBody.setMaximizedUIComponent(null);
-      Utils.updatePortal((PortletRequestContext)event.getRequestContext());
       Utils.closePopupWindow(contentSearchResult.getAncestorOfType(UIContentSelector.class), UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
     }
   }
