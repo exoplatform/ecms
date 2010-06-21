@@ -235,7 +235,6 @@ public class CmsServiceImpl implements CmsService {
     
     String uuid = currentNode.getUUID();
     session.save();
-    session.logout();
     return uuid;
   }
 

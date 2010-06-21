@@ -156,18 +156,14 @@ public class NodeLocation {
    * @return a NodeLocation object
    */
   public static final NodeLocation make(final Node node) {
-    Session session = null;
     try {
-      session = node.getSession();
+      Session session = node.getSession();
       String repository = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
       String workspace = session.getWorkspace().getName();
       String path = node.getPath();
-      session.logout();
       return new NodeLocation(repository, workspace, path);
     } catch (RepositoryException e) {
       log.error("make() failed because of ", e);
-    } finally {
-      if (session != null) session.logout();
     }
     return null;
   }
@@ -205,12 +201,9 @@ public class NodeLocation {
       String repository = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
       String workspace = session.getWorkspace().getName();
       String path = node.getPath();
-      session.logout();
       return new NodeLocation(repository, workspace, path);
     } catch (RepositoryException e) {
       log.error("getNodeLocationByNode() failed because of ", e);
-    } finally {
-      if (session != null) session.logout();
     }
     return null;
   }
@@ -228,12 +221,9 @@ public class NodeLocation {
       ManageableRepository repository = WCMCoreUtils.getRepository(nodeLocation.getRepository());
       session = WCMCoreUtils.getSystemSessionProvider().getSession(nodeLocation.getWorkspace(), repository);
       Node node = (Node)session.getItem(nodeLocation.getPath());
-      session.logout();
       return node;
     } catch (Exception e) {
       log.error("getNodeByNodeLocation() failed because of ", e);
-    } finally {
-      if (session != null) session.logout();
     }
     return null;
   }
