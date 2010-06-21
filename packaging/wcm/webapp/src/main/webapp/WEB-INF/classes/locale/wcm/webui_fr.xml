@@ -398,4 +398,11 @@
       <SharedSite>Site Partagé</SharedSite>   
     </title>
    </ContentSelector>
+   
+   <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Page sélecteur</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
 </bundle>

@@ -399,4 +399,11 @@
       <SharedSite>Shared Site</SharedSite>
     </title>
   </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Page selector</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
 </bundle>

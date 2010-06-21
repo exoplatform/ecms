@@ -18,12 +18,6 @@
     </title>
   </UICategoryNavigationTargetPathFormInputSet>
 
-  <UICategoryNavigationTargetPathPopupWindow>
-    <title>
-      <UIPageSelector>Page sélecteur</UIPageSelector>
-    </title>
-  </UICategoryNavigationTargetPathPopupWindow>
-
   <UICategoryNavigationConfig>
     <label>
       <UICategoryNavigationRepositoryFormSelectBox>Dépôt de données</UICategoryNavigationRepositoryFormSelectBox>

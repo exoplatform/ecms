@@ -18,12 +18,6 @@
     </title>
   </UICategoryNavigationTargetPathFormInputSet>
 
-  <UICategoryNavigationTargetPathPopupWindow>
-    <title>
-      <UIPageSelector>Chọn trang</UIPageSelector>
-    </title>
-  </UICategoryNavigationTargetPathPopupWindow>
-
   <UICategoryNavigationConfig>
     <label>
       <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>

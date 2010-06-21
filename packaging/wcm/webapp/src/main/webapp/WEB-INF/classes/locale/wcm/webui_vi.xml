@@ -400,4 +400,11 @@
       <SharedSite>Tài nguyên chung</SharedSite>
     </title>
   </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Chọn trang</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
 </bundle>
