@@ -25,7 +25,7 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.lifecycle")%></td>
 	      <td class="FieldComponent">
 		      <% 
-		        String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", "options=read,add,remove,modify"] ;
+		        String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", "options=read,schedule,node_added,node_removed,property_added,property_removed,property_changed"] ;
 		        uiform.addSelectBoxField("lifecycle", fieldLifecycle) ;
 		      %>
 		    </td>
