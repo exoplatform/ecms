@@ -3183,4 +3183,14 @@
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Choose category</UIOneTaxonomySelector>
+      </label>
+    </tab>
+    <action>
+    	 <Close>Close</Close>
+    </action>
+  </UICategoryManagerSearch>  
 </bundle>

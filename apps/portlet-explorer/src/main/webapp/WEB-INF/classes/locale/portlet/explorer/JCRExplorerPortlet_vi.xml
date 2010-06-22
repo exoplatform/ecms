@@ -3288,4 +3288,14 @@
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Lựa chọn loại</UIOneTaxonomySelector>
+      </label>
+    </tab>
+    <action>
+    	 <Close>Đóng</Close>
+    </action>
+  </UICategoryManagerSearch>
 </bundle>
