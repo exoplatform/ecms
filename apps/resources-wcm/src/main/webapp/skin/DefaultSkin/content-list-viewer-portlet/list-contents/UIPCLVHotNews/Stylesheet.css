@@ -87,6 +87,10 @@
   display: block;
 }
 
+.UIPCLVHotNews .CaptionItem .ContentHotNews {
+  width:70%;
+}
+
 .UIPCLVHotNews .CaptionItem .ReadLink, .UIPCLVEvents .CaptionItem .ReadLink {
   margin-bottom: 6px;
   text-align: right;
