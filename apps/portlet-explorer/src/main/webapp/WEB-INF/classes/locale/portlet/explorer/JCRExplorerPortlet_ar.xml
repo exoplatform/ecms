@@ -2873,6 +2873,11 @@
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
+  <UIJCRExplorer>  
+    <msg>
+        <target-path-not-found>Target node not found!</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
   <UICategoryManagerSearch>
     <tab>
       <label>

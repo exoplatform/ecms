@@ -57,8 +57,6 @@ public class LinkManagerImpl implements LinkManager {
 
   private final static String    PRIMARY_TYPE = "exo:primaryType";
   
-  private final static String    EXO_RESTORE_LOCATION = "exo:restoreLocation";
-
   private final static Log       LOG  = ExoLogger.getLogger(LinkManagerImpl.class);
 
   private final SessionProviderService providerService_;
@@ -117,7 +115,6 @@ public class LinkManagerImpl implements LinkManager {
       RepositoryException {
     String uuid = link.getProperty(UUID).getString();
     Node targetNode = getSession(link, system).getNodeByUUID(uuid);
-    if (targetNode.isNodeType(EXO_RESTORE_LOCATION)) return link;
     return targetNode;
   }
 

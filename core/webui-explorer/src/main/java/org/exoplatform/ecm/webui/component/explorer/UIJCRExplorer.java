@@ -74,6 +74,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -98,7 +99,7 @@ public class UIJCRExplorer extends UIContainer {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIJCRExplorer");
-	
+  
   private LinkedList<ClipboardCommand> clipboards_ = new LinkedList<ClipboardCommand>() ;
   private LinkedList<String> nodesHistory_ = new LinkedList<String>() ;
   private LinkedList<String> wsHistory_ = new LinkedList<String>();
@@ -683,21 +684,48 @@ public class UIJCRExplorer extends UIContainer {
   }
   
   public void setSelectNode(String uri) throws Exception {
-  	setSelectNode(uri, false);
+    setSelectNode(uri, false);
   }
   
+  private boolean checkTargetForSymlink(String uri) throws Exception {
+    Node testedNode;
+    NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
+    try {
+      testedNode = (Node) nodeFinder.getItem(this.getSession(), uri, true);
+    } catch (Exception e) {
+        LOG.warn("Cannot find the node at " + uri);
+        UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
+            null,
+            ApplicationMessage.WARNING));        
+        return false;
+    }
+    if (testedNode.isNodeType(Utils.EXO_RESTORELOCATION)) {
+      UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
+      uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
+          null,
+          ApplicationMessage.WARNING));        
+      return false;
+    }
+    return true;
+  }  
+  
   public void setSelectNode(String uri, boolean back) throws Exception {  
-    Node currentNode;
+    Node currentNode = null;
     if(uri == null || uri.length() == 0) uri = "/";
     String previousPath = currentPath_;
-    try {
-      setCurrentPath(uri);
+    if (checkTargetForSymlink(uri)) {
+      try {
+        setCurrentPath(uri);
+        currentNode = getCurrentNode();
+      } catch (Exception e) {
+        LOG.error("Cannot find the node at " + uri, e);
+        setCurrentPath(LinkUtils.getParentPath(currentPath_));
+        currentNode = getCurrentNode();
+      }   
+    } else {
       currentNode = getCurrentNode();
-    } catch (Exception e) {
-      LOG.error("Cannot find the node at " + uri, e);
-      setCurrentPath(LinkUtils.getParentPath(currentPath_));
-      currentNode = getCurrentNode();
-    }    
+    }
     if(currentNode.hasProperty(Utils.EXO_LANGUAGE)) {
       setLanguage(currentNode.getProperty(Utils.EXO_LANGUAGE).getValue().getString());
     }
@@ -795,9 +823,9 @@ public class UIJCRExplorer extends UIContainer {
     } else if (Preference.SORT_BY_AUDITING.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_AUDITING));
     } else if (Preference.SORT_BY_CREATED_DATE.equals(preferences_.getSortType())) {
-        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));	
+        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder())); 
     } else if (Preference.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
-        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));	
+        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));  
     } else {
       Collections.sort(childrenList, new PropertyValueComparator(preferences_.getSortType(), preferences_.getOrder()));
     }
@@ -870,13 +898,13 @@ public class UIJCRExplorer extends UIContainer {
     List<Node> documentsOnTag = new ArrayList<Node>() ;
     WebuiRequestContext ctx = WebuiRequestContext.getCurrentInstance();
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?
-    																	SessionProviderFactory.createAnonimProvider() :
-    																	SessionProviderFactory.createSessionProvider();
+                                      SessionProviderFactory.createAnonimProvider() :
+                                      SessionProviderFactory.createSessionProvider();
     for(Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_, getRepositoryName(), 
-    																													getRepository().getConfiguration().getDefaultWorkspaceName(), 
-    																													sessionProvider)) {
+                                                              getRepository().getConfiguration().getDefaultWorkspaceName(), 
+                                                              sessionProvider)) {
       if(documentsType.contains(node.getPrimaryNodeType().getName()) &&
-      	 PermissionUtil.canRead(node)) {
+         PermissionUtil.canRead(node)) {
         documentsOnTag.add(node) ;
       }
     }

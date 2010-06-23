@@ -102,11 +102,13 @@
 	  			  strActs += "</a>" ;				  	
 	  		  } else {
 	  		  	def nodeTarget = node;
-							 if(uicomponent.isSymLink(node)) nodeTarget = Utils.getNodeSymLink(node);
-	  		  	String link = serverPath + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + preferenceWS + Utils.formatNodeName(nodeTarget.getPath()); 
-	  	    	strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
-	  		  	strActs += "  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>";
-	  			  strActs += "</a>" ;				  	
+					  if(uicomponent.isSymLink(node)) nodeTarget = Utils.getNodeSymLink(node);
+						if (nodeTarget!= null) {	 
+  	  		  	String link = serverPath + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + preferenceWS + Utils.formatNodeName(nodeTarget.getPath()); 
+  	  	    	strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
+  	  		  	strActs += "  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>";
+  	  			  strActs += "</a>" ;
+						}
 	  		  }
         }
   		  	  
