@@ -9,11 +9,18 @@
 %>
 
 <div id="$uicomponent.id" class="$uicomponent.id">
-	<% 
+<% 
+	def rcontext = _ctx.getRequestContext() ;
+    String portletId = Utils.getRealPortletId(rcontext);
+	def quickEditingBlockId = portletId + "-QuickEditingBlock";
 
   if (Utils.isShowQuickEdit()) {
     %>
-     <a class="DocumentQuickEdit" href="<%= uicomponent.event("QuickEdit") %>" title="<%= _ctx.appRes("UICNContainer.title.QuickEdit") %>"><div class="QuickEdit"><span></span></div></a>
+    <div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>">
+		<div style="position: absolute; right: 0px; top: 0px; z-index: 1">
+    		 <a class="DocumentQuickEdit" href="<%= uicomponent.event("QuickEdit") %>" title="<%= _ctx.appRes("UICNContainer.title.QuickEdit") %>"><div class="QuickEdit"><span></span></div></a>
+    	</div>
+	</div> 
      <%
    }
 
