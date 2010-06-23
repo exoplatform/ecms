@@ -64,6 +64,10 @@ public class UIPCLVContainer extends UIContainer {
   /** The boolean isError. */
   private boolean isError;
   
+  private Node categoryNode;
+  
+  private String taxonomyTreeName;
+
   /**
    * @return the isError
    */
@@ -114,6 +118,21 @@ public class UIPCLVContainer extends UIContainer {
     return header;
   }
   
+	public void setCategoryNode(Node categoryNode) {
+		this.categoryNode = categoryNode;
+	}
+
+	public Node getCategoryNode() {
+		return categoryNode;
+	}
+
+	public void setTaxonomyTreeName(String taxonomyTreeName) {
+		this.taxonomyTreeName = taxonomyTreeName;
+	}
+
+	public String getTaxonomyTreeName() {
+		return taxonomyTreeName;
+	}
 	/**
 	 * Inits the.
 	 * 
@@ -134,7 +153,12 @@ public class UIPCLVContainer extends UIContainer {
 		}
 		String gpath  = Util.getPortalRequestContext().getRequestParameter("path");
     	if (gpath!=null) {
-    		categoryPath = gpath.substring(gpath.indexOf(preferenceTreeName)+preferenceTreeName.length()+1);
+    		String[] categories = gpath.split("/");
+    		if (categories.length > 1) {
+    			preferenceTreeName = categories[1];
+				categoryPath = gpath.substring(gpath.indexOf(preferenceTreeName)
+						+ preferenceTreeName.length() + 1);
+    		}
     	}
 
 		Node treeNode = null;
@@ -156,7 +180,8 @@ public class UIPCLVContainer extends UIContainer {
 				categoryNode = treeNode;
 			}
 		}
-
+		setTaxonomyTreeName(preferenceTreeName);
+		setCategoryNode(categoryNode);
 		List<Node> nodes = this.getListSymlinkNode(portletPreferences, categoryNode.getPath());
 		if(nodes == null) {
 		  nodes = new ArrayList<Node>();
@@ -166,7 +191,7 @@ public class UIPCLVContainer extends UIContainer {
 		PaginatedNodeIterator paginatedNodeIterator = new PaginatedNodeIterator(nodes, itemsPerPage);
 		getChildren().clear();
 
-		UIPCLVForm parameterizedContentListViewer = addChild(	UIPCLVForm.class, null, null);
+		UIPCLVForm parameterizedContentListViewer = addChild(UIPCLVForm.class, null, null);
 		String templatePath = getFormViewTemplatePath();
 		ResourceResolver resourceResolver = getTemplateResourceResolver();
 		parameterizedContentListViewer.init(templatePath, resourceResolver, paginatedNodeIterator);
@@ -316,4 +341,5 @@ public class UIPCLVContainer extends UIContainer {
     List<Node> nodes = wcmComposer.getContents(repository, workspace, categoryPath, filters, Utils.getSessionProvider());
 		return nodes;
 	}
+
 }
