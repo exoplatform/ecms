@@ -56,4 +56,12 @@ WCMUtils.prototype.getRestContext = function() {
 	return eXo.env.portal.context + "/" + eXo.env.portal.rest; 
 };
 
+WCMUtils.prototype.openPrintPreview = function(urlToOpen) {
+	if(urlToOpen.indexOf("?") == -1) {
+		return urlToOpen + '?isPrint=true';
+	} else {
+		return urlToOpen + '&isPrint=true';
+	}
+};
+
 eXo.ecm.WCMUtils = new WCMUtils();

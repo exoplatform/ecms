@@ -32,7 +32,7 @@
 					%>
 					<div class="UIOptionBar">
 					<div class="BackButton" title="<%= _ctx.appRes("UIPCVContainer.title.Back") %>" onclick="history.go(-1)"><span></span></div>
-					<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open(location.href.replace('<%=parameterizedPageURI%>','<%=printPreviewPageURI%>') + '&isPrint=true')" title="<%= _ctx.appRes("UIPCVContainer.title.print")%>"><%= _ctx.appRes("UIPCVContainer.label.print")%></a>
+					<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open(eXo.ecm.WCMUtils.openPrintPreview(location.href.replace('<%=parameterizedPageURI%>','<%=printPreviewPageURI%>')))" title="<%= _ctx.appRes("UIPCVContainer.title.print")%>"><%= _ctx.appRes("UIPCVContainer.label.print")%></a>
 					</div>
 					<%
 				}
