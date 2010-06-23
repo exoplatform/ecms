@@ -16,8 +16,6 @@
  */
 package org.exoplatform.wcm.webui.pclv;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,21 +27,18 @@ import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.images.RESTImagesRendererService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
-import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -362,6 +357,7 @@ public class UIPCLVForm extends UIForm {
 		return uri;
 	}
 
+
 	/**
 	 * Generate link.
 	 * 
@@ -372,51 +368,19 @@ public class UIPCLVForm extends UIForm {
 	 * @throws Exception the exception
 	 */
 	public String generateLink(Node node) throws Exception {
-		String categoryPath = null;
 		PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
 		PortletRequestContext portletRequestContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
 		PortletRequest portletRequest = portletRequestContext.getRequest();
 		PortletPreferences portletPreferences = portletRequest.getPreferences();
-		String preferenceRepository = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_REPOSITORY, "");
-		String preferenceTreeName = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_TREE_NAME, "");
-		String preferenceTargetPage = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_TARGET_PAGE, "");
 		String workspace = portletPreferences.getValue(UIPCLVPortlet.WORKSPACE, null);
 		String repository = portletPreferences.getValue(UIPCLVPortlet.REPOSITORY, null);
-		String pageNodeSelected = Util.getUIPortal().getSelectedNode().getUri();
-		try {
-			categoryPath = URLDecoder.decode(StringUtils.substringAfter(portalRequestContext.getNodePath(), pageNodeSelected + "/"), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-		  Utils.createPopupMessage(this, "UIPCLVConfig.msg.decode", null, ApplicationMessage.ERROR);
-		}
-    	String gpath = Util.getPortalRequestContext().getRequestParameter("path");
-    	if (gpath!=null) {
-    		categoryPath = gpath.substring(gpath.indexOf(preferenceTreeName)+preferenceTreeName.length()+1);
-    	}
-
-
+		String preferenceTargetPage = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_TARGET_PAGE, "");
 		RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
 		ManageableRepository manageableRepository = repositoryService.getRepository(repository);
-		TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-
-		Node treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
-		Node categoryNode = null;
-		if (preferenceTreeName.equals(categoryPath) || "".equals(categoryPath)) categoryNode = treeNode;
-		else categoryNode = treeNode.getNode(categoryPath);
-		if (!categoryNode.isNodeType("exo:taxonomy")) { 
-			if (categoryPath!=null && categoryPath.lastIndexOf("/")>-1) {
-				categoryPath = categoryPath.substring(0, categoryPath.lastIndexOf("/"));
-				categoryNode = treeNode.getNode(categoryPath);
-			} else {
-				categoryPath = "";
-				categoryNode = treeNode;
-			}
-		}
-		
-		
 		String nodeName = null;
 		if(node.getName().equals("jcr:frozenNode")) {
 		  String uuid = node.getProperty("jcr:frozenUuid").getString();
-		  Session session = Utils.getSessionProvider().getSession(workspace, manageableRepository);
+		  Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, manageableRepository);
 		  Node realNode = session.getNodeByUUID(uuid);
 		  if(realNode != null){
 		    nodeName = realNode.getName();
@@ -424,22 +388,13 @@ public class UIPCLVForm extends UIForm {
 		} else {
 		  nodeName = node.getName();
 		}
-		Node newNode = categoryNode.getNode(nodeName);
+		Node newNode = ((UIPCLVContainer) getParent()).getCategoryNode().getNode(nodeName);
 		String path = newNode.getPath();
 
 		String link = null;
-		
-		String itemPath = path.substring(path.lastIndexOf(preferenceTreeName));
-//		String backToCategory = "";
-//		if (categoryPath.equals("")) {
-//			backToCategory = pageNodeSelected;
-//		} else {
-//			backToCategory = itemPath.substring(0, itemPath.indexOf(newNode.getName()) - 1);
-//		}
+		String itemPath = path.substring(path.lastIndexOf(((UIPCLVContainer) getParent()).getTaxonomyTreeName()));
 		String portalURI = portalRequestContext.getPortalURI();
-//		link = portalURI + preferenceTargetPage + "?path=/" + itemPath + "&back" + "=" + "/" + backToCategory;
 		link = portalURI + preferenceTargetPage + "?path=/" + itemPath;
-
 	    FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
 	    link = friendlyService.getFriendlyUri(link);
 
