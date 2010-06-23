@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -146,6 +147,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
 	          if (target != null)
 	            listNode.add(target);
         	} catch (ItemNotFoundException ex) {}
+        	catch (AccessDeniedException adex) {}
         }
       }
     } catch (RepositoryConfigurationException e) {
