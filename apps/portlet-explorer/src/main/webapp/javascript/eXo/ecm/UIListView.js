@@ -835,8 +835,9 @@ var ListView = function() {
 		var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");		
 		sizeBarContainer.style.height = workingArea.offsetHeight + 'px';	
 		resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
-						
-	 documentWorkspace.style.height = workingArea.offsetHeight + 'px';									
+		
+		if (documentWorkspace)									
+	 		documentWorkspace.style.height = workingArea.offsetHeight + 'px';									
 	 if (page) {
 			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
 				if (view)
