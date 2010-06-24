@@ -245,7 +245,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           node.save() ;
           node.checkin() ;
         } catch (PathNotFoundException pathNotFoundException) {
-          Object[] args = { namePrefix + "/" + name };
+          Object[] args = { namePrefix };
           uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args, 
               ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -287,7 +287,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
       } catch (PathNotFoundException pathNotFoundException) {
         String namePrefix = uiScriptList.getScriptCategory();
-        Object[] args = { namePrefix + "/" + name };
+        Object[] args = { namePrefix };
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args, 
             ApplicationMessage.WARNING));
@@ -338,7 +338,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           uiForm.update(script, false) ;
         } catch (PathNotFoundException pathNotFoundException) {
           String namePrefix = uiScriptList.getScriptCategory();
-          Object[] args = { namePrefix + "/" + sciptName };
+          Object[] args = { namePrefix };
           UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args, 
               ApplicationMessage.WARNING));

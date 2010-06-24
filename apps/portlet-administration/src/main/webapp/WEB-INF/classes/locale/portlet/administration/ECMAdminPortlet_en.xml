@@ -2432,7 +2432,7 @@
 	</UINodeTypeSelector>
 	<UIScriptForm>
  		<msg>
-					<PathNotFoundException>A script with the path '{0}' is not already exists</PathNotFoundException>      
+					<PathNotFoundException>The script is not already exists in '{0}' folder</PathNotFoundException>      
    </msg>
  </UIScriptForm>
  <UINodeTypeList>

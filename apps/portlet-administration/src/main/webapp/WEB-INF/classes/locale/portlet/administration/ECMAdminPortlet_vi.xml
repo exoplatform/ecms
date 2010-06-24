@@ -2445,7 +2445,7 @@
 	 </UINodeTypeUpload>
 	 <UIScriptForm>
  		<msg>
-					<PathNotFoundException>A script with the path '{0}' không tồn tại</PathNotFoundException>      
+					<PathNotFoundException>Script không tồn tại trong thư mục '{0}'</PathNotFoundException>      
    </msg>
  </UIScriptForm>
  <UINodeTypeList>
