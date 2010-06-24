@@ -696,7 +696,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
       inputProperty.setJcrPath(jcrPath);
       setInputProperty(name, inputProperty);
 		} else {
-		  String oldValue = (String) inputProperty.getValue();
+		  String oldValue = inputProperty.getValue().toString();
 		  if ((oldValue != null) && (!oldValue.equals(newValue))) {
 				Iterator componentSelector = componentSelectors.keySet().iterator();
 				Map<String, String> obj = null;
