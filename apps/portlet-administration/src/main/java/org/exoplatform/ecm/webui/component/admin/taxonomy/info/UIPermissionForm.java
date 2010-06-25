@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.taxonomy.info;
 
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -69,6 +70,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   public static final String PERMISSION   = "permission";
 
   public static final String POPUP_SELECT = "SelectUserOrGroup";
+  final static public String ANY_PERMISSION = "*";
   
   public static final String SELECT_GROUP_ID = "TaxoSelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger("admin.UIPermissionForm");
@@ -114,6 +116,9 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         AccessControlEntry accessControlEntry = (AccessControlEntry)perIter.next() ;
         if(user.equals(accessControlEntry.getIdentity())) {
           userPermission.append(accessControlEntry.getPermission()).append(" ");
+        } else if(user.equals("*") || user.equals("any")) {
+          if (accessControlEntry.getIdentity().equals("*") || accessControlEntry.getIdentity().equals("any")) 
+            userPermission.append(accessControlEntry.getPermission()).append(" ");
         }
       }
       for (String perm : PermissionType.ALL) { 
@@ -221,7 +226,25 @@ public class UIPermissionForm extends UIForm implements UISelectable {
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
           }
-        } 
+        }
+        try {
+          if (userOrGroup.equals(ANY_PERMISSION)) {
+            node.removePermission(ANY_PERMISSION);
+            node.removePermission("any");
+          }
+          if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
+          node.save();
+        } catch (AccessDeniedException ade) {
+          uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, 
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch (AccessControlException accessControlException) {
+          uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, 
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
         if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
         node.save();        
         uiParent.getChild(UIPermissionInfo.class).updateGrid();

@@ -221,6 +221,8 @@ public class UIPermissionInfo extends UIContainer {
         }
         try {
           node.removePermission(name);
+          if (name.equals("*")) node.removePermission("any");
+          if (name.equals("any")) node.removePermission("*");
           node.save();
         } catch(AccessDeniedException ace) {
           uicomp.getSession().refresh(false) ;
