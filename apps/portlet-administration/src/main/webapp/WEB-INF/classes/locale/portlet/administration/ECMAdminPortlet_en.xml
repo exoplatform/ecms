@@ -2136,6 +2136,7 @@
   <UIPermissionTreeInfo>
   	<msg>
   		<confirm-delete-permission>Do you really want to delete this permission?</confirm-delete-permission>
+      <no-permission-remove>You can not remove the owner or system</no-permission-remove>  		
   	</msg>
   </UIPermissionTreeInfo>  
   <UITaxonomyTreeMainForm>

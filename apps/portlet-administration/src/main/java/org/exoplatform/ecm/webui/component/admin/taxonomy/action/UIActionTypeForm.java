@@ -51,7 +51,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class, 
-    template = "app:/groovy/webui/component/explorer/UIFormWithoutAction.gtmpl",
+    template = "app:/groovy/webui/component/admin/taxonomy/UIFormWithoutAction.gtmpl",
     events = @EventConfig(listeners = UIActionTypeForm.ChangeActionTypeActionListener.class)
 )
 

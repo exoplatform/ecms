@@ -48,6 +48,7 @@ import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Permission;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Taxonomy;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
@@ -176,6 +177,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator();
     Node taxonomyStorageNodeSystem = Utils.makePath(taxonomyStorageNode, treeName, "exo:taxonomy",
             null);
+    String systemUser = SystemIdentity.SYSTEM;    
     session.save();
     while (it.hasNext()) {
       ObjectParameter objectParam = it.next();
@@ -189,13 +191,18 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
           if (taxonomyStorageNodeSystem.canAddMixin("mix:referenceable")) {
             taxonomyStorageNodeSystem.addMixin("mix:referenceable");
           }
+          if (!containsUserInACL(((ExtendedNode)taxonomyStorageNodeSystem).getACL().getPermissionEntries(), systemUser)) {
+            if (taxonomyStorageNodeSystem.canAddMixin("exo:privilegeable"))
+              taxonomyStorageNodeSystem.addMixin("exo:privilegeable");
+            ((ExtendedNode)taxonomyStorageNodeSystem).setPermission(systemUser, PermissionType.ALL);
+          }    
         }
       } else if (objectParam.getName().equals("taxonomy.configuration")) {
         TaxonomyConfig config = (TaxonomyConfig) objectParam.getObject();
         for (Taxonomy taxonomy : config.getTaxonomies()) {
           Node taxonomyNode = Utils.makePath(taxonomyStorageNodeSystem, taxonomy.getPath(),
               "exo:taxonomy", getPermissions(taxonomy.getPermissions()));
-          String systemUser = SystemIdentity.SYSTEM;
+
           if (!containsUser(taxonomy.getPermissions(), systemUser)) {
             if (taxonomyNode.canAddMixin("exo:privilegeable"))
               taxonomyNode.addMixin("exo:privilegeable");
@@ -224,6 +231,14 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     }
     session.save();
     session.logout();
+  }
+  
+  private boolean containsUserInACL(List<AccessControlEntry> entries, String userName) {
+    if (userName == null) return false;
+    for (AccessControlEntry entry : entries)
+      if (userName.equals(entry.getIdentity()))
+          return true;
+    return false;
   }
   
   private boolean containsUser(List<Permission> permissions, String userName) {

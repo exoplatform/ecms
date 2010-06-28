@@ -197,8 +197,12 @@ public class UIPermissionInfo extends UIContainer {
       Node currentNode = uiJCRExplorer.getCurrentNode() ;
       uiJCRExplorer.addLockToken(currentNode);
       ExtendedNode node = (ExtendedNode)currentNode;
+      String owner = SystemIdentity.SYSTEM ;      
+      int iSystemOwner = 0;
+      if (uicomp.getExoOwner(node) != null) owner = uicomp.getExoOwner(node);
+      if (owner.equals(SystemIdentity.SYSTEM)) iSystemOwner = -1;
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class) ;
-      if (uicomp.getSizeOfListPermission() < 2) {
+      if (uicomp.getSizeOfListPermission() < 2 + iSystemOwner) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-remove",
             null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());

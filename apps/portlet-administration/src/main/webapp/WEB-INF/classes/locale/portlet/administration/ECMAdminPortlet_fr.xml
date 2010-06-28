@@ -2455,5 +2455,10 @@
  	 <UINodeTypeSelector>NodeType Selector</UINodeTypeSelector>
  	</title>
  </PopupComponent>
+  <UIPermissionTreeInfo>
+  	<msg>
+      <no-permission-remove>You can not remove the owner or system</no-permission-remove>  		
+  	</msg>
+  </UIPermissionTreeInfo> 
 </bundle>
 
