@@ -404,5 +404,11 @@
       <UIPageSelector>Page sélecteur</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
+ 
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Accès interdit. Veuillez vérifier vos droits d'accès à ce noeud</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
   
 </bundle>

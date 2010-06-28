@@ -406,4 +406,10 @@
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Access denied. You may not have the privileges on reading or node removed or changed</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  
 </bundle>

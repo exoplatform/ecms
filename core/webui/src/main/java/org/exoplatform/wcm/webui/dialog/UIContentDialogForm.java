@@ -500,6 +500,8 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       	Object[] args = {contentDialogForm.getNode().getPath()};
       	Utils.createPopupMessage(contentDialogForm, "UIContentDialogForm.msg.node-locked", args, ApplicationMessage.WARNING);
       } catch(AccessControlException ace) {
+      } catch (AccessDeniedException ade) {
+    	Utils.createPopupMessage(contentDialogForm, "UIDocumentInfo.msg.access-denied-exception", null, ApplicationMessage.WARNING);  
       } catch(VersionException ve) {
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.in-versioning", null, ApplicationMessage.WARNING);
       } catch(ItemNotFoundException item) {

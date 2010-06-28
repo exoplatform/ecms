@@ -407,4 +407,10 @@
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Truy cập bị chặn do bạn không có quyền đọc node, thay đổi node hoặc node đã bị xóa hoặc thay đổi.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  
 </bundle>
