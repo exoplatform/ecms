@@ -159,6 +159,37 @@ public class CmsServiceImpl implements CmsService {
     session.logout();
     return currentNode.getPath();
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings, 
+      boolean isAddNew, String repository) throws Exception {    
+    Set keys = mappings.keySet();
+    String nodePath = extractNodeName(keys);
+    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath); 
+
+    String primaryType = relRootProp.getNodetype() ;
+    if(primaryType == null || primaryType.length() == 0) {
+      primaryType = nodeTypeName ;
+    }
+    Session session = storeNode.getSession();
+    NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
+    NodeType nodeType = nodetypeManager.getNodeType(primaryType);    
+
+  //Broadcast CmsService.event.preEdit event
+    listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,storeNode,mappings);
+    updateNodeRecursively(NODE, storeNode, nodeType, mappings);
+    if (storeNode.isNodeType("exo:datetime")) {
+      storeNode.setProperty("exo:dateModified", new GregorianCalendar());
+    }
+    listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, storeNode);
+    //add lastModified property to jcr:content
+    session.save();
+    session.logout();
+    return storeNode.getPath();
+  }
+  
 
   /**
    * {@inheritDoc}

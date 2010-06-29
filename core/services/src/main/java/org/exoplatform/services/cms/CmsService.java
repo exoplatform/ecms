@@ -55,6 +55,20 @@ public interface CmsService {
   /**
    * Store node in given repository with given properties
    * @param nodetypeName    NodeType's name
+   * @param storeHomeNode   Parent node, where node is stored
+   * @param inputProperties Map of node's property including (property name, value)
+   * @param isAddNew        flag to decide whether this situation is adding node or updating node
+   * @param repository      Name of repository
+   * @return                return path to saved node
+   * @throws Exception
+   */
+  public String storeNode(String nodetypeName, Node storeHomeNode, Map inputProperties, boolean isAddNew,String repository) throws Exception;
+  
+  /**
+   * Store edited node in given repository with given properties
+   * used in case that user only has permission to access storeNode but
+   * can't access parent of storeNode (storeHomeNode)
+   * @param nodetypeName    NodeType's name
    * @param storeNode       Node is stored
    * @param inputProperties Map of node's property including (property name, value)
    * @param isAddNew        flag to decide whether this situation is adding node or updating node
@@ -62,7 +76,7 @@ public interface CmsService {
    * @return                return path to saved node
    * @throws Exception
    */
-  public String storeNode(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew,String repository) throws Exception;
+  public String storeEditedNode(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew,String repository) throws Exception;
   
   /**
    * Store node in given repository with given properties and return UUID of saved node

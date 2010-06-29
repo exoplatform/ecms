@@ -222,12 +222,12 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       webcontentNodeLocation = NodeLocation.getNodeLocationByNode(realNode);
       this.contentType = realNode.getPrimaryNodeType().getName();
       this.nodePath = realNode.getPath();
-      setStoredPath(realNode.getParent().getPath());
+      setStoredPath(getParentPath(realNode));
     } else {
       webcontentNodeLocation = NodeLocation.getNodeLocationByNode(webcontent);
       this.contentType = webcontent.getPrimaryNodeType().getName();
       this.nodePath = webcontent.getPath();
-      setStoredPath(webcontent.getParent().getPath());
+      setStoredPath(getParentPath(webcontent));
     }
   	this.webcontentNodeLocation = webcontentNodeLocation;
     this.repositoryName = webcontentNodeLocation.getRepository();
@@ -238,6 +238,10 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     String userName = Util.getPortalRequestContext().getRemoteUser();
     this.template = templateService.getTemplatePathByUser(true, contentType, userName, repositoryName);
     initFieldInput();
+  }
+  
+  private String getParentPath(Node node) throws RepositoryException {
+    return node.getPath().substring(0, node.getPath().lastIndexOf('/'));
   }
   
   /**
@@ -383,7 +387,11 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       	}
       	Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs, contentDialogForm.getInputProperties());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
-        cmsService.storeNode(contentDialogForm.contentType, contentDialogForm.getNode().getParent(), inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
+        if (canAccessParentNode(webContentNode)) {
+          cmsService.storeNode(contentDialogForm.contentType, webContentNode.getParent(), inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
+        } else {
+          cmsService.storeEditedNode(contentDialogForm.contentType, webContentNode, inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
+        }
       } catch(LockException le) {
       	Object[] args = {contentDialogForm.getNode().getPath()};
       	Utils.createPopupMessage(contentDialogForm, "UIContentDialogForm.msg.node-locked", args, ApplicationMessage.WARNING);
@@ -404,6 +412,15 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE)
         ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
       Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);      
+    }
+    
+    private boolean canAccessParentNode(Node node) {
+      try {
+        node.getParent();
+      } catch (Exception e) {
+        return false;
+      }
+      return true;
     }
   }
   
