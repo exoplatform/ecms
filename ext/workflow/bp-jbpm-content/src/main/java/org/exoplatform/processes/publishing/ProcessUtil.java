@@ -32,6 +32,7 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -101,25 +102,26 @@ public class ProcessUtil {
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
-    SessionProvider provider = SessionProvider.createSystemProvider();
     try{
-      Node requestNode = getNode(context, repository,workspace,path,provider);
+      Node requestNode = getNode(context, repository,workspace,path, getSessionProvider());
       if(!requestNode.isNodeType(EXO_CONENT_STATE)) {
         requestNode.addMixin(EXO_CONENT_STATE) ;   
-        requestNode.save();
       } 
-      requestNode.setProperty(CURRENT_STATE,REQUEST_FOR_VALIDATION);      
+      if (requestNode.isNodeType(EXO_CONENT_STATE)) {
+    	  requestNode.setProperty(CURRENT_STATE,REQUEST_FOR_VALIDATION);      
+      }
       if(!requestNode.isNodeType(EXO_VALIDATIONREQUEST)) {
         requestNode.addMixin(EXO_VALIDATIONREQUEST) ; 
       }      
-      String requester = ((ExtendedNode)requestNode).getProperty("exo:owner").getString();
-      requestNode.setProperty("exo:requester",requester) ;
-      requestNode.setProperty("exo:requestDate",new GregorianCalendar());
+      if(requestNode.isNodeType(EXO_VALIDATIONREQUEST)) {
+      	String requester = ((ExtendedNode)requestNode).getProperty("exo:owner").getString();
+      	requestNode.setProperty("exo:requester",requester) ;
+      	requestNode.setProperty("exo:requestDate",new GregorianCalendar());
+      }
       requestNode.getSession().save();      
     } catch (Exception e) {
       log.error(e);
     }    
-    provider.close();
   }
   
   public static void approve(ExecutionContext context) {
@@ -128,25 +130,24 @@ public class ProcessUtil {
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
-    SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node validatedNode = getNode(context, repository,workspace,path,provider) ;
+      Node validatedNode = getNode(context, repository,workspace,path,getSessionProvider()) ;
       if(!validatedNode.isNodeType("exo:approved")) {
         validatedNode.addMixin("exo:approved");
-        validatedNode.save();
       }      
-      validatedNode.setProperty("exo:approver",getActorId(context));
-      validatedNode.setProperty("exo:approvedDate",new GregorianCalendar());
-      String approveComment = (String) context.getVariable(ACTION_REASON) ;
-      if(approveComment != null && approveComment.length()!= 0) {
-        validatedNode.setProperty("exo:approvedComment",approveComment);
-      } 
+      if (validatedNode.isNodeType("exo:approved")) {
+    	  validatedNode.setProperty("exo:approver",getActorId(context));
+	      validatedNode.setProperty("exo:approvedDate",new GregorianCalendar());
+	      String approveComment = (String) context.getVariable(ACTION_REASON) ;
+	      if(approveComment != null && approveComment.length()!= 0) {
+	        validatedNode.setProperty("exo:approvedComment",approveComment);
+	      }
+      }
       validatedNode.setProperty(CURRENT_STATE_PROP,"Approved");
       validatedNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
     }
-    provider.close();
   }
   
   public static void disapprove(ExecutionContext context) {    
@@ -155,25 +156,24 @@ public class ProcessUtil {
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
-    SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node disapprovedNode = getNode(context, repository,workspace,path,provider) ;
-      if(!disapprovedNode.isNodeType("exo:disapproved")) {
+      Node disapprovedNode = getNode(context, repository,workspace,path,getSessionProvider()) ;
+      if (!disapprovedNode.isNodeType("exo:disapproved")) {
         disapprovedNode.addMixin("exo:disapproved");
-        disapprovedNode.save();
-      }      
-      disapprovedNode.setProperty("exo:contradictor",getActorId(context));
-      disapprovedNode.setProperty("exo:disaprovedDate",new GregorianCalendar());
-      String approveComment = (String) context.getVariable(ACTION_REASON);
-      if(approveComment != null && approveComment.length()!= 0) {
-        disapprovedNode.setProperty("exo:disapprovedReason",approveComment);
-      } 
-      disapprovedNode.setProperty(CURRENT_STATE_PROP,"Disapproved");
+      }
+      if (disapprovedNode.isNodeType("exo:disapproved")) {
+	      disapprovedNode.setProperty("exo:contradictor",getActorId(context));
+	      disapprovedNode.setProperty("exo:disaprovedDate",new GregorianCalendar());
+	      String approveComment = (String) context.getVariable(ACTION_REASON);
+	      if(approveComment != null && approveComment.length()!= 0) {
+	        disapprovedNode.setProperty("exo:disapprovedReason",approveComment);
+	      } 
+	      disapprovedNode.setProperty(CURRENT_STATE_PROP,"Disapproved");
+      }
       disapprovedNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
     }    
-    provider.close();
   } 
   
   public static void publish(ExecutionContext context) {
@@ -187,17 +187,18 @@ public class ProcessUtil {
       Node publishedNode = getNode(context, repository,workspace,path,provider) ;
       if(!publishedNode.isNodeType("exo:published")) {
         publishedNode.addMixin("exo:published");
-        publishedNode.save();
-      }      
-      Date startDate = (Date)context.getVariable("startDate");
-      Date endDate = (Date)context.getVariable("endDate");
-      Calendar calendar = new GregorianCalendar();
-      calendar.setTime(startDate);      
-      publishedNode.setProperty("exo:startPublication",calendar);
-      if(endDate != null) {
-        calendar.setTime(endDate);
-        publishedNode.setProperty("exo:endPublication",new GregorianCalendar()); 
-      }                  
+      }    
+      if(publishedNode.isNodeType("exo:published")) {
+	      Date startDate = (Date)context.getVariable("startDate");
+	      Date endDate = (Date)context.getVariable("endDate");
+	      Calendar calendar = new GregorianCalendar();
+	      calendar.setTime(startDate);      
+	      publishedNode.setProperty("exo:startPublication",calendar);
+	      if(endDate != null) {
+	        calendar.setTime(endDate);
+	        publishedNode.setProperty("exo:endPublication",new GregorianCalendar()); 
+	      }                  
+      }    
       publishedNode.setProperty(CURRENT_STATE_PROP,LIVE);      
       publishedNode.getSession().save();
     } catch (Exception e) {
@@ -217,14 +218,15 @@ public class ProcessUtil {
       Node pendingNode = getNode(context, repository,workspace,path,provider) ;
       if(!pendingNode.isNodeType("exo:pending")) {
         pendingNode.addMixin("exo:pending");
-        pendingNode.save();
-      }      
-      Date startDate = (Date)context.getVariable("startDate");                  
-      pendingNode.setProperty("exo:pendingStart",new GregorianCalendar());
-      Calendar calendar = new GregorianCalendar();
-      calendar.setTime(startDate);
-      pendingNode.setProperty("exo:pendingEnd",calendar);
-      pendingNode.setProperty(CURRENT_STATE_PROP,PENDING);      
+      }
+      if(pendingNode.isNodeType("exo:pending")) {
+	      Date startDate = (Date)context.getVariable("startDate");                  
+	      pendingNode.setProperty("exo:pendingStart",new GregorianCalendar());
+	      Calendar calendar = new GregorianCalendar();
+	      calendar.setTime(startDate);
+	      pendingNode.setProperty("exo:pendingEnd",calendar);
+	      pendingNode.setProperty(CURRENT_STATE_PROP,PENDING);      
+      }
       pendingNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
@@ -238,27 +240,26 @@ public class ProcessUtil {
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
-    SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node delegateNode = getNode(context, repository,workspace,path,provider) ;
+      Node delegateNode = getNode(context, repository,workspace,path,getSessionProvider()) ;
       if(!delegateNode.isNodeType("exo:delegated")) {
         delegateNode.addMixin("exo:delegated");
-        delegateNode.save();
       }
-      delegateNode.setProperty("exo:assigner",getActorId(context));
-      delegateNode.setProperty("exo:delegatedDate",new GregorianCalendar());
-      String delegator = (String)context.getVariable("delegator") ;
-      delegateNode.setProperty("exo:delegator",delegator);      
-      String delegatedComment = (String) context.getVariable(ACTION_REASON);
-      if(delegatedComment != null && delegatedComment.length()!= 0) {
-        delegateNode.setProperty("exo:delegatedComment",delegatedComment);
+      if(delegateNode.isNodeType("exo:delegated")) {
+	      delegateNode.setProperty("exo:assigner",getActorId(context));
+	      delegateNode.setProperty("exo:delegatedDate",new GregorianCalendar());
+	      String delegator = (String)context.getVariable("delegator") ;
+	      delegateNode.setProperty("exo:delegator",delegator);      
+	      String delegatedComment = (String) context.getVariable(ACTION_REASON);
+	      if(delegatedComment != null && delegatedComment.length()!= 0) {
+	        delegateNode.setProperty("exo:delegatedComment",delegatedComment);
+	      }
       }
       delegateNode.setProperty(CURRENT_STATE_PROP,DELEGATED);
       delegateNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
     }
-    provider.close();
   }
   
   public static void backup(ExecutionContext context) {
@@ -272,10 +273,11 @@ public class ProcessUtil {
       Node backupNode = getNode(context, repository,workspace,path,provider) ;
       if(!backupNode.isNodeType("exo:backup")) {
         backupNode.addMixin("exo:backup");
-        backupNode.save();
       }      
-      backupNode.setProperty("exo:backupDate",new GregorianCalendar());
-      backupNode.setProperty("exo:backupReason","DOCUMENT EXPIRED");
+      if(backupNode.isNodeType("exo:backup")) {
+	      backupNode.setProperty("exo:backupDate",new GregorianCalendar());
+	      backupNode.setProperty("exo:backupReason","DOCUMENT EXPIRED");
+      }
       backupNode.setProperty(CURRENT_STATE_PROP,BACKUP);
       backupNode.getSession().save();      
     } catch (Exception e) {
@@ -296,10 +298,11 @@ public class ProcessUtil {
       Node trashNode = getNode(context, repository,workspace,path,provider) ;
       if(!trashNode.isNodeType("exo:trashMovement")) {
         trashNode.addMixin("exo:trashMovement");
-        trashNode.save();
-      }      
-      trashNode.setProperty("exo:moveDate",new GregorianCalendar());
-      trashNode.setProperty("exo:moveReason",sourceTransition);
+      }
+      if(trashNode.isNodeType("exo:trashMovement")) {
+	      trashNode.setProperty("exo:moveDate",new GregorianCalendar());
+	      trashNode.setProperty("exo:moveReason",sourceTransition);
+      }
       trashNode.setProperty(CURRENT_STATE_PROP,IN_TRASH);
       trashNode.getSession().save();
     } catch (Exception e) {
@@ -393,4 +396,15 @@ public class ProcessUtil {
     return builder.toString();
   }
 
+	/**
+	 * Get SessionProvider of user. Only take this in current operating of user.
+	 * DO NOT use in Job executing
+	 * 
+	 * @return SessionProvider
+	 */
+  private static SessionProvider getSessionProvider() {
+	SessionProviderService sessionProviderService = (SessionProviderService) ExoContainerContext
+		.getCurrentContainer().getComponentInstanceOfType(SessionProviderService.class);
+	return sessionProviderService.getSessionProvider(null);
+  }
 }
