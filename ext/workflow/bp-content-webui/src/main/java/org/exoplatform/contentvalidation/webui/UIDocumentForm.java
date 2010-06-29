@@ -33,6 +33,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
@@ -100,8 +101,9 @@ public class UIDocumentForm extends UIDialogForm {
   
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
-      String workspaceName = getCurrentNode().getSession().getWorkspace().getName() ;
-      return new JCRResourceResolver(getRepository(), workspaceName, Utils.EXO_TEMPLATEFILE);
+      DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+      String wsName = dmsConfiguration.getConfig(getRepository()).getSystemWorkspace();
+      return new JCRResourceResolver(getRepository(), wsName, Utils.EXO_TEMPLATEFILE);
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     }
