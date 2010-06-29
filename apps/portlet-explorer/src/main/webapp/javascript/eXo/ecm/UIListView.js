@@ -835,7 +835,9 @@ var ListView = function() {
 		var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");		
 		sizeBarContainer.style.height = workingArea.offsetHeight + 'px';	
 		resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
-						
+		
+		if (documentWorkspace)						
+			documentWorkspace.style.height = workingArea.offsetHeight + 'px';					
 	  if (page) {
 				if (parseInt(page.getAttribute('pageAvailable')) > 1) {
 					if (view) 
@@ -843,8 +845,7 @@ var ListView = function() {
 				}
 		} else {
 			  if (view) {
-					view.style.height = workingArea.offsetHeight + 'px';
-					documentWorkspace.style.height = workingArea.offsetHeight + 'px';					
+					view.style.height = workingArea.offsetHeight + 'px';					
 				}				
 		}
 		var container = document.getElementById("UITreeExplorer");

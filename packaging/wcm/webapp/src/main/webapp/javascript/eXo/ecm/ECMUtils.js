@@ -654,28 +654,21 @@
 		eXo.ecm.ECMUtils.currentMouseY = event.clientY;
 		var workingArea = document.getElementById('UIWorkingArea');
 		var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");		
-		var container = document.getElementById("UITreeExplorer");							
-		var isOtherTabs=false;
+		var container = document.getElementById("UITreeExplorer");					
+		//var isOtherTabs=false;
 		var listContainers;
 		if (!container) {	  	 
 			listContainers = DOM.findDescendantsByClass(uiResizableBlock, "div", "SideBarContent");		
 			for (var k=0; k < listContainers.length; k++) {
 				if (listContainers[k].parentNode.className!="UIResizableBlock") {				
 					container = listContainers[k-1];
-					isOtherTabs = true;						
+					//isOtherTabs = true;						
 					break;
 				}
 			}				
 		}
 		eXo.ecm.ECMUtils.currentHeight = container.offsetHeight;								
-		var root = document.getElementById("UIDocumentInfo");
-		if (root) {			
-			var uiListGrid = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");	
-			eXo.ecm.ECMUtils.defaultHeight = uiListGrid.offsetHeight;												
-		} else {
-			root = document.getElementById("UIDocumentWorkspace");
-			eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;									
-		}
+		checkRoot();
 										
 		eXo.ecm.ECMUtils.resizableHeight = uiResizableBlock.offsetHeight;					
 		eXo.ecm.ECMUtils.containerResize = container;								
@@ -685,7 +678,8 @@
 
 	ECMUtils.prototype.resizeMouseMoveItemsInSideBar = function(event) {
 		var event = event || window.event;
-		var container = document.getElementById("UITreeExplorer");		
+		//var container = document.getElementById("UITreeExplorer");		
+	    var container = eXo.ecm.ECMUtils.containerResize;		
 		var deltaY = event.clientY - eXo.ecm.ECMUtils.currentMouseY ;
 		eXo.ecm.ECMUtils.resizableY = deltaY;	
 										
@@ -724,14 +718,16 @@
 		// The bellow block are updated		
 		sizeBarContainer.style.height = eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY + 20 + "px";	
 		resizeSideBar.style.height = eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY + 20 + "px";				
-		var root = document.getElementById("UIDocumentWorkspace");
+		var root = checkRoot();
+		// var root = document.getElementById("UIDocumentWorkspace");
 		root.style.height = eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY + 20 +"px";
 		if (eXo.ecm.ECMUtils.resizableHeight + eXo.ecm.ECMUtils.resizableY < eXo.ecm.ECMUtils.defaultHeight) {			
 			sizeBarContainer.style.height = eXo.ecm.ECMUtils.defaultHeight + 20 + "px";
 			resizeSideBar.style.height = eXo.ecm.ECMUtils.defaultHeight + 20 + "px";						
 		}
 		var container = eXo.ecm.ECMUtils.containerResize;		
-		container.style.height = eXo.ecm.ECMUtils.currentHeight + eXo.ecm.ECMUtils.resizableY + "px"			
+		if (container)
+			container.style.height = eXo.ecm.ECMUtils.currentHeight + eXo.ecm.ECMUtils.resizableY + "px"			
 		delete eXo.ecm.ECMUtils.currentHeight;
 		delete eXo.ecm.ECMUtils.currentMouseY;				
 		delete eXo.ecm.ECMUtils.resizableHeight		
@@ -745,7 +741,9 @@
 	  var itemArea = document.getElementById("SelectItemArea");
 	  var container = document.getElementById("UITreeExplorer");
 	  var resizeTreeButton = DOM.findFirstDescendantByClass(resizeBlock, "div", "ResizeTreeButton");	  	
-	  var workspace = document.getElementById("UIDocumentWorkspace");		
+	  
+		// var workspace = document.getElementById("UIDocumentWorkspace");
+		var workspace = checkRoot();
 	  var isOtherTabs;
 	  var listContainers;
 	  
@@ -849,6 +847,25 @@
 	  var select = document.getElementById(id);	  
 	  if (select)
 		select.className = select.className + " " + "SelectedNode";
+	}
+
+	//private method
+	function checkRoot() {
+		var workingArea = document.getElementById('UIWorkingArea');
+		var root = document.getElementById("UIDocumentInfo");
+		if (root) {			
+			var uiListGrid = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");	
+			eXo.ecm.ECMUtils.defaultHeight = uiListGrid.offsetHeight;												
+		} else {
+			root = document.getElementById("UIDocumentWorkspace");
+			if (root) {
+				eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;									
+			} else {
+				root = eXo.core.DOMUtil.findFirstDescendantByClass(workingArea, "div", "RightContainer");	
+			  eXo.ecm.ECMUtils.defaultHeight = root.offsetHeight;				
+			}
+		}
+		return root;
 	}
 	
 };
