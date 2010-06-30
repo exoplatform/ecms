@@ -375,8 +375,8 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
      */
     public void execute(Event<UIContentDialogForm> event) throws Exception {
     	UIContentDialogForm contentDialogForm = event.getSource();
-    	try{
-        Node webContentNode = contentDialogForm.getNode();
+    	try {
+    		Node webContentNode = contentDialogForm.getNode();
         if (!webContentNode.isCheckedOut()) {
           webContentNode.checkout();
         }
@@ -392,10 +392,18 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
         } else {
           cmsService.storeEditedNode(contentDialogForm.contentType, webContentNode, inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
         }
+        
+        if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE) {
+            ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
+        }
+        Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW); 
+        
       } catch(LockException le) {
       	Object[] args = {contentDialogForm.getNode().getPath()};
       	Utils.createPopupMessage(contentDialogForm, "UIContentDialogForm.msg.node-locked", args, ApplicationMessage.WARNING);
       } catch(AccessControlException ace) {
+      } catch (AccessDeniedException ade) {
+    	Utils.createPopupMessage(contentDialogForm, "UIDocumentInfo.msg.access-denied-exception", null, ApplicationMessage.WARNING);  
       } catch(VersionException ve) {
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.in-versioning", null, ApplicationMessage.WARNING);
       } catch(ItemNotFoundException item) {
@@ -408,10 +416,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.numberformat-exception", null, ApplicationMessage.WARNING);
       }catch(Exception e) {
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.cannot-save", null, ApplicationMessage.WARNING);
-      }
-      if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE)
-        ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
-      Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);      
+      }          
     }
     
     private boolean canAccessParentNode(Node node) {
@@ -513,6 +518,11 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
 	      }
 	      publicationPlugin.changeState(webContentNode, PublicationDefaultStates.PUBLISHED, context);
 	      
+	      if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE) {
+	          ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
+	      }
+	      Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);
+	      
       } catch(LockException le) {
       	Object[] args = {contentDialogForm.getNode().getPath()};
       	Utils.createPopupMessage(contentDialogForm, "UIContentDialogForm.msg.node-locked", args, ApplicationMessage.WARNING);
@@ -532,11 +542,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       }catch(Exception e) {
       	Utils.createPopupMessage(contentDialogForm, "UIDocumentForm.msg.cannot-save", null, ApplicationMessage.WARNING);
       }
-      
-      if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE)
-        ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
-      Utils.closePopupWindow(contentDialogForm, CONTENT_DIALOG_FORM_POPUP_WINDOW);
-	  }
+	}
   }
   
   /**
