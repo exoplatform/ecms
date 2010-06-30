@@ -42,13 +42,12 @@ import org.exoplatform.application.gadget.GadgetRegistryService;
 import org.exoplatform.application.registry.Application;
 import org.exoplatform.application.registry.ApplicationCategory;
 import org.exoplatform.application.registry.ApplicationRegistryService;
-import org.exoplatform.commons.chromattic.ChromatticManager;
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.portal.config.model.ApplicationType;
 import org.exoplatform.portal.gadget.core.ExoDefaultSecurityTokenGenerator;
-import org.exoplatform.portal.webui.application.GadgetUtil;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -76,8 +75,6 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /** The gadget registry service. */
   private GadgetRegistryService gadgetRegistryService;
   
-  private ChromatticManager chromatticManager;
-  
   /** The internal server path. */
   private String internalServerPath;
   
@@ -91,7 +88,6 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * @param initParams the init params
    */
   public GadgetConnector(InitParams initParams) throws Exception {
-    chromatticManager = WCMCoreUtils.getService(ChromatticManager.class);
     applicationRegistryService = WCMCoreUtils.getService(ApplicationRegistryService.class);
     gadgetRegistryService = WCMCoreUtils.getService(GadgetRegistryService.class);
     readServerConfig(initParams);
@@ -201,12 +197,16 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
         Element foldersElement = createFolderElement(document, applicationCategories);
         rootElement.appendChild(foldersElement);
       } else {
-        chromatticManager.beginRequest();
-        ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
-        currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
-        Element filesElement = createFileElement(document, applicationCategory);
-        rootElement.appendChild(filesElement);
-        chromatticManager.endRequest(true);
+        PortalContainer container = PortalContainer.getInstance();
+        RequestLifeCycle.begin(container);
+        try {
+          ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
+          currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
+          Element filesElement = createFileElement(document, applicationCategory);
+          rootElement.appendChild(filesElement);
+        } finally {
+          RequestLifeCycle.end();
+        }
       }
       rootElement.appendChild(currentFolderElement);
       return rootElement;
@@ -294,15 +294,19 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * @throws Exception the exception
    */
   private List<ApplicationCategory> getGadgetCategories() throws Exception {
-    chromatticManager.beginRequest();
-    List<ApplicationCategory> applicationCategories = applicationRegistryService.getApplicationCategories();
-    List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
-    for (ApplicationCategory applicationCategory : applicationCategories) {
-      if (!applicationRegistryService.getApplications(applicationCategory, ApplicationType.GADGET).isEmpty()) {
-        gadgetCategories.add(applicationCategory);
+	List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
+    PortalContainer container = PortalContainer.getInstance();
+    RequestLifeCycle.begin(container);
+    try {
+      List<ApplicationCategory> applicationCategories = applicationRegistryService.getApplicationCategories();
+      for (ApplicationCategory applicationCategory : applicationCategories) {
+        if (!applicationRegistryService.getApplications(applicationCategory, ApplicationType.GADGET).isEmpty()) {
+          gadgetCategories.add(applicationCategory);
+        }
       }
+    } finally {
+    	RequestLifeCycle.end();
     }
-    chromatticManager.endRequest(true);
     return gadgetCategories;
   }
 }
