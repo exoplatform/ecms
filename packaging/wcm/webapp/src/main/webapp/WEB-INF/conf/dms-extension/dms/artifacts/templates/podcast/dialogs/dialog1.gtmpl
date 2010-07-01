@@ -137,6 +137,15 @@
 		      %>
 		    </td>
 	    </tr>
+	    <tr>	
+	    <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.mime-type")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldMediamimetype = ["jcrPath=/node/jcr:content/jcr:mimeType", "audio/mp3", "options=audio/mp3,audio/x-m4a,video/mpeg,video/x-m4v,video/quicktime"] ;
+		        uicomponent.addSelectBoxField("mediamimetype", fieldMediamimetype) ;
+		      %>
+		    </td>
+	    </tr>
 	    <tr>		          					
 	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.lenght")%></td>
 	      <td class="FieldComponent">
