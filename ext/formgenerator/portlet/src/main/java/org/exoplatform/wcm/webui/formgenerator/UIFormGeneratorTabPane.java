@@ -338,22 +338,22 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           dialogTemplate.append("                 <%\n");
           dialogTemplate.append("               } else {\n");
           dialogTemplate.append("                 String[] fieldImage = [\"jcrPath=/node/" + propertyName + "\"] ;\n");
-          dialogTemplate.append("                 uicomponent.addUploadField(\"" + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append("                 uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append("               }\n");
           dialogTemplate.append("             } else {\n");
           dialogTemplate.append("               String[] fieldImage = [\"jcrPath=/node/" + propertyName + "\"] ;\n");
-          dialogTemplate.append("               uicomponent.addUploadField(\"" + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append("               uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append("             }\n");
           dialogTemplate.append("           } else if(uicomponent.dataRemoved()) {\n");
           dialogTemplate.append("             String[] fieldImage = [\"jcrPath=/node/" + propertyName + "\"] ;\n");
-          dialogTemplate.append("             uicomponent.addUploadField(\"" + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append("             uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append("           } else {\n");
           dialogTemplate.append("             String[] fieldImage = [\"jcrPath=/node/" + propertyName + "\"] ;\n");
-          dialogTemplate.append("             uicomponent.addUploadField(\"" + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append("             uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append("           }\n");
         } else {
           dialogTemplate.append("           String[] " + inputFieldName + " = [\"jcrPath=/node/" + propertyName + "\", \"defaultValues=" + value + "\", \"" + validate + "\", \"options=" + form.getAdvanced() + "\"];\n");
-          dialogTemplate.append("           uicomponent.add" + inputField + "(\"" + inputName + "\", " + inputFieldName + ");\n");
+          dialogTemplate.append("           uicomponent.add" + inputField + "(\"" + "/node/" + inputName + "\", " + inputFieldName + ");\n");
         }
         dialogTemplate.append("          %>\n");
         dialogTemplate.append("        </td>\n");
