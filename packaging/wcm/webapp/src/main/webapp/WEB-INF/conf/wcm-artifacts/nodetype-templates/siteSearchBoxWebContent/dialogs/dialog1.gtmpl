@@ -187,16 +187,7 @@
 											}
 										%>
 								</td>
-							</tr>
-							<tr>		          					
-	      				<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.imageMimeType")%></td>
-	      				<td class="FieldComponent">
-		      				<%
-		        					String[] fieldMediamimetype = ["jcrPath=/node/medias/images/illustration/jcr:content/jcr:mimeType", "image/gif", "options=image/gif,image/png,image/jpg,image/jpeg"] ;
-		        					uicomponent.addSelectBoxField("mediamimetype", fieldMediamimetype) ;
-		      				%>
-		    				</td>
-	    				</tr>							
+							</tr>											
 							<tr>
 								<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.Summary")%></td>
 								<td class="FieldComponent">
