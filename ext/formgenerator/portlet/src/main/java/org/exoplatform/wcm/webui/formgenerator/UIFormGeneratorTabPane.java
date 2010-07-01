@@ -294,9 +294,13 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         validate += "datetime,";
       } else if (UIFormGeneratorConstant.SELECT.equals(inputType)) {
         inputField = "SelectBoxField";
-      } else {
+      } else if (UIFormGeneratorConstant.CHECKBOX.equals(inputType)){
+      	inputField = "CheckBoxField";
+      } else if (UIFormGeneratorConstant.RADIO.equals(inputType)) {
+      	inputField = "RadioBoxField";
+      }	else {      
         inputField = "TextField";
-      }
+      } 
       if (validate.endsWith(",")) validate = validate.substring(0, validate.length() - 1);
       if (validate.endsWith("=")) validate = "";
       String propertyName = getPropertyName(inputName);
