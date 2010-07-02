@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.tree.selectone;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.jcr.Item;
@@ -24,6 +25,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -75,8 +77,8 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
   private String rootTreePath = null;
   private boolean isDisable = false;
   private boolean allowPublish = false;
-  
   private boolean alreadyChangePath = false;
+  private boolean showOnlyFolderNodeInTree = true;
   
   private String rootTaxonomyName = null;
   
@@ -117,6 +119,14 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
     uiWorkspaceList.setIsDisable(workspaceName, isDisable);
     UINodeTreeBuilder builder = getChild(UINodeTreeBuilder.class);
     builder.setAllowPublish(allowPublish, publicationService, templates);
+    if (this.showOnlyFolderNodeInTree) {
+      List<String> nodeTypesInTree = new ArrayList<String>(Arrays.asList(acceptedNodeTypesInTree));
+      if (!nodeTypesInTree.contains(Utils.NT_UNSTRUCTURED))
+        nodeTypesInTree.add(Utils.NT_UNSTRUCTURED);
+      if (!nodeTypesInTree.contains(Utils.NT_FOLDER))
+        nodeTypesInTree.add(Utils.NT_FOLDER);
+      this.acceptedNodeTypesInTree = nodeTypesInTree.toArray(new String[]{});
+    }
     builder.setAcceptedNodeTypes(acceptedNodeTypesInTree);   
     builder.setDefaultExceptedNodeTypes(defaultExceptedNodeTypes);
     builder.setRootTreeNode(rootNode);
@@ -196,8 +206,14 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
   
   public String[] getAcceptedMimeTypes() { return acceptedMimeTypes; }
   
-  public void setAcceptedMimeTypes(String[] acceptedMimeTypes) { this.acceptedMimeTypes = acceptedMimeTypes; } 
-
+  public void setAcceptedMimeTypes(String[] acceptedMimeTypes) { this.acceptedMimeTypes = acceptedMimeTypes; }
+  
+  public boolean isShowOnlyFolderNodeInTree() { return showOnlyFolderNodeInTree; }
+  
+  public void setShowOnlyFolderNodeInTree(boolean value) {
+    showOnlyFolderNodeInTree = value;
+  }
+  
   public String getRepositoryName() { return repositoryName; }
   public void setRepositoryName(String repositoryName) {
     this.repositoryName = repositoryName;
