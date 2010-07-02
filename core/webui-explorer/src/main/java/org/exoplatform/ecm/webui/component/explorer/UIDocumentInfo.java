@@ -830,10 +830,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   					found = true;
   					break;
   				}
-  			}
-  			
-  			if (documentTypeService.isContentsType(documentType)) 
-  			  return true;
+  			}  			
   			
   			if (!found)
   				return false;
