@@ -304,7 +304,7 @@
                     <argument>-Dexo.conf.dir=${basedir}/target/exopackage-conf</argument>
                     <argument>-Dexo.working.dir=${gatein.working.dir}</argument>
                     <argument>-Dexo.dep.dir=${exo.projects.directory.dependencies}</argument>
-                    <argument>-Dexo.m2.repos=file://${settings.localRepository},http://repository.exoplatform.org/all</argument>
+                    <argument>-Dexo.m2.repos=file:${settings.localRepository},http:repository.exoplatform.org/all</argument>
                     <argument>-Dclean.server=${exo.projects.app.jboss.version}</argument>
                     <argument>-Dexo.m2.home=${maven.home}</argument>
                     <argument>-Dorg.exoplatform.portal.version=${org.exoplatform.portal.version}</argument>
