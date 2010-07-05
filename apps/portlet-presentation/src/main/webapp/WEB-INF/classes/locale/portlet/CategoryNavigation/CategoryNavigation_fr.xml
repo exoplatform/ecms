@@ -36,4 +36,9 @@
       <Save>Sauver</Save>
     </action>
   </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>Cette catégorie n'est pas existé</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
 </bundle>

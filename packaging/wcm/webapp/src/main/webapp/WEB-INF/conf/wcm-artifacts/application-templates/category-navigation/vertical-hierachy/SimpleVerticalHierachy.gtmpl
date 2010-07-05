@@ -37,16 +37,26 @@
 		</div>
 		<div class="NewContent">
 			<%
+			if(uicomponent.getSelected() != null) {
 				def categoryUri = uicomponent.resolveCategoryPathByUri(_ctx.getRequestContext());
 				def categories = uicomponent.getCategoriesByUri(categoryUri);
 				def rootCategory = categories.get(0);
-		    def subcategories = uicomponent.getSubcategories(rootCategory);
-			  for (subcategory in subcategories) {
-			    def subcategoryName = subcategory.getName();
-			    def subcategoryTitle = uicomponent.getTitle(subcategory);
-			    def categoryLink = uicomponent.renderCategoryLink(subcategory);
-			    %><a class="CategoryLabel" href="$categoryLink">$subcategoryTitle</a><%
-			    if ((categoryUri+"/").startsWith("/" + subcategoryName + "/")) renderChild(categoryUri, categories, 1);
+				if(!uicomponent.isMovedTreeToTrash(rootCategory)) {
+			    	def subcategories = uicomponent.getSubcategories(rootCategory);
+				  	for (subcategory in subcategories) {
+				    	def subcategoryName = subcategory.getName();
+				    	def subcategoryTitle = uicomponent.getTitle(subcategory);
+				    	def categoryLink = uicomponent.renderCategoryLink(subcategory);
+				    	%><a class="CategoryLabel" href="$categoryLink">$subcategoryTitle</a><%
+				    	if ((categoryUri+"/").startsWith("/" + subcategoryName + "/")) {
+				    		renderChild(categoryUri, categories, 1);
+				    	}	
+				    }
+				} else {
+					%><div style="font-size: 13px; text-align: center; padding: 10px;"><%= _ctx.appRes("UICategoryNavigationTreeBase.msg.not-existed-category");%></div><%
+				}
+			  } else {
+				%><div style="font-size: 13px; text-align: center; padding: 10px;"><%= _ctx.appRes("UICategoryNavigationTreeBase.msg.not-existed-category");%></div><%
 			  }
 			%>
 		</div>

@@ -161,6 +161,12 @@ public class UICategoryNavigationTreeBase extends UITree {
     if(selectedNode == null) return false;    
     return selectedNode.getPath().equals(node.getPath());
   }
+  
+  public boolean isMovedTreeToTrash(String rootCategory) throws Exception {
+	Node categoryNode = getCategoryNode(rootCategory);
+	if(categoryNode.isNodeType(Utils.EXO_RESTORELOCATION)) return true;
+	return false;
+  }
 
   /**
    * Gets the subcategories.
@@ -172,14 +178,7 @@ public class UICategoryNavigationTreeBase extends UITree {
    * @throws Exception the exception
    */
   public List<Node> getSubcategories(String categoryPath) throws Exception {
-    TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
-    String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
-    String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
-    Node treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
-    Node categoryNode = null;
-    if ("".equals(categoryPath)) categoryNode = treeNode;
-    else categoryNode = treeNode.getNode(categoryPath);
+    Node categoryNode = getCategoryNode(categoryPath);
     NodeIterator nodeIterator = categoryNode.getNodes();
     List<Node> subcategories = new ArrayList<Node>();
     while (nodeIterator.hasNext()) {
@@ -293,5 +292,17 @@ public class UICategoryNavigationTreeBase extends UITree {
   
   public String getTreeTitle() {
 	  return UICategoryNavigationUtils.getPortletPreferences().getValue(UICategoryNavigationConstant.PREFERENCE_TREE_TITLE, "");
+  }
+  
+  private Node getCategoryNode(String categoryPath) throws Exception {
+	TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
+	PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
+	String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
+	String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
+	Node treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
+	Node categoryNode = null;
+	if ("".equals(categoryPath)) categoryNode = treeNode;
+	else categoryNode = treeNode.getNode(categoryPath);
+	return categoryNode;
   }
 }

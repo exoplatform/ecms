@@ -36,4 +36,9 @@
       <Save>Lưu</Save>
     </action>
   </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>Cây phân loại này không tồn tại</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>   
 </bundle>
