@@ -32,6 +32,7 @@ import javax.jcr.Value;
 
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
@@ -368,11 +369,10 @@ public class UIWorkingArea extends UIContainer {
 	  } else if (node.hasProperty("exo:title")) {
 		  title = node.getProperty("exo:title").getValue().getString();
 	  }
-	  if (title==null) {
+	  if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
   		title = node.getName();
 	  }
-	  
-	  return title;
+	  return Text.unescapeIllegalJcrChars(title);	  
   }
 
 }
