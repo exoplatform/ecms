@@ -96,7 +96,9 @@
 	  	      if (node.hasNode("jcr:content")) {
 	  	        mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
 	  	      }
-	  		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+ serverPath+"','"+ portalName +"','"+ restContextName +"','"+ repository +"','"+ preferenceWS+ "','" +Utils.formatNodeName(node.getPath())+"','"+mimeType+"')";				  					  					  	
+	  	        // This escape "'" for js
+	    		String webDavPath = node.getPath().contains("%27") ? node.getPath().replaceAll("%27","%2527") : node.getPath();
+	  		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+ serverPath+"','"+ portalName +"','"+ restContextName +"','"+ repository +"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";				  					  					  	
 	  	    	strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\">" ;	        
 	  		  	strActs += "  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>";
 	  			  strActs += "</a>" ;				  	
