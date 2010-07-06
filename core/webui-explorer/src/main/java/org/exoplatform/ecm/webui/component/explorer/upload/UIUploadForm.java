@@ -535,9 +535,6 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               contentNode.setProperty(Utils.JCR_DATA, inputStream);
               contentNode.setProperty(Utils.JCR_MIMETYPE, mimeType);
               contentNode.setProperty(Utils.JCR_LASTMODIFIED, new GregorianCalendar());
-              node.save() ;       
-              node.checkin() ;
-              node.checkout() ;
               if (node.isNodeType("exo:datetime")) {
                 node.setProperty("exo:dateModified",new GregorianCalendar()) ;
               }
