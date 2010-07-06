@@ -379,7 +379,7 @@ public class UITreeExplorer extends UIContainer {
         uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
         uiDocumentWorkspace.setRendered(true);
       }
-      uiExplorer.setSelectNode(workspaceName, path) ;
+      uiExplorer.setSelectNode(workspaceName, path);
       uiExplorer.setClickExpand(true);
 //      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
 //      UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;

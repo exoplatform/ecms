@@ -3279,4 +3279,9 @@
   			 <NameAlreadyExist>Tên nhãn đã tồn tại</NameAlreadyExist> 
   		</msg>
   </UITagForm>
+  <UIJCRExplorer>  
+	   <msg>
+	   		<target-path-not-found>Không tìm thấy node đích!</target-path-not-found>
+	   </msg>
+  </UIJCRExplorer>  
 </bundle>
