@@ -23,6 +23,7 @@ import javax.jcr.Property;
 
 import org.apache.commons.chain.Context;
 import org.exoplatform.services.command.action.Action;
+import org.exoplatform.services.security.ConversationState;
 
 /**
  * Created by The eXo Platform SARL
@@ -43,7 +44,9 @@ public class ModifyNodeAction implements Action {
   							((Property)item).getParent() :
   							(Node)item;	
     if(node.isNodeType("nt:resource")) node = node.getParent();
-    String userName = node.getSession().getUserID();
+    ConversationState conversationState = ConversationState.getCurrent();
+    String userName = (conversationState == null) ? node.getSession().getUserID() :
+                                                    conversationState.getIdentity().getUserId();
     if(node.canAddMixin("exo:modify")) {
       node.addMixin("exo:modify");            
     }
