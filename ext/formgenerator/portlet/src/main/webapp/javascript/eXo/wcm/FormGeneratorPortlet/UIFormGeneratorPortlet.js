@@ -617,9 +617,28 @@ UIFormGeneratorPortlet.prototype.getProperties = function(comp) {
 			strObject +=  '"value":"null","width":0,"mandatory":'+mandatory+',"height":0,';	
 			break;
 		case "radio" :
-			break;
-		case "checkbox" :
-			break;		
+			var radioNodes = DOMUtil.findDescendantsByClass(topContent, 'div', "RadioButton");
+			var dummyRadioNode = DOMUtil.findFirstDescendantByClass(radioNodes[0], 'input', 'Radio');
+			var width	= dummyRadioNode.offsetWidth;
+			var height  = dummyRadioNode.offsetHeight;
+			var mandatory = fieldLabel.getAttribute('mandatory');
+			strObject +=  '"value":"'+dummyRadioNode.value+'","width":'+width+',"mandatory":'+mandatory+',"height":'+height+',"advanced":"';
+			for(var i = 0; i < radioNodes.length; i++) {
+				var radioNode = DOMUtil.findFirstDescendantByClass(radioNodes[i], 'input', 'Radio');
+				strObject += radioNode.value;
+				if(i != (radioNodes.length-1)) {
+					strObject += ",";				
+				}
+			}
+			strObject += '",';
+ 			break;
+ 		case "checkbox" :
+			var checkboxNode = DOMUtil.findFirstDescendantByClass(topContent, 'input', "CheckBox");
+			var width	= checkboxNode.offsetWidth;
+			var mandatory = fieldLabel.getAttribute('mandatory');
+			var height  = checkboxNode.offsetHeight;
+			strObject +=  '"value":"'+checkboxNode.value+'","width":'+width+',"mandatory":'+mandatory+',"height":'+height+',';	
+ 			break;			
 	}
 
 	strObject += '"guideline":"'+fieldLabel.getAttribute('desc')+'"';
