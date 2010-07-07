@@ -257,6 +257,7 @@ public class UISearchForm extends UIForm {
 				String suggestionURL = Util.getPortalRequestContext().getRequestURI();
         suggestionURL += "?portal=" + selectedPortal + "&keyword=" + keyword;
 				uiSearchResult.setSuggestion(suggestionURL);
+				uiSearchForm.setSubmitAction(suggestionURL);
 				portletRequestContext.addUIComponentToUpdateByAjax(uiSearchResult);
 			} catch (Exception e) {
 				uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD,

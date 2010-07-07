@@ -78,7 +78,7 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
                   <div class="ButtonLeft">
                     <div class="ButtonRight">
                       <div class="ButtonMiddle">
-                        <a href="javascript:void(0);">
+                        <a href="<%uiform.getSubmitAction()%>">
                           $actionLabel
                         </a>
                       </div>

@@ -48,4 +48,9 @@
       <Cancel>Hủy</Cancel>
     </action>
   </UISearchPageLayoutManager>
+  <UISearchForm>
+  	 <message>
+  	   <keyword-not-empty>Giá trị của khóa tìm kiếm không được rỗng hoặc trống!</keyword-not-empty>
+  	 </message>
+  </UISearchForm>
 </bundle>

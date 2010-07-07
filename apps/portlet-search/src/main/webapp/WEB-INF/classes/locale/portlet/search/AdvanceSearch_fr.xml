@@ -48,4 +48,9 @@
       <Cancel>Annuler</Cancel>
     </action>
   </UISearchPageLayoutManager>
+  <UISearchForm>
+  	 <message>
+  	   <keyword-not-empty>The value of keyword is not null or empty!</keyword-not-empty>
+  	 </message>
+  </UISearchForm>
 </bundle>
