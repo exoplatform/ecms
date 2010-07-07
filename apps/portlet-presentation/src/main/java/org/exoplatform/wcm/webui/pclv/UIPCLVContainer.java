@@ -165,12 +165,19 @@ public class UIPCLVContainer extends UIContainer {
 		try {
 		  treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
 		} catch(RepositoryException ex){
-		  return;
 		}
 		
-		Node categoryNode = null;
-		if (preferenceTreeName.equals(categoryPath) || "".equals(categoryPath)) categoryNode = treeNode;
-		else categoryNode = treeNode.getNode(categoryPath);
+    Node categoryNode = null;
+    List<Node> nodes = new ArrayList<Node>(); 
+    if(treeNode != null) {
+      if (preferenceTreeName.equals(categoryPath) || "".equals(categoryPath)) {
+        categoryNode = treeNode;
+      } else {
+        categoryNode = treeNode.getNode(categoryPath);
+      }
+      nodes = this.getListSymlinkNode(portletPreferences, categoryNode.getPath());
+    }
+    
 		if (!categoryNode.isNodeType("exo:taxonomy")) { 
 			if (categoryPath!=null && categoryPath.lastIndexOf("/")>-1) {
 				categoryPath = categoryPath.substring(0, categoryPath.lastIndexOf("/"));
@@ -180,12 +187,8 @@ public class UIPCLVContainer extends UIContainer {
 				categoryNode = treeNode;
 			}
 		}
-		setTaxonomyTreeName(preferenceTreeName);
-		setCategoryNode(categoryNode);
-		List<Node> nodes = this.getListSymlinkNode(portletPreferences, categoryNode.getPath());
-		if(nodes == null) {
-		  nodes = new ArrayList<Node>();
-		}
+		setTaxonomyTreeName(preferenceTreeName);		
+		setCategoryNode(categoryNode);  
 		this.setListNode(nodes);
 		int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIPCLVPortlet.ITEMS_PER_PAGE, null));
 		PaginatedNodeIterator paginatedNodeIterator = new PaginatedNodeIterator(nodes, itemsPerPage);
