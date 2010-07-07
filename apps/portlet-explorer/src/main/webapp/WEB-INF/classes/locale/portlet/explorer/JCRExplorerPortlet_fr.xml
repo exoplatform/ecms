@@ -562,6 +562,7 @@
       <MoveToTrash>Déplacer dans la poubelle</MoveToTrash>
       <RestoreFromTrash>Restaurer de la poubelle</RestoreFromTrash>
       <EmptyTrash>Vider la poubelle</EmptyTrash>      
+						<WebDavView>Download And Allow Edition</WebDavView>
     </event>
   </ECMContextMenu>
   <!--

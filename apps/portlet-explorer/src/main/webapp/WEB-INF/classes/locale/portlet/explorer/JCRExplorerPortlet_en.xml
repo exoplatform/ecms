@@ -562,6 +562,7 @@
       <MoveToTrash>Move to Trash</MoveToTrash>
       <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
       <EmptyTrash>Empty trash</EmptyTrash>
+						<WebDavView>Download And Allow Edition</WebDavView>
     </event>
   </ECMContextMenu>
   <!--
