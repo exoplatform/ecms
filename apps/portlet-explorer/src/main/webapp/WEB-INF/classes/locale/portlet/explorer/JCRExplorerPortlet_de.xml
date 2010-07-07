@@ -528,6 +528,7 @@
       <ViewProperties>Knoteneigenschaften ansehen</ViewProperties>
       <GetURL>URL in die Zwischenablage kopieren</GetURL>
       <AddThumbnail>Hinzufügen/Entfernen thumbnail</AddThumbnail>
+			<WebDavView>Download And Allow Edition</WebDavView>
     </event>
   </ECMContextMenu>
   <!--

@@ -255,15 +255,15 @@
 	    		  	String webDavPath = data.getPath().contains("%27") ? data.getPath().replaceAll("%27","%2527") : data.getPath();
               String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";                                   
               strActs +=    "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\" >" ;          
-              strActs +=    "  <div class=\"ItemIcon WebDAV16x16Icon\">Download And Allow Edition</div>" ;
+              strActs +=    "  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("ECMContextMenu.event.WebDavView") + "</div>" ;
               strActs +=    "</a>" ;            
             } else {
               def dataTarget = data;
               if(uicomponent.isSymLink(data)) dataTarget = Utils.getNodeSymLink(data);
               if (dataTarget != null) {
-                String link = serverUrl + "/" + portalName + "/rest/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath()); 
+                String link = serverUrl + "/" + portalName + restContextName + "/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath()); 
                 strActs +=    "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;          
-                strActs +=    "  <div class=\"ItemIcon WebDAV16x16Icon\">Download And Allow Edition</div>" ;
+                strActs +=    "  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("ECMContextMenu.event.WebDavView") + "</div>" ;
                 strActs +=    "</a>" ;
               }
             }
@@ -282,7 +282,7 @@
           }
           
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-            String clipboardLink = serverUrl + "/" + portalName + "/rest/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+            String clipboardLink = serverUrl + "/" + portalName + restContextName + "/jcr/" + repository + "/" + preferenceWS + data.getPath();
             strActs +=  "<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
             strActs +=  " <div class='MenuURLIcon GetURL16x16Icon'>" ;
             strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");

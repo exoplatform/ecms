@@ -526,6 +526,7 @@
       <ViewProperties>عرض الصفات</ViewProperties>
       <GetURL>نسخ URL</GetURL>
       <AddThumbnail>إضافة/حذف صورة مصغرة</AddThumbnail>
+			<WebDavView>Download And Allow Edition</WebDavView>
     </event>
   </ECMContextMenu>
   <!--

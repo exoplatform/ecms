@@ -397,6 +397,7 @@
 		</title>
 	</UIActionBar>
 	<UIPopupMenu>
+
 		<msg>
 			<has-not-permission>toegang geweigerd. U hebt geen 'toevoegen'
 				rechten in deze node</has-not-permission>
@@ -637,6 +638,7 @@
 			<ViewProperties>Toon Node Eigenschappen</ViewProperties>
 			<GetURL>Copy URL to clipboard</GetURL>
 			<AddThumbnail>Add/Remove thumbnail</AddThumbnail>
+			<WebDavView>Download And Allow Edition</WebDavView>
 		</event>
 	</ECMContextMenu>
 	<!--
