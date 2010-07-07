@@ -570,7 +570,7 @@
       <RemoveFromFavourite>Xóa khỏi mục yêu thích</RemoveFromFavourite>
       <MoveToTrash>Chuyển vào thùng rác</MoveToTrash>
       <RestoreFromTrash>Khôi phục khỏi thùng rác</RestoreFromTrash>
-						<WebDavView>Tải về và chỉnh s</WebDavView>
+						<WebDavView>Tải về và chỉnh sửa</WebDavView>
     </event>
   </ECMContextMenu>
   <!--
