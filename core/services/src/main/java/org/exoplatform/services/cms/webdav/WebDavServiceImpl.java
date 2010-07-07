@@ -361,7 +361,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-    return super.put(repoName, repoPath, lockTokenHeader, ifHeader, nodeTypeHeader, null, mixinTypes, mediaType, inputStream);
+    return super.put(repoName, repoPath, lockTokenHeader, ifHeader, null, nodeTypeHeader, mixinTypes, mediaType, inputStream);
   }
 
   @REPORT
