@@ -167,7 +167,8 @@ public class UISearchResult extends UIContainer {
 			int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null));
 			try {
 				WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(
-				                                                                                    Utils.getSessionProvider(),
+				                                                                               
+				    Utils.getSessionProvider(),
 				                                                                                    queryCriteria,
 																																														itemsPerPage, false);
 				setSearchTime(paginatedQueryResult.getQueryTimeInSecond());
@@ -176,6 +177,7 @@ public class UISearchResult extends UIContainer {
 				suggestionURL += "?portal=" + portal + "&keyword=" + getSuggestion();
 				setSuggestionURL(suggestionURL);
 				setPageList(paginatedQueryResult);
+				searchForm.setSubmitAction(suggestionURL);
 			} catch (Exception e) {
 				UIApplication uiApp = getAncestorOfType(UIApplication.class);
 				uiApp.addMessage(new ApplicationMessage(UISearchForm.MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
