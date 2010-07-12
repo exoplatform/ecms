@@ -71,7 +71,8 @@ import org.exoplatform.webui.form.UIFormMultiValueInputSet;
       @EventConfig(listeners = UILanguageDialogForm.ShowComponentActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UILanguageDialogForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
       @EventConfig(listeners = UILanguageDialogForm.RemoveActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE)
+      @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
+      @EventConfig(listeners = DialogFormActionListeners.ChangeTabActionListener.class, phase = Phase.DECODE)      
     }
 )
 public class UILanguageDialogForm extends UIDialogForm implements UIPopupComponent, UISelectable {
