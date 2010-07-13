@@ -28,6 +28,7 @@ import javax.jcr.Session;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
+import org.exoplatform.resolver.ResourceKey;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -120,6 +121,11 @@ public class JCRResourceResolver extends ResourceResolver {
    */
   public String createResourceId(String url) { return url ; }
 
+  @Override
+  public ResourceKey createResourceKey(String url) {
+    return new ResourceKey(url.hashCode(), url);
+  }
+  
   /* (non-Javadoc)
    * @see org.exoplatform.resolver.ResourceResolver#getResourceScheme()
    */
