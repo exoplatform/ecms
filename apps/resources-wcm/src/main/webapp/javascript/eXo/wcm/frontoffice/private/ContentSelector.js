@@ -203,6 +203,7 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 };
 
 EcmContentSelector.prototype.listRootFolder = function(rootNode) {
+	if(eXo.ecm.ECS.typeObj != 'folder') return;	
 	if(typeof(rootNode) == 'string') rootNode = document.getElementById(rootNode);
 	var nodeName = rootNode.getAttribute("name");
 	var nodeOnBreadcrumb = document.getElementById(rootNode.getAttribute("id"));
