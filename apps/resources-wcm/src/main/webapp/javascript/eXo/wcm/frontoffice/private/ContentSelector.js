@@ -645,9 +645,11 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 	var rws = document.getElementById("RightWorkspace");
 	if(eXo.ecm.ECS.typeObj == "folder" || eXo.ecm.ECS.typeObj == "one") {
 		var action = rws.getAttribute("action");
-		action = action.substring(0, action.length - 2);
-		action += '&objectId=' + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';
-		eval(action);
+		if(action) {
+			action = action.substring(0, action.length - 2);
+			action += '&objectId=' + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';
+			eval(action);
+		}
 	} else if(eXo.ecm.ECS.typeObj == "fck") {
 		if(!objContent) return;
 		var hostName = eXoPlugin.hostName;
@@ -686,9 +688,11 @@ EcmContentSelector.prototype.insertMultiContent = function() {
 		}
 	}
 	var action = rws.getAttribute("action");
-	action = action.substring(0, action.length - 2);
-	action += '&objectId=' + strContent + '\')';
-	eval(action);
+	if(action){
+		action = action.substring(0, action.length - 2);
+		action += '&objectId=' + strContent + '\')';
+		eval(action);
+	}
 };
 
 EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
@@ -772,9 +776,11 @@ EcmContentSelector.prototype.changeFilter = function() {
 	
 	var filter = document.getElementById('Filter');
 	var action = filter.getAttribute("action");
-	action = action.substring(0, action.length - 2);
-	action += '&objectId=' + filter.options[filter.selectedIndex].value + '\')';
-	eval(action);
+	if(action) {
+		action = action.substring(0, action.length - 2);
+		action += '&objectId=' + filter.options[filter.selectedIndex].value + '\')';
+		eval(action);
+	}	
 };
 
 EcmContentSelector.prototype.generateIdDriver = function(objNode) {
