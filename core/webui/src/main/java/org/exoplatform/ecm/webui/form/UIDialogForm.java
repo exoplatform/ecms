@@ -734,7 +734,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
     if(formTextAreaField.isMultiValues()) {
-      renderMultiValuesInput(UIFormDateTimeInput.class,name,label);      
+      renderMultiValuesInput(UIFormTextAreaInput.class,name,label);      
       return;
     }
     boolean isFirstTimeRender = false;
