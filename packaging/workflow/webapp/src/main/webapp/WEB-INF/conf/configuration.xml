@@ -21,8 +21,8 @@
 -->
 <configuration
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
-   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
+   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
 	<import>war:/workflow-extension/workflow/jcr-component-plugins-configuration.xml</import>
   <import>war:/workflow-extension/workflow/workflow-system-configuration.xml</import>
   <import>war:/workflow-extension/workflow/workflow-path-configuration.xml</import>
