@@ -37,6 +37,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.SystemIdentity;
@@ -250,7 +251,8 @@ public class UIWorkingArea extends UIContainer {
     List<UIExtension> uiExtensionList = getUIExtensionList();
     UIComponent uiAddedActionManage;
     try {
-      getAncestorOfType(UIJCRExplorer.class).getSession().getItem(node.getPath());
+    	NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
+    	nodeFinder.getItem(getAncestorOfType(UIJCRExplorer.class).getSession(), node.getPath());	          
     } catch(PathNotFoundException pne) {
       return "";
     }
