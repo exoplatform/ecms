@@ -17,6 +17,7 @@ function getModule(params) {
     
   module.portlet = {}
   module.portlet.ecmadmin = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-administration", "exo-portlet", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui-administration", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version)) .     
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar", module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-viewer", "jar", module.version)).

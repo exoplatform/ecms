@@ -20,5 +20,6 @@
     <module>ext</module>
     <module>search</module>
     <module>webui-explorer</module>
+    <module>webui-administration</module>
   </modules>
 </project>
