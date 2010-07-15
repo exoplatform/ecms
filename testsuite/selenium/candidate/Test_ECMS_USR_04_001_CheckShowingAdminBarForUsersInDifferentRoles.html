@@ -132,6 +132,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>link=James Anderson</td>
+	<td>James Anderson</td>
+</tr>
+<tr>
 	<td>verifyText</td>
 	<td>link=James Anderson</td>
 	<td>James Anderson</td>
@@ -207,9 +212,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>select</td>
 	<td>EditingOptions</td>
 	<td>label=Edit</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[3]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/table/tbody/tr/td[1]/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div[1]/div/a</td>
+	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
@@ -222,9 +232,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>select</td>
 	<td>EditingOptions</td>
 	<td>label=Published</td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[3]/div/div/div[1]/div/div/div/div/div/div/div/div/div/div/table/tbody/tr/td[1]/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div[1]/div/a</td>
+	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
@@ -280,6 +295,11 @@
 	<td>clickAndWait</td>
 	<td>link=Sign in</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Mary Kelly</td>
+	<td>Mary Kelly</td>
 </tr>
 <tr>
 	<td>verifyText</td>
@@ -452,7 +472,52 @@
 	<td>Test_04_</td>
 </tr>
 <tr>
-	<td>waitForElementPresentk</td>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/div/div/div/div/div/div[1]/div/div/div/div/div/div/div/div/div[2]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[2]/div/div/div/div/div/div[1]/div/div/div/div/div/div/div/div/div[2]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIPageSelector2']/div[3]/table/tbody/tr/td/div[3]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIPageSelector2']/div[3]/table/tbody/tr/td/div[3]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//tr[16]/td[5]/div/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[16]/td[5]/div/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>//form[@id='UIPageNodeForm']/div[3]/div[2]/table/tbody/tr/td/div[1]/div/div/div</td>
 	<td></td>
 </tr>
@@ -469,6 +534,81 @@
 <tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='navigation-generator']/div/div/div[6]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='navigation-generator']/div/div/div[6]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/ecmdemo/private/acme/Test_04</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Edit Navigation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UINavigationNodeSelector']/div/div/div/div[2]/div/div/div[9]/div[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDownRight</td>
+	<td>//div[@id='UINavigationNodeSelector']/div/div/div/div[2]/div/div/div[9]/div[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete Node</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this node?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Site</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Test_04_</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 
