@@ -99,5 +99,17 @@
       <value-invalid>'{0}' is needed value</value-invalid>
     </msg>
   </UIDocumentForm>
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+    </title>    
+  </PopupComponent>
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+      <rootNodePath>Root tree</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>  
 </bundle>
 

@@ -94,6 +94,17 @@
       <UIUserSelectContainer>Chọn người dùng</UIUserSelectContainer>
     </title>
   </PopupDelegatedSelectorId>
-    
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Thêm categories</UIOneTaxonomySelector>
+    </title>    
+  </PopupComponent>
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Cây phân loại</taxonomyTree>
+      <rootNodePath>Cây gốc</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>    
 </bundle>
 

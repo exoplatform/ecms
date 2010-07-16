@@ -105,5 +105,17 @@
       <refresh>Refresh</refresh>
     </label>
   </UIWorkflowControllerPortlet>
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+    </title>    
+  </PopupComponent>
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+      <rootNodePath>Root tree</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
 </bundle>
 

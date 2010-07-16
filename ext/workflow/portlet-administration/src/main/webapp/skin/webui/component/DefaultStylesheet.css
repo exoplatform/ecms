@@ -362,3 +362,15 @@
 .UIWorkflowPortlet .UIForm .Hide .DefaultHide {
 	text-align: center;
 }
+
+.AddRootNodeIcon {
+	 width: 16px ;  height: 16px ;
+  background: url('DefaultSkin/icons/SelectPage.gif') no-repeat;  
+}
+
+.Add16x16Icon {
+	 float: left; /* orientation=lt */
+	 float: right; /* orientation=rt */
+  width: 16px; height: 16px;
+  background: url('DefaultSkin/icons/BlueCirclePlus.gif') no-repeat;  
+}
