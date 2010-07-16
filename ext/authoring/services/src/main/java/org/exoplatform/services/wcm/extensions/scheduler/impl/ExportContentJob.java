@@ -1,7 +1,32 @@
 package org.exoplatform.services.wcm.extensions.scheduler.impl;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamWriter;
+
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -13,30 +38,11 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
 import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamWriter;
-import java.io.*;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
@@ -100,10 +106,10 @@ public class ExportContentJob implements Job {
       }
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
 
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService_ = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+      String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
+      RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);
       ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
-      PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       session = sessionProvider.getSession(workspace, manageableRepository);
@@ -130,7 +136,7 @@ public class ExportContentJob implements Job {
       xmlsw.writeNamespace("xs", URL);
       QueryResult queryResult = query.execute();
       if (queryResult.getNodes().getSize() > 0) {
-        TaxonomyService taxonomyService = (TaxonomyService) container.getComponentInstanceOfType(TaxonomyService.class);
+        TaxonomyService taxonomyService = WCMCoreUtils.getService(TaxonomyService.class, containerName);
         Date nodeDate = null;
         Date now = null;
         xmlsw.writeStartElement("xs", "published-contents", URL);

@@ -13,9 +13,6 @@ import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.RootContainer;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PageNavigation;
 import org.exoplatform.portal.webui.util.Util;
@@ -53,10 +50,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * Instantiates a new stage and version publication plugin.
    */
   public AuthoringPublicationPlugin() {
-    pageEventListenerDelegate = new PageEventListenerDelegate(AuthoringPublicationConstant.LIFECYCLE_NAME,
-                                                              ExoContainerContext.getCurrentContainer());
-    navigationEventListenerDelegate = new NavigationEventListenerDelegate(AuthoringPublicationConstant.LIFECYCLE_NAME,
-                                                                          ExoContainerContext.getCurrentContainer());
+    pageEventListenerDelegate = new PageEventListenerDelegate(AuthoringPublicationConstant.LIFECYCLE_NAME, null);
+    navigationEventListenerDelegate = new NavigationEventListenerDelegate(AuthoringPublicationConstant.LIFECYCLE_NAME, null);
   }
 
   /*
@@ -86,7 +81,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     Map<String, VersionData> revisionsMap = getRevisionData(node);
     VersionLog versionLog = null;
     ValueFactory valueFactory = node.getSession().getValueFactory();
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    String containerName = context.get("containerName");
     if (PublicationDefaultStates.PENDING.equals(newState)) {
 
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
@@ -288,12 +283,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       VersionData editableRevision = revisionsMap.get(node.getUUID());
       if (editableRevision != null) {
 
-        PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
-        if (publicationManagerImpl==null) {
-          String containerName = context.get("containerName");
-            container = RootContainer.getInstance().getPortalContainer(containerName);
-            publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
-        }
+        PublicationManagerImpl publicationManagerImpl = WCMCoreUtils.getService(PublicationManagerImpl.class, containerName);
         String lifecycleName = node.getProperty("publication:lifecycle").getString();
         Lifecycle lifecycle = publicationManagerImpl.getLifecycle(lifecycleName);
         List<State> states = lifecycle.getStates();
@@ -328,7 +318,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
     if (!node.isNew())
       node.save();
-    ListenerService listenerService = (ListenerService) container.getComponentInstanceOfType(ListenerService.class);
+    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
     listenerService.broadcast(AuthoringPublicationConstant.POST_UPDATE_STATE_EVENT, null, node);
   }
 
@@ -339,8 +329,6 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * ()
    */
   public String[] getPossibleStates() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    container.getComponentInstanceOfType(PublicationManagerImpl.class);
     return new String[] { PublicationDefaultStates.ENROLLED, PublicationDefaultStates.DRAFT,
         PublicationDefaultStates.PENDING, PublicationDefaultStates.PUBLISHED,
         PublicationDefaultStates.OBSOLETE };
@@ -511,8 +499,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
     String state = node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString();
     if (newState == null) {
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
+      PublicationManagerImpl publicationManagerImpl = WCMCoreUtils.getService(PublicationManagerImpl.class);
       Lifecycle lifecycle = publicationManagerImpl.getLifecycle(node.getProperty("publication:lifecycle")
                                                                     .getString());
       List<State> states = lifecycle.getStates();

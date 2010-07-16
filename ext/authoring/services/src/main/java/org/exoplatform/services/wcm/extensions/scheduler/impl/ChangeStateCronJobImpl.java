@@ -15,9 +15,6 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.RootContainer;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -28,6 +25,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -76,10 +74,9 @@ public class ChangeStateCronJobImpl implements Job {
     	  if (log.isDebugEnabled()) log.debug("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
     			  + toState);
     	  SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    	  String containerName = context.getJobDetail().getGroup().split(":")[0];
-    	  ExoContainer container = RootContainer.getInstance().getPortalContainer(containerName);
-    	  RepositoryService repositoryService_ = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    	  PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
+    	  String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
+    	  RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);
+        PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
     	  ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
     	  if (manageableRepository == null) {
     		  if (log.isDebugEnabled()) log.debug("Repository '" + repository + "' not found., ignoring");
