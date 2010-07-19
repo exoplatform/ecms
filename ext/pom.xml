@@ -16,5 +16,6 @@
     <module>workflow</module>
     <module>newsletter</module>
     <module>formgenerator</module>
+    <module>xcmis</module>
   </modules>
 </project>

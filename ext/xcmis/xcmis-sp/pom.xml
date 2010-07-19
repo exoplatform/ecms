@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms-ext-authoring</artifactId>
+    <artifactId>exo-ecms-ext-xcmis</artifactId>
     <version>2.1.0-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-ext-xcmis-sp</artifactId>
