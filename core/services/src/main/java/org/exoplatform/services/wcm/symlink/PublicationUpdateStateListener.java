@@ -85,14 +85,6 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
 			}
 		}
 
-//		if (targetNode.hasProperty("publication:currentState") && "published".equals(targetNode.getProperty("publication:currentState").getString())) {
-			try {
-				if (!targetNode.isNodeType("exo:sortable") && targetNode.canAddMixin("exo:sortable")) {
-					targetNode.addMixin("exo:sortable");
-				}
-			} catch (PathNotFoundException e) {}
-//		}
-		
 	    try {
 	        String nodeVersionUUID = targetNode.getProperty("publication:liveRevision").getString(); 
 	        Node revNode = targetNode.getVersionHistory().getSession().getNodeByUUID(nodeVersionUUID);
@@ -100,6 +92,14 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
 	        	liveNode = revNode.getNode("jcr:frozenNode");
 	    } catch (Exception e) { }
 
+		if (targetNode.hasProperty("publication:currentState") && liveNode != null) {
+		try {
+			if (!targetNode.isNodeType("exo:sortable") && targetNode.canAddMixin("exo:sortable")) {
+				targetNode.addMixin("exo:sortable");
+			}
+		} catch (PathNotFoundException e) {}
+		}
+	    
 	    if (liveNode!=null && liveNode.hasProperty("exo:title")) {
 			titlePublished = targetNode.hasProperty("exo:titlePublished")?targetNode.getProperty("exo:titlePublished").getString():null;
 			String liveTitle = liveNode.getProperty("exo:title").getString();
