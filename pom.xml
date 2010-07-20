@@ -35,7 +35,7 @@
     <org.exoplatform.portal.version>3.1.0-GA</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <chromattic.version>1.0.3</chromattic.version>
-    <xcmis.version>1.0</xcmis.version>
+    <xcmis.version>1.1-SNAPSHOT</xcmis.version>
     <!-- workflow implementations -->
     <org.jbpm.jbpm3>3.2.8</org.jbpm.jbpm3>
     <bonita.version>4.1</bonita.version>
