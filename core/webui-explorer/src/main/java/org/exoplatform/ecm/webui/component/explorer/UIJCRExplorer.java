@@ -958,64 +958,64 @@ public class UIJCRExplorer extends UIContainer {
   public Preference getPreference() {
     HttpServletRequest request = Util.getPortalRequestContext().getRequest();
     Cookie[] cookies = request.getCookies();
-    
-    Cookie getCookie0 = getCookieByCookieName(Preference.PREFERENCE_ENABLESTRUCTURE, cookies);
-    if ((getCookie0 != null) && (preferences_ != null)) {
-      if (getCookie0.getValue().equals("true"))
+    Cookie getCookieForUser;
+    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_ENABLESTRUCTURE, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) {
+      if (getCookieForUser.getValue().equals("true"))
         preferences_.setJcrEnable(true);
       else
         preferences_.setJcrEnable(false);
     }
-    Cookie getCookie1 = getCookieByCookieName(Preference.PREFERENCE_SHOWSIDEBAR, cookies);
-    if ((getCookie1 != null) && (preferences_ != null)) {
-      if (getCookie1.getValue().equals("true"))
+    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_SHOWSIDEBAR, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) {
+      if (getCookieForUser.getValue().equals("true"))
         preferences_.setShowSideBar(true);
       else
         preferences_.setShowSideBar(false);
     }
-    Cookie getCookie2 = getCookieByCookieName(Preference.SHOW_NON_DOCUMENTTYPE, cookies);
-    if ((getCookie2 != null) && (preferences_ != null)) {
-      if (getCookie2.getValue().equals("true"))
+    getCookieForUser = getCookieByCookieName(Preference.SHOW_NON_DOCUMENTTYPE, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) {
+      if (getCookieForUser.getValue().equals("true"))
         preferences_.setShowNonDocumentType(true);
       else
         preferences_.setShowNonDocumentType(false);
     }
-    Cookie getCookie3 = getCookieByCookieName(Preference.PREFERENCE_SHOWREFDOCUMENTS, cookies);
-    if ((getCookie3 != null) && (preferences_ != null)) {
-      if (getCookie3.getValue().equals("true"))
+    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_SHOWREFDOCUMENTS, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) {
+      if (getCookieForUser.getValue().equals("true"))
         preferences_.setShowPreferenceDocuments(true);
       else
         preferences_.setShowPreferenceDocuments(false);
     }
-    Cookie getCookie4 = getCookieByCookieName(Preference.PREFERENCE_SHOW_HIDDEN_NODE, cookies);
-    if ((getCookie4 != null) && (preferences_ != null)) {
-      if (getCookie4.getValue().equals("true"))
+    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_SHOW_HIDDEN_NODE, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) {
+      if (getCookieForUser.getValue().equals("true"))
         preferences_.setShowHiddenNode(true);
       else
         preferences_.setShowHiddenNode(false);
     }
-    Cookie getCookie5 = getCookieByCookieName(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, cookies);
-    if ((getCookie5 != null) && (preferences_ != null)) {
-      if (getCookie5.getValue().equals("true"))
+    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) {
+      if (getCookieForUser.getValue().equals("true"))
         preferences_.setShowItemsByUser(true);
       else
         preferences_.setShowItemsByUser(false);
     }
-    Cookie getCookie6 = getCookieByCookieName(Preference.ENABLE_DRAG_AND_DROP, cookies);
-    if ((getCookie6 != null) && (preferences_ != null)) {
-      if (getCookie6.getValue().equals("true"))
+    getCookieForUser = getCookieByCookieName(Preference.ENABLE_DRAG_AND_DROP, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) {
+      if (getCookieForUser.getValue().equals("true"))
         preferences_.setEnableDragAndDrop(true);
       else
         preferences_.setEnableDragAndDrop(false);
     }
-    Cookie getCookie7 = getCookieByCookieName(Preference.PREFERENCE_QUERY_TYPE, cookies);
-    if ((getCookie7 != null) && (preferences_ != null)) preferences_.setQueryType(getCookie7.getValue());    
-    Cookie getCookie8 = getCookieByCookieName(Preference.PREFERENCE_SORT_BY, cookies);
-    if ((getCookie8 != null) && (preferences_ != null)) preferences_.setSortType(getCookie8.getValue());    
-    Cookie getCookie9 = getCookieByCookieName(Preference.PREFERENCE_ORDER_BY, cookies);
-    if ((getCookie9 != null) && (preferences_ != null)) preferences_.setOrder(getCookie9.getValue());    
-    Cookie getCookie10 = getCookieByCookieName(Preference.NODES_PER_PAGE, cookies);
-    if ((getCookie10 != null) && (preferences_ != null)) preferences_.setNodesPerPage(Integer.parseInt(getCookie10.getValue()));
+    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_QUERY_TYPE, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setQueryType(getCookieForUser.getValue());    
+    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_SORT_BY, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setSortType(getCookieForUser.getValue());    
+    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_ORDER_BY, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setOrder(getCookieForUser.getValue());    
+    getCookieForUser = getCookieByCookieName(Preference.NODES_PER_PAGE, cookies);
+    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setNodesPerPage(Integer.parseInt(getCookieForUser.getValue()));
     
     return preferences_; 
   }  
