@@ -20,9 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -166,6 +171,48 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
     getUIFormSelectBox(NODES_PER_PAGE).setValue(Integer.toString(pref.getNodesPerPage()));
     getUIFormSelectBox(FIELD_QUERY_TYPE).setValue(pref.getQueryType());
   }
+  
+  private Cookie createNewCookie(String cookieName, String cookieValue) {
+    String userId = Util.getPortalRequestContext().getRemoteUser();
+    cookieName += userId; 
+    return new Cookie(cookieName, cookieValue);
+  }
+  
+  private void savePreferenceInCookies() {
+    HttpServletResponse response = Util.getPortalRequestContext().getResponse();
+    if (getUIFormCheckBoxInput(FIELD_ENABLESTRUCTURE).isChecked())
+      response.addCookie(createNewCookie(Preference.PREFERENCE_ENABLESTRUCTURE, "true"));
+    else
+      response.addCookie(createNewCookie(Preference.PREFERENCE_ENABLESTRUCTURE, "false"));
+    if (getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR).isChecked())
+      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWSIDEBAR, "true"));
+    else
+      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWSIDEBAR, "false"));
+    if (getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked()) 
+      response.addCookie(createNewCookie(Preference.SHOW_NON_DOCUMENTTYPE, "true"));
+    else
+      response.addCookie(createNewCookie(Preference.SHOW_NON_DOCUMENTTYPE, "false"));
+    if (getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked()) 
+      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWREFDOCUMENTS, "true"));
+    else
+      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWREFDOCUMENTS, "false"));
+    if (getUIFormCheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked()) 
+      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_HIDDEN_NODE, "true"));
+    else
+      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_HIDDEN_NODE, "false"));
+    if (getUIFormCheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).isChecked()) 
+      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, "true"));
+    else
+      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, "false"));
+    if (getUIFormCheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked())  
+      response.addCookie(createNewCookie(Preference.ENABLE_DRAG_AND_DROP, "true"));
+    else
+      response.addCookie(createNewCookie(Preference.ENABLE_DRAG_AND_DROP, "false"));
+    response.addCookie(createNewCookie(Preference.PREFERENCE_QUERY_TYPE, getUIFormSelectBox(FIELD_QUERY_TYPE).getValue()));
+    response.addCookie(createNewCookie(Preference.PREFERENCE_SORT_BY, getUIFormSelectBox(FIELD_SHORTBY).getValue()));
+    response.addCookie(createNewCookie(Preference.PREFERENCE_ORDER_BY, getUIFormSelectBox(FIELD_ORDERBY).getValue()));
+    response.addCookie(createNewCookie(Preference.NODES_PER_PAGE, getUIFormSelectBox(NODES_PER_PAGE).getValue()));
+  }
 
   @SuppressWarnings("unused")
   static public class SaveActionListener extends EventListener<UIPreferencesForm> {
@@ -185,6 +232,7 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       pref.setQueryType(uiForm.getUIFormSelectBox(FIELD_QUERY_TYPE).getValue());
       pref.setOrder(uiForm.getUIFormSelectBox(FIELD_ORDERBY).getValue());
       pref.setNodesPerPage(Integer.parseInt(uiForm.getUIFormSelectBox(NODES_PER_PAGE).getValue()));
+      uiForm.savePreferenceInCookies();
       uiExplorer.refreshExplorer();
       explorerPorltet.setRenderedChild(UIJCRExplorer.class);
     }
