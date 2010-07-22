@@ -114,6 +114,11 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     driveNameInput.addUIFormInput(stringInputDrive);
     driveNameInput.setActionInfo(UIJCRExplorerPortlet.DRIVE_NAME, new String[] {"SelectDrive"});
     addUIComponentInput(driveNameInput);
+    
+    UIFormCheckBoxInput<Boolean> uiEditInNewWindow = new UIFormCheckBoxInput<Boolean>(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, null);
+    uiEditInNewWindow.setChecked(Boolean.parseBoolean(getPreference().getValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, "true")));
+    uiEditInNewWindow.setEnable(false);
+    addChild(uiEditInNewWindow);
 
     UIFormInputSetWithAction uiParamPathInput = new UIFormInputSetWithAction(PARAM_PATH_ACTION);
     UIFormStringInput pathInput = new UIFormStringInput(UIJCRExplorerPortlet.PARAMETERIZE_PATH, UIJCRExplorerPortlet.PARAMETERIZE_PATH, null);
@@ -202,6 +207,9 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     
     UIFormStringInput uiMaxFileSize = getChildById(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD);
     uiMaxFileSize.setEditable(isEditable);
+    
+    UIFormCheckBoxInput<Boolean> editInNewWindow = getChildById(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW);
+    editInNewWindow.setEnable(isEditable);
   } 
   
   private PortletPreferences getPreference() {
@@ -241,7 +249,9 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       typeSelectBox.setValue(pref.getValue(UIJCRExplorerPortlet.USECASE, ""));
       UIFormInputSetWithAction driveNameInput = uiForm.getChildById("DriveNameInput");
       UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
-      stringInputDrive.setValue(pref.getValue(UIJCRExplorerPortlet.DRIVE_NAME, ""));     
+      stringInputDrive.setValue(pref.getValue(UIJCRExplorerPortlet.DRIVE_NAME, ""));
+      UIFormCheckBoxInput<Boolean> editInNewWindow = uiForm.getChildById(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW);
+      editInNewWindow.setChecked(Boolean.parseBoolean(pref.getValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, "true")));
             
       // update                  
       UIFormInputSetWithAction uiParamPathInput = uiForm.getChildById(PARAM_PATH_ACTION);      
@@ -323,9 +333,17 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       UIFormSelectBox typeSelectBox = uiForm.getChildById(UIJCRExplorerPortlet.USECASE);
       UIFormInputSetWithAction driveNameInput = uiForm.getChildById("DriveNameInput");
       UIFormStringInput stringInputDrive = driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
+      UIFormCheckBoxInput<Boolean> editInNewWindow = uiForm.getChildById(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW);
       String nodePath = ((UIFormStringInput)uiForm.findComponentById(UIJCRExplorerPortlet.PARAMETERIZE_PATH)).getValue();
       String driveName = stringInputDrive.getValue();      
       String useCase = typeSelectBox.getValue();
+      String editInNewWindowOldValue = pref.getValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, "true");
+      if (!editInNewWindowOldValue.equals(String.valueOf(editInNewWindow.isChecked()))) {
+        UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorerPortlet.class)
+                                         .getChild(UIJcrExplorerContainer.class)
+                                         .getChild(UIJCRExplorer.class);
+        uiExplorer.closeEditingFile();
+      }        
       
       if (useCase.equals(UIJCRExplorerPortlet.JAILED) ) {
         if ((driveName == null) || (driveName.length() == 0)) {
@@ -354,6 +372,7 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       pref.setValue(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD, String.valueOf(uiMaxFileSize.getValue()));
       pref.setValue(UIJCRExplorerPortlet.USECASE, useCase);
       pref.setValue(UIJCRExplorerPortlet.DRIVE_NAME, driveName);
+      pref.setValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, String.valueOf(editInNewWindow.isChecked()));
       pref.setValue(UIJCRExplorerPortlet.PARAMETERIZE_PATH, nodePath);
       pref.store();
       uiForm.setEditable(false);

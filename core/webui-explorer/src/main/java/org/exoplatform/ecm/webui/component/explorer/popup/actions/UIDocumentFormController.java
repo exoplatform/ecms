@@ -26,6 +26,8 @@ import javax.jcr.Node;
 import org.exoplatform.ecm.webui.comparator.ItemOptionNameComparator;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -47,6 +49,8 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 
 public class UIDocumentFormController extends UIContainer implements UIPopupComponent {
 
+  private static final Log LOG  = ExoLogger.getLogger("UIDocumentFormController");
+  
   private String defaultDocument_ ;
   private static String DEFAULT_VALUE = "exo:article" ;
   private Node currentNode_ ;
@@ -130,6 +134,20 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   }
 
   @Override
+  public <T extends UIComponent> T setRendered(boolean rendered)
+  {
+     UIComponent res = super.setRendered(rendered);
+     if (rendered == false) {
+       try {
+         deActivate();
+       } catch (Exception ex) {
+         LOG.error("Unknown err:", ex);
+       }
+     }
+     return (T)res;
+  }
+
+  @Override  
   public void processRender(WebuiRequestContext context) throws Exception {
     UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class);
     if (uiPopup != null && !uiPopup.isShow()) {

@@ -32,7 +32,9 @@ import javax.jcr.Value;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
 
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.form.DialogFormActionListeners;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.selector.ComponentSelector;
@@ -137,12 +139,12 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   public Node getRootPathTaxonomy(Node node) throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     try {
-    	TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    	List<Node> allTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
-    	for (Node taxonomyTree : allTaxonomyTrees) {
-    		if (node.getPath().startsWith(taxonomyTree.getPath())) return taxonomyTree;
-    	}
-    	return null;
+      TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
+      List<Node> allTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
+      for (Node taxonomyTree : allTaxonomyTrees) {
+        if (node.getPath().startsWith(taxonomyTree.getPath())) return taxonomyTree;
+      }
+      return null;
     } catch (AccessDeniedException accessDeniedException) {
       return null;
     } catch (Exception e) {
@@ -161,8 +163,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       List<Node> listCategories = taxonomyService.getAllCategories(getNode());
       Node taxonomyTree;
       for (Node itemNode : listCategories) {
-      	taxonomyTree = getRootPathTaxonomy(itemNode);
-      	if (taxonomyTree == null) continue;
+        taxonomyTree = getRootPathTaxonomy(itemNode);
+        if (taxonomyTree == null) continue;
         String categoryPath = itemNode.getPath().replaceAll(taxonomyTree.getPath(), "");
         if (!getListTaxonomy().contains(taxonomyTree.getName() + categoryPath)) {
           listTaxonomyName.add(getCategoryLabel(taxonomyTree.getName() + categoryPath));
@@ -272,9 +274,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               for (String categoryPath : listTaxonomy) {
                 index = categoryPath.indexOf("/");
                 if (index < 0) {
-                	taxonomyService.getTaxonomyTree(repository, categoryPath);
+                  taxonomyService.getTaxonomyTree(repository, categoryPath);
                 } else {
-                	taxonomyService.getTaxonomyTree(repository, categoryPath.substring(0, index)).getNode(categoryPath.substring(index + 1));
+                  taxonomyService.getTaxonomyTree(repository, categoryPath.substring(0, index)).getNode(categoryPath.substring(index + 1));
                 }
               }
             } catch (Exception e) {
@@ -336,11 +338,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             for(String categoryPath : listTaxonomy) {
               index = categoryPath.indexOf("/");
               try {
-              	if (index != -1) {
-              		taxonomyService.addCategory(newNode, categoryPath.substring(0, index), categoryPath.substring(index + 1));
-              	} else {
-              		taxonomyService.addCategory(newNode, categoryPath, "");
-              	}
+                if (index != -1) {
+                  taxonomyService.addCategory(newNode, categoryPath.substring(0, index), categoryPath.substring(index + 1));
+                } else {
+                  taxonomyService.addCategory(newNode, categoryPath, "");
+                }
               } catch(AccessDeniedException accessDeniedException) {
                 uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null, 
                     ApplicationMessage.WARNING));
@@ -382,12 +384,12 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch(ConstraintViolationException constraintViolationException) {
-    	LOG.error("Unexpected error occurrs", constraintViolationException);
+      LOG.error("Unexpected error occurrs", constraintViolationException);
         uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch(RepositoryException repo) {
-    	LOG.error("Unexpected error occurrs", repo);
+      LOG.error("Unexpected error occurrs", repo);
         uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -406,6 +408,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
          documentForm.releaseLock();
       }
       event.getRequestContext().setAttribute("nodePath",newNode.getPath());
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
       uiExplorer.refreshExplorer();
       uiExplorer.updateAjax(event);      
     }
@@ -495,6 +501,14 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   static  public class CancelActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
+      if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) != null) {
+        event.getSource().releaseLock();
+        uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+        uiExplorer.updateAjax(event);
+      } else    
       uiExplorer.cancelAction();
     }
   }
@@ -544,7 +558,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         } catch (Exception e) {
-        	JCRExceptionManager.process(uiApp, e);
+          JCRExceptionManager.process(uiApp, e);
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }

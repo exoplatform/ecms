@@ -3304,4 +3304,10 @@
     	 <Close>Đóng</Close>
     </action>
   </UICategoryManagerSearch>
+  <UIJcrExplorerEditForm>  
+    <label>  
+      <editInNewWindow>Chỉnh sửa tài liệu trong cửa sổ mới</editInNewWindow>
+    </label>
+  </UIJcrExplorerEditForm>  
+  
 </bundle>

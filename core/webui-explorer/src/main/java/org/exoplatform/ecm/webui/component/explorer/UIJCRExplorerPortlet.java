@@ -97,7 +97,10 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   final static public String PARAMETERIZE       = "parameterize";
 
-  final static public String PARAMETERIZE_PATH       = "nodePath";
+  final static public String PARAMETERIZE_PATH  = "nodePath";
+  
+  final static public String EDIT_IN_NEW_WINDOW = "editInNewWindow";
+  
 
   private boolean flagSelect = false;
 
@@ -206,6 +209,10 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   public String getPreferenceTrashWorkspace() {
     return getPortletPreferences().getValue(Utils.TRASH_WORKSPACE, "");
+  }
+  
+  public boolean isEditInNewWindow() {
+    return Boolean.parseBoolean(getPortletPreferences().getValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, "true"));
   }
 
   public PortletPreferences getPortletPreferences() {

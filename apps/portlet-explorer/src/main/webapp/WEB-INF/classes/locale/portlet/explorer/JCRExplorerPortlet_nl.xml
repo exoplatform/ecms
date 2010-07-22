@@ -3198,5 +3198,11 @@
     <action>
     	 <Close>Close</Close>
     </action>
-  </UICategoryManagerSearch>  
+  </UICategoryManagerSearch>
+      <UIJcrExplorerEditForm>  
+    <label>  
+      <editInNewWindow>Edit in new window</editInNewWindow>
+    </label>
+  </UIJcrExplorerEditForm>  
+    
 </bundle>

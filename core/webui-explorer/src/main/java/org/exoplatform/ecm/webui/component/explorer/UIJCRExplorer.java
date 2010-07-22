@@ -52,6 +52,8 @@ import org.exoplatform.ecm.webui.comparator.StringComparator;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -79,8 +81,10 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 
@@ -120,6 +124,7 @@ public class UIJCRExplorer extends UIContainer {
   private String language_ ;
   private String tagPath_ ;
   private String referenceWorkspace_ ;
+  private String pathBeforeEditing;
   
   private boolean isViewTag_;
   private boolean isHidePopup_;
@@ -182,6 +187,9 @@ public class UIJCRExplorer extends UIContainer {
     currentDriveRootPath_ = rootPath;
     setCurrentRootPath(rootPath);
   }
+  
+  public String getPathBeforeEditing() { return pathBeforeEditing; }
+  public void setPathBeforeEditing(String value) { pathBeforeEditing = value; }
   
   private void setCurrentRootPath(String rootPath) {
     currentRootPath_ = rootPath ;
@@ -436,19 +444,22 @@ public class UIJCRExplorer extends UIContainer {
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocumentWorkspace.isRendered()) {
-      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
-      UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
-      if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isClickExpand())) {
-        uiDocumentWithTree.updatePageListData();
-        uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
-      } else {
-        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
-        uiDocumentInfo.updatePageListData();
-        uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
+      if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) == null || 
+          !uiDocumentWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
+        UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
+        UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
+        if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isClickExpand())) {
+          uiDocumentWithTree.updatePageListData();
+          uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
+        } else {
+          UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
+          uiDocumentInfo.updatePageListData();
+          uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
+        }
+        if (isExoWebContent(getCurrentNode(), this))
+          uiDocumentWithTree.updatePageListData();
+        uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
       }
-      if (isExoWebContent(getCurrentNode(), this))
-        uiDocumentWithTree.updatePageListData();
-      uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
     }
     if(preferences_.isShowSideBar()) {
       UITreeExplorer treeExplorer = findFirstComponentOfType(UITreeExplorer.class);
@@ -576,19 +587,22 @@ public class UIJCRExplorer extends UIContainer {
     }
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocWorkspace.isRendered()) {
-      UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
-      UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");      
-      if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isClickExpand())) {
-        uiDocumentWithTree.updatePageListData();
-        uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
-      } else {
-        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
-        uiDocumentInfo.updatePageListData();
-        uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
-      }
-      if(isExoWebContent(getCurrentNode(), this)) 
-        uiDocumentWithTree.updatePageListData();
-      uiDocWorkspace.setRenderedChild(UIDocumentContainer.class) ;
+      if (uiDocWorkspace.getChild(UIDocumentFormController.class) == null || 
+          !uiDocWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
+        UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
+        UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");      
+        if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isClickExpand())) {
+          uiDocumentWithTree.updatePageListData();
+          uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
+        } else {
+          UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
+          uiDocumentInfo.updatePageListData();
+          uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
+        }
+        if(isExoWebContent(getCurrentNode(), this)) 
+          uiDocumentWithTree.updatePageListData();
+        uiDocWorkspace.setRenderedChild(UIDocumentContainer.class) ;
+        }
     }
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
     event.getRequestContext().addUIComponentToUpdateByAjax(uiActionBar);
@@ -929,7 +943,34 @@ public class UIJCRExplorer extends UIContainer {
   }  
     
   public Preference getPreference() { return preferences_; }  
-  public void setPreferences(Preference preference) {this.preferences_ = preference; } 
+  public void setPreferences(Preference preference) {this.preferences_ = preference; }
+  
+  public void closeEditingFile() throws Exception {
+
+    UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
+    UIPopupWindow uiPopup = uiPopupContainer.getChild(UIPopupWindow.class);
+    
+    UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
+    UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+    
+    //check if edit with popup    
+    UIComponent uiComp = uiPopup.getUIComponent();
+    if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
+      uiPopupContainer.deActivate();
+      this.refreshExplorer();
+      return;
+    }
+    
+    //check if edit without popup
+    if (uiDocumentWorkspace.isRendered()) {
+      UIDocumentFormController controller = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
+      if (controller != null) {
+        uiDocumentWorkspace.removeChild(UIDocumentFormController.class).deActivate();
+        uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class);
+        this.refreshExplorer();
+      }
+    }
+  }
   
   @Deprecated
   public String getPreferencesPath() {

@@ -31,7 +31,7 @@ public class Preference {
   public static final String ENABLE_DRAG_AND_DROP = "EnableDragAndDrop";
   public static final String SHOW_FAVOURITE_DOC = "Favourites";
   public static final String SHOW_HIDDEN_DOC = "Hidden";
-
+  
   public static final String[] SORT_BY_SINGLEVALUE_PROPERTY = {"SingleValueProperty"};
   
   public static final String SHOW_NON_DOCUMENTTYPE = "showNonDocumentType" ;
@@ -59,8 +59,9 @@ public class Preference {
   private boolean isShowHiddenDoc = true;
   private boolean isShowTrashDoc = true;
   private boolean isShowItemsByUser = true;
+  
   private String queryType = "SQL";
-	private int nodesPerPage = 20;
+  private int nodesPerPage = 20;
     
   public boolean isJcrEnable() { return jcrEnable ; }
   public void setJcrEnable(boolean b) { jcrEnable = b ; }
@@ -89,18 +90,14 @@ public class Preference {
   public boolean isEnableDragAndDrop() { return isEnableDragAndDrop; }
   public void setEnableDragAndDrop(boolean b) { isEnableDragAndDrop = b; }
   
-  public boolean isShowFavouriteDoc() {	return isShowFavouriteDoc; }
+  public boolean isShowFavouriteDoc() { return isShowFavouriteDoc; }
   public void setShowFavouriteDoc(boolean b) { isShowFavouriteDoc = b; }
   
   public boolean isShowHiddenDoc() { return isShowHiddenDoc; }
-  public void setShowHiddenDoc(boolean b) {	isShowHiddenDoc = b; }
+  public void setShowHiddenDoc(boolean b) { isShowHiddenDoc = b; }
   
-  public boolean isShowItemsByUser() { 
-  	return isShowItemsByUser; 
-  }
-	public void setShowItemsByUser(boolean b) {
-		this.isShowItemsByUser = b;
-	}
+  public boolean isShowItemsByUser() { return isShowItemsByUser; }
+  public void setShowItemsByUser(boolean b) { this.isShowItemsByUser = b; }
   
   public String getAllowCreateFoder() { return allowCreateFoder ; }
   public void setAllowCreateFoder(String s) { allowCreateFoder = s ; }
