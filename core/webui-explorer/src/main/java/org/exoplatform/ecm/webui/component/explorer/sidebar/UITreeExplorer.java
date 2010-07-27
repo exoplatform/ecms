@@ -443,7 +443,7 @@ public class UITreeExplorer extends UIContainer {
       if (isInTrash(item))
         return;
       
-      if (uiExplorer.getPreference().isShowSideBar()) {
+      if (uiExplorer.getPreference().isShowSideBar() && uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
         uiTreeExplorer.buildTree(path);
       }
     }

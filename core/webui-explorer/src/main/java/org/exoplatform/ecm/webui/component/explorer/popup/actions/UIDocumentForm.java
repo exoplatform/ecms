@@ -411,7 +411,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
+//      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
+      uiExplorer.setCurrentPath(newNode.getPath());      
       uiExplorer.refreshExplorer();
       uiExplorer.updateAjax(event);      
     }
@@ -503,7 +504,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
+//      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
       if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) != null) {
         event.getSource().releaseLock();
         uiDocumentWorkspace.removeChild(UIDocumentFormController.class);

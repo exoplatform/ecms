@@ -3199,9 +3199,13 @@
     	 <Close>Close</Close>
     </action>
   </UICategoryManagerSearch>
-      <UIJcrExplorerEditForm>  
+  <UIJcrExplorerEditForm>  
     <label>  
       <editInNewWindow>Edit in new window</editInNewWindow>
+      <showTopBar>Show Top Bar</showTopBar>
+      <showActionBar>Show Action Bar</showActionBar>
+      <showSideBar>Show Left Bar</showSideBar>
+      <showFilterBar>Show Filter Bar</showFilterBar>
     </label>
   </UIJcrExplorerEditForm>  
     

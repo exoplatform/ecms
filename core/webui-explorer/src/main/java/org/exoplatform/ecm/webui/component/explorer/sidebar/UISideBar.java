@@ -62,11 +62,18 @@ public class UISideBar extends UIContainer {
     return currentComp; 
   }
   
+  public void updateSideBarView() throws Exception {
+    boolean showFilterBar = getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar();
+    getChild(UIAllItems.class).setRendered(showFilterBar);
+    getChild(UIAllItemsByType.class).setRendered(showFilterBar);
+  }
+     
+  
   public void setCurrentComp(String currentComp) { this.currentComp = currentComp; }
   
   public void renderSideBarChild(String[] arrId) throws Exception {
     for(String id : arrId) {
-      setRenderedChild(id);
+      setRenderedChild(id); // Need to remove this because we've already called updateSideBarView() but need Checking
       renderChild(id);
     }
   }

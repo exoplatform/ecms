@@ -56,6 +56,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -86,6 +87,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -160,6 +162,48 @@ public class UIJCRExplorer extends UIContainer {
   public boolean isClickExpand() { return isClickExpand_; }
   public void setClickExpand(boolean value) { isClickExpand_ = value; }
   
+  public boolean isAddingDocument() {
+    UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
+    UIPopupWindow uiPopup = uiPopupContainer.getChild(UIPopupWindow.class);
+    
+    UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
+    UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+    //check if edit with popup    
+    UIComponent uiComp = uiPopup.getUIComponent();
+    if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
+      return ((UIDocumentFormController)uiComp).getChild(UIDocumentForm.class).isAddNew();
+    }
+     //check if edit without popup
+    if (uiDocumentWorkspace.isRendered()) {
+      UIDocumentFormController controller = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
+      if (controller != null && controller.isRendered()) {
+        return controller.getChild(UIDocumentForm.class).isAddNew();
+      }
+    }
+    return false;
+  }
+  
+  public boolean isEditingDocument() {
+    UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
+    UIPopupWindow uiPopup = uiPopupContainer.getChild(UIPopupWindow.class);
+    
+    UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
+    UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+    //check if edit with popup    
+    UIComponent uiComp = uiPopup.getUIComponent();
+    if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
+      return true;
+    }
+     //check if edit without popup
+    if (uiDocumentWorkspace.isRendered()) {
+      UIDocumentFormController controller = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
+      if (controller != null && controller.isRendered()) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
   public List<String> getCheckedSupportType() {
     return checkedSupportType;
   }
@@ -190,9 +234,6 @@ public class UIJCRExplorer extends UIContainer {
     currentDriveRootPath_ = rootPath;
     setCurrentRootPath(rootPath);
   }
-  
-  public String getPathBeforeEditing() { return pathBeforeEditing; }
-  public void setPathBeforeEditing(String value) { pathBeforeEditing = value; }
   
   private void setCurrentRootPath(String rootPath) {
     currentRootPath_ = rootPath ;
@@ -464,9 +505,13 @@ public class UIJCRExplorer extends UIContainer {
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
       }
     }
-    if(preferences_.isShowSideBar()) {
+    if(preferences_.isShowSideBar() && getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
       UITreeExplorer treeExplorer = findFirstComponentOfType(UITreeExplorer.class);
       treeExplorer.buildTree();
+      UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
+      if (uiSideBar.isRendered()) {
+        uiSideBar.updateSideBarView();
+      }
     }
     if (closePopup) {
       UIPopupContainer popupAction = getChild(UIPopupContainer.class);
@@ -579,10 +624,15 @@ public class UIJCRExplorer extends UIContainer {
   public void setIsHidePopup(boolean isHidePopup) { isHidePopup_ = isHidePopup ; }
 
   public void updateAjax(Event<?> event) throws Exception {
+    UIJCRExplorerPortlet uiPortlet = getAncestorOfType(UIJCRExplorerPortlet.class);
     UIAddressBar uiAddressBar = findFirstComponentOfType(UIAddressBar.class) ;
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
         Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
-    event.getRequestContext().addUIComponentToUpdateByAjax(uiAddressBar) ;
+    if (!uiPortlet.isShowTopBar()) 
+      uiAddressBar.setRendered(false);
+    else 
+      uiAddressBar.setRendered(true);
+    event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;    
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class) ;
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class) ;
     if(preferences_.isShowSideBar()) {
@@ -608,7 +658,11 @@ public class UIJCRExplorer extends UIContainer {
         }
     }
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
-    event.getRequestContext().addUIComponentToUpdateByAjax(uiActionBar);
+    if (!uiPortlet.isShowActionBar()) 
+      uiActionBar.setRendered(false);
+    else 
+      uiActionBar.setRendered(true);
+    event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;    
     if(!isHidePopup_) {
       UIPopupContainer popupAction = getChild(UIPopupContainer.class) ;
       if(popupAction.isRendered()) {

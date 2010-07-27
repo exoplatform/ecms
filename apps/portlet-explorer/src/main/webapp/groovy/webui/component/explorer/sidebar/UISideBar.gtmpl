@@ -1,4 +1,6 @@
 <%
+
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
   public String getCSSClassName(String item) {
     if (uicomponent.getCurrentComp().equals(item)) return "SelectedItem";
     return "NormalItem";
@@ -18,8 +20,10 @@
 	
       <div class="SelectItem" id ="SelectItemArea">
         <% 
-          String[] arrAllItems = ["UIAllItems", "UIAllItemsByType"];
-          uicomponent.renderSideBarChild(arrAllItems); 
+          if (uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar()) {
+            String[] arrAllItems = ["UIAllItems", "UIAllItemsByType"];
+            uicomponent.renderSideBarChild(arrAllItems);
+          }
         %>
       </div>
     </div>

@@ -33,6 +33,7 @@ import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
@@ -123,13 +124,6 @@ public class UIJcrExplorerContainer extends UIContainer {
       if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
       UIJCRExplorer uiJCRExplorer = getChild(UIJCRExplorer.class);
   
-      Preference pref = uiJCRExplorer.getPreference();
-      pref.setShowSideBar(drive.getViewSideBar());
-      pref.setShowNonDocumentType(drive.getViewNonDocument());
-      pref.setShowPreferenceDocuments(drive.getViewPreferences());
-      pref.setAllowCreateFoder(drive.getAllowCreateFolders()); 
-      pref.setShowHiddenNode(drive.getShowHiddenNode());
-//      uiJCRExplorer.setPreferences(pref);
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
       
@@ -162,13 +156,30 @@ public class UIJcrExplorerContainer extends UIContainer {
       uiJCRExplorer.setWorkspaceName(drive.getWorkspace());
       uiJCRExplorer.setRootPath(homePath);
       uiJCRExplorer.setSelectNode(drive.getWorkspace(), homePath);
+      Preference pref = uiJCRExplorer.getPreference();
+      pref.setShowSideBar(drive.getViewSideBar());
+      pref.setShowNonDocumentType(drive.getViewNonDocument());
+      pref.setShowPreferenceDocuments(drive.getViewPreferences());
+      pref.setAllowCreateFoder(drive.getAllowCreateFolders()); 
+      pref.setShowHiddenNode(drive.getShowHiddenNode());
       uiJCRExplorer.refreshExplorer();      
       UIControl uiControl = uiJCRExplorer.getChild(UIControl.class);
-      UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
+
       UIAddressBar uiAddressBar = uiControl.getChild(UIAddressBar.class);
       uiAddressBar.setViewList(viewList);
       uiAddressBar.setSelectedViewName(viewList.get(0));
+      uiAddressBar.setRendered(uiFEPortlet.isShowTopBar());
+//      uiActionbar.setTabOptions(viewList.get(0));
+//      if (viewList.size() == 1) uiAddressBar.setRendered(false);
+      UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
+      boolean isShowActionBar = uiFEPortlet.isShowActionBar();
       uiActionbar.setTabOptions(viewList.get(0));
+      uiActionbar.setRendered(isShowActionBar);
+      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);      
+      UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
+      if (uiSideBar.isRendered()) {
+       uiSideBar.updateSideBarView();
+      }
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     }

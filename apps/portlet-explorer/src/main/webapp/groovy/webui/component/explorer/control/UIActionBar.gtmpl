@@ -10,7 +10,11 @@
 <%
   import java.util.List;
   import java.util.ArrayList;
-
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  
+  def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
+  def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def uniqueId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
 	rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkAvailableSpace');
@@ -32,6 +36,7 @@
  
 <% uiform.begin() %>
 <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
+<%if (uiPortlet.isShowActionBar() && !uiExplorer.isAddingDocument()) {%>
 	<div class="UIHorizontalTabs">
 		<div class="TabsContainer">
 		  <div style="overflow: hidden; $displayTabContainer">
@@ -93,20 +98,20 @@
 				</div>
 		 <%}%>
 		</div>
-			
-		<div class="UIViewBarContainer" id="UIViewBarContainer">
-			<%if(uicomponent.isShowSaveSession()) {%>
-	      <a class="SaveSessionButton" href="<%=uicomponent.event("SaveSession")%>" title="<%=_ctx.appRes("UIViewBar.label.saveSession")%>"></a>
-	    <%}%>
-	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
-			<div class="ClearRight"><span></span></div>
-		</div>
-		<div id="IconListHideElement" style="float:right; padding-top: 2px;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event);">
-			<a class="ListHideElementIcon"></a>
-			<div class="ListHideContainer" id="ListHideContainer" style="display:none">								
-			</div>
-		</div>
+  		<div class="UIViewBarContainer" id="UIViewBarContainer">
+  			<%if(uicomponent.isShowSaveSession()) {%>
+  	      <a class="SaveSessionButton" href="<%=uicomponent.event("SaveSession")%>" title="<%=_ctx.appRes("UIViewBar.label.saveSession")%>"></a>
+  	    <%}%>
+  	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
+  			<div class="ClearRight"><span></span></div>
+  		</div>
+  		<div id="IconListHideElement" style="float:right; padding-top: 2px;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event);">
+  			<a class="ListHideElementIcon"></a>
+  			<div class="ListHideContainer" id="ListHideContainer" style="display:none">								
+  			</div>
+  		</div>
 	</div>
+  <% } %>	
 </div>
 		  
 <% uiform.end() %>

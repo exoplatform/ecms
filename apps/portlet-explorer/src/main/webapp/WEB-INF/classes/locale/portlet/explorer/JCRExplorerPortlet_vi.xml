@@ -3307,6 +3307,10 @@
   <UIJcrExplorerEditForm>  
     <label>  
       <editInNewWindow>Chỉnh sửa tài liệu trong cửa sổ mới</editInNewWindow>
+      <showTopBar>Show Top Bar</showTopBar>
+      <showActionBar>Show Action Bar</showActionBar>
+      <showSideBar>Show Left Bar</showSideBar>
+      <showFilterBar>Show Filter Bar</showFilterBar>
     </label>
   </UIJcrExplorerEditForm>  
   
