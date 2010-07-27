@@ -6,6 +6,9 @@ td {
   min-width: 20px;
 }
 
+.UITabPane .UITabContentContainer .UITabContent {
+  height: 100% !important;
+}
 
 .UIWCMColumnContainer {
   margin: auto;
