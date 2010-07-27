@@ -35,6 +35,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.picocontainer.Startable;
 
 public abstract class BaseResourceLoaderService implements Startable{
@@ -157,15 +158,17 @@ public abstract class BaseResourceLoaderService implements Startable{
       resourceName = StringUtils.substringAfterLast(resourceName,"/") ;
     }        
     try {
-      contentNode = resourcesHome.getNode(resourceName);
+      Node script = resourcesHome.getNode(resourceName);
+      contentNode = script.getNode(NodetypeConstant.JCR_CONTENT);
       if(!contentNode.isCheckedOut()) contentNode.checkout() ;
     } catch (PathNotFoundException e) {
-      contentNode = resourcesHome.addNode(resourceName, "nt:resource");
-      contentNode.setProperty("jcr:encoding", "UTF-8");
-      contentNode.setProperty("jcr:mimeType", "text/xml");
+      Node script = resourcesHome.addNode(resourceName, NodetypeConstant.NT_FILE);
+      contentNode = script.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.EXO_RESOURCES);
+      contentNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
+      contentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, "application/x-groovy");
     }
-    contentNode.setProperty("jcr:data", in);
-    contentNode.setProperty("jcr:lastModified", new GregorianCalendar());
+    contentNode.setProperty(NodetypeConstant.JCR_DATA, in);
+    contentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
     resourcesHome.save() ;
   }
 
@@ -198,17 +201,37 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @param resourceName    String
    * @param repository      String
    *                        The name of repository
+   * @deprecated Since WCM 2.1 you should use {@link #getResourceAsStream(String, String)} instead.
    * @see                                          
    * @return                SessionProvider
    * @throws Exception
    */
+  @Deprecated
   public String getResourceAsText(String resourceName, String repository) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
     Node resourcesHome = getResourcesHome(repository,sessionProvider);
     Node resourceNode = resourcesHome.getNode(resourceName);
-    String text = resourceNode.getProperty("jcr:data").getString();
+    String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
     sessionProvider.close();
     return text;
+  }  
+  
+  /**
+   * get Resource As Stream
+   * @param resourceName    String
+   * @param repository      String
+   *                        The name of repository
+   * @see                                          
+   * @return                SessionProvider
+   * @throws Exception
+   */
+  public InputStream getResourceAsStream(String resourceName, String repository) throws Exception {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
+    Node resourcesHome = getResourcesHome(repository,sessionProvider);
+    Node resourceNode = resourcesHome.getNode(resourceName);
+    InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
+    sessionProvider.close();
+    return stream;
   }  
 
   /**

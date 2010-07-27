@@ -85,7 +85,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
 
   final static public String TEMPLATE_PERMISSION = "TemplatePermission" ;
 
-  public UITemplateContent() throws Exception { 
+  public UITemplateContent() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     UIFormSelectBox versions = 
       new UIFormSelectBox(FIELD_SELECT_VERSION, FIELD_SELECT_VERSION, options) ;
@@ -338,7 +338,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       String path = node.getVersionHistory().getVersion(version).getPath() ;           
       VersionNode versionNode = uiForm.getRootVersion(node).findVersionNode(path) ;
       Node frozenNode = versionNode.getVersion().getNode(Utils.JCR_FROZEN) ;
-      String content = frozenNode.getProperty(Utils.EXO_TEMPLATEFILE).getString() ;
+      String content = templateService.getTemplate(frozenNode);
       uiForm.getUIFormTextAreaInput(FIELD_CONTENT).setValue(content) ;
       if (frozenNode.hasProperty(Utils.EXO_ROLES)) {
         StringBuilder rule = new StringBuilder() ;

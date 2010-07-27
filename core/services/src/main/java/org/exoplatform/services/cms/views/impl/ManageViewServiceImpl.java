@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.views.impl;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +29,7 @@ import javax.jcr.Session;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
@@ -37,6 +39,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.picocontainer.Startable;
@@ -54,7 +57,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   private static final Log LOG  = ExoLogger.getLogger(ManageViewServiceImpl.class);
   
   protected final static String EXO_TEMPLATE = "exo:template".intern() ;
-  protected final static String TEMPLATE_PROP = "exo:templateFile".intern() ;
   protected final static String ADMIN_VIEW = "admin".intern() ;
   protected final static String DEFAULT_VIEW = "default".intern() ;
   protected final static String EXO_PERMISSIONS = "exo:accessPermissions".intern()  ;
@@ -67,6 +69,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   private final NodeHierarchyCreator nodeHierarchyCreator_ ;
   private final DMSConfiguration dmsConfiguration_;
   private final UIExtensionManager extensionManager_;
+  private TemplateService templateService;
   
   /**
    * Constructor
@@ -84,6 +87,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     baseViewPath_ = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWS_PATH) ;
     dmsConfiguration_ = dmsConfiguration;
     extensionManager_ = extensionManager;
+    templateService = WCMCoreUtils.getService(TemplateService.class);
   }
 
   /**
@@ -348,17 +352,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   public String addTemplate(String name, String content, String homeTemplate, String repository) throws Exception {
     Session session = getSession(repository) ;
     Node templateHome = (Node)session.getItem(homeTemplate) ;
-    Node newTemp = null ;
-    if(templateHome.hasNode(name)) {
-      newTemp = templateHome.getNode(name) ;      
-    }else {
-      newTemp = templateHome.addNode(name,EXO_TEMPLATE) ;
-    }
-    newTemp.setProperty(TEMPLATE_PROP,content) ;
-    templateHome.save() ;
-    session.save();
-    session.logout();
-    return newTemp.getPath() ;    
+    return templateService.createTemplate(templateHome, name, new ByteArrayInputStream(content.getBytes()), new String[] {"*"});
   }
 
 

@@ -30,6 +30,7 @@ import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -75,8 +76,11 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
 
   private List<String> listVersion = new ArrayList<String>() ;
   private boolean isAddNew_ = true ; 
+  private ScriptService scriptService;
 
-  public UIScriptForm() throws Exception { 
+  public UIScriptForm() throws Exception {
+    scriptService = WCMCoreUtils.getService(ScriptService.class);
+    
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     UIFormSelectBox versions = 
       new UIFormSelectBox(FIELD_SELECT_VERSION , FIELD_SELECT_VERSION, options) ;
@@ -133,7 +137,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
   public void update(Node script, boolean isAddNew) throws Exception{
     isAddNew_ = isAddNew ;
     if(script != null) {
-      String scriptContent = script.getProperty("jcr:data").getString() ;
+      String scriptContent = scriptService.getScriptAsText(script);
       getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
       boolean isVersioned = script.isNodeType(Utils.MIX_VERSIONABLE) ;
       if(isVersioned) {

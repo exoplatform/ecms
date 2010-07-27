@@ -111,7 +111,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
       if (resourceResolver == null) {
         DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
         String workspace = dmsConfiguration.getConfig(this.repositoryName).getSystemWorkspace();
-        resourceResolver = new JCRResourceResolver(this.repositoryName, workspace, TemplateService.EXO_TEMPLATE_FILE_PROP);
+        resourceResolver = new JCRResourceResolver(this.repositoryName, workspace);
       }
     }catch(Exception e) {
       Utils.createPopupMessage(this, "UINewsletterEntryForm.msg.get-template-resource", null, ApplicationMessage.ERROR);

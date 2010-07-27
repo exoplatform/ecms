@@ -150,6 +150,12 @@ public class NodetypeConstant {
   
   public static final String EXO_LINKS                      = "exo:links";
   
+  public static final String EXO_ROLES                      = "exo:roles";
+  
+  public static final String EXO_RESOURCES                  = "exo:resources";
+  
+  
+  
   public static final String PUBLICATION_LIVE_REVISION      = "publication:liveRevision";
   
   public static final String PUBLICATION_WEBPAGES_PUBLICATION = "publication:webpagesPublication";

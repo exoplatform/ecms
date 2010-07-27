@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.views.impl;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -31,17 +32,18 @@ import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.cms.views.PortletTemplatePlugin;
 import org.exoplatform.services.cms.views.PortletTemplatePlugin.PortletTemplateConfig;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
-import org.exoplatform.services.jcr.config.RepositoryServiceConfiguration;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
@@ -66,6 +68,8 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   private NodeHierarchyCreator hierarchyCreator;
   
   private InitParams params;
+  
+  private TemplateService templateService;
 
   /**
    * Instantiates a new application template manager service impl.
@@ -87,6 +91,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     dmsConfiguration_ = dmsConfiguration;
     this.params = params;
     this.hierarchyCreator = hierarchyCreator;
+    templateService = WCMCoreUtils.getService(TemplateService.class);
   }
 
   /**
@@ -115,15 +120,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       category = portletTemplateHome.addNode(config.getCategory(),"nt:unstructured");
       portletTemplateHome.save();
     }
-    Node templateNode = null;
-    try {
-      templateNode = category.getNode(config.getTemplateName());
-    } catch (Exception e) {
-      templateNode = category.addNode(config.getTemplateName(),"exo:template");
-    }
-    templateNode.setProperty("exo:templateFile",config.getTemplateData());
-    //TODO need set permission for the template in future
-    templateNode.getSession().save();
+    templateService.createTemplate(category, config.getTemplateName(), new ByteArrayInputStream(config.getTemplateData().getBytes()), new String[] {"*"});
   }
 
   /**

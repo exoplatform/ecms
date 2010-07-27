@@ -16,8 +16,11 @@
  */
 package org.exoplatform.services.cms.templates.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +58,8 @@ import org.exoplatform.services.resources.Orientation;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
@@ -79,6 +84,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   
   private static String NODETYPE_LIST = "nodeTypeList";
   
+  @SuppressWarnings("unchecked")
   private ExoCache nodeTypeListCached ;
   
   /**
@@ -327,7 +333,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     NodeIterator templateIter = nodeTypeNode.getNode(type).getNodes();
     while (templateIter.hasNext()) {
       Node node = templateIter.nextNode();
-      Value[] roles = node.getProperty(EXO_ROLES_PROP).getValues();
+      String roles = getTemplateRoles(node);
       if(hasPermission(userName, roles, identityRegistry_)) {
         String templatePath = node.getPath() ;
         session.logout();
@@ -375,27 +381,20 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       String repository) throws Exception {
     Session session = getSession(repository);
     Node templateNode = getTemplateNode(session, type, nodeTypeName, templateName);
-    String template = templateNode.getProperty(EXO_TEMPLATE_FILE_PROP).getString();
     session.logout();
-    return template;
+    return getTemplate(templateNode);
   }
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String getTemplateRoles(String type, String nodeTypeName, String templateName,
       String repository) throws Exception {
     Session session = getSession(repository);
     Node templateNode = getTemplateNode(session, type, nodeTypeName, templateName);
-    Value[] values = templateNode.getProperty(EXO_ROLES_PROP).getValues();
-    StringBuffer roles = new StringBuffer();
-    for (int i = 0; i < values.length; i++) {
-      if (roles.length() > 0)
-        roles.append("; ");
-      roles.append(values[i].getString());
-    }
     session.logout();
-    return roles.toString();
+    return getTemplateRoles(templateNode);
   }
 
   /**
@@ -441,40 +440,26 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
     String templateType = DIALOGS;
     if(!isDialog) templateType = VIEWS;
-    Node contentNode = getContentNode(templateType, templatesHome, nodeTypeName, label, 
-        isDocumentTemplate, templateName);
-    contentNode.setProperty(EXO_ROLES_PROP, roles);
-    contentNode.setProperty(EXO_TEMPLATE_FILE_PROP, templateFile);
+    String templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label, 
+        isDocumentTemplate, templateName, roles, new ByteArrayInputStream(templateFile.getBytes()));
     templatesHome.save();
     session.save();
     session.logout();
     //Update managedDocumentTypesMap
-    removeCacheTemplate(contentNode.getPath());
+    removeCacheTemplate(templatePath);
     removeTemplateNodeTypeList();
     updateDocumentsTemplate(isDocumentTemplate, repository, nodeTypeName);
-    return contentNode.getPath();
+    return templatePath;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String addTemplate(String templateType, String nodeTypeName, String label,
       boolean isDocumentTemplate, String templateName, String[] roles, String templateFile,
       String repository) throws Exception {
-    Session session = getSession(repository);
-    Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
-    Node contentNode = getContentNode(templateType, templatesHome, nodeTypeName, label, 
-        isDocumentTemplate, templateName);
-    contentNode.setProperty(EXO_ROLES_PROP, roles);
-    contentNode.setProperty(EXO_TEMPLATE_FILE_PROP, templateFile);
-    templatesHome.save();
-    session.save();
-    session.logout();
-    //Update managedDocumentTypesMap
-    removeCacheTemplate(contentNode.getPath());
-    removeTemplateNodeTypeList();
-    updateDocumentsTemplate(isDocumentTemplate, repository, nodeTypeName);
-    return contentNode.getPath();
+    return addTemplate(templateType, nodeTypeName, label, isDocumentTemplate, templateName, roles, new ByteArrayInputStream(templateFile.getBytes()), repository);
   }
   
   /**
@@ -502,7 +487,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     NodeIterator templateIter = nodeTypeNode.getNode(type).getNodes();
     while (templateIter.hasNext()) {
       Node node = templateIter.nextNode();
-      Value[] roles = node.getProperty(EXO_ROLES_PROP).getValues();
+      Value[] roles = node.getProperty(NodetypeConstant.EXO_ROLES).getValues();
       if(hasPublicTemplate(roles)) {
         String templatePath = node.getPath() ;
         session.logout();
@@ -556,26 +541,18 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     Node homeNode = (Node) session.getItem(cmsTemplatesBasePath_);
     Node nodeTypeNode = homeNode.getNode(nodeTypeName);
     Orientation orientation = getOrientation(locale);
-    Node skinNode = null;
+    String skinPath = null;
     if(orientation.isLT()) {
-      try {
-        skinNode = nodeTypeNode.getNode(SKINS).getNode(skinName + "-lt");
-      } catch(PathNotFoundException pne) {
-        StringBuilder templateData = new StringBuilder("/**");
-        templateData.append("LTR stylesheet for "+nodeTypeNode.getName()+" template").append("*/");
-        skinNode = addNewSkinNode(homeNode, nodeTypeNode, skinName, "-lt", templateData.toString());
-      }
+      StringBuilder templateData = new StringBuilder("/**");
+      templateData.append("LTR stylesheet for "+nodeTypeNode.getName()+" template").append("*/");
+      skinPath = addNewSkinNode(homeNode, nodeTypeNode, skinName, "-lt", templateData.toString());
     } else if(orientation.isRT()) {
-      try {
-        skinNode = nodeTypeNode.getNode(SKINS).getNode(skinName + "-rt");
-      } catch(PathNotFoundException pne) {
-        StringBuilder templateData = new StringBuilder("/**");
-        templateData.append("RTL stylesheet for "+nodeTypeNode.getName()+" template").append("*/");
-        skinNode = addNewSkinNode(homeNode, nodeTypeNode, skinName, "-rt", templateData.toString());
-      }
+      StringBuilder templateData = new StringBuilder("/**");
+      templateData.append("RTL stylesheet for "+nodeTypeNode.getName()+" template").append("*/");
+      skinPath = addNewSkinNode(homeNode, nodeTypeNode, skinName, "-rt", templateData.toString());
     }
     session.logout();
-    return skinNode.getPath();
+    return skinPath;
   }  
   
   /**
@@ -645,8 +622,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @return
    * @throws Exception
    */
-  private Node getContentNode(String templateType, Node templatesHome, String nodeTypeName, 
-      String label, boolean isDocumentTemplate, String templateName) throws Exception {
+  private String getContentNode(String templateType, Node templatesHome, String nodeTypeName, 
+      String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile) throws Exception {
     Node nodeTypeHome = null;
     if (!templatesHome.hasNode(nodeTypeName)) {
       nodeTypeHome = Utils.makePath(templatesHome, nodeTypeName, NT_UNSTRUCTURED);
@@ -664,13 +641,15 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     } catch(PathNotFoundException e) {
       specifiedTemplatesHome = Utils.makePath(nodeTypeHome, templateType, NT_UNSTRUCTURED);
     }
-    Node contentNode = null;
+    String templatePath = null;
     if (specifiedTemplatesHome.hasNode(templateName)) {
-      contentNode = specifiedTemplatesHome.getNode(templateName);
+      templatePath = specifiedTemplatesHome.getNode(templateName).getPath();
     } else {
-      contentNode = specifiedTemplatesHome.addNode(templateName, EXO_TEMPLATE);
+      templatePath = createTemplate(specifiedTemplatesHome, templateName, templateFile, roles);
     }
-    return contentNode;
+    templatesHome.save();
+    templatesHome.getSession().save();
+    return templatePath;
   }
   
   /**
@@ -743,16 +722,17 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @return
    * @throws Exception
    */
-  private boolean hasPermission(String userId,Value[] roles, IdentityRegistry identityRegistry) throws Exception {        
+  private boolean hasPermission(String userId,String roles, IdentityRegistry identityRegistry) throws Exception {        
     if(SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
       return true ;
     } 
     Identity identity = identityRegistry.getIdentity(userId) ;
     if(identity == null) {
       return false ; 
-    }        
-    for (int i = 0; i < roles.length; i++) {
-      String role = roles[i].getString();
+    }
+    String[] listRoles = roles.split("; ");
+    for (int i = 0; i < listRoles.length; i++) {
+      String role = listRoles[i];
       if("*".equalsIgnoreCase(role)) return true ;
       MembershipEntry membershipEntry = MembershipEntry.parse(role) ;
       if(identity.isMemberOf(membershipEntry)) {
@@ -797,18 +777,119 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @return
    * @throws Exception
    */
-  private Node addNewSkinNode(Node templatesHome, Node nodeTypeNode, String skinName, String orientation, 
+  private String addNewSkinNode(Node templatesHome, Node nodeTypeNode, String skinName, String orientation, 
       String templateData) throws Exception {
     String label = nodeTypeNode.getProperty(TEMPLATE_LABEL).getString();
-    Node contentNode = getContentNode(SKINS, templatesHome, nodeTypeNode.getName(), label, 
-        true, skinName + orientation);
-    contentNode.setProperty(EXO_ROLES_PROP, new String[] {"*"});
-    contentNode.setProperty(EXO_TEMPLATE_FILE_PROP, templateData);
-    nodeTypeNode.getSession().save();
-    return nodeTypeNode.getNode(SKINS).getNode(skinName + orientation);
+    return getContentNode(SKINS, templatesHome, nodeTypeNode.getName(), label, true, skinName + orientation, new String[] {"*"}, new ByteArrayInputStream(templateData.getBytes()));
   }
   
   private void removeTemplateNodeTypeList() throws Exception {
     nodeTypeListCached.clearCache();
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile, String repository) throws Exception {
+    Session session = getSession(repository);
+    Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
+    String templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label, 
+        isDocumentTemplate, templateName, roles, templateFile);
+    session.save();
+    session.logout();
+    //Update managedDocumentTypesMap
+    removeCacheTemplate(templatePath);
+    removeTemplateNodeTypeList();
+    updateDocumentsTemplate(isDocumentTemplate, repository, nodeTypeName);
+    return templatePath;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String createTemplate(Node templateFolder, String name, InputStream data, String[] roles) {
+    Session session = null;
+    try {
+      Node contentNode = templateFolder.addNode(name, NodetypeConstant.NT_FILE);
+      Node resourceNode = contentNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.EXO_RESOURCES);
+      resourceNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
+      resourceNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, "application/x-groovy+html");
+      resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
+      resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
+      resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
+      String templatePath = contentNode.getPath();
+      session = getSession(WCMCoreUtils.getRepository(null).getConfiguration().getName());
+      session.save();
+      return templatePath;
+    } catch (Exception e) {
+      LOG.error("An error has been occurred when adding template", e);
+    } finally {
+      if (session != null) session.logout();
+    }
+    return null;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String updateTemplate(Node template, InputStream data, String[] roles) {
+    Session session = null;
+    try {
+      Node resourceNode = template.getNode(NodetypeConstant.JCR_CONTENT);
+      resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
+      resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
+      resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
+      String templatePath = template.getPath();
+      session = getSession(WCMCoreUtils.getRepository(null).getConfiguration().getName());
+      session.save();
+      return templatePath;
+    } catch (Exception e) {
+      LOG.error("An error has been occurred when updating template", e);
+    } finally {
+      if (session != null) session.logout();
+    }
+    return null;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String getTemplate(Node template) {
+    try {
+      Node resourceNode = template.getNode(NodetypeConstant.JCR_CONTENT);
+      return resourceNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+    } catch (Exception e) {
+      LOG.error("An error has been occurred when getting template", e);
+    }
+    return null;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String getTemplateRoles(Node template) {
+    try {
+      Value[] values = template.getNode("jcr:content").getProperty(NodetypeConstant.EXO_ROLES).getValues();
+      StringBuffer roles = new StringBuffer();
+      for (int i = 0; i < values.length; i++) {
+        if (roles.length() > 0)
+          roles.append("; ");
+        roles.append(values[i].getString());
+      }
+      return roles.toString();  
+    } catch (Exception e) {
+      LOG.error("An error has been occurred when getting template's roles", e);
+    }
+    return null;
   }
 }

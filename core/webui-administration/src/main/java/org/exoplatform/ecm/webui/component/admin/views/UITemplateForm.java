@@ -28,13 +28,14 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.groovyscript.text.TemplateService;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -88,8 +89,11 @@ public class UITemplateForm extends UIForm {
   private String              templatePath_;
 
   private VersionNode         rootVersionNode;
+  
+  private org.exoplatform.services.cms.templates.TemplateService     templateService;
 
   public UITemplateForm() throws Exception {
+    templateService = WCMCoreUtils.getService(org.exoplatform.services.cms.templates.TemplateService.class);
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     UIFormSelectBox versions = new UIFormSelectBox(FIELD_VERSION, FIELD_VERSION, options);
     versions.setOnChange("Change");
@@ -237,7 +241,7 @@ public class UITemplateForm extends UIForm {
       UIApplication app = getAncestorOfType(UIApplication.class);
       app.addMessage(new ApplicationMessage("UITemplateForm.msg.version-restored", args));
     }
-    String content = template_.getProperty(Utils.EXO_TEMPLATEFILE).getString();
+    String content = templateService.getTemplate(template_);
     getUIFormTextAreaInput(FIELD_CONTENT).setValue(Utils.encodeHTML(content));
   }
 
@@ -378,7 +382,7 @@ public class UITemplateForm extends UIForm {
       String path = uiForm.template_.getVersionHistory().getVersion(version).getPath();
       VersionNode versionNode = uiForm.rootVersionNode.findVersionNode(path);
       Node frozenNode = versionNode.getVersion().getNode(Utils.JCR_FROZEN);
-      String content = frozenNode.getProperty(Utils.EXO_TEMPLATEFILE).getString();
+      String content = uiForm.templateService.getTemplate(frozenNode);
       uiForm.getUIFormTextAreaInput(FIELD_CONTENT).setValue(content);
       UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ECMTempForm)) {

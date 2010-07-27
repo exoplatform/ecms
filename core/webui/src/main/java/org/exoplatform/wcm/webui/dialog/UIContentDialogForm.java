@@ -298,7 +298,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
   	DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig(this.repositoryName).getSystemWorkspace();
-    return new JCRResourceResolver(this.repositoryName, workspace, TemplateService.EXO_TEMPLATE_FILE_PROP);
+    return new JCRResourceResolver(this.repositoryName, workspace);
   }
 
   /**

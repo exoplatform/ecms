@@ -16,15 +16,15 @@
  */
 package org.exoplatform.services.cms.templates;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.nodetype.NodeType;
+import javax.jcr.Session;
 
 import org.exoplatform.services.cms.templates.impl.TemplatePlugin;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 
@@ -46,9 +46,6 @@ public interface TemplateService {
   static final public String DEFAULT_VIEWS_PATH = "/" + VIEWS + "/" + DEFAULT_VIEW;
     
   static final public String NT_UNSTRUCTURED = "nt:unstructured".intern() ;
-  static final public String EXO_TEMPLATE = "exo:template".intern() ;
-  static final public String EXO_ROLES_PROP = "exo:roles".intern() ;
-  static final public String EXO_TEMPLATE_FILE_PROP = "exo:templateFile".intern() ;  
   static final public String DOCUMENT_TEMPLATE_PROP = "isDocumentTemplate".intern() ;  
   static final public String TEMPLATE_LABEL = "label".intern() ;
   
@@ -190,10 +187,12 @@ public interface TemplateService {
    *                            The file of template
    * @param repository          String
    *                            The name of repository
+   * @deprecated Since WCM 2.1 you should use {@link #addTemplate(String, String, String, boolean, String, String[], InputStream, String)} instead
    * @see                       Session
    * @see                       Node                            
    * @throws Exception
    */
+  @Deprecated
   public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, 
       String[] roles, String templateFile, String repository) throws Exception;  
 
@@ -299,10 +298,12 @@ public interface TemplateService {
    *                        The name of teamplate
    * @param repository      String
    *                        The name of repository
+   * @deprecated Since WCM 2.1 you should use {@link #getTemplateRoles(Node)} instead.
    * @see                   Session
    * @see                   Node                        
    * @throws Exception
    */
+  @Deprecated
   public String getTemplateRoles(String templateType, String nodeTypeName, String templateName, String repository) throws Exception ;
   
   /**
@@ -399,4 +400,59 @@ public interface TemplateService {
    * @return
    */
   public String buildStyleSheet(String nodeTypeName, String repository) throws Exception;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /**
+   * Insert a new template into NodeType by giving the following params
+   * @param templateType        The value which specify the type of template
+   * @param nodeTypeName        The specify name of NodType
+   * @param label               The label of the specified template
+   * @param isDocumentTemplate  The boolean value which yes or no is DocumentTemplate
+   * @param templateName        The name of template
+   * @param roles               The roles of template
+   * @param templateFile        The file of template
+   * @param repository          The name of repository
+   * @see                       Session
+   * @see                       Node                            
+   * @throws Exception
+   */
+  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile, String repository) throws Exception;  
+  
+  /**
+   * Insert a template into JCR database as an nt:file node. This method should be used for all the template types.
+   * @param templateFolder The parent node which contains the template node
+   * @param name The template's name
+   * @param data The template's data
+   * @param roles The template's roles
+   */
+  public String createTemplate(Node templateFolder, String name, InputStream data, String[] roles);
+  
+  /**
+   * Update a template inside JCR database. This method should be used for all the template types.
+   * @param template The template node
+   * @param data The template's data
+   * @param roles The template's roles
+   */
+  public String updateTemplate(Node template, InputStream data, String[] roles);
+  
+  /**
+   * Get a template from JCR database. This method should be used for all the template types.
+   * @param template The template node
+   */
+  public String getTemplate(Node template);
+  
+  /**
+   * Get roles from a template. This method should be used for all the template types.
+   * @param template The template node
+   */
+  public String getTemplateRoles(Node template);
+  
 }

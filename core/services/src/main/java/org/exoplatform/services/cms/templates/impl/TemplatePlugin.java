@@ -42,12 +42,14 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class TemplatePlugin extends BaseComponentPlugin {
 
@@ -64,9 +66,6 @@ public class TemplatePlugin extends BaseComponentPlugin {
   static final public String DEFAULT_VIEWS_PATH = "/" + VIEWS + "/" + DEFAULT_VIEW;
 
   static final public String NT_UNSTRUCTURED = "nt:unstructured".intern() ;
-  static final public String EXO_TEMPLATE = "exo:template".intern() ;
-  static final public String EXO_ROLES_PROP = "exo:roles".intern() ;
-  static final public String EXO_TEMPLATE_FILE_PROP = "exo:templateFile".intern() ;  
   static final public String DOCUMENT_TEMPLATE_PROP = "isDocumentTemplate".intern() ;  
   static final public String TEMPLATE_LABEL = "label".intern() ;
 
@@ -117,6 +116,8 @@ public class TemplatePlugin extends BaseComponentPlugin {
   private String storedLocation_ ;
   private boolean autoCreateInNewRepository_=false;
   private Log log = ExoLogger.getLogger("Templateplugin") ;
+  
+  private TemplateService templateService;
   
   static {
 
@@ -212,6 +213,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
       autoCreateInNewRepository_ = Boolean.parseBoolean(param.getValue()) ;
     }
     dmsConfiguration_ = dmsConfiguration;
+    templateService = WCMCoreUtils.getService(TemplateService.class); 
   }
 
   public void init() throws Exception {               
@@ -238,6 +240,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
     }          
   }
   
+  @SuppressWarnings("unchecked")
   private void addTemplate(TemplateConfig templateConfig, Node templatesHome,String storedLocation) throws Exception{
     NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager() ;
     NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();
@@ -249,6 +252,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
     List nodetypes = templateConfig.getNodeTypes();
     TemplateConfig.NodeType nodeType = null ;       
     Iterator iter = nodetypes.iterator() ;
+    String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
     while(iter.hasNext()) {
       nodeType = (TemplateConfig.NodeType) iter.next();
       if (!listNodeTypeName.contains(nodeType.getNodetypeName())) {
@@ -265,17 +269,14 @@ public class TemplatePlugin extends BaseComponentPlugin {
       nodeTypeHome.setProperty(TEMPLATE_LABEL, nodeType.getLabel()) ;
       
       List dialogs = nodeType.getReferencedDialog();
-      Node dialogsHome = Utils.makePath(nodeTypeHome, DIALOGS, NT_UNSTRUCTURED);
-      addNode(storedLocation, dialogsHome, dialogs);
+      addNode(storedLocation, nodeType, dialogs, DIALOGS, repository);
       
       List views = nodeType.getReferencedView();
-      Node viewsHome = Utils.makePath(nodeTypeHome, VIEWS, NT_UNSTRUCTURED);
-      addNode(storedLocation, viewsHome, views);
+      addNode(storedLocation, nodeType, views, VIEWS, repository);
             
       List skins = nodeType.getReferencedSkin();
       if(skins != null) {
-        Node skinsHome = Utils.makePath(nodeTypeHome, SKINS, NT_UNSTRUCTURED);
-        addNode(storedLocation, skinsHome, skins);
+        addNode(storedLocation, nodeType, skins, SKINS, repository);
       }
     }    
   }
@@ -299,22 +300,18 @@ public class TemplatePlugin extends BaseComponentPlugin {
       templateConfig = (TemplateConfig)object ;
       addTemplate(templateConfig,templatesHome,storedLocation_) ;
     }
-    session.save();
     session.logout();
   }
 
-  private void addNode(String basePath, Node nodeTypeHome, List templates)  throws Exception {
+  @SuppressWarnings("unchecked")
+  private void addNode(String basePath, TemplateConfig.NodeType nodeType, List templates, String templateType, String repository)  throws Exception {
     for (Iterator iterator = templates.iterator(); iterator.hasNext();) {
       TemplateConfig.Template template = (TemplateConfig.Template) iterator.next();
       String templateFileName = template.getTemplateFile();
       String path = basePath + templateFileName;            
       InputStream in = configManager_.getInputStream(path);
-      String nodeName = 
-        templateFileName.substring(templateFileName.lastIndexOf("/") + 1, templateFileName.indexOf("."));
-      if(nodeTypeHome.hasNode(nodeName)) return ;
-      Node contentNode = nodeTypeHome.addNode(nodeName, EXO_TEMPLATE);
-      contentNode.setProperty(EXO_ROLES_PROP, template.getParsedRoles());
-      contentNode.setProperty(EXO_TEMPLATE_FILE_PROP, in);      
+      String nodeName = templateFileName.substring(templateFileName.lastIndexOf("/") + 1, templateFileName.indexOf("."));
+      templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), nodeName, template.getParsedRoles(), in, repository);
     }
   }    
   

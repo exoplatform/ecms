@@ -16,12 +16,13 @@
  */
 package org.exoplatform.services.cms.metadata.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
-import javax.jcr.Value;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.PropertyDefinition;
@@ -31,6 +32,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.metadata.MetadataService;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.templates.impl.TemplatePlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -38,6 +40,7 @@ import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
@@ -52,21 +55,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    * NodeType NT_UNSTRUCTURED
    */
   final static public String NT_UNSTRUCTURED = "nt:unstructured";
-  
-  /**
-   * NodeType EXO_TEMPLATE
-   */
-  final static public String EXO_TEMPLATE = "exo:template";
-  
-  /**
-   * Property name EXO_ROLES_PROP contains permission
-   */
-  final static public String EXO_ROLES_PROP = "exo:roles";
-  
-  /**
-   * Property name EXO_TEMPLATE_FILE_PROP contains content of template
-   */
-  final static public String EXO_TEMPLATE_FILE_PROP = "exo:templateFile";
   
   /**
    * Property name INTERNAL_USE
@@ -123,6 +111,8 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   */   
   private DMSConfiguration dmsConfiguration_;
   private static final Log LOG  = ExoLogger.getLogger(MetadataServiceImpl.class);
+  
+  private TemplateService templateService;
 
   /**
    * Constructor method
@@ -137,6 +127,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     repositoryService_ = repositoryService;
     baseMetadataPath_ = nodeHierarchyCreator_.getJcrPath(BasePath.METADATA_PATH);
     dmsConfiguration_ = dmsConfiguration;
+    templateService = WCMCoreUtils.getService(TemplateService.class);
   }
 
   /**
@@ -204,22 +195,16 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     if(!isAddNew) {
       if(isDialog) {
         Node dialog1 = metadataHome.getNode(nodetype).getNode(DIALOGS).getNode(DIALOG1);
-        dialog1.setProperty(EXO_ROLES_PROP, role.split(";"));
-        dialog1.setProperty(EXO_TEMPLATE_FILE_PROP, content);
-        dialog1.save();
-        path = dialog1.getPath();
+        path = templateService.updateTemplate(dialog1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
       } else {
         Node view1 = metadataHome.getNode(nodetype).getNode(VIEWS).getNode(VIEW1);
-        view1.setProperty(EXO_ROLES_PROP, role.split(";"));
-        view1.setProperty(EXO_TEMPLATE_FILE_PROP, content);
-        view1.save();
-        path = view1.getPath();
+        path = templateService.updateTemplate(view1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
       }      
     } else {
       Node metadata = null;
       if(metadataHome.hasNode(nodetype)) metadata = metadataHome.getNode(nodetype);
       else metadata = metadataHome.addNode(nodetype, NT_UNSTRUCTURED);
-      addTemplate(metadata, role, content, isDialog);
+      addTemplate(metadata, role, new ByteArrayInputStream(content.getBytes()), isDialog);
       metadataHome.save();
     }    
     session.save(); 
@@ -237,21 +222,15 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    * @param content     content of template
    * @throws Exception
    */
-  private void addTemplate(Node nodetype, String role, String content, boolean isDialog) throws Exception {
+  private void addTemplate(Node nodetype, String role, InputStream content, boolean isDialog) throws Exception {
     Node templateHome = createTemplateHome(nodetype, isDialog);
-    Node template = null;
-    if(isDialog) {
-      if(templateHome.hasNode(DIALOG1)) template = templateHome.getNode(DIALOG1);
-      else template = templateHome.addNode(DIALOG1, EXO_TEMPLATE);
-    } else {
-      if(templateHome.hasNode(VIEW1)) template = templateHome.getNode(VIEW1);
-      else template = templateHome.addNode(VIEW1, EXO_TEMPLATE);
-    }    
     String[] arrRoles = {};
     if(role != null) arrRoles = role.split(";");
-    
-    template.setProperty(EXO_ROLES_PROP, arrRoles);
-    template.setProperty(EXO_TEMPLATE_FILE_PROP, content);
+    if(isDialog) {
+      templateService.createTemplate(templateHome, DIALOG1, content, arrRoles);
+    } else {
+      templateService.createTemplate(templateHome, VIEW1, content, arrRoles);
+    }    
   }
 
   /**
@@ -325,7 +304,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     if(isDialog) template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
     else template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     session.logout();
-    return template.getProperty(EXO_TEMPLATE_FILE_PROP).getString();
+    return templateService.getTemplate(template);
   }
 
   /**
@@ -358,14 +337,8 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     } else {
       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     }
-    Value[] values = template.getProperty(EXO_ROLES_PROP).getValues();
-    StringBuffer roles = new StringBuffer();
-    for(int i = 0; i < values.length; i ++ ){
-      if(roles.length() > 0 ) roles.append(";");
-      roles.append(values[i].getString());
-    }
     session.logout();
-    return roles.toString();
+    return templateService.getTemplateRoles(template);
   }  
 
   /**

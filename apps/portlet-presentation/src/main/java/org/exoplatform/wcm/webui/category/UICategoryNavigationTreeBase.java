@@ -33,7 +33,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -133,7 +132,7 @@ public class UICategoryNavigationTreeBase extends UITree {
     String repository = UICategoryNavigationUtils.getPortletPreferences().getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, null);
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
-    return new JCRResourceResolver(repository, workspace, TemplateService.EXO_TEMPLATE_FILE_PROP);
+    return new JCRResourceResolver(repository, workspace);
   }
   
   /* (non-Javadoc)

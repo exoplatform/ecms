@@ -120,11 +120,25 @@ public interface ScriptService {
    *                      The path of script
    * @param repository    String
    *                      The name of repository
+   * @deprecated Since WCM 2.1 you should use {@link #getScriptAsStream(String, String)} instead.
    * @see                 Node                     
    * @return              String
    * @throws Exception
    */
-  public String getScriptAsText(String scriptPath, String repository) throws Exception;        
+  @Deprecated
+  public String getScriptAsText(String scriptPath, String repository) throws Exception;
+  
+  /**
+   * This method will get script by giving the following params: scriptPath, repository  
+   * @param script        Node
+   *                      The script node
+   * @deprecated Since WCM 2.1 you should use {@link #getScriptAsStream(String, String)} instead.
+   * @see                 Node                     
+   * @return              String
+   * @throws Exception
+   */
+  @Deprecated
+  public String getScriptAsText(Node script) throws Exception;
   
   /**
    * This method will add script by giving the following params: name, text, repository, provider 

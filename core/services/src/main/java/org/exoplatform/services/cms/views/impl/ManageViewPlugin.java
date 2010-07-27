@@ -30,6 +30,7 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.TemplateConfig;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
@@ -37,6 +38,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class ManageViewPlugin extends BaseComponentPlugin {
 
@@ -52,6 +54,7 @@ public class ManageViewPlugin extends BaseComponentPlugin {
   private boolean autoCreateInNewRepository_ = false ;  
   private String predefinedViewsLocation_ = "war:/conf/dms/artifacts";
   private DMSConfiguration dmsConfiguration_;
+  private TemplateService templateService;
 
   public ManageViewPlugin(RepositoryService repositoryService, InitParams params, ConfigurationManager cservice, 
       NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration) throws Exception {
@@ -68,6 +71,7 @@ public class ManageViewPlugin extends BaseComponentPlugin {
       predefinedViewsLocation_ = predefinedViewLocation.getValue();
     }
     dmsConfiguration_ = dmsConfiguration;
+    templateService = WCMCoreUtils.getService(TemplateService.class);
   }
 
   public void init() throws Exception {    
@@ -123,7 +127,6 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     session.logout();
   }
   
-  @SuppressWarnings("hiding")
   private Node addView(Node viewManager, String name, String permissions, String template) throws Exception {
     Node contentNode = viewManager.addNode(name, "exo:view");
     contentNode.setProperty("exo:accessPermissions", permissions);
@@ -132,7 +135,6 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     return contentNode ;
   }
   
-  @SuppressWarnings("hiding")
   private void addTab(Node view, String name, String buttons) throws Exception {
     Node tab ;
     if(view.hasNode(name)){
@@ -164,8 +166,6 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     if(templateHomeNode.hasNode(templateName)) return  ;
     String warPath = warViewPath + tempObject.getWarPath() ;
     InputStream in = cservice_.getInputStream(warPath) ;
-    Node templateNode = templateHomeNode.addNode(templateName,"exo:template") ;
-    templateNode.setProperty("exo:templateFile", in) ;
-    templateHomeNode.save() ;     
+    templateService.createTemplate(templateHomeNode, templateName, in, new String[] {"*"});
   }
 }

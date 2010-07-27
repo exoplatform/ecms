@@ -25,16 +25,14 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.resolver.ResourceKey;
 import org.exoplatform.resolver.ResourceResolver;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -46,6 +44,7 @@ public class JCRResourceResolver extends ResourceResolver {
   protected String propertyName ;
   /** The log. */
   private static Log LOG = ExoLogger.getLogger("ecm:JCRResourceResolver");
+  private TemplateService templateService;
 
   /**
    * Instantiates a new jCR resource resolver 
@@ -54,17 +53,30 @@ public class JCRResourceResolver extends ResourceResolver {
    * @param repository the repository
    * @param workspace the workspace
    * @param propertyName the property name
+   * @deprecated Since WCM 2.1 you don't need to add the property's name as a parameter anymore
    */
+  @Deprecated
   public JCRResourceResolver(String repository,String workspace,String propertyName) {
+    this(repository, workspace);
+  }
+  
+  /**
+   * Instantiates a new jCR resource resolver 
+   * to load template that stored as a property of node in jcr
+   * 
+   * @param repository the repository
+   * @param workspace the workspace
+   * @param propertyName the property name
+   */
+  public JCRResourceResolver(String repository,String workspace) {
     this.repository = repository ;
-    this.workspace = workspace;    
-    this.propertyName = propertyName ;
+    this.workspace = workspace;
+    templateService = WCMCoreUtils.getService(TemplateService.class);
   }
 
   /* (non-Javadoc)
    * @see org.exoplatform.resolver.ResourceResolver#getResource(java.lang.String)
    */
-  @SuppressWarnings("unused")
   public URL getResource(String url) throws Exception {
     throw new Exception("This method is not  supported") ;  
   }
@@ -74,17 +86,12 @@ public class JCRResourceResolver extends ResourceResolver {
    * @see org.exoplatform.resolver.ResourceResolver#getInputStream(java.lang.String)
    */
   public InputStream getInputStream(String url) throws Exception  {
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    RepositoryService repositoryService = 
-      (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class) ;
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository) ;
-    //Use system session to access jcr resource
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
-    Session session = provider.getSession(workspace,manageableRepository);
+    Session session = provider.getSession(workspace, WCMCoreUtils.getRepository(repository));
     ByteArrayInputStream inputStream = null;
     try {
-      inputStream = 
-        new ByteArrayInputStream(((Node)session.getItem(removeScheme(url))).getProperty(propertyName).getString().getBytes()); 
+      Node template = (Node)session.getItem(removeScheme(url));
+      inputStream = new ByteArrayInputStream(templateService.getTemplate(template).getBytes()); 
     } catch(Exception e) {
       LOG.error("Unexpected problem happen when try to process with url");
     } finally {
@@ -96,7 +103,6 @@ public class JCRResourceResolver extends ResourceResolver {
   /* (non-Javadoc)
    * @see org.exoplatform.resolver.ResourceResolver#getResources(java.lang.String)
    */
-  @SuppressWarnings("unused")
   public List<URL> getResources(String url) throws Exception {
     throw new Exception("This method is not  supported") ;
   }
@@ -113,7 +119,6 @@ public class JCRResourceResolver extends ResourceResolver {
   /* (non-Javadoc)
    * @see org.exoplatform.resolver.ResourceResolver#isModified(java.lang.String, long)
    */
-  @SuppressWarnings("unused")
   public boolean isModified(String url, long lastAccess) {  return false ; }
 
   /* (non-Javadoc)

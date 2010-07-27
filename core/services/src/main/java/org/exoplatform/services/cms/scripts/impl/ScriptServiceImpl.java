@@ -54,6 +54,8 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class ScriptServiceImpl extends BaseResourceLoaderService implements ScriptService, EventListener {
 
@@ -282,10 +284,16 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String getScriptAsText(String scriptName, String repository) throws Exception {
     return getResourceAsText(scriptName, repository);
   }
-
+  
+  @Deprecated
+  public String getScriptAsText(Node script) throws Exception {
+    return script.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString();
+  }
+  
   @SuppressWarnings("unused")
   /**
    * {@inheritDoc}
@@ -441,9 +449,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
         InputStream in = null;
         SessionProvider provider = SessionProvider.createSystemProvider() ;
         try {
-          Node scriptsHome = getResourcesHome(repository,provider);
-          Node scriptNode = scriptsHome.getNode(nodeName);
-          in = scriptNode.getProperty("jcr:data").getStream();
+          in = WCMCoreUtils.getService(BaseResourceLoaderService.class).getResourceAsStream(nodeName, repository);
           provider.close();
         } catch (Exception e) {
           provider.close();
