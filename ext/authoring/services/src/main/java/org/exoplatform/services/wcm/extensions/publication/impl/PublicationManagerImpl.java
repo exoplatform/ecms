@@ -168,6 +168,8 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
 		  cal.add(Calendar.DAY_OF_YEAR, Integer.parseInt(date));
 		  query.append(" and publication:startPublishedDate<=TIMESTAMP '"+getISO8601Date(cal)+"'");
 		  query.append(" order by publication:startPublishedDate asc");
+	  } else {
+		  query.append(" order by exo:dateModified desc");
 	  }
 	  filters.put(WCMComposer.FILTER_QUERY_FULL, query.toString());
 	  if (log.isInfoEnabled()) log.info("query="+query.toString());

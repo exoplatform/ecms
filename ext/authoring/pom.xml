@@ -12,5 +12,7 @@
   <description>eXo Entreprise Content Management Suite :: Extensions :: Authoring</description>
   <modules>
     <module>services</module>
+    <module>webui</module>
+    <module>apps</module>
   </modules>
 </project>

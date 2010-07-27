@@ -13,6 +13,7 @@ import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
 
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PageNavigation;
 import org.exoplatform.portal.webui.util.Util;
@@ -82,6 +83,9 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     VersionLog versionLog = null;
     ValueFactory valueFactory = node.getSession().getValueFactory();
     String containerName = context.get("containerName");
+    try {
+    	containerName = PortalContainer.getCurrentPortalContainerName();
+    } catch (Exception e) {}
     if (PublicationDefaultStates.PENDING.equals(newState)) {
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,

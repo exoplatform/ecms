@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+	<external-component-plugins>
+		<!-- The full qualified name of the UIExtensionManager that manages all the UI Extensions -->
+		<target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+		<component-plugin>
+			<name>add.action</name>
+			<!-- The method to call to register a new UI Extension -->
+			<set-method>registerUIExtensionPlugin</set-method>
+			<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+			<init-params>
+				<object-param>
+					<name>PublicationRequestApproval</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<!-- The type of extension, here it is the type related to the Action Bar in the File Explorer -->
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<!-- The name of your action -->
+						<field name="name"><string>PublicationRequestApproval</string></field>
+						<!-- The full qualified name of your webui component -->
+						<field name="component"><string>org.exoplatform.wcm.extensions.ui.PublicationRequestApprovalAction</string></field>
+						<!-- The external filters -->
+						<field name="extendedFilters">
+							<collection type="java.util.ArrayList">
+								<value>									
+									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+										<field name="permissions">
+											<collection type="java.util.ArrayList">
+												<value>
+													<string>*:/platform/web-contributors</string>
+												</value>
+											</collection>
+										</field>
+									</object>
+								</value>
+							</collection>
+						</field>
+					</object>
+				</object-param>
+				<object-param>
+					<name>PublicationApproveContent</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<!-- The type of extension, here it is the type related to the Action Bar in the File Explorer -->
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<!-- The name of your action -->
+						<field name="name"><string>PublicationApproveContent</string></field>
+						<!-- The full qualified name of your webui component -->
+						<field name="component"><string>org.exoplatform.wcm.extensions.ui.PublicationApproveContentAction</string></field>
+						<!-- The external filters -->
+						<field name="extendedFilters">
+							<collection type="java.util.ArrayList">
+								<value>									
+									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+										<field name="permissions">
+											<collection type="java.util.ArrayList">
+												<value>
+													<string>*:/platform/web-contributors</string>
+												</value>
+											</collection>
+										</field>
+									</object>
+								</value>
+							</collection>
+						</field>
+					</object>
+				</object-param>
+				<object-param>
+					<name>PublicationPublish</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<!-- The type of extension, here it is the type related to the Action Bar in the File Explorer -->
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<!-- The name of your action -->
+						<field name="name"><string>PublicationPublish</string></field>
+						<!-- The full qualified name of your webui component -->
+						<field name="component"><string>org.exoplatform.wcm.extensions.ui.PublicationPublishAction</string></field>
+						<!-- The external filters -->
+						<field name="extendedFilters">
+							<collection type="java.util.ArrayList">
+								<value>									
+									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+										<field name="permissions">
+											<collection type="java.util.ArrayList">
+												<value>
+													<string>*:/platform/web-contributors</string>
+												</value>
+											</collection>
+										</field>
+									</object>
+								</value>
+							</collection>
+						</field>
+					</object>
+				</object-param>
+				<object-param>
+					<name>ShowDrives</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<!-- The type of extension, here it is the type related to the Action Bar in the File Explorer -->
+						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
+						<!-- The name of your action -->
+						<field name="name"><string>ShowDrives</string></field>
+						<!-- The full qualified name of your webui component -->
+						<field name="component"><string>org.exoplatform.wcm.extensions.ui.ShowDrivesAction</string></field>
+						<!-- The external filters -->
+						<field name="extendedFilters">
+							<collection type="java.util.ArrayList">
+								<value>									
+									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+										<field name="permissions">
+											<collection type="java.util.ArrayList">
+												<value>
+													<string>*:/platform/web-contributors</string>
+												</value>
+											</collection>
+										</field>
+									</object>
+								</value>
+							</collection>
+						</field>
+					</object>
+				</object-param>
+			</init-params>
+		</component-plugin>
+	</external-component-plugins>
+
+  <external-component-plugins>
+    <!-- The full qualified name of the ResourceBundleService -->
+    <target-component>org.exoplatform.services.resources.ResourceBundleService</target-component>
+    <component-plugin>
+      <!-- The name of the plugin -->
+      <name>Sample ResourceBundle Plugin</name>
+      <!-- The name of the method to call on the ResourceBundleService in order to register the ResourceBundles -->
+      <set-method>addResourceBundle</set-method>
+      <!-- The full qualified name of the BaseResourceBundlePlugin -->
+      <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
+      <init-params>
+        <values-param>
+          <name>portal.resource.names</name>
+          <description>The properties files of the portal , those file will be merged
+            into one ResoruceBundle properties </description>
+          <value>locale.portlet.explorer.JCRExplorerPortlet</value>
+          <value>locale.portlet.administration.ECMAdminPortlet</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+<!--
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>PublicationService.event.postUpdateState</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.wcm.authoring.listener.PostUpdateStateEventListener</type>
+      <description>this listener will send a mail when changing the state of a content</description>
+    </component-plugin>
+  </external-component-plugins>
+-->
+  
+</configuration>

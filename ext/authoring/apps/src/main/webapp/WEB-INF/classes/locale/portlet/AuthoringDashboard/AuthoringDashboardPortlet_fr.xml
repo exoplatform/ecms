@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Tableau de bord</title>
+      <nocontent>Aucun contenu</nocontent>
+      <mydraft>Mes brouillons</mydraft>
+      <waitingapproval>En attente d'approbation</waitingapproval>
+      <approve>Approuver</approve>
+      <publishedtomorrow>Publiés demain</publishedtomorrow>
+    </label>
+  </UIDashboardForm>
+</bundle>
