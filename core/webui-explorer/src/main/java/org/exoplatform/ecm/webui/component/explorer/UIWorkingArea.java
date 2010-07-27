@@ -162,9 +162,10 @@ public class UIWorkingArea extends UIContainer {
     return virtualClipboards_;
   }
 
+//Should use this method to check for when execute Actions in Working Area instead in UIEditingTagsForm (line 120)
   public boolean isShowSideBar() throws Exception {
-    UIJCRExplorer jcrExplorer = getParent();
-    return jcrExplorer.getPreference().isShowSideBar();
+   UIJCRExplorer jcrExplorer = getParent();
+   return jcrExplorer.getPreference().isShowSideBar() && getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar();
   }
 
   public void setShowSideBar(boolean b) throws Exception {

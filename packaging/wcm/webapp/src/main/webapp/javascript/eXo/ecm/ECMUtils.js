@@ -424,6 +424,7 @@
 	
 	ECMUtils.prototype.checkAvailableSpace = function() { 
 		var actionBar = document.getElementById('UIActionBar');
+		if (!actionBar) return;
 		var prtNode = document.getElementById('DMSMenuItemContainer');
 		var uiTabs = DOM.findDescendantsByClass(prtNode, "div", "SubTabItem");
 		var listHideIcon = document.getElementById('IconListHideElement');
