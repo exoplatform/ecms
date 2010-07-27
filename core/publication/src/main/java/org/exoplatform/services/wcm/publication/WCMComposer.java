@@ -154,4 +154,12 @@ public interface WCMComposer {
 	 * @throws Exception the exception
 	 */
 	public void cleanTemplates() throws Exception ;
+	
+	/**
+	 * Check isCache or not  
+	 * @return
+	 * @throws Exception the exception
+	 */
+	public boolean isCached() throws Exception;
+	
 }
