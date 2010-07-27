@@ -20,7 +20,6 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
-import javax.jcr.Value;
 import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.services.cms.BasePath;
@@ -109,15 +108,10 @@ public class TestMetadataService extends BaseDMSTestCase {
     metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators;*:/platform/users", "This is content", true, REPO_NAME);
     
     Node myMetadata = (Node)sessionDMS.getItem("/exo:ecm/metadata/exo:article/dialogs/dialog1");
-    assertEquals("This is content", myMetadata.getProperty("exo:templateFile").getString());
+    assertEquals("This is content", myMetadata.getNode("jcr:content").getProperty("jcr:data").getString());
     
-    Value[] values = myMetadata.getProperty("exo:roles").getValues();
-    StringBuffer roles = new StringBuffer();
-    for(int i = 0; i < values.length; i ++ ) {
-      if(roles.length() > 0 ) roles.append(";");
-      roles.append(values[i].getString());
-    }
-    assertEquals("*:/platform/administrators;*:/platform/users", roles.toString());
+    String roles = metadataService.getMetadataRoles(EXO_ARTICLE, true, repository.getConfiguration().getName());
+    assertEquals("*:/platform/administrators; *:/platform/users", roles);
   }
   
   /**

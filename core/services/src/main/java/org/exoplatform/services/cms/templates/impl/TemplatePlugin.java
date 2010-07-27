@@ -300,6 +300,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
       templateConfig = (TemplateConfig)object ;
       addTemplate(templateConfig,templatesHome,storedLocation_) ;
     }
+    session.save();
     session.logout();
   }
 

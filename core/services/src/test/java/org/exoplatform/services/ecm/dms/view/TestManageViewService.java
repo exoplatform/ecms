@@ -318,15 +318,10 @@ public class TestManageViewService extends BaseDMSTestCase {
     
     manageViewService.addTemplate("SimpleView", templateFile, templatesPathEx, REPO_NAME);
     Node simpleViewNode = (Node)sessionDMS.getItem(templatesPathEx + "/SimpleView");
-    assertEquals(TEMPLATE_NODETYPE, simpleViewNode.getPrimaryNodeType().getName());
-    assertEquals(templateFile, simpleViewNode.getProperty("exo:templateFile").getString());
+    assertEquals("nt:file", simpleViewNode.getPrimaryNodeType().getName());
+    assertEquals(templateFile, simpleViewNode.getNode("jcr:content").getProperty("jcr:data").getString());
     
     manageViewService.removeTemplate(templatesPathEx + "/SimpleView", REPO_NAME);
-    
-    manageViewService.addTemplate("SystemView", templateFile, templatesPathEx, REPO_NAME);
-    Node systemViewNode = (Node)sessionDMS.getItem(templatesPathEx + "/SystemView");
-    assertEquals(TEMPLATE_NODETYPE, systemViewNode.getPrimaryNodeType().getName());
-    assertEquals(templateFile, systemViewNode.getProperty("exo:templateFile").getString());
   }
   
   /**

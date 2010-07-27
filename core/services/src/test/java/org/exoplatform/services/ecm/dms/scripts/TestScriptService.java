@@ -207,7 +207,7 @@ public class TestScriptService extends BaseDMSTestCase {
     scriptService.addScript("Hello Name", "Hello Text", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
     Node hello = (Node)sessionDMS.getItem("/exo:ecm/scripts/Hello Name");
     assertNotNull(hello);    
-    assertEquals("Hello Text", hello.getProperty("jcr:data").getString());
+    assertEquals("Hello Text", hello.getNode("jcr:content").getProperty("jcr:data").getString());
   }
   
   /**
@@ -239,7 +239,7 @@ public class TestScriptService extends BaseDMSTestCase {
     
     Node scriptNode = scriptService.getScriptNode("My script 2", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
     assertEquals("My script 2", scriptNode.getName());
-    assertEquals("This is my script as text 2", scriptNode.getProperty("jcr:data").getString());
+    assertEquals("This is my script as text 2", scriptNode.getNode("jcr:content").getProperty("jcr:data").getString());
   }
 
   /**
@@ -258,7 +258,7 @@ public class TestScriptService extends BaseDMSTestCase {
     Node hello = scriptService.getScriptNode("Hello Name", REPO_NAME, 
         sessionProviderService_.getSystemSessionProvider(null));
     assertNotNull(hello);
-    assertEquals("Hello Text", hello.getProperty("jcr:data").getString());
+    assertEquals("Hello Text", hello.getNode("jcr:content").getProperty("jcr:data").getString());
     
     scriptService.removeScript("Hello Name", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null));
     assertNull(scriptService.getScriptNode("Hello Name", REPO_NAME, sessionProviderService_.getSystemSessionProvider(null)));

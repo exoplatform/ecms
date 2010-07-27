@@ -487,8 +487,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     NodeIterator templateIter = nodeTypeNode.getNode(type).getNodes();
     while (templateIter.hasNext()) {
       Node node = templateIter.nextNode();
-      Value[] roles = node.getProperty(NodetypeConstant.EXO_ROLES).getValues();
-      if(hasPublicTemplate(roles)) {
+      String role = getTemplateRoles(node);
+      if(hasPublicTemplate(role)) {
         String templatePath = node.getPath() ;
         session.logout();
         return templatePath ;
@@ -748,10 +748,10 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @return
    * @throws Exception
    */
-  private boolean hasPublicTemplate(Value[] roles) throws Exception {
+  private boolean hasPublicTemplate(String role) throws Exception {
+    String[] roles = role.split("; ");
     for (int i = 0; i < roles.length; i++) {
-      String role = roles[i].getString();
-      if("*".equalsIgnoreCase(role)) return true ;
+      if("*".equalsIgnoreCase(roles[i])) return true ;
     }
     return false ;
   }
