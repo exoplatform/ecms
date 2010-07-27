@@ -28,6 +28,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFil
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIAddLanguageContainer;
@@ -55,7 +56,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class MultiLanguageActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter("UIActionBar.msg.multilang-checkedin"), new IsDocumentFilter("UIActionBar.msg.unsupported-multilanguage")});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter("UIActionBar.msg.multilang-checkedin"), new IsDocumentFilter("UIActionBar.msg.unsupported-multilanguage"), new IsNotEditingDocumentFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

@@ -16,7 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.control.action;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIExportNode;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -24,6 +28,8 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.ext.filter.UIExtensionFilter;
+import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
 /**
  * Created by The eXo Platform SAS
@@ -38,6 +44,13 @@ import org.exoplatform.webui.event.Event;
  )
 public class ExportNodeActionComponent extends UIComponent {
   
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{ new IsNotEditingDocumentFilter()});
+  
+  @UIExtensionFilters
+  public List<UIExtensionFilter> getFilters() {
+    return FILTERS;
+  }	
+	
   public static class ExportNodeActionListener extends UIActionBarActionListener<ExportNodeActionComponent> {
     public void processEvent(Event<ExportNodeActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);                   

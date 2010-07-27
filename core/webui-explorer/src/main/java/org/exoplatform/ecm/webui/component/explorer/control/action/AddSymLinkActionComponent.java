@@ -32,6 +32,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotSymlinkFilter;
@@ -72,7 +73,8 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
   																				new IsCheckedOutFilter(), 
   																				new IsNotSymlinkFilter(),
   																				new IsNotTrashHomeNodeFilter(),
-  																				new IsNotInTrashFilter()});
+  																				new IsNotInTrashFilter(),
+  																				new IsNotEditingDocumentFilter()});
   
 	private static final Log LOG = ExoLogger.getLogger(AddSymLinkActionComponent.class);
   

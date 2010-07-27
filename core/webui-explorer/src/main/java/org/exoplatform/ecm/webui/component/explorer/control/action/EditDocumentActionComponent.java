@@ -36,10 +36,12 @@ import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsEditableFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
@@ -55,6 +57,7 @@ import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -82,10 +85,10 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
       new IsDocumentFilter(), new IsEditableFilter(), new CanSetPropertyFilter(),
-      new IsNotLockedFilter(), new IsCheckedOutFilter(), new IsNotInTrashFilter() });
+      new IsNotLockedFilter(), new IsCheckedOutFilter(), new IsNotInTrashFilter(), new IsNotEditingDocumentFilter() });
   
   @UIExtensionFilters
-  public List<UIExtensionFilter> getFilters() {
+  public static List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
   
@@ -93,14 +96,17 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
     node.refresh(true);
   }
 
-  public static void editDocument(Event<? extends UIComponent> event,
-                                  UIComponent uicomp,
+  public static void editDocument(Event <? extends UIComponent> event,
+  																WebuiRequestContext context,
+  																UIComponent comp,
                                   UIJCRExplorer uiExplorer,
                                   Node selectedNode,
                                   UIApplication uiApp) throws RepositoryException,
                                                       Exception,
                                                       ValueFormatException,
                                                       PathNotFoundException {
+  	if (event != null) 
+  		context = event.getRequestContext();
     if (selectedNode.isNodeType(Utils.EXO_ACTION)) {
       UIActionContainer uiContainer = uiExplorer.createUIComponent(UIActionContainer.class, null, null);
       uiExplorer.setIsHidePopup(true);
@@ -113,7 +119,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       uiActionForm.setStoredPath(selectedNode.getPath());
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiContainer, 700, 550);
-      event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+      context.addUIComponentToUpdateByAjax(UIPopupContainer);
     } else {
       String nodeType = null;
       if(selectedNode.hasProperty("exo:presentationType")) {
@@ -122,13 +128,15 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         nodeType = selectedNode.getPrimaryNodeType().getName();
       }        
       UIDocumentFormController uiController = 
-        event.getSource().createUIComponent(UIDocumentFormController.class, null, "EditFormController");
+      	event != null ?
+        event.getSource().createUIComponent(UIDocumentFormController.class, null, "EditFormController") :
+        comp.createUIComponent(UIDocumentFormController.class, null, "EditFormController");
       UIDocumentForm uiDocumentForm = uiController.getChild(UIDocumentForm.class);
       uiDocumentForm.setRepositoryName(uiExplorer.getRepositoryName());
       uiDocumentForm.setContentType(nodeType);
       if(uiDocumentForm.getTemplate() == null) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.template-null", null));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       refresh(selectedNode);
@@ -171,7 +179,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         Object[] arg = { selectedNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
             ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       uiDocumentForm.setNodePath(selectedNode.getPath());
@@ -182,7 +190,8 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       if (uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isEditInNewWindow()) {
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);      
         uiPopupContainer.activate(uiController, 800, 600);          
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
+        context.addUIComponentToUpdateByAjax(uiPopupContainer);
+        context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
       } else {
         UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
         UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
@@ -198,11 +207,13 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         }
         uiDocumentWorkspace.addChild(uiController);
         uiController.setRendered(true);
-        uiExplorer.updateAjax(event);
+        if (event != null) {
+        	uiExplorer.updateAjax(event);
+        }
+        context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
 //        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo");
                
       }
-      return;
     }
   }
   
@@ -224,7 +235,6 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         Session session = uiExplorer.getSessionByWorkspace(wsName);
         UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
         try {
-          uiExplorer.setPathBeforeEditing(uiExplorer.getCurrentPath());        
           // Use the method getNodeByPath because it is link aware
           selectedNode = uiExplorer.getNodeByPath(nodePath, session);
         } catch (PathNotFoundException path) {
@@ -243,8 +253,9 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         }
       }
       if (selectedNode == null)  selectedNode = uiExplorer.getCurrentNode();
+      uiExplorer.setCurrentPath(selectedNode.getPath());
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
-      editDocument(event, uicomp, uiExplorer, selectedNode, uiApp);
+      editDocument(event, null, uicomp, uiExplorer, selectedNode, uiApp);
     }
   }
 

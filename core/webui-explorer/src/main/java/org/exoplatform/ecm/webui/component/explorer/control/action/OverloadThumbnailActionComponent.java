@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionRealNodeListener;
 import org.exoplatform.ecm.webui.component.explorer.thumbnail.UIThumbnailForm;
@@ -44,7 +45,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class OverloadThumbnailActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), new IsNotEditingDocumentFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

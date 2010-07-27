@@ -23,6 +23,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
@@ -48,7 +49,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class ManageActionsActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), new CanSetPropertyFilter(), new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), new CanSetPropertyFilter(), new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new IsNotEditingDocumentFilter()});
   
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
