@@ -15,7 +15,7 @@
   <scm>
     <connection>scm:svn:http://svn.exoplatform.org/projects/ecms/trunk</connection>
     <developerConnection>scm:svn:http://svn.exoplatform.org/projects/ecms/trunk</developerConnection>
-    <url>http://fisheye.exoplatform.org/browse/projects/ecms/trunk</url>
+    <url>http://fisheye.exoplatform.org/browse/ecms/trunk</url>
   </scm>
   <issueManagement>
     <system>jira</system>
