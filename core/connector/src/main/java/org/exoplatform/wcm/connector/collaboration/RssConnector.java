@@ -19,15 +19,11 @@ package org.exoplatform.wcm.connector.collaboration;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -38,12 +34,12 @@ import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
@@ -63,7 +59,7 @@ import com.sun.syndication.io.SyndFeedOutput;
  * 29-08-2009
  */
 
-@Path("/rss/")
+@Path("/feed/")
 public class RssConnector extends BaseConnector implements ResourceContainer {
 
   /** The WORKSPACE. */
@@ -87,20 +83,20 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   /** The LINK. */
   static private String LINK = "exo:link".intern() ;
   
-  /** The QUER y_ path. */
-  static private String QUERY_PATH = "exo:queryPath".intern() ;
-  
   /** The SUMMARY. */
   static private String SUMMARY = "exo:summary";
 
-  /** The repository service. */
-  private RepositoryService repositoryService;
+  /** The detail page */
+  static private String DETAIL_PAGE = "detail-page";
+  
+  /** The detail get param */
+  static private String DETAIL_PARAM = "detail-param";
+  
+  /** The wcm composer service. */
+  private WCMComposer wcmComposer;
   
   /** The wcm configuration service. */
   private WCMConfigurationService wcmConfigurationService;
-  
-  /** The category path. */
-  private String categoryPath;
   
   /** The log. */
   private static Log log = ExoLogger.getLogger(RssConnector.class);
@@ -111,8 +107,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @param container the container
    */
   public RssConnector() {
-    repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+	  wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+      wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
   }
 
   /**
@@ -129,37 +125,59 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @throws Exception the exception
    */
   @GET
-  @Path("/generate/")
+  @Path("/rss/")
 //  @OutputTransformer(XMLOutputTransformer.class)
   public Response generate ( 
       @QueryParam("repository") String repositoryName, 
       @QueryParam("workspace") String workspaceName,
       @QueryParam("server") String server,
       @QueryParam("siteName") String siteName,
-      @QueryParam("categoryPath") String categoryPath,
-	  @QueryParam("recursive") String recursive,
-	  @QueryParam("desc") String desc
+      @QueryParam("title") String title,
+      @QueryParam("desc") String desc,
+      @QueryParam("folderPath") String folderPath,
+      @QueryParam("orderBy") String orderBy,
+      @QueryParam("orderType") String orderType,
+      @QueryParam("lang") String lang,
+      @QueryParam("detailPage") String detailPage,
+      @QueryParam("detailParam") String detailParam,
+	  @QueryParam("recursive") String recursive
 	  ) throws Exception {
     
-    this.categoryPath = categoryPath;
-    String currentCat = categoryPath;
-    if (currentCat.lastIndexOf("/")!=-1) {
-    	currentCat = currentCat.substring(currentCat.lastIndexOf("/")+1);
-    }
     Map<String, String> contextRss = new HashMap<String, String>();
     contextRss.put(REPOSITORY, repositoryName);
     contextRss.put(WORKSPACE, workspaceName);
-    contextRss.put("actionName", "actionName");
     contextRss.put(RSS_VERSION, "rss_2.0");
-    contextRss.put(FEED_TITLE, currentCat);
-    if (desc==null) desc = "Powered by eXo WCM 2.0";
+    contextRss.put(FEED_TITLE, title);
+    if (desc==null) desc = "Powered by eXo "+ProductVersions.getCurrentVersion();
     contextRss.put(DESCRIPTION, desc);
-    String query = "select * from exo:taxonomyLink where jcr:path like '%/"+siteName+"/categories/" + categoryPath + "/%'";
-    if (recursive==null || "false".equals(recursive)) query += " and not jcr:path like '%/"+siteName+"/categories/" + categoryPath + "/%/%'";
-    query += " order by exo:dateCreated DESC";
-    contextRss.put(QUERY_PATH, query);   
     contextRss.put(LINK, server + "/"+PortalContainer.getCurrentPortalContainerName()+"/public/"+siteName);
-    String feedXML = generateRSS(contextRss);
+
+    if (detailPage == null) detailPage  = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
+    contextRss.put(DETAIL_PAGE, detailPage);
+    if (detailParam == null) detailParam  = "content-id";
+    contextRss.put(DETAIL_PARAM, detailParam);
+    
+    
+    HashMap<String, String> filters = new HashMap<String, String>();
+    filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);
+    if (orderType == null) orderType = "DESC";
+    if (orderBy == null) orderBy = "publication:liveDate";
+    if (lang == null) lang = "en";
+    filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
+    filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
+    filters.put(WCMComposer.FILTER_LANGUAGE, lang);
+    filters.put(WCMComposer.FILTER_RECURSIVE, recursive);
+
+    String path=null;
+    if (folderPath!=null) {
+    	path = folderPath;
+    }
+    
+    
+    List<Node> nodes = wcmComposer.getContents(repositoryName, workspaceName, path, filters, WCMCoreUtils.getUserSessionProvider());
+    
+    String feedXML = generateRSS(nodes, contextRss);
+    
     Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(feedXML.getBytes()));
     Response response = Response.ok(new DOMSource(document), MediaType.TEXT_XML).build();
     return response;
@@ -172,22 +190,19 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * 
    * @return the string
    */
-  private String generateRSS(Map<String, String> context) {  
-    String actionName = (String)context.get("actionName") ;
-    String workspace = (String)context.get(WORKSPACE);                   
+  private String generateRSS(List<Node> nodes , Map<String, String> context) {  
     String rssVersion = (String) context.get(RSS_VERSION) ;
     String feedTitle = (String) context.get(FEED_TITLE) ;    
     String feedDescription = (String) context.get(DESCRIPTION) ;
-    String queryPath = (String) context.get(QUERY_PATH) ;
     String feedLink = (String) context.get(LINK) ;
+    String detailPage = (String) context.get(DETAIL_PAGE) ;
+    String detailParam = (String) context.get(DETAIL_PARAM) ;
     String repository = (String) context.get(REPOSITORY) ;
-    if(feedTitle == null || feedTitle.length() == 0) feedTitle = actionName ;
+    String workspace = (String) context.get(WORKSPACE) ;
+    String contentUrl = feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+
+    if(feedTitle == null || feedTitle.length() == 0) feedTitle = "" ;
     try {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-      Session session = sessionProvider.getSession(workspace, repositoryService.getRepository(repository));
-      QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery(queryPath, Query.SQL);
-      QueryResult queryResult = query.execute();            
       
       SyndFeed feed = new SyndFeedImpl();      
       feed.setFeedType(rssVersion);      
@@ -197,21 +212,20 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       feed.setEncoding("UTF-8");
       
       List<SyndEntry> entries = new ArrayList<SyndEntry>();
-      NodeIterator iter = queryResult.getNodes() ;
+      Iterator<Node> iter = nodes.iterator();
       while (iter.hasNext()) {        
-        Node symlink = iter.nextNode();
-        Node realnode = session.getNodeByUUID(symlink.getProperty("exo:uuid").getString());
-        String url = getEntryUrl(feedLink, symlink.getName()) ;
+        Node node = iter.next();
+        String url = contentUrl + node.getPath() ;
         SyndEntry entry = new SyndEntryImpl();
         
-        if (realnode.hasProperty(TITLE)) entry.setTitle(realnode.getProperty(TITLE).getString());                
+        if (node.hasProperty(TITLE)) entry.setTitle(node.getProperty(TITLE).getString());                
         else entry.setTitle("") ;
         
         entry.setLink(url);        
         SyndContent description = new SyndContentImpl();
         description.setType("text/plain");
         
-        if (realnode.hasProperty(SUMMARY)) description.setValue(realnode.getProperty(SUMMARY).getString().replaceAll("&nbsp;", " "));
+        if (node.hasProperty(SUMMARY)) description.setValue(node.getProperty(SUMMARY).getString().replaceAll("&nbsp;", " "));
         else description.setValue("") ;
         
         entry.setDescription(description);        
@@ -230,18 +244,14 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     return null;
   }
 
-  /**
-   * Gets the entry url.
-   * 
-   * @param host the host
-   * @param nodeName the node name
-   * 
-   * @return the entry url
-   */
-  private String getEntryUrl(String host, String nodeName) {
-    String pcvPageUri = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
-    return host + pcvPageUri + "/" + categoryPath +  "/" + nodeName;
-  }
+//  /**
+//   * Gets the entry url.
+//   * 
+//   * @return the entry url
+//   */
+//  private String getEntryUrl(String link, String detailPage, String detailParam, String contentPath) {
+//    return link + "/" + detailPage + "?" + detailParam + "=" +contentPath;
+//  }
   
   /* (non-Javadoc)
    * @see org.exoplatform.wcm.connector.BaseConnector#getContentStorageType()
