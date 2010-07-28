@@ -56,10 +56,6 @@ public class TestMetadataService extends BaseDMSTestCase {
    */
   public void testInit() throws Exception {
     metadataService.init(REPO_NAME);
-    Node myMetadata = (Node)sessionDMS.getItem(baseMetadataPath);
-    assertTrue(myMetadata.getNodes().getSize() > 0);
-    assertTrue(sessionDMS.itemExists(baseMetadataPath));
-    assertTrue(sessionDMS.itemExists(baseMetadataPath + "/dc:elementSet"));
   }
   
   /**
