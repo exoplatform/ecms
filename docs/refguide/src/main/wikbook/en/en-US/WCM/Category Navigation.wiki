@@ -1,0 +1,187 @@
+
+h1. Category Navigation
+
+
+{info}
+Since WCM 1.2
+{info}
+
+
+h2. Overview
+
+
+WCM 1.2 provides users with Category Navigation Portlet and Parameterized Content List Viewer portlet in order to get rid of long URLs and help users see published documents or webcontents in specific categories in one page.
+
+As you know, when you view documents or webcontents by CLV(Content List Viewer), its URLs is too long and complex:
+
+ !URL.png! 
+
+_*Notice*_: Users can see the URL in the address bar or on the status bar when moving the mouse over content titles in the CLV. In these screenshots, the URL is on the status bar.
+
+Thanks to the appearance of Category Navigation Portlet and Parameterized Content List Viewer, users are provided with many benefits, they easily view documents or webcontents in specific categories with shorter and friendly URL:
+
+ !URL1.png! 
+
+
+If someone interested in this new improvement in details, please refer [Content Friendly URL] 
+
+
+
+The category navigation is not so different than the navigation we're using in WCM 1.1. As before, we use the PCV to show a content in a page based on the URL context. More than that, we also use contextual URL to show a list of contents inside a CLV. 
+
+The *News* page that users go to through the Navigation bar is an easy- understandable application of Category Navigation portlet and Parameterized Content List Viewer portlet.
+
+1\. Go to *News* on the navigation bar.
+
+ !News1.png! 
+
+- The left pane: list all the categories that contains documents or webcontents.
+- The right pane: show the documents or webcontents that you have just selected on the left pane.
+
+2. Select the category that you want to view on the left pane, it will be shown on the right(only the published documents and webcontents will be shown) 
+
+ !News3.png! 
+
+
+
+
+
+
+
+
+
+
+
+h1. The Edit Mode of the Category Navigation
+
+Administrators can edit the Category Navigation portlet, following these simple guides:
+
+1\. Go to *Site Administrator* --> *Manage Pages* on the Administration bar. The Manage Pages will appear:
+
+ !CategoryNavigationPortlet.png! 
+
+2. Click the !EditIcon1.2.png! that corresponds with the Category navigation portlet to edit this portlet.
+
+
+ !CategoryNavigationPortlet1.png! 
+
+3. Click the   !EditIcon1.2.png! at the upper right corner of the Category navigation portlet. The edit form will be displayed:
+
+
+ !EditModeCategoryNavigationPortlet.png! 
+
+ 
+Details:
+
+
+|| Field     || Description ||
+| Repository        |			the repository that can be used to store documents or web-contents. |
+| Title     	|					the title that will be displayed in the View mode |
+| UICategoryNavigationTreeNameFormSelectBox   |	the available of taxonomy tree |
+| UICategoryNavigationTemplateFormSelectBox    |	the template of the category navigation. |
+| Target Path         |					the path that will display documents or web-contents.  |
+
+
+
+3. Click !Down.png! to select the repository for documents in the *Repository* field.
+
+4. Input the name of a category in the *Title* field.
+
+5. Select the taxonomy tree for a category.
+
+6. Select the template for displaying categories.
+
+7. Click the  !GlassIcon.png!   icon to select the target path. The *Page selector* form will appear:
+
+ !PageSelector.png! 
+
+8. Click !DownIcon.png! to select the navigation on the left pane. The corresponding pages will be displayed on the left pane and the corresponding paths will be displayed on the right pane.
+
+9. Click the !OKIcon.png! icon to select the path. This path will be displayed in the *Target Path* field.
+
+10. Click the *Save* button to accept saving the configuration for the Category Navigation portlet.
+
+
+
+
+
+h1. The Edit Mode of the Parameterized Content List Viewer portlet
+
+Users are allowed to edit the settings in the Parameterized Content List Viewer portlet by following guides:
+
+
+1\. Turn on the Edit mode of a site
+
+ !EditModeNews.png! 
+
+2. Click the edit !Pen1.2.png!   icon at the upper right corner of this pane, the edit form of Parameterized Content List Viewer will be displayed:
+
+
+ !EditModeContentListViewer.png! 
+
+
+
+
+
+
+
+Details:
+
+
+|| Field     || Description ||
+| Oder by 	|		the priority to order documents or web-contents, descendant means documents or web- contents are ordered according  to the increased date, ascendant means documents are  ordered according to the decreased date. |
+| Header 	        |		the header of  the page that will show documents or web-contents in Paremeterized Content List Viewer. |
+| Viewer template          |			the template that documents or web-contents will be displayed for viewing. |
+| Paginator template	  |	the template that documents or web-contents will be arranged when paginated. |
+| Items per page      |			the number of documents that will be displayed per page.	 |
+| Show title          |			allows showing the title of documents or web-contents. |
+| Show header         |			allows showing headers of documents or web-contents. |
+| Show refresh button     |		allows showing the refresh button. |
+| Show image          |			allows showing  images of documents or web-contents. |
+| Show date created     |		allows showing the date when documents or web-contents are created. |
+| Show more link       |		allows showing more links for documents or web-contents. |
+| Show summary        | 		allows showing summaries of documents or web-contents. |
+| ShowLink                |	allows showing the title of documents or web-contents. |
+| Show RSS link        |		allows showing the RSS link that documents or web-contents have. |
+| Target page         |			the page that users want to link the content. |
+
+
+
+3. Select the type and the order to display the content of documents or web-contents by selecting the *Order by* field  and the *Descendant* and *Ascendant* check box. 
+
+4. Click  !ArrowDown.png!   to select the template for Viewer and Paginator.
+
+5. Input the number of items that will be displayed per page in this portlet.
+
+6. Select or unselect the *Show title*, *Show header*, *Show Refresh*, etc button check box if you want or don't want to show them.
+
+
+7. Click the magnifying glass !MagnifyIcon.png!  icon to select the target page. The *Page selector* form will appear:
+
+
+ !PageSelector.png! 
+
+- Click !ArrowDown1.png!  to select the navigation, the corresponding pages will be displayed on the left pane and the corresponding path will be displayed on the right pane.
+
+- Click the !OKIcon1.png!  icon that corresponds to the selected path on the right pane to select  the path. The selected path that you choose will be displayed in the *Target Path* field.
+
+8. Click the *Save* button to accept saving changes or the *Cancel* button to quit without saving.
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

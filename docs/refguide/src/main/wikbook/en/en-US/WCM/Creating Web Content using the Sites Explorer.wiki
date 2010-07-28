@@ -1,0 +1,31 @@
+h1. Creating Web Content using the Sites Explorer 
+
+Following these simple guides to add a new web content into a specific site: 
+
+1\. Login by advanced user.
+
+2. Select any view in *Select View* and select *Actions* item to show some actions on the *Action* bar:
+
+3. Select the *Web content*�folder on the left like:
+
+ !WCSitesE.PNG! 
+ 
+
+4. Show the *Add New Document* form by clicking the icon on the *Action* bar. 
+
+5. To add a new content, select *Web content* in Select Template field in the *Add New Document* form:
+
+
+ !WCDir.PNG! 
+
+6. Users can choose a template to create a web content:
+- Picture on head layout webcontent.
+- Two columns layout webcontent.
+- Free layout webcontent.
+ !PC1.gif! 
+
+ 
+- Picture on head layout webcontent: In content of a site, there are two spaces. One for inserting an image and one for editing the site's content.
+- Two columns layout webcontent: Site's content is divided into two parts by two columns. You can insert content into each part.
+- Free layout webcontent: this layout allows you inserting anything into the *Main content* field without dividing this space.
+ 

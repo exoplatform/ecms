@@ -1,0 +1,97 @@
+h1. Using WebDAV with Dreamweaver
+
+{info}
+This tutorial is only for 1.0.x and later version
+{info}
+
+1\. Install Dreamweaver CS3.
+
+2. Open Dreamweaver CS3.
+
+3. On Menu bar choose *Site*--> *New Site* then it will display a form to create a new Dreamweaver site definition:
+
+ !DW1.png! 
+
+
+In here you can take some actions to connect between server site and local site to edit the web content, CSS file and JS file with Dreamweaver editor.
+
+4. On the *Site name* textbox !DW2.png! , here is the name of site which you want to do with. In here I type "WCM_eXo_site"
+
+5. On *Local root folder* !DW3.png ! , here you click on the !DW4.png! icon to choose which folder on local computer that you want to store and manage site.
+
+6. On *HTTP address* textbox !DW5.png! you type the public address of your website, in here I type "http://localhost:8080/portal/public/classic".
+
+7. Then choose the *Remote info* in *Advanced* tab. In the *Access* textbox choose *WebDAV*.
+
+8. In URL textbox type WebDAV link of your site.
+
+9. In the *Login* and *Password* textbox, type the username and password which you use to login on your site.
+
+10. After that, click on the *Test* button to test the connection with server. If it is connected, it will display:
+
+ !DW8.png! 
+
+11\. After being connected, you should see a list of files in the *Remote Site* panel:
+
+ !DW10.png! 
+
+12. Select the top-most folder in either the *Remote Site* or *Local Files* panel.
+
+13. Click the down arrow button !DW11.png! to "Get" files from the *Remote Site*. You will see an alert that *"you are copying the entire site"*. Click the *OK* button.
+
+14. You can click *No* when prompted about dependent files when getting the whole site.
+
+15. You should now have list of files in your Local Folder:
+
+ !DW13.png! 
+
+You now have all your site files and are one step away from editing your pages. If you open any page file, it doesn't look like it does on the browser. Set up your local Templates folder next. 
+ * *We can edit pages with Dreamweaver*
+
+If you want to edit a content, do as follows:
+
+    * Click the *Web Content* folder on the local files panel.
+    * Click the *site artifacts* folder -> Click the *banner* folder-> Click the *Default* folder--> Double click the *Default.html* file. It will display a form to edit HTML file. In here we can see, i have just edited the class "BannerTitle" in the 'Default.html' file:
+
+ !DW14.png! 
+
+ After finishing the edition of HTML file, you choose *File*--> choose *Save* to save all changes in this file. After that you can see all changes on Browser as:
+
+ !DW15.png! 
+
+* *We can edit CSS file with Dreamweaver*
+
+If you want to edit CSS file, do as below:
+
+    * Click *Web Content* folder on the local files panel.
+    * Click the *site artifacts* folder -> Click the *banner* folder -> Click the *CSS* folder --> Double click the *Default.css* file. It will display a form to edit HTML file. In here we can see, I have just edited the class "BannerTitle" in 'Default.css' file and from *color: #bebebe;* to *color: red;* and *font-family: Tahoma;* to *font-family: Arial;*
+as picture below:
+
+ !DW16.png! 
+
+   * After finishing all changes-> click *File* -> click *Save* to save all changes in CSS file. And then we can come back HTML file to see all changes in CSS file which will affect to HTML.
+
+ !DW17.png! 
+
+
+As picture above, we can see that the content was changed as all changes in CSS file.
+
+* *We can create web content with Dreamweaver*
+
+If you want to create web content, do as below:
+
+* Click the *Web Content* folder on the local files panel.
+* Click *File*-> Click *New*-> it will display a form to create the HTML code.
+* Create HTML code -> then click *File* -> Click *Save*.
+* Then click the !Dw20.png! synchronize icon to put this content to server file, as you can see here:
+
+ !DW18.png! 
+
+After that, we can come back to the browser to run eXo WCM, in which we can see this content on *Sites explorer* as:
+
+In here I have just created new web content named _New_Content_. After saving and synchronizing the server file, New_Content will become web content with same structures with other contents in sites explorer as:
+
+ !DW19.png! 
+
+Now, we can do with our sites by FrontPage and Dreamweaver.
+

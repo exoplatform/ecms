@@ -1,0 +1,8 @@
+
+h1. WCM Scaling by Clustering
+
+There are two possibilities to scale eXo WCM by clustering:
+
+# [Scaling by Portlet Container clustering|PC:Session+replication+how-to]
+
+# [Scaling by Java Content Repository clustering|JCR:Clustering]

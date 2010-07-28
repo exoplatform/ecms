@@ -1,0 +1,22 @@
+
+h1. Search Engine Optimization
+
+
+Search Engine Optimization(SEO), as we know about SEO, is the process of improving the volume and quality of traffic so that we have higher rank on Google, Yahoo search results...  via identified keywords. As you know, the earlier a site is presented in the search results, the more searchers will visit our site.
+
+In this feature, eXo Platform WCM supports optimal code:
+
+- Title tag
+
+- Meta description tag
+
+- Meta keyword tag
+
+- Body text
+
+
+ !acmeHompage.jpg! 
+
+
+
+

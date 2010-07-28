@@ -1,0 +1,83 @@
+h1. Using WebDAV with Frontpage
+
+*\1\. Install FrontPage 2003.*
+
+*2. Open Microsoft FrontPage 2003.*
+
+*3. On the File menu, select 'Open Site'. The Open Site window will appear:*
+
+4. Enter _*your site's WebDav address*_ into the *Site Name* text box and click *Open*.
+The *Web Site Setup* window appears as:
+
+ !front.png! 
+
+- Select the 'WebDAV' option and the 'Encrypted Connection Required' (SSL) checkbox, then click the *Next* button.
+
+The Import Web Site Wizard window will appear:
+
+ !front1.png! 
+
+- Select a local folder where you'd like to store the web site on your computer. This is where you'll be able to edit files before uploading back to your web site. We recommend you store the site in a new folder within your *My Web Sites* folder:
+
+1\. Click the *Browse* button
+
+2. Select My Documents then open the *My Web Sites* folder.
+
+3. Click the *New Folder* button, enter the name of your site and click *OK*.
+
+4. Click the *Open* button.
+
+5. Click the *Next* button.
+
+6. Click *Finish*.
+
+# split screen appears showing the local site and the remote web site (your site on the web server) as picture:
+
+ !front2.png! 
+
+ - On the right column of a screen, it will display all folders of your website on server. We will choose all folders and then click !front3.png! to move all folders on server to location.
+
+- Then you can choose web content, CSS, and JS to edit this location.
+
+ _*Users can edit web content by editor FrontPage:*_
+ 
+*5. If you want to edit a content, do as follows :*
+- Click the *Web Content* folder on the left column.
+- Click the *site artifacts* folder -> Click the *homepage* folder-> Click the *Default* folder--> Double click the *Default.html* file. It will display a form to edit HTML file. In here we can see, I have just edited the "ProductSlogan" class in the 'Default.html' file:
+
+ !front5.png! 
+
+*6. We can edit the content of CSS as below:*
+
+- Choose the *WebSite* tab-> click *CSS folder* -> Double click the *Default.css* file. It will display a form to edit CSS file. We can edit this file (In here i have just changed background of homepage from White color to Blue color and height of this banner from 258px to 500px) and then click the !front6.png! icon to save all changes. We have a view with this picture:
+
+ !front9.png! 
+
+*7. Choose the *HTML* tab-> then click ~Format~ on the menu -> choose ~Style Sheet Links~-> Click ~Add~ and then choose the path-> choose edited CSS file to connect with this HTML file.*
+
+We can see by the following interface:
+
+ !front10.png! 
+
+*+_Note:_+* After saving in HTML file, you should remove all codes generated when you make style sheet link.
+
+*8. After editing all files which you want to, click the* !front8.png! *icon to synchronize all changes on location to server.*
+
+*9. After synchronizing, we can browse the website on explorer to see all changes as picture below:*
+
+ !front7.png! 
+
+* _*Users can create a web content by editor FrontPage:*_
+From split interface, on the "local files" interface --> Click the !front11.png! icon, it will display an interface to create a HTML file as below:
+
+ !front12.png! 
+
+Create HTML code on this and then click *File* --> *Save as* and it will display a form to choose which folder you want to save on local site as below:
+
+ !front13.png! 
+
+Finally, you can come back WCM and refresh this on explorer, you can see this content on *sites explorer* and this content have structures as all contents in sites explorer as below:
+
+ !front14.png! 
+
+

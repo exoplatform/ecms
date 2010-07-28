@@ -1,0 +1,16 @@
+h1. Webcontent Types and Subtypes
+
+
+
+
+
+eXo WCM defines  *exo:webcontent* as an abstract JCR (Java Content Repository) content type for *webcontent*. This definition helps us manage all webcontents in eXo WCM in a simple way. You can extend this type to create your own webcontent type that is suitable to your needs. 
+Some built-in webcontent subtypes defined in our WCM are:
+
+- exo:pictureOnHeadWebcontent: a webcontent type with an image on top-left corner(like newspaper articles)
+- exo:twoCollumnWebcontnent: a webcontent type with two columns layout
+- exo:siteNavigationWebcontent: a webcontent type is to display navigation menu
+- exo:siteBreadcrumbsWebcontent: a webcontent type is to display breadcrumb
+- exo:siteSearchBoxWebcontent: a webcontent type is to display search box in the site
+
+You can extend this set to provide your own webcontents types. The advantage is that, as you define a rendering template for those subtypes, it is easy to apply the same change to the presentation of all webcontents implementing them. You just need to change the template !

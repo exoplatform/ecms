@@ -1,0 +1,22 @@
+h1. JavaScript for Breadcrumbs
+
+
+
+h2. Breadcrumb Object
+
+This Breadcrumb object contains two properties:
+* *resolvedLabel*: name of navigation node in current language or title of current document.
+* *uri*: navigation node uri
+
+For example:
+{code}
+JsonObj = {
+           resolvedLabel: administration,
+           uri: "#"
+          }
+{code}
+   
+
+h2. Get Breadcrumbs() Function
+    
+This function is used to get an array of breadcrumb object.

@@ -1,0 +1,135 @@
+
+h1. Manage Publications
+
+{info}
+Since WCM 1.1
+{info}
+
+This useful feature helps you manage the publication easily and effectively.
+
+h2. Sites Explorer
+
+You easily publish a web content after adding it into the web contents folder of a site as well as manage the publication in the *Sites Explorer* by following guides:
+
+1\. Go to *Sites Management* --> *Sites Explorer*
+
+ !SiteExplorer1.png! 
+
+2. Go into the drive of a site which contains the web content that you want to publish.
+
+3. Select the web content to view by double clicking it on the left tree or on the right.
+
+4. Select the *WCM Actions* tab of WCM view to show main actions on the *Action* bar.
+
+5. Show the *Manage publication* form by clicking on the icon !Icon.png! on the Action bar:
+
+
+ !ManagePublication.png! 
+
+
+This form includes three tabs: 
+
+- The *Publication status* tab: this tab lets you know about all statuses of versions. You only may publish a content with the 'Live' status. There are four content statuses for a content:
+
+* *Enrolled*: means that the revision is created but never edited .
+
+* *Draft*: means that the revision has already been created and is editable. Thus you still can edit it if you want.
+
+* *Live*: means that you cannot modify this revision anymore. With this state, the content is ready for publication.
+
+* *Obsolete*: means that the revision does not live anymore and you cannot publish it if is was published.
+
+
+- The *Publication pages* tab: this tab is used to publish a content which has the 'Live' status.
+
+
+ !PublicationPage.png! 
+
+
+*The Left pane*: contains the page list on the navigation bar of current site that is presented in terms of tree structure.
+
+*The Right pane*: contains the path to the position that the selected web content will be published.
+
+
+Following guides to publish a content:
+
+1\. Select the position on the left pane that you want to publish.
+
+2. Click on the left to right arrow to show the path to the publishing content on the right pane:
+
+ !PublicationPage1.png! 
+
+
+Note:
+
+If you don't want to publish the content at a selected position on the right pane, select it on the right pane and click Right to Left arrow:
+
+ !PublicationPage2.png! 
+
+
+The content will not be shown at that page and the path to that position on the right pane will be removed from path list.
+
+
+- The *Publication history* tab:
+
+This tab is used to keep track of publishing history of a site: Select the *Publication history* tab in the above form to view detail information (including: Date, New State, User and Description) of a site's publication:
+
+
+ !PublicationHistory.png! 
+
+
+3. If you want to change the position to publish the selected web content, select the current path and click on the right to left arrow to remove the path.  
+
+4. Click on the *Close* button to close this form and publish the web content. After being published, all users have the permission to access that position can view the published web content as a page on the Navigation bar.
+
+
+h1. Single Content Viewer
+
+
+
+1\. Select the following path on the Navigation bar: *Viewers* --> *Single Content Viewer*.
+
+2. To edit a content of this page, do not forget turn on the EDIT mode of the current site.
+
+3. Click on on the edit icon in this page to create/select a web content for publishing. You can create a new content or select the existing content.
+
+ !SCV.png! 
+
+
+
+|| Name || Description ||
+| Save Draft     |   To save the web content as draft. |
+| Fast Publish   |   To directly publish the web content. |
+
+
+
+h2. Content List Viewer
+
+Following these simple guides to publish multiple contents on a page:
+
+
+
+1\. Go to *Viewers* --> *Content List Viewer* on the navigation bar. 
+
+2. Turn on the EDIT mode. 
+
+3. Show the form to select contents by clicking on the edit icon !EditIcon.png! :
+
+
+ !CLV.png! 
+
+
+4. Select a folder that contains some contents (documents/web contents) to publish.
+
+5. Click on the *Save* button to accept publishing contents of the selected folders.
+
+After publishing contents, contents of the selected folder will be displayed in the *Content List Viewer* page: 
+
+ !EditMode.png! 
+
+
+If you are turning on the EDIT mode, you will see all DRAFT and PUBLICATION versions in list of the *Content List Viewer* page. Thus you can edit a draft version by clicking on the Edit icon on the same line with the name of the content that you want to edit.
+
+But if the EDIT mode is turned off, only the PUBLICATION versions are displayed.
+
+

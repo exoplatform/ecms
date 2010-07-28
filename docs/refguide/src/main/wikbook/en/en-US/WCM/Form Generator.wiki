@@ -1,0 +1,59 @@
+h1. Form Generator
+
+{info}
+Since WCM 1.2
+{info}
+
+The Form Generator Portlet allows users to create and edit templates for document types. The user can then create new documents using the [Fast Content Creator]. Documents are stored in so-called *nodes*, therefore the terms *node* and *node types* are often applied.
+
+1\. Go to *Groups* --> *Form Generator* on the Administration bar. The *Form Generator* page will appear:
+
+
+ !General.png! 
+
+The *General* tab:
+
+Details:
+
+|| Field    || Description ||
+| Name     |			The name of a node, this field is required. |
+| Description      |		The brief description about a node, this field isn't required. |
+| Icon		|	Upload an icon for a node. |
+
+2. Input the name of a node in the *Name* field.
+
+3. Input the brief description about a node.
+
+4. Click the *Browse* button to select an icon for a node, after selecting, click the !Upload.png! icon to upload the selected icon.
+
+The *Form builder* tab: allows users to set properties for a node.
+
+ !FormBuilder1.png! 
+
+5. Click on the available components on the left pane. The selected components will be displayed on the right pane.
+
+
+ !FormBuilder2.png! 
+
+6. Click the   !Up.png !   icon that corresponds to the component to move this component up or click the ! Down.png! icon to move the component down.
+
+7. Click the    !EditPen.png!  icon that corresponds to the component to edit properties of that component. The form to edit properties will appear:
+
+ !EditForm1.2.png! 
+
+Details:
+
+|| Field || Description ||
+| Field Label     |				The label of this field. |
+| Width           | The width of this field.  |
+| Required | The field is required if the user selects the !CheckBox.png ! check box. When selected a ! Star.png! star besides the *Input Field* field appears. |
+| Height          |				The height of this field. |
+| Default Value    |			The field is pre-filled with this default value. |
+| Guidelines for User    |		Guidelines about this component. |
+
+8. Click the trash can    !Delete.png!  icon that corresponds to the component if a user wants to delete  this component.
+
+9. Click the *Save Form* button to save the form that you have just created for nodes.
+
+10. Click the *Save* button to accept creating a new node or the *Reset* button to edit this node again before saving.
+

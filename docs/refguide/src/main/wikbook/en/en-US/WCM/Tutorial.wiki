@@ -1,0 +1,127 @@
+
+h1.  Quick Tutorial
+
+h2. Getting Started
+
+Running eXo WCM is really an easy game. Here are the steps to get you up and run in less than 5 minutes:
+
+\1. [Install Java SE 5.0|http://java.sun.com/javase/downloads/index_jdk5.jsp] (Java Runtime)
+
+Based on JavaEE, our WCM runs currently fine with *version 1.5* so if you are using JavaEE with newer version, please download and install this version of WCM to make WCM works fine. We will support newer version of Java very soon.
+
+2. [Download the lastest eXo Web Content Management version|http://forge.objectweb.org/projects/exoplatform/]
+
+3. Unzip that package on your system
+{note}
+Make sure the target path does not contain any space
+{note}
+
+4. Open a shell session and go to the *bin/* directory that has just been extracted.
+
+5. Then run the command :
+{code}
+Windows : 
+     eXo.bat run
+
+Linux / Mac OS : 
+     chmod +x *.sh
+     ./eXo.sh run
+{code}
+
+6. You can login as an administrator. To do this, refer to the URL *[http//localhost:8080-portal]*
+
+7. When the page has been loaded, click !QT1.gif! "Login" on the top right corner. Specify the *username "root"* and the *password "exo"*.
+
+After finishing all the steps above, you should see eXo WCM homepage as the following. This page has several areas. They are numbered in the capture below:
+
+!WCM1.png|height=175,width=200!
+
+
+| | |
+|*Indicator*                               |*Meaning*| |
+| !1.jpg!  |This is *Admin Tool bar* which contains some administration functions related to portals (websites)| |
+| !2.jpg!  |This is *Banner* which contains organization's slogan, logo, icon used in web site| |
+| !3.jpg!  |This is *Navigation bar* which likes a menu that helps web site's users visualize the   structure     of   web site and provide quick links to pages.| |
+| !4.jpg!  |This is *Breadcrumb bar* which is used to display the path of the selected page from Navigation bar.| |
+| !5.jpg!  |This is *Single content viewer* page. Users can configure web content in here, when it is blank and another way user can view an existing web content by this page.| |
+| !6.jpg!  |This is *Footer* of the web site. It can be a text, an image that is displayed at the bottom of the web site. It provides information about author/institutional sponsor, revision date, copyright...| |
+
+
+h2. Adding a content
+
+Example, we can create new web content by single content viewer like below:
+
+1\. Go to *Single Content Viewer* page on the *Navigation bar*. We can see a message saying that the viewer has not been configured. 
+
+2. Click the !SCV4.gif! icon in this page to create/select a web content for publishing. (If don't see the icon, switch to the edit mode: an on/off button at the upper right corner.) You will be suggested two options like below to select:
+
+!SCV1.gif|width=200!
+
+
+
+
+    * _Quick web content creation:_ This option supports you to create a web content quickly. SCV will refer to this new content for publishing.
+    * _Select an existing content:_ This option supports you to select an existing web content for publishing.
+
+3. Select one of above options. If you select:
+
+    * *Quick web content creation:*
+
+Step 1:
+
+1\. Form to quickly create a new web content will appear:
+
+ !SCV2.gif|width=200! 
+
+
+
+    * _Name:_ the name of new web content. This field is required.
+    * _Summary:_ the brief description of the web content. Value of this field can be used to support for searching afterward.
+
+2. User must type a value into the *Name* field in above form.
+
+3. Click the *Save* button to accept inputted values and complete the step 1. Next to the Step 2.
+
+*Step 2:* After completing the step 1, the form to create a new web content at step 2 will appear:
+
+1\. Enter values for fields in this form.
+
+ !SCV.gif|width=200! 
+
+In *Main content*, you can:
+
+- *Insert a paragraph, text*: Type a text directly into the text box of the *Main content* field or copy a paragraph from another document and paste it into this text box.
+
+- *Insert a link into the site's content*: Click the !SCV6.gif! icon on the Editor of the *Main content* field. The form to insert a link to a site page appears:
+
+
+ !SCV5.gif|width=200! 
+
+
+
+_Title:_ The brief summary of the inserted link. You can enter value of this field or not. If this value is blank, value of this field will be the url of inserted link.
+
+
+_Url:_ The link to a site page that you want to insert into this content. You also can get a link from current portal (site) by clicking the *Get Portal Link* button next to the *Url* field to browse to all links of portal like below. Select one of them to get a portal link. 
+
+ !SCV7.gif|width=200! 
+
+    * In addition, click the *Setting* button in this form to select a view and a sort of links. After that, click the *Save* button to accept inserting the link.
+    * _Insert an image:_ Click the !SCV8.gif! icon on the Editor of the *Main content* field. The form to browse to all images of sites will appear:
+
+ !SCV9.gif|width=200! 
+
+Select a site on the left and select an image on the right pane. You also upload an image into a specific site's folder by following:
+
+Click the !SCV10.gif|width=200!  button to open an upload form:
+
+ !SCV0.gif|width=200! 
+
+
+Finish the step 2, a user clicks the *Next* button to move step 3.  At step 3, click the *Finish* button to finish creating web content. Finally, web content will display like:
+
+ !SCV3.gif|width=200! 
+
+
+ Administrators can execute with eXo WCM as create site, configure banner, footer, homepage, create new page...
+as the [WCM Manual] has all steps to guide you.

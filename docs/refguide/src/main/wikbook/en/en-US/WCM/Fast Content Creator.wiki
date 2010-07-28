@@ -1,0 +1,103 @@
+
+h1. Fast Content Creator
+
+{info}
+Since WCM 1.2
+{info}
+
+h2. Overview
+
+Exo WCM provides users with Fast Content Creator Portlet that allows users to quickly create the content of a document. The Fast Content Creator Portlet is applied in *Contact Us* on the navigation bar and *Contact Us* is one of many document templates:
+
+ !ContactUs.png! 
+
+
+h2. The Portlet mode
+
+The Portlet mode allows users to change the properties of documents. Following guides to view Contact Us in the Portlet mode:
+
+# Go to *Site Editor* --> *Edit Page Wizard*. In the step 3 of editing a page by wizard:
+
+ !EditPage2.png! 
+
+2. Click the !EditIcon.png! to edit the properties of this portlet. The form to edit the portlet will appear:
+
+
+ !EditPortletForm1.2.png! 
+
+In the *Portlet Setting* tab: select the two check boxes: *Show Info Bar* and *Show Portlet Mode* in order to show *Contact Us* in the Portlet mode.
+
+3. Click the *Save* button to save all changes. 
+
+
+Turn back to the homepage by clicking !Home.png!
+
+h3. The View Mode
+
+1\. Go to *Contact Us* on the navigation bar. The *Contact Us* page will appear:
+
+ !ViewModeContactUs.png! 
+
+Details:
+
+
+|| Field         || Description ||
+| Select a recipient        |		the recipient who will receive a message |
+| Your name          |			the name of a person who leaves a message. |
+| Your Address      |		the address of a person who leaves a message. |
+| Your Email Address     |		the email address of a person who leaves a message. |
+| Your Phone Number       |		the phone number of a person who leaves a message. |
+| Your message            |		write a message that you want to leave. |
+
+
+2. Select a recipient and enter values in this form.
+
+3. Click the *Save* button to save a message.	
+
+h3. The Edit Mode
+
+Go to *Contact Us* on the navigation bar. The *Contact Us* in the Portlet mode will appear and users can edit the template, actions and the save location, etc for documents in the Edit mode.
+
+- Click the !Arrow.png!  icon at the upper right corner of this portlet, the menu will list some actions that users can take:
+
+ !Edit.png! 
+
+- Click *Edit* to set the properties of documents
+
+ !EditPortletMode.png! 
+
+Details:
+
+|| Field               || Description ||
+| Select repository   |			the repository that is used to save documents. |
+| Select workspace    |		available workspaces to save documents: collaboration, back up, gadgets, dms - system, wcm-system. 	 |
+| Location to save    |			select the location to save documents. |
+| Select Template     |		all types of available templates for documents. There have corresponding fields with each template. |
+| Custom save button   |	change the label for the save button. |
+| Custom save message  |	the message that informs you have just saved a document. |
+| Redirect      |			this option allows users to redirect the path in the *Redirect path* field. |
+| Redirect path  |	the path that a user will be directed to after clicking the *OK* button in the confirmation message. |
+| Actions    |			more actions can be added for documents.	 |
+
+
+
+1\. Select the repository to save documents.
+
+2. Click !IconSelect.png! to select the workspace for saving documents.
+
+3. Click the !MagnifyIcon.png!  icon to select the location for saving documents. The *Select location* form will appear:
+
+ !SelectLocation.png! 
+
+4. Select the parent node on the left pane and click the  !OKIcon.png!  icon in the *Action* column to choose the child node on the right pane. After selecting, this location will be displayed on the *Location to save* field. Created documents will be saved in this location.
+
+5. Select a template for documents by clicking !IconSelect.png! . There are more available templates that users can select for documents such as: File, Podcast, Sample node, File Plan... etc.
+
+6. Change the label for the *Save* button and the content of a message after clicking the *Save* button.
+
+7. Select the *Redirect* check box if users want to redirect to the path in the *Redirect path* field after clicking the *OK* button in the save message.
+
+8. Click the *Add* button to add more actions for a document.
+
+9. Click the *Save* button to save all changes of editing properties for documents that users will create in this Portlet.	
+

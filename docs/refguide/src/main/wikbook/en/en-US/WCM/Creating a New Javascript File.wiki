@@ -1,0 +1,12 @@
+h1. Creating a New Javascript File
+
+
+This is one of default files of a site. It contains JS data that is used to present data in a site and increase that site's content accessibility.
+
+1\. Go to *Site Content Management* --> *Sites Explorer* page on the Navigation bar. Then only need access to the *managed sites* drive to manage all sites in a place.
+
+2. Choose *JS* folder --> click the  !JS.gif! icon to create the JS file. The *Add New Document* form will display :
+
+ !AddNewDocument.png! 
+
+This function will execute when the content is rendered.
