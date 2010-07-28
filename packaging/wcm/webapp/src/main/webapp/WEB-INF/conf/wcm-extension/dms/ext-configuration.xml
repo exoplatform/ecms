@@ -50,6 +50,9 @@
                         <value>
                           <string>text/js</string>
                         </value>
+                        <value><string>application/rss+xml</string></value>
+                        <value><string>application/x-groovy</string></value>
+                        <value><string>application/x-groovy+html</string></value>
                       </collection>
                     </field>
                   </object>

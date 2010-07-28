@@ -57,7 +57,7 @@
           <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
         </div>			  
         <div style="clear:both"></div>
-				<div class="Content" style="text-align:center; font-style:italic">
+				<div class="Content">
         <%
           def fileComponent = uicomponent.getUIComponent(mimeType);
           if(fileComponent != null) {
