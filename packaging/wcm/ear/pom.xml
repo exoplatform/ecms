@@ -157,7 +157,7 @@ exo-ecms-packaging-ecmdemo-webapp
 -->
   
   <build>
-    <finalName>gatein-ecmdemo-extension-${project.version}</finalName>
+    <finalName>gatein-wcm-extension-${project.version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
