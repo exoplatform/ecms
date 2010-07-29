@@ -79,17 +79,9 @@
 															%><div class="Title">$itemName</div><%
 														}
 													}
-													if(Utils.isShowDraft(viewNode)) { 
-														%>
-															<span>[ </span>
-															<a class="CaptionDraft"><%= _ctx.appRes("UICLVPresentation.label.draft") %></a>
-															<%
-																if(Utils.isShowQuickEdit(viewNode)) {
-																	%>, <a class="CaptionEdit" href="$contentEditLink"><%= _ctx.appRes("UICLVPresentation.action.edit") %></a><%
-																}
-															%>
-															<span> ]</span>
-														<% 
+																										
+													if(Utils.isShowQuickEdit(viewNode)) {
+														%><span>[ </span><a class="CaptionEdit" href="$contentEditLink"><%= _ctx.appRes("UICLVPresentation.action.edit") %></a><span> ]</span><%
 													}
 													if (isShowDate) {
 													  %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%

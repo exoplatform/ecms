@@ -54,18 +54,11 @@
 												} else { 
 													%>$itemName<% 
 												} 
-												if(Utils.isShowDraft(viewNode)) { 
-													%>
-														<span>[ </span>
-														<a class="CaptionDraft"><%=draftLabel%></a>
-														<%
-															if(Utils.isShowQuickEdit(viewNode)) {
-																%>, <a class="CaptionEdit" href="$contentkEdittingLink"><%=editActionLabel%></a><%
-															}
-														%>
-														<span> ]</span>
-													<% 
+												
+												if(Utils.isShowQuickEdit(viewNode)) {
+													%><span>[ </span><a class="CaptionEdit" href="$contentkEdittingLink"><%=editActionLabel%></a><span> ]</span><%
 												}
+												
 											%> 
 										</div>
 									<%							
