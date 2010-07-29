@@ -26,6 +26,7 @@ public class DeploymentDescriptor {
   
   private Target target;
   private String sourcePath;  
+  private Boolean cleanupPublication = false;  
   
   /**
    * @return the target where data will be stored
@@ -52,7 +53,31 @@ public class DeploymentDescriptor {
    */
   public void setSourcePath(String sourcePath) { this.sourcePath = sourcePath; }
   
-  public static class Target {
+  
+  
+  /**
+   * 
+   * @return true if cleanup is enabled
+   */
+  public Boolean getCleanupPublication() {
+	return cleanupPublication;
+  } 
+
+  /**
+   * This method allows to cleanup the publication lifecycle in the target folder after importing the data.
+   * By using this, the publication live revision property will be re-initialized and the content will be set as published directly.
+   * Thus, the content will be visible in front side.
+   * 
+   * @param cleanupPublication
+   */
+  public void setCleanupPublication(Boolean cleanupPublication) {
+	this.cleanupPublication = cleanupPublication;
+  }
+
+
+
+
+public static class Target {
     private String repository;
     private String workspace;
     private String nodePath;

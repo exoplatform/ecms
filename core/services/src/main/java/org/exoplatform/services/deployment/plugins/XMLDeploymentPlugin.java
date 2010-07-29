@@ -20,7 +20,11 @@ import java.io.InputStream;
 import java.util.Iterator;
 
 import javax.jcr.ImportUUIDBehavior;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
 
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
@@ -78,10 +82,35 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
       DeploymentDescriptor deploymentDescriptor = (DeploymentDescriptor)objectParameter.getObject();
       String sourcePath = deploymentDescriptor.getSourcePath();
       // sourcePath should start with: war:/, jar:/, classpath:/, file:/
+      Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
+
       InputStream inputStream = configurationManager.getInputStream(sourcePath);
       ManageableRepository repository = repositoryService.getRepository(deploymentDescriptor.getTarget().getRepository());
       Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(), repository);
       session.importXML(deploymentDescriptor.getTarget().getNodePath(), inputStream, ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW );
+      
+      if (cleanupPublication) {
+    	  /**
+    	   * This code allows to cleanup the publication lifecycle in the target folder after importing the data.
+    	   * By using this, the publication live revision property will be re-initialized and the content will be set as published directly.
+    	   * Thus, the content will be visible in front side.
+    	   */
+    	  	QueryManager manager = session.getWorkspace().getQueryManager();
+    	  	String statement = "select * from nt:base where jcr:path LIKE '"+deploymentDescriptor.getTarget().getNodePath()+"/%'";
+    		Query query = manager.createQuery(statement.toString(), Query.SQL);
+  		    NodeIterator iter = query.execute().getNodes();
+  		    while (iter.hasNext()) {
+  		    	Node node = iter.nextNode();
+  		    	if (node.hasProperty("publication:liveRevision") && node.hasProperty("publication:currentState")) {
+  	  		    	log.info("\""+node.getName()+"\" publication lifecycle has been cleaned up");
+  		    		node.setProperty("publication:liveRevision", "");
+  		    		node.setProperty("publication:currentState", "published");
+  		    	}
+  		    	
+  		    }
+
+      }
+      
       session.save();
       session.logout();
       if(log.isInfoEnabled()) {

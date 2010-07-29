@@ -257,6 +257,10 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
   private Node getLiveRevision(Node node) {
     try {
       String nodeVersionUUID = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString(); 
+      if ("".equals(nodeVersionUUID)
+              && PublicationDefaultStates.PUBLISHED.equals(node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
+                                                               .getString()))
+            return node;
       return node.getVersionHistory().getSession().getNodeByUUID(nodeVersionUUID);
     } catch (Exception e) {      
       return null;
