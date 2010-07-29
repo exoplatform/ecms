@@ -21,7 +21,7 @@ TABLE OF CONTENTS
 2. What's new?
 3. How to set up eXo Content
 4. Building from sources
-5. How to install WCM in EPP5
+5. How to install WCM in JBoss/GateIn and EPP5
 6. Running
 7. Release notes
 
