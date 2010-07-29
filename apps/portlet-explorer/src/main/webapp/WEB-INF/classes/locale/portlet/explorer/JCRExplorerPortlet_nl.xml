@@ -3208,5 +3208,14 @@
       <showFilterBar>Show Filter Bar</showFilterBar>
     </label>
   </UIJcrExplorerEditForm>  
-    
+  
+  <UIPreferencesForm>
+  	 <action>
+    	 <HideAdvance>Hide Advanced</HideAdvance>
+    	 <ShowAdvance>Show Advanced</ShowAdvance>
+    </action>
+    <label>
+    	<Advance>Advanced</Advance>
+    </label>
+  </UIPreferencesForm>  
 </bundle>

@@ -3313,5 +3313,13 @@
       <showFilterBar>Show Filter Bar</showFilterBar>
     </label>
   </UIJcrExplorerEditForm>  
-  
+  <UIPreferencesForm>
+  	 <action>
+    	 <HideAdvance>Ẩn nâng cao</HideAdvance>
+    	 <ShowAdvance>Hiện nâng cao</ShowAdvance>
+    </action>
+    <label>
+    	<Advance>Nâng cao</Advance>
+    </label>
+  </UIPreferencesForm>
 </bundle>

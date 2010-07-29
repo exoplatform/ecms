@@ -2893,5 +2893,15 @@
     <label>  
       <editInNewWindow>Edit in new window</editInNewWindow>
     </label>
-  </UIJcrExplorerEditForm>  
+  </UIJcrExplorerEditForm>
+  
+  <UIPreferencesForm>
+  	 <action>
+    	 <HideAdvance>Hide Advanced</HideAdvance>
+    	 <ShowAdvance>Show Advanced</ShowAdvance>
+    </action>
+    <label>
+    	<Advance>Advanced</Advance>
+    </label>
+  </UIPreferencesForm>  
 </bundle>

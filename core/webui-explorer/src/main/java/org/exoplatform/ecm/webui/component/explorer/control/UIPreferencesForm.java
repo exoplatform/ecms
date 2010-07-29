@@ -16,12 +16,12 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.control;
 
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -29,6 +29,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupComponent;
@@ -44,15 +45,20 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 
 /**
  * Created by The eXo Platform SARL
- * Author : pham tuan
- *          phamtuanchip@yahoo.de
- * September 5, 2006
+ * Author : Chien Nguyen
+ *          chien.nguyen@exoplatform.org
+ * July 28, 2010
  * 14:07:15 PM
  */
 
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl", events = {
-    @EventConfig(listeners = UIPreferencesForm.SaveActionListener.class),
-    @EventConfig(phase = Phase.DECODE, listeners = UIPreferencesForm.BackActionListener.class) })
+@ComponentConfig(
+    lifecycle = UIFormLifecycle.class, 
+    template = "app:/groovy/webui/component/explorer/UIPreferencesForm.gtmpl", 
+    events = {
+      @EventConfig(listeners = UIPreferencesForm.SaveActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UIPreferencesForm.AdvanceActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UIPreferencesForm.BackActionListener.class)
+    })
 public class UIPreferencesForm extends UIForm implements UIPopupComponent {
 
   final static public String FIELD_ENABLESTRUCTURE  = "enableStructure".intern();
@@ -78,6 +84,8 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
   final static public String NODES_PER_PAGE         = "nodesPerPage".intern();
   
   final static public String FIELD_QUERY_TYPE       = "queryType".intern();
+  
+  private boolean advancePreferences = false;
 
   public UIPreferencesForm() throws Exception {
     RequestContext context = RequestContext.getCurrentInstance();
@@ -142,14 +150,34 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_SHOW_HIDDEN_NODE, FIELD_SHOW_HIDDEN_NODE,
         null));
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_SHOW_ITEMS_BY_USER, 
-    																							  FIELD_SHOW_ITEMS_BY_USER, null));
+                                                    FIELD_SHOW_ITEMS_BY_USER, null));
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_ENABLE_DRAG_AND_DROP,
-    																								FIELD_ENABLE_DRAG_AND_DROP, null));
-    		
+                                                    FIELD_ENABLE_DRAG_AND_DROP, null));
+        
     addUIFormInput(new UIFormSelectBox(FIELD_QUERY_TYPE, FIELD_QUERY_TYPE, queryOption));
     addUIFormInput(new UIFormSelectBox(FIELD_SHORTBY, FIELD_SHORTBY, sortOptions));
     addUIFormInput(new UIFormSelectBox(FIELD_ORDERBY, FIELD_ORDERBY, orderOption));
     addUIFormInput(new UIFormSelectBox(NODES_PER_PAGE, NODES_PER_PAGE, nodesPerPagesOptions));
+  }
+  
+  public boolean isAdvancePreferences() { 
+    return advancePreferences; 
+  }
+  
+  public void setAdvancePreferences(boolean adPreferences) { 
+    advancePreferences = adPreferences; 
+  }
+  
+  public void begin() throws Exception {
+    WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
+    String b = context.getURLBuilder().createURL(this, null, null);   
+    
+    Writer writer = context.getWriter();
+    writer.append("<form class=\"").append(getId()).append("\" id=\"").append(getId()).append("\" action=\"").append(b).append('\"');
+    if(getSubmitAction() != null) writer.append(" onsubmit=\"").append(getSubmitAction()).append("\"");
+    if(isMultipart()) writer.append(" enctype=\"multipart/form-data\"");
+    writer.append(" method=\"post\">");
+    writer.append("<div><input type=\"hidden\" name=\"").append(ACTION).append("\" value=\"\"/></div>");
   }
 
   public void activate() throws Exception {
@@ -244,6 +272,19 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       UIJCRExplorerPortlet explorerPorltet = uiForm.getAncestorOfType(UIJCRExplorerPortlet.class);
       UIJCRExplorer uiExplorer = explorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);
       uiExplorer.getChild(UIPopupContainer.class).cancelPopupAction();
+    }
+  }
+  
+  static public class AdvanceActionListener extends EventListener<UIPreferencesForm> {
+    public void execute(Event<UIPreferencesForm> event) throws Exception {
+      UIPreferencesForm uiPreferencesForm = event.getSource();
+      if (uiPreferencesForm.isAdvancePreferences()) uiPreferencesForm.setAdvancePreferences(false); 
+      else uiPreferencesForm.setAdvancePreferences(true);
+      UIJCRExplorerPortlet explorerPorltet = uiPreferencesForm.getAncestorOfType(UIJCRExplorerPortlet.class);
+      UIJCRExplorer uiExplorer = explorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);
+      Preference pref = uiExplorer.getPreference();
+      uiPreferencesForm.update(pref);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPreferencesForm.getParent());
     }
   }
 }

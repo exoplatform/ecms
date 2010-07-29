@@ -45,8 +45,7 @@
 }
 
 .UIJCRExplorerPortlet .UIPreferencesForm {
-  width: 500px;
-  padding: 15px;
+  width: 550px;
   border: none;
 }
 
@@ -177,4 +176,42 @@
 		border: 1px solid #B7B7B7;
 		background: #FBFBFB none repeat scroll 0 0;
 		padding-top: 5px;
+}
+
+.UIPreferencesForm .HorizontalLayout {
+  background:none repeat scroll 0 0 #F7F7F7;
+  border-color:-moz-use-text-color #E3E2E2 #E3E2E2;
+  border-right:1px solid #E3E2E2;
+  border-style:none solid solid;
+  border-width:medium 1px 1px;
+}
+.UIPreferencesForm .HorizontalLayout {
+  background:none repeat scroll 0 0 #F7F7F7;
+  border:1px solid #AEAEAE;
+  padding:10px;
+}
+.UIPreferencesForm .UIFormGrid td.FieldLabel {
+  padding:4px;
+  text-align:right;
+  vertical-align:top;
+}
+.UIPreferencesForm .UIFormGrid td.FieldComponent {
+  padding:4px;
+}
+.UIPreferencesForm .UIFormGrid a.AdvancePreferences {
+  color:#1111CC;
+  text-align:right;
+  text-decoration:underline;
+}
+.UIPreferencesForm .HorizontalLayout input.checkbox {
+  margin:0;
+  width:16px;
+}
+.UIPreferencesForm .HorizontalLayout input {
+  font-size:11px;
+  width:235px;
+}
+.UIPreferencesForm .HorizontalLayout select {
+  font-size:11px;
+  width:110px;
 }
