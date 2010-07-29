@@ -1,16 +1,41 @@
 <div class="$uicomponent.id" id="$uicomponent.id">
 	<%
 		import org.exoplatform.wcm.webui.clv.UICLVPresentation;
-		import	org.exoplatform.wcm.webui.Utils;
+	  import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
+		import org.exoplatform.wcm.webui.Utils;
 	
 		def rcontext = _ctx.getRequestContext() ;
 		String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
+		def addContentBlockId = portletId + "-AddContentBlock";
+    def manageContentBlockId = portletId + "-ManageContentBlock";		
+    if (uicomponent.isShowAddContent()) {          
+      %>
+        <div style="position: relative; height: 0px;" id="<%=addContentBlockId%>">
+          <div style="position: absolute; right: 175px; top: 0px; z-index: 1">
+            <a href="<%=uicomponent.event("AddContent", "true")%>" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
+              <%=_ctx.appRes("UICLVContainer.label.AddContent");%>
+            </a>           
+          </div>
+        </div>
+          
+        <div style="position: relative; height: 0px;" id="<%=manageContentBlockId%>">
+          <div style="position: absolute; right: 75px; top: 0px; z-index: 1">
+            <a href="<%=uicomponent.event("AddContent", "false")%>" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
+              <%=_ctx.appRes("UICLVContainer.label.ManageContent");%>
+            </a>           
+          </div>
+        </div>
+          
+      <% }		
 		if (Utils.isShowQuickEdit()) {					
 	%>
 			<div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>">
 				<div style="position: absolute; right: 0px; top: 0px; z-index: 1">
-					<a href="<%=uicomponent.event("QuickEdit")%>" title="<%= _ctx.appRes("UICLVContainer.title.QuickEdit");%>"><div class="QuickEdit"><span></span></div></a>					 
+					<a href="<%=uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>">
+<!--					  <div class="QuickEdit"><span></span></div>-->
+            <%=_ctx.appRes("UICLVContainer.label.Preferences");%>
+					</a>					 
 				</div>
 			</div>
 	<% } %>		

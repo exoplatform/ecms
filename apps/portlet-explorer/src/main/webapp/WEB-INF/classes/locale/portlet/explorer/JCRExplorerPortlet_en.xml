@@ -2306,7 +2306,11 @@
       <usecase>Select Type</usecase>
       <SelectNodePath>Select path</SelectNodePath>
       <editInNewWindow>Edit in new window</editInNewWindow>
-    <nodePath>Select path</nodePath>
+      <showTopBar>Show Top Bar</showTopBar>
+      <showActionBar>Show Action Bar</showActionBar>
+      <showSideBar>Show Left Bar</showSideBar>
+      <showFilterBar>Show Filter Bar</showFilterBar>
+      <nodePath>Select path</nodePath>
     </label>
   </UIJcrExplorerEditForm>
   

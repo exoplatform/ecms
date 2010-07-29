@@ -189,6 +189,11 @@
         <value></value>
         <read-only>false</read-only>
       </preference>
+      <preference>
+        <name>automaticDetection</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>      
 			<preference>
 				<name>formViewTemplatePath</name>
 				<value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/UIContentListPresentationDefault.gtmpl</value>
@@ -199,11 +204,6 @@
 				<value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
 				<read-only>false</read-only>
 			</preference>
-      <preference>
-        <name>basePath</name>
-        <value>detail</value>
-        <read-only>false</read-only>
-      </preference>
 			<preference>
 				<name>itemsPerPage</name>
 				<value>10</value>
@@ -220,17 +220,32 @@
         <read-only>false</read-only>
       </preference>
       <preference>
-        <name>showSummary</name>
+        <name>showHeader</name>
         <value>true</value>
         <read-only>false</read-only>
       </preference>
+			<preference>
+				<name>showRefreshButton</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>showThumbnailsView</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>			
       <preference>
         <name>showDateCreated</name>
         <value>true</value>
         <read-only>false</read-only>
       </preference>
       <preference>
-        <name>showHeader</name>
+        <name>showReadmore</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showSummary</name>
         <value>true</value>
         <read-only>false</read-only>
       </preference>
@@ -240,15 +255,20 @@
         <read-only>false</read-only>
       </preference>
       <preference>
-        <name>showReadmore</name>
+        <name>showRssLink</name>
         <value>true</value>
         <read-only>false</read-only>
       </preference>
-			<preference>
-				<name>showRefreshButton</name>
-				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
+      <preference>
+        <name>basePath</name>
+        <value>detail</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>allowDynamicUrl</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>      
 		</portlet-preferences>
 		<security-role-ref>
 			<role-name>admin</role-name>

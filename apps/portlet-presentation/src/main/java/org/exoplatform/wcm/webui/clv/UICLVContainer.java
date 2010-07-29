@@ -16,9 +16,15 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
+import javax.portlet.PortletPreferences;
+
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -110,8 +116,7 @@ public abstract class UICLVContainer extends UIContainer {
    * 
    * @see QuickEditActionEvent
    */
-  public static class QuickEditActionListener extends EventListener<UICLVFolderMode> {
-    
+  public static class PreferencesActionListener extends EventListener<UICLVFolderMode> {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -121,11 +126,52 @@ public abstract class UICLVContainer extends UIContainer {
       Utils.createPopupWindow(clvContainer, viewerManagementForm, "UIViewerManagementPopupWindow", 800);
     }    
   }
+  
+  public static class AddContentActionListener extends EventListener<UICLVFolderMode> {
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UICLVFolderMode> event) throws Exception {
+      UICLVContainer clvContainer = event.getSource();
+      String addNewValue = event.getRequestContext().getRequestParameter(OBJECTID);
+      PortalRequestContext pContext = Util.getPortalRequestContext();
+      String portalURI = pContext.getPortalURI();     
+      PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
+      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+      String backto = pContext.getRequestURI();
+      StringBuilder link = new StringBuilder().append(portalURI).append("siteExplorer?").
+                                               append("path=/").append(correctPath(itemPath)).
+                                               append("&backto=").append(backto).
+                                               append("&addNew=").append(addNewValue);
+      event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + link.toString() + "');");
+    }
+    
+    private String correctPath(String oldPath) {
+      int slashIndex = oldPath.indexOf("/");
+      String path = oldPath.substring(slashIndex + 1);
+      String[] repoWorkspace = oldPath.substring(0, slashIndex).split(":");
+      return repoWorkspace[0] + '/' + repoWorkspace[1] + '/' + path;
+    }
+  }  
 
   public void onRefresh(Event<UICLVPresentation> event) throws Exception {
     UICLVPresentation clvPresentation = event.getSource();
     UICLVContainer uiListViewerBase = clvPresentation.getParent();
     uiListViewerBase.getChildren().clear();
     uiListViewerBase.init();
+  }
+  
+  public boolean isShowAddContent() {
+    boolean ret =  Utils.isShowQuickEdit() && (this instanceof UICLVFolderMode);
+//    if (ret) {
+//      PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
+//      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+//	    try {
+////	  		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);    	
+//	    } catch (Exception e) {
+//	    	return false;
+//	    }
+//    }
+    return ret;
   }
 }

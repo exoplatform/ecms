@@ -25,6 +25,7 @@ import java.util.Locale;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.utils.PageList;
@@ -34,6 +35,7 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserHandler;
@@ -80,6 +82,8 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UICLVPresentation extends UIContainer {
 
+	private static final String defaultScvParam = "content-id";
+	
   /** The template path. */
   private String                   templatePath;
 
@@ -233,7 +237,8 @@ public class UICLVPresentation extends UIContainer {
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
     String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
-    link = baseURI + portalURI + basePath + "?path=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+    String scvWith = "path";//Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
+    link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
     
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
@@ -423,9 +428,19 @@ public class UICLVPresentation extends UIContainer {
       UICLVPresentation contentListPresentation = event.getSource();
       String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node node = NodeLocation.getNodeByExpression(itemPath);
-      UIContentDialogForm uiDocumentDialogForm = contentListPresentation.createUIComponent(UIContentDialogForm.class, null, null);
-      uiDocumentDialogForm.init(node, false);
-      Utils.createPopupWindow(contentListPresentation, uiDocumentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
+//      UIContentDialogForm uiDocumentDialogForm = contentListPresentation.createUIComponent(UIContentDialogForm.class, null, null);
+//      uiDocumentDialogForm.init(node, false);
+//      Utils.createPopupWindow(contentListPresentation, uiDocumentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
+      PortalRequestContext pContext = Util.getPortalRequestContext();
+      String portalURI = pContext.getPortalURI();     
+      itemPath = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName() + '/' +
+      						node.getSession().getWorkspace().getName() + '/' +node.getPath();
+      String backto = pContext.getRequestURI();
+      StringBuilder link = new StringBuilder().append(portalURI).append("siteExplorer?").
+                                               append("path=/").append(itemPath).
+                                               append("&backto=").append(backto).
+                                               append("&edit=").append("true");
+      event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + link.toString() + "');");
     }
   }
 }

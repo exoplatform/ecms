@@ -13,13 +13,13 @@
 
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Cấu hình cho Content list viewer</UICLVConfig>
+      <UICLVConfig>Cấu hình cho Content list</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
 
   <UICLVConfig>
     <label>
-      <Title>Cấu hình cho Content list viewer</Title>
+      <Title>Cấu hình cho Content list</Title>
       <ContentSelectionBlock>Chọn nội dung</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Chế độ</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Đường dẫn</UICLVConfigItemPathFormInputSet>
@@ -34,7 +34,7 @@
       <DisplaySettingBlock>Lựa chọn hiển thị</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Tiêu đề portlet</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Mẫu hiển thị</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Mẫu phân trang</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Phân trang</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigTargetPageFormInputSet>Trang đích</UICLVConfigTargetPageFormInputSet>
       <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>
       <UICLVConfigItemsPerPageFormStringInput>Số lượng mỗi trang</UICLVConfigItemsPerPageFormStringInput>
@@ -45,7 +45,8 @@
       <UICLVConfigShowTitleFormCheckboxInput>Hiển thị tiêu đề nội dung</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>Hiển thị ngày tạo</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Hiển thị liên kết</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Hiển thị Đọc thêm</UICLVConfigShowReadmoreFormCheckboxInput>
+ 			<UICLVConfigShowRssLinkFormCheckboxInput>Hiển thị liên kết RSS</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Tự động phát hiện</UICLVConfigShowAutomaticDetectionCheckboxInput>
     </label>
     <action>
       <Save>Lưu</Save>
@@ -119,5 +120,19 @@
       <UIContentDialogForm>Web content form</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
+  <UICLVContainer>
+    <label>
+      <Preferences>Preferences</Preferences>
+      <AddContent>Thêm nội dung</AddContent>
+    </label>
+	</UICLVContainer>
+	
+  <UICLVConfig>
+    <label>
+      <Title>Content List Preferences</Title>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Link</UICLVConfigShowReadmoreFormCheckboxInput>
+    </label>
+  </UICLVConfig>
 
 </bundle>

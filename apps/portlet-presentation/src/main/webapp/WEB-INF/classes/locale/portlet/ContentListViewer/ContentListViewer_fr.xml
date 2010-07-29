@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UICLVContainer>
-    <title>
-      <QuickEdit>Éditer rapidement</QuickEdit>
-    </title>
     <msg>
       <non-contents>Il n'ya pas de contenu ici</non-contents>
       <item-not-found>Cet article ne peut pas trouver</item-not-found>
@@ -11,15 +8,8 @@
     </msg>
   </UICLVContainer>
 
-  <UIViewerManagementPopupWindow>
-    <title>
-      <UICLVConfig>Configuration d'une liste de contenu</UICLVConfig>
-    </title>
-  </UIViewerManagementPopupWindow>
-
   <UICLVConfig>
     <label>
-      <Title>Configuration d'une liste de contenu</Title>
       <ContentSelectionBlock>Sélection de contenus</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Chemin du dossier</UICLVConfigItemPathFormInputSet>
@@ -34,18 +24,16 @@
       <DisplaySettingBlock>Réglages</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Entête</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Modèle de vue</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Modèle de pagination</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigTargetPageFormInputSet>URL de destination</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Pagination</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>
       <UICLVConfigItemsPerPageFormStringInput>Contenus par page</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Afficher l'illustration</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Afficher le résumé</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Afficher l'entête</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Afficher le bouton actualiser</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>Afficher le titre</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>Afficher la date</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Afficher le lien</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Lire la suite</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Détection automatique</UICLVConfigShowAutomaticDetectionCheckboxInput>      
     </label>
     <action>
       <Save>Sauver</Save>
@@ -119,5 +107,28 @@
       <UIContentDialogForm>Edition du contenu</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
+  <UICLVContainer>
+    <label>
+      <Preferences>Preferences</Preferences>
+      <AddContent>Add Content</AddContent>
+    </label>
+	</UICLVContainer>
+
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Content List Preferences</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+
+  <UICLVConfig>
+    <label>
+      <Title>Content List Preferences</Title>
+      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigTargetPageFormInputSet>Target path</UICLVConfigTargetPageFormInputSet>
+ 			<UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Link</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+    </label>
+  </UICLVConfig>
 
 </bundle>

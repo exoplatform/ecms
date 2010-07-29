@@ -50,7 +50,8 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
   lifecycle = Lifecycle.class,                 
    template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
    events = { 
-     @EventConfig(listeners = UICLVFolderMode.QuickEditActionListener.class) 
+     @EventConfig(listeners = UICLVFolderMode.PreferencesActionListener.class), 
+     @EventConfig(listeners = UICLVFolderMode.AddContentActionListener.class)     
    }
 )
 public class UICLVFolderMode extends UICLVContainer {

@@ -40,7 +40,7 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
   lifecycle = Lifecycle.class,                 
    template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
    events = { 
-     @EventConfig(listeners = UICLVManualMode.QuickEditActionListener.class) 
+     @EventConfig(listeners = UICLVManualMode.PreferencesActionListener.class) 
    }
 )
 @SuppressWarnings("deprecation")

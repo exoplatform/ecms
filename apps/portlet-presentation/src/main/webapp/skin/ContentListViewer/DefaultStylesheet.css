@@ -197,6 +197,13 @@
   cursor: pointer;
 }
 
+.UICLVPortlet .QuestionIcon {
+  background: url('DefaultSkin/icons/QuestionIcon.png') no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
 .OneColumnCLVTemplate .Contents .Column1 img {
   width: 51px;
 }

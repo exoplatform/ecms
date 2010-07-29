@@ -36,74 +36,29 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class)
 public class UICLVPortlet extends UIPortletApplication {
 
-  /** The Constant PREFERENCE_ITEMS_PER_PAGE. */
-  public final static String PREFERENCE_ITEMS_PER_PAGE          = "itemsPerPage";
-
-  /** The Constant PREFERENCE_ITEM_PATH. */
-  public final static String PREFERENCE_ITEM_PATH               = "folderPath";
-  
-  /** The Constant PREFERENCE_HEADER. */
-  public final static String PREFERENCE_HEADER                  = "header";
-
-  /** The Constant PREFERENCE_DISPLAY_TEMPLATE. */
-  public final static String PREFERENCE_DISPLAY_TEMPLATE        = "formViewTemplatePath";
-
-  /** The Constant PREFERENCE_PAGINATOR_TEMPLATE. */
-  public final static String PREFERENCE_PAGINATOR_TEMPLATE      = "paginatorTemplatePath";
-
-  /** The Constant PREFERENCE_SHOW_REFRESH_BUTTON. */
-  public final static String PREFERENCE_SHOW_REFRESH_BUTTON     = "showRefreshButton";
-
-  /** The Constant PREFERENCE_SHOW_ILLUSTRATION. */
-  public final static String PREFERENCE_SHOW_ILLUSTRATION       = "showThumbnailsView";
-
-  /** The Constant PREFERENCE_SHOW_TITLE. */
-  public final static String PREFERENCE_SHOW_TITLE              = "showTitle";
-
-  /** The Constant PREFERNECE_SHOW_SUMMARY. */
-  public final static String PREFERENCE_SHOW_SUMMARY            = "showSummary";
-
-  /** The Constant PREFERENCE_SHOW_DATE_CREATED. */
-  public final static String PREFERENCE_SHOW_DATE_CREATED       = "showDateCreated";
-
-  /** The Constant PREFERENCE_SHOW_HEADER. */
-  public final static String PREFERENCE_SHOW_HEADER             = "showHeader";
-  
-  /** The Constant PREFERENCE_SHOW_READMORE. */
-  public final static String PREFERENCE_SHOW_READMORE           = "showReadmore";
-
-  /** The Constant PREFERENCE_SHOW_LINK. */
-  public final static String PREFERENCE_SHOW_LINK               = "showLink";
-  
-  /** The Constant PREFERENCE_TARGET_PAGE. */
-  public final static String  PREFERENCE_TARGET_PAGE            = "basePath";
-  
   /** The Constant PREFERENCE_DISPLAY_MODE. */
   public static final String PREFERENCE_DISPLAY_MODE            = "mode";
   
-  /** The Constant DISPLAY_MODE_MANUAL. */
-  public static final String DISPLAY_MODE_MANUAL                = "ManualViewerMode";
-
-  /** The Constant DISPLAY_MODE_AUTOMATIC. */
-  public static final String DISPLAY_MODE_AUTOMATIC             = "AutoViewerMode";
+  /** The Constant PREFERENCE_ITEM_PATH. */
+  public final static String PREFERENCE_ITEM_PATH               = "folderPath";
   
   /** The Constant PREFERENCE_ORDER_BY. */
   public static final String PREFERENCE_ORDER_BY                = "orderBy";
   
   /** The Constant ORDER_BY_TITLE. */
   public static final String ORDER_BY_TITLE                     = "OrderByTitle";
-
+  
   /** The Constant ORDER_BY_DATE_CREATED. */
   public static final String ORDER_BY_DATE_CREATED              = "OrderByDateCreated";
-
+  
   /** The Constant ORDER_BY_DATE_MODIFIED. */
   public static final String ORDER_BY_DATE_MODIFIED             = "OrderByDateModified";
-
+  
   /** The Constant ORDER_BY_DATE_PUBLISHED. */
   public static final String ORDER_BY_DATE_PUBLISHED            = "OrderByDatePublished";
   
   /** The Constant ORDER_BY_DATE_START_EVENT. */
-  public static final String ORDER_BY_DATE_START_EVENT            = "OrderByDateStartEvent";
+  public static final String ORDER_BY_DATE_START_EVENT          = "OrderByDateStartEvent";
   
   /** The Constant PREFERENCE_ORDER_TYPE. */
   public static final String PREFERENCE_ORDER_TYPE              = "orderType";
@@ -114,6 +69,74 @@ public class UICLVPortlet extends UIPortletApplication {
   /** The Constant ORDER_TYPE_ASCENDENT. */
   public static final String ORDER_TYPE_ASCENDENT               = "OrderAsc";
   
+  /** The Constant PREFERENCE_HEADER. */
+  public final static String PREFERENCE_HEADER                  = "header";
+  
+  /** The Constant PREFERENCE_AUTOMATIC_DETECTION. */
+  public final static String PREFERENCE_AUTOMATIC_DETECTION     = "automaticDetection";
+  
+  /** The Constant PREFERENCE_DISPLAY_TEMPLATE. */
+  public final static String PREFERENCE_DISPLAY_TEMPLATE        = "formViewTemplatePath";
+  
+  /** The Constant PREFERENCE_PAGINATOR_TEMPLATE. */
+  public final static String PREFERENCE_PAGINATOR_TEMPLATE      = "paginatorTemplatePath";
+  
+  /** The Constant PREFERENCE_ITEMS_PER_PAGE. */
+  public final static String PREFERENCE_ITEMS_PER_PAGE          = "itemsPerPage";
+  
+  /** The Constant PREFERENCE_SHOW_TITLE. */
+  public final static String PREFERENCE_SHOW_TITLE              = "showTitle";
+  
+  /** The Constant PREFERENCE_SHOW_HEADER. */
+  public final static String PREFERENCE_SHOW_HEADER             = "showHeader";
+
+  /** The Constant PREFERENCE_SHOW_REFRESH_BUTTON. */
+  public final static String PREFERENCE_SHOW_REFRESH_BUTTON     = "showRefreshButton";
+
+  /** The Constant PREFERENCE_SHOW_ILLUSTRATION. */
+  /** The Constant PREFERENCE_SHOW_IMAGE. */  
+  public final static String PREFERENCE_SHOW_ILLUSTRATION       = "showThumbnailsView";
+//  public final static String PREFERENCE_SHOW_IMAGE              = "showImage";
+  
+  /** The Constant PREFERENCE_SHOW_DATE_CREATED. */
+  public final static String PREFERENCE_SHOW_DATE_CREATED       = "showDateCreated";
+  
+  /** The Constant PREFERENCE_SHOW_MORE_LINK. */
+  public final static String PREFERENCE_SHOW_READMORE           = "showReadmore";
+//  public final static String PREFERENCE_SHOW_MORE_LINK          = "showMoreLink";
+
+  /** The Constant PREFERNECE_SHOW_SUMMARY. */
+  public final static String PREFERENCE_SHOW_SUMMARY            = "showSummary";
+  
+  /** The Constant PREFERENCE_SHOW_LINK. */
+  public final static String PREFERENCE_SHOW_LINK               = "showLink";
+  
+  /** The Constant PREFERENCE_SHOW_RSSLINK. */
+  public final static String PREFERENCE_SHOW_RSSLINK            = "showRssLink";
+  
+  /** The Constant PREFERENCE_CONTEXTUAL_FOLDER. */
+  public final static String PREFERENCE_CONTEXTUAL_FOLDER				= "contextualFolder";
+  
+  /** The Constant PREFERENCE_CONTEXTUAL_FOLDER_ENABLE. */
+  public final static String PREFERENCE_CONTEXTUAL_FOLDER_ENABLE= "contextualEnable";
+  
+  /** The Constant PREFERENCE_CONTEXTUAL_FOLDER_DISABLE. */
+  public final static String PREFERENCE_CONTEXTUAL_FOLDER_DISABLE= "contextualDisable";
+  
+  /** The Constant PREFERENCE_TARGET_PAGE. */
+  public final static String  PREFERENCE_TARGET_PAGE            = "basePath";
+  
+  /** The Constant PREFERENCE_SHOW_SCL_WITH. */
+  public final static String PREFERENCE_SHOW_SCV_WITH						= "showScvWith";
+
+  /** The Constant PREFERENCE_SHOW_CLV_BY. */
+  public final static String PREFERENCE_SHOW_CLV_BY							= "showClvBy";
+  
+  /** The Constant DISPLAY_MODE_MANUAL. */
+  public static final String DISPLAY_MODE_MANUAL                = "ManualViewerMode";
+
+  /** The Constant DISPLAY_MODE_AUTOMATIC. */
+  public static final String DISPLAY_MODE_AUTOMATIC             = "AutoViewerMode";
   private PortletMode     mode;
   
   private UICLVFolderMode folderMode;

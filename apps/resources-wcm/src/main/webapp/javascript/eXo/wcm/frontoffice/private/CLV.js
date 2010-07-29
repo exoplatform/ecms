@@ -107,4 +107,40 @@ ContentListViewer.prototype.checkModeViewer = function() {
 	}
 };
 
+ContentListViewer.prototype.checkContextualFolderInput = function() {
+	var formObj = document.getElementById("UICLVConfig");
+	var tdContextualFolder = eXo.core.DOMUtil.findDescendantsByClass(formObj, "td", "ContextualRadio")[0];
+
+	var inputs = eXo.core.DOMUtil.getChildrenByTagName(tdContextualFolder, "input");
+	var enableInput = inputs[0];
+	var disableInput = inputs[1];
+	
+	var trContextual = eXo.core.DOMUtil.findAncestorByTagName(tdContextualFolder, "tr");
+	var trClv = eXo.core.DOMUtil.findNextElementByTagName(trContextual, "tr");
+	
+	var clvInput = eXo.core.DOMUtil.findDescendantsByTagName(trClv, "input")[0];
+
+	enableInput.setAttribute("onmouseup", "eXo.ecm.CLV.enableClvInput(this)");
+	disableInput.setAttribute("onmouseup", "eXo.ecm.CLV.disableClvInput(this)");
+	if (enableInput.checked) {
+		clvInput.removeAttribute('readonly');
+	} else {
+		clvInput.setAttribute('readonly', '');
+	}
+};
+
+ContentListViewer.prototype.enableClvInput = function(obj){
+	var trContextual = eXo.core.DOMUtil.findAncestorByTagName(obj, "tr");
+	var trClv = eXo.core.DOMUtil.findNextElementByTagName(trContextual, "tr");
+	var clvInput = eXo.core.DOMUtil.findDescendantsByTagName(trClv, "input")[0];
+	clvInput.removeAttribute('readonly');
+};
+
+ContentListViewer.prototype.disableClvInput = function(obj){
+	var trContextual = eXo.core.DOMUtil.findAncestorByTagName(obj, "tr");
+	var trClv = eXo.core.DOMUtil.findNextElementByTagName(trContextual, "tr");
+	var clvInput = eXo.core.DOMUtil.findDescendantsByTagName(trClv, "input")[0];
+	clvInput.setAttribute('readonly', '');
+};
+
 eXo.ecm.CLV = new ContentListViewer();

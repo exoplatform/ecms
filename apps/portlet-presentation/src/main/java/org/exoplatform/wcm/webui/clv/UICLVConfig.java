@@ -72,7 +72,8 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
     @EventConfig(listeners = UICLVConfig.SelectFolderPathActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UICLVConfig.IncreaseActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UICLVConfig.DecreaseActionListener.class, phase = Phase.DECODE),
-    @EventConfig(listeners = UICLVConfig.SelectTargetPageActionListener.class, phase = Phase.DECODE)
+    @EventConfig(listeners = UICLVConfig.SelectTargetPageActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UICLVConfig.ShowAdvancedBlockActionListener.class, phase = Phase.DECODE)    
   }
 )
 public class UICLVConfig extends UIForm  implements UISelectable {
@@ -94,6 +95,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   
   /** The Constant HEADER_FORM_STRING_INPUT. */
   public final static String HEADER_FORM_STRING_INPUT               = "UICLVConfigHeaderFormStringInput";
+  
+  /** The Constant SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT. */
+  public static final String SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT= "UICLVConfigShowAutomaticDetectionCheckboxInput";
 
   /** The Constant DISPLAY_TEMPLATE_FORM_SELECT_BOX. */
   public final static String DISPLAY_TEMPLATE_FORM_SELECT_BOX       = "UICLVConfigDisplayTemplateFormSelectBox";
@@ -101,42 +105,60 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   /** The Constant PAGINATOR_TEMPLATE_FORM_SELECT_BOX. */
   public final static String PAGINATOR_TEMPLATE_FORM_SELECT_BOX     = "UICLVConfigPaginatorTemplateFormSelectBox";
   
+  /** The Constant ITEMS_PER_PAGE_FORM_STRING_INPUT. */
+  public final static String ITEMS_PER_PAGE_FORM_STRING_INPUT       = "UICLVConfigItemsPerPageFormStringInput";
+  
+  /** The Constant SHOW_TITLE_FORM_CHECKBOX_INPUT. */
+  public static final String SHOW_TITLE_FORM_CHECKBOX_INPUT         = "UICLVConfigShowTitleFormCheckboxInput";
+
+  /** The Constant SHOW_HEADER_FORM_CHECKBOX_INPUT. */
+  public static final String SHOW_HEADER_FORM_CHECKBOX_INPUT        = "UICLVConfigShowHeaderFormCheckboxInput";
+  
+  /** The Constant SHOW_REFRESH_FORM_CHECKBOX_INPUT. */
+  public final static String SHOW_REFRESH_FORM_CHECKBOX_INPUT       = "UICLVConfigShowRefreshFormCheckboxInput";
+
+  /** The Constant SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT. */
+  /** The Constant SHOW_IMAGE_FORM_CHECKBOX_INPUT. */  
+  public static final String SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT  = "UICLVConfigShowIllustrationFormCheckboxInput";
+//  public static final String SHOW_IMAGE_FORM_CHECKBOX_INPUT         = "UICLVConfigShowImageFormCheckboxInput";
+  
+  /** The Constant SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT. */
+  public static final String SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT  = "UICLVConfigShowDateCreatedFormCheckboxInput";
+  
+  /** The Constant SHOW_MORE_LINK_FORM_CHECKBOX_INPUT. */
+  public final static String SHOW_READMORE_FORM_CHECKBOX_INPUT      = "UICLVConfigShowReadmoreFormCheckboxInput";  
+//  public static final String SHOW_MORE_LINK_FORM_CHECKBOX_INPUT     = "UICLVConfigShowMoreLinkCheckedboxInput";
+  
+  /** The Constant SHOW_SUMMARY_FORM_CHECKBOX_INPUT. */
+  public static final String SHOW_SUMMARY_FORM_CHECKBOX_INPUT       = "UICLVConfigShowSummaryFormCheckboxInput";
+  
+  /** The Constant SHOW_LINK_FORM_CHECKBOX_INPUT. */
+  public static final String SHOW_LINK_FORM_CHECKBOX_INPUT          = "UICLVConfigShowLinkFormCheckboxInput";
+  
+  /** The Constant SHOW_RSSLINK_FORM_CHECKBOX_INPUT. */
+  public static final String SHOW_RSSLINK_FORM_CHECKBOX_INPUT       = "UICLVConfigShowRssLinkFormCheckboxInput";
+  
   /** The Constant TARGET_PAGE_FORM_INPUT_SET. */
   public final static String TARGET_PAGE_FORM_INPUT_SET             = "UICLVConfigTargetPageFormInputSet";
-  
+
   /** The Constant TARGET_PAGE_FORM_STRING_INPUT. */
   public final static String TARGET_PAGE_FORM_STRING_INPUT          = "UICLVConfigTargetPageFormStringInput";
 
   /** The Constant TARGET_PAGE_SELECTOR_POPUP_WINDOW. */
   public final static String TARGET_PAGE_SELECTOR_POPUP_WINDOW      = "UICLVConfigTargetPageSelectorPopupWindow";
-
-  /** The Constant ITEMS_PER_PAGE_FORM_STRING_INPUT. */
-  public final static String ITEMS_PER_PAGE_FORM_STRING_INPUT       = "UICLVConfigItemsPerPageFormStringInput";
   
-  /** The Constant SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT  = "UICLVConfigShowIllustrationFormCheckboxInput";
+  /** The Constant DYNAMIC_NAVIGATION_LABEL. */											
+  public static final String DYNAMIC_NAVIGATION_LABEL								= "UICLVConfigDynamicNavigationLabel";
   
-  /** The Constant SHOW_TITLE_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_TITLE_FORM_CHECKBOX_INPUT         = "UICLVConfigShowTitleFormCheckboxInput";
+  /** The Constant CONTEXTUAL_FOLDER_RADIOBOX_INPUT. */
+  public static final String CONTEXTUAL_FOLDER_RADIOBOX_INPUT				= "UICLVConfigContextualFolderRadioBoxInput";
 
-  /** The Constant SHOW_SUMMARY_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_SUMMARY_FORM_CHECKBOX_INPUT       = "UICLVConfigShowSummaryFormCheckboxInput";
+  /** The Constant SHOW_CLV_BY_STRING_INPUT. */
+  public static final String SHOW_CLV_BY_STRING_INPUT								= "UICLVConfigShowCLVByStringInput";
   
-  /** The Constant SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT  = "UICLVConfigShowDateCreatedFormCheckboxInput";
-
-  /** The Constant SHOW_HEADER_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_HEADER_FORM_CHECKBOX_INPUT        = "UICLVConfigShowHeaderFormCheckboxInput";
-
-  /** The Constant SHOW_LINK_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_LINK_FORM_CHECKBOX_INPUT          = "UICLVConfigShowLinkFormCheckboxInput";
+  /** The Constant SHOW_SCV_WITH_STRING_INPUT. */
+  public static final String SHOW_SCV_WITH_STRING_INPUT    					= "UICLVConfigshowSCVWithStringInput";
   
-  /** The Constant SHOW_REFRESH_FORM_CHECKBOX_INPUT. */
-  public final static String SHOW_REFRESH_FORM_CHECKBOX_INPUT       = "UICLVConfigShowRefreshFormCheckboxInput";
-
-  /** The Constant SHOW_READMORE_FORM_CHECKBOX_INPUT. */
-  public final static String SHOW_READMORE_FORM_CHECKBOX_INPUT      = "UICLVConfigShowReadmoreFormCheckboxInput";
-
   /** TODO: Need to improve, we should allow user can choose template category by configuration or portlet's preference */
   /** The Constant DISPLAY_TEMPLATE_CATEGORY. */
   public final static String DISPLAY_TEMPLATE_CATEGORY              = "list-by-folder";
@@ -153,6 +175,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   
   /** The items. */
   private List<String> items;
+  
+  private boolean isShowAdvancedBlock_;
   
   /**
    * Gets the popup id.
@@ -197,6 +221,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     this.items = items;
   }
   
+  public boolean isShowAdvancedBlock() { return isShowAdvancedBlock_; }
+  
+  public void setIsShowAdvancedBlock(boolean value) { isShowAdvancedBlock_ = value; }
+  
   /**
    * Instantiates a new uICLV config.
    * 
@@ -208,19 +236,32 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
     String orderBy = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, null);
     String orderType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
+    
     String header = portletPreferences.getValue(UICLVPortlet.PREFERENCE_HEADER, null);
     String displayTemplate = portletPreferences.getValue(UICLVPortlet.PREFERENCE_DISPLAY_TEMPLATE, null);
     String paginatorTemplate = portletPreferences.getValue(UICLVPortlet.PREFERENCE_PAGINATOR_TEMPLATE, null);
-    String targetPage = portletPreferences.getValue(UICLVPortlet.PREFERENCE_TARGET_PAGE, null);
     String itemsPerPage = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null);
-    boolean showIlustration  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, null));
+    
+    String contextualFolderMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER, null);
+    String showClvBy = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_CLV_BY, null);
+    String targetPage = portletPreferences.getValue(UICLVPortlet.PREFERENCE_TARGET_PAGE, null);
+    String showScvWith = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH, null);
+    
+    boolean showAutomaticDetection = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION, null));
+//    boolean showIlustration  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, null));
     boolean showTitle  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_TITLE, null));
-    boolean showSummary  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_SUMMARY, null));
-    boolean showDateCreated  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED, null));
     boolean showHeader  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_HEADER, null));
-    boolean showLink = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_LINK, null));
     boolean showRefresh  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON, null));
-    boolean showReadmore  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_READMORE, null));
+    
+    boolean showImage = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, null));
+    boolean showDateCreated  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED, null));
+//    boolean showMoreLink = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_MORE_LINK, null));
+    boolean showReadmore  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_READMORE, null));    
+    
+    boolean showSummary  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_SUMMARY, null));
+    boolean showLink = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_LINK, null));
+    boolean showRssLink = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_RSSLINK, null));
+//    
     
     /** DISPLAY MODE */
     List<SelectItemOption<String>> displayModeOptions = new ArrayList<SelectItemOption<String>>();
@@ -232,7 +273,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     /** ITEM PATH */
     UIFormStringInput itemPathInput = 
       new UIFormStringInput(ITEM_PATH_FORM_STRING_INPUT, ITEM_PATH_FORM_STRING_INPUT, itemPath);
-    itemPathInput.addValidator(MandatoryValidator.class);
     itemPathInput.setEditable(false);
     itemPathInput.addValidator(MandatoryValidator.class);
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
@@ -259,6 +299,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     /** HEADER */
     UIFormStringInput headerInput = new UIFormStringInput(HEADER_FORM_STRING_INPUT, HEADER_FORM_STRING_INPUT, header);
     
+    /** AUTOMATIC DETECTION */
+    UIFormCheckBoxInput<Boolean> showAutomaticDetectionCheckBox = new UIFormCheckBoxInput<Boolean>(SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT, SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT, null);
+    showAutomaticDetectionCheckBox.setChecked(showAutomaticDetection);
+    
     /** DISPLAY TEMPLATE */
     List<SelectItemOption<String>> formViewerTemplateList = getTemplateList(PORTLET_NAME, DISPLAY_TEMPLATE_CATEGORY);
     UIFormSelectBox formViewTemplateSelector = new UIFormSelectBox(DISPLAY_TEMPLATE_FORM_SELECT_BOX, DISPLAY_TEMPLATE_FORM_SELECT_BOX, formViewerTemplateList);
@@ -269,6 +313,66 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     UIFormSelectBox paginatorTemplateSelector = new UIFormSelectBox(PAGINATOR_TEMPLATE_FORM_SELECT_BOX, PAGINATOR_TEMPLATE_FORM_SELECT_BOX, paginatorTemplateList);
     paginatorTemplateSelector.setValue(paginatorTemplate);
     
+    /** ITEMS PER PAGE */
+    UIFormStringInput itemsPerPageStringInput = new UIFormStringInput(ITEMS_PER_PAGE_FORM_STRING_INPUT, ITEMS_PER_PAGE_FORM_STRING_INPUT, itemsPerPage);
+    itemsPerPageStringInput.addValidator(MandatoryValidator.class);
+    itemsPerPageStringInput.addValidator(ZeroNumberValidator.class);
+    itemsPerPageStringInput.addValidator(PositiveNumberFormatValidator.class);
+    itemsPerPageStringInput.setMaxLength(3);
+
+//    /** SHOW ILLUSTRATION */
+//    UIFormCheckBoxInput<Boolean> showIllustrationCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, null);
+//    showIllustrationCheckbox.setChecked(showIlustration);
+    
+    /** SHOW TITLE */
+    UIFormCheckBoxInput<Boolean> showTitleCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_TITLE_FORM_CHECKBOX_INPUT, SHOW_TITLE_FORM_CHECKBOX_INPUT, null);
+    showTitleCheckbox.setChecked(showTitle);
+    
+    /** SHOW HEADER */
+    UIFormCheckBoxInput<Boolean> showHeaderCheckBox = new UIFormCheckBoxInput<Boolean>(SHOW_HEADER_FORM_CHECKBOX_INPUT, SHOW_HEADER_FORM_CHECKBOX_INPUT, null);
+    showHeaderCheckBox.setChecked(showHeader);
+    
+    /** SHOW REFRESH */
+    UIFormCheckBoxInput<Boolean> showRefreshCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_REFRESH_FORM_CHECKBOX_INPUT, SHOW_REFRESH_FORM_CHECKBOX_INPUT, null);
+    showRefreshCheckbox.setChecked(showRefresh);
+
+    /** SHOW_IMAGE */
+    UIFormCheckBoxInput<Boolean> showImageCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, null);
+    showImageCheckbox.setChecked(showImage);
+    
+    /** SHOW DATE CREATED */
+    UIFormCheckBoxInput<Boolean> showDateCreatedCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT, SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT, null);
+    showDateCreatedCheckbox.setChecked(showDateCreated);
+    
+    /** SHOW MORE LINK */
+    UIFormCheckBoxInput<Boolean> showMoreLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_READMORE_FORM_CHECKBOX_INPUT, SHOW_READMORE_FORM_CHECKBOX_INPUT, null);
+    showMoreLinkCheckbox.setChecked(showReadmore);
+    
+    /** SHOW SUMMARY */
+    UIFormCheckBoxInput<Boolean> showSummaryCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_SUMMARY_FORM_CHECKBOX_INPUT, SHOW_SUMMARY_FORM_CHECKBOX_INPUT, null);
+    showSummaryCheckbox.setChecked(showSummary);
+    
+    /** SHOW LINK */
+    UIFormCheckBoxInput<Boolean> showLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_LINK_FORM_CHECKBOX_INPUT, SHOW_LINK_FORM_CHECKBOX_INPUT, null);
+    showLinkCheckbox.setChecked(showLink);
+    
+//    /** SHOW READMORE */
+//    UIFormCheckBoxInput<Boolean> showReadmoreCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_READMORE_FORM_CHECKBOX_INPUT, SHOW_READMORE_FORM_CHECKBOX_INPUT, null);
+//    showReadmoreCheckbox.setChecked(showReadmore);
+    /** SHOW RSS LINK */
+    UIFormCheckBoxInput<Boolean> showRssLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_RSSLINK_FORM_CHECKBOX_INPUT, SHOW_RSSLINK_FORM_CHECKBOX_INPUT, null);
+    showRssLinkCheckbox.setChecked(showRssLink);
+    
+    /** CONTEXTUAL FOLDER */
+    List<SelectItemOption<String>> contextualFolderOptions = new ArrayList<SelectItemOption<String>>();
+    contextualFolderOptions.add(new SelectItemOption<String>(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE, UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE));
+    contextualFolderOptions.add(new SelectItemOption<String>(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_DISABLE, UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_DISABLE));
+    UIFormRadioBoxInput contextualFolderRadioBoxInput = new UIFormRadioBoxInput(CONTEXTUAL_FOLDER_RADIOBOX_INPUT, CONTEXTUAL_FOLDER_RADIOBOX_INPUT, contextualFolderOptions);
+    contextualFolderRadioBoxInput.setValue(contextualFolderMode);
+    
+    /** SHOW CLV BY */
+    UIFormStringInput showClvByInput = new UIFormStringInput(SHOW_CLV_BY_STRING_INPUT, SHOW_CLV_BY_STRING_INPUT, showClvBy);
+    
     /** TARGET PAGE */
     UIFormInputSetWithAction targetPageInputSet = new UIFormInputSetWithAction(TARGET_PAGE_FORM_INPUT_SET);
     UIFormStringInput basePathInput = new UIFormStringInput(TARGET_PAGE_FORM_STRING_INPUT, TARGET_PAGE_FORM_STRING_INPUT, targetPage);
@@ -277,62 +381,45 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     targetPageInputSet.setActionInfo(TARGET_PAGE_FORM_STRING_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(basePathInput);
     
-    /** ITEMS PER PAGE */
-    UIFormStringInput itemsPerPageStringInput = new UIFormStringInput(ITEMS_PER_PAGE_FORM_STRING_INPUT, ITEMS_PER_PAGE_FORM_STRING_INPUT, itemsPerPage);
-    itemsPerPageStringInput.addValidator(MandatoryValidator.class);
-    itemsPerPageStringInput.addValidator(ZeroNumberValidator.class);
-    itemsPerPageStringInput.addValidator(PositiveNumberFormatValidator.class);
-    itemsPerPageStringInput.setMaxLength(3);
-
-    /** SHOW ILLUSTRATION */
-    UIFormCheckBoxInput<Boolean> showIllustrationCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, null);
-    showIllustrationCheckbox.setChecked(showIlustration);
-    
-    /** SHOW TITLE */
-    UIFormCheckBoxInput<Boolean> showTitleCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_TITLE_FORM_CHECKBOX_INPUT, SHOW_TITLE_FORM_CHECKBOX_INPUT, null);
-    showTitleCheckbox.setChecked(showTitle);
-    
-    /** SHOW SUMMARY */
-    UIFormCheckBoxInput<Boolean> showSummaryCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_SUMMARY_FORM_CHECKBOX_INPUT, SHOW_SUMMARY_FORM_CHECKBOX_INPUT, null);
-    showSummaryCheckbox.setChecked(showSummary);
-    
-    /** SHOW DATE CREATED */
-    UIFormCheckBoxInput<Boolean> showDateCreatedCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT, SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT, null);
-    showDateCreatedCheckbox.setChecked(showDateCreated);
-    
-    /** SHOW HEADER */
-    UIFormCheckBoxInput<Boolean> showHeaderCheckBox = new UIFormCheckBoxInput<Boolean>(SHOW_HEADER_FORM_CHECKBOX_INPUT, SHOW_HEADER_FORM_CHECKBOX_INPUT, null);
-    showHeaderCheckBox.setChecked(showHeader);
-    
-    /** SHOW LINK */
-    UIFormCheckBoxInput<Boolean> showLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_LINK_FORM_CHECKBOX_INPUT, SHOW_LINK_FORM_CHECKBOX_INPUT, null);
-    showLinkCheckbox.setChecked(showLink);
-    
-    /** SHOW REFRESH */
-    UIFormCheckBoxInput<Boolean> showRefreshCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_REFRESH_FORM_CHECKBOX_INPUT, SHOW_REFRESH_FORM_CHECKBOX_INPUT, null);
-    showRefreshCheckbox.setChecked(showRefresh);
-    
-    /** SHOW READMORE */
-    UIFormCheckBoxInput<Boolean> showReadmoreCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_READMORE_FORM_CHECKBOX_INPUT, SHOW_READMORE_FORM_CHECKBOX_INPUT, null);
-    showReadmoreCheckbox.setChecked(showReadmore);
+    /** ALLOW DYNAMIC URL */
+    UIFormStringInput showScvWithInput = new UIFormStringInput(SHOW_SCV_WITH_STRING_INPUT, SHOW_SCV_WITH_STRING_INPUT, showScvWith);
     
     addChild(displayModeRadioBoxInput);
     addChild(itemPathInputSet);
     addChild(orderBySelectBox);
     addChild(orderTypeRadioBoxInput);
+    
     addChild(headerInput);
+    addChild(showAutomaticDetectionCheckBox);
     addChild(formViewTemplateSelector);
     addChild(paginatorTemplateSelector);
     addChild(itemsPerPageStringInput);    
-    addChild(showRefreshCheckbox);
-    addChild(showIllustrationCheckbox);
+    
     addChild(showTitleCheckbox);
-    addChild(showDateCreatedCheckbox);
-    addChild(showSummaryCheckbox);
     addChild(showHeaderCheckBox);
+    addChild(showRefreshCheckbox);
+    
+//    addChild(showIllustrationCheckbox);
+    addChild(showImageCheckbox);
+    addChild(showDateCreatedCheckbox);
+    addChild(showMoreLinkCheckbox);
+    
+    addChild(showSummaryCheckbox);
     addChild(showLinkCheckbox);
-    addChild(showReadmoreCheckbox);
+    addChild(showRssLinkCheckbox);
+//    addChild(showReadmoreCheckbox);
+    
+    addChild(contextualFolderRadioBoxInput);
+    addChild(showClvByInput);
     addChild(targetPageInputSet);
+    addChild(showScvWithInput);
+    
+    if (contextualFolderMode != null && contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE))
+    	isShowAdvancedBlock_ = true;
+    else //if (contextualFolderMode == null || contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_DISABLE)) 
+  	{
+    	isShowAdvancedBlock_ = false;
+    }
 
     setActions(new String[] { "Save", "Cancel" });
   }
@@ -403,23 +490,35 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       if (itemPath == null || itemPath.length() == 0 || (itemPath.contains(";") && displayMode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) || (!itemPath.contains(";") && displayMode.equals(UICLVPortlet.DISPLAY_MODE_MANUAL))) {
         Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.not-valid-path", null, ApplicationMessage.WARNING);
         return;
-      }
+      } 
       String orderBy = clvConfig.getUIFormSelectBox(ORDER_BY_FORM_SELECT_BOX).getValue();
       String orderType = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.ORDER_TYPE_FORM_RADIO_BOX_INPUT)).getValue();
+      
       String header = clvConfig.getUIStringInput(UICLVConfig.HEADER_FORM_STRING_INPUT).getValue();
       if (header == null) header = "";
+      String showAutomaticDetection = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT).isChecked()? "true" : "false";
       String displayTemplate = clvConfig.getUIFormSelectBox(UICLVConfig.DISPLAY_TEMPLATE_FORM_SELECT_BOX).getValue();
       String paginatorTemplate = clvConfig.getUIFormSelectBox(UICLVConfig.PAGINATOR_TEMPLATE_FORM_SELECT_BOX).getValue();
       String itemsPerPage = clvConfig.getUIStringInput(UICLVConfig.ITEMS_PER_PAGE_FORM_STRING_INPUT).getValue();
-      String targetPage = clvConfig.getUIStringInput(UICLVConfig.TARGET_PAGE_FORM_STRING_INPUT).getValue();
-      String showIllustration = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
+      
+//      String showIllustration = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
       String showTitle = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_TITLE_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
-      String showSummary = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_SUMMARY_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
-      String showDateCreated = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
       String showHeader = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_HEADER_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
-      String showLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_LINK_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
       String showRefresh = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_REFRESH_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
-      String showReadmore = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_READMORE_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
+      
+      String showImage = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
+      String showDateCreated = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
+      String showMoreLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_READMORE_FORM_CHECKBOX_INPUT).isChecked()? "true" : "false";
+      
+      String showSummary = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_SUMMARY_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
+      String showLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_LINK_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
+//      String showReadmore = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_READMORE_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
+      String showRssLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_RSSLINK_FORM_CHECKBOX_INPUT).isChecked() ? "true" : "false";
+      
+      String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
+      String showClvBy = clvConfig.getUIStringInput(UICLVConfig.SHOW_CLV_BY_STRING_INPUT).getValue();
+      String targetPage = clvConfig.getUIStringInput(UICLVConfig.TARGET_PAGE_FORM_STRING_INPUT).getValue();
+      String showScvWith = clvConfig.getUIStringInput(UICLVConfig.SHOW_SCV_WITH_STRING_INPUT).getValue();
       
       /** SET VALUES TO PREFERENCES */
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
@@ -428,19 +527,30 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ITEM_PATH, itemPath);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ORDER_BY, orderBy);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, orderType);
+      
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_HEADER, header);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION, showAutomaticDetection);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_DISPLAY_TEMPLATE, displayTemplate);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_PAGINATOR_TEMPLATE, paginatorTemplate);
-      portletPreferences.setValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, itemsPerPage);      
-      portletPreferences.setValue(UICLVPortlet.PREFERENCE_TARGET_PAGE, targetPage);
-      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, showIllustration);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, itemsPerPage);
+      
+//      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, showIllustration);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_TITLE, showTitle);
-      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_SUMMARY, showSummary);
-      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED, showDateCreated);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_HEADER, showHeader);
-      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_LINK, showLink);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON, showRefresh);
-      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_READMORE, showReadmore);
+      
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, showImage);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED, showDateCreated);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_READMORE, showMoreLink);
+      
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_SUMMARY, showSummary);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_LINK, showLink);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_RSSLINK, showRssLink);
+      
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER, contextualFolderMode);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_CLV_BY, showClvBy);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_TARGET_PAGE, targetPage);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH, showScvWith);
       portletPreferences.store();
       
       UICLVPortlet portlet = clvConfig.getAncestorOfType(UICLVPortlet.class);
@@ -611,5 +721,17 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       viewerManagementForm.setPopupId(TARGET_PAGE_SELECTOR_POPUP_WINDOW);
     }
   }
+  
+  public static class ShowAdvancedBlockActionListener extends EventListener<UICLVConfig> {
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UICLVConfig> event) throws Exception {
+      UICLVConfig clvConfig = event.getSource();
+      String showValue = event.getRequestContext().getRequestParameter(OBJECTID);
+      clvConfig.isShowAdvancedBlock_ = "true".equalsIgnoreCase(showValue);
+      event.getRequestContext().addUIComponentToUpdateByAjax(clvConfig);
+    }
+  }  
   
 }

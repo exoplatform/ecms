@@ -5,8 +5,11 @@
   String portletId = Utils.getRealPortletId(rcontext);
   def quickEditingBlockId = portletId + "-QuickEditingBlock";
   def jsManager = rcontext.getJavascriptManager();
+  def advancedBlockDisplay = "block";
+  def advancedLinkDispplay = "none";
   jsManager.importJavascript("eXo.wcm.frontoffice.private.CLV", "/eXoWCMResources/javascript");
   jsManager.addJavascript("eXo.ecm.CLV.checkModeViewer();");
+  jsManager.addJavascript("eXo.ecm.CLV.checkContextualFolderInput();");  
 %>
 <div class="UIForm $uicomponent.id">
   <div class="TitleBar">
@@ -91,6 +94,9 @@
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %></td>
                   <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.HEADER_FORM_STRING_INPUT) %></td>
+                  
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %></td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
@@ -101,41 +107,75 @@
                   <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
                 </tr>
                 <tr>
-                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
-                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
-                </tr>
-                <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></td>
                   <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></td>
                 </tr>
               </table>
               <table class="UIFormGrid">
                 <tr>
-                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %></td>
-                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %></td>
-                </tr>
-                <tr>
+                  
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %></td>
+                  
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %></td>
-                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></td>
-                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></td>
+
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></td>
+                  
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></td>
+                  
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %></td>
+                  
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %></td>
+                  <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %></td>
                 </tr>
               </table>
             </fieldset>
+            <% advancedBlockDisplay = uicomponent.isShowAdvancedBlock() ? "block" : "none" 
+            	 advancedLinkDisplay = uicomponent.isShowAdvancedBlock()? "none" : "block";
+          	%>
+            <fieldset style="display: $advancedBlockDisplay; margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
+              <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.AdvancedBlock") %> <a style="text-align:center;font-style:italic; color: #0000FF;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" title="<%=_ctx.appRes("UICLVConfig.label.HideAdvancedBlock")%>">[ - ]</a> </legend>
+              <table class="UIFormGrid">
+              	<tr>
+              		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></td>
+              	</tr>
+              	<tr>
+              		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %></td>
+              		<td class="FieldComponent ContextualRadio" colspan="2">
+              			<% uiform.renderField(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>
+              		</td>
+              	</tr>
+              	<tr>
+	            		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
+	            		<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
+            		</tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
+                </tr>
+                <tr>
+                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></td>
+                </tr>
+              </table>
+            </fieldset>
+          	<a style="display: $advancedLinkDisplay; text-align:left;font-style:italic; color: #0000FF;" href="<%=uicomponent.event("ShowAdvancedBlock", "true")%>" title="<%=_ctx.appRes("UICLVConfig.label.ShowAdvancedBlock")%>">
+          		<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>
+        		</a>
             <div class="UIAction"> 
               <table class="ActionContainer">
                 <tr>
