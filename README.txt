@@ -46,13 +46,13 @@ monitoring.
 
 2. WHAT's NEW?
 ---------------------------------------------------
-	* EAR compliance with EPP5
-	*	CKEditor3 compatibility, Simple Json based UITable for dialogs/views
-	*	Rest service for cleanName in nodes
-	*	Authoring Plugin (as Tech Preview for RedHat)
-	*	L11n (as Tech Preview for RedHat)
-	* PDF View for almost document: MS Document, Openfice Document
-	Find more details at the RELEASE NOTEs part
+  * EAR compliance with EPP5
+  * CKEditor3 compatibility, Simple Json based UITable for dialogs/views
+  * Rest service for cleanName in nodes
+  * Authoring Plugin (as Tech Preview for RedHat)
+  * L11n (as Tech Preview for RedHat)
+  * PDF View for almost document: MS Document, Openfice Document
+  Find more details at the RELEASE NOTEs part
 
 3. HOW TO SET UP EXO CONTENT
 ---------------------------------------------------
@@ -69,126 +69,90 @@ Environment (JRE) or Java Development Kit version 6.x
 3.4 Open a shell session and go to the bin/ directory that has just been extracted.
 
 3.5 Then run the command :
-		* Start tomcat server
-			+)On the Windows platform
-				Open a DOS prompt command, go to tomcat/bin and type the command:
-					"gatein.bat run" for production
-					"gatein-dev.bat run" for development 
+  * Start tomcat server
+    +)On the Windows platform
+      Open a DOS prompt command, go to tomcat/bin and type the command:
+     "gatein.bat run" for production
+     "gatein-dev.bat run" for development 
 
-			+)On Unix/Linux/cygwin
-				Open a terminal, go to tomcat/bin and type the command:
-					 "./gatein.sh run" for production
-					 "./gatein-dev.sh run" for development
+    +)On Unix/Linux/cygwin
+      Open a terminal, go to tomcat/bin and type the command:
+      "./gatein.sh run" for production
+      "./gatein-dev.sh run" for development
 		
-		* Start JBoss server
-			+) On the Windows platform
-				 Open a DOS prompt command, go to jboss/bin and type the command:
-					"run.bat"
+  * Start JBoss server
+    +) On the Windows platform
+       Open a DOS prompt command, go to jboss/bin and type the command:
+       "run.bat"
 
-			+) On Unix/Linux/cygwin
-				 Open a terminal, go to jboss/bin and type the command:
-					 "./run.sh" for production
+    +) On Unix/Linux/cygwin
+       Open a terminal, go to jboss/bin and type the command:
+       "./run.sh" for production
 3.6 Run Openoffice service to convert document to PDF file for using PDF View.
-		OpenOffice should available on your machine.
-      * Run command:
-		soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard
-		Please refer to: http://www.artofsolving.com for using JODCONVERTER
+    OpenOffice should available on your machine.
+    * Run command:
+      soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard
+      Please refer to: http://www.artofsolving.com for using JODCONVERTER
 3.7 Using PDF Viewer
-		Now we using icepdf to enable viewing function in eXo Content
-		Some PDF document make Icet pdf generating image with wrong font. We can improve this by
-		installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
+    Now we using icepdf to enable viewing function in eXo Content
+    Some PDF document make Icet pdf generating image with wrong font. We can improve this by
+    installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
 
 4. BUILDING FROM SOURCES	
-		This will explain you how to build a package of WCM 2.0.0-GA with Tomcat.
-		For general information about installation, please refer to :
-		http://anonsvn.jboss.org/repos/gatein/portal/trunk/README.txt
-
-		*****************
-		* COMPILATION
-		*****************
-
-		* mvn install
-		For example: mvn install
-
-		***********************
-		* PACKAGING FOR TOMCAT:
-		***********************
-		WCM only:
-		** mvn clean install in /delivery/wcm/assembly
-		*  Creates a Tomcat delivery in /delivery/wcm/assembly/target/tomcat/ 
-		
-		WCM + WKF:
-		** mvn clean install in /delivery/wkf-wcm/assembly
-		*  Creates a Tomcat delivery in /delivery/wkf-wcm/assembly/target/tomcat/ 
-		
-		***************************
-		* PACKAGING FOR JBOSS EARs:
-		***************************		
-		* WCM extension ear:
-		** mvn clean install in /packaging/wcm/ear 
-		  Get this file in target folder: gatein-wcm-extension-2.0.1.ear
-		
-		
-		* ECMDEMO ear
-		** mvn clean install in /packaging/ecmdemo/ear
-		  Get this file in target folder: gatein-ecmdemo-porta-2.0.1.ear
-		
-		* Workflow extension ear(optional):
-		** mvn clean install in /packaging/workflow/ear
-		   Get this file in target folder: gatein-workflow-extension-2.0.1.ear
+			
 
 5. HOW TO INSTALL WCM IN JBoss/GateIn & EPP5
 
-	5.1. Pre-requisites
-	--------------------
-	- Java 6
-	- EPP5 zip
-	- JBoss/GateIn zip
+   5.1. Pre-requisites
+   --------------------
+   * Java 6
+   * EPP5 zip
+   * JBoss/GateIn zip
 
-	5.2. Installation
-	--------------
-	+) For EPP5
-	   * Unzip EPP5. Assume it's located at /working/jboss-epp-5.0
-		   * Copy gatein-wcm-extension-2.0.1.ear and gatein-ecmdemo-portal-2.0.1.ear
+   5.2. Installation
+   --------------
+   * For EPP5
+     +) Unzip EPP5. Assume it's located at /working/jboss-epp-5.0
+     +) Copy gatein-wcm-extension-2.0.1.ear and gatein-ecmdemo-portal-2.0.1.ear
 	    /working/jboss-epp-5.0/jboss-as/server/default/deploy/
-		 * Delete existing gatein-ds.xml and overwrite it with attached gatein-ds.xml and wcm-ds.xml
+     +) Delete existing gatein-ds.xml and overwrite it with attached gatein-ds.xml and wcm-ds.xml
 	
-	+) For JBoss/GateIn
-	   * Unzip JBoss/GateIn. Assum it's located at /working/jboss-gatein
-	   * Copy gatein-wcm-extension-2.0.1.ear and gatein-ecmdemo-portal-2.0.1.ear
-	    /working/jboss-gatein/server/default/deploy/
+   * For JBoss/GateIn
+     +) Unzip JBoss/GateIn. Assum it's located at /working/jboss-gatein
+     +) Copy gatein-wcm-extension-2.0.1.ear and gatein-ecmdemo-portal-2.0.1.ear
+	/working/jboss-gatein/server/default/deploy/
 	
-	5.3. Start up
-	-------------
-  +) On the Windows platform
+   5.3. Start up
+   -------------
+   * On the Windows platform
      Open a DOS prompt command, go to /working/jboss-epp-5.0/jboss-as/bin and type the command:
-		 "run.bat"
+     "run.bat"
 		 
-  +) On Unix/Linux/cygwin
-		 Open a terminal, go to /working/jboss-epp-5.0/jboss-as/bin and type the command:
-		 "./run.sh" for production
+   * On Unix/Linux/cygwin
+     Open a terminal, go to /working/jboss-epp-5.0/jboss-as/bin and type the command:
+     "./run.sh" for production
 
 6. RUNNING
 ---------------------------------------------------
 
-	6.1 Running
-	------------------------
-	    Open your web browsers, now eXo Content can run on FireFox 2 or newer, Internet Explorer 7 or newer (we recommend using FireFox 3+ or Internet Explorer 7+ for the best result)
-		  Navigate to URL: 
-	    http://localhost:8080/ecmdemo/public/classic
-	    http://localhost:8080/ecmdemo/public/acme
+   6.1 Running
+   ------------------------
+   Open your web browsers, now eXo Content can run on FireFox 2 or newer, Internet Explorer 7 or newer (we recommend using FireFox 3+ or Internet Explorer 7+ for the best result)
+   Navigate to URL: 
+   http://localhost:8080/ecmdemo/public/classic
+   http://localhost:8080/ecmdemo/public/acme
 
-  6.2 Login
-	------------------------
-	   When the page has been loaded, click "Login" on the top right corner. 
-		 Specify the username and the password.
-		 ----------------------
-		 Username  |   Password
-       root    |     gtn
-			 john    |     gtn
-			 james   |     gtn
-			 mary    |     gtn
-			 demo    |     gtn
+   6.2 Login
+   ------------------------
+   When the page has been loaded, click "Login" on the top right corner. 
+   Specify the username and the password.
+   ----------------------
+   Username  |   Password
+     root    |     gtn
+     john    |     gtn
+     james   |     gtn
+     mary    |     gtn
+     demo    |     gtn
 
 7. RELEASE NOTES 
 ---------------------------------------------------
@@ -264,13 +228,13 @@ Release Notes - exo-ecms - Version wcm-2.0.1
 
 
 ** Other resources and links
-	Company site        http://www.exoplatform.com
-	Community JIRA      http://jira.exoplatform.org
-	Community site      http://www.exoplatform.org
+   Company site        http://www.exoplatform.com
+   Community JIRA      http://jira.exoplatform.org
+   Community site      http://www.exoplatform.org
 	
 For more documentation and latest updated news, please visit our websites:
-	www.exoplatform.com
-	www.blog.exoplatform.org
+   http://www.exoplatform.com
+   http://www.blog.exoplatform.org
 	
 If you have questions, please send a mail to the list exoplatform@objectweb.org.
 
