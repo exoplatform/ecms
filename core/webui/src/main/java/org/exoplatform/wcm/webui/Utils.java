@@ -19,6 +19,7 @@ package org.exoplatform.wcm.webui;
 import java.util.HashMap;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
@@ -28,6 +29,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIMaskWorkspace;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -463,4 +465,39 @@ public class Utils {
 	  imagePath += System.currentTimeMillis();
 	  return imagePath; 
   }
+  
+  /**
+   * GetRealNode
+   * 
+   * @param strRepository
+   * @param strWorkspace
+   * @param strIdentifier
+   * @return the required node/ the target of a symlink node / null if node was in trash.
+   * @throws RepositoryException
+   */
+  public static Node getRealNode(String strRepository, String strWorkspace, String strIdentifier, boolean isWCMBase) throws RepositoryException{
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    Node selectedNode;
+    if (isWCMBase) {
+      selectedNode = getViewableNodeByComposer(strRepository, strWorkspace, strIdentifier, WCMComposer.BASE_VERSION);
+    }else { 
+      selectedNode = getViewableNodeByComposer(strRepository, strWorkspace, strIdentifier);
+    }
+    if (selectedNode != null){
+      if (!org.exoplatform.ecm.webui.utils.Utils.isTrashHomeNode(selectedNode)) {
+        if (linkManager.isLink(selectedNode)) {
+          if (linkManager.isTargetReachable(selectedNode)) {
+            selectedNode = linkManager.getTarget(selectedNode);
+            if (!org.exoplatform.ecm.webui.utils.Utils.isTrashHomeNode(selectedNode)) {
+              return selectedNode;
+            }
+          }
+        } else {
+          return selectedNode;
+        }
+      }
+    }
+    return null;
+  }
+  
 }

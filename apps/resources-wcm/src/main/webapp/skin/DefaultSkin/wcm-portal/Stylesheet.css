@@ -166,3 +166,108 @@ td {
 .UIPresentationContainer a:hover {
   text-decoration: underline;
 }
+
+/* Context Help CSS START */
+.ShowHelpIcon {
+background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center;
+}
+
+
+.IconInContextHelp {
+    width: 16px; height:16px;
+    float: left; margin: 0px 0px 0px 5px;
+    cursor: pointer;
+}
+
+.InContextHelpContent {
+  position: absolute;
+  display:none;
+  top: 8px;
+  left: 0px;
+  z-index: 100;
+}
+
+.InContextHelpContentData {
+    white-space:normal;
+    cursor: text;
+  position: absolute;
+  top: -35px;
+}
+
+.InContextHelpPopup .ContentPosition {
+    position: relative;
+    background: #ffffff;
+}
+
+.LeftInContextHelpPopup .InContextHelpTL {
+background: url('background/ContextHelp/TopLeftLeft13x47.png') no-repeat top left;
+    padding-left:13px;
+}
+.LeftInContextHelpPopup .InContextHelpTR {
+background: url('background/ContextHelp/TopRightLeft31x47.png') no-repeat top right;
+    padding-right:31px;
+}
+.LeftInContextHelpPopup .InContextHelpTC {
+background: #ffffff url('background/ContextHelp/TopCenterLeft1x14.png') repeat-x top;
+    height:47px;
+}
+
+.LeftInContextHelpPopup .InContextHelpML {
+background: url('background/ContextHelp/LeftMiddleLeft13x1.png') repeat-y top left;
+    padding-left:13px;
+}
+.LeftInContextHelpPopup .InContextHelpMR {
+background: url('background/ContextHelp/MiddleRightLeft31x1.png') repeat-y top right;
+    padding-right:31px;
+}
+
+.LeftInContextHelpPopup .InContextHelpBL {
+background: url('background/ContextHelp/BottomLeftLeft13x17.png') no-repeat top left;
+    padding-left:13px;
+}
+.LeftInContextHelpPopup .InContextHelpBR {
+background: url('background/ContextHelp/BottomRightLeft31x17.png') no-repeat top right;
+    padding-right:31px;
+}
+.LeftInContextHelpPopup .InContextHelpBC {
+background: url('background/ContextHelp/BottomCenterLeft1x17.png') repeat-x top;
+    height:17px;
+}
+
+
+.RightInContextHelpPopup .InContextHelpTL {
+background: url('background/ContextHelp/TopLeft28x49.png') no-repeat top left;
+    padding-left:28px;
+}
+.RightInContextHelpPopup .InContextHelpTR {
+background: url('background/ContextHelp/TopRight15x49.png') no-repeat top right;
+    padding-right:15px;
+}
+.RightInContextHelpPopup .InContextHelpTC {
+background: #ffffff url('background/ContextHelp/TopCenter1x12.png') repeat-x top;
+    height:49px;
+}
+
+.RightInContextHelpPopup .InContextHelpML {
+background: url('background/ContextHelp/MiddleLeft28x1.png') repeat-y top left;
+    padding-left:28px;
+}
+.RightInContextHelpPopup .InContextHelpMR {
+background: url('background/ContextHelp/MiddleRight15x1.png') repeat-y top right;
+    padding-right:15px;
+}
+
+.RightInContextHelpPopup .InContextHelpBL {
+background: url('background/ContextHelp/BottomLeft28x20.png') no-repeat bottom left;
+    padding-left:28px;
+}
+.RightInContextHelpPopup .InContextHelpBR {
+background: url('background/ContextHelp/BottomRight16x20.png') no-repeat bottom right;
+    padding-right:16px;
+}
+.RightInContextHelpPopup .InContextHelpBC {
+background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
+    height:20px;
+}
+
+/* Context Help CSS END */

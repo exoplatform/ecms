@@ -64,4 +64,50 @@ WCMUtils.prototype.openPrintPreview = function(urlToOpen) {
 	}
 };
 
+WCMUtils.prototype.showInContextHelp = function(id, isIn){
+  var parentElm = document.getElementById(id);
+  var popupHelp = document.getElementById(id+"ID");
+  var inContextContentHelp = eXo.core.DOMUtil.findFirstDescendantByClass(parentElm,"div","InContextHelpContent");
+  var wTmp = 1;
+  if(inContextContentHelp){
+    if(isIn == "true"){
+      inContextContentHelp.style.display = "block";
+      var inContextHelpPopup = eXo.core.DOMUtil.findFirstDescendantByClass(inContextContentHelp,"div","InContextHelpPopup");
+      var contentHelp = eXo.core.DOMUtil.findFirstDescendantByClass(popupHelp,"div","InContextHelpContentData");
+      var contentPosition = eXo.core.DOMUtil.findFirstDescendantByClass(inContextContentHelp,"div","ContentPosition");
+      var l = String(contentHelp.innerHTML).length;
+      if(l < 100){
+        contentHelp.style.width = (20 + l*4) + "px"
+        inContextContentHelp.style.width = (20 + l*4 + 54) + "px"
+        wTmp = (20 + l*4 + 54);
+        contentPosition.style.height = "auto";
+      } else {
+        contentHelp.style.width = "400px"
+        inContextContentHelp.style.width = "454px"
+        wTmp = 454;
+        contentPosition.style.height = (contentHelp.offsetHeight - 26) + "px";
+      }
+      //Firt, set the style is left shown
+      inContextContentHelp.style.left = "-"  + (wTmp) + "px";
+      popupHelp.className = "LeftInContextHelpPopup";
+      //Then check if the left of helpPopupWindows is outside the left of Webcontent
+      
+      var accumulateLeft = 0;
+      var parentObj = inContextContentHelp;
+      do {
+        accumulateLeft = accumulateLeft  + parentObj.offsetLeft;
+        parentObj = parentObj.offsetParent;
+      }while (parentObj);
+      //If the popup is outside the webcontent, change it to right shown
+      if (accumulateLeft <0) {
+        inContextContentHelp.style.left = "12px";
+        popupHelp.className = "RightInContextHelpPopup";
+      }      
+    } else {
+      inContextContentHelp.style.display = "none";
+    }
+  }  
+};
+
+
 eXo.ecm.WCMUtils = new WCMUtils();

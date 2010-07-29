@@ -370,3 +370,25 @@
   font-size: 11px;
   width: auto;
 }
+
+/*============================= UISCVPreferences ====================*/
+.UISingleContentViewerPortlet .UISCVPreferences .SelectFolderPathIcon {
+  background: url('icons/16x16/AddPage.gif') no-repeat left center;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  vertical-align: -2px;
+}
+
+.UISingleContentViewerPortlet .UISCVPreferences .TitleBar {
+  background: transparent url('icons/BgCategoryTitle1x25.gif') repeat-x scroll 0 0;
+  border-top: 1px solid #B7B7B7;
+  border-left: 1px solid #B7B7B7;
+  border-right: 1px solid #B7B7B7;
+  color: #424242;
+  font-weight: bold;
+  line-height: 25px;
+  padding-left: 10px;
+  text-align: center;
+}

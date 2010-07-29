@@ -77,4 +77,32 @@
   	 		<AccessControlException>Vous n'avez pas la permission d'accéder à modifier le mode</AccessControlException>
   	 </msg>
   </UISingleContentViewerPortlet>
+  <UIPreferencesPopupWindows>
+	<title>
+		<UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+	</title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>	
+    <action>
+     <Save>Save</Save>
+     <Abort>Abort</Abort>
+     <Cancel>Cancel</Cancel>
+    </action>
+    <title>Content Detail Preferences</title>
+    <label>
+      <Edit>Edit</Edit>
+      <Preferences>Preferences</Preferences>
+   	  <Title>Content Detail Preferences</Title>
+   	  <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
+   	  <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+   	  <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+   	  <DisplaySettingBlock>Display settings</DisplaySettingBlock>
+   	  <ContentPathBlock>Content Selection</ContentPathBlock>
+   	  <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
+    </label>
+    <help>
+   	  <ContentPathBlock>Please select the source data to display</ContentPathBlock>
+   	  <DisplaySettingBlock>You can determine if you want to show Title/Created date of content also the Option bar to print</DisplaySettingBlock>
+    </help>   
+  </UISCVPreferences>
 </bundle>

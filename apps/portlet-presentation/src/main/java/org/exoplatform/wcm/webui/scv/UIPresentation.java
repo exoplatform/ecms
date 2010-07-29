@@ -83,7 +83,7 @@ public class UIPresentation extends UIBaseNodePresentation {
   public String getRepositoryName() {
   	PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
-    return portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, "repository");
+    return originalNodeLocation!=null?originalNodeLocation.getRepository():portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, "repository");
   }
   
   /* (non-Javadoc)

@@ -17,15 +17,12 @@
 package org.exoplatform.wcm.webui.selector.content.one;
 
 import javax.jcr.Node;
-import javax.portlet.PortletPreferences;
 
-import org.exoplatform.services.wcm.core.NodeIdentifier;
+import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
@@ -48,8 +45,9 @@ import org.exoplatform.webui.event.EventListener;
 public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
 
   public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
-    public void execute(Event<UIContentBrowsePanel> event) throws Exception {
+    public void execute(Event<UIContentBrowsePanel> event) throws Exception {      
       UIContentBrowsePanel contentBrowsePanel = event.getSource();
+      String returnFieldName = contentBrowsePanel.getReturnFieldName();      
       String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node node = NodeLocation.getNodeByExpression(itemPath);
       Node realNode = node;
@@ -61,15 +59,7 @@ public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
         Utils.createPopupMessage(contentBrowsePanel, "UIContentBrowsePanelOne.msg.node-checkout", null, ApplicationMessage.WARNING);
         return;
       }  	
-      NodeIdentifier nodeIdentifier = NodeIdentifier.make(realNode);
-      PortletRequestContext pContext = (PortletRequestContext) event.getRequestContext();
-      PortletPreferences prefs = pContext.getRequest().getPreferences();
-      prefs.setValue("repository", nodeIdentifier.getRepository());
-      prefs.setValue("workspace", nodeIdentifier.getWorkspace());
-      prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
-      prefs.store();
-  
-      Utils.closePopupWindow(contentBrowsePanel, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+      ((UISelectable)(contentBrowsePanel.getSourceComponent())).doSelect(returnFieldName, event.getRequestContext().getRequestParameter(OBJECTID));
     }
   }
 }

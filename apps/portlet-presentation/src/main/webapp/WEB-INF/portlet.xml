@@ -59,6 +59,16 @@
 				<read-only>false</read-only>
 			</preference>
 			<preference>
+				<name>ShowDate</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowOptionBar</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
 				<name>ShowPrintAction</name>
 				<value>true</value>
 				<read-only>false</read-only>
@@ -77,6 +87,16 @@
 				<name>isQuickCreate</name>
 				<value>false</value>
 				<read-only>true</read-only>
+			</preference>
+			<preference>
+				<name>ContextEnable</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ParameterName</name>
+				<value></value>
+				<read-only>false</read-only>
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>

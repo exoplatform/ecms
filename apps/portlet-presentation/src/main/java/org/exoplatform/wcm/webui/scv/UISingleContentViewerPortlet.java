@@ -16,24 +16,16 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
-import java.security.AccessControlException;
-
 import javax.jcr.Node;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.WebUIPropertiesConfigService;
-import org.exoplatform.wcm.webui.WebUIPropertiesConfigService.PopupWindowProperties;
-import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
-import org.exoplatform.wcm.webui.scv.config.UIPortletConfig;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
@@ -62,46 +54,39 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
 
   /** The mode_. */
   private PortletMode mode = PortletMode.VIEW ;
-
+  
+  public static final String UIPreferencesPopupID = "UIPreferencesPopupWindows";
+  
+  private UISCVPreferences popPreferences;
+  private UIPresentationContainer uiPresentation;
   /**
    * Instantiates a new uI single content viewer portlet.
    * 
    * @throws Exception the exception
    */
-  public UISingleContentViewerPortlet() throws Exception {    
-    activateMode(mode) ;    
+  public UISingleContentViewerPortlet() throws Exception {
+    addChild(UIPopupContainer.class, null, null);
+    popPreferences = addChild(UISCVPreferences.class, null, null).setRendered(false);
+    uiPresentation = addChild(UIPresentationContainer.class, null, null);
   }
 
   /**
    * Activate mode.
    * 
-   * @param mode the mode
+   * @param newMode the mode
    * 
    * @throws Exception the exception
    */
-  public void activateMode(PortletMode mode) throws Exception {       
-    addChild(UIPopupContainer.class, null, null);
-    if(PortletMode.VIEW.equals(mode)) {      
-    	if (getChild(UIPresentationContainer.class) == null) addChild(UIPresentationContainer.class, null, null);                   
-    } else if (PortletMode.EDIT.equals(mode)) {
-      WebUIPropertiesConfigService propertiesConfigService = getApplicationComponent(WebUIPropertiesConfigService.class);
-      PopupWindowProperties popupProperties = (PopupWindowProperties)propertiesConfigService.getProperties(WebUIPropertiesConfigService.SCV_POPUP_SIZE_EDIT_PORTLET_MODE);
-      UIPortletConfig portletConfig = createUIComponent(UIPortletConfig.class,null,null);      
-      Utils.createPopupWindow(this, portletConfig, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, popupProperties.getWidth());
-      try {
-        portletConfig.init();
-      } catch (AccessControlException e) {        
-        Utils.closePopupWindow(this, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
-        UIApplication uiApp = findFirstComponentOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UISingleContentViewerPortlet.msg.AccessControlException", null, 
-            ApplicationMessage.WARNING));
-        WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-        requestContext.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      }
+  public void activateMode(PortletMode newMode){
+    if(PortletMode.VIEW.equals(newMode)) {
+      popPreferences.setRendered(false);
+    	uiPresentation.setRendered(true);
+    } else if (PortletMode.EDIT.equals(newMode)) {
+      uiPresentation.setRendered(false);
+      popPreferences.setRendered(true);        
     }
   }
-
+  
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
    */
@@ -114,7 +99,13 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     }
     super.processRender(app, context) ;
   }
-
+  
+  public void changeMode(PortletMode newMode) throws Exception{
+    if (!newMode.equals((mode))) {
+      this.mode = newMode;
+      activateMode(newMode) ;
+    }
+  }
   public Node getNodeByPreference() {
     try {
       PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
