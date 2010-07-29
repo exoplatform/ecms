@@ -89,7 +89,7 @@
 		
   </dependencies>
   <build>
-    <finalName>gatein-exo-workflow-${project.version}</finalName>
+    <finalName>gatein-workflow-extension-${project.version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
