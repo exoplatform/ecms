@@ -464,7 +464,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       context.addUIComponentToUpdateByAjax(popupAction);
     }
     
-    Boolean isEdit = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("isEdit"));
+    Boolean isEdit = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("edit"));
     Node selectedNode = uiExplorer.getCurrentNode();
     if (uiExplorer.getCurrentPath().equals(path) && isEdit && !selectedNode.isLocked() && canEditNode(selectedNode, uiApp, uiExplorer, uiActionbar, context)) {
     	EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
