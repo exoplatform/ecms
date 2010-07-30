@@ -343,9 +343,8 @@ public class UICLVPresentation extends UIContainer {
   }
 
   public String getHeader() {
-  	boolean isAutoDetect = Boolean.parseBoolean(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION));
-  	String 
-    Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
+//  	boolean isAutoDetect = Boolean.parseBoolean(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION));
+  	return Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
   }
   
   public UIPageIterator getUIPageIterator() {
