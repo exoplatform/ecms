@@ -302,11 +302,14 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
     CmsScript scriptObject = (CmsScript) resourceCache_.get(scriptName);
     if (scriptObject != null) return scriptObject;
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    scriptObject = (CmsScript) container.getComponentInstance(scriptName);
-    if(scriptObject !=null ) {
-      resourceCache_.put(scriptName,scriptObject) ;
-      return scriptObject;
-    }
+    try {
+      scriptObject = (CmsScript) container.getComponentInstance(scriptName);
+      if(scriptObject !=null ) {
+        resourceCache_.put(scriptName,scriptObject) ;
+        return scriptObject;
+      } 
+    } catch (NoClassDefFoundError e) {}
+    
     groovyClassLoader_ = createGroovyClassLoader();
     Class scriptClass = groovyClassLoader_.loadClass(scriptName) ;        
     container.registerComponentImplementation(scriptName, scriptClass); 
