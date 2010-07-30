@@ -28,7 +28,12 @@
             actionLink = uicomponent.event("ChangeNode", path, new Parameter("workspaceName", preferenceWS)) ;
             String relName = path.substring(path.lastIndexOf("/") + 1, path.length()) ;
             String relLang = rel.hasProperty("exo:language")?rel.getProperty("exo:language").getString():"";
-            String relTitle = rel.hasProperty("exo:title")?rel.getProperty("exo:title").getString():"";
+            String relTitle;
+            if (rel.hasProperty("exo:title")) {
+             relTitle = rel.hasProperty("exo:title")?rel.getProperty("exo:title").getString():"";
+            } else {
+             relTitle = rel.getName(); 
+            }            
             if (relTitle!=null && !"".equals(relTitle)) relName = relTitle; 
         %>
             <div> - <a href="$actionLink">$relLang ($relName)</a></div>
@@ -62,7 +67,12 @@
 					  String path = rel.getPath() ;
 					  actionLink = uicomponent.event("ChangeNode", path, new Parameter("workspaceName", preferenceWS)) ;
 					  String relName = path.substring(path.lastIndexOf("/") + 1, path.length()) ; 
-            String relTitle = rel.getProperty("exo:title").getString();
+       String relTitle;
+       if (rel.hasProperty("exo:title")) {
+        relTitle = rel.getProperty("exo:title").getString();
+       } else {
+        relTitle = rel.getName(); 
+       }       
             if (relTitle!=null && !"".equals(relTitle)) relName = relTitle; 
 				%>
 				 	  <div> - <a href="$actionLink">$relName</a></div>
@@ -96,7 +106,12 @@
 					  String path = rel.getPath() ;
 					  actionLink = uicomponent.event("ChangeNode", path, new Parameter("workspaceName", preferenceWS)) ;
 					  String relName = path.substring(path.lastIndexOf("/") + 1, path.length()) ; 
-            String relTitle = rel.getProperty("exo:title").getString();
+       String relTitle;
+       if (rel.hasProperty("exo:title")) {
+        relTitle = rel.getProperty("exo:title").getString();
+       } else {
+        relTitle = rel.getName();
+       }
             if (relTitle!=null && !"".equals(relTitle)) relName = relTitle; 
 				%>
 				 	  <div> - <a href="$actionLink">$relName</a></div>
