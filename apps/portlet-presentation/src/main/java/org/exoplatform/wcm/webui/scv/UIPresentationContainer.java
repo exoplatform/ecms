@@ -15,15 +15,21 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.wcm.webui.scv;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -48,8 +54,10 @@ import org.exoplatform.webui.event.EventListener;
 		}
 )
 public class UIPresentationContainer extends UIContainer{
-  
+  public final static String  PARAMETER_REGX        = "(.*)/(.*)";
+
   private boolean isPrint = false;
+  private PortletPreferences portletPreferences;
 
 	/**
 	 * Instantiates a new uI presentation container.
@@ -58,8 +66,11 @@ public class UIPresentationContainer extends UIContainer{
 	 */
 	public UIPresentationContainer() throws Exception{   	  
 		addChild(UIPresentation.class, null, null);
+		PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    portletPreferences = portletRequestContext.getRequest().getPreferences();    
 	}
-
+	
+	
 	/**
 	 * Gets the title.
 	 * 
@@ -88,9 +99,19 @@ public class UIPresentationContainer extends UIContainer{
 
 		return title;
 	}
-	public boolean getIsPrint() {
+	public boolean isPrinting() {
 	  return this.isPrint;
 	}
+	
+	public boolean isShowTitle() {
+	  return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE, "false"));
+	}
+	public boolean isShowDate() {
+    return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_DATE, "false"));
+  }
+	public boolean isShowOptionBar() {
+    return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR, "false"));
+  }
 
 	/**
 	 * Gets the created date.
@@ -117,14 +138,24 @@ public class UIPresentationContainer extends UIContainer{
 	 * @throws Exception the exception
 	 */
 	public Node getNodeView() {
+    UIPresentation presentation = getChild(UIPresentation.class);
+
 		try {
-			UIPresentation presentation = getChild(UIPresentation.class);
+		  Node viewNode;
+		  //Check for the saved parameter
+		  viewNode = getParameterizedNode();
+		  if (viewNode!= null) {
+	      presentation.setNode(viewNode);
+	      presentation.setOriginalNode(viewNode);
+		    return viewNode;
+		  }
+		  
 			PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-			PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
-			String repository = preferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);    
-			String workspace = preferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
-			String nodeIdentifier = preferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null) ;
-			Node viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
+			portletPreferences = portletRequestContext.getRequest().getPreferences();
+			String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);    
+			String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
+			String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
+			viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
 			presentation.setNode(viewNode);
 			Node orgNode = Utils.getRealNode(repository, workspace, nodeIdentifier, true);
 			presentation.setOriginalNode(orgNode);
@@ -133,44 +164,97 @@ public class UIPresentationContainer extends UIContainer{
 			return null;
 		}
 	} 
-	
+	/**
+   * Gets the node.
+   * 
+   * @return the node
+   * 
+   * @throws Exception the exception
+   */
+  public Node getParameterizedNode() throws Exception {
+    String parameters = getRequestParameters();
+//    System.out.println("VinhNT tracert: getParameterizedNode and param =" + parameters);
+    if (parameters == null) return null;
+    String strRepository = parameters.substring(0, parameters.indexOf("/"));
+    UIPresentation presentation = getChild(UIPresentation.class);
+    Node nodeView = Utils.getViewableNodeByComposer(null, null, parameters);
+    if (nodeView == null) System.out.println("Test nodeview=null");
+    if (nodeView!=null) {
+      boolean isDocumentType = false;
+      if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true; 
+      // check node is a document node
+      TemplateService templateService = getApplicationComponent(TemplateService.class);
+      List<String> documentTypes = templateService.getDocumentTemplates(strRepository);
+      for (String documentType : documentTypes) {
+        if (nodeView.isNodeType(documentType)) {
+          isDocumentType = true;
+          break;
+        }
+      }
+      if (!isDocumentType) return null;
+      if (nodeView != null && nodeView.isNodeType("nt:frozenNode")) {
+        String nodeUUID = nodeView.getProperty("jcr:frozenUuid").getString();
+        presentation.setOriginalNode(nodeView.getSession().getNodeByUUID(nodeUUID));
+        presentation.setNode(nodeView);
+      } else if (nodeView == null) {
+        return null;
+      } else {
+        presentation.setOriginalNode(nodeView);
+        presentation.setNode(nodeView);
+      }
+      isPrint = Boolean.parseBoolean(Util.getPortalRequestContext().getRequestParameter("isPrint"));
+    }
+    return nodeView;
+  }
+  
+  /**
+   * Gets the request parameters.
+   * 
+   * @return the request parameters
+   */
+  private String getRequestParameters() throws Exception {
+    String parameters = null;
+    if (!Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"))) {
+      return null;
+    }
+    try {     
+      parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext().getNodePath(), Util.getUIPortal().getSelectedNode().getUri() + "/"), "UTF-8");     
+    } catch (UnsupportedEncodingException e) {
+      return null;
+    }
+    String parameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PARAMETER, "");
+    if (!parameters.matches(PARAMETER_REGX)) {
+      String path = Util.getPortalRequestContext().getRequestParameter(parameterName);
+//      System.out.println("VinhNT Tracert Line 222 path=" + path);
+      if (path == null){
+        return null;
+      }        
+      parameters = Util.getPortalRequestContext().getRequestParameter(parameterName).substring(1);
+//      System.out.println("VinhNT Tracert Line 227 path=" + path);
+      return parameters;
+    }
+    return parameters;
+  }
 
 	/**
 	 * Get the print's page URL
 	 * 
 	 * @return <code>true</code> if the Quick Print is shown. Otherwise, <code>false</code>
 	 */
-	public String getPrintUrl() {
-		PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-		PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
-		String repository = preferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);    
-		String workspace = preferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
-		String path = preferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null) ;
-		if (!path.startsWith("/")) path = "/" + path;
-
+	public String getPrintUrl() throws RepositoryException{
+	  Node tempNode = getNodeView();
+    String strPath = tempNode.getPath();
+		String repository = ((ManageableRepository)tempNode.getSession().getRepository()).getConfiguration().getName();
+		String workspace = tempNode.getSession().getWorkspace().getName();
 		String portalURI = Util.getPortalRequestContext().getPortalURI();
 		WCMConfigurationService wcmConfigurationService = getApplicationComponent(WCMConfigurationService.class);
 		String printPageUrl = wcmConfigurationService.getRuntimeContextParam("printViewerPage");
-		String printUrl = portalURI + printPageUrl + "?path=/" + repository + "/" + workspace + path + "&isPrint=true";
+		String printUrl = portalURI + printPageUrl + "?path=/" + repository + "/" + workspace + strPath + "&isPrint=true";
 		return printUrl;
 	}
 
-	public String getQuickEditLink() throws RepositoryException{
-    PortalRequestContext pContext = Util.getPortalRequestContext();
-    String portalURI = pContext.getPortalURI();
-    PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
-    String strIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
-    String strRepository  = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);
-    String strWorkspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
-    String backto = pContext.getRequestURI();
-    Node tempNode = Utils.getRealNode(strRepository, strWorkspace, strIdentifier, false);
-    String strPath = tempNode.getPath();
-	  StringBuilder link = new StringBuilder().append(portalURI).append("siteExplorer?").
-                                              append("path=/").append(strRepository).
-                                              append("/").append(strWorkspace).append(strPath).
-                                              append("&backto=").append(backto).
-                                              append("&edit=true");
-	  return link.toString();
+	public String getQuickEditLink(){
+    return Utils.getEditLink(getNodeView(), true, false);
 	}
 	
 	/**

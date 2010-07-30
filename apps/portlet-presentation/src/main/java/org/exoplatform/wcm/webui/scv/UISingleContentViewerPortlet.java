@@ -44,13 +44,28 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 public class UISingleContentViewerPortlet extends UIPortletApplication {
 
   /** The REPOSITORY. */
-  public static String REPOSITORY = "repository" ;
+  public static String REPOSITORY     = "repository" ;
 
   /** The WORKSPACE. */
-  public static String WORKSPACE = "workspace" ;
+  public static String WORKSPACE      = "workspace" ;
 
   /** The IDENTIFIER. */
-  public static String IDENTIFIER = "nodeIdentifier" ;
+  public static String IDENTIFIER     = "nodeIdentifier" ;
+  
+  /** The Parameterized String **/
+  public static String PARAMETER      = "ParameterName";
+  
+  /** The ShowDate **/
+  public static String SHOW_DATE      = "ShowDate";
+  
+  /** The ShowTitle **/
+  public static String SHOW_TITLE     = "ShowTitle";
+  
+  /** The ShowOptionBar **/
+  public static String SHOW_OPTIONBAR = "ShowOptionBar";
+  
+  /** The is ContextualMode **/
+  public static String CONTEXTUAL_MODE= "ContextEnable";
 
   /** The mode_. */
   private PortletMode mode = PortletMode.VIEW ;
@@ -59,6 +74,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   
   private UISCVPreferences popPreferences;
   private UIPresentationContainer uiPresentation;
+  PortletPreferences preferences;
+
   /**
    * Instantiates a new uI single content viewer portlet.
    * 
@@ -66,6 +83,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
    */
   public UISingleContentViewerPortlet() throws Exception {
     addChild(UIPopupContainer.class, null, null);
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    preferences = portletRequestContext.getRequest().getPreferences();
     popPreferences = addChild(UISCVPreferences.class, null, null).setRendered(false);
     uiPresentation = addChild(UIPresentationContainer.class, null, null);
   }
@@ -80,8 +99,10 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   public void activateMode(PortletMode newMode){
     if(PortletMode.VIEW.equals(newMode)) {
       popPreferences.setRendered(false);
+      uiPresentation.getNodeView();//Force the portlet reload the nodecontent
     	uiPresentation.setRendered(true);
     } else if (PortletMode.EDIT.equals(newMode)) {
+      popPreferences.setInternalPreferencesMode(true);
       uiPresentation.setRendered(false);
       popPreferences.setRendered(true);        
     }
@@ -100,16 +121,12 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     super.processRender(app, context) ;
   }
   
-  public void changeMode(PortletMode newMode) throws Exception{
-    if (!newMode.equals((mode))) {
-      this.mode = newMode;
-      activateMode(newMode) ;
-    }
+  public void changeToViewMode() throws Exception{
+      PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+      portletRequestContext.setApplicationMode(PortletMode.VIEW);      
   }
   public Node getNodeByPreference() {
     try {
-      PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-      PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
       String repository = preferences.getValue(REPOSITORY, null);    
       String workspace = preferences.getValue(WORKSPACE, null);
       String nodeIdentifier = preferences.getValue(IDENTIFIER, null) ;
@@ -119,5 +136,4 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       return null;
     }
   }
-    
 }

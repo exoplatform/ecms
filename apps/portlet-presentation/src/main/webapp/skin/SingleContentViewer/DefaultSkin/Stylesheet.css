@@ -1,3 +1,4 @@
+Title
 .UISingleContentViewerPortlet {
   overflow: hidden;
 }
@@ -298,6 +299,15 @@
   width: 16px;
 }
 
+.UIPresentationContainer .Title {
+    color: #000000;
+    font-size: 24px;
+}
+
+.UIPresentationContainer .DateAndMail {
+    color: #999999;
+    font-size: 10px;
+}
 .UISingleContentViewerPortlet .UIContainerConfigOptions {
   border: 1px solid #b7b7b7;
 }
@@ -369,6 +379,30 @@
 .HorizontalLayout .UIForm input {
   font-size: 11px;
   width: auto;
+}
+
+.UIPresentationContainer .ActionContainer {
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border-top: 1px dotted #b7b7b7;
+}
+.UIPresentationContainer .ActionContainer .PrintFrameIcon {
+  padding: 4px 15px 2px 23px;
+  font-size: 12px;
+}
+
+.UIPresentationContainer .ActionContainer .PrintFrameIcon:hover {
+  text-decoration: underline;
+  color: #058ee6;
+}
+
+.UIPresentationContainer .ActionContainer .PrintIcon {
+  background: url('icons/PrintFrameIcon.gif') no-repeat top left;
+}
+
+.UIPresentationContainer .ActionContainer .CloseIcon {
+  background: url('icons/PrintFrameIcon.gif') no-repeat left -19px;
 }
 
 /*============================= UISCVPreferences ====================*/

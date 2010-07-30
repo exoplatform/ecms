@@ -11,10 +11,9 @@
 
 		def node = uicomponent.getNodeView();
 		if (node != null) {
-			def preferences = rcontext.getRequest().getPreferences();
-			def isShowOptionBar = Boolean.parseBoolean(preferences.getValue("ShowOptionBar", null)); 
-			def isShowTitle = Boolean.parseBoolean(preferences.getValue("ShowTitle", null));
-			def isShowDate  = Boolean.parseBoolean(preferences.getValue("ShowDate", null));
+			def isShowOptionBar = uicomponent.isShowOptionBar(); 
+			def isShowTitle = uicomponent.isShowTitle();
+			def isShowDate  = uicomponent.isShowDate();
 			
 			if(Utils.isShowQuickEdit(node) && (!Utils.isPortalEditMode()) && rcontext.getRemoteUser()) {
 				%>
@@ -36,18 +35,16 @@
 		
 			if (isShowTitle||isShowDate) {
 				%>
-					<div class="PCV">
 					  <% if (isShowTitle) { %>
 						  <div class="Title"><%= uicomponent.getTitle(node) %></div>
 						<% } %>
 						<% if (isShowDate) { %>
 						<div class="DateAndMail"><%= uicomponent.getCreatedDate(node) %></div>
 						<% } %>
-					</div>
 				<%
 			}
 				
-			if (!Utils.isEditPortletInCreatePageWizard() && isShowOptionBar) { 
+			if (!Utils.isPortalEditMode() && isShowOptionBar) { 
 				%>
 					<div class="UIOptionBar">
 						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl() %>')" title="<%= _ctx.appRes("UIPresentationContainer.title.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
@@ -55,6 +52,14 @@
 				<% 
 			} 
 			uicomponent.renderChildren();
+			if(uicomponent.isPrinting()) {
+        %>
+          <div class="ActionContainer">
+            <a class="PrintFrameIcon PrintIcon" href="javascript: void(0)" onclick="window.print();"><%= _ctx.appRes("UIPCVContainer.action.Print") %></a>
+            <a class="PrintFrameIcon CloseIcon" id="CloseIcon" href="javascript: void(0)" onclick="window.close();"><%= _ctx.appRes("UIPCVContainer.action.Close") %></a>
+          </div>
+        <%
+      }
 		} else {
 		  if(Utils.isShowQuickEdit(node) && (!Utils.isPortalEditMode()) && rcontext.getRemoteUser()) {
 				%>
@@ -69,3 +74,23 @@
 		}
 	%>
 </div>
+<%
+if (uicomponent.isPrinting()) {
+  %>
+   <script type="text/javascript">
+  var allElements = document.getElementsByTagName('*');
+  for (i in allElements) {
+   if (allElements[i].nodeName == 'HTML') continue;
+   if (allElements[i].style) allElements[i].style.overflow = 'visible';
+   allElements[i].overflow = 'visible';
+  }
+   </script>
+ <style type="text/css">
+  @media print{
+   a{ display:none; }
+   overflow{ display:none;}
+  }
+ </style>
+  <%
+}
+%>
