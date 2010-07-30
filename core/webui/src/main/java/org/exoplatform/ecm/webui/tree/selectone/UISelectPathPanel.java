@@ -222,7 +222,6 @@ public class UISelectPathPanel extends UIContainer {
         if (uiComponent instanceof UIPopupWindow) {
           ((UIPopupWindow)uiComponent).setShow(false);
           ((UIPopupWindow)uiComponent).setRendered(false);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiComponent);
         }
         UIComponent component = ((UIOneNodePathSelector)uiOneNodePathSelector).getSourceComponent().getParent();
         if (component != null) {
