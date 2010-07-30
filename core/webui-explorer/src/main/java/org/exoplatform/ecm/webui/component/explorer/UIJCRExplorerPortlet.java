@@ -44,15 +44,18 @@ import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
+import org.exoplatform.ecm.webui.component.explorer.control.action.AddDocumentActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.page.UIPageBrowser.AddNewActionListener;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -73,10 +76,12 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
+import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.w3c.dom.Element;
 
@@ -453,11 +458,17 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     UIWorkingArea uiWorkingArea = findFirstComponentOfType(UIWorkingArea.class);
     UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
     if (uiSideBar.isRendered()) {
-     uiSideBar.updateSideBarView();
+    	uiSideBar.updateSideBarView();
+    	uiSideBar.getChild(UITreeExplorer.class).buildTree();
     }
 
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-    uiDocWorkspace.setRenderedChild(UIDocumentContainer.class) ;
+    uiDocWorkspace.setRenderedChild(UIDocumentContainer.class);
+    uiDocWorkspace.setRendered(true);
+    
+    UIDrivesArea uiDrive = uiWorkingArea.getChild(UIDrivesArea.class);
+    if (uiDrive != null) uiDrive.setRendered(false);
+    context.addUIComponentToUpdateByAjax(uiDocWorkspace);
     UIPopupContainer popupAction = getChild(UIPopupContainer.class);
     if (popupAction != null && popupAction.isRendered()) {
       popupAction.deActivate();
@@ -466,22 +477,37 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     
     Boolean isEdit = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("edit"));
     Node selectedNode = uiExplorer.getCurrentNode();
-    if (uiExplorer.getCurrentPath().equals(path) && isEdit && !selectedNode.isLocked() && canEditNode(selectedNode, uiApp, uiExplorer, uiActionbar, context)) {
-    	EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
-    } else {
-	    uiExplorer.refreshExplorer();
-	    uiExplorer.setRenderSibling(UIJCRExplorer.class);
+    if (isEdit) {
+	    if (uiExplorer.getCurrentPath().equals(path) && !selectedNode.isLocked() && 
+	    		canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditDocumentActionComponent.getFilters())) {
+	    	EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
+	    } else {
+	      uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
+	      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+	    }
     }
+    
+    boolean isAddNew = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("addNew"));
+    if (!isEdit && isAddNew) {
+	    if (canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, AddDocumentActionComponent.getFilters())) {
+	    	AddDocumentActionComponent.addDocument(null, uiExplorer, uiApp, this, context);
+	    } else {
+	      uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
+	      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+	    }
+    }
+    uiExplorer.refreshExplorer(null, (isAddNew && isEdit) && isEditInNewWindow());
+    uiExplorer.setRenderSibling(UIJCRExplorer.class);
   }
   
-  private boolean canEditNode(Node selectedNode, UIApplication uiApp, UIJCRExplorer uiExplorer, UIActionBar uiActionBar, Object context) throws Exception {
+  private boolean canManageNode(Node selectedNode, UIApplication uiApp, UIJCRExplorer uiExplorer, UIActionBar uiActionBar, Object context,
+  														List<UIExtensionFilter> filters) throws Exception {
   	Map<String, Object> ctx = new HashMap<String, Object>();
   	ctx.put(UIActionBar.class.getName(), uiActionBar);
     ctx.put(UIJCRExplorer.class.getName(), uiExplorer);
     ctx.put(UIApplication.class.getName(), uiApp);
     ctx.put(Node.class.getName(), selectedNode);
     ctx.put(WebuiRequestContext.class.getName(), context);  	
-  	List<UIExtensionFilter> filters = EditDocumentActionComponent.getFilters();
   	for (UIExtensionFilter filter : filters) 
   		try {
   			if (!filter.accept(ctx)) return false;

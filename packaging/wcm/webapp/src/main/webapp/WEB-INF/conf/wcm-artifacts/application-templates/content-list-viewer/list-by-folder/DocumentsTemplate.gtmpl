@@ -67,6 +67,7 @@
 								def itemIcon = uicomponent.getContentIcon(viewNode);
 								
                 def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
+      					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));                
 						    %>
 									<div class="Column1">
 										<%
@@ -85,8 +86,15 @@
 														}
 													}
 													
-													if(Utils.isShowQuickEdit(viewNode)) {
-														%><span>[ </span><a class="CaptionEdit" href="$contentEditLink"><%= _ctx.appRes("UICLVPresentation.action.edit") %></a><span> ]</span><%
+													if(uicomponent.isShowEdit(viewNode)) {
+														%><span>[ </span><a class="CaptionEdit" href="$contentEditLink"><%= _ctx.appRes("UICLVPresentation.action.edit") %></a>
+														<%
+															if (Utils.isShowDelete(viewNode)) { %>
+																| <a class="CaptionDelete" href="$contentDeleteLink"><%= _ctx.appRes("UICLVPresentation.action.delete") %></a>																	
+															<%
+															}
+														%>
+														<span> ]</span><%
 													}
 																									
 													if (isShowDate) {

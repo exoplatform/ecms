@@ -24,6 +24,14 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.portal.config.model.Page;
+import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.portal.config.model.PageNode;
+import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.webui.page.UIPage;
+import org.exoplatform.portal.webui.page.UIPageBody;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIMaskWorkspace;
@@ -263,6 +271,24 @@ public class Utils {
 		} catch (Exception e) {
 			return false;
 		}
+  }
+  
+  /**
+   * Check if the user can delete the current node
+   * @return true, if current mode is edit mode
+   */
+  public static boolean isShowDelete(Node content) {
+  	return false;
+//  	try {
+//  		boolean isEditMode = false;
+//  		if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
+//  		((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
+//  		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
+//      ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
+//  		return isEditMode;
+//		} catch (Exception e) {
+//			return false;
+//		}
   }
   
   /**
@@ -538,5 +564,75 @@ public class Utils {
     }
     return null;
   }
+  
+  public static boolean hasEditPermissionOnPage() throws Exception
+  {
+     UIPortalApplication portalApp = Util.getUIPortalApplication();
+     UIWorkingWorkspace uiWorkingWS = portalApp.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
+     UIPageBody pageBody = uiWorkingWS.findFirstComponentOfType(UIPageBody.class);
+     UIPage uiPage = (UIPage)pageBody.getUIComponent();
+     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
+
+     if(uiPage != null)
+     {
+        return userACL.hasEditPermissionOnPage(uiPage.getOwnerType(), uiPage.getOwnerId(), uiPage.getEditPermission());
+     }
+     else
+     {
+        UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace>findComponentById(UIPortalApplication.UI_WORKING_WS_ID).findFirstComponentOfType(UIPortal.class);
+        PageNode currentNode = currentUIPortal.getSelectedNode();
+        String pageReference = currentNode.getPageReference();
+        if(pageReference == null)
+        {
+           return false;
+        }
+        else
+        {
+           DataStorage dataStorage = portalApp.getApplicationComponent(DataStorage.class);
+           Page page = dataStorage.getPage(pageReference);
+           if(page == null)
+           {
+              return false;
+           }
+           else
+           {
+              return userACL.hasEditPermission(page);
+           }
+        }
+     }
+  }
+  
+  public static boolean hasEditPermissionOnNavigation() throws Exception
+  {
+     PageNavigation selectedNavigation = getSelectedNavigation();
+     UIPortalApplication portalApp = Util.getUIPortalApplication();
+     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
+     if (selectedNavigation == null || userACL == null)
+     {
+        return false;
+     }
+     else
+     {
+   	 if(PortalConfig.PORTAL_TYPE.equals(selectedNavigation.getOwnerType()))
+   	 {
+   	   return hasEditPermissionOnPortal();
+   	 }
+        return userACL.hasEditPermission(selectedNavigation);
+     }
+  }
+  
+  public static boolean hasEditPermissionOnPortal() throws Exception
+  {
+     UIPortalApplication portalApp = Util.getUIPortalApplication();
+     UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace>findComponentById(UIPortalApplication.UI_WORKING_WS_ID).findFirstComponentOfType(UIPortal.class);
+     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
+     return userACL.hasEditPermissionOnPortal(currentUIPortal.getOwnerType(), currentUIPortal.getOwner(), currentUIPortal.getEditPermission());
+  }
+  
+  public static PageNavigation getSelectedNavigation() throws Exception
+  {
+     return Util.getUIPortal().getSelectedNavigation();
+  }
+
   
 }

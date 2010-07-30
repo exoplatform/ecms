@@ -191,7 +191,9 @@ public class UIJCRExplorer extends UIContainer {
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     //check if edit with popup    
     UIComponent uiComp = uiPopup.getUIComponent();
-    if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
+    
+    if (uiPopup.isShow() && uiPopup.isRendered() &&
+    		uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
       return true;
     }
      //check if edit without popup
@@ -473,7 +475,7 @@ public class UIJCRExplorer extends UIContainer {
     refreshExplorer(currentNode, true);
   }
   
-  private void refreshExplorer(Node currentNode, boolean closePopup) throws Exception { 
+  public void refreshExplorer(Node currentNode, boolean closePopup) throws Exception { 
     try {
       Node nodeGet = currentNode == null ? getCurrentNode() : currentNode;
       if(nodeGet.hasProperty(Utils.EXO_LANGUAGE)) {

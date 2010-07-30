@@ -16,11 +16,15 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
+import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -146,17 +150,32 @@ public abstract class UICLVContainer extends UIContainer {
     uiListViewerBase.init();
   }
   
-  public boolean isShowAddContent() {
-    boolean ret =  Utils.isShowQuickEdit() && (this instanceof UICLVFolderMode);
-//    if (ret) {
-//      PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
-//      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
-//	    try {
-////	  		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);    	
-//	    } catch (Exception e) {
-//	    	return false;
-//	    }
-//    }
-    return ret;
+  public boolean isShowManageContent() {
+    String mode = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE);
+    return (Utils.isShowQuickEdit() && 
+    				UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(mode));
   }
+  
+  public boolean isShowAddContent() {
+    if (isShowManageContent()) {
+      PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
+      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+      Node content = NodeLocation.getNodeByExpression(itemPath);
+	    try {
+	  		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);    	
+	    } catch (Exception e) {
+	    	return false;
+	    }
+	    return true;
+    } else return false;
+  }
+  
+  public boolean isShowPreferences() {
+  	try {
+  		return Utils.isShowQuickEdit() && Utils.hasEditPermissionOnPage();
+  	} catch (Exception e) {
+  		return false;
+  	}
+  }
+  
 }

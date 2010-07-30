@@ -34,6 +34,9 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
@@ -64,7 +67,8 @@ import org.exoplatform.webui.event.EventListener;
   @ComponentConfig(
     lifecycle = Lifecycle.class, 
     events = {
-      @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class)
+      @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
+      @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class)      
     }
   ),
   @ComponentConfig(
@@ -339,7 +343,9 @@ public class UICLVPresentation extends UIContainer {
   }
 
   public String getHeader() {
-    return Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
+  	boolean isAutoDetect = Boolean.parseBoolean(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION));
+  	String 
+    Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
   }
   
   public UIPageIterator getUIPageIterator() {
@@ -357,6 +363,21 @@ public class UICLVPresentation extends UIContainer {
   
   public String getEditLink(Node node, boolean isEditable, boolean isNew) {
 	  return Utils.getEditLink(node, isEditable, isNew);
+  }
+  
+  public boolean isShowEdit(Node node) {
+  	if (Utils.isShowQuickEdit()) {
+  		try {
+  			Node parent = node.getParent();
+  			((ExtendedNode)node).checkPermission(PermissionType.SET_PROPERTY);
+  			((ExtendedNode)parent).checkPermission(PermissionType.ADD_NODE);
+  		} catch (Exception e) {
+  			return false;
+  		}
+  		return true;
+  	} else {
+  		return false;
+  	}
   }
   
   /**
@@ -381,7 +402,7 @@ public class UICLVPresentation extends UIContainer {
     }
     return uri;
   }
-
+  
   /**
    * The listener interface for receiving refreshAction events.
    * The class that is interested in processing a refreshAction
@@ -394,7 +415,6 @@ public class UICLVPresentation extends UIContainer {
    * @see RefreshActionEvent
    */
   public static class RefreshActionListener extends EventListener<UICLVPresentation> {
-
     /*
      * (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
@@ -405,4 +425,21 @@ public class UICLVPresentation extends UIContainer {
     }
   }
 
+  public static class DeleteContentActionListener extends EventListener<UICLVPresentation> {
+    
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UICLVPresentation> event) throws Exception {
+      UICLVPresentation contentListPresentation = event.getSource();
+      String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
+      Node node = NodeLocation.getNodeByExpression(itemPath);
+      Node parent = node.getParent();
+      node.remove();
+      parent.getSession().save();
+      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
+      Utils.createPopupMessage(contentListPresentation, "UICLVPresentation.msg.delete-content-successfull", null, ApplicationMessage.INFO);      
+    }
+  }
+  
 }

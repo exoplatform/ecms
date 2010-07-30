@@ -34,7 +34,9 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -68,21 +70,26 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
                                               new IsNotEditingDocumentFilter()});
   
   @UIExtensionFilters
-  public List<UIExtensionFilter> getFilters() {
+  public static List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
   
   public static void addDocument(Event<? extends UIComponent> event,
                           UIJCRExplorer uiExplorer,
-                          UIApplication uiApp) throws Exception {
+                          UIApplication uiApp,
+                          UIComponent uiComp,
+                          WebuiRequestContext context) throws Exception {
+  	if (event != null) 
+  		context = event.getRequestContext();
+  	
     UIDocumentFormController uiController = 
-      event.getSource().createUIComponent(UIDocumentFormController.class, null, null);
+      uiComp.createUIComponent(UIDocumentFormController.class, null, null);
     uiController.setCurrentNode(uiExplorer.getCurrentNode());
     uiController.setRepository(uiExplorer.getRepositoryName());
     if(uiController.getListFileType().isEmpty()) {
       uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.empty-file-type", null, 
           ApplicationMessage.WARNING));
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
     }
 //    uiExplorer.setPathBeforeEditing(uiExplorer.getCurrentPath());        
@@ -90,7 +97,7 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
     if (uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isEditInNewWindow()) {
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);      
       UIPopupContainer.activate(uiController, 800, 600);
-      event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);      
+      context.addUIComponentToUpdateByAjax(UIPopupContainer);      
     } else {
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
@@ -106,7 +113,9 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
       }
       uiDocumentWorkspace.addChild(uiController);
       uiController.setRendered(true);
-      uiExplorer.updateAjax(event);      
+      context.addUIComponentToUpdateByAjax(uiWorkingArea);
+      if (event != null)
+      	uiExplorer.updateAjax(event);      
     }
   }
   
@@ -114,7 +123,7 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
     public void processEvent(Event<AddDocumentActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
-      addDocument(event, uiExplorer, uiApp);
+      addDocument(event, uiExplorer, uiApp, event.getSource(), null);
     }
   }
 

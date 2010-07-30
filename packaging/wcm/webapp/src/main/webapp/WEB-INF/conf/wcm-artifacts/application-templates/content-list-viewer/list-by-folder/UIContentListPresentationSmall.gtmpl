@@ -42,7 +42,8 @@
 					if (itemTitle != null && itemTitle.trim().length() != 0) {
 						itemName = itemTitle;
 					}						
-					String contentkEdittingLink = uicomponent.event("EditContent", NodeLocation.getExpressionByNode(viewNode));		
+					String contentkEdittingLink = uicomponent.event("EditContent", NodeLocation.getExpressionByNode(viewNode));
+					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));					
 					%>	
 						<div class="CaptionItem" style="border-bottom: 0px;">
 							<% 
@@ -59,8 +60,15 @@
 													%>$itemName<% 
 												} 
 												
-												if(Utils.isShowQuickEdit(viewNode)) {
-													%><span>[ </span><a class="CaptionEdit" href="$contentkEdittingLink"><%=editActionLabel%></a><span> ]</span><%
+												if(uicomponent.isShowEdit(viewNode)) {
+													%><span>[ </span><a class="CaptionEdit" href="$contentkEdittingLink"><%=editActionLabel%></a>
+													<%
+														if (Utils.isShowDelete(viewNode)) { %>
+															| <a class="CaptionDelete" href="$contentDeleteLink"><%= _ctx.appRes("UICLVPresentation.action.delete") %></a>																	
+														<%
+														}
+													%>
+													<span> ]</span><%
 												}
 												
 											%> 
