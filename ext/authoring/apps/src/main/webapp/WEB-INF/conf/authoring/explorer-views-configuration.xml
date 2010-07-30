@@ -57,7 +57,7 @@
                 <value>
                   <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
                     <field name="tabName"><string>Publication</string></field>
-                    <field name="buttons"><string>editDocument; manageCategories; publicationRequestApproval; publicationApproveContent; publicationPublish </string></field>
+                    <field name="buttons"><string>addFolder; addCategory; addDocument; editDocument; upload; manageCategories; publicationRequestApproval; publicationApproveContent; publicationPublish </string></field>
                   </object>
                 </value>
                 <value>
