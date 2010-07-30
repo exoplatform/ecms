@@ -180,7 +180,7 @@
 		<title>Configureer uw navigatie voorkeuren</title>
 		<label>
 			<enableStructure>JCR like structuur activeren</enableStructure>
-			<showSideBar>Toon sidebar</showSideBar>
+			<showSideBar>Toon Sidebar</showSideBar>
 			<showHiddenNode>Toon verborgen node</showHiddenNode>
 			<showNonDocument>Toon non document type</showNonDocument>
 			<showRefDocuments>Toon referenced documenten</showRefDocuments>
@@ -256,7 +256,7 @@
 			<UIViewMetadataManager>Toon Metadata</UIViewMetadataManager>
 			<UIVoteForm>Stem Document</UIVoteForm>
 			<UICommentForm>Commentaar toevoegen</UICommentForm>
-			<UIPreferencesForm>Voorkeuren Setting</UIPreferencesForm>
+			<UIPreferencesForm>Voorkeuren</UIPreferencesForm>
 			<UIPublicationManager>Manage publication</UIPublicationManager>
 			<UIConfirmMessage>Confirm delete</UIConfirmMessage>
 			<UIActivePublication>Enrol to publication lifecycle

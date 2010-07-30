@@ -213,5 +213,6 @@
 }
 .UIPreferencesForm .HorizontalLayout select {
   font-size:11px;
-  width:110px;
+  width:100px;
+  float: left;
 }

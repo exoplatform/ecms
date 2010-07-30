@@ -168,7 +168,7 @@
   <UIPreferencesForm>
     <title>Ihre Browsingvorlieben einstellen</title>
     <label>
-      <enableStructure>JCR als Struktur einsetzen</enableStructure>
+      <enableStructure>Activer Structure DMS</enableStructure>
       <showSideBar>Seitenbalken anzeigen</showSideBar>
       <showHiddenNode>Versteckten Knoten anzeigen</showHiddenNode>
       <showNonDocument>Nicht-Dokumenttyp anzeigen</showNonDocument>
@@ -178,7 +178,7 @@
       <nodesPerPage>Knoten Per Seite</nodesPerPage>
     </label>
     <action>
-      <Back>#{word.back}</Back>
+      <Back>#{word.close}</Back>
       <Save>#{word.save}</Save>
     </action>
   </UIPreferencesForm>

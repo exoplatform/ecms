@@ -177,7 +177,7 @@
       <nodesPerPage>عقد في كل صفحة</nodesPerPage>
     </label>
     <action>
-      <Back>#{word.back}</Back>
+      <Back>#{word.close}</Back>
       <Save>#{word.save}</Save>
     </action>
   </UIPreferencesForm>
@@ -236,7 +236,7 @@
       <UIViewMetadataManager>إظهار قالب المعلومات القياسية</UIViewMetadataManager>
       <UIVoteForm>تصويت للوثيقة</UIVoteForm>
       <UICommentForm>أضف تعليق</UICommentForm>
-      <UIPreferencesForm>Preference Setting</UIPreferencesForm>
+      <UIPreferencesForm>Preferences</UIPreferencesForm>
       <UIPublicationManager>إدارة النشر</UIPublicationManager>
       <UIConfirmMessage>تأكيد الحذف</UIConfirmMessage>
       <UIActivePublication> تسجيل دورة حياة النشر</UIActivePublication>

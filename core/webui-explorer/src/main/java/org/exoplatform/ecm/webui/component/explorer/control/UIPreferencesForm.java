@@ -263,6 +263,7 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       uiForm.savePreferenceInCookies();
       uiExplorer.refreshExplorer();
       explorerPorltet.setRenderedChild(UIJCRExplorer.class);
+      uiExplorer.updateAjax(event);
     }
   }
 

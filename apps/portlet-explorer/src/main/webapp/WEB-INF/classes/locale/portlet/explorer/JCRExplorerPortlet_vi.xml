@@ -174,7 +174,7 @@
   <UIPreferencesForm>
     <title>Thiết lập hiển thị</title>
     <label>
-      <enableStructure>Hiển thị cấu trúc thư mục</enableStructure>
+      <enableStructure>Hiển thị cấu trúc DMS</enableStructure>
       <showSideBar>Hiển thị sidebar.</showSideBar>
       <showHiddenNode>Hiển thị các node ẩn</showHiddenNode>
       <showNonDocument>Hiển thị các node không phải kiểu tài liệu</showNonDocument>
@@ -184,7 +184,7 @@
       <nodesPerPage>Số node trên một trang</nodesPerPage>
     </label>
     <action>
-      <Back>Quay lại</Back>
+      <Back>Đóng lại</Back>
       <Save>Lưu</Save>
     </action>
   </UIPreferencesForm>

@@ -15,16 +15,15 @@
  String FIELD_QUERY_TYPE       = "queryType";   
 %>
 <div class="UIFormWithTitle $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);">
-	<div class="TitleBar"><%=_ctx.appRes(uicomponent.getName() + ".title")%></div>
 	<% uiform.begin() %>
 	<div class="HorizontalLayout">
 		<div class="FormContainer">
 			<table class="UIFormGrid">
 			  <tr>
 			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.sortBy")%></td>
-			    <td class="FieldComponent"><% uiform.renderField(FIELD_SHORTBY) %></td>
-			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.order")%></td>
-			    <td class="FieldComponent"><% uiform.renderField(FIELD_ORDERBY) %></td>
+			    <td class="FieldComponent"><% uiform.renderField(FIELD_SHORTBY) %> &nbsp;&nbsp; <% uiform.renderField(FIELD_ORDERBY) %></td>
+			    <td class="FieldLabel"><div style="clear: both;"><span></span></div></td>
+			    <td class="FieldComponent"></td>
 			  </tr>
 			  <tr>
 			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showSideBar")%></td>
@@ -49,22 +48,21 @@
           <legend><%=_ctx.appRes("UIPreferencesForm.label.Advance")%></legend>
 					     <table>			  
 									  <tr>
-									    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showNonDocument")%></td>
-									    <td class="FieldComponent"><% uiform.renderField(FIELD_SHOWNONDOCUMENT) %></td>
-									    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showRefDocuments")%></td>
-									    <td class="FieldComponent"><% uiform.renderField(FIELD_SHOWREFDOCUMENTS) %></td>
+									    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showNonDocument")%></td>
+									    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_SHOWNONDOCUMENT) %></td>
+									    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showRefDocuments")%></td>
+									    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_SHOWREFDOCUMENTS) %></td>
 									  </tr>
 									  <tr>
-									    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showHiddenNode")%></td>
-									    <td class="FieldComponent"><% uiform.renderField(FIELD_SHOW_HIDDEN_NODE) %></td>
-									    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.enableStructure")%></td>
-									    <td class="FieldComponent"><% uiform.renderField(FIELD_ENABLESTRUCTURE) %></td>
+									    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showHiddenNode")%></td>
+									    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_SHOW_HIDDEN_NODE) %></td>
+									    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.enableStructure")%></td>
+									    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_ENABLESTRUCTURE) %></td>
 									  </tr>
-									  <tr>
-									    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showItemsByUserInTimeline")%></td>
-									    <td class="FieldComponent"><% uiform.renderField(FIELD_SHOW_ITEMS_BY_USER) %></td>
-									    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.queryType")%></td>
-									    <td class="FieldComponent"><% uiform.renderField(FIELD_QUERY_TYPE) %></td>
+									  <tr>									    
+									    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.queryType")%></td>
+									    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_QUERY_TYPE) %></td>
+									    <td colspan="2"></td>
 									  </tr>
 								  </table>
 			      </fieldset>

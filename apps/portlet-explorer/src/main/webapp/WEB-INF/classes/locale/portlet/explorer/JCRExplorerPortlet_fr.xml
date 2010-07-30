@@ -171,7 +171,7 @@
   <UIPreferencesForm>
     <title>Préférences</title>
     <label>
-      <enableStructure>Activer l'affichage JCR brut</enableStructure>
+      <enableStructure>Activer Structure DMS</enableStructure>
       <showSideBar>Afficher le panneau latéral</showSideBar>
       <showHiddenNode>Afficher les éléments cachés</showHiddenNode>
       <showNonDocument>Afficher les "non documents"</showNonDocument>
@@ -179,11 +179,11 @@
       <showItemsByUserInTimeline>Afficher les éléments par utilisateur dans la chronologie</showItemsByUserInTimeline>
       <enableDragAndDrop>Activer le glisser-déposer</enableDragAndDrop>      
       <sortBy>Trier par</sortBy>
-      <order>Trier</order>
+      <order>Ordre</order>
       <nodesPerPage>Noeuds par page</nodesPerPage>
     </label>
     <action>
-      <Back>#{word.back}</Back>
+      <Back>#{word.close}</Back>
       <Save>#{word.save}</Save>
     </action>
   </UIPreferencesForm>
