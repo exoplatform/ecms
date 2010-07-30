@@ -30,7 +30,7 @@
 		      <div class="TabLeft">
 		        <div class="TabRight">
 		          <div class="TabRepeat" onclick="eXo.webui.UIVerticalSlideTabs.switchVTab(this, 'VTabStyle3', 'SelectedVTabStyle3');">
-	              <div class="TabIcon ${type}Icon"><span></span></div>
+	              <div class="TabIcon DefaultItemIcon ${type}Icon"><span></span></div>
 	              <div class="TabLabel">
 	                <%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%>
 	              </div>
