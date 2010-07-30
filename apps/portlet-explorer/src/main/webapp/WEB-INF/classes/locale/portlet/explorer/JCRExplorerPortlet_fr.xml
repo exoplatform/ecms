@@ -1757,8 +1757,9 @@
   <UIDocumentForm>
     <title>Ajout d'un document</title>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>Sauver comme brouillon</Save>
       <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <cannot-save>Sauvegarde impossible. Des contraintes ne sont pas respectées.</cannot-save>

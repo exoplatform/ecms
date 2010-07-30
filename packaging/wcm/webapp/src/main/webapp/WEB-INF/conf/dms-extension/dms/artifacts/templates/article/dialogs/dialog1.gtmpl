@@ -61,6 +61,11 @@
 					</div>
 				</td>
 			</tr>
+        
+      <tr>
+        <td class="FieldLabel">Last modified date : </td>
+        <td class="FieldComponent"><%=uicomponent.getLastModifiedDate()%></td>
+      </tr>
 		</table>
 		<%/* start render action*/%>
 		<%uiform.processRenderAction()%>

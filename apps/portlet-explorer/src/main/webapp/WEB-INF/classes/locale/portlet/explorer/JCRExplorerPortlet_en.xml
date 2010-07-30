@@ -1757,8 +1757,9 @@
   <UIDocumentForm>
     <title>Add New Document</title>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>Save as Draft</Save>
       <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <cannot-save>Some constraints were violated during that action.</cannot-save>

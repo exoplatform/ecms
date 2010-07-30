@@ -32,11 +32,13 @@ import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -280,6 +282,43 @@ public class Utils {
 		} catch (Exception e) {
 			return false;
 		}
+  }
+
+  public static String getEditLink(Node node, boolean isEditable, boolean isNew) {
+	  try {
+		  String itemPath = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName() + '/' +
+		  node.getSession().getWorkspace().getName() + '/' +node.getPath();
+		  return getEditLink(itemPath, isEditable, isNew);
+	  } catch (RepositoryException e) {}
+	  return null;
+  }
+
+  /**
+   * Creates a restfull compliant link to the editor for editing a content, adding a content or managing contents.
+   * Example : 
+   *   Add Content : isEditable = false, isNew = true, itemPath = the parent folder path
+   *   Edit Content : isEditable = true, isNew = false, itemPath = the content path
+   *   Manage Contents =  isEditable = false, isNew = false, itemPath = the folder path
+   * 
+   * @param itemPath
+   * @param isEditable
+   * @param isNew
+   * @return
+   */
+  public static String getEditLink(String itemPath, boolean isEditable, boolean isNew) {
+	  StringBuilder link = new StringBuilder();
+      PortalRequestContext pContext = Util.getPortalRequestContext();
+      String portalURI = pContext.getPortalURI();     
+      String backto = pContext.getRequestURI();
+      WCMConfigurationService configurationService = Util.getUIPortalApplication().getApplicationComponent(WCMConfigurationService.class);
+      String editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDITOR_PAGE_URI);
+      link.append(portalURI).append(editorPageURI).append("?").
+                                               append("path=/").append(itemPath).
+                                               append("&backto=").append(backto);
+      if (isEditable) link.append("&edit=true");
+      if (isNew) link.append("&addNew=true");
+	  
+	  return link.toString();
   }
   
   /**

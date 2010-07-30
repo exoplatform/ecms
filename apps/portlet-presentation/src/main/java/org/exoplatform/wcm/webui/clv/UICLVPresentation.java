@@ -25,7 +25,6 @@ import java.util.Locale;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.utils.PageList;
@@ -35,17 +34,12 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.organization.User;
-import org.exoplatform.services.organization.UserHandler;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.images.RESTImagesRendererService;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -70,8 +64,7 @@ import org.exoplatform.webui.event.EventListener;
   @ComponentConfig(
     lifecycle = Lifecycle.class, 
     events = {
-      @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
-      @EventConfig(listeners = UICLVPresentation.EditContentActionListener.class)
+      @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class)
     }
   ),
   @ComponentConfig(
@@ -362,6 +355,10 @@ public class UICLVPresentation extends UIContainer {
     ((SimpleDateFormat) dateFormatter).applyPattern(format);
   }
   
+  public String getEditLink(Node node, boolean isEditable, boolean isNew) {
+	  return Utils.getEditLink(node, isEditable, isNew);
+  }
+  
   /**
    * Gets the illustrative image.
    * 
@@ -408,39 +405,4 @@ public class UICLVPresentation extends UIContainer {
     }
   }
 
-  /**
-   * The listener interface for receiving editContentAction events.
-   * The class that is interested in processing a editContentAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addEditContentActionListener<code> method. When
-   * the editContentAction event occurs, that object's appropriate
-   * method is invoked.
-   * 
-   * @see EditContentActionEvent
-   */
-  public static class EditContentActionListener extends EventListener<UICLVPresentation> {
-    
-    /* (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-     */
-    public void execute(Event<UICLVPresentation> event) throws Exception {
-      UICLVPresentation contentListPresentation = event.getSource();
-      String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node node = NodeLocation.getNodeByExpression(itemPath);
-//      UIContentDialogForm uiDocumentDialogForm = contentListPresentation.createUIComponent(UIContentDialogForm.class, null, null);
-//      uiDocumentDialogForm.init(node, false);
-//      Utils.createPopupWindow(contentListPresentation, uiDocumentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
-      PortalRequestContext pContext = Util.getPortalRequestContext();
-      String portalURI = pContext.getPortalURI();     
-      itemPath = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName() + '/' +
-      						node.getSession().getWorkspace().getName() + '/' +node.getPath();
-      String backto = pContext.getRequestURI();
-      StringBuilder link = new StringBuilder().append(portalURI).append("siteExplorer?").
-                                               append("path=/").append(itemPath).
-                                               append("&backto=").append(backto).
-                                               append("&edit=").append("true");
-      event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + link.toString() + "');");
-    }
-  }
 }

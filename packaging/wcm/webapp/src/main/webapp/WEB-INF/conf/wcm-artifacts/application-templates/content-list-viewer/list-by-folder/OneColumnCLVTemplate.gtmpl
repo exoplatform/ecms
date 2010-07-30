@@ -62,7 +62,7 @@
 								def itemSummary = uicomponent.getSummary(viewNode);
 								def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;
 								
-								def contentEditLink = uicomponent.event("EditContent", NodeLocation.getExpressionByNode(viewNode));
+								def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
 						    %>
 									<div class="Column1">
 										<%

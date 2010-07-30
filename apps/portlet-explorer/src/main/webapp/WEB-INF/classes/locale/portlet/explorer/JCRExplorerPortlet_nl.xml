@@ -1776,6 +1776,7 @@
 		<action>
 			<Save>#{word.save}</Save>
 			<Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
 		</action>
 		<msg>
 			<cannot-save>Sommige beperkingen werden overtreden tijdens die actie

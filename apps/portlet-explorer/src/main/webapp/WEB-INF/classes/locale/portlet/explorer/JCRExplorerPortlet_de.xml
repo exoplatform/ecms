@@ -1590,6 +1590,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <cannot-save><![CDATA[Einige Einschr&auml;nkung wurden w&auml;hrend der Aktion gebrochen.]]></cannot-save>

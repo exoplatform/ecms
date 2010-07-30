@@ -1767,6 +1767,7 @@
     <action>
       <Save>Lưu</Save>
       <Cancel>Hủy bỏ</Cancel>
+      <Close>#{word.close}</Close>
     </action>
     <msg>
       <cannot-save>Một số ràng buộc bị vi phạm trong quá trình thực hiện thao tác đó.</cannot-save>

@@ -17,8 +17,12 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import java.security.AccessControlException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.jcr.AccessDeniedException;
@@ -45,7 +49,6 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -53,7 +56,6 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
-import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -74,6 +76,7 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
@@ -91,7 +94,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
   lifecycle = UIFormLifecycle.class,
   events = {
     @EventConfig(listeners = UIDocumentForm.SaveActionListener.class),
-    @EventConfig(listeners = UIDocumentForm.CancelActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UIDocumentForm.CloseActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UIDocumentForm.AddActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UIDocumentForm.RemoveActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UIDocumentForm.ShowComponentActionListener.class, phase = Phase.DECODE),
@@ -112,7 +115,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   private static final Log LOG  = ExoLogger.getLogger(UIDocumentForm.class);
   
   public UIDocumentForm() throws Exception {
-    setActions(new String[]{"Save", "Cancel"});  
+    setActions(new String[]{"Save", "Close"});  
   }
   
   public List<String> getlistTaxonomyName() {
@@ -230,6 +233,20 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
   public Node getCurrentNode() throws Exception { 
     return getAncestorOfType(UIJCRExplorer.class).getCurrentNode(); 
+  }
+  
+  public String getLastModifiedDate() throws Exception {
+	  String d = "";
+	  try {
+		  Node node = getCurrentNode();
+		  if (node.hasProperty("exo:dateModified")) {
+		    Locale locale = Util.getPortalRequestContext().getLocale();
+		    DateFormat dateFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
+		    Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
+		    d = dateFormater.format(calendar.getTime());
+		  }
+	  } catch (Exception e) {}
+	  return d;
   }
   
   static  public class SaveActionListener extends EventListener<UIDocumentForm> {
@@ -405,12 +422,12 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } finally {
-         documentForm.releaseLock();
+//         documentForm.releaseLock();
       }
       event.getRequestContext().setAttribute("nodePath",newNode.getPath());
-      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-      uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+//      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+//      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+//      uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
 //      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
       uiExplorer.setCurrentPath(newNode.getPath());      
       uiExplorer.refreshExplorer();
@@ -499,7 +516,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     }
   }
 
-  static  public class CancelActionListener extends EventListener<UIDocumentForm> {
+  static  public class CloseActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
@@ -513,7 +530,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       uiExplorer.cancelAction();
     }
   }
-  
+    
   static  public class AddActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {            
       UIDocumentForm uiDocumentForm = event.getSource();

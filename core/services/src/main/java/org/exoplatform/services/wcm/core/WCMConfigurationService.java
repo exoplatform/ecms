@@ -53,6 +53,8 @@ public class WCMConfigurationService {
   
   public static final String PRINT_VIEWER_PAGE              = "printViewerPage";
   
+  public static final String EDITOR_PAGE_URI                = "editorPageURI";
+  
   public static final String CREATE_WIKI_PAGE_URI           = "createWikiPageURI";
   
   public static final String CLV_PORTLET                    = "CLVPortlet";

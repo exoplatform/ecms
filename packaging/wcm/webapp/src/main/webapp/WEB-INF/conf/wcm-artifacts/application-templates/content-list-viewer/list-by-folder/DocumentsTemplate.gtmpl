@@ -66,7 +66,7 @@
 								
 								def itemIcon = uicomponent.getContentIcon(viewNode);
 								
-								def contentEditLink = uicomponent.event("EditContent", NodeLocation.getExpressionByNode(viewNode));
+                def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
 						    %>
 									<div class="Column1">
 										<%
