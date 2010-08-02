@@ -63,6 +63,11 @@
 	border-top: none;
 }
 
+.UIJCRExplorer .UIPreferencesForm .UIFormGrid .FieldLabel {
+  width: auto;
+  text-align: left;
+}
+
 .UIVersionTreeList {
   margin: 6px 0px 16px 0px;
 }
