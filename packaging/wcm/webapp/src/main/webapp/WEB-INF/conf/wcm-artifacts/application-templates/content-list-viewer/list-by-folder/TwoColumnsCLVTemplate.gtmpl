@@ -107,6 +107,9 @@
 												<span> ]</span><%
 											}
 											
+                      if (isShowDate) {
+                        %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%
+                      }
 											if (isShowSummary) { 
 												%><div class="Summary">$itemSummary</div><% 
 											}
