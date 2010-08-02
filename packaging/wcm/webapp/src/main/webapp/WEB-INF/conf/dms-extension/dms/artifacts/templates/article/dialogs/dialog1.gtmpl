@@ -43,8 +43,8 @@
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">					
 						<%
-						  String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=basic", ""] ;
-						  uicomponent.addWYSIWYGField("summary", fieldSummary) ;
+						  String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=Basic", ""] ;
+						  uicomponent.addRichtextField("summary", fieldSummary) ;
 		      	%>
 		      </div>
 				</td>
@@ -55,8 +55,8 @@
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">
 						<%
-  						String[] fieldContent = ["jcrPath=/node/exo:text", "options=toolbar:CompleteWCM,width:100%,height:410px", ""] ;
-  						uicomponent.addWYSIWYGField("content", fieldContent) ;        
+  						String[] fieldContent = ["jcrPath=/node/exo:text", "options=toolbar:CompleteWCM,'height:410px'", ""] ;
+  						uicomponent.addRichtextField("content", fieldContent) ;        
 			      %>
 					</div>
 				</td>

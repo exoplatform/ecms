@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+		<title>WCM Content Selector</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<meta http-equiv="cache-control" content="no-cache"/>
+		<meta http-equiv="pragma" content="no-cache"/>
+		<meta http-equiv="eXpires" content="0"/>
+		<link type="text/css" rel="stylesheet" href="../../../eXoDMSResources/skin/DefaultSkin/Stylesheet.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/DefaultSkin/Stylesheet.css"/>
+		<link type="text/css" rel="stylesheet" href="css/content.css"/>
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/Util.js"></script>		
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/DOMUtil.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/Browser.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"></script>
+		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"></script>	
+		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/frontoffice/private/ContentSelector.js"></script>	
+		<script type="text/javascript" src="../../eXoPlugins.js"></script>	
+		<script type="text/javascript" src="js/UploadForm.js"></script>	
+		<script type="text/javascript">
+			var CKEDITOR = window.opener.CKEDITOR || {};
+			eXp.init();
+			eXp.userLanguage = eXo.ecm.ECS.userLanguage || "en";
+			window.onload = eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js"); 
+		</script>
+</head>
+<body>
+	<div class="UIHomePagePortlet">
+		<div class="UIHomePageDT" >
+			
+			<div class="TitleBar">
+				CONTENT SELECTOR
+			</div>
+			<div class="UIWorkingWorkspace">
+				<div class="ActionBar">
+					<div class="FinterTitle" userLanguage="UserLanguage.Filter">Filter: </div>
+					<div class="FinterInput">
+						<select class="Pinter" id="Filter" onchange="eXo.ecm.ECS.changeFilter();">
+							<option value="All" selected="selected" userLanguage="UserLanguage.All">All</option>	
+							<option value="Web Contents" userLanguage="UserLanguage.WebContents">Web Contents</option>
+							<option value="DMS Documents" userLanguage="UserLanguage.DMSDocuments">DMS Documents</option>
+							<option value="Medias" userLanguage="UserLanguage.Medias">Medias</option>
+						</select>
+					</div>
+					<div class="SeparatorLineL"><span></span></div>
+					<!--
+					<div class="ControlButton InsertLinksIcon">
+						<a href="javascript: void(0);" class="InseartButton">Insert a links</a>
+					</div>
+					-->
+					<!--====================================== UPLOAD ============================================-->
+					<div class="ControlButton UploadIcon" id="UploadItem" style="display:none;">
+							<a class="Item IconUpload" href="javascript:void(0);" onclick="eXo.ecm.UploadForm.showUploadForm();" userLanguage="UserLanguage.UploadFile">Upload File</a>
+					</div>
+					<!-- ====================================== UPLOAD ============================================-->					
+					<!-- ====================================== SETTING ============================================-->
+					<div class="SettingIcon" onmouseover="" style="position:relative;">	
+						<a href="#" userLanguage="UserLanguage.SettingTitle" style="display:none;">Setting</a>
+						<div class="SettingContainer">
+				      <div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
+				      	<div class="UIContextMenuContainer">
+					        <div class="TopLeftRightClickPopupMenu">
+					          <div class="TopRightRightClickPopupMenu">
+					            <div class="TopCenterRightClickPopupMenu"><span/></div>
+					          </div>
+					        </div>
+					        <div class="MiddleLeftRightClickPopupMenu">
+					          <div class="MiddleRightRightClickPopupMenu">
+					            <div class="UIRightPopupMenuContainer">
+					              <div class="MenuItem" style="white-space:nowrap;" onmouseover="eXo.ecm.PluginUtils.showSubMenuSettings(this);">   
+					                <a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SetView">View</a>
+				                	<div class="ChildrenContainer" style="position: relative;">
+														<div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
+															<div class="UIContextMenuContainer">
+																<div class="TopLeftRightClickPopupMenu">
+																	<div class="TopRightRightClickPopupMenu">
+																		<div class="TopCenterRightClickPopupMenu"><span/></div>
+																	</div>
+																</div>
+																<div class="MiddleLeftRightClickPopupMenu">
+																	<div class="MiddleRightRightClickPopupMenu">
+																		<div class="UIRightPopupMenuContainer">
+																			<div class="MenuItem" style="white-space:nowrap;">   
+																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewList">List</a>   
+																			</div>
+																			<div class="MenuItem">   
+																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewThumbnail">Thumbnails</a>  
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="BottomLeftRightClickPopupMenu">
+																<div class="BottomRightRightClickPopupMenu">
+																	<div class="BottomCenterRightClickPopupMenu"><span/></div>
+																</div>
+															</div>
+															</div>
+														</div>
+													</div>
+					              </div>
+					              <div class="MenuItem">   
+					                <a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SetSort">Sort</a>
+					                	<div class="ChildrenContainer" style="position: relative;">
+															<div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
+																<div class="UIContextMenuContainer">
+																	<div class="TopLeftRightClickPopupMenu">
+																		<div class="TopRightRightClickPopupMenu">
+																			<div class="TopCenterRightClickPopupMenu"><span/></div>
+																		</div>
+																	</div>
+																	<div class="MiddleLeftRightClickPopupMenu">
+																		<div class="MiddleRightRightClickPopupMenu">
+																			<div class="UIRightPopupMenuContainer">
+																				<div class="MenuItem" style="white-space:nowrap;">   
+																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortName">By Name</a>   
+																				</div>
+																				<div class="MenuItem">   
+																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortDate">By Date</a>  
+																				</div>
+																				<div class="MenuItem">   
+																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortSize">By Size</a>  
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="BottomLeftRightClickPopupMenu">
+																	<div class="BottomRightRightClickPopupMenu">
+																		<div class="BottomCenterRightClickPopupMenu"><span/></div>
+																	</div>
+																</div>
+																</div>
+															</div>
+														</div>
+					              </div>
+					            </div>
+					          </div>
+					        </div>
+					        <div class="BottomLeftRightClickPopupMenu">
+				          <div class="BottomRightRightClickPopupMenu">
+				            <div class="BottomCenterRightClickPopupMenu"><span/></div>
+				          </div>
+				        </div>
+				        </div>
+				      </div>
+				    </div>
+					</div>
+					<div class="SeparatorLineR"><span></span></div>
+					<div style="clear: both;"><span></span></div>
+				</div>
+				<div class="BreadcumbsPortlet">
+					<div class="HomeIcon"><span></span></div> 
+					<div class="BreadcumbsContainer" id="BreadcumbsContainer">
+						<a class="Nomal" title="Home" href="#" userLanguage="UserLanguage.Home">Home</a>
+					</div>
+				</div>
+				<div class="ListContainer">
+					<div class="LeftWorkspace" id="LeftWorkspace">
+					
+					</div>
+					<div class="RightWorkspace" id="RightWorkspace">
+						<div class="ListView">
+						  	<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListRecords">
+						    	<thead>
+						    		<tr>
+						    		  <th class="THBar" userLanguage="UserLanguage.FileName"> Name </th>
+						   	      <th class="THBar" style="width: 120px;" userLanguage="UserLanguage.CreateDate"> Date </th>
+						   	      <th class="THBar" style="width: 80px;" userLanguage="UserLanguage.FileSize"> Size </th>
+						    	 	</tr>
+						    	</thead>
+						    	<tr>
+						    		<td class="Item TRNoContent" colspan="3" userLanguage="UserLanguage.NoContent">There is no content</td>
+						    	</tr>
+						  	</table>
+						</div>
+						<div class="PageIterator" id="pageNavPosition"></div>
+					<div style="clear: left;"><span></span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!-- =================================BEGIN UPLOAD ====================================== -->
+<div id="hideContainer" class="HideContainer" style="display: none;">
+	<div class="AlertContainer">
+		<div class="AlertForm">
+			<div align="center"><span userLanguage="UserLanguage.LabelAlert"> Please choose a file before upload !</span></div>
+			<div class="UIAction">
+				<table class="ActionContainer LightBlueStyle" align="center">
+					<tr>
+						<td align="center">
+							<a href="javascript: void(0);" class="ActionButton" style="margin-top: 21px">
+								<div class="ButtonLeft">
+									<div class="ButtonRight">
+										<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.showUploadForm();" userLanguage="UserLanguage.BtnClose">
+											Close
+										</div>
+									</div>
+								</div>
+							</a>
+							<div style="clear: left;"><span style="dislay: none"></span></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div id="UploadContainer" style="display: none;">
+		<div class="UploadForm" style="overflow: auto;">
+			<table border="0" bordercolor="red" class="ActionContainer">
+				<tr class="PathFolder">
+					<td colspan="2" style="width: 100%; overflow: hidden;">
+						<span class="PathFolder" userLanguage="UserLanguage.LabelFolder"> Folder </span>
+					</td>
+				</tr>
+				<tr class="UploadField">
+					<td width="280px">
+						<iframe name="iFrameUpload" class="iFrameUpload" frameborder="0px" border="0px" style="width: 100%; height: 23px;">
+						</iframe>
+						<xmp id="iContentUpLoad" style="display: none;">
+							<html style="padding: 0px; margin: 0px;">
+								<body style="margin: 0px; padding: 0px; overflow: hidden;">
+									<form enctype="multipart/form-data" method="post" target="iTarget" style="width: 235px;">
+										<input type="file" name="file" class="file" />
+									</form>
+									<iframe name="iTarget" id="iTarget" style="display: none"></iframe>
+								</body>
+							</html>
+						</xmp>
+					</td>
+				</tr>
+				<tr class="UploadInfo Abort" style="display: none;">
+					<td width="238">
+						<div class="GraphProgress"></div>
+						<div class="NumberProgress">0%</div>
+					</td>
+					<td>
+						<div class="UIAction Abort">
+							<table class="ActionContainer LightBlueStyle" align="center">
+								<tr>
+									<td>
+										<a href="javascript: void(0);" class="ActionButton">
+											<div class="ButtonLeft">
+												<div class="ButtonRight">
+													<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFileAbort();" userLanguage="UserLanguage.BtnAbort">
+														Abort
+													</div>
+												</div>
+											</div>
+										</a>
+										<div style="clear: left;"><span style="display: none;"></span></div>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<a href="javascript: void(0);" class="ActionButton Delete">
+							<div class="ButtonLeft">
+								<div class="ButtonRight">
+									<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFileDelete();" userLanguage="UserLanguage.BtnDelete">
+										Delete
+									</div>
+								</div>
+							</div>
+						</a>
+					</td>
+				</tr>
+				<tr class="UploadAction" style="display: none;">
+					<td colspan="2">
+						<div style="margin: 3px 0px 3px 0px">
+							<span userLanguage="UserLanguage.LabelName"> Name </span>:
+							<input type="text" name="fileName" style="width: 238px;" maxlength="128"/>
+						</div>
+						<div class="UIAction">
+							<table class="ActionContainer LightBlueStyle" align="center">
+								<tr>
+									<td>
+										<a href="javascript: void(0);" class="ActionButton">
+											<div class="ButtonLeft">
+												<div class="ButtonRight">
+													<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFileCancel();" userLanguage="UserLanguage.BtnCancel">
+														Cancel
+													</div>
+												</div>
+											</div>
+										</a>
+										<a href="javascript: void(0);" class="ActionButton">
+											<div class="ButtonLeft">
+												<div class="ButtonRight">
+													<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFileSave();" userLanguage="UserLanguage.BtnSave">
+														Save
+													</div>
+												</div>
+											</div>
+										</a>
+										<div style="clear: left;"><span style="display: none;"></span></div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>	
+				<tr class="CancelAction">
+					<td colspan="2">
+						<div class="UIAction">
+							<table class="ActionContainer LightBlueStyle" align="center">
+								<tr>
+									<td>
+										<a href="javascript: void(0);" class="ActionButton" style="margin-top: 21px">
+											<div class="ButtonLeft">
+												<div class="ButtonRight">
+													<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFile();" userLanguage="UserLanguage.BtnUpload">
+														Upload
+													</div>
+												</div>
+											</div>
+										</a>
+									</td>
+									<td>
+										<a href="javascript: void(0);" class="ActionButton" style="margin-top: 21px">
+											<div class="ButtonLeft">
+												<div class="ButtonRight">
+		 											<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.removeMask();" userLanguage="UserLanguage.BtnCancel">
+														Cancel
+													</div>
+												</div>
+											</div>
+										</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>	
+<!-- =================================END UPLOAD ======================================== -->
+<div class="Mask" id="Mask"></div>
+<div class="PopupContainer"  id="PopupContainer"></div>
+<script type="text/javascript">
+	window.onload = function(){
+		eXo.ecm.ECS.initRequestXmlTree('editor');
+		eXo.ecm.ECS.languageInit();
+	};
+</script>
+</body>
+</html>

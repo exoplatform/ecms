@@ -164,12 +164,12 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 	node.setAttribute('typeComponent', typeComp);
 	document.getElementById('MiddleCenterViewBoxStyle').appendChild(node);
 
-	if(typeComp == 'wysiwyg' && !FCKeditorAPI.GetInstance('RichTextEditorContent')) {
-		var oFCKEditor = new FCKeditor('RichTextEditorContent_'+eXo.ecm.UIFormGeneratorPortlet.countFCK);
-		eXo.ecm.UIFormGeneratorPortlet.countFCK++;
-		oFCKEditor.BasePath = '/ecm-wcm-extension/fckeditor/';
-		oFCKEditor.ToolbarSet = 'SuperBasicWCM';
-		oFCKEditor.ReplaceTextarea();
+if(typeComp == 'wysiwyg' && !CKEDITOR.instances['RichTextEditorContent']) {
+		var idEditor = 	'RichTextEditorContent_'+ eXo.ecm.UIFormGeneratorPortlet.countFCK;
+		CKEDITOR.replace( idEditor,
+    {
+        toolbar : 'BasicWCM'
+    });
 	}
 };
 
@@ -330,8 +330,11 @@ UIFormGeneratorPortlet.prototype.updateValue = function(evt) {
 			textarea.value = srcEle.value;
 			break
 		case "WYSIWYG" :
-			var oFCKEditor = FCKeditorAPI.GetInstance('RichTextEditorContent') ;
-			oFCKEditor.SetHTML(srcEle.value);
+			var eltComp = DOMUtil.findFirstDescendantByClass(componentNode, 'td', 'FieldComponent');
+			var txtArea = DOMUtil.findFirstChildByClass(eltComp, "textarea", "Textarea");
+			var iEditor = txtArea.id;
+			var editor = eval('CKEDITOR.instances.'+iEditor);
+			editor.setText(srcEle.value);		
 			break;
 		case "upload" : 
 			break;
@@ -616,28 +619,9 @@ UIFormGeneratorPortlet.prototype.getProperties = function(comp) {
 			strObject +=  '"value":"null","width":0,"mandatory":'+mandatory+',"height":0,';	
 			break;
 		case "radio" :
-			var radioNodes = DOMUtil.findDescendantsByClass(topContent, 'div', "RadioButton");
-			var dummyRadioNode = DOMUtil.findFirstDescendantByClass(radioNodes[0], 'input', 'Radio');
-			var width	= dummyRadioNode.offsetWidth;
-			var height  = dummyRadioNode.offsetHeight;
-			var mandatory = fieldLabel.getAttribute('mandatory');
-			strObject +=  '"value":"'+dummyRadioNode.value+'","width":'+width+',"mandatory":'+mandatory+',"height":'+height+',"advanced":"';
-			for(var i = 0; i < radioNodes.length; i++) {
-				var radioNode = DOMUtil.findFirstDescendantByClass(radioNodes[i], 'input', 'Radio');
-				strObject += radioNode.value;
-				if(i != (radioNodes.length-1)) {
-					strObject += ",";				
-				}
-			}
-			strObject += '",';
- 			break;
- 		case "checkbox" :
-			var checkboxNode = DOMUtil.findFirstDescendantByClass(topContent, 'input', "CheckBox");
-			var width	= checkboxNode.offsetWidth;
-			var mandatory = fieldLabel.getAttribute('mandatory');
-			var height  = checkboxNode.offsetHeight;
-			strObject +=  '"value":"'+checkboxNode.value+'","width":'+width+',"mandatory":'+mandatory+',"height":'+height+',';	
- 			break;				
+			break;
+		case "checkbox" :
+			break;		
 	}
 
 	strObject += '"guideline":"'+fieldLabel.getAttribute('desc')+'"';

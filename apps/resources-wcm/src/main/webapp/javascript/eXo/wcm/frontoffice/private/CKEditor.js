@@ -28,7 +28,7 @@ CKEditor.prototype.insertCSS = function(Instance, ContentCSS) {
 		eHead.appendChild(eStyle);
 	};
 	
-	(function checkFCKEditorAPI() {
+	(function checkCKEditorAPI() {
 		if (count <= 5) {
 			try {
 				updateStyle();
@@ -38,7 +38,7 @@ CKEditor.prototype.insertCSS = function(Instance, ContentCSS) {
 				}
 			} catch(e) {
 				count++;
-				updateStyle.time = setTimeout(checkFCKEditorAPI, 500);
+				updateStyle.time = setTimeout(checkCKEditorAPI, 500);
 			}
 		}
 	})();

@@ -45,7 +45,6 @@ import org.exoplatform.application.registry.ApplicationRegistryService;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.portal.config.model.ApplicationType;
 import org.exoplatform.portal.gadget.core.ExoDefaultSecurityTokenGenerator;
 import org.exoplatform.services.log.ExoLogger;
@@ -75,9 +74,6 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /** The gadget registry service. */
   private GadgetRegistryService gadgetRegistryService;
   
-  /** The internal server path. */
-  private String internalServerPath;
-  
   /** The log. */
   private static Log log = ExoLogger.getLogger(GadgetConnector.class);
   
@@ -90,22 +86,6 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   public GadgetConnector(InitParams initParams) throws Exception {
     applicationRegistryService = WCMCoreUtils.getService(ApplicationRegistryService.class);
     gadgetRegistryService = WCMCoreUtils.getService(GadgetRegistryService.class);
-    readServerConfig(initParams);
-  }
-  
-  /**
-   * Read server config.
-   * 
-   * @param initParams the init params
-   */
-  private void readServerConfig(InitParams initParams) {
-    PropertiesParam propertiesParam = initParams.getPropertiesParam("server.config");
-    String scheme = propertiesParam.getProperty("scheme");
-    String hostName = propertiesParam.getProperty("hostName");
-    String port = propertiesParam.getProperty("port");
-    StringBuilder builder = new StringBuilder();
-    builder.append(scheme).append("://").append(hostName).append(":").append(port);
-    internalServerPath = builder.toString();
   }
   
   /**
@@ -120,9 +100,9 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    */
   @GET
   @Path("/getFoldersAndFiles/")
-  public Response getFoldersAndFiles(@QueryParam("currentFolder") String currentFolder, @QueryParam("currentFolder") String language) throws Exception {
+  public Response getFoldersAndFiles(@QueryParam("currentFolder") String currentFolder, @QueryParam("lang") String language, @QueryParam("host") String host) throws Exception {
     try {
-      Response response = buildXMLResponse(currentFolder, language);
+      Response response = buildXMLResponse(currentFolder, language, host);
       if (response != null)
         return response; 
     } catch (Exception e) {
@@ -141,9 +121,9 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * 
    * @throws Exception the exception
    */
-  public Response buildXMLResponse(String currentFolder, String language) throws Exception {
+  public Response buildXMLResponse(String currentFolder, String language, String host) throws Exception {
     List<ApplicationCategory> applicationCategories = getGadgetCategories();
-    Element rootElement = createRootElement(currentFolder, applicationCategories, language);
+    Element rootElement = createRootElement(currentFolder, applicationCategories, language, host);
     Document document = rootElement.getOwnerDocument();
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
@@ -162,7 +142,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * 
    * @throws Exception the exception
    */
-  private Element createRootElement(String currentFolder, List<ApplicationCategory> applicationCategories, String language) throws Exception {
+  private Element createRootElement(String currentFolder, List<ApplicationCategory> applicationCategories, String language, String host) throws Exception {
     Document document = null;
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
@@ -202,7 +182,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
         try {
           ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
           currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
-          Element filesElement = createFileElement(document, applicationCategory);
+          Element filesElement = createFileElement(document, applicationCategory, host);
           rootElement.appendChild(filesElement);
         } finally {
           RequestLifeCycle.end();
@@ -243,7 +223,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * 
    * @throws Exception the exception
    */
-  private Element createFileElement(Document document, ApplicationCategory applicationCategory) throws Exception {
+  private Element createFileElement(Document document, ApplicationCategory applicationCategory, String host) throws Exception {
     Element files = document.createElement("Files");
     List<Application> listApplication = applicationRegistryService.getApplications(applicationCategory, ApplicationType.GADGET);
     for (Application application : listApplication) {
@@ -257,14 +237,14 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       
       String fullurl = "";
       if (gadget.isLocal()) {
-        fullurl = internalServerPath + "/" + PortalContainer.getCurrentRestContextName() + "/" + gadget.getUrl();
+        fullurl = "/" + PortalContainer.getCurrentRestContextName() + "/" + gadget.getUrl();
       } else {
         fullurl = gadget.getUrl();
       }
       file.setAttribute("url", fullurl);
       
       String data = "{\"context\":{\"country\":\"US\",\"language\":\"en\"},\"gadgets\":[{\"moduleId\":0,\"url\":\"" + fullurl + "\",\"prefs\":[]}]}";
-      URL url = new URL(internalServerPath + "/eXoGadgetServer/gadgets/metadata");
+      URL url = new URL(host + "/eXoGadgetServer/gadgets/metadata");
       URLConnection conn = url.openConnection();
       conn.setDoOutput(true);
       OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());

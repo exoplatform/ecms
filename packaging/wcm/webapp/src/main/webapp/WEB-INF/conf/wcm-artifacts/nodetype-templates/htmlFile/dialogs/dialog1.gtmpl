@@ -32,11 +32,11 @@
                 if(curNode.hasNode("jcr:content")) {
                   def content = curNode.getNode("jcr:content") ;                                      
                   String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
-                  uicomponent.addWYSIWYGField("contentHtml", fieldSummary) ;
+                  uicomponent.addRichtextField("contentHtml", fieldSummary) ;
                 }
               } else {                           
                 String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data"] ;
-                uicomponent.addWYSIWYGField("contentHtml", fieldSummary) ;                
+                uicomponent.addRichtextField("contentHtml", fieldSummary) ;                
               }
             %>      
           </td>

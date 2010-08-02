@@ -96,6 +96,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /** The Constant FILE_TYPE_MEDIAS. */
   public static final String FILE_TYPE_MEDIAS                       = "Medias"; 
   
+  /** The Constant FILE_TYPE_MEDIAS. */
+  public static final String FILE_TYPE_ALL                       = "All";
+  
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] MEDIA_MIMETYPE = new String[]{"application", "image", "audio", "video"};
   
@@ -575,6 +578,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   			folders.appendChild(folder);
   		}
 
+  		if (FILE_TYPE_ALL.equals(filterBy)) {
+  		  fileType = FILE_TYPE_ALL;
+  		}
+  		
   		if (FILE_TYPE_WEBCONTENT.equals(filterBy)) {
   			if(checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE)) {
   				fileType = FILE_TYPE_WEBCONTENT;
@@ -822,5 +829,5 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   	folder.setAttribute("isUpload", "true");
   	return folder;
   }
-  
+
 }

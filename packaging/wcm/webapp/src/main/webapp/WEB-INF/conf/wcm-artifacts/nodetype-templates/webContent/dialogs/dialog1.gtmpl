@@ -3,11 +3,11 @@
 	import org.exoplatform.web.application.Parameter;
 	
 	def rcontext = _ctx.getRequestContext() ;
-	def String htmlWYSIWYGFormId = "htmlData[" + uicomponent.hashCode() + "]";
+	def String htmlWYSIWYGFormId = "htmlData" + uicomponent.hashCode();
 	def String cssFormId = "ContentCSS[" + uicomponent.hashCode() + "]";
 	def String jsFormId = "ContentJS[" + uicomponent.hashCode() + "]";
 	def jsManager = rcontext.getJavascriptManager();
-	jsManager.addOnLoadJavascript("eXo.ecm.WCMFCKEditor.insertCSSFromTextArea2FCK('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
+	jsManager.addOnLoadJavascript("eXo.ecm.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
 	
 	private String getDisplayTab(String selectedTab) {
 		if ((uicomponent.getSelectedTab() == null && selectedTab.equals("mainWebcontent"))
@@ -137,7 +137,7 @@
 	        			</tr>
 								<tr>
 						 			<td class="FieldLabel">
-						 				<div title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" class="WebContentSynchronize Refresh16x16Icon" onclick="eXo.ecm.WCMFCKEditor.insertCSSFromTextArea2FCK('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"></div>
+						 				<div title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" class="WebContentSynchronize Refresh16x16Icon" onclick="eXo.ecm.CKEditor.insertCSS('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"></div>
 										<div class="WebContentMain"><%=_ctx.appRes("WebContent.dialog.label.WebContentHtml")%></div>
 					 				</td>
 					  				<td class="FieldComponent">
@@ -159,8 +159,8 @@
 												Node htmlNode = webContentNode.getNode("default.html");
 												htmlContent = htmlNode.getNode("jcr:content").getProperty("jcr:data").getValue().getString();
 											}
-											String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,width:100%,height:410px", htmlContent];
-											uicomponent.addWYSIWYGField(htmlWYSIWYGFormId, htmlArguments) ;
+											String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px'", htmlContent];
+											uicomponent.addRichtextField(htmlWYSIWYGFormId, htmlArguments) ;
 					      				%>
 									</td>
 								</tr>
@@ -207,7 +207,7 @@
 												summaryContent = webContentNode.getProperty("exo:summary").getValue().getString();
 											}
 											String[] fieldSummary = ["jcrPath=/node/exo:summary", "editable=if-null", summaryContent] ;
-											uicomponent.addWYSIWYGField("exo:summary", fieldSummary) ;
+											uicomponent.addRichtextField("exo:summary", fieldSummary) ;
 										%>
 									</td>
 								</tr>

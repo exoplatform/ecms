@@ -44,7 +44,7 @@
 									if(mimeType.startsWith("text")){
 										if(mimeType.equals("text/html")) {
 											String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
-				              uicomponent.addWYSIWYGField("contentHtml", fieldSummary) ;						
+				              uicomponent.addRichtextField("contentHtml", fieldSummary) ;						
 										} else {
 											String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
 			          			uicomponent.addTextAreaField("content", fieldSummary) ;
@@ -58,19 +58,19 @@
 									}
 								} else {
 									String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data"] ;
-			            uicomponent.addWYSIWYGField("contentHtml", fieldSummary) ;						
+			            uicomponent.addRichtextField("contentHtml", fieldSummary) ;						
 								}
 							} else {	
 								String selectValue = uicomponent.getSelectBoxFieldValue("mimetype") ;					
 								if(selectValue != null && selectValue.equals("text/html")) {	
 									String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data"] ;
-			          	uicomponent.addWYSIWYGField("contentHtml", fieldSummary) ;
+			          	uicomponent.addRichtextField("contentHtml", fieldSummary) ;
 								} else if(selectValue != null && selectValue.equals("text/plain")){
 									String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data"] ;
 			          	uicomponent.addTextAreaField("contentPlain", fieldSummary) ;
 								} else {
 									String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data"] ;
-			          	uicomponent.addWYSIWYGField("contentHtml", fieldSummary) ;								  
+			          	uicomponent.addRichtextField("contentHtml", fieldSummary) ;								  
 								}
 							}
 						%>			
