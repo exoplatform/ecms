@@ -260,8 +260,9 @@
   width: 100%;
 }
 
+
 .UICLVPortlet .RssIcon {
-  background: url('DefaultSkin/images/RSS.gif') no-repeat left top;
+  background: url('DefaultSkin/icons/RSS.gif') no-repeat left top;
   padding-left: 22px;
   float: right;
   color: #fe9832;

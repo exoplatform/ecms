@@ -27,19 +27,20 @@
 					%>
 						<div class="TitleBarL">
 							<div class="TitleBarR">
-								<div class="TitleBarM">$header</div>
+                <div class="TitleBarM">
+                  $header
+                  <%if (isShowRssLink) {
+                    %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
+                  }%>
+                </div>
 							</div>
 						</div>
 					<%
-				}
-				if (isShowRssLink) {
-					%><a class="RssIcon" href="$rssLink" target="_newrss"><%= _ctx.appRes("UICLVPresentation.label.rssFeed") %></a><%
 				}
 				%>
 				<div class="ClearBoth"><span></span></div>
 			</div>
 			<%
-
 			if (uicomponent.getUIPageIterator().getAvailable() == 0) {
 				%>
 					<div style="height: 20px; text-align: center; font-size: 13px; background: white; padding: 10px; margin: 5px;">
@@ -84,7 +85,7 @@
 									<div class="Column1">
 										<%
 											if (isShowImage) {
-											  %><a class="Image"><img alt="$imgSrc" src="$imgSrc" /></a><%
+                    %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
 											}
 											%>
 												<div class="Content">
