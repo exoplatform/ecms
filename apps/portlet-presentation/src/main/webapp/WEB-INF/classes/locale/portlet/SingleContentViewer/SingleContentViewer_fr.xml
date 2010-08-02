@@ -77,12 +77,19 @@
   	 		<AccessControlException>Vous n'avez pas la permission d'accéder à modifier le mode</AccessControlException>
   	 </msg>
   </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+  	<label>
+		<Enable>Enable</Enable>
+		<Disable>Disable</Disable>
+  	</label>
+  </UISCVContextualRadioBox>  
+  
   <UIPreferencesPopupWindows>
 	<title>
 		<UISCVPreferences>Content Detail Preferences</UISCVPreferences>
 	</title>
   </UIPreferencesPopupWindows>
-  <UISCVPreferences>	
+  <UISCVPreferences>
     <action>
      <Save>Save</Save>
      <Abort>Abort</Abort>
@@ -99,6 +106,10 @@
    	  <DisplaySettingBlock>Display settings</DisplaySettingBlock>
    	  <ContentPathBlock>Content Selection</ContentPathBlock>
    	  <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
+   	  <Advance>Advance</Advance>
+   	  <ContextCaption>Dynamic Navigation</ContextCaption>
+   	  <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+   	  <UISCVParameterInputBox>by</UISCVParameterInputBox>
     </label>
     <help>
    	  <ContentPathBlock>Please select the source data to display</ContentPathBlock>

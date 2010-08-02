@@ -77,6 +77,7 @@
   	 		<AccessControlException>Bạn không có quyền truy cập vào chế độ chỉnh sửa</AccessControlException>
   	 </msg>
   </UISingleContentViewerPortlet>
+  
   <UIPreferencesPopupWindows>
 	<title>
 		<UISCVPreferences>Tùy chọn chi tiết</UISCVPreferences>
@@ -84,8 +85,8 @@
   </UIPreferencesPopupWindows>
   <UISCVContextualRadioBox>
   	<label>
-		<Enable>Enable</Enable>
-		<Disable>Disable</Disable>
+		<Enable>Cho phép</Enable>
+		<Disable>Vô hiệu</Disable>
   	</label>
   </UISCVContextualRadioBox>
   
@@ -108,7 +109,7 @@
    	  <UISCVConfigItemPathFormInputSet>Nội dung</UISCVConfigItemPathFormInputSet>
    	  <Advance>Nâng cao</Advance>
    	  <ContextCaption>Điều hướng</ContextCaption>
-   	  <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+   	  <UISCVContextualRadioBox>Nội dung theo ngữ cảnh</UISCVContextualRadioBox>
    	  <UISCVParameterInputBox>tham số</UISCVParameterInputBox>
     </label>
     <help>

@@ -84,8 +84,7 @@
 		<Enable>Enable</Enable>
 		<Disable>Disable</Disable>
   	</label>
-  </UISCVContextualRadioBox>
-  
+  </UISCVContextualRadioBox>  
   
   <UIPreferencesPopupWindows>
 	<title>
