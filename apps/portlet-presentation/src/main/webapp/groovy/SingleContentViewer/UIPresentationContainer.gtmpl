@@ -25,13 +25,6 @@
 					</div>
 				<%			
 			}
-			if(Utils.isShowDraft(node)) {
-				%>
-					<div style="padding: 5px 10px; line-height: 16px; ">
-						[ <span class="DraftIcon" style="padding-left: 20px"><%= _ctx.appRes("UIPresentationContainer.label.draft") %></span> ]
-					</div>  
-				<% 
-			}
 		
 			if (isShowTitle||isShowDate) {
 				%>
