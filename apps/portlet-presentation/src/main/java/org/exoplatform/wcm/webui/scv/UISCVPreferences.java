@@ -73,6 +73,12 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   protected String selectedNodeReporitory =null;
   protected String selectedNodeWorkspace =null;
 
+  private UIFormStringInput             txtContentPath;
+  private UIFormCheckBoxInput<Boolean>  chkShowTitle;
+  private UIFormCheckBoxInput<Boolean>  chkShowDate;
+  private UIFormCheckBoxInput<Boolean>  chkShowOptionBar;
+  private UIFormRadioBoxInput           contextOptionsRadioInputBox; 
+  
   public UISCVPreferences() throws Exception{    
     portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
     initComponent();
@@ -85,11 +91,10 @@ public class UISCVPreferences extends UIForm implements UISelectable{
    * @throws Exception
    */
 
-  private void initComponent() throws Exception{
-
-    /** ITEM PATH */
+  public void initComponent() throws Exception{
+    /** Content name **/
     String strNodeName = getNodeNameByPreferences();
-    UIFormStringInput txtContentPath = new UIFormStringInput(CONTENT_PATH_INPUT, CONTENT_PATH_INPUT, strNodeName);
+    txtContentPath = new UIFormStringInput(CONTENT_PATH_INPUT, CONTENT_PATH_INPUT, strNodeName);
     txtContentPath.addValidator(MandatoryValidator.class);
     txtContentPath.setEditable(false);
     txtContentPath.addValidator(MandatoryValidator.class);
@@ -98,32 +103,30 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     itemPathInputSet.setActionInfo(CONTENT_PATH_INPUT, new String[] { "SelectFolderPath" }) ;
     itemPathInputSet.addUIFormInput(txtContentPath);
 
+    /** Option Show Title/Show Date/Show OptionBar **/
     boolean blnShowTitle = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE, null));
-    UIFormCheckBoxInput<Boolean> chkShowTitle = new UIFormCheckBoxInput<Boolean>(SHOW_TITLE_CHECK_BOX, SHOW_TITLE_CHECK_BOX, null);
+    chkShowTitle = new UIFormCheckBoxInput<Boolean>(SHOW_TITLE_CHECK_BOX, SHOW_TITLE_CHECK_BOX, null);
     chkShowTitle.setChecked(blnShowTitle);    
 
     boolean blnShowDate = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_DATE, null));
-    UIFormCheckBoxInput<Boolean> chkShowDate = new UIFormCheckBoxInput<Boolean>(SHOW_DATE_CHECK_BOX, SHOW_DATE_CHECK_BOX, null);
+    chkShowDate = new UIFormCheckBoxInput<Boolean>(SHOW_DATE_CHECK_BOX, SHOW_DATE_CHECK_BOX, null);
     chkShowDate.setChecked(blnShowDate);
 
     boolean blnShowOptionBar = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR, null));
-    UIFormCheckBoxInput<Boolean> chkShowOptionBar = new UIFormCheckBoxInput<Boolean>(SHOW_OPION_BAR_CHECK_BOX, SHOW_OPION_BAR_CHECK_BOX, null);
+    chkShowOptionBar = new UIFormCheckBoxInput<Boolean>(SHOW_OPION_BAR_CHECK_BOX, SHOW_OPION_BAR_CHECK_BOX, null);
     chkShowOptionBar.setChecked(blnShowOptionBar);
 
 
-    /** DISPLAY MODE */
+    /** CONTEXTUAL MODE */
     boolean isShowContextOption = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
     List<SelectItemOption<String>> contextOptions = new ArrayList<SelectItemOption<String>>();
     contextOptions.add(new SelectItemOption<String>(ENABLE_STRING, ENABLE_STRING));
     contextOptions.add(new SelectItemOption<String>(DISABLE_STRING, DISABLE_STRING));
-    UIFormRadioBoxInput contextOptionsRadioInputBox = new UIFormRadioBoxInput(CONTEXTUAL_SELECT_RADIO_BOX, CONTEXTUAL_SELECT_RADIO_BOX, contextOptions);
+    contextOptionsRadioInputBox = new UIFormRadioBoxInput(CONTEXTUAL_SELECT_RADIO_BOX, CONTEXTUAL_SELECT_RADIO_BOX, contextOptions);
     contextOptionsRadioInputBox.setValue(isShowContextOption?ENABLE_STRING:DISABLE_STRING);
 
-    String strParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PARAMETER, "");
+    String strParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PARAMETER, null);
     UIFormStringInput txtParameterName = new UIFormStringInput(PARAMETER_INPUT_BOX, strParameterName);    
-    if (!isContextualEnable()) {
-      txtParameterName.setEditable(false);
-    }
     
     addChild(itemPathInputSet);
     addChild(chkShowTitle);
@@ -132,6 +135,18 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     addChild(contextOptionsRadioInputBox);
     addChild(txtParameterName);
 
+  }
+  public void getPreferences() {
+    String strNodeName = getNodeNameByPreferences();
+    txtContentPath.setLabel(strNodeName);
+    boolean blnShowTitle = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE, null));
+    chkShowTitle.setChecked(blnShowTitle);
+    boolean blnShowDate = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_DATE, null));
+    chkShowDate.setChecked(blnShowDate);
+    boolean blnShowOptionBar = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR, null));
+    chkShowOptionBar.setChecked(blnShowOptionBar);
+    boolean isShowContextOption = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
+    contextOptionsRadioInputBox.setValue(isShowContextOption?ENABLE_STRING:DISABLE_STRING);
   }
   /**
    * ActionListener: save preferences action
@@ -142,7 +157,6 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     public void execute(Event<UISCVPreferences> event) throws Exception {
       UISCVPreferences uiSCVPref = event.getSource();
       PortletPreferences portletPreferences = ((PortletRequestContext) event.getRequestContext()).getRequest().getPreferences();
-
       String strShowTitle = uiSCVPref.getUIFormCheckBoxInput(SHOW_TITLE_CHECK_BOX).isChecked() ? "true" : "false";
       String strShowDate = uiSCVPref.getUIFormCheckBoxInput(SHOW_DATE_CHECK_BOX).isChecked() ? "true" : "false";
       String strShowOptionBar = uiSCVPref.getUIFormCheckBoxInput(SHOW_OPION_BAR_CHECK_BOX).isChecked() ? "true" : "false";      
@@ -160,11 +174,11 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       portletPreferences.setValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR, strShowOptionBar);
       portletPreferences.setValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, strIsContextEnable);
       portletPreferences.setValue(UISingleContentViewerPortlet.PARAMETER, strParameterName);
-      
       portletPreferences.store();
       if (uiSCVPref.getInternalPreferencesMode()) {
         if (!Utils.isPortalEditMode()) {
           uiSCVPref.getAncestorOfType(UISingleContentViewerPortlet.class).changeToViewMode();
+          uiSCVPref.getPreferences();
         }
       } else {
         Utils.closePopupWindow(uiSCVPref, UISingleContentViewerPortlet.UIPreferencesPopupID);

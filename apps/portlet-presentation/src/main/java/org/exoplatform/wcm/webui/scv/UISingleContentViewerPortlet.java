@@ -104,7 +104,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     } else if (PortletMode.EDIT.equals(newMode)) {
       popPreferences.setInternalPreferencesMode(true);
       uiPresentation.setRendered(false);
-      popPreferences.setRendered(true);        
+      popPreferences.getPreferences();
+      popPreferences.setRendered(true);      
     }
   }
   

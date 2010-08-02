@@ -26,7 +26,6 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -178,7 +177,7 @@ public class UIPresentationContainer extends UIContainer{
     String strRepository = parameters.substring(0, parameters.indexOf("/"));
     UIPresentation presentation = getChild(UIPresentation.class);
     Node nodeView = Utils.getViewableNodeByComposer(null, null, parameters);
-    if (nodeView == null) System.out.println("Test nodeview=null");
+//    if (nodeView == null) System.out.println("Test nodeview=null");
     if (nodeView!=null) {
       boolean isDocumentType = false;
       if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true; 
@@ -215,6 +214,7 @@ public class UIPresentationContainer extends UIContainer{
   private String getRequestParameters() throws Exception {
     String parameters = null;
     if (!Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"))) {
+//      System.out.println("VinhNT Tracert: no parameter was set");
       return null;
     }
     try {     
@@ -225,12 +225,12 @@ public class UIPresentationContainer extends UIContainer{
     String parameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PARAMETER, "");
     if (!parameters.matches(PARAMETER_REGX)) {
       String path = Util.getPortalRequestContext().getRequestParameter(parameterName);
-//      System.out.println("VinhNT Tracert Line 222 path=" + path);
+//      System.out.println("VinhNT parameterName=" + parameterName + " para=" + path);
       if (path == null){
         return null;
       }        
       parameters = Util.getPortalRequestContext().getRequestParameter(parameterName).substring(1);
-//      System.out.println("VinhNT Tracert Line 227 path=" + path);
+//      System.out.println("VinhNT Tracert Line 234 path=" + path);
       return parameters;
     }
     return parameters;
