@@ -82,13 +82,16 @@ public abstract class UICLVContainer extends UIContainer {
     super.processRender(context);
   }
   
-  
   public String getEditLink(boolean isEditable, boolean isNew) {
-      PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
-      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+    String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
 	  return Utils.getEditLink(correctPath(itemPath), isEditable, isNew);
   }
 
+  public Node getFolderNode() {
+  	return NodeLocation.getNodeByExpression(
+  				Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH));
+  }
+  
   private String correctPath(String oldPath) {
       int slashIndex = oldPath.indexOf("/");
       String path = oldPath.substring(slashIndex + 1);
@@ -149,11 +152,14 @@ public abstract class UICLVContainer extends UIContainer {
     uiListViewerBase.getChildren().clear();
     uiListViewerBase.init();
   }
+
+  public boolean isModeByFolder() {
+  	return UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(
+  						Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE));		
+  }
   
   public boolean isShowManageContent() {
-    String mode = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE);
-    return (Utils.isShowQuickEdit() && 
-    				UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(mode));
+    return (Utils.isShowQuickEdit() && isModeByFolder());
   }
   
   public boolean isShowAddContent() {

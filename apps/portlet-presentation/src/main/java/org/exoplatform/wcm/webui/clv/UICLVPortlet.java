@@ -16,8 +16,13 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
+import javax.jcr.Node;
 import javax.portlet.PortletMode;
+import javax.portlet.PortletPreferences;
 
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -137,6 +142,10 @@ public class UICLVPortlet extends UIPortletApplication {
 
   /** The Constant DISPLAY_MODE_AUTOMATIC. */
   public static final String DISPLAY_MODE_AUTOMATIC             = "AutoViewerMode";
+  
+  public static final String DEFAULT_SHOW_CLV_BY								= "folder-id";
+  public static final String DEFAULT_SHOW_SCV_WITH							= "content-id";
+  
   private PortletMode     mode;
   
   private UICLVFolderMode folderMode;
@@ -157,14 +166,39 @@ public class UICLVPortlet extends UIPortletApplication {
     config = addChild(UICLVConfig.class, null, null).setRendered(false);
   }
 
+  public String getFolderPathParamValue() {
+    PortletPreferences preferences = Utils.getAllPortletPreferences();
+    String contextualMode = preferences.getValue(PREFERENCE_CONTEXTUAL_FOLDER, null);
+    Node folderNode = null;
+    String folderPath = null;
+    if (PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualMode)) {
+    	String folderParamName = preferences.getValue(PREFERENCE_SHOW_CLV_BY, null);
+    	if (folderParamName == null || folderParamName.length() == 0)
+    		folderParamName = DEFAULT_SHOW_CLV_BY;
+    	folderPath = Util.getPortalRequestContext().getRequestParameter(folderParamName);
+    	try {
+    		NodeLocation folderLocation = NodeLocation.getNodeLocationByExpression(folderPath);
+    		folderNode = NodeLocation.getNodeByLocation(folderLocation);
+    	}
+    	catch (Exception e) {
+    		folderNode = null;
+    		folderPath = null;
+    	}
+    }
+    return folderPath;
+  }
+  
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
-    String displayMode = pContext.getRequest().getPreferences().getValue(PREFERENCE_DISPLAY_MODE, null);
+    PortletPreferences preferences = pContext.getRequest().getPreferences();
+    String displayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
+
     PortletMode currentMode = pContext.getApplicationMode();
-    if (displayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
+    
+    if (displayMode.equals(DISPLAY_MODE_AUTOMATIC) || getFolderPathParamValue() != null) {
       if (currentMode != mode) {
         folderMode.init();
         mode = currentMode;

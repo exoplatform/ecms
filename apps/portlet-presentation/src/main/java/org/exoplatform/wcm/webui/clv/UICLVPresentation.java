@@ -234,7 +234,9 @@ public class UICLVPresentation extends UIContainer {
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
     String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
-    String scvWith = "path";//Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
+    String scvWith = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
+    if (scvWith == null || scvWith.length() == 0)
+    	scvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
     link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
     
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
@@ -343,8 +345,22 @@ public class UICLVPresentation extends UIContainer {
   }
 
   public String getHeader() {
-//  	boolean isAutoDetect = Boolean.parseBoolean(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION));
-  	return Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
+  	String header = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
+  	UICLVContainer clvContainer = this.getAncestorOfType(UICLVContainer.class);
+  	boolean isAutoDetect = Boolean.parseBoolean(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION));
+  	if (!isAutoDetect || !clvContainer.isModeByFolder()) return header;
+
+  	Node folderNode = clvContainer.getFolderNode();
+  	try {
+			if (folderNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE)) {
+				String folderTitle = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE).getString();
+				if (folderTitle != null && folderTitle.length() > 0)
+					header = folderTitle;
+			}
+		} catch (RepositoryException e) {
+			return header;
+		}
+		return header;
   }
   
   public UIPageIterator getUIPageIterator() {
@@ -401,6 +417,40 @@ public class UICLVPresentation extends UIContainer {
     }
     return uri;
   }
+
+  public boolean isShowRssLink() {
+  	return isShowField(UICLVPortlet.PREFERENCE_SHOW_RSSLINK) 
+  				 && 
+  				 (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null ||
+  					UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));
+  }
+  
+	/**
+	 * Gets the rss link.
+	 * 
+	 * @return the rss link
+	 */
+	public String getRssLink() {
+		String portal = PortalContainer.getCurrentPortalContainerName();
+		String rest = PortalContainer.getCurrentRestContextName();
+		String server = Util.getPortalRequestContext().getRequest().getRequestURL().toString();
+		String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
+		if (fullPath == null || fullPath.length() == 0)
+			fullPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
+		String[] repoWsPath = fullPath.split(":");
+		return  "/"+portal+"/"+rest+
+						"/feed/rss?repository=" + repoWsPath[0] + 
+						"&workspace=" + repoWsPath[1] + 
+						"&server=" + server + 
+						"&siteName=" + Util.getUIPortal().getOwner() + 
+						"&folderPath=" + repoWsPath[2] +
+						"&orderBy=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY) +
+						"&orderType=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE) + 
+//						"&title="
+//						"&desc="My%20description
+						"&detailPage=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE) + 
+						"&detailParam=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
+  }  
   
   /**
    * The listener interface for receiving refreshAction events.

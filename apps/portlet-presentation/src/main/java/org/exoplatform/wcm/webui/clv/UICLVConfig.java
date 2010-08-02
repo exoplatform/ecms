@@ -517,8 +517,12 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       
       String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
       String showClvBy = clvConfig.getUIStringInput(UICLVConfig.SHOW_CLV_BY_STRING_INPUT).getValue();
+      if (showClvBy == null || showClvBy.length() == 0)
+      	showClvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
       String targetPage = clvConfig.getUIStringInput(UICLVConfig.TARGET_PAGE_FORM_STRING_INPUT).getValue();
       String showScvWith = clvConfig.getUIStringInput(UICLVConfig.SHOW_SCV_WITH_STRING_INPUT).getValue();
+      if (showScvWith == null || showScvWith.length() == 0)
+      	showScvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
       
       /** SET VALUES TO PREFERENCES */
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();

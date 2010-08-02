@@ -3323,4 +3323,11 @@
     	<Advance>Nâng cao</Advance>
     </label>
   </UIPreferencesForm>
+  
+  <UIJCRExporerPortlet>
+	<msg>
+	  <file-access-denied>Lỗi truy cập file!</file-access-denied>
+	</msg>
+  </UIJCRExporerPortlet>
+  
 </bundle>

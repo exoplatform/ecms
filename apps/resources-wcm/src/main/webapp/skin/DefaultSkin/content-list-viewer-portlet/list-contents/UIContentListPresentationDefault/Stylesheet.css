@@ -110,3 +110,9 @@
 .OneColumnCLVTemplate .Contents .Column1 img {
   width: 51px;
 }
+
+.UICLVPortlet .TopBox {
+  line-height: 30px;
+  padding: 0px 10px;
+  margin-bottom: 1px;
+}

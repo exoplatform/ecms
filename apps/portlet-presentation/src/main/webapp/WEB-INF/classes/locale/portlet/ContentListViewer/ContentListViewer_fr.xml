@@ -25,7 +25,7 @@
       <UICLVConfigHeaderFormStringInput>Entête</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Modèle de vue</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Pagination</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>
+      <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>      
       <UICLVConfigItemsPerPageFormStringInput>Contenus par page</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Afficher le résumé</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Afficher l'entête</UICLVConfigShowHeaderFormCheckboxInput>
@@ -111,6 +111,7 @@
     <label>
       <Preferences>Preferences</Preferences>
       <AddContent>Add Content</AddContent>
+      <ManageContent>Manage Content</ManageContent>      
     </label>
 	</UICLVContainer>
 
@@ -124,11 +125,24 @@
     <label>
       <Title>Content List Preferences</Title>
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigTargetPageFormInputSet>Target path</UICLVConfigTargetPageFormInputSet>
- 			<UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Show More Link</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <AdvancedBlock>Advanced Block</AdvancedBlock>
+	  <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
+	  <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput> 	
+	  <contextualEnable>Enable</contextualEnable>
+	  <contextualDisable>Disable</contextualDisable>
+	  <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
+	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>	        
     </label>
   </UICLVConfig>
+  
+  <UICLVPresentation>
+    <label>
+	  <rssFeed>RSS Feed</rssFeed>      
+	</label>
+  </UICLVPresentation>  
 
 </bundle>

@@ -3285,4 +3285,10 @@
     	<Advance>Advanced</Advance>
     </label>
   </UIPreferencesForm>
+  <UIJCRExporerPortlet>
+	<msg>
+	  <file-access-denied>File access denied!</file-access-denied>
+	</msg>
+  </UIJCRExporerPortlet>
+  
 </bundle>

@@ -35,8 +35,7 @@
       <UICLVConfigHeaderFormStringInput>Tiêu đề portlet</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Mẫu hiển thị</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Phân trang</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigTargetPageFormInputSet>Trang đích</UICLVConfigTargetPageFormInputSet>
-      <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>
+      <UICLVConfigTargetPageFormStringInput></UICLVConfigTargetPageFormStringInput>      
       <UICLVConfigItemsPerPageFormStringInput>Số lượng mỗi trang</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Hiển thị hình minh hoạ</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Hiển thị tóm tắt</UICLVConfigShowSummaryFormCheckboxInput>
@@ -124,6 +123,7 @@
     <label>
       <Preferences>Preferences</Preferences>
       <AddContent>Thêm nội dung</AddContent>
+      <ManageContent>Manage Content</ManageContent>      
     </label>
 	</UICLVContainer>
 	
@@ -132,7 +132,21 @@
       <Title>Content List Preferences</Title>
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Show More Link</UICLVConfigShowReadmoreFormCheckboxInput>
+      <AdvancedBlock>Advanced Block</AdvancedBlock>
+	  <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
+	  <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput> 	
+	  <contextualEnable>Enable</contextualEnable>
+	  <contextualDisable>Disable</contextualDisable>
+	  <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
+	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>	        
     </label>
   </UICLVConfig>
+  
+  <UICLVPresentation>
+    <label>
+	  <rssFeed>RSS Feed</rssFeed>      
+	</label>
+  </UICLVPresentation>  
 
 </bundle>

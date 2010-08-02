@@ -23,6 +23,7 @@ import java.util.List;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.webui.util.Util;
@@ -106,11 +107,15 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
+
+    String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
     
-    if(preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
+    if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
         return new ArrayList<Node>();
     }      
-    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
+    		(folderPath != null) ? folderPath : 
+    													 preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
     return wcmComposer.getContents(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getUserSessionProvider());
   }
 }

@@ -9,11 +9,23 @@
 <div id="$uicomponent.id" class="UICLVPresentation">
 	<%	
 		String header = uicomponent.getHeader();
-	  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
-	  if (isShowHeader) {
-			%><div class="Header"><%= header %></div>		<%
-		}
-	%>
+		def rssLink = uicomponent.getRssLink();
+		def isShowRssLink = uicomponent.isShowRssLink();
+		def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
+		%>
+		<div class="TopBoxHeader">
+			<%
+			if (isShowHeader) {
+				%>
+				<div class="Header"><%= header %></div>	
+				<%
+			}
+			if (isShowRssLink) {
+				%><a class="RssIcon" href="$rssLink" target="_newrss"><%= _ctx.appRes("UICLVPresentation.label.rssFeed") %></a><%
+			}
+			%>
+				<div class="ClearBoth"><span></span></div>
+			</div>
 	<div class="Caption">
 		<% 	
 			String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");		

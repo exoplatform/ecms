@@ -17,17 +17,29 @@
 	<div class="CLV">
 		<%
 			def header = uicomponent.getHeader();
+			def rssLink = uicomponent.getRssLink();
+			def isShowRssLink = uicomponent.isShowRssLink();
 		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
-			if (isShowHeader) {
-				%>
-					<div class="TitleBarL">
-						<div class="TitleBarR">
-							<div class="TitleBarM">$header</div>
+			%>
+		  <div class="TopBoxHeader">
+				<%	
+			  if (isShowHeader) {
+					%>
+						<div class="TitleBarL">
+							<div class="TitleBarR">
+								<div class="TitleBarM">$header</div>
+							</div>
 						</div>
-					</div>
-				<%
-			}
-	
+					<%
+				}
+				if (isShowRssLink) {
+					%><a class="RssIcon" href="$rssLink" target="_newrss"><%= _ctx.appRes("UICLVPresentation.label.rssFeed") %></a><%
+				}
+				%>
+				<div class="ClearBoth"><span></span></div>
+			</div>
+			<%
+
 			if (uicomponent.getUIPageIterator().getAvailable() == 0) {
 				%>
 					<div style="height: 20px; text-align: center; font-size: 13px; background: white; padding: 10px; margin: 5px;">
