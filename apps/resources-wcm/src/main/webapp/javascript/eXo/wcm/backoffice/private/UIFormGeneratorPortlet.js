@@ -171,6 +171,7 @@ if(typeComp == 'wysiwyg' && !CKEDITOR.instances['RichTextEditorContent']) {
         toolbar : 'BasicWCM'
     });
 	}
+		eXo.ecm.UIFormGeneratorPortlet.countFCK++;
 };
 
 
