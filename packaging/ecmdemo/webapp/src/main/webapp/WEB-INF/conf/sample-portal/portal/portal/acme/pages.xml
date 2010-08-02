@@ -784,7 +784,7 @@
     <portlet-application>
       <portlet>
         <application-ref>presentation</application-ref>
-        <portlet-ref>ParameterizedContentViewerPortlet</portlet-ref>
+        <portlet-ref>SingleContentViewer</portlet-ref>
         <preferences>
           <preference>
             <name>repository</name>
@@ -797,18 +797,38 @@
             <read-only>false</read-only>
           </preference>
           <preference>
-            <name>showTitle</name>
+            <name>nodeIdentifier</name>
+            <value>/sites content/live/acme/web contents/site artifacts/Introduce</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowPrintAction</name>
             <value>true</value>
             <read-only>false</read-only>
           </preference>
           <preference>
-            <name>showDateCreated</name>
+            <name>ShowTitle</name>
             <value>true</value>
             <read-only>false</read-only>
           </preference>
           <preference>
-            <name>showBar</name>
+            <name>ShowDate</name>
             <value>true</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowOptionBar</name>
+            <value>true</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ContextEnable</name>
+            <value>true</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ParameterName</name>
+            <value>content-id</value>
             <read-only>false</read-only>
           </preference>
         </preferences>

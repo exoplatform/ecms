@@ -95,7 +95,7 @@
 			</preference>
 			<preference>
 				<name>ParameterName</name>
-				<value></value>
+				<value>content-id</value>
 				<read-only>false</read-only>
 			</preference>
 		</portlet-preferences>
@@ -176,7 +176,7 @@
 			</preference>
       <preference>
         <name>orderBy</name>
-        <value>exo:title</value>
+        <value>publication:liveDate</value>
         <read-only>false</read-only>
       </preference>
       <preference>
@@ -265,8 +265,18 @@
         <read-only>false</read-only>
       </preference>
       <preference>
-        <name>allowDynamicUrl</name>
-        <value></value>
+        <name>contextualFolder</name>
+        <value>contextualDisable</value>
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>showScvWith</name>
+        <value>content-id</value>
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>showClvBy</name>
+        <value>folder-id</value>
         <read-only>false</read-only>
       </preference>      
 		</portlet-preferences>

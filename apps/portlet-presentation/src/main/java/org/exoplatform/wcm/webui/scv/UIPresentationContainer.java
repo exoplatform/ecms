@@ -112,6 +112,10 @@ public class UIPresentationContainer extends UIContainer{
     return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR, "false"));
   }
 
+	public boolean isContextual() {
+		return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
+	}
+	
 	/**
 	 * Gets the created date.
 	 * 

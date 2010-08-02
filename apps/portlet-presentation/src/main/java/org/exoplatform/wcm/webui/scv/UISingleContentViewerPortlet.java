@@ -17,8 +17,10 @@
 package org.exoplatform.wcm.webui.scv;
 
 import javax.jcr.Node;
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
+import javax.portlet.RenderResponse;
 
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.wcm.webui.Utils;
@@ -29,6 +31,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+import org.w3c.dom.Element;
 
 /**
  * Created by The eXo Platform SAS
@@ -119,6 +122,16 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       activateMode(newMode) ;
       mode = newMode ;
     }
+    if (uiPresentation!=null && uiPresentation.isContextual() && uiPresentation.getNodeView()!=null) {
+    	Node node = uiPresentation.getNodeView();
+    	if (node!=null) {
+	        RenderResponse response = context.getResponse();
+	    	Element title = response.createElement("title");
+	    	title.setTextContent(uiPresentation.getTitle(node));
+	    	response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
+    	}
+    }
+    
     super.processRender(app, context) ;
   }
   
