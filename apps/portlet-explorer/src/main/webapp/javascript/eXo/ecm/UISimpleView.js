@@ -94,9 +94,9 @@ var SimpleView = function() {
 	  eXo.ecm.UISimpleView.object = this;
     var element = eXo.ecm.UISimpleView.object ;
 	  var pos = eXo.core.Browser.findMouseYInPage(evt) - eXo.core.Browser.findPosY(element);
-	  if(element.offsetHeight - pos < 40){
+	  if(element.offsetHeight - pos < 10){
 	    element.scrollTop = element.scrollTop + 5;  
-	  } else if(element.scrollTop > 0 && pos < 40) {
+	  } else if(element.scrollTop > 0 && pos < 10) {
 	    element.scrollTop = element.scrollTop - 5;  
 	  }
 	};	
