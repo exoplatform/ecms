@@ -1049,14 +1049,7 @@ public class UIJCRExplorer extends UIContainer {
         preferences_.setShowHiddenNode(true);
       else
         preferences_.setShowHiddenNode(false);
-    }
-    getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, cookies);
-    if ((getCookieForUser != null) && (preferences_ != null)) {
-      if (getCookieForUser.getValue().equals("true"))
-        preferences_.setShowItemsByUser(true);
-      else
-        preferences_.setShowItemsByUser(false);
-    }
+    }    
     getCookieForUser = getCookieByCookieName(Preference.ENABLE_DRAG_AND_DROP, cookies);
     if ((getCookieForUser != null) && (preferences_ != null)) {
       if (getCookieForUser.getValue().equals("true"))

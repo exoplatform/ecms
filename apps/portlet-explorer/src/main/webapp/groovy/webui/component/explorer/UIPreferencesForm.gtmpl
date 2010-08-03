@@ -21,9 +21,7 @@
 			<table class="UIFormGrid">
 			  <tr>
 			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.sortBy")%></td>
-			    <td class="FieldComponent"><% uiform.renderField(FIELD_SHORTBY) %></td>
-			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.order")%></td>
-			    <td class="FieldComponent"><% uiform.renderField(FIELD_ORDERBY) %></td>
+			    <td colspan="3"><% uiform.renderField(FIELD_SHORTBY) %> &nbsp;&nbsp;&nbsp;&nbsp; <% uiform.renderField(FIELD_ORDERBY) %></td>
 			  </tr>
 			  <tr>
 			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showSideBar")%></td>
@@ -34,19 +32,24 @@
 			  <tr>
 			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.nodesPerPage")%></td>
 			    <td class="FieldComponent"><% uiform.renderField(NODES_PER_PAGE) %></td>			    
-			    <td colspan="2" align="right">
-			      <%String advanceLink = uicomponent.event("Advance");%>
+			    <td colspan="2" align="right"></td>
+			  </tr>
+			  <%String advanceLink = uicomponent.event("Advance");%>
+			  <% if (!uicomponent.isAdvancePreferences()) { %>
+			  <tr>
+			    <td style="margin-top: 10px;" colspan="4">			      
          <div onclick="$advanceLink">
-           <a class="AdvancePreferences" href="javascript:window.scroll(0,0);"><%if (uicomponent.isAdvancePreferences()) {%> <%=_ctx.appRes(uicomponent.getName() + ".action.HideAdvance")%> <% } else { %> <%=_ctx.appRes(uicomponent.getName() + ".action.ShowAdvance")%> <%}%></a>
+           <a class="AdvancePreferences" href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.ShowAdvance")%></a>
          </div>             
 			    </td>
 			  </tr>
+			  <% } %>
 			  <% if (uicomponent.isAdvancePreferences()) { %>
 			  <tr>
-			    <td colspan="4">
+			    <td style="margin-top: 10px;" colspan="4">
 			      <fieldset>
-              <legend><%=_ctx.appRes("UIPreferencesForm.label.Advance")%></legend>
-					     <table>			  
+              <legend><a class="AdvancePreferences" style="text-decoration: none;" href="$advanceLink"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%> [ - ]</a></legend>
+					    <table>			  
 							  <tr>
 							    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showNonDocument")%></td>
 							    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_SHOWNONDOCUMENT) %></td>

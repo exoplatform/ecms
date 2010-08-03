@@ -228,10 +228,12 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_HIDDEN_NODE, "true"));
     else
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_HIDDEN_NODE, "false"));
+    /*
     if (getUIFormCheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).isChecked()) 
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, "true"));
     else
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, "false"));
+    */
     if (getUIFormCheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked())  
       response.addCookie(createNewCookie(Preference.ENABLE_DRAG_AND_DROP, "true"));
     else
@@ -254,16 +256,16 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       pref.setShowNonDocumentType(uiForm.getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked());
       pref.setShowPreferenceDocuments(uiForm.getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked());
       pref.setShowHiddenNode(uiForm.getUIFormCheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked());
-      pref.setShowItemsByUser(uiForm.getUIFormCheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).isChecked());
+      //pref.setShowItemsByUser(uiForm.getUIFormCheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).isChecked());
       pref.setEnableDragAndDrop(uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked());
       pref.setSortType(uiForm.getUIFormSelectBox(FIELD_SHORTBY).getValue());
       pref.setQueryType(uiForm.getUIFormSelectBox(FIELD_QUERY_TYPE).getValue());
       pref.setOrder(uiForm.getUIFormSelectBox(FIELD_ORDERBY).getValue());
       pref.setNodesPerPage(Integer.parseInt(uiForm.getUIFormSelectBox(NODES_PER_PAGE).getValue()));
       uiForm.savePreferenceInCookies();
+      uiExplorer.getPreference();
       uiExplorer.refreshExplorer();
       explorerPorltet.setRenderedChild(UIJCRExplorer.class);
-      uiExplorer.updateAjax(event);
     }
   }
 
