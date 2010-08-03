@@ -183,27 +183,27 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
   
 
-  public List<Node> getTodayNodes() { return todayNodes; }
+  public List<Node> getTodayNodes() throws Exception { return filterNodeList(todayNodes); }
   public void setTodayNodes(List<Node> todayNodes) {
     this.todayNodes = todayNodes;
   }
 
-  public List<Node> getYesterdayNodes() { return yesterdayNodes; }
+  public List<Node> getYesterdayNodes() throws Exception { return filterNodeList(yesterdayNodes); }
   public void setYesterdayNodes(List<Node> yesterdayNodes) {
     this.yesterdayNodes = yesterdayNodes;
   }
 
-  public List<Node> getEarlierThisWeekNodes() { return earlierThisWeekNodes; }
+  public List<Node> getEarlierThisWeekNodes() throws Exception { return filterNodeList(earlierThisWeekNodes); }
   public void setEarlierThisWeekNodes(List<Node> earlierThisWeekNodes) {
     this.earlierThisWeekNodes = earlierThisWeekNodes;
   }
 
-  public List<Node> getEarlierThisMonthNodes() { return earlierThisMonthNodes; }
+  public List<Node> getEarlierThisMonthNodes() throws Exception { return filterNodeList(earlierThisMonthNodes); }
   public void setEarlierThisMonthNodes(List<Node> earlierThisMonthNodes) {
     this.earlierThisMonthNodes = earlierThisMonthNodes;
   }
 
-  public List<Node> getEarlierThisYearNodes() { return earlierThisYearNodes; }
+  public List<Node> getEarlierThisYearNodes() throws Exception { return filterNodeList(earlierThisYearNodes); }
   public void setEarlierThisYearNodes(List<Node> earlierThisYearNodes) {
     this.earlierThisYearNodes = earlierThisYearNodes;
   }
@@ -218,17 +218,17 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     String workspace = this.getWorkspaceName();
     String userName = session.getUserID();
     String nodePath = uiExplorer.getCurrentPath();
-    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
+//    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
     todayNodes = timelineService.
-          getDocumentsOfToday(nodePath, repository, workspace, sessionProvider, userName, byUser);
+          getDocumentsOfToday(nodePath, repository, workspace, sessionProvider, userName, false);
     yesterdayNodes = timelineService.
-          getDocumentsOfYesterday(nodePath, repository, workspace, sessionProvider, userName, byUser);
+          getDocumentsOfYesterday(nodePath, repository, workspace, sessionProvider, userName, false);
     earlierThisWeekNodes = timelineService.
-          getDocumentsOfEarlierThisWeek(nodePath, repository, workspace, sessionProvider, userName, byUser);
+          getDocumentsOfEarlierThisWeek(nodePath, repository, workspace, sessionProvider, userName, false);
     earlierThisMonthNodes = timelineService.
-          getDocumentsOfEarlierThisMonth(nodePath, repository, workspace, sessionProvider, userName, byUser);
+          getDocumentsOfEarlierThisMonth(nodePath, repository, workspace, sessionProvider, userName, false);
     earlierThisYearNodes = timelineService.
-          getDocumentsOfEarlierThisYear(nodePath, repository, workspace, sessionProvider, userName, byUser);
+          getDocumentsOfEarlierThisYear(nodePath, repository, workspace, sessionProvider, userName, false);
     
     Collections.sort(todayNodes, new SearchComparator());
     Collections.sort(yesterdayNodes, new SearchComparator());
