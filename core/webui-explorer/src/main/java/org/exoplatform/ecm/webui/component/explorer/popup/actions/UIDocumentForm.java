@@ -39,6 +39,7 @@ import javax.jcr.version.VersionException;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent;
 import org.exoplatform.ecm.webui.form.DialogFormActionListeners;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.selector.ComponentSelector;
@@ -424,14 +425,16 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       } finally {
 //         documentForm.releaseLock();
       }
+      documentForm.releaseLock();
       event.getRequestContext().setAttribute("nodePath",newNode.getPath());
-//      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-//      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-//      uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
 //      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
       uiExplorer.setCurrentPath(newNode.getPath());      
       uiExplorer.refreshExplorer();
-      uiExplorer.updateAjax(event);      
+      uiExplorer.updateAjax(event);
+      EditDocumentActionComponent.editDocument(event, null, uiExplorer, uiExplorer, uiExplorer.getCurrentNode(), uiApp);      
     }
   }
   
