@@ -286,6 +286,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_MODIFIED, NodetypeConstant.EXO_DATE_MODIFIED));
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_PUBLISHED,"publication:liveDate"));    
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_START_EVENT,"exo:startEvent"));    
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_INDEX,"exo:index"));    
     UIFormSelectBox orderBySelectBox = new UIFormSelectBox(ORDER_BY_FORM_SELECT_BOX, ORDER_BY_FORM_SELECT_BOX, orderByOptions);
     orderBySelectBox.setValue(orderBy);
     

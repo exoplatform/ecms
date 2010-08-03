@@ -30,6 +30,7 @@
         <exo:dateModified>Ngày sửa</exo:dateModified>
         <publication:liveDate>Ngày xuất bản</publication:liveDate>
         <exo:startEvent>Event date</exo:startEvent>
+        <exo:index>Index</exo:index>
       </option>
       <DisplaySettingBlock>Lựa chọn hiển thị</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Tiêu đề portlet</UICLVConfigHeaderFormStringInput>

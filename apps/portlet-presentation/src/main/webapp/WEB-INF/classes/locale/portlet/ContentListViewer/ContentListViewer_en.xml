@@ -32,6 +32,7 @@
         <exo:dateModified>Modification date</exo:dateModified>
         <publication:liveDate>Publication date</publication:liveDate>
         <exo:startEvent>Event date</exo:startEvent>
+        <exo:index>Index</exo:index>
       </option>
       <DisplaySettingBlock>Display settings</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>

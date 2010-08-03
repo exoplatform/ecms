@@ -20,6 +20,7 @@
         <exo:dateModified>Date de modification</exo:dateModified>
         <publication:liveDate>Date de publication</publication:liveDate>
         <exo:startEvent>Date d'événement</exo:startEvent>
+        <exo:index>Index</exo:index>
       </option>
       <DisplaySettingBlock>Réglages</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Entête</UICLVConfigHeaderFormStringInput>

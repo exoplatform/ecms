@@ -238,6 +238,12 @@
   
   <nodeType name="exo:sortable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
     <propertyDefinitions>
+      <propertyDefinition name="exo:index" requiredType="Long" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>       
+        <defaultValues>
+          <defaultValue>1000</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
       <propertyDefinition name="exo:title" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>       
       </propertyDefinition>
