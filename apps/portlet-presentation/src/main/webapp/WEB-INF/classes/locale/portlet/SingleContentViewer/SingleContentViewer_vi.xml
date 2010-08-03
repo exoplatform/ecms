@@ -115,6 +115,8 @@
     <help>
    	  <ContentPathBlock>Vui lòng lựa chọn dữ liệu nguồn để hiển thị</ContentPathBlock>
    	  <DisplaySettingBlock>Bạn có thể quyết định có hiển thị hay không các mục: Tiêu đề, ngày tháng, thanh tùy chọn (để in ấn) tại đây</DisplaySettingBlock>
-    </help>   
+   	  <ContextualHelp>Tùy chọn này cho phép/vô hiệu tham số ngữ cảnh phục vụ cho mục đích hiển thị nội dung trong porlet</ContextualHelp>
+   	  <ParameterHelp>Xác định tham số sử dụng trên URL</ParameterHelp>
+    </help> 
   </UISCVPreferences>
 </bundle>

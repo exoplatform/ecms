@@ -141,6 +141,16 @@
 	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>	        
     </label>
+    <help>
+    	<ModeSelectionHelp>Determine what kind of information will be display inside portlet</ModeSelectionHelp>
+    	<FolderPathHelp>Select the location of information</FolderPathHelp>
+    	<HeaderOptionHelp>Set the title to present the general contents inside portlet</HeaderOptionHelp>
+    	<GeneralOptionHelp>Determine if you want to display the corresponding item</GeneralOptionHelp>
+    	<ContextualHelp>This option allow you to enable/disable the contextual parameter for the shown content of portlet</ContextualHelp>
+       	<ParameterHelp>Specify the parameter which appear on the URL</ParameterHelp>
+       	<ShowDetailInPageHelp>Specify the name of page which will be used to display the content details for an item</ShowDetailInPageHelp>    	
+       	<DetailParameterHelp>Specify the parameter on URL which the detail page will use to get the content location</DetailParameterHelp>
+    </help>
   </UICLVConfig>
   
   <UICLVPresentation>

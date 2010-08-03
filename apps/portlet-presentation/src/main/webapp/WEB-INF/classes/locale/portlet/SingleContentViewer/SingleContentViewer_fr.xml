@@ -114,6 +114,8 @@
     <help>
    	  <ContentPathBlock>Please select the source data to display</ContentPathBlock>
    	  <DisplaySettingBlock>You can determine if you want to show Title/Created date of content also the Option bar to print</DisplaySettingBlock>
-    </help>   
+   	  <ContextualHelp>This option allow you to enable/disable the contextual parameter for the shown content of portlet</ContextualHelp>
+   	  <ParameterHelp>Specify the parameter which appear on the URL</ParameterHelp>
+    </help>  
   </UISCVPreferences>
 </bundle>

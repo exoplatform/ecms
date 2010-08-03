@@ -210,6 +210,7 @@
 
 .UICLVPortlet .UIFormGrid {
   margin: 0;
+  width: auto;
 }
 
 .UICLVPortlet .HorizontalLayout .UIFormInputSet {

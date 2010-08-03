@@ -22,22 +22,80 @@
           <div class="FormContainer">
             <fieldset style=" margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
               <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.ContentSelectionBlock") %></legend>
-              <table class="UIFormGrid">
+              <table class="UIFormGrid" style="width:100%;">
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
+                  <td style="align:right">
+                    <div class="IconInContextHelp ShowHelpIcon" id="ModeSelectionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ModeSelectionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ModeSelectionHelp', 'false')">
+                      <div style="position: absolute;">
+                        <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
+                          <div class="InContextHelpPopup">
+                            <div id="ModeSelectionHelpID" class="LeftInContextHelpPopup">
+                              <div class="InContextHelpTL">
+                                <div class="InContextHelpTR">
+                                  <div class="InContextHelpTC"><span></span></div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpML">
+                                <div class="InContextHelpMR">
+                                  <div class="ContentPosition" style="height: 0px; ">
+                                    <div class="InContextHelpContentData" style="width: 400px; "><%= _ctx.appRes("UICLVConfig.help.ModeSelectionHelp") %> </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpBL">
+                                <div class="InContextHelpBR">
+                                  <div class="InContextHelpBC"><span></span></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>                      
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
-                  <td class="FieldComponent"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                  <td class="FieldComponent" style="align:left;"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                  <td style="align:right">
+                    <div class="IconInContextHelp ShowHelpIcon" id="FolderPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'false')">
+                      <div style="position: absolute;">
+                        <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
+                          <div class="InContextHelpPopup">
+                            <div id="FolderPathHelpID" class="LeftInContextHelpPopup">
+                              <div class="InContextHelpTL">
+                                <div class="InContextHelpTR">
+                                  <div class="InContextHelpTC"><span></span></div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpML">
+                                <div class="InContextHelpMR">
+                                  <div class="ContentPosition" style="height: 0px; ">
+                                    <div class="InContextHelpContentData" style="width: 400px; "><%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %> </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpBL">
+                                <div class="InContextHelpBR">
+                                  <div class="InContextHelpBC"><span></span></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>                      
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr class="OrderBlock">
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
-                  <td class="FieldComponent"><% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
                 </tr>
                 <tr class="OrderBlock">
                   <td class="FieldLabel">&nbsp;</td>
-                  <td class="FieldComponent"><% uiform.renderField(uicomponent.ORDER_TYPE_FORM_RADIO_BOX_INPUT) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.ORDER_TYPE_FORM_RADIO_BOX_INPUT) %></td>
                 </tr>
                 <% 
                   List<String> contents = uiform.getItems();
@@ -90,13 +148,42 @@
             </fieldset>   
             <fieldset style=" margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
               <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.DisplaySettingBlock") %></legend>
-              <table class="UIFormGrid">
+              <table class="UIFormGrid" style="width:100%;">
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %></td>
                   <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.HEADER_FORM_STRING_INPUT) %></td>
                   
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %></td>
+                  <td style="align:right">
+                    <div class="IconInContextHelp ShowHelpIcon" id="HeaderOptionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('HeaderOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('HeaderOptionHelp', 'false')">
+                      <div style="position: absolute;">
+                        <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
+                          <div class="InContextHelpPopup">
+                            <div id="HeaderOptionHelpID" class="LeftInContextHelpPopup">
+                              <div class="InContextHelpTL">
+                                <div class="InContextHelpTR">
+                                  <div class="InContextHelpTC"><span></span></div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpML">
+                                <div class="InContextHelpMR">
+                                  <div class="ContentPosition" style="height: 0px; ">
+                                    <div class="InContextHelpContentData" style="width: 400px; "><%= _ctx.appRes("UICLVConfig.help.HeaderOptionHelp") %> </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpBL">
+                                <div class="InContextHelpBR">
+                                  <div class="InContextHelpBC"><span></span></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>                      
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
@@ -121,6 +208,7 @@
                   
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %></td>
+                  <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></td>
@@ -131,6 +219,7 @@
                   
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></td>
+                  <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></td>
@@ -141,6 +230,36 @@
                   
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %></td>
+                  
+                  <td style="align:right">
+                  <div class="IconInContextHelp ShowHelpIcon" id="GeneralOptionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('GeneralOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('GeneralOptionHelp', 'false')">
+                    <div style="position: absolute;">
+                      <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
+                        <div class="InContextHelpPopup">
+                          <div id="GeneralOptionHelpID" class="LeftInContextHelpPopup">
+                            <div class="InContextHelpTL">
+                              <div class="InContextHelpTR">
+                                <div class="InContextHelpTC"><span></span></div>
+                              </div>
+                            </div>
+                            <div class="InContextHelpML">
+                              <div class="InContextHelpMR">
+                                <div class="ContentPosition" style="height: 0px; ">
+                                  <div class="InContextHelpContentData" style="width: 400px; "><%= _ctx.appRes("UICLVConfig.help.GeneralOptionHelp") %> </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="InContextHelpBL">
+                              <div class="InContextHelpBR">
+                                <div class="InContextHelpBC"><span></span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>                      
+                      </div>
+                    </div>
+                  </div>
+                </td>
                 </tr>
               </table>
             </fieldset>
@@ -149,7 +268,7 @@
           	%>
             <fieldset style="display: $advancedBlockDisplay; margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
               <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.AdvancedBlock") %> <a style="text-align:center;font-style:italic; color: #0000FF;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" title="<%=_ctx.appRes("UICLVConfig.label.HideAdvancedBlock")%>">[ - ]</a> </legend>
-              <table class="UIFormGrid">
+              <table class="UIFormGrid" style="width:100%;">
               	<tr>
               		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></td>
               	</tr>
@@ -158,18 +277,135 @@
               		<td class="FieldComponent ContextualRadio" colspan="2">
               			<% uiform.renderField(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>
               		</td>
+              		<td style="align:right">
+                  <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')">
+                    <div style="position: absolute;">
+                      <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
+                        <div class="InContextHelpPopup">
+                          <div id="ContextualHelpID" class="LeftInContextHelpPopup">
+                            <div class="InContextHelpTL">
+                              <div class="InContextHelpTR">
+                                <div class="InContextHelpTC"><span></span></div>
+                              </div>
+                            </div>
+                            <div class="InContextHelpML">
+                              <div class="InContextHelpMR">
+                                <div class="ContentPosition" style="height: 0px; ">
+                                  <div class="InContextHelpContentData" style="width: 400px; "><%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %> </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="InContextHelpBL">
+                              <div class="InContextHelpBR">
+                                <div class="InContextHelpBC"><span></span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>                      
+                      </div>
+                    </div>
+                  </div>
+                </td>
               	</tr>
               	<tr>
 	            		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
 	            		<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
+	            		<td style="align:right">
+                    <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
+                      <div style="position: absolute;">
+                        <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
+                          <div class="InContextHelpPopup">
+                            <div id="ParameterHelpID" class="LeftInContextHelpPopup">
+                              <div class="InContextHelpTL">
+                                <div class="InContextHelpTR">
+                                  <div class="InContextHelpTC"><span></span></div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpML">
+                                <div class="InContextHelpMR">
+                                  <div class="ContentPosition" style="height: 0px; ">
+                                    <div class="InContextHelpContentData" style="width: 400px; "><%= _ctx.appRes("UICLVConfig.help.ParameterHelp") %> </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpBL">
+                                <div class="InContextHelpBR">
+                                  <div class="InContextHelpBC"><span></span></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>                      
+                        </div>
+                      </div>
+                     </div>
+                  </td>
             		</tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
-                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
+                  <td class="FieldComponent" colspan="2"  style="align:left;"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
+                  <td style="align:right">
+                    <div class="IconInContextHelp ShowHelpIcon" id="ShowDetailInPageHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'false')">
+                      <div style="position: absolute;">
+                        <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
+                          <div class="InContextHelpPopup">
+                            <div id="ShowDetailInPageHelpID" class="LeftInContextHelpPopup">
+                              <div class="InContextHelpTL">
+                                <div class="InContextHelpTR">
+                                  <div class="InContextHelpTC"><span></span></div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpML">
+                                <div class="InContextHelpMR">
+                                  <div class="ContentPosition" style="height: 0px; ">
+                                    <div class="InContextHelpContentData" style="width: 400px; "><%= _ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp") %> </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="InContextHelpBL">
+                                <div class="InContextHelpBR">
+                                  <div class="InContextHelpBC"><span></span></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>                      
+                        </div>
+                      </div>
+                     </div>
+                  </td>
+                  
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></td>
                   <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></td>
+                  <td style="align:right">
+                  <div class="IconInContextHelp ShowHelpIcon" id="DetailParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('DetailParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('DetailParameterHelp', 'false')">
+                    <div style="position: absolute;">
+                      <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
+                        <div class="InContextHelpPopup">
+                          <div id="DetailParameterHelpID" class="LeftInContextHelpPopup">
+                            <div class="InContextHelpTL">
+                              <div class="InContextHelpTR">
+                                <div class="InContextHelpTC"><span></span></div>
+                              </div>
+                            </div>
+                            <div class="InContextHelpML">
+                              <div class="InContextHelpMR">
+                                <div class="ContentPosition" style="height: 0px; ">
+                                  <div class="InContextHelpContentData" style="width: 400px; "><%= _ctx.appRes("UICLVConfig.help.DetailParameterHelp") %> </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="InContextHelpBL">
+                              <div class="InContextHelpBR">
+                                <div class="InContextHelpBC"><span></span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>                      
+                      </div>
+                    </div>
+                   </div>
+                </td>
                 </tr>
               </table>
             </fieldset>
