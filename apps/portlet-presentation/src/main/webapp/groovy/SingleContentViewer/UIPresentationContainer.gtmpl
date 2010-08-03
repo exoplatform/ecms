@@ -3,7 +3,9 @@
 	import org.exoplatform.wcm.webui.Utils;
 	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 %>
-<div class="$uicomponent.id">
+<div class="$uicomponent.id" id="$uicomponent.id" 
+	onmouseover="this.setAttribute('class', '$uicomponent.id ContainerHoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
+
 	<%
 		def rcontext = _ctx.getRequestContext() ;
     String portletId = Utils.getRealPortletId(rcontext);

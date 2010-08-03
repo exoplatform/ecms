@@ -6,7 +6,8 @@
 	import org.exoplatform.services.wcm.core.NodeLocation;
 %>
 
-<div id="$uicomponent.id" class="UICLVPresentation">
+<div class="UICLVPresentation" id="$uicomponent.id"> 
+
 	<%	
 		String header = uicomponent.getHeader();
 		def rssLink = uicomponent.getRssLink();
@@ -57,7 +58,8 @@
 					String contentkEdittingLink = uicomponent.event("EditContent", NodeLocation.getExpressionByNode(viewNode));
 					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));					
 					%>	
-						<div class="CaptionItem" style="border-bottom: 0px;">
+						<div class="CaptionItem" style="border-bottom: 0px;"
+							onmouseover="this.setAttribute('class', 'CaptionItem ContainerHoverClass')" onmouseout="this.setAttribute('class', 'CaptionItem')">
 							<% 
                                 if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION)) {
                                     %><img src="$imgSrc" width="30" style="float:left; padding-right:5px;" /><%

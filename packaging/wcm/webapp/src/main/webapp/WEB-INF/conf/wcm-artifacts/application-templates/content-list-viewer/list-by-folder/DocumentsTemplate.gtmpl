@@ -13,7 +13,8 @@
 		import org.exoplatform.services.wcm.core.NodeLocation;
 %>
 
-<div id="$uicomponent.id" class="DocumentsCLVTemplate">
+<div class="DocumentsCLVTemplate" id="$uicomponent.id"> 
+
 	<div class="CLV">
 		<%
 			def header = uicomponent.getHeader();
@@ -82,7 +83,7 @@
                 def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
       					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));                
 						    %>
-									<div class="Column1">
+								<div class="Column1" onmouseover="this.setAttribute('class', 'Column1 ContainerHoverClass')" onmouseout="this.setAttribute('class', 'Column1')">
 										<%
 											if (isShowImage) {
                     %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
