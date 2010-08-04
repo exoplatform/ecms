@@ -423,9 +423,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } finally {
-//         documentForm.releaseLock();
+         documentForm.releaseLock();
       }
-      documentForm.releaseLock();
       event.getRequestContext().setAttribute("nodePath",newNode.getPath());
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
@@ -526,11 +525,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
 //      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
       if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) != null) {
-        event.getSource().releaseLock();
+      	event.getSource().releaseLock();
         uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-        uiExplorer.updateAjax(event);
       } else    
       uiExplorer.cancelAction();
+      uiExplorer.updateAjax(event);
     }
   }
     
