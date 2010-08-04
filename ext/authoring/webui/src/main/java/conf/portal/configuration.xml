@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<configuration>
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
+   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+
 	<external-component-plugins>
 		<!-- The full qualified name of the UIExtensionManager that manages all the UI Extensions -->
 		<target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
@@ -132,6 +136,12 @@
       <!-- The full qualified name of the BaseResourceBundlePlugin -->
       <type>org.exoplatform.services.resources.impl.BaseResourceBundlePlugin</type>
       <init-params>
+        <values-param>
+            <name>init.resources</name>
+            <description>Store the following resources into the db for the first launch </description>
+            <value>locale.portlet.explorer.JCRExplorerPortlet</value>
+            <value>locale.portlet.administration.ECMAdminPortlet</value>
+        </values-param>
         <values-param>
           <name>portal.resource.names</name>
           <description>The properties files of the portal , those file will be merged
