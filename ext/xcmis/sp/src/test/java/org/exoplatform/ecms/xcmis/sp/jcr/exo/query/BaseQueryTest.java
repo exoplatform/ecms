@@ -18,7 +18,6 @@
 package org.exoplatform.ecms.xcmis.sp.jcr.exo.query;
 
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.BaseTest;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.JcrCMIS;
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.PropertyDefinitions;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -84,7 +83,7 @@ public abstract class BaseQueryTest extends BaseTest
    {
       super.setUp();
       storage = storageProvider.getConnection().getStorage();
-      rootFolder = (FolderData)storage.getObjectById(JcrCMIS.ROOT_FOLDER_ID);
+      rootFolder = (FolderData)storage.getObjectById(storage.getRepositoryInfo().getRootFolderId());
 
       nasaDocumentTypeDefinition = storage.getTypeDefinition(NASA_DOCUMENT, true);
       folderTypeDefinition = storage.getTypeDefinition("cmis:folder", true);
@@ -93,47 +92,11 @@ public abstract class BaseQueryTest extends BaseTest
    protected DocumentData createDocument(FolderData folder, String name, TypeDefinition typeDefinition, byte[] content,
       MimeType mimeType) throws Exception
    {
-
       return createDocument(folder, name, typeDefinition, new BaseContentStream(content, null, mimeType), null);
    }
 
    protected DocumentData createDocument(FolderData folder, String name, TypeDefinition typeDefinition,
       ContentStream content, VersioningState versioningState) throws Exception//   /**
-   //    * Test NOT IN constraint.
-   //    * <p>
-   //    * Initial data:
-   //    * <ul>
-   //    * <li>doc1: <b>Title</b> - node1 <b>long</b> - 3
-   //    * <li>doc2: <b>Title</b> - node2 <b>long</b> - 15
-   //    * </ul>
-   //    * <p>
-   //    * Query : Select all documents where long property not in set {15 , 20}.
-   //    * <p>
-   //    * Expected result: doc1
-   //    *
-   //    * @throws Exception if an unexpected error occurs
-   //    */
-   //   public void testNotINConstraint() throws Exception
-   //   {
-   //
-   //      // create data
-   //      String name = "fileCS2.doc";
-   //      String name2 = "fileCS3.doc";
-   //      String contentType = "text/plain";
-   //
-   //      Document doc1 = createDocument(testRoot, name, new byte[0], contentType);
-   //      doc1.setDecimal("long", new BigDecimal(3));
-   //
-   //      Document doc2 = createDocument(folder.getObjectId(), name2, new byte[0], contentType);
-   //      doc2.setDecimal("long", new BigDecimal(15));
-   //
-   //      String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE long NOT IN (15, 20)";
-   //
-   //      Query query = new Query(statement, true);
-   //      ItemsIterator<Result> result = storage.query(query);
-   //
-   //      checkResult(result, new Document[]{doc1});
-   //   }
    {
 
       PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);

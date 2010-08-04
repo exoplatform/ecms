@@ -18,7 +18,6 @@
 package org.exoplatform.ecms.xcmis.sp.jcr.exo;
 
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.IndexListener;
-import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ConstraintException;
 import org.xcmis.spi.ContentStream;
@@ -26,9 +25,9 @@ import org.xcmis.spi.DocumentData;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ItemsIterator;
 import org.xcmis.spi.NameConstraintViolationException;
+import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.PolicyData;
 import org.xcmis.spi.RelationshipData;
-import org.xcmis.spi.RenditionManager;
 import org.xcmis.spi.StorageException;
 import org.xcmis.spi.VersioningException;
 import org.xcmis.spi.model.AccessControlEntry;
@@ -45,7 +44,6 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
 
@@ -59,9 +57,9 @@ public class DocumentVersion extends DocumentDataImpl
    /** Latest version of document. */
    private DocumentData document;
 
-   public DocumentVersion(JcrNodeEntry jcrEntry, IndexListener indexListener, RenditionManager renditionManager)
+   public DocumentVersion(JcrNodeEntry jcrEntry, IndexListener indexListener)
    {
-      super(jcrEntry, indexListener, renditionManager);
+      super(jcrEntry, indexListener);
    }
 
    /**
@@ -164,7 +162,7 @@ public class DocumentVersion extends DocumentDataImpl
    {
       try
       {
-         return getNode().getParent().getName();
+         return entry.getNode().getParent().getName();
       }
       catch (RepositoryException re)
       {
@@ -248,18 +246,19 @@ public class DocumentVersion extends DocumentDataImpl
       {
          try
          {
-            Node node = getNode();
-            Session session = node.getSession();
+            Node node = entry.getNode();
             Version version = (Version)node.getParent();
             VersionHistory versionHistory = version.getContainingHistory();
-            Node latest = ((ExtendedSession)session).getNodeByIdentifier(versionHistory.getVersionableUUID());
             document =
-               new DocumentDataImpl(new JcrNodeEntry(latest, JcrTypeHelper.getTypeDefinition(latest
-                  .getPrimaryNodeType(), true)), indexListener, renditionManager);
+               new DocumentDataImpl(entry.storage.getEntry(versionHistory.getVersionableUUID()), indexListener);
          }
          catch (RepositoryException re)
          {
-            throw new CmisRuntimeException("Unexpected error. " + re.getMessage(), re);
+            throw new CmisRuntimeException("Unable get latest version of document. " + re.getMessage(), re);
+         }
+         catch (ObjectNotFoundException e)
+         {
+            throw new CmisRuntimeException("Unable get latest version of document. " + e.getMessage(), e);
          }
       }
       return document;
@@ -279,15 +278,6 @@ public class DocumentVersion extends DocumentDataImpl
     */
    @Override
    protected void save()
-   {
-      throw new CmisRuntimeException("Not supported for non current version of document.");
-   }
-
-   /**
-    * {@inheritDoc}
-    */
-   @Override
-   void unfile()
    {
       throw new CmisRuntimeException("Not supported for non current version of document.");
    }

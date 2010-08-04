@@ -42,6 +42,7 @@
                   <name>namespaces</name>
                   <property name="dc" value="http://purl.org/dc/elements/1.1/" />
                   <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0" />
+                  <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0" />
                </properties-param>
             </init-params>
          </component-plugin>
@@ -74,10 +75,19 @@
    </component>
 
    <component>
+      <key>org.exoplatform.services.idgenerator.IDGeneratorService</key>
+      <type>org.exoplatform.services.idgenerator.impl.IDGeneratorServiceImpl</type>
+   </component>
+
+   <component>
+      <type>org.xcmis.spi.deploy.ExoContainerCmisRegistry</type>
+   </component>
+
+   <component>
       <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageProviderImpl</type>
       <init-params>
          <object-param>
-            <name>configs</name>
+            <name>configuration</name>
             <object type="org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageProviderImpl$StorageProviderConfig">
                <field name="storage">
                   <object type="org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageConfiguration">
@@ -134,6 +144,22 @@
    <component>
       <key>org.exoplatform.services.security.Authenticator</key>
       <type>org.exoplatform.services.organization.auth.OrganizationAuthenticatorImpl</type>
+   </component>
+
+   <component>
+      <type>org.exoplatform.services.security.IdentityRegistry</type>
+   </component>
+
+   <component>
+      <key>org.exoplatform.services.naming.InitialContextInitializer</key>
+      <type>org.exoplatform.services.naming.InitialContextInitializer</type>
+      <init-params>
+         <properties-param>
+            <name>default-properties</name>
+            <description>Default initial context properties</description>
+            <property name="java.naming.factory.initial" value="org.exoplatform.services.naming.SimpleContextFactory" />
+         </properties-param>
+      </init-params>
    </component>
 
    <external-component-plugins>

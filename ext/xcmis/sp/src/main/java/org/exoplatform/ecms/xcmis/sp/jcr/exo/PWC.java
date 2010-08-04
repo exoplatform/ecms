@@ -18,7 +18,6 @@
 package org.exoplatform.ecms.xcmis.sp.jcr.exo;
 
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.IndexListener;
-import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ConstraintException;
@@ -26,9 +25,8 @@ import org.xcmis.spi.ContentStream;
 import org.xcmis.spi.DocumentData;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.NameConstraintViolationException;
-import org.xcmis.spi.ObjectData;
+import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.PolicyData;
-import org.xcmis.spi.RenditionManager;
 import org.xcmis.spi.StorageException;
 import org.xcmis.spi.model.AccessControlEntry;
 import org.xcmis.spi.model.Property;
@@ -38,8 +36,10 @@ import org.xcmis.spi.model.Updatability;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -56,15 +56,14 @@ class PWC extends DocumentDataImpl
    /** Latest version of document. */
    private DocumentDataImpl document;
 
-   public PWC(JcrNodeEntry jcrNodeEntry, IndexListener indexListener, RenditionManager renditionManager)
+   public PWC(JcrNodeEntry jcrNodeEntry, IndexListener indexListener)
    {
-      super(jcrNodeEntry, indexListener, renditionManager);
+      super(jcrNodeEntry, indexListener);
    }
 
-   public PWC(JcrNodeEntry jcrEntry, IndexListener indexListener, RenditionManager renditionManager,
-      DocumentDataImpl document)
+   public PWC(JcrNodeEntry jcrEntry, IndexListener indexListener, DocumentDataImpl document)
    {
-      super(jcrEntry, indexListener, renditionManager);
+      super(jcrEntry, indexListener);
       this.document = document;
    }
 
@@ -74,26 +73,33 @@ class PWC extends DocumentDataImpl
    @Override
    public void cancelCheckout() throws StorageException
    {
-      // Reset versioning property on latest version
+      String id = getObjectId();
+      // Reset versioning property on latest version.
       DocumentDataImpl latestVersion = getLatestVersion();
-      JcrNodeEntry latestNodeAdapter = latestVersion.getNodeEntry();
-      latestNodeAdapter.setValue(CmisConstants.IS_LATEST_VERSION, true);
-      latestNodeAdapter.setValue(CmisConstants.IS_VERSION_SERIES_CHECKED_OUT, false);
-      latestNodeAdapter.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_ID, (Value)null);
-      latestNodeAdapter.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_BY, (Value)null);
-
-      // Remove PWC
+      JcrNodeEntry latestEntry = latestVersion.getNodeEntry();
+      latestEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
+      latestEntry.setValue(CmisConstants.IS_VERSION_SERIES_CHECKED_OUT, false);
+      latestEntry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_ID, (Value)null);
+      latestEntry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_BY, (Value)null);
+      // Remove PWC with wrapped node.
       try
       {
-         Node node = getNode();
+         Node node = entry.getNode();
          Session session = node.getSession();
          node.getParent().remove();
-
          session.save();
+
+         if (indexListener != null)
+         {
+            Set<String> s = new HashSet<String>();
+            s.add(id);
+            indexListener.removed(s);
+            indexListener.updated(latestVersion);
+         }
       }
       catch (RepositoryException re)
       {
-         throw new StorageException("Unable cancel checkout Document. " + re.getMessage(), re);
+         throw new StorageException("Unable cancel checkout of ocument. " + re.getMessage(), re);
       }
    }
 
@@ -105,59 +111,59 @@ class PWC extends DocumentDataImpl
       ContentStream content, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws NameConstraintViolationException, StorageException
    {
+      String id = getObjectId();
       try
       {
          DocumentDataImpl latestVersion = getLatestVersion();
-         JcrNodeEntry latestNodeAdapter = latestVersion.getNodeEntry();
-         Node latestNode = latestNodeAdapter.getNode();
+         JcrNodeEntry latestEntry = latestVersion.getNodeEntry();
+         Node latestNode = latestEntry.getNode();
          Session session = latestNode.getSession();
 
          // send current state in version history
          latestNode.checkin();
          latestNode.checkout();
 
-         latestNodeAdapter.setValue(CmisConstants.IS_LATEST_VERSION, true);
-         latestNodeAdapter.setValue(CmisConstants.IS_VERSION_SERIES_CHECKED_OUT, false);
-         latestNodeAdapter.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_ID, (Value)null);
-         latestNodeAdapter.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_BY, (Value)null);
+         latestEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
+         latestEntry.setValue(CmisConstants.IS_VERSION_SERIES_CHECKED_OUT, false);
+         latestEntry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_ID, (Value)null);
+         latestEntry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_BY, (Value)null);
          // Update creation date & last modification date to emulate creation new version
          String userId = session.getUserID();
-         latestNodeAdapter.setValue(CmisConstants.CREATED_BY, userId);
-         latestNodeAdapter.setValue(CmisConstants.LAST_MODIFIED_BY, userId);
+         latestEntry.setValue(CmisConstants.CREATED_BY, userId);
+         latestEntry.setValue(CmisConstants.LAST_MODIFIED_BY, userId);
          Calendar cal = Calendar.getInstance();
-         latestNodeAdapter.setValue(CmisConstants.CREATION_DATE, cal);
-         latestNodeAdapter.setValue(CmisConstants.LAST_MODIFICATION_DATE, cal);
-
+         latestEntry.setValue(CmisConstants.CREATION_DATE, cal);
+         latestEntry.setValue(CmisConstants.LAST_MODIFICATION_DATE, cal);
          // Attributes of new version
-         latestNodeAdapter.setValue(CmisConstants.IS_MAJOR_VERSION, major);
+         latestEntry.setValue(CmisConstants.IS_MAJOR_VERSION, major);
          if (checkinComment != null)
          {
-            latestNodeAdapter.setValue(CmisConstants.CHECKIN_COMMENT, checkinComment);
+            latestEntry.setValue(CmisConstants.CHECKIN_COMMENT, checkinComment);
          }
 
          // Merge properties
-         for (PropertyDefinition<?> definition : getTypeDefinition().getPropertyDefinitions())
+         for (PropertyDefinition<?> propertyDefinition : getTypeDefinition().getPropertyDefinitions())
          {
-            Updatability updatability = definition.getUpdatability();
-            String id = definition.getId();
+            Updatability updatability = propertyDefinition.getUpdatability();
+            String propertyId = propertyDefinition.getId();
             if (updatability == Updatability.READWRITE)
             {
-               // Only read/write property could be updated on PWC.
-               // Need copy them to current state.
-
-               // If passed properties contains new value ignore value from PWC.
-               if (properties != null && properties.containsKey(id))
+               // Only read/write property could be updated on PWC. Need copy
+               // them to current state. If passed properties contains new value
+               // then ignore value from PWC.
+               if (properties != null && properties.containsKey(propertyId))
                {
-                  latestNodeAdapter.setProperty(properties.get(id));
+                  latestEntry.setProperty(properties.get(propertyId));
                }
                else
                {
-                  latestNodeAdapter.setProperty(getProperty(id));
+                  latestEntry.setProperty(getProperty(propertyId));
                }
             }
-            else if (updatability == Updatability.WHENCHECKEDOUT && properties != null && properties.containsKey(id))
+            else if (updatability == Updatability.WHENCHECKEDOUT && properties != null
+               && properties.containsKey(propertyId))
             {
-               latestNodeAdapter.setProperty(properties.get(id));
+               latestEntry.setProperty(properties.get(propertyId));
             }
          }
 
@@ -165,12 +171,12 @@ class PWC extends DocumentDataImpl
          {
             if (content != null)
             {
-               latestNodeAdapter.setContentStream(content);
+               latestEntry.setContentStream(content);
             }
             else if (getContentStream() != null)
             {
                // TODO : Need to check if contents are the same then not was not updated not need to change
-               latestNodeAdapter.setContentStream(getContentStream());
+               latestEntry.setContentStream(getContentStream());
             }
          }
          catch (IOException ioe)
@@ -180,21 +186,29 @@ class PWC extends DocumentDataImpl
 
          if (acl != null && acl.size() > 0)
          {
-            latestNodeAdapter.setACL(acl);
+            latestEntry.setACL(acl);
          }
 
          if (policies != null && policies.size() > 0)
          {
-            for (ObjectData aPolicy : policies)
+            for (PolicyData policy : policies)
             {
-               latestNodeAdapter.applyPolicy((PolicyData)aPolicy);
+               latestEntry.applyPolicy(((BaseObjectData)policy).getNodeEntry());
             }
          }
 
-         // Remove PWC
-         Node node = getNode();
+         // Remove PWC with wrapped node.
+         Node node = entry.getNode();
          node.getParent().remove();
          session.save();
+
+         if (indexListener != null)
+         {
+            Set<String> s = new HashSet<String>();
+            s.add(id);
+            indexListener.removed(s);
+            indexListener.updated(latestVersion);
+         }
 
          return latestVersion;
       }
@@ -246,15 +260,12 @@ class PWC extends DocumentDataImpl
       {
          try
          {
-            Node node = getNode();
-            Session session = node.getSession();
-            String latestVersion = node.getProperty("xcmis:latestVersionId").getString();
-            Node latestNode = ((ExtendedSession)session).getNodeByIdentifier(latestVersion);
-            document = new DocumentDataImpl(new JcrNodeEntry(latestNode), indexListener, renditionManager);
+            String latestVersion = entry.getString("xcmis:latestVersionId");
+            document = new DocumentDataImpl(entry.storage.getEntry(latestVersion), indexListener);
          }
-         catch (RepositoryException re)
+         catch (ObjectNotFoundException e)
          {
-            throw new CmisRuntimeException("Unexpected error. " + re.getMessage(), re);
+            throw new CmisRuntimeException("Unable get latest version of document. " + e.getMessage(), e);
          }
       }
       return document;

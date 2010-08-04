@@ -21,7 +21,7 @@ import org.xcmis.spi.CmisConstants;
 
 /**
  * Constants.
- * 
+ *
  * @author <a href="mailto:andrey.parfonov@exoplatform.com">Andrey Parfonov</a>
  * @version $Id: JcrCMIS.java 1262 2010-06-09 10:07:01Z andrew00x $
  */
@@ -46,8 +46,6 @@ public interface JcrCMIS extends CmisConstants
    String CMIS_NT_RENDITION = "xcmis:rendition";
 
    String CMIS_SYSTEM_NODETYPE = "xcmis:system";
-
-   String ROOT_FOLDER_ID = org.exoplatform.services.jcr.impl.Constants.ROOT_UUID;
 
    // --- Renditions ---
 

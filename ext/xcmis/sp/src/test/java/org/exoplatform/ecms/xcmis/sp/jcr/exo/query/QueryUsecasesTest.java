@@ -52,7 +52,7 @@ public class QueryUsecasesTest extends BaseQueryTest
    private FolderData testRoot;
 
    /**
-    * @see org.exoplatform.ecms.xcmis.sp.jcr.exo.query.BaseQueryTest#setUp()
+    * @see org.xcmis.sp.jcr.exo.query.BaseQueryTest#setUp()
     */
    @Override
    public void setUp() throws Exception
@@ -73,7 +73,7 @@ public class QueryUsecasesTest extends BaseQueryTest
       RepositoryCapabilities repCapabilities = storage.getRepositoryInfo().getCapabilities();
       assertEquals(CapabilityQuery.BOTHCOMBINED, repCapabilities.getCapabilityQuery());
       assertEquals(CapabilityJoin.NONE, repCapabilities.getCapabilityJoin());
-      assertFalse(repCapabilities.isCapabilityPWCSearchable());
+      assertTrue(repCapabilities.isCapabilityPWCSearchable());
       assertFalse(repCapabilities.isCapabilityAllVersionsSearchable());
    }
 
@@ -1241,7 +1241,7 @@ public class QueryUsecasesTest extends BaseQueryTest
    }
 
    /**
-    * @see org.exoplatform.ecms.xcmis.sp.jcr.exo.BaseTest#tearDown()
+    * @see org.xcmis.sp.jcr.exo.BaseTest#tearDown()
     */
    @Override
    protected void tearDown() throws Exception

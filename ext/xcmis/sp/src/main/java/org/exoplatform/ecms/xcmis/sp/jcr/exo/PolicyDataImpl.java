@@ -30,11 +30,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.jcr.Node;
-import javax.jcr.PropertyIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
  * @version $Id: PolicyDataImpl.java 1260 2010-06-09 09:18:30Z andrew00x $
@@ -77,34 +72,16 @@ class PolicyDataImpl extends BaseObjectData implements PolicyData
     */
    public String getPolicyText()
    {
-      return jcrEntry.getString(CmisConstants.POLICY_TEXT);
+      return entry.getString(CmisConstants.POLICY_TEXT);
    }
 
+   /**
+    * {@inheritDoc}
+    */
    protected void delete() throws StorageException
    {
       String objectId = getObjectId();
-      try
-      {
-         // Check is policy applied to at least one object.
-         Node node = getNode();
-         Session session = node.getSession();
-         for (PropertyIterator iter = node.getReferences(); iter.hasNext();)
-         {
-            Node controllable = iter.nextProperty().getParent();
-            if (controllable.isNodeType(JcrCMIS.NT_FILE) //
-               || controllable.isNodeType(JcrCMIS.NT_FOLDER) //
-               || controllable.isNodeType(JcrCMIS.CMIS_NT_POLICY))
-            {
-               throw new StorageException("Unable to delete applied policy.");
-            }
-         }
-         node.remove();
-         session.save();
-      }
-      catch (RepositoryException re)
-      {
-         throw new StorageException("Unable delete object. " + re.getMessage(), re);
-      }
+      entry.delete();
       if (indexListener != null)
       {
          Set<String> removed = new HashSet<String>();

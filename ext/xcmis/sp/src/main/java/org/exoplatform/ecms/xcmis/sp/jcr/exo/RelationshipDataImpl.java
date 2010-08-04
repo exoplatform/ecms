@@ -22,17 +22,17 @@ import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.ConstraintException;
 import org.xcmis.spi.ContentStream;
 import org.xcmis.spi.FolderData;
+import org.xcmis.spi.ItemsIterator;
 import org.xcmis.spi.RelationshipData;
 import org.xcmis.spi.StorageException;
+import org.xcmis.spi.model.RelationshipDirection;
+import org.xcmis.spi.model.TypeDefinition;
+import org.xcmis.spi.utils.CmisUtils;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
@@ -52,7 +52,7 @@ class RelationshipDataImpl extends BaseObjectData implements RelationshipData
     */
    public String getSourceId()
    {
-      return jcrEntry.getString(CmisConstants.SOURCE_ID);
+      return entry.getString(CmisConstants.SOURCE_ID);
    }
 
    /**
@@ -60,7 +60,7 @@ class RelationshipDataImpl extends BaseObjectData implements RelationshipData
     */
    public String getTargetId()
    {
-      return jcrEntry.getString(CmisConstants.TARGET_ID);
+      return entry.getString(CmisConstants.TARGET_ID);
    }
 
    /**
@@ -87,27 +87,28 @@ class RelationshipDataImpl extends BaseObjectData implements RelationshipData
       return Collections.emptyList();
    }
 
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   public ItemsIterator<RelationshipData> getRelationships(RelationshipDirection direction, TypeDefinition type,
+      boolean includeSubRelationshipTypes)
+   {
+      return CmisUtils.emptyItemsIterator();
+   }
+
+   /**
+    * {@inheritDoc}
+    */
    protected void delete() throws StorageException
    {
+      String objectId = getObjectId();
+      entry.delete();
+      if (indexListener != null)
       {
-         String objectId = getObjectId();
-         try
-         {
-            Node node = getNode();
-            Session session = node.getSession();
-            node.remove();
-            session.save();
-         }
-         catch (RepositoryException re)
-         {
-            throw new StorageException("Unable delete object. " + re.getMessage(), re);
-         }
-         if (indexListener != null)
-         {
-            Set<String> removed = new HashSet<String>();
-            removed.add(objectId);
-            indexListener.removed(removed);
-         }
+         Set<String> removed = new HashSet<String>();
+         removed.add(objectId);
+         indexListener.removed(removed);
       }
    }
 

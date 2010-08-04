@@ -25,8 +25,6 @@ import org.xcmis.search.model.constraint.Operator;
 import org.xcmis.search.model.source.SelectorName;
 import org.xcmis.search.query.QueryExecutionException;
 import org.xcmis.spi.InvalidArgumentException;
-import org.xcmis.spi.ItemsIterator;
-import org.xcmis.spi.query.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +39,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
    private CmisSchema cmisSchema;
 
    /**
-    * @see org.exoplatform.ecms.xcmis.sp.jcr.exo.query.BaseQueryTest#setUp()
+    * @see org.xcmis.sp.jcr.exo.query.BaseQueryTest#setUp()
     */
    @Override
    public void setUp() throws Exception
@@ -90,7 +88,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
    /**
     * Check invalid operator's
     * @param column
-    * @throws QueryExecutionException 
+    * @throws QueryExecutionException
     */
    private void checkInValid(String tableName, Column column) throws QueryExecutionException
    {
@@ -136,7 +134,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
          try
          {
             org.xcmis.spi.query.Query cmisQuery = new org.xcmis.spi.query.Query(query.toString(), true);
-            ItemsIterator<Result> result = storage.query(cmisQuery);
+            storage.query(cmisQuery);
             fail("InvalidArgumentException should be thrown for invalid operator " + operator + " for columnt ='"
                + column.getName() + "'");
          }
@@ -149,10 +147,10 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
 
    /**
     * Check valid operator's
-    * 
+    *
     * @param column
-    * @throws InvalidQueryException 
-    * @throws QueryExecutionException 
+    * @throws InvalidQueryException
+    * @throws QueryExecutionException
     */
    private void checkValid(String tableName, Column column) throws QueryExecutionException, InvalidQueryException
    {
@@ -194,7 +192,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
                break;
          }
          org.xcmis.spi.query.Query cmisQuery = new org.xcmis.spi.query.Query(query.toString(), true);
-         ItemsIterator<Result> result = storage.query(cmisQuery);
+         storage.query(cmisQuery);
       }
    }
 

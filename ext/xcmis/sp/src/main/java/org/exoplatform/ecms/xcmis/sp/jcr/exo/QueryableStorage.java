@@ -33,7 +33,6 @@ import org.xcmis.spi.ItemsIterator;
 import org.xcmis.spi.ObjectData;
 import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.PermissionService;
-import org.xcmis.spi.RenditionManager;
 import org.xcmis.spi.Storage;
 import org.xcmis.spi.model.BaseType;
 import org.xcmis.spi.query.Query;
@@ -75,31 +74,15 @@ public class QueryableStorage extends StorageImpl
     * @param searchService the search service
     */
    public QueryableStorage(Session session, StorageConfiguration configuration, SearchService searchService,
-      PermissionService permissionService)
+      PermissionService permissionService, Map<String, TypeMapping> nodeTypeMapping)
    {
-      super(session, configuration, permissionService);
+      super(session, configuration, permissionService, nodeTypeMapping);
       this.searchService = searchService;
       this.cmisQueryParser = new CmisQueryParser();
    }
 
    /**
-    * Constructor.
-    * 
-    * @param session Session
-    * @param configuration StorageConfiguration
-    * @param renditionManager RenditionManager
-    * @param searchService the search service
-    */
-   public QueryableStorage(Session session, StorageConfiguration configuration, RenditionManager renditionManager,
-      SearchService searchService, PermissionService permissionService)
-   {
-      super(session, configuration, renditionManager, permissionService);
-      this.searchService = searchService;
-      this.cmisQueryParser = new CmisQueryParser();
-   }
-
-   /**
-    * @see org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageImpl#query(org.xcmis.spi.query.Query)
+    * @see org.xcmis.sp.jcr.exo.StorageImpl#query(org.xcmis.spi.query.Query)
     */
    @Override
    public ItemsIterator<Result> query(Query query) throws InvalidArgumentException
@@ -293,7 +276,7 @@ public class QueryableStorage extends StorageImpl
 
       /**
        * The Constructor.
-       * 
+       *
        * @param selectorName String selector name
        * @param storage the storage
        */
@@ -325,7 +308,7 @@ public class QueryableStorage extends StorageImpl
 
       /**
        * Return comparable location of the object.
-       * 
+       *
        * @param identifer String
        * @return path String
        */

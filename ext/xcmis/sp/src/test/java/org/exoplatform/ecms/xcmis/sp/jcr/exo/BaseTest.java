@@ -21,7 +21,6 @@ import junit.framework.TestCase;
 
 import org.apache.commons.io.FileUtils;
 import org.exoplatform.container.StandaloneContainer;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageImpl;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.CredentialsImpl;
 import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
@@ -85,7 +84,7 @@ public abstract class BaseTest extends TestCase
       }
       String containerConf = getClass().getResource("/conf/standalone/test-configuration.xml").toString();
       String loginConf = Thread.currentThread().getContextClassLoader().getResource("login.conf").toString();
-      StandaloneContainer.addConfigurationURL(containerConf);
+      StandaloneContainer.setConfigurationURL(containerConf);
       container = StandaloneContainer.getInstance();
 
       if (System.getProperty("java.security.auth.login.config") == null)
@@ -152,12 +151,12 @@ public abstract class BaseTest extends TestCase
          {
             wc.nextNode().remove();
          }
-         for (NodeIterator unfiled =
-            rootNode.getNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1) + "/" + StorageImpl.XCMIS_UNFILED).getNodes(); unfiled
-            .hasNext();)
-         {
-            unfiled.nextNode().remove();
-         }
+//         for (NodeIterator unfiled =
+//            rootNode.getNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1) + "/" + StorageImpl.XCMIS_UNFILED).getNodes(); unfiled
+//            .hasNext();)
+//         {
+//            unfiled.nextNode().remove();
+//         }
 
          session.save();
 

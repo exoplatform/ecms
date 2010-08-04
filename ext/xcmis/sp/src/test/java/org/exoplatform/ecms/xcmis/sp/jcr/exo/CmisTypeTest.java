@@ -17,8 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp.jcr.exo;
 
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.JcrCMIS;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageImpl;
 import org.exoplatform.services.jcr.util.IdGenerator;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.InvalidArgumentException;
@@ -36,7 +34,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey Kabashnyuk</a>
+ * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey
+ *         Kabashnyuk</a>
  * @version $Id: exo-jboss-codetemplates.xml 34360 2009-07-22 23:58:59Z ksm $
  *
  */
@@ -65,7 +64,7 @@ public class CmisTypeTest extends BaseTest
    {
       super.setUp();
       storage = storageProvider.getConnection().getStorage();
-      rootFolder = (FolderData)storage.getObjectById(JcrCMIS.ROOT_FOLDER_ID);
+      rootFolder = (FolderData)storage.getObjectById(storage.getRepositoryInfo().getRootFolderId());
    }
 
    public void testGetTypeRegisteredThrowXml() throws Exception

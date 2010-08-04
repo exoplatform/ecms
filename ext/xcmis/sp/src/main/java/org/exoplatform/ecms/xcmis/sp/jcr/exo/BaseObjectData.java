@@ -26,6 +26,7 @@ import org.xcmis.spi.ConstraintException;
 import org.xcmis.spi.DocumentData;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ItemsIterator;
+import org.xcmis.spi.LazyIterator;
 import org.xcmis.spi.NameConstraintViolationException;
 import org.xcmis.spi.ObjectData;
 import org.xcmis.spi.ObjectDataVisitor;
@@ -57,13 +58,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.PropertyIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.nodetype.NodeType;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
@@ -72,57 +67,18 @@ import javax.jcr.nodetype.NodeType;
  */
 abstract class BaseObjectData implements ObjectData
 {
-   private class RelationshipIterator implements ItemsIterator<RelationshipData>
+   private class RelationshipIterator extends LazyIterator<RelationshipData>
    {
 
-      private final PropertyIterator iter;
+      private final Iterator<JcrNodeEntry> iter;
 
-      private final TypeDefinition type;
+      private final int size;
 
-      private final boolean includeSubRelationshipTypes;
-
-      private final RelationshipDirection direction;
-
-      private RelationshipData next;
-
-      RelationshipIterator(PropertyIterator iter, TypeDefinition type, RelationshipDirection direction,
-         boolean includeSubRelationshipTypes)
+      public RelationshipIterator(Collection<JcrNodeEntry> relationships)
       {
-         this.iter = iter;
-         this.type = type;
-         this.direction = direction;
-         this.includeSubRelationshipTypes = includeSubRelationshipTypes;
+         size = relationships.size();
+         iter = relationships.iterator();
          fetchNext();
-      }
-
-      /**
-       * {@inheritDoc}
-       */
-      public boolean hasNext()
-      {
-         return next != null;
-      }
-
-      /**
-       * {@inheritDoc}
-       */
-      public RelationshipData next()
-      {
-         if (next == null)
-         {
-            throw new NoSuchElementException();
-         }
-         RelationshipData n = next;
-         fetchNext();
-         return n;
-      }
-
-      /**
-       * {@inheritDoc}
-       */
-      public void remove()
-      {
-         throw new UnsupportedOperationException("remove");
       }
 
       /**
@@ -130,54 +86,16 @@ abstract class BaseObjectData implements ObjectData
        */
       public int size()
       {
-         return -1;
+         return size;
       }
 
-      /**
-       * {@inheritDoc}
-       */
-      public void skip(int skip) throws NoSuchElementException
-      {
-         while (skip-- > 0)
-         {
-            fetchNext();
-            if (next == null)
-            {
-               throw new NoSuchElementException();
-            }
-         }
-      }
-
-      /**
-       * To fetch next item.
-       */
-      void fetchNext()
+      /** To fetch next item. */
+      protected void fetchNext()
       {
          next = null;
-         while (next == null && iter.hasNext())
+         if (iter.hasNext())
          {
-            javax.jcr.Property prop = iter.nextProperty();
-            try
-            {
-               String propName = prop.getName();
-               if ((direction == RelationshipDirection.EITHER && (propName.equals(CmisConstants.SOURCE_ID) || propName
-                  .equals(CmisConstants.TARGET_ID)))
-                  || (direction == RelationshipDirection.SOURCE && propName.equals(CmisConstants.SOURCE_ID))
-                  || (direction == RelationshipDirection.TARGET && propName.equals(CmisConstants.TARGET_ID)))
-               {
-                  Node relNode = prop.getParent();
-                  NodeType nodeType = relNode.getPrimaryNodeType();
-                  if (nodeType.getName().equals(type.getLocalName()) //
-                     || (includeSubRelationshipTypes && nodeType.isNodeType(type.getLocalName())))
-                  {
-                     next = new RelationshipDataImpl(new JcrNodeEntry(relNode), indexListener);
-                  }
-               }
-            }
-            catch (RepositoryException re)
-            {
-               LOG.error(re.getMessage());
-            }
+            next = new RelationshipDataImpl(iter.next(), indexListener);
          }
       }
    }
@@ -186,11 +104,11 @@ abstract class BaseObjectData implements ObjectData
 
    protected IndexListener indexListener;
 
-   protected JcrNodeEntry jcrEntry;
+   protected JcrNodeEntry entry;
 
    public BaseObjectData(JcrNodeEntry jcrEntry, IndexListener indexListener)
    {
-      this.jcrEntry = jcrEntry;
+      this.entry = jcrEntry;
       this.indexListener = indexListener;
    }
 
@@ -208,28 +126,29 @@ abstract class BaseObjectData implements ObjectData
    public void applyPolicy(PolicyData policy)
    {
       // Object is controllable by policy. It is checked in Connection.
-      jcrEntry.applyPolicy(policy);
+      entry.applyPolicy(((BaseObjectData)policy).getNodeEntry());
       try
       {
          save();
       }
       catch (StorageException se)
       {
+         // Remove ACL does not throw StorageException
          throw new CmisRuntimeException("Unable apply policy. " + se.getMessage(), se);
       }
    }
 
    public boolean equals(Object obj)
    {
-      if (obj == null)
+      if (this == obj)
+      {
+         return true;
+      }
+      if (obj == null || obj.getClass() != getClass())
       {
          return false;
       }
-      if (obj.getClass() != getClass())
-      {
-         return false;
-      }
-      return ((BaseObjectData)obj).getObjectId().equals(getObjectId());
+      return ((BaseObjectData)obj).getNodeEntry().equals(getNodeEntry());
    }
 
    /**
@@ -241,7 +160,7 @@ abstract class BaseObjectData implements ObjectData
       {
          return Collections.emptyList();
       }
-      return jcrEntry.getACL();
+      return entry.getACL();
    }
 
    /**
@@ -249,7 +168,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public BaseType getBaseType()
    {
-      return jcrEntry.getBaseType();
+      return entry.getBaseType();
    }
 
    /**
@@ -257,7 +176,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public String getChangeToken()
    {
-      return jcrEntry.getString(CmisConstants.CHANGE_TOKEN);
+      return entry.getString(CmisConstants.CHANGE_TOKEN);
    }
 
    /**
@@ -265,7 +184,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public String getCreatedBy()
    {
-      return jcrEntry.getString(CmisConstants.CREATED_BY);
+      return entry.getString(CmisConstants.CREATED_BY);
    }
 
    /**
@@ -273,7 +192,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public Calendar getCreationDate()
    {
-      return jcrEntry.getDate(CmisConstants.CREATION_DATE);
+      return entry.getDate(CmisConstants.CREATION_DATE);
    }
 
    /**
@@ -281,7 +200,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public Calendar getLastModificationDate()
    {
-      return jcrEntry.getDate(CmisConstants.LAST_MODIFICATION_DATE);
+      return entry.getDate(CmisConstants.LAST_MODIFICATION_DATE);
    }
 
    /**
@@ -289,7 +208,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public String getLastModifiedBy()
    {
-      return jcrEntry.getString(CmisConstants.LAST_MODIFIED_BY);
+      return entry.getString(CmisConstants.LAST_MODIFIED_BY);
    }
 
    /**
@@ -297,7 +216,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public String getName()
    {
-      return jcrEntry.getName();
+      return entry.getName();
    }
 
    /**
@@ -305,7 +224,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public String getObjectId()
    {
-      return jcrEntry.getId();
+      return entry.getId();
    }
 
    /**
@@ -317,7 +236,7 @@ abstract class BaseObjectData implements ObjectData
       {
          return Collections.emptyList();
       }
-      Collection<JcrNodeEntry> policyEntries = jcrEntry.getPolicies();
+      Collection<JcrNodeEntry> policyEntries = entry.getPolicies();
       Set<PolicyData> policies = new HashSet<PolicyData>(policyEntries.size());
       for (JcrNodeEntry pe : policyEntries)
       {
@@ -377,15 +296,7 @@ abstract class BaseObjectData implements ObjectData
    public ItemsIterator<RelationshipData> getRelationships(RelationshipDirection direction, TypeDefinition type,
       boolean includeSubRelationshipTypes)
    {
-      try
-      {
-         PropertyIterator iter = getNode().getReferences();
-         return new RelationshipIterator(iter, type, direction, includeSubRelationshipTypes);
-      }
-      catch (RepositoryException re)
-      {
-         throw new CmisRuntimeException("Unable get relationships. " + re.getMessage(), re);
-      }
+      return new RelationshipIterator(entry.getRelationships(direction, type, includeSubRelationshipTypes));
    }
 
    /**
@@ -393,7 +304,7 @@ abstract class BaseObjectData implements ObjectData
     */
    public TypeDefinition getTypeDefinition()
    {
-      return jcrEntry.getType();
+      return entry.getType();
    }
 
    /**
@@ -406,7 +317,9 @@ abstract class BaseObjectData implements ObjectData
 
    public int hashCode()
    {
-      return getObjectId().hashCode();
+      int hash = 8;
+      hash = hash * 31 + getNodeEntry().hashCode();
+      return hash;
    }
 
    /**
@@ -415,14 +328,14 @@ abstract class BaseObjectData implements ObjectData
    public void removePolicy(PolicyData policy)
    {
       // Object is controllable by policy. It is checked in Connection.
-      jcrEntry.removePolicy(policy);
+      entry.removePolicy(((BaseObjectData)policy).getNodeEntry());
       try
       {
          save();
       }
       catch (StorageException se)
       {
-         // remove policy does not throw StorageException
+         // Remove policy does not throw StorageException
          throw new CmisRuntimeException(se.getMessage(), se);
       }
    }
@@ -433,14 +346,14 @@ abstract class BaseObjectData implements ObjectData
    public void setACL(List<AccessControlEntry> acl)
    {
       // Object is controllable by ACL. It is checked in Connection.
-      jcrEntry.setACL(acl);
+      entry.setACL(acl);
       try
       {
          save();
       }
       catch (StorageException se)
       {
-         // apply ACL does not throw StorageException
+         // Apply ACL does not throw StorageException
          throw new CmisRuntimeException(se.getMessage(), se);
       }
    }
@@ -498,6 +411,11 @@ abstract class BaseObjectData implements ObjectData
       {
          return new DateTimeProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
             definition.getDisplayName(), getCreationDate());
+      }
+      else if (definition.getId().equals(CmisConstants.LAST_MODIFICATION_DATE))
+      {
+         return new DateTimeProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
+            definition.getDisplayName(), getLastModificationDate());
       }
       else if (definition.getId().equals(CmisConstants.PATH))
       {
@@ -559,7 +477,7 @@ abstract class BaseObjectData implements ObjectData
             definition.getDisplayName(), ((DocumentData)this).isLatestMajorVersion());
       }
 
-      return jcrEntry.getProperty(definition);
+      return entry.getProperty(definition);
    }
 
    /**
@@ -585,7 +503,7 @@ abstract class BaseObjectData implements ObjectData
                i.remove();
             }
          }
-         jcrEntry.setProperty(property);
+         entry.setProperty(property);
       }
       else
       {
@@ -597,20 +515,15 @@ abstract class BaseObjectData implements ObjectData
 
    }
 
-   Node getNode()
-   {
-      return jcrEntry.getNode();
-   }
-
    JcrNodeEntry getNodeEntry()
    {
-      return jcrEntry;
+      return entry;
    }
 
    protected void save() throws StorageException
    {
-      boolean isNew = getNode().isNew();
-      jcrEntry.updateAndSave();
+      boolean isNew = entry.isNew();
+      entry.save(true);
       if (indexListener != null)
       {
          if (isNew)
@@ -624,6 +537,11 @@ abstract class BaseObjectData implements ObjectData
       }
    }
 
+   /**
+    * Delete current object.
+    *
+    * @throws StorageException if operation can't be persisted in back-end
+    */
    protected abstract void delete() throws StorageException;
 
 }

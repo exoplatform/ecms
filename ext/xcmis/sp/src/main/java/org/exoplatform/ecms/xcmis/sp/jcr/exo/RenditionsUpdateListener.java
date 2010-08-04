@@ -28,7 +28,6 @@ import org.xcmis.spi.RenditionContentStream;
 import org.xcmis.spi.RenditionManager;
 import org.xcmis.spi.utils.MimeType;
 
-import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Property;
@@ -43,24 +42,20 @@ public class RenditionsUpdateListener implements EventListener
    /** Logger. */
    private static final Log LOG = ExoLogger.getLogger(RenditionsUpdateListener.class.getName());
 
-   private final RenditionManager renditionManager;
-
    private final String workspace;
 
    private final Repository repository;
 
    /**
     * Instantiates a new update listener.
-    * 
+    *
     * @param repository the repository
     * @param workspace the workspace
-    * @param renditionProviders the rendition providers
     */
-   public RenditionsUpdateListener(Repository repository, String workspace, RenditionManager renditionManager)
+   public RenditionsUpdateListener(Repository repository, String workspace)
    {
       this.repository = repository;
       this.workspace = workspace;
-      this.renditionManager = renditionManager;
    }
 
    /**
@@ -68,7 +63,6 @@ public class RenditionsUpdateListener implements EventListener
     */
    public void onEvent(EventIterator eventIterator)
    {
-
       SessionProvider sessionProvider = null;
       try
       {
@@ -78,75 +72,61 @@ public class RenditionsUpdateListener implements EventListener
          {
             Event event = eventIterator.nextEvent();
             String path = event.getPath();
-            if (path.contains("xcmis:system"))
+            // No processing of renditions for all nodes in "/xcmis:system".
+            if (!path.startsWith("/xcmis:system") && path.endsWith("/jcr:data"))
             {
-               return;
-            }
-
-            if (event.getPath().endsWith("jcr:content") || event.getPath().endsWith("jcr:data"))
-            {
-               Node node = null;
-               Item item = session.getItem(path);
-               if (item.isNode())
+               Property jcrData = (Property)session.getItem(path);
+               Node jcrContent = jcrData.getParent();
+               Node fileNode = jcrContent.getParent();
+               // Do nothing since 'nt:file' without mixin 'cmis:document' may
+               // not have renditions.
+               if (fileNode.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
                {
-                  node = session.getItem(path).getParent();
-               }
-               else
-               {
-                  node = session.getItem(path).getParent().getParent();
-               }
-               Node contentNode = node.getNode(JcrCMIS.JCR_CONTENT);
-               Property fileContent = contentNode.getProperty(JcrCMIS.JCR_DATA);
-               int length = fileContent.getStream().available();
-               if (length == 0)
-               {
+                  // Remove all existed renditions since content is changed.
+                  for (NodeIterator iter = fileNode.getNodes(); iter.hasNext();)
                   {
-                     NodeIterator iter = node.getNodes();
-                     while (iter.hasNext())
+                     Node next = iter.nextNode();
+                     if (next.isNodeType(JcrCMIS.CMIS_NT_RENDITION))
                      {
-                        Node tmp = iter.nextNode();
-                        if (tmp.isNodeType(JcrCMIS.CMIS_NT_RENDITION))
-                        {
-                           tmp.remove();
-                           node.save();
-                        }
+                        next.remove();
                      }
                   }
-               }
-
-               else
-               {
-                  MimeType mimeType = MimeType.fromString(contentNode.getProperty(JcrCMIS.JCR_MIMETYPE).getString());
-                  if (contentNode.hasProperty(JcrCMIS.JCR_ENCODING))
+                  // If new content set then create new rendition.
+                  long length = jcrData.getLength();
+                  if (length > 0)
                   {
-                     mimeType.getParameters().put(CmisConstants.CHARSET,
-                        contentNode.getProperty(JcrCMIS.JCR_ENCODING).getString());
-                  }
+                     MimeType mimeType = MimeType.fromString(jcrContent.getProperty(JcrCMIS.JCR_MIMETYPE).getString());
+                     if (jcrContent.hasProperty(JcrCMIS.JCR_ENCODING))
+                     {
+                        mimeType.getParameters().put(CmisConstants.CHARSET,
+                           jcrContent.getProperty(JcrCMIS.JCR_ENCODING).getString());
+                     }
 
-                  RenditionContentStream renditionContentStream =
-                     (RenditionContentStream)renditionManager.getStream(new BaseContentStream(fileContent.getStream(),
-                        length, null, mimeType), mimeType);
-                  if (renditionContentStream != null)
-                  {
-                     String id = IdGenerator.generate();
-                     Node rendition = node.addNode(id, JcrCMIS.CMIS_NT_RENDITION);
-                     rendition.setProperty(JcrCMIS.CMIS_RENDITION_STREAM, renditionContentStream.getStream());
-                     rendition.setProperty(JcrCMIS.CMIS_RENDITION_MIME_TYPE, renditionContentStream.getMediaType()
-                        .getBaseType());
-                     rendition.setProperty(JcrCMIS.CMIS_RENDITION_ENCODING, renditionContentStream.getMediaType()
-                        .getParameter(CmisConstants.CHARSET));
-                     rendition.setProperty(JcrCMIS.CMIS_RENDITION_KIND, renditionContentStream.getKind());
-                     rendition.setProperty(JcrCMIS.CMIS_RENDITION_HEIGHT, renditionContentStream.getHeight());
-                     rendition.setProperty(JcrCMIS.CMIS_RENDITION_WIDTH, renditionContentStream.getWidth());
-                     session.save();
+                     RenditionContentStream renditionContentStream =
+                        RenditionManager.getInstance().getStream(
+                           new BaseContentStream(jcrData.getStream(), length, null, mimeType), mimeType);
+                     if (renditionContentStream != null)
+                     {
+                        String id = IdGenerator.generate();
+                        Node rendition = fileNode.addNode(id, JcrCMIS.CMIS_NT_RENDITION);
+                        rendition.setProperty(JcrCMIS.CMIS_RENDITION_STREAM, renditionContentStream.getStream());
+                        rendition.setProperty(JcrCMIS.CMIS_RENDITION_MIME_TYPE, renditionContentStream.getMediaType()
+                           .getBaseType());
+                        rendition.setProperty(JcrCMIS.CMIS_RENDITION_ENCODING, renditionContentStream.getMediaType()
+                           .getParameter(CmisConstants.CHARSET));
+                        rendition.setProperty(JcrCMIS.CMIS_RENDITION_KIND, renditionContentStream.getKind());
+                        rendition.setProperty(JcrCMIS.CMIS_RENDITION_HEIGHT, renditionContentStream.getHeight());
+                        rendition.setProperty(JcrCMIS.CMIS_RENDITION_WIDTH, renditionContentStream.getWidth());
+                     }
                   }
+                  session.save();
                }
             }
          }
       }
       catch (Exception e)
       {
-         LOG.error("Creating rendition on event failed. ", e);
+         LOG.error("Creating rendition on event failed. " + e.getMessage());
       }
       finally
       {
@@ -156,5 +136,4 @@ public class RenditionsUpdateListener implements EventListener
          }
       }
    }
-
 }

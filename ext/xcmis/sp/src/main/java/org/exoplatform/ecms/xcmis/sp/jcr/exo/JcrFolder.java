@@ -18,14 +18,7 @@
 package org.exoplatform.ecms.xcmis.sp.jcr.exo;
 
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.IndexListener;
-import org.xcmis.spi.CmisRuntimeException;
-import org.xcmis.spi.RenditionManager;
 import org.xcmis.spi.StorageException;
-
-import java.util.Calendar;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 /**
  * @author <a href="mailto:andrey00x@gmail.com">Andrey Parfonov</a>
@@ -34,35 +27,14 @@ import javax.jcr.RepositoryException;
 class JcrFolder extends FolderDataImpl
 {
 
-   public JcrFolder(JcrNodeEntry jcrEntry, IndexListener indexListener, RenditionManager renditionManager)
+   public JcrFolder(JcrNodeEntry jcrEntry, IndexListener indexListener)
    {
-      super(jcrEntry, indexListener, renditionManager);
-   }
-
-   /**
-    * {@inheritDoc}
-    */
-   @Override
-   public Calendar getCreationDate()
-   {
-      try
-      {
-         Node node = getNode();
-         if (node.isNodeType(JcrCMIS.NT_FOLDER))
-         {
-            return node.getProperty(JcrCMIS.JCR_CREATED).getDate();
-         }
-         return null;
-      }
-      catch (RepositoryException re)
-      {
-         throw new CmisRuntimeException("Unable get cteation date. " + re.getMessage(), re);
-      }
+      super(jcrEntry, indexListener);
    }
 
    protected void save() throws StorageException
    {
-      jcrEntry.save();
+      entry.save(false);
       if (indexListener != null)
       {
          indexListener.updated(this);
