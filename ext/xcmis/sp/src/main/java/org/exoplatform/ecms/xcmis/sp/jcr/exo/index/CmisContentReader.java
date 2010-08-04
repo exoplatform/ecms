@@ -17,7 +17,10 @@
 
 package org.exoplatform.ecms.xcmis.sp.jcr.exo.index;
 
+import org.exoplatform.ecms.xcmis.sp.jcr.exo.NotSupportedNodeTypeException;
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.IndexListener.ContentEntryAdapter;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.xcmis.search.content.ContentEntry;
 import org.xcmis.search.content.command.InvocationContext;
 import org.xcmis.search.content.command.read.GetChildEntriesCommand;
@@ -34,19 +37,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey Kabashnyuk</a>
+ * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey
+ *         Kabashnyuk</a>
  * @version $Id: exo-jboss-codetemplates.xml 34360 2009-07-22 23:58:59Z ksm $
- *
+ * 
  */
 public class CmisContentReader extends ContentReaderInterceptor
 {
    private final Storage storage;
 
+   /** Logger. */
+   private static final Log LOG = ExoLogger.getLogger(CmisContentReader.class.getName());
+
    private final ContentEntryAdapter contentEntryAdapter;
 
    /**
     * Constructor.
-    * @param storage Storage
+    * 
+    * @param storage
+    *           Storage
     */
    public CmisContentReader(Storage storage)
    {
@@ -56,7 +65,8 @@ public class CmisContentReader extends ContentReaderInterceptor
    }
 
    /**
-    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitChildEntriesCommand(org.xcmis.search.content.command.InvocationContext, org.xcmis.search.content.command.read.GetChildEntriesCommand)
+    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitChildEntriesCommand(org.xcmis.search.content.command.InvocationContext,
+    *      org.xcmis.search.content.command.read.GetChildEntriesCommand)
     */
    @Override
    public Object visitChildEntriesCommand(InvocationContext ctx, GetChildEntriesCommand command) throws Throwable
@@ -77,12 +87,14 @@ public class CmisContentReader extends ContentReaderInterceptor
    }
 
    /**
-    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetContentEntryCommand(org.xcmis.search.content.command.InvocationContext, org.xcmis.search.content.command.read.GetContentEntryCommand)
+    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetContentEntryCommand(org.xcmis.search.content.command.InvocationContext,
+    *      org.xcmis.search.content.command.read.GetContentEntryCommand)
     */
    @Override
    public Object visitGetContentEntryCommand(InvocationContext ctx, GetContentEntryCommand command) throws Throwable
    {
 
+      //TODO delegate exception handling 
       ObjectData entry;
       try
       {
@@ -90,13 +102,26 @@ public class CmisContentReader extends ContentReaderInterceptor
       }
       catch (ObjectNotFoundException e)
       {
+         if (LOG.isDebugEnabled())
+         {
+            LOG.debug(e.getLocalizedMessage(), e);
+         }
+         return null;
+      }
+      catch (NotSupportedNodeTypeException e)
+      {
+         if (LOG.isDebugEnabled())
+         {
+            LOG.debug(e.getLocalizedMessage(), e);
+         }
          return null;
       }
       return contentEntryAdapter.createEntry(entry);
    }
 
    /**
-    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetUnfilledEntriesCommand(org.xcmis.search.content.command.InvocationContext, org.xcmis.search.content.command.read.GetUnfilledEntriesCommand)
+    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetUnfilledEntriesCommand(org.xcmis.search.content.command.InvocationContext,
+    *      org.xcmis.search.content.command.read.GetUnfilledEntriesCommand)
     */
    @Override
    public Object visitGetUnfiledEntriesCommand(InvocationContext ctx, GetUnfiledEntriesCommand command)

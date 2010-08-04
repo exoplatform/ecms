@@ -64,7 +64,7 @@ public class IndexListener
     */
    private final Storage storage;
 
-   private ContentEntryAdapter contentEntryAdapter;
+   private final ContentEntryAdapter contentEntryAdapter;
 
    public IndexListener(Storage storage, SearchService searchService)
    {
@@ -82,11 +82,17 @@ public class IndexListener
       }
       catch (IndexModificationException e)
       {
-         LOG.error(e.getLocalizedMessage());
+         if (LOG.isDebugEnabled())
+         {
+            LOG.debug(e.getLocalizedMessage());
+         }
       }
       catch (IOException e)
       {
-         LOG.error(e.getLocalizedMessage());
+         if (LOG.isDebugEnabled())
+         {
+            LOG.debug(e.getLocalizedMessage());
+         }
       }
    }
 
@@ -98,7 +104,10 @@ public class IndexListener
       }
       catch (IndexModificationException e)
       {
-         LOG.error(e.getLocalizedMessage());
+         if (LOG.isDebugEnabled())
+         {
+            LOG.debug(e.getLocalizedMessage());
+         }
       }
    }
 
@@ -110,11 +119,17 @@ public class IndexListener
       }
       catch (IndexModificationException e)
       {
-         LOG.error(e.getLocalizedMessage());
+         if (LOG.isDebugEnabled())
+         {
+            LOG.debug(e.getLocalizedMessage());
+         }
       }
       catch (IOException e)
       {
-         LOG.error(e.getLocalizedMessage());
+         if (LOG.isDebugEnabled())
+         {
+            LOG.debug(e.getLocalizedMessage());
+         }
       }
    }
 
@@ -126,8 +141,9 @@ public class IndexListener
    {
       /**
        * Convert {@link ObjectData} to {@link ContentEntry}.
-       *
-       * @param objectData ObjectData
+       * 
+       * @param objectData
+       *           ObjectData
        * @return contentEntry ContentEntry
        * @throws IOException
        */
@@ -154,7 +170,8 @@ public class IndexListener
       }
 
       /**
-       * @param objectData RelationshipData
+       * @param objectData
+       *           RelationshipData
        * @return ContentEntry ContentEntry;
        */
       private ContentEntry createFromRelationship(RelationshipData objectData)
@@ -167,7 +184,8 @@ public class IndexListener
       }
 
       /**
-       * @param objectData PolicyData
+       * @param objectData
+       *           PolicyData
        * @return contentEntry ContentEntry
        */
       private ContentEntry createFromPolicy(PolicyData objectData)
@@ -213,8 +231,9 @@ public class IndexListener
 
       /**
        * Convert {@link FolderData} to {@link ContentEntry}.
-       *
-       * @param objectData FolderData
+       * 
+       * @param objectData
+       *           FolderData
        * @return contentEntry ContentEntry
        */
       private ContentEntry createFromFolder(FolderData objectData)
@@ -226,8 +245,9 @@ public class IndexListener
 
       /**
        * Convert {@link DocumentData} to {@link ContentEntry}.
-       *
-       * @param objectData DocumentData
+       * 
+       * @param objectData
+       *           DocumentData
        * @return contentEntry ContentEntry.
        * @throws IOException
        */
