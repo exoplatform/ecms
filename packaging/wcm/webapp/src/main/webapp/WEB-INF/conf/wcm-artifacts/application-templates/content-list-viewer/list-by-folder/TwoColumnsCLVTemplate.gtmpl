@@ -13,8 +13,7 @@
 		import org.exoplatform.services.wcm.core.NodeLocation;
 %>
 
-<div class="TwoColumnsCLVTemplate" id="$uicomponent.id">
-
+<div id="$uicomponent.id" class="TwoColumnsCLVTemplate">
 	<div class="CLV">
 		<%
 			def header = uicomponent.getHeader();
@@ -81,6 +80,24 @@
           def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
 					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));          
 								%>
+								<div class="EdittingContent" style=" z-index: 1">
+									<div class="EdittingToolBar " >
+										<div class="EdittingToolBarL">
+											<div class="EdittingToolBarC clearfix">
+												<div style="float: right">
+													<a href="#" class="CloseContentIcon" >
+													  &nbsp;
+													</a>         
+												</div>
+												<div style="float: right">
+													<a href="#" class="EditContentIcon" >
+													  &nbsp;
+													</a>           
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="Column2" onmouseover="this.setAttribute('class', 'Column2 ContainerHoverClass')" onmouseout="this.setAttribute('class', 'Column2')">
 								<%
 									if(isShowImage) {
@@ -97,10 +114,12 @@
 												}
 											}
 											
-										  if(uicomponent.isShowEdit(viewNode)) {
+										  //if(uicomponent.isShowEdit(viewNode)) 
+										  {
 												%><span>[ </span><a class="CaptionEdit" href="$contentEditLink"><%= _ctx.appRes("UICLVPresentation.action.edit") %></a>
 												<%
-													if (Utils.isShowDelete(viewNode)) { %>
+													//if (Utils.isShowDelete(viewNode))
+													 { %>
 														| <a class="CaptionDelete" href="$contentDeleteLink"><%= _ctx.appRes("UICLVPresentation.action.delete") %></a>																	
 													<%
 													}

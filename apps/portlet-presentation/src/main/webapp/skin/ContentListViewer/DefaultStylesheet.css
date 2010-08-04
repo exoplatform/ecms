@@ -210,7 +210,6 @@
 
 .UICLVPortlet .UIFormGrid {
   margin: 0;
-  width: auto;
 }
 
 .UICLVPortlet .HorizontalLayout .UIFormInputSet {
@@ -271,4 +270,118 @@
   margin-top: 9px;
   line-height: 16px;
   font-size: 11px;
+}
+
+.TwoColumnsCLVTemplate .CLV {
+	border:1px solid transparent;
+	padding; 0px;
+	-moz-border-radius-topleft:0px;
+	-moz-border-radius-topright:0px;
+}
+
+.UIPresentationContainer{
+	border:1px solid transparent;
+}
+
+.UICLVFolderMode{
+	border:1px solid transparent;
+}
+
+.Column1{
+	border:1px solid transparent;
+}
+
+.UISingleContentViewerPortlet {
+	border:1px solid transparent;
+}
+
+.ContainerHoverClass {
+	border:1px solid #bfd5ed;
+}
+
+.EdittingToolBarContainer{
+	position:relative;
+	right:0;
+	top:0;
+	z-index:1;
+	width: 90px;
+	float: right;
+}
+
+.EdittingToolBarContainer .EdittingToolBar {
+	position:absolute;
+	right:0;
+	top:-20px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarL {
+	background: url('DefaultSkin/icons/EdittingToolBarL.gif') no-repeat left top;
+	padding-left: 4px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarR {
+	background: url('DefaultSkin/icons/EdittingToolBarR.gif') no-repeat right top;
+	padding-right: 4px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarC {
+	background: url('DefaultSkin/icons/EdittingToolBarC.gif') repeat-x;
+	line-height: 20px;
+	padding:2px 0 0;
+}
+
+.AddContentIcon {
+	background: url('DefaultSkin/icons/AddContentIcon.gif') no-repeat center center;
+	margin-left:6px;
+	padding:2px 7px;
+}
+
+.ManageContentIcon {
+	background: url('DefaultSkin/icons/ManageContentIcon.gif') no-repeat center center;
+	margin-left:6px;
+	padding:2px 7px;
+}
+
+.PreferencesIcon {
+	background: url('DefaultSkin/icons/PreferencesIcon.gif') no-repeat center center;
+	margin-left:6px;
+	padding:2px 7px;
+}
+
+.EdittingContent{
+	position:relative;
+	right:0;
+	top:0;
+	z-index:1;
+	float: right;
+	width: 55px;
+}
+
+.EdittingContent .EdittingToolBar {
+	position:absolute;
+	right:0;
+}
+
+
+.EdittingContent .EdittingToolBar .EdittingToolBarL {
+	background: url('DefaultSkin/icons/EdittingContentL.png') no-repeat left top;
+	padding-left: 3px;
+}
+
+.EdittingContent .EdittingToolBar .EdittingToolBarC {
+	background: url('DefaultSkin/icons/EdittingContentC.png') repeat-x;
+	line-height: 20px;
+	padding:2px 0 0;
+}
+
+.EditContentIcon {
+	background: url('DefaultSkin/icons/EditContentIcon.png') no-repeat center center;
+	margin-left:6px;
+	padding:2px 7px;
+}
+
+.CloseContentIcon {
+	background: url('DefaultSkin/icons/CloseContentIcon.png') no-repeat center center;
+	margin-left:6px;
+	padding:2px 7px;
 }

@@ -14,8 +14,7 @@
 		import org.exoplatform.services.wcm.core.NodeLocation;
 %>
 
-<div class="OneColumnCLVTemplate" id="$uicomponent.id"> 
-
+<div id="$uicomponent.id" class="OneColumnCLVTemplate">
 	<div class="CLV">
 		<%
 			def header = uicomponent.getHeader();
@@ -79,6 +78,25 @@
 								def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
 								def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
 						    %>
+						   <div class="EdittingContent" style=" z-index: 1">
+								<div class="EdittingToolBar " >
+									<div class="EdittingToolBarL">
+										<div class="EdittingToolBarC clearfix">
+											<div style="float: right;">
+												<a href="#" class="CloseContentIcon" >
+												  &nbsp;
+												</a>         
+											</div>
+											<div href="#" style="float: right">
+												<a class="EditContentIcon" >
+												  &nbsp;
+												</a>           
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
 								<div class="Column1" onmouseover="this.setAttribute('class', 'Column1 ContainerHoverClass')" onmouseout="this.setAttribute('class', 'Column1')">
 										<%
 											if (isShowImage) {

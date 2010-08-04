@@ -3,10 +3,26 @@
 	import org.exoplatform.wcm.webui.Utils;
 	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 %>
+<div class="EdittingContent" style=" z-index: 1">
+	<div class="EdittingToolBar " >
+		<div class="EdittingToolBarL">
+			<div class="EdittingToolBarC clearfix">
+				<div style="float: right">
+					<a href="#" class="CloseContentIcon" >
+					  &nbsp;
+					</a>         
+				</div>
+				<div style="float: right">
+					<a href="#" class="EditContentIcon" >
+					  &nbsp;
+					</a>           
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="$uicomponent.id" id="$uicomponent.id" 
-	onmouseover="this.setAttribute('class', '$uicomponent.id ContainerHoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
-
-	<%
+	onmouseover="this.setAttribute('class', '$uicomponent.id ContainerHoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">	<%
 		def rcontext = _ctx.getRequestContext() ;
     String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
@@ -42,7 +58,6 @@
 			if (!Utils.isPortalEditMode() && isShowOptionBar) { 
 				%>
 					<div class="UIOptionBar">
-					  <div class="BackButton" title="<%= _ctx.appRes("UIPCVContainer.title.Back") %>" onclick="history.go(-1)"><span></span></div>
 						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl() %>')" title="<%= _ctx.appRes("UIPresentationContainer.title.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
 					</div>
 				<% 
