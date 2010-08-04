@@ -16,43 +16,44 @@
     
     %>
 	 <div class="EdittingToolBarContainer" style=" z-index: 1">
-	 <div class="EdittingToolBar " >
-		<div class="EdittingToolBarL">
-			<div class="EdittingToolBarR">
-				<div class="EdittingToolBarC clearfix">
-	 <% 
-    if (uicomponent.isShowAddContent()) {          
-      %>
-        <div style="float: right" id="<%=addContentBlockId%>">
-            <a class="AddContentIcon" href="<%=addContentLink%>" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
-              &nbsp;
-            </a>           
-        </div>
-      <% 
-    } 
-    
-    if (uicomponent.isShowManageContent()) {
-      %>
-        <div style="float: right"  id="<%=manageContentBlockId%>">
-            <a class="ManageContentIcon" href="<%=manageContentsLink%>" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
-              &nbsp;
-            </a>           
-        </div>
-          
-      <% }		
-		if (uicomponent.isShowPreferences()) {					
-	%>
-			<div style="float: right" id="<%=quickEditingBlockId%>">
-					<a class="PreferencesIcon" href="<%=uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>">
-<!--					  <div class="QuickEdit"><span></span></div>-->
-            &nbsp;
-					</a>					 
-			</div>
-	<% } %>		
+		 <div class="EdittingToolBar " >
+			<div class="EdittingToolBarL">
+				<div class="EdittingToolBarR">
+					<div class="EdittingToolBarC clearfix">
+				
+					<%		
+						if (uicomponent.isShowPreferences()) {					
+					%>
+							<div style="float: right" id="<%=quickEditingBlockId%>">
+									<a class="PreferencesIcon" href="<%=uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>">
+			<!--					  <div class="QuickEdit"><span></span></div>-->
+							&nbsp;
+									</a>					 
+							</div>
+					<% } 	
+					
+					if (uicomponent.isShowManageContent()) {
+					  %>
+						<div style="float: right"  id="<%=manageContentBlockId%>">
+							<a class="ManageContentIcon" href="<%=manageContentsLink%>" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
+							  &nbsp;
+							</a>           
+						</div>
+						  
+					 <% 
+					}
+					if (uicomponent.isShowAddContent()) {          
+					  %>
+						<div style="float: right" id="<%=addContentBlockId%>">
+							<a class="AddContentIcon" href="<%=addContentLink%>" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
+							  &nbsp;
+							</a>           
+						</div>
+					  <% }%>		
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 	<% 			

@@ -306,6 +306,11 @@
 	z-index:1;
 	width: 90px;
 	float: right;
+	display: none;
+}
+
+.UIPresentationContainer .EdittingToolBarContainer{
+	width: 60px;
 }
 
 .EdittingToolBarContainer .EdittingToolBar {
@@ -355,6 +360,7 @@
 	z-index:1;
 	float: right;
 	width: 55px;
+	display: none;
 }
 
 .EdittingContent .EdittingToolBar {
@@ -384,4 +390,12 @@
 	background: url('DefaultSkin/icons/CloseContentIcon.png') no-repeat center center;
 	margin-left:6px;
 	padding:2px 7px;
+}
+
+.ContainerHoverClass .EdittingContent{
+	display: block;
+}
+
+.ContainerHoverClass .EdittingToolBarContainer{
+	display: block;
 }
