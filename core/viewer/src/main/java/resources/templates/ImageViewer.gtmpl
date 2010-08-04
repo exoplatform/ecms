@@ -63,8 +63,6 @@
 	  dcTitle=sB.toString();
   }
   
-  def rqcontext = _ctx.getRequestContext() ;
-  rqcontext.getJavascriptManager().addOnLoadJavascript('initLightbox');
 %>
 
-  <a href="$binarySrc" rel="lightbox" title="$dcTitle" target="_new"><image src="$binarySrc" width="610"/></a>              
+  <a href="$binarySrc" title="$dcTitle" target="_new"><image src="$binarySrc" width="610"/></a>              

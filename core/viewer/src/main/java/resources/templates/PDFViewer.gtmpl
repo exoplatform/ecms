@@ -42,7 +42,6 @@
   def currentScale = uicomponent.getCurrentScale();
   def metadatas = uicomponent.getMetadataExtraction();
   def rqcontext = _ctx.getRequestContext() ;
-  rqcontext.getJavascriptManager().addOnLoadJavascript('initLightbox');
   rqcontext.getJavascriptManager().addJavascript('eXo.ecm.ECMUtils.onKeyPDFViewerPress();') ;
 %>
 <head>
@@ -239,7 +238,7 @@
 		<%
 			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";
 		%>
-			  <a href="$pdfPageImage" rel="lightbox" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><image src="$pdfPageImage"></a>
+			  <a href="$pdfPageImage" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><image src="$pdfPageImage"></a>
 		</div>
 	</div>
   </div>
