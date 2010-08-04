@@ -28,7 +28,6 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-authoring-services", "jar",  module.version)).    
     addDependency(ws.frameworks.json).
     addDependency(jcr.frameworks.command).
-    addDependency(jcr.frameworks.web).
     addDependency(portal.webui.portal);
   module.portlet.webpresentation.deployName = "presentation";
     
@@ -53,7 +52,13 @@ function getModule(params) {
     
   module.web.eXoStaticResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-static", "war", module.version);
   module.web.eXoStaticResources.deployName = "eXoStaticResources";
-    
+
+  module.authoring = {};
+  module.authoring.war = new Project("org.exoplatform.ecms", "exo-ecms-ext-authoring-apps", "war", module.version).
+  addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-authoring-webui", "jar", module.version));
+  module.authoring.war.deployName = "authoring-apps";	      
+  
+  
   module.extension = {};
   
   module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).

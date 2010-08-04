@@ -94,6 +94,9 @@
                   <string>workflow</string>
                 </value>
 				        <value>
+									<string>authoring-apps</string>
+								</value>
+				        <value>
 									<string>ecmdemo</string>
 								</value>
 							</collection>

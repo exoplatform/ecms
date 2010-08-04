@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 
@@ -33,21 +34,31 @@ import org.picocontainer.Startable;
  */
 public class PublicationManagerImpl implements PublicationManager, Startable {
 
-  private StatesLifecyclePlugin statesLifecyclePlugin;
+  private Map<String,Lifecycle> 	lifecycles = new HashMap<String, Lifecycle>();
 
-  private ContextPlugin         contextPlugin;
+  private Map<String,Context>         contexts = new HashMap<String, Context>();
 
   private static final Log log         = ExoLogger.getLogger(PublicationManagerImpl.class);
 
   public void addLifecycle(ComponentPlugin plugin) {
     if (plugin instanceof StatesLifecyclePlugin) {
-      statesLifecyclePlugin = (StatesLifecyclePlugin) plugin;
+	  if (((StatesLifecyclePlugin) plugin).getLifecyclesConfig() != null) {
+	    for (Lifecycle l:((StatesLifecyclePlugin) plugin).getLifecyclesConfig().getLifecycles()) {
+	    	log.info("Adding Lifecyle : "+l.getName());
+		  lifecycles.put(l.getName(), l);
+	    }
+	  }
     }
   }
 
   public void addContext(ComponentPlugin plugin) {
     if (plugin instanceof ContextPlugin) {
-      contextPlugin = (ContextPlugin) plugin;
+  	  if (((ContextPlugin) plugin).getContextConfig() != null) {
+  	    for (Context c:((ContextPlugin) plugin).getContextConfig().getContexts()) {
+  	    	log.info("Adding Context : "+c.getName());
+  		  contexts.put(c.getName(), c);
+  	    }
+  	  }
     }
   }
 
@@ -62,70 +73,52 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
   }
 
   public Context getContext(String name) {
-    if (name != null && contextPlugin != null && contextPlugin.getContextConfig() != null) {
-      for (Context context : contextPlugin.getContextConfig().getContexts()) {
-        if (name.equals(context.getName())) {
-          return context;
-        }
-      }
-    }
+	if (contexts.containsKey(name))
+		return contexts.get(name);
+	
     return null;
   }
 
   public List<Context> getContexts() {
-    if (contextPlugin != null && contextPlugin.getContextConfig() != null)
-      return contextPlugin.getContextConfig().getContexts();
-    return null;
+	  return new ArrayList<Context>(contexts.values());		  
   }
 
   public Lifecycle getLifecycle(String name) {
-    if (name != null && statesLifecyclePlugin != null
-        && statesLifecyclePlugin.getLifecyclesConfig() != null) {
-      for (Lifecycle lifecycle : statesLifecyclePlugin.getLifecyclesConfig().getLifecycles()) {
-        if (name.equals(lifecycle.getName())) {
-          return lifecycle;
-        }
-      }
-    }
-
+    if (lifecycles.containsKey(name))
+    	return lifecycles.get(name);
     return null;
   }
 
   public List<Lifecycle> getLifecycles() {
-    if (statesLifecyclePlugin != null && statesLifecyclePlugin.getLifecyclesConfig() != null)
-      return statesLifecyclePlugin.getLifecyclesConfig().getLifecycles();
-    return null;
+	  return new ArrayList<Lifecycle>(lifecycles.values());		  
   }
 
   public List<Lifecycle> getLifecyclesFromUser(String remoteUser, String state) {
     List<Lifecycle> lifecycles = null;
 
-    if (statesLifecyclePlugin != null && statesLifecyclePlugin.getLifecyclesConfig() != null) {
-      for (Lifecycle lifecycle : statesLifecyclePlugin.getLifecyclesConfig().getLifecycles()) {
-        if (lifecycles == null)
-          lifecycles = new ArrayList<Lifecycle>();
-        ExoContainer container = ExoContainerContext.getCurrentContainer();
-        IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
-        Identity identity = identityRegistry.getIdentity(remoteUser);
-        for (State state_ : lifecycle.getStates()) {
-          if (state.equals(state_.getState())) {
-            List<String> memberships = new ArrayList<String>();
-            if (state_.getMembership() != null && !"automatic".equals(state_.getMembership())) {
-              memberships.add(state_.getMembership());
-            }
-            if (state_.getMemberships() != null)
-              memberships.addAll(state_.getMemberships());
-            for (String membership : memberships) {
-              String[] membershipTab = membership.split(":");
-              if (identity.isMemberOf(membershipTab[1], membershipTab[0])) {
-                lifecycles.add(lifecycle);
-                break;
-              }
-            }
-          }
-        }
-
-      }
+	  for (Lifecycle lifecycle : getLifecycles()) {
+	    if (lifecycles == null)
+	      lifecycles = new ArrayList<Lifecycle>();
+	    ExoContainer container = ExoContainerContext.getCurrentContainer();
+	    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+	    Identity identity = identityRegistry.getIdentity(remoteUser);
+	    for (State state_ : lifecycle.getStates()) {
+	      if (state.equals(state_.getState())) {
+	        List<String> memberships = new ArrayList<String>();
+	        if (state_.getMembership() != null && !"automatic".equals(state_.getMembership())) {
+	          memberships.add(state_.getMembership());
+	        }
+	        if (state_.getMemberships() != null)
+	          memberships.addAll(state_.getMemberships());
+	        for (String membership : memberships) {
+	          String[] membershipTab = membership.split(":");
+	          if (identity.isMemberOf(membershipTab[1], membershipTab[0])) {
+	            lifecycles.add(lifecycle);
+	            break;
+	          }
+	        }
+	      }
+	    }
 
     }
     return lifecycles;

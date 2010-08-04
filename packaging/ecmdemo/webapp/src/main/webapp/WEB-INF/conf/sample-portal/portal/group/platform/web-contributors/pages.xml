@@ -70,6 +70,17 @@
       <show-application-state>false</show-application-state>
       <show-application-mode>false</show-application-mode>
     </portlet-application>
+    <portlet-application>
+      <portlet>
+        <application-ref>authoring-apps</application-ref>
+        <portlet-ref>AuthoringDashboard</portlet-ref>
+      </portlet>
+      <title>Authoring Dashboard</title>
+      <access-permissions>*:/platform/web-contributors</access-permissions>
+      <show-info-bar>false</show-info-bar>
+      <show-application-state>false</show-application-state>
+      <show-application-mode>false</show-application-mode>
+    </portlet-application>
   </page>
 
   <page>

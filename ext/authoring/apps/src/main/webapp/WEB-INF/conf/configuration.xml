@@ -25,8 +25,8 @@
 	xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
 	xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
   
-  <import profiles="authoring">war:/conf/authoring/authoring-configuration.xml</import>
-  <import profiles="authoring">war:/conf/authoring/explorer-views-configuration.xml</import>
-  <import profiles="authoring">war:/conf/authoring/drives-configuration.xml</import>
+  <import>war:/conf/authoring/authoring-configuration.xml</import>
+  <import>war:/conf/authoring/explorer-views-configuration.xml</import>
+  <import>war:/conf/authoring/drives-configuration.xml</import>
   
 </configuration>

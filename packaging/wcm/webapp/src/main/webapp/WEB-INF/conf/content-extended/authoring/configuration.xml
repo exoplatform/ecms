@@ -4,24 +4,25 @@
 	xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
 	xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
 
-	<component>
-	  <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
-	  <type>org.exoplatform.services.wcm.extensions.publication.WCMPublicationServiceImpl</type>
-    <component-plugins>
-		  <component-plugin>
-		    <name>States and versions based publication</name>
-		    <set-method>addPublicationPlugin</set-method>
-		    <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin</type>
-		    <description>This publication lifecycle publish a web content or DMS document to a portal page with more state and version.</description>	    	    	   
-		  </component-plugin>
-		  <component-plugin>
-		    <name>Authoring publication</name>
-		    <set-method>addPublicationPlugin</set-method>
-		    <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin</type>
-		    <description>This publication lifecycle publish a web content or DMS document to a portal page with more states and version.</description>	    	    	   
-		  </component-plugin>
-	  </component-plugins>
-   </component>
+<component>
+  <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
+  <type>org.exoplatform.services.wcm.extensions.publication.WCMPublicationServiceImpl</type>
+  <component-plugins>
+	  <component-plugin>
+	    <name>States and versions based publication</name>
+	    <set-method>addPublicationPlugin</set-method>
+	    <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin</type>
+	    <description>This publication lifecycle publish a web content or DMS document to a portal page with more state and version.</description>	    	    	   
+	  </component-plugin>
+	  <component-plugin>
+	    <name>Authoring publication</name>
+	    <set-method>addPublicationPlugin</set-method>
+	    <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin</type>
+	    <description>This publication lifecycle publish a web content or DMS document to a portal page with more states and version.</description>	    	    	   
+	  </component-plugin>
+  </component-plugins>
+ </component>
+   
 <component>
 	  <key>org.exoplatform.services.wcm.extensions.publication.PublicationManager</key>
 	  <type>org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl</type>
@@ -80,46 +81,6 @@
                 </object>
               </value>
 
-              <value>
-                <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
-                  <field name="name"><string>lifecycle2</string></field>
-                  <field name="publicationPlugin"><string>Authoring publication</string></field>
-                  <field  name="states">
-                    <collection type="java.util.ArrayList">
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>draft</string></field>
-                          <field name="membership"><string>author:/platform/web-contributors</string></field>
-                        </object>
-                      </value>
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>pending</string></field>
-                          <field name="membership"><string>author:/platform/web-contributors</string></field>
-                        </object>
-                      </value>
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>approved</string></field>
-                          <field name="membership"><string>manager:/platform/web-contributors</string></field>
-                        </object>
-                      </value>
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>staged</string></field>
-                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
-                        </object>
-                      </value>
-                      <value>
-                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>published</string></field>
-                          <field name="membership"><string>automatic</string></field>
-                        </object>
-                      </value>
-                    </collection>
-                  </field>
-                </object>
-              </value>
             </collection>
           </field>
         </object>
@@ -143,58 +104,6 @@
                   <field name="lifecycle"><string>lifecycle1</string></field>
                 </object>
               </value>
-              <value>
-                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
-                  <field name="name"><string>context2</string></field>
-                  <field name="priority"><string>100</string></field>
-                  <field name="lifecycle"><string>lifecycle2</string></field>
-                  <field name="site"><string>acme</string></field>
-                </object>
-              </value>
-              <!-- 
-              <value>
-                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
-                  <field name="name"><string>context1</string></field>
-                  <field name="priority"><string>100</string></field>
-                  <field name="lifecycle"><string>lifecycle1</string></field>
-                  <field name="membership"><string>*:/platform/web-contributors</string></field>
-                  <field name="memberships">                  
-                          <collection type="java.util.ArrayList">
-                            <value><string>author:/platform/web-contributors</string></value>
-                          </collection>
-                  </field>
-                  <field name="site"><string>acme</string></field>
-                  <field name="path"><string>repository:collaboration:/sites content/live/acme/</string></field>
-                </object>
-              </value>
-              <value>
-                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
-                  <field name="name"><string>context2</string></field>
-                  <field name="priority"><string>100</string></field>
-                  <field name="lifecycle"><string>lifecycle2</string></field>
-                  <field name="site"><string>classic</string></field>
-                </object>
-              </value>
-              <value>
-                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
-                  <field name="name"><string>context3</string></field>
-                  <field name="priority"><string>80</string></field>
-                  <field name="lifecycle"><string>lifecycle2</string></field>
-                  <field name="membership"><string>*:/platform/web-contributors</string></field>
-                  <field name="site"><string>acme</string></field>
-                </object>
-               </value>
-               <value>
-                <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
-                  <field name="name"><string>context4</string></field>
-                  <field name="priority"><string>50</string></field>
-                  <field name="lifecycle"><string>lifecycle2</string></field>
-                  <field name="membership"><string>*:/platform/web-contributors</string></field>
-                  <field name="path"><string>repository:collaboration:/documents/company/finances</string></field>
-                  <field name="nodetype"><string>exo:article</string></field>
-                </object>
-              </value>
-               -->
             </collection>
           </field>
         </object>

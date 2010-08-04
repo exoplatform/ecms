@@ -44,6 +44,7 @@ function getProduct(version) {
   product.addDependencies(dms.portlet.ecmbrowsecontent);
   product.addDependencies(dms.web.eXoDMSResources) ;
   
+  product.addDependencies(wcm.authoring.war);
   product.addDependencies(wcm.extension.war);
   product.addDependencies(wcm.portlet.webpresentation);
   product.addDependencies(wcm.portlet.websearches); 
