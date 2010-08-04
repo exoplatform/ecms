@@ -58,7 +58,8 @@
 	  <contextualDisable>Disable</contextualDisable>
 	  <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
 	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>	  
+      <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Content not found!</content-not-found>	  
     </label>
     <help>
     	<ModeSelectionHelp>Determine what kind of information will be display inside portlet</ModeSelectionHelp>

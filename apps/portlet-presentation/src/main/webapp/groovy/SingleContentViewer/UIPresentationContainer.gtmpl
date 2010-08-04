@@ -4,50 +4,53 @@
 	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 %>
 
-<div class="$uicomponent.id" id="$uicomponent.id" 
-	onmouseover="this.setAttribute('class', '$uicomponent.id ContainerHoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">	
-	 <div class="EdittingToolBarContainer" style=" z-index: 1">
-		 <div class="EdittingToolBar " >
-			<div class="EdittingToolBarL">
-				<div class="EdittingToolBarR">
-					<div class="EdittingToolBarC clearfix">
-						<div style="float: right">
-							<a href="#" class="PreferencesIcon" >
-							  &nbsp;
-							</a>         
-						</div>
-						<div style="float: right">
-							<a href="#" class="EditContentIcon" >
-							  &nbsp;
-							</a>           
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<%
 		def rcontext = _ctx.getRequestContext() ;
     String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
+		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
 
 		def node = uicomponent.getNodeView();
 		if (node != null) {
 			def isShowOptionBar = uicomponent.isShowOptionBar(); 
 			def isShowTitle = uicomponent.isShowTitle();
 			def isShowDate  = uicomponent.isShowDate();
-			
-			if(Utils.isShowQuickEdit(node) && (!Utils.isPortalEditMode()) && rcontext.getRemoteUser()) {
-				%>
-					<div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>"> 
-						<div style="position: absolute; width: 90px; right: 0px; top: 0px">
-						<a href="<%= uicomponent.getQuickEditLink() %>"><%= _ctx.appRes("UISCVPreferences.label.Edit")%></a>
-						<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Title")%>"><%= _ctx.appRes("UISCVPreferences.label.Preferences")%></a>
+			%>
+			<div class="$uicomponent.id" id="$uicomponent.id" 
+				onmouseover="this.setAttribute('class', '$uicomponent.id $hoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
+			<%     if (Utils.isShowQuickEdit()) {	%>	
+				 <div class="EdittingToolBarContainer" style=" z-index: 1">
+					 <div class="EdittingToolBar " >
+						<div class="EdittingToolBarL">
+							<div class="EdittingToolBarR">
+								<div class="EdittingToolBarC clearfix">
+
+								<%
+								
+								if(Utils.isShowQuickEdit(node) && (!Utils.isPortalEditMode()) && rcontext.getRemoteUser()) {
+									%>
+									<div style="float: right">
+										<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.Title")%>" class="PreferencesIcon" >
+										  &nbsp;
+										</a>         
+									</div>
+									<div style="float: right">
+										<a href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Edit")%>">
+										  &nbsp;
+										</a>           
+									</div>
+									<%			
+								}
+									%>
+								</div>
+							</div>
 						</div>
 					</div>
-				<%			
-			}
-		
+				</div>
+				<%}%>
+			
+			<%
+			
 			if (isShowTitle||isShowDate) {
 				%>
 					  <% if (isShowTitle) { %>

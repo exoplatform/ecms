@@ -13,6 +13,7 @@
 		def rssLink = uicomponent.getRssLink();
 		def isShowRssLink = uicomponent.isShowRssLink();
 		def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
+		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";		
 		%>
 		<div class="TopBoxHeader">
 			<%
@@ -56,10 +57,38 @@
 						itemName = itemTitle;
 					}						
 					String contentkEdittingLink = uicomponent.event("EditContent", NodeLocation.getExpressionByNode(viewNode));
-					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));					
-					%>	
+					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
+			    if (Utils.isShowQuickEdit()) {
+					%>
+					<div class="EdittingContent" style=" z-index: 1">
+					<div class="EdittingToolBar " >
+						<div class="EdittingToolBarL">
+							<div class="EdittingToolBarC clearfix">
+							 <% 										  
+							 if (Utils.isShowDelete(viewNode)) {
+							 %>
+								<div style="float: right">
+									<a href="$contentDeleteLink" title="<%= _ctx.appRes("UICLVPresentation.action.delete") %>"class="CloseContentIcon" >
+									  &nbsp;
+									</a>         
+								</div>
+							 <% } 
+							 
+							 if(uicomponent.isShowEdit(viewNode)){
+							 %>
+								<div style="float: right">
+									<a href="$contentEditLink" title="<%= _ctx.appRes("UICLVPresentation.action.edit") %>" class="EditContentIcon" >
+									  &nbsp;
+									</a>           
+								</div>
+								<% } %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%}%>
 						<div class="CaptionItem" style="border-bottom: 0px;"
-							onmouseover="this.setAttribute('class', 'CaptionItem ContainerHoverClass')" onmouseout="this.setAttribute('class', 'CaptionItem')">
+							onmouseover="this.setAttribute('class', 'CaptionItem $hoverClass')" onmouseout="this.setAttribute('class', 'CaptionItem')">
 							<% 
                                 if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION)) {
                                     %><img src="$imgSrc" width="30" style="float:left; padding-right:5px;" /><%
@@ -73,18 +102,6 @@
 												} else { 
 													%>$itemName<% 
 												} 
-												
-												if(uicomponent.isShowEdit(viewNode)) {
-													%><span>[ </span><a class="CaptionEdit" href="$contentkEdittingLink"><%=editActionLabel%></a>
-													<%
-														if (Utils.isShowDelete(viewNode)) { %>
-															| <a class="CaptionDelete" href="$contentDeleteLink"><%= _ctx.appRes("UICLVPresentation.action.delete") %></a>																	
-														<%
-														}
-													%>
-													<span> ]</span><%
-												}
-												
 											%> 
 										</div>
 									<%							
@@ -100,13 +117,13 @@
 									} 
 								%>															
 							</div>			
-                            <%
-                            if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_READMORE)) {
-                            %>
-                            <div class="CaptionViewMore"><a href="$itemLink"><%=labelReadMore%>&raquo;</a></div>
-                            <%
-                            }
-                            %>
+	            <%
+	            if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_READMORE)) {
+	            %>
+	            <div class="CaptionViewMore"><a href="$itemLink"><%=labelReadMore%>&raquo;</a></div>
+	            <%
+	            }
+	            %>
 						</div>
 					<%							
 				} //end for

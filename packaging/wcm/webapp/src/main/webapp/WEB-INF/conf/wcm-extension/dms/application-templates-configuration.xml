@@ -152,6 +152,42 @@
           </object>
         </object-param>
         <object-param>
+          <name>default.folder.list.viewer</name>
+          <description>Default folder list viewer groovy template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>ContentListViewerDefault.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list-by-folder</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Big hot news template</name>
+          <description>Big hot news template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>BigHotNewsTemplateCLV.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list-by-folder</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Events template</name>
+          <description>Events template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>EventsTemplateCLV.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list-by-folder</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
           <name>default.paginator</name>
           <description>Default paginator groovy template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">

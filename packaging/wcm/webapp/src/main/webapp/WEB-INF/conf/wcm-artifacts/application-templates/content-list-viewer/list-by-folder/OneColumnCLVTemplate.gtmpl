@@ -8,6 +8,7 @@
 
 	 	import javax.jcr.Node;
 
+
 		import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 		import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 		import org.exoplatform.wcm.webui.Utils;
@@ -21,6 +22,7 @@
 			def rssLink = uicomponent.getRssLink();
 			def isShowRssLink = uicomponent.isShowRssLink();
 			def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
+			def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";		
 			%>
 			<div class="TopBoxHeader">
 				<%
@@ -77,27 +79,36 @@
 								
 								def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
 								def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
-						    %>
-						   <div class="EdittingContent" style=" z-index: 1">
+						    if (Utils.isShowQuickEdit()) {
+								%>
+								<div class="EdittingContent" style=" z-index: 1">
 								<div class="EdittingToolBar " >
 									<div class="EdittingToolBarL">
 										<div class="EdittingToolBarC clearfix">
-											<div style="float: right;">
-												<a href="#" class="CloseContentIcon" >
+										 <% 										  
+										if (Utils.isShowDelete(viewNode)) {
+										 %>
+											<div style="float: right">
+												<a href="$contentDeleteLink" title="<%= _ctx.appRes("UICLVPresentation.action.delete") %>"class="CloseContentIcon" >
 												  &nbsp;
 												</a>         
 											</div>
-											<div href="#" style="float: right">
-												<a class="EditContentIcon" >
+										 <% } 
+										 
+										 if(uicomponent.isShowEdit(viewNode)){
+										 %>
+											<div style="float: right">
+												<a href="$contentEditLink" title="<%= _ctx.appRes("UICLVPresentation.action.edit") %>" class="EditContentIcon" >
 												  &nbsp;
 												</a>           
 											</div>
+											<% } %>
 										</div>
 									</div>
 								</div>
 							</div>
-
-								<div class="Column1" onmouseover="this.setAttribute('class', 'Column1 ContainerHoverClass')" onmouseout="this.setAttribute('class', 'Column1')">
+							<%}%>
+								<div class="Column1" onmouseover="this.setAttribute('class', 'Column1 $hoverClass')" onmouseout="this.setAttribute('class', 'Column1')">
 										<%
 											if (isShowImage) {
                         %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
@@ -113,16 +124,6 @@
 														}
 													}
 																										
-													if(uicomponent.isShowEdit(viewNode)) {
-														%><span>[ </span><a class="CaptionEdit" href="$contentEditLink"><%= _ctx.appRes("UICLVPresentation.action.edit") %></a>
-																<%
-																	if (Utils.isShowDelete(viewNode)) { %>
-																		| <a class="CaptionDelete" href="$contentDeleteLink"><%= _ctx.appRes("UICLVPresentation.action.delete") %></a>																	
-																	<%
-																	}
-																%>
-															<span> ]</span><%
-													}
 													if (isShowDate) {
 													  %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%
 													}

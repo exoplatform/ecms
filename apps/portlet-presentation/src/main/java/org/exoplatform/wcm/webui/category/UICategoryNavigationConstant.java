@@ -68,4 +68,20 @@ public class UICategoryNavigationConstant {
   
   /** The Constant TARGET_PATH_SELECTOR_POPUP_WINDOW. */
   public static final String TARGET_PATH_SELECTOR_POPUP_WINDOW= "UICategoryNavigationTargetPathPopupWindow";
+  
+  public static final String PREFERENCE_TREE_PATH							= "treePath";
+  public static final String PREFERENCE_HEADER								= "header";
+  public static final String PREFERENCE_AUTOMATIC							= "automatic";
+  public static final String PREFERENCE_WITH_CLV							= "with";
+  
+  public static final String TREE_PATH_FORM_INPUT_SET					= "UICategoryNavigationTreePathFormInputSet";
+  public static final String TREE_PATH_FORM_STRING_INPUT			= "UICategoryNavigationTreePathFormStringInput";
+  public static final String HEADER_FORM_STRING_INPUT					= "UICategoryNavigationHeaderFormStringInput";
+  public static final String AUTOMATIC_DETECTION_CHECKBOX_INPUT = "UICategoryNavigationAutomaticDetectionCheckBoxInput";
+  public static final String DYNAMIC_NAVIGATION_LABEL					= "UICategoryNavigationDynamicNavigationLabel";
+  public static final String WITH_CLV_FORM_STRING_INPUT				= "UICategoryNavigationWithClvFormStringInput";
+  
+  public static final String DEFAULT_WITH_CLV_VALUE						= "folder-id";
+  
+  public static final String TREE_PATH_SELECTOR_POPUP_WINDOW	= "UICategoryNavigationTreepathPopupWindow";
 }

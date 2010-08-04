@@ -1,9 +1,14 @@
-<div class="$uicomponent.id " id="$uicomponent.id" 
-	onmouseover="this.setAttribute('class', '$uicomponent.id ContainerHoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
 	<%
 		import org.exoplatform.wcm.webui.clv.UICLVPresentation;
+
 	  import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
 		import org.exoplatform.wcm.webui.Utils;
+		
+		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : ""; 
+%>
+<div class="$uicomponent.id " id="$uicomponent.id" 
+	onmouseover="this.setAttribute('class', '$uicomponent.id $hoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
+	<%
 	
 		def rcontext = _ctx.getRequestContext() ;
 		String portletId = Utils.getRealPortletId(rcontext);
@@ -14,6 +19,7 @@
     def addContentLink = uicomponent.getEditLink(false, true);
     def manageContentsLink = uicomponent.getEditLink(false, false);
     
+    if (Utils.isShowQuickEdit()) {
     %>
 	 <div class="EdittingToolBarContainer" style=" z-index: 1">
 		 <div class="EdittingToolBar " >
@@ -57,6 +63,7 @@
 	</div>
 
 	<% 			
+    }
 		uicomponent.renderChild(UICLVPresentation.class);
 	%>
 </div>

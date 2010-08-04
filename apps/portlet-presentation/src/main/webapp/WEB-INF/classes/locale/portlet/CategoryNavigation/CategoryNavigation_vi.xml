@@ -23,7 +23,6 @@
       <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
       <UICategoryNavigationTreeNameSelectBox>Cây phân loại</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Tiêu đề</UICategoryNavigationTreeTitleFormStringInput>
-      <UICategoryNavigationTargetPathFormInputSet>Trang đích</UICategoryNavigationTargetPathFormInputSet>
       <UICategoryNavigationTreeNameFormSelectBox>Cây phân loại</UICategoryNavigationTreeNameFormSelectBox>
       <UICategoryNavigationTemplateFormSelectBox>Mẫu hiển thị cây phân loại</UICategoryNavigationTemplateFormSelectBox>
     </label>
@@ -40,5 +39,20 @@
     <msg>
       <not-existed-category>Cây phân loại này không tồn tại</not-existed-category>
     </msg>
-  </UICategoryNavigationTreeBase>   
+  </UICategoryNavigationTreeBase>
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>Display settings</DisplaySettingBlock>
+      <AdvancedBlock>Advance</AdvancedBlock>
+	  <UICategoryNavigationTreePathFormInputSet>Tree Path</UICategoryNavigationTreePathFormInputSet>
+	  <UICategoryNavigationTreePathFormStringInput>Tree Path</UICategoryNavigationTreePathFormStringInput>
+	  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+	  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
+	  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+	  <UICategoryNavigationTreepathPopupWindow>Tree Path</UICategoryNavigationTreepathPopupWindow>    
+    </label>
+  </UICategoryNavigationConfig>     
 </bundle>
