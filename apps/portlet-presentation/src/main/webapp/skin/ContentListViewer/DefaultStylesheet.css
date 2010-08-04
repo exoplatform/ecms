@@ -279,9 +279,11 @@
 	-moz-border-radius-topright:0px;
 }
 
+/*
 .UIPresentationContainer{
 	border:1px solid transparent;
 }
+*/
 
 .UICLVFolderMode{
 	border:1px solid transparent;
@@ -295,9 +297,11 @@
 	border:1px solid transparent;
 }
 
+/*
 .UISingleContentViewerPortlet {
 	border:1px solid transparent;
 }
+*/
 
 .ContainerHoverClass {
 	border:1px solid #bfd5ed;

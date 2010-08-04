@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -125,19 +126,25 @@ public class UICLVPresentation extends UIContainer {
   
   
   public List<CategoryBean> getCategories() throws Exception {
-	String orderType, orderBy;
+	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+	return getCategories(fullPath, 0);
+
+  }
+  
+  public List<CategoryBean> getCategories(String fullPath, int depth) throws Exception {
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
-    orderType = "ASC";
-    orderBy = "jcr:path";
+    
+    String orderType = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE);
+    String orderBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY);
+//    orderType = "ASC";
+//    orderBy = "jcr:path";
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
-    filters.put(WCMComposer.FILTER_RECURSIVE, "true");
+//    filters.put(WCMComposer.FILTER_RECURSIVE, "true");
     filters.put(WCMComposer.FILTER_PRIMARY_TYPE, "exo:taxonomy");
-
-	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
 
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
 	String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
@@ -146,18 +153,17 @@ public class UICLVPresentation extends UIContainer {
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(fullPath);
     
     List<Node> nodes = wcmComposer.getContents(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getUserSessionProvider());
-    List<CategoryBean> categories = new ArrayList<CategoryBean>();
-    int defaultDepth = -1;
+    List<CategoryBean> categories = new LinkedList<CategoryBean>();
     for (Node node:nodes) {
     	String title = getTitle(node);
     	String url = getCategoryURL(node);
     	String path = node.getPath();
-    	if (defaultDepth==-1) {
-    		defaultDepth = path.split("/").length;
-    	}
-    	int depth = path.split("/").length - defaultDepth;
     	boolean isSelected = paramPath!=null&&paramPath.endsWith(path);
     	CategoryBean cat = new CategoryBean(node.getName(), node.getPath(), title, url, isSelected, depth);
+    	NodeLocation catLocation = NodeLocation.getNodeLocationByNode(node);
+    	List<CategoryBean> childs = getCategories(catLocation.toString(), depth+1);
+    	if (childs!=null && childs.size()>0)
+    		cat.setChilds(childs);
 //    	System.out.println(cat.getName()+"::"+cat.getPath()+"::"+cat.getTitle()+"::"+cat.isSelected()+"::"+cat.getDepth());
     	categories.add(cat);
     	

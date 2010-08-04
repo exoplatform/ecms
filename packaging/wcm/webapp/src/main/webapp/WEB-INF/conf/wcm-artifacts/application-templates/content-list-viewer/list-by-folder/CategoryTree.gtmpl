@@ -7,6 +7,23 @@
 	 	*/
 
 %>
+<%
+public void renderCategories(def categories) {
+    for (category in categories) {
+      def categoryTitle = category.getTitle();
+      def categoryURL = category.getUrl();
+      def cssStyle = "CategoryLabel";
+      def margin = 16 * category.getDepth() + "px";
+      
+      if (category.getDepth()>0) cssStyle = "SubCategory";
+      if (category.isSelected()) cssStyle += " CategorySelected";
+      %>
+      <a class="$cssStyle" style="margin-left: $margin" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>  
+      <%
+      if (category.hasChilds()) renderCategories(category.getChilds());
+    }
+}
+%>
 
 <style>
 #ACMEBody {
@@ -35,18 +52,7 @@
     <div class="NewContent">
       <%
       def categories = uicomponent.getCategories();
-      for (category in categories) {
-        def categoryTitle = category.getTitle();
-        def categoryURL = category.getUrl();
-        def cssStyle = "CategoryLabel";
-        def margin = 16 * category.getDepth() + "px";
-        
-        if (category.getDepth()>0) cssStyle = "SubCategory";
-        if (category.isSelected()) cssStyle += " CategorySelected";
-        %>
-        <a class="$cssStyle" style="margin-left: $margin" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>  
-        <%
-      }
+      renderCategories(categories);
       %>
     </div>
   </div>

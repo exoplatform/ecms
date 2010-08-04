@@ -1,5 +1,7 @@
 package org.exoplatform.wcm.webui.clv;
 
+import java.util.List;
+
 public class CategoryBean {
 
 	String name;
@@ -8,6 +10,7 @@ public class CategoryBean {
 	String url;
 	boolean isSelected = false;
 	int depth=0;
+	List<CategoryBean> childs;
 	
 	public CategoryBean(String name, String path, String title, String url, boolean isSelected, int depth) {
 		this.name = name;
@@ -16,6 +19,7 @@ public class CategoryBean {
 		this.url = url;
 		this.isSelected = isSelected;
 		this.depth = depth;
+		this.childs = null;
 	}
 	
 	public String getTitle() {
@@ -59,5 +63,16 @@ public class CategoryBean {
 		this.path = path;
 	}
 
+	public List<CategoryBean> getChilds() {
+		return childs;
+	}
+
+	public void setChilds(List<CategoryBean> childs) {
+		this.childs = childs;
+	}
+
+	public boolean hasChilds() {
+		return (childs!=null && childs.size()>0);
+	}
 	
 }
