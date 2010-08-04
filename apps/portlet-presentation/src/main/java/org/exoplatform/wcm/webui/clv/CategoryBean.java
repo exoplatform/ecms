@@ -1,0 +1,63 @@
+package org.exoplatform.wcm.webui.clv;
+
+public class CategoryBean {
+
+	String name;
+	String path;
+	String title;
+	String url;
+	boolean isSelected = false;
+	int depth=0;
+	
+	public CategoryBean(String name, String path, String title, String url, boolean isSelected, int depth) {
+		this.name = name;
+		this.path = path;
+		this.title = title;
+		this.url = url;
+		this.isSelected = isSelected;
+		this.depth = depth;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public boolean isSelected() {
+		return isSelected;
+	}
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	
+}

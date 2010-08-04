@@ -169,6 +169,13 @@ public class UICLVPortlet extends UIPortletApplication {
     config = addChild(UICLVConfig.class, null, null).setRendered(false);
   }
 
+  public String getFolderPath() {
+	String fullPath = this.getFolderPathParamValue();
+	if (fullPath == null || fullPath.length() == 0)
+		fullPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
+	return fullPath;
+  }
+  
   public String getFolderPathParamValue() {
     PortletPreferences preferences = Utils.getAllPortletPreferences();
     String contextualMode = preferences.getValue(PREFERENCE_CONTEXTUAL_FOLDER, null);

@@ -116,6 +116,30 @@
           </object>
         </object-param>
         <object-param>
+          <name>Category Tree</name>
+          <description>Category Tree</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>CategoryTree.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list-by-folder</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Category List</name>
+          <description>Category List</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>CategoryList.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list-by-folder</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
           <name>Documents template</name>
           <description>Documents template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">

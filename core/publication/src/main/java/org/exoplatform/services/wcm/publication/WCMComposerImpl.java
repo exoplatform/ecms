@@ -213,6 +213,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		String queryFilter = filters.get(FILTER_QUERY);
 		String queryFilterFull = filters.get(FILTER_QUERY_FULL);
 		StringBuffer statement = new StringBuffer();
+		boolean filterTemplates = true;
 		if (queryFilterFull!=null) {
 			statement.append(queryFilterFull);
 		} else {
@@ -222,6 +223,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 				if (currentFolder.isNodeType("exo:taxonomy")) {
 					primaryType = "exo:taxonomyLink";
 				}
+			} else {
+				filterTemplates = false;
 			}
 			
 			statement.append("SELECT * FROM " + primaryType + " WHERE (jcr:path LIKE '" + path + "/%'");
@@ -230,7 +233,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 			} else {
 				statement.append(")");
 			}
-			statement.append(" AND " + getTemplatesSQLFilter(repository));
+			if (filterTemplates) statement.append(" AND " + getTemplatesSQLFilter(repository));
 			if (queryFilter!=null) {
 				statement.append(queryFilter);
 			}

@@ -18,7 +18,9 @@ package org.exoplatform.wcm.webui.clv;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,6 +42,8 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.images.RESTImagesRendererService;
+import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
@@ -117,6 +121,77 @@ public class UICLVPresentation extends UIContainer {
     uiPaginator.setPageList(dataPageList);
     Locale locale = Util.getPortalRequestContext().getLocale();
     dateFormatter = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
+  }
+  
+  
+  public List<CategoryBean> getCategories() throws Exception {
+	String orderType, orderBy;
+    WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
+    HashMap<String, String> filters = new HashMap<String, String>();
+    filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
+    orderType = "ASC";
+    orderBy = "jcr:path";
+    filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
+    filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
+    filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
+    filters.put(WCMComposer.FILTER_RECURSIVE, "true");
+    filters.put(WCMComposer.FILTER_PRIMARY_TYPE, "exo:taxonomy");
+
+	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+
+    String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+	String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
+//	System.out.println("paramPath::"+paramPath);
+
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(fullPath);
+    
+    List<Node> nodes = wcmComposer.getContents(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getUserSessionProvider());
+    List<CategoryBean> categories = new ArrayList<CategoryBean>();
+    int defaultDepth = -1;
+    for (Node node:nodes) {
+    	String title = getTitle(node);
+    	String url = getCategoryURL(node);
+    	String path = node.getPath();
+    	if (defaultDepth==-1) {
+    		defaultDepth = path.split("/").length;
+    	}
+    	int depth = path.split("/").length - defaultDepth;
+    	boolean isSelected = paramPath!=null&&paramPath.endsWith(path);
+    	CategoryBean cat = new CategoryBean(node.getName(), node.getPath(), title, url, isSelected, depth);
+//    	System.out.println(cat.getName()+"::"+cat.getPath()+"::"+cat.getTitle()+"::"+cat.isSelected()+"::"+cat.getDepth());
+    	categories.add(cat);
+    	
+    }
+    
+    return categories;
+
+  }
+  
+  /**
+   * Gets the uRL.
+   * 
+   * @param node the node
+   * @return the uRL
+   * @throws Exception the exception
+   */
+  public String getCategoryURL(Node node) throws Exception {
+    String link = null;
+    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletRequest portletRequest = portletRequestContext.getRequest();
+    String portalURI = portalRequestContext.getPortalURI();
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+    String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
+    String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+    if (clvBy == null || clvBy.length() == 0)
+    	clvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
+    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
+    
+    FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+    link = friendlyService.getFriendlyUri(link);
+    
+    return link;
   }
 
   /**
@@ -237,6 +312,12 @@ public class UICLVPresentation extends UIContainer {
     if (scvWith == null || scvWith.length() == 0)
     	scvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
     link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+    
+	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
+	if (fullPath!=null) {
+	    String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+		link += "&"+clvBy+"="+fullPath;
+	}
     
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
