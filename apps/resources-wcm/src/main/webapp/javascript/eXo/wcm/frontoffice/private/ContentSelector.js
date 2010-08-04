@@ -214,6 +214,7 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 };
 
 EcmContentSelector.prototype.listRootFolder = function(rootNode) {
+	if(eXo.ecm.ECS.typeObj != 'folder') return;
 	var rightWS = document.getElementById('RightWorkspace');
 	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
 	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
@@ -222,7 +223,6 @@ EcmContentSelector.prototype.listRootFolder = function(rootNode) {
 			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
 		}
 	} 
-	if(eXo.ecm.ECS.typeObj != 'folder') return;
 	if(typeof(rootNode) == 'string') rootNode = document.getElementById(rootNode);
 	var nodeName = rootNode.getAttribute("name");
 	var nodeOnBreadcrumb = document.getElementById(rootNode.getAttribute("id"));
@@ -422,6 +422,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 		var tdNoContent = tblRWS.insertRow(1).insertCell(0);
 		tdNoContent.innerHTML = "There is no content";
 		tdNoContent.className = "Item TRNoContent";
+		tdNoContent.setAttribute("colspan",3);
 		tdNoContent.userLanguage = "UserLanguage.NoContent";	
 		document.getElementById("pageNavPosition").innerHTML = "";
 		return;

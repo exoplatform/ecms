@@ -6,7 +6,6 @@ import javax.jcr.Node;
 
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
@@ -26,8 +25,12 @@ public class FCKFileHandler {
   	Element file = document.createElement("File");
     file.setAttribute("name", displayNode.getName());     
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT);    
-    file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated").getDate().getTime()));    
-    file.setAttribute("dateModified", formatter.format(sourceNode.getProperty("exo:dateModified").getDate().getTime()));      
+    file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated").getDate().getTime()));
+    if(sourceNode.hasProperty("exo:dateModified")) {
+    	file.setAttribute("dateModified", formatter.format(sourceNode.getProperty("exo:dateModified").getDate().getTime()));      
+    } else {
+    	file.setAttribute("dateModified", null);
+    }
     file.setAttribute("creator", sourceNode.getProperty("exo:owner").getString());    
     file.setAttribute("path", displayNode.getPath());
     if (sourceNode.isNodeType("nt:file")) {

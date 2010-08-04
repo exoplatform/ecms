@@ -28,7 +28,7 @@
 	</div>
 	<div class="RightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>">
 		<div class="ListView">
-		  	<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListRecords">
+		  	<table cellspacing="0" style="table-layout: fixed; width: 100%; *width: 96%;" id="ListRecords">
 		    	<thead>
 		    		<tr>
 		    		  <th class="THBar" > Name </th>

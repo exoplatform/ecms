@@ -471,7 +471,7 @@
 }
 
 .UIWCMSearchContainer .RightWorkspace table{
-	border: 1px solid #f4f4f4;
+	/*border: 1px solid #f4f4f4;*/
 }
 
 .UIWCMSearchContainer .RightWorkspace td{
@@ -510,7 +510,6 @@
 
 .UIWCMSearchContainer .RightWorkspace .Item{
 	/* background-position:left 3px; */
-	border-left:1px solid #F4F4F4;
 	cursor:pointer;
 	height:24px;
 	line-height:24px;

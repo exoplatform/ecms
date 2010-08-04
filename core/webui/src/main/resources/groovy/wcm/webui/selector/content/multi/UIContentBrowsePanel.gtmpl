@@ -12,7 +12,8 @@
 		<div class="FilterTitle">Filter</div>
 		<div class="FilterInput">
 			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter" action="<%= uicomponent.event("ChangeContentType") %>">
-				<option selected="selected" value="Web Contents">Web Contents</option>
+				<option selected="selected" value="All">All</option>
+				<option value="Web Contents">Web Contents</option>
 				<option value="DMS Documents">DMS Documents</option>
 				<option value="Medias">Medias</option>
 			</select>
@@ -30,7 +31,7 @@
 		<div class="RightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>">
 			<div class="MultiListContainer">
 				<div class="ListView">
-		  			<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListRecords">
+		  			<table cellspacing="0" style="table-layout: fixed; width: 100%; *width: 96%;" id="ListRecords">
 		    			<thead>
 		    				<tr>
 			    		  		<th class="THBar"> Name </th>
@@ -42,7 +43,7 @@
 		  			</table>
 				</div>
 				<div class="ListFileContainer">
-		  			<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListFilesContent">
+		  			<table cellspacing="0" style="table-layout: fixed; width: 100%; *width: 96%;" id="ListFilesContent">
 		    			<thead>
 		    				<tr>
 			    		  		<th class="THBar"> List Content </th>
