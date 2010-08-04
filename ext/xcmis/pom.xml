@@ -11,6 +11,6 @@
   <name>eXo ECM Suite :: Ext :: xCMIS</name>
   <description>eXo Entreprise Content Management Suite :: Extensions :: xCMIS</description>
   <modules>
-    <module>sp</module>
+<!--    <module>sp</module> -->
   </modules>
 </project>
