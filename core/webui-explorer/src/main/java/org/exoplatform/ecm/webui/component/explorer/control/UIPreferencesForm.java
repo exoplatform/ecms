@@ -188,7 +188,10 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
 
   public void update(Preference pref) {
     getUIFormCheckBoxInput(FIELD_ENABLESTRUCTURE).setChecked(pref.isJcrEnable());
-    getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR).setChecked(pref.isShowSideBar());
+    UIFormCheckBoxInput<Boolean> showSideBar = getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR);
+    showSideBar.setChecked(pref.isShowSideBar() );
+   	showSideBar.setEnable(this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar());
+   	
     getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).setChecked(pref.isShowNonDocumentType());
     getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).setChecked(pref.isShowPreferenceDocuments());
     getUIFormCheckBoxInput(FIELD_SHOW_HIDDEN_NODE).setChecked(pref.isShowHiddenNode());

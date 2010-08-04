@@ -1001,7 +1001,7 @@ public class UIJCRExplorer extends UIContainer {
     }    
   }
   
-  public Cookie getCookieByCookieName(String cookieName, Cookie[] cookies) {
+  public static Cookie getCookieByCookieName(String cookieName, Cookie[] cookies) {
     String userId = Util.getPortalRequestContext().getRemoteUser();
     cookieName += userId; 
     for(int loopIndex = 0; loopIndex < cookies.length; loopIndex++) { 
@@ -1029,6 +1029,8 @@ public class UIJCRExplorer extends UIContainer {
       else
         preferences_.setShowSideBar(false);
     }
+    if (preferences_ != null && !this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar())
+    	preferences_.setShowSideBar(false);
     getCookieForUser = getCookieByCookieName(Preference.SHOW_NON_DOCUMENTTYPE, cookies);
     if ((getCookieForUser != null) && (preferences_ != null)) {
       if (getCookieForUser.getValue().equals("true"))
