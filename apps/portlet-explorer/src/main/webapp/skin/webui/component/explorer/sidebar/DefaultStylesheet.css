@@ -101,9 +101,9 @@
 	cursor: pointer;
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */
-  height:16px;
-	margin-top:4px;
-	width:14px;
+  height:19px;
+	margin-top:2px;
+	width:33px;
 }
 
 .UIJCRExplorerPortlet .UISideBar .BarContent .SideGeneratal{
