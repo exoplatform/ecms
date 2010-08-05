@@ -497,19 +497,28 @@ function showPopupSubMenu(obj) {
 	}
 }
 
-function requestAjax(urlRequestXML) {
+function requestAjax(url) {
 	var xmlHttpRequest = false;
-	if (window.XMLHttpRequest) {
-		xmlHttpRequest = new window.XMLHttpRequest();
-		xmlHttpRequest.open("GET",urlRequestXML,false);
-		xmlHttpRequest.send("");
+  if(window.XMLHttpRequest) {
+		try {
+			xmlHttpRequest = new XMLHttpRequest();
+		} catch(e) {
+			xmlHttpRequest = false;
+		}
+  } else if(window.ActiveXObject) {
+     	try {
+      	xmlHttpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+    	} catch(e) {
+      	try {
+        	xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+      	} catch(e) {
+        	xmlHttpRequest = false;
+      	}
+		}
+  }
+	if(xmlHttpRequest) {
+		xmlHttpRequest.open("GET", url, false);
+		xmlHttpRequest.send();
 		return xmlHttpRequest.responseXML;
-	}	else if (ActiveXObject("Microsoft.XMLDOM")) { // for IE
-		xmlHttpRequest = new ActiveXObject("Microsoft.XMLDOM");
-		xmlHttpRequest.async=false;
-		xmlHttpRequest.load(urlRequestXML);
-		return xmlHttpRequest;
 	}
-	alert("There was a problem retrieving the XML data!");
-	return null;
 }
