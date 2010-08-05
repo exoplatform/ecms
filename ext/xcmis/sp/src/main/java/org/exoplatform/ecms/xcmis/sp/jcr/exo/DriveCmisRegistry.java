@@ -213,7 +213,7 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
                }
                catch (Exception e)
                {
-                  LOG.error(e.getMessage(), e);
+                  LOG.error(e.getMessage());
                }
                finally
                {
