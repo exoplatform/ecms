@@ -3,14 +3,15 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms</artifactId>
+    <artifactId>exo-ecms-examples</artifactId>
     <version>2.1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-examples</artifactId>
+  <artifactId>exo-ecms-examples-uiextension-framework</artifactId>
   <packaging>pom</packaging>
-  <name>eXo WCM Examples</name>
-  <description>eXo WCM Examples</description>
+  <name>eXo WCM Examples :: UIExtension Framework</name>
+  <description>eXo WCM Examples :: UIExtension Framework</description>
   <modules>
-    <module>uiextension-framework</module>
+    <module>manage-wcm-cache</module>
+		<module>helloworld-optionblock</module>
   </modules>
 </project>
