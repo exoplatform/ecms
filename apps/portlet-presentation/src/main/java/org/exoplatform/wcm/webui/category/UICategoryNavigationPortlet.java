@@ -16,6 +16,8 @@
  */
 package org.exoplatform.wcm.webui.category;
 
+import java.util.Date;
+
 import javax.portlet.PortletMode;
 
 import org.exoplatform.wcm.webui.category.config.UICategoryNavigationConfig;
@@ -62,7 +64,7 @@ public class UICategoryNavigationPortlet extends UIPortletApplication {
    */
   public void activateMode(PortletMode mode) throws Exception {
     getChildren().clear();
-    addChild(UIPopupContainer.class, null, null);
+    addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     if (PortletMode.VIEW.equals(mode)) {
       addChild(UICategoryNavigationTree.class, null, null);
     } else if (PortletMode.EDIT.equals(mode)) {

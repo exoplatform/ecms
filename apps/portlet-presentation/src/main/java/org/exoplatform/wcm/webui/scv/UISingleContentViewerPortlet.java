@@ -16,6 +16,8 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
+import java.util.Date;
+
 import javax.jcr.Node;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
@@ -85,7 +87,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
    * @throws Exception the exception
    */
   public UISingleContentViewerPortlet() throws Exception {
-    addChild(UIPopupContainer.class, null, null);
+    addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     preferences = portletRequestContext.getRequest().getPreferences();
     popPreferences = addChild(UISCVPreferences.class, null, null).setRendered(false);

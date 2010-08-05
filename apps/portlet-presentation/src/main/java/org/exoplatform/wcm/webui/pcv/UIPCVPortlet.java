@@ -16,6 +16,8 @@
  */
 package org.exoplatform.wcm.webui.pcv;
 
+import java.util.Date;
+
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.RenderResponse;
@@ -85,7 +87,7 @@ public class UIPCVPortlet extends UIPortletApplication {
    */
   public void activateMode(PortletMode mode) throws Exception {
   	getChildren().clear();
-		addChild(UIPopupContainer.class, null, null);
+		addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
 		if (PortletMode.VIEW.equals(mode)) {
 			addChild(UIPCVContainer.class, null, null);
     } else if (PortletMode.EDIT.equals(mode)) {

@@ -16,6 +16,8 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
+import java.util.Date;
+
 import javax.jcr.Node;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
@@ -163,7 +165,7 @@ public class UICLVPortlet extends UIPortletApplication {
    * @throws Exception the exception
    */
   public UICLVPortlet() throws Exception {
-    addChild(UIPopupContainer.class, null, null);
+    addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     folderMode = addChild(UICLVFolderMode.class, null, null).setRendered(false);
     manualMode = addChild(UICLVManualMode.class, null, null).setRendered(false);
     config = addChild(UICLVConfig.class, null, null).setRendered(false);
