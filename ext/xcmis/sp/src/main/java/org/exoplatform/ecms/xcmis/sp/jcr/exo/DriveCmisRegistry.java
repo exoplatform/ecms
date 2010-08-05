@@ -211,6 +211,10 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
                   info.setRootFolderId(connection.getStorage().getRepositoryInfo().getRootFolderId());
                   repositories.add(info);
                }
+               catch (Exception e)
+               {
+                  LOG.error(e.getMessage(), e);
+               }
                finally
                {
                   if (connection != null)
