@@ -152,7 +152,7 @@
           </object>
         </object-param>
         <object-param>
-          <name>default.folder.list.viewer</name>
+          <name>folder.list.viewer</name>
           <description>Default folder list viewer groovy template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
             <field name="templateName">

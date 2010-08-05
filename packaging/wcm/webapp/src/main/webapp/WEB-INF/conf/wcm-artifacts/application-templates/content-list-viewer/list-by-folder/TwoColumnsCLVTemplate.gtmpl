@@ -20,7 +20,7 @@
 			def rssLink = uicomponent.getRssLink();
 			def isShowRssLink = uicomponent.isShowRssLink();
 		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
-			def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";		  
+			def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";		  
 			%>
 		  <div class="TopBoxHeader">
 				<%
@@ -80,69 +80,70 @@
 										
           def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
 					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
-			    if (Utils.isShowQuickEdit()) {
 					%>
-					<div class="EdittingContent" style=" z-index: 1">
-					<div class="EdittingToolBar " >
-						<div class="EdittingToolBarL">
-							<div class="EdittingToolBarC clearfix">
-							 <% 										  
-							 if (Utils.isShowDelete(viewNode)) {
-							 %>
-								<div style="float: right">
-									<a href="$contentDeleteLink" title="<%= _ctx.appRes("UICLVPresentation.action.delete") %>"class="CloseContentIcon" >
-									  &nbsp;
-									</a>         
-								</div>
-							 <% } 
-							 
-							 if(uicomponent.isShowEdit(viewNode)){
-							 %>
-								<div style="float: right">
-									<a href="$contentEditLink" title="<%= _ctx.appRes("UICLVPresentation.action.edit") %>" class="EditContentIcon" >
-									  &nbsp;
-									</a>           
-								</div>
-								<% } %>
-							</div>
-						</div>
-					</div>
-				</div>
-				<%}%>
-								<div class="Column2" onmouseover="this.setAttribute('class', 'Column2 $hoverClass')" onmouseout="this.setAttribute('class', 'Column2')">
-								<%
-									if(isShowImage) {
-									  %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
-									}
-									%>
-									<div class="Content">
-										<%
-											if (isShowTitle) {
-												if (isShowLink) {
-													%><div class="Title"><a href="$itemLink">$itemName</a></div><%
-												} else {
-													%><div class="Title">$itemName</div><%
-												}
-											}
-											
-                      if (isShowDate) {
-                        %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%
-                      }
-											if (isShowSummary) { 
-												%><div class="Summary">$itemSummary</div><% 
-											}
-										%>
+					<div class="Column2" onmouseover="this.setAttribute('class', 'Column2 $hoverClass')" onmouseout="this.setAttribute('class', 'Column2')">
+						<%
+						if (Utils.isShowQuickEdit()) {
+						%>
+							<div class="EdittingContent" style=" z-index: 1">
+								<div class="EdittingToolBar " >
+									<div class="EdittingToolBarL">
+										<div class="EdittingToolBarC clearfix">
+										 <% 										  
+										 if (Utils.isShowDelete(viewNode)) {
+										 %>
+											<div style="float: right">
+												<a href="$contentDeleteLink" title="<%= _ctx.appRes("UICLVPresentation.action.delete") %>"class="CloseContentIcon" >
+												  &nbsp;
+												</a>         
+											</div>
+										 <% } 
+										 
+										 if(uicomponent.isShowEdit(viewNode)){
+										 %>
+											<div style="float: right">
+												<a href="$contentEditLink" title="<%= _ctx.appRes("UICLVPresentation.action.edit") %>" class="EditContentIcon" >
+												  &nbsp;
+												</a>           
+											</div>
+											<% } %>
+										</div>
 									</div>
-									<%
-										if (isShowReadmore) {
-										  %><div class="LinkMore"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
-										}
-									%>
 								</div>
-							<% if ((i+1) % 2 == 0) { %>	
-							<% } %>
-							
-				    <%
+							</div>
+							<%}
+							if(isShowImage) {
+							  %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
+							}
+							%>
+							<div class="Content">
+								<%
+									if (isShowTitle) {
+										if (isShowLink) {
+											%><div class="Title"><a href="$itemLink">$itemName</a></div><%
+										} else {
+											%><div class="Title">$itemName</div><%
+										}
+									}
+									
+	                if (isShowDate) {
+	                  %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%
+	                }
+									if (isShowSummary) { 
+										%><div class="Summary">$itemSummary</div><% 
+									}
+								%>
+							</div>
+							<%
+								if (isShowReadmore) {
+								  %><div class="LinkMore"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
+								}
+							%>
+						</div>
+				<% if ((i+1) % 2 == 0) { %>	
+				<% } %>
+				
+	    <%
 				}
 			%>	</div> <%
 			}
