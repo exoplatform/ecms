@@ -35,12 +35,12 @@
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-ext</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
+		<dependency>
+		  <groupId>org.exoplatform.commons</groupId>
+		  <artifactId>exo.platform.commons.webui.ext</artifactId>
+		  <version>${org.exoplatform.commons.version}</version>
+			<scope>provided</scope>
+		</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-viewer</artifactId>

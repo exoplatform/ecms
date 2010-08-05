@@ -51,11 +51,11 @@
       <artifactId>exo-ecms-core-webui</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-ext</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+		<dependency>
+		  <groupId>org.exoplatform.commons</groupId>
+		  <artifactId>exo.platform.commons.webui.ext</artifactId>
+		  <version>${org.exoplatform.commons.version}</version>
+		</dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-webui-explorer</artifactId>
@@ -217,8 +217,8 @@ exo-ecms-packaging-ecmdemo-webapp
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
-              <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-core-ext</artifactId>
+						  <groupId>org.exoplatform.commons</groupId>
+						  <artifactId>exo.platform.commons.webui.ext</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <jarModule>
