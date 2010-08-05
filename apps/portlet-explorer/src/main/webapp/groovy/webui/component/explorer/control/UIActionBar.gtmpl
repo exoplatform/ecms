@@ -101,7 +101,10 @@
   		<div class="UIViewBarContainer" id="UIViewBarContainer">
   			<%if(uicomponent.isShowSaveSession()) {%>
   	      <a class="SaveSessionButton" href="<%=uicomponent.event("SaveSession")%>" title="<%=_ctx.appRes("UIViewBar.label.saveSession")%>"></a>
-  	    <%}%>
+  	    <%}  	      
+  	      if (uicomponent.hasBackButton()) {%>
+  	        <a class ="URLBackToButton" href="<%=uicomponent.getBackLink()%>"></a>
+  	      <%}%>
   	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
   			<div class="ClearRight"><span></span></div>
   		</div>

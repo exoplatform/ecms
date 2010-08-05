@@ -207,6 +207,7 @@ public class Utils {
 	final static public String GROUP = "Group";
 	final static public String SITE = "Site";
 	final static public String PRIVATE = "Private";
+	final static public String URL_BACKTO ="backto";
 	private static final Log LOG = ExoLogger.getLogger("webui.Utils");
 	public Map<String, Object> maps_ = new HashMap<String, Object>();
 

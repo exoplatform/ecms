@@ -111,7 +111,11 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       popPreferences.setRendered(true);      
     }
   }
-  
+  public boolean isViewMode() {
+    System.out.println(Utils.getCurrentMode());
+    return Utils.getCurrentMode().equals(PortletMode.VIEW);
+    
+  }
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
    */

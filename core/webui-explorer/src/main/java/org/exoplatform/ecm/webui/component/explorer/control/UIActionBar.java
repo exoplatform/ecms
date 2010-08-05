@@ -34,7 +34,6 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.SearchValidator;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
@@ -46,12 +45,14 @@ import org.exoplatform.ecm.webui.component.explorer.search.UIECMSearch;
 import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -112,7 +113,8 @@ public class UIActionBar extends UIForm {
 
   final static private String ROOT_SQL_QUERY = "select * from nt:base where contains(*, '$1') order by exo:dateCreated DESC, jcr:primaryType DESC" ;
   final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' and contains(*, '$1') order by jcr:path DESC, jcr:primaryType DESC";
-
+  
+  private String backToLink;
   public UIActionBar() throws Exception{
     addChild(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SearchValidator.class));
     List<SelectItemOption<String>> typeOptions = new ArrayList<SelectItemOption<String>>();
@@ -120,6 +122,7 @@ public class UIActionBar extends UIForm {
     typeOptions.add(new SelectItemOption<String>(FIELD_XPATH, Query.XPATH));
     addChild(new UIFormSelectBox(FIELD_SEARCH_TYPE, FIELD_SEARCH_TYPE, typeOptions));
     addChild(new UIFormStringInput(FIELD_ADVANCE_SEARCH, FIELD_ADVANCE_SEARCH, null));
+    backToLink = initBackLink();
   }
 
   public void setTabOptions(String viewName) throws Exception {
@@ -139,7 +142,12 @@ public class UIActionBar extends UIForm {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     uiExplorer.setRenderTemplate(template);
   }
-
+  public boolean hasBackButton() {
+    return backToLink!=null;
+  }
+  public String getBackLink() {
+    return backToLink;
+  }
   public String getTemplateName() { return templateName_;  }
 
   private void setListButton(String tabName) throws PathNotFoundException, RepositoryException {
@@ -172,6 +180,21 @@ public class UIActionBar extends UIForm {
   public boolean isShowSaveSession() throws Exception {
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class) ;
     return uiExplorer.getPreference().isJcrEnable() ;    
+  }
+  
+  private String initBackLink() {
+    String portalURI;
+    StringBuilder link;
+    PortalRequestContext pContext = Util.getPortalRequestContext();
+
+    String parameter = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
+    if (parameter==null) {
+      return null;
+    }
+    if (parameter.startsWith("/")) parameter = parameter.substring(1);    
+    portalURI = pContext.getPortalURI();
+    link = new StringBuilder().append(portalURI).append(parameter);
+    return link.toString();
   }
   
   public List<String> getTabList() { return tabList_; }
