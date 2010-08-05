@@ -54,6 +54,9 @@
                 <value>
                   <string>eXoDMSGadgets</string>
                 </value>
+																<value>
+                  <string>eXoContentGadgets</string>
+                </value>																
                 <value>
                   <string>eXoStaticResources</string>
                 </value>

@@ -64,6 +64,12 @@ function getModule(params) {
   module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-config", "jar", module.version));
   module.extension.war.deployName = "ecm-wcm-extension";	      
+	
+	module.gadget = {};
+  
+  module.gadget.war = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget", "war", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
+  module.gadget.war.deployName = "eXoContentGadgets";	      
 
   module.demo = {};
   
@@ -83,6 +89,9 @@ function getModule(params) {
 
   module.server.jboss = {};
   module.server.jboss.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-jboss", "jar", module.version);	
-   
+ 
+	  
+  
+
   return module;
 }

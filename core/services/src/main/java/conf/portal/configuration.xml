@@ -18,6 +18,10 @@
   <component>
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
+  </component>		
+	
+	 <component>
+    <type>org.exoplatform.ecm.REST.favorite.FavoriteRESTService</type>
   </component>
 	
   <component>
