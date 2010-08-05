@@ -13,10 +13,9 @@
 <style>
 	.UIForm .HorizontalLayout textarea { 
 	  font-size:11px;
-	  height:275px;
-	  width:525px;
+	  height:275px !important;
+	  width:525px !important;
 	 }
-	 
 </style>
 <div class="UIForm">  
   <% uiform.begin() %>
