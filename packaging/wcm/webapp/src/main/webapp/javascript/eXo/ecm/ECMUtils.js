@@ -375,6 +375,7 @@
 	
 	var clip=null;
 	ECMUtils.prototype.initClipboard = function(id, level, size) {
+  if (!size) return;	
 		if(eXo.core.Browser.getBrowserType() != "ie") {
 			if (size > 0) {
 				for(var i=1; i <= size; i++) {
