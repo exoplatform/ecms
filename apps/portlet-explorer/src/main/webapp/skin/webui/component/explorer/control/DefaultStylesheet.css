@@ -61,7 +61,7 @@
 
 .UIJCRExplorerPortlet .SetupPreferencesButton {
   width: 24px;	
-  height: 24px;
+  height: 28px;
   background: url('DefaultSkin/icons/IconSetupPreferences.gif') no-repeat bottom;
   float: right; /* orientation=lt */
   float: left; /* orientation=rt */

@@ -44,7 +44,7 @@
         <div class="ItemIcon TagExplorerIcon"><span></span></div>
       </div>
       <div class="<%=getCSSClassName("UISavedSearches")%>" onclick="<%=uicomponent.event("SavedSearches")%>" title="<%=_ctx.appRes("UISavedSearches.title.savedSearches")%>">
-        <div class="ItemIcon SideGeneratal"><span></span></div>
+        <div class="ItemIcon Search"><span></span></div>
       </div>
     </div>
     <div style="clear: both;"><span></span></div>

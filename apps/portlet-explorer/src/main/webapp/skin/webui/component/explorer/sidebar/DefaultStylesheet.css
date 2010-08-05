@@ -101,7 +101,7 @@
 	cursor: pointer;
 	float: right; /* orientation=lt */
 	float: left; /* orientation=rt */
-  height:19px;
+  height:20px;
 	margin-top:2px;
 	width:33px;
 }
@@ -171,6 +171,11 @@
 
 .UIJCRExplorerPortlet .UISideBar .SideGeneratal {
 	background: url('DefaultSkin/icons/Generatal.png') no-repeat center;
+	width: 17px; height: 17px;
+}
+
+.UIJCRExplorerPortlet .UISideBar .Search {
+	background: url('DefaultSkin/icons/Search.png') no-repeat center;
 	width: 17px; height: 17px;
 }
 
