@@ -18,30 +18,27 @@
 			%>
 			<div class="$uicomponent.id" id="$uicomponent.id" 
 				onmouseover="this.setAttribute('class', '$uicomponent.id $hoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
-			<%     if (Utils.isShowQuickEdit()) {	%>	
+			<%     
+			  if (Utils.isShowQuickEdit()) {	%>	
 				 <div class="EdittingToolBarContainer" style=" z-index: 1">
 					 <div class="EdittingToolBar " >
 						<div class="EdittingToolBarL">
 							<div class="EdittingToolBarR">
 								<div class="EdittingToolBarC clearfix">
-
-								<%
-								
-								if(Utils.isShowQuickEdit(node) && (!Utils.isPortalEditMode()) && rcontext.getRemoteUser()) {
+								<%								
+								if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 									%>
 									<div style="float: right">
-										<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.Title")%>" class="PreferencesIcon" >
+										<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
 										  &nbsp;
 										</a>         
 									</div>
+									<%}%>
 									<div style="float: right">
 										<a href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Edit")%>">
 										  &nbsp;
 										</a>           
 									</div>
-									<%			
-								}
-									%>
 								</div>
 							</div>
 						</div>
@@ -77,12 +74,12 @@
             <a class="PrintFrameIcon CloseIcon" id="CloseIcon" href="javascript: void(0)" onclick="window.close();"><%= _ctx.appRes("UIPCVContainer.action.Close") %></a>
           </div>
         <%
-      }
+      } 
 			%></div><%
 
 		} else {
 		  
-		  if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && (Utils.isShowQuickEdit())) {
+		  if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage() && Utils.isShowQuickEdit()) {
 				%>
 	      <div class="$uicomponent.id" id="$uicomponent.id" 
 	        onmouseover="this.setAttribute('class', '$uicomponent.id $hoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
@@ -92,7 +89,7 @@
              <div class="EdittingToolBarR">
                <div class="EdittingToolBarC clearfix">
                  <div style="float: right">
-                   <a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.Title")%>" class="PreferencesIcon" >
+                   <a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
                      &nbsp;
                    </a>         
                  </div>            
@@ -101,13 +98,10 @@
            </div>
          </div>
        </div>
-       <div style="width: 100%; height: 30px; text-align: center; font-style: italic;"><%= _ctx.appRes("UIPresentationContainer.msg.no-content") %></div>
      </div>			
 		<%
-			}else {
-	       %><div style="width: 100%; height: 30px; text-align: center; font-style: italic;"><%= _ctx.appRes("UIPresentationContainer.msg.no-content") %></div><%
-			}
 		}
+	}
 if (uicomponent.isPrinting()) {
   %>
    <script type="text/javascript">

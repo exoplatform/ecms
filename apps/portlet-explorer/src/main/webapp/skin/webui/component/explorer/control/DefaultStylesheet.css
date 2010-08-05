@@ -72,7 +72,7 @@
 .UIJCRExplorerPortlet .URLBackToButton {
   width: 24px;	
   height: 24px;
-  background: url('DefaultSkin/icons/backIcon.gif') no-repeat bottom;
+  background: url('DefaultSkin/icons/backIcon.png') no-repeat bottom;
   float: right; /* orientation=lt */
   float: left; /* orientation=rt */
   padding: 2px 0px 0px 10px; /* orientation=lt */
