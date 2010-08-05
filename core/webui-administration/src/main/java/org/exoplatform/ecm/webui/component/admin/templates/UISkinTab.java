@@ -83,6 +83,7 @@ public class UISkinTab extends UIContainer {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
     Node templateHome = tempService.getTemplatesHome(repository, 
         SessionProviderFactory.createSystemProvider()).getNode(nodeName);
+    if(!templateHome.hasNode(TemplateService.SKINS)) return;
     NodeIterator iter = templateHome.getNode(TemplateService.SKINS).getNodes();
     List<SkinData> data = new ArrayList<SkinData>() ;
     SkinData item  ;
@@ -91,7 +92,7 @@ public class UISkinTab extends UIContainer {
       node = (Node) iter.next() ;
       String version = "" ;
       StringBuilder rule = new StringBuilder() ;
-      Value[] rules = node.getProperty("exo:roles").getValues() ;
+      Value[] rules = node.getNode(Utils.JCR_CONTENT).getProperty(Utils.EXO_ROLES).getValues() ;
       for(int i = 0; i < rules.length; i++) {
         rule.append("["+rules[i].getString()+"]") ;
       }

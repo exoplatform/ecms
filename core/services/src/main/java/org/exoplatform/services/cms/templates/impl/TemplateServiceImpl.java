@@ -293,8 +293,11 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   public NodeIterator getAllTemplatesOfNodeType(boolean isDialog, String nodeTypeName,
       String repository, SessionProvider provider) throws Exception {
     Node nodeTypeHome = getTemplatesHome(repository, provider).getNode(nodeTypeName);
-    if (isDialog)
+    if (isDialog) {
+      if(!nodeTypeHome.hasNode(DIALOGS)) return null;
       return nodeTypeHome.getNode(DIALOGS).getNodes();
+    }
+    if(!nodeTypeHome.hasNode(VIEWS)) return null;
     return nodeTypeHome.getNode(VIEWS).getNodes();
   }
 

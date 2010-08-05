@@ -81,11 +81,12 @@ public class UIDialogTab extends UIContainer {
         SessionProviderFactory.createSystemProvider()) ;
     List<DialogData> data = new ArrayList<DialogData>() ;
     DialogData item  ;
+    if(iter == null) return;
     while (iter.hasNext()){
       Node node = (Node) iter.next() ;
       String version = "" ;
       StringBuilder rule = new StringBuilder() ;
-      Value[] rules = node.getProperty("exo:roles").getValues() ;
+      Value[] rules = node.getNode(Utils.JCR_CONTENT).getProperty(Utils.EXO_ROLES).getValues() ;
       for(int i = 0; i < rules.length; i++) {
         rule.append("["+rules[i].getString()+"]") ;
       }
