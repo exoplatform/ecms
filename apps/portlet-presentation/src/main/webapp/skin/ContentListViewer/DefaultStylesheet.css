@@ -274,16 +274,19 @@
 
 .TwoColumnsCLVTemplate .CLV {
 	border:1px solid transparent;
-	padding; 0px;
+	padding; 10px 0px 10px 10px;
 	-moz-border-radius-topleft:0px;
 	-moz-border-radius-topright:0px;
 }
 
-/*
+.TwoColumnsCLVTemplate .Contents .Column2 {
+	margin-right:10px;
+	padding:0 0 10px 0;
+}
+
 .UIPresentationContainer{
 	border:1px solid transparent;
 }
-*/
 
 .UICLVFolderMode{
 	border:1px solid transparent;
@@ -302,10 +305,6 @@
 	border:1px solid transparent;
 }
 */
-
-.ContainerHoverClass {
-	border:1px solid #bfd5ed;
-}
 
 .EdittingToolBarContainer{
 	position:relative;
@@ -400,10 +399,20 @@
 	padding:2px 7px;
 }
 
-.ContainerHoverClass .EdittingContent{
-	display: block;
+.ContainerHoverClass {
+	border:1px solid #bfd5ed;
 }
 
 .ContainerHoverClass .EdittingToolBarContainer{
 	display: block;
 }
+
+
+.ContainerHoverClassInner {
+	border:1px solid #bfd5ed;
+}
+
+.ContainerHoverClassInner .EdittingContent{
+	display: block;
+}
+
