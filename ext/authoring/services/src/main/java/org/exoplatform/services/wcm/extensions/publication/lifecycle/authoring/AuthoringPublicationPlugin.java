@@ -84,7 +84,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     ValueFactory valueFactory = node.getSession().getValueFactory();
     String containerName = context.get("containerName");
     try {
-    	containerName = PortalContainer.getCurrentPortalContainerName();
+    	if (containerName==null) containerName = PortalContainer.getCurrentPortalContainerName();
     } catch (Exception e) {}
     if (PublicationDefaultStates.PENDING.equals(newState)) {
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
