@@ -207,6 +207,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
           controller.getChild(UIDocumentForm.class).releaseLock();
         }
         uiDocumentWorkspace.addChild(uiController);
+        uiController.initOptionBlockPanel();
         uiController.setRendered(true);
         context.addUIComponentToUpdateByAjax(uiWorkingArea);
         if (event != null) {

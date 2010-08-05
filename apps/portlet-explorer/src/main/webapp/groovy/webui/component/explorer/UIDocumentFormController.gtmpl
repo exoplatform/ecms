@@ -1,0 +1,30 @@
+<div class="UIDocumentFormController">	
+	<%
+	  if(uicomponent.isDisplayOptionBlockPanel()) {
+	%>		
+		<%
+	   	for(uiChild in uicomponent.getChildren()) { 
+	   		String width = "70%";	  
+	   		if(uiChild.getId() != "UIDocumentForm") {
+	   			width = "30%";
+	   		}
+	     	String display = "none" ;
+	     	if(uiChild.isRendered()) display="block" ;
+	     	println "<div style=\"display: $display;float:left; width: $width;\">" ;
+	     	uicomponent.renderUIComponent(uiChild) ;
+	    	 println "</div>" ;
+	   	}
+		%>						
+		<div style="clear: both;"><span></span></div>		
+	<% } else { %>	
+		<%
+	   		for(uiChild in uicomponent.getChildren()) { 
+	     		String display = "none" ;
+	     		if(uiChild.isRendered()) display="block" ;
+	     		println "<div style=\"display: $display;\">" ;
+	     		uicomponent.renderUIComponent(uiChild) ;
+	    		println "</div>" ;
+	   		}
+		%>	
+	<% } %>
+</div>

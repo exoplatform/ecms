@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+  <external-component-plugins>
+    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
+    <component-plugin>
+      <name>HelloWorld</name>
+      <set-method>registerUIExtensionPlugin</set-method>
+      <type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
+      <init-params>
+		<object-param>
+		  <name>HelloWorld</name>
+		  <object type="org.exoplatform.webui.ext.UIExtension">
+		    <field name="type"><string>org.exoplatform.ecm.dms.UIOptionBlocks</string></field>							
+		    <field name="name"><string>HelloWorld</string></field>							
+		    <field name="component"><string>org.exoplatform.wcm.extension.helloworld.UIHelloWorld</string></field>
+		  </object>
+		</object-param>	         
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>

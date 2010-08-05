@@ -1,0 +1,11 @@
+<div class="UIOptionBlockPanel" style="margin-left:10px;">
+  <table border="1" bgcolor="WHITE" bordercolor="gray">	
+  <%
+   for(uiChild in uicomponent.getChildren()) { 	     	     
+     println "<tr><td height=100>" ;
+     uicomponent.renderUIComponent(uiChild) ;
+     println "</td></tr>" ;	     
+   }
+  %>				
+  </table>
+</div>

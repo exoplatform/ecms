@@ -1,0 +1,4 @@
+<div>
+	<div>Hello World</div>
+	<div>You are editing document with path: <%= uicomponent.getEditingNode().getPath() %></div>
+</div>

@@ -928,6 +928,16 @@
 						</field>
 					</object>
 				</object-param>
+				
+				<object-param>
+						<name>UIOptionBlockPanel</name>
+						<object type="org.exoplatform.webui.ext.UIExtension">
+							<field name="type"><string>org.exoplatform.ecm.dms.UIOptionBlockPanel</string></field>							
+							<field name="name"><string>UIOptionBlock</string></field>							
+							<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.optionblocks.UIOptionBlockPanel</string></field>
+						</object>
+				</object-param>			
+					
 			</init-params>
 		</component-plugin>
 	</external-component-plugins>

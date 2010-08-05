@@ -24,6 +24,7 @@ import java.util.List;
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.comparator.ItemOptionNameComparator;
+import org.exoplatform.ecm.webui.component.explorer.optionblocks.UIOptionBlockPanel;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
@@ -34,8 +35,9 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
+import org.exoplatform.webui.ext.UIExtension;
+import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.form.UIFormSelectBox;
 
 /**
@@ -45,7 +47,9 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Nov 8, 2006 10:16:18 AM 
  */
 
-@ComponentConfig (lifecycle = UIContainerLifecycle.class)
+@ComponentConfig(
+		template  = "app:/groovy/webui/component/explorer/UIDocumentFormController.gtmpl"		
+)
 
 public class UIDocumentFormController extends UIContainer implements UIPopupComponent {
 
@@ -55,13 +59,17 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   private static String DEFAULT_VALUE = "exo:article" ;
   private Node currentNode_ ;
   private String repository_ ;  
+  
+  private String OPTION_BLOCK_EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIOptionBlockPanel";
+  private List<UIComponent> listExtenstion = new ArrayList<UIComponent>();
+  private boolean isDisplayOptionPanel = false;
 
   public UIDocumentFormController() throws Exception {
-    addChild(UISelectDocumentForm.class, null, null) ;
+    addChild(UISelectDocumentForm.class, null, null).setRendered(false) ;
     UIDocumentForm uiDocumentForm = createUIComponent(UIDocumentForm.class, null, null) ;
     uiDocumentForm.setContentType(DEFAULT_VALUE);
-    uiDocumentForm.addNew(true) ;    
-    addChild(uiDocumentForm) ;
+    uiDocumentForm.addNew(true);    
+    addChild(uiDocumentForm);           
   }
 
   public void setCurrentNode(Node node) { currentNode_ = node ; }
@@ -133,7 +141,8 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     }
   }
 
-  @Override
+  @SuppressWarnings("unchecked")
+	@Override
   public <T extends UIComponent> T setRendered(boolean rendered)
   {
      UIComponent res = super.setRendered(rendered);
@@ -155,5 +164,52 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     }
     super.processRender(context);
   }
-
+   
+  /*
+   * 
+   * This method get Option Block Panel extenstion and add it into this
+   * 
+   * */
+  public void addOptionBlockPanel() throws Exception {
+  	  	
+  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+     List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
+          
+     for (UIExtension extension : extensions) {
+       UIComponent uicomp = manager.addUIExtension(extension, null, this);       
+       uicomp.setRendered(false);
+       listExtenstion.add(uicomp);
+     }
+  }
+  /*
+   * This method checks and returns true if the Option Block Panel is configured to display, else it returns false
+   * */
+  public boolean isHasOptionBlockPanel() {  	  	  	
+  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+     List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
+     if(extensions != null) {
+    	 return true;
+     }  	
+  	return false;
+  }
+  public void setDisplayOptionBlockPanel(boolean display) {
+  	for(UIComponent uicomp : listExtenstion) {
+  		uicomp.setRendered(display);
+  	}
+  	isDisplayOptionPanel = display;
+  }
+  public boolean isDisplayOptionBlockPanel() {
+  	return isDisplayOptionPanel;
+  }
+  public void initOptionBlockPanel() throws Exception {
+  	if(isHasOptionBlockPanel()) {  		
+  		addOptionBlockPanel(); 
+  		UIOptionBlockPanel optionBlockPanel = this.getChild(UIOptionBlockPanel.class);
+  		
+  		if(optionBlockPanel.isHasOptionBlockExtension()) {
+  			optionBlockPanel.addOptionBlockExtension();
+  			setDisplayOptionBlockPanel(true);
+  		}
+    }  
+  }
 }
