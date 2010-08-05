@@ -11,7 +11,7 @@
       <init-params>
          <value-param>
             <name>rootIndexDir</name>
-            <value>../temp/xcmis/_index</value>
+            <value>${gatein.jcr.index.data.dir}/cmis-index${container.name.suffix}</value>
          </value-param>
          <value-param>
             <name>exo.cmis.renditions.persistent</name>
