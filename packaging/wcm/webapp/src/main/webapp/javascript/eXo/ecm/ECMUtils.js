@@ -871,5 +871,15 @@
 	
 };
 
+ECMUtils.prototype.showInContextHelp = function(){
+  var parentElm = document.getElementById("idAllDrivers");
+  var inContextContentHelp = eXo.core.DOMUtil.findFirstDescendantByClass(parentElm,"div","InContextHelpContent");
+  if(inContextContentHelp) {
+	   setTimeout(function(){         
+	      inContextContentHelp.style.display = "none";
+	   }, 6*1000); 
+  }  
+};
+
 eXo.ecm.ECMUtils = new ECMUtils();
 

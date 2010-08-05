@@ -2914,5 +2914,9 @@
 	  <file-access-denied>File access denied!</file-access-denied>
 	</msg>
   </UIJCRExporerPortlet>
-    
+ <UITreeExplorer>
+  		<DriversArea>
+  				<allDrivers>Click to show drivers</allDrivers>
+  		</DriversArea>
+  </UITreeExplorer>   
 </bundle>

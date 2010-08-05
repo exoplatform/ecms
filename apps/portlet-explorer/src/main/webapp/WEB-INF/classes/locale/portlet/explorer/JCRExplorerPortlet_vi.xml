@@ -3329,5 +3329,9 @@
 	  <file-access-denied>Lỗi truy cập file!</file-access-denied>
 	</msg>
   </UIJCRExporerPortlet>
-  
+  <UITreeExplorer>
+  		<DriversArea>
+  				<allDrivers>Click to show drivers</allDrivers>
+  		</DriversArea>
+  </UITreeExplorer>
 </bundle>

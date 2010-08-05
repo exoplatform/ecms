@@ -175,8 +175,10 @@ public class UIJcrExplorerContainer extends UIContainer {
       boolean isShowActionBar = uiFEPortlet.isShowActionBar();
       uiActionbar.setTabOptions(viewList.get(0));
       uiActionbar.setRendered(isShowActionBar);
-      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);      
+      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
+      uiWorkingArea.setRenderedChild(UIDrivesArea.class);
       UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
+      uiSideBar.setRendered(true);
       if (uiSideBar.isRendered()) {
        uiSideBar.updateSideBarView();
       }

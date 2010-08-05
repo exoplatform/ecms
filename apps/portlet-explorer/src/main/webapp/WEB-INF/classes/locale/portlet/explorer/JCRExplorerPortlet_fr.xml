@@ -3290,5 +3290,9 @@
 	  <file-access-denied>File access denied!</file-access-denied>
 	</msg>
   </UIJCRExporerPortlet>
-  
+  <UITreeExplorer>
+  		<DriversArea>
+  				<allDrivers>Cliquer pour montrer les conducteurs</allDrivers>
+  		</DriversArea>
+  </UITreeExplorer>
 </bundle>
