@@ -3292,7 +3292,7 @@
   </UIJCRExporerPortlet>
   <UITreeExplorer>
   		<DriversArea>
-  				<allDrivers>Cliquer pour montrer les conducteurs</allDrivers>
+  				<allDrivers>Accès à la vue des lecteurs</allDrivers>
   		</DriversArea>
   </UITreeExplorer>
 </bundle>

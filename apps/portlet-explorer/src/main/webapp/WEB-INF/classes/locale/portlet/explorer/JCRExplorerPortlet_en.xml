@@ -3276,7 +3276,7 @@
   </UIJCRExporerPortlet>
   <UITreeExplorer>
   		<DriversArea>
-  				<allDrivers>Click to show drivers</allDrivers>
+  				<allDrivers>Access to all drives view</allDrivers>
   		</DriversArea>
   </UITreeExplorer>  
 </bundle>
