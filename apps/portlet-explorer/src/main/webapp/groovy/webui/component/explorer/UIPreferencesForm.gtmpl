@@ -44,9 +44,11 @@
 			    </td>
 			  </tr>
 			  <% } %>
-			  <% if (uicomponent.isAdvancePreferences()) { %>
+			  <% 
+			  	def advancedLinkDisplay = uicomponent.isAdvancePreferences() ? "block" : "none";
+			  %>
 			  <tr>
-			    <td style="margin-top: 10px;" colspan="4">
+			    <td style="display: $advancedLinkDisplay; margin-top: 10px;" colspan="4">
 			      <fieldset>
               <legend><a class="AdvancePreferences" style="text-decoration: none;" href="$advanceLink"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%> [ - ]</a></legend>
 					    <table>			  
@@ -71,7 +73,6 @@
 			      </fieldset>
 			    </td>
 			  </tr>
-			  <% } %>				
 			</table>
 			<%// start render action%>
 			<div class="UIAction"> 

@@ -523,9 +523,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+    	event.getSource().releaseLock();      
 //      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
       if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) != null) {
-      	event.getSource().releaseLock();
         uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
       } else    
       uiExplorer.cancelAction();

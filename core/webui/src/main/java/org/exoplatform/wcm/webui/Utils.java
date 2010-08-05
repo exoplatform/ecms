@@ -340,7 +340,8 @@ public class Utils {
       String editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDITOR_PAGE_URI);
       link.append(portalURI).append(editorPageURI).append("?").
                                                append("path=/").append(itemPath).
-                                               append("&backto=").append(backto);
+                                               append("&").append(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO).
+                                               append("=").append(backto);
       if (isEditable) link.append("&edit=true");
       if (isNew) link.append("&addNew=true");
 	  

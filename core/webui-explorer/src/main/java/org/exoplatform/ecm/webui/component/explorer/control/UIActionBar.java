@@ -39,6 +39,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.search.UIContentNameSearch;
 import org.exoplatform.ecm.webui.component.explorer.search.UIECMSearch;
@@ -114,7 +115,8 @@ public class UIActionBar extends UIForm {
   final static private String ROOT_SQL_QUERY = "select * from nt:base where contains(*, '$1') order by exo:dateCreated DESC, jcr:primaryType DESC" ;
   final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' and contains(*, '$1') order by jcr:path DESC, jcr:primaryType DESC";
   
-  private String backToLink;
+  private String backLink;
+  
   public UIActionBar() throws Exception{
     addChild(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SearchValidator.class));
     List<SelectItemOption<String>> typeOptions = new ArrayList<SelectItemOption<String>>();
@@ -122,7 +124,6 @@ public class UIActionBar extends UIForm {
     typeOptions.add(new SelectItemOption<String>(FIELD_XPATH, Query.XPATH));
     addChild(new UIFormSelectBox(FIELD_SEARCH_TYPE, FIELD_SEARCH_TYPE, typeOptions));
     addChild(new UIFormStringInput(FIELD_ADVANCE_SEARCH, FIELD_ADVANCE_SEARCH, null));
-    backToLink = initBackLink();
   }
 
   public void setTabOptions(String viewName) throws Exception {
@@ -143,10 +144,16 @@ public class UIActionBar extends UIForm {
     uiExplorer.setRenderTemplate(template);
   }
   public boolean hasBackButton() {
-    return backToLink!=null;
+    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
+    if (newLink != null)
+    	backLink = newLink;
+  	return backLink != null;
   }
   public String getBackLink() {
-    return backToLink;
+    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
+    if (newLink != null)
+    	backLink = newLink;
+    return backLink;
   }
   public String getTemplateName() { return templateName_;  }
 
@@ -180,21 +187,6 @@ public class UIActionBar extends UIForm {
   public boolean isShowSaveSession() throws Exception {
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class) ;
     return uiExplorer.getPreference().isJcrEnable() ;    
-  }
-  
-  private String initBackLink() {
-    String portalURI;
-    StringBuilder link;
-    PortalRequestContext pContext = Util.getPortalRequestContext();
-
-    String parameter = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
-    if (parameter==null) {
-      return null;
-    }
-    if (parameter.startsWith("/")) parameter = parameter.substring(1);    
-    portalURI = pContext.getPortalURI();
-    link = new StringBuilder().append(portalURI).append(parameter);
-    return link.toString();
   }
   
   public List<String> getTabList() { return tabList_; }

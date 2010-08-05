@@ -138,6 +138,7 @@ public class UIJCRExplorer extends UIContainer {
     
   private boolean isFilterSave_ ;
   private boolean isClickExpand_;
+  private boolean preferencesSaved_ = false;
   
   private int tagScope;
 
@@ -151,16 +152,14 @@ public class UIJCRExplorer extends UIContainer {
   public int getTagScope() { return tagScope; }
   public void setTagScope(int scope) { tagScope = scope; }
       
-  public boolean isFilterSave() {
-    return isFilterSave_;
-  }
-  
-  public void setFilterSave(boolean isFilterSave) {
-    isFilterSave_ = isFilterSave;
-  }
+  public boolean isFilterSave() { return isFilterSave_; }
+  public void setFilterSave(boolean isFilterSave) { isFilterSave_ = isFilterSave; }
   
   public boolean isClickExpand() { return isClickExpand_; }
   public void setClickExpand(boolean value) { isClickExpand_ = value; }
+  
+  public boolean isPreferencesSaved() { return preferencesSaved_; }
+  public void setPreferencesSaved(boolean value) { preferencesSaved_ = value; }
   
   public boolean isAddingDocument() {
     UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
@@ -507,13 +506,12 @@ public class UIJCRExplorer extends UIContainer {
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
       }
     }
-    if(preferences_.isShowSideBar() && getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
+    UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
+    uiSideBar.setRendered(preferences_.isShowSideBar());
+    if(preferences_.isShowSideBar()) {
       UITreeExplorer treeExplorer = findFirstComponentOfType(UITreeExplorer.class);
       treeExplorer.buildTree();
-      UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
-      if (uiSideBar.isRendered()) {
-        uiSideBar.updateSideBarView();
-      }
+      uiSideBar.updateSideBarView();
     }
     if (closePopup) {
       UIPopupContainer popupAction = getChild(UIPopupContainer.class);
@@ -628,15 +626,13 @@ public class UIJCRExplorer extends UIContainer {
   public void updateAjax(Event<?> event) throws Exception {
     UIJCRExplorerPortlet uiPortlet = getAncestorOfType(UIJCRExplorerPortlet.class);
     UIAddressBar uiAddressBar = findFirstComponentOfType(UIAddressBar.class) ;
-    uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
-        Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
-    if (!uiPortlet.isShowTopBar()) 
-      uiAddressBar.setRendered(false);
-    else 
-      uiAddressBar.setRendered(true);
-    event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;    
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class) ;
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class) ;
+    UISideBar uiSideBar = findFirstComponentOfType(UISideBar.class);
+    
+    uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
+        Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
+    event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;    
     if(preferences_.isShowSideBar()) {
       findFirstComponentOfType(UITreeExplorer.class).buildTree();
     }
@@ -659,12 +655,12 @@ public class UIJCRExplorer extends UIContainer {
         uiDocWorkspace.setRenderedChild(UIDocumentContainer.class) ;
         }
     }
+    uiActionBar.setRendered(uiPortlet.isShowActionBar());
+    uiAddressBar.setRendered(uiPortlet.isShowTopBar());
+    uiSideBar.setRendered(this.getPreference().isShowSideBar());
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
-    if (!uiPortlet.isShowActionBar()) 
-      uiActionBar.setRendered(false);
-    else 
-      uiActionBar.setRendered(true);
-    event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;    
+    event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
+    
     if(!isHidePopup_) {
       UIPopupContainer popupAction = getChild(UIPopupContainer.class) ;
       if(popupAction.isRendered()) {
@@ -1012,6 +1008,11 @@ public class UIJCRExplorer extends UIContainer {
   }
     
   public Preference getPreference() {
+  	if (preferencesSaved_) {
+      if (preferences_ != null && !this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar())
+      	preferences_.setShowSideBar(false);
+  		return preferences_;
+  	}
     HttpServletRequest request = Util.getPortalRequestContext().getRequest();
     Cookie[] cookies = request.getCookies();
     Cookie getCookieForUser;

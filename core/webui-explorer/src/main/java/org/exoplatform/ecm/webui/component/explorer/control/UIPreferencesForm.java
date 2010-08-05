@@ -266,9 +266,11 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       pref.setOrder(uiForm.getUIFormSelectBox(FIELD_ORDERBY).getValue());
       pref.setNodesPerPage(Integer.parseInt(uiForm.getUIFormSelectBox(NODES_PER_PAGE).getValue()));
       uiForm.savePreferenceInCookies();
-      uiExplorer.getPreference();
+      uiExplorer.setPreferencesSaved(true);
+      //uiExplorer.getPreference();
       uiExplorer.refreshExplorer();
       explorerPorltet.setRenderedChild(UIJCRExplorer.class);
+      uiExplorer.updateAjax(event);
     }
   }
 
