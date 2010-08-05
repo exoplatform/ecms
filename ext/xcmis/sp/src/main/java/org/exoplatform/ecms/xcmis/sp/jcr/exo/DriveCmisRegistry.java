@@ -33,6 +33,7 @@ import org.exoplatform.services.security.MembershipEntry;
 import org.xcmis.search.config.IndexConfiguration;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.Connection;
+import org.xcmis.spi.InvalidArgumentException;
 import org.xcmis.spi.PermissionService;
 import org.xcmis.spi.StorageProvider;
 import org.xcmis.spi.deploy.ExoContainerCmisRegistry;
@@ -65,9 +66,15 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
 
    private ManageDriveService driveService;
 
-   private String repository = "repository";
+   private String defRepository = "repository";
+
+   private String repository;
 
    private PermissionService permissionService;
+
+   private String rootIndexDir;
+
+   private boolean persistRenditions;
 
    public DriveCmisRegistry(RepositoryService repositoryService, DocumentReaderService documentReaderService,
       ManageDriveService driveService, InitParams initParams)
@@ -83,6 +90,47 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
    public DriveCmisRegistry(RepositoryService repositoryService, ManageDriveService driveService, InitParams initParams)
    {
       this(repositoryService, null, driveService, initParams);
+   }
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   public Connection getConnection(String storageId)
+   {
+      StorageProvider provider = storageProviders.get(storageId);
+      if (provider == null)
+      {
+         DriveData drive = null;
+         try
+         {
+            drive = driveService.getDriveByName(storageId, repository);
+         }
+         catch (Exception e)
+         {
+            throw new CmisRuntimeException(e.getMessage(), e);
+         }
+         if (drive != null)
+         {
+            // TODO : No indexing on drive which met after start.
+            StorageProviderImpl provider0 = createStorageProvider(drive, null);
+            try
+            {
+               provider0.init();
+               provider = provider0;
+            }
+            catch (Exception e)
+            {
+               throw new CmisRuntimeException("Initializing of storage provider " + storageId + " failed. "
+                  + e.getMessage(), e);
+            }
+         }
+      }
+      if (provider != null)
+      {
+         return provider.getConnection();
+      }
+      throw new InvalidArgumentException("Storage '" + storageId + "' does not exist.");
    }
 
    /**
@@ -135,9 +183,24 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
             StorageProvider provider = storageProviders.get(driveName);
             if (provider == null)
             {
-               // TODO personal user drives here
+               // TODO : No indexing on drive which met after start.
+               StorageProviderImpl provider0 = createStorageProvider(drive, null);
+               try
+               {
+                  provider0.init();
+                  provider = provider0;
+               }
+               catch (Exception e)
+               {
+                  LOG.error("Initializing of storage provider " + driveName + " failed. ", e);
+               }
+               // XXX NOTE New storage is not add in registry.
+               // At the moment met only private/public user's storage.
+               // It can be a lot storage if user's database is large.
+               // Probably will need create specific storage provider for this.
             }
-            else
+
+            if (provider != null)
             {
                Connection connection = null;
                try
@@ -167,13 +230,13 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
    @Override
    public void start()
    {
-      String rootIndexDir = getValueParameter("rootIndexDir", null);
-      String repository1 = getValueParameter("repository", repository);
-      boolean persistRenditions = Boolean.parseBoolean(getValueParameter("exo.cmis.renditions.persistent", "false"));
+      rootIndexDir = getValueParameter("rootIndexDir", null);
+      repository = getValueParameter("repository", defRepository);
+      persistRenditions = Boolean.parseBoolean(getValueParameter("exo.cmis.renditions.persistent", "false"));
       List<DriveData> allDrives = null;
       try
       {
-         allDrives = driveService.getAllDrives(repository1);
+         allDrives = driveService.getAllDrives(repository);
       }
       catch (Exception e)
       {
@@ -188,8 +251,6 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
             continue;
          }
          String driveName = drive.getName();
-         String driveRootPath = drive.getHomePath();
-         String driveWorkspace = drive.getWorkspace();
          String indexDir =
             rootIndexDir != null ? (rootIndexDir.charAt(rootIndexDir.length() - 1) == File.separatorChar ? rootIndexDir
                + driveName : rootIndexDir + File.separatorChar + driveName) : null;
@@ -199,14 +260,7 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
             indexConfiguration = new IndexConfiguration();
             indexConfiguration.setIndexDir(indexDir);
          }
-         Map<String, Object> properties = new HashMap<String, Object>();
-         properties.put("exo.cmis.renditions.persistent", persistRenditions);
-         StorageConfiguration configuration =
-            new StorageConfiguration(driveName, repository1, driveWorkspace, driveRootPath, indexConfiguration,
-               properties, null);
-         StorageProviderImpl sp =
-            new StorageProviderImpl(repositoryService, documentReaderService, permissionService, this, configuration);
-
+         StorageProviderImpl sp = createStorageProvider(drive, indexConfiguration);
          sp.addNodeTypeMapping(nodeTypeMapping);
          try
          {
@@ -215,7 +269,7 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
          }
          catch (Exception e)
          {
-            LOG.error("Initializing of storage provider " + driveName + " failed. ", e);
+            LOG.error("Initializing of storage provider " + driveName + " failed. " + e.getMessage());
          }
       }
 
@@ -248,5 +302,21 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
          }
       }
       return value != null ? value : defaultValue;
+   }
+
+   private StorageProviderImpl createStorageProvider(DriveData drive, IndexConfiguration indexConfiguration)
+   {
+      String driveName = drive.getName();
+      String driveRootPath = drive.getHomePath();
+      String driveWorkspace = drive.getWorkspace();
+      Map<String, Object> properties = new HashMap<String, Object>();
+      properties.put("exo.cmis.renditions.persistent", persistRenditions);
+      StorageConfiguration configuration =
+         new StorageConfiguration(driveName, repository, driveWorkspace, driveRootPath, indexConfiguration, properties,
+            null);
+      StorageProviderImpl sp =
+         new StorageProviderImpl(repositoryService, documentReaderService, permissionService, this, configuration);
+      sp.addNodeTypeMapping(nodeTypeMapping);
+      return sp;
    }
 }

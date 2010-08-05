@@ -355,36 +355,19 @@ abstract class BaseJcrStorage implements TypeManager
          {
             TypeDefinition typeDefinition = getTypeDefinition(typeId, includePropertyDefinitions);
             String nodeTypeName = typeDefinition.getLocalName();
-
-            if (getTypeMapping(nodeTypeName) != null)
+            NodeTypeManager nodeTypeManager = session.getWorkspace().getNodeTypeManager();
+            for (NodeTypeIterator iter = nodeTypeManager.getPrimaryNodeTypes(); iter.hasNext();)
             {
-               for (TypeMapping e : nodeTypeMapping.values())
+               NodeType nt = iter.nextNodeType();
+               TypeMapping mapping = getTypeMapping(nt);
+               // Get only direct children of specified type.
+               if (mapping == null && nt.isNodeType(nodeTypeName) && getTypeLevelHierarchy(nt, nodeTypeName) == 1)
                {
-                  if (e.getParentType().equals(typeId))
-                  {
-                     types.add(getTypeDefinition(e.getNodeTypeName(), includePropertyDefinitions));
-                  }
+                  types.add(getTypeDefinition(nt, includePropertyDefinitions));
                }
-            }
-            else
-            {
-               NodeTypeManager nodeTypeManager = session.getWorkspace().getNodeTypeManager();
-               for (NodeTypeIterator iter = nodeTypeManager.getPrimaryNodeTypes(); iter.hasNext();)
+               else if (mapping != null && mapping.getParentType().equals(typeId))
                {
-                  NodeType nt = iter.nextNodeType();
-                  TypeMapping mapping = getTypeMapping(nt.getName());
-                  // Get only direct children of specified type.
-                  if (mapping == null && nt.isNodeType(nodeTypeName) && getTypeLevelHierarchy(nt, nodeTypeName) == 1)
-                  {
-                     types.add(getTypeDefinition(nt, includePropertyDefinitions));
-                  }
-                  else if (mapping != null)
-                  {
-                     if (mapping.getParentType().equals(typeId))
-                     {
-                        types.add(getTypeDefinition(nt, includePropertyDefinitions));
-                     }
-                  }
+                  types.add(getTypeDefinition(mapping, nt, includePropertyDefinitions));
                }
             }
          }
@@ -523,14 +506,22 @@ abstract class BaseJcrStorage implements TypeManager
     */
    public TypeDefinition getTypeDefinition(NodeType nodeType, boolean includePropertyDefinition)
    {
-      TypeMapping mapping = getTypeMapping(nodeType.getName());
-      if (nodeType.isNodeType(JcrCMIS.NT_FILE) || (mapping != null && mapping.getBaseType() == BaseType.DOCUMENT))
+      TypeMapping mapping = getTypeMapping(nodeType);
+      return getTypeDefinition(mapping, nodeType, includePropertyDefinition);
+   }
+
+   private TypeDefinition getTypeDefinition(TypeMapping mapping, NodeType nodeType, boolean includePropertyDefinition)
+   {
+      if (nodeType.isNodeType(JcrCMIS.NT_FILE))
       {
+         // XXX Mapping not supported for documents at the moment.
+         // Need pluggable mechanism for reading content first.
+         // Before this no sense to use any mapping.
          return getDocumentDefinition(nodeType, includePropertyDefinition);
       }
       else if (nodeType.isNodeType(JcrCMIS.NT_FOLDER) || (mapping != null && mapping.getBaseType() == BaseType.FOLDER))
       {
-         return getFolderDefinition(nodeType, includePropertyDefinition);
+         return getFolderDefinition(nodeType, includePropertyDefinition, mapping);
       }
       else if (nodeType.isNodeType(JcrCMIS.CMIS_NT_RELATIONSHIP))
       {
@@ -592,12 +583,6 @@ abstract class BaseJcrStorage implements TypeManager
             }
          }
       }
-      else
-      {
-         // Since reach this method node type is supported BUT with mapping.
-         // Node type is not nt:file and does not extend nt:file.
-         def.setParentId(getTypeMapping(localTypeName).getParentType());
-      }
 
       def.setQueryable(true);
       def.setQueryName(typeId);
@@ -615,9 +600,10 @@ abstract class BaseJcrStorage implements TypeManager
     * @param nt node type
     * @param includePropertyDefinition true if need include property definition
     *        false otherwise
+    * @param typeMapping TypeMapping
     * @return folder type definition
     */
-   private TypeDefinition getFolderDefinition(NodeType nt, boolean includePropertyDefinition)
+   private TypeDefinition getFolderDefinition(NodeType nt, boolean includePropertyDefinition, TypeMapping typeMapping)
    {
       TypeDefinition def = new TypeDefinition();
       String localTypeName = nt.getName();
@@ -656,7 +642,7 @@ abstract class BaseJcrStorage implements TypeManager
       {
          // Since reach this method node type is supported BUT with mapping.
          // Node type is not nt:folder and does not extend nt:folder.
-         def.setParentId(getTypeMapping(localTypeName).getParentType());
+         def.setParentId(typeMapping.getParentType());
       }
       def.setQueryable(true);
       def.setQueryName(typeId);
@@ -667,12 +653,21 @@ abstract class BaseJcrStorage implements TypeManager
       return def;
    }
 
-   TypeMapping getTypeMapping(String nodeTypeName)
+   TypeMapping getTypeMapping(NodeType nodeType)
    {
-      TypeMapping tm = null;
-      if (nodeTypeMapping != null)
+      if (nodeTypeMapping == null)
       {
-         tm = nodeTypeMapping.get(nodeTypeName);
+         return null;
+      }
+      String nodeTypeName = nodeType.getName();
+      TypeMapping tm = nodeTypeMapping.get(nodeTypeName);
+      if (tm == null)
+      {
+         NodeType[] supertypes = nodeType.getSupertypes();
+         for (int i = 0; i < supertypes.length && tm == null; i++)
+         {
+            tm = nodeTypeMapping.get(supertypes[i].getName());
+         }
       }
       return tm;
    }

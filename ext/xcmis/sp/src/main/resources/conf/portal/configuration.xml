@@ -67,11 +67,6 @@
                <property name="baseType" value="cmis:folder" />
             </properties-param>
             <properties-param>
-               <name>exo:webContent</name>
-               <property name="parentType" value="cmis:folder" />
-               <property name="baseType" value="cmis:folder" />
-            </properties-param>
-            <properties-param>
                <name>exo:article</name>
                <property name="parentType" value="cmis:folder" />
                <property name="baseType" value="cmis:folder" />

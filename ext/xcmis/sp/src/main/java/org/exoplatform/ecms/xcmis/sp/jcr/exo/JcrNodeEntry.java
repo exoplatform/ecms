@@ -1132,11 +1132,8 @@ class JcrNodeEntry
          }
          if (getBaseType() == BaseType.DOCUMENT || !isRoot())
          {
-            Node parent = node.getParent();
-            if (node.getPath().startsWith(storage.getJcrRootPath()))
-            {
-               parents.add(storage.fromNode(parent));
-            }
+            JcrNodeEntry parent = storage.fromNode(node.getParent());
+            parents.add(parent);
          }
          return parents;
       }
