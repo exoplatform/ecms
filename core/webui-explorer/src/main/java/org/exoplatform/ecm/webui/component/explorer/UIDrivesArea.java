@@ -212,6 +212,7 @@ public class UIDrivesArea extends UIContainer {
 //      uiJCRExplorer.setPreferences(pref);
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
+      uiJCRExplorer.setPreferencesSaved(true);
       
       SessionProvider provider = SessionProviderFactory.createSessionProvider();                  
       ManageableRepository repository = rservice.getRepository(uiDrivesArea.getRepository());
