@@ -31,14 +31,11 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.lock.Lock;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderResponse;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -46,42 +43,31 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.control.action.AddDocumentActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent;
-import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
-import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
-
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.webui.page.UIPageBrowser.AddNewActionListener;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.MembershipType;
-import org.exoplatform.services.organization.OrganizationService;
-
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
-import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.w3c.dom.Element;
 
@@ -165,11 +151,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     UIJcrExplorerContainer explorerContainer = getChild(UIJcrExplorerContainer.class);
     UIJcrExplorerEditContainer editContainer = getChild(UIJcrExplorerEditContainer.class);
-    PortletRequestContext portletReqContext = (PortletRequestContext) context ;
-    String backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
-    if (backToValue != null && backToValue.length() > 0) {
-    	getPortletPreferences().setValue(Utils.URL_BACKTO, backToValue);
-    }
+    PortletRequestContext portletReqContext = (PortletRequestContext) context ;    
     HashMap<String, String> map = getElementByContext(context);
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     HashMap<String, String> changeDrive = (HashMap<String, String>)pcontext.getAttribute("jcrexplorer-show-document");

@@ -144,15 +144,25 @@ public class UIActionBar extends UIForm {
     uiExplorer.setRenderTemplate(template);
   }
   public boolean hasBackButton() {
-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
-    if (newLink != null)
-    	backLink = newLink;
+    PortalRequestContext preq;
+    String backToValue=null;
+    preq = Util.getPortalRequestContext();
+    if (!preq.useAjax()) {
+      backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
+    }
+    if (backToValue != null)
+    	backLink = backToValue;
   	return backLink != null;
   }
   public String getBackLink() {
-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
-    if (newLink != null)
-    	backLink = newLink;
+    PortalRequestContext preq;
+    String backToValue=null;
+    preq = Util.getPortalRequestContext();
+    if (!preq.useAjax()) {
+      backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
+    }
+    if (backToValue != null)
+      backLink = backToValue;
     return backLink;
   }
   public String getTemplateName() { return templateName_;  }
