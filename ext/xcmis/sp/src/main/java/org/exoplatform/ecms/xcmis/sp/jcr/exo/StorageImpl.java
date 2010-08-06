@@ -799,9 +799,10 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                new RepositoryCapabilities(CapabilityACL.MANAGE, CapabilityChanges.NONE,
                   CapabilityContentStreamUpdatable.ANYTIME, CapabilityJoin.NONE, CapabilityQuery.BOTHCOMBINED,
                   CapabilityRendition.READ, false, true, true, true, true, true, false, false), new ACLCapability(
-                  permissionMapping, Collections.unmodifiableList(permissions), AccessControlPropagation.OBJECTONLY,
-                  SupportedPermissions.BASIC), SystemIdentity.ANONIM, SystemIdentity.ANY, null, null, true,
-               REPOSITORY_DESCRIPTION, VENDOR_NAME, PRODUCT_NAME, PRODUCT_VERSION, null);
+                  permissionMapping, Collections.unmodifiableList(permissions),
+                  AccessControlPropagation.REPOSITORYDETERMINED, SupportedPermissions.BASIC), SystemIdentity.ANONIM,
+               SystemIdentity.ANY, null, null, true, REPOSITORY_DESCRIPTION, VENDOR_NAME, PRODUCT_NAME,
+               PRODUCT_VERSION, null);
       }
 
       // TODO update latestChangeLogToken when ChangeLogToken feature will be implemented

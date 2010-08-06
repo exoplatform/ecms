@@ -55,7 +55,7 @@
                   <name>autoCreatedInNewRepository</name>
                   <description>Node types configuration file</description>
                   <value>jar:/conf/cmis-nodetypes-config.xml</value>
-                  <value>jar:/conf/test/test-cmis-nodetypes-config.xml</value>
+                  <!--                  <value>jar:/conf/test/test-cmis-nodetypes-config.xml</value>-->
                </values-param>
             </init-params>
          </component-plugin>
@@ -69,7 +69,7 @@
          <value-param>
             <name>conf-path</name>
             <description>JCR configuration file</description>
-            <value>jar:/conf/tck/tck-cmis-configuration.xml</value>
+            <value>jar:/conf/tck/tck-cmis-jcr-configuration.xml</value>
          </value-param>
       </init-params>
    </component>
