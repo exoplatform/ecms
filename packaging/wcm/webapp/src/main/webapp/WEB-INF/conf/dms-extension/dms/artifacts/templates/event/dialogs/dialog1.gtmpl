@@ -93,7 +93,7 @@
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">					
 						<%
-			        String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=SuperBasicWCM", ""] ;
+			        String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=toolbar:SuperBasicWCM", ""] ;
 			        uicomponent.addRichtextField("summary", fieldSummary) ;
 		      	%>
 		      </div>
@@ -105,7 +105,7 @@
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">
 						<%
-			        String[] fieldContent = ["jcrPath=/node/exo:text", "options=BasicWCM", ""] ;
+			        String[] fieldContent = ["jcrPath=/node/exo:text", "options=toolbar:BasicWCM", ""] ;
 			        uicomponent.addRichtextField("content", fieldContent) ;        
 			      %>
 					</div>
