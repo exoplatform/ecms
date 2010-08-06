@@ -65,7 +65,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   private boolean isDisplayOptionPanel = false;
 
   public UIDocumentFormController() throws Exception {
-    addChild(UISelectDocumentForm.class, null, null).setRendered(false) ;
+    addChild(UISelectDocumentForm.class, null, null);
     UIDocumentForm uiDocumentForm = createUIComponent(UIDocumentForm.class, null, null) ;
     uiDocumentForm.setContentType(DEFAULT_VALUE);
     uiDocumentForm.addNew(true);    
