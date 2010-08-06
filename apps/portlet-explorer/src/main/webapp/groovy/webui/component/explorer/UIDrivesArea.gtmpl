@@ -7,6 +7,14 @@
 %>
 <div id="$uicomponent.id" class="UIDrivesArea">
 	<div class="UIDriversAreaContainer">
+    <% if (uicomponent.isFirstVisit()) {
+        uicomponent.setFirstVisit(false); 
+     %>
+        <div class="Info" style="padding-left: 25px;font-size:12px">
+          <%= _ctx.appRes("UIDrivesArea.DrivesArea.allDrives") %>
+          &nbsp;<img src="/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/DriversButton.gif" />
+        </div>
+    <% } %>
 	  <%if(mainDrives.size() > 0) {%>
 			<div class="RowDrives">
 				<div class="IconArrowDrives TextTitleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GeneralDrives" )%></div>

@@ -73,8 +73,17 @@ public class UIDrivesArea extends UIContainer {
   
   final public static String FIELD_SELECTREPO = "selectRepo" ; 
   private String repoName_;
+  private boolean firstVisit = true;
   
   public UIDrivesArea() throws Exception {
+  }
+
+  public void setFirstVisit(boolean firstVisit) {
+    this.firstVisit = firstVisit;
+  }
+
+  public boolean isFirstVisit() {
+    return firstVisit;
   }
 
   public String getLabel(String id)  {

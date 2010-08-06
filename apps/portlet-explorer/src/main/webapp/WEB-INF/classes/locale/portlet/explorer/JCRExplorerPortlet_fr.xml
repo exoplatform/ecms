@@ -3290,9 +3290,9 @@
 	  <file-access-denied>File access denied!</file-access-denied>
 	</msg>
   </UIJCRExporerPortlet>
-  <UITreeExplorer>
-  		<DriversArea>
-  				<allDrivers>Accès à la vue des lecteurs</allDrivers>
-  		</DriversArea>
-  </UITreeExplorer>
+  <UIDrivesArea>
+    <DrivesArea>
+      <allDrives>Vous pouvez accéder à cette vue en utilisant le bouton Lecteurs à votre gauche</allDrives>
+    </DrivesArea>
+  </UIDrivesArea>   
 </bundle>

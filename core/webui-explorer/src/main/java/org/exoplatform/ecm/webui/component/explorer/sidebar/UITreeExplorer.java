@@ -86,17 +86,9 @@ public class UITreeExplorer extends UIContainer {
   private static final Log LOG  = ExoLogger.getLogger("dms.UIJCRExplorer");
   private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   private TreeNode treeRoot_ ;
-  private boolean firstVisit = true;
   public UITreeExplorer() throws Exception { 
   }
   
-  public void setFirstVisit(boolean firstVisit) {
-    this.firstVisit = firstVisit;
-  }
-
-  public boolean isFirstVisit() {
-    return firstVisit;
-  }
   
   public UIRightClickPopupMenu getContextMenu() {
     return getAncestorOfType(UIWorkingArea.class).getChild(UIRightClickPopupMenu.class) ;

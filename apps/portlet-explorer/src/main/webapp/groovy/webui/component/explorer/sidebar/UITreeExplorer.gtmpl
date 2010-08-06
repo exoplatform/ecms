@@ -18,9 +18,6 @@
 
   def idSelected = uicomponent.getEncodeCurrentPath();  
   _ctx.getRequestContext().getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.selectedPath('${idSelected}')");
-  if (uicomponent.isFirstVisit()) {
-  	_ctx.getRequestContext().getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.showInContextHelp()");
-  }
 
   public void writeNodes(TreeNode rootTree) {
     UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu();
@@ -201,36 +198,6 @@
 			  	<%if (!uicomponent.isDirectlyDrive()) {%>
 			  		<a href="<%=uicomponent.event("ShowDrivesArea")%>">
 			  				<div class="DriversButton" title="Drivers"><span></span></div>
-			  				<%
-			  				if (uicomponent.isFirstVisit()) {
-			  				uicomponent.setFirstVisit(false);
-			  				%>
-			  				<div id="idAllDrivers" style="position: absolute;">
-            <div class="InContextHelpContent" style="width: 159px; top: 18px; left: 20px; *left: -130px; display: block;">                    
-              <div class="InContextHelpPopup">
-                <div id="FolderPathHelpID" class="LeftInContextHelpPopup">
-                  <div class="InContextHelpTL">
-                    <div class="InContextHelpTR">
-                      <div class="InContextHelpTC"><span></span></div>
-                    </div>
-                  </div>
-                  <div class="InContextHelpML">
-                    <div class="InContextHelpMR">
-                      <div class="ContentPosition" style="height: 0px; ">
-                        <div class="InContextHelpContentData" style="width: 105px; "><%= _ctx.appRes("UITreeExplorer.DriversArea.allDrivers") %></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="InContextHelpBL">
-                    <div class="InContextHelpBR">
-                      <div class="InContextHelpBC"><span></span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>                      
-            </div>
-         </div>
-         <%}%>
 			  	 </a>
 			  	<%}%>
 			  	<div class="ClearLeft"><span></span></div>
