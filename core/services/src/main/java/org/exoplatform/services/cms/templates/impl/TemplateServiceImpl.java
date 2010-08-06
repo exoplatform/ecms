@@ -505,7 +505,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public void removeCacheTemplate(String name) throws Exception {
-    templateService.getTemplatesCache().remove(name); 
+    templateService.reloadTemplate(name);
   }
   
   /**
@@ -647,7 +647,6 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     String templatePath = null;
     if (specifiedTemplatesHome.hasNode(templateName)) {
       templatePath = specifiedTemplatesHome.getNode(templateName).getPath();
-      updateTemplate(specifiedTemplatesHome.getNode(templateName), templateFile, roles);
     } else {
       templatePath = createTemplate(specifiedTemplatesHome, templateName, templateFile, roles);
     }
@@ -797,10 +796,19 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile, String repository) throws Exception {
     Session session = getSession(repository);
     Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
-    String templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label, 
-        isDocumentTemplate, templateName, roles, templateFile);
-    session.save();
-    session.logout();
+    String templatePath = null;
+    try {
+      templatePath = templatesHome.getPath() + "/" + nodeTypeName + "/" + templateType + "/" + templateName;
+      Node templateNode = (Node)session.getItem(templatePath);
+      updateTemplate(templateNode,templateFile, roles);
+      session.save();
+    } catch(PathNotFoundException e) {
+      templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label, 
+          isDocumentTemplate, templateName, roles, templateFile);
+      session.save();
+    } finally {
+      session.logout();
+    }
     //Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
     removeTemplateNodeTypeList();
