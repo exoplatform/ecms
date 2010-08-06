@@ -13,9 +13,9 @@
   <name>eXo ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
   <scm>
-    <connection>scm:svn:http://svn.exoplatform.org/projects/ecms/trunk</connection>
-    <developerConnection>scm:svn:http://svn.exoplatform.org/projects/ecms/trunk</developerConnection>
-    <url>http://fisheye.exoplatform.org/browse/ecms/trunk</url>
+    <connection>scm:svn:http://svn.exoplatform.org/projects/ecms/branches/2.1.x</connection>
+    <developerConnection>scm:svn:http://svn.exoplatform.org/projects/ecms/branches/2.1.x</developerConnection>
+    <url>http://fisheye.exoplatform.org/browse/ecms/branches/2.1.x</url>
   </scm>
   <issueManagement>
     <system>jira</system>
