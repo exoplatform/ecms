@@ -98,7 +98,7 @@
       </preference>   
       <preference>
         <name>editInNewWindow</name>
-        <value>false</value>
+        <value>true</value>
         <read-only>false</read-only>
       </preference>       
 
