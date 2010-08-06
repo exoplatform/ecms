@@ -832,9 +832,11 @@ var ListView = function() {
 		var title = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "TitleTable");				
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
 		var resizeSizeBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");		
-		var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");		
-		sizeBarContainer.style.height = workingArea.offsetHeight + 'px';	
-		resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
+		var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
+		if (sizeBarContainer)
+			sizeBarContainer.style.height = workingArea.offsetHeight + 'px';
+		if (resizeSizeBar)
+			resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
 		
 		if (documentWorkspace)									
 	 		documentWorkspace.style.height = workingArea.offsetHeight + 'px';									
@@ -848,9 +850,10 @@ var ListView = function() {
 					view.style.height = workingArea.offsetHeight + 'px';										
 		}
 		var container = document.getElementById("UITreeExplorer");
-		if (!container) {
+		if (!container && uiResizableBlock) {
 			container = DOM.findFirstDescendantByClass(uiResizableBlock, "div", "SideBarContent");
-			eXo.ecm.UIListView.initialHeightOfContainer = container.offsetHeight;
+			if (container)
+				eXo.ecm.UIListView.initialHeightOfContainer = container.offsetHeight;
 		}		
 	}
 	
