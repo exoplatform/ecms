@@ -833,6 +833,7 @@ var ListView = function() {
 		var sizeBarContainer = DOM.findFirstDescendantByClass(workingArea, "div", "UISideBarContainer");
 		var resizeSizeBar = DOM.findFirstDescendantByClass(workingArea, "div", "ResizeSideBar");		
 		var uiResizableBlock = DOM.findFirstDescendantByClass(workingArea, "div", "UIResizableBlock");
+		var barContent = DOM.findFirstDescendantByClass(workingArea, "div", "BarContent");	
 		if (sizeBarContainer)
 			sizeBarContainer.style.height = workingArea.offsetHeight + 'px';
 		if (resizeSizeBar)
