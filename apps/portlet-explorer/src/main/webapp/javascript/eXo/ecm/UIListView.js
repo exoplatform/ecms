@@ -854,7 +854,12 @@ var ListView = function() {
 			container = DOM.findFirstDescendantByClass(uiResizableBlock, "div", "SideBarContent");
 			if (container)
 				eXo.ecm.UIListView.initialHeightOfContainer = container.offsetHeight;
-		}		
+		}	
+		
+		var itemArea = document.getElementById("SelectItemArea");
+		if (!itemArea & container.className == "UITreeExplorer") {
+			container.style.height = (resizeSizeBar.offsetHeight - barContent.offsetHeight - 30) + "px";
+		}	
 	}
 	
 	ListView.prototype.hideColumn = function(obj, event) {
