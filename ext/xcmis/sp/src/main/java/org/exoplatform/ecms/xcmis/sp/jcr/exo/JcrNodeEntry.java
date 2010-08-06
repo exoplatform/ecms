@@ -275,30 +275,18 @@ class JcrNodeEntry
 
    String getPath()
    {
-      try
+      String rootPath = storage.getJcrRootPath();
+      String nodePath = path();
+      if (rootPath.length() > 1 && rootPath.endsWith("/"))
       {
-         String rootPath = storage.getJcrRootPath();
-         String nodePath = path();
-         if (rootPath.contains("${userId}"))
-         {
-            String userId = node.getSession().getUserID();
-            rootPath = rootPath.replace("${userId}", userId);
-         }
-         if (rootPath.endsWith("/"))
-         {
-            rootPath = rootPath.substring(0, rootPath.length() - 1);
-         }
-         if (rootPath.equals(nodePath))
-         {
-            return "/";
-         }
-         nodePath = nodePath.substring(rootPath.length());
-         return nodePath;
+         rootPath = rootPath.substring(0, rootPath.length() - 1);
       }
-      catch (RepositoryException re)
+      if (rootPath.equals(nodePath))
       {
-         throw new CmisRuntimeException("Unable get object's path. " + re.getMessage(), re);
+         return "/";
       }
+      nodePath = nodePath.substring(rootPath.length());
+      return nodePath;
    }
 
    String path()

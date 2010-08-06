@@ -767,7 +767,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             permissions.add(new Permission(b.value(), ""));
          }
 
-         String rootFolderPath = storageConfiguration.getRootNodePath();
+         String rootFolderPath = getJcrRootPath();
          String rootIdentifier = null;
          if ("/".equals(rootFolderPath))
          {
@@ -775,15 +775,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
          else
          {
-            if (rootFolderPath.contains("${userId}"))
-            {
-               String userId = session.getUserID();
-               if (!(userId.equals(SystemIdentity.SYSTEM) || userId.equals(SystemIdentity.ANONIM) || userId
-                  .equals(SystemIdentity.ANY)))
-               {
-                  rootFolderPath = rootFolderPath.replace("${userId}", userId);
-               }
-            }
             try
             {
                rootIdentifier = ((ExtendedNode)session.getItem(rootFolderPath)).getIdentifier();
