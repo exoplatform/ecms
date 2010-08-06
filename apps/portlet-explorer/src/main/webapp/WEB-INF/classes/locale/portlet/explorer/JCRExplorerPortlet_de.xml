@@ -3304,6 +3304,7 @@
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
+      <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>   
 </bundle>

@@ -3293,6 +3293,7 @@
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>Vous pouvez accéder à cette vue en utilisant le bouton Lecteurs à votre gauche</allDrives>
+      <ShowDrives>Montrer les lecteurs</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>   
 </bundle>
