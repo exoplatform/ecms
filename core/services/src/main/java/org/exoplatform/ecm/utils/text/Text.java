@@ -483,6 +483,9 @@ public class Text {
    * @return the escaped name
    */
   public static String escapeIllegalJcrChars(String name) {
+  	if (name == null || name.length() == 0) {
+  		return "";
+  	}
     StringBuffer buffer = new StringBuffer(name.length() * 2);
     for (int i = 0; i < name.length(); i++) {
       char ch = name.charAt(i);
