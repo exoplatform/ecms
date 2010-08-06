@@ -197,7 +197,7 @@
 			    </div>
 			  	<%if (!uicomponent.isDirectlyDrive()) {%>
 			  		<a href="<%=uicomponent.event("ShowDrivesArea")%>">
-			  				<div class="DriversButton" title="<%= _ctx.appRes("UITreeExplorer.DriversArea.ShowDrives") %>"><span></span></div>
+			  				<div class="DriversButton" title="<%= _ctx.appRes("UIDrivesArea.DriversArea.ShowDrives") %>"><span></span></div>
 			  	 </a>
 			  	<%}%>
 			  	<div class="ClearLeft"><span></span></div>
