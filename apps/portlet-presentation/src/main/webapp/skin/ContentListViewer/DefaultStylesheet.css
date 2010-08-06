@@ -390,7 +390,7 @@
 }
 
 .EditContentIcon {
-	background: url('DefaultSkin/icons/EditContentIcon.png') no-repeat center center;
+	background: url('DefaultSkin/icons/EditContentIcon.png') no-repeat left center;
 	margin-left:6px;
 	padding:2px 7px;
 }
@@ -399,6 +399,11 @@
 	background: url('DefaultSkin/icons/CloseContentIcon.png') no-repeat center center;
 	margin-left:6px;
 	padding:2px 7px;
+}
+
+
+.UISingleContentViewerPortlet .ContainerHoverClass {
+	border:1px solid #bfd5ed;
 }
 
 .ContainerHoverClass {
