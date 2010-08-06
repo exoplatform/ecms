@@ -16,10 +16,13 @@
  */
 package org.exoplatform.wcm.webui.authoring;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.jcr.Item;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -64,17 +67,24 @@ public class UIDashboardForm extends UIForm {
 	  PublicationManager manager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
 	  String user = PortalRequestContext.getCurrentInstance().getRemoteUser();
 	  String lang = Util.getPortalRequestContext().getLocale().getLanguage();
-	  List<Node> nodes;
-	  
+	  List<Node> nodes = new ArrayList<Node>();
+	  List<Node> temp = new ArrayList<Node>();
 	  try {
 		  nodes = manager.getContents(fromstate, tostate, date, user, lang, "collaboration");
-		  return nodes;
+		  for(Node node : nodes) {
+		  	if(isInTrash(node) != true) {		  				  		
+		  		temp.add(node);
+		  	}
+		  }		  
 	  } catch (Exception e) {
-		  
+		  temp = new ArrayList<Node>();
 	  }
-	  return null;
+	  return temp;
   }
   
+  private boolean isInTrash(Node node) throws RepositoryException {
+  	return node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_RESTORELOCATION);
+  }
   /**
    * The listener interface for receiving ShowDocumentAction events.
    * The class that is interested in processing a changeRepositoryAction
