@@ -1,3 +1,12 @@
+<% 
+import org.exoplatform.wcm.webui.Utils;
+if (Utils.isShowQuickEdit()) { %>
+<style>
+.UIPresentationContainer{
+  border:1px solid transparent;
+}
+</style>
+<% } %>
 <div class="UISiteAdminToolBar">
 	<% uiform.begin(); %>
 	<div>
