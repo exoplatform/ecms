@@ -1,8 +1,20 @@
-﻿var b_changed = false;
+﻿/**
+ * Variable to check if some content has changed
+ * - true if some content has changed
+ **/
+var b_changed = false;
 
+/**
+ * Change the current state to inform some content has changed
+ **/
 function changed() {
   b_changed = true;
 }
+
+/**
+ * UPDATE AJAX GET METHOD
+ * - manage changes popup
+ **/
 
 function ajaxGet(url, callback) {
   var bypassActionbar= -1; //url.indexOf("uicomponent=UIActionBar_");
@@ -19,6 +31,12 @@ function ajaxGet(url, callback) {
   if (!callback) callback = null ;
   doRequest("Get", url, null, callback) ;
 };
+
+/**
+ * UPDATE FORM SUBMIT METHOD
+ * - manage changes popup
+ * - manage CKeditor update in textareas
+ **/
 
 UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
  if (!callback) callback = null;
@@ -65,19 +83,16 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
   }
 } ;
 eXo.webui.UIForm = new UIForm();
+/**
+ * END UPDATE FORM
+ **/
 
-window.onbeforeunload = function (e) {
-  var e = e || window.event;
 
-  // For IE and Firefox
-  if (e) {
-    e.returnValue = 'Any string';
-  }
 
-  // For Safari
-  return 'Any string';
-};
-
+/**
+ * Before we change the url, we check if the content has changed
+ * Inform the user with a popup
+ **/
 
 function closeIt(e) {
   if (b_changed) {
@@ -91,6 +106,41 @@ function closeIt(e) {
     return 'The changes you made will be lost if you navigate away from this page.';
   }
 }
+
+/**
+ * Catch any url changes in the browser
+ **/
 window.onbeforeunload = closeIt;
 
+/**
+ * Catch when some content has changed in the form
+ **/
 document.getElementById("UIDocumentForm").onchange = changed;
+
+
+/**
+ * Update each textarea when you type inside CKEditor
+ * Inform the page that some content has changed
+ **/
+ try {
+  if (CKEDITOR && typeof CKEDITOR == "object") {
+    for ( var name in CKEDITOR.instances ) {
+      var oEditor ;
+      try {
+        oEditor = CKEDITOR.instances[name] ;
+
+		oEditor.on( 'key', function() {
+		  b_changed = true;
+          document.getElementById(name).value = this.getData();
+        });
+
+
+      } catch(e) {
+        continue ;
+      }
+    }
+  }
+ } catch(e) {}
+
+
+
