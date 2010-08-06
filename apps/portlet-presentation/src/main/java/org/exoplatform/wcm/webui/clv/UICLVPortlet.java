@@ -170,16 +170,19 @@ public class UICLVPortlet extends UIPortletApplication {
     folderMode = addChild(UICLVFolderMode.class, null, null).setRendered(false);
     manualMode = addChild(UICLVManualMode.class, null, null).setRendered(false);
     config = addChild(UICLVConfig.class, null, null).setRendered(false);
+    currentFolderPath = getFolderPath();
   }
-
+  
   public String getFolderPath() {
     PortalRequestContext preq = Util.getPortalRequestContext();
     if (!preq.useAjax()) {
        currentFolderPath= getFolderPathParamValue();
+//       System.out.println("VinhNT: Tracert: " + currentFolderPath + " Ajax: " + String.valueOf(preq.useAjax()));
     }
     if (currentFolderPath == null || currentFolderPath.length() == 0) {
       currentFolderPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     }
+//    System.out.println("VinhNT: Tracert: " + currentFolderPath + " Ajax: " + String.valueOf(preq.useAjax()));
     return currentFolderPath;
   }
   
@@ -215,7 +218,7 @@ public class UICLVPortlet extends UIPortletApplication {
 
     PortletMode currentMode = pContext.getApplicationMode();
     
-    if (displayMode.equals(DISPLAY_MODE_AUTOMATIC) || getFolderPathParamValue() != null) {
+    if (displayMode.equals(DISPLAY_MODE_AUTOMATIC) || getFolderPath() != null) {
       if (currentMode != mode) {
         folderMode.init();
         mode = currentMode;

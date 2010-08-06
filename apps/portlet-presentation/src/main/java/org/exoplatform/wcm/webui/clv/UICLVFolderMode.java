@@ -108,7 +108,7 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
 
-    String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
+    String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
     
     if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
         return new ArrayList<Node>();
