@@ -21,6 +21,8 @@ import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
 import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.xcmis.spi.BaseItemsIterator;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRuntimeException;
@@ -73,6 +75,8 @@ import javax.jcr.version.OnParentVersionAction;
 abstract class BaseJcrStorage implements TypeManager
 {
 
+   private static final Log LOG = ExoLogger.getExoLogger(BaseJcrStorage.class);
+
    public static final String XCMIS_PROPERTY_TYPE = "_xcmis_property_type";
 
    public static final Pattern XCMIS_PROPERTY_TYPE_PATTERN = Pattern.compile(".*" + StorageImpl.XCMIS_PROPERTY_TYPE);
@@ -91,11 +95,11 @@ abstract class BaseJcrStorage implements TypeManager
 
    public static final String VENDOR_NAME = "eXo";
 
-   public static final String PRODUCT_NAME = "xCMIS (eXo JCR SP)";
+   public static final String PRODUCT_NAME = "xCMIS (eXo SP)";
 
-   public static final String PRODUCT_VERSION = "1.0";
+   public static final String PRODUCT_VERSION = "1.1";
 
-   public static final String REPOSITORY_DESCRIPTION = "xCMIS (eXo JCR SP)";
+   public static final String REPOSITORY_DESCRIPTION = "xCMIS (eXo SP)";
 
    static final Set<Pattern> IGNORED_PROPERTIES = new HashSet<Pattern>();
    static
@@ -117,12 +121,21 @@ abstract class BaseJcrStorage implements TypeManager
 
    protected Map<String, TypeMapping> nodeTypeMapping;
 
+   protected final String rootPath;
+
    public BaseJcrStorage(Session session, StorageConfiguration storageConfiguration,
       Map<String, TypeMapping> nodeTypeMapping)
    {
       this.session = session;
       this.storageConfiguration = storageConfiguration;
       this.nodeTypeMapping = nodeTypeMapping;
+      String rootPath = storageConfiguration.getRootNodePath();
+      if (rootPath.contains("${userId}"))
+      {
+         String userId = session.getUserID();
+         rootPath = rootPath.replace("${userId}", userId);
+      }
+      this.rootPath = rootPath;
    }
 
    // ================= TypeManager =================
@@ -1175,6 +1188,26 @@ abstract class BaseJcrStorage implements TypeManager
 
    public String getJcrRootPath()
    {
-      return storageConfiguration.getRootNodePath();
+      return rootPath;
+   }
+
+   public boolean isSupportedNodeType(String nodeTypeName)
+   {
+      try
+      {
+         NodeType nodeType = session.getWorkspace().getNodeTypeManager().getNodeType(nodeTypeName);
+         return nodeType.isNodeType(JcrCMIS.NT_FILE) || nodeType.isNodeType(JcrCMIS.NT_FOLDER)
+            || nodeType.isNodeType(JcrCMIS.CMIS_NT_POLICY) || nodeType.isNodeType(JcrCMIS.CMIS_NT_RELATIONSHIP)
+            || getTypeMapping(nodeType) != null;
+      }
+      catch (NoSuchNodeTypeException e)
+      {
+         LOG.error(e.getMessage(), e);
+      }
+      catch (RepositoryException e)
+      {
+         LOG.error(e.getMessage(), e);
+      }
+      return false;
    }
 }
