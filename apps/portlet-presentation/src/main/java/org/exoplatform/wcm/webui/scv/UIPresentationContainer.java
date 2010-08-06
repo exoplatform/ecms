@@ -27,15 +27,12 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -62,7 +59,7 @@ public class UIPresentationContainer extends UIContainer{
 
   private boolean isPrint = false;
   private PortletPreferences portletPreferences;
-
+  private String contentParameter = null;
 	/**
 	 * Instantiates a new uI presentation container.
 	 * 
@@ -185,12 +182,17 @@ public class UIPresentationContainer extends UIContainer{
    * @throws Exception the exception
    */
   public Node getParameterizedNode() throws Exception {
-    String parameters = getRequestParameters();
+
+    PortalRequestContext preq = Util.getPortalRequestContext();
+    if (!preq.useAjax()) {
+      contentParameter = getRequestParameters();
+    }
+     
 //    System.out.println("VinhNT tracert: getParameterizedNode and param =" + parameters);
-    if (parameters == null) return null;
-    String strRepository = parameters.substring(0, parameters.indexOf("/"));
+    if (contentParameter == null) return null;
+    String strRepository = contentParameter.substring(0, contentParameter.indexOf("/"));
     UIPresentation presentation = getChild(UIPresentation.class);
-    Node nodeView = Utils.getViewableNodeByComposer(null, null, parameters);
+    Node nodeView = Utils.getViewableNodeByComposer(null, null, contentParameter);
 //    if (nodeView == null) System.out.println("Test nodeview=null");
     if (nodeView!=null) {
       boolean isDocumentType = false;

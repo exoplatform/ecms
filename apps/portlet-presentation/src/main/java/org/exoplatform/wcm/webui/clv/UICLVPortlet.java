@@ -22,6 +22,7 @@ import javax.jcr.Node;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
@@ -158,7 +159,7 @@ public class UICLVPortlet extends UIPortletApplication {
   private UICLVManualMode manualMode;
   
   private UICLVConfig     config;
-  
+  private String          currentFolderPath;
   /**
    * Instantiates a new uICLV portlet.
    * 
@@ -172,10 +173,14 @@ public class UICLVPortlet extends UIPortletApplication {
   }
 
   public String getFolderPath() {
-	String fullPath = this.getFolderPathParamValue();
-	if (fullPath == null || fullPath.length() == 0)
-		fullPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
-	return fullPath;
+    PortalRequestContext preq = Util.getPortalRequestContext();
+    if (!preq.useAjax()) {
+       currentFolderPath= getFolderPathParamValue();
+    }
+    if (currentFolderPath == null || currentFolderPath.length() == 0) {
+      currentFolderPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
+    }
+    return currentFolderPath;
   }
   
   public String getFolderPathParamValue() {
