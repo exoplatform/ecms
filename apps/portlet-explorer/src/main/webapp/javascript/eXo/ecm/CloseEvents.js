@@ -39,6 +39,13 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
     }
   }
  } catch(e) {}
+ 
+  if (CKEDITOR && typeof CKEDITOR == "object") {
+	 for ( var name in CKEDITOR.instances) {
+		// alert(CKEDITOR.instances["summary"].getData()); 
+		document.getElementById(name).value = CKEDITOR.instances[name].getData();
+	 }
+  }
 
   form.elements['formOp'].value = action ;
   if(useAjax) {
