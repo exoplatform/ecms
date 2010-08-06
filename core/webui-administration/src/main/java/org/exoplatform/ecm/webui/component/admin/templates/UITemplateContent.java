@@ -16,6 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.admin.templates;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,7 +123,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
             SessionProviderFactory.createSystemProvider()) ;      
       getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
       String templateRole = 
-        templateService.getTemplateRoles(templateType, nodeTypeName_, templateName, repository) ;
+        templateService.getTemplateRoles(template) ;
       boolean isVersioned = template.isNodeType(Utils.MIX_VERSIONABLE) ;
       if(isVersioned) {
         getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(true) ;
@@ -302,23 +304,23 @@ public class UITemplateContent extends UIForm implements UISelectable {
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       boolean isEnableVersioning = 
         uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
-      if(uiForm.isAddNew_ || !isEnableVersioning){
-        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, 
-            new String[] {role},  content, repository) ;
+      if(uiForm.isAddNew_){
+        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},  
+            new ByteArrayInputStream(content.getBytes()), repository);
       } else {
         Node node = 
           templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_, name, 
               repository, SessionProviderFactory.createSystemProvider()) ;
-        if(!node.isNodeType(Utils.MIX_VERSIONABLE)) {
+        if(isEnableVersioning && !node.isNodeType(Utils.MIX_VERSIONABLE)) {
           node.addMixin(Utils.MIX_VERSIONABLE) ;
-          node.save();
-        } else {
-          node.checkout() ;            
-        }
-        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, 
-            new String[] {role},  content, repository) ;
+        } 
+        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},  
+            new ByteArrayInputStream(content.getBytes()), repository);
         node.save() ;
-        node.checkin() ;
+        if(isEnableVersioning) {
+          node.checkin() ;
+          node.checkout();
+        }
       }
       uiForm.refresh() ;
       uiForm.isAddNew_ = true ;

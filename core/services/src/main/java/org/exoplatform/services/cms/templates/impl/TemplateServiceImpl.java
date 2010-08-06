@@ -647,6 +647,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     String templatePath = null;
     if (specifiedTemplatesHome.hasNode(templateName)) {
       templatePath = specifiedTemplatesHome.getNode(templateName).getPath();
+      updateTemplate(specifiedTemplatesHome.getNode(templateName), templateFile, roles);
     } else {
       templatePath = createTemplate(specifiedTemplatesHome, templateName, templateFile, roles);
     }
@@ -789,16 +790,6 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   private void removeTemplateNodeTypeList() throws Exception {
     nodeTypeListCached.clearCache();
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   /**
    * {@inheritDoc}
