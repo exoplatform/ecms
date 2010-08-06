@@ -414,8 +414,15 @@
 	display: block;
 }
 
+.OneColumnCLVTemplate .Contents .ContainerHoverClassInner {
+	border:1px solid #bfd5ed;
+}
 
-.ContainerHoverClassInner {
+.TwoColumnsCLVTemplate .Contents .ContainerHoverClassInner {
+	border:1px solid #bfd5ed;
+}
+
+.DocumentsCLVTemplate .Contents .ContainerHoverClassInner {
 	border:1px solid #bfd5ed;
 }
 
