@@ -54,7 +54,6 @@ function getProduct(version) {
   product.addDependencies(wcm.web.eXoStaticResources) ;
   product.addDependencies(wcm.demo.portal);
   product.addDependencies(wcm.demo.rest);
-	product.addDependencies(wcm.gadget.war);
 
   product.addServerPatch("tomcat", wcm.server.tomcat.patch) ;
   product.addServerPatch("jboss",  portal.server.jboss.patch) ;
