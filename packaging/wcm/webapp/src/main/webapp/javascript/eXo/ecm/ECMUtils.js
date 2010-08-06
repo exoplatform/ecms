@@ -576,6 +576,7 @@
 		// resizableBlock.style.width = eXo.ecm.ECMUtils.resizableBlockWidth + deltaX + "px";
 		eXo.ecm.ECMUtils.savedResizableMouseX = eXo.ecm.ECMUtils.resizableBlockWidth + deltaX + "px";
 		eXo.ecm.ECMUtils.savedLeftContainer = eXo.ecm.ECMUtils.currentWidth + deltaX + "px";
+		eXo.ecm.ECMUtils.isResizedLeft = false;
 		
 		var resizeDiv = document.getElementById("ResizeSideBarDiv");
 		if (resizeDiv == null) {		
@@ -604,9 +605,12 @@
 		
 		var container = document.getElementById("LeftContainer");		
 		var resizableBlock = DOM.findFirstDescendantByClass(container, "div", "UIResizableBlock");	
-
+  var workingArea = DOM.findAncestorByClass(container, "UIWorkingArea");		
+		var allowedWidth = parseInt(workingArea.offsetWidth) / 2;
 		// Fix minimium width can be resized
-		if (eXo.ecm.ECMUtils.currentWidth + eXo.ecm.ECMUtils.savedResizeDistance > 50) {
+		if ((eXo.ecm.ECMUtils.currentWidth + eXo.ecm.ECMUtils.savedResizeDistance > 50) & 
+				  (eXo.ecm.ECMUtils.currentWidth + eXo.ecm.ECMUtils.savedResizeDistance <= allowedWidth)) {
+			eXo.ecm.ECMUtils.isResizedLeft = true;
 			container.style.width = eXo.ecm.ECMUtils.currentWidth + eXo.ecm.ECMUtils.savedResizeDistance + "px";
 			resizableBlock.style.width = eXo.ecm.ECMUtils.resizableBlockWidth + eXo.ecm.ECMUtils.savedResizeDistance + "px";			
 		}
@@ -641,8 +645,9 @@
 	ECMUtils.prototype.loadEffectedSideBar = function(id) {
 		var container = document.getElementById("LeftContainer");
 		var resizableBlock = DOM.findFirstDescendantByClass(container, "div", "UIResizableBlock");
-		if(eXo.ecm.ECMUtils.savedLeftContainer && eXo.ecm.ECMUtils.savedResizableMouseX) {			
-			container.style.width = eXo.ecm.ECMUtils.savedLeftContainer;
+		if(eXo.ecm.ECMUtils.savedLeftContainer && eXo.ecm.ECMUtils.savedResizableMouseX) {
+			if (eXo.ecm.ECMUtils.isResizedLeft==true)			
+					container.style.width = eXo.ecm.ECMUtils.savedLeftContainer;
 			resizableBlock.style.width = eXo.ecm.ECMUtils.savedResizableMouseX;			
 			var documentInfo = document.getElementById("UIDocumentInfo");
 			var listGrid = DOM.findFirstDescendantByClass(documentInfo, "div", "UIListGrid");		 		
