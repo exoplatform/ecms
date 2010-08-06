@@ -1006,7 +1006,7 @@ public class UIJCRExplorer extends UIContainer {
     }
     return null;
   }
-    
+  
   public Preference getPreference() {
   	if (preferencesSaved_) {
       if (preferences_ != null && !this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar())

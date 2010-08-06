@@ -1,4 +1,4 @@
-<div class="UIDocumentFormController">	
+<div class="UIDocumentFormController" id="$uicomponent.id" >	
 	<%
 	  if(uicomponent.isDisplayOptionBlockPanel()) {
 	%>		
