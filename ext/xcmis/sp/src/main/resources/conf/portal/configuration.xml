@@ -54,25 +54,4 @@
       </component-plugin>
    </external-component-plugins>
    
-   <external-component-plugins>
-      <target-component>org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry</target-component>
-      <component-plugin>
-         <name></name>
-         <set-method>addPlugin</set-method>
-         <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.TypeMappingPlugin</type>
-         <init-params>
-            <properties-param>
-               <name>exo:taxonomy</name>
-               <property name="parentType" value="cmis:folder" />
-               <property name="baseType" value="cmis:folder" />
-            </properties-param>
-            <properties-param>
-               <name>exo:article</name>
-               <property name="parentType" value="cmis:folder" />
-               <property name="baseType" value="cmis:folder" />
-            </properties-param>
-         </init-params>
-      </component-plugin>
-   </external-component-plugins>
-   
 </configuration>

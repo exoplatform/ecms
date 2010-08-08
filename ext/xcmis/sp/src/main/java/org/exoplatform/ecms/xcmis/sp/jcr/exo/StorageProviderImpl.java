@@ -119,7 +119,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
 
    /**
     * This constructor is used by eXo container.
-    *
+    * 
     * @param repositoryService JCR repository service
     * @param documentReaderService DocumentReaderService required for indexing
     *        mechanism
@@ -137,7 +137,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
 
    /**
     * This constructor is used by eXo container.
-    *
+    * 
     * @param repositoryService JCR repository service
     * @param permissionService PermissionService
     * @param registry CmisRegistry will be used for registered current
@@ -187,10 +187,11 @@ public class StorageProviderImpl implements StorageProvider, Startable
       this.registry = registry;
       this.searchService = searchService;
       this.storageConfiguration = storageConfiguration;
-      // Add unstructured mapping immediately. May need have access
+      // Unstructured mapping immediately. May need have access
       // to root node which often has type nt:unstructured.
-      TypeMapping unstructuredMapping = new TypeMapping(JcrCMIS.NT_UNSTRUCTURED, BaseType.FOLDER, CmisConstants.FOLDER);
-      nodeTypeMapping.put(unstructuredMapping.getNodeTypeName(), unstructuredMapping);
+      nodeTypeMapping.put(JcrCMIS.NT_UNSTRUCTURED, new TypeMapping(JcrCMIS.NT_UNSTRUCTURED, BaseType.FOLDER,
+         CmisConstants.FOLDER));
+      nodeTypeMapping.put("exo:taxonomy", new TypeMapping("exo:taxonomy", BaseType.FOLDER, CmisConstants.FOLDER));
    }
 
    /**
@@ -250,7 +251,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
 
    /**
     * Set storage configuration.
-    *
+    * 
     * @param storageConfig storage configuration
     * @throw IllegalStateException if configuration for storage already set
     */

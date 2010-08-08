@@ -25,8 +25,6 @@ import org.xcmis.spi.model.BaseType;
  *
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
  * @version $Id$
- * @see TypeMappingPlugin
- * @see org.xcmis.sp.jcr.exo.DriveCmisRegistry#addPlugin(org.exoplatform.container.component.ComponentPlugin)
  */
 public class TypeMapping
 {

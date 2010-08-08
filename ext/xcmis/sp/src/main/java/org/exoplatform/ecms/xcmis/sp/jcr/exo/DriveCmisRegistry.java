@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp.jcr.exo;
 
-import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -58,8 +57,6 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
 
    private static final Log LOG = ExoLogger.getLogger(DriveCmisRegistry.class);
 
-   Map<String, TypeMapping> nodeTypeMapping;
-
    private RepositoryService repositoryService;
 
    private DocumentReaderService documentReaderService;
@@ -84,7 +81,6 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
       this.documentReaderService = documentReaderService;
       this.permissionService = new PermissionService();
       this.driveService = driveService;
-      this.nodeTypeMapping = new HashMap<String, TypeMapping>();
    }
 
    public DriveCmisRegistry(RepositoryService repositoryService, ManageDriveService driveService, InitParams initParams)
@@ -265,7 +261,6 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
             indexConfiguration.setIndexDir(indexDir);
          }
          StorageProviderImpl sp = createStorageProvider(drive, indexConfiguration);
-         sp.addNodeTypeMapping(nodeTypeMapping);
          try
          {
             sp.init();
@@ -284,14 +279,6 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
    {
       // TODO is there something better in WCM API ?
       return drive.getHomePath().contains("${userId}");
-   }
-
-   public void addPlugin(ComponentPlugin plugin)
-   {
-      if (plugin instanceof TypeMappingPlugin)
-      {
-         nodeTypeMapping.putAll(((TypeMappingPlugin)plugin).getTypeMapping());
-      }
    }
 
    private String getValueParameter(String name, String defaultValue)
@@ -320,7 +307,6 @@ public class DriveCmisRegistry extends ExoContainerCmisRegistry
             null);
       StorageProviderImpl sp =
          new StorageProviderImpl(repositoryService, documentReaderService, permissionService, this, configuration);
-      sp.addNodeTypeMapping(nodeTypeMapping);
       return sp;
    }
 }
