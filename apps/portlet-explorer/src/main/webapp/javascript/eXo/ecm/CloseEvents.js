@@ -118,40 +118,26 @@ window.onbeforeunload = closeIt;
  **/
 document.getElementById("UIDocumentForm").onchange = changed;
 
-/**
- * Hide all actions (will be displayed when CKEditor is ready
- */
-$(".UIAction").css("display","none");
-
 
 /**
  * Update each textarea when you type inside CKEditor
  * Inform the page that some content has changed
  **/
- var noCK = true;
  try {
   if (CKEDITOR && typeof CKEDITOR == "object") {
     for ( var name in CKEDITOR.instances ) {
       var oEditor ;
       try {
         oEditor = CKEDITOR.instances[name] ;
-        noCK = false;
         /**
          * inform the content has changed
          * update the textarea with last modifiedcontent
          */
 		oEditor.on( 'key', function() {
 		  b_changed = true;
-          document.getElementById(name).value = this.getData();
+          document.getElementById(this.name).value = this.getData();
         });
 
-		
-		/**
-		 * Displays Save and Close action when editor is ready
-		 */
-		oEditor.on( 'pluginsLoaded', function() {
-			$(".UIAction").css("display","block");
-        });
 
 
       } catch(e) {
@@ -160,9 +146,5 @@ $(".UIAction").css("display","none");
     }
   }
  } catch(e) {}
-
- if (noCK) {
-   $(".UIAction").css("display","block");
- }
 
 
