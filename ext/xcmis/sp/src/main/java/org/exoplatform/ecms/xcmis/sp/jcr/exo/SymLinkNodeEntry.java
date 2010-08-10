@@ -19,6 +19,7 @@ package org.exoplatform.ecms.xcmis.sp.jcr.exo;
 
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.xcmis.spi.CmisRuntimeException;
+import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.StorageException;
 
 import java.util.Collection;
@@ -94,7 +95,14 @@ class SymLinkNodeEntry extends JcrNodeEntry
       {
          Set<JcrNodeEntry> parents = new HashSet<JcrNodeEntry>();
          Node parent = link.getParent();
-         parents.add(storage.fromNode(parent));
+         try
+         {
+            parents.add(storage.fromNode(parent));
+         }
+         catch (ObjectNotFoundException onfe)
+         {
+            // Ignore nodes with object not found.
+         }
          return parents;
       }
       catch (RepositoryException re)

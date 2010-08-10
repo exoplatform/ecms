@@ -204,6 +204,10 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
          }
          return pwc;
       }
+      catch (ObjectNotFoundException onfe)
+      {
+         throw new StorageException("Unable checkout. " + onfe.getMessage(), onfe);
+      }
       catch (IOException ioe)
       {
          throw new CmisRuntimeException("Unable checkout. " + ioe.getMessage(), ioe);

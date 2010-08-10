@@ -1064,6 +1064,10 @@ abstract class BaseJcrStorage implements TypeManager
          }
          return fromNode(document);
       }
+      catch (ObjectNotFoundException onfe)
+      {
+         throw new StorageException(onfe.getMessage(), onfe);
+      }
       catch (RepositoryException re)
       {
          throw new StorageException(re.getMessage(), re);
@@ -1088,6 +1092,10 @@ abstract class BaseJcrStorage implements TypeManager
          }
          return fromNode(folderNode);
       }
+      catch (ObjectNotFoundException onfe)
+      {
+         throw new StorageException(onfe.getMessage(), onfe);
+      }
       catch (RepositoryException re)
       {
          throw new StorageException(re.getMessage(), re);
@@ -1106,6 +1114,10 @@ abstract class BaseJcrStorage implements TypeManager
          }
          Node policyNode = policiesStore.addNode(name, typeDefinition.getLocalName());
          return fromNode(policyNode);
+      }
+      catch (ObjectNotFoundException onfe)
+      {
+         throw new StorageException(onfe.getMessage(), onfe);
       }
       catch (RepositoryException re)
       {
@@ -1129,11 +1141,14 @@ abstract class BaseJcrStorage implements TypeManager
          relationshipNode.setProperty(CmisConstants.TARGET_ID, target.getNode());
          return fromNode(relationshipNode);
       }
+      catch (ObjectNotFoundException onfe)
+      {
+         throw new StorageException(onfe.getMessage(), onfe);
+      }
       catch (RepositoryException re)
       {
          throw new StorageException(re.getMessage(), re);
       }
-
    }
 
    public JcrNodeEntry getEntry(String id) throws ObjectNotFoundException
@@ -1157,7 +1172,7 @@ abstract class BaseJcrStorage implements TypeManager
       }
    }
 
-   public JcrNodeEntry fromNode(Node node)
+   public JcrNodeEntry fromNode(Node node) throws ObjectNotFoundException
    {
       try
       {
@@ -1174,7 +1189,7 @@ abstract class BaseJcrStorage implements TypeManager
             }
             catch (ItemNotFoundException e)
             {
-               throw new CmisRuntimeException("Target of exo:symlink " + link.getPath() + " is not exist any more. ");
+               throw new ObjectNotFoundException("Target of exo:symlink " + link.getPath() + " is not exist any more. ");
             }
             return new SymLinkNodeEntry(link, node, this);
          }

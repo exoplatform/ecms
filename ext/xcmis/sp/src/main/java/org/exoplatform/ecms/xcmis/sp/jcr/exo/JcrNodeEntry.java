@@ -37,6 +37,7 @@ import org.xcmis.spi.ContentStream;
 import org.xcmis.spi.ItemsIterator;
 import org.xcmis.spi.LazyIterator;
 import org.xcmis.spi.NameConstraintViolationException;
+import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.StorageException;
 import org.xcmis.spi.TypeNotFoundException;
 import org.xcmis.spi.model.AccessControlEntry;
@@ -124,16 +125,37 @@ class JcrNodeEntry
                if (node.isNodeType("nt:linkedFile"))
                {
                   node = node.getProperty("jcr:content").getNode();
-                  next = storage.fromNode(node);
+                  try
+                  {
+                     next = storage.fromNode(node);
+                  }
+                  catch (ObjectNotFoundException e)
+                  {
+                     continue;
+                  }
                }
                else if (node.isNodeType("exo:symlink"))
                {
-                  // May be sub-types of exo:symlink
-                  next = storage.fromNode(node);
+                  try
+                  {
+                     // May be sub-types of exo:symlink
+                     next = storage.fromNode(node);
+                  }
+                  catch (ObjectNotFoundException e)
+                  {
+                     continue;
+                  }
                }
                else
                {
-                  next = storage.fromNode(node);
+                  try
+                  {
+                     next = storage.fromNode(node);
+                  }
+                  catch (ObjectNotFoundException e)
+                  {
+                     continue;
+                  }
                }
             }
             catch (NotSupportedNodeTypeException iae)
@@ -326,7 +348,14 @@ class JcrNodeEntry
                   Node n = jcrProperty.getNode();
                   if (n.getPrimaryNodeType().isNodeType(JcrCMIS.CMIS_NT_POLICY))
                   {
-                     policies.add(storage.fromNode(n));
+                     try
+                     {
+                        policies.add(storage.fromNode(n));
+                     }
+                     catch (ObjectNotFoundException onfe)
+                     {
+                        // Ignore nodes with object not found.
+                     }
                   }
                }
                catch (ValueFormatException ignored)
@@ -547,6 +576,11 @@ class JcrNodeEntry
                try
                {
                   relationshipEntry = storage.fromNode(prop.getParent());
+
+               }
+               catch (ObjectNotFoundException onfe)
+               {
+                  // Ignore nodes with object not found.
                }
                catch (NotSupportedNodeTypeException ignored)
                {
@@ -1114,14 +1148,27 @@ class JcrNodeEntry
                if (refer.isNodeType("nt:linkedFile"))
                {
                   Node parent = refer.getParent();
-                  parents.add(storage.fromNode(parent));
+                  try
+                  {
+                     parents.add(storage.fromNode(parent));
+                  }
+                  catch (ObjectNotFoundException onfe)
+                  {
+                     // Ignore nodes with object not found.
+                  }
                }
             }
          }
          if (getBaseType() == BaseType.DOCUMENT || !isRoot())
          {
-            JcrNodeEntry parent = storage.fromNode(node.getParent());
-            parents.add(parent);
+            try
+            {
+               JcrNodeEntry parent = storage.fromNode(node.getParent());
+               parents.add(parent);
+            }
+            catch (ObjectNotFoundException onfe)
+            {
+            }
          }
          return parents;
       }

@@ -607,6 +607,10 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
          return new BaseItemsIterator<DocumentData>(checkedOut);
       }
+      catch (ObjectNotFoundException onfe)
+      {
+         throw new CmisRuntimeException("Unable get checked-out documents. " + onfe.getMessage(), onfe);
+      }
       catch (RepositoryException re)
       {
          throw new CmisRuntimeException("Unable get checked-out documents. " + re.getMessage(), re);
