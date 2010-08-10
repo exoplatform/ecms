@@ -3334,5 +3334,11 @@
       <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
-  </UIDrivesArea>   
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>    
+    <msg>
+   	  <fields-saved>Các giá trị thiết lập đã được lưu!</fields-saved>
+   	  <fields-cancelled>Các giá trị thiết lập đã được hủy!</fields-cancelled>   	  
+    </msg>
+  </UIJcrExplorerEditForm>
 </bundle>

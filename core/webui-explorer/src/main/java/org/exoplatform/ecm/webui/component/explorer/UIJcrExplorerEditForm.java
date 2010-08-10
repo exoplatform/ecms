@@ -60,7 +60,6 @@ import org.exoplatform.webui.form.validator.NumberFormatValidator;
     template =  "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
       @EventConfig(phase = Phase.DECODE, listeners = UIJcrExplorerEditForm.SaveActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIJcrExplorerEditForm.EditActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIJcrExplorerEditForm.CancelActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIJcrExplorerEditForm.SelectTypeActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIJcrExplorerEditForm.SelectDriveActionListener.class),
@@ -80,18 +79,15 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     UIFormSelectBox repository = new UIFormSelectBox(UIJCRExplorerPortlet.REPOSITORY, UIJCRExplorerPortlet.REPOSITORY, getRepoOption());
     String repositoryValue = getPreference().getValue(UIJCRExplorerPortlet.REPOSITORY, "");
     repository.setValue(repositoryValue);
-    repository.setEnable(false);
     addChild(repository);
     
     UIFormCheckBoxInput<Boolean> checkBoxCategory = new UIFormCheckBoxInput<Boolean>(UIJCRExplorerPortlet.CATEGORY_MANDATORY, null, null);
     checkBoxCategory.setChecked(Boolean.parseBoolean(getPreference().getValue(UIJCRExplorerPortlet.CATEGORY_MANDATORY, "")));
-    checkBoxCategory.setEnable(false);
     addChild(checkBoxCategory);
     
     UIFormStringInput uiMaxSizeUpload = new UIFormStringInput(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD, UIJCRExplorerPortlet.MAX_SIZE_UPLOAD, null);
     uiMaxSizeUpload.addValidator(NumberFormatValidator.class);
     uiMaxSizeUpload.setValue(getPreference().getValue(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD, ""));
-    uiMaxSizeUpload.setEditable(false);
     addChild(uiMaxSizeUpload);
     
     List<SelectItemOption<String>> listType = new ArrayList<SelectItemOption<String>>();
@@ -103,27 +99,25 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     listType.add(new SelectItemOption<String>("Parameterize", "parameterize"));
     UIFormSelectBox typeSelectBox = new UIFormSelectBox(UIJCRExplorerPortlet.USECASE, UIJCRExplorerPortlet.USECASE, listType);
     typeSelectBox.setValue(usecase);
-    typeSelectBox.setEnable(false);    
     typeSelectBox.setOnChange("SelectType");
     addChild(typeSelectBox);
     
     UIFormInputSetWithAction driveNameInput = new UIFormInputSetWithAction("DriveNameInput");
     UIFormStringInput stringInputDrive = new UIFormStringInput(UIJCRExplorerPortlet.DRIVE_NAME, UIJCRExplorerPortlet.DRIVE_NAME, null);
     stringInputDrive.setValue(getPreference().getValue(UIJCRExplorerPortlet.DRIVE_NAME, ""));
-    stringInputDrive.setEnable(false);
+    stringInputDrive.setEnable(false);    
     driveNameInput.addUIFormInput(stringInputDrive);
     driveNameInput.setActionInfo(UIJCRExplorerPortlet.DRIVE_NAME, new String[] {"SelectDrive"});
     addUIComponentInput(driveNameInput);
     
     UIFormCheckBoxInput<Boolean> uiEditInNewWindow = new UIFormCheckBoxInput<Boolean>(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, null);
     uiEditInNewWindow.setChecked(Boolean.parseBoolean(getPreference().getValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, "true")));
-    uiEditInNewWindow.setEnable(false);
     addChild(uiEditInNewWindow);
 
     UIFormInputSetWithAction uiParamPathInput = new UIFormInputSetWithAction(PARAM_PATH_ACTION);
     UIFormStringInput pathInput = new UIFormStringInput(UIJCRExplorerPortlet.PARAMETERIZE_PATH, UIJCRExplorerPortlet.PARAMETERIZE_PATH, null);
     pathInput.setValue(getPreference().getValue(UIJCRExplorerPortlet.PARAMETERIZE_PATH, ""));
-    pathInput.setEnable(false);
+    pathInput.setEnable(false);    
     uiParamPathInput.addUIFormInput(pathInput);
     uiParamPathInput.setActionInfo(UIJCRExplorerPortlet.PARAMETERIZE_PATH, new String[] {PARAM_PATH_ACTION});
     addUIComponentInput(uiParamPathInput);
@@ -134,22 +128,18 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     
     UIFormCheckBoxInput<Boolean> uiFormCheckBoxTop =  new UIFormCheckBoxInput<Boolean>(UIJCRExplorerPortlet.SHOW_TOP_BAR, UIJCRExplorerPortlet.SHOW_TOP_BAR, true);
     uiFormCheckBoxTop.setChecked(Boolean.parseBoolean(getPreference().getValue(UIJCRExplorerPortlet.SHOW_TOP_BAR, "true")));
-    uiFormCheckBoxTop.setEnable(false);
     addUIFormInput(uiFormCheckBoxTop);
 
     UIFormCheckBoxInput<Boolean> uiFormCheckBoxAction = new UIFormCheckBoxInput<Boolean>(UIJCRExplorerPortlet.SHOW_ACTION_BAR, UIJCRExplorerPortlet.SHOW_ACTION_BAR, true);
     uiFormCheckBoxAction.setChecked(Boolean.parseBoolean(getPreference().getValue(UIJCRExplorerPortlet.SHOW_ACTION_BAR, "true")));
-    uiFormCheckBoxAction.setEnable(false);
     addUIFormInput(uiFormCheckBoxAction);
     
     UIFormCheckBoxInput<Boolean> uiFormCheckBoxSide = new UIFormCheckBoxInput<Boolean>(UIJCRExplorerPortlet.SHOW_SIDE_BAR, UIJCRExplorerPortlet.SHOW_SIDE_BAR, true);
     uiFormCheckBoxSide.setChecked(Boolean.parseBoolean(getPreference().getValue(UIJCRExplorerPortlet.SHOW_SIDE_BAR, "true")));
-    uiFormCheckBoxSide.setEnable(false);
     addUIFormInput(uiFormCheckBoxSide);
     
     UIFormCheckBoxInput<Boolean> uiFormCheckBoxFilter = new UIFormCheckBoxInput<Boolean>(UIJCRExplorerPortlet.SHOW_FILTER_BAR, UIJCRExplorerPortlet.SHOW_FILTER_BAR, true);
     uiFormCheckBoxFilter.setChecked(Boolean.parseBoolean(getPreference().getValue(UIJCRExplorerPortlet.SHOW_FILTER_BAR, "true")));
-    uiFormCheckBoxFilter.setEnable(false);
     addUIFormInput(uiFormCheckBoxFilter);
     
     if (usecase.equals(UIJCRExplorerPortlet.JAILED)) {
@@ -165,7 +155,7 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       uiParamPathInput.setRendered(true);
       setFlagSelectRender(true);
     }
-    setActions(new String[] {"Edit"});
+    setActions(new String[] {"Save", "Cancel"});
   }
   
   public String getGroupId() {
@@ -219,26 +209,6 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     this.flagSelectRender = flagSelectRender;
   }
   
-  public void setEditable(boolean isEditable) {
-    UIFormSelectBox repository = getChild(UIFormSelectBox.class);
-    repository.setEnable(isEditable);
-    UIFormCheckBoxInput<Boolean> checkBoxCategory = getChildById(UIJCRExplorerPortlet.CATEGORY_MANDATORY);
-    checkBoxCategory.setEnable(isEditable);
-    UIFormSelectBox typeSelectBox = getChildById(UIJCRExplorerPortlet.USECASE);
-    typeSelectBox.setEnable(isEditable);
-    
-    UIFormStringInput uiMaxFileSize = getChildById(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD);
-    uiMaxFileSize.setEditable(isEditable);
-    
-    ((UIFormCheckBoxInput<Boolean>)getChildById(UIJCRExplorerPortlet.SHOW_TOP_BAR)).setEnable(isEditable);
-    ((UIFormCheckBoxInput<Boolean>)getChildById(UIJCRExplorerPortlet.SHOW_ACTION_BAR)).setEnable(isEditable);
-    ((UIFormCheckBoxInput<Boolean>)getChildById(UIJCRExplorerPortlet.SHOW_SIDE_BAR)).setEnable(isEditable);
-    ((UIFormCheckBoxInput<Boolean>)getChildById(UIJCRExplorerPortlet.SHOW_FILTER_BAR)).setEnable(isEditable);
-    
-    UIFormCheckBoxInput<Boolean> editInNewWindow = getChildById(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW);
-    editInNewWindow.setEnable(isEditable);
-  } 
-  
   private PortletPreferences getPreference() {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     return pcontext.getRequest().getPreferences();
@@ -253,17 +223,6 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     return options;
   }
 
-  public static class EditActionListener extends EventListener<UIJcrExplorerEditForm>{
-    public void execute(Event<UIJcrExplorerEditForm> event) throws Exception {
-      UIJcrExplorerEditForm uiForm = event.getSource();
-      UIFormInputSetWithAction driveNameInput = uiForm.getChildById("DriveNameInput");
-      driveNameInput.setActionInfo(UIJCRExplorerPortlet.DRIVE_NAME, new String[] {"SelectDrive"});
-      uiForm.setEditable(true);
-      uiForm.setActions(new String[] {"Save", "Cancel"});
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
-    }
-  }  
-  
   public static class CancelActionListener extends EventListener<UIJcrExplorerEditForm>{
     public void execute(Event<UIJcrExplorerEditForm> event) throws Exception {
       UIJcrExplorerEditForm uiForm = event.getSource();
@@ -279,6 +238,15 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       stringInputDrive.setValue(pref.getValue(UIJCRExplorerPortlet.DRIVE_NAME, ""));
       UIFormCheckBoxInput<Boolean> editInNewWindow = uiForm.getChildById(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW);
       editInNewWindow.setChecked(Boolean.parseBoolean(pref.getValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, "true")));
+      
+      UIFormCheckBoxInput<Boolean> checkBoxShowTopBar = uiForm.getChildById(UIJCRExplorerPortlet.SHOW_TOP_BAR);
+      checkBoxShowTopBar.setChecked(Boolean.parseBoolean(pref.getValue(UIJCRExplorerPortlet.SHOW_TOP_BAR, "true")));
+      UIFormCheckBoxInput<Boolean> checkBoxShowActionBar = uiForm.getChildById(UIJCRExplorerPortlet.SHOW_ACTION_BAR);
+      checkBoxShowActionBar.setChecked(Boolean.parseBoolean(pref.getValue(UIJCRExplorerPortlet.SHOW_ACTION_BAR, "true")));
+      UIFormCheckBoxInput<Boolean> checkBoxShowLeftBar = uiForm.getChildById(UIJCRExplorerPortlet.SHOW_SIDE_BAR);
+      checkBoxShowLeftBar.setChecked(Boolean.parseBoolean(pref.getValue(UIJCRExplorerPortlet.SHOW_SIDE_BAR, "true")));
+      UIFormCheckBoxInput<Boolean> checkBoxShowFilterBar = uiForm.getChildById(UIJCRExplorerPortlet.SHOW_FILTER_BAR);
+      checkBoxShowFilterBar.setChecked(Boolean.parseBoolean(pref.getValue(UIJCRExplorerPortlet.SHOW_FILTER_BAR, "true")));
             
       // update                  
       UIFormInputSetWithAction uiParamPathInput = uiForm.getChildById(PARAM_PATH_ACTION);      
@@ -297,8 +265,9 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       }
       UIFormStringInput uiMaxFileSize = uiForm.getUIStringInput(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD);
       uiMaxFileSize.setValue(pref.getValue(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD, ""));
-      uiForm.setEditable(false);
-      uiForm.setActions(new String[] {"Edit"});
+      
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+      uiApp.addMessage(new ApplicationMessage("UIJcrExplorerEditForm.msg.fields-cancelled", null));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
@@ -307,7 +276,6 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     public void execute(Event<UIJcrExplorerEditForm> event) throws Exception {
       UIJcrExplorerEditForm uiForm = event.getSource();
       UIJCRExplorerPortlet uiJExplorerPortlet = uiForm.getAncestorOfType(UIJCRExplorerPortlet.class);
-      uiForm.setEditable(true);
       UIFormSelectBox typeSelectBox = uiForm.getChildById(UIJCRExplorerPortlet.USECASE);
       UIFormInputSetWithAction driveNameInput = uiForm.getChildById("DriveNameInput");
       UIFormInputSetWithAction uiParamPathInput = uiForm.getChildById(PARAM_PATH_ACTION);
@@ -328,6 +296,12 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
           stringInputDrive.setValue(groupId);
         }
         driveNameInput.setRendered(false);
+      } else if(typeSelectBox.getValue().equals(UIJCRExplorerPortlet.SELECTION)) {
+        DriveData personalPrivateDrive = 
+          uiJExplorerPortlet.getUserDrive(uiJExplorerPortlet.getPreferenceRepository(), "private");
+        UIFormStringInput stringInputDrive = 
+          driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
+        stringInputDrive.setValue(personalPrivateDrive.getName());
       } else if(typeSelectBox.getValue().equals(UIJCRExplorerPortlet.PERSONAL)) {
         DriveData personalPrivateDrive = 
           uiJExplorerPortlet.getUserDrive(uiJExplorerPortlet.getPreferenceRepository(), "private");
@@ -397,7 +371,7 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       }
       
       if (useCase.equals(UIJCRExplorerPortlet.SELECTION)) {
-        //driveName = pref.getValue("driveName", "");
+//        driveName = pref.getValue("driveName", "");
         nodePath = "/";
       } else {
 //        uiForm.setFlagSelectRender(true);
@@ -417,8 +391,9 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
       pref.setValue(UIJCRExplorerPortlet.SHOW_FILTER_BAR, String.valueOf(uiFormCheckBoxFilter.getValue()));
       
       pref.store();
-      uiForm.setEditable(false);
-      uiForm.setActions(new String[] {"Edit"});
+      
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+      uiApp.addMessage(new ApplicationMessage("UIJcrExplorerEditForm.msg.fields-saved", null));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }

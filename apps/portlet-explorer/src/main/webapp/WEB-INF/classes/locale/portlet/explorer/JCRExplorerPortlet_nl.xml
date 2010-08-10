@@ -3229,5 +3229,11 @@
       <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
-  </UIDrivesArea>   
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>    
+    <msg>
+   	  <fields-saved>All field values saved!</fields-saved>
+   	  <fields-cancelled>All field values cancelled!</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
 </bundle>
