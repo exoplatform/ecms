@@ -36,7 +36,9 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.javascript.JavascriptConfigService;
 import org.picocontainer.Startable;
@@ -50,7 +52,7 @@ import org.picocontainer.Startable;
 public class XJavascriptService implements Startable {
 
   /** The SHARE d_ j s_ query. */
-//  private static String SHARED_JS_QUERY = "select * from exo:jsFile where jcr:path like '{path}/%' and exo:active='true' and exo:sharedJS='true' order by exo:priority ASC".intern();
+  private static String SHARED_JS_QUERY = "select * from exo:jsFile where jcr:path like '{path}/%' and exo:active='true' and exo:sharedJS='true' order by exo:priority ASC".intern();
   
   private static String WEBCONTENT_JS_QUERY = "select * from exo:jsFile where jcr:path like '{path}/%' and exo:active='true' order by exo:priority ASC".intern();
   
@@ -67,7 +69,7 @@ public class XJavascriptService implements Startable {
   private WCMConfigurationService configurationService;
   
   /** The schema config service. */
-//  private WebSchemaConfigService schemaConfigService;
+  private WebSchemaConfigService schemaConfigService;
   
   /** The s context. */
   private ServletContext sContext ;    
@@ -89,7 +91,7 @@ public class XJavascriptService implements Startable {
   public XJavascriptService() throws Exception{    
     this.jsConfigService = WCMCoreUtils.getService(JavascriptConfigService.class);
     this.sContext = WCMCoreUtils.getService(ServletContext.class);
-//    this.schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
+    this.schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     this.configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
   }
 
@@ -172,11 +174,11 @@ public class XJavascriptService implements Startable {
    */
   private void addPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
   	String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
-//  	String jsData = mergeJSData(portalNode, jsFile, isStartup);
+  	String jsData = mergeJSData(portalNode, jsFile, isStartup);
     if(jsConfigService.isModuleLoaded(MODULE_NAME)) {      
       jsConfigService.removeExtendedJavascript(MODULE_NAME, javascriptPath, sContext) ;
     }
-    //jsConfigService.addExtendedJavascript(MODULE_NAME, javascriptPath, sContext, jsData) ;
+    jsConfigService.addExtendedJavascript(MODULE_NAME, javascriptPath, sContext, jsData) ;
   }
   
   /**
@@ -186,69 +188,69 @@ public class XJavascriptService implements Startable {
    */
   private void addSharedPortalJavascript(Node portalNode, Node jsFile, boolean isStartup) throws Exception {
   	String javascriptPath = StringUtils.replaceOnce(PATH, "{portalName}", portalNode.getName());
-//  	String jsData = mergeJSData(portalNode, jsFile, isStartup);
+  	String jsData = mergeJSData(portalNode, jsFile, isStartup);
     if(jsConfigService.isModuleLoaded(MODULE_NAME)) {      
       jsConfigService.removeExtendedJavascript(MODULE_NAME, javascriptPath, sContext) ;
     }
-//    jsConfigService.addExtendedJavascript(MODULE_NAME, javascriptPath, sContext, jsData) ;
+    jsConfigService.addExtendedJavascript(MODULE_NAME, javascriptPath, sContext, jsData) ;
   }
 
-//  /**
-//   * Gets the jS data by sql query.
-//   * 
-//   * @param session the session
-//   * @param queryStatement the query statement
-//   * @param exceptPath the except path
-//   * 
-//   * @return the jS data by sql query
-//   * 
-//   * @throws Exception the exception
-//   */
-//  private String mergeJSData(Node portalNode, Node newJSFile, boolean isStartup) throws Exception {
-//  	StringBuffer buffer = new StringBuffer();
-//
-//  	// Get all js by query
-//  	Node jsFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class).getJSFolder(portalNode);
-//  	String statement = StringUtils.replaceOnce(SHARED_JS_QUERY, "{path}", jsFolder.getPath());
-//  	RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-//  	SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-//  	NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
-//  	ManageableRepository repository = repositoryService.getRepository(portalNodeLocation.getRepository());
-//  	Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
-//  	QueryManager queryManager = session.getWorkspace().getQueryManager();
-//  	QueryResult queryResult = null;
-//	  Query query = queryManager.createQuery(statement, Query.SQL);
-//	  queryResult = query.execute();
-//  	NodeIterator iterator = queryResult.getNodes();
-//  	
-//  	if (isStartup) {
-//  		while(iterator.hasNext()) {
-//    		Node registeredJSFile = iterator.nextNode();
-//    		buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-//    	}
-//  	} else {
-//  		boolean isAdded = false;
-//    	while(iterator.hasNext()) {
-//    		Node registeredJSFile = iterator.nextNode();
-//    		// Add new
-//    		long newJSFilePriority = newJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-//    		long registeredJSFilePriority = registeredJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-//    		if (!isAdded && newJSFilePriority < registeredJSFilePriority) {
-//    			buffer.append(newJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString());
-//    			isAdded = true;
-//    			continue;
-//    		}
-//    		// Modify
-//    		if (newJSFile.getPath().equals(registeredJSFile.getPath())) {
-//    			buffer.append(newJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-//    			continue;
-//    		}
-//    		buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
-//    	}	
-//  	}
-//    
-//    return buffer.toString();    
-//  }
+  /**
+   * Gets the jS data by sql query.
+   * 
+   * @param session the session
+   * @param queryStatement the query statement
+   * @param exceptPath the except path
+   * 
+   * @return the jS data by sql query
+   * 
+   * @throws Exception the exception
+   */
+  private String mergeJSData(Node portalNode, Node newJSFile, boolean isStartup) throws Exception {
+  	StringBuffer buffer = new StringBuffer();
+
+  	// Get all js by query
+  	Node jsFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class).getJSFolder(portalNode);
+  	String statement = StringUtils.replaceOnce(SHARED_JS_QUERY, "{path}", jsFolder.getPath());
+  	RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+  	SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+  	NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
+  	ManageableRepository repository = repositoryService.getRepository(portalNodeLocation.getRepository());
+  	Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
+  	QueryManager queryManager = session.getWorkspace().getQueryManager();
+  	QueryResult queryResult = null;
+	  Query query = queryManager.createQuery(statement, Query.SQL);
+	  queryResult = query.execute();
+  	NodeIterator iterator = queryResult.getNodes();
+  	
+  	if (isStartup) {
+  		while(iterator.hasNext()) {
+    		Node registeredJSFile = iterator.nextNode();
+    		buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
+    	}
+  	} else {
+  		boolean isAdded = false;
+    	while(iterator.hasNext()) {
+    		Node registeredJSFile = iterator.nextNode();
+    		// Add new
+    		long newJSFilePriority = newJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+    		long registeredJSFilePriority = registeredJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+    		if (!isAdded && newJSFilePriority < registeredJSFilePriority) {
+    			buffer.append(newJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString());
+    			isAdded = true;
+    			continue;
+    		}
+    		// Modify
+    		if (newJSFile.getPath().equals(registeredJSFile.getPath())) {
+    			buffer.append(newJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
+    			continue;
+    		}
+    		buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString()) ;
+    	}	
+  	}
+    
+    return buffer.toString();    
+  }
 
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#start()
