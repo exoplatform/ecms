@@ -108,7 +108,7 @@
    	  <DisplaySettingBlock>Display settings</DisplaySettingBlock>
    	  <ContentPathBlock>Content Selection</ContentPathBlock>
    	  <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-   	  <Advance>Advance</Advance>
+   	  <Advance>Advanced</Advance>
    	  <ContextCaption>Dynamic Navigation</ContextCaption>
    	  <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
    	  <UISCVParameterInputBox>by</UISCVParameterInputBox>

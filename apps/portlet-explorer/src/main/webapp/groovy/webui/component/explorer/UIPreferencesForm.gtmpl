@@ -16,7 +16,6 @@
 %>
 <div class="UIFormWithTitle $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);">
 	<% uiform.begin() %>
-	<div class="HorizontalLayout">
 		<div class="FormContainer">
 			<table class="UIFormGrid">
 			  <tr>
@@ -39,7 +38,7 @@
 			  <tr>
 			    <td style="margin-top: 10px;" colspan="4">			      
          <div onclick="$advanceLink">
-           <a class="AdvancePreferences" href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.ShowAdvance")%></a>
+           <a class="AdvancePreferences" href="javascript:window.scroll(0,0);"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%></a>
          </div>             
 			    </td>
 			  </tr>
@@ -50,7 +49,7 @@
 			  <tr>
 			    <td style="margin-top: 10px; $advancedLinkDisplay" colspan="4">
 			      <fieldset>
-              <legend><a class="AdvancePreferences" style="text-decoration: none;" href="$advanceLink"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%> [ - ]</a></legend>
+              <legend><a class="AdvancePreferences" style="text-decoration: underline;" href="$advanceLink"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%></a></legend>
 					    <table>			  
 							  <tr>
 							    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showNonDocument")%></td>
@@ -105,7 +104,6 @@
 			</div>
 			<%// end render action%>
 		</div>
-	</div>
 	<%uiform.end()%>
 </div>
 <script language="javascript">

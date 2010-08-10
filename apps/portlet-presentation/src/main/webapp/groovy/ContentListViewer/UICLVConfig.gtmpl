@@ -12,9 +12,6 @@
   jsManager.addJavascript("eXo.ecm.CLV.checkContextualFolderInput();");  
 %>
 <div class="UIForm $uicomponent.id">
-  <div class="TitleBar">
-    <b><%=_ctx.appRes("UICLVConfig.label.Title")%></b>  
-  </div>
   <%
     uiform.begin()
       %>
@@ -25,8 +22,9 @@
               <table class="UIFormGrid" style="width:100%;">
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
-                  <td class="FieldComponent"><% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
-                  <td style="align:right">
+                  <td class="FieldComponent" colspan="3"><% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
+                  
+                  <td style="align:right; width:30px;">
                     <div class="IconInContextHelp ShowHelpIcon" id="ModeSelectionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ModeSelectionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ModeSelectionHelp', 'false')">
                       <div style="position: absolute;">
                         <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
@@ -58,8 +56,8 @@
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
-                  <td class="FieldComponent" style="align:left;"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
-                  <td style="align:right">
+                  <td class="FieldComponent" colspan="3"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                  <td style="align:right; width:30px;">
                     <div class="IconInContextHelp ShowHelpIcon" id="FolderPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'false')">
                       <div style="position: absolute;">
                         <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
@@ -91,11 +89,11 @@
                 </tr>
                 <tr class="OrderBlock">
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
+                  <td class="FieldComponent" colspan="4"><% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
                 </tr>
                 <tr class="OrderBlock">
                   <td class="FieldLabel">&nbsp;</td>
-                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.ORDER_TYPE_FORM_RADIO_BOX_INPUT) %></td>
+                  <td class="FieldComponent" colspan="4"><% uiform.renderField(uicomponent.ORDER_TYPE_FORM_RADIO_BOX_INPUT) %></td>
                 </tr>
                 <% 
                   List<String> contents = uiform.getItems();
@@ -155,7 +153,7 @@
                   
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %></td>
-                  <td style="align:right">
+                  <td style="align:right; width:30px;">
                     <div class="IconInContextHelp ShowHelpIcon" id="HeaderOptionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('HeaderOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('HeaderOptionHelp', 'false')">
                       <div style="position: absolute;">
                         <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
@@ -187,18 +185,18 @@
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
+                  <td class="FieldComponent" colspan="6"><% uiform.renderField(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
+                  <td class="FieldComponent" colspan="6"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></td>
-                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></td>
+                  <td class="FieldComponent" colspan="6"><% uiform.renderField(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></td>
                 </tr>
               </table>
-              <table class="UIFormGrid">
+              <table class="UIFormGrid" style="width:100%;">
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %></td>
@@ -231,7 +229,7 @@
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %></td>
                   <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %></td>
                   
-                  <td style="align:right">
+                  <td style="align:right; width:30px;">
                   <div class="IconInContextHelp ShowHelpIcon" id="GeneralOptionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('GeneralOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('GeneralOptionHelp', 'false')">
                     <div style="position: absolute;">
                       <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
@@ -267,7 +265,7 @@
             	 advancedLinkDisplay = uicomponent.isShowAdvancedBlock()? "none" : "block";
           	%>
             <fieldset style="display: $advancedBlockDisplay; margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
-              <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.AdvancedBlock") %> <a style="text-align:center;font-style:italic; color: #0000FF;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" title="<%=_ctx.appRes("UICLVConfig.label.HideAdvancedBlock")%>">[ - ]</a> </legend>
+              <legend class="StyleLegend"><a style="text-align:center; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" title="<%=_ctx.appRes("UICLVConfig.label.HideAdvancedBlock")%>"><%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%></a></legend>
               <table class="UIFormGrid" style="width:100%;">
               	<tr>
               		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></td>
@@ -277,7 +275,7 @@
               		<td class="FieldComponent ContextualRadio" colspan="2">
               			<% uiform.renderField(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>
               		</td>
-              		<td style="align:right">
+              		<td style="align:right; width:30px">
                   <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')">
                     <div style="position: absolute;">
                       <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
@@ -310,7 +308,7 @@
               	<tr>
 	            		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
 	            		<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
-	            		<td style="align:right">
+	            		<td style="align:right; width:30px">
                     <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
                       <div style="position: absolute;">
                         <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
@@ -343,7 +341,7 @@
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
                   <td class="FieldComponent" colspan="2"  style="align:left;"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
-                  <td style="align:right">
+                  <td style="align:right; width:30px">
                     <div class="IconInContextHelp ShowHelpIcon" id="ShowDetailInPageHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'false')">
                       <div style="position: absolute;">
                         <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
@@ -377,7 +375,7 @@
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></td>
                   <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></td>
-                  <td style="align:right">
+                  <td style="align:right; width:30px">
                   <div class="IconInContextHelp ShowHelpIcon" id="DetailParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('DetailParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('DetailParameterHelp', 'false')">
                     <div style="position: absolute;">
                       <div class="InContextHelpContent" style="width: 454px; left: -450px; display: none; ">                    
@@ -409,7 +407,7 @@
                 </tr>
               </table>
             </fieldset>
-          	<a style="display: $advancedLinkDisplay; text-align:left;font-style:italic; color: #0000FF;" href="<%=uicomponent.event("ShowAdvancedBlock", "true")%>" title="<%=_ctx.appRes("UICLVConfig.label.ShowAdvancedBlock")%>">
+          	<a style="display: $advancedLinkDisplay; text-align:left; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "true")%>" title="<%=_ctx.appRes("UICLVConfig.label.ShowAdvancedBlock")%>">
           		<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>
         		</a>
             <div class="UIAction"> 
