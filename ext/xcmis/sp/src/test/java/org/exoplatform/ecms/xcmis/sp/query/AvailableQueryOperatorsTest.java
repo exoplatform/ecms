@@ -15,7 +15,7 @@
  *  along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.ecms.xcmis.sp.jcr.exo.query;
+package org.exoplatform.ecms.xcmis.sp.query;
 
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.CmisSchema;
 import org.xcmis.search.InvalidQueryException;
@@ -31,7 +31,7 @@ import java.util.List;
 
 /**
  * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey Kabashnyuk</a>
- * @version $Id: exo-jboss-codetemplates.xml 34360 2009-07-22 23:58:59Z ksm $
+ * @version $Id$
  *
  */
 public class AvailableQueryOperatorsTest extends BaseQueryTest

@@ -15,7 +15,7 @@
  *  along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.ecms.xcmis.sp.jcr.exo.query;
+package org.exoplatform.ecms.xcmis.sp.query;
 
 import org.xcmis.spi.BaseContentStream;
 import org.xcmis.spi.CmisConstants;
@@ -44,7 +44,7 @@ import java.util.List;
  * Date:
  *
  * @author <a href="karpenko.sergiy@gmail.com">Karpenko Sergiy</a>
- * @version $Id: QueryUsecasesTest.java 27 2010-02-08 07:49:20Z andrew00x $
+ * @version $Id$
  */
 public class QueryUsecasesTest extends BaseQueryTest
 {

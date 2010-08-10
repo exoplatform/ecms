@@ -15,7 +15,7 @@
  *  along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.ecms.xcmis.sp.jcr.exo.query;
+package org.exoplatform.ecms.xcmis.sp.query;
 
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.BaseTest;
 import org.exoplatform.ecms.xcmis.sp.jcr.exo.PropertyDefinitions;
@@ -49,7 +49,7 @@ import java.util.Set;
  * Date:
  *
  * @author <a href="karpenko.sergiy@gmail.com">Karpenko Sergiy</a>
- * @version $Id: BaseQueryTest.java 2 2010-02-04 17:21:49Z andrew00x $
+ * @version $Id$
  */
 public abstract class BaseQueryTest extends BaseTest
 {
