@@ -84,13 +84,13 @@
    </component>
 
    <component>
-      <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageProviderImpl</type>
+      <type>org.exoplatform.ecms.xcmis.sp.StorageProviderImpl</type>
       <init-params>
          <object-param>
             <name>configuration</name>
-            <object type="org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageProviderImpl$StorageProviderConfig">
+            <object type="org.exoplatform.ecms.xcmis.sp.StorageProviderImpl$StorageProviderConfig">
                <field name="storage">
-                  <object type="org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageConfiguration">
+                  <object type="org.exoplatform.ecms.xcmis.sp.StorageConfiguration">
                      <field name="id">
                         <string>cmis1</string>
                      </field>

@@ -17,7 +17,7 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.IndexListener;
+import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.xcmis.spi.CmisConstants;

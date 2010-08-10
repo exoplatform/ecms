@@ -19,10 +19,10 @@ package org.exoplatform.ecms.xcmis.sp;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.CmisContentReader;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.CmisSchema;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.CmisSchemaTableResolver;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.IndexListener;
+import org.exoplatform.ecms.xcmis.sp.index.CmisContentReader;
+import org.exoplatform.ecms.xcmis.sp.index.CmisSchema;
+import org.exoplatform.ecms.xcmis.sp.index.CmisSchemaTableResolver;
+import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
