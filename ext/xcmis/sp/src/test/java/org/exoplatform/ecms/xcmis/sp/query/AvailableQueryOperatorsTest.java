@@ -17,7 +17,7 @@
 
 package org.exoplatform.ecms.xcmis.sp.query;
 
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.CmisSchema;
+import org.exoplatform.ecms.xcmis.sp.index.CmisSchema;
 import org.xcmis.search.InvalidQueryException;
 import org.xcmis.search.content.Schema.Column;
 import org.xcmis.search.content.Schema.Table;
@@ -39,7 +39,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
    private CmisSchema cmisSchema;
 
    /**
-    * @see org.xcmis.sp.jcr.exo.query.BaseQueryTest#setUp()
+    * @see org.xcmis.sp.query.BaseQueryTest#setUp()
     */
    @Override
    public void setUp() throws Exception

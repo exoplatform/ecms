@@ -52,7 +52,7 @@ public class QueryUsecasesTest extends BaseQueryTest
    private FolderData testRoot;
 
    /**
-    * @see org.xcmis.sp.jcr.exo.query.BaseQueryTest#setUp()
+    * @see org.xcmis.sp.query.BaseQueryTest#setUp()
     */
    @Override
    public void setUp() throws Exception
@@ -1241,7 +1241,7 @@ public class QueryUsecasesTest extends BaseQueryTest
    }
 
    /**
-    * @see org.xcmis.sp.jcr.exo.BaseTest#tearDown()
+    * @see org.xcmis.sp.BaseTest#tearDown()
     */
    @Override
    protected void tearDown() throws Exception
