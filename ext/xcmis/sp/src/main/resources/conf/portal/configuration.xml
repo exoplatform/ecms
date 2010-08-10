@@ -7,7 +7,7 @@
    </component>
    
    <component>
-      <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry</type>
+      <type>org.exoplatform.ecms.xcmis.sp.DriveCmisRegistry</type>
       <init-params>
          <value-param>
             <name>rootIndexDir</name>
