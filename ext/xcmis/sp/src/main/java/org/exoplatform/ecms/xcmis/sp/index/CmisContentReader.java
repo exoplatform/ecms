@@ -17,8 +17,8 @@
 
 package org.exoplatform.ecms.xcmis.sp.index;
 
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.NotSupportedNodeTypeException;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.IndexListener.ContentEntryAdapter;
+import org.exoplatform.ecms.xcmis.sp.NotSupportedNodeTypeException;
+import org.exoplatform.ecms.xcmis.sp.index.IndexListener.ContentEntryAdapter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.xcmis.search.content.ContentEntry;
