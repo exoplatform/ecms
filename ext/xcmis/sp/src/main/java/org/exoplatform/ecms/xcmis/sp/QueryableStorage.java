@@ -82,7 +82,7 @@ public class QueryableStorage extends StorageImpl
    }
 
    /**
-    * @see org.xcmis.sp.jcr.exo.StorageImpl#query(org.xcmis.spi.query.Query)
+    * @see org.xcmis.sp.StorageImpl#query(org.xcmis.spi.query.Query)
     */
    @Override
    public ItemsIterator<Result> query(Query query) throws InvalidArgumentException

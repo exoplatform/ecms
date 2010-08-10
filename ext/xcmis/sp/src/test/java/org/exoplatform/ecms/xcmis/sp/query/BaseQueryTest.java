@@ -17,8 +17,8 @@
 
 package org.exoplatform.ecms.xcmis.sp.query;
 
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.BaseTest;
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.PropertyDefinitions;
+import org.exoplatform.ecms.xcmis.sp.BaseTest;
+import org.exoplatform.ecms.xcmis.sp.PropertyDefinitions;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.xcmis.spi.BaseContentStream;
