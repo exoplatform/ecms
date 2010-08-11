@@ -468,7 +468,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     Boolean isEdit = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("edit"));
     Node selectedNode = uiExplorer.getCurrentNode();
     if (isEdit) {
-	    if (uiExplorer.getCurrentPath().equals(path) && !selectedNode.isLocked() && 
+	    if (uiExplorer.getCurrentPath().equals(path) && 
 	    		canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditDocumentActionComponent.getFilters())) {
 	    	EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
 	    } else {

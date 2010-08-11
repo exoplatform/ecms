@@ -2120,9 +2120,9 @@
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
   -->
-  <UIJCRExporerPortlet>
+  <UIJCRExplorerPortlet>
     <nopermission>Es gibt kein Laufwerk, oder Sie haben keine Berechtigung für den Zugriff auf das Laufwerk</nopermission>
-  </UIJCRExporerPortlet>
+  </UIJCRExplorerPortlet>
   
   <UIJcrExplorerEditForm>
     <title>Datei-Explorer bearbeiten Form</title>
@@ -3296,11 +3296,11 @@
     	<Advance>Advanced</Advance>
     </label>
   </UIPreferencesForm>
-  <UIJCRExporerPortlet>
+  <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>File access denied!</file-access-denied>
 	</msg>
-  </UIJCRExporerPortlet>
+  </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>You can access to this view using the Drives button on the left panel</allDrives>

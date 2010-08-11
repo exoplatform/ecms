@@ -2116,9 +2116,9 @@
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
   -->
-  <UIJCRExporerPortlet>
+  <UIJCRExplorerPortlet>
     <nopermission>هذا ليس بقُرص أو انّك لا تملك الصلاحيّة الكافية للدّخول إلى هذا القُرص</nopermission>
-  </UIJCRExporerPortlet>
+  </UIJCRExplorerPortlet>
   
   <UIJcrExplorerEditForm>
     <title>مُستكشف الملفات مشهد التغيير</title>
@@ -2909,11 +2909,11 @@
     	<Advance>Advanced</Advance>
     </label>
   </UIPreferencesForm>
-  <UIJCRExporerPortlet>
+  <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>File access denied!</file-access-denied>
 	</msg>
-  </UIJCRExporerPortlet>
+  </UIJCRExplorerPortlet>
  <UIDrivesArea>
   		<DrivesArea>
   				<allDrives>You can access to this view using the Drives button on the left panel</allDrives>

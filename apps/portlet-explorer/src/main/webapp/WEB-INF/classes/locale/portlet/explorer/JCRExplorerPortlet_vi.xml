@@ -2299,9 +2299,9 @@
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
   -->
-  <UIJCRExporerPortlet>
+  <UIJCRExplorerPortlet>
     <nopermission>Không có drive này hoặc bạn không có quyền để truy cập</nopermission>
-  </UIJCRExporerPortlet>
+  </UIJCRExplorerPortlet>
   
   <UIJcrExplorerEditForm>
     <title>Sửa form File Explorer</title>
@@ -3324,11 +3324,11 @@
     </label>
   </UIPreferencesForm>
   
-  <UIJCRExporerPortlet>
+  <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>Lỗi truy cập file!</file-access-denied>
 	</msg>
-  </UIJCRExporerPortlet>
+  </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
