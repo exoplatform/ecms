@@ -441,6 +441,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     String repository = manageableRepository.getConfiguration().getName();
     List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(repository, portletName, category, WCMCoreUtils.getUserSessionProvider());
     for (Node templateNode : templateNodeList) {
+      if (!templateNode.isNodeType("nt:file")) continue;
       SelectItemOption<String> template = new SelectItemOption<String>();
       template.setLabel(templateNode.getName());
       template.setValue(templateNode.getPath());
