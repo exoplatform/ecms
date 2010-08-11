@@ -1682,7 +1682,7 @@
       <action>Thao tác</action>
     </header>
     <info>
-      <child-not-found>Node này không có bất kỳ node con nào</child-not-found>
+      <child-not-found>Không có nội dung có thể chọn được</child-not-found>
     </info>
   </UITreeList>
   <!--

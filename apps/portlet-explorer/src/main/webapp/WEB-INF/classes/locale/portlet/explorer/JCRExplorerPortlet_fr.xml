@@ -1674,7 +1674,7 @@
       <action>Action</action>
     </header>
     <info>
-      <child-not-found>Ce noeud n'a pas de fils</child-not-found>
+      <child-not-found>Aucun contenu sélectionnable</child-not-found>
     </info>
   </UITreeList>
   <!--

@@ -1674,7 +1674,7 @@
       <action>Action</action>
     </header>
     <info>
-      <child-not-found>This node hasn't got any child</child-not-found>
+      <child-not-found>No selectable content</child-not-found>
     </info>
   </UITreeList>
   <!--
