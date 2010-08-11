@@ -57,9 +57,13 @@ public class UICLVManualMode extends UICLVContainer {
     List<Node> nodes = new ArrayList<Node>();
     if (listContent != null && listContent.length != 0) {
       for (String itemPath : listContent) {
-      	NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
-      	Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath());
-      	if (viewNode != null) nodes.add(viewNode);    
+      	if (itemPath != null && itemPath.length() > 0) {
+	      	try {
+		      	NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
+		      	Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath());
+		      	if (viewNode != null) nodes.add(viewNode);
+	      	} catch (Exception ex) {}
+      	}
       }
     }
     if (nodes.size() == 0) {

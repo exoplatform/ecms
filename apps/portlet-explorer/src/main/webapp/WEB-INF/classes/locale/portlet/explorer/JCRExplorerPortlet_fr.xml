@@ -2291,9 +2291,9 @@
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
   -->
-  <UIJCRExporerPortlet>
+  <UIJCRExplorerPortlet>
     <nopermission>Impossible d'accéder au lecteur. Peut-être a-t-il été supprimé ou vous n'avez pas les permissions suffisantes.</nopermission>
-  </UIJCRExporerPortlet>
+  </UIJCRExplorerPortlet>
   
   <UIJcrExplorerEditForm>
     <title>Panneau de personnalisation de l'explorateur de fichiers</title>
@@ -3285,11 +3285,11 @@
     	<Advance>Advanced</Advance>
     </label>
   </UIPreferencesForm>
-  <UIJCRExporerPortlet>
+  <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>File access denied!</file-access-denied>
 	</msg>
-  </UIJCRExporerPortlet>
+  </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>Vous pouvez accéder à cette vue en utilisant le bouton Lecteurs à votre gauche</allDrives>
