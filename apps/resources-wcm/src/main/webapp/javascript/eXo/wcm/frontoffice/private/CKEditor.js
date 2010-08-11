@@ -45,4 +45,11 @@ CKEditor.prototype.insertCSS = function(Instance, ContentCSS) {
 	
 };
 
+CKEditor.prototype.getGadgetToken = function(url, metadata) {
+	var tokenURL = eXo.ecm.WCMUtils.getHostName() + eXo.ecm.WCMUtils.getRestContext() + "/wcmGadget/getToken?url=" + url;
+	var token = eXo.ecm.WCMUtils.request(tokenURL).getElementsByTagName("token")[0].getAttribute("value");
+	metadata.gadgets[0].secureToken = token;
+	return metadata;
+}
+
 eXo.ecm.CKEditor = new CKEditor();

@@ -112,6 +112,34 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
   
   /**
+   * Gets the folders and files.
+   * 
+   * @param currentFolder the current folder
+   * @param language the language
+   * 
+   * @return the folders and files
+   * 
+   * @throws Exception the exception
+   */
+  @GET
+  @Path("/getToken/")
+  public Response getToken(@QueryParam("url") String url) throws Exception {
+    ConversationState conversationState = ConversationState.getCurrent();
+    String userId = conversationState.getIdentity().getUserId();
+    String token = createToken(url, userId, userId, new Random().nextLong(), "default");
+    
+    Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+    Element element = document.createElement("token");
+    element.setAttribute("value", token);
+    document.appendChild(element);
+    
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setNoCache(true);
+    cacheControl.setNoStore(true);
+    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
+  }
+  
+  /**
    * Builds the xml response.
    * 
    * @param currentFolder the current folder
