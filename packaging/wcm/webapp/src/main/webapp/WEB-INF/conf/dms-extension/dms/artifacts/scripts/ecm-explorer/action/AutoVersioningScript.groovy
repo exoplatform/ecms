@@ -21,6 +21,7 @@ import org.exoplatform.services.cms.scripts.CmsScript;
 import javax.jcr.Node;
 import javax.jcr.Property;
 import javax.jcr.Session;
+import javax.jcr.Value;
 
 import org.exoplatform.services.jcr.RepositoryService;
 
@@ -51,8 +52,12 @@ public class AutoVersioningScript implements CmsScript{
       Node srcNode = (Node)session.getItem(srcPath) ;
       Node exoActionNodes = srcNode.getNode("exo:actions") ;
       Node actionNode = exoActionNodes.getNode(actionName) ;
-      String lifecycle = actionNode.getProperty("exo:lifecyclePhase").getString() ;
-      if("modify".equals(lifecycle)) {
+      List<String> lifeCycleList = new ArrayList<String>();
+      Value[] values = actionNode.getProperty("exo:lifecyclePhase").getValues();
+      for(Value value : values) {
+        lifeCycleList.add(value.getString());
+      }
+      if (lifeCycleList.contains("modify")) {      
         String propertyName = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
         if(!propertyName.equals("jcr:isCheckedOut")) {
           Property changedProp = session.getItem(nodePath) ;
@@ -65,7 +70,8 @@ public class AutoVersioningScript implements CmsScript{
           session.refresh(true) ;
           session.logout();
         }
-      } else if("add".equals(lifecycle)||"remove".equals(lifecycle)|| "schedule".equals(lifecycle)) {
+      } else if(lifeCycleList.contains("node_added") || lifeCycleList.contains("node_removed") 
+          || lifeCycleList.contains("schedule")) {
         Node currentNode = (Node)session.getItem(nodePath) ;
         if(!currentNode.isNodeType("mix:versionable")) {
           if(currentNode.canAddMixin("mix:versionable")) {
