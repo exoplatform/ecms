@@ -65,8 +65,8 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
       var oEditor ;
       try {
         oEditor = CKEDITOR.instances[name] ;
-        if (oEditor) {
-			document.getElementById(name).value = oEditor.getData();
+        if (oEditor && document.getElementById(name)) {
+			    document.getElementById(name).value = oEditor.getData();
         }
       } catch(e) {
         continue ;
