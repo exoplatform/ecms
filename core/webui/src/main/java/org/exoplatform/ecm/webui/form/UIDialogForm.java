@@ -18,12 +18,16 @@ package org.exoplatform.ecm.webui.form;
 
 import java.io.InputStream;
 import java.io.Writer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -235,7 +239,7 @@ public class UIDialogForm extends UIForm {
   public String geti18nNodePath() { return i18nNodePath; }
   
   @SuppressWarnings("unchecked")
-public void addActionField(String name,String label,String[] arguments) throws Exception {
+  public void addActionField(String name,String label,String[] arguments) throws Exception {
     UIFormActionField formActionField = new UIFormActionField(name,label,arguments);    
     if(formActionField.useSelector()) {
       componentSelectors.put(name, formActionField.getSelectorInfo()); 
@@ -331,7 +335,7 @@ public void addActionField(String name,String label,String[] arguments) throws E
   }
 
   @SuppressWarnings("unchecked")
-public void addCalendarField(String name, String label, String[] arguments) throws Exception {
+  public void addCalendarField(String name, String label, String[] arguments) throws Exception {
     UIFormCalendarField calendarField = new UIFormCalendarField(name,label,arguments);  
     String jcrPath = calendarField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
@@ -544,7 +548,7 @@ public void addCalendarField(String name, String label, String[] arguments) thro
   }
   
   @SuppressWarnings("unchecked")
-public void addSelectBoxField(String name, String label, String[] arguments) throws Exception {
+  public void addSelectBoxField(String name, String label, String[] arguments) throws Exception {
     UIFormSelectBoxField formSelectBoxField = new UIFormSelectBoxField(name,label,arguments);
     String jcrPath = formSelectBoxField.getJcrPath();
     String editable = formSelectBoxField.getEditable();
@@ -820,7 +824,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
   }
 
   @SuppressWarnings("unchecked")
-public void addTextField(String name, String label, String[] arguments) throws Exception {
+  public void addTextField(String name, String label, String[] arguments) throws Exception {
     UIFormTextField formTextField = new UIFormTextField(name,label,arguments);
     String jcrPath = formTextField.getJcrPath();
     String mixintype = formTextField.getMixinTypes();
@@ -1146,7 +1150,7 @@ public void addTextField(String name, String label, String[] arguments) throws E
   public Node getNode() throws Exception { 
     if(nodePath == null) return null;
     try {    
-    return (Node) getSession().getItem(nodePath);
+      return (Node) getSession().getItem(nodePath);
     } catch (Exception e) {
       return null;
     }
@@ -1351,6 +1355,23 @@ public void addTextField(String name, String label, String[] arguments) throws E
   public String getStoredPath() { return storedPath; }
 
   public void setWorkspace(String workspace) { this.workspaceName = workspace; }  
+  
+  public String getLastModifiedDate() throws Exception {
+    return getLastModifiedDate(getNode());
+  }
+  
+  public String getLastModifiedDate(Node node) throws Exception {
+    String d = "";
+    try {
+      if (node.hasProperty("exo:dateModified")) {
+        Locale locale = Util.getPortalRequestContext().getLocale();
+        DateFormat dateFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
+        Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
+        d = dateFormater.format(calendar.getTime());
+      }
+    } catch (Exception e) {}
+    return d;
+  }
 
   private void executePostSaveEventInterceptor(String nodePath_) throws Exception {
     if (postScriptInterceptor.size() > 0) {
@@ -1423,16 +1444,15 @@ public void addTextField(String name, String label, String[] arguments) throws E
     RepositoryService repositoryService  = getApplicationComponent(RepositoryService.class);      
     return repositoryService.getRepository(repositoryName);
   } 
-
   
   @SuppressWarnings("unchecked")
-private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
+ private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
     addMultiValuesInput(type, name, label);
     renderField(name);
   }
 
   @SuppressWarnings({ "unchecked", "unchecked" })
-private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
+ private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
     UIFormMultiValueInputSet uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
     uiMulti.setId(name);
     uiMulti.setName(name);
