@@ -137,7 +137,7 @@ public class UIJCRExplorer extends UIContainer {
   private DriveData driveData_ ;
     
   private boolean isFilterSave_ ;
-  private boolean isClickExpand_;
+  private boolean isShowDocumentViewForFile_ = true;
   private boolean preferencesSaved_ = false;
   
   private int tagScope;
@@ -155,8 +155,8 @@ public class UIJCRExplorer extends UIContainer {
   public boolean isFilterSave() { return isFilterSave_; }
   public void setFilterSave(boolean isFilterSave) { isFilterSave_ = isFilterSave; }
   
-  public boolean isClickExpand() { return isClickExpand_; }
-  public void setClickExpand(boolean value) { isClickExpand_ = value; }
+  public boolean isShowDocumentViewForFile() { return isShowDocumentViewForFile_; }
+  public void setShowDocumentViewForFile(boolean value) { isShowDocumentViewForFile_ = value; }
   
   public boolean isPreferencesSaved() { return preferencesSaved_; }
   public void setPreferencesSaved(boolean value) { preferencesSaved_ = value; }
@@ -275,7 +275,12 @@ public class UIJCRExplorer extends UIContainer {
   /**
    * Sets the virtual current path
    */
-  public void setCurrentPath(String currentPath) { currentPath_ = currentPath ; }
+  public void setCurrentPath(String currentPath) {
+  	if (currentPath_ == null || !currentPath_.equals(currentPath)) {
+  		isShowDocumentViewForFile_ = true;
+  	}
+  	currentPath_ = currentPath;  
+	}
   
   /**
    * Indicates if the current node is a referenced node 
@@ -493,7 +498,7 @@ public class UIJCRExplorer extends UIContainer {
           !uiDocumentWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
         UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
         UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
-        if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isClickExpand())) {
+        if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isShowDocumentViewForFile())) {
           uiDocumentWithTree.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
         } else {
@@ -642,7 +647,7 @@ public class UIJCRExplorer extends UIContainer {
           !uiDocWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
         UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
         UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");      
-        if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isClickExpand())) {
+        if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isShowDocumentViewForFile())) {
           uiDocumentWithTree.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
         } else {

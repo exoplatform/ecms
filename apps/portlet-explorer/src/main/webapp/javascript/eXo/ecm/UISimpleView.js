@@ -22,6 +22,7 @@ var SimpleView = function() {
 		Self.actionAreaId = actionAreaId;
 
 		var actionArea = document.getElementById(actionAreaId);
+		if (!actionArea) return;		
 		Self.allItems = DOM.findDescendantsByClass(actionArea, "div", "ActionIconBox");
 		var mousedown = null;
 		for (var i in Self.allItems) {

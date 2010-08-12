@@ -67,7 +67,6 @@ public class UIVoteForm extends UIComponent implements UIPopupComponent {
       VotingService votingService = uiExplorer.getApplicationComponent(VotingService.class) ;
       votingService.vote(uiExplorer.getCurrentNode(), objId, userName, language) ;
       event.getSource().getAncestorOfType(UIPopupContainer.class).cancelPopupAction() ;
-      uiExplorer.setClickExpand(true);
       uiExplorer.updateAjax(event) ;
     }
   }
