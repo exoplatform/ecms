@@ -17,14 +17,12 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.xcmis.search.config.IndexConfiguration;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * CMIS repository configuration.
- *
+ * 
  * @author <a href="mailto:andrey.parfonov@exoplatform.com">Andrey Parfonov</a>
  * @version $Id$
  */
@@ -43,8 +41,9 @@ public class StorageConfiguration
    /** Path of JCR node which must be considered as root folder. */
    private String rootNodePath = "/";
 
-   /** Configuration for the index. */
-   private IndexConfiguration indexConfiguration;
+   //
+   //   /** Configuration for the index. */
+   //   private IndexConfiguration indexConfiguration;
 
    /** Additional properties. */
    private Map<String, Object> properties;
@@ -57,13 +56,12 @@ public class StorageConfiguration
    }
 
    public StorageConfiguration(String id, String repository, String workspace, String rootNodePath,
-      IndexConfiguration indexConfiguration, Map<String, Object> properties, String description)
+      Map<String, Object> properties, String description)
    {
       this.id = id;
       this.repository = repository;
       this.workspace = workspace;
       this.rootNodePath = rootNodePath;
-      this.indexConfiguration = indexConfiguration;
       if (properties != null)
       {
          this.properties = new HashMap<String, Object>(properties);
@@ -73,7 +71,7 @@ public class StorageConfiguration
 
    /**
     * Get repository id.
-    *
+    * 
     * @return the repository id
     */
    public String getId()
@@ -85,8 +83,9 @@ public class StorageConfiguration
 
    /**
     * Set CMIS repository id.
-    *
-    * @param id repository id
+    * 
+    * @param id
+    *           repository id
     */
    public void setId(String id)
    {
@@ -95,7 +94,7 @@ public class StorageConfiguration
 
    /**
     * Get repository name.
-    *
+    * 
     * @return repository name.
     */
    public String getRepository()
@@ -105,8 +104,9 @@ public class StorageConfiguration
 
    /**
     * Set repository name.
-    *
-    * @param repository the repository name
+    * 
+    * @param repository
+    *           the repository name
     */
    public void setRepository(String repository)
    {
@@ -115,7 +115,7 @@ public class StorageConfiguration
 
    /**
     * Get workspace name.
-    *
+    * 
     * @return the workspace name
     */
    public String getWorkspace()
@@ -125,8 +125,9 @@ public class StorageConfiguration
 
    /**
     * Set workspace name.
-    *
-    * @param workspace the workspace name
+    * 
+    * @param workspace
+    *           the workspace name
     */
    public void setWorkspace(String workspace)
    {
@@ -135,7 +136,7 @@ public class StorageConfiguration
 
    /**
     * Get path of JCR node which must be considered as root folder.
-    *
+    * 
     * @return root folder path
     */
    public String getRootNodePath()
@@ -145,8 +146,9 @@ public class StorageConfiguration
 
    /**
     * Set path of JCR node which must be considered as root folder.
-    *
-    * @param rootFolderPath root folder path
+    * 
+    * @param rootFolderPath
+    *           root folder path
     */
    public void setRootNodePath(String rootNodePath)
    {
@@ -155,7 +157,7 @@ public class StorageConfiguration
 
    /**
     * Get description.
-    *
+    * 
     * @return repository description.
     */
    public String getDescription()
@@ -165,37 +167,39 @@ public class StorageConfiguration
 
    /**
     * Set repository description.
-    *
-    * @param description string description
+    * 
+    * @param description
+    *           string description
     */
    public void setDescription(String description)
    {
       this.description = description;
    }
 
-   /**
-    * Get index configuration.
-    *
-    * @return the index configuration
-    */
-   public IndexConfiguration getIndexConfiguration()
-   {
-      return indexConfiguration;
-   }
-
-   /**
-    * Set index configuration.
-    *
-    * @param indexConfiguration the index configuration
-    */
-   public void setIndexConfiguration(IndexConfiguration indexConfiguration)
-   {
-      this.indexConfiguration = indexConfiguration;
-   }
+   //   /**
+   //    * Get index configuration.
+   //    * 
+   //    * @return the index configuration
+   //    */
+   //   public IndexConfiguration getIndexConfiguration()
+   //   {
+   //      return indexConfiguration;
+   //   }
+   //
+   //   /**
+   //    * Set index configuration.
+   //    * 
+   //    * @param indexConfiguration
+   //    *           the index configuration
+   //    */
+   //   public void setIndexConfiguration(IndexConfiguration indexConfiguration)
+   //   {
+   //      this.indexConfiguration = indexConfiguration;
+   //   }
 
    /**
     * Get additional repository's properties.
-    *
+    * 
     * @return properties. If there is no any properties specified for repository
     *         then empty map will be returned
     */
@@ -210,8 +214,9 @@ public class StorageConfiguration
 
    /**
     * Set additional repository's properties.
-    *
-    * @param properties properties map
+    * 
+    * @param properties
+    *           properties map
     */
    public void setProperties(Map<String, Object> properties)
    {

@@ -19,10 +19,6 @@ package org.exoplatform.ecms.xcmis.sp;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
-import org.exoplatform.ecms.xcmis.sp.index.CmisContentReader;
-import org.exoplatform.ecms.xcmis.sp.index.CmisSchema;
-import org.exoplatform.ecms.xcmis.sp.index.CmisSchemaTableResolver;
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
@@ -35,11 +31,6 @@ import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
 import org.xcmis.search.SearchService;
 import org.xcmis.search.SearchServiceException;
-import org.xcmis.search.config.IndexConfiguration;
-import org.xcmis.search.config.SearchServiceConfiguration;
-import org.xcmis.search.content.command.InvocationContext;
-import org.xcmis.search.value.SlashSplitter;
-import org.xcmis.search.value.ToStringNameConverter;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRegistry;
 import org.xcmis.spi.CmisRuntimeException;
@@ -89,7 +80,8 @@ public class StorageProviderImpl implements StorageProvider, Startable
       }
 
       /**
-       * @param storage the storage configuration
+       * @param storage
+       *           the storage configuration
        */
       public void setStorage(StorageConfiguration storage)
       {
@@ -120,13 +112,17 @@ public class StorageProviderImpl implements StorageProvider, Startable
    /**
     * This constructor is used by eXo container.
     * 
-    * @param repositoryService JCR repository service
-    * @param documentReaderService DocumentReaderService required for indexing
-    *        mechanism
-    * @param permissionService PermissionService
-    * @param registry CmisRegistry will be used for registered current
-    *        StorageProvider after its initialization
-    * @param initParams configuration parameters
+    * @param repositoryService
+    *           JCR repository service
+    * @param documentReaderService
+    *           DocumentReaderService required for indexing mechanism
+    * @param permissionService
+    *           PermissionService
+    * @param registry
+    *           CmisRegistry will be used for registered current StorageProvider
+    *           after its initialization
+    * @param initParams
+    *           configuration parameters
     */
    public StorageProviderImpl(RepositoryService repositoryService, DocumentReaderService documentReaderService,
       PermissionService permissionService, CmisRegistry registry, InitParams initParams)
@@ -138,11 +134,15 @@ public class StorageProviderImpl implements StorageProvider, Startable
    /**
     * This constructor is used by eXo container.
     * 
-    * @param repositoryService JCR repository service
-    * @param permissionService PermissionService
-    * @param registry CmisRegistry will be used for registered current
-    *        StorageProvider after its initialization
-    * @param initParams configuration parameters
+    * @param repositoryService
+    *           JCR repository service
+    * @param permissionService
+    *           PermissionService
+    * @param registry
+    *           CmisRegistry will be used for registered current StorageProvider
+    *           after its initialization
+    * @param initParams
+    *           configuration parameters
     */
    public StorageProviderImpl(RepositoryService repositoryService, PermissionService permissionService,
       CmisRegistry registry, InitParams initParams)
@@ -211,18 +211,20 @@ public class StorageProviderImpl implements StorageProvider, Startable
       {
          ManageableRepository repository = repositoryService.getRepository(repositoryId);
          Session session = repository.login(ws);
-         StorageImpl storage = null;
-         if (searchService != null)
-         {
-            storage =
-               new QueryableStorage(session, storageConfiguration, searchService, permissionService, nodeTypeMapping);
-            IndexListener indexListener = new IndexListener(storage, searchService);
-            storage.setIndexListener(indexListener);
-         }
-         else
-         {
-            storage = new StorageImpl(session, storageConfiguration, permissionService, nodeTypeMapping);
-         }
+         StorageImpl storage =
+            new StorageImpl(session, storageConfiguration, searchService, permissionService, nodeTypeMapping);
+
+         //         if (searchService != null)
+         //         {
+         //            storage =
+         //               new QueryableStorage(session, storageConfiguration, searchService, permissionService, nodeTypeMapping);
+         //            IndexListener indexListener = new IndexListener(storage, searchService);
+         //            storage.setIndexListener(indexListener);
+         //         }
+         //         else
+         //         {
+         //            storage = new StorageImpl(session, storageConfiguration, permissionService, nodeTypeMapping);
+         //         }
          return new JcrConnection(storage);
       }
       catch (RepositoryException re)
@@ -235,6 +237,19 @@ public class StorageProviderImpl implements StorageProvider, Startable
          throw new CmisRuntimeException("Unable get CMIS storage " + storageConfiguration.getId() + ". "
             + rce.getMessage(), rce);
       }
+   }
+
+   /**
+    * @return the nodeTypeMapping
+    */
+   public Map<String, TypeMapping> getNodeTypeMapping()
+   {
+      return nodeTypeMapping;
+   }
+
+   public StorageConfiguration getStorageConfiguration()
+   {
+      return storageConfiguration;
    }
 
    /**
@@ -252,7 +267,8 @@ public class StorageProviderImpl implements StorageProvider, Startable
    /**
     * Set storage configuration.
     * 
-    * @param storageConfig storage configuration
+    * @param storageConfig
+    *           storage configuration
     * @throw IllegalStateException if configuration for storage already set
     */
    void setConfiguration(StorageConfiguration storageConfig)
@@ -278,6 +294,17 @@ public class StorageProviderImpl implements StorageProvider, Startable
       {
          LOG.error("Unable to initialize storage. ", e);
       }
+   }
+
+   /**
+    * {@inheritDoc}
+    */
+   public void stop()
+   {
+      //      if (searchService != null)
+      //      {
+      //         searchService.stop();
+      //      }
    }
 
    protected synchronized void init() throws RepositoryException, RepositoryConfigurationException,
@@ -367,65 +394,19 @@ public class StorageProviderImpl implements StorageProvider, Startable
             LOG.error("Unable to create event listener. " + e);
          }
       }
-
-      if (searchService == null && storageConfiguration.getIndexConfiguration() != null)
-      {
-         //prepare search service
-         StorageImpl storage = new StorageImpl(session, storageConfiguration, permissionService, nodeTypeMapping);
-         CmisSchema schema = new CmisSchema(storage);
-         CmisSchemaTableResolver tableResolver =
-            new CmisSchemaTableResolver(new ToStringNameConverter(), schema, storage);
-
-         IndexConfiguration indexConfiguration = storageConfiguration.getIndexConfiguration();
-         indexConfiguration.setRootUuid(storage.getRepositoryInfo().getRootFolderId());
-         //if list of root parents is empty it will be indexed as empty string
-         indexConfiguration.setRootParentUuid("");
-         indexConfiguration.setDocumentReaderService(documentReaderService);
-
-         //default invocation context
-         InvocationContext invocationContext = new InvocationContext();
-         invocationContext.setNameConverter(new ToStringNameConverter());
-         invocationContext.setSchema(schema);
-         invocationContext.setPathSplitter(new SlashSplitter());
-         invocationContext.setTableResolver(tableResolver);
-
-         SearchServiceConfiguration configuration = new SearchServiceConfiguration();
-         configuration.setIndexConfiguration(indexConfiguration);
-         configuration.setContentReader(new CmisContentReader(storage));
-         configuration.setNameConverter(new ToStringNameConverter());
-         configuration.setDefaultInvocationContext(invocationContext);
-         configuration.setTableResolver(tableResolver);
-         configuration.setPathSplitter(new SlashSplitter());
-
-         SearchService searchService = new SearchService(configuration);
-         searchService.start();
-
-         //attach listener to the created storage
-         IndexListener indexListener = new IndexListener(storage, searchService);
-         storage.setIndexListener(indexListener);
-
-         this.searchService = searchService;
-      }
-   }
-
-   /**
-    * {@inheritDoc}
-    */
-   public void stop()
-   {
-      if (searchService != null)
-      {
-         searchService.stop();
-      }
-   }
-
-   public StorageConfiguration getStorageConfiguration()
-   {
-      return storageConfiguration;
    }
 
    void addNodeTypeMapping(Map<String, TypeMapping> nodeTypeMapping)
    {
       this.nodeTypeMapping.putAll(nodeTypeMapping);
+   }
+
+   /**
+    * @param searchService
+    *           the searchService to set
+    */
+   public void setSearchService(SearchService searchService)
+   {
+      this.searchService = searchService;
    }
 }

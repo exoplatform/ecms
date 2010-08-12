@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd" xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
+   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
    <component>
       <key>org.exoplatform.services.log.LogConfigurationInitializer</key>
@@ -16,15 +17,15 @@
          <properties-param>
             <name>properties</name>
             <description>Log4J properties</description>
-            <property name="log4j.rootLogger" value="INFO, stdout" />
-            <property name="log4j.appender.stdout" value="org.apache.log4j.ConsoleAppender" />
-            <property name="log4j.appender.stdout.threshold" value="DEBUG" />
-            <property name="log4j.appender.stdout.layout" value="org.apache.log4j.PatternLayout" />
-            <property name="log4j.appender.stdout.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
-            <property name="log4j.appender.file" value="org.apache.log4j.FileAppender" />
-            <property name="log4j.appender.file.File" value="target/container.log" />
-            <property name="log4j.appender.file.layout" value="org.apache.log4j.PatternLayout" />
-            <property name="log4j.appender.file.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
+            <property name="log4j.rootLogger" value="INFO, stdout"/>
+            <property name="log4j.appender.stdout" value="org.apache.log4j.ConsoleAppender"/>
+            <property name="log4j.appender.stdout.threshold" value="DEBUG"/>
+            <property name="log4j.appender.stdout.layout" value="org.apache.log4j.PatternLayout"/>
+            <property name="log4j.appender.stdout.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n"/>
+            <property name="log4j.appender.file" value="org.apache.log4j.FileAppender"/>
+            <property name="log4j.appender.file.File" value="target/container.log"/>
+            <property name="log4j.appender.file.layout" value="org.apache.log4j.PatternLayout"/>
+            <property name="log4j.appender.file.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n"/>
          </properties-param>
       </init-params>
    </component>
@@ -40,9 +41,9 @@
             <init-params>
                <properties-param>
                   <name>namespaces</name>
-                  <property name="dc" value="http://purl.org/dc/elements/1.1/" />
-                  <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0" />
-                  <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0" />
+                  <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
+                  <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0"/>
+                  <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0"/>
                </properties-param>
             </init-params>
          </component-plugin>
@@ -80,8 +81,19 @@
    </component>
 
    <component>
-      <type>org.xcmis.spi.deploy.ExoContainerCmisRegistry</type>
+      <type>org.exoplatform.ecms.xcmis.sp.JcrCmisRegistry</type>
+      <init-params>
+         <value-param>
+            <name>indexDir</name>
+            <value>target/temp/index/</value>
+         </value-param>
+      </init-params>
    </component>
+
+
+   <!-- component>
+      <type>org.exoplatform.ecms.xcmis.sp.index.CmisRegistryStartListener</type>
+   </component-->
 
    <component>
       <type>org.exoplatform.ecms.xcmis.sp.StorageProviderImpl</type>
@@ -100,13 +112,6 @@
                      <field name="workspace">
                         <string>ws1</string>
                      </field>
-                     <field name="indexConfiguration">
-                        <object type="org.xcmis.search.config.IndexConfiguration">
-                           <field name="indexDir">
-                              <string>target/temp/index/db1/ws1</string>
-                           </field>
-                        </object>
-                     </field>
                   </object>
                </field>
             </object>
@@ -123,7 +128,7 @@
       <init-params>
          <properties-param>
             <name>locations</name>
-            <property name="db1" value="ws1" />
+            <property name="db1" value="ws1"/>
          </properties-param>
       </init-params>
    </component>
@@ -157,7 +162,7 @@
          <properties-param>
             <name>default-properties</name>
             <description>Default initial context properties</description>
-            <property name="java.naming.factory.initial" value="org.exoplatform.services.naming.SimpleContextFactory" />
+            <property name="java.naming.factory.initial" value="org.exoplatform.services.naming.SimpleContextFactory"/>
          </properties-param>
       </init-params>
    </component>
@@ -184,10 +189,10 @@
             <properties-param>
                <name>ref-addresses</name>
                <description>ref-addresses</description>
-               <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
-               <property name="url" value="jdbc:hsqldb:file:target/temp/data/portal" />
-               <property name="username" value="sa" />
-               <property name="password" value="" />
+               <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+               <property name="url" value="jdbc:hsqldb:file:target/temp/data/portal"/>
+               <property name="username" value="sa"/>
+               <property name="password" value=""/>
             </properties-param>
          </init-params>
       </component-plugin>
@@ -211,10 +216,10 @@
             <properties-param>
                <name>ref-addresses</name>
                <description>ref-addresses</description>
-               <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
-               <property name="url" value="jdbc:hsqldb:file:target/temp/data/jcr" />
-               <property name="username" value="sa" />
-               <property name="password" value="" />
+               <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+               <property name="url" value="jdbc:hsqldb:file:target/temp/data/jcr"/>
+               <property name="username" value="sa"/>
+               <property name="password" value=""/>
             </properties-param>
          </init-params>
       </component-plugin>

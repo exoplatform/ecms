@@ -29,7 +29,6 @@ import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ItemsIterator;
 import org.xcmis.spi.ObjectData;
 import org.xcmis.spi.ObjectNotFoundException;
-import org.xcmis.spi.Storage;
 import org.xcmis.spi.model.Property;
 import org.xcmis.spi.model.PropertyDefinition;
 import org.xcmis.spi.model.TypeDefinition;
@@ -47,7 +46,7 @@ import java.util.Set;
 /**
  * Created by The eXo Platform SAS. <br/>
  * Date:
- *
+ * 
  * @author <a href="karpenko.sergiy@gmail.com">Karpenko Sergiy</a>
  * @version $Id$
  */
@@ -71,7 +70,7 @@ public abstract class BaseQueryTest extends BaseTest
 
    protected final static String PROPERTY_STATUS = "cmis:status";
 
-   protected Storage storage;
+   // protected Storage storage;
 
    protected FolderData rootFolder;
 
@@ -79,10 +78,11 @@ public abstract class BaseQueryTest extends BaseTest
 
    protected TypeDefinition folderTypeDefinition;
 
+   @Override
    public void setUp() throws Exception
    {
       super.setUp();
-      storage = storageProvider.getConnection().getStorage();
+      //storage = storageProvider.getConnection().getStorage();
       rootFolder = (FolderData)storage.getObjectById(storage.getRepositoryInfo().getRootFolderId());
 
       nasaDocumentTypeDefinition = storage.getTypeDefinition(NASA_DOCUMENT, true);
@@ -130,12 +130,12 @@ public abstract class BaseQueryTest extends BaseTest
       {
          LOG.debug("expected:");
       }
-      for (int i = 0; i < expectedResults.length; i++)
+      for (String[] expectedResult : expectedResults)
       {
          String newRow = "";
-         for (int j = 0; j < expectedResults[i].length; j++)
+         for (int j = 0; j < expectedResult.length; j++)
          {
-            newRow += "|" + expectedResults[i][j];
+            newRow += "|" + expectedResult[j];
          }
          expectedPaths.add(newRow);
          if (LOG.isDebugEnabled())

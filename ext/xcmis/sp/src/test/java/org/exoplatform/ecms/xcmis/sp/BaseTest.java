@@ -32,7 +32,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.xcmis.spi.ObjectData;
-import org.xcmis.spi.StorageProvider;
+import org.xcmis.spi.Storage;
 import org.xcmis.spi.model.Property;
 
 import java.io.File;
@@ -69,9 +69,13 @@ public abstract class BaseTest extends TestCase
 
    protected Node relationshipsNode;
 
-   protected StorageProvider storageProvider;
+   //protected StorageProvider storageProvider;
 
    protected ThreadLocalSessionProviderService sessionProviderService;
+
+   private JcrCmisRegistry registry;
+
+   protected Storage storage;
 
    private volatile static boolean shoutDown;
 
@@ -98,7 +102,12 @@ public abstract class BaseTest extends TestCase
 
       repository = (RepositoryImpl)repositoryService.getRepository(jcrRepositoryName);
 
-      storageProvider = (StorageProvider)container.getComponentInstanceOfType(StorageProvider.class);
+      registry = (JcrCmisRegistry)container.getComponentInstanceOfType(JcrCmisRegistry.class);
+      ConversationState cs = new ConversationState(new Identity("root"));
+      ConversationState.setCurrent(cs);
+
+      storage = registry.getConnection("cmis1").getStorage();
+      //storageProvider = (StorageProvider)container.getComponentInstanceOfType(StorageProvider.class);
 
       session = (SessionImpl)repository.login(credentials, wsName);
 
@@ -108,9 +117,6 @@ public abstract class BaseTest extends TestCase
          (ThreadLocalSessionProviderService)container
             .getComponentInstanceOfType(ThreadLocalSessionProviderService.class);
       assertNotNull(sessionProviderService);
-
-      ConversationState cs = new ConversationState(new Identity("root"));
-      ConversationState.setCurrent(cs);
 
       sessionProviderService.setSessionProvider(null, new SessionProvider(cs));
 
@@ -151,12 +157,12 @@ public abstract class BaseTest extends TestCase
          {
             wc.nextNode().remove();
          }
-//         for (NodeIterator unfiled =
-//            rootNode.getNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1) + "/" + StorageImpl.XCMIS_UNFILED).getNodes(); unfiled
-//            .hasNext();)
-//         {
-//            unfiled.nextNode().remove();
-//         }
+         //         for (NodeIterator unfiled =
+         //            rootNode.getNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1) + "/" + StorageImpl.XCMIS_UNFILED).getNodes(); unfiled
+         //            .hasNext();)
+         //         {
+         //            unfiled.nextNode().remove();
+         //         }
 
          session.save();
 

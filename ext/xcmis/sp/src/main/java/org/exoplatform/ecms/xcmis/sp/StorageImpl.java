@@ -24,6 +24,14 @@ import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.xcmis.search.InvalidQueryException;
+import org.xcmis.search.SearchService;
+import org.xcmis.search.Visitors;
+import org.xcmis.search.model.source.SelectorName;
+import org.xcmis.search.parser.CmisQueryParser;
+import org.xcmis.search.parser.QueryParser;
+import org.xcmis.search.query.QueryExecutionException;
+import org.xcmis.search.result.ScoredRow;
 import org.xcmis.spi.BaseItemsIterator;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRuntimeException;
@@ -88,6 +96,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
@@ -109,7 +118,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
 
    private class TreeVisitor implements ObjectDataVisitor
    {
-      private Collection<BaseObjectData> items = new LinkedHashSet<BaseObjectData>();
+      private final Collection<BaseObjectData> items = new LinkedHashSet<BaseObjectData>();
 
       public void visit(ObjectData object)
       {
@@ -146,20 +155,25 @@ public class StorageImpl extends BaseJcrStorage implements Storage
 
    private RepositoryInfo repositoryInfo;
 
-   private PermissionService permissionService;
+   private final PermissionService permissionService;
 
-   public StorageImpl(Session session, IndexListener indexListener, StorageConfiguration configuration,
+   /**
+    * Searching service.
+    */
+   private SearchService searchService;
+
+   /**
+    * Cmis query parser.
+    */
+   private final QueryParser cmisQueryParser;
+
+   public StorageImpl(Session session, StorageConfiguration configuration, SearchService searchService,
       PermissionService permissionService, Map<String, TypeMapping> nodeTypeMapping)
    {
       super(session, configuration, nodeTypeMapping);
-      this.indexListener = indexListener;
+      this.searchService = searchService;
       this.permissionService = permissionService;
-   }
-
-   public StorageImpl(Session session, StorageConfiguration configuration, PermissionService permissionService,
-      Map<String, TypeMapping> nodeTypeMapping)
-   {
-      this(session, null, configuration, permissionService, nodeTypeMapping);
+      this.cmisQueryParser = new CmisQueryParser();
    }
 
    /**
@@ -492,7 +506,9 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          catch (Exception e)
          {
             if (LOG.isDebugEnabled())
+            {
                LOG.warn("Unable delete object " + o.getObjectId());
+            }
 
             if (!continueOnFailure)
             {
@@ -836,11 +852,46 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    public ItemsIterator<Result> query(Query query) throws InvalidArgumentException
    {
       // May be overridden.
-      throw new NotSupportedException("Query is not supported. ");
+
+      if (searchService != null)
+      {
+         try
+         {
+            org.xcmis.search.model.Query qom = cmisQueryParser.parseQuery(query.getStatement());
+
+            //            org.xcmis.search.model.Query newQom =
+            //               new org.xcmis.search.model.Query(qom.getSource(), new And(qom.getConstraint(), new DescendantNode(
+            //                  ((Selector)qom.getSource()).getAlias(), "[" + "ROOT_DRIVE_ID" + "]")), qom.getOrderings(), qom
+            //                  .getColumns(), qom.getLimits());
+
+            List<ScoredRow> rows = searchService.execute(qom);
+            //check if needed default sorting
+            if (qom.getOrderings().size() == 0)
+            {
+               Set<SelectorName> selectorsReferencedBy = Visitors.getSelectorsReferencedBy(qom);
+               Collections.sort(rows, new DocumentOrderResultSorter(selectorsReferencedBy.iterator().next().getName(),
+                  this));
+            }
+            return new QueryResultIterator(rows, qom);
+         }
+         catch (InvalidQueryException e)
+         {
+            throw new InvalidArgumentException(e.getLocalizedMessage(), e);
+         }
+         catch (QueryExecutionException e)
+         {
+            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
+      }
+      else
+      {
+         throw new NotSupportedException("Query is not supported. ");
+      }
    }
 
    /**
-    * @param indexListener the indexListener to set
+    * @param indexListener
+    *           the indexListener to set
     */
    public void setIndexListener(IndexListener indexListener)
    {
@@ -917,4 +968,20 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       }
    }
 
+   /**
+    * @return the searchService
+    */
+   public SearchService getSearchService()
+   {
+      return searchService;
+   }
+
+   /**
+    * @param searchService
+    *           the searchService to set
+    */
+   public void setSearchService(SearchService searchService)
+   {
+      this.searchService = searchService;
+   }
 }

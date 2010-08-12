@@ -20,7 +20,6 @@ package org.exoplatform.ecms.xcmis.sp;
 import org.exoplatform.services.jcr.util.IdGenerator;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.InvalidArgumentException;
-import org.xcmis.spi.Storage;
 import org.xcmis.spi.model.BaseType;
 import org.xcmis.spi.model.ContentStreamAllowed;
 import org.xcmis.spi.model.PropertyDefinition;
@@ -37,11 +36,11 @@ import java.util.Set;
  * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey
  *         Kabashnyuk</a>
  * @version $Id$
- *
+ * 
  */
 public class CmisTypeTest extends BaseTest
 {
-   protected Storage storage;
+   //protected Storage storage;
 
    protected FolderData rootFolder;
 
@@ -63,7 +62,7 @@ public class CmisTypeTest extends BaseTest
    public void setUp() throws Exception
    {
       super.setUp();
-      storage = storageProvider.getConnection().getStorage();
+      //storage = storageProvider.getConnection().getStorage();
       rootFolder = (FolderData)storage.getObjectById(storage.getRepositoryInfo().getRootFolderId());
    }
 

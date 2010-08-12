@@ -26,7 +26,7 @@ import org.xcmis.spi.utils.MimeType;
  * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey
  *         Kabashnyuk</a>
  * @version $Id$
- *
+ * 
  */
 public class MultifilingUnfilingTest extends BaseQueryTest
 {
@@ -74,7 +74,7 @@ public class MultifilingUnfilingTest extends BaseQueryTest
       storage.deleteTree(testRoot, true, null, true);
    }
 
-   public void testRemoveFromMultipleParents() throws Exception
+   public void _testRemoveFromMultipleParents() throws Exception
    {
 
       FolderData folder1 = createFolder(testRoot, "multifilingFolderTest1", folderTypeDefinition);

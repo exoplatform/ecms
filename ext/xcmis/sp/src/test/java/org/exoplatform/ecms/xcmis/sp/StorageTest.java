@@ -32,7 +32,6 @@ import org.xcmis.spi.ObjectData;
 import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.PolicyData;
 import org.xcmis.spi.RelationshipData;
-import org.xcmis.spi.Storage;
 import org.xcmis.spi.StorageException;
 import org.xcmis.spi.VersioningException;
 import org.xcmis.spi.model.AccessControlEntry;
@@ -64,7 +63,7 @@ import javax.jcr.Node;
 public class StorageTest extends BaseTest
 {
 
-   protected Storage storage;
+   //protected Storage storage;
 
    protected FolderData rootFolder;
 
@@ -80,7 +79,7 @@ public class StorageTest extends BaseTest
    public void setUp() throws Exception
    {
       super.setUp();
-      storage = storageProvider.getConnection().getStorage();
+      //storage = storageProvider.getConnection().getStorage();
       rootFolder = (FolderData)storage.getObjectById(storage.getRepositoryInfo().getRootFolderId());
 
       documentTypeDefinition = storage.getTypeDefinition("cmis:document", true);
