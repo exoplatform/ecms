@@ -151,16 +151,16 @@ public class ChangeStateCronJobImpl implements Job {
     				  }
     			  }
     		  } else {
-    			  if (log.isInfoEnabled()) log.info("no '" + fromState + "' content found in " + predefinedPath);
+    			  if (log.isDebugEnabled()) log.debug("no '" + fromState + "' content found in " + predefinedPath);
     		  }
     	  }
     	  if (log.isDebugEnabled()) log.debug("End Execute ChangeStateCronJob");
       }
       
     } catch (RepositoryException ex) {
-      if (log.isInfoEnabled()) log.info("Repository '" + repository + "' not found., ignoring");
+      if (log.isErrorEnabled()) log.error("Repository '" + repository + "' not found., ignoring");
     } catch (Exception ex) {
-      log.error("error when changing the state of the content : " + ex.getMessage(), ex);
+      if (log.isErrorEnabled()) log.error("error when changing the state of the content : " + ex.getMessage(), ex);
     } finally {
       if (session != null)
         session.logout();
