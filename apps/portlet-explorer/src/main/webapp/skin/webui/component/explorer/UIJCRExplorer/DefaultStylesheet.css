@@ -174,7 +174,7 @@
 }
 
 .UIJCRExplorerPortlet .SelectNodePath .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid {
-  width: auto;
+  width: 100%;
 }
 
 .UIJCRExplorerPortlet .DriveNameInput .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td.FieldLabel {
