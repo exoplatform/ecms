@@ -67,6 +67,7 @@
 
 .UIJCRExplorerPortlet .UIJcrExplorerEditContainer .UIForm .UIFormGrid td.FieldLabel {
 	vertical-align: middle;
+	width:250px;
 }
 
 .UIAnyPermission .UIForm .HorizontalLayout .UIFormGrid {
