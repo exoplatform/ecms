@@ -110,15 +110,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     }
     if(PortletMode.VIEW.equals(newMode)) {
       addChild(UIPresentationContainer.class, null, null).getNodeView();
-//      popPreferences.setRendered(false);      
-//      uiPresentation.getNodeView();//Force the portlet reload the nodecontent
-//    	uiPresentation.setRendered(true);
     } else if (PortletMode.EDIT.equals(newMode)) {
       addChild(UISCVPreferences.class, null, null).setInternalPreferencesMode(true);
-//      popPreferences.setInternalPreferencesMode(true);
-//      uiPresentation.setRendered(false);
-//      popPreferences.getPreferences();
-//      popPreferences.setRendered(true);      
     }
   }
   public boolean isViewMode() {
