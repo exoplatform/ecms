@@ -395,59 +395,62 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    private void initializeSearchService(IndexConfiguration readOnlyIndexConfiguration)
    {
-      try
+      if (readOnlyIndexConfiguration != null)
       {
+         try
+         {
 
-         rootStorage = createRootStorage();
+            rootStorage = createRootStorage();
 
-         //prepare search service
-         CmisSchema schema = new CmisSchema(rootStorage);
-         CmisSchemaTableResolver tableResolver =
-            new CmisSchemaTableResolver(new ToStringNameConverter(), schema, rootStorage);
+            //prepare search service
+            CmisSchema schema = new CmisSchema(rootStorage);
+            CmisSchemaTableResolver tableResolver =
+               new CmisSchemaTableResolver(new ToStringNameConverter(), schema, rootStorage);
 
-         IndexConfiguration indexConfiguration = new IndexConfiguration();
+            IndexConfiguration indexConfiguration = new IndexConfiguration();
 
-         File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
-         File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
+            File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
+            File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
 
-         indexConfiguration.setIndexDir(indexFolder.getPath());
-         indexConfiguration.setDocumentReaderService(readOnlyIndexConfiguration.getDocumentReaderService());
-         indexConfiguration.setRootUuid(Constants.ROOT_UUID);
+            indexConfiguration.setIndexDir(indexFolder.getPath());
+            indexConfiguration.setDocumentReaderService(readOnlyIndexConfiguration.getDocumentReaderService());
+            indexConfiguration.setRootUuid(Constants.ROOT_UUID);
 
-         //if list of root parents is empty it will be indexed as empty string
-         indexConfiguration.setRootParentUuid("");
+            //if list of root parents is empty it will be indexed as empty string
+            indexConfiguration.setRootParentUuid("");
 
-         //default invocation context
-         InvocationContext invocationContext = new InvocationContext();
-         invocationContext.setNameConverter(new ToStringNameConverter());
-         invocationContext.setSchema(schema);
-         invocationContext.setPathSplitter(new SlashSplitter());
-         invocationContext.setTableResolver(tableResolver);
+            //default invocation context
+            InvocationContext invocationContext = new InvocationContext();
+            invocationContext.setNameConverter(new ToStringNameConverter());
+            invocationContext.setSchema(schema);
+            invocationContext.setPathSplitter(new SlashSplitter());
+            invocationContext.setTableResolver(tableResolver);
 
-         SearchServiceConfiguration configuration = new SearchServiceConfiguration();
-         configuration.setIndexConfiguration(indexConfiguration);
-         configuration.setContentReader(new CmisContentReader(rootStorage));
-         configuration.setNameConverter(new ToStringNameConverter());
-         configuration.setDefaultInvocationContext(invocationContext);
-         configuration.setTableResolver(tableResolver);
-         configuration.setPathSplitter(new SlashSplitter());
+            SearchServiceConfiguration configuration = new SearchServiceConfiguration();
+            configuration.setIndexConfiguration(indexConfiguration);
+            configuration.setContentReader(new CmisContentReader(rootStorage));
+            configuration.setNameConverter(new ToStringNameConverter());
+            configuration.setDefaultInvocationContext(invocationContext);
+            configuration.setTableResolver(tableResolver);
+            configuration.setPathSplitter(new SlashSplitter());
 
-         searchService = new SearchService(configuration);
-         searchService.start();
+            searchService = new SearchService(configuration);
+            searchService.start();
 
-         //attach listener to the created storage
-         //indexListener = new IndexListener(searchService);
-         //storage.setIndexListener(indexListener);
+            //attach listener to the created storage
+            //indexListener = new IndexListener(searchService);
+            //storage.setIndexListener(indexListener);
 
-      }
-      catch (RepositoryException e)
-      {
-         throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
+         catch (RepositoryException e)
+         {
+            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
 
-      }
-      catch (SearchServiceException e)
-      {
-         throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
+         catch (SearchServiceException e)
+         {
+            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
       }
    }
 
