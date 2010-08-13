@@ -10,10 +10,11 @@
    <component>
       <type>org.exoplatform.ecms.xcmis.sp.DriveCmisRegistry</type>
       <init-params>
-         <value-param>
+         <!-- Disabled by default. Uncomment if you need query support in CMIS. -->
+         <!-- value-param>
             <name>indexDir</name>
             <value>${gatein.jcr.index.data.dir}/cmis-index${container.name.suffix}</value>
-         </value-param>
+         </value-param-->
          <value-param>
             <name>exo.cmis.renditions.persistent</name>
             <value>true</value>
