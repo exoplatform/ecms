@@ -91,15 +91,19 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
 
    public void addSearchService(String jcrRepositoryName, String jcrWorkspaceName, SearchService searchService)
    {
-      wsSearchServices.put(jcrRepositoryName + "@" + jcrWorkspaceName, searchService);
-      //reload existed sp
-      for (Entry<String, StorageProvider> spEntry : storageProviders.entrySet())
+      if (searchService != null)
       {
-         StorageProviderImpl sp = (StorageProviderImpl)spEntry.getValue();
-         if (sp.getStorageConfiguration().getRepository().equals(jcrRepositoryName)
-            && sp.getStorageConfiguration().getWorkspace().equals(jcrWorkspaceName))
+         wsSearchServices.put(jcrRepositoryName + "@" + jcrWorkspaceName, searchService);
+
+         //reload existed sp
+         for (Entry<String, StorageProvider> spEntry : storageProviders.entrySet())
          {
-            sp.setSearchService(searchService);
+            StorageProviderImpl sp = (StorageProviderImpl)spEntry.getValue();
+            if (sp.getStorageConfiguration().getRepository().equals(jcrRepositoryName)
+               && sp.getStorageConfiguration().getWorkspace().equals(jcrWorkspaceName))
+            {
+               sp.setSearchService(searchService);
+            }
          }
       }
    }
@@ -167,7 +171,11 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
    {
       for (Entry<String, SearchService> entry : wsSearchServices.entrySet())
       {
-         entry.getValue().stop();
+         SearchService value = entry.getValue();
+         if (value != null)
+         {
+            value.stop();
+         }
       }
    }
 
