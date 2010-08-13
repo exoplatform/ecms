@@ -805,10 +805,12 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             }
          }
 
+         CapabilityQuery queryCapability = searchService != null ? CapabilityQuery.BOTHCOMBINED : CapabilityQuery.NONE;
+
          repositoryInfo =
             new RepositoryInfo(getId(), getId(), rootIdentifier, CmisConstants.SUPPORTED_VERSION,
                new RepositoryCapabilities(CapabilityACL.MANAGE, CapabilityChanges.NONE,
-                  CapabilityContentStreamUpdatable.ANYTIME, CapabilityJoin.NONE, CapabilityQuery.BOTHCOMBINED,
+                  CapabilityContentStreamUpdatable.ANYTIME, CapabilityJoin.NONE, queryCapability,
                   CapabilityRendition.READ, false, true, true, true, true, true, false, false), new ACLCapability(
                   permissionMapping, Collections.unmodifiableList(permissions),
                   AccessControlPropagation.REPOSITORYDETERMINED, SupportedPermissions.BASIC), SystemIdentity.ANONIM,
