@@ -318,6 +318,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   
   public void setInternalPreferencesMode(boolean isInternal) {
     this.isInternal = isInternal;
+    if (isInternal) getPreferences();
   }
   public boolean getInternalPreferencesMode() {
     return this.isInternal;
