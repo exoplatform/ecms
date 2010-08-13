@@ -125,12 +125,12 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
             ValuesParam next = vparams.next();
             if (next.getName().equalsIgnoreCase("renditionProviders"))
             {
-               this.providers.addAll(next.getValues());
+               renditionProviders.addAll(next.getValues());
             }
          }
       }
       RenditionManager manager = RenditionManager.getInstance();
-      manager.addRenditionProviders(providers);
+      manager.addRenditionProviders(renditionProviders);
       setFactory(this);
 
       try
