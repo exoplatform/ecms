@@ -276,7 +276,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           for (String category : listTaxonomy) {
             categoriesPath.concat(category).concat(",");
           }
-          
           if (listTaxonomy != null && listTaxonomy.size() > 0) {
             try {
               for (String categoryPath : listTaxonomy) {
@@ -326,6 +325,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew(),documentForm.repositoryName);
         try {
           newNode = (Node)homeNode.getSession().getItem(addedPath);
+          if(newNode.isLocked()) {
+            newNode.getSession().addLockToken(LockUtil.getLockToken(newNode));
+          }
           // Begin delete listExistedTaxonomy
           if (hasCategories) {          
             List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
@@ -343,6 +345,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           // End delete listExistedTaxonomy
           
           if (hasCategories && (newNode != null) && ((listTaxonomy != null) && (listTaxonomy.size() > 0))){
+            documentForm.releaseLock();
             for(String categoryPath : listTaxonomy) {
               index = categoryPath.indexOf("/");
               try {
