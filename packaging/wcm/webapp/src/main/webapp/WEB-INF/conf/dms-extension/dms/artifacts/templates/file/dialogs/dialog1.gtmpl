@@ -55,7 +55,7 @@
                     String mimeType = content.getProperty("jcr:mimeType").getString() ;
                     if(mimeType.startsWith("text")){
                       if(mimeType.equals("text/html")) {
-                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
+                        String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty"] ;
                               uicomponent.addRichtextField("contentHtml", fieldSummary) ;      
                         //uicomponent.removeComponent("content");
                       } else {
@@ -70,13 +70,13 @@
                     <%
                     }
                   } else {
-                    String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
+                    String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty"] ;
                                 uicomponent.addRichtextField("contentHtml", fieldSummary) ;            
                   }
                 } else {  
                   String selectValue = uicomponent.getSelectBoxFieldValue("mimetype") ;   
                   if(selectValue != null && selectValue.equals("text/html")) {  
-                    String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
+                    String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty"] ;
                                 uicomponent.addRichtextField("contentHtml", fieldSummary) ;
                     uicomponent.removeComponent("contentPlain");
                   } else if(selectValue != null && selectValue.equals("text/plain")){
@@ -84,7 +84,7 @@
                                 uicomponent.addTextAreaField("contentPlain", fieldSummary) ;
                     uicomponent.removeComponent("contentHtml");
                   } else {
-                    String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
+                    String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty"] ;
                                 uicomponent.addRichtextField("contentHtml", fieldSummary) ;  
                     uicomponent.removeComponent("contentPlain");                
                   }
