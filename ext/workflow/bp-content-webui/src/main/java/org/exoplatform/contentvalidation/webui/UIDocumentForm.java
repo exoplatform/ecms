@@ -293,6 +293,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         // End delete listExistedTaxonomy
         
         if (hasCategories && (newNode != null) && ((listTaxonomy != null) && (listTaxonomy.size() > 0))){
+          uiForm.releaseLock();
           for(String categoryPath : listTaxonomy) {
             index = categoryPath.indexOf("/");
             try {

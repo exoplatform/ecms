@@ -50,7 +50,6 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActionContainer;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActionForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActionTypeForm;
-import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -97,6 +96,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
     node.refresh(true);
   }
 
+  @SuppressWarnings("unchecked")
   public static void editDocument(Event <? extends UIComponent> event,
   																WebuiRequestContext context,
   																UIComponent comp,
@@ -202,20 +202,15 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         }
         UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
         uiDocumentContainer.setRendered(false);
-        UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-        if (controller != null) {
-          controller.getChild(UIDocumentForm.class).releaseLock();
-        }
         uiDocumentWorkspace.addChild(uiController);
         uiController.initOptionBlockPanel();
         uiController.setRendered(true);
+        uiController.getChild(UIDocumentForm.class).initFieldInput();
         context.addUIComponentToUpdateByAjax(uiWorkingArea);
         if (event != null) {
         	uiExplorer.updateAjax(event);
         }
         context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
-//        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo");
-               
       }
     }
   }
