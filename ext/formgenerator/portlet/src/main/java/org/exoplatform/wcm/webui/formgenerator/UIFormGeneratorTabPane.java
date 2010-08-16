@@ -568,7 +568,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       Utils.createPopupMessage(formGeneratorTabPane, "UIFormGeneratorTabPane.msg.AddNewsSuccessful", new Object[]{templateName}, ApplicationMessage.INFO);
       
       nameFormStringInput.setValue("");
-      ((UIFormWYSIWYGInput)formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
+      ((UIFormRichtextInput)formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
       event.getRequestContext().addUIComponentToUpdateByAjax(formGeneratorTabPane);
     }
   }
@@ -593,7 +593,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       UIFormGeneratorTabPane formGeneratorTabPane = event.getSource();
       UIFormInputSet formGeneratorGeneralTab = formGeneratorTabPane.getChildById(UIFormGeneratorConstant.FORM_GENERATOR_GENERAL_TAB);
       formGeneratorGeneralTab.getUIStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT).setValue("");
-      ((UIFormWYSIWYGInput)formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
+      ((UIFormRichtextInput)formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
       event.getRequestContext().addUIComponentToUpdateByAjax(formGeneratorTabPane);
     }
   }
