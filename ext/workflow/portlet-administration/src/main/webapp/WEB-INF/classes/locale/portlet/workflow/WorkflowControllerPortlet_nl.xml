@@ -22,6 +22,7 @@
       <UIBPDefinition>BP Definitie Kontroler</UIBPDefinition>
       <UIDocumentContent>Bezie inhoud</UIDocumentContent>
       <UIDocumentForm>Wijzig inhoud</UIDocumentForm>
+			<WorkflowDocumentContainer>Wijzig inhoud</WorkflowDocumentContainer>
       <UITask>Taak</UITask>
     </title>
   </UITabPane>

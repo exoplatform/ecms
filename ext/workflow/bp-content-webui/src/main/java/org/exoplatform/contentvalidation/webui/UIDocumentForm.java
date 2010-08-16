@@ -51,6 +51,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -225,8 +226,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       listTaxonomyName = values;
       inputSet.setValue(values);
     }
-
-    UITaskManager uiContainer = getParent();
+    UIContainer uiContainer = getParent();
     uiContainer.removeChildById(POPUP_TAXONOMY);
   }
   
@@ -343,7 +343,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
   static  public class CancelActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
-      UITaskManager uiTaskManager = event.getSource().getParent() ;
+      UIDocumentForm uiForm = event.getSource();
+      UITaskManager uiTaskManager = uiForm.getAncestorOfType(UITaskManager.class) ;
       uiTaskManager.setRenderedChild(UITask.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager) ;
     }
@@ -352,7 +353,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   static public class AddActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm uiDocumentForm = event.getSource();
-      UITaskManager uiTaskManager = uiDocumentForm.getParent();
+      UIContainer uiDocumentContainer = uiDocumentForm.getParent();
       String clickedField = event.getRequestContext().getRequestParameter(OBJECTID);
       if (uiDocumentForm.isReference) {
         UIApplication uiApp = uiDocumentForm.getAncestorOfType(UIApplication.class);
@@ -366,7 +367,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               String workspaceName = dmsRepoConfig.getSystemWorkspace();            
               if(uiSet.getValue().size() == 0) uiSet.setValue(new ArrayList<Value>());            
               UIOneTaxonomySelector uiOneTaxonomySelector = 
-                uiTaskManager.createUIComponent(UIOneTaxonomySelector.class, null, null);
+                uiDocumentContainer.createUIComponent(UIOneTaxonomySelector.class, null, null);
               uiOneTaxonomySelector.setIsDisable(workspaceName, false);
               TaxonomyService taxonomyService = uiDocumentForm.getApplicationComponent(TaxonomyService.class);
               List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees(repository);
@@ -376,9 +377,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               uiOneTaxonomySelector.init(SessionProviderFactory.createSystemProvider());
               String param = "returnField=" + FIELD_TAXONOMY;
               uiOneTaxonomySelector.setSourceComponent(uiDocumentForm, new String[]{param});
-              UIPopupWindow uiPopupWindow = uiTaskManager.getChildById(POPUP_TAXONOMY);
+              UIPopupWindow uiPopupWindow = uiDocumentContainer.getChildById(POPUP_TAXONOMY);
               if (uiPopupWindow == null) {
-                uiPopupWindow = uiTaskManager.addChild(UIPopupWindow.class, null, POPUP_TAXONOMY);
+                uiPopupWindow = uiDocumentContainer.addChild(UIPopupWindow.class, null, POPUP_TAXONOMY);
               }
               uiPopupWindow.setWindowSize(700, 450);
               uiPopupWindow.setUIComponent(uiOneTaxonomySelector);
@@ -386,7 +387,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               uiPopupWindow.setShow(true);
             }
           } 
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager);
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentContainer);
         } catch (AccessDeniedException accessDeniedException) {
           uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null, 
               ApplicationMessage.WARNING));
