@@ -359,5 +359,6 @@
     <module>delivery</module>
     <module>packaging</module>
 		<module>examples</module>
+		<module>migration/2.0/templates</module>
   </modules>
 </project>
