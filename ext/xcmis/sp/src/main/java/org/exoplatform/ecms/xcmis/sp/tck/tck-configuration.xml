@@ -100,13 +100,6 @@
                      <field name="workspace">
                         <string>cmis-tck</string>
                      </field>
-                     <field name="indexConfiguration">
-                        <object type="org.xcmis.search.config.IndexConfiguration">
-                           <field name="indexDir">
-                              <string>target/temp/index/db1/cmis-tck</string>
-                           </field>
-                        </object>
-                     </field>
                   </object>
                </field>
             </object>
