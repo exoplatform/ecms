@@ -1,0 +1,27 @@
+
+h1. SQL or XPath based search
+
+
+* Select the location you want to search
+* Switch to the *Search* tab
+* Click on the
+
+!icon.gif !
+
+ icon(the
+
+! SearchIcon.jpg!
+
+ for DMS 2.5). The *Advanced Search* form will appear and select the *New Query* tab :
+
+
+!form1!
+
+
+There are two query types for you to choose: SQL and xPath. To create one, do as follows:
+
+* Input the query name
+* Select the query type
+* Input the query statement.
+* Click the *Search* button to review the search result and display a search result in the *Search Results* tab or *Save* to accept creating a new query.
+* The new saved query will be displayed in the existing query list in the *Saved Query* tab

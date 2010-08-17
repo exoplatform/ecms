@@ -1,0 +1,82 @@
+
+
+h1. Autoversioning Action in DMS
+
+
+When the *Autoversioning* action is assigned to a folder, it will automatically create new versions for the folder and its childnodes without the need to check-out/check-in. For check-in and check-out refer to [ECM:Version+Control+and+Locking#AddVersionsforNodes].
+
+The *autoversioning* action is applied to the folder or its child nodes depending on selecting the lifecyle:
+
+- If the lifecycle is *User Action*: The action is applied to the current folder.
+
+- If the lifecycle is *Add*/ *remove*/ *modify*/ *schedule*: The action is applied to the child nodes of the folder.
+
+
+|| Lifecycle|| Meaning ||
+| Add| The action will be executed to a new document, but not to a subfolder when the document or the subfolder is created in the folder in which an action has been added to. It's also applied to a new document in the subfolder of the folder. |
+| User Action | The action is executed when right-clicking on the folder and then select the action. |
+| Modify| The action will be executed when a folder /node is modified.  |
+| Remove| The action will be executed to a document, but not to a subfolder in the folder when the document or the subfolder is moved. |
+| Schedule |The action is done at specific time. There are 2 schedule lifecyle types: period and cron.(See more [Schedule lifecycle]). |
+
+
+h1. How to view the versions automatically created by the autoversioning action
+
+After the *autoversioning* action has been added to a folder (view [Managing Actions] to know how to add an action to a folder), you can look at the automatically created versions of the folder or its subfolders in the *Version Info* form.
+
+ - Lifecyle is *User Action*. Do the following to view the versions of a folder:
+
+1\. Select a folder that you added autoversioning action to.
+
+2. Right-click on the folder and choose the autoversioning action in the menu:
+
+
+!useraction1.png!
+
+
+3. Click the *Ok* button in a pop-up message:
+
+
+!message.png!
+
+
+4. Then, choose the *Admin* tab --> Click the
+!manageverion1.jpg!
+ icon on the action bar. If the version hasn't been activated, an *activate version* form will appear and click the *Activate* button to accept activating it.
+
+
+!activate1.png!
+
+
+5. Then, click the
+!manageverion1.jpg!
+ icon on the action bar again and the Version info of the folder will list in the *version info* form.
+
+
+- Lifecycle is *Add*/ *remove*/ *modify*/ *schedule*. Do the following to view the versions of a folder:
+
+
+1\. Select a subfolder (childnode) of the folder that you added autoversioning action to.
+
+2. Select the *Admin* tab --> Click the
+!manageverion1.jpg!
+ icon on the action bar:
+
+
+!manageversion.png!
+
+
+The *version info* form appears like this:
+
+
+
+!versioninfo.png!
+
+
+
+
+
+
+
+
+

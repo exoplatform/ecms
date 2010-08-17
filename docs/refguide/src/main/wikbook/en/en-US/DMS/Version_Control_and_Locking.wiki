@@ -1,0 +1,280 @@
+
+h1. Version Control and Locking
+
+
+
+
+h1. Manage version
+
+When you update or edit a node, the new content will replace the existing content. By using the *Manage versions* function, you can update or edit nodes but still keep old versions.
+
+h2. Add Versions for Nodes
+
+1\. Go to *File Explorer* on the navigation bar --> Select a node that you want to add a version from the left or right pane.
+
+2. Select the *Admin* tab to show some administration actions:
+
+
+!admintab.png!
+
+
+3. Click the icon
+!2.png!
+    to open the *Activate version* form:
+
+{info}
+For DMS 2.5
+{info}
+
+Click on the
+!ManageVersion.jpg!
+ on the Action bar. The *Activate version* form will appear:
+
+
+
+!3.png!
+
+
+
+4. Click *Activate* to activate a version for a node.
+
+5. Right-click on the selected node and select 'Check in'
+
+
+
+!4.png!
+
+
+
+6. Click the icon
+!5.png!
+     again to open the *Version Info* pop-up.
+
+
+!6.png!
+
+
+
+# node is added a version and it is 'Base version'
+
+7. Right-click on the selected node and select Check out to finish adding a version for the node.
+
+
+!7.png!
+
+
++*Note :*+
+
+* If the node is in the 'Check in' status, you can not take any actions like copy/cut, rename... You must check out before doing other actions.
+* If you want to add more versions for a node, right-click on the selected node above and do 'check in' and 'check out'
+
+
+
+
+
+h2. Add/Remove Labels for Versions
+
+*Add a label of a version*:
+
+1\. Select a node which is added a version
+
+2. Click
+!8.png!
+   to open the *Version Info* form.
+
+3. Click the icon
+!9.png!
+    to show the *Add label* form under the version list:
+
+
+!AddLabel.png!
+
+
+4. Input value in the *Label* field.
+
+* Do not put special characters like : @,#,$...
+* Do not put the label that has the same name with existing label.
+
+5. Click the *Save* button to accept the inputted label.
+
+*Remove a label of a version*:
+
+1\. Click the icon
+!11.png!
+    to show the *Remove label* form:
+
+
+!12.png!
+
+
+2. Click the icon
+!13.png!
+    and select one label that you want to remove:
+
+
+!14.png!
+
+
+3. Click the *Remove* button. The selected label is deleted.
+
+
+
+h2. View Versions of Nodes
+
+Do the following steps to view the content of a version:
+
+1\. Select a node which is added versions.
+
+2. Click the icon
+!15.png!
+     to open the *'Version Info'* form.
+
+3. Click the icon
+!16.png!
+  .The node's content of the current version will appear:
+
+
+
+!17.png!
+
+
+
+h2. Restore Versions of Nodes
+
+Do the following steps to restore versions:
+
+1\. Select a node which has at least 2 versions.
+
+2. Click the icon
+!18.png!
+  to open the *Version Infor* form:
+
+
+
+!19.png!
+
+
+3. Select a version that you want to make it to be a base version.
+
+4. Click the icon
+!20.png!
+  . The selected version become the base version.
+
+
+h2. Delete Versions
+
+1\. Select a node which has at least 2 versions.
+
+2. Click the icon
+!21.png!
+  to open the *'Version Infor'* form.
+
+
+
+!22.png!
+
+
+
+3. Select a version that you want to delete.
+
+4. Click the icon
+!23.png!
+   corresponding to the version that you want to delete.
+
+5. Click the *OK* button on the confirmation message to accept deleting or click the *Cancel* button to quit without deleting.
+
++*Note :*+ You can not delete the base version.
+
+
+
+
+h2. Compare Versions of Nodes
+
+This function is used to compare between two versions of a node and only node type is nt:file can compare versions.
+
+
+1\. Select a node which has at least 2 versions.
+2. Click the icon
+!24.png!
+   to open the *'Version Info'* form.
+
+
+!25.png!
+
+
+3. Select a version you want to compare with the base version.
+
+4. Show the form to compare versions by clicking the icon !26.png!
+
+
+!27.png!
+
+
+If there is no difference between 2 versions, the form will appear:
+
+
+
+!28.png!
+
+
+
+h1. Lock/Unlock Folder
+
+This function supports you to avoid changes on a specific folder by others in specific time.
+
+h2. Lock Folders
+
+Just need to right-click on the folder (from left or right pane) and select the *Lock* item in menu. The selected folder is locked.
+
+
+!29.png!
+
+
++*Note :*+
+
+* Only users who have right can take this action.
+* After being locked, others only can view it.
+* The lock status can be kept in the current session only, if the locker sign out, the node will be unlocked.
+* Other users can make a copy of locking node in other places by doing Copy and Paste it into another node but users can not remove it or perform others actions.
+* If you lock the folder but do not do any action on it, after 30 minutes, it will be unlocked automatically.
+
+
+
+h2. Unlock Folders
+
+To unlock a folder, right-click on a locked folder and select 'Unlock' item in the menu. The locked folder will be unlocked and thus others can take actions on it.
+
+
+
+h1. Lock/Unlock Documents
+
+This function supports you to avoid changes on a specific document by others in a specific time.
+
+
+h2. Lock Documents
+
+Do  the following to lock a document:
+
+1\. Select the path to the document you want to lock or select to open that document on the left/right pane.
+
+2. Right-click on the document and select the *Lock* item in menu.
+
+
+!30.png!
+
+
+After this action, the document is locked, you can take any action on this document but others can not.
+
++*Note :*+
+* Only user who has right can take this action, otherwise contact with the Administrator to get right.
+* After being locked, others only can view it.
+* The lock status can be kept in current session only, if the locker signs out, the node is unlocked.
+* Other users can make copy of locking node in other places by doing Copy and Paste it into another node but users can not remove it or perform others actions.
+* If you lock the document but do not perform any action on it, after 30 minutes, it will be unlocked automatically.
+
+
+h2. Unlock Documents
+After the document is locked, when right-click on it, the *Unlock* item in the menu will be enabled only when the document is being locked. Select it and the locked document will be unlocked. After that, others can take actions on it.
+
+
+

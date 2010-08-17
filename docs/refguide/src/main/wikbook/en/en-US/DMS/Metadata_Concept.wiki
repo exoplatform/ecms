@@ -1,0 +1,27 @@
+h1. Metadata Concept
+
+h2. Overview
+
+
+In the JCR semantics, meta-data (data used to provide information on the real content data) are properties at the same level as the content properties. Hence, it is up to the application built on the top of the repository to provide the conventions and mechanism to differentiate properties data from meta-data properties.
+
+eXo ECM does so by allowing the ECM admin to select from the list of JCR MixinTypes the ones that provides meta-data properties. In other words, one can tell that a document can be described by meta-data provided and structured in custom JCR MixinTypes.
+
+It is then up to the ECM admin to create new mixin types (the UI provided is the same as when creating a new NodeType) and quote them to make them meta-data mixin types by extending the exo:metadata mixin type.
+
+The most common example which is bundle by default is the Dublin Core meta data set. Indeed, we provide a dc mixin type that describes a set of properties that can be used to describe a document.
+
+Of course, not every mixin type can be seen as a structure for a set of meta-data and it is the responsibility of the ECM to quote the correct ones from the list of available mixins.
+
+
+
+h2. Adding a new Metadata type
+
+For adding a metadata type you need to add a mixin type which has a super type _exo:metadata_. A metadata has 2 scripts, one for editing, and another one for viewing. They can be edited using the _ECM Admin > Manage Ontologies > Manage Metadata_. To edit these two scripts, see the page [ECM:ECM Template Management] for more information on how to edit them.
+
+
+
+h2. Handling Administrative tasks like Metadata dialog and viewing templates
+
+
+h2. Configuring the Metadata Service

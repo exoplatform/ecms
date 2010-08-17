@@ -1,0 +1,132 @@
+
+h1. Drives
+
+
+
+h1. Show or hide the sidebar
+
+The side bar is used to show nodes like a tree, related documents, tags, and the clipboard. To hide the sidebar, click the
+!HideIcon.png!
+ in the *Sidebar Controller* or perform in the *Preference Setting*(please refer [Using the File Explorer] for more details):
+
+
+!HideSideBar.png!
+
+
+After closing the sidebar, the drive will be displayed:
+
+
+!AfterSideBar.png!
+
+
+
+To show the sidebar, click the
+!ShowSideBar.png!
+ icon or perform in the *Preference Setting*
+
+
+!ShowSideBar1.png!
+
+
+
+{info}
+Since DMS 2.5
+{info}
+
+To hide the sidebar, click on the icon
+!IconNew.png!
+ to open the *Preference Setting*
+
+Unselect the *Show sidebar* checkbox. After closing the side bar, the drive will be displayed:
+
+
+!AfterSideBar1.png!
+
+
+To show the sidebar, select the *Show sidebar* check box in the *Preference Setting*
+
+{info}
+Since DMS 2.6
+{info}
+
+To hide the sidebar, click on the icon
+!ShowSidebar.png!
+ to open the *Preference Setting*
+
+Unselect the *Show sidebar* checkbox. After closing the side bar, the drive will be displayed:
+
+
+!FileExplorer.png!
+
+
+To show the sidebar, select the *Show sidebar* check box in the *Preference Setting*
+
+
+
+
+h1. Access a drive directly
+
+By default, when you access File Explorer, you can see some drives that you have permissions to work on them. But you also allowed to open a specific drive directly when you access File Explorer.
+
+Following these simple guides to access a drive directly:
+
+1\. Move your cursor to the upper right corner of this portlet and click on the
+!Icon.png!
+ to open the functional menu.
+
+2. Select the *Edit* function in the menu:
+
+
+
+!Edit1.png!
+
+
+# form to edit File Explorer appears:
+
+
+!Edit2.png!
+
+
+Details:
+
+|| Name   || Description ||
+| Repository   |	the repository contains drives that you want to access |
+| Specify a category when uploading a file    |	the check box requires you to specify a specific category when you create or upload a document. |
+| Upload file size limit(MB)   |	The limit size of file you can upload into File Explorer |
+| Select Type   | 	A type is used to select drives in the File Explorer. There are 4 types to select drives displayed in File Explorer: Selection, Jailed, Personal, Social. |
+
+
+3. Click on the *Edit* button. You will see a form to modify values of fields:
+
+
+!Edit3.png!
+
+
+4. Select a type in the *Select Type* field.
+
+Details:
+
+|| Name  || Description ||
+| Selection  | all drives that you have the access right will be listed in the Fire Explorer. |
+| Jailed   | this type allows you to select a desired drive to be accessed directly when you access File Explorer. |
+| Personal  | all drives that you have the access right will be listed in the Fire Explorer. (this type will be improved in next version.) |
+| Social   |  If you are using DMS, when you select this type, the value of the field will be *Selection*. So you can not use this type if you do not embed the File Explorer in the Social product. If a File Explorer page is embed in the Social product, the drive that has the same name with the space created in the Social product will be accessed directly when you access File Explorer  |
+
+
+
+5. Select the name of the drive you want to access directly.
+
+6. Click on the *Save* button and switch to the *View* mode of this portlet.
+
+7. The selected drive will appear immediately and there is no *Back to JCR main Drives* icon  !Back.png
+! at the upper right corner of this drive( the new icon for *Back to JCR main Drives* in DMS 2.5 will be !
+ Back1.png!)
+
+
+
+
+
+
+
+
+

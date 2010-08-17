@@ -1,0 +1,18 @@
+h1. JCR Hierarchy
+
+
+
+The Java Content Repository Specification introduces several levels of granularity to store contents. Most of them are optional but once again eXo implements them all.
+
+As you can see on the next schema, the entry point is a Repository object that contains several Workspaces. Each workspace is bound to be a tree of Nodes and Property objects. The leaves of the nodes are the ECM documents, structured (article, events..) or unstructured ones (PDF, Word, Images...).
+
+As an analogy with File System in usual Operating Systems, we can compare the Workspaces with File Partitions.
+
+In eXo JCR, Repositories and workspaces can be [dynamically managed|JCR:Repository  and Workspace management] in an unique way.
+
+!jcr_hierarchy.png|height=600!
+
+
+
+
+

@@ -1,0 +1,36 @@
+
+h1. Migrate data from DMS 2.3 to DMS 2.5
+
+
+
+
+h1. Migration for workspace and resource bundle
+Since DMS version 2.5 or higher, we used dms-system workspace as a location to store all data of DMS(templates, drives, scripts,...). So when we want to upgrade DMS from 2.3 to 2.5 and keep all data as before then we have to create this workspace.
+
+How to do it?
+
+* Compile the source code at /\{dms.version}/core/component/migration/2.5/workspaces to create new jar *(exo.ecm.dms.core.component.migration.2.5.workspaces-\{dms.version}.jar)* by command:
+{code:xml}
+mvn clean install
+{code}
+   or simply by [copy>http:--wiki.exoplatform.com-xwiki-bin-download-ECM-ECM+Migration+from+DMS+2%2D3+to+DMS+2%2D5-exo.ecm.dms.core.component.migration.2.5.workspaces%2D2.5.jar] the jar file which complied and attached to this article
+   * Copy this jar to server's library(For ex: the "/lib" folder in tomcat server).<br>
+   * Stop and run server to let this jar apply the changes. You can see some exceptions in the console because the new configuration cannot found the dms-system workspace to init data. Don't worry, let it run to last step, after that stop and start server again please, everything will be fine<br>
+   * Remove this jar.
+
+
+1 Migration for data in dms-system workspace
+In the older version of DMS(before 2.5), we used system workspace to store all data of DMS, that is mean since DMS 2.5 those data are useless and need to be migrated to dms-system workspace to make it effect to our system.
+
+To do this thing, we have to migrate workspace and resource bundle which described above first.
+After that follow step by step
+
+* Compile the source code at /\{dms.version}/core/component/migration/2.5/datas to create new jar *(exo.ecm.dms.core.component.migration.2.5.datas-\{dms.version}.jar)* by command:
+{code:xml}
+mvn clean install
+{code}
+   or simply by [copy|http://wiki.exoplatform.com/xwiki/bin/download/ECM/ECM+Migration+from+DMS+2%2D3+to+DMS+2%2D5/exo.ecm.dms.core.component.migration.2.5.datas%2D2.5.jar] the jar file which complied and attached to this article
+   * Copy this jar to server's library(For ex: the "/lib" folder in tomcat server).<br>
+   * Stop and run server to let this jar apply the changes. <br>
+   * Remove this jar.
+

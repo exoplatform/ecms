@@ -1,0 +1,72 @@
+
+h1. Unlock Management
+
+
+{info}
+Since DMS 2.6
+{info}
+
+
+
+
+
+h1. Overview
+
+
+All locked nodes are listed and managed by administrators in ECM Administration. There are two 	ways that help administrators unlock nodes: unlock nodes in the right-click menu in *Site Explorer* or unlock nodes in the *ECM Administration*.
+
+
+
+
+h1. Unlock Nodes
+
+Follow these guides to unlock nodes:
+
+1\. Go to *ECM Administration* on the navigation bar.
+
+2. Select *Advanced Configuration* --> *Manage Unlocks* in the *Admin the ECM main functions* pane on the left, the locked nodes will be listed on the right pane.
+
+
+!ECMAdministration1.png!
+
+
+Details:
+
+
+|| Field   || Meaning ||
+| Node Path   |  The node that has been locked. |
+| User Lock    |  The user name that has locked nodes. |
+| Action      | The unlock
+!UnlockIcon.png!
+ icon that corresponds to each node. |
+
+
+3. In the *Locked Node* tab on the right pane, administrators can unlock nodes by clicking on the
+!UnlockIcon.png!
+  icon corresponding to nodes which need to be unlocked. The unlocked nodes will be disappeared from the locked nodes list.	
+
+
+
+
+
+h1. Setting Unlock Permission
+
+Moreover, administrators can manage and add the unlock permission for another groups and users in the *Manage Lock* tab.
+
+
+
+!ECMAdministration2.png!
+
+
+
+1\. Select the group on the *Select group* pane and the corresponding membership on the *Select membership* pane. The selected group will be listed in the *Group and Users* column. However, administrators can also click on the
+!PlusIcon.png!
+ icon if they want to allow any user to unlock nodes.
+
+
+!ECMAdministration3b.png!
+
+	
+2. In case administrators want to remove the unlock permission of groups, click the
+!DeleteIcon.png!
+ icon that corresponds to the  group in order to remove them from the Unlock permission list except the group **:/platform/administrator* and *root*.

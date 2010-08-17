@@ -1,0 +1,68 @@
+
+h1. Renaming a category
+
+
+
+h1. Until DMS 2.3.x
+
+To rename a category, you have 3 different ways:
+
+h2. Webdav Access
+
+# Open your favorite Webdav Client
+# Use the following URL http://$\{hostname}:$\{port}/rest/private/jcr/repository/system/jcr:system/exo:ecm/exo:taxonomies
+# Browse into the the taxonomy tree in order to find the category to rename
+# Rename the category
+
+h2. FTP Access
+
+# Open your favorite Ftp Client
+# Use the following connexion settings Host: $\{hostname}, Port: 2121 by default, Path: /system/jcr:system/exo:ecm/exo:taxonomies
+# Browse into the the taxonomy tree in order to find the category to rename
+# Rename the category
+
+h2. File Explorer Access
+
+In fact, by default all the views in the File Explorer are not allowed to edit something in the system workspace, so we need to remove this lock first, here is what you need to do:
+
+# Go to "Content Presentation/Manage View" in ECM Adminstration
+# Edit the "system-view"
+# In the "View Form" tab, select "ListView" instead of "SystemView" as template
+# Click on the Save button
+# In "Manage View", select "ECM Templates" tab
+# Edit the view called "ListView"
+# Remove "if (!uicomponent.isSystemWorkspace()) " from the source code
+# Click on the Save button
+
+
+h1. Since DMS 2.4.x
+
+To rename a category of the "System" taxonomy tree, you have 3 different ways:
+
+h2. Webdav Access
+
+# Open your favorite Webdav Client
+# Use the following URL http://$\{hostname}:$\{port}/rest/private/jcr/repository/dms-system/exo:ecm/exo:taxonomyTrees/definition/System
+# Browse into the the taxonomy tree in order to find the category to rename
+# Rename the category
+
+h2. FTP Access
+
+# Open your favorite Ftp Client
+# Use the following connexion settings Host: $\{hostname}, Port: 2121 by default, Path: /dms-system/exo:ecm/exo:taxonomyTrees/definition/System
+# Browse into the the taxonomy tree in order to find the category to rename
+# Rename the category
+
+h2. File Explorer Access
+
+In fact, by default all the views in the File Explorer are not allowed to edit something in the system workspace, so we need to remove this lock first, here is what you need to do:
+
+# Go to the File Explorer
+# Choose the drive "DMS Administration"
+# Go to the folder "/exo:ecm/exo:taxonomyTrees/storage/System"
+# Browse into the the taxonomy tree in order to find the category to rename
+# Right-click on the category
+# Click on the item menu "Rename"
+# Give the new name
+# Click on the *Save* button
+

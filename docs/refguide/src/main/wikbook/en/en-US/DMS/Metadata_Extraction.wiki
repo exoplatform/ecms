@@ -1,0 +1,166 @@
+h1. Build your own Metadata Extraction
+
+
+
+
+ECM is capable of automatically extracting metadata from files at upload time.
+We have extractors for most common office documents (.doc, .pdf, .ppt, .xls, ...).
+
+But this mechanism is extensible through plugins for your own metadata management.
+This tutorial will show you how to extract the metadata from a simple properties file.
+
+{note}
+For this tutorial, you will need java 5, maven 2 and eclipse
+{note}
+
+
+
+
+
+
+
+h2. Create and deploy my extractor
+
+* Create a class called *org.exoplatform.tutorial MyMetadataExtractor* which has to extend to *org.exoplatform.services.document.impl.BaseDocumentReader*. As follow:
+{code:java}
+import org.exoplatform.services.document.impl.BaseDocumentReader;
+
+public class MyMetadataExtractor extends BaseDocumentReader {
+{code}
+* Implement the *getContentAsText* methods which are dedicated to the full content extraction. As follow:
+{code:java}
+/**
+ * Text extraction for the full text indexing
+ */
+public String getContentAsText(InputStream input) throws Exception {
+	// Create a Properties Object
+	Properties properties = new Properties();
+	// Load the properties from the input stream
+	properties.load(input);
+	// Create a StringBuilder Object to append the full content of my file
+	StringBuilder content = new StringBuilder();
+	for (Enumeration keys = properties.keys(); keys.hasMoreElements(); ) {
+		String key = (String) keys.nextElement();
+		// Get the value from the key
+		String value = properties.getProperty(key);
+		// Append the value to the content
+		content.append(value).append(' ');
+	}
+	return content.toString();
+}
+
+/**
+ * Text extraction for the full text indexing with a specific character encoding
+ */
+public String getContentAsText(InputStream input, String encoding) throws Exception {
+	return getContentAsText(input);
+}
+{code}
+
+
+
+
+
+*Note:* This content will be indexed by eXo Platform in full text. It is easy to retrieve the file from its content through the *Search Component*.
+
+
+
+* Add the configuration file to declare the component to eXo Platform, create a *configuration.xml* file in the conf/portal directory (into the source folder) and add the following contents:
+{code:xml}
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration>
+  <!- Define my Metadata Extractor ->
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.document.DocumentReaderService</target-component>
+    <component-plugin>
+      <name>my.document.reader</name>
+      <set-method>addDocumentReader</set-method>
+      <type>org.exoplatform.tutorial.MyMetadataExtractor</type>
+      <description>to read my specific stream</description>
+    </component-plugin>
+  </external-component-plugins>
+</configuration>
+{code}
+
+
+
+* Build the resulting jar by using maven(maven 2 must be correctly installed in your system), you can create a *pom.xml* in the root folder of the project with the following contents:
+{code:xml}
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.exoplatform.tutorial</groupId>
+	<artifactId>exo.tutorial.metadata-extraction</artifactId>
+	<packaging>jar</packaging>
+	<version>trunk</version>
+	<description>Tutorial metadata extraction</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.exoplatform.core</groupId>
+			<artifactId>exo.core.component.document</artifactId>
+			<version>trunk</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.exoplatform.kernel</groupId>
+			<artifactId>exo.kernel.commons</artifactId>
+			<version>trunk</version>
+
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.exoplatform.kernel</groupId>
+			<artifactId>exo.kernel.container</artifactId>
+			<version>trunk</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+		  <resource>
+			<directory>src/main/java</directory>
+			<includes>
+			  <include>**/*.xml</include>
+			</includes>
+		  </resource>		
+		</resources>
+	</build>
+</project>
+{code}
+When you have done this, you can launch "mvn install" command from the root directory of the project. This will create a jar file called *exo.tutorial.metadata-extraction-trunk.jar* into the target folder.
+*Note:* Ensure that the maven settings file use http://maven2.exoplatform.org/rest/maven2 as maven repository.
+* Copy the jar into the *$\{TOMCAT_HOME}/lib* directory
+* Start tomcat and check for the following message "ExoContainer - org.exoplatform.tutorial.MyMetadataExtractor  added to portal"
+
+h2. Test my extractor
+
+To test the extractor we must:
+* Create a properties file called myInputFile.properties with the following contents:
+{code:properties}
+Author=my Author
+Subject=my Subject
+Description=my Description
+{code}
+* Authenticate the portal as root
+* Go to *Content Management* -> *File Explorer*
+* Select a drive to upload the file like *Collaboration Center*
+* Click on the *Upload* icon
+* Choose the properties file that we created below then click on the *Upload* icon, the file will be uploaded to the server
+* Click on the *Save* button, you will see the following window:
+
+
+!UploadResult.jpg!
+
+
+* Click on the *Edit* button to see the extracted metadata, you will see the following window:
+
+
+!MetadatForm.jpg!
+
+
+* To easily retrieve your file you can select the tab *Search* then type "my Author" in the seach text box, you will see the following result:
+
+
+!SearchResult.jpg!
+
+
+*Note:* The source files can be found in the zip file attached to this page, see the end of this page

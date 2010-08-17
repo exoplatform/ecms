@@ -1,58 +1,10 @@
-h1. Terms
 
-{include:document="WCM/WCM for Beginners.wiki" /}
-{include:document="WCM/WebContent Folders.wiki" /}
-{include:document="WCM/WebContent Types.wiki" /}
-{include:document="WCM/Site Content Storage.wiki" /}
-{include:document="WCM/Web Content Publishing.wiki" /}
-{include:document="WCM/Site Administration Toolbar.wiki" /}
+h1. WCM
 
-h1. User Manual
+
+h1. Misc
 {include:document="WCM/FAQ.wiki" /}
-{include:document="WCM/Creating a New Site.wiki" /}
-{include:document="WCM/Web Pages Management.wiki" /}
-{include:document="WCM/Multiple Sites Management.wiki" /}
-{include:document="WCM/Page Configuration.wiki" /}
-{include:document="WCM/Change Interface Language and Skins.wiki" /}
-
-h1. Content Creation
-
-{include:document="WCM/Quick Edit.wiki" /}
-{include:document="WCM/Edit Mode Switch.wiki" /}
-{include:document="WCM/Easy Content Publishing.wiki" /}
-{include:document="WCM/Creating Web Content using the Create Page Wizard.wiki" /}
-{include:document="WCM/Creating Web Content using the Single Content Viewer.wiki" /}
-{include:document="WCM/Creating Web Content using the Sites Explorer.wiki" /}
-{include:document="WCM/Manage Publications using the Sites Explorer.wiki" /}
-{include:document="WCM/Manage Publications.wiki" /}
-{include:document="WCM/Unpublishing Web Content using the Manage Publication Dialog.wiki" /}
-{include:document="WCM/Using the Content List Viewer.wiki" /}
-{include:document="WCM/Fast Content Creator.wiki" /}
-{include:document="WCM/Form Generator.wiki" /}
-
-h1. Hints
-
-{include:document="WCM/Creating a New CSS File.wiki" /}
-{include:document="WCM/Creating a New Javascript File.wiki" /}
-{include:document="WCM/Using Links.wiki" /}
-{include:document="WCM/Uploading an Image.wiki" /}
-{include:document="WCM/Version Management.wiki" /}
-
-h1. Export and Import Nodes
-TODO Include ECM:Export and Import Nodes
-
-{include:document="WCM/Media Library.wiki" /}
 {include:document="WCM/Content Friendly URL.wiki" /}
-
-h1. Other
-
-{include:document="WCM/Newsletters.wiki" /}
-{include:document="WCM/Category Navigation.wiki" /}
-{include:document="WCM/Print Content.wiki" /}
-{include:document="WCM/Search Engine Optimization.wiki" /}
-{include:document="WCM/Integrated Search Engine.wiki" /}
-{include:document="WCM/Google Gadgets in WCM.wiki" /}
-{include:document="WCM/WCM Templates.wiki" /}
 {include:document="WCM/How to create new publication in WCM.wiki" /}
 {include:document="WCM/How to create a site template in WCM.wiki" /}
 {include:document="WCM/How to create and deploy pre-defined contents in WCM.wiki" /}
@@ -65,15 +17,6 @@ h1. WebDAV
 {include:document="WCM/Using WebDAV with Dreamweaver.wiki" /}
 {include:document="WCM/How to do with WebDAV in WCM.wiki" /}
 
-h1. Administration
-
-Please refer to the Portal Administration and DMS Administration.
-{include:document="WCM/Manage Sites.wiki" /}
-
-h1. Installation
-
-{include:document="WCM/Tutorial.wiki" /}
-
 h1. Configuration
 
 {include:document="WCM/JavaScript for Navigation and Sitemap.wiki" /}
@@ -84,26 +27,49 @@ h1. Configuration
 {include:document="WCM/Deploy Single Content to a Predefined Page.wiki" /}
 {include:document="WCM/WCM Internal Cache.wiki" /}
 
+
+h1. DMS
+
+
+h1. Configuration
+{include:document="DMS/Content_Browser_Portlet_Preferences.wiki"}
+{include:document="DMS/Metadata_Extraction.wiki"}
+{include:document="DMS/WebDav_Access.wiki"}
+{include:document="DMS/User-Defined_Document_Types.wiki"}
+
+{include:document="DMS/Direct_Access_of_JCR_Drives.wiki"}
+{include:document="DMS/Forcing_Taxonomies_at_File_Upload.wiki"}
+{include:document="DMS/View_Service_Configuration.wiki"}
+{include:document="DMS/Edit_and_View_Mode_Configuration.wiki"}
+{include:document="DMS/Predefined_Taxonomies.wiki"}
+
+{include:document="DMS/Audit_Trails_Configuration.wiki"}
+
+
 h1. Integration
+{include:document="DMS/Integrating_Content_Validation_into_DMS.wiki"}
 
-* Links:
-** Core:LDAP Configuration
-** Core:Spring Security Integration
-{include:document="WCM/WCM Scaling by Clustering.wiki" /}
-{include:document="WCM/Dependencies.wiki" /}
+h1. Migration
 
-h1. Misc
-Pages not directly referenced in the Manual
-{include:document="WCM/Broken links detection engine.wiki" /}
-{include:document="WCM/Link Management.wiki" /}
-{include:document="WCM/Publication Plugin.wiki" /}
-{include:document="WCM/Search of contents.wiki" /}
-{include:document="WCM/Single and List Content Viewer.wiki" /}
-{include:document="WCM/Web Content CSS Support.wiki" /}
-{include:document="WCM/How to copy a site.wiki" /}
+{include:document="DMS/ECM_Migration_from_2-0-x_to_2-1.wiki"}
+{include:document="DMS/ECM_Migration_from_2-0_to_2-0-x.wiki"}
+{include:document="DMS/ECM_Migration_from_2-1-x_to_2-2.wiki"}
+{include:document="DMS/ECM_Migration_from_2-2-x_to_2-2-2.wiki"}
+{include:document="DMS/ECM_Migration_from_DMS_2-3_to_DMS_2-4.wiki"}
+{include:document="DMS/ECM_Migration_from_DMS_2-3_to_DMS_2-5.wiki"}
+{include:document="DMS/ECM_Migration_from_ECM_2-2-x_to_DMS_2-3.wiki"}
+{include:document="DMS/Changes_between_DMS_2-3_and_DMS_2-5.wiki"}
 
-h1. Trash
-{include:document="WCM/WCM Manual.wiki" /}
-{include:document="WCM/WebDAV in WCM.wiki" /}
-{include:document="WCM/Newsletter.wiki" /}
-{include:document="WCM/WCM Videos.wiki" /}
+{include:document="DMS/Changes_in_SVN_and_exobuild_since_DMS_2-3.wiki"}
+{include:document="DMS/Configuration_of_Publication_Awareness_of_the_Content_Browser.wiki"}
+{include:document="DMS/Taxonomy_Migration_from_ECM_2-2-x_to_DMS_2-5.wiki"}
+
+
+h1. Development
+{include:document="DMS/Publication_Service.wiki"}
+{include:document="DMS/ECM_Action_Type_Management.wiki"}
+{include:document="DMS/ECM_Groovy_Scripts_Management.wiki"}
+{include:document="DMS/ECM_Template_Management.wiki"}
+{include:document="DMS/UI_Extension_Framework.wiki"}
+
+

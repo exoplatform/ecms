@@ -1,0 +1,37 @@
+h1.  File Explorer Views
+
+ECM views provide a membership in a group with a set of dedicated sorted icons and a rendering template to display the children of the current selected folder.
+
+
+
+
+
+
+h1. Overview
+
+
+
+The ECM admin can create any new view for a given profile from the ECMAdmin portlet. It is also possible from that control panel to create new templates for displaying the current node children as well as templates to be used by the Browse Content portlet.
+
+eXo ECM provides three view templates by default:
+
+* Thumbnails view: displays children folders and documents as a site of icons
+* Mac view: displays the folder hierarchy in three columns
+* List view: displays the children folder in a list, that view contains more information but may be too complex for simple users
+
+Adding a new template is a simple process but it requires some knowledge on HTML as well as the default groovy directives available to generate links to navigate through the document tree. The template is stored in the JCR and therefore can have a version.
+
+Adding a new view is much more simple and the user does not need to have any programming skills. The process only consists of:
+
+* Give a name to the view.
+* Select a membership in a group. That selected component is a reusable one that is used in many places. It allows you to browse the group hierarchy and to select a membership from a pop-up list.
+* Add several tabs (provide a name and a set of icons for each).
+* Select a view template.
+
+If you then go to the ECM explorer portlet you will be able to see the new view in the list and to swap between views (if you have the appropriate rights).
+
+
+
+h1. Service Configuration
+
+You can see more details in [View Service Configuration]

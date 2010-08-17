@@ -1,0 +1,111 @@
+
+h1. RSS feed in DMS
+
+
+
+RSS is a Web content syndication format. Its name is an acronym for *Really Simple Syndication*.<br>
+RSS is a dialect of XML so that all RSS files must conform to the XML 1.0 specification. RSS feeds are also called *channels*.
+
+
+Creating an RSS feed in eXo DMS:
+
+1\. Go to *Content Management* -> *File Explorer*.
+
+2. Create a folder.
+
+3. Switch to the *Admin* tab and click on the
+!icon1.gif!
+ icon to open the *Manage Actions* dialog to add an action for this folder.
+
+4. Select the *Action Type* called *exo:createRSSFeedAction*
+
+
+!rss.gif!
+
+
+5. Explanations of the fields.
+
+
+{info}
+You could think that your action always applies to the current folder where the action is created, but this is not the case. The triggering of the RSSFeedAction depends on the query in the field _Query items_. But the action is stored in the current folder (normally invisible)
+{info}
+
+
+
+|| Name || Meaning ||
+|  Id | the Id of action. This field is created automatically and can not be modified. (If you insist on changing the name, you can always create a new RSS feed.) |
+| Create feed action name | The name of this action. This name is internal to the JCR explorer. |
+|  Lifecycle | Select the lifecycle for this action. The action will be executed depending on the lifecycle:\\- '*Add*':  when a document is created \\ - '*Modify*': the action will be executed when a document is created or modified \\ - '*Read*': the action will be executed when a document is read \\ - '*Remove*': the action will be executed when a document is removed \\ - '*Schedule*': the action will be executed depending on a "schedule type", a specific "schedule type" field appears in the dialog.   \\ If you need the same action to be executed in several lifecycles, you have to create several actions. |
+| Schedule type \\ _only if "Schedule" is selected_  | There are two schedule types: "Cron" and "Period". |
+| Cron expression \\ _only if "Cron" is selected_ | Defines a repetition scheme using the syntax of the unix cron job. Example: Enter "* * * * * ?" to repeat the job every second. See [http://en.wikipedia.org/wiki/CRON_expression] |
+|  Feed node name | This name is used as the name of a correspondent subfolder of the "Feed store path". |
+|  Feed store path | This path is relative to the root of the current workspace, it starts with a "/". If you enter "/Feeds" here and "newArticles" in the "Feed node name" field you will find your feed in "/Feeds/rss/newArticles" |
+|  Feed type | You can choose among RSS, podcast and video podcast. |
+|  Title | The node that contains a title. You have to provide a node type that contains the title of the article or document. The title of each document is part of the article list in the RSS feed.  |
+|  Summary | The node that contains a summary. You have to provide a node type that contains the summary of the article or document. The summary of each document is part of the article list in the RSS feed.  |
+|  Query items | Provide a query that defines the documents that are concerned by this RSS Feed Action. The default value shows how to get exo:article nodes, that are in the folder but also in any subfolders (because you use the double slash "//"). |
+|  Feed title | The title of the feed. This title appears in the header of the rss/xml feed. |
+|  Rss version | Select the version of RSS. In case of doubt use version 2.0 |
+|  Link | The URL to the HTML website corresponding to the channel. |
+|  Description | The description appears together with the title in the header of the rss feed. |
+|  Language | The language that the feed is written in. |
+|  Copyright | Copyright notice for content in the channel. |
+|  Publish date | The publication date of the content in the channel.	  |
+|  Owner name | The name of the owner. |
+|  Owner email | The email of the owner. |
+|  Image URL | The URL of a GIF, JPEG or PNG image that represents the channel. |
+|  Category | Specify one or more categories that the channel belongs to. |
+|  Keywords | The keywords are used for searching rss feeds. |
+
+
+6. Click the *Save* button. An RSS action is created.
+
+7. Create a new document in the above folder. Automatically, an xml is created in the rss folder that stores at the location you have configured in the *Feed store path* field.
+
+8. Open this xml file, you can see like this :
+{code}
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>sss</title>
+    <link />
+    <description>This podcast provided by eXo Platform opensource company</description>
+    <item>
+      <title>test</title>
+      <link>http://localhost:8080/ecm/rss/portal/collaboration/hanh/test</link>
+      <description><p>test</p></description>
+      <guid>http://localhost:8080/ecm/rss/portal/collaboration/hanh/test</guid>
+    </item>
+    <item>
+      <title>sssssssss</title>
+      <link>http://localhost:8080/ecm/rss/portal/collaboration/hanh/sssssss</link>
+      <description><p>ssssssssss</p></description>
+      <guid>http://localhost:8080/ecm/rss/portal/collaboration/hanh/sssssss</guid>
+    </item>
+    <item>
+      <title>fdsagdg</title>
+      <link>http://localhost:8080/ecm/rss/portal/collaboration/hanh/aaaaaaaaaa</link>
+      <description><p>gfdagdfgdfarere</p></description>
+      <guid>http://localhost:8080/ecm/rss/portal/collaboration/hanh/aaaaaaaaaa</guid>
+    </item>
+    <item>
+      <title>bb</title>
+      <link>http://localhost:8080/ecm/rss/portal/collaboration/hanh/bbb</link>
+      <description><p>bbbb</p></description>
+      <guid>http://localhost:8080/ecm/rss/portal/collaboration/hanh/bbb</guid>
+    </item>
+  </channel>
+</rss>
+{code}
+- Each document is created in each item.
+
+
+
+
+
+
+
+
+
+
+

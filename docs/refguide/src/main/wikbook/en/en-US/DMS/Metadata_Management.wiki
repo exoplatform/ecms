@@ -1,0 +1,51 @@
+h1. Metadata Management
+
+Metadata has multiple definitions, the briefest of which is "data about data". It can generally be thought as information that describes or supplements the central data.<br>
+
+Metadata management allows managing the node in metadata format in ECM system. Metadata is the information that is used to describe the data. When data is provided for the end users, metadata helps users understand more details about that detail. All metadata nodes can combine with other nodes to create a new node (add mix)
+
+
+
+
+h1. View Metadata
+
+1\. Go to *ECM Administration* on the navigation bar -> *Content Presentation* -> *Manage Metadata*
+
+
+!form.jpg!
+
+
+2. Click the
+!icon1.jpg!
+ icon corresponding to metadata that you want to view. Metadata information form will appear like illustration below:
+
+
+!view.jpg!
+
+
+
+h1. Edit Metadata
+
+1\. Click the
+!icon2.jpg!
+ icon that corresponds to metadata that you want to edit. The Edit Metadata's Template form will appear:
+
+
+!edit.jpg!
+
+
+2. Change properties of the edited metadata.
+
+_*Note*_: you can not edit a metadata's name<br>
+
+3. Click the *Apply* button to finish all changes.
+
+h1. Delete Metadata
+
+Do the following guides to delete metadata:<br>
+
+1\. Click
+!icon3.jpg!
+ icon corresponding to metadata that you want to delete. A confirmation message will appear.<br>
+
+2. Click the *OK* button to accept deleting this template or click the *Cancel* button to discard this action.

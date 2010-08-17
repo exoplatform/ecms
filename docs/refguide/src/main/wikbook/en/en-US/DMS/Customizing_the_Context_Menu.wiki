@@ -1,0 +1,30 @@
+
+h1. Customizing the Context Menu
+
+
+
+
+When using the file explorer you can *customize* the right click context menu by *adding actions* to it.
+
+
+First learn how to assign an action to a folder: [ECM:Managing Actions]
+
+When assigning a new action to a node:
+* Select the "SendMail" action in the action list (This is only an example! You can create a [custom action|ECM:User-Defined+Action+Types] and assign it here.)
+
+
+!addingaSendMailAction.jpg!
+
+
+* Enter the name "SendToArchive".
+* Choose the lifecylce "*user action*". This lifecylce add the action to the *right-click context menu*.
+
+* Finally, save the action.
+
+
+On the *left pane* click the right mouse button on the node you have just assigned the action to.
+
+There you will find the name "SendToArchive" in the *right click menu*.
+
+
+!SendMailActionContextMenu.jpg!
