@@ -127,28 +127,28 @@ td {
 }
 
 .UIToolbarContainer .StarToolBarPortletTDContainer {
-	z-index: 10;
+	z-index: 3;
 	position: relative;
 }
  
 .UIToolbarContainer .UserToolBarSitePortletTDContainer {
-	z-index: 10;
+	z-index: 3;
 	position: relative;
 }
 
 .UIToolbarContainer .UserToolBarGroupPortletTDContainer {
-	z-index: 10;
+	z-index: 3;
 	position: relative;
 }
 
 .UIToolbarContainer .UserToolBarDashboardPortletTDContainer  {
-	z-index: 10;
+	z-index: 3;
 	position: relative;
 }
 
 
 .UIToolbarContainer .AdminToolBarPortletTDContainer {
-	z-index: 10;
+	z-index: 3;
 	position: relative;
 }
 
