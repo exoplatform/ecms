@@ -400,16 +400,7 @@ public interface TemplateService {
    * @return
    */
   public String buildStyleSheet(String nodeTypeName, String repository) throws Exception;
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    
   /**
    * Insert a new template into NodeType by giving the following params
    * @param templateType        The value which specify the type of template
@@ -424,7 +415,25 @@ public interface TemplateService {
    * @see                       Node                            
    * @throws Exception
    */
-  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile, String repository) throws Exception;  
+  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile, String repository) throws Exception;
+  
+  /**
+   * Insert a new template into NodeType by giving the following params
+   * @param templateType        The value which specify the type of template
+   * @param nodeTypeName        The specify name of NodType
+   * @param label               The label of the specified template
+   * @param isDocumentTemplate  The boolean value which yes or no is DocumentTemplate
+   * @param templateName        The name of template
+   * @param roles               The roles of template
+   * @param templateFile        The file of template
+   * @param repository          The name of repository
+   * @param templatesHome       Node
+   * @see                       Session
+   * @see                       Node                            
+   * @throws Exception
+   */
+  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, 
+      String[] roles, InputStream templateFile, String repository, Node templatesHome) throws Exception;
   
   /**
    * Insert a template into JCR database as an nt:file node. This method should be used for all the template types.

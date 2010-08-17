@@ -819,6 +819,32 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
+  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, 
+      String[] roles, InputStream templateFile, String repository, Node templatesHome) throws Exception {
+    Session session = getSession(repository);
+    String templatePath = null;
+    try {
+      templatePath = templatesHome.getPath() + "/" + nodeTypeName + "/" + templateType + "/" + templateName;
+      Node templateNode = (Node)session.getItem(templatePath);
+      updateTemplate(templateNode,templateFile, roles);
+      session.save();
+    } catch(PathNotFoundException e) {
+      templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label, 
+          isDocumentTemplate, templateName, roles, templateFile);
+      session.save();
+    } finally {
+      session.logout();
+    }
+    //Update managedDocumentTypesMap
+    removeCacheTemplate(templatePath);
+    removeTemplateNodeTypeList();
+    updateDocumentsTemplate(isDocumentTemplate, repository, nodeTypeName);
+    return templatePath;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
   public String createTemplate(Node templateFolder, String name, InputStream data, String[] roles) {
     Session session = null;
     try {
