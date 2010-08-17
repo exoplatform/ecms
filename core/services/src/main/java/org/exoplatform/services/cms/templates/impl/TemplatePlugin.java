@@ -269,14 +269,14 @@ public class TemplatePlugin extends BaseComponentPlugin {
       nodeTypeHome.setProperty(TEMPLATE_LABEL, nodeType.getLabel()) ;
       
       List dialogs = nodeType.getReferencedDialog();
-      addNode(storedLocation, nodeType, dialogs, DIALOGS, repository);
+      addNode(storedLocation, nodeType, dialogs, DIALOGS, repository, templatesHome);
       
       List views = nodeType.getReferencedView();
-      addNode(storedLocation, nodeType, views, VIEWS, repository);
+      addNode(storedLocation, nodeType, views, VIEWS, repository, templatesHome);
             
       List skins = nodeType.getReferencedSkin();
       if(skins != null) {
-        addNode(storedLocation, nodeType, skins, SKINS, repository);
+        addNode(storedLocation, nodeType, skins, SKINS, repository, templatesHome);
       }
     }    
   }
@@ -304,14 +304,16 @@ public class TemplatePlugin extends BaseComponentPlugin {
   }
 
   @SuppressWarnings("unchecked")
-  private void addNode(String basePath, TemplateConfig.NodeType nodeType, List templates, String templateType, String repository)  throws Exception {
+  private void addNode(String basePath, TemplateConfig.NodeType nodeType, List templates, String templateType, 
+      String repository, Node templatesHome)  throws Exception {
     for (Iterator iterator = templates.iterator(); iterator.hasNext();) {
       TemplateConfig.Template template = (TemplateConfig.Template) iterator.next();
       String templateFileName = template.getTemplateFile();
       String path = basePath + templateFileName;            
       InputStream in = configManager_.getInputStream(path);
       String nodeName = templateFileName.substring(templateFileName.lastIndexOf("/") + 1, templateFileName.indexOf("."));
-      templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), nodeName, template.getParsedRoles(), in, repository);
+      templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), 
+          nodeName, template.getParsedRoles(), in, repository, templatesHome);
     }
   }    
   
