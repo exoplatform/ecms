@@ -1,0 +1,33 @@
+h1. Workflow RTL Support
+
+
+
+
+Workflow is supported for Arabic. When users change their language to Arabic or set the interface language to Arabic, The interface language on Workflow will change the direction from Right to Left (RTL).
+
+{info}
+Should use Portal version 2.5.1 or more to have the best view.
+{info}
+
+Some screen shots of Workflow portlet with RLT:
+
+
+!home2.jpg!
+
+<h4>Homepage</h4>
+
+!bpadmin.gif!
+
+<h4>Workflow Administration</h4>
+
+!bpcontroller.gif!
+
+<h4>Workflow Controller</h4>
+
+!holiday.gif!
+
+<h4>Holiday Process</h4>
+
+!payraise.gif!
+
+<h4>Pay Raise Process</h4>

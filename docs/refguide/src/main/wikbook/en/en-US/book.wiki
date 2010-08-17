@@ -72,4 +72,19 @@ h1. Development
 {include:document="DMS/ECM_Template_Management.wiki"}
 {include:document="DMS/UI_Extension_Framework.wiki"}
 
+h1. Workflow
+
+h1. Configuration
+{include:document="WKF/Workflow_Publication_Plugin.wiki"}
+{include:document="WKF/Process_Definition_XPDL.wiki"}
+{include:document="WKF/Bonita_Forms_Definition.wiki"}
+{include:document="WKF/Bonita_Resource_bundle.wiki"}
+{include:document="WKF/Business_Process_in_the_JCR.wiki"}
+
+
+h1. Integration
+{include:document="WKF/Bonita_Overview.wiki"}
+{include:document="WKF/JBPM_Configuration.wiki"}
+
+
 
