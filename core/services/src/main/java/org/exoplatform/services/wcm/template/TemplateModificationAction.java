@@ -36,7 +36,7 @@ public class TemplateModificationAction implements Action {
 		Property property = (Property)context.get("currentItem");
 		Node node = property.getParent();
 		TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-		templateService.reloadTemplate(node.getPath());
+		templateService.reloadTemplate(node.getParent().getPath());
 		return true;
 	}
 

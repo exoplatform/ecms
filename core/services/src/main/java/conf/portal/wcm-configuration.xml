@@ -196,7 +196,7 @@
                       <boolean>true</boolean>
                     </field>
                     <field name="nodeTypes">
-                      <string>exo:template</string>
+                      <string>exo:resources</string>
                     </field>
                     <field name="eventTypes">
                       <string>changeProperty</string>
