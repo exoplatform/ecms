@@ -836,3 +836,7 @@
 	clear: right;  /* orientation=rt */
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .UICalendarComponent {
+   position: absolute;
+   z-index: 100;
+}
