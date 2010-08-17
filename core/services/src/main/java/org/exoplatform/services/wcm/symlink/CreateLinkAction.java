@@ -35,13 +35,15 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class CreateLinkAction implements Action{
 
   public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
+  public static final String EXO_SORTABLE = "exo:sortable";
   
   public boolean execute(Context context) throws Exception {
     Property property = (Property)context.get("currentItem");
     if (!"exo:uuid".equals(property.getName())) return false;
     
     Node linkNode = property.getParent();
-    if (!linkNode.canAddMixin("exo:sortable")) return false;
+    if (!linkNode.isNodeType(EXO_SORTABLE) && !linkNode.canAddMixin(EXO_SORTABLE))  
+    		 return false;
     
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     Node targetNode = linkManager.getTarget(linkNode);
