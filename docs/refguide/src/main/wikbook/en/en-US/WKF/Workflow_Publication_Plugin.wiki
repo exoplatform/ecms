@@ -1,0 +1,132 @@
+h1. Workflow Publication Plugin
+
+
+
+h1. Overview
+
+*Workflow Publication Plugin* allows users to publish a content of document. It breaks a work process down into tasks. A basic example of such a process is an approval workflow process, in which an employee needs a manager's permission before running an application. A workflow engine provides an infrastructure to model this workflow, execute it, assign the tasks to its participants and monitor it. To achieve the desired results, it may interact with humans or machines through, for example, Web services. This enables integration with platforms different from Java, like mainframes or .NET.
+
+
+In *Workflow Publication Plugin*, each phase has its lifecycle.
+
+- When creating a new document, and manage publication, enrolled it, the lifecycle is *enrolled*.
+- After creating workflow publication for it (choose validator, dest workspace, dest path, backup path or using default), the lifecycle is *content publishing*.
+- When the validator person manage it, after approve it, the lifecycle is *published*.
+- When the document is published, it can be unpublished. When the document is unpublished, it will be moved to *backup* workspace within backup path, and the lifecycle will be changed to *backup*.
+
+It can be brought back to the primitive state by using the Unsubcribe function when the lifecycle is *backup*.
+
+h1. Pulication Configuration
+
+h2. Publication Configuration Interface
+The Publication Configuration Interface is prefilled with the default values you defined in the configuration file.
+
+
+!ManagePulicationAction.jpg!
+
+
+When creating a workflow publication for a document, if the value isEditable is *false*, it will use the default value.
+
+h2. Configuration File
+In the file *configuration.xml*, to add a workflow publication plugin, insert these code below:
+
+{code:xml}
+<external-component-plugins>
+   <target-component>org.exoplatform.services.ecm.publication.PublicationService</target-component>
+   <component-plugin>
+      <name>Workflow</name>
+      <set-method>addPublicationPlugin</set-method>
+      <type>org.exoplatform.services.ecm.publication.plugins.workflow.WorkflowPublicationPlugin</type>
+      <description>Workflow Publication</description>  
+      <init-params>
+         <value-param>
+      <name>validator</name>
+      <value>*:/platform/administrators</value>
+   </value-param>
+   <value-param>
+      <name>to_workspace</name>
+      <value>collaboration</value>
+   </value-param>  
+         <value-param>
+      <name>destPath</name>
+      <value>/Documents/Live</value>
+   </value-param>
+   <value-param>
+      <name>destPath_currentFolder</name>
+      <value>true</value>
+   </value-param>
+   <value-param>
+      <name>isEditable</name>
+      <value>false</value>
+   </value-param>
+         <value-param>
+      <name>backupWorkspace</name>
+      <value>backup</value>
+        </value-param>
+      </init-params>        
+   </component-plugin>
+</external-component-plugins>  
+
+{code}
+
+h2. Configuration Parameters
+
+| Field | Default value | Explain
+| validator | *:/platform/administrators | Users have responsibility to manage tasks which are requested. |
+| to_workspace | collaboration | The workspace that node will be stored during the task is being evaluated. |
+| destPath_currentFolder | true | The parameter is specified to decide which the desPath is |
+| destPath | The current folder if the value destPath_currentFolder is true and "/Documents/Live" if the value destPath_currentFolder is false | The path of workspace that node will be stored after being approved and then being published. |
+| backupWorkspace | backup | The workspace that node will be removed to when user unpublish this task |
+|backuppath | /Expired Documents | The path that node will be removed to when user unpublish this task |
+
+h2. Publication Workflow View
+The following image is the view after manage workflow publication for a document.
+
+
+!ManagePulicationView.jpg!
+
+
+h2. Example Publication History
+
+
+!managepublicationhistory.jpg!
+
+
+h2. Publication Nodetype Configuration
+
+Here is the file *nodetypes-workflow-publication-config.xml*. This file is used to configure a new nodetype (nodetype workflow publication).
+
+
+{code:xml}
+<nodeType name="publication:workflowPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>publication:publication</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="publication:validator" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>*</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="publication:businessProcess" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>content-publishing</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+</nodeType>
+
+{code}
+
+
+The property *"publication:validator"* is used to specify the membership who can manage the workflow publication action. The property *"publication:businessProcess"* is used to specify the name of the process.
+
+
+
+
+
+

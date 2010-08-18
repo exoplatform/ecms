@@ -1,0 +1,120 @@
+h1. Process Definition (XPDL)
+
+
+
+h1. Overview
+
+In order to take advantages of the Bonita advanced features using a XPDL based process definition, we have agreed on a couple of advanced attributes which will allow you to use entities such Hooks, mappers or performer assignments in Bonita remaining compliant with the XPDL standard. Those attributes are called in XPDL "extended attributes".
+
+
+h1. Attributes
+
+We recommend you take a look at "holiday" processdefinition.xpdl file to see exactly where you have to add the following tags.
+
+h2. Activities attributes
+
+Bonita allows you to create local attribute, related to a particular activity, in contrast with global attributes. The following attributes indicate that the attribute "choice" is local to the activity "eval enough holiday".
+
+{code}
+<DataField Id="choice" Name="choice">
+  ...
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="PropertyActivity" />
+  </ExtendedAttributes>
+  ...
+</DataField>
+...
+<Activity Id="eval enough holiday" Name="eval enough holiday">
+  ...
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="property" Value="choice"/>
+  </ExtendedAttributes>
+  ...
+</Activity>
+{code}
+
+h2. Propagated attribute
+
+  Activities attributes can be propagated to sub-activities (daughter activities) if the "Propagated" tag is added:
+
+{code}
+<Activity Id="eval enough holiday" Name="eval enough holiday">
+  ...
+  <ExtendedAttributes>
+    ...
+    <ExtendedAttribute Name="property" Value="choice">
+      <Propagated>Yes</Propagated>
+    </ExtendedAttribute>
+    ...
+  </ExtendedAttributes>
+  ...
+</Activity>
+{code}
+
+h2. Participants section
+
+  Some particular roles need extended attributes, please refers to section "Roles" for more details.
+
+  - initiator: an user who started the project instance
+{code}
+<Participant Id="initiator" Name="initiator">
+<ParticipantType Type="ROLE" />
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="Mapper" Value="Properties" />
+  </ExtendedAttributes>
+</Participant>
+{code}
+  - All users in an eXo group
+
+  You can assign an activity to all users
+  in a specific eXo role. eXo role starts with an eXo membership (member, owner, validator) and ends with a group: platform/administrators or organization/management/human-resources etc...
+
+{code}
+<Participant Id="*:/organization/management/human-resources" Name="*:/organization/management/human-resources">
+          <ParticipantType Type="ROLE" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Mapper" Value="Custom" />
+            <ExtendedAttribute Name="MapperClassName" Value="hero.mapper.ExoOrganizationMapper" />
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+            <ExtendedAttribute Name="XOffset" Value="0" />
+            <ExtendedAttribute Name="YOffset" Value="0" />
+          </ExtendedAttributes>
+        </Participant>
+{code}
+
+h2. Hooks
+
+  In "holiday" business process, the activity "eval enough holiday" uses a before termination hook.
+  Here it is the corresponding extended attribute. Note that the hook class has to be in src/java/hero/hook/.
+
+{code}
+<Activity Id="eval enough holiday" Name="eval enough holiday">
+...
+  <ExtendedAttributes>
+    ...
+    <ExtendedAttribute Name="hook" Value="hero.hook.HolidayEnoughHolidaysLeftHook">
+      <HookEventName>beforeTerminate</HookEventName>
+    </ExtendedAttribute>
+    ...
+  </ExtendedAttributes>
+...
+</Activity>
+{code}
+
+h2. Iterations
+
+  Bonita supports cycles within a process. As it's done in "holiday" business
+  process, we define a cycle between activities "evaluation" and "change request".
+  The iteration is defined in the last activity of the cycle.
+  The following extended attribute is defined in "change request" activity.
+{code}
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="Iteration" Value="changedecision.equals("Modify")">
+      <To>evaluation</To>
+    </ExtendedAttribute>
+  </ExtendedAttributes>
+{code}
+
+
+  "Value" is the condition to continue the iteration.
+

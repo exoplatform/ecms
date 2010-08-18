@@ -1,0 +1,93 @@
+h1. Holiday Process
+
+
+
+
+
+h1. Holiday Process Request Creation
+
+Whenever you want to have a holiday in a time interval, you should use this process to give your request to the people who have the responsibility for this issue.
+
+1\. Go to *Business Process Controller* on the Navigation bar, select the *BP Definition Controller*  tab:
+
+
+!BPHoliday.png!
+
+
+2. Open the *UITask Manager* form by clicking the icon
+!Icon.png!
+ corresponding with a holiday process that you want to request a task:
+
+
+!HolidayTaskManager.png!
+
+
+3. Set a time interval in the *Start* and *End* field by moving your cursor to each field and then click on each field to open the *Calendar* pop up.
+
+4. Click on the *Submit* button. This task will be sent to members in the **:/organization/management/executive-board* group and they will manage it.
+
+
+
+h1. Holiday Process Management
+
+
+If you are a member of **:/organization/management/executive-board* group, you have the responsibility for evaluating the received tasks.
+
+Following guides to manage a holiday process:
+
+1\. Go to *Business Process Controller* on the *Navigation* bar. If there are tasks pending to be evaluated, you will see the task list in the *Task Controller* tab:
+
+
+!Controller.png!
+
+
+
+
+2. Click on the *Manage* function in the *Action* column corresponding with a task you want to evaluate. The *Task manager* form will appear:
+
+
+!TaskManager!
+
+
+You can see the following dialog for more details about this process:
+
+
+!Dialog.png!
+
+
+3. If you agree with the period of time that a user proposes in the received task, click the *Approve* button on the *Task manager* form. Automatically, this task will be sent to members of **:/organization/management/human-resources* to read it.
+
+Thus, if you are a member of **:/organization/management/human-resources* group, you have the responsibility for reading the approved tasks:
+
+* Go to *Business Process Controller*. If there are tasks approved by members of the **:/organization/management/executive-board* group, you will see the approved tasks in the *Task Controller* tab:
+
+
+!TaskController.png!
+
+
+* Select the *Manage* function in the *Action* column to open the *Task manager* form:
+
+
+!TaskManager1.png!
+
+
+* Click the *Read* button to accept reading the task.
+
+4. If you do not agree with the period time that a user propose, click the *Disapprove* button on the *Task manager* form. This task will be sent to the creator of this task to modify it again.
+
+* If the creator agrees to modify the period of time and click the *Modify* button, this task will be sent to members of **:/organization/management/human-resources* again to manage it.
+
+* If the creator does not agree to modify the period of time and click the *Disagree* button,the task does not exist.
+
+5. If you do not agree with this task, click the *Refuse* button on the *Task manager* form. This task will be removed.
+
+
+
+
+
+
+
+
+
+
+

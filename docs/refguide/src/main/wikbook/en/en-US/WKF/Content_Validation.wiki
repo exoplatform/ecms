@@ -1,0 +1,84 @@
+h1. Content Validation
+
+{info}
+This feature is available if you integrate eXo Workflow and eXo DMS
+{info}
+
+
+
+
+h1. Task Creation
+
+h2. Using Content Validation Workflow
+
+Following these steps to create a task by using Content Validation Workflow:
+
+1\. Create a folder.
+
+2. Add the publication: workflowAction for this folder (using *Manage Action* function) like the picture below:
+
+
+!action.gif!
+
+
+3. Add a document in this folder.
+
+After being created, this document will be added into this drive and will be sent to members of the *validator/platform/administrator* group for waiting to be approved/ disapproved or delegated/refused.
+
+h2. Using Publication Panel
+
+To create a task using publication, follow these steps:
+
+1\. Create a document.
+
+2. Click on *Manage Publication* icon. A form appears:
+
+
+!enroll.gif!
+
+
+3. Enroll for workflow lifecycle. The *Management publication* form appears:
+
+
+!public.jpg!
+
+
+4. Click the *Save* button. Immediately, this node will be sent to users in the *Validator* field to manage it.
+
+
+h1. Content Validation
+
+Following these guides to validate a content:
+
+1\. Login by an account of an user in the *validator/platform/administrator* group.
+
+2. Go to *Content Management*-> *Business Process Center*, you will see a task list in the *Task Controller* tab:
+
+
+!list1.gif!
+
+
+3. Click the *Manage* function in the *Action* column corresponding to the content - validation task that you want to evaluate. The *Task Manager* form will appear:
+
+
+!task.gif!
+
+
+*To approve*:
+
+- Enter values into the *Publication starts on* and *Publication ends on* field by moving your cursor and click on each field to open the calendar pop up.
+- Click the *Approve* button. After being approved, this task will be published.
+
+*To disapprove*:
+
+Click the *Disapprove* button. After being disapproved, this task will be sent back to the creator for updating or canceling it again.
+
+*To delegate this task*:
+
+- Put the name of the user who you want to delegate.
+- Click the *Delegate* button to assign this task to the selected user. This selected user will have a responsibility to evaluate this task.
+
+*To refuse*:
+
+- Click the *Refuse* button to refuse this task.
+

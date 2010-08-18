@@ -1,0 +1,75 @@
+h1. Pay Raise Process
+
+
+
+h1. Overview
+
+This process is used when you want to propose raising your salary to your managers.
+
+h1. Pay Raise Request Creation
+
+1\. Go to *Business Process Controller* on the Navigation bar, select the *BP Definition Controller* tab to bring up process list:
+
+
+!BP.png!
+
+
+2. Open the *UITask Manager* form by clicking the icon
+!Icon.png!
+ corresponding to the pay raise process that you want to request a task:
+
+
+!TaskManager.png!
+
+
+3. Fill in all fields and click the *Let's pray* button. This task will be sent to members in the **:/organization/management/executive-board* group. They will manage it.
+
+
+
+
+
+
+
+
+h1. Pay Raise Process Management
+
+
+If you are a member of the **:/organization/management/executive-board* group, you have a responsibility to evaluate received tasks.
+
+1\. Go to the *Business Process Controller* page on the Navigation bar. If there are tasks pending to be evaluated, you will see a task list in the *Task Controller* tab:
+
+
+
+!list2!
+
+
+2. Click the *Manage* function in the *Action* column corresponding to a task that you want to evaluate. The *Task manager* form will appear:
+
+
+!task5!
+
+
+You can see the following process for more details:
+
+
+!Dialog.png!
+
+
+3. If you agree with the number that the creator propose, input the number that the creator want in the *Grant* field and then click the *Grant* button. Automatically, this task will be sent to members of **:/organization/management/human-resources* to read it.
+
+Thus, if you are a member of **:/organization/management/human-resources* group, you have responsibility to read the approved tasks as below:
+
+* Go to *Business Process Controller*. If there are tasks approved by members of **:/organization/management/executive-board* group, you will see approved tasks in the *Task Controller* tab.
+* Select the *Manage* function in the *Action* column to open the *Task manager* form:
+
+
+!PayTaskManager.png!
+
+
+* Click *Finish it* to accept reading the task.
+
+4. If you do not agree with this request, click the *Deny* button. This request will be removed.
+
+
+
+

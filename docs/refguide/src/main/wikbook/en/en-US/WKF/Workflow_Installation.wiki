@@ -1,0 +1,48 @@
+h1. Workflow Installation
+
+
+
+h1. Overview
+
+
+Workflow is the simplest way which moves documents/tasks to persons in charge by using a process. Specially, workflow looks like actions of a procedure/process (including iteration actions based on rules ): how tasks are structured, who performs them, what their relative order is, how they are synchronized, how information flows to support tasks and how tasks are being tracked. Workflow can be modeled and analyzed using graph-based forms like Petri nets.
+
+
+If you want to deploy eXo Workflow, you have to prepare developing tools first. Here is a set of links that helps you when building an eXo project.
+
+* [Main:Package Installation]
+* [Main:Building from sources]
+
+
+h1. Product Installation
+
+When everything is ready, you can deploy the product as a workflow with a following command in cygwin
+
+<code>exobuild -product=workflow -workflow=jbpm|bonita -exclude=all -build --deploy</code>
+
+
+About workflow paramater: Specify the workflow engine to bundle with the product. The possible values are bonita or jbpm. This option is only used for products that use workflow. Default engine is jbpm (jbpm 3.0 and bonita 3.0)
+
+
+{info}
+*Since DMS 2.3*:
+
+*workflow* has been replaced by *enable-workflow*
+
+*--enable-workflow=_engine_*: Specify the workflow engine to bundle with the product. The possible values are bonita or jbpm. This option is only used for products that use workflow. Default engine is *bonita*.
+{info}
+
+
+Sub packages are:
+
+# *exo.ecm.workflow.bp.jbpm.payraise*
+# *exo.ecm.workflow.bp.jbpm.holiday*
+# *exo.ecm.workflow.bp.jbpm.content.validation*
+# *exo.ecm.workflow.bp.jbpm.content.backup*
+# *exo.ecm.workflow.bp.jbpm.content.publishing*
+
+
+
+
+
+

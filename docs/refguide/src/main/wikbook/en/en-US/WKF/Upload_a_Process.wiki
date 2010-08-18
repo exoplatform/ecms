@@ -1,0 +1,30 @@
+
+h1. Upload a Process
+
+
+
+Besides the three default processes supported by the system, Administrators also can upload new processes for using by following guides:
+
+1\. Access the *Business Process Admin* page on the *Navigation* bar.
+
+
+!MainNew.png!
+
+
+*Admin Workflow Management* will appear:
+
+
+!AdminWorkflowManagement.png!
+
+
+2. Open the *Upload process* form by clicking the button !UploadProcessButton.png!
+
+
+!UploadProcessForm.png!
+
+
+3. Enter a name for the uploaded process in the *Name* field.
+
+4. Browse to the location that contains a code of a new process by clicking the *Browse* button and then click the *Upload* icon next to this button to upload that process.
+
+5. Save the uploaded process by clicking the *Save* button.

@@ -1,0 +1,5 @@
+
+h1. Workflow Engine
+
+The second module in the stack is the workflow engine. A workflow engine, sometimes referred as a BPM (Business Process Management) engine, is a software component that breaks a work process down into tasks. A basic example of such a process is an approval workflow process, in which an employee needs a manager's permission before running an application. A workflow engine provides an infrastructure to model this workflow, execute it, assign the tasks to its participants , and monitor it. To achieve the desired results, it may interact with humans or machines through, for example, Web services. This enables integration with platforms different from Java, like mainframes or .NET.
+
