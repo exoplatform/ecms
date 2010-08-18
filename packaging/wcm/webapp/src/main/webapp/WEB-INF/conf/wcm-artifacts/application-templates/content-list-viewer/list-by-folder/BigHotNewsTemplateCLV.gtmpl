@@ -79,7 +79,7 @@
 							if(count == 0) { 
 							  count = 1;
 							  %>
-								<div class="HotNews" onmouseover="this.setAttribute('class', 'HotNews $hoverClass')" onmouseout="this.setAttribute('class', 'HotNews')">							  
+								<div class="HotNews" onmouseover="this.className = 'HotNews $hoverClass'" onmouseout="this.className = 'HotNews' ">							  
 								  <%
 							    if (Utils.isShowQuickEdit()) {
 									%>
@@ -141,7 +141,7 @@
 								<%
 							} else {
 								%>
-								<div class="NormalNews" onmouseover="this.setAttribute('class', 'NormalNews $hoverClass')" onmouseout="this.setAttribute('class', 'NormalNews')">								
+								<div class="NormalNews" onmouseover="this.className = 'NormalNews $hoverClass' " onmouseout="this.className = 'NormalNews' ">								
 									<%
 							    if (Utils.isShowQuickEdit()) {
 									%>

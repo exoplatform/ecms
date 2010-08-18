@@ -82,7 +82,7 @@
 						    
 								%>
 								
-								<div class="Column1" onmouseover="this.setAttribute('class', 'Column1 $hoverClass')" onmouseout="this.setAttribute('class', 'Column1')">
+								<div class="Column1" onmouseover="this.className = 'Column1 $hoverClass' " onmouseout="this.className = 'Column1' ">
 									<%
 									if (Utils.isShowQuickEdit()) {
 									%>
