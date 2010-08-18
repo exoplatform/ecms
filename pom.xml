@@ -71,7 +71,7 @@
     <jdk.min.version>1.6</jdk.min.version>
     <!-- maven-release-plugin -->
     <preparationGoals>clean install</preparationGoals>
-    <arguments>-Dgatein.working.dir=target</arguments>
+    <arguments>-Dgatein.working.dir=target -Dmaven.test.skip=true</arguments>
     <!-- For 2.0.0 Beta 01 we release only tomcat package for WCM -->
     <releaseProfiles>${defaulteXoReleaseProfiles},pkg-tomcat,arc-tomcat,pkg-jbossas,arc-jbossas,wcm,wkf</releaseProfiles>    
   </properties>
