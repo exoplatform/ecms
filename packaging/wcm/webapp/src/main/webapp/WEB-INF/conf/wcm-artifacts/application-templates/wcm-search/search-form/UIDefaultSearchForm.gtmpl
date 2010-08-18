@@ -10,6 +10,7 @@ import org.exoplatform.wcm.webui.search.UISearchForm;
 
 <%
 UIFormStringInput uiKeywordInput = uicomponent.getUIStringInput(UISearchForm.KEYWORD_INPUT);
+uicomponent.setKeyword();
 UIFormSelectBox uiPortalSelectBox = uicomponent.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR);
 UIFormCheckBoxInput uiPageCheckBox = uicomponent.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING);
 UIFormCheckBoxInput uiDocumentCheckBox = uicomponent.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING);

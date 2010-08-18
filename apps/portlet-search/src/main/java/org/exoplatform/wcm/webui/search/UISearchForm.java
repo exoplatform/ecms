@@ -16,6 +16,7 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.model.PortalConfig;
@@ -127,6 +128,13 @@ public class UISearchForm extends UIForm {
 		return templatePath;
 	}
 
+	public void setKeyword() {
+		PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+		String keyword = portalRequestContext.getRequestParameter("keyword");
+		if(keyword != null && keyword.length() > 0) {
+			getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
+		}
+	}
 	/*
 	 * (non-Javadoc)
 	 * @see
