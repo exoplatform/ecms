@@ -424,14 +424,21 @@ Title
   vertical-align: -2px;
 }
 
-.UISingleContentViewerPortlet .UISCVPreferences .TitleBar {
-  background: transparent url('icons/BgCategoryTitle1x25.gif') repeat-x scroll 0 0;
-  border-top: 1px solid #B7B7B7;
-  border-left: 1px solid #B7B7B7;
-  border-right: 1px solid #B7B7B7;
-  color: #424242;
-  font-weight: bold;
-  line-height: 25px;
-  padding-left: 10px;
-  text-align: center;
+.UISingleContentViewerPortlet .UISCVPreferences .tdShowHelp {
+  text-align: right;
+  width: 30px;
+}
+
+.UISingleContentViewerPortlet .UISCVPreferences a.AdvancePreferences {
+  color:#1111CC;
+  text-align:left;
+  text-decoration:underline;
+}
+
+.UISingleContentViewerPortlet .UISCVPreferences .fieldsetPreferences{
+ margin-right: 10px; 
+ margin-left: 10px; 
+ margin-bottom: 10px; 
+ overflow: hidden; 
+ border: 1px solid #b7b7b7;
 }
