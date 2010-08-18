@@ -1,0 +1,23 @@
+h1. Browsing Content Portlet
+
+
+To browse content extracted from the JCR, we provide a dedicated portlet called the BrowseContent one (BC). The idea is to provide ECM admin with an extensible portlet for both rendering issues and modifying ways that the content is extracted.
+
+By default we provide a rendering template that allows you to browse down a JCR tree and to view the children document or optionally the document that refers the node. Rendering references is a pretty convenient feature as it allows people to decouple the content location from the navigation paths to the point of that content. Categorizing a content from the ECM Explorer portlet allows such behaviors.
+
+Note that templates as well as the one used to render the document itself (kind of decorator around the DocumenType view template) are stored in the JCR itself and can therefore be modified online by the ECM admin. Refering to the administration section that deals with templates. Templates are hence also versionnable.
+
+One can also search for documents, either in a full text way or looking for a keyword that would be contained in the path (category). Some children documents can also a reference of other documents (called a relation; if they are allowed in the configuration, the search will also include those.
+
+There exists many ways to extract content and everything can be configured from the CB portlet edit mode. The current configuration is shown from the main page in the edit mode. By default, we extract the content from the root path of the taxonomies (located in the system workspace - one per repository - under the path /jcr:system/exo:ecm/exo:taxonomies) which allows to view all documents that refer any node in the taxonomy tree.
+
+It is possible to access several wizards that allows you to choose among several ways to extract content from a dedicated workspace:
+
+* extract content from a JCR path located in a well defined repository/workspace which includes repository bound taxonomies
+* extract content by using a JCR Query (XPath or SQL)
+* delegate the content extraction to a Groovy script
+* directly display a JCR document with the correct decorating templates
+
+
+
+

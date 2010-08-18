@@ -1,0 +1,73 @@
+h1. Adding Taxonomies using the File Explorer
+
+
+
+{note}
+By default, this action is only available for users who are member of the group '/platform/administrators'. You can change this behavior thanks to the applications 'Manage Views' and 'Manage Drives'
+{note}
+
+1\. Sign in with an account which has enough permissions like "*root*".
+
+2. Go to *Content Management* -> *File Explorer*.
+
+3. Choose the drive called *Collaboration Center* in the *General drives* section.
+
+4. Select the node to which you want to add categories.
+
+5. Select the *Details* view.
+
+6. Select the *Admin* tab.
+
+7. Click the *Manage Categories* icon
+!MC.gif!
+ .
+
+{info}
+Since DMS 2.5
+{info}
+
+1\. You also sign in with an account that has permissions like "root".
+
+2. Click on the File Explorer on the navigation bar.
+
+3. Select *General drives* and then select *Collaboration Center* drive.
+
+4. Select the node that you want to add categories.
+
+5. Select the *Admin* tab and click !ManageCategories.jpg!
+
+
+!ManageCategory.jpg!
+
+
+
+The following window appears:
+
+
+!AddCategory1.jpg!
+
+
+8. Choose the tab *Select category*:
+
+
+!AddCategory2.jpg!
+
+
+
+|| \# ||*Purpose* ||
+| h1. | It indicates the name of the workspace which contains categories. |
+| 2 | This arrow allows you to go one level above in the tree of categories. |
+| 3 | The '+' button allows you to go into a specific category. |
+| 4 | This button allows you to add the corresponding category to the selected document. |
+
+
+Once the category has been selected, you are automatically redirected to the "Referenced categories" tab
+
+
+!RC.gif!
+
+
+
+|| \# ||*Purpose* ||
+| h1. | It indicates the name of categories which have already been added to the document |
+| 2 | This button allows you to remove the corresponding category from the document. |

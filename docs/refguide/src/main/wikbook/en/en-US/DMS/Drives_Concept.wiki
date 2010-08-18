@@ -1,0 +1,135 @@
+h1.  Drives Concept
+
+
+
+h1. Overview
+
+In eXo ECM it is possible to let the ECM administrator dynamically create drives on the top of JCR Workspaces.
+
+Actually, a drive is a customized workspace with:
+
+    * a configured path where a user will start when browsing the drive
+    * a set of allowed views that will allow limiting the available actions (such as the edition or creation of contents while being in the drive)
+    * a set of permissions allows limiting the access (and view) of the drive to a limited number of people
+    * a set of options to describe the behavior of the drive when an user browses it (when we show the file explorer on the left, what types of folder we should add to the drive...)
+
+Hence a workspace can have several drives configured on its top. The ECM administrator can create and edit new drives from the ECM admin portlet which contains a "Manage Drive" action. Drives, like Workspaces are bound to a JCR Repository.
+
+It is possible to add a new drive including one display on the taxonomy tree. Once a new drive is added, we can directly see it inside the File Explorer portlet and inside the correct Repository.
+
+
+
+
+
+h1. Drives in DMS
+
+eXo DMS facilitates many drive types that help you organize, manage and search for folders, documents quickly and effectively. These few representative drives below will partly help you to clearly and fast acquire more about drives in eXo DMS.
+
+h2. The Public Drive
+
+
+!PublicDrive.png!
+
+
+In the public drive, by default there's no initialized folder but you can create new folders by yourself.Also, you can do many actions here:
+
+- By selecting *Actions*, you can do:
+* Create a new folder
+* Create or edit documents
+* Upload files from your machine
+- By selecting *Collaboration*, you can do:
+* Add tags for documents
+* Set multi-displaying languages for documents
+* Vote for a document
+* Comment for a document
+- By selecting the *Search* tab, you can:
+* Simply search
+* Do the advanced search with more constraints, add a new query to search
+* Search by using existing queries
+Furthermore, you also can:
+* Setup your browsing preferences
+* Cut/paste, copy/paste, delete a node.
+* Lock a node.
+* Rename a node
+* Use view WebDAV to view a content of a document.
+
+
+
+{info}
+Since DMS 2.5
+{info}
+
+
+!puplicdrive2.5.4.png!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+h2. The drive of a specific group
+
+
+!SpecificGroupDrive.png!
+
+
+By default, there are two initialized folders but you also can add more and do actions like in the private drive.
+Only users in a group can access this drive.
+
+{info}
+Since DMS 2.5
+{info}
+
+
+!specialdrive.png!
+
+
+
+
+
+h2. The Shared Users Space drive
+
+
+!ShareDrive.png!
+
+
+By default, there is a list of all existing users, each user has a folder including two sub folders (private and public). You can see both your private and public folders here but you only can see the public folders of others.
+- In this drive, you can:
+* Perform all actions in both your public and private drives
+* View nodes from public folders of others
+- In this drive, you can not:
+* Can not add folders/documents in root node
+* Can not add folders/documents in a folder of other users and child nodes of this folder
+* Can not add folders/documents in a folder named by your username (e.g: you can not add folder/document in folder /marry)
+* Can not rename the default folders
+* Can not lock folders named by users
+* Can not delete default folders
+
+{info}
+Since DMS 2.5
+{info}
+
+
+!shareduserspace2.5.4.png!
+
+
+
+
+
+
+
+
+
+
+
+

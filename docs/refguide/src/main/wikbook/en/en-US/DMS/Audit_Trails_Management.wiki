@@ -1,0 +1,33 @@
+
+h1. Audit Trails Management
+
+This function supports you to log property changes of a node. It helps you manage and view changes on a node better and more effectively.
+
+1\. Go to *File Explorer* --> Select *Info* tab to show some actions on the Action bar.
+
+2. Select a node (on the left pane or right pane) that you want to manage auditing.
+
+3. Activate the selected node by clicking the icon
+!1.png!
+  on the Action bar. The *Activate Auditing* form will appear:
+
+
+!2.png!
+
+
+4. Click the *Activate* button to accept activating the selected node.
+
+5. Click the icon
+!3.png!
+    on the *Action* bar again to view auditing information of the selected node.
+
+* If the selected node has no property change, the *Auditing Information* form will show:
+
+
+!4.png!
+
+
+* If the selected node has property changes, the *Auditing Information* form will list detail changes:
+
+
+!5.png!

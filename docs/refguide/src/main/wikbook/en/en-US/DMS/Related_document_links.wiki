@@ -1,0 +1,12 @@
+
+h2. Related document links
+#startfloatingbox()
+*See also*
+- [eXo Workflow concepts|eXo+Workflow+concepts]
+- [Features and Benefits]
+- [Technical Documents]
+- [Related document links]
+#endfloatingbox()
+* [Workflow:Bonita Overview]
+* [Workflow:JBPM Configuration] <br>
+

@@ -1,0 +1,95 @@
+
+
+h1. Creating a Symlink
+
+We have three ways to create an exo:symlink:
+
+
+
+
+h1. Use the "Add Link" action in the tool bar
+
+1\. Select 1 node.
+
+2. Click the icon
+!icon1.gif!
+  on the action bar, the *Sym Link Manager* pop-up appears :
+
+
+!symlink.gif!
+
+
+|| Field||Meaning ||
+| Sym Link Name | the name of a link. |
+| Path Node |  	the path of a link. |
+
+3. Click on the icon
+!icon2.gif!
+  to open the *Choose Target Node* form.
+
+
+!target.gif!
+
+
+4. Choose the workspace which contains the node you want to add a symlink.
+
+5. Click the icon
+!icon3.gif!
+ in the row of the node you want to add -> the path of the node will appear in the *Path Node* field and the name of the node is set default by the name of the selected node. You can edit this name.
+
+
+!ex.gif!
+
+
+6. Click the *Save* button, a symlink is added.
+
+
+!ex2.gif!
+
+
+7. Click on the symlink to view its content.
+
+
+h1. Use the context menu by right-clicking
+
+You also can create a symlink by right-clicking.
+
+1\. If there is not a node that has been selected, the *Sym Link Manager* pop-up appears:
+
+
+!symlink.gif!
+
+
+ Do the same steps as you create a symlink using the *Add Sym Link* function on the action bar.
+
+2. If at least one node has been selected, a symlink is automatically created. The name of the link will be of type "\{node-name}.lnk".
+
+
+!link2.gif!
+
+
+3. Click on the symlink to view its content.
+
+
+h1. Use the Drag and Drop function
+
+Do the following steps to add a symlink for a node by using drag and drop :
+
+1\. Select 1 node.
+
+2. Keep CTRL+SHIFT key and move this node to the destination path.
+
+
+!dragdrop.gif!
+
+
+# link will be automatically added.
+
+
+!link.gif!
+
+
+3. Click on the symlink to view its content.
+
+
+

@@ -1,0 +1,113 @@
+
+
+h1. Tags Management
+
+
+
+
+Tag are words or keywords which are used as labels to describe or group the same documents. Thus using tags allows classifying based on keywords and search information quickly and easily.
+
+h1. Manage Tags
+
+By using Folksonomy function, you can manage the styles of tag. They will be changed depending on the number of documents in a tag.
+
+Do the following guides to manage tags:
+
+1\. Go to *ECM Administration* on the navigation bar-> *Ontologies* -> *Manage Folksonomy*.
+
+
+!folksonomy.gif!
+
+
+
+|| Name  || Description ||
+| Style name  |  there are 5 styles: normal, interesting, attractive, hot and hotest |
+| Document range  | the number of documents are assigned the same tag. |
+| Style of tag  | includes font-size, font-weight, color,  font-family, text-decoration. |
+
+
+h2. Edit Tags
+
+1\. Click the
+!icon1.gif!
+ icon in the Action column corresponding to a tag style that you want to edit. The *Edit tag style configuration* form will appear:
+
+
+!edit.gif!
+  <br>
+
+2. Change the values of the current properties in this form.
+
+3. Click the *Update* button to accept changes.
+
+h2. Add Tags in File Explorer
+
+Do the following guides to add a tag for a document in File Explorer:
+
+1\. Go to *File Explore*, select any drive.
+
+2. Select the *Action* tab and create a document. Select this document.
+
+3. Select the *Collaboration* tab and click the
+!tag.gif!
+ icon on the Action bar. There is a form to add tags for the selected document:
+
+
+!addtag.gif!
+
+
+4. Enter a value for the *Tag names* field. A document can be added several tags at the same time. To do that, input all tag names in the *Tag names* field and separated by ",".
+
+5. Click the *Add Tags* button to accept the entered values.
+
+
+h1. View Tags
+
+h2. In File Explorer
+
+Click the
+!icon2.gif!
+ icon on the left corner and select the *Tag cloud* item.
+
+
+
+!tagcloud.gif!
+
+
+{info}
+For DMS 2.5
+{info}
+
+Click on the *Tag cloud* icon:
+
+
+!TagCloud.png!
+
+
+All existing tags are listed:
+
+
+* Depending on the number of added documents in each tag, then the displaying of it will be different from others by: font-size, font-weight, color, font-family, text-decoration. This is made by Administrator.
+
+
+!list.gif!
+
+
+For example, when a tag is added for over 10 documents, it will be displayed in red color, size:20px, bold.
+Each tag like a link, to list all documents that it is added, click on tag name, document list will be displayed in the right pane.
+
+
+
+h2. In Content Browser
+
+1\. Go to *Content Browser*.
+
+2. Configuration for Content Browser that *Tag map* appears. All tags are displayed:
+
+
+!cb.gif!
+
+
+
+
+

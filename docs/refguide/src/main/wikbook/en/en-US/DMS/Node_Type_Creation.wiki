@@ -1,0 +1,90 @@
+
+h1. Node Type Creation
+
+
+
+
+h1. How to Create a Node Type
+
+1\. Follow the path: *ECM Administration* -> *Type of Content* -> *Manage Node Type* to open the *Manage Node Type* form:
+
+
+!nodetype.gif!
+
+
+2. Click the *Add* button to open a form to create a new node type:
+
+
+!add.gif!
+
+
+3. Select a name space for the node. It is like a prefix of node.
+
+4. Enter a name for the node in the *Node type name*. This field is required.
+
+5. Select a value for the *Is mixin type* field.
+
+- True: this node is mixin type.
+- False:this node is not mixin type.
+
+6. Select a value for the *Orderable child nodes* field.
+
+- True: child nodes are ordered.
+- False:child node are not ordered.
+
+7. Enter a value for the *Primary item name* field.
+
+8. Super types: click to add more parent nodes.
+
+9. Property definitions: list all definition names of the *Property* tab. To create properties:
+
+- Click on the *Property* tab:
+
+
+!property.gif!
+
+
+- Put values in fields.
+- Click the *Add property* button.
+
+10. Child node definitions: list all definition names of the *Child node* tab. To create child nodes:
+
+- Click on the *Child node* tab:
+
+
+!child.gif!
+
+
+- Put values in fields.
+- Click the *Add child* button.
+
+11\. Click the *Save* button to accept adding a new node type or click the *Save draft* button to save this node type as a draft
+
+
+
+
+
+
+
+
+h1. How to define an Icon for a Node Type
+
+1\. Access to the package *exo.ecm.dms.core.web.eXoDMSResources*.
+
+2. With a small icon:
+
+Go to the */exo.ecm.dms.core.web.eXoDMSResources/src/main/webapp/skin/DefaultSkin/skinIcons/16x16/Stylesheet.css*  and add a style sheet for a new nodetype icon.
+For example: with exo:article nodetype
+{code}
+.exo_article16x16Icon {
+  background: url('icons/NodeTypes/exo-article.gif') no-repeat;
+}
+
+{code}
+- Replace ':' by '_'
+- Upload your icons to this folder */exo.ecm.dms.core.web.eXoDMSResources/src/main/webapp/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes*
+
+3. You can do the same for bigger icons.
+
+
+

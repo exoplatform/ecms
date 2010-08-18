@@ -1,0 +1,326 @@
+
+h1. Using the File Explorer in DMS 2.6
+
+
+
+
+
+h1. How to access?
+
+You can directly click to the File Explorer on the Navigation bar after having signed in:
+
+
+!FileExplorer.png!
+
+
+
+h1. Drive Selector
+
+When you access to the File Explorer, you need first to select a drive unless your File Explorer has been configured to access directly to a specific drive. You can select a drive thanks to the following user interface.
+
+
+!DriveSelector.png!
+
+
+
+|| \# ||*Purpose* ||
+| "1" | It indicates the name of the Java Content Repository that holds the drives |
+| 2 | The drives to the current user. |
+| 3 | The drives to the groups of the current user. |
+| 4 | The custom drives that have been configured |
+| 5 | This button allows you to hide or show a category of drives (Personal drives, Group drives and General drives) |
+| 6 | A specific drive |
+
+
+* To know more about the drive concept, click [here|ECM:Drives+Concept]
+* To know how to configure the File Explorer in order to access directly to a specific drive, click [here|ECM:Direct Access of JCR Drives?]
+
+
+h1. File Explorer User Interface
+
+
+h2. Main UI
+
+Once you have selected your drive, you access to the following user interface.
+
+
+!FileExplorerAdjust.png!
+
+
+
+
+|| \# ||*Purpose* ||
+| "1" | It indicates the name of the selected drive. |
+| 2 | The list of all the "*views*" available for the current drive. |
+| 3 | The list of all the "*tabs*" available for the selected view. |
+| 4 | The list of all the "*actions*" available for the selected tab. |
+| 5 | The "*address bar*" allows you to directly access to a specific path into the drive. |
+| 6 | This button allows you to back to the previous node. |
+| 7 | This button allows you to refresh the current content of the file explorer. |
+| 8 | This button allows you to do the simple search. |
+| 9 | This button allows you to do the advanced search. |
+| 10 | This button allows you to back to the JCR main Drives. |
+| ## | This button allows you to change change the preferences of the current drive.the "*side bar*" purpose. |
+| 12 | These buttons allows you to see the relationships between files, the tag cloud or the clipboard content. |
+| 13 | This button allows you to sort the current content. |
+| 14 | This pane helps users filter documents, files, folders, video, music, images,etc by items: Owned by me, favourites, hidden, trash or by types: video, images, documents, music. |
+
+
+
+Users quickly filter nodes(folders, files, documents, music, video, images,etc) by following these simple guides:
+
+1\. Just click on the item or the type that users want to filter nodes (files, folders, documents, video, images, music,etc), the filter list result will be displayed on the right pane:(in below screen shot, I filter nodes by *Favourites*)
+
+
+!FavouriteList.png!
+
+
+2. Click on the
+!Icon1.png!
+ icon that corresponds to the node if users want to view this node.
+
+3. Click the
+!Icon2.png!
+ icon that corresponds to the node if users want to go to the folder that contains that node.
+
+
+
+h2. Preferences Settings Window
+
+
+Click the
+!SettingIcon.png!
+ icon at the right corner of the File Explorer portlet. There will be a form to set up your browsing preferences:
+
+
+!PreferenceSetting.png!
+
+
+
+||  ||
+|  |
+| *Name* |*Purpose* |
+| Enable JCR like structure | Allows you to show or hide the complete JCR structure at least documents non hidden. |
+| Show side bar | Allows you to show or hide the sidebar. |
+| Show non document type | Allows you to show or hide non document type. _In other words, nodes whose type has not been declared as document (see Manage Templates in the ECM Administration)_ |
+| Show referenced document | Allows you to show or hide nodes which are linked to the selected node. _In other words, nodes which have the property exo:relation (= nodes of type exo:relationable) which contains the UUID of the selected node._ |
+| Show hidden node | Allows you to show or hide nodes flagged as hidden. _In other words, nodes of type exo:hiddenable._ |
+| Sort by | Allows you to choose the way to sort the child nodes of the selected node. |
+| Order | Allows you to choose the order of the sort. |
+| Nodes Per Page | Allows you to choose the total count of nodes per page. |
+
+
+
+h3. The Predefined Views
+
+By default, there are 4 predefined different views:
+
+* *Details* : This view is the most detailed view, it presents files and folders as a list and for each element it indicates the *creation date*, *modification date*, the *name of the creator*, if the data is *"versionable"* and if the data is *"auditable"*.
+
+
+!DV.png!
+
+
+* *Icons* : This view is a very simple one, it presents files and folders with few informations and big icons.
+
+
+!IV.png!
+
+
+* *Thumbnails* : This view presents files and folders by using thumbnails. _NB: As you might have noticed, the default thumbnail of the folder "Records Space" has been overloaded._
+
+
+!TV.png!
+
+
+* *Cover Flow* : This view presents files and folders as a cover flow. _NB: As you might have noticed, the default thumbnail of the folder "Records Space" has been overloaded._
+
+
+!CF.png!
+
+
+
+h3. The Actions Available
+
+
+||  Icon ||*Purpose* ||
+|
+!A1.png!
+ | Allows you to manage versions of the current node. _Help you to activate the versioning for the node, if it has not been activated yet._ |
+|
+!A2.png!
+ | Allows you to manage the publication process of the current node.  |
+|
+!A3.png!
+ | Allows you to add categories to the current node. |
+|
+!A4.png!
+ | Allows you to add relationships between the current node and files located on the drive. |
+|
+!A5.png!
+ | Allows you to add actions to trigger on specific phases of the current node lifecycle. |
+|
+!A6.png!
+ | Allows you to view or add the JCR properties of the current node. |
+|
+!A7.png!
+ | Allows you to export the current node content in one of the 2 XML formats defined into the JSR 170 (system and document, refer to the JSR 170 for more details). |
+|
+!A8.png!
+ | Allows you to import content into the current node. The expected format is one of the 2 XML formats defined into the JSR 170 (system and document, refer to the JSR 170 for more details). |
+|
+!A9.png!
+ | Allows you to add or remove the status of hidden node to the current node. |
+|
+!A10.png!
+ | Allows you to view all the nodes that references the current node. |
+|
+!A11.png!
+ | Allows you to view the JCR structure of the current node. |
+|
+!A12.png!
+ | Allows you to view and set access permissions on the current node. |
+|
+!A13.png!
+ | Allows you to view and set metadata on the current node. |
+|
+!A14.png!
+ | Allows you to switch the mode of the "side bar" from "File Explorer" to "Relation". |
+|
+!A15.png!
+ | Allows you to manage auditing of the current node. _Help you to activate the auditing for the node, if it has not been activated yet._ |
+|
+!A16.png!
+ | Allows you to show/hide the complete JCR structure. |
+|
+!A17.png!
+ | Allows you to add a new folder to the current node. |
+|
+!A18.png!
+ | Allows you to add a new structured file (e.g. exo:article) to the current node. |
+|
+!A19.png!
+ | Allows you to edit the current node if the node is a structured file (e.g exo:article). |
+|
+!A20.png!
+ | Allows you to upload a new unstructured file (e.g. office files). |
+|
+!A21.png!
+ | Allows you to watch/unwatch the current node. |
+|
+!A22.png!
+ | Allows you to add new tags to the current node, in order to easily find your node thanks to the tag cloud. |
+|
+!A23.png!
+ | Allows you to translate the current node into another language. _The current node must be file._ |
+|
+!A24.png!
+ | Allows you to vote for the current node. _The current node must be file._ |
+|
+!A25.png!
+ | Allows you to add a comment to the current node. _The current node must be file._ |
+|
+!A26.png!
+ | Allows you to find documents thanks to a full text search. |
+|
+!A27.png!
+ | Allows you to find documents thanks to an advanced search. |
+|
+!A29.png!
+ | Allows you to overload the default thumbnail of the current node. |
+
+
+
+
+
+h2. The Control Sidebar
+
+If you click the down arrow next to "File explorer" in the frame of the left, you will see the following menu appears:
+
+
+!TheControlSideBar.png!
+
+
+
+||  Name ||*Purpose* ||
+| File Explorer | Allows you to browse your folder tree |
+| Relation | Allows you to see and access all the documents related to the current document |
+| Clipboard | Allows you to manage your Clipboard content since eXo DMS supports multiple items into the Clipboard |
+| Tag Cloud | Allows you to access your tagged documents thanks to the tag |
+| Save Searches | Allows you to do the advanced search |
+
+
+
+
+
+h2. The Right Click
+
+{info}
+Since DMS 2.6, two more actions can be taken: *Add to Favourite* and *Move to Trash*
+{info}
+
+If you select an item and you right-click on it, you will see the following menu appears:
+
+
+!RightClick.png!
+
+
+
+||  Name ||*Purpose* ||
+| Add to favourite  |  To add the selected item to as favourite |
+| Move to Trash    | To move the selected item to Trash |
+| Copy | To copy the selected item to the clipboard |
+| Cut | To cut the selected item |
+| Paste | To paste the item stored in the clipboard into the current location |
+| Delete | To remove the selected item |
+| Lock | To lock the selected item in order to prevent other people from changing it |
+| Rename | To rename the selected item  |
+| Add SymLink | To add a symlink to the selected item |
+| Download And Allow Edition | To access the selected item content directly thanks to webdav (when it is possible) |
+| Copy URL to clipboard | To copy to the clipboard the webdav URL of the selected item  |
+
+
+
+h3. Add to favourite
+
+This function helps users easily add nodes (documents, folders or files,etc)  as favourite. After adding a node to favourite, that node will be appeared in the favourite nodes list of that user. Any user who has the "set property" permission on the nodes can take this action on the nodes.
+
+To add a document as your favourite, do the following guides:
+
+1\. Right-click on the item that users want to add it as favourite and select
+!AddToFavourite.png!
+  in the menu:
+
+
+!AddToFavourite1.png!
+
+
+2. After adding it as favourite, the favourite items have the *Remove from favourite* in the right-click menu in case users want to remove them from the favourite nodes list.
+
+_*Note*_ :
+- In the favourite nodes list, users can view a node content or go to a folder which contains that node.
+- Users also have another way to remove nodes from favourite by simply clicking on the star to change its color into gray. After clicking on the star, refresh it to view the change.
+- In the favourite nodes list, users can sort nodes by its name or its type.
+
+
+h3. Move to Trash
+
+This function allows moving nodes(folders, documents, files) to the trash. Users can delete node if they want to completely remove it. We provide another way that helps users delete node by temporarily moving node to the */Document/Trash* folder so it can be easily restored for using.
+
+Do the following guides to move a document into the trash:
+
+1\. Right-click on the document that users want to move to the trash.
+
+2. Select the
+!MoveToTrash1.png!
+  in the menu:
+
+
+!MoveToTrash.png!
+
+
+The selected item will be moved to the trash. After being moved to trash, in the Trash folder, the document will have the *Restore from Trash* in the right-click menu, it allows users to restore the item that has been moved to trash.
+
+_*Note*_ : In the */Document/Trash* folder, users can delete nodes or restore them for using again. Only users who have the "Remove" permission can take this action.
+
+

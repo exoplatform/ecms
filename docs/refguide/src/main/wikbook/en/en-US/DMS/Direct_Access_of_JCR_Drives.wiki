@@ -1,0 +1,126 @@
+
+h1. Direct Access of JCR Drives
+
+
+
+
+When you access the *File Explorer* normally, it shows several drives. The use sees only those drives she or he has access to. The user can then choose the drive he wishes to work with.
+
+By configuring the portlet settings you can modify this default behavior. By default the "selection" option is configured. Besides "selection", there are 4 other ways to configure the file explorer :
+
+* Jailed
+* Personal
+* Social
+* Parameterize
+
+
+Context adaptation of eXo JCR File Explorer
+
+In eXo DMS (Document Management System), users manage the content through an application called  "JCR File Explorer". This application allows creating, retrieving, updating or deleting content. By default, it forces users to initially select a drive. A drive can be considered as a logical unit of storage (for example: live documents, user private documents, workgroup documents).
+
+The selection step is not really convenient and in order to improve productivity JCR File Explorer can optionally bypass the drive selection step and let the users directly access the drive matching the context of their work.
+
+Of course, in all cases, security checks are performed to ensure the current user is allowed to access the target location.
+
+
+h2. Configuration by the User Interface
+
+* Move the mouse to the right corner of this portlet and select the *Edit* mode. A form appears to edit File Explorer
+
+!edit.gif!
+
+* Click the *Edit* button
+
+From here, the User Interface depends on the mode you chose, so please directly refer to the specific mode parts below:
+
+h3. Selection
+
+!selection.gif!
+ <br>
+|| Field|| Meaning ||
+| Repository| Select the repository which contains the drive that a user wants to select |
+| Specify a category when uploading a file| Force an user to add a category when uploading or creating a document |
+
+h3. Jailed
+In the "jailed" use case, the administrator configures a unique drive. Only that drive is accessible by the file explorer instance (http://en.wikipedia.org/wiki/Jail_%28computer_security%29). In Unix system the same mechanism is achieved by using "chroot".
+
+
+!jailed.gif!
+ <br>
+|| Field|| Meaning ||
+| Repository| Select the repository which contains the drive that an user wants to select |
+| Specify a category when uploading a file| Force an user to add a category when uploading or creating a document |
+| Drive Name| The name of a drive that an user wants to access |
+
+You can select a drive by clicking on
+!icon.gif!
+ . The following drive will appear:
+
+!jailed2.gif!
+  <br>
+
+!drive.gif!
+  <br>
+
+As you can see in the picture below, the 'Back to JCR main Drives' icon doesn't appear anymore
+
+!jail.gif!
+ <br>
+
+h3. Parameterized
+
+TODO: Mention the URL parameters !
+
+
+In the "parameterized" use case, the application fetches some location information from the portal page URL. Then it will directly access that specified location in the storage (can be a folder or a document). This use case is handy to allow linking the JCR File Explorer from external applications. A typical example is a Google gadget listing the last 5 modified documents. When clicking, the user is redirected to eXo Portal and directly accesses the document in its context.
+
+h3. Personal
+
+When you choose the Personal usecase, the Private drive of the current user will be used.
+
+
+!Personal.png!
+ <br>
+|| Field|| Meaning ||
+| Repository| Select the repository which contains the drive that an user wants to select |
+| Specify a category when uploading a file| Force an user to add a category when uploading or creating a document |
+
+h3. Social
+
+In the "social" use case, the JCR File Explorer will directly access the drive containing content shared by the community he's connected to (this use case is compatible with the eXo Spaces module).
+
+
+!social.gif!
+ <br>
+|| Field|| Meaning ||
+| Repository| Select the repository which contains the drive that an user wants to select |
+| Specify a category when uploading a file| Force an user to add a category when uploading or creating a document |
+
+h2. Configuration by xml files
+
+In the *portlet.xml* and *portal/group/platform/user/portlet-preferences.xml*, insert new preference values
+
+{code:xml}
+<preference>
+ <name>usecase</name>
+ <value>selection</value>
+ <read-only>false</read-only>
+</preference>
+<preference>
+ <name>driveName</name>
+ <value>Collaboration Center</value>
+ <read-only>false</read-only>
+</preference>
+{code}
+
+
+
+|| Field|| Default value || Explain ||
+| usecase| selection | The ways to access the drive. |
+| driveName | Collaboration Center| The parameter is specified to decide which the driveName is. |
+
+
+
+
+
+

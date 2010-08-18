@@ -1,0 +1,247 @@
+h1. ECM Action Type Management
+
+
+
+
+
+h1. Overview
+
+
+
+Actions are activated when event is occurred in the ECM Explorer portlet. Thanks the UI in the explorer as described in the "Actions Concept" section, actions are bound to JCR Nodes . As you can see there we provide some default preconfigured actions such as the sendmailAction or the trasformBinaryToText one.
+
+Each action is in fact a custom NodeType that extends one of the exo:action NodeType. Each time you want to create a new ActionType you will have to extend one of the provided concrete "exo:action" definitions. By default there exist 3 NodeTypes that extend the "exo:action" one as shown in the next diagram:
+
+Thanks to Observation in JCR,with each change in the workspace, it monitors and dispatches registed events. When registering event, we should notice some attributes:
+* *isDeep* = true|false: event affect to child node or not.
+* *uuid* : array of uuids of associated parent nodes can receive event.
+* *nodeTypeName*: array of node type of associated parent nodes can receive event.
+* *uuid* and *nodeTypeName* are null then no restriction for receiving event.
+
+You already knew that activating an action would, underneath, launch a BusinessProcess, a script or a Business Rule. Now you know why! PLugin a new default type that the admin can use to create new concreate ActionType is a developer work as he will need to plug new eXo plugins to tell the service that new action types are supported.
+
+When you reach from the ECM Admin portlet, in the "Manage ActionType" section you will get a list of al the existing ActionType as well as, in the second column, the list of the NodeType it exten,ds. That provides you the same information as in the previous picture. Indeed, we can see that the two ActionTypes that are "exo:workflowAction" and "exo:backupAction" extends the "exo:businessProcessAction" one and hence they will launch some business processes.
+
+As ActionTypes are NodeTypes, it is not possible to remove them (for integrity reasons) but you can create new ones. Remind that you will create NodeType and not Node instances! In the next screenshot, the admin must choose among the 3 ActionType to extend. In our current case, it is a "exo:businessProcess" one. The form below the selectbox is adapted according to the selected ActionType and in the case of a business process base action type then the admin is allowed to select the business process to map with the ActionType (here "content-backup"). The admin can also define new varailable that will be then passed to the business process and stored as JCR properties when the ActionType will be instantiated.
+
+Finally, the Move checkbox tells if the Action will move the document from one location in a workspace to another one in another workspace. Underneath, the newly created ActionType also gets the "exo:move" MixinType which defines the "exo:destWorkspace" and the "exo:destPath" JCR properties.
+
+In the next screenshot you can see that the form is adapted to the main selected ActionType. Here we see all the available business processes that the action could launch. If the admin had selected the "exo:scriptAction" base NodeType then the list would have been filled with the available Scripts.
+
+The next code sample is simple the "TransformBinaryChildrenToTextScript.groovy". As you can see, it gets the information through the context object and then has access to all the necessary information to process some document manipulations such as transforming all the binary documents of a folder into text documents under the same folder using the eXo DocumentReaderService.
+
+{code}
+import java.util.Map;
+
+import javax.jcr.Property;
+import javax.jcr.Node ;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+
+import org.exoplatform.services.cms.scripts.CmsScript;
+import org.exoplatform.services.document.DocumentReaderService;
+
+/*
+* Will need to get The MailService when it has been moved to exo-platform
+*/
+public class TransformBinaryChildrenToTextScript implements CmsScript {
+
+  private DocumentReaderService readerService_;
+
+  public TransformBinaryChildrenToTextScript(DocumentReaderService readerService) {
+    readerService_ = readerService;
+  }
+
+  public void execute(Object context) {
+    Map variables = (Map) context;
+
+    Node actionNode = (Node) variables.get("actionNode");
+    Node folderNode = actionNode.getParent();
+
+    try {
+      NodeIterator iter = folderNode.getNodes();
+      while(iter.hasNext()) {
+        Node childNode = iter.nextNode();
+        if("nt:file".equals(childNode.getPrimaryNodeType().getName())) {
+          Node content = childNode.getNode("jcr:content");
+          Property mime = content.getProperty("jcr:mimeType");
+          if (!mime.getString().startsWith("text")) {
+            String text = readerService_.getContentAsText(mime.getString(), content
+              .getProperty("jcr:data").getStream());
+            Node file = null;
+            try {
+              file = folderNode.getNode(childNode.getName() + ".txt");
+            } catch (PathNotFoundException e) {
+              file = folderNode.addNode(childNode.getName() + ".txt", "nt:file");
+            }
+            Node contentNode = file.addNode("jcr:content", "nt:resource");
+            contentNode.setProperty("jcr:encoding", "UTF-8");
+            contentNode.setProperty("jcr:mimeType", "text/html");
+            contentNode.setProperty("jcr:data", text);
+            contentNode.setProperty("jcr:lastModified", new GregorianCalendar());
+          }
+        }
+      }
+      folderNode.save();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void setParams(String[] params) {}
+
+}
+{code}
+
+Note that when a node is bound with an action then it gets the MixinType "exo:actionable" which mandates the Node to have a child Node of type exo:action. In the JCR explorer, those are, by default, managed as hidden files but you can view them by configuration from the Preferences form.
+
+
+h1. Event Type
+
+Available Event types now are add node, remove node, add property, remove property, update property. From DMS 2.6, Each action can have more than one event type. For example: sendmailAction can be registered with events: add node, remove node, ... Thanks to ObservationManager from JCR, listener of action will be fired if its events matches event occurring. DMS have two more event types is read and schedule.
+
+h1. Affected node types
+
+With DMS 2.6, when listener of action is executed, the first of all, it will check whether node making event has node type in set of affected node types to continue launch or stop. When registering one action, affected node types contains set values of node types and is kept as property of action node. If this property does not exist or is empty then above checking will be ignored. This property *exo:affectedNodeTypeNames* is in *mix:affectedNodeTypes*:
+
+{code}
+  <nodeType name="mix:affectedNodeTypes" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:affectedNodeTypeNames" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+{code}
+
+
+h1. Service Configuration
+
+{code}
+  <component>
+    <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>
+    <type>org.exoplatform.services.cms.actions.ActionServiceContainerImpl</type>
+    ..............
+  </component>
+{code}
+
+As in many cases the service can get plugins and there are alot of defined actions type pluged-in action service thought actions plugin
+
+
+* Sample action configuration:
+{code}
+       <component-plugin>
+          <name>exo:scriptAction</name>
+          <set-method>addPlugin</set-method>
+          <type>org.exoplatform.services.cms.actions.ScriptActionPlugin</type>
+          <init-params>
+            <object-param>
+              <name>predefined.actions</name>
+              <description>description</description>
+              <object type="org.exoplatform.services.cms.actions.ActionConfig">
+                <field  name="workspace"><string>production</string></field>
+                <field  name="actions">
+                  <collection type="java.util.ArrayList">
+                    <value>
+                      <object type="org.exoplatform.services.cms.actions.ActionConfig$Action">
+                        <field  name="type"><string>$\{action type}</string></field>
+                        <field  name="name"><string>$\{action name}</string></field>
+                        <field  name="description"><string>$\{description}</string></field>
+                        <field  name="srcWorkspace"><string>$\{workspace}</string></field>
+                        <field  name="srcPath"><string>$\{path}</string></field>
+                        <field  name="isDeep"><string>$\{true|false}</string></field>
+                        <field  name="uuid"><string>$\{array uuid}</string></field>
+                        <field  name="nodeTypeName">
+			  <collection type="java.util.ArrayList">
+			    <value><string>$\{nodeTypeName}</string></value>		
+			  </collection>
+			</field>
+                        <field  name="lifecyclePhase">
+			  <collection type="java.util.ArrayList">
+			    <value><string>$\{lifecycle (node_added,node_remove...}</string></value>		
+			  </collection>
+			</field>
+                        <field  name="roles"><string>$\{list of permission can execute this action}</string></field>
+                        <field  name="mixins">
+			  <collection type="java.util.ArrayList">
+			   <value>
+                    	    <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+                             <field  name="name"><string>mix:affectedNodeTypes</string></field>
+                             <field  name="properties">
+                              <string>exo:affectedNodeTypeNames=exo:article,
+                                    exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+                             </field>
+                            </object>
+                           </value>		
+                          </collection>
+                        </field>
+                        <field  name="variables">
+                          <!--
+                                 Map necessary variables to execute action
+                          -->
+                        </field>
+                      </object>
+                    </value>
+                  </collection>
+                </field>
+              </object>
+            </object-param>
+          </init-params>
+        </component-plugin>
+{code}
+
+* Script action plugin: init a send mail script action. In DMS, by default, *isDeep* = true, *uuid* = null, *nodeTypeName* = null.
+
+{code}
+       <component-plugin>
+          <name>exo:scriptAction</name>
+          <set-method>addPlugin</set-method>
+          <type>org.exoplatform.services.cms.actions.ScriptActionPlugin</type>
+          <init-params>
+            <object-param>
+              <name>predefined.actions</name>
+              <description>description</description>
+              <object type="org.exoplatform.services.cms.actions.ActionConfig">
+                <field  name="workspace"><string>production</string></field>
+                <field  name="actions">
+                  <collection type="java.util.ArrayList">
+                    <value>
+                      <object type="org.exoplatform.services.cms.actions.ActionConfig$Action">
+                        <field  name="type"><string>exo:sendMailAction</string></field>
+                        <field  name="name"><string>sendMail</string></field>
+                        <field  name="description"><string>send a notification mail</string></field>
+                        <field  name="srcWorkspace"><string>production</string></field>
+                        <field  name="srcPath"><string>/cms/publications</string></field>
+                        <field  name="isDeep"><string>true</string></field>
+                        <field  name="lifecyclePhase">
+			  <collection type="java.util.ArrayList">
+			    <value><string>read</string></value>		
+			  </collection>
+			</field>
+                        <field  name="roles"><string>*:/admin</string></field>
+                        <field  name="variables">
+                          <string>exo:to=benjamin.mestrallet@exoplatform.com</string>
+                        </field>
+                        <field  name="mixins">
+			  <collection type="java.util.ArrayList">
+			   <value>
+                    	    <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+                             <field  name="name"><string>mix:affectedNodeTypes</string></field>
+                             <field  name="properties">
+                              <string>exo:affectedNodeTypeNames=exo:article,
+                                    exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+                             </field>
+                            </object>
+                           </value>		
+                          </collection>
+                        </field>
+                      </object>
+                    </value>
+                  </collection>
+                </field>
+              </object>
+            </object-param>
+          </init-params>
+        </component-plugin>
+{code}

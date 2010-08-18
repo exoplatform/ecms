@@ -1,0 +1,27 @@
+
+h1. Search documents in Content Browser
+
+
+There are many documents in a specific location so it is difficult to find a document in it. This function is used to support users to search a document in that specific location.
+To search a document, do the followings:
+- Go to *Content Browser*
+- Config for Content Browser
+- Click the
+!icon1!
+ icon on the toolbar to show the search form
+
+
+!form1.gif!
+
+
+- Select the search type in a combo box.
+* With the type 'Content', it will be found in the content of documents
+* With the type 'Category', it will be found in the name of folders or the name of categories
+- Fill the keyword of the documents that you want to find.
+- Click on the *Search now* icon to display all results of searching.
+
+
+!form2.gif!
+
+
+

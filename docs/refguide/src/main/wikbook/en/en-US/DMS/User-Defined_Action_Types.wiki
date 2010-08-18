@@ -1,0 +1,48 @@
+
+h1. User-Defined Action Types
+
+
+
+1\. Login by user 'root'.
+
+2. Go to *ECM Administration* on the navigation bar.
+
+3. Select *Advanced Configuration* -> *Create an Action Type*.
+
+
+!form1.jpg!
+
+
+4. A form will appear:
+
+
+!action.jpg!
+
+
+5. Click the *Add* button to create the new action type.
+
+
+!action2.jpg!
+
+
+6. Select the type of the action: exo:scriptAction.
+
+7. Input a name for the action. The name must be started with "*exo:*"
+
+8. Check/uncheck the *Action Move* option: the action will has exo:move property or not.
+
+9. Select an execute for the *Execute* field.
+
+10. Variables: allows to create multi-values for the action. If you want to add more values for the action, click the
+!icon3.jpg !
+ icon. Click the
+! icon2.jpg!
+ icon to delete a value.
+
+11\. Click the *Save* button to accept adding a new action type.
+
+
+
+
+
+

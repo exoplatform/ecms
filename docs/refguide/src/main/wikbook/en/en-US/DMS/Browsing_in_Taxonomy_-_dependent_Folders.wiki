@@ -1,0 +1,50 @@
+{info}
+Since DMS 2.3
+{info}
+
+h1. Browsing in Taxonomy - dependent Folders
+
+
+
+1\. Sign in with your account.
+
+2. Go to *Content Management*-> *Content Browser*
+
+
+!cont1.png!
+
+
+To configure for *Content Browser*, do the followings:
+
+* Click
+!icon1.jpg!
+ on the right corner of the *Content Browser* portlet and select the *Edit* function:
+
+
+!cont2.png!
+
+
+* Click the *Edit* button, the following form appears:
+
+
+!BCF.gif!
+
+
+* Choose the workspace *system*.
+* Click the *Add Path* icon
+!PS.gif!
+ to choose a path for the field "Categories Path".
+* Choose the path */jcr:system/exo:ecm/exo:taxonomies* thanks to the path selector.
+* Click the *Save* button.
+
+To go back to the view mode:
+
+* Click
+!icon1.jpg!
+ on the right corner of the *Content Browser* portlet and select the *View* function.
+
+You can then browse the category tree as if it were a tree of files in order to find your documents.
+
+
+!CBS.gif!
+

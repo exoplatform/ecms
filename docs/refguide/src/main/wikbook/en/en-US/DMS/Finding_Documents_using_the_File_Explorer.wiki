@@ -1,0 +1,242 @@
+
+h1. Finding Documents using the File Explorer
+
+There are three ways to find documents using the File Explorer, they are: Simple Search, Advanced Search and Quick Search.
+
+
+
+h1. Simple Search
+
+You can search by the properties of the document except document's name.
+
+
+1\. Input a string that is existing in a document you want to find (not in name).
+
+2. Click the
+!MagnifyIcon.png!
+ icon to do searching. The search result will be returned in the right pane.
+
+
+- If no node includes the searching term, the return result will be blank:
+
+
+!Search1.png!
+
+
+- If the searching string has been existing, the return result will be:
+
+
+!Search2.png!
+
+
+{info}
+Since DMS 2.5
+{info}
+
+After inputting a string that you want to search, if the searching string has been existing, the return result will be:
+
+
+!SimpleSearch2.5.jpg!
+
+
+
+3. Click the
+!MagnifyIcon.png!
+ icon to view the content of corresponding search result in the Action column.
+
+
+
+!Search3.png!
+
+
+
+4. Or you can click the
+!BookIcon.png!
+ icon to go to the node that contains the corresponding search result. After clicking this icon, the node contains that search result node will be opened and your screen appears:
+
+
+!Search4.png!
+
+
+
+
+
+h1. Advanced search
+
+
+Click the  !SearchIcon.png
+!  icon  (since DMS 2.5 the search icon !
+ AdIcon.png!). The *Advanced Search* form will appear:
+
+
+!ASearch.png!
+
+
+
+There are more options for you to search: search by Name, search with constraints, search by new/existing query.
+
+h2. Searching by Name
+
+
+To search a node by name, select the first tab *Search by Name* and do the followings:
+
+
+
+!ASearch1.png!
+
+
+
+- Search on this location is the path that you selected to search from
+- Input exactly the name of node that you want to search.
+- Click the *Search* button. It will return "No result found" if there is no node with searching name. If the searching name has been existing, the result will be return in the *Search Result* tab like the simple search.
+
+
+h2. Searching with Constraints
+
+
+This kind of search allows you to search with more constraints to limit the returned results.
+
+
+!ASearch2.png!
+
+
+
+*Current location* is the path that you selected to search from.
+
+By this way, you can do like simple search by inputting the search term into A word or phrase in the content field and then click Search. The result will be returned in the *Search Results* tab.
+
+Or you can search with more constraints:
+
+1\. Input the search term that you want to search in the content fields of nodes.
+
+2. Select the *Operator*
+
+- Select AND when you want to combine the inputed string and the constraints will be added after selecting an operator. The search result will not be blank only when there's a node can be reached both two conditions (the phrase and the constraints).
+- Select OR when you want to combine the inputed string and the constraints will be added after selecting an operator. The search result will not be blank when there's a node can be reached at least one of two conditions (the phrase and the constraints).
+
+3. Click the *Show/hide constraints form* button to add more constraints. The adding constraints form appears:
+
+
+
+!ASearch3.png!
+
+
+
+|| Field  || Meaning ||
+| Operator  | You can add more than one constraint thus there are two operators AND and OR for you to combine. |
+| The second row  |  allows you to add a constraint to search by a property with exactly specific value. |
+| The third row  |  allows you to add a constraint to search by a property that contains one of the word in the specific string. |
+| The fourth row   |  allows you to add a constraint to search by a property that does not contain the specific string. |
+| The fifth row  | allows you to add a constraint to search by a duration of date (created, modified). |
+| The sixth row  | allows you to add a constraint to search by the document type (File, Article, Podcast, Sample node, File Plan, Kofax) |
+| The seventh row  | allows you to add a constraint to search by categories. |
+
+
+
+4. Select the constraint operator (AND/OR).
+
+5. Check the check box corresponding to the row you want to add a constraint.
+
+
+
+h2. Searching by Creating a new Query
+
+
+Select the *New Query* tab, the main screen appears:
+
+
+
+!ASearch4.png!
+
+
+
+This requires you to have to know about the structured and query statements.
+
+There are two types of query for you to choose: SQL and xPath. Do the following guides to create one query:
+
+1\. Input the query name, it must be unique.
+
+2. Select the query type.
+
+3. Input the query statement.
+
+4. Click the *Search* button to review the search result and display the search result in the *Search Results* tab or *Save* to accept creating a new query.
+
+5. The new saved query will be displayed in the existing queries list in the *Saved Query* tab.
+
+
+
+
+
+h2. Searching by the existing Queries
+
+
+Select the *Saved Query* tab:
+
+
+
+!ASearch5.png!
+
+
+
+This is the list of all existing queries that you have right to use. In this example, the first query is the system query, it is created by Administrator, you can not edit or remove it.
+
+
+Click
+!Icon1.png!
+ to see the search results in the *Search Result* tab.
+
+Click
+!Icon2.png!
+ if you want to change the query statement. The editing form appears like when you create new but you can not change its name.
+
+Click
+!Icon3.png!
+ if you want to delete the query if you have the right.
+
+
+
+
+h1. Quick Search
+
+
+This is the quick way for you to use the existing queries to search.
+
+Click
+!Icon4.png!
+ to see the existing queries list.
+
+
+!QSearch.png!
+
+
+
+
+{info}
+Since DMS 2.5
+{info}
+
+Click the
+!QuickIcon.png!
+ icon to see the existing queries list.
+
+
+!Quick.png!
+
+
+The existing queries list appears:
+
+
+
+!QSearch1.png!
+
+
+
+Do the same as when you search by advanced in the *Saved Query* tab.
+
+
+
+
+
+
+

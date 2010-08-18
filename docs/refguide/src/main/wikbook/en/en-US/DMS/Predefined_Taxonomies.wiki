@@ -1,0 +1,112 @@
+h1. Predefined Taxonomies
+
+
+
+
+h1. Service Definition
+
+The service which defines categories is configured into the jar _exo.ecm.dms.component.cms-XXX.jar_ (_exo.ecm.component.cms-XXX.jar_ in old versions) as follow:
+
+{code:xml}
+<component>
+  <key>org.exoplatform.services.cms.categories.CategoriesService</key>
+  <type>org.exoplatform.services.cms.categories.impl.CategoriesServiceImpl</type>
+  ..............
+</component>
+{code}
+
+1 Plugin Definition
+
+The service accepts plugins that can define new taxonomies.
+
+1.1 Component Plugin Part
+
+When the application will process the code below, it will call the method ~~addTaxonomyPlugin(org.exoplatform.services.cms.categories.impl.TaxonomyPlugin)~~ on the implementation of the service ~~org.exoplatform.services.cms.categories.CategoriesService~~.
+
+{code:xml}
+<external-component-plugins>
+  <target-component>org.exoplatform.services.cms.categories.CategoriesService</target-component>
+  <component-plugin>
+    <name>predefinedTaxonomyPlugin</name>
+    <set-method>addTaxonomyPlugin</set-method>
+    <type>org.exoplatform.services.cms.categories.impl.TaxonomyPlugin</type>
+    <init-params>
+    ...............<!-- This part is detailed later in this article -->
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
+{code}
+
+h2. Initial Parameters Part
+
+To be created the class _org.exoplatform.services.cms.categories.impl.TaxonomyPlugin_ needs the following initial parameters
+
+{code:xml}
+<init-params>
+  <value-param>
+    <name>autoCreateInNewRepository</name>
+    <value>true</value>
+  </value-param>
+  <value-param>
+    <name>repository</name>
+    <value>repository</value>
+  </value-param>
+  <object-param>
+    <name>taxonomy.configuration</name>
+    <description>configuration predefined taxonomies to inject in jcr</description>
+    <object type="org.exoplatform.services.cms.categories.impl.TaxonomyConfig">
+     ............... <!- This part is detailed later in this article ->
+    </object>
+  </object-param>
+</init-params>
+{code}
+
+
+| Property Name | *Purpose* |
+| autoCreateInNewRepository | Indicates if the taxonomies must be created in all the repositories available|
+| repository | The name of the repository in which we want to create the taxonomies. ~~Only used if the parameter "autoCreateInNewRepository" has been set to false.~~ |
+| taxonomy.configuration | The object parameter in which we define the taxonomies to create.|
+
+
+1.1 Taxonomy Configuration Part
+
+In this part we define the list of all the categories/taxonomies we would like to create automatically. The example below create the taxonomy called "*myTaxonomyName*" which corresponding path is "*/my/taxonomy/absolute/path*".
+
+{code:xml}
+<object type="org.exoplatform.services.cms.categories.impl.TaxonomyConfig">
+  <field name="taxonomies">
+  <collection type="java.util.ArrayList">
+    <value>
+    <object type="org.exoplatform.services.cms.categories.impl.TaxonomyConfig$Taxonomy">
+      <field name="name"><string>myTaxonomyName</string></field>
+      <field name="path"><string>/my/taxonomy/absolute/path</string></field>
+    </object>
+    </value>
+    ...............
+  </collection>
+  </field>
+</object>
+{code}
+
+
+|| Property Name ||*Purpose* ||
+| name | The name of the taxonomy |
+| path | The absolute path of the taxonomy |
+
+
+h1. Default Configuration Location
+
+The configuration file which defines all the default taxonomies, is located at _/portal/WEB-INF/conf/dms/dms-categories-configuration.xml_ (_/portal/WEB-INF/conf/ecm/ecm-categories-configuration.xml_ in old versions)
+
+h1. How is it working ?
+
+The taxonomy is stored in the JCR at the path _/jcr:system/exo:ecm/exo:taxonomies_. All nodes of the taxonomy have the type _exo:taxonomy_. The name of the category is the path to this category so for example _/cms/sports/football/champions-league_.
+
+# categorized documents have the mixin _exo:categorized_ and in the property _exo:category_ that contains the list of references to the taxonomy tree.
+
+h1. Notes
+
+{note}
+You can only predefine taxonomies when the Java Content Repository has never been initialized. Otherwise, you need to create them manually from the User Interface
+{note}
+
