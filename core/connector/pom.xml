@@ -65,16 +65,7 @@
     </dependency>
   </dependencies>
   <build>
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.properties</include>
-          <include>**/*.xsl</include>
-          <include>**/*.dtd</include>
-        </includes>
-      </resource>
+    <resources>      
       <resource>
         <directory>src/main/resources</directory>
         <includes>
@@ -91,6 +82,8 @@
           <include>**/*.sha1</include>
           <include>**/*.conf</include>
           <include>**/*.gtmpl</include>
+										<include>**/*.xsl</include>
+          <include>**/*.dtd</include>
         </includes>
       </resource>
     </resources>
