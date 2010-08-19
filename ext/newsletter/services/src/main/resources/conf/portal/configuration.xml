@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
+   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+
+  <component>
+    <type>org.exoplatform.services.wcm.newsletter.NewsletterManagerService</type>
+    <init-params>
+      <value-param>
+        <name>repository</name>
+        <value>repository</value>
+      </value-param>
+      <value-param>
+        <name>workspace</name>
+        <value>collaboration</value>
+      </value-param>
+    </init-params>
+  </component>
+  <component>
+    <key>org.exoplatform.services.mail.MailService</key>
+    <type>org.exoplatform.services.mail.impl.MailServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>config</name>
+        <property name="mail.smtp.auth.username" value="exoservice@gmail.com" />
+        <property name="mail.smtp.auth.password" value="exoadmin" />
+        <property name="mail.smtp.host" value="smtp.gmail.com" />
+        <property name="mail.smtp.port" value="465" />
+        <property name="mail.smtp.starttls.enable" value="true" />
+        <property name="mail.smtp.auth" value="true" />
+        <property name="mail.smtp.debug" value="false" />
+        <property name="mail.smtp.socketFactory.port" value="465" />
+        <property name="mail.smtp.socketFactory.class" value="javax.net.ssl.SSLSocketFactory" />
+        <property name="mail.smtp.socketFactory.fallback" value="false" />
+      </properties-param>
+    </init-params>
+  </component>
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <priority>98</priority>
+      <init-params>
+        <values-param>
+          <name>autoCreatedInNewRepository</name>
+          <description>Node types configuration file</description>
+          <value>jar:/conf/wcm-newsletter-nodetypes.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
+</configuration>
