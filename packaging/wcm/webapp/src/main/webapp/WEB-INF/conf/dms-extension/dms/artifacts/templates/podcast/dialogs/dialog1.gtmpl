@@ -151,7 +151,7 @@
 	      <td class="FieldComponent">
 		      <%
 		       String[] fieldSize = ["jcrPath=/node/exo:length", "validate=number"] ;
-		       uicomponent.addTextField("length", fieldSize) ; 
+		       uicomponent.addTextField("medialength", fieldSize) ; 
 		      %>
 		    </td>
 	    </tr>
