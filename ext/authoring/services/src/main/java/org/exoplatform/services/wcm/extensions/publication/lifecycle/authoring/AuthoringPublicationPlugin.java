@@ -155,8 +155,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       addLog(node, versionLog);
     } else if (PublicationDefaultStates.UNPUBLISHED.equalsIgnoreCase(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
-      Value liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
-                               .getValue();
+      Value liveRevision = null;
+      if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
+        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getValue();
+      }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
                          valueFactory.createValue(""));
@@ -183,8 +185,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
-      Value liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
-                               .getValue();
+      Value liveRevision = null;
+      if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
+        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getValue();
+      }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
                          valueFactory.createValue(""));
