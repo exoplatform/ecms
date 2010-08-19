@@ -10,14 +10,7 @@
   <name>eXo WCM Extension JAR</name>
   <description>eXo WCM Extension JAR's configuration</description>
   <build>
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.properties</include>
-        </includes>
-      </resource>
+    <resources>      
       <resource>
         <directory>src/main/resources</directory>
         <includes>

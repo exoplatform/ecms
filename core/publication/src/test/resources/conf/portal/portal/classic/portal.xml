@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portal-config>
+  <portal-name>classic</portal-name>
+  <locale>en</locale>
+  <access-permissions>Everyone</access-permissions>
+  <edit-permission>*:/platform/web-contributors</edit-permission>
+
+  <portal-layout>
+    <container id="ClassicBanner" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
+      <access-permissions>Everyone</access-permissions>
+      <container id="ClassicLogo" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+        <access-permissions>Everyone</access-permissions>
+        <portlet-application>
+          <portlet>
+            <application-ref>presentation</application-ref>
+            <portlet-ref>SingleContentViewer</portlet-ref>
+            <preferences>
+              <preference>
+                <name>repository</name>
+                <value>repository</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>workspace</name>
+                <value>collaboration</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeIdentifier</name>
+                <value>/sites content/live/classic/web contents/site artifacts/Logo</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowQuickEdit</name>
+                <value>true</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowPrintAction</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowTitle</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+            </preferences>
+          </portlet>
+          <title>Logo</title>
+          <access-permissions>Everyone</access-permissions>
+          <show-info-bar>false</show-info-bar>
+          <show-application-state>false</show-application-state>
+          <show-application-mode>false</show-application-mode>
+        </portlet-application>
+      </container>
+
+      <container id="ClassicSearch" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+        <access-permissions>Everyone</access-permissions>
+        <portlet-application>
+          <portlet>
+            <application-ref>presentation</application-ref>
+            <portlet-ref>SingleContentViewer</portlet-ref>
+            <preferences>
+              <preference>
+                <name>repository</name>
+                <value>repository</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>workspace</name>
+                <value>collaboration</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeIdentifier</name>
+                <value>/sites content/live/classic/web contents/site artifacts/Signin</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowQuickEdit</name>
+                <value>true</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowPrintAction</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowTitle</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+            </preferences>
+          </portlet>
+          <title>Sign in</title>
+          <access-permissions>Everyone</access-permissions>
+          <show-info-bar>false</show-info-bar>
+          <show-application-state>false</show-application-state>
+          <show-application-mode>false</show-application-mode>
+        </portlet-application>
+      </container>
+
+      <container id="ClassicSignin" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+        <access-permissions>Everyone</access-permissions>
+        <portlet-application>
+          <portlet>
+            <application-ref>presentation</application-ref>
+            <portlet-ref>SingleContentViewer</portlet-ref>
+            <preferences>
+              <preference>
+                <name>repository</name>
+                <value>repository</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>workspace</name>
+                <value>collaboration</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeIdentifier</name>
+                <value>/sites content/live/classic/web contents/site artifacts/Searchbox</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowQuickEdit</name>
+                <value>true</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowPrintAction</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>ShowTitle</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
+            </preferences>
+          </portlet>
+          <title>Search box</title>
+          <access-permissions>Everyone</access-permissions>
+          <show-info-bar>false</show-info-bar>
+          <show-application-state>false</show-application-state>
+          <show-application-mode>false</show-application-mode>
+        </portlet-application>
+      </container>
+    </container>
+
+    <page-body>
+    </page-body>
+
+    <portlet-application>
+      <portlet>
+        <application-ref>presentation</application-ref>
+        <portlet-ref>SingleContentViewer</portlet-ref>
+        <preferences>
+          <preference>
+            <name>repository</name>
+            <value>repository</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>workspace</name>
+            <value>collaboration</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>nodeIdentifier</name>
+            <value>/sites content/live/classic/web contents/site artifacts/Footer</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowQuickEdit</name>
+            <value>true</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowPrintAction</name>
+            <value>false</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowTitle</name>
+            <value>false</value>
+            <read-only>false</read-only>
+          </preference>
+        </preferences>
+      </portlet>
+      <title>Footer</title>
+      <access-permissions>Everyone</access-permissions>
+      <show-info-bar>false</show-info-bar>
+      <show-application-state>false</show-application-state>
+      <show-application-mode>false</show-application-mode>
+    </portlet-application>
+  </portal-layout>
+
+</portal-config>

@@ -190,17 +190,9 @@
           <include>**/*.conf</include>
           <include>**/*.gtmpl</include>
           <include>**/*.groovy</include>
+										<include>**/*.jpg</include>
         </includes>
-      </testResource>
-      <testResource>
-        <directory>src/test/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.gtmpl</include>
-          <include>**/*.groovy</include>
-          <include>**/*.jpg</include>
-        </includes>
-      </testResource>
+      </testResource>      
     </testResources>
     <plugins>
       <plugin>

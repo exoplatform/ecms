@@ -1,0 +1,45 @@
+<style>
+	.FileContent {  
+	  padding: 10px;
+	  font-family: Verdana;
+	  color: #0e396c; font-size: 11px;
+	}
+	
+	.FileContent .NavigationContainer{  
+	  padding-bottom: 5px;
+	}
+	
+	.FileContent .TopTitle{  
+	  padding-left: 10px;
+	  height: 21px; line-height: 21px;
+	  font-family: Verdana;
+	  color: #058ee6; font-weight: bold; 
+	  background: url('/ecm/skin/images/file/TitleBG1x21.gif') repeat-x;
+	  border: 1px solid #cbcbcb;
+	}
+	
+	.FileContent .Content {  
+	  padding: 10px;
+	  border: 1px solid #cbcbcb; 
+	  border-top: none;
+	  overflow: auto;
+	}
+		
+</style>
+<%
+	def node = uicomponent.getNode() ;
+%>
+<div class="FileContent">
+	<div class="NavigationContainer">  			
+		<div class="TopTitle">$node.name</div>
+		<div class="Content">
+			<%
+	  		if(node.hasProperty("jcr:data") && node.hasProperty("jcr:mimeType")) {
+	  	 		if(node.getProperty("jcr:mimeType").getString().startsWith("text")) {
+	  	 		  println "<pre>" + uicomponent.encodeHTML(node.getProperty("jcr:data").getString()) + "</pre>";		  	
+	  	 	  }
+	  	 	}
+	  	%>	  	 
+		</div>	
+	</div>  			  			
+</div>

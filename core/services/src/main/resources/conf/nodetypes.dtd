@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nodeTypes [
+	<!ELEMENT nodeTypes (nodeType)*>
+		<!ELEMENT nodeType (supertypes?|propertyDefinitions?|childNodeDefinitions?)>
+
+    <!-- 18.01.06: primaryItemName, hasOrderableChildNodes attributes is optional -->
+		<!ATTLIST nodeType
+			name CDATA #REQUIRED
+			isMixin (true|false) #REQUIRED
+ 			hasOrderableChildNodes (true|false)
+			primaryItemName CDATA
+		>
+		<!ELEMENT supertypes (supertype*)>
+		<!ELEMENT supertype (CDATA)>
+	
+		<!ELEMENT propertyDefinitions (propertyDefinition*)>
+
+		<!ELEMENT propertyDefinition (valueConstraints?|defaultValues?)>
+		<!ATTLIST propertyDefinition
+			name CDATA #REQUIRED
+			requiredType (String|Date|Path|Name|Reference|Binary|Double|Long|Boolean|undefined) #REQUIRED
+			autoCreated (true|false) #REQUIRED
+			mandatory (true|false) #REQUIRED
+			onParentVersion (COPY|VERSION|INITIALIZE|COMPUTE|IGNORE|ABORT) #REQUIRED
+			protected (true|false) #REQUIRED
+			multiple  (true|false) #REQUIRED
+		>    
+    <!-- For example if you need to set ValueConstraints [], 
+      you have to add empty element <valueConstraints/>. 
+      Same order for other properties like defaultValues, requiredPrimaryTypes etc.
+      -->  
+		<!ELEMENT valueConstraints (valueConstraint*)>
+		<!ELEMENT valueConstraint (CDATA)>
+		<!ELEMENT defaultValues (defaultValue*)>
+		<!ELEMENT defaultValue (CDATA)>
+
+		<!ELEMENT childNodeDefinitions (childNodeDefinition*)>
+
+		<!ELEMENT childNodeDefinition (requiredPrimaryTypes)>
+		<!ATTLIST childNodeDefinition
+			name CDATA #REQUIRED
+			defaultPrimaryType  CDATA #REQUIRED
+			autoCreated (true|false) #REQUIRED
+			mandatory (true|false) #REQUIRED
+			onParentVersion (COPY|VERSION|INITIALIZE|COMPUTE|IGNORE|ABORT) #REQUIRED
+			protected (true|false) #REQUIRED
+			sameNameSiblings (true|false) #REQUIRED
+		>
+		<!ELEMENT requiredPrimaryTypes (requiredPrimaryType+)>
+		<!ELEMENT requiredPrimaryType (CDATA)>  
+]>

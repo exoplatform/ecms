@@ -1,0 +1,99 @@
+<style>
+  ul.menu img {cursor: pointer; width: 16px; height: 16px; margin-left: -20px;}
+  ul.menu, ul.menu ul {text-align: left; list-style-type: none;}
+  ul.menu li {list-style-type: none; list-style-image: none; margin-left: -20px;}
+  ul.menu ul {display: none;}
+</style>
+
+<script>
+  var currentObject;
+  function expand(n)
+  {
+    var img = n.firstChild;
+    while ( img.nodeName != "IMG" )
+      img = img.nextSibling;
+    var ul = n;
+    while ( ul.nodeName != "UL" )
+      ul = ul.nextSibling;
+    if(ul.style.display == 'block') {
+      img.src = "/cms-content/images/small/collapsed.gif";
+      ul.style.display = 'none';
+    }
+    else {
+      img.src = "/cms-content/images/small/expanded.gif";
+      ul.style.display = 'block';
+    }
+  }
+</script>
+</head>
+<body bgcolor="#FFFFFF">
+
+#set($node = $uicomponent.getNode())
+#set($childs = $node.getChildNodes())<br><br>
+
+<ul class="menu">
+  <li>
+      <img onclick="javascript:expand(this)" src="/cms-content/images/small/collapsed.gif" alt=""/>
+      <a href="#" onclick="javascript:expand(this)" style="font-weight: bold">Properties</a>
+    <ul>
+      #if($childs.size() > 0)
+        #foreach($child in $childs)
+          #set($type = $child.getProperty("jcr:primaryType").getString())
+          #if($type.equals("nt:file"))
+            #set($name = $child.getName())
+            #set($content = $child.getNode("jcr:content"))
+            #set($data = $content.getProperty("jcr:data").getString())
+            #set($mime = $content.getProperty("jcr:mimeType").getString())
+            #set($inputname = "component_${velocityCount}" )
+            #if($mime.startsWith("text/plain"))
+              <li>
+                <div class="detail">
+                  <div class="row">
+                    <label>${name}:</label>
+                    #jsfDialogFormField("inputName=$inputname" "jcrPath=/node/${name}/jcr:content/jcr:data" "widget=textarea")
+                  </div>
+                </div>
+              </li>
+            #end
+          #end
+        #end
+      #end
+    </ul>
+  </li>
+</ul>
+<ul class="menu">
+  <li>
+    <>
+      <img onclick="javascript:expand(this)" src="/cms-content/images/small/collapsed.gif" alt=""/>
+      <a href="#" onclick="javascript:expand(this)" style="font-weight: bold"> XML </a>
+    <ul>
+      #if($childs.size() > 0)
+        #foreach($child in $childs)
+          #set($type = $child.getProperty("jcr:primaryType").getString())
+          #if($type.equals("nt:file"))
+            #set($name = $child.getName())
+            #set($content = $child.getNode("jcr:content"))
+            #set($data = $content.getProperty("jcr:data").getString())
+            #set($mime = $content.getProperty("jcr:mimeType").getString())
+            #set( $inputname = "component_${velocityCount}" )	
+            #if($mime.startsWith("text/xml"))
+              <li>
+                <div class="detail">
+                  <div class="row">
+                    <label>${name}:</label>
+                    #if($name.endsWith("xpdl"))
+                      #jsfDialogFormField("inputName=$inputname" "jcrPath=/node/${name}/jcr:content/jcr:data" "widget=textarea"  "editable=false")
+                    #else
+                      #jsfDialogFormField("inputName=$inputname" "jcrPath=/node/${name}/jcr:content/jcr:data" "widget=textarea")
+                    #end
+                  </div>
+                </div>
+              </li>
+            #end
+          #end
+        #end
+      #end <br>
+    </ul>
+  </li>
+</ul><br>
+</body>

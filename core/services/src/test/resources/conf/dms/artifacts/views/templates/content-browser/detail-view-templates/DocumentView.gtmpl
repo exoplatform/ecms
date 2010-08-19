@@ -1,0 +1,83 @@
+<%
+  import org.exoplatform.ecm.webui.component.browsecontent.UIToolBar ;
+	import org.exoplatform.ecm.webui.component.browsecontent.UIDocumentDetail ; 	
+	import org.exoplatform.ecm.webui.component.browsecontent.UISearchController ;
+	import org.exoplatform.ecm.webui.utils.Utils ;
+	
+	def subDocumentList =  uicomponent.getCurrentList() ;
+	boolean hasNoDocument = subDocumentList.isEmpty() ;
+	String componentName = uicomponent.getName() ;
+  int totalPages = uicomponent.getNumberOfPage() ;
+%>
+<div class="UIBrowseContainer" id="$uicomponent.id">
+  <%
+  	if(uicomponent.isCommentAndVote()) uicomponent.renderChild(UIToolBar.class);  	
+		uicomponent.renderChild(UIDocumentDetail.class) ;
+		if(uicomponent.isShowDocumentList()) { 		  
+	%>
+		<div class="UIDocumentList">
+			<%/*Begin UIEventViewer*/%>
+			<div class="UIEventViewer">
+		 	<%if(!hasNoDocument){%>
+  				<div class="EventContent">
+	      <%
+	        for(Node doc in subDocumentList) {
+	        	try {
+		        	String objectId = doc.getPath() + "&category=" + uicomponent.getCategoryPath() ;
+		          String viewAction = uicomponent.event("ChangeNode",objectId);
+		          String iconName = uicomponent.getIcons(doc,"16x16Icon") ;
+		          String docName = doc.getPath().substring(doc.getPath().lastIndexOf("/") + 1) ;
+		      %>
+		          <div class="EventContentDetail">
+		            <div class="TopEventContentDetail">
+		              <table>  
+		                 <tr>
+		                  <td>
+		                    <div class="DocNodeIcon CBDefaultDocument16x16Icon $iconName">
+			                    <%if(Utils.isSymLink(doc)) {%>
+		                       <div class="LinkSmall"></div>
+		                      <%}%>
+		                    </div>
+		                    <div class="EventDocumentLabel">
+		                      <a href="$viewAction"><%=docName%></a>
+		                    </div>  
+		                  </td>
+		                  <td class="EventAuthorNameLabel">
+		                  	<%=_ctx.appRes(componentName + ".label.author")%>:<%=uicomponent.getOwner(doc)%>
+		                  </td>	                  
+		                </tr>        
+		              </table>
+		            </div>
+		            <div class="MainEventContent">
+		              <div class="SummaryTitleLabel">
+		              	<%=_ctx.appRes(componentName + ".label.summary")%>:
+		                <%if(doc.hasProperty("exo:summary")){%>
+		                 <%=doc.getProperty("exo:summary").getString()%>
+		                <%}%>
+		              </div>
+		            </div>
+		          </div>
+	      <%
+	          } catch(Exception e) {
+	            continue ;
+	          }
+	        }
+	      %>
+   			</div>
+   			<% if(totalPages>1){ %>
+		    <div class="DocumentsPageIterator"><%_ctx.renderUIComponent(uicomponent.getUIPageIterator());%></div>
+		    <% } %>
+		    <div style="clear:left"><span></span></div>
+   		<%}%>
+	    <div class="ViewPreviousDocument"> 
+	      <div class="BackIcon"><span></span></div>
+	      <a href="<%=uicomponent.event('Back')%>">
+	      	<%=_ctx.appRes(componentName + ".label.previous")%>
+	      </a>
+	      <div style="clear:left"><span></span></div>
+	    </div>
+			<%/*End UIEventViewer*/%>
+			</div>
+		</div>
+	<%}%>
+</div>

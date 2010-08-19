@@ -1,0 +1,176 @@
+<div class="UIForm FormLayout"> 
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">
+  	<table class="UIFormGrid">	  
+  		<tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.supplemental-marking-list")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldSupplemental = ["jcrPath=/node/rma:supplementalMArkingList"] ;
+		        uicomponent.addTextField("supplementalMArkingList", fieldSupplemental) ; 
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.subject")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldSubject = ["jcrPath=/node/rma:subject"] ;
+		        uicomponent.addTextField("subject", fieldSubject) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.record-identifier")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldRecordIdentifier = ["jcrPath=/node/rma:recordIdentifier"] ;
+		        uicomponent.addTextField("recordIdentifier", fieldRecordIdentifier) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.originator")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldOriginator = ["jcrPath=/node/rma:Originator"] ;
+		        uicomponent.addTextField("originator", fieldOriginator) ;        
+		      %>
+				</td>	      
+			</tr>
+			<tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.format")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldFormat = ["jcrPath=/node/rma:format"] ;
+		        uicomponent.addTextField("format", fieldFormat) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.addresses")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldAddressees = ["jcrPath=/node/rma:addressees"] ;
+		        uicomponent.addTextField("addressees", fieldAddressees) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.originating-organization")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldOriginating = ["jcrPath=/node/rma:originatingOrganization"] ;
+		        uicomponent.addTextField("originatingOrganization", fieldOriginating) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.other-addresses")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldOtherAddressees = ["jcrPath=/node/rma:otherAddressees"] ;
+		        uicomponent.addTextField("otherAddressees", fieldOtherAddressees) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.publication-date")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldPublicationDate = ["jcrPath=/node/rma:publicationDate", "options=displaytime", "visible=true"] ;
+		        uicomponent.addCalendarField("publicationDate", fieldPublicationDate) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.record-note")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldRecordNote = ["jcrPath=/node/rma:recordNote"] ;
+		        uicomponent.addTextField("recordNote", fieldRecordNote) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.date-received")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldDateReceived = ["jcrPath=/node/rma:dateReceived", "options=displaytime", "visible=true"] ;
+		        uicomponent.addCalendarField("dateReceived", fieldDateReceived) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.media-format")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldMediaFormat = ["jcrPath=/node/rma:mediaFormat"] ;
+		        uicomponent.addTextField("mediaFormat", fieldMediaFormat) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.is-obsolete")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldIsObsolete = ["jcrPath=/node/rma:isObsolete", "options= ,true,false"] ;
+		        uicomponent.addSelectBoxField("isObsolete", fieldIsObsolete) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.date-field")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldDate = ["jcrPath=/node/rma:dateFiled", "options=displaytime", "visible=true"];
+		        uicomponent.addCalendarField("dateFiled", fieldDate) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.superseded")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldSuperseded = ["jcrPath=/node/rma:superseded"] ;
+		        uicomponent.addTextField("superseded", fieldSuperseded) ;        
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Record.dialog.label.uuid")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldUUID = ["jcrPath=/node/rma:uuid"] ;
+		        uicomponent.addTextField("uuid", fieldUUID) ;        
+		      %>
+		    </td>
+		  </tr>
+		</table>
+		<%/* start render action*/%>
+		<div class="UIAction"> 
+	    <table class="ActionContainer">
+	    	<tr>
+	    		<td>
+			      <% for(action in uicomponent.getActions()) {
+			      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ; 
+								 String link = uicomponent.event(action) ;
+			      %>
+			          <div onclick="$link" class="ActionButton LightBlueStyle">
+									<div class="ButtonLeft">
+									  <div class="ButtonRight">
+										  <div class="ButtonMiddle">
+										    <a href="javascipt:void(0);">$actionLabel</a>
+								      </div>
+								    </div>
+							    </div>
+								</div>
+			      <%}%>          
+	      	</td>
+	      </tr>
+	    </table>
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

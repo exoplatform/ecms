@@ -86,9 +86,10 @@
   <build>
     <resources>
       <resource>
-        <directory>src/main/java</directory>
+        <directory>src/main/resources</directory>
         <includes>
           <include>**/*.xml</include>
+										<include>**/*.properties</include>
         </includes>
       </resource>
     </resources>
@@ -110,13 +111,7 @@
           <include>**/*.conf</include>
           <include>**/*.gtmpl</include>
         </includes>
-      </testResource>
-      <testResource>
-        <directory>src/test/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-      </testResource>
+      </testResource>      
     </testResources>
     <plugins>
       <plugin>

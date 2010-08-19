@@ -1,0 +1,836 @@
+<nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
+  xmlns:jcr="http://www.jcp.org/jcr/1.0">
+       
+  <nodeType name="exo:addMetadataAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:scriptAction</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>ecm-explorer/action/AddMetadataScript.groovy</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="exo:mixinMetadata" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY"
+        protected="false" multiple="false"/>
+    </propertyDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:sendMailAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:scriptAction</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>ecm-explorer/action/SendMailScript.groovy</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="exo:to" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY"
+        protected="false" multiple="false"/>
+    </propertyDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:transformBinaryToTextAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:scriptAction</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>ecm-explorer/action/TransformBinaryChildrenToTextScript.groovy</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="exo:ReloadBPAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:scriptAction</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>ecm-explorer/action/ReloadBPScript.groovy</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:processRecordAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:scriptAction</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>ecm-explorer/action/ProcessRecordsScript.groovy</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>        
+  
+  <nodeType name="exo:workflowAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:businessProcessAction</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:validator" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false"/>
+      <propertyDefinition name="exo:businessProcess" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>content-validation</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:backupAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:businessProcessAction</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:businessProcess" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>content-backup</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="exo:businessProcessModel" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
+    <supertypes>
+      <supertype>nt:unstructured</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:businessProcessId" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="nt:file" autoCreated="false"
+        mandatory="false" onParentVersion="VERSION" protected="false"
+        sameNameSiblings="true">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:file</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:relationable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:relation" requiredType="Reference" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>        
+    </propertyDefinitions>
+  </nodeType> 
+
+  <nodeType name="exo:rss-enable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:title" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:summary" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+    </propertyDefinitions>
+  </nodeType>   
+
+  <nodeType name="exo:article" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+      <supertype>mix:referenceable</supertype>
+      <supertype>exo:rss-enable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:text" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+    </propertyDefinitions>
+    <childNodeDefinitions>
+        <childNodeDefinition name="*" defaultPrimaryType="nt:file" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" sameNameSiblings="true">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:file</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>   
+  
+  <nodeType name="exo:tab" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:buttons" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>    
+  </nodeType>
+  
+  <nodeType name="exo:view" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:accessPermissions" requiredType="String" autoCreated="false" mandatory="true" 
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>      
+      <propertyDefinition name="exo:template" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>   
+    </propertyDefinitions>
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="" autoCreated="false" mandatory="false"
+        onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes> 
+            <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>     
+      </childNodeDefinition>
+    </childNodeDefinitions>    
+  </nodeType>
+  
+  <nodeType name="exo:published" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:startPublication" requiredType="Date" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:endPublication" requiredType="Date" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+    </propertyDefinitions>
+  </nodeType>    
+  
+  <nodeType name="exo:categorized" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:category" requiredType="Reference" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>        
+    </propertyDefinitions>
+  </nodeType>
+      
+  <nodeType name="exo:template" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:templateFile" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:roles" requiredType="String" autoCreated="true" mandatory="true" onParentVersion="COPY"
+        protected="false" multiple="true">
+        <valueConstraints/>        
+        <defaultValues>
+          <defaultValue>*</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:taxonomy" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+    </supertypes> 
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="" autoCreated="false" mandatory="false"
+        onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes> 
+            <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>     
+      </childNodeDefinition>
+    </childNodeDefinitions>   
+  </nodeType>
+  
+  <nodeType name="exo:drive" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+    	<supertype>nt:base</supertype>
+    </supertypes> 
+    <propertyDefinitions>
+      <propertyDefinition name="exo:accessPermissions" requiredType="String" autoCreated="false" mandatory="true" 
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>      
+      <propertyDefinition name="exo:path" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:workspace" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:views" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:icon" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewPreferences" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewNonDocument" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewSideBar" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:showHiddenNode" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:allowCreateFolders" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>      
+    </propertyDefinitions>
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="" autoCreated="false" mandatory="false"
+        onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes> 
+            <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>     
+      </childNodeDefinition>
+    </childNodeDefinitions>   
+  </nodeType>    
+  <nodeType name="exo:createRSSFeedAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:scriptAction</supertype>
+    </supertypes>
+    <propertyDefinitions>        
+      <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <defaultValues>
+          <defaultValue>ecm-explorer/action/RSSScript.groovy</defaultValue>
+        </defaultValues>
+      </propertyDefinition>                                    
+      <propertyDefinition name="exo:feedTitle" requiredType="String" autoCreated="false" mandatory="true" 
+        onParentVersion="COPY" protected="false" multiple="false" /> 
+               
+      <propertyDefinition name="exo:feedType" requiredType="String" autoCreated="false" mandatory="true"
+	      onParentVersion="COPY" protected="false" multiple="false" />
+	      
+	    <propertyDefinition name="exo:link" requiredType="String" autoCreated="false" mandatory="true"
+	      onParentVersion="COPY" protected="false" multiple="false" />
+	    
+	    <propertyDefinition name="exo:description" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:language" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:copyright" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />    
+      
+      <propertyDefinition name="exo:pubDate" requiredType="Date" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:ownerName" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:ownerEmail" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:imageURL" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:category" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:keywords" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:storePath" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:feedName" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:rssVersion" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />  
+      
+      <propertyDefinition name="exo:queryPath" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />
+       
+      <propertyDefinition name="exo:url" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false" />
+    </propertyDefinitions>
+  </nodeType>  
+  
+  <nodeType name="exo:podcast" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:file</supertype>
+    </supertypes>
+    <propertyDefinitions>
+    	<propertyDefinition name="exo:title" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:link" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:author" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:explicit" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:podcastCategory" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:keywords" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:publishedDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:description" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:length" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+    <!--
+    <childNodeDefinitions>
+      <childNodeDefinition name="exo:media" defaultPrimaryType="" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:file</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+    -->
+  </nodeType>
+  
+  <nodeType name="exo:sample" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+      <supertype>exo:rss-enable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:title" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>      
+      </propertyDefinition>
+      <propertyDefinition name="exo:description" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>
+      <propertyDefinition name="exo:date" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+      <propertyDefinition name="exo:datetime" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+      <propertyDefinition name="exo:summary" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:content" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+    <childNodeDefinitions>
+        <childNodeDefinition name="*" defaultPrimaryType="nt:file" autoCreated="false" mandatory="false"
+        onParentVersion="VERSION" protected="false" sameNameSiblings="true">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:file</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+      <childNodeDefinition name="exo:image" defaultPrimaryType="nt:resource" autoCreated="false" mandatory="false"
+        onParentVersion="VERSION" protected="false" sameNameSiblings="true">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:resource</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:watchable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:rssWatcher" requiredType="String" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:emailWatcher" requiredType="String" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>        
+    </propertyDefinitions>          
+  </nodeType>
+      
+  <nodeType name="exo:mail" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>      
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:from" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>      
+      </propertyDefinition>
+      <propertyDefinition name="exo:to" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>
+      <propertyDefinition name="exo:cc" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>
+      <propertyDefinition name="exo:bcc" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>
+      <propertyDefinition name="exo:subject" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>
+      <propertyDefinition name="exo:content" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>
+      <propertyDefinition name="exo:sendDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+      <propertyDefinition name="exo:receivedDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>       
+    </propertyDefinitions>    
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="nt:file" autoCreated="false" mandatory="false"
+        onParentVersion="VERSION" protected="false" sameNameSiblings="true">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:file</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>      
+    </childNodeDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:getMailAction" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:scriptAction</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:script" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <defaultValues>
+          <defaultValue>ecm-explorer/action/GetMailScript.groovy</defaultValue>
+        </defaultValues>
+    	</propertyDefinition>      
+      <propertyDefinition name="exo:protocol" requiredType="String" autoCreated="false" mandatory="true"
+	    	onParentVersion="COPY" protected="false" multiple="false" />
+	    <propertyDefinition name="exo:host" requiredType="String" autoCreated="false" mandatory="true"
+	    	onParentVersion="COPY" protected="false" multiple="false" />
+	    <propertyDefinition name="exo:port" requiredType="String" autoCreated="false" mandatory="true"
+	    	onParentVersion="COPY" protected="false" multiple="false" />
+	    <propertyDefinition name="exo:folder" requiredType="String" autoCreated="false" mandatory="true"
+	    	onParentVersion="COPY" protected="false" multiple="false" />
+	    <propertyDefinition name="exo:userName" requiredType="String" autoCreated="false" mandatory="true"
+	    	onParentVersion="COPY" protected="false" multiple="false" />
+	    <propertyDefinition name="exo:password" requiredType="String" autoCreated="false" mandatory="true"
+	    	onParentVersion="COPY" protected="false" multiple="false" />	    
+	    <propertyDefinition name="exo:description" requiredType="String" autoCreated="false" mandatory="true"
+	    	onParentVersion="COPY" protected="false" multiple="false" />	    
+	    <propertyDefinition name="exo:storePath" requiredType="String" autoCreated="false" mandatory="true"
+	    	onParentVersion="COPY" protected="false" multiple="false" />	    
+    </propertyDefinitions>    
+  </nodeType>
+  
+  <nodeType name="exo:tag" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+    </supertypes>
+    <propertyDefinitions>     
+      <propertyDefinition name="exo:tagCreatedDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+      <propertyDefinition name="exo:lastUpdatedDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+      <propertyDefinition name="exo:tagStatus" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+    </propertyDefinitions>      
+  </nodeType>
+    
+  <nodeType name="exo:tagStyle" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+    </supertypes>
+    <propertyDefinitions>     
+      <propertyDefinition name="exo:styleRange" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+      <propertyDefinition name="exo:htmlStyle" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+    </propertyDefinitions>      
+  </nodeType>
+  
+  <nodeType name="exo:folksonomized" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:folksonomy" requiredType="Reference" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>        
+    </propertyDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:schedulableInfo" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+    	<propertyDefinition name="exo:scheduledInitiator" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+     	</propertyDefinition>        
+    	<propertyDefinition name="exo:jobName" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+     	</propertyDefinition>        
+     	<propertyDefinition name="exo:jobGroup" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+     	</propertyDefinition>        
+     	<propertyDefinition name="exo:jobClass" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+     	</propertyDefinition>        
+     	<propertyDefinition name="exo:jobDescription" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+     	</propertyDefinition>        
+      <propertyDefinition name="exo:scheduleType" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:startTime" requiredType="Date" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:endTime" requiredType="Date" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:repeatCount" requiredType="Long" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:timeInterval" requiredType="Long" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+      <propertyDefinition name="exo:cronExpression" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition> 
+      <propertyDefinition name="exo:counter" requiredType="Long" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>0</defaultValue>
+        </defaultValues>
+      </propertyDefinition>             
+    </propertyDefinitions>
+  </nodeType>
+  
+  <nodeType name="mix:i18n" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:language" requiredType="String" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>English</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+    </propertyDefinitions>
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="nt:unstructured" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:unstructured</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+  <nodeType name="mix:sharedQuery" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+	  <propertyDefinitions>	
+	  	<propertyDefinition name="exo:accessPermissions" requiredType="String" autoCreated="false" mandatory="false"
+		   onParentVersion="COPY" protected="false" multiple="true">
+		    <valueConstraints/>        
+		  </propertyDefinition>
+		  <propertyDefinition name="exo:cachedResult" requiredType="Boolean" autoCreated="false" mandatory="false"
+		    onParentVersion="COPY" protected="false" multiple="false">
+		    <valueConstraints/>        
+		  </propertyDefinition>
+	  </propertyDefinitions> 
+  </nodeType>
+  
+  <nodeType name="mix:votable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:votingRate" requiredType="Double" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>0</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+			<propertyDefinition name="exo:voteTotal" requiredType="Long" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>0</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+			<propertyDefinition name="exo:voteTotalOfLang" requiredType="Long" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>0</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+			<propertyDefinition name="exo:voter" requiredType="String" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="true">        
+      </propertyDefinition>			
+    </propertyDefinitions>			
+  </nodeType>
+  
+  <nodeType name="exo:hiddenable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+    </propertyDefinitions>			
+  </nodeType>
+  
+  <nodeType name="mix:commentable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  	
+	<nodeType	name="exo:comments" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">  		
+		<supertypes>      
+      <supertype>nt:unstructured</supertype>           
+    </supertypes>
+		<propertyDefinitions>
+			<propertyDefinition name="exo:commentor" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>
+			<propertyDefinition name="exo:commentorEmail" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>
+			<propertyDefinition name="exo:commentorSite" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>
+			<propertyDefinition name="exo:commentDate" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>	  			  		
+			<propertyDefinition name="exo:commentContent" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>	  		
+		</propertyDefinitions>			
+ 	</nodeType>
+ 
+  <nodeType name="exo:symlink" isMixin="false" hasOrderableChildNodes="false" primaryItemName="exo:primaryType">
+		<supertypes>
+		  <supertype>nt:hierarchyNode</supertype>
+		</supertypes>
+		<propertyDefinitions>
+			<propertyDefinition name="exo:workspace" requiredType="String" autoCreated="false" mandatory="false"
+			onParentVersion="COPY" protected="false" multiple="false">
+			  <valueConstraints/>
+			</propertyDefinition>
+			<propertyDefinition name="exo:uuid" requiredType="String" autoCreated="false" mandatory="true"
+			onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>
+			<propertyDefinition name="exo:primaryType" requiredType="Name" autoCreated="false" mandatory="true"
+				onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>
+		</propertyDefinitions>
+	</nodeType> 	
+ 		
+ 	
+ 	<nodeType name="exo:musicFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName=""> 		
+  </nodeType>
+  
+  <nodeType name="exo:documentFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+ 	</nodeType>
+  
+  <nodeType name="exo:pictureFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
+  <nodeType name="exo:searchFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
+  <nodeType name="exo:videoFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
+	<nodeType name="mix:cms" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+		<propertyDefinitions>
+			<propertyDefinition name="exo:totalScore"	requiredType="Long" autoCreated="false" mandatory="false"	onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints />
+			</propertyDefinition>
+			<propertyDefinition name="exo:averageScore" requiredType="Double" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints />
+			</propertyDefinition>
+			<propertyDefinition name="exo:moveable" requiredType="Boolean" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints />
+			</propertyDefinition>
+	   	<propertyDefinition name="exo:linkdata" requiredType="Reference" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+	   	</propertyDefinition> 
+		</propertyDefinitions>
+	</nodeType>
+  
+   	 	       	             
+</nodeTypes>
+  
+	
+
+
+  

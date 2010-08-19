@@ -1,0 +1,134 @@
+
+<div class="UIFormWithTitle">
+  <div class="TitleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></div>
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">
+  	<table class="UIFormGrid">	  
+  		<tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.id")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldId = ["jcrPath=/node", "editable=false", "visible=if-not-null"] ;
+						uicomponent.addMixinField("id", fieldId) ;  
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.name")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty"];
+		        uicomponent.addTextField("actionName", fieldName);
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.lifecycle")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", "options=read,add,remove,modify"] ;
+		        uiform.addSelectBoxField("lifecycle", fieldLifecycle) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.protocol")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldProtocol = ["jcrPath=/node/exo:protocol", "options=pop3,imap"] ; 
+		        uicomponent.addSelectBoxField("protocol", fieldProtocol) 
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.host")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		       	String[] fieldHost = ["jcrPath=/node/exo:host"] ;
+		        uicomponent.addTextField("host", fieldHost)  ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.port")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldPort = ["jcrPath=/node/exo:port", "validate=number"] ;
+		        uicomponent.addTextField("port", fieldPort)  ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.folder")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldFolder = ["jcrPath=/node/exo:folder", "Inbox"] ;
+		        uicomponent.addTextField("folder", fieldFolder)  ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.username")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldUsername = ["jcrPath=/node/exo:userName", "support@exoplatform.com", "validate=email"] ;
+		        uicomponent.addTextField("userName", fieldUsername)  ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.password")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldPassword = ["jcrPath=/node/exo:password", "type=password"] ;
+		        uicomponent.addTextField("password", fieldPassword)  ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.description")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldDescription = ["jcrPath=/node/exo:description"] ;         
+						uicomponent.addTextAreaField("description", fieldDescription) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.stote-path")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        def storePath = "Users/" + uicomponent.getSesssion().getUserID() + "/Private/Mail";
+		        String[] fieldStorePath = ["jcrPath=/node/exo:storePath", storePath] ;
+		        uicomponent.addTextField("storePath", fieldStorePath)  ;
+		      %>
+		    </td>
+		  </tr>
+		</table>
+    <%/* start render action*/%>
+		<div class="UIAction"> 
+	    <table align="center" class="ActionContainer">
+	    	<tr>
+	    		<td align="center">
+			      <% for(action in uicomponent.getActions()) {
+			      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+								 String link = uicomponent.event(action) ;
+			      %>
+			          <a href="$link" class="ActionButton LightBlueStyle">
+									<div class="ButtonLeft">
+									  <div class="ButtonRight">
+										  <div class="ButtonMiddle">
+										    $actionLabel
+								      </div>
+								    </div>
+							    </div>
+								</a>
+			      <%}%>  
+	      	</td>
+	      </tr>        
+	    </table>
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

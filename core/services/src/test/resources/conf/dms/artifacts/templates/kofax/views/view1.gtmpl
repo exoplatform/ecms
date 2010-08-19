@@ -1,0 +1,81 @@
+<%
+	import org.exoplatform.web.application.Parameter ;  
+  def node = uicomponent.getNode() ;
+  def originalNode = uicomponent.getOriginalNode();
+  String namespace = "kfx:" ;
+  
+  private String formatNodeName(String text) {
+    return text.replaceAll("'", "\\\\'");
+  }
+%>
+<style>
+	.WorkKofax {
+		margin: 10px;
+	}
+	
+	.WorkKofax .UIGrid {
+		width: 97%;
+	}
+	
+	.WorkKofax .UIGrid td {
+		border: 1px solid #CCCCCC
+	}
+</style>
+<div class="WorkKofax">
+	<table class="UIGrid">      	 			
+	  <tr>
+	    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.document-name")%></td>
+	    <td><%=originalNode.getName()%></td>
+	  </tr>
+	
+	  <%
+		  for(property in node.getProperties()) {
+		    def propertyName = property.getName() ;
+		    if(propertyName.startsWith(namespace)) { %>
+				  <tr>
+				    <td style="width:25%"><%=propertyName.substring(namespace.length(), propertyName.length())%></td>
+				    <td><%=node.getProperty(propertyName).getString()%></td>
+				  </tr>
+		<%
+		    }
+		  }
+		  int i = 1;
+		  for(child in uicomponent.getAttachments()) { 
+		    if(child.hasNode("jcr:content")) {
+		%>
+			  <tr>
+			    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.downloadable")%> #<%=i%></td>
+					<%						  
+						  String actionLink = uicomponent.event("ChangeNode", child.getPath(), new Parameter("workspaceName", child.getSession().getWorkspace().getName())) ;
+					%>
+					<td>
+						<a href="$actionLink">
+						 		<%=child.getName()%>
+					 	</a>
+					</td>
+					<!--
+			    <td>
+			      <a href="<%=uicomponent.getDownloadLink(child)%>">
+			        <%=child.getName()%>
+			      </a>
+			    </td>
+					-->
+			  </tr>
+		<%  } else {%>
+		      <tr>
+				    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.downloadable")%> #<%=i%></td>
+				    <td>
+				      <a href="<%=uicomponent.event("ChangeNode", formatNodeName(child.getPath()), new Parameter("workspaceName", child.getSession().getWorkspace().getName()))%>">
+				        <%=child.getName()%>
+				      </a>
+				    </td>
+				  </tr>
+		<%      
+		    }
+	      i++ ;
+		  } 
+		%>
+	</table>
+	<div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+  <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
+</div>

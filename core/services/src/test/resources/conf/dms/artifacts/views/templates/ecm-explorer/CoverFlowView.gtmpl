@@ -1,0 +1,176 @@
+<%
+  /**
+   * Created by The eXo Platform SARL
+   * Author : Dang Van Minh
+   *          minhdv@exoplatform.com
+   * Oct 10, 2008
+   * 1:36:23 PM
+   */
+%>
+<%   
+  import org.exoplatform.web.application.Parameter ;
+%>
+<%
+  if(uicomponent.getChildrenList().size() > 0) {
+    def viewComponentId  = new Date().getTime();
+	  def rcontext = _ctx.getRequestContext() ;
+	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
+%>
+	<div id="$uicomponent.id" class="UICoverFlowView">
+		<div class="TLBox">
+			<div class="TRBox">
+				<div class="TMBox"><span></span></div>
+			</div>
+		</div>
+		<div class="MLBox">
+			<div class="MRBox">
+				<div id="$viewComponentId" class="MCBox" style="text-align: right;">
+					<textarea class="Album" style="display: none">
+							<!DOCTYPE html 
+						    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+						           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+							<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+							<head><title>K</title>
+								<meta http-equiv="content-type" content="text/html; charset=utf-8">
+								<style type="text/css">
+									
+									body {
+										text-align: center;
+										color: #fff;
+										margin: 0px;
+										padding: 0px;
+										width: 100%;
+									}
+		
+									img { 
+										position: absolute; 
+										top: 0px;
+										border: none;
+									}
+									#images img {
+										visibility: hidden;
+										display: none;
+										filter: alpha(opacity=100);
+										opacity: 1;
+									}
+									#preload {
+										visibility: hidden;
+									}
+									#imageflow {
+										text-align: left;
+										width: 100%;
+										margin: auto;
+									}
+									#imageflow #captions {
+										font-weight: bold;
+										position: relative; 
+										text-align: center;
+										color: black;
+										z-index: 10000;
+									 }
+									 #imageflow #captions * {
+										cursor: pointer;
+									 }
+									 .LeftScrollBar {
+										background: url('/eXoDMSResources/skin/images/CoverFlow/Slice.png') no-repeat left -32px;
+										padding-left: 28px;
+										position: relative; 
+										z-index: 10001;
+									 }
+									 .RightScrollBar {
+										background: url('/eXoDMSResources/skin/images/CoverFlow/Slice.png') no-repeat right -64px;
+										padding-right: 28px;
+									 }
+									 .CenterScrollBar {
+										background: url('/eXoDMSResources/skin/images/CoverFlow/Slice.png') repeat-x center -96px;
+										height: 32px;
+									 }
+									 .ScrollBar {
+										background: url('/eXoDMSResources/skin/images/CoverFlow/Slice.png') no-repeat center top;
+										position: absolute;
+										margin-left: -8px;
+										z-index: 10002;
+										width: 32px;
+										height: 32px;	
+									 }
+								</style>
+								<script type="text/javascript" src="/ecm/javascript/eXo/ecm/CoverFlowLib.js"></script>
+							</head>
+							<body>
+								<div id="imageflow">
+									<div id="images">
+									<%
+						  if(uicomponent.isEnableThumbnail()) {
+							  String imgSrc = "";
+							  String imageSize = "";
+							  def actionLink = "";
+							  def wsName = "";
+							  String primaryType = "";
+							  for(image in uicomponent.getChildrenList()) {
+							    wsName = image.getSession().getWorkspace().getName();
+							    actionLink = uicomponent.event("ChangeNode", image.getPath(), new Parameter("workspaceName", wsName));
+							    primaryType = image.getPrimaryNodeType().getName();
+	  					    def thumbnailNode = uicomponent.getThumbnailNode(image);
+	  					    boolean isShowCoverFlow = false;
+	  					    String[] arrSize = {};
+	  					    if(thumbnailNode != null && thumbnailNode.hasProperty("exo:bigSize")) {
+							      isShowCoverFlow = true;
+							      imageSize = uicomponent.getThumbnailSize(thumbnailNode);
+							      arrSize = imageSize.split("x");
+	  					    } else {
+	  					      isShowCoverFlow = false;
+	  					    }
+	                imgSrc = "/" + uicomponent.getPortalName() + "/rest/thumbnailImage/" + uicomponent.getRepository() + "/" + wsName + image.getPath() + "/?size=big";
+	  					    if(uicomponent.isImageType(image)) {
+								    if(isShowCoverFlow) {
+	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+image.getName()+"\"/>";
+								    } else {
+								      println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" onload='this.setAttribute(\"w\", (this.width || 300)); this.setAttribute(\"h\", (this.height || 300));' alt=\""+image.getName()+"\"/>";
+								    }
+							    } else if(primaryType.equals("nt:unstructured") || primaryType.equals("nt:folder")) {
+	  						    if(isShowCoverFlow) {
+	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+image.getName()+"\"/>";
+	  						    } else {
+  	  						    println "<image src=\"/ecm/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigFolder.gif\" longdesc=\""+actionLink+"\" w=\"208\" h=\"218\" alt=\""+image.getName()+"\"/>";
+	  						    }
+							    } else {
+							      if(isShowCoverFlow) {
+	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+image.getName()+"\"/>";
+	  						    } else {
+	  						      println "<image src=\"/ecm/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/BigDocument.gif\" longdesc=\""+actionLink+"\" w=\"115\" h=\"144\" alt=\""+image.getName()+"\"/>";
+	                  }
+							    }
+							  }
+							} else {
+							  println "<image src=\"\" w=\"300\" h=\"300\"/>";
+							}
+						%>
+									</div>
+									<div id="captions"></div>
+									<div id="scrollbar" class="LeftScrollBar">
+										<div class="RightScrollBar">
+											<div class="CenterScrollBar">
+												<div id="slider" class="ScrollBar"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</body>
+							<script type="text/javascript"> init() </script>
+						</html>
+					</textarea>
+				</div>
+				<% if(uicomponent.getContentPageIterator().getAvailablePage()>1) { %>	
+					<div style="margin:4px 0px 4px 0px;">
+						<%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
+					</div>
+				<% } %>
+			</div>
+		</div>
+		<div class="BLBox">
+			<div class="BRBox">
+				<div class="BMBox"><span></span></div>
+			</div>
+		</div>	
+	</div>
+<%}%>	
