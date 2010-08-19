@@ -12,6 +12,7 @@
   <properties>
     <gatein.working.dir>${basedir}/target</gatein.working.dir>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.tool</groupId>
@@ -111,7 +112,110 @@
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.portlet.dashboard</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.starter.war</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+	  </dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.component.management</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>jar</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.web.rest</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.eXoGadgets</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.web.portal</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.jcr</groupId>
+			<artifactId>exo.jcr.framework.web</artifactId>
+			<version>${org.exoplatform.jcr.version}</version>
+			<type>jar</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.portlet.exoadmin</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.portlet.web</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.server.tomcat.plugin</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>jar</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.component.dashboard</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>jar</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.tool</groupId>
+			<artifactId>exo.tool.webunit</artifactId>
+			<version>${org.exoplatform.tool.version}</version>
+		  <type>jar</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.web.eXoResources</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.kernel</groupId>
+			<artifactId>exo.kernel.component.remote</artifactId>
+			<version>${org.exoplatform.kernel.version}</version>
+			<type>jar</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>exo.portal.gadgets-server</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>war</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.portal</groupId>
+			<artifactId>gatein.portal.component.wsrp</artifactId>
+			<version>${org.exoplatform.portal.version}</version>
+			<type>jar</type>
+		</dependency>
+    <dependency>
+		  <groupId>org.exoplatform.ws</groupId>
+			<artifactId>exo.ws.frameworks.servlet</artifactId>
+			<version>${org.exoplatform.ws.version}</version>
+			<type>jar</type>
+		</dependency>	
   </dependencies>
+
   <build>
     <plugins>
       <!-- needed for exobuild to call maven dependency:get -->
