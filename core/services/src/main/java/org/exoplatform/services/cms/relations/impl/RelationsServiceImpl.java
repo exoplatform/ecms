@@ -21,18 +21,15 @@ import java.util.List;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.Property;
 import javax.jcr.Session;
 import javax.jcr.Value;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
@@ -47,12 +44,9 @@ public class RelationsServiceImpl implements RelationsService, Startable {
 
   private RepositoryService repositoryService_;
   String repositories_ ;
-  private NodeHierarchyCreator nodeHierarchyCreator_;
   private static final Log LOG  = ExoLogger.getLogger(RelationsServiceImpl.class);
-  public RelationsServiceImpl(RepositoryService repositoryService,
-      NodeHierarchyCreator nodeHierarchyCreator, InitParams params) {
+  public RelationsServiceImpl(RepositoryService repositoryService, InitParams params) {
     repositoryService_ = repositoryService;
-    nodeHierarchyCreator_ = nodeHierarchyCreator;
     repositories_ = params.getValueParam("repositories").getValue();
   }
   
@@ -81,6 +75,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
       try{
         return provider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;        
       } catch(Exception e) {
+      	LOG.error("Unexpected problem occurs");
         continue ;
       }      
     }
@@ -159,7 +154,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
         String uuid = value.getString();
         Node refNode = null ;
         try {
-//          refNode = session.getNodeByUUID(uuid);
           refNode = getNodeByUUID(uuid, repository, provider) ;
         } catch(ItemNotFoundException ie) {
           removeRelation(node, relationPath, repository) ;
@@ -181,29 +175,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * {@inheritDoc}
    */
   public void start() {
-    Session session = null;
-    Node relationsHome = null;
-    try {
-      String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
-      if (relationPath == null) throw new IllegalArgumentException();
-      String[] repositories = repositories_.split(",") ;
-      for(String repo : repositories) {
-        session = getSession(repo.trim());
-        relationsHome = (Node) session.getItem(relationPath);
-        for (NodeIterator iterator = relationsHome.getNodes(); iterator.hasNext();) {
-          Node rel = iterator.nextNode();
-          rel.addMixin("mix:referenceable");
-        }
-        relationsHome.save();
-        session.save();
-      }      
-    } catch (IllegalArgumentException e) {
-      LOG.error("Cannot find path by alias " + BasePath.CMS_PUBLICATIONS_PATH);
-    } catch (Exception e) {
-      if(session !=null && session.isLive()) session.logout();
-    } finally {
-      if(session != null) session.logout();
-    }
+    //This method is not used anymore because we've removed Repository Management out of WCM
   }
 
   /**
@@ -216,23 +188,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * {@inheritDoc}
    */
   public void init(String repository) throws Exception {
-    Session session = getSession(repository);
-    String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
-    if (relationPath == null) throw new IllegalArgumentException();
-    try {            
-      Node relationsHome = (Node) session.getItem(relationPath);
-      for (NodeIterator iterator = relationsHome.getNodes(); iterator.hasNext();) {
-        Node rel = iterator.nextNode();
-        rel.addMixin("mix:referenceable");
-      }
-      relationsHome.save(); 
-    } catch (IllegalArgumentException e) {
-      LOG.error("Cannot find path by alias " + BasePath.CMS_PUBLICATIONS_PATH);
-    } catch (Exception e) {
-      LOG.error("Unexpected error", e);
-    } finally {
-      if(session != null) session.logout();
-    }
+    //This method is not used anymore because we've removed Repository Management out of WCM
   }
   
   /**
