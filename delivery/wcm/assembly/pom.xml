@@ -213,7 +213,19 @@
 			<artifactId>exo.ws.frameworks.servlet</artifactId>
 			<version>${org.exoplatform.ws.version}</version>
 			<type>jar</type>
-		</dependency>	
+		</dependency>
+            <dependency>
+                <groupId>org.exoplatform.ecms</groupId>
+                <artifactId>exo-ecms-packaging-workflow-config</artifactId>
+                <version>${project.version}</version>
+                <type>jar</type>
+           </dependency><!-- 2.1.0-CR01-->
+           <dependency>
+               <groupId>org.exoplatform.ecms</groupId>
+               <artifactId>exo-ecms-packaging-workflow-webapp</artifactId>
+               <version>${project.version}</version>
+               <type>war</type>
+           </dependency><!-- 2.1.0-CR01-->
   </dependencies>
 
   <build>
