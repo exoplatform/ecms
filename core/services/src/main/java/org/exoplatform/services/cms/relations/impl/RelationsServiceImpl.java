@@ -75,7 +75,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
       try{
         return provider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;        
       } catch(Exception e) {
-      	LOG.error("Unexpected problem occurs");
         continue ;
       }      
     }
