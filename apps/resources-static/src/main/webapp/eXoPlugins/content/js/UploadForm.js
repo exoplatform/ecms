@@ -198,10 +198,13 @@ UploadForm.prototype.uploadFileDelete = function() {
 	var strParam ="action=delete&uploadId="+eXo.ecm.UploadForm.uploadId+"&currentFolder="+eXo.ecm.ECS.currentFolder+"&currentPortal="+eXo.ecm.ECS.portalName;
 	if (repositoryName !== undefined) strParam += "&repositoryName="+ repositoryName;
 	if (workspaceName !== undefined)  strParam += "&workspaceName=" + workspaceName;
-	var strConnector = eXo.ecm.connector.replace("/getDrivers?repositoryName=repository", "/");
+	var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
 	var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+strParam;
-	eXo.ecm.WCMUtils.request(connector);
-	eXo.ecm.UploadForm.removeMask();
+	var isDelete = confirm("Are you sure want to remove?");
+	if(isDelete) {
+		eXo.ecm.WCMUtils.request(connector);
+		eXo.ecm.UploadForm.showUploadForm();
+	}
 };
 
 UploadForm.prototype.uploadFileSave = function() {
