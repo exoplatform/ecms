@@ -107,10 +107,6 @@
   height: 24px;
 }
 
-.UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar  {
-    border-top: solid 1px #fdfdfd\0/;
-}
-
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .AddressBarSeparator {
   float: left; /* orientation=lt */
   float: right; /* orientation=rt */
