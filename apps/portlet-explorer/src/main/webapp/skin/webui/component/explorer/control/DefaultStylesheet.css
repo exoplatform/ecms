@@ -99,7 +99,6 @@
 /*############################## -- Begin UIViewBar -- ##############################*/
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar {
-  border-top: solid 1px #fdfdfd;
   border-bottom: solid 1px #b7b7b7;
   background: url('DefaultSkin/background/LineDecorator1x30.gif') repeat-x center center;
   height: 30px;
