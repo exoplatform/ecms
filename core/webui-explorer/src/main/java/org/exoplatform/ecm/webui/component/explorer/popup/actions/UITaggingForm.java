@@ -101,9 +101,7 @@ public class UITaggingForm extends UIForm {
     ResourceBundle res = context.getApplicationResourceBundle();
     List<SelectItemOption<String>> tagScopes = new ArrayList<SelectItemOption<String>>();
     tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PRIVATE), Utils.PRIVATE));    
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PUBLIC), Utils.PUBLIC));
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.GROUP), Utils.GROUP));
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.SITE), Utils.SITE));
+    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PUBLIC), Utils.PUBLIC));    
 
     UIFormSelectBox box = new UIFormSelectBox(TAG_SCOPES, TAG_SCOPES, tagScopes);
     box.setOnChange("Change");
