@@ -84,6 +84,7 @@ public abstract class UICLVContainer extends UIContainer {
   
   public String getEditLink(boolean isEditable, boolean isNew) {
     String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
+    if (itemPath==null) itemPath="";
 	  return Utils.getEditLink(correctPath(itemPath), isEditable, isNew);
   }
 
@@ -93,6 +94,7 @@ public abstract class UICLVContainer extends UIContainer {
   }
   
   private String correctPath(String oldPath) {
+      if ((oldPath==null) || ((oldPath!=null) && (oldPath.length()==0))) return "";
       int slashIndex = oldPath.indexOf("/");
       String path = oldPath.substring(slashIndex + 1);
       String[] repoWorkspace = oldPath.substring(0, slashIndex).split(":");

@@ -18,7 +18,6 @@ package org.exoplatform.wcm.webui.clv;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -435,16 +434,16 @@ public class UICLVPresentation extends UIContainer {
   	UICLVContainer clvContainer = this.getAncestorOfType(UICLVContainer.class);
   	boolean isAutoDetect = Boolean.parseBoolean(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION));
   	if (!isAutoDetect || !clvContainer.isModeByFolder()) return header;
-
-  	Node folderNode = clvContainer.getFolderNode();
+  	
   	try {
+  	  Node folderNode = clvContainer.getFolderNode();
 			if (folderNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE)) {
 				String folderTitle = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE).getString();
 				if (folderTitle != null && folderTitle.length() > 0)
 					header = folderTitle;
 			}
-		} catch (RepositoryException e) {
-			return header;
+		} catch (RepositoryException repositoryException) {		  
+		} catch (Exception e) {
 		}
 		return header;
   }
@@ -523,6 +522,13 @@ public class UICLVPresentation extends UIContainer {
 		String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
 		if (fullPath == null || fullPath.length() == 0)
 			fullPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
+		if (fullPath == null)
+		  return "/"+portal+"/"+rest+      
+      "&siteName=" + Util.getUIPortal().getOwner() + 
+      "&orderBy=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY) +
+      "&orderType=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE) +
+      "&detailPage=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE) + 
+      "&detailParam=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
 		String[] repoWsPath = fullPath.split(":");
 		return  "/"+portal+"/"+rest+
 						"/feed/rss?repository=" + repoWsPath[0] + 
