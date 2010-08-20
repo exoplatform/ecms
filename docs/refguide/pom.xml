@@ -56,7 +56,7 @@
               <outputDirectory>${wikbook.source}</outputDirectory>
               <resources>
                 <resource>
-                  <directory>src/main/wikbook</directory>
+                  <directory>src/main/resources/wikbook</directory>
                   <filtering>true</filtering>
                 </resource>
               </resources>
@@ -187,6 +187,18 @@
         <artifactId>build-helper-maven-plugin</artifactId>
         <executions>
           <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/resources</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
             <id>attach-artifacts</id>
             <phase>package</phase>
             <goals>
@@ -203,7 +215,6 @@
           </execution>
         </executions>
       </plugin>
-
        </plugins>
    </build>
 </project>
