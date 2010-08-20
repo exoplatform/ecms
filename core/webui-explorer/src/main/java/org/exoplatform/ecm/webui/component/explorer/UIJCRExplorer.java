@@ -498,7 +498,7 @@ public class UIJCRExplorer extends UIContainer {
           !uiDocumentWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
         UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
         UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
-        if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isShowDocumentViewForFile())) {
+        if(isShowViewFile() &&  !(isShowDocumentViewForFile())) {
           uiDocumentWithTree.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
         } else {
@@ -647,7 +647,7 @@ public class UIJCRExplorer extends UIContainer {
           !uiDocWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
         UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
         UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");      
-        if(isShowViewFile() &&  !(isExoWebContent(getCurrentNode(), this) && isShowDocumentViewForFile()) && !getPreference().isJcrEnable()) {
+        if(isShowViewFile() &&  !isShowDocumentViewForFile() && !getPreference().isJcrEnable()) {
           uiDocumentWithTree.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
         } else {
