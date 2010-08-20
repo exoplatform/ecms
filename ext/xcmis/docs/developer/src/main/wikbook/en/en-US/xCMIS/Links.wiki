@@ -1,0 +1,16 @@
+eXo CMIS related links
+
+xCMIS project links:
+* Community site [http://xcmis.org/]
+* Forum [http://groups.google.com/group/xcmis]
+* xCMIS latest news [http://gazarenkov.blogspot.com/]
+* eXo Platform blog [http://blog.exoplatform.org/]
+* [http://xcmis.org/CmisExpert1/org.exoplatform.cmis.CmisExpertApplication/CmisExpertApplication.html|Demo site with CMISExpert client]
+
+CMIS related links:
+* [http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cmis|CMIS specification]
+* TODO CMIS working group (list, mail, feeds etc)
+* TODO CMIS external tutorials, guides, videos. blogs, news any
+* TODO CMIS clients, UI, web any 
+
+ 

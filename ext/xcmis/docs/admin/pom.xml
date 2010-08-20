@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.xcmis</groupId>
+      <artifactId>xcmis-docs</artifactId>
+      <version>1.1-SNAPSHOT</version>
+   </parent>
+
+   <artifactId>xcmis-admin-guide</artifactId>
+   <packaging>jar</packaging>
+
+   <name>xCMIS administrator's guide</name>
+
+   <dependencies>
+      <dependency>
+         <groupId>org.wikbook</groupId>
+         <artifactId>wikbook.docbkxstyle</artifactId>
+         <version>${wikbook.version}</version>
+      </dependency>
+   </dependencies>
+
+   <properties>
+      <wikbook.source>${pom.basedir}/src/main/wikbook</wikbook.source>
+      <wikbook.target>${project.build.directory}/wikbook</wikbook.target>
+   </properties>
+
+   <build>
+      <plugins>
+         <!-- copy images to wikbook src -->
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>prepare</id>
+                  <phase>compile</phase>
+                  <goals>
+                     <goal>copy-resources</goal>
+                  </goals>
+                  <configuration>
+                     <outputDirectory>${wikbook.target}/src/resources/images</outputDirectory>
+                     <resources>
+                        <resource>
+                           <directory>src/main/wikbook/images</directory>
+                           <filtering>true</filtering>
+                        </resource>
+                     </resources>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <!-- The wikbook maven plugin generates the docbook document from the wiki source -->
+         <plugin>
+            <groupId>org.wikbook</groupId>
+            <artifactId>wikbook.maven</artifactId>
+            <version>0.9.26</version>
+            <executions>
+               <execution>
+                  <phase>prepare-package</phase>
+                  <goals>
+                     <goal>transform</goal>
+                  </goals>
+               </execution>
+            </executions>
+            <configuration>
+               <sourceDirectory>${wikbook.source}/en/en-US</sourceDirectory>
+               <sourceFileName>book.wiki</sourceFileName>
+               <destinationDirectory>${wikbook.target}/src</destinationDirectory>
+               <destinationFileName>index.xml</destinationFileName>
+
+               <emitDoctype>false</emitDoctype>
+               <beforeBookBodyXML><![CDATA[<xi:include href="bookinfo.ext" xmlns:xi="http://www.w3.org/2001/XInclude" />]]></beforeBookBodyXML>
+               <validationMode>lax</validationMode>
+               <syntaxId>confluence/1.0</syntaxId>
+            </configuration>
+         </plugin>
+
+         <!-- Unpacks the docbook style resources for the docbkx plugin -->
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.1</version>
+            <executions>
+               <execution>
+                  <id>a</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                     <goal>unpack-dependencies</goal>
+                  </goals>
+                  <configuration>
+                     <includeGroupIds>org.wikbook</includeGroupIds>
+                     <includeArtifactIds>wikbook.docbkxstyle</includeArtifactIds>
+                     <excludes>META-INF/**</excludes>
+                     <outputDirectory>${wikbook.target}/src/resources</outputDirectory>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <!-- Dockbx plugin that generates content -->
+         <plugin>
+            <groupId>com.agilejava.docbkx</groupId>
+            <artifactId>docbkx-maven-plugin</artifactId>
+            <version>2.0.7</version>
+            <executions>
+               <execution>
+                  <id>Generate HTML</id>
+                  <goals>
+                     <goal>generate-html</goal>
+                  </goals>
+                  <phase>package</phase>
+                  <configuration>
+                     <htmlCustomization>${wikbook.target}/src/resources/xsl/html.xsl</htmlCustomization>
+                     <htmlStylesheet>css/html.css</htmlStylesheet>
+                     <imgSrcPath>images/</imgSrcPath>
+                     <admonGraphicsPath>images/admons/</admonGraphicsPath>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>Generate PDF</id>
+                  <goals>
+                     <goal>generate-pdf</goal>
+                  </goals>
+                  <phase>package</phase>
+                  <configuration>
+                     <foCustomization>${wikbook.target}/src/resources/xsl/fopdf.xsl</foCustomization>
+                     <imgSrcPath>${wikbook.target}/src/resources/images/</imgSrcPath>
+                     <admonGraphicsPath>${wikbook.target}/src/resources/images/admons/</admonGraphicsPath>
+                  </configuration>
+               </execution>
+            </executions>
+            <configuration>
+               <sourceDirectory>${wikbook.target}/src</sourceDirectory>
+               <targetDirectory>${wikbook.target}/output</targetDirectory>
+               <includes>index.xml</includes>
+
+               <!-- Highlight source code -->
+               <highlightSource>1</highlightSource>
+
+               <!-- We need to support xinclude -->
+               <xincludeSupported>true</xincludeSupported>
+
+               <!--
+                 |  See http://www.sagehill.net/docbookxsl/AnnotateListing.html
+                 |  Callouts on imported text
+                -->
+               <useExtensions>1</useExtensions>
+               <calloutsExtension>1</calloutsExtension>
+
+               <!-- Copy any docbook XML -->
+               <preProcess>
+                  <copy todir="${wikbook.target}/src">
+                     <fileset dir="${wikbook.source}/en/en-US">
+                        <include name="**/*.ext" />
+                     </fileset>
+                     <fileset dir="${wikbook.source}/en/en-US">
+                        <include name="**/*.xml" />
+                     </fileset>
+                  </copy>
+               </preProcess>
+
+               <!-- Copy the image for HTML-->
+               <postProcess>
+                  <copy todir="${wikbook.target}/output/images">
+                     <fileset dir="${wikbook.source}/images">
+                        <include name="**" />
+                     </fileset>
+                  </copy>
+                  <copy todir="${wikbook.target}/output">
+                     <fileset dir="${wikbook.target}/src/resources">
+                        <include name="**/*.css" />
+                        <include name="**/*.png" />
+                        <include name="**/*.gif" />
+                        <include name="**/*.jpg" />
+                        <include name="**/*.jpeg" />
+                     </fileset>
+                  </copy>
+               </postProcess>
+            </configuration>
+            <dependencies>
+               <dependency>
+                  <groupId>org.docbook</groupId>
+                  <artifactId>docbook-xml</artifactId>
+                  <version>4.4</version>
+                  <scope>runtime</scope>
+               </dependency>
+            </dependencies>
+         </plugin>
+
+         <!-- Attach the doc to the pom in maven repo -->
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>attach-artifacts</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>attach-artifact</goal>
+                  </goals>
+                  <configuration>
+                     <artifacts>
+                        <artifact>
+                           <file>target/wikbook/output/index.pdf</file>
+                           <type>pdf</type>
+                        </artifact>
+                     </artifacts>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+</project>

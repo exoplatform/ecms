@@ -1,0 +1,23 @@
+h1. Introduction
+{include:document="xCMIS/Introduction.wiki" /}
+
+h1. CMIS specification
+{include:document="xCMIS/CMISspecification.wiki" /}
+
+h1. xCMIS project
+{include:document="xCMIS/xCMISproject.wiki" /}
+
+h1. CMIS features
+{include:document="xCMIS/CMISfeatures.wiki" /}
+{include:document="xCMIS/WCMfeatures.wiki" /}
+
+h1. Code examples
+{include:document="xCMIS/CodeExamples.wiki" /}
+
+h1. Miscellaneous and Tips
+{include:document="xCMIS/Miscellaneous.wiki" /}
+
+h1. Links
+{include:document="xCMIS/Links.wiki" /}
+
+

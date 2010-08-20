@@ -1,0 +1,71 @@
+h1. CMIS services configuration
+
+To expose WCM drives to CMIS repositories there is special extension of CmisRegistry.
+
+Typical configuration of component org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry
+{code:language=xml}
+<component>
+   <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry</type>
+   <init-params>
+      <!-- Disabled by default. Uncomment if you need query support in CMIS. -->
+         <!-- value-param>
+            <name>indexDir</name>
+            <value>${gatein.jcr.index.data.dir}/cmis-index${container.name.suffix}</value>
+         </value-param-->
+      <value-param>
+         <name>exo.cmis.renditions.persistent</name>
+         <value>true</value>
+      </value-param>
+      <values-param>
+         <name>renditionProviders</name>
+         <description>Redition providers classes.</description>
+         <!-- <value>org.xcmis.renditions.impl.PDFDocumentRenditionProvider</value> -->
+         <value>org.xcmis.renditions.impl.ImageRenditionProvider</value>
+      </values-param>
+   </init-params>
+</component>
+{code}
+
+Where configuration parameters:
+* indexDir - directory where lucene index will be placed. Disabled by default.
+* exo.cmis.renditions.persistent - should be document's rendition (thumbnail) persisted in JCR. Allowed value is _true_ or _false_.
+* renditionProviders - set of FQN of classes which can be used as Rendition Providers. Classes which implements org.xcmis.spi.RenditionProvider interface used to show preview of CMIS objects (thumbnails).
+
+{info}
+  In most cases it's not requred to change anything in xCIMIS configuration.
+  In case of change of indexer storage location, uncomment indexDir value parameter and point it to the actual location.
+{info}
+
+h1. Required nodetypes and namespaces in JCR
+
+This configuration is manadatory for normal work.
+{code:language=xml}
+<external-component-plugins>
+   <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+   <component-plugin>
+      <name>add.namespaces</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+      <init-params>
+         <properties-param>
+            <name>namespaces</name>
+            <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0" />
+            <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0" />
+         </properties-param>
+      </init-params>
+   </component-plugin>
+   <component-plugin>
+      <name>add.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <init-params>
+        <values-param>
+            <name>autoCreatedInNewRepository</name>
+            <description>Node types configuration file</description>
+            <value>jar:/conf/cmis-nodetypes-config.xml</value>
+         </values-param>
+      </init-params>
+   </component-plugin>
+</external-component-plugins>
+{code}
+

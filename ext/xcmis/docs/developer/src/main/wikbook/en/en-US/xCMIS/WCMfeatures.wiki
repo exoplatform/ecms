@@ -1,0 +1,99 @@
+h1. Integration with eXo WCM
+
+eXo's Web Content Management system provides CMIS specified access to its content storage features:
+* WCM drives
+* Symlinks
+* Categories
+
+h2. WCM drives as CMIS Repositories
+
+WCM drive is exposes as isolated Repository via CMIS service. Operations on the Repository will reflect the Drive immediatelly. 
+
+*Browse Drives via getRepository*
+
+
+h2. WCM Symlinks
+
+Sylinks used to be able to organize virtual access to a documents in WCM, it's implemented like links in Unix/Linux/Mac OS (refer to ln command for more details).
+{note}
+JCR exo:symlink nodetype used for such type nodes.
+{note}
+
+*Follow Symlinks...*
+
+* I login to the acme website as a user with developer role
+* Open Group \-> Sites Explorer, select *Sites Management*, go to folder /acme/events/All/Products
+* Upload any file (e.g. test.txt) to *Products* events
+* In toolbar I click on Group \-> Developers \-> CMISexpert
+* Select *Managed Sites* repository (it's WCM drive) in *Repositories* panel
+* Go to folder /acme/events/All/Products and find file just uploaded in *Site Explorer* there
+It's a symlink to the actual file stored somewhere by path with current date at the end, like /sites content/live/acme/web contents/2010/08/18/test.txt.
+* Find this actual file respectively in /acme/web contents/2010/08/18/test.txt
+* Check if both locations reflects to the same content (of file uploaded via *Sites Explorer*)
+
+h2. WCM Categories
+
+TODO WCM Categories intro
+
+*Browse Categories*
+* I login to the acme website as a user with developer role
+* Open Group \-> Sites Explorer, select *Sites Management*, go to folder /acme/categories/acme/News
+* Upload any file (e.g. news.txt) to *News* category
+* In *Sites Explorer* go to folder /acme/documents
+* Upload any file (e.g. document.txt) to *documents*, enter this document by double-click, change its categories clicking on *Manage Categories* in Publication menu and set both *acme/Economy* and *acme/News* categories to the document
+!sitesexplorer-categories.png|thumbnail,border=1!
+* In toolbar I click on Group \-> Developers \-> CMISexpert
+* Select *Managed Sites* repository (it's WCM drive) in *Repositories* panel
+* Go to folder /acme/categories/acme/News and find two files just uploaded in *Site Explorer* there (news.txt and document.txt)
+!xcmis-2file-news-catgory.png|thumbnail,border=1!
+* Go to folder /acme/categories/acme/Economy and only one file uploaded in *Site Explorer* there (document.txt)
+* Check if news.txt stored in /acme/web contents/
+* Check if document.txt stored in /acme/documents
+
+h2. Modify WCM via CMIS
+
+TODO...
+
+*Modify template*
+
+* I login to the acme website as a user with developer role
+* In toolbar I click on Group \-> Developers \-> CMISexpert
+* Select *DMS Administration* repository (it's WCM drive actually) in *Repositories* panel on left
+* Go to folder /exo:ecm/views/templates/Content List Viewer/list-by-folder
+* Double-click on *OneColumnCLVTemplate.gtmpl* file and download it to local folder on the disk
+* Modify local file, change div element at begin of the template: 
+{code:language=xml}
+    <div class="TitleBarM">
+      $header
+      <%if (isShowRssLink) {
+      %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
+      }%>
+    </div>
+  {code}
+with link to the eXo site:
+{code:language=xml}
+    <div class="TitleBarM">
+      $header
+      <%if (isShowRssLink) {
+      %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a>
+      <a href="http://www.exoplatform.org/">eXo site</a><%
+      }%>
+    </div>
+{code}
+* Open Group \-> Sites Explorer, select *DMS Administration*, go to file /exo:ecm/views/templates/Content List Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl.
+* Open the file *View Node Properties* in Sites Explorer, and copy *jcr:uuid* of the file.
+It's possible to get Node ID through CMIS API call by Node's path and then looking the response XML for content download URL.
+Command for 
+{screen}
+curl -o OneColumnCLVTemplate.gtmpl.Entry.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/DMS%20Administration/objectbypath?path=/exo:ecm/views/templates/Content%20List%20Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl
+{screen}
+
+{note}
+* Upload modified local file using command with substitute of *<file_ID>* to *jcr:uuid* of the file. Note: run this command from folder where is local file stored.
+{screen}
+curl -T OneColumnCLVTemplate.gtmpl -X PUT -H "Content-Type:application/x-groovy+html; charset=UTF-8" -u root:gtn http://localhost:8080/rest/private/cmisatom/DMS%20Administration/file/<file_ID>
+{screen}
+* go to the home page of Acme and see change applied from the local file: find link to eXo site on portlet header
+
+
+

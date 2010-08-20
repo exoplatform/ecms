@@ -1,0 +1,27 @@
+<bookinfo>
+  <title>eXo CMIS</title>
+  <subtitle>eXo CMIS developer's guide</subtitle>
+  <edition>${project.version}</edition>
+  <pubsnumber>1</pubsnumber>
+  <productname>eXo CMIS</productname>
+  <productnumber>${project.version}</productnumber>
+  <copyright>
+    <year>2010</year>
+    <holder>eXo Platform SAS</holder>
+  </copyright>
+  <authorgroup>
+    <author>
+      <affiliation>
+        <shortaffil>eXo Platform</shortaffil>
+      </affiliation>
+    </author>
+  </authorgroup>
+  <mediaobject>
+    <imageobject role="fo">
+      <imagedata align="center" fileref="eXoLogo.png" format="PNG"/>
+    </imageobject>
+    <imageobject role="html">
+      <imagedata align="center" fileref="eXoLogo.png" format="PNG"/>
+    </imageobject>
+  </mediaobject>
+</bookinfo>
