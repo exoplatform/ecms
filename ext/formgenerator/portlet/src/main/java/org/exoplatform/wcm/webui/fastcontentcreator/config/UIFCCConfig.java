@@ -28,7 +28,6 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.portlet.PortletPreferences;
 
-import org.apache.poi.hssf.record.formula.functions.Finv;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.services.cms.templates.TemplateService;
