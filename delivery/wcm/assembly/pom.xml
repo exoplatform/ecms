@@ -150,6 +150,8 @@
 		<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.web.eXoResources</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.0-GA-->
 		<dependency><groupId>org.gatein.pc</groupId><artifactId>pc-controller</artifactId><version>${org.gatein.pc.version}</version><type>jar</type></dependency><!-- 2.1.1-GA-->
 		<dependency><groupId>org.gatein.shindig</groupId><artifactId>shindig-social-api</artifactId><version>${org.gatein.shindig.version}</version><type>jar</type></dependency><!-- 1.0-r790473-Patch02-->
+    <dependency><groupId>org.exoplatform.kernel</groupId><artifactId>exo.kernel.component.ext.cache.impl.jboss.v3</artifactId><version>${org.exoplatform.kernel.version}</version><type>jar</type></dependency><!-- 2.2.3-GA-->
+    <dependency><groupId>org.exoplatform.tool</groupId><artifactId>exo.tool.webunit</artifactId><version>${org.exoplatform.tool.version}</version><type>jar</type></dependency><!-- 1.0.0-->		
   </dependencies>
   <build>
     <plugins>
