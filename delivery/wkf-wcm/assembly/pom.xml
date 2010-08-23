@@ -111,6 +111,8 @@
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
+		<dependency><groupId>org.exoplatform.ecms</groupId><artifactId>exo-ecms-packaging-workflow-config</artifactId><version>${project.version}</version><type>jar</type></dependency><!-- 2.2.0-SNAPSHOT-->
+		<dependency><groupId>org.exoplatform.ecms</groupId><artifactId>exo-ecms-packaging-workflow-webapp</artifactId><version>${project.version}</version><type>war</type></dependency><!-- 2.2.0-SNAPSHOT-->
   </dependencies>
   <build>
     <plugins>
