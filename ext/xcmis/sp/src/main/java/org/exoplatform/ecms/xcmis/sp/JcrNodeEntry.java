@@ -302,11 +302,14 @@ class JcrNodeEntry
       if (rootPath.length() > 1 && rootPath.endsWith("/"))
       {
          rootPath = rootPath.substring(0, rootPath.length() - 1);
-         return nodePath.substring(rootPath.length());
-       }
+      }
       if (rootPath.equals(nodePath))
       {
          return "/";
+      }
+      if (rootPath.length() > 1)
+      {
+         nodePath = nodePath.substring(rootPath.length());
       }
       return nodePath;
    }
