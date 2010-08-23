@@ -55,14 +55,14 @@
               <legend class="StyleLegend"><%= _ctx.appRes("UISCVPreferences.label.DisplaySettingBlock") %></legend>
               <table class="UIFormGrid">
                 <tr>                  
-                  <td class="FieldLabel"><% uiform.renderField(uicomponent.SHOW_TITLE_CHECK_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_CHECK_BOX) %></td>                  
+                  <td class="FieldComponent" style="text-align:right;"><% uiform.renderField(uicomponent.SHOW_TITLE_CHECK_BOX) %></td>
+                  <td class="FieldLabel" style="text-align:left;vertical-align:middle;" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_CHECK_BOX) %></td>                  
                   
-                  <td class="FieldLabel"><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></td>                  
+                  <td class="FieldComponent" style="text-align:right;"><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %></td>
+                  <td class="FieldLabel" style="text-align:left;vertical-align:middle;" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></td>                  
                   
-                  <td class="FieldLabel"><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
+                  <td  class="FieldComponent" style="text-align:right;"><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
+                  <td class="FieldLabel" style="text-align:left;vertical-align:middle;" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
                   <td class ="tdShowHelp">
                     <div class="IconInContextHelp ShowHelpIcon" id="ShowOptionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'false')">
                       <div style="position: absolute;">
