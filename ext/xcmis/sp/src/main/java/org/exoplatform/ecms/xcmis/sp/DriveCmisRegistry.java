@@ -21,7 +21,6 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
-import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.impl.RepositoryServiceImpl;
@@ -60,8 +59,6 @@ public class DriveCmisRegistry extends JcrCmisRegistry
 
    private final RepositoryService repositoryService;
 
-   private final DocumentReaderService documentReaderService;
-
    private final ManageDriveService driveService;
 
    private final String defRepository = "repository";
@@ -74,21 +71,14 @@ public class DriveCmisRegistry extends JcrCmisRegistry
 
    private final DMSConfiguration dmsConfiguration;
 
-   public DriveCmisRegistry(RepositoryServiceImpl repositoryService, DocumentReaderService documentReaderService,
-      InitParams initParams, ManageDriveService driveService, DMSConfiguration dmsConfiguration)
-   {
-      super(repositoryService, documentReaderService, initParams);
-      this.repositoryService = repositoryService;
-      this.documentReaderService = documentReaderService;
-      this.dmsConfiguration = dmsConfiguration;
-      this.permissionService = new PermissionService();
-      this.driveService = driveService;
-   }
-
    public DriveCmisRegistry(RepositoryServiceImpl repositoryService, InitParams initParams,
       ManageDriveService driveService, DMSConfiguration dmsConfiguration)
    {
-      this(repositoryService, null, initParams, driveService, dmsConfiguration);
+      super(repositoryService, initParams);
+      this.repositoryService = repositoryService;
+      this.dmsConfiguration = dmsConfiguration;
+      this.permissionService = new PermissionService();
+      this.driveService = driveService;
    }
 
    /**
@@ -335,8 +325,8 @@ public class DriveCmisRegistry extends JcrCmisRegistry
       StorageConfiguration configuration =
          new StorageConfiguration(driveName, repository, driveWorkspace, driveRootPath, properties, null);
       StorageProviderImpl sp =
-         new StorageProviderImpl(repositoryService, documentReaderService, permissionService, this, getSearchService(
-            repository, driveWorkspace), configuration);
+         new StorageProviderImpl(repositoryService, permissionService, this, getSearchService(repository,
+            driveWorkspace), configuration);
       return sp;
    }
 }

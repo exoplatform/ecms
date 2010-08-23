@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ConstraintException;
@@ -86,9 +85,9 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
       CHECKOUT_SKIP.add("xcmis:latestVersionId");
    }
 
-   public DocumentDataImpl(JcrNodeEntry jcrEntry, IndexListener indexListener)
+   public DocumentDataImpl(JcrNodeEntry jcrEntry)
    {
-      super(jcrEntry, indexListener);
+      super(jcrEntry);
    }
 
    /**
@@ -99,7 +98,7 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
       try
       {
          String pwcId = getVersionSeriesCheckedOutId();
-         PWC pwc = new PWC(entry.storage.getEntry(pwcId), indexListener, this);
+         PWC pwc = new PWC(entry.storage.getEntry(pwcId), this);
          pwc.delete();
       }
       catch (ObjectNotFoundException e)
@@ -196,12 +195,8 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
          entry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_ID, pwcEntry.getId());
          entry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_BY, userId);
 
-         PWC pwc = new PWC(pwcEntry, indexListener, this);
+         PWC pwc = new PWC(pwcEntry, this);
          pwc.save();
-         if (indexListener != null)
-         {
-            indexListener.updated(this);
-         }
          return pwc;
       }
       catch (ObjectNotFoundException onfe)
@@ -256,6 +251,7 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
    /**
     * {@inheritDoc}
     */
+   @Override
    public Calendar getCreationDate()
    {
       Calendar date = super.getCreationDate();
@@ -308,7 +304,7 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
       Set<FolderData> parents = new HashSet<FolderData>(parentEntries.size());
       for (JcrNodeEntry parentEntry : parentEntries)
       {
-         parents.add(new FolderDataImpl(parentEntry, indexListener));
+         parents.add(new FolderDataImpl(parentEntry));
       }
       return parents;
    }
@@ -421,16 +417,11 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
       return length;
    }
 
+   @Override
    protected void delete() throws StorageException
    {
       String objectId = getObjectId();
       entry.delete();
-      if (indexListener != null)
-      {
-         Set<String> removed = new HashSet<String>();
-         removed.add(objectId);
-         indexListener.removed(removed);
-      }
    }
 
 }

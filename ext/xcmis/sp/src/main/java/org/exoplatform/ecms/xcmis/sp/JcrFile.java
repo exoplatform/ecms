@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ContentStream;
 import org.xcmis.spi.DocumentData;
@@ -42,9 +41,9 @@ import javax.jcr.Session;
 class JcrFile extends DocumentDataImpl
 {
 
-   public JcrFile(JcrNodeEntry jcrEntry, IndexListener indexListener)
+   public JcrFile(JcrNodeEntry jcrEntry)
    {
-      super(jcrEntry, indexListener);
+      super(jcrEntry);
       try
       {
          Node node = entry.getNode();
@@ -107,12 +106,9 @@ class JcrFile extends DocumentDataImpl
       return entry.getString(JcrCMIS.JCR_VERSION_HISTORY);
    }
 
+   @Override
    protected void save() throws StorageException
    {
       entry.save(false);
-      if (indexListener != null)
-      {
-         indexListener.updated(this);
-      }
    }
 }

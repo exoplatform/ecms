@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.ConstraintException;
 import org.xcmis.spi.ContentStream;
@@ -31,8 +30,6 @@ import org.xcmis.spi.utils.CmisUtils;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
@@ -42,9 +39,9 @@ import java.util.Set;
 class RelationshipDataImpl extends BaseObjectData implements RelationshipData
 {
 
-   public RelationshipDataImpl(JcrNodeEntry jcrEntry, IndexListener indexListener)
+   public RelationshipDataImpl(JcrNodeEntry jcrEntry)
    {
-      super(jcrEntry, indexListener);
+      super(jcrEntry);
    }
 
    /**
@@ -100,16 +97,10 @@ class RelationshipDataImpl extends BaseObjectData implements RelationshipData
    /**
     * {@inheritDoc}
     */
+   @Override
    protected void delete() throws StorageException
    {
-      String objectId = getObjectId();
       entry.delete();
-      if (indexListener != null)
-      {
-         Set<String> removed = new HashSet<String>();
-         removed.add(objectId);
-         indexListener.removed(removed);
-      }
    }
 
 }

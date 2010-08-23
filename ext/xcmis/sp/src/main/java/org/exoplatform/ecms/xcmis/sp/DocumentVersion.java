@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ConstraintException;
 import org.xcmis.spi.ContentStream;
@@ -57,9 +56,9 @@ public class DocumentVersion extends DocumentDataImpl
    /** Latest version of document. */
    private DocumentData document;
 
-   public DocumentVersion(JcrNodeEntry jcrEntry, IndexListener indexListener)
+   public DocumentVersion(JcrNodeEntry jcrEntry)
    {
-      super(jcrEntry, indexListener);
+      super(jcrEntry);
    }
 
    /**
@@ -249,8 +248,7 @@ public class DocumentVersion extends DocumentDataImpl
             Node node = entry.getNode();
             Version version = (Version)node.getParent();
             VersionHistory versionHistory = version.getContainingHistory();
-            document =
-               new DocumentDataImpl(entry.storage.getEntry(versionHistory.getVersionableUUID()), indexListener);
+            document = new DocumentDataImpl(entry.storage.getEntry(versionHistory.getVersionableUUID()));
          }
          catch (RepositoryException re)
          {

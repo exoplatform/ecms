@@ -18,12 +18,11 @@
  */
 package org.exoplatform.ecms.xcmis.sp.index;
 
-import org.exoplatform.ecms.xcmis.sp.JcrCMIS;
 import org.exoplatform.ecms.xcmis.sp.JcrCmisRegistry;
 import org.exoplatform.ecms.xcmis.sp.StorageConfiguration;
 import org.exoplatform.ecms.xcmis.sp.StorageImpl;
 import org.exoplatform.ecms.xcmis.sp.StorageProviderImpl;
-import org.exoplatform.ecms.xcmis.sp.TypeMapping;
+import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.core.NamespaceAccessor;
 import org.exoplatform.services.jcr.dataflow.ItemState;
@@ -49,11 +48,9 @@ import org.xcmis.search.content.IndexModificationException;
 import org.xcmis.search.content.command.InvocationContext;
 import org.xcmis.search.value.SlashSplitter;
 import org.xcmis.search.value.ToStringNameConverter;
-import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.PermissionService;
-import org.xcmis.spi.model.BaseType;
 
 import java.io.File;
 import java.io.IOException;
@@ -101,9 +98,11 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    private final ContentEntryAdapter contentEntryAdapter;
 
+   private final DocumentReaderService documentReaderService;
+
    public Jcr2XcmisChangesListener(String currentRepositoryName, String workspaceName,
       PersistentDataManager dataManager, SessionProviderService sessionProviderService,
-      ManageableRepository repository, NamespaceAccessor namespaceAccessor)
+      ManageableRepository repository, NamespaceAccessor namespaceAccessor, DocumentReaderService documentReaderService)
    {
       super();
       this.currentRepositoryName = currentRepositoryName;
@@ -111,6 +110,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
       this.dataManager = dataManager;
       this.sessionProviderService = sessionProviderService;
       this.repository = repository;
+      this.documentReaderService = documentReaderService;
       this.linkedStorages = new ArrayList<StorageProviderImpl>();
       this.locationFactory = new LocationFactory(namespaceAccessor);
       this.contentEntryAdapter = new ContentEntryAdapter();
@@ -413,7 +413,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
             File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
 
             indexConfiguration.setIndexDir(indexFolder.getPath());
-            indexConfiguration.setDocumentReaderService(readOnlyIndexConfiguration.getDocumentReaderService());
+            indexConfiguration.setDocumentReaderService(documentReaderService);
             indexConfiguration.setRootUuid(Constants.ROOT_UUID);
 
             //if list of root parents is empty it will be indexed as empty string
@@ -437,10 +437,6 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
             searchService = new SearchService(configuration);
             searchService.start();
 
-            //attach listener to the created storage
-            //indexListener = new IndexListener(searchService);
-            //storage.setIndexListener(indexListener);
-
          }
          catch (RepositoryException e)
          {
@@ -456,22 +452,14 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    private StorageImpl createRootStorage() throws LoginException, NoSuchWorkspaceException, RepositoryException
    {
-      //TODO change this
-      Map<String, TypeMapping> nodeTypeMapping = new HashMap<String, TypeMapping>();
-      // Unstructured mapping immediately. May need have access
-      // to root node which often has type nt:unstructured.
-      nodeTypeMapping.put(JcrCMIS.NT_UNSTRUCTURED, new TypeMapping(JcrCMIS.NT_UNSTRUCTURED, BaseType.FOLDER,
-         CmisConstants.FOLDER));
-      nodeTypeMapping.put("exo:taxonomy", new TypeMapping("exo:taxonomy", BaseType.FOLDER, CmisConstants.FOLDER));
 
       StorageConfiguration rootStorageConfiguration =
          new StorageConfiguration(UUID.randomUUID().toString(), currentRepositoryName, workspaceName, "/",
             Collections.EMPTY_MAP, "Virtual root storage");
       SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       return new StorageImpl(sessionProvider.getSession(workspaceName, repository), rootStorageConfiguration, null,
-         new PermissionService(), nodeTypeMapping);
+         new PermissionService(), StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
 
-      //return rootStorage;
    }
 
 }

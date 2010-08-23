@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ConstraintException;
@@ -36,10 +35,8 @@ import org.xcmis.spi.model.Updatability;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -56,14 +53,14 @@ class PWC extends DocumentDataImpl
    /** Latest version of document. */
    private DocumentDataImpl document;
 
-   public PWC(JcrNodeEntry jcrNodeEntry, IndexListener indexListener)
+   public PWC(JcrNodeEntry jcrNodeEntry)
    {
-      super(jcrNodeEntry, indexListener);
+      super(jcrNodeEntry);
    }
 
-   public PWC(JcrNodeEntry jcrEntry, IndexListener indexListener, DocumentDataImpl document)
+   public PWC(JcrNodeEntry jcrEntry, DocumentDataImpl document)
    {
-      super(jcrEntry, indexListener);
+      super(jcrEntry);
       this.document = document;
    }
 
@@ -89,13 +86,6 @@ class PWC extends DocumentDataImpl
          node.getParent().remove();
          session.save();
 
-         if (indexListener != null)
-         {
-            Set<String> s = new HashSet<String>();
-            s.add(id);
-            indexListener.removed(s);
-            indexListener.updated(latestVersion);
-         }
       }
       catch (RepositoryException re)
       {
@@ -202,14 +192,6 @@ class PWC extends DocumentDataImpl
          node.getParent().remove();
          session.save();
 
-         if (indexListener != null)
-         {
-            Set<String> s = new HashSet<String>();
-            s.add(id);
-            indexListener.removed(s);
-            indexListener.updated(latestVersion);
-         }
-
          return latestVersion;
       }
       catch (RepositoryException re)
@@ -261,7 +243,7 @@ class PWC extends DocumentDataImpl
          try
          {
             String latestVersion = entry.getString("xcmis:latestVersionId");
-            document = new DocumentDataImpl(entry.storage.getEntry(latestVersion), indexListener);
+            document = new DocumentDataImpl(entry.storage.getEntry(latestVersion));
          }
          catch (ObjectNotFoundException e)
          {

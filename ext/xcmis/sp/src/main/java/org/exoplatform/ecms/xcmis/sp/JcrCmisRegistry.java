@@ -37,17 +37,13 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
 
    protected String rootIndexDir;
 
-   private final DocumentReaderService documentReaderService;
-
    protected final InitParams initParams;
 
    private final RepositoryServiceImpl repositoryService;
 
-   public JcrCmisRegistry(RepositoryServiceImpl repositoryService, DocumentReaderService documentReaderService,
-      InitParams initParams)
+   public JcrCmisRegistry(RepositoryServiceImpl repositoryService, InitParams initParams)
    {
       this.initParams = initParams;
-      this.documentReaderService = documentReaderService;
       this.repositoryService = repositoryService;
       this.listeners = new ArrayList<Jcr2XcmisChangesListener>();
       this.wsSearchServices = new HashMap<String, SearchService>();
@@ -149,9 +145,11 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
             SessionProviderService sessionProviderService =
                (SessionProviderService)wsContainer.getComponent(SessionProviderService.class);
             NamespaceAccessor namespaceAccessor = (NamespaceAccessor)wsContainer.getComponent(NamespaceAccessor.class);
+            DocumentReaderService documentReaderService =
+               (DocumentReaderService)wsContainer.getComponent(DocumentReaderService.class);
             Jcr2XcmisChangesListener changesListener =
                new Jcr2XcmisChangesListener(currentRepositoryName, wsName, dm, sessionProviderService,
-                  repositoryService.getCurrentRepository(), namespaceAccessor);
+                  repositoryService.getCurrentRepository(), namespaceAccessor, documentReaderService);
             changesListener.onRegistryStart(this);
             dm.addItemPersistenceListener(changesListener);
 
@@ -196,11 +194,10 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
    public IndexConfiguration getIndexConfiguration()
    {
       IndexConfiguration indexConfiguration = null;
-      if (rootIndexDir != null && documentReaderService != null)
+      if (rootIndexDir != null)
       {
          indexConfiguration = new IndexConfiguration();
          indexConfiguration.setIndexDir(rootIndexDir);
-         indexConfiguration.setDocumentReaderService(documentReaderService);
       }
       return indexConfiguration;
    }

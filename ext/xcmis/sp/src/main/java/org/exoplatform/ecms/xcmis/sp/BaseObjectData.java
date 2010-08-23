@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.xcmis.spi.CmisConstants;
@@ -90,26 +89,24 @@ abstract class BaseObjectData implements ObjectData
       }
 
       /** To fetch next item. */
+      @Override
       protected void fetchNext()
       {
          next = null;
          if (iter.hasNext())
          {
-            next = new RelationshipDataImpl(iter.next(), indexListener);
+            next = new RelationshipDataImpl(iter.next());
          }
       }
    }
 
    private static final Log LOG = ExoLogger.getLogger(BaseObjectData.class);
 
-   protected IndexListener indexListener;
-
    protected JcrNodeEntry entry;
 
-   public BaseObjectData(JcrNodeEntry jcrEntry, IndexListener indexListener)
+   public BaseObjectData(JcrNodeEntry jcrEntry)
    {
       this.entry = jcrEntry;
-      this.indexListener = indexListener;
    }
 
    /**
@@ -138,6 +135,7 @@ abstract class BaseObjectData implements ObjectData
       }
    }
 
+   @Override
    public boolean equals(Object obj)
    {
       if (this == obj)
@@ -240,7 +238,7 @@ abstract class BaseObjectData implements ObjectData
       Set<PolicyData> policies = new HashSet<PolicyData>(policyEntries.size());
       for (JcrNodeEntry pe : policyEntries)
       {
-         policies.add(new PolicyDataImpl(pe, indexListener));
+         policies.add(new PolicyDataImpl(pe));
       }
       return policies;
    }
@@ -315,6 +313,7 @@ abstract class BaseObjectData implements ObjectData
       return getTypeDefinition().getId();
    }
 
+   @Override
    public int hashCode()
    {
       int hash = 8;
@@ -482,17 +481,17 @@ abstract class BaseObjectData implements ObjectData
 
    /**
     * Update properties, skip on-create and read-only properties
-    *
-    * @param property property to be updated
+    * 
+    * @param property
+    *           property to be updated
     */
    protected void doSetProperty(Property<?> property) throws NameConstraintViolationException
    {
       PropertyDefinition<?> definition = getTypeDefinition().getPropertyDefinition(property.getId());
 
       Updatability updatability = definition.getUpdatability();
-      if (updatability == Updatability.READWRITE
-         || (updatability == Updatability.WHENCHECKEDOUT && getBaseType() == BaseType.DOCUMENT && ((DocumentData)this)
-            .isPWC()))
+      if (updatability == Updatability.READWRITE || updatability == Updatability.WHENCHECKEDOUT
+         && getBaseType() == BaseType.DOCUMENT && ((DocumentData)this).isPWC())
       {
          // Do not store nulls
          for (Iterator<?> i = property.getValues().iterator(); i.hasNext();)
@@ -524,23 +523,13 @@ abstract class BaseObjectData implements ObjectData
    {
       boolean isNew = entry.isNew();
       entry.save(true);
-      if (indexListener != null)
-      {
-         if (isNew)
-         {
-            indexListener.created(this);
-         }
-         else
-         {
-            indexListener.updated(this);
-         }
-      }
    }
 
    /**
     * Delete current object.
-    *
-    * @throws StorageException if operation can't be persisted in back-end
+    * 
+    * @throws StorageException
+    *            if operation can't be persisted in back-end
     */
    protected abstract void delete() throws StorageException;
 

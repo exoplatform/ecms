@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ExtendedSession;
@@ -150,8 +149,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
 
    /** Logger. */
    private static final Log LOG = ExoLogger.getLogger(StorageImpl.class);
-
-   private IndexListener indexListener;
 
    private RepositoryInfo repositoryInfo;
 
@@ -289,7 +286,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
       }
 
-      DocumentDataImpl document = new DocumentDataImpl(documentEntry, indexListener);
+      DocumentDataImpl document = new DocumentDataImpl(documentEntry);
       document.save();
       return document;
    }
@@ -347,7 +344,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
       }
 
-      FolderDataImpl folder = new FolderDataImpl(folderEntry, indexListener);
+      FolderDataImpl folder = new FolderDataImpl(folderEntry);
       folder.save();
       return folder;
    }
@@ -401,7 +398,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
       }
 
-      PolicyDataImpl policy = new PolicyDataImpl(policyEntry, indexListener);
+      PolicyDataImpl policy = new PolicyDataImpl(policyEntry);
       policy.save();
       return policy;
    }
@@ -456,7 +453,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
       }
 
-      RelationshipDataImpl relationship = new RelationshipDataImpl(relationshipEntry, indexListener);
+      RelationshipDataImpl relationship = new RelationshipDataImpl(relationshipEntry);
       relationship.save();
       return relationship;
    }
@@ -552,7 +549,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          while (iterator.hasNext())
          {
             Version v = iterator.nextVersion();
-            versions.add(new DocumentVersion(fromNode(v.getNode(JcrCMIS.JCR_FROZEN_NODE)), indexListener));
+            versions.add(new DocumentVersion(fromNode(v.getNode(JcrCMIS.JCR_FROZEN_NODE))));
          }
          DocumentData latest = (DocumentData)getObjectById(vh.getVersionableUUID());
          versions.add(latest);
@@ -604,7 +601,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                continue;
             }
             Node node = wc.getNodes().nextNode();
-            PWC pwc = new PWC(fromNode(node), indexListener);
+            PWC pwc = new PWC(fromNode(node));
             if (folder != null)
             {
                for (FolderData parent : pwc.getParents())
@@ -639,14 +636,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    public String getId()
    {
       return storageConfiguration.getId();
-   }
-
-   /**
-    * @return the indexListener
-    */
-   public IndexListener getIndexListener()
-   {
-      return indexListener;
    }
 
    /**
@@ -859,6 +848,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       {
          try
          {
+            String rootNodePath = storageConfiguration.getRootNodePath();
             org.xcmis.search.model.Query qom = cmisQueryParser.parseQuery(query.getStatement());
 
             //            org.xcmis.search.model.Query newQom =
@@ -892,15 +882,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    }
 
    /**
-    * @param indexListener
-    *           the indexListener to set
-    */
-   public void setIndexListener(IndexListener indexListener)
-   {
-      this.indexListener = indexListener;
-   }
-
-   /**
     * {@inheritDoc}
     */
    public void unfileObject(ObjectData object)
@@ -919,7 +900,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          {
             if (node.getParent().isNodeType("xcmis:workingCopy"))
             {
-               return new PWC(entry, indexListener);
+               return new PWC(entry);
             }
             if (!node.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
             {
@@ -930,13 +911,13 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                   LOG.warn("Node " + node.getPath()
                      + " has not 'cmis:document' mixin type. Some operations may be disabled.");
                }
-               return new JcrFile(entry, indexListener);
+               return new JcrFile(entry);
             }
             if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
             {
-               return new DocumentVersion(entry, indexListener);
+               return new DocumentVersion(entry);
             }
-            return new DocumentDataImpl(entry, indexListener);
+            return new DocumentDataImpl(entry);
          }
          else if (typeDefinition.getBaseId() == BaseType.FOLDER)
          {
@@ -949,17 +930,17 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                   LOG.warn("Node " + node.getPath()
                      + " has not 'cmis:document' mixin type. Some operation may be disabled.");
                }
-               return new JcrFolder(entry, indexListener);
+               return new JcrFolder(entry);
             }
-            return new FolderDataImpl(entry, indexListener);
+            return new FolderDataImpl(entry);
          }
          else if (typeDefinition.getBaseId() == BaseType.POLICY)
          {
-            return new PolicyDataImpl(entry, indexListener);
+            return new PolicyDataImpl(entry);
          }
          else if (typeDefinition.getBaseId() == BaseType.RELATIONSHIP)
          {
-            return new RelationshipDataImpl(entry, indexListener);
+            return new RelationshipDataImpl(entry);
          }
          // Must never happen.
          throw new CmisRuntimeException("Unknown base type. ");

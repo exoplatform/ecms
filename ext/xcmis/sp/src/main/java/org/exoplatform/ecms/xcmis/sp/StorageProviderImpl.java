@@ -19,7 +19,6 @@ package org.exoplatform.ecms.xcmis.sp;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
-import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -40,6 +39,7 @@ import org.xcmis.spi.PermissionService;
 import org.xcmis.spi.StorageProvider;
 import org.xcmis.spi.model.BaseType;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,9 +95,6 @@ public class StorageProviderImpl implements StorageProvider, Startable
    /** JCR repository service. */
    private final RepositoryService repositoryService;
 
-   /** Document reader service. */
-   private final DocumentReaderService documentReaderService;
-
    /** Permission service. */
    private final PermissionService permissionService;
 
@@ -108,6 +105,20 @@ public class StorageProviderImpl implements StorageProvider, Startable
    private StorageConfiguration storageConfiguration;
 
    Map<String, TypeMapping> nodeTypeMapping = new HashMap<String, TypeMapping>();
+
+   public static final Map<String, TypeMapping> DEFAULT_NODETYPE_MAPPING;
+   static
+   {
+      Map<String, TypeMapping> aMap = new HashMap<String, TypeMapping>();
+      // Unstructured mapping immediately. May need have access
+      // to root node which often has type nt:unstructured.
+
+      aMap
+         .put(JcrCMIS.NT_UNSTRUCTURED, new TypeMapping(JcrCMIS.NT_UNSTRUCTURED, BaseType.FOLDER, CmisConstants.FOLDER));
+      aMap.put("exo:taxonomy", new TypeMapping("exo:taxonomy", BaseType.FOLDER, CmisConstants.FOLDER));
+
+      DEFAULT_NODETYPE_MAPPING = Collections.unmodifiableMap(aMap);
+   }
 
    /**
     * This constructor is used by eXo container.
@@ -124,30 +135,10 @@ public class StorageProviderImpl implements StorageProvider, Startable
     * @param initParams
     *           configuration parameters
     */
-   public StorageProviderImpl(RepositoryService repositoryService, DocumentReaderService documentReaderService,
-      PermissionService permissionService, CmisRegistry registry, InitParams initParams)
-   {
-      this(repositoryService, documentReaderService, permissionService, registry, null,
-         getStorageConfiguration(initParams));
-   }
-
-   /**
-    * This constructor is used by eXo container.
-    * 
-    * @param repositoryService
-    *           JCR repository service
-    * @param permissionService
-    *           PermissionService
-    * @param registry
-    *           CmisRegistry will be used for registered current StorageProvider
-    *           after its initialization
-    * @param initParams
-    *           configuration parameters
-    */
    public StorageProviderImpl(RepositoryService repositoryService, PermissionService permissionService,
       CmisRegistry registry, InitParams initParams)
    {
-      this(repositoryService, null, permissionService, registry, null, getStorageConfiguration(initParams));
+      this(repositoryService, permissionService, registry, null, getStorageConfiguration(initParams));
    }
 
    private static StorageConfiguration getStorageConfiguration(InitParams initParams)
@@ -165,33 +156,27 @@ public class StorageProviderImpl implements StorageProvider, Startable
       return storageConfiguration;
    }
 
-   StorageProviderImpl(RepositoryService repositoryService, DocumentReaderService documentReaderService,
-      PermissionService permissionService, CmisRegistry registry, StorageConfiguration storageConfiguration)
-   {
-      this(repositoryService, documentReaderService, permissionService, registry, null, storageConfiguration);
-   }
-
-   StorageProviderImpl(RepositoryService repositoryService, DocumentReaderService documentReaderService,
-      PermissionService permissionService, SearchService searchService, StorageConfiguration storageConfiguration)
-   {
-      this(repositoryService, documentReaderService, permissionService, null, searchService, storageConfiguration);
-   }
-
-   StorageProviderImpl(RepositoryService repositoryService, DocumentReaderService documentReaderService,
-      PermissionService permissionService, CmisRegistry registry, SearchService searchService,
+   StorageProviderImpl(RepositoryService repositoryService, PermissionService permissionService, CmisRegistry registry,
       StorageConfiguration storageConfiguration)
    {
+      this(repositoryService, permissionService, registry, null, storageConfiguration);
+   }
+
+   StorageProviderImpl(RepositoryService repositoryService, PermissionService permissionService,
+      SearchService searchService, StorageConfiguration storageConfiguration)
+   {
+      this(repositoryService, permissionService, null, searchService, storageConfiguration);
+   }
+
+   StorageProviderImpl(RepositoryService repositoryService, PermissionService permissionService, CmisRegistry registry,
+      SearchService searchService, StorageConfiguration storageConfiguration)
+   {
       this.repositoryService = repositoryService;
-      this.documentReaderService = documentReaderService;
       this.permissionService = permissionService;
       this.registry = registry;
       this.searchService = searchService;
       this.storageConfiguration = storageConfiguration;
-      // Unstructured mapping immediately. May need have access
-      // to root node which often has type nt:unstructured.
-      nodeTypeMapping.put(JcrCMIS.NT_UNSTRUCTURED, new TypeMapping(JcrCMIS.NT_UNSTRUCTURED, BaseType.FOLDER,
-         CmisConstants.FOLDER));
-      nodeTypeMapping.put("exo:taxonomy", new TypeMapping("exo:taxonomy", BaseType.FOLDER, CmisConstants.FOLDER));
+      this.nodeTypeMapping.putAll(DEFAULT_NODETYPE_MAPPING);
    }
 
    /**

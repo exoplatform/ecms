@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.xcmis.spi.StorageException;
 
 /**
@@ -27,18 +26,15 @@ import org.xcmis.spi.StorageException;
 class JcrFolder extends FolderDataImpl
 {
 
-   public JcrFolder(JcrNodeEntry jcrEntry, IndexListener indexListener)
+   public JcrFolder(JcrNodeEntry jcrEntry)
    {
-      super(jcrEntry, indexListener);
+      super(jcrEntry);
    }
 
+   @Override
    protected void save() throws StorageException
    {
       entry.save(false);
-      if (indexListener != null)
-      {
-         indexListener.updated(this);
-      }
    }
 
 }

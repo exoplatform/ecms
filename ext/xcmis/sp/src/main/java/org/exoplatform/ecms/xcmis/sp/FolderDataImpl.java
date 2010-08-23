@@ -17,7 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.index.IndexListener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.xcmis.spi.CmisConstants;
@@ -34,9 +33,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
@@ -87,9 +84,9 @@ class FolderDataImpl extends BaseObjectData implements FolderData
 
    private static final Log LOG = ExoLogger.getLogger(FolderDataImpl.class);
 
-   public FolderDataImpl(JcrNodeEntry jcrEntry, IndexListener indexListener)
+   public FolderDataImpl(JcrNodeEntry jcrEntry)
    {
-      super(jcrEntry, indexListener);
+      super(jcrEntry);
    }
 
    /**
@@ -98,10 +95,7 @@ class FolderDataImpl extends BaseObjectData implements FolderData
    public void addObject(ObjectData object) throws ConstraintException
    {
       entry.addObject(((BaseObjectData)object).getNodeEntry());
-      if (indexListener != null)
-      {
-         indexListener.updated(object);
-      }
+
    }
 
    /**
@@ -148,7 +142,7 @@ class FolderDataImpl extends BaseObjectData implements FolderData
       List<FolderData> parents = new ArrayList<FolderData>(parentEntries.size());
       for (JcrNodeEntry parentEntry : parentEntries)
       {
-         parents.add(new FolderDataImpl(parentEntry, indexListener));
+         parents.add(new FolderDataImpl(parentEntry));
       }
       return parents;
    }
@@ -211,26 +205,17 @@ class FolderDataImpl extends BaseObjectData implements FolderData
    public void removeObject(ObjectData object)
    {
       entry.removeObject(((BaseObjectData)object).getNodeEntry());
-      if (indexListener != null)
-      {
-         indexListener.updated(object);
-      }
+
    }
 
+   @Override
    protected void delete() throws StorageException
    {
       if (isRoot())
       {
          throw new StorageException("Root folder can't be deleted.");
       }
-      String objectId = getObjectId();
       entry.delete();
-      if (indexListener != null)
-      {
-         Set<String> removed = new HashSet<String>();
-         removed.add(objectId);
-         indexListener.removed(removed);
-      }
    }
 
 }
