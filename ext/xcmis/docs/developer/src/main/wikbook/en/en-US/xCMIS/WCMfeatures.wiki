@@ -5,11 +5,105 @@ eXo's Web Content Management system provides CMIS specified access to its conten
 * Symlinks
 * Categories
 
+Work with CMIS are based on reference documents returned from the server. Result document contains links to other services are related to this document service.
+
+{note}
+Notes for usecases:
+To access eXo CMIS services from client side *[Curl|http://curl.haxx.se/download.html]* tool used.
+CMIS AtomPub binding used. This binding is based upon the Atom (RFC4287) and Atom Publishing Protocol (RFC5023).
+WebServices (SOAP binding) isn't present in Platfporm 3.x.
+{note}
+
 h2. WCM drives as CMIS Repositories
 
 WCM drive is exposes as isolated Repository via CMIS service. Operations on the Repository will reflect the Drive immediatelly. 
 
-*Browse Drives via getRepository*
+h3. USERCASE: Browse Drives via getRepository
+
+* Login to the website as a user with developer role
+* Open Group \-> Sites Explorer, you can see set of drives of WCM such as *Sites Management*, *DMS Administration* etc.
+* Get list of these WCM drives via CMIS using Curl, asking getRepositories service:
+{screen}
+curl -o getrepos.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/ 
+{screen}
+
+Result file (getrepos.xml) contains set of Repositories in AtomPub format.
+Root element represents set *workspaces* representing *WCM drives* related resources, e.g.
+{code:language=xml}
+   <workspace>
+      <atom:title type="text">DMS Administration</atom:title>
+      <cmisra:repositoryInfo xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/">
+         <cmis:repositoryId>DMS Administration</cmis:repositoryId>
+         <cmis:repositoryName>DMS Administration</cmis:repositoryName>
+      </cmisra:repositoryInfo>
+      <collection href="http://localhost:8080/rest/private/cmisatom/DMS%20Administration/query">
+         <atom:title type="text">Query</atom:title>
+         <cmisra:collectionType>query</cmisra:collectionType>
+      </collection>
+      <collection
+         href="http://localhost:8080/rest/private/cmisatom/DMS%20Administration/children/00exo0jcr0root0uuid0000000000000">
+         <atom:title type="text">Folder Children</atom:title>
+         <cmisra:collectionType>root</cmisra:collectionType>
+      </collection>
+      <collection href="http://localhost:8080/rest/private/cmisatom/DMS%20Administration/checkedout">
+         <atom:title type="text">Checkedout collection</atom:title>
+         <cmisra:collectionType>checkedout</cmisra:collectionType>
+      </collection>
+      <collection href="http://localhost:8080/rest/private/cmisatom/DMS%20Administration/unfiled">
+         <atom:title type="text">Unfiled collection</atom:title>
+         <cmisra:collectionType>unfiled</cmisra:collectionType>
+      </collection>
+      <collection href="http://localhost:8080/rest/private/cmisatom/DMS%20Administration/types">
+         <atom:title type="text">Types Children</atom:title>
+         <cmisra:collectionType>types</cmisra:collectionType>
+      </collection>
+      <cmisra:uritemplate>
+         <cmisra:template>http://localhost:8080/rest/private/cmisatom/DMS%20Administration/object/{id}?filter={filter}&amp;includeAllowableActions={includeAllowableActions}&amp;includePolicyIds={includePolicyIds}&amp;includeRelationships={includeRelationships}&amp;includeACL={includeACL}&amp;renditionFilter={renditionFilter}
+         </cmisra:template>
+         <cmisra:type>objectbyid</cmisra:type>
+         <cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
+      </cmisra:uritemplate>
+      <cmisra:uritemplate>
+         <cmisra:template>http://localhost:8080/rest/private/cmisatom/DMS%20Administration/objectbypath?path={path}&amp;filter={filter}&amp;includeAllowableActions={includeAllowableActions}&amp;includePolicyIds={includePolicyIds}&amp;includeRelationships={includeRelationships}&amp;includeACL={includeACL}&amp;renditionFilter={renditionFilter}
+         </cmisra:template>
+         <cmisra:type>objectbypath</cmisra:type>
+         <cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
+      </cmisra:uritemplate>
+      <cmisra:uritemplate>
+         <cmisra:template>http://localhost:8080/rest/private/cmisatom/DMS%20Administration/query?q={q}&amp;searchAllVersions={searchAllVersions}&amp;maxItems={maxItems}&amp;skipCount={skipCount}&amp;includeAllowableActions={includeAllowableActions}=&amp;includeRelationships={includeRelationships}
+         </cmisra:template>
+         <cmisra:type>query</cmisra:type>
+         <cmisra:mediatype>application/atom+xml;type=feed</cmisra:mediatype>
+      </cmisra:uritemplate>
+      <cmisra:uritemplate>
+         <cmisra:template>http://localhost:8080/rest/private/cmisatom/DMS%20Administration/typebyid/{id}
+         </cmisra:template>
+         <cmisra:type>typebyid</cmisra:type>
+         <cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
+      </cmisra:uritemplate>
+   </workspace>
+{code}
+
+Here are set of services collections and predefined templates can be used from client side to request resources related to this repository.
+E.g. to get WCM node of *DMS Administration* drive by path *objectbypath* template can be used:
+{code}
+http://localhost:8080/rest/private/cmisatom/DMS%20Administration/objectbypath?path={path}&amp;filter={filter}&amp;includeAllowableActions={includeAllowableActions}&amp;includePolicyIds={includePolicyIds}&amp;includeRelationships={includeRelationships}&amp;includeACL={includeACL}&amp;renditionFilter={renditionFilter}
+{code}
+where parameters:
+* Required:
+** ID repositoryId: The identifier for the Repository.
+** String path: The path to the object.
+* Optional:
+** String filter
+** Boolean includeAllowableActions
+** Enum includeRelationships
+** String renditionFilter
+** Boolean includePolicyIds
+** Boolean includeACL
+
+{note}
+Find full description of all sepcefied services in CMIS specefication.
+{note}
 
 
 h2. WCM Symlinks
@@ -19,81 +113,256 @@ Sylinks used to be able to organize virtual access to a documents in WCM, it's i
 JCR exo:symlink nodetype used for such type nodes.
 {note}
 
-*Follow Symlinks...*
+h3. USERCASE: Follow Symlinks
 
-* I login to the acme website as a user with developer role
-* Open Group \-> Sites Explorer, select *Sites Management*, go to folder /acme/events/All/Products
+* Login to the website as a user with developer role
+* Open Group \-> Sites Explorer, select *Sites Management*, go to folder /acme/documents
 * Upload any file (e.g. test.txt) to *Products* events
-* In toolbar I click on Group \-> Developers \-> CMISexpert
-* Select *Managed Sites* repository (it's WCM drive) in *Repositories* panel
-* Go to folder /acme/events/All/Products and find file just uploaded in *Site Explorer* there
-It's a symlink to the actual file stored somewhere by path with current date at the end, like /sites content/live/acme/web contents/2010/08/18/test.txt.
-* Find this actual file respectively in /acme/web contents/2010/08/18/test.txt
-* Check if both locations reflects to the same content (of file uploaded via *Sites Explorer*)
 
-h2. WCM Categories
+* Get content of folder /acme/events/All/Products via CMIS:
+{screen}
+curl -o products.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/objectbypath?path=/acme/documents
+{screen}
 
-TODO WCM Categories intro
+Result file (products.xml) contains entry with information about the folder:
+ * The list of properties for the object (such as node Id or type)
+ * Allowable Actions can be performed on the document. e.g. request childrens list.
+ * ACL and policies information
+{code:xml}
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
+   <id>8bedf7d10a14f89c5509eef77f0a8943</id>
+   <published>2010-08-23T13:17:26.364Z</published>
+   <updated>2010-08-23T13:17:26.364Z</updated>
+   <summary type="text"></summary>
+   <author>
+      <name>system</name>
+   </author>
+   <title type="text">documents</title>
+   <link href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites" rel="service" type="application/atomsvc+xml"></link>
+   <link href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/object/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="self"></link>
+   <link href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/object/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="edit"></link>
+   <link href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/typebyid/nt%3Aunstructured"
+      rel="describedby" type="application/atom+xml; type=entry"></link>
+   <link
+      href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/allowableactions/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="http://docs.oasis-open.org/ns/cmis/link/200908/allowableactions" type="application/cmis+xml; type=allowableActions"></link>
+   <link
+      href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/relationships/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="http://docs.oasis-open.org/ns/cmis/link/200908/relationships" type="application/atom+xml; type=feed"></link>
+   <link
+      href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/policies/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="http://docs.oasis-open.org/ns/cmis/link/200908/policies" type="application/atom+xml; type=feed"></link>
+   <link href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/objacl/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="http://docs.oasis-open.org/ns/cmis/link/200908/acl" type="application/cmisacl+xml"></link>
+   <link
+      href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/children/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="down" type="application/atom+xml; type=feed"></link>
+   <link
+      href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/descendants/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="down" type="application/cmistree+xml"></link>
+   <link
+      href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/foldertree/8bedf7d10a14f89c5509eef77f0a8943"
+      rel="http://docs.oasis-open.org/ns/cmis/link/200908/foldertree" type="application/atom+xml; type=feed"></link>
+   <link href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/object/8bedf7d10a14f89c4a39c13ec4250d39"
+      rel="up" type="application/atom+xml; type=entry"></link>
+   <content type="text">documents</content>
+   <cmisra:object xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
+      <cmis:properties>
+         <cmis:propertyId propertyDefinitionId="cmis:allowedChildObjectTypeIds" localName="cmis:allowedChildObjectTypeIds"
+            displayName="cmis:allowedChildObjectTypeIds" queryName="cmis:allowedChildObjectTypeIds"></cmis:propertyId>
+         <cmis:propertyString propertyDefinitionId="cmis:path" localName="cmis:path"
+            displayName="cmis:path" queryName="cmis:path">
+            <cmis:value>/sites content/live/acme/documents</cmis:value>
+         </cmis:propertyString>
+         <cmis:propertyId propertyDefinitionId="cmis:objectTypeId" localName="cmis:objectTypeId"
+            displayName="cmis:objectTypeId" queryName="cmis:objectTypeId">
+            <cmis:value>nt:unstructured</cmis:value>
+         </cmis:propertyId>
+         <cmis:propertyString propertyDefinitionId="cmis:lastModifiedBy" localName="cmis:lastModifiedBy"
+            displayName="cmis:lastModifiedBy" queryName="cmis:lastModifiedBy"></cmis:propertyString>
+         <cmis:propertyString propertyDefinitionId="cmis:name" localName="cmis:name"
+            displayName="cmis:name" queryName="cmis:name">
+            <cmis:value>documents</cmis:value>
+         </cmis:propertyString>
+         <cmis:propertyString propertyDefinitionId="cmis:createdBy" localName="cmis:createdBy"
+            displayName="cmis:createdBy" queryName="cmis:createdBy"></cmis:propertyString>
+         <cmis:propertyId propertyDefinitionId="cmis:objectId" localName="cmis:objectId"
+            displayName="cmis:objectId" queryName="cmis:objectId">
+            <cmis:value>8bedf7d10a14f89c5509eef77f0a8943</cmis:value>
+         </cmis:propertyId>
+         <cmis:propertyDateTime propertyDefinitionId="cmis:creationDate" localName="cmis:creationDate"
+            displayName="cmis:creationDate" queryName="cmis:creationDate"></cmis:propertyDateTime>
+         <cmis:propertyString propertyDefinitionId="cmis:changeToken" localName="cmis:changeToken"
+            displayName="cmis:changeToken" queryName="cmis:changeToken"></cmis:propertyString>
+         <cmis:propertyId propertyDefinitionId="cmis:baseTypeId" localName="cmis:baseTypeId"
+            displayName="cmis:baseTypeId" queryName="cmis:baseTypeId">
+            <cmis:value>cmis:folder</cmis:value>
+         </cmis:propertyId>
+         <cmis:propertyId propertyDefinitionId="cmis:parentId" localName="cmis:parentId"
+            displayName="cmis:parentId" queryName="cmis:parentId">
+            <cmis:value>8bedf7d10a14f89c4a39c13ec4250d39</cmis:value>
+         </cmis:propertyId>
+         <cmis:propertyDateTime propertyDefinitionId="cmis:lastModificationDate"
+            localName="cmis:lastModificationDate" displayName="cmis:lastModificationDate" queryName="cmis:lastModificationDate"></cmis:propertyDateTime>
+      </cmis:properties>
+      <cmis:acl></cmis:acl>
+      <cmis:exactACL>false</cmis:exactACL>
+      <cmis:policyIds></cmis:policyIds>
+      <cmis:rendition></cmis:rendition>
+   </cmisra:object>
+</entry>
+{code}
+ 
+To get file have uploaded above use *children* service to get list of child nodes of /acme/documents, find this service URL in the response XML above:
+{screen}
+curl -o childs.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/children/8bedf7d10a14f89c5509eef77f0a8943
+{screen}
 
-*Browse Categories*
-* I login to the acme website as a user with developer role
-* Open Group \-> Sites Explorer, select *Sites Management*, go to folder /acme/categories/acme/News
-* Upload any file (e.g. news.txt) to *News* category
-* In *Sites Explorer* go to folder /acme/documents
-* Upload any file (e.g. document.txt) to *documents*, enter this document by double-click, change its categories clicking on *Manage Categories* in Publication menu and set both *acme/Economy* and *acme/News* categories to the document
-!sitesexplorer-categories.png|thumbnail,border=1!
-* In toolbar I click on Group \-> Developers \-> CMISexpert
-* Select *Managed Sites* repository (it's WCM drive) in *Repositories* panel
-* Go to folder /acme/categories/acme/News and find two files just uploaded in *Site Explorer* there (news.txt and document.txt)
-!xcmis-2file-news-catgory.png|thumbnail,border=1!
-* Go to folder /acme/categories/acme/Economy and only one file uploaded in *Site Explorer* there (document.txt)
-* Check if news.txt stored in /acme/web contents/
-* Check if document.txt stored in /acme/documents
+In the response result (childs.xml) find entry related to *test.txt* file uploaded via *Sites Explorer*.
+{code:xml}
+   <entry xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
+      <id>9e72ceb2c0a88901312de3fac548c5c0</id>
+      <published>2010-08-23T13:16:18.354Z</published>
+      <updated>2010-08-23T13:16:18.354Z</updated>
+      <summary type="text"></summary>
+      <author>
+         <name>system</name>
+      </author>
+      <title type="text">test.txt</title>
+      <link href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites" rel="service"
+         type="application/atomsvc+xml"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/object/9e72ceb2c0a88901312de3fac548c5c0"
+         rel="self"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/object/9e72ceb2c0a88901312de3fac548c5c0"
+         rel="edit"></link>
+      <link href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/typebyid/cmis%3Adocument"
+         rel="describedby" type="application/atom+xml; type=entry"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/allowableactions/9e72ceb2c0a88901312de3fac548c5c0"
+         rel="http://docs.oasis-open.org/ns/cmis/link/200908/allowableactions" type="application/cmis+xml; type=allowableActions"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/relationships/9e72ceb2c0a88901312de3fac548c5c0"
+         rel="http://docs.oasis-open.org/ns/cmis/link/200908/relationships" type="application/atom+xml; type=feed"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/policies/9e72ceb2c0a88901312de3fac548c5c0"
+         rel="http://docs.oasis-open.org/ns/cmis/link/200908/policies" type="application/atom+xml; type=feed"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/objacl/9e72ceb2c0a88901312de3fac548c5c0"
+         rel="http://docs.oasis-open.org/ns/cmis/link/200908/acl" type="application/cmisacl+xml"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/versions/9e72cee8c0a88901181da1df79fc77f9"
+         rel="version-history" type="application/atom+xml; type=feed"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/object/9e72ceb2c0a88901312de3fac548c5c0?returnVersion=latest"
+         rel="current-version" type="application/atom+xml; type=entry"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/parents/9e72ceb2c0a88901312de3fac548c5c0"
+         rel="up" type="application/atom+xml; type=feed"></link>
+      <link
+         href="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/9e72ceb2c0a88901312de3fac548c5c0"
+         rel="edit-media"></link>
+      <content type="text/plain"
+         src="http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/9e72ceb2c0a88901312de3fac548c5c0"></content>
+      <cmisra:object xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
+         <cmis:properties>
+            <cmis:propertyBoolean propertyDefinitionId="cmis:isLatestMajorVersion"
+               localName="cmis:isLatestMajorVersion" displayName="cmis:isLatestMajorVersion" queryName="cmis:isLatestMajorVersion">
+               <cmis:value>false</cmis:value>
+            </cmis:propertyBoolean>
+            <cmis:propertyInteger propertyDefinitionId="cmis:contentStreamLength"
+               localName="cmis:contentStreamLength" displayName="cmis:contentStreamLength" queryName="cmis:contentStreamLength">
+               <cmis:value>4</cmis:value>
+            </cmis:propertyInteger>
+            <cmis:propertyId propertyDefinitionId="cmis:contentStreamId" localName="cmis:contentStreamId"
+               displayName="cmis:contentStreamId" queryName="cmis:contentStreamId"></cmis:propertyId>
+            <cmis:propertyId propertyDefinitionId="cmis:objectTypeId" localName="cmis:objectTypeId"
+               displayName="cmis:objectTypeId" queryName="cmis:objectTypeId">
+               <cmis:value>cmis:document</cmis:value>
+            </cmis:propertyId>
+            <cmis:propertyString propertyDefinitionId="cmis:versionSeriesCheckedOutBy"
+               localName="cmis:versionSeriesCheckedOutBy" displayName="cmis:versionSeriesCheckedOutBy"
+               queryName="cmis:versionSeriesCheckedOutBy"></cmis:propertyString>
+            <cmis:propertyId propertyDefinitionId="cmis:versionSeriesCheckedOutId" localName="cmis:versionSeriesCheckedOutId"
+               displayName="cmis:versionSeriesCheckedOutId" queryName="cmis:versionSeriesCheckedOutId"></cmis:propertyId>
+            <cmis:propertyString propertyDefinitionId="cmis:name" localName="cmis:name"
+               displayName="cmis:name" queryName="cmis:name">
+               <cmis:value>test.txt</cmis:value>
+            </cmis:propertyString>
+            <cmis:propertyString propertyDefinitionId="cmis:contentStreamMimeType"
+               localName="cmis:contentStreamMimeType" displayName="cmis:contentStreamMimeType" queryName="cmis:contentStreamMimeType">
+               <cmis:value>text/plain</cmis:value>
+            </cmis:propertyString>
+            <cmis:propertyId propertyDefinitionId="cmis:versionSeriesId" localName="cmis:versionSeriesId"
+               displayName="cmis:versionSeriesId" queryName="cmis:versionSeriesId">
+               <cmis:value>9e72cee8c0a88901181da1df79fc77f9</cmis:value>
+            </cmis:propertyId>
+            <cmis:propertyDateTime propertyDefinitionId="cmis:creationDate" localName="cmis:creationDate"
+               displayName="cmis:creationDate" queryName="cmis:creationDate">
+               <cmis:value>2010-08-23T13:16:18.354Z</cmis:value>
+            </cmis:propertyDateTime>
+            <cmis:propertyString propertyDefinitionId="cmis:changeToken" localName="cmis:changeToken"
+               displayName="cmis:changeToken" queryName="cmis:changeToken"></cmis:propertyString>
+            <cmis:propertyBoolean propertyDefinitionId="cmis:isLatestVersion" localName="cmis:isLatestVersion"
+               displayName="cmis:isLatestVersion" queryName="cmis:isLatestVersion"></cmis:propertyBoolean>
+            <cmis:propertyString propertyDefinitionId="cmis:versionLabel" localName="cmis:versionLabel"
+               displayName="cmis:versionLabel" queryName="cmis:versionLabel">
+               <cmis:value>latest</cmis:value>
+            </cmis:propertyString>
+            <cmis:propertyBoolean propertyDefinitionId="cmis:isVersionSeriesCheckedOut"
+               localName="cmis:isVersionSeriesCheckedOut" displayName="cmis:isVersionSeriesCheckedOut"
+               queryName="cmis:isVersionSeriesCheckedOut"></cmis:propertyBoolean>
+            <cmis:propertyString propertyDefinitionId="cmis:lastModifiedBy" localName="cmis:lastModifiedBy"
+               displayName="cmis:lastModifiedBy" queryName="cmis:lastModifiedBy"></cmis:propertyString>
+            <cmis:propertyString propertyDefinitionId="cmis:createdBy" localName="cmis:createdBy"
+               displayName="cmis:createdBy" queryName="cmis:createdBy"></cmis:propertyString>
+            <cmis:propertyString propertyDefinitionId="cmis:checkinComment" localName="cmis:checkinComment"
+               displayName="cmis:checkinComment" queryName="cmis:checkinComment"></cmis:propertyString>
+            <cmis:propertyId propertyDefinitionId="cmis:objectId" localName="cmis:objectId"
+               displayName="cmis:objectId" queryName="cmis:objectId">
+               <cmis:value>9e72ceb2c0a88901312de3fac548c5c0</cmis:value>
+            </cmis:propertyId>
+            <cmis:propertyBoolean propertyDefinitionId="cmis:isImmutable" localName="cmis:isImmutable"
+               displayName="cmis:isImmutable" queryName="cmis:isImmutable"></cmis:propertyBoolean>
+            <cmis:propertyBoolean propertyDefinitionId="cmis:isMajorVersion" localName="cmis:isMajorVersion"
+               displayName="cmis:isMajorVersion" queryName="cmis:isMajorVersion"></cmis:propertyBoolean>
+            <cmis:propertyId propertyDefinitionId="cmis:baseTypeId" localName="cmis:baseTypeId"
+               displayName="cmis:baseTypeId" queryName="cmis:baseTypeId">
+               <cmis:value>cmis:document</cmis:value>
+            </cmis:propertyId>
+            <cmis:propertyString propertyDefinitionId="cmis:contentStreamFileName"
+               localName="cmis:contentStreamFileName" displayName="cmis:contentStreamFileName" queryName="cmis:contentStreamFileName">
+               <cmis:value>test.txt</cmis:value>
+            </cmis:propertyString>
+            <cmis:propertyDateTime propertyDefinitionId="cmis:lastModificationDate"
+               localName="cmis:lastModificationDate" displayName="cmis:lastModificationDate" queryName="cmis:lastModificationDate">
+               <cmis:value>2010-08-23T13:16:18.354Z</cmis:value>
+            </cmis:propertyDateTime>
+         </cmis:properties>
+         <cmis:acl></cmis:acl>
+         <cmis:exactACL>false</cmis:exactACL>
+         <cmis:policyIds></cmis:policyIds>
+         <cmis:rendition></cmis:rendition>
+      </cmisra:object>
+   </entry>
+{code}
+
+Then get *test.txt* file content via CMIS use *file* service:
+{screen}
+curl -o test.txt -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/9e72ceb2c0a88901312de3fac548c5c0
+{screen}
+
+Get result in test.txt file in local folder.
+
 
 h2. Modify WCM via CMIS
 
-TODO...
-
-*Modify template*
-
-* I login to the acme website as a user with developer role
-* In toolbar I click on Group \-> Developers \-> CMISexpert
-* Select *DMS Administration* repository (it's WCM drive actually) in *Repositories* panel on left
-* Go to folder /exo:ecm/views/templates/Content List Viewer/list-by-folder
-* Double-click on *OneColumnCLVTemplate.gtmpl* file and download it to local folder on the disk
-* Modify local file, change div element at begin of the template: 
-{code:language=xml}
-    <div class="TitleBarM">
-      $header
-      <%if (isShowRssLink) {
-      %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
-      }%>
-    </div>
-  {code}
-with link to the eXo site:
-{code:language=xml}
-    <div class="TitleBarM">
-      $header
-      <%if (isShowRssLink) {
-      %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a>
-      <a href="http://www.exoplatform.org/">eXo site</a><%
-      }%>
-    </div>
-{code}
-* Open Group \-> Sites Explorer, select *DMS Administration*, go to file /exo:ecm/views/templates/Content List Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl.
-* Open the file *View Node Properties* in Sites Explorer, and copy *jcr:uuid* of the file.
-It's possible to get Node ID through CMIS API call by Node's path and then looking the response XML for content download URL.
-Command for 
+To update any file via CMIS use *file* service and PUT request.
+using same file as in previous paragraph (/acme/documents, id:9e72ceb2c0a88901312de3fac548c5c0)
 {screen}
-curl -o OneColumnCLVTemplate.gtmpl.Entry.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/DMS%20Administration/objectbypath?path=/exo:ecm/views/templates/Content%20List%20Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl
+curl -T test.txt -X PUT -H "Content-Type:text/plain; charset=UTF-8" -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/9e72ceb2c0a88901312de3fac548c5c0
 {screen}
-
-{note}
-* Upload modified local file using command with substitute of *<file_ID>* to *jcr:uuid* of the file. Note: run this command from folder where is local file stored.
-{screen}
-curl -T OneColumnCLVTemplate.gtmpl -X PUT -H "Content-Type:application/x-groovy+html; charset=UTF-8" -u root:gtn http://localhost:8080/rest/private/cmisatom/DMS%20Administration/file/<file_ID>
-{screen}
-* go to the home page of Acme and see change applied from the local file: find link to eXo site on portlet header
-
-
 
