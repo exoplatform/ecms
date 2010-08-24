@@ -9,6 +9,7 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -25,6 +26,7 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -67,7 +69,10 @@ public class UIContentSearchResult extends UIGrid {
   
   /** The BEA n_ fields. */
   public String[] BEAN_FIELDS = {TITLE, SCORE, PUBLICATION_STATE};
-
+  
+  /** To save the source uicomponent */
+  protected UIComponent sourceUIComponent;
+  protected String returnFieldName;
 
   /**
    * Instantiates a new uIWCM search result.
@@ -264,5 +269,21 @@ public class UIContentSearchResult extends UIGrid {
       event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
       contentSelector.setSelectedTab(contentResultViewer.getId());
     }
-  }  
+  }
+  public String getReturnFieldName() { return returnFieldName; }
+
+  public UIComponent getSourceComponent() { return sourceUIComponent; }
+
+  public void setSourceComponent(UIComponent uicomponent, String[] initParams) {
+    sourceUIComponent = uicomponent ;
+    if(initParams == null || initParams.length < 0) return ;
+    for(int i = 0; i < initParams.length; i ++) {
+      if(initParams[i].indexOf("returnField") > -1) {
+        String[] array = initParams[i].split("=") ;
+        returnFieldName = array[1] ;
+        break ;
+      }
+      returnFieldName = initParams[0] ;
+    }
+  }
 }
