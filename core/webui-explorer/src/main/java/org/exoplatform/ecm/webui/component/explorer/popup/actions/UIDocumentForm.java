@@ -237,17 +237,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   }
   
   public String getLastModifiedDate() throws Exception {
-	  String d = "";
-	  try {
-		  Node node = getCurrentNode();
-		  if (node.hasProperty("exo:dateModified")) {
-		    Locale locale = Util.getPortalRequestContext().getLocale();
-		    DateFormat dateFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
-		    Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
-		    d = dateFormater.format(calendar.getTime());
-		  }
-	  } catch (Exception e) {}
-	  return d;
+    return getLastModifiedDate(getCurrentNode());
   }
   
   static  public class SaveActionListener extends EventListener<UIDocumentForm> {

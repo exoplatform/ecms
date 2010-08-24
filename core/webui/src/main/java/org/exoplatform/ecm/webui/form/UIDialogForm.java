@@ -18,12 +18,16 @@ package org.exoplatform.ecm.webui.form;
 
 import java.io.InputStream;
 import java.io.Writer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -56,7 +60,6 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.JcrInputProperty;
@@ -85,6 +88,7 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormInput;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -1350,7 +1354,24 @@ public void addTextField(String name, String label, String[] arguments) throws E
   
   public String getStoredPath() { return storedPath; }
 
-  public void setWorkspace(String workspace) { this.workspaceName = workspace; }  
+  public void setWorkspace(String workspace) { this.workspaceName = workspace; }
+  
+  public String getLastModifiedDate() throws Exception {
+    return getLastModifiedDate(getNode());
+  }
+  
+  public String getLastModifiedDate(Node node) throws Exception {
+    String d = "";
+    try {
+      if (node.hasProperty("exo:dateModified")) {
+        Locale locale = Util.getPortalRequestContext().getLocale();
+        DateFormat dateFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
+        Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
+        d = dateFormater.format(calendar.getTime());
+      }
+    } catch (Exception e) {}
+    return d;
+  }
 
   private void executePostSaveEventInterceptor(String nodePath_) throws Exception {
     if (postScriptInterceptor.size() > 0) {
