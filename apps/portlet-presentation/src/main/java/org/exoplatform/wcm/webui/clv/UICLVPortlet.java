@@ -244,6 +244,13 @@ public class UICLVPortlet extends UIPortletApplication {
       folderMode.setRendered(false);
       manualMode.setRendered(false);
       config.setRendered(true);
+    } else if (currentMode == PortletMode.VIEW) {
+      if (Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH) != null)
+        currentFolderPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
+      folderMode.init();
+      folderMode.setRendered(true);
+      manualMode.setRendered(false);
+      config.setRendered(false);      
     }
     
     super.processRender(app, context);
