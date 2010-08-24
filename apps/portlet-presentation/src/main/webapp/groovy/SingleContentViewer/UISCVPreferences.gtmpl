@@ -14,7 +14,7 @@
               <legend class="StyleLegend"><%= _ctx.appRes("UISCVPreferences.label.ContentPathBlock") %></legend>
               <table class="UIFormGrid" style="width:100%">    
                 <tr>                  
-                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                  <td class="FieldLabel" style="vertical-align:middle;"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td class="FieldComponent"  colspan="2"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td class ="tdShowHelp">
                     <div class="IconInContextHelp ShowHelpIcon" id="ContentPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentPathHelp', 'false')">
@@ -55,14 +55,14 @@
               <legend class="StyleLegend"><%= _ctx.appRes("UISCVPreferences.label.DisplaySettingBlock") %></legend>
               <table class="UIFormGrid">
                 <tr>                  
-                  <td class="FieldLabel"><% uiform.renderField(uicomponent.SHOW_TITLE_CHECK_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_CHECK_BOX) %></td>                  
+                  <td class="FieldComponent" style="text-align:right;"><% uiform.renderField(uicomponent.SHOW_TITLE_CHECK_BOX) %></td>
+                  <td class="FieldLabel" style="text-align:left;vertical-align:middle;" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_CHECK_BOX) %></td>                  
                   
-                  <td class="FieldLabel"><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></td>                  
+                  <td class="FieldComponent" style="text-align:right;"><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %></td>
+                  <td class="FieldLabel" style="text-align:left;vertical-align:middle;" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></td>                  
                   
-                  <td class="FieldLabel"><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
-                  <td class="FieldComponent" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
+                  <td  class="FieldComponent" style="text-align:right;"><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
+                  <td class="FieldLabel" style="text-align:left;vertical-align:middle;" colspan="2"><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></td>
                   <td class ="tdShowHelp">
                     <div class="IconInContextHelp ShowHelpIcon" id="ShowOptionHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowOptionHelp', 'false')">
                       <div style="position: absolute;">
@@ -108,8 +108,8 @@
               <div><%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %></div>
               <table class="UIFormGrid" width="100%">
                 <tr>
-                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %></td>
-                  <td class="FieldComponent" colspan="2">
+                  <td class="FieldComponent" style="text-align:right;vertical-align:middle;"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %></td>
+                  <td class="FieldLabel" style="text-align:left;vertical-align:middle;" colspan="2">
                     <div onclick="if (document.getElementById('<%=uicomponent.id%>').<%=uicomponent.CONTEXTUAL_SELECT_RADIO_BOX%>[0].checked) document.getElementById('<%=uicomponent.id%>').<%=uicomponent.PARAMETER_INPUT_BOX%>.removeAttribute('readonly',0); else document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('readonly',true);">
                       <%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %>                      
                     </div>
@@ -145,8 +145,8 @@
                 </td>
                 </tr>
                 <tr>                  
-                  <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.PARAMETER_INPUT_BOX) %></td>
-                  <td class="FieldComponent"  colspan="2"><%uiform.renderField(uicomponent.PARAMETER_INPUT_BOX) %></td>
+                  <td class="FieldLabel" style="vertical-align:middle;"><%=uicomponent.getLabel(uicomponent.PARAMETER_INPUT_BOX) %></td>
+                  <td class="FieldComponent"  colspan="2" ><%uiform.renderField(uicomponent.PARAMETER_INPUT_BOX) %></td>
                   <td class ="tdShowHelp">
                   <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
                     <div style="position: absolute;">

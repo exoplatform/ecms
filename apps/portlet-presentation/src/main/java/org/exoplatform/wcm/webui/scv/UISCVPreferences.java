@@ -136,18 +136,6 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     addChild(txtParameterName);
 
   }
-  public void getPreferences() {
-    String strNodeName = getNodeNameByPreferences();
-    txtContentPath.setLabel(strNodeName);
-    boolean blnShowTitle = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE, null));
-    chkShowTitle.setChecked(blnShowTitle);
-    boolean blnShowDate = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_DATE, null));
-    chkShowDate.setChecked(blnShowDate);
-    boolean blnShowOptionBar = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR, null));
-    chkShowOptionBar.setChecked(blnShowOptionBar);
-    boolean isShowContextOption = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
-    contextOptionsRadioInputBox.setValue(isShowContextOption?ENABLE_STRING:DISABLE_STRING);
-  }
   /**
    * ActionListener: save preferences action
    * @author exo.VinhNT
@@ -178,7 +166,6 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       if (uiSCVPref.getInternalPreferencesMode()) {
         if (!Utils.isPortalEditMode()) {
           uiSCVPref.getAncestorOfType(UISingleContentViewerPortlet.class).changeToViewMode();
-          uiSCVPref.getPreferences();
         }
       } else {
         Utils.closePopupWindow(uiSCVPref, UISingleContentViewerPortlet.UIPreferencesPopupID);

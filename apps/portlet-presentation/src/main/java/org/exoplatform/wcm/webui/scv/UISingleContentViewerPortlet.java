@@ -101,16 +101,17 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
    * 
    * @throws Exception the exception
    */
-  public void activateMode(PortletMode newMode){
+  public void activateMode(PortletMode newMode) throws Exception{
+    if (getChild(UIPresentationContainer.class) !=null) {
+      removeChild(UIPresentationContainer.class);
+    }
+    if (getChild(UISCVPreferences.class) != null) {
+      removeChild(UISCVPreferences.class);
+    }
     if(PortletMode.VIEW.equals(newMode)) {
-      popPreferences.setRendered(false);
-      uiPresentation.getNodeView();//Force the portlet reload the nodecontent
-    	uiPresentation.setRendered(true);
+      addChild(UIPresentationContainer.class, null, null).getNodeView();
     } else if (PortletMode.EDIT.equals(newMode)) {
-      popPreferences.setInternalPreferencesMode(true);
-      uiPresentation.setRendered(false);
-      popPreferences.getPreferences();
-      popPreferences.setRendered(true);      
+      addChild(UISCVPreferences.class, null, null).setInternalPreferencesMode(true);
     }
   }
   public boolean isViewMode() {

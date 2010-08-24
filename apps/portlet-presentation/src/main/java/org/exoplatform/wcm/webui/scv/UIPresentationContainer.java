@@ -23,7 +23,6 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
@@ -118,11 +117,6 @@ public class UIPresentationContainer extends UIContainer{
 		return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
 	}
 	
-	public boolean isViewMode() {
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    System.out.println("VinhNT Tracert: isViewmode: " + portletRequestContext.getApplicationMode());
-    return portletRequestContext.getApplicationMode().equals(PortletMode.VIEW);
-	}
 	/**
 	 * Gets the created date.
 	 * 
@@ -155,11 +149,8 @@ public class UIPresentationContainer extends UIContainer{
 		  //Check for the saved parameter
 		  viewNode = getParameterizedNode();
 		  if (viewNode!= null) {
-	      presentation.setNode(viewNode);
-	      presentation.setOriginalNode(viewNode);
 		    return viewNode;
-		  }
-		  
+		  }		  
 			PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
 			portletPreferences = portletRequestContext.getRequest().getPreferences();
 			String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);    

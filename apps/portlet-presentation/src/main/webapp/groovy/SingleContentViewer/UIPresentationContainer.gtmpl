@@ -62,6 +62,7 @@
 			if (!Utils.isPortalEditMode() && isShowOptionBar) { 
 				%>
 					<div class="UIOptionBar">
+	         <div class="BackButton" title="<%= _ctx.appRes("UIPCVContainer.title.Back") %>" onclick="history.go(-1)"><span></span></div>
 						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl() %>')" title="<%= _ctx.appRes("UIPresentationContainer.title.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
 					</div>
 				<% 
