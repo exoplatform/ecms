@@ -19,7 +19,6 @@ package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -30,13 +29,13 @@ import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.nodetype.NodeType;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -431,13 +430,13 @@ public class UIPropertyForm extends UIForm {
           Value[] values = {};
           List valueList = uiForm.processValues(type);
           values = uiForm.createValues(valueList, type, currentNode.getSession().getValueFactory());
-          if(nodeType.canSetProperty(name, values)) {
+          if(currentNode.hasProperty(name)) {
             currentNode.setProperty(name, values);
           }
         } else {
           Object objValue = uiForm.processValue(type);
           Value value = uiForm.createValue(objValue, type, currentNode.getSession().getValueFactory());
-          if(nodeType.canSetProperty(name, value)) {
+          if(currentNode.hasProperty(name)) {
             currentNode.setProperty(name, value);
           }
         }
