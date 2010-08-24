@@ -60,7 +60,7 @@
 					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
 					%>
 					<div class="CaptionItem" style="border-bottom: 0px;"
-							 onmouseover="this.setAttribute('class', 'CaptionItem $hoverClass')" onmouseout="this.setAttribute('class', 'CaptionItem')">					
+						onmouseover="this.className = 'CaptionItem $hoverClass'" onmouseout="this.className ='CaptionItem'">					
 						<%
 				    if (Utils.isShowQuickEdit()) {
 						%>

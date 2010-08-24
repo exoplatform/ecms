@@ -17,7 +17,7 @@
 			def isShowDate  = uicomponent.isShowDate();
 			%>
 			<div class="$uicomponent.id" id="$uicomponent.id" 
-				onmouseover="this.setAttribute('class', '$uicomponent.id $hoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
+				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' ">
 			<%     
 			  if (Utils.isShowQuickEdit()) {	%>	
 				 <div class="EdittingToolBarContainer" style=" z-index: 1">
@@ -83,7 +83,7 @@
 		  if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage() && Utils.isShowQuickEdit()) {
 				%>
 	      <div class="$uicomponent.id" id="$uicomponent.id" 
-	        onmouseover="this.setAttribute('class', '$uicomponent.id $hoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
+	      	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id' ">
   				<div class="EdittingToolBarContainer" style=" z-index: 1">
           <div class="EdittingToolBar " >
            <div class="EdittingToolBarL">

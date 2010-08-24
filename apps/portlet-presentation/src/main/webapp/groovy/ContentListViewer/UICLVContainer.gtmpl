@@ -7,7 +7,7 @@
 		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : ""; 
 %>
 <div class="$uicomponent.id " id="$uicomponent.id" 
-	onmouseover="this.setAttribute('class', '$uicomponent.id $hoverClass')" onmouseout="this.setAttribute('class', '$uicomponent.id')">
+	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id'">
 	<%
 	
 		def rcontext = _ctx.getRequestContext() ;

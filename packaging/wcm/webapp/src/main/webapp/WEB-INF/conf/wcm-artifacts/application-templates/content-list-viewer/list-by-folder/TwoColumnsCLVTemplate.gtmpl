@@ -81,7 +81,7 @@
           def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
 					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
 					%>
-					<div class="Column2" onmouseover="this.setAttribute('class', 'Column2 $hoverClass')" onmouseout="this.setAttribute('class', 'Column2')">
+					<div class="Column2" onmouseover="this.className  = 'Column2 $hoverClass' " onmouseout="this.className = 'Column2'">
 						<%
 						if (Utils.isShowQuickEdit()) {
 						%>

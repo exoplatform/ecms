@@ -73,7 +73,7 @@
 							if (itemTitle != null && itemTitle.trim().length() != 0)
 								itemName = itemTitle;
 							%>
-							<div class="NormalNews" onmouseover="this.setAttribute('class', 'NormalNews $hoverClass')" onmouseout="this.setAttribute('class', 'NormalNews')">							
+							<div class="NormalNews" onmouseover="this.className  = 'NormalNews $hoverClass' " onmouseout="this.className = 'NormalNews'">							
 								<%
 						    if (Utils.isShowQuickEdit()) {
 								%>
