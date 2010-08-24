@@ -23,7 +23,7 @@
 				              <div class="$style">
 				                <div class="LeftTab">
 				                  <div class="RightTab">                
-				                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.changeTabForUITabPane(this, '$paneId', '$tabId')"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
+				                  <div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab"  ,tabId)%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
 				                  </div>
 				                </div>
 				              </div>
@@ -50,8 +50,6 @@
 	</div>  
 </div>
 <%
-  UIJCRExplorer uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
-  uiExplorer.setClickExpand(false);
   } else { %>
   <div id="$uicomponent.id">
 <%

@@ -23,6 +23,7 @@ var ListView = function() {
 		Self.contextMenuId = "JCRContextMenu";
 		Self.actionAreaId = actionAreaId;
 		var actionArea = document.getElementById(actionAreaId);
+		if (!actionArea) return;
 		Self.allItems = DOM.findDescendantsByClass(actionArea, "div", "RowView");
 		var mousedown = null;
 		for (var i in Self.allItems) {
