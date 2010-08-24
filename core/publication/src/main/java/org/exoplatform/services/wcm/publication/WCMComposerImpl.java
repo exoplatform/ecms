@@ -195,7 +195,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 			List<Node> cachedNodes = (List<Node>)cache.get(hash);
 			if (cachedNodes != null) return cachedNodes;
 		}
-		if (log.isInfoEnabled()) log.info("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
+		if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
 		NodeIterator nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider);
 		List<Node> nodes = new ArrayList<Node>();
 		Node node = null, viewNode = null;
@@ -310,7 +310,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 //		String orderType = filters.get(FILTER_ORDER_TYPE);
 		if (isCached) {
 			String[] orderTypes = {"ASC", "DESC"};
-			if (log.isInfoEnabled()) log.info("updateContent : "+path);
+			if (log.isDebugEnabled()) log.debug("updateContent : "+path);
 			String part = path.substring(0, path.lastIndexOf("/"));
 			String remoteUser = null;
 			try {
@@ -340,7 +340,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 
 				}
 			} catch (RepositoryException e) {
-				if (log.isInfoEnabled()) log.info("Can't find UUID for path : "+workspace+":"+path);
+				if (log.isErrorEnabled()) log.error("Can't find UUID for path : "+workspace+":"+path);
 			}
 
 			for (String lang:usedLanguages) {
@@ -428,7 +428,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	      }
 	    }
 	  } catch (RepositoryException e) {
-	    log.error("Unexpected error when getting node taxonomies");
+	    if (log.isErrorEnabled())log.error("Unexpected error when getting node taxonomies");
 	  }
 	  return "";
 	}
@@ -444,7 +444,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 				remoteUser = Util.getPortalRequestContext().getRemoteUser();
 			} catch (Exception e) {}
 
-			if (log.isInfoEnabled()) log.info("updateContents : "+path);
+			if (log.isDebugEnabled()) log.debug("updateContents : "+path);
 
 			for (String lang:usedLanguages) {
 				for (String recursive:new String[]{"true", "false"}) {
@@ -500,7 +500,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		public void cleanTemplates() throws Exception {
 			this.templatesFilter = null;
 			getTemplatesSQLFilter("repository");
-			if (log.isInfoEnabled()) log.info("WCMComposer templates have been cleaned !");
+			if (log.isDebugEnabled()) log.debug("WCMComposer templates have been cleaned !");
 		}
 	
 	@Managed
