@@ -20,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.jcr.PropertyType;
@@ -204,6 +205,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     supertypes.add("nt:base");
 
     List<PropertyDefinitionValue> properties = new ArrayList<PropertyDefinitionValue>();
+    List<NodeDefinitionValue>  childNodesDefinitions = new ArrayList<NodeDefinitionValue>();
+    
     for (UIFormGeneratorInputBean form : formBeans) {
       PropertyDefinitionValue property = new PropertyDefinitionValue() ;
       property.setName(getPropertyName(form.getName())) ;          
@@ -216,12 +219,19 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       property.setValueConstraints(null) ;
       properties.add(property) ;
       String inputType = form.getType();
-      if (UIFormGeneratorConstant.UPLOAD.equals(inputType) && !supertypes.contains("nt:file")) supertypes.add("nt:file");   
+      //if (UIFormGeneratorConstant.UPLOAD.equals(inputType) && !supertypes.contains("nt:file")) supertypes.add("nt:file");
+      if (UIFormGeneratorConstant.UPLOAD.equals(inputType)) {
+        String inputFieldName = cleanString(form.getName()) + "FieldName";              
+        String childName = "jcr:content" +  inputFieldName;             
+        NodeDefinitionValue nodeDef = new NodeDefinitionValue(childName, false, false, OnParentVersionAction.VERSION, false,
+        																											"nt:resource", Arrays.asList(new String[] {"nt:resource"}), true);
+        childNodesDefinitions.add(nodeDef);
+      }      
     }
     newNodeType.setDeclaredSupertypeNames(supertypes);
     newNodeType.setDeclaredPropertyDefinitionValues(properties) ;
     
-    newNodeType.setDeclaredChildNodeDefinitionValues(new ArrayList<NodeDefinitionValue>()) ;
+    newNodeType.setDeclaredChildNodeDefinitionValues(childNodesDefinitions);
     try {
       ExtendedNodeTypeManager extendedNodeTypeManager = getApplicationComponent(RepositoryService.class).getRepository(repository).getNodeTypeManager(); 
       extendedNodeTypeManager.registerNodeType(newNodeType, ExtendedNodeTypeManager.FAIL_IF_EXISTS);
@@ -338,23 +348,28 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         
         if (UIFormGeneratorConstant.UPLOAD.equals(inputType)) {
           String extraFormUploadInput = "";                    
-          dialogTemplate.append("hiddenField1 = [\"jcrPath=/node" + extraFormUploadInput + "/jcr:content\", \"nodetype=nt:resource\", \"visible=false\"];\n");
-          dialogTemplate.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput1\", hiddenField1);\n");          
-          dialogTemplate.append("hiddenField2 = [\"jcrPath=/node" + extraFormUploadInput + "/jcr:content/jcr:encoding\", \"visible=false\", \"UTF-8\"];\n");
-          dialogTemplate.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput2\", hiddenField2);\n");          
-          dialogTemplate.append("hiddenField3 = [\"jcrPath=/node" + extraFormUploadInput + "/jcr:content/jcr:lastModified\", \"visible=false\"];\n");
-          dialogTemplate.append("uicomponent.addCalendarField(\"" + inputFieldName + "_hiddenInput3\", hiddenField3);\n");
+          String realDataNodeName = "jcr:content"  + (inputFieldName);
+          
+          StringBuilder hiddenFields = new StringBuilder();
+          hiddenFields.append("hiddenField1 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "\", \"nodetype=nt:resource\", \"visible=false\"];\n");
+          hiddenFields.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput1\", hiddenField1);\n");         
+          hiddenFields.append("hiddenField2 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "/jcr:encoding\", \"visible=false\", \"UTF-8\"];\n");
+          hiddenFields.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput2\", hiddenField2);\n");         
+          hiddenFields.append("hiddenField3 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "/jcr:lastModified\", \"visible=false\"];\n");
+          hiddenFields.append("uicomponent.addCalendarField(\"" + inputFieldName + "_hiddenInput3\", hiddenField3);\n");
+          String hiddenFieldsStr = hiddenFields.toString();
+	          
           dialogTemplate.append("           if(uicomponent.isEditing()) {\n");
           dialogTemplate.append("             def curNode = uicomponent.getNode() ;\n");
-          dialogTemplate.append("             if (curNode.hasNode(\"jcr:content\")) {\n");
-          dialogTemplate.append("               def imageNode = curNode.getNode(\"jcr:content\");\n");
+          dialogTemplate.append("             if (curNode.hasNode(\"" + realDataNodeName + "\")) {\n");
+          dialogTemplate.append("               def imageNode = curNode.getNode(\"" + realDataNodeName + "\");\n");
           dialogTemplate.append("               if(imageNode.getProperty(\"jcr:data\").getStream().available() > 0) {\n");
           dialogTemplate.append("                 DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);\n");
           dialogTemplate.append("                 InputStream input = imageNode.getProperty(\"jcr:data\").getStream();\n");
           dialogTemplate.append("                 InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, \"" + inputFieldName + "\");\n");
           dialogTemplate.append("                 dresource.setDownloadName(curNode.getName());\n");
           dialogTemplate.append("                 def imgSrc = dservice.getDownloadLink(dservice.addDownloadResource(dresource));\n");
-          dialogTemplate.append("                 def actionLink = uicomponent.event(\"RemoveData\", \"/jcr:content\");\n");
+          dialogTemplate.append("                 def actionLink = uicomponent.event(\"RemoveData\", \"/" + realDataNodeName + "\");\n");
           dialogTemplate.append("                 %>\n");
           dialogTemplate.append("                   <div>\n");
           dialogTemplate.append("                     <image src=\"$imgSrc\" width=\"100px\" height=\"80px\"/>\n");
@@ -364,19 +379,23 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           dialogTemplate.append("                   </div>\n");
           dialogTemplate.append("                 <%\n");
           dialogTemplate.append("               } else {\n");
-          dialogTemplate.append("                 fieldImage = [\"jcrPath=/node" + extraFormUploadInput + "/jcr:content/jcr:data\"] ;\n");
+          dialogTemplate.append("                 fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
           dialogTemplate.append("                 uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("               }\n");
           dialogTemplate.append("             } else {\n");
-          dialogTemplate.append("               fieldImage = [\"jcrPath=/node" + extraFormUploadInput + "/jcr:content/jcr:data\"] ;\n");
+          dialogTemplate.append("               fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
           dialogTemplate.append("               uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("             }\n");
           dialogTemplate.append("           } else if(uicomponent.dataRemoved()) {\n");
-          dialogTemplate.append("             fieldImage = [\"jcrPath=/node" + extraFormUploadInput + "/jcr:content/jcr:data\"] ;\n");
+          dialogTemplate.append("             fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
           dialogTemplate.append("             uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("           } else {\n");
-          dialogTemplate.append("             fieldImage = [\"jcrPath=/node" + extraFormUploadInput + "/jcr:content/jcr:data\"] ;\n");
+          dialogTemplate.append("             fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
           dialogTemplate.append("             uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("           }\n");
         } else {
           dialogTemplate.append("           String[] " + inputFieldName + " = [\"jcrPath=/node/" + propertyName + "\", \"defaultValues=" + value + "\", \"" + validate + "\", \"options=" + form.getAdvanced() + "\"];\n");
@@ -460,10 +479,13 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       viewTemplate.append("         %>\n");
       viewTemplate.append("           <td style=\"padding:5px\"><%= cleanName %></td>\n");
       if(UIFormGeneratorConstant.UPLOAD.equals(form.getType())) {
+      	String inputName  = form.getName();
+        String inputFieldName = cleanString(inputName) + "FieldName";
+        String realDataNodeName = "jcr:content" + (inputFieldName);      	
         viewTemplate.append("<%\n");
-        viewTemplate.append("if (currentNode.hasNode(\"jcr:content\")) {\n");
-        viewTemplate.append("           def imageNode = currentNode.getNode(\"jcr:content\");\n");
-        viewTemplate.append("           DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);\n");
+        viewTemplate.append("if (currentNode.hasNode(\"" + realDataNodeName + "\")) {\n");
+ 	 	 	 	viewTemplate.append("           def imageNode = currentNode.getNode(\"" + realDataNodeName + "\");\n");
+ 	 	 	 	viewTemplate.append("           DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);\n");
         viewTemplate.append("           InputStream input = imageNode.getProperty(\"jcr:data\").getStream();\n");
         viewTemplate.append("           InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, \"" + form.getName() + "\");\n");
         viewTemplate.append("           dresource.setDownloadName(currentNode.getName());\n");
