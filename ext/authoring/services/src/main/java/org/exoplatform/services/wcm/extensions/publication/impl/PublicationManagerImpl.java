@@ -165,7 +165,7 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
 		  query.append(" order by exo:dateModified desc");
 	  }
 	  filters.put(WCMComposer.FILTER_QUERY_FULL, query.toString());
-	  if (log.isInfoEnabled()) log.info("query="+query.toString());
+	  if (log.isDebugEnabled()) log.debug("query="+query.toString());
 	  List<Node> nodes = wcmComposer.getContents("repository", workspace, "/", filters, WCMCoreUtils.getUserSessionProvider());
 	  
 	  return nodes;
