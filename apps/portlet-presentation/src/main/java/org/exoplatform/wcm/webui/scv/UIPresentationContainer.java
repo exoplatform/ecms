@@ -198,13 +198,10 @@ public class UIPresentationContainer extends UIContainer{
       contentParameter = getRequestParameters();
     }
      
-//    System.out.println("VinhNT tracert: getParameterizedNode and param =" + parameters);
     if (contentParameter == null) return null;
     String strRepository = contentParameter.substring(0, contentParameter.indexOf("/"));
     UIPresentation presentation = getChild(UIPresentation.class);
     Node nodeView = Utils.getViewableNodeByComposer(null, null, contentParameter);
-    System.out.println("VinhNT Tracert: nodeUUID=" + nodeView.getUUID());
-//    if (nodeView == null) System.out.println("Test nodeview=null");
     if (nodeView!=null) {
       boolean isDocumentType = false;
       if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true; 
@@ -241,7 +238,6 @@ public class UIPresentationContainer extends UIContainer{
   private String getRequestParameters() throws Exception {
     String parameters = null;
     if (!Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"))) {
-//      System.out.println("VinhNT Tracert: no parameter was set");
       return null;
     }
     try {     
@@ -252,12 +248,10 @@ public class UIPresentationContainer extends UIContainer{
     String parameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PARAMETER, "");
     if (!parameters.matches(PARAMETER_REGX)) {
       String path = Util.getPortalRequestContext().getRequestParameter(parameterName);
-//      System.out.println("VinhNT parameterName=" + parameterName + " para=" + path);
       if (path == null){
         return null;
       }        
       parameters = Util.getPortalRequestContext().getRequestParameter(parameterName).substring(1);
-//      System.out.println("VinhNT Tracert Line 234 path=" + path);
       return parameters;
     }
     return parameters;

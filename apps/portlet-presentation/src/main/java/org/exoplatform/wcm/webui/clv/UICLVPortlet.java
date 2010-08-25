@@ -177,16 +177,14 @@ public class UICLVPortlet extends UIPortletApplication {
     PortalRequestContext preq = Util.getPortalRequestContext();
     if (!preq.useAjax()) {
        currentFolderPath= getFolderPathParamValue();
-//       System.out.println("VinhNT: Tracert: " + currentFolderPath + " Ajax: " + String.valueOf(preq.useAjax()));
     }
     PortletPreferences preferences = Utils.getAllPortletPreferences();
     String displayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
     if (DISPLAY_MODE_AUTOMATIC.equals(displayMode)) {
-           if (currentFolderPath == null || currentFolderPath.length() == 0) {
-             currentFolderPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
-           }
+	    if (currentFolderPath == null || currentFolderPath.length() == 0) {
+	      currentFolderPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
+	    }
     }
-//    System.out.println("VinhNT: Tracert: " + currentFolderPath + " Ajax: " + String.valueOf(preq.useAjax()));
     return currentFolderPath;
   }
   
@@ -245,11 +243,15 @@ public class UICLVPortlet extends UIPortletApplication {
       manualMode.setRendered(false);
       config.setRendered(true);
     } else if (currentMode == PortletMode.VIEW) {
-      if (Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH) != null)
-        currentFolderPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
-      folderMode.init();
-      folderMode.setRendered(true);
-      manualMode.setRendered(false);
+      if (displayMode.equals(DISPLAY_MODE_AUTOMATIC) || getFolderPath() != null) {
+        manualMode.setRendered(false);
+        folderMode.init();        
+        folderMode.setRendered(true);
+      }else {
+        folderMode.setRendered(false);
+        manualMode.init();
+        manualMode.setRendered(true);
+      }      
       config.setRendered(false);      
     }
     

@@ -136,6 +136,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     addChild(txtParameterName);
 
   }
+  
   /**
    * ActionListener: save preferences action
    * @author exo.VinhNT
