@@ -82,8 +82,8 @@
 .UIDocumentFormController .UIForm .HorizontalLayout textarea {
 	font-size: 11px;
 	border: 1px solid #b7b7b7;
-  height: auto;
-	width: auto;
+  	height: auto;
+	width: 95%;
 }
 
 .HorizontalLayout .UIFormInputSet .FormContainer .UIFormGrid td{
