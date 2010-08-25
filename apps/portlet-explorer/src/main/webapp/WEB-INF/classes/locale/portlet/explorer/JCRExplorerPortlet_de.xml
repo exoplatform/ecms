@@ -467,6 +467,7 @@
       <Unlock>Aufsperren</Unlock>
       <EditDocument><![CDATA[&Auml;ndern]]></EditDocument>
       <Paste><![CDATA[Einf&uuml;gen]]></Paste>
+      <LockedBy>locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>

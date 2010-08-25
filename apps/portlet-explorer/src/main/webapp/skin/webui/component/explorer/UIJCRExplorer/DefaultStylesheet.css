@@ -382,6 +382,14 @@
   height: 16px;
 }
 
+.UIJCRExplorerPortlet .UIListGrid .IconLocked {
+	background: url('DefaultSkin/background/IconLocked.gif') no-repeat right top; /* orientation=lt */
+	background: url('DefaultSkin/background/IconLocked.gif') no-repeat left top; /* orientation=rt */
+  width: 20px;
+  height: 16px;
+  float: left;
+}
+
 .UIJCRExplorerPortlet .UIListGrid .LineLeft {
 	background: url('/ecmexplorer/skin/icons/24x24/DefaultSkin/Split.gif') no-repeat center;
   width: 3px;

@@ -494,6 +494,7 @@
       <Unlock>Unlock</Unlock>
       <EditDocument>Edit</EditDocument>
       <Paste>Paste</Paste>
+      <LockedBy>locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>

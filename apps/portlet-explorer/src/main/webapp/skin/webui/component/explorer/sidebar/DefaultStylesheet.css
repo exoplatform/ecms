@@ -283,6 +283,14 @@
 	padding-right: 22px; /* orientation=rt */
 }
 
+.UIJCRExplorerPortlet .UITreeExplorer .IconLocked {
+  background: url('DefaultSkin/background/IconLocked.gif') no-repeat 12px top; /* orientation=lt */
+  background: url('DefaultSkin/background/IconLocked.gif') no-repeat 94% top; /* orientation=rt */
+  width: 20px;
+  height: 16px;
+  float: left;
+}
+
 .UIJCRExplorerPortlet .UITreeExplorer .HardDisk24x24Icon {
   background: url('DefaultSkin/background/HardDisk.gif') no-repeat center bottom;
   height: 15px;

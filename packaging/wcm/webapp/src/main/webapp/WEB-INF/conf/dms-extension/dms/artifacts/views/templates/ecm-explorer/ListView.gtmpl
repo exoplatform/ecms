@@ -263,12 +263,16 @@
 	        }
 	        strActs += "</div>";
 	        def rightClickMenu = "" ;
-	        String isLocked = "false";
-	        String isFavourite = "false";
-	        String isInTrash = "false";
-	        String isMediaType = "false";
-	        String isTrashHome = "false";
-	        if (data.isLocked()) isLocked = "true";
+          Boolean isLocked = false;
+          String lockedLabel = "";
+          String isFavourite = "false";
+          String isInTrash = "false";
+          String isMediaType = "false";
+          String isTrashHome = "false";
+          if (data.isLocked()) {
+            isLocked = true;
+            lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
+          }
 	        if (uicomponent.isFavouriter(data)) isFavourite = "true";
 	        if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
 	        if (uicomponent.isMediaType(data)) isMediaType = "true";
@@ -279,6 +283,9 @@
 			      $strActs
 		        <div class="ColumnIcon" style="padding: 2px 0px; 	border-right: none; width: 30px;">
 						  <div title="$title" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
+                <%if(isLocked) {%>
+                  <div class="IconLocked"></div>
+                <%}%>
 						    <%if(uicomponent.isSymLink(data)) {%>
 						      <div class="LinkSmall"></div>
 						    <%}%>
@@ -286,7 +293,7 @@
 		        </div>
 		        <div class="ColumnName" style="width: 150px;">
 							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%=Text.unescapeIllegalJcrChars(title)%>"><%=Text.unescapeIllegalJcrChars(title)%></div>
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%=Text.unescapeIllegalJcrChars(title)%> $lockedLabel"><%=Text.unescapeIllegalJcrChars(title)%></div>
 		 					</div>
 		        </div>
 		        <!--

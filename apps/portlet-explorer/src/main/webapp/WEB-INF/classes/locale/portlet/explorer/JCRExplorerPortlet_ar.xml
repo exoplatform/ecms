@@ -465,6 +465,7 @@
       <Unlock>تحرير القفل</Unlock>
       <EditDocument>تبديل</EditDocument>
       <Paste>ألصق</Paste>
+      <LockedBy>locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
