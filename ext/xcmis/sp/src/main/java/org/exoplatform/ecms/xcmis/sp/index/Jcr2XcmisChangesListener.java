@@ -48,7 +48,6 @@ import org.xcmis.search.content.IndexModificationException;
 import org.xcmis.search.content.command.InvocationContext;
 import org.xcmis.search.value.SlashSplitter;
 import org.xcmis.search.value.ToStringNameConverter;
-import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.PermissionService;
 
@@ -63,8 +62,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.jcr.LoginException;
-import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.RepositoryException;
 
 /**
@@ -385,7 +382,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    }
 
-   public void onRegistryStart(JcrCmisRegistry cmisRegistry)
+   public void onRegistryStart(JcrCmisRegistry cmisRegistry) throws RepositoryException, SearchServiceException
    {
 
       initializeSearchService(cmisRegistry.getIndexConfiguration());
@@ -393,73 +390,56 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    }
 
-   private void initializeSearchService(IndexConfiguration readOnlyIndexConfiguration)
+   private void initializeSearchService(IndexConfiguration readOnlyIndexConfiguration) throws RepositoryException,
+      SearchServiceException
    {
-      if (readOnlyIndexConfiguration != null)
+      if (readOnlyIndexConfiguration != null && rootStorage == null)
       {
-         try
-         {
 
-            rootStorage = createRootStorage();
+         StorageConfiguration rootStorageConfiguration =
+            new StorageConfiguration(UUID.randomUUID().toString(), currentRepositoryName, workspaceName, "/",
+               Collections.EMPTY_MAP, "Virtual root storage");
+         SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+         rootStorage =
+            new StorageImpl(sessionProvider.getSession(workspaceName, repository), rootStorageConfiguration, null,
+               new PermissionService(), StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
 
-            //prepare search service
-            CmisSchema schema = new CmisSchema(rootStorage);
-            CmisSchemaTableResolver tableResolver =
-               new CmisSchemaTableResolver(new ToStringNameConverter(), schema, rootStorage);
+         //prepare search service
+         CmisSchema schema = new CmisSchema(rootStorage);
+         CmisSchemaTableResolver tableResolver =
+            new CmisSchemaTableResolver(new ToStringNameConverter(), schema, rootStorage);
 
-            IndexConfiguration indexConfiguration = new IndexConfiguration();
+         IndexConfiguration indexConfiguration = new IndexConfiguration();
 
-            File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
-            File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
+         File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
+         File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
 
-            indexConfiguration.setIndexDir(indexFolder.getPath());
-            indexConfiguration.setDocumentReaderService(documentReaderService);
-            indexConfiguration.setRootUuid(Constants.ROOT_UUID);
+         indexConfiguration.setIndexDir(indexFolder.getPath());
+         indexConfiguration.setDocumentReaderService(documentReaderService);
+         indexConfiguration.setRootUuid(Constants.ROOT_UUID);
 
-            //if list of root parents is empty it will be indexed as empty string
-            indexConfiguration.setRootParentUuid("");
+         //if list of root parents is empty it will be indexed as empty string
+         indexConfiguration.setRootParentUuid("");
 
-            //default invocation context
-            InvocationContext invocationContext = new InvocationContext();
-            invocationContext.setNameConverter(new ToStringNameConverter());
-            invocationContext.setSchema(schema);
-            invocationContext.setPathSplitter(new SlashSplitter());
-            invocationContext.setTableResolver(tableResolver);
+         //default invocation context
+         InvocationContext invocationContext = new InvocationContext();
+         invocationContext.setNameConverter(new ToStringNameConverter());
+         invocationContext.setSchema(schema);
+         invocationContext.setPathSplitter(new SlashSplitter());
+         invocationContext.setTableResolver(tableResolver);
 
-            SearchServiceConfiguration configuration = new SearchServiceConfiguration();
-            configuration.setIndexConfiguration(indexConfiguration);
-            configuration.setContentReader(new CmisContentReader(rootStorage));
-            configuration.setNameConverter(new ToStringNameConverter());
-            configuration.setDefaultInvocationContext(invocationContext);
-            configuration.setTableResolver(tableResolver);
-            configuration.setPathSplitter(new SlashSplitter());
+         SearchServiceConfiguration configuration = new SearchServiceConfiguration();
+         configuration.setIndexConfiguration(indexConfiguration);
+         configuration.setContentReader(new CmisContentReader(rootStorage));
+         configuration.setNameConverter(new ToStringNameConverter());
+         configuration.setDefaultInvocationContext(invocationContext);
+         configuration.setTableResolver(tableResolver);
+         configuration.setPathSplitter(new SlashSplitter());
 
-            searchService = new SearchService(configuration);
-            searchService.start();
+         searchService = new SearchService(configuration);
+         searchService.start();
 
-         }
-         catch (RepositoryException e)
-         {
-            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
-
-         }
-         catch (SearchServiceException e)
-         {
-            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
-         }
       }
-   }
-
-   private StorageImpl createRootStorage() throws LoginException, NoSuchWorkspaceException, RepositoryException
-   {
-
-      StorageConfiguration rootStorageConfiguration =
-         new StorageConfiguration(UUID.randomUUID().toString(), currentRepositoryName, workspaceName, "/",
-            Collections.EMPTY_MAP, "Virtual root storage");
-      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-      return new StorageImpl(sessionProvider.getSession(workspaceName, repository), rootStorageConfiguration, null,
-         new PermissionService(), StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
-
    }
 
 }

@@ -17,9 +17,11 @@
 
 package org.exoplatform.ecms.xcmis.sp.query;
 
+import org.exoplatform.ecms.xcmis.sp.StorageImpl;
 import org.xcmis.spi.DocumentData;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ObjectData;
+import org.xcmis.spi.model.TypeDefinition;
 import org.xcmis.spi.utils.MimeType;
 
 /**
@@ -32,6 +34,12 @@ public class MultifilingUnfilingTest extends BaseQueryTest
 {
    private FolderData testRoot;
 
+   private StorageImpl storageA;
+
+   private TypeDefinition folderTypeDefinition;
+
+   private TypeDefinition nasaDocumentTypeDefinition;
+
    /**
     * @see org.xcmis.sp.query.BaseQueryTest#setUp()
     */
@@ -39,26 +47,30 @@ public class MultifilingUnfilingTest extends BaseQueryTest
    public void setUp() throws Exception
    {
       super.setUp();
-      testRoot = createFolder(rootFolder, "QueryUsecasesTest", folderTypeDefinition);
-      // create data
+      storageA = (StorageImpl)registry.getConnection("driveA").getStorage();
+      folderTypeDefinition = storageA.getTypeDefinition("cmis:folder", true);
+      nasaDocumentTypeDefinition = storageA.getTypeDefinition(NASA_DOCUMENT, true);
+      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
+      testRoot =
+         createFolder(storageA, rootFolder, "QueryUsecasesTest", storageA.getTypeDefinition("cmis:folder", true));
 
    }
 
    public void testAddMultipleParents() throws Exception
    {
 
-      FolderData folder1 = createFolder(testRoot, "multifilingFolderTest1", folderTypeDefinition);
-      FolderData folder2 = createFolder(testRoot, "multifilingFolderTest2", folderTypeDefinition);
-      FolderData folder3 = createFolder(testRoot, "multifilingFolderTest3", folderTypeDefinition);
+      FolderData folder1 = createFolder(storageA, testRoot, "multifilingFolderTest1", folderTypeDefinition);
+      FolderData folder2 = createFolder(storageA, testRoot, "multifilingFolderTest2", folderTypeDefinition);
+      FolderData folder3 = createFolder(storageA, testRoot, "multifilingFolderTest3", folderTypeDefinition);
 
       DocumentData doc1 =
-         createDocument(folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("plain",
-            "text"));
+         createDocument(storageA, folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType(
+            "plain", "text"));
 
       //check what document can be found only in one folder
-      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder1.getObjectId() + "')",
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder1.getObjectId() + "')",
          new ObjectData[]{doc1});
-      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
          new ObjectData[]{});
 
       folder2.addObject(doc1);
@@ -66,24 +78,24 @@ public class MultifilingUnfilingTest extends BaseQueryTest
 
       assertEquals(3, doc1.getParents().size());
 
-      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
          new ObjectData[]{doc1});
 
-      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder3.getObjectId() + "')",
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder3.getObjectId() + "')",
          new ObjectData[]{doc1});
-      storage.deleteTree(testRoot, true, null, true);
+      storageA.deleteTree(testRoot, true, null, true);
    }
 
    public void _testRemoveFromMultipleParents() throws Exception
    {
 
-      FolderData folder1 = createFolder(testRoot, "multifilingFolderTest1", folderTypeDefinition);
-      FolderData folder2 = createFolder(testRoot, "multifilingFolderTest2", folderTypeDefinition);
-      FolderData folder3 = createFolder(testRoot, "multifilingFolderTest3", folderTypeDefinition);
+      FolderData folder1 = createFolder(storageA, testRoot, "multifilingFolderTest1", folderTypeDefinition);
+      FolderData folder2 = createFolder(storageA, testRoot, "multifilingFolderTest2", folderTypeDefinition);
+      FolderData folder3 = createFolder(storageA, testRoot, "multifilingFolderTest3", folderTypeDefinition);
 
       DocumentData doc1 =
-         createDocument(folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("plain",
-            "text"));
+         createDocument(storageA, folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType(
+            "plain", "text"));
       folder2.addObject(doc1);
       folder3.addObject(doc1);
       assertEquals(3, doc1.getParents().size());
@@ -91,34 +103,34 @@ public class MultifilingUnfilingTest extends BaseQueryTest
       folder2.removeObject(doc1);
       assertEquals(2, doc1.getParents().size());
 
-      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
          new ObjectData[]{});
 
-      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder3.getObjectId() + "')",
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder3.getObjectId() + "')",
          new ObjectData[]{doc1});
-      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder1.getObjectId() + "')",
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder1.getObjectId() + "')",
          new ObjectData[]{doc1});
-      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
          new ObjectData[]{doc1});
 
-      storage.deleteTree(testRoot, true, null, true);
+      storageA.deleteTree(testRoot, true, null, true);
    }
 
    //   public void testRemoveFromLastParent() throws Exception
    //   {
    //
-   //      FolderData folder1 = createFolder(testRoot, "multifilingFolderTest1", folderTypeDefinition);
-   //      FolderData folder2 = createFolder(testRoot, "multifilingFolderTest2", folderTypeDefinition);
-   //      FolderData folder3 = createFolder(testRoot, "multifilingFolderTest3", folderTypeDefinition);
+   //      FolderData folder1 = createFolder(storageA,testRoot, "multifilingFolderTest1", folderTypeDefinition);
+   //      FolderData folder2 = createFolder(storageA,testRoot, "multifilingFolderTest2", folderTypeDefinition);
+   //      FolderData folder3 = createFolder(storageA,testRoot, "multifilingFolderTest3", folderTypeDefinition);
    //
    //      DocumentData doc1 =
-   //         createDocument(folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("plain",
+   //         createDocument(storageA,folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("plain",
    //            "text"));
    //      folder2.addObject(doc1);
    //      folder3.addObject(doc1);
    //      assertEquals(3, doc1.getParents().size());
    //
-   //      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
+   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
    //         new ObjectData[]{doc1});
    //
    //      folder2.removeObject(doc1);
@@ -127,7 +139,7 @@ public class MultifilingUnfilingTest extends BaseQueryTest
    //
    //      assertEquals(0, doc1.getParents().size());
    //
-   //      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
+   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
    //         new ObjectData[]{});
    //
    //      storage.deleteObject(doc1, true);
@@ -136,17 +148,17 @@ public class MultifilingUnfilingTest extends BaseQueryTest
 
    //   public void testSearchUnfiled() throws Exception
    //   {
-   //      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{});
+   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{});
    //      DocumentData doc1 =
-   //         createDocument(testRoot, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("text", "plain"));
+   //         createDocument(storageA,testRoot, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("text", "plain"));
    //
-   //      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
+   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
    //
    //      testRoot.removeObject(doc1);
    //      //check if document have no parents
    //      assertEquals(0, doc1.getParents().size());
    //      //check if we can find document
-   //      checkResult("SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
+   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
    //
    //      storage.deleteObject(doc1, true);
    //      storage.deleteTree(testRoot, true, null, true);

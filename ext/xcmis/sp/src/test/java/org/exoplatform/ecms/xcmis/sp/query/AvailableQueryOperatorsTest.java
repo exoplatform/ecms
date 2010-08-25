@@ -17,6 +17,7 @@
 
 package org.exoplatform.ecms.xcmis.sp.query;
 
+import org.exoplatform.ecms.xcmis.sp.StorageImpl;
 import org.exoplatform.ecms.xcmis.sp.index.CmisSchema;
 import org.xcmis.search.InvalidQueryException;
 import org.xcmis.search.content.Schema.Column;
@@ -30,13 +31,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey Kabashnyuk</a>
- * @version $Id$
- *
+ * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey
+ *         Kabashnyuk</a>
+ * @version $Id: AvailableQueryOperatorsTest.java 50581 2010-08-10 14:58:47Z
+ *          makis $
+ * 
  */
 public class AvailableQueryOperatorsTest extends BaseQueryTest
 {
    private CmisSchema cmisSchema;
+
+   private StorageImpl storageA;
 
    /**
     * @see org.xcmis.sp.query.BaseQueryTest#setUp()
@@ -45,7 +50,8 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
    public void setUp() throws Exception
    {
       super.setUp();
-      cmisSchema = new CmisSchema(storage);
+      storageA = (StorageImpl)registry.getConnection("driveA").getStorage();
+      cmisSchema = new CmisSchema(storageA);
 
    }
 
@@ -87,6 +93,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
 
    /**
     * Check invalid operator's
+    * 
     * @param column
     * @throws QueryExecutionException
     */
@@ -134,7 +141,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
          try
          {
             org.xcmis.spi.query.Query cmisQuery = new org.xcmis.spi.query.Query(query.toString(), true);
-            storage.query(cmisQuery);
+            storageA.query(cmisQuery);
             fail("InvalidArgumentException should be thrown for invalid operator " + operator + " for columnt ='"
                + column.getName() + "'");
          }
@@ -147,7 +154,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
 
    /**
     * Check valid operator's
-    *
+    * 
     * @param column
     * @throws InvalidQueryException
     * @throws QueryExecutionException
@@ -192,12 +199,13 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
                break;
          }
          org.xcmis.spi.query.Query cmisQuery = new org.xcmis.spi.query.Query(query.toString(), true);
-         storage.query(cmisQuery);
+         storageA.query(cmisQuery);
       }
    }
 
    /**
     * Return the array of unAvailableQueryOperators
+    * 
     * @param availableQueryOperators
     * @return
     */
@@ -207,9 +215,9 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
       for (Operator operator : Operator.ALL)
       {
          boolean isValid = false;
-         for (int i = 0; i < availableQueryOperators.length; i++)
+         for (Operator availableQueryOperator : availableQueryOperators)
          {
-            if (operator.equals(availableQueryOperators[i]))
+            if (operator.equals(availableQueryOperator))
             {
                isValid = true;
                break;

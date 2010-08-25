@@ -26,6 +26,9 @@ import org.exoplatform.services.security.ConversationState;
 import org.xcmis.search.InvalidQueryException;
 import org.xcmis.search.SearchService;
 import org.xcmis.search.Visitors;
+import org.xcmis.search.model.constraint.And;
+import org.xcmis.search.model.constraint.DescendantNode;
+import org.xcmis.search.model.source.Selector;
 import org.xcmis.search.model.source.SelectorName;
 import org.xcmis.search.parser.CmisQueryParser;
 import org.xcmis.search.parser.QueryParser;
@@ -842,21 +845,23 @@ public class StorageImpl extends BaseJcrStorage implements Storage
     */
    public ItemsIterator<Result> query(Query query) throws InvalidArgumentException
    {
-      // May be overridden.
 
       if (searchService != null)
       {
          try
          {
-            String rootNodePath = storageConfiguration.getRootNodePath();
             org.xcmis.search.model.Query qom = cmisQueryParser.parseQuery(query.getStatement());
+            //add drive path constrain
+            DescendantNode rootDescendantConstraint =
+               new DescendantNode(((Selector)qom.getSource()).getAlias(), "[" + getRepositoryInfo().getRootFolderId()
+                  + "]");
 
-            //            org.xcmis.search.model.Query newQom =
-            //               new org.xcmis.search.model.Query(qom.getSource(), new And(qom.getConstraint(), new DescendantNode(
-            //                  ((Selector)qom.getSource()).getAlias(), "[" + "ROOT_DRIVE_ID" + "]")), qom.getOrderings(), qom
-            //                  .getColumns(), qom.getLimits());
+            org.xcmis.search.model.Query newQom =
+               new org.xcmis.search.model.Query(qom.getSource(), qom.getConstraint() == null ? rootDescendantConstraint
+                  : new And(qom.getConstraint(), rootDescendantConstraint), qom.getOrderings(), qom.getColumns(), qom
+                  .getLimits());
 
-            List<ScoredRow> rows = searchService.execute(qom);
+            List<ScoredRow> rows = searchService.execute(newQom);
             //check if needed default sorting
             if (qom.getOrderings().size() == 0)
             {
