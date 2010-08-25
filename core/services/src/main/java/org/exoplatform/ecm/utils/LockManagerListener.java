@@ -23,6 +23,8 @@ import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.RootContainer;
 import org.exoplatform.services.cache.CacheService;
@@ -54,14 +56,17 @@ public class LockManagerListener extends Listener<ConversationRegistry, Conversa
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     ConversationState conversationState = event.getData();
     String userid = conversationState.getIdentity().getUserId();
-    RootContainer rootContainer = RootContainer.getInstance() ;
-    PortalContainer portalContainer = rootContainer.getPortalContainer("portal") ;
-    CacheService cacheService = (CacheService)portalContainer.getComponentInstanceOfType(CacheService.class);
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    if(container == null) {
+      RootContainer rootContainer = RootContainer.getInstance() ;
+      container = rootContainer.getPortalContainer("portal") ;
+    }
+    CacheService cacheService = (CacheService)container.getComponentInstanceOfType(CacheService.class);
     ExoCache lockcache = cacheService.getCacheInstance(LockManagerImpl.class.getName());
     try {
       Map<String,String> lockedNodes = (Map<String,String>)lockcache.get(userid);
       if(lockedNodes == null || lockedNodes.values().isEmpty()) return;      
-      RepositoryService repositoryService = (RepositoryService)portalContainer.getComponentInstanceOfType(RepositoryService.class);
+      RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
       String key = null, nodePath = null, repoName = null,workspaceName = null, lockToken= null ;
       String[] temp = null, location = null ;
       Session session = null;      
