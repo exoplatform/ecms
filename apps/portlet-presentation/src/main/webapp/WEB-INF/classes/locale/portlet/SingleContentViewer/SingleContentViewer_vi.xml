@@ -30,9 +30,12 @@
   <action>
    <Save>Lưu</Save>
    <Abort>Hủy</Abort>
+   <Print>In ấn</Print>
+   <Close>Đóng</Close>
   </action>
   <label>
    <name>Tiêu đề</name>
+   <Back>Trở về</Back>
    <selectTemplate>Chọn mẫu</selectTemplate>
    <option>
     <exo:siteBreadcrumb>Site Breadcrumb</exo:siteBreadcrumb>

@@ -157,9 +157,28 @@ public class UIPresentationContainer extends UIContainer{
 			String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
 			String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
 			viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
-			presentation.setNode(viewNode);
-			Node orgNode = Utils.getRealNode(repository, workspace, nodeIdentifier, true);
-			presentation.setOriginalNode(orgNode);
+			if (viewNode!=null) {
+	      boolean isDocumentType = false;
+	      if (viewNode.isNodeType("nt:frozenNode")) isDocumentType = true; 
+	      // check node is a document node
+	      TemplateService templateService = getApplicationComponent(TemplateService.class);
+	      List<String> documentTypes = templateService.getDocumentTemplates(repository);
+	      for (String documentType : documentTypes) {
+	        if (viewNode.isNodeType(documentType)) {
+	          isDocumentType = true;
+	          break;
+	        }
+	      }
+	      if (!isDocumentType) return null;
+	      if (viewNode != null && viewNode.isNodeType("nt:frozenNode")) {
+	        String nodeUUID = viewNode.getProperty("jcr:frozenUuid").getString();
+	        presentation.setOriginalNode(viewNode.getSession().getNodeByUUID(nodeUUID));
+	        presentation.setNode(viewNode);	      
+	      } else {
+	        presentation.setOriginalNode(viewNode);
+	        presentation.setNode(viewNode);
+	      }
+			}
 			return viewNode;
 		} catch (Exception e) {
 			return null;
@@ -184,6 +203,7 @@ public class UIPresentationContainer extends UIContainer{
     String strRepository = contentParameter.substring(0, contentParameter.indexOf("/"));
     UIPresentation presentation = getChild(UIPresentation.class);
     Node nodeView = Utils.getViewableNodeByComposer(null, null, contentParameter);
+    System.out.println("VinhNT Tracert: nodeUUID=" + nodeView.getUUID());
 //    if (nodeView == null) System.out.println("Test nodeview=null");
     if (nodeView!=null) {
       boolean isDocumentType = false;
