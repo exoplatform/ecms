@@ -1132,6 +1132,17 @@
   bottom: 0;
 }
 
+.UIJCRExplorerPortlet .UIThumbnailsView .IconLocked {
+  background: url('DefaultSkin/background/IconLockedBig.gif') no-repeat right top;
+  position: absolute;
+  width: 16px;
+  height: 48px;
+  right: 0; /* orientation=lt */
+  left: 0; /* orientation=rt */
+  bottom: 0;
+}
+
+
 /*===========================================UIRightClickPopupMenu===========================================*/
 .UIRightClickPopupMenu .MenuIcon {
 	line-height:22px;
