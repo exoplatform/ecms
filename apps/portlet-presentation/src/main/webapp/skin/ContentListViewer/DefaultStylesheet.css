@@ -300,6 +300,7 @@
 
 .Column1{
 	border:1px solid transparent;
+	overflow:hidden;
 }
 
 /*
