@@ -163,10 +163,10 @@
 	    if(!uicomponent.isSystemWorkspace()) ctMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(node.getPath()), uicomponent.getActionsList(node)) ;
 	    println "<div  class=\"${lastNodeClass}Node\" >" ;
 	    println "  <div class=\"${iconType}Icon\" id=\"" + uicomponent.encodeBase64(treeNode.getPath()) + "\" onclick=\"event.cancelBubble=true; if(eXo.ecm.ECMUtils.collapseExpand(this)) return; " + actionLink + "\">" ;
-	    println "    <div id=\"iconTreeExplorer\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + URLEncoder.encode(Utils.formatNodeName(treeNode.getPath()), "utf-8") + "\" workspacename=\"" + preferenceWS + "\" class=\"${iconClassLink}Icon16x16 default16x16Icon " + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
 	    if (node.isLocked()) {
         println "<div class=\"IconLocked\"></div>";
 	    }
+	    println "    <div id=\"iconTreeExplorer\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + URLEncoder.encode(Utils.formatNodeName(treeNode.getPath()), "utf-8") + "\" workspacename=\"" + preferenceWS + "\" class=\"${iconClassLink}Icon16x16 default16x16Icon " + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
 	    println "      <div class='NodeLabel'>" ;
 	    println "			   <a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;' title=\"$treeNodeName $lockedLabel\">$treeNodeName</a>" ;
 	    println "      </div>" ; 
