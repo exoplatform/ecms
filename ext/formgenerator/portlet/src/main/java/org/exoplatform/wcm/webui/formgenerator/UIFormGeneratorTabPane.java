@@ -317,7 +317,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       if (UIFormGeneratorConstant.TEXTAREA.equals(inputType)) {
         inputField = "TextAreaField";
       } else if (UIFormGeneratorConstant.WYSIWYG.equals(inputType)) {
-        inputField = "WYSIWYGField";
+        inputField = "RichtextField";
       } else if (UIFormGeneratorConstant.DATE.equals(inputType)) {
         inputField = "CalendarField";
         validate += "datetime,";
