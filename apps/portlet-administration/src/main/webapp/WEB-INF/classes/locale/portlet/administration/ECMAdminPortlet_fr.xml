@@ -2282,7 +2282,7 @@
 		
 <UITaxonomyTreeContainer>
 		<action>
-			<Cancel>Annuler</Cancel>
+			<Cancel>Fermer</Cancel>
 		</action>
 	</UITaxonomyTreeContainer>
 	 <UITaxonomyTreeMainForm>			
