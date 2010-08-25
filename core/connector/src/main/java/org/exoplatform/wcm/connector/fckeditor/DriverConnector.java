@@ -371,29 +371,30 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 	 * 
 	 * @return the element
 	 */
-	private Element appendDrivers(Document document, List<DriveData> driversList, String groupName, String lang) throws Exception {
-	  Element folders = document.createElement("Folders");
-	  folders.setAttribute("name", resolveDriveLabel(groupName, lang));
-	  folders.setAttribute("isUpload", "false");
-      for (DriveData driver : driversList) {      
-        String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
-        String workspace  = driver.getWorkspace();
-        String path = driver.getHomePath();
-        String name = driver.getName();
-        Element folder = document.createElement("Folder");
-        NodeLocation nodeLocation = new NodeLocation(repository, workspace, path);  
-        Node driverNode = NodeLocation.getNodeByLocation(nodeLocation);
-        folder.setAttribute("name", name);
-        folder.setAttribute("label", resolveDriveLabel(name, lang));
-        folder.setAttribute("url", FCKUtils.createWebdavURL(driverNode));
-        folder.setAttribute("folderType", "exo:drive");
-        folder.setAttribute("path", path);
-        folder.setAttribute("repository", repository);
-        folder.setAttribute("workspace", workspace);
-        folder.setAttribute("isUpload", "true");      
-        folders.appendChild(folder);  
-      }
-	  return folders;
+  private Element appendDrivers(Document document, List<DriveData> driversList, String groupName, String lang) throws Exception {
+    Element folders = document.createElement("Folders");
+    folders.setAttribute("name", resolveDriveLabel(groupName, lang));
+    folders.setAttribute("isUpload", "false");
+    for (DriveData driver : driversList) {      
+      String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
+      String workspace  = driver.getWorkspace();
+      String path = driver.getHomePath();
+      String name = driver.getName();
+      Element folder = document.createElement("Folder");
+      NodeLocation nodeLocation = new NodeLocation(repository, workspace, path);  
+      Node driveNode = NodeLocation.getNodeByLocation(nodeLocation);
+      if(driveNode == null) continue;
+      folder.setAttribute("name", name);
+      folder.setAttribute("label", resolveDriveLabel(name, lang));
+      folder.setAttribute("url", FCKUtils.createWebdavURL(driveNode));
+      folder.setAttribute("folderType", "exo:drive");
+      folder.setAttribute("path", path);
+      folder.setAttribute("repository", repository);
+      folder.setAttribute("workspace", workspace);
+      folder.setAttribute("isUpload", "true");      
+      folders.appendChild(folder);  
+    }
+    return folders;
   }
   
 	private String resolveDriveLabel(String name, String lang) {

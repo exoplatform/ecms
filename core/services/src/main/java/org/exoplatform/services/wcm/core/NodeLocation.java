@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.core;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
@@ -222,10 +223,12 @@ public class NodeLocation {
       session = WCMCoreUtils.getSystemSessionProvider().getSession(nodeLocation.getWorkspace(), repository);
       Node node = (Node)session.getItem(nodeLocation.getPath());
       return node;
+    } catch(PathNotFoundException pne) {
+      return null;
     } catch (Exception e) {
       log.error("getNodeByNodeLocation() failed because of ", e);
+      return null;
     }
-    return null;
   }
   
   /**
