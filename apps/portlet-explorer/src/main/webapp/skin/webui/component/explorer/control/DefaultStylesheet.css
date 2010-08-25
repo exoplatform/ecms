@@ -99,11 +99,11 @@
 /*############################## -- Begin UIViewBar -- ##############################*/
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar {
-  border-top: solid 1px #fdfdfd;
   border-bottom: solid 1px #b7b7b7;
   background: url('DefaultSkin/background/LineDecorator1x30.gif') repeat-x center center;
-  height: 30px;
-  line-height: 30px;
+  line-height: 24px;
+  padding: 4px;
+  height: 24px;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .AddressBarSeparator {
@@ -481,8 +481,7 @@
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .TblAddressBar{
 	table-layout: fixed; 
 	width: 99%; 
-	_width: auto; 
-	margin: 4px;
+	_width: auto; 	
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .Block .IconFileExplorer{
