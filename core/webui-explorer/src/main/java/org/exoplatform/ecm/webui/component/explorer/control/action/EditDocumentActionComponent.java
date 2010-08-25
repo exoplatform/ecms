@@ -202,6 +202,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         }
         UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
         uiDocumentContainer.setRendered(false);
+        uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
         uiDocumentWorkspace.addChild(uiController);
         uiController.initOptionBlockPanel();
         uiController.setRendered(true);
