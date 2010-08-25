@@ -126,7 +126,7 @@
 													if (isShowTitle) {
 														%><div title="$itemName" class="FloatLeft $itemIcon"></div><%
 														if (isShowLink) {
-															%><div class="Title"><a href="$itemWebdavLink" target="_newdoc">$itemName</a></div><%
+															%><div class="Title"><a href="$itemWebdavLink" target="_newdoc" title="$itemName">$itemName</a></div><%
 														} else {
 															%><div class="Title">$itemName</div><%
 														}
