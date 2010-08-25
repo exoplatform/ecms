@@ -13,34 +13,41 @@ color: #ccc;
 }
 
 .UIAuthoringDashboard .AlignLeft {
-float: left;
+	float: left;
+	width: 260px;
 }
 
 .UIAuthoringDashboard .Elements {
-text-align: left;
-width: 260px;
-border: 1px dotted #ccc;
-border-top: 1px solid #ccc;
-padding: 2px 5px;
-margin-right: 5px;
+	text-align: left;
+	width: 243px;
+	border: 1px dotted #ccc;
+	border-top: 1px solid #ccc;
+	padding: 2px 5px;
+	margin-right: 5px;
 }
 
 .UIAuthoringDashboard .Header {
-padding: 2px 5px;
-margin-right: 5px;
-background-color: #ccc;
-color: #fff;
-font-weight: bold;
+	padding: 2px 5px;
+	margin-right: 5px;
+	background-color: #ccc;
 }
 
+.UIAuthoringDashboard .Header .Title {
+	color: #fff;
+	font-weight:bold;
+	float: left;
+}
+
+
 .UIAuthoringDashboard .Header .Total {
-background-color: #E00;
-min-width: 25px;
-float: right;
-text-align: center;
-font-weight: bold;
--moz-border-radius: 10px;
--webkit-border-radius: 10px;
+	background-color: #ee0000;
+	color: #fff;	
+	min-width: 25px;
+	float: right;
+	text-align:center;
+	font-weight: bold;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 
 .UIAuthoringDashboard .NoContent {
@@ -56,10 +63,11 @@ color: #888;
       %>
      <div class="AlignLeft">
         <div class="Header">
-        <%=_ctx.appRes("UIDashboardForm.label.mydraft")%>
-        <% if (nodes.size()>0) { %>
-          <div class="Total"><%=nodes.size()%></div>
-        <% } %>
+		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.mydraft")%></div>
+		      <% if (nodes.size()>0) { %>
+		        <div class="Total"><%=nodes.size()%></div>
+		      <% } %>
+					<div style="clear:both;"><span></span></div>
         </div>
         
         <div class="Elements">
@@ -83,10 +91,11 @@ color: #888;
       %>
      <div class="AlignLeft">
         <div class="Header">
-        <%=_ctx.appRes("UIDashboardForm.label.waitingapproval")%>
-        <% if (nodes.size()>0) { %>
-          <div class="Total"><%=nodes.size()%></div>
-        <% } %>
+		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.waitingapproval")%></div>
+		      <% if (nodes.size()>0) { %>
+		        <div class="Total"><%=nodes.size()%></div>
+		      <% } %>
+					<div style="clear:both;"><span></span></div>
         </div>
         
         <div class="Elements">
@@ -110,10 +119,11 @@ color: #888;
       %>
      <div class="AlignLeft">
         <div class="Header">
-        <%=_ctx.appRes("UIDashboardForm.label.publishedtomorrow")%>
-        <% if (nodes.size()>0) { %>
-          <div class="Total"><%=nodes.size()%></div>
-        <% } %>
+		      <div class="Title"><%=_ctx.appRes("UIDashboardForm.label.publishedtomorrow")%></div>
+		      <% if (nodes.size()>0) { %>
+		        <div class="Total"><%=nodes.size()%></div>
+		      <% } %>
+					<div style="clear:both;"><span></span></div>
         </div>
         
         <div class="Elements">
