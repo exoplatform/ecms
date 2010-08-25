@@ -177,7 +177,6 @@ public class UICLVPortlet extends UIPortletApplication {
     PortalRequestContext preq = Util.getPortalRequestContext();
     if (!preq.useAjax()) {
        currentFolderPath= getFolderPathParamValue();
-//       System.out.println("VinhNT: Tracert: " + currentFolderPath + " Ajax: " + String.valueOf(preq.useAjax()));
     }
     PortletPreferences preferences = Utils.getAllPortletPreferences();
     String displayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
@@ -186,7 +185,6 @@ public class UICLVPortlet extends UIPortletApplication {
 	      currentFolderPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
 	    }
     }
-//    System.out.println("VinhNT: Tracert: " + currentFolderPath + " Ajax: " + String.valueOf(preq.useAjax()));
     return currentFolderPath;
   }
   
