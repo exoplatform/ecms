@@ -20,10 +20,8 @@ package org.exoplatform.ecms.xcmis.sp;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.SystemIdentity;
-import org.exoplatform.services.jcr.impl.RepositoryServiceImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -69,14 +67,10 @@ public class DriveCmisRegistry extends JcrCmisRegistry
 
    private boolean persistRenditions;
 
-   private final DMSConfiguration dmsConfiguration;
-
-   public DriveCmisRegistry(RepositoryServiceImpl repositoryService, InitParams initParams,
-      ManageDriveService driveService, DMSConfiguration dmsConfiguration)
+   public DriveCmisRegistry(RepositoryService repositoryService, InitParams initParams, ManageDriveService driveService)
    {
       super(repositoryService, initParams);
       this.repositoryService = repositoryService;
-      this.dmsConfiguration = dmsConfiguration;
       this.permissionService = new PermissionService();
       this.driveService = driveService;
    }

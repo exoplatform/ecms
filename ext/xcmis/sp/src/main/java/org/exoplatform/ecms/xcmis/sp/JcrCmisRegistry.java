@@ -6,13 +6,14 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
 import org.exoplatform.ecms.xcmis.sp.index.Jcr2XcmisChangesListener;
 import org.exoplatform.services.document.DocumentReaderService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.NamespaceAccessor;
 import org.exoplatform.services.jcr.core.WorkspaceContainerFacade;
 import org.exoplatform.services.jcr.dataflow.PersistentDataManager;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.impl.RepositoryServiceImpl;
 import org.picocontainer.Startable;
 import org.xcmis.search.SearchService;
+import org.xcmis.search.SearchServiceException;
 import org.xcmis.search.config.IndexConfiguration;
 import org.xcmis.spi.CmisRegistry;
 import org.xcmis.spi.CmisRegistryFactory;
@@ -39,9 +40,9 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
 
    protected final InitParams initParams;
 
-   private final RepositoryServiceImpl repositoryService;
+   private final RepositoryService repositoryService;
 
-   public JcrCmisRegistry(RepositoryServiceImpl repositoryService, InitParams initParams)
+   public JcrCmisRegistry(RepositoryService repositoryService, InitParams initParams)
    {
       this.initParams = initParams;
       this.repositoryService = repositoryService;
@@ -156,6 +157,10 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
          }
       }
       catch (RepositoryException e)
+      {
+         throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+      }
+      catch (SearchServiceException e)
       {
          throw new CmisRuntimeException(e.getLocalizedMessage(), e);
       }
