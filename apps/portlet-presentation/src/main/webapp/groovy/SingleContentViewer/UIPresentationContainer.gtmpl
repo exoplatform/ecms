@@ -62,8 +62,8 @@
 			if (!Utils.isPortalEditMode() && isShowOptionBar) { 
 				%>
 					<div class="UIOptionBar">
-	         <div class="BackButton" title="<%= _ctx.appRes("UIPCVContainer.title.Back") %>" onclick="history.go(-1)"><span></span></div>
-						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl() %>')" title="<%= _ctx.appRes("UIPresentationContainer.title.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
+	         <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>
+						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl() %>')" title="<%= _ctx.appRes("UISCVPreferences.label.Print");%>"><%= _ctx.appRes("UISCVPreferences.label.Print") %></a>
 					</div>
 				<% 
 			} 
@@ -71,8 +71,8 @@
 			if(uicomponent.isPrinting()) {
         %>
           <div class="ActionContainer">
-            <a class="PrintFrameIcon PrintIcon" href="javascript: void(0)" onclick="window.print();"><%= _ctx.appRes("UIPCVContainer.action.Print") %></a>
-            <a class="PrintFrameIcon CloseIcon" id="CloseIcon" href="javascript: void(0)" onclick="window.close();"><%= _ctx.appRes("UIPCVContainer.action.Close") %></a>
+            <a class="PrintFrameIcon PrintIcon" href="javascript: void(0)" onclick="window.print();"><%= _ctx.appRes("UISCVPreferences.action.Print") %></a>
+            <a class="PrintFrameIcon CloseIcon" id="CloseIcon" href="javascript: void(0)" onclick="window.close();"><%= _ctx.appRes("UISCVPreferences.action.Close") %></a>
           </div>
         <%
       } 

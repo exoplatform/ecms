@@ -96,9 +96,12 @@
      <Save>Save</Save>
      <Abort>Abort</Abort>
      <Cancel>Cancel</Cancel>
+     <Print>Print</Print>
+     <Close>Close</Close>
     </action>
     <title>Content Detail Preferences</title>
     <label>
+      <Back>Back to previous page</Back>
       <Edit>Edit</Edit>
       <Preferences>Preferences</Preferences>
    	  <Title>Content Detail Preferences</Title>
