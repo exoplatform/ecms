@@ -17,7 +17,7 @@
     <wikbook.source>${project.build.directory}/wikbook-src</wikbook.source>
     <wikbook.resources>${project.basedir}/src/main/resources/wikbook/images</wikbook.resources>
     <wikbook.target>${project.build.directory}/wikbook</wikbook.target>
-    <wikbook.version>0.9.26</wikbook.version>
+    <wikbook.version>0.9.28</wikbook.version>
   </properties>
 
   <dependencies>
@@ -129,7 +129,7 @@
 
                  <!-- HTML -->
                  <htmlCustomization>${wikbook.target}/src/resources/xsl/html.xsl</htmlCustomization>
-                 <htmlStylesheet>css/html.css</htmlStylesheet>
+                 <htmlStylesheet>css/ecms.css</htmlStylesheet>
 
                  <!-- PDF -->
                  <foCustomization>${wikbook.target}/src/resources/xsl/fopdf.xsl</foCustomization>
@@ -164,6 +164,15 @@
                      </fileset>
                    </copy>
               </preProcess>
+
+              <!-- Copy the css -->
+              <postProcess>
+                <copy todir="${wikbook.target}/output/css">
+									<fileset dir="${wikbook.source}/css">
+                    <include name="**/*.css" />
+                  </fileset>
+                </copy>
+              </postProcess>
               
                </configuration>
              </execution>
