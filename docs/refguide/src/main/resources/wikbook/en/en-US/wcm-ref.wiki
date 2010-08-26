@@ -10,7 +10,8 @@ h3. Content List
   {include:document="pages/preface/portlet_contentlist.wiki" /}
 h3. Explorer
   {include:document="pages/preface/portlet_explorer.wiki" /}
-
+h3. Administration
+  {include:document="pages/preface/portlet_administration.wiki" /}
 h1. Configuration
 h2. Drives
   {include:document="pages/configuration/drives.wiki" /}
@@ -22,6 +23,8 @@ h2. Taxonomies
   {include:document="pages/configuration/taxonomies.wiki" /}
 h2. Nodetypes
   {include:document="pages/configuration/nodetypes.wiki" /}
+h2. Views
+  {include:document="pages/configuration/views.wiki" /}
 h2. Templates
 h3. Application template
   {include:document="pages/configuration/template_application.wiki" /}
