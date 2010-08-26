@@ -1,25 +1,27 @@
-
 h1. Available preferences
 
-|| *Preference* || *Type*|| *Description* ||
-| *repository* | {{String}} | The current repository name. always is "repository" |
-| *workspace* | {{String}} | The workspace where the content is stored|
-| *nodeIdentifier* | {{String}} | path to the content you want to show|
-| *ShowTitle* | {{Boolean}} | Show the content title on top of the portlet|
-| *ShowDate* | {{Boolean}} | Show the content date on top of the portlet|
-| *ShowOptionBar* | {{Boolean}} | Show a bar with some actions (Print, Back)|
-| *ShowPrintAction* | {{Boolean}} | Show/hide the print action button|
+|| *Preference* || *Type* || *Default Value* || *Description* ||
+| *repository* | {{String}} | repository | The current repository name. always is "repository" |
+| *workspace* | {{String}} | collaboration | The workspace where the content is stored |
+| *nodeIdentifier* | {{String}} | N/A | The UUID or the path of content that you want to show |
+| *ShowTitle* | {{Boolean}} | true | Show the content title on top of the portlet |
+| *ShowDate* | {{Boolean}} | false | Show the content date on top of the portlet |
+| *ShowOptionBar* | {{Boolean}} | false | Show a bar with some actions (Print, Back) |
+| *ContextEnable* | {{Boolean}} | false | Determine if the portlet will use the parameter on URL as the path to content to display |
+| *ParameterName* | {{String}} | content-id | Determine what parameter will be used to get the content's path |
+| *ShowVote* | {{Boolean}} | false | Show the result of voting for the displayed content. |
+| *ShowComments* | {{Boolean}} | false | Show the existing comments of this content (if any) |
 
-h1. Default Values
+h1. Sample configuration
 {code:language=xml|indent=2}
 		<portlet-preferences>
 			<preference>
-				<name>repository</name> 
+				<name>repository</name>
 				<value>repository</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
-				<name>workspace</name>  
+				<name>workspace</name>
 				<value>collaboration</value>
 				<read-only>false</read-only>
 			</preference>
@@ -66,3 +68,4 @@ h1. Default Values
 		</portlet-preferences>
 {code}
 
+h6. Note: In 2.1.x, there is some preference is no longer used: for example: ShowPrintAction preference,..
