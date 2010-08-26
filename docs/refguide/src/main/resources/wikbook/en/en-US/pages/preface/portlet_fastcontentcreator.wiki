@@ -13,7 +13,7 @@ h1. Available preferences
 | *redirectPath* | {{String}} | http://www.google.com.vn | The page will redirect to |
 | *isActionNeeded* | {{Boolean}} | true | Is an action needed to save the configuration |
 
-h1. Example
+h1. Example Configuration
 {code:language=xml|indent=2}
 		<portlet-preferences>      
 			<preference>
