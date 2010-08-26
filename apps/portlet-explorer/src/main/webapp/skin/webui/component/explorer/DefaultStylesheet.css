@@ -220,3 +220,156 @@
   font-size:11px;
   width:100px;
 }
+
+
+/*=================Explorer Panel======================*/
+.UIJCRExplorerPortlet .UIExplorerPanel{
+	width: 291px;
+	background: #f5f5f5;
+	position: absolute;
+	top: 100px;
+	right: 0px;
+	padding: 5px;
+	color: #666666;
+	display: none;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .BarContent {
+	background:url("/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/BarContent.gif") repeat-x scroll 0 0 transparent;
+	height:24px;
+	line-height:24px;
+	overflow:hidden;
+	padding:0 4px;
+	border: 1px solid #e4e4e4;
+	border-bottom: none;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .DownPanelIcon {
+	background:url("/ecmexplorer/skin/icons/16x16/DefaultSkin/DownPanelIcon.png") no-repeat scroll center center transparent;
+	cursor:pointer;
+	float:right;
+	height:15px;
+	margin-top:4px;
+	width:15px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .BarContent .Title {
+	color:#666666;
+	font-weight:bold;
+	line-height:24px;
+	overflow:hidden;
+	padding-left:4px;
+	white-space:nowrap;
+	margin-right: 20px;
+	font-family: arial;
+	font-size: 12px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent {
+	background: white;
+	overflow:auto;
+	padding: 8px;
+	margin-bottom: 6px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .DeleteContentIcon {
+	background:url("/ecmexplorer/skin/icons/16x16/DefaultSkin/DeleteContentIcon.png") no-repeat scroll center center transparent;
+	float:right;
+	margin-top:4px;
+	padding: 2px 7px;
+	display: block;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .Title {
+	color:#666666;
+	line-height:24px;
+	overflow:hidden;
+	padding-left:4px;
+	white-space:nowrap;
+	margin-right: 20px;
+	font-weight: normal;
+	font-size: 12px;
+	font-family: arial;
+}
+
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .AddCategory {
+	border-top: 1px solid #e4e4e4;
+	margin-top: 4px;
+	padding-top: 4px;
+	text-align: right;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .AddCategory a{
+	color: #006bb6;
+	text-decoration: underline;
+}
+
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .ItemContent {
+	padding: 0px 4px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .SelectItem {
+	background: #f2f2f2;
+	height: 24px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .FieldLabel {
+	font-weight: bold;
+	text-align: left;
+	width: 45px;
+	font-size: 11px;
+	font-family: arial;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent input {
+	color:#CCCCCC;
+	font-family:arial;
+	font-size:11px;
+	font-style:italic;
+	width:90px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .CrossedIcon {
+	background:url("/ecmexplorer/skin/icons/16x16/DefaultSkin/CrossedIcon.gif") no-repeat left;
+	cursor:pointer;
+	padding: 4px 8px 4px 14px;
+	color: #006bb6;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .selectbox {
+	color:#959595;
+	font-family:arial;
+	font-size:11px;
+	font-style:italic;
+	width:200px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .AddTagIcon {
+	background:url("/ecmexplorer/skin/icons/16x16/DefaultSkin/AddTagIcon.png") no-repeat center center;
+	padding: 2px 7px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .SelectDateTimeIcon {
+	background:url("/ecmexplorer/skin/icons/16x16/DefaultSkin/SelectDateTimeIcon.png") no-repeat center center;
+	padding: 2px 7px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .LastComment {
+	background: #f5f5f5;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .LastCommentBar {
+	border-bottom: 1px solid white;
+	padding: 4px;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .LastCommentBar .Title{
+	font-weight: bold;
+}
+
+.UIJCRExplorerPortlet .UIExplorerPanel .SideContent .LastCommentContent {
+	padding: 8px;
+	font-family: arial;
+}

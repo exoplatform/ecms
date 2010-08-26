@@ -96,7 +96,7 @@
 	
 	
 /* Clearfix */	
-.clearfix:after {
+.ClearFix:after {
 content: ".";
 display: block;
 height: 0;
@@ -104,10 +104,10 @@ clear: both;
 visibility: hidden;
 }
 
-.clearfix {display: inline-block;}
+.ClearFix {display: inline-block;}
 
 /* Hides from IE-mac \*/
-* html .clearfix {height: 1%;}
-.clearfix {display: block;}
+* html .ClearFix {height: 1%;}
+.ClearFix {display: block;}
 /* End hide from IE-mac */ 
 	
