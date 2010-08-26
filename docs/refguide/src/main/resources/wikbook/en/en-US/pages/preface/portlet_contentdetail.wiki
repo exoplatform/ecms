@@ -1,0 +1,68 @@
+
+h1. Available preferences
+
+|| *Preference* || *Type*|| *Description* ||
+| *repository* | {{String}} | The current repository name. always is "repository" |
+| *workspace* | {{String}} | The workspace where the content is stored|
+| *nodeIdentifier* | {{String}} | path to the content you want to show|
+| *ShowTitle* | {{Boolean}} | Show the content title on top of the portlet|
+| *ShowDate* | {{Boolean}} | Show the content date on top of the portlet|
+| *ShowOptionBar* | {{Boolean}} | Show a bar with some actions (Print, Back)|
+| *ShowPrintAction* | {{Boolean}} | Show/hide the print action button|
+
+h1. Default Values
+{code:language=xml|indent=2}
+		<portlet-preferences>
+			<preference>
+				<name>repository</name> 
+				<value>repository</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>workspace</name>  
+				<value>collaboration</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>nodeIdentifier</name>
+				<value>/myfolder/mycontent</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowTitle</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowDate</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowOptionBar</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ShowPrintAction</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>isQuickCreate</name>
+				<value>false</value>
+				<read-only>true</read-only>
+			</preference>
+			<preference>
+				<name>ContextEnable</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>ParameterName</name>
+				<value>content-id</value>
+				<read-only>false</read-only>
+			</preference>
+		</portlet-preferences>
+{code}
+

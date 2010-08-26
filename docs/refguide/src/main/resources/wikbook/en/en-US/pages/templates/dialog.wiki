@@ -1,0 +1,56 @@
+Dialogs are groovy templates that generate forms by mixing static HTML fragments and groovy calls to the components responsible for building the UI at runtime. The result is a simple but powerfull syntax.
+
+h1. Text Field
+
+h2. Parameters
+
+|| || || *Text Field* ||
+| *jcrPath* | {{Path}} | relative path inside the current node |
+| | _example_ | {{ jcrPath=/node/exo:title }} |
+| *mixintype* | {{List of String}} | List of the mixin types we want to initialize when creating the content |
+| | _example_ | {{ mixintype=mix:votable,mix:commentable,mix:i18n }} |
+| | | {{ validate=empty,name }} |
+| *validate* | {{List of String}} | use some validators. Possible values are : empty, name, datetime. |
+| | _example_ | {{ validate=empty }} |
+| | | {{ validate=empty,name }} |
+| *editable* | {{String}} | Text input will be editable if value is _if-null_ |
+| | _example_ | {{ editable=if-null }} |
+| *multiValues* | {{Boolean}} | Show a multi values component if true. Must be used only with corresponding multi-values properties |
+| | _example_ | {{ multiValues=true}} |
+| *visible* | {{Boolean}} | Input will be visible if true |
+| | _example_ | {{ visible=true }} |
+
+{warning:title=Mon titre}
+Note that _mixintype_ can be used only in the root node  field (commonly known as the name field)
+{warning}
+
+h2. Example
+{code:language=java}
+<%
+  String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
+  uicomponent.addTextField("title", fieldTitle) ;
+%>
+{code}
+
+h1. Hidden Field
+  {{TODO : DOC HERE}}
+
+h1. Text Area Field
+  {{TODO : DOC HERE}}
+
+h1. Rich Text Field
+  {{TODO : DOC HERE}}
+
+h1. Calendar Field
+  {{TODO : DOC HERE}}
+
+h1. Upload Field
+  {{TODO : DOC HERE}}
+
+h1. SelectBox Field
+  {{TODO : DOC HERE}}
+
+h1. Interceptors
+  {{TODO : DOC HERE}}
+
+

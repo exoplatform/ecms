@@ -1,0 +1,78 @@
+h1. Preface
+h2. Getting started with eXo WCM
+  {include:document="pages/preface/start.wiki" /}
+h2. Packaging
+  {include:document="pages/preface/packaging.wiki" /}
+h2. Portlets
+h3. Content Detail
+  {include:document="pages/preface/portlet_contentdetail.wiki" /}
+h3. Content List
+  {include:document="pages/preface/portlet_contentlist.wiki" /}
+h3. Explorer
+  {include:document="pages/preface/portlet_explorer.wiki" /}
+
+h1. Configuration
+h2. Drives
+  {include:document="pages/configuration/drives.wiki" /}
+h2. Publication
+  {include:document="pages/configuration/publication.wiki" /}
+h2. Deployment
+  {include:document="pages/configuration/deployment.wiki" /}
+h2. Taxonomies
+  {include:document="pages/configuration/taxonomies.wiki" /}
+h2. Nodetypes
+  {include:document="pages/configuration/nodetypes.wiki" /}
+h2. Templates
+h3. Application template
+  {include:document="pages/configuration/template_application.wiki" /}
+h3. Nodetype template
+  {include:document="pages/configuration/template_nodetype.wiki" /}
+h2. Views
+  {include:document="pages/configuration/views.wiki" /}
+h2. Extensions
+  {include:document="pages/configuration/extensions.wiki" /}
+
+h1. Inside WCM Templates
+h2. Content types
+  {include:document="pages/templates/content.wiki" /}
+h3. Dialog
+  {include:document="pages/templates/dialog.wiki" /}
+h3. View
+  {include:document="pages/templates/view.wiki" /}
+h2. List of Contents
+  {include:document="pages/templates/clv.wiki" /}
+h3. Folder based Template
+  {include:document="pages/templates/folder.wiki" /}
+h3. Category tree Template
+  {include:document="pages/templates/category.wiki" /}
+
+h1. Inside WCM Explorer
+h2. CSS
+  {include:document="pages/explorer/css.wiki" /}
+h2. Javascript
+  {include:document="pages/explorer/javascript.wiki" /}
+h2. CKEditor
+  {include:document="pages/explorer/ckeditor.wiki" /}
+
+h1. Extensions
+h2. REST Services
+  {include:document="pages/extensions/rest.wiki" /}
+h2. UI Extensions
+  {include:document="pages/extensions/ui.wiki" /}
+
+h1. JMX Events
+  {include:document="pages/jmx/events.wiki" /}
+
+h1. Java Services
+h2. TaxonomyService
+  {include:document="pages/services/taxonomy.wiki" /}
+h2. LinkManager
+  {include:document="pages/services/link.wiki" /}
+h2. PublicationManager
+  {include:document="pages/services/publication.wiki" /}
+h2. WCMComposer
+  {include:document="pages/services/composer.wiki" /}
+
+h1. FAQ
+  {include:document="pages/faq/faq.wiki" /}
+

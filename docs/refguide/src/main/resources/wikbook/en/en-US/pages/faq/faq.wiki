@@ -1,0 +1,6 @@
+h2. How do I create a new Site ?
+
+h2. How do I create a new Content Type ?
+
+
+h2. How do I create a new Site ?
