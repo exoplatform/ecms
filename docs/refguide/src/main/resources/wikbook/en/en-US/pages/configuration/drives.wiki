@@ -29,6 +29,29 @@ h1. Fields
 | | _example_ | {{ {{{*}}} }}|
 | | | {{exo:taxonomy}} |
 
+We use the following structure for drives configuration
+{code:language=xml|indent=2}
+	<external-component-plugins>
+		<target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
+		<component-plugin>
+			<name>manage.drive.plugin</name>
+			<set-method>setManageDrivePlugin</set-method>
+			<type>org.exoplatform.services.cms.drives.impl.ManageDrivePlugin</type>
+			<description>Nothing</description>
+			<init-params>
+				<object-param>
+					There are initializing attributes of org.exoplatform.services.cms.drives.DriveData object
+				</object-param>
+			</init-params>
+		</component-plugin>
+	</external-component-plugins>
+{code}
+
+The file that contains the structure above will be configured in configuration.xml file as the following:
+{code:language=xml|indent=2}
+	<import>war:/conf/wcm-extension/dms/drives-configuration.xml</import>			
+{code}
+
 h1. Example of configuration
 {code:language=xml|indent=2}
   <external-component-plugins>
