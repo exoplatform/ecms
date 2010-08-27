@@ -116,7 +116,26 @@ h2. Example
 {code}
 
 h1. Upload Field
-  {{TODO : DOC HERE}}
+
+h2. Parameters
+
+|| || || *Upload Field* ||
+| *jcrPath* | {{Path}} | relative path inside the current node |
+| | | {{ validate=empty,name }} |
+| *validate* | {{List of String}} | use some validators. Allowed values are : empty, name, datetime. |
+| | _example_ | {{ validate=empty }} |
+| *editable* | {{String}} | Text input will be editable if value is _if-null_ |
+| | _example_ | {{ editable=if-null }} |
+| *visible* | {{Boolean}} | Input will be visible if true |
+| | _example_ | {{ visible=true }} |
+
+h2. Example
+{code:language=java}
+<%
+  String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data"] ;
+  uicomponent.addUploadField("media", fieldMedia) ;		
+%>
+{code}
 
 h1. SelectBox Field
   {{TODO : DOC HERE}}
