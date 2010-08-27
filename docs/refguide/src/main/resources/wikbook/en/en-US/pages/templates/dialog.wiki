@@ -147,7 +147,17 @@ h2. Example
 {code}
 
 h1. Interceptors
-  {{TODO : DOC HERE}}
+TO add an intercepter into a dialog, we can use this method {{*uicomponent.addInterceptor(String scriptPath, String type)*}}
+|| || || *Parameters* ||
+| *scriptPath* | {{String}} | The relative path to the script file |
+| *type* | {{String}} | The type of intercepter: {{prev}} or {{post}} |
+
+h2. Example
+{code:language=java}
+<%
+  uicomponent.addInterceptor("ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy", "prev");
+%>
+{code}
   
 h1. Mixin Field
 
