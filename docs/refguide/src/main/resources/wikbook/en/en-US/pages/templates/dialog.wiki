@@ -36,7 +36,35 @@ h1. Hidden Field
   {{TODO : DOC HERE}}
 
 h1. Text Area Field
-  {{TODO : DOC HERE}}
+
+h2. Parameters
+
+|| || || *Text Field* ||
+| *jcrPath* | {{Path}} | relative path inside the current node |
+| | _example_ | {{ jcrPath=/node/exo:description }} |
+| *mixintype* | {{List of String}} | List of the mixin types we want to initialize when creating the content |
+| | _example_ | {{ mixintype=mix:votable,mix:commentable,mix:i18n }} |
+| | | {{ validate=empty,name }} |
+| *validate* | {{List of String}} | use some validators. Possible values are : empty, name, datetime. |
+| | _example_ | {{ validate=empty }} |
+| | | {{ validate=empty,name }} |
+| *editable* | {{String}} | Text input will be editable if value is _if-null_ |
+| | _example_ | {{ editable=if-null }} |
+| *multiValues* | {{Boolean}} | Show a multi values component if true. Must be used only with corresponding multi-values properties |
+| | _example_ | {{ multiValues=true}} |
+| *visible* | {{Boolean}} | Input will be visible if true |
+| | _example_ | {{ visible=true }} |
+| *rows* | Number | The initial textarea's number of rows |
+| *cols* | Number | The initial textarea's number of cols |
+
+h2. Example
+{code:lang=java}
+<%
+String[] fieldDescription = ["jcrPath=/node/exo:description", "validate=empty"] ;
+uicomponent.addTextAreaField("description", fieldDescription)
+%>
+{code}
+
 
 h1. Rich Text Field
 
