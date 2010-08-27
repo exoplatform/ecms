@@ -1,0 +1,91 @@
+A view can include many object parameters. Parameters are used to create default views, templates and actions of Manage view service. View allow administrators to customize many sort of views that can impact to users in exploring workspace. Each object-param have a type that is a class representing all properties of a view.
+
+
+
+h1. Fields
+
+*org.exoplatform.services.cms.views.ViewConfig*
+
+|| Name || Type || Description ||
+| *name* | {{String}} | view name, must be unique inside WCM |
+| *permissions* | {{String}} | Visibility of the view based on eXo Rights |
+| | _example_ | {{ {{{*:/platform/administrators}}} }} |
+| *template* | {{String}} | Specify path to the template location |
+| *tabList* | {{java.util.ArrayList}} | include a set of view names. |
+
+
+
+*org.exoplatform.services.cms.views.ViewConfig$Tab*
+
+|| Name || Type || Description ||
+| *tabName* | {{String}} | tab name that is not uniquely  |
+| *button* | {{String}} | These have to specify a set of view component names |
+| | _example_ | viewNodeType; viewPermissions; viewProperties; showJCRStructure |
+
+
+
+*org.exoplatform.services.cms.views.TemplateConfig*
+
+|| Name || Type || Description ||
+| *type* | {{String}} | Specify to a name that is truly a class representing all properties of a view.  |
+| *name* | {{String}} | These have to specify a set of view component names |
+| *warPath*| {{String}} | Specify to a template location for viewing |
+| | _example_ | /ecm-explorer/SystemView.gtmpl |
+
+h1. Example of configuration
+{code:language=xml|indent=2}
+<external-component-plugins>
+    <target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>
+    	<component-plugin> 
+        <name>manage.view.plugin</name>
+        <set-method>setManageViewPlugin</set-method>
+        <type>org.exoplatform.services.cms.views.impl.ManageViewPlugin</type>
+        <description>this plugin manage user view</description>
+        <init-params>
+        	<value-param>
+	        	<name>autoCreateInNewRepository</name>
+	        	<value>true</value>
+	        </value-param>
+	        <value-param>
+	        	<name>predefinedViewsLocation</name>
+	        	<value>war:/conf/dms-extension/dms/artifacts</value>
+	        </value-param>	        
+	        <value-param>
+	        	<name>repository</name>
+	        	<value>repository</value>
+	        </value-param>
+		<object-param>	      
+		       <name>System-View</name>
+		       <description>View configuration for System workspace</description>
+		       <object type="org.exoplatform.services.cms.views.ViewConfig">		          
+		          <field name="name"><string>system-view</string></field>
+		          <field name="permissions"><string>*:/platform/administrators</string></field>
+		          <field name="template"><string>/exo:ecm/views/templates/ecm-explorer/SystemView</string></field>	
+		          <field name="tabList">
+                             <collection type="java.util.ArrayList">               
+                                 <value>
+                                 <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                                    <field name="tabName"><string>Info</string></field>
+                                    <field name="buttons">
+                               	      <string>viewNodeType; viewPermissions; viewProperties; showJCRStructure</string>
+                                    </field>
+                                 </object>
+                                 </value>
+                              </collection>
+                          </field>	          
+	               </object>
+	        </object-param>
+                <object-param>	      
+		        <name>System Template</name>
+		        <description>Template for display documents in list style</description>
+		        <object type="org.exoplatform.services.cms.views.TemplateConfig">		        	
+                            <field name="type"><string>ecmExplorerTemplate</string></field>
+		            <field name="name"><string>SystemView</string></field>
+		            <field name="warPath"><string>/ecm-explorer/SystemView.gtmpl</string></field>              
+		        </object>
+		</object-param>
+       </init-params>
+    </component-plugin>
+  </external-component-plugins>
+{code}
+
