@@ -679,27 +679,6 @@ body {
   background: url('../images/icons/exo-image.gif') no-repeat right center; /* orientation=rt */
 }
 
-.UIAction .ActionContainer {
- width: auto;
- margin: auto;
-} 
-
-.UIAction .ActionButton {
- display: block;
- float: left; /* orientation=lt */
- float: right; /* orientation=rt */
- margin: 0px 3px;
- cursor: pointer;
-}
-
-.UIAction a {
-}
-
-.UIAction a:hover {
- color: #058ee6;
-}
-
-
 .UIAction .ActionButton .Icon {
  padding-left: 20px; /* orientation=lt */
  padding-right: 20px; /* orientation=rt */
