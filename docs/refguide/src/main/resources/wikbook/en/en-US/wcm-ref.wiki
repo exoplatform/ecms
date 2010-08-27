@@ -14,6 +14,8 @@ h3. Explorer
   {include:document="pages/preface/portlet_explorer.wiki" /}
 h3. Administration
   {include:document="pages/preface/portlet_administration.wiki" /}
+h3. Fast Content Creator
+  {include:document="pages/preface/portlet_fastcontentcreator.wiki" /}
 h1. Configuration
 h2. Drives
   {include:document="pages/configuration/drives.wiki" /}

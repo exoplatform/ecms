@@ -42,13 +42,63 @@ h1. Rich Text Field
   {{TODO : DOC HERE}}
 
 h1. Calendar Field
-  {{TODO : DOC HERE}}
+
+h2. Parameters
+
+|| || || *Calendar Field* ||
+| *jcrPath* | {{Path}} | relative path inside the current node |
+| | _example_ | {{ jcrPath=/node/exo:publishedDate }} |
+| *options* | {{List of String}} | use for format data. Possible values are : displaytime, displaydatetime. |
+| | _example_ | {{ options=displaytime }} |
+| | | {{ options=displaydatetime }} |
+| *validate* | {{List of String}} | use some validators. Possible values are : empty, datetime. |
+| | _example_ | {{ validate=empty }} |
+| | | {{ validate=datetime }} |
+| *editable* | {{String}} | Text input will be editable if value is _if-null_ |
+| | _example_ | {{ editable=if-null }} |
+| *multiValues* | {{Boolean}} | Show a multi values component if true. Must be used only with corresponding multi-values properties |
+| | _example_ | {{ multiValues=true}} |
+| *visible* | {{Boolean}} | Input will be visible if true |
+| | _example_ | {{ visible=true }} |
+
+h2. Example
+{code:language=java}
+<%
+  String[] fieldPublishedDate = ["jcrPath=/node/exo:publishedDate", "options=displaytime", "validate=datetime", "visible=true"] ;
+  uicomponent.addCalendarField("publishedDate", fieldPublishedDate) ;
+%>
+{code}
 
 h1. Upload Field
   {{TODO : DOC HERE}}
 
 h1. SelectBox Field
   {{TODO : DOC HERE}}
+
+h1. CheckBox Field
+
+h2. Parameters
+
+|| || || *CheckBox Field* ||
+| *jcrPath* | {{Path}} | relative path inside the current node |
+| | _example_ | {{ jcrPath=/node/exo:isDeep }} |
+| *validate* | {{List of String}} | use some validators. Possible values are : empty |
+| | _example_ | {{ validate=empty }} |
+| | | {{ validate=empty }} |
+| *editable* | {{String}} | Text input will be editable if value is _if-null_ |
+| | _example_ | {{ editable=if-null }} |
+| *multiValues* | {{Boolean}} | Show a multi values component if true. Must be used only with corresponding multi-values properties |
+| | _example_ | {{ multiValues=true}} |
+| *visible* | {{Boolean}} | Input will be visible if true |
+| | _example_ | {{ visible=true }} |
+
+h2. Example
+{code:language=java}
+<%
+  String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true"];         
+  uicomponent.addCheckBoxField("isDeep", fieldDeep);
+%>
+{code}
 
 h1. Interceptors
   {{TODO : DOC HERE}}
