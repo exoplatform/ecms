@@ -8,6 +8,8 @@ h3. Content Detail
   {include:document="pages/preface/portlet_contentdetail.wiki" /}
 h3. Content List
   {include:document="pages/preface/portlet_contentlist.wiki" /}
+h3. Search
+  {include:document="pages/preface/portlet_search.wiki" /}
 h3. Explorer
   {include:document="pages/preface/portlet_explorer.wiki" /}
 h3. Administration

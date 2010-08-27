@@ -5,7 +5,7 @@
 h1. Available configuration
 
 
-h6. 1.&nbsp;init-params
+h2. 1.&nbsp;init-params
 
 || Configuration name || Data type || Default Value || Description ||
 | autoCreateInNewRepository | {{Boolean}} | true | Allow the application automatically import predefined templated at start up of template service |
@@ -14,7 +14,7 @@ h6. 1.&nbsp;init-params
 | object-param | {{Structure}} | | Configuration for each instance. |
 
 
-h6. 2.&nbsp;object-param
+h2. 2.&nbsp;object-param
 
 || Configuration name || Data type || Default Value || Description ||
 | name | String | template.configuration | The name of this configuration |
@@ -24,7 +24,7 @@ h6. 2.&nbsp;object-param
 
 *Object type define all available template file, using the "collection type" configuration*
 
-h6. 3. &nbsp;object
+h2. 3. &nbsp;object
 
 *type: name of each object type, it means the type of template, the further configurations for this type are define by the some specify fileds.*
 || Field name || Data type || Description ||
@@ -136,4 +136,5 @@ as the another NodeType.
           </object-param>
         </init-params>
       </component-plugin>
+</external-component-plugins>
 {code}

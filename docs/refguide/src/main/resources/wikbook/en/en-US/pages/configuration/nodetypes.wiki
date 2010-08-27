@@ -1,4 +1,4 @@
-Every node has a type. A node’s type The names, types and other attributes of its child items. Node types can be used to define complex storage objects consisting of multiple sub nodes and properties, possibly many layers deep.
+Every node has a type. A node's type The names, types and other attributes of its child items. Node types can be used to define complex storage objects consisting of multiple sub nodes and properties, possibly many layers deep.
 
 h1. Fields
 
