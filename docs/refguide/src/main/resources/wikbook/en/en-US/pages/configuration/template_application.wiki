@@ -5,7 +5,7 @@
 h1. Available configuration
 
 
-h2. 1.&nbsp;init-params
+h2. init-params
 
 || Configuration name || Data type || Default Value || Description ||
 | autoCreateInNewRepository | {{Boolean}} | true | Allow the application automatically import predefined templated at start up of template service |
@@ -14,7 +14,7 @@ h2. 1.&nbsp;init-params
 | object-param | {{Structure}} | | Configuration for each instance. |
 
 
-h2. 2.&nbsp;object-param
+h2. object-param
 
 || Configuration name || Data type || Default Value || Description ||
 | name | String | template.configuration | The name of this configuration |
@@ -24,7 +24,7 @@ h2. 2.&nbsp;object-param
 
 *Object type define all available template file, using the "collection type" configuration*
 
-h2. 3. &nbsp;object
+h2. object
 
 *type: name of each object type, it means the type of template, the further configurations for this type are define by the some specify fileds.*
 || Field name || Data type || Description ||
@@ -38,15 +38,15 @@ h2. 3. &nbsp;object
 + referencedDialog: Determine how to display a diaglog to input information.
 + referencedSkin: Determine the style sheet for displaying.
 
-\*Each type include some definition as an ﻿\[object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template"\]&nbsp;with the fields as the properties.\*
+*Each type include some definition as an ﻿\[object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template"\]with the fields as the properties.*
 || Field name || Data type || Desciption ||
 | templateFile | String | The location of the file store for the template's presentation |
 | roles | String | Determine who can access this object (View/Dialog/CSS) |
 
 h1. Example of configuration for an template
 
-This bellow example is configuration for the nt:file template, any other template will be put in the same level with this template start from the line&nbsp;
-{color:#0000ff}<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">{color}
+This bellow example is configuration for the nt:file template, any other template will be put in the same level with this template start from the line
+<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
 as the another NodeType.
 
 {code:language=xml|indent=2}
