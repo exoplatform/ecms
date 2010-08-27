@@ -13,7 +13,7 @@ h1. Fields
 | *name* | {{String}} | Name of the drive, must be unique inside WCM |
 | *repository* | {{String}} | Content Repository where to find the root path |
 | *workspace* | {{String}} | Workspace in the Content Repository |
-| *homePath* | {{String}} | root path in the Content Repository. _${userId}_ can be used to use the userId at runtime in the path. |
+| *homePath* | {{String}} | root path in the Content Repository. {code} _${userId}_ {code} can be used to use the userId at runtime in the path. |
 | *permissions* | {{String}} | Visibility of the drive based on eXo Rights |
 | | _example_ | {{ {{{*:/platform/users}}} }} |
 | *icon* | {{String}} | url to the icon |
