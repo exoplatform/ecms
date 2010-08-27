@@ -68,4 +68,4 @@ h1. Sample configuration
 		</portlet-preferences>
 {code}
 
-h6. Note: In 2.1.x, there is some preference is no longer used: for example: ShowPrintAction preference,..
+*Note: In 2.1.x, there is some preference is no longer used: for example: ShowPrintAction preference,..*
