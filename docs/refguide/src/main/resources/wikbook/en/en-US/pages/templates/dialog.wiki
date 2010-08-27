@@ -137,6 +137,27 @@ h2. Example
 %>
 {code}
 
+
+h1. Radio Field
+
+h2. Parameters
+
+|| || || *Radio Field* ||
+| *jcrPath* | {{Path}} | relative path inside the current node |
+| | | {{ validate=empty,name }} |
+| *visible* | {{Boolean}} | Input will be visible if true |
+| | _example_ | {{ visible=true }} |
+
+
+h2. Example
+{code:language=java}
+<%
+  String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true"];         
+  uicomponent.addRadioBoxField("isDeep", fieldDeep);
+%>
+{code}
+
+
 h1. SelectBox Field
   {{TODO : DOC HERE}}
 
