@@ -158,6 +158,7 @@ public class ExportContentJob implements Job {
             node_.setProperty(MIX_TARGET_WORKSPACE, workspace);
             session.save();
             HashMap<String, String> context_ = new HashMap<String, String>();
+            context_.put("containerName", containerName);
             publicationPlugin.changeState(node_, toState, context_);
             log.info("change the status of the node " + node_.getPath() + " to " + toState);
             bos = new ByteArrayOutputStream();
