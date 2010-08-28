@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -270,13 +271,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 * @throws Exception the exception
 	 */
 	private Node getViewableContent(Node node, HashMap<String, String> filters) throws Exception {
-	    if (node.isNodeType("exo:taxonomyLink")) {
-	      try {
-	    	 node = linkManager.getTarget(node);
-	      }catch(AccessDeniedException ade) {	     
-	     	 return null;
-	      }
-	    }
+      try {
+    	 node = getTargetNode(node);
+      }catch(AccessDeniedException ade) {	     
+     	 return null;
+      }
 	   
 	    String languageFilter = filters.get(FILTER_LANGUAGE);
 	    if (languageFilter!=null) {
@@ -301,6 +300,21 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		Node viewNode = publicationPlugin.getNodeView(node, context);
 		return viewNode;
 	}
+	
+  private Node getTargetNode(Node showingNode) throws Exception {
+    Node targetNode = null;
+    if (linkManager.isLink(showingNode)) {
+      try {
+        targetNode = linkManager.getTarget(showingNode);
+      } catch (ItemNotFoundException e) {
+        targetNode = showingNode;
+      }
+    } else {
+      targetNode = showingNode;
+    }
+    return targetNode;
+  }
+
 
 	/* (non-Javadoc)
 	 * @see org.exoplatform.services.wcm.publication.WCMComposer#updateContent(java.lang.String, java.lang.String, java.lang.String, java.util.HashMap)

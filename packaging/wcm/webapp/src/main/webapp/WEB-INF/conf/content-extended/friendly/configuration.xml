@@ -86,11 +86,12 @@
                   <field name="unfriendlyUri"><string>/rest-ecmdemo/jcr/repository/collaboration/sites content/live/acme/documents</string></field>
                 </object>
               </value>
+     http://localhost:8080/ecmdemo/public/acme/detail?content-id=/repository/collaboration/sites%20content/live/acme/web%20contents/Events/Event1
               -->
               <value>
                 <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
                   <field name="friendlyUri"><string>documents</string></field>
-                  <field name="unfriendlyUri"><string>/public/acme/detail?path=/repository/collaboration</string></field>
+                  <field name="unfriendlyUri"><string>/public/acme/detail?content-id=/repository/collaboration</string></field>
                 </object>
               </value>
               <value>

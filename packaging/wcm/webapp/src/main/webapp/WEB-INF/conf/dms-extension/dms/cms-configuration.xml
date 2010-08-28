@@ -818,7 +818,7 @@
                 <value>               
                   <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">                 
                     <field  name="alias"><string>exoPublicTagNode</string></field>
-                    <field  name="path"><string>/Application Data/Tags</string></field>
+                    <field  name="path"><string>/tags</string></field>
                     <field name="permissions">
                       <collection type="java.util.ArrayList">               
                         <value>                            

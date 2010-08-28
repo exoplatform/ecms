@@ -10,15 +10,17 @@ public class CategoryBean {
 	String url;
 	boolean isSelected = false;
 	int depth=0;
+	long total=0;
 	List<CategoryBean> childs;
 	
-	public CategoryBean(String name, String path, String title, String url, boolean isSelected, int depth) {
+	public CategoryBean(String name, String path, String title, String url, boolean isSelected, int depth, long total) {
 		this.name = name;
 		this.path = path;
 		this.title = title;
 		this.url = url;
 		this.isSelected = isSelected;
 		this.depth = depth;
+		this.total = total;
 		this.childs = null;
 	}
 	
@@ -62,6 +64,14 @@ public class CategoryBean {
 	public void setPath(String path) {
 		this.path = path;
 	}
+	
+	public long getTotal() {
+  	return total;
+  }
+
+	public void setTotal(long total) {
+  	this.total = total;
+  }
 
 	public List<CategoryBean> getChilds() {
 		return childs;

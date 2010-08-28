@@ -23,12 +23,15 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
@@ -36,6 +39,8 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
+import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -96,6 +101,10 @@ public class UICLVPresentation extends UIContainer {
   /** The date formatter. */
   private DateFormat               dateFormatter = null;
   
+  /** Generic TagStyles configurable in ECM Administration */
+  private Map<String, String> tagStyles = null;
+  
+  
   /**
    * Instantiates a new uICLV presentation.
    */
@@ -126,11 +135,17 @@ public class UICLVPresentation extends UIContainer {
   
   public List<CategoryBean> getCategories() throws Exception {
 	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
-	return getCategories(fullPath, 0);
+	return getCategories(fullPath, "exo:taxonomy", 0);
 
   }
+
+  public List<CategoryBean> getCategories(String primaryType) throws Exception {
+  	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+  	return getCategories(fullPath, primaryType, 0);
+  	
+  }
   
-  public List<CategoryBean> getCategories(String fullPath, int depth) throws Exception {
+  public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth) throws Exception {
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
@@ -143,7 +158,7 @@ public class UICLVPresentation extends UIContainer {
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
 //    filters.put(WCMComposer.FILTER_RECURSIVE, "true");
-    filters.put(WCMComposer.FILTER_PRIMARY_TYPE, "exo:taxonomy");
+    filters.put(WCMComposer.FILTER_PRIMARY_TYPE, primaryType);
 
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
 //	String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
@@ -157,10 +172,11 @@ public class UICLVPresentation extends UIContainer {
     	String title = getTitle(node);
     	String url = getCategoryURL(node);
     	String path = node.getPath();
+    	long total = (node.hasProperty("exo:total"))?node.getProperty("exo:total").getValue().getLong():0;
     	boolean isSelected = fullPath!=null&&fullPath.endsWith(path);
-    	CategoryBean cat = new CategoryBean(node.getName(), node.getPath(), title, url, isSelected, depth);
+    	CategoryBean cat = new CategoryBean(node.getName(), node.getPath(), title, url, isSelected, depth, total);
     	NodeLocation catLocation = NodeLocation.getNodeLocationByNode(node);
-    	List<CategoryBean> childs = getCategories(catLocation.toString(), depth+1);
+    	List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth+1);
     	if (childs!=null && childs.size()>0)
     		cat.setChilds(childs);
 //    	System.out.println(cat.getName()+"::"+cat.getPath()+"::"+cat.getTitle()+"::"+cat.isSelected()+"::"+cat.getDepth());
@@ -171,6 +187,41 @@ public class UICLVPresentation extends UIContainer {
     return categories;
 
   }
+  
+  public String getTagHtmlStyle(long tagCount) throws Exception {
+  	for (Entry<String, String> entry : getTagStyles().entrySet()) {
+  		if (checkTagRate(tagCount, entry.getKey()))
+	  		return entry.getValue();
+  	}
+  	return "";
+  }
+
+  private Map<String ,String> getTagStyles() throws Exception {
+  	if (tagStyles==null) {
+	    NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
+	    String workspace = "dms-system";
+	    tagStyles = new HashMap<String ,String>() ;
+	    for(Node tag : folksonomyService.getAllTagStyle("repository", workspace)) {
+	      tagStyles.put(tag.getProperty("exo:styleRange").getValue().getString(),
+	      						 tag.getProperty("exo:htmlStyle").getValue().getString());
+	    }
+  	}
+    return tagStyles ;
+  }
+  
+  private boolean checkTagRate(long numOfDocument, String range) throws Exception {
+    String[] vals = StringUtils.split(range ,"..") ;    
+    int minValue = Integer.parseInt(vals[0]) ;
+    int maxValue ;
+    if(vals[1].equals("*")) {
+      maxValue = Integer.MAX_VALUE ;
+    }else {
+      maxValue = Integer.parseInt(vals[1]) ;
+    }
+    if(minValue <=numOfDocument && numOfDocument <maxValue ) return true ;    
+    return false ;
+  }
+  
   
   /**
    * Gets the uRL.

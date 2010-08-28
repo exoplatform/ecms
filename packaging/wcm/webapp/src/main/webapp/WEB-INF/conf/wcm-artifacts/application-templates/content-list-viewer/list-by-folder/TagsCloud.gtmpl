@@ -9,29 +9,40 @@
 %>
 <%
 public void renderCategories(def categories) {
+    def first = true;
     for (category in categories) {
       def categoryTitle = category.getTitle();
       def categoryURL = category.getUrl();
-      def cssStyle = "CategoryLabel";
-      def margin = 16 * category.getDepth() + "px";
-      
-      if (category.getDepth()>0) cssStyle = "SubCategory";
-      if (category.isSelected()) cssStyle += " CategorySelected";
+      def cssStyle = "TagLabel";
+      if (category.isSelected()) cssStyle = "TagLabel TagSelected";
+
+      def style = "" ;
+      def tagCount = category.getTotal();
+      style = "Style = '" + uicomponent.getTagHtmlStyle(tagCount)+ "'" ;
       %>
-      <a class="$cssStyle" style="margin-left: $margin" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>
+
+      <a class="$cssStyle" href="$categoryURL" title="$categoryTitle" $style>$categoryTitle</a>  
       <%
-      if (category.hasChilds()) renderCategories(category.getChilds());
+      first=false;
+      if (category.hasChilds()) {
+        %> &nbsp;|&nbsp; <%
+        renderCategories(category.getChilds(), tagStyle);
+      }
     }
 }
 %>
 
 <style>
-.CategorySelected {
+.TagSelected {
   color: #3366CC !important;
 }
 
 .SimpleHorizontal {
   padding-bottom:10px;
+}
+
+.SimpleVerticalHierachy .CategoriesContainer .TagLabel {
+  display:inline !important;
 }
 
 </style>
@@ -47,7 +58,7 @@ public void renderCategories(def categories) {
     </div>
     <div class="NewContent">
       <%
-      def categories = uicomponent.getCategories();
+      def categories = uicomponent.getCategories("nt:unstructured");
       renderCategories(categories);
       %>
     </div>
