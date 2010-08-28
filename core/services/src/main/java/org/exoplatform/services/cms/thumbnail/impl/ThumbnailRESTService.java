@@ -143,8 +143,9 @@ public class ThumbnailRESTService implements ResourceContainer {
       return Response.ok().build();
     Node showingNode = getShowingNode(repoName, wsName, getNodePath(nodePath));
     Node targetNode = getTargetNode(showingNode);
-    if (targetNode.getPrimaryNodeType().getName().equals("nt:file")) {
-      Node content = targetNode.getNode("jcr:content");
+    if (targetNode.getPrimaryNodeType().getName().equals("nt:file") || targetNode.getPrimaryNodeType().getName().equals("nt:resource")) {
+      Node content = targetNode;
+      if (targetNode.getPrimaryNodeType().getName().equals("nt:file")) content = targetNode.getNode("jcr:content");
       String mimeType = content.getProperty("jcr:mimeType").getString();
       for (ComponentPlugin plugin : thumbnailService_.getComponentPlugins()) {
         if (plugin instanceof ThumbnailPlugin) {
