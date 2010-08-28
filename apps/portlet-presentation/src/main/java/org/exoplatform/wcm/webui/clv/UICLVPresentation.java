@@ -161,7 +161,7 @@ public class UICLVPresentation extends UIContainer {
     filters.put(WCMComposer.FILTER_PRIMARY_TYPE, primaryType);
 
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
-//	String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
+	  String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
 //	System.out.println("paramPath::"+paramPath);
 
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(fullPath);
@@ -173,7 +173,7 @@ public class UICLVPresentation extends UIContainer {
     	String url = getCategoryURL(node);
     	String path = node.getPath();
     	long total = (node.hasProperty("exo:total"))?node.getProperty("exo:total").getValue().getLong():0;
-    	boolean isSelected = fullPath!=null&&fullPath.endsWith(path);
+    	boolean isSelected = paramPath!=null&&paramPath.endsWith(path);
     	CategoryBean cat = new CategoryBean(node.getName(), node.getPath(), title, url, isSelected, depth, total);
     	NodeLocation catLocation = NodeLocation.getNodeLocationByNode(node);
     	List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth+1);
