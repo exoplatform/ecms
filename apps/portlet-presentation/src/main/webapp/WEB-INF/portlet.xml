@@ -229,11 +229,6 @@
 				<value>false</value>
 				<read-only>false</read-only>
 			</preference>
-			<preference>
-				<name>showThumbnailsView</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>			
       <preference>
         <name>showDateCreated</name>
         <value>true</value>
@@ -294,7 +289,7 @@
 		
 		<init-param>
 			<name>webui.configuration</name>
-			<value>/WEB-INF/conf/portlet/ParameterizedContentViewer/webui/configuration.xml</value>
+			<value>/WEB-INF/conf/portlet/SingleContentViewer/webui/configuration.xml</value>
 		</init-param>
 		
 		<expiration-cache>0</expiration-cache>
@@ -305,7 +300,7 @@
 			<portlet-mode>help</portlet-mode>
 		</supports>
 		<supported-locale>en</supported-locale>
-		<resource-bundle>locale.portlet.ParameterizedContentViewer.ParameterizedContentViewer</resource-bundle>
+		<resource-bundle>locale.portlet.SingleContentViewer.SingleContentViewer</resource-bundle>
 		
 		<portlet-info>
 			<title>Content by URL</title>
@@ -313,28 +308,78 @@
 			<keywords>Contents</keywords>
 		</portlet-info>
 		
-		<portlet-preferences>
-			<preference>
-				<name>repository</name>
-				<value>repository</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showTitle</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showDateCreated</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showBar</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-		</portlet-preferences>
+    <portlet-preferences>
+      <preference>
+        <name>repository</name>
+        <value>repository</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>workspace</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowTOC</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowTags</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowCategories</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowTitle</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowDate</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowOptionBar</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowPrintAction</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowVote</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ShowComments</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>isQuickCreate</name>
+        <value>false</value>
+        <read-only>true</read-only>
+      </preference>
+      <preference>
+        <name>ContextEnable</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>ParameterName</name>
+        <value>content-id</value>
+        <read-only>false</read-only>
+      </preference>
+    </portlet-preferences>
 	</portlet>
 	
 	<!--portlet>
