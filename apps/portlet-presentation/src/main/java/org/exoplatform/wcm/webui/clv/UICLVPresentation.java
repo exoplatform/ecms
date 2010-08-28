@@ -485,14 +485,22 @@ public class UICLVPresentation extends UIContainer {
   	String header = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
   	UICLVContainer clvContainer = this.getAncestorOfType(UICLVContainer.class);
   	boolean isAutoDetect = Boolean.parseBoolean(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION));
-  	if (!isAutoDetect || !clvContainer.isModeByFolder()) return header;
+  	String contextualFolder = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER);
+  	boolean isContextualEnable = UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualFolder);
+    String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+	  String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
+
+  	if (!isAutoDetect || !clvContainer.isModeByFolder() || paramPath==null || !isContextualEnable) return header;
   	
   	try {
-  	  Node folderNode = clvContainer.getFolderNode();
+  		
+  	  Node folderNode =NodeLocation.getNodeByExpression(this.getAncestorOfType(UICLVPortlet.class).getFolderPath()); 
 			if (folderNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE)) {
 				String folderTitle = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE).getString();
 				if (folderTitle != null && folderTitle.length() > 0)
 					header = folderTitle;
+			} else {
+				header = folderNode.getName();
 			}
 		} catch (RepositoryException repositoryException) {		  
 		} catch (Exception e) {
