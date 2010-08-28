@@ -161,8 +161,9 @@ public class UICLVPresentation extends UIContainer {
     filters.put(WCMComposer.FILTER_PRIMARY_TYPE, primaryType);
 
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+    
+    /* Allows us to know the current selected node */
 	  String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
-//	System.out.println("paramPath::"+paramPath);
 
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(fullPath);
     
