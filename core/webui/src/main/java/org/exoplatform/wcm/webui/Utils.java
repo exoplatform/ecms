@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
@@ -219,6 +220,9 @@ public class Utils {
 			HashMap<String, String> filters = new HashMap<String, String>();
 		    filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
 			filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
+			PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+			PortletMode portletMode = portletRequestContext.getApplicationMode();
+			filters.put(WCMComposer.PORTLET_MODE, portletMode.toString());
 			if (version != null) filters.put(WCMComposer.FILTER_VERSION, version);
 			return getService(WCMComposer.class).getContent(repository, workspace, nodeIdentifier, filters, getSessionProvider());
 		} catch (Exception e) {
