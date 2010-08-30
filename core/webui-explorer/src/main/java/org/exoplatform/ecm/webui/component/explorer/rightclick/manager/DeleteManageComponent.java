@@ -58,6 +58,8 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -156,7 +158,20 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 		if (node.isNodeType(Utils.EXO_RESTORELOCATION) || !checkToMoveToTrash)
 			processRemoveNode(nodePath, node, event, isMultiSelect);
 		else {
-			moveToTrash(nodePath, node, event, isMultiSelect);
+	    WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
+	    List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(node);
+			
+			String parentPath = node.getParent().getPath();
+			String parentRepo = node.getSession().getRepository().toString();
+			String parentWSpace = node.getSession().getWorkspace().getName();
+	    moveToTrash(nodePath, node, event, isMultiSelect);
+	    
+	    for(Node categoryNode : categories){
+	      wcmComposer.updateContents(categoryNode.getSession().getRepository().toString(), 
+	                                 categoryNode.getSession().getWorkspace().getName(),
+	                                 categoryNode.getPath(), new HashMap<String, String>());
+      }
+			wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
 		}
   }
 
