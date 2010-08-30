@@ -19,6 +19,15 @@
   <listener>
     <listener-class>org.exoplatform.services.portletcontainer.impl.servlet.PortletApplicationListener</listener-class>
   </listener>
+
+  <listener>
+    <listener-class>org.exoplatform.container.web.PortalContainerConfigOwner</listener-class>
+  </listener>
+  <!--
+	<listener>
+    <listener-class>org.exoplatform.application.gadget.GadgetRegister</listener-class>
+  </listener>
+  -->
   
   <servlet>
     <servlet-name>PortletWrapper</servlet-name>
@@ -41,13 +50,5 @@
     <url-pattern>/PortletWrapper</url-pattern>
   </servlet-mapping>
 
-  <listener>
-    <listener-class>org.exoplatform.container.web.PortalContainerConfigOwner</listener-class>
-  </listener>
-  <!--
-	<listener>
-    <listener-class>org.exoplatform.application.gadget.GadgetRegister</listener-class>
-  </listener>
-  -->
 
 </web-app>
