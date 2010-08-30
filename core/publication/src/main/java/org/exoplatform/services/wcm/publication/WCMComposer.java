@@ -70,6 +70,9 @@ public interface WCMComposer {
 	/** Filter parameter to execute a specific query. ex: "SELECT * from nt:base"*/
 	public final static String FILTER_QUERY_FULL = "filter-query-full";
 	
+	/** mode of portlet **/
+	public final static String PORTLET_MODE = "portlet-mode";
+	
 	/** The Constant MODE_EDIT. */
 	public final static String MODE_EDIT = "Edit";
 	

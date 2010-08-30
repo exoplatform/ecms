@@ -142,22 +142,21 @@ public class UIPresentationContainer extends UIContainer{
 	 * @throws Exception the exception
 	 */
 	public Node getNodeView() {
-    UIPresentation presentation = getChild(UIPresentation.class);
-
-		try {
-		  Node viewNode;
-		  //Check for the saved parameter
-		  viewNode = getParameterizedNode();
-		  if (viewNode!= null) {
-		    return viewNode;
-		  }		  
-			PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-			portletPreferences = portletRequestContext.getRequest().getPreferences();
-			String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);    
-			String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
-			String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
-			viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
-			if (viewNode!=null) {
+	  UIPresentation presentation = getChild(UIPresentation.class);
+	  try {
+	    Node viewNode;
+		//Check for the saved parameter
+		viewNode = getParameterizedNode();
+		if (viewNode!= null) {
+		  return viewNode;
+		}		  
+		PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+		portletPreferences = portletRequestContext.getRequest().getPreferences();
+		String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);    
+		String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
+		String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
+		viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
+		if (viewNode!=null) {
 	      boolean isDocumentType = false;
 	      if (viewNode.isNodeType("nt:frozenNode")) isDocumentType = true; 
 	      // check node is a document node
@@ -178,8 +177,8 @@ public class UIPresentationContainer extends UIContainer{
 	        presentation.setOriginalNode(viewNode);
 	        presentation.setNode(viewNode);
 	      }
-			}
-			return viewNode;
+		}
+		  return viewNode;
 		} catch (Exception e) {
 			return null;
 		}

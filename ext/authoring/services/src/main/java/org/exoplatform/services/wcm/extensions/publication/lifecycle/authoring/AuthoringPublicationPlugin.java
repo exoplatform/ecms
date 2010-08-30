@@ -12,6 +12,7 @@ import javax.jcr.Node;
 import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
+import javax.portlet.PortletMode;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.config.model.Page;
@@ -557,7 +558,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       return null;
 
     // if current mode is edit mode
-    if (context==null || context.get(WCMComposer.FILTER_MODE).equals(WCMComposer.MODE_EDIT))
+    if (context==null || context.get(WCMComposer.FILTER_MODE).equals(WCMComposer.MODE_EDIT) ||
+        PortletMode.EDIT.toString().equals(context.get(WCMComposer.PORTLET_MODE)))
       return node;
 
     // if current mode is live mode

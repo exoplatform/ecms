@@ -164,11 +164,11 @@
 			<keywords>Contents</keywords>
 		</portlet-info>
 		<portlet-preferences>
-      <preference>
-        <name>mode</name>
-        <value>AutoViewerMode</value>
-        <read-only>false</read-only>
-      </preference>
+			<preference>
+			  <name>mode</name>
+			  <value>AutoViewerMode</value>
+			  <read-only>false</read-only>
+			</preference>
 			<preference>
 				<name>folderPath</name>
 				<value></value>

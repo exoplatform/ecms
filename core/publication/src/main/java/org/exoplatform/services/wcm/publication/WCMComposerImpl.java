@@ -289,6 +289,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		HashMap<String, Object> context = new HashMap<String, Object>();
 		String mode = filters.get(FILTER_MODE);
 		context.put(WCMComposer.FILTER_MODE, mode);
+		context.put(WCMComposer.PORTLET_MODE, filters.get(PORTLET_MODE));
 		String lifecyleName = null;
 		try {
 			lifecyleName = publicationService.getNodeLifecycleName(node);
