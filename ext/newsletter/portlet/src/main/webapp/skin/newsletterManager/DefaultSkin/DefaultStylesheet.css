@@ -282,6 +282,11 @@
   background: transparent url('icons/16x16/DeleteAdmin.gif') repeat scroll 0 0;
 }
 
+.UINewsletterManagerPortlet .UINewsletterEntryDialogSelector .UICalendarComponent {
+	position: absolute;
+	z-index: 4;
+}
+
 .UINewsletterPortlet .openFolder {
   background: transparent url(icons/16x16/folderopen1.png) no-repeat scroll left center;
 }
