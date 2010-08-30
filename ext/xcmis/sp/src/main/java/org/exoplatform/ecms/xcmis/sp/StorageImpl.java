@@ -850,26 +850,30 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       {
          try
          {
-            org.xcmis.search.model.Query qom = cmisQueryParser.parseQuery(query.getStatement());
-            //add drive path constrain
-            DescendantNode rootDescendantConstraint =
-               new DescendantNode(((Selector)qom.getSource()).getAlias(), "[" + getRepositoryInfo().getRootFolderId()
-                  + "]");
-
-            org.xcmis.search.model.Query newQom =
-               new org.xcmis.search.model.Query(qom.getSource(), qom.getConstraint() == null ? rootDescendantConstraint
-                  : new And(qom.getConstraint(), rootDescendantConstraint), qom.getOrderings(), qom.getColumns(), qom
-                  .getLimits());
-
-            List<ScoredRow> rows = searchService.execute(newQom);
-            //check if needed default sorting
-            if (qom.getOrderings().size() == 0)
+            boolean isRootStorage = "/".equals(getJcrRootPath());
+            org.xcmis.search.model.Query realQuery = cmisQueryParser.parseQuery(query.getStatement());
+            if (!isRootStorage)
             {
-               Set<SelectorName> selectorsReferencedBy = Visitors.getSelectorsReferencedBy(qom);
+
+               //add drive path constrain
+               DescendantNode rootDescendantConstraint =
+                  new DescendantNode(((Selector)realQuery.getSource()).getAlias(), "["
+                     + getRepositoryInfo().getRootFolderId() + "]");
+
+               realQuery =
+                  new org.xcmis.search.model.Query(realQuery.getSource(), realQuery.getConstraint() == null
+                     ? rootDescendantConstraint : new And(realQuery.getConstraint(), rootDescendantConstraint),
+                     realQuery.getOrderings(), realQuery.getColumns(), realQuery.getLimits());
+            }
+            List<ScoredRow> rows = searchService.execute(realQuery);
+            //check if needed default sorting
+            if (realQuery.getOrderings().size() == 0)
+            {
+               Set<SelectorName> selectorsReferencedBy = Visitors.getSelectorsReferencedBy(realQuery);
                Collections.sort(rows, new DocumentOrderResultSorter(selectorsReferencedBy.iterator().next().getName(),
                   this));
             }
-            return new QueryResultIterator(rows, qom);
+            return new QueryResultIterator(rows, realQuery);
          }
          catch (InvalidQueryException e)
          {
