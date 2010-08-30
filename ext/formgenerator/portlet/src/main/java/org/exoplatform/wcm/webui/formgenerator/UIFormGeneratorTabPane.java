@@ -97,7 +97,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     nameFormStringInput.addValidator(ECMNameValidator.class);
     formGeneratorGeneralTab.addUIFormInput(nameFormStringInput);
     formGeneratorGeneralTab.addUIFormInput(new UIFormHiddenInput(UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR, UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR, null));
-    formGeneratorGeneralTab.addUIFormInput(new UIFormRichtextInput(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT, UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT, null));
+    formGeneratorGeneralTab.addUIFormInput(new UIFormRichtextInput(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT, UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT, ""));
 //    formGeneratorGeneralTab.addUIFormInput(new UIFormUploadInput(UIFormGeneratorConstant.ICON_FORM_UPLOAD_INPUT, UIFormGeneratorConstant.ICON_FORM_UPLOAD_INPUT));
     addUIFormInput(formGeneratorGeneralTab);
     
@@ -317,7 +317,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       if (UIFormGeneratorConstant.TEXTAREA.equals(inputType)) {
         inputField = "TextAreaField";
       } else if (UIFormGeneratorConstant.WYSIWYG.equals(inputType)) {
-        inputField = "WYSIWYGField";
+        inputField = "RichtextField";
       } else if (UIFormGeneratorConstant.DATE.equals(inputType)) {
         inputField = "CalendarField";
         validate += "datetime,";
