@@ -265,15 +265,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
             continue;
          }
          String driveName = drive.getName();
-         //         String indexDir =
-         //            rootIndexDir != null ? (rootIndexDir.charAt(rootIndexDir.length() - 1) == File.separatorChar ? rootIndexDir
-         //               + driveName : rootIndexDir + File.separatorChar + driveName) : null;
-         //         IndexConfiguration indexConfiguration = null;
-         //         if (indexDir != null)
-         //         {
-         //            indexConfiguration = new IndexConfiguration();
-         //            indexConfiguration.setIndexDir(indexDir);
-         //         }
+
          StorageProviderImpl sp = createStorageProvider(drive);
          try
          {
@@ -293,21 +285,6 @@ public class DriveCmisRegistry extends JcrCmisRegistry
       // TODO is there something better in WCM API ?
       return drive.getHomePath().contains("${userId}");
    }
-
-   //   @Override
-   //   private String getValueParameter(String name, String defaultValue)
-   //   {
-   //      String value = null;
-   //      if (initParams != null)
-   //      {
-   //         ValueParam valueParam = initParams.getValueParam(name);
-   //         if (valueParam != null)
-   //         {
-   //            value = valueParam.getValue();
-   //         }
-   //      }
-   //      return value != null ? value : defaultValue;
-   //   }
 
    private StorageProviderImpl createStorageProvider(DriveData drive)
    {

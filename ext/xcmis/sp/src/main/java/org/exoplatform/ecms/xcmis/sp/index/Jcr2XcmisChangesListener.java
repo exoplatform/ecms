@@ -18,7 +18,6 @@
  */
 package org.exoplatform.ecms.xcmis.sp.index;
 
-import org.exoplatform.ecms.xcmis.sp.JcrCmisRegistry;
 import org.exoplatform.ecms.xcmis.sp.StorageConfiguration;
 import org.exoplatform.ecms.xcmis.sp.StorageImpl;
 import org.exoplatform.ecms.xcmis.sp.StorageProviderImpl;
@@ -79,8 +78,6 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    private final String workspaceName;
 
-   private final List<StorageProviderImpl> linkedStorages;
-
    private final SessionProviderService sessionProviderService;
 
    private final ManageableRepository repository;
@@ -108,10 +105,16 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
       this.sessionProviderService = sessionProviderService;
       this.repository = repository;
       this.documentReaderService = documentReaderService;
-      this.linkedStorages = new ArrayList<StorageProviderImpl>();
       this.locationFactory = new LocationFactory(namespaceAccessor);
       this.contentEntryAdapter = new ContentEntryAdapter();
+   }
 
+   /**
+    * @return the searchService
+    */
+   public SearchService getSearchService()
+   {
+      return searchService;
    }
 
    /**
@@ -326,34 +329,6 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
                else
                {
 
-                  //                  String nodeTypeName =
-                  //                     locationFactory.createJCRName(((NodeData)itemState.getData()).getPrimaryTypeName()).getAsString();
-                  //                  if (nodeTypeName.equals("nt:linkedFile"))
-                  //                  {
-                  //                     List<ItemState> nodes = updatedNodes.get(itemState.getData().getIdentifier());
-                  //                     ItemData jcrContent = null;
-                  //                     for (ItemState itemState2 : nodes)
-                  //                     {
-                  //                        if (itemState2.getData().getQPath().getName().equals(
-                  //                           locationFactory.parseJCRName("jcr:content").getInternalName()))
-                  //                        {
-                  //                           jcrContent = itemState2.getData();
-                  //                        }
-                  //                     }
-                  //                     if (jcrContent == null)
-                  //                     {
-                  //                        jcrContent =
-                  //                           dataManager.getItemData((NodeData)itemState.getData(), new QPathEntry(locationFactory
-                  //                              .parseJCRName("jcr:content").getInternalName(), 0));
-                  //                     }
-                  //                     if (!jcrContent.isNode())
-                  //                     {
-                  //                        String linkedUUid = new String(((PropertyData)jcrContent).getValues().get(0).getAsByteArray());
-                  //                        createNewOrAdd(linkedUUid, null, updatedNodes);
-                  //                     }
-                  //
-                  //                  }
-
                   removedNodes.add(uuid);
                }
                // remove all changes after node remove
@@ -382,17 +357,18 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    }
 
-   public void onRegistryStart(JcrCmisRegistry cmisRegistry) throws RepositoryException, SearchServiceException
-   {
-
-      initializeSearchService(cmisRegistry.getIndexConfiguration());
-      cmisRegistry.addSearchService(currentRepositoryName, workspaceName, searchService);
-
-   }
-
-   private void initializeSearchService(IndexConfiguration readOnlyIndexConfiguration) throws RepositoryException,
+   /**
+    * Called on CmisRegistry start. It will initialize search service.
+    * 
+    * @param cmisRegistry
+    * @param readOnlyIndexConfiguration
+    * @throws RepositoryException
+    * @throws SearchServiceException
+    */
+   public void onRegistryStart(IndexConfiguration readOnlyIndexConfiguration) throws RepositoryException,
       SearchServiceException
    {
+
       if (readOnlyIndexConfiguration != null && rootStorage == null)
       {
 

@@ -21,10 +21,8 @@ import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.RenditionManager;
 import org.xcmis.spi.StorageProvider;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -32,8 +30,6 @@ import javax.jcr.RepositoryException;
 
 public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegistryFactory
 {
-   private final List<Jcr2XcmisChangesListener> listeners;
-
    private final Map<String, SearchService> wsSearchServices;
 
    protected String rootIndexDir;
@@ -46,7 +42,6 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
    {
       this.initParams = initParams;
       this.repositoryService = repositoryService;
-      this.listeners = new ArrayList<Jcr2XcmisChangesListener>();
       this.wsSearchServices = new HashMap<String, SearchService>();
 
    }
@@ -71,14 +66,9 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
       return storageProviders;
    }
 
-   public void addListener(Jcr2XcmisChangesListener jcr2XcmisChangesListener)
-   {
-      listeners.add(jcr2XcmisChangesListener);
-   }
-
    /**
     * 
-    * @return list of workp
+    * @return list of workspace
     * @throws RepositoryException
     */
    public String[] getAffectedWorkspaceNames() throws RepositoryException
@@ -86,7 +76,7 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
       return repositoryService.getCurrentRepository().getWorkspaceNames();
    }
 
-   public void addSearchService(String jcrRepositoryName, String jcrWorkspaceName, SearchService searchService)
+   private void addSearchService(String jcrRepositoryName, String jcrWorkspaceName, SearchService searchService)
    {
       if (searchService != null)
       {
@@ -134,35 +124,45 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
       manager.addRenditionProviders(renditionProviders);
       setFactory(this);
 
-      try
+      //initialize search services
+      if (rootIndexDir != null)
       {
-         String[] wsNames = getAffectedWorkspaceNames();
-         String currentRepositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
-         for (String wsName : wsNames)
+         IndexConfiguration indexConfiguration = new IndexConfiguration();
+         indexConfiguration.setIndexDir(rootIndexDir);
+
+         try
          {
-            WorkspaceContainerFacade wsContainer =
-               repositoryService.getCurrentRepository().getWorkspaceContainer(wsName);
-            PersistentDataManager dm = (PersistentDataManager)wsContainer.getComponent(PersistentDataManager.class);
-            SessionProviderService sessionProviderService =
-               (SessionProviderService)wsContainer.getComponent(SessionProviderService.class);
-            NamespaceAccessor namespaceAccessor = (NamespaceAccessor)wsContainer.getComponent(NamespaceAccessor.class);
-            DocumentReaderService documentReaderService =
-               (DocumentReaderService)wsContainer.getComponent(DocumentReaderService.class);
-            Jcr2XcmisChangesListener changesListener =
-               new Jcr2XcmisChangesListener(currentRepositoryName, wsName, dm, sessionProviderService,
-                  repositoryService.getCurrentRepository(), namespaceAccessor, documentReaderService);
-            changesListener.onRegistryStart(this);
-            dm.addItemPersistenceListener(changesListener);
+            String[] wsNames = getAffectedWorkspaceNames();
+            String currentRepositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
+            for (String wsName : wsNames)
+            {
+               WorkspaceContainerFacade wsContainer =
+                  repositoryService.getCurrentRepository().getWorkspaceContainer(wsName);
+               PersistentDataManager dm = (PersistentDataManager)wsContainer.getComponent(PersistentDataManager.class);
+               SessionProviderService sessionProviderService =
+                  (SessionProviderService)wsContainer.getComponent(SessionProviderService.class);
+               NamespaceAccessor namespaceAccessor =
+                  (NamespaceAccessor)wsContainer.getComponent(NamespaceAccessor.class);
+               DocumentReaderService documentReaderService =
+                  (DocumentReaderService)wsContainer.getComponent(DocumentReaderService.class);
+               Jcr2XcmisChangesListener changesListener =
+                  new Jcr2XcmisChangesListener(currentRepositoryName, wsName, dm, sessionProviderService,
+                     repositoryService.getCurrentRepository(), namespaceAccessor, documentReaderService);
+               changesListener.onRegistryStart(indexConfiguration);
+               dm.addItemPersistenceListener(changesListener);
+               addSearchService(currentRepositoryName, wsName, changesListener.getSearchService());
+
+            }
 
          }
-      }
-      catch (RepositoryException e)
-      {
-         throw new CmisRuntimeException(e.getLocalizedMessage(), e);
-      }
-      catch (SearchServiceException e)
-      {
-         throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         catch (RepositoryException e)
+         {
+            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
+         catch (SearchServiceException e)
+         {
+            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
       }
    }
 
@@ -194,17 +194,6 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
          }
       }
       return value != null ? value : defaultValue;
-   }
-
-   public IndexConfiguration getIndexConfiguration()
-   {
-      IndexConfiguration indexConfiguration = null;
-      if (rootIndexDir != null)
-      {
-         indexConfiguration = new IndexConfiguration();
-         indexConfiguration.setIndexDir(rootIndexDir);
-      }
-      return indexConfiguration;
    }
 
    @Override

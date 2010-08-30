@@ -47,4 +47,33 @@ public class QueryDriveTest extends BaseQueryTest
 
    }
 
+   public void testSearchSameContenInDifferentDrives() throws Exception
+   {
+      //storageA
+      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
+      FolderData testRoot =
+         createFolder(storageA, rootFolder, "QueryUsecasesTest", storageA.getTypeDefinition("cmis:folder", true));
+
+      List<DocumentData> appolloContent = createNasaContent(storageA, testRoot);
+
+      //storageB
+      FolderData rootFolderB = (FolderData)storageA.getObjectById(storageB.getRepositoryInfo().getRootFolderId());
+      FolderData testRootB =
+         createFolder(storageB, rootFolderB, "QueryUsecasesTest", storageB.getTypeDefinition("cmis:folder", true));
+
+      List<DocumentData> appolloContentB = createNasaContent(storageB, testRootB);
+
+      String statement1 = "SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"moon\")";
+      Query query = new Query(statement1, true);
+      ItemsIterator<Result> result = storageA.query(query);
+
+      assertEquals(2, result.size());
+      checkResult(storageA, result, new DocumentData[]{appolloContent.get(1), appolloContent.get(2)});
+
+      ItemsIterator<Result> resultB = storageB.query(query);
+
+      assertEquals(2, resultB.size());
+      checkResult(storageB, resultB, new DocumentData[]{appolloContentB.get(1), appolloContentB.get(2)});
+   }
+
 }
