@@ -366,12 +366,6 @@
         <workflowEngine>jbpm</workflowEngine>
       </properties>
     </profile>
-    <profile>
-      <id>release</id>
-      <modules>
-        <module>docs</module>
-      </modules>
-    </profile>
   </profiles>
   <modules>
     <module>core</module>
@@ -380,5 +374,6 @@
     <module>delivery</module>
     <module>packaging</module>
 		<module>examples</module>
+    <module>docs</module>
   </modules>
 </project>
