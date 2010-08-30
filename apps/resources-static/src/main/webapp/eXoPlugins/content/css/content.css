@@ -679,27 +679,6 @@ body {
   background: url('../images/icons/exo-image.gif') no-repeat right center; /* orientation=rt */
 }
 
-.UIAction .ActionContainer {
- width: auto;
- margin: auto;
-} 
-
-.UIAction .ActionButton {
- display: block;
- float: left; /* orientation=lt */
- float: right; /* orientation=rt */
- margin: 0px 3px;
- cursor: pointer;
-}
-
-.UIAction a {
-}
-
-.UIAction a:hover {
- color: #058ee6;
-}
-
-
 .UIAction .ActionButton .Icon {
  padding-left: 20px; /* orientation=lt */
  padding-right: 20px; /* orientation=rt */
@@ -711,20 +690,19 @@ body {
 }
 
 .UIAction .LightBlueStyle .ButtonLeft {
- background: url('images/LightBlueStyle.gif') no-repeat left top;
+ background: url('../images/LightBlueStyle.gif') no-repeat left top;
  padding: 0px 0px 0px 3px;
 }
 
 .UIAction .LightBlueStyle .ButtonRight {
- background: url('images/LightBlueStyle.gif') no-repeat right top;
+ background: url('../images/LightBlueStyle.gif') no-repeat right top;
  padding: 0px 3px 0px 0px;
 }
 
 .UIAction .LightBlueStyle .ButtonMiddle {
   line-height: 22px; text-align: center; 
- background: url('images/LightBlueStyle.gif') repeat-x bottom;
+ background: url('../images/LightBlueStyle.gif') repeat-x bottom;
  white-space: nowrap;
- display: table-cell;
  padding: 0px 12px;
 }
 

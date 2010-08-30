@@ -189,15 +189,17 @@
 				<table class="ActionContainer LightBlueStyle" align="center">
 					<tr>
 						<td align="center">
-							<a href="javascript: void(0);" class="ActionButton" style="margin-top: 21px">
+						
+							<div class="ActionButton Delete LightBlueStyle" onclick="eXo.ecm.UploadForm.showUploadForm();">
 								<div class="ButtonLeft">
 									<div class="ButtonRight">
-										<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.showUploadForm();" userLanguage="UserLanguage.BtnClose">
-											Close
+										<div class="ButtonMiddle">
+											<a href="javascript:void(0);">Close</a>
 										</div>
 									</div>
 								</div>
-							</a>
+							</div>
+
 							<div style="clear: left;"><span style="dislay: none"></span></div>
 						</td>
 					</tr>
@@ -221,8 +223,8 @@
 						<xmp id="iContentUpLoad" style="display: none;">
 							<html style="padding: 0px; margin: 0px;">
 								<body style="margin: 0px; padding: 0px; overflow: hidden;">
-									<form enctype="multipart/form-data" method="post" target="iTarget" style="width: 235px;">
-										<input type="file" name="file" class="file" />
+									<form enctype="multipart/form-data" method="post" target="iTarget">
+										<input type="file" name="file" class="file" style="width: 280px" />
 									</form>
 									<iframe name="iTarget" id="iTarget" style="display: none"></iframe>
 								</body>
@@ -236,33 +238,39 @@
 						<div class="NumberProgress">0%</div>
 					</td>
 					<td>
+					
+						
+						
 						<div class="UIAction Abort">
-							<table class="ActionContainer LightBlueStyle" align="center">
-								<tr>
-									<td>
-										<a href="javascript: void(0);" class="ActionButton">
-											<div class="ButtonLeft">
-												<div class="ButtonRight">
-													<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFileAbort();" userLanguage="UserLanguage.BtnAbort">
-														Abort
+							<table class="ActionContainer">
+								<tbody>
+									<tr>
+										<td>
+											<div class="ActionButton LightBlueStyle" onclick="eXo.ecm.UploadForm.uploadFileAbort();">
+												<div class="ButtonLeft">
+													<div class="ButtonRight">
+														<div class="ButtonMiddle">
+															<a href="javascript:void(0);">Abort</a>
+														</div>
 													</div>
 												</div>
 											</div>
-										</a>
-										<div style="clear: left;"><span style="display: none;"></span></div>
-									</td>
-								</tr>
+											
+										</td>
+									</tr>
+								</tbody>
 							</table>
-						</div>
-						<a href="javascript: void(0);" class="ActionButton Delete">
+						</div>	
+						<div class="ActionButton Delete LightBlueStyle" onclick="eXo.ecm.UploadForm.uploadFileDelete();">
 							<div class="ButtonLeft">
 								<div class="ButtonRight">
-									<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFileDelete();" userLanguage="UserLanguage.BtnDelete">
-										Delete
+									<div class="ButtonMiddle">
+										<a href="javascript:void(0);">Delete</a>
 									</div>
 								</div>
 							</div>
-						</a>
+						</div>
+
 					</td>
 				</tr>
 				<tr class="UploadAction" style="display: none;">
@@ -271,65 +279,70 @@
 							<span userLanguage="UserLanguage.LabelName"> Name </span>:
 							<input type="text" name="fileName" style="width: 238px;" maxlength="128"/>
 						</div>
+
 						<div class="UIAction">
-							<table class="ActionContainer LightBlueStyle" align="center">
-								<tr>
-									<td>
-										<a href="javascript: void(0);" class="ActionButton">
-											<div class="ButtonLeft">
-												<div class="ButtonRight">
-													<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFileCancel();" userLanguage="UserLanguage.BtnCancel">
-														Cancel
+							<table class="ActionContainer">
+								<tbody>
+									<tr>
+										<td>
+											<div class="ActionButton LightBlueStyle" onclick="eXo.ecm.UploadForm.uploadFileSave();">
+												<div class="ButtonLeft">
+													<div class="ButtonRight">
+														<div class="ButtonMiddle">
+															<a href="javascript:void(0);">Save</a>
+														</div>
 													</div>
 												</div>
 											</div>
-										</a>
-										<a href="javascript: void(0);" class="ActionButton">
-											<div class="ButtonLeft">
-												<div class="ButtonRight">
-													<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFileSave();" userLanguage="UserLanguage.BtnSave">
-														Save
+											<div class="ActionButton LightBlueStyle" onclick="eXo.ecm.UploadForm.uploadFileCancel();">
+												<div class="ButtonLeft">
+													<div class="ButtonRight">
+														<div class="ButtonMiddle">
+															<a href="javascript:void(0);">Cancel</a>
+														</div>
 													</div>
 												</div>
 											</div>
-										</a>
-										<div style="clear: left;"><span style="display: none;"></span></div>
-									</td>
-								</tr>
+										</td>
+									</tr>
+								</tbody>
 							</table>
-						</div>
+						</div>	
+
 					</td>
 				</tr>	
 				<tr class="CancelAction">
 					<td colspan="2">
+
 						<div class="UIAction">
-							<table class="ActionContainer LightBlueStyle" align="center">
-								<tr>
-									<td>
-										<a href="javascript: void(0);" class="ActionButton" style="margin-top: 21px">
-											<div class="ButtonLeft">
-												<div class="ButtonRight">
-													<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.uploadFile();" userLanguage="UserLanguage.BtnUpload">
-														Upload
+							<table class="ActionContainer">
+								<tbody>
+									<tr>
+										<td>
+											<div class="ActionButton LightBlueStyle" onclick="eXo.ecm.UploadForm.uploadFile();" >
+												<div class="ButtonLeft">
+													<div class="ButtonRight">
+														<div class="ButtonMiddle">
+															<a href="javascript:void(0);">Upload</a>
+														</div>
 													</div>
 												</div>
 											</div>
-										</a>
-									</td>
-									<td>
-										<a href="javascript: void(0);" class="ActionButton" style="margin-top: 21px">
-											<div class="ButtonLeft">
-												<div class="ButtonRight">
-		 											<div class="ButtonMiddle" onclick="eXo.ecm.UploadForm.removeMask();" userLanguage="UserLanguage.BtnCancel">
-														Cancel
+											<div class="ActionButton LightBlueStyle" onclick="eXo.ecm.UploadForm.removeMask();" >
+												<div class="ButtonLeft">
+													<div class="ButtonRight">
+														<div class="ButtonMiddle">
+															<a href="javascript:void(0);">Cancel</a>
+														</div>
 													</div>
 												</div>
 											</div>
-										</a>
-									</td>
-								</tr>
+										</td>
+									</tr>
+								</tbody>
 							</table>
-						</div>
+						</div>	
+
 					</td>
 				</tr>
 			</table>
