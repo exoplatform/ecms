@@ -580,7 +580,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   			folders.appendChild(folder);
   		}
 
-  		if (FILE_TYPE_ALL.equals(filterBy)) {
+  		if (FILE_TYPE_ALL.equals(filterBy) && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE) || !isFolder(checkNode))) {
   		  fileType = FILE_TYPE_ALL;
   		}
   		
