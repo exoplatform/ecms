@@ -60,7 +60,8 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
  } catch(e) {}
 
  try {
-  if (CKEDITOR && typeof CKEDITOR == "object") {
+  var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById('summary'), 'span').id.indexOf('cke');
+  if (CKEDITOR && typeof CKEDITOR == "object" && rendered == 0) {
     for ( var name in CKEDITOR.instances ) {
       var oEditor ;
       try {
