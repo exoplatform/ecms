@@ -7,7 +7,7 @@ td {
 }
 
 .UITabPane .UITabContentContainer .UITabContent {
-  height: 100% !important;
+  height: auto;
 }
 
 .UIWCMColumnContainer {
