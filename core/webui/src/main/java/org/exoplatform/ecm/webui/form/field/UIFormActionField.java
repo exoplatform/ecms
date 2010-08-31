@@ -41,12 +41,8 @@ public class UIFormActionField extends DialogFormField {
     UIFormStringInput uiInput = new UIFormStringInput(name, name, defaultValue) ;
     //TODO need use full class name for validate type.
     if(validateType != null) {
-      String[] validatorList = null;
-      if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
-      else validatorList = new String[] {validateType};
-      for (String validator : validatorList)
-        uiInput.addValidator(DialogFormUtil.getValidator(validator.trim())) ;
-    }     
+      DialogFormUtil.addValidators(uiInput, validateType);
+    }
     if(label != null && label.length()!=0) {
       uiInput.setLabel(label);
     }

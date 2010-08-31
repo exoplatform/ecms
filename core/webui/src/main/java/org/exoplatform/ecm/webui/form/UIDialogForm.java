@@ -348,17 +348,11 @@ public class UIDialogForm extends UIForm {
     boolean isFirstTimeRender = false;
     UIFormDateTimeInput uiDateTime = findComponentById(name);
     if (uiDateTime == null) {
-    	isFirstTimeRender = true;
-    	uiDateTime = calendarField.createUIFormInput();
-    	if (calendarField.validateType != null) {
-            String validateType = calendarField.validateType;
-            String[] validatorList = null;
-            if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
-            else validatorList = new String[] {validateType};
-            for (String validator : validatorList) {
-            	uiDateTime.addValidator(DialogFormUtil.getValidator(validator.trim()));
-            }              
-          }
+      isFirstTimeRender = true;
+      uiDateTime = calendarField.createUIFormInput();
+      if (calendarField.validateType != null) {
+        DialogFormUtil.addValidators(uiDateTime, calendarField.validateType);
+      }
     }
     uiDateTime.setDisplayTime(calendarField.isDisplayTime());
     String propertyName = getPropertyName(jcrPath);
@@ -466,13 +460,7 @@ public class UIDialogForm extends UIForm {
     UIFormCheckBoxInput uiCheckBoxInput = findComponentById(name);
     
     if (formCheckBoxField.validateType != null) {
-      String validateType = formCheckBoxField.validateType;
-      String[] validatorList = null;
-      if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
-      else validatorList = new String[] {validateType};
-      for (String validator : validatorList) {
-        uiCheckBoxInput.addValidator(DialogFormUtil.getValidator(validator.trim()));
-      }            
+      DialogFormUtil.addValidators(uiCheckBoxInput, formCheckBoxField.validateType);
     }
     
     if(uiCheckBoxInput == null){
@@ -607,13 +595,7 @@ public class UIDialogForm extends UIForm {
     propertiesName.put(name, getPropertyName(jcrPath));
     fieldNames.put(getPropertyName(jcrPath), name);
     if (formSelectBoxField.validateType != null) {
-      String validateType = formSelectBoxField.validateType;
-      String[] validatorList = null;
-      if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
-      else validatorList = new String[] {validateType};
-      for (String validator : validatorList) {
-        uiSelectBox.addValidator(DialogFormUtil.getValidator(validator.trim()));
-      }              
+      DialogFormUtil.addValidators(uiSelectBox, formSelectBoxField.validateType);
     }
     String[] arrNodes = jcrPath.split("/");
     Node childNode = null;
@@ -862,8 +844,19 @@ public class UIDialogForm extends UIForm {
             if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
             else validatorList = new String[] {validateType};
             for (String validator : validatorList) {
-              uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()));
-            }              
+              Object[] params;
+              String s_param=null;
+              int p_begin, p_end;
+              p_begin = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_BEGIN);
+              p_end   = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_END);
+              if (p_begin>=0 && p_end > p_begin) {        
+                s_param = validator.substring(p_begin, p_end);
+                params = s_param.split(DialogFormUtil.VALIDATOR_PARAM_SEPERATOR);          
+                uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()), params) ;
+              }else {
+                uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim())) ;
+              }
+            }
           }
           List<String> valueList = new ArrayList<String>();
           List<UIComponent> listChildren = uiMulti.getChildren();
@@ -894,8 +887,19 @@ public class UIDialogForm extends UIForm {
           if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
           else validatorList = new String[] {validateType};
           for (String validator : validatorList) {
-            uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()));
-          }              
+            Object[] params;
+            String s_param=null;
+            int p_begin, p_end;
+            p_begin = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_BEGIN);
+            p_end   = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_END);
+            if (p_begin>=0 && p_end > p_begin) {        
+              s_param = validator.substring(p_begin, p_end);
+              params = s_param.split(DialogFormUtil.VALIDATOR_PARAM_SEPERATOR);          
+              uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()), params) ;
+            }else {
+              uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim())) ;
+            }
+          }
         }                
         addUIFormInput(uiMulti);
       }
