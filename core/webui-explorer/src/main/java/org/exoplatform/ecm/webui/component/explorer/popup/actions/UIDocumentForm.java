@@ -330,7 +330,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             newNode.getSession().addLockToken(LockUtil.getLockToken(newNode));
           }
           // Begin delete listExistedTaxonomy
-          if (hasCategories) {          
+          if (hasCategories && !homeNode.isNodeType("exo:taxonomy")) {          
             List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
             List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(newNode);
             for (Node existedTaxonomy : listExistedTaxonomy) {
