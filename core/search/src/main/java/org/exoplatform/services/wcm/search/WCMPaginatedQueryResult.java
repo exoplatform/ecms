@@ -127,12 +127,12 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
       Node parent = displayNode.getParent();      
       if (queryCriteria.isSearchWebContent()) {
         if (parent.isNodeType("exo:webContent")) return parent;
-        else return null;
-      } else {
-        if (parent.isNodeType("exo:webContent")) return null;
-        else return displayNode;
-      }             
-    }
+        return null;
+      } 
+      if (parent.isNodeType("exo:webContent")) return null;
+      return displayNode;
+    }    
+    /*
     if(queryCriteria.isSearchWebContent()) {
       if(!queryCriteria.isSearchDocument()) {
         if(!displayNode.isNodeType("exo:webContent")) 
@@ -147,7 +147,8 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
           return displayNode;
         } else if (!displayNode.isNodeType("publication:webpagesPublication"))
           return null;
-    }      
+    }
+    */      
     String[] contentTypes = queryCriteria.getContentTypes();
     if(contentTypes != null && contentTypes.length>0) {
       String primaryNodeType = displayNode.getPrimaryNodeType().getName();
