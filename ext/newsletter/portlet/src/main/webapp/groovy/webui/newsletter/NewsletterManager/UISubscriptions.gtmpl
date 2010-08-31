@@ -73,12 +73,12 @@ if(uicomponent.categoryConfig != null){
 					        	  	<div class="ButtonRight">
 					          	  	<div class="ButtonMiddle">
 					          	  	
-														<div class="ContentAction ActionTitle" style="float:right;" onclick="eXo.webui.UIPopupSelectCategory.show(this, event);">
+														<div class="ContentAction ActionTitle" style="float:right;" onclick="eXo.ecm.NewsletterManager.show(this, event);">
 															<!-- action of this category -->
-															<div class="Line" style="background: none;" onclick="eXo.webui.UIPopupSelectCategory.show(this, event);">
+															<div class="Line" style="background: none;" onclick="eXo.ecm.NewsletterManager.show(this, event);">
 																<a href="#" class="NewsAdmin"><%=_ctx.appRes("UICategories.title.Administration")%></a>
 																<div style="position:absolute;">
-																	<div class="UIPopupCategory" style="display:none; left:-46px; top:-2px; ">
+																	<div class="UIPopupCategory" style="display:none">
 																		<div class="UIRightClickPopupMenu UINewLetterPopup" style="display:block;min-width:130px;">
 																			<div class="UIContextMenuContainer BorderOutline">											
 																				<div class="TopLeftRightClickPopupMenu">
