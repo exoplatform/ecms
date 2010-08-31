@@ -23,7 +23,7 @@
   </issueManagement>
   <ciManagement>
     <system>hudson</system>
-    <url>http://builder.exoplatform.org/hudson/job/ecms-trunk-ci/</url>
+    <url>http://builder.exoplatform.org/hudson/job/ecms-2.1.x-ci/</url>
   </ciManagement>
   <properties>
     <!-- Dependencies versions -->
