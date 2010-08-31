@@ -50,4 +50,7 @@ public interface VotingService {
    * @throws Exception
    */
   public long getVoteTotal(Node node) throws Exception;
+  
+  public boolean isVoted(Node node, String userName, String language) throws Exception;
+  
 }

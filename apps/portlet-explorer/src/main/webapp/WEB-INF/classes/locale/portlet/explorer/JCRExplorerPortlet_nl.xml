@@ -48,6 +48,7 @@
 			</not-support>
 			<not-checkedout>U moet eerst check out node vooraleer u kunt stemmen
 			</not-checkedout>
+			<vote-restriction>You can not vote more than one time </vote-restriction>
 		</msg>
 	</UIVoteForm>
 	<!--

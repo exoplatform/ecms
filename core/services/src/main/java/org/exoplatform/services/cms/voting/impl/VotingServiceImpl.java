@@ -101,39 +101,15 @@ public class VotingServiceImpl implements VotingService {
   /**
    * {@inheritDoc}
    */
-  public void vote(Node node, double rate, String userName, String language) throws Exception {
-    Session session = node.getSession();
-    if (userName == null) {
-      String strWorkspaceName = node.getSession().getWorkspace().getName();
-      ExoContainer eXoContainer = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService = (RepositoryService) eXoContainer
-          .getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageRepository = repositoryService.getCurrentRepository();
-      session = SessionProvider.createSystemProvider().getSession(strWorkspaceName,
-          manageRepository);
-      String uid = node.getUUID();
-      node = session.getNodeByUUID(uid);
-    }
+  public void vote(Node node, double rate, String userName, String language) throws Exception {    
+  	Session session = node.getSession();
+  	node = handleUser(session, node, userName);
     
     if(!node.isNodeType(VOTABLE)) {
       if(node.canAddMixin(VOTABLE)) node.addMixin(VOTABLE) ;
       else throw new NoSuchNodeTypeException() ;
     }        
-    String defaultLang = multiLangService_.getDefault(node) ;           
-    Node multiLanguages =null, languageNode= null ;
-    if((defaultLang == null && language == null) || language.equals(defaultLang)) {
-      languageNode = node ;
-    } else {
-      if(node.hasNode(LANGUAGES)) {
-        multiLanguages = node.getNode(LANGUAGES) ;
-        if(multiLanguages.hasNode(language)) {
-          languageNode = multiLanguages.getNode(language) ;
-          if(node.getPrimaryNodeType().getName().equals("nt:file")) {
-            languageNode = getFileLangNode(languageNode) ;
-          } 
-        }
-      }
-    }
+    Node languageNode = handleLanguage(node, language);
     long voteTotalOfLang = languageNode.getProperty(VOTE_TOTAL_LANG_PROP).getLong() ;
     double votingRate = languageNode.getProperty(VOTING_RATE_PROP).getDouble() ;
     double newRating = ((voteTotalOfLang*votingRate)+rate)/(voteTotalOfLang+1) ;    
@@ -155,5 +131,62 @@ public class VotingServiceImpl implements VotingService {
     node.save() ;
     session.save() ;
     session.logout();
-  }       
+  }
+  
+  public boolean isVoted(Node node, String userName, String language) throws Exception {
+  	boolean isVoted = false;
+  	Session session = node.getSession();
+  	node = handleUser(session, node, userName);
+    
+    if(!node.isNodeType(VOTABLE)) {
+      if(node.canAddMixin(VOTABLE)) node.addMixin(VOTABLE) ;
+      else throw new NoSuchNodeTypeException() ;
+    }
+    
+    Node languageNode = handleLanguage(node, language);               
+    Value[] voters = {} ;
+    if(languageNode.hasProperty(VOTER_PROP)) {
+      voters = languageNode.getProperty(VOTER_PROP).getValues() ;        
+    }
+    Value newVoter = session.getValueFactory().createValue(userName) ;    
+    List<Value> newVoterList = new ArrayList<Value>() ;
+    newVoterList.addAll(Arrays.<Value>asList(voters)) ;
+    if (newVoterList.contains(newVoter))
+    	isVoted = true;
+    return isVoted;
+  } 
+  
+  private Node handleLanguage(Node node, String language) throws Exception {
+  	String defaultLang = multiLangService_.getDefault(node) ;           
+    Node multiLanguages =null, languageNode= null ;
+    if((defaultLang == null && language == null) || language.equals(defaultLang)) {
+      languageNode = node ;
+    } else {
+      if(node.hasNode(LANGUAGES)) {
+        multiLanguages = node.getNode(LANGUAGES) ;
+        if(multiLanguages.hasNode(language)) {
+          languageNode = multiLanguages.getNode(language) ;
+          if(node.getPrimaryNodeType().getName().equals("nt:file")) {
+            languageNode = getFileLangNode(languageNode) ;
+          } 
+        }
+      }
+    }
+    return languageNode;
+  }
+  
+  private Node handleUser(Session session, Node node, String userName) throws Exception {  	
+    if (userName == null) {
+      String strWorkspaceName = node.getSession().getWorkspace().getName();
+      ExoContainer eXoContainer = ExoContainerContext.getCurrentContainer();
+      RepositoryService repositoryService = (RepositoryService) eXoContainer
+          .getComponentInstanceOfType(RepositoryService.class);
+      ManageableRepository manageRepository = repositoryService.getCurrentRepository();
+      session = SessionProvider.createSystemProvider().getSession(strWorkspaceName,
+          manageRepository);
+      String uid = node.getUUID();
+      node = session.getNodeByUUID(uid);
+    }
+    return node;
+  }
 }

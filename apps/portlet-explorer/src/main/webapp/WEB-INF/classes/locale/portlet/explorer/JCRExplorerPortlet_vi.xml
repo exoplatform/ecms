@@ -43,6 +43,7 @@
     <msg>
       <not-support>Không được phép bình chọn cho loại tài liệu này</not-support>
       <not-checkedout>Bạn phải check out node trước khi bình chọn</not-checkedout>
+						<vote-restriction>Bạn không được phép bình chọn quá 1 lần</vote-restriction>
     </msg>
   </UIVoteForm>
   <!--

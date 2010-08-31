@@ -43,6 +43,7 @@
     <msg>
       <not-support>Interdire le vote pour ce type de document</not-support>
       <not-checkedout>Un check out est nécessaire avant de pouvoir voter</not-checkedout>
+						<vote-restriction>You can not vote more than one time </vote-restriction>
     </msg>
   </UIVoteForm>
   <!--
