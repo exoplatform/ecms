@@ -571,7 +571,7 @@
          <mime-type>text/html</mime-type>
          <portlet-mode>help</portlet-mode>
       </supports>
-      <supported-locale>en,fr,vi,ar</supported-locale>
+      <supported-locale>en</supported-locale>
       <resource-bundle>locale.portlet.Toolbar.AdminToolbarPortlet</resource-bundle>
       <portlet-info>
          <title>WCM Administration Toolbar Portlet</title>
