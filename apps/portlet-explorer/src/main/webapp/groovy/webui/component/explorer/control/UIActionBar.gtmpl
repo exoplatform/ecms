@@ -18,7 +18,6 @@
   def uniqueId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
 	rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkAvailableSpace');
-  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkTabSize');
   def tabs = uicomponent.getTabList() ;
   def actionBarStyle = "";
   def displayTabContainer = "";
@@ -54,7 +53,7 @@
 				      tabStyle = "SelectedActionBarTab";
 				    }
 				    def tabName = _ctx.appRes(uicomponent.getId() + ".obtion." + tab);
-				    def tabSize = tabName.length()*3 + 40;
+				    def tabSize = tabName.length() * 4 + 40;
 				%>
 					    <div class="UITab" style="display: block;">
 						    <div class="$tabStyle">
