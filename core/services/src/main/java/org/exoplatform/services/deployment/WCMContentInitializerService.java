@@ -93,8 +93,8 @@ public class WCMContentInitializerService implements Startable{
             deploymentPlugin.deploy(sessionProvider);
             logData.append("deploy " + deploymentPlugin.getName() + " deployment plugin succesfully at " + date.toString() + "\n");
           } catch (Exception e) {
-            log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at " + date.toString() + " by " + e.fillInStackTrace() + "\n");
-            logData.append("deploy " + deploymentPlugin.getName() + " deployment plugin failure at " + date.toString() + " by " + e.fillInStackTrace() + "\n");
+            log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at " + date.toString() + " by " + e + "\n");
+            logData.append("deploy " + deploymentPlugin.getName() + " deployment plugin failure at " + date.toString() + " by " + e + "\n");
           }                            
         } 
         
@@ -112,7 +112,7 @@ public class WCMContentInitializerService implements Startable{
         jsService.start();
       }
     } catch (Exception e) {
-      log.error("Error when start WCMContentInitializerService: ", e.fillInStackTrace());
+      log.error("Error when start WCMContentInitializerService: ", e);
     }
   }
   

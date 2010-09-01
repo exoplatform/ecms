@@ -166,7 +166,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
         updateLinkStatus(session, "select * from exo:linkable where jcr:path like '" + path + "/%'");      
       } 
     } catch (Exception e) {
-      log.error("Error when perform updateLinks: ", e.fillInStackTrace());
+      log.error("Error when perform updateLinks: ", e);
     }
   }
 
@@ -181,7 +181,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
       Session session = portal.getSession();
       updateLinkStatus(session, "select * from exo:linkable where jcr:path like '" + path + "/%'"); 
     } catch (Exception e) {
-      log.error("Error when perform updateLinks: ", e.fillInStackTrace());
+      log.error("Error when perform updateLinks: ", e);
     }
   }
 
@@ -248,7 +248,7 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
         return LinkBean.STATUS_ACTIVE;
       }
     } catch (Exception e) {
-      log.error("Exception when validate link:" + strUrl, e.fillInStackTrace());
+      log.error("Exception when validate link:" + strUrl, e);
     }
     return LinkBean.STATUS_BROKEN;
   }

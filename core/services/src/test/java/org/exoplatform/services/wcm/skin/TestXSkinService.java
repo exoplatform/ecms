@@ -311,7 +311,7 @@ public class TestXSkinService extends BaseWCMTestCase {
 			Node cssFolder = webContent.getNode("css");
 			skinService.updatePortalSkinOnRemove(portal, cssFolder);
 		} catch(Exception e) {
-			assertNotNull(e.fillInStackTrace());
+			assertNotNull(e);
 		}
 	}
 	

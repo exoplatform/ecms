@@ -89,7 +89,7 @@ public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
       endDateTime = getCalendar(endDateTimeParam);           
       setIncrement();        
     } catch (Exception e) {
-      log.error("Error when perform DateTimeClassifyPlugin: ", e.fillInStackTrace());
+      log.error("Error when perform DateTimeClassifyPlugin: ", e);
     }    
   }
 
@@ -257,7 +257,7 @@ public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
       calendar = ISO8601.parse(datetime);
       return calendar;
     } catch (Exception e) {
-      log.error("Error when perform getCalendar: ", e.fillInStackTrace());
+      log.error("Error when perform getCalendar: ", e);
     } 
     return null;
   }
@@ -271,4 +271,4 @@ public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
     incrementType = templateDateTime.charAt(templateDateTime.indexOf("{") + 1);        
   }  
 
-}
+}

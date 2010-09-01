@@ -100,7 +100,7 @@ public class NewsletterTemplateHandler {
       this.templates = templates;
       return templates;
     } catch (Exception e) {
-      log.error("Get templates of category " + categoryConfig + " failed because of ", e.fillInStackTrace());
+      log.error("Get templates of category " + categoryConfig + " failed because of ", e);
     }
     return null;
   }
@@ -129,7 +129,7 @@ public class NewsletterTemplateHandler {
         }
       }
     } catch (Exception e) {
-      log.error("Get dialog " + templateName + " failed because of ", e.fillInStackTrace());
+      log.error("Get dialog " + templateName + " failed because of ", e);
     }
     return null;
   }
@@ -162,7 +162,7 @@ public class NewsletterTemplateHandler {
         throw new Exception("Same name");
       }
     } catch (Exception e) {
-      log.error("Convert node " + webcontentPath + " to template at category " + categoryName + " failed because of ", e.fillInStackTrace());
+      log.error("Convert node " + webcontentPath + " to template at category " + categoryName + " failed because of ", e);
       throw e;
     }
   }

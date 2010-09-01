@@ -59,7 +59,7 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
   		manageDriveService.removeDrive(portalName, repository);
   		log.info("Removed drive for portal: " + portalName);
 		} catch (Exception e) {
-			log.error("Error when remove drive for portal: " + portalName, e.fillInStackTrace());
+			log.error("Error when remove drive for portal: " + portalName, e);
 		}
   	
   	// Remove initial artifacts for this portal
@@ -71,7 +71,7 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
   		livePortalManagerService.removeLivePortal(sessionProvider, portalConfig);
   		log.info("Removed resource storage for portal: " + portalName);
 		} catch (Exception e) {
-			log.error("Error when remove resource storage: " + portalName, e.fillInStackTrace());
+			log.error("Error when remove resource storage: " + portalName, e);
 		}
   }
 

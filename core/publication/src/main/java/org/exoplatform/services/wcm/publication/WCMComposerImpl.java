@@ -277,7 +277,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	     	 return null;
 	      }
 	    }
-	   
+	    if (node.isNodeType("exo:trashFolder")) {
+	      return null;
+	    }
 	    String languageFilter = filters.get(FILTER_LANGUAGE);
 	    if (languageFilter!=null) {
 	    	addUsedLanguage(languageFilter);

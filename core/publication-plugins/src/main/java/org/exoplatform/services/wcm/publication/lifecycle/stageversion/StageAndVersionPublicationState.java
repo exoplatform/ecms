@@ -59,7 +59,7 @@ public class StageAndVersionPublicationState {
     try {
       currentState = currentNode.getProperty("publication:currentState").getString();
     } catch (Exception e) {
-      log.error("Error when getRevisionState: ", e.fillInStackTrace());
+      log.error("Error when getRevisionState: ", e);
     }
     return currentState;
   }

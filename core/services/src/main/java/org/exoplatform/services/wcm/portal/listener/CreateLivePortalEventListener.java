@@ -61,8 +61,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       livePortalManagerService.addLivePortal(sessionProvider, portalConfig);
       log.info("Create new resource storage for portal: " + portalConfig.getName());
     } catch (Exception e) {
-      log.error("Error when create new resource storage: " + portalConfig.getName(),
-                e.fillInStackTrace());
+      log.error("Error when create new resource storage: " + portalConfig.getName(), e);
     }        
     // create drive for the site content storage
     ManageDriveService manageDriveService = (ManageDriveService) container
@@ -73,8 +72,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
       createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
     } catch (Exception e) {
-      log.error("Error when create drive for portal: " + portalConfig.getName(),
-                e.fillInStackTrace());
+      log.error("Error when create drive for portal: " + portalConfig.getName(), e);
     }      
     //Deploy initial artifacts for this portal 
     CreatePortalArtifactsService artifactsInitializerService = (CreatePortalArtifactsService)
@@ -82,8 +80,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     try {      
       artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName());
     } catch (Exception e) {
-      log.error("Error when create drive for portal: " + portalConfig.getName(),
-                e.fillInStackTrace());
+      log.error("Error when create drive for portal: " + portalConfig.getName(), e);
     }
   }
 

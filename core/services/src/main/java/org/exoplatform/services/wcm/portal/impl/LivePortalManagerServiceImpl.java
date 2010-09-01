@@ -230,7 +230,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
         livePortalPaths.putIfAbsent(portalNode.getName(),portalNode.getPath());
       }
     } catch (Exception e) {
-      log.error("Error when starting LivePortalManagerService: ", e.fillInStackTrace());
+      log.error("Error when starting LivePortalManagerService: ", e);
     } finally {
     	if(session != null) session.logout();
     }

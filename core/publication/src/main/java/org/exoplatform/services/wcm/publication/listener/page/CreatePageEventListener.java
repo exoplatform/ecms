@@ -51,7 +51,7 @@ public class CreatePageEventListener extends Listener<DataStorageImpl, Page>{
       else 
         publicationService.updateLifecyleOnCreatePage(event.getData(), ConversationState.getCurrent().getIdentity().getUserId());
     } catch (Exception e) {
-      log.error("Exception when update publication lifecyle", e.fillInStackTrace());
+      log.error("Exception when update publication lifecyle", e);
     }    
   }
 }

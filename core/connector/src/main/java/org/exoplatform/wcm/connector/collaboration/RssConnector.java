@@ -239,7 +239,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       feedXML = StringUtils.replace(feedXML,"&amp;","&");
       return feedXML;
     } catch (Exception e) {
-      log.error("Error when perform generateRSS: ", e.fillInStackTrace());
+      log.error("Error when perform generateRSS: ", e);
     }
     return null;
   }
