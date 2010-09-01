@@ -20,6 +20,8 @@ import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.portal.webui.util.Util;
@@ -58,6 +60,8 @@ public class UIVoteForm extends UIComponent implements UIPopupComponent {
   static  public class VoteActionListener extends EventListener<UIVoteForm> {
     public void execute(Event<UIVoteForm> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
+      UIVoteForm uiForm = event.getSource();
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       String userName = Util.getPortalRequestContext().getRemoteUser() ;
       UIDocumentInfo uiDocumentInfo = uiExplorer.findFirstComponentOfType(UIDocumentInfo.class) ;
       Node currentNode = uiExplorer.getCurrentNode();
@@ -65,6 +69,12 @@ public class UIVoteForm extends UIComponent implements UIPopupComponent {
       String language = uiDocumentInfo.getLanguage() ;
       double objId = Double.parseDouble(event.getRequestContext().getRequestParameter(OBJECTID)) ;
       VotingService votingService = uiExplorer.getApplicationComponent(VotingService.class) ;
+      if(votingService.isVoted(uiExplorer.getCurrentNode(), userName, language)) {
+        uiApp.addMessage(new ApplicationMessage("UIVoteForm.msg.vote-restriction", null, 
+            ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
       votingService.vote(uiExplorer.getCurrentNode(), objId, userName, language) ;
       event.getSource().getAncestorOfType(UIPopupContainer.class).cancelPopupAction() ;
       uiExplorer.updateAjax(event) ;

@@ -43,6 +43,7 @@
     <msg>
       <not-support>Do not allow to vote for this type of document</not-support>
       <not-checkedout>You must check out node before vote</not-checkedout>
+						<vote-restriction>You can not vote more than one time </vote-restriction>
     </msg>
   </UIVoteForm>
   <!--

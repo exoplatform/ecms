@@ -43,6 +43,7 @@
     <msg>
        <not-support>لا يسمح للتصويت على هذا النوع من الوثائق</not-support>
        <not-checkedout>يجب عليك مراجعة العقدة قبل التصويت </not-checkedout>
+							<vote-restriction>You can not vote more than one time </vote-restriction>
     </msg>
   </UIVoteForm>
   <!--

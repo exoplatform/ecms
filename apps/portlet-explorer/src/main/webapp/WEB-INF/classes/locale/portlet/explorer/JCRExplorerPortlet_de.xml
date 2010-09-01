@@ -43,6 +43,7 @@
     <msg>
       <not-support><![CDATA[Abstimmen f&uuml;r diesen Dokumententypen verbieten]]></not-support>
       <not-checkedout><![CDATA[Sie m&uuml;ssen Knoten &uuml;berpr&uuml;fen bevor Sie stimmen]]></not-checkedout>
+						<vote-restriction>You can not vote more than one time </vote-restriction>
     </msg>
   </UIVoteForm>
   <!--
