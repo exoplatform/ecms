@@ -46,6 +46,7 @@ import org.exoplatform.webui.form.validator.EmailAddressValidator;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.NullFieldValidator;
 import org.exoplatform.webui.form.validator.NumberFormatValidator;
+import org.exoplatform.webui.form.validator.StringLengthValidator;
 
 /*
  * Created by The eXo Platform SAS
@@ -58,6 +59,19 @@ import org.exoplatform.webui.form.validator.NumberFormatValidator;
  */
 public class DialogFormUtil {
 
+  public static String VALIDATOR_PARAM_BEGIN      ="(";
+  public static String VALIDATOR_PARAM_END        =")";
+  public static String VALIDATOR_PARAM_SEPERATOR  =";";
+  
+  /** Type of parameters which were passed for the validator 
+   * TODO: Please add all the possible type here and parser it in side the 
+   * function parserValidatorParam.
+   * If any question, ask for VinhNT from Content's team.
+   * */  
+  public static String TYPE_FLOAT                 ="Float";
+  public static String TYPE_DOUBLE                ="Double";
+  public static String TYPE_INTEGER               ="Int";
+  public static String TYPE_STRING                ="String";
   /**
    * Prepare map.
    * 
@@ -214,13 +228,7 @@ public class DialogFormUtil {
       String validateType, Class valueType) throws Exception {
     Object[] args= {name, null, valueType };
     UIFormInputBase formInput = type.getConstructor().newInstance(args) ;    
-    if(validateType != null) {
-      String[] validatorList = null;
-      if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
-      else validatorList = new String[] {validateType};
-      for (String validator : validatorList)
-        formInput.addValidator(getValidator(validator.trim())) ;
-    }     
+    addValidators(formInput, validateType);         
     if(label != null && label.length()!=0) {
       formInput.setLabel(label);
     }
@@ -282,6 +290,8 @@ public class DialogFormUtil {
       return RepeatCountValidator.class;
     }else if(validatorType.equals("repeatIntervalValidator")) {      
       return RepeatIntervalValidator.class;
+    }else if (validatorType.equals("length")){
+      return StringLengthValidator.class;
     }else {
       ClassLoader cl = Thread.currentThread().getContextClassLoader();
       return cl.loadClass(validatorType);
@@ -292,7 +302,44 @@ public class DialogFormUtil {
     String[] validatorList = null;
     if (validators.indexOf(',') > -1) validatorList = validators.split(",");
     else validatorList = new String[] {validators};
-    for (String validator : validatorList)
-      uiInput.addValidator(getValidator(validator.trim())) ;
+    for (String validator : validatorList) {
+      Object[] params;
+      String s_param=null;
+      int p_begin, p_end;
+      p_begin = validator.indexOf(VALIDATOR_PARAM_BEGIN);
+      p_end   = validator.indexOf(VALIDATOR_PARAM_END);
+      if (p_begin>0 && p_end > p_begin) {
+        String v_name;
+        s_param = validator.substring(p_begin+1, p_end);        
+        params = s_param.split(VALIDATOR_PARAM_SEPERATOR);
+        params = parserValidatorParam(params, params.length-1, params[params.length-1].toString());
+        v_name = validator.substring(0, p_begin);
+        uiInput.addValidator(getValidator(v_name.trim()), params) ;
+      }else {
+        uiInput.addValidator(getValidator(validator.trim())) ;
+      }
+    }
+  }
+  /** 
+   * 
+   * @param params
+   * @param length
+   * @param type
+   * @return the conversion of the input parameters with the new type.
+   * @throws Exception
+   */
+  public static Object[] parserValidatorParam(Object[] params, int length, String type) throws Exception {
+    int i;
+    Object[] newParams;
+    if (length<1) return params;
+    newParams = new Object[length];
+    if (type.equalsIgnoreCase(TYPE_INTEGER)) {
+      for (i=0; i<length; i++ ) newParams[i] = Integer.parseInt(params[i].toString());
+    }else if (type.equalsIgnoreCase(TYPE_FLOAT)){
+      for (i=0; i<length; i++ ) newParams[i] = Float.parseFloat(params[i].toString());
+    }else if (type.equalsIgnoreCase(TYPE_DOUBLE)) {
+      for (i=0; i<length; i++ ) newParams[i] = Double.parseDouble(params[i].toString());
+    }else return params;//Do not convert, let those parameters are the Objec type
+    return newParams;
   }
 }

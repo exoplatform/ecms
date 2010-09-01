@@ -60,6 +60,7 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.JcrInputProperty;
@@ -88,7 +89,6 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormInput;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -239,7 +239,7 @@ public class UIDialogForm extends UIForm {
   public String geti18nNodePath() { return i18nNodePath; }
   
   @SuppressWarnings("unchecked")
-public void addActionField(String name,String label,String[] arguments) throws Exception {
+  public void addActionField(String name,String label,String[] arguments) throws Exception {
     UIFormActionField formActionField = new UIFormActionField(name,label,arguments);    
     if(formActionField.useSelector()) {
       componentSelectors.put(name, formActionField.getSelectorInfo()); 
@@ -335,7 +335,7 @@ public void addActionField(String name,String label,String[] arguments) throws E
   }
 
   @SuppressWarnings("unchecked")
-public void addCalendarField(String name, String label, String[] arguments) throws Exception {
+  public void addCalendarField(String name, String label, String[] arguments) throws Exception {
     UIFormCalendarField calendarField = new UIFormCalendarField(name,label,arguments);  
     String jcrPath = calendarField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
@@ -348,17 +348,11 @@ public void addCalendarField(String name, String label, String[] arguments) thro
     boolean isFirstTimeRender = false;
     UIFormDateTimeInput uiDateTime = findComponentById(name);
     if (uiDateTime == null) {
-    	isFirstTimeRender = true;
-    	uiDateTime = calendarField.createUIFormInput();
-    	if (calendarField.validateType != null) {
-            String validateType = calendarField.validateType;
-            String[] validatorList = null;
-            if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
-            else validatorList = new String[] {validateType};
-            for (String validator : validatorList) {
-            	uiDateTime.addValidator(DialogFormUtil.getValidator(validator.trim()));
-            }              
-          }
+      isFirstTimeRender = true;
+      uiDateTime = calendarField.createUIFormInput();
+      if (calendarField.validateType != null) {
+        DialogFormUtil.addValidators(uiDateTime, calendarField.validateType);
+      }
     }
     uiDateTime.setDisplayTime(calendarField.isDisplayTime());
     String propertyName = getPropertyName(jcrPath);
@@ -466,13 +460,7 @@ public void addCalendarField(String name, String label, String[] arguments) thro
     UIFormCheckBoxInput uiCheckBoxInput = findComponentById(name);
     
     if (formCheckBoxField.validateType != null) {
-      String validateType = formCheckBoxField.validateType;
-      String[] validatorList = null;
-      if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
-      else validatorList = new String[] {validateType};
-      for (String validator : validatorList) {
-        uiCheckBoxInput.addValidator(DialogFormUtil.getValidator(validator.trim()));
-      }            
+      DialogFormUtil.addValidators(uiCheckBoxInput, formCheckBoxField.validateType);
     }
     
     if(uiCheckBoxInput == null){
@@ -548,7 +536,7 @@ public void addCalendarField(String name, String label, String[] arguments) thro
   }
   
   @SuppressWarnings("unchecked")
-public void addSelectBoxField(String name, String label, String[] arguments) throws Exception {
+  public void addSelectBoxField(String name, String label, String[] arguments) throws Exception {
     UIFormSelectBoxField formSelectBoxField = new UIFormSelectBoxField(name,label,arguments);
     String jcrPath = formSelectBoxField.getJcrPath();
     String editable = formSelectBoxField.getEditable();
@@ -607,13 +595,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
     propertiesName.put(name, getPropertyName(jcrPath));
     fieldNames.put(getPropertyName(jcrPath), name);
     if (formSelectBoxField.validateType != null) {
-      String validateType = formSelectBoxField.validateType;
-      String[] validatorList = null;
-      if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
-      else validatorList = new String[] {validateType};
-      for (String validator : validatorList) {
-        uiSelectBox.addValidator(DialogFormUtil.getValidator(validator.trim()));
-      }              
+      DialogFormUtil.addValidators(uiSelectBox, formSelectBoxField.validateType);
     }
     String[] arrNodes = jcrPath.split("/");
     Node childNode = null;
@@ -824,7 +806,7 @@ public void addSelectBoxField(String name, String label, String[] arguments) thr
   }
 
   @SuppressWarnings("unchecked")
-public void addTextField(String name, String label, String[] arguments) throws Exception {
+  public void addTextField(String name, String label, String[] arguments) throws Exception {
     UIFormTextField formTextField = new UIFormTextField(name,label,arguments);
     String jcrPath = formTextField.getJcrPath();
     String mixintype = formTextField.getMixinTypes();
@@ -862,8 +844,19 @@ public void addTextField(String name, String label, String[] arguments) throws E
             if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
             else validatorList = new String[] {validateType};
             for (String validator : validatorList) {
-              uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()));
-            }              
+              Object[] params;
+              String s_param=null;
+              int p_begin, p_end;
+              p_begin = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_BEGIN);
+              p_end   = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_END);
+              if (p_begin>=0 && p_end > p_begin) {        
+                s_param = validator.substring(p_begin, p_end);
+                params = s_param.split(DialogFormUtil.VALIDATOR_PARAM_SEPERATOR);          
+                uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()), params) ;
+              }else {
+                uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim())) ;
+              }
+            }
           }
           List<String> valueList = new ArrayList<String>();
           List<UIComponent> listChildren = uiMulti.getChildren();
@@ -894,8 +887,19 @@ public void addTextField(String name, String label, String[] arguments) throws E
           if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
           else validatorList = new String[] {validateType};
           for (String validator : validatorList) {
-            uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()));
-          }              
+            Object[] params;
+            String s_param=null;
+            int p_begin, p_end;
+            p_begin = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_BEGIN);
+            p_end   = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_END);
+            if (p_begin>=0 && p_end > p_begin) {        
+              s_param = validator.substring(p_begin, p_end);
+              params = s_param.split(DialogFormUtil.VALIDATOR_PARAM_SEPERATOR);          
+              uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()), params) ;
+            }else {
+              uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim())) ;
+            }
+          }
         }                
         addUIFormInput(uiMulti);
       }
@@ -1150,7 +1154,7 @@ public void addTextField(String name, String label, String[] arguments) throws E
   public Node getNode() throws Exception { 
     if(nodePath == null) return null;
     try {    
-    return (Node) getSession().getItem(nodePath);
+      return (Node) getSession().getItem(nodePath);
     } catch (Exception e) {
       return null;
     }
@@ -1354,7 +1358,7 @@ public void addTextField(String name, String label, String[] arguments) throws E
   
   public String getStoredPath() { return storedPath; }
 
-  public void setWorkspace(String workspace) { this.workspaceName = workspace; }
+  public void setWorkspace(String workspace) { this.workspaceName = workspace; }  
   
   public String getLastModifiedDate() throws Exception {
     return getLastModifiedDate(getNode());
@@ -1444,16 +1448,15 @@ public void addTextField(String name, String label, String[] arguments) throws E
     RepositoryService repositoryService  = getApplicationComponent(RepositoryService.class);      
     return repositoryService.getRepository(repositoryName);
   } 
-
   
   @SuppressWarnings("unchecked")
-private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
+ private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
     addMultiValuesInput(type, name, label);
     renderField(name);
   }
 
   @SuppressWarnings({ "unchecked", "unchecked" })
-private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
+ private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
     UIFormMultiValueInputSet uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
     uiMulti.setId(name);
     uiMulti.setName(name);
