@@ -293,36 +293,44 @@ public class PortalLinkConnector implements ResourceContainer {
     if (!pageNode.isDisplay()) {
       return;
     }
+    
     String pageId = pageNode.getPageReference();
     Page page = portalConfigService.getPage(pageId, userId);
+    String pageUri = "";
     if (page == null) {
-      return;
+		pageUri = "/";
+		Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
+    	folderElement.setAttribute("name", pageNode.getName());
+    	folderElement.setAttribute("folderType", "");
+    	folderElement.setAttribute("url", pageUri);
+    	foldersElement.appendChild(folderElement);
+    } else {
+    	String accessMode = PRIVATE_ACCESS;
+    	for (String role : page.getAccessPermissions()) {
+    		if (EVERYONE_PERMISSION.equalsIgnoreCase(role)) {
+    			accessMode = PUBLIC_ACCESS;
+    			break;
+    		}
+    	}
+    	pageUri = "/" + servletContext.getServletContextName() + "/" + accessMode + "/" + portalName + "/" + pageNode.getUri();
+    	
+    	Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
+    	folderElement.setAttribute("name", pageNode.getName());
+    	folderElement.setAttribute("folderType", "");
+    	folderElement.setAttribute("url", pageUri);
+    	foldersElement.appendChild(folderElement);
+    	
+    	SimpleDateFormat formatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);    
+    	String datetime = formatter.format(new Date());
+    	Element fileElement = filesElement.getOwnerDocument().createElement("File");
+    	fileElement.setAttribute("name", pageNode.getName());
+    	fileElement.setAttribute("dateCreated", datetime);
+    	fileElement.setAttribute("fileType", "page node");
+    	fileElement.setAttribute("url", pageUri);
+    	fileElement.setAttribute("size", "");
+    	filesElement.appendChild(fileElement);
     }
-    String accessMode = PRIVATE_ACCESS;
-    for (String role : page.getAccessPermissions()) {
-      if (EVERYONE_PERMISSION.equalsIgnoreCase(role)) {
-        accessMode = PUBLIC_ACCESS;
-        break;
-      }
-    }
-    String pageUri = "/" + servletContext.getServletContextName() + "/" + accessMode + "/" + portalName + "/" + pageNode.getUri();
-
-    Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
-    folderElement.setAttribute("name", pageNode.getName());
-    folderElement.setAttribute("folderType", "");
-    folderElement.setAttribute("url", pageUri);
-    foldersElement.appendChild(folderElement);
-
-    SimpleDateFormat formatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);    
-    String datetime = formatter.format(new Date());
-    Element fileElement = filesElement.getOwnerDocument().createElement("File");
-    fileElement.setAttribute("name", pageNode.getName());
-    fileElement.setAttribute("dateCreated", datetime);
-    fileElement.setAttribute("fileType", "page node");
-    fileElement.setAttribute("url", pageUri);
-    fileElement.setAttribute("size", "");
-    filesElement.appendChild(fileElement);
-  }
+  }  
 
   /**
    * Gets the page node.
