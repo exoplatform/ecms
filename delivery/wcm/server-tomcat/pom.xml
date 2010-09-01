@@ -9,6 +9,9 @@
   <artifactId>exo-ecms-delivery-wcm-server-tomcat</artifactId>
   <name>eXo Tomcat Server</name>
   <description>eXo Tomcat server patch</description>
+  <properties>
+    <maven.resources.overwrite>true</maven.resources.overwrite>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
@@ -32,7 +35,7 @@
         <executions>
           <execution>
             <id>unpack-dependencies</id>
-            <phase>compile</phase>
+            <phase>generate-resources</phase>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
