@@ -472,7 +472,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
 			createSharedJsNode(sharedJsNode);
 			javascriptService.updatePortalJSOnRemove(portalNode, sharedJsNode);
 		} catch(Exception e) {
-			assertNotNull(e.fillInStackTrace());
+			assertNotNull(e);
 		}
 	}
 	

@@ -133,7 +133,7 @@ public class NewsletterInitializationService implements Startable {
         }
       }
     } catch (Throwable e) {
-      log.info("Starting NewsletterInitializationService fail because of ", e.fillInStackTrace());
+      log.info("Starting NewsletterInitializationService fail because of ", e);
     }
   }
 

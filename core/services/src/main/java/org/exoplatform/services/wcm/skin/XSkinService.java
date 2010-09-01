@@ -296,7 +296,7 @@ public class XSkinService implements Startable {
         addPortalSkin(portal, null, true);
       }
     }catch (Exception e) {
-    	log.error("Exception when start XSkinService", e.fillInStackTrace());
+    	log.error("Exception when start XSkinService", e);
     }
   }
 

@@ -203,7 +203,7 @@ public class NewsletterSubscriptionHandler {
       this.updatePermissionForSubscriptionNode(subscriptionNode, subscription, true);
       session.save();
     } catch (Exception e) {
-      log.error("Add subcription " + subscription.getName() + " failed because of ", e.fillInStackTrace());
+      log.error("Add subcription " + subscription.getName() + " failed because of ", e);
       throw e;
     } finally {
       if (session != null) session.logout();
@@ -236,7 +236,7 @@ public class NewsletterSubscriptionHandler {
       }
       categoryNode.save();
     } catch (Exception e) {
-      log.error("Edit subcription " + subscription.getName() + " failed because of ", e.fillInStackTrace());
+      log.error("Edit subcription " + subscription.getName() + " failed because of ", e);
     }
   }
 
@@ -267,7 +267,7 @@ public class NewsletterSubscriptionHandler {
       subscriptionNode.remove();
       session.save();
     } catch (Exception e) {
-      log.error("Delete subcription " + subscription.getName() + " failed because of ", e.fillInStackTrace());
+      log.error("Delete subcription " + subscription.getName() + " failed because of ", e);
     }
   }
   
@@ -301,7 +301,7 @@ public class NewsletterSubscriptionHandler {
         if(!childNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE)) continue;
         listSubscriptions.add(getSubscriptionFormNode(childNode));
       }catch(Exception ex){
-        log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex.fillInStackTrace());
+        log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex);
       }
     }
     return listSubscriptions;
@@ -323,7 +323,7 @@ public class NewsletterSubscriptionHandler {
         if(!subscriptionNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE)) continue;
         if(NewsletterConstant.hasPermission(userName, subscriptionNode)) listSubs.add(getSubscriptionFormNode(subscriptionNode));
       }catch(Exception ex){
-        log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex.fillInStackTrace());
+        log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex);
       }
     }
     return listSubs;
@@ -358,7 +358,7 @@ public class NewsletterSubscriptionHandler {
       try{
         listSubscriptions.add(getSubscriptionFormNode(nodeIterator.nextNode()));
       } catch(Exception ex) {
-        log.error("getSubscriptionIdsByPublicUser() failed because of ", ex.fillInStackTrace());
+        log.error("getSubscriptionIdsByPublicUser() failed because of ", ex);
       }
     }
     return listSubscriptions;

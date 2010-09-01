@@ -51,7 +51,7 @@ public class UpdateNavigationEventListener extends Listener<DataStorageImpl, Pag
       else 
         publicationService.updateLifecycleOnChangeNavigation(event.getData(), ConversationState.getCurrent().getIdentity().getUserId());
     } catch (Exception e) {
-      log.error("Exception when update publication lifecyle", e.fillInStackTrace());
+      log.error("Exception when update publication lifecyle", e);
     }    
   }
 }

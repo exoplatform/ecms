@@ -87,7 +87,7 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
       if (response != null)              
         return response; 
     } catch (Exception e) {
-      log.error("Error when perform getFoldersAndFiles: ", e.fillInStackTrace());
+      log.error("Error when perform getFoldersAndFiles: ", e);
     }    
     return Response.ok().build();
   }

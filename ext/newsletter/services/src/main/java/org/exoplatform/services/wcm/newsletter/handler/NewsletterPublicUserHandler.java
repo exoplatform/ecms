@@ -88,7 +88,7 @@ public class NewsletterPublicUserHandler {
       try {
         listString.add(value.getString());
       } catch (Exception e) {
-        log.error("Error when convert values to array: ", e.fillInStackTrace());
+        log.error("Error when convert values to array: ", e);
       }
     }
     return listString;
@@ -128,7 +128,7 @@ public class NewsletterPublicUserHandler {
           subscriptionNode.setProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_USER, new String[]{userMail});
         }
       } catch(Exception ex){
-        log.error("updateSubscriptions() failed because of ", ex.fillInStackTrace());
+        log.error("updateSubscriptions() failed because of ", ex);
       }
     }
     session.save();
@@ -168,7 +168,7 @@ public class NewsletterPublicUserHandler {
       }
       session.save();
     } catch (Exception e) {
-      log.error("Update user's subscription for user " + email + " failed because of ", e.fillInStackTrace());
+      log.error("Update user's subscription for user " + email + " failed because of ", e);
     }
   }
   
@@ -215,7 +215,7 @@ public class NewsletterPublicUserHandler {
         mailService.sendMessage(message) ;   
       }
     } catch(Exception e) {
-      log.error("Subscribe user " + userMail + " failed because of ", e.fillInStackTrace());
+      log.error("Subscribe user " + userMail + " failed because of ", e);
       throw e;
     }
   }
@@ -266,7 +266,7 @@ public class NewsletterPublicUserHandler {
       NewsletterManageUserHandler manageUserHandler = newsletterManagerService.getManageUserHandler();
       manageUserHandler.delete(sessionProvider, portalName, email);
     } catch(Exception e) {
-      log.error("Update user's subscription for user " + email + " failed because of ", e.fillInStackTrace());
+      log.error("Update user's subscription for user " + email + " failed because of ", e);
     }
   }
 
@@ -290,7 +290,7 @@ public class NewsletterPublicUserHandler {
       // Get current subscriptions which user subscribed (by query), compare with input subscriptions
       // to get which subscription user remove, which subscription user add, then update reference
     } catch(Exception e) {
-      log.error("Update user's subscription for user " + email + " failed because of ", e.fillInStackTrace());
+      log.error("Update user's subscription for user " + email + " failed because of ", e);
     }
   }
 }

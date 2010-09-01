@@ -62,7 +62,7 @@ public class TestRESTImagesRendererService extends BaseWCMTestCase {
       restImagesRendererService.generateImageURI(null, null);
       fail();
     } catch (Exception e) {
-      assertNotNull(e.fillInStackTrace());
+      assertNotNull(e);
     }
   }
   

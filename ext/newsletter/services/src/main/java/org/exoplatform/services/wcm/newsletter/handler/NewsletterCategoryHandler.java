@@ -193,7 +193,7 @@ public class NewsletterCategoryHandler {
         }
       }
     } catch (Exception e) {
-      log.error("Update permission for category " + categoryConfig.getName() + " failed because of: ", e.fillInStackTrace());
+      log.error("Update permission for category " + categoryConfig.getName() + " failed because of: ", e);
     }
     return afterRemovePermisions;
   }
@@ -230,7 +230,7 @@ public class NewsletterCategoryHandler {
       this.updatePermissionForCategoryNode(categoryNode, categoryConfig, true);
       session.save();
     } catch(Exception e) {
-      log.error("Add category " + categoryConfig.getName() + " failed because of: ", e.fillInStackTrace());
+      log.error("Add category " + categoryConfig.getName() + " failed because of: ", e);
     }
   }
   
@@ -259,9 +259,9 @@ public class NewsletterCategoryHandler {
       session.save();
       session.logout();
     } catch(ItemNotFoundException ie) {
-      log.info("Edit category " + categoryConfig.getName() + " failed because of ", ie.fillInStackTrace());
+      log.info("Edit category " + categoryConfig.getName() + " failed because of ", ie);
     } catch (Exception e) {
-      log.info("Edit category " + categoryConfig.getName() + " failed because of ", e.fillInStackTrace());
+      log.info("Edit category " + categoryConfig.getName() + " failed because of ", e);
     }
   }
   
@@ -288,7 +288,7 @@ public class NewsletterCategoryHandler {
       categoryNode.remove();
       session.save();
     } catch (Exception e) {
-      log.error("Delete category " + categoryName + " failed because of ", e.fillInStackTrace());
+      log.error("Delete category " + categoryName + " failed because of ", e);
     }
   }
   
@@ -310,7 +310,7 @@ public class NewsletterCategoryHandler {
       Node categoriesNode = (Node)session.getItem(categoryPath);
       return getCategoryFromNode(categoriesNode.getNode(categoryName));
   	} catch(Exception ex){
-  	  log.error("Error when getCategoryByName: " + ex.fillInStackTrace());
+  	  log.error("Error when getCategoryByName: " + ex);
   	}
   	return null;
   }
@@ -338,7 +338,7 @@ public class NewsletterCategoryHandler {
         listCategories.add(getCategoryFromNode(nodeIterator.nextNode()));
       }
     }catch(Exception ex){
-      log.error("Get category " + nodeIterator.nextNode().getName() + " failed because of ", ex.fillInStackTrace());
+      log.error("Get category " + nodeIterator.nextNode().getName() + " failed because of ", ex);
     }
     return listCategories;
   }

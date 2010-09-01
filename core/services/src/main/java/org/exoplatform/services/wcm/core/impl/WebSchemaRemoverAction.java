@@ -46,7 +46,7 @@ public class WebSchemaRemoverAction implements Action{
     try {      
       schemaConfigService.updateSchemaOnRemove(sessionProvider, node);
     } catch (Exception e) { 
-      log.error("Error when update web schema before remove node: " + node.getPath() , e.fillInStackTrace());
+      log.error("Error when update web schema before remove node: " + node.getPath() , e);
     }       
     return false;    
   }

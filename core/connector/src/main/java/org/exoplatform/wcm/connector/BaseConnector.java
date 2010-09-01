@@ -367,7 +367,7 @@ public abstract class BaseConnector {
       if (NodeTypeFilter==null || (NodeTypeFilter!=null && content.isNodeType(NodeTypeFilter)) ) 
     	  return content;
     } catch (Exception e) {
-      log.error("Error when perform getContent: ", e.fillInStackTrace());
+      log.error("Error when perform getContent: ", e);
     }
     return null;
   }

@@ -47,7 +47,7 @@ public class WebSchemaCreationAction implements Action {
     try {      
       schemaConfigService.createSchema(sessionProvider, node);
     } catch (Exception e) { 
-      log.error("Error when creat web schema for node"+node.getPath() , e.fillInStackTrace());
+      log.error("Error when creat web schema for node"+node.getPath() , e);
     }       
     return false;
   }

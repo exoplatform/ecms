@@ -117,7 +117,7 @@ public class NewsletterEntryHandler {
       }
       session.save();
     } catch (Exception e) {
-      log.error("Delete newsletter entry failed because of ", e.fillInStackTrace());
+      log.error("Delete newsletter entry failed because of ", e);
     }
   }
   
@@ -151,7 +151,7 @@ public class NewsletterEntryHandler {
       try{
         listNewsletterEntry.add(getEntryFromNode(nodeIterator.nextNode()));
       }catch(Exception ex){
-        log.error("Get getNewsletterEntriesBySubscription() failed because of ", ex.fillInStackTrace());
+        log.error("Get getNewsletterEntriesBySubscription() failed because of ", ex);
         continue;
       }
     }
@@ -229,7 +229,7 @@ public class NewsletterEntryHandler {
       sb.append(newsletterNode.getNode("default.html").getNode("jcr:content").getProperty("jcr:data").getString());
       return sb.toString();
     } catch (Exception e) {
-      log.error("Error when get content: ", e.fillInStackTrace());
+      log.error("Error when get content: ", e);
     }
     return null;
   }
@@ -261,7 +261,7 @@ public class NewsletterEntryHandler {
 		  
 		  return sb.toString();
 		} catch (Exception e) {
-		  log.error("Error when get content: ", e.fillInStackTrace());
+		  log.error("Error when get content: ", e);
 		}
 		return null;
   }
