@@ -35,7 +35,7 @@ eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
   try {
     if (CKEDITOR && typeof CKEDITOR == "object") {
       for (var i in CKEDITOR.instances) {
-    	CKEDITOR.instances[i].updateElement();
+        if(document.getElementById(i)) CKEDITOR.instances[i].updateElement();
       }
     }
   } catch(e) {}
