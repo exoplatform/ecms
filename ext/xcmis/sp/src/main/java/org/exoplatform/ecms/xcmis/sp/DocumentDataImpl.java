@@ -420,7 +420,6 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
    @Override
    protected void delete() throws StorageException
    {
-      String objectId = getObjectId();
       entry.delete();
    }
 

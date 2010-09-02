@@ -70,7 +70,7 @@ class PWC extends DocumentDataImpl
    @Override
    public void cancelCheckout() throws StorageException
    {
-      String id = getObjectId();
+      //String id = getObjectId();
       // Reset versioning property on latest version.
       DocumentDataImpl latestVersion = getLatestVersion();
       JcrNodeEntry latestEntry = latestVersion.getNodeEntry();
@@ -101,7 +101,7 @@ class PWC extends DocumentDataImpl
       ContentStream content, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws NameConstraintViolationException, StorageException
    {
-      String id = getObjectId();
+      //String id = getObjectId();
       try
       {
          DocumentDataImpl latestVersion = getLatestVersion();

@@ -490,6 +490,11 @@ abstract class BaseObjectData implements ObjectData
          return new BooleanProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
             definition.getDisplayName(), ((DocumentData)this).isVersionSeriesCheckedOut());
       }
+      else if (definition.getId().equals(CmisConstants.IS_IMMUTABLE))
+      {
+         return new BooleanProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
+            definition.getDisplayName(), false);
+      }
 
       return entry.getProperty(definition);
    }
@@ -536,7 +541,6 @@ abstract class BaseObjectData implements ObjectData
 
    protected void save() throws StorageException
    {
-      boolean isNew = entry.isNew();
       entry.save(true);
    }
 

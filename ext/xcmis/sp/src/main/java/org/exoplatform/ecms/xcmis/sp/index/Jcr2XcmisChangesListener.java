@@ -67,7 +67,7 @@ import javax.jcr.RepositoryException;
  * @author <a href="mailto:foo@bar.org">Foo Bar</a>
  * @version $Id: exo-jboss-codetemplates.xml 34360 2009-07-22 23:58:59Z
  *          aheritier $
- * 
+ *
  */
 public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 {
@@ -120,7 +120,6 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
    /**
     * @see org.exoplatform.services.jcr.dataflow.persistent.ItemsPersistenceListener#isTXAware()
     */
-   @Override
    public boolean isTXAware()
    {
       return false;
@@ -129,12 +128,9 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
    /**
     * @see org.exoplatform.services.jcr.dataflow.persistent.ItemsPersistenceListener#onSaveItems(org.exoplatform.services.jcr.dataflow.ItemStateChangesLog)
     */
-   @Override
    public void onSaveItems(ItemStateChangesLog itemStates)
    {
-
       applyChangesLog(itemStates);
-
    }
 
    private void applyChangesLog(ItemStateChangesLog itemStates)
@@ -213,7 +209,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
                   }
                }
             }
-            //remove one by one. ignore exceptions 
+            //remove one by one. ignore exceptions
             for (String uuid : removedNodes)
             {
                try
@@ -267,7 +263,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
    }
 
    /**
-    * 
+    *
     * @param removedNodes
     * @param addedNodes
     * @param updatedNodes
@@ -359,7 +355,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    /**
     * Called on CmisRegistry start. It will initialize search service.
-    * 
+    *
     * @param cmisRegistry
     * @param readOnlyIndexConfiguration
     * @throws RepositoryException

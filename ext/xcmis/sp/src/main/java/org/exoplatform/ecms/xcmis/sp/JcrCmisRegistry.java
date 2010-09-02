@@ -67,7 +67,7 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
    }
 
    /**
-    * 
+    *
     * @return list of workspace
     * @throws RepositoryException
     */
@@ -103,7 +103,6 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
    /**
     * @see org.xcmis.spi.deploy.ExoContainerCmisRegistry#start()
     */
-   @Override
    public void start()
    {
       if (initParams != null)
@@ -169,7 +168,6 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
    /**
     * @see org.xcmis.spi.deploy.ExoContainerCmisRegistry#stop()
     */
-   @Override
    public void stop()
    {
       for (Entry<String, SearchService> entry : wsSearchServices.entrySet())
@@ -196,7 +194,6 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
       return value != null ? value : defaultValue;
    }
 
-   @Override
    public CmisRegistry getRegistry()
    {
       return (CmisRegistry)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(CmisRegistry.class);
