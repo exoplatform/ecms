@@ -80,8 +80,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
       }
 
       /**
-       * @param storage
-       *           the storage configuration
+       * @param storage the storage configuration
        */
       public void setStorage(StorageConfiguration storage)
       {
@@ -122,18 +121,14 @@ public class StorageProviderImpl implements StorageProvider, Startable
 
    /**
     * This constructor is used by eXo container.
-    * 
-    * @param repositoryService
-    *           JCR repository service
-    * @param documentReaderService
-    *           DocumentReaderService required for indexing mechanism
-    * @param permissionService
-    *           PermissionService
-    * @param registry
-    *           CmisRegistry will be used for registered current StorageProvider
-    *           after its initialization
-    * @param initParams
-    *           configuration parameters
+    *
+    * @param repositoryService JCR repository service
+    * @param documentReaderService DocumentReaderService required for indexing
+    *        mechanism
+    * @param permissionService PermissionService
+    * @param registry CmisRegistry will be used for registered current
+    *        StorageProvider after its initialization
+    * @param initParams configuration parameters
     */
    public StorageProviderImpl(RepositoryService repositoryService, PermissionService permissionService,
       CmisRegistry registry, InitParams initParams)
@@ -198,18 +193,6 @@ public class StorageProviderImpl implements StorageProvider, Startable
          Session session = repository.login(ws);
          StorageImpl storage =
             new StorageImpl(session, storageConfiguration, searchService, permissionService, nodeTypeMapping);
-
-         //         if (searchService != null)
-         //         {
-         //            storage =
-         //               new QueryableStorage(session, storageConfiguration, searchService, permissionService, nodeTypeMapping);
-         //            IndexListener indexListener = new IndexListener(storage, searchService);
-         //            storage.setIndexListener(indexListener);
-         //         }
-         //         else
-         //         {
-         //            storage = new StorageImpl(session, storageConfiguration, permissionService, nodeTypeMapping);
-         //         }
          return new JcrConnection(storage);
       }
       catch (RepositoryException re)
@@ -251,9 +234,8 @@ public class StorageProviderImpl implements StorageProvider, Startable
 
    /**
     * Set storage configuration.
-    * 
-    * @param storageConfig
-    *           storage configuration
+    *
+    * @param storageConfig storage configuration
     * @throw IllegalStateException if configuration for storage already set
     */
    void setConfiguration(StorageConfiguration storageConfig)
@@ -387,8 +369,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
    }
 
    /**
-    * @param searchService
-    *           the searchService to set
+    * @param searchService the searchService to set
     */
    public void setSearchService(SearchService searchService)
    {

@@ -345,9 +345,8 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Create String representation of date in format required by JCR.
-    * 
-    * @param c
-    *           Calendar
+    *
+    * @param c Calendar
     * @return formated string date
     */
    private String createJcrDate(Calendar c)
@@ -403,11 +402,9 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Get the level of hierarchy.
-    * 
-    * @param discovered
-    *           the node type
-    * @param match
-    *           the name of the node type
+    *
+    * @param discovered the node type
+    * @param match the name of the node type
     * @return hierarchical level for node type <code>discovered</code>
     */
    private int getTypeLevelHierarchy(NodeType discovered, String match)
@@ -449,9 +446,8 @@ abstract class BaseJcrStorage implements TypeManager
    /**
     * Get JCR node type name reflected CMIS type <code>typeId</code>. This is
     * reverse operation to {@link #getCmisTypeId(String)}.
-    * 
-    * @param cmisTypeId
-    *           CMIS type
+    *
+    * @param cmisTypeId CMIS type
     * @return corresponded JCR node type name
     */
    private String getNodeType(String cmisTypeId)
@@ -493,15 +489,13 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Get all sub-types of type <code>typeId</code>.
-    * 
-    * @param typeId
-    *           type Id
-    * @param includePropertyDefinition
-    *           if <code>true</code> property definition should be included
+    *
+    * @param typeId type Id
+    * @param includePropertyDefinition if <code>true</code> property definition
+    *        should be included
     * @return set of type definitions which are sub-type of specified type. If
     *         type has not any sub-types that empty collection will be returned.
-    * @throws TypeNotFoundException
-    *            if type <code>typeId</code> does not exist
+    * @throws TypeNotFoundException if type <code>typeId</code> does not exist
     */
    public Collection<TypeDefinition> getSubTypes(String typeId, boolean includePropertyDefinitions)
       throws TypeNotFoundException
@@ -523,14 +517,13 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Get CMIS type definition which is front-end of JCR node type.
-    * 
-    * @param nodeType
-    *           JCR node type
-    * @param includePropertyDefinition
-    *           if true property definition should be included
+    *
+    * @param nodeType JCR node type
+    * @param includePropertyDefinition if true property definition should be
+    *        included
     * @return CMIS type definition
-    * @throws NotSupportedNodeTypeException
-    *            if specified node type is unsupported by xCMIS
+    * @throws NotSupportedNodeTypeException if specified node type is
+    *         unsupported by xCMIS
     */
    public TypeDefinition getTypeDefinition(NodeType nodeType, boolean includePropertyDefinition)
    {
@@ -564,16 +557,14 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Document type definition.
-    * 
-    * @param mapping
-    *           type mapping. May be
-    *           <code>null<code> if node type not need any mapping and supported
+    *
+    * @param mapping type mapping. May be
+    *        <code>null<code> if node type not need any mapping and supported
     *        by xcmis directly. In this case node type must be one nt:file or
     *        node type which extends nt:file
-    * @param nt
-    *           node type
-    * @param includePropertyDefinition
-    *           true if need include property definition false otherwise
+    * @param nt node type
+    * @param includePropertyDefinition true if need include property definition
+    *        false otherwise
     * @return document type definition
     */
    private TypeDefinition getDocumentDefinition(NodeType nt, boolean includePropertyDefinition)
@@ -626,13 +617,11 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Folder type definition.
-    * 
-    * @param nt
-    *           node type
-    * @param includePropertyDefinition
-    *           true if need include property definition false otherwise
-    * @param typeMapping
-    *           TypeMapping
+    *
+    * @param nt node type
+    * @param includePropertyDefinition true if need include property definition
+    *        false otherwise
+    * @param typeMapping TypeMapping
     * @return folder type definition
     */
    private TypeDefinition getFolderDefinition(NodeType nt, boolean includePropertyDefinition, TypeMapping typeMapping)
@@ -706,11 +695,10 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Get policy type definition.
-    * 
-    * @param nt
-    *           node type
-    * @param includePropertyDefinition
-    *           true if need include property definition false otherwise
+    *
+    * @param nt node type
+    * @param includePropertyDefinition true if need include property definition
+    *        false otherwise
     * @return type policy definition
     */
    private TypeDefinition getPolicyDefinition(NodeType nt, boolean includePropertyDefinition)
@@ -759,11 +747,10 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Get relationship type definition.
-    * 
-    * @param nt
-    *           node type
-    * @param includePropertyDefinition
-    *           true if need include property definition false otherwise
+    *
+    * @param nt node type
+    * @param includePropertyDefinition true if need include property definition
+    *        false otherwise
     * @return type relationship definition
     */
    private TypeDefinition getRelationshipDefinition(NodeType nt, boolean includePropertyDefinition)
@@ -812,9 +799,8 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Get CMIS object type id by the JCR node type name.
-    * 
-    * @param ntName
-    *           JCR node type name
+    *
+    * @param ntName JCR node type name
     * @return CMIS object type id
     */
    private String getCmisTypeId(String ntName)
@@ -835,11 +821,9 @@ abstract class BaseJcrStorage implements TypeManager
 
    /**
     * Add property definitions.
-    * 
-    * @param typeDefinition
-    *           the object type definition
-    * @param nt
-    *           the JCR node type.
+    *
+    * @param typeDefinition the object type definition
+    * @param nt the JCR node type.
     */
    private void addPropertyDefinitions(TypeDefinition typeDefinition, NodeType nt)
    {
@@ -942,9 +926,7 @@ abstract class BaseJcrStorage implements TypeManager
                case javax.jcr.PropertyType.NAME :
                case javax.jcr.PropertyType.REFERENCE :
                case javax.jcr.PropertyType.STRING :
-               case javax.jcr.PropertyType.PATH :
-               case javax.jcr.PropertyType.BINARY :
-               case javax.jcr.PropertyType.UNDEFINED : {
+               case javax.jcr.PropertyType.PATH : {
                   Value[] jcrDefaultValues = jcrPropertyDef.getDefaultValues();
                   List<Choice<String>> choices = null;
                   Boolean openChoice = null;
@@ -1015,7 +997,9 @@ abstract class BaseJcrStorage implements TypeManager
                   cmisPropDef = stringDef;
                   break;
                }
-
+               default :
+                  // If binary or undefined.
+                  continue;
             }
             pd.put(cmisPropDef.getId(), cmisPropDef);
          }

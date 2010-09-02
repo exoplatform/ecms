@@ -185,6 +185,15 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       AllowableActions actions =
          permissionService.calculateAllowableActions(object, state != null ? state.getIdentity() : null,
             getRepositoryInfo());
+
+      if (object instanceof JcrFile)
+      {
+         // Disable creation new versions for object which represents JCR nodes
+         // created directly in JCR (not via xCMIS API).
+         actions.setCanCheckOut(false);
+         actions.setCanCheckIn(false);
+         actions.setCanCancelCheckOut(false);
+      }
       return actions;
    }
 

@@ -470,10 +470,25 @@ abstract class BaseObjectData implements ObjectData
          return new StringProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(), definition
             .getDisplayName(), ((DocumentData)this).getVersionLabel());
       }
+      else if (definition.getId().equals(CmisConstants.IS_LATEST_VERSION))
+      {
+         return new BooleanProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
+            definition.getDisplayName(), ((DocumentData)this).isLatestVersion());
+      }
+      else if (definition.getId().equals(CmisConstants.IS_MAJOR_VERSION))
+      {
+         return new BooleanProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
+            definition.getDisplayName(), ((DocumentData)this).isMajorVersion());
+      }
       else if (definition.getId().equals(CmisConstants.IS_LATEST_MAJOR_VERSION))
       {
          return new BooleanProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
             definition.getDisplayName(), ((DocumentData)this).isLatestMajorVersion());
+      }
+      else if (definition.getId().equals(CmisConstants.IS_VERSION_SERIES_CHECKED_OUT))
+      {
+         return new BooleanProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
+            definition.getDisplayName(), ((DocumentData)this).isVersionSeriesCheckedOut());
       }
 
       return entry.getProperty(definition);
@@ -481,7 +496,7 @@ abstract class BaseObjectData implements ObjectData
 
    /**
     * Update properties, skip on-create and read-only properties
-    * 
+    *
     * @param property
     *           property to be updated
     */
@@ -527,7 +542,7 @@ abstract class BaseObjectData implements ObjectData
 
    /**
     * Delete current object.
-    * 
+    *
     * @throws StorageException
     *            if operation can't be persisted in back-end
     */
