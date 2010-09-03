@@ -603,11 +603,37 @@ class JcrNodeEntry
       return relationships;
    }
 
+   String getContentStreamId()
+   {
+      if (getBaseType() == BaseType.DOCUMENT)
+      {
+         String id = getString(CmisConstants.CONTENT_STREAM_ID);
+         if (id == null)
+         {
+            try
+            {
+               Node contentNode = node.getNode(JcrCMIS.JCR_CONTENT);
+               long contentLength = contentNode.getProperty(JcrCMIS.JCR_DATA).getLength();
+               if (contentLength > 0)
+               {
+                  id = ((ExtendedNode)contentNode).getIdentifier();
+               }
+            }
+            catch (RepositoryException re)
+            {
+               throw new CmisRuntimeException(re.getMessage(), re);
+            }
+         }
+         return id;
+      }
+      return null;
+   }
+
    ContentStream getContentStream(String streamId)
    {
       try
       {
-         if (streamId == null || streamId.equals(getString(CmisConstants.CONTENT_STREAM_ID)))
+         if (streamId == null || streamId.equals(getContentStreamId()))
          {
             if (getBaseType() != BaseType.DOCUMENT)
             {

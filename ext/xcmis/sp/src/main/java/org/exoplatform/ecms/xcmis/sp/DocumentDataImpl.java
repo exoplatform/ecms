@@ -417,6 +417,19 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
       return length;
    }
 
+   /**
+    * @return id of content stream if document has content and <code>null</code>
+    *         otherwise
+    */
+   protected String getContentStreamId()
+   {
+      String contentId = entry.getContentStreamId();
+      return contentId;
+   }
+
+   /**
+    * {@inheritDoc}
+    */
    @Override
    protected void delete() throws StorageException
    {

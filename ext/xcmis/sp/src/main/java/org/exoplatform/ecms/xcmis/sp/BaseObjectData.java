@@ -436,6 +436,11 @@ abstract class BaseObjectData implements ObjectData
             LOG.error("Unable get parent id. " + never.getMessage());
          }
       }
+      else if (definition.getId().equals(CmisConstants.CONTENT_STREAM_ID))
+      {
+            return new IdProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
+               definition.getDisplayName(), ((DocumentDataImpl)this).getContentStreamId());
+      }
       else if (definition.getId().equals(CmisConstants.CONTENT_STREAM_FILE_NAME))
       {
          if (((DocumentData)this).hasContent())
