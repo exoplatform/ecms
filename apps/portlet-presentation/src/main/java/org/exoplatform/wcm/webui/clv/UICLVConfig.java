@@ -561,6 +561,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       UICLVPortlet portlet = clvConfig.getAncestorOfType(UICLVPortlet.class);
       if (displayMode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) {
         portlet.getChild(UICLVFolderMode.class).init();
+        portlet.setCurrentFolderPath(itemPath);
       } else if (displayMode.equals(UICLVPortlet.DISPLAY_MODE_MANUAL)) {
         portlet.getChild(UICLVManualMode.class).init();
       }

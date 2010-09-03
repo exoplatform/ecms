@@ -173,6 +173,10 @@ public class UICLVPortlet extends UIPortletApplication {
     currentFolderPath = getFolderPath();
   }
   
+  public void setCurrentFolderPath(String value) {
+    currentFolderPath = value;
+  }
+  
   public String getFolderPath() {
     PortalRequestContext preq = Util.getPortalRequestContext();
     if (!preq.useAjax()) {
