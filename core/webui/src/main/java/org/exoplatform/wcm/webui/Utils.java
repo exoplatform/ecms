@@ -16,7 +16,11 @@
  */
 package org.exoplatform.wcm.webui;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -313,12 +317,16 @@ public class Utils {
 			return false;
 		}
   }
-
+  
   public static String getEditLink(Node node, boolean isEditable, boolean isNew) {
+    return getEditLink(node, isEditable, isNew, "");
+  }
+
+  public static String getEditLink(Node node, boolean isEditable, boolean isNew, String paramName) {
 	  try {
 		  String itemPath = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName() + '/' +
 		  node.getSession().getWorkspace().getName() + '/' +node.getPath();
-		  return getEditLink(itemPath, isEditable, isNew);
+		  return getEditLink(itemPath, isEditable, isNew, paramName);
 	  } catch (RepositoryException e) {}
 	  return null;
   }
@@ -335,11 +343,11 @@ public class Utils {
    * @param isNew
    * @return
    */
-  public static String getEditLink(String itemPath, boolean isEditable, boolean isNew) {
+  public static String getEditLink(String itemPath, boolean isEditable, boolean isNew, String paramName) {
 	  StringBuilder link = new StringBuilder();
       PortalRequestContext pContext = Util.getPortalRequestContext();
       String portalURI = pContext.getPortalURI();     
-      String backto = pContext.getRequestURI();
+      String backto = pContext.getRequestURI() + parameterBackTo(itemPath, paramName);
       WCMConfigurationService configurationService = Util.getUIPortalApplication().getApplicationComponent(WCMConfigurationService.class);
       String editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDITOR_PAGE_URI);
       link.append(portalURI).append(editorPageURI).append("?").
@@ -350,6 +358,18 @@ public class Utils {
       if (isNew) link.append("&addNew=true");
 	  
 	  return link.toString();
+  }
+  
+  public static String getEditLink(String itemPath, boolean isEditable, boolean isNew) {
+    return getEditLink(itemPath, isEditable, isNew, "");
+  }
+  
+  private static String parameterBackTo(String itemPath, String paramName) {
+    if (paramName == null || paramName.length() == 0) 
+      return "";
+    StringBuilder ret = new StringBuilder();
+    ret.append("?").append(paramName).append("=/").append(itemPath.replace("//", "/"));
+    return URLEncoder.encode(ret.toString());
   }
   
   /**

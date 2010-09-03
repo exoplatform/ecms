@@ -274,7 +274,11 @@ public class UIPresentationContainer extends UIContainer{
 	}
 
 	public String getQuickEditLink(){
-    return Utils.getEditLink(getNodeView(), true, false);
+      PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+	  PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
+	  
+	  UISingleContentViewerPortlet uiScvPortlet = this.getAncestorOfType(UISingleContentViewerPortlet.class);
+      return Utils.getEditLink(getNodeView(), true, false, preferences.getValue(UISingleContentViewerPortlet.PARAMETER, "")); 
 	}
 	
 	/**
