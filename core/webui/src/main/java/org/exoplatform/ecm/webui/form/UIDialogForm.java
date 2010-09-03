@@ -285,10 +285,16 @@ public class UIDialogForm extends UIForm {
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
+    
+    if(node != null && !isShowingComponent && !isRemovePreference && !isRemoveActionField) {
+      if(jcrPath.equals("/node") && (!formActionField.isEditable() || formActionField.isEditableIfNull())) {
+        ((UIFormStringInput)uiInput).setEditable(false);      
+      }
+    }
+
     if(node != null && !isShowingComponent && !isRemovePreference && !isRemoveActionField && isFirstTimeRender) {
       if(jcrPath.equals("/node") && (!formActionField.isEditable() || formActionField.isEditableIfNull())) {
         ((UIFormStringInput)uiInput).setValue(node.getName());
-        ((UIFormStringInput)uiInput).setEditable(false);
       } else if(node.hasProperty(propertyName) && !isUpdateSelect) {
         String relPath = "";
         String itemRelPath = "";
@@ -942,6 +948,12 @@ public class UIDialogForm extends UIForm {
     uiInput.setEditable(formTextField.isEditable());
     if(uiInput.getValue() == null) uiInput.setValue(formTextField.getDefaultValue());       
     else uiInput.setEditable(true);
+
+    if(node != null && !isShowingComponent && !isRemovePreference) {
+      if(jcrPath.equals("/node") && (!formTextField.isEditable() || formTextField.isEditableIfNull())) {
+        uiInput.setEditable(false);        
+      }
+    }
     if(node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       if(jcrPath.equals("/node") && (!formTextField.isEditable() || formTextField.isEditableIfNull())) {
       	String value = uiInput.getValue();
@@ -951,7 +963,6 @@ public class UIDialogForm extends UIForm {
           String nameValue =  node.getPath().substring(node.getPath().lastIndexOf("/") + 1);
           uiInput.setValue(Text.unescapeIllegalJcrChars(nameValue));
         }
-        uiInput.setEditable(false);
       } else if(node.hasProperty(propertyName)) {
         uiInput.setValue(node.getProperty(propertyName).getValue().getString());
       } 
