@@ -9,17 +9,16 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.wcm.core.NodeIdentifier;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.PaginatedQueryResult;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.viewer.UIContentViewer;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -217,17 +216,9 @@ public class UIContentSearchResult extends UIGrid {
      */
     public void execute(Event<UIContentSearchResult> event) throws Exception {
       UIContentSearchResult contentSearchResult = event.getSource();
-      String expression = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node webContent = NodeLocation.getNodeByExpression(expression);
-      NodeIdentifier nodeIdentifier = NodeIdentifier.make(webContent);
-      PortletRequestContext pContext = (PortletRequestContext) event.getRequestContext();
-      PortletPreferences prefs = pContext.getRequest().getPreferences();
-      prefs.setValue("repository", nodeIdentifier.getRepository());
-      prefs.setValue("workspace", nodeIdentifier.getWorkspace());
-      prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
-      prefs.store();
-
-      Utils.closePopupWindow(contentSearchResult.getAncestorOfType(UIContentSelector.class), UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+      UIContentSelector contentSelector = contentSearchResult.getAncestorOfType(UIContentSelector.class);
+      UIContentBrowsePanel contentBrowsePanel = contentSelector.getChild(UIContentBrowsePanel.class);
+      ((UISelectable)(contentBrowsePanel.getSourceComponent())).doSelect(contentBrowsePanel.getReturnFieldName(), event.getRequestContext().getRequestParameter(OBJECTID));
     }
   }
 
