@@ -222,17 +222,9 @@ public class UIContentSearchResult extends UIGrid {
      */
     public void execute(Event<UIContentSearchResult> event) throws Exception {
       UIContentSearchResult contentSearchResult = event.getSource();
-      String expression = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node webContent = NodeLocation.getNodeByExpression(expression);
-      NodeIdentifier nodeIdentifier = NodeIdentifier.make(webContent);
-      PortletRequestContext pContext = (PortletRequestContext) event.getRequestContext();
-      PortletPreferences prefs = pContext.getRequest().getPreferences();
-      prefs.setValue("repository", nodeIdentifier.getRepository());
-      prefs.setValue("workspace", nodeIdentifier.getWorkspace());
-      prefs.setValue("nodeIdentifier", nodeIdentifier.getUUID());
-      prefs.store();
-
-      Utils.closePopupWindow(contentSearchResult.getAncestorOfType(UIContentSelector.class), UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+      UIContentSelector contentSelector = contentSearchResult.getAncestorOfType(UIContentSelector.class);
+      UIContentBrowsePanel contentBrowsePanel = contentSelector.getChild(UIContentBrowsePanel.class);
+      ((UISelectable)(contentBrowsePanel.getSourceComponent())).doSelect(contentBrowsePanel.getReturnFieldName(), event.getRequestContext().getRequestParameter(OBJECTID));
     }
   }
 
