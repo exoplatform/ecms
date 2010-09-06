@@ -6,8 +6,10 @@
    <print>Imprimer cette page</print>
   </title>
   <label>
-   <draft>brouillon</draft>
+   <Draft>brouillon</Draft>
    <print>Imprimer</print>
+   <Preferences>Preferences</Preferences>   
+   <Edit>Edit</Edit>
   </label>
   <msg>
    <no-content>Il n'ya pas de contenu à afficher</no-content>
@@ -100,8 +102,6 @@
     <title>Content Detail Preferences</title>
     <label>
       <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
    	  <Title>Content Detail Preferences</Title>
    	  <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
    	  <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>

@@ -29,13 +29,13 @@
 								if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 									%>
 									<div style="float: right">
-										<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+										<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UIPresentationContainer.label.Preferences")%>" class="PreferencesIcon" >
 										  &nbsp;
 										</a>         
 									</div>
 									<%}%>
 									<div style="float: right">
-										<a href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Edit")%>">
+										<a href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.label.Edit")%>">
 										  &nbsp;
 										</a>           
 									</div>
@@ -67,6 +67,13 @@
 					</div>
 				<% 
 			} 
+			if(Utils.isShowDraft(node) && !uicomponent.isPrinting()){
+      %>
+        <div style="padding: 5px 10px; line-height: 16px; ">
+        <span class="DraftIcon" style="padding-left: 20px">[<%= _ctx.appRes("UIPresentationContainer.label.Draft") %>]</span>
+      </div>  
+      <% 
+      }
 			uicomponent.renderChildren();
 			if(uicomponent.isPrinting()) {
         %>
@@ -90,7 +97,7 @@
              <div class="EdittingToolBarR">
                <div class="EdittingToolBarC clearfix">
                  <div style="float: right">
-                   <a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+                   <a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UIPresentationContainer.label.Preferences")%>" class="PreferencesIcon" >
                      &nbsp;
                    </a>         
                  </div>            

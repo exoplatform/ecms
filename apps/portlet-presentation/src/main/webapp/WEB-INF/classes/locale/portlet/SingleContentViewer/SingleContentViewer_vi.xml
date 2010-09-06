@@ -6,8 +6,10 @@
    <print>In trang này</print>
   </title>
   <label>
-   <draft>Nháp</draft>
+   <Draft>Nháp</Draft>
    <print>In</print>
+   <Preferences>Tùy chọn</Preferences>
+   <Edit>Hiệu chỉnh</Edit>
   </label>
   <msg>
    <no-content>Không có nội dung nào</no-content>
@@ -101,8 +103,6 @@
     </action>
     <title>Tùy chọn chi tiết</title>
     <label>
-      <Edit>Hiệu chỉnh</Edit>
-      <Preferences>Tùy chọn</Preferences>
    	  <Title>Tùy chọn chi tiết</Title>
    	  <UISCVShowTitleConfigurationCheckBox>Hiện tiêu đề</UISCVShowTitleConfigurationCheckBox>
    	  <UISCVShowDateConfigurationCheckBox>Hiện ngày tháng</UISCVShowDateConfigurationCheckBox>
@@ -114,7 +114,7 @@
    	  <ContextCaption>Điều hướng</ContextCaption>
    	  <UISCVContextualRadioBox>Nội dung theo ngữ cảnh</UISCVContextualRadioBox>
    	  <UISCVParameterInputBox>tham số</UISCVParameterInputBox>
-    </label>
+	</label>
     <help>
    	  <ContentPathBlock>Vui lòng lựa chọn dữ liệu nguồn để hiển thị</ContentPathBlock>
    	  <DisplaySettingBlock>Bạn có thể quyết định có hiển thị hay không các mục: Tiêu đề, ngày tháng, thanh tùy chọn (để in ấn) tại đây</DisplaySettingBlock>

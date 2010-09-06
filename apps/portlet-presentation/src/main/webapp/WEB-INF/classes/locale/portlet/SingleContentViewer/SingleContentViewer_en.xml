@@ -6,8 +6,10 @@
    <print>Print this page</print>
   </title>
   <label>
-   <draft>Draft</draft>
+   <Draft>Draft</Draft>
    <print>Print</print>
+   <Preferences>Preferences</Preferences>
+   <Edit>Edit</Edit>   
   </label>
   <msg>
    <no-content>There is no content to show</no-content>
@@ -102,8 +104,6 @@
     <title>Content Detail Preferences</title>
     <label>
       <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
-      <Preferences>Preferences</Preferences>
    	  <Title>Content Detail Preferences</Title>
    	  <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
    	  <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
