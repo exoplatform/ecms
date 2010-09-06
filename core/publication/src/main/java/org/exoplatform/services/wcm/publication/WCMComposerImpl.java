@@ -312,7 +312,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 //		String orderBy = filters.get(FILTER_ORDER_BY);
 //		String orderType = filters.get(FILTER_ORDER_TYPE);
 		if (isCached) {
-			String[] orderTypes = {"ASC", "DESC"};
+			String[] orderTypes = {null, "ASC", "DESC"};
 			if (log.isDebugEnabled()) log.debug("updateContent : "+path);
 			String part = path.substring(0, path.lastIndexOf("/"));
 			String remoteUser = null;
@@ -441,7 +441,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 */
 	public boolean updateContents(String repository, String workspace, String path, HashMap<String, String> filters) throws Exception {
 		if (isCached) {
-			String[] orderTypes = {"ASC", "DESC"};
+			String[] orderTypes = {null, "ASC", "DESC"};
 			String remoteUser = null;
 			try {
 				remoteUser = Util.getPortalRequestContext().getRemoteUser();
