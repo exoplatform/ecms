@@ -60,14 +60,15 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
  } catch(e) {}
 
  try {
-  var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById('summary'), 'span').id.indexOf('cke');
-  if (CKEDITOR && typeof CKEDITOR == "object" && rendered == 0) {
+  
+  if (CKEDITOR && typeof CKEDITOR == "object") {
     for ( var name in CKEDITOR.instances ) {
       var oEditor ;
       try {
         oEditor = CKEDITOR.instances[name] ;
         if (oEditor && document.getElementById(name)) {
-			    document.getElementById(name).value = oEditor.getData();
+            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
+            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
         }
       } catch(e) {
         continue ;
@@ -89,7 +90,49 @@ eXo.webui.UIForm = new UIForm();
  * END UPDATE FORM
  **/
 
+/**
+ * Submits a form by Ajax, with the given action and the given parameters
+ * Calls ajaxPost of PortalHttpRequest
+ * Note: ie bug  you cannot have more than one button tag
+ */
+UIForm.prototype.submitEvent = function(formId, action, params) {
+  var form = this.getFormElemt(formId) ;
+	 try {
+	  if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
+	 	  for ( var name in FCKeditorAPI.__Instances ) {
+	 	  	var oEditor = FCKeditorAPI.__Instances[name] ;
+	 	  	if ( oEditor.GetParentForm && oEditor.GetParentForm() == form ) {
+	 	  		oEditor.UpdateLinkedField() ;
+	 	  	}
+	  	}
+	  }
+	 } catch(e) {}
+	 
+	  try {
 
+	  if (CKEDITOR && typeof CKEDITOR == "object") {
+	    for ( var name in CKEDITOR.instances ) {
+	      var oEditor ;
+	      try {
+	        oEditor = CKEDITOR.instances[name] ;
+	        if (oEditor && document.getElementById(name)) {
+	            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
+	            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
+	        }
+	      } catch(e) {
+	        continue ;
+	      }
+	    }
+	  }
+	 } catch(e) {}
+
+	 
+  form.elements['formOp'].value = action ; 
+  if(!form.originalAction) form.originalAction = form.action ; 
+	form.action =  form.originalAction +  encodeURI(params) ;
+  b_changed = false;
+  ajaxPost(form) ;
+} ;
 
 /**
  * Before we change the url, we check if the content has changed
@@ -136,7 +179,6 @@ document.getElementById("UIDocumentForm").onchange = changed;
          */
 		oEditor.on( 'key', function() {
 		  b_changed = true;
-          document.getElementById(this.name).value = this.getData();
         });
 
 
