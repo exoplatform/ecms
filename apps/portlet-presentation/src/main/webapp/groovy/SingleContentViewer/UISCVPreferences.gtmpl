@@ -97,7 +97,7 @@
             </fieldset>             
           </div>
           
-          <a href="#" id="UISCVShowAdvanceOption" class="AdvancePreferences" style="margin-left: 20px;" onClick="document.getElementById('UISCVShowAdvanceOption').style.display='none';document.getElementById('UISCVContextualSelectionAdvance').style.display='block';">
+          <a href="#" id="UISCVShowAdvanceOption" class="AdvancePreferences" style="margin-left: 21px;" onClick="document.getElementById('UISCVShowAdvanceOption').style.display='none';document.getElementById('UISCVContextualSelectionAdvance').style.display='block';">
              <%= _ctx.appRes("UISCVPreferences.label.Advance") %></a>
              
           <div class="FormContainer" id="UISCVContextualSelectionAdvance">

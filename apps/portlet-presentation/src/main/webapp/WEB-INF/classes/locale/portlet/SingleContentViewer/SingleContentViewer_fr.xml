@@ -121,4 +121,9 @@
    	  <ParameterHelp>Specify the parameter which appear on the URL</ParameterHelp>
     </help>  
   </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+  	<title>
+  		<SelectFolderPath>Select folder path</SelectFolderPath>
+  	</title>  	
+  </UISCVConfigItemPathFormInputSet>
 </bundle>

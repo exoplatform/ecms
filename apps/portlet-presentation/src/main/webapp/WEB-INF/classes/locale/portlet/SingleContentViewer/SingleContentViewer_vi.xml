@@ -122,4 +122,9 @@
    	  <ParameterHelp>Xác định tham số sử dụng trên URL</ParameterHelp>
     </help> 
   </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+  	<title>
+  		<SelectFolderPath>Lựa chọn đường dẫn</SelectFolderPath>
+  	</title>  	
+  </UISCVConfigItemPathFormInputSet>
 </bundle>

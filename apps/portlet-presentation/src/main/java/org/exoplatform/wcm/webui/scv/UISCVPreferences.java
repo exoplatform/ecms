@@ -223,7 +223,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       UISCVPreferences uiSCVPref = event.getSource();
       UIContentSelectorOne contentSelector = uiSCVPref.createUIComponent(UIContentSelectorOne.class, null, null);
       contentSelector.init();
-      contentSelector.getChild(UIContentBrowsePanelOne.class).setSourceComponent(uiSCVPref, new String[] { UISCVPreferences.CONTENT_PATH_INPUT });
+      contentSelector.setSourceComponent(uiSCVPref, new String[] { UISCVPreferences.CONTENT_PATH_INPUT });
       Utils.createPopupWindow(uiSCVPref, contentSelector, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
       uiSCVPref.setContentSelectorID(UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
     }
