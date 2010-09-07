@@ -167,15 +167,16 @@ public abstract class UICLVContainer extends UIContainer {
   public boolean isShowAddContent() {
     if (isShowManageContent()) {
       PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
-      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
-      Node content = NodeLocation.getNodeByExpression(itemPath);
+      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);      
 	    try {
+	      Node content = NodeLocation.getNodeByExpression(itemPath);
 	  		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);    	
 	    } catch (Exception e) {
 	    	return false;
 	    }
 	    return true;
-    } else return false;
+    } 
+    return false;
   }
   
   public boolean isShowPreferences() {
