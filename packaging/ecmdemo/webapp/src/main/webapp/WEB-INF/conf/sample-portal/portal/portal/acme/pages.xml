@@ -523,7 +523,7 @@
             </preference>
             <preference>
               <name>templateCategory</name>
-              <value>horizontal-hierachy</value>
+              <value>vertical-hierachy</value>
               <read-only>false</read-only>
             </preference>
             <preference>
