@@ -15,24 +15,24 @@
  *  along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.ecms.xcmis.sp.jcr.exo;
+package org.exoplatform.ecms.xcmis.sp;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.io.FileUtils;
 import org.exoplatform.container.StandaloneContainer;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.CredentialsImpl;
 import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.RepositoryImpl;
-import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.xcmis.spi.CmisRegistry;
 import org.xcmis.spi.ObjectData;
-import org.xcmis.spi.StorageProvider;
 import org.xcmis.spi.model.Property;
 
 import java.io.File;
@@ -41,37 +41,25 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 public abstract class BaseTest extends TestCase
 {
 
    private static final Log LOG = ExoLogger.getLogger(BaseTest.class);
 
-   protected final String wsName = "ws1";
-
-   protected final String jcrRepositoryName = "db1";
-
-   protected String cmisRepositoryId = "cmis1";
-
-   protected String testRootFolderId;
-
    protected StandaloneContainer container;
 
-   protected SessionImpl session;
+   private CredentialsImpl credentials;
 
-   protected RepositoryImpl repository;
-
-   protected CredentialsImpl credentials;
-
-   protected RepositoryService repositoryService;
-
-   protected Node root;
-
-   protected Node relationshipsNode;
-
-   protected StorageProvider storageProvider;
+   private RepositoryService repositoryService;
 
    protected ThreadLocalSessionProviderService sessionProviderService;
+
+   // protected StorageImpl storage;
+
+   protected JcrCmisRegistry registry;
 
    private volatile static boolean shoutDown;
 
@@ -96,21 +84,15 @@ public abstract class BaseTest extends TestCase
 
       repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
 
-      repository = (RepositoryImpl)repositoryService.getRepository(jcrRepositoryName);
+      registry = (JcrCmisRegistry)container.getComponentInstanceOfType(CmisRegistry.class);
+      ConversationState cs = new ConversationState(new Identity("root"));
+      ConversationState.setCurrent(cs);
 
-      storageProvider = (StorageProvider)container.getComponentInstanceOfType(StorageProvider.class);
-
-      session = (SessionImpl)repository.login(credentials, wsName);
-
-      root = session.getRootNode();
-
+      // storage = (StorageImpl)registry.getConnection("driveA").getStorage();
       sessionProviderService =
          (ThreadLocalSessionProviderService)container
             .getComponentInstanceOfType(ThreadLocalSessionProviderService.class);
       assertNotNull(sessionProviderService);
-
-      ConversationState cs = new ConversationState(new Identity("root"));
-      ConversationState.setCurrent(cs);
 
       sessionProviderService.setSessionProvider(null, new SessionProvider(cs));
 
@@ -134,6 +116,16 @@ public abstract class BaseTest extends TestCase
    protected void tearDown() throws Exception
    {
 
+      driveTearDown("db1", "ws", "exo:drives/driveA");
+      driveTearDown("db1", "ws", "exo:drives/driveB");
+      driveTearDown("db1", "ws1", "exo:drives/driveC");
+      super.tearDown();
+   }
+
+   protected void driveTearDown(String repositoryName, String wsName, String cmisRootPath) throws Exception
+   {
+      Session session = getJcrSession(repositoryName, wsName);
+
       try
       {
          session.refresh(false);
@@ -151,30 +143,33 @@ public abstract class BaseTest extends TestCase
          {
             wc.nextNode().remove();
          }
-//         for (NodeIterator unfiled =
-//            rootNode.getNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1) + "/" + StorageImpl.XCMIS_UNFILED).getNodes(); unfiled
-//            .hasNext();)
-//         {
-//            unfiled.nextNode().remove();
-//         }
+         //         for (NodeIterator unfiled =
+         //            rootNode.getNode(StorageImpl.XCMIS_SYSTEM_PATH.substring(1) + "/" + StorageImpl.XCMIS_UNFILED).getNodes(); unfiled
+         //            .hasNext();)
+         //         {
+         //            unfiled.nextNode().remove();
+         //         }
 
          session.save();
-
-         if (rootNode.hasNodes())
+         if (session.getRootNode().hasNode(cmisRootPath))
          {
-            // clean test root
-            for (NodeIterator children = rootNode.getNodes(); children.hasNext();)
+            Node driveRoot = session.getRootNode().getNode(cmisRootPath);
+            if (driveRoot.hasNodes())
             {
-               Node node = children.nextNode();
-               if (!node.getPath().startsWith("/jcr:system") //
-                  && !node.getPath().startsWith("/exo:audit") //
-                  && !node.getPath().startsWith("/exo:organization") //
-                  && !node.getPath().equals(StorageImpl.XCMIS_SYSTEM_PATH))
+               // clean test root
+               for (NodeIterator children = driveRoot.getNodes(); children.hasNext();)
                {
-                  node.remove();
+                  Node node = children.nextNode();
+                  if (!node.getPath().startsWith("/jcr:system") //
+                     && !node.getPath().startsWith("/exo:audit") //
+                     && !node.getPath().startsWith("/exo:organization") //
+                     && !node.getPath().equals(StorageImpl.XCMIS_SYSTEM_PATH))
+                  {
+                     node.remove();
+                  }
                }
+               session.save();
             }
-            session.save();
          }
       }
       catch (Exception e)
@@ -186,7 +181,14 @@ public abstract class BaseTest extends TestCase
          session.logout();
       }
 
-      super.tearDown();
+   }
+
+   protected Session getJcrSession(String repositoryName, String wsName) throws RepositoryException,
+      RepositoryConfigurationException
+   {
+      RepositoryImpl repo = (RepositoryImpl)repositoryService.getRepository(repositoryName);
+      return repo.login(credentials, wsName);
+
    }
 
    protected void setProperty(ObjectData object, Property<?> property) throws Exception

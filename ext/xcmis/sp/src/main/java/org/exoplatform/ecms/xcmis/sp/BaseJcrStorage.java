@@ -15,7 +15,7 @@
  *  along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.ecms.xcmis.sp.jcr.exo;
+package org.exoplatform.ecms.xcmis.sp;
 
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
@@ -139,6 +139,14 @@ abstract class BaseJcrStorage implements TypeManager
    }
 
    // ================= TypeManager =================
+
+   /**
+    * @return the storageConfiguration
+    */
+   public StorageConfiguration getStorageConfiguration()
+   {
+      return storageConfiguration;
+   }
 
    /**
     * {@inheritDoc}
@@ -532,7 +540,7 @@ abstract class BaseJcrStorage implements TypeManager
          // Before this no sense to use any mapping.
          return getDocumentDefinition(nodeType, includePropertyDefinition);
       }
-      else if (nodeType.isNodeType(JcrCMIS.NT_FOLDER) || (mapping != null && mapping.getBaseType() == BaseType.FOLDER))
+      else if (nodeType.isNodeType(JcrCMIS.NT_FOLDER) || mapping != null && mapping.getBaseType() == BaseType.FOLDER)
       {
          return getFolderDefinition(nodeType, includePropertyDefinition, mapping);
       }
@@ -829,9 +837,9 @@ abstract class BaseJcrStorage implements TypeManager
       //map for quick string properties lookup
       Map<String, javax.jcr.nodetype.PropertyDefinition> propertyDefinitionsMap =
          new HashMap<String, javax.jcr.nodetype.PropertyDefinition>(propertyDefinitions.length);
-      for (int i = 0; i < propertyDefinitions.length; i++)
+      for (javax.jcr.nodetype.PropertyDefinition propertyDefinition : propertyDefinitions)
       {
-         propertyDefinitionsMap.put(propertyDefinitions[i].getName(), propertyDefinitions[i]);
+         propertyDefinitionsMap.put(propertyDefinition.getName(), propertyDefinition);
       }
 
       for (javax.jcr.nodetype.PropertyDefinition jcrPropertyDef : propertyDefinitions)
@@ -918,9 +926,7 @@ abstract class BaseJcrStorage implements TypeManager
                case javax.jcr.PropertyType.NAME :
                case javax.jcr.PropertyType.REFERENCE :
                case javax.jcr.PropertyType.STRING :
-               case javax.jcr.PropertyType.PATH :
-               case javax.jcr.PropertyType.BINARY :
-               case javax.jcr.PropertyType.UNDEFINED : {
+               case javax.jcr.PropertyType.PATH : {
                   Value[] jcrDefaultValues = jcrPropertyDef.getDefaultValues();
                   List<Choice<String>> choices = null;
                   Boolean openChoice = null;
@@ -991,7 +997,9 @@ abstract class BaseJcrStorage implements TypeManager
                   cmisPropDef = stringDef;
                   break;
                }
-
+               default :
+                  // If binary or undefined.
+                  continue;
             }
             pd.put(cmisPropDef.getId(), cmisPropDef);
          }
@@ -1224,5 +1232,13 @@ abstract class BaseJcrStorage implements TypeManager
          LOG.error(e.getMessage(), e);
       }
       return false;
+   }
+
+   /**
+    * @return the nodeTypeMapping
+    */
+   public Map<String, TypeMapping> getNodeTypeMapping()
+   {
+      return nodeTypeMapping;
    }
 }

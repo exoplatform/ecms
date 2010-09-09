@@ -15,15 +15,25 @@
  *  along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.ecms.xcmis.sp.jcr.exo;
+package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.ecms.xcmis.sp.jcr.exo.index.IndexListener;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.xcmis.search.InvalidQueryException;
+import org.xcmis.search.SearchService;
+import org.xcmis.search.Visitors;
+import org.xcmis.search.model.constraint.And;
+import org.xcmis.search.model.constraint.DescendantNode;
+import org.xcmis.search.model.source.Selector;
+import org.xcmis.search.model.source.SelectorName;
+import org.xcmis.search.parser.CmisQueryParser;
+import org.xcmis.search.parser.QueryParser;
+import org.xcmis.search.query.QueryExecutionException;
+import org.xcmis.search.result.ScoredRow;
 import org.xcmis.spi.BaseItemsIterator;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRuntimeException;
@@ -88,6 +98,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
@@ -109,7 +120,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
 
    private class TreeVisitor implements ObjectDataVisitor
    {
-      private Collection<BaseObjectData> items = new LinkedHashSet<BaseObjectData>();
+      private final Collection<BaseObjectData> items = new LinkedHashSet<BaseObjectData>();
 
       public void visit(ObjectData object)
       {
@@ -142,24 +153,27 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    /** Logger. */
    private static final Log LOG = ExoLogger.getLogger(StorageImpl.class);
 
-   private IndexListener indexListener;
-
    private RepositoryInfo repositoryInfo;
 
-   private PermissionService permissionService;
+   private final PermissionService permissionService;
 
-   public StorageImpl(Session session, IndexListener indexListener, StorageConfiguration configuration,
+   /**
+    * Searching service.
+    */
+   private SearchService searchService;
+
+   /**
+    * Cmis query parser.
+    */
+   private final QueryParser cmisQueryParser;
+
+   public StorageImpl(Session session, StorageConfiguration configuration, SearchService searchService,
       PermissionService permissionService, Map<String, TypeMapping> nodeTypeMapping)
    {
       super(session, configuration, nodeTypeMapping);
-      this.indexListener = indexListener;
+      this.searchService = searchService;
       this.permissionService = permissionService;
-   }
-
-   public StorageImpl(Session session, StorageConfiguration configuration, PermissionService permissionService,
-      Map<String, TypeMapping> nodeTypeMapping)
-   {
-      this(session, null, configuration, permissionService, nodeTypeMapping);
+      this.cmisQueryParser = new CmisQueryParser();
    }
 
    /**
@@ -171,6 +185,15 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       AllowableActions actions =
          permissionService.calculateAllowableActions(object, state != null ? state.getIdentity() : null,
             getRepositoryInfo());
+
+      if (object instanceof JcrFile)
+      {
+         // Disable creation new versions for object which represents JCR nodes
+         // created directly in JCR (not via xCMIS API).
+         actions.setCanCheckOut(false);
+         actions.setCanCheckIn(false);
+         actions.setCanCancelCheckOut(false);
+      }
       return actions;
    }
 
@@ -275,7 +298,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
       }
 
-      DocumentDataImpl document = new DocumentDataImpl(documentEntry, indexListener);
+      DocumentDataImpl document = new DocumentDataImpl(documentEntry);
       document.save();
       return document;
    }
@@ -333,7 +356,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
       }
 
-      FolderDataImpl folder = new FolderDataImpl(folderEntry, indexListener);
+      FolderDataImpl folder = new FolderDataImpl(folderEntry);
       folder.save();
       return folder;
    }
@@ -387,7 +410,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
       }
 
-      PolicyDataImpl policy = new PolicyDataImpl(policyEntry, indexListener);
+      PolicyDataImpl policy = new PolicyDataImpl(policyEntry);
       policy.save();
       return policy;
    }
@@ -442,7 +465,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          }
       }
 
-      RelationshipDataImpl relationship = new RelationshipDataImpl(relationshipEntry, indexListener);
+      RelationshipDataImpl relationship = new RelationshipDataImpl(relationshipEntry);
       relationship.save();
       return relationship;
    }
@@ -492,7 +515,9 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          catch (Exception e)
          {
             if (LOG.isDebugEnabled())
+            {
                LOG.warn("Unable delete object " + o.getObjectId());
+            }
 
             if (!continueOnFailure)
             {
@@ -536,7 +561,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          while (iterator.hasNext())
          {
             Version v = iterator.nextVersion();
-            versions.add(new DocumentVersion(fromNode(v.getNode(JcrCMIS.JCR_FROZEN_NODE)), indexListener));
+            versions.add(new DocumentVersion(fromNode(v.getNode(JcrCMIS.JCR_FROZEN_NODE))));
          }
          DocumentData latest = (DocumentData)getObjectById(vh.getVersionableUUID());
          versions.add(latest);
@@ -588,7 +613,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                continue;
             }
             Node node = wc.getNodes().nextNode();
-            PWC pwc = new PWC(fromNode(node), indexListener);
+            PWC pwc = new PWC(fromNode(node));
             if (folder != null)
             {
                for (FolderData parent : pwc.getParents())
@@ -623,14 +648,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    public String getId()
    {
       return storageConfiguration.getId();
-   }
-
-   /**
-    * @return the indexListener
-    */
-   public IndexListener getIndexListener()
-   {
-      return indexListener;
    }
 
    /**
@@ -789,10 +806,12 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             }
          }
 
+         CapabilityQuery queryCapability = searchService != null ? CapabilityQuery.BOTHCOMBINED : CapabilityQuery.NONE;
+
          repositoryInfo =
             new RepositoryInfo(getId(), getId(), rootIdentifier, CmisConstants.SUPPORTED_VERSION,
                new RepositoryCapabilities(CapabilityACL.MANAGE, CapabilityChanges.NONE,
-                  CapabilityContentStreamUpdatable.ANYTIME, CapabilityJoin.NONE, CapabilityQuery.BOTHCOMBINED,
+                  CapabilityContentStreamUpdatable.ANYTIME, CapabilityJoin.NONE, queryCapability,
                   CapabilityRendition.READ, false, true, true, true, true, true, false, false), new ACLCapability(
                   permissionMapping, Collections.unmodifiableList(permissions),
                   AccessControlPropagation.REPOSITORYDETERMINED, SupportedPermissions.BASIC), SystemIdentity.ANONIM,
@@ -835,16 +854,49 @@ public class StorageImpl extends BaseJcrStorage implements Storage
     */
    public ItemsIterator<Result> query(Query query) throws InvalidArgumentException
    {
-      // May be overridden.
-      throw new NotSupportedException("Query is not supported. ");
-   }
 
-   /**
-    * @param indexListener the indexListener to set
-    */
-   public void setIndexListener(IndexListener indexListener)
-   {
-      this.indexListener = indexListener;
+      if (searchService != null)
+      {
+         try
+         {
+            boolean isRootStorage = "/".equals(getJcrRootPath());
+            org.xcmis.search.model.Query realQuery = cmisQueryParser.parseQuery(query.getStatement());
+            if (!isRootStorage)
+            {
+
+               //add drive path constrain
+               DescendantNode rootDescendantConstraint =
+                  new DescendantNode(((Selector)realQuery.getSource()).getAlias(), "["
+                     + getRepositoryInfo().getRootFolderId() + "]");
+
+               realQuery =
+                  new org.xcmis.search.model.Query(realQuery.getSource(), realQuery.getConstraint() == null
+                     ? rootDescendantConstraint : new And(realQuery.getConstraint(), rootDescendantConstraint),
+                     realQuery.getOrderings(), realQuery.getColumns(), realQuery.getLimits());
+            }
+            List<ScoredRow> rows = searchService.execute(realQuery);
+            //check if needed default sorting
+            if (realQuery.getOrderings().size() == 0)
+            {
+               Set<SelectorName> selectorsReferencedBy = Visitors.getSelectorsReferencedBy(realQuery);
+               Collections.sort(rows, new DocumentOrderResultSorter(selectorsReferencedBy.iterator().next().getName(),
+                  this));
+            }
+            return new QueryResultIterator(rows, realQuery);
+         }
+         catch (InvalidQueryException e)
+         {
+            throw new InvalidArgumentException(e.getLocalizedMessage(), e);
+         }
+         catch (QueryExecutionException e)
+         {
+            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
+      }
+      else
+      {
+         throw new NotSupportedException("Query is not supported. ");
+      }
    }
 
    /**
@@ -866,7 +918,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          {
             if (node.getParent().isNodeType("xcmis:workingCopy"))
             {
-               return new PWC(entry, indexListener);
+               return new PWC(entry);
             }
             if (!node.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
             {
@@ -877,13 +929,13 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                   LOG.warn("Node " + node.getPath()
                      + " has not 'cmis:document' mixin type. Some operations may be disabled.");
                }
-               return new JcrFile(entry, indexListener);
+               return new JcrFile(entry);
             }
             if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
             {
-               return new DocumentVersion(entry, indexListener);
+               return new DocumentVersion(entry);
             }
-            return new DocumentDataImpl(entry, indexListener);
+            return new DocumentDataImpl(entry);
          }
          else if (typeDefinition.getBaseId() == BaseType.FOLDER)
          {
@@ -896,17 +948,17 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                   LOG.warn("Node " + node.getPath()
                      + " has not 'cmis:document' mixin type. Some operation may be disabled.");
                }
-               return new JcrFolder(entry, indexListener);
+               return new JcrFolder(entry);
             }
-            return new FolderDataImpl(entry, indexListener);
+            return new FolderDataImpl(entry);
          }
          else if (typeDefinition.getBaseId() == BaseType.POLICY)
          {
-            return new PolicyDataImpl(entry, indexListener);
+            return new PolicyDataImpl(entry);
          }
          else if (typeDefinition.getBaseId() == BaseType.RELATIONSHIP)
          {
-            return new RelationshipDataImpl(entry, indexListener);
+            return new RelationshipDataImpl(entry);
          }
          // Must never happen.
          throw new CmisRuntimeException("Unknown base type. ");
@@ -917,4 +969,20 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       }
    }
 
+   /**
+    * @return the searchService
+    */
+   public SearchService getSearchService()
+   {
+      return searchService;
+   }
+
+   /**
+    * @param searchService
+    *           the searchService to set
+    */
+   public void setSearchService(SearchService searchService)
+   {
+      this.searchService = searchService;
+   }
 }

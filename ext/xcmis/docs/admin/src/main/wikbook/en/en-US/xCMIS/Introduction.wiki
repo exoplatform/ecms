@@ -1,0 +1,47 @@
+Introduction in eXo CMIS, principles of its work and configuration.
+
+h1. CMIS specification
+
+{info}
+Content Management Interoperability Services (CMIS) Version 1.0
+OASIS Standard 
+1 May 2010
+
+[http://en.wikipedia.org/wiki/Content_Management_Interoperability_Services]
+{info}
+
+The Content Management Interoperability Services (CMIS) standard defines a domain model and Web Services and Restful AtomPub bindings that can be used by applications to work with one or more Content Management repositories/systems.
+The CMIS interface is designed to be layered on top of existing Content Management systems and their existing programmatic interfaces. 
+It is not intended to prescribe how specific features should be implemented within those CM systems, not to exhaustively expose all of the CM system.s capabilities through the CMIS interfaces. 
+Rather, it is intended to define a generic/universal set of capabilities provided by a CM system and a set of services for working with those capabilities.
+
+CMIS specification provides a Web services interface that:
+* Is designed to work over existing repositories enabling customers to build and leverage applications against multiple repositories
+* Decouples Web services and content from the content management repository, enabling customers to manage content independently
+* Provides common Web services and Web 2.0 interfaces to dramatically simplify application development
+* Is development platform and language agnostic
+* Supports composite application development and mash-up by the business or IT analyst
+
+
+h1. xCMIS project
+
+The xCMIS project [http://xcmis.org/], initially contributed to the Open Source community by [http://www.exoplatform.com|eXo Platform],is an implementation of the full stack of Java-based CMIS services. 
+xCMIS also include the client side frameworks for integrating content from different enterprise repositories according to the [http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cmis|CMIS standard]. 
+
+The project is distributed under the LGPL license. 
+You can download sources on [http://code.google.com/p/xcmis/source/checkout|Google code],
+or visit [http://code.google.com/p/xcmis/w/list|Community Wiki] for more information. 
+
+h1. eXo CMIS 
+
+eXo CMIS it is the eXo Platform service exposing eXo Content via CMIS.
+eXo CMIS offers the way of access the eXo ECMS content from CMIS 1.0 compatible Web client using REST Atom protocol.
+
+{note}
+WS-SOAP/WSDL binding is supported as well but it is not delivered in standard eXo Platform 3.0 bundle.
+{note}
+
+eXo CMIS is build on top of xCMIS embedded in Platform to expose WCM drives as CMIS repositories.
+CMIS features are implemented as a set of components deployed on eXo Container using XML files to describe the configuration of the service.
+
+

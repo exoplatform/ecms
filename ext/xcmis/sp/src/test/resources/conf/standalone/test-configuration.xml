@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd" xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
+   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
    <component>
       <key>org.exoplatform.services.log.LogConfigurationInitializer</key>
@@ -16,15 +17,15 @@
          <properties-param>
             <name>properties</name>
             <description>Log4J properties</description>
-            <property name="log4j.rootLogger" value="INFO, stdout" />
-            <property name="log4j.appender.stdout" value="org.apache.log4j.ConsoleAppender" />
-            <property name="log4j.appender.stdout.threshold" value="DEBUG" />
-            <property name="log4j.appender.stdout.layout" value="org.apache.log4j.PatternLayout" />
-            <property name="log4j.appender.stdout.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
-            <property name="log4j.appender.file" value="org.apache.log4j.FileAppender" />
-            <property name="log4j.appender.file.File" value="target/container.log" />
-            <property name="log4j.appender.file.layout" value="org.apache.log4j.PatternLayout" />
-            <property name="log4j.appender.file.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n" />
+            <property name="log4j.rootLogger" value="INFO, stdout"/>
+            <property name="log4j.appender.stdout" value="org.apache.log4j.ConsoleAppender"/>
+            <property name="log4j.appender.stdout.threshold" value="DEBUG"/>
+            <property name="log4j.appender.stdout.layout" value="org.apache.log4j.PatternLayout"/>
+            <property name="log4j.appender.stdout.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n"/>
+            <property name="log4j.appender.file" value="org.apache.log4j.FileAppender"/>
+            <property name="log4j.appender.file.File" value="target/container.log"/>
+            <property name="log4j.appender.file.layout" value="org.apache.log4j.PatternLayout"/>
+            <property name="log4j.appender.file.layout.ConversionPattern" value="%d{dd.MM.yyyy HH:mm:ss} *%-5p* [%t] %c{1}: %m (%F, line %L) %n"/>
          </properties-param>
       </init-params>
    </component>
@@ -40,9 +41,14 @@
             <init-params>
                <properties-param>
                   <name>namespaces</name>
-                  <property name="dc" value="http://purl.org/dc/elements/1.1/" />
-                  <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0" />
-                  <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0" />
+                  <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
+                  <property name="rma" value="http://www.rma.com/jcr/"/>
+                  <property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/"/>
+                  <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/"/>
+                  <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/"/>
+                  <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/"/>
+                  <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0"/>
+                  <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0"/>
                </properties-param>
             </init-params>
          </component-plugin>
@@ -56,10 +62,52 @@
                   <description>Node types configuration file</description>
                   <value>jar:/conf/cmis-nodetypes-config.xml</value>
                   <value>jar:/conf/test/test-cmis-nodetypes-config.xml</value>
+                  <value>jar:/conf/ext-nodetypes-config.xml</value>
+                  <value>classpath:/conf/standalone/nodetypes/test-nodetypes-config.xml</value>
+                  <value>classpath:/conf/standalone/nodetypes/test-nodetypes-config-extended.xml</value>
+
+
                </values-param>
             </init-params>
          </component-plugin>
       </component-plugins>
+   </component>
+
+   <component>
+      <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
+   </component>
+   <component>
+      <type>org.exoplatform.services.cms.impl.DMSConfiguration</type>
+   </component>
+
+   <component>
+      <key>org.exoplatform.services.cache.CacheService</key>
+      <jmx-name>cache:type=CacheService</jmx-name>
+      <type>org.exoplatform.services.cache.impl.CacheServiceImpl</type>
+      <init-params>
+         <object-param>
+            <name>cache.config.default</name>
+            <description>The default cache configuration</description>
+            <object type="org.exoplatform.services.cache.ExoCacheConfig">
+               <field name="name">
+                  <string>default</string>
+               </field>
+               <field name="maxSize">
+                  <int>300</int>
+               </field>
+               <field name="liveTime">
+                  <long>300</long>
+               </field>
+               <field name="distributed">
+                  <boolean>false</boolean>
+               </field>
+               <field name="implementation">
+                  <string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string>
+               </field>
+            </object>
+         </object-param>
+      </init-params>
    </component>
 
    <component>
@@ -80,37 +128,16 @@
    </component>
 
    <component>
-      <type>org.xcmis.spi.deploy.ExoContainerCmisRegistry</type>
-   </component>
-
-   <component>
-      <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageProviderImpl</type>
+      <type>org.exoplatform.ecms.xcmis.sp.DriveCmisRegistry</type>
       <init-params>
-         <object-param>
-            <name>configuration</name>
-            <object type="org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageProviderImpl$StorageProviderConfig">
-               <field name="storage">
-                  <object type="org.exoplatform.ecms.xcmis.sp.jcr.exo.StorageConfiguration">
-                     <field name="id">
-                        <string>cmis1</string>
-                     </field>
-                     <field name="repository">
-                        <string>db1</string>
-                     </field>
-                     <field name="workspace">
-                        <string>ws1</string>
-                     </field>
-                     <field name="indexConfiguration">
-                        <object type="org.xcmis.search.config.IndexConfiguration">
-                           <field name="indexDir">
-                              <string>target/temp/index/db1/ws1</string>
-                           </field>
-                        </object>
-                     </field>
-                  </object>
-               </field>
-            </object>
-         </object-param>
+         <value-param>
+            <name>indexDir</name>
+            <value>target/temp/index/</value>
+         </value-param>
+         <value-param>
+            <name>repository</name>
+            <value>db1</value>
+         </value-param>
       </init-params>
    </component>
 
@@ -123,7 +150,7 @@
       <init-params>
          <properties-param>
             <name>locations</name>
-            <property name="db1" value="ws1" />
+            <property name="db1" value="ws1"/>
          </properties-param>
       </init-params>
    </component>
@@ -157,10 +184,15 @@
          <properties-param>
             <name>default-properties</name>
             <description>Default initial context properties</description>
-            <property name="java.naming.factory.initial" value="org.exoplatform.services.naming.SimpleContextFactory" />
+            <property name="java.naming.factory.initial" value="org.exoplatform.services.naming.SimpleContextFactory"/>
          </properties-param>
       </init-params>
    </component>
+   <component>
+      <key>org.exoplatform.services.cms.drives.ManageDriveService</key>
+      <type>org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl</type>
+   </component>
+
 
    <external-component-plugins>
       <target-component>org.exoplatform.services.naming.InitialContextInitializer</target-component>
@@ -184,10 +216,10 @@
             <properties-param>
                <name>ref-addresses</name>
                <description>ref-addresses</description>
-               <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
-               <property name="url" value="jdbc:hsqldb:file:target/temp/data/portal" />
-               <property name="username" value="sa" />
-               <property name="password" value="" />
+               <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+               <property name="url" value="jdbc:hsqldb:file:target/temp/data/portal"/>
+               <property name="username" value="sa"/>
+               <property name="password" value=""/>
             </properties-param>
          </init-params>
       </component-plugin>
@@ -211,13 +243,229 @@
             <properties-param>
                <name>ref-addresses</name>
                <description>ref-addresses</description>
-               <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
-               <property name="url" value="jdbc:hsqldb:file:target/temp/data/jcr" />
-               <property name="username" value="sa" />
-               <property name="password" value="" />
+               <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+               <property name="url" value="jdbc:hsqldb:file:target/temp/data/jcr"/>
+               <property name="username" value="sa"/>
+               <property name="password" value=""/>
             </properties-param>
          </init-params>
       </component-plugin>
    </external-component-plugins>
+   <external-component-plugins>
+      <target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>
+      <component-plugin>
 
+         <name>manage.drive.plugin</name>
+         <set-method>setManageDrivePlugin</set-method>
+         <type>org.exoplatform.services.cms.drives.impl.ManageDrivePlugin</type>
+         <description>Nothing</description>
+         <init-params>
+
+            <object-param>
+               <name>driveA</name>
+               <description>Drive A</description>
+               <object type="org.exoplatform.services.cms.drives.DriveData">
+                  <field name="name">
+                     <string>driveA</string>
+                  </field>
+                  <field name="repository">
+                     <string>db1</string>
+                  </field>
+                  <field name="workspace">
+                     <string>ws</string>
+                  </field>
+                  <field name="permissions">
+                     <string>*:any</string>
+                  </field>
+                  <field name="homePath">
+                     <string>/exo:drives/driveA</string>
+                  </field>
+                  <field name="icon">
+                     <string></string>
+                  </field>
+                  <field name="views">
+                     <string>authoring-view</string>
+                  </field>
+                  <field name="viewPreferences">
+                     <boolean>false</boolean>
+                  </field>
+                  <field name="viewNonDocument">
+                     <boolean>true</boolean>
+                  </field>
+                  <field name="viewSideBar">
+                     <boolean>true</boolean>
+                  </field>
+                  <field name="showHiddenNode">
+                     <boolean>false</boolean>
+                  </field>
+                  <field name="allowCreateFolders">
+                     <string>nt:folder,nt:unstructured</string>
+                  </field>
+                  <field name="allowNodeTypesOnTree">
+                     <string>*</string>
+                  </field>
+               </object>
+            </object-param>
+
+            <object-param>
+               <name>driveB</name>
+               <description>Drive B</description>
+               <object type="org.exoplatform.services.cms.drives.DriveData">
+                  <field name="name">
+                     <string>driveB</string>
+                  </field>
+                  <field name="repository">
+                     <string>db1</string>
+                  </field>
+                  <field name="workspace">
+                     <string>ws</string>
+                  </field>
+                  <field name="permissions">
+                     <string>*:any</string>
+                  </field>
+                  <field name="homePath">
+                     <string>/exo:drives/driveB</string>
+                  </field>
+                  <field name="icon">
+                     <string></string>
+                  </field>
+                  <field name="views">
+                     <string>wcm-category-view</string>
+                  </field>
+                  <field name="viewPreferences">
+                     <boolean>false</boolean>
+                  </field>
+                  <field name="viewNonDocument">
+                     <boolean>true</boolean>
+                  </field>
+                  <field name="viewSideBar">
+                     <boolean>true</boolean>
+                  </field>
+                  <field name="showHiddenNode">
+                     <boolean>false</boolean>
+                  </field>
+                  <field name="allowCreateFolders">
+                     <string>nt:folder,nt:unstructured</string>
+                  </field>
+                  <field name="allowNodeTypesOnTree">
+                     <string>*</string>
+                  </field>
+               </object>
+            </object-param>
+            
+             <object-param>
+               <name>driveC</name>
+               <description>Drive C</description>
+               <object type="org.exoplatform.services.cms.drives.DriveData">
+                  <field name="name">
+                     <string>driveC</string>
+                  </field>
+                  <field name="repository">
+                     <string>db1</string>
+                  </field>
+                  <field name="workspace">
+                     <string>ws1</string>
+                  </field>
+                  <field name="permissions">
+                     <string>*:any</string>
+                  </field>
+                  <field name="homePath">
+                     <string>/exo:drives/driveC</string>
+                  </field>
+                  <field name="icon">
+                     <string></string>
+                  </field>
+                  <field name="views">
+                     <string>wcm-category-view</string>
+                  </field>
+                  <field name="viewPreferences">
+                     <boolean>false</boolean>
+                  </field>
+                  <field name="viewNonDocument">
+                     <boolean>true</boolean>
+                  </field>
+                  <field name="viewSideBar">
+                     <boolean>true</boolean>
+                  </field>
+                  <field name="showHiddenNode">
+                     <boolean>false</boolean>
+                  </field>
+                  <field name="allowCreateFolders">
+                     <string>nt:folder,nt:unstructured</string>
+                  </field>
+                  <field name="allowNodeTypesOnTree">
+                     <string>*</string>
+                  </field>
+               </object>
+            </object-param>
+
+         </init-params>
+      </component-plugin>
+
+   </external-component-plugins>
+   <external-component-plugins>
+      <target-component>org.exoplatform.services.cms.impl.DMSConfiguration</target-component>
+      <component-plugin>
+         <name>dmsconfiguration.plugin</name>
+         <set-method>addPlugin</set-method>
+         <type>org.exoplatform.services.cms.impl.DMSRepositoryConfiguration</type>
+         <description>DMS Repository configuration</description>
+         <init-params>
+            <value-param>
+               <name>repository</name>
+               <value>db1</value>
+            </value-param>
+            <value-param>
+               <name>systemWorkspace</name>
+               <value>ws</value>
+            </value-param>
+         </init-params>
+      </component-plugin>
+   </external-component-plugins>
+
+   <external-component-plugins>
+      <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+      <component-plugin>
+         <name>addPaths</name>
+         <set-method>addPlugin</set-method>
+         <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
+         <init-params>
+            <object-param>
+               <name>sites.content.storage.configuration</name>
+               <description>config for storage to store running sites content</description>
+               <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+                  <field name="repository">
+                     <string>db1</string>
+                  </field>
+                  <field name="workspaces">
+                     <collection type="java.util.ArrayList">
+                        <value>
+                           <string>ws</string>
+                        </value>
+                        <value>
+                           <string>ws1</string>
+                        </value>
+
+                     </collection>
+                  </field>
+                  <field name="jcrPaths">
+                     <collection type="java.util.ArrayList">
+                        <value>
+                           <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+                              <field name="alias">
+                                 <string>exoDrivesPath</string>
+                              </field>
+                              <field name="path">
+                                 <string>/exo:drives</string>
+                              </field>
+                           </object>
+                        </value>
+
+                     </collection>
+                  </field>
+               </object>
+            </object-param>
+         </init-params>
+      </component-plugin>
+   </external-component-plugins>
 </configuration>

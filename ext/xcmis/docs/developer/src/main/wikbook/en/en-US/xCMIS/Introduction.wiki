@@ -1,0 +1,22 @@
+eXo Platform provides CMIS support using xCMIS project and WCM Storage provider.
+
+h1. Why CMIS?
+
+Idea of a standard to make it easier to share and manage content and an Organization for the 
+Advancement of Structured Information Standards (OASIS) technical committee was formed to write a 
+formal specification of a Content Management Interoperability (CMIS) standard.
+
+Two mutual targets which caused appearance of the specification:
+# Content integration - ensuring of using the content from various repositories, even created by different vendors in a single application, such as the portal, CMS, etc.
+# Access unification - a minimum interface provided by content repository to decouple the content storage from the application's business logic.
+
+{tip:title=Intro in CMIS basis}
+  Find good CMIS intro on [http://gazarenkov.blogspot.com/2010/01/xcmis1-cmis-in-nutshell.html]
+{tip}
+
+
+xCMIS project embedded in Platform to expose WCM drives as CMIS repositories.
+CMIS feature is implemented as a set of components deployed on eXo Container using XML files to describe the configuration of the service.
+
+
+

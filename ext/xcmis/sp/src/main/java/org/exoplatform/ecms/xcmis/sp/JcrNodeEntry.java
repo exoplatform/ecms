@@ -15,7 +15,7 @@
  *  along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.ecms.xcmis.sp.jcr.exo;
+package org.exoplatform.ecms.xcmis.sp;
 
 import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -88,7 +88,7 @@ import javax.jcr.nodetype.NodeType;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
- * @version $Id: JcrNodeEntry.java 1262 2010-06-09 10:07:01Z andrew00x $
+ * @version $Id$
  */
 class JcrNodeEntry
 {
@@ -302,11 +302,14 @@ class JcrNodeEntry
       if (rootPath.length() > 1 && rootPath.endsWith("/"))
       {
          rootPath = rootPath.substring(0, rootPath.length() - 1);
-         return nodePath.substring(rootPath.length());
-       }
+      }
       if (rootPath.equals(nodePath))
       {
          return "/";
+      }
+      if (rootPath.length() > 1)
+      {
+         nodePath = nodePath.substring(rootPath.length());
       }
       return nodePath;
    }
@@ -600,11 +603,37 @@ class JcrNodeEntry
       return relationships;
    }
 
+   String getContentStreamId()
+   {
+      if (getBaseType() == BaseType.DOCUMENT)
+      {
+         String id = getString(CmisConstants.CONTENT_STREAM_ID);
+         if (id == null)
+         {
+            try
+            {
+               Node contentNode = node.getNode(JcrCMIS.JCR_CONTENT);
+               long contentLength = contentNode.getProperty(JcrCMIS.JCR_DATA).getLength();
+               if (contentLength > 0)
+               {
+                  id = ((ExtendedNode)contentNode).getIdentifier();
+               }
+            }
+            catch (RepositoryException re)
+            {
+               throw new CmisRuntimeException(re.getMessage(), re);
+            }
+         }
+         return id;
+      }
+      return null;
+   }
+
    ContentStream getContentStream(String streamId)
    {
       try
       {
-         if (streamId == null || streamId.equals(getString(CmisConstants.CONTENT_STREAM_ID)))
+         if (streamId == null || streamId.equals(getContentStreamId()))
          {
             if (getBaseType() != BaseType.DOCUMENT)
             {

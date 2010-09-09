@@ -72,6 +72,12 @@
          <groupId>org.exoplatform.ecms</groupId>
          <artifactId>exo-ecms-core-services</artifactId>
          <version>${project.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>org.slf4j</groupId>
+               <artifactId>slf4j-jdk14</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
    </dependencies>
    <build>

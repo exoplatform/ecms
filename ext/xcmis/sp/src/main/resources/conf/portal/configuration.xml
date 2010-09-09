@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd" xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
+   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
    <component>
       <key>org.exoplatform.services.document.DocumentReaderService</key>
@@ -7,12 +8,13 @@
    </component>
    
    <component>
-      <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry</type>
+      <type>org.exoplatform.ecms.xcmis.sp.DriveCmisRegistry</type>
       <init-params>
-         <value-param>
-            <name>rootIndexDir</name>
+         <!-- Disabled by default. Uncomment if you need query support in CMIS. -->
+         <!-- value-param>
+            <name>indexDir</name>
             <value>${gatein.jcr.index.data.dir}/cmis-index${container.name.suffix}</value>
-         </value-param>
+         </value-param-->
          <value-param>
             <name>exo.cmis.renditions.persistent</name>
             <value>true</value>
@@ -25,7 +27,7 @@
          </values-param>
       </init-params>
    </component>
-   
+
    <external-component-plugins>
       <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
       <component-plugin>
@@ -35,8 +37,8 @@
          <init-params>
             <properties-param>
                <name>namespaces</name>
-               <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0" />
-               <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0" />
+               <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0"/>
+               <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0"/>
             </properties-param>
          </init-params>
       </component-plugin>
@@ -53,5 +55,5 @@
          </init-params>
       </component-plugin>
    </external-component-plugins>
-   
+
 </configuration>

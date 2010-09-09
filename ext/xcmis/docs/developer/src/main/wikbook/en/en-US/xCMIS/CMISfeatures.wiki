@@ -1,0 +1,52 @@
+
+CMIS specification prescribes:
+* Domain model
+* Services
+
+h1. CMIS Domain Model
+Domain model of CMIS is pretty simple and non-restrictive, it defines a Repository as a container and an entry point to the objects.
+
+Domain Model entities for persistent information:
+** Repository, provides access to CMIS Repository 
+** Object, for entities managed by CMIS
+** Object-Type, defines a fixed and non-hierarchical set of properties ("schema") that all objects of that type have  
+** Document Object, elementary information entities
+** Folder Object, collection of file-able objects
+** Relationship Object, describes semantically a dependent object
+** Policy Object, represents an administrative policy
+** Access Object, defines permissions 
+** Versioning, for support of versioning for Document objects
+** Query, type-based query in a simplified SQL SELECT statement. 
+** Change Log, mechanism to allow applications to discover changes that have occurred to objects stored
+
+{note}
+Query language is defined by the SQL-92 standard, plus the extensions, in conjunction with the model mapping defined by CMIS's relational view.
+{note}
+
+Repository manages entities called Object. All objects are classified by Object Type which declares that all objects of given type 
+have common set of Properties and Attributes (such as TypeID, Parent, Display Name and others). There are four base types 
+Document, Folder, Relationship, and Policy which inherit Object as it shown on diagram below. 
+In addition you can extend those basic types of modifying a set of their properties.
+
+!cmis-dm.jpg!
+
+Document is similar to a file, it has properties to hold document metadata, such as the document author and modification date and custom properties. It can also contain a content stream (in many cases that is why it needed) and renditions, such as a thumbnail view of a document.
+Folder is self-explained, it is container for other objects. Note, that apart from default hierarchical structure, CMIS is optionally able to store objects in multiple folders or in no folders at all (so called multifiling and unfiling capabilities)
+Relationship object defines a relationship between two objects (target and source). An object can have multiple relationships with other objects.
+Policy is a way of defining administrative policies to manage objects. For example, you can use a CMIS policy to define which documents are subject to retention policies.
+
+h1. CMIS Services
+The CMIS specification also defines a set of services to access and manage the content or repository including:
+* Repository Services: are used to discover information about the repository, including information about the repository and the object-types defined for the repository
+* Navigation Services: are used to traverse the folder hierarchy in a CMIS Repository, and to locate Documents that are checked out
+* Object Services: provides ID-based CRUD (Create, Retrieve, Update, Delete), operations on objects in a Repository
+* Multi-filing Services: (optional) make it possible to put object to several filders (multi-filing) or outside folder hierarchy (un-filing)
+* Discovery Services: are used to search for query-able objects within the Repository
+* Versioning Services: are used to navigate or update a Document Version Series (checkOut, cancelCheckOut, getPropertiesOfLatestVersion, getAllVersions, deleteAllVersions)
+* Relationship Services: (optional) are used to retrieve the dependent Relationship objects associated with an independent object
+* Policy Services: (optional) are used to apply or remove a policy object to a controllablePolicy object
+* ACL Services: are used to manage the Access Control Llist of an object.
+
+As you can see, not that much and a repository might not implement certain optional capabilities, but is still considered CMIS-compliant.
+Each of the services has two bindings which defines the way messages will be serialized and wired. Both bindings based on HTTP, one uses the Atom Publishing Protocol, and the other uses Web services based on SOAP. Specification obliges CMIS compatible repositories support both but does not limit to have more (first possible candidates are JSON).
+

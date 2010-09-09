@@ -1,0 +1,17 @@
+h1. Introduction
+{include:document="xCMIS/Introduction.wiki" /}
+
+h1. Configuration
+{include:document="xCMIS/Configure.wiki" /}
+{include:document="xCMIS/Authentication.wiki" /}
+
+h1. Service JARs
+{include:document="xCMIS/xCMISfiles.wiki" /}
+
+h1. Miscellaneous and Tips
+{include:document="xCMIS/Miscellaneous.wiki" /}
+
+h1. Links
+{include:document="xCMIS/Links.wiki" /}
+
+

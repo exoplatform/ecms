@@ -15,7 +15,7 @@
  *  along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-package org.exoplatform.ecms.xcmis.sp.jcr.exo;
+package org.exoplatform.ecms.xcmis.sp;
 
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.xcmis.spi.CmisRuntimeException;
