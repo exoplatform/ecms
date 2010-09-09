@@ -1,35 +1,35 @@
 h1. Integration with eXo WCM
 
-eXo's Web Content Management system provides CMIS specified access to its content storage features:
+The eXo Web Content Management system provides CMIS  the given access to its content storage features:
 * WCM drives
 * Symlinks
 * Categories
 
-Work with CMIS are based on reference documents returned from the server. Result document contains links to other services are related to this document service.
+Working with CMIS is based on reference documents returned from the server. The requested documents, which contain links to other services, are related to this document service.
 
 {note}
-Notes for usecases:
-To access eXo CMIS services from client side *[Curl|http://curl.haxx.se/download.html]* tool used.
-CMIS AtomPub binding used. This binding is based upon the Atom (RFC4287) and Atom Publishing Protocol (RFC5023).
-WebServices (SOAP binding) isn't present in Platfporm 3.x.
+Notes for use cases:
+To access the eXo CMIS services from the client side, use the tool *[Curl|http://curl.haxx.se/download.html]*.
+CMIS AtomPub binding which is based upon the Atom (RFC4287) and Atom Publishing Protocol (RFC5023) will be used.
+WebServices (SOAP binding) is not covered in the Platform 3.x.
 {note}
 
 h2. WCM drives as CMIS Repositories
 
-WCM drive is exposes as isolated Repository via CMIS service. Operations on the Repository will reflect the Drive immediatelly. 
+The WCM drive is used to expose as an isolated repository via the CMIS service. Operations on the repository will reflect the drive immediately. 
 
 h3. USERCASE: Browse Drives via getRepository
 
-* Login to the website as a user with developer role
-* Open Group \-> Sites Explorer, you can see set of drives of WCM such as *Sites Management*, *DMS Administration* etc.
-* Get list of these WCM drives via CMIS using Curl, asking getRepositories service:
+* Login to the website as a user with the developer role.
+* Open *Group | Sites Explorer*, you can see the drives set of WCM, such as *Sites Management*, *DMS Administration*.
+* Get the list of these WCM drives via CMIS using Curl, asking getRepositories service:
 {screen}
 curl -o getrepos.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/ 
 {screen}
 
-Result file (getrepos.xml) contains set of Repositories in AtomPub format.
-Root element represents set *workspaces* representing *WCM drives* related resources, e.g.
-{code:language=xml}
+The requested file (getrepos.xml) contains the set of Repositories in the AtomPub format.
+The root element represents the set of *workspaces* representing *WCM drives* related to resources, e.g.
+{code}
    <workspace>
       <atom:title type="text">DMS Administration</atom:title>
       <cmisra:repositoryInfo xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/">
@@ -84,14 +84,14 @@ Root element represents set *workspaces* representing *WCM drives* related resou
    </workspace>
 {code}
 
-Here are set of services collections and predefined templates can be used from client side to request resources related to this repository.
-E.g. to get WCM node of *DMS Administration* drive by path *objectbypath* template can be used:
+Here are the collection of services and predefined templates which can be used from the client side to request resources related to this repository.
+For example, to get the WCM node of *DMS Administration* drive by path, the *objectbypath* template can be used:
 {code}
 http://localhost:8080/rest/private/cmisatom/DMS%20Administration/objectbypath?path={path}&amp;filter={filter}&amp;includeAllowableActions={includeAllowableActions}&amp;includePolicyIds={includePolicyIds}&amp;includeRelationships={includeRelationships}&amp;includeACL={includeACL}&amp;renditionFilter={renditionFilter}
 {code}
-where parameters:
+where parameters include:
 * Required:
-** ID repositoryId: The identifier for the Repository.
+** ID repositoryId: The identifier for the repository.
 ** String path: The path to the object.
 * Optional:
 ** String filter
@@ -102,32 +102,38 @@ where parameters:
 ** Boolean includeACL
 
 {note}
-Find full description of all sepcefied services in CMIS specefication.
+Find full description of all sepcefied services in the CMIS specefication.
 {note}
 
 
 h2. WCM Symlinks
 
-Sylinks used to be able to organize virtual access to a documents in WCM, it's implemented like links in Unix/Linux/Mac OS (refer to ln command for more details).
+Symlinks are used to organize the virtual access to documents in WCM, which is implemented like links in Unix/Linux/Mac OS (refer to ln command for more details).
 {note}
 JCR exo:symlink nodetype used for such type nodes.
 {note}
 
 h3. USERCASE: Follow Symlinks
 
-* Login to the website as a user with developer role
-* Open Group \-> Sites Explorer, select *Sites Management*, go to folder /acme/documents
-* Upload any file (e.g. test.txt) to *Products* events
 
+* Login to the acme website as a user with the developer role.
+* Open *Group | Sites Explorer*, select *Sites Management*, go to folder /acme/documents.
+* Upload any file (e.g. test.txt) to *Products* events.
+* In the toolbar, click *Group | Developers | CMISexpert*.
+* Select the *Managed Sites* repository (WCM drive) in the *Repositories* panel.
+* Go to folder /acme/events/All/Products and find the file which is just uploaded in *Site Explorer* there.
+It is a symlink to the actual file stored somewhere by path with the current date at the end, like /sites content/live/acme/web contents/2010/08/18/test.txt.
+* Find the actual file respectively in /acme/web contents/2010/08/18/test.txt.
+* Check if both locations reflects to the same content (of file uploaded via *Sites Explorer*).
 * Get content of folder /acme/events/All/Products via CMIS:
 {screen}
 curl -o products.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/objectbypath?path=/acme/documents
 {screen}
 
-Result file (products.xml) contains entry with information about the folder:
- * The list of properties for the object (such as node Id or type)
- * Allowable Actions can be performed on the document. e.g. request childrens list.
- * ACL and policies information
+The requested file (products.xml) contains the entry with information about the folder.
+* The list of properties for the object (such as node Id or type).
+* Allowable Actions can be performed on the document; for example, requesting the childrens list.
+* ACL and policies information.
 {code:xml}
 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
    <id>8bedf7d10a14f89c5509eef77f0a8943</id>
@@ -215,12 +221,28 @@ Result file (products.xml) contains entry with information about the folder:
 </entry>
 {code}
  
-To get file have uploaded above use *children* service to get list of child nodes of /acme/documents, find this service URL in the response XML above:
+To get the file which has uploaded above, use the *children* service to get the list of child nodes of /acme/documents. Find this service URL in the response XML above:
 {screen}
 curl -o childs.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/children/8bedf7d10a14f89c5509eef77f0a8943
 {screen}
 
-In the response result (childs.xml) find entry related to *test.txt* file uploaded via *Sites Explorer*.
+
+*Browse Categories*
+* Login to the acme website as a user with developer role.
+* Open *Group | Sites Explorer*, select *Sites Management*, go to the folder /acme/categories/acme/News.
+* Upload any file (e.g. news.txt) to *News* category.
+* In *Sites Explorer*, go to the folder /acme/documents.
+* Upload any file (e.g. document.txt) to *documents*, enter this document by double-clicking, then change its categories clicking *Manage Categories* in the *Publication* menu and set both *acme/Economy* and *acme/News* categories to the document.
+!sitesexplorer-categories.png|thumbnail,border=1!
+* In the toolbar, click *Group | Developers | CMISexpert*.
+* Select the *Managed Sites* repository (WCM drive) in the *Repositories* panel.
+* Go to the folder /acme/categories/acme/News and find two files which are just uploaded in *Site Explorer* (news.txt and document.txt).
+!xcmis-2file-news-catgory.png|thumbnail,border=1!
+* Go to the folder /acme/categories/acme/Economy and only one file uploaded in *Site Explorer* (document.txt)
+* Check if news.txt is stored in /acme/web contents.
+* Check if document.txt is stored in /acme/documents.
+
+In the requested file (childs.xml), find the entry related to *test.txt* file uploaded via *Sites Explorer*.
 {code:xml}
    <entry xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
       <id>9e72ceb2c0a88901312de3fac548c5c0</id>
@@ -350,19 +372,58 @@ In the response result (childs.xml) find entry related to *test.txt* file upload
    </entry>
 {code}
 
-Then get *test.txt* file content via CMIS use *file* service:
+
+Then, get the *test.txt* file content via CMIS by using the *file* service:
 {screen}
 curl -o test.txt -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/9e72ceb2c0a88901312de3fac548c5c0
 {screen}
 
-Get result in test.txt file in local folder.
+Get results in the test.txt file in the local folder.
 
+
+* Login to the acme website as a user with the developer role.
+* In the toolbar, click *Group | Developers | CMISexpert*.
+* Select the *DMS Administration* repository (WCM drive) in the *Repositories* panel on left.
+* Go to the folder /exo:ecm/views/templates/Content List Viewer/list-by-folder.
+* Double-click the *OneColumnCLVTemplate.gtmpl* file and download it to the local folder on the disk.
+* Modify the local file, change the div element at the beginning of template: 
+{code:language=xml}
+    <div class="TitleBarM">
+      $header
+      <%if (isShowRssLink) {
+      %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
+      }%>
+    </div>
+  {code}
+with a link to the eXo site:
+{code:language=xml}
+    <div class="TitleBarM">
+      $header
+      <%if (isShowRssLink) {
+      %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a>
+      <a href="http://www.exoplatform.org/">eXo site</a><%
+      }%>
+    </div>
+{code}
+* Open *Group | Sites Explorer*, select *DMS Administration*, go to file /exo:ecm/views/templates/Content List Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl.
+* Open the file *View Node Properties* in *Sites Explorer*, and copy *jcr:uuid* of the file.
+It is possible to get the Node ID through the CMIS API call by Node's path, then check out the response XML for content download URL. The command is as follows:
+{screen}
+curl -o OneColumnCLVTemplate.gtmpl.Entry.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/DMS%20Administration/objectbypath?path=/exo:ecm/views/templates/Content%20List%20Viewer/list-by-folder/OneColumnCLVTemplate.gtmpl
+{screen}
 
 h2. Modify WCM via CMIS
 
-To update any file via CMIS use *file* service and PUT request.
-using same file as in previous paragraph (/acme/documents, id:9e72ceb2c0a88901312de3fac548c5c0)
+
+{note}
+* Upload the modified local file using the command with substitute of *<file_ID>* to *jcr:uuid* of the file. Note that you should run this command from the folder where the local file is stored.
+
+To update any file via CMIS, use the *file* service and the PUT request. Use the same file as in the previous paragraph (/acme/documents, id:9e72ceb2c0a88901312de3fac548c5c0).
+
 {screen}
 curl -T test.txt -X PUT -H "Content-Type:text/plain; charset=UTF-8" -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/9e72ceb2c0a88901312de3fac548c5c0
 {screen}
+
+* Go to the Acme homepage and see changes applied from the local file and find the link to the eXo site on the portlet header.
+
 

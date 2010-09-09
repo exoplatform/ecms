@@ -1,7 +1,7 @@
 
-List of JAR files required for eXo CMIS normal work.
+The list of required JAR files for eXo CMIS to work correctly:
 
-xCMIS project jars (actual for xCMIS 1.1.x versions):
+xCMIS project jars (actual for the xCMIS 1.1.x versions):
 * xcmis-renditions-X.X.X.jar
 * xcmis-restatom-X.X.X.jar
 * xcmis-search-model-X.X.X.jar
@@ -9,7 +9,7 @@ xCMIS project jars (actual for xCMIS 1.1.x versions):
 * xcmis-search-service-X.X.X.jar
 * xcmis-spi-X.X.X.jar
 
-WCM Storage provider for xCMIS (uses same version as WCM/ECMS system):
+WCM Storage provider for xCMIS (uses the same version as WCM/ECMS system):
 * exo-ecms-ext-xcmis-sp-Y.Y.Y.jar 
 
 xCMIS dependencies (for 1.1.x):
