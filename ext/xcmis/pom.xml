@@ -8,9 +8,10 @@
   </parent>
   <artifactId>exo-ecms-ext-xcmis</artifactId>
   <packaging>pom</packaging>
-  <name>eXo ECM Suite :: Ext :: xCMIS</name>
+  <name>eXo ECM Suite :: Ext :: eXo CMIS</name>
   <description>eXo Entreprise Content Management Suite :: Extensions :: xCMIS</description>
   <modules>
     <module>sp</module>
+    <module>docs</module>
   </modules>
 </project>
