@@ -150,4 +150,17 @@
   	</label>
   </UICLVConfigContextualFolderRadioBoxInput>
   
+  <PublicationStates>
+    <archived>Archived</archived>
+    <obsolete>Obsolete</obsolete>
+    <unpublished>Unpublished</unpublished>
+    <enrolled>Enrolled</enrolled>
+    <draft>Draft</draft>
+    <pending>Pending</pending>
+    <approved>Approved</approved>
+    <inreview>In Review</inreview>
+    <staged>Staged</staged>
+    <published>Published</published>
+  </PublicationStates>  
+  
 </bundle>

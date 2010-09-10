@@ -38,6 +38,9 @@
 										  &nbsp;
 										</a>         
 									</div>
+									<div class="EdittingCurrentState" style="float: right">
+                    <%=uicomponent.getCurrentState() %>
+                  </div>
 									<%}%>
 									<div style="float: right">
 										<a href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Edit")%>">

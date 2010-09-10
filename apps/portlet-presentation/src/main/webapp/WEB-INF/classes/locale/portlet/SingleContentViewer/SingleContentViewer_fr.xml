@@ -129,4 +129,18 @@
   		<SelectFolderPath>Select folder path</SelectFolderPath>
   	</title>  	
   </UISCVConfigItemPathFormInputSet>
+  
+  <PublicationStates>
+    <archived>Archivé</archived>
+    <obsolete>Obsolète</obsolete>
+    <unpublished>Non publié</unpublished>
+    <enrolled>Créé</enrolled>
+    <draft>Brouillon</draft>
+    <pending>Rédigé</pending>
+    <approved>Validé</approved>
+    <inreview>En revue</inreview>
+    <staged>Prêt à publier</staged>
+    <published>Publié</published>
+  </PublicationStates>
+  
 </bundle>

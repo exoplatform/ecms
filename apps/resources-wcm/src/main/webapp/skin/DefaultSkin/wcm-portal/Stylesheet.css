@@ -286,13 +286,18 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
 }
 
 .UIPresentationContainer .EdittingToolBarContainer{
-  width: 60px;
+  width: 160px;
 }
 
 .EdittingToolBarContainer .EdittingToolBar {
   position:absolute;
   right:0;
   top:-20px;
+}
+
+.EdittingToolBarContainer .EdittingCurrentState {
+  padding-left: 3px;
+  color: #5E6D7B;
 }
 
 .EdittingToolBarContainer .EdittingToolBar .EdittingToolBarL {
@@ -335,7 +340,7 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
   top:0;
   z-index:1;
   float: right;
-  width: 55px;
+  width: 160px;
   display: none;
 }
 
@@ -354,6 +359,11 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
   background: url('icons/EdittingContentC.png') repeat-x;
   line-height: 20px;
   padding:2px 0 0;
+}
+
+.EdittingContent .EdittingCurrentState {
+  padding-left: 3px;
+  color: #5E6D7B;
 }
 
 .EditContentIcon {

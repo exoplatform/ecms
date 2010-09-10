@@ -24,6 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.Map.Entry;
 
 import javax.jcr.Node;
@@ -40,7 +41,6 @@ import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -639,6 +639,16 @@ public class UICLVPresentation extends UIContainer {
 				sb.append("						  &nbsp;");
 				sb.append("						</a>");    
 				sb.append("					</div>");
+			}
+			if (viewNode.hasProperty("publication:currentState")) {
+			  PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+			  String state = viewNode.getProperty("publication:currentState").getValue().getString(); 
+			  try {
+			    state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
+			  } catch (MissingResourceException e) { }
+			  sb.append("         <div class=\"EdittingCurrentState\" style=\"float: right\">");        
+			  sb.append(""+state);
+			  sb.append("         </div>");
 			}
 			sb.append("				</div>");
 			sb.append("			</div>");
