@@ -27,6 +27,8 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.application.UIPortlet;
+import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -70,6 +72,21 @@ public class UIPresentationContainer extends UIContainer{
     portletPreferences = portletRequestContext.getRequest().getPreferences();    
 	}
 	
+	/**
+	 * Gets the bar info show.
+	 * 
+	 * @return the value for info bar setting
+	 * 
+	 * @throws Exception the exception
+	 */
+	@SuppressWarnings("unchecked")
+	public boolean isShowInfoBar() throws Exception {		
+		UIPortal uiPortal = Util.getUIPortal();		
+    UIPortlet uiPortlet = Util.findUIComponent(uiPortal, UIPortlet.class, UIPresentationContainer.class);				
+		if (uiPortlet.getShowInfoBar())
+			return true;
+		return false;
+	}
 	
 	/**
 	 * Gets the title.
@@ -80,7 +97,8 @@ public class UIPresentationContainer extends UIContainer{
 	 * 
 	 * @throws Exception the exception
 	 */
-	public String getTitle(Node node) throws Exception {
+	public String getTitle(Node node) throws Exception {				
+		
 		String title = null;
 		if (node.hasProperty("exo:title")) {
 			title = node.getProperty("exo:title").getValue().getString();
