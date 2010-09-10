@@ -21,6 +21,8 @@ See also:
 * [Radio field|#radio-field]
 * [Select box field|#selectbox-field]
 * [Checkbox field|#checkbox-field]
+* [Mixin field|#mixin-field]
+* [Action field|#action-field]
 
 {warning}
 Note that {{mixintype}} can be used only in the root node  field (commonly known as the name field)
@@ -59,7 +61,7 @@ h2. Addition parameters
 See also: [Common parameters|#common-params]
 
 h2. Example
-{code:lang=java}
+{code:language=java}
 <%
 	String[] fieldDescription = ["jcrPath=/node/exo:description", "validate=empty"] ;
 	uicomponent.addTextAreaField("description", fieldDescription)
@@ -224,10 +226,35 @@ _None_
 See also: [Common parameters|#common-params]
 
 h2. Example 
-{code:lang=java}
+{code:language=java}
 <%
 	String[] fieldId = ["jcrPath=/node", "editable=false", "visible=if-not-null"] ;
 	uicomponent.addMixinField("id", fieldId) ; 
+%>
+{code}
+
+h1. Action Field {anchor:id=action-field}
+
+h2. Addition parameters
+|| *Parameter* || *Type* || *Required* || *Description* || *Example* ||
+| *selectorClass* | {{String}} | [image:check.gif] | The component to display | {{selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}} |
+| *selectorIcon* | {{String}} | [image:check.gif] | The action icon | {{selectorIcon=SelectPath24x24Icon}} |
+
+Depends on the {{selectorClass}}, some other parameters can be added
+For example 
+The component {{org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}} need these parameters
+|| *Parameter* || *Type* || *Required* || *Description* || *Example* ||
+| *workspaceField* | {{String}} | [image:error.gif] | The field which allow to select a workspace | {{workspaceField=targetWorkspace}} |
+
+The component {{org.exoplatform.ecm.webui.selector.UIPermissionSelector}} don't need any special parameters
+
+See also: [Common parameters|#common-params]
+
+h2. Example 
+{code:language=java}
+<% 
+	String[] fieldPath = ["jcrPath=/node/exo:targetPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=targetWorkspace", "selectorIcon=SelectPath24x24Icon"] ;
+	uicomponent.addActionField("targetPath", fieldPath)  ;
 %>
 {code}
 
