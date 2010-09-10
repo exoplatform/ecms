@@ -80,7 +80,7 @@
    </component>
 
    <component>
-      <type>org.xcmis.spi.deploy.ExoContainerCmisRegistry</type>
+      <type>org.exoplatform.ecms.xcmis.sp.ExoContainerCmisRegistry</type>
    </component>
 
    <component>
