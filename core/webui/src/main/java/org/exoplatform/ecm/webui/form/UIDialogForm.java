@@ -404,6 +404,9 @@ public class UIDialogForm extends UIForm {
     UIFormHiddenField formHiddenField = new UIFormHiddenField(name,null,arguments);
     String jcrPath = formHiddenField.getJcrPath();
     JcrInputProperty inputProperty = formHiddenField.createJcrInputProperty();
+    inputProperty.setJcrPath(jcrPath);
+    if(formHiddenField.getMixinTypes() != null) inputProperty.setMixintype(formHiddenField.getMixinTypes());
+    if(formHiddenField.getNodeType() != null ) inputProperty.setNodetype(formHiddenField.getNodeType());
     setInputProperty(name, inputProperty);
   }
 
@@ -825,7 +828,7 @@ public class UIDialogForm extends UIForm {
     if(jcrPath.equals("/node") && nodetype != null ) inputProperty.setNodetype(nodetype);
     properties.put(name, inputProperty);
     propertiesName.put(name, propertyName);
-    fieldNames.put(propertyName, name);
+    fieldNames.put(propertyName, name);    
     Node node = getNode();
     Node childNode = getChildNode();
     if(!isReference) {
@@ -910,14 +913,26 @@ public class UIDialogForm extends UIForm {
         addUIFormInput(uiMulti);
       }
       List<String> valueList = new ArrayList<String>();
-      if(childNode != null) {
-        if(childNode.hasProperty(propertyName)) {
-          Value[] values = childNode.getProperty(propertyName).getValues();
+      if((node != null) && node.hasNode("jcr:content") && (childNode == null)) {
+        Node jcrContentNode = node.getNode("jcr:content");
+        if(jcrContentNode.hasProperty(propertyName)) {
+          Value[] values = jcrContentNode.getProperty(propertyName).getValues();
           for(Value value : values) {
             valueList.add(value.getString());
           }
           uiMulti.setEditable(formTextField.isEditable());
           uiMulti.setValue(valueList);
+        }
+      } else {
+        if(childNode != null) {
+          if(childNode.hasProperty(propertyName)) {
+            Value[] values = childNode.getProperty(propertyName).getValues();
+            for(Value value : values) {
+              valueList.add(value.getString());
+            }
+            uiMulti.setEditable(formTextField.isEditable());
+            uiMulti.setValue(valueList);
+          }
         }
       }
       if(node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
