@@ -254,6 +254,7 @@ Title
 
 .UINameWebContentForm .UIFormGrid td.FieldLabel {
   white-space: nowrap;
+  vertical-align:middle;
 }
 
 .UISingleContentViewerPortlet .QuickEditContainer .UIFormGrid {
@@ -424,9 +425,20 @@ Title
   vertical-align: -2px;
 }
 
+.UISingleContentViewerPortlet .UISCVPreferences .SelectTargetPageIcon {
+  background: url('icons/SearchIcon.png') no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
 .UISingleContentViewerPortlet .UISCVPreferences .tdShowHelp {
   text-align: right;
   width: 30px;
+}
+
+.UISingleContentViewerPortlet .UISCVPreferences .UIFormInputSet {
+  padding:0px;
 }
 
 .UISingleContentViewerPortlet .UISCVPreferences a.AdvancePreferences {
@@ -441,4 +453,27 @@ Title
  margin-bottom: 10px; 
  overflow: hidden; 
  border: 1px solid #b7b7b7;
+}
+.UISingleContentViewerPortlet .UIPageSelector {
+  margin: 0;
+  width: auto;
+}
+
+.UISingleContentViewerPortlet #UIPageNodeSelector {
+  float: left;
+  width: 49%;
+}
+
+.UISingleContentViewerPortlet .MiddleRightContainerOptions {
+  width: 200%;
+}
+
+.UISingleContentViewerPortlet .UIPageNodeSelector {
+  width: 100%;
+}
+
+.UISingleContentViewerPortlet #UIPageSelectorPanel {
+  float: left;
+  width: 49%;
+  padding-left:10px;
 }

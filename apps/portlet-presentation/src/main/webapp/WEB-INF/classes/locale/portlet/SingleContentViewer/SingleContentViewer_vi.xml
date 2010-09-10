@@ -114,7 +114,10 @@
    	  <ContextCaption>Điều hướng</ContextCaption>
    	  <UISCVContextualRadioBox>Nội dung theo ngữ cảnh</UISCVContextualRadioBox>
    	  <UISCVParameterInputBox>tham số</UISCVParameterInputBox>
-    </label>
+   	  <PrintSettingBlock>Tùy chọn xem bản in</PrintSettingBlock>
+   	  <UISCVPrintPageParameter>Tham số URL</UISCVPrintPageParameter>
+   	  <UISCVConfigPrintPageFormInputSet>Xem bản in tại</UISCVConfigPrintPageFormInputSet>
+	</label>
     <help>
    	  <ContentPathBlock>Vui lòng lựa chọn dữ liệu nguồn để hiển thị</ContentPathBlock>
    	  <DisplaySettingBlock>Bạn có thể quyết định có hiển thị hay không các mục: Tiêu đề, ngày tháng, thanh tùy chọn (để in ấn) tại đây</DisplaySettingBlock>
@@ -122,4 +125,14 @@
    	  <ParameterHelp>Xác định tham số sử dụng trên URL</ParameterHelp>
     </help> 
   </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+  	<title>
+  		<SelectFolderPath>Lựa chọn đường dẫn</SelectFolderPath>
+  	</title>  	
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+  	<title>
+  		<SelectTargetPage>Xem bản in tại</SelectTargetPage>
+  	</title>  	
+  </UISCVConfigPrintPageFormInputSet>
 </bundle>

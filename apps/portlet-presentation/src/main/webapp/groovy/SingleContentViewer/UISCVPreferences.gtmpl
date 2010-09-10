@@ -97,7 +97,25 @@
             </fieldset>             
           </div>
           
-          <a href="#" id="UISCVShowAdvanceOption" class="AdvancePreferences" style="margin-left: 20px;" onClick="document.getElementById('UISCVShowAdvanceOption').style.display='none';document.getElementById('UISCVContextualSelectionAdvance').style.display='block';">
+          <div class="FormContainer">
+          <fieldset class="fieldsetPreferences" maxHeight="350">
+              <legend class="StyleLegend"><%= _ctx.appRes("UISCVPreferences.label.PrintSettingBlock") %></legend>
+              <table class="UIFormGrid">
+                <tr>                  
+                  <td class="FieldLabel" style="vertical-align:middle;"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %></td>
+                  <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %></td>               
+                  <td></td>
+                </tr>
+                <tr>                  
+                <td class="FieldLabel" style="vertical-align:middle;"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></td>
+                <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></td>               
+                <td></td>
+              </tr>
+              </table>
+            </fieldset>             
+          </div>
+          
+          <a href="#" id="UISCVShowAdvanceOption" class="AdvancePreferences" style="margin-left: 21px;" onClick="document.getElementById('UISCVShowAdvanceOption').style.display='none';document.getElementById('UISCVContextualSelectionAdvance').style.display='block';">
              <%= _ctx.appRes("UISCVPreferences.label.Advance") %></a>
              
           <div class="FormContainer" id="UISCVContextualSelectionAdvance">

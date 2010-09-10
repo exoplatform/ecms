@@ -4,7 +4,6 @@
  **************************************************************************/
 package org.exoplatform.wcm.webui.scv;
 
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,7 @@ import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentBrowsePanelOne;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
+import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -46,7 +46,8 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     events = {
       @EventConfig(listeners = UISCVPreferences.SaveActionListener.class),
       @EventConfig(listeners = UISCVPreferences.SelectFolderPathActionListener.class),
-      @EventConfig(listeners = UISCVPreferences.CancelActionListener.class)
+      @EventConfig(listeners = UISCVPreferences.CancelActionListener.class),
+      @EventConfig(listeners = UISCVPreferences.SelectTargetPageActionListener.class)
     }
 )
 public class UISCVPreferences extends UIForm implements UISelectable{
@@ -65,7 +66,14 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   public static final String CONTEXTUAL_SELECT_RADIO_BOX  = "UISCVContextualRadioBox";
   
   public static final String PARAMETER_INPUT_BOX          = "UISCVParameterInputBox";
-
+  
+  public final static String PRINT_PAGE_FORM_INPUT_SET    = "UISCVConfigPrintPageFormInputSet";
+  public static final String PRINT_VIEW_PAGE_INPUT        = "UISCVPrintViewPageInput";
+  /** The Constant PRINT_PAGE_SELECTOR_POPUP. */
+  public final static String PRINT_PAGE_SELECTOR_POPUP    = "UISCVConfigPrintPageSelectorPopupWindow";
+  
+  public static final String PRINT_PAGE_PARAMETER_INPUT   = "UISCVPrintPageParameter";
+  
   public static final String ENABLE_STRING                = "Enable".intern();
   public static final String DISABLE_STRING               = "Disable".intern();
 
@@ -77,7 +85,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   protected String selectedNodeWorkspace =null;
   protected String selectedNodeDrive = null;
 
-  private UIFormStringInput             txtContentPath;
+  private UIFormStringInput             txtContentPath, txtPrintPage, txtPrintPageParameter;
+  
   private UIFormCheckBoxInput<Boolean>  chkShowTitle;
   private UIFormCheckBoxInput<Boolean>  chkShowDate;
   private UIFormCheckBoxInput<Boolean>  chkShowOptionBar;
@@ -132,13 +141,28 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     String strParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PARAMETER, null);
     UIFormStringInput txtParameterName = new UIFormStringInput(PARAMETER_INPUT_BOX, strParameterName);    
     
+    String strPrintParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, null);
+    txtPrintPageParameter = new UIFormStringInput(PRINT_PAGE_PARAMETER_INPUT, strPrintParameterName);
+    
+    
+    /** TARGET PAGE */
+    String strPrintPageName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PAGE, null);
+    UIFormInputSetWithAction targetPageInputSet = new UIFormInputSetWithAction(PRINT_PAGE_FORM_INPUT_SET);
+    txtPrintPage = new UIFormStringInput(PRINT_VIEW_PAGE_INPUT, PRINT_VIEW_PAGE_INPUT, strPrintPageName);
+    txtPrintPage.setValue(strPrintPageName);
+    txtPrintPage.setEditable(false);
+    targetPageInputSet.setActionInfo(PRINT_VIEW_PAGE_INPUT, new String[] {"SelectTargetPage"}) ;
+    targetPageInputSet.addUIFormInput(txtPrintPage);
+    
     addChild(itemPathInputSet);
     addChild(chkShowTitle);
     addChild(chkShowDate);
     addChild(chkShowOptionBar);
     addChild(contextOptionsRadioInputBox);
     addChild(txtParameterName);
-
+    addChild(targetPageInputSet);
+    addChild(txtPrintPageParameter);
+    
   }
   
   /**
@@ -157,6 +181,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       String strIsContextEnable = ((UIFormRadioBoxInput) uiSCVPref.getChildById(CONTEXTUAL_SELECT_RADIO_BOX)).getValue();
       strIsContextEnable = strIsContextEnable.equals(ENABLE_STRING) ? "true":"false";
       String strParameterName = uiSCVPref.getUIStringInput(PARAMETER_INPUT_BOX).getValue();
+      String strPrintPageName = uiSCVPref.getUIStringInput(PRINT_VIEW_PAGE_INPUT).getValue();
+      String strPrintParameterName  = uiSCVPref.getUIStringInput(PRINT_PAGE_PARAMETER_INPUT).getValue();
       
       portletPreferences.setValue(UISingleContentViewerPortlet.REPOSITORY, uiSCVPref.getSelectedNodeRepository());    
       portletPreferences.setValue(UISingleContentViewerPortlet.WORKSPACE, uiSCVPref.getSelectedNodeWorkspace());
@@ -168,6 +194,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       portletPreferences.setValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR, strShowOptionBar);
       portletPreferences.setValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, strIsContextEnable);
       portletPreferences.setValue(UISingleContentViewerPortlet.PARAMETER, strParameterName);
+      portletPreferences.setValue(UISingleContentViewerPortlet.PRINT_PAGE, strPrintPageName);
+      portletPreferences.setValue(UISingleContentViewerPortlet.PRINT_PARAMETER, strPrintParameterName);
       portletPreferences.store();
       if (uiSCVPref.getInternalPreferencesMode()) {
         if (!Utils.isPortalEditMode()) {
@@ -308,6 +336,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   public String getContetSelectorID() {
     return this.contentSelectorID;
   }
+  
   public boolean isContextualEnable() {    
     return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
   }
@@ -328,8 +357,36 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       strNodeUUID = selectedNode.getUUID();
       this.setSelectedNodeInfo(strNodeUUID, strRepository, strWorkspace, strDrive);
       getUIStringInput(selectField).setValue(getTitle(selectedNode));
+    }else if (PRINT_VIEW_PAGE_INPUT.equals(selectField)) {
+      getUIStringInput(selectField).setValue(strPath);
     }
     Utils.closePopupWindow(this, contentSelectorID);
+  }
+  
+  
+  /**
+   * The listener interface for receiving selectTargetPageAction events.
+   * The class that is interested in processing a selectTargetPageAction
+   * event implements this interface, and the object created
+   * with that class is registered with a component using the
+   * component's <code>addSelectTargetPageActionListener<code> method. When
+   * the selectTargetPageAction event occurs, that object's appropriate
+   * method is invoked.
+   * 
+   * @see SelectTargetPageActionEvent
+   */
+  public static class SelectTargetPageActionListener extends EventListener<UISCVPreferences> {
+    
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UISCVPreferences> event) throws Exception {
+      UISCVPreferences uiscv = event.getSource();
+      UIPageSelector pageSelector = uiscv.createUIComponent(UIPageSelector.class, null, null);
+      pageSelector.setSourceComponent(uiscv, new String[] {PRINT_VIEW_PAGE_INPUT});
+      Utils.createPopupWindow(uiscv, pageSelector, PRINT_PAGE_SELECTOR_POPUP, 800);
+      uiscv.setContentSelectorID(PRINT_PAGE_SELECTOR_POPUP);
+    }
   }
   
   public void setInternalPreferencesMode(boolean isInternal) {

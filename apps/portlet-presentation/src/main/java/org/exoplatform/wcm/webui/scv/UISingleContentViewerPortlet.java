@@ -74,7 +74,12 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   
   /** The is ContextualMode **/
   public static String CONTEXTUAL_MODE= "ContextEnable";
-
+  
+  /** The Parameterized String for printing**/
+  public static String PRINT_PARAMETER= "PrintParameterName";
+  
+  /** The Page that show the print viewer **/
+  public static String PRINT_PAGE     = "PrintPage";
   /** The mode_. */
   private PortletMode mode = PortletMode.VIEW ;
   
