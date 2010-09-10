@@ -36,8 +36,6 @@ h3. Nodetype template
   {include:document="pages/configuration/template_nodetype.wiki" /}
 h2. Views
   {include:document="pages/configuration/views.wiki" /}
-h2. Extensions
-  {include:document="pages/configuration/extensions.wiki" /}
 
 h1. Inside WCM Templates
 h2. Content types
