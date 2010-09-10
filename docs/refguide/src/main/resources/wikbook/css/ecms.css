@@ -21,3 +21,7 @@ table[summary^="Note"], table[summary^="Warning"], table[summary^="Tip"] {
   background-color:#F8F8F8;
   border:1px solid #999;
 }
+
+.programlisting {
+	overflow: auto;
+}
