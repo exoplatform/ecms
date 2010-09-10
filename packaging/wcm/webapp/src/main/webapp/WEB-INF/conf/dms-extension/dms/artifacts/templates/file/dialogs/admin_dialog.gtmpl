@@ -41,7 +41,7 @@
 								if(curNode.hasNode("jcr:content")) {
 									def content = curNode.getNode("jcr:content") ;
 									String mimeType = content.getProperty("jcr:mimeType").getString() ;
-									if(mimeType.startsWith("text")){
+									if(mimeType.startsWith("text") || mimeType.indexOf("groovy") >= 0){
 										if(mimeType.equals("text/html")) {
 											String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "validate=empty"] ;
 				              uicomponent.addRichtextField("contentHtml", fieldSummary) ;						
