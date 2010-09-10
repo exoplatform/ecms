@@ -22,8 +22,8 @@
   
   <UISCVContextualRadioBox>
   	<label>
-		<Enable>Enable</Enable>
-		<Disable>Disable</Disable>
+		<Enable>Enabled</Enable>
+		<Disable>Disabled</Disable>
   	</label>
   </UISCVContextualRadioBox>  
   

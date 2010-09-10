@@ -63,10 +63,10 @@
     	<ModeSelectionHelp>Two modes are available to show contents. "By folder" will take all the contents available in the folder/category you choose ; "By Contents" lets you manually choose the contents you want to show</ModeSelectionHelp>
     	<FolderPathHelp>Select the contents you want to show. This default selection will be replaced dynamically if you activate the Dynamic navigation (Advanced mode, see below)</FolderPathHelp>
     	<HeaderOptionHelp>Show a header on top of the list of contents. If you activate the Automatic Detection, it will try to find the header based on the current selection.</HeaderOptionHelp>
-    	<GeneralOptionHelp>Select the information you want to show in your list.</GeneralOptionHelp>
+    	<GeneralOptionHelp>Select the graphical elements you want to show in your list.</GeneralOptionHelp>
     	<ContextualHelp>Activates the dynamic navigation. The contents can be changed dynamically by others based on a URL parameter</ContextualHelp>
        	<ParameterHelp>This parameter will be used to get the contents if Dynamic Navigation is activated</ParameterHelp>
-       	<ShowDetailInPageHelp>Clicking on a content redirects to a Detailed page. You must have a "Content by URL" portlet with Dynamic navigation enabled on the target page to show the content</ShowDetailInPageHelp>    	
+       	<ShowDetailInPageHelp>Clicking on a content redirects to a Detail page. You must have a "Content by URL" portlet with Dynamic navigation enabled on the target page to show the content</ShowDetailInPageHelp>    	
        	<DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
     </help>
     <action>
@@ -145,8 +145,8 @@
   
   <UICLVConfigContextualFolderRadioBoxInput>
   	<label>
-		  <contextualEnable>Enable</contextualEnable>
-		  <contextualDisable>Disable</contextualDisable>
+		  <contextualEnable>Enabled</contextualEnable>
+		  <contextualDisable>Disabled</contextualDisable>
   	</label>
   </UICLVConfigContextualFolderRadioBoxInput>
   

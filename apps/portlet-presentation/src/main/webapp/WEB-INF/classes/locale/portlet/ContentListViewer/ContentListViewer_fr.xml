@@ -136,7 +136,7 @@
       <FolderPathHelp>Sélectionnez les contenus qui vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique (voir Avancé, ci-dessous)</FolderPathHelp>
       <HeaderOptionHelp>Affiche un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
       <GeneralOptionHelp>Choisissez les éléments graphiques que vous souhaitez voir.</GeneralOptionHelp>
-      <ContextualHelp>Active la navigation dynamique. dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
+      <ContextualHelp>Active la navigation dynamique. Les contenus peuvent être changés dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
         <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
         <ShowDetailInPageHelp>Cliquer sur un contenu redirige sur une page de détail. Vous devez avoir une portlet "Contenu par URL" configurée en "Navigation dynamique" sur la page cible pour afficher le contenu.</ShowDetailInPageHelp>      
         <DetailParameterHelp>Ce paramètre contiendra le chemin vers le contenu à afficher dans la page de détail. Il doit être identique au paramètre utilisé dans la portlet "Contenu par URL" de la page.</DetailParameterHelp>
