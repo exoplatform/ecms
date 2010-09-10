@@ -113,8 +113,7 @@ public class UICLVFolderMode extends UICLVContainer {
         return new ArrayList<Node>();
     }      
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
-    		(folderPath != null) ? folderPath : 
-    													 preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
+    		(folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
     return wcmComposer.getContents(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getUserSessionProvider());
   }
 }

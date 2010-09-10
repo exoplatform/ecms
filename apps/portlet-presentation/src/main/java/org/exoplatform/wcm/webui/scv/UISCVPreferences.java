@@ -4,6 +4,7 @@
  **************************************************************************/
 package org.exoplatform.wcm.webui.scv;
 
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentBrowsePanelOne;
@@ -72,6 +75,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   protected String selectedNodeUUID =null;
   protected String selectedNodeReporitory =null;
   protected String selectedNodeWorkspace =null;
+  protected String selectedNodeDrive = null;
 
   private UIFormStringInput             txtContentPath;
   private UIFormCheckBoxInput<Boolean>  chkShowTitle;
@@ -157,6 +161,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       portletPreferences.setValue(UISingleContentViewerPortlet.REPOSITORY, uiSCVPref.getSelectedNodeRepository());    
       portletPreferences.setValue(UISingleContentViewerPortlet.WORKSPACE, uiSCVPref.getSelectedNodeWorkspace());
       portletPreferences.setValue(UISingleContentViewerPortlet.IDENTIFIER, uiSCVPref.getSelectedNodeUUID()) ;
+      portletPreferences.setValue(UISingleContentViewerPortlet.DRIVE, uiSCVPref.getSelectedNodeDrive());
 
       portletPreferences.setValue(UISingleContentViewerPortlet.SHOW_TITLE, strShowTitle);
       portletPreferences.setValue(UISingleContentViewerPortlet.SHOW_DATE, strShowDate);
@@ -191,10 +196,11 @@ public class UISCVPreferences extends UIForm implements UISelectable{
    * @param nodeRepo
    * @param nodeWS
    */
-  public void setSelectedNodeInfo(String nodeUUID, String nodeRepo, String nodeWS) {
+  public void setSelectedNodeInfo(String nodeUUID, String nodeRepo, String nodeWS, String nodeDrive) {
     this.selectedNodeUUID = nodeUUID;
     this.selectedNodeReporitory = nodeRepo;
     this.selectedNodeWorkspace = nodeWS;    
+    this.selectedNodeDrive = nodeDrive;
   }
   /**
    * Get the temporary node UUID
@@ -217,15 +223,35 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   public String getSelectedNodeWorkspace() {
     return this.selectedNodeWorkspace;
   }
+  
+  /** 
+   * Get the temporary node Drive string
+   * @return
+   */
+  public String getSelectedNodeDrive() {
+    return this.selectedNodeDrive;
+  }
 
   public static class SelectFolderPathActionListener extends EventListener<UISCVPreferences> {  
     public void execute(Event<UISCVPreferences> event) throws Exception {
       UISCVPreferences uiSCVPref = event.getSource();
       UIContentSelectorOne contentSelector = uiSCVPref.createUIComponent(UIContentSelectorOne.class, null, null);
-      contentSelector.init();
+      Node node = Utils.getViewableNodeByComposer(uiSCVPref.getSelectedNodeRepository(), uiSCVPref.getSelectedNodeWorkspace(), uiSCVPref.getSelectedNodeUUID());
+      contentSelector.init(uiSCVPref.getSelectedNodeDrive(),
+                           fixPath(node.getPath(), uiSCVPref));
       contentSelector.getChild(UIContentBrowsePanelOne.class).setSourceComponent(uiSCVPref, new String[] { UISCVPreferences.CONTENT_PATH_INPUT });
       Utils.createPopupWindow(uiSCVPref, contentSelector, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
       uiSCVPref.setContentSelectorID(UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+    }
+    
+    private String fixPath(String path, UISCVPreferences uiScvPref) throws Exception {
+      if (uiScvPref.getSelectedNodeDrive() == null || uiScvPref.getSelectedNodeDrive().length() == 0)
+        return path;
+      ManageDriveService managerDriveService = uiScvPref.getApplicationComponent(ManageDriveService.class);
+      DriveData driveData = managerDriveService.getDriveByName(uiScvPref.getSelectedNodeDrive(), uiScvPref.getSelectedNodeRepository());
+      if ("/".equals(driveData.getHomePath()))
+        return path;
+      return path.substring(driveData.getHomePath().length());      
     }
   }
 
@@ -237,11 +263,12 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   protected String getNodeNameByPreferences(){
     String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);    
     String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
-    String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null) ;
+    String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
+    String nodeDrive = portletPreferences.getValue(UISingleContentViewerPortlet.DRIVE, null);
     try {
       Node savedNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
       if (savedNode==null) return null;
-      this.setSelectedNodeInfo(savedNode.getUUID(), repository, workspace);
+      this.setSelectedNodeInfo(savedNode.getUUID(), repository, workspace, nodeDrive);
       return getTitle(savedNode);
     }catch (RepositoryException re) {
       return null;
@@ -285,20 +312,21 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
   }
   public void doSelect(String selectField, Object value) throws Exception {
-    String strRepository, strWorkspace, strIdentifier, strNodeUUID;
-    int repoIndex, wsIndex;
+    String strRepository, strWorkspace, strDrive, strIdentifier, strNodeUUID;
+    int driveIndex;
     String strPath = (String) value;
 
     if (CONTENT_PATH_INPUT.equals(selectField) ) {
-      repoIndex = strPath.indexOf(':');
-      wsIndex = strPath.lastIndexOf(':');
-      strRepository = strPath.substring(0, repoIndex);
-      strWorkspace = strPath.substring(repoIndex+1, wsIndex);
-      strIdentifier = strPath.substring(wsIndex +1);
+      String[] splits = strPath.split(":");
+      driveIndex = (splits.length == 4) ? 1 : 0;
+      strRepository = splits[driveIndex];
+      strWorkspace = splits[driveIndex + 1];
+      strIdentifier = splits[driveIndex + 2];
+      strDrive=  (driveIndex == 1) ? splits[0] : "";
       Node selectedNode = Utils.getRealNode(strRepository, strWorkspace, strIdentifier, false);
       if (selectedNode==null) return;
       strNodeUUID = selectedNode.getUUID();
-      this.setSelectedNodeInfo(strNodeUUID, strRepository, strWorkspace);
+      this.setSelectedNodeInfo(strNodeUUID, strRepository, strWorkspace, strDrive);
       getUIStringInput(selectField).setValue(getTitle(selectedNode));
     }
     Utils.closePopupWindow(this, contentSelectorID);

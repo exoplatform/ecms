@@ -1,9 +1,22 @@
 <%
+    import org.exoplatform.wcm.webui.selector.content.folder.UIContentBrowsePanelFolder;
+
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
+	
 	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
 	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
 	jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('folder')");
+	
+    if (uicomponent instanceof UIContentBrowsePanelFolder) {
+      def uiBrowseFolder = (UIContentBrowsePanelFolder)uicomponent;
+      String nodeDrive = uiBrowseFolder.getInitDrive();
+      String nodePath = uiBrowseFolder.getInitPath();
+      if (nodeDrive != null && nodeDrive.length() > 0) {
+        jsManager.addOnLoadJavascript("eXo.ecm.ECS.initPath('$nodeDrive','$nodePath', '$uicomponent.id')");
+      }
+    }
+	
 %>
 
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">

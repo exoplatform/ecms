@@ -49,4 +49,15 @@ public class UIContentSelectorOne extends UIContentSelector {
   public void init() throws Exception {
     getChild(UIContentSearchForm.class).init();
   }
+  
+  /**
+   * Set the init path, when the popup window appears, it will go to the node
+   * specified by this init path.
+   * @param initPath
+   * @throws Exception
+   */
+  public void init(String initDrive, String initPath) throws Exception {
+    getChild(UIContentBrowsePanelOne.class).setInitPath(initDrive, initPath);
+    this.init();
+  }
 }

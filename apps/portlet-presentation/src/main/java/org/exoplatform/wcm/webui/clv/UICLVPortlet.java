@@ -49,6 +49,9 @@ public class UICLVPortlet extends UIPortletApplication {
   
   /** The Constant PREFERENCE_ITEM_PATH. */
   public final static String PREFERENCE_ITEM_PATH               = "folderPath";
+
+  /** The Constant PREFERENCE_ITEM_PATH. */
+  public final static String PREFERENCE_ITEM_DRIVE              = "nodeDrive";
   
   /** The Constant PREFERENCE_ORDER_BY. */
   public static final String PREFERENCE_ORDER_BY                = "orderBy";

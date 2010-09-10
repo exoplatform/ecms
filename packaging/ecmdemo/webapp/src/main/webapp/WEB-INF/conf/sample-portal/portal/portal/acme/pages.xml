@@ -41,6 +41,11 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>workspace</name>
                 <value>collaboration</value>
                 <read-only>false</read-only>
@@ -96,6 +101,11 @@
               <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/web contents/Events</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -157,6 +167,11 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>orderType</name>
                 <value>ASC</value>
                 <read-only>false</read-only>
@@ -205,6 +220,11 @@
               <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/documents</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -258,6 +278,11 @@
               <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/web contents/News</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -325,6 +350,11 @@
               <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/categories/acme</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -470,6 +500,11 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>orderBy</name>
                 <value>publication:liveDate</value>
                 <read-only>false</read-only>
@@ -556,6 +591,11 @@
                 <read-only>false</read-only>
               </preference>
               <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
                 <name>orderType</name>
                 <value>ASC</value>
                 <read-only>false</read-only>
@@ -623,6 +663,11 @@
               <preference>
                 <name>folderPath</name>
                 <value>repository:collaboration:/sites content/live/acme/events</value>
+                <read-only>false</read-only>
+              </preference>
+              <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -843,6 +888,11 @@
             <value>/sites content/live/acme/web contents/site artifacts/Introduce</value>
             <read-only>false</read-only>
           </preference>
+              <preference>
+                <name>nodeDrive</name>
+                <value>Managed Sites</value>
+                <read-only>false</read-only>
+              </preference>
           <preference>
             <name>ShowPrintAction</name>
             <value>true</value>
