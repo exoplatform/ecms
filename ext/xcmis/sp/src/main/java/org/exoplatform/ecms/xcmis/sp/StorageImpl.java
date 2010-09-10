@@ -181,10 +181,11 @@ public class StorageImpl extends BaseJcrStorage implements Storage
     */
    public AllowableActions calculateAllowableActions(ObjectData object)
    {
+      RepositoryInfo info = getRepositoryInfo();
       ConversationState state = ConversationState.getCurrent();
-      AllowableActions actions =
-         permissionService.calculateAllowableActions(object, state != null ? state.getIdentity() : null,
-            getRepositoryInfo());
+      AllowableActions actions = permissionService.calculateAllowableActions(object, //
+         state != null ? state.getIdentity().getUserId() : info.getPrincipalAnonymous(), //
+         info);
 
       if (object instanceof JcrFile)
       {
@@ -978,8 +979,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    }
 
    /**
-    * @param searchService
-    *           the searchService to set
+    * @param searchService the searchService to set
     */
    public void setSearchService(SearchService searchService)
    {
