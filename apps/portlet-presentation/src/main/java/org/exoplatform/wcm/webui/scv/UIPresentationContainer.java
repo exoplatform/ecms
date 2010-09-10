@@ -81,9 +81,7 @@ public class UIPresentationContainer extends UIContainer{
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean isShowInfoBar() throws Exception {		
-		UIPortal uiPortal = Util.getUIPortal();		
-    UIPortlet uiPortlet = Util.findUIComponent(uiPortal, UIPortlet.class, UIPresentationContainer.class);				
-		if (uiPortlet.getShowInfoBar())
+		if (UIPortlet.getCurrentUIPortlet().getShowInfoBar())
 			return true;
 		return false;
 	}
