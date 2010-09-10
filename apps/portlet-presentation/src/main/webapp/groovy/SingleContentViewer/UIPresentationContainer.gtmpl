@@ -18,8 +18,7 @@
 			%>
 			<div class="$uicomponent.id" id="$uicomponent.id" 
 				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' ">
-			<%     
-			  if (Utils.isShowQuickEdit()) {	%>	
+			<% if (Utils.isShowQuickEdit()) {	%>	
 				 <div class="EdittingToolBarContainer" style=" z-index: 1">
 					 <div class="EdittingToolBar " >
 						<div class="EdittingToolBarL">
@@ -67,13 +66,6 @@
 					</div>
 				<% 
 			} 
-			if(Utils.isShowDraft(node) && !uicomponent.isPrinting()){
-      %>
-        <div style="padding: 5px 10px; line-height: 16px; ">
-        <span class="DraftIcon" style="padding-left: 20px">[<%= _ctx.appRes("UIPresentationContainer.label.draft") %>]</span>
-      </div>  
-      <% 
-      }
 			uicomponent.renderChildren();
 			if(uicomponent.isPrinting()) {
         %>
