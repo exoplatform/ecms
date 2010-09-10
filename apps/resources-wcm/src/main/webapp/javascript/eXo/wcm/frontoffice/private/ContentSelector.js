@@ -318,8 +318,12 @@ EcmContentSelector.prototype.actionColExp = function(objNode) {
 	if(!objNode) return;
 	var nextElt = eXo.core.DOMUtil.findNextElementByTagName(objNode, "div");
 	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(objNode, "div")[0];
-//	alert(nextElt.className + " -   " + nextElt.style.display + " " + nextElt.innerHTML);
-	if(!nextElt || nextElt.className != "ChildrenContainer") return;
+	if(!nextElt || nextElt.className != "ChildrenContainer") {		
+		var currentNode	= eXo.core.DOMUtil.findFirstDescendantByClass(objNode,"a","NodeIcon");			
+		if (currentNode != null) {
+			eXo.ecm.ECS.getDir(currentNode, false);
+		} else return;
+	}
 	if(nextElt.style.display != 'block') {
 		nextElt.style.display = 'block';
 		iconElt.className = 'CollapseIcon';
@@ -679,9 +683,7 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 	if(eXo.ecm.ECS.typeObj == "folder" || eXo.ecm.ECS.typeObj == "one") {
 		var action = rws.getAttribute("action");
 		action = action.substring(0, action.length - 2);
-//		action += '&objectId=' + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';
 		action += '&objectId=' + eXo.ecm.ECS.driverName + ":" + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';		
-//		alert(action);
 		eval(action);
 	} else {
 		var hostName = eXo.ecm.ECS.hostName;
@@ -896,7 +898,6 @@ EcmContentSelector.prototype.initPath = function(initDrive, initPath, componentI
 EcmContentSelector.prototype.waitAndInitPath = function(initDrive, initPath, componentId) {
 	initDrive = initDrive.replace(/ /g, "");
 	initPath = initPath.replace(/ /g, "");
-//	alert(initDrive + "; " + initPath + "; " + '_' + initDrive + '_');	
 	var contentBrowsePanel = document.getElementById(componentId);
 	var leftWorkspace = eXo.core.DOMUtil.findDescendantsByClass(contentBrowsePanel, "div", "LeftWorkspace")[0];
 	var tagADrives = eXo.core.DOMUtil.findDescendantsByTagName(leftWorkspace, "a");
@@ -924,7 +925,6 @@ EcmContentSelector.prototype.waitAndInitPath = function(initDrive, initPath, com
 };
 
 EcmContentSelector.prototype.expandTree = function(preStr, path, nodeParent) { 
-//	alert(preStr + " " + path + " " + nodeParent);
 	var nextElt = eXo.core.DOMUtil.findNextElementByTagName(nodeParent, "div");	
 	if(!nextElt || nextElt.className != "ChildrenContainer" || !path || path == "") {
 		return;
