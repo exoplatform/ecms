@@ -41,7 +41,7 @@ public class UIFormCalendarField extends DialogFormField {
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     String[] arrDate = null;
     SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss") ;
-    Date date = new Date() ;
+    Date date = null;
     if(options == null) formatter = new SimpleDateFormat("MM/dd/yyyy") ;
     if(defaultValue != null && defaultValue.length() > 0) {
       try {
@@ -50,7 +50,7 @@ public class UIFormCalendarField extends DialogFormField {
         String[] arrDf = formatter.format(date).split("/") ;
         if(Integer.parseInt(arrDate[0]) != Integer.parseInt(arrDf[0])) date = new Date() ;
       } catch(Exception e) {
-        date = new Date() ;
+        date = null;
       }
     }     
     UIFormDateTimeInput uiDateTime = null;
@@ -59,9 +59,13 @@ public class UIFormCalendarField extends DialogFormField {
     } else {
       uiDateTime = new UIFormDateTimeInput(name, name, date, false) ;
     }
-    Calendar calendar = new GregorianCalendar();
-    calendar.setTime(date);
-    uiDateTime.setCalendar(calendar);
+    if (date != null) {
+      Calendar calendar = new GregorianCalendar();
+      calendar.setTime(date);
+      uiDateTime.setCalendar(calendar);
+    } else {
+      uiDateTime.setCalendar(null);
+    }
     if(label != null) uiDateTime.setLabel(label);       
     return (T)uiDateTime;
   }

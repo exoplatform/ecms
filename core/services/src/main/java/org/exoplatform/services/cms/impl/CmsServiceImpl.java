@@ -622,8 +622,26 @@ public class CmsServiceImpl implements CmsService {
       
       break;
     case PropertyType.DATE:      
-      if (value == null){        
-        node.setProperty(propertyName, new GregorianCalendar());
+      if (value == null){
+        boolean mandatory = false;
+        for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions()) 
+          if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
+            mandatory = true;
+            break;
+          }
+        for (NodeType mixin : node.getMixinNodeTypes()) {
+          for (PropertyDefinition propertyDef : mixin.getPropertyDefinitions()) {
+            if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
+              mandatory = true;
+              break;
+            }
+          }
+        }
+        if (mandatory) {
+          node.setProperty(propertyName, new GregorianCalendar());
+        } else {
+          node.setProperty(propertyName, (Value)null);
+        }
       } else {
         if (isMultiple) {
           Session session = node.getSession();
@@ -848,8 +866,22 @@ public class CmsServiceImpl implements CmsService {
       }       
       break;
     case PropertyType.DATE:      
-      if (value == null){        
-        if (node.hasProperty(propertyName) && node.getProperty(propertyName).getDefinition().isMandatory()) {
+      if (value == null){
+        boolean mandatory = false;
+        for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions()) 
+          if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
+            mandatory = true;
+            break;
+          }
+        for (NodeType mixin : node.getMixinNodeTypes()) {
+          for (PropertyDefinition propertyDef : mixin.getPropertyDefinitions()) {
+            if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
+              mandatory = true;
+              break;
+            }
+          }
+        }
+        if (mandatory) {
           node.setProperty(propertyName, new GregorianCalendar());
         } else {
           node.setProperty(propertyName, (Value)null);
