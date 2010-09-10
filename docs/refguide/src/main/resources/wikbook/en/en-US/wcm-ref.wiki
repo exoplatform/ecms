@@ -67,9 +67,6 @@ h2. REST Services
 h2. UI Extensions
   {include:document="pages/extensions/ui.wiki" /}
 
-h1. JMX Events
-  {include:document="pages/jmx/events.wiki" /}
-
 h1. Java Services
 h2. TaxonomyService
   {include:document="pages/services/taxonomy.wiki" /}
