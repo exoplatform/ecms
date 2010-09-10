@@ -15,12 +15,10 @@
 			def isShowOptionBar = uicomponent.isShowOptionBar(); 
 			def isShowTitle = uicomponent.isShowTitle();
 			def isShowDate  = uicomponent.isShowDate();
-			boolean isShowInforBar = uicomponent.isShowInfoBar();
-			def edittingStyle = null;
-			if (isShowInforBar)
-				edittingStyle = "z-index: 1";
-			else 
-				edittingStyle = "z-index: 1; top:20px";
+			boolean isShowInfoBar = uicomponent.isShowInfoBar();
+			def editingStyle = "z-index: 1";
+			//if (isShowInfoBar)
+			//	editingStyle = "z-index: 1; top:20px";
 			%>
 			<div class="$uicomponent.id" id="$uicomponent.id" 
 				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' ">
@@ -38,15 +36,15 @@
 										  &nbsp;
 										</a>         
 									</div>
-									<div class="EdittingCurrentState" style="float: right">
-                    <%=uicomponent.getCurrentState() %>
-                  </div>
 									<%}%>
 									<div style="float: right">
 										<a href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UISCVPreferences.label.Edit")%>">
 										  &nbsp;
 										</a>           
 									</div>
+									<div class="EdittingCurrentState" style="float: right">
+                    <%=uicomponent.getCurrentState() %>
+                  </div>
 								</div>
 							</div>
 						</div>
