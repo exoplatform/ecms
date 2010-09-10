@@ -2,9 +2,9 @@
 <bundle>
   <UICLVContainer>
     <msg>
-      <non-contents>Il n'ya pas de contenu ici</non-contents>
-      <item-not-found>Cet article ne peut pas trouver</item-not-found>
-      <no-permission>Vous n'avez pas la permission d'accéder à ce noeud</no-permission>
+      <non-contents>Aucun contenu trouvé</non-contents>
+      <item-not-found>Le contenu n'a pas été trouvé</item-not-found>
+      <no-permission>Vous n'avez pas la permission d'accéder à ce contenu</no-permission>
     </msg>
   </UICLVContainer>
 
@@ -12,7 +12,7 @@
     <label>
       <ContentSelectionBlock>Sélection de contenus</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigItemPathFormInputSet>Chemin du dossier</UICLVConfigItemPathFormInputSet>
+      <UICLVConfigItemPathFormInputSet>Chemin du répertoire</UICLVConfigItemPathFormInputSet>
       <UICLVConfigOrderByFormSelectBox>Classement par</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Titre</exo:title>
@@ -22,7 +22,7 @@
         <exo:startEvent>Date d'événement</exo:startEvent>
         <exo:index>Index</exo:index>
       </option>
-      <DisplaySettingBlock>Réglages</DisplaySettingBlock>
+      <DisplaySettingBlock>Réglages d'affichage</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Entête</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Modèle de vue</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Pagination</UICLVConfigPaginatorTemplateFormSelectBox>
@@ -41,8 +41,8 @@
       <Cancel>Annuler</Cancel>
     </action>
     <msg>
-      <not-valid-path>Le chemin élément est invalide</not-valid-path>
-      <saving-success>Les préférences du portlet sont enregistrés</saving-success>
+      <not-valid-path>Ce chemin de contenu est invalide</not-valid-path>
+      <saving-success>Vos préférences ont été enregistrées</saving-success>
     </msg>
   </UICLVConfig>
 
@@ -55,13 +55,13 @@
 
   <UICLVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Sélectionner le dossier chemin</SelectFolderPath>
+      <SelectFolderPath>Sélectionner le répertoire</SelectFolderPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
 
   <FolderPathSelectorPopupWindow>
     <title>
-      <UIContentSelectorFolder>Navigateur de dossiers</UIContentSelectorFolder>
+      <UIContentSelectorFolder>Navigateur de répertoires</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
 
@@ -72,11 +72,6 @@
     </label>
   </UICLVConfigOrderTypeFormRadioBoxInput>
 
-  <UICLVConfigTargetPageFormInputSet>
-    <title>
-      <SelectBasePath>Sélectionnez le chemin de base</SelectBasePath>
-    </title>
-  </UICLVConfigTargetPageFormInputSet>
 
   <UICLVBasePathPopupWindow>
     <title>
@@ -99,7 +94,7 @@
 
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Multiples panneau sélecteur de contenu</UIContentSelectorMulti>
+      <UIContentSelectorMulti>Sélecteur de contenus</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
 
@@ -110,41 +105,41 @@
   </UIContentDialogFormPopupWindow>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
-      <AddContent>Add Content</AddContent>
-      <ManageContent>Manage Content</ManageContent>      
+      <Preferences>Préférences</Preferences>
+      <AddContent>Ajouter un contenu</AddContent>
+      <ManageContent>Gérer les contenus</ManageContent>      
     </label>
 	</UICLVContainer>
 
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Préférences Liste de contenu</UICLVConfig>
+      <UICLVConfig>Préférences des contenus</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
 
   <UICLVConfig>
     <label>
-      <Title>Préférences Liste de contenu</Title>
+      <Title>Préférences des contenus</Title>
       <UICLVConfigShowRssLinkFormCheckboxInput>Afficher les flux RSS</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Afficher "En savoir plus"</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Afficher l'image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <AdvancedBlock>Paramètres avancés</AdvancedBlock>
+      <AdvancedBlock>Avancé</AdvancedBlock>
 	  <UICLVConfigDynamicNavigationLabel>Navigation dynamique</UICLVConfigDynamicNavigationLabel>
 	  <UICLVConfigContextualFolderRadioBoxInput>Répertoire contextuel</UICLVConfigContextualFolderRadioBoxInput> 	
 	  <UICLVConfigShowCLVByStringInput>par</UICLVConfigShowCLVByStringInput>
 	  <UICLVConfigshowSCVWithStringInput>avec</UICLVConfigshowSCVWithStringInput>
-    <UICLVConfigTargetPageFormInputSet>Afficher dans une page</UICLVConfigTargetPageFormInputSet>
-    <content-not-found>Ce contenu n'est pas trouvé!</content-not-found>
+    <UICLVConfigTargetPageFormInputSet>Afficher dans la page</UICLVConfigTargetPageFormInputSet>
+    <content-not-found>Le contenu n'a pas été trouvé</content-not-found>
     </label>
     <help>
-    	<ModeSelectionHelp>Configure quelle type de contenu sera affiché dans cette portlet</ModeSelectionHelp>
-    	<FolderPathHelp>Selectionne le chemin où se trouve les contenus</FolderPathHelp>
-    	<HeaderOptionHelp>Configure les informations générales à afficher dans la portlet</HeaderOptionHelp>
-    	<GeneralOptionHelp>Configure l'affichage ou non du paramètre correspondant</GeneralOptionHelp>
-    	<ContextualHelp>This option allow you to enable/disable the contextual parameter for the shown content of portlet</ContextualHelp>
-       	<ParameterHelp>Specify the parameter which appear on the URL</ParameterHelp>
-       	<ShowDetailInPageHelp>Specify the name of page which will be used to display the content details for an item</ShowDetailInPageHelp>    	
-       	<DetailParameterHelp>Specify the parameter on URL which the detail page will use to get the content location</DetailParameterHelp>
+      <ModeSelectionHelp>Deux modes sont disponibles pour affichers les contenus. "Par répertoire" affichage tous les contenus présents dans le répertoire (ou catégorie) sélectionné ; "Par contenus" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
+      <FolderPathHelp>Sélectionnez les contenus qui vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique (voir Avancé, ci-dessous)</FolderPathHelp>
+      <HeaderOptionHelp>Affiche un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
+      <GeneralOptionHelp>Choisissez les éléments graphiques que vous souhaitez voir.</GeneralOptionHelp>
+      <ContextualHelp>Active la navigation dynamique. dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
+        <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
+        <ShowDetailInPageHelp>Cliquer sur un contenu redirige sur une page de détail. Vous devez avoir une portlet "Contenu par URL" configurée en "Navigation dynamique" sur la page cible pour afficher le contenu.</ShowDetailInPageHelp>      
+        <DetailParameterHelp>Ce paramètre contiendra le chemin vers le contenu à afficher dans la page de détail. Il doit être identique au paramètre utilisé dans la portlet "Contenu par URL" de la page.</DetailParameterHelp>
     </help>
   </UICLVConfig>
   
@@ -156,8 +151,8 @@
   
   <UICLVConfigContextualFolderRadioBoxInput>
   	<label>
-		  <contextualEnable>Activer</contextualEnable>
-		  <contextualDisable>Désactiver</contextualDisable>
+		  <contextualEnable>Activé</contextualEnable>
+		  <contextualDisable>Désactivé</contextualDisable>
   	</label>
   </UICLVConfigContextualFolderRadioBoxInput>
     
