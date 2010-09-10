@@ -54,8 +54,6 @@
       <AdvancedBlock>Advanced</AdvancedBlock>
 	  <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
 	  <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput> 	
-	  <contextualEnable>Enable</contextualEnable>
-	  <contextualDisable>Disable</contextualDisable>
 	  <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
 	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>
@@ -144,5 +142,12 @@
       <UIContentDialogForm>Web content form</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
+  
+  <UICLVConfigContextualFolderRadioBoxInput>
+  	<label>
+		  <contextualEnable>Enable</contextualEnable>
+		  <contextualDisable>Disable</contextualDisable>
+  	</label>
+  </UICLVConfigContextualFolderRadioBoxInput>
   
 </bundle>

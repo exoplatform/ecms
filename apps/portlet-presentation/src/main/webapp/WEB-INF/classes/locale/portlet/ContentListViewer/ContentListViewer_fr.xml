@@ -36,16 +36,6 @@
       <UICLVConfigShowLinkFormCheckboxInput>Afficher le lien</UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Détection automatique</UICLVConfigShowAutomaticDetectionCheckboxInput>      
     </label>
-    <help>
-    	<ModeSelectionHelp>Determine what kind of information will be display inside portlet</ModeSelectionHelp>
-    	<FolderPathHelp>Select the location of information</FolderPathHelp>
-    	<HeaderOptionHelp>Set the title to present the general contents inside portlet</HeaderOptionHelp>
-    	<GeneralOptionHelp>Determine if you want to display the corresponding item</GeneralOptionHelp>
-    	<ContextualHelp>This option allow you to enable/disable the contextual parameter for the shown content of portlet</ContextualHelp>
-       	<ParameterHelp>Specify the parameter which appear on the URL</ParameterHelp>
-       	<ShowDetailInPageHelp>Specify the name of page which will be used to display the content details for an item</ShowDetailInPageHelp>    	
-       	<DetailParameterHelp>Specify the parameter on URL which the detail page will use to get the content location</DetailParameterHelp>
-    </help>
     <action>
       <Save>Sauver</Save>
       <Cancel>Annuler</Cancel>
@@ -128,32 +118,29 @@
 
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Content List Preferences</UICLVConfig>
+      <UICLVConfig>Préférences Liste de contenu</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
 
   <UICLVConfig>
     <label>
-      <Title>Content List Preferences</Title>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Link</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <AdvancedBlock>Advanced Block</AdvancedBlock>
-	  <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
-	  <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput> 	
-	  <contextualEnable>Enable</contextualEnable>
-	  <contextualDisable>Disable</contextualDisable>
-	  <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
-	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found!</content-not-found>
+      <Title>Préférences Liste de contenu</Title>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Afficher les flux RSS</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Afficher "En savoir plus"</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Afficher l'image</UICLVConfigShowIllustrationFormCheckboxInput>
+      <AdvancedBlock>Paramètres avancés</AdvancedBlock>
+	  <UICLVConfigDynamicNavigationLabel>Navigation dynamique</UICLVConfigDynamicNavigationLabel>
+	  <UICLVConfigContextualFolderRadioBoxInput>Répertoire contextuel</UICLVConfigContextualFolderRadioBoxInput> 	
+	  <UICLVConfigShowCLVByStringInput>par</UICLVConfigShowCLVByStringInput>
+	  <UICLVConfigshowSCVWithStringInput>avec</UICLVConfigshowSCVWithStringInput>
+    <UICLVConfigTargetPageFormInputSet>Afficher dans une page</UICLVConfigTargetPageFormInputSet>
+    <content-not-found>Ce contenu n'est pas trouvé!</content-not-found>
     </label>
     <help>
-    	<ModeSelectionHelp>Determine what kind of information will be display inside portlet</ModeSelectionHelp>
-    	<FolderPathHelp>Select the location of information</FolderPathHelp>
-    	<HeaderOptionHelp>Set the title to present the general contents inside portlet</HeaderOptionHelp>
-    	<GeneralOptionHelp>Determine if you want to display the corresponding item</GeneralOptionHelp>
+    	<ModeSelectionHelp>Configure quelle type de contenu sera affiché dans cette portlet</ModeSelectionHelp>
+    	<FolderPathHelp>Selectionne le chemin où se trouve les contenus</FolderPathHelp>
+    	<HeaderOptionHelp>Configure les informations générales à afficher dans la portlet</HeaderOptionHelp>
+    	<GeneralOptionHelp>Configure l'affichage ou non du paramètre correspondant</GeneralOptionHelp>
     	<ContextualHelp>This option allow you to enable/disable the contextual parameter for the shown content of portlet</ContextualHelp>
        	<ParameterHelp>Specify the parameter which appear on the URL</ParameterHelp>
        	<ShowDetailInPageHelp>Specify the name of page which will be used to display the content details for an item</ShowDetailInPageHelp>    	
@@ -163,8 +150,16 @@
   
   <UICLVPresentation>
     <label>
-	  <rssFeed>RSS Feed</rssFeed>      
+	  <rssFeed>Flux RSS</rssFeed>      
 	</label>
-  </UICLVPresentation>  
+  </UICLVPresentation>
+  
+  <UICLVConfigContextualFolderRadioBoxInput>
+  	<label>
+		  <contextualEnable>Activer</contextualEnable>
+		  <contextualDisable>Désactiver</contextualDisable>
+  	</label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+    
 
 </bundle>

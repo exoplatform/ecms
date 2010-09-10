@@ -117,31 +117,29 @@
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogForm>Web content form</UIContentDialogForm>
+      <UIContentDialogForm>Bảng nội dung web</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
+      <Preferences>Cấu hình</Preferences>
       <AddContent>Thêm nội dung</AddContent>
-      <ManageContent>Manage Content</ManageContent>      
+      <ManageContent>Quản lý nội dung</ManageContent>      
     </label>
 	</UICLVContainer>
 	
   <UICLVConfig>
     <label>
-      <Title>Content List Preferences</Title>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Link</UICLVConfigShowReadmoreFormCheckboxInput>
-      <AdvancedBlock>Advanced Block</AdvancedBlock>
-	  <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
-	  <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput> 	
-	  <contextualEnable>Enable</contextualEnable>
-	  <contextualDisable>Disable</contextualDisable>
-	  <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
-	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found!</content-not-found>
+      <Title>Cấu hình cho Content List</Title>
+      <UICLVConfigAllowDynamicUrlStringInput>Cho phép liên kết động</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Hiển thị liên kết</UICLVConfigShowReadmoreFormCheckboxInput>
+      <AdvancedBlock>Cấu hình nâng cao</AdvancedBlock>
+	  <UICLVConfigDynamicNavigationLabel>Liên kết động</UICLVConfigDynamicNavigationLabel>
+	  <UICLVConfigContextualFolderRadioBoxInput>Hiển thị theo ngữ cảnh</UICLVConfigContextualFolderRadioBoxInput> 	
+	  <UICLVConfigShowCLVByStringInput>bằng</UICLVConfigShowCLVByStringInput>
+	  <UICLVConfigshowSCVWithStringInput>với</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Hiển thị tại trang</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Không tìm thấy nội dung!</content-not-found>
     </label>
     <help>
     	<ModeSelectionHelp>Determine what kind of information will be display inside portlet</ModeSelectionHelp>
@@ -159,6 +157,13 @@
     <label>
 	  <rssFeed>RSS Feed</rssFeed>      
 	</label>
-  </UICLVPresentation>  
+  </UICLVPresentation>
+  
+  <UICLVConfigContextualFolderRadioBoxInput>
+  	<label>
+		  <contextualEnable>Bật</contextualEnable>
+		  <contextualDisable>Tắt</contextualDisable>
+  	</label>
+  </UICLVConfigContextualFolderRadioBoxInput>
 
 </bundle>
