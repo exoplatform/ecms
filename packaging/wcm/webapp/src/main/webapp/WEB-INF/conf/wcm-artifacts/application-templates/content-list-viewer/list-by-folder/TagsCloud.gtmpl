@@ -26,7 +26,7 @@ public void renderCategories(def categories) {
       first=false;
       if (category.hasChilds()) {
         %> &nbsp;|&nbsp; <%
-        renderCategories(category.getChilds(), tagStyle);
+        renderCategories(category.getChilds());
       }
     }
 }
