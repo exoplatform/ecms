@@ -16,9 +16,9 @@
 			def isShowTitle = uicomponent.isShowTitle();
 			def isShowDate  = uicomponent.isShowDate();
 			boolean isShowInfoBar = uicomponent.isShowInfoBar();
-			def editingStyle = "z-index: 1";
-			//if (isShowInfoBar)
-			//	editingStyle = "z-index: 1; top:20px";
+			def edittingStyle = "z-index: 1";
+			if (isShowInfoBar)
+				edittingStyle = "z-index: 1; top:20px";
 			%>
 			<div class="$uicomponent.id" id="$uicomponent.id" 
 				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' ">
