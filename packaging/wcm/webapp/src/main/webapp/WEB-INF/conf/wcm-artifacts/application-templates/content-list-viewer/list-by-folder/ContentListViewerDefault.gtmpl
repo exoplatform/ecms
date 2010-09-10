@@ -12,7 +12,7 @@
 		def rssLink = uicomponent.getRssLink();
 		def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 		def isShowRSSLink = uicomponent.isShowRssLink();
-		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";		
+		
 		%>
 		<div class="TopBoxHeader">
       <% if (isShowHeader) { %>
@@ -52,9 +52,6 @@
 					    def itemTitle = uicomponent.getTitle(viewNode);
 							def itemDateCreated = uicomponent.getCreatedDate(viewNode);
 							def imgSrc = uicomponent.getIllustrativeImage(viewNode);
-							def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
-							def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
-							
 							def isShowTitle = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE);
 							def isShowSumary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY);
 							def isShowIllustrationImg = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION);
@@ -70,38 +67,9 @@
 								<div style="padding: 10px 20px;">
 									<% 
 										if(count == 0) {
-											%>
-											<div class="HotNews" onmouseover="this.className  = 'HotNews $hoverClass'" onmouseout="this.className = 'HotNews' ">											
+											%>																						
+											<%=uicomponent.addQuickEditDiv("HotNews", viewNode)%>
 											<%
-									    if (Utils.isShowQuickEdit()) {
-											%>
-											<div class="EdittingContent" style=" z-index: 1">
-												<div class="EdittingToolBar " >
-													<div class="EdittingToolBarL">
-														<div class="EdittingToolBarC clearfix">
-														 <% 										  
-														 if (Utils.isShowDelete(viewNode)) {
-														 %>
-															<div style="float: right">
-																<a href="$contentDeleteLink" title="<%= _ctx.appRes("UICLVPresentation.action.delete") %>"class="CloseContentIcon" >
-																  &nbsp;
-																</a>         
-															</div>
-														 <% } 
-														 
-														 if(uicomponent.isShowEdit(viewNode)){
-														 %>
-															<div style="float: right">
-																<a href="$contentEditLink" title="<%= _ctx.appRes("UICLVPresentation.action.edit") %>" class="EditContentIcon" >
-																  &nbsp;
-																</a>           
-															</div>
-															<% } %>
-														</div>
-													</div>
-												</div>
-											</div>
-											<%}
 													if (isShowIllustrationImg) {
 														%><a class="ImageHotNews" href="<%=itemLink%>"><img width="248" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
 													} 
@@ -133,38 +101,9 @@
 											<%
 											count = 1;
 										} else {
-											%>
-											<div class="NormalNews" onmouseover="this.className  = 'NormalNews $hoverClass' " onmouseout="this.className = 'NormalNews' ">											
-											<%
-										    if (Utils.isShowQuickEdit()) {
-												%>
-												<div class="EdittingContent" style=" z-index: 1">
-													<div class="EdittingToolBar " >
-														<div class="EdittingToolBarL">
-															<div class="EdittingToolBarC clearfix">
-															 <% 										  
-															 if (Utils.isShowDelete(viewNode)) {
-															 %>
-																<div style="float: right">
-																	<a href="$contentDeleteLink" title="<%= _ctx.appRes("UICLVPresentation.action.delete") %>"class="CloseContentIcon" >
-																	  &nbsp;
-																	</a>         
-																</div>
-															 <% } 
-															 
-															 if(uicomponent.isShowEdit(viewNode)){
-															 %>
-																<div style="float: right">
-																	<a href="$contentEditLink" title="<%= _ctx.appRes("UICLVPresentation.action.edit") %>" class="EditContentIcon" >
-																	  &nbsp;
-																	</a>           
-																</div>
-																<% } %>
-															</div>
-														</div>
-													</div>
-												</div>
-												<%}
+											%>																						
+											<%=uicomponent.addQuickEditDiv("NormalNews", viewNode)%>
+												<%
 														if (isShowIllustrationImg) {
 															%><a class="ImageNormalNews" href="<%=itemLink%>"><img width="190" alt="<%=imgSrc%>" src="<%=imgSrc%>" /></a><%
 														} 
