@@ -254,8 +254,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       else
         uiExplorer.setSelectNode(uiExplorer.getCurrentPath());
     }
-	}  
-  
+	}
+	
   private void processRemoveNode(String nodePath, Node node, Event<?> event, boolean isMultiSelect)
       throws Exception {
     final String virtualNodePath = nodePath;

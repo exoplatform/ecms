@@ -31,6 +31,7 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -41,7 +42,11 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  */
 public class TrashServiceImpl implements TrashService {
 
-  final static public String EXO_TOTAL = "exo:total".intern();	
+  final static public String EXO_TOTAL = "exo:total".intern();
+	final static public String MIX_REFERENCEABLE = "mix:referenceable";
+  final static public String TAXONOMY_LINK   = "exo:taxonomyLink";
+  final static public String UUID         = "exo:uuid";
+  final static public String SYMLINK      = "exo:symlink";
 
   private RepositoryService repositoryService;
   private LinkManager linkManager;
@@ -59,10 +64,22 @@ public class TrashServiceImpl implements TrashService {
   public void moveToTrash(Node node, String trashPath, String trashWorkspace,
       String repository, SessionProvider sessionProvider)
   throws Exception {
+  	moveToTrash(node, trashPath, trashWorkspace, repository, sessionProvider, 0);
+  }
+  	
+  public void moveToTrash(Node node, String trashPath, String trashWorkspace,
+      String repository, SessionProvider sessionProvider, int deep)
+  throws Exception {
+  	
 
     String nodeName = node.getName();
     Session nodeSession = node.getSession();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
+    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
+    TaxonomyService taxonomyService = (TaxonomyService)myContainer.getComponentInstanceOfType(TaxonomyService.class);
+    List<Node> categories = taxonomyService.getAllCategories(node);
+    String nodeUUID = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : null;
+    if (node.isNodeType(SYMLINK)) nodeUUID = null;
 
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
       node.addMixin(EXO_RESTORE_LOCATION);
@@ -83,29 +100,51 @@ public class TrashServiceImpl implements TrashService {
         //clone node in trash folder
         trashSession.getWorkspace().clone(nodeWorkspaceName,
             node.getPath(), actualTrashPath, true);
-        Node clonedNode = trashSession.getNodeByUUID(node.getUUID());
-        //remove link from tag to node
-        ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-        NewFolksonomyService newFolksonomyService = (NewFolksonomyService)
-        myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
-
-        String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-        List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(node, repository, tagWorkspace);
-        for (Node tag : tags) {
-          newFolksonomyService.removeTagOfDocument(tag.getPath(), node, repository, tagWorkspace);
-          linkManager.createLink(tag, clonedNode);
-          long total = tag.hasProperty(EXO_TOTAL) ?
-              tag.getProperty(EXO_TOTAL).getLong() : 0;
-              tag.setProperty(EXO_TOTAL, total + 1);
-              tag.getSession().save();					
-        }				
+	      if (node.isNodeType(MIX_REFERENCEABLE)) {
+		        Node clonedNode = trashSession.getNodeByUUID(node.getUUID());
+		        //remove link from tag to node
+		
+		        NewFolksonomyService newFolksonomyService = (NewFolksonomyService)
+		        myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
+		
+		        String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
+		        List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(node, repository, tagWorkspace);
+		        for (Node tag : tags) {
+		          newFolksonomyService.removeTagOfDocument(tag.getPath(), node, repository, tagWorkspace);
+		          linkManager.createLink(tag, clonedNode);
+		          long total = tag.hasProperty(EXO_TOTAL) ?
+		              tag.getProperty(EXO_TOTAL).getLong() : 0;
+		              tag.setProperty(EXO_TOTAL, total + 1);
+		              tag.getSession().save();					
+		        }	
+	      }
         node.remove();
       }
+
       nodeSession.save();
       trashSession.save();
+      //remove categories
+      if (deep == 0 && nodeUUID != null) {
+	      for (Node category : categories) {
+	      	NodeIterator iter = category.getNodes();
+	      	while (iter.hasNext()) {
+	      		Node categoryChild = iter.nextNode();
+		      	if (categoryChild.isNodeType(TAXONOMY_LINK) && categoryChild.hasProperty(UUID) && 
+		      			nodeUUID.equals(categoryChild.getProperty(UUID).getString())) 	{
+		      		moveToTrash(categoryChild, trashPath, trashWorkspace, repository, sessionProvider, deep + 1);
+		      	}
+	      	}
+	      }
+      }
+      
+      trashSession.save();
       trashSession.logout();
-    } 
-    nodeSession.logout();
+    }
+    
+    nodeSession.save();
+    if (deep == 0) {
+    	nodeSession.logout();
+    }
   }
 
   /**
@@ -115,6 +154,12 @@ public class TrashServiceImpl implements TrashService {
   public void restoreFromTrash(Node trashHomeNode, String trashNodePath, 
       String repository,
       SessionProvider sessionProvider) throws Exception {
+  	restoreFromTrash(trashHomeNode, trashNodePath, repository, sessionProvider, 0);
+  }
+  
+  private void restoreFromTrash(Node trashHomeNode, String trashNodePath, 
+      String repository,
+      SessionProvider sessionProvider, int deep) throws Exception {
 
     Session trashNodeSession = trashHomeNode.getSession();
     Node trashNode = (Node)trashNodeSession.getItem(trashNodePath);
@@ -122,13 +167,12 @@ public class TrashServiceImpl implements TrashService {
     String restoreWorkspace = trashNode.getProperty(RESTORE_WORKSPACE).getString();
     String restorePath = trashNode.getProperty(RESTORE_PATH).getString();
     //		restorePath = fixRestorePath(restorePath);
+    String nodeUUID = trashNode.isNodeType(MIX_REFERENCEABLE) ? trashNode.getUUID() : null;
+    if (trashNode.isNodeType(SYMLINK)) nodeUUID = null;
+    String taxonomyLinkUUID = trashNode.isNodeType(TAXONOMY_LINK) ? trashNode.getProperty(UUID).getString() : null;
 
-    ManageableRepository manageableRepository = repositoryService
-    .getRepository(repository);
-    Session restoreSession 
-    = sessionProvider.
-    getSession(restoreWorkspace,
-        manageableRepository);
+    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    Session restoreSession = sessionProvider.getSession(restoreWorkspace,  manageableRepository);
 
     if (restoreWorkspace.equals(trashWorkspace)) {
       trashNodeSession.getWorkspace().move(trashNodePath, restorePath);
@@ -136,32 +180,78 @@ public class TrashServiceImpl implements TrashService {
       //clone node
       restoreSession.getWorkspace().clone(
           trashWorkspace, trashNodePath, restorePath, true);
-      Node restoredNode = restoreSession.getNodeByUUID(trashNode.getUUID());
-
-      //remove link from tag to node in trash
-      ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-      NewFolksonomyService newFolksonomyService = (NewFolksonomyService)
-      myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
-
-      String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-      List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(trashNode, repository, tagWorkspace);
-      for (Node tag : tags) {
-        newFolksonomyService.removeTagOfDocument(tag.getPath(), trashNode, repository, tagWorkspace);
-        linkManager.createLink(tag, restoredNode);
-        long total = tag.hasProperty(EXO_TOTAL) ?
-            tag.getProperty(EXO_TOTAL).getLong() : 0;
-            tag.setProperty(EXO_TOTAL, total + 1);
-            tag.getSession().save();
-      }				
+      if (trashNode.isNodeType(MIX_REFERENCEABLE)) {
+	      Node restoredNode = restoreSession.getNodeByUUID(trashNode.getUUID());
+	
+	      //remove link from tag to node in trash
+	      ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
+	      NewFolksonomyService newFolksonomyService = (NewFolksonomyService)
+	      myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
+	
+	      String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
+	      List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(trashNode, repository, tagWorkspace);
+	      for (Node tag : tags) {
+	        newFolksonomyService.removeTagOfDocument(tag.getPath(), trashNode, repository, tagWorkspace);
+	        linkManager.createLink(tag, restoredNode);
+	        long total = tag.hasProperty(EXO_TOTAL) ?
+	            tag.getProperty(EXO_TOTAL).getLong() : 0;
+	            tag.setProperty(EXO_TOTAL, total + 1);
+	            tag.getSession().save();
+	      }
+      }
 
       trashNodeSession.getItem(trashNodePath).remove();
     }
 
     removeMixinEXO_RESTORE_LOCATION(restoreSession, restorePath);
+
     trashNodeSession.save();
     restoreSession.save();
+    
+    //also restore categories of node
+    if (deep == 0 && nodeUUID != null) {
+    	while (true) {
+    		boolean found = false;
+	    	NodeIterator iter = trashHomeNode.getNodes();
+	      while (iter.hasNext()) {
+	      	Node trashChild = iter.nextNode();
+	      	if (trashChild.isNodeType(TAXONOMY_LINK) && trashChild.hasProperty(UUID) && 
+	      			nodeUUID.equals(trashChild.getProperty(UUID).getString()) ) 	{
+	      				restoreFromTrash(trashHomeNode, trashChild.getPath(), repository, sessionProvider, deep + 1);
+	      				found = true;
+	      				break;
+	      	}
+	    	}
+	      if (!found) break;
+    	}
+    }
 
-    trashNodeSession.logout();
+    trashNodeSession.save();
+    restoreSession.save();
+    
+    if (deep == 0 && taxonomyLinkUUID != null) {
+    	while (true) {
+    		boolean found = false;
+	    	NodeIterator iter = trashHomeNode.getNodes();
+	      while (iter.hasNext()) {
+	      	Node trashChild = iter.nextNode();
+	      	if (trashChild.isNodeType(MIX_REFERENCEABLE)  &&
+	      			taxonomyLinkUUID.equals(trashChild.getUUID()))	{
+	      				restoreFromTrash(trashHomeNode, trashChild.getPath(), repository, sessionProvider, deep + 1);
+	      				found = true;
+	      				break;
+	      	}
+	      }
+	      if (!found) break;
+    	}
+    }
+
+    trashNodeSession.save();
+    restoreSession.save();
+    
+    if (deep == 0) {
+	    trashNodeSession.logout();
+    }
     if (!restoreWorkspace.equals(trashWorkspace)) 		
       restoreSession.logout();
   }

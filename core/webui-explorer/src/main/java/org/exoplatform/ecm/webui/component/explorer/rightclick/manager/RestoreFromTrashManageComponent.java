@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 
@@ -42,12 +43,16 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectRestorePath;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -150,6 +155,9 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     TrashService trashService = (TrashService)myContainer.getComponentInstanceOfType(TrashService.class);
     UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);    
 
+    String restorePath = node.getProperty(Utils.EXO_RESTOREPATH).getString();
+		String restoreWs = node.getProperty(Utils.EXO_RESTORE_WORKSPACE).getString();
+    
 		try {
       uiExplorer.addLockToken(node);
     } catch (Exception e) {
@@ -183,6 +191,27 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
 				
 				event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     	}
+    	//restore categories for node
+    	try {
+    		Session session = uiExplorer.getSessionByWorkspace(restoreWs);
+        NodeFinder nodeFinder = uiExplorer.getApplicationComponent(NodeFinder.class);		
+  			Node restoredNode = (Node)nodeFinder.getItem(session, restorePath);
+  	    WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
+  	    List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(restoredNode);
+ 			
+  	    for(Node categoryNode : categories){
+  	      wcmComposer.updateContents(categoryNode.getSession().getRepository().toString(), 
+  	                                 categoryNode.getSession().getWorkspace().getName(),
+  	                                 categoryNode.getPath(), new HashMap<String, String>());
+        }
+  	    
+  			String parentPath = restoredNode.getParent().getPath();
+  			String parentRepo = restoredNode.getSession().getRepository().toString();
+  			String parentWSpace = restoredNode.getSession().getWorkspace().getName();
+  	    
+  			wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
+  			
+    	} catch (Exception e) {}
     } catch (PathNotFoundException e) {
     	LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + node.getPath());
     	JCRExceptionManager.process(uiApp, e);
