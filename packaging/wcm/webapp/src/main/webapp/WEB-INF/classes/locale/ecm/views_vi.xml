@@ -701,5 +701,14 @@
      </label> 
    </view>
   </EnableVersioning>
-
+		<AutoVersioning>
+   <view>
+     <label>
+     		<isDeep>Độ sâu</isDeep>
+							<nodetypes>Kiểu node</nodetypes> 
+							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
+     </label> 
+   </view>
+  </AutoVersioning>
 </bundle>

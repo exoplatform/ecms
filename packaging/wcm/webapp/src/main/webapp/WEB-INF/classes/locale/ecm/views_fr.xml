@@ -702,4 +702,14 @@
      </label> 
    </view>
   </EnableVersioning>
+  <AutoVersioning>
+   <view>
+     <label>
+     		<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes>
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+							<nodeTypeName>NodeType Name</nodeTypeName>
+     </label> 
+   </view>
+  </AutoVersioning>
 </bundle>

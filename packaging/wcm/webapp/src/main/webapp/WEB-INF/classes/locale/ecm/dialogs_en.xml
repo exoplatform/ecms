@@ -801,4 +801,13 @@
      </label> 
    </dialog>
   </EnableVersioning>
+  <AutoVersioning>
+  	<dialog>
+     <label>
+     		<isDeep>Is deep</isDeep>
+							<nodetypes>NodeTypes</nodetypes> 
+							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     </label> 
+   </dialog>
+  </AutoVersioning>
 </bundle>

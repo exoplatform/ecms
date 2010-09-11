@@ -702,4 +702,14 @@
      </label> 
    </view>
   </EnableVersioning>
+  <AutoVersioning>
+   <view>
+     <label>
+     		<isDeep>Is deep</isDeep>
+							<nodetypes>NodeTypes</nodetypes> 
+							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodeTypeName>NodeType Name</nodeTypeName>
+     </label> 
+   </view>
+  </AutoVersioning>
 </bundle>

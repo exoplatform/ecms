@@ -799,5 +799,13 @@
      </label> 
    </dialog>
   </EnableVersioning>
-
+  <AutoVersioning>
+   <dialog>
+     <label>
+     		<isDeep>Độ sâu</isDeep>
+							<nodetypes>Kiểu node</nodetypes> 
+							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+     </label> 
+   </dialog>
+  </AutoVersioning>
 </bundle>
