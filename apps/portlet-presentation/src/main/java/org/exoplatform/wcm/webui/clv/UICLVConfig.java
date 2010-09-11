@@ -32,7 +32,6 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.scv.UISCVPreferences;
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.wcm.webui.selector.content.folder.UIContentBrowsePanelFolder;
 import org.exoplatform.wcm.webui.selector.content.folder.UIContentSelectorFolder;
@@ -150,17 +149,17 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   /** The Constant TARGET_PAGE_SELECTOR_POPUP_WINDOW. */
   public final static String TARGET_PAGE_SELECTOR_POPUP_WINDOW      = "UICLVConfigTargetPageSelectorPopupWindow";
   
-  /** The Constant DYNAMIC_NAVIGATION_LABEL. */											
-  public static final String DYNAMIC_NAVIGATION_LABEL								= "UICLVConfigDynamicNavigationLabel";
+  /** The Constant DYNAMIC_NAVIGATION_LABEL. */                     
+  public static final String DYNAMIC_NAVIGATION_LABEL               = "UICLVConfigDynamicNavigationLabel";
   
   /** The Constant CONTEXTUAL_FOLDER_RADIOBOX_INPUT. */
-  public static final String CONTEXTUAL_FOLDER_RADIOBOX_INPUT				= "UICLVConfigContextualFolderRadioBoxInput";
+  public static final String CONTEXTUAL_FOLDER_RADIOBOX_INPUT       = "UICLVConfigContextualFolderRadioBoxInput";
 
   /** The Constant SHOW_CLV_BY_STRING_INPUT. */
-  public static final String SHOW_CLV_BY_STRING_INPUT								= "UICLVConfigShowCLVByStringInput";
+  public static final String SHOW_CLV_BY_STRING_INPUT               = "UICLVConfigShowCLVByStringInput";
   
   /** The Constant SHOW_SCV_WITH_STRING_INPUT. */
-  public static final String SHOW_SCV_WITH_STRING_INPUT    					= "UICLVConfigshowSCVWithStringInput";
+  public static final String SHOW_SCV_WITH_STRING_INPUT             = "UICLVConfigshowSCVWithStringInput";
   
   /** TODO: Need to improve, we should allow user can choose template category by configuration or portlet's preference */
   /** The Constant DISPLAY_TEMPLATE_CATEGORY. */
@@ -214,7 +213,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     if (items == null && UICLVPortlet.DISPLAY_MODE_MANUAL.equals(displayMode) && itemPath != null) {
       if(itemPath.contains(";")) {
-      	items = Arrays.asList(itemPath.split(";"));
+        items = Arrays.asList(itemPath.split(";"));
       }
     }
     return items;
@@ -425,10 +424,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     addChild(showScvWithInput);
     
     if (contextualFolderMode != null && contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE))
-    	isShowAdvancedBlock_ = true;
+      isShowAdvancedBlock_ = true;
     else //if (contextualFolderMode == null || contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_DISABLE)) 
-  	{
-    	isShowAdvancedBlock_ = false;
+    {
+      isShowAdvancedBlock_ = false;
     }
 
     setActions(new String[] { "Save", "Cancel" });
@@ -541,11 +540,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
       String showClvBy = clvConfig.getUIStringInput(UICLVConfig.SHOW_CLV_BY_STRING_INPUT).getValue();
       if (showClvBy == null || showClvBy.length() == 0)
-      	showClvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
+        showClvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
       String targetPage = clvConfig.getUIStringInput(UICLVConfig.TARGET_PAGE_FORM_STRING_INPUT).getValue();
       String showScvWith = clvConfig.getUIStringInput(UICLVConfig.SHOW_SCV_WITH_STRING_INPUT).getValue();
       if (showScvWith == null || showScvWith.length() == 0)
-      	showScvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
+        showScvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
       
       /** SET VALUES TO PREFERENCES */
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
@@ -591,7 +590,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       }
       
       if (Utils.isPortalEditMode()) {
-      	Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);
+        Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);
       } else {
         Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
       }
@@ -647,7 +646,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         String[] locations = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue().split(":");
         Node node = Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]);
         contentSelector.init(clvConfig.getDriveName(),
-                             fixPath(node.getPath(), clvConfig, locations[0]));
+                             fixPath(node == null ? "" : node.getPath(), clvConfig, locations[0]));
         folderContentSelector.setSourceComponent(clvConfig, new String[] { UICLVConfig.ITEM_PATH_FORM_STRING_INPUT });
         Utils.createPopupWindow(clvConfig, contentSelector, UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW, 800);
         clvConfig.setPopupId(UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW);
@@ -665,6 +664,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     
     private String fixPath(String path, UICLVConfig clvConfig, String repository) throws Exception {
+      if (path == null || path.length() == 0)
+        return "";
       if (clvConfig.getDriveName() == null || clvConfig.getDriveName().length() == 0)
         return path;
       
