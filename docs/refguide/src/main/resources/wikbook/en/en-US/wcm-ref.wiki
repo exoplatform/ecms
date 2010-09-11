@@ -74,6 +74,8 @@ h2. PublicationManager
   {include:document="pages/services/publication.wiki" /}
 h2. WCMComposer
   {include:document="pages/services/composer.wiki" /}
+h2. CMS
+  {include:document="pages/services/cms.wiki" /} 
 
 h1. FAQ
   {include:document="pages/faq/faq.wiki" /}
