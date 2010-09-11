@@ -1,0 +1,5 @@
+RSSService is used for working with generate RSS. In this service there are some functions.
+
+|| *Method* || *Return* || *Prototype* || *Desription* ||
+| storeNode | String | generateFeed(Map context) | Create a Feed file (feed type is RSS or Podcast){example}{example}@param context: Map Consist of among information{example}{example}@throws Exception: throws exception |
+
