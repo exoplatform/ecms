@@ -90,14 +90,14 @@ Create a pom.xml from the following content
 
 Create the directories _src/main/java_ and start launching *mvn  eclipse:eclipse* You can then, launch your eclipse and import this new project
 
-Create a new class called *{_}org.exoplatform.wcm.component.cache.UIWCMCacheComponent{_}* that extends *org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent*
+Create a new class called *_org.exoplatform.wcm.component.cache.UIWCMCacheComponent_* that extends *org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent*
 
 h2. Add your own ActionListener
 
 The webui framework allows you to be notified when a given action has  been triggered, you just need to call your own action listener as follow \_(ACTION_NAME)*ActionListener*_
 _Example :_ You create your own action listener name *CacheView*, so your action listener then will be named as *CacheViewActionListener*
 
-first thing we will do, add a static inner class called *{_}CacheViewActionListener{_}* that extends *{_}org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanelActionListener{_}*
+first thing we will do, add a static inner class called *_CacheViewActionListener_* that extends *_org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanelActionListener_*
 
 
 See below the expected code
