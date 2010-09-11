@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8080" />
-<title>Test_SNF_ECMS_15_SubscribleLetter</title>
+<title>Test_SNF_ECMS_14_SubscribleLetter_ecmdemo</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_15_SubscribleLetter</td></tr>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_14_SubscribleLetter_ecmdemo</td></tr>
 </thead><tbody>
 <tr>
 	<td>echo</td>
@@ -27,7 +27,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Login</td>
 	<td></td>
 </tr>
@@ -62,7 +62,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Newsletters</td>
 	<td></td>
 </tr>
@@ -77,17 +77,32 @@
 	<td>hanhlt84@gmail.com</td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
 	<td>marketing#market</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
+	<td>marketing#market</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>general#results</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
+	<td>general#results</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Subscribe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Subscribe</td>
 	<td></td>
 </tr>
@@ -97,7 +112,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//div[3]/div/div/div[1]/div/div/div/div/div[2]/div/div/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
 	<td></td>
 </tr>
@@ -119,6 +134,11 @@
 <tr>
 	<td>echo</td>
 	<td>-- Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>
