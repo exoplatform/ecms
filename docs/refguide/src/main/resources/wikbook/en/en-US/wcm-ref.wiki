@@ -80,16 +80,12 @@ h2. ActionServiceContainer
 	{include:document="pages/services/actionServiceContainer.wiki" /}
 h2. Records
   {include:document="pages/services/records.wiki" /}
-h2. ContentInitializer
-  {include:document="pages/services/contentInitializer.wiki" /}
 h2. MultiLanguage
   {include:document="pages/services/multiLanguage.wiki" /}
 h2. ManageDrive
   {include:document="pages/services/manageDrive.wiki" /}
 h2. NewFolksonomy
   {include:document="pages/services/newFolksonomy.wiki" /}
-h2. Metadata
-  {include:document="pages/services/metadata.wiki" /}
 h2. Script
   {include:document="pages/services/script.wiki" /}
 h2. Relations
@@ -100,44 +96,12 @@ h2. Voting
   {include:document="pages/services/voting.wiki" /}
 h2. Comments
   {include:document="pages/services/comments.wiki" /}
-h2. WatchDocument
-  {include:document="pages/services/watchDocument.wiki" /}
 h2. Query
   {include:document="pages/services/query.wiki" /}
-h2. Template
-  {include:document="pages/services/template.wiki" /}
 h2. ManageView
   {include:document="pages/services/manageView.wiki" /}
-h2. Thumbnail
-  {include:document="pages/services/thumbnail.wiki" /}
-h2. ThumbnailREST
-  {include:document="pages/services/thumbnailREST.wiki" /}
-h2. CompressData
-  {include:document="pages/services/compressData.wiki" /}
 h2. ApplicationTemplateManager
   {include:document="pages/services/applicationTemplateManager.wiki" /}
-h2. NodeFinder
-  {include:document="pages/services/nodeFinder.wiki" /}
-h2. DMSConfiguration
-  {include:document="pages/services/dmsConfiguration.wiki" /}
-h2. DocumentType
-  {include:document="pages/services/documentType.wiki" /}
-h2. Favorite
-  {include:document="pages/services/favorite.wiki" /}
-h2. Trash
-  {include:document="pages/services/trash.wiki" /}
-h2. Timeline
-  {include:document="pages/services/timeline.wiki" /}
-h2. Lock
-  {include:document="pages/services/lock.wiki" /}
-h2. JodConverter
-  {include:document="pages/services/jodConverter.wiki" /}
-h2. Repository
-  {include:document="pages/services/repository.wiki" /}
-h2. Cache
-  {include:document="pages/services/cache.wiki" /}
-h2. Listener
-  {include:document="pages/services/listener.wiki" /}
 
 h1. FAQ
   {include:document="pages/faq/faq.wiki" /}
