@@ -643,10 +643,13 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       if (mode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) {
         UIContentSelectorFolder contentSelector = clvConfig.createUIComponent(UIContentSelectorFolder.class, null, null);
         UIContentBrowsePanelFolder folderContentSelector= contentSelector.getChild(UIContentBrowsePanelFolder.class);
-        String[] locations = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue().split(":");
-        Node node = Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]);
+        String location = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
+        String[] locations = (location == null) ? null : location.split(":");
+        Node node = (locations != null && locations.length >= 3) ? Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]) : null;
         contentSelector.init(clvConfig.getDriveName(),
-                             fixPath(node == null ? "" : node.getPath(), clvConfig, locations[0]));
+                             fixPath(node == null ? "" : node.getPath(), 
+                                     clvConfig, 
+                                     (locations != null && locations.length > 0) ? locations[0] : null));
         folderContentSelector.setSourceComponent(clvConfig, new String[] { UICLVConfig.ITEM_PATH_FORM_STRING_INPUT });
         Utils.createPopupWindow(clvConfig, contentSelector, UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW, 800);
         clvConfig.setPopupId(UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW);
@@ -664,10 +667,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     
     private String fixPath(String path, UICLVConfig clvConfig, String repository) throws Exception {
-      if (path == null || path.length() == 0)
+      if (path == null || path.length() == 0 || repository == null || repository.length() == 0 || 
+          clvConfig.getDriveName() == null || clvConfig.getDriveName().length() == 0)
         return "";
-      if (clvConfig.getDriveName() == null || clvConfig.getDriveName().length() == 0)
-        return path;
       
       ManageDriveService managerDriveService = clvConfig.getApplicationComponent(ManageDriveService.class);
       DriveData driveData = managerDriveService.getDriveByName(clvConfig.getDriveName(), repository);
