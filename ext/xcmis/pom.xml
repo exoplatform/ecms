@@ -10,10 +10,6 @@
    <packaging>pom</packaging>
    <name>eXo ECM Suite :: Ext :: xCMIS</name>
    <description>eXo Entreprise Content Management Suite :: Extensions :: xCMIS</description>
-   <properties>
-      <!-- REMOVE THIS AFTER UPDATING PARENT POM OF ECMS -->
-      <xcmis.version>1.2.0-SNAPSHOT</xcmis.version>
-   </properties>
    <modules>
       <module>sp</module>
    </modules>
