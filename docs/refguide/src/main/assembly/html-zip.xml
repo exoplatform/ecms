@@ -5,15 +5,16 @@
   <includeBaseDirectory>false</includeBaseDirectory>
   <fileSets>
    <fileSet>
-    <directory>target/wikbook/output</directory>
+    <directory>target/wikbook/src</directory>
     <outputDirectory>org.exoplatform.ecms</outputDirectory>
     <includes>
-      <include>**</include>
+      <include>**/*.xml</include>
+      <include>**/*.ext</include>
      </includes>
-    <excludes>
+    <!--excludes>
       <exclude>**/*.fo</exclude>
       <exclude>**/*.pdf</exclude>
-    </excludes>
+    </excludes-->
    </fileSet>
   </fileSets>
 </assembly>
