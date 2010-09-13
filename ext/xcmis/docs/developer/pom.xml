@@ -189,6 +189,25 @@
             </dependencies>
          </plugin>
 
+
+      <!-- html-zip packaging -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/html-zip.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
          <!-- Attach the doc to the pom in maven repo -->
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -206,6 +225,10 @@
                            <file>target/wikbook/output/index.pdf</file>
                            <type>pdf</type>
                         </artifact>
+		        <artifact>
+		          <file>target/${project.artifactId}-${project.version}.zip</file>
+		          <type>zip</type>
+		        </artifact>
                      </artifacts>
                   </configuration>
                </execution>
