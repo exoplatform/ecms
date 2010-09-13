@@ -25,5 +25,6 @@
     <module>server-jboss</module>
     <module>module</module>
     <module>product</module>
+    <module>jboss-package</module>
   </modules>
 </project>
