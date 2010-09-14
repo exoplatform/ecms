@@ -823,8 +823,54 @@
     <portlet-application>
       <portlet>
         <application-ref>presentation</application-ref>
-        <portlet-ref>ParameterizedContentViewerPortlet</portlet-ref>
-        <preferences></preferences>
+        <portlet-ref>SingleContentViewer</portlet-ref>
+        <preferences>
+          <preference>
+            <name>repository</name>
+            <value>repository</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>workspace</name>
+            <value>collaboration</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>nodeIdentifier</name>
+            <value>/sites content/live/acme/web contents/site artifacts/Introduce</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowPrintAction</name>
+            <value>false</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowTitle</name>
+            <value>true</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowDate</name>
+            <value>false</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ShowOptionBar</name>
+            <value>false</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ContextEnable</name>
+            <value>true</value>
+            <read-only>false</read-only>
+          </preference>
+          <preference>
+            <name>ParameterName</name>
+            <value>content-id</value>
+            <read-only>false</read-only>
+          </preference>
+        </preferences>
       </portlet>
       <title>Print viewer</title>
       <access-permissions>Everyone</access-permissions>

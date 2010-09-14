@@ -113,6 +113,9 @@
    	  <ContextCaption>Dynamic Navigation</ContextCaption>
    	  <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
    	  <UISCVParameterInputBox>by</UISCVParameterInputBox>
+   	  <PrintSettingBlock>Print viewer setting</PrintSettingBlock>
+   	  <UISCVPrintPageParameter>URL Parameter</UISCVPrintPageParameter>
+   	  <UISCVConfigPrintPageFormInputSet>Print viewer in page</UISCVConfigPrintPageFormInputSet>
     </label>
     <help>
    	  <ContentPathBlock>Please select the source data to display</ContentPathBlock>
@@ -126,4 +129,10 @@
   		<SelectFolderPath>Select folder path</SelectFolderPath>
   	</title>  	
   </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+  	<title>
+  		<SelectTargetPage>Print viewer in page</SelectTargetPage>
+  	</title>  	
+  </UISCVConfigPrintPageFormInputSet>
+
 </bundle>

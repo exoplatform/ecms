@@ -59,7 +59,7 @@
 				<%
 			}
 				
-			if (!Utils.isPortalEditMode() && isShowOptionBar) { 
+			if (!Utils.isPortalEditMode() && isShowOptionBar && !uicomponent.isPrinting()) { 
 				%>
 					<div class="UIOptionBar">
 	         <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>

@@ -221,6 +221,7 @@ public class UIPresentationContainer extends UIContainer{
         presentation.setNode(nodeView);
       } else if (nodeView == null) {
         return null;
+
       } else {
         presentation.setOriginalNode(nodeView);
         presentation.setNode(nodeView);
@@ -263,16 +264,17 @@ public class UIPresentationContainer extends UIContainer{
 	 * @return <code>true</code> if the Quick Print is shown. Otherwise, <code>false</code>
 	 */
 	public String getPrintUrl() throws RepositoryException{
+		String printParameterName;
 	  Node tempNode = getNodeView();
-    String strPath = tempNode.getPath();
-		String repository = ((ManageableRepository)tempNode.getSession().getRepository()).getConfiguration().getName();
-		String workspace = tempNode.getSession().getWorkspace().getName();
-		String portalURI = Util.getPortalRequestContext().getPortalURI();
-		WCMConfigurationService wcmConfigurationService = getApplicationComponent(WCMConfigurationService.class);
-		String printPageUrl = wcmConfigurationService.getRuntimeContextParam("printViewerPage");
-		String printUrl = portalURI + printPageUrl + "?path=/" + repository + "/" + workspace + strPath + "&isPrint=true";
-		return printUrl;
-	}
+	  String strPath = tempNode.getPath();
+	  String repository = ((ManageableRepository)tempNode.getSession().getRepository()).getConfiguration().getName();
+	  String workspace = tempNode.getSession().getWorkspace().getName();
+	  String portalURI = Util.getPortalRequestContext().getPortalURI();
+	  String printPageUrl = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PAGE, "");
+	  printParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, "");
+	  String printUrl = portalURI + printPageUrl + "?" + printParameterName +  "=/" + repository + "/" + workspace + strPath + "&isPrint=true";
+	  return printUrl;
+}
 
 	public String getQuickEditLink(){
     return Utils.getEditLink(getNodeView(), true, false);
