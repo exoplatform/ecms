@@ -11,8 +11,7 @@
 		String header = uicomponent.getHeader();
 		def rssLink = uicomponent.getRssLink();
 		def isShowRssLink = uicomponent.isShowRssLink();
-		def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
-		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";		
+		def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;				
 		%>
 		<div class="TopBoxHeader">
 			<%
@@ -54,42 +53,10 @@
 					String imgSrc = uicomponent.getIllustrativeImage(viewNode);								
 					if (itemTitle != null && itemTitle.trim().length() != 0) {
 						itemName = itemTitle;
-					}						
-					String contentEditLink = uicomponent.getEditLink(viewNode, true, false);
-					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
-					%>
-					<div class="CaptionItem"
-						onmouseover="this.className = 'CaptionItem $hoverClass' " onmouseout="this.className = 'CaptionItem' ">
+					}											
+					%>					
+					<%=uicomponent.addQuickEditDiv("CaptionItem", viewNode)%>						
 						<%
-				    if (Utils.isShowQuickEdit()) {
-						%>
-						<div class="EdittingContent" style=" z-index: 1">
-							<div class="EdittingToolBar " >
-								<div class="EdittingToolBarL">
-									<div class="EdittingToolBarC clearfix">
-									 <% 										  
-									 if (Utils.isShowDelete(viewNode)) {
-									 %>
-										<div style="float: right">
-											<a href="$contentDeleteLink" title="<%= _ctx.appRes("UICLVPresentation.action.delete") %>"class="CloseContentIcon" >
-											  &nbsp;
-											</a>         
-										</div>
-									 <% } 
-									 
-									 if(uicomponent.isShowEdit(viewNode)){
-									 %>
-										<div style="float: right">
-											<a href="$contentEditLink" title="<%= _ctx.appRes("UICLVPresentation.action.edit") %>" class="EditContentIcon" >
-											  &nbsp;
-											</a>           
-										</div>
-										<% } %>
-									</div>
-								</div>
-							</div>
-						</div>
-						<%}
 								if (uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE)) {
 									%>
 										<div class="CaptionTitle" >

@@ -22,8 +22,7 @@
 			def header = uicomponent.getHeader();
 			def rssLink = uicomponent.getRssLink();
 			def isShowRssLink = uicomponent.isShowRssLink();
-		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
-		  def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";		
+		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;		  
 			%>
 		  <div class="TopBoxHeader">
 				<%	
@@ -68,55 +67,20 @@
 								def itemWebdavLink = uicomponent.getWebdavURL(viewNode);
 								uicomponent.setDateTimeFormat("dd/MM/yyyy");			
 								def itemDateCreated = uicomponent.getCreatedDate(viewNode);
-								def itemOwner = uicomponent.getAuthor(viewNode);			
-								
+								def itemOwner = uicomponent.getAuthor(viewNode);											
 								def imgSrc = uicomponent.getIllustrativeImage(viewNode);
 								def isShowImage = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION) && imgSrc != null;
-
 								def itemName = viewNode.getName();
 								def itemTitle = uicomponent.getTitle(viewNode);
 								if (itemTitle != null && itemTitle.trim().length() != 0)
 									itemName = itemTitle;
-
 								def itemSummary = uicomponent.getSummary(viewNode);
 								def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;
-								
 								def itemIcon = uicomponent.getContentIcon(viewNode);
-								
-                def contentEditLink = uicomponent.getEditLink(viewNode, true, false);
-      					def contentDeleteLink = uicomponent.event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
-      					%>
-								<div class="Column1" onmouseover="this.className = 'Column1 $hoverClass'" onmouseout="this.className = 'Column1'">      					
-	      					<%
-	      			    if (Utils.isShowQuickEdit()) {
-									%>
-										<div class="EdittingContent" style=" z-index: 1">
-											<div class="EdittingToolBar " >
-												<div class="EdittingToolBarL">
-													<div class="EdittingToolBarC clearfix">
-													 <% 										  
-													 if (Utils.isShowDelete(viewNode)) {
-													 %>
-														<div style="float: right">
-															<a href="$contentDeleteLink" title="<%= _ctx.appRes("UICLVPresentation.action.delete") %>"class="CloseContentIcon" >
-															  &nbsp;
-															</a>         
-														</div>
-													 <% } 
-													 
-		  										 if(uicomponent.isShowEdit(viewNode)){
-													 %>
-														<div style="float: right">
-															<a href="$contentEditLink" title="<%= _ctx.appRes("UICLVPresentation.action.edit") %>" class="EditContentIcon" >
-															  &nbsp;
-															</a>           
-														</div>
-														<% } %>
-													</div>
-												</div>
-											</div>
-										</div>
-									<%}
+      					%>								
+								<%=uicomponent.addQuickEditDiv("Column1", viewNode)%>
+	      					
+									<%
       			    	if (isShowImage) {
                     %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
 											}
