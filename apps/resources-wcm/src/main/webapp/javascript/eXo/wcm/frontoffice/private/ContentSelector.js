@@ -130,7 +130,8 @@ EcmContentSelector.prototype.buildECSTreeView = function() {
 
 EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	var ECS = eXo.ecm.ECS;
-	eXo.ecm.ECS.eventNode = event;
+	if (event)
+		eXo.ecm.ECS.eventNode = event;
 	var repoName = currentNode.getAttribute("repository");
 	if(repoName) eXo.ecm.ECS.repositoryName = repoName;
 	var wsName	= currentNode.getAttribute("workspace");
@@ -241,7 +242,8 @@ EcmContentSelector.prototype.listRootFolder = function(rootNode) {
 
 EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, connector) {
 	var event = event || window.event;
-	event.cancelBubble = true;
+	if (event)
+		event.cancelBubble = true;
 	if(!currentNode) return;
 	var treeHTML = '';
 	var fileList = '';
@@ -316,7 +318,12 @@ EcmContentSelector.prototype.actionColExp = function(objNode) {
 	if(!objNode) return;
 	var nextElt = eXo.core.DOMUtil.findNextElementByTagName(objNode, "div");
 	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(objNode, "div")[0];
-	if(!nextElt || nextElt.className != "ChildrenContainer") return;
+	if(!nextElt || nextElt.className != "ChildrenContainer") {		
+		var currentNode	= eXo.core.DOMUtil.findFirstDescendantByClass(objNode,"a","NodeIcon");			
+		if (currentNode != null) {
+			eXo.ecm.ECS.getDir(currentNode, false);
+		} else return;
+	}
 	if(nextElt.style.display != 'block') {
 		nextElt.style.display = 'block';
 		iconElt.className = 'CollapseIcon';
