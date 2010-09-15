@@ -40,6 +40,17 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UIContentBrowsePanelFolder extends UIContentBrowsePanel{
+  
+  private String _initPath = "";
+  private String _initDrive = "";
+  
+  public void setInitPath(String initDrive, String initPath) {
+    this._initPath = initPath;
+    this._initDrive = initDrive;
+  }
+  
+  public String getInitDrive() { return this._initDrive; }
+  public String getInitPath() { return this._initPath; }
 
   public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
     public void execute(Event<UIContentBrowsePanel> event) throws Exception {

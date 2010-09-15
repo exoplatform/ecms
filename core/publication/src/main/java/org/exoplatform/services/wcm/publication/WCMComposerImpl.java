@@ -235,7 +235,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 			addUsedPrimaryTypes(primaryType);
 			if (primaryType == null) {
 				primaryType = "nt:base";
-				Node currentFolder = session.getRootNode().getNode(path.substring(1));
+				Node currentFolder = "/".equals(path) ? session.getRootNode() : 
+				                                        session.getRootNode().getNode(path.substring(1));
 				if (currentFolder.isNodeType("exo:taxonomy")) {
 					primaryType = "exo:taxonomyLink";
 				}

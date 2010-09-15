@@ -25,12 +25,15 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.scv.UISCVPreferences;
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.wcm.webui.selector.content.folder.UIContentBrowsePanelFolder;
 import org.exoplatform.wcm.webui.selector.content.folder.UIContentSelectorFolder;
@@ -178,6 +181,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   private List<String> items;
   private String savedPath;
   private boolean isShowAdvancedBlock_;
+  private String driveName_;
+
+  public void setDriveName(String value) { this.driveName_ = value; }
+  public String getDriveName() { return this.driveName_; }
+  
   public void setSavedPath(String value) {
     savedPath = value;
   }
@@ -240,6 +248,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
     String displayMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_DISPLAY_MODE, null);
     String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+    this.setDriveName(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_DRIVE, null));    
     savedPath = itemPath;
     itemPath = getTitles(savedPath);
     String orderBy = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, null);
@@ -473,11 +482,26 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         getUIStringInput(selectField).setValue(titles);
       } else if (TARGET_PAGE_FORM_STRING_INPUT.equals(selectField)){        
         getUIStringInput(selectField).setValue(sValue);
-      }else {
+      }else if (ITEM_PATH_FORM_STRING_INPUT.equals(selectField) && UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(displayMode)) {
         items = new ArrayList<String>();
+        //init drive
+        String[] values = sValue.split(":");
+        if (values.length == 4) {
+          this.setDriveName(values[0]);
+          //check if drive is selected instead of folder
+          ManageDriveService managerDriveService = this.getApplicationComponent(ManageDriveService.class);
+          for (DriveData data : managerDriveService.getAllDrives(values[1])) {
+            if (data.getHomePath().equals(values[3])) {
+              this.setDriveName(data.getName());
+            }
+          }
+          sValue = sValue.substring(values[0].length() + 1);
+        }        
+        // -end of init drive
         titles = getTitle(sValue);
         getUIStringInput(selectField).setValue(titles);
         savedPath = sValue;
+
       }
 
     }
@@ -601,6 +625,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_DISPLAY_MODE, displayMode);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ITEM_PATH, itemPath);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_ITEM_DRIVE, clvConfig.getDriveName());
+      
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ORDER_BY, orderBy);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, orderType);
       
@@ -691,6 +717,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       if (mode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) {
         UIContentSelectorFolder contentSelector = clvConfig.createUIComponent(UIContentSelectorFolder.class, null, null);
         UIContentBrowsePanelFolder folderContentSelector= contentSelector.getChild(UIContentBrowsePanelFolder.class);
+        String[] locations = clvConfig.getSavedPath().split(":");
+        Node node = Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]);
+        contentSelector.init(clvConfig.getDriveName(),
+                             fixPath(node.getPath(), clvConfig, locations[0]));
         folderContentSelector.setSourceComponent(clvConfig, new String[] { UICLVConfig.ITEM_PATH_FORM_STRING_INPUT });
         Utils.createPopupWindow(clvConfig, contentSelector, UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW, 800);
         clvConfig.setPopupId(UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW);
@@ -707,6 +737,20 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         clvConfig.setPopupId(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
       }
     }
+    
+    private String fixPath(String path, UICLVConfig clvConfig, String repository) throws Exception {
+      if (clvConfig.getDriveName() == null || clvConfig.getDriveName().length() == 0)
+        return path;
+      
+      ManageDriveService managerDriveService = clvConfig.getApplicationComponent(ManageDriveService.class);
+      DriveData driveData = managerDriveService.getDriveByName(clvConfig.getDriveName(), repository);
+      if (!path.startsWith(driveData.getHomePath()))
+        return "";
+      if ("/".equals(driveData.getHomePath()))
+        return path;
+      return path.substring(driveData.getHomePath().length());      
+    }
+    
   }
 
   /**

@@ -683,7 +683,7 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 	if(eXo.ecm.ECS.typeObj == "folder" || eXo.ecm.ECS.typeObj == "one") {
 		var action = rws.getAttribute("action");
 		action = action.substring(0, action.length - 2);
-		action += '&objectId=' + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';
+		action += '&objectId=' + eXo.ecm.ECS.driverName + ":" + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';
 		eval(action);
 	} else {
 		var hostName = eXo.ecm.ECS.hostName;
@@ -888,6 +888,82 @@ EcmContentSelector.prototype.languageInit = function() {
 	} else {
 		eXoPlugin.loadScript(window, "lang/en.js");
 		setTimeout(languageInit, 1000);
+	}
+};
+
+EcmContentSelector.prototype.initPath = function(initDrive, initPath, componentId) {
+	setTimeout("eXo.ecm.ECS.waitAndInitPath(\"" + initDrive + "\",\"" + initPath + "\",\"" + componentId +"\")", 1000);
+}
+
+EcmContentSelector.prototype.waitAndInitPath = function(initDrive, initPath, componentId) {
+	initDrive = initDrive.replace(/ /g, "");
+	initPath = initPath.replace(/ /g, "");
+//	alert(initDrive + "; " + initPath + "; " + '_' + initDrive + '_');	
+	var contentBrowsePanel = document.getElementById(componentId);
+	var leftWorkspace = eXo.core.DOMUtil.findDescendantsByClass(contentBrowsePanel, "div", "LeftWorkspace")[0];
+	var tagADrives = eXo.core.DOMUtil.findDescendantsByTagName(leftWorkspace, "a");
+	for (var i = 0; i < tagADrives.length; ++i) {
+		if (tagADrives[i].getAttribute("id")) {
+			var id = tagADrives[i].getAttribute("id");
+			if (id && (id.indexOf('_' + initDrive + '_') >= 0)) {
+				var nodeContainer = eXo.core.DOMUtil.findAncestorByClass(tagADrives[i], "ChildrenContainer");
+				var nodeParent = eXo.core.DOMUtil.findAncestorByClass(tagADrives[i], "Node");
+				if(!nodeContainer) return;
+				var nodeADriveType = nodeContainer.previousSibling;
+				if(!nodeADriveType) return;
+				var nodeLink = nodeADriveType.firstChild.firstChild;
+				eXo.ecm.ECS.renderBreadcrumbs(nodeLink);
+				eXo.ecm.ECS.listRootFolder(nodeLink);
+				eXo.ecm.ECS.actionColExp(nodeADriveType);				
+				var event = false;
+				if (initPath && initPath != "" && initPath != "/")	eXo.ecm.ECS.getDir(tagADrives[i], event);				
+//				eXo.ecm.ECS.actionColExp(nodeParent);
+				eXo.ecm.ECS.expandTree('_' + initDrive + '_', initPath, nodeParent);
+				return;
+			}
+		}
+	}
+};
+
+EcmContentSelector.prototype.expandTree = function(preStr, path, nodeParent) { 
+//	alert(preStr + " " + path + " " + nodeParent);
+	var nextElt = eXo.core.DOMUtil.findNextElementByTagName(nodeParent, "div");	
+	if(!nextElt || nextElt.className != "ChildrenContainer" || !path || path == "") {
+		return;
+	}
+	path = path.substring(1, path.length);
+	var slashIndex = path.indexOf('/');
+	preStr = preStr + "_" + path.substring(0, slashIndex);
+	path = path.substring(slashIndex, path.length);
+	if (path.indexOf('/') < 0) {
+		var height = 0;
+		var node = nodeParent;
+		while (node.getAttribute("id") != "LeftWorkspace") {
+			if (!node.previousSibling) {
+				node = node.parentNode;
+			}
+			if (node.getAttribute("id") != "LeftWorkspace")	node = node.previousSibling;
+			if (node.className == "Node") {
+				height += 27;
+			}
+		}
+		var leftWS = document.getElementById("LeftWorkspace");		
+		leftWS.scrollTop = height;
+		return;
+	}
+	var tagADrives = eXo.core.DOMUtil.findDescendantsByTagName(nextElt, "a");
+	for (var i = 0; i < tagADrives.length; ++i) {
+		if (tagADrives[i].getAttribute("id")) {
+			var id = tagADrives[i].getAttribute("id");
+			if (id && (id.indexOf(preStr) >= 0)) {
+				nodeParent = eXo.core.DOMUtil.findAncestorByClass(tagADrives[i], "Node");
+				var event = false;				
+				eXo.ecm.ECS.getDir(tagADrives[i], event);
+				//eXo.ecm.ECS.actionColExp(nodeParent);
+				eXo.ecm.ECS.expandTree(preStr, path, nodeParent);
+				return;
+			}
+		}
 	}
 };
 

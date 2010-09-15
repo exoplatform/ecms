@@ -57,6 +57,9 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   /** The IDENTIFIER. */
   public static String IDENTIFIER     = "nodeIdentifier" ;
   
+  /** The DRIVE. */
+  public static String DRIVE          = "nodeDrive";
+  
   /** The Parameterized String **/
   public static String PARAMETER      = "ParameterName";
   

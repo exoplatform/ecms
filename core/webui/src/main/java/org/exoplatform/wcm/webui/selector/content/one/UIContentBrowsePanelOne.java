@@ -43,13 +43,24 @@ import org.exoplatform.webui.event.EventListener;
   }
 )
 public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
+  
+  private String _initPath = "";
+  private String _initDrive = "";
+  
+  public void setInitPath(String initDrive, String initPath) {
+    this._initPath = initPath;
+    this._initDrive = initDrive;
+  }
+  
+  public String getInitDrive() { return this._initDrive; }
+  public String getInitPath() { return this._initPath; }
 
   public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
     public void execute(Event<UIContentBrowsePanel> event) throws Exception {      
       UIContentBrowsePanel contentBrowsePanel = event.getSource();
       String returnFieldName = contentBrowsePanel.getReturnFieldName();      
       String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node node = NodeLocation.getNodeByExpression(itemPath);
+      Node node = NodeLocation.getNodeByExpression(itemPath.substring(itemPath.indexOf(':') + 1));
       Node realNode = node;
       if (node.isNodeType("exo:symlink")) {
     	String uuid = node.getProperty("exo:uuid").getString();
