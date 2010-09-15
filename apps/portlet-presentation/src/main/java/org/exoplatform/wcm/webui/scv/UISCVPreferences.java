@@ -265,7 +265,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       UIContentSelectorOne contentSelector = uiSCVPref.createUIComponent(UIContentSelectorOne.class, null, null);
       Node node = Utils.getViewableNodeByComposer(uiSCVPref.getSelectedNodeRepository(), uiSCVPref.getSelectedNodeWorkspace(), uiSCVPref.getSelectedNodeUUID());
       contentSelector.init(uiSCVPref.getSelectedNodeDrive(),
-                           fixPath(node.getPath(), uiSCVPref));
+      										 fixPath(node  == null ? ""  : node.getPath(), uiSCVPref));
 
       contentSelector.setSourceComponent(uiSCVPref, new String[] { UISCVPreferences.CONTENT_PATH_INPUT });
       Utils.createPopupWindow(uiSCVPref, contentSelector, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
@@ -273,6 +273,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     }
     
     private String fixPath(String path, UISCVPreferences uiScvPref) throws Exception {
+    	if (path == null || path.length() == 0)
+ 	 	 	 	return "";    	
       if (uiScvPref.getSelectedNodeDrive() == null || uiScvPref.getSelectedNodeDrive().length() == 0)
         return path;
       ManageDriveService managerDriveService = uiScvPref.getApplicationComponent(ManageDriveService.class);

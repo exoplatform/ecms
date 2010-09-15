@@ -720,7 +720,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         String[] locations = clvConfig.getSavedPath().split(":");
         Node node = Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]);
         contentSelector.init(clvConfig.getDriveName(),
-                             fixPath(node.getPath(), clvConfig, locations[0]));
+            								 fixPath(node == null ? "" : node.getPath(), clvConfig, locations[0]));
         folderContentSelector.setSourceComponent(clvConfig, new String[] { UICLVConfig.ITEM_PATH_FORM_STRING_INPUT });
         Utils.createPopupWindow(clvConfig, contentSelector, UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW, 800);
         clvConfig.setPopupId(UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW);
@@ -739,6 +739,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     
     private String fixPath(String path, UICLVConfig clvConfig, String repository) throws Exception {
+      if (path == null || path.length() == 0)
+ 	 	 	 	return "";    	
       if (clvConfig.getDriveName() == null || clvConfig.getDriveName().length() == 0)
         return path;
       
