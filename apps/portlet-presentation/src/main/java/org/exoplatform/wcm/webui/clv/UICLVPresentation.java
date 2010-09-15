@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.MissingResourceException;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -32,6 +33,7 @@ import javax.portlet.PortletRequest;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
@@ -544,6 +546,66 @@ public class UICLVPresentation extends UIContainer {
 						"&detailParam=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
   }  
   
+	/**
+	 * This method will put the mandatory html code to manage QuickEdit mode
+	 * 
+	 * @param cssClass
+	 * @param viewNode
+	 * @return
+	 * @throws Exception
+	 */
+	public String addQuickEditDiv(String cssClass, Node viewNode) throws Exception {
+		StringBuffer sb = new StringBuffer();
+		String contentEditLink = getEditLink(viewNode, true, false);
+		String contentDeleteLink = event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
+		String hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";		
+
+		sb.append("<div class=\""+cssClass+"\" onmouseover=\"this.className  = '"+cssClass+" "+hoverClass+"' \" onmouseout=\"this.className = '"+cssClass+"' \">");
+		if (Utils.isShowQuickEdit()) {
+			sb.append("	<div class=\"EdittingContent\" style=\" z-index: 1\">");
+			sb.append("		<div class=\"EdittingToolBar \" >");
+			sb.append("			<div class=\"EdittingToolBarL\">");
+			sb.append("				<div class=\"EdittingToolBarC clearfix\">");
+			if (Utils.isShowDelete(viewNode)) {
+				sb.append("					<div style=\"float: right\">");
+				sb.append("						<a href=\""+contentDeleteLink+"\" title=\"delete\"class=\"CloseContentIcon\" >");
+				sb.append("						  &nbsp;");
+				sb.append("						</a>");  
+				sb.append("					</div>");
+			} 
+
+			if(isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)){
+				sb.append("					<div style=\"float: right\">");
+				sb.append("						<a href=\""+contentEditLink+"\" title=\"edit\" class=\"EditContentIcon\" >");
+				sb.append("						  &nbsp;");
+				sb.append("						</a>");    
+				sb.append("					</div>");
+			} else {
+				sb.append("					<div style=\"float: right\">");
+				sb.append("						<div title=\"lock\" class=\"IconLocked\" >");
+				sb.append("						  &nbsp;");
+				sb.append("						</div>");    
+				sb.append("					</div>");		
+			}
+			if (viewNode.hasProperty("publication:currentState")) {
+			  PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+			  String state = viewNode.getProperty("publication:currentState").getValue().getString(); 
+			  try {
+			    state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
+			  } catch (MissingResourceException e) { }
+			  sb.append("         <div class=\"EdittingCurrentState\" style=\"float: right\">");        
+			  sb.append(""+state);
+			  sb.append("         </div>");
+			}
+			sb.append("				</div>");
+			sb.append("			</div>");
+			sb.append("		</div>");
+			sb.append("	</div>");
+		}
+
+		return sb.toString();
+	}
+	
   /**
    * The listener interface for receiving refreshAction events.
    * The class that is interested in processing a refreshAction
