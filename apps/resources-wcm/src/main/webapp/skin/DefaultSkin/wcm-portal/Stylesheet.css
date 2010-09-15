@@ -270,4 +270,11 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
     height:20px;
 }
 
+.IconLocked {
+  background: url('icons/IconLockedBig.gif') no-repeat right top; /* orientation=lt */
+  background: url('icons/IconLockedBig.gif') no-repeat left top; /* orientation=rt */
+  width: 20px;
+  height: 16px;
+  float: left;
+}
 /* Context Help CSS END */

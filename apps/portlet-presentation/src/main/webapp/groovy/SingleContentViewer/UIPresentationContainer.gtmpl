@@ -19,7 +19,7 @@
 			<div class="$uicomponent.id" id="$uicomponent.id" 
 				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' ">
 			<%     
-			  if (Utils.isShowQuickEdit()) {	%>	
+			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
 				 <div class="EdittingToolBarContainer" style=" z-index: 1">
 					 <div class="EdittingToolBar " >
 						<div class="EdittingToolBarL">
@@ -44,8 +44,33 @@
 						</div>
 					</div>
 				</div>
-				<%}%>
+				<%} else { %>
 			
+				<div class="EdittingToolBarContainer" style="$edittingStyle">
+				 <div class="EdittingToolBar " >
+					<div class="EdittingToolBarL">
+						<div class="EdittingToolBarR">
+							<div class="EdittingToolBarC clearfix">
+							<%								
+							if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
+								%>
+								<div style="float: right">
+									<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+									  &nbsp;
+									</a>         
+								</div>
+								<%}%>
+								<div style="float: right">
+									<div class="IconLocked" title="<%= _ctx.appRes("UISCVPreferences.label.LockStatus")%>">
+									  &nbsp;
+									</div>           
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+																
 			<%
 			
 			if (isShowTitle||isShowDate) {

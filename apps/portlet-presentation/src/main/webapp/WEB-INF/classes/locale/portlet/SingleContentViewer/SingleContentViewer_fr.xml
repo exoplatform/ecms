@@ -116,6 +116,7 @@
    	  <PrintSettingBlock>Print viewer setting</PrintSettingBlock>
    	  <UISCVPrintPageParameter>URL Parameter</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Print viewer in page</UISCVConfigPrintPageFormInputSet>
+   	  <LockStatus>Verrouillage</LockStatus>
     </label>
     <help>
    	  <ContentPathBlock>Please select the source data to display</ContentPathBlock>

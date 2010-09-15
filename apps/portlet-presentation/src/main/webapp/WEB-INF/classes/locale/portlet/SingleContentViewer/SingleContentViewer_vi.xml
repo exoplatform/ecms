@@ -117,6 +117,7 @@
    	  <PrintSettingBlock>Tùy chọn xem bản in</PrintSettingBlock>
    	  <UISCVPrintPageParameter>Tham số URL</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Xem bản in tại</UISCVConfigPrintPageFormInputSet>
+   	  <LockStatus>Khóa</LockStatus>
 	</label>
     <help>
    	  <ContentPathBlock>Vui lòng lựa chọn dữ liệu nguồn để hiển thị</ContentPathBlock>

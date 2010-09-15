@@ -207,4 +207,13 @@ public class LockUtil {
     return buffer.toString();
   }
   
+  public static boolean isLocked(Node node) throws Exception {
+    if(!node.isLocked()) return false;        
+    String lockToken = LockUtil.getLockTokenOfUser(node);
+    if(lockToken != null) {
+      node.getSession().addLockToken(LockUtil.getLockToken(node));
+      return false;
+    }                
+    return true;
+  }
 }
