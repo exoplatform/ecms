@@ -65,8 +65,7 @@ public class TrashFolderScript implements CmsScript {
       session = seProviderService_.getSystemSessionProvider(null).getSession(workspace, manageableRepository);
       node = (Node)session.getItem(nodePath);
     } catch(Exception e) {
-      LOG.error("Exception when try to get node", e);
-      throw e;
+      LOG.warn("Exception when try to get node:" + nodePath);
     }
     System.out.println("type: " + eventType);
     if ((eventType & Event.NODE_ADDED) > 0) {
@@ -77,12 +76,7 @@ public class TrashFolderScript implements CmsScript {
   			node.setProperty(EXO_RESTORE_WORKSPACE, workspace);
     		session.save();
     	}
-    } else if ((eventType & Event.NODE_REMOVED) > 0) {
-    	if (node.isNodeType(EXO_RESTORELOCATION)) {
-    		node.removeMixin(EXO_RESTORELOCATION);
-    		session.save();
-    	}
-    }
+    } 
     
   	String nodeName = nodePath.substring(nodePath.lastIndexOf("/") + 1);
     session.save();
