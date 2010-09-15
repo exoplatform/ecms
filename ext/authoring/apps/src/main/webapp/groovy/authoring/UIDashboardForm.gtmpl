@@ -24,6 +24,7 @@ color: #ccc;
 	border-top: 1px solid #ccc;
 	padding: 2px 5px;
 	margin-right: 5px;
+	overflow:hidden;
 }
 
 .UIAuthoringDashboard .Header {
