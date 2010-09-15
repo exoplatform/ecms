@@ -1,7 +1,8 @@
 <%
 	import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
 	import org.exoplatform.wcm.webui.Utils;
-	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
+	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;	
+	import org.exoplatform.ecm.webui.utils.LockUtil;
 %>
 
 	<%
@@ -46,7 +47,7 @@
 				</div>
 				<%} else { %>
 			
-				<div class="EdittingToolBarContainer" style="$edittingStyle">
+				<div class="EdittingToolBarContainer" style=" z-index: 1">
 				 <div class="EdittingToolBar " >
 					<div class="EdittingToolBarL">
 						<div class="EdittingToolBarR">
