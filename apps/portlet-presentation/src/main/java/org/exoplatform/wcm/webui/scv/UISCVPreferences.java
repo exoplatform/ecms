@@ -273,12 +273,14 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     }
     
     private String fixPath(String path, UISCVPreferences uiScvPref) throws Exception {
-    	if (path == null || path.length() == 0)
+      if (path == null || path.length() == 0 ||
+          uiScvPref.getSelectedNodeDrive() == null || uiScvPref.getSelectedNodeDrive().length() == 0 ||
+          uiScvPref.getSelectedNodeRepository() == null || uiScvPref.getSelectedNodeRepository().length() == 0)
  	 	 	 	return "";    	
-      if (uiScvPref.getSelectedNodeDrive() == null || uiScvPref.getSelectedNodeDrive().length() == 0)
-        return path;
       ManageDriveService managerDriveService = uiScvPref.getApplicationComponent(ManageDriveService.class);
       DriveData driveData = managerDriveService.getDriveByName(uiScvPref.getSelectedNodeDrive(), uiScvPref.getSelectedNodeRepository());
+      if (!path.startsWith(driveData.getHomePath()))
+ 	 	 		return "";      
       if ("/".equals(driveData.getHomePath()))
         return path;
       return path.substring(driveData.getHomePath().length());      
