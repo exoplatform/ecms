@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>Test_SNF_ECMS_06_SearchContent_ecmdemo</title>
+<title>Test_SNF_ECMS_07_ShowDraftContent_ecmdemo</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_06_SearchContent_ecmdemo</td></tr>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_07_ShowDraftContent_ecmdemo</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -97,6 +97,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=documents</td>
 	<td></td>
@@ -104,6 +109,11 @@
 <tr>
 	<td>click</td>
 	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -127,14 +137,14 @@
 	<td>article</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>type</td>
 	<td>name</td>
 	<td>article</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name</td>
-	<td>article</td>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -188,78 +198,28 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Public document</td>
+	<td>-- Check the draft content in CLV</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Manage Publications</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Manage Publications</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Published</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Published</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Save</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Save</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Search document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
 	<td>link=Overview</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>keyword</td>
+	<td>clickAndWait</td>
+	<td>link=Overview</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>keyword</td>
-	<td>hello</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>keyword</td>
+	<td>verifyTextNotPresent</td>
+	<td>link=article</td>
 	<td></td>
 </tr>
 <tr>
-	<td>focus</td>
-	<td>keyword</td>
-	<td></td>
-</tr>
-<tr>
-	<td>mouseOver</td>
-	<td>keyword</td>
-	<td></td>
-</tr>
-<tr>
-	<td>keyPress</td>
-	<td>keyword</td>
-	<td>\13</td>
+	<td>select</td>
+	<td>EditingOptions</td>
+	<td>label=Edit</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -267,33 +227,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>verifyElementPresent</td>
 	<td>link=article</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPresentationContainer']/div[3]/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UIPresentationContainer']/div[3]/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>select</td>
+	<td>EditingOptions</td>
+	<td>label=Published</td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>-- Delete document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Explorer</td>
 	<td></td>
 </tr>
 <tr>
@@ -309,6 +259,11 @@
 <tr>
 	<td>mouseDownRight</td>
 	<td>link=article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>
