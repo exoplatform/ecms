@@ -134,7 +134,30 @@ public class CmsServiceImpl implements CmsService {
           if(!currentNode.isNodeType(type)) {
             currentNode.addMixin(type);
           }
-          NodeType mixinType = nodetypeManager.getNodeType(type);          
+          NodeType mixinType = nodetypeManager.getNodeType(type);
+          for (Iterator<String> iter = keys.iterator(); iter.hasNext();) {
+            String keyJCRPath = (String) iter.next();
+            JcrInputProperty jcrInputProperty = (JcrInputProperty) mappings.get(keyJCRPath);
+            if (!jcrInputProperty.getJcrPath().equals(NODE)) {
+              String inputMixinTypeName = jcrInputProperty.getMixintype();
+              String[] inputMixinTypes = null ;
+              if(inputMixinTypeName != null && inputMixinTypeName.trim().length() > 0) {
+                if(inputMixinTypeName.indexOf(",") > -1){
+                  inputMixinTypes = inputMixinTypeName.split(",");                  
+                }else {
+                  inputMixinTypes = new String[] {inputMixinTypeName};
+                }
+              }
+              if (inputMixinTypes != null) {
+                for(String inputType : inputMixinTypes) {
+                  if (inputType.equals(type)) {
+                    String childPath = jcrInputProperty.getJcrPath().replaceAll(NODE + "/", "");
+                    createNodeRecursively(jcrInputProperty.getJcrPath(), currentNode.getNode(childPath), mixinType, mappings);
+                  }                    
+                }
+              }
+            }
+          }
           createNodeRecursively(NODE, currentNode, mixinType, mappings);
         }
       }
