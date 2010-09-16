@@ -75,14 +75,9 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
                     class="ActionButton LightBlueStyle SearchButton"
                     onmouseover="this.style.color = '#058ee6'"
                     onmouseout="this.style.color='black'">
-
                   <div class="ButtonLeft">
                     <div class="ButtonRight">
-                      <div class="ButtonMiddle">
-                        <a href="<%uiform.getSubmitAction()%>">
-                          $actionLabel
-                        </a>
-                      </div>
+                      <div class="ButtonMiddle">$actionLabel</div>
                     </div>
                   </div>
                 </div>
