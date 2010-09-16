@@ -861,7 +861,8 @@ public class CmsServiceImpl implements CmsService {
         if (mandatory) {
           node.setProperty(propertyName, new GregorianCalendar());
         } else {
-          node.setProperty(propertyName, (Value)null);
+          if(isMultiple) node.setProperty(propertyName, (Value[])null);
+          else node.setProperty(propertyName, (Value)null);
         }
       } else {
         if(isMultiple) {
