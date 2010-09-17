@@ -391,6 +391,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       UIComponent uiComp = uiContainer.createUIComponent(clazz, null, null);
       String selectorParams = (String)fieldPropertiesMap.get("selectorParams");
       if(uiComp instanceof UIOneNodePathSelector) {
+        int wsIndex =0;
         UIJCRExplorer explorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
         String repositoryName = explorer.getRepositoryName();
         SessionProvider provider = explorer.getSessionProvider();        
@@ -402,15 +403,20 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         }
         if(selectorParams != null) {
           String[] arrParams = selectorParams.split(",");
-          if(arrParams.length == 4) {
+          if(arrParams.length >2) {
+            if (arrParams.length==4) 
+            {
+              wsIndex = 1;
+              repositoryName = arrParams[0];
+            }
             ((UIOneNodePathSelector)uiComp).setAcceptedNodeTypesInPathPanel(new String[] {Utils.NT_FILE});
-            wsName = arrParams[1];
-            rootPath = arrParams[2];
+            wsName = arrParams[wsIndex];
+            rootPath = arrParams[wsIndex+1];
             ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true);
-            if(arrParams[3].indexOf(";") > -1) {
-              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(arrParams[3].split(";"));
+            if(arrParams[wsIndex+2].indexOf(";") > -1) {
+              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(arrParams[wsIndex+2].split(";"));
             } else {
-              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(new String[] {arrParams[3]});
+              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(new String[] {arrParams[wsIndex+2]});
             }
           }
         }

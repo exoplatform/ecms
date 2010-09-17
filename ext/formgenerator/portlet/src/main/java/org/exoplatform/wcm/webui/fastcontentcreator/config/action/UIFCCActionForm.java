@@ -441,7 +441,9 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
       Class clazz = Class.forName(classPath, true, cl) ;
       UIComponent uiComp = uiContainer.createUIComponent(clazz, null, null);
       if(uiComp instanceof UIOneNodePathSelector) {
+        int wsIndex = 0;
         String wsFieldName = (String)fieldPropertiesMap.get("workspaceField") ;
+        String repositoryName = UIFCCUtils.getPreferenceRepository();
         String wsName = "";
         if(wsFieldName != null && wsFieldName.length() > 0) {
           wsName = (String)fastContentCreatorActionForm.<UIFormInputBase>getUIInput(wsFieldName).getValue() ;          
@@ -450,20 +452,25 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
         String selectorParams = (String)fieldPropertiesMap.get("selectorParams") ;
         if(selectorParams != null) {
           String[] arrParams = selectorParams.split(",") ;
-          if(arrParams.length == 4) {
+          if(arrParams.length >2) {
+            if (arrParams.length==4) 
+            {
+              wsIndex = 1;
+              repositoryName = arrParams[0];
+            }
             ((UIOneNodePathSelector)uiComp).setAcceptedNodeTypesInPathPanel(new String[] {"nt:file"}) ;
-            wsName = arrParams[1];
-            rootPath = arrParams[2];
+            wsName = arrParams[wsIndex];
+            rootPath = arrParams[wsIndex+1];
             ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true) ;
-            if(arrParams[3].indexOf(";") > -1) {
-              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(arrParams[3].split(";")) ;
+            if(arrParams[wsIndex+2].indexOf(";") > -1) {
+              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(arrParams[wsIndex+2].split(";")) ;
             } else {
-              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(new String[] {arrParams[3]}) ;
+              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(new String[] {arrParams[wsIndex+2]}) ;
             }
           }
         }
         if(rootPath == null) rootPath = "/";
-        ((UIOneNodePathSelector)uiComp).setRootNodeLocation(UIFCCUtils.getPreferenceRepository(), wsName, rootPath) ;
+        ((UIOneNodePathSelector)uiComp).setRootNodeLocation(repositoryName, wsName, rootPath) ;
         ((UIOneNodePathSelector)uiComp).setShowRootPathSelect(true);
         ((UIOneNodePathSelector)uiComp).init(Utils.getSessionProvider());
       }
