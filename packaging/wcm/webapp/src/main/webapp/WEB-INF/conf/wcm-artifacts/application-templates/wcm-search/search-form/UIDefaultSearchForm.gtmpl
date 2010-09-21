@@ -6,8 +6,6 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.wcm.webui.search.UISearchForm;
 %>
-
-
 <%
 UIFormStringInput uiKeywordInput = uicomponent.getUIStringInput(UISearchForm.KEYWORD_INPUT);
 uicomponent.setKeyword();
@@ -70,18 +68,14 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
           <table class="ActionContainer">
             <tr>
               <td>
-                <div 
-                    onclick="$link"
+                <div onclick="$link"
                     class="ActionButton LightBlueStyle SearchButton"
                     onmouseover="this.style.color = '#058ee6'"
                     onmouseout="this.style.color='black'">
-
                   <div class="ButtonLeft">
                     <div class="ButtonRight">
                       <div class="ButtonMiddle">
-                        <a href="<%uiform.getSubmitAction()%>">
-                          $actionLabel
-                        </a>
+                        <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();">$actionLabel</a>
                       </div>
                     </div>
                   </div>
@@ -94,3 +88,12 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
     </div>
     <%uiform.end()%>
     </div>
+<script type="text/javascript">
+	onload = function() {
+		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
+	}
+	onsubmit = function() {
+		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
+	}		
+</script>
+    
