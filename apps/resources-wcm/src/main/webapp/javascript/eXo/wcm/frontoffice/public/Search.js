@@ -79,6 +79,14 @@ SearchPortlet.prototype.keepKeywordOnBoxSearch = function() {
 	if (keyword != undefined && keyword.length != 0) {
 		keyWordInput.value = unescape(keyword);
 	}
+	var uiSearchForm = document.getElementById("UISearchForm");
+	if (uiSearchForm != null) {
+		var inputKeyInForm = eXo.core.DOMUtil.findDescendantById(uiSearchForm,
+				"keywordInput");
+		if ((inputKeyInForm != null) && (inputKeyInForm.value.length != 0)) {
+			keyWordInput.value=inputKeyInForm.value;
+		}
+	}	
 };
 
 eXo.ecm.SearchPortlet = new SearchPortlet();
