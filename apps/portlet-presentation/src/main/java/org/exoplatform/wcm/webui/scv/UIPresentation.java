@@ -16,11 +16,16 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
+import java.util.Arrays;
+
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
+import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
+import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
+import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -140,14 +145,20 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getCommentComponent()
    */
   public UIComponent getRemoveAttach() throws Exception {
-  	return null;
+    removeChild(RemoveAttachmentComponent.class);
+    UIComponent uicomponent = addChild(RemoveAttachmentComponent.class, null, "DocumentInfoRemoveAttach");
+    ((AbstractActionComponent)uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPresentationContainer.class}));
+    return uicomponent;
   }
   
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getCommentComponent()
    */
   public UIComponent getRemoveComment() throws Exception {
-  	return null;
+    removeChild(RemoveCommentComponent.class);
+    UIComponent uicomponent = addChild(RemoveCommentComponent.class, null, "DocumentInfoRemoveComment");
+    ((AbstractActionComponent)uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPresentationContainer.class}));
+    return uicomponent;
   }
 
 public UIComponent getUIComponent(String mimeType) throws Exception {
