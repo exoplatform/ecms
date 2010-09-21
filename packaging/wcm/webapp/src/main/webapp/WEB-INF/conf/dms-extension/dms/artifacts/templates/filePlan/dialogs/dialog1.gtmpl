@@ -1,10 +1,27 @@
 <%
 	uicomponent.addInterceptor("ecm-explorer/interceptor/PostFilePlanInterceptor.groovy", "post") ;
   def rcontext = _ctx.getRequestContext() ;
+  
+  
+  private String getDisplayTab(String selectedTab) {
+		if ((uicomponent.getSelectedTab() == null && selectedTab.equals("mainWebcontent"))
+				|| selectedTab.equals(uicomponent.getSelectedTab())) {
+			return "display:block";	
+		}
+		return "display:none";
+	}
+	
+	private String getSelectedTab(String selectedTab) {
+		if (getDisplayTab(selectedTab).equals("display:block")) {
+			return "SelectedTab";
+		}
+		return "NormalTab";
+	}
 %>
 
 <%/*Begin UITabPane*/%>
 <div class="UITabPane">
+<%uiform.begin()%>
   <%/*Begin TabPaneContent*/%>
   <div class="TabPaneContent"> 
     <%/*Begin WorkingArea*/%>
@@ -17,30 +34,30 @@
 			        <div class="TabsContainer">
 
 			            <div class="UITab NormalTabStyle">
-			              <div class="SelectedTab">
+			              <div class="<%=getSelectedTab("mainWebcontent")%>">
 			                <div class="LeftTab">
 			                  <div class="RightTab">                
-			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("FilePlan.dialog.label.name")%></div>
+			                    <div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "mainWebcontent")%>"><%=_ctx.appRes("FilePlan.dialog.label.name")%></div>
 			                  </div>
 			                </div>
 			              </div>
 			            </div>  
 			            
 			            <div class="UITab NormalTabStyle">
-			              <div class="NormalTab">
+			              <div class="<%=getSelectedTab("illustrationWebcontent")%>">
 			                <div class="LeftTab">
 			                  <div class="RightTab">                
-			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("FilePlan.dialog.label.record-properties")%></div>
+			                    <div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "illustrationWebcontent")%>"><%=_ctx.appRes("FilePlan.dialog.label.record-properties")%></div>
 			                  </div>
 			                </div>
 			              </div>
 			            </div>                
 									
 									 <div class="UITab NormalTabStyle">
-			              <div class="NormalTab">
+			              <div class="<%= getSelectedTab("contentCSSWebcontent")%>">
 			                <div class="LeftTab">
 			                  <div class="RightTab">                
-			                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("FilePlan.dialog.label.process-properties")%></div>
+			                    <div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "contentCSSWebcontent")%>"><%=_ctx.appRes("FilePlan.dialog.label.process-properties")%></div>
 			                  </div>
 			                </div>
 			              </div>
@@ -54,11 +71,11 @@
       <%/*End UIHorizontalTabs*/%>
       <%/*Start UITabContentContainer*/%>
       
-			<%uiform.begin()%>
+			
 				<div class="HorizontalLayout">	  
       
 		      <div class="UITabContentContainer">
-		      	<div class="UITabContent" style="display: block;">
+		      	<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
 						    <table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.name")%></td>
@@ -92,7 +109,7 @@
 								</table>
 		      	</div> 
 		      	
-		      	<div class="UITabContent" style="display: none;">
+		      	<div class="UITabContent" style="<%=getDisplayTab("illustrationWebcontent")%>">
 		      		  <table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.record-category-identifier")%></td>
@@ -187,7 +204,7 @@
 								</table>
 		      	</div> 
 		      	
-		        <div class="UITabContent" style="display: none;">
+		        <div class="UITabContent" style="<%=getDisplayTab("contentCSSWebcontent")%>">
 		        	<table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.process-cutoff")%></td>
@@ -332,12 +349,12 @@
 		      <%uiform.processRenderAction()%>
           <%/* end render action*/%>      	
       	</div>  
-      <%uiform.end()%>						 
-      <%/*End UITabContentContainer*/%>
-      
+      	<%/*End UITabContentContainer*/%>
     </div>  
     <%/*End WorkingArea*/%>
   </div>  
   <%/*End TabPaneContent*/%>
+  <%uiform.end()%>						 
+  
 </div>  
 <%/*End UITabPane*/%>
