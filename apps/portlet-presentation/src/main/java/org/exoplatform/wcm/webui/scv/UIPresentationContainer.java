@@ -20,6 +20,7 @@ import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.MissingResourceException;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -30,7 +31,6 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -115,6 +115,22 @@ public class UIPresentationContainer extends UIContainer{
 
 	public boolean isContextual() {
 		return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
+	}
+	
+	public String getCurrentState() throws Exception {
+	  UIPresentation presentation = getChild(UIPresentation.class);
+	  Node node = presentation.getOriginalNode();
+	  if (node!=null) {
+	    if (node.hasProperty("publication:currentState")) {
+	      PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+	      String state = node.getProperty("publication:currentState").getValue().getString(); 
+	      try {
+	        state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
+	      } catch (MissingResourceException e) { }
+	      return state;
+	    }
+	  }
+	  return "";
 	}
 	
 	/**

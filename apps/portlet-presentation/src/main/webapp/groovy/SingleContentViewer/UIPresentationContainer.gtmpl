@@ -40,6 +40,9 @@
 										  &nbsp;
 										</a>           
 									</div>
+									<div class="EdittingCurrentState" style="float: right">
+                    <%=uicomponent.getCurrentState() %>
+                  </div>	
 								</div>
 							</div>
 						</div>
@@ -92,14 +95,7 @@
 						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl() %>')" title="<%= _ctx.appRes("UISCVPreferences.label.Print");%>"><%= _ctx.appRes("UISCVPreferences.label.Print") %></a>
 					</div>
 				<% 
-			} 
-			if(Utils.isShowDraft(node) && !uicomponent.isPrinting()){
-      %>
-        <div style="padding: 5px 10px; line-height: 16px; ">
-        <span class="DraftIcon" style="padding-left: 20px">[<%= _ctx.appRes("UIPresentationContainer.label.Draft") %>]</span>
-      </div>  
-      <% 
-      }
+			} 			
 			uicomponent.renderChildren();
 			if(uicomponent.isPrinting()) {
         %>

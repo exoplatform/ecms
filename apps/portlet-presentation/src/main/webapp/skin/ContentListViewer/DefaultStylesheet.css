@@ -319,8 +319,8 @@
 	display: none;
 }
 
-.UIPresentationContainer .EdittingToolBarContainer{
-	width: 60px;
+.UIPresentationContainer .EdittingToolBarContainer{	
+	width: 160px;
 }
 
 .EdittingToolBarContainer .EdittingToolBar {
@@ -329,9 +329,19 @@
 	top:-20px;
 }
 
+.EdittingToolBarContainer .EdittingCurrentState {
+  padding-left: 3px;
+  color: #5E6D7B;
+}
+
 .EdittingToolBarContainer .EdittingToolBar .EdittingToolBarL {
 	background: url('DefaultSkin/icons/EdittingToolBarL.png') no-repeat left top;
 	padding-left: 4px;
+}
+
+.EdittingContent .EdittingCurrentState {
+  padding-left: 3px;
+  color: #5E6D7B;
 }
 
 .EdittingToolBarContainer .EdittingToolBar .EdittingToolBarR {
@@ -369,7 +379,7 @@
 	top:0;
 	z-index:1;
 	float: right;
-	width: 55px;
+	width: 160px;
 	display: none;
 }
 
