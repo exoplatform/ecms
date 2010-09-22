@@ -20,7 +20,7 @@
 			<div class="$uicomponent.id" id="$uicomponent.id" 
 				onmouseover="this.className = '$uicomponent.id $hoverClass' " onmouseout="this.className = '$uicomponent.id' ">
 			<%     
-			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
+			  if (Utils.isShowQuickEdit()) {	%>	
 				 <div class="EdittingToolBarContainer" style=" z-index: 1">
 					 <div class="EdittingToolBar " >
 						<div class="EdittingToolBarL">
@@ -35,11 +35,26 @@
 										</a>         
 									</div>
 									<%}%>
+										
+								<% 
+										if (LockUtil.isLocked(node)) { 
+								%>	
+									<div style="float: right">
+											<div class="IconLocked" title="<%= _ctx.appRes("UISCVPreferences.label.LockStatus")%>">
+											  &nbsp;
+											</div>           
+								  </div>	
+								<% 
+										} else { 
+								%>										
 									<div style="float: right">
 										<a href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.label.Edit")%>">
 										  &nbsp;
 										</a>           
 									</div>
+								<% 
+										} 
+								%>	
 									<div class="EdittingCurrentState" style="float: right">
                     <%=uicomponent.getCurrentState() %>
                   </div>	
@@ -48,35 +63,9 @@
 						</div>
 					</div>
 				</div>
-				<%} else { %>
-			
-				<div class="EdittingToolBarContainer" style=" z-index: 1">
-				 <div class="EdittingToolBar " >
-					<div class="EdittingToolBarL">
-						<div class="EdittingToolBarR">
-							<div class="EdittingToolBarC clearfix">
-							<%								
-							if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
-								%>
-								<div style="float: right">
-									<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UIPresentationContainer.label.Preferences")%>" class="PreferencesIcon" >
-									  &nbsp;
-									</a>         
-								</div>
-								<%}%>
-								<div style="float: right">
-									<div class="IconLocked" title="<%= _ctx.appRes("UISCVPreferences.label.LockStatus")%>">
-									  &nbsp;
-									</div>           
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+				<%} %>
 																
-			<% }
-			
+			<% 			
 			if (isShowTitle||isShowDate) {
 				%>
 					  <% if (isShowTitle) { %>
