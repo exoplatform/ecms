@@ -1,0 +1,7 @@
+eXo WCM is a fully integrated Content Management solution inside GateIn.
+Basically, we're using the extension mecanism inside GateIn to add content features. If you want more info about the extension mecanism, you can read the GateIn documentation :
+[http://docs.jboss.com/gatein/portal/3.1.0-FINAL/reference-guide/en-US/html/index.html]
+
+This integrated solution provides users with a comprehensive platform for integrating applications as well as managing and publishing content — all from a single, familiar console.
+
+When starting a new project, you can see eXo WCM as a WCM Java developer Platform. In this reference guide, we will give you guidelines so you can build stable applications using eXo WCM from the inside.
