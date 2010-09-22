@@ -550,6 +550,7 @@ exo-ecms-packaging-ecmdemo-webapp
 										<include name="jboss*.jar" />
 										<include name="jsf-*.jar" />
 										<include name="wikbook*.jar" />
+										<include name="pull-parser-*.jar" />
 										
                   </fileset>
                 </delete>
