@@ -80,7 +80,8 @@ public class UIPresentationContainer extends UIContainer{
 	 * 
 	 * @throws Exception the exception
 	 */
-	public String getTitle(Node node) throws Exception {
+	public String getTitle(Node node) throws Exception {				
+		
 		String title = null;
 		if (node.hasProperty("exo:title")) {
 			title = node.getProperty("exo:title").getValue().getString();
@@ -194,8 +195,8 @@ public class UIPresentationContainer extends UIContainer{
 	        presentation.setOriginalNode(viewNode);
 	        presentation.setNode(viewNode);
 	      }
-			}
-			return viewNode;
+		}
+		  return viewNode;
 		} catch (Exception e) {
 			return null;
 		}
@@ -237,7 +238,6 @@ public class UIPresentationContainer extends UIContainer{
         presentation.setNode(nodeView);
       } else if (nodeView == null) {
         return null;
-
       } else {
         presentation.setOriginalNode(nodeView);
         presentation.setNode(nodeView);
@@ -280,7 +280,7 @@ public class UIPresentationContainer extends UIContainer{
 	 * @return <code>true</code> if the Quick Print is shown. Otherwise, <code>false</code>
 	 */
 	public String getPrintUrl() throws RepositoryException{
-		String printParameterName;
+	  String printParameterName;
 	  Node tempNode = getNodeView();
 	  String strPath = tempNode.getPath();
 	  String repository = ((ManageableRepository)tempNode.getSession().getRepository()).getConfiguration().getName();
@@ -293,7 +293,9 @@ public class UIPresentationContainer extends UIContainer{
 }
 
 	public String getQuickEditLink(){
-    return Utils.getEditLink(getNodeView(), true, false);
+	  PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+	  PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
+	  return Utils.getEditLink(getNodeView(), true, false, preferences.getValue(UISingleContentViewerPortlet.PARAMETER, "")); 
 	}
 	
 	/**

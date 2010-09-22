@@ -59,7 +59,7 @@
 							if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 								%>
 								<div style="float: right">
-									<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
+									<a href="<%= uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UIPresentationContainer.label.Preferences")%>" class="PreferencesIcon" >
 									  &nbsp;
 									</a>         
 								</div>
