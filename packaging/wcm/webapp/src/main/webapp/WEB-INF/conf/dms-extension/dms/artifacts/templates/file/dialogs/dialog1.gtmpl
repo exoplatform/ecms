@@ -68,6 +68,8 @@
                         <%=_ctx.appRes("File.dialog.label.re-upload")%>
                       </div>
                     <%
+			        String[] fieldData = ["jcrPath=/node/jcr:content/jcr:data"] ;
+			        uicomponent.addUploadField("data", fieldData) ;
                     }
                   } else {
                     String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty"] ;
