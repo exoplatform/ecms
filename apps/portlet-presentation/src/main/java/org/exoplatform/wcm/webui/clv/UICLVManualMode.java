@@ -23,6 +23,7 @@ import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
@@ -71,5 +72,17 @@ public class UICLVManualMode extends UICLVContainer {
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, null);
     clvPresentation.init(templatePath, resourceResolver, pageList);    
-  }  
+  }
+	/**
+	 * Gets the bar info show.
+	 * 
+	 * @return the value for info bar setting
+	 * 
+	 * @throws Exception the exception
+	 */
+	public boolean isShowInfoBar() throws Exception {		
+		if (UIPortlet.getCurrentUIPortlet().getShowInfoBar())
+			return true;
+		return false;
+	}
 }

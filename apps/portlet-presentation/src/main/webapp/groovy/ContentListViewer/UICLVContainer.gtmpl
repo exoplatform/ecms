@@ -18,10 +18,13 @@
     
     def addContentLink = uicomponent.getEditLink(false, true);
     def manageContentsLink = uicomponent.getEditLink(false, false);
-    
+    boolean isShowInfoBar = uicomponent.isShowInfoBar();    
+    def edittingStyle = "z-index: 1";
+      if (isShowInfoBar)
+        edittingStyle = "z-index: 1; top:20px";
     if (Utils.isShowQuickEdit()) {
     %>
-	 <div class="EdittingToolBarContainer" style=" z-index: 1">
+	 <div class="EdittingToolBarContainer" style="$edittingStyle">
 		 <div class="EdittingToolBar " >
 			<div class="EdittingToolBarL">
 				<div class="EdittingToolBarR">
