@@ -288,7 +288,7 @@ public class UITemplateForm extends UIForm {
           }
         }
       }
-      if (uiForm.isAddNew_ || !isEnableVersioning) {
+      if (uiForm.isAddNew_) {
         if (uiForm.templatePath_ != null) {
           String oldHomeTemplate = uiForm.templatePath_.substring(0, uiForm.templatePath_
               .lastIndexOf("/"));
@@ -311,8 +311,10 @@ public class UITemplateForm extends UIForm {
           } else {
             uiForm.template_.checkout();
           }
-          path = manageViewService.addTemplate(templateName, content, homeTemplate, repository);
-          uiForm.template_.save();
+        }
+        path = manageViewService.updateTemplate(templateName, content, homeTemplate, repository);
+        uiForm.template_.save();
+        if (isEnableVersioning) {
           uiForm.template_.checkin();
         }
       }
