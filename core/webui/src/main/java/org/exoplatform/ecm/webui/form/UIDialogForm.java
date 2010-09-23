@@ -617,7 +617,7 @@ public class UIDialogForm extends UIForm {
       }
       uiSelectBox.setMultiple(true);      
       StringBuffer buffer = new StringBuffer();
-      if(childNode != null && isFirstTimeRender) {      
+      if((childNode != null) && isFirstTimeRender && childNode.hasProperty(propertyName)) {
         List<String> valueList = new ArrayList<String>();      
         Value[] values = childNode.getProperty(propertyName).getValues();
         for(Value value : values) {
@@ -652,7 +652,7 @@ public class UIDialogForm extends UIForm {
         }
       }      
     } else {
-      if(childNode != null && isFirstTimeRender) {
+      if((childNode != null) && isFirstTimeRender && childNode.hasProperty(propertyName)) {  
         uiSelectBox.setValue(childNode.getProperty(propertyName).getValue().getString());
       } else {
         if(node != null && node.hasProperty(propertyName)) {
