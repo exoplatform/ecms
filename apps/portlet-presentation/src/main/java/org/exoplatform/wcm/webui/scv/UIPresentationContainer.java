@@ -166,6 +166,14 @@ public class UIPresentationContainer extends UIContainer{
 		  //Check for the saved parameter
 		  viewNode = getParameterizedNode();
 		  if (viewNode!= null) {
+			  if (viewNode.isNodeType("nt:frozenNode")) {
+          try {		    
+            String nodeUUID = viewNode.getProperty("jcr:frozenUuid").getString();
+            return viewNode.getSession().getNodeByUUID(nodeUUID);
+          } catch (Exception ex) {
+            return viewNode;
+          }
+		    }
 		    return viewNode;
 		  }		  
 			PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
