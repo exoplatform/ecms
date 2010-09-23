@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.taxonomy.info;
 
-import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +23,6 @@ import java.util.List;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
@@ -36,6 +34,7 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -70,7 +69,6 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   public static final String PERMISSION   = "permission";
 
   public static final String POPUP_SELECT = "SelectUserOrGroup";
-  final static public String ANY_PERMISSION = "*";
   
   public static final String SELECT_GROUP_ID = "TaxoSelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger("admin.UIPermissionForm");
@@ -116,9 +114,6 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         AccessControlEntry accessControlEntry = (AccessControlEntry)perIter.next() ;
         if(user.equals(accessControlEntry.getIdentity())) {
           userPermission.append(accessControlEntry.getPermission()).append(" ");
-        } else if(user.equals("*") || user.equals("any")) {
-          if (accessControlEntry.getIdentity().equals("*") || accessControlEntry.getIdentity().equals("any")) 
-            userPermission.append(accessControlEntry.getPermission()).append(" ");
         }
       }
       for (String perm : PermissionType.ALL) { 
@@ -226,24 +221,6 @@ public class UIPermissionForm extends UIForm implements UISelectable {
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
           }
-        }
-        try {
-          if (userOrGroup.equals(ANY_PERMISSION)) {
-            node.removePermission(ANY_PERMISSION);
-            node.removePermission("any");
-          }
-          if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
-          node.save();
-        } catch (AccessDeniedException ade) {
-          uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, 
-                                                  ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          return;
-        } catch (AccessControlException accessControlException) {
-          uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, 
-              ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          return;
         }
         if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
         node.save();        
