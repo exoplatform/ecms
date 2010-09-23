@@ -205,7 +205,7 @@ public class DriveData implements Comparable<DriveData> {
         String[] arrPer = {};
         for(String per : permissionList) {
           arrPer = per.split(":/");
-          if(arrPer[1].equals(array[1])) return true;
+          if(arrPer.length == 2 && arrPer[1].equals(array[1])) return true;
         }
       }
     }    

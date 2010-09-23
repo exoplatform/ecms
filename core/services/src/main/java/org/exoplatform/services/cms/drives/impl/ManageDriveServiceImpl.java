@@ -429,7 +429,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
         }
         for(String permission : drive.getAllPermissions()) {
           String[] arrPer = permission.split(":/");
-          if(groups.contains("/" + arrPer[1]) && !groupDrives.contains(drive)) {
+          if(arrPer.length == 2 && groups.contains("/" + arrPer[1]) && !groupDrives.contains(drive)) {
             groupDrives.add(drive);
             break;
           }
