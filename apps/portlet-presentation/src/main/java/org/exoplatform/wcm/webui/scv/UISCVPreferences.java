@@ -15,7 +15,7 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
+import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentBrowsePanelOne;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
 import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
@@ -268,8 +268,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       contentSelector.init(uiSCVPref.getSelectedNodeDrive(),
                            fixPath(node == null ? "" : node.getPath(), uiSCVPref));
       contentSelector.getChild(UIContentBrowsePanelOne.class).setSourceComponent(uiSCVPref, new String[] { UISCVPreferences.CONTENT_PATH_INPUT });
-      Utils.createPopupWindow(uiSCVPref, contentSelector, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
-      uiSCVPref.setContentSelectorID(UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+      Utils.createPopupWindow(uiSCVPref, contentSelector, UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW, 800);
+      uiSCVPref.setContentSelectorID(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
     }
     
     private String fixPath(String path, UISCVPreferences uiScvPref) throws Exception {
