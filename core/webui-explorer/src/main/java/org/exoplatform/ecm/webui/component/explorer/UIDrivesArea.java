@@ -34,6 +34,8 @@ import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
@@ -265,6 +267,11 @@ public class UIDrivesArea extends UIContainer {
       for(UIComponent uiComp : uiWorkingArea.getChildren()) {
         if(uiComp instanceof UIDrivesArea) uiComp.setRendered(false);
         else uiComp.setRendered(true);
+      }
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+      if (controller != null) {
+        controller.getChild(UIDocumentForm.class).releaseLock();
       }
       uiParent.setRenderedChild(UIJcrExplorerContainer.class);
       uiJCRExplorer.updateAjax(event);
