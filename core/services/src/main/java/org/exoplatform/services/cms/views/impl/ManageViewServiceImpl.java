@@ -356,6 +356,17 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     session.save();
     return templatePath;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String updateTemplate(String name, String content, String homeTemplate, String repository) throws Exception {
+    Session session = getSession(repository) ;
+    Node templateHome = (Node)session.getItem(homeTemplate) ;
+    String templatePath = templateService.updateTemplate(templateHome.getNode(name), new ByteArrayInputStream(content.getBytes()), new String[] {"*"});
+    session.save();
+    return templatePath;
+  }
 
 
   /**

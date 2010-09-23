@@ -169,6 +169,22 @@ public interface ManageViewService {
   public String addTemplate(String name, String content, String homePath, String repository)throws Exception ;
   
   /**
+   * Update a template for node by specified path
+   * @param name            String
+   *                        The name of current template         
+   * @param content         String
+   *                        The property of current template
+   * @param homePath       String
+   *                        The path of specified node
+   * @param repository      String
+   *                        The name of repository
+   * @see                   Session
+   * @see                   Node                       
+   * @throws Exception
+   */
+  public String updateTemplate(String name, String content, String homePath, String repository)throws Exception ;
+  
+  /**
    * Removes the template to the given node by specified the templatePath params
    * @param templatePath    String
    *                        The path of template
