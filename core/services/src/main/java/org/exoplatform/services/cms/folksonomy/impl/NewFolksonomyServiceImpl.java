@@ -27,6 +27,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.jcr.ItemExistsException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -117,14 +118,15 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public void addPrivateTag(String[] tagsName, Node documentNode, String repository, String workspace, String userName) throws Exception {
 		Node userFolksonomyNode = getUserFolksonomyFolder(userName);
+		Node targetNode  = getTargetNode(documentNode);
 		for (String tag : tagsName) {
 			try {
 				//find tag node				
 				Node tagNode = userFolksonomyNode.hasNode(tag) ?  
 						userFolksonomyNode.getNode(tag) : userFolksonomyNode.addNode(tag);
 				//add symlink and total
-				if (documentNode != null && !existSymlink(tagNode, documentNode)) {
-					linkManager.createLink(tagNode, documentNode);
+				if (targetNode != null && !existSymlink(tagNode, targetNode)) {
+			    linkManager.createLink(tagNode, targetNode);
 					long total = tagNode.hasProperty(EXO_TOTAL) ?
 							tagNode.getProperty(EXO_TOTAL).getLong() : 0;
 					tagNode.setProperty(EXO_TOTAL, total + 1);
@@ -136,7 +138,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 				}
 				userFolksonomyNode.getSession().save();
 			} catch (Exception e) {
-				LOG.error("can't add tag '" + tag + "' to node: " + documentNode.getPath() + " for user: " + userName);
+			  LOG.error("can't add tag '" + tag + "' to node: "  + targetNode.getPath() + " for user: " + userName);
 			}
 		}
   }
@@ -145,6 +147,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    * {@inheritDoc}
    */
   public void addGroupsTag(String[] tagsName, Node documentNode, String repository, String workspace, String[] roles) throws Exception {
+    Node targetNode  = getTargetNode(documentNode);
     for (String group : roles) {
 			Node groupFolksonomyNode = getGroupFolksonomyFolder(group, repository, workspace);
 //			System.out.println(groupFolksonomyNode.getPath());
@@ -154,8 +157,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 					Node tagNode = groupFolksonomyNode.hasNode(tag) ?
 							groupFolksonomyNode.getNode(tag) : groupFolksonomyNode.addNode(tag);
 					//add symlink and total
-					if (documentNode != null && !existSymlink(tagNode, documentNode)) {
-						linkManager.createLink(tagNode, documentNode);
+					if (targetNode != null && !existSymlink(tagNode, targetNode)) {
+				    linkManager.createLink(tagNode, targetNode);
 						long total = tagNode.hasProperty(EXO_TOTAL) ?
 								tagNode.getProperty(EXO_TOTAL).getLong() : 0;
 						tagNode.setProperty(EXO_TOTAL, total + 1);
@@ -167,7 +170,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 					}
 					groupFolksonomyNode.getSession().save();
 				} catch (Exception e) {
-					LOG.error("can't add tag '" + tag + "' to node: " + documentNode.getPath() + " for group: " + group);					
+				  LOG.error("can't add tag '" + tag + "' to node: "  + targetNode.getPath() + " for group: " + group);					
 				}
 			}
     }
@@ -178,14 +181,15 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public void addPublicTag(String treePath, String[] tagsName, Node documentNode, String repository, String workspace) throws Exception {
   	Node publicFolksonomyTreeNode = getNode(repository, workspace, treePath);
+  	Node targetNode  = getTargetNode(documentNode);
   	for (String tag : tagsName) {
   		try {
   			//find tag node
   			Node tagNode = publicFolksonomyTreeNode.hasNode(tag) ?
   					publicFolksonomyTreeNode.getNode(tag) : publicFolksonomyTreeNode.addNode(tag);
 				//add symlink and total
-  			if (documentNode != null && !existSymlink(tagNode, documentNode)) {
-  				linkManager.createLink(tagNode, documentNode);
+  			if (targetNode != null && !existSymlink(tagNode, targetNode)) {
+  		    linkManager.createLink(tagNode, targetNode);
   				long total = tagNode.hasProperty(EXO_TOTAL) ? 
   						tagNode.getProperty(EXO_TOTAL).getLong() : 0;
 					tagNode.setProperty(EXO_TOTAL, total + 1);
@@ -197,9 +201,23 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 				}
   			publicFolksonomyTreeNode.getSession().save();
   		} catch (Exception e) {
-				LOG.error("can't add tag '" + tag + "' to node: " + documentNode.getPath() + " in public folksonomy tree!");
+  		  LOG.error("can't add tag '" + tag + "' to node: "  + targetNode.getPath() + " in public folksonomy tree!");
   		}
   	}
+  }
+  
+  private Node getTargetNode(Node showingNode) throws Exception {
+    Node targetNode = null;
+    if (linkManager.isLink(showingNode)) {
+      try {
+        targetNode = linkManager.getTarget(showingNode);
+      } catch (ItemNotFoundException e) {
+        targetNode = showingNode;
+      }
+    } else {
+      targetNode = showingNode;
+    }
+    return targetNode;
   }
 
   /**
