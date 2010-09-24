@@ -495,6 +495,7 @@
       <Unlock>Déverrouiller</Unlock>
       <EditDocument>Editer</EditDocument>
       <Paste>Coller</Paste>
+      <LockedBy>verrouillé par</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>

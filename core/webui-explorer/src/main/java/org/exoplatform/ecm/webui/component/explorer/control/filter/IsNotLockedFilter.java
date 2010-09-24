@@ -34,6 +34,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 public class IsNotLockedFilter extends UIExtensionAbstractFilter {
 
   private boolean checkGroup = false;
+  private boolean  checkOwner = false;
   
   public IsNotLockedFilter() {
     this(null);
@@ -48,12 +49,23 @@ public class IsNotLockedFilter extends UIExtensionAbstractFilter {
     this.checkGroup = checkGroup;
   }
   
+  public IsNotLockedFilter(boolean checkGroup, boolean checkOwner) {
+    this(null);
+    this.checkGroup = checkGroup;
+    this.checkOwner = checkOwner;
+  }
+  
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
     /*UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
     return !uiExplorer.nodeIsLocked(currentNode);*/
-    if(!currentNode.isLocked()) return true;        
+    if(!currentNode.isLocked()) return true;
+    if (checkOwner && currentNode.isLocked()) {
+      String remoteUser = currentNode.getSession().getUserID();
+      String lockOwner = currentNode.getLock().getLockOwner();
+      if (lockOwner.equals(remoteUser)) return true;
+    }
     String lockToken = checkGroup ? LockUtil.getLockToken(currentNode): LockUtil.getLockTokenOfUser(currentNode);
     if(lockToken != null) {
       currentNode.getSession().addLockToken(LockUtil.getLockToken(currentNode));

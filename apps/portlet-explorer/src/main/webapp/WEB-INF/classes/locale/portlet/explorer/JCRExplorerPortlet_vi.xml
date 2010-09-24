@@ -506,6 +506,7 @@
       <Unlock>Mở khóa</Unlock>
       <EditDocument>chỉnh sửa</EditDocument>
       <Paste>Dán</Paste>
+      <LockedBy>Bị khoá bởi</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>

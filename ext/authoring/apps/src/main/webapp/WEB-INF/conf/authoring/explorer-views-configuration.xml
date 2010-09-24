@@ -51,7 +51,7 @@
           <object type="org.exoplatform.services.cms.views.ViewConfig">
             <field name="name"><string>authoring-view</string></field>
             <field name="permissions"><string>*:/platform/web-contributors</string></field>
-            <field name="template"><string>/exo:ecm/views/templates/ecm-explorer/AuthoringView</string></field>
+            <field name="template"><string>/exo:ecm/views/templates/ecm-explorer/ContentView</string></field>
             <field name="tabList">
               <collection type="java.util.ArrayList">
                 <value>
@@ -69,17 +69,7 @@
               </collection>
             </field>
           </object>
-        </object-param>
-
-        <object-param>
-          <name>Content Template</name>
-          <description>Template to display contents in list style</description>
-          <object type="org.exoplatform.services.cms.views.TemplateConfig">
-            <field name="type"><string>ecmExplorerTemplate</string></field>
-            <field name="name"><string>AuthoringView</string></field>
-            <field name="warPath"><string>/ecm-explorer/AuthoringView.gtmpl</string></field>
-          </object>
-        </object-param>
+        </object-param>        
 
       </init-params>
     </component-plugin>
