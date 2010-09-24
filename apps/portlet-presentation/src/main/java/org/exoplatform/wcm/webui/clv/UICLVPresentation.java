@@ -36,6 +36,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
@@ -633,12 +634,18 @@ public class UICLVPresentation extends UIContainer {
 				sb.append("					</div>");
 			} 
 
-			if(isShowEdit(viewNode)){
+			if(isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)){
 				sb.append("					<div style=\"float: right\">");
 				sb.append("						<a href=\""+contentEditLink+"\" title=\"edit\" class=\"EditContentIcon\" >");
 				sb.append("						  &nbsp;");
 				sb.append("						</a>");    
 				sb.append("					</div>");
+			} else {
+				sb.append("					<div style=\"float: right\">");
+				sb.append("						<div title=\"lock\" class=\"IconLocked\" >");
+				sb.append("						  &nbsp;");
+				sb.append("						</div>");    
+				sb.append("					</div>");		
 			}
 			if (viewNode.hasProperty("publication:currentState")) {
 			  PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
@@ -657,8 +664,7 @@ public class UICLVPresentation extends UIContainer {
 		}
 
 		return sb.toString();
-	}
-	
+	}		
 	
   /**
    * The listener interface for receiving refreshAction events.

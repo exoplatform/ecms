@@ -411,5 +411,12 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
   display: block;
 }
 
+.IconLocked {
+  background: url('icons/IconLockedBig.gif') no-repeat right top; /* orientation=lt */
+		background: url('icons/IconLockedBig.gif') no-repeat left top; /* orientation=rt */
+  width: 20px;
+  height: 16px;
+  float: left;
+}
 
 /* QUICK EDIT END */

@@ -58,6 +58,7 @@
    	  <PrintSettingBlock>Configuration d'impression</PrintSettingBlock>
    	  <UISCVPrintPageParameter>Avec</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Afficher dans la page</UISCVConfigPrintPageFormInputSet>
+						<LockStatus>Verrouillage</LockStatus>	
     </label>
     <help>
       <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique (mode Avancé, voir ci-dessous)</ContentPathBlock>

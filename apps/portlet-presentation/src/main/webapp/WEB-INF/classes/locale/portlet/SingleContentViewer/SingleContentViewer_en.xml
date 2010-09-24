@@ -59,6 +59,7 @@
    	  <PrintSettingBlock>Print settings</PrintSettingBlock>
    	  <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Show in page</UISCVConfigPrintPageFormInputSet>
+						<LockStatus>Lock</LockStatus>						
     </label>
     <help>
    	  <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic navigation (Advanced mode, see below).</ContentPathBlock>
