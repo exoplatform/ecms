@@ -19,11 +19,12 @@
 	        <name>namespaces</name>
 	        <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
 	        <property name="rma" value="http://www.rma.com/jcr/"/>
-					    <property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/"/>
+					<property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/"/>
 	        <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/"/>
 	        <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/"/>
 	        <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/"/>
 	        <property name="rh" value="www.vn.vnn"/>
+					<property name="jos" value="http://nl.ijs.si/jos/"/>
 	      </properties-param>
 	    </init-params>
 	  </component-plugin>
