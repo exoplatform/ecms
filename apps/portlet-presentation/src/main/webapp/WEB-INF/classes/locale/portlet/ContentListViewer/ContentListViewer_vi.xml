@@ -51,6 +51,7 @@
     <action>
       <Save>Lưu</Save>
       <Cancel>Hủy</Cancel>
+      <delete>Xóa</delete>
     </action>
     <msg>
       <not-valid-path>Đường dẫn không đúng</not-valid-path>
@@ -103,6 +104,7 @@
     <action>
       <refresh>Làm mới</refresh>
       <edit>Chỉnh sửa</edit>
+      <delete>Xóa</delete>
     </action>
     <label>
       <draft>Bản nháp</draft>

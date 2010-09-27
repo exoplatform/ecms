@@ -86,6 +86,7 @@
     <action>
       <refresh>Rafraîchir</refresh>
       <edit>Modifier</edit>
+      <delete>Effacer</delete>
     </action>
     <label>
       <draft>Brouillon</draft>

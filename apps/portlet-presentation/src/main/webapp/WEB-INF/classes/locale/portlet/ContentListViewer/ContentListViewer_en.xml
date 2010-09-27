@@ -72,6 +72,7 @@
     <action>
       <Save>Save</Save>
       <Cancel>Cancel</Cancel>
+      <delete>Delete</delete>
     </action>
     <msg>
       <not-valid-path>The item path is invalid</not-valid-path>
@@ -125,6 +126,7 @@
     <action>
       <refresh>Refresh</refresh>
       <edit>Edit</edit>
+      <delete>Delete</delete>
     </action>
     <label>
       <draft>Draft</draft>
