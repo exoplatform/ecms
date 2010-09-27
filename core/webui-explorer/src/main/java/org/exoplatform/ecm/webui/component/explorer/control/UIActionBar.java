@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.control;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -152,7 +153,7 @@ public class UIActionBar extends UIForm {
   public String getBackLink() {
     String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
     if (newLink != null)
-      backLink = newLink;
+    	backLink = URLDecoder.decode(newLink);
     return backLink;
   }
   public String getTemplateName() { return templateName_;  }

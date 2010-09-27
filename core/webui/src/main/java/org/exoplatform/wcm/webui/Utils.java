@@ -343,11 +343,10 @@ public class Utils {
       WCMConfigurationService configurationService = Util.getUIPortalApplication().getApplicationComponent(WCMConfigurationService.class);
       String editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDITOR_PAGE_URI);
       link.append(portalURI).append(editorPageURI).append("?").
-                                               append("path=/").append(itemPath).
-                                               append("&").append(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO).
-                                               append("=").append(backto);
+      																				 append("path=/").append(itemPath);
       if (isEditable) link.append("&edit=true");
       if (isNew) link.append("&addNew=true");
+      link.append("&").append(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO).append("=").append(backto);
 	  
 	  return link.toString();
   }

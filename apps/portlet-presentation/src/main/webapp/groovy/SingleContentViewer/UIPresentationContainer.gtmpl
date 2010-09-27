@@ -48,7 +48,7 @@
 										} else { 
 								%>										
 									<div style="float: right">
-										<a href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.label.Edit")%>">
+										<a onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.label.Edit")%>">
 										  &nbsp;
 										</a>           
 									</div>

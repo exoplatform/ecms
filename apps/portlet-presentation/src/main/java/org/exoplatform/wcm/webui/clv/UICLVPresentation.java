@@ -625,7 +625,7 @@ public class UICLVPresentation extends UIContainer {
 
 			if(isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)){
 				sb.append("					<div style=\"float: right\">");
-				sb.append("						<a href=\""+contentEditLink+"\" title=\"edit\" class=\"EditContentIcon\" >");
+				sb.append("						<a onclick = 'eXo.ecm.CLV.addURL(this)' href=\""+contentEditLink+"\" title=\"edit\" class=\"EditContentIcon\" >");
 				sb.append("						  &nbsp;");
 				sb.append("						</a>");    
 				sb.append("					</div>");

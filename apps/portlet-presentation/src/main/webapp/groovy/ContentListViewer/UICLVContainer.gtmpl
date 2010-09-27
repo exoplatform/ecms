@@ -4,13 +4,13 @@
 	  import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
 		import org.exoplatform.wcm.webui.Utils;
 		
-		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : ""; 
+		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
+		def rcontext = _ctx.getRequestContext() ;
 %>
 <div class="$uicomponent.id " id="$uicomponent.id" 
 	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id'">
 	<%
 	
-		def rcontext = _ctx.getRequestContext() ;
 		String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
 		def addContentBlockId = portletId + "-AddContentBlock";
@@ -44,7 +44,7 @@
 					if (uicomponent.isShowManageContent()) {
 					  %>
 						<div style="float: right"  id="<%=manageContentBlockId%>">
-							<a class="ManageContentIcon" href="<%=manageContentsLink%>" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
+							<a class="ManageContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
 							  &nbsp;
 							</a>           
 						</div>
@@ -54,7 +54,7 @@
 					if (uicomponent.isShowAddContent()) {          
 					  %>
 						<div style="float: right" id="<%=addContentBlockId%>">
-							<a class="AddContentIcon" href="<%=addContentLink%>" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
+							<a class="AddContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
 							  &nbsp;
 							</a>           
 						</div>
