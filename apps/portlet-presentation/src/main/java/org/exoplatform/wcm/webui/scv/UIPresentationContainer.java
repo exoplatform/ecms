@@ -313,9 +313,7 @@ public class UIPresentationContainer extends UIContainer{
 	}
 
 	public String getQuickEditLink(){
-	  PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-	  PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
-	  return Utils.getEditLink(getNodeView(), true, false, preferences.getValue(UISingleContentViewerPortlet.PARAMETER, "")); 
+	  return Utils.getEditLink(getNodeView(), true, false);
 	}
 	
 	/**

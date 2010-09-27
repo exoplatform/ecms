@@ -55,7 +55,6 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -154,7 +153,7 @@ public class UIActionBar extends UIForm {
   public String getBackLink() {
     String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
     if (newLink != null)
-      backLink = URLDecoder.decode(newLink);
+    	backLink = URLDecoder.decode(newLink);
     return backLink;
   }
   public String getTemplateName() { return templateName_;  }

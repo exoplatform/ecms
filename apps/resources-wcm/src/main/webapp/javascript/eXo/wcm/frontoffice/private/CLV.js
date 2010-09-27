@@ -143,4 +143,8 @@ ContentListViewer.prototype.disableClvInput = function(obj){
 	clvInput.setAttribute('readonly', '');
 };
 
+ContentListViewer.prototype.addURL = function(aDiv) {
+	aDiv.setAttribute("href", aDiv.getAttribute("href") + escape(location.search));
+}
+
 eXo.ecm.CLV = new ContentListViewer();

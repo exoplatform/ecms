@@ -618,8 +618,8 @@ public class UICLVPresentation extends UIContainer {
 		StringBuffer sb = new StringBuffer();
 		String contentEditLink = getEditLink(viewNode, true, false);
 		String contentDeleteLink = event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
-		String hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";		
-
+		String hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";
+		
 		sb.append("<div class=\""+cssClass+"\" onmouseover=\"this.className  = '"+cssClass+" "+hoverClass+"' \" onmouseout=\"this.className = '"+cssClass+"' \">");
 		if (Utils.isShowQuickEdit()) {
 			sb.append("	<div class=\"EdittingContent\" style=\" z-index: 1\">");
@@ -628,7 +628,7 @@ public class UICLVPresentation extends UIContainer {
 			sb.append("				<div class=\"EdittingToolBarC clearfix\">");
 			if (Utils.isShowDelete(viewNode)) {
 				sb.append("					<div style=\"float: right\">");
-				sb.append("						<a href=\""+contentDeleteLink+"\" title=\"delete\"class=\"CloseContentIcon\" >");
+				sb.append("                     <a href=\""+contentDeleteLink+"\" title=\"delete\"class=\"CloseContentIcon\" >");
 				sb.append("						  &nbsp;");
 				sb.append("						</a>");  
 				sb.append("					</div>");
@@ -636,7 +636,7 @@ public class UICLVPresentation extends UIContainer {
 
 			if(isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)){
 				sb.append("					<div style=\"float: right\">");
-				sb.append("						<a href=\""+contentEditLink+"\" title=\"edit\" class=\"EditContentIcon\" >");
+				sb.append("						<a onclick = 'eXo.ecm.CLV.addURL(this)' href=\""+contentEditLink+"\" title=\"edit\" class=\"EditContentIcon\" >");
 				sb.append("						  &nbsp;");
 				sb.append("						</a>");    
 				sb.append("					</div>");
@@ -648,7 +648,7 @@ public class UICLVPresentation extends UIContainer {
 				sb.append("					</div>");		
 			}
 			if (viewNode.hasProperty("publication:currentState")) {
-			  PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+		          PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();			  
 			  String state = viewNode.getProperty("publication:currentState").getValue().getString(); 
 			  try {
 			    state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
