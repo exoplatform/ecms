@@ -102,29 +102,6 @@ h2. ManageView
   {include:document="pages/services/manageView.wiki" /}
 h2. ApplicationTemplateManager
   {include:document="pages/services/applicationTemplateManager.wiki" /}
-h2. NodeFinder
-  {include:document="pages/services/nodeFinder.wiki" /}
-h2. DMSConfiguration
-  {include:document="pages/services/dmsConfiguration.wiki" /}
-h2. DocumentType
-  {include:document="pages/services/documentType.wiki" /}
-h2. Favorite
-  {include:document="pages/services/favorite.wiki" /}
-h2. Trash
-  {include:document="pages/services/trash.wiki" /}
-h2. Timeline
-  {include:document="pages/services/timeline.wiki" /}
-h2. Lock
-  {include:document="pages/services/lock.wiki" /}
-h2. JodConverter
-  {include:document="pages/services/jodConverter.wiki" /}
-h2. Repository
-  {include:document="pages/services/repository.wiki" /}
-h2. Cache
-  {include:document="pages/services/cache.wiki" /}
-h2. Listener
-  {include:document="pages/services/listener.wiki" /}
-  
 
 h1. FAQ
   {include:document="pages/faq/faq.wiki" /}
