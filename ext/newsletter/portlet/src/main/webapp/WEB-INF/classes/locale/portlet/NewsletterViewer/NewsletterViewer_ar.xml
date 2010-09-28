@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UINewsletterViewerForm>
+    <msg>
+      <updateSuccess>تم تحديث تسجيلك </updateSuccess>
+      <subcribed>أنت الان مسجل فالرسالة الاخبارية التي تم اختيارها </subcribed>
+      <email-not-empty>البريد الإلكتروني لا يمكن أن تكون فارغة</email-not-empty>
+      <checkSubscriptionToProcess>يرجى التحقق من واحدة أو أكثر من الاشتراكات قبل تقديم!</checkSubscriptionToProcess>
+      <alreadyExistedEmail>هذا البريد الإلكتروني موجود بالفعل. الرجاء إدخال بريد إلكتروني آخر</alreadyExistedEmail>
+      <canNotSubcribed>لا يمكن الاشتراك. يرجى المحاولة مرة أخرى!</canNotSubcribed>
+      <get-checked>خطأ عند تنفيذ الحصول على اشتراك يتم التحقق.</get-checked>
+    </msg>
+    <action>
+      <Subcribe>اشترك</Subcribe>
+      <ForgetEmail>ننسى هذا البريد الإلكتروني</ForgetEmail>
+      <ChangeSubcriptions>تغيير اشتراكاتك</ChangeSubcriptions>
+    </action>
+    <title>
+      <userEmail>البريد الإلكتروني</userEmail>
+      <subscription>اشتراك</subscription>
+      <yourStatus>إختيار الإشتراك </yourStatus>
+    </title>
+    <Email>
+      <ConfirmUser>
+        <Subject>النشرة الإخبارية تأكيد الطلب</Subject>
+        <Content>إضغط # هنا # لتأكيد الإشتراك </Content>
+      </ConfirmUser>
+    </Email>
+  </UINewsletterViewerForm>
+</bundle>

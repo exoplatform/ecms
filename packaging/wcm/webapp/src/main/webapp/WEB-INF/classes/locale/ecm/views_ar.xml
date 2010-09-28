@@ -624,9 +624,9 @@
 				<SendMail>
    <view>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes>
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </view>
   </SendMail>
@@ -634,9 +634,9 @@
   <ScriptAction>
    <view>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes>
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </view>
   </ScriptAction>
@@ -644,9 +644,9 @@
   <Getmail>
    <view>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes> 
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </view>
   </Getmail>
@@ -654,9 +654,9 @@
   <Rss>
    <view>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes>
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </view>
   </Rss>
@@ -664,9 +664,9 @@
   <AddMetadata>
    <view>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes> 
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </view>
   </AddMetadata>
@@ -674,9 +674,9 @@
   <ReloadAction>
    <view>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes> 
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </view>
   </ReloadAction>
@@ -684,9 +684,9 @@
   <Transform>
    <view>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes>
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </view>
   </Transform>
@@ -694,20 +694,10 @@
   <EnableVersioning>
    <view>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes> 
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </view>
   </EnableVersioning>
-  <AutoVersioning>
-   <view>
-     <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
-							<nodeTypeName>NodeType Name</nodeTypeName>
-     </label> 
-   </view>
-  </AutoVersioning>
 </bundle>

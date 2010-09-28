@@ -29,8 +29,8 @@
       <EditPortal>تحرير البوابة</EditPortal>
       <BrowsePage>إدارة الصفحات</BrowsePage>
       <EditPageAndNavigation>تحرير الصفحة والتصفح</EditPageAndNavigation>
-      <Editor>Editor</Editor>
-      <EditSiteLayout>Edit Layout</EditSiteLayout>
+      <Editor>محرر</Editor>
+						<EditSiteLayout>تحرير التنسيق</EditSiteLayout>
     </action>
   </UIAdminToolbarPortlet>
 </bundle>

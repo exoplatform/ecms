@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <UIPresentationContainer>
+  <title>
+   <QuickEdit>عدل بسرعة</QuickEdit>
+   <print>طباعة هذه الصفحة</print>
+  </title>
+  <label>
+   <draft>مسودة</draft>
+   <print>طباعة</print>
+  </label>
+  <msg>
+   <no-content>لا يوجد لعرض المحتوى</no-content>
+  </msg>
+ </UIPresentationContainer>
+
+ <UIWelcomeScreen>
+  <label>
+   <WelcomeLabel>مرحبا بكم في واحدة عارض المحتوى</WelcomeLabel>
+   <WelcomeText>اختر</WelcomeText>
+  </label>
+  <action>
+   <Abort>إلغاء</Abort>
+   <CreateNewContent>إنشاء محتوى جديد</CreateNewContent>
+   <SelectContent>تحديد محتوى</SelectContent>
+  </action>
+ </UIWelcomeScreen>
+
+ <UINameWebContentForm>
+  <action>
+   <Save>حفظ</Save>
+   <Abort>إلغاء</Abort>
+  </action>
+  <label>
+   <name>عنوان</name>
+   <selectTemplate>حدد نموذج </selectTemplate>
+   <option>
+    <exo:siteBreadcrumb>موقع تفصيلي</exo:siteBreadcrumb>
+    <exo:siteNavigationWebContent>موقع الملاحة</exo:siteNavigationWebContent>
+    <exo:pictureOnHeadWebcontent>الصورة على تخطيط رئيس محتوى الويب</exo:pictureOnHeadWebcontent>
+    <exo:siteSearchBox>موقع الويب مربع البحث محتوى</exo:siteSearchBox>
+    <exo:webContent>الحرة محتوى تخطيط ويب</exo:webContent>
+   </option>
+  </label>
+ </UINameWebContentForm>
+
+ <UITabPane>
+   <title>
+    <UIContentDialogConfig>ترتيب لمشاهد محتوى وحيد </UIContentDialogConfig>
+   </title>
+  </UITabPane>
+  
+  <UIContentDialogConfig>
+   <action>
+    <SaveToPortletPreference>حفظ</SaveToPortletPreference>
+   </action>
+   <label>
+    <ShowTitle>تظهر عنوان</ShowTitle>
+    <ShowPrintAction>عرض الطباعة</ShowPrintAction>
+   </label>
+   <msg>
+    <saved-successfully>يتم حفظ تفضيلاتك</saved-successfully>
+   </msg>
+  </UIContentDialogConfig>
+  
+  <UIContentDialogFormPopupWindow>
+   <title>
+    <UIWelcomeScreen>مرحبا بكم في المشاهد المحتوى واحدة</UIWelcomeScreen>
+    <UINameWebContentForm>وفقا لنموذج</UINameWebContentForm>
+    <UIContentDialogForm>شكل محتوى ويب</UIContentDialogForm>
+    <UIContentSelectorOne>واحد محدد لوحة المحتوى</UIContentSelectorOne>
+   </title>
+  </UIContentDialogFormPopupWindow>
+  
+  <UISingleContentViewerPortlet>
+  	 <msg>
+  	 		<AccessControlException>ليس لديك إذن للوصول إلى وضع التحرير</AccessControlException>
+  	 </msg>
+  </UISingleContentViewerPortlet>
+</bundle>

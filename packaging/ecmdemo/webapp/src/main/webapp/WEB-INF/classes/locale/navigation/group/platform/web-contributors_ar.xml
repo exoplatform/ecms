@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <administration>
+    <wcm>إدارة الموقع</wcm>
+    <siteExplorer>مستكشف الموقع </siteExplorer>
+    <wcmAdmin>إدارة الموقع</wcmAdmin>
+    <newslettermanager>إدارة النشرات الاخبارية </newslettermanager>
+    <formgenerator>مولد الشكل </formgenerator>
+		<workflowcontroller>وحدة تحكم العمليات التجارية</workflowcontroller>
+		<workflowAdministration>ادارات العمليات</workflowAdministration>
+  </administration>
+</bundle>
+

@@ -682,12 +682,12 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home path</homePath>
-        <targetWorkspace>Target workspace</targetWorkspace>
-        <targetPath>Target path</targetPath>
+        <id>المعرف الوحيد</id>
+        <name>الاسم</name>
+        <lifecycle>دورة الحياة</lifecycle>
+        <homePath>مسار الاستقبال</homePath>
+        <targetWorkspace>هدف فضاء العمل</targetWorkspace>
+        <targetPath>مسار الهدف</targetPath>
       </label>
     </dialog>
   </ScriptAction>
@@ -697,30 +697,30 @@
     
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-  <no>No</no>
-	<yes>Yes</yes>
-	<true>True</true>
-	<false>False</false>	
-	<Electronic>Electronic</Electronic>
-	<Paper>Paper</Paper>
-	<NONE>None</NONE>
-	<CLASSIFIED>Classified</CLASSIFIED>
-	<UNCLASSIFIED>Un Classified</UNCLASSIFIED>
-	<NOCONTRACT>No Contract</NOCONTRACT>
-	<true>True</true>
-	<false>False</false>
-	<one-minute>One Minute</one-minute>
-	<hourly>Hourly</hourly>
-	<daily>Daily</daily>
-	<quarterly>Quarterly</quarterly>
-	<yearly>Yearly</yearly>
-	<ten-years>Ten Years</ten-years>
+  <no>لا</no>
+	<yes>نعم</yes>
+	<true>صحيح</true>
+	<false>خطأ</false>	
+	<Electronic>إلكتروني</Electronic>
+	<Paper>ورقة</Paper>
+	<NONE>لا شيء</NONE>
+	<CLASSIFIED>مُصنّف</CLASSIFIED>
+	<UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
+	<NOCONTRACT>بدون عقد</NOCONTRACT>
+	<true>صحيح</true>
+	<false>خطأ</false>
+	<one-minute>دقيقة واحدة</one-minute>
+	<hourly>كل ساعة</hourly>
+	<daily>يوميا</daily>
+	<quarterly> فصليا (كُل ثلاثَة أشْهُر)</quarterly>
+	<yearly>سنويا</yearly>
+	<ten-years>عشر سنوات</ten-years>
 	  <SendMail>
    <dialog>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes>
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </dialog>
   </SendMail>
@@ -728,9 +728,9 @@
   <ScriptAction>
    <dialog>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes>
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </dialog>
   </ScriptAction>
@@ -738,9 +738,9 @@
   <Getmail>
    <dialog>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes> 
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Getmail>
@@ -748,9 +748,9 @@
   <Rss>
    <dialog>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes>
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Rss>
@@ -758,9 +758,9 @@
   <AddMetadata>
    <dialog>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes> 
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </dialog>
   </AddMetadata>
@@ -768,9 +768,9 @@
   <ReloadAction>
    <dialog>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes> 
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </dialog>
   </ReloadAction>
@@ -778,9 +778,9 @@
   <Transform>
    <dialog>
      <label> 
-							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes>
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Transform>
@@ -788,19 +788,10 @@
   <EnableVersioning>
    <dialog>
      <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+     		<isDeep>عميق</isDeep>
+							<nodetypes>نوع العقدة</nodetypes> 
+							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
      </label> 
    </dialog>
-  </EnableVersioning>
-  <AutoVersioning>
-   <dialog>
-     <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
-     </label> 
-   </dialog>
-  </AutoVersioning>    
+  </EnableVersioning>  
 </bundle>

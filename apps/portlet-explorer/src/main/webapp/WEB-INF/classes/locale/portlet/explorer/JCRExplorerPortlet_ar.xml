@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <!--
   #############################################################################
@@ -43,7 +43,6 @@
     <msg>
        <not-support>لا يسمح للتصويت على هذا النوع من الوثائق</not-support>
        <not-checkedout>يجب عليك مراجعة العقدة قبل التصويت </not-checkedout>
-							<vote-restriction>You can not vote more than one time </vote-restriction>
     </msg>
   </UIVoteForm>
   <!--
@@ -178,7 +177,7 @@
       <nodesPerPage>عقد في كل صفحة</nodesPerPage>
     </label>
     <action>
-      <Back>#{word.close}</Back>
+      <Back>#{word.back}</Back>
       <Save>#{word.save}</Save>
     </action>
   </UIPreferencesForm>
@@ -237,7 +236,7 @@
       <UIViewMetadataManager>إظهار قالب المعلومات القياسية</UIViewMetadataManager>
       <UIVoteForm>تصويت للوثيقة</UIVoteForm>
       <UICommentForm>أضف تعليق</UICommentForm>
-      <UIPreferencesForm>Preferences</UIPreferencesForm>
+      <UIPreferencesForm>Preference Setting</UIPreferencesForm>
       <UIPublicationManager>إدارة النشر</UIPublicationManager>
       <UIConfirmMessage>تأكيد الحذف</UIConfirmMessage>
       <UIActivePublication> تسجيل دورة حياة النشر</UIActivePublication>
@@ -466,7 +465,6 @@
       <Unlock>تحرير القفل</Unlock>
       <EditDocument>تبديل</EditDocument>
       <Paste>ألصق</Paste>
-      <LockedBy>locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
@@ -528,7 +526,6 @@
       <ViewProperties>عرض الصفات</ViewProperties>
       <GetURL>نسخ URL</GetURL>
       <AddThumbnail>إضافة/حذف صورة مصغرة</AddThumbnail>
-						<WebDavView>Download And Allow Edition</WebDavView>
     </event>
   </ECMContextMenu>
   <!--
@@ -687,7 +684,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
+      <Reset>إعادة تعيين</Reset>
     </action>
   </UIMixinTypeForm>
   <!--
@@ -990,7 +987,7 @@
   </UISearchResult>
   <UIConstraintsForm>
     <label>
-      <constraints>UIConstraintsForm</constraints>
+      <constraints>واجهة القيود </constraints>
       <metadataProperty>الصفات</metadataProperty>
       <operator>عامل رياضيات</operator>
       <contains>يحتوي على القيمة</contains>
@@ -1589,7 +1586,6 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Close>#{word.close}</Close>
     </action>
     <msg>
       <cannot-save>لم يتم الحفظ لأن بعض الشروط لم يمكن تخطيها.</cannot-save>
@@ -1687,7 +1683,7 @@
         Deeper test on DMS 2.4 RC1
         ECM-3873 Error content of message when type name of action by special character
 	    -->
-      <repository-exception>Can not save this action. The name provided has some special character.</repository-exception>
+      <repository-exception>لا يمكن حفظ هذا العمل. اسم قدمت له بعض طابع خاص.</repository-exception>
       <numberformat-exception>لا يمكن حفظ هذا العمل. الاسم المستخدم يجب أن لا يحمل '[' أو ']'.</numberformat-exception>
       <existed-action>هذا الاسم '{0}' مستخدم، هلا اخترت اسما آخرا.</existed-action>
       <unable-add-action>لم يتمكن من إضافة هذا العمل</unable-add-action>
@@ -1748,7 +1744,7 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Watch</Watch>
+      <Watch>راقب</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>واصل</Continue>
       <Unwatch>الاكتفاء من المراقبة</Unwatch>
@@ -1772,7 +1768,7 @@
     <label>
       <names>اسم العلامة</names>
       <linked>العلامات الموصولة</linked>
-      <tagSet>UITaggingForm</tagSet>
+      <tagSet>واجهة نموذج الدالة</tagSet>
     </label>
     <action>
       <AddTag>إضافة علامة</AddTag>
@@ -2093,9 +2089,9 @@
   -->
   <UIWorkflowPublicationActionForm>
     <label>
-      <fieldValidator>fieldValidator</fieldValidator>
-      <fieldDestPath>fieldDestPath</fieldDestPath>
-      <fieldBackup>fieldBackup</fieldBackup>
+      <fieldValidator>مجال المصادقة</fieldValidator>
+      <fieldDestPath>حقل الوجهة مسار</fieldDestPath>
+      <fieldBackup>النسخ الاحتياطي</fieldBackup>
     </label>
   </UIWorkflowPublicationActionForm>
   <workflow_validator>
@@ -2118,9 +2114,9 @@
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
   -->
-  <UIJCRExplorerPortlet>
+  <UIJCRExporerPortlet>
     <nopermission>هذا ليس بقُرص أو انّك لا تملك الصلاحيّة الكافية للدّخول إلى هذا القُرص</nopermission>
-  </UIJCRExplorerPortlet>
+  </UIJCRExporerPortlet>
   
   <UIJcrExplorerEditForm>
     <title>مُستكشف الملفات مشهد التغيير</title>
@@ -2136,7 +2132,7 @@
       <isDirectlyDrive>القرص المباشر</isDirectlyDrive>
       <driveName>اسم القرص</driveName>
       <usecase>اختيار النّوع</usecase>
-				  <SelectNodePath>Select path</SelectNodePath>
+				  <SelectNodePath>حدد مسار</SelectNodePath>
     </label>
   </UIJcrExplorerEditForm>
   
@@ -2150,13 +2146,13 @@
   <UIJcrExplorerEditForm>
     <label>
       <driveName>اسم القرص</driveName>
-      <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
+      <DriveNameInput>تحرير نموذج JCR</DriveNameInput>
     </label>
     <msg>
       <not-have-social>النموذج التطبيقي الاجتماعي غير متوفّر، سيتمّ استعمال النموذج المُختار عوضاً عن ذلك</not-have-social>
       <personal-usecase>سيتمّ استعمال القرص الشخصي الخاص بالمستخدم الحالي عند اختيارك للنموذج التطبيقي الشخصي</personal-usecase>
-						<drive-edit-permission>Can not edit drive name. Please, click on Edit button</drive-edit-permission>
-						<path-edit-permission>Can not edit path. Please, click on Edit button</path-edit-permission>
+						<drive-edit-permission>لا يمكن تحرير اسم محرك . من فضلك ، انقر على زر تحرير</drive-edit-permission>
+						<path-edit-permission>لا يمكن تحرير المسار. من فضلك ، انقر على زر تحرير</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
   
@@ -2168,7 +2164,7 @@
   
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>حدد العقدة</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
   
@@ -2183,101 +2179,101 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddSymLink>Add Sym Link</AddSymLink>
+      <AddSymLink>إضافة وصلة</AddSymLink>
 		</tooltip>
 	</UIActionBar>
 	
 	<UIPopupWindow>
 		<title>
-			<UISymLinkManager>Sym Link Manager</UISymLinkManager>
+			<UISymLinkManager>رابط إداري </UISymLinkManager>
 		</title>
 	</UIPopupWindow>
 	
 	<UISymLinkForm>
 		<label>
-      <symLinkName>Sym Link Name</symLinkName>
-			<pathNode>Path Node</pathNode>
+      <symLinkName>إسم الرابط </symLinkName>
+			<pathNode>مسار عقدة</pathNode>
 		</label>
 		<action>
 			<Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
 		</action>
 		<msg>
-      <addFolder-successful>Add Symbolic Link '{0}' Successful</addFolder-successful>
-			<name-invalid>Please enter Symbolic Link Name!</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>Invalid file name</fileName-error>
-      <constraint-violation>Current node does not allow to add '{0}' node type</constraint-violation>
-      <repository-exception>Access deny! You don't have add permission in this node</repository-exception>
-      <numberformat-exception>Can not save this folder. The name provided must be a number format</numberformat-exception>      
-			<path-node-invalid>Please enter Path Node!</path-node-invalid>
-			<path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-			<non-node>Please choose trust target node Or you don't have enough rights to read this node</non-node>
-			<cannot-save>Some constraints were violated during that action.</cannot-save>
-			<item-exists-exception>The node with the same name already exists</item-exists-exception>
-			<UnsupportedRepositoryOperationException>This target node is not referenceable</UnsupportedRepositoryOperationException>
+      <addFolder-successful>إضافة ارتباط رمزي '{0}' بنجاح</addFolder-successful>
+			<name-invalid>الرجاء إدخال الاسم الرمزي للرابط </name-invalid>
+      <name-not-allowed>لا يسمح هذا الاسم.</name-not-allowed>
+      <fileName-error>اسم الملف غير صالح</fileName-error>
+      <constraint-violation>العقدة الحالية لا تسمح لإضافة '{0}' نوع العقدة'</constraint-violation>
+      <repository-exception>رفض الوصول! لم يكن لديك إضافة إذن في هذه العقدة</repository-exception>
+      <numberformat-exception>لا يمكن حفظ هذا المجلد. وقدم اسم يجب أن يكون تنسيق رقم</numberformat-exception>      
+			<path-node-invalid>الرجاء إدخال مسار عقدة!</path-node-invalid>
+			<path-node-not-allowed>لا يسمح هذا الاسم.</path-node-not-allowed>
+			<non-node>الرجاء اختيار الثقة عقدة الهدف أو لم يكن لديك ما يكفي من حقوق لقراءة هذه العقدة</non-node>
+			<cannot-save>قد انتهكت بعض القيود خلال هذا الإجراء.</cannot-save>
+			<item-exists-exception>العقدة مع نفس الاسم موجود مسبقا</item-exists-exception>
+			<UnsupportedRepositoryOperationException>هذا ليس الهدف المشار إليه</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>
 	
 	<UIPopupSymLink>
 		<title>
-			<UIOneNodePathSelector>Choose Target Node</UIOneNodePathSelector>
+			<UIOneNodePathSelector>اختيار الهدف عقدة</UIOneNodePathSelector>
 		</title>
 	</UIPopupSymLink>
 	
 	<ECMContextMenu>
 		<event>
-			<AddSymLink>Add Sym Link</AddSymLink>
+			<AddSymLink>إضافة رابط </AddSymLink>
     </event>
   </ECMContextMenu>
   
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You can not create a link for node '{0}' at '{1}'</create-link-problem>
-      <dest-node-is-link>The destination node '{0}' is already a symlink. So you can not create a symlink inside it</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link, you can not create a link point to another link</selected-is-link>
-      <confirm-create-link>Do you really want to create a link to this location?</confirm-create-link>    
+      <create-link-problem>   '{1}' إلى '{0}' لا يمكنك إنشاء ارتباط لعقدة</create-link-problem>
+      <dest-node-is-link>العقدة الوجهة'{0} 'هو بالفعل الارتباط الرمزي. بحيث لا يمكنك إنشاء الارتباط الرمزي داخله</dest-node-is-link>
+      <selected-is-link>العقدة المحددة '{0}'هو بالفعل وجود صلة ، لا يمكنك إنشاء ارتباط إلى ارتباط آخر نقطة</selected-is-link>
+      <confirm-create-link>هل تريد حقاً انجاز رابط إلى هذا الموقع؟</confirm-create-link>    
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Create link</CreateLink>
+      <CreateLink>إنشاء رابط</CreateLink>
     </event>
   </ECMContextMenu>
     
   <UIWorkspaceList>
   	<msg>
-  		<AccessDeniedException>Access deny! You don't have read permission in this workspace</AccessDeniedException>
+  		<AccessDeniedException>ليمكنك الدخول إلى مساحة العمل هذه </AccessDeniedException>
   	</msg>
   	<label>
-      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+      <taxonomyTree>شجرة التصنيف</taxonomyTree>
     </label>
   </UIWorkspaceList>
   
   <UIPopupTaxonomy>
     <title>
-			<UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+			<UIOneTaxonomySelector>إضافة فئات</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
   
   <UITreeTaxonomyList>
   	<label>
-      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+      <taxonomyTree>شجرة التصنيف</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
   
   <UIActionBar>
     <tooltip>
-      <ManageSimpleCategories>Manage Simple Categories</ManageSimpleCategories>
+      <ManageSimpleCategories>نظم صلة واحدة</ManageSimpleCategories>
     </tooltip>
 	</UIActionBar>
 	
 	<UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select category</UIOneNodePathSelector>
+        <UICategoriesAddedList>الفئات المشار إليه</UICategoriesAddedList>
+        <UIOneNodePathSelector>حدد فئة</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2285,43 +2281,43 @@
   <UICategoryManager>
     <tab>
       <label>
-				<UIOneTaxonomySelector>Select category</UIOneTaxonomySelector>
+				<UIOneTaxonomySelector>حدد فئة</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
   
   <UISimpleCategoryManager>
   	<action>
-  		<Close>Close</Close>	
+  		<Close>أغلق</Close>	
   	</action>
   </UISimpleCategoryManager>  
   <UIPopupWindow>
   	<title>
-  		<UISimpleCategoryManager>Add Category</UISimpleCategoryManager>	
+  		<UISimpleCategoryManager>إضافة تصنيف</UISimpleCategoryManager>	
   	</title>
   </UIPopupWindow>
   <UICategoriesAddedList>
   	<msg>
-  		<ItemExistsException>A category with the same name already exists</ItemExistsException>
+  		<ItemExistsException>وهناك فئة مع اسم سامي موجود مسبقا</ItemExistsException>
   	</msg>
 	</UICategoriesAddedList>
 	
 	<UIConfirmMessage>
 	  <label>
 	    <Close>#{word.close}</Close>
-	    <OK>OK</OK>
+	    <OK>موافق</OK>
 	  </label>
 	</UIConfirmMessage>
 	
 	<PopupComponent>
     <title>
-			<UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+			<UIOneTaxonomySelector>إضافة فئات</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
   
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>Can not move: The destination folder is the same as the source folder</can-not-move-to-itself>
+      <can-not-move-to-itself>لا يمكن نقل : المجلد الوجهة هو نفس المصدر المجلد</can-not-move-to-itself>
     </msg>
   </UIWorkingArea>  
   
@@ -2382,7 +2378,7 @@
   
   <UIPopupMenu>
   	<msg>
-			<can-not-unlock-node-is-checked-in>Can not unlock because node '{0}' or ancestor of '{0}' is checked-in</can-not-unlock-node-is-checked-in>
+			<can-not-unlock-node-is-checked-in> لايمكن فتح العقدة {0} إما لأنها محمية أو لأنها تم ادعوها </can-not-unlock-node-is-checked-in>
 		</msg>
   </UIPopupMenu>
   <!-- 
@@ -2390,55 +2386,55 @@
   -->
   <UIActionBar>
   	<msg>
-				<cannot-enable-version>Can not enable version node</cannot-enable-version>
+				<cannot-enable-version>لا يمكن تمكين الإصدار العقدة</cannot-enable-version>
 			</msg>
   </UIActionBar>
   <UIPopupMenu>
   	<msg>
-				<cannot-readsource>Can not read data from source node</cannot-readsource>
+				<cannot-readsource>لا يمكن قراءة البيانات من مصدر العقدة</cannot-readsource>
 	 	</msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>You need upload file before add category</upload-not-null>
+      <upload-not-null>الحاجة أثناء إضافة فئة قبل تحميل الملف</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must select set property for this group</allow-setProperty>
+      <allow-setProperty>يجب تحديد يمكنك تعيين الخصائص لهذه المجموعة</allow-setProperty>
     </msg>
   </UIActionBar>
   <UIActionForm>
   	<msg>
-  		<name-not-allowed>This action name is not allowed.</name-not-allowed>
+  		<name-not-allowed>لا يسمح هذا الاسم العمل.</name-not-allowed>
   	</msg>
   </UIActionForm>
   <UISaveQueryForm>
 		<msg>
-			<name-not-allowed>This query name is not allowed.</name-not-allowed>
+			<name-not-allowed>لا يسمح هذا الاسم الاستعلام.</name-not-allowed>
 		</msg>
 	</UISaveQueryForm>
 	<UISimpleSearch>
 		<msg>
-			<name-not-allowed>A word or phrase in content is not allowed.</name-not-allowed>
+			<name-not-allowed>كلمة أو جملة في المحتوى غير مسموح به.</name-not-allowed>
 		</msg>
 	</UISimpleSearch>
 	<Drives>
 		<label>
-			<Private>Private</Private>
-			<Public>Public</Public>
-			<BackupCenter>Backup Center</BackupCenter>
-			<CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-			<CollaborationCenter>Collaboration Center</CollaborationCenter>
-			<DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-			<DMSAdministration>DMS Administration</DMSAdministration>
-			<DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-			<LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-			<PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-			<RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-			<SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-			<Systemfiles>System files</Systemfiles>
-			<ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
+			<Private>خاص</Private>
+			<Public>جمهور</Public>
+			<BackupCenter>مركز النسخ الاحتياطي</BackupCenter>
+			<CategorizedDocumentsCenter>تصنيف مركز الوثائق</CategorizedDocumentsCenter>
+			<CollaborationCenter>مركز التعاون</CollaborationCenter>
+			<DigitalAssetsManagementCenter>مركز إدارة الأصول الرقمية</DigitalAssetsManagementCenter>
+			<DMSAdministration>شعبة الخدمات الإدارية الإدارة</DMSAdministration>
+			<DocumentsManagementCenter>سجلات إدارة مركز</DocumentsManagementCenter>
+			<LiveDocumentsCenter>مركز الوثاق </LiveDocumentsCenter>
+			<PendingDocumentsCenter>في انتظار مركز الوثائق</PendingDocumentsCenter>
+			<RecordsManagementCenter>سجلات إدارة مركز</RecordsManagementCenter>
+			<SharedUsersSpace>المشتركة للمستخدمين الفضاء</SharedUsersSpace>
+			<Systemfiles>نظام ملفات</Systemfiles>
+			<ValidationRequestsDocumentsCenter>مركز التحقق من صحة وثائق تطلب</ValidationRequestsDocumentsCenter>
 		</label>  
 	</Drives>
 	<!-- 
@@ -2446,33 +2442,33 @@
   -->
 	<UIUploadContent>
 		<tooltip>
-			<ManageMetadata>Manage Metadata</ManageMetadata>
+			<ManageMetadata>إدارة البيانات الوصفية</ManageMetadata>
 		</tooltip>
 		<label>
-			<manageMetadata>Manage Metadata</manageMetadata>
+			<manageMetadata>إدارة البيانات الوصفية</manageMetadata>
 		</label>		
 	</UIUploadContent>
 	<UIUploadForm>
 		<action>
-			<AddUpload>Add Upload</AddUpload>
-			<RemoveUpload>Remove Upload</RemoveUpload>
+			<AddUpload>أضف تحميل</AddUpload>
+			<RemoveUpload>إزالة حمل</RemoveUpload>
 		</action>
 	</UIUploadForm>
 	<UIExternalMetadataForm>
 		<action>
-			<Add>Add</Add>
-			<Cancel>Cancel</Cancel>
+			<Add>أضف</Add>
+			<Cancel>إلغاء</Cancel>
 		</action>
 	</UIExternalMetadataForm>
   <ECMContextMenu>
 	    <event>
-	    	<Permlink>View Document</Permlink>
+	    	<Permlink>عرض الوثيقة</Permlink>
 	    </event>
 	</ECMContextMenu>
 	<UIUploadContainer>
   	<tab>
   		<label>
-  			<UIListMetadata>List external metadatas</UIListMetadata>
+  			<UIListMetadata>قائمة الفوقية الخارجية</UIListMetadata>
   		</label>
   	</tab>
   </UIUploadContainer>
@@ -2487,35 +2483,35 @@
   </UIFolderForm>
   	<Comments>
 	  <tooltip>
-	    <remove-comment>Remove this comment</remove-comment>
-	    <edit-comment>Edit this comment</edit-comment>
+	    <remove-comment>إزالة هذا التعليق</remove-comment>
+	    <edit-comment>تحرير هذا التعليق</edit-comment>
 	  </tooltip>
 			</Comments>
 			<UIDocumentInfo>
 			  <msg>
-			    <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+			    <confirm-deletecomment>هل حقا تريد حذف هذا التعليق؟</confirm-deletecomment>
 			  </msg>
 			</UIDocumentInfo>
 		<UIDrivesBrowser>
 	  <msg>
-	    <drive-not-exist>The drive '{0}' was not found or you don't have permission to access in this repository</drive-not-exist>
+	    <drive-not-exist>ليمكنك الوصول إلى '{0} أو ليس لديك لحق للدخول </drive-not-exist>
 	  </msg>
 	 </UIDrivesBrowser>
 	 
  <UIExportNode>
   <msg>
-    <OutOfMemoryError>You should choose SystemView when export large data</OutOfMemoryError>
+    <OutOfMemoryError>عليك أن تختار "عرض نظام" لإصدار بيانات</OutOfMemoryError>
   </msg>
  </UIExportNode>
  <Taxonomy>
 		<msg>
-			<AccessDeniedException>You don't have permission to access in these taxonomies</AccessDeniedException>		 	
+			<AccessDeniedException>ليس لديك إذن للوصول إلى أطروحة في التصنيفات</AccessDeniedException>		 	
 		</msg>
 	 </Taxonomy>
 	 <UIJcrExplorerEditForm>    
 		<msg>
-			<notNullDriveName>Drive Name is null or empty. Fill Drive Name, please!</notNullDriveName>
-			<notNullPath>Path is null or empty. Fill the path, please!</notNullPath>
+			<notNullDriveName>موقع فارغ ، أتمم الاسم منفضلك  !</notNullDriveName>
+			<notNullPath>المسار هو خالية أو فارغة. ملء المسار ، من فضلك!</notNullPath>
 		</msg>
 	</UIJcrExplorerEditForm>
 		<RemoveAttachmentComponent>
@@ -2524,154 +2520,154 @@
 			</msg>
 		</RemoveAttachmentComponent>
 		<ConstraintViolationException>
-    <msg>You can't do action because of some constraints</msg>
+    <msg>لا يمكنك ان تفعل العمل بسبب بعض القيود</msg>
   </ConstraintViolationException>
   <UIViewSearchResult>
 			<tooltip>
-				<remove-attachment>Do you want to remove this attachment file?</remove-attachment>
+				<remove-attachment>هل تريد إزالة هذا الملف المرفق؟</remove-attachment>
 			</tooltip>
 	</UIViewSearchResult>
   <UIConfirmMessage>
 	  <label>
-	    <ReplaceData>Replace data</ReplaceData>
-	    <Back>Back to rename</Back>
-	    <Keepfile>Keep both files</Keepfile>
+	    <ReplaceData>يستعاض عن البيانات</ReplaceData>
+	    <Back>مرة أخرى لإعادة تسمية</Back>
+	    <Keepfile>ابقاء كل الملفات</Keepfile>
 	  </label>
 	</UIConfirmMessage>
 	<UIUploadForm>
 	  <msg>
-	    <confirm-behavior>There is already a file with the same name '{0}' in this location. Please choose a behavior to keep file</confirm-behavior>
+	    <confirm-behavior>وهناك بالفعل ملف بنفس الاسم '{0}' في هذا الموقع. الرجاء اختيار السلوك للحفاظ على الملف</confirm-behavior>
 	  </msg>
 	</UIUploadForm>
 	<SameNamePopup>
 	  <title>
-		  <UIUploadBehaviorWithSameName>Upload file</UIUploadBehaviorWithSameName>
+		  <UIUploadBehaviorWithSameName>تحميل الملف</UIUploadBehaviorWithSameName>
 	  </title>
 	</SameNamePopup>
 	
 	<UISingleUploadForm>
-    <title>Upload a file</title>
+    <title>تحميل الملف</title>
     <label>
-      <upload>Select a file</upload>
-      <name>Name</name>
-      <fieldListTaxonomy>List Taxonomy</fieldListTaxonomy>
+      <upload>حدد ملف</upload>
+      <name>اسم</name>
+      <fieldListTaxonomy>قائمة التصنيف</fieldListTaxonomy>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Please make sure that you uploaded the selected file to the server using the upload icon.</fileName-error>
-      <taxonomyPath-error>Please choose the taxonomy!</taxonomyPath-error>
-      <fileName-invalid>Have some invalid characters in file name. Type file name or upload other file, please.</fileName-invalid>
-      <fileSize-too-big>File size is too big. You should split to some small files or use WebDav upload.</fileSize-too-big>
-      <name-is-exist>The name '{0}' is existing. You can not upload same name file except for 'nt:file'</name-is-exist>
-      <contraint-violation>Can't add node '{0}' to this node because it is not allowed as child's node type for parent node type</contraint-violation>
+      <fileName-error>الرجاء تأكد من تحميل الملف المحدد إلى الملقم باستخدام رمز التحميل.</fileName-error>
+      <taxonomyPath-error>الرجاء اختيار التصنيف!</taxonomyPath-error>
+      <fileName-invalid>بعض أحرف غير صالحة في اسم الملف. اكتب اسم الملف أو الملفات الأخرى تحميل ، من فضلك.</fileName-invalid>
+      <fileSize-too-big>حجم الملف كبير جدا. يجب تقسيم لبعض الملفات الصغيرة أو استخدام WebDav تحميل.</fileSize-too-big>
+      <name-is-exist>'nt:file' الاسم '{0}' غير موجود. لا يمكنك تحميل نفس اسم الملف ما عدا</name-is-exist>
+      <contraint-violation>لا يمكن إضافة العقدة '{0}' في هذه العقدة لأن من غير المسموح كنوع الطفل عقدة عقدة لنوع الأصل</contraint-violation>
       <lock-exception>This node is locked. Some action will be run unlikely.</lock-exception>
     </msg>
   </UISingleUploadForm>
   <UISingleUploadContent>
     <label>
-      <fileName>File name</fileName>
-      <nodeName>Node name</nodeName>
-      <fileSize>File size</fileSize>
-      <mimeType>Mime Type</mimeType>
+      <fileName>اسم الملف</fileName>
+      <nodeName>عقدة اسم</nodeName>
+      <fileSize>حجم الملف</fileSize>
+      <mimeType>نوع التمثيل الصامت</mimeType>
     </label>
     <title>
-      <uploaded-file>Uploaded file</uploaded-file>
-      <external-metadata>External metadatas</external-metadata>
-      <metadata-name>Metadata name</metadata-name>
-      <action>Action</action>
+      <uploaded-file>حملت الملف</uploaded-file>
+      <external-metadata>معلومات خارجية </external-metadata>
+      <metadata-name>إسم المعلومة </metadata-name>
+      <action>عمل</action>
     </title>
     <tooltip>
-      <Edit>Edit</Edit>
+      <Edit>عدل</Edit>
     </tooltip>
     <msg>
-      <has-not-template>Template of '{0}' is null or empty.</has-not-template>
+      <has-not-template>قالب '{0}' فارغ أو غير موجود </has-not-template>
     </msg>
   </UISingleUploadContent>
   <UISingleUploadContainer>
     <action>
       <Close>#{word.close}</Close>
-      <AddMetadata>Add metadata</AddMetadata>
+      <AddMetadata>إضافة بيانات التعريف</AddMetadata>
     </action>
     <tab>
       <label>
-        <UISingleUploadContent>Information</UISingleUploadContent>
-        <UISingleAddMetadataForm>Metadata Form</UISingleAddMetadataForm>
+        <UISingleUploadContent>معلومات</UISingleUploadContent>
+        <UISingleAddMetadataForm>نموذج البيانات الوصفية</UISingleAddMetadataForm>
       </label>
     </tab>
   </UISingleUploadContainer>
   <UISingleExternalMetadataForm>
 		<action>
-			<Add>Add</Add>
-			<Cancel>Cancel</Cancel>
+			<Add>أضف</Add>
+			<Cancel>إلغاء</Cancel>
 		</action>
 	</UISingleExternalMetadataForm>
 	<UISingleUploadContainer>
   	<tab>
   		<label>
-  			<UIListMetadata>List external metadatas</UIListMetadata>
+  			<UIListMetadata>قائمة المعلومات الخارجية </UIListMetadata>
   		</label>
   	</tab>
   </UISingleUploadContainer>
   <AddMetadataPopup>
     <title>
-      <UISingleExternalMetadataForm>Add External Metadata</UISingleExternalMetadataForm>
+      <UISingleExternalMetadataForm>إضافة البيانات الوصفية الخارجية</UISingleExternalMetadataForm>
     </title>
   </AddMetadataPopup>
   <UISingleExternalMetadataForm>
     <msg>
-      <can-not-add>This node can not add mixin.</can-not-add>
+      <can-not-add>يمكن هذه العقدة لا تضيف mixin.</can-not-add>
     </msg>
   </UISingleExternalMetadataForm>
   <UISingleAddMetadataForm>
     <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
+      <Cancel>إلغاء</Cancel>
+      <Save>حفظ</Save>
     </action>
   </UISingleAddMetadataForm>
   
   <UIPreferencesForm>
   	<label>
-  	  <Alphabetic>Alphabetic</Alphabetic>
-  		<Type>Type</Type>
-  		<CreatedDate>Created Date</CreatedDate>
-  		<ModifiedDate>Modified Date</ModifiedDate>
-  		<Ascending>Ascending</Ascending>
-  		<Descending>Descending</Descending>
+  	  <Alphabetic>أبجدي</Alphabetic>
+  		<Type>نوع</Type>
+  		<CreatedDate>تاريخ الانشاء</CreatedDate>
+  		<ModifiedDate>تاريخ التعديل</ModifiedDate>
+  		<Ascending>تصاعدي</Ascending>
+  		<Descending>تنازلي</Descending>
   	</label>
   </UIPreferencesForm>
   
   <UIAllItems>
     <label>
-      <OwnedByMe>Owned by me</OwnedByMe>
-      <Favourites>Favorites</Favourites>
-      <Hidden>Hidden</Hidden>
-      <Trash>Trash</Trash>
-      <Configuration>Set up preferences</Configuration>      
+      <OwnedByMe>ملكي </OwnedByMe>
+      <Favourites>المفضلة</Favourites>
+      <Hidden>مخفي</Hidden>
+      <Trash>نفاية</Trash>
+      <Configuration>إعداد تفضيلات</Configuration>      
     </label>
     <title>
-      <allItems>All Items</allItems>
+      <allItems>جميع البنود</allItems>
     </title>
   </UIAllItems>
   
   <DocumentType>
     <label>
-    	 <Images>Images</Images>
-    	 <Video>Video</Video>
-    	 <Music>Music</Music>
-    	 <Documents>Documents</Documents> 
-     	 <Contents>Contents</Contents>   	 
+    	 <Images>الصور</Images>
+    	 <Video>فيديو</Video>
+    	 <Music>موسيقى</Music>
+    	 <Documents>وثائق</Documents> 
+     	 <Contents>محتويات</Contents>   	 
     </label>
   </DocumentType>
   
   <UIDocumentFilterForm>
   	<label>
-    	<Images>Images</Images>
-    	<Video>Video</Video>
+    	<Images>الصور</Images>
+    	<Video>فيديو</Video>
     </label>
-    <title>Set up filter preferences</title>
+    <title>تعيين تصفية التفضيلات </title>
     <action>
   		<Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>      
@@ -2680,77 +2676,76 @@
   
   <UIAllItemsByType>
   	<label>
-  		<ByType>Filter By Type</ByType>
-  		<DocumentFilterConfiguration>Set up filter preferences</DocumentFilterConfiguration>
+  		<DocumentFilterConfiguration>تعيين تصفية التفضيلات </DocumentFilterConfiguration>
   	</label>
   	<title>
-  	  <ShowVideo>Show all video files</ShowVideo>
-  	  <ShowMusic>Show all music files</ShowMusic>
-  	  <ShowImages>Show all image files</ShowImages>
-  	  <ShowDocuments>Show all document files</ShowDocuments>
-  	  <ShowContents>Show all contents type document</ShowContents>
+  	  <ShowVideo>عرض جميع ملفات الفيديو</ShowVideo>
+  	  <ShowMusic>عرض جميع ملفات الموسيقى</ShowMusic>
+  	  <ShowImages>عرض جميع ملفات الصور</ShowImages>
+  	  <ShowDocuments>عرض كل الملفات وثيقة</ShowDocuments>
+  	  <ShowContents>وتظهر الوثيقة نوع كل محتويات</ShowContents>
   	</title>  	
   </UIAllItemsByType>  
 
   <Views>
     <label>
-      <slide-show>Slide show</slide-show>
-      <timeline-view>Timeline view</timeline-view>
+      <slide-show>عرض الشرائح</slide-show>
+      <timeline-view>عرض الجدول الزمني</timeline-view>
     </label>
   </Views>
   <ECMContextMenu>
     <event>
-      <PlayMedia>Play media</PlayMedia>
+      <PlayMedia>تشغيل ميديا </PlayMedia>
      </event>
   </ECMContextMenu>
   <UICategoryForm>
 	  <label>
-	  	<name>Category Name</name>
+	  	<name>اسم التصنيف</name>
 	  </label>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>      
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>      
     </action>
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add category</UICategoryForm>
+      <UICategoryForm>إضافة فئة</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add category</AddCategory>
+      <AddCategory>إضافة فئة</AddCategory>
     </tooltip>
 	 </UIActionBar>
   <UIPopupMenu>
   	<msg>
-  		<node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>	
+  		<node-locked-editing>هذه العقدة مع المسار {0} يتم تأمينه من قبل مستخدم آخر للتحرير!</node-locked-editing>	
     </msg>
   </UIPopupMenu>
 
 		<PopupComponent>
     <title>
-      <UINodeTypeSelector>Select node type</UINodeTypeSelector>
+      <UINodeTypeSelector>حدد نوع العقدة</UINodeTypeSelector>
     </title>
   </PopupComponent>
 		
 		<UIActionForm>
   	<title>
-  		<ShowComponent>Show component</ShowComponent>
-  		<removeReference>Remove</removeReference>
+  		<ShowComponent>عرض مكون</ShowComponent>
+  		<removeReference>إزالة</removeReference>
   	</title>
   </UIActionForm>		 
 
 	 <EditFormAction>
   	<title>
-  		<ShowComponent>Show component</ShowComponent>
-  		<removeReference>Remove</removeReference>
+  		<ShowComponent>عرض مكون</ShowComponent>
+  		<removeReference>إزالة</removeReference>
   	</title>
   </EditFormAction>
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Type another value, please!</Invalid-char>
-      <empty-input>The value of field is null or empty!</empty-input>
+      <Invalid-char>هناك بعض أحرف غير صالحة. اكتب قيمة أخرى ، من فضلك!</Invalid-char>
+      <empty-input>قيمة الحقل خالية أو فارغة!</empty-input>
     </msg>
   </NodeTypeNameValidator>
   
@@ -2763,169 +2758,102 @@
   </UIPreferencesForm>
     <UIDocumentForm>
   	<msg>
-  		<constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
+  		<constraintviolation-exception>لا يمكن حفظ المستند. وغاب عن إدخال البيانات أو غير صالحة!</constraintviolation-exception>
   	</msg>
   </UIDocumentForm> 
   <UIActionForm>
   	<msg>
-  		<constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
+  		<constraintviolation-exception>لا يمكن حفظ المستند. وغاب عن إدخال البيانات أو غير صالحة!</constraintviolation-exception>
   	</msg>
   </UIActionForm>
   
   <UIJcrExplorerEditForm>
     <label>
-	  <nodePath>Select path</nodePath>
+	  <nodePath>حدد مسار</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 		<UIActionForm>
     <msg>
-      <homePath-emty>The Home path is empty</homePath-emty>
-      <targetPath-emty>The target path is empty</targetPath-emty>
+      <homePath-emty>الطريق الرئيسية فارغة</homePath-emty>
+      <targetPath-emty>الطريق الرئيسية فارغة</targetPath-emty>
     </msg>
 		</UIActionForm>
 		<UIActionBar>
 				<msg>
-				  <not-exist-categories>There isn't any category</not-exist-categories>
+				  <not-exist-categories>لا توجد أي فئة</not-exist-categories>
 				</msg>
 		</UIActionBar>		 
 			<UIPublicationPanel>
     <button>
-      <Close>Close</Close>
+      <Close>أغلق</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
-      <date>Date</date>
-      <author>Author</author>
-      <status>Status</status>
-      <action>Action</action>
-      <label>Revision</label>
-      <none>No revisions</none>
-      <seeall>See all versions</seeall>
-      <currentVersion>current revision</currentVersion>
-      <confirm>You will lost your draft work, do you really want to restore this revision and replace the current revision ?</confirm>
+      <version>التنقيحات</version>
+      <date>تاريخ</date>
+      <author>الكاتب</author>
+      <status>حالة</status>
+      <action>عمل</action>
+      <label>تنقيح</label>
+      <none>لا التنقيحات</none>
+      <seeall>شاهد كل الإصدارات</seeall>
+      <currentVersion>النسخة الحالية</currentVersion>
+      <confirm>هل فقدت عملك مشروع ، هل تريد حقا أن يعيد هذه المراجعة والتنقيح الحالي استبدال؟</confirm>
     </revisions>
     <status>
-      <version>Revision</version>
-      <title>Status</title>
-      <archived>Archived</archived>
-      <obsolete>Obsolete</obsolete>
-      <unpublished>Unpublished</unpublished>
-      <enrolled>Enrolled</enrolled>
-      <draft>Draft</draft>
-      <pending>Pending</pending>
-      <approved>Approved</approved>
-      <inreview>In Review</inreview>
-      <staged>Staged</staged>
-      <published>Published</published>
-      <live>Published</live>
+      <version>تنقيح</version>
+      <title>حالة</title>
+      <archived>أرشفة</archived>
+      <obsolete>عفا عليها الزمن</obsolete>
+      <unpublished>لم ينشر</unpublished>
+      <enrolled>التحق</enrolled>
+      <draft>مسودة</draft>
+      <pending>ريثما</pending>
+      <approved>موافق عليه</approved>
+      <inreview>في مراجعة</inreview>
+      <staged>نظم</staged>
+      <live>نشرت</live>
     </status>
     <scheduled>
-      <title>Scheduled</title>
-      <from>from</from>
-      <to>to</to>
+      <title>من المقرر</title>
+      <from>من</from>
+      <to>إلى</to>
     </scheduled>
     <title>
-      <preview>Preview</preview>
-      <restore>Restore</restore>
+      <preview>معاينة</preview>
+      <restore>استعادة</restore>
     </title>
     <msg>
-      <have-no-view-template>View template of this is not supported</have-no-view-template>
-      <restore-complete>Restore completed</restore-complete>
+      <have-no-view-template>عرض الصفحة النموذجية لهذه غير معتمد</have-no-view-template>
+      <restore-complete>أنجزت استعادة</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
-      <versionName>Revision name</versionName>
-      <currentState>Current state</currentState>
-      <user>Author</user>
-      <description>Description</description>
+      <date>تاريخ</date>
+      <versionName>مراجعة اسم</versionName>
+      <currentState>الوضع الحالي</currentState>
+      <user>الكاتب</user>
+      <description>وصف</description>
     </header>
   </UIPublicationHistory>
 
   <UIPublicationPanel>
     <label>
-      <header>Publication date time</header>
-      <start>Start publication</start>
-      <end>End publication</end>
+      <header>تاريخ النشر مرة</header>
+      <start>بدء نشر</start>
+      <end>نهاية النشر</end>
     </label>
     <action>
-      <Save>Save</Save>
+      <Save>حفظ</Save>
     </action>
     <msg>
-      <invalid-format>Invalid datetime format. Please check again</invalid-format>
+      <invalid-format>التاريخ والوقت غير صالحة الشكل. يرجى مراجعة مرة أخرى</invalid-format>
     </msg>
   </UIPublicationPanel>     
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage publication</UIPublishingPanel>
+      <UIPublicationContainer>إدارة النشر</UIPublicationContainer>
+      <UIPublishingPanel>إدارة النشر</UIPublishingPanel>
     </title>
-  </UIPopupWindow>
-  <UITagForm>
-  		<msg>
-  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
-  		</msg>
-  </UITagForm>  					
-
-  <!-- 
-  	############  From WCM 2.1.0 ##############
-   -->  
-  <UITreeTaxonomyList>
-    <label>
-      <rootNodePath>Root tree</rootNodePath>
-      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
-    </label>
-  </UITreeTaxonomyList>
-  <UIJCRExplorer>  
-    <msg>
-        <target-path-not-found>Target node not found!</target-path-not-found>
-    </msg>
-  </UIJCRExplorer>
-  <UICategoryManagerSearch>
-    <tab>
-      <label>
-        <UIOneTaxonomySelector>Choose category</UIOneTaxonomySelector>
-      </label>
-    </tab>
-    <action>
-    	 <Close>Close</Close>
-    </action>
-  </UICategoryManagerSearch>
-  <UIJcrExplorerEditForm>  
-    <label>  
-      <editInNewWindow>Edit in new window</editInNewWindow>
-      <showTopBar>Show Top Bar</showTopBar>
-      <showActionBar>Show Action Bar</showActionBar>
-      <showSideBar>Show Left Bar</showSideBar>
-      <showFilterBar>Show Filter Bar</showFilterBar>
-    </label>
-  </UIJcrExplorerEditForm>
-  
-  <UIPreferencesForm>
-  	 <action>
-    	 <HideAdvance>Hide Advanced</HideAdvance>
-    	 <ShowAdvance>Show Advanced</ShowAdvance>
-    </action>
-    <label>
-    	<Advance>Advanced</Advance>
-    </label>
-  </UIPreferencesForm>
-  <UIJCRExplorerPortlet>
-	<msg>
-	  <file-access-denied>File access denied!</file-access-denied>
-	</msg>
-  </UIJCRExplorerPortlet>
- <UIDrivesArea>
-  		<DrivesArea>
-  				<allDrives>You can access to this view using the Drives button on the left panel</allDrives>
-  				<ShowDrives>Show Drives</ShowDrives>
-  		</DrivesArea>
-  </UIDrivesArea>
-  <UIJcrExplorerEditForm>   
-    <msg>
-      <fields-saved>All field values saved!</fields-saved>
-      <fields-cancelled>All field values cancelled!</fields-cancelled>
-    </msg>
-  </UIJcrExplorerEditForm>
+  </UIPopupWindow>  					
 </bundle>
