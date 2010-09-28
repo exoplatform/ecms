@@ -24,7 +24,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
 	xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
-	<import>war:/conf/sample-portal/jcr/jcr-configuration.xml</import>
 	<import>war:/conf/sample-portal/portal/portal-configuration.xml</import>
   <import>war:/conf/sample-portal/portal/application-registry-configuration.xml</import>
   <import>war:/conf/sample-portal/portal/resource-bundle-configuration.xml</import>
