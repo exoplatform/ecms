@@ -1,0 +1,16 @@
+Basically, if you want to add a rich text area into your dialogs, you can use [addRichtextField|#richtext-field] method. But sometimes, you want to add the rich text editor by yourself manually. So first you need to use [addTextAreaField|#textarea-field] method and some addition javascript like this 
+{code:language=java}
+<%
+	String[] fieldDescription = ["jcrPath=/node/exo:description"] ;
+	uicomponent.addTextAreaField("description", fieldDescription)
+%>
+<script>
+  var instances = CKEDITOR.instances['description'];
+  if (instances) instances.destroy(true);
+  CKEDITOR.replace('description', {
+    toolbar : 'CompleteWCM',
+    uiColor : '#9AB8F3'
+  });
+</script>
+{code}
+[image:custom_ck.png]
