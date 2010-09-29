@@ -128,6 +128,8 @@ h2. WatchDocument
   {include:document="pages/services/watchDocument.wiki" /}  
 h2. MetaData
   {include:document="pages/services/metadata.wiki" /}  
+h2. CompressData
+  {include:document="pages/services/compressData.wiki" /}
 h1. FAQ
   {include:document="pages/faq/faq.wiki" /}
 
