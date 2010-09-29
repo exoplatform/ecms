@@ -124,7 +124,10 @@ h2. Cache
   {include:document="pages/services/cache.wiki" /}
 h2. Listener
   {include:document="pages/services/listener.wiki" /}
-
+h2. WatchDocument
+  {include:document="pages/services/watchDocument.wiki" /}  
+h2. MetaData
+  {include:document="pages/services/metadata.wiki" /}  
 h1. FAQ
   {include:document="pages/faq/faq.wiki" /}
 
