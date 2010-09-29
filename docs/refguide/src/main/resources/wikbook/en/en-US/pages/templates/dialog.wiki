@@ -270,3 +270,57 @@ h2. Example
 	uicomponent.addInterceptor("ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy", "prev");
 %>
 {code}
+
+h1. This is an instruction that explains how to add new ECM template with tabs.
+
+To avoid refresh to first tab every action execution, we add new private function to the template with tabs
+In the template we have to insert new piece of code like the following:
+{code:lang=java}private String getDisplayTab(String selectedTab) {
+	if ((uicomponent.getSelectedTab() == null && selectedTab.equals("mainWebcontent"))
+			|| selectedTab.equals(uicomponent.getSelectedTab())) {
+		return "display:block";
+	}
+	return "display:none";
+}
+
+private String getSelectedTab(String selectedTab) {
+	if (getDisplayTab(selectedTab).equals("display:block")) {
+		return "SelectedTab";
+	}
+	return "NormalTab";
+}
+{code}Changing in every event of onclick is have to be done like this :
+{code:lang=html}        <div class="UITab NormalTabStyle">
+		<div class="<%=getSelectedTab("mainWebcontent")%>">
+			<div class="LeftTab">
+				<div class="RightTab">
+					<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "mainWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="UITab NormalTabStyle">
+		<div class="<%=getSelectedTab("illustrationWebcontent")%>">
+			<div class="LeftTab">
+				<div class="RightTab">
+					<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "illustrationWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="UITab NormalTabStyle">
+		<div class="<%= getSelectedTab("contentCSSWebcontent")%>">
+			<div class="LeftTab">
+				<div class="RightTab">
+					<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "contentCSSWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></div>
+				</div>
+			</div>
+		</div>
+	</div>{code}
+
+Finally, in order to display selected tab, we'll add into style of UITabContent class
+
+{code:lang=html}<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
+{code}
