@@ -1,0 +1,5 @@
+This service is used to manage the page's metadata.
+
+|| *Method* || *Return* || *Prototype* || *Description* ||
+| *{{extractMetadata}}* | {{HashMap}} | {{extractMetadata(Node node) throws Exception}} | Extract metadata information from node. {example}{example} @param node the node {example}{example} @return the hash map< string, string> {example}{example} @throws Exception the exception |
+| *{{getPortalMetadata}}* | {{HashMap}} | {{getPortalMetadata(SessionProvider sessionProvider, String uri) throws Exception}} | Retrieves  the portal metadata information for each request uri. {example}{example} @param uri the uri {example}{example} @param sessionProvider the session provider {example}{example} @return the portal metadata {example}{example} @throws Exception the exception |

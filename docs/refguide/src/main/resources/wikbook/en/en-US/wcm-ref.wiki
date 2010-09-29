@@ -98,6 +98,8 @@ h2. Comments
   {include:document="pages/services/comments.wiki" /}
 h2. Query
   {include:document="pages/services/query.wiki" /}
+h2. PageMetadata
+  {include:document="pages/services/pageMetadata.wiki" /}
 h2. ManageView
   {include:document="pages/services/manageView.wiki" /}
 h2. ApplicationTemplateManager
@@ -118,8 +120,6 @@ h2. Lock
   {include:document="pages/services/lock.wiki" /}
 h2. JodConverter
   {include:document="pages/services/jodConverter.wiki" /}
-h2. Repository
-  {include:document="pages/services/repository.wiki" /}
 h2. Cache
   {include:document="pages/services/cache.wiki" /}
 h2. Listener
