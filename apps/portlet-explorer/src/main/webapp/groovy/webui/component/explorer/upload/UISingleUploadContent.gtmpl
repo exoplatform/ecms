@@ -35,7 +35,7 @@
 	          String subValue = value ; 
 	          if(value.length() > 20) subValue = value.substring(0,20) + "..." ;
 	      %>
-	          <td style="text-align: center;"><span title="$value"><%=subValue%></span></td>
+	          <td style="text-align: center;overflow:hidden;"><span title="$value"><%=subValue%></span></td>
 	      <%}%>
 	    </tr>
 	  </tbody>
