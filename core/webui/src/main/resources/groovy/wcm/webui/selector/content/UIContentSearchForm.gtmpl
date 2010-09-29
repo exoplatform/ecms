@@ -12,7 +12,7 @@
   jsManager.addOnLoadJavascript("eXo.ecm.CLV.setHiddenValue");
 %>
 
-<div class="$uicomponent.id" style="height:420px;">
+<div class="$uicomponent.id">
   <%uiform.begin();%>
     <div class="ContentSearchForm">
     <span><%= _ctx.appRes("UIContentSearchForm.title.Location")%>: </span> <%uiform.renderField(uiform.getChildById(uicomponent.LOCATION));%>
