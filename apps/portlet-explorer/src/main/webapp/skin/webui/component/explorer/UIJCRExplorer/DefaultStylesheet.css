@@ -673,6 +673,7 @@
   float: right; /* orientation=rt */
   margin: 5px;
   height: 110px;
+  overflow:hidden;
 }
 
 .UIJCRExplorerPortlet .UIThumbnailsView .ActionIconContainer {
@@ -1193,6 +1194,7 @@
 
 .UITrees .Node .NodeIconLink {
 	background-position: left top;
+
 	font-weight: bold;
 	height:  16px;
 	padding-left: 11px;

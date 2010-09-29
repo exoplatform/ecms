@@ -374,6 +374,7 @@
   float: right; /* orientation=rt */
   margin: 5px;
   height: 110px;
+  overflow:hidden;
 }
 
 .UIJCRExplorerPortlet .UIThumbnailsView .ActionIconContainer {
