@@ -120,10 +120,6 @@ h2. Lock
   {include:document="pages/services/lock.wiki" /}
 h2. JodConverter
   {include:document="pages/services/jodConverter.wiki" /}
-h2. Cache
-  {include:document="pages/services/cache.wiki" /}
-h2. Listener
-  {include:document="pages/services/listener.wiki" /}
 h2. WatchDocument
   {include:document="pages/services/watchDocument.wiki" /}  
 h2. MetaData
