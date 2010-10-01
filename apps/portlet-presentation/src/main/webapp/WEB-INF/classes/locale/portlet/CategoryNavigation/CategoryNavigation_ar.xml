@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>تفضيلات</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>إعداد فئات</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath></SelectTargetPath>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>محدد الصفحة </UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>مستودع</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>شجرة التصنيف</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>لقب</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTargetPathFormInputSet>الهدف مسار</UICategoryNavigationTargetPathFormInputSet>
+      <UICategoryNavigationTreeNameFormSelectBox>اسم شجرة</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>تم مشاهدة نموذج الشجرة </UICategoryNavigationTemplateFormSelectBox>
+    </label>
+    <msg>
+      <not-support-encoding> لم يتم إعتبار الترميز </not-support-encoding>
+      <render> خطأ عندما جعل العملية. </render>
+      <saving-success>تم تحديث هذا مدخل</saving-success>
+    </msg>
+    <action>
+      <Save>حفظ</Save>
+    </action>
+  </UICategoryNavigationConfig>
+</bundle>

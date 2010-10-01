@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #			org.exoplatform.workflow.webui.component.controller										#
+  #############################################################################
+  -->
+  <UIWorkflowControllerPortlet>
+    <tab>
+      <label>تحكم</label>
+      <text>إدارة سير العمل</text>
+    </tab>
+    <msg>
+      <refresh-session-success>تم تحديث الدورة بنجاح</refresh-session-success>
+    </msg>
+    <label>
+      <refesh>تحديث</refesh>
+    </label>
+  </UIWorkflowControllerPortlet>
+  <ControllerPopup>
+    <title>
+      <UITaskManager>مهمة إدارة وحدة دولية</UITaskManager>
+    </title>
+  </ControllerPopup>
+  <UITabPane>
+    <title>
+      <UITaskList>مهام وحدة تحكم</UITaskList>
+      <UIBPDefinition>تعريف عملية الأعمال</UIBPDefinition>
+      <UIDocumentContent>عرض المحتوى</UIDocumentContent>
+      <UIDocumentForm>تحرير المحتوى</UIDocumentForm>
+      <UITask>مهمة</UITask>
+    </title>
+  </UITabPane>
+  <UITaskList>
+    <header>
+      <id>معرف المهمة</id>
+      <processName>اسم العملية</processName>
+      <taskName>اسم المهمة</taskName>
+      <actor>الفاعل</actor>
+      <description>وصف</description>
+      <actorId>هوية الفاعل</actorId>
+      <taskVariables>متغيرات مهمة</taskVariables>
+      <processDateStart>تاريخ بدء عملية</processDateStart>
+      <action>عمل</action>
+    </header>
+    <label>
+      <managerState>إدارة</managerState>
+    </label>
+    <msg>
+      <task-not-found>لا يمكن أن تدار هذه المهمة. السبب الأكثر ترجيحا هو أن مستخدم آخر عالجت بالفعل بهذه المهمة.</task-not-found>
+    </msg>
+  </UITaskList>
+  <UITaksList>
+    <msg>
+      <no-task>لم يتم توكيل أي مهمة </no-task>
+    </msg>
+  </UITaksList>
+  <UITask>
+    <label>
+      <hide-process-link>إخفاء الارتباط إلى عملية</hide-process-link>
+      <show-process-link>إظهار رابط نحو المهمة </show-process-link>
+    </label>
+    <msg>
+      <has-not-got-delegate>الرجاء اختيار المستخدم الذي لتفويض</has-not-got-delegate>
+    </msg>
+    <title>
+      <Delegate>دخول المستخدم</Delegate>
+    </title>
+  </UITask>
+  <UIBPDefinition>
+    <header>
+      <id>معرف</id>
+      <name>اسم</name>
+      <version>الإصدار</version>
+      <action>عمل</action>
+    </header>
+    <msg>
+      <empty>لا إطلاق العمليات التجارية</empty>
+    </msg>
+  </UIBPDefinition>
+  <UIControllerManager>
+    <action>
+      <title>
+        <ManageStart>إدارة الاطلاق</ManageStart>
+      </title>
+    </action>
+  </UIControllerManager>
+  <UIDocumentForm>
+    <msg>
+      <cannot-save>.قد انتهكت بعض القيود في هذا العمل.</cannot-save>
+      <in-versioning>الرجاء إزالة العقدة الحالية قبل ان يضيف عقدة جديدة</in-versioning>
+      <not-support> .'{0}' غير قادر على تحميل النموذج</not-support>
+      <value-invalid>'{0}' هو القيمة المطلوبة</value-invalid>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #####################################################################
+  ## Need to be translated Since version ECM 2.3                      #
+  #####################################################################
+  -->
+  
+  <PopupDelegatedSelectorId>
+    <title>
+      <UIUserSelectContainer>دخول المستخدم</UIUserSelectContainer>
+    </title>
+  </PopupDelegatedSelectorId>
+  <!--
+  #############################################################################
+  #			     Since 2.0.0-Alpha02-SNAPSHOT tobe translate											#
+  #############################################################################
+  -->
+  <UIWorkflowControllerPortlet>
+    <msg>
+      <refresh-session-success>الدورة تم "تحديث بنجاح</refresh-session-success>
+    </msg>
+    <label>
+      <refresh>تحديث</refresh>
+    </label>
+  </UIWorkflowControllerPortlet>
+</bundle>
+
