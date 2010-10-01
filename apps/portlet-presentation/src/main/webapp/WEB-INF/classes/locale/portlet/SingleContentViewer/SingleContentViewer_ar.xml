@@ -63,14 +63,14 @@
    </msg>
   </UIContentDialogConfig>
   
-  <UIContentDialogFormPopupWindow>
+  <CorrectContentSelectorPopupWindow>
    <title>
     <UIWelcomeScreen>مرحبا بكم في المشاهد المحتوى واحدة</UIWelcomeScreen>
     <UINameWebContentForm>وفقا لنموذج</UINameWebContentForm>
     <UIContentDialogForm>شكل محتوى ويب</UIContentDialogForm>
     <UIContentSelectorOne>واحد محدد لوحة المحتوى</UIContentSelectorOne>
    </title>
-  </UIContentDialogFormPopupWindow>
+  </CorrectContentSelectorPopupWindow>
   
   <UISingleContentViewerPortlet>
   	 <msg>

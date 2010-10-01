@@ -65,14 +65,14 @@
    </msg>
   </UIContentDialogConfig>
   
-  <UIContentDialogFormPopupWindow>
+  <CorrectContentSelectorPopupWindow>
    <title>
     <UIWelcomeScreen>Bienvenue dans Single content viewer</UIWelcomeScreen>
     <UINameWebContentForm>Suivant un modèle</UINameWebContentForm>
     <UIContentDialogForm>Web content form</UIContentDialogForm>
-    <UIContentSelectorOne>Single content selector panel</UIContentSelectorOne>
+    <UIContentSelectorOne>Sélectionnez un contenu</UIContentSelectorOne>
    </title>
-  </UIContentDialogFormPopupWindow>
+  </CorrectContentSelectorPopupWindow>
   
   <UISingleContentViewerPortlet>
   	 <msg>

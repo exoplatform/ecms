@@ -68,14 +68,14 @@
    </msg>
   </UIContentDialogConfig>
   
-  <UIContentDialogFormPopupWindow>
+  <CorrectContentSelectorPopupWindow>
    <title>
     <UIWelcomeScreen>Chào mừng đến với Single content viewer</UIWelcomeScreen>
     <UINameWebContentForm>Chọn mẫu</UINameWebContentForm>
     <UIContentDialogForm>Nhập nội dung</UIContentDialogForm>
-    <UIContentSelectorOne>Single content selector panel</UIContentSelectorOne>
+    <UIContentSelectorOne>Nhập nội dung</UIContentSelectorOne>
    </title>
-  </UIContentDialogFormPopupWindow>
+  </CorrectContentSelectorPopupWindow>
   
   <UISingleContentViewerPortlet>
   	 <msg>

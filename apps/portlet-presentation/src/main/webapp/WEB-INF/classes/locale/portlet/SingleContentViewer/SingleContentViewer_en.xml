@@ -67,14 +67,14 @@
    </msg>
   </UIContentDialogConfig>
   
-  <UIContentDialogFormPopupWindow>
+  <CorrectContentSelectorPopupWindow>
    <title>
     <UIWelcomeScreen>Welcome to Single content viewer</UIWelcomeScreen>
     <UINameWebContentForm>Template form</UINameWebContentForm>
     <UIContentDialogForm>Web content form</UIContentDialogForm>
     <UIContentSelectorOne>Single content selector panel</UIContentSelectorOne>
    </title>
-  </UIContentDialogFormPopupWindow>
+  </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
   	 <msg>
   	 		<AccessControlException>You don't have permission to access edit mode</AccessControlException>
