@@ -13,7 +13,11 @@
    <no-content>Il n'y a pas de contenu à afficher</no-content>
   </msg>
  </UIPresentationContainer>
-
+  <CorrectContentSelectorPopupWindow>
+   <title>
+    <UIContentSelectorOne>Choisissez un dossier</UIContentSelectorOne>
+   </title>
+  </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
   	 <msg>
   	 		<AccessControlException>Vous n'avez pas la permission d'accéder au mode d'édition</AccessControlException>

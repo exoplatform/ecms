@@ -77,4 +77,11 @@
   	 		<AccessControlException>ليس لديك إذن للوصول إلى وضع التحرير</AccessControlException>
   	 </msg>
   </UISingleContentViewerPortlet>
+  
+  <CorrectContentSelectorPopupWindow>
+  	<title>
+    	<UIContentSelectorOne>واحد محدد لوحة المحتوى</UIContentSelectorOne>
+   	</title>
+  </CorrectContentSelectorPopupWindow>
+  
 </bundle>

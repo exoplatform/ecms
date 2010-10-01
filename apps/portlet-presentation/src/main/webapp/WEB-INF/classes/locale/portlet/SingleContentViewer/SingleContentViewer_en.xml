@@ -13,7 +13,12 @@
    <no-content>There is no content to show</no-content>
   </msg>
  </UIPresentationContainer>
-
+ 
+  <CorrectContentSelectorPopupWindow>
+   <title>
+    <UIContentSelectorOne>Select content</UIContentSelectorOne>
+   </title>
+  </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
   	 <msg>
   	 		<AccessControlException>You don't have permission to access Edit mode</AccessControlException>
