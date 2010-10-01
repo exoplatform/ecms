@@ -17,12 +17,8 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import java.security.AccessControlException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.jcr.AccessDeniedException;
@@ -588,9 +584,11 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       String objectid = event.getRequestContext().getRequestParameter(OBJECTID);
       String idx = objectid.replaceAll(FIELD_TAXONOMY,"");
       try {
-        int idxInput = Integer.parseInt(idx);
-        uiDocumentForm.getListTaxonomy().remove(idxInput);
+        int idxInput = Integer.parseInt(idx);        
+        if (idxInput < uiDocumentForm.getListTaxonomy().size())
+          uiDocumentForm.getListTaxonomy().remove(idxInput);
       } catch (NumberFormatException ne) {
+      } catch (Exception e) {
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentForm);
     }
