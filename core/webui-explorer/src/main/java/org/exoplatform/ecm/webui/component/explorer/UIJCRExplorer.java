@@ -662,9 +662,9 @@ public class UIJCRExplorer extends UIContainer {
     }
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
     uiAddressBar.setRendered(uiPortlet.isShowTopBar());
-    uiSideBar.setRendered(this.getPreference().isShowSideBar());
-    if (uiSideBar.isRendered()) event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
+    uiSideBar.setRendered(this.getPreference().isShowSideBar());    
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
+    if (uiSideBar.isRendered()) event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
     
     if(!isHidePopup_) {
