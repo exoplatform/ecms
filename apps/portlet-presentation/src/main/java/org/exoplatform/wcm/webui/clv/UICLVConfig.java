@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
@@ -178,10 +179,17 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   /** The items. */
   private List<String> items;
   
+  private String savedPath;  
   private boolean isShowAdvancedBlock_;
   
   private String driveName_;
   
+  public void setSavedPath(String value) {
+    savedPath = value;
+  }
+  public String getSavedPath () {
+    return savedPath;
+  }
   /**
    * Gets the popup id.
    * 
@@ -241,6 +249,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
     String displayMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_DISPLAY_MODE, null);
     String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+    savedPath = itemPath;
+    itemPath = getTitles(savedPath);
     this.setDriveName(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_DRIVE, null));    
     String orderBy = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, null);
     String orderType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
@@ -463,10 +473,16 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   public void doSelect(String selectField, Object value) throws Exception {
     if (selectField != null && value != null) {
       String sValue = (String) value;
+      String titles="";      
       String displayMode = ((UIFormRadioBoxInput) getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
       if (ITEM_PATH_FORM_STRING_INPUT.equals(selectField) && UICLVPortlet.DISPLAY_MODE_MANUAL.equals(displayMode)) {
         items = Arrays.asList(sValue.split(";"));
-      } else {
+        titles = getTitles(sValue);
+        savedPath = sValue;
+        getUIStringInput(selectField).setValue(titles);
+      } else if (TARGET_PAGE_FORM_STRING_INPUT.equals(selectField)){        
+        getUIStringInput(selectField).setValue(sValue);
+      }else {
         items = new ArrayList<String>();
         String[] values = sValue.split(":");
         if (values.length == 4) {
@@ -478,13 +494,69 @@ public class UICLVConfig extends UIForm  implements UISelectable {
               this.setDriveName(data.getName());
             }
           }
-          
           sValue = sValue.substring(values[0].length() + 1);
         }
+        titles = getTitle(sValue);
+        getUIStringInput(selectField).setValue(titles);
+        savedPath = sValue;
       }
-      getUIStringInput(selectField).setValue(sValue);
     }
     Utils.closePopupWindow(this, popupId);
+  }
+  
+  private String getTitles(String itemPath) throws RepositoryException {
+    if (itemPath == null || itemPath.length() == 0)
+      return "";
+    String titles = "";
+    List<String> tmpItems;
+    tmpItems = Arrays.asList(itemPath.split(";"));
+    for (String item:tmpItems) {
+      String title = getTitle(item);
+      if (title!=null) {
+        if (titles.length()>0) {
+           titles  = titles + ";" + title;
+        }else {
+            titles  = title;
+        }
+      }
+    }
+    return titles;
+  }
+  
+ /**
+   * 
+   * @param itemPath
+   * @return
+   * @throws RepositoryException
+   */  
+  private String getTitle(String itemPath) throws RepositoryException {
+    String strRepository, strWorkspace, strIdentifier;
+    int repoIndex, wsIndex;
+    if (itemPath==null || itemPath.length() == 0) 
+      return "";
+    repoIndex = itemPath.indexOf(':');
+    wsIndex = itemPath.lastIndexOf(':');
+    strRepository = itemPath.substring(0, repoIndex);
+    strWorkspace = itemPath.substring(repoIndex+1, wsIndex);
+    strIdentifier = itemPath.substring(wsIndex +1);
+    Node selectedNode = Utils.getRealNode(strRepository, strWorkspace, strIdentifier, false);
+    String title = null;    
+    if (selectedNode.hasProperty("exo:title")) {
+      title = selectedNode.getProperty("exo:title").getValue().getString();
+    }
+    if (selectedNode.hasNode("jcr:content")) {
+      Node content = selectedNode.getNode("jcr:content");
+      if (content.hasProperty("dc:title")) {
+        try {
+          title = content.getProperty("dc:title").getValues()[0].getString();
+        } catch (Exception e) {
+          title = null;
+        }
+      }
+    }
+    if (title==null) title = selectedNode.getName();
+
+    return title;
   }
   
   /**
@@ -508,7 +580,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
       /** GET VALUES FROM UIFORM */
       String displayMode = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
-      String itemPath = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
+//      String itemPath = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
+      String itemPath = clvConfig.getSavedPath();
+      
       if (itemPath == null || itemPath.length() == 0 || (itemPath.contains(";") && displayMode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) || (!itemPath.contains(";") && displayMode.equals(UICLVPortlet.DISPLAY_MODE_MANUAL))) {
         Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.not-valid-path", null, ApplicationMessage.WARNING);
         return;
@@ -643,7 +717,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       if (mode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) {
         UIContentSelectorFolder contentSelector = clvConfig.createUIComponent(UIContentSelectorFolder.class, null, null);
         UIContentBrowsePanelFolder folderContentSelector= contentSelector.getChild(UIContentBrowsePanelFolder.class);
-        String location = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
+        String location = clvConfig.getSavedPath();
         String[] locations = (location == null) ? null : location.split(":");
         Node node = (locations != null && locations.length >= 3) ? Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]) : null;
         contentSelector.init(clvConfig.getDriveName(),
@@ -657,7 +731,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         UIContentSelectorMulti contentSelector = clvConfig.createUIComponent(UIContentSelectorMulti.class, null, null);
         UIContentBrowsePanelMulti multiContentSelector= contentSelector.getChild(UIContentBrowsePanelMulti.class);
         multiContentSelector.setSourceComponent(clvConfig, new String[] { UICLVConfig.ITEM_PATH_FORM_STRING_INPUT });
-        String itemPath = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
+//        String itemPath = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
+        String itemPath = clvConfig.getSavedPath();
         if (itemPath != null && itemPath.contains(";"))
           multiContentSelector.setItemPaths(itemPath);
         contentSelector.init();
@@ -711,7 +786,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       for (String item : items) {
         itemPath += item + ";";
       }
-      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(itemPath);
+      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
+      clvConfig.setSavedPath(itemPath);
+
     }
   }
 
@@ -744,7 +821,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       for (String item : items) {
         itemPath += item + ";";
       }
-      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(itemPath);
+      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
+      clvConfig.setSavedPath(itemPath);
     }
   }
   
