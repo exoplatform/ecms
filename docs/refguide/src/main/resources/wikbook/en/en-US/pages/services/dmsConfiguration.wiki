@@ -1,5 +1,7 @@
 DMSConfiguration is used to manage dms-workspace in repository
 
+Package org.exoplatform.services.cms.impl.DmsConfiguration;
+
 || *Method* || *Return* || *Prototype* || *Desription* ||
 | getConfig | DMSRepositoryConfiguration| getConfig(String repository) | Get DMS configuration with specific repository. {example}{example} @param repository:  repository name.{example}{example} @return:  DMSRepositoryConfiguration|
 | addPlugin | void | addPlugin(ComponentPlugin plugin) | This method will add more plugin. {example}{example} @param plugin: plugin name |

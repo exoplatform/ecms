@@ -1,5 +1,7 @@
 CompressData is used to compress data file
 
+Package org.exoplatform.services.cms.compress.CompressData;
+
 || *Method* || *Return* || *Prototype* || *Desription* ||
 | getBase | String | getBase() |  |
 | addFile | void | addFile(String entryName, File file)|  |

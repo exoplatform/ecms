@@ -1,5 +1,7 @@
 Supply API to work with the linked node or the link included in node.
 
+Package org.exoplatform.services.cms.link.LinkManager;
+
 || *Method* || *Return* || *Prototype* || *Description* ||
 | {{createLink}}  | {{Node}} | {{createLink(Node parent, String linkType, Node target)}} {example}{example} {{throws RepositoryException;}} | Creates a new link, add it to the parent node and returns the link {example}{example} {example}{example} @param parent The parent node of the link {example}{example} @param linkType The primary node type of the link must be a sub-type of {example}{example} exo:symlink, the default value is "exo:symlink" {example}{example} @param target The target of the link {example}{example} @throws RepositoryException if the link cannot be created for any reason |
 | {{createLink}} | {{Node}} | {{createLink(Node parent, Node target)}} {example}{example} {{throws RepositoryException;}} | Creates a new node of type exo:symlink, add it to the parent node and {example}{example} returns the link node {example}{example} {example}{example} @param parent The parent node of the link to create {example}{example} @param target The target of the link {example}{example} @throws RepositoryException if the link cannot be created for any reason {example}{example}  |

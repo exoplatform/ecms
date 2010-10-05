@@ -1,5 +1,7 @@
 This service is used to manage DMS actions (with nodetype {{exo:action}})
 
+Package org.exoplatform.services.cms.actions.ActionServiceContainer;
+
 || *Method* || *Return* || *Prototype* || *Description* ||
 | *{{getActionPluginNames}}* | {{Collection<String>}} | {{getActionPluginNames()}} | Collection of String {example}{example} @return collection of ActionPlugin names |
 | *{{getActionPlugin}}* | {{ActionPlugin}} | {{getActionPlugin(String actionServiceName)}} | Get ActionPlugin following ActionSeriveName {example}{example} @param actionServiceName name of action service {example}{example} @return ActionPlugin |

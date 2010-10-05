@@ -1,5 +1,7 @@
 This class is is used to manage templates for ecm-based products.
 
+Package org.exoplatform.services.cms.templates.TemplateService;
+
 || *Method* || *Return* || *Prototype* || *Description* |
 | getDefaultTemplatePath | String | getDefaultTemplatePath(boolean isDialog, String nodeTypeName) {example}{example} throws Exception ; | Return path of default template by giving the following params{example}{example}@param isDialog        boolean    The boolean value which specify the type of template                {example}{example}@param nodeTypeName    String   The name of NodeType|
 | getTemplatesHome | Node | getTemplatesHome(String repository,SessionProvider provider) {example}{example} throws Exception ; | Return template home of repository{example}{example}@param repository      String   The name of repository              {example}{example}@param provider        SessionProvider   The SessionProvider object is used to managed Sessions{example}{example}@see                   Node{example}{example}@throws Exception the exception|

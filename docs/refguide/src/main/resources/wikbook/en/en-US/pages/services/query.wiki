@@ -1,5 +1,7 @@
 This service is used to manage the search feature in WCM back-end
 
+Package org.exoplatform.services.cms.queries.QueryService;
+
 || *Method* || *Return* || *Prototype* || *Description* ||
 | *{{getRelativePath}}* | {{String}} | {{getRelativePath()}} | Get the relative path |
 | *{{getQueries}}* | {{List<Query>}} | {{getQueries(String userName, String repository, SessionProvider provider) throws Exception}} | Get queries by giving the following params {example}{example} @param userName String Can be <code>null</code> {example}{example} @param repository String The name of repository {example}{example} @param provider SessionProvider {example}{example} @return queries List<Query> {example}{example} @see Query {example}{example} @see SessionProvider {example}{example} @throws Exception |

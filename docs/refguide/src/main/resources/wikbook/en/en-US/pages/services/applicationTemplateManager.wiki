@@ -1,5 +1,7 @@
 This class is is used to manage dynamic groovy templates for ecm-based products.
 
+Package org.exoplatform.services.cms.views.ApplicationTemplateManager;
+
 || *Method* || *Return* || *Prototype* || *Description* ||
 | addPlugin | void | addPlugin(PortletTemplatePlugin portletTemplatePlugin) {example}{example} throws Exception ; | Adds the plugin.{example}{example}portletTemplatePlugin the portlet template plugin|
 | getAllManagedPortletName | List<String> | getAllManagedPortletName(String repository){example}{example} throws Exception ; | Retrieves  the all portlet names that have dynamic groovy templates are managed by service.{example}{example}repository the repository{example}{example}@throws Exception the exception|

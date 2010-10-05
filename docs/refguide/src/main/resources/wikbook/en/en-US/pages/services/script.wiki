@@ -1,5 +1,7 @@
 This service is used to manage groovy script resources
 
+Package org.exoplatform.services.cms.scripts.ScriptService;
+
 || *Method* || *Return* || *Prototype* || *Description* ||
 | *{{getECMScriptHome}}* | {{Node}} | {{getECMScriptHome(String repository,SessionProvider provider) throws Exception}} | This method will get node for ECM Explorer Scripts by giving the following params {example}{example} @param repository    The name of repository {example}{example} @param provider {example}{example} @see                 Node {example}{example} @see                 NodeHierarchyCreator {example}{example} @see                 SessionProvider {example}{example} @return              Node {example}{example} @throws Exception |
 | *{{getCBScriptHome}}* | {{Node}} | {{getCBScriptHome(String repository,SessionProvider provider) throws Exception}} | This method will get node for Content Browser Scripts by giving the following params {example}{example} @param repository    The name of reporsitory {example}{example} @param provider {example}{example} @see                 Node {example}{example} @see                 NodeHierarchyCreator {example}{example} @see                 SessionProvider {example}{example} @return              Node {example}{example} @throws Exception |

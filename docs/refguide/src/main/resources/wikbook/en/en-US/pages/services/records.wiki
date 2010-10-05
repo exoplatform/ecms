@@ -1,4 +1,4 @@
-
+Package org.exoplatform.services.cms.records.RecordService;
 
 || *Method* || *Return* || *Prototype* || *Description* ||
 | {{bindFilePlanAction}} |  {{void}} | {{bindFilePlanAction(Node filePlan, String repository) throws Exception;}} | Add action for filePlan node in repository{example}{example}@param filePlan Node to process{example}{example}@param repository Repository name{example}{example}@throws Exception |

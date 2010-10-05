@@ -1,4 +1,6 @@
-This service is used to manage the watch document feature in WCM
+This service is used to manage the watch document feature in WCM.
+
+Package org.exoplatform.services.cms.thumbnail.ThumnailService;
 
 || *Method* || *Return* || *Prototype* || *Description* ||
 | *{{getAllFileInNode}}* | {{List<Node>}} | {{getAllFileInNode(Node node) throws RepositoryException}} | Return all nt:file node at current node
@@ -14,7 +16,7 @@ This service is used to manage the watch document feature in WCM
 {example}{example}@param node Current node
 {example}{example}@return List<Node>
 {example}{example}@throws RepositoryException |
-| *{{setEnableThumbnail}}* | {{void}} | {{setEnableThumbnail(boolean isEnable)}} | To setup status of node is allow thumbnail or not
+| *{{setEnableThumbnail}}* | {{void}} | {{setEnableThumbnail(boolean isEnable)}} | To set up status of node is allow thumbnail or not
 {example}{example}@param isEnable |
 | *{{isEnableThumbnail}}* | {{boolean}} | {{isEnableThumbnail()}} | Return the status of node is enable thumbnail or not
 {example}{example}@return Boolean value |

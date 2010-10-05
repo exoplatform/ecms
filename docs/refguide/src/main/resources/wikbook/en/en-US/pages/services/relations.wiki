@@ -1,5 +1,7 @@
 This service is used to manage document relationship
 
+Package org.exoplatform.services.cms.relations.RelationsService;
+
 || *Method* || *Return* || *Prototype* || *Description* ||
 | *{{hasRelations}}* | {{boolean}} | {{hasRelations(Node node) throws Exception}} | Returns true is the given node has relation {example}{example} @param node              Specify the node wants to check relation {example}{example} @see                     Node {example}{example} @throws Exception |
 | *{{getRelations}}* | {{List<Node>}} | {{getRelations(Node node, String repository, SessionProvider provider) throws Exception}} | Gets all node that has relation to the given node {example}{example} @param node              Specify the node wants to get all node relative to it {example}{example} @param repository        The name of repository {example}{example} @param provider          The SessionProvider object is used to managed Sessions {example}{example} @see                     Node {example}{example} @see                     SessionProvider {example}{example} @throws Exception |
