@@ -28,12 +28,12 @@ To make a typical component org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegis
 
 Where configuration parameters include:
 * indexDir - directory where the lucene index will be placed. It is disabled by default.
-* exo.cmis.renditions.persistent - should be document's rendition. (thumbnail) persisted in JCR. The allowed value is _true_ or _false_.
+* exo.cmis.renditions.persistent - Indicates if a rendition of the document (thumbnails) should be persisted in the JCR. The allowed value are _true_ or _false_.
 * renditionProviders - set of FQN of classes which can be used as Rendition Providers. Classes which implement the org.xcmis.spi.RenditionProvider interface are used to preview the CMIS objects (thumbnails).
 
 {info}
   In most cases, it is not required to change anything in the xCIMIS configuration.
-  In case of any change of the indexer storage location, donot comment the indexDir value parameter and point it to the actual location.
+  In case of any change of the indexer storage location, do not comment the indexDir value parameter and point it to the actual location.
 {info}
 
 h1. Required nodetypes and namespaces in JCR

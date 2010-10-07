@@ -1,7 +1,12 @@
 
-The list of required JAR files for eXo CMIS to work correctly:
+{info}
+JCRs listed for informational purpose only. E.g. if the customer application will need to use same third-parties used by eXo CMIS but of another version.
+All files are delivered in Platform 3.0 distribution.
+{info}
 
-xCMIS project jars (actual for the xCMIS 1.1.x versions):
+eXo CMIS consists of JAR files:
+
+xCMIS project files (actual for the xCMIS 1.1.x versions):
 * xcmis-renditions-X.X.X.jar
 * xcmis-restatom-X.X.X.jar
 * xcmis-search-model-X.X.X.jar
@@ -9,10 +14,10 @@ xCMIS project jars (actual for the xCMIS 1.1.x versions):
 * xcmis-search-service-X.X.X.jar
 * xcmis-spi-X.X.X.jar
 
-WCM Storage provider for xCMIS (uses the same version as WCM/ECMS system):
+eXo WCM Storage Provider for xCMIS SPI (uses the same version as WCM/ECMS system):
 * exo-ecms-ext-xcmis-sp-Y.Y.Y.jar 
 
-xCMIS dependencies (for 1.1.x):
+Third-party dependencies (of xCMIS 1.1.x):
 * _abdera-client-0.4.0-incubating.jar_
 * _abdera-core-0.4.0-incubating.jar_
 * _abdera-i18n-0.4.0-incubating.jar_
@@ -23,3 +28,5 @@ xCMIS dependencies (for 1.1.x):
 * _axiom-impl-1.2.5.jar_
 * _jaxen-1.1.1.jar_
 * _lucene-regex-2.4.1.jar_
+
+
