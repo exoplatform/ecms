@@ -1,4 +1,4 @@
-function EcmContentSelector() {
+function EcmContentSelector() {	
 	this.portalName = eXo.env.portal.portalName;
 	this.context = eXo.env.portal.context;
 	this.accessMode = eXo.env.portal.accessMode;
@@ -138,13 +138,15 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	if(wsName) eXo.ecm.ECS.workspaceName =  wsName;
 	var connector = ECS.connector;
 	var currentFolder;
-	var driverName;
-	var driverPath = currentNode.getAttribute("driverPath");
-	if(driverPath && driverPath != "") {
+	var driverName;	
+	var driverPath = currentNode.getAttribute("driverPath");	
+	if(driverPath && driverPath != "") {		
 		driverName =	currentNode.getAttribute('name');
 		eXo.ecm.ECS.driverName = driverName;
-		currentFolder = '';
-	} else {
+		currentFolder = '';		
+		eXo.ecm.ECS.showUpload();	
+	} else if(currentNode.getAttribute('isUpload')) {
+		
 			var nodeContainer = eXo.core.DOMUtil.findAncestorByClass(currentNode, "ChildrenContainer");
 			if(!nodeContainer) return;
 			var nodeParent = eXo.core.DOMUtil.findPreviousElementByTagName(nodeContainer, "div");
@@ -163,12 +165,11 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 				currentNode.setAttribute("currentFolder", currentFolder);
 			}
 
-			if(nodeLink.getAttribute('isUpload')) {
-				eXo.ecm.ECS.showUpload();
-			} else {
-				eXo.ecm.ECS.hideUpload();
-			}
+
+			eXo.ecm.ECS.showUpload();	
 	}
+	
+	
 	eXo.ecm.ECS.currentFolder = currentFolder;
 	eXo.ecm.ECS.currentNode = currentNode;
 	driverName = eXo.ecm.ECS.driverName;
@@ -215,7 +216,9 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 };
 
 EcmContentSelector.prototype.listRootFolder = function(rootNode) {
+	eXo.ecm.ECS.hideUpload();
 	if(eXo.ecm.ECS.typeObj != 'folder') return;
+        
 	var rightWS = document.getElementById('RightWorkspace');
 	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
 	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
@@ -397,7 +400,11 @@ EcmContentSelector.prototype.actionBreadcrumbs = function(nodeId) {
 	var dropdownlist = document.getElementById("Filter");
 	if(dropdownlist) filter = dropdownlist.options[dropdownlist.selectedIndex].value;
 	else filter = 'All';
-	if(currentFolder == null) currentFolder = '';
+	if(currentFolder == null) 
+	{
+		eXo.ecm.ECS.hideUpload();
+		currentFolder = '';
+	}
 	var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+currentFolder+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
 	var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter;
 	if(eXo.ecm.ECS.strConnection == url) return;	
