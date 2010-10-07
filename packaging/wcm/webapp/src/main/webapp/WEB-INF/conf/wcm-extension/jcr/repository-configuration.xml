@@ -80,8 +80,8 @@
               <property name="jbosscache-configuration" value="${gatein.jcr.lock.cache.config}" />
               <property name="jgroups-configuration" value="${gatein.jcr.jgroups.config}" />
               <property name="jgroups-multiplexer-stack" value="true" />
-              <property name="jbosscache-cluster-name" value="jcrlock-${container.name.suffix}-system" />
-              <property name="jbosscache-cl-cache.jdbc.table.name" value="jcrlock_portal_system" />
+              <property name="jbosscache-cluster-name" value="jcrlock-${container.name.suffix}-wcm-system" />
+              <property name="jbosscache-cl-cache.jdbc.table.name" value="jcrlock_wcm_system" />
               <property name="jbosscache-cl-cache.jdbc.table.create" value="true" />
               <property name="jbosscache-cl-cache.jdbc.table.drop" value="false" />
               <property name="jbosscache-cl-cache.jdbc.table.primarykey" value="pk" />
