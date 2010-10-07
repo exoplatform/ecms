@@ -47,4 +47,4 @@ Overview graphic of how CMIS works
 !exo-cmis-wcm.png!
 
 WCM drives exposure is implemented as WCM storage provider to xCMIS SPI. 
-Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And AtomPub bindings making WCM structure available via CMIS API.
+Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standart API.
