@@ -43,8 +43,8 @@ WS-SOAP/WSDL binding is also supported, but it is not delivered in the standard 
 eXo CMIS is built on the top of xCMIS embedded in Platform to expose the WCM drives as the CMIS repositories. 
 The CMIS features are implemented as a set of components deployed on the eXo Container using XML files to describe the service configuration.
 
-Overview graphic of how CMIS works
 !exo-cmis-wcm.png!
+Figure: how eXo CMIS works
 
 WCM drives exposure is implemented as WCM storage provider to xCMIS SPI. 
 Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standart API.
