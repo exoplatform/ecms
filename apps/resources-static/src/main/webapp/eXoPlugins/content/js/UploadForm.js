@@ -258,6 +258,7 @@ UploadForm.prototype.uploadFileSave = function() {
 
 UploadForm.prototype.updateFiles = function(nodeId) {
 	if(!nodeId) return;
+	alert(nodeId);
 	var node = document.getElementById(nodeId);
 	var strConnector = eXo.ecm.ECS.connector + eXo.ecm.ECS.cmdEcmDriver;
 	currentFolder = node.getAttribute('currentfolder');
