@@ -1,12 +1,13 @@
-﻿﻿﻿﻿﻿﻿﻿/*
+﻿﻿﻿﻿﻿﻿﻿﻿﻿/*
 Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
 var curInstance = '';
-CKEDITOR.dialog.add( 'insertPortalLink', function( editor )
+CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 {
 	curInstance = editor.name;
+	var title = '';
 	return {
 		title : 'InsertPortalLink',
 		minWidth : 390,
@@ -87,7 +88,7 @@ CKEDITOR.dialog.add( 'insertPortalLink', function( editor )
 												'<label>Title: </label>'+
 											'</td>'+
 											'<td colspan="2" class="FieldComponent">'+
-												'<input type="text" id="inputTitle">'+
+												'<input type="text" id="inputTitle" value="'+ title +'" />'+
 											'</td>'+
 										'</tr>'+
 										'<tr>'+
@@ -95,7 +96,7 @@ CKEDITOR.dialog.add( 'insertPortalLink', function( editor )
 												'<label>URL: </label>'+
 											'</td>'+
 											'<td class="FieldComponent">'+
-												'<input type="text" id="txtUrl">'+
+												'<input type="text" id="txtUrl" />'+
 											'</td>'+
 											'<td class="FieldComponent">'+
 												'<div class="UIAction">'+
@@ -168,7 +169,14 @@ CKEDITOR.dialog.add( 'insertPortalLink', function( editor )
 				]
 			}
 		],
-		buttons : [ CKEDITOR.dialog.cancelButton ]
+		onShow : function() {
+			title = editor.titleLink ;
+			document.getElementById("inputTitle").value = title ;
+		},
+		buttons : [ CKEDITOR.dialog.cancelButton ],
+		onCancel : function() {
+			CKEDITOR.dialog.getCurrent().hide();
+		}
 		};
 } );
 
@@ -185,12 +193,17 @@ function previewLink() {
 }
 
 function addURL() {
+	var tLink = document.getElementById("inputTitle").value;
 	var url = document.getElementById("txtUrl").value;
 	if (url == "") {
 		alert("Field URL is not empty"); 
 		return;
 	}
-	var newTag = '<a href="'+url+'">'+url+'</a>';
+	if(tLink == "" ) {
+		var newTag = '<a href="'+url+'" style="color:blue;">'+url+'</a>';
+	} else {
+		var newTag = '<a href="'+url+'" style="color:blue;">'+tLink+'</a>';
+	}
 	CKEDITOR.instances[curInstance].insertHtml(newTag);
 	CKEDITOR.dialog.getCurrent().hide();
 }
