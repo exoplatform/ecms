@@ -141,10 +141,12 @@ if (uicomponent.isPrinting()) {
    <script type="text/javascript">
   var allElements = document.getElementsByTagName('*');
   for (i in allElements) {
-   if (allElements[i].nodeName == 'HTML') continue;
+   if (allElements[i].nodeName == 'HTML') continue;   
    if (allElements[i].style) allElements[i].style.overflow = 'visible';
    allElements[i].overflow = 'visible';
   }
+  var pdfViewer = document.getElementById("pdf_viewer_image");
+  if (pdfViewer != null) pdfViewer.style.height="";
    </script>
  <style type="text/css">
   @media print{
