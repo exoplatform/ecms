@@ -423,6 +423,7 @@ Go to the *Sites Explorer* and see changes applied from the local file in /acme/
 
 h2. CMIS search 
 
+{warning}
 CMIS search is disable in eXo CMIS by default.
-For more details and configuration check Admin guide.
-
+For more details and configuration refer to CMIS Administrator guide.
+{warning}
