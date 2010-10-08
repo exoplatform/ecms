@@ -44,17 +44,17 @@ How to set up the index directory.
 
 h2. Index atomicity and durability
 
-* Write-ahead logging *
+* Write-ahead logging
 
 To be able to provide index consistency and recoverability in the case of unexpected crashes or damages, XCMIS uses&nbsp;[write-ahead logging|http://en.wikipedia.org/wiki/Write-ahead_logging]&nbsp;(WAL) technique. Write-Ahead Logging is a standard approach to transaction logging. Briefly, WAL's central concept is that changes to data files (indexes) must be written only after those changes have been logged, that is, when log records describing the changes have been flushed to permanent storage. If we follow this procedure, we do not need to flush data pages to disk on every transaction commit, because we know that in the event of a crash we will be able to recover the index using the log: any changes that have not been applied to the data pages can be redone from the log records. (This is roll-forward recovery, also known as REDO.)
 
 A major benefit of using WAL is a significantly reduced number of disk writes, because only the log file needs to be flushed to disk at the time of transaction commit, rather than every data file changed by the transaction.
 
-* Recover uncommited transaction * 
+* Recover uncommited transaction 
 
 When you start Indexer, it will check uncommitted transaction logs. If there are at least one log exists - recover process will be started. Indexer will read all logs and extract added, updated and removed uuids into set. Then it will walk throw this set and check objects according to UUID. If object exist - indexer will put into the added documents list, in other case uuid will be added to removed documents list. After according to the list of added and removed documents changes will be applyed to the index.
 
-* Initial index population *
+* Initial index population
 
 When you run the indexer checks the number of documents in the index. If there is no documents in the index or previous re-indexation wasn't successful then re-indexation of all content will be started. First step is cleaning old index data. Uncommited transaction logs and old persistent data is removed. This data is useless, because re-indexation of all content will be started. Then indexer walks throw all objects and make lucene document for each one. Then batches with less then 100 elements will be saved to the index. After re-indexation, all logs (WAL) will be removed, all data mentioned on this changes logs - already indexed.
 
