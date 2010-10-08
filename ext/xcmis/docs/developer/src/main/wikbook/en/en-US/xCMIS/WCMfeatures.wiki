@@ -1,6 +1,6 @@
 h1. Integration with eXo WCM
 
-The eXo Web Content Management system provides CMIS access to its content storage features:
+eXo Web Content Management (WCM) system provides CMIS access to its content storage features:
 * WCM drives
 * Document files and folders
 * Symlinks
@@ -48,7 +48,7 @@ h2. WCM drives as CMIS Repositories
 The WCM drive is used to expose as an isolated repository via the CMIS service. Operations on the repository will reflect the drive immediately. 
 
 {tip}
-  Working with CMIS repositories it's important understand that the repository reflects a WCM drive, which is a sub-tree in JCR workspace. And two or more drives can be mapped to a same workspace or a sub-tree.
+  Working with CMIS repositories it's important understand that a repository reflects a WCM Drive, which is a sub-tree in JCR workspace. And two or more drives can be mapped to a same workspace or a sub-tree.
   As a result changes in one repository can affect others. 
   Consult with WCM drives mappings to know actual location of a content you'll access or change.
 {tip}
@@ -63,7 +63,8 @@ curl -o getrepos.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/
 {screen}
 
 The requested file (getrepos.xml) contains the set of Repositories in the AtomPub format.
-The root element represents the set of *workspaces* representing *WCM drives* related to resources, e.g.
+The root element represents the set of *workspaces* representing *WCM drives* related to resources, 
+for example for *DMS Administration* the response will contains data like:
 {code:language=xml}
    <service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
    <workspace>
@@ -139,9 +140,8 @@ where parameters include:
 ** Boolean includeACL
 
 {note}
-Find full description of all sepcefied services in the CMIS specefication.
+  Find full description of all sepcefied services in the CMIS specefication.
 {note}
-
 
 h2. WCM Symlinks
 
@@ -397,7 +397,6 @@ In the requested file (childs.xml), find the entry related to *test.txt* file up
    </entry>
 {code}
 
-
 Then, get the *test.txt* file content via CMIS by using the *file* service and *id* of the file "test.txt" from *childs.xml*:
 {screen}
 curl -o test.txt -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/f708e208c0a80003554babb97bd934ba
@@ -422,4 +421,8 @@ curl -T test.txt -X PUT -H "Content-Type:text/plain; charset=UTF-8" -u root:gtn 
 
 Go to the *Sites Explorer* and see changes applied from the local file in /acme/documents/test.txt.
 
+h2. CMIS search 
+
+CMIS search is disable in eXo CMIS by default.
+For more details and configuration check Admin guide.
 
