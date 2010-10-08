@@ -1,28 +1,63 @@
 h1. Integration with eXo WCM
 
-The eXo Web Content Management system provides CMIS  the given access to its content storage features:
+The eXo Web Content Management system provides CMIS access to its content storage features:
 * WCM drives
+* Document files and folders
 * Symlinks
 * Categories
 
-Working with CMIS is based on reference documents returned from the server. The requested documents, which contain links to other services, are related to this document service.
+To expose WCM drives as CMIS repositories there is special extension of _CmisRegistry_.
+Read admin guide for configuration of _org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry_ component.
 
-{note}
+Work with CMIS is based on reference documents returned by services. 
+Each CMIS service returns response containing links to other services describing the Document or operations on it. 
+In most cases a Document will be asked by its ID. Some services accepts a Document path.
+
+{info}
 Notes for use cases:
 To access the eXo CMIS services from the client side, use the Curl tool [http://curl.haxx.se/download.html].
 CMIS AtomPub binding which is based upon the Atom (RFC4287) and Atom Publishing Protocol (RFC5023) will be used.
-WebServices (SOAP binding) is not covered in the Platform 3.x.
-{note}
+
+SOAP binding is not implemented in the eXo Platform 3.x.
+{info}
+
+h2. JCR namespaces and nodetypes
+
+eXo CMIS uses special JCR namespaces _cmis_ and _xcmis_ internally. 
+
+To expose drives content following nodetypes supported:
+* _nt:file_ nodetype for representation of _cmis:documents_ 
+* _nt:folder_ for representation of _cmis:folder_
+
+Since CMIS specification not allows to have more root types except of described above (_cmis:documents_ and _cmis:folder_), those two (_nt:file_ and _nt:folder_) are mapped to CMIS types. 
+
+There is two more node types which are used: _cmis:policy_ and _cmis:relationship_ which represent CMIS types with corresponded (see Services description for details). 
+
+Additionally nodetypes used in WCM are mapped as follow:
+* _nt:unstructured_  + extentions as _cmis:folder_
+* _exo:taxonomy_ + extentions as _cmis:folder_
+
+In other words only nodetypes extending _nt:file_, _nt:folder_, _nt:unstructured_ and _exo:taxonomy_ will be exposed correctly via CMIS API.
+
+{warning}
+  WCM's nodetype _exo:article_ isn't supported by eXo CMIS due to not compliant structure to _nt:file_.
+{warning}
 
 h2. WCM drives as CMIS Repositories
 
 The WCM drive is used to expose as an isolated repository via the CMIS service. Operations on the repository will reflect the drive immediately. 
 
-h3. USERCASE: Browse Drives via getRepository
+{tip}
+  Working with CMIS repositories it's important understand that the repository reflects a WCM drive, which is a sub-tree in JCR workspace. And two or more drives can be mapped to a same workspace or a sub-tree.
+  As a result changes in one repository can affect others. 
+  Consult with WCM drives mappings to know actual location of a content you'll access or change.
+{tip}
+
+h3. Use Case: Browse Drives via _getRepository_
 
 * Login to the website as a user with the developer role.
 * Open *Group | Sites Explorer*, you can see the drives set of WCM, such as *Sites Management*, *DMS Administration*.
-* Get the list of these WCM drives via CMIS using Curl, asking getRepositories service:
+* Get the list of these WCM drives via CMIS using _Curl_, asking _getRepositories_ service:
 {screen}
 curl -o getrepos.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/ 
 {screen}
@@ -115,7 +150,7 @@ Symlinks are used to organize the virtual access to documents in WCM, which is i
 JCR exo:symlink nodetype used for such type nodes.
 {note}
 
-h3. USERCASE: Follow Symlinks
+h3. Use Case: Follow Symlinks
 
 * Login to the acme website as a user with the developer role.
 * Open *Group | Sites Explorer*, select *Sites Management*, go to folder /acme/documents.

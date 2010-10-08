@@ -23,6 +23,10 @@ h1. About eXo CMIS
 eXo CMIS is built on the top of xCMIS embedded in Platform to expose the WCM drives as the CMIS repositories. 
 The CMIS features are implemented as a set of components deployed on the eXo Container using XML files to describe the service configuration.
 
+{info}
+  SOAP protocol binding is not implemented in eXo CMIS.
+{info}
+
 !exo-cmis-wcm.png!
 Figure: how eXo CMIS works
 

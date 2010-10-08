@@ -41,5 +41,5 @@ CMIS provides a set of services to access and manage the content or repository. 
 * ACL Services: To return and manage the Access Control List (ACL) of an object. ACL Services are not supported by all repositories.
 
 Some repositories might not implement certain optional capabilities, but they are still considered CMIS-compliant.
-Each service has two bindings which defines the way messages will be serialized and wired. Both bindings are based on HTTP, one uses the Atom Publishing Protocol, and the other uses SOAP-based Web services. The specification requires the CMIS compatible repositories support but does not limit to have more (first possible candidates are JSON).
-
+Each service has binding which defines the way messages will be serialized and wired. 
+Binding are based on HTTP and uses the Atom Publishing Protocol. 
