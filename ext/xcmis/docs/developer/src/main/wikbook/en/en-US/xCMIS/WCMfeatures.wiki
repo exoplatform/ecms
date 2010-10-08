@@ -25,22 +25,22 @@ h2. JCR namespaces and nodetypes
 
 eXo CMIS uses special JCR namespaces _cmis_ and _xcmis_ internally. 
 
-To expose drives content following nodetypes supported:
-* _nt:file_ nodetype for representation of _cmis:documents_ 
-* _nt:folder_ for representation of _cmis:folder_
+To expose drives content following nodetypes supported: 
+* nt:file nodetype for representation of cmis:documents 
+* nt:folder for representation of cmis:folder
 
-Since CMIS specification not allows to have more root types except of described above (_cmis:documents_ and _cmis:folder_), those two (_nt:file_ and _nt:folder_) are mapped to CMIS types. 
+Since CMIS specification not allows to have more root types except of described above (cmis:documents and cmis:folder), those two (nt:file and nt:folder) are mapped to CMIS types. 
 
-There is two more node types which are used: _cmis:policy_ and _cmis:relationship_ which represent CMIS types with corresponded (see Services description for details). 
+There is two more node types which are used: cmis:policy and cmis:relationship which represent CMIS types with corresponded (see Services description for details). 
 
 Additionally nodetypes used in WCM are mapped as follow:
-* _nt:unstructured_  + extentions as _cmis:folder_
-* _exo:taxonomy_ + extentions as _cmis:folder_
+* nt:unstructured + extentions as cmis:folder
+* exo:taxonomy + extentions as cmis:folder
 
-In other words only nodetypes extending _nt:file_, _nt:folder_, _nt:unstructured_ and _exo:taxonomy_ will be exposed correctly via CMIS API.
+In other words only nodetypes extending nt:file, nt:folder, nt:unstructured and exo:taxonomy will be exposed correctly via CMIS API.
 
 {warning}
-  WCM's nodetype _exo:article_ isn't supported by eXo CMIS due to not compliant structure to _nt:file_.
+  WCM's nodetype exo:article isn't supported by eXo CMIS due to not compliant structure to nt:file.
 {warning}
 
 h2. WCM drives as CMIS Repositories
