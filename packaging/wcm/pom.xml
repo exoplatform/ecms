@@ -14,5 +14,6 @@
     <module>config</module>
     <module>ear</module>
     <module>webapp</module>
+    <module>ear-plf</module>
   </modules>
 </project>
