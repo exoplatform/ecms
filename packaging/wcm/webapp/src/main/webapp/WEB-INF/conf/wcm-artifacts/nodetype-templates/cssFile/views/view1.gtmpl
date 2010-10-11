@@ -45,6 +45,7 @@
   }      
 </style>
 <%
+		import org.exoplatform.ecm.webui.utils.Utils;
   def originalNode = uicomponent.getOriginalNode();
   def currentNode = uicomponent.getNode() ; 
   def contentNode = currentNode.getNode("jcr:content") ;
@@ -53,6 +54,7 @@
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
+  String restContextName = Utils.getRestContextName(uicomponent.getPortalName());  
 %>
 <div class="FileContent"> 
   <div class="NavigationContainer">       
@@ -67,7 +69,7 @@
     <table align="center" class="ActionContainer">  
       <tr>
         <td align="center">
-          <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+          <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=restContextName%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
             <div class="ButtonLeft">
               <div class="ButtonRight">
                 <div class="ButtonMiddle">
