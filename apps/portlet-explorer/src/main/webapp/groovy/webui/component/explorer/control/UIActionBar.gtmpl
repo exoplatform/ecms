@@ -101,7 +101,7 @@
   		<div class="UIViewBarContainer" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
-  		  <a class ="URLBackToButton" href="<%=uicomponent.getBackLink()%>"></a>
+  		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
   		  <%}
  			  if(uicomponent.isShowSaveSession()) {%>
   	      <a class="SaveSessionButton" href="<%=uicomponent.event("SaveSession")%>" title="<%=_ctx.appRes("UIViewBar.label.saveSession")%>"></a>
