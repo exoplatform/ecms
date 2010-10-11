@@ -104,7 +104,7 @@ public class UIPageNodeSelector extends UIContainer {
    */
   public void loadNavigations() throws Exception {
     navigations = new ArrayList<PageNavigation>();
-    List<PageNavigation> pnavigations = getExistedNavigation(Util.getUIPortal().getNavigations()) ;
+    List<PageNavigation> pnavigations = getExistedNavigation(Util.getUIPortalApplication().getNavigations()) ;
     for(PageNavigation nav  : pnavigations){      
       if(nav.isModifiable()) navigations.add(nav);
     }
