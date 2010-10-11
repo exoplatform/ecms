@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.control;
 
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -33,6 +34,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SearchValidator;
@@ -42,6 +44,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.search.UIContentNameSearch;
 import org.exoplatform.ecm.webui.component.explorer.search.UIECMSearch;
 import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
@@ -87,7 +91,8 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UIActionBar.SavedQueriesActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIActionBar.ChangeTabActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIActionBar.PreferencesActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIActionBar.SaveSessionActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = UIActionBar.SaveSessionActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIActionBar.BackToActionListener.class, phase=Phase.DECODE)
     }
 )
 
@@ -313,7 +318,24 @@ public class UIActionBar extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
-
+  static public class BackToActionListener extends EventListener<UIActionBar> {
+	    public void execute(Event<UIActionBar> event) throws Exception {
+	    	UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+	        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+	        UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);	            	      
+	        UIDocumentFormController uiDocumentFormController =  uiDocumentWorkspace.getChild(UIDocumentFormController.class);
+	        String backLink = event.getSource().getBackLink();
+	        if (uiDocumentFormController != null) {
+	          UIDocumentForm uiDocument = uiDocumentFormController.getChild(UIDocumentForm.class);
+			  if (uiDocument!=null) {
+			    uiDocument.releaseLock();
+			  }
+	          uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+	        } else    
+	        uiExplorer.cancelAction();
+	        event.getRequestContext().getJavascriptManager().addJavascript("location.href='" + backLink + "';");
+	    }
+	  }
   static public class SavedQueriesActionListener extends EventListener<UIActionBar> {
     public void execute(Event<UIActionBar> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
