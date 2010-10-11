@@ -1,4 +1,7 @@
-<%import org.exoplatform.ecm.webui.utils.Utils ;%>
+<%
+import java.net.URLEncoder;
+import org.exoplatform.ecm.webui.utils.Utils;
+%>
 <%
   List<String[]> listValues = uicomponent.listUploadValues();
   uicomponent.getListUploadedNode();
@@ -45,7 +48,8 @@
 	        <%} else {%>
 		          <td style="text-align: center;overflow:hidden">
 		            <%if (index == 6) {%>
-		              <a href="<%=uicomponent.event("ManageMetadata", value)%>">
+		              <% String valuePath = URLEncoder.encode(Utils.formatNodeName(value), "utf-8"); %>
+		              <a href="<%=uicomponent.event("ManageMetadata", valuePath)%>">
 		              <div class="Icon16x16 Edit16x16Icon" style="margin-left: 30px;" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>"><span></span></div>
 	                </a>
 		            <%} else {%>
