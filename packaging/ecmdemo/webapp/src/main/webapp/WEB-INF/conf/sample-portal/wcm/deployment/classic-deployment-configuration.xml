@@ -149,7 +149,7 @@
           </object>
         </object-param>
         <object-param>
-          <name>Classic News Data</name>
+          <name>Classic Community Members Data</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
@@ -166,12 +166,12 @@
               </object>
             </field>
             <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/News.xml</string>
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/CommunityMembers.xml</string>
             </field>
           </object>
         </object-param>
         <object-param>
-          <name>Classic Howto Data</name>
+          <name>Classic Enterprise Or Production Use Data</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
@@ -188,12 +188,12 @@
               </object>
             </field>
             <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/Howto.xml</string>
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/EnterpriseOrProductionUse.xml</string>
             </field>
           </object>
         </object-param>
         <object-param>
-          <name>Classic Test Data</name>
+          <name>Classic Getting Started Guide Data</name>
           <description>Deployment Descriptor</description>
           <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
             <field name="target">
@@ -210,7 +210,73 @@
               </object>
             </field>
             <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/Test.xml</string>
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/GettingStartedGuide.xml</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Classic Key Features Data</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="repository">
+                  <string>repository</string>
+                </field>
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/classic/web contents/site artifacts</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/KeyFeatures.xml</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Classic Using eXo Social Data</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="repository">
+                  <string>repository</string>
+                </field>
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/classic/web contents/site artifacts</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/UsingExoSocial.xml</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Classic Useful Links Data</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+            <field name="target">
+              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+                <field name="repository">
+                  <string>repository</string>
+                </field>
+                <field name="workspace">
+                  <string>collaboration</string>
+                </field>
+                <field name="nodePath">
+                  <string>/sites content/live/classic/web contents/site artifacts</string>
+                </field>
+              </object>
+            </field>
+            <field name="sourcePath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/classic/UsefulLinks.xml</string>
             </field>
           </object>
         </object-param>

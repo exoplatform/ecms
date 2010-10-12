@@ -29,10 +29,8 @@
     <title>Home Page</title>
     <access-permissions>Everyone</access-permissions>
     <edit-permission>*:/platform/administrators</edit-permission>
-    <container id="ClassicBody" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
+    <container id="ClassicBody" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
       <access-permissions>Everyone</access-permissions>
-      <container id="ClassicLeft" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
-        <access-permissions>Everyone</access-permissions>
         <portlet-application>
           <portlet>
             <application-ref>presentation</application-ref>
@@ -76,161 +74,307 @@
           <show-application-state>false</show-application-state>
           <show-application-mode>false</show-application-mode>
         </portlet-application>
-
-        <portlet-application>
-          <portlet>
-            <application-ref>presentation</application-ref>
-            <portlet-ref>ContentListViewerPortlet</portlet-ref>
-            <preferences>
-              <preference>
-                <name>folderPath</name>
-                <value>repository:collaboration:/sites content/live/classic/web contents/site artifacts/News</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>orderType</name>
-                <value>ASC</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>header</name>
-                <value>Last Project News</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>formViewTemplatePath</name>
-                <value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/TwoColumnsCLVTemplate.gtmpl</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>basePath</name>
-                <value>parameterizedviewer</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>itemsPerPage</name>
-                <value>5</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showDateCreated</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showLink</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showReadmore</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>showThumbnailsView</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-            </preferences>
-          </portlet>
-          <title>News</title>
-          <access-permissions>Everyone</access-permissions>
-          <show-info-bar>false</show-info-bar>
-          <show-application-state>false</show-application-state>
-          <show-application-mode>false</show-application-mode>
-        </portlet-application>
+        
+      <container id="ClassicMiddle" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
+        <access-permissions>Everyone</access-permissions>
+        
+       <container id="ClassicMiddleUpLeft" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+        <access-permissions>Everyone</access-permissions>
+        
+	        <portlet-application>
+	          <portlet>
+	            <application-ref>presentation</application-ref>
+	            <portlet-ref>SingleContentViewer</portlet-ref>
+	            <preferences>
+	              <preference>
+	                <name>repository</name>
+	                <value>repository</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>workspace</name>
+	                <value>collaboration</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>nodeIdentifier</name>
+	                <value>/sites content/live/classic/web contents/site artifacts/CommunityMembers</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowQuickEdit</name>
+	                <value>true</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowPrintAction</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowTitle</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	            </preferences>
+	          </portlet>
+	          <title>Community Members</title>
+	          <access-permissions>Everyone</access-permissions>
+	          <show-info-bar>false</show-info-bar>
+	          <show-application-state>false</show-application-state>
+	          <show-application-mode>false</show-application-mode>
+	        </portlet-application>
+		    </container>
+	      <container id="ClassicMiddleUpRight" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+	        <access-permissions>Everyone</access-permissions>
+		         
+	        <portlet-application>
+	          <portlet>
+	            <application-ref>presentation</application-ref>
+	            <portlet-ref>SingleContentViewer</portlet-ref>
+	            <preferences>
+	              <preference>
+	                <name>repository</name>
+	                <value>repository</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>workspace</name>
+	                <value>collaboration</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>nodeIdentifier</name>
+	                <value>/sites content/live/classic/web contents/site artifacts/EnterpriseOrProductionUse</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowQuickEdit</name>
+	                <value>true</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowPrintAction</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowTitle</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	            </preferences>
+	          </portlet>
+	          <title>Enterprise or Production Use</title>
+	          <access-permissions>Everyone</access-permissions>
+	          <show-info-bar>false</show-info-bar>
+	          <show-application-state>false</show-application-state>
+	          <show-application-mode>false</show-application-mode>
+	        </portlet-application>
+        </container>
       </container>
 
-      <container id="ClassicRight" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+      <container id="ClassicBottom" template="system:/groovy/portal/webui/container/UITableColumnContainer.gtmpl">
         <access-permissions>Everyone</access-permissions>
-        <portlet-application>
-          <portlet>
-            <application-ref>presentation</application-ref>
-            <portlet-ref>SingleContentViewer</portlet-ref>
-            <preferences>
-              <preference>
-                <name>repository</name>
-                <value>repository</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>workspace</name>
-                <value>collaboration</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>nodeIdentifier</name>
-                <value>/sites content/live/classic/web contents/site artifacts/Howto</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowQuickEdit</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowPrintAction</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowTitle</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-            </preferences>
-          </portlet>
-          <title>How to</title>
-          <access-permissions>Everyone</access-permissions>
-          <show-info-bar>false</show-info-bar>
-          <show-application-state>false</show-application-state>
-          <show-application-mode>false</show-application-mode>
-        </portlet-application>
-
-        <portlet-application>
-          <portlet>
-            <application-ref>presentation</application-ref>
-            <portlet-ref>SingleContentViewer</portlet-ref>
-            <preferences>
-              <preference>
-                <name>repository</name>
-                <value>repository</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>workspace</name>
-                <value>collaboration</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowQuickEdit</name>
-                <value>true</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowPrintAction</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>nodeIdentifier</name>
-                <value>/sites content/live/classic/web contents/site artifacts/Test</value>
-                <read-only>false</read-only>
-              </preference>
-              <preference>
-                <name>ShowTitle</name>
-                <value>false</value>
-                <read-only>false</read-only>
-              </preference>
-            </preferences>
-          </portlet>
-          <title>Test</title>
-          <access-permissions>Everyone</access-permissions>
-          <show-info-bar>false</show-info-bar>
-          <show-application-state>false</show-application-state>
-          <show-application-mode>false</show-application-mode>
-        </portlet-application>
+				<container id="ClassicBottomLeft" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+				  <access-permissions>Everyone</access-permissions>
+	        <portlet-application>
+	          <portlet>
+	            <application-ref>presentation</application-ref>
+	            <portlet-ref>SingleContentViewer</portlet-ref>
+	            <preferences>
+	              <preference>
+	                <name>repository</name>
+	                <value>repository</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>workspace</name>
+	                <value>collaboration</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>nodeIdentifier</name>
+	                <value>/sites content/live/classic/web contents/site artifacts/GettingStartedGuide</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowQuickEdit</name>
+	                <value>true</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowPrintAction</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowTitle</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	            </preferences>
+	          </portlet>
+	          <title>Getting Started Guide</title>
+	          <access-permissions>Everyone</access-permissions>
+	          <show-info-bar>false</show-info-bar>
+	          <show-application-state>false</show-application-state>
+	          <show-application-mode>false</show-application-mode>
+	        </portlet-application>
+	        <portlet-application>
+	          <portlet>
+	            <application-ref>presentation</application-ref>
+	            <portlet-ref>ContentListViewerPortlet</portlet-ref>
+	            <preferences>
+	              <preference>
+	                <name>folderPath</name>
+	                <value>repository:collaboration:/sites content/live/classic/web contents/site artifacts/KeyFeatures</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>orderType</name>
+	                <value>ASC</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>header</name>
+	                <value>Last Project News</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>formViewTemplatePath</name>
+	                <value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/TwoColumnsCLVTemplate.gtmpl</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>basePath</name>
+	                <value>parameterizedviewer</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>itemsPerPage</name>
+	                <value>5</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>showDateCreated</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>showLink</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>showReadmore</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>showThumbnailsView</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	            </preferences>
+	          </portlet>
+	          <title>Key Features</title>
+	          <access-permissions>Everyone</access-permissions>
+	          <show-info-bar>false</show-info-bar>
+	          <show-application-state>false</show-application-state>
+	          <show-application-mode>false</show-application-mode>
+	        </portlet-application>
+	        <portlet-application>
+	          <portlet>
+	            <application-ref>presentation</application-ref>
+	            <portlet-ref>SingleContentViewer</portlet-ref>
+	            <preferences>
+	              <preference>
+	                <name>repository</name>
+	                <value>repository</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>workspace</name>
+	                <value>collaboration</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>nodeIdentifier</name>
+	                <value>/sites content/live/classic/web contents/site artifacts/UsingExoSocial</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowQuickEdit</name>
+	                <value>true</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowPrintAction</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowTitle</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	            </preferences>
+	          </portlet>
+	          <title>Using eXo Social</title>
+	          <access-permissions>Everyone</access-permissions>
+	          <show-info-bar>false</show-info-bar>
+	          <show-application-state>false</show-application-state>
+	          <show-application-mode>false</show-application-mode>
+	        </portlet-application>
+				</container>
+				<container id="ClassicBottomRight" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+				  <access-permissions>Everyone</access-permissions>
+	        <portlet-application>
+	          <portlet>
+	            <application-ref>presentation</application-ref>
+	            <portlet-ref>SingleContentViewer</portlet-ref>
+	            <preferences>
+	              <preference>
+	                <name>repository</name>
+	                <value>repository</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>workspace</name>
+	                <value>collaboration</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowQuickEdit</name>
+	                <value>true</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowPrintAction</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>nodeIdentifier</name>
+	                <value>/sites content/live/classic/web contents/site artifacts/UsefulLinks</value>
+	                <read-only>false</read-only>
+	              </preference>
+	              <preference>
+	                <name>ShowTitle</name>
+	                <value>false</value>
+	                <read-only>false</read-only>
+	              </preference>
+	            </preferences>
+	          </portlet>
+	          <title>Useful Links</title>
+	          <access-permissions>Everyone</access-permissions>
+	          <show-info-bar>false</show-info-bar>
+	          <show-application-state>false</show-application-state>
+	          <show-application-mode>false</show-application-mode>
+	        </portlet-application>
+	  
+				</container>
       </container>
     </container>
   </page>
