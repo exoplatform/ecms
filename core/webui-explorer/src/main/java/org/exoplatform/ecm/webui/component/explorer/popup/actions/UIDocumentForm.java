@@ -74,7 +74,6 @@ import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
-import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -157,30 +156,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     }
   }
   
-  public void initFieldInput() throws Exception {
-    if (!isAddNew) {    
-      TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-      List<Node> listCategories = taxonomyService.getAllCategories(getNode());
-      Node taxonomyTree;
-      for (Node itemNode : listCategories) {
-        taxonomyTree = getRootPathTaxonomy(itemNode);
-        if (taxonomyTree == null) continue;
-        String categoryPath = itemNode.getPath().replaceAll(taxonomyTree.getPath(), "");
-        if (!getListTaxonomy().contains(taxonomyTree.getName() + categoryPath)) {
-          listTaxonomyName.add(getCategoryLabel(taxonomyTree.getName() + categoryPath));
-          getListTaxonomy().add(taxonomyTree.getName() + categoryPath);
-        }
-      }
-    }
-    UIFormMultiValueInputSet uiFormMultiValue = createUIComponent(UIFormMultiValueInputSet.class, null, null);
-    uiFormMultiValue.setId(FIELD_TAXONOMY);
-    uiFormMultiValue.setName(FIELD_TAXONOMY);
-    uiFormMultiValue.setType(UIFormStringInput.class);
-    uiFormMultiValue.setValue(listTaxonomyName);
-    uiFormMultiValue.setEditable(false);
-    addUIFormInput(uiFormMultiValue);
-  }
-  
   @SuppressWarnings("unchecked")
   public void doSelect(String selectField, Object value) throws Exception {
     isUpdateSelect = true;    
@@ -236,6 +211,29 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 	  return getLastModifiedDate(getCurrentNode());
   }
   
+  public void renderField(String name) throws Exception {
+    if (FIELD_TAXONOMY.equals(name)) {
+      if (!isAddNew && !isUpdateSelect) {    
+        TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
+        List<Node> listCategories = taxonomyService.getAllCategories(getNode());
+        Node taxonomyTree;
+        for (Node itemNode : listCategories) {
+          taxonomyTree = getRootPathTaxonomy(itemNode);
+          if (taxonomyTree == null) continue;
+          String categoryPath = itemNode.getPath().replaceAll(taxonomyTree.getPath(), "");
+          if (!getListTaxonomy().contains(taxonomyTree.getName() + categoryPath)) {
+            if (!listTaxonomyName.contains(getCategoryLabel(taxonomyTree.getName() + categoryPath)))
+              listTaxonomyName.add(getCategoryLabel(taxonomyTree.getName() + categoryPath));
+            getListTaxonomy().add(taxonomyTree.getName() + categoryPath);
+          }
+        }
+        UIFormMultiValueInputSet uiSet = getChildById(FIELD_TAXONOMY);
+        if (uiSet != null) uiSet.setValue(listTaxonomyName);
+      } 
+    }    
+    super.renderField(name);
+  }  
+  
   static  public class SaveActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm documentForm = event.getSource();
@@ -269,6 +267,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         UIFormMultiValueInputSet uiSet = documentForm.getChild(UIFormMultiValueInputSet.class);
         if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals("categories")) {
           hasCategories = true;
+          listTaxonomy = (List<String>) uiSet.getValue();
           for (String category : listTaxonomy) {
             categoriesPath.concat(category).concat(",");
           }
@@ -590,8 +589,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       String idx = objectid.replaceAll(FIELD_TAXONOMY,"");
       try {
         int idxInput = Integer.parseInt(idx);
-        if (idxInput < uiDocumentForm.getListTaxonomy().size())
-          uiDocumentForm.getListTaxonomy().remove(idxInput);
+        uiDocumentForm.getListTaxonomy().remove(idxInput);
+        uiDocumentForm.getlistTaxonomyName().remove(idxInput);        
+        uiDocumentForm.setIsUpdateSelect(true);
       } catch (NumberFormatException ne) {
       } catch (Exception e) {
       }

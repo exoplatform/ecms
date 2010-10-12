@@ -127,8 +127,6 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   }
 
   public void activate() throws Exception {
-    UIDocumentForm uiDocumentForm = getChild(UIDocumentForm.class);
-    uiDocumentForm.initFieldInput();
   }
 
   /**

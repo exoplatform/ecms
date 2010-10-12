@@ -209,7 +209,6 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         uiDocumentWorkspace.addChild(uiController);
         uiController.initOptionBlockPanel();
         uiController.setRendered(true);
-        uiController.getChild(UIDocumentForm.class).initFieldInput();
         context.addUIComponentToUpdateByAjax(uiWorkingArea);
         if (event != null) {
         	uiExplorer.updateAjax(event);
