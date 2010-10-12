@@ -148,6 +148,11 @@
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-parser</artifactId>
+      <version>${project.version}</version>
+    </dependency>		
   </dependencies>
 
 <!-- 
@@ -177,6 +182,11 @@ exo-ecms-packaging-ecmdemo-webapp
               <artifactId>exo-ecms-core-services</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
+            <jarModule>
+              <groupId>org.exoplatform.ecms</groupId>
+              <artifactId>exo-ecms-core-parser</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>						
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-core-viewer</artifactId>

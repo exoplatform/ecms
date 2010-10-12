@@ -35,9 +35,10 @@
     <org.exoplatform.portal.version>3.1.6-PLF-SNAPSHOT</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>1.0.1-SNAPSHOT</org.exoplatform.commons.version>
-		<org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
+    <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
     <chromattic.version>1.0.3</chromattic.version>
     <xcmis.version>1.1.1-SNAPSHOT</xcmis.version>
+    <xml.parser.version>3.1</xml.parser.version>
     <!-- workflow implementations -->
     <org.jbpm.jbpm3>3.2.8</org.jbpm.jbpm3>
     <bonita.version>4.1</bonita.version>
@@ -269,6 +270,7 @@
         <artifactId>mockito-all</artifactId>
         <version>${mockito.version}</version>
       </dependency>
+     
     </dependencies>
   </dependencyManagement>
   <build>
@@ -373,7 +375,7 @@
     <module>ext</module>
     <module>delivery</module>
     <module>packaging</module>
-		<module>examples</module>
+    <module>examples</module>
     <module>docs</module>
   </modules>
 </project>
