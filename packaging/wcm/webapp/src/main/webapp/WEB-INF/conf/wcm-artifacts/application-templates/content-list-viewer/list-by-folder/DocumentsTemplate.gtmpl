@@ -107,7 +107,7 @@
 														%><div class="Summary">$itemSummary</div><% 
 													}
 													if (isShowReadmore) {
-													  %><div class="ClearBoth"><span></span></div><div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
+													  %><div class="ClearBoth"><span></span></div><div class="ReadLink"><a href="$itemWebdavLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%
 													}
 													%>
 												</div>
