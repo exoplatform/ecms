@@ -176,7 +176,13 @@ public class UIJcrExplorerContainer extends UIContainer {
       uiActionbar.setTabOptions(viewList.get(0));
       uiActionbar.setRendered(isShowActionBar);
       UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
-      uiWorkingArea.setRenderedChild(UIDrivesArea.class);
+      String usecase =  preference.getValue(UIJCRExplorerPortlet.USECASE, "").trim();
+      if ((usecase != null) && UIJCRExplorerPortlet.SELECTION.equals(usecase)) {
+        uiWorkingArea.setRenderedChild(UIDrivesArea.class);
+      } else {
+        uiWorkingArea.setRenderedChild(UIDocumentWorkspace.class);
+        uiJCRExplorer.refreshExplorer();
+      }
       UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
       uiSideBar.setRendered(true);
       if (uiSideBar.isRendered()) {
