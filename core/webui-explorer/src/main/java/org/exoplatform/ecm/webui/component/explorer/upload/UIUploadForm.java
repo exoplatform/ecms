@@ -434,11 +434,19 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           String taxonomyPath = null;
           if (listTaxonomyNameNew != null) {
             for(String categoryPath : listTaxonomyNameNew) {
-              try {
+              try {           	 
                 if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
-                taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
-                taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
-                taxonomyService.getTaxonomyTree(repository, taxonomyTree).hasNode(taxonomyPath);
+                if(categoryPath.indexOf("/")>0)
+                {
+	                taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
+	                taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
+	                taxonomyService.getTaxonomyTree(repository, taxonomyTree).hasNode(taxonomyPath);
+                }
+                else
+                {
+                	taxonomyTree = categoryPath;   
+                	taxonomyPath = "";
+                }
               } catch (ItemNotFoundException e) {
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, 
                     ApplicationMessage.WARNING)) ;
@@ -500,9 +508,17 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 if (newNode != null) {
                   for (String categoryPath : listTaxonomyNameNew) {
                     try {
-                      if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
-                      taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
-                      taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
+                      if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);                      
+                      if(categoryPath.indexOf("/")>0)
+                      {
+      	                taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
+      	                taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);      	                
+                      }
+                      else
+                      {
+                      	taxonomyTree = categoryPath;    
+                      	taxonomyPath = "";
+                      }
                       taxonomyService.addCategory(newNode, taxonomyTree, taxonomyPath);
                     } catch (ItemExistsException e) {
                       uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
@@ -545,8 +561,16 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 for (String categoryPath : listTaxonomyNameNew) {
                   try {              
                     if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
-                    taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
-                    taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
+                    if(categoryPath.indexOf("/")>0)
+                    {
+    	                taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
+    	                taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);    	                
+                    }
+                    else
+                    {
+                    	taxonomyTree = categoryPath;   
+                    	taxonomyPath = "";
+                    }                    
                     taxonomyService.addCategory(node, taxonomyTree, taxonomyPath);
                   } catch (ItemExistsException e) {
                     uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
