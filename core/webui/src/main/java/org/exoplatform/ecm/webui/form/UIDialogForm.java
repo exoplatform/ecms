@@ -1158,7 +1158,7 @@ public class UIDialogForm extends UIForm {
         } else if(childNode == null && jcrPath.equals("/node") && node != null) {
           richtextInput.setValue(node.getName());
         } else {
-          richtextInput.setValue(null);
+          richtextInput.setValue("");
         }
       }
     }
