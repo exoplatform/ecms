@@ -331,7 +331,10 @@ public class NewsletterConstant {
       User currentUser = userHandler.findUserByName(newAccessPermission);
       if (currentUser == null) {
         PageList<User> listUsers = userHandler.findUsersByGroup(newAccessPermission.split(":")[1]);
-        users = listUsers.getAll();
+        List<User> usersTmp = listUsers.getAll();
+        for (User userTmp: usersTmp) {
+        	users.add(userTmp);
+        }
       } else
         users.add(currentUser);
       for(User user : users){
