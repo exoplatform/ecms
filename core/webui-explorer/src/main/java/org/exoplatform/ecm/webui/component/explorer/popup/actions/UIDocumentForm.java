@@ -264,8 +264,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       int index = 0;
       List<String> listTaxonomy = documentForm.getListTaxonomy();
       if (documentForm.isReference) {
-        UIFormMultiValueInputSet uiSet = documentForm.getChild(UIFormMultiValueInputSet.class);
-        if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals("categories")) {
+        UIFormMultiValueInputSet uiSet = documentForm.getChildById(FIELD_TAXONOMY);
+        if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals(FIELD_TAXONOMY)) {
           hasCategories = true;
           listTaxonomy = (List<String>) uiSet.getValue();
           for (String category : listTaxonomy) {

@@ -840,8 +840,8 @@ public class UIDialogForm extends UIForm {
       UIFormMultiValueInputSet uiMulti;
       if(node == null &&childNode == null) {
         uiMulti = findComponentById(name);
-        isFirstTimeRender = true;
         if(uiMulti == null) {
+          isFirstTimeRender = true;
           uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
           uiMulti.setId(name);
           uiMulti.setName(name);
@@ -886,6 +886,7 @@ public class UIDialogForm extends UIForm {
         } 
       } else {
         uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
+        isFirstTimeRender = true;
         uiMulti.setId(name);
         uiMulti.setName(name);
         uiMulti.setType(UIFormStringInput.class);
@@ -913,6 +914,7 @@ public class UIDialogForm extends UIForm {
         addUIFormInput(uiMulti);
       }
       List<String> valueList = new ArrayList<String>();
+      boolean valueListIsSet = false;
       if((node != null) && node.hasNode("jcr:content") && (childNode == null)) {
         Node jcrContentNode = node.getNode("jcr:content");
         if(jcrContentNode.hasProperty(propertyName)) {
@@ -922,6 +924,7 @@ public class UIDialogForm extends UIForm {
           }
           uiMulti.setEditable(formTextField.isEditable());
           uiMulti.setValue(valueList);
+          valueListIsSet = true;
         }
       } else {      
         if(childNode != null) {
@@ -932,10 +935,11 @@ public class UIDialogForm extends UIForm {
             }
             uiMulti.setEditable(formTextField.isEditable());
             uiMulti.setValue(valueList);
+            valueListIsSet = true;
           }
         }
       }
-      if(node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
+      if(!valueListIsSet && node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
         String propertyPath = jcrPath.substring("/node/".length());
         if(node.hasProperty(propertyPath)) {
           Value[] values = node.getProperty(propertyPath).getValues();
