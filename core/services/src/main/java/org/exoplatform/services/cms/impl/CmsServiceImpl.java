@@ -705,6 +705,7 @@ public class CmsServiceImpl implements CmsService {
           } else {
             node.setProperty(propertyName, session2.getValueFactory().createValue((String)value));
           }
+          session2.logout();
         } else {
             Node referenceNode = null;
             try {
@@ -724,7 +725,7 @@ public class CmsServiceImpl implements CmsService {
             }
         }
         session.save();
-        session.logout();
+//        session.logout();
       } else if(value instanceof String[]) {
         String[] values = (String[]) value;        
         String referenceWorksapce = null;
@@ -740,10 +741,11 @@ public class CmsServiceImpl implements CmsService {
             Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);            
             if(session2.getRootNode().hasNode(referenceNodeName)) {
               Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
-              valueObj = session2.getValueFactory().createValue(referenceNode);              
+              valueObj = session2.getValueFactory().createValue(referenceNode);
             }else {             
               valueObj = session2.getValueFactory().createValue(v);
-            }            
+            }
+            session2.logout();
           }else {            
             if(session.getRootNode().hasNode(v)) {
               Node referenceNode = session.getRootNode().getNode(v);
@@ -959,6 +961,7 @@ public class CmsServiceImpl implements CmsService {
               node.setProperty(propertyName, session2.getValueFactory().createValue((String)value));
             }
           }
+          session2.logout();
         } else {
           Node referenceNode = null;
           try {
@@ -982,7 +985,7 @@ public class CmsServiceImpl implements CmsService {
           }
         }
         session.save();
-        session.logout();
+//        session.logout();
       } else if(value instanceof String[]) {
         String[] values = (String[]) value;        
         String referenceWorksapce = null;
@@ -1017,7 +1020,7 @@ public class CmsServiceImpl implements CmsService {
           node.setProperty(propertyName, list.toArray(new Value[list.size()]));
         }
         session.save();
-        session.logout();
+//        session.logout();
       }       
       break ;
     default:
