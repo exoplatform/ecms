@@ -112,6 +112,8 @@ public class UITask extends UIForm implements UISelectable {
   private static final String NODE_PATH_VARIABLE = "nodePath";
   private static final String WORKSPACE_VARIABLE = "srcWorkspace";
   private static final String REPOSITORY_VARIABLE = "repository";
+  private static final String DEST_PATH = "exo:destPath";
+  private static final String DEST_WORKSPACE = "exo:destWorkspace";  
 
   private static final String DELEGATE_FIELD = "delegator";
   private Form form;
@@ -514,11 +516,11 @@ public class UITask extends UIForm implements UISelectable {
             if(nodePath != null) {
               Session session = sessionProvider.getSession(srcWorkspace, repositoryService.getRepository(repository));
               Node node = (Node)session.getItem(nodePath);
-              if(node.isLocked()) {
+              if(node.isLocked() && node.hasProperty(DEST_PATH) && node.hasProperty(DEST_WORKSPACE)) {
                 String actionName = (String)variablesForService.get("actionName");
                 Node actionNode = uiTask.getAction((Node)session.getItem(srcPath), actionName);
-                String destPath = actionNode.getProperty("exo:destPath").getString() + nodePath.substring(nodePath.lastIndexOf("/"));
-                String destWorkspace = actionNode.getProperty("exo:destWorkspace").getString();
+                String destPath = actionNode.getProperty(DEST_PATH).getString() + nodePath.substring(nodePath.lastIndexOf("/"));
+                String destWorkspace = actionNode.getProperty(DEST_WORKSPACE).getString();
                 Session desSession = sessionProvider.getSession(destWorkspace, repositoryService.getRepository(repository));
                 Node destNode = (Node)desSession.getItem(destPath);
                 LockUtil.changeLockToken(nodePath, destNode);
