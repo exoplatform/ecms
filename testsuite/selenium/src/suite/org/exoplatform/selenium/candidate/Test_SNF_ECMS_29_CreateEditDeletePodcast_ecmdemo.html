@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>Test_SNF_ECMS_07_ShowDraftContent_ecmdemo</title>
+<title>Test_SNF_ECMS_29_CreateEditDeletePodcast_ecmdemo</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_07_ShowDraftContent_ecmdemo</td></tr>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_29_CreateEditDeletePodcast_ecmdemo</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -23,7 +23,12 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Log in</td>
+	<td>-- Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -53,12 +58,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Create document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>-- Go to Sites Explorer</td>
 	<td></td>
 </tr>
 <tr>
@@ -67,6 +67,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--Open&nbsp;&nbsp;driver pane</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
 	<td></td>
@@ -77,48 +82,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Management</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Sites Management</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
+	<td>echo</td>
+	<td>--Open Private driver</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>link=Private</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>link=Private</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
+	<td>echo</td>
+	<td>--Go to Detail View</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=documents</td>
+	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=documents</td>
+	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
+	<td>echo</td>
+	<td>-- Go to Action tab</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Add Podcast</td>
 	<td></td>
 </tr>
 <tr>
@@ -133,58 +143,38 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>title</td>
-	<td></td>
+	<td>selectTemplate</td>
+	<td>label=Podcast</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>title</td>
-	<td>Test_SNF_ECMS_07</td>
+	<td>select</td>
+	<td>selectTemplate</td>
+	<td>label=Podcast</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>name</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Test_SNF_ECMS_07</td>
+	<td>Podcast</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>type</td>
+	<td>title</td>
+	<td>Titile</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[@id='cke_contents_summary']/iframe</td>
-	<td></td>
+	<td>type</td>
+	<td>link</td>
+	<td>google.com</td>
 </tr>
 <tr>
-	<td>selectFrame</td>
-	<td>//td[@id='cke_contents_summary']/iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>//html/body</td>
-	<td>hello</td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>relative=top</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//td[@id='cke_contents_content']/iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>//html/body</td>
-	<td>hello</td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>relative=top</td>
-	<td></td>
+	<td>type</td>
+	<td>author</td>
+	<td>Dung</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -198,7 +188,72 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Edit Podcast</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Podcast</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Podcast</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Edit Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>description</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>description</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -213,72 +268,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Check the draft content in CLV</td>
+	<td>--Delete</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Overview</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Overview</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextNotPresent</td>
-	<td>Test_SNF_ECMS_07</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Test_SNF_ECMS_07</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>EditingOptions</td>
-	<td>label=Edit</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementPresent</td>
-	<td>link=Test_SNF_ECMS_07</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>EditingOptions</td>
-	<td>label=Published</td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Delete document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Test_SNF_ECMS_07</td>
+	<td>link=Podcast</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=Test_SNF_ECMS_07</td>
+	<td>link=Podcast</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,8 +307,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-- Log out</td>
+	<td>verifyTextNotPresent</td>
+	<td>link=Podcast</td>
 	<td></td>
 </tr>
 <tr>

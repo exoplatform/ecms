@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>Test_SNF_ECMS_07_ShowDraftContent_ecmdemo</title>
+<title>Test_SNF_ECMS_27_CreateEditDeleteSampleNode_ecmdemo</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_07_ShowDraftContent_ecmdemo</td></tr>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_27_CreateEditDeleteSampleNode_ecmdemo</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -53,12 +53,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Create document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>-- Select drive</td>
 	<td></td>
 </tr>
 <tr>
@@ -78,47 +73,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Sites Management</td>
+	<td>link=Private</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Sites Management</td>
+	<td>link=Private</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
+	<td>echo</td>
+	<td>--- Create document</td>
 	<td></td>
 </tr>
 <tr>
@@ -129,6 +94,26 @@
 <tr>
 	<td>click</td>
 	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectTemplate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>selectTemplate</td>
+	<td>label=Sample node</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//option[@value='exo:sample']</td>
 	<td></td>
 </tr>
 <tr>
@@ -139,51 +124,26 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>Test_SNF_ECMS_07</td>
+	<td>Test_SNF_ECMS_27</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Test_SNF_ECMS_07</td>
+	<td>Test_SNF_ECMS_27</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
+	<td>type</td>
+	<td>summary</td>
+	<td>sample node</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[@id='cke_contents_summary']/iframe</td>
-	<td></td>
+	<td>type</td>
+	<td>content</td>
+	<td>sample node</td>
 </tr>
 <tr>
-	<td>selectFrame</td>
-	<td>//td[@id='cke_contents_summary']/iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>//html/body</td>
-	<td>hello</td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>relative=top</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//td[@id='cke_contents_content']/iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>//html/body</td>
-	<td>hello</td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>relative=top</td>
+	<td>echo</td>
+	<td>link=Save as Draft</td>
 	<td></td>
 </tr>
 <tr>
@@ -198,7 +158,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -212,34 +172,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
-	<td>-- Check the draft content in CLV</td>
+	<td>link=Edit Document</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Overview</td>
+	<td>link=Edit Document</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Overview</td>
+	<td>click</td>
+	<td>link=Edit Document</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForTextNotPresent</td>
-	<td>Test_SNF_ECMS_07</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextNotPresent</td>
-	<td>Test_SNF_ECMS_07</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>EditingOptions</td>
-	<td>label=Edit</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -247,43 +197,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>link=Test_SNF_ECMS_07</td>
+	<td>type</td>
+	<td>description</td>
+	<td>this is a test</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save as Draft</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>EditingOptions</td>
-	<td>label=Published</td>
+	<td>click</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Delete document</td>
+	<td>--- Delete</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Test_SNF_ECMS_07</td>
+	<td>link=Test_SNF_ECMS_27</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=Test_SNF_ECMS_07</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
+	<td>link=Test_SNF_ECMS_27</td>
 	<td></td>
 </tr>
 <tr>
@@ -302,8 +262,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_27</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_27</td>
 	<td></td>
 </tr>
 <tr>
