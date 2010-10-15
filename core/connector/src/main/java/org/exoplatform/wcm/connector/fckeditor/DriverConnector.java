@@ -192,7 +192,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   		@QueryParam("filterBy") String filterBy)
   		throws Exception {
     try {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer()
       	.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
