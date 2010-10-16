@@ -33,3 +33,133 @@
 .cke_show_borders {
 	background:#fff;
 }
+
+/************ UIToolbarContainer **************/
+
+.UIToolbarContainer .NormalContainerBlock .LeftContainerBlock .RightContainerBlock .ToolbarContainer {
+	background: #343a50;
+	border: none;
+	height: 30px;
+}
+
+.UIToolbarContainer .ToolbarContainer .UITableColumnContainer .TRContainer {
+	height: 30px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .UIStarToolBarPortlet {
+	background: url("background/LogoStart.gif") no-repeat 10px top;
+	height: 30px;
+	width: 64px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .UIHorizontalTabs .TabsContainer {
+	float: left;
+	height: 30px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .UIHorizontalTabs .UITab {
+	background: url("background/LineMenu.gif") no-repeat left top;
+	line-height: 30px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .UIAdminToolbarPortlet .UIHorizontalTabs .UITab {
+	background: url("background/LineMenu.gif") no-repeat left top;
+}
+
+.UIToolbarContainer .ToolbarContainer .UITableColumnContainer .TRContainer a {
+	color: #ffd400;
+	padding: 0 15px;
+	font-weight: normal;
+	background: none;
+	margin: 0px;
+	line-height: 30px;
+}
+
+.UIToolbarContainer .ToolbarContainer .UITableColumnContainer a:hover {
+	color: #abadb0;
+}
+
+.UIToolbarContainer .ToolbarContainer .UITableColumnContainer a.ToolbarArrowIcon {
+	background: url("background/ToolbarArrowIcon.gif") no-repeat right center;
+	padding: 0 25px 0 15px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .EditingPortletTDContainer {
+	margin: 5px 0 0 30px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .EditingPortletTDContainer select {
+	border: 1px solid #0d1223;
+	background: #151a30;
+	color: #ABADB0;
+	padding: 0px 0px 0px 5px;
+	line-height: 18px;
+	height: 20px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .EditingPortletTDContainer option {
+	background: none;
+}
+
+
+.UIToolbarContainer .UITableColumnContainer .MenuItemContainer {
+	border: 1px solid #343a50;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem {
+	background: #3E445D;
+	border-top: 1px solid #555a6e;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem .ArrowIcon {
+	background:url("background/ArrowIcon.gif") no-repeat right center;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem a {
+	color: #f0f0f0;
+	padding-right: 25px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem a:hover {
+	background-color: #343a50;
+}
+
+.UIToolbarContainer .UITableColumnContainer .TitleBar {
+	background: #606F7D;
+	color: #20263F;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem .ChangeLanguageIcon {
+	background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIToolbarContainer/background/ToolbarContainer.gif") no-repeat 2px -192px;
+	padding-left: 35px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem .ChangeSkinIcon {
+	background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIToolbarContainer/background/ToolbarContainer.gif") no-repeat 2px -224px;
+	padding-left: 35px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem .SignOutIcon {
+	background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIToolbarContainer/background/ToolbarContainer.gif") no-repeat 2px -288px;
+	padding-left: 35px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem .DefaultPageIcon {
+	background:url("/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/DefaultNodeIcon.gif") no-repeat 10px center;
+	padding-left: 32px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem .AddPageIcon {
+	background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIToolbarContainer/background/ToolbarContainer.gif") no-repeat 2px -320px;
+	padding-left: 32px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem .EditPageIcon {
+	background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIToolbarContainer/background/ToolbarContainer.gif") no-repeat 2px -352px;
+	padding-left: 32px;
+}
+
+.UIToolbarContainer .UITableColumnContainer .MenuItem .EditSiteIcon {
+	background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIToolbarContainer/background/ToolbarContainer.gif") no-repeat 2px -384px;
+	padding-left: 32px;
+}
