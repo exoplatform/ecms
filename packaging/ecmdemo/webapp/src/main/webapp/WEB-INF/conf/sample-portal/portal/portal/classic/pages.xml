@@ -263,7 +263,7 @@
 	              </preference>
 	              <preference>
 	                <name>showLink</name>
-	                <value>false</value>
+	                <value>true</value>
 	                <read-only>false</read-only>
 	              </preference>
 	              <preference>
@@ -301,7 +301,7 @@
 	              </preference>
 	              <preference>
 	                <name>nodeIdentifier</name>
-	                <value>/sites content/live/classic/web contents/site artifacts/UsingExoSocial</value>
+	                <value>/sites content/live/classic/web contents/site artifacts/UsingACME</value>
 	                <read-only>false</read-only>
 	              </preference>
 	              <preference>
