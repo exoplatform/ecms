@@ -202,6 +202,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Close</td>
 	<td></td>
@@ -212,9 +217,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
 	<td>-- Go to Collaboration Tab</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -238,8 +248,8 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td></td>
 	<td>--Open form to add language</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -248,18 +258,33 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td></td>
 	<td>--Go to Add language Tab</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIMultiLanguageManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUITabPane(this, 'UIMultiLanguageManager', 'UIAddLanguageContainer')&quot;]</td>
+	<td>//div[@id='UIMultiLanguageManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>typeLang</td>
+	<td>label=Vietnamese</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>typeLang</td>
 	<td>label=Vietnamese</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='vi']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -327,6 +352,11 @@
 	<td>--Go to View language Tab</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id=&quot;UIMultiLanguageManager&quot;]/div/div/div[1]/div/div/div/div/div[1]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id=&quot;UIMultiLanguageManager&quot;]/div/div/div[1]/div/div/div/div/div[1]/div/div/div/div</td>
 	<td></td>
@@ -352,6 +382,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add/Edit localised contents</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Add/Edit localised contents</td>
 	<td></td>
@@ -365,6 +400,11 @@
 	<td>select</td>
 	<td>languages</td>
 	<td>label=English</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=View</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>

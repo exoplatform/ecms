@@ -57,6 +57,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
 	<td></td>
@@ -92,8 +97,18 @@
 	<td>label=collaboration</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='collaboration']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//option[@value='collaboration']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Add Path']</td>
 	<td></td>
 </tr>
 <tr>
@@ -109,6 +124,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[4]/td[2]/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Add Permission']</td>
 	<td></td>
 </tr>
 <tr>
@@ -152,13 +172,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>waitForElementPresent</td>
 	<td>admin-view</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
+	<td>admin-view</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>icon-view</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>icon-view</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
@@ -263,7 +298,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -309,6 +344,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
 	<td></td>
 </tr>
 <tr>
@@ -377,6 +417,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Disapprove</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Disapprove</td>
 	<td></td>
@@ -427,8 +472,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Manage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UITaskManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -437,8 +492,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Modify</td>
 	<td></td>
 </tr>
 <tr>
@@ -512,8 +577,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=30</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=30</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Approve</td>
 	<td></td>
 </tr>
 <tr>
@@ -529,6 +604,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -558,37 +638,42 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=2010</td>
+	<td>//div[2]/div/div[1]/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=2010</td>
+	<td>//div[2]/div/div[1]/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=July</td>
+	<td>//div[2]/div/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=July</td>
+	<td>//div[2]/div/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=05 July-11 July 2010</td>
+	<td>//div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=05 July-11 July 2010</td>
+	<td>//div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
 	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>article</td>
 	<td></td>
 </tr>
 <tr>
@@ -607,8 +692,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage Drives</td>
 	<td></td>
 </tr>
 <tr>
@@ -642,8 +737,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -653,7 +758,12 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>Workflow</td>
 	<td></td>
 </tr>
 <tr>

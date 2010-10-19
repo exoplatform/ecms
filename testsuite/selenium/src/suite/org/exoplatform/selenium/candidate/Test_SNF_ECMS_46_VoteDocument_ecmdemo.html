@@ -97,7 +97,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
 	<td></td>
 </tr>
@@ -112,7 +112,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Actions</td>
 	<td></td>
 </tr>
@@ -169,6 +169,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -237,6 +242,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//div[@id='UIDocumentInfo']/div[2]/div/div/div/div/div/div[2]/div[2]</td>
+	<td>4.0</td>
+</tr>
+<tr>
 	<td>verifyText</td>
 	<td>//div[@id='UIDocumentInfo']/div[2]/div/div/div/div/div/div[2]/div[2]</td>
 	<td>4.0</td>
@@ -257,6 +267,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Delete</td>
 	<td></td>
@@ -269,6 +284,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>link=Sample node</td>
 	<td></td>
 </tr>
 <tr>
