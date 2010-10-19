@@ -60,7 +60,6 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.JcrInputProperty;
@@ -89,6 +88,7 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormInput;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -694,6 +694,7 @@ public class UIDialogForm extends UIForm {
       inputProperty.setJcrPath(jcrPath);
       setInputProperty(name, inputProperty);
 		} else {
+		  if (inputProperty.getValue() != null) {
 		  String oldValue = inputProperty.getValue().toString();
 		  if ((oldValue != null) && (!oldValue.equals(newValue))) {
 				Iterator componentSelector = componentSelectors.keySet().iterator();
@@ -709,6 +710,7 @@ public class UIDialogForm extends UIForm {
 				    }
 				  }
 				}
+		  }
 		  }
 		}
     inputProperty.setValue(newValue);
