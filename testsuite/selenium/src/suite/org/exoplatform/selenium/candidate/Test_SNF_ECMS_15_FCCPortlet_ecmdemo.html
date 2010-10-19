@@ -172,13 +172,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-- Add action for folder</td>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Explorer</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>echo</td>
+	<td>-- Add action for folder</td>
 	<td></td>
 </tr>
 <tr>
@@ -194,6 +194,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Sites Management</td>
 	<td></td>
 </tr>
 <tr>
@@ -264,7 +269,7 @@
 <tr>
 	<td>type</td>
 	<td>actionName</td>
-	<td>Test</td>
+	<td>Test_SNF_ECMS_15</td>
 </tr>
 <tr>
 	<td>addSelection</td>
@@ -284,6 +289,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -354,7 +364,7 @@
 <tr>
 	<td>type</td>
 	<td>UIFCCMessageFormTextareaInput</td>
-	<td>Chao cac ban</td>
+	<td>Test_SNF_ECMS_15_FCCPortlet_ecmdemo</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -454,17 +464,17 @@
 <tr>
 	<td>waitForElementPresent</td>
 	<td>your_nameFieldName</td>
-	<td>hi</td>
+	<td>Linh</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>your_nameFieldName</td>
-	<td>hi</td>
+	<td>Nhi</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>your_addressFieldName</td>
-	<td>hi</td>
+	<td>Thai Ha - Ha Noi</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -602,8 +612,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage View</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Manage View</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -647,7 +667,17 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
@@ -659,6 +689,11 @@
 <tr>
 	<td>echo</td>
 	<td>-- Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>
