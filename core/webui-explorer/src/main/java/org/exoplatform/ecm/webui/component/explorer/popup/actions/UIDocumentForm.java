@@ -450,8 +450,13 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         String wsFieldName = (String)fieldPropertiesMap.get("workspaceField");
         String wsName = "";
         if(wsFieldName != null && wsFieldName.length() > 0) {
-          wsName = (String)uiForm.<UIFormInputBase>getUIInput(wsFieldName).getValue();
-          ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true);      
+          if (uiForm.<UIFormInputBase>getUIInput(wsFieldName) != null) {
+            wsName = (String)uiForm.<UIFormInputBase>getUIInput(wsFieldName).getValue();
+            ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true);
+          } else {
+            wsName = explorer.getCurrentWorkspace();            
+            ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, false);
+          }                
         }
         if(selectorParams != null) {
           String[] arrParams = selectorParams.split(",");
