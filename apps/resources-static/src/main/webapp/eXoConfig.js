@@ -19,40 +19,44 @@ CKEDITOR.editorConfig = function( config ){
 		['Cut','Copy','PasteText','-','SpellCheck'],
 		['Undo','Redo','-','RemoveFormat'],
 		'/',
-		['Bold','Italic','Underline','StrikeThrough'],
-		['OrderedList','UnorderedList'],
+		['Bold','Italic','Underline','Strike'],
+		['NumberedList','BulletedList'],
 		['Link','Unlink','Anchor'],
 		['Image','Flash','Table','SpecialChar'],
 		['TextColor','BGColor'],
-		['FitWindow','ShowBlocks'],
-		['Style','FontFormat','FontName','FontSize']
+		['Maximize', 'ShowBlocks'],
+		['Style','Format','Font','FontSize']
 	] ;
 
 	config.toolbar_Basic = [
-		['Source','-','Bold','Italic','Underline','StrikeThrough','-','OrderedList','UnorderedList','Outdent','Indent'],
-		['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-		['Blockquote','-','Link','Unlink','-','FitWindow','ShowBlocks'],	
-		['Style','FontFormat','FontName','FontSize','-','Maximize']
+		['Source','-','Bold','Italic','Underline','Strike','-','NumberedList','BulletedList','Outdent','Indent'],
+		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+		'/',
+		['Blockquote','-','Link','Unlink', 'ShowBlocks'],		
+		['Style','Format','Font','FontSize','-','Maximize']
 	] ;
 
 	config.toolbar_CompleteWCM = [
-		['Source','Templates','-','FitWindow','ShowBlocks'],
+		['Source','Templates','ShowBlocks'],
 		['Cut','Copy','PasteText','-','SpellCheck','-','Undo','Redo'],
 		['insertGadget.btn','Flash','Table','SpecialChar', 'content.btn'], 
-		'/',	['Bold','Italic','Underline','StrikeThrough','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull','-','OrderedList','UnorderedList','-','TextColor','BGColor','-','RemoveFormat'],
-		['Link','insertPortalLink.btn','Unlink','Anchor'],['Style','FontFormat','FontName','FontSize']
+		'/',	
+		['Bold','Italic','Underline','Strike','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','TextColor','BGColor','-','RemoveFormat'],
+		['Link','insertPortalLink.btn','Unlink','Anchor'],
+		'/',
+		['Style','Format','Font','FontSize', '-' ,'Maximize']
 	] ;
-
+	
 	config.toolbar_BasicWCM = [
-		['Source','-','Bold','Italic','Underline','StrikeThrough','-','OrderedList','UnorderedList','Outdent','Indent'],
-		['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-		['Blockquote','-','Link','Unlink','insertPortalLink.btn','content.btn','-','FitWindow','ShowBlocks'],	
-		['Style','FontFormat','FontName','FontSize']
+		['Source','-','Bold','Italic','Underline','Strike','-','NumberedList','BulletedList','Outdent','Indent'],
+		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+		['Blockquote','-','Link','Unlink','insertPortalLink.btn','content.btn','-','Maximize','ShowBlocks'],	
+		['Style','Format','Font','FontSize']
 	] ;
 
 	config.toolbar_SuperBasicWCM = [
 		   ['Source','-','Bold','Italic','Underline'],
-		   ['-','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+		   ['-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
 		   ['-','Link','Unlink','insertPortalLink.btn','insertGadget.btn','content.btn'],	
 	] ;
 };
