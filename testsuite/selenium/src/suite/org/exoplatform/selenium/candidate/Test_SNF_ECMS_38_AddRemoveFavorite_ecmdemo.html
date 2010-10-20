@@ -117,6 +117,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Actions</td>
 	<td></td>
@@ -124,6 +129,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -152,8 +162,18 @@
 	<td>Test_SNF_ECMS_38</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -222,13 +242,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_38</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
 	<td>link=Test_SNF_ECMS_38</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>--Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>
