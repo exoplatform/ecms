@@ -25,7 +25,7 @@
 					 <div class="EdittingToolBar " >
 						<div class="EdittingToolBarL">
 							<div class="EdittingToolBarR">
-								<div class="EdittingToolBarC clearfix">
+								<div class="EdittingToolBarC ClearFix">
 								<%								
 								if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 									%>
