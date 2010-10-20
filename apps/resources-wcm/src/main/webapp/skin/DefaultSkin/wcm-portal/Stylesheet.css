@@ -7,7 +7,7 @@ td {
 }
 
 .UITabPane .UITabContentContainer .UITabContent {
-  height: auto;
+  height: 100% !important;
 }
 
 .UIWCMColumnContainer {
@@ -111,8 +111,8 @@ td {
 }
 
 .UISiteAdminToolBar {
-  height: 21px;
-  padding-right: 10px;
+  height: auto;
+  padding-right: 20px;
   float: right;
 }
 
@@ -160,7 +160,7 @@ td {
 }
 
 .UIPresentationContainer a {
-  color: blue;
+  color: #0068FF;
 }
 
 .UIPresentationContainer a:hover {
@@ -270,11 +270,159 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
     height:20px;
 }
 
+/* Context Help CSS END */
+
+
+/* QUICK EDIT */
+
+.EdittingToolBarContainer{
+  position:relative;
+  right:0;
+  top:0;
+  z-index:1;
+  width: 90px;
+  float: right;
+  display: none;
+}
+
+.UIPresentationContainer .EdittingToolBarContainer{
+  width: 160px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar {
+  position:absolute;
+  right:0;
+  top:-20px;
+}
+
+.EdittingToolBarContainer .EdittingCurrentState {
+  padding-left: 3px;
+  color: #5E6D7B;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarL {
+  background: url('icons/EdittingToolBarL.png') no-repeat left top;
+  padding-left: 4px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarR {
+  background: url('icons/EdittingToolBarR.png') no-repeat right top;
+  padding-right: 4px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarC {
+  background: url('icons/EdittingToolBarC.png') repeat-x;
+  line-height: 18px;
+  padding:2px 0 0;
+}
+
+.AddContentIcon {
+  background: url('icons/AddContentIcon.png') no-repeat center center;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
+}
+
+.ManageContentIcon {
+  background: url('icons/ManageContentIcon.png') no-repeat center center;
+  margin-left: 6px;
+  display: block;
+  width: 16px;
+}
+
+.PreferencesIcon {
+  background: url('icons/PreferencesIcon.png') no-repeat center center;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
+}
+
+.EdittingContent{
+  position:relative;
+  right:0;
+  top:0;
+  z-index:1;
+  float: right;
+  width: 160px;
+  display: none;
+}
+
+.EdittingContent .EdittingToolBar {
+  position:absolute;
+  right:0;
+}
+
+
+.EdittingContent .EdittingToolBar .EdittingToolBarL {
+  background: url('icons/EdittingContentL.png') no-repeat left top;
+  padding-left: 3px;
+}
+
+
+.EdittingContent .EdittingToolBar .EdittingToolBarC {
+  background: url('icons/EdittingContentC.png') repeat-x;
+  line-height: 20px;
+  padding:2px 0 0;
+}
+
+.EdittingContent .EdittingCurrentState {
+  padding-left: 3px;
+  color: #5E6D7B;
+}
+
+.EditContentIcon {
+  background: url('icons/EditContentIcon.png') no-repeat left center;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
+}
+
+.CloseContentIcon {
+  background: url('icons/CloseContentIcon.png') no-repeat center center;
+  margin-left:6px;
+  width: 16px;
+  display: block;
+}
+
+
+.UISingleContentViewerPortlet .ContainerHoverClass {
+  border:1px solid #bfd5ed;
+}
+
+.UICLVPortlet .ContainerHoverClass {
+  border:1px solid #bfd5ed;
+}
+
+.ContainerHoverClass {
+  border:1px solid #bfd5ed;
+}
+
+.ContainerHoverClass .EdittingToolBarContainer{
+  display: block;
+}
+
+.OneColumnCLVTemplate .Contents .ContainerHoverClassInner {
+  border:1px solid #bfd5ed;
+}
+
+.TwoColumnsCLVTemplate .Contents .ContainerHoverClassInner {
+  border:1px solid #bfd5ed;
+}
+
+.DocumentsCLVTemplate .Contents .ContainerHoverClassInner {
+  border:1px solid #bfd5ed;
+}
+
+.ContainerHoverClassInner .EdittingContent{
+  display: block;
+}
+
 .IconLocked {
   background: url('icons/IconLockedBig.gif') no-repeat right top; /* orientation=lt */
-  background: url('icons/IconLockedBig.gif') no-repeat left top; /* orientation=rt */
+		background: url('icons/IconLockedBig.gif') no-repeat left top; /* orientation=rt */
   width: 20px;
   height: 16px;
   float: left;
 }
-/* Context Help CSS END */
+
+/* QUICK EDIT END */
