@@ -135,7 +135,8 @@ There are 2 main cases when create an upload form: You want to store the image a
 %>
 {code}
 
-* But, this code is not complete. What if you want to display the upload field if the image is blank, otherwise you display the image and an action allow you to remove ? You can do as follow
+* But, this code is not complete. If you want to display the *upload* field, the image must be blank, otherwise you can display the image and an action enables you to remove it. You can do as follows:
+
 {code:language=java}
 <%
 	def image = "image";
@@ -246,7 +247,7 @@ The component {{org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *workspaceField* | {{String}} | [image:error.gif] | The field which allow to select a workspace | {{workspaceField=targetWorkspace}} |
 
-The component {{org.exoplatform.ecm.webui.selector.UIPermissionSelector}} don't need any special parameters
+The component {{org.exoplatform.ecm.webui.selector.UIPermissionSelector}} does not need any special parameters.
 
 See also: [Common parameters|#common-params]
 
@@ -271,10 +272,10 @@ h2. Example
 %>
 {code}
 
-h1. This is an instruction that explains how to add new ECM template with tabs.
+h1. How to add new ECM template with tabs.
 
-To avoid refresh to first tab every action execution, we add new private function to the template with tabs
-In the template we have to insert new piece of code like the following:
+To avoid refreshing the first tab for every action execution, we add a new private function to the template with tabs.
+In the template, we must insert new piece of code like the following:
 {code:lang=java}private String getDisplayTab(String selectedTab) {
 	if ((uicomponent.getSelectedTab() == null && selectedTab.equals("mainWebcontent"))
 			|| selectedTab.equals(uicomponent.getSelectedTab())) {
@@ -320,7 +321,8 @@ private String getSelectedTab(String selectedTab) {
 		</div>
 	</div>{code}
 
-Finally, in order to display selected tab, we'll add into style of UITabContent class
+Finally, to display the selected tab, we will add it into the style of UITabContent class.
 
-{code:lang=html}<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
+{code:lang=html}
+<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
 {code}

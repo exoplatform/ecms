@@ -1,38 +1,38 @@
 h1. component configuration
 
-|| Configuration name || Data type || Sample value || Description ||
-| key | {{String}} | org.exoplatform.services.wcm.publication.WCMPublicationService | Service class location |
-| type | {{String}} | org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl | Service class's implementation location |
-| component-plugins | {{Object}} |  | The plugins that is used inside the component |
-| init-params | {{Object}} | | The intitial parameter that will be used inside the component |
+|| *Configuration name* || *Data type* || *Sample value* || *Description* ||
+| *key* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationService}} | Service class location |
+| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl}} | Service class's implementation location |
+| *component-plugins* | {{Object}} |N/A  | The plugins that are used inside the component |
+| *init-params* | {{Object}} |N/A | The intitial parameter that will be used inside the component |
 
 h2. component-plugin configuration
+* *Description*:
 
-|| Configuration name || Data type || Sample value || Description ||
-| name | {{String}} | Simple publication | Name of component-plugin |
-| set-method | {{String}} | addPublicationPlugin | Set method to start using plugin |
-| type | {{String}} | org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin | Class and location of plugin |
-| description | {{String}} | ... | Some description |
+|| *Configuration name* || *Data type* || *Sample value* || *Description* ||
+| *name* | {{String}} | {{Simple publication}} | Name of component-plugin |
+| *set-method* | {{String}} | {{addPublicationPlugin}} | Set method to start using plugin |
+| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin}} | Class and location of plugin |
 
 h2. init-params configuration
 
 - parameter will be set in pair: name-value and will be placed inside the <value-param> object
-|| Configuration name || Data type || Sample value ||
-| name | {{String}} | useCache | 
-| value | {{String}} | true |
+|| *Configuration name* || *Data type* || *Sample value* ||
+|*name* | {{String}} | {{useCache}} | 
+| *value* | {{String}} | {{true}} |
 
 
-- parameter also can be set in an object, with further infomation will be the object's properties.
-|| Configuration name || Data type || Sample value || Description ||
-| name | {{String}} | cache.config.wcm.composer | |
-| description | {{String}} |  |  |
-| object | {{Object}} |  |  This object will be passed to component as a parameter, this object includes fieldset properties |
+- parameter also can be set in an object, with further information will be the object's properties.
+|| *Configuration name* || *Data type* || *Sample value* || *Description* ||
+| *name* | {{String}} | {{cache.config.wcm.composer}} |The name of the object |
+| *description* | {{String}} |N/A  |The brief description about the object |
+| *object* | {{Object}} |N/A  |  This object will be passed to component as a parameter, this object includes fieldset properties |
 
 h1. external-component-plugins configuration
 
-|| Configuration name || Data type || Sample value || Description ||
-| target-component | {{String}} | org.exoplatform.services.wcm.core.WebSchemaConfigService< | External plugin's class location |
-| component-plugin | {{Object}} |  | Configuration of component that will be used as a plugin |
+|| *Configuration name* || *Data type* || *Sample value* || *Description* ||
+| *target-component* | {{String}} | {{org.exoplatform.services.wcm.core.WebSchemaConfigService<}} | External plugin's class location |
+| *component-plugin* | {{Object}} | N/A | Configuration of component that will be used as a plugin |
 
 h1. Example
 

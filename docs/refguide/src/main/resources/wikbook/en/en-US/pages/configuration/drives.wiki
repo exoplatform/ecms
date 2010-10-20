@@ -1,33 +1,30 @@
 A drive is like a shortcut in the content repository, a quick access to some places for users.
 You can restrict the visibility of this drive to a group/user and apply a specific view depending on the content you have in this area.
 
-For shorter, a drive is the combination of :
-* Path : the root folder of the drive.
-* View : how we can see the contents (by list, thumbnails, coverflow, etc)
-* Role : visible to everybody, a group or a single user
-* Options : can we see hidden nodes ? can we create folders in this drive ?
+A drive is the combination of:
+* Path: the root folder of the drive.
+* View: how we can see the contents (by list, thumbnails, coverflow, etc).
+* Role: visible to everybody, a group or a single user.
+* Options: allow us to specify whether to see hidden nodes or not and to create folders in this drive or not.
 
 h1. Fields
 
-|| || || org.exoplatform.services.cms.drives.*DriveData* ||
-| *name* | {{String}} | Name of the drive, must be unique inside WCM |
+Object type: _org.exoplatform.services.cms.drives.*DriveData*_
+
+||*Field name* ||*Type* || *Description*  ||
+| *name* | {{String}} | Name of the drive. It must be unique|
 | *repository* | {{String}} | Content Repository where to find the root path |
 | *workspace* | {{String}} | Workspace in the Content Repository |
-| *homePath* | {{String}} | root path in the Content Repository. {code} _${userId}_ {code} can be used to use the userId at runtime in the path. |
-| *permissions* | {{String}} | Visibility of the drive based on eXo Rights |
-| | _example_ | {{ {{{*:/platform/users}}} }} |
-| *icon* | {{String}} | url to the icon |
-| *views* | {{String}} | List of views you want to use |
-| | _example_ | {{simple-view,admin-view}} |
-| *viewPreferences* | {{Boolean}} | "User Preference" icon will be visible if true |
-| *viewNonDocument* | {{Boolean}} | Non document types will be visible in the user view if true |
+| *homePath* | {{String}} | Root path in the Content Repository. *{{userId}}* can be used to use the userId at runtime in the path. |
+| *permissions* | {{String}} | Visibility of the drive based on eXo rights. For example: {{ {{{*:/platform/users}}} }} |
+| *icon* | {{String}} | Url to the icon |
+| *views* | {{String}} | The list of views you want to use, separated by commas. For example: {{simple-view,admin-view}} |
+| *viewPreferences* | {{Boolean}} | *User Preference* icon will be visible if true |
+| *viewNonDocument* | {{Boolean}} | Non-document types will be visible in the user view if true |
 | *viewSideBar* | {{Boolean}} | Show/Hide the left bar (with navigation and filters) |
 | *showHiddenNode* | {{Boolean}} | Hidden nodes will be visible if true |
-| *allowCreateFolders* | {{Boolean}} | List of nodetype we can create as folders |
-| | _example_ | {{nt:folder,nt:unstructured}} |
-| *allowNodeTypesOnTree* | {{String}} | Allows you to filter nodetypes in the navigation tree. Default value is "{{{*}}}" to show all content types |
-| | _example_ | {{ {{{*}}} }}|
-| | | {{exo:taxonomy}} |
+| *allowCreateFolders* | {{Boolean}} | List of nodet ype we can create as folders. For example: {{nt:folder,nt:unstructured}} |
+| *allowNodeTypesOnTree* | {{String}} | Allows you to filter node types in the navigation tree. For example, the default value is "{{{*}}}" to show all content types |
 
 We use the following structure for drives configuration
 {code:language=xml|indent=2}
@@ -47,7 +44,7 @@ We use the following structure for drives configuration
 	</external-component-plugins>
 {code}
 
-The file that contains the structure above will be configured in configuration.xml file as the following:
+The file that contains the structure above will be configured in the configuration.xml file as the following:
 {code:language=xml|indent=2}
 	<import>war:/conf/wcm-extension/dms/drives-configuration.xml</import>			
 {code}

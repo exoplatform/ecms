@@ -1,9 +1,10 @@
-Every node has a type. A node's type The names, types and other attributes of its child items. Node types can be used to define complex storage objects consisting of multiple sub nodes and properties, possibly many layers deep.
+Every node has a type. Node types can be used to define complex storage objects consisting of multiple sub-nodes and properties, possibly many deep layers.
 
 h1. Fields
 
-|| || || org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager ||
-| *name* | {{String}} | Name of the Node type, this field is required |
+*{{org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager}}*
+|| *Node Type*|| *Type* || *Description* ||
+| *name* | {{String}} | Name of the node type. This field is required |
 | *isMixin* | {{boolean}} | mixin type&nbsp; |
 | *hasOrderableChildNodes* | {{boolean}} | Orderable childnodes |
 | *primaryItemName* | {{String}} | Primary item name |

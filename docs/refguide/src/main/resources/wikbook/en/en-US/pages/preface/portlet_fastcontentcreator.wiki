@@ -2,16 +2,16 @@
 h1. Available preferences
 
 || *Preference* || *Type*|| *Default Value* || *Description* ||
-| *mode* | {{String}} | basic | The default mode for fast content creator portlet |
-| *repository* | {{String}} | repository | The current repository name. always is "repository" |
-| *workspace* | {{String}} | collaboration | The workspace where the content is stored |
-| *path* | {{String}} | /Groups/platform/users/Documents | The destination path where the content is stored |
-| *type* | {{String}} | exo:article | The node type of document which will be show on the dialog form |
-| *saveButton* | {{String}} | Save | The custom button Save |
-| *saveMessage* | {{String}} | This node has been saved successfully | The custom message when click Save button |
-| *isRedirect* | {{Boolean}} | false | Redirect to other page or not |
-| *redirectPath* | {{String}} | http://www.google.com.vn | The page will redirect to |
-| *isActionNeeded* | {{Boolean}} | true | Is an action needed to save the configuration |
+| *mode* | {{String}} | {{basic}} | The default mode for *fast content creator* portlet |
+| *repository* | {{String}} | {{repository}} | The name of the current repository|
+| *workspace* | {{String}} | {{collaboration}} | The workspace where the content is stored |
+| *path* | {{String}} | {{/Groups/platform/users/Documents}} | The destination path where the content is stored |
+| *type* | {{String}} | {{exo:article}} | The node type of document which will be shown on the dialog form |
+| *saveButton* | {{String}} | {{Save}} | The custom button Save |
+| *saveMessage* | {{String}} | {{This node has been saved successfully}} | The custom message when clicking *Save* button |
+| *isRedirect* | {{Boolean}} | {{false}} | Redirect to another page or not |
+| *redirectPath* | {{String}} | {{http://www.google.com.vn}} | The path that the page will redirect to |
+| *isActionNeeded* | {{Boolean}} | {{true}} | Is an action needed to save the configuration |
 
 h1. Example Configuration
 {code:language=xml|indent=2}

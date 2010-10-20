@@ -1,36 +1,41 @@
-A view can include many object parameters. Parameters are used to create default views, templates and actions of Manage view service. View allow administrators to customize many sort of views that can impact to users in exploring workspace. Each object-param have a type that is a class representing all properties of a view.
+A view can include many object parameters. Parameters are used to create default views, templates and actions of *Manage View* service. View enables administrators to customize view classification that can impact on users in exploring workspace. Each object-param has a type that is a class representing all properties of a view.
 
 
 
 h1. Fields
 
-*org.exoplatform.services.cms.views.ViewConfig*
+- *target-component*: _org.exoplatform.services.cms.views.ManageViewService</target-component-
+- *Name*: {{manage.view.plugin}}
+- *Set-method*: {{setManageViewPlugin}}
+- *Type*: {{org.exoplatform.services.cms.views.impl.ManageViewPlugin}}
+- *Description*: This plugin manages user views
+        
 
-|| Name || Type || Description ||
-| *name* | {{String}} | view name, must be unique inside WCM |
-| *permissions* | {{String}} | Visibility of the view based on eXo Rights |
-| | _example_ | {{ {{{*:/platform/administrators}}} }} |
-| *template* | {{String}} | Specify path to the template location |
-| *tabList* | {{java.util.ArrayList}} | include a set of view names. |
+*Object type*: _org.exoplatform.services.cms.views.ViewConfig_
 
-
-
-*org.exoplatform.services.cms.views.ViewConfig$Tab*
-
-|| Name || Type || Description ||
-| *tabName* | {{String}} | tab name that is not uniquely  |
-| *button* | {{String}} | These have to specify a set of view component names |
-| | _example_ | viewNodeType; viewPermissions; viewProperties; showJCRStructure |
+|| *Name* || *Type* || *Default value*|| *Description* ||
+| *name* | {{String}} |{{system-view}}| The name of the view. It must be unique inside WCM. |
+| *permissions* | {{String}} |{{{*:/platform/administrators}}}| Visibility of the view based on eXo rights.|
+| *template* | {{String}} | {{/exo:ecm/views/templates/ecm-explorer/SystemView}}|Specify path to the template location. |
+| *tabList* | {{ArrayList}}| {{java.util.ArrayList}} | Include a set of view names. |
 
 
 
-*org.exoplatform.services.cms.views.TemplateConfig*
+*Object type*: _org.exoplatform.services.cms.views.ViewConfig$Tab_
 
-|| Name || Type || Description ||
-| *type* | {{String}} | Specify to a name that is truly a class representing all properties of a view.  |
-| *name* | {{String}} | These have to specify a set of view component names |
-| *warPath*| {{String}} | Specify to a template location for viewing |
-| | _example_ | /ecm-explorer/SystemView.gtmpl |
+|| *Name* || *Type* ||*Default value*||  *Description* ||
+| *tabName* | {{String}} | {{Info}}|The name of the tab. It must be unique.  |
+| *button* | {{String}} | {{viewNodeType; viewPermissions; viewProperties; showJCRStructure}}| Specify a set of view component names.|
+
+
+
+*Object type*: _org.exoplatform.services.cms.views.TemplateConfig_
+
+|| *Name* || *Type* || *Default value*||  *Description* ||
+| *type* | {{String}} | {{ecmExplorerTemplate}}| Specify if a name is truly a class representing all properties of a view.  |
+| *name* | {{String}} | {{system-view}}| Specify a set of view component names. |
+| *warPath*| {{String}} |{{/ecm-explorer/SystemView.gtmpl}}| Specify a template location to view.|
+
 
 h1. Example of configuration
 {code:language=xml|indent=2}

@@ -2,7 +2,7 @@
 h1. Available preferences
 
 || *Preference* || *Type*|| *Default*|| *Description* ||
-| *repository* | {{String}} | repository |The current repository name. Default value is "repository" |
+| *repository* | {{String}} | {{Repository}} |The name of the current repository|
 
 
 h1. Sample Configuration 

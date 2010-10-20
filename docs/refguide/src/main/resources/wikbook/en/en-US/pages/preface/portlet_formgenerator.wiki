@@ -1,7 +1,7 @@
 h1. Available preferences
 
 || *Preference* || *Type*|| *Default Value* || *Description* ||
-| *repository* | {{String}} | repository | The current repository name. always is "repository" |
+| *repository* | {{String}} | {{repository}} | The current repository name. It is always "repository" |
 
 h1. Example
 

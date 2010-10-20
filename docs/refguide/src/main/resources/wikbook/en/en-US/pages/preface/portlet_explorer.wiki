@@ -1,24 +1,24 @@
 h1. Available preferences
 
 || *Preference* || *Type* || *Default value* || *Description* ||
-| *repository* | {{String}} | repository | The repository name which will be used in an instance of Site Explorer |
-| *workspace* | {{String}} | N/A | Not in used. The workspace name was included in the Drive(!) |
-| *path* | {{String}} | N/A | The path of node. This preference will be used when you choose the usecase is Parameterize |
-| *drive* | {{String}} | N/A | Not in used. Replaced by driveName preference(!) |
-| *views* | {{String}} | N/A | Not in used. The views will be displayed based on the Drive which user has access permission(!) |
-| *allowCreateFolders* | {{String}} | N/A | Allow to create a folder by type. When you don't specify the value then the default value will be nt:unstructured, nt:folder |
+| *repository* | {{String}} | {{repository}} | The repository name which will be used in an instance of Site Explorer |
+| *workspace* | {{String}} | N/A | Not in use. The workspace name was included in the Drive(!) |
+| *path* | {{String}} | N/A | The path of node. This preference will be used when the usecase chosen is Parameterize |
+| *drive* | {{String}} | N/A | Not in use. Replaced by driveName preference(!) |
+| *views* | {{String}} | N/A | Not in use. The views will be displayed basing on the Drive which user has the access permission(!) |
+| *allowCreateFolders* | {{String}} | N/A | Allow to create a folder by type. When you do not specify the value, then the default value will be nt:unstructured, nt:folder |
 | *categoryMandatoryWhenFileUpload* | {{Boolean}} | false | Force an user to add a category when uploading or creating a document |
 | *uploadFileSizeLimitMB* | {{Float}} | 150 | The maximum of file size when upload to the system (MB) |
-| *usecase* | {{String}} | selection | The behavior to access Site Explorer. By default the "selection" option is configured. Besides "selection", there are 4 other ways to configure the file explorer: *Jailed*,*Personal*,*Social*,*Parameterize* |
-| *driveName* | {{String}} | Private | The name of a drive that an user wants to access |
-| *trashHomeNodePath* | {{String}} | /Trash | The location to store the deleted nodes |
-| *trashRepository* | {{String}} | repository | The repository name where store the deleted nodes |
-| *trashWorkspace* | {{String}} | collaboration | The workspace name where store the deleted nodes |
-| *editInNewWindow* | {{Boolean}} | false | Allow to edit document with or without window popup. By default the value is false |
-| *showTopBar* | {{Boolean}} | true | Allow to show the Top bar or not. By default the value is true |
-| *showActionBar* | {{Boolean}} | true | Allow to show action bar or not. By default the value is true |
-| *showSideBar* | {{Boolean}} | true | Allow to show the side bar or not. By default the value is true |
-| *showFilterBar* | {{Boolean}} | true | Allow to show the Filter bar or not. By default the value is true |
+| *usecase* | {{String}} | {{selection}} | The behavior to access Site Explorer. By default, the "selection" option is configured. Besides "selection", there are 4 other ways to configure the file explorer: *Jailed*,*Personal*,*Social*,*Parameterize* |
+| *driveName* | {{String}} | {{Private}} | The name of a drive that an user wants to access |
+| *trashHomeNodePath* | {{String}} | {{/Trash}} | The location to store the deleted nodes |
+| *trashRepository* | {{String}} | {{repository}} | The name of the repository where stores the deleted nodes |
+| *trashWorkspace* | {{String}} | {{collaboration}} | The name of the workspace where stores the deleted nodes |
+| *editInNewWindow* | {{Boolean}} | {{false}} | Allow to edit document with or without a window popup.|
+| *showTopBar* | {{Boolean}} | {{true}} | Allow to show the Top bar or not. |
+| *showActionBar* | {{Boolean}} | {{true}} | Allow to show the Action bar or not.|
+| *showSideBar* | {{Boolean}} | {{true}} | Allow to show the Side bar or not.|
+| *showFilterBar* | {{Boolean}} | {{true}} | Allow to show the Filter bar or not. |
 
 h1. Example of configuration
 {code:language=xml|indent=2}

@@ -1,16 +1,16 @@
 h1. Available preferences
 
 || *Preference* || *Type* || *Default Value* || *Description* ||
-| *repository* | {{String}} | repository | The current repository name. always is "repository" |
-| *workspace* | {{String}} | collaboration | The workspace where the content is stored |
-| *nodeIdentifier* | {{String}} | N/A | The UUID or the path of content that you want to show |
-| *ShowTitle* | {{Boolean}} | true | Show the content title on top of the portlet |
-| *ShowDate* | {{Boolean}} | false | Show the content date on top of the portlet |
-| *ShowOptionBar* | {{Boolean}} | false | Show a bar with some actions (Print, Back) |
-| *ContextEnable* | {{Boolean}} | false | Determine if the portlet will use the parameter on URL as the path to content to display |
-| *ParameterName* | {{String}} | content-id | Determine what parameter will be used to get the content's path |
-| *ShowVote* | {{Boolean}} | false | Show the result of voting for the displayed content. |
-| *ShowComments* | {{Boolean}} | false | Show the existing comments of this content (if any) |
+| *repository* | {{String}} | {{repository}} | Repository is a place where data are stored and maintained |
+| *workspace* | {{String}} | {{collaboration}} | Workspace is a place where the content is stored |
+| *nodeIdentifier* | {{String}} | {{N/A}} | The UUID or the path of content that you want to show |
+| *ShowTitle* | {{Boolean}} | {{true}} | Show the content title on the top of the portlet |
+| *ShowDate* | {{Boolean}} | {{false}} | Show the content date on the top of the portlet |
+| *ShowOptionBar* | {{Boolean}} | {{false}} | Show a bar with some actions (Print, Back) |
+| *ContextEnable* | {{Boolean}} | {{false}} | Define if the portlet will use the parameter on URL as the path to content to display or not|
+| *ParameterName* | {{String}} | {{content-id}} | Define which parameter will be used to get the content's path |
+| *ShowVote* | {{Boolean}} | {{false}} | Show the result of voting for the displayed content |
+| *ShowComments* | {{Boolean}} | {{false}} | Show the existing comments of this content (if any) |
 
 h1. Sample configuration
 {code:language=xml|indent=2}
@@ -68,4 +68,6 @@ h1. Sample configuration
 		</portlet-preferences>
 {code}
 
-*Note: In 2.1.x, there is some preference is no longer used: for example: ShowPrintAction preference,..*
+{note}
+In 2.1.x, there are some preferences that are no longer used, for example, ShowPrintAction preference.
+{note}

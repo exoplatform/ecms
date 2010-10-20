@@ -1,52 +1,55 @@
-*A template is an definition of presentation while displaying the saved information*
+A template is a presentation while displaying the saved information.
 
-*Template service is responsibility for select the right template corresponding to the saved content.*
+Template service is used to select the right template corresponding to the saved content.
 
 h1. Available configuration
 
 
-h2. init-params
+h2. Init-params
 
-|| Configuration name || Data type || Default Value || Description ||
-| autoCreateInNewRepository | {{Boolean}} | true | Allow the application automatically import predefined templated at start up of template service |
-| storedLocation | {{String}} | war:/conf/dms-extension/dms/artifacts/templates | Location of stored templates |
-| repository | {{String}} | repository | Location of stored templates |
+|| *Configuration name* || *Data type* || *Default Value* || *Description* ||
+| *autoCreateInNewRepository* | {{Boolean}} | {{true}} | Enable the application to import predefined templates at the start-up of template service automatically.|
+| storedLocation | {{String}} | {{war:/conf/dms-extension/dms/artifacts/templates}} | Location of stored templates |
+| repository | {{String}} | {{repository}} | Location of stored templates |
 | object-param | {{Structure}} | | Configuration for each instance. |
 
 
-h2. object-param
+h2. Object-param
 
-|| Configuration name || Data type || Default Value || Description ||
-| name | String | template.configuration | The name of this configuration |
-| description | String | configuration for the localtion of templates to inject in jcr | Description of template instance |
-| object-type | Structure | | Details configuration for each instance type |
-
-
-*Object type define all available template file, using the "collection type" configuration*
-
-h2. object
-
-*type: name of each object type, it means the type of template, the further configurations for this type are define by the some specify fileds.*
-|| Field name || Data type || Description ||
-| nodetypeName | {{String}} | The name of template that is saved as a node in system |
-| documentTemplate | Boolean | Determine if the node type is a document type |
-| label | String | Visual displaying of the title for this node |
+|| *Configuration name* || *Data type* || *Default Value* || *Description* ||
+| *name* | {{String}} | {{template.configuration}} | The name of this configuration |
+| *description* | {{String}} | {{configuration for the location of templates to inject in jcr}} | Description of template instance |
+| *object-type* | {{Structure}} | | Details configuration for each instance type |
 
 
-*There are 3 further information related to presentation of each template, that is*
-+ referencedView: Determine how to display to view.
-+ referencedDialog: Determine how to display a diaglog to input information.
-+ referencedSkin: Determine the style sheet for displaying.
+*Object-type* defines all available template files, using the "collection type" configuration*
 
-*Each type include some definition as an ﻿\[object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template"\]with the fields as the properties.*
-|| Field name || Data type || Desciption ||
-| templateFile | String | The location of the file store for the template's presentation |
-| roles | String | Determine who can access this object (View/Dialog/CSS) |
+h2. Object
 
-h1. Example of configuration for an template
+*type*: It is the name of each object type. It means the type of template, the further configurations for this type are defined by some specified fields.
+|| *Field name* || *Data type* || *Description* ||
+| *nodetypeName* | {{String}} | The name of template that is saved as a node in system |
+| *documentTemplate* | {{Boolean}} | Determine if the node type is a document type |
+| *label* | {{String}} | Visual display of the title for this node |
 
-This bellow example is configuration for the nt:file template, any other template will be put in the same level with this template start from the line
-<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
+
+There are three further information related to the presentation of each template:
+
+- *{{referencedView}}*: Determine how to display a view.
+
+- *{{referencedDialog}}*: Determine how to display a dialog to input information.
+
+- *{{referencedSkin}}*: Determine the stylesheet for displaying.
+
+Each type includes some definitions as an ﻿{{object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template"\}} with the fields as the properties.
+|| *Field name* || *Data type* || *Description* ||
+| *templateFile* | {{String}} | The location of the file store for the template's presentation |
+| *roles* | {{String}} | Determine who can access this object (View/Dialog/CSS) |
+
+h1. Example of template configuration
+
+This below example is configuration for the _nt:file_ template, any other template will be put in the same level with this template start from the line
+{{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">}}
 as the another NodeType.
 
 {code:language=xml|indent=2}

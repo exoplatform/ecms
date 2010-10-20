@@ -1,4 +1,4 @@
-* All package action in WCM start from {{delivery}} folder, so let's go to this folder first
+* All package actions in WCM start from the {{delivery}} folder, so you should go to this folder first.
 {code}
 	$ cd ecms/delivery
 {code}

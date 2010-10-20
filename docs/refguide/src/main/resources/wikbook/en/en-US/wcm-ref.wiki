@@ -3,19 +3,20 @@ h2. Getting started with eXo WCM
   {include:document="pages/preface/start.wiki" /}
 h2. Packaging
   {include:document="pages/preface/packaging.wiki" /}
-h2. Portlets
-h3. Content Detail
+h1. Portlets
+h2. Content Detail
   {include:document="pages/preface/portlet_contentdetail.wiki" /}
-h3. Content List
+h2. Content List
   {include:document="pages/preface/portlet_contentlist.wiki" /}
-h3. Search
+h2. Search
   {include:document="pages/preface/portlet_search.wiki" /}
-h3. Explorer
+h2. Explorer
   {include:document="pages/preface/portlet_explorer.wiki" /}
-h3. Administration
+h2. Administration
   {include:document="pages/preface/portlet_administration.wiki" /}
-h3. Fast Content Creator
+h2. Fast Content Creator
   {include:document="pages/preface/portlet_fastcontentcreator.wiki" /}
+
 h1. Configuration
 h2. Drives
   {include:document="pages/configuration/drives.wiki" /}
@@ -29,6 +30,7 @@ h2. Nodetypes
   {include:document="pages/configuration/nodetypes.wiki" /}
 h2. Views
   {include:document="pages/configuration/views.wiki" /}
+
 h2. Templates
 h3. Application template
   {include:document="pages/configuration/template_application.wiki" /}
