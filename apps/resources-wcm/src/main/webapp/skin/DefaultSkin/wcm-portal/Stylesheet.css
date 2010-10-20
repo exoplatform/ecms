@@ -111,8 +111,8 @@ td {
 }
 
 .UISiteAdminToolBar {
-  height: 32px;
-  padding-right: 10px;
+  height: auto;
+  padding-right: 20px;
   float: right;
 }
 
@@ -160,7 +160,7 @@ td {
 }
 
 .UIPresentationContainer a {
-  color: blue;
+  color: #0068FF;
 }
 
 .UIPresentationContainer a:hover {
@@ -318,20 +318,23 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
 
 .AddContentIcon {
   background: url('icons/AddContentIcon.png') no-repeat center center;
-  margin-left:6px;
-  padding:2px 7px;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
 }
 
 .ManageContentIcon {
   background: url('icons/ManageContentIcon.png') no-repeat center center;
-  margin-left:6px;
-  padding:2px 7px;
+  margin-left: 6px;
+  display: block;
+  width: 16px;
 }
 
 .PreferencesIcon {
   background: url('icons/PreferencesIcon.png') no-repeat center center;
-  margin-left:6px;
-  padding:2px 7px;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
 }
 
 .EdittingContent{
@@ -369,14 +372,16 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
 
 .EditContentIcon {
   background: url('icons/EditContentIcon.png') no-repeat left center;
-  margin-left:6px;
-  padding:2px 7px;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
 }
 
 .CloseContentIcon {
   background: url('icons/CloseContentIcon.png') no-repeat center center;
   margin-left:6px;
-  padding:2px 7px;
+  width: 16px;
+  display: block;
 }
 
 
