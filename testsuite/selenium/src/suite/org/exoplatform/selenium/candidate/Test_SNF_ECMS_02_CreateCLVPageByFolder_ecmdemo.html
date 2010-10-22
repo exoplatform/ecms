@@ -89,7 +89,7 @@
 <tr>
 	<td>type</td>
 	<td>pageName</td>
-	<td>CLV1</td>
+	<td>ASnfEcms02</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -257,6 +257,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>Go to &quot;ASnfEcms02&quot; pages</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//a[@onclick='eXo.core.DOMUtil.disableOnClick(this);']</td>
 	<td></td>
@@ -268,7 +273,42 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>Content list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Where we are</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Where we are</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Conditions and Requirements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Conditions and Requirements</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=How to join us</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=How to join us</td>
 	<td></td>
 </tr>
 <tr>
@@ -288,7 +328,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -299,7 +339,7 @@
 <tr>
 	<td>type</td>
 	<td>searchTerm</td>
-	<td>CLV1</td>
+	<td>ASnfEcms02</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -392,8 +432,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UINavigationManagement']/div[3]/table/tbody/tr/td[2]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='UINavigationManagement']/div[3]/table/tbody/tr/td[2]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit Navigation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Edit Navigation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@id='UINavigationNodeSelector']/div/div/div/div[2]/div/div/div[13]/div//a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//div[@id='UINavigationNodeSelector']/div/div/div/div[2]/div/div/div[13]/div//a</td>
 	<td></td>
 </tr>
 <tr>

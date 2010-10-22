@@ -249,7 +249,7 @@
 <tr>
 	<td>type</td>
 	<td>pageName</td>
-	<td>SCVECMS01</td>
+	<td>ASNFECMS01</td>
 </tr>
 <tr>
 	<td>echo</td>
@@ -428,6 +428,41 @@
 </tr>
 <tr>
 	<td>echo</td>
+	<td>Verify title page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='UIPresentation']/div/div[1]/div/div/div</td>
+	<td>Test_SNF_ECMS_01</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='UIPresentation']/div/div[1]/div/div/div</td>
+	<td>Test_SNF_ECMS_01</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>Verify title Summary </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='UIPresentation']/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div/p</td>
+	<td>Test_SNF_ECMS_01_CreateSCVbddNewContent_ecmdemo</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>Content </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='UIPresentation']/div/div[2]/div/div/div[3]/div[2]/div/div/div/div[1]/div/p</td>
+	<td>Manchester United FC</td>
+</tr>
+<tr>
+	<td>echo</td>
 	<td>-- Delete node</td>
 	<td></td>
 </tr>
@@ -444,7 +479,7 @@
 <!--if use underscore _ in page name ==> bug. find functions will be not active.-->
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -455,7 +490,7 @@
 <tr>
 	<td>type</td>
 	<td>searchTerm</td>
-	<td>SCVECMS01</td>
+	<td>ASNFECMS01</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -470,6 +505,11 @@
 <tr>
 	<td>click</td>
 	<td>//form[@id='UIPageSearch']/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -524,12 +564,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=SCVECMS01</td>
+	<td>//div[@id='UINavigationNodeSelector']/div/div/div/div[2]/div/div/div[13]/div/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=SCVECMS01</td>
+	<td>//div[@id='UINavigationNodeSelector']/div/div/div/div[2]/div/div/div[13]/div/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -594,7 +634,22 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>Check delete ?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_01</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_01</td>
 	<td></td>
 </tr>
 <tr>
