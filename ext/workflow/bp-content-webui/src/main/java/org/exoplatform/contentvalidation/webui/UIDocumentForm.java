@@ -168,20 +168,22 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   
   public void renderField(String name) throws Exception {    
     if (name.equals(FIELD_TAXONOMY)) {
-      UIComponent uiInput = findComponentById(name);
-      TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-      List<Node> listCategories = taxonomyService.getAllCategories(getCurrentNode());
-      Node taxonomyTree;
-      for (Node itemNode : listCategories) {
-        taxonomyTree = getRootPathTaxonomy(itemNode);
-        if (taxonomyTree == null) continue;
-        String categoryPath = itemNode.getPath().replaceAll(taxonomyTree.getPath(), "");
-        if (!getListTaxonomy().contains(taxonomyTree.getName() + categoryPath)) {
-          listTaxonomyName.add(getCategoryLabel(taxonomyTree.getName() + categoryPath));
-          getListTaxonomy().add(taxonomyTree.getName() + categoryPath);
+      if (!isUpdateSelect) {      
+        UIComponent uiInput = findComponentById(name);
+        TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
+        List<Node> listCategories = taxonomyService.getAllCategories(getCurrentNode());
+        Node taxonomyTree;
+        for (Node itemNode : listCategories) {
+          taxonomyTree = getRootPathTaxonomy(itemNode);
+          if (taxonomyTree == null) continue;
+          String categoryPath = itemNode.getPath().replaceAll(taxonomyTree.getPath(), "");
+          if (!getListTaxonomy().contains(taxonomyTree.getName() + categoryPath)) {
+            listTaxonomyName.add(getCategoryLabel(taxonomyTree.getName() + categoryPath));
+            getListTaxonomy().add(taxonomyTree.getName() + categoryPath);
+          }
         }
+        ((UIFormMultiValueInputSet) uiInput).setValue(listTaxonomyName);
       }
-      ((UIFormMultiValueInputSet) uiInput).setValue(listTaxonomyName);
     }
     super.renderField(name);
   }
@@ -410,7 +412,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       String idx = objectid.replaceAll(FIELD_TAXONOMY,"");
       try {
         int idxInput = Integer.parseInt(idx);
-        uiDocumentForm.listTaxonomyName.remove(idxInput);
+        uiDocumentForm.getListTaxonomy().remove(idxInput);
+        uiDocumentForm.getlistTaxonomyName().remove(idxInput);
+        uiDocumentForm.setIsUpdateSelect(true);        
       } catch (NumberFormatException ne) {
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentForm);
