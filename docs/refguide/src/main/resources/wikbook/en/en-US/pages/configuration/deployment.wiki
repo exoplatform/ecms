@@ -23,7 +23,8 @@ h1. Fields
 _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 || *Name* || *Type* || *Default value* || *Description* ||
 | *target* | {{Object}} | {{org.exoplatform.services.deployment.DeploymentDescriptor$Target (*)}} | The target node (which will contains the imported node) |
-| *sourcePath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml<}} | The absolute path of the XML file |
+| *sourcePath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml}} | The absolute path of the XML file |
+| *cleanupPublication* | {{Boolean}} | {{false}} | Decide when allows to cleanup the publication lifecycle in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
 
 *{{org.exoplatform.services.deployment.DeploymentDescriptor$Target}}*
 || *Field* || *Type* || *Default value* || *Description* ||
@@ -60,6 +61,9 @@ h1. Example of configuration
             </field>
             <field name="sourcePath">
               <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml</string>
+            </field>
+            <field name="cleanupPublication">
+              <boolean>true</boolean>
             </field>
           </object>
         </object-param>
