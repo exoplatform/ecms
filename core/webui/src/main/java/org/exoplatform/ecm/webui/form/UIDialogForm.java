@@ -730,11 +730,134 @@ public class UIDialogForm extends UIForm {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
+    String propertyName = getPropertyName(jcrPath);
+    propertiesName.put(name, propertyName);
+    fieldNames.put(propertyName, name);
+    Node node = getNode();
+    Node childNode = getChildNode();    
+    boolean isFirstTimeRender = false;
     if(formTextAreaField.isMultiValues()) {
-      renderMultiValuesInput(UIFormTextAreaInput.class,name,label);      
+      UIFormMultiValueInputSet uiMulti;
+      if(node == null && childNode == null) {
+        uiMulti = findComponentById(name);
+        if(uiMulti == null) {
+          isFirstTimeRender = true;
+          uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
+          uiMulti.setId(name);
+          uiMulti.setName(name);
+          uiMulti.setType(UIFormTextAreaInput.class);
+          uiMulti.setEditable(formTextAreaField.isEditable());
+          if (formTextAreaField.validateType != null) {
+            String validateType = formTextAreaField.validateType;
+            String[] validatorList = null;
+            if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
+            else validatorList = new String[] {validateType};
+            for (String validator : validatorList) {
+              Object[] params;
+              String s_param=null;
+              int p_begin, p_end;
+              p_begin = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_BEGIN);
+              p_end   = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_END);
+              if (p_begin>=0 && p_end > p_begin) {        
+                s_param = validator.substring(p_begin, p_end);
+                params = s_param.split(DialogFormUtil.VALIDATOR_PARAM_SEPERATOR);          
+                uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()), params) ;
+              }else {
+                uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim())) ;
+              }
+            }
+          }
+          List<String> valueList = new ArrayList<String>();
+          List<UIComponent> listChildren = uiMulti.getChildren();
+          if (listChildren.size() == 0) {
+            valueList.add(formTextAreaField.getDefaultValue());
+          } else {
+            for (UIComponent component : listChildren) {
+              UIFormTextAreaInput uiTextAreaInput = (UIFormTextAreaInput)component;
+              if(uiTextAreaInput.getValue() != null) {
+                valueList.add(uiTextAreaInput.getValue().trim());            
+              } else{
+                valueList.add(formTextAreaField.getDefaultValue());
+              }
+            }
+          }
+          uiMulti.setValue(valueList);
+          addUIFormInput(uiMulti);
+        } 
+      } else {
+        uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
+        isFirstTimeRender = true;
+        uiMulti.setId(name);
+        uiMulti.setName(name);
+        uiMulti.setType(UIFormTextAreaInput.class);
+        uiMulti.setEditable(formTextAreaField.isEditable());
+        if (formTextAreaField.validateType != null) {
+          String validateType = formTextAreaField.validateType;
+          String[] validatorList = null;
+          if (validateType.indexOf(',') > -1) validatorList = validateType.split(",");
+          else validatorList = new String[] {validateType};
+          for (String validator : validatorList) {
+            Object[] params;
+            String s_param=null;
+            int p_begin, p_end;
+            p_begin = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_BEGIN);
+            p_end   = validator.indexOf(DialogFormUtil.VALIDATOR_PARAM_END);
+            if (p_begin>=0 && p_end > p_begin) {        
+              s_param = validator.substring(p_begin, p_end);
+              params = s_param.split(DialogFormUtil.VALIDATOR_PARAM_SEPERATOR);          
+              uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim()), params) ;
+            }else {
+              uiMulti.addValidator(DialogFormUtil.getValidator(validator.trim())) ;
+            }
+          }
+        }                
+        addUIFormInput(uiMulti);
+      }
+      List<String> valueList = new ArrayList<String>();
+      boolean valueListIsSet = false;
+      if((node != null) && node.hasNode("jcr:content") && (childNode == null)) {
+        Node jcrContentNode = node.getNode("jcr:content");
+        if(jcrContentNode.hasProperty(propertyName)) {
+          Value[] values = jcrContentNode.getProperty(propertyName).getValues();
+          for(Value value : values) {
+            valueList.add(value.getString());
+          }
+          uiMulti.setEditable(formTextAreaField.isEditable());
+          uiMulti.setValue(valueList);
+          valueListIsSet = true;
+        }
+      } else {
+        if(childNode != null) {
+          if(childNode.hasProperty(propertyName)) {
+            Value[] values = childNode.getProperty(propertyName).getValues();
+            for(Value value : values) {
+              valueList.add(value.getString());
+            }
+            uiMulti.setEditable(formTextAreaField.isEditable());
+            uiMulti.setValue(valueList);
+            valueListIsSet = true;
+          }
+        }
+      }
+      if(!valueListIsSet && node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
+        String propertyPath = jcrPath.substring("/node/".length());
+        if(node.hasProperty(propertyPath)) {
+          Value[] values = node.getProperty(propertyPath).getValues();
+          for(Value vl : values) {
+            if (vl != null) {
+              valueList.add(vl.getString());
+            }
+          }
+        }
+        uiMulti.setValue(valueList);        
+      }
+      if(isResetMultiField) {
+        uiMulti.setValue(new ArrayList<Value>());
+      }
+      uiMulti.setEditable(formTextAreaField.isEditable());
+      renderField(name);
       return;
     }
-    boolean isFirstTimeRender = false;
     UIFormTextAreaInput uiTextArea = findComponentById(name);    
     if(uiTextArea == null) {
     	isFirstTimeRender = true;
@@ -751,10 +874,6 @@ public class UIDialogForm extends UIForm {
       }
       addUIFormInput(uiTextArea);
     }    
-    String propertyName = getPropertyName(jcrPath);
-    propertiesName.put(name, propertyName);
-    fieldNames.put(propertyName, name);
-    Node node = getNode();
     if(node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       String value = null;
       if(node.hasProperty(propertyName)) {
@@ -775,7 +894,6 @@ public class UIDialogForm extends UIForm {
       uiTextArea.setValue(value);
     } 
     if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
-      Node childNode = getChildNode();
       if(node != null && node.hasNode("jcr:content") && childNode != null) {
         Node jcrContentNode = node.getNode("jcr:content");
         uiTextArea.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
