@@ -93,12 +93,7 @@
 				                  </object>  
 				                </value>
 			                </collection>
-			              </field>
-			              <field name="mixinTypes">
-			                <collection type="java.util.ArrayList">
-			                  <value><string>exo:hiddenable</string></value>
-			                </collection>
-			              </field>   			               
+			              </field>			                			               
 	              	</object>
               	</value>
                 <value>               
@@ -339,7 +334,7 @@
 	      </value-param>	      	      	      	      	      	      	      
 	      <value-param>
 	        <name>showHiddenNode</name>
-	        <value>true</value>
+	        <value>false</value>
 	      </value-param>	      	      	      	      	      	      	      
 	      <value-param>
 	        <name>allowCreateFolder</name>
