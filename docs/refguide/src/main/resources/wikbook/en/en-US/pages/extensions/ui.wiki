@@ -254,3 +254,4 @@ h2. Run your own UI extension sample
 
 You will see a new extension has been already added to ECM Administrator.
 [image:Screenshot2.png]
+
