@@ -80,6 +80,7 @@ h1. Configuration
 {include:document="WKF/Bonita_Forms_Definition.wiki"}
 {include:document="WKF/Bonita_Resource_bundle.wiki"}
 {include:document="WKF/Business_Process_in_the_JCR.wiki"}
+{include:document="WKF/Authoring_Configuration.wiki"}
 
 
 h1. Integration
