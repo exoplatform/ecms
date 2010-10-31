@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE bookinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<bookinfo id="book-User_Guide-User_Guide">
+	<title>User Guide</title>
+	 <subtitle>A guide to the basic usage of the Site Publisher extension for JBoss Enterprise Portal Platform</subtitle>
+	 <productname>JBoss Site Publisher</productname>
+	 <productnumber>5</productnumber>
+	 <edition>1</edition>
+	 <pubsnumber>2.0</pubsnumber>
+	 <abstract>
+		<para>
+			This document provides an easy to follow guide to the functions and options available in the Enterprise Portal Platform Site Publisher extension. It is intended to be accessible and useful to both experienced and novice portal users.
+		</para>
+
+	</abstract>
+	 <corpauthor>
+		<inlinemediaobject>
+			<imageobject>
+				<imagedata fileref="Common_Content/images/title_logo.svg" format="SVG" />
+			</imageobject>
+
+		</inlinemediaobject>
+
+	</corpauthor>
+	 <xi:include href="Common_Content/Legal_Notice.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Author_Group.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</bookinfo>
+

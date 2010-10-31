@@ -1,0 +1,1327 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Content_Presentation_Manager">
+	<!--  This document was created with Syntext Serna Free.  --> <title>Content Presentation Manager</title>
+	 <para>
+
+	</para>
+	 <section id="sect-User_Guide-Content_Presentation_Manager-Manage_a_Template">
+		<title>Manage a Template</title>
+		 <para>
+			To create a node in WCM, this node must set its properties. Thus, each node needs to have a form for entering data for their properties (called the dialog template), and displaying the existing values (called the view template). The template management allows users to view, delete and modify the predefined templates or to add a new template.
+		</para>
+		 <figure id="figu-User_Guide-Manage_a_Template-Manage_Templates_Form">
+			<title>Manage Templates Form</title>
+			 <mediaobject>
+				<imageobject>
+					<imagedata fileref="images/img-Manage_Templates_Form.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</figure>
+		 <procedure id="proc-User_Guide-Manage_a_Template-Add_a_New_Template">
+			<title>Add a New Template</title>
+			 <step id="step-User_Guide-Add_a_New_Template-Go_to_the_Manage_Templates_form">
+				<title>Go to the Manage Templates form</title>
+				 <para>
+					Click <menuchoice> <guimenu>Sites Administration</guimenu> <guimenuitem>Content Presentation</guimenuitem> <guimenuitem>Manage Templates </guimenuitem> </menuchoice>
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Open_a_new_template_form">
+				<title>Open a new template form</title>
+				 <para>
+					Click the Add button in the Manage Templates form to opent he Template form.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Select_the_template_type">
+				<title>Select the template type</title>
+				 <para>
+					In the <guilabel>Name</guilabel> drop-down box, select the template type you require.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Label_the_template">
+				<title>Label the template</title>
+				 <para>
+					Specify a name for the template in the <guilabel>Label</guilabel> field.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Specify_whether_the_template_is_a_document_template">
+				<title>Specify whether the template is a document template</title>
+				 <para>
+					Click the <guibutton>Document Template</guibutton> check box if the template you are creating should be used as a template for a document.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Open_Permissions_dialog.">
+				<title>Open Permissions dialog.</title>
+				 <para>
+					Click the <guibutton>+</guibutton> icon next to the Permissions field to open the Select Permission dialog.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Assign_memberships_to_the_group">
+				<title>Assign memberships to the group</title>
+				 <para>
+					Select the group from the left panel and the membership from the right panel.
+				</para>
+				 <figure id="figu-User_Guide-Assign_memberships_to_the_group-Select_Permissions_Dialog">
+					<title>Select Permissions Dialog</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/img-Select_Permissions_Dialog.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Add_dialog_content">
+				<title>Add dialog content</title>
+				 <para>
+					Select the <guilabel>Dialog</guilabel> tab and enter the value in the <guilabel>Dialog content</guilabel> field.
+				</para>
+				 <figure id="figu-User_Guide-Add_dialog_content-Manage_Templates_Dialog_Tab">
+					<title>Manage Templates Dialog Tab</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/img-Template_Form_Dialog_Content.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Add_view_content">
+				<title>Add view content</title>
+				 <para>
+					Select the <guilabel>View</guilabel> tab and enter the value in the <guilabel>Dialog content</guilabel> field.
+				</para>
+				 <figure id="figu-User_Guide-Add_view_content-Manage_Templates_View_Tab">
+					<title>Manage Templates View Tab</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/img-Template_Form_View_Content.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Add_CSS_content" performance="optional">
+				<title>Add CSS content</title>
+				 <para>
+					Select the <guilabel>CSS</guilabel> tab and enter the value in the <guilabel>Dialog content</guilabel> field.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_a_New_Template-Save_template">
+				<title>Save template</title>
+				 <para>
+					Click <guibutton>Save</guibutton> to create the template.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_a_Template-Edit_a_Template">
+			<title>Edit a Template</title>
+			 <step id="step-User_Guide-Edit_a_Template-Go_to_the_Manage_Templates_form">
+				<title>Go to the Manage Templates form</title>
+				 <para>
+					Click <menuchoice> <guimenu>Sites Administration</guimenu> <guimenuitem>Content Presentation</guimenuitem> <guimenuitem>Manage Templates </guimenuitem> </menuchoice>
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Edit_a_Template-Open_the_View_and_Edit_Template_form">
+				<title>Open the View and Edit Template form</title>
+				 <para>
+					Click the <guiicon>Pencil</guiicon> icon in the Action column corresponding to the template you want to edit.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Edit_a_Template-Edit_the_Template_tab">
+				<title>Edit the Template tab</title>
+				 <para>
+					In the <guilabel>Template</guilabel> tab, you can edit the Label of the Template.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Edit_a_Template-Add_a_dialog_to_the_Dialog_tab" performance="optional">
+				<title>Add a dialog to the Dialog tab</title>
+				 <para>
+					To add a dialog, do the following:
+				</para>
+				 <substeps>
+					<step>
+						<para>
+							Input content for this dialog in the ' Content ' field.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Input name for this dialog. (*Required).
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Select permissions for a group that can use this dialog. (*Required).
+						</para>
+
+					</step>
+
+				</substeps>
+
+			</step>
+			 <step id="step-User_Guide-Edit_a_Template-Edit_an_existing_dialog_in_the_Dialog_tab" performance="optional">
+				<title>Edit an existing dialog in the Dialog tab</title>
+				 <para>
+					To edit an existing dialog, do the following:
+				</para>
+				 <substeps>
+					<step>
+						<para>
+							Click the <guiicon>Pencil</guiicon> icon in the dialog row you want to edit.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Edit the dialog properties.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Click <guibutton>Save</guibutton> to accept all changed in the Dialog tab.
+						</para>
+
+					</step>
+
+				</substeps>
+
+			</step>
+			 <step id="step-User_Guide-Edit_a_Template-Delete_an_existing_dialog" performance="optional">
+				<title>Delete an existing dialog</title>
+				 <para>
+					To delete an existing dialog, do the following:
+				</para>
+				 <substeps>
+					<step>
+						<para>
+							Click the <guiicon>Trash Can</guiicon> icon in the dialog row you want to edit.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Click OK to continue with deletion.
+						</para>
+
+					</step>
+
+				</substeps>
+				 <note>
+					<para>
+						You can not delete the default dialog. You must create a new one before you can delete the current default dialog.
+					</para>
+
+				</note>
+
+			</step>
+			 <step id="step-User_Guide-Edit_a_Template-Add_a_View_to_the_view_tab" performance="optional">
+				<title>Add a View to the view tab</title>
+				 <para>
+					To add a view, do the following:
+				</para>
+				 <substeps>
+					<step>
+						<para>
+							Click the View tab and enter content into the content field.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Input name for this view. (*Required).
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Select permissions for a group that can use this view. (*Required).
+						</para>
+
+					</step>
+
+				</substeps>
+
+			</step>
+			 <step id="step-User_Guide-Edit_a_Template-Edit_an_existing_view_in_the_View_tab" performance="optional">
+				<title>Edit an existing view in the View tab</title>
+				 <para>
+					To edit an existing view, do the following:
+				</para>
+				 <substeps>
+					<step>
+						<para>
+							Click the <guiicon>Pencil</guiicon> icon in the view row you want to edit.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Edit the view properties.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Click <guibutton>Save</guibutton> to accept all changed in the View tab.
+						</para>
+
+					</step>
+
+				</substeps>
+				 <note>
+					<title>Notes about Editing Views</title>
+					 <para>
+						You can not change the view name.
+					</para>
+					 <para>
+						If you click <guilabel>is Enable Version</guilabel> checkbox, this view automatically increments one version after you click <guibutton>Save</guibutton>. It is displayed at ' version' column in the <guilabel>View</guilabel> tab.
+					</para>
+					 <para>
+						If the dialog has at least two versions, in the <guilabel>View</guilabel> tab, it displays the <guibutton>Restore</guibutton> button. You can use <guibutton>Restore</guibutton> to roll back to the previous View.
+					</para>
+
+				</note>
+
+			</step>
+			 <step id="step-User_Guide-Edit_a_Template-Delete_an_existing_dialog_in_the_Dialog_tab" performance="optional">
+				<title>Delete an existing dialog in the Dialog tab</title>
+				 <para>
+					To delete an existing dialog, do the following:
+				</para>
+				 <substeps>
+					<step>
+						<para>
+							Click the <guiicon>Trash Can</guiicon> icon in the dialog row you want to edit.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Click <guibutton>OK</guibutton> to continue with deletion.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Click <guibutton>Save</guibutton> to accept all changes.
+						</para>
+
+					</step>
+
+				</substeps>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_a_Template-Delete_a_Template">
+			<title>Delete a Template</title>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+					</inlinemediaobject>
+					 corresponding to the template that you want to discard.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">OK</emphasis> on the confirmation message to delete the template or <emphasis role="bold">Cancel</emphasis> to abort the operation.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Content_Presentation_Manager-Metadata_Management">
+		<title>Metadata Management</title>
+		 <para>
+			Metadata in its simplest form is "data about data". Generally, it may be understood as information that describes, or supplements the central data. The metadata management allows managing nodes in the metadata format in the WCM system. The metadata may be considered as information used to describe the data. When data are provided to the end users, the metadata allow users to understand about information in more details. All metadata nodes can combine with other nodes to create a new node (add mix).
+		</para>
+		 <procedure id="proc-User_Guide-Metadata_Management-View_Metadata">
+			<title>View Metadata</title>
+			 <step id="step-User_Guide-View_Metadata-Go_to_the_Manage_Metadata_form">
+				<title>Go to the Manage Metadata form</title>
+				 <para>
+					Click <menuchoice> <guimenu>Sites Administration</guimenu> <guimenuitem>Content Presentation</guimenuitem> <guimenuitem>Manage Metadata </guimenuitem> </menuchoice>
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-View_Metadata-Open_the_Metadata_Information_form">
+				<title>Open the Metadata Information form</title>
+				 <para>
+					Click the magnifying glass icon corresponding to the metadata you want to view.
+				</para>
+				 <para>
+					The Metadata Information Form opens.
+				</para>
+				 <figure id="figu-User_Guide-Open_the_Metadata_Information_form-Metadata_Form">
+					<title>Metadata Form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/img-Metadata_Form.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Metadata_Management-Edit_Metadata">
+			<title>Edit Metadata</title>
+			 <step id="step-User_Guide-Edit_Metadata-Open_the_Edit_Metadatas_Template_form">
+				<title>Open the Edit Metadata's Template form</title>
+				 <para>
+					Click the <guiicon>Pencil</guiicon> icon in the metadata row you want to edit.
+				</para>
+				 <para>
+					The <guilabel>Edit Metadata's Template</guilabel> form opens.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Edit_Metadata-Change_the_properties_">
+				<title>Change the properties </title>
+				 <para>
+					Change the required properties of the metadata.
+				</para>
+				 <note>
+					<para>
+						You can not edit the metadata name.
+					</para>
+
+				</note>
+
+			</step>
+			 <step id="step-User_Guide-Edit_Metadata-Save_changes">
+				<title>Save changes</title>
+				 <para>
+					Click Apply to save all metadata changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Metadata_Management-Delete_Metadata">
+			<title>Delete Metadata</title>
+			 <step id="step-User_Guide-Delete_Metadata-Click_the_Trash_Can_button">
+				<title>Click the Trash Can button</title>
+				 <para>
+					Click the <guiicon>Trash Can</guiicon> icon corresponding to the metadata you want to delete.
+				</para>
+				 <para>
+					A confirmation message displays.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Delete_Metadata-Confirm_deletion">
+				<title>Confirm deletion</title>
+				 <para>
+					Click <guibutton>OK</guibutton> to delete the template, or <guibutton>Cancel</guibutton> to preserve the template.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Content_Presentation_Manager-Manage_Views">
+		<title>Manage Views</title>
+		 <para>
+			The function <function>Manage View</function> is used to control view ways of a user. It has 3 tabs: <guilabel>View</guilabel>, <guilabel>ECM Templates</guilabel> and <guilabel>BC Templates</guilabel> tabs.
+		</para>
+		 <para>
+			To open the Manage View function, click <menuchoice> <guimenu>Sites Administration</guimenu> <guimenuitem>Content Presentation</guimenuitem> <guimenuitem>Manage View</guimenuitem> </menuchoice>. The Manage View form displays.
+		</para>
+		 <figure id="figu-User_Guide-Manage_Views-Metadata_Form">
+			<title>Metadata Form</title>
+			 <mediaobject>
+				<imageobject>
+					<imagedata fileref="images/img-Manage_Views_Form.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</figure>
+		 <formalpara id="form-User_Guide-Manage_Views-Views_Tab">
+			<title>Views Tab</title>
+			 <para>
+				The procedures that follow describe how to Add, Edit, Delete, and Preview views.
+			</para>
+
+		</formalpara>
+		 <procedure id="proc-User_Guide-Manage_Views-Add_View">
+			<title>Add View</title>
+			 <step id="step-User_Guide-Add_View-Open_the_Add_View_form">
+				<title>Open the Add View form</title>
+				 <para>
+					Click the <guibutton>Add View</guibutton> button located at the bottom of the <guilabel>Manage View</guilabel> form.
+				</para>
+				 <para>
+					The Add View form opens.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_View-Define_View_Name">
+				<title>Define View Name</title>
+				 <para>
+					In the Name field, specify the name of the view you are creating. The name must be unique, and must only contain standard alphanumeric characters.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_View-Assign_memberships_to_the_group">
+				<title>Assign memberships to the group</title>
+				 <para>
+					Select the group from the left panel and the membership from the right panel.
+				</para>
+				 <figure id="figu-User_Guide-Assign_memberships_to_the_group-Select_Permission_Dialog">
+					<title>Select Permission Dialog</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/img-Select_Permissions_Dialog.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step id="step-User_Guide-Add_View-Select_the_Templates_view">
+				<title>Select the Templates view</title>
+				 <para>
+					Click the <guilabel>Templates</guilabel> field and select the correct template for this view.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_View-Save_the_View">
+				<title>Save the View</title>
+				 <para>
+					Click <guibutton>Save</guibutton> to apply all settings and close the form.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Views-Edit_a_View">
+			<title>Edit a View</title>
+			 <step>
+				<para>
+					Click the <guiicon>Pencil</guiicon> icon in the view row you want to edit.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Edit the view properties.
+				</para>
+				 <note>
+					<title>Notes about Editing Views</title>
+					 <para>
+						You can not change the view name.
+					</para>
+					 <para>
+						If you click <guilabel>Enable Version</guilabel> checkbox, this view automatically increments one version after you click <guibutton>Save</guibutton>. It is displayed at ' version' column in the <guilabel>View</guilabel> tab.
+					</para>
+					 <para>
+						If the dialog has at least two versions, in the <guilabel>View</guilabel> tab, it displays the <guibutton>Restore</guibutton> button. You can use <guibutton>Restore</guibutton> to roll back to the previous View.
+					</para>
+
+				</note>
+
+			</step>
+			 <step>
+				<para>
+					Click the <guibutton>Add Tab</guibutton> button to open the <guilabel>Tab Form</guilabel> tab to add more tabs.
+				</para>
+				 <substeps>
+					<step performance="optional">
+						<para>
+							Click the <guibutton>Add Tab</guibutton> button to add more tabs after the initial tab has been added.
+						</para>
+
+					</step>
+					 <step performance="optional">
+						<para>
+							Click the <guibutton>Reset</guibutton> button to change values for fields.
+						</para>
+
+					</step>
+					 <step performance="optional">
+						<para>
+							Click the <guibutton>Back</guibutton> button to return to the <guilabel>View Form</guilabel> tab in the <guilabel>Edit View</guilabel> form.
+						</para>
+
+					</step>
+
+				</substeps>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Save</guibutton> to accept all changed in the View tab.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Views-Delete_Views">
+			<title>Delete Views</title>
+			 <step id="step-User_Guide-Delete_Views-Click_the_Trash_Can_button">
+				<title>Click the Trash Can button</title>
+				 <para>
+					Click the <guiicon>Trash Can</guiicon> icon corresponding to the view you want to delete.
+				</para>
+				 <para>
+					A confirmation message displays.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Delete_Views-Confirm_deletion">
+				<title>Confirm deletion</title>
+				 <para>
+					Click <guibutton>OK</guibutton> to delete the view, or <guibutton>Cancel</guibutton> to preserve the view.
+				</para>
+				 <note>
+					<para>
+						You can not delete a view that is in use.
+					</para>
+
+				</note>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Views-Preview_a_View">
+			<title>Preview a View</title>
+			 <step>
+				<para>
+					Click the Magnifying Glass icon in the Action column of the view you want to preview.
+				</para>
+				 <para>
+					The View form opens.
+				</para>
+				 <figure id="figu-User_Guide-Preview_a_View-View_Dialog">
+					<title>View Dialog</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/img-View_Form.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Click Close to exit the View Form.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Content_Presentation_Manager-ECM_Templates">
+		<title>ECM Templates</title>
+		 <figure id="figu-User_Guide-ECM_Templates-ECM_Templates">
+			<title>ECM Templates</title>
+			 <mediaobject>
+				<imageobject>
+					<imagedata fileref="images/ecmtemplates.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</figure>
+		 <procedure id="proc-User_Guide-ECM_Templates-Add_a_new_ECM_Template">
+			<title>Add a new ECM Template</title>
+			 <step>
+				<para>
+					Select the ECM Templates tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the <guibutton>Add</guibutton> button to open the Add ECM Template form.
+				</para>
+				 <figure id="figu-User_Guide-Add_a_new_ECM_Template-The_Add_ECM_Template_form">
+					<title>The Add ECM Template form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/addecmtemplate.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Input the content of the template in the "Content" field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Input a name for the template in the "Name" field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select a type for the template in the "Template Type" field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Save</guibutton> to accept adding a new template, or click <guibutton>Reset</guibutton> to change values, or <guibutton>Cancel</guibutton> to quit without any changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-ECM_Templates-Editing_a_Template">
+			<title>Editing a Template</title>
+			 <step>
+				<para>
+					Click the <guibutton>Pencil</guibutton> icon next to the template you want to edit.
+				</para>
+				 <figure id="figu-User_Guide-Editing_a_Template-Editing_an_ECM_Template_Form">
+					<title>Editing an ECM Template Form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/editecmtemplate.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Change the current template's properties.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Save</guibutton> to accept all changes, or <guibutton>Cancel</guibutton> to quit without any changes.
+				</para>
+				 <note>
+					<para>
+						You can not edit the template name.
+					</para>
+					 <para>
+						If you tick the 'Enable Version' checkbox, this template will automatically increase to 1 version after you have clicked Save. It is displayed at the 'Base version' column in 'ECM template' tab.
+					</para>
+					 <para>
+						If the template has at least 2 versions, in the 'Edit ECM Template' form, it displays the Restore button that allows restoring the template version.
+					</para>
+
+				</note>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-ECM_Templates-Delete_a_Template">
+			<title>Delete a Template</title>
+			 <step>
+				<para>
+					Click the <guibutton>Trash</guibutton> icon corresponding with the template you want to edit. A confirmation message will appear.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Ok</guibutton> to accept deleting this template, or <guibutton>Cancel</guibutton> to discard this action.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Content_Presentation_Manager-BC_Templates">
+		<title>BC Templates</title>
+		 <figure id="figu-User_Guide-BC_Templates-BC_Templates_form">
+			<title>BC Templates form</title>
+			 <mediaobject>
+				<imageobject>
+					<imagedata fileref="images/bctemplatesform.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</figure>
+		 <procedure id="proc-User_Guide-BC_Templates-Adding_a_New_Template">
+			<title>Adding a New Template</title>
+			 <step>
+				<para>
+					Click <guibutton>Add</guibutton> to open the Add BC Template form.
+				</para>
+				 <figure id="figu-User_Guide-Adding_a_New_Template-The_Add_BC_Template_form">
+					<title>The Add BC Template form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/addbctemplateform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Input the content for the template in the Content textbox. (*Required).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Input the name for the template in the Name field. (*Required).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the template type from the dropdown box in the Template Type form.
+				</para>
+				 <figure id="figu-User_Guide-Adding_a_New_Template-Dropdown_Box">
+					<title>Dropdown Box</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/templatetypedropdownbox.png" format="PNG" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+				 <note>
+					<para>
+						The name must be unique.
+					</para>
+					 <para>
+						The name must not contain special characters like !,@,#,$,%,&amp;,*,(,).
+					</para>
+
+				</note>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Save</guibutton> to complete adding a new template.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-BC_Templates-Edit_a_BC_Template">
+			<title>Edit a BC Template</title>
+			 <step>
+				<para>
+					Click the <guibutton>Pencil</guibutton> icon on a template that you want to edit.
+				</para>
+				 <figure id="figu-User_Guide-Edit_a_BC_Template-The_Edit_BC_Template_Form">
+					<title>The Edit BC Template Form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata fileref="images/editbctemplateform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Change the current template's properties.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Save</guibutton> to accept all changes, or <guibutton>Cancel</guibutton> to quit without any changes.
+				</para>
+				 <note>
+					<para>
+						You can not edit the template name.
+					</para>
+					 <para>
+						You can not edit the template type.
+					</para>
+					 <para>
+						If you tick the 'Enable Version' checkbox, this template will automatically increase by 1 version after you have clicked Save. It is displayed at the 'Base Version' column in ECM Template tab.
+					</para>
+					 <para>
+						If the template has at least 2 versions, in the 'Edit ECM Template' form, it displays the Restore button that allows restoring the template version.
+					</para>
+
+				</note>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-BC_Templates-Delete_a_Template">
+			<title>Delete a Template</title>
+			 <step>
+				<para>
+					Click the <guibutton>Trash</guibutton> icon corresponding with the template you want to edit. A confirmation message will appear.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Ok</guibutton> to accept deleting the template, or <guibutton>Cancel</guibutton> to discard this action.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Content_Presentation_Manager-Drives_Management">
+		<title>Drives Management</title>
+		 <para>
+			The function is used to manage drives in the File Explorer. It allows adding, editing and deleting drives.
+		</para>
+		 <para>
+			Go to <guibutton>Sites Administration</guibutton>, then <guibutton>Content Presentation</guibutton>, and finally <guibutton>Manage Drives</guibutton>.
+		</para>
+		 <mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/manage_drives.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <section id="sect-User_Guide-Drives_Management-Add_a_new_drive">
+			<title>Add a new drive</title>
+			 <para>
+				Use the <xref linkend="proc-User_Guide-Add_a_new_drive-Add_A_New_Drive" /> to add a new drive.
+			</para>
+			 <procedure id="proc-User_Guide-Add_a_new_drive-Add_A_New_Drive">
+				<title>Add A New Drive</title>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_One">
+					<title>Step One</title>
+					 <para>
+						Click the <guibutton>Add Drive</guibutton> button in the <guibutton>Manage Drives</guibutton> form to open the <guibutton>Add Drive</guibutton> form.
+					</para>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/add_drive.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Two">
+					<title>Step Two</title>
+					 <para>
+						Input a name for the new drive in the <guibutton>Name</guibutton> field. (*Required).
+					</para>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Three">
+					<title>Step Three</title>
+					 <para>
+						Select a workspace for the drive. There are 4 available workspaces: system, collaboration, backup, and dms-system.
+					</para>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/workspaces.png" format="PNG" width="500" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Four">
+					<title>Step Four</title>
+					 <para>
+						Select the home path for the drive by clicking the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/deplussy.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 icon
+					</para>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/home_path.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Five">
+					<title>Step Five</title>
+					 <para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/deplussy.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 icon to select the home path.
+					</para>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Six">
+					<title>Step Six</title>
+					 <para>
+						Select an icon for the workspace by clicking the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/addplusicon.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+
+					</para>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Seven">
+					<title>Step Seven</title>
+					 <para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/greentick.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 to select an icon file:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/addiconfileform.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/addiconfileform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Eight">
+					<title>Step Eight</title>
+					 <para>
+						Select permissions for groups that have access rights to this drive by clicking the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/pluspermissionbutton.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 icon.
+					</para>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Nine">
+					<title>Step Nine</title>
+					 <para>
+						Select or unselect the various checkboxes to hide or show the corresponding drive elements:
+					</para>
+					 <variablelist>
+						<varlistentry>
+							<term>Show referenced document</term>
+							 <listitem>
+								<para>
+									Allows viewing preference documents.
+								</para>
+
+							</listitem>
+
+						</varlistentry>
+						 <varlistentry>
+							<term>Show non-document</term>
+							 <listitem>
+								<para>
+									Allows viewing non-documents.
+								</para>
+
+							</listitem>
+
+						</varlistentry>
+						 <varlistentry>
+							<term>Show sidebar</term>
+							 <listitem>
+								<para>
+									Allows showing the sidebar.
+								</para>
+
+							</listitem>
+
+						</varlistentry>
+						 <varlistentry>
+							<term>Show hidden node</term>
+							 <listitem>
+								<para>
+									Allows showing the hidden nodes.
+								</para>
+
+							</listitem>
+
+						</varlistentry>
+
+					</variablelist>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Ten">
+					<title>Step Ten</title>
+					 <para>
+						Select the document type that will be created in this drive:
+					</para>
+					 <variablelist>
+						<varlistentry>
+							<term>Folder</term>
+							 <listitem>
+								<para>
+									Only <emphasis role="bold">nt:folder</emphasis> folders can be created in this drive.
+								</para>
+
+							</listitem>
+
+						</varlistentry>
+						 <varlistentry>
+							<term>Unstructured folder</term>
+							 <listitem>
+								<para>
+									Only <emphasis role="bold">nt:unstructured</emphasis> folders can be created in this drive.
+								</para>
+
+							</listitem>
+
+						</varlistentry>
+
+					</variablelist>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Eleven">
+					<title>Step Eleven</title>
+					 <para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/versionplusicon.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 to select a node type. The <emphasis role="bold">Select node types</emphasis> form will appear:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/selectnodetypesform.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/selectnodetypesform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						Enter a node name to search for in the <emphasis role="bold">Node type name</emphasis> field and click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 to begin searching.
+					</para>
+					 <para>
+						All the node types matching the search string will appear in a list below.
+					</para>
+					 <para>
+						Check the box correpsonding to the desired node type in the <emphasis role="bold">Select</emphasis> column, or click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/addplusicon.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 beside <emphasis role="bold">Choose all node types</emphasis> to select all results.
+					</para>
+					 <para>
+						If you click the icon, the <emphasis role="bold">Allowance nodetype on left tree</emphasis> becomes a required field (indicated by an asterix '*')
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/requiredallowancenodetype.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/requiredallowancenodetype.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 if you want to remove the selected nodetype.
+					</para>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Twelve">
+					<title>Step Twelve</title>
+					 <para>
+						Select the <emphasis role="bold">Apply Views</emphasis> tab and select the view type you want to be available in the drive:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/applyviewstab.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/applyviewstab.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step id="step-User_Guide-Add_A_New_Drive-Step_Thirteen">
+					<title>Step Thirteen</title>
+					 <para>
+						Click <emphasis role="bold">Save</emphasis> to commit the details and create the new drive, <emphasis role="bold">Refresh</emphasis> to clear the form or <emphasis role="bold">Cancel</emphasis> to abort the operation.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <procedure id="proc-User_Guide-Add_a_new_drive-Edit_a_drive">
+				<title>Edit a drive</title>
+				 <step id="step-User_Guide-Edit_a_drive-Step_One">
+					<title>Step One</title>
+					 <para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/editicon4.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 icon that corresponds to the drive you want to edit. The <emphasis role="bold">Edit drive</emphasis> for will appear:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/editdriveform.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/editdriveform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step id="step-User_Guide-Edit_a_drive-Step_Two">
+					<title>Step Two</title>
+					 <para>
+						Edit the properties as required.
+					</para>
+
+				</step>
+				 <step id="step-User_Guide-Edit_a_drive-Step_Three">
+					<title>Step Three</title>
+					 <para>
+						Click <emphasis role="bold">Save</emphasis> to commit the changes.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <note>
+				<title>Drive Name</title>
+				 <para>
+					The drive name can not be edited in this form.
+				</para>
+
+			</note>
+			 <procedure id="proc-User_Guide-Add_a_new_drive-Delete_a_drive">
+				<title>Delete a drive</title>
+				 <step id="step-User_Guide-Delete_a_drive-Step_One">
+					<title>Step One</title>
+					 <para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+						</inlinemediaobject>
+						 that corresponds to the drive you want to delete.
+					</para>
+
+				</step>
+				 <step id="step-User_Guide-Delete_a_drive-Step_Two">
+					<title>Step Two</title>
+					 <para>
+						Click <emphasis role="bold">OK</emphasis> on the confirmation message to delete the drive or click <emphasis role="bold">Cancel</emphasis> to abort the operation.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+
+	</section>
+
+</section>
+
+

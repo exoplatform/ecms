@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE authorgroup PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<authorgroup>
+	<editor>
+		<firstname>Scott</firstname>
+		 <surname>Mumford</surname>
+		 <affiliation>
+			<shortaffil>Red Hat</shortaffil>
+			 <orgdiv>Engineering Content Services</orgdiv>
+
+		</affiliation>
+		 <email>smumford@redhat.com</email>
+
+	</editor>
+	 <othercredit>
+		<affiliation>
+			<orgname><emphasis role="bold"><ulink type="http" url="http://www.jboss.org/gatein/">GateIn</ulink></emphasis> and <emphasis role="bold"><ulink type="http" url="http://www.exoplatform.com">eXo Platform</ulink></emphasis></orgname>
+			 <orgdiv>Documentation Teams</orgdiv>
+
+		</affiliation>
+		 <contrib>Based on original product documentation by:</contrib>
+
+	</othercredit>
+</authorgroup>
+

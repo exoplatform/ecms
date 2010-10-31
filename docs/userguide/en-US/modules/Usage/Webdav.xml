@@ -1,0 +1,358 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Manage_Site_Content_with_WebDAV">
+	<title>Manage Site Content with WebDAV</title>
+	 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Concept">
+		<title>Concept</title>
+		 <para>
+			<emphasis role="bold">WebDAV</emphasis> is an abbreviation of <emphasis role="bold">Web</emphasis>-based <emphasis role="bold">D</emphasis>istributed <emphasis role="bold">A</emphasis>uthoring and <emphasis role="bold">V</emphasis>ersioning.. It is used to publish to publish and manage file and directories on a remote server. It also groups users to perform these tasks.
+		</para>
+		 <para>
+			WebDAV provides the following features:
+		</para>
+		 <variablelist>
+			<varlistentry>
+				<term>Locking</term>
+				 <listitem>
+					<para>
+						This feature prevents two or more collaborators from overwriting shared files.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Site Manipulation</term>
+				 <listitem>
+					<para>
+						WebDAV supports copy and move actions and the creaion of <emphasis>collections</emphasis> (file system directories)
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Name space management</term>
+				 <listitem>
+					<para>
+						This function enables copying and moving web pages within a server's namespace.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+
+		</variablelist>
+		 <para>
+			WebDAV offers users the ability to:
+		</para>
+		 <itemizedlist>
+			<listitem>
+				<para>
+					Copy/paste web content on a desktop machine and have those changes reflected in a host-based website.
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					Easily, quickly and flexibly manipulate actions on a website without having to access it directly with web-browsers. FIles can be accessed from anywhere and are stored as in local directories.
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					Easily and quickly upload content to a website simply by copying it into the appropriate directory.
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+
+	</section>
+	
+	 <!--  Close Section: 3.4.1 Overview  --> <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Using_WebDAV_With_Site_Publisher">
+		<title>Using WebDAV With Site Publisher</title>
+		 <para>
+			Site Publisher supports WebDAV in two ways:
+		</para>
+		 <note>
+			<title>DOCS NOTES:</title>
+			 <para>
+				The procedures below (esp the first) are written for a Windows operating environment. We need to either broaden them to cover all operating systems or include other OS-specific procedures.
+			</para>
+			 <para>
+				I've added some further details as best I can.
+			</para>
+
+		</note>
+		 <procedure id="proc-User_Guide-Using_WebDAV_With_Site_Publisher-Using_a_local_file_system">
+			<title>Using a local file system</title>
+			 <step>
+				<para>
+					Navigate to the network directory on your local computer:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							On Windows machines this is the <emphasis role="bold">My Network Places</emphasis> location found in the left sidebar of the file manager.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							On Linux systems that use the Gnome desktop manager, it is found under <emphasis role="bold">Network</emphasis> which in the <emphasis role="bold">Places</emphasis> menu or in the sidebar of Nautilus.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							On OS X (Macintosh) systems this location can be found by clicking on the <emphasis role="bold">Network</emphasis> icon in Finder.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/mynetworkplaces.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/mynetworkplaces.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the <emphasis role="bold">Add a network place</emphasis> link on the left to open the <emphasis role="bold">Add Network Place Wizard</emphasis>:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/networkplacewizard.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/networkplacewizard.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Next</emphasis> to choose a network location:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/networkplacelocation.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/networkplacelocation.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Select <emphasis role="bold">Choose andother network location</emphasis> to create a shortcut.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter an address into the <emphasis role="bold">Internet or network address</emphasis> field. As an example, the address of the demonstration site <emphasis>Acme</emphasis> is <emphasis role="bold"> http://localhost:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme</emphasis>
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Next</emphasis>. After a few moments a folder named <emphasis role="bold">acme on localhost</emphasis> will appear in the <emphasis role="bold">My Network Places</emphasis> directory.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/newnetworklocation.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/newnetworklocation.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					Each site being managed by WebDAV will appear as a folder in this location.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Take action on the content in this folder to administer the site content remotely.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Using_WebDAV_With_Site_Publisher-Using_a_web_browser">
+			<title>Using a web browser</title>
+			 <step>
+				<para>
+					Navigate to <ulink type="http" url="http://localhost:8080/portal" /> in your web browser.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Sites Explorer</emphasis> in the Administration bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Drives</emphasis> the select <emphasis role="bold">Sites Management</emphasis>.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/sitesmanagementdrive.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/sitesmanagementdrive.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					You will see all sites listed in the left sidebar:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/sitesleftpane.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/sitesleftpane.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Right click the site you want to view with WebDAV and select the <emphasis role="bold">Download and Allow Edition</emphasis> item in the menu.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/alloweditionmenu.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/alloweditionmenu.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The selected site will be shown in WebDAV:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/webdavsiteview.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/webdavsiteview.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					In this view you can you can access documents in the directories that are linked to the web server.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <!--  Close Section: 3.4.2 Using WebDAV With Site Publisher  --> 
+    <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Actions">
+		<title>Actions</title>
+		 <para>
+			You see all <emphasis>default folders</emphasis> of a site when accessing it via WebDAV. Manipulating content through WebDAV is the same as working on it in local folders.
+		</para>
+		 <para>
+			This means you can copy/paste files, list folders, rename and more in system directories.
+		</para>
+		 <section id="sect-User_Guide-Actions-Add_new_content_to_a_site">
+			<title>Add new content to a site</title>
+			 <para>
+				This function allows you to copy web content (such as an <emphasis role="bold">.html</emphasis> file) from your local computer to a <emphasis>web content</emphasis> folder of a site.
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Access a site via WebDAV (refer to <xref linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-Using_WebDAV_With_Site_Publisher" />) then go to a <emphasis role="bold">web content</emphasis> folder of the site.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Copy the web content on your local system into this folder.
+					</para>
+					 <para>
+						The copied file will be converted to web content that is viewable by WebDAV automatically. The content is converted to a directory containing <emphasis>CSS</emphasis>, <emphasis>documents</emphasis>, <emphasis>js</emphasis> and <emphasis>media</emphasis>.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <para>
+				After new content is added it can be viewed as a folder in WebDAV or as page content using a web browser.
+			</para>
+
+		</section>
+		
+		 <!--  Close Section: 3.4.3.1 Add new content to a site --> <section id="sect-User_Guide-Actions-Delete_content">
+			<title>Delete content</title>
+			 <para>
+				This function allows site administrators to delete web content files singularly or in batches.
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Navigate to the folder that contains the content you want to remove.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Right click the content files or directories (hold the <emphasis>Ctrl</emphasis> key to select multiple files at once) and select <emphasis role="bold">Delete form the context menu</emphasis>.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/webdavcontextdelete.png" format="PNG" scale="" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/webdavcontextdelete.png" format="PNG" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						The selected file(s) will be removed from the site.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+		 <!--  Close Section: 3.4.3.2 Delete content  -->
+	</section>
+	
+	 <!--  Close Section: 3.4.3 Actions  --><!--  Close Section: 3.4 Manage Site Content with WebDAV  -->
+</section>
+
+

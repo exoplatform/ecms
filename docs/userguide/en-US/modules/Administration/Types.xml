@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Types_of_Content">
+	<title>Types of Content</title>
+	 <section id="sect-User_Guide-Types_of_Content-The_Namespace_Registry">
+		<title>The Namespace Registry</title>
+		 <para>
+			The namespace is used as a prefix for the node type that describes all the node type properties. This function allows users to register the namespace used in the system. <!-- Go to Sites Administration | Types of Content | Namespace Registry  -->
+		</para>
+		 <figure id="figu-User_Guide-The_Namespace_Registry-Namespace_Registry">
+			<title>Namespace Registry</title>
+			 <mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/namespaceregistry.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</figure>
+		 <procedure id="proc-User_Guide-The_Namespace_Registry-Registering_a_Namespace">
+			<title>Registering a Namespace</title>
+			 <step>
+				<para>
+					Click the <guibutton>Register</guibutton> button on the Namespace Registry form to register a new namespace.
+				</para>
+				 <figure id="figu-User_Guide-Registering_a_Namespace-Namespace_Registration_Form">
+					<title>Namespace Registration Form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/namespaceregistrationform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Enter the value for the Namespace Prefix field. (* Required).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter the value for the Namespace Prefix field. (* Required).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter the value for the Uri field. This field must be unique. (*Required).
+				</para>
+				 <important>
+					<para>
+						The namespace must not contain special characters like !,@,#,$,%,&amp;,*,(,).
+					</para>
+
+				</important>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Types_of_Content-Manage_Node_Types">
+		<title>Manage Node Types</title>
+		 <para>
+			This function is used to control all node types in WCM.
+		</para>
+		 <figure id="figu-User_Guide-Manage_Node_Types-The_Manage_Node_Type_Form">
+			<title>The Manage Node Type Form</title>
+			 <mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/themanagenodetypeform.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</figure>
+		 <procedure id="proc-User_Guide-Manage_Node_Types-View_Node_Types">
+			<title>View Node Types</title>
+			 <step>
+				<para>
+					Click the icon that corresponds to the node to be reviewed. The View Node Type Information form will appear.
+				</para>
+				 <figure id="figu-User_Guide-View_Node_Types-View_Node_Type_Information_Form">
+					<title>View Node Type Information Form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/viewnodetypeinformation.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Close</guibutton> to exit this form.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Node_Types-Add_Node_Type">
+			<title>Add Node Type</title>
+			 <step>
+				<para>
+					Open the Add/Edit Node Type Definitions form by clicking the <guibutton>Add</guibutton> button on the Manage Node Type Form.
+				</para>
+				 <figure id="figu-User_Guide-Add_Node_Type-Add_Node_Type_Form">
+					<title>Add Node Type Form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/addnodetype.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Select a name space for the node. It looks like a node prefix.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter a node name for the Node type name field. This field is required, and must be unique.
+				</para>
+				 <important>
+					<para>
+						The name must not contain special characters like !,@,#,$,%,&amp;,*,(,).
+					</para>
+
+				</important>
+
+			</step>
+			 <step>
+				<para>
+					Select a value for the "Is mixin type" field.
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							True: this node is mixin type.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							False: this node is not mixin type.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</step>
+			 <step>
+				<para>
+					Select a value for the "Orderable child nodes" field:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							True: child nodes are ordered.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							False: child nodes are not ordered.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</step>
+			 <step>
+				<para>
+					Enter a value for the Primary item name field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Super Types: Click the <guibutton>+</guibutton> button to add more parent types.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Property definitions: lists all definition names of Property tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Child node definitions: lists all definition names of Child node tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Save</guibutton> to accept adding a new node type, or <guibutton>Save draft</guibutton> to save this node type as a draft, or <guibutton>Cancel</guibutton> to quit.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Node_Types-Export_Node_Types">
+			<title>Export Node Types</title>
+			 <step>
+				<para>
+					Open the Export Node Types form by clicking the <guibutton>Export</guibutton> button on the Manage Node Type Form.
+				</para>
+				 <figure id="figu-User_Guide-Export_Node_Types-Export_Node_Types_Form">
+					<title>Export Node Types Form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/exportnodetypes.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Click <guibutton>Uncheck all</guibutton> if you do not want to export all node types. After clicking <guibutton>Uncheck all</guibutton>, this button becomes the <guibutton>Check all</guibutton> button.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select nodes that you want to export by ticking the checkboxes.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the <guibutton>Export</guibutton> button in this form.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the location in your computer to save the exported node.
+				</para>
+				 <important>
+					<para>
+						You must select at least 1 node type to be exported. If you do not want to export the node, click <guibutton>Cancel</guibutton> to quit this pop up.
+					</para>
+
+				</important>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Node_Types-Import_Node_Types">
+			<title>Import Node Types</title>
+			 <step>
+				<para>
+					Open the Import Node Type from XML file form by clicking the <guibutton>Import</guibutton> button on the Manage Node Type Form.
+				</para>
+				 <figure id="figu-User_Guide-Import_Node_Types-Import_Node_Type_from_XML_file_Form">
+					<title>Import Node Type from XML file Form</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/importnodetype.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+
+			</step>
+			 <step>
+				<para>
+					Click the <guibutton>Browse</guibutton> button to upload a file.
+				</para>
+				 <figure id="figu-User_Guide-Import_Node_Types-Browse_for_XML_files_containing_Node_Types">
+					<title>Browse for XML files containing Node Types</title>
+					 <mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/browsefornodes.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</figure>
+				 <important>
+					<para>
+						You must upload an XML file. This file is in the node type's format.
+					</para>
+
+				</important>
+
+			</step>
+			 <step>
+				<para>
+					Click the <guibutton>Upload</guibutton> button.
+				</para>
+				 <note>
+					<para>
+						If you want to upload a different file, click the <guibutton>trash</guibutton>icon to delete the file which has just been uploaded, then upload other files.
+					</para>
+
+				</note>
+
+			</step>
+			 <step>
+				<para>
+					Tick the checkboxes corresponding to the nodes that you want to import.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the Import button to complete importing a node type.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+
+</section>
+
+

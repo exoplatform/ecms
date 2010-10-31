@@ -1,0 +1,386 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-User_Guide-Preamble">
+	<title>Preamble</title>
+	 <section id="sect-User_Guide-Preamble-Overview">
+		<title>Overview</title>
+		 <para>
+			Beginning as an Open Source project in the year 2002, eXo is well-known as the industry's first Java portlet container. With the aim of dominating the potential portal market through robust and easy-to-use applications, eXo Project succeeded in attracting consumers in the whole world. eXo actually opened the floodgates to various options in many markets, and customers have been choosing eXo as the best method for their success.
+		</para>
+		 <para>
+			The eXo Platform™ software is a powerful Open Source corporate portal and content management system. Users of the platform have a customized single point of access to the company's information system and resources.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/exoplatform.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/exoplatform.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			The foundation for eXo Platform 3.0 is eXo Core Services, a powerful set of REST-based services for rapid website development, content management and gadget-based development and deployment. eXo Extended Services are also a part of the eXo Platform 3.0 running on top of eXo Core Services to enable easy development of rich, user-centric web applications.
+		</para>
+		 <para>
+			eXo Content is one of eXo Core services, it provides a set of services to extend portal-based applications with Enterprise Content Management (ECM) capabilities. Document Management (DMS) features make it easy to catalog and organize enterprise content and with powerful Web Content Management (WCM) services to quickly build dynamic, content-rich websites.
+		</para>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Preamble-Why_Use_Site_Publisher">
+		<title>Why Use Site Publisher</title>
+		 <para>
+			If you are looking for a powerful tool and strategies in managing website and contents, eXo Content is what you need. eXo Content is designed to provide webmasters who manage websites the way of how to maintain, control, modify and reassemble the content of a web-page easily and effectively. All components of your website can be orgnized, reconstructed easily, which helps you keep your website under control. eXo Content really brings interesting experience for all users and changes their way of thinking about website. The followings are key features of eXo Content:
+		</para>
+		 <variablelist id="vari-User_Guide-Why_Use_Site_Publisher-Website_Creation">
+			<title>Website Creation</title>
+			 <varlistentry>
+				<term>Fast Setup:</term>
+				 <listitem>
+					<para>
+						Setup a new site in just a few clicks with an intuitive user interface and template features.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Navigate, Preview and Publish Content:</term>
+				 <listitem>
+					<para>
+						Navigate through page content in either a single content viewer or the list content display, quickly preview page content or work on new content in draft mode and publish at anytime.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Templates:</term>
+				 <listitem>
+					<para>
+						Create websites from existing templates and themes, or create new templates with a consistent look-and-feel across a single site.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>In-Site Edition</term>
+				 <listitem>
+					<para>
+						The integrated rich text editor allows non-technical users to edit the pages they are in charge of in an intuitive way.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+
+		</variablelist>
+		 <variablelist id="vari-User_Guide-Why_Use_Site_Publisher-Web_Content_Organization">
+			<title>Web Content Organization</title>
+			 <varlistentry>
+				<term>Web-Based Administration:</term>
+				 <listitem>
+					<para>
+						Use a web browser to manage sites remotely, no local administration software is required.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Manage Multiple Websites:</term>
+				 <listitem>
+					<para>
+						Manage and control every site in one place.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Media Library:</term>
+				 <listitem>
+					<para>
+						Upload media to the library, publish, reuse and update all available media content across multiple websites.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Content Search:</term>
+				 <listitem>
+					<para>
+						Search content and documents using categorization and tag features.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Broken Link Detection:</term>
+				 <listitem>
+					<para>
+						Know how many broken links are present and how many are functional with ease.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Versioning and Rollback:</term>
+				 <listitem>
+					<para>
+						Easily rollback a website's content with automatic versioning.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>SEO and Friendly URLs:</term>
+				 <listitem>
+					<para>
+						Search Engine Optimization (SEO) is simplified for editing meta tags and more. Content has its own specific URL for easier bookmarking and improved SEO.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Configuration for Deployment on Web Farms:</term>
+				 <listitem>
+					<para>
+						Advanced deployment rule for scalable, three-tier web application architecture with partitioned replicated deployment.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+
+		</variablelist>
+		 <variablelist id="vari-User_Guide-Why_Use_Site_Publisher-Capture_and_Manage_Documents">
+			<title>Capture and Manage Documents</title>
+			 <varlistentry>
+				<term>Kofax Plugin:</term>
+				 <listitem>
+					<para>
+						Collect paper documents, forms, invoices and other unstructured documents and convert into accurate and retrievable information, stored in the eXo JCR.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Access Control List:</term>
+				 <listitem>
+					<para>
+						Validate the current session's permissions to add nodes, set properties, remove or retrieve items. Define actions to launch the next step in a process, or to invoke any "coded" action required.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Workflow:</term>
+				 <listitem>
+					<para>
+						Specify processes for document collaboration and validation.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Record Management:</term>
+				 <listitem>
+					<para>
+						Track the status of content completion and control document storage lifecycles.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+
+		</variablelist>
+		 <variablelist id="vari-User_Guide-Why_Use_Site_Publisher-Store_and_Access_Documents">
+			<title>Store and Access Documents</title>
+			 <varlistentry>
+				<term>JCR:</term>
+				 <listitem>
+					<para>
+						eXo JCR allows applications to access or manage files independent of their location, and also provides advanced features such as unified access control, versioning, indexing and more.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Automatic Backup:</term>
+				 <listitem>
+					<para>
+						Define and automate tasks to save documents as required.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Web Interface:</term>
+				 <listitem>
+					<para>
+						Access documents in an intuitive and user-friendly web interface.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Microsoft and OpenOffice Plug-ins:</term>
+				 <listitem>
+					<para>
+						Microsoft and OpenOffice plug-ins give users the freedom to work on documents in their preferred document editing program.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+
+		</variablelist>
+		 <formalpara id="form-User_Guide-Why_Use_Site_Publisher-And_More...">
+			<title>And More...</title>
+			 <para>
+				eXo Content also provides other powerful tools to manage an build content-rich websites such as CSS, Java Script and RSS support, advanced document management tool, collaboration tools, etc. All features is to meet your requirements for the purpose of easy site management, cost reduction in managing multiple sites in only one place.
+			</para>
+
+		</formalpara>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Preamble-About_This_Document">
+		<title>About This Document</title>
+		 <para>
+			The intended reader of this manual are webmasters using eXo Content. This manual will explain all the basic and advanced features that eXo Content provides in managing websites and site content. It gives in-depth examples and easy explanations of eXo Platform technology that allows the webmasters to create and manage a very fast and powerful website.
+		</para>
+		 <para>
+			With this guide you will:
+		</para>
+		 <itemizedlist>
+			<listitem>
+				<para>
+					learn the basic terminologies used in eXo Content.
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					know how to create, manage and publish Site content.
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					know how to manage Web pages, set up a website, etc.
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Preamble-References_and_Related_Sources">
+		<title>References and Related Sources</title>
+		 <itemizedlist id="item-User_Guide-References_and_Related_Sources-Information">
+			<title>Information</title>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://www.exoplatform.com/">eXo Home Page</ulink>
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://wiki.exoplatform.com/xwiki/bin/view/Main/WebHome/">eXo Wiki</ulink>
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+		 <itemizedlist id="item-User_Guide-References_and_Related_Sources-Support">
+			<title>Support</title>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://forums.exoplatform.org/">Forums</ulink>
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://faq.exoplatform.org/index.html">FAQs</ulink>
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+		 <itemizedlist id="item-User_Guide-References_and_Related_Sources-Downloads">
+			<title>Downloads</title>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://www.exoplatform.com/company/public/website/platform/exo-core-services/exo-content">eXo Content</ulink>
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://www.exoplatform.com/company/public/website/platform/exo-core-services/exo-development-tools">eXo Development Tools</ulink>
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<ulink type="http" url="">Gatein Portal Framework</ulink>
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://www.exoplatform.com/company/public/website/platform/exo-extended-services/exo-collaboration">eXo Collaboration</ulink>
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://www.exoplatform.com/company/public/website/platform/exo-extended-services/exo-knowledge">eXo Knowledge</ulink>
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://www.exoplatform.com/company/public/website/platform/exo-extended-services/exo-social">eXo Social</ulink>
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+		 <itemizedlist id="item-User_Guide-References_and_Related_Sources-Resource_Center">
+			<title>Resource Center</title>
+			 <listitem>
+				<para>
+					<ulink type="http" url="http://www.exoplatform.com/company/public/website/resource-center">Video demos, tutorials, webinar archives, features and benefits tables and more</ulink>
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+
+	</section>
+	
+
+</chapter>
+

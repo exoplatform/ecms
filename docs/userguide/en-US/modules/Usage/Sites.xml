@@ -1,0 +1,1346 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Set_Up_a_Website">
+	<title>Set Up a Website</title>
+	 <para>
+		In DMS, we use the 'Website' term equally to the 'Portal' term. It means that creating a new portal is creating a new website. Thus, you can also edit, delete, view a website as a portal.
+	</para>
+	 <para>
+		Besides, DMS also supports webmasters/ administrators to manage websites better.
+	</para>
+	 <section id="sect-User_Guide-Set_Up_a_Website-Create_a_new_site">
+		<title>Create a new site</title>
+		 <para>
+			This function allows you to create a site (portal) to meet your own needs.
+		</para>
+		 <para>
+			Do as follows:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Click Site on the administration bar.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/site.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/site.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					A list of existing portals will be listed. Click the Add New Portal button to open the Add new portal form:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/portallist.png" format="PNG" scale="110" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/portallist.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The add new portal form appears:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/newportal.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/newportal.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					In the Portal Template tab, select Classic Portal or ACME Template for the new portal.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the Portal Setting tab to set some properties for this site:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/portalsettings.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/portalsettings.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					(*): required
+				</para>
+				 <table id="tabl-User_Guide-Create_a_new_site-Details">
+					<title>Details:</title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Field
+								</entry>
+								 <entry>
+									Information
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									Portal name
+								</entry>
+								 <entry>
+									The name of the portal. This field is required and must be unique. Only alphabet, numbers and underscore characters are allowed. The Portal name must be at least 3 characters
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Locale
+								</entry>
+								 <entry>
+									The interface language of the portal. This field is required
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Skin
+								</entry>
+								 <entry>
+									The skin of the portal.
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+
+			</step>
+			 <step>
+				<para>
+					Keep session alive by clicking the <emphasis role="bold">Properties</emphasis> tab.
+				</para>
+				 <para>
+					The Keep session alive option means keeping the working session for a long time to avoid the working time out. There are 3 options:
+				</para>
+				 <variablelist>
+					<varlistentry>
+						<term>never:</term>
+						 <listitem>
+							<para>
+								it never happens even if the application requests
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>on demand:</term>
+						 <listitem>
+							<para>
+								it starts to be used as soon as the application requests
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>always:</term>
+						 <listitem>
+							<para>
+								it's always enabled (which has a cost but the administrator will be aware of that)
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+
+				</variablelist>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/portalproperties.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/portalproperties.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Set access and edit permission for this portal by clicking the <emphasis role="bold">Permission Setting</emphasis> tab.
+				</para>
+				 <!--                         Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                         --> <para>
+					The <emphasis role="bold">Permission Setting</emphasis> tab includes two subtabs: <emphasis role="bold">Access Permission Setting</emphasis> and <emphasis role="bold">Edit Permission Setting</emphasis>.
+				</para>
+				 <variablelist>
+					<varlistentry>
+						<term>Access Permission Setting tab</term>
+						 <listitem>
+							<para>
+								By default, the access permission list of the portal is empty:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/accesspermission.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/accesspermission.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								You can assign the access permission to everyone by checking the Make it public check box, or clicking the Add Permission button to assign the access permission to a specific group which is selected from the Select Permissions form (By selecting a group on the left and a corresponding membership on the right):
+							</para>
+							 <para>
+								After selecting groups, the access permission list is displayed:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/permissionlist.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/permissionlist.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								In which, the 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/trashicon.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 icon is to remove its corresponding group from the Access Permission list.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>Edit Permission Setting</term>
+						 <listitem>
+							<para>
+								By default, it is also empty and you have to assign the edit permission to a specific group.
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/editpermission.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/editpermission.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								You can assign the edit permission to a group with a specific membership by clicking the Select Permission button in the Edit Permission Setting tab to open the Permission Selector form. Select a group on the left panel and a corresponding membership on the right panel:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/permissionselector.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/permissionselector.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								The (<emphasis role="bold">*</emphasis>) from the Select a Membership panel means that you assign the right for everyone in the selected group from left panel.
+							</para>
+							 <para>
+								After selecting a group, the Current Permission will be displayed with detailed information:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/currentpermission.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/currentpermission.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								The edit permission is assigned for only one group at one time. You can click the Delete Permission button to remove the current edit permission of the selected group or re–assign the edit permission to the another group by re-clicking the Select Permission button and select another group.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+
+				</variablelist>
+				 <!--                        END                        -->
+			</step>
+			 <step>
+				<para>
+					Click Save to accept creating a new portal.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After creating a new site, a list of the existing sites will be displayed on the screen. This new site will be added in the exiting sites in Site on the administration bar and concurrently in a drive that includes all its default files.
+		</para>
+		 <para>
+			To see it in the drive, click Group | Sites Explorer | Drive on the administrator bar.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG" scale="100" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/sitesexplorer.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			For example, after creating a portal named 'eXo', there is a drive named 'eXo' in Sites Explorer:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/exosite.png" format="PNG" scale="130" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/exosite.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Set_Up_a_Website-Edit_a_Site">
+		<title>Edit a Site</title>
+		 <para>
+			This function helps you edit a site (portal). In addition to editing properties (setting, access/edit permission) of a site like a portal, you also may edit the layout components of that site.
+		</para>
+		 <para>
+			You have two modes:
+		</para>
+		 <variablelist>
+			<varlistentry>
+				<term>View Mode:</term>
+				 <listitem>
+					<para>
+						in this mode, you only can view the current portal (site) without editing the layout components of the site. When you sign in, by default, the mode of your site will be the view mode. This mode is the 'off' status of the edit mode.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Edit Mode:</term>
+				 <listitem>
+					<para>
+						in this mode, you are either view or edit layout components of the current portal.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+
+		</variablelist>
+		 <section id="sect-User_Guide-Edit_a_Site-Turn_on_the_Edit_Mode_of_the_Site">
+			<title>Turn on the Edit Mode of the Site</title>
+			 <para>
+				After signing in, you will see two statuses (Live/Edit) of the edit mode on the Administration bar. By default, the status is 'Live'. It means that you only view the current site without editing the layout component of the site:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/portalmode.png" format="PNG" scale="120" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/portalmode.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <para>
+				To switch between two statuses “Live” and “Edit”, just click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/droparrowicon.png" format="PNG" />
+					</imageobject>
+
+				</inlinemediaobject>
+				 to open the status list and select the mode you want:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/modes.png" format="PNG" scale="60" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/modes.png" format="PNG" />
+				</imageobject>
+
+			</mediaobject>
+			 <para>
+				When your site is switched to the edit mode you are able to directly edit any components of your site:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/portaleditmode.png" format="PNG" scale="110" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/portaleditmode.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</section>
+		
+		 <section id="sect-User_Guide-Edit_a_Site-The_structure_of_a_site_interface">
+			<title>The structure of a site interface</title>
+			 <para>
+				The interface of a site can be divided into five parts like the illustration below and each part is a single content viewer so that it also includes all default elements of a web content.
+			</para>
+			 <mediaobjectco> <imageobjectco> <areaspec>
+				<area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-administration" />
+				 <area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-banner" />
+				 <area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-navigation" />
+				 <area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-content" />
+				 <area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-footer" />
+
+			</areaspec>
+			 <imageobject>
+				<imagedata align="center" fileref="images/sitestructure.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <calloutlist>
+				<callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-administration">
+					<para>
+						This is Administration bar which contains some administration functions related to portals (websites).
+					</para>
+
+				</callout>
+				 <callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-banner">
+					<para>
+						This is Banner which contains organization's slogan, logo, icon used in websites.
+					</para>
+
+				</callout>
+				 <callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-navigation">
+					<para>
+						This is Navigation bar that helps the website' s users to visualize the structure of website and provide quick links to different pages.
+					</para>
+
+				</callout>
+				 <callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-content">
+					<para>
+						This is the page content area to display the content of current selecting page
+					</para>
+
+				</callout>
+				 <callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-footer">
+					<para>
+						This is Footer of the web site. It can be texts, or image that is displayed at the bottom of the web site. It provides information about author/institutional sponsor, revision date, copyright, etc.
+					</para>
+
+				</callout>
+
+			</calloutlist>
+			 </imageobjectco></mediaobjectco>
+		</section>
+		
+		 <section id="sect-User_Guide-Edit_a_Site-How_to_edit_a_Site">
+			<title>How to edit a Site</title>
+			 <para>
+				To edit a site, do the following steps:
+			</para>
+			 <procedure id="proc-User_Guide-How_to_edit_a_Site-Edit_the_properties_of_the_Website">
+				<title>Edit the properties of the Website:</title>
+				 <step>
+					<para>
+						Show the form to edit the current site by clicking Site Editor on the administration bar, then select 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/editlayouticon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/editlayout.png" format="PNG" scale="100" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/editlayout.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						The form to edit the current portal will appear.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/editportalform.png" format="PNG" scale="110" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/editportalform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						To edit the properties of the current portal, use one of icons below:
+					</para>
+					 <table>
+						<title></title>
+						 <tgroup cols="2">
+							<thead>
+								<row>
+									<entry>
+										Indicator
+									</entry>
+									 <entry>
+										Meaning
+									</entry>
+
+								</row>
+
+							</thead>
+							 <tbody>
+								<row>
+									<entry>
+										<mediaobject>
+											<imageobject role="html">
+												<imagedata align="center" fileref="images/portalpropertiesbutton.png" format="PNG" scale="100" />
+											</imageobject>
+
+										</mediaobject>
+
+									</entry>
+									 <entry>
+										<emphasis role="bold">Portal Properties</emphasis>: allows editing the portal's properties
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										<mediaobject>
+											<imageobject role="html">
+												<imagedata align="center" fileref="images/switchviewbutton.png" format="PNG" scale="100" />
+											</imageobject>
+
+										</mediaobject>
+
+									</entry>
+									 <entry>
+										<emphasis role="bold">Switch View Mode</emphasis>: allows turning on the view mode
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										<mediaobject>
+											<imageobject role="html">
+												<imagedata align="center" fileref="images/finishbutton.png" format="PNG" scale="100" />
+											</imageobject>
+
+										</mediaobject>
+
+									</entry>
+									 <entry>
+										<emphasis role="bold">Finish</emphasis>: allows saving all changes and escaping the Edit page
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										<mediaobject>
+											<imageobject role="html">
+												<imagedata align="center" fileref="images/abortbutton.png" format="PNG" scale="100" />
+											</imageobject>
+
+										</mediaobject>
+
+									</entry>
+									 <entry>
+										<emphasis role="bold">Abort</emphasis>: allows canceling all changes that have not been saved and quitting the Edit page
+									</entry>
+
+								</row>
+
+							</tbody>
+
+						</tgroup>
+
+					</table>
+
+				</step>
+
+			</procedure>
+			
+			 <formalpara id="form-User_Guide-How_to_edit_a_Site-The_layout_of_Edit_Website">
+				<title>The layout of Edit Website:</title>
+				 <para>
+					You can only edit a banner, a navigation bar, a breadcrumb bar, a homepage and a footer of a website.
+				</para>
+
+			</formalpara>
+			 <procedure id="proc-User_Guide-How_to_edit_a_Site-Edit_Banner">
+				<title>Edit Banner</title>
+				 <step>
+					<para>
+						In WCM, the banner is divided into two parts: a left banner and a right banner. You can edit both of them.
+					</para>
+					 <para>
+						Show the form to edit a banner by:
+					</para>
+					 <itemizedlist>
+						<listitem>
+							<para>
+								Switch on the Edit Status on the homepage and click the edit button on the homepage as this illustration below:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/editstatus.png" format="PNG" scale="90" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/editstatus.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+
+						</listitem>
+
+					</itemizedlist>
+					 <para>
+						or
+					</para>
+					 <itemizedlist>
+						<listitem>
+							<para>
+								Click the 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/editicon.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 icon at the right corner of the classic - banner portlet (for the left banner) or classic- access portlet (for the right banner) in the Edit Portal form.
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/editbanner.png" format="PNG" scale="90" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/editbanner.png" format="PNG" />
+								</imageobject>
+
+							</mediaobject>
+
+						</listitem>
+
+					</itemizedlist>
+					 <para>
+						A form to edit the current banner will appear:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/leftbanner.png" format="PNG" scale="110" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/leftbanner.png" format="PNG" width="444" />
+						</imageobject>
+						 <caption> <para>
+							Edit Left Banner
+						</para>
+						 </caption>
+					</mediaobject>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/rightbanner.png" format="PNG" scale="110" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/rightbanner.png" format="PNG" width="444" />
+						</imageobject>
+						 <caption> <para>
+							Edit Right Banner
+						</para>
+						 </caption>
+					</mediaobject>
+					 <table>
+						<title></title>
+						 <tgroup cols="2">
+							<thead>
+								<row>
+									<entry>
+										Field
+									</entry>
+									 <entry>
+										Information
+									</entry>
+
+								</row>
+
+							</thead>
+							 <tbody>
+								<row>
+									<entry>
+										Name
+									</entry>
+									 <entry>
+										The default name of the banner. You can not change this value.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										Title
+									</entry>
+									 <entry>
+										The title of the banner. This field is required.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										Main Content
+									</entry>
+									 <entry>
+										The main displaying content of the banner.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										Save Draft
+									</entry>
+									 <entry>
+										Allow to save the current content as draft.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										Fast Publish
+									</entry>
+									 <entry>
+										Allow to publish immediately.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										Preference
+									</entry>
+									 <entry>
+										Allow to set some property for the web content.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										Close
+									</entry>
+									 <entry>
+										Close this form.
+									</entry>
+
+								</row>
+
+							</tbody>
+
+						</tgroup>
+
+					</table>
+
+				</step>
+				 <step>
+					<para>
+						Change values in the <emphasis role="bold">Main Content</emphasis> tab of the edit banner form to edit the web site's banner.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Complete editing the site's banner and publish the content on the banner by clicking the <emphasis role="bold">Fast Publish</emphasis> button.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						If you just want to save the edited content as a draft, click <emphasis role="bold">Save Draft</emphasis>.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						To set some properties for the current content, click the <emphasis role="bold">Preferences</emphasis> button. The <emphasis role="bold">Setting</emphasis> form will appear as you can see below. Change the information in this form and then click <emphasis role="bold">Save</emphasis> to save settings.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/webcontentpreference.png" format="PNG" scale="110" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/webcontentpreference.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <!--                         Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                         --> <itemizedlist>
+						<listitem>
+							<para>
+								The <emphasis role="bold">Permission manager</emphasis> tab is used to set the edit and access permission for this content:
+							</para>
+							 <para>
+								By default, when creating a new web content, all users can access but only '<literal>root</literal>' and users of <literal>*:/platform/administrators</literal> group can edit the web content. In addition, you also can change these permission by doing as follows:
+							</para>
+							 <procedure>
+								<step>
+									<para>
+										Edit the current permission of a group/user in the <emphasis role="bold">Permission</emphasis> table by clicking the 
+										<inlinemediaobject>
+											<imageobject>
+												<imagedata fileref="images/editicon2.png" format="PNG" />
+											</imageobject>
+
+										</inlinemediaobject>
+										 icon corresponding to that group/user. Then change the current permission by checking check boxes in the edit form below:
+									</para>
+									 <mediaobject>
+										<imageobject role="html">
+											<imagedata align="center" fileref="images/permissionrights.png" format="PNG" scale="60" />
+										</imageobject>
+										 <imageobject role="fo">
+											<imagedata align="center" contentwidth="150mm" fileref="images/permissionrights.png" format="PNG" />
+										</imageobject>
+
+									</mediaobject>
+
+								</step>
+								 <step>
+									<para>
+										Or you can add new groups into the Permission table:
+									</para>
+									 <para>
+										Select the 
+										<inlinemediaobject>
+											<imageobject>
+												<imagedata fileref="images/usericon.png" format="PNG" />
+											</imageobject>
+
+										</inlinemediaobject>
+										 icon if you want to set permission for a user: The User selector form will appear. Select a user in the list by clicking the 
+										<inlinemediaobject>
+											<imageobject>
+												<imagedata fileref="images/greentick.png" format="PNG" />
+											</imageobject>
+
+										</inlinemediaobject>
+										 icon.
+									</para>
+									 <mediaobject>
+										<imageobject role="html">
+											<imagedata align="center" fileref="images/userselector.png" format="PNG" scale="90" width="444" />
+										</imageobject>
+										 <imageobject role="fo">
+											<imagedata align="center" contentwidth="150mm" fileref="images/userselector.png" format="PNG" width="444" />
+										</imageobject>
+
+									</mediaobject>
+									 <para>
+										Select the 
+										<inlinemediaobject>
+											<imageobject>
+												<imagedata fileref="images/grouppermission.png" format="PNG" />
+											</imageobject>
+
+										</inlinemediaobject>
+										 icon if you want to set permission for a group. The <emphasis role="bold">Group selector</emphasis> form will appear. Select a group on the left and then select one corresponding membership on the right.
+									</para>
+									 <mediaobject>
+										<imageobject role="html">
+											<imagedata align="center" fileref="images/groupselector.png" format="PNG" scale="100" width="444" />
+										</imageobject>
+										 <imageobject role="fo">
+											<imagedata align="center" contentwidth="150mm" fileref="images/groupselector.png" format="PNG" width="444" />
+										</imageobject>
+
+									</mediaobject>
+									 <para>
+										Select the 
+										<inlinemediaobject>
+											<imageobject>
+												<imagedata fileref="images/alluserpermission.png" format="PNG" />
+											</imageobject>
+
+										</inlinemediaobject>
+										 icon if you want to set permission for all users.
+									</para>
+									 <para>
+										After selecting users/groups, set permission for these users/groups by checking the <emphasis role="bold">Access Right</emphasis> check box (for only the access right) or the <emphasis role="bold">Edit Right</emphasis> check box (for only the edit right) or checking both check boxes if you want.
+									</para>
+
+								</step>
+								 <step>
+									<para>
+										Accept and save permissions by clicking <emphasis role="bold">Save</emphasis>.
+									</para>
+
+								</step>
+
+							</procedure>
+							
+							 <!--                        END                        -->
+						</listitem>
+						 <listitem>
+							<para>
+								The <emphasis role="bold">Configuration for Single content viewer</emphasis> tab includes:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/singlecontentviewer.png" format="PNG" scale="110" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/singlecontentviewer.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <table>
+								<title></title>
+								 <tgroup cols="2">
+									<thead>
+										<row>
+											<entry>
+												Option
+											</entry>
+											 <entry>
+												Information
+											</entry>
+
+										</row>
+
+									</thead>
+									 <tbody>
+										<row>
+											<entry>
+												Show title
+											</entry>
+											 <entry>
+												The option is whether to show the title of this content or not
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Show print
+											</entry>
+											 <entry>
+												The option is whether to show the print function or not.
+											</entry>
+
+										</row>
+
+									</tbody>
+
+								</tgroup>
+
+							</table>
+
+						</listitem>
+						 <listitem>
+							<para>
+								The <emphasis role="bold">Illustration</emphasis> tab in the Web Content form:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/illustrationtab.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/illustrationtab.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <table>
+								<title></title>
+								 <tgroup cols="2">
+									<thead>
+										<row>
+											<entry>
+												Field
+											</entry>
+											 <entry>
+												Information
+											</entry>
+
+										</row>
+
+									</thead>
+									 <tbody>
+										<row>
+											<entry>
+												Illustration Image
+											</entry>
+											 <entry>
+												The path to an image that you want to upload into the site. This image will be used like an illustration of that site.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Image Type
+											</entry>
+											 <entry>
+												The image format that you want to upload to the site. The image file format can be gif, png, jpg or jpeg.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Summary
+											</entry>
+											 <entry>
+												You can give a short description about the web content because it will be displayed with illustration image when the web content is listed. The main content will be show when it is selected to be viewed.
+											</entry>
+
+										</row>
+
+									</tbody>
+
+								</tgroup>
+
+							</table>
+							 <para>
+								To upload an image to the site:
+							</para>
+							 <itemizedlist>
+								<listitem>
+									<para>
+										Browse an image list on your local computer by clicking the Browse... button and then select a specific location.
+									</para>
+
+								</listitem>
+								 <listitem>
+									<para>
+										Select an image in the list to upload.
+									</para>
+
+								</listitem>
+								 <listitem>
+									<para>
+										The Advanced tab:
+									</para>
+									 <para>
+										This tab includes two parts: CSS data and JS data:
+									</para>
+									 <variablelist>
+										<varlistentry>
+											<term>CSS Data:</term>
+											 <listitem>
+												<para>
+													Contains CSS definition to present data in a web content. You can optionally enter CSS data into this field to specify the style.
+												</para>
+
+											</listitem>
+
+										</varlistentry>
+										 <varlistentry>
+											<term>JS data:</term>
+											 <listitem>
+												<para>
+													It contains JS content to make the web content dynamically when being published. You can optionally enter JS content in this field.
+												</para>
+
+											</listitem>
+
+										</varlistentry>
+
+									</variablelist>
+									 <mediaobject>
+										<imageobject role="html">
+											<imagedata align="center" fileref="images/advancedtab.png" format="PNG" scale="90" width="444" />
+										</imageobject>
+										 <imageobject role="fo">
+											<imagedata align="center" contentwidth="150mm" fileref="images/advancedtab.png" format="PNG" width="444" />
+										</imageobject>
+
+									</mediaobject>
+
+								</listitem>
+
+							</itemizedlist>
+
+						</listitem>
+
+					</itemizedlist>
+
+				</step>
+
+			</procedure>
+			
+			 <procedure id="proc-User_Guide-How_to_edit_a_Site-Edit_Homepage">
+				<title>Edit Homepage</title>
+				 <step>
+					<para>
+						WCM helps you edit the main content displayed in the home page of a web site.
+					</para>
+					 <para>
+						Do the following steps:
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Show a form to edit the home page by clicking the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/editicon3.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon at the right corner of the home page:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/edithomepage.png" format="PNG" scale="110" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/edithomepage.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						The Web content form allows you to edit the main content in the home page:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/webcontentform.png" format="PNG" scale="110" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/webcontentform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Change values in this form.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the <emphasis role="bold">Fast Publish</emphasis> button to accept changes and publish them on the home page, or click the <emphasis role="bold">Save Draft</emphasis> button to save the edited content as a draft.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						To set more properties for this content, click the <emphasis role="bold">Preference</emphasis> button.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <procedure id="proc-User_Guide-How_to_edit_a_Site-Edit_Footer">
+				<title>Edit Footer</title>
+				 <step>
+					<para>
+						This function supports you to change the footer of the site.
+					</para>
+					 <para>
+						Do the following steps:
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Show the form to edit the footer of the current site in two following ways:
+					</para>
+					 <itemizedlist>
+						<listitem>
+							<para>
+								Click the 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/editicon.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 icon at the right corner of the footer portlet. The form to edit the current footer will appear.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								Click the 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/editicon3.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 icon at the right corner of the site's footer.
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/editfooter.png" format="PNG" scale="110" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/editfooter.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+
+						</listitem>
+
+					</itemizedlist>
+					 <para>
+						The form to edit the current footer will appear:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/editfooterform.png" format="PNG" scale="110" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/editfooterform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Change values of this form.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the <emphasis role="bold">Fast Publish</emphasis> button to accept changes and publish them on the home page, or click the <emphasis role="bold">Save Draft</emphasis> button to save the edited content as a draft.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						To set more properties for this content, click the <emphasis role="bold">Preference</emphasis> button.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <note>
+				<title>Shared Page Elements</title>
+				 <para>
+					The Banner, Home page and Footer of a site are shared to others. Thus, all their changes will impact on the entire site. So you should copy the shared banner, home page and footer to a specific portal folder and refer to them when you need
+				</para>
+
+			</note>
+
+		</section>
+		
+		 <section id="sect-User_Guide-Edit_a_Site-Switch_between_sites">
+			<title>Switch between sites</title>
+			 <para>
+				This function is used to change the current web site by another one.
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Just select a site in the site list that appears when you move the cursor to Sites on the Administration bar:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/sitelist.png" format="PNG" scale="100" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/sitelist.png" format="PNG" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						Your current site will be switched to the selected site.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+		 <section id="sect-User_Guide-Edit_a_Site-Delete_a_site">
+			<title>Delete a site</title>
+			 <para>
+				This function is used to delete a portal (site) from the portal list.
+			</para>
+			 <para>
+				Do the following steps:
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Show the portal list by clicking Site on the Administration bar:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/sitelistclick.png" format="PNG" scale="110" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/sitelistclick.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/deletebutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 in the row of the portal that you want to delete.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click OK in the confirmation message to accept deleting.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+
+	</section>
+	
+
+</section>
+
+

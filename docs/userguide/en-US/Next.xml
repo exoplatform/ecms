@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-User_Guide-Next_Steps">
+	<title>Next Steps</title>
+	 <warning>
+		<title>DOC NOTE</title>
+		 <para>
+			This section of the original WCM Guide contains links to various eXo products and projects.
+		</para>
+		 <para>
+			We can either:
+		</para>
+		 <orderedlist numeration="arabic">
+			<listitem>
+				<para>
+					Fill the section with Redhat/JBoss links (suggestions welcome)
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					Or remove it completely.
+				</para>
+
+			</listitem>
+
+		</orderedlist>
+		 <para>
+			Feedback on which course is preferred would be appreciated bearing in mind that RH and eXo may be using the same docbook source in the near future.
+		</para>
+
+	</warning>
+</chapter>
+

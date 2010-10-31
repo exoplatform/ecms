@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Form_Generator">
+	<title>Form Generator</title>
+	 <para>
+		The <emphasis role="bold">Form Generator</emphasis> portlet allows users to create and to edit template of document types. Documents are stored in the so-called node; therefore, the term “node” and node types are often applied.
+	</para>
+	 <procedure>
+		<title></title>
+		 <step>
+			<para>
+				Go to <emphasis role="bold">Group | Form Generator</emphasis> on the <emphasis role="bold">Administration</emphasis> bar. The <emphasis role="bold">Form Generator</emphasis> will appear:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/formgeneratorform.png" format="PNG" scale="" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/formgeneratorform.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</step>
+		 <step>
+			<para>
+				Enter the node name into the <emphasis role="bold">Name</emphasis> field. (* Required)
+			</para>
+
+		</step>
+		 <step>
+			<para>
+				Enter a brief description about the node.
+			</para>
+
+		</step>
+		 <step>
+			<para>
+				Click the <emphasis role="bold">Form builder</emphasis> tab that allows users to set properties for a node. Available components are displayed on the left panel.
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/formbuildertab.png" format="PNG" scale="" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/formbuildertab.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</step>
+		 <step>
+			<para>
+				Click the desired components on the left panel. The selected components will be displayed on the right panel.
+			</para>
+
+		</step>
+		 <step>
+			<para>
+				Click the 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/componentuparrow.png" format="PNG" />
+					</imageobject>
+				</inlinemediaobject>
+				 corresponding to the component to move this component up or the 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/componentdownarrow.png" format="PNG" />
+					</imageobject>
+				</inlinemediaobject>
+				 to move the component down.
+			</para>
+
+		</step>
+		 <step>
+			<para>
+				Click the 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/editcomponenticon.png" format="PNG" />
+					</imageobject>
+				</inlinemediaobject>
+				 that corresponds to the component to edit properties of that component. The form to edit properties appears like the illustration below:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/editcomponentpropertiesform.png" format="PNG" scale="" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/editcomponentpropertiesform.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <table>
+				<title></title>
+				 <tgroup cols="2">
+					<thead>
+						<row>
+							<entry>
+								Field
+							</entry>
+							 <entry>
+								Details
+							</entry>
+
+						</row>
+
+					</thead>
+					 <tbody>
+						<row>
+							<entry>
+								Field Label
+							</entry>
+							 <entry>
+								To enter the field label.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Width
+							</entry>
+							 <entry>
+								Enter the field width. If the checkbox in 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/rulesrequiredbox.png" format="PNG" />
+									</imageobject>
+								</inlinemediaobject>
+								 is marked the 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/redstarasterix.png" format="PNG" />
+									</imageobject>
+								</inlinemediaobject>
+								 will appear beside the text box, indicating that values in this box are required.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Height
+							</entry>
+							 <entry>
+								Enter the field height.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Default Value
+							</entry>
+							 <entry>
+								To display the dafault value
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Guidelines for User
+							</entry>
+							 <entry>
+								To display instructions about this component.
+							</entry>
+
+						</row>
+
+					</tbody>
+
+				</tgroup>
+
+			</table>
+			 <para>
+				To delete the component click the 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/trashicon.png" format="PNG" />
+					</imageobject>
+				</inlinemediaobject>
+				 corresponding to the component.
+			</para>
+
+		</step>
+		 <step>
+			<para>
+				Click <emphasis role="bold">Save Form</emphasis> to save the form that you have created for nodes.
+			</para>
+
+		</step>
+		 <step>
+			<para>
+				Click <emphasis role="bold">Save</emphasis> to accept creating a new node, or <emphasis role="bold">Reset</emphasis> to edit this node again before saving.
+			</para>
+
+		</step>
+
+	</procedure>
+	
+	 <!-- Close Section 3.8 Form Generator -->
+</section>
+
+
