@@ -93,37 +93,42 @@
 </tr>
 <tr>
 	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
 	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Add Document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Add Document</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,7 +139,7 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>SNF_ECMS_0888</td>
+	<td>SNF_ECMS_08</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -213,12 +218,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=SNF_ECMS_0888</td>
+	<td>link=SNF_ECMS_08</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=SNF_ECMS_0888</td>
+	<td>link=SNF_ECMS_08</td>
 	<td></td>
 </tr>
 <tr>
@@ -352,16 +357,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[5]/div[7]/div/div</td>
-	<td>published</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>//div[5]/div[7]/div/div</td>
-	<td>published</td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Sites Explorer</td>
 	<td></td>
@@ -372,13 +367,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>//div[5]/div[7]/div/div</td>
+	<td>published</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[5]/div[7]/div/div</td>
+	<td>published</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIDocumentInfo']/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=SNF_ECMS_0888</td>
+	<td>//div[3]/div/div/div[1]/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/div/div/div[1]/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=SNF_ECMS_08</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=SNF_ECMS_0888</td>
+	<td>link=SNF_ECMS_08</td>
 	<td></td>
 </tr>
 <tr>
