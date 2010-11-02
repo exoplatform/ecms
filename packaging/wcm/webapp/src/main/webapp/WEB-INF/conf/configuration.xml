@@ -50,7 +50,6 @@
   <import>war:/conf/dms-extension/dms/dms-document-type-configuration.xml</import>  
   
   <import>war:/conf/wcm-extension/kernel/schedule-configuration.xml</import>
-  <import>war:/conf/wcm-extension/core/organization-configuration.xml</import>
   <import>war:/conf/wcm-extension/jcr/jcr-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/resource-bundle-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/explorer-views-configuration.xml</import>
