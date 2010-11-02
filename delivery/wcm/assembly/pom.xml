@@ -235,7 +235,7 @@
 		<dependency><groupId>xml-apis</groupId><artifactId>xml-apis</artifactId><version>${xml-apis.version}</version><type>jar</type></dependency><!-- 1.3.04-->
 		<dependency><groupId>org.gatein.pc</groupId><artifactId>pc-controller</artifactId><version>${org.gatein.pc.version}</version><type>jar</type></dependency><!-- 2.1.1-GA-->
 		<dependency><groupId>org.gatein.shindig</groupId><artifactId>shindig-social-api</artifactId><version>${org.gatein.shindig.version}</version><type>jar</type></dependency><!-- 1.0-r790473-Patch02-->
-		
+		<dependency><groupId>org.exoplatform.commons</groupId><artifactId>exo.platform.commons.webui.ext</artifactId><version>${org.exoplatform.commons.version}</version><type>jar</type></dependency><!-- 1.0.2-SNAPSHOT-->
   </dependencies>
   <build>
     <plugins>
