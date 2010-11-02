@@ -102,6 +102,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=documents</td>
 	<td></td>
@@ -109,21 +114,21 @@
 <tr>
 	<td>click</td>
 	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Add Document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Add Document</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
 	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add Document</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,12 +139,17 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>SNF_ECMS_06</td>
+	<td>Test_SNF_ECMS_06</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>testSnfEcms06</td>
+	<td>Test_SNF_ECMS_06</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -152,9 +162,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
-	<td>Manchester</td>
+	<td>I hate myself for loving you</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -162,19 +172,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[@id='cke_contents_content']/iframe</td>
-	<td></td>
-</tr>
-<tr>
 	<td>selectFrame</td>
 	<td>//td[@id='cke_contents_content']/iframe</td>
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
-	<td>Chelsea</td>
+	<td>Em yeu chi ! Tieu Huong Duong</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -193,7 +198,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -204,11 +209,6 @@
 <tr>
 	<td>click</td>
 	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -217,11 +217,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=SNF_ECMS_06</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Manage Publications</td>
 	<td></td>
@@ -322,6 +317,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Check the public content in CLV</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=documents</td>
 	<td></td>
@@ -333,7 +333,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>20000</td>
+	<td>40000</td>
 	<td></td>
 </tr>
 <tr>
@@ -344,11 +344,6 @@
 <tr>
 	<td>click</td>
 	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -363,12 +358,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=SNF_ECMS_06</td>
+	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=SNF_ECMS_06</td>
+	<td>link=Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
@@ -383,12 +388,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Close</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Close</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refresh</td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -402,14 +412,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[5]/div[7]/div/div</td>
-	<td>published</td>
+	<td>echo</td>
+	<td>-- Log out</td>
+	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//div[5]/div[7]/div/div</td>
-	<td>published</td>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign out</td>
+	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
@@ -417,19 +432,54 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>john</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>gtn</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Overview</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Overview</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>keyword</td>
-	<td>Manchester</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>keyword</td>
-	<td>Manchester</td>
+	<td>Tieu Huong Duong</td>
 </tr>
 <tr>
 	<td>keyPress</td>
@@ -443,33 +493,33 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=SNF_ECMS_06</td>
+	<td>link=Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=SNF_ECMS_06</td>
+	<td>link=Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>//div[@id='UIPresentation']/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div/p</td>
-	<td>Manchester</td>
+	<td>I hate myself for loving you</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>//div[@id='UIPresentation']/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div/p</td>
-	<td>Manchester</td>
+	<td>I hate myself for loving you</td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>//div[@id='UIPresentation']/div/div[2]/div/div/div[3]/div[2]/div/div/div/div[1]/div/p</td>
-	<td>Chelsea</td>
+	<td>Em yeu chi ! Tieu Huong Duong</td>
 </tr>
 <tr>
 	<td>verifyText</td>
 	<td>//div[@id='UIPresentation']/div/div[2]/div/div/div[3]/div[2]/div/div/div/div[1]/div/p</td>
-	<td>Chelsea</td>
+	<td>Em yeu chi ! Tieu Huong Duong</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -498,12 +548,52 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=SNF_ECMS_06</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sites Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@onclick=&quot;event.cancelBubble=true;javascript:ajaxGet('/ecmdemo/private/acme/siteExplorer?portal:componentId=0d9b499c-9733-4343-9dc6-232ae6b9810f&amp;portal:type=action&amp;uicomponent=UITreeExplorer&amp;op=Expand&amp;objectId=%2Fsites+content%2Flive%2Facme&amp;ajaxRequest=true')&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@onclick=&quot;event.cancelBubble=true;javascript:ajaxGet('/ecmdemo/private/acme/siteExplorer?portal:componentId=0d9b499c-9733-4343-9dc6-232ae6b9810f&amp;portal:type=action&amp;uicomponent=UITreeExplorer&amp;op=Expand&amp;objectId=%2Fsites+content%2Flive%2Facme&amp;ajaxRequest=true')&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=SNF_ECMS_06</td>
+	<td>link=Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
@@ -524,6 +614,16 @@
 <tr>
 	<td>echo</td>
 	<td>-- Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_06</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
