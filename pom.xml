@@ -34,7 +34,7 @@
     <org.exoplatform.jcr-services.version>1.12.6-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
     <org.exoplatform.portal.version>3.1.6-PLF-SNAPSHOT</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
-    <org.exoplatform.commons.version>1.0.1-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.commons.version>1.0.2-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
     <chromattic.version>1.0.4</chromattic.version>
     <xcmis.version>1.1.1-SNAPSHOT</xcmis.version>
