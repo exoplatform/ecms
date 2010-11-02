@@ -30,7 +30,7 @@
   }
 
   def originalNode = uiParent.getOriginalNode();
-  def currentNode = getFileLangNode(uiParent.getNode());
+  def currentNode = getFileLangNode(originalNode);
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
    public String formatNodeName(String text) {
