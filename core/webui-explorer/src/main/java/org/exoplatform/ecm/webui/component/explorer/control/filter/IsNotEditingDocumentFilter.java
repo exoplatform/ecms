@@ -43,8 +43,13 @@ public class IsNotEditingDocumentFilter extends UIExtensionAbstractFilter {
   }
   public boolean accept(Map<String, Object> context) throws Exception {
   	if (context == null) return true;
+  	Node currentNode = (Node) context.get(Node.class.getName());
   	UIJCRExplorer uiExplorer = (UIJCRExplorer)context.get(UIJCRExplorer.class.getName());
-  	return !uiExplorer.isEditingDocument();
+  	if (currentNode == null)
+  		return !uiExplorer.isEditingDocument();
+  	return  !uiExplorer.isEditingDocument() || 
+  					!currentNode.getSession().getWorkspace().getName().equals(uiExplorer.getCurrentDriveWorkspace()) ||
+  					!currentNode.getPath().equals(uiExplorer.getCurrentNode().getPath());
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
