@@ -27,6 +27,7 @@
 	</div>
 	<div class="ListContainer">
 		<div class="LeftWorkspace" id="LeftWorkspace">
+			<div class ="LoadingProgress"><span></span></div>		
 		</div>
 		<div class="RightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>">
 			<div class="MultiListContainer">

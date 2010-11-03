@@ -175,6 +175,12 @@
   display: none;
 }
 
+.LeftWorkspace .LoadingProgress {
+  background: url(background/LoadingProgress.gif) no-repeat center center;
+  height: 150px;
+  width: 100%;
+}
+
 .LeftWorkspace .SelectNodeIcon {
   background: url(background/CollapseIcon.gif) no-repeat left center;
   height: auto;
