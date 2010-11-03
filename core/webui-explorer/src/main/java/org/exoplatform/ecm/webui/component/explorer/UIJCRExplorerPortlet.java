@@ -66,6 +66,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
+import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -280,6 +281,9 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiExplorer.getChild(UIControl.class).setRendered(false);
     UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
     uiWorkingArea.setRenderedChild(UIDrivesArea.class);
+    UIRightClickPopupMenu uiRightClickPopupMenu = uiWorkingArea.getChild(UIRightClickPopupMenu.class);
+    if(uiRightClickPopupMenu!=null)
+    	uiRightClickPopupMenu.setRendered(true);
   }
 
   private HashMap<String, String> getElementByContext(WebuiRequestContext context) {
