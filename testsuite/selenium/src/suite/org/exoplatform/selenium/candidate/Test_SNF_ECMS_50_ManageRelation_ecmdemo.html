@@ -187,9 +187,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
-	<td>test1</td>
+	<td>Lam Y khue, Em yeu chi</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -204,7 +204,7 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//html/body</td>
-	<td>test1</td>
+	<td>Tai sao chi lai tu` troi em chu', Em muon het len. EM YEU CHI</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -238,7 +238,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -297,8 +297,33 @@
 	<td>Kofax</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -392,13 +417,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[2]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[2]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>/Users/root/Private/Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/Users/root/Private/Kofax</td>
 	<td></td>
 </tr>
 <tr>
@@ -409,6 +449,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -442,6 +487,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>display</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Show/Hide Relations</td>
 	<td></td>
@@ -449,6 +509,16 @@
 <tr>
 	<td>click</td>
 	<td>link=Show/Hide Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>link=Test_SNF_ECMS_50</td>
 	<td></td>
 </tr>
 <tr>
@@ -477,6 +547,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//img[@alt='Delete']</td>
 	<td></td>
@@ -487,13 +562,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
-	<td>//img[@alt='Delete']</td>
+	<td>waitForTextPresent</td>
+	<td>Empty data </td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>//img[@alt='Delete']</td>
+	<td>verifyTextPresent</td>
+	<td>Empty data </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
 	<td></td>
 </tr>
 <tr>

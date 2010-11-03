@@ -212,6 +212,116 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Log in John</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>john</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>gtn</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sites Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_06</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Test_SNF_ECMS_06</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
 	<td>-- Public document</td>
 	<td></td>
@@ -333,7 +443,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>40000</td>
+	<td>20000</td>
 	<td></td>
 </tr>
 <tr>
@@ -399,66 +509,6 @@
 <tr>
 	<td>refresh</td>
 	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Log out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sign out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Sign out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Search document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>username</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>username</td>
-	<td>john</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password</td>
-	<td>gtn</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Sign in</td>
 	<td></td>
 </tr>
 <tr>
@@ -568,12 +618,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@onclick=&quot;event.cancelBubble=true;javascript:ajaxGet('/ecmdemo/private/acme/siteExplorer?portal:componentId=0d9b499c-9733-4343-9dc6-232ae6b9810f&amp;portal:type=action&amp;uicomponent=UITreeExplorer&amp;op=Expand&amp;objectId=%2Fsites+content%2Flive%2Facme&amp;ajaxRequest=true')&quot;]</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[@onclick=&quot;event.cancelBubble=true;javascript:ajaxGet('/ecmdemo/private/acme/siteExplorer?portal:componentId=0d9b499c-9733-4343-9dc6-232ae6b9810f&amp;portal:type=action&amp;uicomponent=UITreeExplorer&amp;op=Expand&amp;objectId=%2Fsites+content%2Flive%2Facme&amp;ajaxRequest=true')&quot;]</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
