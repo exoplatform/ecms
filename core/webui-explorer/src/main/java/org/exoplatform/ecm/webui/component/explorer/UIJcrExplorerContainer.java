@@ -51,6 +51,7 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.core.model.SelectItemOption;
 /**
  * Created by The eXo Platform SARL
@@ -183,6 +184,9 @@ public class UIJcrExplorerContainer extends UIContainer {
         uiWorkingArea.setRenderedChild(UIDocumentWorkspace.class);
         uiJCRExplorer.refreshExplorer();
       }
+      UIRightClickPopupMenu uiRightClickPopupMenu = uiWorkingArea.findFirstComponentOfType(UIRightClickPopupMenu.class);
+      if(uiRightClickPopupMenu!=null && !uiRightClickPopupMenu.isRendered())        	
+      	uiRightClickPopupMenu.setRendered(true);  
       UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
       uiSideBar.setRendered(true);
       if (uiSideBar.isRendered()) {
