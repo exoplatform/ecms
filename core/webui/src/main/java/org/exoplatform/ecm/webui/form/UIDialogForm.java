@@ -36,6 +36,7 @@ import java.util.Set;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.PropertyType;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.lock.LockException;
@@ -841,11 +842,35 @@ public class UIDialogForm extends UIForm {
       }
       if(!valueListIsSet && node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
         String propertyPath = jcrPath.substring("/node/".length());
-        if(node.hasProperty(propertyPath)) {
+        if (node.hasProperty(propertyPath)) {
           Value[] values = node.getProperty(propertyPath).getValues();
-          for(Value vl : values) {
-            if (vl != null) {
-              valueList.add(vl.getString());
+          // if the node type is mix:referenceable, its values will contain the UUIDs of the reference nodes
+          // we need to get the paths of the reference nodes instead of its UUIDs to display onto screen
+          if (node.isNodeType(Utils.MIX_REFERENCEABLE)) {
+            for (Value vl : values) {
+              if (vl != null) {
+                String strUUID = vl.getString();
+                try {
+                  String strReferenceableNodePath = node.getSession().getNodeByUUID(strUUID).getPath();
+                  
+                  //if the referenceable node is not ROOT, remove the "/" character at head
+                  if (strReferenceableNodePath.length() > 1){
+                    strReferenceableNodePath = strReferenceableNodePath.substring(1);
+                  }
+                  
+                  valueList.add(strReferenceableNodePath);
+                } catch (ItemNotFoundException infEx) {
+                  valueList.add(formTextAreaField.getDefaultValue());
+                } catch (RepositoryException repoEx) {
+                  valueList.add(formTextAreaField.getDefaultValue());
+                }
+              }
+            }
+          } else {
+            for (Value vl : values) {
+              if (vl != null) {
+                valueList.add(vl.getString());
+              }
             }
           }
         }
@@ -1061,11 +1086,35 @@ public class UIDialogForm extends UIForm {
       }
       if(!valueListIsSet && node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
         String propertyPath = jcrPath.substring("/node/".length());
-        if(node.hasProperty(propertyPath)) {
+        if (node.hasProperty(propertyPath)) {
           Value[] values = node.getProperty(propertyPath).getValues();
-          for(Value vl : values) {
-            if (vl != null) {
-              valueList.add(vl.getString());
+          // if the node type is mix:referenceable, its values will contain the UUIDs of the reference nodes
+          // we need to get the paths of the reference nodes instead of its UUIDs to display onto screen
+          if (node.isNodeType(Utils.MIX_REFERENCEABLE)) {
+            for (Value vl : values) {
+              if (vl != null) {
+                String strUUID = vl.getString();
+                try {
+                  String strReferenceableNodePath = node.getSession().getNodeByUUID(strUUID).getPath();
+                  
+                  //if the referenceable node is not ROOT, remove the "/" character at head
+                  if (strReferenceableNodePath.length() > 1){
+                    strReferenceableNodePath = strReferenceableNodePath.substring(1);
+                  }
+                  
+                  valueList.add(strReferenceableNodePath);
+                } catch (ItemNotFoundException infEx) {
+                  valueList.add(formTextField.getDefaultValue());
+                } catch (RepositoryException repoEx) {
+                  valueList.add(formTextField.getDefaultValue());
+                }
+              }
+            }
+          } else {
+            for (Value vl : values) {
+              if (vl != null) {
+                valueList.add(vl.getString());
+              }
             }
           }
         }
