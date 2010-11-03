@@ -148,10 +148,10 @@
 	    </tr>
 	    <tr>		          					
 	      <td class="FieldLabel"><%=_ctx.appRes("Podcast.dialog.label.lenght")%></td>
-	      <td class="FieldComponent">
+	      <td class="FieldComponent">		     
 		      <%
 		       String[] fieldSize = ["jcrPath=/node/exo:length", "validate=number"] ;
-		       uicomponent.addTextField("lenth", fieldSize) ; 
+		       uicomponent.addTextField("medialength", fieldSize) ; 
 		      %>
 		    </td>
 	    </tr>
