@@ -224,7 +224,7 @@ public class Utils {
 			PortletMode portletMode = portletRequestContext.getApplicationMode();
 			filters.put(WCMComposer.PORTLET_MODE, portletMode.toString());
 			if (version != null) filters.put(WCMComposer.FILTER_VERSION, version);
-			return getService(WCMComposer.class).getContent(repository, workspace, nodeIdentifier, filters, getSessionProvider());
+			return WCMCoreUtils.getService(WCMComposer.class).getContent(repository, workspace, nodeIdentifier, filters, WCMCoreUtils.getUserSessionProvider());
 		} catch (Exception e) {
 			return null;
 		}

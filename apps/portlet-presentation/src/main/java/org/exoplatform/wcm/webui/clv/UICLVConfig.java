@@ -545,6 +545,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     strWorkspace = itemPath.substring(repoIndex+1, wsIndex);
     strIdentifier = itemPath.substring(wsIndex +1);
     Node selectedNode = Utils.getRealNode(strRepository, strWorkspace, strIdentifier, false);
+	if (selectedNode==null) return null;
     String title = null;    
     if (selectedNode.hasProperty("exo:title")) {
       title = selectedNode.getProperty("exo:title").getValue().getString();
