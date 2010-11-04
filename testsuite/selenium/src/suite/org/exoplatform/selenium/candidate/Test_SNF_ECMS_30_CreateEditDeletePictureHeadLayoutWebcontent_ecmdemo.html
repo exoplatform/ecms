@@ -113,7 +113,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>30000</td>
 	<td></td>
 </tr>
 <tr>
@@ -208,17 +208,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[1]/div/div/div</td>
+	<td>//form[@id='UIDocumentForm']/div[2]/div[2]/table/tbody/tr/td/a[1]/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[1]/div/div/div</td>
+	<td>//form[@id='UIDocumentForm']/div[2]/div[2]/table/tbody/tr/td/a[1]/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>30000</td>
 	<td></td>
 </tr>
 <tr>
@@ -238,7 +238,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>30000</td>
 	<td></td>
 </tr>
 <tr>
@@ -254,6 +254,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Test_SNF_30</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>30000</td>
 	<td></td>
 </tr>
 <tr>
@@ -328,7 +333,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>30000</td>
 	<td></td>
 </tr>
 <tr>
@@ -348,7 +353,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -382,7 +387,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>waitForElementNotPresent</td>
+	<td>link=Picture on head layout webcontent edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
 	<td>link=Picture on head layout webcontent edit</td>
 	<td></td>
 </tr>
