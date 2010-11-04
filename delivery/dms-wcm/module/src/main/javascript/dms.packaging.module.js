@@ -30,7 +30,7 @@ function getModule(params) {
     addDependency(new Project("ical4j", "ical4j", "jar", "0.9.20")) .
     addDependency(new Project("jdom", "jdom", "jar", "1.0")).
     addDependency(new Project("org.apache.ws.commons", "ws-commons-util", "jar", "1.0.1")).
-    addDependency(new Project("com.sun.xml.stream", "sjsxp", "jar", "1.0")).
+  //addDependency(new Project("com.sun.xml.stream", "sjsxp", "jar", "1.0")).
     addDependency(new Project("org.icepdf", "icepdf-core", "jar", "4.0.1")).
     addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "4.0.1")).
     addDependency(new Project("org.apache.pdfbox", "fontbox", "jar", "1.1.0")).
