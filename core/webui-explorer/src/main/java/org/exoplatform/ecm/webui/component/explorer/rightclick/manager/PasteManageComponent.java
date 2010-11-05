@@ -49,6 +49,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsPasteableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
@@ -426,10 +427,13 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         }
       }
     }
-    
+    // Add locked token for the source node    
+    uiExplorer.addLockToken(srcNode);
     if (workspace.getName().equals(srcWorkspace)) {
       try {
         workspace.move(srcPath, destPath);
+        LockUtil.changeLockToken(srcPath, (Node)session.getItem(destPath));
+        session.save();
       } catch (ArrayIndexOutOfBoundsException e) {
         throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.bound-exception", null,
             ApplicationMessage.WARNING));
