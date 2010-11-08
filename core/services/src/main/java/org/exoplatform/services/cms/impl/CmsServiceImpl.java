@@ -443,7 +443,7 @@ public class CmsServiceImpl implements CmsService {
         if(inputVariable != null) {
           value = inputVariable.getValue();
         }
-        if (currentListPropertyName.contains(propertyName)) {                               
+        if (currentListPropertyName.contains(propertyName) && currentNode.hasProperty(propertyName)) {                               
           Property property = currentNode.getProperty(propertyName);
           int requiredtype = property.getType();
           if(keyList.contains(propertyName)) {
