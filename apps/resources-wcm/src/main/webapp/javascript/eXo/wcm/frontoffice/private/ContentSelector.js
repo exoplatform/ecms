@@ -116,8 +116,8 @@ EcmContentSelector.prototype.buildECSTreeView = function() {
 		var isUpload = nodeList[i].getAttribute("isUpload");
 		treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 		treeHTML += 	'<div class="ExpandIcon">';		
-		treeHTML += 		'<a title="'+strName+'"href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+strName+'" id="'+id+'" isUpload="'+isUpload+'">';
-		treeHTML +=				strName;	
+		treeHTML += 		'<a title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload+'">';
+		treeHTML +=				decodeURIComponent(strName);	
 		treeHTML +=			'</a>';
 		treeHTML += 	'</div>';			
 		treeHTML += '</div>';			
@@ -204,7 +204,7 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 			if (!label) label = strName;
 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+label+'" href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+strName+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
+			treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
 			treeHTML +=				label;	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
@@ -262,8 +262,8 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 			var isUpload = nodeList[i].getAttribute("isUpload");
 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+ strName +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+strName+'" id="'+id+'" isUpload="'+isUpload+'">';
-			treeHTML +=				strName;	
+			treeHTML +=			'<a title="'+ decodeURIComponent(strName) +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload+'">';
+			treeHTML +=				decodeURIComponent(strName);	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
 			treeHTML +=	'</div>';
@@ -281,8 +281,8 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 				var isUpload = currentNodeList[i].getAttribute("isUpload");
 				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 				treeHTML += 	'<div class="ExpandIcon">';
-				treeHTML +=			'<a title="'+strName+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+strName+'" id="'+id+'" isUpload="'+isUpload+'">';
-				treeHTML +=				strName;	
+				treeHTML +=			'<a title="'+decodeURIComponent(strName)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload+'">';
+				treeHTML +=				decodeURIComponent(strName);	
 				treeHTML += 		'</a>';
 				treeHTML +=		'</div>';
 				treeHTML +=	'</div>';
@@ -358,11 +358,11 @@ EcmContentSelector.prototype.renderBreadcrumbs = function(currentNode) {
 				strOnclick = "eXo.ecm.ECS.actionBreadcrumbs('"+node.id+"');";		
 			}
 			if(beforeNode == null) {
-				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+label+'</a>';
+				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
 				tmpNode.innerHTML = strHTML;
 				breadcrumbContainer.appendChild(tmpNode);
 			} else {
-				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+label+'</a>';
+				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
 				strHTML += '<div class="RightArrowIcon"><span></span></div>';
 				tmpNode.innerHTML = strHTML;
 				breadcrumbContainer.insertBefore(tmpNode, beforeNode);
@@ -459,7 +459,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 		else size += '&nbsp;kb';
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;		
-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+node+'</a>';
+		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>';
 		newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 		newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
 		
@@ -511,7 +511,7 @@ EcmContentSelector.prototype.listFolders = function(list) {
 		if (!label) label = node;
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+label+'</a>';
+		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(label)+'</a>';
 		
 		if(i > 13) {
 			var numberRecords = 0;
@@ -690,13 +690,27 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 	if(eXo.ecm.ECS.typeObj == "folder" || eXo.ecm.ECS.typeObj == "one") {
 		var action = rws.getAttribute("action");
 		action = action.substring(0, action.length - 2);
-		action += '&objectId=' + eXo.ecm.ECS.driverName + ":" + eXo.ecm.ECS.repositoryName + ":" + eXo.ecm.ECS.workspaceName + ":" + objNode.getAttribute("path") + '\')';		
+		action += '&objectId=' + encodeURIComponent(eXo.ecm.ECS.driverName) + ":" + encodeURIComponent(eXo.ecm.ECS.repositoryName) + ":" + encodeURIComponent(eXo.ecm.ECS.workspaceName) + ":" + objNode.getAttribute("path") + '\')';
+		var temp = action;
+		var index = temp.indexOf("%27");
+		while(index != -1) {
+		   temp = temp.replace("%27","%2527");
+		   index = temp.indexOf("%27");
+		}
+		action = temp;		
 		eval(action);
 	} else {
 		var hostName = eXo.ecm.ECS.hostName;
 		var nodeType = objNode.getAttribute('nodeType');
 		var url 	= objNode.getAttribute('url');
-		var name 	= objNode.innerHTML;
+		var temp = url;
+  var index = temp.indexOf("%27");
+  while(index != -1) {
+   temp = temp.replace("%27","%2527");
+ 		index = temp.indexOf("%27");
+  }
+  url = temp;
+ 	var name 	= encodeURIComponent(objContent.innerHTML);
 		var strHTML = '';	
 		var editor = eXo.ecm.ECS.currentEditor ;
 		if(window.opener.document.getElementById(eXp.getParameterValueByName("browserType"))){		
@@ -704,9 +718,9 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 			window.opener.document.getElementById(eXp.getParameterValueByName("browserType")).value=strHTML;
 		} else {
 			if(nodeType.indexOf("image") >=0) {
-				strHTML += "<img src='"+url+"' name='"+name+"' alt='"+name+"'/>";
+				strHTML += "<img src=\""+url+"\" name=\""+name+"\" alt=\""+name+"\"/>";
 			} else {
-				strHTML += "<a href='" + url+"' style='text-decoration:none;'>"+name+"</a>";		
+				strHTML += "<a href=\"" + url+"\" style='text-decoration:none;'>"+name+"</a>";		
 			}
 			editor.insertHtml(strHTML);
 		}
