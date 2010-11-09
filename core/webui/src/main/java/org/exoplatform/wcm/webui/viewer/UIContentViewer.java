@@ -94,7 +94,11 @@ public class UIContentViewer extends UIBaseNodePresentation {
 	}
 	
 	public String getRepositoryName() {
-		return null;
+		try {
+			return getRepository();
+		}catch (Exception ex) {
+			return null;
+		}
 	}
 	
 	public String getTemplatePath() {
