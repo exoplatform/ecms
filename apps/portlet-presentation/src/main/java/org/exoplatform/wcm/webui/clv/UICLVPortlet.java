@@ -19,12 +19,14 @@ package org.exoplatform.wcm.webui.clv;
 import java.util.Date;
 
 import javax.jcr.Node;
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -33,6 +35,8 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -163,6 +167,8 @@ public class UICLVPortlet extends UIPortletApplication {
   
   private UICLVConfig     config;
   private String          currentFolderPath;
+
+  private static final Log log = ExoLogger.getLogger(UICLVPortlet.class);
   /**
    * Instantiates a new uICLV portlet.
    * 
@@ -222,6 +228,15 @@ public class UICLVPortlet extends UIPortletApplication {
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
+    
+  	if (context.getRemoteUser()==null) {
+      WCMService wcmService = getApplicationComponent(WCMService.class);
+	    pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
+	    if (log.isTraceEnabled())
+	      log.trace("CLV rendering : cache set to "+wcmService.getPortletExpirationCache());
+  	  }
+
+    
     PortletPreferences preferences = pContext.getRequest().getPreferences();
     String displayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
 

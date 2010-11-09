@@ -84,8 +84,27 @@
   <component>
     <key>org.exoplatform.services.wcm.core.WCMService</key>
     <type>org.exoplatform.services.wcm.core.impl.WCMServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>server.config</name>
+        <description>server.config</description>
+        <property name="expirationCache" value="30" />
+      </properties-param>
+    </init-params>
   </component>
 
+  <component>
+    <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
+    <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
+    <init-params>
+      <value-param>
+        <name>cleanup-cache</name>
+        <description>The cleanup cache period in seconds</description>
+        <value>300</value>
+      </value-param>
+    </init-params>
+  </component>
+ 
   <component>
     <key>org.exoplatform.services.wcm.skin.XSkinService</key>
     <type>org.exoplatform.services.wcm.skin.XSkinService</type>

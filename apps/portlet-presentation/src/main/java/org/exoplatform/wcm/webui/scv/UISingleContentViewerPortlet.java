@@ -24,6 +24,8 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderResponse;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
@@ -88,6 +90,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   private UISCVPreferences popPreferences;
   private UIPresentationContainer uiPresentation;
   PortletPreferences preferences;
+  private static final Log log = ExoLogger.getLogger(UISingleContentViewerPortlet.class);
 
   /**
    * Instantiates a new uI single content viewer portlet.
@@ -133,6 +136,14 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context ;
     PortletMode newMode = pContext.getApplicationMode() ;
+
+    if (context.getRemoteUser()==null) {
+      WCMService wcmService = getApplicationComponent(WCMService.class);
+      pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
+      if (log.isTraceEnabled())
+        log.trace("SCV rendering : cache set to "+wcmService.getPortletExpirationCache());
+     }
+
     if(!mode.equals(newMode)) {
       activateMode(newMode) ;
       mode = newMode ;

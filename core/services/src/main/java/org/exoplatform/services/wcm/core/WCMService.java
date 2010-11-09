@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.core;
 
 import javax.jcr.Node;
+import javax.portlet.CacheControl;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
@@ -57,5 +58,24 @@ public interface WCMService {
 	 * @throws Exception the exception
 	 */
 	public boolean isSharedPortal(SessionProvider sessionProvider, String portalName) throws Exception ;
+	
+	
+  /**
+   * Sets the expiration time in seconds for WCM portlets.
+   * <P>
+   * If the expiration value is set to <code>0</code>, caching is disabled for these
+   * portlet; if the value is set to <code>-1</code>, the cache does not expire.
+   * <p>
+   */
+	public void setPortletExpirationCache(int expirationCache) throws Exception ;
+	
+  /**
+   * Gets the expiration time in seconds for WCM portlets.
+   * <P>
+   * If the expiration value is set to <code>0</code>, caching is disabled for these
+   * portlet; if the value is set to <code>-1</code>, the cache does not expire.
+   * <p>
+   */
+	public int getPortletExpirationCache() throws Exception ;
 	
 }
