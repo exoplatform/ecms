@@ -17,7 +17,8 @@
     <module>publication-plugins</module>
     <module>connector</module>
     <module>webui</module>
-    <module>ext</module>
+    <!-- ext module was deprecated and will be reuse by the one from commons -->
+    <!--module>ext</module-->
     <module>search</module>
     <module>webui-explorer</module>
     <module>webui-administration</module>
