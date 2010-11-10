@@ -63,6 +63,12 @@
       <version>${org.exoplatform.portal.version}</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+      <version>${icu4j.version}</version>
+      <scope>compile</scope>
+    </dependency>	
   </dependencies>
   <build>
     <resources>
