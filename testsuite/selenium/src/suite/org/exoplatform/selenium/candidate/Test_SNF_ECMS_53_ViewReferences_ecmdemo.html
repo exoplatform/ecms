@@ -162,11 +162,6 @@
 	<td>Test_SNF_ECMS_53</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name</td>
-	<td>article</td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//td[@id='cke_contents_summary']/iframe</td>
 	<td></td>
@@ -418,12 +413,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[2]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[2]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>/Users/root/Private/Kofax_SNF_ECMS_53</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/Users/root/Private/Kofax_SNF_ECMS_53</td>
 	<td></td>
 </tr>
 <tr>
@@ -469,6 +474,16 @@
 <tr>
 	<td>click</td>
 	<td>link=View References</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>/Users/root/Private/testsnfecms53</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/Users/root/Private/testsnfecms53</td>
 	<td></td>
 </tr>
 <tr>

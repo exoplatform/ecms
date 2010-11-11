@@ -179,7 +179,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>I hate myself for loving you</td>
+	<td>Em yeu chi ! Tieu Huong Duong</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -212,11 +212,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-- Log in john</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Sign out</td>
 	<td></td>
@@ -224,6 +219,16 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Log in John</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -252,11 +257,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-- Create document</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Sites Explorer</td>
 	<td></td>
@@ -287,11 +287,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
 	<td></td>
@@ -314,11 +309,6 @@
 <tr>
 	<td>click</td>
 	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -453,7 +443,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>40000</td>
+	<td>20000</td>
 	<td></td>
 </tr>
 <tr>
@@ -522,83 +512,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[5]/div[7]/div/div</td>
-	<td>published</td>
-</tr>
-<tr>
-	<td>verifyText</td>
-	<td>//div[5]/div[7]/div/div</td>
-	<td>published</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sign out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Sign out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>username</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>username</td>
-	<td>root</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>password</td>
-	<td>gtn</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Sign in</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Overview</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Overview</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Test_SNF_ECMS_08</td>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_08</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>Test_SNF_ECMS_08</td>
+	<td>verifyElementPresent</td>
+	<td>link=Test_SNF_ECMS_08</td>
 	<td></td>
 </tr>
 <tr>
@@ -628,6 +553,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>link=Sites Management</td>
 	<td></td>
 </tr>
@@ -638,12 +573,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>css=a[title='acme ']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>css=a[title='acme ']</td>
 	<td></td>
 </tr>
 <tr>
@@ -667,11 +602,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>link=Delete</td>
 	<td></td>
@@ -684,16 +614,21 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>-- Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_08</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_08</td>
 	<td></td>
 </tr>
 <tr>
