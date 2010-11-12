@@ -715,6 +715,10 @@ public class UIDialogForm extends UIForm {
 		  }
 		}
     inputProperty.setValue(newValue);
+    if (isUpdateSelect) {
+      String[] values1 = newValue.split(",");      
+      uiSelectBox.setSelectedValues(values1);
+    }
     renderField(name);   
   }
 
