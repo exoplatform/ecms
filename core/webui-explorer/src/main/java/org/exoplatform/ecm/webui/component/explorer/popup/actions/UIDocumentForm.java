@@ -418,6 +418,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
 //      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
+      documentForm.setIsUpdateSelect(false);
       uiExplorer.setCurrentPath(newNode.getPath());      
       uiExplorer.refreshExplorer();
       uiExplorer.updateAjax(event);
@@ -538,6 +539,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIDocumentFormController uiFormController = uiDocumentForm.getParent();
       String clickedField = event.getRequestContext().getRequestParameter(OBJECTID);
       if (uiDocumentForm.isReference) {
+        uiDocumentForm.setIsUpdateSelect(true);
         UIApplication uiApp = uiDocumentForm.getAncestorOfType(UIApplication.class);
         try {        
           UIFormMultiValueInputSet uiSet = uiDocumentForm.getChildById(FIELD_TAXONOMY);
