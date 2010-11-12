@@ -23,7 +23,6 @@
 	xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
 	xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
 
-
   <component>
     <key>org.exoplatform.services.wcm.core.WCMConfigurationService</key>
     <type>org.exoplatform.services.wcm.core.WCMConfigurationService</type>
@@ -112,23 +111,132 @@
     </init-params>
   </component>
 
+  <component>
+    <key>org.exoplatform.services.wcm.core.WebSchemaConfigService</key>
+    <type>org.exoplatform.services.wcm.core.impl.WebSchemaConfigServiceImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>CSSFileHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.skin.CSSFileHandler</type>
+      </component-plugin>
+      <component-plugin>
+        <name>JSFileHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.javascript.JSFileHandler</type>
+      </component-plugin>
+      <component-plugin>
+        <name>WebContentSchemaHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler</type>
+      </component-plugin>
+      <component-plugin>
+        <name>HTMLFileSchemaHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.webcontent.HTMLFileSchemaHandler</type>
+      </component-plugin>
+      <component-plugin>
+        <name>PortalFolderSchemaHandler</name>
+        <set-method>addWebSchemaHandler</set-method>
+        <type>org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler</type>
+      </component-plugin>
+    </component-plugins>
+  </component>
+	
+  <component>
+    <key>org.exoplatform.services.wcm.portal.LivePortalManagerService</key>
+    <type>org.exoplatform.services.wcm.portal.impl.LivePortalManagerServiceImpl</type>
+  </component>
+	
+	<component>
+    <key>org.exoplatform.services.cms.templates.TemplateService</key>
+    <type>org.exoplatform.services.cms.templates.impl.TemplateServiceImpl</type>    
+  </component>
+	
+  <component>
+    <key>org.exoplatform.services.wcm.core.WCMService</key>
+    <type>org.exoplatform.services.wcm.core.impl.WCMServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>server.config</name>
+        <description>server.config</description>
+        <property name="expirationCache" value="30" />
+      </properties-param>
+    </init-params>
+  </component>		
+	
+  <component>
+    <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
+    <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>ExcludeMimeTypes</name>
+        <set-method>addExcludeIncludeDataTypePlugin</set-method>
+        <type>org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin</type>
+        <init-params>
+          <properties-param>
+            <name>search.exclude.datatypes</name>
+            <description>exclude some data type when search</description>
+            <property name="mimetypes" value="text/css,text/javascript,application/x-javascript,text/ecmascript" />
+          </properties-param>
+        </init-params>
+      </component-plugin>
+    </component-plugins>
+  </component>
+	
+  <component>
+    <key>org.exoplatform.services.wcm.link.LiveLinkManagerService</key>
+    <type>org.exoplatform.services.wcm.link.LiveLinkManagerServiceImpl</type>
+    <init-params>
+      <properties-param>
+        <name>server.config</name>
+        <description>server.address</description>
+        <property name="scheme" value="http" />
+        <property name="hostName" value="localhost" />
+        <property name="port" value="8080" />
+      </properties-param>
+    </init-params>
+  </component>	
+	
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
     <component-plugin>
       <name>add.nodeType</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
-      <priority>100</priority>
+      <priority>101</priority>
       <init-params>
         <values-param>
           <name>autoCreatedInNewRepository</name>
           <description>Node types configuration file</description>
-          <value>classpath:/conf/wcm/test-nodetypes-configuration.xml</value>
+          <value>jar:/conf/wcm/test-wcm-nodetypes-configuration.xml</value>
         </values-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
-
+  </external-component-plugins>	
+	
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigCreated</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.CreateLivePortalEventListener</type>
+      <description>this listener create new live portal content storage</description>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigRemoved</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.RemoveLivePortalEventListener</type>
+      <description>this listener new live portal content storage</description>
+    </component-plugin>
+    <component-plugin>
+      <name>org.exoplatform.portal.config.DataStorage.portalConfigUpdated</name>
+      <set-method>addListener</set-method>
+      <type>org.exoplatform.services.wcm.portal.listener.UpdateLivePortalEventListener</type>
+      <description>this listener new live portal content storage</description>
+    </component-plugin>
+  </external-component-plugins>	
+  
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</target-component>
     <component-plugin>

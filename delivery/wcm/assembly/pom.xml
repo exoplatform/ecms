@@ -91,7 +91,8 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-packaging-wcm-config</artifactId>
+      <artifactId>exo-ecms-core-webapp</artifactId>
+      <type>war</type>
       <version>${project.version}</version>
     </dependency>
     <dependency>

@@ -104,7 +104,7 @@
       </value-param>
     </init-params>
   </component>
- 
+
   <component>
     <key>org.exoplatform.services.wcm.skin.XSkinService</key>
     <type>org.exoplatform.services.wcm.skin.XSkinService</type>

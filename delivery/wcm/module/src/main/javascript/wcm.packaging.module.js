@@ -60,6 +60,10 @@ function getModule(params) {
   module.authoring.war.deployName = "authoring-apps";	      
   
   
+  module.core = {};
+  module.core.war = new Project("org.exoplatform.ecms", "exo-ecms-core-webapp", "war", module.version);
+  module.core.war.deployName = "ecm-wcm-core";	      	    
+
   module.extension = {};
   
   module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version);

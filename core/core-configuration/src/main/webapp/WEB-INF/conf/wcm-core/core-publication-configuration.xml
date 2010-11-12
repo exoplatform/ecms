@@ -61,7 +61,7 @@
 	      <values-param>
 	        <name>autoCreatedInNewRepository</name>
 	        <description>Node types configuration file</description>
-	        <value>jar:/conf/nodetypes-publication-config.xml</value>
+	        <value>war:/conf/wcm-core/nodetypes/nodetypes-publication-config.xml</value>
 	      </values-param>
 	    </init-params>
 	  </component-plugin>

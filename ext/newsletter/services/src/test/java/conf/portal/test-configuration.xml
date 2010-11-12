@@ -160,12 +160,12 @@
   </component>
 
   <component>
-    <type>org.exoplatform.groovyscript.text.TemplateService</type>
-  </component>
+    <type>org.exoplatform.groovyscript.text.TemplateService</type>
+  </component>
  
   <component>
-    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
-  </component>
+    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
+  </component>
 
   <external-component-plugins>
     <target-component>org.exoplatform.commons.chromattic.ChromatticManager</target-component>

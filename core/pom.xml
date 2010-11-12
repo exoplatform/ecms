@@ -23,5 +23,6 @@
     <module>search</module>
     <module>webui-explorer</module>
     <module>webui-administration</module>
+    <module>core-configuration</module>
   </modules>
 </project>
