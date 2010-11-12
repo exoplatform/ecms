@@ -75,7 +75,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	private ExoCache<String, Object> cache;
 	
 	private boolean isCached = true;
-	
+
+  private boolean useDefaultLanguage = true;
+
 	/** The log. */
 	private static Log log = ExoLogger.getLogger(WCMComposerImpl.class);
 	
@@ -93,9 +95,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	/**
 	 * Instantiates a new WCM composer impl.
 	 * 
-	 * @param templateService the template service
-	 * @param publicationService the publication service
-	 * 
 	 * @throws Exception the exception
 	 */
 	public WCMComposerImpl(InitParams params) throws Exception {
@@ -103,6 +102,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	    ValueParam useCache = params.getValueParam("useCache");
 	    if (useCache != null)
 	      this.isCached = Boolean.parseBoolean(useCache.getValue());
+	    ValueParam useDefaultLanguage = params.getValueParam("useDefaultLanguage");
+	    if (useDefaultLanguage != null)
+	      this.useDefaultLanguage = Boolean.parseBoolean(useDefaultLanguage.getValue());
 		}
 		
 		repositoryService = WCMCoreUtils.getService(RepositoryService.class);
@@ -272,36 +274,52 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 * @throws Exception the exception
 	 */
 	private Node getViewableContent(Node node, HashMap<String, String> filters) throws Exception {
-      try {
-    	 node = getTargetNode(node);
-      }catch(AccessDeniedException ade) {	     
-     	 return null;
-      }
-	   
-	    String languageFilter = filters.get(FILTER_LANGUAGE);
-	    if (languageFilter!=null) {
-	    	addUsedLanguage(languageFilter);
-		    Node lnode = multiLanguageService.getLanguage(node, languageFilter);
-		    if (lnode!=null) {
-			    node = lnode;
-		    }
-	    }
+    Node viewNode = null;
+    try {
+     node = getTargetNode(node);
+    }catch(AccessDeniedException ade) {
+     return null;
+    }
 
-		HashMap<String, Object> context = new HashMap<String, Object>();
-		String mode = filters.get(FILTER_MODE);
-		context.put(WCMComposer.FILTER_MODE, mode);
-		context.put(WCMComposer.PORTLET_MODE, filters.get(PORTLET_MODE));
-		String lifecyleName = null;
-		try {
-			lifecyleName = publicationService.getNodeLifecycleName(node);
-		} catch (NotInPublicationLifecycleException e) {
-			// Don't log here, this is normal
-		}
-		if (lifecyleName == null) return node;
-		PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins().get(lifecyleName);
-		Node viewNode = publicationPlugin.getNodeView(node, context);
+    String languageFilter = filters.get(FILTER_LANGUAGE);
+    if (languageFilter!=null) {
+      addUsedLanguage(languageFilter);
+      Node lnode = multiLanguageService.getLanguage(node, languageFilter);
+      if (lnode!=null) {
+
+        viewNode = getPublishedContent(lnode, filters);
+
+        if (viewNode!=null) {
+          return viewNode;
+        } else if (!useDefaultLanguage) {
+          return null;
+        }
+      }
+    }
+
+    viewNode = getPublishedContent(node, filters);
+
 		return viewNode;
 	}
+
+
+  private Node getPublishedContent(Node node, HashMap<String, String> filters) throws Exception {
+    HashMap<String, Object> context = new HashMap<String, Object>();
+    String mode = filters.get(FILTER_MODE);
+    context.put(WCMComposer.FILTER_MODE, mode);
+    context.put(WCMComposer.PORTLET_MODE, filters.get(PORTLET_MODE));
+    String lifecyleName = null;
+    try {
+      lifecyleName = publicationService.getNodeLifecycleName(node);
+    } catch (NotInPublicationLifecycleException e) {
+      // Don't log here, this is normal
+    }
+    if (lifecyleName == null) return node;
+    PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins().get(lifecyleName);
+    Node viewNode = publicationPlugin.getNodeView(node, context);
+    return viewNode;
+
+  }
 	
   private Node getTargetNode(Node showingNode) throws Exception {
     Node targetNode = null;
@@ -526,6 +544,12 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	}
 	
 	@Managed
+	@ManagedDescription("Use the default language if translation is not published ?")
+	public boolean useDefaultLanguage() {
+		return useDefaultLanguage;
+	}
+
+	@Managed
 	@ManagedDescription("How many nodes in the cache ?")
 	public int getCachedEntries() {
 		return this.cache.getCacheSize();
@@ -537,6 +561,13 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		this.isCached = isCached;
 	}
 	
+	public void setDefaultLanguagePolicy(boolean useDefaultLanguage) {
+    /**
+     * we don't expose this thru JMX as it's not persistent and it won't work in Cluster environement.
+     */
+		this.useDefaultLanguage = useDefaultLanguage;
+	}
+
 	@Managed
 	@ManagedDescription("Used Languages") 
 	public List<String> getUsedLanguages() {

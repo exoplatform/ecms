@@ -53,6 +53,10 @@
         <name>useCache</name>
         <value>true</value>
       </value-param>
+      <value-param>
+        <name>useDefaultLanguage</name>
+        <value>true</value>
+      </value-param>
     </init-params>
   </component>
 
