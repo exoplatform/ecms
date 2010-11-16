@@ -190,7 +190,7 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	if(dropdownlist) filter = dropdownlist.options[dropdownlist.selectedIndex].value;
 	else filter = 'All';
 
-	var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+currentFolder+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
+	var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+encodeURIComponent(currentFolder)+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
 	var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter;
 	if(eXo.ecm.ECS.strConnection == url) return;	
 	eXo.ecm.ECS.strConnection = url;
@@ -753,7 +753,7 @@ EcmContentSelector.prototype.insertMultiContent = function(operation, currentpat
 		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "a", "Item");
 		if(nodeContent) {
 			var path = nodeContent.getAttribute("path");
-			strContent +=  path+";";
+			strContent += encodeURIComponent(path) + ";";
 		}
 	}
 	var action = rws.getAttribute("action");
@@ -793,7 +793,7 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+path+'</a>';
+	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'">'+decodeURIComponent(path)+'</a>';
 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 	this.insertMultiContent("SaveTemporary", path);	
 };

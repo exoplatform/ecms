@@ -24,6 +24,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -539,7 +540,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     strRepository = itemPath.substring(0, repoIndex);
     strWorkspace = itemPath.substring(repoIndex+1, wsIndex);
     strIdentifier = itemPath.substring(wsIndex +1);
-    Node selectedNode = Utils.getRealNode(strRepository, strWorkspace, strIdentifier, false);
+    Node selectedNode = Utils.getRealNode(Text.escapeIllegalJcrChars(strRepository), Text.escapeIllegalJcrChars(strWorkspace), 
+        Text.escapeIllegalJcrChars(strIdentifier), false);
     if (selectedNode==null) return null;
     String title = null;    
     if (selectedNode.hasProperty("exo:title")) {
@@ -557,7 +559,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     if (title==null) title = selectedNode.getName();
 
-    return title;
+    return Text.unescapeIllegalJcrChars(title);
   }
   
   /**

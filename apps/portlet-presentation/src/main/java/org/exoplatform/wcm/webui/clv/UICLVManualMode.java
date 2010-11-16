@@ -23,6 +23,7 @@ import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -59,7 +60,8 @@ public class UICLVManualMode extends UICLVContainer {
     if (listContent != null && listContent.length != 0) {
       for (String itemPath : listContent) {
       	NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
-      	Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath());
+      	Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(), 
+      	    Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), Text.escapeIllegalJcrChars(nodeLocation.getPath()));
       	if (viewNode != null) nodes.add(viewNode);    
       }
     }
