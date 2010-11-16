@@ -2357,6 +2357,9 @@
   </UIGroupMemberSelector>
   
   <UIFolksonomyManager>
+  	<msg>
+  		<confirm-delete>Souhaitez-vous supprimer ce style?</confirm-delete>
+  	</msg>
     <action>
       <title>
         <AddStyle>Ajouter un style</AddStyle>

@@ -458,8 +458,8 @@
       <Icon>Icon</Icon>
     </title>
     <msg>
-      <confirm-delete>Are you sure want to delete the node '{0}' and move all its contents?</confirm-delete>
-      <confirm-delete-permanently>Are you sure want to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>      
+      <confirm-delete>Do you want to delete the node '{0}' and move all its contents?</confirm-delete>
+      <confirm-delete-permanently>Do you want to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>      
       <confirm-restore>A node with the same name also exists in node '{0}' 's old location. Are you sure want to restore this node?</confirm-restore>
       <confirm-delete-multi>Are you sure want to move these {0} items?</confirm-delete-multi>
       <confirm-delete-permanently-multi>Are you sure want to move these {0} items permanently?</confirm-delete-permanently-multi>      
@@ -3009,7 +3009,7 @@
     </title>
   </action>
     <msg>
-      <confirm-remove>Are you sure want to delete?</confirm-remove>
+      <confirm-remove>Do you want to delete?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
   
