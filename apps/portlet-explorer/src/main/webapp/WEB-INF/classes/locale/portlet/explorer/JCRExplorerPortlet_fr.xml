@@ -459,7 +459,7 @@
     </title>
     <msg>
       <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
-      <confirm-delete-permanently>Souhaitez-vous réellement supprimer le noeud '{0}' et tout son contenu définitivement?</confirm-delete-permanently>      
+      <confirm-delete-permanently> Souhaitez-vous définitivement supprimer  le noeud '{0}' et tout son contenu?</confirm-delete-permanently>      
       <confirm-restore>Un noeud du même nom existe déjà sous l'arborescence '{0}'. Souhaitez-vous réellement restaurer ce noeud ?</confirm-restore>      
       <confirm-delete-multi>Etes vous certains de vouloir déplacer ces {0} éléments vers la corbeille?</confirm-delete-multi>
       <confirm-delete-permanently-multi>Souhaitez-vous réellement supprimer définitivement les éléments {0} ?</confirm-delete-permanently-multi>      

@@ -29,7 +29,7 @@
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure want to delete ?</confirm-delete>
+      <confirm-delete>Do you want to delete ?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 

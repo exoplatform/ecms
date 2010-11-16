@@ -2354,6 +2354,9 @@
   </UIGroupMemberSelector>  
 
   <UIFolksonomyManager>
+  	<msg>
+  		<confirm-delete>Ban co thuc su muon xoa khong?</confirm-delete>
+  	</msg>
     <action>
       <title>
         <AddStyle>Thêm style</AddStyle>
