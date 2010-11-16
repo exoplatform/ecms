@@ -665,9 +665,13 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       }
       
       if (Utils.isPortalEditMode()) {
-        Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);
+    	  Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);
       } else {
-        Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
+    	  if (clvConfig.getModeInternal()) {
+    		  portlet.changeToViewMode();
+    	  }else {
+    		  Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
+    	  }
       }
     }
   }
@@ -690,8 +694,14 @@ public class UICLVConfig extends UIForm  implements UISelectable {
      */
     public void execute(Event<UICLVConfig> event) throws Exception {
       UICLVConfig clvConfig = event.getSource();
-      if (!Utils.isPortalEditMode())
-        Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
+      if (!Utils.isPortalEditMode()) {
+    	  if (clvConfig.getModeInternal()) {
+    	      UICLVPortlet portlet = clvConfig.getAncestorOfType(UICLVPortlet.class);
+    	      portlet.changeToViewMode();
+    	  }else {
+    		  Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
+    	  }
+      }        
     }
   }
 
@@ -863,5 +873,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(clvConfig);
     }
   }  
-  
+  private boolean modeInternal = false;
+  public void setModeInternal(boolean value) {
+	  this.modeInternal = value;
+  }
+  public boolean getModeInternal() {
+	  return this.modeInternal;
+  }
 }
