@@ -20,8 +20,14 @@ function EcmContentSelector() {
 	this.eventNode = false;
 	this.uploadFile = "uploadFile/upload";
 	this.controlUpload = "uploadFile/control";
+	this.initDriverExpanded ="";
+	this.initPathExpanded ="";
+	this.initComponentIdExpanded ="";
+	this.deleteConfirmationMsg="";
 }
-
+EcmContentSelector.prototype.setDeleteConfirmationMessage = function(msg) {
+	this.deleteConfirmationMsg=msg;
+}
 EcmContentSelector.prototype.getUrlParam = function(paramName) {
 	var oRegex = new RegExp("[\?&]" + paramName + "=([^&]+)", "i");
 	var oMatch = oRegex.exec(window.location.search) ; 
@@ -70,8 +76,11 @@ EcmContentSelector.prototype.ajaxRequest = function(url) {
 
 EcmContentSelector.prototype.processResponse = function() {
 	if (eXo.ecm.ECS.xmlHttpRequest.readyState == 4) {
-    if (eXo.ecm.ECS.xmlHttpRequest.status == 200) {
-			eXo.ecm.ECS.buildECSTreeView();
+     if (eXo.ecm.ECS.xmlHttpRequest.status == 200) {    
+       eXo.ecm.ECS.buildECSTreeView();
+       if (eXo.ecm.ECS.initDriverExpanded!=null && eXo.ecm.ECS.initDriverExpanded.length>0) { 
+         eXo.ecm.ECS.waitAndInitPath(eXo.ecm.ECS.initDriverExpanded, eXo.ecm.ECS.initPathExpanded, eXo.ecm.ECS.initComponentIdExpanded);
+       }
     } else {
         alert("There was a problem retrieving the XML data:\n" + eXo.ecm.ECS.xmlHttpRequest.statusText);
         return false;
@@ -79,7 +88,10 @@ EcmContentSelector.prototype.processResponse = function() {
   }
 };
 
-EcmContentSelector.prototype.initRequestXmlTree = function(typeObj){
+EcmContentSelector.prototype.initRequestXmlTree = function(typeObj, iDriver, iPath, iID) {
+  this.initDriverExpanded =iDriver;
+  this.initPathExpanded =iPath;
+  this.initComponentIdExpanded =iID;
 	if(!typeObj) return;
 	eXo.ecm.ECS.typeObj = false;
 	switch(typeObj) {
@@ -729,7 +741,7 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 	}
 };
 
-EcmContentSelector.prototype.insertMultiContent = function() {
+EcmContentSelector.prototype.insertMultiContent = function(operation, currentpath) {
 	var rws = document.getElementById("RightWorkspace");
 	var tblContent = document.getElementById("ListFilesContent");
 	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblContent, "tr");
@@ -748,6 +760,16 @@ EcmContentSelector.prototype.insertMultiContent = function() {
 	if(action){
 		action = action.substring(0, action.length - 2);
 		action += '&objectId=' + strContent + '\')';
+    if (operation) {
+      var opIndex = action.indexOf("op=");
+      if (opIndex>=0) {
+        var opEndIndex = action.indexOf("&", opIndex);
+        if (opEndIndex <0 ) 
+          opEndIndex = action.length;
+        action = action.substring(0, opIndex+3) + operation + action.substring(opEndIndex, action.length-2);
+        action = action + "&driverName=" + this.driverName + "&currentPath=" + currentpath + "')";
+      }
+    }
 		eval(action);
 	}
 };
@@ -768,12 +790,12 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 			return;
 		}
 	}
-	alert("This content is successfully added into the list content.");
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
 	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+path+'</a>';
-	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';	
+	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
+	this.insertMultiContent("SaveTemporary", path);	
 };
 
 EcmContentSelector.prototype.addFileSearchListSearch = function() {
@@ -805,10 +827,15 @@ EcmContentSelector.prototype.loadListContent = function(strArray) {
 };
 
 EcmContentSelector.prototype.removeContent = function(objNode) {
+	var confirmDelete = confirm(this.deleteConfirmationMsg);
+	if (confirmDelete != true) {
+		return;
+	}
 	var tblListFilesContent = document.getElementById("ListFilesContent"); 
 	var objRow = eXo.core.DOMUtil.findAncestorByTagName(objNode, "tr");
 	tblListFilesContent.deleteRow(objRow.rowIndex);	
 	eXo.ecm.ECS.pathContent = false;
+	this.insertMultiContent("SaveTemporary", this.initPathExpanded);
 }
 
 EcmContentSelector.prototype.changeFilter = function() {
@@ -936,7 +963,8 @@ EcmContentSelector.prototype.waitAndInitPath = function(initDrive, initPath, com
 				eXo.ecm.ECS.listRootFolder(nodeLink);
 				eXo.ecm.ECS.actionColExp(nodeADriveType);				
 				var event = false;
-				if (initPath && initPath != "" && initPath != "/")	eXo.ecm.ECS.getDir(tagADrives[i], event);				
+				if (initPath && initPath != "" && initPath != "/")
+				  eXo.ecm.ECS.getDir(tagADrives[i], event);
 //				eXo.ecm.ECS.actionColExp(nodeParent);
 				eXo.ecm.ECS.expandTree('_' + initDrive + '_', initPath, nodeParent);
 				return;

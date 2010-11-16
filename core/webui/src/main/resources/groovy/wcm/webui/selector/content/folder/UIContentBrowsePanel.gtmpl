@@ -6,17 +6,16 @@
 	
 	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
 	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
-	jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('folder')");
 	
-    if (uicomponent instanceof UIContentBrowsePanelFolder) {
-      def uiBrowseFolder = (UIContentBrowsePanelFolder)uicomponent;
-      String nodeDrive = uiBrowseFolder.getInitDrive();
-      String nodePath = uiBrowseFolder.getInitPath();
-      if (nodeDrive != null && nodeDrive.length() > 0) {
-        jsManager.addOnLoadJavascript("eXo.ecm.ECS.initPath('$nodeDrive','$nodePath', '$uicomponent.id')");
-      }
-    }
-	
+	if (uicomponent instanceof UIContentBrowsePanelFolder) {
+		def uiBrowseFolder = (UIContentBrowsePanelFolder)uicomponent;
+		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('folder', '" +
+				uiBrowseFolder.getInitDrive() + "', '" + 
+				uiBrowseFolder.getInitPath()  + "', '" + 
+				uicomponent.id + "')");
+	}else {
+		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('folder')");
+	}
 %>
 
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
