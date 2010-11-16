@@ -18,6 +18,7 @@ package org.exoplatform.wcm.webui.selector.content.one;
 
 import javax.jcr.Node;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
@@ -60,7 +61,7 @@ public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
       UIContentBrowsePanel contentBrowsePanel = event.getSource();
       String returnFieldName = contentBrowsePanel.getReturnFieldName();      
       String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node node = NodeLocation.getNodeByExpression(itemPath.substring(itemPath.indexOf(':') + 1));
+      Node node = NodeLocation.getNodeByExpression(Text.escapeIllegalJcrChars(itemPath.substring(itemPath.indexOf(':') + 1)));
       Node realNode = node;
       if (node.isNodeType("exo:symlink")) {
     	String uuid = node.getProperty("exo:uuid").getString();

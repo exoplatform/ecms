@@ -135,6 +135,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       } else {
         type = uiFolderForm.allowCreateFolder_ ;
       }
+      name = name.trim();
       try {
         node.addNode(Text.escapeIllegalJcrChars(name), type);
         node.save();

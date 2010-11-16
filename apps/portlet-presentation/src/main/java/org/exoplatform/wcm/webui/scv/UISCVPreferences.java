@@ -11,11 +11,11 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
 import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
@@ -333,7 +333,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     }
     if (title==null) title = node.getName();
 
-    return title;
+    return Text.unescapeIllegalJcrChars(title);
   }
   public void setContentSelectorID(String id) {
     this.contentSelectorID = id;
@@ -360,7 +360,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       if (selectedNode==null) return;
       strNodeUUID = selectedNode.getUUID();
       this.setSelectedNodeInfo(strNodeUUID, strRepository, strWorkspace, strDrive);
-      getUIStringInput(selectField).setValue(getTitle(selectedNode));
+      getUIStringInput(selectField).setValue(Text.unescapeIllegalJcrChars(getTitle(selectedNode)));
     }else if (PRINT_VIEW_PAGE_INPUT.equals(selectField)) {
       getUIStringInput(selectField).setValue(strPath);
     }

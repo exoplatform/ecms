@@ -51,6 +51,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -201,14 +202,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       ManageDriveService manageDriveService = (ManageDriveService)ExoContainerContext.getCurrentContainer()
       	.getComponentInstanceOfType(ManageDriveService.class);
       
-      String driverHomePath = manageDriveService.getDriveByName(driverName, repositoryName).getHomePath();
+      String driverHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName), 
+          Text.escapeIllegalJcrChars(repositoryName)).getHomePath();
       String itemPath = driverHomePath
                         + ((currentFolder != null && !"".equals(currentFolder) && !driverHomePath.endsWith("/")) ? "/" : "")
                         + currentFolder;
       ConversationState conversationState = ConversationState.getCurrent();
       String userId = conversationState.getIdentity().getUserId();      
       itemPath = StringUtils.replaceOnce(itemPath, "${userId}", userId);
-      Node node = (Node)session.getItem(itemPath);
+      Node node = (Node)session.getItem(Text.escapeIllegalJcrChars(itemPath));
       
       return buildXMLResponseForChildren(node, null, repositoryName, filterBy, session, currentPortal);
 
@@ -254,9 +256,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @HeaderParam("content-type") String contentType,
       @HeaderParam("content-length") String contentLength) throws Exception {
 
-  	Node currentFolderNode = getParentFolderNode(repositoryName, workspaceName, driverName, currentFolder);
-    return createUploadFileResponse(inputStream, repositoryName, workspaceName, currentFolderNode,
-        currentPortal, jcrPath, uploadId, language, contentType, contentLength, limit);
+  	Node currentFolderNode = getParentFolderNode(Text.escapeIllegalJcrChars(repositoryName), Text.escapeIllegalJcrChars(workspaceName), 
+  	    Text.escapeIllegalJcrChars(driverName), Text.escapeIllegalJcrChars(currentFolder));
+    return createUploadFileResponse(inputStream, Text.escapeIllegalJcrChars(repositoryName), Text.escapeIllegalJcrChars(workspaceName), currentFolderNode,
+        currentPortal, Text.escapeIllegalJcrChars(jcrPath), uploadId, language, contentType, contentLength, limit);
   }
 
   /**
@@ -293,9 +296,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("fileName") String fileName,
       @QueryParam("uploadId") String uploadId) throws Exception {
     try {
-    	Node currentFolderNode = getParentFolderNode(repositoryName, workspaceName, driverName, currentFolder);
-      return createProcessUploadResponse(repositoryName, workspaceName, currentFolderNode, siteName, userId, jcrPath,
-          action, language, fileName, uploadId);  
+    	Node currentFolderNode = getParentFolderNode(Text.escapeIllegalJcrChars(repositoryName), Text.escapeIllegalJcrChars(workspaceName), 
+    	    Text.escapeIllegalJcrChars(driverName), Text.escapeIllegalJcrChars(currentFolder));
+      return createProcessUploadResponse(Text.escapeIllegalJcrChars(repositoryName), Text.escapeIllegalJcrChars(workspaceName), currentFolderNode, 
+          siteName, userId, Text.escapeIllegalJcrChars(jcrPath), action, language, fileName, uploadId);  
     } catch (Exception e) {
       log.error("Error when perform processUpload: ", e);
     }

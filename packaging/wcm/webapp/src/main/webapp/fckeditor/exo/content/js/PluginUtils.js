@@ -31,8 +31,8 @@ PluginUtils.prototype.renderTree = function(objXML) {
 		var id = eXoWCM.PluginUtils.generateIdDriver(nodeList[i]);
 		treeHTML += '<div class="Node" onclick="eXoWCM.PluginUtils.actionColExp(this);">';
 		treeHTML += 	'<div class="ExpandIcon">';		
-		treeHTML += 		'<a title="'+strName+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" isUpload="'+isUpload+'" onclick="eXoWCM.PluginUtils.renderBreadcrumbs(this);" name="'+strName+'" id="'+id+'">';
-		treeHTML +=			strName;	
+		treeHTML += 		'<a title="'+decodeURIComponent(strName)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" isUpload="'+isUpload+'" onclick="eXoWCM.PluginUtils.renderBreadcrumbs(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'">';
+		treeHTML +=			decodeURIComponent(strName);	
 		treeHTML +=			'</a>';
 		treeHTML += 	'</div>';			
 		treeHTML += '</div>';			
@@ -59,7 +59,7 @@ PluginUtils.prototype.renderSubTree = function(currentNode) {
 			var driverPath = nodeList[i].getAttribute("driverPath");
 			treeHTML += '<div class="Node" onclick="eXoWCM.PluginUtils.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+label+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="getDir(this, event);" name="'+strName+'" id="'+id+'"  driverPath="'+driverPath+'">';
+			treeHTML +=			'<a title="'+decodeURIComponent(label)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'">';
 			treeHTML +=				label;	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
@@ -85,8 +85,8 @@ PluginUtils.prototype.renderSubTrees = function(currentNode, event, connector) {
 			var strName = nodeList[i].getAttribute("name");
 			treeHTML += '<div class="Node" onclick="eXoWCM.PluginUtils.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+ strName +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="getDir(this, event);" name="'+strName+'" id="'+id+'">';
-			treeHTML +=				strName;	
+			treeHTML +=			'<a title="'+ decodeURIComponent(strName) +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'">';
+			treeHTML +=				decodeURIComponent(strName);	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
 			treeHTML +=	'</div>';
@@ -102,8 +102,8 @@ PluginUtils.prototype.renderSubTrees = function(currentNode, event, connector) {
 				var	strName	= currentNodeList[i].getAttribute("name");
 				treeHTML += '<div class="Node" onclick="eXoWCM.PluginUtils.actionColExp(this);">';
 				treeHTML += 	'<div class="ExpandIcon">';
-				treeHTML +=			'<a title="'+strName+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="getDir(this, event);" name="'+strName+'" id="'+id+'">';
-				treeHTML +=				strName;	
+				treeHTML +=			'<a title="'+decodeURIComponent(strName)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'">';
+				treeHTML +=				decodeURIComponent(strName);	
 				treeHTML += 		'</a>';
 				treeHTML +=		'</div>';
 				treeHTML +=	'</div>';
@@ -178,7 +178,7 @@ PluginUtils.prototype.listFiles = function(list) {
 		if (!label) label = node;
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<div class="Item '+clazzItem+'" url="'+url+'" nodeType="'+nodeType+'" onclick="eXoWCM.PluginUtils.insertContent(this);">'+label+'</div>';
+		newRow.insertCell(0).innerHTML = '<div class="Item '+clazzItem+'" url="'+url+'" nodeType="'+nodeType+'" onclick="eXoWCM.PluginUtils.insertContent(this);">'+decodeURIComponent(label)+'</div>';
 		newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 		newRow.insertCell(2).innerHTML = '<div class="Item">'+ list[i].getAttribute("size")+'&nbsp;kb' +'</div>';
 		
@@ -319,11 +319,11 @@ PluginUtils.prototype.renderBreadcrumbs = function(currentNode) {
 			var node = document.getElementById(currentNode.id);
 			if(node) strOnclick = "eXoWCM.PluginUtils.actionBreadcrumbs('"+node.id+"')";		
 			if(beforeNode == null) {
-				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+label+'</a>';
+				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
 				tmpNode.innerHTML = strHTML;
 				breadscrumbsContainer.appendChild(tmpNode);
 			} else {
-				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+label+'</a>';
+				strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
 				strHTML += '<div class="RightArrowIcon"><span></span></div>';
 				tmpNode.innerHTML = strHTML;
 				breadscrumbsContainer.insertBefore(tmpNode, beforeNode);
@@ -404,16 +404,23 @@ PluginUtils.prototype.insertContent = function(objContent) {
 	var hostName = eXoPlugin.hostName;
 	var nodeType = objContent.getAttribute('nodeType');
 	var url 	= objContent.getAttribute('url');
-	var name 	= objContent.innerHTML;
+	var temp = url;
+ var index = temp.indexOf("%27");
+ while(index != -1){
+  temp = temp.replace("%27","%2527");
+		index = temp.indexOf("%27");
+ }
+ url = temp;
+ var name 	= encodeURIComponent(objContent.innerHTML);
 	var strHTML = '';	
 	if(window.opener.document.getElementById(getParameterValueByName("browserType"))){		
 		strHTML += url;		
 		window.opener.document.getElementById(getParameterValueByName("browserType")).value=strHTML;
 	} else {
 		if(nodeType.indexOf("image") >=0) {
-			strHTML += "<img src='"+url+"' name='"+name+"' alt='"+name+"'/>";
+			strHTML += "<img src=\""+url+"\" name=\""+name+"\" alt=\""+name+"\"/>";
 		} else {
-			strHTML += "<a href='" + url+"' style='text-decoration:none;'>"+name+"</a>";		
+			strHTML += "<a href=\"" + url+"\" style='text-decoration:none;'>"+name+"</a>";		
 		}
 		FCK.InsertHtml(strHTML);
 	}			

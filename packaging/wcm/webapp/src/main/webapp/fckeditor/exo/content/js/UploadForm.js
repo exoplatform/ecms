@@ -39,7 +39,7 @@ UploadForm.prototype.showUploadForm = function() {
 	var tblActionContainer =  eXo.core.DOMUtil.findFirstDescendantByClass(uploadForm, "table", "ActionContainer");
 	var trFolder =  eXo.core.DOMUtil.findFirstDescendantByClass(tblActionContainer, "tr", "PathFolder");
 	var spanFolder = eXo.core.DOMUtil.findDescendantsByTagName(trFolder, "span")[0];
-	spanFolder.innerHTML += ":"+ eXp.store.currentFolder;
+	spanFolder.innerHTML += ":"+ decodeURIComponent(decodeURIComponent(eXp.store.currentFolder));
 };
 
 UploadForm.prototype.showAlert = function() {

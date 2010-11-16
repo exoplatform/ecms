@@ -423,7 +423,7 @@ var eXp = {
 					currentNode.setAttribute("currentFolder", currentFolder);
 				}
 		}
-		eXp.store.currentFolder = currentFolder;
+		eXp.store.currentFolder = decodeURIComponent(currentFolder);
 		eXp.store.currentNode = currentNode;
 		driverName = eXp.store.driverName;
 		var strReplace 	= "getFoldersAndFiles?driverName="+driverName+"&currentFolder="+currentFolder+"&currentPortal="+eXoPlugin.portalName+"&" ;	

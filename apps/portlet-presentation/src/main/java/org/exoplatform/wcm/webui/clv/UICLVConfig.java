@@ -24,6 +24,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -562,7 +563,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     if (title==null) title = selectedNode.getName();
 
-    return title;
+    return Text.unescapeIllegalJcrChars(title);
   }
   /**
    * The listener interface for receiving saveAction events.

@@ -27,6 +27,7 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -98,7 +99,7 @@ public class UIPresentationContainer extends UIContainer{
 		}
 		if (title==null) title = node.getName();
 
-		return title;
+		return Text.unescapeIllegalJcrChars(title);
 	}
 	public boolean isPrinting() {
 	  return this.isPrint;
