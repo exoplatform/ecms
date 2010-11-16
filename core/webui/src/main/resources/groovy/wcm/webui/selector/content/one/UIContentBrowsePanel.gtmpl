@@ -6,16 +6,14 @@
 	
 	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
 	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
-	jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('one')");
 	if (uicomponent instanceof UIContentBrowsePanelOne) {
 	  def uiBrowseOne = (UIContentBrowsePanelOne)uicomponent;
-	  String nodeDrive = uiBrowseOne.getInitDrive();
-	  String nodePath = uiBrowseOne.getInitPath();
-	  if (nodeDrive != null && nodeDrive.length() > 0) {
-	    jsManager.addOnLoadJavascript("eXo.ecm.ECS.initPath('$nodeDrive','$nodePath', '$uicomponent.id')");
-	  }
-	}
-	
+      jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('one', '" +
+						  							uiBrowseOne.getInitDrive() + "', '" + 
+						  							uiBrowseOne.getInitPath()  + "', '" + 
+						  							uicomponent.id + "')");	  
+	}else 
+		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('one')");
 %>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
 	<div class="ActionBar">

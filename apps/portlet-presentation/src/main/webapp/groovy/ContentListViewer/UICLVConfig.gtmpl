@@ -265,7 +265,7 @@
             	 advancedLinkDisplay = uicomponent.isShowAdvancedBlock()? "none" : "block";
           	%>
             <fieldset style="display: $advancedBlockDisplay; margin-bottom: 10px; overflow: hidden; border: 1px solid #b7b7b7;" maxHeight="350">
-              <legend class="StyleLegend"><a style="text-align:center; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" title="<%=_ctx.appRes("UICLVConfig.label.HideAdvancedBlock")%>"><%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%></a></legend>
+              <legend class="StyleLegend"><a style="text-align:center; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" title="<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>"><%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%></a></legend>
               <table class="UIFormGrid" style="width:100%;">
               	<tr>
               		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></td>
@@ -407,7 +407,7 @@
                 </tr>
               </table>
             </fieldset>
-          	<a style="display: $advancedLinkDisplay; text-align:left; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "true")%>" title="<%=_ctx.appRes("UICLVConfig.label.ShowAdvancedBlock")%>">
+          	<a style="display: $advancedLinkDisplay; text-align:left; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "true")%>" title="<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>">
           		<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>
         		</a>
             <div class="UIAction"> 
