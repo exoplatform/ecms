@@ -116,7 +116,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private ResourceBundleService resourceBundleService;
   
   private String resourceBundleNames[];
+  private ResourceBundle sharedResourceBundle;
   
+  private Locale lang = Locale.ENGLISH;
   /**
    * Instantiates a new driver connector.
    * 
@@ -129,6 +131,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     organizationService = WCMCoreUtils.getService(OrganizationService.class);
     resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     resourceBundleNames = resourceBundleService.getSharedResourceBundleNames();
+    sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, lang);
   }
 	
   /**
@@ -403,15 +406,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return folders;
   }
   
-	private String resolveDriveLabel(String name, String lang) {
-	  for (String resourceBundleName : resourceBundleNames) {
-	    try {
-	      ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(lang));
-	      return resourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
-      } catch (MissingResourceException e) {}
-	  }
+  private String resolveDriveLabel(String name, String lang) {
+	  try {
+		  if(!this.lang.getLanguage().equals(lang)){
+			  this.lang = new Locale(lang);
+			  sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
+		  }
+		  return sharedResourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
+	  } catch (MissingResourceException e) {}
 	  return name;
-	}
+  }
 	
   /**
    * Personal drivers.
