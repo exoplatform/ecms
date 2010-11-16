@@ -249,7 +249,9 @@ public class UICLVPortlet extends UIPortletApplication {
       folderMode.setRendered(false);
       manualMode.setRendered(false);
       config.setRendered(true);
+      config.setModeInternal(true);
     } else if (currentMode == PortletMode.VIEW) {
+      config.setModeInternal(false);
       if (displayMode.equals(DISPLAY_MODE_AUTOMATIC) || getFolderPath() != null) {
         manualMode.setRendered(false);
         folderMode.init();        
@@ -263,5 +265,9 @@ public class UICLVPortlet extends UIPortletApplication {
     }
     
     super.processRender(app, context);
+  }
+  public void changeToViewMode() throws Exception{
+      PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+      portletRequestContext.setApplicationMode(PortletMode.VIEW);      
   }
 }

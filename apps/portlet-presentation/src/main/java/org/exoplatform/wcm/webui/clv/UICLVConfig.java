@@ -152,17 +152,17 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   /** The Constant TARGET_PAGE_SELECTOR_POPUP_WINDOW. */
   public final static String TARGET_PAGE_SELECTOR_POPUP_WINDOW      = "UICLVConfigTargetPageSelectorPopupWindow";
   
-  /** The Constant DYNAMIC_NAVIGATION_LABEL. */											
-  public static final String DYNAMIC_NAVIGATION_LABEL								= "UICLVConfigDynamicNavigationLabel";
+  /** The Constant DYNAMIC_NAVIGATION_LABEL. */                     
+  public static final String DYNAMIC_NAVIGATION_LABEL               = "UICLVConfigDynamicNavigationLabel";
   
   /** The Constant CONTEXTUAL_FOLDER_RADIOBOX_INPUT. */
-  public static final String CONTEXTUAL_FOLDER_RADIOBOX_INPUT				= "UICLVConfigContextualFolderRadioBoxInput";
+  public static final String CONTEXTUAL_FOLDER_RADIOBOX_INPUT       = "UICLVConfigContextualFolderRadioBoxInput";
 
   /** The Constant SHOW_CLV_BY_STRING_INPUT. */
-  public static final String SHOW_CLV_BY_STRING_INPUT								= "UICLVConfigShowCLVByStringInput";
+  public static final String SHOW_CLV_BY_STRING_INPUT               = "UICLVConfigShowCLVByStringInput";
   
   /** The Constant SHOW_SCV_WITH_STRING_INPUT. */
-  public static final String SHOW_SCV_WITH_STRING_INPUT    					= "UICLVConfigshowSCVWithStringInput";
+  public static final String SHOW_SCV_WITH_STRING_INPUT             = "UICLVConfigshowSCVWithStringInput";
   
   /** TODO: Need to improve, we should allow user can choose template category by configuration or portlet's preference */
   /** The Constant DISPLAY_TEMPLATE_CATEGORY. */
@@ -180,12 +180,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   
   /** The items. */
   private List<String> items;
-  private String savedPath;
+  
+  private String savedPath;  
   private boolean isShowAdvancedBlock_;
+  
   private String driveName_;
-
-  public void setDriveName(String value) { this.driveName_ = value; }
-  public String getDriveName() { return this.driveName_; }
   
   public void setSavedPath(String value) {
     savedPath = value;
@@ -211,6 +210,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     this.popupId = popupId;
   }
 
+  public void setDriveName(String value) { this.driveName_ = value; }
+  public String getDriveName() { return this.driveName_; }
+  
   /**
    * Gets the items.
    * 
@@ -221,7 +223,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     if (items == null && UICLVPortlet.DISPLAY_MODE_MANUAL.equals(displayMode) && itemPath != null) {
       if(itemPath.contains(";")) {
-      	items = Arrays.asList(itemPath.split(";"));
+        items = Arrays.asList(itemPath.split(";"));
       }
     }
     return items;
@@ -434,10 +436,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     addChild(showScvWithInput);
     
     if (contextualFolderMode != null && contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE))
-    	isShowAdvancedBlock_ = true;
+      isShowAdvancedBlock_ = true;
     else //if (contextualFolderMode == null || contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_DISABLE)) 
-  	{
-    	isShowAdvancedBlock_ = false;
+    {
+      isShowAdvancedBlock_ = false;
     }
 
     setActions(new String[] { "Save", "Cancel" });
@@ -485,7 +487,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         getUIStringInput(selectField).setValue(sValue);
       }else if (ITEM_PATH_FORM_STRING_INPUT.equals(selectField) && UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(displayMode)) {
         items = new ArrayList<String>();
-        //init drive
         String[] values = sValue.split(":");
         if (values.length == 4) {
           this.setDriveName(values[0]);
@@ -502,16 +503,14 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         titles = getTitle(sValue);
         getUIStringInput(selectField).setValue(titles);
         savedPath = sValue;
-
       }
-
     }
     Utils.closePopupWindow(this, popupId);
   }
   
   private String getTitles(String itemPath) throws RepositoryException {
-  	if (itemPath == null || itemPath.length() == 0)
-  		return "";
+    if (itemPath == null || itemPath.length() == 0)
+      return "";
     String titles = "";
     List<String> tmpItems;
     tmpItems = Arrays.asList(itemPath.split(";"));
@@ -528,25 +527,24 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     return titles;
   }
   
-  /**
+ /**
    * 
    * @param itemPath
    * @return
    * @throws RepositoryException
    */  
   private String getTitle(String itemPath) throws RepositoryException {
-  	if (itemPath == null || itemPath.length() == 0)
-  		return "";
     String strRepository, strWorkspace, strIdentifier;
     int repoIndex, wsIndex;
-    if (itemPath==null) return null;
+    if (itemPath==null || itemPath.length() == 0) 
+      return "";
     repoIndex = itemPath.indexOf(':');
     wsIndex = itemPath.lastIndexOf(':');
     strRepository = itemPath.substring(0, repoIndex);
     strWorkspace = itemPath.substring(repoIndex+1, wsIndex);
     strIdentifier = itemPath.substring(wsIndex +1);
     Node selectedNode = Utils.getRealNode(strRepository, strWorkspace, strIdentifier, false);
-	if (selectedNode==null) return null;
+    if (selectedNode==null) return null;
     String title = null;    
     if (selectedNode.hasProperty("exo:title")) {
       title = selectedNode.getProperty("exo:title").getValue().getString();
@@ -565,6 +563,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
     return Text.unescapeIllegalJcrChars(title);
   }
+  
   /**
    * The listener interface for receiving saveAction events.
    * The class that is interested in processing a saveAction
@@ -620,11 +619,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
       String showClvBy = clvConfig.getUIStringInput(UICLVConfig.SHOW_CLV_BY_STRING_INPUT).getValue();
       if (showClvBy == null || showClvBy.length() == 0)
-      	showClvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
+        showClvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
       String targetPage = clvConfig.getUIStringInput(UICLVConfig.TARGET_PAGE_FORM_STRING_INPUT).getValue();
       String showScvWith = clvConfig.getUIStringInput(UICLVConfig.SHOW_SCV_WITH_STRING_INPUT).getValue();
       if (showScvWith == null || showScvWith.length() == 0)
-      	showScvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
+        showScvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
       
       /** SET VALUES TO PREFERENCES */
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
@@ -670,9 +669,13 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       }
       
       if (Utils.isPortalEditMode()) {
-      	Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);
+    	  Utils.createPopupMessage(clvConfig, "UICLVConfig.msg.saving-success", null, ApplicationMessage.INFO);
       } else {
-        Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
+    	  if (clvConfig.getModeInternal()) {
+    		  portlet.changeToViewMode();
+    	  }else {
+    		  Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
+    	  }
       }
     }
   }
@@ -695,8 +698,14 @@ public class UICLVConfig extends UIForm  implements UISelectable {
      */
     public void execute(Event<UICLVConfig> event) throws Exception {
       UICLVConfig clvConfig = event.getSource();
-      if (!Utils.isPortalEditMode())
-        Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
+      if (!Utils.isPortalEditMode()) {
+    	  if (clvConfig.getModeInternal()) {
+    	      UICLVPortlet portlet = clvConfig.getAncestorOfType(UICLVPortlet.class);
+    	      portlet.changeToViewMode();
+    	  }else {
+    		  Utils.closePopupWindow(clvConfig, "UIViewerManagementPopupWindow");
+    	  }
+      }        
     }
   }
 
@@ -723,15 +732,13 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       if (mode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) {
         UIContentSelectorFolder contentSelector = clvConfig.createUIComponent(UIContentSelectorFolder.class, null, null);
         UIContentBrowsePanelFolder folderContentSelector= contentSelector.getChild(UIContentBrowsePanelFolder.class);
-        
         String location = clvConfig.getSavedPath();
         String[] locations = (location == null) ? null : location.split(":");
         Node node = (locations != null && locations.length >= 3) ? Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]) : null;
-        
- 	 	 	 	contentSelector.init(clvConfig.getDriveName(),
- 	 	 	 												fixPath(node  == null ? ""  : node.getPath(),
-	                                     clvConfig,
-	                                     (locations != null && locations.length > 0) ? locations[0] : null));
+        contentSelector.init(clvConfig.getDriveName(),
+                             fixPath(node == null ? "" : node.getPath(), 
+                                     clvConfig, 
+                                     (locations != null && locations.length > 0) ? locations[0] : null));
         folderContentSelector.setSourceComponent(clvConfig, new String[] { UICLVConfig.ITEM_PATH_FORM_STRING_INPUT });
         Utils.createPopupWindow(clvConfig, contentSelector, UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW, 800);
         clvConfig.setPopupId(UIContentSelector.FOLDER_PATH_SELECTOR_POPUP_WINDOW);
@@ -750,9 +757,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     
     private String fixPath(String path, UICLVConfig clvConfig, String repository) throws Exception {
-      if (path == null || path.length() == 0 || repository  == null || repository.length()  == 0 ||
-      		clvConfig.getDriveName() == null || clvConfig.getDriveName().length() == 0)
- 	 	 	 	return "";    	
+      if (path == null || path.length() == 0 || repository == null || repository.length() == 0 || 
+          clvConfig.getDriveName() == null || clvConfig.getDriveName().length() == 0)
+        return "";
       
       ManageDriveService managerDriveService = clvConfig.getApplicationComponent(ManageDriveService.class);
       DriveData driveData = managerDriveService.getDriveByName(clvConfig.getDriveName(), repository);
@@ -796,6 +803,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       }
       clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
       clvConfig.setSavedPath(itemPath);
+
     }
   }
 
@@ -869,5 +877,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(clvConfig);
     }
   }  
-  
+  private boolean modeInternal = false;
+  public void setModeInternal(boolean value) {
+	  this.modeInternal = value;
+  }
+  public boolean getModeInternal() {
+	  return this.modeInternal;
+  }
 }
