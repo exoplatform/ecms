@@ -3,72 +3,12 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Basic_Actions_in_WCM">
-	<title>Basic Actions in WCM</title>
-	 <para>
-		These actions can be done by users who have the right to use the administration bar with a personal preferences menu.
-	</para>
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-View_a_site">
-		<title>View a site</title>
-		 <para>
-			In WCM, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
-		</para>
-		 <mediaobject>
-			<imageobject role="html">
-				<imagedata align="center" fileref="images/toolbar.png" format="PNG" scale="100" />
-			</imageobject>
-			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="70mm" fileref="images/toolbar.png" format="PNG" />
-			</imageobject>
-
-		</mediaobject>
-		 <para>
-			The main screen of the site will appear like the illustration below:
-		</para>
-		 <mediaobjectco> <imageobjectco> <areaspec>
-			<area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-admin" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-banner" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-home" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-footer" />
-
-		</areaspec>
-		 <imageobject>
-			<imagedata align="center" fileref="images/acme.png" format="PNG" width="444" />
-		</imageobject>
-		 <calloutlist>
-			<callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-admin">
-				<para>
-					This is Administration bar which contains administration functions related to portals (websites).
-				</para>
-
-			</callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-banner">
-				<para>
-					This is Banner which contains slogan, logo, icon used in the website.
-				</para>
-
-			</callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-home">
-				<para>
-					This is Home page which is the main page of the website. This is the default page that is displayed first when you visit the website.
-				</para>
-
-			</callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-footer">
-				<para>
-					This is Footer of the web site. It can be texts, or image that is displayed at the bottom of the web site. It provides information about author/institutional sponsor, revision date, copyright, etc.
-				</para>
-
-			</callout>
-
-		</calloutlist>
-		 </imageobjectco> </mediaobjectco>
-	</section>
-	
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Register_an_account">
+<section>
+  <title><emphasis role="bold">Account</emphasis></title>
+    <section>
 		<title>Register an account</title>
 		 <para>
-			To register a new account on the portal, proceed as follows:
+			To register a new account on the portal, do as follows:
 		</para>
 		 <procedure>
 			<title></title>
@@ -175,23 +115,17 @@
 									Email Address
 								</entry>
 								 <entry>
-									Your email address. It must have right format: <replaceable>username@abc.com</replaceable>
+									Your email address. It must have a right format: <replaceable>username@abc.com</replaceable>
 								</entry>
-
 							</row>
-
 						</tbody>
-
 					</tgroup>
-
 				</table>
-
 			</step>
 			 <step>
 				<para>
-					Input values for fields in this form.
+					Input values for the fields in this form.
 				</para>
-
 			</step>
 			 <step>
 				<para>
@@ -200,21 +134,19 @@
 						<imageobject>
 							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
 						</imageobject>
-
 					</inlinemediaobject>
-					 icon to search and check if the inputted user name is available.
+					 icon to search and check if the inputted user name is available or not.
 				</para>
-
 			</step>
-			 <step>
+          <!--<step>
 				<para>
 					Input other required fields in the <emphasis role="bold">Account Settings</emphasis> tab.
 				</para>
 
-			</step>
+			</step>-->
 			 <step>
 				<para>
-					Input values for the User Profile information, including: Profile information, Home information, Business information.
+					Input values in the fields of User Profile tab, including: Profile information, Home information and Business information.
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
@@ -229,12 +161,12 @@
 			</step>
 			 <step>
 				<para>
-					Click Save to register a new account, or Reset to renew all inputted values. There will be an alert message, and you can not add a new account successfully if at least one of these cases occurs:
+					Click Save to register a new account, or Reset to renew all inputted values. There will be an alert message, and you cannot add a new account successfully if at least one of these cases occurs:
 				</para>
 				 <itemizedlist>
 					<listitem>
 						<para>
-							User name is existing or User Name is invalid.
+							User name is existing or invalid.
 						</para>
 
 					</listitem>
@@ -252,7 +184,7 @@
 					</listitem>
 					 <listitem>
 						<para>
-							Email Address is invalid format.
+							Email Address has invalid format.
 						</para>
 
 					</listitem>
@@ -285,13 +217,13 @@
 	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Sign_In">
 		<title>Sign In</title>
 		 <para>
-			This function allows you to go into WCM in the private mode.
+			This function enables you to go into WCM in the private mode.
 		</para>
 		 <procedure id="proc-User_Guide-Sign_In-Sign_in">
 			<title>Sign in</title>
 			 <step>
 				<para>
-					Go to the WCM in the public mode by inputting the URL in the address bar (e.g: <ulink type="http" url="http://localhost:8080//portal/public/classic/" />)
+					Go to the WCM in the public mode by inputting the URL in the address bar (e.g: <ulink type="http" url="http://localhost:8080//portal/public/classic/" />).
 				</para>
 
 			</step>
@@ -318,7 +250,7 @@
 			</step>
 			 <step>
 				<para>
-					Click Sign in to accept, or Discard to exit the Sign in form.
+					Click Sign in to accept, or Discard to exit from the Sign in form.
 				</para>
 				 <table id="tabl-User_Guide-Sign_in-Options">
 					<title>Options</title>
@@ -359,7 +291,7 @@
 									Forgot your User Name/Password
 								</entry>
 								 <entry>
-									To retrieve the forgotten username or password when you forget.
+									To retrieve the forgotten user name or password when you forget.
 								</entry>
 
 							</row>
@@ -368,7 +300,7 @@
 									Sign in
 								</entry>
 								 <entry>
-									To sign into the eXo Portal with the inputted username and password.
+									To sign into the eXo Portal with the inputted user name and password.
 								</entry>
 
 							</row>
@@ -388,7 +320,7 @@
 
 				</table>
 				 <para>
-					In case the User Name does not exist or the inputted User name/Password is invalid, there will be an alert message that requires users to input right values. The page will be redirected to the private security check mode.
+					If the User Name does not exist or the inputted User name/Password is invalid, there will be an alert message that requires users to input right values. The page will be redirected to the private security checking mode.
 				</para>
 				 <para>
 					To login again, enter User Name and Password again.
@@ -399,7 +331,7 @@
 		</procedure>
 		
 		 <para>
-			After signing in, you will be redirected to the authenticated homepage:
+			After signing in, you will be redirected to the authenticated homepage like the illustration.
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -431,7 +363,7 @@
 
 		</mediaobject>
 		 <para>
-			or click the Start logo at the top left corner of the administration bar and select the Sign out form from the menu:
+			or click eXo | Sign out from the menu:
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -440,13 +372,11 @@
 			 <imageobject role="fo">
 				<imagedata align="center" contentwidth="150mm" fileref="images/startlogo.png" format="PNG" />
 			</imageobject>
-
 		</mediaobject>
-
 	</section>
-	
+   
 	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Retrieve_usernamepassword">
-		<title>Retrieve username/password</title>
+		<title>Retrieve user name/password</title>
 		 <para>
 			If you forget your account or password, you can recover them by doing as follows:
 		</para>
@@ -454,7 +384,7 @@
 			<title></title>
 			 <step>
 				<para>
-					Click the link <emphasis role="bold">Forget your User Name/Password?</emphasis> from the Sign in form.
+               Click the link <emphasis role="bold">Forgot your User Name/Password?</emphasis> in the Sign in form.
 				</para>
 				 <para>
 					This form offers two options:
@@ -466,7 +396,6 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/retrieve.png" format="PNG" width="444" />
 					</imageobject>
-
 				</mediaobject>
 				 <variablelist>
 					<varlistentry>
@@ -485,20 +414,16 @@
 							<para>
 								If you forgot your username, you need to select this option.
 							</para>
-
 						</listitem>
-
 					</varlistentry>
-
 				</variablelist>
-
 			</step>
 			 <step>
 				<para>
 					Select one of these two options in this form. The selected option will be shown:
 				</para>
 				 <para>
-					If the <emphasis role="bold">Forgot my password</emphasis> option is selected:
+					If the <emphasis role="bold">Forgot my password</emphasis> option is selected the form to recover the password appears:
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
@@ -507,10 +432,9 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/forgotpassword.png" format="PNG" width="444" />
 					</imageobject>
-
 				</mediaobject>
 				 <para>
-					If the <emphasis role="bold">Forgot my username</emphasis> option is selected:
+					If the <emphasis role="bold">Forgot my username</emphasis> option is selected, the form to recover the user name appears:
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
@@ -519,149 +443,55 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/forgotname.png" format="PNG" width="444" />
 					</imageobject>
-
 				</mediaobject>
-
 			</step>
 			 <step>
 				<para>
 					Enter your username or email in the corresponding form.
 				</para>
-
 			</step>
 			 <step>
 				<para>
-					Click Send to send the inputted values.
+               Click <emphasis role="bold">Send</emphasis> to send the inputted values.
 				</para>
 				 <para>
-					Once information has been sent, you will receive an email with your User name/ Password in your email address registered by you.
+					Once information has been sent, you will receive an email with your User name/ Password in your email address that you registered. 
 				</para>
 				 <itemizedlist>
 					<listitem>
 						<para>
 							If you forget User Name: when a username is retrieved, your old username is restored and can be reused and a new password is also sent to your email with the old username.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							If you forget old password: a new password will be set (as temporary, then you will be directed to change the password for the next time you sign in.
+							If you forget old password: a new password will be set (as temporary, then you will be directed to change the password for the next time you sign in).
 						</para>
-
 					</listitem>
-
 				</itemizedlist>
+<!-- Removed in eXo Content User Guide 2.1.1
 				 <note>
 					<title>Temporary Credentials Validity</title>
 					 <para>
 						The Username/Password that you received only takes effect for 1 day. It means that if the period is over 1 day from the receipt date, you can not use the receipt username/password, so you will need to get another email active.
 					</para>
-
 				</note>
-
+-->
 			</step>
-
 		</procedure>
-		
-
 	</section>
 	
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Change_The_Display_Language">
-		<title>Change The Display Language</title>
-		 <para>
-			The priority order of display language is shown to the following order:
-		</para>
-		 <orderedlist>
-			<listitem>
-				<para>
-					User's language
-				</para>
-
-			</listitem>
-			 <listitem>
-				<para>
-					Browser's language
-				</para>
-
-			</listitem>
-			 <listitem>
-				<para>
-					Portal 's language.
-				</para>
-
-			</listitem>
-
-		</orderedlist>
-		 <para>
-			Thus, to display your preferred language, you should pay attention to this order to change the language type appropriately.
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Click the Change Language link on the top left corner:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/startlogo.png" format="PNG" scale="70" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/startlogo.png" format="PNG" />
-					</imageobject>
-
-				</mediaobject>
-				 <para>
-					The Interface Language Setting form appears:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/languagesetting.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/languagesetting.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Select the another language in the list. The currently selected language will be marked with the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/tickicon.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 icon.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click Apply to change the display language temporarily, and wait few seconds to take effect, or click Cancel to quit without any changes.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-
-	</section>
-	
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Change_Account_Information">
+   <section id="sect-User_Guide-Basic_Actions_in_WCM-Change_Account_Information">
 		<title>Change Account Information</title>
 		 <para>
-			The function allows changing your account information.
+			The function enables you change your account information, such as your profile and password.
 		</para>
-		 <para>
-			To change account information do as follows:
-		</para>
+
 		 <procedure>
 			<title></title>
 			 <step>
 				<para>
-					Click directly on your own account name to open the Account Profiles tab which enables you to change your account profile or password.
+					The first thing to do is to directly click your own account name. 
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
@@ -670,7 +500,6 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/accountname.png" format="PNG" width="444" />
 					</imageobject>
-
 				</mediaobject>
 				 <para>
 					The Account Profiles tab will appear:
@@ -682,13 +511,10 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/accountprofile.png" format="PNG" width="444" />
 					</imageobject>
-
 				</mediaobject>
-
 			</step>
-
 		</procedure>
-		
+
 		 <procedure id="proc-User_Guide-Change_Account_Information-To_Change_Account_Profiles">
 			<title>To Change Account Profiles</title>
 			 <step>
@@ -696,25 +522,21 @@
 					Select the Account Profiles tab.
 				</para>
 				 <para>
-					This tab displays the current basic information of the user who has logged at the time.
+					This tab displays your current basic information.
 				</para>
-
 			</step>
 			 <step>
 				<para>
-					Change your First Name, Last Name, Email. You cannot change your User Name.
+					Change your First Name, Last Name and Email. You cannot change your User Name.
 				</para>
-
 			</step>
 			 <step>
 				<para>
-					Click Save to accept changes.
+               Click <emphasis role="bold">Save</emphasis> to accept changes.
 				</para>
-
 			</step>
-
 		</procedure>
-		
+
 		 <procedure id="proc-User_Guide-Change_Account_Information-To_change_your_Password">
 			<title>To change your Password</title>
 			 <step>
@@ -728,142 +550,28 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/changepassword.png" format="PNG" width="444" />
 					</imageobject>
-
 				</mediaobject>
-
 			</step>
 			 <step>
 				<para>
 					Input your current password to identify that you are the owner of this account.
 				</para>
-
 			</step>
 			 <step>
 				<para>
 					Input your new password, it must have at least 6 characters.
 				</para>
-
 			</step>
 			 <step>
 				<para>
-					Input your password again in the Confirm New Password field.
+               Input your password again in the <emphasis role="bold">Confirm New Password</emphasis> field.
 				</para>
-
 			</step>
 			 <step>
 				<para>
-					Click Save to accept changes.
+               Click <emphasis role="bold">Save</emphasis> to accept changes.
 				</para>
-
 			</step>
-
 		</procedure>
-		
-
-	</section>
-	
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Change_the_skin_of_the_current_site">
-		<title>Change the skin of the current site</title>
-		 <para>
-			The eXo skins are attractive user interface styles for displaying a portal. Each skin has its own characteristics with different backgrounds, icons, etc. In order to use easily and effectively, you are allowed to change the skin of the current site.
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Select the Change Skin item in the menu that appears when you move the cursor to the logo at the upper left corner:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/startlogo.png" format="PNG" scale="70" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/startlogo.png" format="PNG" />
-					</imageobject>
-
-				</mediaobject>
-				 <para>
-					The <emphasis role="bold">Skin Setting</emphasis> form appears.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/skinsetting.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/skinsetting.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Select the skin you want by clicking its name.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click Apply and wait a few seconds to take affect.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-
-	</section>
-	
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Print_a_Web_Content">
-		<title>Print a Web Content</title>
-		 <para>
-			Users can easily print any content in a site by following these steps:
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Read more</emphasis> to read all the content of a document or an article in a site.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/readmore.png" format="PNG" scale="100" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/readmore.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Click the Print button, the Print Preview page will be displayed on another tab.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/printpreview.png" format="PNG" scale="130" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/printpreview.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Click the <emphasis role="bold">Print</emphasis> button to print the content of this page or <emphasis role="bold">Close</emphasis> to close this tab without printing.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-
-	</section>
-	
-
+      </section>
 </section>
-
-

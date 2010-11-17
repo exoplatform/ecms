@@ -6,9 +6,9 @@
 <chapter id="chap-User_Guide-Overall_Introduction">
 	<title>Overall Introduction</title>
 	 <section id="sect-User_Guide-Overall_Introduction-WCM_and_DMS">
-		<title>WCM and DMS</title>
+		<title>exo Content</title>
 		 <para>
-			<emphasis role="bold">Web Content Management</emphasis> (<emphasis role="bold">WCM</emphasis>) is the technologies used to Capture, Manage, Store, Preserve, and Deliver content and documents related toses. It especially concerns content imported into or generated from within an organization in the course of its operation, and includes the control of access to this content from outside the organization's processes.
+			<emphasis role="bold">Web Content Management</emphasis> (<emphasis role="bold">WCM</emphasis>) is the technologies used to Capture, Manage, Store, Preserve, and Deliver content and documents related to ses. It especially concerns content imported into or generated from within an organization in the course of its operation, and includes the control of access to this content from outside the organization's processes.
 		</para>
 		 <para>
 			The WCM users can manage both structured and unstructured content, so that an organization, such as a business or governmental agency, can more effectively meet business goals (increase the profits or improve th organizational procese efficient use of budgets), serve its customers (as a competitive advantage, or to improve responsiveness), and protect itself (against non-compliance, law-suits, uncoordinated departments or turnover within the organization).
@@ -142,9 +142,9 @@
 	 <section id="sect-User_Guide-Overall_Introduction-Web_Content">
 		<title>Web Content</title>
 		 <section id="sect-User_Guide-Web_Content-What_is_Web_Content_in_WCM">
-			<title>What is Web Content in WCM?</title>
+			<title>Web Content</title>
 			 <para>
-				Web Content is the textual, visual or aural content that is encountered as part of the user experience on a website. It may include other things such as texts, images, sounds, videos and animations.
+				 Web Content is the textual, visual or aural content that is encountered as part of the user experience on a website. It may include other things such as texts, images, sounds, videos and animations.
 			</para>
 
 		</section>
@@ -345,7 +345,7 @@
 		 <section id="sect-User_Guide-Terminologies-Version">
 			<title>Version</title>
 			 <para>
-				Versioning means that at any given time the node's state can be saved for possible future recovery and the action of saving called 'checking in'. A workspace may contain both versionable and non-versionable nodes. A node is versionable if it has been assigned a mixin type mix: versionable; otherwise, it is a nonversionable node. A version exists as a part of a version history graph that describes the predecessor/successor relations among versions of a particular versionable node.
+				Versioning means that at any given time the node's state can be saved for possible future recovery and the action of saving called 'checking in'. A workspace may contain both versionable and non-versionable nodes. A node is versionable if it has been assigned a mixin type mixin: versionable; otherwise, it is a nonversionable node. A version exists as a part of a version history graph that describes the predecessor/successor relations among versions of a particular versionable node.
 			</para>
 			 <mediaobject>
 				<imageobject role="html">

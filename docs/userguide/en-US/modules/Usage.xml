@@ -4,8 +4,11 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-User_Guide-How_To_Use_WCM_and_DMS">
-	<title>How To Use WCM and DMS</title>
-	 <xi:include href="Usage/Basics.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<title>Get Started</title>
+    <xi:include href="Usage/Account.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="Usage/ChangeLanguage.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="Usage/ChangeSkin.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <!--<xi:include href="Usage/Basics.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />-->
 	 <xi:include href="Usage/Sites.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Usage/SitesExplorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Usage/Webdav.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
