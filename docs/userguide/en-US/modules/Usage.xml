@@ -8,11 +8,9 @@
     <xi:include href="Usage/Account.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
     <xi:include href="Usage/ChangeLanguage.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
     <xi:include href="Usage/ChangeSkin.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-    <!--<xi:include href="Usage/Basics.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />-->
 	 <xi:include href="Usage/Sites.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Usage/SitesExplorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Usage/Webdav.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="Usage/Publish.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Usage/Newsletters.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Usage/FastContentCreator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Usage/FormGenerator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />

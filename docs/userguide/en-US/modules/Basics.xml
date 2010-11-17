@@ -5,107 +5,12 @@
 ]>
 <chapter>
 	<title>Basic Actions</title>
-	 <para>
+      	 <para>
 		These actions are for all registered users after they have logged in the accounts.
 	</para>
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-View_a_site">
-		<title>View a site</title>
-		 <para>
-			In eXo Content, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
-		</para>
-		 <mediaobject>
-			<imageobject role="html">
-				<imagedata align="center" fileref="images/toolbar.png" format="PNG" scale="100" />
-			</imageobject>
-			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="70mm" fileref="images/toolbar.png" format="PNG" />
-			</imageobject>
 
-		</mediaobject>
-		 <para>
-			The main screen of the site will appear like the illustration below:
-		</para>
-		 <mediaobjectco> <imageobjectco> <areaspec>
-			<area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-admin" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-banner" />
-          <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-navigation" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-home" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-footer" />
-		</areaspec>
-		 <imageobject>
-			<imagedata align="center" fileref="images/acme.png" format="PNG" width="444" />
-		</imageobject>
-		 <calloutlist>
-			<callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-admin">
-				<para>
-					This is Administration bar which contains administration functions related to portals (websites).
-				</para>
-
-			</callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-banner">
-				<para>
-					This is Banner which contains slogan, logo, icon used in the website.
-				</para>
-			</callout>
-         <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-navigation">
-                  <para>
-                     Thhe Navigation bar helps users to visualize the structure of the website and provide quick links to different pages.
-                  </para>
-         </callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-home">
-				<para>
-					This is Home page which is the main page of the website. This is the default page that is displayed first when you visit the website.
-				</para>
-
-			</callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-footer">
-				<para>
-					This is Footer of the web site. It can be texts, or image that is displayed at the bottom of the web site. It provides information about author/institutional sponsor, revision date, copyright and more.
-				</para>
-			</callout>
-		</calloutlist>
-		 </imageobjectco> </mediaobjectco>
-	</section>
-   
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Print_a_Web_Content">
-		<title>Print a Web Content</title>
-		 <para>
-			Users can easily print any content in a site by following these steps:
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Read more</emphasis> to read all the content of a document or an article in a site.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/readmore.png" format="PNG" scale="100" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/readmore.png" format="PNG" width="444" />
-					</imageobject>
-				</mediaobject>
-			</step>
-			 <step>
-				<para>
-					Click the Print button, the Print Preview page will be displayed on another tab.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/printpreview.png" format="PNG" scale="130" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/printpreview.png" format="PNG" width="444" />
-					</imageobject>
-				</mediaobject>
-			</step>
-			 <step>
-				<para>
-					Click the <emphasis role="bold">Print</emphasis> button to print the content of this page or <emphasis role="bold">Close</emphasis> to close this tab without printing.
-				</para>
-			</step>
-		</procedure>
-	</section>
-<!--MARK: sections 4.3 - 4.13 go in here.-->
+	 <xi:include href="Basics/View.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Print.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Publish.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <!--MARK: sections 4.4 - 4.13 go in here.-->
 </chapter>
