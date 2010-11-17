@@ -16,6 +16,9 @@
  */
 package org.exoplatform.wcm.webui.viewer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 
@@ -32,6 +35,9 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.ext.UIExtensionManager;
+import org.exoplatform.webui.ext.UIExtension;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
@@ -126,8 +132,15 @@ public class UIContentViewer extends UIBaseNodePresentation {
 	}
 
 	public UIComponent getUIComponent(String mimeType) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+		List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
+	    Map<String, Object> context = new HashMap<String, Object>();
+	    context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
+	    for (UIExtension extension : extensions) {
+	      UIComponent uiComponent = manager.addUIExtension(extension, context, this);
+	      if(uiComponent != null) return uiComponent;
+	    }
+	    return null;
 	}
 	
 }
