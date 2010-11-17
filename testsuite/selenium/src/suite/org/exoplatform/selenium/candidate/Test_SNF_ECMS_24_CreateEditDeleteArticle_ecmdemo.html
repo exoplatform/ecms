@@ -47,7 +47,7 @@
 	<td>gtn</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Sign in</td>
 	<td></td>
 </tr>
@@ -62,7 +62,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Sites Explorer</td>
 	<td></td>
 </tr>
@@ -77,7 +77,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
 	<td></td>
 </tr>
@@ -107,7 +107,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
 	<td></td>
 </tr>
@@ -117,18 +117,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Actions</td>
+	<td>//div[3]/div/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>link=Actions</td>
+	<td>click</td>
+	<td>//div[3]/div/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>--Add Article</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -142,6 +147,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>title</td>
 	<td></td>
@@ -149,7 +159,7 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>Article</td>
+	<td>Article_Test_SNF_ECMS_24</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -227,18 +237,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Article_Test_SNF_ECMS_24</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>link=Article</td>
+	<td>link=Article_Test_SNF_ECMS_24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- go to edit&nbsp;&nbsp;document</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Edit Document</td>
+	<td>//a[contains(text(),'Edit Document')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Edit Document</td>
+	<td>//a[contains(text(),'Edit Document')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -254,7 +274,7 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//html/body</td>
-	<td>Test</td>
+	<td>Test_SNF_ECMS_24</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -318,12 +338,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Article</td>
+	<td>link=Article_Test_SNF_ECMS_24</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=Article</td>
+	<td>link=Article_Test_SNF_ECMS_24</td>
 	<td></td>
 </tr>
 <tr>
@@ -348,12 +368,12 @@
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
-	<td>link=Article</td>
+	<td>link=Article_Test_SNF_ECMS_24</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>link=Article</td>
+	<td>link=Article_Test_SNF_ECMS_24</td>
 	<td></td>
 </tr>
 <tr>
@@ -362,7 +382,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Sign out</td>
 	<td></td>
 </tr>

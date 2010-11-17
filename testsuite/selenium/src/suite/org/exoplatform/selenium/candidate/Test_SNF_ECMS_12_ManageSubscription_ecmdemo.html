@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>Test_SNF_ECMS_13_ManageSubscription</title>
+<title>Test_SNF_ECMS_12_ManageSubscription_ecmdemo</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_13_ManageSubscription</td></tr>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_12_ManageSubscription_ecmdemo</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -27,7 +27,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Login</td>
 	<td></td>
 </tr>
@@ -62,7 +62,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Newsletter Manager</td>
 	<td></td>
 </tr>
@@ -72,7 +72,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=New Subscription</td>
 	<td></td>
 </tr>
@@ -92,7 +92,7 @@
 	<td>Subscription</td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//img[@alt='SelectUser']</td>
 	<td></td>
 </tr>
@@ -102,12 +102,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//table[@id='UIListUsers']/tbody/tr[5]/td[5]/div//img</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
@@ -122,7 +127,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Marketing</td>
 	<td></td>
 </tr>
@@ -132,7 +137,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>Subscription</td>
 	<td></td>
 </tr>
@@ -142,12 +147,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//div[@id='UISubscriptions']/div/div[3]/div/div[1]/div[3]/table/tbody/tr/td/div/div/div/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Edit</td>
 	<td></td>
 </tr>
@@ -162,7 +172,12 @@
 	<td>hi all</td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
@@ -172,13 +187,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
 	<td>Subscription</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
+	<td>Subscription</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>//div[@id='UISubscriptions']/div/div[3]/div/div[1]/div[3]/table/tbody/tr/td/div/div/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UISubscriptions']/div/div[3]/div/div[1]/div[3]/table/tbody/tr/td/div/div/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td> Open</td>
 	<td></td>
 </tr>
 <tr>
@@ -187,8 +217,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Open</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>Marketing</td>
 	<td></td>
 </tr>
 <tr>
@@ -197,13 +232,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Marketing</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
 	<td>//div[@id='UISubscriptions']/div/div[3]/div/div[1]/div[3]/table/tbody/tr/td/div/div/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UISubscriptions']/div/div[3]/div/div[1]/div[3]/table/tbody/tr/td/div/div/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- delete</td>
 	<td></td>
 </tr>
 <tr>
@@ -212,7 +257,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Delete</td>
 	<td></td>
 </tr>
@@ -234,6 +279,11 @@
 <tr>
 	<td>echo</td>
 	<td>-- Signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>

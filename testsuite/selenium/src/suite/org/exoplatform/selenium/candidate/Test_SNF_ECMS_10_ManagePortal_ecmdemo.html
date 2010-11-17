@@ -27,7 +27,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Login</td>
 	<td></td>
 </tr>
@@ -62,7 +67,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>clickAndWait</td>
 	<td>link=Site</td>
 	<td></td>
 </tr>
@@ -72,7 +77,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Add New Portal</td>
 	<td></td>
 </tr>
@@ -82,7 +87,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PortalSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PortalSetting')&quot;]</td>
 	<td></td>
 </tr>
@@ -97,12 +102,22 @@
 	<td>NewPortal</td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
 	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'Properties');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=Properties')&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
+	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'Properties');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=Properties')&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PermissionSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PermissionSetting')&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PermissionSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PermissionSetting')&quot;]</td>
 	<td></td>
 </tr>
@@ -113,57 +128,122 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>publicMode</td>
+	<td>link=Add Permission</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>publicMode</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>link=Edit Permission Setting</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>link=Select Permission</td>
+	<td>click</td>
+	<td>link=Add Permission</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Platform</td>
+	<td>link=Customers</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>link=Platform</td>
+	<td>click</td>
+	<td>link=Customers</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Administrators</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>link=Administrators</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
 	<td>link=exact:*</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
+	<td>link=exact:*</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PermissionSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PermissionSetting')&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PermissionSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PermissionSetting')&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit Permission Setting</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Edit Permission Setting</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Select Permission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Select Permission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>platform</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>Administrator</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div[2]/div[1]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div[2]/div[1]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='PermissionSelector']/div/div[3]/div/div[2]/div[7]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='PermissionSelector']/div/div[3]/div/div[2]/div[7]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
 	<td>15000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>NewPortal</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,7 +257,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UISiteManagement']/table[3]/tbody/tr/td[3]/a[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>//div[@id='UISiteManagement']/table[3]/tbody/tr/td[3]/a[3]</td>
 	<td></td>
 </tr>
@@ -187,7 +272,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PermissionSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PermissionSetting')&quot;]</td>
 	<td></td>
 </tr>
@@ -197,47 +282,72 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Edit Permission Setting</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
 	<td>link=Delete Permission</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
+	<td>link=Delete Permission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Select Permission</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Platform</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>link=Platform</td>
+	<td>echo</td>
+	<td>platform</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Administrators</td>
+	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>link=Administrators</td>
+	<td>click</td>
+	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>link=manager</td>
+	<td>echo</td>
+	<td>Administrator</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div[2]/div[1]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div[2]/div[1]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='PermissionSelector']/div/div[3]/div/div[2]/div[4]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='PermissionSelector']/div/div[3]/div/div[2]/div[4]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
@@ -257,7 +367,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//div[@id='UISiteManagement']/table[3]/tbody/tr/td[3]/a[4]</td>
 	<td></td>
 </tr>
@@ -289,6 +399,11 @@
 <tr>
 	<td>clickAt</td>
 	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>platform</td>
 	<td></td>
 </tr>
 

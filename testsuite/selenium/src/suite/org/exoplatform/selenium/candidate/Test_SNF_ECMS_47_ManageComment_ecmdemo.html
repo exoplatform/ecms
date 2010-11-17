@@ -52,7 +52,7 @@
 	<td>gtn</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Sign in</td>
 	<td></td>
 </tr>
@@ -82,7 +82,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
 	<td></td>
 </tr>
@@ -112,7 +112,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
 	<td></td>
 </tr>
@@ -122,13 +122,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Actions</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>link=Actions</td>
+	<td>waitForElementPresent</td>
+	<td>//div[3]/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -154,12 +164,7 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>Article</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>Article</td>
+	<td>Test_SNF_ECMS_47</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -173,7 +178,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -193,12 +198,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Article</td>
+	<td>link=Test_SNF_ECMS_47</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Article</td>
+	<td>link=Test_SNF_ECMS_47</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,6 +219,21 @@
 <tr>
 	<td>echo</td>
 	<td>--Open form to comment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Comment this document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>IconListHideElement</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Comment this document</td>
 	<td></td>
 </tr>
 <tr>
@@ -242,13 +262,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>typeKeys</td>
 	<td>//html/body</td>
-	<td>comment</td>
+	<td>ManageComment_ecmdemo</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
 	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
@@ -259,6 +284,11 @@
 <tr>
 	<td>echo</td>
 	<td>-- Show comment to Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -279,6 +309,11 @@
 <tr>
 	<td>echo</td>
 	<td>--Open form to edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Edit this comment']</td>
 	<td></td>
 </tr>
 <tr>
@@ -307,7 +342,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>typeKeys</td>
 	<td>//html/body</td>
 	<td>comment edit</td>
 </tr>
@@ -319,6 +354,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -358,12 +398,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Article</td>
+	<td>link=Test_SNF_ECMS_47</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=Article</td>
+	<td>link=Test_SNF_ECMS_47</td>
 	<td></td>
 </tr>
 <tr>
@@ -392,19 +432,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
-	<td>link=Article</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>link=Article</td>
+	<td>link=Test_SNF_ECMS_47</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>--Logout</td>
 	<td>--Logout</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>

@@ -23,7 +23,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Login</td>
+	<td>-- Login ---</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,17 +113,22 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>2000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Actions</td>
+	<td>//div[3]/div/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Actions</td>
+	<td>//div[3]/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -139,6 +144,16 @@
 <tr>
 	<td>click</td>
 	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Add File</td>
 	<td></td>
 </tr>
 <tr>
@@ -198,7 +213,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -218,7 +233,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -284,7 +299,7 @@
 <tr>
 	<td>waitForElementPresent</td>
 	<td>title0</td>
-	<td></td>
+	<td>test</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -308,12 +323,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Save</td>
+	<td>link=Cancel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Save</td>
+	<td>link=Cancel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[3]/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[3]/a[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -323,12 +348,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=File</td>
+	<td>//div[3]/div/div/div[1]/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[3]/div/div/div[1]/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=test</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=File</td>
+	<td>link=test</td>
 	<td></td>
 </tr>
 <tr>
@@ -352,12 +387,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
+	<td>waitForElementNotPresent</td>
 	<td>link=File</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>verifyElementNotPresent</td>
 	<td>link=File</td>
 	<td></td>
 </tr>
@@ -372,7 +407,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Sign out</td>
 	<td></td>
 </tr>

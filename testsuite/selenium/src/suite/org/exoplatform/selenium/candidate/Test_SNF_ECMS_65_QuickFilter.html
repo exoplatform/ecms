@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>Test_SNF_ECMS_49_ManagePublication_ecmdemo</title>
+<title>Test_SNF_ECMS_65_QuickFilter</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_49_ManagePublication_ecmdemo</td></tr>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_65_QuickFilter</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -23,7 +23,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Login</td>
+	<td>-- Log in</td>
 	<td></td>
 </tr>
 <tr>
@@ -53,12 +53,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Go to Sites Explorer</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>-- Go to Site Explorer</td>
 	<td></td>
 </tr>
 <tr>
@@ -68,7 +63,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Open&nbsp;&nbsp;driver pane</td>
+	<td>-- Browse all drives</td>
 	<td></td>
 </tr>
 <tr>
@@ -83,7 +78,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Open Private driver</td>
+	<td>-- Go to Private drive</td>
 	<td></td>
 </tr>
 <tr>
@@ -98,22 +93,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Go to Detail View</td>
+	<td>-- Create new folder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
+	<td>link=Documents</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Go to Action tab</td>
+	<td>link=Documents</td>
 	<td></td>
 </tr>
 <tr>
@@ -123,192 +113,112 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>link=Actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--Create a Article document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Add Document</td>
+	<td>link=Add Folder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Add Document</td>
+	<td>link=Add Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Add folder's name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>title</td>
+	<td>name</td>
 	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>title</td>
-	<td>Test_SNF_ECMS_49</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Test_SNF_ECMS_49</td>
+	<td>SNF_ECMS_65</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[@id='cke_contents_summary']/iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//td[@id='cke_contents_summary']/iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>//html/body</td>
-	<td>Manchester United</td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>relative=top</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//td[@id='cke_contents_content']/iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>//html/body</td>
-	<td>Manchester United FC</td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>relative=top</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Save as Draft</td>
+	<td>//form[@id='UIFolderForm']/div[2]/div/div/table/tbody/tr/td/div[1]/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Save as Draft</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
+	<td>//form[@id='UIFolderForm']/div[2]/div/div/table/tbody/tr/td/div[1]/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Published</td>
+	<td>-- Filter by Items</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test_SNF_ECMS_49</td>
+	<td>//div[@id='UIAllItems']/div/div[2]/div/div[1]/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Test_SNF_ECMS_49</td>
+	<td>//div[@id='UIAllItems']/div/div[2]/div/div[1]/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Go to Admin tab</td>
+	<td>-- Verify folder is displayed</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Admin</td>
+	<td>//div[4]/div/div/div/div/div[2]/div/div/div[1]/div[1]/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Admin</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manage Publications</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Manage Publications</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Published</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Published</td>
+	<td>verifyElementPresent</td>
+	<td>//div[4]/div/div/div/div/div[2]/div/div/div[1]/div[1]/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Close mange publication form</td>
+	<td>-- Remove filter</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(text(),'Close')]</td>
+	<td>//div[@id='UIAllItems']/div/div[2]/div/div[1]/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[contains(text(),'Close')]</td>
+	<td>//div[@id='UIAllItems']/div/div[2]/div/div[1]/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Delete Sample node</td>
+	<td>-- Remove document</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test_SNF_ECMS_49</td>
+	<td>link=Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=SNF_ECMS_65</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=Test_SNF_ECMS_49</td>
+	<td>link=SNF_ECMS_65</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>
@@ -327,13 +237,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>--Logout</td>
+	<td>waitForTextNotPresent</td>
+	<td>SNF_ECMS_65</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sign out</td>
+	<td>verifyTextNotPresent</td>
+	<td>SNF_ECMS_65</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Log out</td>
 	<td></td>
 </tr>
 <tr>

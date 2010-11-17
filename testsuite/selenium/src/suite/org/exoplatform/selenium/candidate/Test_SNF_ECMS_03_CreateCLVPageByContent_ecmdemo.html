@@ -77,6 +77,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>pageName</td>
 	<td></td>
@@ -84,7 +89,27 @@
 <tr>
 	<td>type</td>
 	<td>pageName</td>
-	<td>CLV2</td>
+	<td>ASniffEcms03</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>step 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIPageCreationWizard']/div/div[3]/div/div/div/div[2]/div/table/tbody/tr/td/div[2]/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIPageCreationWizard']/div/div[3]/div/div/div/div[2]/div/table/tbody/tr/td/div[2]/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>step 3</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -97,13 +122,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPageCreationWizard']/div/div[3]/div/div/div/div[2]/div/table/tbody/tr/td/div[2]/div/div/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UIPageCreationWizard']/div/div[3]/div/div/div/div[2]/div/table/tbody/tr/td/div[2]/div/div/div</td>
+	<td>echo</td>
+	<td>-- Contents</td>
 	<td></td>
 </tr>
 <tr>
@@ -114,46 +134,26 @@
 <tr>
 	<td>click</td>
 	<td>link=Contents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='Contents/ContentListViewerPortlet']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>dragAndDropToObject</td>
-	<td>//div[@id='Contents/ContentListViewerPortlet']</td>
+	<td>//div[text()='Content List']</td>
 	<td>//div[@id='UIPagePreview']/div[@class='UIPage']//div[@class='UIComponentBlock']</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPage']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>mouseOver</td>
-	<td>//div[@id='UIPage']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIApplicationList']/div/div[1]/div/div/div/div/div[2]/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UIApplicationList']/div/div[1]/div/div/div/div/div[2]/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
 	<td>//div/div/div[2]/div/div/div/div/div/div/a[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>//div/div/div[2]/div/div/div/div/div/div/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- check By Contents radio</td>
 	<td></td>
 </tr>
 <tr>
@@ -167,6 +167,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- verify checked ?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForChecked</td>
+	<td>//input[@name='UICLVConfigDisplayModeFormRadioBoxInput' and @value='ManualViewerMode']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyChecked</td>
+	<td>//input[@name='UICLVConfigDisplayModeFormRadioBoxInput' and @value='ManualViewerMode']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//img[@alt='Select folder path']</td>
 	<td></td>
@@ -174,6 +189,76 @@
 <tr>
 	<td>click</td>
 	<td>//img[@alt='Select folder path']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Select General Drives</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[text()='General Drives']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[text()='General Drives']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Managed Sites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[text()='Managed Sites']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[text()='Managed Sites']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- select acme in Managed Sites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[text()='acme' and @isupload='true']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[text()='acme' and @isupload='true']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>Generaldrives_</td>
 	<td></td>
 </tr>
 <tr>
@@ -217,6 +302,21 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- select documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@title='documents']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@title='documents']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=offices.jpg</td>
 	<td></td>
@@ -227,8 +327,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertAlert</td>
-	<td>This content is successfully added into the list content.</td>
+	<td>echo</td>
+	<td>-- Verify ruselt in List Content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='ListFilesContent']/thead/tr[2]/td[1]/a</td>
+	<td>offices.jpg</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[@id='ListFilesContent']/thead/tr[2]/td[1]/a</td>
+	<td>offices.jpg</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Save</td>
 	<td></td>
 </tr>
 <tr>
@@ -242,6 +357,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Save 2</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Save</td>
 	<td></td>
@@ -249,6 +369,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Press OK in pop-up</td>
 	<td></td>
 </tr>
 <tr>
@@ -269,6 +394,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Save to finish create page</td>
 	<td></td>
 </tr>
 <tr>
@@ -277,13 +407,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>//div[@id='UIPageEditor']/div[1]/div/div/div/a[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Search and delete page</td>
+	<td>verify All selected web content/documents are displayed as list in List Content Viewer page</td>
 	<td></td>
 </tr>
 <tr>
@@ -293,12 +423,42 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>link=Where we are</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>link=Where we are</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Where we are</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Where we are</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Search and delete page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>link=Page Management</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Page Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -309,7 +469,7 @@
 <tr>
 	<td>type</td>
 	<td>searchTerm</td>
-	<td>CLV2</td>
+	<td>ASniffEcms03</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -322,6 +482,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//img[@title='Delete Page']</td>
 	<td></td>
@@ -329,11 +494,6 @@
 <tr>
 	<td>click</td>
 	<td>//img[@title='Delete Page']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Do you want to delete this page?</td>
 	<td></td>
 </tr>
 <tr>
@@ -416,7 +576,6 @@
 	<td>link=Sign out</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

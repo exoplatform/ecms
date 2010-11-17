@@ -117,6 +117,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Actions</td>
 	<td></td>
@@ -124,6 +129,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -149,11 +159,21 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Content Folder</td>
+	<td>Test_SNF_ECMS_38</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -163,12 +183,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Content Folder</td>
+	<td>link=Test_SNF_ECMS_38</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=Content Folder</td>
+	<td>link=Test_SNF_ECMS_38</td>
 	<td></td>
 </tr>
 <tr>
@@ -183,12 +203,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Content Folder</td>
+	<td>link=Test_SNF_ECMS_38</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=Content Folder</td>
+	<td>link=Test_SNF_ECMS_38</td>
 	<td></td>
 </tr>
 <tr>
@@ -203,17 +223,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Content Folder</td>
+	<td>link=Test_SNF_ECMS_38</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=Content Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
+	<td>link=Test_SNF_ECMS_38</td>
 	<td></td>
 </tr>
 <tr>
@@ -232,18 +247,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
-	<td>link=Content Folder</td>
+	<td>echo</td>
+	<td>--Delete Yes or No</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>link=Content Folder</td>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_38</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_38</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>--Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>

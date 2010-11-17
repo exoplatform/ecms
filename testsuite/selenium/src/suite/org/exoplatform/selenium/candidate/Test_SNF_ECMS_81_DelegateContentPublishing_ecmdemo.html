@@ -17,6 +17,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>windowMaximize</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Login</td>
 	<td></td>
@@ -102,6 +107,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Add Permission']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//img[@title='Add Permission']</td>
 	<td></td>
@@ -142,6 +152,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>admin-view</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>admin-view</td>
 	<td></td>
@@ -157,8 +172,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIDriveList']/div[1]/div/a[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIDriveList']/div[1]/div/a[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[2]/div</td>
+	<td>Workflow</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[2]/div</td>
+	<td>Workflow</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Login Mary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -187,8 +237,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -292,6 +352,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Close</td>
 	<td></td>
@@ -302,8 +367,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Manchester United</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manchester United</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Manchester United FC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manchester United FC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Login Root</td>
 	<td></td>
 </tr>
 <tr>
@@ -347,8 +447,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Select User']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//img[@title='Select User']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='UIListUsers']/tbody/tr[2]/td[5]/div/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -357,13 +467,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delegate</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Delegate</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Login james</td>
 	<td></td>
 </tr>
 <tr>
@@ -416,9 +541,30 @@
 	<td>//table[@class='UIFormGrid']/tbody/tr[3]/td[@class='FieldComponent']/input[@type='text']</td>
 	<td></td>
 </tr>
+<!--days :(-->
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
+	<td></td>
+</tr>
 <tr>
 	<td>click</td>
-	<td>link=30</td>
+	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//tr[5]/td[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[5]/td[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Approve</td>
 	<td></td>
 </tr>
 <tr>
@@ -427,8 +573,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -488,32 +644,42 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=2010</td>
+	<td>//div[2]/div/div[1]/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=2010</td>
+	<td>//div[2]/div/div[1]/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=July</td>
+	<td>//div[2]/div/div/div/div[1]/div[2]/div/div[2]/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=July</td>
+	<td>//div[2]/div/div/div/div[1]/div[2]/div/div[2]/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=05 July-11 July 2010</td>
+	<td>//div[2]/div/div[2]/div/div[2]/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=05 July-11 July 2010</td>
+	<td>//div[2]/div/div[2]/div/div[2]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=article</td>
 	<td></td>
 </tr>
 <tr>
@@ -522,8 +688,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForTextPresent</td>
+	<td>article</td>
+	<td></td>
+</tr>
+<tr>
 	<td>verifyTextPresent</td>
 	<td>article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Manchester United</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manchester United</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Manchester United FC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Manchester United FC</td>
 	<td></td>
 </tr>
 <tr>
@@ -553,12 +744,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[8]/td[7]/div/img[2]</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[7]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[8]/td[7]/div/img[2]</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[7]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -572,13 +763,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>waitForElementNotPresent</td>
+	<td>Workflow</td>
 	<td></td>
 </tr>
 <tr>
@@ -587,7 +783,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Sign out</td>
 	<td></td>
 </tr>

@@ -27,6 +27,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Login</td>
 	<td></td>
@@ -52,13 +57,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Administration</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sites Administration</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage Drives</td>
 	<td></td>
 </tr>
 <tr>
@@ -99,6 +119,11 @@
 <tr>
 	<td>click</td>
 	<td>//option[@value='collaboration']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Add Path']</td>
 	<td></td>
 </tr>
 <tr>
@@ -172,8 +197,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>
@@ -189,6 +224,11 @@
 <tr>
 	<td>echo</td>
 	<td>- Create content publishing by normal user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,6 +254,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Sign in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Explorer</td>
 	<td></td>
 </tr>
 <tr>
@@ -274,12 +319,12 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>article</td>
+	<td>Test_SNF_ECMS_79</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>article</td>
+	<td>Test_SNF_ECMS_79</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -332,6 +377,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Close</td>
 	<td></td>
@@ -342,6 +392,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sign out</td>
 	<td></td>
@@ -349,6 +409,11 @@
 <tr>
 	<td>echo</td>
 	<td>-- Manage content publishing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -382,6 +447,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Manage</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Manage</td>
 	<td></td>
@@ -406,14 +476,25 @@
 	<td>//table[@class='UIFormGrid']/tbody/tr[3]/td[@class='FieldComponent']/input[@type='text']</td>
 	<td></td>
 </tr>
+<!--days :(-->
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=30</td>
+	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=30</td>
+	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//tr[5]/td[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[5]/td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -429,6 +510,11 @@
 <tr>
 	<td>echo</td>
 	<td>-- Check where document is stored</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Explorer</td>
 	<td></td>
 </tr>
 <tr>
@@ -468,12 +554,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[2]/div/div/div/div[2]/a</td>
+	<td>//div[2]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[2]/div/div/div/div[2]/a</td>
+	<td>//div[2]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -494,16 +580,21 @@
 <tr>
 	<td>click</td>
 	<td>//div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>article</td>
+	<td>Test_SNF_ECMS_79</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>article</td>
+	<td>Test_SNF_ECMS_79</td>
 	<td></td>
 </tr>
 <tr>
@@ -517,8 +608,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage Drives</td>
 	<td></td>
 </tr>
 <tr>
@@ -538,12 +639,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[8]/td[7]/div/img[2]</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[7]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[8]/td[7]/div/img[2]</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[7]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -568,17 +669,22 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>Workflow</td>
+	<td>link=Workflow</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>Workflow</td>
+	<td>link=Workflow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>

@@ -57,6 +57,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Sites Explorer</td>
 	<td></td>
@@ -97,6 +102,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>selectTemplate</td>
 	<td></td>
@@ -105,11 +115,6 @@
 	<td>select</td>
 	<td>selectTemplate</td>
 	<td>label=Sample node</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//option[@value='exo:sample']</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -124,12 +129,12 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>sample node</td>
+	<td>Test_SNF_ECMS_27</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>sample node</td>
+	<td>Test_SNF_ECMS_27</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -142,6 +147,11 @@
 	<td>sample node</td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Save as Draft</td>
 	<td></td>
@@ -153,7 +163,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>2000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -168,17 +178,12 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>2000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=sample node</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=sample node</td>
+	<td>echo</td>
+	<td>link=Edit Document</td>
 	<td></td>
 </tr>
 <tr>
@@ -192,8 +197,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>description</td>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -213,7 +218,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>2000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -228,22 +233,22 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>2000</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--- Delete</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=sample node</td>
+	<td>link=Test_SNF_ECMS_27</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=sample node</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
+	<td>link=Test_SNF_ECMS_27</td>
 	<td></td>
 </tr>
 <tr>
@@ -262,18 +267,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
-	<td>link=sample node</td>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_27</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>link=sample node</td>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_27</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>-- Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>

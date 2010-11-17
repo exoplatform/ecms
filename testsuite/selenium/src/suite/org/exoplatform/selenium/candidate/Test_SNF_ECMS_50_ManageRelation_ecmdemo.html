@@ -62,7 +62,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>clickAndWait</td>
 	<td>link=Sites Explorer</td>
 	<td></td>
 </tr>
@@ -77,13 +77,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>--Open Private driver</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -102,12 +107,17 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
 	<td></td>
 </tr>
@@ -117,13 +127,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Actions</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>click</td>
 	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -149,12 +169,12 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>article</td>
+	<td>Test_SNF_ECMS_50</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>article</td>
+	<td>Test_SNF_ECMS_50</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -167,9 +187,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
-	<td>test1</td>
+	<td>Lam Y khue, Em yeu chi</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -184,7 +204,7 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//html/body</td>
-	<td>test1</td>
+	<td>Tai sao chi lai tu` troi em chu', Em muon het len. EM YEU CHI</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -202,6 +222,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Close</td>
 	<td></td>
@@ -212,8 +237,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
 	<td>--Go to root path</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[2]/div/div/div[1]/div[2]/div[1]/div/div/div/div[1]</td>
 	<td></td>
 </tr>
 <tr>
@@ -227,6 +262,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Add Document</td>
 	<td></td>
@@ -234,6 +274,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -252,8 +297,33 @@
 	<td>Kofax</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -263,12 +333,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=article</td>
+	<td>link=Test_SNF_ECMS_50</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=article</td>
+	<td>link=Test_SNF_ECMS_50</td>
 	<td></td>
 </tr>
 <tr>
@@ -347,13 +417,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[2]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[2]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>/Users/root/Private/Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/Users/root/Private/Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
 	<td></td>
 </tr>
 <tr>
@@ -362,8 +452,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
 	<td>--Go to Infor Tab</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Info</td>
 	<td></td>
 </tr>
 <tr>
@@ -377,18 +477,58 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>waitForElementPresent</td>
 	<td>link=Show/Hide Relations</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>link=Show/Hide Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>display</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Show/Hide Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Show/Hide Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyVisible</td>
+	<td>link=Test_SNF_ECMS_50</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>--Delete Relation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Admin</td>
 	<td></td>
 </tr>
 <tr>
@@ -407,6 +547,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//img[@alt='Delete']</td>
 	<td></td>
@@ -417,8 +562,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementNotPresent</td>
-	<td>//img[@alt='Delete']</td>
+	<td>waitForTextPresent</td>
+	<td>Empty data </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Empty data </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
 	<td></td>
 </tr>
 <tr>
@@ -433,12 +588,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=article</td>
+	<td>link=Test_SNF_ECMS_50</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=article</td>
+	<td>link=Test_SNF_ECMS_50</td>
 	<td></td>
 </tr>
 <tr>
@@ -457,8 +612,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
-	<td>link=article</td>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
 	<td></td>
 </tr>
 <tr>
@@ -492,7 +652,12 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextNotPresent</td>
+	<td>waitForElementNotPresent</td>
+	<td>link=Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
 	<td>link=Kofax</td>
 	<td></td>
 </tr>
@@ -507,7 +672,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>link=Sign out</td>
 	<td></td>
 </tr>

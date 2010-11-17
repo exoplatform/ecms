@@ -12,6 +12,11 @@
 <tr><td rowspan="1" colspan="3">Test_SNF_ECMS_13_ManageNewLetter_ecmdemo</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/ecmdemo/public/acme/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>windowMaximize</td>
 	<td></td>
 	<td></td>
@@ -92,6 +97,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Update sending parameters</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Update sending parameters</td>
 	<td></td>
@@ -137,13 +147,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>basic-template</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>basic-template</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>basic-template</td>
+	<td>link=Moderation</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,6 +192,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Moderation</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Moderation</td>
 	<td></td>
@@ -212,6 +232,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Update sending parameters</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Update sending parameters</td>
 	<td></td>
@@ -237,8 +262,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Basic Template</td>
+	<td>waitForElementPresent</td>
+	<td>basic-template</td>
 	<td></td>
 </tr>
 <tr>
@@ -292,6 +317,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>UIWCMNewsletterEntryManagerCheckAll</td>
 	<td></td>
@@ -299,26 +329,11 @@
 <tr>
 	<td>click</td>
 	<td>UIWCMNewsletterEntryManagerCheckAll</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>2000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>-- Delete newsletter</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>basic-template</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>basic-template</td>
 	<td></td>
 </tr>
 <tr>
@@ -349,6 +364,11 @@
 <tr>
 	<td>echo</td>
 	<td>-- Signout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>
