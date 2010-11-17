@@ -7,7 +7,7 @@
       <ManageContent>Manage Content</ManageContent>
     </label>
     <msg>
-      <non-contents>There are no content here</non-contents>
+      <non-contents>Sorry, no articles available.</non-contents>
       <item-not-found>Item not found</item-not-found>
       <no-permission>You don't have permission to access this node</no-permission>
     </msg>
