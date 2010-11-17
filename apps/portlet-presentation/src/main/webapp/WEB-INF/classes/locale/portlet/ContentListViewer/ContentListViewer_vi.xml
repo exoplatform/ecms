@@ -5,7 +5,7 @@
       <QuickEdit>Sửa nhanh</QuickEdit>
     </title>
     <msg>
-      <non-contents>Không có nội dung nào</non-contents>
+      <non-contents>Xin lỗi! Không có nội dung nào.</non-contents>
       <item-not-found>Nội dung này không tồn tại</item-not-found>
       <no-permission>Bạn không có quyền xem nội dung này</no-permission>	
     </msg>
