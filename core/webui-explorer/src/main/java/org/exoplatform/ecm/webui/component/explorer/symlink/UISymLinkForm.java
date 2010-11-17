@@ -15,31 +15,24 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.ecm.webui.component.explorer.symlink;
-
 import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemExistsException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.nodetype.ConstraintViolationException;
-
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -184,10 +177,6 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         }
       }
       */
-      RepositoryService repositoryService = uiSymLinkForm.getApplicationComponent(RepositoryService.class) ;
-      ManageableRepository repository = repositoryService.getRepository(uiExplorer.getRepositoryName());
-      Session userSession = 
-        SessionProviderFactory.createSessionProvider().getSession(workspaceName, repository);
       NodeFinder nodeFinder = uiSymLinkForm.getApplicationComponent(NodeFinder.class);      
       try {
         nodeFinder.getItem(uiExplorer.getRepositoryName(), workspaceName, pathNode);
@@ -195,25 +184,21 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null, 
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        userSession.logout();
         return;
       } catch (RepositoryException re) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null, 
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        userSession.logout();
         return;
       } catch(Exception e) {
         LOG.error("An unexpected error occurs", e);
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null, 
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        userSession.logout();
         return;
       }
       try {        
         Node targetNode = (Node) nodeFinder.getItem(uiExplorer.getRepositoryName(), workspaceName, pathNode);
-        node.getSession().getItem(targetNode.getPath());
         if (uiSymLinkForm.localizationMode) {
             MultiLanguageService langService = uiSymLinkForm.getApplicationComponent(MultiLanguageService.class);        
             langService.addLinkedLanguage(node, targetNode);
@@ -252,11 +237,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.cannot-save", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      } finally {
-        if(userSession != null) {
-          userSession.logout();
-        }
-      }
+      } 
     }
   }
 
