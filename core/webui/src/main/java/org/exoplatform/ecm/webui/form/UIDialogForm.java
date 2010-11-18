@@ -850,7 +850,7 @@ public class UIDialogForm extends UIForm {
           Value[] values = node.getProperty(propertyPath).getValues();
           // if the node type is mix:referenceable, its values will contain the UUIDs of the reference nodes
           // we need to get the paths of the reference nodes instead of its UUIDs to display onto screen
-          if (node.isNodeType(Utils.MIX_REFERENCEABLE)) {
+          if (node.getProperty(propertyPath).getType() == PropertyType.REFERENCE) {
             for (Value vl : values) {
               if (vl != null) {
                 String strUUID = vl.getString();
@@ -1094,7 +1094,7 @@ public class UIDialogForm extends UIForm {
           Value[] values = node.getProperty(propertyPath).getValues();
           // if the node type is mix:referenceable, its values will contain the UUIDs of the reference nodes
           // we need to get the paths of the reference nodes instead of its UUIDs to display onto screen
-          if (node.isNodeType(Utils.MIX_REFERENCEABLE)) {
+          if (node.getProperty(propertyPath).getType() == PropertyType.REFERENCE) {
             for (Value vl : values) {
               if (vl != null) {
                 String strUUID = vl.getString();
