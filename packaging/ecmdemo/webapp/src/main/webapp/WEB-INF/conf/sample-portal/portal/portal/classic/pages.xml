@@ -261,6 +261,16 @@
 	                <value>false</value>
 	                <read-only>false</read-only>
 	              </preference>
+								<preference>
+									<name>showHeader</name>
+									<value>false</value>
+									<read-only>false</read-only>
+								</preference>
+								<preference>
+									<name>showRssLink</name>
+									<value>false</value>
+									<read-only>false</read-only>
+								</preference>
 	              <preference>
 	                <name>showLink</name>
 	                <value>true</value>
