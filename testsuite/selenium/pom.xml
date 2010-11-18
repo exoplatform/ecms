@@ -24,6 +24,8 @@
     <!-- configuration values for Selegen -->
     <selenium.port>8444</selenium.port><!-- 4444 (selenium RC default) is used by JBoss -->
     <selenium.browser>firefox</selenium.browser>
+    <selenium.host>localhost</selenium.host>
+    <selenium.host.port>8080</selenium.host.port>
     <selenium.timeout>10000</selenium.timeout>
     <selenium.speed>300</selenium.speed>
   </properties>
@@ -171,6 +173,14 @@
                     <property>
                       <name>selenium.timeout</name>
                       <value>${selenium.timeout}</value>
+                    </property>
+                    <property>
+		      <name>selenium.host</name>
+		      <value>${selenium.host}</value>
+                    </property>
+                    <property>
+		      <name>selenium.host.port</name>
+		      <value>${selenium.host.port}</value>
                     </property>
                   </systemProperties>
                 </configuration>
