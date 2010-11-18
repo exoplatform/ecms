@@ -469,7 +469,6 @@ exo-ecms-packaging-ecmdemo-webapp
 										<include name="exo.jcr.component.webdav-*.jar" />
                     <!--include name="exo.portal.component.scripting-*.jar"/-->
                     <include name="exo.portal.component.web-*.jar" />
-                    <include name="exo.portal.component.xml-parser-*.jar" />
                     <include name="exo.portal.gadgets-core-*.jar" />
                     <include name="exo.portal.server.jboss.plugin-*.jar" />
                     <include name="exo.portal.webui.core-*.jar" />
