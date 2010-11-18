@@ -326,7 +326,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       revisionsMap.put(liveVersion.getUUID(), liveRevisionData);
       addRevisionData(node, revisionsMap.values());
     }
-    node.setProperty("publication:lastUser", userId);
+
+    if (!"__system".equals(userId)) {
+      node.setProperty("publication:lastUser", userId);
+    }
 
     if (!node.isNew())
       node.save();
