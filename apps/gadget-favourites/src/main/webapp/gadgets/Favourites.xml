@@ -6,7 +6,7 @@
 		directory_title="Favourite documents"
 		title_url="http://www.exoplatform.org"
 		description="The favourite documents documents"
-    thumbnail="http://localhost:8080/eXoDMSGadgets/skin/DefaultSkin/gadgetIcons/PublishedDocument.png"
+    thumbnail="http://localhost:8080/favourites/skin/DefaultSkin/gadgetIcons/PublishedDocument.png"
 		height="227">
          <Require feature="opensocial-0.7" /> 
          <Require feature="dynamic-height"/>
@@ -14,7 +14,7 @@
 	<Content type="html">
 	<![CDATA[
 	
-		<script type="text/javascript" src="/eXoDMSGadgets/javascript/script.js">
+		<script type="text/javascript" src="/favourites/javascript/script.js">
 
 
                </script>
@@ -45,17 +45,17 @@
 			}
 			
 			.GadgetBgTitleLeft{
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left -70px;
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") no-repeat left -70px;
 				padding-left: 4px;
 			}
 			
 			.GadgetBgTitleCenter{
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") repeat-x left -92px;
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") repeat-x left -92px;
 				height: 22px;
 			}
 			
 			.GadgetBgTitleRight{
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat right -70px;
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") no-repeat right -70px;
 				padding-right:3px;
 			}
 			
@@ -68,7 +68,7 @@
 			}
 			
 			.GadgetBgTitleCenter .IconEditGadGet{
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat center -180px;
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") no-repeat center -180px;
 				display: block;
 				height: 13px;
 				width: 13px;
@@ -76,7 +76,7 @@
 			}
 			
 			.GadgetBgTitleCenter .IconMinimize{
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat center -202px;
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") no-repeat center -202px;
 				display: block;
 				height: 13px;
 				width: 13px;
@@ -84,7 +84,7 @@
 			}
 			
 			.GadgetBgTitleCenter .IconClose{
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat center -224px;
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") no-repeat center -224px;
 				display: block;
 				height: 13px;
 				width: 13px;
@@ -97,22 +97,22 @@
 			}
 			
 			.ContentGadGet .BgLeftTitleContent{
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left top;	
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") no-repeat left top;	
 				padding-left: 6px;
 			}
 			
 			.ContentGadGet .BgCentertTitleContent{
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") repeat-x left -35px;	
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") repeat-x left -35px;	
 				height: 35px;
 				line-height: 35px;
 			}
 			
 			.ContentGadGet .BgRightTitleContent{
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat right top;	
+				background: url("/favourites/skin/images/ImageGadGets.gif") no-repeat right top;	
 				padding-right: 8px;
 			}
 			.ContentGadGet .IconArrow{
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat right -246px;
+				background: url("/favourites/skin/images/ImageGadGets.gif") no-repeat right -246px;
 				float: right;
 				height: 35px;
 				width: 16px;
@@ -123,51 +123,51 @@
 			}
 			
 			.ContentGadGet .BgLeftFooterContent{
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left -114px;	
+				background: url("/favourites/skin/images/ImageGadGets.gif") no-repeat left -114px;	
 				padding-left: 9px;
 			}
 			
 			.ContentGadGet .BgCenterFooterContent{
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") repeat-x center -130px;
+				background: url("/favourites/skin/images/ImageGadGets.gif") repeat-x center -130px;
 				height: 8px;
 			}
 			
 			.ContentGadGet .BgRightFooterContent{
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat right -122px;	
+				background: url("/favourites/skin/images/ImageGadGets.gif") no-repeat right -122px;	
 				padding-right: 8px;
 			}
 			
 			.ContentGadGet .BgCenterContent{
-				background: url("/eXoDMSGadgets/skin/images/BgBottomConten.gif") repeat-x left bottom;
+				background: url("/favourites/skin/images/BgBottomConten.gif") repeat-x left bottom;
 			}
 			.ContentGadGet .BgLeftContent{
 				border-left: solid 1px #9c9c9c;
 			}
 			
 			.ContentGadGet .BgRightContent{
-				background: url("/eXoDMSGadgets/skin/images/GagetBorRight.gif") repeat-y right top;
+				background: url("/favourites/skin/images/GagetBorRight.gif") repeat-y right top;
 				padding-right: 3px;
 			}
 			
 			.ContentGadGet .BgRightContent .IconDriver {
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left -281px;
+				background: url("/favourites/skin/images/ImageGadGets.gif") no-repeat left -281px;
 			
 			}
 			
 			.ContentGadGet .BgRightContent .IconPdf {
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left -352px;
+				background: url("/favourites/skin/images/ImageGadGets.gif") no-repeat left -352px;
 			}
 			
 			.ContentGadGet .BgRightContent .IconDoc {
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left -396px;
+				background: url("/favourites/skin/images/ImageGadGets.gif") no-repeat left -396px;
 			}
 			
 			.ContentGadGet .BgRightContent .IconJpg {
-				background: url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left -440px;
+				background: url("/favourites/skin/images/ImageGadGets.gif") no-repeat left -440px;
 			}
 			
 			.ContentGadGet .BgRightContent .IconNote {
-				background:transparent url("/eXoDMSGadgets/skin/images/ImageGadGets.gif") no-repeat left -308px;
+				background:transparent url("/favourites/skin/images/ImageGadGets.gif") no-repeat left -308px;
 			}
 			
 			.ContentGadGet .BgRightContent .BgTitle{
