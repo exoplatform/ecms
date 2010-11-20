@@ -42,12 +42,12 @@
 	          		<collection type="java.util.ArrayList">	          		  
 	          			<value>
 	          				<object type="org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle">
-	          					<field  name="name"><string>nomal</string></field>		          				          				
+	          					<field  name="name"><string>normal</string></field>		          				          				
 		          			  <field  name="tagRate"><string>0..2</string></field>
 		          			  <field  name="htmlStyle">
 		          			  	<string>font-size: 12px; font-weight: bold; color: #6b6b6b; font-family: verdana; text-decoration:none;</string>
 		          			  </field>
-		          			  <field  name="description"><string>Nomal style for tag</string></field>		          				          						          				
+		          			  <field  name="description"><string>Normal style for tag</string></field>		          				          						          				
 		          			</object>
 		          		</value>		          		
 		          		<value>
@@ -82,12 +82,12 @@
 		          		</value>		          				          		
 		          		<value>
 	          				<object type="org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig$HtmlTagStyle">
-		          			  <field  name="name"><string>hotest</string></field>		          				          				
+		          			  <field  name="name"><string>hottest</string></field>		          				          				
 		          			  <field  name="tagRate"><string>10..*</string></field>
 		          			  <field  name="htmlStyle">
 		          			  	<string>font-size: 20px; font-weight: bold; color: red; font-family:Arial; text-decoration:none;</string>
 		          			  </field>
-		          			  <field  name="description"><string>hostest style for tag</string></field>		          				          						          				
+		          			  <field  name="description"><string>hottest style for tag</string></field>		          				          						          				
 		          			</object>
 		          		</value>
 		          				          				          		
