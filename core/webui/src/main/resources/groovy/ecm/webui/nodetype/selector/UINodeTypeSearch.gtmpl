@@ -23,8 +23,8 @@
                       uicomponent.renderChildren();
                     %>
                 </td>
-                <td>
-                    <a class="SearchIcon" href="<%=uicomponent.event('SearchNodeType')%>" title="<%=uicomponent.getResource('UINodeTypeSearh.msg.title')%>"><span></span></a>
+                <td class="ButtonCell">
+                    <a href="<%=uicomponent.event('SearchNodeType')%>" title="<%=uicomponent.getResource('UINodeTypeSearh.msg.title')%>"><div class="SearchIcon"></div></a>
                 </td>
                </tr>
             </table>
