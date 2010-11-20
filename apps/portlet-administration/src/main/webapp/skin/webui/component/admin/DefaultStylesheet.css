@@ -867,7 +867,10 @@ float: left;
 		background: transparent url(/ecmadmin/skin/icons/24x24/DefaultSkin/Search.gif) no-repeat scroll left center;
 		height: 24px;
 		width: 24px;
-		padding: 10px;
+}
+
+.UINodeTypeSearh .UIBarStyle .ButtonCell {
+  padding-top: 7px;
 }
 
 .UINodeTypeSearh .UIBarStyle .MultiValueContainerShow {
