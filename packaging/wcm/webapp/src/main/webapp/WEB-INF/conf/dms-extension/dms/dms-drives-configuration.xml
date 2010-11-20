@@ -46,12 +46,12 @@
               <field  name="homePath"><string>/Users/${userId}/Private</string></field>
               <field  name="icon"><string></string></field>
               <field  name="views">
-                <string>simple-view, admin-view</string>
+                <string>timeline-view</string>
               </field>
               <field  name="viewPreferences"><boolean>true</boolean></field>
               <field  name="viewNonDocument"><boolean>true</boolean></field>
               <field  name="viewSideBar"><boolean>true</boolean></field>
-              <field  name="showHiddenNode"><boolean>true</boolean></field>
+              <field  name="showHiddenNode"><boolean>false</boolean></field>
               <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
               <field name="allowNodeTypesOnTree"><string>*</string></field>       
             </object>
