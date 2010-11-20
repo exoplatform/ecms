@@ -5,10 +5,10 @@
 ]>
 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV">
 	<title>Manage Site Content with WebDAV</title>
-	 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Concept">
-		<title>Concept</title>
+	 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-What_is_WebDAV">
+		<title>What is WebDAV</title>
 		 <para>
-			<emphasis role="bold">WebDAV</emphasis> is an abbreviation of <emphasis role="bold">Web</emphasis>-based <emphasis role="bold">D</emphasis>istributed <emphasis role="bold">A</emphasis>uthoring and <emphasis role="bold">V</emphasis>ersioning.. It is used to publish to publish and manage file and directories on a remote server. It also groups users to perform these tasks.
+			<emphasis role="bold">WebDAV</emphasis> is an abbreviation of <emphasis role="bold">Web</emphasis>-based <emphasis role="bold">D</emphasis>istributed <emphasis role="bold">A</emphasis>uthoring and <emphasis role="bold">V</emphasis>ersioning.. It is used to publish to publish and manage file and directories on a remote server. It also groups users to perform these these functions on a website.
 		</para>
 		 <para>
 			WebDAV provides the following features:
@@ -46,8 +46,13 @@
 			</varlistentry>
 
 		</variablelist>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Why_use_WebDAV">
+		<title>Why use WebDAV?</title>
 		 <para>
-			WebDAV offers users the ability to:
+			You should use WebDAV to manage site content because of the following reasons:
 		</para>
 		 <itemizedlist>
 			<listitem>
@@ -72,50 +77,22 @@
 		</itemizedlist>
 
 	</section>
-	
-	 <!--  Close Section: 3.4.1 Overview  --> <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Using_WebDAV_With_Site_Publisher">
-		<title>Using WebDAV With Site Publisher</title>
-		 <para>
-			Site Publisher supports WebDAV in two ways:
-		</para>
-		 <note>
-			<title>DOCS NOTES:</title>
-			 <para>
-				The procedures below (esp the first) are written for a Windows operating environment. We need to either broaden them to cover all operating systems or include other OS-specific procedures.
-			</para>
-			 <para>
-				I've added some further details as best I can.
-			</para>
 
-		</note>
-		 <procedure id="proc-User_Guide-Using_WebDAV_With_Site_Publisher-Using_a_local_file_system">
-			<title>Using a local file system</title>
+    <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">
+		<title>How to Use WebDAV With eXo Content</title>
+		 <para>
+			WCM supports WebDAV in two ways:
+		</para>
+      <para>
+			This way is used when you are on a Window System and your computer has to be connected to the Internet or Intranet.
+		</para>
+		 <procedure id="proc-User_Guide-How_to_Use_WebDAV_With_eXo_Content-Method_One">
+			<title>Method One:</title>
 			 <step>
 				<para>
-					Navigate to the network directory on your local computer:
+					Navigate to the <emphasis role="bold">My Network Places</emphasis> on your local computer. You will see all shared files and folders:
 				</para>
-				 <itemizedlist>
-					<listitem>
-						<para>
-							On Windows machines this is the <emphasis role="bold">My Network Places</emphasis> location found in the left sidebar of the file manager.
-						</para>
-
-					</listitem>
-					 <listitem>
-						<para>
-							On Linux systems that use the Gnome desktop manager, it is found under <emphasis role="bold">Network</emphasis> which in the <emphasis role="bold">Places</emphasis> menu or in the sidebar of Nautilus.
-						</para>
-
-					</listitem>
-					 <listitem>
-						<para>
-							On OS X (Macintosh) systems this location can be found by clicking on the <emphasis role="bold">Network</emphasis> icon in Finder.
-						</para>
-
-					</listitem>
-
-				</itemizedlist>
-				 <mediaobject>
+            <mediaobject>
 					<imageobject role="html">
 						<imagedata align="center" fileref="images/mynetworkplaces.png" format="PNG" scale="90" width="444" />
 					</imageobject>
@@ -195,8 +172,8 @@
 
 		</procedure>
 		
-		 <procedure id="proc-User_Guide-Using_WebDAV_With_Site_Publisher-Using_a_web_browser">
-			<title>Using a web browser</title>
+		 <procedure id="proc-User_Guide-How_to_Use_WebDAV_With_eXo_Content-Method_Two">
+			<title>Method Two:</title>
 			 <step>
 				<para>
 					Navigate to <ulink type="http" url="http://localhost:8080/portal" /> in your web browser.
@@ -205,7 +182,7 @@
 			</step>
 			 <step>
 				<para>
-					Click <emphasis role="bold">Sites Explorer</emphasis> in the Administration bar.
+					Click <emphasis role="bold">Group | Sites Explorer</emphasis> in the Administration bar.
 				</para>
 
 			</step>
@@ -271,9 +248,8 @@
 		
 
 	</section>
-	
-	 <!--  Close Section: 3.4.2 Using WebDAV With Site Publisher  --> 
-    <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Actions">
+
+   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Actions">
 		<title>Actions</title>
 		 <para>
 			You see all <emphasis>default folders</emphasis> of a site when accessing it via WebDAV. Manipulating content through WebDAV is the same as working on it in local folders.
@@ -281,8 +257,8 @@
 		 <para>
 			This means you can copy/paste files, list folders, rename and more in system directories.
 		</para>
-		 <section id="sect-User_Guide-Actions-Add_new_content_to_a_site">
-			<title>Add new content to a site</title>
+		 <section id="sect-User_Guide-Actions-Add_new_content_to_a_specific_site">
+			<title>Add new content to a specific site</title>
 			 <para>
 				This function allows you to copy web content (such as an <emphasis role="bold">.html</emphasis> file) from your local computer to a <emphasis>web content</emphasis> folder of a site.
 			</para>
@@ -290,7 +266,7 @@
 				<title></title>
 				 <step>
 					<para>
-						Access a site via WebDAV (refer to <xref linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-Using_WebDAV_With_Site_Publisher" />) then go to a <emphasis role="bold">web content</emphasis> folder of the site.
+						Access a site via WebDAV (refer to <xref linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content"/>) then go to a <emphasis role="bold">web content</emphasis> folder of the site.
 					</para>
 
 				</step>
@@ -311,9 +287,9 @@
 			</para>
 
 		</section>
-		
-		 <!--  Close Section: 3.4.3.1 Add new content to a site --> <section id="sect-User_Guide-Actions-Delete_content">
-			<title>Delete content</title>
+
+      <section id="sect-User_Guide-Actions-Delete_a_web_content">
+			<title>Delete a web content</title>
 			 <para>
 				This function allows site administrators to delete web content files singularly or in batches.
 			</para>
@@ -348,11 +324,9 @@
 			
 
 		</section>
-		
-		 <!--  Close Section: 3.4.3.2 Delete content  -->
+
 	</section>
-	
-	 <!--  Close Section: 3.4.3 Actions  --><!--  Close Section: 3.4 Manage Site Content with WebDAV  -->
+
 </section>
 
 

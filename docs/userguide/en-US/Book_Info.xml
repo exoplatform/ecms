@@ -9,7 +9,7 @@
 	 <productname>JBoss Site Publisher</productname>
 	 <productnumber>5</productnumber>
 	 <edition>1</edition>
-	 <pubsnumber>2.0</pubsnumber>
+	 <pubsnumber>2.1.1</pubsnumber>
 	 <abstract>
 		<para>
 			This document provides an easy to follow guide to the functions and options available in the Enterprise Portal Platform Site Publisher extension. It is intended to be accessible and useful to both experienced and novice portal users.
@@ -25,13 +25,9 @@
 		</inlinemediaobject>
 
 	</corpauthor>
-   
-   <!--FOR PUBLICAN:-->
-   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Common_Content/Legal_Notice.xml">
-   <!--FOR JDOCBOOK:-->
-      <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude" />
-   </xi:include>
-
-	<xi:include href="Author_Group.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <!-- FOR PUBLICAN: --> <xi:include href="Common_Content/Legal_Notice.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+     <!-- FOR JDOCBOOK: --> <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude"></xi:fallback>
+	 </xi:include>
+	 <xi:include href="Author_Group.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </bookinfo>
 

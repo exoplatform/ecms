@@ -1,0 +1,5835 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Actions">
+	<title>Actions</title>
+	 <section id="sect-User_Guide-Actions-Add_Category">
+		<title>Add Category</title>
+		 <para>
+			This function enables you to add a category for a node.
+		</para>
+		 <para>
+			Do as follows to add a category:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Choose a node that you want to add a category into.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select on 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addcategorybutton.png" format="PNG" />
+						</imageobject>
+					</inlinemediaobject>
+					 the action bar and the Add Category form appears:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addcategoryform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addcategoryform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Enter a name for the category in the Category Name field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click Save to accept creating a new category or Cancel to quit from this form without adding a category.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+
+    <section id="sect-User_Guide-Actions-Add_a_document">
+		<title>Add a document</title>
+		 <para>
+			There are several types of document: <emphasis role="bold">File</emphasis>, <emphasis role="bold">Article</emphasis>, <emphasis role="bold">Podcast</emphasis>, <emphasis role="bold">Sample node</emphasis>, <emphasis role="bold">File Plan</emphasis>, <emphasis role="bold">Kofax</emphasis>.
+		</para>
+		 <para>
+			The table below outlines which nodes types different document types can be added to. The rows indicate what the node in the left column can be added to. The columns indicate what the node at the top can contain.
+		</para>
+		 <table>
+			<title></title>
+			 <tgroup cols="9">
+				<thead>
+					<row>
+						<entry>
+
+						</entry>
+						 <entry>
+							File
+						</entry>
+						 <entry>
+							Article
+						</entry>
+						 <entry>
+							Podcast
+						</entry>
+						 <entry>
+							Sample node
+						</entry>
+						 <entry>
+							File Plan
+						</entry>
+						 <entry>
+							Kofax document
+						</entry>
+						 <entry>
+							Content folder
+						</entry>
+						 <entry>
+							Document folder
+						</entry>
+
+					</row>
+
+				</thead>
+				 <tbody>
+					<row>
+						<entry>
+							File
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							Article
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							Podcast
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							Sample node
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							File Plan
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							Kofax
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							Uploaded file
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							Content folder
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							Document folder
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+						 <entry align="center">
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/greentick.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+
+						</entry>
+
+					</row>
+
+				</tbody>
+
+			</tgroup>
+
+		</table>
+		 <note>
+			<title></title>
+			 <itemizedlist>
+				<listitem>
+					<para>
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/greentick.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						: The corresponding document can be added into.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						A blank entry means the corresponding document can not be added into.
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+			 <para>
+				Follow the horizontal, you will know what the node can be added into.
+			</para>
+			 <para>
+				Follow the vertical, you will know what the node can include.
+			</para>
+
+		</note>
+		 <para>
+			To add a new document, do the following steps:
+		</para>
+		 <procedure id="proc-User_Guide-Add_a_document-Add_a_new_document">
+			<title>Add a new document:</title>
+			 <step>
+				<para>
+					Select a folder from the left pane that you want to add a new document to.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/adddocumenticon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the <emphasis role="bold">Actions</emphasis> bar.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/actionstab.png" format="PNG" scale="90" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/actionstab.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Select the document type (template) that you want to create from the drop-down list (Article is selected by default).
+				</para>
+				 <para>
+					Each document (except Article) must be added to catagories when created.
+				</para>
+
+			</step>
+
+		</procedure>
+<!--DOC NOTE: The procedure  below was not in the 2.1.1 .odt. It has been re-included as is it linked to in "Create a new Article" -->
+       <procedure id="proc-User_Guide-Add_a_document-Attach_files_to_a_document">
+         <title>Attach files to a document</title>
+          <step>
+            <para>
+               Select the document that you want to attach files to and click 
+               <inlinemediaobject>
+                  <imageobject>
+                     <imagedata fileref="images/uploadicon2.png" format="PNG" />
+                  </imageobject>
+
+               </inlinemediaobject>
+                in the <emphasis role="bold">Actions</emphasis> bar.
+            </para>
+             <para>
+               The <emphasis role="bold">Upload file</emphasis> form will appear.
+            </para>
+             <mediaobject>
+               <imageobject role="html">
+                  <imagedata align="center" fileref="images/uploadfilewindow.png" format="PNG" scale="" width="444" />
+               </imageobject>
+                <imageobject role="fo">
+                  <imagedata align="center" contentwidth="150mm" fileref="images/uploadfilewindow.png" format="PNG" width="444" />
+               </imageobject>
+
+            </mediaobject>
+
+         </step>
+          <step>
+            <para>
+               Enter a name into the <emphasis role="bold">Name</emphasis> field.
+            </para>
+
+         </step>
+          <step>
+            <para>
+               Click on 
+               <inlinemediaobject>
+                  <imageobject>
+                     <imagedata fileref="images/choosefilebutton.png" format="PNG" />
+                  </imageobject>
+
+               </inlinemediaobject>
+                to select the attachment file. You can click 
+               <inlinemediaobject>
+                  <imageobject>
+                     <imagedata fileref="images/addplusicon.png" format="PNG" />
+                  </imageobject>
+
+               </inlinemediaobject>
+                to add multiple files.
+            </para>
+
+         </step>
+          <step>
+            <para>
+               Click <emphasis role="bold">Save</emphasis> to attach the files or <emphasis role="bold">Cancel</emphasis> to to quit.
+            </para>
+
+         </step>
+
+      </procedure>
+
+		 <procedure id="proc-User_Guide-Add_a_document-Create_a_new_File_document">
+			<title>Create a new File document</title>
+			 <step>
+				<para>
+					Follow the steps in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document" />), to open the <emphasis role="bold">Add New Document</emphasis> form then select <emphasis role="bold">File</emphasis> from the drop-down list.
+				</para>
+				 <para>
+					The <emphasis role="bold">Add New Document</emphasis> form will be displayed like the following illustration:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addnewdocument.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addnewdocument.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Input name for file document in the <emphasis role="bold">Name</emphasis> field. Some special characters can not be used in the Name field: @ # % &amp; * ( ) “ ' : ; [ ] {} / !
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/droparrow.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to see the <emphasis role="bold">Mime Type</emphasis> list and select one. There are two types of File document for you to choose:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							<emphasis role="bold">text/html</emphasis>: when creating a text/html File document, you can input value in the Content field like source code (HyperText Markup Language HTML). After being created, it will generate the content you want, then you can see both the inputted source code and the generated content in that document.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">text/plain</emphasis>: after being created, it will display exactly what you inputted in the Content field.html.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</step>
+			 <step>
+				<para>
+					Input a value in the <emphasis role="bold">Content</emphasis> field:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							<emphasis role="bold">text/html</emphasis>: If you want to create a File document with a source code and generated content, click 
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/sourceicon.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+							 in the editor bar. In this mode, only Save, New Page, Preview icons in editor bar are visible for using. Click the 
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/previewicon.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+							 to preview the generated content.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">text/plain</emphasis>: If you select text/plain type, the content field will be displayed like the following illustration:
+						</para>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/plaintextcontentform.png" format="PNG" scale="90" width="444" />
+							</imageobject>
+							 <imageobject role="fo">
+								<imagedata align="center" contentwidth="150mm" fileref="images/plaintextcontentform.png" format="PNG" width="444" />
+							</imageobject>
+
+						</mediaobject>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</step>
+			 <step>
+				<para>
+					After inputting all required fields, click <emphasis role="bold">Save</emphasis> to accept creating a new file document or Cancel to quit without saving changes.
+				</para>
+				 <para>
+					After being created successfully, a file document with type text/html will be displayed like the illustration below:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/htmltab.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/htmltab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/texttab.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/texttab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Add_a_document-Create_a_new_Article">
+			<title>Create a new Article</title>
+			 <step>
+				<para>
+					Follow the steps in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document" /> to open the <emphasis role="bold">Add New Document</emphasis> form then select <emphasis role="bold">Article</emphasis> from the drop-down list. (Actually, Article is selected by default).
+				</para>
+				 <para>
+					The <emphasis role="bold">Add New Document</emphasis> form will be displayed like the following illustration:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addnewdocumentarticle.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addnewdocumentarticle.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Input the name and the title of the Article in the <emphasis role="bold">Name</emphasis> and <emphasis role="bold">Title</emphasis> field, some special characters can not be used in the Name field (@ # % &amp; * ( ) “ ' : ; [ ] {} / !).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Input value for the <emphasis role="bold">Summary</emphasis> field, and the <emphasis role="bold">Content</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to accept the inputted values, or <emphasis role="bold">Cancel</emphasis> to quit.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After being created, new added Article document will be like the illustration below:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/newarticle.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/newarticle.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			The Links is used to list all its related documents. After adding relations for a document, Article will be displayed. You can click these links to view a content of the related documents.
+		</para>
+		 <para>
+			The Attachments is used to list all its uploaded files/documents that is attached with the Article. You can remove the attachments by clicking the 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/trashicon.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 .
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/attachments.png" format="PNG" scale="90" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/attachments.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			Instructions to add an attachment are in <xref linkend="proc-User_Guide-Add_a_document-Attach_files_to_a_document" />.
+		</para>
+		 <note>
+			<title>Exisiting Names</title>
+			 <para>
+				Document name can be the same with the existing one. When a new document is created with the same name as other existing document, its name will be added an index (e.g: test [2])
+			</para>
+
+		</note>
+		 <procedure id="proc-User_Guide-Add_a_document-Create_a_New_Podcast">
+			<title>Create a New Podcast</title>
+			 <step>
+				<para>
+               Follow the steps in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> form and select <emphasis role="bold">Podcast</emphasis> from the drop-down list.
+				</para>
+				 <para>
+					The <emphasis role="bold">Add New Podcast</emphasis> form will be displayed like the following illustration:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addnewpodcast.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addnewpodcast.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <table>
+					<title></title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Field
+								</entry>
+								 <entry>
+									Details
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									Name
+								</entry>
+								 <entry>
+									The name of a document. This field is required. Some special characters are not allowed to input in the Name field(@ # % &amp; * ( ) “ ' : ; [ ] {} / !).
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Title
+								</entry>
+								 <entry>
+									The title of a document.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Categories
+								</entry>
+								 <entry>
+									Categories of a document.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Link
+								</entry>
+								 <entry>
+									The link to the source path of the uploaded media file. This field is required.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Author
+								</entry>
+								 <entry>
+									The author of the uploaded media file.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Explicit
+								</entry>
+								 <entry>
+									<para>
+										It is used to indicate whether or not your podcast contains an explicit material.
+									</para>
+									 <para>
+										There are two options:
+									</para>
+									 <itemizedlist>
+										<listitem>
+											<para>
+												<emphasis>Yes</emphasis>: an "explicit" parental advisory graphic will appear next to your podcast artwork
+											</para>
+
+										</listitem>
+										 <listitem>
+											<para>
+												<emphasis>No</emphasis>: you see no indicator – bank is default advisory type
+											</para>
+
+										</listitem>
+
+									</itemizedlist>
+
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Category
+								</entry>
+								 <entry>
+									The category of the uploaded media file, example: music, film, short clip, etc.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Keyword
+								</entry>
+								 <entry>
+									Keyword allows you to search your podcast files more quickly. You can use commas to separate between keywords.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Publish date
+								</entry>
+								 <entry>
+									The date when an episode was released.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Description
+								</entry>
+								 <entry>
+									Information about the uploaded media file.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Mime type
+								</entry>
+								 <entry>
+									The type of the uploaded media file.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Length
+								</entry>
+								 <entry>
+									The length of the uploaded media file.
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+
+			</step>
+			 <step>
+				<para>
+					Input values for fields. To upload a media file, click the <emphasis role="bold">Browse...</emphasis> button and select the media file from your machine. Then click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/uploadicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 next to the <emphasis role="bold">Browse...</emphasis> button.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to finish, or <emphasis role="bold">Cancel</emphasis> to quit without saving changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title>Exisiting Names</title>
+			 <para>
+				Document name can be the same with the existing one. When a new document is created with the same name as other existing document, its name will be added an index (e.g: test [2])
+			</para>
+
+		</note>
+		 <para>
+			Once created, a Podcast will appear as so:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/podcastscreen.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/podcastscreen.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			Podcasts can be listened to immediately, or transferred to another device.
+		</para>
+		 <procedure id="proc-User_Guide-Add_a_document-Create_a_new_Sample_node">
+			<title>Create a new Sample node</title>
+			 <step>
+				<para>
+               Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> window and select <emphasis role="bold">Sample node</emphasis> from the drop-down list.
+				</para>
+				 <para>
+					The <emphasis role="bold">Add New Sample Node</emphasis> form will appear liek in the following illustration:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/newsamplenodeform.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/newsamplenodeform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Complete the appropriate fields
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					To upload an image, click the <emphasis role="bold">Browse...</emphasis> button and select an image from your computer. Click the upload icon (
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/uploadicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					) next to the <emphasis role="bold">Browse...</emphasis> button to upload the selected file.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the <emphasis role="bold">Save</emphasis> to accept or the <emphasis role="bold">Cancel</emphasis> to quit without saving changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After being created, a new sample node will be displayed like the illustration below:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/samplenodeformcompleted.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/samplenodeformcompleted.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			The <emphasis role="bold">Relations</emphasis> area is used to list all its related documents. See <xref linkend="sect-User_Guide-Manage_Relations-View_Relations" />.
+		</para>
+		 <para>
+			You can click the links to view content of the related document.
+		</para>
+		 <para>
+			The <emphasis role="bold">Attachments</emphasis> area is used to list all its uploaded files. See <xref linkend="proc-User_Guide-Add_a_document-Attach_files_to_a_document" />.
+		</para>
+		 <procedure id="proc-User_Guide-Add_a_document-Create_a_new_File_Plan">
+			<title>Create a new File Plan</title>
+			 <step>
+				<para>
+               Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> window and select <emphasis role="bold">File plan</emphasis> from the drop-down list.
+				</para>
+				 <para>
+					The <emphasis role="bold">Add File plan</emphasis> form will appear:
+				</para>
+				 <!--    Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.    --> <variablelist id="vari-User_Guide-Create_a_new_File_Plan-Tabs_in_the_Add_File_plan_form">
+					<title>Tabs in the <emphasis role="bold">Add File plan</emphasis> form</title>
+					 <varlistentry>
+						<term>The <emphasis role="bold">Name</emphasis> tab</term>
+						 <listitem>
+							<mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/addfileplanform.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/addfileplanform.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <table>
+								<title></title>
+								 <tgroup cols="2">
+									<thead>
+										<row>
+											<entry>
+												Field
+											</entry>
+											 <entry>
+												Details
+											</entry>
+
+										</row>
+
+									</thead>
+									 <tbody>
+										<row>
+											<entry>
+												Name
+											</entry>
+											 <entry>
+												The name of the file plan.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Categories
+											</entry>
+											 <entry>
+												The categories of your file plan. Select the categories for your file plan by clicking the 
+												<inlinemediaobject>
+													<imageobject>
+														<imagedata fileref="images/addplusicon.png" format="PNG" />
+													</imageobject>
+
+												</inlinemediaobject>
+												 button.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												File Plan note
+											</entry>
+											 <entry>
+												Note for presenting any other information for users.
+											</entry>
+
+										</row>
+
+									</tbody>
+
+								</tgroup>
+
+							</table>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>The <emphasis role="bold">Record properties</emphasis> tab</term>
+						 <listitem>
+							<mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/recordpropertiestab.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/recordpropertiestab.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <table>
+								<title></title>
+								 <tgroup cols="2">
+									<thead>
+										<row>
+											<entry>
+												Field
+											</entry>
+											 <entry>
+												Details
+											</entry>
+
+										</row>
+
+									</thead>
+									 <tbody>
+										<row>
+											<entry>
+												Record category identifier
+											</entry>
+											 <entry>
+												The alphanumeric or numeric identifier indicating a unique record category. This must be a unique ID and if left blank will be created automatically by the system.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Disposition authority
+											</entry>
+											 <entry>
+												A reference number to the regulations that govern the disposition.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Permanent record indicator
+											</entry>
+											 <entry>
+												A type of record indicators which should never be deleted.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Disposition instructions
+											</entry>
+											 <entry>
+												A readable guidelines on how the records associated with the file plan will be handled.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Contains records folder
+											</entry>
+											 <entry>
+												The confirmation is about whether the records folder is contained or not.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Default media type
+											</entry>
+											 <entry>
+												The choice for preset media types which are made available to simplify the data entry for the record. The frequently-chosen value is "electronic" or paper.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Default marking list
+											</entry>
+											 <entry>
+												Handling and classification information that are printed at the bottom of the record, such as UNCLASSIFIED or NOCONTRACT.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Default originating organization
+											</entry>
+											 <entry>
+												This option is to enter the original arrangement as default which is made available to simplify the data entry for the record and to assume that originating organizations are the same for the information in the file plan.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Vital record indicator
+											</entry>
+											 <entry>
+												This flag is to allow whether tracking or reminding you of the record as essential or not.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Vital record review period
+											</entry>
+											 <entry>
+												The choice for the interval of time between vital record reviews.
+											</entry>
+
+										</row>
+
+									</tbody>
+
+								</tgroup>
+
+							</table>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>The <emphasis role="bold">Process Properties</emphasis> tab:</term>
+						 <listitem>
+							<mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/processproperties.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/processproperties.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <table>
+								<title></title>
+								 <tgroup cols="2">
+									<thead>
+										<row>
+											<entry>
+												Field
+											</entry>
+											 <entry>
+												Details
+											</entry>
+
+										</row>
+
+									</thead>
+									 <tbody>
+										<row>
+											<entry>
+												Process cutoffs
+											</entry>
+											 <entry>
+												The boolean datatype is used to break a process. If the process cutoff flag is set in the file plan, the record is cutoff after the expiration, or after it has been obsolete or superseded, depending on the information in the file plan.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Event trigger
+											</entry>
+											 <entry>
+												The text datatype is an automatic executing code which is used to tell the event to perform some actions.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Cutoff period
+											</entry>
+											 <entry>
+												The duration for the record cutoff performance.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Cutoff on obsolete
+											</entry>
+											 <entry>
+												The record is cutoff when it is obsolete.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Cutoff on superseded
+											</entry>
+											 <entry>
+												The record is cutoff when it is removed or replaced.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Process hold
+											</entry>
+											 <entry>
+												This boolean datatype is used when a record process may be held before the further disposition is handled.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Hold period
+											</entry>
+											 <entry>
+												The duration when a record may be held after cutoff which is normally measured in Years.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Discretionary Hold
+											</entry>
+											 <entry>
+												The boolean datatype is used when a hold may be discretionary, such as after a command change. So, the discretionary hold flag allows the records management module to track these manual checks.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Process transfer
+											</entry>
+											 <entry>
+												The boolean datatype is used to determine how a record process will be transferred.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Default transfer location
+											</entry>
+											 <entry>
+												The text datatype is used to determine where a record is transferred by default.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Transfer block size
+											</entry>
+											 <entry>
+												The float datatype is used to determine in what size blocks for organizational purposes that is normally measured in Years.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Process accession
+											</entry>
+											 <entry>
+												The boolean datatype is flagged when a record which is held permanently must be ultimately transferred to the national records authority.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Accession location
+											</entry>
+											 <entry>
+												The text datatype is flagged to specify an area for the accession transfer.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Accession block size
+											</entry>
+											 <entry>
+												The text datatype is flagged to determine the blocks size for organizational purposes which is normally measured in Years.
+											</entry>
+
+										</row>
+										 <row>
+											<entry>
+												Process destruction
+											</entry>
+											 <entry>
+												The boolean datatype is flagged if there is any record to be destroyed. After that, the record is marked in the Alfresco system to be permanently destroyed so that all information, metadata and physical traces are removed and cannot be recovered.
+											</entry>
+
+										</row>
+
+									</tbody>
+
+								</tgroup>
+
+							</table>
+
+						</listitem>
+
+					</varlistentry>
+
+				</variablelist>
+				 <!--    END    -->
+			</step>
+			 <step>
+				<para>
+					Complete appropriate fields.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to accept, or <emphasis role="bold">Cancel</emphasis> to quit.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After being created, the new File Plan will be displayed:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/fileplancontent.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/fileplancontent.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <procedure id="proc-User_Guide-Add_a_document-Create_a_new_Kofax">
+			<title>Create a new Kofax</title>
+			 <step>
+				<para>
+               Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Kofax</emphasis> form and select <emphasis role="bold">Add New Kofax</emphasis> from the drop-down list.
+				</para>
+				 <para>
+					The <emphasis role="bold">Add New Kofax</emphasis> form will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addnewkofax.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addnewkofax.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Input a name for a Kofax document in the Name field. This field is required. Some special characters can not be used in the Name field(@ # % &amp; * ( ) “ ' : ; [ ] { } / !).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select categories for a Kofax document by clicking the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to commit changes or <emphasis role="bold">Cancel</emphasis> to quit.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After being created, a kofax document will be displayed like this illustration:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/kofaxdocument.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/kofaxdocument.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			The File View tab is used to display all added nodes in that kofax. Besides, all added files in kofax are also displayed in the <emphasis role="bold">Document View</emphasis> tab:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/kofaxdocumentview.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/kofaxdocumentview.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <procedure id="proc-User_Guide-Add_a_document-Create_new_Event">
+			<title>Create new Event</title>
+			 <step>
+				<para>
+					Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document" /> to open the <emphasis role="bold">Add New Event</emphasis> form and select <emphasis role="bold">Event</emphasis> from the drop-down list.
+				</para>
+				 <para>
+					The <emphasis role="bold">Add New Event</emphasis> window will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/neweventform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/neweventform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Enter a title for the event.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Input the location where the event will take place in <emphasis role="bold">Location</emphasis> field. Check the Google Maps checkbox if you want the location of the event shown on Google Maps.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter the <emphasis role="bold">Start</emphasis> and <emphasis role="bold">End Date/time</emphasis> of the event.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Fill the <emphasis role="bold">Summary</emphasis> and <emphasis role="bold">Content</emphasis> fields.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to commit the event, or <emphasis role="bold">Cancel</emphasis> to quit without saving changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After being created, the event wll be displayed like the illustration bellow:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/eventdisplay.png" format="PNG" scale="" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/eventdisplay.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			The event will be displayed in a website as:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/eventdisplayweb.png" format="PNG" scale="" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/eventdisplayweb.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Actions-Add_Folder">
+		<title>Add Folder</title>
+		 <para>
+			You can create a document immediately in a specific drive; however, to manage documents better, the created folder should contain documents in it.
+		</para>
+		 <para>
+			There are two types of folder:
+		</para>
+		 <itemizedlist>
+			<listitem>
+				<para>
+					Content folder.
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					Document folder.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/documentfolder.png" format="PNG" scale="100" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/documentfolder.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</listitem>
+
+		</itemizedlist>
+		 <para>
+			In default skin, the icon for a content folder node is displayed in blue and the icon for a document folder node is displayed in yellow.
+		</para>
+		 <variablelist id="vari-User_Guide-Add_Folder-File_and_folder_types_in_a_folder">
+			<title>File and folder types in a folder</title>
+			 <varlistentry>
+				<term>Content folder</term>
+				 <listitem>
+					<itemizedlist>
+						<listitem>
+							<para>
+								You can add a Content Folder folder into a Content Folder one.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can add a Document Folder folder into a Content Folder one.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can add documents into a Content Folder.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can upload files (images, MS word documents, OpenOffice documents, .pdf files, .txt files, .xml file, etc) into a Content Folder.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can import sub node(s) that was exported into a Content Folder.
+							</para>
+
+						</listitem>
+
+					</itemizedlist>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>Document folder</term>
+				 <listitem>
+					<itemizedlist>
+						<listitem>
+							<para>
+								You can add a new Document Folder into a Document Folder.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can add File, Podcast, File Plan documents into a Document Folder.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can upload files (images, MS word documents, OpenOffice documents, .pdf files, .txt files, .xml file, etc ) into a Document Folder.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can not add a Content Folder into a Document Folder
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can not import an exported a Content Folder into a Document Folder.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You can not import an exported Article, Sample node, Kofax into a Document Folder.
+							</para>
+
+						</listitem>
+
+					</itemizedlist>
+
+				</listitem>
+
+			</varlistentry>
+
+		</variablelist>
+		 <procedure id="proc-User_Guide-Add_Folder-Create_content_folders">
+			<title>Create content folders</title>
+			 <step>
+				<para>
+					Select the path to create a folder.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addfolderbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 from the action bar. The <emphasis role="bold">Add a Folder</emphasis> form is displayed:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addfolderwindow.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addfolderwindow.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the icon to see type list and select the Content Folder type.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Input value for the Name field. This field is required. You can not input some special characters in the Name field (@ # % &amp; * ( ) " ' : ; [ ] {} / !)
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click Save to accept creating a new folder.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title>Folder Creation</title>
+			 <para>
+				A folder name can be the same with the existing one. When a new folder is created with the same name with other existing folder, after you click Save, its name will be added an index (e.g: test[2]).
+			</para>
+			 <para>
+				You can only create a content folder in another content folder.
+			</para>
+
+		</note>
+		 <para>
+			You can create a document folder in a content folder or a document folder.
+		</para>
+		 <procedure id="proc-User_Guide-Add_Folder-Create_document_folders">
+			<title>Create document folders</title>
+			 <step>
+				<para>
+					Select the path to create a new folder.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the Actions tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addfolderbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 . The Add a Folder form appears:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addfolderwindow.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addfolderwindow.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					In the <emphasis role="bold">Add a folder</emphasis>form, click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/droparrowicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to see the folder types list and select Document Folder.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter a value for the <emphasis role="bold">Name</emphasis>field. This field is required. Some special characters are not allowed to inputted in the Name field: (@ # % &amp; * ( ) " ' : ; [ ] {} / !)
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis>to accept creating a new folder.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title></title>
+			 <para>
+				Like a content folder, A folder name can be the same with the existing one. When a new folder is created with the same name with other existing folder, after you click Save, its name will be added an index (e.g: test[2]).
+			</para>
+
+		</note>
+
+	</section>
+
+    <section id="sect-User_Guide-Actions-Add_translations_to_a_document">
+		<title>Add translations to a document</title>
+		 <para>
+			This function allows users to add multiple languages for a document. This action is similar to adding a language.
+		</para>
+		 <para>
+			By default, the <emphasis role="bold">Add translation</emphasis> button is not displayed on the toolbar.
+		</para>
+		 <para>
+			Enable this function by navigating to <emphasis role="bold">Sites Administration</emphasis>, then <emphasis role="bold">Content Presentation</emphasis>, then <emphasis role="bold">Manage Views</emphasis>.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the document you want to add the translation for. For example; select an <emphasis role="bold">Article</emphasis> which is in <emphasis>English</emphasis>:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/selectarticle.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/selectarticle.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addtranslationicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 in the <emphasis role="bold">Action</emphasis> bar. The <emphasis role="bold">Symlink Manager</emphasis> will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/symlinkmanager2.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/symlinkmanager2.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 , then browse to the target document that has different language with the first document. For example, the <emphasis role="bold">Article</emphasis> version in French.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/choosetargetnode.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/choosetargetnode.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					After you have selected the document, click <emphasis role="bold">Save</emphasis> on the <emphasis role="bold">Symlink Manager</emphasis> form:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/symlinkmanagersave.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/symlinkmanagersave.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Select the document which you have added the translation to, then click the <emphasis role="bold">Relation</emphasis> button on the sidebar.
+				</para>
+				 <para>
+					You will see the available language for the selected document. Click the language on this panel to view the document in the corresponding language version.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/availablelanguages.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/availablelanguages.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Actions-Add_symlink">
+		<title>Add symlink</title>
+		 <para>
+			You also easily add a sym link for a document for the purpose of fast accessing the document that you are looking for:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select a document that you want to add a sym link.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Right click that document and select <emphasis role="bold">Add Sym Link</emphasis> from the menu.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					The selected document will be added a sym link immediately. You now can click the sym link to view its content.
+				</para>
+
+			</step>
+
+		</procedure>
+
+	</section>
+
+    <section id="sect-User_Guide-Actions-Comment">
+		<title>Comment</title>
+		 <para>
+			This function is used to comment on a document (Note: you cannot vote for a <emphasis role="bold">File Plan</emphasis> document).
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the document that you want to add a comment to.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Collaboration</emphasis> tag to show advanced actions.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/collaboration_comment.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/collaboration_comment.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/commentdocumentbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 .
+				</para>
+				 <para>
+					The <emphasis role="bold">Add Comment</emphasis> form appears:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addcommentform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addcommentform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Add your comment in the <emphasis role="bold">Comment</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis>.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			Comments are shown at the bottom of the document:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/commentdisplay.png" format="PNG" scale="100" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/commentdisplay.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			To view your comment click the <emphasis role="bold">Show Comments</emphasis> link:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/commentview.png" format="PNG" scale="100" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/commentview.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			You can edit your comment by clicking the 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/editicon2.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 icon or delete it by clicking 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/trashicon.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 .
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Edit_documents">
+		<title>Edit documents</title>
+		 <para>
+			There are two ways to edit a document.
+		</para>
+		 <procedure id="proc-User_Guide-Edit_documents-Method_One">
+			<title>Method One</title>
+			 <step>
+				<para>
+					Select the document you want to edit in the left pane
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Actions</emphasis> tab to show the Actions bar.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/actionbareditdocument.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/actionbareditdocument.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editdocumenticon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 in the Action Bars
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			Or:
+		</para>
+		 <procedure id="proc-User_Guide-Edit_documents-Method_Two">
+			<title>Method Two</title>
+			 <step>
+				<para>
+					Select a folder that contains the document you want to edit.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Right-click the document you want to edit and select Edit from the menu.
+				</para>
+				 <para>
+					The <emphasis role="bold">Edit Document</emphasis> form will appear. All information of the selected document will be displayed in this form and ready for you to change except the <emphasis role="bold">Name</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to commit the changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+   <section id="sect-User_Guide-Actions-Export_nodes">
+		<title>Export nodes</title>
+		 <para>
+			Nodes can be exported into either <emphasis role="bold">.xml</emphasis> or <emphasis role="bold">.zip</emphasis> file types.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the node that you want to export
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Admin</emphasis> tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the Action bar to show the <emphasis role="bold">Export Node</emphasis> form:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/exportnodeform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/exportnodeform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <table>
+					<title></title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Fields
+								</entry>
+								 <entry>
+									Details
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									Path to Export
+								</entry>
+								 <entry>
+									The path of the node being exported. This field will be prepopulated.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Format
+								</entry>
+								 <entry>
+									The format of the original node.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Document View
+								</entry>
+								 <entry>
+									Each node is a tag and properties of that node are considered to be elements of that tag.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									System View
+								</entry>
+								 <entry>
+									Each node and each property of that node is included in a different tag.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Zip
+								</entry>
+								 <entry>
+									If this field is checked, the node will be exported as a <emphasis role="bold">.zip</emphasis> file.
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Export</emphasis> and choose a location to save the exported file.
+				</para>
+				 <note>
+					<title>Exporting Versioned nodes</title>
+					 <para>
+						The <emphasis role="bold">Export Node</emphasis> form will offer an <emphasis role="bold">Export version history</emphasis> button if the node being exported, or any of its child nodes, is versioned.
+					</para>
+					 <para>
+						This action exports all of the node's version history.
+					</para>
+
+				</note>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Import_Nodes">
+		<title>Import Nodes</title>
+		 <para>
+			Nodes that are in the <emphasis role="bold">.xml</emphasis> file format can be imported in to the JCR Explorer system.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the location that you want to import the new node to.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Admin</emphasis> tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/importnodebutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 . The <emphasis role="bold">Import Node</emphasis> form appears.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/importnodeform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/importnodeform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Browse</emphasis> next to the <emphasis>Upload File</emphasis> field and navigate to the file you want to import.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/uploadicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to upload the file.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">UUID</emphasis> from the drop down menu:
+				</para>
+				 <variablelist>
+					<varlistentry>
+						<term>Create new</term>
+						 <listitem>
+							<para>
+								A new UUID will be created for the new node.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>Remove existing</term>
+						 <listitem>
+							<para>
+								The new node will be created in the selected path with the UUID it was exported with.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>Replace existing</term>
+						 <listitem>
+							<para>
+								The imported node will replace the existing node and UUID.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>Throw Exception</term>
+						 <listitem>
+							<para>
+								This option will display an alert informing you if you can not import the file.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+
+				</variablelist>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Browse</emphasis> next to the <emphasis>Version history</emphasis> to select a version to import and click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/uploadicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to upload it.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select a format.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Import</emphasis> to import the chosen version of the selected file.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Manage_Actions">
+		<title>Manage Actions</title>
+		 <section id="sect-User_Guide-Manage_Actions-Add_an_action">
+			<title>Add an action</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select the node you want to add an action to.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Admin</emphasis> tab.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click on 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/manageactionsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+					 <para>
+						The <emphasis role="bold">Manage Actions</emphasis> form will appear.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Add Actions</emphasis> tab.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/addactionstab.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/addactionstab.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click on 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/droparrow.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 and select the type of action from the drop down menu
+					</para>
+					 <table>
+						<title></title>
+						 <tgroup cols="2">
+							<thead>
+								<row>
+									<entry>
+										Field
+									</entry>
+									 <entry>
+										Details
+									</entry>
+
+								</row>
+
+							</thead>
+							 <tbody>
+								<row>
+									<entry>
+										exo:action
+									</entry>
+									 <entry>
+										This action is not supported.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										exo:AddMetadataAction
+									</entry>
+									 <entry>
+										This action adds metadata
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										exo:autoVersioning
+									</entry>
+									 <entry>
+										This action automatically adds a version.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										exo:createRSSFeedAction
+									</entry>
+									 <entry>
+										This action creates an RSS file.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										exo:enableVersioning
+									</entry>
+									 <entry>
+										This action enables versioning.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										exo:getMailAction
+									</entry>
+									 <entry>
+										This action fetches mail
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										exo:sendMailAction
+									</entry>
+									 <entry>
+										This action sends mail.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										exo:taxonomy/Action
+									</entry>
+									 <entry>
+										???
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										exo:transformBinaryTo TextAction
+									</entry>
+									 <entry>
+										This action converts <emphasis>.pdf</emphasis> or <emphasis>.doc</emphasis> file types to plain text.
+									</entry>
+
+								</row>
+
+							</tbody>
+
+						</tgroup>
+
+					</table>
+
+				</step>
+				 <step>
+					<para>
+						Complete the required fields in the form for the selected action.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Save</emphasis> to commit the action.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <para>
+				All actions of a node are listed in the <emphasis role="bold">Available Actions</emphasis> tab.
+			</para>
+			 <para>
+				Once an action is added to a node it is automatically added to any child nodes of the selected node.
+			</para>
+			 <note>
+				<title>Actions in menus</title>
+				 <para>
+					Not all actions are listed in a nodes right-click menu. Some will be performed immediately when that action is added.
+				</para>
+
+			</note>
+
+		</section>
+		
+		<section id="sect-User_Guide-Manage_Actions-View_Actions">
+			<title>View Actions</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Open the <emphasis role="bold">Manage Actions</emphasis> form and select the <emphasis role="bold">Available Actions</emphasis> tab.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/viewdetailsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon that corresponds to the action you want to view.
+					</para>
+					 <para>
+						The details will be displayed in the <emphasis role="bold">Action info</emphasis> tab:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/actionsinfotab.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/actionsinfotab.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+		<section id="sect-User_Guide-Manage_Actions-Edit_an_action">
+			<title>Edit an action</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Open the <emphasis role="bold">Manage Actions</emphasis> form and select the <emphasis role="bold">Available Actions</emphasis> tab.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/availableactions.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/availableactions.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/editicon4.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon that corresponds to the action you want to modify.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Edit the properties in the <emphasis role="bold">Actions form</emphasis>:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/editactionform.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/editactionform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Save</emphasis> to commit the changes.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+		<section id="sect-User_Guide-Manage_Actions-Delete_an_action">
+			<title>Delete an action</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Open the <emphasis role="bold">Manage Actions</emphasis> form and select the <emphasis role="bold">Available Actions</emphasis> tab.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/availableactions.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/availableactions.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon that corresponds to the action you want to modify.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">OK</emphasis> on the confirmation dialog box to delete the action of <emphasis role="bold">Cancel</emphasis> to quit.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Manage_Auditing">
+		<title>Manage Auditing</title>
+		 <para>
+			This function logs property changes in nodes.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select a node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the Details view and the <emphasis role="bold">Info</emphasis> tab on the Action bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/manageauditing.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 . The <emphasis role="bold">Activate Auditing</emphasis> message appears.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/auditingactivated.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/auditingactivated.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Activate</emphasis> to activate auditing on the selected node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/manageauditing.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 again to view audit information for the selected node.
+				</para>
+				 <para>
+					The <emphasis role="bold">Auditing Information</emphasis> list appears.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/auditinformation.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/auditinformation.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					If the node has no audit information the form will appear like this:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/noauditinformation.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/noauditinformation.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+    
+    <section id="sect-User_Guide-Actions-Manage_Categories">
+		<title>Manage Categories</title>
+		 <section id="sect-User_Guide-Manage_Categories-Add_a_category_for_a_node">
+			<title>Add a category for a node</title>
+			 <para>
+				You can add categories to document type nodes only:
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select the node that you want to add a category to:
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Admin</emphasis> tab.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click on 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/managecategoriesicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+					 <para>
+						The <emphasis role="bold">Add category</emphasis> form appears.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Select category</emphasis> tab to show the available categories.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/showcategoriestab.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/showcategoriestab.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/greentick.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 to add the corresponding category to the node.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <para>
+				Categories that have been added to a node are listed in the <emphasis role="bold">Referenced categories</emphasis> tab of the <emphasis role="bold">Add categories</emphasis> form.
+			</para>
+			 <para>
+				All nodes belonging to a category can be viewed by doing the following:
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Go to the drive that contains the category you have added. There will be a list of categories available.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the category you want. The documents in that category will be listed.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <note>
+				<title>Copy/pasting nodes</title>
+				 <para>
+					When copy and pasting a node in a drive, a new node with the same content will be created with a different name.
+				</para>
+				 <para>
+					When copy and pasting a node in the category tree, a reference to the original node will be created. This reference is a link rather than a copy. This feature preserves disk space.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/categoryreferencednodes.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/categoryreferencednodes.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</note>
+
+		</section>
+		
+		<section id="sect-User_Guide-Manage_Categories-Delete_a_Category">
+			<title>Delete a Category</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select a categorized node.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/managecategoriesicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Referenced categories</emphasis> tab.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 that corresponds to the category you want to delete.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+
+	</section>
+
+   <section id="sect-User_Guide-Actions-ShowHide_Content">
+		<title>Show/Hide Content</title>
+		 <para>
+			Nodes can be hidden or revealed as desired.
+		</para>
+		 <procedure id="proc-User_Guide-ShowHide_Content-Hide_a_Node">
+			<title>Hide a Node</title>
+			 <step>
+				<para>
+					Select the node you want to hide.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Admin</emphasis> tab.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/hideshowcontentactionbar.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/hideshowcontentactionbar.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/hideshowcontentbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the Action bar to hide the node.
+				</para>
+				 <para>
+					A message box will appear with a confirmation that the node has been hidden.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Hide_a_Node-Show_a_Node">
+				<title>Show a Node</title>
+				 <para>
+					To reveal a hidden node, click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/hideshowcontentbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 again.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Manage_Publications">
+		<title>Manage Publications</title>
+		 <para>
+			This function is used to manage node publication.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select a node (on the left or right panel) which you want to manage the publication.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Admin</emphasis> tab to show administration actions in the <emphasis role="bold">Action</emphasis> bar:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/admintab.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/admintab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/managepublicationsbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the actions bar.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/managepublicationstab.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/managepublicationstab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The <emphasis role="bold">Manage Publications</emphasis> form appears:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/managepublicationsform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/managepublicationsform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The <emphasis role="bold">Publication status</emphasis> tab displays some basic information and the current state of the selected node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewdetailsbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to view the content of the node or click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/restoreversionicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to restore a version (refer to <xref linkend="sect-User_Guide-Actions-Manage_Versions" /> for information about versioning)
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Publication History</emphasis> tab to view the nodes publication history.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/publicationhistorytab.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/publicationhistorytab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click save to commit any changes made.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+    
+   <section id="sect-User_Guide-Actions-Manage_Relations">
+		<title>Manage Relations</title>
+		 <para>
+			You can use this function to create relationships between nodes
+		</para>
+		 <section id="sect-User_Guide-Manage_Relations-Add_a_relation">
+			<title>Add a relation</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select the node you want to add a relations to.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Admin</emphasis> tab.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/managerelationsicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+					 <para>
+						The <emphasis role="bold">Add relation</emphasis> form appears.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Select relation</emphasis> tab to see a list of other documents.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/greentick.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 that corresponds to the document(s) that relate to the document selected in the <emphasis role="bold">Step 1</emphasis>.
+					</para>
+					 <para>
+						Documents linked to the original via a relation will be listed in the <emphasis role="bold">Relation List</emphasis> tab.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <note>
+				<title>Relation Rules</title>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							Relations can only be added to document and uploaded file node types
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							A node cannot have a relation to itself.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</note>
+
+		</section>
+
+      <section id="sect-User_Guide-Manage_Relations-Delete_a_relation">
+			<title>Delete a relation</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select a node that has links to related documents.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click on 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/managerelationsicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Relation List</emphasis> to view the relations for the selected node.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 corresponding to the relation you want to remove.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">OK</emphasis> on the confirmation message to delete the relation.
+					</para>
+					 <para>
+						The related document will be removed from the list.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+      
+      <section id="sect-User_Guide-Manage_Relations-View_Relations">
+			<title>View Relations</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select a node that has links to related documents.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the relation button on the side panel:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/relationsbutton.png" format="PNG" scale="" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/relationsbutton.png" format="PNG" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						All nodes related to the selected node will be displayed in the left pane:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/relationslist.png" format="PNG" scale="" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/relationslist.png" format="PNG" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click on the name of the related node to view the document.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Manage_Versions">
+		<title>Manage Versions</title>
+		 <section id="sect-User_Guide-Manage_Versions-Add_versions_for_nodes">
+			<title>Add versions for nodes</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select a node to add a version to.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Admin</emphasis> tab to show available administration actions:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/admintab.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/admintab.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/manageversionsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+					 <para>
+						The following message box will appear:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/activateversionmessage.png" format="PNG" scale="" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/activateversionmessage.png" format="PNG" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Activate</emphasis> to activate a version for the node.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Right click the selected node and select <emphasis role="bold">CheckIn</emphasis> from the menu:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/versionmenu.png" format="PNG" scale="" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/versionmenu.png" format="PNG" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/manageversionsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 again to open the <emphasis role="bold">Version Info</emphasis> window.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/versioninfo.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/versioninfo.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						The node selected in step one has been added as the <emphasis>Base version</emphasis>.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Right click the node again and select <emphasis role="bold">Check out</emphasis> to obtain a version of this node.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <note>
+				<title></title>
+				 <para>
+					No actions (copy/cut/rename) can be taken on a node in <emphasis role="bold">Check In</emphasis> status. You must check it out before you can perform any actions on it.
+				</para>
+				 <para>
+					If you want to add more versions for a node, right click selected node above and select <emphasis role="bold">Check In</emphasis> and then <emphasis role="bold">Check Out</emphasis>
+				</para>
+
+			</note>
+
+		</section>
+		
+		<section id="sect-User_Guide-Manage_Versions-Adding_and_Removing_labels_for_Versions">
+			<title>Adding and Removing labels for Versions</title>
+			 <procedure id="proc-User_Guide-Adding_and_Removing_labels_for_Versions-Adding_a_label">
+				<title>Adding a label</title>
+				 <step>
+					<para>
+						Select a versioned node.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/manageversionsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/versionplusicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 on the <emphasis role="bold">Version Info</emphasis> window to show the <emphasis role="bold">Add label</emphasis> field under the version list.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/addlabelform.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/addlabelform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Enter a value into the <emphasis role="bold">Label</emphasis> field.
+					</para>
+					 <para>
+						The label must be unique and can not use special characters such as @, #, $.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Save</emphasis> to submit the new label.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <procedure id="proc-User_Guide-Adding_and_Removing_labels_for_Versions-Removing_a_label">
+				<title>Removing a label</title>
+				 <step>
+					<para>
+						Select a versioned node that has at least one label.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/manageversionsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/versionminusicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 on the <emphasis role="bold">Version Info</emphasis> window to show the <emphasis role="bold">Remove label</emphasis> field under the version list.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/removelabelform.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/removelabelform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Select the label you want to remove from the drop down menu:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/labellist.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/labellist.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click the <emphasis role="bold">Remove</emphasis> button to remove the selected label.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+		 <section id="sect-User_Guide-Manage_Versions-View_versions">
+			<title>View versions</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select a versioned node.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/manageversionsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/viewdetailsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 to see the current versions of the selected node.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/versionviewlist.png" format="PNG" scale="90" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/versionviewlist.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+
+			</procedure>
+			
+			 <note>
+				<title>Folder Nodes</title>
+				 <para>
+					Version viewing is not supported on folder nodes.
+				</para>
+				 <para>
+					If you click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewdetailsbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 while the selected node is a folder, a message to this effect will appear.
+				</para>
+
+			</note>
+
+		</section>
+		
+		<section id="sect-User_Guide-Manage_Versions-Restore_versions">
+			<title>Restore versions</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select a node that has at least two versions stored.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/manageversionsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/versionlist.png" format="PNG" scale="100" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/versionlist.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Select the version that you wish to restore as the base version.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/restoreversionicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 to restore the selected version
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+		<section id="sect-User_Guide-Manage_Versions-Delete_versions">
+			<title>Delete versions</title>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Select a node with at least two versions:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/versionlist.png" format="PNG" scale="90" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/versionlist.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+
+				</step>
+				 <step>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/manageversionsbutton.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 .
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon that corresponding to the version you want to delete.
+					</para>
+					 <para>
+						A confirmation message will appear.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">OK</emphasis> to delete the version or <emphasis role="bold">Cancel</emphasis> to quit.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <note>
+				<title>Base Versions</title>
+				 <para>
+					You cannot delete a base version.
+				</para>
+
+			</note>
+
+		</section>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Multi_Language">
+		<title>Multi Language</title>
+		 <para>
+			This function is used to support users to add multiple languages for a document. Each document can be displayed in many languages.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select a document that you want to add language(s).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Collaboration</emphasis> tab to show some advanced actions on the Action bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/localisedcontents.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the <emphasis role="bold">Action</emphasis> bar.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addlanguage.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addlanguage.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The <emphasis role="bold">Multi-language</emphasis> form will appear.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/multi-language.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/multi-language.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The <emphasis role="bold">View language</emphasis> tab contains a list of all languages. The default language for the document will be automatically populated.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Add language</emphasis> tab. This tab will be displayed differently, depending on what file you selected. However, the area where you can add languages for document is the same. The below illustration shows the <emphasis role="bold">Add language</emphasis> tab for a <emphasis role="bold">Sample node</emphasis> file:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addlanguageform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addlanguageform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Select a language you want to add from the <emphasis role="bold">Language</emphasis> drop-down list.
+				</para>
+				 <para>
+					If the selected language has not been added for current document, the content field will be blank.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/selectlanguage.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/selectlanguage.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					Select the <emphasis role="bold">Set default</emphasis> checkbox if you want to set your selected language as default language.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis>, you will be returned to the <emphasis role="bold">View language</emphasis>tab. Your selected language is now added to the <emphasis role="bold">Language</emphasis> field:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/newlanguage.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/newlanguage.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					You can view this document in new added language by selecting the language from the language drop-down list then click the <emphasis role="bold">View </emphasis> button.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			To view the languages list of a document, do the following:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select a document that you want to view the language list then click the <emphasis role="bold">Relation</emphasis> button on side panel:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/relationbutton.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/relationbutton.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					The list of language (and all related documents) will be displayed on the left panel:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/languagelist.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/languagelist.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					You can view the document in the new language by clicking the corresponding link in <emphasis role="bold">Languages List</emphasis>.
+				</para>
+				 <para>
+					For more details about <emphasis role="bold">Relations</emphasis>, refer to <xref linkend="sect-User_Guide-Manage_Relations-View_Relations" />.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title>Language Notes</title>
+			 <para>
+				You cannot add multiple languages for a <emphasis role="bold">File Plan</emphasis>.
+			</para>
+			 <para>
+				When a document is a sub-node of <emphasis role="bold">File Plan</emphasis>, you also cannot add language to it.
+			</para>
+
+		</note>
+
+	</section>
+
+   <section id="sect-User_Guide-Actions-Overload_Thumbnails">
+		<title>Overload Thumbnails</title>
+		 <para>
+			You can 'overload' a thumbnail image for a folder. Overloading allows a folder to be represented by a thumbnail image, rather than a folder icon.
+		</para>
+		 <para>
+			To overload a thumbnail:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the folder you wish to overload with a thumbnail image.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/overloadthumbnail.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the Action Bar.
+				</para>
+				 <para>
+					The <emphasis role="bold">Add thumbnail image</emphasis> form appears:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addthumbnail.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addthumbnail.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Browse...</emphasis> button to select the image to use as the display icon for the selected folder.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to commit the change. The node will be sotred in an <emphasis>exo:thuumbnails</emphasis> folder.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/exothumbnailsfolder.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/exothumbnailsfolder.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Approve_Content">
+		<title>Approve Content</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Publish_Content">
+		<title>Publish Content</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Request_Approval">
+		<title>Request Approval</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Show_Drives">
+		<title>Show Drives</title>
+		 <para>
+			This function enables you to show or hide all the drives in Sites Explorer.
+		</para>
+		 <para>
+			To show drives, click 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/showhidedrives.png" format="PNG" />
+				</imageobject>
+			</inlinemediaobject>
+			 on the action bar.
+		</para>
+		 <para>
+			To hide drives, click 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/showhidedrives.png" format="PNG" />
+				</imageobject>
+			</inlinemediaobject>
+			 on the action bar again.
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Show_JCR_Structure">
+		<title>Show JCR Structure</title>
+		 <para>
+			This function allows you to view nodes in documents in a tree structure.
+		</para>
+		 <procedure>
+			<step id="step-User_Guide-Show_JCR_Structure-Show_the_JCR_structure">
+				<title>Show the JCR structure</title>
+				 <para>
+					Select a document.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Info</emphasis> tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/jcrstructure.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 .
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/discsave.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon to save the view.
+				</para>
+				 <para>
+					The following information message will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/savemessage.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/savemessage.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step id="step-User_Guide-Show_JCR_Structure-Hide_the_JCR_structure">
+				<title>Hide the JCR structure</title>
+				 <para>
+					Select a document that is showing the JCR structure.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/jcrstructure.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 again.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Tag_Documents">
+		<title>Tag Documents</title>
+		 <para>
+			A tag is a (relevant) keyword or term associated with or assigned to a piece of information (a picture, a geographic map, a blog entry, a video clip etc.), thus describing the item and enabling keyword-based classification and search of information.
+		</para>
+		 <procedure id="proc-User_Guide-Tag_Documents-Add_a_new_tag_for_a_document">
+			<title>Add a new tag for a document</title>
+			 <step>
+				<para>
+					Select a document that you want to add tags.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Chose the <emphasis role="bold">Collaboration</emphasis> tab then click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/taggingdocument.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the Action bar. The <emphasis role="bold">Tag Manager</emphasis> will be displayed:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/tagmanager.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/tagmanager.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <table>
+					<title></title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Fields
+								</entry>
+								 <entry>
+									Details
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									Tag names
+								</entry>
+								 <entry>
+									The tag names that users want to add tags for documents.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Tag Scopes
+								</entry>
+								 <entry>
+									To classify tags. There are four tag types: private, public, group, site. Currently, the two first types are activated(Private: a user who create tags can view and edit tags; public: all users can view and edit tags).
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Linked tags
+								</entry>
+								 <entry>
+									To list all tags of a document after you click the Add Tags button.
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+
+			</step>
+			 <step>
+				<para>
+					Input a value for the <emphasis role="bold">Tag names</emphasis> field. A document can be added several tags at a time. To do that, input all tag names in the <emphasis role="bold">Tag names</emphasis> field and separate by “,”.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select a value for the <emphasis role="bold">Tag Scopes</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Add Tags</emphasis> to accept, or Close to quit. Only you can see this tag in this document.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to delete tags.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Upload_files_into_folders">
+		<title>Upload files into folders</title>
+		 <para>
+			This function supports you to upload a file from your machine. All file types can be uploaded. The uploaded file's name must not include some special characters (! @ $ % &amp; + [ ])
+		</para>
+		 <procedure id="proc-User_Guide-Upload_files_into_folders-To_upload_file_into_folder_do_as_follows">
+			<title>To upload file into folder, do as follows:</title>
+			 <step>
+				<para>
+					Select the folder that you want to upload a file into from the left/right panel
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the Actions tab to show some actions on the Action bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/uploadicon2.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the Action bar to open the Upload a file form:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/uploadfilewindow.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/uploadfilewindow.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Browse and select a file on your computer by clicking the <emphasis role="bold">Browse</emphasis>... button. The selected filename will be displayed in the <emphasis role="bold">Select a file</emphasis> field.
+				</para>
+				 <para>
+					If you want to upload multi files at the same time, click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to open more forms to upload more files:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/multipleuploadform.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/multipleuploadform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 enables users to delete the upload file form.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					You can change the uploaded file by clicking the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon and select <emphasis role="bold">Browse</emphasis>... again to select another one.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					By default, the name of the uploaded file will be kept as original but if you want to change, you can type the new name in the Name field, this field is not required. The new name must not contain special characters: ! @ $ % &amp; + [ ].
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					You can click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon next to the List Taxonomy field to add categories for this file:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addcategories.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addcategories.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Select categories by clicking the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/greentick.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon. Click '+ ' to open child nodes of categories.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addcategoriesexpanded.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addcategoriesexpanded.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <note>
+					<title></title>
+					 <para>
+						You can add more categories for a file by clicking the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/addplusicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon again to open the Add Categories form.
+					</para>
+					 <para>
+						Click the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon to delete category in <emphasis role="bold">Upload a file</emphasis> form.
+					</para>
+					 <para>
+						You also manage categories which added for files by using the <emphasis role="bold">Manage Categories</emphasis> function. See <xref linkend="sect-User_Guide-Actions-Manage_Categories" />.
+					</para>
+
+				</note>
+
+			</step>
+			 <step>
+				<para>
+					Complete uploading file by clicking Save.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					After being saved, the main information of the uploaded file will be displayed:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/uploadedfileview.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/uploadedfileview.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon4.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon to see more details of its external metadata information. The <emphasis role="bold"> List external metadatas</emphasis> tab will be enable and you can input value in this tab.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/externalmetadata.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/externalmetadata.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click Save to accept changes or Cancel to quit without any changes.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Data can be added for the uploaded file. Check the checkbox, then click <emphasis role="bold">Add</emphasis>, or <emphasis role="bold">Cancel</emphasis> to quit without adding anything.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addexternalmetadata.png" format="PNG" scale="100" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addexternalmetadata.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					New metadata is displayed in External Metadatas list and you also can edit it by clicking 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon4.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 .
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click Close to quit the Uploaded information form.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					After being uploaded, the tree is displayed in the left panel:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/uploadtree.png" format="PNG" scale="100" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/uploadtree.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+				 <note>
+					<title>File Size Limits</title>
+					 <para>
+						The size of the uploaded file depends on the size limit of the uploaded file that you set up in the 'Edit' mode of Sites Explorer. If your file size exceeds the limit, a pop-up message will appears to alert you.
+					</para>
+
+				</note>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			If you want to upload multi files at the same time, click 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/addplusicon.png" format="PNG" />
+				</imageobject>
+			</inlinemediaobject>
+			 to open more forms to upload more files:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/uploadmulti.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/uploadmulti.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			Click the <emphasis role="bold">Browse</emphasis> button to upload files that you want to. The 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/trashicon.png" format="PNG" />
+				</imageobject>
+			</inlinemediaobject>
+			 enables users to delete the upload file form.
+		</para>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Actions-View_Metadata">
+		<title>View Metadata</title>
+		 <para>
+			This function allows you to view the metadata attached to File nodes, Podcast nodes, File Plan child nodes and uploaded file nodes (<emphasis role="bold">nt:file</emphasis> nodes)
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select an appropriate (<emphasis role="bold">nt:file</emphasis>) node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Info</emphasis> tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewmetadatasbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 . The <emphasis role="bold">View Metadata</emphasis> form appears:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/viewmetadatasform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/viewmetadatasform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the <emphasis role="bold">Add/Edit</emphasis> button at the bottom of the <emphasis role="bold">View Metadata</emphasis> form to add metadata.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Complete the desired fields in the <emphasis role="bold">Add/Edit Properties</emphasis> form. Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to add further metadata.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/addeditpropertiesform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/addeditpropertiesform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to commit the new metadata values.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-View_Node_Types">
+		<title>View Node Types</title>
+		 <para>
+			To view detailed information about a node:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select a node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Info</emphasis> tab to show contextual actions in the <emphasis role="bold">Action</emphasis> bar.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/viewnodetypes.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/viewnodetypes.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewnodetypesbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to view detailed information about the selected node.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/nodetypesinformation.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/nodetypesinformation.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the tabs at the top of the form to view categorized information.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-View_Permissions">
+		<title>View Permissions</title>
+		 <para>
+			This function allows an administrator to manage the permissions for nodes.
+		</para>
+		 <procedure id="proc-User_Guide-View_Permissions-View_Permissions">
+			<title>View Permissions</title>
+			 <step>
+				<para>
+					Select a node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Info</emphasis> tab on the Actions bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewpermissionsbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 . The <emphasis role="bold">Permissions Management</emphasis> form appears.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/permissionsmanagementform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/permissionsmanagementform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			With the <emphasis role="bold">Permissions Management</emphasis> form open you can perform the following actions:
+		</para>
+		 <procedure id="proc-User_Guide-View_Permissions-Add_Permissions">
+			<title>Add Permissions</title>
+			 <step id="step-User_Guide-Add_Permissions-To_add_permission_for_specific_users">
+				<title>To add permission for specific users</title>
+				 <para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/usericon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 button next to the <emphasis role="bold">User Or Group</emphasis> field.
+				</para>
+				 <para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/greentick.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 beside the users you want to grant permissions to.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_Permissions-To_select_users_from_a_specific_group">
+				<title>To select users from a specific group</title>
+				 <para>
+					Enter a group name in the <emphasis role="bold">Group</emphasis> field at the top of the form (for example; <emphasis role="bold">/platform/users</emphasis>). All users in the nominated group will be displayed.
+				</para>
+				 <para>
+					Or;
+				</para>
+				 <para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon beside the <emphasis role="bold">Group</emphasis> field to open a form that lists groups and their sub-groups. Select a sub-group to add all users in that sub-group.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/groupssubgroups.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/groupssubgroups.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step id="step-User_Guide-Add_Permissions-To_search_for_a_user">
+				<title>To search for a user</title>
+				 <para>
+					Select an information parameter (User Name, First Name, Last Name, Email) from the drop down menu in the other field at the top of the page and enter the information into the text box. Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to search for users that match that information.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_Permissions-To_add_permissions_based_on_memberships">
+				<title>To add permissions based on memberships</title>
+				 <para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/userpermissionbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon next to the <emphasis role="bold">User Or Group</emphasis> field.
+				</para>
+				 <para>
+					The <emphasis role="bold">Select memebership</emphasis> form that appears allows you to select users by membership. Select a group on the left pane and then select membership types on the right.
+				</para>
+
+			</step>
+			 <step id="step-User_Guide-Add_Permissions-To_add_all_usersgroups_with_read_access">
+				<title>To add all users/groups with read access</title>
+				 <para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/grouppermission.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon next to the <emphasis role="bold">User Or Group</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the permission you want to grant the chosen users or groups by ticking the corresponding check boxes beside the rights you want to add.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to commit the changes. The new permissions will appear in the permissions table above.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-View_Permissions-Edit_Permissions">
+			<title>Edit Permissions</title>
+			 <step>
+				<para>
+					Select the permission of a user or a group in the table of list permissions.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon4.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Change the permissions as desired.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to commit the changed permissions.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-View_Permissions-Delete_Permissions">
+			<title>Delete Permissions</title>
+			 <step>
+				<para>
+					Select the permission of a user or a group in the table of list permissions.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">OK</emphasis> in the confirmation message to remove the permission or <emphasis role="bold">Cancel</emphasis> to quit.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-View_Properties">
+		<title>View Properties</title>
+		 <para>
+			This function allows users to review all the properties and values of a node. It can also nbe used to add values to a node.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the node that you want to review or add values to.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Admin</emphasis> tab to show available actions in the <emphasis role="bold">Action</emphasis> bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewnodepropertiesbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 button to show the <emphasis role="bold">Properties Management</emphasis> form:
+				</para>
+				 <para>
+					This form has two tabs:
+				</para>
+				 <variablelist>
+					<varlistentry>
+						<term>Properties</term>
+						 <listitem>
+							<para>
+								This tab displays all properties and values for the selected node.
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/propertiesmanagement.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/propertiesmanagement.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								Select this tab to review the properties for the selcted node without making any changes.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>Add New Property</term>
+						 <listitem>
+							<para>
+								This tab contains fields to add new properties to the selected node.
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/addnewproperties.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/addnewproperties.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								Select this node if you want to make changes to the properties of the selected node.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+
+				</variablelist>
+
+			</step>
+			 <step id="step-User_Guide-View_Properties-To_add_new_properties">
+				<title>To add new properties:</title>
+				 <para>
+					Select the namespace for the property.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter a name for the new property in the <emphasis role="bold">Name</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select a <emphasis role="bold">Type</emphasis> for the property from the drop down menu:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/newpropertytype.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/newpropertytype.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Enter a value for the property in the <emphasis role="bold">Value</emphasis>.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					To add multiple new values, click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 and repeat the above steps.
+				</para>
+				 <para>
+					To remove a value, click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 .
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to commit the new values or <emphasis role="bold">Reset</emphasis> to clear any modified fields.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After you commit new properties you will be returned to the <emphasis role="bold">Properties</emphasis> tab. The newly added values will be displayed.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/newpropertiesmanagement.png" format="PNG" scale="" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/newpropertiesmanagement.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			In this form you can edit a property by clicking 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/editicon4.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 or delete it by clicking 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/trashicon.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-View_References">
+		<title>View References</title>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select a categorized node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Info</emphasis> tab to show the <emphasis role="bold">View References</emphasis> action.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/viewreferences.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/viewreferences.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Select a category.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewreferencesbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the action bar to show the <emphasis role="bold">References List Form</emphasis>
+				</para>
+				 <para>
+					This form lists the path to each document that is also tagged in the selected category.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/referencelistform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/referencelistform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-View_Relations">
+		<title>View Relations</title>
+		 <para>
+			This function shows documents related to a selected node.
+		</para>
+		 <procedure>
+			<step id="step-User_Guide-View_Relations-To_View_Relations">
+				<title>To View Relations</title>
+				 <para>
+					Select a node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the <emphasis role="bold">Info</emphasis> tab on the Action bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/showhiderelations.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 . Documents related to the selected node will be shown in the sidebar.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/relationssidebar.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/relationssidebar.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					If the node does not have any related documents the message <emphasis role="bold">No related document</emphasis> will appear instead.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/norelateddocument.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/norelateddocument.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step id="step-User_Guide-View_Relations-To_Hide_Relations">
+				<title>To Hide Relations</title>
+				 <para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/showhiderelations.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 again to hide relations.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions-Vote">
+		<title>Vote</title>
+		 <para>
+			This function is used to vote for a document (Note: you cannot vote for a <emphasis role="bold">File Plan</emphasis> document).
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Open the document you want to vote for.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the <emphasis role="bold">Collaboration</emphasis> tag to show advanced actions.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/votefordocument.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 .
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/collaboration_vote.png" format="PNG" scale="100" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/collaboration_vote.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The <emphasis role="bold">Vote Document</emphasis> form will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/votedocumentform.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/votedocumentform.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Rate the document by clicking on the appropriate star level for your vote:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/votestars.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/votestars.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After a vote has been added, the rating will appear at the bottom of the document:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/voteinfo.png" format="PNG" scale="100" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/voteinfo.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Actions-Watch_Documents">
+		<title>Watch Documents</title>
+		 <para>
+			By using this function, whenever a change is made on the document, there will be a notification message sent to your email address. To receive that email, you must configure in your mail server.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the document you want to watch.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Chose the <emphasis role="bold">Collaboration</emphasis> tab then click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/watchicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 from the action bar.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/watchunwatchscreen.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/watchunwatchscreen.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					The <emphasis role="bold">Watching Document</emphasis> form will appear. Click the <emphasis role="bold">Watch</emphasis> button to finish.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/watchingdocumentform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/watchingdocumentform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			To stop watching a document, select the document and click 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/watchicon.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 .
+		</para>
+		 <para>
+			A message will appeared confirming the action.
+		</para>
+
+	</section>
+
+</section>
+
+

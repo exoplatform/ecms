@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Content_Presentation_Manager">
-	<!--  This document was created with Syntext Serna Free.  --> <title>Content Presentation Manager</title>
+	<!--  This document was created with Syntext Serna Free.  --><!--   This document was created with Syntext Serna Free.   --> <title>Content Presentation Manager</title>
 	 <para>
 
 	</para>
@@ -351,6 +351,7 @@
 						<imageobject>
 							<imagedata fileref="images/trashicon.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 					 corresponding to the template that you want to discard.
 				</para>
@@ -664,277 +665,277 @@
 
 		</procedure>
 		
-
-	</section>
-	
-	 <section id="sect-User_Guide-Content_Presentation_Manager-ECM_Templates">
-		<title>ECM Templates</title>
-		 <figure id="figu-User_Guide-ECM_Templates-ECM_Templates">
+		 <section id="sect-User_Guide-Manage_Views-ECM_Templates">
 			<title>ECM Templates</title>
-			 <mediaobject>
-				<imageobject>
-					<imagedata fileref="images/ecmtemplates.png" format="PNG" width="444" />
-				</imageobject>
+			 <figure id="figu-User_Guide-ECM_Templates-ECM_Templates">
+				<title>ECM Templates</title>
+				 <mediaobject>
+					<imageobject>
+						<imagedata fileref="images/ecmtemplates.png" format="PNG" width="444" />
+					</imageobject>
 
-			</mediaobject>
+				</mediaobject>
 
-		</figure>
-		 <procedure id="proc-User_Guide-ECM_Templates-Add_a_new_ECM_Template">
-			<title>Add a new ECM Template</title>
-			 <step>
-				<para>
-					Select the ECM Templates tab.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click the <guibutton>Add</guibutton> button to open the Add ECM Template form.
-				</para>
-				 <figure id="figu-User_Guide-Add_a_new_ECM_Template-The_Add_ECM_Template_form">
-					<title>The Add ECM Template form</title>
-					 <mediaobject>
-						<imageobject>
-							<imagedata fileref="images/addecmtemplate.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</figure>
-
-			</step>
-			 <step>
-				<para>
-					Input the content of the template in the "Content" field.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Input a name for the template in the "Name" field.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Select a type for the template in the "Template Type" field.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <guibutton>Save</guibutton> to accept adding a new template, or click <guibutton>Reset</guibutton> to change values, or <guibutton>Cancel</guibutton> to quit without any changes.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-		 <procedure id="proc-User_Guide-ECM_Templates-Editing_a_Template">
-			<title>Editing a Template</title>
-			 <step>
-				<para>
-					Click the <guibutton>Pencil</guibutton> icon next to the template you want to edit.
-				</para>
-				 <figure id="figu-User_Guide-Editing_a_Template-Editing_an_ECM_Template_Form">
-					<title>Editing an ECM Template Form</title>
-					 <mediaobject>
-						<imageobject>
-							<imagedata fileref="images/editecmtemplate.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</figure>
-
-			</step>
-			 <step>
-				<para>
-					Change the current template's properties.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <guibutton>Save</guibutton> to accept all changes, or <guibutton>Cancel</guibutton> to quit without any changes.
-				</para>
-				 <note>
+			</figure>
+			 <procedure id="proc-User_Guide-ECM_Templates-Add_a_new_ECM_Template">
+				<title>Add a new ECM Template</title>
+				 <step>
 					<para>
-						You can not edit the template name.
-					</para>
-					 <para>
-						If you tick the 'Enable Version' checkbox, this template will automatically increase to 1 version after you have clicked Save. It is displayed at the 'Base version' column in 'ECM template' tab.
-					</para>
-					 <para>
-						If the template has at least 2 versions, in the 'Edit ECM Template' form, it displays the Restore button that allows restoring the template version.
+						Select the ECM Templates tab.
 					</para>
 
-				</note>
-
-			</step>
-
-		</procedure>
-		
-		 <procedure id="proc-User_Guide-ECM_Templates-Delete_a_Template">
-			<title>Delete a Template</title>
-			 <step>
-				<para>
-					Click the <guibutton>Trash</guibutton> icon corresponding with the template you want to edit. A confirmation message will appear.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <guibutton>Ok</guibutton> to accept deleting this template, or <guibutton>Cancel</guibutton> to discard this action.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-
-	</section>
-	
-	 <section id="sect-User_Guide-Content_Presentation_Manager-BC_Templates">
-		<title>BC Templates</title>
-		 <figure id="figu-User_Guide-BC_Templates-BC_Templates_form">
-			<title>BC Templates form</title>
-			 <mediaobject>
-				<imageobject>
-					<imagedata fileref="images/bctemplatesform.png" format="PNG" width="444" />
-				</imageobject>
-
-			</mediaobject>
-
-		</figure>
-		 <procedure id="proc-User_Guide-BC_Templates-Adding_a_New_Template">
-			<title>Adding a New Template</title>
-			 <step>
-				<para>
-					Click <guibutton>Add</guibutton> to open the Add BC Template form.
-				</para>
-				 <figure id="figu-User_Guide-Adding_a_New_Template-The_Add_BC_Template_form">
-					<title>The Add BC Template form</title>
-					 <mediaobject>
-						<imageobject>
-							<imagedata fileref="images/addbctemplateform.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</figure>
-
-			</step>
-			 <step>
-				<para>
-					Input the content for the template in the Content textbox. (*Required).
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Input the name for the template in the Name field. (*Required).
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Select the template type from the dropdown box in the Template Type form.
-				</para>
-				 <figure id="figu-User_Guide-Adding_a_New_Template-Dropdown_Box">
-					<title>Dropdown Box</title>
-					 <mediaobject>
-						<imageobject>
-							<imagedata fileref="images/templatetypedropdownbox.png" format="PNG" />
-						</imageobject>
-
-					</mediaobject>
-
-				</figure>
-				 <note>
+				</step>
+				 <step>
 					<para>
-						The name must be unique.
+						Click the <guibutton>Add</guibutton> button to open the Add ECM Template form.
 					</para>
-					 <para>
-						The name must not contain special characters like !,@,#,$,%,&amp;,*,(,).
-					</para>
+					 <figure id="figu-User_Guide-Add_a_new_ECM_Template-The_Add_ECM_Template_form">
+						<title>The Add ECM Template form</title>
+						 <mediaobject>
+							<imageobject>
+								<imagedata fileref="images/addecmtemplate.png" format="PNG" width="444" />
+							</imageobject>
 
-				</note>
+						</mediaobject>
 
-			</step>
-			 <step>
-				<para>
-					Click <guibutton>Save</guibutton> to complete adding a new template.
-				</para>
+					</figure>
 
-			</step>
-
-		</procedure>
-		
-		 <procedure id="proc-User_Guide-BC_Templates-Edit_a_BC_Template">
-			<title>Edit a BC Template</title>
-			 <step>
-				<para>
-					Click the <guibutton>Pencil</guibutton> icon on a template that you want to edit.
-				</para>
-				 <figure id="figu-User_Guide-Edit_a_BC_Template-The_Edit_BC_Template_Form">
-					<title>The Edit BC Template Form</title>
-					 <mediaobject>
-						<imageobject>
-							<imagedata fileref="images/editbctemplateform.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</figure>
-
-			</step>
-			 <step>
-				<para>
-					Change the current template's properties.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <guibutton>Save</guibutton> to accept all changes, or <guibutton>Cancel</guibutton> to quit without any changes.
-				</para>
-				 <note>
+				</step>
+				 <step>
 					<para>
-						You can not edit the template name.
-					</para>
-					 <para>
-						You can not edit the template type.
-					</para>
-					 <para>
-						If you tick the 'Enable Version' checkbox, this template will automatically increase by 1 version after you have clicked Save. It is displayed at the 'Base Version' column in ECM Template tab.
-					</para>
-					 <para>
-						If the template has at least 2 versions, in the 'Edit ECM Template' form, it displays the Restore button that allows restoring the template version.
+						Input the content of the template in the "Content" field.
 					</para>
 
-				</note>
+				</step>
+				 <step>
+					<para>
+						Input a name for the template in the "Name" field.
+					</para>
 
-			</step>
+				</step>
+				 <step>
+					<para>
+						Select a type for the template in the "Template Type" field.
+					</para>
 
-		</procedure>
+				</step>
+				 <step>
+					<para>
+						Click <guibutton>Save</guibutton> to accept adding a new template, or click <guibutton>Reset</guibutton> to change values, or <guibutton>Cancel</guibutton> to quit without any changes.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <procedure id="proc-User_Guide-ECM_Templates-Editing_a_Template">
+				<title>Editing a Template</title>
+				 <step>
+					<para>
+						Click the <guibutton>Pencil</guibutton> icon next to the template you want to edit.
+					</para>
+					 <figure id="figu-User_Guide-Editing_a_Template-Editing_an_ECM_Template_Form">
+						<title>Editing an ECM Template Form</title>
+						 <mediaobject>
+							<imageobject>
+								<imagedata fileref="images/editecmtemplate.png" format="PNG" width="444" />
+							</imageobject>
+
+						</mediaobject>
+
+					</figure>
+
+				</step>
+				 <step>
+					<para>
+						Change the current template's properties.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <guibutton>Save</guibutton> to accept all changes, or <guibutton>Cancel</guibutton> to quit without any changes.
+					</para>
+					 <note>
+						<para>
+							You can not edit the template name.
+						</para>
+						 <para>
+							If you tick the 'Enable Version' checkbox, this template will automatically increase to 1 version after you have clicked Save. It is displayed at the 'Base version' column in 'ECM template' tab.
+						</para>
+						 <para>
+							If the template has at least 2 versions, in the 'Edit ECM Template' form, it displays the Restore button that allows restoring the template version.
+						</para>
+
+					</note>
+
+				</step>
+
+			</procedure>
+			
+			 <procedure id="proc-User_Guide-ECM_Templates-Delete_a_Template">
+				<title>Delete a Template</title>
+				 <step>
+					<para>
+						Click the <guibutton>Trash</guibutton> icon corresponding with the template you want to edit. A confirmation message will appear.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <guibutton>Ok</guibutton> to accept deleting this template, or <guibutton>Cancel</guibutton> to discard this action.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
 		
-		 <procedure id="proc-User_Guide-BC_Templates-Delete_a_Template">
-			<title>Delete a Template</title>
-			 <step>
-				<para>
-					Click the <guibutton>Trash</guibutton> icon corresponding with the template you want to edit. A confirmation message will appear.
-				</para>
+		 <section id="sect-User_Guide-Manage_Views-BC_Templates">
+			<title>BC Templates</title>
+			 <figure id="figu-User_Guide-BC_Templates-BC_Templates_form">
+				<title>BC Templates form</title>
+				 <mediaobject>
+					<imageobject>
+						<imagedata fileref="images/bctemplatesform.png" format="PNG" width="444" />
+					</imageobject>
 
-			</step>
-			 <step>
-				<para>
-					Click <guibutton>Ok</guibutton> to accept deleting the template, or <guibutton>Cancel</guibutton> to discard this action.
-				</para>
+				</mediaobject>
 
-			</step>
+			</figure>
+			 <procedure id="proc-User_Guide-BC_Templates-Adding_a_New_Template">
+				<title>Adding a New Template</title>
+				 <step>
+					<para>
+						Click <guibutton>Add</guibutton> to open the Add BC Template form.
+					</para>
+					 <figure id="figu-User_Guide-Adding_a_New_Template-The_Add_BC_Template_form">
+						<title>The Add BC Template form</title>
+						 <mediaobject>
+							<imageobject>
+								<imagedata fileref="images/addbctemplateform.png" format="PNG" width="444" />
+							</imageobject>
 
-		</procedure>
+						</mediaobject>
+
+					</figure>
+
+				</step>
+				 <step>
+					<para>
+						Input the content for the template in the Content textbox. (*Required).
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Input the name for the template in the Name field. (*Required).
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the template type from the dropdown box in the Template Type form.
+					</para>
+					 <figure id="figu-User_Guide-Adding_a_New_Template-Dropdown_Box">
+						<title>Dropdown Box</title>
+						 <mediaobject>
+							<imageobject>
+								<imagedata fileref="images/templatetypedropdownbox.png" format="PNG" />
+							</imageobject>
+
+						</mediaobject>
+
+					</figure>
+					 <note>
+						<para>
+							The name must be unique.
+						</para>
+						 <para>
+							The name must not contain special characters like !,@,#,$,%,&amp;,*,(,).
+						</para>
+
+					</note>
+
+				</step>
+				 <step>
+					<para>
+						Click <guibutton>Save</guibutton> to complete adding a new template.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+			 <procedure id="proc-User_Guide-BC_Templates-Edit_a_BC_Template">
+				<title>Edit a BC Template</title>
+				 <step>
+					<para>
+						Click the <guibutton>Pencil</guibutton> icon on a template that you want to edit.
+					</para>
+					 <figure id="figu-User_Guide-Edit_a_BC_Template-The_Edit_BC_Template_Form">
+						<title>The Edit BC Template Form</title>
+						 <mediaobject>
+							<imageobject>
+								<imagedata fileref="images/editbctemplateform.png" format="PNG" width="444" />
+							</imageobject>
+
+						</mediaobject>
+
+					</figure>
+
+				</step>
+				 <step>
+					<para>
+						Change the current template's properties.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <guibutton>Save</guibutton> to accept all changes, or <guibutton>Cancel</guibutton> to quit without any changes.
+					</para>
+					 <note>
+						<para>
+							You can not edit the template name.
+						</para>
+						 <para>
+							You can not edit the template type.
+						</para>
+						 <para>
+							If you tick the 'Enable Version' checkbox, this template will automatically increase by 1 version after you have clicked Save. It is displayed at the 'Base Version' column in ECM Template tab.
+						</para>
+						 <para>
+							If the template has at least 2 versions, in the 'Edit ECM Template' form, it displays the Restore button that allows restoring the template version.
+						</para>
+
+					</note>
+
+				</step>
+
+			</procedure>
+			
+			 <procedure id="proc-User_Guide-BC_Templates-Delete_a_Template">
+				<title>Delete a Template</title>
+				 <step>
+					<para>
+						Click the <guibutton>Trash</guibutton> icon corresponding with the template you want to edit. A confirmation message will appear.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <guibutton>Ok</guibutton> to accept deleting the template, or <guibutton>Cancel</guibutton> to discard this action.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
 		
 
 	</section>
@@ -1001,6 +1002,7 @@
 							<imageobject>
 								<imagedata fileref="images/deplussy.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 icon
 					</para>
@@ -1020,6 +1022,7 @@
 							<imageobject>
 								<imagedata fileref="images/deplussy.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 icon to select the home path.
 					</para>
@@ -1033,6 +1036,7 @@
 							<imageobject>
 								<imagedata fileref="images/addplusicon.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 
 					</para>
@@ -1046,6 +1050,7 @@
 							<imageobject>
 								<imagedata fileref="images/greentick.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 to select an icon file:
 					</para>
@@ -1068,6 +1073,7 @@
 							<imageobject>
 								<imagedata fileref="images/pluspermissionbutton.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 icon.
 					</para>
@@ -1161,6 +1167,7 @@
 							<imageobject>
 								<imagedata fileref="images/versionplusicon.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 to select a node type. The <emphasis role="bold">Select node types</emphasis> form will appear:
 					</para>
@@ -1179,6 +1186,7 @@
 							<imageobject>
 								<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 to begin searching.
 					</para>
@@ -1191,6 +1199,7 @@
 							<imageobject>
 								<imagedata fileref="images/addplusicon.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 beside <emphasis role="bold">Choose all node types</emphasis> to select all results.
 					</para>
@@ -1212,6 +1221,7 @@
 							<imageobject>
 								<imagedata fileref="images/trashicon.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 if you want to remove the selected nodetype.
 					</para>
@@ -1253,6 +1263,7 @@
 							<imageobject>
 								<imagedata fileref="images/editicon4.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 icon that corresponds to the drive you want to edit. The <emphasis role="bold">Edit drive</emphasis> for will appear:
 					</para>
@@ -1301,6 +1312,7 @@
 							<imageobject>
 								<imagedata fileref="images/trashicon.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 that corresponds to the drive you want to delete.
 					</para>

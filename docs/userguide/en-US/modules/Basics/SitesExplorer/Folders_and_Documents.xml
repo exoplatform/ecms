@@ -1,0 +1,1071 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Actions_on_Folders_and_Documents">
+	<title>Actions on Folders and Documents</title>
+	 <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Add_to_favorites">
+		<title>Add to favorites</title>
+		 <para>
+			This function helps users easily add nodes (documents, folders or files) as favorite.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Right-click the document you want to add as a favorite
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addfavorite.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			A symlink of your favorite nodes (folders, documents, files) will be created in the <emphasis role="bold">Favorite</emphasis> folder.
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-CopyPaste_Documents">
+		<title>Copy/Paste Documents</title>
+		 <para>
+			This function is used to make a copy of a document (include sub nodes) in other places. There are two ways to cope/paste documents:
+		</para>
+		 <procedure id="proc-User_Guide-CopyPaste_Documents-Method_One">
+			<title>Method One</title>
+			 <step>
+				<para>
+					Right-click a document then select <emphasis role="bold">Cut</emphasis> or <emphasis role="bold">Copy</emphasis> from the menu.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select a destination node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Right-click the node you want to be the parent node of the cut/copied node and select the <emphasis role="bold">Paste</emphasis> item in the menu. Note that the <emphasis role="bold">Paste</emphasis> function is enabled in the menu only after selecting the <emphasis role="bold">Copy</emphasis> or <emphasis role="bold">Cut</emphasis> action.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					The cut/copied folder (and its sub-folders) will be pasted to the new selected path.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title>Cut/Copy/Paste Information</title>
+			 <itemizedlist>
+				<listitem>
+					<para>
+						You only can take the Cut/Copy action if you have a right on the source node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						You only can take the Paste action if you have a right on the destination node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						If the destination node has the same name with the cut/copied node, after being pasted, the pasted node will be added an index with its name. For example, in this case, if “new folder” contains a node with name “Live”, then after the paste action, in “new folder” there are two nodes with name Live and Live[2].
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						You can not Cut/Copy a content folder into a document folder.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						After taking the Cut/Copy action, you can take the Paste action on different nodes before taking another Copy or Cut action.
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+
+		</note>
+		 <procedure id="proc-User_Guide-CopyPaste_Documents-Method_Two">
+			<title>Method Two</title>
+			 <step>
+				<para>
+					Right-click a document and select the Copy from the menu.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the destination node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the Clipboard icon:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/clipboarditem.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/clipboarditem.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the Clipboard window will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/clipboarditemlist.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/clipboarditemlist.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/clipboardicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 in the clipboard window to paste the copied node into the selected destination node in step 3.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					You can click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to delete a specific waiting statement.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					You can also click the <emphasis role="bold">Clear All</emphasis> link to delete all waiting statements in the list.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After the action has been taken, a confirmation message will appear with detailed information about the destination path.
+		</para>
+		 <note>
+			<title>Cut/Copy/Paste Information</title>
+			 <itemizedlist>
+				<listitem>
+					<para>
+						You only can take the Cut/Copy action if you have a right on the source node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						You only can take the Paste action if you have a right on the destination node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						If the destination node has the same name with the cut/copied node, after being pasted, the pasted node will be added an index with its name. For example, in this case, if “new folder” contains a node with name “Live”, then after the paste action, in “new folder” there are two nodes with name Live and Live[2].
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						You can not Cut/Copy a content folder into a document folder.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						After taking the Cut/Copy action, you can take the Paste action on different nodes before taking another Copy or Cut action.
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+
+		</note>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-Edit_folders_documents">
+		<title>Edit folders/ documents</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-CutPaste_Documents">
+		<title>Cut/Paste Documents</title>
+		 <para>
+			This function is used to make a copy of a document (include sub nodes) in other places. There are two ways to cope/paste documents:
+		</para>
+		 <procedure id="proc-User_Guide-CutPaste_Documents-Method_One">
+			<title>Method One</title>
+			 <step>
+				<para>
+					Right-click a document then select <emphasis role="bold">Cut</emphasis> or <emphasis role="bold">Copy</emphasis> from the menu.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select a destination node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Right-click the node you want to be the parent node of the cut/copied node and select the <emphasis role="bold">Paste</emphasis> item in the menu. Note that the <emphasis role="bold">Paste</emphasis> function is enabled in the menu only after selecting the <emphasis role="bold">Copy</emphasis> or <emphasis role="bold">Cut</emphasis> action.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					The cut/copied folder (and its sub-folders) will be pasted to the new selected path.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title>Cut/Copy/Paste Information</title>
+			 <itemizedlist>
+				<listitem>
+					<para>
+						You only can take the Cut/Copy action if you have a right on the source node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						You only can take the Paste action if you have a right on the destination node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						If the destination node has the same name with the cut/copied node, after being pasted, the pasted node will be added an index with its name. For example, in this case, if “new folder” contains a node with name “Live”, then after the paste action, in “new folder” there are two nodes with name Live and Live[2].
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						You can not Cut/Copy a content folder into a document folder.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						After taking the Cut/Copy action, you can take the Paste action on different nodes before taking another Copy or Cut action.
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+
+		</note>
+		 <procedure id="proc-User_Guide-CutPaste_Documents-Method_Two">
+			<title>Method Two</title>
+			 <step>
+				<para>
+					Right-click a document and select the Copy from the menu.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the destination node.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the Clipboard icon:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/clipboarditem.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/clipboarditem.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the Clipboard window will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/clipboarditemlist.png" format="PNG" scale="" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/clipboarditemlist.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/clipboardicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 in the clipboard window to paste the copied node into the selected destination node in step 3.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					You can click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to delete a specific waiting statement.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					You can also click the <emphasis role="bold">Clear All</emphasis> link to delete all waiting statements in the list.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After the action has been taken, a confirmation message will appear with detailed information about the destination path.
+		</para>
+		 <note>
+			<title>Cut/Copy/Paste Information</title>
+			 <itemizedlist>
+				<listitem>
+					<para>
+						You only can take the Cut/Copy action if you have a right on the source node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						You only can take the Paste action if you have a right on the destination node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						If the destination node has the same name with the cut/copied node, after being pasted, the pasted node will be added an index with its name. For example, in this case, if “new folder” contains a node with name “Live”, then after the paste action, in “new folder” there are two nodes with name Live and Live[2].
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						You can not Cut/Copy a content folder into a document folder.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						After taking the Cut/Copy action, you can take the Paste action on different nodes before taking another Copy or Cut action.
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+
+		</note>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-Delete_folders_and_documents">
+		<title>Delete folders and documents</title>
+		<!--  DOC NOTE: This section looks to have been merged with "sect-User_Guide-Manage_Documents_in_Sites_Explorer-Delete_documents" from SitesExplorer_Raw_XML  --> <para>
+			Thsi function helps you remove folders easily.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Right-click a folder that you want to delete.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select <emphasis role="bold">Delete</emphasis> from the menu.
+				</para>
+				 <para>
+					A confirmation message will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/confirmdelete.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/confirmdelete.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">OK</emphasis> in the confirmation message to delete the folder or <emphasis role="bold">Cancel</emphasis> to quit.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title>Delete Rights</title>
+			 <itemizedlist>
+				<listitem>
+					<para>
+						You can only take the <emphasis role="bold">Delete</emphasis> action if you have the right on a node.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						If the deleted node also contains sub-nodes, these will be deleted also.
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+
+		</note>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-Drag_and_drop_folders_and_documents">
+		<title>Drag and drop folders and documents</title>
+		<!-- DOC NOTE: This section seems to have been merged with "sect-User_Guide-Manage_Documents_in_Sites_Explorer-Drag_and_drop_documents" from SitesExplorer_Raw_XML  --> <para>
+			This function allows you to move folders from a current location to another one by using the drag and drop feature.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Move a cursor on a folder or folders on the right panel (hold the <emphasis role="bold">Ctrl</emphasis> or <emphasis role="bold">Shift</emphasis> key to select multiple folders at once) until the cursor changes to 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/handcursor.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 .
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/selectfolders.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/selectfolders.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Press the left mouse button and then drag the selected folder(s) to another folder on either the right or left panes.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/draggingfolders.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/draggingfolders.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Drop them into the selcted folder (by releaseing the left mouse button). All 'dragged' folders will be relocated to the destination folder.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-LockUnlock_folders_and_Documents">
+		<title>Lock/Unlock folders and Documents</title>
+		<!--  DOC NOTE: This section seems to have been merged with "sect-User_Guide-Manage_Documents_in_Sites_Explorer-LockUnlock_documents" from SitesExplorer_Raw_XML --> <para>
+			This function allows you to avoid changes to specific folders, actioned by others, during a specific time.
+		</para>
+		 <formalpara id="form-User_Guide-LockUnlock_folders_and_Documents-Lock_folders">
+			<title>Lock folders</title>
+			 <para>
+				Just right-click a folder (on either the right or left window panes) and select <emphasis role="bold">Lock</emphasis> from the menu. The selected folder will be locked.
+			</para>
+
+		</formalpara>
+		 <note>
+			<title>Locking Rights</title>
+			 <itemizedlist>
+				<listitem>
+					<para>
+						Only users with appropriate rights can lock folders.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						After locking, other users can only view the folder.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						The lock will be kept current for a session only. if the locking user signs out, the node will be unlocked
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						Other users can create a copy of the locked node (by using the <emphasis role="bold">Copy/Paste</emphasis> functions outlined above), however the original node cannot be removed or altered.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						If no action is taken on a locked node within 30 minutes, the lock will be automatically removed.
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+
+		</note>
+		 <formalpara id="form-User_Guide-LockUnlock_folders_and_Documents-Unlock_folders">
+			<title>Unlock folders</title>
+			 <para>
+				To unlock a folder, right-click a locked folder and select the <emphasis role="bold">Unlock</emphasis> item on the menu. The folder will then be unlocked and other users can take actions on it.
+			</para>
+
+		</formalpara>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-Rename_folders_and_Documents">
+		<title>Rename folders and Documents</title>
+		<!-- DOC NOTE: This section seems to have been merged with "sect-User_Guide-Manage_Documents_in_Sites_Explorer-Rename_documents" from SitesPublisher_Raw_XML --> <para>
+			This function is used to change the name of a folder.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Right-click a folder that you want to rename then select <emphasis role="bold">Rename</emphasis> from the menu:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/renameoption.png" format="PNG" scale="100" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/renameoption.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The rename form will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/renameform.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/renameform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Input a new name in the <emphasis role="bold">Name</emphasis> field. You can also change the title of this folder by entering a new one in the <emphasis role="bold">Title</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click save to commit the new details.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-Add_a_symlink">
+		<title>Add a symlink</title>
+		 <para>
+			For the purpose of fast accessing the node that you want to look for in other nodes, adding a sym link for a node is an effective way to meet this need.
+		</para>
+		 <para>
+			To add a symlink do as follows:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the node that you want to add a sym link.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the Actions tab to show some actions on the Action bar
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addsymlinkbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the Action bar. The Sym Link Manager pop-up will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/symlinkmanager.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/symlinkmanager.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <table>
+					<title></title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Field
+								</entry>
+								 <entry>
+									Details
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									Path Node
+								</entry>
+								 <entry>
+									The path of a link
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Symlink name
+								</entry>
+								 <entry>
+									The name of the link.
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/addplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon to open the <emphasis role="bold">Choose Target Node</emphasis> form.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Choose the workspace which contains the node that you want to add a symlink:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/workspacelist.png" format="PNG" scale="100" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/workspacelist.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/greentick.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 in the row of the node that you want to add, the path that the node will appear in the <emphasis role="bold">Path Node</emphasis> field and the name of the node is set by the name of the selected node. You can also edit this name.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/symlinkmanagercompleted.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/symlinkmanagercompleted.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to add symlink.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/symlinkadded.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/symlinkadded.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					You can select mupltiple nodes at once by holding the <emphasis role="bold">Ctrl</emphasis> or <emphasis role="bold">Shift</emphasis> key and select nodes or move mouse over nodes. By using this feature, you can take some actions (copy, cut, delete, lock/unlock) on different nodes at the same time.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_WebDAV">
+		<title>View WebDAV</title>
+		 <para>
+			WebDAV enables people to access files, folders and read and write documents over the web. Due to its benefits of easy, quick and flexible manipulations and time saving, WebDAV is used to view nodes.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select the path of node you want to view webDAV or open that folder from the left/right panel.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Right-click the node and select the Download and Allow Edition item in the menu.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					With each type of node, form to view in WebDAV will be different:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							<emphasis role="bold">Folder</emphasis>: The sub-nodes list of the current folder will be displayed in WebDAV.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">nt:file</emphasis>: The content of the document will be shown.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">Article</emphasis>: This node type does not, by default, list any folders. However, if the Article includes actions, added language or other data, all folders will be listed and named; <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis> and so on.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">Podcast</emphasis>: Veiwed in WebDAV, this node type will be attached a form that users have to complete to download this document.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">Sample node</emphasis>: This node lists folder names as <emphasis>exo:images</emphasis>. Like <emphasis role="bold">Article</emphasis>, if the <emphasis role="bold">Sample</emphasis> node contains actions or added languages, folders will be named <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis> and so on.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">File Plan</emphasis>: This node behaves the same way as <emphasis role="bold">Article</emphasis> and <emphasis role="bold">Sample node</emphasis>.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">Kofax</emphasis>: This node behaves the same way as <emphasis role="bold">Article</emphasis> and <emphasis role="bold">Sample node</emphasis>
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Document">
+		<title>View Document</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-Copy_URL_to_Clipboard">
+		<title>Copy URL to Clipboard</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-Use_Created_tags">
+		<title>Use Created tags</title>
+		 <para>
+			Select the Tag cloud 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/cloudicon.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 you will see all existing tags: All existing tags are listed and classified by private or public tags.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/taglist.png" format="PNG" scale="60" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/taglist.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			Tags will be displayed differently depending on popularity. The font size, weight, color, family and text-decoration will be used to visuall communicate popularity.
+		</para>
+		 <para>
+			For example, tags added to over ten documents will be displayed in red, at 20px and bold. These settings can be configured in WCM Administration portlet.
+		</para>
+		 <para>
+			Each tag is also link to all documents with the same tag. Click a tag name to see these documents listed in the right panel.
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Actions_on_Folders_and_Documents-Manage_Tags">
+		<title>Manage Tags</title>
+		 <para>
+			Tags are easily managed by editing or deleting them with the <emphasis role="bold">Tag Manager</emphasis>.
+		</para>
+		 <procedure id="proc-User_Guide-Manage_Tags-Edit_a_tag">
+			<title>Edit a tag</title>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/cloudicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon at the upper-right corner of the tags panel.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/taglistiediticon.png" format="PNG" scale="60" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/taglistiediticon.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The <emphasis role="bold">Edit tag form</emphasis> will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/tageditform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/tageditform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon4.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 that corresponds to the tag you want to edit.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Edit the tag as desired.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/tagform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/tagform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> button to commit the change or <emphasis role="bold">Cancel</emphasis> to quit without changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Tags-Delete_a_tag">
+			<title>Delete a tag</title>
+			 <step>
+				<para>
+					Perform <emphasis role="bold">Step 1</emphasis> from the procedure above.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 .
+				</para>
+				 <para>
+					A confirmation box will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/tagdelete.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/tagdelete.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					Click <emphasis role="bold">OK</emphasis> button to delete the tag or <emphasis role="bold">Cancel</emphasis> to quit.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+
+</section>
+
+

@@ -5,7 +5,7 @@
 ]>
 <chapter id="chap-User_Guide-Next_Steps">
 	<title>Next Steps</title>
-	 <warning>
+	 <!-- <warning>
 		<title>DOC NOTE</title>
 		 <para>
 			This section of the original WCM Guide contains links to various eXo products and projects.
@@ -32,6 +32,36 @@
 			Feedback on which course is preferred would be appreciated bearing in mind that RH and eXo may be using the same docbook source in the near future.
 		</para>
 
-	</warning>
+	</warning> --> <para>
+		This user guide has provided a thorough explanation of features and terminologies within eXo Content. Now that you know how to create, manage and publish web content and administer a website based on eXo Content, you may have more questions or want to get involved in the eXo community. The following links can connect you with resources to learn more and contribute to the open source development process.
+	</para>
+	 <itemizedlist>
+		<listitem>
+			<para>
+				<ulink type="http" url="http://www.exoplatform.com/company/public/website/platform">Learn more about eXo Platform 3.0</ulink>
+			</para>
+
+		</listitem>
+		 <listitem>
+			<para>
+				<ulink type="http" url="http://www.exoplatform.com/company/public/website/resource-center">Video demos, tutorial and more in the eXo Resource Center</ulink>
+			</para>
+
+		</listitem>
+		 <listitem>
+			<para>
+				<ulink type="http" url="http://wiki.exoplatform.com/xwiki/bin/view/Main/WebHome/">Access another eXo documents in the eXo Wiki</ulink>
+			</para>
+
+		</listitem>
+		 <listitem>
+			<para>
+				<ulink type="http" url="http://forums.exoplatform.org/portal/public/classic/forum">Ask question about eXo Content in the Forums</ulink>
+			</para>
+
+		</listitem>
+
+	</itemizedlist>
+
 </chapter>
 

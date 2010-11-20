@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Access_Sites_Explorer">
+	<title>Access Sites Explorer</title>
+	 <para>
+		This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Sites Explorer but the performing actions on Sites Explorer depending on the role of each user.
+	</para>
+	 <procedure>
+		<title></title>
+		 <step>
+			<para>
+				Go to Group | Sites Explorer on the administration bar:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG" scale="100" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/sitesexplorer.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <para>
+				A list of all drives in Sites Explorer displays:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/alldrives.png" format="PNG" scale="90" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/alldrives.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <para>
+				There are some specific drives to choose to work on, they are organized in groups: Personal drives, Group drives and General drives.
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/drivegroups.png" format="PNG" scale="110" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/drivegroups.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <variablelist>
+				<varlistentry>
+					<term>Personal drives:</term>
+					 <listitem>
+						<para>
+							Personal drive is the working space of a user. If you want to do in private, select the Private drive, no one else can access or get your private resources. If you want to create resource and share with others, work in the Public drive.
+						</para>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/personaldrivesharing.png" format="PNG" scale="100" />
+							</imageobject>
+							 <imageobject role="fo">
+								<imagedata align="center" contentwidth="150mm" fileref="images/personaldrivesharing.png" format="PNG" />
+							</imageobject>
+
+						</mediaobject>
+
+					</listitem>
+
+				</varlistentry>
+				 <varlistentry>
+					<term>Group drives:</term>
+					 <listitem>
+						<para>
+							The drive of a group is the working space of users in that group.
+						</para>
+						 <para>
+							In this example, the user "root" joins in three groups : "executive-board", "administrators" and "users" so he has right to access these group's drive.
+						</para>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/groupdrives.png" format="PNG" scale="110" width="444" />
+							</imageobject>
+							 <imageobject role="fo">
+								<imagedata align="center" contentwidth="150mm" fileref="images/groupdrives.png" format="PNG" width="444" />
+							</imageobject>
+
+						</mediaobject>
+
+					</listitem>
+
+				</varlistentry>
+				 <varlistentry>
+					<term>General drives:</term>
+					 <listitem>
+						<para>
+							This is the working space for everyone but your access right in different drives depends on your role. With default users, log in by "root" or "john" you can access any drive in General drives, but if you login by "mary" or "demo" you only can access Shared Users Space and Validation Request Document Center only.
+						</para>
+
+					</listitem>
+
+				</varlistentry>
+
+			</variablelist>
+
+		</step>
+
+	</procedure>
+	
+
+</section>
+
+

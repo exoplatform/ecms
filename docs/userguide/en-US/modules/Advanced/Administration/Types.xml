@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Types_of_Content">
-	<title>Types of Content</title>
+   <title>Types of Content</title>
 	 <section id="sect-User_Guide-Types_of_Content-The_Namespace_Registry">
 		<title>The Namespace Registry</title>
 		 <para>
-			The namespace is used as a prefix for the node type that describes all the node type properties. This function allows users to register the namespace used in the system. <!-- Go to Sites Administration | Types of Content | Namespace Registry  -->
+			The namespace is used as a prefix for the node type that describes all the node type properties. This function allows users to register the namespace used in the system. <!--  Go to Sites Administration | Types of Content | Namespace Registry   -->
 		</para>
 		 <figure id="figu-User_Guide-The_Namespace_Registry-Namespace_Registry">
 			<title>Namespace Registry</title>
@@ -83,9 +83,12 @@
 			</mediaobject>
 
 		</figure>
-		 <procedure id="proc-User_Guide-Manage_Node_Types-View_Node_Types">
-			<title>View Node Types</title>
-			 <step>
+	</section>
+	
+	 <section id="sect-User_Guide-Types_of_Content-View_Node_Types">
+		<title>View Node Types</title>
+		 <procedure>
+			<step>
 				<para>
 					Click the icon that corresponds to the node to be reviewed. The View Node Type Information form will appear.
 				</para>
@@ -110,7 +113,7 @@
 
 		</procedure>
 		
-		 <procedure id="proc-User_Guide-Manage_Node_Types-Add_Node_Type">
+		 <procedure id="proc-User_Guide-View_Node_Types-Add_Node_Type">
 			<title>Add Node Type</title>
 			 <step>
 				<para>
@@ -221,7 +224,7 @@
 
 		</procedure>
 		
-		 <procedure id="proc-User_Guide-Manage_Node_Types-Export_Node_Types">
+		 <procedure id="proc-User_Guide-View_Node_Types-Export_Node_Types">
 			<title>Export Node Types</title>
 			 <step>
 				<para>
@@ -272,7 +275,7 @@
 
 		</procedure>
 		
-		 <procedure id="proc-User_Guide-Manage_Node_Types-Import_Node_Types">
+		 <procedure id="proc-User_Guide-View_Node_Types-Import_Node_Types">
 			<title>Import Node Types</title>
 			 <step>
 				<para>

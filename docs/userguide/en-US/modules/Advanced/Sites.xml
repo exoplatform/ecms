@@ -4,13 +4,17 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Set_Up_a_Website">
-	<title>Set Up a Website</title>
-	 <para>
-		In DMS, we use the 'Website' term equally to the 'Portal' term. It means that creating a new portal is creating a new website. Thus, you can also edit, delete, view a website as a portal.
-	</para>
-	 <para>
-		Besides, DMS also supports webmasters/ administrators to manage websites better.
-	</para>
+	<!--  This document was created with Syntext Serna Free.  --> <title>Set Up a Website</title>
+	 <note>
+		<title></title>
+		 <para>
+			In DMS, we use the 'Website' term equally to the 'Portal' term. It means that creating a new portal is creating a new website. Thus, you can also edit, delete, view a website as a portal.
+		</para>
+		 <para>
+			Besides, DMS also supports webmasters/ administrators to manage websites better.
+		</para>
+
+	</note>
 	 <section id="sect-User_Guide-Set_Up_a_Website-Create_a_new_site">
 		<title>Create a new site</title>
 		 <para>
@@ -191,7 +195,7 @@
 				<para>
 					Set access and edit permission for this portal by clicking the <emphasis role="bold">Permission Setting</emphasis> tab.
 				</para>
-				 <!--                         Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                         --> <para>
+				<!--   Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                          --> <para>
 					The <emphasis role="bold">Permission Setting</emphasis> tab includes two subtabs: <emphasis role="bold">Access Permission Setting</emphasis> and <emphasis role="bold">Edit Permission Setting</emphasis>.
 				</para>
 				 <variablelist>
@@ -290,7 +294,7 @@
 					</varlistentry>
 
 				</variablelist>
-				 <!--                        END                        -->
+				<!--                         END                         -->
 			</step>
 			 <step>
 				<para>
@@ -309,10 +313,10 @@
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
-				<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG" scale="100" />
+				<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG" scale="100" width="444" />
 			</imageobject>
 			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/sitesexplorer.png" format="PNG" />
+				<imagedata align="center" contentwidth="150mm" fileref="images/sitesexplorer.png" format="PNG" width="444" />
 			</imageobject>
 
 		</mediaobject>
@@ -410,48 +414,48 @@
 
 		</section>
 		
-		 <section id="sect-User_Guide-Edit_a_Site-The_structure_of_a_site_interface">
-			<title>The structure of a site interface</title>
+		 <section id="sect-User_Guide-Edit_a_Site-Web_content_structure">
+			<title>Web content structure</title>
 			 <para>
 				The interface of a site can be divided into five parts like the illustration below and each part is a single content viewer so that it also includes all default elements of a web content.
 			</para>
 			 <mediaobjectco> <imageobjectco> <areaspec>
-				<area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-administration" />
-				 <area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-banner" />
-				 <area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-navigation" />
-				 <area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-content" />
-				 <area coords="" id="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-footer" />
+				<area coords="" id="area-User_Guide-Edit_a_Site-Web_content_structure-administration" />
+				 <area coords="" id="area-User_Guide-Edit_a_Site-Web_content_structure-banner" />
+				 <area coords="" id="area-User_Guide-Edit_a_Site-Web_content_structure-navigation" />
+				 <area coords="" id="area-User_Guide-Edit_a_Site-Web_content_structure-content" />
+				 <area coords="" id="area-User_Guide-Edit_a_Site-Web_content_structure-footer" />
 
 			</areaspec>
 			 <imageobject>
 				<imagedata align="center" fileref="images/sitestructure.png" format="PNG" scale="110" width="444" />
 			</imageobject>
 			 <calloutlist>
-				<callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-administration">
+				<callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-administration">
 					<para>
 						This is Administration bar which contains some administration functions related to portals (websites).
 					</para>
 
 				</callout>
-				 <callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-banner">
+				 <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-banner">
 					<para>
 						This is Banner which contains organization's slogan, logo, icon used in websites.
 					</para>
 
 				</callout>
-				 <callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-navigation">
+				 <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-navigation">
 					<para>
 						This is Navigation bar that helps the website' s users to visualize the structure of website and provide quick links to different pages.
 					</para>
 
 				</callout>
-				 <callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-content">
+				 <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-content">
 					<para>
 						This is the page content area to display the content of current selecting page
 					</para>
 
 				</callout>
-				 <callout arearefs="area-User_Guide-Edit_a_Site-The_structure_of_a_site_interface-footer">
+				 <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-footer">
 					<para>
 						This is Footer of the web site. It can be texts, or image that is displayed at the bottom of the web site. It provides information about author/institutional sponsor, revision date, copyright, etc.
 					</para>
@@ -459,7 +463,7 @@
 				</callout>
 
 			</calloutlist>
-			 </imageobjectco></mediaobjectco>
+			 </imageobjectco> </mediaobjectco>
 		</section>
 		
 		 <section id="sect-User_Guide-Edit_a_Site-How_to_edit_a_Site">
@@ -617,7 +621,7 @@
 							</para>
 							 <mediaobject>
 								<imageobject role="html">
-									<imagedata align="center" fileref="images/editstatus.png" format="PNG" scale="90" />
+									<imagedata align="center" fileref="images/editstatus.png" format="PNG" scale="90" width="444" />
 								</imageobject>
 								 <imageobject role="fo">
 									<imagedata align="center" contentwidth="150mm" fileref="images/editstatus.png" format="PNG" width="444" />
@@ -645,10 +649,10 @@
 							</para>
 							 <mediaobject>
 								<imageobject role="html">
-									<imagedata align="center" fileref="images/editbanner.png" format="PNG" scale="90" />
+									<imagedata align="center" fileref="images/editbanner.png" format="PNG" scale="90" width="444" />
 								</imageobject>
 								 <imageobject role="fo">
-									<imagedata align="center" contentwidth="150mm" fileref="images/editbanner.png" format="PNG" />
+									<imagedata align="center" contentwidth="150mm" fileref="images/editbanner.png" format="PNG" width="444" />
 								</imageobject>
 
 							</mediaobject>
@@ -801,7 +805,7 @@
 						</imageobject>
 
 					</mediaobject>
-					 <!--                         Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                         --> <itemizedlist>
+					<!-- Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                          --> <itemizedlist>
 						<listitem>
 							<para>
 								The <emphasis role="bold">Permission manager</emphasis> tab is used to set the edit and access permission for this content:
@@ -905,7 +909,7 @@
 
 							</procedure>
 							
-							 <!--                        END                        -->
+							<!--                         END                         -->
 						</listitem>
 						 <listitem>
 							<para>
@@ -1256,90 +1260,89 @@
 
 		</section>
 		
-		 <section id="sect-User_Guide-Edit_a_Site-Switch_between_sites">
-			<title>Switch between sites</title>
-			 <para>
-				This function is used to change the current web site by another one.
-			</para>
-			 <procedure>
-				<title></title>
-				 <step>
-					<para>
-						Just select a site in the site list that appears when you move the cursor to Sites on the Administration bar:
-					</para>
-					 <mediaobject>
-						<imageobject role="html">
-							<imagedata align="center" fileref="images/sitelist.png" format="PNG" scale="100" />
-						</imageobject>
-						 <imageobject role="fo">
-							<imagedata align="center" contentwidth="150mm" fileref="images/sitelist.png" format="PNG" />
-						</imageobject>
 
-					</mediaobject>
-					 <para>
-						Your current site will be switched to the selected site.
-					</para>
+	</section>
+	
+	 <section id="sect-User_Guide-Set_Up_a_Website-Switch_between_sites">
+		<title>Switch between sites</title>
+		 <para>
+			This function is used to change the current web site by another one.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Just select a site in the site list that appears when you move the cursor to Sites on the Administration bar:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/sitelist.png" format="PNG" scale="100" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/sitelist.png" format="PNG" />
+					</imageobject>
 
-				</step>
+				</mediaobject>
+				 <para>
+					Your current site will be switched to the selected site.
+				</para>
 
-			</procedure>
-			
+			</step>
 
-		</section>
-		
-		 <section id="sect-User_Guide-Edit_a_Site-Delete_a_site">
-			<title>Delete a site</title>
-			 <para>
-				This function is used to delete a portal (site) from the portal list.
-			</para>
-			 <para>
-				Do the following steps:
-			</para>
-			 <procedure>
-				<title></title>
-				 <step>
-					<para>
-						Show the portal list by clicking Site on the Administration bar:
-					</para>
-					 <mediaobject>
-						<imageobject role="html">
-							<imagedata align="center" fileref="images/sitelistclick.png" format="PNG" scale="110" width="444" />
-						</imageobject>
-						 <imageobject role="fo">
-							<imagedata align="center" contentwidth="150mm" fileref="images/sitelistclick.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</step>
-				 <step>
-					<para>
-						Click 
-						<inlinemediaobject>
-							<imageobject>
-								<imagedata fileref="images/deletebutton.png" format="PNG" />
-							</imageobject>
-
-						</inlinemediaobject>
-						 in the row of the portal that you want to delete.
-					</para>
-
-				</step>
-				 <step>
-					<para>
-						Click OK in the confirmation message to accept deleting.
-					</para>
-
-				</step>
-
-			</procedure>
-			
-
-		</section>
+		</procedure>
 		
 
 	</section>
 	
+	 <section id="sect-User_Guide-Set_Up_a_Website-Delete_a_site">
+		<title>Delete a site</title>
+		 <para>
+			This function is used to delete a portal (site) from the portal list.
+		</para>
+		 <para>
+			Do the following steps:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Show the portal list by clicking Site on the Administration bar:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/sitelistclick.png" format="PNG" scale="110" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/sitelistclick.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/deletebutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 in the row of the portal that you want to delete.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click OK in the confirmation message to accept deleting.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
 
 </section>
 

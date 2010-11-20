@@ -257,6 +257,7 @@
 						<imageobject>
 							<imagedata fileref="images/previewicon.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 					 to search for the location to save documents. The <emphasis role="bold">Select Location</emphasis> form appears:
 				</para>
@@ -278,6 +279,7 @@
 						<imageobject>
 							<imagedata fileref="images/greentick.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 					 in the <emphasis role="bold">Action</emphasis> column to choose the child node on the right panel. After being selected, this location will be displayed on the <emphasis role="bold">Location to save field</emphasis>. Created documents will be saved in this location.
 				</para>
@@ -312,8 +314,7 @@
 		
 
 	</section>
-	
-	 <!--  Close Section: 3.7.1 Edit Mode  --><!--  Close Section 3.7 Fast Content Creator -->
+
 </section>
 
 

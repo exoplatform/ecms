@@ -1,16 +1,25 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter>
+<chapter id="chap-User_Guide-Basic_Actions">
 	<title>Basic Actions</title>
-      	 <para>
+	 <para>
 		These actions are for all registered users after they have logged in the accounts.
 	</para>
-
 	 <xi:include href="Basics/View.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Print.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="Basics/Publish.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-    <!--MARK: sections 4.4 - 4.13 go in here.-->
+	 <xi:include href="Basics/Contribute_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Content_Inside_Categories.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Dynamic_Navigation.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/SitesExplorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Webdav.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Search.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Newsletters.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/FastContentCreator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/FormGenerator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Categories.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </chapter>
+

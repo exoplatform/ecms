@@ -1,0 +1,574 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Manage_Content_In_Sites_Explorer">
+	<title>Manage Content In Sites Explorer</title>
+	 <para>
+		A web content is a key resource to make a site. Other resources make a site more dynamic and animated by using layout, color, font, etc.This section focuses on how to manage a web content.
+	</para>
+	 <section id="sect-User_Guide-Manage_Content_In_Sites_Explorer-Create_a_new_web_content">
+		<title>Create a new web content</title>
+		 <para>
+			This function is used to add a new web content into a specific site.
+		</para>
+		 <para>
+			Do the following steps:
+		</para>
+		 <procedure id="proc-User_Guide-Create_a_new_web_content-Add_new_content">
+			<title>Add new content</title>
+			 <step>
+				<para>
+					Go to the drive of the site that you want to add a web content.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the web content folder on the left:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/webcontentfolder.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/webcontentfolder.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <note>
+					<title></title>
+					 <para>
+						In this step, you also can add a new web content into another folders (documents and media folder) of a site but you are recommended to select the web content folder because:
+					</para>
+					 <itemizedlist>
+						<listitem>
+							<para>
+								Manage web content of a site more easily.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								You only may add a new web content in this folder so that you don't need to select a web content document in the list of document types. It makes adding a new web content more flexibly.
+							</para>
+
+						</listitem>
+
+					</itemizedlist>
+
+				</note>
+
+			</step>
+			 <step>
+				<para>
+					Open the Add New Document form by clicking 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/adddocumenticon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the Action bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select a template in the Select Template field to present web content:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/maincontenttab.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/maincontenttab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+<!-- Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                         --> <para>
+					The Select Template field has two options:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							<emphasis role="bold">Picture on head layout web content:</emphasis>The site's content is presented in two spaces. One for inserting an image and one for editing the site's content. In which, the image is put at the head of a site.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							<emphasis role="bold">Free layout web content:</emphasis>This template is a free layout.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+				 <para>
+					The <emphasis role="bold">Main Content</emphasis>Tab includes:
+				</para>
+				 <table>
+					<title></title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Field
+								</entry>
+								 <entry>
+									Options
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									Name
+								</entry>
+								 <entry>
+									The name of a web content that you want to add new
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Title
+								</entry>
+								 <entry>
+									The title of a web content
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Main content
+								</entry>
+								 <entry>
+									The main content that you want to display when publishing this web content
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Save button
+								</entry>
+								 <entry>
+									To accept saving the inputted values
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Cancel button
+								</entry>
+								 <entry>
+									To exit the current form
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+				 <para>
+					The <emphasis role="bold">Illustration Tab</emphasis>allows you to upload an illustration that makes the site's content more attractive
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/illustrationtab.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/illustrationtab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <table>
+					<title></title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Field
+								</entry>
+								 <entry>
+									Option
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									Illustration Image
+								</entry>
+								 <entry>
+									The path to an image that you want to upload into a site. This image will be used like an illustration of that site
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Image Type
+								</entry>
+								 <entry>
+									The image format that you want to upload to the site. It can be: image/gif; image/png; image/jpg; image/jpeg
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Summary
+								</entry>
+								 <entry>
+									You can give short description about the web content because it will be displayed with the illustration image when the web content is listed. The main content will be shown when it is selected to be viewed
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+				 <para>
+					To upload an image do as follows:
+				</para>
+				 <procedure>
+					<title></title>
+					 <step>
+						<para>
+							Browse an image list on your local computer by clicking the Browse... button and then select a specific location.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Select an image in a list.
+						</para>
+
+					</step>
+					 <step>
+						<para>
+							Click the 
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/uploadicon.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+							 icon to upload the selected image.
+						</para>
+
+					</step>
+
+				</procedure>
+				
+				 <para>
+					The <emphasis role="bold">Advanced</emphasis>tab includes two parts: CSS data and JS data:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/advancedtab.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/advancedtab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <table>
+					<title></title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Field
+								</entry>
+								 <entry>
+									Information
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									CSS data
+								</entry>
+								 <entry>
+									Contains CSS definition to present data in a web content. You can optionally enter CSS data into this field to specify the style.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									JS data
+								</entry>
+								 <entry>
+									Contains JS content to make the web content more dynamic when after publishing. You can optionally enter JS content in this field.
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+				 <!--                        END                        -->
+			</step>
+			 <step>
+				<para>
+					Enter values in fields of the Add New Document form.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click Save to accept adding new web content into a site.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Manage_Content_In_Sites_Explorer-Edit_a_web_content">
+		<title>Edit a web content</title>
+		 <para>
+			This function is used to edit a web content in a specific drive of an existing site.
+		</para>
+		 <para>
+			Do the following steps:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Go into the drive of a site which contains the web content that you want to edit.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select to view a web content by double - clicking it on the left tree or on the right. Detailed information of web content will be viewed on the right panel.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click on 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editdocumenticon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 the Action bar to show the edit form of the selected web content as
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Change current values in fields of this edit form.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Complete editing the selected web content by clicking Save.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title>Auto-lock</title>
+			 <para>
+				When you click <emphasis role="bold">Edit Document</emphasis>, the web-content will be auto-locked for your editing. After finishing, the content is back to unlock status. You can manage Locks in the WCM Admin portlet.
+			</para>
+
+		</note>
+
+	</section>
+	
+	<section id="sect-User_Guide-Manage_Content_In_Sites_Explorer-Delete_a_web_content">
+		<title>Delete a web content</title>
+		 <para>
+			This function is used to remove a web content from the web content folder in a specific site's drive.
+		</para>
+		 <para>
+			To delete a web-content, do the following:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Right-click the name of the web content that you want to delete and then select Delete in the menu:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/selectdelete.png" format="PNG" scale="50" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/selectdelete.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					There will be a confirmation message. Click OK to accept the deletion, or Cancel to quit without deleting.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<section id="sect-User_Guide-Manage_Content_In_Sites_Explorer-Publish_a_web_content">
+		<title>Publish a web content</title>
+		 <para>
+			This function helps you publish a web content that you have added to web content folder in Sites Explorer.
+		</para>
+		 <para>
+			To publish web-content, do the following:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Go to the drive of a site which contains the web content that you want to publish.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select to view it by double clicking it on the left tree or on the right.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Show the Manage publication form by clicking 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/managepublications.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the Action bar:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/managepublicationsscreen.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/managepublicationsscreen.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <variablelist>
+					<varlistentry>
+						<term>The Publication status tab:</term>
+						 <listitem>
+							<para>
+								This tab lets you know about all statuses of versions. In which, you only may publish a content with the 'Live' status. There are four statuses for a content. They are:
+							</para>
+							 <itemizedlist>
+								<listitem>
+									<para>
+										<emphasis role="bold">Enrolled</emphasis>: The revision is created but never be edited .
+									</para>
+
+								</listitem>
+								 <listitem>
+									<para>
+										<emphasis role="bold">Draft</emphasis>: The revision's already been created and it is editable. Thus you can still edit it if you want.
+									</para>
+
+								</listitem>
+								 <listitem>
+									<para>
+										<emphasis role="bold">Live</emphasis>: The revision can not be modified anymore. In this status, the content is ready for publication.
+									</para>
+
+								</listitem>
+								 <listitem>
+									<para>
+										<emphasis role="bold">Obsolete</emphasis>: The revision is not live anymore and you should unpublish it if is was published.
+									</para>
+
+								</listitem>
+
+							</itemizedlist>
+							 <note>
+								<title>Content Status</title>
+								 <para>
+									You only can switch from one status to its next status. For example, your revision is in the <emphasis>Enrolled</emphasis>status and you only switch to the <emphasis>Draft</emphasis>status by clicking the <emphasis>Draft</emphasis>icon. After being switched, your revision will be in the <emphasis>Draft</emphasis>status.
+								</para>
+
+							</note>
+
+						</listitem>
+
+					</varlistentry>
+					 <varlistentry>
+						<term>The Publication history tab:</term>
+						 <listitem>
+							<para>
+								This tab is used to keep track of publishing history of a site.
+							</para>
+							 <para>
+								Select the <emphasis role="bold">Publication history</emphasis>tab in the above form to view detailed information (including: Date, New State, User and Description) of a site's publication:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/publicationhistorytab.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/publicationhistorytab.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								If you want to change the position for publishing the selected web content, select the current path and click right to left arrow to remove the path the select another location.
+							</para>
+
+						</listitem>
+
+					</varlistentry>
+
+				</variablelist>
+
+			</step>
+			 <step>
+				<para>
+					Click Close to close this form and publish successfully.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			After being published, all users who have the right to access that position can view the published web content as a page on the Navigation bar.
+		</para>
+
+	</section>
+
+</section>
+
+

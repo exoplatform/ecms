@@ -3,43 +3,53 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Basic_Actions_in_WCM-Print_a_Web_Content">
-		<title>Print a Web Content</title>
-		 <para>
-			Users can easily print any content in a site by following these steps:
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Read more</emphasis> to read all the content of a document or an article in a site.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/readmore.png" format="PNG" scale="100" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/readmore.png" format="PNG" width="444" />
-					</imageobject>
-				</mediaobject>
-			</step>
-			 <step>
-				<para>
-					Click the Print button, the Print Preview page will be displayed on another tab.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/printpreview.png" format="PNG" scale="130" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/printpreview.png" format="PNG" width="444" />
-					</imageobject>
-				</mediaobject>
-			</step>
-			 <step>
-				<para>
-					Click the <emphasis role="bold">Print</emphasis> button to print the content of this page or <emphasis role="bold">Close</emphasis> to close this tab without printing.
-				</para>
-			</step>
-		</procedure>
-	</section>
+<section id="sect-User_Guide-Print_a_Web_Content">
+	<title>Print a Web Content</title>
+	 <para>
+		Users can easily print any content in a site by following these steps:
+	</para>
+	 <procedure>
+		<title></title>
+		 <step>
+			<para>
+				Click <emphasis role="bold">Read more</emphasis> to read all the content of a document or an article in a site.
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/readmore.png" format="PNG" scale="100" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/readmore.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</step>
+		 <step>
+			<para>
+				Click the Print button, the Print Preview page will be displayed on another tab.
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/printpreview.png" format="PNG" scale="130" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/printpreview.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</step>
+		 <step>
+			<para>
+				Click the <emphasis role="bold">Print</emphasis> button to print the content of this page or <emphasis role="bold">Close</emphasis> to close this tab without printing.
+			</para>
+
+		</step>
+
+	</procedure>
+	
+
+</section>
+
+

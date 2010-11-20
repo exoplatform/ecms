@@ -287,23 +287,29 @@
 				<para>
 					know how to manage Web pages, set up a website, etc.
 				</para>
+
 			</listitem>
+
 		</itemizedlist>
-      <para>
-         In this guide, we will use the following accounts (username/ password) throughout the guide:
-      </para>
-      <itemizedlist>
-         <listitem>
-            <para>
-               <emphasis role="bold">root/ gtn</emphasis>: This account is for users as Administrators who have the highest right on the platform.
-            </para>
-         </listitem>
-         <listitem>
-            <para>
-               <emphasis role="bold">mary/ gtn</emphasis>: This account is for a publisher who can write contents but also can create new pages or edit them in the current site.
-            </para>
-         </listitem>
-      </itemizedlist>
+		 <para>
+			In this guide, we will use the following accounts (username/ password) throughout the guide:
+		</para>
+		 <itemizedlist>
+			<listitem>
+				<para>
+					<emphasis role="bold">root/ gtn</emphasis>: This account is for users as Administrators who have the highest right on the platform.
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<emphasis role="bold">mary/ gtn</emphasis>: This account is for a publisher who can write contents but also can create new pages or edit them in the current site.
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+
 	</section>
 	
 	 <section id="sect-User_Guide-Preamble-References_and_Related_Sources">

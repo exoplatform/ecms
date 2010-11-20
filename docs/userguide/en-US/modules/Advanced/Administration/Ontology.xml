@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Ontology">
@@ -343,18 +343,21 @@
 						<imageobject>
 							<imagedata fileref="images/little_man.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 					 icon to select a user or the 
 					<inlinemediaobject>
 						<imageobject>
 							<imagedata fileref="images/hug_me.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 					 icon to select memerships or the 
 					<inlinemediaobject>
 						<imageobject>
 							<imagedata fileref="images/personal_space.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 					 icon to select everyone in order to set permissions. The user or memership that you have just selected will be displayed in the <guilabel>User or Group</guilabel> field.
 				</para>
@@ -486,6 +489,7 @@
 						<imageobject>
 							<imagedata fileref="images/pencil.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 					 icon that corresponds to the taxonomy tree you want to edit.
 				</para>
@@ -505,6 +509,7 @@
 						<imageobject>
 							<imagedata fileref="images/blueplusicon.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 
 				</para>
@@ -568,6 +573,7 @@
 		</note>
 
 	</section>
+	
 
 </section>
 

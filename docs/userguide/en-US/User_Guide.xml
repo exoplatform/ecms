@@ -8,9 +8,9 @@
 	 <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Preamble.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Introduction.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-    <xi:include href="modules/Usage.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-    <xi:include href="modules/Basics.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	 <xi:include href="modules/Administration.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="modules/Get_Started.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="modules/Basics.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="modules/Advanced.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Next.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 

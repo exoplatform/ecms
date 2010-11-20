@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Manage_Site_Resources_in_one_place">
+	<title>Manage Site Resources in one place</title>
+	 <para>
+		You can easily manage all the site resources in Sites Explorer.
+	</para>
+	 <para>
+		Chose 
+		<inlinemediaobject>
+			<imageobject>
+				<imagedata fileref="images/sitesmanagementicon.png" format="PNG" />
+			</imageobject>
+
+		</inlinemediaobject>
+		 in General drive. All of your created sites and their resources will be listed in the left panel.
+	</para>
+	 <mediaobject>
+		<imageobject role="html">
+			<imagedata align="center" fileref="images/resourcesleftpanel.png" format="PNG" scale="90" width="444" />
+		</imageobject>
+		 <imageobject role="fo">
+			<imagedata align="center" contentwidth="150mm" fileref="images/resourcesleftpanel.png" format="PNG" width="444" />
+		</imageobject>
+
+	</mediaobject>
+	 <para>
+		All sites contain typical folders that are site resources:
+	</para>
+	 <mediaobject>
+		<imageobject role="html">
+			<imagedata align="center" fileref="images/typicalfolders.png" format="PNG" scale="100" />
+		</imageobject>
+		 <imageobject role="fo">
+			<imagedata align="center" contentwidth="150mm" fileref="images/typicalfolders.png" format="PNG" />
+		</imageobject>
+
+	</mediaobject>
+	 <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-CSS_Folder">
+		<title>CSS Folder</title>
+		 <para>
+			CSS is one of default files of a site. This folder contains CSS data that is used to present data in a site and increase that site's content accessibility.
+		</para>
+		 <note>
+			<title>CSS</title>
+			 <para>
+				Once a new CSS file in a site is created, it will affect on how the site will look. For an example, the color of the current site's background is black but when you create a new CSS file with red background color , all site's background will be in red.
+			</para>
+
+		</note>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-Document_Folder">
+		<title>Document Folder</title>
+		 <para>
+			This folder contains all documents used in a site. When you want to add a new document for a site, you also can put them outside this folder but you are recommended to put all documents in this folder to manage all site's documents easily and conveniently.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/documentsview.png" format="PNG" scale="100" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/documentsview.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-JS_Folder">
+		<title>JS Folder</title>
+		 <para>
+			This is one of default files of a site. This file contains Java Script data that is used to make a site more animated and more dynamic.
+		</para>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-Links_Folder">
+		<title>Links Folder</title>
+		 <para>
+			This file contains all links used in a site.
+		</para>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-Media_Folder">
+		<title>Media Folder</title>
+		 <para>
+			This folder contains all documents related to videos, images and sounds. It is divided into three sub folders:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/mediafiles.png" format="PNG" scale="100" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/mediafiles.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+		 <variablelist>
+			<varlistentry>
+				<term>audio:</term>
+				 <listitem>
+					<para>
+						This folder contains sound data used in a site.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>images:</term>
+				 <listitem>
+					<para>
+						This folder contains images used in a site.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+			 <varlistentry>
+				<term>videos:</term>
+				 <listitem>
+					<para>
+						This folder contains videos used in a site.
+					</para>
+
+				</listitem>
+
+			</varlistentry>
+
+		</variablelist>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-Web_Content_Folder">
+		<title>Web Content Folder</title>
+		 <para>
+			This folder contains all web content used in sites. You are suggested to put all web content files here to make use (in case you need to reuse web content files for creating a new site) and manage more flexibility.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/webcontentfiles.png" format="PNG" scale="100" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/webcontentfiles.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+
+	</section>
+	
+
+</section>
+
+

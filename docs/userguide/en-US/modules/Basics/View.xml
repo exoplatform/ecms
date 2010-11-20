@@ -3,61 +3,68 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-   <section id="sect-User_Guide-Basic_Actions_in_WCM-View_a_site">
-		<title>View a site</title>
-		 <para>
-			In eXo Content, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
-		</para>
-		 <mediaobject>
-			<imageobject role="html">
-				<imagedata align="center" fileref="images/toolbar.png" format="PNG" scale="100" />
-			</imageobject>
-			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="70mm" fileref="images/toolbar.png" format="PNG" />
-			</imageobject>
-
-		</mediaobject>
-		 <para>
-			The main screen of the site will appear like the illustration below:
-		</para>
-		 <mediaobjectco> <imageobjectco> <areaspec>
-			<area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-admin" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-banner" />
-          <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-navigation" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-home" />
-			 <area coords="" id="area-User_Guide-Basic_Actions_in_WCM-View_a_site-footer" />
-		</areaspec>
-		 <imageobject>
-			<imagedata align="center" fileref="images/acme.png" format="PNG" width="444" />
+<section id="sect-User_Guide-View_a_site">
+	<title>View a site</title>
+	 <para>
+		In eXo Content, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
+	</para>
+	 <mediaobject>
+		<imageobject role="html">
+			<imagedata align="center" fileref="images/toolbar.png" format="PNG" scale="100" width="444" />
 		</imageobject>
-		 <calloutlist>
-			<callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-admin">
-				<para>
-					This is Administration bar which contains administration functions related to portals (websites).
-				</para>
+		 <imageobject role="fo">
+			<imagedata align="center" contentwidth="70mm" fileref="images/toolbar.png" format="PNG" width="444" />
+		</imageobject>
 
-			</callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-banner">
-				<para>
-					This is Banner which contains slogan, logo, icon used in the website.
-				</para>
-			</callout>
-         <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-navigation">
-                  <para>
-                     Thhe Navigation bar helps users to visualize the structure of the website and provide quick links to different pages.
-                  </para>
-         </callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-home">
-				<para>
-					This is Home page which is the main page of the website. This is the default page that is displayed first when you visit the website.
-				</para>
+	</mediaobject>
+	 <para>
+		The main screen of the site will appear like the illustration below:
+	</para>
+	 <mediaobjectco> <imageobjectco> <areaspec>
+		<area coords="" id="area-User_Guide-View_a_site-admin" />
+		 <area coords="" id="area-User_Guide-View_a_site-banner" />
+		 <area coords="" id="area-User_Guide-View_a_site-navigation" />
+		 <area coords="" id="area-User_Guide-View_a_site-home" />
+		 <area coords="" id="area-User_Guide-View_a_site-footer" />
 
-			</callout>
-			 <callout arearefs="area-User_Guide-Basic_Actions_in_WCM-View_a_site-footer">
-				<para>
-					This is Footer of the web site. It can be texts, or image that is displayed at the bottom of the web site. It provides information about author/institutional sponsor, revision date, copyright and more.
-				</para>
-			</callout>
-		</calloutlist>
-		 </imageobjectco> </mediaobjectco>
-	</section>
+	</areaspec>
+	 <imageobject>
+		<imagedata align="center" fileref="images/acme.png" format="PNG" width="444" />
+	</imageobject>
+	 <calloutlist>
+		<callout arearefs="area-User_Guide-View_a_site-admin">
+			<para>
+				This is Administration bar which contains administration functions related to portals (websites).
+			</para>
+
+		</callout>
+		 <callout arearefs="area-User_Guide-View_a_site-banner">
+			<para>
+				This is Banner which contains slogan, logo, icon used in the website.
+			</para>
+
+		</callout>
+		 <callout arearefs="area-User_Guide-View_a_site-navigation">
+			<para>
+				Thhe Navigation bar helps users to visualize the structure of the website and provide quick links to different pages.
+			</para>
+
+		</callout>
+		 <callout arearefs="area-User_Guide-View_a_site-home">
+			<para>
+				This is Home page which is the main page of the website. This is the default page that is displayed first when you visit the website.
+			</para>
+
+		</callout>
+		 <callout arearefs="area-User_Guide-View_a_site-footer">
+			<para>
+				This is Footer of the web site. It can be texts, or image that is displayed at the bottom of the web site. It provides information about author/institutional sponsor, revision date, copyright and more.
+			</para>
+
+		</callout>
+
+	</calloutlist>
+	 </imageobjectco> </mediaobjectco>
+</section>
+
+

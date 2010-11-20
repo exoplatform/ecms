@@ -1,0 +1,436 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Views">
+	<title>Views</title>
+	 <para>
+		- What is a view?
+	</para>
+	 <para>
+		- Explain view and tab mechanism.
+	</para>
+	 <para>
+		<emphasis role="bold">WCM supports you four ways to view nodes in a specific folder and show actions of corresponding tab on the Actions bar.</emphasis>
+	</para>
+	 <note>
+		<title>View Types</title>
+		 <para>
+			The number of View types depends on what drive you are browsing.You can manage the view types in the WCM Administration. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views" /> for details
+		</para>
+
+	</note>
+	 <section id="sect-User_Guide-Views-Admin_view">
+		<title>Admin view</title>
+		 <para>
+			In this view, each item in list includes following information: Name, Date Created, Date Modified, Owner, Versionable and Auditing. These information will help you manage nodes easily.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/detailsview.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/detailsview.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			You also can sort nodes basing on node information by clicking the label of corresponding column. The 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/descendingarrow.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 indicates that nodes are ordered in ascending order and on the contrary, the 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/ascendingarrow.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 icon means nodes are in descending order.
+		</para>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Views-Icons_View">
+		<title>Icons View</title>
+		 <para>
+			In this view type, nodes in a specific folder will be viewed as icons. The name of each node will be shown under its icon.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/iconsview.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/iconsview.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Views-Thumbnails_View">
+		<title>Thumbnails View</title>
+		 <para>
+			With thumbnails view, nodes in a specific folder are viewed as icons bounded by frames. Name of each node is shown under its icon.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/thumbnailview.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/thumbnailview.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			If nodes are image files, their thumbnails will be shown like the screenshot below:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/thumbnailimages.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/thumbnailimages.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			Especially, in this view, you can overload thumbnail image for node. For an example, if you want to add thumbnail image for <emphasis role="bold">Digital Assets</emphasis>folder, do as follows:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Select a folder (on the left or right panel) that you want to add a thumbnail image.
+				</para>
+				<!--  Removed in WCM 2.1.1 
+               <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/addthumbnail.png" format="PNG" scale="90" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/addthumbnail.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject> -->
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/overloadthumbnail.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to open the Add thumbnail image form:
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select an image used as a displaying icon for the selected folder by clicking the <emphasis role="bold">Browse...</emphasis>button.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Complete adding a thumbnail image by clicking <emphasis role="bold">Save</emphasis>. This node will be stored in a exo:thumbnails folder.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Back to the parent folder (folder Pictures in this example) that contains the selected folder to see a icon used to display:
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Views-Cover_Flow_View">
+		<title>Cover Flow View</title>
+		 <para>
+			You can understand this view as a dynamical view because it brings the side-scrolling view to nodes in a folder. In this view, when a node is selected, its name is set with bold effect to more outstanding than others.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/imagefolders.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/imagefolders.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			If nodes are pictures, they are shown like:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/coverflow.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/coverflow.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			If nodes are documents or folders, they are displayed like the illustration below :
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/folderflow.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/folderflow.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			To move from one node to another one, you can do any of these ways:
+		</para>
+		 <itemizedlist>
+			<listitem>
+				<para>
+					Use the mousewheel.
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					Hold and move the yellow circle button to the left or the right.
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					Click the folder/document name that you want to select.
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Views-Slide_Show_View">
+		<title>Slide Show View</title>
+		 <para>
+			In this view type, pictures in folders are viewed in slide show.
+		</para>
+		 <para>
+			To view pictures in slide show, click the 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/slideshowicon.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 icon:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/imageslideshow.png" format="PNG" scale="100" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/imageslideshow.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			If nodes are pictures, they are displayed like the following illustration:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/pictureslideshowscreen.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/pictureslideshowscreen.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			The Slide show view automatically show all picture nodes, users can control this slide show by clicking the below buttons:
+		</para>
+		 <table>
+			<title></title>
+			 <tgroup cols="2">
+				<thead>
+					<row>
+						<entry>
+							Button
+						</entry>
+						 <entry>
+							Function
+						</entry>
+
+					</row>
+
+				</thead>
+				 <tbody>
+					<row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/slideshownavfirst.png" format="PNG" scale="100" />
+								</imageobject>
+
+							</mediaobject>
+
+						</entry>
+						 <entry>
+							Go to the first picture node.
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/slideshownavprev.png" format="PNG" scale="100" />
+								</imageobject>
+
+							</mediaobject>
+
+						</entry>
+						 <entry>
+							View the previous picture node.
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/slideshownavpause.png" format="PNG" scale="100" />
+								</imageobject>
+
+							</mediaobject>
+
+						</entry>
+						 <entry>
+							Pause the slide show.
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/slideshownavnext.png" format="PNG" scale="100" />
+								</imageobject>
+
+							</mediaobject>
+
+						</entry>
+						 <entry>
+							View the next picture node.
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/slideshownavlast.png" format="PNG" scale="100" />
+								</imageobject>
+
+							</mediaobject>
+
+						</entry>
+						 <entry>
+							View the last picture node.
+						</entry>
+
+					</row>
+					 <row>
+						<entry>
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/slideshownavplay.png" format="PNG" scale="100" />
+								</imageobject>
+
+							</mediaobject>
+
+						</entry>
+						 <entry>
+							Continue viewing pictures node.
+						</entry>
+
+					</row>
+
+				</tbody>
+
+			</tgroup>
+
+		</table>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Views-Timeline_View">
+		<title>Timeline View</title>
+		 <para>
+			This view allows users to view all nodes created and uploaded by time. Just click the 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/timeline.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 icon.
+		</para>
+		 <para>
+			All the nodes that were created and uploaded will be displayed like below:
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/timelineview.png" format="PNG" scale="100" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/timelineview.png" format="PNG" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			You can click directly on the node name to view its content in details.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/timelinedetails.png" format="PNG" scale="90" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/timelinedetails.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			You can also click the 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/favestar.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 to mark your item as favorite or the 
+			<inlinemediaobject>
+				<imageobject>
+					<imagedata fileref="images/unfavestar.png" format="PNG" />
+				</imageobject>
+
+			</inlinemediaobject>
+			 icon corresponding to nodes in order to remove it from favorites.
+		</para>
+
+	</section>
+	
+
+</section>
+
+

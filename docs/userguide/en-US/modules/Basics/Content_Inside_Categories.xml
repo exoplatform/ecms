@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Content_Inside_Categories">
+	<title>Content Inside Categories</title>
+	 <para>
+
+	</para>
+	 <section id="sect-User_Guide-Content_Inside_Categories-What_is_a_Category_in_eXo_Content">
+		<title>What is a Category in eXo Content?</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
+		<title>Create a Content</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	<section id="sect-User_Guide-Content_Inside_Categories-Organize_Content">
+		<title>Organize Content</title>
+		 <para>
+
+		</para>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Content_Inside_Categories-Pros_and_Cons">
+		<title>Pros and Cons</title>
+		 <para>
+
+		</para>
+
+	</section>
+
+</section>
+
+

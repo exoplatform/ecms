@@ -1,0 +1,1005 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Search_in_Sites_Explorer">
+	<title>Search in Sites Explorer</title>
+	 <para>
+		There are three ways to search an existing node:
+	</para>
+	 <orderedlist>
+		<listitem>
+			<para>
+				<xref linkend="sect-User_Guide-Search_in_Sites_Explorer-Simple_Search" />.
+			</para>
+
+		</listitem>
+		 <listitem>
+			<para>
+				<xref linkend="sect-User_Guide-Search_in_Sites_Explorer-Advanced_Search" />.
+			</para>
+
+		</listitem>
+		 <listitem>
+			<para>
+				<xref linkend="sect-User_Guide-Search_in_Sites_Explorer-Quick_Search" />
+			</para>
+
+		</listitem>
+
+	</orderedlist>
+	 <section id="sect-User_Guide-Search_in_Sites_Explorer-Simple_Search">
+		<title>Simple Search</title>
+		 <para>
+			This function is used to search with properties of the document (Note: Not the document's name).
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Enter a string that is found in the document you are searching for (Note: Do not use the document's name).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon to perform the search.
+				</para>
+				 <para>
+					Search results will be displayed in the right pane.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/searchresults.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/searchresults.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The search results will appear empty if no node cotains the search string.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/emptysearch.png" format="PNG" scale="100" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/emptysearch.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewdetailsbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to view the content containing the search string.
+				</para>
+				 <para>
+					Or click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/viewresultnode.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon to go to the node that contains the search result.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+
+    <section id="sect-User_Guide-Search_in_Sites_Explorer-Advanced_Search">
+		<title>Advanced Search</title>
+		 <para>
+			To perform an advanced search:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/savedsearchicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 <emphasis role="bold">Saved Search</emphasis> icon.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/savedsearches.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/savedsearches.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Then click the <emphasis role="bold">Advanced Search</emphasis> icon 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to open the <emphasis role="bold">Advanced Search</emphasis> form.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/advancedsearches.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/advancedsearches.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					The <emphasis role="bold">Advanced Search</emphasis> form will open:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/advancedsearchform.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/advancedsearchform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			The tabs in this form offer different search functions:
+		</para>
+		 <itemizedlist>
+			<listitem>
+				<para>
+					<xref linkend="sect-User_Guide-Advanced_Search-Search_by_Name" />
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<xref linkend="sect-User_Guide-Advanced_Search-Search_with_constraints" />
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<xref linkend="sect-User_Guide-Advanced_Search-Search_by_creating_a_new_query" />
+				</para>
+
+			</listitem>
+			 <listitem>
+				<para>
+					<xref linkend="sect-User_Guide-Advanced_Search-Search_by_existing_queries" />
+				</para>
+
+			</listitem>
+
+		</itemizedlist>
+		 <section id="sect-User_Guide-Advanced_Search-Search_by_Name">
+			<title>Search by Name</title>
+			 <para>
+				Use the <emphasis role="bold">Search by Name</emphasis> tab to search nodes by name:
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Enter the exact name you wish to search for in the <emphasis role="bold">Content name</emphasis> field.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Search</emphasis>.
+					</para>
+					 <para>
+						Results will return with the message <emphasis>“No result found”</emphasis> if there is no node with the entered name.
+					</para>
+					 <para>
+						Results will be returned in the <emphasis role="bold">Search Results</emphasis> tab if the requested name is found.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+
+       <section id="sect-User_Guide-Advanced_Search-Search_with_constraints">
+			<title>Search with constraints</title>
+			 <para>
+				This search allows you to search with more constraints to limit the returned results.
+			</para>
+			 <para>
+				Extra search constraints are entered in the <emphasis role="bold">Advanced Search</emphasis> tab of the <emphasis role="bold">Advanced Search</emphasis> form.
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/advancedsearchtab.png" format="PNG" scale="" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/advancedsearchtab.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <para>
+				The <emphasis role="bold">Current location</emphasis> field is not editable. It shows the path selected to search.
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Enter search terms in the <emphasis role="bold">A word of phrase in content</emphasis> field.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Select the <emphasis role="bold">Operator</emphasis>.
+					</para>
+					 <itemizedlist>
+						<listitem>
+							<para>
+								Select <emphasis role="bold">AND</emphasis> operator to only return results that meet <emphasis>both</emphasis> the search terms and the entered constraints (see Step 3).
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								Select <emphasis role="bold">OR</emphasis> operator to return results that meet <emphasis>either</emphasis> the search terms or the entered constraints (see Step 3).
+							</para>
+
+						</listitem>
+
+					</itemizedlist>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold"> Show/hide constraints form</emphasis> to add more constraints.
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/showconstraintform.png" format="PNG" scale="90" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/showconstraintform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						a further constraint options window will appear:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/furtherconstraintform.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/furtherconstraintform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <table>
+						<title></title>
+						 <tgroup cols="2">
+							<thead>
+								<row>
+									<entry>
+										Item
+									</entry>
+									 <entry>
+										Details
+									</entry>
+
+								</row>
+
+							</thead>
+							 <tbody>
+								<row>
+									<entry>
+										1
+									</entry>
+									 <entry>
+										You can add more than one constraint thus there are two operators AND and OR for you to combine them.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										2
+									</entry>
+									 <entry>
+										These fields allow you to add a constraint to search by a property with specific values.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										3
+									</entry>
+									 <entry>
+										These fields allow you to add a constraint to search by a property with specific values.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										4
+									</entry>
+									 <entry>
+										These fields allow you to add a constraint to search by a property that contains one of the word in the specific string.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										5
+									</entry>
+									 <entry>
+										These fields allow you to add a constraint to search by a property that does not contain the specific string.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										6
+									</entry>
+									 <entry>
+										These fields allow you to add a constraint to search by a duration of date (created, modified).
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										7
+									</entry>
+									 <entry>
+										This field allow you to add a constraint to search by the document type (File, Article, Podcast, Sample node, File Plan, Kofax).
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										8
+									</entry>
+									 <entry>
+										This field allow you to add a constraint to search by categories.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										<inlinemediaobject>
+											<imageobject>
+												<imagedata fileref="images/addnodetypeicon.png" format="PNG" />
+											</imageobject>
+
+										</inlinemediaobject>
+
+									</entry>
+									 <entry>
+										Add a document type.
+									</entry>
+
+								</row>
+								 <row>
+									<entry>
+										<inlinemediaobject>
+											<imageobject>
+												<imagedata fileref="images/addcategoryicon.png" format="PNG" />
+											</imageobject>
+
+										</inlinemediaobject>
+
+									</entry>
+									 <entry>
+										Add a category.
+									</entry>
+
+								</row>
+
+							</tbody>
+
+						</tgroup>
+
+					</table>
+
+				</step>
+				 <step>
+					<para>
+						Select the constraint operator(<emphasis role="bold">AND/OR</emphasis>).
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Add the required constraints using one of the follow methods:
+					</para>
+					 <orderedlist>
+						<listitem>
+							<para>
+								<xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values" />
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								<xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_including_or_excluding_values_" />
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								<xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_by_date" />
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								<xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_by_document_type" />
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								<xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_by_category" />
+							</para>
+
+						</listitem>
+
+					</orderedlist>
+					 <procedure id="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values">
+						<title>Add a constraint for exact values</title>
+						 <step>
+							<para>
+								Check the box that corresponds to the constraint you want.
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Enter the property you want to locate or click the <emphasis role="bold">Add property</emphasis> icon 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/furtherpropertyicon.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 .
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/addpropertyiconform.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/addpropertyiconform.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								A list of possible properties appears:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/propertieslist.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/propertieslist.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+
+						</step>
+						 <step>
+							<para>
+								Select a property from the list and click <emphasis role="bold">Add</emphasis>. The selected property will populate <emphasis role="bold">Property</emphasis> field.
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Define the property value to search for by entering a value into the <emphasis role="bold">Contain exactly</emphasis> field or click the <emphasis role="bold">Find exactly</emphasis> icon: 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/furtherpropertyicon.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/containexactlyform.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/containexactlyform.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								The <emphasis role="bold">Filter form</emphasis> will appear:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/filterform.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/filterform.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								All pre-existing values for the property you selected will appear.
+							</para>
+							 <itemizedlist>
+								<listitem>
+									<para>
+										If the value you require is in the list, select it and click <emphasis role="bold">Select</emphasis>.
+									</para>
+
+								</listitem>
+								 <listitem>
+									<para>
+										If the value you require is not in the list, enter it in the <emphasis role="bold">Filter:</emphasis> field and click 
+										<inlinemediaobject>
+											<imageobject>
+												<imagedata fileref="images/furtherpropertyicon.png" format="PNG" />
+											</imageobject>
+
+										</inlinemediaobject>
+										 icon. The value will populate the <emphasis role="bold">Contain exactly</emphasis> field of the constraints form.
+									</para>
+
+								</listitem>
+
+							</itemizedlist>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/containexactlypopulated.png" format="PNG" scale="100" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/containexactlypopulated.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+
+						</step>
+
+					</procedure>
+					
+					 <procedure id="proc-User_Guide-Search_with_constraints-Add_a_constraint_including_or_excluding_values_">
+						<title>Add a constraint including or excluding values </title>
+						 <step>
+							<para>
+								Check the box corresponding to the <emphasis role="bold">Contain</emphasis> or <emphasis role="bold">Not Contain</emphasis> constraint, as appropriate.
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Enter the required property in the <emphasis role="bold">Property</emphasis> field or click the <emphasis role="bold">Add Property</emphasis> icon 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/furtherpropertyicon.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 (refer to <emphasis role="bold">Step B</emphasis> in <xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values" /> for more information).
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Enter the required values in the <emphasis role="bold">Contain</emphasis> or <emphasis role="bold">Not Contain</emphasis> fields.
+							</para>
+
+						</step>
+
+					</procedure>
+					
+					 <procedure id="proc-User_Guide-Search_with_constraints-Add_a_constraint_by_date">
+						<title>Add a constraint by date</title>
+						 <step>
+							<para>
+								Click the check box beside the field with the drop down menu (below the <emphasis role="bold">Property</emphasis> entries).
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Define the search condition from the drop down list (<emphasis role="bold">CREATED</emphasis>/<emphasis role="bold">MODIFIED</emphasis>).
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Click in the <emphasis role="bold">From</emphasis> field.
+							</para>
+							 <para>
+								A small calendar will appear;
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/datesearchcondition.png" format="PNG" scale="90" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/datesearchcondition.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+							 <para>
+								Select the date you want to use as a contraint.
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Repeat the above steps for the <emphasis role="bold">To</emphasis> field.
+							</para>
+							 <para>
+								The selected dates will populate the <emphasis role="bold">From</emphasis> and <emphasis role="bold">To</emphasis> fields in the <emphasis role="bold">Add constraint</emphasis> form.
+							</para>
+
+						</step>
+
+					</procedure>
+					
+					 <procedure id="proc-User_Guide-Search_with_constraints-Add_a_constraint_by_document_type">
+						<title>Add a constraint by document type</title>
+						 <step>
+							<para>
+								Click the check box beside the <emphasis role="bold">Document Type</emphasis> field.
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Enter the document type you want to search for or click the 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/addnodetypeicon.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 icon for a list of document types:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/documenttypelist.png" format="PNG" scale="" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/documenttypelist.png" format="PNG" />
+								</imageobject>
+
+							</mediaobject>
+
+						</step>
+						 <step>
+							<para>
+								Click the check box of the document type you want and click <emphasis role="bold">Save</emphasis>.
+							</para>
+							 <para>
+								The selected document type will populate the <emphasis role="bold">Document Type</emphasis> field.
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/documenttypepopulated.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/documenttypepopulated.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+
+						</step>
+
+					</procedure>
+					
+					 <procedure id="proc-User_Guide-Search_with_constraints-Add_a_constraint_by_category">
+						<title>Add a constraint by category</title>
+						 <step>
+							<para>
+								Click the check box beside the <emphasis role="bold">Category</emphasis> field.
+							</para>
+
+						</step>
+						 <step>
+							<para>
+								Enter the category you want to search for or click the 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/addcategoryicon.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 icon for a list of categories:
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/categorylist.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/categorylist.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+
+						</step>
+						 <step>
+							<para>
+								Click the 
+								<inlinemediaobject>
+									<imageobject>
+										<imagedata fileref="images/greentick.png" format="PNG" />
+									</imageobject>
+
+								</inlinemediaobject>
+								 that corresponds to the category you want.
+							</para>
+							 <para>
+								The selected category will populate the <emphasis role="bold">Category</emphasis> field.
+							</para>
+							 <mediaobject>
+								<imageobject role="html">
+									<imagedata align="center" fileref="images/documenttypepopulated.png" format="PNG" scale="" width="444" />
+								</imageobject>
+								 <imageobject role="fo">
+									<imagedata align="center" contentwidth="150mm" fileref="images/documenttypepopulated.png" format="PNG" width="444" />
+								</imageobject>
+
+							</mediaobject>
+
+						</step>
+
+					</procedure>
+					
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Add</emphasis> to add any/all activated constraints.
+					</para>
+					 <para>
+						The constraints will be converted to an <emphasis role="bold">SQL</emphasis> query and displayed in the search form:
+					</para>
+					 <mediaobject>
+						<imageobject role="html">
+							<imagedata align="center" fileref="images/SQLsearchform.png" format="PNG" scale="" width="444" />
+						</imageobject>
+						 <imageobject role="fo">
+							<imagedata align="center" contentwidth="150mm" fileref="images/SQLsearchform.png" format="PNG" width="444" />
+						</imageobject>
+
+					</mediaobject>
+					 <para>
+						Remove unnecessary constraints with the 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 icon.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Search</emphasis> to launch the search. Results will be displayed in the <emphasis role="bold">Search Results</emphasis> tab.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Save</emphasis> and give this search configuration a name if you want to save it for use at another time.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+		
+      <section id="sect-User_Guide-Advanced_Search-Search_by_creating_a_new_query">
+			<title>Search by creating a new query</title>
+			 <para>
+				You need a knowledge of the structure of query statements in order to configure a search using the parameters on the <emphasis role="bold">New Query</emphasis> tab
+			</para>
+			 <procedure>
+				<title></title>
+				 <step>
+					<para>
+						Enter a unique name for this query in the <emphasis role="bold">Name</emphasis> field.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Choose a query type from the drop down menu; <emphasis role="bold">SQL</emphasis> or <emphasis role="bold">xPath</emphasis>
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Enter a query statement.
+					</para>
+
+				</step>
+				 <step>
+					<para>
+						Click <emphasis role="bold">Search</emphasis> to perform the search and display the results in the <emphasis role="bold">Search Results</emphasis> tab.
+					</para>
+					 <para>
+						Or click <emphasis role="bold">Save</emphasis> to save the search query to the <emphasis role="bold">Saved Query</emphasis> tab.
+					</para>
+					 <para>
+						Or click <emphasis role="bold">Cancel</emphasis> to quit.
+					</para>
+
+				</step>
+
+			</procedure>
+			
+
+		</section>
+
+      <section id="sect-User_Guide-Advanced_Search-Search_by_existing_queries">
+			<title>Search by existing queries</title>
+			 <para>
+				This tab lists all saved search queries (that you have access rights to use).
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/savedquerytab.png" format="PNG" scale="90" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/savedquerytab.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <itemizedlist>
+				<listitem>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/searchsprocket.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 to perfom the search and see the results in the <emphasis role="bold">Search Results</emphasis> tab.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/editicon4.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 to edit the query statement. The query form will appear as it does when creating a query (see <xref linkend="sect-User_Guide-Advanced_Search-Search_by_creating_a_new_query" />) however you cannot edit the name of the saved search.
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/trashicon.png" format="PNG" />
+							</imageobject>
+
+						</inlinemediaobject>
+						 to delete a query (provided you have access rights over that query).
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+
+		</section>
+
+	</section>
+
+    <section id="sect-User_Guide-Search_in_Sites_Explorer-Quick_Search">
+		<title>Quick Search</title>
+		 <para>
+			To perform a quick search:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/savedsearchicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon to see the list of existing queries.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/savedsearches.png" format="PNG" scale="100" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/savedsearches.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					A query list will appear. It contains the sections; <emphasis role="bold">All Articles</emphasis>, <emphasis role="bold">Created Documents</emphasis>, <emphasis role="bold">CreatedDocumentDayBefore</emphasis> and <emphasis role="bold">allArticles</emphasis>.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/querylistsections.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/querylistsections.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Launch, modify or delete the queries as required (see <xref linkend="sect-User_Guide-Advanced_Search-Search_by_creating_a_new_query" />  for more information).
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Filter results with the entries in the <emphasis role="bold">All Items</emphasis> and/or <emphasis role="bold">By Type</emphasis> panes on the left of the tab. Items matching the selections will appear in the right pane.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click on the required document or folder name to view and or download them.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+
+</section>
+
+

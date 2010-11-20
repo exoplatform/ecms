@@ -3,9 +3,9 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section>
-  <title><emphasis role="bold">Account</emphasis></title>
-    <section>
+<section id="sect-User_Guide-Account">
+	<title><emphasis role="bold">Account</emphasis></title>
+	 <section id="sect-User_Guide-Account-Register_an_account">
 		<title>Register an account</title>
 		 <para>
 			To register a new account on the portal, do as follows:
@@ -117,15 +117,21 @@
 								 <entry>
 									Your email address. It must have a right format: <replaceable>username@abc.com</replaceable>
 								</entry>
+
 							</row>
+
 						</tbody>
+
 					</tgroup>
+
 				</table>
+
 			</step>
 			 <step>
 				<para>
 					Input values for the fields in this form.
 				</para>
+
 			</step>
 			 <step>
 				<para>
@@ -134,17 +140,18 @@
 						<imageobject>
 							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
 						</imageobject>
+
 					</inlinemediaobject>
 					 icon to search and check if the inputted user name is available or not.
 				</para>
+
 			</step>
-          <!--<step>
+			 <!-- <step>
 				<para>
 					Input other required fields in the <emphasis role="bold">Account Settings</emphasis> tab.
 				</para>
 
-			</step>-->
-			 <step>
+			</step> --> <step>
 				<para>
 					Input values in the fields of User Profile tab, including: Profile information, Home information and Business information.
 				</para>
@@ -214,7 +221,7 @@
 
 	</section>
 	
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Sign_In">
+	 <section id="sect-User_Guide-Account-Sign_In">
 		<title>Sign In</title>
 		 <para>
 			This function enables you to go into WCM in the private mode.
@@ -345,7 +352,7 @@
 
 	</section>
 	
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Sign_Out">
+	 <section id="sect-User_Guide-Account-Sign_Out">
 		<title>Sign Out</title>
 		 <para>
 			The function lets you get back to the anonymous portal. It ends your current portal session.
@@ -372,10 +379,12 @@
 			 <imageobject role="fo">
 				<imagedata align="center" contentwidth="150mm" fileref="images/startlogo.png" format="PNG" />
 			</imageobject>
+
 		</mediaobject>
+
 	</section>
-   
-	 <section id="sect-User_Guide-Basic_Actions_in_WCM-Retrieve_usernamepassword">
+	
+	 <section id="sect-User_Guide-Account-Retrieve_user_namepassword">
 		<title>Retrieve user name/password</title>
 		 <para>
 			If you forget your account or password, you can recover them by doing as follows:
@@ -384,7 +393,7 @@
 			<title></title>
 			 <step>
 				<para>
-               Click the link <emphasis role="bold">Forgot your User Name/Password?</emphasis> in the Sign in form.
+					Click the link <emphasis role="bold">Forgot your User Name/Password?</emphasis> in the Sign in form.
 				</para>
 				 <para>
 					This form offers two options:
@@ -396,6 +405,7 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/retrieve.png" format="PNG" width="444" />
 					</imageobject>
+
 				</mediaobject>
 				 <variablelist>
 					<varlistentry>
@@ -414,9 +424,13 @@
 							<para>
 								If you forgot your username, you need to select this option.
 							</para>
+
 						</listitem>
+
 					</varlistentry>
+
 				</variablelist>
+
 			</step>
 			 <step>
 				<para>
@@ -432,6 +446,7 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/forgotpassword.png" format="PNG" width="444" />
 					</imageobject>
+
 				</mediaobject>
 				 <para>
 					If the <emphasis role="bold">Forgot my username</emphasis> option is selected, the form to recover the user name appears:
@@ -443,55 +458,63 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/forgotname.png" format="PNG" width="444" />
 					</imageobject>
+
 				</mediaobject>
+
 			</step>
 			 <step>
 				<para>
 					Enter your username or email in the corresponding form.
 				</para>
+
 			</step>
 			 <step>
 				<para>
-               Click <emphasis role="bold">Send</emphasis> to send the inputted values.
+					Click <emphasis role="bold">Send</emphasis> to send the inputted values.
 				</para>
 				 <para>
-					Once information has been sent, you will receive an email with your User name/ Password in your email address that you registered. 
+					Once information has been sent, you will receive an email with your User name/ Password in your email address that you registered.
 				</para>
 				 <itemizedlist>
 					<listitem>
 						<para>
 							If you forget User Name: when a username is retrieved, your old username is restored and can be reused and a new password is also sent to your email with the old username.
 						</para>
+
 					</listitem>
 					 <listitem>
 						<para>
 							If you forget old password: a new password will be set (as temporary, then you will be directed to change the password for the next time you sign in).
 						</para>
+
 					</listitem>
+
 				</itemizedlist>
-<!-- Removed in eXo Content User Guide 2.1.1
+				<!--  Removed in eXo Content User Guide 2.1.1
 				 <note>
 					<title>Temporary Credentials Validity</title>
 					 <para>
 						The Username/Password that you received only takes effect for 1 day. It means that if the period is over 1 day from the receipt date, you can not use the receipt username/password, so you will need to get another email active.
 					</para>
 				</note>
--->
+ -->
 			</step>
+
 		</procedure>
+		
+
 	</section>
 	
-   <section id="sect-User_Guide-Basic_Actions_in_WCM-Change_Account_Information">
+	 <section id="sect-User_Guide-Account-Change_Account_Information">
 		<title>Change Account Information</title>
 		 <para>
 			The function enables you change your account information, such as your profile and password.
 		</para>
-
 		 <procedure>
 			<title></title>
 			 <step>
 				<para>
-					The first thing to do is to directly click your own account name. 
+					The first thing to do is to directly click your own account name.
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
@@ -500,6 +523,7 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/accountname.png" format="PNG" width="444" />
 					</imageobject>
+
 				</mediaobject>
 				 <para>
 					The Account Profiles tab will appear:
@@ -511,10 +535,13 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/accountprofile.png" format="PNG" width="444" />
 					</imageobject>
-				</mediaobject>
-			</step>
-		</procedure>
 
+				</mediaobject>
+
+			</step>
+
+		</procedure>
+		
 		 <procedure id="proc-User_Guide-Change_Account_Information-To_Change_Account_Profiles">
 			<title>To Change Account Profiles</title>
 			 <step>
@@ -524,19 +551,23 @@
 				 <para>
 					This tab displays your current basic information.
 				</para>
+
 			</step>
 			 <step>
 				<para>
 					Change your First Name, Last Name and Email. You cannot change your User Name.
 				</para>
+
 			</step>
 			 <step>
 				<para>
-               Click <emphasis role="bold">Save</emphasis> to accept changes.
+					Click <emphasis role="bold">Save</emphasis> to accept changes.
 				</para>
-			</step>
-		</procedure>
 
+			</step>
+
+		</procedure>
+		
 		 <procedure id="proc-User_Guide-Change_Account_Information-To_change_your_Password">
 			<title>To change your Password</title>
 			 <step>
@@ -550,28 +581,40 @@
 					 <imageobject role="fo">
 						<imagedata align="center" contentwidth="150mm" fileref="images/changepassword.png" format="PNG" width="444" />
 					</imageobject>
+
 				</mediaobject>
+
 			</step>
 			 <step>
 				<para>
 					Input your current password to identify that you are the owner of this account.
 				</para>
+
 			</step>
 			 <step>
 				<para>
 					Input your new password, it must have at least 6 characters.
 				</para>
+
 			</step>
 			 <step>
 				<para>
-               Input your password again in the <emphasis role="bold">Confirm New Password</emphasis> field.
+					Input your password again in the <emphasis role="bold">Confirm New Password</emphasis> field.
 				</para>
+
 			</step>
 			 <step>
 				<para>
-               Click <emphasis role="bold">Save</emphasis> to accept changes.
+					Click <emphasis role="bold">Save</emphasis> to accept changes.
 				</para>
+
 			</step>
+
 		</procedure>
-      </section>
+		
+
+	</section>
+
 </section>
+
+

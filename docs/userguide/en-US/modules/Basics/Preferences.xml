@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Preferences">
+	<title>Preferences</title>
+	 <para>
+		This function is used to set up your browsing preferences.
+	</para>
+	 <procedure>
+		<title></title>
+		 <step>
+			<para>
+				Click on 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/preferencesettingicon.png" format="PNG" />
+					</imageobject>
+
+				</inlinemediaobject>
+				 on the right side of the <emphasis role="bold">Sites Explorer</emphasis> portlet.
+			</para>
+			 <para>
+				The <emphasis role="bold">Preference Setting</emphasis> window will appear:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/preferencesettingform.png" format="PNG" scale="" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/preferencesettingform.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <table>
+				<title></title>
+				 <tgroup cols="2">
+					<thead>
+						<row>
+							<entry>
+								Setting
+							</entry>
+							 <entry>
+								Details
+							</entry>
+
+						</row>
+
+					</thead>
+					 <tbody>
+						<row>
+							<entry>
+								Enable JCR like structure.
+							</entry>
+							 <entry>
+								This option is to display nodes in a document in tree structure.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Show sidebar
+							</entry>
+							 <entry>
+								This option is to display a sidebar.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Show non document nodes
+							</entry>
+							 <entry>
+								This option is to display nodes that are non–documents.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Show referenced documents
+							</entry>
+							 <entry>
+								This option is to display referenced documents.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Show hidden nodes
+							</entry>
+							 <entry>
+								The option is to display hidden nodes.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Show items by user in Time line View
+							</entry>
+							 <entry>
+								This option is to display items by a user or not in Timeline view.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Enable drag and drop
+							</entry>
+							 <entry>
+								This option is to allows taking the “drag and drop” action or not.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Query Type
+							</entry>
+							 <entry>
+								This query type.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Sort by
+							</entry>
+							 <entry>
+								This condition is used to sort nodes in nodes list.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Order
+							</entry>
+							 <entry>
+								This type of the sorted order.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+								Nodes per page
+							</entry>
+							 <entry>
+								This number of nodes that will be displayed per page.
+							</entry>
+
+						</row>
+						 <row>
+							<entry>
+
+							</entry>
+							 <entry>
+
+							</entry>
+
+						</row>
+
+					</tbody>
+
+				</tgroup>
+
+			</table>
+
+		</step>
+		 <step>
+			<para>
+				Configure the preferences as required and click <emphasis role="bold">Save</emphasis> to set them.
+			</para>
+			 <para>
+				Or click <emphasis role="bold">Back</emphasis> to quit without submitting changes.
+			</para>
+
+		</step>
+
+	</procedure>
+
+</section>
+
+

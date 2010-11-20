@@ -65,12 +65,14 @@
 					<imageobject>
 						<imagedata fileref="images/componentuparrow.png" format="PNG" />
 					</imageobject>
+
 				</inlinemediaobject>
 				 corresponding to the component to move this component up or the 
 				<inlinemediaobject>
 					<imageobject>
 						<imagedata fileref="images/componentdownarrow.png" format="PNG" />
 					</imageobject>
+
 				</inlinemediaobject>
 				 to move the component down.
 			</para>
@@ -83,6 +85,7 @@
 					<imageobject>
 						<imagedata fileref="images/editcomponenticon.png" format="PNG" />
 					</imageobject>
+
 				</inlinemediaobject>
 				 that corresponds to the component to edit properties of that component. The form to edit properties appears like the illustration below:
 			</para>
@@ -130,12 +133,14 @@
 									<imageobject>
 										<imagedata fileref="images/rulesrequiredbox.png" format="PNG" />
 									</imageobject>
+
 								</inlinemediaobject>
 								 is marked the 
 								<inlinemediaobject>
 									<imageobject>
 										<imagedata fileref="images/redstarasterix.png" format="PNG" />
 									</imageobject>
+
 								</inlinemediaobject>
 								 will appear beside the text box, indicating that values in this box are required.
 							</entry>
@@ -180,6 +185,7 @@
 					<imageobject>
 						<imagedata fileref="images/trashicon.png" format="PNG" />
 					</imageobject>
+
 				</inlinemediaobject>
 				 corresponding to the component.
 			</para>
@@ -199,8 +205,7 @@
 		</step>
 
 	</procedure>
-	
-	 <!-- Close Section 3.8 Form Generator -->
+
 </section>
 
 

@@ -1,0 +1,386 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Categories">
+	<title>Categories</title>
+	 <para>
+		When implementing the Category, users will actually enjoy nice features via the Category model. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the Parameterized Content List Viewer in such an easy way.
+	</para>
+	 <procedure>
+		<title></title>
+		 <step>
+			<para>
+				Go to <emphasis role="bold">News</emphasis> on the navigation bar:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/newsnavigationbar.png" format="PNG" scale="100" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/newsnavigationbar.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <para>
+				The left pane lists all the sub-catgories containign documents or web-content.
+			</para>
+			 <para>
+				The right pane displays the documents selected in the left pane.
+			</para>
+
+		</step>
+		 <step>
+			<para>
+				Select a category that you want to view on the left, it will be shown on the right (only documents or web content published are shown).
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/categorypanes.png" format="PNG" scale="" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/categorypanes.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+
+		</step>
+
+	</procedure>
+	
+	 <section id="sect-User_Guide-Categories-The_Edit_Modes_of_Category_Navigation_portlet">
+		<title>The Edit Modes of Category Navigation portlet</title>
+		 <para>
+			Administrators can edit the Category Navigation portlet with the following process:
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Go to <emphasis role="bold">News</emphasis>, then turn on the Edit mode. Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon3.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the Category panel.
+				</para>
+				 <para>
+					The Category List Configuration will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/categorylistconfiguration.png" format="PNG" scale="" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/categorylistconfiguration.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Categories-The_Edit_Mode_in_Parameterized_Content_List_Viewer">
+		<title>The Edit Mode in Parameterized Content List Viewer</title>
+		 <para>
+			Users are entitled to edit the settings in the Parameterized Content List Viewer portlet.
+		</para>
+		 <procedure>
+			<title></title>
+			 <step>
+				<para>
+					Turn on the Edit mode of a site.
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/editmodeswitch.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/editmodeswitch.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon3.png" format="PNG" />
+						</imageobject>
+					</inlinemediaobject>
+					 icon at the upper right corner of this panel, the edit form of Parameterized Content List Viewer will be displayed:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/parameterizedviewer.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/parameterizedviewer.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <table>
+					<title></title>
+					 <tgroup cols="2">
+						<thead>
+							<row>
+								<entry>
+									Field
+								</entry>
+								 <entry>
+									Details
+								</entry>
+
+							</row>
+
+						</thead>
+						 <tbody>
+							<row>
+								<entry>
+									Order By
+								</entry>
+								 <entry>
+									To choose types of order priority for documents or web-content. The “descendant” means documents or web-content are arranged according to the increasing order; meanwhile the "ascendant” means documents or web-content are arranged according to the decreasing order.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Header
+								</entry>
+								 <entry>
+									To enter the topic containing documents or web-content. You can use the default header to let the portlet define the Header from the category URI.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									View Template
+								</entry>
+								 <entry>
+									To choose the template in which documents or web-content will be displayed for viewing.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Paginator template
+								</entry>
+								 <entry>
+									To choose the template in which documents or web-content will be arranged.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Items per page
+								</entry>
+								 <entry>
+									To enter a number of documents or web-content that will be displayed per page.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show title
+								</entry>
+								 <entry>
+									To allow showing titles of documents or web-content.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show header
+								</entry>
+								 <entry>
+									To allow showing headers of documents or web-content.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show refresh button:
+								</entry>
+								 <entry>
+									To allow showing the refresh button.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show illustration
+								</entry>
+								 <entry>
+									To allow showing images of documents or web-content.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show date created
+								</entry>
+								 <entry>
+									To allow showing the date when documents or web-content are created.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show read more
+								</entry>
+								 <entry>
+									To allow showing more documents or web-content.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show summary
+								</entry>
+								 <entry>
+									To allow showing summaries of documents or web-content.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show link
+								</entry>
+								 <entry>
+									To allow showing the title of document or web-content.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Show RSS link
+								</entry>
+								 <entry>
+									To allow showing the RSS link containing documents or web-content.
+								</entry>
+
+							</row>
+							 <row>
+								<entry>
+									Target page
+								</entry>
+								 <entry>
+									The page that users want to link the content to.
+								</entry>
+
+							</row>
+
+						</tbody>
+
+					</tgroup>
+
+				</table>
+
+			</step>
+			 <step>
+				<para>
+					Select the type and the order displaying document content or web content by selecting the <emphasis role="bold">Order by</emphasis> field, and <emphasis role="bold">Descendant</emphasis> or <emphasis role="bold">Ascendant</emphasis> checkbox.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/droparrow.png" format="PNG" />
+						</imageobject>
+					</inlinemediaobject>
+					 to select the template for Viewer and Paginator.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Input the number of items that will be displayed per page in this portlet.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select/unselect the checkboxes, including <emphasis role="bold">Show title</emphasis>, <emphasis role="bold">Show header</emphasis>, <emphasis role="bold">Show Refresh</emphasis> buttons, etc.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
+						</imageobject>
+					</inlinemediaobject>
+					 icon to select the target page. The Page selector form will appear:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/pageselectorform.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/pageselectorform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/ascendingarrow.png" format="PNG" />
+						</imageobject>
+					</inlinemediaobject>
+					 to select the navigation, the corresponding pages will be displayed on the left panel and the corresponding path will be displayed on the right panel.
+				</para>
+				 <para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/greentick.png" format="PNG" />
+						</imageobject>
+					</inlinemediaobject>
+					that corresponds to the selected path on the right panel to select the path. The selected path will be displayed in the Target Path field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to accept changes, or <emphasis role="bold">Cancel</emphasis> to quit without saving.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <note>
+			<title></title>
+			 <para>
+				This feature only supports users as administrators (root/gtn). In this part, we use the account ( root/ gtn) to give the guide.
+			</para>
+
+		</note>
+
+	</section>
+
+</section>
+
+

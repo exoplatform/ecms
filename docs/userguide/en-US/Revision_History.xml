@@ -7,6 +7,20 @@
 	<title>Revision History</title>
 	 <simpara>
 		<revhistory>
+         <revision>
+            <revnumber>1-2.1.1</revnumber>
+            <date>Fri Nov 19 2010</date>
+               <author>
+                  <firstname>Scott</firstname>
+                  <surname>Mumford</surname>
+                  <email>smumford@redhat.com</email>
+               </author>
+                  <revdescription>
+                     <simplelist>
+                        <member>Updated docbook source to WCM 2.1.1</member>
+                     </simplelist>
+                  </revdescription>
+         </revision>
 			<revision>
 				<revnumber>1-2.0</revnumber>
 				 <date>Mon Oct 25 2010</date>
@@ -48,8 +62,9 @@
 					</simplelist>
 
 				</revdescription>
-
 			</revision>
+
+<!--
 			 <revision>
 				<revnumber>1-1.5</revnumber>
 				 <date>Wed Oct 20 2010</date>
@@ -140,6 +155,7 @@
 				</revdescription>
 
 			</revision>
+ -->
 			 <revision>
 				<revnumber>1-0</revnumber>
 				 <date>Tue Sep 28 2010</date>

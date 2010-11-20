@@ -5,7 +5,7 @@
 ]>
 <section id="sect-User_Guide-Newsletters">
 	<title>Newsletters</title>
-	 <!-- Chapter converted by lbailey; talk to me about any borks. --> <para>
+	 <para>
 		WCM provides a newsletter service aiming at helping users quickly get the updated newsletters from a website.
 	</para>
 	 <section id="sect-User_Guide-Newsletters-Newsletter_Viewer">
@@ -83,7 +83,7 @@
 
 	</section>
 	
-	 <!-- Close Section 3.6.1 Newsletter Viewer --> <section id="sect-User_Guide-Newsletters-Newsletter_Manager">
+	<section id="sect-User_Guide-Newsletters-Newsletter_Manager">
 		<title>Newsletter Manager</title>
 		 <para>
 			WCM facilitates administrators to easily and quickly manage and control newsletters. Go to Groups | Newsletter Manager on the Administration bar to reach the Newsletter Manager.
@@ -199,6 +199,7 @@
 								<imageobject>
 									<imagedata fileref="images/newsletters-user_icon.png" format="PNG" />
 								</imageobject>
+
 							</inlinemediaobject>
 							 next to the Moderator field to select a user. The User selector form will appear.
 						</para>
@@ -217,6 +218,7 @@
 								<imageobject>
 									<imagedata fileref="images/newsletters-tick.png" format="PNG" />
 								</imageobject>
+
 							</inlinemediaobject>
 							 to select a user in the list.
 						</para>
@@ -229,6 +231,7 @@
 								<imageobject>
 									<imagedata fileref="images/newsletters-user_group.png" format="PNG" />
 								</imageobject>
+
 							</inlinemediaobject>
 							 to select users in a specific group. The Group selector will appear.
 						</para>
@@ -269,8 +272,8 @@
 				
 
 			</section>
-			
-			 <!--  Close Section 3.6.2.1.1.  Add Category --> <section id="sect-User_Guide-Category-Edit_a_category">
+
+         <section id="sect-User_Guide-Category-Edit_a_category">
 				<title>Edit a category</title>
 				 <procedure>
 					<step>
@@ -410,7 +413,7 @@
 
 			</section>
 			
-			 <!--  Close Section: 3.6.2.1.3 Delete a category  --> <section id="sect-User_Guide-Category-Manage_Users">
+			<section id="sect-User_Guide-Category-Manage_Users">
 				<title>Manage Users</title>
 				 <para>
 					Administrators can manage users accounts and activity with <emphasis>edit</emphasis>, <emphasis>ban</emphasis>, <emphasis>remove ban</emphasis> or <emphasis>delete</emphasis> actions.
@@ -496,6 +499,7 @@
 												<imageobject>
 													<imagedata fileref="images/editicon2.png" format="PNG" />
 												</imageobject>
+
 											</inlinemediaobject>
 
 										</entry>
@@ -510,6 +514,7 @@
 												<imageobject>
 													<imagedata fileref="images/newsletters_ban_icon.png" format="PNG" />
 												</imageobject>
+
 											</inlinemediaobject>
 
 										</entry>
@@ -524,6 +529,7 @@
 												<imageobject>
 													<imagedata fileref="images/newsletters_unban_icon.png" format="PNG" />
 												</imageobject>
+
 											</inlinemediaobject>
 
 										</entry>
@@ -538,6 +544,7 @@
 												<imageobject>
 													<imagedata fileref="images/trashicon.png" format="PNG" />
 												</imageobject>
+
 											</inlinemediaobject>
 
 										</entry>
@@ -565,11 +572,10 @@
 				
 
 			</section>
-			
-			 <!--  Close Section: 3.6.2.1.4 Manage Users  -->
+
 		</section>
 		
-		 <!-- Close Section 3.6.2.1 Category --> <section id="sect-User_Guide-Newsletter_Manager-Subscriptions">
+		<section id="sect-User_Guide-Newsletter_Manager-Subscriptions">
 			<title>Subscriptions</title>
 			 <para>
 				An administrator can add more subscriptions to any category. There are two ways to do this:
@@ -677,6 +683,7 @@
 							<imageobject>
 								<imagedata fileref="images/droparrow.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 and select the category from the drop down menu.
 					</para>
@@ -838,7 +845,7 @@
 
 		</section>
 		
-		 <!--  Close Section: 3.6.2.2 Subscriptions  --> <section id="sect-User_Guide-Newsletter_Manager-Open_a_Newsletter">
+		<section id="sect-User_Guide-Newsletter_Manager-Open_a_Newsletter">
 			<title>Open a Newsletter</title>
 			 <para>
 				Administrators can easily view the content of a newsletter.
@@ -882,6 +889,7 @@
 							<imageobject>
 								<imagedata fileref="images/newsletters_moderation_icon.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 button, then select <emphasis role="bold">Open</emphasis> in the menu:
 					</para>
@@ -920,7 +928,7 @@
 
 		</section>
 		
-		 <!--  Close Section: 3.6.2.3 Open a Newsletter  --> <section id="sect-User_Guide-Newsletter_Manager-Edit_a_newsletter">
+		<section id="sect-User_Guide-Newsletter_Manager-Edit_a_newsletter">
 			<title>Edit a newsletter</title>
 			 <para>
 				Do the following to edit a newsletter.
@@ -940,8 +948,9 @@
 							<imageobject>
 								<imagedata fileref="images/moderationbutton.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
-						, then select <emphasis role="bold">Edit</emphasis> in the menu.
+						 , then select <emphasis role="bold">Edit</emphasis> in the menu.
 					</para>
 					 <mediaobject>
 						<imageobject>
@@ -990,7 +999,7 @@
 
 		</section>
 		
-		 <!--  Close section 3.6.2.4 Edit a newsletter  --> <section id="sect-User_Guide-Newsletter_Manager-Delete_a_newsletter">
+		<section id="sect-User_Guide-Newsletter_Manager-Delete_a_newsletter">
 			<title>Delete a newsletter</title>
 			 <para>
 				Administrator can delete obselete newsletters.
@@ -1016,8 +1025,9 @@
 							<imageobject>
 								<imagedata fileref="images/moderationbutton.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
-						, then click <emphasis role="bold">Delete</emphasis> in the menu.
+						 , then click <emphasis role="bold">Delete</emphasis> in the menu.
 					</para>
 					 <para>
 						The confirmation message will be displayed:
@@ -1042,7 +1052,7 @@
 
 		</section>
 		
-		 <!--  Close section 3.6.2.5 Delete a newsletter  --> <section id="sect-User_Guide-Newsletter_Manager-Convert_as_Template">
+		<section id="sect-User_Guide-Newsletter_Manager-Convert_as_Template">
 			<title>Convert as Template</title>
 			 <para>
 				The administrator can reuse the template of the frequently used newsletter template.
@@ -1062,8 +1072,9 @@
 							<imageobject>
 								<imagedata fileref="images/moderationbutton.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
-						, then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
+						 , then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
 					</para>
 
 				</step>
@@ -1073,7 +1084,7 @@
 
 		</section>
 		
-		 <!--  Close section 3.6.2.6 Convert As Template  --> <section id="sect-User_Guide-Newsletter_Manager-Newsletters">
+		<section id="sect-User_Guide-Newsletter_Manager-Newsletters">
 			<title>Newsletters</title>
 			 <para>
 				Each subscription consists of many newsletters. <emphasis role="bold">WCM</emphasis> helps you easily create newsletters by following these steps.
@@ -1093,6 +1104,7 @@
 							<imageobject>
 								<imagedata fileref="images/newletterbutton.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 on the action bar. The <emphasis role="bold">Newsletter entry form</emphasis>will appear:
 					</para>
@@ -1181,6 +1193,7 @@
 							<imageobject>
 								<imagedata fileref="images/bluedroparrow.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 to select the template for the newsletter.
 					</para>
@@ -1205,6 +1218,7 @@
 							<imageobject>
 								<imagedata fileref="images/bluedroparrow.png" format="PNG" />
 							</imageobject>
+
 						</inlinemediaobject>
 						 in the category field to select the category and the subscription in list.
 					</para>
@@ -1348,11 +1362,9 @@
 			
 
 		</section>
-		
-		 <!--  Close section 3.6.2.7 Newsletters  -->
+
 	</section>
-	
-	 <!--  Close Section 3.6.2 Newsletter Manager --> <!--  Close Section 3.6 Newsletters  -->
+
 </section>
 
 

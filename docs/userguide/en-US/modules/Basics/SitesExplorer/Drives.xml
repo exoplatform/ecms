@@ -1,0 +1,422 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Drives">
+	<title>Drives</title>
+	 <section id="sect-User_Guide-Drives-Private_drive">
+		<title>Private drive</title>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/privatedrive.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/privatedrive.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			Private drive contains personal data of registered users. Hence, only these individuals can access data in this drive type.
+		</para>
+		 <para>
+			By default, there are some initialized folders to store private user's resources.
+		</para>
+		 <itemizedlist>
+			<listitem>
+				<mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/actionstab.png" format="PNG" scale="90" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/actionstab.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					By selecting the Actions tab, you can:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							Create a new folder
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Create a new document
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Upload file from your computer
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Add Sym Links
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Overload Thumbnails
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</listitem>
+			 <listitem>
+				<para>
+					By selecting the Collaboration tab, you can:
+				</para>
+				 <mediaobject>
+					<imageobject role="html">
+						<imagedata align="center" fileref="images/collaborationtab.png" format="PNG" scale="90" width="444" />
+					</imageobject>
+					 <imageobject role="fo">
+						<imagedata align="center" contentwidth="150mm" fileref="images/collaborationtab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							Watch/Unwatch a document.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Add tags for a document.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Set multi-display languages for document.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Vote for a document.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Comment for a document.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</listitem>
+			 <listitem>
+				<para>
+					By selecting the Search tab, you can:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							Do the simple search
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Do the advanced search with more constraints, add new query to search
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Do search by existing queries.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</listitem>
+			 <listitem>
+				<para>
+					In addition, you can:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							Setup your browsing preferences
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Cut/paste, Copy/past, Delete a node
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Lock a node
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Rename a node
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Use the view WebDAV function to view document content.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Download documents (folders) to your machine.
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</listitem>
+
+		</itemizedlist>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Drives-Public_drive">
+		<title>Public drive</title>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/publicdrive.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/publicdrive.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			With the Public drive, there's no initialized folder but you can create by yourself.
+		</para>
+		 <para>
+			In the Public drive, you also can take actions like in the Private drive.
+		</para>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Drives-Drive_of_a_specific_group">
+		<title>Drive of a specific group</title>
+		 <para>
+			By default, there are two initialized folders but you also can add more and take actions like in Private drives. Only users in a specific group can access its drive.
+		</para>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/groupdrive.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/groupdrive.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Drives-Shared_Users_Space_drive">
+		<title>Shared Users Space drive</title>
+		 <mediaobject>
+			<imageobject role="html">
+				<imagedata align="center" fileref="images/shareddrive.png" format="PNG" scale="110" width="444" />
+			</imageobject>
+			 <imageobject role="fo">
+				<imagedata align="center" contentwidth="150mm" fileref="images/shareddrive.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			By default, there will be a list of all folders named after existing users, each user has a folder that includes two sub folders (private and public). You can see both your private and public folders here but you can see only the public folder of others.
+		</para>
+		 <itemizedlist>
+			<listitem>
+				<para>
+					In this drive you can:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							Perform all actions that you can do in your private drive.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							View nodes from public folder of others
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</listitem>
+			 <listitem>
+				<para>
+					In this drive you can not:
+				</para>
+				 <itemizedlist>
+					<listitem>
+						<para>
+							Add a folder/document in a root node
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Add a folder/document in a folder named by other users and in child nodes of this folder.
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Add a folder/document in a folder named by your username
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Rename a default folder
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Lock folders named by a user
+						</para>
+
+					</listitem>
+					 <listitem>
+						<para>
+							Delete a default folder
+						</para>
+
+					</listitem>
+
+				</itemizedlist>
+
+			</listitem>
+
+		</itemizedlist>
+
+	</section>
+	
+	 <section id="sect-User_Guide-Drives-Showhide_the_sidebar_in_a_drive">
+		<title>Show/hide the sidebar in a drive</title>
+		 <para>
+			The side bar is used to show nodes like a tree or show the related documents, tags, clipboard and saved searches.
+		</para>
+		 <para>
+			You can show/hide the side bar in two ways:
+		</para>
+		 <orderedlist numeration="arabic">
+			<listitem>
+				<procedure id="proc-User_Guide-Showhide_the_sidebar_in_a_drive-Method_1">
+					<title>Method 1</title>
+					 <step>
+						<para>
+							Click the 
+							<inlinemediaobject>
+								<imageobject>
+									<imagedata fileref="images/preferencesettingicon.png" format="PNG" />
+								</imageobject>
+
+							</inlinemediaobject>
+							 icon to open the 'Preference Setting':
+						</para>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/preferencesetting.png" format="PNG" scale="90" width="444" />
+							</imageobject>
+							 <imageobject role="fo">
+								<imagedata align="center" contentwidth="150mm" fileref="images/preferencesetting.png" format="PNG" width="444" />
+							</imageobject>
+
+						</mediaobject>
+
+					</step>
+					 <step>
+						<para>
+							Unselect the Show sidebar check box | Click <emphasis role="bold">Save</emphasis>.
+						</para>
+						 <para>
+							The drive will be displayed like the illustration below:
+						</para>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/hidesidebar.png" format="PNG" scale="110" width="444" />
+							</imageobject>
+							 <imageobject role="fo">
+								<imagedata align="center" contentwidth="150mm" fileref="images/hidesidebar.png" format="PNG" width="444" />
+							</imageobject>
+
+						</mediaobject>
+
+					</step>
+					 <step>
+						<para>
+							To show the side bar, select the <emphasis role="bold">Show sidebar</emphasis> check box in the '<emphasis role="bold">Preferences</emphasis>'.
+						</para>
+
+					</step>
+
+				</procedure>
+				
+
+			</listitem>
+			 <listitem>
+				<procedure id="proc-User_Guide-Showhide_the_sidebar_in_a_drive-Method_2">
+					<title>Method 2</title>
+					 <step>
+						<para>
+							Simply click the border of this sidebar to hide it as the illustration below:
+						</para>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/sidebarborder.png" format="PNG" scale="110" width="444" />
+							</imageobject>
+							 <imageobject role="fo">
+								<imagedata align="center" contentwidth="150mm" fileref="images/sidebarborder.png" format="PNG" width="444" />
+							</imageobject>
+
+						</mediaobject>
+
+					</step>
+					 <step>
+						<para>
+							Click that border again to show the sidebar back.
+						</para>
+
+					</step>
+
+				</procedure>
+				
+
+			</listitem>
+
+		</orderedlist>
+
+	</section>
+	
+
+</section>
+
+
