@@ -38,7 +38,7 @@
               <td class="FieldLabel"><%=_ctx.appRes("File.dialog.label.mimeType")%></td>
               <td class="FieldComponent">
                 <%
-                  String[] mimetype = ["jcrPath=/node/jcr:content/jcr:mimeType", "text/html", "options=text/html,text/plain", "onchange=true"] ;
+                  String[] mimetype = ["jcrPath=/node/jcr:content/jcr:mimeType", "text/html", "options=text/html,text/plain,application/x-groovy+html", "onchange=true"] ;
                   uicomponent.addSelectBoxField("mimetype", mimetype) ;
                 %>
               </td>

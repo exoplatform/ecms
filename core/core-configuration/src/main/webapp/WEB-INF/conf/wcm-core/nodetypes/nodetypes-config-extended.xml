@@ -253,7 +253,7 @@
     </propertyDefinitions>
   </nodeType>
       
-  <nodeType name="exo:template" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+  <!-- >nodeType name="exo:template" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>nt:base</supertype>
     </supertypes>
@@ -270,7 +270,7 @@
         </defaultValues>
       </propertyDefinition>
     </propertyDefinitions>
-  </nodeType>
+  </nodeType-->
 
   <nodeType name="exo:resources" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
