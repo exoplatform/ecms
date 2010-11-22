@@ -628,12 +628,12 @@ public class UIDialogForm extends UIForm {
       } else {
         if(node != null && node.hasProperty(propertyName)) {
           List<String> valueList = new ArrayList<String>();
-          if(node.getProperty(propertyName).getDefinition().isMultiple() && (!onchange.equals("true") || !isOnchange)) {
+          if(node.getProperty(propertyName).getDefinition().isMultiple() && (!"true".equals(onchange) || !isOnchange)) {
             Value[] values = node.getProperty(propertyName).getValues();
             for(Value value : values) {
               buffer.append(value.getString()).append(",");
             }          
-          } else if(onchange.equals("true") && isOnchange) {
+          } else if("true".equals(onchange) && isOnchange) {
             if (uiSelectBox.isMultiple()) {
               String[] values = uiSelectBox.getSelectedValues();
               for (String value : values) {
@@ -688,7 +688,14 @@ public class UIDialogForm extends UIForm {
     }
     if(formSelectBoxField.isOnchange()) uiSelectBox.setOnChange("Onchange");
     if (findComponentById(name) == null) addUIFormInput(uiSelectBox);    
-    String newValue = ((UIFormStringInput)findComponentById(name)).getValue();
+
+    StringBuilder newValues = new StringBuilder();
+    int count = 0;
+    for (String v : ((UIFormSelectBox)findComponentById(name)).getSelectedValues()) {
+      if (count++ > 0) newValues.append(",");
+      newValues.append(v);
+    }
+    String newValue = newValues.toString();
     JcrInputProperty inputProperty = properties.get(name);    
     if (inputProperty== null) {
       inputProperty = new JcrInputProperty();
