@@ -27,22 +27,10 @@
 
   <!-- WORKFLOWSkin -->
   <portal-skin>
-    <skin-module>WORKFLOWSkin</skin-module>
     <skin-name>Default</skin-name>
+    <skin-module>WORKFLOWSkin</skin-module>
     <css-path>/skin/DefaultSkin/Stylesheet.css</css-path>
   </portal-skin>
-  
-  <!-- 
-  <portal-skin>
-    <skin-name>Mac</skin-name>
-    <css-path>/skin/MacSkin/Stylesheet.css</css-path>
-  </portal-skin>
-  
-  <portal-skin>
-    <skin-name>Vista</skin-name>
-    <css-path>/skin/VistaSkin/Stylesheet.css</css-path>
-  </portal-skin>
-  -->
 
 </gatein-resources>
 
