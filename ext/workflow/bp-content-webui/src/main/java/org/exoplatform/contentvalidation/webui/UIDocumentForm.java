@@ -235,7 +235,24 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     uiContainer.removeChildById(POPUP_TAXONOMY);
   }
   
+  private List<String> getAddedListCategory(List<String> taxonomyList, List<String> existingList) {
+    List<String> addedList = new ArrayList<String>();
+    for(String addedCategory : taxonomyList) {
+      if(!existingList.contains(addedCategory)) addedList.add(addedCategory);
+    }
+    return addedList;
+  }
+  
+  private List<String> getRemovedListCategory(List<String> taxonomyList, List<String> existingList) {
+    List<String> removedList = new ArrayList<String>();
+    for(String existedCategory : existingList) {
+      if(!taxonomyList.contains(existedCategory)) removedList.add(existedCategory);
+    }
+    return removedList;
+  }  
+  
   static  public class SaveActionListener extends EventListener<UIDocumentForm> {
+    @SuppressWarnings("unchecked")
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm uiForm = event.getSource();
       List inputs = uiForm.getChildren();
@@ -281,25 +298,32 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         homeNode.getSession().save() ;
         homeNode.save() ;
         Node newNode = (Node)homeNode.getSession().getItem(addedPath);
-        // Begin delete listExistedTaxonomy
-        if (hasCategories) {          
-          List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
-          List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(newNode);
-          for (Node existedTaxonomy : listExistedTaxonomy) {
-            for (Node taxonomyTrees : listTaxonomyTrees) {
-              if(existedTaxonomy.getPath().contains(taxonomyTrees.getPath())) {
-                taxonomyService.removeCategory(newNode, taxonomyTrees.getName(), 
-                    existedTaxonomy.getPath().substring(taxonomyTrees.getPath().length()));
-                break;
-              }
+        List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
+        List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(newNode);
+        List<String> listExistingTaxonomy = new ArrayList<String>();
+                  
+        for (Node existedTaxonomy : listExistedTaxonomy) {
+          for (Node taxonomyTrees : listTaxonomyTrees) {
+            if(existedTaxonomy.getPath().contains(taxonomyTrees.getPath())) {
+              listExistingTaxonomy.add(taxonomyTrees.getName() + existedTaxonomy.getPath().substring(taxonomyTrees.getPath().length()));
+              break;
             }
           }
         }
-        // End delete listExistedTaxonomy
+        if (hasCategories && !homeNode.isNodeType("exo:taxonomy")) {
+          for(String removedCate : uiForm.getRemovedListCategory(listTaxonomy, listExistingTaxonomy)) {
+            index = removedCate.indexOf("/");
+            if (index != -1) {
+              taxonomyService.removeCategory(newNode, removedCate.substring(0, index), removedCate.substring(index + 1));
+            } else {
+              taxonomyService.removeCategory(newNode, removedCate, "");
+            }
+          }
+        }
         
         if (hasCategories && (newNode != null) && ((listTaxonomy != null) && (listTaxonomy.size() > 0))){
           uiForm.releaseLock();
-          for(String categoryPath : listTaxonomy) {
+          for(String categoryPath : uiForm.getAddedListCategory(listTaxonomy, listExistingTaxonomy)) {
             index = categoryPath.indexOf("/");
             try {
               if (index != -1) {
@@ -416,9 +440,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       try {
         int idxInput = Integer.parseInt(idx);
         uiDocumentForm.getListTaxonomy().remove(idxInput);
-        uiDocumentForm.getlistTaxonomyName().remove(idxInput);
+        uiDocumentForm.getlistTaxonomyName().remove(idxInput);        
         uiDocumentForm.setIsUpdateSelect(true);        
       } catch (NumberFormatException ne) {
+      } catch (Exception e) {
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentForm);
     }
