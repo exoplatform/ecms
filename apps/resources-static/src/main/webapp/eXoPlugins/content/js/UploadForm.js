@@ -29,7 +29,7 @@ UploadForm.prototype.showUploadForm = function() {
 	eXo.ecm.UploadForm.showMask(popupContainer, true);
 	var uploadForm = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "div", "UploadForm");
 	var maskLayer = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "div", "MaskLayer");
-	maskLayer.style.zIndex = uploadForm.style.zIndex++;
+	if (maskLayer!=null) maskLayer.style.zIndex = uploadForm.style.zIndex++;
 	uploadForm.style.position = 'absolute';
 	var widthUploadForm = (eXo.core.Browser.getBrowserWidth() - uploadForm.offsetWidth)/2;
 	var heightUploadForm = (eXo.core.Browser.getBrowserHeight() - uploadForm.offsetHeight)/2;
@@ -56,7 +56,7 @@ UploadForm.prototype.showAlert = function() {
 	eXo.ecm.UploadForm.showMask(popupContainer, true);
 	var alertForm = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "div", "AlertForm");
 	var maskLayer = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "div", "MaskLayer");
-	maskLayer.style.zIndex = alertForm.style.zIndex++;
+	if (maskLayer!=null) maskLayer.style.zIndex = alertForm.style.zIndex++;
 	alertForm.style.position = 'absolute';
 	var widthAlertForm = (eXo.core.Browser.getBrowserWidth() - alertForm.offsetWidth)/2;
 	var heightAlertForm = (eXo.core.Browser.getBrowserHeight() - alertForm.offsetHeight)/2;
@@ -68,7 +68,7 @@ UploadForm.prototype.showMask = function(popup, isShowPopup) {
 	var maskId = popup.id + "MaskLayer" ;
 	var mask = document.getElementById(maskId) ;
 	if(isShowPopup) {
-		if (mask == null) eXo.core.UIMaskLayer.createMask(popup.id, mask, 20) ;			
+		if (mask != null) eXo.core.UIMaskLayer.createMask(popup.id, mask, 20) ;			
 	} else {
 		if(mask != null)	eXo.core.UIMaskLayer.removeMask(mask) ;			
 	}
