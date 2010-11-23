@@ -16,12 +16,24 @@
  */
 package org.exoplatform.services.cms.link;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+
+import org.exoplatform.portal.webui.util.SessionProviderFactory;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
  * Created by The eXo Platform SAS
@@ -36,12 +48,14 @@ public final class LinkUtils {
    * @param path the path to convert
    * @return the real absolute path
    */
+  private static final String EXO_SYMLINK = "exo:symlink";
+   
   public static String evaluatePath(String path) {
     if (!path.startsWith("/")) {
       throw new IllegalArgumentException("The path '" + path +  "' must be an absolute path");
     }
     path = cleanPath(path);
-    int index;
+    int index;    
     while ((index = path.indexOf("/..")) != -1) {
       if (index == 0) {
         path = path.substring(3);
@@ -208,6 +222,37 @@ public final class LinkUtils {
       path = path.substring(0, path.length() - 1);
     }
     return path;
+  }
+
+  public static List<Node> getAllSymlinks(Node targetNode, String repoName) throws Exception {
+    List<Node> result = new ArrayList<Node>();
+    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
+    RepositoryService repositoryService =(RepositoryService)myContainer.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository repository  = repositoryService.getRepository(repoName);
+    String[] workspaces = repository.getWorkspaceNames();
+    String systemWS = 
+      repository.getConfiguration().getSystemWorkspaceName();
+    String queryString = new StringBuilder().append("SELECT * FROM ").
+                                             append(EXO_SYMLINK).
+                                             append(" WHERE exo:uuid='").
+                                             append(targetNode.getUUID()).append("'").
+                                             append(" AND exo:workspace='").
+                                             append(targetNode.getSession().getWorkspace().getName()).
+                                             append("'").toString();
+    
+    for (String workspace : workspaces) {
+      SessionProvider sessionProvider = workspace.equals(systemWS) ? SessionProviderFactory.createSystemProvider() 
+                                                                   : SessionProviderFactory.createSessionProvider();
+      Session session = sessionProvider.getSession(workspace, repository);
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      Query query = queryManager.createQuery(queryString, Query.SQL);
+      QueryResult queryResult = query.execute();
+      NodeIterator iter = queryResult.getNodes();
+      while (iter.hasNext()) {
+        result.add(iter.nextNode());
+      }
+    }        
+    return result;
   }
   
 }
