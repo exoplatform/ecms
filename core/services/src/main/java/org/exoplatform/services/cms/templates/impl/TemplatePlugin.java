@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.PropertyType;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -312,6 +313,22 @@ public class TemplatePlugin extends BaseComponentPlugin {
       String path = basePath + templateFileName;            
       InputStream in = configManager_.getInputStream(path);
       String nodeName = templateFileName.substring(templateFileName.lastIndexOf("/") + 1, templateFileName.indexOf("."));
+      Node nodeTypeHome = null;
+      if (!templatesHome.hasNode(nodeType.getNodetypeName())) {
+        nodeTypeHome = Utils.makePath(templatesHome, nodeType.getNodetypeName(), NT_UNSTRUCTURED);
+      } else {
+        nodeTypeHome = templatesHome.getNode(nodeType.getNodetypeName());
+      }
+      Node specifiedTemplatesHome = null;
+      try {
+        specifiedTemplatesHome = nodeTypeHome.getNode(templateType);
+      } catch(PathNotFoundException e) {
+        specifiedTemplatesHome = Utils.makePath(nodeTypeHome, templateType, NT_UNSTRUCTURED);
+      }
+      if(!specifiedTemplatesHome.hasNode(nodeName)) {
+        templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), nodeName, 
+            template.getParsedRoles(), in, repository, templatesHome);
+      }
       templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), 
           nodeName, template.getParsedRoles(), in, repository, templatesHome);
     }
