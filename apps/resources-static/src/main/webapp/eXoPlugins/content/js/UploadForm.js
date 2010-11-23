@@ -202,6 +202,7 @@ UploadForm.prototype.uploadFileDelete = function() {
 	var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+strParam;
 	eXo.ecm.WCMUtils.request(connector);
 	eXo.ecm.UploadForm.removeMask();
+	eXo.ecm.UploadForm.showUploadForm();
 };
 
 UploadForm.prototype.uploadFileSave = function() {
