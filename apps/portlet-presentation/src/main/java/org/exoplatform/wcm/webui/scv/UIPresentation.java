@@ -58,6 +58,8 @@ public class UIPresentation extends UIBaseNodePresentation {
   private NodeLocation originalNodeLocation;
   
   private NodeLocation viewNodeLocation;
+
+  String templatePath = null;
   
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getOriginalNode()
@@ -100,20 +102,21 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
    */
   public String getTemplate() {
-    try{
-      return getTemplatePath() ;
-    } catch (Exception e) {
-      return null ;
-    }
+    return templatePath;
   }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getTemplatePath()
    */
   public String getTemplatePath() throws Exception {
-    TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return templateService.getTemplatePath(getOriginalNode(), false) ;
+    return templatePath;
   }
+
+  public void setTemplatePath(String templatePath) {
+    this.templatePath = templatePath;
+  }
+
+  
     
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)

@@ -180,9 +180,11 @@ public class UIPresentationContainer extends UIContainer{
 		viewNode = getParameterizedNode();
 		if (viewNode!= null) {
 		  if (viewNode.isNodeType("nt:frozenNode")) {
-            try {		    
+            try {
               String nodeUUID = viewNode.getProperty("jcr:frozenUuid").getString();
-              return viewNode.getSession().getNodeByUUID(nodeUUID);
+              presentation.setOriginalNode(viewNode.getSession().getNodeByUUID(nodeUUID));
+              presentation.setNode(viewNode);
+//              return viewNode.getSession().getNodeByUUID(nodeUUID);
             } catch (Exception ex) {
               return viewNode;
             }
@@ -244,12 +246,14 @@ public class UIPresentationContainer extends UIContainer{
       boolean isDocumentType = false;
       if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true; 
       // check node is a document node
-      TemplateService templateService = getApplicationComponent(TemplateService.class);
-      List<String> documentTypes = templateService.getDocumentTemplates(strRepository);
-      for (String documentType : documentTypes) {
-        if (nodeView.isNodeType(documentType)) {
-          isDocumentType = true;
-          break;
+      if (!isDocumentType) {
+        TemplateService templateService = getApplicationComponent(TemplateService.class);
+        List<String> documentTypes = templateService.getDocumentTemplates(strRepository);
+        for (String documentType : documentTypes) {
+          if (nodeView.isNodeType(documentType)) {
+            isDocumentType = true;
+            break;
+          }
         }
       }
       if (!isDocumentType) return null;
@@ -295,14 +299,28 @@ public class UIPresentationContainer extends UIContainer{
     return parameters;
   }
 
+  /**
+   *
+   *
+   * @return
+   * @throws RepositoryException
+   */
+  @Deprecated
+  public String getPrintUrl() throws RepositoryException{
+    return getPrintUrl(null);
+  }
+
 	/**
 	 * Get the print's page URL
 	 * 
 	 * @return <code>true</code> if the Quick Print is shown. Otherwise, <code>false</code>
 	 */
-	public String getPrintUrl() throws RepositoryException{
+	public String getPrintUrl(Node node) throws RepositoryException{
 	  String printParameterName;
-	  Node tempNode = getNodeView();
+    Node tempNode = node;
+    if (tempNode==null) {
+	    tempNode = getNodeView();
+    }
     String strPath = tempNode.getPath();
 		String repository = ((ManageableRepository)tempNode.getSession().getRepository()).getConfiguration().getName();
 		String workspace = tempNode.getSession().getWorkspace().getName();
@@ -313,8 +331,23 @@ public class UIPresentationContainer extends UIContainer{
 		return printUrl;
 	}
 
-	public String getQuickEditLink(){
-	  return Utils.getEditLink(getNodeView(), true, false);
+  @Deprecated
+  public String getQuickEditLink(){
+    return getQuickEditLink(null);
+  }
+
+  /**
+   * Get the quick edit url
+   *
+   * @param node
+   * @return
+   */
+	public String getQuickEditLink(Node node){
+    Node tempNode = node;
+    if (tempNode==null) {
+	    tempNode = getNodeView();
+    }
+	  return Utils.getEditLink(tempNode, true, false);
 	}
 	
 	/**

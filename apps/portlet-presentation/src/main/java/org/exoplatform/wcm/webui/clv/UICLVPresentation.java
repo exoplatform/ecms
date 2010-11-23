@@ -369,13 +369,19 @@ public class UICLVPresentation extends UIContainer {
     String scvWith = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
     	scvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
-    link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+    if (node.isNodeType("nt:frozenNode")){
+      String uuid = node.getProperty("jcr:frozenUuid").getString();
+      Node originalNode = node.getSession().getNodeByUUID(uuid);
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
+    } else {
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+    }
     
-	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
-	if (fullPath!=null) {
-	    String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
-		link += "&"+clvBy+"="+fullPath;
-	}
+    String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
+    if (fullPath!=null) {
+        String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+      link += "&"+clvBy+"="+fullPath;
+    }
     
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
@@ -681,8 +687,7 @@ public class UICLVPresentation extends UIContainer {
    * component's <code>addRefreshActionListener<code> method. When
    * the refreshAction event occurs, that object's appropriate
    * method is invoked.
-   * 
-   * @see RefreshActionEvent
+   *
    */
   public static class RefreshActionListener extends EventListener<UICLVPresentation> {
     /*

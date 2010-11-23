@@ -279,12 +279,14 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     String templateType = null;
     if (node.isNodeType("exo:presentationable") && node.hasProperty("exo:presentationType")) {
       templateType = node.getProperty("exo:presentationType").getString();
+    } else if (node.isNodeType("nt:frozenNode")) {
+      templateType = node.getProperty("jcr:frozenPrimaryType").getString();
     } else {
       templateType = node.getPrimaryNodeType().getName();
     }
     if (isManagedNodeType(templateType, repository))
       return getTemplatePathByUser(isDialog, templateType, userId, repository);
-    throw new Exception("The content type: " + templateType + " doesn't be supported by any template");
+    throw new Exception("The content type: " + templateType + " isn't supported by any template");
   }
   
   /**

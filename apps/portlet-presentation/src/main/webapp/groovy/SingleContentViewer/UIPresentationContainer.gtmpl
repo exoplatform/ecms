@@ -40,7 +40,7 @@
 									</div>
 									<%}%>
 									<div style="float: right">
-									<a onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink() %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
+									<a onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>" class="EditContentIcon" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
 										  &nbsp;
 										</a>           
 									</div>
@@ -96,7 +96,7 @@
 				%>
 					<div class="UIOptionBar">
 	         <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>
-						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl() %>')" title="<%= _ctx.appRes("UISCVPreferences.label.Print");%>"><%= _ctx.appRes("UISCVPreferences.label.Print") %></a>
+						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UISCVPreferences.label.Print");%>"><%= _ctx.appRes("UISCVPreferences.label.Print") %></a>
 					</div>
 				<% 
 			} 

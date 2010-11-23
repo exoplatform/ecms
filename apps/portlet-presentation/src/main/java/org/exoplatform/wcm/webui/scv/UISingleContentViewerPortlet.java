@@ -24,9 +24,9 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderResponse;
 
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.core.WCMService;
+import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -36,6 +36,8 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.w3c.dom.Element;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SAS
@@ -58,35 +60,35 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
 
   /** The IDENTIFIER. */
   public static String IDENTIFIER     = "nodeIdentifier" ;
-  
+
   /** The DRIVE. */
   public static String DRIVE          = "nodeDrive";
-  
+
   /** The Parameterized String **/
   public static String PARAMETER      = "ParameterName";
-  
+
   /** The ShowDate **/
   public static String SHOW_DATE      = "ShowDate";
-  
+
   /** The ShowTitle **/
   public static String SHOW_TITLE     = "ShowTitle";
-  
+
   /** The ShowOptionBar **/
   public static String SHOW_OPTIONBAR = "ShowOptionBar";
-  
+
   /** The is ContextualMode **/
   public static String CONTEXTUAL_MODE= "ContextEnable";
-  
+
   /** The Parameterized String for printing**/
   public static String PRINT_PARAMETER= "PrintParameterName";
-  
+
   /** The Page that show the print viewer **/
   public static String PRINT_PAGE     = "PrintPage";
   /** The mode_. */
-  private PortletMode mode = PortletMode.VIEW ;
-  
+  private PortletMode mode = null;//PortletMode.VIEW ;
+
   public static final String UIPreferencesPopupID = "UIPreferencesPopupWindows";
-  
+
   private UISCVPreferences popPreferences;
   private UIPresentationContainer uiPresentation;
   PortletPreferences preferences;
@@ -94,22 +96,22 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
 
   /**
    * Instantiates a new uI single content viewer portlet.
-   * 
+   *
    * @throws Exception the exception
    */
   public UISingleContentViewerPortlet() throws Exception {
     addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     preferences = portletRequestContext.getRequest().getPreferences();
-    popPreferences = addChild(UISCVPreferences.class, null, null).setRendered(false);
-    uiPresentation = addChild(UIPresentationContainer.class, null, null);
+    //popPreferences = addChild(UISCVPreferences.class, null, null).setRendered(false);
+    //uiPresentation = addChild(UIPresentationContainer.class, null, null);
   }
 
   /**
    * Activate mode.
-   * 
+   *
    * @param newMode the mode
-   * 
+   *
    * @throws Exception the exception
    */
   public void activateMode(PortletMode newMode) throws Exception{
@@ -120,15 +122,16 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       removeChild(UISCVPreferences.class);
     }
     if(PortletMode.VIEW.equals(newMode)) {
-      addChild(UIPresentationContainer.class, null, null).getNodeView();
+      uiPresentation = addChild(UIPresentationContainer.class, null, null);
     } else if (PortletMode.EDIT.equals(newMode)) {
-      addChild(UISCVPreferences.class, null, null).setInternalPreferencesMode(true);
+      popPreferences = addChild(UISCVPreferences.class, null, null);
+      popPreferences.setInternalPreferencesMode(true);
     }
   }
   public boolean isViewMode() {
-    System.out.println(Utils.getCurrentMode());
+//    System.out.println(Utils.getCurrentMode());
     return Utils.getCurrentMode().equals(PortletMode.VIEW);
-    
+
   }
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
@@ -137,37 +140,41 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     PortletRequestContext pContext = (PortletRequestContext) context ;
     PortletMode newMode = pContext.getApplicationMode() ;
 
-    if (context.getRemoteUser()==null) {
+  	if (context.getRemoteUser()==null) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
-      pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
-      if (log.isTraceEnabled())
-        log.trace("SCV rendering : cache set to "+wcmService.getPortletExpirationCache());
-     }
+  	  pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
+	    if (log.isTraceEnabled())
+	      log.trace("SCV rendering : cache set to "+wcmService.getPortletExpirationCache());
+  	}
 
-    if(!mode.equals(newMode)) {
+    if(!newMode.equals(mode)) {
       activateMode(newMode) ;
       mode = newMode ;
     }
-    if (uiPresentation!=null && uiPresentation.isContextual() && uiPresentation.getNodeView()!=null) {
-    	Node node = uiPresentation.getNodeView();
-    	if (node!=null) {
-	        RenderResponse response = context.getResponse();
-	    	Element title = response.createElement("title");
-	    	title.setTextContent(uiPresentation.getTitle(node));
-	    	response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
-    	}
+
+    Node nodeView = uiPresentation.getNodeView();
+    if (nodeView != null) {
+      TemplateService templateService = getApplicationComponent(TemplateService.class);
+      uiPresentation.getChild(UIPresentation.class).setTemplatePath(templateService.getTemplatePath(nodeView, false));
     }
-    
+
+    if (uiPresentation!=null && uiPresentation.isContextual() && nodeView!=null) {
+      RenderResponse response = context.getResponse();
+      Element title = response.createElement("title");
+      title.setTextContent(uiPresentation.getTitle(nodeView));
+      response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
+    }
+
     super.processRender(app, context) ;
   }
-  
+
   public void changeToViewMode() throws Exception{
       PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-      portletRequestContext.setApplicationMode(PortletMode.VIEW);      
+      portletRequestContext.setApplicationMode(PortletMode.VIEW);
   }
   public Node getNodeByPreference() {
     try {
-      String repository = preferences.getValue(REPOSITORY, null);    
+      String repository = preferences.getValue(REPOSITORY, null);
       String workspace = preferences.getValue(WORKSPACE, null);
       String nodeIdentifier = preferences.getValue(IDENTIFIER, null) ;
       WCMService wcmService = getApplicationComponent(WCMService.class);
