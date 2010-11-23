@@ -626,7 +626,7 @@ public class UIDialogForm extends UIForm {
         }
         uiSelectBox.setSelectedValues(StringUtils.split(buffer.toString(), ","));
       } else {
-        if(node != null && node.hasProperty(propertyName)) {
+        if(node != null && isFirstTimeRender && node.hasProperty(propertyName)) {
           List<String> valueList = new ArrayList<String>();
           if(node.getProperty(propertyName).getDefinition().isMultiple() && (!"true".equals(onchange) || !isOnchange)) {
             Value[] values = node.getProperty(propertyName).getValues();
