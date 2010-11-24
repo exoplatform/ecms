@@ -188,7 +188,7 @@ public class UITaskList extends UIContainer {
           return;
         }
         UIPopupContainer uiPopupAction = uiControllerPortlet.getChild(UIPopupContainer.class) ;
-        uiPopupAction.activate(uiTaskManager, 600, 800, true);
+        uiPopupAction.activate(uiTaskManager, 730, 800, true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
       }
     }
