@@ -164,7 +164,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		}
 		if (MODE_LIVE.equals(mode) && isCached) {
 			String hash = getHash(nodeIdentifier, version, remoteUser, language, null, null, null, null);
-			cache.remove(hash);
+//			cache.remove(hash);
 			cache.put(hash, node);
 		}
 		return node;
@@ -211,7 +211,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		}
 		if (MODE_LIVE.equals(mode) && isCached) {
 			String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType, primaryType);
-			cache.remove(hash);
+//			cache.remove(hash);
 			cache.put(hash, nodes);
 		}
 		return nodes;    
