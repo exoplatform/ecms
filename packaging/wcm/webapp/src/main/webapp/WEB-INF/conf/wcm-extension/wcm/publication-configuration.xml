@@ -60,8 +60,6 @@
     </init-params>
   </component>
 
-  <!--
-  IMPORTANT : We don't need this configuration anymore as it's the default configuration in eXo Cache (defined in GateIn)
   <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
     <component-plugin>
@@ -94,35 +92,6 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-  -->
-
-  <!-- We add a special configuration for Cluster cache compliance -->
-  <external-component-plugins>
-   <target-component>org.exoplatform.services.cache.CacheService</target-component>
-   <component-plugin profiles="cluster">
-     <name>addExoCacheConfig</name>
-     <set-method>addExoCacheConfig</set-method>
-     <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-     <description>add Exo Cache Config</description>
-     <init-params>
-       <object-param>
-         <name>cache.config.wcm.composer</name>
-         <description>The JBoss Cache configuration for the WCM Composer Service</description>
-         <object type="org.exoplatform.services.cache.impl.jboss.ea.EAExoCacheConfig">
-           <field name="name">
-             <string>wcm.composer</string>
-           </field>
-           <field name="expirationTimeout">
-             <long>600</long>
-           </field>
-           <field name="distributed">
-             <boolean>true</boolean>
-           </field>
-         </object>
-       </object-param>
-     </init-params>
-   </component-plugin>
- </external-component-plugins>
 
   <!-- 
 	WE USE THIS HANDLER TO ENROLL DOCUMENTS (UNTIL DMS 2.5.1)
