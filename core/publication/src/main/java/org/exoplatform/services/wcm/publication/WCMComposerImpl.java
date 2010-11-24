@@ -284,7 +284,12 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String languageFilter = filters.get(FILTER_LANGUAGE);
     if (languageFilter!=null) {
       addUsedLanguage(languageFilter);
-      Node lnode = multiLanguageService.getLanguage(node, languageFilter);
+      Node lnode = null;
+      try {
+        lnode = multiLanguageService.getLanguage(node, languageFilter);
+      } catch (AccessDeniedException e) {
+        if (log.isTraceEnabled()) log.trace("AccessDenied on "+languageFilter+" translation for "+node.getPath());
+      }
       if (lnode!=null) {
 
         viewNode = getPublishedContent(lnode, filters);
