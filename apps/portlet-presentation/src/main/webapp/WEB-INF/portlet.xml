@@ -427,7 +427,7 @@
 		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
 		<init-param>
 			<name>webui.configuration</name>
-			<value>/WEB-INF/conf/portlet/CategoryNavigation/webui/configuration.xml</value>
+			<value>/WEB-INF/conf/portlet/ContentListViewer/webui/configuration.xml</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -435,7 +435,7 @@
 			<portlet-mode>edit</portlet-mode>
 		</supports>
 		<supported-locale>en</supported-locale>
-		<resource-bundle>locale.portlet.CategoryNavigation.CategoryNavigation</resource-bundle>
+		<resource-bundle>locale.portlet.ContentListViewer.ContentListViewer</resource-bundle>
 		<portlet-info>
 			<title>Category Navigation</title>
 			<short-title>Category Navigation</short-title>
@@ -448,35 +448,115 @@
 				<read-only>false</read-only>
 			</preference>
 			<preference>
-				<name>repository</name>
-				<value>repository</value>
+			 <name>mode</name>
+			 <value>AutoViewerMode</value>
+			 <read-only>false</read-only>
+   </preference>
+   <preference>
+				<name>folderPath</name>
+				<value>repository:collaboration:/sites content/live/acme/categories/acme</value>
+ 			<read-only>false</read-only>
+ 		</preference>
+ 		<preference>
+				<name>orderBy</name>
+    <value>publication:liveDate</value>
+    <read-only>false</read-only>
+			</preference>
+   <preference>
+    <name>orderType</name>
+    <value>DESC</value>
+    <read-only>false</read-only>
+   </preference>
+   <preference>
+    <name>header</name>
+    <value>Categories</value>
+    <read-only>false</read-only>
+   </preference>
+   <preference>
+    <name>automaticDetection</name>
+    <value>true</value>
+    <read-only>false</read-only>
+   </preference>
+   <preference>
+				<name>formViewTemplatePath</name>				  
+				<value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/CategoryTree.gtmpl</value>
+ 			<read-only>false</read-only>
+ 		</preference>
+   <preference>				
+				<name>paginatorTemplatePath</name>
+				<value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
+ 			<read-only>false</read-only>
+ 		</preference>
+ 		<preference>
+				<name>itemsPerPage</name>
+				<value>10</value>
+ 			<read-only>false</read-only>
+ 		</preference>
+ 		<preference>
+    <name>showThumbnailsView</name>
+    <value>true</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
-				<name>treeName</name>
-				<value>acme</value>
-				<read-only>false</read-only>
+    <name>showTitle</name>
+    <value>true</value>
+    <read-only>false</read-only>
 			</preference>
 			<preference>
-				<name>treeTitle</name>
-				<value>Categories</value>
+				<name>showHeader</name>
+	   <value>true</value>
+    <read-only>false</read-only>
+			</preference>
+ 		<preference>
+				<name>showRefreshButton</name>
+				<value>false</value>
+ 			<read-only>false</read-only>
+ 		</preference>
+ 		<preference>
+				<name>showDateCreated</name>
+				<value>true</value>
+	   <read-only>false</read-only>
+			</preference>
+   <preference>
+	   <name>showReadmore</name>
+   	<value>true</value>
 				<read-only>false</read-only>
 			</preference>
-			<preference>
-				<name>templateCategory</name>
-				<value>vertical-hierachy</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>templatePath</name>
-				<value>/exo:ecm/views/templates/Category Navigation Portlet/vertical-hierachy/SimpleVerticalHierachy.gtmpl</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>targetPath</name>
-				<value>products/presentation/pclv</value>
-				<read-only>false</read-only>
-			</preference>
+   <preference>
+     <name>showSummary</name>
+     <value>true</value>
+     <read-only>false</read-only>
+   </preference>
+   <preference>
+     <name>showLink</name>
+     <value>true</value>
+     <read-only>false</read-only>
+   </preference>
+   <preference>
+     <name>showRssLink</name>
+     <value>true</value>
+     <read-only>false</read-only>
+   </preference>
+   <preference>
+     <name>basePath</name>
+     <value>news</value>
+     <read-only>false</read-only>
+   </preference>
+   <preference>
+     <name>contextualFolder</name>
+     <value>contextualDisable</value>
+     <read-only>false</read-only>
+   </preference>      
+   <preference>
+     <name>showScvWith</name>
+     <value>content-id</value>
+     <read-only>false</read-only>
+   </preference>      
+   <preference>
+     <name>showClvBy</name>
+     <value>folder-id</value>
+     <read-only>false</read-only>
+   </preference>
 		</portlet-preferences>
 	</portlet>
 	
@@ -487,7 +567,7 @@
 		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
 		<init-param>
 			<name>webui.configuration</name>
-			<value>/WEB-INF/conf/portlet/ParameterizedContentListViewer/webui/configuration.xml</value>
+			<value>/WEB-INF/conf/portlet/ContentListViewer/webui/configuration.xml</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -495,7 +575,7 @@
 			<portlet-mode>edit</portlet-mode>
 		</supports>
 		<supported-locale>en</supported-locale>
-		<resource-bundle>locale.portlet.ParameterizedContentListViewer.ParameterizedContentListViewer</resource-bundle>
+		<resource-bundle>locale.portlet.ContentListViewer.ContentListViewer</resource-bundle>
 		<portlet-info>
 			<title>Category Contents</title>
 			<short-title>Category Contents</short-title>
@@ -503,43 +583,48 @@
 		</portlet-info>
 		<portlet-preferences>
 			<preference>
-				<name>repository</name>
-				<value>repository</value>
+				<name>mode</name>
+				<value>AutoViewerMode</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
-				<name>workspace</name>
-				<value>collaboration</value>
+				<name>folderPath</name>
+				<value>repository:collaboration:/sites content/live/acme/categories/acme</value>
 				<read-only>false</read-only>
 			</preference>
+			<preference>
+				<name>orderBy</name>
+				<value>exo:title</value>
+				<read-only>false</read-only>
+			</preference>
+			<preference>
+				<name>orderType</name>
+				<value>DESC</value>
+				<read-only>false</read-only>
+			</preference>			
 			<preference>
 				<name>header</name>
-				<value>Parameterize Content List Viewer</value>
+				<value>Category Contents</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
+    <name>automaticDetection</name>
+    <value>true</value>
+    <read-only>false</read-only>
+   </preference>
+			<preference>
 				<name>formViewTemplatePath</name>
-				<value>/exo:ecm/views/templates/Parameterized Content List Viewer/list-by-folder/UIParameterizedContentListViewerDefault.gtmpl</value>
+				<value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/TwoColumnsCLVTemplate.gtmpl</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
 				<name>paginatorTemplatePath</name>
-				<value>/exo:ecm/views/templates/Parameterized Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
+				<value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
 				<read-only>false</read-only>
-			</preference>
+			</preference>			
 			<preference>
 				<name>itemsPerPage</name>
 				<value>10</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showQuickEditButton</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showRefreshButton</name>
-				<value>false</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
@@ -553,60 +638,60 @@
 				<read-only>false</read-only>
 			</preference>
 			<preference>
-				<name>showDateCreated</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showSummary</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
 				<name>showHeader</name>
 				<value>true</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
-				<name>showLink</name>
+				<name>showRefreshButton</name>
+				<value>false</value>
+				<read-only>false</read-only>
+			</preference>			
+			<preference>
+				<name>showDateCreated</name>
 				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>orderBy</name>
-				<value>exo:title</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>orderType</name>
-				<value>DESC</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
 				<name>showReadMore</name>
 				<value>true</value>
 				<read-only>false</read-only>
-			</preference>
+			</preference>			
+			<preference>
+				<name>showSummary</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>			
+			<preference>
+				<name>showLink</name>
+				<value>true</value>
+				<read-only>false</read-only>
+			</preference>			
 			<preference>
 				<name>showRssLink</name>
 				<value>false</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
-				<name>showAutoDetect</name>
-				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
+				<name>basePath</name>
+    <value>detail</value>
+    <read-only>false</read-only>
+   </preference>
 			<preference>
-				<name>targetPage</name>
-				<value>detail</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>treeName</name>
-				<value>acme</value>
-				<read-only>false</read-only>
-			</preference>
+    <name>contextualFolder</name>
+    <value>contextualDisable</value>
+    <read-only>false</read-only>
+   </preference>
+   <preference>
+    <name>showScvWith</name>
+    <value>content-id</value>
+    <read-only>false</read-only>
+   </preference>      
+   <preference>
+    <name>showClvBy</name>
+    <value>folder-id</value>
+    <read-only>false</read-only>
+   </preference>			
 		</portlet-preferences>
 	</portlet>
 
