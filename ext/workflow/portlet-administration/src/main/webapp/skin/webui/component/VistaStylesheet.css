@@ -28,7 +28,7 @@
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent {
-	width: 75%;
+	width: 85%;
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent .SelectUserIcon{
@@ -326,7 +326,7 @@
 /*********************************************** UITaskManager***********************************/
 
 .UIWorkflowPortlet .UITabPane .UITabContent .UIFormWithTitle {
-	width: 525px;
+	width: 650px;
 }
 
 .UIWorkflowPortlet .UITabPane .UIForm .HorizontalLayout {
