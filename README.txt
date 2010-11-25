@@ -98,7 +98,7 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
 		installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
 
 4. BUILDING FROM SOURCES	
-		This will explain you how to build a package of WCM 2.1.0-GA with Tomcat.
+		This will explain you how to build a package of WCM 2.1.2-CR01 with Tomcat.
 		For general information about installation, please refer to :
 		http://anonsvn.jboss.org/repos/gatein/portal/trunk/README.txt
 
@@ -148,6 +148,216 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
 
 6. RELEASE NOTES 
 ---------------------------------------------------
+
+Release Notes - exo-ecms - Version wcm-2.1.2-CR01
+
+** Bug
+    * ECMS-1794	NPE when rendering edit mode of SCV portlet
+    * ECMS-1786	UI error when signin with "mary" user and go to site explorer
+    * ECMS-1785	Missing div close tag when addQuickEditDiv in class UICLVPresentation.java
+    * ECMS-1779	All templates content has been reset after restart server
+    * ECMS-1778	Some tests are failing on the hudson
+    * ECMS-1777	Error message "TypeError: eXo.webui.UIPopup is undefined" appear when uploading content from ContentSelector
+    * ECMS-1774	Mutisecetor field rest on selection of category or repeating field
+    * ECMS-1772	Some pdf's are not transferred
+    * ECMS-1771	Multiselector field resets on selection of category or repeating field
+    * ECMS-1770	ERROR message in the console when startup Workflow
+    * ECMS-1769	error in addSelectBox function in UIDialogForm
+    * ECMS-1767	'Some constraints violated' exception for templates having child node
+    * ECMS-1766	CLV/PCV mixes frozen nodes and base version
+    * ECMS-1762	Upload-fields-are-non-editable-in-workflow-if-preselected
+    * ECMS-1761	Wrong code in ContentSelector.js
+    * ECMS-1758	Do not set __system as last user when going from staged to published state
+    * ECMS-1757	Multivalue field value is not filled after saving file.
+    * ECMS-1753	Remove dependency of portal xml parser and add dependency for the one from WCM
+    * ECMS-1751	Cannot start Workflow extension in EPP51
+    * ECMS-1741	The order of services loading are wrong with Ubuntu
+    * ECMS-1740	SE : Dialog consumes too much memory
+    * ECMS-1708	Exception when modify content from classic site
+    * ECMS-1694	Cannot add symlink in a workspace different of node's workspace
+    * ECMS-1691	Umbrella for the side effects after the changing of JCR
+    * ECMS-1684	translation node with "any" access permession are not visible to public user after restat the server
+    * ECMS-1681	A link that reference documen in "ecms" is died
+    * ECMS-1671	System files and directories must be hidden
+    * ECMS-1667	Uploaded file's name is not displayed in Edit form
+    * ECMS-1665	Wrong label in remove tag permission
+    * ECMS-1664	Wrong Log class in SendMailScript.groovy
+    * ECMS-1663	Missing label in Tag deletion js popup
+    * ECMS-1662	nomal and hotest bad styles
+    * ECMS-1659	[ECMS 2.1.2] Edit content in SCV porlet (Test_SNF_ECMS_04)
+    * ECMS-1652	Rendering translations in PCV portlet
+    * ECMS-1650	Do not create workflow tables in database when the "workflow" profile is not activated
+    * ECMS-1648	Problem of multi-languages
+    * ECMS-1644	Edit ECM Templates : a new template is created...
+    * ECMS-1637	Setting for Category Navigation is not working
+    * ECMS-1634	Textarea type is not saved
+    * ECMS-1632	Category field not-populated when edited in workflow UI-task-form
+    * ECMS-1630	Update main pom in branches to upgrade version of shindig
+    * ECMS-1628	Some bugs in the new classic home page
+    * ECMS-1627	The checkbox "is document template" is not checked anymore when create new template in ECMAdmin
+    * ECMS-1626	CLV - Show in page: unable to select a page
+    * ECMS-1625	Exception when create new node
+    * ECMS-1624	WCM 2.1.1 doesn't start on EPP 5.0.1
+    * ECMS-1621	Cannot create CLV template, or equivalent from the File Explorer
+    * ECMS-1618	Unknown error when configure clv/scv when browsing directories with special characters (using IE7)
+    * ECMS-1616	Right click does not work if a drive has not been selected
+    * ECMS-1613	CLONE -Backport to REL- Node is locked error on saving content
+    * ECMS-1611	Exception when edit document with multi-value reference field
+    * ECMS-1594	Add selectDestPath with category selector launch an exception
+    * ECMS-1591	Invalid Wysiwyg toolbar in FreeWebLayout template
+    * ECMS-1588	Cannot used action for content-publishing process
+    * ECMS-1587	Error message on edit File Plan
+    * ECMS-1586	Can not view link on portlet
+    * ECMS-1585	Do not display the upload field on EPP
+    * ECMS-1584	Can not auditing for node
+    * ECMS-1583	Cannot create a new Newsletter on EPP 5.1
+    * ECMS-1582	Still show "null" in FCKEditor when user add language for documents
+    * ECMS-1568	Cluster configuration is wrong for some of WCM workspaces
+    * ECMS-1561	EPP5.1: Can not export node
+    * ECMS-1552	Picture is still shown at Published mode while this picture is draft
+    * ECMS-1551	Category Fields not Editable in Edit Mode, while Editable is true
+    * ECMS-1547	Right click in Site Explorer is not working
+    * ECMS-1544	Remove upload fields cannot work properly with nt:file child nodes
+    * ECMS-1543	Error "Item already exists" when trying to inline edit a content.
+    * ECMS-1542	Browser does not go back to right page after editing content of SCV, managing contents of CLV
+    * ECMS-1541	Test failure on wcm 2.1.x branches
+    * ECMS-1539	Date Format error when create new document (with French Language selected)
+    * ECMS-1532	Remove pull-parser-2.jar from wcm's ears to fix problem with wrong parser of gadget
+    * ECMS-1529	Upload file icon is not show at Content selector form
+    * ECMS-1528	Name of content selector is not correct
+    * ECMS-1527	Taxonomy/category field not populating on Edit
+    * ECMS-1525	Access Denied in jcr:content with anonim__ permission on published content
+    * ECMS-1521	Multi selected exception when we add to dc:subject property
+    * ECMS-1520	DocumentsTemplate doesn't work as before
+    * ECMS-1519	Cannot replace a binary from within the dialog
+    * ECMS-1518	Split friendly conf and content conf in ecmdemo
+    * ECMS-1511	Duplicate SE templates if edit and save from Site administrator
+    * ECMS-1497	Click to "BackToFront" icon, the node has not been released lock.
+    * ECMS-1496	Show target blockid when setting for new driver
+    * ECMS-1495	Cannot view an article document on SCV which has attachment
+    * ECMS-1494	Exception after rename File document while it is being locked
+    * ECMS-1493	Exception when add properties to search node in SCV
+    * ECMS-1492	Exception when view content of File document in search result of SCV/CLV
+    * ECMS-1489	Still keep create document form when change drive
+    * ECMS-1485	Site Explorer should not show drives when option "jailed" is chosen
+    * ECMS-1480	Still show content of document althought it was deleted
+    * ECMS-1479	Can't Edit document in special case
+    * ECMS-1471	Don't show the preference and add content icon when the CLV enable to show infor bar
+    * ECMS-1469	Media file can be attached in WYSIWYG irrespective of permissions
+    * ECMS-1458	can't download file .pdf
+    * ECMS-1457	Broken URL on Webdav view button for js or css files
+    * ECMS-1456	Bad/missing translation in popup help message
+    * ECMS-1450	Incorrect display of names when name is too long when uploading a file
+    * ECMS-1447	Don't show Search icon in Mange Node type (IE7 & IE6)
+    * ECMS-1444	Can't view document when this document was inserted into other document by FCK Content Selector
+    * ECMS-1443	Remove category doesn't work in edit workflow tab
+    * ECMS-1438	IE7: Error displaying in Add tab form when add new view
+    * ECMS-1437	IE7: Error displaying button in Metadata form when edit a upload file
+    * ECMS-1432	IE7: Error with Newsletter entry form
+    * ECMS-1424	Unknown error on clearing publication date of new version
+    * ECMS-1422	Node is locked error on saving content
+    * ECMS-1417	WEBDAV URL doesn't work in PCV after publication
+    * ECMS-1403	Multiselector fields reset on selction of categories
+    * ECMS-1394	Missing resource for JCRExplorerPortlet
+    * ECMS-1392	Can't search with second keyword
+    * ECMS-1378	When a link is generate, selected text is replace
+    * ECMS-1322	WCM extension populates sample users
+    * ECMS-1316	Edit Locked Node from front shouldn't be possible
+    * ECMS-1302	CLV : Wrong url generated jcr:frozenNode
+    * ECMS-1277	CLV: need to switch from "edit" to "view" mode after saving configuration of CLV
+    * ECMS-1274	WYSIWYG not shown completely When content is edited from workflow task
+    * ECMS-1268	Search: search query does not appear in simple search box in WCM
+    * ECMS-1261	Publication state not correctly displayed
+    * ECMS-1246	Error UI when print a document in special case
+    * ECMS-1183	Unknown error when edit File plan second time
+    * ECMS-1167	Can't login in special case
+    * ECMS-1164	Drivers Pane is not shown and then Site Explore is broken after change permission of a driver with any permission
+    * ECMS-1156	No vertical scroll bar for webContent documents
+    * ECMS-1147	UI error when open Advance in Preferences setting form
+    * ECMS-1094	Can't add root category for node while upload file
+    * ECMS-1088	Cannot create new document in a folder which have SendMailActionScript
+    * ECMS-1084	Can not select no more content for an SCV after selecting a content once
+    * ECMS-1039	Correct the message when a content list is empty
+    * ECMS-1023	DMS: Can not cut/paste 1 locked node but can drag & drop
+    * ECMS-1003	Remove group and sites tags from the Tag extension
+    * ECMS-1000	[DMS] Show exception in cygwin when click remove item icon when don't select categories you want to add for document
+    * ECMS-979	WCM- Delete uploaded files works invalidly
+    * ECMS-966	Error when create category after deleting group/user
+    * ECMS-965	Document folder and Application data folder are not shown when choose target node at driver : /platform/user
+    * ECMS-964	IE7 [DMS] can't create Podcast document
+    * ECMS-808	WCM: Multi-Content selector form is reloaded
+    * ECMS-309	WCM Navigation Portlet does not render sub menus
+
+** Improvement
+    * ECMS-1715	Fix EPPSP packaging
+    * ECMS-1714	Add public portlet markup cache layer
+    * ECMS-1705	out of memory errors When uploading content with large size
+    * ECMS-1692	Shouldn't show alert message when choose content to add in the list from ContentSelector
+    * ECMS-1683	remove some unncessary jars
+    * ECMS-1607	Update the default application in Content application category
+    * ECMS-1523	Provide visual feedback in content selector while loading list of drives
+    * ECMS-1410	Configuration of eXo JCR improvements
+    * ECMS-345	Improve Upload File function in the Content Selector form
+
+** Delivery Item
+    * ECMS-1783	Remove ear-plf from SVN
+
+** Feedback
+    * ECMS-1555	UIPageSelector Component behavior
+
+** Documentation
+    * ECMS-1608	Add cleanupPublication property explanation in the refguide
+    * ECMS-1604	Refguide : explain the Authoring plugin
+    * ECMS-1482	Java Services
+    * ECMS-1335	Getting started with eXo WCM
+    * ECMS-1301	FAQ
+    * ECMS-1298	Extensions
+    * ECMS-1297	Inside WCM Explorer
+
+** Task
+    * ECMS-1791	Check test failing on Hudson
+    * ECMS-1789	Review JBEPP issues fixed by WCM 2.1.2-CR01 release
+    * ECMS-1742	Test WCM branches 2.1.2-SNAPSHOt on top of EPP 5.1-ER4
+    * ECMS-1737	Review and apply the patches which proposed last sprint
+    * ECMS-1735	Add sources packaging distribution
+    * ECMS-1724	Add dependency for icu4j in core/connector and remove the build for core/ext
+    * ECMS-1696	Replace /command by /upload /download
+    * ECMS-1682	Remove wcm-config from wcm-extension EAR
+    * ECMS-1680	PERF : Drive selection in content selector dialog is too slow
+    * ECMS-1679	Add the missing dependency in wcm 2.1.x
+    * ECMS-1678	Upgrade version of commons from 1.0.1-SNAPSHOT to 1.0.2-SNAPSHOT
+    * ECMS-1654	Remove bin folder in workflow bp-bonita-holiday
+    * ECMS-1635	upgrade chromatic version from 1.0.3 to 1.0.4 in main pom.xml file of WCM 2.1.x
+    * ECMS-1615	Get Email settings from configuration.properties
+    * ECMS-1595	Update home page
+    * ECMS-1593	JBoss EAR packaging
+    * ECMS-1558	default portal removal
+    * ECMS-1553	WCM 2.1.1 TC
+    * ECMS-1540	List all scheduler jobs of WCM project
+    * ECMS-1517	update README.txt
+    * ECMS-1515	Test WCM EARs on jboss epp 5.1.0-ER1
+    * ECMS-1350	Migration of a customer project (WCM 2.0.0 to WCM 2.1.0)
+    * ECMS-1287	Write a new Developer Reference Guide
+    * ECMS-983	Review and correct the messages in resource bundle files
+    * ECMS-374	Review all resource bundle files
+
+** Sub-task
+    * ECMS-1748	"ECMS-1742 Register ""*"" as a membership type."
+    * ECMS-1729	"ECMS-1715 Test on EPP 5.1"
+    * ECMS-1722	"ECMS-1666 Changes in permissions are not taken in consideration by SymLinks"
+    * ECMS-1706	"ECMS-1666 CKEditor probloem with table setting"
+    * ECMS-1703	"ECMS-1666 End of Tag not exist (W3C)"
+    * ECMS-1702	"ECMS-1666 Exception with Content List Viewer when select the folder that has name contains special character"
+    * ECMS-1676	"ECMS-1673 Update README and Release notes"
+    * ECMS-1675	"ECMS-1673 Fix the issue related to new homepage"
+    * ECMS-1674	"ECMS-1673 Upgrade version of WCM 2.1.1_REL (from 2.1.2-SNAPSHOT to 2.1.1.1-SNAPSHOT)"
+    * ECMS-1670	"ECMS-1633 Write specification"
+    * ECMS-1669	"ECMS-1666 Analyze the workload this issue"
+    * ECMS-1609	"ECMS-1107 Test the described scenario (using external jar)"
+    * ECMS-1460	"ECMS-1298 REST Services"
+    * ECMS-529	"ECMS-374  Translation - English"
+    * ECMS-528	"ECMS-374  Translation - Arabic"
+    * ECMS-527	"ECMS-374  Translation - French"
 
 Release Notes - exo-ecms - Version wcm-2.1.0-GA
 
