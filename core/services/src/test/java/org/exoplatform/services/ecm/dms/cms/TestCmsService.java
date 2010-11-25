@@ -365,7 +365,7 @@ public class TestCmsService extends BaseDMSTestCase {
     
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(data);
-    inputProperty.setValue(getClass().getResource("/conf/standalone/test-configuration.xml").openStream());
+    inputProperty.setValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
     map.put(data, inputProperty);
     return map;
   }

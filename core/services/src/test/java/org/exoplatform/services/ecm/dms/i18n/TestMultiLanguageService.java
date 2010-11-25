@@ -374,7 +374,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
   public void testAddFileLanguage1() throws Exception {
     Node test = session.getRootNode().addNode("test", FILE);
     Node testFile = test.addNode(CONTENT, RESOURCE);
-    testFile.setProperty(DATA, getClass().getResource("/conf/standalone/test-configuration.xml").openStream());
+    testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
     testFile.setProperty(MIMETYPE, "text/xml");
     testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
     test.addMixin(I18NMixin);
@@ -388,7 +388,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     String defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("en", defaultLanguage);
 
-    Value contentValue1 = session.getValueFactory().createValue(getClass().getResource("/conf/standalone/test-configuration.xml").openStream());
+    Value contentValue1 = session.getValueFactory().createValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
     multiLanguageService.addFileLanguage(test, "test-configuration.xml" , contentValue1, "text/xml", "vi", REPO_NAME, true);
     defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("vi", defaultLanguage);
@@ -445,7 +445,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
       Node testFile = test.addNode(CONTENT, RESOURCE);
       testFile.setProperty(MIMETYPE, "text/xml");
       testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
-      testFile.setProperty(DATA, getClass().getResource("/conf/standalone/test-configuration.xml").openStream());
+      testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
       test.addMixin(I18NMixin);
       session.save();
       multiLanguageService.addLanguage(test, createPodcastMapInput(), "fr", false);
