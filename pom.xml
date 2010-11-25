@@ -97,6 +97,8 @@
     <arguments>-Dgatein.working.dir=target</arguments>
     <!-- For 2.0.0 Beta 01 we release only tomcat package for WCM -->
     <releaseProfiles>${defaulteXoReleaseProfiles},pkg-tomcat,arc-tomcat,wcm,wkf,docs</releaseProfiles>    
+    <!-- Required to add generate sources bundle -->
+    <version.assembly.plugin>2.2</version.assembly.plugin>
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
@@ -368,6 +370,42 @@
       <properties>
         <workflowEngine>jbpm</workflowEngine>
       </properties>
+    </profile>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <!-- Create a source-release artifact that contains the fully buildable 
+               project directory source structure. This is the artifact which is 
+               the official subject of any release vote. -->
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.apache.resources</groupId>
+                <artifactId>apache-source-release-assembly-descriptor</artifactId>
+                <version>1.0.2</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>source-release-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+                  <descriptorRefs>
+                    <descriptorRef>source-release</descriptorRef>
+                  </descriptorRefs>
+                  <tarLongFileFormat>gnu</tarLongFileFormat>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
   <modules>
