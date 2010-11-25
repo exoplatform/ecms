@@ -44,6 +44,9 @@ import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.access.SystemIdentity;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.impl.core.value.DateValue;
 import org.exoplatform.services.jcr.impl.core.value.StringValue;
 
@@ -424,20 +427,22 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
    * {@inheritDoc}
    */
   public void addLinkedLanguage(Node node, Node translationNode) throws Exception {
-//  	String LANGUAGES = "languages"; 
-	Node languagesNode;
-	if(node.hasNode(LANGUAGES)) languagesNode = node.getNode(LANGUAGES) ;
-    else  {
-      languagesNode = node.addNode(LANGUAGES, "nt:unstructured") ;
-      if(languagesNode.canAddMixin("exo:hiddenable"))
-        languagesNode.addMixin("exo:hiddenable");
+  //  	String LANGUAGES = "languages";
+    Node languagesNode;
+    if(node.hasNode(LANGUAGES)) languagesNode = node.getNode(LANGUAGES) ;
+      else  {
+        languagesNode = node.addNode(LANGUAGES, "nt:unstructured") ;
+        if(languagesNode.canAddMixin("exo:hiddenable"))
+          languagesNode.addMixin("exo:hiddenable");
+      }
+    String lang = translationNode.getProperty("exo:language").getString();
+    if (languagesNode.hasNode(lang)) {
+      throw new ItemExistsException();
     }
-	String lang = translationNode.getProperty("exo:language").getString();
-	if (languagesNode.hasNode(lang)) {
-		throw new ItemExistsException();
-	}
-	LinkManager linkManager = (LinkManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LinkManager.class);
-	linkManager.createLink(languagesNode, "exo:symlink", translationNode, lang);
+    LinkManager linkManager = (LinkManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LinkManager.class);
+    Node linkNode = linkManager.createLink(languagesNode, "exo:symlink", translationNode, lang);
+    ((ExtendedNode)linkNode).setPermission(SystemIdentity.ANY, new String[]{PermissionType.READ});
+    linkNode.getSession().save();
   }
   
   
@@ -927,7 +932,6 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
   /**
    * Exchange child node of current node with the default node
    * @param node
-   * @param selectedLangNode
    * @param newLang
    * @throws RepositoryException
    */
