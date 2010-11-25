@@ -152,10 +152,13 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       mode = newMode ;
     }
 
-    Node nodeView = uiPresentation.getNodeView();
-    if (nodeView != null) {
-      TemplateService templateService = getApplicationComponent(TemplateService.class);
-      uiPresentation.getChild(UIPresentation.class).setTemplatePath(templateService.getTemplatePath(nodeView, false));
+    Node nodeView = null;
+    if (uiPresentation!=null) {
+      nodeView = uiPresentation.getNodeView();
+      if (nodeView != null) {
+        TemplateService templateService = getApplicationComponent(TemplateService.class);
+        uiPresentation.getChild(UIPresentation.class).setTemplatePath(templateService.getTemplatePath(nodeView, false));
+      }
     }
 
     if (uiPresentation!=null && uiPresentation.isContextual() && nodeView!=null) {
