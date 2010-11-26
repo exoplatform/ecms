@@ -24,6 +24,7 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderResponse;
 
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
@@ -138,6 +139,16 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       activateMode(newMode) ;
       mode = newMode ;
     }
+    
+    Node nodeView = null;
+    if (uiPresentation!=null) {
+      nodeView = uiPresentation.getNodeView();
+      if (nodeView != null) {
+        TemplateService templateService = getApplicationComponent(TemplateService.class);
+        uiPresentation.getChild(UIPresentation.class).setTemplatePath(templateService.getTemplatePath(nodeView, false));
+      }
+    }
+    
     if (uiPresentation!=null && uiPresentation.isContextual() && uiPresentation.getNodeView()!=null) {
     	Node node = uiPresentation.getNodeView();
     	if (node!=null) {
