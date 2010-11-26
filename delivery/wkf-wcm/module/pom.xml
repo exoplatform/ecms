@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms-delivery-wkf-wcm</artifactId>
-    <version>2.1.2-CR01</version>
+    <version>2.1.2-SNAPSHOT</version>
   </parent>
   <artifactId>workflow.packaging.module</artifactId>
   <packaging>pom</packaging>
