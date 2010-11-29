@@ -332,13 +332,40 @@
                       <string>FastContentCreatorBasicPortlet</string>
                     </field>
                     <field name="displayName">
-                      <string>Content Creator</string>
+                      <string>Basic Content Creator</string>
                     </field>
                     <field name="type">
                       <string>portlet</string>
                     </field>
                     <field name="contentId">
                       <string>formgenerator/FastContentCreatorBasicPortlet</string>
+                    </field>
+                    <field name="accessPermissions">
+                      <collection type="java.util.ArrayList" item-type="java.lang.String">
+                        <value>
+                          <string>*:/platform/users</string>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+
+                <value>
+                  <object type="org.exoplatform.application.registry.Application">
+                    <field name="categoryName">
+                      <string>Forms</string>
+                    </field>
+                    <field name="applicationName">
+                      <string>FastContentCreatorBasicPortletStandard</string>
+                    </field>
+                    <field name="displayName">
+                      <string>Standard Content Creator</string>
+                    </field>
+                    <field name="type">
+                      <string>portlet</string>
+                    </field>
+                    <field name="contentId">
+                      <string>formgenerator/FastContentCreatorBasicPortletStandard</string>
                     </field>
                     <field name="accessPermissions">
                       <collection type="java.util.ArrayList" item-type="java.lang.String">

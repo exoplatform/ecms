@@ -104,8 +104,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     workspaceSelectBox.setOnChange("ChangeWorkspace") ;
     saveLocationField.addChild(workspaceSelectBox) ;
 		}
-    
-    UIFormInputSetWithAction folderSelectorInput = new UIFormInputSetWithAction(UIFCCConstant.LOCATION_FORM_INPUT_ACTION) ;
+	UIFormInputSetWithAction folderSelectorInput = new UIFormInputSetWithAction(UIFCCConstant.LOCATION_FORM_INPUT_ACTION) ;
     folderSelectorInput.addUIFormInput(new UIFormStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT, UIFCCConstant.LOCATION_FORM_STRING_INPUT, null).setEditable(false)) ;
     folderSelectorInput.setActionInfo(UIFCCConstant.LOCATION_FORM_STRING_INPUT, new String[] {"SelectPath"}) ;
     saveLocationField.addChild(folderSelectorInput) ;
@@ -120,7 +119,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     templateField.addChild(new UIFormStringInput(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT, UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT, null));
 
     addChild(templateField);
-    
+    if (!"basic".equals(preferenceMode)) {
     UIFormFieldSet actionField = new UIFormFieldSet(UIFCCConstant.ACTION_FIELD);
     UIFCCActionList fastContentCreatorActionList = actionField.addChild(UIFCCActionList.class, null, null);
 		fastContentCreatorActionList.init(preferenceMode);
@@ -130,6 +129,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     fastContentCreatorActionList.updateGrid((Node)session.getItem(preferencePath), fastContentCreatorActionList.getChild(UIGrid.class).getUIPageIterator().getCurrentPage());
     
     addChild(actionField);
+    }
     
     setActions(new String[] {"Save"}) ;
   }
@@ -457,36 +457,31 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       PortletPreferences portletPreferences = UIFCCUtils.getPortletPreferences();
 			String preferenceMode = portletPreferences.getValue(UIFCCConstant.PREFERENCE_MODE, "");
 			boolean preferenceIsActionNeeded = Boolean.parseBoolean(portletPreferences.getValue(UIFCCConstant.PREFERENCE_IS_ACTION_NEEDED, "false"));
-
       String type = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.TEMPLATE_FORM_SELECTBOX).getValue() ;
       String path = fastContentCreatorConfig.getUIStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT).getValue() ;
       String saveButton = fastContentCreatorConfig.getUIStringInput(UIFCCConstant.SAVE_FORM_STRING_INPUT).getValue() ;
 	  String saveMessage = fastContentCreatorConfig.getUIFormTextAreaInput(UIFCCConstant.MESSAGE_FORM_TEXTAREA_INPUT).getValue() ;			
       String isRedirect = String.valueOf(fastContentCreatorConfig.getUIFormCheckBoxInput(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT).isChecked());
       String redirectPath = fastContentCreatorConfig.getUIStringInput(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT).getValue() ;
-      
       if (("false".equals(isRedirect) || redirectPath == null) && saveMessage == null) {
         Utils.createPopupMessage(fastContentCreatorConfig, "UIFCCConfig.msg.message-empty", null, ApplicationMessage.WARNING);
-      }
-      
-			if ("basic".equals(preferenceMode) && preferenceIsActionNeeded) {
-				UIFCCActionList actionList = ((UIFormFieldSet)fastContentCreatorConfig.getChildById("UIFCCActionField")).getChild(UIFCCActionList.class);
-				int nb = actionList.getChild(UIGrid.class).getUIPageIterator().getAvailable();
-				if (nb==0) {
-					uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.action-empty", null, ApplicationMessage.WARNING)) ;
-					event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;
-      }
-			}
-      
-			if (!"basic".equals(preferenceMode)) {
-      String workspaceName = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX).getValue() ;
+      }      
+
+      String workspaceName = null;
+      if ("basic".equals(preferenceMode) && preferenceIsActionNeeded)
+    	  workspaceName=portletPreferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "");
+      else
+    	  workspaceName = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX).getValue() ;
       if(workspaceName == null || workspaceName.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.ws-empty", null, ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;        
       }
-      String repositoryName = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX).getValue() ;
+      String repositoryName=null;
+      if ("basic".equals(preferenceMode) && preferenceIsActionNeeded)
+    	  repositoryName=portletPreferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, "");
+      else
+    	  repositoryName = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX).getValue() ;
       if(type == null || type.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.fileType-empty", null, ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
@@ -494,7 +489,6 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       }
 				portletPreferences.setValue(UIFCCConstant.PREFERENCE_REPOSITORY, repositoryName) ;
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_WORKSPACE, workspaceName) ;
-			}
 
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_PATH, path) ;
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_TYPE, type) ;

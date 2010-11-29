@@ -38,6 +38,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPageIterator;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
@@ -267,11 +268,13 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
         }
       }
       ((UISelectable)(uiNodeTypeSelect).getSourceComponent()).doSelect(returnField, selectedNodetypes);
-      selectedNodetypes.clear();
+      selectedNodetypes.clear();      
       UIPopupWindow uiPopup = event.getSource().getAncestorOfType(UIPopupWindow.class);
       if (uiPopup != null) {
         uiPopup.setShow(false);
         uiPopup.setRendered(false);
+        //UIPopupContainer uiPopupContainer = uiPopup.getParent();    	
+    	event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
       }
       UIComponent component = event.getSource().getSourceComponent().getParent();
       if (component != null) {
@@ -345,6 +348,8 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       uiPopup.setRendered(false);
       UIComponent component = event.getSource().getSourceComponent().getParent();
       if (component != null) {
+    	//UIPopupContainer uiPopupContainer = uiPopup.getParent();    	
+    	event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
         event.getRequestContext().addUIComponentToUpdateByAjax(component);
       }
     }
