@@ -127,11 +127,29 @@ public class AddTaxonomyActionScript implements CmsScript {
 		    String nodeLinkPath = nodePath.substring(0, nodePath.lastIndexOf("/"));
 		    if (!nodeLinkPath.startsWith("/")) nodeLinkPath = "/" + nodeLinkPath;     
 		    Node nodeLink = linkManager_.createLink((Node)storeNode.getSession().getItem(nodeLinkPath), "exo:taxonomyLink", targetNode, nodeName);
+       
 		    //rename added node to recover official name
+		    String destPath = targetParentPath.concat("/").concat(nodeName);
 		    sessionTargetNode.move(targetPath, targetParentPath.concat("/").concat(nodeName));
 		    if (targetNode.canAddMixin("exo:privilegeable"))
 		      targetNode.addMixin("exo:privilegeable");
 		    sessionTargetNode.save();
+		    String t_title;
+		    try {
+		      Node dest =(Node)  sessionTargetNode.getItem(destPath);
+          t_title = dest.getProperty("exo:title").getString();          
+        } catch (Exception e) {
+          //No need to process with exception here
+        }
+        try {
+          Node source =(Node)  sessionTargetNode.getItem(nodePath);
+          String currentTitle = source.hasProperty("exo:title")?source.getProperty("exo:title").getString():null;
+          source.setProperty("exo:title", t_title);
+          System.out.println("nodePath: " + nodePath + " title: " + source.getProperty("exo:title").getString());
+          source.save();
+        } catch (Exception e) {
+          //No need to process with exception here
+        }
 	    }
     } catch (Exception e) {
     	LOG.error("Exception when try move node and create link", e);
