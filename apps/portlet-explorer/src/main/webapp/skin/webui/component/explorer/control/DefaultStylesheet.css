@@ -464,7 +464,6 @@
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FieldLabel {
   width: 128px;
-  vertical-align: middle; 
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .UIFormUploadInput .SelectFileFrame {
