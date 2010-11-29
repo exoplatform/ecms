@@ -37,7 +37,7 @@
       <init-params>
         <value-param>
           <name>portletName</name>
-          <value>Content List Viewer</value>
+          <value>content-list-viewer</value>
         </value-param>
         <value-param>
           <name>portlet.template.path</name>
@@ -51,7 +51,7 @@
               <string>UIContentListPresentationDefault.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
             <!--
 						<field  name="accessPermissions">
@@ -75,7 +75,7 @@
               <string>UIContentListPresentationBigImage.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -87,7 +87,7 @@
               <string>UIContentListPresentationSmall.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -99,7 +99,7 @@
               <string>TwoColumnsCLVTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -111,7 +111,7 @@
               <string>OneColumnCLVTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -123,7 +123,7 @@
               <string>CategoryTree.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>navigation</string>
             </field>
           </object>
         </object-param>
@@ -135,7 +135,7 @@
               <string>CategoryList.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>navigation</string>
             </field>
           </object>
         </object-param>
@@ -147,7 +147,7 @@
               <string>TagsCloud.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>navigation</string>
             </field>
           </object>
         </object-param>
@@ -159,7 +159,7 @@
               <string>DocumentsTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -171,7 +171,7 @@
               <string>ContentListViewerDefault.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -183,7 +183,7 @@
               <string>BigHotNewsTemplateCLV.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -195,7 +195,7 @@
               <string>EventsTemplateCLV.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -252,7 +252,7 @@
               <string>UIParameterizedContentListViewerDefault.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -264,7 +264,7 @@
               <string>BigHotNewsTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -276,7 +276,7 @@
               <string>EventsTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>

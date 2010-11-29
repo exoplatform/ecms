@@ -30,7 +30,7 @@ Following guides to edit a WCM template
 
 2. Select *Sites Explorer*  --> *DMS Administration*
 
-3. Select *exo:ecm* -> *views* -> *templates* -> *Content List Viewer* -> *list-by-folder* --> select one template in list (in this guide, I choose the *TwoColumnCLVTemplate.gtmpl*)
+3. Select *exo:ecm* -> *views* -> *templates* -> *content-list-viewer* -> *list* --> select one template in list (in this guide, I choose the *TwoColumnCLVTemplate.gtmpl*)
 
 
  !DMSAdmin.png! 

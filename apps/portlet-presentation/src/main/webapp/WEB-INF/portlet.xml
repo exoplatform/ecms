@@ -206,12 +206,12 @@
       </preference>      
 			<preference>
 				<name>formViewTemplatePath</name>
-				<value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/UIContentListPresentationDefault.gtmpl</value>
+				<value>/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
 				<name>paginatorTemplatePath</name>
-				<value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
+				<value>/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
@@ -283,7 +283,12 @@
         <name>showClvBy</name>
         <value>folder-id</value>
         <read-only>false</read-only>
-      </preference>      
+      </preference>
+      <preference>
+        <name>application</name>
+        <value>ContentList</value>
+        <read-only>true</read-only>
+      </preference>
 		</portlet-preferences>
 		<security-role-ref>
 			<role-name>admin</role-name>
@@ -454,110 +459,115 @@
    </preference>
    <preference>
 				<name>folderPath</name>
-				<value>repository:collaboration:/sites content/live/acme/categories/acme</value>
+				<value></value>
  			<read-only>false</read-only>
  		</preference>
  		<preference>
 				<name>orderBy</name>
-    <value>publication:liveDate</value>
+    <value>exo:title</value>
     <read-only>false</read-only>
 			</preference>
    <preference>
     <name>orderType</name>
-    <value>DESC</value>
+    <value>ASC</value>
     <read-only>false</read-only>
    </preference>
    <preference>
     <name>header</name>
-    <value>Categories</value>
+    <value></value>
     <read-only>false</read-only>
    </preference>
    <preference>
     <name>automaticDetection</name>
-    <value>true</value>
+    <value>false</value>
     <read-only>false</read-only>
    </preference>
    <preference>
 				<name>formViewTemplatePath</name>				  
-				<value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/CategoryTree.gtmpl</value>
+				<value>/exo:ecm/views/templates/content-list-viewer/navigation/CategoryTree.gtmpl</value>
  			<read-only>false</read-only>
  		</preference>
    <preference>				
 				<name>paginatorTemplatePath</name>
-				<value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
+				<value>/exo:ecm/views/templates/content-list-viewer/paginator/UIPaginatorEmpty.gtmpl</value>
  			<read-only>false</read-only>
  		</preference>
  		<preference>
 				<name>itemsPerPage</name>
-				<value>10</value>
+				<value>20</value>
  			<read-only>false</read-only>
  		</preference>
  		<preference>
-    <name>showThumbnailsView</name>
-    <value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-    <name>showTitle</name>
-    <value>true</value>
-    <read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>showHeader</name>
-	   <value>true</value>
-    <read-only>false</read-only>
-			</preference>
+      <name>showThumbnailsView</name>
+      <value>false</value>
+			<read-only>false</read-only>
+		</preference>
+		<preference>
+      <name>showTitle</name>
+      <value>true</value>
+      <read-only>false</read-only>
+		</preference>
+		<preference>
+			<name>showHeader</name>
+	    <value>true</value>
+      <read-only>false</read-only>
+		</preference>
  		<preference>
 				<name>showRefreshButton</name>
 				<value>false</value>
  			<read-only>false</read-only>
  		</preference>
  		<preference>
-				<name>showDateCreated</name>
-				<value>true</value>
-	   <read-only>false</read-only>
-			</preference>
-   <preference>
-	   <name>showReadmore</name>
-   	<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-   <preference>
-     <name>showSummary</name>
-     <value>true</value>
-     <read-only>false</read-only>
-   </preference>
-   <preference>
+			<name>showDateCreated</name>
+			<value>false</value>
+	    <read-only>false</read-only>
+		</preference>
+    <preference>
+	    <name>showReadmore</name>
+   	  <value>false</value>
+			<read-only>false</read-only>
+		</preference>
+    <preference>
+      <name>showSummary</name>
+      <value>false</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
      <name>showLink</name>
      <value>true</value>
      <read-only>false</read-only>
-   </preference>
-   <preference>
+    </preference>
+    <preference>
      <name>showRssLink</name>
-     <value>true</value>
+     <value>false</value>
      <read-only>false</read-only>
-   </preference>
-   <preference>
-     <name>basePath</name>
-     <value>news</value>
-     <read-only>false</read-only>
-   </preference>
-   <preference>
-     <name>contextualFolder</name>
-     <value>contextualDisable</value>
-     <read-only>false</read-only>
-   </preference>      
-   <preference>
-     <name>showScvWith</name>
-     <value>content-id</value>
-     <read-only>false</read-only>
-   </preference>      
-   <preference>
-     <name>showClvBy</name>
-     <value>folder-id</value>
-     <read-only>false</read-only>
-   </preference>
-		</portlet-preferences>
+    </preference>
+    <preference>
+      <name>basePath</name>
+      <value></value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>contextualFolder</name>
+      <value>contextualDisable</value>
+      <read-only>false</read-only>
+    </preference>      
+    <preference>
+      <name>showScvWith</name>
+      <value></value>
+      <read-only>false</read-only>
+    </preference>      
+    <preference>
+      <name>showClvBy</name>
+      <value>folder-id</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>application</name>
+      <value>CategoryNavigation</value>
+      <read-only>true</read-only>
+    </preference>
+	</portlet-preferences>
 	</portlet>
 	
 	<portlet>
@@ -589,12 +599,12 @@
 			</preference>
 			<preference>
 				<name>folderPath</name>
-				<value>repository:collaboration:/sites content/live/acme/categories/acme</value>
+				<value></value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
 				<name>orderBy</name>
-				<value>exo:title</value>
+				<value>publication:liveDate</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
@@ -604,27 +614,27 @@
 			</preference>			
 			<preference>
 				<name>header</name>
-				<value>Category Contents</value>
+				<value></value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
-    <name>automaticDetection</name>
-    <value>true</value>
-    <read-only>false</read-only>
-   </preference>
+        <name>automaticDetection</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
 			<preference>
 				<name>formViewTemplatePath</name>
-				<value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/TwoColumnsCLVTemplate.gtmpl</value>
+				<value>/exo:ecm/views/templates/content-list-viewer/list/OneColumnCLVTemplate.gtmpl</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
 				<name>paginatorTemplatePath</name>
-				<value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
+				<value>/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl</value>
 				<read-only>false</read-only>
 			</preference>			
 			<preference>
 				<name>itemsPerPage</name>
-				<value>10</value>
+				<value>5</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
@@ -654,7 +664,7 @@
 			</preference>
 			<preference>
 				<name>showReadMore</name>
-				<value>true</value>
+				<value>false</value>
 				<read-only>false</read-only>
 			</preference>			
 			<preference>
@@ -669,29 +679,34 @@
 			</preference>			
 			<preference>
 				<name>showRssLink</name>
-				<value>false</value>
+				<value>true</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
 				<name>basePath</name>
-    <value>detail</value>
-    <read-only>false</read-only>
-   </preference>
+        <value>detail</value>
+        <read-only>false</read-only>
+      </preference>
 			<preference>
-    <name>contextualFolder</name>
-    <value>contextualDisable</value>
-    <read-only>false</read-only>
-   </preference>
-   <preference>
-    <name>showScvWith</name>
-    <value>content-id</value>
-    <read-only>false</read-only>
-   </preference>      
-   <preference>
-    <name>showClvBy</name>
-    <value>folder-id</value>
-    <read-only>false</read-only>
-   </preference>			
+        <name>contextualFolder</name>
+        <value>contextualEnable</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showScvWith</name>
+        <value>content-id</value>
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>showClvBy</name>
+        <value>folder-id</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>application</name>
+        <value>CategoryContents</value>
+        <read-only>true</read-only>
+      </preference>
 		</portlet-preferences>
 	</portlet>
 

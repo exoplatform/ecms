@@ -7,8 +7,8 @@ h1. Available preferences
 | *orderType* | {{String}} | {{DESC}} | The type of the content sort method: ascending or descending |
 | *header* | {{String}} | | Header of the portlet. It is displayed at the top of the portlet. |
 | *automaticDetection* | {{Boolean}} | {{true}} | This value indicates whether the header of the portlet is chosen to be the title of the folder given in the *folderPath* parameter (true value) or the value given in the *header* paramter above |
-| *formViewTemplatePath* | {{String}} | {{/exo:ecm/views/templates/Content List Viewer/list-by-folder/UIContentListPresentationDefault.gtmpl}} | Path to the template used to display the contents in this portlet. |
-| *paginatorTemplatePath* | {{String}} | {{/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl}} | Path to the paginator used to display the contents in this portlet. |
+| *formViewTemplatePath* | {{String}} | {{/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl}} | Path to the template used to display the contents in this portlet. |
+| *paginatorTemplatePath* | {{String}} | {{/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl}} | Path to the paginator used to display the contents in this portlet. |
 | *itemsPerPage* | {{Integer}} | 10 | Number of contents displayed in every "page" of the portlet. |
 | *showThumbnailsView* | {{Boolean}} | {{true}} | This value indicates whether the content image in this portlet is shown or not. |
 | *showTitle* | {{Boolean}} | {{true}} | This value indicates whether the content title in this portlet is shown or not. |
@@ -59,12 +59,12 @@ h1. Sample Configuration
       </preference>
       <preference>
 	<name>formViewTemplatePath</name>
-	<value>/exo:ecm/views/templates/Content List Viewer/list-by-folder/UIContentListPresentationDefault.gtmpl</value>
+	<value>/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl</value>
 	<read-only>false</read-only>
       </preference>
       <preference>
 	<name>paginatorTemplatePath</name>
-	<value>/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl</value>
+	<value>/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl</value>
 	<read-only>false</read-only>
       </preference>
       <preference>

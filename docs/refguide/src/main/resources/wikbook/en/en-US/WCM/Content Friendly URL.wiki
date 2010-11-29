@@ -93,7 +93,7 @@ Configure the CLV to point to the right JCR path (where the is content) and the 
 
 h3. CLV Template Modification
 
-Open the Sites administration / DMS Administration drive. Then go to the "/exo:ecm/views/templates/Content List Viewer/list-by-folder" folder. Edit the UIContentListPresentationDefault.gtmpl content, which is the template we choose for the CLV (see also [WCM Templates|#WCM Templates]).
+Open the Sites administration / DMS Administration drive. Then go to the "/exo:ecm/views/templates/content-list-viewer/list" folder. Edit the UIContentListPresentationDefault.gtmpl content, which is the template we choose for the CLV (see also [WCM Templates|#WCM Templates]).
 
 Locate the following block of code and insert the line below: 
 

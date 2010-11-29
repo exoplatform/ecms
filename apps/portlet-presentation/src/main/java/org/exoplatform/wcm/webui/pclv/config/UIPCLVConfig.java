@@ -80,7 +80,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
   public final static String PORTLET_NAME                      = "Parameterized Content List Viewer";
 
   /** The Constant FORM_VIEW_TEMPLATE_CATEGORY. */
-  public final static String FORM_VIEW_TEMPLATE_CATEGORY       = "list-by-folder";
+  public final static String FORM_VIEW_TEMPLATE_CATEGORY       = "content-list-viewer";
 
   /** The Constant PAGINATOR_TEMPLATE_CATEGORY. */
   public final static String PAGINATOR_TEMPLATE_CATEGORY       = "paginators";
