@@ -339,14 +339,7 @@
         		</tr>
             <tr>
               <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
-              <td class="FieldComponent" colspan="2"  style="align:left;"><%
-                if (uicomponent.isCategoriesNavigation()) {
-                	uiform.renderField(uicomponent.TARGET_PAGE_FORM_STRING_INPUT);
-                }else {
-                	uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET);
-                }
-              %>
-              </td>
+              <td class="FieldComponent" colspan="2"  style="align:left;"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
               <td style="align:right; width:30px">
                 <div class="IconInContextHelp ShowHelpIcon" id="ShowDetailInPageHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'false')">
                   <div style="position: absolute;">

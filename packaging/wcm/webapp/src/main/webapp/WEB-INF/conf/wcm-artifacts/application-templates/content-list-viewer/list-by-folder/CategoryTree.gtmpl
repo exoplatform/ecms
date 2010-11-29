@@ -23,8 +23,6 @@ public void renderCategories(def categories) {
       if (category.hasChilds()) renderCategories(category.getChilds());
     }
 }
-def header = uicomponent.getHeader();
-if (header ==null) header= _ctx.appRes(uicomponent.getParent().getMessageKey());
 %>
 
 <style>
@@ -43,7 +41,7 @@ if (header ==null) header= _ctx.appRes(uicomponent.getParent().getMessageKey());
     <div class="TitleBarL">
       <div class="TitleBarR">
         <div class="TitleBarM">
-          <%= header %>
+          <%= uicomponent.getHeader() %>
         </div>
       </div>
     </div>

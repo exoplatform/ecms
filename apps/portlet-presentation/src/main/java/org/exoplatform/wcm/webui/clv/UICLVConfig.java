@@ -162,6 +162,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   
   /** The Constant SHOW_SCV_WITH_STRING_INPUT. */
   public static final String SHOW_SCV_WITH_STRING_INPUT             = "UICLVConfigshowSCVWithStringInput";
+  
+  /** TODO: Need to improve, we should allow user can choose template category by configuration or portlet's preference */
+  /** The Constant DISPLAY_TEMPLATE_CATEGORY. */
+  public final static String DISPLAY_TEMPLATE_CATEGORY              = "list-by-folder";
 
   /** The Constant PAGINATOR_TEMPLATE_CATEGORY. */
   public final static String PAGINATOR_TEMPLATE_CATEGORY            = "paginators";
@@ -169,15 +173,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   /** TODO: Need to improve, we should get portlet's name by API, not hardcode like this */
   /** The Constant PORTLET_NAME. */
   public final static String PORTLET_NAME                           = "Content List Viewer";
-  
-  /** TODO: Need to improve, we should allow user can choose template category by configuration or portlet's preference */
-  /** The Constant DISPLAY_TEMPLATE_CATEGORY. */
-  public final static String DISPLAY_TEMPLATE_CATEGORY              = "navigation";
-  public final static String DISPLAY_TEMPLATE_LIST					= "list";
-  public final static String TEMPLATE_STORAGE_FOLDER				= "content-list-viewer";
-  public final static String CONTENT_LIST_TYPE						= "ContentList";
-  public final static String CATEGORIES_CONTENT_TYPE				= "CategoryContents";
-  public final static String CATOGORIES_NAVIGATION_TYPE				= "CategoryNavigation";
   
   /** The popup id. */
   private String popupId;
@@ -187,7 +182,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   
   private String savedPath;  
   private boolean isShowAdvancedBlock_;
-  private String appType;  
+  
   private String driveName_;
   
   public void setSavedPath(String value) {
@@ -204,7 +199,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   public String getPopupId() {
     return popupId;
   }
-  
+
   /**
    * Sets the popup id.
    * 
@@ -253,7 +248,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    */
   public UICLVConfig() throws Exception {
     PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
-    appType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);
     String displayMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_DISPLAY_MODE, null);
     String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
     savedPath = itemPath;
@@ -294,7 +288,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     displayModeOptions.add(new SelectItemOption<String>(UICLVPortlet.DISPLAY_MODE_MANUAL, UICLVPortlet.DISPLAY_MODE_MANUAL));
     UIFormRadioBoxInput displayModeRadioBoxInput = new UIFormRadioBoxInput(DISPLAY_MODE_FORM_RADIO_BOX_INPUT, DISPLAY_MODE_FORM_RADIO_BOX_INPUT, displayModeOptions);
     displayModeRadioBoxInput.setValue(displayMode);
-
     
     /** ITEM PATH */
     UIFormStringInput itemPathInput = 
@@ -330,20 +323,13 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     UIFormCheckBoxInput<Boolean> showAutomaticDetectionCheckBox = new UIFormCheckBoxInput<Boolean>(SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT, SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT, null);
     showAutomaticDetectionCheckBox.setChecked(showAutomaticDetection);
     
-    String templateSubFolder;
     /** DISPLAY TEMPLATE */
-    if (appType.equals(CONTENT_LIST_TYPE) || appType.equals(CATEGORIES_CONTENT_TYPE)) {
-    	templateSubFolder = DISPLAY_TEMPLATE_LIST;
-    }else {
-    	templateSubFolder = DISPLAY_TEMPLATE_CATEGORY;
-    }
-    
-    List<SelectItemOption<String>> formViewerTemplateList = getTemplateList(TEMPLATE_STORAGE_FOLDER, templateSubFolder);
+    List<SelectItemOption<String>> formViewerTemplateList = getTemplateList(PORTLET_NAME, DISPLAY_TEMPLATE_CATEGORY);
     UIFormSelectBox formViewTemplateSelector = new UIFormSelectBox(DISPLAY_TEMPLATE_FORM_SELECT_BOX, DISPLAY_TEMPLATE_FORM_SELECT_BOX, formViewerTemplateList);
     formViewTemplateSelector.setValue(displayTemplate);
     
     /** PAGINATOR TEMPLATE */
-    List<SelectItemOption<String>> paginatorTemplateList = getTemplateList(TEMPLATE_STORAGE_FOLDER, PAGINATOR_TEMPLATE_CATEGORY);
+    List<SelectItemOption<String>> paginatorTemplateList = getTemplateList(PORTLET_NAME, PAGINATOR_TEMPLATE_CATEGORY);
     UIFormSelectBox paginatorTemplateSelector = new UIFormSelectBox(PAGINATOR_TEMPLATE_FORM_SELECT_BOX, PAGINATOR_TEMPLATE_FORM_SELECT_BOX, paginatorTemplateList);
     paginatorTemplateSelector.setValue(paginatorTemplate);
     
@@ -417,20 +403,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     
     /** ALLOW DYNAMIC URL */
     UIFormStringInput showScvWithInput = new UIFormStringInput(SHOW_SCV_WITH_STRING_INPUT, SHOW_SCV_WITH_STRING_INPUT, showScvWith);
-    if (appType.equals(CATOGORIES_NAVIGATION_TYPE)) {
-    	//Disable option
-    	displayModeRadioBoxInput.setEnable(false);
-    	showAutomaticDetectionCheckBox.setEnable(false);
-    	showImageCheckbox.setEnable(false);
-    	showSummaryCheckbox.setEnable(false);
-    	showDateCreatedCheckbox.setEnable(false);
-    	showLinkCheckbox.setEnable(false);
-    	showRefreshCheckbox.setEnable(false);
-    	showMoreLinkCheckbox.setEnable(false);
-    	showRssLinkCheckbox.setEnable(false);
-    	contextualFolderRadioBoxInput.setEnable(false);
-    	showScvWithInput.setEnable(false);
-    }
+    
     addChild(displayModeRadioBoxInput);
     addChild(itemPathInputSet);
     addChild(orderBySelectBox);
@@ -458,11 +431,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     
     addChild(contextualFolderRadioBoxInput);
     addChild(showClvByInput);
-    if (appType.equals(CATOGORIES_NAVIGATION_TYPE)) {
-    	addChild(basePathInput);
-    } else {
-        addChild(targetPageInputSet);
-    }
+    addChild(targetPageInputSet);
     addChild(showScvWithInput);
     
     if (contextualFolderMode != null && contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE))
@@ -498,9 +467,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     return templateOptionList;
   }
-  public boolean isCategoriesNavigation() {
-	  return appType.equals(CATOGORIES_NAVIGATION_TYPE);
-  }
+  
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String, java.lang.Object)
    */

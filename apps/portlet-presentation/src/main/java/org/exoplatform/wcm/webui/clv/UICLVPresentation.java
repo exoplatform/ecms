@@ -147,9 +147,6 @@ public class UICLVPresentation extends UIContainer {
   }
   
   public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth) throws Exception {
-    if (fullPath==null || fullPath.length()==0) {
-    	return null;
-    }
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
