@@ -877,3 +877,19 @@ float: left;
 		padding-bottom:5px;
 		vertical-align:bottom;
 }
+
+.UILockHolderContainer .UIGroupMembershipSelector .UITrees .TreeContainer {
+  height: 146px;
+}
+
+.UILockHolderContainer .UIGroupMembershipSelector .MembershipSelector .OverflowContainer{
+  height: 132px;
+}
+
+.UILockHolderContainer .UIGroupMembershipSelector .GroupSelector {
+  height: 168px;
+}
+
+.UILockHolderContainer .UIGroupMembershipSelector .MembershipSelector {
+  height: 168px;
+}
