@@ -2067,6 +2067,12 @@
       <anyPermission>Jede Erlaubnis</anyPermission>
     </label>
   </UIAnyPermission>
+  
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Jede Erlaubnis</AddAnyPermission>
+    </title>
+  </anyPermission>
   <!--
   ###################################################################################
   # UICategoriesAddedList						                                       					#

@@ -2059,6 +2059,12 @@
       <anyPermission>التصريح للجميع</anyPermission>
     </label>
   </UIAnyPermission>
+  
+  <anyPermission>
+    <title>
+      <AddAnyPermission>ضع اي صلاحية</AddAnyPermission>
+    </title>
+  </anyPermission>
   <!--
   ###################################################################################
   # UICategoriesAddedList						                                       					#

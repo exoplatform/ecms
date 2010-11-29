@@ -2303,6 +2303,12 @@
 			<anyPermission>Any Permission</anyPermission>
 		</label>
 	</UIAnyPermission>
+	
+	<anyPermission>
+    	<title>
+		  <AddAnyPermission>Stel elke toestemming</AddAnyPermission>
+		</title>
+	</anyPermission>
 	<!--
 		###################################################################################
 		# UICategoriesAddedList #
