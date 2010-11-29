@@ -8,16 +8,16 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>Catégoriser</Ontologies>
-        <TypesOfContent>Types de Contenu</TypesOfContent>
+        <Ontologies>Catégories &amp; Tags</Ontologies>
+        <TypesOfContent>Types de contenu</TypesOfContent>
         <ContentPresentation>Présentation des Contenus</ContentPresentation>
         <AdvanceConfiguaration>Configuration Avancée</AdvanceConfiguaration>
       </label>
     </tab>
     <label>
-      <UIFolksonomyManager>Tags</UIFolksonomyManager>
-      <UITaxonomyManager>Catégories</UITaxonomyManager>
-      <UITaxonomyManagerTrees>Taxonomies</UITaxonomyManagerTrees>
+      <UIFolksonomyManager>Gérer les étiquettes</UIFolksonomyManager>
+      <UITaxonomyManager>Gérer les Catégorie simple</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Gérer les Catégories</UITaxonomyManagerTrees>
       <UIMetadataManager>Gestion des Metadonnées</UIMetadataManager>
       <UINamespaceManager>Espaces de Nommage</UINamespaceManager>
       <UINodeTypeManager>Types de Contenu</UINodeTypeManager>
@@ -529,7 +529,7 @@
   </UIRepositoryForm>
   <UIRepositoryList>
     <titlebar>
-      <label>Administrer les fonctions de l'ECM</label>
+      <label>Gérer les  fonctions principales d'ECM</label>
     </titlebar>
     <header>
       <name>Nom</name>
