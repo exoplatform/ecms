@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -543,45 +544,14 @@ public class Utils {
 			fileSizeKB = Math.abs((fileLengthLong / (1024 * 1024 * 1024)));
 			howBig = "GB";
 		}
-		String finalResult = getRoundedValue(fileSizeKB);
+		String finalResult = roundTwoDecimals(fileSizeKB);
 		return finalResult + " " + howBig;
 	}
-
-	private static String getRoundedValue(double decimalVal) {
-		long beforeDecimalValue = decimalTokenize(decimalVal, 1);
-		long afterDecimalValue = decimalTokenize(decimalVal, 2);
-		long decimalValueLength = String.valueOf(afterDecimalValue).length();
-		long dividerVal = divider(decimalValueLength - 1);
-		long dividedValue = afterDecimalValue / dividerVal;
-		String finalResult = String.valueOf(beforeDecimalValue) + "."
-				+ String.valueOf(dividedValue);
-		return finalResult;
-	}
-
-	private static long divider(long argLength) {
-		long varDivider = 1;
-		for (int i = 0; i < (argLength - 1); i++) {
-			varDivider = varDivider * 10;
-		}
-		return varDivider;
-	}
-
-	private static long decimalTokenize(double decimalVal, int position) {
-		long returnDecimalVal = 0;
-		String strDecimalVal = "";
-		if (decimalVal > 0)
-			strDecimalVal = String.valueOf(decimalVal);
-		if (strDecimalVal.length() > 0) {
-			StringTokenizer decimalToken = new StringTokenizer(strDecimalVal, ".");
-			if (position == 1) {
-				returnDecimalVal = Long.parseLong(decimalToken.nextToken());
-			} else if (position == 2) {
-				decimalToken.nextToken();
-				returnDecimalVal = Long.parseLong(decimalToken.nextToken());
-			}
-		}
-		return returnDecimalVal;
-	}
+	
+  private static String roundTwoDecimals(double d) {
+    DecimalFormat twoDForm = new DecimalFormat("#.##");
+    return twoDForm.format(d);
+  }
 
 	/**
 	 * Get resource bundle from PortalApplication resource bundle

@@ -24,7 +24,7 @@
 					 			
 					 		%>
 					   	<div class="MenuItem"> 	
-								<a exo:attr="$action" href="<%=itemContext.event(action,"_objectid_");%>" onclick="return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);" class="ItemIcon ${action}16x16Icon" >
+								<a exo:attr="$action" href="<%=itemContext.event(action,"_objectid_");%>" onclick="return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);" class="ItemIcon DefaultAction16x16Icon ${action}16x16Icon" >
 									<%=_ctx.appRes(uicomponent.getId() + ".event." + action) %>
 								</a>
 						 	</div>
