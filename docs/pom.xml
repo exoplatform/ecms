@@ -21,6 +21,6 @@
   
   <modules>
     <module>refguide</module>
-    <module>userguide</module>
+    <!-- module>userguide</module -->
  </modules>
 </project>
