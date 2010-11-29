@@ -151,7 +151,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		if (MODE_LIVE.equals(mode) && isCached) {
 		  String hash = getHash(nodeIdentifier, version, remoteUser, language, null, null, null, null);
 		  Node cachedNode = (Node)cache.get(hash);
-		  if (cachedNode != null) return cachedNode;
+		  if ((cachedNode != null) && (getViewableContent(cachedNode, filters)!=null)) return cachedNode;
 		}
 		Node node = null;
 		try {
