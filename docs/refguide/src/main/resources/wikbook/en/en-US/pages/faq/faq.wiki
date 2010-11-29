@@ -1,6 +1,63 @@
-h2. How do I create a new Site ?
+h1. How to deploy a workflow?
+ 
+The *addPlugin()* function of *WorkflowServiceContainer* service is used to register for using a workflow. So, if you want to use a workflow, you are required to configure to invoke this addPlugin() function by adding a "*external-component-plugins*" element into the configuration file.
 
-h2. How do I create a new Content Type ?
+You have to set value for the name and location of the workflow which you want to use. There are 2 ways to configure the location of the workflow
 
+h2. Deploy a workflow inside a war
+You can use "war:(FOLDER_PATH)" to register the location where you put the workflow jars file inside
+	
+{code:xml}<external-component-plugins>
+	<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
+	<component-plugin>
+		<name>deploy.predefined.processes</name>
+		<set-method>addPlugin</set-method>
+		<type>org.exoplatform.services.workflow.PredefinedProcessesPlugin</type>
+		<init-params>
+			<object-param>
+				<name>predefined.processes</name>
+				<description>load of default business processes</description>
+				<object type="org.exoplatform.services.workflow.ProcessesConfig">
+					<field name="processLocation"><string>war:/conf/bp</string></field>
+					<field name="predefinedProcess">
+						<collection type="java.util.HashSet">
+							<value><string>/exo-ecms-ext-workflow-bp-jbpm-content-2.1.1.jar</string></value>
+							<value><string>/exo-ecms-ext-workflow-bp-jbpm-payraise-2.1.1.jar</string></value>
+							<value><string>/exo-ecms-ext-workflow-bp-jbpm-holiday-2.1.1.jar</string></value>
+						</collection>
+					</field>
+				</object>
+			</object-param>
+		</init-params>
+	</component-plugin>	    
+ </external-component-plugins>
+{code}
 
-h2. How do I create a new Site ?
+h2. Deploy a workflow inside a jar.
+You can use "classpath:" to register a workflow which you put it inside a jar.
+	
+{code:xml}<external-component-plugins>
+	<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>	  
+	<component-plugin>
+		<name>deploy.predefined.processes</name>
+		<set-method>addPlugin</set-method>
+		<type>org.exoplatform.services.workflow.PredefinedProcessesPlugin</type>
+		<init-params>
+			<object-param>
+				<name>predefined.processes</name>
+				<description>load of default business processes</description>
+				<object type="org.exoplatform.services.workflow.ProcessesConfig">
+					<field name="processLocation"><string>classpath:</string></field>
+					<field name="predefinedProcess">
+						<collection type="java.util.HashSet">
+							<value><string>/exo-ecms-ext-workflow-bp-jbpm-content-myworkflow.jar</string></value>     
+						</collection>
+					</field>
+				</object>
+			</object-param>
+		</init-params>
+	</component-plugin>	    
+</external-component-plugins>
+{code}	
+  
+There is a notification when you deploy a workflow on Jboss: if you use the "classpath:" way, you must to put your workflow jars file inside gatein.ear/lib folder (instead of your lib folder) to make it works.
