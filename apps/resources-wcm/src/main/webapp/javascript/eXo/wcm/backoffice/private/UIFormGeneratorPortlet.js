@@ -2,7 +2,6 @@ function UIFormGeneratorPortlet() {
 }
 
 UIFormGeneratorPortlet.prototype.init = function() {
-  //alert('This is test Form generator portlet....');
 	var DOMUtil = eXo.core.DOMUtil;
 	var uiTabContentContainer = document.getElementById('UITabContentContainer');
 	var uiTabContent = DOMUtil.findFirstDescendantByClass(uiTabContentContainer, 'div', 'UITabContent');
@@ -347,9 +346,9 @@ UIFormGeneratorPortlet.prototype.updateValue = function(evt) {
 			for(var i = 0 ; i < inputList.length; i++) {
 				if(inputList[i] == srcEle) {
 					var radioInputNode = DOMUtil.findFirstDescendantByClass(radioNodes[i], 'input', 'Radio');
-					radioInputNode.value = srcEle.value;
+					if (srcEle.value.length>0) radioInputNode.value = srcEle.value;
 					var radioTextNode = DOMUtil.findDescendantsByTagName(radioNodes[i], 'span')[0];
-					radioTextNode.innerHTML = srcEle.value;
+					if (srcEle.value.length>0) radioTextNode.innerHTML = srcEle.value;
 				} 
 			}
 			break;	
@@ -620,8 +619,42 @@ UIFormGeneratorPortlet.prototype.getProperties = function(comp) {
 			strObject +=  '"value":"null","width":0,"mandatory":'+mandatory+',"height":0,';	
 			break;
 		case "radio" :
+		 var radioButtonList = DOMUtil.findDescendantsByClass(topContent, 'div', 'RadioButton');
+			var strAdvanced = "";			
+			for(var i = 0 ; i < radioButtonList.length; i++) {		 	
+				var radioButton = radioButtonList[i];
+				var inputList = DOMUtil.getChildrenByTagName(radioButton, 'input');							
+				for(var j = 0 ; j < inputList.length; j++) {
+					var radioLabel = DOMUtil.findNextElementByTagName(inputList[j], 'span');
+					if ((radioLabel != null) && (radioLabel.innerHTML.length>0)) {
+						strAdvanced += radioLabel.innerHTML + ",";
+					} else {
+						strAdvanced += inputList[j].value + ",";
+					}
+				}			
+			}
+			var mandatory = fieldLabel.getAttribute('mandatory');
+			strObject += '"mandatory":'+mandatory+',';
+			strObject += '"advanced":"' + strAdvanced + '",';
 			break;
 		case "checkbox" :
+		 var checkboxButtonList = DOMUtil.findDescendantsByClass(topContent, 'div', 'CheckboxButton');
+			var strAdvanced = "";			
+			for(var i = 0 ; i < checkboxButtonList.length; i++) {		 	
+				var checkboxButton = checkboxButtonList[i];
+				var inputList = DOMUtil.getChildrenByTagName(checkboxButton, 'input');							
+				for(var j = 0 ; j < inputList.length; j++) {
+					var checkboxLabel = DOMUtil.findNextElementByTagName(inputList[j], 'span');
+					if ((checkboxLabel != null) && (checkboxLabel.innerHTML.length>0)) {
+						strAdvanced += checkboxLabel.innerHTML + ",";
+					} else {
+						strAdvanced += inputList[j].value + ",";
+					}
+				}			
+			}
+			var mandatory = fieldLabel.getAttribute('mandatory');
+			strObject += '"mandatory":'+mandatory+',';
+			strObject += '"advanced":"' + strAdvanced + '",';
 			break;		
 	}
 
