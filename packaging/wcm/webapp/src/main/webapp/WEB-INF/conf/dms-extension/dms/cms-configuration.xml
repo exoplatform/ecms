@@ -43,6 +43,11 @@
 				<name>def-file-mimetype</name>
 				<value>text/plain</value>
 			</value-param>
+			
+			<value-param>
+	      <name>folder-icon-path</name>
+	      <value>/ecmexplorer/skin/icons/16x16/NodeTypes/DefaultSkin/nt-folder.gif</value>
+    	</value-param>
 				
 			<value-param>
 				<name>update-policy</name>
