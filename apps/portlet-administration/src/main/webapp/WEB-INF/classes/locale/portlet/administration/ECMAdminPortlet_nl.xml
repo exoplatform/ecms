@@ -8,16 +8,16 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>Ontologieën</Ontologies>
+        <Ontologies>Categorieën &amp; labels</Ontologies>
         <TypesOfContent>Types van inhoud</TypesOfContent>
         <ContentPresentation>Inhouds Presentatie</ContentPresentation>
         <AdvanceConfiguaration>geavanceerd Configuratie</AdvanceConfiguaration>
       </label>
     </tab>
     <label>
-      <UIFolksonomyManager>Folksonomy beheer</UIFolksonomyManager>
-      <UITaxonomyManager>Taxonomy beheer</UITaxonomyManager>
-      <UITaxonomyManagerTrees>Beheer Taxonomie Bomen</UITaxonomyManagerTrees>
+      <UIFolksonomyManager>Tags beheer</UIFolksonomyManager>
+      <UITaxonomyManager>Eenvoudig te beheren Categorie</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Categorieën beheer</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadata beheer</UIMetadataManager>
       <UINamespaceManager>Namespace Register</UINamespaceManager>
       <UINodeTypeManager>Node Type beheer</UINodeTypeManager>

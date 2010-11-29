@@ -89,7 +89,7 @@
                     <field name="name"><string>web-contributors</string></field>
                     <field name="parentId"><string>/platform</string></field>
                     <field name="description"><string>the /platform/web-contributors group</string></field>
-                    <field name="label"><string>Web Contributors</string></field>
+                    <field name="label"><string>Content Manager</string></field>
                   </object>
                 </value>
               </collection>
