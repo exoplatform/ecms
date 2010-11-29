@@ -2246,6 +2246,11 @@
       <anyPermission>Cho phép tất cả</anyPermission>
     </label>
   </UIAnyPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Tất cả người dùng</AddAnyPermission>
+    </title>
+  </anyPermission>
   <!--
   ###################################################################################
   # UICategoriesAddedList						                                       					#

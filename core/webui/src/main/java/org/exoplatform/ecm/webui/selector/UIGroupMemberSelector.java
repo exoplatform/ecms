@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
@@ -315,7 +316,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
       UIAnyPermission uiAnyPermission = event.getSource();
       UIGroupMemberSelector uiGroupMemberSelector = uiAnyPermission.getParent();
       String returnField = uiGroupMemberSelector.getReturnField();
-      String value = "*";
+      String value = SystemIdentity.ANY;
       ((UISelectable)uiGroupMemberSelector.getSourceComponent()).doSelect(returnField, value);
       if (uiGroupMemberSelector.isUsePopup()) {
         UIPopupWindow uiPopup = uiGroupMemberSelector.getParent();

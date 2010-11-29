@@ -2234,6 +2234,12 @@
       <anyPermission>Any Permission</anyPermission>
     </label>
   </UIAnyPermission>
+	
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Set any permission</AddAnyPermission>
+    </title>
+  </anyPermission>
   <!--
   ###################################################################################
   # UICategoriesAddedList                                                           #
