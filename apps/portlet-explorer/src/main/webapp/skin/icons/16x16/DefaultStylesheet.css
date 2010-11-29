@@ -790,7 +790,10 @@
   background: url('DefaultSkin/BlueNextIcon.gif') no-repeat center;
 }
 /*====================================UIRightClickPopupMenu==================================*/
-
+.UIRightClickPopupMenu .DefaultAction16x16Icon {
+  background: url('DefaultSkin/DefaultAction.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/DefaultAction.gif') no-repeat right center; /* orientation=rt */
+}
 
 .UIRightClickPopupMenu .AddToFavourite16x16Icon {
   background: url('DefaultSkin/AddToFavourite.gif') no-repeat left center; /* orientation=lt */
@@ -862,6 +865,11 @@
 .UIRightClickPopupMenu .AddSymLink16x16Icon {
   background: url('DefaultSkin/AddSymLink.gif') no-repeat left center; /* orientation=lt */
   background: url('DefaultSkin/AddSymLink.gif') no-repeat right center; /* orientation=rt */
+}
+
+.UIRightClickPopupMenu .ViewInfo16x16Icon {
+  background: url('DefaultSkin/ViewInfo.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ViewInfo.gif') no-repeat right center; /* orientation=rt */
 }
 
 .UIRightClickPopupMenu .Paste16x16Icon {

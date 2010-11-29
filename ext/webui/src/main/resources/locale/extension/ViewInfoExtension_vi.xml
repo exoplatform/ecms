@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+	<UIPopupWindow>
+		<title>
+			<UIViewInfoManager>Xem thông tin chi tiết</UIViewInfoManager>
+		</title>	
+	</UIPopupWindow>
+    
+	<ECMContextMenu>
+		<event>
+			<ViewInfo>Xem thông tin chi tiết</ViewInfo>
+		</event>
+	</ECMContextMenu>
+	<UIViewInfoContainer>
+		<label>
+			<name>Tên</name>
+			<title>Tiêu đề</title>
+			<type>Kiểu</type>
+			<size>Kích thước</size>
+			<owner>Người tạo</owner>
+			<lastModifier>Người sửa cuối cùng</lastModifier>
+			<created>Ngày tạo</created>
+			<lastModified>Ngày sửa cuối</lastModified>
+			<publicationState>Trạng thái xuất bản</publicationState>
+		</label>
+		<value>
+			<folder>Thư mục</folder>
+		</value>
+		<action>
+			<Close>Đóng</Close>
+		</action>
+	</UIViewInfoContainer>
+</bundle>

@@ -17,5 +17,6 @@
     <module>newsletter</module>
     <module>formgenerator</module>
     <module>xcmis</module>
+    <module>webui</module>
   </modules>
 </project>
