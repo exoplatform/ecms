@@ -126,14 +126,17 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
       String iPath = event.getRequestContext().getRequestParameter("currentPath");
       String repoName;
       String[] locations = (iPath == null) ? null : iPath.split(":");
-      if (locations.length>2) node= Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]);
-      if (node!=null) {
-	      repoName = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName();
-	      iPath = fixPath(iDriver, node.getPath(), repoName, contentBrowsePanelMulti);	
-	      contentBrowsePanelMulti.setInitPath(iDriver, iPath);
-      }else {    	  
-    	  contentBrowsePanelMulti.setInitPath(iDriver,iPath);
-      }
+      if (iDriver!=null && iDriver.length()>0) {
+	    if (locations!=null && locations.length>2) node= Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]);
+	    if (node!=null) {
+		  repoName = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName();
+		  iPath = fixPath(iDriver, node.getPath(), repoName, contentBrowsePanelMulti);	
+		  contentBrowsePanelMulti.setInitPath(iDriver, iPath);
+	    }else {    	  
+	      contentBrowsePanelMulti.setInitPath(iDriver,iPath);
+	    }
+      }else contentBrowsePanelMulti.setInitPath("", "");
+      
       contentBrowsePanelMulti.setItemPaths(itemPaths);      
       UIContentSelector contentSelector = contentBrowsePanelMulti.getAncestorOfType(UIContentSelector.class);
       contentSelector.setSelectedTab(contentBrowsePanelMulti.getId());
