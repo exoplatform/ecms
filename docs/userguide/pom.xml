@@ -197,9 +197,9 @@ Repositories are proxied in http://repository.exoplatform.org/public, should be 
 				</dependencies>
 				<configuration>
 		      <sourceDocumentName>${docname}.xml</sourceDocumentName>
-				  <sourceDirectory>.</sourceDirectory>
+				  <sourceDirectory>${basedir}</sourceDirectory>
 				  <imageResource>
-					  <directory>${translation}</directory>
+					  <directory>${basedir}/${translation}</directory>
 					  <includes>
 						  <include>images/*</include>
 					  </includes>

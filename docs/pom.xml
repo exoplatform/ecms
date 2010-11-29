@@ -19,8 +19,18 @@
     <wikbook.version>0.9.26</wikbook.version>
   </properties>
   
-  <modules>
-    <module>refguide</module>
-    <!-- module>userguide</module -->
- </modules>
+   <modules>
+     <!-- to build the doc, use the release plugin -->
+   </modules>
+
+   <profiles>
+     <profile>
+       <id>release</id>
+       <modules>
+         <module>refguide</module>
+         <module>userguide</module>
+       </modules>
+     </profile>
+   </profiles>
+
 </project>
