@@ -3,29 +3,26 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jboss.project</groupId>
-	<artifactId>${docname}-${translation}</artifactId>
-	<version>1.0</version>
-	<packaging>jdocbook</packaging>
-	<name>${bookname}-(${translation})</name>
+  <modelVersion>4.0.0</modelVersion>
+    <parent>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo-ecms-docs</artifactId>
+    <version>2.1.2-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo-ecms-docs-userguide</artifactId>
+  <packaging>jdocbook</packaging>
+
+  <name>ECMS documentation userguide (co-edited by RHT)</name>
 
   <properties>
     <translation>en-US</translation>
-    <docname>User_Guide</docname>
     <bookname>User Guide</bookname>
+    <docname>User_Guide</docname>
   </properties> 
 
-  <repositories>
-      <!--repository>
-          <id>repository.jboss.org</id>
-          <name>JBoss Repository</name>
-          <layout>default</layout>
-          <url>http://repository.jboss.org/nexus/</url>
-          <snapshots>
-              <enabled>false</enabled>
-          </snapshots>
-      </repository-->
+<!--
+Repositories are proxied in http://repository.exoplatform.org/public, should be declared in maven settings.
+<repositories>
       <repository>
           <id>jboss-public-repository-group</id>
           <name>JBoss Public Maven Repository Group</name>
@@ -54,22 +51,9 @@
             <enabled>true</enabled>
           </snapshots>
     </pluginRepository>
-    <!--pluginRepository>
-          <id>jboss-snapshot-repository-group</id>
-          <name>JBoss Snapshot Maven Repository Group</name>
-          <url>https://repository.jboss.org/nexus/content/groups/snapshot/</url>
-          <layout>default</layout>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-    </pluginRepository-->
  </pluginRepositories>
-  
+-->
   <profiles>
-
     <!-- mvn compile -->
     <profile>
       <id>all</id>
@@ -88,7 +72,7 @@
         				<format>
         				  <formatName>pdf</formatName>
         					<stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
-        					<finalName>${docname}.pdf</finalName>
+        					<finalName>${artifactId}.pdf</finalName>
         				</format>
     					  <format>
     					    <formatName>html</formatName>
@@ -179,7 +163,7 @@
         				<format>
         				  <formatName>pdf</formatName>
         					<stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
-        					<finalName>${docname}.pdf</finalName>
+        					<finalName>${artifactId}.pdf</finalName>
         				</format>
     					</formats>
   					</configuration>
@@ -240,6 +224,64 @@
 			  </configuration>
 		  </plugin>
 		  
+		  
+     <!-- html-zip packaging -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/html-zip.xml</descriptor>
+          </descriptors>
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Attach the doc to the pom in maven repo -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/resources</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>attach-artifacts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>target/docbook/publish/en-US/pdf/${project.artifactId}.pdf</file>
+                  <type>pdf</type>
+                </artifact>
+                <artifact>
+                  <file>target/${project.artifactId}-${project.version}.zip</file>
+                  <type>zip</type>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin> 
 	  </plugins>
   </build>
 
