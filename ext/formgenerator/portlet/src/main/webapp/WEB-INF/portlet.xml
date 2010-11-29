@@ -109,9 +109,9 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
   </portlet>
 
   <portlet>
-    <description xml:lang="EN">Content Creator</description>
+    <description xml:lang="EN">Basic Content Creator</description>
     <portlet-name>FastContentCreatorBasicPortlet</portlet-name>
-    <display-name xml:lang="EN">Content Creator</display-name>
+    <display-name xml:lang="EN">Basic Content Creator</display-name>
     <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
     <init-param>
       <name>webui.configuration</name>
@@ -126,8 +126,8 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
     <supported-locale>en</supported-locale>
     <resource-bundle>locale.portlet.FastContentCreatorPortlet.FastContentCreatorPortlet</resource-bundle>
     <portlet-info>
-      <title>Content Creator</title>
-      <short-title>Content Creator</short-title>
+      <title>Basic Content Creator</title>
+      <short-title>Basic Content Creator</short-title>
       <keywords>Forms</keywords>
     </portlet-info>
     <portlet-preferences>
@@ -194,6 +194,92 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
 			
 		</portlet-preferences>
   </portlet>
-
+ 
+  <portlet>
+    <description xml:lang="EN">Standard Content Creator</description>
+    <portlet-name>FastContentCreatorBasicPortletStandard</portlet-name>
+    <display-name xml:lang="EN">Standard Content Creator</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/FastContentCreatorPortlet/webui/configuration.xml</value>
+    </init-param>
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+      <portlet-mode>edit</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.FastContentCreatorPortlet.FastContentCreatorPortlet</resource-bundle>
+    <portlet-info>
+      <title>Standard Content Creator</title>
+      <short-title>Standard Content Creator</short-title>
+      <keywords>Forms</keywords>
+    </portlet-info>
+    <portlet-preferences>
+      <!-- Setup the default mode for fast content creator portlet -->
+      <preference>
+        <name>mode</name>
+        <value>standard</value>
+        <read-only>true</read-only>
+      </preference>
+      <!-- Setup the default repository name for fast content creator portlet -->
+      <preference>
+        <name>repository</name>
+        <value>repository</value>
+        <read-only>false</read-only>
+      </preference>
+      <!-- Specify the workspace name will be use in repository	-->
+      <preference>
+        <name>workspace</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>
+      <!-- Specify the destination path which will be use to store saved documents -->
+      <preference>
+        <name>path</name>
+        <value>/Groups/platform/users/Documents</value>
+        <read-only>false</read-only>
+      </preference>
+      <!-- Specify the node type of document which will be show on the dialog form -->
+      <preference>
+        <name>type</name>
+        <value>exo:article</value>
+        <read-only>false</read-only>
+      </preference>
+      <!-- The custom button Save -->
+      <preference>
+        <name>saveButton</name>
+        <value>Save</value>
+        <read-only>false</read-only>
+      </preference>
+      <!-- The custom message when click Save button -->
+      <preference>
+        <name>saveMessage</name>
+        <value>This node has been saved successfully</value>
+        <read-only>false</read-only>
+      </preference>
+      <!-- Redirect to other page or not -->
+      <preference>
+        <name>isRedirect</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>
+      <!-- The page will redirect to -->
+      <preference>
+        <name>redirectPath</name>
+        <value>http://www.google.com.vn</value>
+        <read-only>false</read-only>
+      </preference>
+    <!-- Is an action needed to save the configuration -->
+			<preference>
+				<name>isActionNeeded</name>
+				<value>true</value>
+				<read-only>true</read-only>
+			</preference>
+			
+		</portlet-preferences>
+  </portlet>
 
 </portlet-app>

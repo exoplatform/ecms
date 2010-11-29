@@ -26,6 +26,7 @@
   width: 16px;
   height: 16px;
   cursor: pointer;
+	margin-top: 4px;
 }
 
 .UIFCCPortlet .AddRootNodeIcon {
@@ -179,4 +180,24 @@
   padding-left: 12px;
   right: 0;
   bottom: 0;
+}
+.SearchIcon {
+	background:url("/ecmexplorer/skin/icons/24x24/DefaultSkin/Search.gif") no-repeat scroll left center transparent;
+	border:1px none;
+	height:24px;
+	padding:10px;
+	width:24px;
+}
+.HorizontalLayout .UIForm input.checkbox {
+	margin:10px 0 0 2px;
+	width:16px;
+}
+.UIForm .HorizontalLayout input.checkbox {
+	margin:0;
+	width:16px;
+}
+.UIMaskWorkspace .UIFormWithTitle {
+	margin:auto;
+	padding:0 0 50px;
+	width:550px;
 }

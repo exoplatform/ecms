@@ -16,13 +16,15 @@
  */
 package org.exoplatform.wcm.webui.fastcontentcreator.config.action;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
-
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
+import org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector;
 import org.exoplatform.ecm.webui.selector.ComponentSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
@@ -55,6 +57,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInputBase;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
@@ -150,9 +153,15 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String, java.lang.Object)
    */
-  public void doSelect(String selectField, Object value) {
+  public void doSelect(String selectField, Object value) throws Exception {
     isUpdateSelect = true ;
-    getUIStringInput(selectField).setValue(value.toString()) ;
+    //getUIStringInput(selectField).setValue(value.toString()) ;
+    UIComponent uicomponent = getChildById(selectField);
+    if (UIFormStringInput.class.isInstance(uicomponent))
+      ((UIFormStringInput)uicomponent).setValue(value.toString());
+    else if (UIFormMultiValueInputSet.class.isInstance(uicomponent)) {
+      ((UIFormMultiValueInputSet)uicomponent).setValue((ArrayList<String>)value);
+    }    
   }
   
   /**
@@ -341,7 +350,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
           fastContentCreatorActionList = fastContentCreatorConfig.findFirstComponentOfType(UIFCCActionList.class) ;  
           fastContentCreatorActionList.updateGrid(parentNode, fastContentCreatorActionList.getChild(UIGrid.class).getUIPageIterator().getCurrentPage());
           fccActionForm.reset() ;
-        } catch(RepositoryException repo) {      
+        } catch(RepositoryException repo) {        	
           String key = "UIFastContentCreatorActionForm.msg.repository-exception" ;
           uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
@@ -438,16 +447,17 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
       String classPath = (String)fieldPropertiesMap.get("selectorClass") ;
       String rootPath = (String)fieldPropertiesMap.get("rootPath") ;
       ClassLoader cl = Thread.currentThread().getContextClassLoader() ;
-      Class clazz = Class.forName(classPath, true, cl) ;
+      Class clazz = Class.forName(classPath, true, cl) ;      
       UIComponent uiComp = uiContainer.createUIComponent(clazz, null, null);
+      String repositoryName = fastContentCreatorActionForm.getRepositoryName();
+      String selectorParams = (String) fieldPropertiesMap.get("selectorParams");
       if(uiComp instanceof UIOneNodePathSelector) {
         String wsFieldName = (String)fieldPropertiesMap.get("workspaceField") ;
         String wsName = "";
         if(wsFieldName != null && wsFieldName.length() > 0) {
           wsName = (String)fastContentCreatorActionForm.<UIFormInputBase>getUIInput(wsFieldName).getValue() ;          
           ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true) ;           
-        }
-        String selectorParams = (String)fieldPropertiesMap.get("selectorParams") ;
+        }        
         if(selectorParams != null) {
           String[] arrParams = selectorParams.split(",") ;
           if(arrParams.length == 4) {
@@ -466,10 +476,20 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
         ((UIOneNodePathSelector)uiComp).setRootNodeLocation(UIFCCUtils.getPreferenceRepository(), wsName, rootPath) ;
         ((UIOneNodePathSelector)uiComp).setShowRootPathSelect(true);
         ((UIOneNodePathSelector)uiComp).init(Utils.getSessionProvider());
-      }
+      } else if (uiComp instanceof UINodeTypeSelector) {  
+    	  ((UINodeTypeSelector)uiComp).setRepositoryName(repositoryName);
+          UIFormMultiValueInputSet uiFormMultiValueInputSet = fastContentCreatorActionForm.getChildById(fieldName);
+          List values = uiFormMultiValueInputSet.getValue();
+          ((UINodeTypeSelector)uiComp).init(1, values);
+        }
+      
       Utils.createPopupWindow(fastContentCreatorActionForm, uiComp, UIFCCConstant.SELECTOR_POPUP_WINDOW, 640);
       String param = "returnField=" + fieldName ;
-      ((ComponentSelector)uiComp).setSourceComponent(fastContentCreatorActionForm, new String[]{param}) ;
+      String[] params = selectorParams == null ? new String[]{param} : new String[]{param, "selectorParams=" + selectorParams};
+      ((ComponentSelector)uiComp).setSourceComponent(fastContentCreatorActionForm, params);     
+      if(fastContentCreatorActionForm.isAddNew){
+    	  uiContainer.setRendered(true);
+      }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
   }

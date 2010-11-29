@@ -16,7 +16,8 @@
           if(field.isRendered()) {
       %>
 						<tr>
-              <%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { %>                        
+              <%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { 
+            	  if(uicomponent.getLabel(field.getName())!=null && !uicomponent.getLabel(field.getName()).equals(""))%>                        
 								<td class="FieldLabel"><%=uicomponent.getLabel(field.getName())%></td>
   						  <td class="FieldComponent"><% uiform.renderField(field) %></td>
               <%} else {%>
