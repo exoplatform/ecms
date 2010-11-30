@@ -201,3 +201,10 @@
 	padding:0 0 50px;
 	width:550px;
 }
+.UIFCCPortlet .Add16x16Icon {
+	background:url("/formgenerator/skin/FastContentCreatorPortlet/DefaultSkin/AddIcon.png") no-repeat scroll 0 0 transparent;
+	cursor:pointer;
+	height:16px;
+	margin-top:2px;
+	width:16px;
+}
