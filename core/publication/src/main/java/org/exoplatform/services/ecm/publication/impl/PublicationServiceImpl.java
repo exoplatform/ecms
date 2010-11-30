@@ -225,7 +225,7 @@ public class PublicationServiceImpl implements PublicationService {
    * @see org.exoplatform.services.cms.publication.PublicationService#isNodeEnrolledInLifecycle(javax.jcr.Node)
    */
   public boolean isNodeEnrolledInLifecycle(Node node) throws Exception {
-    return node.isNodeType(PUBLICATION);
+    return node.isNodeType(PUBLICATION) && node.hasProperty(LIFECYCLE_NAME);
   }
 
   public String getLocalizedAndSubstituteLog(Locale locale, String key, String[] values){
