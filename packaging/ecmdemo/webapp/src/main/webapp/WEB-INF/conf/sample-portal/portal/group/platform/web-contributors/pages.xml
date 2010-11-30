@@ -27,7 +27,7 @@
     <owner-type>group</owner-type>
     <owner-id>platform/web-contributors</owner-id>
     <name>wcm</name>
-    <title>Site Explorer</title>
+    <title>Content Explorer</title>
     <access-permissions>*:/platform/web-contributors</access-permissions>
     <edit-permission>manager:/platform/web-contributors</edit-permission>
     <portlet-application>
@@ -36,7 +36,7 @@
         <portlet-ref>FileExplorerPortlet</portlet-ref>
         <preferences></preferences>
       </portlet>
-      <title>Site Explorer</title>
+      <title>Content Explorer</title>
       <access-permissions>*:/platform/web-contributors</access-permissions>
       <show-info-bar>false</show-info-bar>
       <show-application-state>false</show-application-state>
@@ -49,7 +49,7 @@
     <owner-type>group</owner-type>
     <owner-id>platform/web-contributors</owner-id>
     <name>SiteExplorer</name>
-    <title>Site Explorer</title>
+    <title>Content Explorer</title>
     <access-permissions>*:/platform/web-contributors</access-permissions>
     <edit-permission>manager:/platform/web-contributors</edit-permission>
     <portlet-application>
@@ -64,7 +64,7 @@
 			</preference>        	
         </preferences>
       </portlet>
-      <title>Site Explorer</title>
+      <title>Content Explorer</title>
       <access-permissions>*:/platform/web-contributors</access-permissions>
       <show-info-bar>false</show-info-bar>
       <show-application-state>false</show-application-state>
