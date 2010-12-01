@@ -61,7 +61,7 @@ Environment (JRE) or Java Development Kit version 6.x
 3.1 Install Java SE 1.6 (Java Development Kit)
 Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are using newer version, please download and install this version to make WCM works fine. We will support newer version of Java very soon.
 
-3.2 Download the lastest eXo Web Content Management version from: http://forge.objectweb.org/projects/exoplatform/
+3.2 Download the latest eXo Web Content Management version from: https://sourceforge.net/projects/exo-wcm/
 
 3.3 Unzip that package under a path that does not contain any space (in Windows).
 
@@ -735,9 +735,9 @@ Release Notes - exo-ecms - Version wcm-2.1.0-GA
 	
 For more documentation and latest updated news, please visit our websites:
 	www.exoplatform.com
-	www.blog.exoplatform.org
+	blog.exoplatform.org
 	
-If you have questions, please send a mail to the list exoplatform@objectweb.org.
+If you have questions, please send a mail to the list exo-ecms@googlegroups.com.
 
 Thank your for using eXo Content product!
 The eXo Content team.
