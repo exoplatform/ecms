@@ -920,12 +920,14 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
     while(nodeIter.hasNext()) {
       Node child = nodeIter.nextNode();
       if(child.getName().equals(LANGUAGES)) continue;
-      node.getSession().move(child.getPath(), newLang.getPath() + "/" + child.getName());
+      if(!node.getSession().itemExists(newLang.getPath() + "/" + child.getName()))
+        node.getSession().move(child.getPath(), newLang.getPath() + "/" + child.getName());
     }
     NodeIterator selectedIter = selectedLangNode.getNodes();
     while(selectedIter.hasNext()) {
       Node child = selectedIter.nextNode();
-      node.getSession().move(child.getPath(), node.getPath() + "/" + child.getName());
+      if(!node.getSession().itemExists(node.getPath() + "/" + child.getName()))
+        node.getSession().move(child.getPath(), node.getPath() + "/" + child.getName());
     }
   }
   
@@ -942,7 +944,8 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
     while(nodeIter.hasNext()) {
       Node child = nodeIter.nextNode();
       if(child.getName().equals(LANGUAGES)) continue;
-      node.getSession().move(child.getPath(), tempNode.getPath() + "/" + child.getName());
+      if(!node.getSession().itemExists(tempNode.getPath() + "/" + child.getName()))
+        node.getSession().move(child.getPath(), tempNode.getPath() + "/" + child.getName());
     }
     
     NodeIterator selectedIter = selectedLangNode.getNodes();
@@ -953,7 +956,8 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
     NodeIterator tempIter = tempNode.getNodes();
     while(tempIter.hasNext()) {
       Node child = tempIter.nextNode();
-      node.getSession().move(child.getPath(), selectedLangNode.getPath() + "/" + child.getName());
+      if(!node.getSession().itemExists(selectedLangNode.getPath() + "/" + child.getName()))
+        node.getSession().move(child.getPath(), selectedLangNode.getPath() + "/" + child.getName());
     }
     tempNode.remove();
   }
@@ -971,9 +975,12 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
   private void processWithDataChildNode(Node node, Node selectedLangNode, Node languagesNode, 
       String defaultLanguage, String nodeType) throws Exception {
     Node tempNode = node.addNode(TEMP_NODE, NTUNSTRUCTURED) ;
-    node.getSession().move(node.getNode(nodeType).getPath(), tempNode.getPath() + "/" + nodeType) ;
-    node.getSession().move(selectedLangNode.getNode(nodeType).getPath(), node.getPath() + "/" + nodeType) ;
-    node.getSession().move(tempNode.getNode(nodeType).getPath(), languagesNode.getPath() + "/" + defaultLanguage + "/" + nodeType) ;
+    if(!node.getSession().itemExists(tempNode.getPath() + "/" + nodeType))
+      node.getSession().move(node.getNode(nodeType).getPath(), tempNode.getPath() + "/" + nodeType) ;
+    if(!node.getSession().itemExists(node.getPath() + "/" + nodeType))
+      node.getSession().move(selectedLangNode.getNode(nodeType).getPath(), node.getPath() + "/" + nodeType) ;
+    if(!node.getSession().itemExists(languagesNode.getPath() + "/" + defaultLanguage + "/" + nodeType))
+      node.getSession().move(tempNode.getNode(nodeType).getPath(), languagesNode.getPath() + "/" + defaultLanguage + "/" + nodeType) ;
     tempNode.remove() ;
   }
   
