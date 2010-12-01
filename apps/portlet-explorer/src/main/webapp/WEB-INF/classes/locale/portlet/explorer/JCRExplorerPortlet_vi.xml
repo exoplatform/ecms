@@ -104,7 +104,8 @@
       <Hidden>Ẩn</Hidden>
       <Trash>Thùng rác</Trash>      
       <Configuration>Thiết lập lựa chọn</Configuration>
-      <DocumentFilterConfiguration>Thiết lập kiểu hiển thị</DocumentFilterConfiguration>      
+      <DocumentFilterConfiguration>Thiết lập kiểu hiển thị</DocumentFilterConfiguration>
+      <SavedSearches>Câu tìm kiếm</SavedSearches>      
     </label>
     <title>
       <Control>Điều khiển</Control>
