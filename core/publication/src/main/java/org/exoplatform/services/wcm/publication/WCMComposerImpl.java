@@ -370,7 +370,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 				 */
 				Node node = wcmService.getReferencedContent(sessionProvider, repository, workspace, path);
 				if (node!=null) {
-					oid = node.getUUID();
+				  if (node.isNodeType("mix:referenceable")) oid = node.getUUID();
 					/* remove parent cache */
 					updateContents(repository, workspace, part, filters);
 					taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
