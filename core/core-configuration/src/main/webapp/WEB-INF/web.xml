@@ -63,10 +63,6 @@
   <listener>
     <listener-class>org.exoplatform.container.web.PortalContainerConfigOwner</listener-class>
   </listener>
-  
-  <listener>
-    <listener-class>org.exoplatform.web.resource.config.xml.FCKConfigListener</listener-class>
-  </listener>
   <!-- ================================================================== -->
   <!--           SERVLET                                                  -->
   <!-- ================================================================== -->
