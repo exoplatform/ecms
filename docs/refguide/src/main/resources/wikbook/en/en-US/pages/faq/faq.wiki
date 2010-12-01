@@ -1,13 +1,15 @@
 h1. How to deploy a workflow?
  
-The *addPlugin()* function of *WorkflowServiceContainer* service is used to register for using a workflow. So, if you want to use a workflow, you are required to configure to invoke this addPlugin() function by adding a "*external-component-plugins*" element into the configuration file.
+The _*addPlugin()*_ function of *WorkflowServiceContainer* service will be used to register when a workflow is implemented. Thus, if you want to use a workflow, you are required to configure to invoke the _*addPlugin()*_ function by adding the _*external-component-plugins*_ element to the configuration file.
 
-You have to set value for the name and location of the workflow which you want to use. There are 2 ways to configure the location of the workflow
+You have to set values for the name and location of the workflow which you want to use. There are *TWO* ways to configure the location of the workflow.
 
-h2. Deploy a workflow inside a war
-You can use "war:(FOLDER_PATH)" to register the location where you put the workflow jars file inside
+h2. Deploy a workflow inside a *.war* file
+
+You can use war:(FOLDER_PATH) to register the location in which you put the workflow in the _*.jar*_ files.
 	
-{code:xml}<external-component-plugins>
+{code:xml}
+<external-component-plugins>
 	<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
 	<component-plugin>
 		<name>deploy.predefined.processes</name>
@@ -30,13 +32,16 @@ You can use "war:(FOLDER_PATH)" to register the location where you put the workf
 			</object-param>
 		</init-params>
 	</component-plugin>	    
- </external-component-plugins>
+</external-component-plugins>
 {code}
 
-h2. Deploy a workflow inside a jar.
-You can use "classpath:" to register a workflow which you put it inside a jar.
+h2. Deploy a workflow inside a *.jar* file
+
+
+You can use "classpath:" to register a workflow which you put inside the _*.jar*_ file.
 	
-{code:xml}<external-component-plugins>
+{code:xml}
+<external-component-plugins>
 	<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>	  
 	<component-plugin>
 		<name>deploy.predefined.processes</name>
@@ -60,4 +65,4 @@ You can use "classpath:" to register a workflow which you put it inside a jar.
 </external-component-plugins>
 {code}	
   
-There is a notification when you deploy a workflow on Jboss: if you use the "classpath:" way, you must to put your workflow jars file inside gatein.ear/lib folder (instead of your lib folder) to make it works.
+The notification message will be displayed when you deploy a workflow on Jboss. If you use "classpath:" to register, you must put your workflow in the *.jar* files inside the _*gatein.ear/lib*_ folder (instead of the *_lib_* folder) to make it work.
