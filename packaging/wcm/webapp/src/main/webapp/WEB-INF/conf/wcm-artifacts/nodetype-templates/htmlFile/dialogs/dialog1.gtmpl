@@ -18,11 +18,21 @@
           <td class="FieldLabel"><%=_ctx.appRes("HtmlFile.dialog.label.name")%></td>
           <td class="FieldComponent">
             <%
-              String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=mix:votable,mix:commentable,exo:htmlFile", "editable=if-null", "validate=name, empty"] ;
+              String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=mix:votable,mix:commentable,exo:htmlFile,mix:i18n", "editable=if-null", "validate=name, empty"] ;
               uicomponent.addTextField("name", fieldName) ; 
             %>
           </td>
-        </tr>       
+        </tr>   
+		<tr>
+        	<td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+			<td class="FieldComponent">
+			<%
+			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
+			  String[] fieldLang = ["jcrPath=/node/exo:language", "options=en,fr,es,de", lang] ;
+			  uicomponent.addSelectBoxField("lang", fieldLang) ;
+			%>
+			</td>
+		</tr>    
         <tr>
           <td class="FieldLabel"><%=_ctx.appRes("HtmlFile.dialog.label.content")%></td>
           <td class="FieldComponent">
