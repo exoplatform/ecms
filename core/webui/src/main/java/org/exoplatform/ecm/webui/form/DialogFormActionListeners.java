@@ -34,7 +34,7 @@ public class DialogFormActionListeners {
   static public class RemoveDataActionListener extends EventListener<UIDialogForm> {
     public void execute(Event<UIDialogForm> event) throws Exception {
       UIDialogForm uiForm = event.getSource();
-      uiForm.isRemovePreference = true;
+//      uiForm.isRemovePreference = true;
       String referenceNodePath = event.getRequestContext().getRequestParameter(UIDialogForm.OBJECTID);
       uiForm.releaseLock();
       if (referenceNodePath.startsWith("/")) {
