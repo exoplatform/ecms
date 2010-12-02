@@ -20,6 +20,8 @@
 package org.exoplatform.services.portletcache;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -29,6 +31,23 @@ import java.util.Map;
  */
 class Util
 {
+
+   static Map<String, String[]> clone(Map<String, String[]> map)
+   {
+      if (map.isEmpty())
+      {
+         return Collections.emptyMap();
+      }
+      else
+      {
+         Map<String, String[]> copy = new HashMap<String, String[]>(map);
+         for (Map.Entry<String, String[]> entry : copy.entrySet())
+         {
+            entry.setValue(entry.getValue().clone());
+         }
+         return copy;
+      }
+   }
 
    static int hashCode(Map<String, String[]> map)
    {

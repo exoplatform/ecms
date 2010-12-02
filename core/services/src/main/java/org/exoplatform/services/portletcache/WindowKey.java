@@ -56,6 +56,11 @@ class WindowKey
 
    WindowKey(String windowId, WindowState windowState, PortletMode portletMode, Locale locale, Map<String, String[]> parameters, Map<String, String[]> query)
    {
+
+      // Clone parameter map
+      parameters = Util.clone(parameters);
+      query = Util.clone(parameters);
+
       // Compute hashCode;
       int hashCode =
          windowId.hashCode() ^
