@@ -20,6 +20,10 @@ import javax.jcr.Node;
 import javax.jcr.Property;
 
 import org.apache.commons.chain.Context;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.definition.PortalContainerConfig;
+import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.command.action.Action;
@@ -45,11 +49,14 @@ public class CreateLinkAction implements Action{
     if (!linkNode.isNodeType(EXO_SORTABLE) && !linkNode.canAddMixin(EXO_SORTABLE)) 
       return false;
     
-    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);      
+    String containerName = containerInfo.getContainerName();
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class, containerName);
     Node targetNode = linkManager.getTarget(linkNode);
 
-    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-    CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
+    CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
 
     listenerService.broadcast(UPDATE_EVENT, cmsService, targetNode);
     
