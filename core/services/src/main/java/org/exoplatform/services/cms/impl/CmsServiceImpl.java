@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -479,7 +480,8 @@ public class CmsServiceImpl implements CmsService {
       for(NodeIterator iterator = currentNode.getNodes(); iterator.hasNext();) {
         childs.add(iterator.nextNode());
       }      
-    }        
+    }
+    Set<String> childItemPaths = new HashSet<String>();    
     for(Object obj : childs){  
       NodeDefinition nodeDef;      
       if (obj instanceof Node) {
@@ -504,8 +506,10 @@ public class CmsServiceImpl implements CmsService {
           if(input.getMixintype()!= null) {
             mixinTypes = input.getMixintype().split(",") ; 
           }                   
-          Node childNode = doAddNode(currentNode, (String)input.getValue(), nodeType.getName(), mixinTypes) ;          
-          processNodeRecursively(create, childItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);          
+          Node childNode = doAddNode(currentNode, (String)input.getValue(), nodeType.getName(), mixinTypes) ;
+          if (!childItemPaths.contains(childItemPath))
+            processNodeRecursively(create, childItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
+          childItemPaths.add(childItemPath);
         }
       }else {               
         String childNodeName = null;
@@ -532,8 +536,10 @@ public class CmsServiceImpl implements CmsService {
         } else {
           nodeType = nodeTypeManger.getNodeType(nodeTypeName);
         }
-        Node childNode = doAddNode(currentNode, childNodeName, nodeType.getName(), mixinTypes) ;        
-        processNodeRecursively(create, newItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);                  
+        Node childNode = doAddNode(currentNode, childNodeName, nodeType.getName(), mixinTypes) ;
+        if (!childItemPaths.contains(newItemPath))
+          processNodeRecursively(create, newItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
+        childItemPaths.add(newItemPath);
       }
     }    
   }
