@@ -48,7 +48,6 @@ public final class LinkUtils {
    * @param path the path to convert
    * @return the real absolute path
    */
-  private static final String EXO_SYMLINK = "exo:symlink";
    
   public static String evaluatePath(String path) {
     if (!path.startsWith("/")) {
@@ -223,36 +222,5 @@ public final class LinkUtils {
     }
     return path;
   }
-
-  public static List<Node> getAllSymlinks(Node targetNode, String repoName) throws Exception {
-    List<Node> result = new ArrayList<Node>();
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService =(RepositoryService)myContainer.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository repository  = repositoryService.getRepository(repoName);
-    String[] workspaces = repository.getWorkspaceNames();
-    String systemWS = 
-      repository.getConfiguration().getSystemWorkspaceName();
-    String queryString = new StringBuilder().append("SELECT * FROM ").
-                                             append(EXO_SYMLINK).
-                                             append(" WHERE exo:uuid='").
-                                             append(targetNode.getUUID()).append("'").
-                                             append(" AND exo:workspace='").
-                                             append(targetNode.getSession().getWorkspace().getName()).
-                                             append("'").toString();
-    
-    for (String workspace : workspaces) {
-      SessionProvider sessionProvider = workspace.equals(systemWS) ? SessionProviderFactory.createSystemProvider() 
-                                                                   : SessionProviderFactory.createSessionProvider();
-      Session session = sessionProvider.getSession(workspace, repository);
-      QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery(queryString, Query.SQL);
-      QueryResult queryResult = query.execute();
-      NodeIterator iter = queryResult.getNodes();
-      while (iter.hasNext()) {
-        result.add(iter.nextNode());
-      }
-    }        
-    return result;
-  }
-  
+ 
 }

@@ -25,19 +25,28 @@ import java.util.Map;
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.ValueFormatException;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeLinkAware;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
@@ -296,5 +305,37 @@ public class LinkManagerImpl implements LinkManager {
     } catch(AccessControlException e) {
       return false;
     }
-  }  
+  }
+  
+  public List<Node> getAllLinks(Node targetNode, String linkType, String repoName) throws Exception {
+    List<Node> result = new ArrayList<Node>();
+    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
+    RepositoryService repositoryService =(RepositoryService)myContainer.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository repository  = repositoryService.getRepository(repoName);
+    String[] workspaces = repository.getWorkspaceNames();
+    String systemWS = 
+      repository.getConfiguration().getSystemWorkspaceName();
+    String queryString = new StringBuilder().append("SELECT * FROM ").
+                                             append(linkType).
+                                             append(" WHERE exo:uuid='").
+                                             append(targetNode.getUUID()).append("'").
+                                             append(" AND exo:workspace='").
+                                             append(targetNode.getSession().getWorkspace().getName()).
+                                             append("'").toString();
+    
+    for (String workspace : workspaces) {
+      SessionProvider sessionProvider = workspace.equals(systemWS) ? SessionProviderFactory.createSystemProvider() 
+                                                                   : SessionProviderFactory.createSessionProvider();
+      Session session = sessionProvider.getSession(workspace, repository);
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      Query query = queryManager.createQuery(queryString, Query.SQL);
+      QueryResult queryResult = query.execute();
+      NodeIterator iter = queryResult.getNodes();
+      while (iter.hasNext()) {
+        result.add(iter.nextNode());
+      }
+    }        
+    return result;
+  }
+  
 }
