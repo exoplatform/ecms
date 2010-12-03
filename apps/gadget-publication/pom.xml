@@ -23,9 +23,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.shindig</groupId>
+      <groupId>org.gatein.shindig</groupId>
       <artifactId>shindig-common</artifactId>
-      <version>${org.shindig.version}</version>
+      <version>${org.gatein.shindig.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
