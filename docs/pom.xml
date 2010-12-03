@@ -25,7 +25,7 @@
 
    <profiles>
      <profile>
-       <id>release</id>
+       <id>docs</id>
        <modules>
          <module>refguide</module>
          <module>userguide</module>

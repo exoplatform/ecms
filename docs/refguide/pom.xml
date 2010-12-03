@@ -39,9 +39,6 @@
     </dependency>   
   </dependencies>
 
-  <profiles>
-  <profile>
-    <id>release</id>
   <build>
        <plugins>
       <plugin>
@@ -248,6 +245,4 @@
       </plugin>
        </plugins>
    </build>
-  </profile>
-  </profiles>
 </project>
