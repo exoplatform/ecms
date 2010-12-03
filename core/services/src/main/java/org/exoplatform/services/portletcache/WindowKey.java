@@ -59,7 +59,7 @@ class WindowKey
 
       // Clone parameter map
       parameters = Util.clone(parameters);
-      query = Util.clone(parameters);
+      query = Util.clone(query);
 
       // Compute hashCode;
       int hashCode =
