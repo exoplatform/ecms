@@ -74,7 +74,7 @@
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
                           <field name="state"><string>published</string></field>
-                          <field name="membership"><string>automatic</string></field>
+                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
                         </object>
                       </value>
                     </collection>

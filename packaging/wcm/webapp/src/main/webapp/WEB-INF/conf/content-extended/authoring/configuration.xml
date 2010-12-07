@@ -66,13 +66,19 @@
                       </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>published</string></field>
-                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
+                          <field name="state"><string>approved</string></field>
+                          <field name="membership"><string>manager:/platform/web-contributors</string></field>
                         </object>
-                      </value>                      
+                      </value>
                       <value>
                         <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
-                          <field name="state"><string>unpublished</string></field>
+                          <field name="state"><string>staged</string></field>
+                          <field name="membership"><string>publisher:/platform/web-contributors</string></field>
+                        </object>
+                      </value>
+                      <value>
+                        <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                          <field name="state"><string>published</string></field>
                           <field name="membership"><string>publisher:/platform/web-contributors</string></field>
                         </object>
                       </value>
