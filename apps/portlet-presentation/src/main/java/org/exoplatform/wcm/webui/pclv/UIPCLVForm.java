@@ -625,7 +625,6 @@ public class UIPCLVForm extends UIForm {
 	 * the refreshAction event occurs, that object's appropriate
 	 * method is invoked.
 	 * 
-	 * @see RefreshActionEvent
 	 */
 	public static class RefreshActionListener extends EventListener<UIPCLVForm> {
 

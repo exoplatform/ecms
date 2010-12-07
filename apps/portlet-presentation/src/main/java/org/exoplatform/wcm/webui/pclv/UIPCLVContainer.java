@@ -94,7 +94,7 @@ public class UIPCLVContainer extends UIContainer {
   /**
    * Sets the list noode.
    * 
-   * @param listNoode the listNoode to set
+   * @param listNode the listNoode to set
    */
   public void setListNode(List<Node> listNode) {
     this.listNode = listNode;
@@ -291,7 +291,6 @@ public class UIPCLVContainer extends UIContainer {
 	 * the quickEditAction event occurs, that object's appropriate
 	 * method is invoked.
 	 * 
-	 * @see QuickEditActionEvent
 	 */
 	public static class QuickEditActionListener extends EventListener<UIPCLVContainer> {
 		

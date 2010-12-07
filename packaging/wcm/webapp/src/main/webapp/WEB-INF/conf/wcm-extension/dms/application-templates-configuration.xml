@@ -37,7 +37,7 @@
       <init-params>
         <value-param>
           <name>portletName</name>
-          <value>Content List Viewer</value>
+          <value>content-list-viewer</value>
         </value-param>
         <value-param>
           <name>portlet.template.path</name>
@@ -51,7 +51,7 @@
               <string>UIContentListPresentationDefault.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
             <!--
 						<field  name="accessPermissions">
@@ -75,7 +75,7 @@
               <string>UIContentListPresentationBigImage.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -87,7 +87,7 @@
               <string>UIContentListPresentationSmall.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -99,7 +99,7 @@
               <string>TwoColumnsCLVTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -111,7 +111,7 @@
               <string>OneColumnCLVTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -123,7 +123,7 @@
               <string>CategoryTree.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>navigation</string>
             </field>
           </object>
         </object-param>
@@ -135,7 +135,7 @@
               <string>CategoryList.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>navigation</string>
             </field>
           </object>
         </object-param>
@@ -147,7 +147,7 @@
               <string>TagsCloud.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>navigation</string>
             </field>
           </object>
         </object-param>
@@ -159,7 +159,7 @@
               <string>DocumentsTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -171,7 +171,7 @@
               <string>ContentListViewerDefault.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -183,7 +183,7 @@
               <string>BigHotNewsTemplateCLV.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -195,7 +195,7 @@
               <string>EventsTemplateCLV.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -228,6 +228,7 @@
   </external-component-plugins>
 
   <!-- Deploy template for Parameterized Content List Viewer Portlet -->
+  <!--
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</target-component>
     <component-plugin>
@@ -252,7 +253,7 @@
               <string>UIParameterizedContentListViewerDefault.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -264,7 +265,7 @@
               <string>BigHotNewsTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -276,7 +277,7 @@
               <string>EventsTemplate.gtmpl</string>
             </field>
             <field name="category">
-              <string>list-by-folder</string>
+              <string>list</string>
             </field>
           </object>
         </object-param>
@@ -295,6 +296,7 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
+  -->
 
   <!-- Deploy template for Search Portlet -->
   <external-component-plugins>
@@ -366,6 +368,7 @@
   </external-component-plugins>
 
   <!-- Deploy template for Category Navigation Portlet -->
+  <!--
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</target-component>
     <component-plugin>
@@ -382,7 +385,8 @@
           <name>portlet.template.path</name>
           <value>war:/conf/wcm-artifacts/application-templates/category-navigation</value>
         </value-param>
-        <!-- object-param>        
+        -->
+        <!-- object-param>
             <name>DefaultVerticalHierachy</name>
             <description>Default vertical hierachy with two levels</description>
             <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
@@ -390,6 +394,7 @@
               <field  name="category"><string>vertical-hierachy</string></field>
             </object>
           </object-param -->
+        <!--
         <object-param>
           <name>SimpleVerticalHierachy</name>
           <description>Simple vertical hierachy with all levels</description>
@@ -417,5 +422,6 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
+  -->
 
 </configuration>

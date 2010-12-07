@@ -30,11 +30,13 @@ import java.util.Map.Entry;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -104,7 +106,7 @@ public class UICLVPresentation extends UIContainer {
   
   /** Generic TagStyles configurable in ECM Administration */
   private Map<String, String> tagStyles = null;
-  
+
   
   /**
    * Instantiates a new uICLV presentation.
@@ -115,15 +117,16 @@ public class UICLVPresentation extends UIContainer {
   /**
    * Inits the.
    * 
-   * @param templatePath the template path
    * @param resourceResolver the resource resolver
    * @param dataPageList the data page list
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
-  public void init(String templatePath, ResourceResolver resourceResolver, PageList dataPageList) throws Exception {
+  public void init(ResourceResolver resourceResolver, PageList dataPageList) throws Exception {
+
     String paginatorTemplatePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_PAGINATOR_TEMPLATE);
-    this.templatePath = templatePath;
+    this.templatePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_TEMPLATE);
+
     this.resourceResolver = resourceResolver;
     uiPaginator = addChild(UICustomizeablePaginator.class, null, null);
     uiPaginator.setTemplatePath(paginatorTemplatePath);
@@ -133,10 +136,9 @@ public class UICLVPresentation extends UIContainer {
     dateFormatter = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
   }
   
-  
   public List<CategoryBean> getCategories() throws Exception {
-	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
-	return getCategories(fullPath, "exo:taxonomy", 0);
+    String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+    return getCategories(fullPath, "exo:taxonomy", 0);
 
   }
 
@@ -147,6 +149,9 @@ public class UICLVPresentation extends UIContainer {
   }
   
   public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth) throws Exception {
+    if (fullPath==null || fullPath.length()==0) {
+    	return null;
+    }
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());

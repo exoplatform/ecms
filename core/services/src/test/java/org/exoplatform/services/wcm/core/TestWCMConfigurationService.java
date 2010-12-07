@@ -80,8 +80,8 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertEquals("wikipresentation", configurationService.getRuntimeContextParam(WCMConfigurationService.CREATE_WIKI_PAGE_URI));
     assertEquals("/presentation/ContentListViewerPortlet", configurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET));
     assertEquals("/presentation/SingleContentViewer", configurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET));
-    assertEquals("/exo:ecm/views/templates/Content List Viewer/list-by-folder/UIContentListPresentationDefault.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.FORM_VIEW_TEMPLATE_PATH));
-    assertEquals("/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.PAGINATOR_TEMPLAET_PATH));
+    assertEquals("/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.FORM_VIEW_TEMPLATE_PATH));
+    assertEquals("/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.PAGINATOR_TEMPLAET_PATH));
   }
   
   /**
@@ -96,8 +96,8 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertTrue(runtimeContextParams.contains("wikipresentation"));
     assertTrue(runtimeContextParams.contains("/presentation/ContentListViewerPortlet"));
     assertTrue(runtimeContextParams.contains("/presentation/SingleContentViewer"));
-    assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/Content List Viewer/list-by-folder/UIContentListPresentationDefault.gtmpl"));
-    assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/Content List Viewer/paginators/UIPaginatorDefault.gtmpl"));
+    assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl"));
+    assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl"));
     assertEquals(9, runtimeContextParams.size());
   }
   

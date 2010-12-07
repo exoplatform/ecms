@@ -23,6 +23,8 @@ public void renderCategories(def categories) {
       if (category.hasChilds()) renderCategories(category.getChilds());
     }
 }
+def header = uicomponent.getHeader();
+if (header ==null) header=_ctx.appRes("UICLVContainer.msg.non-contents");
 %>
 
 <style>
@@ -41,7 +43,7 @@ public void renderCategories(def categories) {
     <div class="TitleBarL">
       <div class="TitleBarR">
         <div class="TitleBarM">
-          <%= uicomponent.getHeader() %>
+          <%= header %>
         </div>
       </div>
     </div>

@@ -83,9 +83,8 @@ public class UICLVFolderMode extends UICLVContainer {
     PaginatedNodeIterator paginatedNodeIterator = new PaginatedNodeIterator(nodes, itemsPerPage);
     getChildren().clear();
     clvPresentation = addChild(UICLVPresentation.class, null, null);    
-    String templatePath = getFormViewTemplatePath();
-    ResourceResolver resourceResolver = getTemplateResourceResolver();    
-    clvPresentation.init(templatePath, resourceResolver, paginatedNodeIterator);    
+    ResourceResolver resourceResolver = getTemplateResourceResolver();
+    clvPresentation.init(resourceResolver, paginatedNodeIterator);    
   }
   
   /**

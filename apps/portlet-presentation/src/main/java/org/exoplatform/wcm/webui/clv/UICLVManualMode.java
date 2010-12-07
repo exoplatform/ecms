@@ -70,10 +70,9 @@ public class UICLVManualMode extends UICLVContainer {
     }    
     getChildren().clear();
     ObjectPageList pageList = new ObjectPageList(nodes, itemsPerPage);    
-    String templatePath = getFormViewTemplatePath();
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, null);
-    clvPresentation.init(templatePath, resourceResolver, pageList);    
+    clvPresentation.init(resourceResolver, pageList);    
   }
 	/**
 	 * Gets the bar info show.

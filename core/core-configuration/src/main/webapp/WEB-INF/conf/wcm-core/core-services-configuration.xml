@@ -14,7 +14,11 @@
   <component>
     <type>org.exoplatform.services.deployment.ContentInitializerService</type>
   </component>
-  
+
+  <component>
+    <type>org.exoplatform.services.migration.TemplateMigrationService</type>
+  </component>
+
   <component>
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
