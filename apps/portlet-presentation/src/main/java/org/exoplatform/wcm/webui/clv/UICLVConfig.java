@@ -429,7 +429,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     	showRefreshCheckbox.setEnable(false);
     	showMoreLinkCheckbox.setEnable(false);
     	showRssLinkCheckbox.setEnable(false);
-    	contextualFolderRadioBoxInput.setEnable(false);
+    	//contextualFolderRadioBoxInput.setEnable(false);
     	showScvWithInput.setEnable(false);
     }
     addChild(displayModeRadioBoxInput);
