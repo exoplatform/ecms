@@ -63,6 +63,16 @@
   padding: 0px;
 }
 
+.UICLVPortlet .UICLVConfig .UIFormInputSet {
+    margin: auto;
+    padding: 0px;
+}
+
+.UICLVPortlet .UICLVConfig input,select {
+    font-size: 11px;
+    width: auto;
+}
+
 .UICLVPortlet .UICLVConfig .FieldLabel {
   width: 125px;
 }
@@ -247,7 +257,6 @@
 
 .UIForm .FieldComponent .FieldComponent input {
   width: 220px;
-  margin-left: 3px;
 }
 
 .UIContainerConfigOptions .ContainerConfigOptions {
