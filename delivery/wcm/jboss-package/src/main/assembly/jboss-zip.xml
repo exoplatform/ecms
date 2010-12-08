@@ -5,15 +5,14 @@
   <formats>
     <format>zip</format>
   </formats>
-  <includeBaseDirectory>true</includeBaseDirectory>
-  <dependencySets>
-    <dependencySet>
-      <outputDirectory>/</outputDirectory>
-    </dependencySet>
-  </dependencySets>
+  <includeBaseDirectory>false</includeBaseDirectory>
   <fileSets>
     <fileSet>
       <directory>src/main/resources</directory>
+      <outputDirectory>/</outputDirectory>
+    </fileSet>
+    <fileSet>
+      <directory>${project.build.directory}/distribution</directory>
       <outputDirectory>/</outputDirectory>
     </fileSet>
   </fileSets>

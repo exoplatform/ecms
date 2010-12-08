@@ -26,6 +26,42 @@
   <build>
     <finalName>eXoContent-${project.version}-jboss-package</finalName>
     <plugins>
+    
+          <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <executions>
+              <!-- Download and unpack the webapps and libs -->
+              <execution>
+                  <id>wcm-ecmdemo-ear</id>
+                  <phase>process-resources</phase>
+                  <goals>
+                      <goal>copy</goal>
+                  </goals>
+                  <configuration>
+                      <artifactItems>
+    <artifactItem>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-packaging-wcm-ear</artifactId>
+      <version>${project.version}</version>
+      <type>ear</type>
+      <outputDirectory>${project.build.directory}/distribution</outputDirectory>
+      <destFileName>gatein-wcm-extension-${project.version}.ear</destFileName>
+    </artifactItem>
+    <artifactItem>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-packaging-ecmdemo-ear</artifactId>
+      <version>${project.version}</version>
+      <type>ear</type>
+      <outputDirectory>${project.build.directory}/distribution</outputDirectory>
+      <destFileName>gatein-ecmdemo-portal-${project.version}.ear</destFileName>
+    </artifactItem>
+                      </artifactItems>
+                  </configuration>
+              </execution>
+            </executions>
+        </plugin>
+    
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
