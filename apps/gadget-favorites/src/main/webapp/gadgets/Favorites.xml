@@ -227,40 +227,38 @@
                     
                          /* Showing list */
                          Favorite.prototype.displayList = function(resp) {
+  			     var data = eval(resp.data.Entry);
+                             var displayTime = new DisplayTime();
+                             var editedDocList = _gel("myspaces_id");
 
-				var data = eval(resp.data.Entry);
-                                var displayTime = new DisplayTime();
-                                var editedDocList = _gel("myspaces_id");
+                             for (var i = 0; i < data.length; i++) {
+				var doc = data[i];
+				var AppClass = document.createElement('div');
+				var showHTML = "<a  style=\"cursor: pointer;\" ";
+                                showHTML += " href= \" ";
+                                showHTML += prefixUrl;
+                                showHTML += "/portal/private/acme/editor/?path="
+                                showHTML += "/repository/collaboration/Users/"
+                                showHTML += user;
+                                showHTML += "/Private/Favorites/"
+				showHTML += doc.Title;
+                                showHTML += "\"";
+       				showHTML += ">";
+				showHTML += doc.Title;
+				showHTML += "</a>";
+				showHTML += "<div class='DateTime'>";
+				showHTML += "Added ";
+				showHTML += displayTime.timeToPrettyString(doc.Date);
+				showHTML += "</div>";
+				showHTML += "<br>";
 
-                                for (var i = 0; i < data.length; i++) {
-					var doc = data[i];
-					var AppClass = document.createElement('div');
-					var showHTML = "<a  style=\"cursor: pointer;\" ";
-                                        showHTML += " href= \" ";
-                                        showHTML += prefixUrl;
-                                        showHTML += "/portal/private/acme/editor/?path="
-                                        showHTML += "/repository/collaboration/Users/"
-                                        showHTML += user;
-                                        showHTML += "/Private/Favorites/"
-					showHTML += doc.Title;
-                                        showHTML += "\"";
-       				        showHTML += ">";
-					showHTML += doc.Title;
-					showHTML += "</a>";
-					showHTML += "<div class='DateTime'>";
-					showHTML += "Added ";
-					showHTML += displayTime.timeToPrettyString(doc.Date);
-					showHTML += "</div>";
-					showHTML += "<br>";
-
-                                        AppClass.innerHTML = showHTML;
-					AppClass.className = 'ItemIcon';
-					editedDocList.appendChild(AppClass);
-
-                                 }
+                                AppClass.innerHTML = showHTML;
+				AppClass.className = 'ItemIcon';
+				editedDocList.appendChild(AppClass);
+                               }
 				var title = _gel("BgTitle");
 				if (data && (data.length > 0) && title) {
-					editedDocList.removeChild(title);
+				   editedDocList.removeChild(title);
 				}
 			
 				gadgets.window.adjustHeight();
@@ -269,21 +267,20 @@
                          
 
 
-                       function loadXMLString(txt)
-			{
-                        var xmlDoc = null;
-			if (window.DOMParser)
-			  {
-			  parser=new DOMParser();
-			  xmlDoc=parser.parseFromString(txt,"text/xml");
-			  }
-			else // Internet Explorer
-			  {
-			  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
-			  xmlDoc.async="false";
-			  xmlDoc.loadXML(txt);
-			  }
-			return xmlDoc;
+                       function loadXMLString(txt) {
+                         var xmlDoc = null;
+			 if (window.DOMParser)
+			   {
+			    parser=new DOMParser();
+			    xmlDoc=parser.parseFromString(txt,"text/xml");
+			   }
+			 else // Internet Explorer
+			   {
+			    xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+			    xmlDoc.async="false";
+			    xmlDoc.loadXML(txt);
+			   }
+			  return xmlDoc;
 			}
 
 
@@ -328,19 +325,12 @@
 
 			      return output;
 			   }
-			
-
                        
                         var favorite = new Favorite();
       		        favorite.loadUser();
-
-
-
           </script>
-
 				
-			 <body>
-				
+	            <body>
 			<div class="UIGadgetThemes">
                           <div id="more_spaces">
                            <div class="TitGad">
@@ -355,7 +345,7 @@
 			    </div>
                           </div>
 	               </div>
-		</body>
+		   </body>
 	]]>
 	</Content>
 </Module>
