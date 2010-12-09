@@ -8,7 +8,7 @@
   </parent>
   <artifactId>exo-ecms-apps-gadget-favoutites</artifactId>
   <packaging>war</packaging>
-  <name>eXo Favourite Gadgets</name>
+  <name>eXo Favorite Gadget</name>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
@@ -30,6 +30,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>favourites</finalName>
+    <finalName>favorites</finalName>
   </build>
 </project>
