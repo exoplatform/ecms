@@ -6,13 +6,13 @@
 <section id="sect-User_Guide-Sites_Administration">
 	<title>Sites Administration</title>
 	 <para>
-		This page is used to manage all workspaces, drives, node types, metadata, templates, queries, etc. Only administrator like ''root” can access the WCM Administration.
+		This page is used to manage all workspaces, drives, node types, metadata, templates, queries, etc. Only administrators can access <emphasis role="bold">Sites Administration</emphasis>.
 	</para>
 	 <procedure>
-		<title><emphasis role="bold"></emphasis></title>
+		
 		 <step>
 			<para>
-				Click <emphasis role="bold">Sites Administration</emphasis> on the Group bar:
+				Click <emphasis role="bold">Group > Sites Administration</emphasis> on the administration bar:
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
@@ -41,12 +41,12 @@
 	</procedure>
 	
 	 <para>
-		This page offers access to:
+		This page offers you to access to:
 	</para>
 	 <itemizedlist>
 		<listitem>
 			<para>
-				<emphasis role="bold">Ontologies</emphasis>: includes Manage Folksonomy and Manage Taxonomies.
+				<emphasis role="bold">Ontologies</emphasis>: includes Manage Folksonomy (manage tags) and Manage Taxonomy Tree(manage categories).
 			</para>
 
 		</listitem>

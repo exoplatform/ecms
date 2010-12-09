@@ -1,580 +1,528 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Ontology">
-	<title>Ontology</title>
-	 <section id="sect-User_Guide-Ontology-Folksonomy_Management">
-		<title>Folksonomy Management</title>
-		 <para>
-			The Folksonomy allows you to manage tag styles. The tag style will be changed depending on the number of documents in a tag.
-		</para>
-		 <para>
-			Go to <guimenu>Sites Administration</guimenu>, then <guimenu>Ontologies</guimenu>, and finally, <guimenu>Manage Folksonomy</guimenu>.
-		</para>
-		 <mediaobject>
-			<imageobject>
-				<imagedata align="center" fileref="images/JBoss_product_and_documentation_overview.png" format="PNG" width="444" />
-			</imageobject>
-
-		</mediaobject>
-		 <section id="sect-User_Guide-Folksonomy_Management-Edit">
-			<title>Edit</title>
-			 <para>
-				<literal>Tag manager</literal> tab:
-			</para>
-			 <para>
-				To edit existing tags, do as follows:
-			</para>
-			 <procedure id="proc-User_Guide-Edit-Editing_existing_tabs">
-				<title>Editing existing tabs</title>
-				 <step id="step-User_Guide-Editing_existing_tabs-Step_One">
-					<title>Step One</title>
-					 <para>
-						Click the icon that corresponds to the tag name which you want to edit in the <literal>Action</literal> column to edit the tag style configuration. The <guimenu>Edit tag style configuration</guimenu> form will appear:
-					</para>
-					 <mediaobject>
-						<imageobject>
-							<imagedata align="center" fileref="images/editstyletag.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-					 <para>
-						Details:
-					</para>
-					 <variablelist>
-						<varlistentry>
-							<term>Style name</term>
-							 <listitem>
-								<para>
-									To give the tag name. (*Required).
-								</para>
-
-							</listitem>
-
-						</varlistentry>
-						 <varlistentry>
-							<term>Document Range</term>
-							 <listitem>
-								<para>
-									To give the number of document assigned to the same tag. (*Required).
-								</para>
-
-							</listitem>
-
-						</varlistentry>
-						 <varlistentry>
-							<term>Html style</term>
-							 <listitem>
-								<para>
-									To include font-size, font-weight, colour, font-family, text-decoration. (*Required).
-								</para>
-
-							</listitem>
-
-						</varlistentry>
-
-					</variablelist>
-
-				</step>
-				 <step id="step-User_Guide-Editing_existing_tabs-Step_Two">
-					<title>Step Two</title>
-					 <para>
-						Change values for fields: <guimenu>Style name</guimenu>, <guimenu>Document range</guimenu>. <guimenu>Html single</guimenu>
-					</para>
-
-				</step>
-				 <step id="step-User_Guide-Editing_existing_tabs-Step_Three">
-					<title>Step Three</title>
-					 <para>
-						Click <guimenu>Update</guimenu> to save new changes, or <guimenu>Cancel</guimenu> to quit this form without changing.
-					</para>
-
-				</step>
-
-			</procedure>
-			
-			 <note>
-				<title> Note </title>
-				 <itemizedlist>
-					<listitem>
-						<para>
-							You cannot edit the style name.
-						</para>
-
-					</listitem>
-					 <listitem>
-						<para>
-							The format of valid range must be: a..b with 'a', 'b' are positive integers. You can use * instead of 'b' to indicate it is unlimited.
-						</para>
-
-					</listitem>
-					 <listitem>
-						<para>
-							The 'Html style' text box cannot be empty: you can change values of font-size, font–weight, color, font-family, text-decoration.
-						</para>
-
-					</listitem>
-
-				</itemizedlist>
-
-			</note>
-
-		</section>
-		
-		 <section id="sect-User_Guide-Folksonomy_Management-Delete_a_tag_style">
-			<title>Delete a tag style</title>
-			 <para>
-				An administrator can delete a tag style by clicking the trash icon that corresponds to the tag style which an administrator wants to delete. There will be a message which confirms the deletion:
-			</para>
-			 <mediaobject>
-				<imageobject>
-					<imagedata align="center" fileref="images/confirmdeletion.png" format="PNG" width="500" />
-				</imageobject>
-
-			</mediaobject>
-			 <para>
-				Click <guimenu>OK</guimenu> to accept deletion, or <guimenu>Cancel</guimenu> to quit without deleting the tag style
-			</para>
-
-		</section>
-		
-		 <section id="sect-User_Guide-Folksonomy_Management-Add_a_tag_style">
-			<title>Add a tag style</title>
-			 <para>
-				Furthermore, an administrator can add a new tag style as follows:
-			</para>
-			 <procedure id="proc-User_Guide-Add_a_tag_style-Add_a_Tag_Style">
-				<title>Add a Tag Style</title>
-				 <step id="step-User_Guide-Add_a_Tag_Style-Step_One">
-					<title>Step One</title>
-					 <para>
-						Click the <guibutton>Add style</guibutton> button. The <guibutton>Add tag style configuration</guibutton> form will appear:
-					</para>
-					 <mediaobject>
-						<imageobject>
-							<imagedata align="center" fileref="images/editstyletagconfig.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</step>
-				 <step id="step-User_Guide-Add_a_Tag_Style-Step_Two">
-					<title>Step Two</title>
-					 <para>
-						Input values for fields: <guilabel>Style name</guilabel>, <guilabel>Document range</guilabel>, <guilabel>Html style</guilabel>, all of which are required.
-					</para>
-
-				</step>
-				 <step id="step-User_Guide-Add_a_Tag_Style-Step_Three">
-					<title>Step Three</title>
-					 <para>
-						Click <guilabel>Update</guilabel> to accept adding a new tag style, or <guilabel>Cancel</guilabel> to quit without adding a new tag style.
-					</para>
-					 <formalpara id="form-User_Guide-Step_Three-Tag_Permission_Manager">
-						<title>Tag Permission Manager</title>
-						 <para>
-							The <guilabel>Tag permission manager</guilabel> tab helps administrator set permissions regarding editing and deleting public tags.
-						</para>
-
-					</formalpara>
-					 <mediaobject>
-						<imageobject>
-							<imagedata align="center" fileref="images/tagpermissionmanager.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</step>
-				 <step id="step-User_Guide-Add_a_Tag_Style-Step_Four">
-					<title>Step Four</title>
-					 <para>
-						Click the icon to select memberships in order to add a permission for those memberships. The Select membership form will appear:
-					</para>
-					 <mediaobject>
-						<imageobject>
-							<imagedata align="center" fileref="images/selectmembership.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</step>
-				 <step id="step-User_Guide-Add_a_Tag_Style-Step_Five">
-					<title>Step Five</title>
-					 <para>
-						Select a group on the left and the corresponding membership on the right. The selected membership will appear in the <guilabel>Memberships</guilabel>field:
-					</para>
-					 <mediaobject>
-						<imageobject>
-							<imagedata align="center" fileref="images/memberships.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-
-				</step>
-				 <step id="step-User_Guide-Add_a_Tag_Style-Step_Six">
-					<title>Step Six</title>
-					 <para>
-						Click <guibutton>Save</guibutton> to accept adding a permission for the selected membership of the selected group. The selected membership that has just been added a permission will be listed in the <guilabel>Memberships</guilabel> column.
-					</para>
-					 <mediaobject>
-						<imageobject>
-							<imagedata align="center" fileref="images/managemembership.png" format="PNG" width="444" />
-						</imageobject>
-
-					</mediaobject>
-					 <para>
-						An administrator can also delete memberships that have been set permissions by clicking the Delete icon relevant to that membership. A confirmation message will appear:
-					</para>
-					 <mediaobject>
-						<imageobject>
-							<imagedata align="center" fileref="images/accept_delete.png" format="PNG" width="500" />
-						</imageobject>
-
-					</mediaobject>
-
-				</step>
-				 <step id="step-User_Guide-Add_a_Tag_Style-Step_Seven">
-					<title>Step Seven</title>
-					 <para>
-						Click <guibutton>OK</guibutton> to accept the deletion, or <guibutton>Cancel</guibutton> to quit the form without deleting.
-					</para>
-
-				</step>
-
-			</procedure>
-			
-
-		</section>
-		
-
-	</section>
-	
-	 <section id="sect-User_Guide-Ontology-Manage_Taxonomy_Trees">
-		<title>Manage Taxonomy Trees</title>
-		 <para>
-			A Taxonomy may be understood as a classification practice and science. It is used to sort documents, aiming at facilitating searches. The Taxonomy management includes adding, editing and deleting a taxonomy tree. Go to <guilabel>Sites Administration</guilabel>, then <guilabel>Ontologies Manage Taxonomy Trees</guilabel>.
-		</para>
-		 <mediaobject>
-			<imageobject>
-				<imagedata align="center" fileref="images/manage_taxonomy_trees.png" format="PNG" width="444" />
-			</imageobject>
-
-		</mediaobject>
-
-	</section>
-	
-	 <section id="sect-User_Guide-Ontology-Add_a_Taxonomy_Tree">
-		<title>Add a Taxonomy Tree</title>
-		 <para>
-			Perform the step in <xref linkend="proc-User_Guide-Add_a_Taxonomy_Tree-Adding_a_Taxonomy_Tree" /> to add a taxonomy tree.
-		</para>
-		 <procedure id="proc-User_Guide-Add_a_Taxonomy_Tree-Adding_a_Taxonomy_Tree">
-			<title>Adding a Taxonomy Tree</title>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_One">
-				<title>Step One</title>
-				 <para>
-					Click the <guibutton>Add Taxonomy Tree</guibutton> button to add a new taxonomy. The <guilabel>Add taxonomy tree</guilabel> form will appear.
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/add_taxonomy_tree.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Two">
-				<title>Step Two</title>
-				 <para>
-					Enter the taxonomy tree name in the <guilabel>Name</guilabel> field. (*Required).
-				</para>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Three">
-				<title>Step Three</title>
-				 <para>
-					Select the workspace you want to work with.
-				</para>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Four">
-				<title>Step Four</title>
-				 <para>
-					Select the home path by clicking the plus item. The <guibutton>Select Home Path</guibutton> form will appear:
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/select_home_path.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Five">
-				<title>Step Five</title>
-				 <para>
-					Click the tick icon if you want to select the root path or click the arrow icon to go to the up level path. Click the plus sign to expand the folder.
-				</para>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Six">
-				<title>Step Six</title>
-				 <para>
-					Click the tick icon corresponding to the path that you want to select as a home path.
-				</para>
-				 <para>
-					Click <guimenu>Reset</guimenu> if you want to reset values that have just been selected or <guimenu>Next</guimenu> to select permissions for a taxonomy tree.
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/taxonomy_permissions.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Seven">
-				<title>Step Seven</title>
-				 <para>
-					Click the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/little_man.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 icon to select a user or the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/hug_me.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 icon to select memerships or the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/personal_space.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 icon to select everyone in order to set permissions. The user or memership that you have just selected will be displayed in the <guilabel>User or Group</guilabel> field.
-				</para>
-				 <para>
-					Then, check at least one of these below options to set rights for the selected user to membership:
-				</para>
-				 <variablelist>
-					<varlistentry>
-						<term>Read Right</term>
-						 <listitem>
-							<para>
-								The option is to select the read right or not.
-							</para>
-
-						</listitem>
-
-					</varlistentry>
-					 <varlistentry>
-						<term> Add Note Right</term>
-						 <listitem>
-							<para>
-								The option is to select the Add Node right or not.
-							</para>
-
-						</listitem>
-
-					</varlistentry>
-					 <varlistentry>
-						<term>Set Property Right</term>
-						 <listitem>
-							<para>
-								The option is to select the Set Property Right or not.
-							</para>
-
-						</listitem>
-
-					</varlistentry>
-					 <varlistentry>
-						<term>Remove Right</term>
-						 <listitem>
-							<para>
-								The option is to select the Remove right or not.
-							</para>
-
-						</listitem>
-
-					</varlistentry>
-
-				</variablelist>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Eight">
-				<title>Step Eight</title>
-				 <para>
-					Click <guibutton>Save</guibutton> to save all values, or <guibutton>Reset</guibutton> to change values that have just been set. After clicking <guibutton>Save</guibutton>, click <guibutton>Next</guibutton> to go to the next step.
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/action_gimme.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Nine">
-				<title>Step Nine</title>
-				 <para>
-					Enter the name for an action of the taxonomy tree in the Name field. (*Required).
-				</para>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Ten">
-				<title>Step Ten</title>
-				 <para>
-					Select values for <guilabel>Lifecycle</guilabel>, <guilabel>NodeTypes</guilabel>, <guilabel>Target workspace</guilabel>, <guilabel>Target path</guilabel>, <guilabel>Affected Node Types</guilabel>. (*Required).
-				</para>
-
-			</step>
-			 <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Eleven">
-				<title>Step Eleven</title>
-				 <para>
-					Click <guibutton>Save</guibutton> to save all values and, click <guibutton>Next</guibutton> to go to the next step.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-		 <note>
-			<title>Note</title>
-			 <itemizedlist>
-				<listitem>
-					<para>
-						Do not input some special characters in the 'Name' field like: !,@,#,$,%,&amp;,*,(,).
-					</para>
-
-				</listitem>
-				 <listitem>
-					<para>
-						Do not add a taxonomy which has the same name and level with existing taxonomies in a node.
-					</para>
-
-				</listitem>
-				 <listitem>
-					<para>
-						The taxonomy name must contain less than 30 characters.
-					</para>
-
-				</listitem>
-
-			</itemizedlist>
-
-		</note>
-
-	</section>
-	
-	 <section id="sect-User_Guide-Ontology-Edit_a_Taxonomy_Tree">
-		<title>Edit a Taxonomy Tree</title>
-		 <para>
-			Perform the following steps to edit a taxonomy tree.
-		</para>
-		 <procedure id="proc-User_Guide-Edit_a_Taxonomy_Tree-Edit_a_Taxonomy_Tree">
-			<title>Edit a Taxonomy Tree</title>
-			 <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_One">
-				<title>Step One</title>
-				 <para>
-					Click the edit 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/pencil.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 icon that corresponds to the taxonomy tree you want to edit.
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/edittaxonomytree.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Two">
-				<title>Step Two</title>
-				 <para>
-					Click the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/blueplusicon.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/edittaxonomytree2.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Three">
-				<title>Step Three</title>
-				 <para>
-					Enter a taxonomy name in the Taxonomy name field. (*Required).
-				</para>
-
-			</step>
-			 <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Four">
-				<title>Step Four</title>
-				 <para>
-					Click <guibutton>Save</guibutton>to save the taxonomy name.
-				</para>
-
-			</step>
-			 <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Five">
-				<title>Step Five</title>
-				 <para>
-					Click <guibutton>Previous</guibutton> to return to the previous steps.
-				</para>
-
-			</step>
-			 <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Six">
-				<title>Step Six</title>
-				 <para>
-					Click <guibutton>Save</guibutton> tos ave all changes and the <guibutton>Previous</guibutton> or <guibutton>Next</guibutton> if you want to edit more.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-		 <note>
-			<title>Note</title>
-			 <itemizedlist>
-				<listitem>
-					<para>
-						You can delete a taxonomy by clicking the trash icon corresponding to the taxonomy that you want to delete. Click OK on the confirmation message to accept deleting this taxonomy, or click Cancel to discard this action.
-					</para>
-
-				</listitem>
-				 <listitem>
-					<para>
-						You cannot delete taxonomies that have been referenced.
-					</para>
-
-				</listitem>
-
-			</itemizedlist>
-
-		</note>
-
-	</section>
-	
-
+  <title>Ontology</title>
+
+  <section id="sect-User_Guide-Ontology-Folksonomy_Management">
+    <title>Folksonomy Management</title>
+
+    <para>The Folksonomy enables you to manage tag styles. The tag style will
+    be changed depending on the number of documents in a tag.</para>
+
+    <para>Go to <guimenu>Sites Administration &gt; Ontologies &gt; Manage
+    Folksonomy</guimenu>.</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata align="center"
+                   fileref="images/JBoss_product_and_documentation_overview.png"
+                   format="PNG" width="444" />
+      </imageobject>
+    </mediaobject>
+
+    <section id="sect-User_Guide-Folksonomy_Management-Edit">
+      <title>Edit</title>
+
+      <para><emphasis role="bold">Tag manager</emphasis> tab enables you to
+      edit the existing tags.</para>
+
+      <para>Do as follows:</para>
+
+      <procedure id="proc-User_Guide-Edit-Editing_existing_tabs">
+        <title>Editing existing tabs</title>
+
+        <step id="step-User_Guide-Editing_existing_tabs-Step_One">
+          <para>Click the pen icon corresponding to the tag name which you
+          want to edit in the <emphasis role="bold">Action</emphasis> column
+          to edit the tag style configuration. The <emphasis role="bold">Edit
+          tag style configuration</emphasis> form will appear:</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/editstyletag.png"
+                         format="PNG" width="444" />
+            </imageobject>
+          </mediaobject>
+
+          <para>Details:</para>
+
+          <variablelist>
+            <varlistentry>
+              <term>Style name</term>
+
+              <listitem>
+                <para>Give the tag name. You cannot edit it.</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>Document Range</term>
+
+              <listitem>
+                <para>Give the number of document assigned to a tag.
+                (*Required).</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>Html style</term>
+
+              <listitem>
+                <para>Include font-size, font-weight, colour, font-family,
+                text-decoration. (*Required).</para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </step>
+
+        <step id="step-User_Guide-Editing_existing_tabs-Step_Two">
+          <para>Change values in the fields: <guimenu>Style name</guimenu>,
+          <guimenu>Document range</guimenu>. <guimenu>Html
+          single</guimenu></para>
+        </step>
+
+        <step id="step-User_Guide-Editing_existing_tabs-Step_Three">
+          <para>Click <guimenu>Update</guimenu> to save new changes, or
+          <guimenu>Cancel</guimenu> to quit this form without changing.</para>
+        </step>
+      </procedure>
+
+      <note>
+        <title>Note</title>
+
+        <itemizedlist>
+          <listitem>
+            <para>You cannot edit the style name.</para>
+          </listitem>
+
+          <listitem>
+            <para>The format of valid range must be: a..b with 'a', 'b' are
+            positive integers. You can use * instead of 'b' to indicate it is
+            unlimited. For example, 0..2 (means 0-2 documents assigned to a
+            tag), 10..* (means at least 10 documents assigned to a
+            tag).</para>
+          </listitem>
+
+          <listitem>
+            <para>The 'Html style' text box cannot be empty: you can change
+            values of font-size, font–weight, color, font-family,
+            text-decoration.</para>
+          </listitem>
+        </itemizedlist>
+      </note>
+    </section>
+
+    <section id="sect-User_Guide-Folksonomy_Management-Delete_a_tag_style">
+      <title>Delete a tag style</title>
+
+      <para>An administrator can delete a tag style by clicking the trash icon
+      that corresponds to the tag style which he wants to delete. There will
+      be a message which confirms the deletion:</para>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata align="center" fileref="images/confirmdeletion.png"
+                     format="PNG" width="500" />
+        </imageobject>
+      </mediaobject>
+
+      <para>Click <guimenu>OK</guimenu> to accept deletion, or
+      <guimenu>Cancel</guimenu> to quit without deleting the tag style</para>
+    </section>
+
+    <section id="sect-User_Guide-Folksonomy_Management-Add_a_tag_style">
+      <title>Add a tag style</title>
+
+      <para>Furthermore, an administrator can add a new tag style as
+      follows:</para>
+
+      <procedure id="proc-User_Guide-Add_a_tag_style-Add_a_Tag_Style">
+        <title>Add a Tag Style</title>
+
+        <step id="step-User_Guide-Add_a_Tag_Style-Step_One">
+          <para>Click the <guibutton>Add style</guibutton> button. The
+          <guibutton>Add tag style configuration</guibutton> form will
+          appear:</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center"
+                         fileref="images/editstyletagconfig.png" format="PNG"
+                         width="444" />
+            </imageobject>
+          </mediaobject>
+        </step>
+
+        <step id="step-User_Guide-Add_a_Tag_Style-Step_Two">
+          <para>Input values in the fields: <guilabel>Style name</guilabel>,
+          <guilabel>Document range</guilabel>, <guilabel>Html
+          style</guilabel>, all of which are required.</para>
+        </step>
+
+        <step id="step-User_Guide-Add_a_Tag_Style-Step_Three">
+          <para>Click <guilabel>Update</guilabel> to accept adding a new tag
+          style, or <guilabel>Cancel</guilabel> to quit without adding a new
+          tag style.</para>
+        </step>
+      </procedure>
+    </section>
+
+    <section id="sec-User_Guide-Step_Three-Tag_Permission_Manager">
+      <title>Tag Permission Manager</title>
+
+      <para>The <guilabel>Tag permission manager</guilabel> tab helps a
+      administrator set permissions regarding editing and deleting public
+      tags.</para>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata align="center" fileref="images/tagpermissionmanager.png"
+                     format="PNG" width="444" />
+        </imageobject>
+      </mediaobject>
+
+      <procedure id="proc-User_Guide-Tag_Permission_Manager-Tag_Permission_Manager">
+        <title>Set Permission To Tag Management</title>
+
+        <step id="step-User_Guide-Tag_Permission_Manager-Step_one">
+          <para>Click the icon to select memberships in order to add a
+          permission for those memberships. The Select membership form will
+          appear:</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/selectmembership.png"
+                         format="PNG" width="444" />
+            </imageobject>
+          </mediaobject>
+        </step>
+
+        <step id="step-User_Guide-Tag_Permission_Manager-Step_two">
+          <para>Select a group on the left and the corresponding membership on
+          the right. The selected membership will appear in the
+          <guilabel>Memberships</guilabel> field:</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/memberships.png"
+                         format="PNG" width="444" />
+            </imageobject>
+          </mediaobject>
+        </step>
+
+        <step id="step-User_Guide-Tag_Permission_Manager-Step_three">
+          <para>Click <guibutton>Save</guibutton> to accept adding a
+          permission for the selected membership of the selected group. The
+          selected membership that has just been added a permission will be
+          listed in the <guilabel>Memberships</guilabel> column.</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/managemembership.png"
+                         format="PNG" width="444" />
+            </imageobject>
+          </mediaobject>
+
+          <para>An administrator can also delete memberships that have been
+          set permissions by clicking the Delete icon relevant to that
+          membership. A confirmation message will appear:</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata align="center" fileref="images/accept_delete.png"
+                         format="PNG" width="500" />
+            </imageobject>
+          </mediaobject>
+        </step>
+
+        <step id="step-User_Guide-Tag_Permission_Manager-Step_four">
+          <para>Click <guibutton>OK</guibutton> to accept the deletion, or
+          <guibutton>Cancel</guibutton> to quit the form without
+          deleting.</para>
+        </step>
+      </procedure>
+    </section>
+  </section>
+
+  <section id="sect-User_Guide-Ontology-Manage_Taxonomy_Trees">
+    <title>Manage Taxonomy Trees</title>
+
+    <para>A Taxonomy may be understood as a classification practice and
+    science. It is used to sort documents, aiming at facilitating searches.
+    The Taxonomy management includes adding, editing and deleting a taxonomy
+    tree.</para>
+
+    <para>Go to <guilabel>Sites Administration &gt; Ontologies &gt; Manage
+    Taxonomy Trees</guilabel>.</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata align="center"
+                   fileref="images/manage_taxonomy_trees.png"
+                   format="PNG" width="444" />
+      </imageobject>
+    </mediaobject>
+  </section>
+
+  <section id="sect-User_Guide-Ontology-Add_a_Taxonomy_Tree">
+    <title>Add a Taxonomy Tree</title>
+
+    <para>Perform the step in <xref
+    linkend="proc-User_Guide-Add_a_Taxonomy_Tree-Adding_a_Taxonomy_Tree" /> to
+    add a taxonomy tree.</para>
+
+    <procedure id="proc-User_Guide-Add_a_Taxonomy_Tree-Adding_a_Taxonomy_Tree">
+      <title>Adding a Taxonomy Tree</title>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_One">
+        <para>Click the <guibutton>Add Taxonomy Tree</guibutton> button to add
+        a new taxonomy. The <guilabel>Add taxonomy tree</guilabel> form will
+        appear.</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center" fileref="images/add_taxonomy_tree.png"
+                       format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Two">
+        <para>Enter the taxonomy tree name in the <guilabel>Name</guilabel>
+        field. (*Required).</para>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Three">
+        <para>Select the workspace you want to work with.</para>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Four">
+        <para>Select the home path by clicking the plus item. The
+        <guibutton>Select Home Path</guibutton> form will appear:</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center" fileref="images/select_home_path.png"
+                       format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Five">
+        <para>Click the tick icon if you want to select the root path or click
+        the arrow icon to go to the up level path. Click the plus sign to
+        expand the folder.</para>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Six">
+        <para>Click the tick icon corresponding to the path that you want to
+        select as a home path.</para>
+
+        <para>Click <guimenu>Reset</guimenu> if you want to reset values that
+        have just been selected or <guimenu>Next</guimenu> to select
+        permissions for a taxonomy tree.</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center"
+                       fileref="images/taxonomy_permissions.png" format="PNG"
+                       width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Seven">
+        <para>Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/little_man.png" format="PNG" />
+            </imageobject>
+          </inlinemediaobject> icon to select a user or the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/hug_me.png" format="PNG" />
+            </imageobject>
+          </inlinemediaobject> icon to select memerships or the
+        <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/personal_space.png" format="PNG" />
+            </imageobject>
+          </inlinemediaobject> icon to select everyone in order to set
+        permissions. The user or memership that you have just selected will be
+        displayed in the <guilabel>User or Group</guilabel> field.</para>
+
+        <para>Then, check at least one of these below options to set rights
+        for the selected user to membership:</para>
+
+        <variablelist>
+          <varlistentry>
+            <term>Read Right</term>
+
+            <listitem>
+              <para>The option is to select the read right or not.</para>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>Add Note Right</term>
+
+            <listitem>
+              <para>The option is to select the Add Node right or not.</para>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>Set Property Right</term>
+
+            <listitem>
+              <para>The option is to select the Set Property Right or
+              not.</para>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>Remove Right</term>
+
+            <listitem>
+              <para>The option is to select the Remove right or not.</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Eight">
+        <para>Click <guibutton>Save</guibutton> to save all values, or
+        <guibutton>Reset</guibutton> to change values that have just been set.
+        After clicking <guibutton>Save</guibutton>, click
+        <guibutton>Next</guibutton> to go to the next step.</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center" fileref="images/action_gimme.png"
+                       format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Nine">
+        <para>Enter the name for an action of the taxonomy tree in the Name
+        field. (*Required).</para>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Ten">
+        <para>Select values for <guilabel>Lifecycle</guilabel>,
+        <guilabel>NodeTypes</guilabel>, <guilabel>Target workspace</guilabel>,
+        <guilabel>Target path</guilabel>, <guilabel>Affected Node
+        Types</guilabel>. (*Required).</para>
+      </step>
+
+      <step id="step-User_Guide-Adding_a_Taxonomy_Tree-Step_Eleven">
+        <para>Click <guibutton>Save</guibutton> to save all values and, click
+        <guibutton>Next</guibutton> to go to the next step.</para>
+      </step>
+    </procedure>
+
+    <note>
+      <title>Note</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Do not input some special characters in the 'Name' field like:
+          !,@,#,$,%,&amp;,*,(,).</para>
+        </listitem>
+
+        <listitem>
+          <para>Do not add a taxonomy which has the same name and level with
+          existing taxonomies in a node.</para>
+        </listitem>
+
+        <listitem>
+          <para>The taxonomy name must contain less than 30 characters.</para>
+        </listitem>
+      </itemizedlist>
+    </note>
+  </section>
+
+  <section id="sect-User_Guide-Ontology-Edit_a_Taxonomy_Tree">
+    <title>Edit a Taxonomy Tree</title>
+
+    <para>Perform the following steps to edit a taxonomy tree.</para>
+
+    <procedure id="proc-User_Guide-Edit_a_Taxonomy_Tree-Edit_a_Taxonomy_Tree">
+      <title>Edit a Taxonomy Tree</title>
+
+      <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_One">
+        <para>Click the edit icon <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/pencil.png" format="PNG" />
+            </imageobject>
+          </inlinemediaobject>that corresponds to the taxonomy tree you
+        want to edit.</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center" fileref="images/edittaxonomytree.png"
+                       format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
+
+      <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Two">
+        <para>Click the icon <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/blueplusicon.png" format="PNG" />
+            </imageobject>
+          </inlinemediaobject>
+	 to add more taxonomy trees. The Edit taxonomy tree will appear:
+	</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center" fileref="images/edittaxonomytree2.png"
+                       format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
+
+      <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Three">
+        <para>Enter a taxonomy name in the Taxonomy name field.
+        (*Required).</para>
+      </step>
+
+      <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Four">
+        <para>Click <guibutton>Save</guibutton>to save the taxonomy
+        name.</para>
+      </step>
+
+      <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Five">
+        <para>Click <guibutton>Previous</guibutton> to return to the previous
+        steps.</para>
+      </step>
+
+      <step id="step-User_Guide-Edit_a_Taxonomy_Tree-Step_Six">
+        <para>Click <guibutton>Save</guibutton> to s ave all changes and the
+        <guibutton>Previous</guibutton> or <guibutton>Next</guibutton> if you
+        want to edit more.</para>
+      </step>
+    </procedure>
+
+    <note>
+      <title>Note</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>You can delete a taxonomy by clicking the trash icon
+          corresponding to the taxonomy that you want to delete. Click OK on
+          the confirmation message to accept deleting this taxonomy, or click
+          Cancel to discard this action.</para>
+        </listitem>
+
+        <listitem>
+          <para>You cannot delete taxonomies that have been referenced.</para>
+        </listitem>
+      </itemizedlist>
+    </note>
+  </section>
 </section>
-
-

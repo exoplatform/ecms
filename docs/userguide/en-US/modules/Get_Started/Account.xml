@@ -1,496 +1,458 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Account">
-	<title><emphasis role="bold">Account</emphasis></title>
-	 <section id="sect-User_Guide-Account-Register_an_account">
-		<title>Register an account</title>
-		 <para>
-			To register a new account on the portal, do as follows:
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Go to the portal by inputting the URL in the address bar (e.g: <ulink type="http" url="http://localhost:8080/portal/public/classic" />).
-				</para>
-				 <para>
-					The anonymous homepage will appear:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/homepage.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/homepage.png" format="PNG" width="444" />
-					</imageobject>
+  <title><emphasis role="bold">Account</emphasis></title>
 
-				</mediaobject>
+  <section id="sect-User_Guide-Account-Register_an_account">
+    <title>Register an account</title>
 
-			</step>
-			 <step>
-				<para>
-					Click the Register link on the top of the site, the Register form will be displayed:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/register.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/register.png" format="PNG" width="444" />
-					</imageobject>
+    <para>To register a new account on the portal, do as follows:</para>
 
-				</mediaobject>
-				 <para>
-					(*) required
-				</para>
-				 <para>
-					The Account Setting information includes:
-				</para>
-				 <table>
-					<title></title>
-					 <tgroup cols="2">
-						<thead>
-							<row>
-								<entry>
-									Field
-								</entry>
-								 <entry>
-									Information
-								</entry>
+    <procedure>
+      <title></title>
 
-							</row>
+      <step>
+        <para>Go to the portal by inputting the URL in the address bar (e.g:
+        <ulink type="http"
+        url="http://localhost:8080/portal/public/classic"></ulink>).</para>
 
-						</thead>
-						 <tbody>
-							<row>
-								<entry>
-									User Name
-								</entry>
-								 <entry>
-									The user name that is used to login into the system. It must be unique. The user name must be started with a character.
-								</entry>
+        <para>The anonymous homepage will appear:</para>
 
-							</row>
-							 <row>
-								<entry>
-									Password
-								</entry>
-								 <entry>
-									The security characters are used to login. It must have at least 6 characters.
-								</entry>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/homepage.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
 
-							</row>
-							 <row>
-								<entry>
-									Confirm Password
-								</entry>
-								 <entry>
-									The re-typed password above. The password in Password field and this field must be the same.
-								</entry>
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/homepage.png" format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
 
-							</row>
-							 <row>
-								<entry>
-									First Name
-								</entry>
-								 <entry>
-									Your first name
-								</entry>
+      <step>
+        <para>Click the Register link on the top of the site, the Register
+        form will be displayed:</para>
 
-							</row>
-							 <row>
-								<entry>
-									Last Name
-								</entry>
-								 <entry>
-									Your last name
-								</entry>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/register.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
 
-							</row>
-							 <row>
-								<entry>
-									Email Address
-								</entry>
-								 <entry>
-									Your email address. It must have a right format: <replaceable>username@abc.com</replaceable>
-								</entry>
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/register.png" format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
 
-							</row>
+        <para>(*) required</para>
 
-						</tbody>
+        <para>The Account Setting information includes:</para>
 
-					</tgroup>
+        <table>
+          <title></title>
 
-				</table>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Field</entry>
 
-			</step>
-			 <step>
-				<para>
-					Input values for the fields in this form.
-				</para>
+                <entry>Information</entry>
+              </row>
+            </thead>
 
-			</step>
-			 <step>
-				<para>
-					Click the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
-						</imageobject>
+            <tbody>
+              <row>
+                <entry>User Name</entry>
 
-					</inlinemediaobject>
-					 icon to search and check if the inputted user name is available or not.
-				</para>
+                <entry>The user name that is used to login into the system. It
+                must be unique. The user name must be started with a
+                character.</entry>
+              </row>
 
-			</step>
-			 <!-- <step>
+              <row>
+                <entry>Password</entry>
+
+                <entry>The security characters are used to login. It must have
+                at least 6 characters.</entry>
+              </row>
+
+              <row>
+                <entry>Confirm Password</entry>
+
+                <entry>The re-typed password above. The password in Password
+                field and this field must be the same.</entry>
+              </row>
+
+              <row>
+                <entry>First Name</entry>
+
+                <entry>Your first name</entry>
+              </row>
+
+              <row>
+                <entry>Last Name</entry>
+
+                <entry>Your last name</entry>
+              </row>
+
+              <row>
+                <entry>Email Address</entry>
+
+                <entry>Your email address. It must have a right format:
+                <replaceable>username@abc.com</replaceable></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </step>
+
+      <step>
+        <para>Input values for the fields in this form.</para>
+      </step>
+
+      <step>
+        <para>Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
+            </imageobject>
+          </inlinemediaobject> icon to search and check if the inputted user
+        name is available or not.</para>
+      </step>
+
+      <!-- <step>
 				<para>
 					Input other required fields in the <emphasis role="bold">Account Settings</emphasis> tab.
 				</para>
 
-			</step> --> <step>
-				<para>
-					Input values in the fields of User Profile tab, including: Profile information, Home information and Business information.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/userprofile.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/userprofile.png" format="PNG" width="444" />
-					</imageobject>
+			</step> -->
 
-				</mediaobject>
+      <step>
+        <para>Input values in the fields of User Profile tab, including:
+        Profile information, Home information and Business information.</para>
 
-			</step>
-			 <step>
-				<para>
-					Click Save to register a new account, or Reset to renew all inputted values. There will be an alert message, and you cannot add a new account successfully if at least one of these cases occurs:
-				</para>
-				 <itemizedlist>
-					<listitem>
-						<para>
-							User name is existing or invalid.
-						</para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/userprofile.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
 
-					</listitem>
-					 <listitem>
-						<para>
-							Password has less than 6 characters.
-						</para>
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/userprofile.png" format="PNG"
+                       width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
 
-					</listitem>
-					 <listitem>
-						<para>
-							Password and Confirm Password are not the same.
-						</para>
+      <step>
+        <para>Click Save to register a new account, or Reset to renew all
+        inputted values. There will be an alert message, and you cannot add a
+        new account successfully if at least one of these cases occurs:</para>
 
-					</listitem>
-					 <listitem>
-						<para>
-							Email Address has invalid format.
-						</para>
+        <itemizedlist>
+          <listitem>
+            <para>User name is existing or invalid.</para>
+          </listitem>
 
-					</listitem>
-					 <listitem>
-						<para>
-							Required fields are empty.
-						</para>
+          <listitem>
+            <para>Password has less than 6 characters.</para>
+          </listitem>
 
-					</listitem>
+          <listitem>
+            <para>Password and Confirm Password are not the same.</para>
+          </listitem>
 
-				</itemizedlist>
+          <listitem>
+            <para>Email Address has invalid format.</para>
+          </listitem>
 
-			</step>
+          <listitem>
+            <para>Required fields are empty.</para>
+          </listitem>
+        </itemizedlist>
+      </step>
+    </procedure>
 
-		</procedure>
-		
-		 <para>
-			After adding a new account, contact with the administrator to get the confirmation.
-		</para>
-		 <note>
-			<title>Email</title>
-			 <para>
-				You should enter your email address exactly because when you forget username or password, you can recover it by using this email address.
-			</para>
+    <para>After adding a new account, contact with the administrator to get
+    the confirmation.</para>
 
-		</note>
+    <note>
+      <title>Email </title>
 
-	</section>
-	
-	 <section id="sect-User_Guide-Account-Sign_In">
-		<title>Sign In</title>
-		 <para>
-			This function enables you to go into WCM in the private mode.
-		</para>
-		 <procedure id="proc-User_Guide-Sign_In-Sign_in">
-			<title>Sign in</title>
-			 <step>
-				<para>
-					Go to the WCM in the public mode by inputting the URL in the address bar (e.g: <ulink type="http" url="http://localhost:8080//portal/public/classic/" />).
-				</para>
+      <para>You should enter your email address exactly because when you
+      forget username or password, you can recover it by using this email
+      address.</para>
+    </note>
+  </section>
 
-			</step>
-			 <step>
-				<para>
-					Click the Login link at the top of the home page. The Sign in form will appear:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/signin.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/signin.png" format="PNG" width="444" />
-					</imageobject>
+  <section id="sect-User_Guide-Account-Sign_In">
+    <title>Sign In</title>
 
-				</mediaobject>
+    <para>This function enables you to go into WCM in the private mode.</para>
 
-			</step>
-			 <step>
-				<para>
-					Input your registered User name and Password.
-				</para>
+    <procedure id="proc-User_Guide-Sign_In-Sign_in">
+      <title>Sign in</title>
 
-			</step>
-			 <step>
-				<para>
-					Click Sign in to accept, or Discard to exit from the Sign in form.
-				</para>
-				 <table id="tabl-User_Guide-Sign_in-Options">
-					<title>Options</title>
-					 <tgroup cols="2">
-						<thead>
-							<row>
-								<entry>
-									Option
-								</entry>
-								 <entry>
-									Information
-								</entry>
+      <step>
+        <para>Go to the WCM in the public mode by inputting the URL in the
+        address bar (e.g: <ulink type="http"
+        url="http://localhost:8080//portal/public/classic/"></ulink>).</para>
+      </step>
 
-							</row>
+      <step>
+        <para>Click the Login link at the top of the home page. The Sign in
+        form will appear:</para>
 
-						</thead>
-						 <tbody>
-							<row>
-								<entry>
-									User name
-								</entry>
-								 <entry>
-									To input the registered username.
-								</entry>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/signin.png" format="PNG"
+                       scale="90" width="444" />
+          </imageobject>
 
-							</row>
-							 <row>
-								<entry>
-									Password
-								</entry>
-								 <entry>
-									To input the password of your username.
-								</entry>
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/signin.png" format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
 
-							</row>
-							 <row>
-								<entry>
-									Forgot your User Name/Password
-								</entry>
-								 <entry>
-									To retrieve the forgotten user name or password when you forget.
-								</entry>
+      <step>
+        <para>Input your registered User name and Password.</para>
+      </step>
 
-							</row>
-							 <row>
-								<entry>
-									Sign in
-								</entry>
-								 <entry>
-									To sign into the eXo Portal with the inputted user name and password.
-								</entry>
+      <step>
+        <para>Click Sign in to accept, or Discard to exit from the Sign in
+        form.</para>
 
-							</row>
-							 <row>
-								<entry>
-									Discard
-								</entry>
-								 <entry>
-									To close the Sign In form without any changes.
-								</entry>
+        <table id="tabl-User_Guide-Sign_in-Options">
+          <title>Options</title>
 
-							</row>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Option</entry>
 
-						</tbody>
+                <entry>Information</entry>
+              </row>
+            </thead>
 
-					</tgroup>
+            <tbody>
+              <row>
+                <entry>User name</entry>
 
-				</table>
-				 <para>
-					If the User Name does not exist or the inputted User name/Password is invalid, there will be an alert message that requires users to input right values. The page will be redirected to the private security checking mode.
-				</para>
-				 <para>
-					To login again, enter User Name and Password again.
-				</para>
+                <entry>To input the registered username.</entry>
+              </row>
 
-			</step>
+              <row>
+                <entry>Password</entry>
 
-		</procedure>
-		
-		 <para>
-			After signing in, you will be redirected to the authenticated homepage like the illustration.
-		</para>
-		 <mediaobject>
-			<imageobject role="html">
-				<imagedata align="center" fileref="images/authhomepage.png" format="PNG" scale="90" width="444" />
-			</imageobject>
-			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/authhomepage.png" format="PNG" width="444" />
-			</imageobject>
+                <entry>To input the password of your username.</entry>
+              </row>
 
-		</mediaobject>
+              <row>
+                <entry>Forgot your User Name/Password</entry>
 
-	</section>
-	
-	 <section id="sect-User_Guide-Account-Sign_Out">
-		<title>Sign Out</title>
-		 <para>
-			The function lets you get back to the anonymous portal. It ends your current portal session.
-		</para>
-		 <para>
-			To sign out, click the Logout link on the right access banner:
-		</para>
-		 <mediaobject>
-			<imageobject role="html">
-				<imagedata align="center" fileref="images/accessbanner.png" format="PNG" scale="70" />
-			</imageobject>
-			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/accessbanner.png" format="PNG" />
-			</imageobject>
+                <entry>To retrieve the forgotten user name or password when
+                you forget.</entry>
+              </row>
 
-		</mediaobject>
-		 <para>
-			or click eXo | Sign out from the menu:
-		</para>
-		 <mediaobject>
-			<imageobject role="html">
-				<imagedata align="center" fileref="images/startlogo.png" format="PNG" scale="100" />
-			</imageobject>
-			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/startlogo.png" format="PNG" />
-			</imageobject>
+              <row>
+                <entry>Sign in</entry>
 
-		</mediaobject>
+                <entry>To sign into the eXo Portal with the inputted user name
+                and password.</entry>
+              </row>
 
-	</section>
-	
-	 <section id="sect-User_Guide-Account-Retrieve_user_namepassword">
-		<title>Retrieve user name/password</title>
-		 <para>
-			If you forget your account or password, you can recover them by doing as follows:
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Click the link <emphasis role="bold">Forgot your User Name/Password?</emphasis> in the Sign in form.
-				</para>
-				 <para>
-					This form offers two options:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/retrieve.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/retrieve.png" format="PNG" width="444" />
-					</imageobject>
+              <row>
+                <entry>Discard</entry>
 
-				</mediaobject>
-				 <variablelist>
-					<varlistentry>
-						<term>Forgot my password:</term>
-						 <listitem>
-							<para>
-								If you forgot your password, you need to select this option.
-							</para>
+                <entry>To close the Sign In form without any changes.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
 
-						</listitem>
+        <para>If the User Name does not exist or the inputted User
+        name/Password is invalid, there will be an alert message that requires
+        users to input right values. The page will be redirected to the
+        private security checking mode.</para>
 
-					</varlistentry>
-					 <varlistentry>
-						<term>Forgot my username:</term>
-						 <listitem>
-							<para>
-								If you forgot your username, you need to select this option.
-							</para>
+        <para>To login again, enter User Name and Password again.</para>
+      </step>
+    </procedure>
 
-						</listitem>
+    <para>After signing in, you will be redirected to the authenticated
+    homepage like the illustration.</para>
 
-					</varlistentry>
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata align="center" fileref="images/authhomepage.png"
+                   format="PNG" scale="90" width="444" />
+      </imageobject>
 
-				</variablelist>
+      <imageobject role="fo">
+        <imagedata align="center" contentwidth="150mm"
+                   fileref="images/authhomepage.png" format="PNG" width="444" />
+      </imageobject>
+    </mediaobject>
+  </section>
 
-			</step>
-			 <step>
-				<para>
-					Select one of these two options in this form. The selected option will be shown:
-				</para>
-				 <para>
-					If the <emphasis role="bold">Forgot my password</emphasis> option is selected the form to recover the password appears:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/forgotpassword.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/forgotpassword.png" format="PNG" width="444" />
-					</imageobject>
+  <section id="sect-User_Guide-Account-Sign_Out">
+    <title>Sign Out</title>
 
-				</mediaobject>
-				 <para>
-					If the <emphasis role="bold">Forgot my username</emphasis> option is selected, the form to recover the user name appears:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/forgotname.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/forgotname.png" format="PNG" width="444" />
-					</imageobject>
+    <para>The function lets you get back to the anonymous portal. It ends your
+    current portal session.</para>
 
-				</mediaobject>
+    <para>To sign out, click the Logout link on the right access
+    banner:</para>
 
-			</step>
-			 <step>
-				<para>
-					Enter your username or email in the corresponding form.
-				</para>
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata align="center" fileref="images/accessbanner.png"
+                   format="PNG" scale="70" />
+      </imageobject>
 
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Send</emphasis> to send the inputted values.
-				</para>
-				 <para>
-					Once information has been sent, you will receive an email with your User name/ Password in your email address that you registered.
-				</para>
-				 <itemizedlist>
-					<listitem>
-						<para>
-							If you forget User Name: when a username is retrieved, your old username is restored and can be reused and a new password is also sent to your email with the old username.
-						</para>
+      <imageobject role="fo">
+        <imagedata align="center" contentwidth="150mm"
+                   fileref="images/accessbanner.png" format="PNG" />
+      </imageobject>
+    </mediaobject>
 
-					</listitem>
-					 <listitem>
-						<para>
-							If you forget old password: a new password will be set (as temporary, then you will be directed to change the password for the next time you sign in).
-						</para>
+    <para>or click <emphasis role="bold">eXo</emphasis> <emphasis
+    role="bold">&gt; Sign Out</emphasis> from the menu:</para>
 
-					</listitem>
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata align="center" fileref="images/startlogo.png" format="PNG"
+                   scale="100" />
+      </imageobject>
 
-				</itemizedlist>
-				<!--  Removed in eXo Content User Guide 2.1.1
+      <imageobject role="fo">
+        <imagedata align="center" contentwidth="150mm"
+                   fileref="images/startlogo.png" format="PNG" />
+      </imageobject>
+    </mediaobject>
+  </section>
+
+  <section id="sect-User_Guide-Account-Retrieve_user_namepassword">
+    <title>Retrieve user name/password</title>
+
+    <para>If you forget your account or password, you can recover them by
+    doing as follows:</para>
+
+    <procedure>
+      <title></title>
+
+      <step>
+        <para>Click the link <emphasis role="bold">Forgot your User
+        Name/Password?</emphasis> in the Sign in form.</para>
+
+        <para>This form offers two options:</para>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/retrieve.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/retrieve.png" format="PNG" width="444" />
+          </imageobject>
+        </mediaobject>
+
+        <variablelist>
+          <varlistentry>
+            <term>Forgot my password:</term>
+
+            <listitem>
+              <para>If you forgot your password, you need to select this
+              option.</para>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>Forgot my username:</term>
+
+            <listitem>
+              <para>If you forgot your username, you need to select this
+              option.</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </step>
+
+      <step>
+        <para>Select one of these two options in this form. The selected
+        option will be shown:</para>
+
+        <para>If the <emphasis role="bold">Forgot my password</emphasis>
+        option is selected the form to recover the password appears:</para>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/forgotpassword.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/forgotpassword.png" format="PNG"
+                       width="444" />
+          </imageobject>
+        </mediaobject>
+
+        <para>If the <emphasis role="bold">Forgot my username</emphasis>
+        option is selected, the form to recover the user name appears:</para>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/forgotname.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/forgotname.png" format="PNG"
+                       width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
+
+      <step>
+        <para>Enter your username or email in the corresponding form.</para>
+      </step>
+
+      <step>
+        <para>Click <emphasis role="bold">Send</emphasis> to send the inputted
+        values.</para>
+
+        <para>Once information has been sent, you will receive an email with
+        your User name/ Password in your email address that you
+        registered.</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>If you forget User Name: when a username is retrieved, your
+            old username is restored and can be reused and a new password is
+            also sent to your email with the old username.</para>
+          </listitem>
+
+          <listitem>
+            <para>If you forget old password: a new password will be set (as
+            temporary, then you will be directed to change the password for
+            the next time you sign in).</para>
+          </listitem>
+        </itemizedlist>
+
+        <!--  Removed in eXo Content User Guide 2.1.1
 				 <note>
 					<title>Temporary Credentials Validity</title>
 					 <para>
@@ -498,123 +460,112 @@
 					</para>
 				</note>
  -->
-			</step>
+      </step>
+    </procedure>
+  </section>
 
-		</procedure>
-		
+  <section id="sect-User_Guide-Account-Change_Account_Information">
+    <title>Change Account Information</title>
 
-	</section>
-	
-	 <section id="sect-User_Guide-Account-Change_Account_Information">
-		<title>Change Account Information</title>
-		 <para>
-			The function enables you change your account information, such as your profile and password.
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					The first thing to do is to directly click your own account name.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/accountname.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/accountname.png" format="PNG" width="444" />
-					</imageobject>
+    <para>The function enables you change your account information, such as
+    your profile and password.</para>
 
-				</mediaobject>
-				 <para>
-					The Account Profiles tab will appear:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/accountprofile.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/accountprofile.png" format="PNG" width="444" />
-					</imageobject>
+    <procedure>
+      <title></title>
 
-				</mediaobject>
+      <step>
+        <para>The first thing to do is to directly click your own account
+        name.</para>
 
-			</step>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/accountname.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
 
-		</procedure>
-		
-		 <procedure id="proc-User_Guide-Change_Account_Information-To_Change_Account_Profiles">
-			<title>To Change Account Profiles</title>
-			 <step>
-				<para>
-					Select the Account Profiles tab.
-				</para>
-				 <para>
-					This tab displays your current basic information.
-				</para>
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/accountname.png" format="PNG"
+                       width="444" />
+          </imageobject>
+        </mediaobject>
 
-			</step>
-			 <step>
-				<para>
-					Change your First Name, Last Name and Email. You cannot change your User Name.
-				</para>
+        <para>The Account Profiles tab will appear:</para>
 
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Save</emphasis> to accept changes.
-				</para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/accountprofile.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
 
-			</step>
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/accountprofile.png" format="PNG"
+                       width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
+    </procedure>
 
-		</procedure>
-		
-		 <procedure id="proc-User_Guide-Change_Account_Information-To_change_your_Password">
-			<title>To change your Password</title>
-			 <step>
-				<para>
-					Select the Change Password tab.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/changepassword.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/changepassword.png" format="PNG" width="444" />
-					</imageobject>
+    <procedure id="proc-User_Guide-Change_Account_Information-To_Change_Account_Profiles">
+      <title>To Change Account Profiles</title>
 
-				</mediaobject>
+      <step>
+        <para>Select the Account Profiles tab.</para>
 
-			</step>
-			 <step>
-				<para>
-					Input your current password to identify that you are the owner of this account.
-				</para>
+        <para>This tab displays your current basic information.</para>
+      </step>
 
-			</step>
-			 <step>
-				<para>
-					Input your new password, it must have at least 6 characters.
-				</para>
+      <step>
+        <para>Change your First Name, Last Name and Email. You cannot change
+        your User Name.</para>
+      </step>
 
-			</step>
-			 <step>
-				<para>
-					Input your password again in the <emphasis role="bold">Confirm New Password</emphasis> field.
-				</para>
+      <step>
+        <para>Click <emphasis role="bold">Save</emphasis> to accept
+        changes.</para>
+      </step>
+    </procedure>
 
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Save</emphasis> to accept changes.
-				</para>
+    <procedure id="proc-User_Guide-Change_Account_Information-To_change_your_Password">
+      <title>To change your Password</title>
 
-			</step>
+      <step>
+        <para>Select the Change Password tab.</para>
 
-		</procedure>
-		
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/changepassword.png"
+                       format="PNG" scale="90" width="444" />
+          </imageobject>
 
-	</section>
+          <imageobject role="fo">
+            <imagedata align="center" contentwidth="150mm"
+                       fileref="images/changepassword.png" format="PNG"
+                       width="444" />
+          </imageobject>
+        </mediaobject>
+      </step>
 
+      <step>
+        <para>Input your current password to identify that you are the owner
+        of this account.</para>
+      </step>
+
+      <step>
+        <para>Input your new password, it must have at least 6
+        characters.</para>
+      </step>
+
+      <step>
+        <para>Input your password again in the <emphasis role="bold">Confirm
+        New Password</emphasis> field.</para>
+      </step>
+
+      <step>
+        <para>Click <emphasis role="bold">Save</emphasis> to accept
+        changes.</para>
+      </step>
+    </procedure>
+  </section>
 </section>
-
-

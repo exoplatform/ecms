@@ -1,332 +1,276 @@
-<?xml version='1.0' encoding='utf-8' ?>
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV">
-	<title>Manage Site Content with WebDAV</title>
-	 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-What_is_WebDAV">
-		<title>What is WebDAV</title>
-		 <para>
-			<emphasis role="bold">WebDAV</emphasis> is an abbreviation of <emphasis role="bold">Web</emphasis>-based <emphasis role="bold">D</emphasis>istributed <emphasis role="bold">A</emphasis>uthoring and <emphasis role="bold">V</emphasis>ersioning.. It is used to publish to publish and manage file and directories on a remote server. It also groups users to perform these these functions on a website.
-		</para>
-		 <para>
-			WebDAV provides the following features:
-		</para>
-		 <variablelist>
-			<varlistentry>
-				<term>Locking</term>
-				 <listitem>
-					<para>
-						This feature prevents two or more collaborators from overwriting shared files.
-					</para>
-
-				</listitem>
-
-			</varlistentry>
-			 <varlistentry>
-				<term>Site Manipulation</term>
-				 <listitem>
-					<para>
-						WebDAV supports copy and move actions and the creaion of <emphasis>collections</emphasis> (file system directories)
-					</para>
-
-				</listitem>
-
-			</varlistentry>
-			 <varlistentry>
-				<term>Name space management</term>
-				 <listitem>
-					<para>
-						This function enables copying and moving web pages within a server's namespace.
-					</para>
-
-				</listitem>
-
-			</varlistentry>
-
-		</variablelist>
-
-	</section>
-	
-	 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Why_use_WebDAV">
-		<title>Why use WebDAV?</title>
-		 <para>
-			You should use WebDAV to manage site content because of the following reasons:
-		</para>
-		 <itemizedlist>
-			<listitem>
-				<para>
-					Copy/paste web content on a desktop machine and have those changes reflected in a host-based website.
-				</para>
-
-			</listitem>
-			 <listitem>
-				<para>
-					Easily, quickly and flexibly manipulate actions on a website without having to access it directly with web-browsers. FIles can be accessed from anywhere and are stored as in local directories.
-				</para>
-
-			</listitem>
-			 <listitem>
-				<para>
-					Easily and quickly upload content to a website simply by copying it into the appropriate directory.
-				</para>
-
-			</listitem>
-
-		</itemizedlist>
-
-	</section>
-
-    <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">
-		<title>How to Use WebDAV With eXo Content</title>
-		 <para>
-			WCM supports WebDAV in two ways:
-		</para>
+  <title>Manage Site Content with WebDAV</title>
+  <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-What_is_WebDAV">
+    <title>What is WebDAV</title>
+    <para>
+   <emphasis role="bold">WebDAV</emphasis> is an abbreviation of <emphasis role="bold">Web</emphasis>-based <emphasis role="bold">D</emphasis>istributed <emphasis role="bold">A</emphasis>uthoring and <emphasis role="bold">V</emphasis>ersioning.. It is used to publish to publish and manage file and directories on a remote server. It also groups users to perform these these functions on a website.
+  </para>
+    <para>
+   WebDAV provides the following features:
+  </para>
+    <variablelist>
+      <varlistentry>
+        <term>Locking</term>
+        <listitem>
+          <para>
+      This feature prevents two or more collaborators from overwriting shared files.
+     </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Site Manipulation</term>
+        <listitem>
+          <para>
+      WebDAV supports copy and move actions and the creaion of <emphasis>collections</emphasis> (file system directories)
+     </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Name space management</term>
+        <listitem>
+          <para>
+      This function enables copying and moving web pages within a server&apos;s namespace.
+     </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+  <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Why_use_WebDAV">
+    <title>Why use WebDAV?</title>
+    <para>
+   You should use WebDAV to manage site content because of the following reasons:
+  </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+     Copy/paste web content on a desktop machine and have those changes reflected in a host-based website.
+    </para>
+      </listitem>
+      <listitem>
+        <para>
+     Easily, quickly and flexibly manipulate actions on a website without having to access it directly with web-browsers. FIles can be accessed from anywhere and are stored as in local directories.
+    </para>
+      </listitem>
+      <listitem>
+        <para>
+     Easily and quickly upload content to a website simply by copying it into the appropriate directory.
+    </para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">
+    <title>How to Use WebDAV With eXo Content</title>
+    <para>
+   eXo Content supports WebDAV in two ways:
+  </para>
+    <para>
+   This way is used when you are on a Window System and your computer has to be connected to the Internet or Intranet.
+  </para>
+    <procedure id="proc-User_Guide-How_to_Use_WebDAV_With_eXo_Content-Method_One">
+      <title>Method One:</title>
+      <step>
+        <para>
+     Navigate to the <emphasis role="bold">My Network Places</emphasis> on your local computer. You will see all shared files and folders:
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="90" fileref="images/mynetworkplaces.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/mynetworkplaces.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Click the <emphasis role="bold">Add a network place</emphasis> link on the left to open the <emphasis role="bold">Add Network Place Wizard</emphasis>:
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="" fileref="images/networkplacewizard.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/networkplacewizard.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Click <emphasis role="bold">Next</emphasis> to choose a network location:
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="" fileref="images/networkplacelocation.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/networkplacelocation.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Select <emphasis role="bold">Choose andother network location</emphasis> to create a shortcut.
+    </para>
+      </step>
+      <step>
+        <para>
+     Enter an address into the <emphasis role="bold">Internet or network address</emphasis> field. As an example, the address of the demonstration site <emphasis>Acme</emphasis> is <emphasis role="bold"> http://localhost:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme</emphasis>
+    </para>
+      </step>
+      <step>
+        <para>
+     Click <emphasis role="bold">Next</emphasis>. After a few moments a folder named <emphasis role="bold">acme on localhost</emphasis> will appear in the <emphasis role="bold">My Network Places</emphasis> directory.
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="" fileref="images/newnetworklocation.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newnetworklocation.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <para>
+     Each site being managed by WebDAV will appear as a folder in this location.
+    </para>
+      </step>
+      <step>
+        <para>
+     Take action on the content in this folder to administer the site content remotely.
+    </para>
+      </step>
+    </procedure>
+    <procedure id="proc-User_Guide-How_to_Use_WebDAV_With_eXo_Content-Method_Two">
+      <title>Method Two:</title>
+      <step>
+        <para>
+     Navigate to <ulink url="http://localhost:8080/portal" type="http"/> in your web browser.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click <emphasis role="bold">Group &gt; Sites Explorer</emphasis> in the Administration bar.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click the <emphasis role="bold">Drives</emphasis> button<emphasis role="bold"> &gt;</emphasis> select <emphasis role="bold">Sites Management</emphasis>.
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="90" fileref="images/sitesmanagementdrive.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/sitesmanagementdrive.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <para>
+     You will see all sites listed in the left sidebar:
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="" fileref="images/sitesleftpane.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/sitesleftpane.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Right-click the site you want to view with WebDAV and select the <emphasis role="bold">Download and Allow Edition</emphasis> item in the menu.
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="90" fileref="images/alloweditionmenu.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/alloweditionmenu.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <para>
+     The selected site will be shown in WebDAV:
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="90" fileref="images/webdavsiteview.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/webdavsiteview.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <para>
+     In this view you can you can access documents in the directories that are linked to the web server.
+    </para>
+      </step>
+    </procedure>
+  </section>
+  <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Actions">
+    <title>Actions</title>
+    <para>
+   You see all <emphasis>default folders</emphasis> of a site when accessing it via WebDAV. Manipulating content through WebDAV is the same as working on it in local folders.
+  </para>
+    <para>
+   This means you can copy/paste files, list folders, rename and more in system directories.
+  </para>
+    <section id="sect-User_Guide-Actions-Add_new_content_to_a_specific_site">
+      <title>Add new content to a specific site</title>
       <para>
-			This way is used when you are on a Window System and your computer has to be connected to the Internet or Intranet.
-		</para>
-		 <procedure id="proc-User_Guide-How_to_Use_WebDAV_With_eXo_Content-Method_One">
-			<title>Method One:</title>
-			 <step>
-				<para>
-					Navigate to the <emphasis role="bold">My Network Places</emphasis> on your local computer. You will see all shared files and folders:
-				</para>
-            <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/mynetworkplaces.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/mynetworkplaces.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Click the <emphasis role="bold">Add a network place</emphasis> link on the left to open the <emphasis role="bold">Add Network Place Wizard</emphasis>:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/networkplacewizard.png" format="PNG" scale="" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/networkplacewizard.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Next</emphasis> to choose a network location:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/networkplacelocation.png" format="PNG" scale="" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/networkplacelocation.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Select <emphasis role="bold">Choose andother network location</emphasis> to create a shortcut.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Enter an address into the <emphasis role="bold">Internet or network address</emphasis> field. As an example, the address of the demonstration site <emphasis>Acme</emphasis> is <emphasis role="bold"> http://localhost:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme</emphasis>
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Next</emphasis>. After a few moments a folder named <emphasis role="bold">acme on localhost</emphasis> will appear in the <emphasis role="bold">My Network Places</emphasis> directory.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/newnetworklocation.png" format="PNG" scale="" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/newnetworklocation.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-				 <para>
-					Each site being managed by WebDAV will appear as a folder in this location.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Take action on the content in this folder to administer the site content remotely.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-		 <procedure id="proc-User_Guide-How_to_Use_WebDAV_With_eXo_Content-Method_Two">
-			<title>Method Two:</title>
-			 <step>
-				<para>
-					Navigate to <ulink type="http" url="http://localhost:8080/portal" /> in your web browser.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Group | Sites Explorer</emphasis> in the Administration bar.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Drives</emphasis> the select <emphasis role="bold">Sites Management</emphasis>.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/sitesmanagementdrive.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/sitesmanagementdrive.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-				 <para>
-					You will see all sites listed in the left sidebar:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/sitesleftpane.png" format="PNG" scale="" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/sitesleftpane.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Right click the site you want to view with WebDAV and select the <emphasis role="bold">Download and Allow Edition</emphasis> item in the menu.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/alloweditionmenu.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/alloweditionmenu.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-				 <para>
-					The selected site will be shown in WebDAV:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/webdavsiteview.png" format="PNG" scale="90" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/webdavsiteview.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-				 <para>
-					In this view you can you can access documents in the directories that are linked to the web server.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-
-	</section>
-
-   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Actions">
-		<title>Actions</title>
-		 <para>
-			You see all <emphasis>default folders</emphasis> of a site when accessing it via WebDAV. Manipulating content through WebDAV is the same as working on it in local folders.
-		</para>
-		 <para>
-			This means you can copy/paste files, list folders, rename and more in system directories.
-		</para>
-		 <section id="sect-User_Guide-Actions-Add_new_content_to_a_specific_site">
-			<title>Add new content to a specific site</title>
-			 <para>
-				This function allows you to copy web content (such as an <emphasis role="bold">.html</emphasis> file) from your local computer to a <emphasis>web content</emphasis> folder of a site.
-			</para>
-			 <procedure>
-				<title></title>
-				 <step>
-					<para>
-						Access a site via WebDAV (refer to <xref linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content"/>) then go to a <emphasis role="bold">web content</emphasis> folder of the site.
-					</para>
-
-				</step>
-				 <step>
-					<para>
-						Copy the web content on your local system into this folder.
-					</para>
-					 <para>
-						The copied file will be converted to web content that is viewable by WebDAV automatically. The content is converted to a directory containing <emphasis>CSS</emphasis>, <emphasis>documents</emphasis>, <emphasis>js</emphasis> and <emphasis>media</emphasis>.
-					</para>
-
-				</step>
-
-			</procedure>
-			
-			 <para>
-				After new content is added it can be viewed as a folder in WebDAV or as page content using a web browser.
-			</para>
-
-		</section>
-
-      <section id="sect-User_Guide-Actions-Delete_a_web_content">
-			<title>Delete a web content</title>
-			 <para>
-				This function allows site administrators to delete web content files singularly or in batches.
-			</para>
-			 <procedure>
-				<title></title>
-				 <step>
-					<para>
-						Navigate to the folder that contains the content you want to remove.
-					</para>
-
-				</step>
-				 <step>
-					<para>
-						Right click the content files or directories (hold the <emphasis>Ctrl</emphasis> key to select multiple files at once) and select <emphasis role="bold">Delete form the context menu</emphasis>.
-					</para>
-					 <mediaobject>
-						<imageobject role="html">
-							<imagedata align="center" fileref="images/webdavcontextdelete.png" format="PNG" scale="" />
-						</imageobject>
-						 <imageobject role="fo">
-							<imagedata align="center" contentwidth="150mm" fileref="images/webdavcontextdelete.png" format="PNG" />
-						</imageobject>
-
-					</mediaobject>
-					 <para>
-						The selected file(s) will be removed from the site.
-					</para>
-
-				</step>
-
-			</procedure>
-			
-
-		</section>
-
-	</section>
-
+    This function allows you to copy web content (such as an <emphasis role="bold">.html</emphasis> file) from your local computer to a <emphasis>web content</emphasis> folder of a site.
+   </para>
+      <procedure>
+        <title/>
+        <step>
+          <para>
+      Access a site via WebDAV (refer to <xref linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content"/>), then go to a <emphasis role="bold">web content</emphasis> folder of the site.
+     </para>
+        </step>
+        <step>
+          <para>
+      Copy the web content on your local system into this folder.
+     </para>
+          <para>
+      The copied file will be converted to web content that is viewable by WebDAV automatically. The content is converted to a directory containing <emphasis>CSS</emphasis>, <emphasis>documents</emphasis>, <emphasis>js</emphasis> and <emphasis>media</emphasis>.
+     </para>
+        </step>
+      </procedure>
+      <para>
+    After new content is added it can be viewed as a folder in WebDAV or as page content using a web browser.
+   </para>
+    </section>
+    <section id="sect-User_Guide-Actions-Delete_a_web_content">
+      <title>Delete a web content</title>
+      <para>
+    This function enables site administrators to delete web content files singularly or in batches.
+   </para>
+      <procedure>
+        <title/>
+        <step>
+          <para>
+      Navigate to the folder that contains the content you want to remove.
+     </para>
+        </step>
+        <step>
+          <para>
+      Right-click the content files or directories (hold the <emphasis>Ctrl</emphasis> key to select multiple files at once) and select      <emphasis role="bold">Delete</emphasis> from the context meu.</para>
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata align="center" scale="" fileref="images/webdavcontextdelete.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata contentwidth="150mm" align="center" fileref="images/webdavcontextdelete.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+          <para>
+      The selected file(s) will be removed from the site.
+     </para>
+        </step>
+      </procedure>
+    </section>
+  </section>
 </section>
-
-

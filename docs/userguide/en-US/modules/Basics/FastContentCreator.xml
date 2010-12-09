@@ -1,320 +1,212 @@
-<?xml version='1.0' encoding='utf-8' ?>
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Fast_Content_Creator">
-	<title>Fast Content Creator</title>
-	 <para>
-		Site Publisher provides users with the <emphasis role="bold">Fast Content Creator</emphasis> portlet that allows users to create document content quickly. The Fast Content Creator portlet is applied in the <emphasis role="bold">Contact Us</emphasis> on the navigation bar:
-	</para>
-	 <procedure>
-		<title></title>
-		 <step>
-			<para>
-				Go to <emphasis role="bold">Contact Us</emphasis> on the Navigation bar or go to <emphasis role="bold"> Site | Acme | Contact Us</emphasis>.
-			</para>
-			 <para>
-				The <emphasis role="bold">Contact Us</emphasis> page will appear:
-			</para>
-			 <mediaobject>
-				<imageobject role="html">
-					<imagedata align="center" fileref="images/contactusform.png" format="PNG" scale="100" width="444" />
-				</imageobject>
-				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="150mm" fileref="images/contactusform.png" format="PNG" width="444" />
-				</imageobject>
-
-			</mediaobject>
-			 <table>
-				<title></title>
-				 <tgroup cols="2">
-					<thead>
-						<row>
-							<entry>
-								Field
-							</entry>
-							 <entry>
-								Details
-							</entry>
-
-						</row>
-
-					</thead>
-					 <tbody>
-						<row>
-							<entry>
-								Select a recipient
-							</entry>
-							 <entry>
-								To choose people who will receive the message.
-							</entry>
-
-						</row>
-						 <row>
-							<entry>
-								Your Name
-							</entry>
-							 <entry>
-								To type the name of person who leaves a message.
-							</entry>
-
-						</row>
-						 <row>
-							<entry>
-								Your Address
-							</entry>
-							 <entry>
-								To type the address of person who leaves a message.
-							</entry>
-
-						</row>
-						 <row>
-							<entry>
-								Your Email Address
-							</entry>
-							 <entry>
-								To enter the email address of person who leaves a message.
-							</entry>
-
-						</row>
-						 <row>
-							<entry>
-								Your Phone Number
-							</entry>
-							 <entry>
-								To enter the phone number of person who leaves a message.
-							</entry>
-
-						</row>
-						 <row>
-							<entry>
-								Your Message
-							</entry>
-							 <entry>
-								To write a message that you want to leave.
-							</entry>
-
-						</row>
-
-					</tbody>
-
-				</tgroup>
-
-			</table>
-
-		</step>
-		 <step>
-			<para>
-				Select a recipient and cokplete the other values in the form.
-			</para>
-
-		</step>
-		 <step>
-			<para>
-				Click <emphasis role="bold">Save</emphasis> to send a message.
-			</para>
-
-		</step>
-
-	</procedure>
-	
-	 <section id="sect-User_Guide-Fast_Content_Creator-Edit_Mode">
-		<title>Edit Mode</title>
-		 <para>
-			Users can edit templates, take actions, and save locations for the documents in the <emphasis role="bold">Contact Us</emphasis> portlet.
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Go to <emphasis role="bold">Contact Us</emphasis> on the Navigation bar or go to <emphasis role="bold"> Site | Acme | Contact Us</emphasis>.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click Site <emphasis role="bold">Editor | Edit Page</emphasis> on the administration bar. The <emphasis role="bold">Page Editor</emphasis> will be displayed.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click the edit icon to open the <emphasis role="bold">Edit Mode</emphasis> tab in the <emphasis role="bold">Contact Us</emphasis> portlet.
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/contactusportlet.png" format="PNG" scale="" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/contactusportlet.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-				 <para>
-					The <emphasis role="bold">Edit Mode</emphasis> tab appears:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/editnodetab.png" format="PNG" scale="" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/editnodetab.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-				 <table>
-					<title></title>
-					 <tgroup cols="2">
-						<thead>
-							<row>
-								<entry>
-									Field
-								</entry>
-								 <entry>
-									Details
-								</entry>
-
-							</row>
-
-						</thead>
-						 <tbody>
-							<row>
-								<entry>
-									Location to Save
-								</entry>
-								 <entry>
-									Select the location for saving documents or messages.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Select Template
-								</entry>
-								 <entry>
-									Choose available templates for documents. There are corresponding fields to each template.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Custom Save button
-								</entry>
-								 <entry>
-									Change the label for the save button.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Custom Save message
-								</entry>
-								 <entry>
-									Show a custom message that informs you have just saved a document.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Redirect
-								</entry>
-								 <entry>
-									Allow users to redirect the path in the Redirect path field.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Redirect Path
-								</entry>
-								 <entry>
-									Show a path that a user will be directed to after he/she clicks OK in the confirmation message.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Actions
-								</entry>
-								 <entry>
-									Add another actions to documents.
-								</entry>
-
-							</row>
-
-						</tbody>
-
-					</tgroup>
-
-				</table>
-
-			</step>
-			 <step>
-				<para>
-					Click the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/previewicon.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 to search for the location to save documents. The <emphasis role="bold">Select Location</emphasis> form appears:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/selectlocationform.png" format="PNG" scale="" width="444" />
-					</imageobject>
-					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/selectlocationform.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Select the parent node on the left panel and click the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/greentick.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 in the <emphasis role="bold">Action</emphasis> column to choose the child node on the right panel. After being selected, this location will be displayed on the <emphasis role="bold">Location to save field</emphasis>. Created documents will be saved in this location.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Select a template for documents by clicking .
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Change the label for <emphasis role="bold">Save</emphasis>, and the message content after clicking <emphasis role="bold">Save</emphasis>.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Select the <emphasis role="bold">Redirect</emphasis> checkbox if users want to redirect to the path in the <emphasis role="bold">Redirect path</emphasis> field after clicking <emphasis role="bold">OK</emphasis> in the save message.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Save</emphasis> to save all changes of editing properties for documents that users will create in the <emphasis role="bold">Contact Us</emphasis> Portlet.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-
-	</section>
-
+  <title>Fast Content Creator</title>
+  <para>
+  Site Publisher provides users with the <emphasis role="bold">Fast Content Creator</emphasis> portlet that allows users to create document content quickly. The Fast Content Creator portlet is applied in the <emphasis role="bold">Contact Us</emphasis> portlet on the navigation bar:
+ </para>
+  <procedure>
+    <title/>
+    <step>
+      <para>
+    Go to <emphasis role="bold">Contact Us</emphasis> on the Navigation bar or go to <emphasis role="bold"> Site &gt; Acme &gt; Contact Us</emphasis>.
+   </para>
+      <para>
+    The <emphasis role="bold">Contact Us</emphasis> page will appear:
+   </para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata width="444" align="center" scale="100" fileref="images/contactusform.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/contactusform.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+      <table>
+        <title/>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry> Field </entry>
+              <entry> Details </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry> Select a recipient </entry>
+              <entry> To choose people who will receive the message. </entry>
+            </row>
+            <row>
+              <entry> Your Name </entry>
+              <entry> To type the name of person who leaves a message. </entry>
+            </row>
+            <row>
+              <entry> Your Address </entry>
+              <entry> To type the address of person who leaves a message. </entry>
+            </row>
+            <row>
+              <entry> Your Email Address </entry>
+              <entry> To enter the email address of person who leaves a message. </entry>
+            </row>
+            <row>
+              <entry> Your Phone Number </entry>
+              <entry> To enter the phone number of person who leaves a message. </entry>
+            </row>
+            <row>
+              <entry> Your Message </entry>
+              <entry> To write a message that you want to leave. </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </step>
+    <step>
+      <para>
+    Select a recipient and cokplete the other values in the form.
+   </para>
+    </step>
+    <step>
+      <para>
+    Click <emphasis role="bold">Save</emphasis> to send a message.
+   </para>
+    </step>
+  </procedure>
+  <section id="sect-User_Guide-Fast_Content_Creator-Edit_Mode">
+    <title>Edit Mode</title>
+    <para>
+   Users can edit templates, take actions, and save locations for the documents in the <emphasis role="bold">Contact Us</emphasis> portlet.
+  </para>
+    <procedure>
+      <title/>
+      <step>
+        <para>
+     Go to <emphasis role="bold">Contact Us</emphasis> on the Navigation bar or go to <emphasis role="bold"> Site &gt; Acme &gt; Contact Us</emphasis>.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click <emphasis role="bold">Site</emphasis> <emphasis role="bold">Editor &gt; Edit Page</emphasis> on the administration bar. The <emphasis role="bold">Page Editor</emphasis> will be displayed.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click the edit icon to open the <emphasis role="bold">Edit Mode</emphasis> tab in the <emphasis role="bold">Contact Us</emphasis> portlet.
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="" fileref="images/contactusportlet.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/contactusportlet.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <para>
+     The <emphasis role="bold">Edit Mode</emphasis> tab appears:
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="" fileref="images/editnodetab.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/editnodetab.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <table>
+          <title/>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry> Field </entry>
+                <entry> Details </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry> Location to Save </entry>
+                <entry> Select the location for saving documents or messages. </entry>
+              </row>
+              <row>
+                <entry> Select Template </entry>
+                <entry> Choose available templates for documents. There are corresponding fields to each template. </entry>
+              </row>
+              <row>
+                <entry> Custom Save button </entry>
+                <entry> Change the label for the save button. </entry>
+              </row>
+              <row>
+                <entry> Custom Save message </entry>
+                <entry> Show a custom message that informs you have just saved a document. </entry>
+              </row>
+              <row>
+                <entry> Redirect </entry>
+                <entry> Allow users to redirect the path in the Redirect path field. </entry>
+              </row>
+              <row>
+                <entry> Redirect Path </entry>
+                <entry> Show a path that a user will be directed to after he/she clicks OK in the confirmation message. </entry>
+              </row>
+              <row>
+                <entry> Actions </entry>
+                <entry> Add another actions to documents. </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </step>
+      <step>
+        <para>
+     Click the 
+     <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/previewicon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+      to search for the location to save documents. The <emphasis role="bold">Select Location</emphasis> form appears:
+    </para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata width="444" align="center" scale="" fileref="images/selectlocationform.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/selectlocationform.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Select the parent node on the left panel and click the 
+     <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/greentick.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+      in the <emphasis role="bold">Action</emphasis> column to choose the child node on the right panel. After being selected, this location will be displayed on the <emphasis role="bold">Location to save field</emphasis>. Created documents will be saved in this location.
+    </para>
+      </step>
+      <step>
+        <para>
+     Select a template for documents by clicking .
+    </para>
+      </step>
+      <step>
+        <para>
+     Change the label for <emphasis role="bold">Save</emphasis>, and the message content after clicking <emphasis role="bold">Save</emphasis>.
+    </para>
+      </step>
+      <step>
+        <para>
+     Select the <emphasis role="bold">Redirect</emphasis> checkbox if users want to redirect to the path in the <emphasis role="bold">Redirect path</emphasis> field after clicking <emphasis role="bold">OK</emphasis> in the save message.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click <emphasis role="bold">Save</emphasis> to save all changes of editing properties for documents that users will create in the <emphasis role="bold">Contact Us</emphasis> Portlet.
+    </para>
+      </step>
+    </procedure>
+  </section>
 </section>
-
-
