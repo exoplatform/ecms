@@ -5,9 +5,9 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Manage_Content_In_Sites_Explorer">
-  <title>Manage Content In Sites Explorer</title>
+  <title>Manage Content In Content Explorer</title>
   <para>
-  A web content is a key resource to make a site. Other resources make a site more dynamic and animated by using layout, color, font, etc.This section focuses on how to manage a web content in a specific site.</para>
+  A web content is a key resource to make a site. Other resources make a site more dynamic and animated by using layout, color, font, and more.This section focuses on how to manage a web content in a specific site.</para>
   <note>
     <para>Only users who have the right to access <emphasis role="bold">Sites Management</emphasis> drive can do it.</para>
   </note>
@@ -243,7 +243,7 @@
       </step>
       <step>
         <para>
-     Select to view a web content by double - clicking it on the left tree or on the right. The detailed information of web content will be viewed on the right panel.
+     Select to view a web content by double-clicking it on the left tree or on the right. The detailed information of web content will be viewed on the right panel.
     </para>
       </step>
       <step>
@@ -271,7 +271,7 @@
     <note>
       <title>Auto-lock</title>
       <para>
-    When you click <emphasis role="bold">Edit Document</emphasis>, the web-content will be auto-locked for your editing. After finishing, the content is back to unlock status. You can manage Locks in the Sites Administration  portlet.
+    When you click <emphasis role="bold">Edit Document</emphasis>, the web-content will be auto-locked for your editing. After finishing, the content is back to unlock status. You can manage Locks in the Administration  portlet.
    </para>
     </note>
   </section>
@@ -308,7 +308,7 @@
   <section id="sect-User_Guide-Manage_Content_In_Sites_Explorer-Publish_a_web_content">
     <title>Publish a web content</title>
     <para>
-   This function helps you publish a web content that you have added to web content folder in Sites Explorer.
+   This function helps you publish a web content that you have added to web content folder in Content Explorer.
   </para>
     <para>See <xref linkend="sect-User_Guide-Contribute_Content-Publication_Process" /> to know how to publish a web content.</para>
     <para>

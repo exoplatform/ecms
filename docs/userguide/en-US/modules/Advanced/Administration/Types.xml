@@ -5,7 +5,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Types_of_Content">
-  <title>Types of Content</title>
+  <title>Content Types</title>
 
   <section id="sect-User_Guide-Types_of_Content-The_Namespace_Registry">
     <title>The Namespace Registry</title>
@@ -14,9 +14,8 @@
     all the node type properties. This function enables users to register the
     namespace used in the system. </para>
 
-    <para>Go to <emphasis role="bold"><emphasis><guimenuitem>Sites
-    Adminstration &gt; Types of Content &gt; Namespace Registry</guimenuitem>
-    to open the NamesPace Registry form.</emphasis></emphasis><!--  Go to Sites Administration | Types of Content | Namespace Registry   --></para>
+    <para>Go to <emphasis role="bold"><emphasis><guimenuitem>Administration &gt; Content Types &gt; Namespace Registry</guimenuitem>
+    to open the NamesPace Registry form.</emphasis></emphasis><!--  Go to Administration | Content Types | Namespace Registry   --></para>
 
     <figure id="figu-User_Guide-The_Namespace_Registry-Namespace_Registry">
       <title>Namespace Registry</title>

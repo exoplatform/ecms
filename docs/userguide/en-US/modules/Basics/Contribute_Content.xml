@@ -15,7 +15,7 @@
     </mediaobject>
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Edit mode</emphasis>: In this mode, you can edit all contents of the current site. When hovering the mouse over contens, you can see edit icons which enable you to  quickly edit these contents. You can take advantage of this feature to submit contents to a page.</para>
+        <para><emphasis role="bold">Edit mode</emphasis>: In this mode, you can edit all contents of the current site. When hovering the mouse over contents, you can see edit icons which enable you to quickly edit these contents. You can take advantage of this feature to submit contents to a page.</para>
       </listitem>
       <listitem>
         <para><emphasis role="bold">Published mode</emphasis>: In this mode, you only can view the current site without editing the contents of the site. </para>
@@ -27,7 +27,7 @@
         <imagedata width="444" align="center" fileref="images/publishedmode.png" format="PNG"/>
       </imageobject>
     </mediaobject>
-    <para>When a page is switched to Edit mode, you can see quick edit icons on the site contents when mousing over them.</para>
+    <para>When a page is switched to the Edit mode, you can see quick edit icons on the site contents when mousing over them.</para>
     <para>For single content viewer (SCV), you can see the current state of the content, the Edi Content icon and References icon.</para>
     <mediaobject>
       <imageobject>
@@ -48,7 +48,7 @@
     <para>To use <emphasis role="bold">InContext Editing</emphasis>, turn on the <emphasis role="bold">Edit Mode</emphasis>.</para>
     <section id="sect-User_Guide-Incontext_Editing-Add_Content">
       <title>Add Content</title>
-      <para>Adding  a  new content by InContext Editing is enable for the content list viewer.</para>
+      <para>Adding  a  new content by InContext Editing is enabled for the content list viewer.</para>
       <para> Do the following:</para>
       <procedure>
         <title>Add a new content</title>
@@ -57,7 +57,7 @@
         </step>
         <step>
           <para>Click the <emphasis role="bold">Add Content</emphasis> icon on the CLV.</para>
-          <para>You will be  redirected to the <emphasis role="bold">Sites Explorer </emphasis>with a new document form for you to write a document.</para>
+          <para>You will be  redirected to the <emphasis role="bold">Content Explorer </emphasis>with a new document form for you to write a document.</para>
           <mediaobject>
             <imageobject>
               <imagedata width="444" align="center" fileref="images/documentform.png" format="PNG"/>
@@ -98,7 +98,7 @@
               <imageobject>
                 <imagedata fileref="images/editicon4.png" format="PNG"/>
               </imageobject>
-            </inlinemediaobject> on the right conner of the content you want to edit. You will be  redirected to the <emphasis role="bold">Sites Explorer </emphasis>with the  document form form for you to edit.</para>
+            </inlinemediaobject> on the right conner of the content you want to edit. You will be  redirected to the <emphasis role="bold">Content Explorer </emphasis>with the  document form form for you to edit.</para>
           <mediaobject>
             <imageobject>
               <imagedata width="444" align="center" fileref="images/editform.png" format="PNG"/>
@@ -145,7 +145,7 @@
               <imagedata width="444" align="center" fileref="images/managecontent.png" format="PNG"/>
             </imageobject>
           </mediaobject>
-          <para>The browser will redirect to <emphasis role="bold">Sites Explorer</emphasis>:</para>
+          <para>The browser will redirect to <emphasis role="bold">Content Explorer</emphasis>:</para>
           <mediaobject>
             <imageobject>
               <imagedata width="444" align="center" fileref="images/managecontent1.png" format="PNG"/>
@@ -286,7 +286,7 @@
                     <entry>
                       <emphasis role="bold">Mode</emphasis>
                     </entry>
-                    <entry>This mode is to select web content for list viewer. There are two modes:<para>By Folder:  This mode allows you to select a content folder in the Folder path field.</para><para>By Content: This mode allows you to select  by  the content in a specific folder in Folder path field.</para></entry>
+                    <entry>This mode is to select web content for list viewer. There are two modes:<para>By Folder: This mode allows you to select a content folder in the Folder path field.</para><para>By Content: This mode allows you to select  by  the content in a specific folder in Folder path field.</para></entry>
                   </row>
                   <row>
                     <entry>
@@ -385,7 +385,7 @@
         </step>
         <step>
           <para>If you select the <emphasis role="bold">By folder</emphasis> mode, select an available site on the left, then select a folder that contains contents (documents and/or web content) on the right by clicking the folder.</para>
-          <para>If you select the <emphasis role="bold">By content </emphasis>mode, select an available folder from the left panel, all content in this folder will be listed on the right panel.   Click a  content on the right that you want to add to the content list. Amessage informs that you have successfully added it in List Content. The selected content is listed in List Content.</para>
+          <para>If you select the <emphasis role="bold">By content </emphasis>mode, select an available folder from the left panel, all content in this folder will be listed on the right panel.   Click a  content on the right that you want to add to the content list. A message informs that you have successfully added it in List Content. The selected content is listed in List Content.</para>
         </step>
         <step>
           <para>Enter a header for the content list in the Header field if you want. </para>
@@ -409,7 +409,7 @@
         </emphasis></para> <para>If you do not have the right to approve or publish a content, so when you want to publish your content, you must send your approval request first.</para><para>If you have the right to approve or publish a content, you do not need to send a request approval. You can yourself  publish it with the <emphasis role="bold">Stage</emphasis> step immediately.</para></para>
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Request approva</emphasis>l: When a new content is created, it must be approved before publishing by clicking <emphasis role="bold">Request Approval</emphasis> on the action bar of  the Sites Explorer or clicking <emphasis role="bold">Pending</emphasis> in the Manage Publication form:</para>
+        <para><emphasis role="bold">Request approva</emphasis>l: When a new content is created, it must be approved before publishing by clicking <emphasis role="bold">Request Approval</emphasis> on the action bar of  the Content Explorer or clicking <emphasis role="bold">Pending</emphasis> in the Manage Publication form:</para>
         <mediaobject>
           <imageobject>
             <imagedata width="444" align="center" fileref="images/managepublication.png" format="PNG"/>
@@ -417,7 +417,7 @@
         </mediaobject>
       </listitem>
       <listitem>
-        <para><emphasis role="bold">Approve</emphasis>: To approve a content, click <emphasis role="bold">Approve </emphasis>on the action bar of  the Sites Explorer or click <emphasis role="bold">Approved</emphasis> in the Manage Publication.</para>
+        <para><emphasis role="bold">Approve</emphasis>: To approve a content, click <emphasis role="bold">Approve </emphasis>on the action bar of  the Content Explorer or click <emphasis role="bold">Approved</emphasis> in the Manage Publication.</para>
       </listitem>
       <listitem>
         <para><emphasis role="bold">Stage</emphasis>: Stage enables you to publish a content in a period.  After selecting the publication schedule for the content, it will be automatically published as the schedule. </para>
@@ -432,7 +432,7 @@
       <listitem>
         <para><emphasis role="bold">Publish</emphasis>:  A content will be published when you have completed the <emphasis role="bold">Stage</emphasis> step.</para>
         <note>
-          <para>You will see a  list of draft contents,  pending  contents (that are waiting to be your approval if you have the approval right)  and contents that will be published at the bottom of the Sites Explorer. Click them to review, approve or publish.</para>
+          <para>You will see a  list of draft contents,  pending  contents (that are waiting to be your approval if you have the approval right)  and contents that will be published at the bottom of the Content Explorer. Click them to review, approve or publish.</para>
         </note>
         <mediaobject>
           <imageobject>

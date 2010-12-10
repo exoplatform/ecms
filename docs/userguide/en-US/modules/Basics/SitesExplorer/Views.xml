@@ -7,7 +7,7 @@
 <section id="sect-User_Guide-Views">
   <title>Views</title>
   <para>
-  In the Sites Explorer of eXo Content have many drives. Each drive has some views that enable you to look at  data in the drive in a particular way. Each view has some tabs and each tab contains some functions (or called actions).</para>
+  There have many drives in the Content Explorer. Each drive has some views that enable you to look at  data in the drive in a particular way. Each view has some tabs and each tab contains some functions (or called actions).</para>
   <para>eXo Content  supports you four ways to view nodes in a specific folder and show actions of corresponding tab on the Actions bar.</para>
   <note>
     <title>View Types</title>

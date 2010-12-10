@@ -5,7 +5,7 @@
 ]>
 <section id="sect-User_Guide-Actions_on_Folders_and_Documents">
   <title>Actions on Folders and Documents</title>
-  <para>In this section, we will present the actions on  folders and document in the right-click menu (Add to favorites, copy, cut, paste, add Symlink, lock/unlock,   view document, rename, download and allow edition and copy URL to clipboard) and other actions (drap and drop folders or documents).</para>
+  <para>In this section, we will present the actions on  folders and document in the right-click menu (Add to favorites, copy, cut, paste, add Symlink, lock/unlock,   view document, rename, download and allow edition and copy URL to clipboard) and other actions (drag and drop folders or documents).</para>
   <para>Depend on the actions on folders or documents, the right-click menu (drop-down menu)  is different.</para>
   <para>The actions in the right-click menu for documents:</para>
   <mediaobject>
@@ -50,7 +50,7 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-CopyPaste_Documents">
     <title>Copy/Paste</title>
     <para>
-   This function is used to make a copy of a node (include sub nodes) to other places.</para>
+   This function is used to make a copy of a node (including sub-nodes) to other places.</para>
     <para> There are two ways to cut/copy/paste the node:
   </para>
     <procedure id="proc-User_Guide-CopyPaste_Documents-Method_One">
@@ -88,7 +88,7 @@
       </step>
       <step>
         <para>
-     Select the Clipboard icon on the side bar:
+     Select the Clipboard icon on the sidebar:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -365,7 +365,7 @@
       </step>
       <step>
         <para>
-     Drop them into the selcted folder (by releaseing the left mouse button). All &apos;dragged&apos; folders/documents will be relocated to the destination folder.
+     Drop them into the selected folder (by releasing the left mouse button). All &apos;dragged&apos; folders/documents will be relocated to the destination folder.
     </para>
       </step>
     </procedure>
@@ -378,7 +378,7 @@
     <formalpara id="form-User_Guide-LockUnlock_folders_and_Documents-Lock_folders">
       <title>Lock folders/documents</title>
       <para>
-    Just right-click a folder/document (on either the right or left window panel) and select <emphasis role="bold">Lock</emphasis> from the menu. The selected folder/document will be locked.
+    Just right-click a folder/document (on either the right or left window pane) and select <emphasis role="bold">Lock</emphasis> from the menu. The selected folder/document will be locked.
    </para>
     </formalpara>
     <note>
@@ -470,17 +470,17 @@
       <title/>
       <step>
         <para>
-     Select a document that you want to add a sym link.
+     Select a document that you want to add a symlink.
     </para>
       </step>
       <step>
         <para>
-     Righ-click that document and select <emphasis role="bold">Add Sym Link</emphasis> from the menu.
+     Righ-click that document and select <emphasis role="bold">Add SymLink</emphasis> from the menu.
     </para>
       </step>
       <step>
         <para>
-     The selected document will be added a sym link immediately. You now can click the sym link to view its content.
+     The selected document will be added a symlink immediately. You now can click the sym link to view its content.
     </para>
       </step>
     </procedure>
@@ -715,7 +715,7 @@
             <imagedata contentwidth="150mm" align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
         </mediaobject>
-        <para>Depending on the popularity of tag, the displaying of each tag will be different from others by: font-size, font-weight, color, font-family, text-decoration. For example, when a tag is added for over 10 documents, it will be displayed in red color, size:20px, bold. This is also can be configured in Sites Administration portlet. </para>
+        <para>Depending on the popularity of tag, the displaying of each tag will be different from others by: font-size, font-weight, color, font-family, text-decoration. For example, when a tag is added for over 10 documents, it will be displayed in red color, size:20px, bold. This is also can be configured in the Administration portlet. </para>
       </step>
       <step>
         <para>Each tag is also like a link used list all documents that it is added. Click a tag name, documents list will be displayed in the right panel. </para>

@@ -40,7 +40,7 @@
         <title>Go to the Manage Templates form</title>
 
         <para>Click <menuchoice>
-            <guimenu>Sites Administration</guimenu>
+            <guimenu>Administration</guimenu>
 
             <guimenuitem>Content Presentation</guimenuitem>
 
@@ -162,7 +162,7 @@
         <title>Go to the Manage Templates form</title>
 
         <para>Click <menuchoice>
-            <guimenu>Sites Administration</guimenu>
+            <guimenu>Administration</guimenu>
 
             <guimenuitem>Content Presentation</guimenuitem>
 
@@ -380,7 +380,7 @@
         <title>Go to the Manage Metadata form</title>
 
         <para>Click <menuchoice>
-            <guimenu>Sites Administration</guimenu>
+            <guimenu>Administration</guimenu>
 
             <guimenuitem>Content Presentation</guimenuitem>
 
@@ -471,7 +471,7 @@
 
     <para>To open the <emphasis role="bold">Manage View</emphasis> function,
     click <menuchoice>
-        <guimenu>Sites Administration</guimenu>
+        <guimenu>Administration</guimenu>
 
         <guimenuitem>Content Presentation</guimenuitem>
 
@@ -918,7 +918,7 @@
     File Explorer</emphasis>. It allows adding, editing and deleting
     drives.</para>
 
-    <para>Go to <guibutton>Sites Administration</guibutton><emphasis
+    <para>Go to <guibutton>Administration</guibutton><emphasis
     role="bold"> &gt; <guibutton>Content Presentation</guibutton> &gt;
     <guibutton>Manage Drives</guibutton>.</emphasis></para>
 

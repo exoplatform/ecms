@@ -7,13 +7,13 @@
   <title>Content Inside Categories</title>
   <para>
 
- You can create new contents in any folders or directly in a CLV with Incontext Editing.  However, creating contents inside a category helps you easily and quickly  manage and publish them.</para>
+ You can create new contents in any folders or directly in a CLV with Incontext Editing.  However, creating contents inside a category helps you easily and quickly manage and publish them.</para>
   <section id="sect-User_Guide-Content_Inside_Categories-What_is_a_Category_in_eXo_Content">
     <title>What is a Category in eXo Content?</title>
     <para>
 
   </para>
-    <para>Cateogies are used to sort and organize documents to ease searches when browsing documents online. After creating a document, you should categorize it by adding it into a category. You should direcly create a document in a category, then  the document is automatically created a link to it in the category. When you browse the category, it will be possible to find the referenced documents and display them as if they were children of the category node.</para>
+    <para>Categories are used to sort and organize documents to ease searches when browsing documents online. After creating a document, you should categorize it by adding it into a category. You should directly create a document in a category, then  the document is automatically created a link to it in the category. When you browse the category, it will be possible to find the referenced documents and display them as if they were children of the category node.</para>
     <para>Categories are stored in the JCR itself .</para>
   </section>
   <section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
@@ -23,7 +23,7 @@
     <procedure>
       <title>Create a content</title>
       <step>
-        <para>Go to <emphasis role="bold">Group &gt; Sites Explorer &gt; </emphasis>select a category in a drive.  For example, select <emphasis role="bold">Acme </emphasis>drive as the following illustration.</para>
+        <para>Go to <emphasis role="bold">Group &gt; Content Explorer &gt; </emphasis>select a category in a drive.  For example, select <emphasis role="bold">Acme </emphasis>drive as the following illustration.</para>
         <mediaobject>
           <imageobject>
             <imagedata width="444" align="center" fileref="images/selectcategory.png" format="PNG"/>

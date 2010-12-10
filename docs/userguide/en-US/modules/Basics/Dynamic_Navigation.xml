@@ -39,12 +39,12 @@
                 <entry>
                   <itemizedlist>
                     <listitem>
-                      <para>Disable: It means  a single content will be opened by an URL containing   the Content Path.</para>
+                      <para>Disable: It means  a single content will be opened by an URL containing the Content Path.</para>
                     </listitem>
                   </itemizedlist>
                   <itemizedlist>
                     <listitem>
-                      <para>Enable:  This portlet is  configured with the provided parameter (content-id by default). </para>
+                      <para>Enable:  This portlet is configured with the provided parameter (content-id by default). </para>
                     </listitem>
                   </itemizedlist>
                 </entry>

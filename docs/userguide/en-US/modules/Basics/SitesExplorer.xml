@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Sites_Explorer">
-	<title>Sites Explorer</title>
+	<title>Content Explorer</title>
 	 <xi:include href="SitesExplorer/Access_Sites_Explorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="SitesExplorer/Drives.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="SitesExplorer/Views.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />

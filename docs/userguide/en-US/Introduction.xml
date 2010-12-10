@@ -7,7 +7,7 @@
 <chapter id="chap-User_Guide-Overall_Introduction">
   <title>Overall Introduction</title>
   <section id="sect-User_Guide-Overall_Introduction-exo_Content">
-    <title>exo Content</title>
+    <title>eXo Content</title>
     <para><emphasis role="bold">Web Content Management</emphasis> (<emphasis role="bold">WCM</emphasis>) is the technologies used to Capture, Manage,
     Store, Preserve, and Deliver content and documents. It
     especially concerns content imported into or generated from within an
@@ -15,8 +15,8 @@
     access to this content from outside the organization&apos;s processes.</para>
     <para>The WCM users can manage both structured and unstructured content,
     so that an organization, such as a business or governmental agency, can
-    more effectively meet business goals (increase the profits or improve th
-    organizational procese efficient use of budgets), serve its customers (as
+    more effectively meet business goals (increasing the profits or improve th
+    organizational process with efficient use of budgets), serve its customers (as
     a competitive advantage, or to improve responsiveness), and protect itself
     (against non-compliance, law-suits, uncoordinated departments or turnover
     within the organization).</para>
@@ -35,7 +35,7 @@
     (<emphasis role="bold">DMS</emphasis>) - an extension of eXo Content is
     used to store, manage and track electronic documents and electronic images
     and allows documents to be modified and managed easily and conveniently by
-    managing versions, properties, ect.</para>
+    managing versions, properties, and more.</para>
   </section>
   <section id="sect-User_Guide-Overall_Introduction-Site_Content_Structure">
     <title>Site Content Structure</title>
@@ -338,7 +338,7 @@
       <title>Symlink</title>
       <para>Symlink is a special file containing a reference to document or
       folder. By using symlinks, you can easily access specific nodes (target)
-      that symlinks point to. In the Sites Explorer, a symlink has a small
+      that symlinks point to. In Content Explorer, a symlink has a small
       chain symbol next to its icon:</para>
       <mediaobject>
         <imageobject role="html">

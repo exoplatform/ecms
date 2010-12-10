@@ -5,8 +5,8 @@
 ]>
 <section id="sect-User_Guide-Actions">
   <title>Actions</title>
-  <para>Actions are added in tabs in Sites Explorer by administrators. Depending on each tab and each drive you are browsing  and your role, you can see which action.</para>
-  <para>eXo Content consists of many actions. This section shows you how to take all the actions in Sites Explorer.</para>
+  <para>Actions are added in tabs in Content Explorer by administrators. Depending on each tab and each drive you are browsing  and your role, you can see which action.</para>
+  <para>eXo Content consists of many actions. This section shows you how to take all the actions in Content Explorer.</para>
   <section id="sect-User_Guide-Actions-Add_Category">
     <title>Add Category</title>
     <para>
@@ -1479,8 +1479,8 @@
    By default, the <emphasis role="bold">Add translation</emphasis> button is not displayed on the action bar.
   </para>
     <para>
-   Enable this function by navigating to <emphasis role="bold">Sites Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>.
-  See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Add translation button to the tabs on the action bar in Sites Explorer.</para>
+   Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>.
+  See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Add translation button to the tabs on the action bar in Content Explorer.</para>
     <procedure>
       <title/>
       <step>
@@ -3274,7 +3274,7 @@
       </step>
       <step>
         <para>Click the <emphasis role="bold">Request Approval</emphasis> button on the action bar. </para>
-        <para>The content is displayed at  the bottom of the Sites Explorer of the people who have the right to approve contents.</para>
+        <para>The content is displayed at the bottom of the Content Explorer of the people who have the right to approve contents.</para>
       </step>
     </procedure>
   </section>
@@ -3295,8 +3295,8 @@
           <para><para>
    By default, the button is not displayed on the action bar.
   </para><para>
-   Enable this function by navigating to <emphasis role="bold">Sites Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>.
-  See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Appove Content  button to the tabs on the action bar in Sites Explorer.</para></para>
+   Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>.
+  See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Appove Content  button to the tabs on the action bar in Content Explorer.</para></para>
         </note>
       </step>
     </procedure>
@@ -3313,13 +3313,13 @@
         <para>Select a content that you want to publish.</para>
       </step>
       <step>
-        <para>Click the <emphasis role="bold">Publish Content</emphasis> button on the action bar. The content will be publish as the chedule that you set up.</para>
+        <para>Click the <emphasis role="bold">Publish Content</emphasis> button on the action bar. The content will be published as the schedule that you set up.</para>
         <note>
           <para><para>The Publish Content button is only invisible for users who have the right to publish contents. </para><para><para>
    By default, the button is not displayed on the action bar.
   </para><para>
-   Enable this function by navigating to <emphasis role="bold">Sites Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>.
-  See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Publish Content  button to the tabs on the action bar in Sites Explorer.</para></para></para>
+   Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>.
+  See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Publish Content  button to the tabs on the action bar in Content Explorer.</para></para></para>
         </note>
       </step>
     </procedure>
@@ -3327,7 +3327,7 @@
   <section id="sect-User_Guide-Actions-Show_Drives">
     <title>Show Drives</title>
     <para>
-   This function enables you to show or hide all the drives in Sites Explorer.
+   This function enables you to show or hide all the drives in Content Explorer.
   </para>
     <para>
    To show drives, click 
@@ -3667,7 +3667,7 @@
        icon to delete a category in <emphasis role="bold">Upload a file</emphasis> form.
      </para>
           <para>
-      You also manage categories which added for files by using the <emphasis role="bold">Manage Categories</emphasis> function. See <xref linkend="sect-User_Guide-Actions-Manage_Categories"/>.
+      You also manage categories which were added to files by using the <emphasis role="bold">Manage Categories</emphasis> function. See <xref linkend="sect-User_Guide-Actions-Manage_Categories"/>.
      </para>
         </note>
       </step>
@@ -3697,7 +3697,7 @@
               <imagedata fileref="images/editicon4.png" format="PNG"/>
             </imageobject>
           </inlinemediaobject>
-      icon to see more details of its external metadata information. The <emphasis role="bold"> List external metadatas</emphasis> tab will be enable and you can input value in this tab.
+      icon to see more details of its external metadata information. The <emphasis role="bold"> List external metadata</emphasis> tab will be enable and you can input value in this tab.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -3757,7 +3757,7 @@
         <note>
           <title>File Size Limits</title>
           <para>
-      The size of the uploaded file depends on the size limit of the uploaded file that you set up in the &apos;Edit&apos; mode of Sites Explorer. If your file size exceeds the limit, a pop-up message will appears to alert you.
+      The size of the uploaded file depends on the size limit of the uploaded file that you set up in the &apos;Edit&apos; mode of Content Explorer. If your file size exceeds the limit, a pop-up message will appears to alert you.
      </para>
         </note>
       </step>
@@ -3865,7 +3865,7 @@
   <section id="sect-User_Guide-Actions-View_Permissions">
     <title>View Permissions</title>
     <para>
-   This function emables an administrator to manage the permissions for nodes.
+   This function enables an administrator to manage the permissions for nodes.
   </para>
     <procedure id="proc-User_Guide-View_Permissions-View_Permissions">
       <title>View Permissions</title>
@@ -3970,7 +3970,7 @@
       icon next to the <emphasis role="bold">User Or Group</emphasis> field.
     </para>
         <para>
-     The <emphasis role="bold">Select memebership</emphasis> form that appears allows you to select users by membership. Select a group on the left pane and then select membership types on the right.
+     The <emphasis role="bold">Select membership</emphasis> form that appears allows you to select users by membership. Select a group on the left pane and then select membership types on the right.
     </para>
       </step>
       <step id="step-User_Guide-Add_Permissions-To_add_all_usersgroups_with_read_access">
@@ -4091,7 +4091,7 @@
                 </imageobject>
               </mediaobject>
               <para>
-        Select this tab to review the properties for the selcted node without making any changes.
+        Select this tab to review the properties for the selected node without making any changes.
        </para>
             </listitem>
           </varlistentry>
@@ -4345,7 +4345,7 @@
     .
   </para>
     <para>
-   A message will appeared confirming the action.
+   A message will appear for you to confirm the action.
   </para>
   </section>
 </section>

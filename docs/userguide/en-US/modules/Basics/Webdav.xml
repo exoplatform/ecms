@@ -27,7 +27,7 @@
         <term>Site Manipulation</term>
         <listitem>
           <para>
-      WebDAV supports copy and move actions and the creaion of <emphasis>collections</emphasis> (file system directories)
+      WebDAV supports copy and move actions and the creation of <emphasis>collections</emphasis> (file system directories)
      </para>
         </listitem>
       </varlistentry>
@@ -154,7 +154,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Group &gt; Sites Explorer</emphasis> in the Administration bar.
+     Click <emphasis role="bold">Group &gt; Content Explorer</emphasis> in the administration bar.
     </para>
       </step>
       <step>
@@ -257,7 +257,7 @@
         </step>
         <step>
           <para>
-      Right-click the content files or directories (hold the <emphasis>Ctrl</emphasis> key to select multiple files at once) and select      <emphasis role="bold">Delete</emphasis> from the context meu.</para>
+      Right-click the content files or directories (hold the <emphasis>Ctrl</emphasis> key to select multiple files at once) and select      <emphasis role="bold">Delete</emphasis> from the context menu.</para>
           <mediaobject>
             <imageobject role="html">
               <imagedata align="center" scale="" fileref="images/webdavcontextdelete.png" format="PNG"/>

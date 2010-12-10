@@ -4,15 +4,15 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Access_Sites_Explorer">
-  <title>Access Sites Explorer</title>
+  <title>Access Content Explorer</title>
   <para>
-  This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Sites Explorer but the performing actions on Sites Explorer depending on the role of each user.
+  This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Content Explorer but the performing actions on Content Explorer depending on the role of each user.
  </para>
   <procedure>
     <title/>
     <step>
       <para>
-    Go to <emphasis role="bold">Group &gt; Sites Explorer </emphasis>on the administration bar:
+    Go to <emphasis role="bold">Group &gt; Content Explorer </emphasis>on the administration bar:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -23,7 +23,7 @@
         </imageobject>
       </mediaobject>
       <para>
-    A list of all drives organized in groups: Personal drives, Group drives and General drives in the Sites Explorer displays:
+    A list of all drives organized in groups: Personal drives, Group drives and General drives in the Content Explorer displays:
    </para>
       <mediaobject>
         <imageobject role="html">

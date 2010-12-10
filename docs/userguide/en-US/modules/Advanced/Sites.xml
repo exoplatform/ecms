@@ -209,7 +209,7 @@
     displayed on the screen. This new site will be added in the exiting sites
     in <emphasis role="bold">Site </emphasis> on the administration bar and
     concurrently in a drive that includes all its default files.</para>
-    <para>To see it in the drive, click <emphasis role="bold">Group &gt; Sites Explorer</emphasis> on the administrator bar.</para>
+    <para>To see it in the drive, click <emphasis role="bold">Group &gt; Content Explorer</emphasis> on the administrator bar.</para>
     <mediaobject>
       <imageobject role="html">
         <imagedata width="444" align="center" scale="100" fileref="images/sitesexplorer.png" format="PNG"/>
@@ -219,7 +219,7 @@
       </imageobject>
     </mediaobject>
     <para>For example, after creating a portal named &apos;eXo&apos;, there is a drive
-    named &apos;eXo&apos; in Sites Explorer:</para>
+    named &apos;eXo&apos; in Content Explorer:</para>
     <mediaobject>
       <imageobject role="html">
         <imagedata width="444" align="center" scale="130" fileref="images/exosite.png" format="PNG"/>

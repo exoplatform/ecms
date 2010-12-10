@@ -15,7 +15,7 @@
    Users instantly get newsletters from your email in order to update the newest information about categories and subscriptions that users frequently care about.
   </para>
     <para>
-   Do the following to subscribe to newsletters from exoservice:
+   Do the following to subscribe to newsletters from eXo Service:
   </para>
     <procedure>
       <step>
@@ -71,9 +71,9 @@
     </procedure>
   </section>
   <section id="sect-User_Guide-Newsletters-Newsletter_Manager">
-    <title>Newsletter Manager</title>
+    <title>Manage Newsletters</title>
     <para>
-   eXo Content  facilitates administrators to easily and quickly manage and control newsletters. Go to<emphasis role="bold"> Groups &gt; Newsletter Manager</emphasis> on the Administration bar to access to  the Newsletter Manager.
+   eXo Content  facilitates administrators to easily and quickly manage and control newsletters. Go to<emphasis role="bold"> Group &gt; Newsletters</emphasis> on the administration bar to access Newsletters.
   </para>
     <mediaobject>
       <imageobject>
@@ -91,7 +91,7 @@
           <title>Add a new category</title>
           <step>
             <para>
-       Click <emphasis role="bold">New Category</emphasis> on the action bar of the Newsletter Manager page. The Category form will appear.
+       Click <emphasis role="bold">New Category</emphasis> on the action bar of the Newsletters page. The Category form will appear.
       </para>
             <mediaobject>
               <imageobject>
@@ -472,12 +472,12 @@
                 <imagedata fileref="images/icon1.png" format="PNG"/>
               </imageobject>
             </inlinemediaobject>
-       and select the category from the drop down menu.
+       and select the category from the drop-down menu.
      </para>
         </step>
         <step>
           <para>
-      Enter the rest of ther values in the form.
+      Enter the rest of their values in the form.
      </para>
         </step>
         <step>
@@ -721,7 +721,7 @@
     <section id="sect-User_Guide-Newsletter_Manager-Delete_a_newsletter">
       <title>Delete a newsletter</title>
       <para>
-    Administrator can delete obselete newsletters.
+    Administrator can delete obsolete newsletters.
    </para>
       <procedure id="proc-User_Guide-Delete_a_newsletter-Delete_a_newsletter">
         <title>Delete a newsletter</title>
@@ -795,7 +795,7 @@
         <title>Creating Newsletters</title>
         <step>
           <para>
-      Go to <emphasis role="bold">Groups &gt; Newsletter Manager</emphasis> on the Administration bar. The eXo Newsletter appears.
+      Go to <emphasis role="bold">Group &gt; Newsletters </emphasis> on the administration bar. The eXo Newsletter appears.
      </para>
         </step>
         <step>
@@ -904,7 +904,7 @@
         </step>
         <step>
           <para>
-      Select <emphasis role="bold">Contact Us</emphasis> on the navagation bar, or go to <emphasis role="bold">Site &gt; Acme &gt; Contact Us</emphasis>.
+      Select <emphasis role="bold">Contact Us</emphasis> on the navigation bar, or go to <emphasis role="bold">Site &gt; Acme &gt; Contact Us</emphasis>.
      </para>
           <mediaobject>
             <imageobject>

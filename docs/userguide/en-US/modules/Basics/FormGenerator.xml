@@ -4,15 +4,15 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Form_Generator">
-  <title>Form Generator</title>
+  <title>Form Builder</title>
   <para>
-  The <emphasis role="bold">Form Generator</emphasis> portlet enables users to create and to edit template of document types. Documents are stored in the so-called node; therefore, the term “node” and node types are often applied.
+  The <emphasis role="bold">Form Builder</emphasis> portlet enables users to create and to edit template of document types. Documents are stored in the so-called node; therefore, the term “node” and node types are often applied.
  </para>
   <procedure>
     <title/>
     <step>
       <para>
-    Go to <emphasis role="bold">Group &gt; Form Generator</emphasis> on the <emphasis role="bold">Administration</emphasis> bar. The <emphasis role="bold">Form Generator</emphasis> will appear:
+    Go to <emphasis role="bold">Group &gt; Form Builder</emphasis> on the <emphasis role="bold">administration</emphasis> bar. The <emphasis role="bold">Form Builder</emphasis> will appear:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -35,7 +35,7 @@
     </step>
     <step>
       <para>
-    Click the <emphasis role="bold">Form builder</emphasis> tab that allows users to set properties for a node. Available components are displayed on the left panel.
+    Click the <emphasis role="bold">Form Builder</emphasis> tab that allows you to set properties for a node. Available components are displayed on the left pane.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -48,7 +48,7 @@
     </step>
     <step>
       <para>
-    Click the desired components on the left panel. The selected components will be displayed on the right panel.
+    Click the desired components on the left pane. The selected components will be displayed on the right pane.
    </para>
     </step>
     <step>
@@ -118,7 +118,7 @@
             </row>
             <row>
               <entry> Default Value </entry>
-              <entry> To display the dafault value </entry>
+              <entry> To display the default value </entry>
             </row>
             <row>
               <entry> Guidelines for User </entry>
@@ -128,7 +128,7 @@
         </tgroup>
       </table>
       <para>
-    To delete the component click the 
+    To delete the component, click the 
     <inlinemediaobject>
           <imageobject>
             <imagedata fileref="images/trashicon.png" format="PNG"/>

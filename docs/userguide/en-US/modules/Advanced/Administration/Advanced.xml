@@ -13,7 +13,7 @@
     <para>The function supports you to manage queries. It allows adding,
     editing and deleting queries.</para>
 
-    <para>Go to <emphasis role="bold">Sites Administration &gt; Advanced
+    <para>Go to <emphasis role="bold">Administration &gt; Advanced
     Configuration &gt; Manage Queries.</emphasis></para>
 
     <mediaobject>
@@ -166,7 +166,7 @@
     <emphasis role="bold">WCM</emphasis> and<emphasis role="bold"> Browser
     Content </emphasis>system.</para>
 
-    <para>Go to <emphasis role="bold">Sites Administration &gt; Advanced
+    <para>Go to <emphasis role="bold">Administration &gt; Advanced
     Configuration &gt; Manage Scripts</emphasis>.</para>
 
     <mediaobject>
@@ -400,23 +400,23 @@
     <title>Manage Unlocks</title>
 
     <para>All locked nodes are listed and managed by administrators in the
-    <emphasis role="bold">Sites Administration</emphasis>. There are two ways
-    that help administrators unlock nodes: unlock nodes in the right-click
-    menu in <emphasis role="bold">Site Explorer</emphasis> or unlock nodes in
-    the <emphasis role="bold">Sites Administration.</emphasis></para>
+    <emphasis role="bold">Administration page</emphasis>. There are two ways
+    that help administrators unlock nodes: unlock nodes in the right-click the
+    menu in <emphasis role="bold">Content Explorer</emphasis> or unlock nodes in
+    the <emphasis role="bold">Administration page.</emphasis></para>
 
     <procedure id="proc-User_Guide-Manage_Unlocks-Unlock_Nodes">
       <title>Unlock Nodes</title>
 
       <step>
-        <para>Go to <emphasis role="bold">Sites Administration</emphasis> on
+        <para>Go to <emphasis role="bold">Administration</emphasis> on
         the navigation bar.</para>
       </step>
 
       <step>
         <para>Select <emphasis role="bold">Advanced Configuration &gt; Manage
-        Unlocks</emphasis> on the <emphasis role="bold">Admin the WCM main
-        functions</emphasis> panel on the left. The locked nodes will be
+        Unlocks</emphasis> on the <emphasis role="bold">Manage the main ECM
+        functions</emphasis> pane on the left. The locked nodes will be
         listed on the right panel.</para>
 
         <mediaobject>

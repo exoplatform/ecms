@@ -5,16 +5,16 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Ontology">
-  <title>Ontology</title>
+  <title>Categories and Tags</title>
 
   <section id="sect-User_Guide-Ontology-Folksonomy_Management">
-    <title>Folksonomy Management</title>
+    <title>Manage Tags</title>
 
-    <para>The Folksonomy enables you to manage tag styles. The tag style will
+    <para>Manage Tags enables you to manage tag styles. The tag style will
     be changed depending on the number of documents in a tag.</para>
 
-    <para>Go to <guimenu>Sites Administration &gt; Ontologies &gt; Manage
-    Folksonomy</guimenu>.</para>
+    <para>Go to <guimenu>Administration &gt; Manage Categories &gt; Manage
+    Tags</guimenu>.</para>
 
     <mediaobject>
       <imageobject>
@@ -249,15 +249,15 @@
   </section>
 
   <section id="sect-User_Guide-Ontology-Manage_Taxonomy_Trees">
-    <title>Manage Taxonomy Trees</title>
+    <title>Manage Taxonomy</title>
 
     <para>A Taxonomy may be understood as a classification practice and
     science. It is used to sort documents, aiming at facilitating searches.
     The Taxonomy management includes adding, editing and deleting a taxonomy
     tree.</para>
 
-    <para>Go to <guilabel>Sites Administration &gt; Ontologies &gt; Manage
-    Taxonomy Trees</guilabel>.</para>
+    <para>Go to <guilabel>Administration &gt; Categories and Tags &gt; Manage
+    Categories</guilabel>.</para>
 
     <mediaobject>
       <imageobject>

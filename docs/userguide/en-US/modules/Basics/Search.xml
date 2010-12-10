@@ -5,7 +5,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Search_in_Sites_Explorer">
-  <title>Search in Sites Explorer</title>
+  <title>Search in Content Explorer</title>
   <para>
   There are three ways to search an existing node:
  </para>
@@ -60,7 +60,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     The search results will appear empty if no node cotains the search string.
+     The search results will appear empty if no node contains the search string.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -490,7 +490,7 @@
             <title>Add a constraint by date</title>
             <step>
               <para>
-        Click the check box beside the field with the drop down menu (below the <emphasis role="bold">Property</emphasis> entries).
+        Click the check box beside the field with the drop-down menu (below the <emphasis role="bold">Property</emphasis> entries).
        </para>
             </step>
             <step>
@@ -790,7 +790,7 @@
       </step>
       <step>
         <para>
-     Click on the required document or folder name to view and or download them.
+     Click the required document or folder name to view and or download them.
     </para>
       </step>
     </procedure>
