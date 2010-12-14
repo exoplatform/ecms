@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV">
@@ -79,9 +79,9 @@
 	</section>
 	
 	 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">
-		<title>How to Use WebDAV With eXo Content</title>
+		<title>How to Use WebDAV With &PRODUCT;</title>
 		 <para>
-			eXo Content supports WebDAV in two ways:
+			&PRODUCT; supports WebDAV in two ways:
 		</para>
 		 <para>
 			This way is used when you are on a Window System and your computer has to be connected to the Internet or Intranet.

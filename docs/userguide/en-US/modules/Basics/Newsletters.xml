@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Newsletters">
 	<!--  This document was created with Syntext Serna Free.  --> <title>Newsletters</title>
 	 <para>
-		eXo Content provides a newsletter service aiming at helping users quickly get the updated newsletters from a website.
+		&PRODUCT; provides a newsletter service aiming at helping users quickly get the updated newsletters from a website.
 	</para>
 	 <section id="sect-User_Guide-Newsletters-Newsletter_Viewer">
 		<title>Newsletter Viewer</title>
@@ -86,7 +86,7 @@
 	 <section id="sect-User_Guide-Newsletters-Manage_Newsletters">
 		<title>Manage Newsletters</title>
 		 <para>
-			eXo Content facilitates administrators to easily and quickly manage and control newsletters. Go to<emphasis role="bold"> Group &gt; Newsletters</emphasis> on the administration bar to access Newsletters.
+			&PRODUCT; facilitates administrators to easily and quickly manage and control newsletters. Go to<emphasis role="bold"> Group &gt; Newsletters</emphasis> on the administration bar to access Newsletters.
 		</para>
 		 <mediaobject>
 			<imageobject>
@@ -1088,7 +1088,7 @@
 		 <section id="sect-User_Guide-Manage_Newsletters-Newsletters">
 			<title>Newsletters</title>
 			 <para>
-				Each subscription consists of many newsletters. <emphasis role="bold">WCM</emphasis> helps you easily create newsletters by following these steps.
+				Each subscription consists of many newsletters. <emphasis role="bold">&PRODUCT;</emphasis> helps you easily create newsletters by following these steps.
 			</para>
 			 <procedure id="proc-User_Guide-Newsletters-Creating_Newsletters">
 				<title>Creating Newsletters</title>

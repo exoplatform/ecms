@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Actions">
@@ -9,7 +9,7 @@
 		Actions are added in tabs in Content Explorer by administrators. Depending on each tab and each drive you are browsing and your role, you can see which action.
 	</para>
 	 <para>
-		eXo Content consists of many actions. This section shows you how to take all the actions in Content Explorer.
+		&PRODUCT; consists of many actions. This section shows you how to take all the actions in Content Explorer.
 	</para>
 	 <section id="sect-User_Guide-Actions-Add_Category">
 		<title>Add Category</title>
@@ -70,7 +70,7 @@
 	 <section id="sect-User_Guide-Actions-Add_a_document">
 		<title>Add a document</title>
 		 <para>
-			There are several types of document in eXo Content, including <emphasis role="bold">File</emphasis>, <emphasis role="bold">Article</emphasis>, <emphasis role="bold">Podcast</emphasis>, <emphasis role="bold">Sample node</emphasis>, <emphasis role="bold">File Plan</emphasis>, <emphasis role="bold">Kofax</emphasis>.
+			There are several types of document in &PRODUCT;, including <emphasis role="bold">File</emphasis>, <emphasis role="bold">Article</emphasis>, <emphasis role="bold">Podcast</emphasis>, <emphasis role="bold">Sample node</emphasis>, <emphasis role="bold">File Plan</emphasis>, <emphasis role="bold">Kofax</emphasis>.
 		</para>
 		 <para>
 			The table below outlines which nodes types different document types can be added to. The rows indicate what the node in the left column can be added to. The columns indicate what the node at the top can contain.

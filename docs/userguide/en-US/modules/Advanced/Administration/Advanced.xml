@@ -168,7 +168,7 @@
 	 <section id="sect-User_Guide-Advanced_Configuration-Manage_Scripts">
 		<title>Manage Scripts</title>
 		 <para>
-			The function enables users to manage all script codes in the <emphasis role="bold">WCM</emphasis> and<emphasis role="bold"> Browser Content </emphasis>system.
+			The function enables users to manage all script codes in the <emphasis role="bold">&PRODUCT;</emphasis> and<emphasis role="bold"> Browser Content </emphasis>system.
 		</para>
 		 <para>
 			Go to <emphasis role="bold">Administration &gt; Advanced Configuration &gt; Manage Scripts</emphasis>.
@@ -184,7 +184,7 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-						<emphasis role="bold">WCM</emphasis> <emphasis role="bold">Scripts</emphasis>: scripts are used in <emphasis role="bold">WCM</emphasis>
+						<emphasis role="bold">&PRODUCT;</emphasis> <emphasis role="bold">Scripts</emphasis>: scripts are used in <emphasis role="bold">&PRODUCT;</emphasis>
 					</para>
 
 				</listitem>
@@ -529,7 +529,7 @@
 	 <section id="sect-User_Guide-Advanced_Configuration-Create_Action_Types">
 		<title>Create Action Types</title>
 		 <para>
-			This function allows managing of all action nodes in the <emphasis role="bold">eXo Content</emphasis>.
+			This function allows managing of all action nodes in the <emphasis role="bold">&PRODUCT;</emphasis>.
 		</para>
 		 <procedure id="proc-User_Guide-Create_Action_Types-Create_an_Action_Type">
 			<title>Create an Action Type</title>

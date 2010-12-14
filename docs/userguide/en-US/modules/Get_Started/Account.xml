@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Account">
@@ -224,13 +224,13 @@
 	 <section id="sect-User_Guide-Account-Sign_In">
 		<title>Sign In</title>
 		 <para>
-			This function enables you to go into WCM in the private mode.
+			This function enables you to go into &PRODUCT; in the private mode.
 		</para>
 		 <procedure id="proc-User_Guide-Sign_In-Sign_in">
 			<title>Sign in</title>
 			 <step>
 				<para>
-					Go to the WCM in the public mode by inputting the URL in the address bar (e.g: <ulink type="http" url="http://localhost:8080//portal/public/classic/" />).
+					Go to the &PRODUCT; in the public mode by inputting the URL in the address bar (e.g: <ulink type="http" url="http://localhost:8080//portal/public/classic/" />).
 				</para>
 
 			</step>

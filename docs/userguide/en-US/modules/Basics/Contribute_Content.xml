@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Contribute_Content">
@@ -8,7 +8,7 @@
 	 <section id="sect-User_Guide-Contribute_Content-Edit_Mode">
 		<title>Edit Mode</title>
 		 <para>
-			A site in eXo Content has two modes (Published mode and Edit mode) which is specific for editing site and viewing site. You can easily switch between these modes by selecting in the drop-down list at the top left corner.
+			A site in &PRODUCT; has two modes (Published mode and Edit mode) which is specific for editing site and viewing site. You can easily switch between these modes by selecting in the drop-down list at the top left corner.
 		</para>
 		 <mediaobject>
 			<imageobject>

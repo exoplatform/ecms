@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Views">
@@ -9,12 +9,12 @@
 		There have many drives in the Content Explorer. Each drive has some views that enable you to look at data in the drive in a particular way. Each view has some tabs and each tab contains some functions (or called actions).
 	</para>
 	 <para>
-		eXo Content supports you four ways to view nodes in a specific folder and show actions of corresponding tab on the Actions bar.
+		&PRODUCT; supports you four ways to view nodes in a specific folder and show actions of corresponding tab on the Actions bar.
 	</para>
 	 <note>
 		<title>View Types</title>
 		 <para>
-			The number of View types depends on what drive you are browsing.You can manage the view types in the WCM Administration. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views" /> for details
+			The number of View types depends on what drive you are browsing.You can manage the view types in the &PRODUCT; Administration. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views" /> for details
 		</para>
 
 	</note>
@@ -104,16 +104,6 @@
 				<para>
 					Select a folder (on the left or right panel) that you want to add a thumbnail image.
 				</para>
-				<!--   Removed in WCM 2.1.1 
-               <mediaobject>
-      <imageobject role="html">
-       <imagedata align="center" fileref="images/addthumbnail.png" format="PNG" scale="90" width="444" />
-      </imageobject>
-       <imageobject role="fo">
-       <imagedata align="center" contentwidth="150mm" fileref="images/addthumbnail.png" format="PNG" width="444" />
-      </imageobject>
-
-     </mediaobject>  -->
 			</step>
 			 <step>
 				<para>

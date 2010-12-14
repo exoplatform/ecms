@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Fast_Content_Creator">
 	<!--  This document was created with Syntext Serna Free.  --> <title>Fast Content Creator</title>
 	 <para>
-		Site Publisher provides users with the <emphasis role="bold">Fast Content Creator</emphasis> portlet that allows users to create document content quickly. The Fast Content Creator portlet is applied in the <emphasis role="bold">Contact Us</emphasis> portlet on the navigation bar:
+		&PRODUCT; provides users with the <emphasis role="bold">Fast Content Creator</emphasis> portlet that allows users to create document content quickly. The Fast Content Creator portlet is applied in the <emphasis role="bold">Contact Us</emphasis> portlet on the navigation bar:
 	</para>
 	 <procedure>
 		<title></title>

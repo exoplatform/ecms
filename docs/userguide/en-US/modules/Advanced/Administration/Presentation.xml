@@ -10,7 +10,7 @@
 	 <section id="sect-User_Guide-Content_Presentation_Manager-Manage_a_Template">
 		<title>Manage a Template</title>
 		 <para>
-			When creating a node in eXo Content, you must set its properties. Thus, each node needs to have a form to enter data for their properties (called the dialog template), and display the existing values (called the view template). The template management allows users to view, delete and modify the predefined templates or to add a new template.
+			When creating a node in &PRODUCT;, you must set its properties. Thus, each node needs to have a form to enter data for their properties (called the dialog template), and display the existing values (called the view template). The template management allows users to view, delete and modify the predefined templates or to add a new template.
 		</para>
 		 <figure id="figu-User_Guide-Manage_a_Template-Manage_Templates_Form">
 			<title>Manage Templates Form</title>
@@ -371,7 +371,7 @@
 	 <section id="sect-User_Guide-Content_Presentation_Manager-Metadata_Management">
 		<title>Metadata Management</title>
 		 <para>
-			Metadata in its simplest form is "data about data". Generally, it may be understood as information that describes, or supplements the central data. The metadata management allows managing nodes in the metadata format in the WCM system. The metadata may be considered as information used to describe the data. When data are provided to the end users, the metadata allow users to understand about information in more details. All metadata nodes can combine with other nodes to create a new node (add mix).
+			Metadata in its simplest form is "data about data". Generally, it may be understood as information that describes, or supplements the central data. The metadata management allows managing nodes in the metadata format in the &PRODUCT; system. The metadata may be considered as information used to describe the data. When data are provided to the end users, the metadata allow users to understand about information in more details. All metadata nodes can combine with other nodes to create a new node (add mix).
 		</para>
 		 <procedure id="proc-User_Guide-Metadata_Management-View_Metadata">
 			<title>View Metadata</title>

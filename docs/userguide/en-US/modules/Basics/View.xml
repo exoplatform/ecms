@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-View_a_site">
 	<!--  This document was created with Syntext Serna Free.  --> <title>View a site</title>
 	 <para>
-		In eXo Content, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
+		In &PRODUCT;, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
 	</para>
 	 <mediaobject>
 		<imageobject role="html">

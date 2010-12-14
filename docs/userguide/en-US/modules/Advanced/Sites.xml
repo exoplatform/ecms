@@ -4,10 +4,10 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Set_Up_a_Website">
-	<!--  This document was created with Syntext Serna Free.  --> <title>Set Up a Website</title>
+	<title>Set Up a Website</title>
 	 <note>
 		<para>
-			In <emphasis role="bold">eXo Content</emphasis>, we use the 'Website' term equally to the 'Portal' term. It means that creating a new portal is creating a new website. Thus, you can also edit, delete, view a website as a portal.
+			In <emphasis role="bold">&PRODUCT;</emphasis>, we use the 'Website' term equally to the 'Portal' term. It means that creating a new portal is creating a new website. Thus, you can also edit, delete, view a website as a portal.
 		</para>
 		 <para>
 			However, only Administrators can create a new site.
