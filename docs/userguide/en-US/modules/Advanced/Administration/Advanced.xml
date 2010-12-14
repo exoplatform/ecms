@@ -1,568 +1,630 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Advanced_Configuration">
-  <title>Advanced Configuration</title>
-
-  <section id="sect-User_Guide-Advanced_Configuration-Manage_Queries">
-    <title>Manage Queries</title>
-
-    <para>The function supports you to manage queries. It allows adding,
-    editing and deleting queries.</para>
-
-    <para>Go to <emphasis role="bold">Administration &gt; Advanced
-    Configuration &gt; Manage Queries.</emphasis></para>
-
-    <mediaobject>
-      <imageobject>
-        <imagedata align="center" contentwidth="150mm"
-                   fileref="images/managequeriestable.png" format="PNG"
-                   width="444" />
-      </imageobject>
-    </mediaobject>
-
-    <procedure id="proc-User_Guide-Manage_Queries-_Add_a_new_query_">
-      <title>Add a new query</title>
-
-      <step>
-        <para>Show the <emphasis role="bold">Add Query</emphasis> form by
-        clicking the <guibutton>Add Query</guibutton> button in the <emphasis
-        role="bold">Manage Queries</emphasis> form.</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/addqueryform.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Enter a query name for the <emphasis role="bold">Name</emphasis>
-        field.</para>
-      </step>
-
-      <step>
-        <para>Select the query type. <itemizedlist>
-            <listitem>
-              <para><emphasis role="bold">Xpath</emphasis>: (XML Path
-              Language) is a language for selecting nodes. For example,
-              <filename>/jcr:root/Documents/Live</filename></para>
-            </listitem>
-
-            <listitem>
-              <para><emphasis role="bold">SQL</emphasis>: (Structured Query
-              Language) is a database computer language.</para>
-            </listitem>
-          </itemizedlist></para>
-      </step>
-
-      <step>
-        <para>Enter the statement for query. The name of node type must be
-        unique.</para>
-      </step>
-
-      <step>
-        <para>Check or uncheck the 'Enable cache results' option. If you tick
-        this checkbox, for the fist time you use this query to search, the
-        result will be cached. For the second time you search using this
-        query, it will show the cached results. After 45minutes, the cache
-        will be removed.</para>
-
-        <para>For example: you have the query <literal>Test</literal> with
-        statement <literal>//element (*, nt:file)</literal>. In the File
-        Explorer, you have a <filename>nt:file</filename> document named
-        <filename>File1</filename>. When you execute the query
-        <literal>Test</literal>, only document <filename>File1</filename> will
-        be shown. After that, create a <filename>nt:file</filename> document
-        named <filename>File2</filename> and execute query
-        <literal>Test</literal>, only document <filename>File2</filename>
-        document will be listed. After 45 minutes, the cache will be removed.
-        When you execute the query <literal>Test</literal>, the documents
-        <filename>File1</filename> and <filename>File2</filename> will be
-        listed.</para>
-      </step>
-
-      <step>
-        <para>Select permissions for a group that can use this query by
-        clicking <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/pluspermissionbutton.png"
-                         format="PNG" />
-            </imageobject>
-          </inlinemediaobject></para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/selectpermission.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to finish adding a
-        new query.</para>
-      </step>
-    </procedure>
-
-    <procedure id="proc-User_Guide-Manage_Queries-Edit_a_query">
-      <title>Edit a query</title>
-
-      <step>
-        <para>Click the <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> icon corresponding to the query you want to
-        edit. The <emphasis role="bold">Edit Query</emphasis> form will
-        appear:</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/editqueryform.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Edit the properties of the selected query.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to accept all
-        changes.</para>
-      </step>
-    </procedure>
-
-    <procedure id="proc-User_Guide-Manage_Queries-Delete_a_query">
-      <title>Delete a query</title>
-
-      <step>
-        <para>Click <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> corresponding to the query you want to delete.
-        A confirmation message will appear.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">OK</emphasis> to accept deleting
-        this query, or <emphasis role="bold">Cancel</emphasis> to discard this
-        action.</para>
-      </step>
-    </procedure>
-  </section>
-
-  <section id="sect-User_Guide-Advanced_Configuration-Manage_Scripts">
-    <title>Manage Scripts</title>
-
-    <para>The function enables users to manage all script codes in the
-    <emphasis role="bold">WCM</emphasis> and<emphasis role="bold"> Browser
-    Content </emphasis>system.</para>
-
-    <para>Go to <emphasis role="bold">Administration &gt; Advanced
-    Configuration &gt; Manage Scripts</emphasis>.</para>
-
-    <mediaobject>
-      <imageobject>
-        <imagedata align="center" fileref="images/managescriptsform.png"
-                   format="PNG" width="444" />
-      </imageobject>
-    </mediaobject>
-
-    <para>Details: <itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">WCM</emphasis> <emphasis
-          role="bold">Scripts</emphasis>: scripts are used in <emphasis
-          role="bold">WCM</emphasis></para>
-        </listitem>
-
-        <listitem>
-          <para><emphasis role="bold">BC Scripts</emphasis>: scripts are used
-          in <emphasis role="bold">Content Browser</emphasis>.</para>
-
-          <para><emphasis role="bold">The ECM Scripts tab:</emphasis></para>
-        </listitem>
-      </itemizedlist></para>
-
-    <procedure id="proc-User_Guide-Manage_Scripts-Add_a_new_script_in_ECM">
-      <title>Add a new script in <emphasis role="bold">ECM</emphasis></title>
-
-      <step>
-        <para>Select <emphasis role="bold">ECM Scripts</emphasis> tab in the
-        <emphasis role="bold">Manage Script</emphasis>.</para>
-      </step>
-
-      <step>
-        <para>Click the <emphasis role="bold">Add</emphasis> button to open
-        the <emphasis role="bold">Add/Edit script</emphasis> form:</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center"
-                       fileref="images/ecmaddeditscriptsform.png" format="PNG"
-                       width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Enter a value for the <emphasis role="bold">Script
-        content</emphasis> field.</para>
-      </step>
-
-      <step>
-        <para>Enter a script name for the <emphasis role="bold">Script
-        name</emphasis> field. <itemizedlist>
-            <listitem>
-              <para>The script name must be unique.</para>
-            </listitem>
-
-            <listitem>
-              <para>The name must not contain special characters such as
-              !,@,#,$,%,&amp;,*,(,).</para>
-            </listitem>
-          </itemizedlist></para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to accept adding the
-        new script.</para>
-      </step>
-    </procedure>
-
-    <procedure id="proc-User_Guide-Manage_Scripts-Edit_an_ECM_script">
-      <title>Edit an ECM script</title>
-
-      <para>To edit an ECM script, do the following:</para>
-
-      <step>
-        <para>In the <emphasis role="bold">ECM Scripts</emphasis> tab, click
-        the <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> icon that corresponds to the script that you
-        want to edit. The <emphasis role="bold">Add/Edit script</emphasis>
-        form will appear:</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/addeditscriptsform.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Edit the properties in this form.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to save all
-        changes.</para>
-      </step>
-    </procedure>
-
-    <procedure id="proc-User_Guide-Manage_Scripts-Deleting_an_ECM_script">
-      <title>Delete an ECM script</title>
-
-      <para>To delete an ECM script, do the following:</para>
-
-      <step>
-        <para>In the <emphasis role="bold">ECM Scripts</emphasis> tab, click
-        <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> on the script that you want to delete. A
-        confirmation message will appear.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">OK</emphasis> to accept deleting
-        this action, or <emphasis role="bold">Cancel</emphasis> to discard
-        this action.</para>
-      </step>
-    </procedure>
-
-    <para><emphasis role="bold">The BC Scripts tab:</emphasis></para>
-
-    <mediaobject>
-      <imageobject>
-        <imagedata align="center" fileref="images/bcscriptstab.png"
-                   format="PNG" width="444" />
-      </imageobject>
-    </mediaobject>
-
-    <procedure id="proc-User_Guide-Manage_Scripts-Add_a_BC_script">
-      <title>Add a BC script</title>
-
-      <para>To add a BC script, do the following:</para>
-
-      <step>
-        <para>In the <emphasis role="bold">Manage Scripts</emphasis>, select
-        the <emphasis role="bold">BC Scripts</emphasis> tab.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">Add</emphasis> to open the <emphasis
-        role="bold">Add/Edit script</emphasis> form:</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/bcaddeditscriptform.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Input script content for the <emphasis role="bold">Script
-        content</emphasis> field.</para>
-      </step>
-
-      <step>
-        <para>Input a script name into the <emphasis
-        role="bold">Name</emphasis> field.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to finish adding the
-        new script.</para>
-      </step>
-    </procedure>
-
-    <procedure id="proc-User_Guide-Manage_Scripts-Editing_a_BC_script">
-      <title>Edit a BC script</title>
-
-      <para>To edit a BC script, do the following::</para>
-
-      <step>
-        <para>In the <emphasis role="bold">BC Script</emphasis> tab, click
-        <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> on a script that you want to edit.</para>
-
-        <para>The <emphasis role="bold">Add/Edit script</emphasis> form will
-        appear:</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/bceditscriptform.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Edit the properties that you want.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to accept all
-        changes.</para>
-      </step>
-    </procedure>
-
-    <procedure id="proc-User_Guide-Manage_Scripts-Deleting_a_BC_script">
-      <title>Delete a BC script</title>
-
-      <para>To delete a BC script, do the following:</para>
-
-      <step>
-        <para>In the <emphasis role="bold">BC Scripts</emphasis> tab, click
-        <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> on the script you want to delete. A
-        confirmation message appears.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">OK</emphasis> to accept deleting
-        this script, or <emphasis role="bold">Cancel</emphasis> to discard
-        this action.</para>
-      </step>
-    </procedure>
-  </section>
-
-  <section id="sect-User_Guide-Advanced_Configuration-Manage_Unlocks">
-    <title>Manage Unlocks</title>
-
-    <para>All locked nodes are listed and managed by administrators in the
-    <emphasis role="bold">Administration page</emphasis>. There are two ways
-    that help administrators unlock nodes: unlock nodes in the right-click the
-    menu in <emphasis role="bold">Content Explorer</emphasis> or unlock nodes in
-    the <emphasis role="bold">Administration page.</emphasis></para>
-
-    <procedure id="proc-User_Guide-Manage_Unlocks-Unlock_Nodes">
-      <title>Unlock Nodes</title>
-
-      <step>
-        <para>Go to <emphasis role="bold">Administration</emphasis> on
-        the navigation bar.</para>
-      </step>
-
-      <step>
-        <para>Select <emphasis role="bold">Advanced Configuration &gt; Manage
-        Unlocks</emphasis> on the <emphasis role="bold">Manage the main ECM
-        functions</emphasis> pane on the left. The locked nodes will be
-        listed on the right panel.</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/manageunlockstab.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>In the <emphasis role="bold">Locked Node</emphasis> tab on the
-        right panel, administrators can unlock nodes by clicking
-        <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/unlockicon.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> that corresponds to nodes which need to be
-        unlocked. The unlocked nodes will disappear from the locked node
-        list.</para>
-
-        <para>Administrators can manage and add the unlock permission for
-        another group and users in the <emphasis role="bold">Manage
-        Lock</emphasis> tab.</para>
-      </step>
-
-      <step>
-        <para>Select the group on the <emphasis role="bold">Select
-        group</emphasis> panel and the corresponding membership on the
-        <emphasis role="bold">Select membership</emphasis>panel. The selected
-        group will be lisetd in the <emphasis role="bold">Group and
-        Users</emphasis> column. However, administrators can also click the
-        <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> if they want to allow any users to unlock
-        nodes.</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/manageunlocksform.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>In case, administrators want to remove the unlock permission of
-        groups, click the <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> that corresponds to the group in order to
-        remove them form the Unlock permission list except the group
-        <filename>*:/platform/administrator</filename> and
-        <literal>root</literal>.</para>
-      </step>
-    </procedure>
-  </section>
-
-  <section id="sect-User_Guide-Advanced_Configuration-Creating_Action_Types">
-    <title>Create Action Types</title>
-
-    <para>This function allows managing of all action nodes in the <emphasis
-    role="bold">eXo Content</emphasis>.</para>
-
-    <procedure id="proc-User_Guide-Creating_Action_Types-Create_an_Action_Type">
-      <title>Create an Action Type</title>
-
-      <step>
-        <para>Go to the <emphasis role="bold">Sites<emphasis role="bold">
-        </emphasis></emphasis><emphasis role="bold">Administration</emphasis>
-        on the navigation bar.</para>
-      </step>
-
-      <step>
-        <para>Select <emphasis role="bold">Advanced Configuration &gt; Create
-        an Action Type</emphasis>.</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/createactiontypetab.png"
-                       format="PNG" width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Click the <emphasis role="bold">Add</emphasis> button to open
-        the <emphasis role="bold">Action Type Form</emphasis> form:</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center"
-                       fileref="images/createactiontypeform.png" format="PNG"
-                       width="444" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>Select the action type.</para>
-      </step>
-
-      <step>
-        <para>Input a name for the action.</para>
-      </step>
-
-      <step>
-        <para>Check/uncheck the "<emphasis role="bold">is Action
-        Move</emphasis>" option: the action will have exo:move property or
-        not.</para>
-      </step>
-
-      <step>
-        <para>Select an execute for the <emphasis
-        role="bold">Execute</emphasis> field.</para>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata align="center"
-                       fileref="images/createactiontypeexecuteform.png"
-                       format="PNG" />
-          </imageobject>
-        </mediaobject>
-      </step>
-
-      <step>
-        <para>The <emphasis role="bold">Variables</emphasis> field: allows
-        creating multi-values for action. If you want to add more values for
-        action, click <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> . Click <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" />
-            </imageobject>
-          </inlinemediaobject> to delete a value.</para>
-      </step>
-
-      <step>
-        <para>Click <emphasis role="bold">Save</emphasis> to accept adding a
-        new action type.</para>
-      </step>
-    </procedure>
-  </section>
+	<title>Advanced Configuration</title>
+	 <section id="sect-User_Guide-Advanced_Configuration-Manage_Queries">
+		<title>Manage Queries</title>
+		 <para>
+			The function supports you to manage queries. It allows adding, editing and deleting queries.
+		</para>
+		 <para>
+			Go to <emphasis role="bold">Administration &gt; Advanced Configuration &gt; Manage Queries.</emphasis>
+		</para>
+		 <mediaobject>
+			<imageobject>
+				<imagedata align="center" contentwidth="150mm" fileref="images/managequeriestable.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <procedure id="proc-User_Guide-Manage_Queries-Add_a_new_query">
+			<title>Add a new query</title>
+			 <step>
+				<para>
+					Show the <emphasis role="bold">Add Query</emphasis> form by clicking the <guibutton>Add Query</guibutton> button in the <emphasis role="bold">Manage Queries</emphasis> form.
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/addqueryform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Enter a query name for the <emphasis role="bold">Name</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the query type. 
+					<itemizedlist>
+						<listitem>
+							<para>
+								<emphasis role="bold">Xpath</emphasis>: (XML Path Language) is a language for selecting nodes. For example, <filename>/jcr:root/Documents/Live</filename>
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								<emphasis role="bold">SQL</emphasis>: (Structured Query Language) is a database computer language.
+							</para>
+
+						</listitem>
+
+					</itemizedlist>
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter the statement for query. The name of node type must be unique.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Check or uncheck the 'Enable cache results' option. If you tick this checkbox, for the fist time you use this query to search, the result will be cached. For the second time you search using this query, it will show the cached results. After 45minutes, the cache will be removed.
+				</para>
+				 <para>
+					For example: you have the query <literal>Test</literal> with statement <literal>//element (*, nt:file)</literal>. In the File Explorer, you have a <filename>nt:file</filename> document named <filename>File1</filename>. When you execute the query <literal>Test</literal>, only document <filename>File1</filename> will be shown. After that, create a <filename>nt:file</filename> document named <filename>File2</filename> and execute query <literal>Test</literal>, only document <filename>File2</filename> document will be listed. After 45 minutes, the cache will be removed. When you execute the query <literal>Test</literal>, the documents <filename>File1</filename> and <filename>File2</filename> will be listed.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select permissions for a group that can use this query by clicking 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/pluspermissionbutton.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/selectpermission.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to finish adding a new query.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Queries-Edit_a_query">
+			<title>Edit a query</title>
+			 <step>
+				<para>
+					Click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon4.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon corresponding to the query you want to edit. The <emphasis role="bold">Edit Query</emphasis> form will appear:
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/editqueryform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Edit the properties of the selected query.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to accept all changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Queries-Delete_a_query">
+			<title>Delete a query</title>
+			 <step>
+				<para>
+					Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 corresponding to the query you want to delete. A confirmation message will appear.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">OK</emphasis> to accept deleting this query, or <emphasis role="bold">Cancel</emphasis> to discard this action.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Advanced_Configuration-Manage_Scripts">
+		<title>Manage Scripts</title>
+		 <para>
+			The function enables users to manage all script codes in the <emphasis role="bold">WCM</emphasis> and<emphasis role="bold"> Browser Content </emphasis>system.
+		</para>
+		 <para>
+			Go to <emphasis role="bold">Administration &gt; Advanced Configuration &gt; Manage Scripts</emphasis>.
+		</para>
+		 <mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/managescriptsform.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <para>
+			Details: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<emphasis role="bold">WCM</emphasis> <emphasis role="bold">Scripts</emphasis>: scripts are used in <emphasis role="bold">WCM</emphasis>
+					</para>
+
+				</listitem>
+				 <listitem>
+					<para>
+						<emphasis role="bold">BC Scripts</emphasis>: scripts are used in <emphasis role="bold">Content Browser</emphasis>.
+					</para>
+					 <para>
+						<emphasis role="bold">The ECM Scripts tab:</emphasis>
+					</para>
+
+				</listitem>
+
+			</itemizedlist>
+		</para>
+		 <procedure id="proc-User_Guide-Manage_Scripts-Add_a_new_script_in_ECM">
+			<title>Add a new script in <emphasis role="bold">ECM</emphasis></title>
+			 <step>
+				<para>
+					Select <emphasis role="bold">ECM Scripts</emphasis> tab in the <emphasis role="bold">Manage Script</emphasis>.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click the <emphasis role="bold">Add</emphasis> button to open the <emphasis role="bold">Add/Edit script</emphasis> form:
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/ecmaddeditscriptsform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Enter a value for the <emphasis role="bold">Script content</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Enter a script name for the <emphasis role="bold">Script name</emphasis> field. 
+					<itemizedlist>
+						<listitem>
+							<para>
+								The script name must be unique.
+							</para>
+
+						</listitem>
+						 <listitem>
+							<para>
+								The name must not contain special characters such as !,@,#,$,%,&amp;,*,(,).
+							</para>
+
+						</listitem>
+
+					</itemizedlist>
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to accept adding the new script.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Scripts-Edit_an_ECM_script">
+			<title>Edit an ECM script</title>
+			 <para>
+				To edit an ECM script, do the following:
+			</para>
+			 <step>
+				<para>
+					In the <emphasis role="bold">ECM Scripts</emphasis> tab, click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon4.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 icon that corresponds to the script that you want to edit. The <emphasis role="bold">Add/Edit script</emphasis> form will appear:
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/addeditscriptsform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Edit the properties in this form.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to save all changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Scripts-Delete_an_ECM_script">
+			<title>Delete an ECM script</title>
+			 <para>
+				To delete an ECM script, do the following:
+			</para>
+			 <step>
+				<para>
+					In the <emphasis role="bold">ECM Scripts</emphasis> tab, click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the script that you want to delete. A confirmation message will appear.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">OK</emphasis> to accept deleting this action, or <emphasis role="bold">Cancel</emphasis> to discard this action.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <para>
+			<emphasis role="bold">The BC Scripts tab:</emphasis>
+		</para>
+		 <mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/bcscriptstab.png" format="PNG" width="444" />
+			</imageobject>
+
+		</mediaobject>
+		 <procedure id="proc-User_Guide-Manage_Scripts-Add_a_BC_script">
+			<title>Add a BC script</title>
+			 <para>
+				To add a BC script, do the following:
+			</para>
+			 <step>
+				<para>
+					In the <emphasis role="bold">Manage Scripts</emphasis>, select the <emphasis role="bold">BC Scripts</emphasis> tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Add</emphasis> to open the <emphasis role="bold">Add/Edit script</emphasis> form:
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/bcaddeditscriptform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Input script content for the <emphasis role="bold">Script content</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Input a script name into the <emphasis role="bold">Name</emphasis> field.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to finish adding the new script.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Scripts-Edit_a_BC_script">
+			<title>Edit a BC script</title>
+			 <para>
+				To edit a BC script, do the following::
+			</para>
+			 <step>
+				<para>
+					In the <emphasis role="bold">BC Script</emphasis> tab, click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/editicon4.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on a script that you want to edit.
+				</para>
+				 <para>
+					The <emphasis role="bold">Add/Edit script</emphasis> form will appear:
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/bceditscriptform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Edit the properties that you want.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to accept all changes.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+		 <procedure id="proc-User_Guide-Manage_Scripts-Delete_a_BC_script">
+			<title>Delete a BC script</title>
+			 <para>
+				To delete a BC script, do the following:
+			</para>
+			 <step>
+				<para>
+					In the <emphasis role="bold">BC Scripts</emphasis> tab, click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 on the script you want to delete. A confirmation message appears.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">OK</emphasis> to accept deleting this script, or <emphasis role="bold">Cancel</emphasis> to discard this action.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Advanced_Configuration-Manage_Unlocks">
+		<title>Manage Unlocks</title>
+		 <para>
+			All locked nodes are listed and managed by administrators in the <emphasis role="bold">Administration page</emphasis>. There are two ways that help administrators unlock nodes: unlock nodes in the right-click the menu in <emphasis role="bold">Content Explorer</emphasis> or unlock nodes in the <emphasis role="bold">Administration page.</emphasis>
+		</para>
+		 <procedure id="proc-User_Guide-Manage_Unlocks-Unlock_Nodes">
+			<title>Unlock Nodes</title>
+			 <step>
+				<para>
+					Go to <emphasis role="bold">Administration</emphasis> on the navigation bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select <emphasis role="bold">Advanced Configuration &gt; Manage Unlocks</emphasis> on the <emphasis role="bold">Manage the main ECM functions</emphasis> pane on the left. The locked nodes will be listed on the right panel.
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/manageunlockstab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					In the <emphasis role="bold">Locked Node</emphasis> tab on the right panel, administrators can unlock nodes by clicking 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/unlockicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 that corresponds to nodes which need to be unlocked. The unlocked nodes will disappear from the locked node list.
+				</para>
+				 <para>
+					Administrators can manage and add the unlock permission for another group and users in the <emphasis role="bold">Manage Lock</emphasis> tab.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select the group on the <emphasis role="bold">Select group</emphasis> panel and the corresponding membership on the <emphasis role="bold">Select membership</emphasis>panel. The selected group will be lisetd in the <emphasis role="bold">Group and Users</emphasis> column. However, administrators can also click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/blueplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 if they want to allow any users to unlock nodes.
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/manageunlocksform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					In case, administrators want to remove the unlock permission of groups, click the 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 that corresponds to the group in order to remove them form the Unlock permission list except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	 <section id="sect-User_Guide-Advanced_Configuration-Create_Action_Types">
+		<title>Create Action Types</title>
+		 <para>
+			This function allows managing of all action nodes in the <emphasis role="bold">eXo Content</emphasis>.
+		</para>
+		 <procedure id="proc-User_Guide-Create_Action_Types-Create_an_Action_Type">
+			<title>Create an Action Type</title>
+			 <step>
+				<para>
+					Go to the <emphasis role="bold">Sites<emphasis role="bold"> </emphasis></emphasis><emphasis role="bold">Administration</emphasis> on the navigation bar.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select <emphasis role="bold">Advanced Configuration &gt; Create an Action Type</emphasis>.
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/createactiontypetab.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the <emphasis role="bold">Add</emphasis> button to open the <emphasis role="bold">Action Type Form</emphasis> form:
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/createactiontypeform.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Select the action type.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Input a name for the action.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Check/uncheck the "<emphasis role="bold">is Action Move</emphasis>" option: the action will have exo:move property or not.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Select an execute for the <emphasis role="bold">Execute</emphasis> field.
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/createactiontypeexecuteform.png" format="PNG" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					The <emphasis role="bold">Variables</emphasis> field: allows creating multi-values for action. If you want to add more values for action, click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/blueplusicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 . Click 
+					<inlinemediaobject>
+						<imageobject>
+							<imagedata fileref="images/trashicon.png" format="PNG" />
+						</imageobject>
+
+					</inlinemediaobject>
+					 to delete a value.
+				</para>
+
+			</step>
+			 <step>
+				<para>
+					Click <emphasis role="bold">Save</emphasis> to accept adding a new action type.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+
 </section>
+
+

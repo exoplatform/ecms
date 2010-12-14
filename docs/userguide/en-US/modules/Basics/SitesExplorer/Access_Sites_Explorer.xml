@@ -1,84 +1,102 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Access_Sites_Explorer">
-  <title>Access Content Explorer</title>
-  <para>
-  This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Content Explorer but the performing actions on Content Explorer depending on the role of each user.
- </para>
-  <procedure>
-    <title/>
-    <step>
-      <para>
-    Go to <emphasis role="bold">Group &gt; Content Explorer </emphasis>on the administration bar:
-   </para>
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata width="444" align="center" scale="100" fileref="images/sitesexplorer.png" format="PNG"/>
-        </imageobject>
-        <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/sitesexplorer.png" format="PNG"/>
-        </imageobject>
-      </mediaobject>
-      <para>
-    A list of all drives organized in groups: Personal drives, Group drives and General drives in the Content Explorer displays:
-   </para>
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata width="444" align="center" scale="90" fileref="images/alldrives.png" format="PNG"/>
-        </imageobject>
-        <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/alldrives.png" format="PNG"/>
-        </imageobject>
-      </mediaobject>
-      <para>
-    </para>
-      <variablelist>
-        <varlistentry>
-          <term>Personal drives:</term>
-          <listitem>
-            <para>
-       Personal drive is the working space of a user. If you want to do in private, select the Private drive, no one else can access or get your private resources. If you want to create resource and share with others, work in the Public drive.
-      </para>
-            <mediaobject>
-              <imageobject role="html">
-                <imagedata align="center" scale="100" fileref="images/personaldrivesharing.png" format="PNG"/>
-              </imageobject>
-              <imageobject role="fo">
-                <imagedata contentwidth="150mm" align="center" fileref="images/personaldrivesharing.png" format="PNG"/>
-              </imageobject>
-            </mediaobject>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>Group drives:</term>
-          <listitem>
-            <para>
-       The drive of a group is the working space of users in that group.
-      </para>
-            <para>
-       In this example, the user &quot;root&quot; joins in three groups : &quot;executive-board&quot;, &quot;administrators&quot; and &quot;users&quot; so he has right to access these group&apos;s drive.
-      </para>
-            <mediaobject>
-              <imageobject role="html">
-                <imagedata width="444" align="center" scale="110" fileref="images/groupdrives.png" format="PNG"/>
-              </imageobject>
-              <imageobject role="fo">
-                <imagedata width="444" contentwidth="150mm" align="center" fileref="images/groupdrives.png" format="PNG"/>
-              </imageobject>
-            </mediaobject>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>General drives:</term>
-          <listitem>
-            <para>
-       This is the working space for everyone but your access right in different drives depends on your role. If you access as administrator role, you can see all drives; otherwise, if you access as web contributor role, you can see some drives only.</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </step>
-  </procedure>
+<section id="sect-User_Guide-Access_Content_Explorer">
+	<!--  This document was created with Syntext Serna Free.  --> <title>Access Content Explorer</title>
+	 <para>
+		This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Content Explorer but the performing actions on Content Explorer depending on the role of each user.
+	</para>
+	 <procedure>
+		<title></title>
+		 <step>
+			<para>
+				Go to <emphasis role="bold">Group &gt; Content Explorer </emphasis>on the administration bar:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG" scale="100" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/sitesexplorer.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <para>
+				A list of all drives organized in groups: Personal drives, Group drives and General drives in the Content Explorer displays:
+			</para>
+			 <mediaobject>
+				<imageobject role="html">
+					<imagedata align="center" fileref="images/alldrives.png" format="PNG" scale="90" width="444" />
+				</imageobject>
+				 <imageobject role="fo">
+					<imagedata align="center" contentwidth="150mm" fileref="images/alldrives.png" format="PNG" width="444" />
+				</imageobject>
+
+			</mediaobject>
+			 <para>
+
+			</para>
+			 <variablelist>
+				<varlistentry>
+					<term>Personal drives:</term>
+					 <listitem>
+						<para>
+							Personal drive is the working space of a user. If you want to do in private, select the Private drive, no one else can access or get your private resources. If you want to create resource and share with others, work in the Public drive.
+						</para>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/personaldrivesharing.png" format="PNG" scale="100" />
+							</imageobject>
+							 <imageobject role="fo">
+								<imagedata align="center" contentwidth="150mm" fileref="images/personaldrivesharing.png" format="PNG" />
+							</imageobject>
+
+						</mediaobject>
+
+					</listitem>
+
+				</varlistentry>
+				 <varlistentry>
+					<term>Group drives:</term>
+					 <listitem>
+						<para>
+							The drive of a group is the working space of users in that group.
+						</para>
+						 <para>
+							In this example, the user "root" joins in three groups : "executive-board", "administrators" and "users" so he has right to access these group's drive.
+						</para>
+						 <mediaobject>
+							<imageobject role="html">
+								<imagedata align="center" fileref="images/groupdrives.png" format="PNG" scale="110" width="444" />
+							</imageobject>
+							 <imageobject role="fo">
+								<imagedata align="center" contentwidth="150mm" fileref="images/groupdrives.png" format="PNG" width="444" />
+							</imageobject>
+
+						</mediaobject>
+
+					</listitem>
+
+				</varlistentry>
+				 <varlistentry>
+					<term>General drives:</term>
+					 <listitem>
+						<para>
+							This is the working space for everyone but your access right in different drives depends on your role. If you access as administrator role, you can see all drives; otherwise, if you access as web contributor role, you can see some drives only.
+						</para>
+
+					</listitem>
+
+				</varlistentry>
+
+			</variablelist>
+
+		</step>
+
+	</procedure>
+
 </section>
+
+

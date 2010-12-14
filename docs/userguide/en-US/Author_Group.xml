@@ -4,19 +4,22 @@
 %BOOK_ENTITIES;
 ]>
 <authorgroup>
-    <author>
-      <firstname>eXo Platform</firstname>
+	<author>
+		<firstname>eXo Platform</firstname>
 		 <surname>Documentation Team</surname>
-      <affiliation>
-          <orgdiv><emphasis role="bold"><ulink type="http" url="http://www.exoplatform.com">eXo Platform</ulink></emphasis></orgdiv>
+		 <affiliation>
+			<orgdiv><emphasis role="bold"><ulink type="http" url="http://www.exoplatform.com">eXo Platform</ulink></emphasis></orgdiv>
+
 		</affiliation>
+
 	</author>
-   <editor>
+	 <editor>
 		<firstname>Scott</firstname>
 		 <surname>Mumford</surname>
 		 <affiliation>
-         <shortaffil><emphasis role="bold"><ulink type="http" url="www.redhat.com">Red Hat</ulink></emphasis></shortaffil>
+			<shortaffil><emphasis role="bold"><ulink type="http" url="www.redhat.com">Red Hat</ulink></emphasis></shortaffil>
 			 <orgdiv>Engineering Content Services</orgdiv>
+
 		</affiliation>
 		 <email>smumford@redhat.com</email>
 

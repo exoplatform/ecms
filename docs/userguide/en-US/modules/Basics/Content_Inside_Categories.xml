@@ -1,51 +1,74 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Content_Inside_Categories">
-  <title>Content Inside Categories</title>
-  <para>
+	<!--  This document was created with Syntext Serna Free.  --> <title>Content Inside Categories</title>
+	 <para>
+		You can create new contents in any folders or directly in a CLV with Incontext Editing. However, creating contents inside a category helps you easily and quickly manage and publish them.
+	</para>
+	 <section id="sect-User_Guide-Content_Inside_Categories-What_is_a_Category_in_eXo_Content">
+		<title>What is a Category in eXo Content?</title>
+		 <para>
 
- You can create new contents in any folders or directly in a CLV with Incontext Editing.  However, creating contents inside a category helps you easily and quickly manage and publish them.</para>
-  <section id="sect-User_Guide-Content_Inside_Categories-What_is_a_Category_in_eXo_Content">
-    <title>What is a Category in eXo Content?</title>
-    <para>
+		</para>
+		 <para>
+			Categories are used to sort and organize documents to ease searches when browsing documents online. After creating a document, you should categorize it by adding it into a category. You should directly create a document in a category, then the document is automatically created a link to it in the category. When you browse the category, it will be possible to find the referenced documents and display them as if they were children of the category node.
+		</para>
+		 <para>
+			Categories are stored in the JCR itself .
+		</para>
 
-  </para>
-    <para>Categories are used to sort and organize documents to ease searches when browsing documents online. After creating a document, you should categorize it by adding it into a category. You should directly create a document in a category, then  the document is automatically created a link to it in the category. When you browse the category, it will be possible to find the referenced documents and display them as if they were children of the category node.</para>
-    <para>Categories are stored in the JCR itself .</para>
-  </section>
-  <section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
-    <title>Create a Content</title>
-    <para>This section will show you how to create a content in a category.</para>
-    <para>Do the following:</para>
-    <procedure>
-      <title>Create a content</title>
-      <step>
-        <para>Go to <emphasis role="bold">Group &gt; Content Explorer &gt; </emphasis>select a category in a drive.  For example, select <emphasis role="bold">Acme </emphasis>drive as the following illustration.</para>
-        <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/selectcategory.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </step>
-      <step>
-        <para>Click the <emphasis role="bold">Add Document</emphasis> button to create a new content. See  <xref linkend="sect-User_Guide-Actions-Add_a_document"/> to know how to add a new content. The new content is a symlink.</para>
-        <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/createdcontent.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-        <para>Click the symlink to view the content.</para>
-      </step>
-    </procedure>
-  </section>
-</section>
-<!-- Remove
+	</section>
+	
+	 <section id="sect-User_Guide-Content_Inside_Categories-Create_a_Content">
+		<title>Create a Content</title>
+		 <para>
+			This section will show you how to create a content in a category.
+		</para>
+		 <para>
+			Do the following:
+		</para>
+		 <procedure id="proc-User_Guide-Create_a_Content-Create_a_content">
+			<title>Create a content</title>
+			 <step>
+				<para>
+					Go to <emphasis role="bold">Group &gt; Content Explorer &gt; </emphasis>select a category in a drive. For example, select <emphasis role="bold">Acme </emphasis>drive as the following illustration.
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/selectcategory.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+
+			</step>
+			 <step>
+				<para>
+					Click the <emphasis role="bold">Add Document</emphasis> button to create a new content. See <xref linkend="sect-User_Guide-Actions-Add_a_document" /> to know how to add a new content. The new content is a symlink.
+				</para>
+				 <mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="images/createdcontent.png" format="PNG" width="444" />
+					</imageobject>
+
+				</mediaobject>
+				 <para>
+					Click the symlink to view the content.
+				</para>
+
+			</step>
+
+		</procedure>
+		
+
+	</section>
+	
+	<!--  Remove
   <section id="sect-User_Guide-Content_Inside_Categories-Organize_Content">
     <title>Organize Content</title>
-    <para>  After a content is created in a category, it will be stored in Category Navigation. ( See more about Category Navigation at <xref linkend="sect-User_Guide-Categories_Navigation"/> .) </para>
+    <para>  After a content is created in a category, it will be stored in Category Navigation. ( See more about Category Navigation at <xref linkend="sect-User_Guide-Category_Navigation"/> .) </para>
     <para>If the content is not published, you cannot see it in the Published Mode. To see it in Category Navigation, turn on the Edit Mode.</para>
     <mediaobject>
       <imageobject>
@@ -54,5 +77,7 @@
     </mediaobject>
     <para>Here, you can edit and publish it. See <xref linkend="sect-User_Guide-Contribute_Content"/> the to know how to edit and publish a content.</para>
   </section>
--->
+ -->
+</section>
+
 

@@ -5,9 +5,11 @@
 ]>
 <preface id="pref-User_Guide-Preface">
 	<title>Preface</title>
-	 <!-- FOR PUBLICAN: --> <xi:include href="Common_Content/Conventions.xml" xmlns:xi="http://www.w3.org/2001/XInclude"> <!-- FOR JDOCBOOK: --> <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude"></xi:fallback>
+	 <!--  FOR PUBLICAN:  --> <xi:include href="Common_Content/Conventions.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!--  FOR JDOCBOOK:  --> <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude"></xi:fallback>
 	 </xi:include>
-	 <!-- FOR PUBLICAN: --> <xi:include href="Common_Content/Feedback.xml" xmlns:xi="http://www.w3.org/2001/XInclude"> <!-- FOR JDOCBOOK: --> <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude"></xi:fallback>
+	 <!--  FOR PUBLICAN:  --> <xi:include href="Middleware_Feedback.xml" xmlns:xi="http://www.w3.org/2001/XInclude"> 
+    <!--  FOR JDOCBOOK:  --> <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude"></xi:fallback>
 	 </xi:include>
 
 </preface>

@@ -1,18 +1,17 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+<!ENTITY % BOOK_ENTITIES SYSTEM "../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Sites_Administration">
+<section id="sect-User_Guide-Administration_page">
 	<title>Administration page</title>
 	 <para>
 		This page is used to manage all workspaces, drives, node types, metadata, templates, queries, etc. Only administrators can access the <emphasis role="bold">Administration</emphasis> page.
 	</para>
 	 <procedure>
-		
-		 <step>
+		<step>
 			<para>
-				Click <emphasis role="bold">Group > Administration</emphasis> on the administration bar:
+				Click <emphasis role="bold">Group &gt; Administration</emphasis> on the administration bar:
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
