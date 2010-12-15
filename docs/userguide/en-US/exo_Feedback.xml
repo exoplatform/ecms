@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+  <!--NOTE: THE FOLLOWING ENTITIES WILL NOT BE REPLACED IN YOUR BUGZILLA URL.
+            YOU WILL NEED TO CORRECT THE URL MANUALLY.
+      &PRODUCT_NAME; of the form "JBoss Enterprise Application Platform"
+      &BZ_COMPONENT; of the form "doc-triage" (as listed in Bugzilla)
+      &PRODUCT_VERSION; of the form "5.0.0" (as listed in Bugzilla, to minimise confusion)
+      The above entities should be defined in your Book_Name.ent file so that
+      this file can be included in your Publican Common Content directory and added to 
+      all Middleware books with minimal fuss.
+
+      These entities should not affect translated documents, since Bugzilla is not localised.
+  -->
+
+<section id="jboss-feedback">
+  <title>Give us Feedback</title>
+
+  <para>
+    If you find a typographical error, or know how this guide can be improved, we would love to hear from you. Submit a report in JIRA against eXo Content. The following link will take you to bug report for eXo Content <ulink type="http" url="http://jira.exoplatform.org/secure/Dashboard.jspa">http://jira.exoplatform.org</ulink>.
+  </para>
+  <para>
+     Select the document name and version number relevant to the document you found the error in from the available lists then complete the description with as much detail as you can provide.
+  </para>
+
+<!--  <para>
+    Fill out the following template and add it to Bugzilla's <literal>Description</literal> field. Be as specific as possible when describing the issue; this will help ensure that we can fix it quickly.
+  </para>
+
+  <screen>Document URL:
+
+
+Section Number and Name:
+
+
+Describe the issue:
+
+
+Suggestions for improvement:
+
+
+Additional information:
+
+
+</screen>-->
+
+  <para>
+    Be sure to give us your name so that you can receive full credit for reporting the issue.
+  </para>
+
+</section>

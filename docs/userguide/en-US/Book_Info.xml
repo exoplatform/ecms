@@ -4,9 +4,9 @@
 %BOOK_ENTITIES;
 ]>
 <bookinfo id="book-User_Guide-User_Guide">
-	<title>User Guide</title>
+	<title>Site Publisher User Guide</title>
 	 <subtitle>A guide to the basic usage of the Site Publisher extension for JBoss Enterprise Portal Platform</subtitle>
-	 <productname>JBoss Site Publisher</productname>
+	 <productname>JBoss Enterprise Portal Platform</productname>
 	 <productnumber>5</productnumber>
 	 <edition>1</edition>
 	 <pubsnumber>2.1.1</pubsnumber>

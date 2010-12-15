@@ -8,9 +8,13 @@
 	 <!--  FOR PUBLICAN:  --> <xi:include href="Common_Content/Conventions.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
     <!--  FOR JDOCBOOK:  --> <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude"></xi:fallback>
 	 </xi:include>
-	 <!--  FOR PUBLICAN:  --> <xi:include href="Middleware_Feedback.xml" xmlns:xi="http://www.w3.org/2001/XInclude"> 
-    <!--  FOR JDOCBOOK:  --> <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude"></xi:fallback>
-	 </xi:include>
+    
+        <!--FOR PUBLICAN -->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="rh_Feedback.xml">
+    <!--FOR JDOCBOOK:-->
+    <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
+        <xi:include href="exo_Feedback.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
+    </xi:fallback> </xi:include>
 
 </preface>
 
