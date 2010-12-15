@@ -7,9 +7,9 @@
 	<title>Site Publisher User Guide</title>
 	 <subtitle>A guide to the basic usage of the Site Publisher extension for JBoss Enterprise Portal Platform</subtitle>
 	 <productname>JBoss Enterprise Portal Platform</productname>
-	 <productnumber>5</productnumber>
+	 <productnumber>5.1</productnumber>
 	 <edition>1</edition>
-	 <pubsnumber>2.1.1</pubsnumber>
+	 <pubsnumber>2.3</pubsnumber>
 	 <abstract>
 		<para>
 			This document provides an easy to follow guide to the functions and options available in the Enterprise Portal Platform Site Publisher extension. It is intended to be accessible and useful to both experienced and novice portal users.
