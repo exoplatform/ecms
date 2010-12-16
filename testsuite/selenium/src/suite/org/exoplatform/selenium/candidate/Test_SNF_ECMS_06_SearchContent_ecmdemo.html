@@ -97,8 +97,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;acme</td>
 	<td></td>
 </tr>
 <tr>
@@ -109,6 +109,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;acme/documents</td>
 	<td></td>
 </tr>
 <tr>
@@ -150,11 +155,6 @@
 	<td>type</td>
 	<td>name</td>
 	<td>Test_SNF_ECMS_06</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -342,78 +342,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Staged</td>
+	<td>link=Published</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Staged</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPublicationPanel']/fieldset[2]//input[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UIPublicationPanel']/fieldset[2]//input[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=13</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=13</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPublicationPanel']/fieldset[2]//td[2]/input[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UIPublicationPanel']/fieldset[2]//td[2]/input[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=16</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=16</td>
+	<td>link=Published</td>
 	<td></td>
 </tr>
 <tr>
@@ -424,11 +359,6 @@
 <tr>
 	<td>click</td>
 	<td>link=Save</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -444,41 +374,6 @@
 <tr>
 	<td>click</td>
 	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Refresh</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[3]/a[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[3]/a[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- OK</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>refresh</td>
-	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -532,14 +427,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[@id='UIPresentation']/div/div[2]/div/div/div[3]/div[2]/div/div/div/div[1]/div/p</td>
+	<td>waitForTextPresent</td>
 	<td>Em yeu chi ! Tieu Huong Duong</td>
+	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//div[@id='UIPresentation']/div/div[2]/div/div/div[3]/div[2]/div/div/div/div[1]/div/p</td>
+	<td>verifyTextPresent</td>
 	<td>Em yeu chi ! Tieu Huong Duong</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
