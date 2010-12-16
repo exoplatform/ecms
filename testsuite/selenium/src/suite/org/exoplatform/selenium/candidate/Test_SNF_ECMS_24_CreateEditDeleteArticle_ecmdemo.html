@@ -57,13 +57,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
@@ -73,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -97,18 +92,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
-	<td>--Go to Detail View</td>
+	<td>-Go to Admin View</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
+	<td>//a[@title='Admin View']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
+	<td>//a[@title='Admin View']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -117,23 +122,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
-	<td>//div[3]/div/div/div/div/a</td>
+	<td>link=Actions</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[3]/div/div/div/div/a</td>
+	<td>link=Actions</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -148,7 +148,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -172,9 +172,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
-	<td>Manchester United</td>
+	<td>Da qua roi, giac mo xua</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -192,9 +192,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
-	<td>Manchester United FC</td>
+	<td>Nguoi nhu canh chim mo khuat.</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -213,7 +213,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,7 +233,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -244,11 +244,21 @@
 <tr>
 	<td>click</td>
 	<td>link=Article_Test_SNF_ECMS_24</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Actions</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- go to edit&nbsp;&nbsp;document</td>
+	<td>--&nbsp;&nbsp;Go to edit&nbsp;&nbsp;document</td>
 	<td></td>
 </tr>
 <tr>
@@ -272,9 +282,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
-	<td>Test_SNF_ECMS_24</td>
+	<td>Long te tai nho phut am em hom nao</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -292,9 +302,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
-	<td>chao cac ban</td>
+	<td>Nho em lam. Tieu Huong Duong a</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -313,7 +323,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -328,7 +338,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -367,6 +377,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForTextNotPresent</td>
 	<td>link=Article_Test_SNF_ECMS_24</td>
 	<td></td>
@@ -386,7 +401,6 @@
 	<td>link=Sign out</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

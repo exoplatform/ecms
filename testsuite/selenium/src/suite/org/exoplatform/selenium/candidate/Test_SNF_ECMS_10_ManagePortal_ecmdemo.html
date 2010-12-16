@@ -58,7 +58,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Open form to create portal</td>
+	<td>-- Site</td>
 	<td></td>
 </tr>
 <tr>
@@ -72,6 +72,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Add New Portal</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Add New Portal</td>
 	<td></td>
@@ -82,13 +87,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Portal Setting</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PortalSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PortalSetting')&quot;]</td>
+	<td>//div[text()='Portal Setting']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PortalSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PortalSetting')&quot;]</td>
+	<td>//div[text()='Portal Setting']</td>
 	<td></td>
 </tr>
 <tr>
@@ -102,28 +112,38 @@
 	<td>NewPortal</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'Properties');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=Properties')&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'Properties');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=Properties')&quot;]</td>
+	<td>echo</td>
+	<td>-- Properties</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PermissionSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PermissionSetting')&quot;]</td>
+	<td>//div[text()='Properties']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PermissionSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PermissionSetting')&quot;]</td>
+	<td>//div[text()='Properties']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Set permission</td>
+	<td>-- Properties</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='Permission Setting']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='Permission Setting']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Add Permission</td>
 	<td></td>
 </tr>
 <tr>
@@ -137,6 +157,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Customers</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Customers</td>
 	<td></td>
@@ -144,6 +169,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Customers</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- *</td>
 	<td></td>
 </tr>
 <tr>
@@ -164,6 +194,16 @@
 <tr>
 	<td>click</td>
 	<td>xpath=//div[@onclick=&quot;eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, 'UIPortalForm', 'PermissionSetting');javascript:eXo.webui.UIForm.submitEvent('UIPortalForm','SelectTab','&amp;objectId=PermissionSetting')&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Edit Permission Setting</td>
 	<td></td>
 </tr>
 <tr>
@@ -188,7 +228,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>platform</td>
+	<td>--&nbsp;&nbsp;platform</td>
 	<td></td>
 </tr>
 <tr>
@@ -203,7 +243,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>Administrator</td>
+	<td>--&nbsp;&nbsp;platform/Administrator</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,6 +254,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div[2]/div[1]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;platform/Administrator/any</td>
 	<td></td>
 </tr>
 <tr>
@@ -238,7 +283,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>15000</td>
+	<td>30000</td>
 	<td></td>
 </tr>
 <tr>
@@ -367,7 +412,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>//div[@id='UISiteManagement']/table[3]/tbody/tr/td[3]/a[4]</td>
 	<td></td>
 </tr>
@@ -378,7 +423,12 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>NewPortal</td>
 	<td></td>
 </tr>
 <tr>
@@ -397,16 +447,10 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>clickAndWait</td>
 	<td>link=Sign out</td>
 	<td></td>
 </tr>
-<tr>
-	<td>echo</td>
-	<td>platform</td>
-	<td></td>
-</tr>
-
 </tbody></table>
 </body>
 </html>

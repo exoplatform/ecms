@@ -53,27 +53,32 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Create document</td>
+	<td>-- Site Explorer</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Browse all drives</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -257,23 +262,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Site Explorer</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Browse all drives</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -284,6 +299,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Sites Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -447,33 +467,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>click</td>
+	<td>//a[@title='Refresh']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a[2]</td>
+	<td>//div[3]//div[3]//tbody/tr//div/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a[2]</td>
+	<td>//div[3]//div[3]//tbody/tr//div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Site Explorer</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[3]/div/div/div[1]/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[3]/div/div/div[1]/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
@@ -512,8 +532,108 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=Overview</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>root</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>gtn</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Site Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@title='Show Drives']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@title='Show Drives']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sites Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Sites Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=documents</td>
 	<td></td>
 </tr>
 <tr>
@@ -522,7 +642,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
+	<td>click</td>
 	<td>link=Test_SNF_ECMS_08</td>
 	<td></td>
 </tr>
@@ -539,56 +659,6 @@
 <tr>
 	<td>echo</td>
 	<td>-- Delete document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sites Management</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Sites Management</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=a[title='acme ']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=a[title='acme ']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=documents</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=documents</td>
 	<td></td>
 </tr>
 <tr>
@@ -641,7 +711,6 @@
 	<td>link=Sign out</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
