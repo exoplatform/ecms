@@ -196,7 +196,7 @@ A lifecycle is defined by a simple vertical workflow with steps (states) and pro
           </field>
         </object>
       </object-param>
-    </init-param>
+    </init-params>
   </component-plugin>
 </external-component-plugins>
 {code}
@@ -305,7 +305,7 @@ We can have conflicts on contexts and we will avoid that by setting a priority (
           </field>
         </object>
       </object-param>
-    </init-param>
+    </init-params>
   </component-plugin>
 </external-component-plugins>
 {code}
