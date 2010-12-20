@@ -1,1 +1,264 @@
-Examples of CMIS usage
+The following examples of CMIS usage may be useful for developers wants to access repository. Most of examples implies using Apache HTTP Client in java exaples or 
+Google gadets (gadgets.io) in javascript examples for making requests to CMIS.
+
+h2. Login to repository.
+
+CMIS using default Tomcat authenticaton in general case, but it may be overriden in case of embedding CMIS onto other product. So this example covers only 
+basic variant of authenticaton.
+
+h3. Using java.
+
+{code}
+HttpClient client = new HttpClient(); 
+
+client.getState().setCredentials(
+    new AuthScope("localhost", 8080, "realm"),
+    new UsernamePasswordCredentials("root", "exo");
+....
+{code}
+
+
+h2. Listing of documents (folder, files).
+
+There are a few methods to get the documents listings, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
+The difference between them is usage of different URL segments to get data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
+and a different kind results  (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in responce).
+
+h3. Using java.
+
+{code}
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/children/";
+ url += obj_id;
+
+ org.apache.commons.httpclient.HttpClient client = new HttpClient(
+                                                       new MultiThreadedHttpConnectionManager());
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ GetMethod get = new GetMethod(url); 
+ try {
+ int result = client.executeMethod(get);
+ final String strResponce = get.getResponseBodyAsString(); 
+ } finally {
+   get.releaseConnection();
+ }
+{code}
+
+
+h3. Using javascript.
+Composing URL to make request (consists of repository name, the method name, e.g. "/children/", and folderID to get childrens from):
+
+{code}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/children/";
+ url += obj_id;
+{code}
+
+performing request:
+
+{code}
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+ params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
+processing results (code located in handler specified while making request):
+{code}
+var handler = function(resp) {
+  var data = eval(resp.data.Entry);
+   for (var i = 0; i < data.length; i++) {
+     var doc = data[i];
+     alert(doc.Title);  
+     alert(doc.Date);  
+      ...etc..
+   }
+}
+{code}
+
+h2. Read document properties and content-stream.
+
+Reading document properties and content-stream it's a separate operations, getting content stream is possible after the properties set is read, and appropriate 
+content-stream ID is detected from it.
+
+h3. Using java.
+
+{code}
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+
+ org.apache.commons.httpclient.HttpClient client = new HttpClient(
+                                                       new MultiThreadedHttpConnectionManager());
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ GetMethod get = new GetMethod(url); 
+ try {
+ int result = client.executeMethod(get);
+ final String strResponce = get.getResponseBodyAsString(); 
+ } finally {
+   get.releaseConnection();
+ }
+{code}
+
+To get document's content-stream, the URL must contain the "/file" part, e.g.:
+{code}
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/file/";
+ url += obj_id;
+{code}
+
+h3. Using javascript.
+
+Composing URL to make request (consists of repository name, the method name, e.g. "/children/", and folderID to get childrens from):
+
+{code}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+{code}
+
+performing request:
+
+{code}
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+ params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
+You can also use the ContentType.DOM parameter, you want to parse the feed by yourself (Using DOMParser for example).
+
+
+
+h2. Dearch of data and syntax examples.
+
+CMIS suports queries for more handful content search. Query service can uses both GET and POST for consuming requests. URL for query consists of repository name and method name "/query".
+GET request must contain query as a parameter named "q", in case of POST request query must be located in request body.
+More detailed explanation how to construct queries see at [http://code.google.com/p/xcmis/wiki/xCMISSQLQueryUsecases|xCMIS documentation].
+
+h3. Using java.
+
+{code}
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/query/";
+
+ org.apache.commons.httpclient.HttpClient client = new HttpClient();
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ PostMethod post = new PostMethod(url);
+ try { 
+ int result = client.executeMethod(post);
+ final String strResponce = post.getResponseBodyAsString(); 
+ } finally {
+   post.releaseConnection();
+ }
+{code}
+
+To get document's content-stream, the URL must contain the "/file" part, object ID, and optionally content stream ID e.g.:
+{code}
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/file/";
+ url += obj_id;
+ //Optionally
+ url += "?";
+ url += "streamid=";
+ url += streamID;
+{code}
+
+
+h3. Using javascript.
+
+{code}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/query/";
+{code}
+
+{code}
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+ params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues(someQuery);
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
+
+h2. Modification of document properties or content.
+
+Update properties command has an PUT method. The URL is the same as for the reading properties, differs only HTTP method.
+Body of the request must be an Atom document with the properties specified (see spec. 2.2.4.12 for details constructing document).
+
+Setting content stream can be executed via PUT or POST. Content-type of the request must be an "multipart/form-data".
+
+h3. Using java.
+
+{code}
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+
+ org.apache.commons.httpclient.HttpClient client = new HttpClient();
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ PostMethod post = new PostMethod(url);
+ RequestEntity entity = new FileRequestEntity(inputStream, "text/xml; charset=ISO-8859-1");
+ post.setRequestEntity(entity); 
+
+ try { 
+ int result = client.executeMethod(post);
+ final String strResponce = post.getResponseBodyAsString(); 
+ } finally {
+   post.releaseConnection();
+ }
+{code}
+
+h3. Using javascript.
+
+Update properties:
+
+{code}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+{code}
+
+{code}
+ var atomDoc = ...;//constructing document
+
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.PUT;
+ params[gadgets.io.RequestParameters.POST_DATA] = atomDoc;
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
+
+Set content stream:
+
+{code}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/file/";
+ url += obj_id;
+{code}
+
+{code}
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+ params[gadgets.io.RequestParameters.CONTENT_TYPE] = "multipart/form-data";
+ params[gadgets.io.RequestParameters.POST_DATA] = contestStream;
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
