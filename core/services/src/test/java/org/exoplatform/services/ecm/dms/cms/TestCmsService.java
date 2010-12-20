@@ -365,7 +365,7 @@ public class TestCmsService extends BaseDMSTestCase {
     
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(data);
-    inputProperty.setValue(getClass().getResource("/conf/standalone/test-configuration.xml").openStream());
+    inputProperty.setValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
     map.put(data, inputProperty);
     return map;
   }
@@ -392,7 +392,7 @@ public class TestCmsService extends BaseDMSTestCase {
         assertTrue(session.itemExists(path1));
         Node binaryNode = (Node)session.getItem(path1);
         assertEquals("BinaryData", binaryNode.getName());
-        InputStream is = getClass().getResource("/conf/standalone/test-configuration.xml").openStream();
+        InputStream is = getClass().getResource("/conf/standalone/system-configuration.xml").openStream();
         assertTrue(compareInputStream(is, binaryNode.getProperty("jcr:data").getStream()));
         binaryNode.remove();
         session.save();

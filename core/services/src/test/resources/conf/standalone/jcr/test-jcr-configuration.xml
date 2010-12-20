@@ -72,6 +72,7 @@
             <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/"/>
             <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/"/>
             <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/"/>
+            <property name="jos" value="http://nl.ijs.si/jos/"/>
         </properties-param>
  		  </init-params>
  		</component-plugin>

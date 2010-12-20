@@ -24,6 +24,7 @@
 	        <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/"/>
 	        <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/"/>
 	        <property name="rh" value="www.vn.vnn"/>
+					<property name="jos" value="http://nl.ijs.si/jos/"/>
 	      </properties-param>
 	    </init-params>
 	  </component-plugin>

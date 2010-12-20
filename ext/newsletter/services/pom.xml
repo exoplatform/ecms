@@ -41,9 +41,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.xml-parser</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-parser</artifactId>
+      <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

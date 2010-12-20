@@ -27,17 +27,18 @@
   </ciManagement>
   <properties>
     <!-- Dependencies versions -->
-    <org.exoplatform.kernel.version>2.2.3-GA</org.exoplatform.kernel.version>
-    <org.exoplatform.core.version>2.3.3-GA</org.exoplatform.core.version>
-    <org.exoplatform.ws.version>2.1.3-GA</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.12.3-GA</org.exoplatform.jcr.version>
-    <org.exoplatform.jcr-services.version>1.12.3-GA</org.exoplatform.jcr-services.version>
-    <org.exoplatform.portal.version>3.1.0-GA</org.exoplatform.portal.version>
+    <org.exoplatform.kernel.version>2.2.6-GA</org.exoplatform.kernel.version>
+    <org.exoplatform.core.version>2.3.6-GA</org.exoplatform.core.version>
+    <org.exoplatform.ws.version>2.1.6-GA</org.exoplatform.ws.version>
+    <org.exoplatform.jcr.version>1.12.6-GA</org.exoplatform.jcr.version>
+    <org.exoplatform.jcr-services.version>1.12.6-GA</org.exoplatform.jcr-services.version>
+    <org.exoplatform.portal.version>3.1.6-PLF</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
-    <org.exoplatform.commons.version>1.0.0-CR01</org.exoplatform.commons.version>
+    <org.exoplatform.commons.version>1.0.2</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
-    <chromattic.version>1.0.3</chromattic.version>
-    <xcmis.version>1.1.0-GA</xcmis.version>
+    <chromattic.version>1.0.4</chromattic.version>
+    <xcmis.version>1.1.2</xcmis.version>
+		<xml.parser.version>3.1</xml.parser.version>		
     <!-- workflow implementations -->
     <org.jbpm.jbpm3>3.2.8</org.jbpm.jbpm3>
     <bonita.version>4.1</bonita.version>
@@ -49,7 +50,7 @@
     <org.gatein.wci.version>2.0.1-GA</org.gatein.wci.version>
     <javassist.version>3.4.GA</javassist.version>
     <commons-collections.version>3.2.1</commons-collections.version>
-    <commons-pool.version>1.2</commons-pool.version>
+    <commons-pool.version>1.2</commons-pool.version>    
     <html-parser.version>1.6</html-parser.version>
     <stax.version>1.0</stax.version>
     <org.jvnet.jaxb2.maven2.version>0.1</org.jvnet.jaxb2.maven2.version>
@@ -61,7 +62,7 @@
     <javax.transaction.version>1.0.1B</javax.transaction.version>
     <net.oauth.version>20080621</net.oauth.version>
     <net.sourceforge.nekohtml.version>1.9.9</net.sourceforge.nekohtml.version>
-    <org.gatein.shindig.version>1.0-r790473-Patch02</org.gatein.shindig.version>
+    <org.gatein.shindig.version>1.0-r790473-Patch04</org.gatein.shindig.version>
     <org.gatein.pc.version>2.1.1-GA</org.gatein.pc.version>
     <commons-lang.version>2.4</commons-lang.version>
     <javax.servlet.servlet-api.version>2.5</javax.servlet.servlet-api.version>
@@ -269,6 +270,7 @@
         <artifactId>mockito-all</artifactId>
         <version>${mockito.version}</version>
       </dependency>
+     
     </dependencies>
   </dependencyManagement>
   <build>
