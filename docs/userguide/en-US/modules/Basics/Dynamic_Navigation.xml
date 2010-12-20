@@ -18,7 +18,7 @@
 		<title>Access Dynamic Navigation</title>
 		 <step>
 			<para>
-				Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> hover the mouse to SCV or CLV and select the <emphasis role="bold">Preferences </emphasis>icon.
+				Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> hover the mouse over SCV or CLV and select the <emphasis role="bold">Preferences </emphasis>icon.
 			</para>
 			 <para>
 				If you select the Preferences icon of SCV, the Content Detail Preferences form displays.
@@ -30,7 +30,7 @@
 		</step>
 		 <step>
 			<para>
-				Click the <emphasis role="bold">Advanced</emphasis> panel in the Content Detail Preferences form/ the Content List Preferences form.
+				Click the <emphasis role="bold">Advanced</emphasis> link in the Content Detail Preferences form/ the Content List Preferences form.
 			</para>
 			 <para>
 				The Dynamic Navigation will display.

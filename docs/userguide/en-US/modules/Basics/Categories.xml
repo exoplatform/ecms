@@ -1,199 +1,166 @@
-<?xml version='1.0' encoding='utf-8' ?>
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Category_Navigation">
-	<!--  This document was created with Syntext Serna Free.  --> <title>Category Navigation</title>
-	 <para>
-		Category Navigation Portlet and Parameterized Content List Viewer portlet get rid of long URLs when you view a content and help users see published documents or webcontents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the Parameterized Content List Viewer in such an easy way.
-	</para>
-	 <procedure id="proc-User_Guide-Category_Navigation-Access_to_Category_Navigation_Portlet">
-		<title>Access to Category Navigation Portlet</title>
-		 <step>
-			<para>
-				Go to <emphasis role="bold">News</emphasis> on the navigation bar:
-			</para>
-			 <mediaobject>
-				<imageobject role="html">
-					<imagedata align="center" fileref="images/newsnavigationbar.png" format="PNG" scale="100" width="444" />
-				</imageobject>
-				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="150mm" fileref="images/newsnavigationbar.png" format="PNG" width="444" />
-				</imageobject>
-
-			</mediaobject>
-			 <para>
-				The left panel lists all the categories containing documents or web contents.
-			</para>
-			 <para>
-				The right panel displays the documents selected in the left pane.
-			</para>
-
-		</step>
-		 <step>
-			<para>
-				Select a category that you want to view on the left, it will be shown on the right (only documents or web content published are shown).
-			</para>
-			 <mediaobject>
-				<imageobject role="html">
-					<imagedata align="center" fileref="images/categorypanes.png" format="PNG" scale="" width="444" />
-				</imageobject>
-				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="150mm" fileref="images/categorypanes.png" format="PNG" width="444" />
-				</imageobject>
-
-			</mediaobject>
-
-		</step>
-
-	</procedure>
-	
-	 <section id="sect-User_Guide-Category_Navigation-The_Edit_Modes_of_Category_Navigation_Portlet">
-		<title>The Edit Modes of Category Navigation Portlet</title>
-		 <para>
-			Administrators can edit the Category Navigation portlet with the following process: categorynavigation.png
-		</para>
-		 <procedure>
-			<title></title>
-			 <step>
-				<para>
-					Go to <emphasis role="bold">Group &gt; Administration &gt; Manage Pages</emphasis> on the Administration bar. The Manage Pages will appear:
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/categorynavigation.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Click 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/editicon4.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 that corresponds with the Category navigation portlet to open the page for edit this portlet.
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/editcn.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Click 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/editicon4.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 to open a form with the Edit Mode to edit the portlet.
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/cneditmode.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Click 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/icon1.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 to select the repository for documents in the Repository field.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Input the name of a category in the Title field.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Select the tree name for a category.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Select the template for displaying categories.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/magnifyingglassicon.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 icon to select the target path. The Page selector form will appear:
-				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/pageselector.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
-
-			</step>
-			 <step>
-				<para>
-					Click 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/bluedroparrow.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 to select the navigation on the left pane. The corresponding pages will be displayed on the left pane and the corresponding paths will be displayed on the right pane.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click the 
-					<inlinemediaobject>
-						<imageobject>
-							<imagedata fileref="images/newsletters-tick.png" format="PNG" />
-						</imageobject>
-
-					</inlinemediaobject>
-					 icon to select the path. This path will be displayed in the Show in page field.
-				</para>
-
-			</step>
-			 <step>
-				<para>
-					Click <emphasis role="bold">Save</emphasis> to accept saving the configuration for the Category Navigation portlet.
-				</para>
-
-			</step>
-
-		</procedure>
-		
-
-	</section>
-
+<!--  This document was created with Syntext Serna Free.  -->  <title>Category Navigation</title>
+  <para>
+  Category Navigation Portlet and Parameterized Content List Viewer portlet get rid of long URLs when you view a content and enable users to see published documents or webcontents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the Parameterized Content List Viewer easily.
+ </para>
+  <procedure id="proc-User_Guide-Category_Navigation-Access_to_Category_Navigation_Portlet">
+    <title>Access to Category Navigation Portlet</title>
+    <step>
+      <para>
+    Go to <emphasis role="bold">News</emphasis> on the navigation bar:
+   </para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata width="444" align="center" scale="100" fileref="images/newsnavigationbar.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsnavigationbar.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+      <para>
+    The left panel lists all the categories containing documents or web contents.
+   </para>
+      <para>
+    The right panel displays the documents selected in the left pane.
+   </para>
+    </step>
+    <step>
+      <para>
+    Select a category that you want to view on the left, it will be shown on the right (only documents or web content published are shown).
+   </para>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata width="444" align="center" scale="" fileref="images/categorypanes.png" format="PNG"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/categorypanes.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </step>
+  </procedure>
+  <section id="sect-User_Guide-Category_Navigation-The_Edit_Modes_of_Category_Navigation_Portlet">
+    <title>The Edit Modes of Category Navigation Portlet</title>
+    <para>
+   Administrators can edit the Category Navigation portlet with the following procedure:</para>
+    <procedure>
+      <title/>
+      <step>
+        <para>
+     Go to <emphasis role="bold">Group &gt; Administration &gt; Manage Pages</emphasis> on the administration bar. The Manage Pages will appear:
+    </para>
+        <mediaobject>
+          <imageobject>
+            <imagedata width="444" align="center" fileref="images/categorynavigation.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Click 
+     <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/edittion5.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+      in the <emphasis role="bold">Manage Pages</emphasis> that corresponds with the Category navigation portlet to open the page to edit this portlet.
+    </para>
+        <mediaobject>
+          <imageobject>
+            <imagedata width="444" align="center" fileref="images/editcn.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Click 
+     <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/editicon4.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+      to open a form with the Edit Mode to edit the portlet.
+    </para>
+        <mediaobject>
+          <imageobject>
+            <imagedata width="444" align="center" fileref="images/cneditmode.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Click 
+     <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/icon1.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+      to select the repository for documents in the Repository field.
+    </para>
+      </step>
+      <step>
+        <para>
+     Input the name of a category in the Title field.
+    </para>
+      </step>
+      <step>
+        <para>
+     Select the tree name for a category.
+    </para>
+      </step>
+      <step>
+        <para>
+     Select the template for displaying categories.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click the 
+     <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/magnifyingglassicon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+      icon to select the target path. The Page selector form will appear:
+    </para>
+        <mediaobject>
+          <imageobject>
+            <imagedata width="444" align="center" fileref="images/pageselector.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>
+     Click 
+     <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/bluedroparrow.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+      to select the navigation on the left pane. The corresponding pages will be displayed on the left pane and the corresponding paths will be displayed on the right pane.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click the 
+     <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/newsletters-tick.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+      icon to select the path. This path will be displayed in the Show in page field.
+    </para>
+      </step>
+      <step>
+        <para>
+     Click <emphasis role="bold">Save</emphasis> to accept saving the configuration for the Category Navigation portlet.
+    </para>
+      </step>
+    </procedure>
+  </section>
 </section>
-
-

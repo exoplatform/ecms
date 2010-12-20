@@ -14,7 +14,7 @@
 
 		</para>
 		 <para>
-			Categories are used to sort and organize documents to ease searches when browsing documents online. After creating a document, you should categorize it by adding it into a category. You should directly create a document in a category, then the document is automatically created a link to it in the category. When you browse the category, it will be possible to find the referenced documents and display them as if they were children of the category node.
+			Categories are used to sort and organize documents to ease searches when browsing documents online. After creating a document, you should categorize it by adding it to a category. You should directly create documents in a category, then the documents are automatically created links to them in the category. When you browse the category, it will be possible to find the referenced documents and display them as if they were children of the category node.
 		</para>
 		 <para>
 			Categories are stored in the JCR itself .

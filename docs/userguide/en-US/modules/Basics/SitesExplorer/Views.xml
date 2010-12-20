@@ -6,7 +6,7 @@
 <section id="sect-User_Guide-Views">
 	<!--  This document was created with Syntext Serna Free.  --> <title>Views</title>
 	 <para>
-		There have many drives in the Content Explorer. Each drive has some views that enable you to look at data in the drive in a particular way. Each view has some tabs and each tab contains some functions (or called actions).
+		There are many drives in the Content Explorer. Each drive has some views that enable you to look at data in the drive in a particular way. Each view has some tabs and each tab contains some functions (or called actions).
 	</para>
 	 <para>
 		&PRODUCT; supports you four ways to view nodes in a specific folder and show actions of corresponding tab on the Actions bar.
@@ -14,7 +14,7 @@
 	 <note>
 		<title>View Types</title>
 		 <para>
-			The number of View types depends on what drive you are browsing.You can manage the view types in the &PRODUCT; Administration. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views" /> for details
+			The number of View types depends on which drive you are browsing.You can manage the view types in the &PRODUCT; Administration. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views" /> for details.
 		</para>
 
 	</note>
@@ -96,7 +96,7 @@
 
 		</mediaobject>
 		 <para>
-			Especially, in this view, you can overload thumbnail image for node. For example, if you want to add thumbnail image for <emphasis role="bold">Digital Assets</emphasis>folder, do as follows:
+			Especially, in this view, you can overload a thumbnail image for a node. For example, if you want to add a thumbnail image for the <emphasis role="bold">Digital Assets</emphasis>folder, do the following:
 		</para>
 		 <procedure>
 			<title></title>
@@ -114,13 +114,13 @@
 						</imageobject>
 
 					</inlinemediaobject>
-					 to open the <emphasis role="bold">Add thumbnail image</emphasis> form:
+					 to open the <emphasis role="bold">Add thumbnail image</emphasis> form.
 				</para>
 
 			</step>
 			 <step>
 				<para>
-					Select an image used as a displaying icon for the selected folder by clicking the <emphasis role="bold">Browse...</emphasis>button.
+					Select an image from your machince to use as a display icon for the selected folder.
 				</para>
 
 			</step>
@@ -132,7 +132,7 @@
 			</step>
 			 <step>
 				<para>
-					Back to the parent folder (folder Pictures in this example) that contains the selected folder to see a icon used to display:
+					Back to the parent folder (folder Pictures in this example) that contains the selected folder to see a icon used to display.
 				</para>
 
 			</step>
@@ -145,7 +145,7 @@
 	 <section id="sect-User_Guide-Views-Cover_Flow_View">
 		<title>Cover Flow View</title>
 		 <para>
-			You can understand this view as a dynamical view because it brings the side-scrolling view to nodes in a folder. In this view, when a node is selected, its name is set with bold effect to more outstanding than others.
+			This view is defined as a dynamical one with the side-scrolling view to nodes in a folder. In this view, when a node is selected, its name is set with bold effect to more outstanding than others.
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -181,7 +181,7 @@
 
 		</mediaobject>
 		 <para>
-			To move from one node to another one, you can do any of these ways:
+			To move from one node to another one, you can do one of these ways:
 		</para>
 		 <itemizedlist>
 			<listitem>
@@ -210,10 +210,10 @@
 	 <section id="sect-User_Guide-Views-Slide_Show_View">
 		<title>Slide Show View</title>
 		 <para>
-			In this view type, pictures in folders are viewed in slide show.
+			In this view type, pictures in folders are viewed in the slide show.
 		</para>
 		 <para>
-			To view pictures in slide show, click the 
+			To view pictures in the slide show, click the 
 			<inlinemediaobject>
 				<imageobject>
 					<imagedata fileref="images/slideshowicon.png" format="PNG" />
@@ -244,7 +244,7 @@
 
 		</mediaobject>
 		 <para>
-			The Slide show view automatically show all picture nodes, users can control this slide show by clicking the below buttons:
+			The Slide Show view automatically show all picture nodes. Users can control this slide show by clicking the below buttons:
 		</para>
 		 <table>
 			<title></title>

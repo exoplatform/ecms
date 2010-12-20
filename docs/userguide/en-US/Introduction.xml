@@ -36,7 +36,7 @@
 				<term>CSS</term>
 				 <listitem>
 					<para>
-						This file is used to define the presentation of your entire site such as: font, color, size, etc.
+						This file is used to define the presentation of your entire site, such as font, color, size and more.
 					</para>
 
 				</listitem>
@@ -76,7 +76,7 @@
 				<term>Media:</term>
 				 <listitem>
 					<para>
-						This folder includes three sub folders:
+						This folder includes three sub-folders:
 					</para>
 					 <variablelist>
 						<varlistentry>
@@ -90,7 +90,7 @@
 
 						</varlistentry>
 						 <varlistentry>
-							<term>images:</term>
+							<term>Images:</term>
 							 <listitem>
 								<para>
 									Store all images, pictures used in a site.
@@ -100,7 +100,7 @@
 
 						</varlistentry>
 						 <varlistentry>
-							<term>videos:</term>
+							<term>Videos:</term>
 							 <listitem>
 								<para>
 									Store all video files used in a site.
@@ -272,12 +272,12 @@
 				A drive can be understood as a shortcut in the content repository. It enables administrators to limit visibility of each workspace for groups of users. It's also a simple way to hide the complexity of the content storage by showing only the structure that makes sense for Business users.
 			</para>
 			 <para>
-				More specifically, a drive consists of :
+				More specifically, a drive consists of:
 			</para>
 			 <itemizedlist>
 				<listitem>
 					<para>
-						a configured path from where the user will start when browsing the drive.
+						a configured path where the user will start when browsing the drive.
 					</para>
 
 				</listitem>
@@ -310,7 +310,7 @@
 				A node is an abstract basic unit used to build linked data structures, such as linked lists and trees, and computer-based representation of graphs. Nodes contain data and/or links to other nodes. Links between nodes are often implemented by pointers or references.
 			</para>
 			 <para>
-				A node can be thought of as a logical placeholder for data. It is a memory block which contains some data unit, and optionally a reference to some other data, which may be another node that contains other data. By linking one node with other interlinked nodes, very large and complex data structure can be formed.
+				A node can be defined as a logical placeholder for data. It is a memory block which contains some data units, and optionally a reference to some other data, which may be another node that contains other data. By linking one node with other interlinked nodes, very large and complex data structure can be formed.
 			</para>
 
 		</section>

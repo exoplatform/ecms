@@ -57,7 +57,7 @@
 					</listitem>
 					 <listitem>
 						<para>
-							Add Sym Links
+							Add Symlinks
 						</para>
 
 					</listitem>
@@ -153,13 +153,13 @@
 				 <itemizedlist>
 					<listitem>
 						<para>
-							Setup your browsing preferences
+							Set up your browsing preferences
 						</para>
 
 					</listitem>
 					 <listitem>
 						<para>
-							Cut/paste, Copy/past, Delete a node
+							Cut/paste, Copy/paste, Delete a node
 						</para>
 
 					</listitem>
@@ -245,12 +245,12 @@
 
 		</mediaobject>
 		 <para>
-			By default, there will be a list of all existing users, each user has a folder named with his username, that includes two sub folders (private and public). You can see both your private and public folders here but you only can see the public folder of other users.
+			By default, there will be a list of all existing users, each user has a folder named as his username, that includes two sub-folders (private and public). You can see both your private and public folders here but you only can see the public folder of other users.
 		</para>
 		 <itemizedlist>
 			<listitem>
 				<para>
-					In this drive you can:
+					In this drive, you can:
 				</para>
 				 <itemizedlist>
 					<listitem>
@@ -261,7 +261,7 @@
 					</listitem>
 					 <listitem>
 						<para>
-							View nodes from public folder of others
+							View nodes from public folder of others.
 						</para>
 
 					</listitem>
@@ -271,42 +271,42 @@
 			</listitem>
 			 <listitem>
 				<para>
-					In this drive you cannot:
+					In this drive, you cannot:
 				</para>
 				 <itemizedlist>
 					<listitem>
 						<para>
-							Add a folder/document in a root node
+							Add a folder/document in a root node.
 						</para>
 
 					</listitem>
 					 <listitem>
 						<para>
-							Add a folder/document in a folder named by other users and in child nodes of this folder.
+							Add a folder/document in a folder named as other users' username and to child nodes of this folder.
 						</para>
 
 					</listitem>
 					 <listitem>
 						<para>
-							Add folders/documents in a folder named by your username (e.g, you cannot add a folder/document in the folder "root"), but you can do in its child nodes "public" and "private".
+							Add folders/documents in a folder named as your username (e.g, you cannot add a folder/document in the folder "root"), but you can do in its child nodes "public" and "private".
 						</para>
 
 					</listitem>
 					 <listitem>
 						<para>
-							Rename a default folder
+							Rename a default folder.
 						</para>
 
 					</listitem>
 					 <listitem>
 						<para>
-							Lock folders named by a user
+							Lock folders named by a user.
 						</para>
 
 					</listitem>
 					 <listitem>
 						<para>
-							Delete a default folder
+							Delete a default folder.
 						</para>
 
 					</listitem>
@@ -322,10 +322,10 @@
 	 <section id="sect-User_Guide-Drives-Showhide_the_sidebar_in_a_drive">
 		<title>Show/hide the sidebar in a drive</title>
 		 <para>
-			The side bar is used to show nodes like a tree or show the related documents, tags, clipboard and saved searches.
+			The sidebar is used to show nodes like a tree or show the related documents, tags, clipboard and saved searches.
 		</para>
 		 <para>
-			You can show/hide the side bar in two ways:
+			You can show/hide the sidebar in two ways:
 		</para>
 		 <orderedlist numeration="arabic">
 			<listitem>
@@ -355,7 +355,7 @@
 					</step>
 					 <step>
 						<para>
-							Untick the <emphasis role="bold">Show sidebar</emphasis> check box <emphasis role="bold">&gt;</emphasis> <emphasis role="bold">Save</emphasis>.
+							Untick the <emphasis role="bold">Show sidebar</emphasis> checkbox <emphasis role="bold">&gt;</emphasis> <emphasis role="bold">Save</emphasis>.
 						</para>
 						 <para>
 							The drive will be displayed like the illustration below:
@@ -373,7 +373,7 @@
 					</step>
 					 <step>
 						<para>
-							To show the side bar, tick the <emphasis role="bold">Show sidebar</emphasis> check box in the '<emphasis role="bold">Preferences</emphasis>'.
+							To show the sidebar, tick the <emphasis role="bold">Show sidebar</emphasis> checkbox in the '<emphasis role="bold">Preferences</emphasis>'.
 						</para>
 
 					</step>
@@ -387,7 +387,7 @@
 					<title>Method 2</title>
 					 <step>
 						<para>
-							Simply click the border of this sidebar to hide it as the illustration below:
+							Simply click the Expand icon to hide the sidebar as the illustration below:
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
@@ -402,7 +402,7 @@
 					</step>
 					 <step>
 						<para>
-							Click that border again to show the sidebar back.
+							Click the Collapse icon to show the sidebar back.
 						</para>
 
 					</step>

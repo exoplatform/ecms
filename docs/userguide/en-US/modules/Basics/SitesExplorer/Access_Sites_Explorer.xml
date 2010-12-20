@@ -6,7 +6,7 @@
 <section id="sect-User_Guide-Access_Content_Explorer">
 	<!--  This document was created with Syntext Serna Free.  --> <title>Access Content Explorer</title>
 	 <para>
-		This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Content Explorer but the performing actions on Content Explorer depending on the role of each user.
+		This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Content Explorer but performing actions on Content Explorer depending on the role of each user.
 	</para>
 	 <procedure>
 		<title></title>
@@ -43,7 +43,7 @@
 					<term>Personal drives:</term>
 					 <listitem>
 						<para>
-							Personal drive is the working space of a user. If you want to do in private, select the Private drive, no one else can access or get your private resources. If you want to create resource and share with others, work in the Public drive.
+							Personal drive is the working space of a user. If you want to do in private, select the Private drive, no one else can access or get your private resources. If you want to create resources and share them with others, work in the Public drive.
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
@@ -65,7 +65,7 @@
 							The drive of a group is the working space of users in that group.
 						</para>
 						 <para>
-							In this example, the user "root" joins in three groups : "executive-board", "administrators" and "users" so he has right to access these group's drive.
+							In the following example, the user "root" joins in three groups : "executive-board", "administrators" and "users" so he has the right to access these group's drive.
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
@@ -84,7 +84,7 @@
 					<term>General drives:</term>
 					 <listitem>
 						<para>
-							This is the working space for everyone but your access right in different drives depends on your role. If you access as administrator role, you can see all drives; otherwise, if you access as web contributor role, you can see some drives only.
+							This is the working space for everyone but your access right in different drives depends on your role. If you access as administrator role, you can see all drives; otherwise, you can see some drives only as a web contributor role.
 						</para>
 
 					</listitem>

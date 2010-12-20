@@ -20,7 +20,7 @@
 			This function is used to add a new web content into a specific site.
 		</para>
 		 <para>
-			Do the following steps:
+			Do the following:
 		</para>
 		 <procedure id="proc-User_Guide-Create_a_new_web_content-Add_new_content">
 			<title>Add new content</title>
@@ -120,7 +120,7 @@
 			</step>
 			 <step>
 				<para>
-					Click <emphasis role="bold">Save as Draf</emphasis>t to save the content or <emphasis role="bold">Cancel</emphasis> to quit the Add New Document form.
+					Click <emphasis role="bold">Save as Draft</emphasis> to save the content or <emphasis role="bold">Cancel</emphasis> to quit the Add New Document form.
 				</para>
 
 			</step>
@@ -229,7 +229,7 @@
 									Illustration Image
 								</entry>
 								 <entry>
-									The path to an image that you want to upload into a site. This image will be used like an illustration of that site
+									The path to an image that you want to upload into a site. This image will be used like an illustration of that site.
 								</entry>
 
 							</row>
@@ -238,7 +238,7 @@
 									Image Type
 								</entry>
 								 <entry>
-									The image format that you want to upload to the site. It can be: image/gif; image/png; image/jpg; image/jpeg
+									The image format that you want to upload to the site. It can be: image/gif; image/png; image/jpg; image/jpeg.
 								</entry>
 
 							</row>
@@ -247,7 +247,7 @@
 									Summary
 								</entry>
 								 <entry>
-									You can give short description about the web content because it will be displayed with the illustration image when the web content is listed. The main content will be shown when it is selected to be viewed
+									You can give a short description about the web content because it will be displayed with the illustration image when the web content is listed. The main content will be shown when it is selected to be viewed.
 								</entry>
 
 							</row>
@@ -258,7 +258,7 @@
 
 				</table>
 				 <para>
-					To upload an image do as follows:
+					Do the following to upload an image:
 				</para>
 				 <procedure id="proc-User_Guide-Add_new_content-_Upload_an_image">
 					<title> Upload an image</title>
@@ -358,7 +358,7 @@
 			</step>
 			 <step>
 				<para>
-					Select to view a web content by double-clicking it on the left tree or on the right. The detailed information of web content will be viewed on the right panel.
+					Select the web content by double-clicking it on the left tree or on the right panel. The detailed information of web content will be viewed on the right panel.
 				</para>
 
 			</step>
@@ -371,7 +371,7 @@
 						</imageobject>
 
 					</inlinemediaobject>
-					 the action bar to show the edit form of the selected web content as the Add New Documetn form.
+					on the action bar to show the edit form of the selected web content as the Add New Document form.
 				</para>
 
 			</step>
@@ -412,7 +412,7 @@
 			<title>Delete a web content</title>
 			 <step>
 				<para>
-					Right-click the name of the web content that you want to delete and then select <emphasis role="bold">Delete</emphasis> in the menu:
+					Right-click the name of the web content that you want to delete and then select <emphasis role="bold">Delete</emphasis> in the drop-down menu:
 				</para>
 				 <mediaobject>
 					<imageobject role="html">

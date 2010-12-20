@@ -8,7 +8,7 @@
 	 <section id="sect-User_Guide-Preamble-Overview">
 		<title>Overview</title>
 		 <para>
-			Beginning as an Open Source project in the year 2002, eXo is well-known as the industry's first Java portlet container. With the aim of dominating the potential portal market through robust and easy-to-use applications, eXo Project has succeeded in attracting consumers in the whole world. Exo has actually opened the floodgates to various options in many markets, and customers have been choosing eXo as the best method for their success.
+			Beginning as an Open Source project in the year 2002, eXo is well-known as the industry's first Java portlet container. With the aim of dominating the potential portal market through robust and easy-to-use applications, eXo Project has succeeded in attracting consumers in the whole world. eXo has actually opened the floodgates to various options in many markets, and customers have been choosing eXo as the best method for their success.
 		</para>
 		 <para>
 			The eXo Platform™ software is a powerful Open Source that corporates portal and content management system. Users of the platform have a customized single point of access to the company's information system and resources.
@@ -214,7 +214,7 @@
 				<term>JCR:</term>
 				 <listitem>
 					<para>
-						eXo JCR allows applications to access or manage files independent of their location, and also provides advanced features such as unified access control, versioning, indexing and more.
+						eXo JCR allows applications to access or manage files independent of their location, and also provides advanced features, such as unified access control, versioning, indexing and more.
 					</para>
 
 				</listitem>
@@ -255,7 +255,7 @@
 		 <formalpara id="form-User_Guide-Why_Use_Site_Publisher-And_More...">
 			<title>And More...</title>
 			 <para>
-				&PRODUCT; also provides other powerful tools to manage an build content-rich websites such as CSS, Java Script and RSS support, advanced document management tool, collaboration tools, etc. All features is to meet your requirements for the purpose of easy site management, cost reduction in managing multiple sites in only one place.
+				&PRODUCT; also provides other powerful tools to manage an built content-rich websites, such as CSS, Java Script and RSS support, advanced document management tool, collaboration tools and more. All features are to meet your requirements for the purpose of easy site management, cost reduction in managing multiple sites in only one place.
 			</para>
 
 		</formalpara>
@@ -285,14 +285,14 @@
 			</listitem>
 			 <listitem>
 				<para>
-					know how to manage Web pages, set up a website, etc.
+					know how to set up a website, manage Web pages, etc.
 				</para>
 
 			</listitem>
 
 		</itemizedlist>
 		 <para>
-			In this guide, we will use the following accounts (username/ password) throughout the guide:
+			In this guide, we will use the following accounts (username/ password) to give the tutorial throughout the guide:
 		</para>
 		 <itemizedlist>
 			<listitem>
