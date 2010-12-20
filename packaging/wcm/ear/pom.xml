@@ -11,11 +11,7 @@
   <name>eXo WCM Extension EAR</name>
   <description>eXo WCM Extension EAR</description>
   <dependencies>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-packaging-wcm-config</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+    
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-services</artifactId>
@@ -181,11 +177,7 @@ exo-ecms-packaging-ecmdemo-webapp
               <artifactId>exo-ecms-core-parser</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
-            <jarModule>
-              <groupId>org.exoplatform.ecms</groupId>
-              <artifactId>exo-ecms-packaging-wcm-config</artifactId>
-              <includeInApplicationXml>true</includeInApplicationXml>
-            </jarModule>
+            
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-core-services</artifactId>
