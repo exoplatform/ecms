@@ -19,6 +19,8 @@ package org.exoplatform.ecm.webui.component.admin.manager;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminWorkingArea;
 import org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanelActionListener;
+import org.exoplatform.ecm.webui.component.admin.unlock.UILockHolderContainer;
+import org.exoplatform.ecm.webui.component.admin.unlock.UIPermissionSelector;
 import org.exoplatform.ecm.webui.component.admin.unlock.UIUnLockManager;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -43,7 +45,10 @@ public class UIUnLockManagerComponent extends UIAbstractManagerComponent {
     public void processEvent(Event<UIUnLockManagerComponent> event) throws Exception {
       UIECMAdminPortlet portlet = event.getSource().getAncestorOfType(UIECMAdminPortlet.class);
       UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);
-      uiWorkingArea.getChild(UIUnLockManager.class).update() ;
+      UIUnLockManager uiUnLockManager = uiWorkingArea.getChild(UIUnLockManager.class);
+      uiUnLockManager.update();
+      UILockHolderContainer uiLockHolderContainer = uiUnLockManager.getChild(UILockHolderContainer.class);
+      uiLockHolderContainer.getChild(UIPermissionSelector.class).changeGroup(null);
       uiWorkingArea.setChild(UIUnLockManager.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
