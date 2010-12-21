@@ -12,7 +12,7 @@ h1. CMIS features
 {include:document="xCMIS/WCMfeatures.wiki" /}
 
 h1. CMIS Usage code examples
-{include:document="xCMIS/CodeExamples.wiki /}
+{include:document="xCMIS/CodeExamples.wiki" /}
 
 h1. References
 {include:document="xCMIS/Links.wiki" /}
