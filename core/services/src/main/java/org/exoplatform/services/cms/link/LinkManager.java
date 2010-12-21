@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.cms.link;
 
+import java.util.List;
+
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
@@ -133,4 +135,15 @@ public interface LinkManager {
    * @throws RepositoryException if an unexpected error occurs
    */
   public String getTargetPrimaryNodeType(Node link) throws RepositoryException;
+  
+  /**
+   * Gives all links of the given node
+   * 
+   * @param targetNode The target node to get links
+   * @param linkType The type of link to get
+   * @param repoName Name of the repository
+   * @return the list of link of the target node with given type
+   * @throws Exception
+   */
+  public List<Node> getAllLinks(Node targetNode, String linkType, String repoName) throws Exception;
 }

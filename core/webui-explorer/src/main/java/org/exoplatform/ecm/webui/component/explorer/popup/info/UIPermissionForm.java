@@ -49,6 +49,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -80,8 +81,8 @@ import org.exoplatform.webui.form.UIForm;
 public class UIPermissionForm extends UIForm implements UISelectable {
   
   final static public String PERMISSION   = "permission";
-
   final static public String POPUP_SELECT = "SelectUserOrGroup";
+  final static public String SYMLINK = "exo:symlink";
 
   private Node               currentNode;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIPermissionForm");
@@ -284,6 +285,17 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
+      
+      if(currentNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)){
+        LinkManager linkManager = uiExplorer.getApplicationComponent(LinkManager.class);
+        List<Node> symlinks = linkManager.getAllLinks(currentNode, SYMLINK, uiExplorer.getRepositoryName());
+        for (Node symlink : symlinks) {
+          try {
+            linkManager.updateLink(symlink, currentNode);
+          } catch (Exception e) {}
+        }
+       }
+      
       LinkManager linkManager = uiExplorer.getApplicationComponent(LinkManager.class);
       List<Node> symlinks = LinkUtils.getAllSymlinks(currentNode, uiExplorer.getRepositoryName());
       for (Node symlink : symlinks) {
