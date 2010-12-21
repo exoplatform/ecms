@@ -60,16 +60,19 @@ public final class LinkUtils {
       if (index == 0) {
         path = path.substring(3);
       } else {
-        path = createPath(getParentPath(path.substring(0, index)), path.substring(index + 3));        
+        path = createPath(getParentPath(path.substring(0, index)), path.substring(index + 3));
+        if (!path.endsWith("/")) path = path.concat("/");        
       }
-    }
-    while ((index = path.indexOf("/.")) != -1) {
+    }   
+    // Avoid for file with name starts with a dot
+    while ((index = path.indexOf("/./")) != -1) {
       if (index == 0) {
         path = path.substring(2);
       } else {
         path = createPath(path.substring(0, index), path.substring(index + 2));
       }
     }
+    path = cleanPath(path);
     return path.length() == 0 ? "/" : path;
   }
   
@@ -218,7 +221,8 @@ public final class LinkUtils {
     
     // Remove unnecessary '/'
     path = path.replaceAll("/+", "/");
-    if (path.length() > 1 && path.charAt(path.length() - 1) == '/') {
+    // Avoid for file with name starts with a dot
+    if ((!(path.contains("/./"))) && path.length() > 1 && path.charAt(path.length() - 1) == '/') {
       path = path.substring(0, path.length() - 1);
     }
     return path;
