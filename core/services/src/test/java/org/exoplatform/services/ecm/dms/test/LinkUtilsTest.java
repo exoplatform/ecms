@@ -34,18 +34,20 @@ public class LinkUtilsTest extends BasicTestCase {
     assertEquals(LinkUtils.evaluatePath("/a/"), "/a");
     assertEquals(LinkUtils.evaluatePath("/////a////"), "/a");
     assertEquals(LinkUtils.evaluatePath("/.."), "/");
-    assertEquals(LinkUtils.evaluatePath("/."), "/");
+    assertEquals(LinkUtils.evaluatePath("/."), "/.");
+    assertEquals(LinkUtils.evaluatePath("/.a"), "/.a");
     assertEquals(LinkUtils.evaluatePath("/../.."), "/");
     assertEquals(LinkUtils.evaluatePath("/.././.."), "/");
     assertEquals(LinkUtils.evaluatePath("/./../.."), "/");
     assertEquals(LinkUtils.evaluatePath("/a/.."), "/");
     assertEquals(LinkUtils.evaluatePath("/./a/.."), "/");
-    assertEquals(LinkUtils.evaluatePath("/a/."), "/a");
+    assertEquals(LinkUtils.evaluatePath("/a/."), "/a/.");
     assertEquals(LinkUtils.evaluatePath("/a/../a"), "/a");
     assertEquals(LinkUtils.evaluatePath("/a/./b"), "/a/b");
     assertEquals(LinkUtils.evaluatePath("/a//.//b//"), "/a/b");
     assertEquals(LinkUtils.evaluatePath("/a/b/../c/.."), "/a");
     assertEquals(LinkUtils.evaluatePath("/a/b/../c/../.."), "/");
-    assertEquals(LinkUtils.evaluatePath("/a/b/../c/../../.."), "/");
+    assertEquals(LinkUtils.evaluatePath("/a/b/../c/../../.."), "/");   
+
   }
 }
