@@ -3,6 +3,7 @@
 	import org.exoplatform.wcm.webui.Utils;
 	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 	import org.exoplatform.ecm.webui.utils.LockUtil;
+	import org.exoplatform.services.wcm.core.NodeLocation;
 %>
 
 	<%
@@ -12,7 +13,12 @@
 		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
 
 		def node = uicomponent.getNodeView();
+
+		
 		if (node != null) {
+			def viewNodeLocation = NodeLocation.make(node);
+			def viewableNode = Utils.getViewableNodeByComposer(viewNodeLocation.getRepository(), viewNodeLocation.getWorkspace(), viewNodeLocation.getPath());
+			if (viewableNode != null) {
 			def isShowOptionBar = uicomponent.isShowOptionBar(); 
 			def isShowTitle = uicomponent.isShowTitle();
 			def isShowDate  = uicomponent.isShowDate();
@@ -136,6 +142,7 @@
 		<%
 		}
 	}
+}
 if (uicomponent.isPrinting()) {
   %>
    <script type="text/javascript">
