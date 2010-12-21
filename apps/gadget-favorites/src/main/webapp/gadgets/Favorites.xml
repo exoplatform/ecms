@@ -237,12 +237,15 @@
 				var showHTML = "<a  style=\"cursor: pointer;\" ";
                                 showHTML += " href= \" ";
                                 showHTML += prefixUrl;
-                                showHTML += "/portal/private/acme/editor/?path="
-                                showHTML += "/repository/collaboration/Users/"
+                                showHTML += "/portal/private/acme/editor/?path=";
+                                showHTML += "/repository/collaboration/Users/";
                                 showHTML += user;
-                                showHTML += "/Private/Favorites/"
+                                showHTML += "/Private/Favorites/";
 				showHTML += doc.Title;
-                                showHTML += "\"";
+                                showHTML += "\" ";
+       				showHTML += "target";
+       				showHTML += "=";
+       				showHTML += "\"_top\"";
        				showHTML += ">";
 				showHTML += doc.Title;
 				showHTML += "</a>";
