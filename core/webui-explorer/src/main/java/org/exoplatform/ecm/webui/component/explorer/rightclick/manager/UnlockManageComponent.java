@@ -27,6 +27,8 @@ import javax.jcr.Session;
 import javax.jcr.lock.LockException;
 import javax.jcr.version.VersionException;
 
+import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -42,6 +44,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -113,7 +116,12 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       JCRExceptionManager.process(uiApp, e);
       return;
     }
-    
+    String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
+    String remoteUser = node.getSession().getUserID();
+    if (remoteUser.equalsIgnoreCase(superUser)) {
+    	session = WCMCoreUtils.getSystemSessionProvider().getSession(node.getSession().getWorkspace().getName(), (ManageableRepository)node.getSession().getRepository());
+    	node = (Node)session.getItem(node.getPath());
+    }
     try {
       if(node.holdsLock()) {
         String lockToken = LockUtil.getLockToken(node);        

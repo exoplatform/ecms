@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.admin.unlock;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.jcr.AccessDeniedException;
@@ -33,14 +34,22 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
+import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.Membership;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -124,6 +133,20 @@ public class UILockNodeList extends UIComponentDecorator {
   }
   
   static public class UnLockActionListener extends EventListener<UILockNodeList> {
+    private List<String> getGroups(String userId) throws Exception {
+      PortalContainer  manager = PortalContainer.getInstance() ;
+      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+	  ((ComponentRequestLifecycle) organizationService).startRequest(manager);
+	  List<String> groupList = new ArrayList<String> ();
+	  //Collection<?> groups = organizationService.getGroupHandler().findGroupsOfUser(userId);
+	  Collection<?> gMembership = organizationService.getMembershipHandler().findMembershipsByUser(userId);
+	  Object[] objects = gMembership.toArray();
+	  for(int i = 0; i < objects.length; i ++ ){
+	    Membership member = (Membership)objects[i];	    
+	    groupList.add(member.getMembershipType()+":"+member.getGroupId());
+	  }
+	  return groupList;
+	}
     public void execute(Event<UILockNodeList> event) throws Exception {
       UIUnLockManager uiUnLockManager = event.getSource().getParent();
       UIApplication uiApp = uiUnLockManager.getAncestorOfType(UIApplication.class);
@@ -145,6 +168,7 @@ public class UILockNodeList extends UIComponentDecorator {
           }
         }
       }
+      
       if (lockedNode == null) {
         Object[] args = {nodePath};
         uiApp.addMessage(new ApplicationMessage("UILockNodeList.msg.access-denied-exception", args, 
@@ -154,6 +178,23 @@ public class UILockNodeList extends UIComponentDecorator {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
       }
+      LockService lockService = WCMCoreUtils.getService(LockService.class);
+      String remoteUser = lockedNode.getSession().getUserID();
+      List<String> authenticatedGroups = lockService.getAllGroupsOrUsersForLock();
+      List<String> memberShips = getGroups(remoteUser);
+      boolean isAuthenticated =false;
+      for (String group: authenticatedGroups) {
+    	  if (memberShips.contains(group)){
+    		isAuthenticated=true;
+    		break;
+    	  }
+      }
+      UserACL userACLService = WCMCoreUtils.getService(UserACL.class);
+      if (isAuthenticated || remoteUser.equals(userACLService.getSuperUser())) {
+    	  session = WCMCoreUtils.getSystemSessionProvider().getSession(lockedNode.getSession().getWorkspace().getName(), (ManageableRepository)lockedNode.getSession().getRepository());
+    	  lockedNode = (Node)session.getItem(lockedNode.getPath());
+      }
+      
       try {
         if(lockedNode.holdsLock()) {
           String lockToken = LockUtil.getLockToken(lockedNode);
