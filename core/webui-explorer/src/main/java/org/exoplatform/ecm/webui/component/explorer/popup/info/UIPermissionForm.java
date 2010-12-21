@@ -23,14 +23,7 @@ import java.util.List;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 
-
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
@@ -39,16 +32,15 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -284,12 +276,15 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      LinkManager linkManager = uiExplorer.getApplicationComponent(LinkManager.class);
-      List<Node> symlinks = linkManager.getAllLinks(currentNode, SYMLINK, uiExplorer.getRepositoryName());
-      for (Node symlink : symlinks) {
-        try {
-          linkManager.updateLink(symlink, currentNode);
-        } catch (Exception e) {}
+      
+      if(currentNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)){
+        LinkManager linkManager = uiExplorer.getApplicationComponent(LinkManager.class);
+        List<Node> symlinks = linkManager.getAllLinks(currentNode, SYMLINK, uiExplorer.getRepositoryName());
+        for (Node symlink : symlinks) {
+          try {
+            linkManager.updateLink(symlink, currentNode);
+          } catch (Exception e) {}
+        }
       }
       currentNode.getSession().save();
       uiForm.refresh();
