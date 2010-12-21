@@ -430,15 +430,16 @@ public class UIPropertyForm extends UIForm {
           Value[] values = {};
           List valueList = uiForm.processValues(type);
           values = uiForm.createValues(valueList, type, currentNode.getSession().getValueFactory());
-          if(currentNode.hasProperty(name)) {
-            currentNode.setProperty(name, values);
-          }
+          // if(currentNode.hasProperty(name)) {
+          currentNode.setProperty(name, values);
+          //}
         } else {
           Object objValue = uiForm.processValue(type);
           Value value = uiForm.createValue(objValue, type, currentNode.getSession().getValueFactory());
-          if(currentNode.hasProperty(name)) {
-            currentNode.setProperty(name, value);
-          }
+          //  if(currentNode.hasProperty(name)) {
+          //setProperty already checks whether the property exists if not it will create a new one as in the description
+          currentNode.setProperty(name, value);
+          //  }
         }
         currentNode.save();
         currentNode.getSession().save();
