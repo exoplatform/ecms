@@ -216,10 +216,10 @@
 		var subGroup = DOM.findFirstChildByClass(node, "div", "NodeGroup") ;
 		if(!subGroup) return false;
 		if(subGroup.style.display == "none") {
-			if (element.className == "ExpandIcon") 	element.className = "CollapseIcon" ;
+			if (element.className.match("ExpandIcon")) element.className = element.className.replace("ExpandIcon", "CollapseIcon");
 			subGroup.style.display = "block" ;
 		} else {
-			if (element.className == "CollapseIcon") element.className = "ExpandIcon" ;
+			if (element.className.match("CollapseIcon")) element.className = element.className.replace("CollapseIcon", "ExpandIcon");
 			subGroup.style.display = "none" ;
 		}
 		return true;
