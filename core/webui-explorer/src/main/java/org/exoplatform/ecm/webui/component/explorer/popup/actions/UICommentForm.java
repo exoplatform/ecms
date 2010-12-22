@@ -31,6 +31,7 @@ import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserHandler;
 import org.exoplatform.services.organization.UserProfile;
 import org.exoplatform.services.organization.UserProfileHandler;
+import org.exoplatform.wcm.webui.form.UIFormRichtextInput;
 import org.exoplatform.wcm.webui.validator.FckMandatoryValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -47,7 +48,6 @@ import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.EmailAddressValidator;
-import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -105,11 +105,11 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       addUIFormInput(new UIFormStringInput(FIELD_EMAIL, FIELD_EMAIL, null).addValidator(EmailAddressValidator.class)) ;
       addUIFormInput(new UIFormStringInput(FIELD_WEBSITE, FIELD_WEBSITE, null)) ;
     } 
-    addUIFormInput(new UIFormWYSIWYGInput(FIELD_COMMENT, FIELD_COMMENT, null).addValidator(FckMandatoryValidator.class)) ;
+    addUIFormInput(new UIFormRichtextInput(FIELD_COMMENT, FIELD_COMMENT, "").addValidator(FckMandatoryValidator.class)) ;
     if (isEdit()) {
       Node comment = getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodeCommentPath, document_.getSession());
       if(comment.hasProperty("exo:commentContent")){
-        getChild(UIFormWYSIWYGInput.class).setValue(comment.getProperty("exo:commentContent").getString());
+        getChild(UIFormRichtextInput.class).setValue(comment.getProperty("exo:commentContent").getString());
       }
     }
   }
@@ -136,7 +136,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     public void execute(Event<UICommentForm> event) throws Exception {
       UICommentForm uiForm = event.getSource() ;
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
-      String comment = uiForm.getChild(UIFormWYSIWYGInput.class).getValue() ;
+      String comment = uiForm.getChild(UIFormRichtextInput.class).getValue() ;
       CommentsService commentsService = uiForm.getApplicationComponent(CommentsService.class) ; 
       if(comment == null || comment.trim().length() == 0) {
         throw new MessageException(new ApplicationMessage("UICommentForm.msg.content-null", null, ApplicationMessage.WARNING)) ;
