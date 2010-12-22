@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.Node;
-
+import javax.jcr.NodeIterator;
 import org.exoplatform.commons.exception.ExoMessageException;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.services.jcr.impl.core.query.lucene.TwoWayRangeIterator;
@@ -36,6 +36,9 @@ public class PaginatedNodeIterator  extends PageList {
 
   /** The nodes. */
   protected List<Node> nodes;
+  
+  /** The node iterator. */
+  protected NodeIterator nodeIterator;
 
   /**
    * Gets the nodes.
@@ -65,11 +68,17 @@ public class PaginatedNodeIterator  extends PageList {
   }
 
   /**
-   * Instantiates a new paginated node iterator.
-   * 
-   * @param pageSize the page size
-   * @param nodes the nodes
-   */
+     * Used to display nodes in search portlets
+     * 
+     * @param nodeIterator the node iterator
+     * @param pageSize the page size
+     */
+  public PaginatedNodeIterator(NodeIterator nodeIterator, int pageSize) {
+     super(pageSize);
+     this.nodeIterator = nodeIterator;
+     this.setAvailablePage((int)nodeIterator.getSize());
+     this.currentListPage_ = null;
+  }   
   public PaginatedNodeIterator(List<Node> nodes, int pageSize) {
     super(pageSize);
     this.nodes = nodes;
@@ -88,12 +97,22 @@ public class PaginatedNodeIterator  extends PageList {
     checkAndSetPosition(page);
     currentListPage_ = new ArrayList();
     int count = 0;
-    for(int i = ((page - 1)*this.getPageSize()); i < nodes.size(); i++) {
-      currentListPage_.add(nodes.get(i));
-      count++;
-      if(count == getPageSize()) {
-        break;
-      }  
+    if (nodes != null) {
+        for(int i = ((page - 1)*this.getPageSize()); i < nodes.size(); i++) {
+    	    currentListPage_.add(nodes.get(i));
+    	    count++;
+    	    if(count == getPageSize()) {
+    	       break;
+    	    }
+    	}
+    } else {
+    	 while (nodeIterator.hasNext()) {
+    	        currentListPage_.add(nodeIterator.next());
+    	        count ++;
+    	        if(count == getPageSize()) {
+    	           break;
+    	        }  
+    	 }   
     }
     currentPage_ = page;
   }
@@ -118,7 +137,10 @@ public class PaginatedNodeIterator  extends PageList {
    * @return the total nodes
    */
   public long getTotalNodes() { 
-    return nodes.size();  
+	if (nodes != null)
+		return nodes.size();
+	else 
+		return nodeIterator.getSize();  
   }
 
   /**
@@ -161,18 +183,17 @@ public class PaginatedNodeIterator  extends PageList {
    * @param page the page
    */
   protected void checkAndSetPosition(int page) {
-    try {
-      //Iterate next
-      if (page > currentPage_) {
-        long skipNextNum = (page - (currentPage_ + 1)) * getPageSize();
-        ((TwoWayRangeIterator)nodes).skip(skipNextNum);
-      } else if(page <currentPage_) {
-        //Iterate back
-        int currentPageSize = currentListPage_.size();
-        long skipBackNum = ((currentPage_ - page) * getPageSize()) + currentPageSize;      
-        ((TwoWayRangeIterator)nodes).skipBack(skipBackNum);
-      }
-    }catch(Exception e) {}
+	  if (nodeIterator == null) return;
+	  //Iterate next
+	  if (page > currentPage_) {
+	      long skipNextNum = (page - (currentPage_ + 1)) * getPageSize();
+	      nodeIterator.skip(skipNextNum);
+	  } else if(page <currentPage_) {
+	      //Iterate back
+	      int currentPageSize = currentListPage_.size();
+	      long skipBackNum = ((currentPage_ - page) * getPageSize()) + currentPageSize;      
+	      ((TwoWayRangeIterator)nodeIterator).skipBack(skipBackNum);  
+	  }
   }
 
   /* (non-Javadoc)
@@ -181,4 +202,6 @@ public class PaginatedNodeIterator  extends PageList {
   public List getAll() throws Exception {
     throw new UnsupportedOperationException();
   }
+  public NodeIterator getNodeIterator() { return this.nodeIterator; }  
+  public void setNodeIterator(NodeIterator iterator) { this.nodeIterator = iterator; }
 }

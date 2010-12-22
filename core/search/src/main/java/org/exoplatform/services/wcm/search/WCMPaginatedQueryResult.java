@@ -57,7 +57,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
    * @throws Exception the exception
    */
   public WCMPaginatedQueryResult(QueryResult queryResult, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
-    super(queryResult, pageSize);
+    super(queryResult, pageSize, isSearchContent);
     this.queryCriteria = queryCriteria;
   }
 
