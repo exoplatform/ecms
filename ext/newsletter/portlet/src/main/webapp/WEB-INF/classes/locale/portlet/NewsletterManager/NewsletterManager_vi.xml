@@ -20,11 +20,11 @@
       <CreateLetter>New Letter</CreateLetter>
     </action>
     <title>
-      <newsletter>Newsletters</newsletter>
+      <eXoNewsletter>eXo Newsletter</eXoNewsletter>
     </title>
     <Email>
       <ConfirmUser>
-        <Subject>eXo Newsletter Confirm</Subject>
+        <Subject>Newsletter Confirm</Subject>
         <Content>Click #here# to views your newsletters</Content>
       </ConfirmUser>
     </Email>

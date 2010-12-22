@@ -15,7 +15,7 @@ if(uicomponent.categoryConfig != null){
 	<div class="NewsletterBoxContent">
 		<div class="BreadCumbs">
 			<a class="Selected" href="javaScript:void(0);" onclick="<%=uicomponent.event("BackToCategories")%>">
-				<%=_ctx.appRes("NewsletterPortlet.title.eXoNewsletter")%>
+				<%=_ctx.appRes("NewsletterPortlet.title.newsletter")%>
 			</a>
 			>
 			<a class="UnSelected"><%=uicomponent.categoryConfig.getTitle()%></a>
