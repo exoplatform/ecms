@@ -73,7 +73,7 @@ public class SmallPaginatedQueryResult extends WCMPaginatedQueryResult{
         rowIterator.skip(skipNum -1);        
         Row row = rowIterator.nextRow();
         ResultNode resultNode = new ResultNode(viewNode,row);
-        arrayList.addIfAbsent(resultNode);
+        arrayList.add(resultNode);
       }
       setPageSize(pageSize);
       setAvailablePage(arrayList.size());    
