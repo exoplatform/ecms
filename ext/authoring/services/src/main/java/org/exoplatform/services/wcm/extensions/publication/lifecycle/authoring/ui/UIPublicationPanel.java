@@ -26,6 +26,7 @@ import javax.jcr.Node;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
@@ -39,6 +40,7 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.A
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationContainer;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -133,6 +135,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
       String state = event.getRequestContext().getRequestParameter(OBJECTID) ;
       Node currentNode = publicationPanel.getCurrentNode();
       PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
+      WCMPublicationService wcmPublicationService = publicationPanel.getApplicationComponent(WCMPublicationService.class);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       HashMap<String, String> context = new HashMap<String, String>();
@@ -143,6 +146,9 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
       try {
         publicationPlugin.changeState(currentNode, state, context);
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
+        String siteName = Util.getPortalRequestContext().getPortalOwner();
+        String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+        wcmPublicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);        
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
