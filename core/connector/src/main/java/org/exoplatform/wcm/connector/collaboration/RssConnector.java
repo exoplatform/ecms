@@ -151,8 +151,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     contextRss.put(FEED_TITLE, title);
     if (desc==null) desc = "Powered by eXo "+ProductVersions.getCurrentVersion();
     contextRss.put(DESCRIPTION, desc);
-    
-    contextRss.put(LINK, server);
+    contextRss.put(LINK, server + "/"+PortalContainer.getCurrentPortalContainerName()+"/public/"+siteName);
 
     if (detailPage == null) detailPage  = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
     contextRss.put(DETAIL_PAGE, detailPage);
@@ -201,12 +200,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     String detailParam = (String) context.get(DETAIL_PARAM) ;
     String repository = (String) context.get(REPOSITORY) ;
     String workspace = (String) context.get(WORKSPACE) ;
-    String contentUrl;
-    if (!feedLink.endsWith("/") ) {
-    	contentUrl= feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
-    }else {
-    	contentUrl= feedLink + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
-    }
+    String contentUrl = feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
 
     if(feedTitle == null || feedTitle.length() == 0) feedTitle = "" ;
     try {
@@ -225,7 +219,12 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
         String url = contentUrl + node.getPath() ;
         SyndEntry entry = new SyndEntryImpl();
         
-        if (node.hasProperty(TITLE)) entry.setTitle(node.getProperty(TITLE).getString());                
+        if (node.hasProperty(TITLE)) {
+          String nTitle = node.getProperty(TITLE).getString();
+          //encoding
+          nTitle = new String(nTitle.getBytes("UTF-8"));
+          entry.setTitle(Text.encodeIllegalXMLCharacters(nTitle));                
+        }
         else entry.setTitle("") ;
         
         entry.setLink(url);        
@@ -274,3 +273,4 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     return null;
   }
 }
+
