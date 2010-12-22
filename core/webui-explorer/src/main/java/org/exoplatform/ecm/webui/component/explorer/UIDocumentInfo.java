@@ -100,6 +100,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -164,7 +165,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   private String timeLineSortByDate = "";
   
   public UIDocumentInfo() throws Exception {
-    pageIterator_ = addChild(UIPageIterator.class, null,CONTENT_PAGE_ITERATOR_ID);    
+    pageIterator_ = addChild(UIPageIterator.class, null,CONTENT_PAGE_ITERATOR_ID);
   }
 
   public String getTimeLineSortByFavourite() { return timeLineSortByFavourite; }
@@ -493,6 +494,12 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       }
     }
     return attachments;
+  }
+  
+  @Override
+  public String getAttachmentURL(Node attNode, Parameter[] params)
+      throws Exception {
+    return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
   }
 
   public boolean isNodeTypeSupported(String nodeTypeName) {
@@ -1250,4 +1257,5 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   public void setEnableVote(boolean value) {
     // TODO Auto-generated method stub
   }
+
 }

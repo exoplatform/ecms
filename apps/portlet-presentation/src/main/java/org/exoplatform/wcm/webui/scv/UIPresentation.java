@@ -23,18 +23,24 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.clv.UICLVPortlet;
+import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -169,16 +175,49 @@ public class UIPresentation extends UIBaseNodePresentation {
     return uicomponent;
   }
 
-public UIComponent getUIComponent(String mimeType) throws Exception {
-	// TODO Auto-generated method stub
-	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-	List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
-    Map<String, Object> context = new HashMap<String, Object>();
-    context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
-    for (UIExtension extension : extensions) {
-      UIComponent uiComponent = manager.addUIExtension(extension, context, this);
-      if(uiComponent != null) return uiComponent;
+  public UIComponent getUIComponent(String mimeType) throws Exception {
+  	// TODO Auto-generated method stub
+  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+  	List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
+      Map<String, Object> context = new HashMap<String, Object>();
+      context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
+      for (UIExtension extension : extensions) {
+        UIComponent uiComponent = manager.addUIExtension(extension, context, this);
+        if(uiComponent != null) return uiComponent;
+      }
+      return null;
+  }
+  
+  /**
+   * Gets the attachment URL.
+   * 
+   * @param node the node
+   * @return the attachment URL
+   * @throws Exception the exception
+   */
+  public String getAttachmentURL(Node node, Parameter[] params) throws Exception {
+    String link = null;
+    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletRequest portletRequest = portletRequestContext.getRequest();
+    String portalURI = portalRequestContext.getPortalURI();
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+    String basePath = Utils.getPortletPreference(UISingleContentViewerPortlet.PREFERENCE_TARGET_PAGE);
+    String scvWith = Utils.getPortletPreference(UISingleContentViewerPortlet.PREFERENCE_SHOW_SCV_WITH);
+    if (scvWith == null || scvWith.length() == 0)
+        scvWith = UISingleContentViewerPortlet.DEFAULT_SHOW_SCV_WITH;
+    if (node.isNodeType("nt:frozenNode")){
+      String uuid = node.getProperty("jcr:frozenUuid").getString();
+      Node originalNode = node.getSession().getNodeByUUID(uuid);
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
+    } else {
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
     }
-    return null;
-}
+    FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+    link = friendlyService.getFriendlyUri(link);
+    
+    return link;
+  }
+
 }
