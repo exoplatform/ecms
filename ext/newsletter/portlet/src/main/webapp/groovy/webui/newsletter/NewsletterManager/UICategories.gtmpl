@@ -12,7 +12,7 @@ import java.util.List;
 <div class="UINewsletterPortlet" id="$uicomponent.id">
 	<div class="NewsletterBoxContent">
 		<div class="BreadCumbs">
-			<a href="#" class="Selected"><%=_ctx.appRes("NewsletterPortlet.title.eXoNewsletter")%></a>
+			<a href="#" class="Selected"><%=_ctx.appRes("NewsletterPortlet.title.newsletter")%></a>
 		</div>
 		<%
 		if(uicomponent.isAdministrator()){

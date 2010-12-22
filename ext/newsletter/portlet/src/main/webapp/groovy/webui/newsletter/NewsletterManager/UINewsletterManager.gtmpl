@@ -8,7 +8,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 	<% uiform.begin() %>
 			<div class="BreadCumbs">
 				<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToCategories")%>">
-					eXo Newsletter
+					<%=_ctx.appRes("NewsletterPortlet.title.newsletter")%>
 				</a>
 				>
 				<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToSubcriptions")%>">
