@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                   <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
-                  <td class="FieldComponent" colspan="3"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+                  <td class="FieldComponent" title="<%=uicomponent.getSavedPath()%>" colspan="3"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
                   <td style="align:right; width:30px;">
                     <div class="IconInContextHelp ShowHelpIcon" id="FolderPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'false')">
                       <div style="position: absolute;">
