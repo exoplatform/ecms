@@ -41,7 +41,8 @@ public class UnescapeHTMLFilter extends TokenFilter {
     Token nextToken = input.next();
     if (nextToken != null) {
       String tokenText = nextToken.termText();
-      tokenText = StringEscapeUtils.unescapeHtml(tokenText);
+      String brTokenText = tokenText.replaceAll("<br", "");    
+      tokenText = StringEscapeUtils.unescapeHtml(brTokenText);
       tokenText = tokenText.replaceAll("\\<.*?>", "");
       // Finally we return a new token with transformed characters.
       if(tokenText.equals("")||tokenText.trim().equals("")){
