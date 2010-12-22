@@ -85,6 +85,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   protected String selectedNodeReporitory =null;
   protected String selectedNodeWorkspace =null;
   protected String selectedNodeDrive = null;
+  protected String selectedNodePath = null;
 
   private UIFormStringInput             txtContentPath, txtPrintPage, txtPrintPageParameter;
   
@@ -231,6 +232,13 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     this.selectedNodeWorkspace = nodeWS;    
     this.selectedNodeDrive = nodeDrive;
   }
+  public void setSelectedNodePath(String path)
+  {
+	  this.selectedNodePath = path;
+  }
+  public String getSelectedNodePath() {
+	  return this.selectedNodePath;
+  }
   /**
    * Get the temporary node UUID
    * @return
@@ -302,6 +310,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       Node savedNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
       if (savedNode==null) return null;
       this.setSelectedNodeInfo(savedNode.getUUID(), repository, workspace, nodeDrive);
+      this.setSelectedNodePath(savedNode.getPath());
       return getTitle(savedNode);
     }catch (RepositoryException re) {
       return null;
@@ -361,6 +370,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       if (selectedNode==null) return;
       strNodeUUID = selectedNode.getUUID();
       this.setSelectedNodeInfo(strNodeUUID, strRepository, strWorkspace, strDrive);
+      this.setSelectedNodePath(selectedNode.getPath());
       getUIStringInput(selectField).setValue(Text.unescapeIllegalJcrChars(getTitle(selectedNode)));
     }else if (PRINT_VIEW_PAGE_INPUT.equals(selectField)) {
       getUIStringInput(selectField).setValue(strPath);
