@@ -35,6 +35,7 @@ import javax.xml.transform.dom.DOMSource;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.ProductVersions;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -224,14 +225,19 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
         String url = contentUrl + node.getPath() ;
         SyndEntry entry = new SyndEntryImpl();
         
-        if (node.hasProperty(TITLE)) entry.setTitle(node.getProperty(TITLE).getString());                
+        if (node.hasProperty(TITLE)) {
+          String nTitle = node.getProperty(TITLE).getString();
+          //encoding
+          nTitle = new String(nTitle.getBytes("UTF-8"));
+          entry.setTitle(Text.encodeIllegalXMLCharacters(nTitle));                
+        }
         else entry.setTitle("") ;
         
         entry.setLink(url);        
         SyndContent description = new SyndContentImpl();
         description.setType("text/plain");
         
-        if (node.hasProperty(SUMMARY)) description.setValue(node.getProperty(SUMMARY).getString().replaceAll("&nbsp;", " "));
+        if (node.hasProperty(SUMMARY)) description.setValue(Text.encodeIllegalXMLCharacters(node.getProperty(SUMMARY).getString()).replaceAll("&nbsp;", " "));
         else description.setValue("") ;
         
         entry.setDescription(description);        
