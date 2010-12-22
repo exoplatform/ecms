@@ -115,9 +115,8 @@ public class UICLVFolderMode extends UICLVContainer {
     }      
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
     		(folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
-    String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
     return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
-    		Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
+        Text.escapeIllegalJcrChars(nodeLocation.getPath()), filters, WCMCoreUtils.getUserSessionProvider());
   }
   /**
 	 * Gets the bar info show.
