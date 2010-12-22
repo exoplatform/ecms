@@ -29,7 +29,7 @@
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent {
-	width: 85%;
+	width: 75%;
 }
 
 .UIWorkflowPortlet .WorkflowPortletContent{
@@ -264,7 +264,7 @@
 }
 
 .WorkflowPortletContent .UIFormGrid td.FieldLabel {
-	width: 128px;
+	width: 180px;
 }
 
 .WorkflowPortletContent .UIUploadProcess .ProgressBarFrame { 

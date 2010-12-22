@@ -26,11 +26,16 @@
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldLabel {
-	width: 25%;
+         width: 25%;
+	 padding: 4px;
+         text-align: right;
+         vertical-align: bottom;
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent {
-	width: 85%;
+	width: 75%;
+        vertical-align: bottom;
+
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent .SelectUserIcon{
@@ -285,7 +290,7 @@
 }
 
 .WorkflowPortletContent .UIFormGrid td.FieldLabel {
-	width: 128px;
+	width: 180px;
 }
 
 .WorkflowPortletContent .UIUploadProcess .FileNameLabel {

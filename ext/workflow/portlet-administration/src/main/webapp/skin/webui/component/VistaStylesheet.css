@@ -28,7 +28,7 @@
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent {
-	width: 85%;
+	width: 75%;
 }
 
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent .SelectUserIcon{
@@ -300,7 +300,7 @@
 }
 
 .WorkflowPortletContent .UIFormGrid td.FieldLabel {
-	width: 128px;
+	width: 180px;
 }
 
 .EmptyGrid {
