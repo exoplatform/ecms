@@ -1870,6 +1870,7 @@
       <name-invalid>Veldnaam mag geen speciale tekens</name-invalid>
       <name-existing>Deze zoekopdracht naam al bestaat. Kies een andere naam, alstublieft!</name-existing>
       <invalid-query>Ongeldige zoekopdracht. Controleer uw zoekopdracht verklaring, gelieve!</invalid-query>
+      <access-denied>Toegang geweigerd! U hebt geen toegang tot deze functie.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>

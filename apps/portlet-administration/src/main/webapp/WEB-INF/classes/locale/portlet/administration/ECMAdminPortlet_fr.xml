@@ -1874,6 +1874,7 @@
       <name-invalid>Caractères invalides détectés dans le nom de la requête</name-invalid>
       <name-existing>Une requête du même nom existe déjà</name-existing>
       <invalid-query>Requuêtes invalide. Veuillez vérifier le code de votre requête !</invalid-query>
+      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>

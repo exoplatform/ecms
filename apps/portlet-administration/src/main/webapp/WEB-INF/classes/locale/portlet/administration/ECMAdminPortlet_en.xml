@@ -1869,6 +1869,7 @@
       <name-invalid>Field name must not contain any special character</name-invalid>
       <name-existing>This query name already exists. Choose another name, please!</name-existing>
       <invalid-query>Invalid query. Check your query statement, please!</invalid-query>
+      <access-denied>Access denied! You haven't got permission in this function.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>

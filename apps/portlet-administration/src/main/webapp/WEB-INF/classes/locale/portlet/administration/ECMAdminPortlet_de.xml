@@ -1866,6 +1866,7 @@
       <name-invalid>Name im Feld darf keine besonderen Symbole enthalten</name-invalid>
       <name-existing><![CDATA[Abfragename existiert schon. Bitte einen anderen w&auml;hlen!]]></name-existing>
       <invalid-query><![CDATA[Ung&uuml;ltige Abfrage. &Uuml;berpr&uuml;fen Sie bitte die Abfrageaussage!]]></invalid-query>
+      <access-denied>Kein Zugang! Sie haben in dieser Funktion keine Genehmigung.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
