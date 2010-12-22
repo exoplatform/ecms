@@ -22,7 +22,7 @@
       <RemoveModerators>إزالة</RemoveModerators>
     </action>
     <title>
-      <eXoNewsletter>رسالة إخبارية  eXo </eXoNewsletter>
+      <newsletter>رسالة إخبارية </newsletter>
       <Preferences>تفضيلات</Preferences>
     </title>
   </NewsletterPortlet>
