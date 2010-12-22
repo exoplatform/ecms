@@ -126,9 +126,12 @@ EcmContentSelector.prototype.buildECSTreeView = function() {
 		var strName = nodeList[i].getAttribute("name") ;
 		var id = eXo.ecm.ECS.generateIdDriver(nodeList[i]);
 		var isUpload = nodeList[i].getAttribute("isUpload");
+		var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
+		if (nodeDriveName==null) nodeDriveName='';
+
 		treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 		treeHTML += 	'<div class="ExpandIcon">';		
-		treeHTML += 		'<a title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload+'">';
+		treeHTML += 		'<a title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="NodeIcon DefaultPageIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 		treeHTML +=				decodeURIComponent(strName);	
 		treeHTML +=			'</a>';
 		treeHTML += 	'</div>';			
@@ -151,7 +154,8 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	var connector = ECS.connector;
 	var currentFolder;
 	var driverName;	
-	var driverPath = currentNode.getAttribute("driverPath");	
+	var driverPath = currentNode.getAttribute("driverPath");
+	var nodeDriveName = currentNode.getAttribute("nodedrivename");
 	if(driverPath && driverPath != "") {		
 		driverName =	currentNode.getAttribute('name');
 		eXo.ecm.ECS.driverName = driverName;
@@ -186,6 +190,10 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	eXo.ecm.ECS.currentNode = currentNode;
 	driverName = eXo.ecm.ECS.driverName;
 	var filter = '';
+	if (nodeDriveName!=null && nodeDriveName.length>0 ) {
+		eXo.ecm.ECS.driverName = driverName =nodeDriveName;
+	}
+
 	var dropdownlist = document.getElementById("Filter");
 	if(dropdownlist) filter = dropdownlist.options[dropdownlist.selectedIndex].value;
 	else filter = 'All';
@@ -213,6 +221,8 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 			var workspace =  nodeList[i].getAttribute("workspace");
 			var isUpload = nodeList[i].getAttribute("isUpload");
 			var label = nodeList[i].getAttribute("label");
+			var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
+			if (nodeDriveName==null) nodeDriveName='';
 			if (!label) label = strName;
 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
@@ -272,9 +282,11 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 			var id = eXo.ecm.ECS.generateIdNodes(nodeList[i], currentNode.id);
 			var strName = nodeList[i].getAttribute("name");
 			var isUpload = nodeList[i].getAttribute("isUpload");
+			var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
+			if (nodeDriveName==null) nodeDriveName='';
 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
-			treeHTML +=			'<a title="'+ decodeURIComponent(strName) +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload+'">';
+			treeHTML +=			'<a title="'+ decodeURIComponent(strName) +'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 			treeHTML +=				decodeURIComponent(strName);	
 			treeHTML += 		'</a>';
 			treeHTML +=		'</div>';
@@ -291,9 +303,11 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 				var id = eXo.ecm.ECS.generateIdNodes(currentNodeList[i], currentNode.id);
 				var	strName	= currentNodeList[i].getAttribute("name");
 				var isUpload = currentNodeList[i].getAttribute("isUpload");
+				var nodeDriveName = currentNodeList[i].getAttribute("nodeDriveName");
+				if (nodeDriveName==null) nodeDriveName='';
 				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 				treeHTML += 	'<div class="ExpandIcon">';
-				treeHTML +=			'<a title="'+decodeURIComponent(strName)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload+'">';
+				treeHTML +=			'<a title="'+decodeURIComponent(strName)+'" class="NodeIcon DefaultPageIcon" href="javascript:void(0);" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				treeHTML +=				decodeURIComponent(strName);	
 				treeHTML += 		'</a>';
 				treeHTML +=		'</div>';
