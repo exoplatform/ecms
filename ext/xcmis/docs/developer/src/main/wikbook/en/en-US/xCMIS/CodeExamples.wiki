@@ -176,33 +176,7 @@ h2. Search of data and syntax examples.
 CMIS suports queries for more handful content search. Query service can uses both GET and POST for consuming requests. URL for query consists of repository name and method name "/query".
 GET request must contain query as a parameter named "q", in case of POST request query must be located in request body.
 
-CMIS query languages is based on a subset of the SQL-92 grammar. CMIS-specific language extensions to SQL-92 are called out explicitly. 
-The basic structure of a CMIS query is a SQL statement that MUST include the following clauses:
-*	SELECT (virtual columns): This clause identifies the set of virtual columns that will be included in the query results for each row.
-*	FROM  (Virtual Table Names): This clause identifies which Virtual Table(s) the query will run against.
-
-Additionally, a CMIS query MAY include the following clauses: 
-*	WHERE (conditions): This clause identifies the constraints that rows MUST satisfy to be considered a result for the query.
-*	ORDER BY (sort specification): This clause identifies the order in which the result rows MUST be sorted in the result row set
-
-Query examples:
-
- Simple query:
-{code}
-SELECT * FROM cmis:document
-{code}
-
- Fulltext query:
-{code}
-SELECT * FROM cmis:document WHERE CONTAINS("sometext")
-{code}
-
- Property query:
-{code}
-SELECT * FROM cmis:document WHERE (cmis:lastModificationDate >= TIMESTAMP '2007-01-01T00:00:00.000Z')
-{code}
-
-For more detailed instructions how to construct queries please refer to CMIS spec chapter 2.1.10 or to [xCMIS documentation|http://code.google.com/p/xcmis/wiki/xCMISSQLQueryUsecases].
+For more detailed instructions how to construct queries please refer see chapter 4.3.5.
 
 h3. Using java.
 
