@@ -5,6 +5,7 @@
 %>
 <%
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
+import org.exoplatform.webui.core.UIComponent;
 %>
 <%
 if(uicomponent.categoryConfig != null){
@@ -186,11 +187,16 @@ if(uicomponent.categoryConfig != null){
 								<%=_ctx.appRes("UICategories.title.AWaitingLetter")%>
 							</th>
 							<th class="thContent Title" style="border-right:none;">
-								<%uicomponent.renderChild("UISubscriptionsCheckAll")%>
+								<%
+								UIComponent child = uicomponent.getChildById("UISubscriptionsCheckAll");
+								if (child != null) {
+								    uicomponent.renderChild("UISubscriptionsCheckAll")
+								}
+								%>
 							</th>
 						</tr>					
 						<%
-							if(listSubscriptions.size() > 0){
+							if(listSubscriptions != null && listSubscriptions.size() > 0){
 								int i = 0;
 								String classTr = "";
 								for(NewsletterSubscriptionConfig subScription in listSubscriptions){									
