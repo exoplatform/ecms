@@ -54,6 +54,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -284,6 +285,12 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     }
     return attachments;
   }  
+  
+  @Override
+  public String getAttachmentURL(Node attNode, Parameter[] params)
+      throws Exception {
+    return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
+  }
 
   public String getRssLink() { return null ; }
   public boolean isRssLink() { return false ; }
@@ -460,4 +467,5 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   public void setEnableVote(boolean value) {
     // TODO Auto-generated method stub
   }
+  
 }

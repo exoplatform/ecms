@@ -20,6 +20,8 @@ import java.util.List;
 
 import javax.jcr.Node;
 
+import org.exoplatform.web.application.Parameter;
+
 import org.exoplatform.webui.core.UIComponent;
 
 /**
@@ -117,6 +119,15 @@ public interface NodePresentation {
    */
   public List<Node> getAttachments() throws Exception;
 
+  /**
+   * Gets the attachment URL.
+   * 
+   * @return the attachment URL
+   * @throws Exception the exception
+   */
+  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception;
+  
+  
   /**
    * Checks if is rss link.
    * 

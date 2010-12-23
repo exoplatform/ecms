@@ -3,6 +3,7 @@
   import org.exoplatform.ecm.webui.utils.Utils ;
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIPopupWindow;
+  import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 	
 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
@@ -149,14 +150,16 @@
 						        if(attachments.size() > 0) {
 							        def removeattachcomponent = uicomponent.getRemoveAttach();
 							        String wsName = "";
-															for (att in attachments) {
-																if(att != null) {
-			  													wsName = att.getSession().getWorkspace().getName();
-			  													params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
-														%>
-														  <div class="AttachmentsContainer">	
+									for (att in attachments) {
+										if(att != null) {
+			  							wsName = att.getSession().getWorkspace().getName();
+			  							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
+			  							def viewAttachmentLink = uicomponent.getAttachmentURL(att, params);
+			  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
+										%>
+											<div class="AttachmentsContainer">	
 							                  <div class="AttachmentsContentIcon">
-							                  	<a onclick="<%=uicomponent.event("ChangeNode", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;"><%=att.getName()%></a>
+							                  	<a $linkActionName="$viewAttachmentLink" style="cursor: pointer;"><%=att.getName()%></a>
 							                  </div>
 							                  <% if (PermissionUtil.canRemoveNode(att)) {
 							                       params = [new Parameter("workspaceName", wsName), new Parameter("repository", uicomponent.getRepository())];

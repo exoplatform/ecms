@@ -58,6 +58,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -286,6 +287,12 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
       }
     }
     return attachments;
+  }
+  
+  @Override
+  public String getAttachmentURL(Node attNode, Parameter[] params)
+      throws Exception {
+    return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
   }
 
   public List<Node> getRelations() throws Exception {

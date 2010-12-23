@@ -43,6 +43,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
@@ -108,6 +109,12 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
       if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
     }
     return attachments;
+  }
+  
+  @Override
+  public String getAttachmentURL(Node attNode, Parameter[] params)
+      throws Exception {
+    return "";
   }
 
   /* (non-Javadoc)

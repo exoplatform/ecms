@@ -16,6 +16,10 @@
   </component>
   
   <component>
+    <type>org.exoplatform.services.migration.SCVPortletPreferenceMigrationService</type>
+  </component>  
+  
+  <component>
     <key>org.exoplatform.services.cms.CmsService</key>
     <type>org.exoplatform.services.cms.impl.CmsServiceImpl</type>
   </component>		
