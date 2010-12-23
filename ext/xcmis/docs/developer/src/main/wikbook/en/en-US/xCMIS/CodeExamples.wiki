@@ -1,4 +1,4 @@
-The following examples of CMIS usage may be useful for developers wants to access repository. Most of examples implies using Apache HTTP Client in java exaples or 
+The following examples of CMIS usage may be useful for developers wants to access repository. Most of examples implies using Apache HTTP Client in java examples or 
 Google gadets (gadgets.io) in javascript examples for making requests to CMIS.
 
 h2. Login to repository.
@@ -24,7 +24,7 @@ h3. Using java.
 
 h2. Listing of documents (folder, files).
 
-There are a few methods to get the documents listings, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
+There are a several methods to get the documents listings, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
 The difference between them is usage of different URL segments to get data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
 and a different kind results  (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in responce).
 
