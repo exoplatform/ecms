@@ -1334,4 +1334,6 @@
 .UIJCRExplorer .UIDrivesArea .UIDriversAreaContainer .ClearBoth{
 	clear: both;
 }
-
+.UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FileNameLabel {
+ overflow: hidden;
+}
