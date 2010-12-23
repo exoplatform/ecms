@@ -1865,6 +1865,7 @@
       <name-invalid>Tên không được phép chứa các kí tự đặc biệt</name-invalid>
       <name-existing>Tên của câu truy vấn này đã tồn tại. Hãy chọn một tên khác!</name-existing>
       <invalid-query>Truy vấn không hợp lệ. Kiểm tra lại câu lệnh!</invalid-query>
+      <access-denied>Bạn không có quyền thực hiện chức năng này.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>

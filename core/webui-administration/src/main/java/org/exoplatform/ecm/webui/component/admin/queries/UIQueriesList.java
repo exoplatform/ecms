@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.Session;
 
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.commons.utils.PageList;
@@ -28,6 +29,10 @@ import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponentDecorator;
@@ -74,7 +79,28 @@ public class UIQueriesList extends UIComponentDecorator {
   }
   
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
-  
+  public boolean canEditNode(Node node) {
+	  SessionProvider sProvider = WCMCoreUtils.getUserSessionProvider();
+	  try {
+		  ManageableRepository manageableRepository = ((ManageableRepository)node.getSession().getRepository());
+		  Session session = sProvider.getSession(node.getSession().getWorkspace().getName(), manageableRepository);
+		  session.checkPermission(node.getPath(), PermissionType.SET_PROPERTY);
+	  }catch (Exception e){
+		  return false;
+	  }
+	  return true;
+  }
+  public boolean canRemoveNode(Node node) {
+	  SessionProvider sProvider = WCMCoreUtils.getUserSessionProvider();
+	  try {
+		  ManageableRepository manageableRepository = ((ManageableRepository)node.getSession().getRepository());
+		  Session session = sProvider.getSession(node.getSession().getWorkspace().getName(), manageableRepository);
+		  session.checkPermission(node.getPath(), PermissionType.REMOVE);
+	  }catch (Exception e){
+		  return false;
+	  }
+	  return true;
+  }
   public List getQueryList() throws Exception { return uiPageIterator_.getCurrentPageData() ; } 
   
   @SuppressWarnings("unchecked")
@@ -82,7 +108,7 @@ public class UIQueriesList extends UIComponentDecorator {
     QueryService queryService = getApplicationComponent(QueryService.class) ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     List<Node> queries = queryService.getSharedQueries(repository, 
-        SessionProviderFactory.createSystemProvider()) ;
+    		SessionProviderFactory.createSystemProvider()) ;
     Collections.sort(queries, new QueryComparator()) ;
     return queries ;
   }

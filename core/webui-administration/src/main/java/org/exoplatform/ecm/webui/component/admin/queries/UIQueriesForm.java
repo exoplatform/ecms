@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.admin.queries;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.Value;
 import javax.jcr.query.InvalidQueryException;
@@ -203,6 +204,11 @@ public class UIQueriesForm extends UIForm implements UISelectable {
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
+      } catch (AccessDeniedException ade) {
+    	  uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.access-denied", null, 
+                  ApplicationMessage.WARNING)) ;
+    	  event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+    	  return ;
       }
       UIQueriesManager uiManager = uiForm.getAncestorOfType(UIQueriesManager.class) ;
       uiManager.getChild(UIQueriesList.class).updateQueriesGrid(1);

@@ -1866,6 +1866,7 @@
       <name-invalid>هناك بعض الأحرف غير متاحة في الإسم</name-invalid>
       <name-existing> إسم الإستبيان موجود.إختر إسم آخر، أرجوك!</name-existing>
       <invalid-query>الإستبيان غير صحيح.الرجاء التثبت منه!</invalid-query>
+      <access-denied> غير مسموح بالدخول!  لم تتحصل على الصلاحية في هذه المهمة!</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
