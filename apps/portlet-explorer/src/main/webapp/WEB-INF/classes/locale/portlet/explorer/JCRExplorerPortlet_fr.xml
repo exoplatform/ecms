@@ -99,7 +99,6 @@
       <Close>Fermer</Close>
       <TagExplorer>Nuage de tags</TagExplorer>
       <Clipboard>Presse-papier</Clipboard>
-      <SavedSearches>Recherches Sauvées</SavedSearches>
     </label>
     <title>
       <Control>Barre latérale</Control>
@@ -148,7 +147,7 @@
       <webDavView>Télécharger pour éditer</webDavView>
     </label>
     <msg>
-      <path-not-found>Ce noeud a été modifié ou supprimé, veuillez cliquer sur le bouton "Actualiser".</path-not-found>
+      <path-not-found>Cet élément a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -393,7 +392,7 @@
       <can-not-paste-node>Vous n'avez pas les droits suffisants pour coller ce noeud.</can-not-paste-node>
       <can-not-move-node>Vous n'avez pas les droits requis pour supprimer ce noeud.</can-not-move-node>
       <does-not-support-versioning>Le versioning n'est pas supporté par ce noeud</does-not-support-versioning>
-      <path-not-found>Ce noeud a été modifié ou supprimé, veuillez cliquer sur le bouton "Actualiser"</path-not-found>
+      <path-not-found>Cet élément a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser"</path-not-found>
       <paste-lock-exception>Impossible de coller le noeud car le noeud source ou le noeud cible est verrouillé ou possède une relation avec un noeud verrouillé.</paste-lock-exception>
       <can-not-checkin-node>Vous ne pouvez pas faire de check-in sur ce noeud. Veuillez vérifier vos permissions!</can-not-checkin-node>
       <can-not-checkout-node>Vous ne pouvez pas faire de check-out sur ce noeud. Veuillez vérifier vos permissions!</can-not-checkout-node>
@@ -442,7 +441,7 @@
       <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
       <fileName-error>Nom de fichier invalide</fileName-error>
       <constraint-violation>Le noeud courant n'autorise pas l'ajout d'un noeud du type '{0}'</constraint-violation>
-      <repository-exception>Erreur lors du sauvegarde : vous n'avez pas les droits suffisants ou le nom fournit ne doit pas avoir d'indexe ou existe.</repository-exception>
+      <repository-exception>Une erreur s'est produite. Veuillez contacter votre administrateur pour plus de détails.</repository-exception>
       <repository-exception-permission>Vous n'avez pas le droit d'ajouter un répertoire à ce noeud</repository-exception-permission>
       <numberformat-exception>Ce répertoire ne peut être sauvegardé. Input must be a number format</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
@@ -506,6 +505,7 @@
       <confirm-deleteattachment>Confirmez-vous la suppression du fichier attaché?</confirm-deleteattachment>
       <confirm-deletecomment>Confirmez-vous la suppression du commentaire?</confirm-deletecomment>
       <access-denied-exception>Accès interdit ! Veuillez vérifier vos droits d'accès à ce noeud</access-denied-exception>
+			<path-not-found>Cet élément a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser"</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Supprimer le fichier attaché</remove-attachment>
@@ -1677,7 +1677,7 @@
       <action>Action</action>
     </header>
     <info>
-      <child-not-found>Aucun contenu sélectionnable</child-not-found>
+      <child-not-found>Ce noeud n'a pas de fils</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1955,7 +1955,7 @@
       <name-exist>Le tag existe déjà ou est invalide</name-exist>
       <tagName-invalid>Caractères invalides détectés dans le nom du tag.</tagName-invalid>
       <tag-name-empty>Nom du tag requis</tag-name-empty>
-      <tagName-too-long>Nom du tag trop long (doit être inférieur à 20 caractères)</tagName-too-long>
+      <tagName-too-long>Nom du tag trop long (doit être inférieur à 30 caractères)</tagName-too-long>
     </msg>
     <introduction>
       <tagName>(Utilisez le séparateur "," pour ajouter plusieurs tags)</tagName>
@@ -3247,7 +3247,7 @@
   </WCMContentView>
   <UITagForm>
   		<msg>
-  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+  			 <NameAlreadyExist>Ce nom du tag déjà existe</NameAlreadyExist> 
   		</msg>
   </UITagForm>
   <!-- 
@@ -3255,48 +3255,48 @@
   -->  
   <UITreeTaxonomyList>
     <label>
-      <rootNodePath>Root tree</rootNodePath>
+      <rootNodePath>Arbre racine</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
   <UIJCRExplorer>  
     <msg>
-        <target-path-not-found>Target node not found!</target-path-not-found>
+        <target-path-not-found>Noeud cible n'est pas trouvé.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
  
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Choose category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Choisir une catégorie</UIOneTaxonomySelector>
       </label>
     </tab>
     <action>
-    	 <Close>Close</Close>
+    	 <Close>Fermer</Close>
     </action>
   </UICategoryManagerSearch>
   <UIJcrExplorerEditForm>  
     <label>  
-      <editInNewWindow>Edit in new window</editInNewWindow>
-      <showTopBar>Show Top Bar</showTopBar>
-      <showActionBar>Show Action Bar</showActionBar>
-      <showSideBar>Show Left Bar</showSideBar>
-      <showFilterBar>Show Filter Bar</showFilterBar>
+      <editInNewWindow>Modifier dans une nouvelle fenêtre</editInNewWindow>
+      <showTopBar>Afficher le Bar dessus</showTopBar>
+      <showActionBar>Afficher le Bar d'action</showActionBar>
+      <showSideBar>Afficher le Bar à gauche</showSideBar>
+      <showFilterBar>Afficher le Bar filtré</showFilterBar>
     </label>
   </UIJcrExplorerEditForm>  
   
   <UIPreferencesForm>
   	 <action>
-    	 <HideAdvance>Hide Advanced</HideAdvance>
-    	 <ShowAdvance>Show Advanced</ShowAdvance>
+    	 <HideAdvance>Cacher Préférence Avancée</HideAdvance>
+    	 <ShowAdvance>Afficher Préférence Avancée</ShowAdvance>
     </action>
     <label>
-    	<Advance>Advanced</Advance>
+    	<Advance>Avancée</Advance>
     </label>
   </UIPreferencesForm>
   <UIJCRExplorerPortlet>
 	<msg>
-	  <file-access-denied>File access denied!</file-access-denied>
+	  <file-access-denied>Accès au fichier est interdit.</file-access-denied>
 	</msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
@@ -3305,10 +3305,10 @@
       <ShowDrives>Montrer les lecteurs</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>    
+  <UIJcrExplorerEditForm>   
     <msg>
-   	  <fields-saved>All field values saved!</fields-saved>
-   	  <fields-cancelled>All field values cancelled!</fields-cancelled>
+      <fields-saved>Toutes les valeurs de champ sont enregistrées.</fields-saved>
+      <fields-cancelled>Toutes les valeurs de champ sont annulées.</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
 </bundle>
