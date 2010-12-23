@@ -282,6 +282,7 @@
     <msg>
       <get-list-users> erreur lorsque obtenir la liste des utilisateurs publics. </get-list-users>
       <set-infor-users> erreur lorsque ensemble d'information pour les utilisateurs. </set-infor-users>
+	  <remove-admin-role-of-root>Vous ne pouvez supprimer le rôle d'administrateur de l'utilisateur supérieur.</remove-admin-role-of-root>
     </msg>
   </UIManagerUsers>
 

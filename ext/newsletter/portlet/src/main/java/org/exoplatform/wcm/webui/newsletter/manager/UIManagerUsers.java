@@ -436,6 +436,11 @@ public class UIManagerUsers extends UITabPane {
     public void execute(Event<UIManagerUsers> event) throws Exception {
       UIManagerUsers managerUsers = event.getSource();
       String userId = event.getRequestContext().getRequestParameter(OBJECTID);
+      String superUserId = WCMCoreUtils.getService(UserACL.class).getSuperUser();
+      if (superUserId != null && superUserId.equalsIgnoreCase(userId)) {
+        Utils.createPopupMessage(managerUsers, "UIManagerUsers.msg.remove-admin-role-of-root", null, ApplicationMessage.WARNING);
+        return;
+      }
       managerUsers.managerUserHandler.deleteUserAddministrator(Utils.getSessionProvider(), NewsLetterUtil.getPortalName(), userId);
       managerUsers.updateListUser();
       event.getRequestContext().addUIComponentToUpdateByAjax(managerUsers.getChildById(managerUsers.UIGRID_MANAGER_MODERATOR)) ;

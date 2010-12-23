@@ -242,6 +242,11 @@
       <Moderator>Moderator</Moderator>
       <Redactor>Redactor</Redactor>
     </role>
+    <msg>
+      <get-list-users>Error when get list public users.</get-list-users>
+      <set-infor-users>Error when set information for users.</set-infor-users>
+	  <remove-admin-role-of-root>You cannot remove Administrator role of super user.</remove-admin-role-of-root>
+    </msg>	  
   </UIManagerUsers>
 
   <UINewsletterEntryManager>
