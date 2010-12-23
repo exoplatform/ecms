@@ -247,7 +247,7 @@ public class UITaggingForm extends UIForm {
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
-        if(t.trim().length() > 20) {
+        if(t.trim().length() > 30) {
           uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long", null, 
                                                   ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());

@@ -148,7 +148,7 @@
       <webDavView>Download And Allow Edition</webDavView>
     </label>
     <msg>
-      <path-not-found>Maybe this node was deleted or changed! Please click to refresh button!</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click to Refresh button!</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -392,7 +392,7 @@
       <can-not-paste-node>You don't have permission to paste to this node. Please contact with administrator to get correct right.</can-not-paste-node>
       <can-not-move-node>You don't have permission to move to this node. Please contact with administrator to get correct right.</can-not-move-node>
       <does-not-support-versioning>Versioning is not supported for this node</does-not-support-versioning>
-      <path-not-found>This node was deleted or changed. Please click to refresh button.</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click to Refresh button.</path-not-found>
       <paste-lock-exception>You can not paste '{0}' to this node because the source node or the destination node is locked or has relation with the locked node.</paste-lock-exception>
       <can-not-checkin-node>You can not check-in this node. Please check your right permission!</can-not-checkin-node>
       <can-not-checkout-node>You can not check-out this node. Please check your right permission!</can-not-checkout-node>
@@ -441,7 +441,7 @@
       <name-not-allowed>This name is not allowed.</name-not-allowed>
       <fileName-error>Invalid file name</fileName-error>
       <constraint-violation>Current node does not allow to add '{0}' node type</constraint-violation>
-      <repository-exception>Access deny! You don't have add permission in this folder</repository-exception>
+      <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
       <repository-exception-permission>You don't have permission to add a new folder on this node</repository-exception-permission>
       <numberformat-exception>Can not save this folder. The name provided must be number format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
@@ -505,6 +505,7 @@
       <confirm-deleteattachment>Do you want to remove this attachment file?</confirm-deleteattachment>
       <confirm-deleteattcomment>Do you want to remove this comment?</confirm-deleteattcomment>
       <access-denied-exception>Access denied! Maybe you have no privileges on reading or node removed or changed</access-denied-exception>
+	  <path-not-found>This element was deleted or changed. Please click to Refresh button.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Remove this attachment file</remove-attachment>
@@ -1950,7 +1951,7 @@
       <name-exist>Tag name '{0}' is existing</name-exist>
       <tagName-invalid>Have some invalid characters in tag name.</tagName-invalid>
       <tag-name-empty>Your tag name is empty</tag-name-empty>
-      <tagName-too-long>One of the tags entered was too long. Tags must be less than 20 characters long</tagName-too-long>
+      <tagName-too-long>One of the tags entered was too long. Tags must be less than 30 characters long</tagName-too-long>
     </msg>
     <introduction>
       <tagName>(Use "," separator to add multiple tag)</tagName>

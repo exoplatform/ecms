@@ -1962,7 +1962,7 @@
       <name-exist>Tên thẻ '{0}' đã tồn tại.</name-exist>
       <tagName-invalid>Có một số kí tự không hợp lệ trong tên nhãn.</tagName-invalid>
       <tag-name-empty>Tên thẻ của bạn là rỗng</tag-name-empty>
-      <tagName-too-long>Một trong các thẻ nhập vào là quá dài. Các thể phải có độ dài nhỏ hơn 20 kí tự.</tagName-too-long>
+      <tagName-too-long>Một trong các thẻ nhập vào là quá dài. Các thể phải có độ dài nhỏ hơn 30 kí tự.</tagName-too-long>
     </msg>
     <introduction>
       <tagName>(Sử dụng dấu "," để thêm nhiều thẻ)</tagName>

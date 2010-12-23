@@ -1996,7 +1996,7 @@
 			<name-exist>Tag naam '{0}' bestaat reeds</name-exist>
 			<tagName-invalid>ongeldige karakters in tag naam.</tagName-invalid>
 			<tag-name-empty>tag naam is leeg</tag-name-empty>
-			<tagName-too-long>Een van de tags is te lang.(max 20 karakters)
+			<tagName-too-long>Een van de tags is te lang.(max 30 karakters)
 			</tagName-too-long>
 		</msg>
 		<introduction>
