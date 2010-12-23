@@ -1334,3 +1334,7 @@
 	clear: both;
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FileNameLabel {
+  overflow: hidden;
+}
+
