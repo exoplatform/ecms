@@ -422,9 +422,7 @@ curl -T test.txt -X PUT -H "Content-Type:text/plain; charset=UTF-8" -u root:gtn 
 Go to the *Sites Explorer* and see changes applied from the local file in /acme/documents/test.txt.
 
 h2. CMIS search 
-
-CMIS provides a type-based query service for discovering objects that match specified criteria, by defining a read-only projection of the CMIS data
-model into a Relational View.
+CMIS provides a type-based query service for discovering objects that match specified criteria, by defining a read-only projection of the CMIS data model into a Relational View.
 
 CMIS query languages is based on a subset of the SQL-92 grammar. CMIS-specific language extensions to SQL-92 are called out explicitly. 
 The basic structure of a CMIS query is a SQL statement that MUST include the following clauses:
@@ -444,63 +442,58 @@ Each CMIS ObjectType definition has next query attributes:
 
 Property definition also contains queryName and queriable attributes with same usage.
 
+h3. Query examples.
+h4. Simple query.
 
-
-*Query examples.*
-
-Simple query: 
-
-Query : Select all `NASA_DOCUMENT`.
+Query : Select all {{{NASA_DOCUMENT}}}.
 
 {code:language=java}
-String statement = "SELECT * FROM " + NASA\_DOCUMENT;
+String statement = "SELECT * FROM " + NASA_DOCUMENT;
 {code}
 
 Query result:
-*All documents from Apollo program.
+* All documents from Apollo program.
 
 
-Find document by several constraints:
+h4. Find document by several constraints:
 
-Query : Select all documents where *exo:Booster* is 'Saturn V' and *exo:Commander* is Frank F. Borman, II or James A. Lovell, Jr.
+Query : Select all documents where exo:Booster is 'Saturn V' and exo:Commander is Frank F. Borman, II or James A. Lovell, Jr.
 
 Initial data:
-    * document1: PROPERTY\_BOOSTER - Saturn 1B, PROPERTY\_COMMANDER - Walter M. Schirra
-    * document2: PROPERTY\_BOOSTER - Saturn V,  PROPERTY\_COMMANDER - Frank F. Borman, II
-    * document3: PROPERTY\_BOOSTER - Saturn V,  PROPERTY\_COMMANDER - James A. Lovell, Jr.
+* document1: {{{PROPERTY_BOOSTER}}} - Saturn 1B, {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
+* document2: {{{PROPERTY_BOOSTER}}} - Saturn V,  {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
+* document3: {{{PROPERTY_BOOSTER}}} - Saturn V,  {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
 
 {code:language=java}
 String statement = "SELECT * FROM " +  NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER + " = " + "'Saturn V' AND ( " + PROPERTY_COMMANDER + " = 'Frank F. Borman, II' OR " + PROPERTY_COMMANDER + " = 'James A. Lovell, Jr.')"
 {code}
 
 Query result:
-*document2 and document3.
+* document2 and document3.
 
-Full-text search:
-
-Full-text search from jcr:content
+h4. Full-text search:
 
 Query : Select all documents that contains "here" word.
 
 Initial data:
-    * document1: content - "There must be test word"
-    * document2: content - "Test word is not here"
+* document1: content - "There must be test word"
+* document2: content - "Test word is not here"
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"here\")";
 {code}
 
 Query result:
-*document2.
+* document2.
 
-Extended full-text search:
+h4. Extended full-text search:
 
 Query : Select all documents that contains "There must" phrase and do not contain "check-word" word.
 
 Initial data:
-    * document1: content - "There must be test word"
-    * document2: content - " Test word is not here. Another check-word."
-    * document3: content - "There must be check-word."
+* document1: content - "There must be test word."
+* document2: content - "Test word is not here. Another check-word."
+* document3: content - "There must be check-word."
 
 {code:language=java}
 String statement =
@@ -508,16 +501,16 @@ String statement =
 {code}
 
 Query result:
-*document1.
+* document1.
 
 
-Date property comparison:
+h4. Date property comparison:
 
-Query : Select all documents where *cmis:lastModificationDate* more than *2007-01-01*.
+Query : Select all documents where cmis:lastModificationDate more than 2007-01-01.
 
 Initial data:
-    * document1: cmis:lastModificationDate - 2006-08-08
-    * document2: cmis:lastModificationDate - 2009-08-08
+* document1: cmis:lastModificationDate - 2006-08-08
+* document2: cmis:lastModificationDate - 2009-08-08
 
 {code:language=java}
 String statement =
@@ -526,32 +519,32 @@ String statement =
 {code}
 
 Query result:
-document2.
+* document2.
 
-Boolean property comparison:
+h4. Boolean property comparison:
 
-Query : Select all documents where property *PROPERTY_STATUS* equals to *false*.
+Query : Select all documents where property {{{PROPERTY_STATUS}}} equals to false.
 
 Initial data:
-    * document1: PROPERTY\_STATUS - true
-    * document2: PROPERTY\_STATUS - false
+* document1: {{{PROPERTY_STATUS}}} - true
+* document2: {{{PROPERTY_STATUS}}} - false
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE (" + PROPERTY_STATUS + " = FALSE )";
 {code}
   
 Query result:
-*document2.
+* document2.
 
-IN Constraint:
+h4. IN Constraint:
 
-Query : Select all documents where *PROPERTY_COMMANDER* is in set {*'Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.'*}.
+Query : Select all documents where {{{PROPERTY_COMMANDER}}} is in set {'Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.'}.
 
 Initial data:
-    * document1: PROPERTY\_COMMANDER - Walter M. Schirra
-    * document2: PROPERTY\_COMMANDER - Frank F. Borman, II
-    * document3: PROPERTY\_COMMANDER - James A. Lovell, Jr.
-    * document4: PROPERTY\_COMMANDER - Eugene A. Cernan
+* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
+* document2: {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
+* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
+* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cernan
 
 {code:language=java}
 String statement =
@@ -560,17 +553,17 @@ String statement =
 {code}
 
 Query result:
-*document2 and document3.
+* document2 and document3.
 
-Select all documents where longprop property NOT IN set:
+h4. Select all documents where longprop property NOT IN set:
 
-Query : Select all documents where *PROPERTY_COMMANDER* property not in set {*'Walter M. Schirra', 'James A. Lovell, Jr.'*}.
+Query : Select all documents where {{{PROPERTY_COMMANDER}}} property not in set {'Walter M. Schirra', 'James A. Lovell, Jr.'}.
 
 Initial data:
-    * document1: PROPERTY\_COMMANDER - Walter M. Schirra
-    * document2: PROPERTY\_COMMANDER - Frank F. Borman, II
-    * document3: PROPERTY\_COMMANDER - James A. Lovell, Jr.
-    * document4: PROPERTY\_COMMANDER - Eugene A. Cerna
+* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
+* document2: {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
+* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
+* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
 
 {code:language=java}
 String statement =
@@ -579,17 +572,17 @@ String statement =
 {code}
 
 Query result:
-*document2,document4.
+* document2,document4.
 
-Select all documents where longprop property NOT NOT IN set:
+h4. Select all documents where longprop property NOT NOT IN set:
 
-Query : Select all documents where *PROPERTY_COMMANDER* property *NOT NOT IN* set {*'James A. Lovell, Jr.'*}.
+Query : Select all documents where {{{PROPERTY_COMMANDER}}} property NOT IN set {'James A. Lovell, Jr.'}.
 
 Initial data:
-    * document1: PROPERTY\_COMMANDER - Walter M. Schirra
-    * document2: PROPERTY\_COMMANDER - Frank F. Borman, II
-    * document3: PROPERTY\_COMMANDER - James A. Lovell, Jr.
-    * document4: PROPERTY\_COMMANDER - Eugene A. Cerna
+* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
+* document2: {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
+* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
+* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
 
 {code:language=java}
 String statement =
@@ -597,84 +590,83 @@ String statement =
 {code}
 
 Query result:
-*document3.
+* document3.
 
-IN\_FOLDER constarint.
-Select all folders that are in specified folder:
+h4. {{{IN_FOLDER}}} constarint.
 
-Query : Select all folders that are in *folder1*.
+Query : Select all folders that are in folder1.
 
 Initial data:
-    * folder1:
-      document1:  Title - node1
-      * folder3:
-          folder4: 
-    * folder2:
-        document2: Title - node2
+* folder1:
+** document1:  Title - node1
+* folder3:
+** folder4: 
+* folder2:
+** document2: Title - node2
 
 {code:language=java}
 String statement = "SELECT * FROM cmis:folder  WHERE IN_FOLDER( '" + folder1.getObjectId() + "')";
 {code}
 
 Query result:
-*folder3.
+* folder3.
 
-Select all documents that are in specified folder:
+h4. Select all documents that are in specified folder:
 
-Query : Select all documents that are in *folder1*.
+Query : Select all documents that are in folder1.
 
 Initial data:
-    * folder1:
-      document1: Title - node1
-    * folder2:
-      document2: Title - node2
+* folder1:
+** document1: Title - node1
+* folder2:
+** document2: Title - node2
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER( '" + folder1.getObjectId() + "')";
 {code}
 
 Query result:
-*document1.
+* document1.
 
-Select all documents where query supertype is cmis:article:
+h4. Select all documents where query supertype is cmis:article:
 
 Initial data:
-    * document1: Title - node1 typeID - cmis:article-sports
-    * document2: Title - node2 typeID - cmis:article-animals
+* document1: Title - node1 typeID - cmis:article-sports
+* document2: Title - node2 typeID - cmis:article-animals
 
 {code:language=java}
 String stat = "SELECT * FROM cmis:article WHERE IN_FOLDER( '" + testRoot.getObjectId() + "')";
 {code}
 
 Query result:
-*document1,document2.
+* document1,document2.
 
-IN|_TREE constraint:
+h4. {{{IN_TREE}}} constraint:
 
-Query : Select all documents that are in tree of *folder1*.
+Query : Select all documents that are in tree of folder1.
 
 Initial data:
-    * folder1:
-        document1
-      * folder2:
-          document2
+* folder1:
+** document1
+* folder2:
+** document2
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder1.getObjectId() + "')";
 {code}
 
 Query result:
-*document1,document2.
+* document1,document2.
 
-LIKE Comparison:
+h4. LIKE Comparison:
 
-Query : Select all documents where *PROPERTY_COMMANDER* begins with "James".
+Query : Select all documents where {{{PROPERTY_COMMANDER}}} begins with "James".
 
 Initial data:
-    * document1: PROPERTY\_COMMANDER - Walter M. Schirra
-    * document2: PROPERTY\_COMMANDER - Frank F. James, II
-    * document3: PROPERTY\_COMMANDER - James A. Lovell, Jr.
-    * document4: PROPERTY\_COMMANDER - Eugene A. James
+* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
+* document2: {{{PROPERTY_COMMANDER}}} - Frank F. James, II
+* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
+* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. James
 
 
 {code:language=java}
@@ -682,16 +674,16 @@ String statement = "SELECT * FROM " + NASA_DOCUMENT + " AS doc WHERE " + PROPERT
 {code}
 
 Query result:
-*document3.
+* document3.
 
-Test LIKE constraint with escape symbols:
+h4. Test LIKE constraint with escape symbols:
 
-Query : Select all documents where *PROPERTY* like *'ad\\%min%'*.
+Query : Select all documents where PROPERTY like 'ad\%min%'.
 
 Initial data:
-    * document1: Title - node1, PROPERTY - ad%min master
-    * document2: Title - node2, PROPERTY - admin operator
-    * document3: Title - node2, PROPERTY - radmin
+* document1: Title - node1, PROPERTY - ad%min master
+* document2: Title - node2, PROPERTY - admin operator
+* document3: Title - node2, PROPERTY - radmin
 
 {code:language=java}
 String statement =
@@ -699,153 +691,153 @@ String statement =
 {code}
 
 Query result:
-*document1.
+* document1.
 
-NOT constraint:
+h4. NOT constraint:
 
-Query : Select all documents that not contains *"world"* word.
+Query : Select all documents that not contains "world" word.
 
 Initial data:
-    * document1: Title - node1, content - hello world
-    * document2: Title - node2, content - hello
+* document1: Title - node1, content - hello world
+* document2: Title - node2, content - hello
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE NOT CONTAINS(\"world\")";
 {code}
 
 Query result:
-*document2.
+* document2.
 
-Property existanse:
+h4. Property existanse:
 
-Query : Select all documents that has *PROPERTY_COMMANDER* property *IS NOT NULL*.
+Query : Select all documents that has {{{PROPERTY_COMMANDER}}} property IS NOT NULL.
 
 Initial data:
-    * document1: PROPERTY\_COMMANDER - Walter M. Schirra
-    * document2: PROPERTY\_COMMANDER - 
-    * document3: PROPERTY\_COMMANDER - James A. Lovell, Jr.
-    * document4: PROPERTY\_COMMANDER - 
+* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
+* document2: {{{PROPERTY_COMMANDER}}} - 
+* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
+* document4: {{{PROPERTY_COMMANDER}}} - 
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER + " IS NOT NULL";
 {code}
 
 Query result:
-*document1,document3.
+* document1,document3.
 
-ORDER BY:
+h4. ORDER BY:
 
 Query : Select all documents in default order (by document name).
 
 Initial data:
-    * document1: Title - Apollo 7
-    * document2: Title - Apollo 8
-    * document3: Title - Apollo 13
-    * document4: Title - Apollo 17
+* document1: Title - Apollo 7
+* document2: Title - Apollo 8
+* document3: Title - Apollo 13
+* document4: Title - Apollo 17
 
 {code:language=java}
 String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM NASA_DOCUMENT ";
 {code}
 
 Query result:
-*document3,document4,document1,document2.
+* document3,document4,document1,document2.
 
-ORDER BY ASC:
+h4. ORDER BY ASC:
 
-Query : Order by PROPERTY\_COMMANDER property value (in ascending order).
+Query : Order by {{{PROPERTY_COMMANDER}}} property value (in ascending order).
 
 Initial data:
-    * document1: PROPERTY\_COMMANDER - Walter M. Schirra
-    * document2: PROPERTY\_COMMANDER - Frank F. Borman, II
-    * document3: PROPERTY\_COMMANDER - James A. Lovell, Jr.
-    * document4: PROPERTY\_COMMANDER - Eugene A. Cerna
+* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
+* document2: {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
+* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
+* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
 
 {code:language=java}
 String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM NASA_DOCUMENT ORDER BY" + PROPERTY_COMMANDER;
 {code}
 
 Query result:
-*document4,document2,document3,document1.
+* document4,document2,document3,document1.
 
 
-ORDER BY DESC:
+h4. ORDER BY DESC:
 
-Query : Order by PROPERTY\_COMMANDER property value (in decending order).
+Query : Order by {{{PROPERTY_COMMANDER}}} property value (in decending order).
 
 Initial data:
-    * document1: PROPERTY\_COMMANDER - Walter M. Schirra
-    * document2: PROPERTY\_COMMANDER - Frank F. James, II
-    * document3: PROPERTY\_COMMANDER - James A. Lovell, Jr.
-    * document4: PROPERTY\_COMMANDER - Eugene A. James
+* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
+* document2: {{{PROPERTY_COMMANDER}}} - Frank F. James, II
+* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
+* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. James
 
 {code:language=java}
 String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM NASA_DOCUMENT ORDER BY" + PROPERTY_COMMANDER + " DESC";
 {code}
 
 Query result:
-*document1,document3,document2,document4.
+* document1,document3,document2,document4.
 
-ORDER BY SCORE (as columns):
+h4. ORDER BY SCORE (as columns):
 
 Query : Select all documents which contains word "moon" ordered by score.
 
 Initial data:
-    * document1: content - "Earth-orbital mission, the first manned launch"
-    * document2: content - "from another celestial body - Earth's Moon"
-    * document3: content - "NASA intended to land on the Moon, but a mid-mission technical"
-    * document4: content - "It was the first night launch of a U.S. human"
+* document1: content - "Earth-orbital mission, the first manned launch"
+* document2: content - "from another celestial body - Earth's Moon"
+* document3: content - "NASA intended to land on the Moon, but a mid-mission technical"
+* document4: content - "It was the first night launch of a U.S. human"
 
 {code:language=java}
 String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM NASA_DOCUMENT WHERE CONTAINS(\"moon\") ORDER BY SCORE() ";
 {code}
 
 Query result:
-*document2,document3.
+* document2,document3.
 
 
-Not equal comparison (decimal):
+h4. Not equal comparison (decimal):
 
-Query : Select all documents property PROPERTY\_BOOSTER\_MASS not equal to 3.
+Query : Select all documents property {{{PROPERTY_BOOSTER_MASS}}} not equal to 3.
 
 Initial data:
-    * document1: Title - node1, PROPERTY\_BOOSTER\_MASS - 3
-    * document2: Title - node2, PROPERTY\_BOOSTER\_MASS - 15
+* document1: Title - node1, {{{PROPERTY_BOOSTER_MASS}}} - 3
+* document2: Title - node2, {{{PROPERTY_BOOSTER_MASS}}} - 15
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER_MASS + " <> 3";
 {code}
 
 Query result:
-*document2.
+* document2.
 
-Not equal comparison (string):
+h4. Not equal comparison (string):
 
 Query : Select all documents property PROPERTY not equals to "test word second".
 
 Initial data:
-    * document1: PROPERTY - "test word first"
-    * document2: PROPERTY - "test word second"
+* document1: PROPERTY - "test word first"
+* document2: PROPERTY - "test word second"
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY + " <> 'test word second'";
 {code}
 
 Query result:
-*document1.
+* document1.
 
-More than comparison (>):
+h4. More than comparison (>):
 
 Query : Select all documents property PROPERTY\_BOOSTER\_MASS more than 5.
 
 Initial data:
-    * document1: PROPERTY\_BOOSTER\_MASS - 3
-    * document2: PROPERTY\_BOOSTER\_MASS - 15
+* document1: {{{PROPERTY_BOOSTER_MASS}}} - 3
+* document2: {{{PROPERTY_BOOSTER_MASS}}} - 15
 
 {code:language=java}
 String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER_MASS + " > 5";
 {code}
 
 Query result:
-*document2.
+* document2.
 
 
