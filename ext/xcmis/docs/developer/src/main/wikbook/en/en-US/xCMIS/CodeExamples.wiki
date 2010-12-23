@@ -8,13 +8,17 @@ basic variant of authenticaton.
 
 h3. Using java.
 
-{code}
-HttpClient client = new HttpClient(); 
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.UsernamePasswordCredentials;
+ import org.apache.commons.httpclient.auth.AuthScope;
+ import org.apache.commons.httpclient.methods.GetMethod; 
 
-client.getState().setCredentials(
-    new AuthScope("localhost", 8080, "realm"),
-    new UsernamePasswordCredentials("root", "exo");
-....
+ HttpClient client = new HttpClient(); 
+ client.getState().setCredentials(
+     new AuthScope("localhost", 8080, "realm"),
+     new UsernamePasswordCredentials("root", "exo");
+ ....
 {code}
 
 
@@ -26,14 +30,18 @@ and a different kind results  (getChildren() returns a flat structure, while a g
 
 h3. Using java.
 
-{code}
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.GetMethod;
+ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;  
+
+
  String url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/children/";
  url += obj_id;
 
- org.apache.commons.httpclient.HttpClient client = new HttpClient(
-                                                       new MultiThreadedHttpConnectionManager());
+ HttpClient client = new HttpClient(new MultiThreadedHttpConnectionManager());
  client.getHttpConnectionManager().
  getParams().setConnectionTimeout(10000);
 
@@ -66,7 +74,7 @@ performing request:
  gadgets.io.makeRequest(url, handler, params);
 {code}
 
-processing results (code located in handler specified while making request):
+processing results (code located in handler specified while making request, the same way may be used for all examples below):
 {code}
 var handler = function(resp) {
   var data = eval(resp.data.Entry);
@@ -86,14 +94,17 @@ content-stream ID is detected from it.
 
 h3. Using java.
 
-{code}
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.GetMethod;
+ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;  
+
  String url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/object/";
  url += obj_id;
 
- org.apache.commons.httpclient.HttpClient client = new HttpClient(
-                                                       new MultiThreadedHttpConnectionManager());
+ HttpClient client = new HttpClient(new MultiThreadedHttpConnectionManager());
  client.getHttpConnectionManager().
  getParams().setConnectionTimeout(10000);
 
@@ -106,12 +117,33 @@ h3. Using java.
  }
 {code}
 
-To get document's content-stream, the URL must contain the "/file" part, e.g.:
-{code}
+To get document's content-stream, the URL must contain the "/file" part, object ID, and optionally content stream ID, which can be used, for example, to obtain 
+renditions. If no streamId is specified, default stream will be returned.
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.PostMethod;
+
  String url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/file/";
  url += obj_id;
+ //Optionally
+ url += "?";
+ url += "streamid=";
+ url += streamID;
+
+ HttpClient client = new HttpClient();
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ PostMethod post = new PostMethod(url);
+ try { 
+ int result = client.executeMethod(post);
+ final InputStream stream = post.getResponseBodyAsStream(); 
+ } finally {
+   post.releaseConnection();
+ }
 {code}
 
 h3. Using javascript.
@@ -136,27 +168,70 @@ performing request:
 
 You can also use the ContentType.DOM parameter, you want to parse the feed by yourself (Using DOMParser for example).
 
+Making contestStream request in JS results in calling the standart browser dialog for file downloading.
 
 
-h2. Dearch of data and syntax examples.
+h2. Search of data and syntax examples.
 
 CMIS suports queries for more handful content search. Query service can uses both GET and POST for consuming requests. URL for query consists of repository name and method name "/query".
 GET request must contain query as a parameter named "q", in case of POST request query must be located in request body.
-More detailed explanation how to construct queries see at [http://code.google.com/p/xcmis/wiki/xCMISSQLQueryUsecases|xCMIS documentation].
+
+CMIS query languages is based on a subset of the SQL-92 grammar. CMIS-specific language extensions to SQL-92 are called out explicitly. 
+The basic structure of a CMIS query is a SQL statement that MUST include the following clauses:
+*	SELECT (virtual columns): This clause identifies the set of virtual columns that will be included in the query results for each row.
+*	FROM  (Virtual Table Names): This clause identifies which Virtual Table(s) the query will run against.
+
+Additionally, a CMIS query MAY include the following clauses: 
+*	WHERE (conditions): This clause identifies the constraints that rows MUST satisfy to be considered a result for the query.
+*	ORDER BY (sort specification): This clause identifies the order in which the result rows MUST be sorted in the result row set
+
+Query examples:
+
+ Simple query:
+{code}
+SELECT * FROM cmis:document
+{code}
+
+ Fulltext query:
+{code}
+SELECT * FROM cmis:document WHERE CONTAINS("sometext")
+{code}
+
+ Property query:
+{code}
+SELECT * FROM cmis:document WHERE (cmis:lastModificationDate >= TIMESTAMP '2007-01-01T00:00:00.000Z')
+{code}
+
+For more detailed instructions how to construct queries please refer to CMIS spec chapter 2.1.10 or to [xCMIS documentation|http://code.google.com/p/xcmis/wiki/xCMISSQLQueryUsecases].
 
 h3. Using java.
 
-{code}
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.PostMethod;
+ import org.apache.commons.httpclient.methods.StringRequestEntity;
+
  String url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/query/";
 
- org.apache.commons.httpclient.HttpClient client = new HttpClient();
+ HttpClient client = new HttpClient();
  client.getHttpConnectionManager().
  getParams().setConnectionTimeout(10000);
 
  PostMethod post = new PostMethod(url);
+ String s = "<?xml version='1.0' encoding='utf-8'?>" //
+         + "<cmis:query xmlns='http://www.w3.org/2005/Atom' xmlns:cmis='" + CmisConstants.CMIS_NS_URI + "'>"
+         + "<cmis:statement>SELECT * FROM cmis:document</cmis:statement>"
+         + "<cmis:maxItems>10</cmis:maxItems>"
+         + "<cmis:skipCount>0</cmis:skipCount>"
+         + "<cmis:searchAllVersions>true</cmis:searchAllVersions>"
+         + "<cmis:includeAllowableActions>true</cmis:includeAllowableActions>"
+         + "</cmis:query>";
+
+ RequestEntity entity = new StringRequestEntity(s, "text/xml","utf-8");
  try { 
+ post.setRequestEntity(entity);
  int result = client.executeMethod(post);
  final String strResponce = post.getResponseBodyAsString(); 
  } finally {
@@ -164,17 +239,7 @@ h3. Using java.
  }
 {code}
 
-To get document's content-stream, the URL must contain the "/file" part, object ID, and optionally content stream ID e.g.:
-{code}
- String url = "http://localhost:8080/rest/private/cmisatom/";
- url += repository;
- url += "/file/";
- url += obj_id;
- //Optionally
- url += "?";
- url += "streamid=";
- url += streamID;
-{code}
+
 
 
 h3. Using javascript.
@@ -202,18 +267,23 @@ Setting content stream can be executed via PUT or POST. Content-type of the requ
 
 h3. Using java.
 
-{code}
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
+ import org.apache.commons.httpclient.methods.PostMethod;
+ import org.apache.commons.httpclient.methods.RequestEntity; 
+
  String url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/object/";
  url += obj_id;
 
- org.apache.commons.httpclient.HttpClient client = new HttpClient();
+ HttpClient client = new HttpClient();
  client.getHttpConnectionManager().
  getParams().setConnectionTimeout(10000);
 
  PostMethod post = new PostMethod(url);
- RequestEntity entity = new FileRequestEntity(inputStream, "text/xml; charset=ISO-8859-1");
+ RequestEntity entity = new InputStreamRequestEntity(inputStream, "text/xml; charset=ISO-8859-1");
  post.setRequestEntity(entity); 
 
  try { 
@@ -236,7 +306,18 @@ Update properties:
 {code}
 
 {code}
- var atomDoc = ...;//constructing document
+
+//constructing document
+ String atomDoc = "<?xml version='1.0' encoding='utf-8'?>"
+         + "<entry xmlns='http://www.w3.org/2005/Atom'"
+         + " xmlns:cmis='" + CmisConstants.CMIS_NS_URI + "'"
+         + " xmlns:cmisra='" + AtomCMIS.CMISRA_NS_URI + "'>"
+         + "<title>title</title><summary>summary</summary>"
+         + "<cmisra:object><cmis:properties>"
+         + "<cmis:propertyId queryName="cmis:objectId" localName="rep-cmis:objectId" propertyDefinitionId="cmis:objectId">"
+         + "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>"
+         + "</cmis:propertyId>"
+         + "</cmis:properties></cmisra:object></entry>";
 
  var params = {};
  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.PUT;
