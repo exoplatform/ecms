@@ -3243,4 +3243,10 @@
       <fields-cancelled>All field values cancelled!</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+	  <msg>
+		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
+		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
+	  </msg>
+  </UIDocumentForm>
 </bundle>

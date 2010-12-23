@@ -29,3 +29,13 @@
 	<% } %>
 </div>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/CloseEvents.js"></script>
+<%  
+	String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
+	String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";
+	def messageClose = uicomponent.getClosingConfirmMsg(closeConfirmationMsg) ;
+	def messageNavigate = uicomponent.getClosingConfirmMsg(navigateConfirmationMsg) ;
+%>
+<script type="text/javascript"> 
+	setClosingConfirmationMsg('<%=messageClose%>');
+	setNavigatingConfirmationMsg('<%=messageNavigate%>');
+</script>
