@@ -151,7 +151,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     contextRss.put(FEED_TITLE, title);
     if (desc==null) desc = "Powered by eXo "+ProductVersions.getCurrentVersion();
     contextRss.put(DESCRIPTION, desc);
-    contextRss.put(LINK, server + "/"+PortalContainer.getCurrentPortalContainerName()+"/public/"+siteName);
+    contextRss.put(LINK, server);
 
     if (detailPage == null) detailPage  = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
     contextRss.put(DETAIL_PAGE, detailPage);
@@ -200,7 +200,12 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     String detailParam = (String) context.get(DETAIL_PARAM) ;
     String repository = (String) context.get(REPOSITORY) ;
     String workspace = (String) context.get(WORKSPACE) ;
-    String contentUrl = feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+    String contentUrl;
+    if (!feedLink.endsWith("/") ) {
+    	contentUrl= feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+    }else {
+    	contentUrl= feedLink + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+    }
 
     if(feedTitle == null || feedTitle.length() == 0) feedTitle = "" ;
     try {
