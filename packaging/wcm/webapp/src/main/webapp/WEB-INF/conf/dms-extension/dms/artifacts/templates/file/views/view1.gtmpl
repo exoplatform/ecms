@@ -26,8 +26,10 @@
   }
 	
   def rcontext = _ctx.getRequestContext() ;	
-  rcontext.getJavascriptManager().addJavascript("eXo.core.Browser.onResize();");
-	rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm-wcm-extension/javascript/');
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm-wcm-extension/javascript/');
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
+  rcontext.getJavascriptManager().addJavascript("eXo.ecm.DMSBrowser.managerResize();");
+	
 	
   UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
