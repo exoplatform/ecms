@@ -28,10 +28,10 @@
 						<div class="TitleBarL">
 							<div class="TitleBarR">
                 <div class="TitleBarM">
-                  $header
                   <%if (isShowRssLink) {
                     %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
                   }%>
+                  $header
                 </div>
 							</div>
 						</div>
