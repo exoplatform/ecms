@@ -445,10 +445,10 @@ Property definition also contains queryName and queriable attributes with same u
 h3. Query examples.
 h4. Simple query.
 
-Query : Select all {{{NASA_DOCUMENT}}}.
+Query : Select all {{{cmis:document}}}.
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT
+SELECT * FROM cmis:document
 {code}
 
 Query result:
@@ -460,12 +460,12 @@ h4. Find document by several constraints:
 Query : Select all documents where exo:Booster is 'Saturn V' and exo:Commander is Frank F. Borman, II or James A. Lovell, Jr.
 
 Initial data:
-* document1: {{{PROPERTY_BOOSTER}}} - Saturn 1B, {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
-* document2: {{{PROPERTY_BOOSTER}}} - Saturn V,  {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
-* document3: {{{PROPERTY_BOOSTER}}} - Saturn V,  {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
+* document1: {{{cmis:PropertyBooster}}} - Saturn 1B, {{{cmis:PropertyCommander}}} - Walter M. Schirra
+* document2: {{{cmis:PropertyBooster}}} - Saturn V,  {{{cmis:PropertyCommander}}} - Frank F. Borman, II
+* document3: {{{cmis:PropertyBooster}}} - Saturn V,  {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
 
 {code}
-SELECT * FROM " +  NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER + " = " + "'Saturn V' AND ( " + PROPERTY_COMMANDER + " = 'Frank F. Borman, II' OR " + PROPERTY_COMMANDER + " = 'James A. Lovell, Jr.')
+SELECT * FROM cmis:document WHERE cmis:PropertyBooster = 'Saturn V' AND (cmis:PropertyCommander = 'Frank F. Borman, II' OR  cmis:PropertyCommander = 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -480,7 +480,7 @@ Initial data:
 * document2: content - "Test word is not here"
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS('here')
+SELECT * FROM cmis:document WHERE CONTAINS('here')
 {code}
 
 Query result:
@@ -496,7 +496,7 @@ Initial data:
 * document3: content - "There must be check-word."
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"\\\"There must\\\" -\\\"check\\-word\\\"\")
+SELECT * FROM cmis:document WHERE CONTAINS(\"\\\"There must\\\" -\\\"check\\-word\\\"\")
 {code}
 
 Query result:
@@ -512,7 +512,7 @@ Initial data:
 * document2: cmis:lastModificationDate - 2009-08-08
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE ( cmis:lastModificationDate >= TIMESTAMP '2007-01-01T00:00:00.000Z' )"
+SELECT * FROM cmis:document WHERE (cmis:lastModificationDate >= TIMESTAMP '2007-01-01T00:00:00.000Z')"
 {code}
 
 Query result:
@@ -520,14 +520,14 @@ Query result:
 
 h4. Boolean property comparison:
 
-Query : Select all documents where property {{{PROPERTY_STATUS}}} equals to false.
+Query : Select all documents where property {{{cmis:someProperty}}} equals to false.
 
 Initial data:
-* document1: {{{PROPERTY_STATUS}}} - true
-* document2: {{{PROPERTY_STATUS}}} - false
+* document1: {{{cmis:someProperty}}} - true
+* document2: {{{cmis:someProperty}}} - false
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE (" + PROPERTY_STATUS + " = FALSE )
+SELECT * FROM cmis:document WHERE (cmis:someProperty = FALSE)
 {code}
   
 Query result:
@@ -535,17 +535,16 @@ Query result:
 
 h4. IN Constraint:
 
-Query : Select all documents where {{{PROPERTY_COMMANDER}}} is in set {'Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.'}.
+Query : Select all documents where {{{cmis:PropertyCommander}}} is in set {'Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.'}.
 
 Initial data:
-* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
-* document2: {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
-* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
-* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cernan
+* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
+* document2: {{{cmis:PropertyCommander}}} - Frank F. Borman, II
+* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{cmis:PropertyCommander}}} - Eugene A. Cernan
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER
-            + " IN ('Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.')
+SELECT * FROM cmis:document WHERE cmis:PropertyCommander IN ('Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -553,17 +552,16 @@ Query result:
 
 h4. Select all documents where longprop property NOT IN set:
 
-Query : Select all documents where {{{PROPERTY_COMMANDER}}} property not in set {'Walter M. Schirra', 'James A. Lovell, Jr.'}.
+Query : Select all documents where {{{cmis:PropertyCommander}}} property not in set {'Walter M. Schirra', 'James A. Lovell, Jr.'}.
 
 Initial data:
-* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
-* document2: {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
-* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
-* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
+* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
+* document2: {{{cmis:PropertyCommander}}} - Frank F. Borman, II
+* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{cmis:PropertyCommander}}} - Eugene A. Cerna
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER
-            + " NOT IN ('Walter M. Schirra', 'James A. Lovell, Jr.')
+SELECT * FROM cmis:document WHERE cmis:PropertyCommander NOT IN ('Walter M. Schirra', 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -571,16 +569,16 @@ Query result:
 
 h4. Select all documents where longprop property NOT NOT IN set:
 
-Query : Select all documents where {{{PROPERTY_COMMANDER}}} property NOT IN set {'James A. Lovell, Jr.'}.
+Query : Select all documents where cmis:PropertyCommander property NOT IN set {'James A. Lovell, Jr.'}.
 
 Initial data:
-* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
-* document2: {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
-* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
-* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
+* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
+* document2: {{{cmis:PropertyCommander}}} - Frank F. Borman, II
+* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{cmis:PropertyCommander}}} - Eugene A. Cerna
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE  NOT (" + PROPERTY_COMMANDER + " NOT IN ('James A. Lovell, Jr.'))
+SELECT * FROM cmis:document WHERE  NOT (cmis:PropertyCommander NOT IN ('James A. Lovell, Jr.'))
 {code}
 
 Query result:
@@ -599,7 +597,7 @@ Initial data:
 ** document2: Title - node2
 
 {code}
-SELECT * FROM cmis:folder  WHERE IN_FOLDER('123456789')
+SELECT * FROM cmis:folder WHERE IN_FOLDER('123456789')
 {code}
 
 Query result:
@@ -616,7 +614,7 @@ Initial data:
 ** document2: Title - node2
 
 {code}
-"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('123456789')
+SELECT * FROM cmis:document WHERE IN_FOLDER('123456789')
 {code}
 
 Query result:
@@ -647,7 +645,7 @@ Initial data:
 ** document2
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('123456789')
+SELECT * FROM cmis:document WHERE IN_TREE('123456789')
 {code}
 
 Query result:
@@ -655,17 +653,17 @@ Query result:
 
 h4. LIKE Comparison:
 
-Query : Select all documents where {{{PROPERTY_COMMANDER}}} begins with "James".
+Query : Select all documents where {{{cmis:PropertyCommander}}} begins with "James".
 
 Initial data:
-* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
-* document2: {{{PROPERTY_COMMANDER}}} - Frank F. James, II
-* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
-* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. James
+* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
+* document2: {{{cmis:PropertyCommander}}} - Frank F. James, II
+* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{cmis:PropertyCommander}}} - Eugene A. James
 
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " AS doc WHERE " + PROPERTY_COMMANDER + " LIKE 'James%'
+SELECT * FROM cmis:document AS doc WHERE cmis:PropertyCommander LIKE 'James%'
 {code}
 
 Query result:
@@ -673,15 +671,15 @@ Query result:
 
 h4. Test LIKE constraint with escape symbols:
 
-Query : Select all documents where PROPERTY like 'ad\%min%'.
+Query : Select all documents where cmis:someProperty like 'ad\%min%'.
 
 Initial data:
-* document1: Title - node1, PROPERTY - ad%min master
-* document2: Title - node2, PROPERTY - admin operator
-* document3: Title - node2, PROPERTY - radmin
+* document1: Title - node1, cmis:someProperty - ad%min master
+* document2: Title - node2, cmis:someProperty - admin operator
+* document3: Title - node2, cmis:someProperty - radmin
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " AS doc WHERE  " + PROPERTY + " LIKE 'ad\\%min%'
+SELECT * FROM cmis:document AS doc WHERE cmis:someProperty  LIKE 'ad\\%min%'
 {code}
 
 Query result:
@@ -696,7 +694,7 @@ Initial data:
 * document2: Title - node2, content - hello
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE NOT CONTAINS('world')
+SELECT * FROM cmis:document WHERE NOT CONTAINS('world')
 {code}
 
 Query result:
@@ -704,16 +702,16 @@ Query result:
 
 h4. Property existanse:
 
-Query : Select all documents that has {{{PROPERTY_COMMANDER}}} property IS NOT NULL.
+Query : Select all documents that has cmis:PropertyCommander property IS NOT NULL.
 
 Initial data:
-* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
-* document2: {{{PROPERTY_COMMANDER}}} - 
-* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
-* document4: {{{PROPERTY_COMMANDER}}} - 
+* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
+* document2: {{{cmis:PropertyCommander}}} - 
+* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{cmis:PropertyCommander}}} - 
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER + " IS NOT NULL
+SELECT * FROM cmis:document WHERE cmis:PropertyCommander IS NOT NULL
 {code}
 
 Query result:
@@ -730,7 +728,7 @@ Initial data:
 * document4: Title - Apollo 17
 
 {code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document
 {code}
 
 Query result:
@@ -738,16 +736,16 @@ Query result:
 
 h4. ORDER BY ASC:
 
-Query : Order by {{{PROPERTY_COMMANDER}}} property value (in ascending order).
+Query : Order by {{{cmis:PropertyCommander}}} property value (in ascending order).
 
 Initial data:
-* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
-* document2: {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
-* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
-* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
+* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
+* document2: {{{cmis:PropertyCommander}}} - Frank F. Borman, II
+* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{cmis:PropertyCommander}}} - Eugene A. Cerna
 
 {code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " ORDER BY" + PROPERTY_COMMANDER
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY cmis:PropertyCommander
 {code}
 
 Query result:
@@ -756,16 +754,16 @@ Query result:
 
 h4. ORDER BY DESC:
 
-Query : Order by {{{PROPERTY_COMMANDER}}} property value (in decending order).
+Query : Order by {{{cmis:PropertyCommander}}} property value (in decending order).
 
 Initial data:
-* document1: {{{PROPERTY_COMMANDER}}} - Walter M. Schirra
-* document2: {{{PROPERTY_COMMANDER}}} - Frank F. James, II
-* document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
-* document4: {{{PROPERTY_COMMANDER}}} - Eugene A. James
+* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
+* document2: {{{cmis:PropertyCommander}}} - Frank F. James, II
+* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{cmis:PropertyCommander}}} - Eugene A. James
 
 {code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " ORDER BY" + PROPERTY_COMMANDER + " DESC
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY cmis:PropertyCommander DESC
 {code}
 
 Query result:
@@ -782,7 +780,7 @@ Initial data:
 * document4: content - "It was the first night launch of a U.S. human"
 
 {code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " WHERE CONTAINS('moon') ORDER BY SCORE()
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document WHERE CONTAINS('moon') ORDER BY SCORE()
 {code}
 
 Query result:
@@ -791,14 +789,14 @@ Query result:
 
 h4. Not equal comparison (decimal):
 
-Query : Select all documents property {{{PROPERTY_BOOSTER_MASS}}} not equal to 3.
+Query : Select all documents property {{{cmis:PropertyBooster}}} not equal to 3.
 
 Initial data:
-* document1: Title - node1, {{{PROPERTY_BOOSTER_MASS}}} - 3
-* document2: Title - node2, {{{PROPERTY_BOOSTER_MASS}}} - 15
+* document1: Title - node1, {{{cmis:PropertyBooster}}} - 3
+* document2: Title - node2, {{{cmis:PropertyBooster}}} - 15
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER_MASS + " <> 3
+SELECT * FROM cmis:document WHERE cmis:PropertyBooster <> 3
 {code}
 
 Query result:
@@ -806,14 +804,14 @@ Query result:
 
 h4. Not equal comparison (string):
 
-Query : Select all documents property PROPERTY not equals to "test word second".
+Query : Select all documents property cmis:someProperty not equals to "test word second".
 
 Initial data:
-* document1: PROPERTY - "test word first"
-* document2: PROPERTY - "test word second"
+* document1: cmis:someProperty - "test word first"
+* document2: cmis:someProperty - "test word second"
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY + " <> 'test word second'
+SELECT * FROM cmis:document WHERE cmis:someProperty <> 'test word second'
 {code}
 
 Query result:
@@ -821,14 +819,14 @@ Query result:
 
 h4. More than comparison (>):
 
-Query : Select all documents property PROPERTY\_BOOSTER\_MASS more than 5.
+Query : Select all documents property cmis:PropertyBooster more than 5.
 
 Initial data:
-* document1: {{{PROPERTY_BOOSTER_MASS}}} - 3
-* document2: {{{PROPERTY_BOOSTER_MASS}}} - 15
+* document1: {{{cmis:PropertyBooster}}} - 3
+* document2: {{{cmis:PropertyBooster}}} - 15
 
 {code}
-SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER_MASS + " > 5"
+SELECT * FROM cmis:document WHERE cmis:PropertyBooster > 5
 {code}
 
 Query result:
