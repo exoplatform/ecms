@@ -1,10 +1,12 @@
-The following examples of CMIS usage may be useful for developers wants to access repository. Most of examples implies using Apache HTTP Client in java examples or 
-Google gadets (gadgets.io) in javascript examples for making requests to CMIS.
+The following examples of CMIS usage may be useful for developers who needs to access a repository. 
+CMIS access code snippets build using Apache HTTP Client for Java or using Google gadets (gadgets.io) for JavaScript examples.
 
 h2. Login to repository.
 
-CMIS using default Tomcat authenticaton in general case, but it may be overriden in case of embedding CMIS onto other product. So this example covers only 
-basic variant of authenticaton.
+{note}
+CMIS service uses default authenticaton in general case, but it can be overriden in case of embedding CMIS into an Application Service. 
+In these examples only Basic HTTP authenticaton covered.
+{note}
 
 h3. Using java.
 
@@ -25,8 +27,8 @@ h3. Using java.
 h2. Listing of documents (folder, files).
 
 There are a several methods to get the documents listings, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
-The difference between them is usage of different URL segments to get data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
-and a different kind results  (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in responce).
+The difference between them is in usage of different URL segments to get a data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
+and a different kind of results (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in responce).
 
 h3. Using java.
 
@@ -34,7 +36,6 @@ h3. Using java.
  import org.apache.commons.httpclient.HttpClient;
  import org.apache.commons.httpclient.methods.GetMethod;
  import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;  
-
 
  String url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
@@ -56,9 +57,10 @@ h3. Using java.
 
 
 h3. Using javascript.
-Composing URL to make request (consists of repository name, the method name, e.g. "/children/", and folderID to get childrens from):
 
-{code}
+Creating an URL to make a request (consists of repository name, the method name, e.g. "/children/", and folderID to get childrens from):
+
+{code:language=java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/children/";
@@ -67,15 +69,15 @@ Composing URL to make request (consists of repository name, the method name, e.g
 
 performing request:
 
-{code}
+{code:language=java}
  var params = {};
  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
  gadgets.io.makeRequest(url, handler, params);
 {code}
 
-processing results (code located in handler specified while making request, the same way may be used for all examples below):
-{code}
+processing results (code located in the handler specified while making a request, the same way it might be used for all examples in this chapter):
+{code:language=java}
 var handler = function(resp) {
   var data = eval(resp.data.Entry);
    for (var i = 0; i < data.length; i++) {
@@ -89,8 +91,8 @@ var handler = function(resp) {
 
 h2. Read document properties and content-stream.
 
-Reading document properties and content-stream it's a separate operations, getting content stream is possible after the properties set is read, and appropriate 
-content-stream ID is detected from it.
+Reading of Document properties and content stream it are two separate operations. 
+Getting of content stream is possible after the properties set have been read and the content stream ID extracted from it.
 
 h3. Using java.
 
@@ -110,15 +112,16 @@ h3. Using java.
 
  GetMethod get = new GetMethod(url); 
  try {
- int result = client.executeMethod(get);
- final String strResponce = get.getResponseBodyAsString(); 
+   int result = client.executeMethod(get);
+   final String strResponce = get.getResponseBodyAsString(); 
+   // use response...
  } finally {
    get.releaseConnection();
  }
 {code}
 
-To get document's content-stream, the URL must contain the "/file" part, object ID, and optionally content stream ID, which can be used, for example, to obtain 
-renditions. If no streamId is specified, default stream will be returned.
+To get a Document's content stream, an URL must contain "/file" part, object ID, and optionally the content stream ID, which can be used, for example, to obtain 
+renditions. If no stream ID is specified, a default stream will be returned.
 
 {code:language=java}
  import org.apache.commons.httpclient.HttpClient;
@@ -154,9 +157,9 @@ renditions. If no streamId is specified, default stream will be returned.
 
 h3. Using javascript.
 
-Composing URL to make request (consists of repository name, the method name, e.g. "/children/", and folderID to get childrens from):
+Creating an URL to make a request (consists of repository name, method name, e.g. "/children/", and folder ID to get the childrens from):
 
-{code}
+{code:language=java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/object/";
@@ -165,23 +168,23 @@ Composing URL to make request (consists of repository name, the method name, e.g
 
 performing request:
 
-{code}
+{code:language=java}
  var params = {};
  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
  gadgets.io.makeRequest(url, handler, params);
 {code}
 
-You can also use the ContentType.DOM parameter, you want to parse the feed by yourself (Using DOMParser for example).
+You can also use the ContentType.DOM parameter to parse the feed in your application (Using DOMParser for example).
 
 {note}
-Making contestStream request in JavaScript results in calling the standart browser dialog for a file download.
+Perfoming a content stream request in JavaScript will cause the browser dialog for a file download.
 {note}
 
 h2. Search of data and syntax examples.
 
-CMIS suports queries for more handful content search. Query service can uses both GET and POST for consuming requests. URL for query consists of repository name and method name "/query".
-GET request must contain query as a parameter named "q", in case of POST request query must be located in request body.
+CMIS suports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
+GET request must contain query as a parameter named "q", in case of POST request query must be located in a request body.
 
 For more detailed instructions how to construct queries please refer to chapter 4.3.5.
 
@@ -212,26 +215,25 @@ h3. Using java.
 
  RequestEntity entity = new StringRequestEntity(s, "text/xml","utf-8");
  try { 
- post.setRequestEntity(entity);
- int result = client.executeMethod(post);
- final String strResponce = post.getResponseBodyAsString(); 
+   post.setRequestEntity(entity);
+   int result = client.executeMethod(post);
+   final String strResponce = post.getResponseBodyAsString(); 
+   // use response...
  } finally {
    post.releaseConnection();
  }
 {code}
 
 
-
-
 h3. Using javascript.
 
-{code}
+{code:language=java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/query/";
 {code}
 
-{code}
+{code:language=java}
  var params = {};
  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues(someQuery);
@@ -241,10 +243,10 @@ h3. Using javascript.
 
 h2. Modification of document properties or content.
 
-Update properties command has an PUT method. The URL is the same as for the reading properties, differs only HTTP method.
+Command of property update uses PUT method. The URL is the same as for a reading of properties, the difference is only in HTTP method used.
 Body of the request must be an Atom document with the properties specified (see spec. 2.2.4.12 for details constructing document).
 
-Setting content stream can be executed via PUT or POST. Content-type of the request must be an "multipart/form-data".
+Sending of content stream can be executed via PUT or POST requests. Content-type of the request must be an "multipart/form-data".
 
 h3. Using java.
 
@@ -281,8 +283,8 @@ String atomDoc = "<?xml version='1.0' encoding='utf-8'?>"
  post.setRequestEntity(entity); 
 
  try { 
- int result = client.executeMethod(post);
- final String strResponce = post.getResponseBodyAsString(); 
+   int result = client.executeMethod(post);
+   final String strResponce = post.getResponseBodyAsString(); 
  } finally {
    post.releaseConnection();
  }
@@ -311,8 +313,8 @@ Set content stream:
  post.setRequestEntity(entity); 
 
  try { 
- int result = client.executeMethod(post);
- final String strResponce = post.getResponseBodyAsString(); 
+   int result = client.executeMethod(post);
+   final String strResponce = post.getResponseBodyAsString(); 
  } finally {
    post.releaseConnection();
  }
@@ -322,15 +324,14 @@ h3. Using javascript.
 
 Update properties:
 
-{code}
+{code:language=java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/object/";
  url += obj_id;
 {code}
 
-{code}
-
+{code:language=java}
 //constructing document
  String atomDoc = "<?xml version='1.0' encoding='utf-8'?>";
        atomDoc += "<entry xmlns='http://www.w3.org/2005/Atom'";
@@ -349,17 +350,16 @@ Update properties:
  gadgets.io.makeRequest(url, handler, params);
 {code}
 
-
 Set content stream:
 
-{code}
+{code:language=java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/file/";
  url += obj_id;
 {code}
 
-{code}
+{code:language=java}
  var params = {};
  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
  params[gadgets.io.RequestParameters.CONTENT_TYPE] = "multipart/form-data";
