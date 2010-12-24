@@ -139,9 +139,15 @@ renditions. If no streamId is specified, default stream will be returned.
 
  PostMethod post = new PostMethod(url);
  try { 
- int result = client.executeMethod(post);
- final InputStream stream = post.getResponseBodyAsStream(); 
- } finally {
+   int result = client.executeMethod(post);
+   final InputStream stream = post.getResponseBodyAsStream(); 
+   try { 
+   // use stream... 
+   int dataByte = stream.read(); 
+   } finally {   
+     stream.close();
+   }
+ } finally {   
    post.releaseConnection();
  }
 {code}
@@ -168,15 +174,16 @@ performing request:
 
 You can also use the ContentType.DOM parameter, you want to parse the feed by yourself (Using DOMParser for example).
 
-Making contestStream request in JS results in calling the standart browser dialog for file downloading.
-
+{note}
+Making contestStream request in JavaScript results in calling the standart browser dialog for a file download.
+{note}
 
 h2. Search of data and syntax examples.
 
 CMIS suports queries for more handful content search. Query service can uses both GET and POST for consuming requests. URL for query consists of repository name and method name "/query".
 GET request must contain query as a parameter named "q", in case of POST request query must be located in request body.
 
-For more detailed instructions how to construct queries please refer see chapter 4.3.5.
+For more detailed instructions how to construct queries please refer to chapter 4.3.5.
 
 h3. Using java.
 
