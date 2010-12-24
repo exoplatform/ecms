@@ -480,7 +480,7 @@ Initial data:
 * document2: content - "Test word is not here"
 
 {code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"here\")";
+String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS('here')";
 {code}
 
 Query result:
@@ -635,7 +635,7 @@ Initial data:
 * document2: Title - node2 typeID - cmis:article-animals
 
 {code:language=java}
-String stat = "SELECT * FROM cmis:article WHERE IN_FOLDER( '" + testRoot.getObjectId() + "')";
+String statement = "SELECT * FROM cmis:article WHERE IN_FOLDER( '" + testRoot.getObjectId() + "')";
 {code}
 
 Query result:
@@ -702,7 +702,7 @@ Initial data:
 * document2: Title - node2, content - hello
 
 {code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE NOT CONTAINS(\"world\")";
+String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE NOT CONTAINS('world')";
 {code}
 
 Query result:
@@ -736,7 +736,7 @@ Initial data:
 * document4: Title - Apollo 17
 
 {code:language=java}
-String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM NASA_DOCUMENT ";
+String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT;
 {code}
 
 Query result:
@@ -753,7 +753,7 @@ Initial data:
 * document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
 
 {code:language=java}
-String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM NASA_DOCUMENT ORDER BY" + PROPERTY_COMMANDER;
+String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " ORDER BY" + PROPERTY_COMMANDER;
 {code}
 
 Query result:
@@ -771,7 +771,7 @@ Initial data:
 * document4: {{{PROPERTY_COMMANDER}}} - Eugene A. James
 
 {code:language=java}
-String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM NASA_DOCUMENT ORDER BY" + PROPERTY_COMMANDER + " DESC";
+String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " ORDER BY" + PROPERTY_COMMANDER + " DESC";
 {code}
 
 Query result:
@@ -788,7 +788,7 @@ Initial data:
 * document4: content - "It was the first night launch of a U.S. human"
 
 {code:language=java}
-String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM NASA_DOCUMENT WHERE CONTAINS(\"moon\") ORDER BY SCORE() ";
+String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " WHERE CONTAINS('moon') ORDER BY SCORE() ";
 {code}
 
 Query result:
