@@ -3349,4 +3349,10 @@
    	  <fields-cancelled>Các giá trị thiết lập đã được hủy!</fields-cancelled>   	  
     </msg>
   </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+	  <msg>
+		  <confirm-close>Dữ liệu mới cập nhất sẽ bị mất nếu bạn đóng biểu mẫu này.</confirm-close>
+		  <confirm-navigate>Dữ liệu mới cập nhất sẽ bị mất nếu chuyển sang trang khác.</confirm-navigate>
+	  </msg>
+  </UIDocumentForm>
 </bundle>

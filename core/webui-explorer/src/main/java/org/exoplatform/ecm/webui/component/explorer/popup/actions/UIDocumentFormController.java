@@ -20,6 +20,7 @@ import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 
@@ -29,6 +30,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -62,7 +64,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   
   private String OPTION_BLOCK_EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIOptionBlockPanel";
   private List<UIComponent> listExtenstion = new ArrayList<UIComponent>();
-  private boolean isDisplayOptionPanel = false;
+  private boolean isDisplayOptionPanel = false;  
 
   public UIDocumentFormController() throws Exception {
     addChild(UISelectDocumentForm.class, null, null);
@@ -209,5 +211,11 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   			setDisplayOptionBlockPanel(true);
   		}
     }  
+  }
+  
+  public String getClosingConfirmMsg(String key) {	  
+	  RequestContext context = RequestContext.getCurrentInstance();
+	  ResourceBundle res = context.getApplicationResourceBundle();	  
+	  return res.getString(key);
   }
 }

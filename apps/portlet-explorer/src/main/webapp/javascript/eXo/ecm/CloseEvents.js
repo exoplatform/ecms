@@ -3,7 +3,8 @@
  * - true if some content has changed
  **/
 var b_changed = false;
-
+var document_closing_confirm_msg = "";
+var document_navigating_confirm_msg = "";
 
 /**
  * Change the current state to inform some content has changed
@@ -20,7 +21,7 @@ function changed() {
 function ajaxGet(url, callback) {
   var bypassActionbar= -1; //url.indexOf("uicomponent=UIActionBar_");
   if (b_changed && bypassActionbar<=0) {
-    var answer = confirm("The changes you made will be lost if you navigate away from this page.");
+    var answer = confirm(document_navigating_confirm_msg);
     if (answer) {
       b_changed = false;
     } else {
@@ -38,8 +39,26 @@ function ajaxGet(url, callback) {
  * - manage changes popup
  * - manage CKeditor update in textareas
  **/
+function setClosingConfirmationMsg(msg) {
+  document_closing_confirm_msg = msg;
+}
 
+function setNavigatingConfirmationMsg(msg) {
+  document_navigating_confirm_msg = msg;
+}
 UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
+ if(action.toLowerCase() == "close") {
+   if (b_changed) {      
+			var answer = confirm(document_closing_confirm_msg);
+    	if (answer) {
+      	b_changed = false;
+    	} 
+			else {
+      	return;
+    	}
+   }
+ }
+ 
  if (!callback) callback = null;
  var form = this.getFormElemt(formId) ;
  //TODO need review try-cactch block for form doesn't use FCK
