@@ -32,12 +32,14 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilder;
@@ -245,22 +247,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   @Path("/uploadFile/upload/")
 //  @InputTransformer(PassthroughInputTransformer.class)
 //  @OutputTransformer(XMLOutputTransformer.class)
-  public Response uploadFile(InputStream inputStream,
-  		@QueryParam("repositoryName") String repositoryName,
-  		@QueryParam("workspaceName") String workspaceName,
-  		@QueryParam("driverName") String driverName,
-      @QueryParam("currentFolder") String currentFolder,
-      @QueryParam("currentPortal") String currentPortal,
-      @QueryParam("jcrPath") String jcrPath,
-      @QueryParam("uploadId") String uploadId,
-      @QueryParam("language") String language,
-      @HeaderParam("content-type") String contentType,
-      @HeaderParam("content-length") String contentLength) throws Exception {
-
-  	Node currentFolderNode = getParentFolderNode(repositoryName, Text.escapeIllegalJcrChars(workspaceName), 
-  	    Text.escapeIllegalJcrChars(driverName), Text.escapeIllegalJcrChars(currentFolder));
-    return createUploadFileResponse(inputStream, repositoryName, Text.escapeIllegalJcrChars(workspaceName), currentFolderNode,
-        currentPortal, Text.escapeIllegalJcrChars(jcrPath), uploadId, language, contentType, contentLength, limit);
+  public Response uploadFile(@Context HttpServletRequest servletRequest,
+      @QueryParam("uploadId") String uploadId) throws Exception {
+  	return fileUploadHandler.upload(servletRequest, uploadId, limit);
   }
 
   /**
@@ -285,7 +274,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   @Path("/uploadFile/control/")
 //  @OutputTransformer(XMLOutputTransformer.class)
   public Response processUpload(
-  		@QueryParam("repositoryName") String repositoryName,
+	  @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driverName") String driverName,
       @QueryParam("currentFolder") String currentFolder,
@@ -734,6 +723,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * 
    * @throws Exception the exception
    */
+  @Deprecated
   protected Response createUploadFileResponse(InputStream inputStream,
                                               String repositoryName,
                                               String workspaceName,

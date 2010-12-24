@@ -16,21 +16,19 @@
  */
 package org.exoplatform.ecm.connector.fckeditor;
 
-import java.io.InputStream;
-
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.exoplatform.common.http.HTTPMethods;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -157,19 +155,8 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   @Path("/uploadFile/upload/")  
   //@InputTransformer(PassthroughInputTransformer.class)
   //@OutputTransformer(XMLOutputTransformer.class)
-  public Response uploadFile(
-      InputStream inputStream,
-      @QueryParam("repositoryName") String repositoryName, 
-      @QueryParam("workspaceName") String workspaceName,
-      @QueryParam("currentFolder") String currentFolder,
-      @QueryParam("uploadId") String uploadId,
-      @QueryParam("language") String language,
-      @HeaderParam("content-type") String contentType,      
-      @HeaderParam("content-length") String contentLength) throws Exception {
-    Session session = getSession(repositoryName,workspaceName);    
-    Node currentNode = (Node)session.getItem(currentFolder);
-    session.logout();
-    return fileUploadHandler.upload(uploadId,contentType,Double.parseDouble(contentLength), inputStream, currentNode, language);
+  public Response uploadFile(@Context HttpServletRequest servletRequest) throws Exception {    
+    return fileUploadHandler.upload(servletRequest);
   }
 
   /**

@@ -136,7 +136,7 @@ public class UINodeTypeUpload extends UIForm {
       } finally {
         UploadService uploadService = uiUploadForm.getApplicationComponent(UploadService.class);
         UIFormUploadInput uiUploadInput = uiUploadForm.getChild(UIFormUploadInput.class);
-        uploadService.removeUpload(uiUploadInput.getUploadId());
+        uploadService.removeUploadResource(uiUploadInput.getUploadId());
         if (is != null) is.close();
       }
     }    
