@@ -435,7 +435,7 @@ Additionally, a CMIS query MAY include the following clauses:
 
 Each CMIS ObjectType definition has next query attributes:
 
-* query name (String) - Used for query operations on object types. In our SQL statement examples all objecttypes is a queryName. For example: "SELECT * FROM cmis:document" ,"cmis:document" is queryName preconfigured in Document object type definition.
+* query name (String) - Used for query operations on object types. In our SQL statement examples all objecttypes is a queryName, i.e. the given queryName matches the specific type of document. For example, in query like "SELECT * FROM cmis:document" ,"cmis:document" is queryName preconfigured in Document object type definition.
 * queryable  (Boolean) - Indicates whether or not this object type is queryable. A non-queryable object type is not visible through the relational view that is used for query, and can not appear in the FROM clause of a query statement.
 * fulltextIndexed (Boolean) - Indicates whether objects of this type are full-text indexed for querying via the CONTAINS() query predicate.
 * includedInSupertypeQuery (Boolean) - Indicates whether this type and its subtypes appear in a query of this type's ancestor types. For example: if Invoice is a sub-type of Document, if this is TRUE on Invoice then for a query on Document type, instances of Invoice will be returned if they match. If this attribute is FALSE, no instances of Invoice will be returned even if they match the query.
@@ -447,8 +447,8 @@ h4. Simple query.
 
 Query : Select all {{{NASA_DOCUMENT}}}.
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT;
+{code}
+SELECT * FROM " + NASA_DOCUMENT
 {code}
 
 Query result:
@@ -464,8 +464,8 @@ Initial data:
 * document2: {{{PROPERTY_BOOSTER}}} - Saturn V,  {{{PROPERTY_COMMANDER}}} - Frank F. Borman, II
 * document3: {{{PROPERTY_BOOSTER}}} - Saturn V,  {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
 
-{code:language=java}
-String statement = "SELECT * FROM " +  NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER + " = " + "'Saturn V' AND ( " + PROPERTY_COMMANDER + " = 'Frank F. Borman, II' OR " + PROPERTY_COMMANDER + " = 'James A. Lovell, Jr.')"
+{code}
+SELECT * FROM " +  NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER + " = " + "'Saturn V' AND ( " + PROPERTY_COMMANDER + " = 'Frank F. Borman, II' OR " + PROPERTY_COMMANDER + " = 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -479,8 +479,8 @@ Initial data:
 * document1: content - "There must be test word"
 * document2: content - "Test word is not here"
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS('here')";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS('here')
 {code}
 
 Query result:
@@ -495,9 +495,8 @@ Initial data:
 * document2: content - "Test word is not here. Another check-word."
 * document3: content - "There must be check-word."
 
-{code:language=java}
-String statement =
-         "SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"\\\"There must\\\" -\\\"check\\-word\\\"\")";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"\\\"There must\\\" -\\\"check\\-word\\\"\")
 {code}
 
 Query result:
@@ -512,10 +511,8 @@ Initial data:
 * document1: cmis:lastModificationDate - 2006-08-08
 * document2: cmis:lastModificationDate - 2009-08-08
 
-{code:language=java}
-String statement =
-"SELECT * FROM " + NASA_DOCUMENT
-+ " WHERE ( cmis:lastModificationDate >= TIMESTAMP '2007-01-01T00:00:00.000Z' )";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE ( cmis:lastModificationDate >= TIMESTAMP '2007-01-01T00:00:00.000Z' )"
 {code}
 
 Query result:
@@ -529,8 +526,8 @@ Initial data:
 * document1: {{{PROPERTY_STATUS}}} - true
 * document2: {{{PROPERTY_STATUS}}} - false
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE (" + PROPERTY_STATUS + " = FALSE )";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE (" + PROPERTY_STATUS + " = FALSE )
 {code}
   
 Query result:
@@ -546,10 +543,9 @@ Initial data:
 * document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
 * document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cernan
 
-{code:language=java}
-String statement =
-         "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER
-            + " IN ('Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.')";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER
+            + " IN ('Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -565,10 +561,9 @@ Initial data:
 * document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
 * document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
 
-{code:language=java}
-String statement =
-         "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER
-            + " NOT IN ('Walter M. Schirra', 'James A. Lovell, Jr.')";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER
+            + " NOT IN ('Walter M. Schirra', 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -584,9 +579,8 @@ Initial data:
 * document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
 * document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
 
-{code:language=java}
-String statement =
-         "SELECT * FROM " + NASA_DOCUMENT + " WHERE  NOT (" + PROPERTY_COMMANDER + " NOT IN ('James A. Lovell, Jr.'))";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE  NOT (" + PROPERTY_COMMANDER + " NOT IN ('James A. Lovell, Jr.'))
 {code}
 
 Query result:
@@ -597,15 +591,15 @@ h4. {{{IN_FOLDER}}} constarint.
 Query : Select all folders that are in folder1.
 
 Initial data:
-* folder1:
+* folder1: id - 123456789
 ** document1:  Title - node1
 * folder3:
 ** folder4: 
 * folder2:
 ** document2: Title - node2
 
-{code:language=java}
-String statement = "SELECT * FROM cmis:folder  WHERE IN_FOLDER( '" + folder1.getObjectId() + "')";
+{code}
+SELECT * FROM cmis:folder  WHERE IN_FOLDER('123456789')
 {code}
 
 Query result:
@@ -616,13 +610,13 @@ h4. Select all documents that are in specified folder:
 Query : Select all documents that are in folder1.
 
 Initial data:
-* folder1:
+* folder1: id - 123456789
 ** document1: Title - node1
 * folder2:
 ** document2: Title - node2
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER( '" + folder1.getObjectId() + "')";
+{code}
+"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('123456789')
 {code}
 
 Query result:
@@ -631,11 +625,12 @@ Query result:
 h4. Select all documents where query supertype is cmis:article:
 
 Initial data:
+* testRoot:  id - 123456789
 * document1: Title - node1 typeID - cmis:article-sports
 * document2: Title - node2 typeID - cmis:article-animals
 
-{code:language=java}
-String statement = "SELECT * FROM cmis:article WHERE IN_FOLDER( '" + testRoot.getObjectId() + "')";
+{code}
+SELECT * FROM cmis:article WHERE IN_FOLDER('123456789')
 {code}
 
 Query result:
@@ -646,13 +641,13 @@ h4. {{{IN_TREE}}} constraint:
 Query : Select all documents that are in tree of folder1.
 
 Initial data:
-* folder1:
+* folder1: id - 123456789
 ** document1
 * folder2:
 ** document2
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder1.getObjectId() + "')";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('123456789')
 {code}
 
 Query result:
@@ -669,8 +664,8 @@ Initial data:
 * document4: {{{PROPERTY_COMMANDER}}} - Eugene A. James
 
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " AS doc WHERE " + PROPERTY_COMMANDER + " LIKE 'James%'";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " AS doc WHERE " + PROPERTY_COMMANDER + " LIKE 'James%'
 {code}
 
 Query result:
@@ -685,9 +680,8 @@ Initial data:
 * document2: Title - node2, PROPERTY - admin operator
 * document3: Title - node2, PROPERTY - radmin
 
-{code:language=java}
-String statement =
-         "SELECT * FROM " + NASA_DOCUMENT + " AS doc WHERE  " + PROPERTY + " LIKE 'ad\\%min%'";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " AS doc WHERE  " + PROPERTY + " LIKE 'ad\\%min%'
 {code}
 
 Query result:
@@ -701,8 +695,8 @@ Initial data:
 * document1: Title - node1, content - hello world
 * document2: Title - node2, content - hello
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE NOT CONTAINS('world')";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE NOT CONTAINS('world')
 {code}
 
 Query result:
@@ -718,8 +712,8 @@ Initial data:
 * document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
 * document4: {{{PROPERTY_COMMANDER}}} - 
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER + " IS NOT NULL";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_COMMANDER + " IS NOT NULL
 {code}
 
 Query result:
@@ -735,8 +729,8 @@ Initial data:
 * document3: Title - Apollo 13
 * document4: Title - Apollo 17
 
-{code:language=java}
-String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT;
+{code}
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT
 {code}
 
 Query result:
@@ -752,8 +746,8 @@ Initial data:
 * document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
 * document4: {{{PROPERTY_COMMANDER}}} - Eugene A. Cerna
 
-{code:language=java}
-String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " ORDER BY" + PROPERTY_COMMANDER;
+{code}
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " ORDER BY" + PROPERTY_COMMANDER
 {code}
 
 Query result:
@@ -770,8 +764,8 @@ Initial data:
 * document3: {{{PROPERTY_COMMANDER}}} - James A. Lovell, Jr.
 * document4: {{{PROPERTY_COMMANDER}}} - Eugene A. James
 
-{code:language=java}
-String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " ORDER BY" + PROPERTY_COMMANDER + " DESC";
+{code}
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " ORDER BY" + PROPERTY_COMMANDER + " DESC
 {code}
 
 Query result:
@@ -787,8 +781,8 @@ Initial data:
 * document3: content - "NASA intended to land on the Moon, but a mid-mission technical"
 * document4: content - "It was the first night launch of a U.S. human"
 
-{code:language=java}
-String statement = "SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " WHERE CONTAINS('moon') ORDER BY SCORE() ";
+{code}
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM " + NASA_DOCUMENT + " WHERE CONTAINS('moon') ORDER BY SCORE()
 {code}
 
 Query result:
@@ -803,8 +797,8 @@ Initial data:
 * document1: Title - node1, {{{PROPERTY_BOOSTER_MASS}}} - 3
 * document2: Title - node2, {{{PROPERTY_BOOSTER_MASS}}} - 15
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER_MASS + " <> 3";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER_MASS + " <> 3
 {code}
 
 Query result:
@@ -818,8 +812,8 @@ Initial data:
 * document1: PROPERTY - "test word first"
 * document2: PROPERTY - "test word second"
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY + " <> 'test word second'";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY + " <> 'test word second'
 {code}
 
 Query result:
@@ -833,8 +827,8 @@ Initial data:
 * document1: {{{PROPERTY_BOOSTER_MASS}}} - 3
 * document2: {{{PROPERTY_BOOSTER_MASS}}} - 15
 
-{code:language=java}
-String statement = "SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER_MASS + " > 5";
+{code}
+SELECT * FROM " + NASA_DOCUMENT + " WHERE " + PROPERTY_BOOSTER_MASS + " > 5"
 {code}
 
 Query result:

@@ -248,6 +248,49 @@ Setting content stream can be executed via PUT or POST. Content-type of the requ
 
 h3. Using java.
 
+Update properties:
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.StringRequestEntity;
+ import org.apache.commons.httpclient.methods.PostMethod;
+ import org.apache.commons.httpclient.methods.RequestEntity; 
+
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+
+ HttpClient client = new HttpClient();
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+String atomDoc = "<?xml version='1.0' encoding='utf-8'?>"
+         + "<entry xmlns='http://www.w3.org/2005/Atom'"
+         + " xmlns:cmis='" + CmisConstants.CMIS_NS_URI + "'"
+         + " xmlns:cmisra='" + AtomCMIS.CMISRA_NS_URI + "'>"
+         + "<title>title</title><summary>summary</summary>"
+         + "<cmisra:object><cmis:properties>"
+         + "<cmis:propertyId queryName="cmis:objectId" localName="rep-cmis:objectId" propertyDefinitionId="cmis:objectId">"
+         + "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>"
+         + "</cmis:propertyId>"
+         + "</cmis:properties></cmisra:object></entry>";
+
+ PostMethod post = new PostMethod(url);
+ RequestEntity entity = new StringRequestEntity(atomDoc, "text/xml", "utf-8");
+ post.setRequestEntity(entity); 
+
+ try { 
+ int result = client.executeMethod(post);
+ final String strResponce = post.getResponseBodyAsString(); 
+ } finally {
+   post.releaseConnection();
+ }
+{code}
+
+
+Set content stream:
+
 {code:language=java}
  import org.apache.commons.httpclient.HttpClient;
  import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
@@ -256,7 +299,7 @@ h3. Using java.
 
  String url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
- url += "/object/";
+ url += "/file/";
  url += obj_id;
 
  HttpClient client = new HttpClient();
