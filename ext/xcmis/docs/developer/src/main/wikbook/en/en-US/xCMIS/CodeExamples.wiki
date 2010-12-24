@@ -201,8 +201,8 @@ h3. Using java.
  getParams().setConnectionTimeout(10000);
 
  PostMethod post = new PostMethod(url);
- String s = "<?xml version='1.0' encoding='utf-8'?>" //
-         + "<cmis:query xmlns='http://www.w3.org/2005/Atom' xmlns:cmis='" + CmisConstants.CMIS_NS_URI + "'>"
+ String s = "<?xml version='1.0' encoding='utf-8'?>" 
+         + "<cmis:query xmlns='http://www.w3.org/2005/Atom' xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'>"
          + "<cmis:statement>SELECT * FROM cmis:document</cmis:statement>"
          + "<cmis:maxItems>10</cmis:maxItems>"
          + "<cmis:skipCount>0</cmis:skipCount>"
@@ -267,11 +267,11 @@ Update properties:
 
 String atomDoc = "<?xml version='1.0' encoding='utf-8'?>"
          + "<entry xmlns='http://www.w3.org/2005/Atom'"
-         + " xmlns:cmis='" + CmisConstants.CMIS_NS_URI + "'"
-         + " xmlns:cmisra='" + AtomCMIS.CMISRA_NS_URI + "'>"
+         + " xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'"
+         + " xmlns:cmisra='http://docs.oasis-open.org/ns/cmis/restatom/200908/'>"
          + "<title>title</title><summary>summary</summary>"
          + "<cmisra:object><cmis:properties>"
-         + "<cmis:propertyId queryName="cmis:objectId" localName="rep-cmis:objectId" propertyDefinitionId="cmis:objectId">"
+         + "<cmis:propertyId queryName='cmis:objectId' localName='rep-cmis:objectId' propertyDefinitionId='cmis:objectId'>"
          + "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>"
          + "</cmis:propertyId>"
          + "</cmis:properties></cmisra:object></entry>";
@@ -332,16 +332,16 @@ Update properties:
 {code}
 
 //constructing document
- String atomDoc = "<?xml version='1.0' encoding='utf-8'?>"
-         + "<entry xmlns='http://www.w3.org/2005/Atom'"
-         + " xmlns:cmis='" + CmisConstants.CMIS_NS_URI + "'"
-         + " xmlns:cmisra='" + AtomCMIS.CMISRA_NS_URI + "'>"
-         + "<title>title</title><summary>summary</summary>"
-         + "<cmisra:object><cmis:properties>"
-         + "<cmis:propertyId queryName="cmis:objectId" localName="rep-cmis:objectId" propertyDefinitionId="cmis:objectId">"
-         + "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>"
-         + "</cmis:propertyId>"
-         + "</cmis:properties></cmisra:object></entry>";
+ String atomDoc = "<?xml version='1.0' encoding='utf-8'?>";
+       atomDoc += "<entry xmlns='http://www.w3.org/2005/Atom'";
+       atomDoc += " xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'";
+       atomDoc += " xmlns:cmisra='http://docs.oasis-open.org/ns/cmis/restatom/200908/'>";
+       atomDoc += "<title>title</title><summary>summary</summary>";
+       atomDoc += "<cmisra:object><cmis:properties>";
+       atomDoc += "<cmis:propertyId queryName='cmis:objectId' localName='rep-cmis:objectId' propertyDefinitionId='cmis:objectId'>";
+       atomDoc += "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>";
+       atomDoc += "</cmis:propertyId>";
+       atomDoc += "</cmis:properties></cmisra:object></entry>";
 
  var params = {};
  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.PUT;
