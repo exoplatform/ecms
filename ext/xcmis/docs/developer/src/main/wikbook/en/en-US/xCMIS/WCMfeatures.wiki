@@ -457,15 +457,15 @@ Query result:
 
 h4. Find document by several constraints:
 
-Query : Select all documents where exo:Booster is 'Saturn V' and exo:Commander is Frank F. Borman, II or James A. Lovell, Jr.
+Query : Select all documents where apollo:propertyBooster is 'Saturn V' and apollo:propertyCommander is Frank F. Borman, II or James A. Lovell, Jr.
 
 Initial data:
-* document1: {{{cmis:PropertyBooster}}} - Saturn 1B, {{{cmis:PropertyCommander}}} - Walter M. Schirra
-* document2: {{{cmis:PropertyBooster}}} - Saturn V,  {{{cmis:PropertyCommander}}} - Frank F. Borman, II
-* document3: {{{cmis:PropertyBooster}}} - Saturn V,  {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
+* document1: {{{apollo:propertyBooster}}} - Saturn 1B, {{{apollo:propertyCommander}}} - Walter M. Schirra
+* document2: {{{apollo:propertyBooster}}} - Saturn V,  {{{apollo:propertyCommander}}} - Frank F. Borman, II
+* document3: {{{apollo:propertyBooster}}} - Saturn V,  {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
 
 {code}
-SELECT * FROM cmis:document WHERE cmis:PropertyBooster = 'Saturn V' AND (cmis:PropertyCommander = 'Frank F. Borman, II' OR  cmis:PropertyCommander = 'James A. Lovell, Jr.')
+SELECT * FROM cmis:document WHERE apollo:propertyBooster = 'Saturn V' AND (apollo:propertyCommander = 'Frank F. Borman, II' OR  apollo:propertyCommander = 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -520,14 +520,14 @@ Query result:
 
 h4. Boolean property comparison:
 
-Query : Select all documents where property {{{cmis:someProperty}}} equals to false.
+Query : Select all documents where property {{{apollo:someProperty}}} equals to false.
 
 Initial data:
-* document1: {{{cmis:someProperty}}} - true
-* document2: {{{cmis:someProperty}}} - false
+* document1: {{{apollo:someProperty}}} - true
+* document2: {{{apollo:someProperty}}} - false
 
 {code}
-SELECT * FROM cmis:document WHERE (cmis:someProperty = FALSE)
+SELECT * FROM cmis:document WHERE (apollo:someProperty = FALSE)
 {code}
   
 Query result:
@@ -535,16 +535,16 @@ Query result:
 
 h4. IN Constraint:
 
-Query : Select all documents where {{{cmis:PropertyCommander}}} is in set {'Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.'}.
+Query : Select all documents where {{{apollo:propertyCommander}}} is in set {'Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.'}.
 
 Initial data:
-* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
-* document2: {{{cmis:PropertyCommander}}} - Frank F. Borman, II
-* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
-* document4: {{{cmis:PropertyCommander}}} - Eugene A. Cernan
+* document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
+* document2: {{{apollo:propertyCommander}}} - Frank F. Borman, II
+* document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{apollo:propertyCommander}}} - Eugene A. Cernan
 
 {code}
-SELECT * FROM cmis:document WHERE cmis:PropertyCommander IN ('Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.')
+SELECT * FROM cmis:document WHERE apollo:propertyCommander IN ('Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -552,16 +552,16 @@ Query result:
 
 h4. Select all documents where longprop property NOT IN set:
 
-Query : Select all documents where {{{cmis:PropertyCommander}}} property not in set {'Walter M. Schirra', 'James A. Lovell, Jr.'}.
+Query : Select all documents where {{{apollo:propertyCommander}}} property not in set {'Walter M. Schirra', 'James A. Lovell, Jr.'}.
 
 Initial data:
-* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
-* document2: {{{cmis:PropertyCommander}}} - Frank F. Borman, II
-* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
-* document4: {{{cmis:PropertyCommander}}} - Eugene A. Cerna
+* document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
+* document2: {{{apollo:propertyCommander}}} - Frank F. Borman, II
+* document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{apollo:propertyCommander}}} - Eugene A. Cerna
 
 {code}
-SELECT * FROM cmis:document WHERE cmis:PropertyCommander NOT IN ('Walter M. Schirra', 'James A. Lovell, Jr.')
+SELECT * FROM cmis:document WHERE apollo:PropertyCommander NOT IN ('Walter M. Schirra', 'James A. Lovell, Jr.')
 {code}
 
 Query result:
@@ -569,16 +569,16 @@ Query result:
 
 h4. Select all documents where longprop property NOT NOT IN set:
 
-Query : Select all documents where cmis:PropertyCommander property NOT IN set {'James A. Lovell, Jr.'}.
+Query : Select all documents where apollo:propertyCommander property NOT IN set {'James A. Lovell, Jr.'}.
 
 Initial data:
-* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
-* document2: {{{cmis:PropertyCommander}}} - Frank F. Borman, II
-* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
-* document4: {{{cmis:PropertyCommander}}} - Eugene A. Cerna
+* document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
+* document2: {{{apollo:propertyCommander}}} - Frank F. Borman, II
+* document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{apollo:propertyCommander}}} - Eugene A. Cerna
 
 {code}
-SELECT * FROM cmis:document WHERE  NOT (cmis:PropertyCommander NOT IN ('James A. Lovell, Jr.'))
+SELECT * FROM cmis:document WHERE  NOT (apollo:propertyCommander NOT IN ('James A. Lovell, Jr.'))
 {code}
 
 Query result:
@@ -653,17 +653,17 @@ Query result:
 
 h4. LIKE Comparison:
 
-Query : Select all documents where {{{cmis:PropertyCommander}}} begins with "James".
+Query : Select all documents where {{{apollo:propertyCommander}}} begins with "James".
 
 Initial data:
-* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
-* document2: {{{cmis:PropertyCommander}}} - Frank F. James, II
-* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
-* document4: {{{cmis:PropertyCommander}}} - Eugene A. James
+* document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
+* document2: {{{apollo:propertyCommander}}} - Frank F. James, II
+* document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{apollo:propertyCommander}}} - Eugene A. James
 
 
 {code}
-SELECT * FROM cmis:document AS doc WHERE cmis:PropertyCommander LIKE 'James%'
+SELECT * FROM cmis:document AS doc WHERE apollo:PropertyCommander LIKE 'James%'
 {code}
 
 Query result:
@@ -671,15 +671,15 @@ Query result:
 
 h4. Test LIKE constraint with escape symbols:
 
-Query : Select all documents where cmis:someProperty like 'ad\%min%'.
+Query : Select all documents where apollo:someProperty like 'ad\%min%'.
 
 Initial data:
-* document1: Title - node1, cmis:someProperty - ad%min master
-* document2: Title - node2, cmis:someProperty - admin operator
-* document3: Title - node2, cmis:someProperty - radmin
+* document1: Title - node1, apollo:someProperty - ad%min master
+* document2: Title - node2, apollo:someProperty - admin operator
+* document3: Title - node2, apollo:someProperty - radmin
 
 {code}
-SELECT * FROM cmis:document AS doc WHERE cmis:someProperty  LIKE 'ad\\%min%'
+SELECT * FROM cmis:document AS doc WHERE apollo:someProperty  LIKE 'ad\\%min%'
 {code}
 
 Query result:
@@ -702,16 +702,16 @@ Query result:
 
 h4. Property existanse:
 
-Query : Select all documents that has cmis:PropertyCommander property IS NOT NULL.
+Query : Select all documents that has apollo:propertyCommander property IS NOT NULL.
 
 Initial data:
-* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
-* document2: {{{cmis:PropertyCommander}}} - 
-* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
-* document4: {{{cmis:PropertyCommander}}} - 
+* document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
+* document2: {{{apollo:propertyCommander}}} - 
+* document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{apollo:propertyCommander}}} - 
 
 {code}
-SELECT * FROM cmis:document WHERE cmis:PropertyCommander IS NOT NULL
+SELECT * FROM cmis:document WHERE apollo:propertyCommander IS NOT NULL
 {code}
 
 Query result:
@@ -736,16 +736,16 @@ Query result:
 
 h4. ORDER BY ASC:
 
-Query : Order by {{{cmis:PropertyCommander}}} property value (in ascending order).
+Query : Order by {{{apollo:propertyCommander}}} property value (in ascending order).
 
 Initial data:
-* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
-* document2: {{{cmis:PropertyCommander}}} - Frank F. Borman, II
-* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
-* document4: {{{cmis:PropertyCommander}}} - Eugene A. Cerna
+* document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
+* document2: {{{apollo:propertyCommander}}} - Frank F. Borman, II
+* document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{apollo:propertyCommander}}} - Eugene A. Cerna
 
 {code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY cmis:PropertyCommander
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY apollo:propertyCommander
 {code}
 
 Query result:
@@ -754,16 +754,16 @@ Query result:
 
 h4. ORDER BY DESC:
 
-Query : Order by {{{cmis:PropertyCommander}}} property value (in decending order).
+Query : Order by {{{apollo:propertyCommander}}} property value (in decending order).
 
 Initial data:
-* document1: {{{cmis:PropertyCommander}}} - Walter M. Schirra
-* document2: {{{cmis:PropertyCommander}}} - Frank F. James, II
-* document3: {{{cmis:PropertyCommander}}} - James A. Lovell, Jr.
-* document4: {{{cmis:PropertyCommander}}} - Eugene A. James
+* document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
+* document2: {{{apollo:propertyCommander}}} - Frank F. James, II
+* document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
+* document4: {{{apollo:propertyCommander}}} - Eugene A. James
 
 {code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY cmis:PropertyCommander DESC
+SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY cmis:propertyCommander DESC
 {code}
 
 Query result:
@@ -789,14 +789,14 @@ Query result:
 
 h4. Not equal comparison (decimal):
 
-Query : Select all documents property {{{cmis:PropertyBooster}}} not equal to 3.
+Query : Select all documents property {{{apollo:propertyBooster}}} not equal to 3.
 
 Initial data:
-* document1: Title - node1, {{{cmis:PropertyBooster}}} - 3
-* document2: Title - node2, {{{cmis:PropertyBooster}}} - 15
+* document1: Title - node1, {{{apollo:propertyBooster}}} - 3
+* document2: Title - node2, {{{apollo:propertyBooster}}} - 15
 
 {code}
-SELECT * FROM cmis:document WHERE cmis:PropertyBooster <> 3
+SELECT * FROM cmis:document WHERE apollo:propertyBooster <> 3
 {code}
 
 Query result:
@@ -804,14 +804,14 @@ Query result:
 
 h4. Not equal comparison (string):
 
-Query : Select all documents property cmis:someProperty not equals to "test word second".
+Query : Select all documents property apollo:someProperty not equals to "test word second".
 
 Initial data:
-* document1: cmis:someProperty - "test word first"
-* document2: cmis:someProperty - "test word second"
+* document1: apollo:someProperty - "test word first"
+* document2: apollo:someProperty - "test word second"
 
 {code}
-SELECT * FROM cmis:document WHERE cmis:someProperty <> 'test word second'
+SELECT * FROM cmis:document WHERE apollo:someProperty <> 'test word second'
 {code}
 
 Query result:
@@ -819,14 +819,14 @@ Query result:
 
 h4. More than comparison (>):
 
-Query : Select all documents property cmis:PropertyBooster more than 5.
+Query : Select all documents property apollo:propertyBooster more than 5.
 
 Initial data:
-* document1: {{{cmis:PropertyBooster}}} - 3
-* document2: {{{cmis:PropertyBooster}}} - 15
+* document1: {{{apollo:propertyBooster}}} - 3
+* document2: {{{apollo:propertyBooster}}} - 15
 
 {code}
-SELECT * FROM cmis:document WHERE cmis:PropertyBooster > 5
+SELECT * FROM cmis:document WHERE apollo:propertyBooster > 5
 {code}
 
 Query result:
