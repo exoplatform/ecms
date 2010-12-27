@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -76,14 +77,19 @@ public class FileUploadHandler {
     uploadService = (UploadService)container.getComponentInstanceOfType(UploadService.class);
     fckMessage = new FCKMessage();
   }
-  
+  @Deprecated
   public Response upload(String uploadId, String contentType, double contentLength, InputStream inputStream, Node currentNode, String language) throws Exception {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     uploadService.createUploadResource(uploadId,null,contentType,contentLength,inputStream);
-    return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).build();            
+    return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).build();
   }
-
+  public Response upload(HttpServletRequest servletRequest) throws Exception {
+    CacheControl cacheControl = new CacheControl();
+	cacheControl.setNoCache(true);
+	uploadService.createUploadResource(servletRequest);
+	return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).build();
+  }
   public Response control(String uploadId, String action) throws Exception {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
@@ -91,10 +97,10 @@ public class FileUploadHandler {
       Document currentProgress = getProgress(uploadId);      
       return Response.ok(currentProgress, new MediaType("text", "xml")).cacheControl(cacheControl).build();
     }else if(FileUploadHandler.ABORT_ACTION.equals(action)) {
-      uploadService.removeUpload(uploadId);
+      uploadService.removeUploadResource(uploadId);
       return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).build();    
     }else if(FileUploadHandler.DELETE_ACTION.equals(action)) {
-      uploadService.removeUpload(uploadId);
+      uploadService.removeUploadResource(uploadId);
       return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).build();    
     }
     return Response.status(HTTPStatus.BAD_REQUEST).cacheControl(cacheControl).build();
@@ -133,7 +139,7 @@ public class FileUploadHandler {
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());    
     jcrContent.setProperty("jcr:mimeType",mimetype);
     parent.getSession().save();
-    uploadService.removeUpload(uploadId);
+    uploadService.removeUploadResource(uploadId);
     return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).build();
   }
   

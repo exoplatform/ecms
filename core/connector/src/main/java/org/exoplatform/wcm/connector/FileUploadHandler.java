@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -94,6 +95,7 @@ public class FileUploadHandler {
    * 
    * @throws Exception the exception
    */
+  @Deprecated
   public Response upload(String uploadId, String contentType, double contentLength, InputStream inputStream, Node currentNode, String language, int limit) throws Exception {
     // Require from portal 2.5.5
     uploadService.addUploadLimit(uploadId, limit);
@@ -103,7 +105,14 @@ public class FileUploadHandler {
     cacheControl.setNoStore(true);
     return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();            
   }
-
+  public Response upload(HttpServletRequest servletRequest, String uploadId, Integer limit) throws Exception{
+	  uploadService.addUploadLimit(uploadId, limit);
+	  uploadService.createUploadResource(servletRequest);
+	  CacheControl cacheControl = new CacheControl();
+	  cacheControl.setNoCache(true);
+	  cacheControl.setNoStore(true);
+	  return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();
+  }
   /**
    * Control.
    * 
@@ -122,10 +131,10 @@ public class FileUploadHandler {
       Document currentProgress = getProgress(uploadId);      
       return Response.ok(new DOMSource(currentProgress), MediaType.TEXT_XML).cacheControl(cacheControl).build();
     }else if(FileUploadHandler.ABORT_ACTION.equals(action)) {
-      uploadService.removeUpload(uploadId);
+      uploadService.removeUploadResource(uploadId);
       return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();    
     }else if(FileUploadHandler.DELETE_ACTION.equals(action)) {
-      uploadService.removeUpload(uploadId);
+      uploadService.removeUploadResource(uploadId);
       return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();    
     }
     return Response.status(HTTPStatus.BAD_REQUEST).cacheControl(cacheControl).build();
@@ -178,7 +187,7 @@ public class FileUploadHandler {
     jcrContent.setProperty("jcr:mimeType",mimetype);
     parent.getSession().save();
     parent.getSession().refresh(true); // Make refreshing data 
-    uploadService.removeUpload(uploadId);
+    uploadService.removeUploadResource(uploadId);
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
     return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();

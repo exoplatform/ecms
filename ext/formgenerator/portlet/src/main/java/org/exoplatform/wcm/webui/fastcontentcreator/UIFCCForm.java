@@ -49,6 +49,7 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -203,7 +204,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     PortletPreferences preferences = UIFCCUtils.getPortletPreferences() ;
     Session session = 
-      Utils.getSessionProvider().getSession(
+    	WCMCoreUtils.getUserSessionProvider().getSession(
         preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, ""), 
         repositoryService.getRepository(preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, ""))) ;
     return (Node) session.getItem(preferences.getValue("path", ""));
@@ -234,7 +235,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    */
   public void newJCRTemplateResourceResolver() {
     try {
-      jcrTemplateResourceResolver_ = new JCRResourceResolver(repositoryName, getDMSWorkspace(), "exo:templateFile") ;
+      jcrTemplateResourceResolver_ = new JCRResourceResolver(repositoryName, getDMSWorkspace()) ;
     } catch(Exception e) {
       Utils.createPopupMessage(this, "UIFCCForm.msg.new-jcr-template", null, ApplicationMessage.ERROR);
     }
@@ -277,7 +278,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       String preferenceWorkspace = preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "") ;
       
       RepositoryService repositoryService  = fastContentCreatorForm.getApplicationComponent(RepositoryService.class);
-      SessionProvider sessionProvider = Utils.getSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       Session session = sessionProvider.getSession(preferenceWorkspace, repositoryService.getRepository(preferenceRepository));
       CmsService cmsService = fastContentCreatorForm.getApplicationComponent(CmsService.class) ;
       TaxonomyService taxonomyService = fastContentCreatorForm.getApplicationComponent(TaxonomyService.class);      
@@ -329,7 +330,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
             }
           }
         }
-      }      
+      }
       Map inputProperties = DialogFormUtil.prepareMap(fastContentCreatorForm.getChildren(), fastContentCreatorForm.getInputProperties()) ;
       Node homeNode = null;
       Node newNode = null ;
@@ -369,7 +370,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
             ((UIFormMultiValueInputSet)uiChild).setValue(new ArrayList<Value>()) ;
           } else if(uiChild instanceof UIFormUploadInput) {
             UploadService uploadService = fastContentCreatorForm.getApplicationComponent(UploadService.class) ;
-            uploadService.removeUpload(((UIFormUploadInput)uiChild).getUploadId()) ;
+            uploadService.removeUploadResource(((UIFormUploadInput)uiChild).getUploadId()) ;
           }
         }
         session.save() ;
@@ -445,7 +446,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       Class clazz = Class.forName(classPath, true, cl) ;
       UIComponent component = fastContentCreatorPortlet.createUIComponent(clazz, null, null);
       NodeHierarchyCreator nodeHierarchyCreator = fastContentCreatorForm.getApplicationComponent(NodeHierarchyCreator.class);  
-      SessionProvider sessionProvider = Utils.getSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       String selectorParams = (String)fieldPropertiesMap.get("selectorParams") ;
       if(component instanceof UIOneNodePathSelector) {
         String repositoryName = UIFCCUtils.getPreferenceRepository() ;
@@ -554,7 +555,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
             uiOneTaxonomySelector.setIsDisable(workspaceName, false);
             String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);      
             RepositoryService repositoryService  = fastContentCreatorForm.getApplicationComponent(RepositoryService.class);
-            SessionProvider sessionProvider = Utils.getSessionProvider();
+            SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
             Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(fastContentCreatorForm.repositoryName));
             Node rootTree = (Node) session.getItem(rootTreePath);      
             NodeIterator childrenIterator = rootTree.getNodes();
@@ -564,7 +565,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
               break;
             }
             uiOneTaxonomySelector.setRootNodeLocation(fastContentCreatorForm.repositoryName, workspaceName, rootTreePath);
-            uiOneTaxonomySelector.init(Utils.getSessionProvider());
+            uiOneTaxonomySelector.init(WCMCoreUtils.getUserSessionProvider());
             String param = "returnField=" + FIELD_TAXONOMY;        
             uiOneTaxonomySelector.setSourceComponent(fastContentCreatorForm, new String[]{param});
             Utils.createPopupWindow(fastContentCreatorForm, uiOneTaxonomySelector, UIFCCConstant.TAXONOMY_POPUP_WINDOW, 640);

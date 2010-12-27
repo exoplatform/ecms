@@ -465,7 +465,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
             Text.unescapeIllegalJcrChars(name), fileSize, mimeType} ;
         uiUploadContent.setUploadValues(arrValues) ;
         inputStream.close();
-        uploadService.removeUpload(uiChild.getUploadId()) ;
+        uploadService.removeUploadResource(uiChild.getUploadId()) ;
         uiManager.setRenderedChild(UISingleUploadContainer.class) ;
         uiExplorer.setIsHidePopup(true) ;
         uiExplorer.updateAjax(event) ;
