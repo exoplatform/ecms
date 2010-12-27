@@ -55,6 +55,7 @@ import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
@@ -74,16 +75,26 @@ import org.exoplatform.webui.form.UIFormUploadInput;
  * chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
  * Jun 25, 2009
  */
-@ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    events = {
-      @EventConfig(listeners = UIFCCForm.SaveActionListener.class),
-      @EventConfig(listeners = UIFCCForm.AddActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIFCCForm.RemoveActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIFCCForm.ShowComponentActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIFCCForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE)
-    }
-)
+@ComponentConfigs(
+                  {
+        @ComponentConfig(
+                         type = UIFormMultiValueInputSet.class,
+                         id="WYSIWYGRichTextMultipleInputset",
+                         events = {@EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
+                                   @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE)
+                                  }
+                     ),
+        @ComponentConfig(
+            lifecycle = UIFormLifecycle.class,
+            events = {
+              @EventConfig(listeners = UIFCCForm.SaveActionListener.class),
+              @EventConfig(listeners = UIFCCForm.AddActionListener.class, phase = Phase.DECODE),
+              @EventConfig(listeners = UIFCCForm.RemoveActionListener.class, phase = Phase.DECODE),
+              @EventConfig(listeners = UIFCCForm.ShowComponentActionListener.class, phase = Phase.DECODE),
+              @EventConfig(listeners = UIFCCForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE)
+            }
+        )
+})
 public class UIFCCForm extends UIDialogForm implements UISelectable {
 
   /** The Constant FIELD_TAXONOMY. */
