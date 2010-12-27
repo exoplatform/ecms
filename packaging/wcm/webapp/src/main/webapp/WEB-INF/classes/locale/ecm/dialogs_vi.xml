@@ -105,7 +105,7 @@
         <categories>Categories</categories>
         <mimeType>MimeType</mimeType>
         <content>Nội dung</content>
-        <re-upload>Có file đã tồn tại. Bạn có thể tải file khác để thay đổi nó.</re-upload>
+        <re-upload>Có file đã tồn tại. Bạn có thể xóa file cũ ở đây rồi tải file khác để thay đổi nó.</re-upload>
       </label>
     </dialog>
   </File>
