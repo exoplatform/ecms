@@ -80,14 +80,19 @@ import org.exoplatform.wcm.webui.form.UIFormRichtextInput;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
+import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
@@ -104,6 +109,17 @@ import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
  *          hoa.pham@exoplatform.com
  * Jun 23, 2008  
  */
+
+@ComponentConfigs(
+                  {
+        @ComponentConfig(
+                         type = UIFormMultiValueInputSet.class,
+                         id="WYSIWYGRichTextMultipleInputset",
+                         events = {@EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
+                                   @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE)
+                                  }
+                     )
+                  })
 @SuppressWarnings("unused")
 public class UIDialogForm extends UIForm {
 
@@ -115,11 +131,13 @@ public class UIDialogForm extends UIForm {
   private final String REPOSITORY = "repository";
   protected final static String CANCEL_ACTION = "Cancel".intern();
   protected final static String SAVE_ACTION = "Save".intern();
-  protected static final  String[]  ACTIONS = { SAVE_ACTION, CANCEL_ACTION };  
+  protected static final  String[]  ACTIONS = { SAVE_ACTION, CANCEL_ACTION };
+  private static final String WYSIWYG_MULTI_ID = "WYSIWYGRichTextMultipleInputset";
 
   protected Map<String, Map<String,String>> componentSelectors = new HashMap<String, Map<String,String>>();
   protected Map<String, String> fieldNames = new HashMap<String, String>();
   protected Map<String, String> propertiesName = new HashMap<String, String>();
+  protected Map<String, String[]> uiMultiValueParam = new HashMap<String, String[]>();
   protected String contentType; 
   protected boolean isAddNew = true;
   protected boolean isRemovePreference;
@@ -1218,16 +1236,47 @@ public class UIDialogForm extends UIForm {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);       
     setInputProperty(name, inputProperty);
+    String propertyName = getPropertyName(jcrPath);
+    propertiesName.put(name, propertyName);
+    fieldNames.put(propertyName, name);
+    
+    List<UIFormInputBase<String>> wysiwygList = getUIFormInputList(name, formWYSIWYGField, false);
     if(formWYSIWYGField.isMultiValues()) {
-      //TODO need add FCKEditorConfig for the service
-      renderMultiValuesInput(UIFormWYSIWYGInput.class,name,label);      
-      return;
-    }            
+      UIFormMultiValueInputSet uiMulti = findComponentById(name); 
+      if (uiMulti == null) { 
+        uiMulti = createUIComponent(UIFormMultiValueInputSet.class, WYSIWYG_MULTI_ID, null);
+
+        this.uiMultiValueParam.put(name, arguments);
+        uiMulti.setId(name);
+        uiMulti.setName(name);
+        uiMulti.setType(UIFormWYSIWYGInput.class);
+        for (int i = 0; i < wysiwygList.size(); i++) {
+          uiMulti.addChild(wysiwygList.get(i));
+          wysiwygList.get(i).setId(name + i);
+          wysiwygList.get(i).setName(name + i);
+        }
+        addUIFormInput(uiMulti);
+        if(label != null) uiMulti.setLabel(label);
+      }
+    } else {
+      if (wysiwygList.size() > 0)
+        addUIFormInput(wysiwygList.get(0));
+    }
+    renderField(name);
+  }
+
+  @SuppressWarnings("unchecked")
+  private List<UIFormInputBase<String>> getUIFormInputList(String name, DialogFormField formField, boolean isCreateNew) throws Exception {
+    String jcrPath = formField.getJcrPath();
+    String propertyName = getPropertyName(jcrPath);
+    List<UIFormInputBase<String>> ret = new ArrayList<UIFormInputBase<String>>();
+
+    UIFormInputBase formInput = formField.isMultiValues() ? null : (UIFormInputBase)findComponentById(name);
+  
     boolean isFirstTimeRender = false;
-    UIFormWYSIWYGInput wysiwyg = findComponentById(name);
-    if(wysiwyg == null) {
-    	isFirstTimeRender = true;
-      wysiwyg = formWYSIWYGField.createUIFormInput();      
+    if(formInput == null) {
+      isFirstTimeRender = true;
+      formInput = formField.createUIFormInput();      
     }                 
     /**
      * Broadcast some info about current node by FCKEditorConfig Object
@@ -1253,41 +1302,76 @@ public class UIDialogForm extends UIForm {
     FCKConfigService fckConfigService = getApplicationComponent(FCKConfigService.class);
     editorContext.setPortalName(Util.getUIPortal().getName());
     editorContext.setSkinName(Util.getUIPortalApplication().getSkin());
-    fckConfigService.processFCKEditorConfig(config,editorContext);      
-    wysiwyg.setFCKConfig(config);    
-    addUIFormInput(wysiwyg);
-    if(wysiwyg.getValue() == null) wysiwyg.setValue(formWYSIWYGField.getDefaultValue());
-    String propertyName = getPropertyName(jcrPath);
-    propertiesName.put(name, propertyName);
-    fieldNames.put(propertyName, name);
+    fckConfigService.processFCKEditorConfig(config,editorContext);
+    if (formInput instanceof UIFormWYSIWYGInput)
+      ((UIFormWYSIWYGInput)formInput).setFCKConfig(config);    
+    if(formInput.getValue() == null) formInput.setValue(formField.getDefaultValue());
     Node node = getNode();
+    
+    if (isCreateNew) {
+      ret.add(formInput);
+      return ret;
+    }
+    if (!formField.isMultiValues()) {
+      if(!isShowingComponent && !isRemovePreference) {
+        if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
+          Node jcrContentNode = node.getNode("jcr:content");
+          formInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
+        } else {
+          if(node != null && node.hasProperty(propertyName)) {
+            formInput.setValue(node.getProperty(propertyName).getValue().getString());
+          }
+        }
+      }
+      if(isNotEditNode && !isShowingComponent && !isRemovePreference) {
+        Node childNode = getChildNode();
+        if(node != null && node.hasNode("jcr:content") && childNode != null) {
+          Node jcrContentNode = node.getNode("jcr:content");
+          formInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
+        } else {
+          if(childNode != null) {
+            formInput.setValue(propertyName);
+          } else if(childNode == null && jcrPath.equals("/node") && node != null) {
+            formInput.setValue(node.getName());
+          } else {
+            formInput.setValue(null);
+          }
+        }
+      }
+      ret.add(formInput);
+      return ret;
+    }
+    Value[] values = null;
 
     if(!isShowingComponent && !isRemovePreference && isFirstTimeRender) {
-      if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
-        Node jcrContentNode = node.getNode("jcr:content");
-        wysiwyg.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
-      } else {
-        if(node != null && node.hasProperty(propertyName)) {
-          wysiwyg.setValue(node.getProperty(propertyName).getValue().getString());
-        }
+      if(node != null && node.hasProperty(propertyName)) {
+        values = node.getProperty(propertyName).getValues();
       }
     }
     if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       Node childNode = getChildNode();
-      if(node != null && node.hasNode("jcr:content") && childNode != null) {
-        Node jcrContentNode = node.getNode("jcr:content");
-        wysiwyg.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
+      if(childNode != null) {
+        values = new Value[] {node.getSession().getValueFactory().createValue(propertyName)};
+      } else if(childNode == null && jcrPath.equals("/node") && node != null) {
+        values = new Value[] {node.getSession().getValueFactory().createValue(node.getName())};
       } else {
-        if(childNode != null) {
-          wysiwyg.setValue(propertyName);
-        } else if(childNode == null && jcrPath.equals("/node") && node != null) {
-          wysiwyg.setValue(node.getName());
-        } else {
-          wysiwyg.setValue(null);
-        }
+        values = new Value[] {node.getSession().getValueFactory().createValue("")};
       }
     }
-    renderField(name);
+    if (values != null) {
+      for (Value v : values) {
+        UIFormInputBase uiFormInput = formField.createUIFormInput();
+        if (uiFormInput instanceof UIFormWYSIWYGInput)
+          ((UIFormWYSIWYGInput)uiFormInput).setFCKConfig((FCKEditorConfig)config.clone());
+        if(v == null || v.getString() == null)  
+          uiFormInput.setValue(formField.getDefaultValue());
+        else uiFormInput.setValue(v.getString());
+        ret.add(uiFormInput);
+      }
+    } else {
+      ret.add(formInput);
+    }
+    return ret;
   }
 
   public void addWYSIWYGField(String name, String[] arguments) throws Exception {
@@ -1300,48 +1384,30 @@ public class UIDialogForm extends UIForm {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);       
     setInputProperty(name, inputProperty);
-    if(richtextField.isMultiValues()) {
-      //TODO need add FCKEditorConfig for the service
-      renderMultiValuesInput(UIFormRichtextInput.class,name,label);      
-      return;
-    }            
-    boolean isFirstTimeRender = false;
-    UIFormRichtextInput richtextInput = findComponentById(name);
-    if(richtextInput == null) {
-    	isFirstTimeRender = true;
-      richtextInput = richtextField.createUIFormInput();      
-    }                 
-    addUIFormInput(richtextInput);
-    if(richtextInput.getValue() == null) richtextInput.setValue(richtextField.getDefaultValue());
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
-    Node node = getNode();
+    List<UIFormInputBase<String>> richtextList = getUIFormInputList(name, richtextField, false);
+    if(richtextField.isMultiValues()) {
+      UIFormMultiValueInputSet uiMulti = findComponentById(name); 
+      if (uiMulti == null) { 
+        uiMulti = createUIComponent(UIFormMultiValueInputSet.class, WYSIWYG_MULTI_ID, null);
 
-    if(!isShowingComponent && !isRemovePreference && isFirstTimeRender) {
-      if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
-        Node jcrContentNode = node.getNode("jcr:content");
-        richtextInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
-      } else {
-        if(node != null && node.hasProperty(propertyName)) {
-          richtextInput.setValue(node.getProperty(propertyName).getValue().getString());
+        this.uiMultiValueParam.put(name, arguments);
+        uiMulti.setId(name);
+        uiMulti.setName(name);
+        uiMulti.setType(UIFormRichtextInput.class);
+        for (int i = 0; i < richtextList.size(); i++) {
+          uiMulti.addChild(richtextList.get(i));
+          richtextList.get(i).setId(name + i);
+          richtextList.get(i).setName(name + i);
         }
+        addUIFormInput(uiMulti);
+        if(label != null) uiMulti.setLabel(label);
       }
-    }
-    if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
-      Node childNode = getChildNode();
-      if(node != null && node.hasNode("jcr:content") && childNode != null) {
-        Node jcrContentNode = node.getNode("jcr:content");
-        richtextInput.setValue(jcrContentNode.getProperty("jcr:data").getValue().getString());
-      } else {
-        if(childNode != null) {
-          richtextInput.setValue(propertyName);
-        } else if(childNode == null && jcrPath.equals("/node") && node != null) {
-          richtextInput.setValue(node.getName());
-        } else {
-          richtextInput.setValue(null);
-        }
-      }
+    } else {
+      if (richtextList.size() > 0)
+        addUIFormInput(richtextList.get(0));
     }
     renderField(name);
   }
@@ -1721,4 +1787,30 @@ public class UIDialogForm extends UIForm {
     writer.append("</table>");
     writer.append("</div>");
   }
+  
+  static public class AddActionListener extends EventListener<UIFormMultiValueInputSet> {
+    public void execute(Event<UIFormMultiValueInputSet> event) throws Exception {
+      UIFormMultiValueInputSet uiSet = event.getSource();
+      String id = event.getRequestContext().getRequestParameter(OBJECTID);
+      if (uiSet.getId().equals(id)) {
+        // get max id
+        List<UIComponent> children = uiSet.getChildren();
+        if (children.size() > 0) {
+          UIFormInputBase uiInput = (UIFormInputBase) children.get(children.size() - 1);
+          String index = uiInput.getId();
+          int maxIndex = Integer.parseInt(index.replaceAll(id, ""));
+          
+          UIDialogForm uiDialogForm = uiSet.getAncestorOfType(UIDialogForm.class);
+          String[] arguments = uiDialogForm.uiMultiValueParam.get(uiSet.getName());
+          UIFormInputBase newUIInput = (uiInput instanceof UIFormWYSIWYGInput) ? 
+                                        uiDialogForm.getUIFormInputList(uiSet.getName(), new UIFormWYSIWYGField(uiSet.getName(), null,arguments), true).get(0) :
+                                          uiDialogForm.getUIFormInputList(uiSet.getName(), new UIFormRichtextField(uiSet.getName(), null,arguments), true).get(0);  
+          uiSet.addChild(newUIInput);
+          newUIInput.setId(uiSet.getName() + (maxIndex + 1));
+          newUIInput.setName(uiSet.getName() + (maxIndex + 1));
+        }
+      }
+    }
+  }
+    
 }

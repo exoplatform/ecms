@@ -26,7 +26,6 @@ import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector;
@@ -42,13 +41,12 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
-import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
@@ -70,18 +68,28 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Nov 8, 2006
  * 11:23:50 AM 
  */
-@ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    events = {
-      @EventConfig(listeners = UIActionForm.SaveActionListener.class),
-      @EventConfig(listeners = UIDialogForm.OnchangeActionListener.class, phase=Phase.DECODE),
-      @EventConfig(listeners = UIActionForm.BackActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIActionForm.ShowComponentActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIActionForm.AddActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIActionForm.RemoveActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIActionForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE)
-    }
-)
+@ComponentConfigs(
+                  {
+        @ComponentConfig(
+                         type = UIFormMultiValueInputSet.class,
+                         id="WYSIWYGRichTextMultipleInputset",
+                         events = {@EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
+                                   @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE)
+                                  }
+                     ),
+        @ComponentConfig(
+            lifecycle = UIFormLifecycle.class,
+            events = {
+              @EventConfig(listeners = UIActionForm.SaveActionListener.class),
+              @EventConfig(listeners = UIDialogForm.OnchangeActionListener.class, phase=Phase.DECODE),
+              @EventConfig(listeners = UIActionForm.BackActionListener.class, phase = Phase.DECODE),
+              @EventConfig(listeners = UIActionForm.ShowComponentActionListener.class, phase = Phase.DECODE),
+              @EventConfig(listeners = UIActionForm.AddActionListener.class, phase = Phase.DECODE),
+              @EventConfig(listeners = UIActionForm.RemoveActionListener.class, phase = Phase.DECODE),
+              @EventConfig(listeners = UIActionForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE)
+            }
+        )
+})
 public class UIActionForm extends UIDialogForm implements UISelectable {
   
   private String parentPath_;
