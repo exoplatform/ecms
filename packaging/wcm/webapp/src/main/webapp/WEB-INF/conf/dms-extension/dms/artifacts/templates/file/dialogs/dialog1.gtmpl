@@ -63,14 +63,27 @@
                               uicomponent.addTextAreaField("content", fieldSummary) ;
                       }
                     } else {
-                    %>
-                      <div style="font-size:12px; font-weight: bold; line-height: 17px;">
-                        <%=_ctx.appRes("File.dialog.label.re-upload")%>
-                      </div>
-                    <%
-			        String[] fieldData = ["jcrPath=/node/jcr:content/jcr:data"] ;
-			        uicomponent.addUploadField("data", fieldData) ;
-                    }
+                  if (content.getProperty("jcr:data").getStream().available() > 0) {
+                        def actionLink = uicomponent.event("RemoveData", "/jcr:content");
+                        def fileName = curNode.getName();
+                        %> 
+                          <div>
+                          <div style="font-size:12px; font-weight: bold; line-height: 17px;">
+                       	   <%=_ctx.appRes("File.dialog.label.re-upload")%>
+                          </div>
+                          <a style="font-size:12px; font-weight: bold; line-height: 17px;">
+                             $fileName
+                          </a>
+                          <a href="$actionLink">
+							 <img src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" class="ActionIcon Remove16x16Icon"/>
+						  </a>
+						  </div>
+                       <%
+                    }else{
+ 			        String[] fieldData = ["jcrPath=/node/jcr:content/jcr:data"] ;
+ 			        uicomponent.addUploadField("data", fieldData) ;
+ 			        }
+ 			        }
                   } else {
                     String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty"] ;
                                 uicomponent.addRichtextField("contentHtml", fieldSummary) ;            

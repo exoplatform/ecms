@@ -105,7 +105,7 @@
         <categories>Catégories</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>Un fichier existe déjà. Vous pouvez le remplacer en le téléchargeant à nouveau.</re-upload>
+        <re-upload>Un fichier existe déjà. Vous pouvez le remplacer par le supprimer et de télécharger un autre fichier à partir d'ici.</re-upload>
       </label>
     </dialog>
   </File>
