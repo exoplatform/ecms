@@ -571,7 +571,7 @@ public class UIPublicationPanel extends UIForm {
       
       UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class) ;
       uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.restore-complete", null)) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp) ;
       
       UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
       publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
