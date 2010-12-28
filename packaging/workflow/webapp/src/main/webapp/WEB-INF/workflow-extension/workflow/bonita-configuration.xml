@@ -29,7 +29,7 @@
 	    </value-param>	        
 	    <value-param>
 	    	<name>jaas.login.context</name>
-	    	<value>gatein-domain</value>
+	    	<value>${portal.container.realm}</value>
 	    </value-param>
     </init-params>
 	</component>
