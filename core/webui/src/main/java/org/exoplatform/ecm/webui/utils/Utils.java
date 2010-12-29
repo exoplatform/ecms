@@ -230,6 +230,14 @@ public class Utils {
 	public static boolean isTrashHomeNode(Node node) throws RepositoryException {
 		return node.isNodeType(EXO_TRASH_FOLDER);
 	}
+	
+	public static boolean isInTrash(Node node) throws RepositoryException {
+	  return node.isNodeType(EXO_RESTORELOCATION);
+	}
+	
+    public static boolean isReferenceable(Node node) throws RepositoryException {
+      return node.isNodeType(MIX_REFERENCEABLE);
+    }
 
 	static public class NodeTypeNameComparator implements Comparator<NodeType> {
 		public int compare(NodeType n1, NodeType n2) throws ClassCastException {

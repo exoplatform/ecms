@@ -157,40 +157,45 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
   private void processRemoveOrMoveToTrash(String nodePath, Node node, Event<?> event, boolean isMultiSelect, boolean checkToMoveToTrash)
   throws Exception {
-		if (node.isNodeType(Utils.EXO_RESTORELOCATION) || !checkToMoveToTrash)
-			processRemoveNode(nodePath, node, event, isMultiSelect);
-		else {
-	    WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
-	    List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(node);
-			
-			String parentPath = node.getParent().getPath();
-			String parentRepo = node.getSession().getRepository().toString();
-			String parentWSpace = node.getSession().getWorkspace().getName();
-	    moveToTrash(nodePath, node, event, isMultiSelect);
-	    
-	    for(Node categoryNode : categories){
-	      wcmComposer.updateContents(categoryNode.getSession().getRepository().toString(), 
-	                                 categoryNode.getSession().getWorkspace().getName(),
-	                                 categoryNode.getPath(), new HashMap<String, String>());
+	if (node.isNodeType(Utils.EXO_RESTORELOCATION) || !checkToMoveToTrash)
+	  processRemoveNode(nodePath, node, event, isMultiSelect);
+	else {
+  	  WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
+  	  List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(node);
+  			
+  	  String parentPath = node.getParent().getPath();
+  	  String parentRepo = node.getSession().getRepository().toString();
+  	  String parentWSpace = node.getSession().getWorkspace().getName();
+
+      wcmComposer.updateContent(parentRepo, parentWSpace, node.getPath(), new HashMap<String, String>());  	  
+      boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
+      if (moveOK) {
+        for(Node categoryNode : categories){
+          wcmComposer.updateContents(categoryNode.getSession().getRepository().toString(), 
+  	                                 categoryNode.getSession().getWorkspace().getName(),
+  	                                 categoryNode.getPath(), new HashMap<String, String>());
+        }
+    	  
+        if (Utils.isReferenceable(node)) {
+          wcmComposer.updateContent(parentRepo, parentWSpace, node.getUUID(), new HashMap<String, String>());
+        }
+        wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
       }
-			wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
-		}
+	}
   }
 
-	private void moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
+	private boolean moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
 		ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
     TrashService trashService = (TrashService)myContainer.getComponentInstanceOfType(TrashService.class);
-    
+    boolean ret = true;
     final String virtualNodePath = srcPath;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    
-    
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     try {
       uiExplorer.addLockToken(node);
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
-      return;
+      return false;
     }
     
     try {
@@ -204,7 +209,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
             null,ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         uiExplorer.updateAjax(event);
-        return;
+        return false;
       }
     	
 			if (!node.isCheckedOut())
@@ -223,7 +228,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 	    	trashService.moveToTrash(node,  
 	    							 trashHomeNodePath, trashWorkspace, 
 	    							 trashRepository, sessionProvider);
-    	} catch (PathNotFoundException ex) {}
+    	} catch (PathNotFoundException ex) { ret = false;}
     	String currentPath = LinkUtils.getExistPath(currentNode, uiExplorer.getCurrentPath());    	
     	uiExplorer.setCurrentPath(currentPath);    	
     	uiExplorer.updateAjax(event);
@@ -233,21 +238,25 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     	JCRExceptionManager.process(uiApp, e);
     	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
     	uiExplorer.updateAjax(event);
+    	ret = false;
     } catch (VersionException e) {
     	LOG.error("node is checked in, can't move to trash node:" + node.getPath());
     	JCRExceptionManager.process(uiApp, e);
     	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-    	uiExplorer.updateAjax(event);	   
+    	uiExplorer.updateAjax(event);
+    	ret = false;
     } catch (AccessDeniedException e) {
     	LOG.error("access denied, can't add move to trash to node:" + node.getPath());
     	JCRExceptionManager.process(uiApp, e);
     	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
     	uiExplorer.updateAjax(event);
+    	ret = false;
     } catch (Exception e) {
     	LOG.error("an unexpected error occurs", e);
     	JCRExceptionManager.process(uiApp, e);
     	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
     	uiExplorer.updateAjax(event);
+    	ret = false;
     }
     
     if (!isMultiSelect) {
@@ -256,7 +265,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       else
         uiExplorer.setSelectNode(uiExplorer.getCurrentPath());
     }
-	}
+    return ret;
+  }
 	
   private void processRemoveNode(String nodePath, Node node, Event<?> event, boolean isMultiSelect)
       throws Exception {

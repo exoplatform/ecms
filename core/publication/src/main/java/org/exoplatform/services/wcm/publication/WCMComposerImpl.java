@@ -55,6 +55,8 @@ import org.picocontainer.Startable;
 @RESTEndpoint(path = "wcmcomposerservice")
 public class WCMComposerImpl implements WCMComposer, Startable {
 
+  final static public String EXO_RESTORELOCATION = "exo:restoreLocation";  
+  
 	/** The repository service. */
 	private RepositoryService repositoryService;
 
@@ -272,23 +274,22 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 * @throws Exception the exception
 	 */
 	private Node getViewableContent(Node node, HashMap<String, String> filters) throws Exception {
-  	  try {
-        node = getTargetNode(node);
-      }catch(AccessDeniedException ade) {           
-        return null;
-      }
+	  try {
+      node = getTargetNode(node);
+    }catch(AccessDeniedException ade) {           
+      return null;
+    }
       
-	    if (node.isNodeType("exo:trashFolder")) {
-	      return null;
+    if (node != null && node.isNodeType(EXO_RESTORELOCATION))
+      return null;
+    String languageFilter = filters.get(FILTER_LANGUAGE);
+    if (languageFilter!=null) {
+    	addUsedLanguage(languageFilter);
+	    Node lnode = multiLanguageService.getLanguage(node, languageFilter);
+	    if (lnode!=null) {
+		    node = lnode;
 	    }
-	    String languageFilter = filters.get(FILTER_LANGUAGE);
-	    if (languageFilter!=null) {
-	    	addUsedLanguage(languageFilter);
-		    Node lnode = multiLanguageService.getLanguage(node, languageFilter);
-		    if (lnode!=null) {
-			    node = lnode;
-		    }
-	    }
+    }
 
 		HashMap<String, Object> context = new HashMap<String, Object>();
 		String mode = filters.get(FILTER_MODE);
@@ -329,7 +330,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		if (isCached) {
 			String[] orderTypes = {null, "ASC", "DESC"};
 			if (log.isDebugEnabled()) log.debug("updateContent : "+path);
-			String part = path.substring(0, path.lastIndexOf("/"));
+			String part = (path.lastIndexOf("/") >= 0) ? path.substring(0, path.lastIndexOf("/")) : path;
 			String remoteUser = null;
 			try {
 				remoteUser = Util.getPortalRequestContext().getRemoteUser();

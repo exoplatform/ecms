@@ -553,11 +553,11 @@ public class Utils {
       selectedNode = getViewableNodeByComposer(strRepository, strWorkspace, strIdentifier);
     }
     if (selectedNode != null){
-      if (!org.exoplatform.ecm.webui.utils.Utils.isTrashHomeNode(selectedNode)) {
+      if (!org.exoplatform.ecm.webui.utils.Utils.isInTrash(selectedNode)) {
         if (linkManager.isLink(selectedNode)) {
           if (linkManager.isTargetReachable(selectedNode)) {
             selectedNode = linkManager.getTarget(selectedNode);
-            if (!org.exoplatform.ecm.webui.utils.Utils.isTrashHomeNode(selectedNode)) {
+            if (!org.exoplatform.ecm.webui.utils.Utils.isInTrash(selectedNode)) {
               return selectedNode;
             }
           }
