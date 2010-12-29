@@ -280,7 +280,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       return null;
     }
       
-    if (node != null && node.isNodeType(EXO_RESTORELOCATION))
+    if (node != null && (node.isNodeType(EXO_RESTORELOCATION) || node.isNodeType("exo:trashFolder")))
       return null;
     String languageFilter = filters.get(FILTER_LANGUAGE);
     if (languageFilter!=null) {
