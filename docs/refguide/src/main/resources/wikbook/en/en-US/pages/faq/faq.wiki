@@ -1,12 +1,12 @@
 h1. How to deploy a workflow?
  
-The _*addPlugin()*_ function of *WorkflowServiceContainer* service will be used to register when a workflow is implemented. Thus, if you want to use a workflow, you are required to configure to invoke the _*addPlugin()*_ function by adding the _*external-component-plugins*_ element to the configuration file.
+The _*addPlugin()*_ function of *WorkflowServiceContainer* service is used to register a Business Process when a workflow is implemented. Thus, if you want to use a workflow, you are required to configure the workflow service to invoke the _*addPlugin()*_ function by adding the _*external-component-plugins*_ element to the configuration file.
 
 You have to set values for the name and location of the workflow which you want to use. There are *TWO* ways to configure the location of the workflow.
 
 h2. Deploy a workflow inside a *.war* file
 
-You can use war:(FOLDER_PATH) to register the location in which you put the workflow in the _*.jar*_ files.
+You can use "war:(FOLDER_PATH)" to configure which *.jar* files contain your workflow processes inside the _*.war*_ file.
 	
 {code:xml}
 <external-component-plugins>
@@ -38,7 +38,7 @@ You can use war:(FOLDER_PATH) to register the location in which you put the work
 h2. Deploy a workflow inside a *.jar* file
 
 
-You can use "classpath:" to register a workflow which you put inside the _*.jar*_ file.
+You can use "classpath:" to configure which *.jar* files contain your workflow processes inside the _*.jar*_ file.
 	
 {code:xml}
 <external-component-plugins>
@@ -65,4 +65,4 @@ You can use "classpath:" to register a workflow which you put inside the _*.jar*
 </external-component-plugins>
 {code}	
   
-The notification message will be displayed when you deploy a workflow on Jboss. If you use "classpath:" to register, you must put your workflow in the *.jar* files inside the _*gatein.ear/lib*_ folder (instead of the *_lib_* folder) to make it work.
+The notification message is displayed when you deploy a workflow on Jboss. If you use "classpath:" to register, you must put your workflow in the *.jar* files inside the _*gatein.ear/lib*_ folder (instead of the *_lib_* folder) to make it work.
