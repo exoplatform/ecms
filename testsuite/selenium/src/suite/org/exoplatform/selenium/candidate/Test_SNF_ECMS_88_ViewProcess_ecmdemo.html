@@ -23,7 +23,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Login </td>
+	<td>-- Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -62,8 +62,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;BP Definition Controller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;pay raise process</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIBPDefinition']/table/tbody/tr[2]/td[4]/div/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -74,7 +94,7 @@
 <tr>
 	<td>waitForElementPresent</td>
 	<td>amount-asked</td>
-	<td>3000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -137,6 +157,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;view : 	pay raise process</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIMonitor']/table/tbody/tr[3]/td[4]/div/img[1]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='UIMonitor']/table/tbody/tr[3]/td[4]/div/img[1]</td>
 	<td></td>
@@ -159,6 +189,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id='UITaskListOfProcess']/div/div/div[2]/table/tbody/tr/td/a/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIRunningProcessGrid']/table/tbody/tr/td[6]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -186,7 +221,6 @@
 	<td>link=Sign out</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

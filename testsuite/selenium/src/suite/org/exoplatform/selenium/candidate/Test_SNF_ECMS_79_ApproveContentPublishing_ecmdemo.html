@@ -57,23 +57,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Site Admin</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Sites Administration</td>
+	<td>//a[@href='/ecmdemo/private/acme/wcmAdmin']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Administration</td>
+	<td>//a[@href='/ecmdemo/private/acme/wcmAdmin']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Content Presentation</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),'Content Presentation')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),'Content Presentation')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -147,6 +157,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Add Permission']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//img[@title='Add Permission']</td>
 	<td></td>
@@ -178,12 +193,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[2]/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[text()='Apply Views']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[2]/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[text()='Apply Views']</td>
 	<td></td>
 </tr>
 <tr>
@@ -258,22 +273,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -312,6 +327,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>title</td>
 	<td></td>
@@ -327,11 +347,6 @@
 	<td>Test_SNF_ECMS_79</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//td[@id='cke_contents_summary']/iframe</td>
 	<td></td>
@@ -342,7 +357,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
 	<td>Manchester United</td>
 </tr>
@@ -357,7 +372,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>//html/body</td>
 	<td>Manchester United FC</td>
 </tr>
@@ -448,7 +463,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Manage</td>
+	<td>-- Manage : content-publishing -first</td>
 	<td></td>
 </tr>
 <tr>
@@ -463,17 +478,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Approve content publishing</td>
+	<td>--&nbsp;&nbsp;Publication ends on:</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[3]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>//input[@name='endDate']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[3]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>//input[@name='endDate']</td>
 	<td></td>
 </tr>
 <!--days :(-->
@@ -498,13 +513,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Approve</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Approve</td>
+	<td>//form[@id='UITask']/div[3]/div/div[1]/div/table/tbody/tr/td/div[1]/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Approve</td>
+	<td>//form[@id='UITask']/div[3]/div/div[1]/div/table/tbody/tr/td/div[1]/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -514,22 +534,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -604,7 +624,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Administration</td>
+	<td>//a[@href='/ecmdemo/private/acme/wcmAdmin']</td>
 	<td></td>
 </tr>
 <tr>
@@ -654,17 +674,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sites Explorer</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -692,7 +712,6 @@
 	<td>link=Sign out</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
