@@ -16,7 +16,10 @@
  */
 package org.exoplatform.wcm.connector;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -80,6 +83,12 @@ public abstract class BaseConnector {
 
   /** The web schema config service. */
   protected WebSchemaConfigService            webSchemaConfigService;
+  
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  protected static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  protected static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /**
    * Gets the root content storage.
@@ -96,7 +105,7 @@ public abstract class BaseConnector {
    * @return the content storage type
    * @throws Exception the exception
    */
-  protected abstract String getContentStorageType() throws Exception;
+  protected abstract String getContentStorageType() throws Exception;  
 
   /**
    * Instantiates a new base connector.
@@ -340,7 +349,8 @@ public abstract class BaseConnector {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
-    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /**

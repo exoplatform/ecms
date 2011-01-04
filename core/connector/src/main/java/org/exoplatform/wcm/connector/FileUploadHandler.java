@@ -18,6 +18,9 @@ package org.exoplatform.wcm.connector;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.jcr.Node;
@@ -63,6 +66,12 @@ public class FileUploadHandler {
 
   /** The Constant SAVE_ACTION. */
   public final static String SAVE_ACTION = "save".intern();
+  
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /** The upload service. */
   private UploadService uploadService;
@@ -103,7 +112,9 @@ public class FileUploadHandler {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
-    return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();            
+    
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();            
   }
   public Response upload(HttpServletRequest servletRequest, String uploadId, Integer limit) throws Exception{
 	  uploadService.addUploadLimit(uploadId, limit);
@@ -127,17 +138,18 @@ public class FileUploadHandler {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     if(FileUploadHandler.PROGRESS_ACTION.equals(action)) {
-      Document currentProgress = getProgress(uploadId);      
-      return Response.ok(new DOMSource(currentProgress), MediaType.TEXT_XML).cacheControl(cacheControl).build();
+      Document currentProgress = getProgress(uploadId);  
+      return Response.ok(new DOMSource(currentProgress), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     }else if(FileUploadHandler.ABORT_ACTION.equals(action)) {
       uploadService.removeUploadResource(uploadId);
-      return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();    
+      return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();    
     }else if(FileUploadHandler.DELETE_ACTION.equals(action)) {
       uploadService.removeUploadResource(uploadId);
-      return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();    
+      return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();    
     }
-    return Response.status(HTTPStatus.BAD_REQUEST).cacheControl(cacheControl).build();
+    return Response.status(HTTPStatus.BAD_REQUEST).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
   
   /**
@@ -156,16 +168,17 @@ public class FileUploadHandler {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     UploadResource resource = uploadService.getUploadResource(uploadId);
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     if (parent == null) {
       Document fileNotUploaded = 
         fckMessage.createMessage(FCKMessage.FILE_NOT_UPLOADED, FCKMessage.ERROR, language, null);
-      return Response.ok(new DOMSource(fileNotUploaded), MediaType.TEXT_XML).cacheControl(cacheControl).build();
+      return Response.ok(new DOMSource(fileNotUploaded), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     }
     if(!FCKUtils.hasAddNodePermission(parent)) {
       Object[] args = { parent.getPath() };
       Document message = 
         fckMessage.createMessage(FCKMessage.FILE_UPLOAD_RESTRICTION,FCKMessage.ERROR,language,args);
-      return Response.ok(message, MediaType.TEXT_XML).cacheControl(cacheControl).build();
+      return Response.ok(message, MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     }
     if((fileName == null) || (fileName.length() == 0)) {
       fileName = resource.getFileName();
@@ -174,7 +187,7 @@ public class FileUploadHandler {
       Object args[] = { fileName, parent.getPath() };
       Document fileExisted = 
         fckMessage.createMessage(FCKMessage.FILE_EXISTED, FCKMessage.ERROR, language, args);
-      return Response.ok(fileExisted, MediaType.TEXT_XML).cacheControl(cacheControl).build();
+      return Response.ok(fileExisted, MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     }                
     String location = resource.getStoreLocation();
     byte[] uploadData = IOUtil.getFileContentAsBytes(location);
@@ -190,7 +203,7 @@ public class FileUploadHandler {
     uploadService.removeUploadResource(uploadId);
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
-    return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).build();
+    return Response.ok(null, MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
   
   /**

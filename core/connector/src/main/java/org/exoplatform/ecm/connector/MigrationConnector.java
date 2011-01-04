@@ -1,5 +1,8 @@
 package org.exoplatform.ecm.connector;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -20,10 +23,17 @@ import org.w3c.dom.Element;
 @Path("/configuration/")
 public class MigrationConnector implements ResourceContainer {
 
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  
 	@GET
 	@Path("/export/")
 	public Response export() throws Exception {
-		try {
+	  DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+	  try {
 			Document document =
 				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 			Element element = document.createElement("ecm");
@@ -60,11 +70,11 @@ public class MigrationConnector implements ResourceContainer {
 		    	drives.appendChild(driveElt);
 		    }
 
-			return Response.ok(new DOMSource(document), MediaType.TEXT_XML).build();
+			return Response.ok(new DOMSource(document), MediaType.TEXT_XML).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 		} catch (Exception e) {
 			Response.serverError().build();
 		}    
-		return Response.ok().build();
+		return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 	}
 
 }

@@ -1,8 +1,11 @@
 package org.exoplatform.ecm.REST.favorite;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.jcr.ItemNotFoundException;
@@ -37,6 +40,12 @@ public class FavoriteRESTService implements ResourceContainer {
 	private static final String TITLE   = "exo:title";
 
 	private static final int    NO_PER_PAGE     = 10;
+	
+	/** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 	
 	private static final Log LOG = ExoLogger.getLogger(FavoriteRESTService.class
 			.getName());
@@ -81,8 +90,9 @@ public class FavoriteRESTService implements ResourceContainer {
 		}
 		ListResultNode listResultNode = new ListResultNode();			
 		listResultNode.setListFavorite(listFavorites);
-		return Response.ok(listResultNode, new MediaType("application", "json"))
-				.build();
+		
+		DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+		return Response.ok(listResultNode, new MediaType("application", "json")).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 	}	
 	
 	private String getTitle(Node node) throws Exception {

@@ -1,5 +1,9 @@
 package org.exoplatform.ecm.connector;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -12,17 +16,24 @@ import com.ibm.icu.text.Transliterator;
 @Path("/l11n/")
 public class LocalizationConnector implements ResourceContainer {
 
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  
 	@GET
 	@Path("/cleanName/")
 	public Response getCleanName(
 			@QueryParam("name") String name 
 	) throws Exception {
+	  DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
 		try {
-			return Response.ok(cleanString(name)).build();
+			return Response.ok(cleanString(name)).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 		} catch (Exception e) {
 			Response.serverError().build();
 		}    
-		return Response.ok().build();
+		return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 	}
 
 

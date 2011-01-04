@@ -16,6 +16,10 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.jcr.Node;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -79,7 +83,9 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
     } catch (Exception e) {
     	Response.serverError().build();
     }    
-    return Response.ok().build();
+    
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /**
@@ -119,12 +125,15 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
 			  element.appendChild(total);
 			  document.appendChild(element);
 
-			  return Response.ok(new DOMSource(document), MediaType.TEXT_XML).build();
+			  DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+			  return Response.ok(new DOMSource(document), MediaType.TEXT_XML).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 		  }
 	  } catch (Exception e) {
 		  Response.serverError().build();
-	  }    
-	  return Response.ok().build();
+	  }  
+	  
+	  DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+	  return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
   
   /*

@@ -16,6 +16,10 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.ws.rs.GET;
@@ -89,7 +93,8 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
     } catch (Exception e) {
       log.error("Error when perform getFoldersAndFiles: ", e);
     }    
-    return Response.ok().build();
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /*

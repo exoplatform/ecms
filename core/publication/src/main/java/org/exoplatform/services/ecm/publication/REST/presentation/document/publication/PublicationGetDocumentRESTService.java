@@ -17,6 +17,7 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.publication.REST.presentation.document.publication;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,6 +68,13 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   private ManageDriveService manageDriveService_;
   
   final static public String DEFAULT_ITEM = "5";
+  
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  
   private static final Log LOG  = ExoLogger.getLogger(PublicationGetDocumentRESTService.class);
   
   public PublicationGetDocumentRESTService(RepositoryService repositoryService,
@@ -149,7 +157,8 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
     }
     publishedListNode.setPublishedListNode(publishedNodes);
     session.logout();
-    return Response.ok(publishedListNode, new MediaType("application", "json")).build();
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(publishedListNode, new MediaType("application", "json")).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   private List<Node> getNodePublish(NodeIterator iter, String pluginName) throws Exception {

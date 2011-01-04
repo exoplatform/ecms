@@ -1,18 +1,21 @@
 package org.exoplatform.wcm.extensions.component.rest;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
-
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.Date;
 
 /**
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
@@ -29,6 +32,12 @@ public class CopyContentFile implements ResourceContainer {
   private static String       stagingStorage;
 
   private static String       targetKey;
+  
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+  
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   public CopyContentFile(InitParams params) {
     stagingStorage = params.getValueParam("stagingStorage").getValue();
@@ -41,6 +50,8 @@ public class CopyContentFile implements ResourceContainer {
     if (log.isDebugEnabled()) {
       log.debug("Start Execute CopyContentFile Web Service");
     }
+    
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     try {
 
       String[] tabParam = param.split("&&");
@@ -69,11 +80,11 @@ public class CopyContentFile implements ResourceContainer {
       } else {
         log.warn("Anthentification failed...");
         return Response.ok(KO_RESPONSE + "...Anthentification failed", "text/plain")
-                               .build();
+                               .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
       }
     } catch (Exception ex) {
       log.error("error when copying content file" + ex.getMessage());
-      return Response.ok(KO_RESPONSE + "..." + ex.getMessage(), "text/plain").build();
+      return Response.ok(KO_RESPONSE + "..." + ex.getMessage(), "text/plain").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     }
     if (log.isDebugEnabled()) {
       log.debug("Start Execute CopyContentFile Web Service");
@@ -81,7 +92,7 @@ public class CopyContentFile implements ResourceContainer {
     return Response.ok(OK_RESPONSE
                                    + "...content has been successfully copied in the production server",
                                "text/plain")
-                           .build();
+                           .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 
   }
 

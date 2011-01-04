@@ -17,7 +17,10 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.io.ByteArrayInputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -181,7 +184,9 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     String feedXML = generateRSS(nodes, contextRss);
     
     Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(feedXML.getBytes()));
-    Response response = Response.ok(new DOMSource(document), MediaType.TEXT_XML).build();
+    
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    Response response = Response.ok(new DOMSource(document), MediaType.TEXT_XML).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     return response;
   }
   
