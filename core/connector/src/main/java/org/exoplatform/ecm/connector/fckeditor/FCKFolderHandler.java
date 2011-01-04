@@ -16,6 +16,10 @@
  */
 package org.exoplatform.ecm.connector.fckeditor;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.jcr.Node;
 import javax.jcr.nodetype.NodeType;
 import javax.ws.rs.core.CacheControl;
@@ -89,18 +93,19 @@ public class FCKFolderHandler {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     Document document = null;
+    DateFormat dateFormat = new SimpleDateFormat(FCKUtils.IF_MODIFIED_SINCE_DATE_FORMAT);
     if (currentNode != null) {
       if (!FCKUtils.hasAddNodePermission(currentNode)) {
         Object[] args = { currentNode.getPath() };
         document = fckMessage.createMessage(FCKMessage.FOLDER_PERMISSION_CREATING, FCKMessage.ERROR,
             language, args);
-        return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).build();
+        return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
       }
       if (currentNode.hasNode(newFolderName)) {
         Object[] args = { currentNode.getPath(), newFolderName };
         document = fckMessage.createMessage(FCKMessage.FOLDER_EXISTED, FCKMessage.ERROR, language,
             args);
-        return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).build();
+        return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
       }
       currentNode.addNode(newFolderName, FCKUtils.NT_FOLDER);
       currentNode.getSession().save();
@@ -114,11 +119,10 @@ public class FCKFolderHandler {
           language));
       errorElement.setAttribute("type", FCKMessage.ERROR);
       rootElement.appendChild(errorElement);
-      return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).build();
-    } else {      
-      document = fckMessage.createMessage(FCKMessage.FOLDER_NOT_CREATED, FCKMessage.ERROR,
-          language, null);
-      return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).build();
-    }    
+      return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    }
+    
+    document = fckMessage.createMessage(FCKMessage.FOLDER_NOT_CREATED, FCKMessage.ERROR, language, null);
+    return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();    
   }
 }

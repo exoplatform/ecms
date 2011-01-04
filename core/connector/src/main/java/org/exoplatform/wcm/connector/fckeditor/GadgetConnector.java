@@ -19,7 +19,10 @@ package org.exoplatform.wcm.connector.fckeditor;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -74,6 +77,12 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /** The gadget registry service. */
   private GadgetRegistryService gadgetRegistryService;
   
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  
   /** The log. */
   private static Log log = ExoLogger.getLogger(GadgetConnector.class);
   
@@ -108,35 +117,8 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
     } catch (Exception e) {
       log.error("Error when perform getFoldersAndFiles: ", e);
     }    
-    return Response.ok().build();
-  }
-  
-  /**
-   * Gets the folders and files.
-   * 
-   * @param currentFolder the current folder
-   * @param language the language
-   * 
-   * @return the folders and files
-   * 
-   * @throws Exception the exception
-   */
-  @GET
-  @Path("/getToken/")
-  public Response getToken(@QueryParam("url") String url) throws Exception {
-    ConversationState conversationState = ConversationState.getCurrent();
-    String userId = conversationState.getIdentity().getUserId();
-    String token = createToken(url, userId, userId, new Random().nextLong(), "default");
-    
-    Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-    Element element = document.createElement("token");
-    element.setAttribute("value", token);
-    document.appendChild(element);
-    
-    CacheControl cacheControl = new CacheControl();
-    cacheControl.setNoCache(true);
-    cacheControl.setNoStore(true);
-    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
   
   /**
@@ -156,7 +138,8 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
-    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
   
   /**
@@ -185,40 +168,39 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       ResourceBundle resourceBundle = ResourceBundle.getBundle(FCK_RESOURCE_BUNDLE_FILE, locale);
       String message = "";
       try {
-				message = resourceBundle.getString("fckeditor.no-gadget");
-			} catch (MissingResourceException e) {
-				message = "fckeditor.no-gadget";
-			}
+        message = resourceBundle.getString("fckeditor.no-gadget");
+      } catch (MissingResourceException e) {
+        message = "fckeditor.no-gadget";
+      }
       Element rootElement = document.createElement("Message");
       document.appendChild(rootElement);
       rootElement.setAttribute("number", "555");
       rootElement.setAttribute("text", message);
       rootElement.setAttribute("type", "Error");
       return rootElement;
+    } 
+    Element rootElement = document.createElement("Connector");
+    document.appendChild(rootElement);
+    rootElement.setAttribute("resourceType", "Gadget");    
+    Element currentFolderElement = document.createElement("CurrentFolder");
+    if (currentFolder == null || currentFolder.equals("/")){
+      currentFolderElement.setAttribute("name", applicationCategories.get(0).getName());
+      Element foldersElement = createFolderElement(document, applicationCategories);
+      rootElement.appendChild(foldersElement);
     } else {
-      Element rootElement = document.createElement("Connector");
-      document.appendChild(rootElement);
-      rootElement.setAttribute("resourceType", "Gadget");    
-      Element currentFolderElement = document.createElement("CurrentFolder");
-      if (currentFolder == null || currentFolder.equals("/")){
-        currentFolderElement.setAttribute("name", applicationCategories.get(0).getName());
-        Element foldersElement = createFolderElement(document, applicationCategories);
-        rootElement.appendChild(foldersElement);
-      } else {
-        PortalContainer container = PortalContainer.getInstance();
-        RequestLifeCycle.begin(container);
-        try {
-          ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
-          currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
-          Element filesElement = createFileElement(document, applicationCategory, host);
-          rootElement.appendChild(filesElement);
-        } finally {
-          RequestLifeCycle.end();
-        }
+      PortalContainer container = PortalContainer.getInstance();
+      RequestLifeCycle.begin(container);
+      try {
+        ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
+        currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
+        Element filesElement = createFileElement(document, applicationCategory, host);
+        rootElement.appendChild(filesElement);
+      } finally {
+        RequestLifeCycle.end();
       }
-      rootElement.appendChild(currentFolderElement);
-      return rootElement;
     }
+    rootElement.appendChild(currentFolderElement);
+    return rootElement;
   }
   
   /**
@@ -302,7 +284,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * @throws Exception the exception
    */
   private List<ApplicationCategory> getGadgetCategories() throws Exception {
-	List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
+  List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
     PortalContainer container = PortalContainer.getInstance();
     RequestLifeCycle.begin(container);
     try {
@@ -313,7 +295,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
         }
       }
     } finally {
-    	RequestLifeCycle.end();
+      RequestLifeCycle.end();
     }
     return gadgetCategories;
   }

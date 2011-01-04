@@ -40,6 +40,12 @@ import org.w3c.dom.Element;
  */
 public class FCKUtils {
   
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  public static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  public static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  
   public static String GET_FOLDERS_AND_FILES="getFoldersAndFiles".intern();
   public static String CREATE_FOLDER = "createFolder".intern();
   public static String UPLOAD_FILE = "upload".intern();

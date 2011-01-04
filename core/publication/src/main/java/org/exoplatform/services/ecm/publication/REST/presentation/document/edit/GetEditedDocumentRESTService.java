@@ -17,10 +17,13 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.publication.REST.presentation.document.edit;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -62,6 +65,12 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 
 @Path("/presentation/document/edit/")
 public class GetEditedDocumentRESTService implements ResourceContainer {
+  
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
   
   private RepositoryService   repositoryService;
 
@@ -107,7 +116,9 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     List<DocumentNode> lstDocNode = getDocumentData(repository, lstLastEditedNode);
     ListEditDocumentNode listEditDocumentNode = new ListEditDocumentNode();
     listEditDocumentNode.setLstDocNode(lstDocNode);
-    return Response.ok(listEditDocumentNode, new MediaType("application", "json")).build();
+    
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(listEditDocumentNode, new MediaType("application", "json")).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   private List<Node> getLastEditedNode(String repository, String noOfItem, String showGadgetWs) throws Exception{

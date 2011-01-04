@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -86,6 +87,12 @@ public class PortalLinkConnector implements ResourceContainer {
   /** The log. */
   private static Log log = ExoLogger.getLogger(PortalLinkConnector.class);
   
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+   
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  
   /**
    * Instantiates a new portal link connector.
    * 
@@ -125,7 +132,8 @@ public class PortalLinkConnector implements ResourceContainer {
     } catch (Exception e) {
       log.error("Error when perform getPageURI: ", e);
     }    
-    return Response.ok().build();
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /**
@@ -164,7 +172,8 @@ public class PortalLinkConnector implements ResourceContainer {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
-    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /**

@@ -1,5 +1,8 @@
 package org.exoplatform.wcm.extensions.component.rest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -21,6 +24,11 @@ import org.w3c.dom.Element;
 public class LifecycleConnector implements ResourceContainer {
 
 //  private static final Log log         = ExoLogger.getLogger(LifecycleConnector.class);
+  /** The Constant LAST_MODIFIED_PROPERTY. */
+  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+  
+  /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
+  private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /**
    * 
@@ -111,7 +119,7 @@ public class LifecycleConnector implements ResourceContainer {
 		  String lang,
 		  String workspace,
 		  String asJSon) throws Exception {
-	  
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
 	  try {
 		  StringBuffer json = new StringBuffer();
 		  Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -151,13 +159,13 @@ public class LifecycleConnector implements ResourceContainer {
 		  json.append("]");
 
 		  if ("true".equals(asJSon))
-			  return Response.ok(json.toString(), MediaType.TEXT_PLAIN).build();
+			  return Response.ok(json.toString(), MediaType.TEXT_PLAIN).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 		  else
-			  return Response.ok(new DOMSource(document), MediaType.TEXT_XML).build();
+			  return Response.ok(new DOMSource(document), MediaType.TEXT_XML).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 	  } catch (Exception e) {
 		  Response.serverError().build();
 	  }
-	  return Response.ok().build();
+	  return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
     
 }

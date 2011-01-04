@@ -17,7 +17,10 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.io.ByteArrayInputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +36,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.log.ExoLogger;
@@ -108,7 +110,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @param container the container
    */
   public RssConnector() {
-	  wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+    wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
       wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
   }
 
@@ -141,8 +143,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       @QueryParam("lang") String lang,
       @QueryParam("detailPage") String detailPage,
       @QueryParam("detailParam") String detailParam,
-	  @QueryParam("recursive") String recursive
-	  ) throws Exception {
+    @QueryParam("recursive") String recursive
+    ) throws Exception {
     
     Map<String, String> contextRss = new HashMap<String, String>();
     contextRss.put(REPOSITORY, repositoryName);
@@ -151,6 +153,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     contextRss.put(FEED_TITLE, title);
     if (desc==null) desc = "Powered by eXo "+ProductVersions.getCurrentVersion();
     contextRss.put(DESCRIPTION, desc);
+    
     contextRss.put(LINK, server);
 
     if (detailPage == null) detailPage  = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
@@ -171,7 +174,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
 
     String path=null;
     if (folderPath!=null) {
-    	path = folderPath;
+      path = folderPath;
     }
     
     
@@ -180,7 +183,9 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     String feedXML = generateRSS(nodes, contextRss);
     
     Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(feedXML.getBytes()));
-    Response response = Response.ok(new DOMSource(document), MediaType.TEXT_XML).build();
+    
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    Response response = Response.ok(new DOMSource(document), MediaType.TEXT_XML).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     return response;
   }
   
@@ -192,19 +197,19 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @return the string
    */
   private String generateRSS(List<Node> nodes , Map<String, String> context) {  
-    String rssVersion = (String) context.get(RSS_VERSION) ;
-    String feedTitle = (String) context.get(FEED_TITLE) ;    
-    String feedDescription = (String) context.get(DESCRIPTION) ;
-    String feedLink = (String) context.get(LINK) ;
-    String detailPage = (String) context.get(DETAIL_PAGE) ;
-    String detailParam = (String) context.get(DETAIL_PARAM) ;
-    String repository = (String) context.get(REPOSITORY) ;
-    String workspace = (String) context.get(WORKSPACE) ;
+    String rssVersion = context.get(RSS_VERSION) ;
+    String feedTitle = context.get(FEED_TITLE) ;    
+    String feedDescription = context.get(DESCRIPTION) ;
+    String feedLink = context.get(LINK) ;
+    String detailPage = context.get(DETAIL_PAGE) ;
+    String detailParam = context.get(DETAIL_PARAM) ;
+    String repository = context.get(REPOSITORY) ;
+    String workspace = context.get(WORKSPACE) ;
     String contentUrl;
     if (!feedLink.endsWith("/") ) {
-    	contentUrl= feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+      contentUrl= feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
     }else {
-    	contentUrl= feedLink + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+      contentUrl= feedLink + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
     }
 
     if(feedTitle == null || feedTitle.length() == 0) feedTitle = "" ;
@@ -278,4 +283,3 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     return null;
   }
 }
-

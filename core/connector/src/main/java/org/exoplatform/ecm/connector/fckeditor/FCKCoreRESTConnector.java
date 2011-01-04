@@ -16,6 +16,11 @@
  */
 package org.exoplatform.ecm.connector.fckeditor;
 
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
@@ -118,7 +123,9 @@ public class FCKCoreRESTConnector implements ResourceContainer {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     session.logout();
-    return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).build();
+    
+    DateFormat dateFormat = new SimpleDateFormat(FCKUtils.IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /**
