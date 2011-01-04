@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
 import org.exoplatform.services.log.Log;
+import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -94,6 +95,7 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
       UIGroupMemberSelector uiGroupMemberSelector = uiForm.createUIComponent(UIGroupMemberSelector.class, null, null);
       uiGroupMemberSelector.setSourceComponent(uiForm, new String[] { UITagPermissionInputSet.FIELD_USERORGROUP });
       uiGroupMemberSelector.setShowAnyPermission(false);
+      uiGroupMemberSelector.removeChild(UIAnyPermission.class);
       uiForm.getAncestorOfType(UITagPermissionManager.class).initPopupPermission(uiGroupMemberSelector);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
