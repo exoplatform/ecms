@@ -54,6 +54,7 @@ import org.exoplatform.upload.UploadService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -121,9 +122,28 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    * @throws Exception the exception
    */
   public UIFCCForm() throws Exception {
-    setActions(new String[]{"Save"}) ;
+	PortletPreferences preferences = UIFCCUtils.getPortletPreferences() ;
+	String custom_save_button = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_BUTTON, "");  
+    setActions(new String[]{custom_save_button}) ;
+
   }
-  
+  public String event(String name) throws Exception
+  {
+
+     StringBuilder b = new StringBuilder();
+     b.append("javascript:eXo.webui.UIForm.submitForm('").append(getFormId()).append("','");
+     b.append("Save").append("',true)");
+     return b.toString();
+  }
+  private String getFormId()
+  {
+     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
+     if (context instanceof PortletRequestContext)
+     {
+        return ((PortletRequestContext)context).getWindowId() + "#" + getId();
+     }
+     return getId();
+  }
   /**
    * Gets the list taxonomy.
    * 
