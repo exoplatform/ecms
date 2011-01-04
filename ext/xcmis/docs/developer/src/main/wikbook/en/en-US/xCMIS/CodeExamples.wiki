@@ -178,7 +178,7 @@ performing request:
 You can also use the ContentType.DOM parameter to parse the feed in your application (Using DOMParser for example).
 
 {note}
-Perfoming a content stream request in JavaScript will cause the browser dialog for a file download.
+Perfoming a content stream request in javascript will cause the browser dialog for a file download.
 {note}
 
 h2. Search of data and syntax examples.
@@ -186,7 +186,7 @@ h2. Search of data and syntax examples.
 CMIS suports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
 GET request must contain query as a parameter named "q", in case of POST request query must be located in a request body.
 
-For more detailed instructions how to construct queries please refer to chapter 4.3.5.
+For more detailed instructions how to construct queries please refer to "Query examples" chapter.
 
 h3. Using java.
 
