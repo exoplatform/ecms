@@ -178,30 +178,29 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       rootElement.setAttribute("text", message);
       rootElement.setAttribute("type", "Error");
       return rootElement;
+    } 
+    Element rootElement = document.createElement("Connector");
+    document.appendChild(rootElement);
+    rootElement.setAttribute("resourceType", "Gadget");    
+    Element currentFolderElement = document.createElement("CurrentFolder");
+    if (currentFolder == null || currentFolder.equals("/")){
+      currentFolderElement.setAttribute("name", applicationCategories.get(0).getName());
+      Element foldersElement = createFolderElement(document, applicationCategories);
+      rootElement.appendChild(foldersElement);
     } else {
-      Element rootElement = document.createElement("Connector");
-      document.appendChild(rootElement);
-      rootElement.setAttribute("resourceType", "Gadget");    
-      Element currentFolderElement = document.createElement("CurrentFolder");
-      if (currentFolder == null || currentFolder.equals("/")){
-        currentFolderElement.setAttribute("name", applicationCategories.get(0).getName());
-        Element foldersElement = createFolderElement(document, applicationCategories);
-        rootElement.appendChild(foldersElement);
-      } else {
-        PortalContainer container = PortalContainer.getInstance();
-        RequestLifeCycle.begin(container);
-        try {
-          ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
-          currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
-          Element filesElement = createFileElement(document, applicationCategory, host);
-          rootElement.appendChild(filesElement);
-        } finally {
-          RequestLifeCycle.end();
-        }
+      PortalContainer container = PortalContainer.getInstance();
+      RequestLifeCycle.begin(container);
+      try {
+        ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
+        currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
+        Element filesElement = createFileElement(document, applicationCategory, host);
+        rootElement.appendChild(filesElement);
+      } finally {
+        RequestLifeCycle.end();
       }
-      rootElement.appendChild(currentFolderElement);
-      return rootElement;
     }
+    rootElement.appendChild(currentFolderElement);
+    return rootElement;
   }
   
   /**

@@ -36,7 +36,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.log.ExoLogger;
@@ -198,14 +197,14 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @return the string
    */
   private String generateRSS(List<Node> nodes , Map<String, String> context) {  
-    String rssVersion = (String) context.get(RSS_VERSION) ;
-    String feedTitle = (String) context.get(FEED_TITLE) ;    
-    String feedDescription = (String) context.get(DESCRIPTION) ;
-    String feedLink = (String) context.get(LINK) ;
-    String detailPage = (String) context.get(DETAIL_PAGE) ;
-    String detailParam = (String) context.get(DETAIL_PARAM) ;
-    String repository = (String) context.get(REPOSITORY) ;
-    String workspace = (String) context.get(WORKSPACE) ;
+    String rssVersion = context.get(RSS_VERSION) ;
+    String feedTitle = context.get(FEED_TITLE) ;    
+    String feedDescription = context.get(DESCRIPTION) ;
+    String feedLink = context.get(LINK) ;
+    String detailPage = context.get(DETAIL_PAGE) ;
+    String detailParam = context.get(DETAIL_PARAM) ;
+    String repository = context.get(REPOSITORY) ;
+    String workspace = context.get(WORKSPACE) ;
     String contentUrl;
     if (!feedLink.endsWith("/") ) {
     	contentUrl= feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
