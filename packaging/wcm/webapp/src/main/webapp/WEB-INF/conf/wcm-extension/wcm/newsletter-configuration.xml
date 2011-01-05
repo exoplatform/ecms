@@ -27,57 +27,6 @@
   <external-component-plugins>
     <target-component>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</target-component>
     <component-plugin>
-      <name>Initial newsletter data for each site</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.wcm.newsletter.InitialNewsletterPlugin</type>
-      <description>This plugin deploy newsletter data of portal when a portal is created</description>
-      <init-params>
-        <object-param>
-          <name>general</name>
-          <description>general</description>
-          <object type="org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig">
-            <field name="name">
-              <string>general</string>
-            </field>
-            <field name="title">
-              <string>General</string>
-            </field>
-            <field name="description">
-              <string>General information about us</string>
-            </field>
-            <field name="moderator">
-              <string>root</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>checklist</name>
-          <description>checklist</description>
-          <object type="org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig">
-            <field name="name">
-              <string>checklist</string>
-            </field>
-            <field name="title">
-              <string>Check-List</string>
-            </field>
-            <field name="description">
-              <string>Weekly newsletter with general topics</string>
-            </field>
-            <field name="categoryName">
-              <string>general</string>
-            </field>
-            <field name="redactor">
-              <string>*:/platform/web-contributors</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.portal.artifacts.CreatePortalArtifactsService</target-component>
-    <component-plugin>
       <name>Initial demo newsletter for each site</name>
       <set-method>addPlugin</set-method>
       <type>org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin</type>
