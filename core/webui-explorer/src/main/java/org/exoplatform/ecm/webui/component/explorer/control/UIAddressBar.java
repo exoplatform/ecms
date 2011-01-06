@@ -18,7 +18,6 @@ package org.exoplatform.ecm.webui.component.explorer.control ;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -96,9 +95,9 @@ public class UIAddressBar extends UIForm {
   private String[] arrView_ = {};
   final static private String FIELD_SIMPLE_SEARCH = "simpleSearch" ;
 
-  final static private String ROOT_SQL_QUERY = "select * from nt:base where contains(*, '$1') or lower(exo:name) like '%$2%' order by exo:dateCreated DESC, jcr:primaryType DESC" ;
+  final static private  String ROOT_SQL_QUERY  = "select * from nt:base where contains(*, '$1') or lower(exo:name) like '%$2%' order by exo:dateCreated DESC, jcr:primaryType DESC" ;
   final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' ) order by jcr:path DESC, jcr:primaryType DESC";
-  
+     
   public UIAddressBar() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null)) ;
     addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SearchValidator.class));
@@ -244,6 +243,7 @@ public class UIAddressBar extends UIForm {
       UIJCRExplorer uiExplorer = uiAddressBar.getAncestorOfType(UIJCRExplorer.class);
       String text = uiAddressBar.getUIStringInput(FIELD_SIMPLE_SEARCH).getValue();
       Node currentNode = uiExplorer.getCurrentNode();
+      boolean isTaxonomyNode = false;
       if (currentNode.isNodeType(Utils.EXO_TAXANOMY)) {
         TaxonomyService taxonomyService = uiAddressBar.getApplicationComponent(TaxonomyService.class);
         List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
@@ -255,7 +255,6 @@ public class UIAddressBar extends UIForm {
               if (actionNode.isNodeType(ACTION_TAXONOMY)) {
                 String searchPath = actionNode.getProperty(EXO_TARGETPATH).getString();
                 String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();                
-                uiExplorer.setSelectNode(searchWorkspace, searchPath);                
                 String queryStatement = null;
                 if("/".equals(searchPath)) {
                   queryStatement = ROOT_SQL_QUERY;        
@@ -264,7 +263,7 @@ public class UIAddressBar extends UIForm {
                 }
                 queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));
                 queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());
-                System.out.println("Trace: Vu Nguyen: " + queryStatement);
+                isTaxonomyNode = true;
                 uiExplorer.removeChildById("ViewSearch");
                 UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class);
                 
@@ -284,6 +283,7 @@ public class UIAddressBar extends UIForm {
                 uiSearchResult.clearAll();
                 uiSearchResult.setQueryResults(queryResult);            
                 uiSearchResult.updateGrid(true);
+                uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
                 long time = System.currentTimeMillis() - startTime;
                 uiSearchResult.setSearchTime(time);
                 uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
@@ -301,9 +301,8 @@ public class UIAddressBar extends UIForm {
       }else {
         queryStatement = StringUtils.replace(SQL_QUERY,"$0",currentNode.getPath());
       }
-      queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));            
-      queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());
-      System.out.println("Trace: Vu Nguyen: " + queryStatement);      
+      queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));
+      queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());      
       uiExplorer.removeChildById("ViewSearch");
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
@@ -320,7 +319,8 @@ public class UIAddressBar extends UIForm {
       Query query = queryManager.createQuery(queryStatement, Query.SQL);        
       QueryResult queryResult = query.execute();                  
       uiSearchResult.clearAll();
-      uiSearchResult.setQueryResults(queryResult);            
+      uiSearchResult.setQueryResults(queryResult);  
+      uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
       uiSearchResult.updateGrid(true);
       long time = System.currentTimeMillis() - startTime;
       uiSearchResult.setSearchTime(time);      
