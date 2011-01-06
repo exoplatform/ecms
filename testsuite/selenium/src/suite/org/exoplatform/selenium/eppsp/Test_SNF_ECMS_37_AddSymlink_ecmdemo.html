@@ -4,16 +4,21 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>Test_SNF_ECMS_57_ManageAuditting_ecmdemo</title>
+<title>Test_SNF_ECMS_37_AddSymlink_ecmdemo</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_57_ManageAuditting_ecmdemo</td></tr>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_37_AddSymlink_ecmdemo</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
 	<td>/ecmdemo/public/acme/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>windowMaximize</td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -63,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -88,17 +93,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Go to Detail View</td>
+	<td>-Go to Admin View</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
+	<td>//a[@title='Admin View']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
+	<td>//a[@title='Admin View']</td>
 	<td></td>
 </tr>
 <tr>
@@ -118,7 +123,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Add Document folder</td>
+	<td>-- Add folder</td>
 	<td></td>
 </tr>
 <tr>
@@ -139,7 +144,7 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Folder</td>
+	<td>XinhTuoi</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -152,99 +157,39 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>--Auditting node</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manage Auditing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Manage Auditing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Activate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Activate</td>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--View again</td>
+	<td>-- Add Content folder bb</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Manage Auditing</td>
+	<td>link=Add Folder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Manage Auditing</td>
+	<td>link=Add Folder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Rename folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>mouseDownRight</td>
-	<td>link=Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Rename</td>
+	<td>name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>nameField</td>
-	<td>new</td>
+	<td>name</td>
+	<td>TocNgan</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -252,33 +197,153 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=new</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Manage Auditing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
 	<td>echo</td>
-	<td>-- Delete Document folder</td>
+	<td>--Add Symlink</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=new</td>
+	<td>link=XinhTuoi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=XinhTuoi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add Sym Link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add Sym Link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Click additem icon to find path</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Add Item']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@title='Add Item']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Go to the node to add symlink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='Users']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='Users']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Go to root</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='root']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='root']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Go to private</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='Private']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='Private']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Choose TocNgan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[9]/td[2]/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[9]/td[2]/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>symLinkName</td>
+	<td>TocNgan.lnk</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>symLinkName</td>
+	<td>TocNgan.lnk</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Click Save button to finish adding symlink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Delete Content Folder aa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=XinhTuoi</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=new</td>
+	<td>link=XinhTuoi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,7 +363,47 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>3000</td>
+	<td>--Delete content folder bb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=TocNgan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDownRight</td>
+	<td>link=TocNgan</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Logout</td>
 	<td></td>
 </tr>
 <tr>

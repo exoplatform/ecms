@@ -4,16 +4,21 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>Test_SNF_ECMS_57_ManageAuditting_ecmdemo</title>
+<title>Test_SNF_ECMS_59_SimpleSearch_ecmdemo</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_57_ManageAuditting_ecmdemo</td></tr>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_59_SimpleSearch_ecmdemo</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
 	<td>/ecmdemo/public/acme/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>windowMaximize</td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -63,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -88,17 +93,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Go to Detail View</td>
+	<td>--&nbsp;&nbsp;Select Admin View</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
+	<td>//a[@title='Admin View']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIAddressBar']/div[2]/table/tbody/tr/td[1]/a</td>
+	<td>//a[@title='Admin View']</td>
 	<td></td>
 </tr>
 <tr>
@@ -107,6 +112,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Actions</td>
 	<td></td>
@@ -117,148 +127,103 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
-	<td>--Add Document folder</td>
+	<td>--Create a Article document</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Add Folder</td>
+	<td>link=Add Document</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Add Folder</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>name</td>
+	<td>title</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
+	<td>title</td>
+	<td>Test_SNF_ECMS_59</td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>name</td>
-	<td>Folder</td>
+	<td>Test_SNF_ECMS_59</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Save</td>
+	<td>//td[@id='cke_contents_summary']/iframe</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Save</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--Auditting node</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manage Auditing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Manage Auditing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Activate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Activate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--View again</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manage Auditing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Manage Auditing</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Rename folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>mouseDownRight</td>
-	<td>link=Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Rename</td>
+	<td>selectFrame</td>
+	<td>//td[@id='cke_contents_summary']/iframe</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>nameField</td>
-	<td>new</td>
+	<td>//html/body</td>
+	<td>SimpleSearch</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Save</td>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[@id='cke_contents_content']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//td[@id='cke_contents_content']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//html/body</td>
+	<td>SimpleSearch</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save as Draft</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=new</td>
+	<td>link=Save as Draft</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Manage Auditing</td>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
 	<td></td>
 </tr>
 <tr>
@@ -267,18 +232,93 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
-	<td>-- Delete Document folder</td>
+	<td>--Go to root path</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=new</td>
+	<td>//div[@title='Private']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@title='Private']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Search document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>simpleSearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>simpleSearch</td>
+	<td>SimpleSearch</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>SimpleSearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Path: /Users/root/Private/Test_SNF_ECMS_59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Path: /Users/root/Private/Test_SNF_ECMS_59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='View this node']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@title='View this node']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>SimpleSearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>SimpleSearch</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Delete document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_59</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=new</td>
+	<td>link=Test_SNF_ECMS_59</td>
 	<td></td>
 </tr>
 <tr>
@@ -297,8 +337,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_59</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_59</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
-	<td>3000</td>
+	<td>--Logout</td>
 	<td></td>
 </tr>
 <tr>
