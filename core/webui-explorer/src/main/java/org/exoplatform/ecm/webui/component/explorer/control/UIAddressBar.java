@@ -243,6 +243,7 @@ public class UIAddressBar extends UIForm {
       UIJCRExplorer uiExplorer = uiAddressBar.getAncestorOfType(UIJCRExplorer.class);
       String text = uiAddressBar.getUIStringInput(FIELD_SIMPLE_SEARCH).getValue();
       Node currentNode = uiExplorer.getCurrentNode();
+      boolean isTaxonomyNode = false;
       if (currentNode.isNodeType(Utils.EXO_TAXANOMY)) {
         TaxonomyService taxonomyService = uiAddressBar.getApplicationComponent(TaxonomyService.class);
         List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
@@ -254,7 +255,6 @@ public class UIAddressBar extends UIForm {
               if (actionNode.isNodeType(ACTION_TAXONOMY)) {
                 String searchPath = actionNode.getProperty(EXO_TARGETPATH).getString();
                 String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();                
-                uiExplorer.setSelectNode(searchWorkspace, searchPath);                
                 String queryStatement = null;
                 if("/".equals(searchPath)) {
                   queryStatement = ROOT_SQL_QUERY;        
@@ -263,7 +263,7 @@ public class UIAddressBar extends UIForm {
                 }
                 queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));
                 queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());
-            
+                isTaxonomyNode = true;
                 uiExplorer.removeChildById("ViewSearch");
                 UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class);
                 
@@ -283,6 +283,7 @@ public class UIAddressBar extends UIForm {
                 uiSearchResult.clearAll();
                 uiSearchResult.setQueryResults(queryResult);            
                 uiSearchResult.updateGrid(true);
+                uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
                 long time = System.currentTimeMillis() - startTime;
                 uiSearchResult.setSearchTime(time);
                 uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
@@ -318,7 +319,8 @@ public class UIAddressBar extends UIForm {
       Query query = queryManager.createQuery(queryStatement, Query.SQL);        
       QueryResult queryResult = query.execute();                  
       uiSearchResult.clearAll();
-      uiSearchResult.setQueryResults(queryResult);            
+      uiSearchResult.setQueryResults(queryResult);  
+      uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
       uiSearchResult.updateGrid(true);
       long time = System.currentTimeMillis() - startTime;
       uiSearchResult.setSearchTime(time);      

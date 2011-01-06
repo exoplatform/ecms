@@ -33,36 +33,36 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
-import javax.portlet.PortletPreferences;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.BasePath;
-import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
-import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.JCRPath;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -107,6 +107,9 @@ public class UISearchResult extends UIContainer {
   private List<String> categoryPathList = new ArrayList<String>();
   private String constraintsCondition;
   private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";  
+  private boolean isTaxonomyNode = false;
+  private String workspaceName = null;
+  private String currentPath = null;
   
   public List<String> getCategoryPathList() { return categoryPathList; }
   public void setCategoryPathList(List<String> categoryPathListItem) {
@@ -262,6 +265,28 @@ public class UISearchResult extends UIContainer {
   }
   
   public UIQueryResultPageIterator getUIPageIterator() { return uiPageIterator_; }
+  
+  public void setTaxonomyNode(boolean isTaxonomyNode, String workspaceName, String currentPath) {
+    this.isTaxonomyNode = isTaxonomyNode;
+    this.workspaceName = workspaceName;
+    this.currentPath = currentPath;
+  }
+   
+  public boolean isTaxonomyNode() { return isTaxonomyNode; }  
+  
+  public Node getSymlinkNode(Node targetNode) throws Exception {
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+    Session session = 
+      SessionProviderFactory.createSessionProvider().getSession(workspaceName, repositoryService.getCurrentRepository());
+    String queryStatement = 
+      "select * from exo:taxonomyLink where jcr:path like '" + currentPath + "/%' " +
+          "and exo:uuid='"+targetNode.getUUID()+"' " +
+          "and exo:workspace='"+targetNode.getSession().getWorkspace().getName()+"' order by exo:primaryType DESC";
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    Query query = queryManager.createQuery(queryStatement, Query.SQL);
+    if(query.execute().getNodes().getSize() > 0) return query.execute().getNodes().nextNode();
+    return null;
+  } 
 
   public void updateGrid(boolean flagCheck) throws Exception {
     SearchResultPageList pageList;

@@ -13,6 +13,7 @@
   import javax.jcr.Node;
   import javax.jcr.Session;
   import org.apache.commons.lang.StringEscapeUtils;
+  import java.util.ArrayList;
 %>
 <% 
   def resultList = uicomponent.getCurrentList(); 
@@ -84,7 +85,9 @@
       boolean even = true ;
       boolean found = false ;
       Node node = null; 
+	  def listAddedResult = new ArrayList<Node>();
       if (resultList != null && resultList.size() > 0) {
+	    def count = 0;
         for (row in resultList) {          
           found = true;
           if (even) rowClass = "EvenRow";  
@@ -107,7 +110,21 @@
 //          	row.getValue("rep:spellcheck()").getString();
           String score = row.getValue("jcr:score")== null ? "" : row.getValue("jcr:score").getString();
           String s = ""; 
-		  if (!node.getPrimaryNodeType().getName().equals("exo:comments")) {		  
+		  def linkNode = null;
+		  if(uicomponent.isTaxonomyNode()) {
+			if(node.getParent().isNodeType("exo:webContent")) {
+			  node = node.getParent();
+			  linkNode = uicomponent.getSymlinkNode(node);
+			} else {
+			  linkNode = uicomponent.getSymlinkNode(node);
+			}
+		  } else {
+			linkNode = node;
+		  }
+		  if(!listAddedResult.contains(linkNode)) listAddedResult.add(linkNode);
+		  else continue;
+		  if (linkNode != null && !node.getPrimaryNodeType().getName().equals("exo:comments")) {	
+            count++;		  
       %>
           <tr class="$rowClass">
             <td>
@@ -115,17 +132,17 @@
             </td>
             <td>
               <div class="Text" title="<%=dateFormat.format(uicomponent.getDateCreated(node))%>">
-                <%=node.getName()%>
+                <%=linkNode.getName()%>
               </div>
               <div>$excerpt</div>
-              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=nodePath%></div>
+              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=linkNode.getPath()%></div>
               <div><%=_ctx.appRes("UISearchResult.header.dateCreated")%>: <%=dateFormat.format(uicomponent.getDateCreated(node))%></div>
             </td>
             <td><div class="ActionContainer">$score</div></td>
             <td>
               <div class="ActionContainer">
-                <img onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="View16x16Icon"/>
-                <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(node.getPath()))%>" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="" class="OpenFolder16x16Icon"/>
+                <img onclick="<%=uicomponent.event("View", Utils.formatNodeName(linkNode.getPath()))%>" alt="" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="View16x16Icon"/>
+                <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(linkNode.getPath()))%>" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="" class="OpenFolder16x16Icon"/>
               </div>
             </td>                   
           </tr>
