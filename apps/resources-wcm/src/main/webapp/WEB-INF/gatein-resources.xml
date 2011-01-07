@@ -68,7 +68,7 @@
     </param>
     <param>
       <js-module>eXo.ecm.FrontPrivate</js-module>
-      <js-path>/javascript/eXo/wcm/frontoffice/private/CKEditor.js</js-path>
+      <js-path>/javascript/eXo/wcm/frontoffice/private/CKEditorUtil.js</js-path>
       <js-priority>65</js-priority>
     </param>
     <!-- 
