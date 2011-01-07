@@ -23,15 +23,7 @@
     <filter-name>ResourceRequestFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>     
-      	
-  <listener>
-    <listener-class>org.exoplatform.services.portletcontainer.impl.servlet.PortletApplicationListener</listener-class>
-  </listener>
-  
-  <servlet>
-    <servlet-name>PortletWrapper</servlet-name>
-    <servlet-class>org.exoplatform.services.portletcontainer.impl.servlet.ServletWrapper</servlet-class>
-  </servlet>
+
   <servlet>
     <servlet-name>rssservlet</servlet-name>
     <servlet-class>org.exoplatform.ecm.jcr.RssServlet</servlet-class>
@@ -42,9 +34,5 @@
     <servlet-name>rssservlet</servlet-name>
     <url-pattern>/rss/*</url-pattern>
   </servlet-mapping>  
-  
-  <servlet-mapping>
-    <servlet-name>PortletWrapper</servlet-name>
-    <url-pattern>/PortletWrapper</url-pattern>
-  </servlet-mapping>
+
 </web-app>
