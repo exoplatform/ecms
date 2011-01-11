@@ -25,62 +25,11 @@
 <web-app>
   <display-name>ecm-wcm-extension</display-name>
 
-  <context-param>
-    <param-name>org.exoplatform.frameworks.jcr.command.web.fckeditor.digitalAssetsWorkspace</param-name>
-    <param-value>collaboration</param-value>
-    <description>Binary assets workspace name</description>
-  </context-param>
-
-  <context-param>
-    <param-name>org.exoplatform.frameworks.jcr.command.web.fckeditor.digitalAssetsPath</param-name>
-    <param-value>/Digital Assets/</param-value>
-    <description>Binary assets path</description>
-  </context-param>
-
-  <context-param>
-    <param-name>CurrentFolder</param-name>
-    <param-value>/Digital Assets/</param-value>
-    <description>Binary assets workspace name</description>
-  </context-param>
-
   <!-- ================================================================== -->
   <!--           LISTENER                                                 -->
   <!-- ================================================================== -->
   <listener>
     <listener-class>org.exoplatform.container.web.PortalContainerConfigOwner</listener-class>
   </listener>
-  
-  <listener>
-    <listener-class>org.exoplatform.web.resource.config.xml.FCKConfigListener</listener-class>
-  </listener>
-  <!-- ================================================================== -->
-  <!--           SERVLET                                                  -->
-  <!-- ================================================================== -->
-  <servlet>
-    <servlet-name>GateInServlet</servlet-name>
-    <servlet-class>org.gatein.wci.api.GateInServlet</servlet-class>
-    <load-on-startup>0</load-on-startup>
-  </servlet>
-  
-  <servlet>
-    <servlet-name>RestServer</servlet-name>
-    <description>eXo - Platform REST Server</description>
-    <servlet-class>org.exoplatform.services.rest.servlet.RestServlet</servlet-class>
-    <load-on-startup>4</load-on-startup>
-  </servlet>
-  <!--  =================================================================  -->
-  <servlet-mapping>
-    <servlet-name>GateInServlet</servlet-name>
-    <url-pattern>/gateinservlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>RestServer</servlet-name>
-    <url-pattern>/rest/private/*</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-    <servlet-name>RestServer</servlet-name>
-    <url-pattern>/rest/*</url-pattern>
-  </servlet-mapping>
+ 
 </web-app>
