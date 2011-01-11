@@ -381,7 +381,8 @@
     <module>ext</module>
     <module>delivery</module>
     <module>packaging</module>
-		<module>examples</module>
-		<module>migration/2.0</module>
+	<module>testsuite</module>
+	<module>examples</module>
+	<module>migration/2.0</module>
   </modules>
 </project>
