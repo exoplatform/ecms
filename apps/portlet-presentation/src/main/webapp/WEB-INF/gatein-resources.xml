@@ -41,7 +41,7 @@
     <application-name>presentation</application-name>
     <portlet-name>CategoryNavigationPortlet</portlet-name>
     <skin-name>Default</skin-name>
-    <css-path>/skin/CategoryNavigation/DefaultStylesheet.css</css-path>
+    <css-path>/skin/ContentListViewer/DefaultStylesheet.css</css-path>
   </portlet-skin>
   
   <!-- ContentListViewerPortlet skins -->
@@ -68,7 +68,7 @@
     <application-name>presentation</application-name>
     <portlet-name>ParameterizedContentListViewerPortlet</portlet-name>
     <skin-name>Default</skin-name>
-    <css-path>/skin/ParameterizedContentListViewer/DefaultStylesheet.css</css-path>
+    <css-path>/skin/ContentListViewer/DefaultStylesheet.css</css-path>
   </portlet-skin>
   
   <!-- javascript>

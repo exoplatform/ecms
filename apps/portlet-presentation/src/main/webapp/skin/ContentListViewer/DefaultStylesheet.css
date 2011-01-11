@@ -62,9 +62,19 @@
   margin-left: -2px;
   padding: 0px;
 }
+.UICLVPortlet .UICLVConfig .UIFormInputSet {
+    margin: auto;
+    padding: 0px;
+}
+
+.UICLVPortlet .UICLVConfig input,select {
+    font-size: 11px;
+    width: auto;
+}
 
 .UICLVPortlet .UICLVConfig .FieldLabel {
   width: 125px;
+
 }
 
 .UICLVPortlet .UICLVConfig .TitleBar {
