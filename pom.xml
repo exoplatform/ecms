@@ -416,5 +416,6 @@
     <module>packaging</module>
     <module>examples</module>
     <module>docs</module>
+    <module>testsuite</module>
   </modules>
 </project>
