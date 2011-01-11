@@ -11,7 +11,5 @@
   <name>eXo Platform - Tests</name>
   <modules>
     <module>selenium</module>
-	<module>testdefinitions</module>
-	<module>jmeter</module>
   </modules>
 </project>
