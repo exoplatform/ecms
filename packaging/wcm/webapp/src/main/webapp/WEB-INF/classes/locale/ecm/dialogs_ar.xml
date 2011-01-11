@@ -715,6 +715,17 @@
 	<quarterly> فصليا (كُل ثلاثَة أشْهُر)</quarterly>
 	<yearly>سنويا</yearly>
 	<ten-years>عشر سنوات</ten-years>
+	
+		<read>إجراء المستخدم</read>
+	     <schedule>جدولة</schedule>
+        <node_added>إضافة محتوى</node_added>
+        <node_removed>إزالة المحتوى</node_removed>
+        <property_added>إضافة خاصية</property_added>
+        <property_removed>إزالة الخاصية</property_removed>
+        <property_changed>تعديل الملكية</property_changed> 
+	
+	
+	
 	  <SendMail>
    <dialog>
      <label> 

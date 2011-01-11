@@ -720,8 +720,13 @@
 	<quarterly>Trimestriel</quarterly>
 	<yearly>Annuel</yearly>
 	<ten-years>Tous les 10 ans</ten-years>
-	<read>Action Utilisateur</read>
-
+	<read>Action Utilisateur</read>    	
+	    <schedule>Planificateur</schedule>
+        <node_added>Content Addition</node_added>
+        <node_removed>Ajout de contenu</node_removed>
+        <property_added>Ajout de la propriété</property_added>
+        <property_removed>Enlèvement de la propriété</property_removed>
+        <property_changed>Modification de la propriété</property_changed>
     <SendMail>
    <dialog>
      <label> 

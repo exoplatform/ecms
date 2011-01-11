@@ -719,7 +719,13 @@
 	<quarterly>Quarterly</quarterly>
 	<yearly>Yearly</yearly>
 	<ten-years>Ten Years</ten-years>
-	<read>User Action</read>  
+		<read>User Action</read>
+	     <schedule>Scheduler</schedule>
+        <node_added>Content Addition</node_added>
+        <node_removed>Content Removal</node_removed>
+        <property_added>Property Addition</property_added>
+        <property_removed>Property Removal</property_removed>
+        <property_changed>Property Modification</property_changed> 
 
   <SendMail>
    <dialog>

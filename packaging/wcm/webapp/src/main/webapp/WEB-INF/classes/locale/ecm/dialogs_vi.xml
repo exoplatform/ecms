@@ -718,7 +718,13 @@
 	<quarterly>Hàng quý</quarterly>
 	<yearly>Hàng năm</yearly>
 	<ten-years>10 năm</ten-years>
-	<read>Người dùng hành động</read>    		
+	<read>Thao tác ủa người dùng</read>
+	     <schedule>Biểu thời gian</schedule>
+        <node_added>Nội dung thêm vào</node_added>
+        <node_removed>Nội dung xóa đi</node_removed>
+        <property_added>Đặc tính thêm vào</property_added>
+        <property_removed>Đặc tính xóa đi</property_removed>
+        <property_changed>Đặc tính thay đổi</property_changed> 		
 
 	 <SendMail>
    <dialog>
