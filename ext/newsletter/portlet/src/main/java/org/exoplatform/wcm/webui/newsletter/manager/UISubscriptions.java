@@ -23,6 +23,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
+import org.exoplatform.services.wcm.newsletter.NewsletterConstant;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterCategoryHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterManageUserHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterSubscriptionHandler;
@@ -305,6 +306,7 @@ public class UISubscriptions extends UIForm {
       UISubscriptions subsriptions = event.getSource();
       NewsletterManagerService newsletterManagerService = subsriptions.getApplicationComponent(NewsletterManagerService.class);
       NewsletterCategoryHandler categoryHandler = newsletterManagerService.getCategoryHandler();
+      NewsletterConstant.removeAccessPermission(subsriptions.categoryConfig.getModerator().split(","));
       categoryHandler.delete(Utils.getSessionProvider(), NewsLetterUtil.getPortalName(), subsriptions.categoryConfig.getName());
       UINewsletterManagerPortlet newsletterManagerPortlet = subsriptions.getAncestorOfType(UINewsletterManagerPortlet.class);
       UICategories categories = newsletterManagerPortlet.getChild(UICategories.class);
