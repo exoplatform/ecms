@@ -114,8 +114,6 @@ public class ClearOrphanSymlinksJob implements Job {
     } finally {
       if (session != null && session.isLive())
         session.logout();
-      if (sessionProvider != null)
-        sessionProvider.close();
     }
     log.info("ClearOrphanSymlinksJob: Done!");
   }
