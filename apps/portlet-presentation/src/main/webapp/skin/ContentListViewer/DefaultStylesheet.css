@@ -62,6 +62,7 @@
   margin-left: -2px;
   padding: 0px;
 }
+
 .UICLVPortlet .UICLVConfig .UIFormInputSet {
     margin: auto;
     padding: 0px;
@@ -74,7 +75,6 @@
 
 .UICLVPortlet .UICLVConfig .FieldLabel {
   width: 125px;
-
 }
 
 .UICLVPortlet .UICLVConfig .TitleBar {
@@ -365,22 +365,19 @@
 	padding:2px 0 0;
 }
 
-.AddContentIcon {
+.EdittingToolBar .AddContentIcon {
 	background: url('DefaultSkin/icons/AddContentIcon.png') no-repeat center center;
 	margin-left:6px;
-	padding:2px 7px;
 }
 
-.ManageContentIcon {
+.EdittingToolBar .ManageContentIcon {
 	background: url('DefaultSkin/icons/ManageContentIcon.png') no-repeat center center;
 	margin-left:6px;
-	padding:2px 7px;
 }
 
-.PreferencesIcon {
+.EdittingToolBar .PreferencesIcon {
 	background: url('DefaultSkin/icons/PreferencesIcon.png') no-repeat center center;
 	margin-left:6px;
-	padding:2px 7px;
 }
 
 .EdittingContent{
@@ -413,13 +410,11 @@
 .EditContentIcon {
 	background: url('DefaultSkin/icons/EditContentIcon.png') no-repeat left center;
 	margin-left:6px;
-	padding:2px 7px;
 }
 
 .CloseContentIcon {
 	background: url('DefaultSkin/icons/CloseContentIcon.png') no-repeat center center;
 	margin-left:6px;
-	padding:2px 7px;
 }
 
 

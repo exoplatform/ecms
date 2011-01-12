@@ -7,8 +7,6 @@
 	 	*/
 
 	 	import javax.jcr.Node;
-
-
 		import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 		import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 		import org.exoplatform.wcm.webui.Utils;
@@ -21,7 +19,7 @@
 			def header = uicomponent.getHeader();
 			def rssLink = uicomponent.getRssLink();
 			def isShowRssLink = uicomponent.isShowRssLink();
-			def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;			
+			def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 			%>
 			<div class="TopBoxHeader">
 				<%
@@ -33,7 +31,7 @@
                   <%if (isShowRssLink) {
                     %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
                   }%>
-                  $header
+								  $header
 								</div>
 							</div>
 						</div>
@@ -74,12 +72,13 @@
 									itemName = itemTitle;
 
 								def itemSummary = uicomponent.getSummary(viewNode);
-								def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;														    
-								%>																
+								def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;
+								
+								%>
+								
 								<%=uicomponent.addQuickEditDiv("Column1", viewNode)%>
-									<%
-										
-											if (isShowImage) {
+										 
+											<%if (isShowImage) {
                         %><a class="Image" title="$itemName"><img alt="$itemName" src="$imgSrc" /></a><%
 											}
 											%>

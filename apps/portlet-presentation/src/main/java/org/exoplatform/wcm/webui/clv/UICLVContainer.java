@@ -20,7 +20,6 @@ import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
-import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -104,15 +103,6 @@ public abstract class UICLVContainer extends UIContainer {
 
 
   /**
-   * Gets the form view template path.
-   * 
-   * @return the form view template path
-   */
-  protected String getFormViewTemplatePath() {
-    return Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_TEMPLATE);
-  }
-
-  /**
    * Gets the template resource resolver.
    * 
    * @return the template resource resolver
@@ -135,7 +125,6 @@ public abstract class UICLVContainer extends UIContainer {
    * the quickEditAction event occurs, that object's appropriate
    * method is invoked.
    * 
-   * @see QuickEditActionEvent
    */
   public static class PreferencesActionListener extends EventListener<UICLVFolderMode> {
     /* (non-Javadoc)
@@ -168,16 +157,15 @@ public abstract class UICLVContainer extends UIContainer {
   public boolean isShowAddContent() {
     if (isShowManageContent()) {
       PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
-      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);      
+      String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
 	    try {
-	      Node content = NodeLocation.getNodeByExpression(itemPath);
+	    	Node content = NodeLocation.getNodeByExpression(itemPath);
 	  		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);    	
 	    } catch (Exception e) {
 	    	return false;
 	    }
 	    return true;
-    } 
-    return false;
+    } else return false;
   }
   
   public boolean isShowPreferences() {

@@ -18,11 +18,13 @@ public void renderCategories(def categories) {
       if (category.getDepth()>0) cssStyle = "SubCategory";
       if (category.isSelected()) cssStyle += " CategorySelected";
       %>
-      <a class="$cssStyle" style="margin-left: $margin" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>  
+      <a class="$cssStyle" style="margin-left: $margin" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>
       <%
       if (category.hasChilds()) renderCategories(category.getChilds());
     }
 }
+def header = uicomponent.getHeader();
+if (header ==null) header=_ctx.appRes("UICLVContainer.msg.non-contents");
 %>
 
 <style>
@@ -41,7 +43,7 @@ public void renderCategories(def categories) {
     <div class="TitleBarL">
       <div class="TitleBarR">
         <div class="TitleBarM">
-          <%= uicomponent.getHeader() %>
+          <%= header %>
         </div>
       </div>
     </div>

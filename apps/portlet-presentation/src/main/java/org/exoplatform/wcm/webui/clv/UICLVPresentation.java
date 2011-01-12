@@ -24,17 +24,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.MissingResourceException;
+import java.util.Map.Entry;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -42,7 +44,6 @@ import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -105,7 +106,7 @@ public class UICLVPresentation extends UIContainer {
   
   /** Generic TagStyles configurable in ECM Administration */
   private Map<String, String> tagStyles = null;
-  
+
   
   /**
    * Instantiates a new uICLV presentation.
@@ -116,15 +117,16 @@ public class UICLVPresentation extends UIContainer {
   /**
    * Inits the.
    * 
-   * @param templatePath the template path
    * @param resourceResolver the resource resolver
    * @param dataPageList the data page list
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
-  public void init(String templatePath, ResourceResolver resourceResolver, PageList dataPageList) throws Exception {
+  public void init(ResourceResolver resourceResolver, PageList dataPageList) throws Exception {
+
     String paginatorTemplatePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_PAGINATOR_TEMPLATE);
-    this.templatePath = templatePath;
+    this.templatePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_TEMPLATE);
+
     this.resourceResolver = resourceResolver;
     uiPaginator = addChild(UICustomizeablePaginator.class, null, null);
     uiPaginator.setTemplatePath(paginatorTemplatePath);
@@ -134,10 +136,9 @@ public class UICLVPresentation extends UIContainer {
     dateFormatter = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
   }
   
-  
   public List<CategoryBean> getCategories() throws Exception {
-	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
-	return getCategories(fullPath, "exo:taxonomy", 0);
+    String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+    return getCategories(fullPath, "exo:taxonomy", 0);
 
   }
 
@@ -148,6 +149,9 @@ public class UICLVPresentation extends UIContainer {
   }
   
   public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth) throws Exception {
+    if (fullPath==null || fullPath.length()==0) {
+    	return null;
+    }
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
@@ -163,8 +167,9 @@ public class UICLVPresentation extends UIContainer {
     filters.put(WCMComposer.FILTER_PRIMARY_TYPE, primaryType);
 
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
-//	String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
-//	System.out.println("paramPath::"+paramPath);
+    
+    /* Allows us to know the current selected node */
+	  String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
 
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(fullPath);
     
@@ -174,8 +179,8 @@ public class UICLVPresentation extends UIContainer {
     	String title = getTitle(node);
     	String url = getCategoryURL(node);
     	String path = node.getPath();
-    	long total  = (node.hasProperty("exo:total"))?node.getProperty("exo:total").getValue().getLong():0;
-    	boolean isSelected = fullPath!=null&&fullPath.endsWith(path);
+    	long total = (node.hasProperty("exo:total"))?node.getProperty("exo:total").getValue().getLong():0;
+    	boolean isSelected = paramPath!=null&&paramPath.endsWith(path);
     	CategoryBean cat = new CategoryBean(node.getName(), node.getPath(), title, url, isSelected, depth, total);
     	NodeLocation catLocation = NodeLocation.getNodeLocationByNode(node);
     	List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth+1);
@@ -188,38 +193,39 @@ public class UICLVPresentation extends UIContainer {
     
     return categories;
 
-  }  
-  public String  getTagHtmlStyle(long tagCount) throws Exception  {
-    for (Entry<String, String> entry : getTagStyles().entrySet()) {
-      if (checkTagRate(tagCount, entry.getKey()))
-        return entry.getValue();
-    }
-    return "";
   }
   
-  private Map<String ,String>  getTagStyles() throws Exception  {
-    if (tagStyles==null) {
-      NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
-      String workspace = "dms-system";
-      tagStyles = new HashMap<String ,String>() ;
-      for(Node tag : folksonomyService.getAllTagStyle("repository", workspace)) {
-        tagStyles.put(tag.getProperty("exo:styleRange").getValue().getString(),
-            tag.getProperty("exo:htmlStyle").getValue().getString());
-      }
-    }
+  public String getTagHtmlStyle(long tagCount) throws Exception {
+  	for (Entry<String, String> entry : getTagStyles().entrySet()) {
+  		if (checkTagRate(tagCount, entry.getKey()))
+	  		return entry.getValue();
+  	}
+  	return "";
+  }
+
+  private Map<String ,String> getTagStyles() throws Exception {
+  	if (tagStyles==null) {
+	    NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
+	    String workspace = "dms-system";
+	    tagStyles = new HashMap<String ,String>() ;
+	    for(Node tag : folksonomyService.getAllTagStyle("repository", workspace)) {
+	      tagStyles.put(tag.getProperty("exo:styleRange").getValue().getString(),
+	      						 tag.getProperty("exo:htmlStyle").getValue().getString());
+	    }
+  	}
     return tagStyles ;
   }
   
-  private boolean  checkTagRate(long numOfDocument, String range) throws Exception {
-    String[] vals = StringUtils.split(range ,"..");   
-    int minValue = Integer.parseInt(vals[0]);
-    int maxValue;
+  private boolean checkTagRate(long numOfDocument, String range) throws Exception {
+    String[] vals = StringUtils.split(range ,"..") ;    
+    int minValue = Integer.parseInt(vals[0]) ;
+    int maxValue ;
     if(vals[1].equals("*")) {
-      maxValue = Integer.MAX_VALUE;
+      maxValue = Integer.MAX_VALUE ;
     }else {
-      maxValue = Integer.parseInt(vals[1]);
+      maxValue = Integer.parseInt(vals[1]) ;
     }
-    if(minValue <=numOfDocument && numOfDocument <maxValue ) return true;   
+    if(minValue <=numOfDocument && numOfDocument <maxValue ) return true ;    
     return false ;
   }
   

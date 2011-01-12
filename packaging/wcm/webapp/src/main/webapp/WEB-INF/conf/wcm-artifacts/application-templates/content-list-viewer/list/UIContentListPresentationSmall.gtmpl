@@ -12,7 +12,7 @@
 		String header = uicomponent.getHeader();
 		def rssLink = uicomponent.getRssLink();
 		def isShowRssLink = uicomponent.isShowRssLink();
-		def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;			
+		def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 		%>
 		<div class="TopBoxHeader">
 			<%
@@ -56,7 +56,7 @@
 						itemName = itemTitle;
 					}						
 					%>
-					<%=uicomponent.addQuickEditDiv("CaptionItem", viewNode)%>					
+					<%=uicomponent.addQuickEditDiv("CaptionItem", viewNode)%>
 				<%
                 if(imgSrc != null && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION)) {
                     %><img src="$imgSrc" width="30" style="float:left; padding-right:5px;" /><%

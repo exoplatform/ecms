@@ -312,28 +312,25 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
   padding:2px 0 0;
 }
 
-.UIWorkingWorkspace .AddContentIcon {
+.AddContentIcon {
   background: url('icons/AddContentIcon.png') no-repeat center center;
   margin-left: 6px;
   width: 16px;
   display: block;
-  padding:0px;
 }
 
-.UIWorkingWorkspace .ManageContentIcon {
+.ManageContentIcon {
   background: url('icons/ManageContentIcon.png') no-repeat center center;
   margin-left: 6px;
   display: block;
   width: 16px;
-  padding:0px;  
 }
 
-.UIWorkingWorkspace .PreferencesIcon {
+.PreferencesIcon {
   background: url('icons/PreferencesIcon.png') no-repeat center center;
   margin-left: 6px;
   width: 16px;
   display: block;
-  padding:0px;
 }
 
 .EdittingContent{
@@ -369,12 +366,11 @@ background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
   color: #5E6D7B;
 }
 
-.UIWorkingWorkspace .EditContentIcon {
+.EditContentIcon {
   background: url('icons/EditContentIcon.png') no-repeat left center;
   margin-left: 6px;
   width: 16px;
   display: block;
-  padding: 0px;
 }
 
 .CloseContentIcon {
