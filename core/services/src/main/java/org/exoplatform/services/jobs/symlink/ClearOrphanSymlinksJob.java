@@ -55,7 +55,7 @@ public class ClearOrphanSymlinksJob implements Job {
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)exoContainer.getComponentInstanceOfType(NodeHierarchyCreator.class);
     ManageableRepository manageableRepository;
     try {
-      manageableRepository = repositoryService.getDefaultRepository();
+      manageableRepository = repositoryService.getCurrentRepository();
     } catch (Exception e) { return; }
 
     String repositoryName = manageableRepository.getConfiguration().getName();    
@@ -70,14 +70,15 @@ public class ClearOrphanSymlinksJob implements Job {
         }
     } catch (Exception e) {}
     if (trashWorkspace == null) return;
-    
+    SessionProvider sessionProvider = null;
+    Session session = null;
     try {
       String[] workspaces = manageableRepository.getWorkspaceNames();
+      sessionProvider = SessionProviderFactory.createSystemProvider();
       
       for (String workspace : workspaces) {
         try {
-          SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider(); 
-          Session session = sessionProvider.getSession(workspace, manageableRepository);
+          session = sessionProvider.getSession(workspace, manageableRepository);
           QueryManager queryManager = session.getWorkspace().getQueryManager();
           Query query = queryManager.createQuery(queryString, Query.SQL);
           QueryResult queryResult = query.execute();
@@ -85,6 +86,8 @@ public class ClearOrphanSymlinksJob implements Job {
           List<Node> deleteNodeList = new ArrayList<Node>();
           while (nodeIterator.hasNext()) {
             Node symlinkNode = nodeIterator.nextNode();
+            if (symlinkNode.isNodeType(EXO_RESTORELOCATION))
+              continue;
             //get list of node to delete
             try {
               Node targetNode = linkManager.getTarget(symlinkNode, true);
@@ -96,7 +99,9 @@ public class ClearOrphanSymlinksJob implements Job {
             //move the nodes in list to trash
             for (Node node : deleteNodeList) {
               try {
+                String nodePath = node.getPath();
                 trashService.moveToTrash(node, trashPath, trashWorkspace, repositoryName, sessionProvider);
+                log.info("ClearOrphanSymlinksJob: move orphan symlink " + nodePath + " to Trash");
               } catch (Exception e) {
                 log.error("ClearOrphanSymlinksJob: Can not move to trash node :" + node.getPath(), e);
               }
@@ -108,6 +113,9 @@ public class ClearOrphanSymlinksJob implements Job {
       }
     } catch (Exception e) {
       log.error("Error occurs in ClearOrphanSymlinksJob", e);
+    } finally {
+      if (session != null && session.isLive())
+        session.logout();
     }
     log.info("ClearOrphanSymlinksJob: Done!");
   }
