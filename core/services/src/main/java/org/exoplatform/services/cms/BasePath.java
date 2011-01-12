@@ -57,4 +57,5 @@ public interface BasePath {
   public static final String ECM_INTERCEPTOR_SCRIPTS = "ecmInterceptorScripts".intern() ;
   public static final String ECM_WIDGET_SCRIPTS = "ecmWidgetScripts".intern() ;
   
+  public static final String TRASH_PATH = "newDocumentsTrashPath".intern();
 }

@@ -81,7 +81,7 @@ public class TrashServiceImpl implements TrashService {
     Session nodeSession = node.getSession();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    List<Node> categories = taxonomyService_.getAllCategories(node);
+    List<Node> categories = taxonomyService_.getAllCategories(node, true);
     String nodeUUID = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : null;
     if (node.isNodeType(SYMLINK)) nodeUUID = null;
     String taxonomyLinkUUID = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(UUID).getString() : null;
