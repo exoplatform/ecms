@@ -86,6 +86,8 @@ public class ClearOrphanSymlinksJob implements Job {
           List<Node> deleteNodeList = new ArrayList<Node>();
           while (nodeIterator.hasNext()) {
             Node symlinkNode = nodeIterator.nextNode();
+            if (symlinkNode.isNodeType(EXO_RESTORELOCATION))
+              continue;
             //get list of node to delete
             try {
               Node targetNode = linkManager.getTarget(symlinkNode, true);
