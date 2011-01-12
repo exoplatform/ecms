@@ -18,7 +18,7 @@
           <property name="jobName" value="ClearOrphanSymlinksJob"/>
           <property name="job" value="org.exoplatform.services.jobs.symlink.ClearOrphanSymlinksJob"/>
           <property name="repeatCount" value="0"/>
-          <property name="period" value="7200000"/>     
+          <property name="period" value="1200000"/>     
           <property name="startTime" value="+0"/>
           <property name="endTime" value=""/>               
           <property name="repository" value="repository"/>
