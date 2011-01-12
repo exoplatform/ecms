@@ -35,6 +35,7 @@
   <import>war:/conf/dms-extension/dms/dms-scripts-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-actions-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-categories-configuration.xml</import>
+  <import>war:/conf/dms-extension/dms/dms-clearSymlinks-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-taxonomies-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-ext-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-views-configuration.xml</import>
