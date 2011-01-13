@@ -53,28 +53,23 @@ public class ClearOrphanSymlinksJob implements Job {
     LinkManager linkManager = (LinkManager)exoContainer.getComponentInstanceOfType(LinkManager.class);
     TrashService trashService = (TrashService)exoContainer.getComponentInstanceOfType(TrashService.class);
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)exoContainer.getComponentInstanceOfType(NodeHierarchyCreator.class);
-    ManageableRepository manageableRepository;
+    
+    Session session = null;    
     try {
-      manageableRepository = repositoryService.getCurrentRepository();
-    } catch (Exception e) { return; }
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
-    String repositoryName = manageableRepository.getConfiguration().getName();    
-    String trashPath = nodeHierarchyCreator.getJcrPath(BasePath.TRASH_PATH);
-    String trashWorkspace = null;
-    ManageDriveService driveService = (ManageDriveService)exoContainer.getComponentInstanceOfType(ManageDriveService.class);
-    try {
-      for (DriveData driveData : driveService.getAllDrives(repositoryName)) 
-        if (driveData.getHomePath().equals(trashPath) ) {
-          trashWorkspace = driveData.getWorkspace();
-          break;
-        }
-    } catch (Exception e) {}
-    if (trashWorkspace == null) return;
-    SessionProvider sessionProvider = null;
-    Session session = null;
-    try {
+      String repositoryName = manageableRepository.getConfiguration().getName();    
+      String trashPath = nodeHierarchyCreator.getJcrPath(BasePath.TRASH_PATH);
+      String trashWorkspace = null;
+      ManageDriveService driveService = (ManageDriveService)exoContainer.getComponentInstanceOfType(ManageDriveService.class);
+        for (DriveData driveData : driveService.getAllDrives(repositoryName)) 
+          if (driveData.getHomePath().equals(trashPath) ) {
+            trashWorkspace = driveData.getWorkspace();
+            break;
+          }
+      if (trashWorkspace == null) return;
+      SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
       String[] workspaces = manageableRepository.getWorkspaceNames();
-      sessionProvider = SessionProviderFactory.createSystemProvider();
       
       for (String workspace : workspaces) {
         try {
@@ -97,14 +92,14 @@ public class ClearOrphanSymlinksJob implements Job {
               deleteNodeList.add(symlinkNode);
             } catch (RepositoryException e) {}
             //move the nodes in list to trash
-            for (Node node : deleteNodeList) {
-              try {
-                String nodePath = node.getPath();
-                trashService.moveToTrash(node, trashPath, trashWorkspace, repositoryName, sessionProvider);
-                log.info("ClearOrphanSymlinksJob: move orphan symlink " + nodePath + " to Trash");
-              } catch (Exception e) {
-                log.error("ClearOrphanSymlinksJob: Can not move to trash node :" + node.getPath(), e);
-              }
+          }
+          for (Node node : deleteNodeList) {
+            try {
+              String nodePath = node.getPath();
+              trashService.moveToTrash(node, trashPath, trashWorkspace, repositoryName, sessionProvider);
+              log.info("ClearOrphanSymlinksJob: move orphan symlink " + nodePath + " to Trash");
+            } catch (Exception e) {
+              log.error("ClearOrphanSymlinksJob: Can not move to trash node :" + node.getPath(), e);
             }
           }
         } catch (RepositoryException e) {
