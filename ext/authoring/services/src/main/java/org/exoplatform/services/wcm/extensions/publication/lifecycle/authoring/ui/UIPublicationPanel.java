@@ -148,7 +148,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
         String siteName = Util.getPortalRequestContext().getPortalOwner();
         String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-        wcmPublicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);        
+        wcmPublicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser, state);        
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
