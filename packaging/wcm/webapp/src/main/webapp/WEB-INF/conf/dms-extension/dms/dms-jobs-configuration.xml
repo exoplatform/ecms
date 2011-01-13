@@ -10,11 +10,11 @@
       <name>ClearOrphanSymlinksJob</name>
       <set-method>addPeriodJob</set-method>
       <type>org.exoplatform.services.scheduler.PeriodJob</type>
-      <description>add a job to the JobSchedulerService</description>
+      <description>add to the JobSchedulerService a job which cleans all the unassigned symlinks</description>
       <init-params>
         <properties-param>
           <name>job.info</name>
-          <description>save the monitor data  periodically</description>
+          <description>info of jobs</description>
           <property name="jobName" value="ClearOrphanSymlinksJob"/>
           <property name="job" value="org.exoplatform.services.jobs.symlink.ClearOrphanSymlinksJob"/>
           <property name="repeatCount" value="0"/>
