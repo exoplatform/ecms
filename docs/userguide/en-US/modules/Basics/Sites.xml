@@ -3,9 +3,9 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Set_Up_a_Website">
-  <title>Set Up a Website</title>
-  <section id="sect-User_Guide-Set_Up_a_Website-Create_a_new_site">
+<section id="sect-User_Guide-Manage_a_site">
+  <title>Manage a site</title>
+  <section id="sect-User_Guide-Manage_a_site-Create_a_new_site">
     <title>Create a new site</title>
     <para>
    </para>
@@ -245,7 +245,7 @@
       </imageobject>
     </mediaobject>
   </section>
-  <section id="sect-User_Guide-Set_Up_a_Website-Edit_a_Site">
+  <section id="sect-User_Guide-Manage_a_site-Edit_a_Site">
     <title>Edit a Site</title>
     <para>
    This function enables you to edit a site, inluding   the configuration (setting,  permission), the navigation and the layout components of the site.</para>
@@ -350,7 +350,9 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
             </callout>
           </calloutlist>
         </imageobjectco>
-      </mediaobjectco>  -->    <section id="sect-User_Guide-Edit_a_Site-How_to_edit_the_current_Site">
+      </mediaobjectco>  -->    
+      
+      <section id="sect-User_Guide-Edit_a_Site-How_to_edit_the_current_Site">
       <title>How to edit the current site</title>
       <para>
     To edit the current site that you are browsing, do the following:
@@ -680,7 +682,7 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
          </para>
       </formalpara>
       <para>
-            Do the same steps as in <xref linkend="sect-User_Guide-Set_Up_a_Website-Create_a_new_site"/>.
+            Do the same steps as in <xref linkend="sect-User_Guide-Manage_a_site-Create_a_new_site"/>.
    </para>
       <note>
         <para>
@@ -873,13 +875,13 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
         </step>
         <step>
           <para>
-      Do the same steps as in <xref linkend="sect-User_Guide-Set_Up_a_Website-Create_a_new_site"/>.
+      Do the same steps as in <xref linkend="sect-User_Guide-Manage_a_site-Create_a_new_site"/>.
      </para>
         </step>
       </procedure>
     </section>
   </section>
-<!-- </section>-->  <section id="sect-User_Guide-Set_Up_a_Website-Switch_between_sites">
+<!-- </section>-->  <section id="sect-User_Guide-Manage_a_site-Switch_between_sites">
     <title>Switch between sites</title>
     <para>
    This function is used to change the current web site by another one.
@@ -909,7 +911,7 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
       </step>
     </procedure>
   </section>
-  <section id="sect-User_Guide-Set_Up_a_Website-Delete_a_site">
+  <section id="sect-User_Guide-Manage_a_site-Delete_a_site">
     <title>Delete a site</title>
     <para>
    This function is used to delete a portal (site) from the portal list.

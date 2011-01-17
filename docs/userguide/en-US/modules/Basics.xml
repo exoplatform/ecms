@@ -10,6 +10,7 @@
 	</para>
 	 <xi:include href="Basics/View.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Print.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="Basics/Sites.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Contribute_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Content_Inside_Categories.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Dynamic_Navigation.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />

@@ -3,8 +3,8 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="sect-User_Guide-Print_a_Web_Content">
-	<title>Print a Web Content</title>
+<section id="sect-User_Guide-Print_content">
+	<title>Print content</title>
 	 <para>
 		Users can easily print any content in a site by following these steps:
 	</para>
