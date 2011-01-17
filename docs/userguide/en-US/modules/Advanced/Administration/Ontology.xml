@@ -255,19 +255,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/little_man.png" format="PNG"/>
+              <imagedata fileref="images/usericon.png" format="PNG"/>
             </imageobject>
           </inlinemediaobject>
       icon to select a user or the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/hug_me.png" format="PNG"/>
+              <imagedata fileref="images/grouppermission.png" format="PNG"/>
             </imageobject>
           </inlinemediaobject>
       icon to select memerships or the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/personal_space.png" format="PNG"/>
+              <imagedata fileref="images/alluserpermission.png" format="PNG"/>
             </imageobject>
           </inlinemediaobject>
       icon to select everyone in order to set permissions. The user or memership that you have just selected will be displayed in the <guilabel>User or Group</guilabel> field.
