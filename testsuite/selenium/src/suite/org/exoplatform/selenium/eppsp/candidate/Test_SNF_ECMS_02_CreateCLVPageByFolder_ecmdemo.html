@@ -142,11 +142,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//div[text()='Content List']</td>
 	<td></td>
@@ -174,6 +169,11 @@
 <tr>
 	<td>click</td>
 	<td>//a[@title='Edit Portlet']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Select folder path</td>
 	<td></td>
 </tr>
 <tr>
@@ -283,7 +283,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>Go to &quot;ASnfEcms02&quot; pages</td>
+	<td>--&nbsp;&nbsp;Go to &quot;ASnfEcms02&quot; pages</td>
 	<td></td>
 </tr>
 <tr>
@@ -294,6 +294,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//a[@onclick='eXo.core.DOMUtil.disableOnClick(this);']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -329,71 +334,6 @@
 <tr>
 	<td>verifyElementPresent</td>
 	<td>link=How to join us</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Search and delete page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//a[contains(text(),'Page Management')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//a[contains(text(),'Page Management')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>searchTerm</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>searchTerm</td>
-	<td>ASnfEcms02</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>searchOption</td>
-	<td>label=Title</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//form[@id='UIPageSearch']/div[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//form[@id='UIPageSearch']/div[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@title='Delete Page']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//img[@title='Delete Page']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Do you want to delete this page?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[5]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[5]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div</td>
 	<td></td>
 </tr>
 <tr>

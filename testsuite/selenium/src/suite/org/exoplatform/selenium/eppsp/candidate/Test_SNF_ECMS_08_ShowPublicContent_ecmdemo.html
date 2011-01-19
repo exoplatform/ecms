@@ -82,6 +82,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Sites Management</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Sites Management</td>
 	<td></td>
@@ -93,22 +98,37 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- acme</td>
+	<td>-Go to Admin View</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//a[@title='Admin View']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//a[@title='Admin View']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- acme/documents</td>
+	<td>--&nbsp;&nbsp;acme</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[text()='acme' and @style='cursor: pointer;']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[text()='acme' and @style='cursor: pointer;']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;acme/documents</td>
 	<td></td>
 </tr>
 <tr>
@@ -123,7 +143,27 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Add Document</td>
+	<td>--&nbsp;&nbsp;Go to Action</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Add Document</td>
 	<td></td>
 </tr>
 <tr>
