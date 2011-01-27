@@ -159,6 +159,11 @@
       <artifactId>exo-ecms-core-parser</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-webui</artifactId>
+      <version>${project.version}</version>
+     </dependency>
   </dependencies>
 
 <!-- 
@@ -251,6 +256,11 @@ exo-ecms-packaging-ecmdemo-webapp
             <jarModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-core-search</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.exoplatform.ecms</groupId>
+              <artifactId>exo-ecms-ext-webui</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <webModule>
