@@ -12,6 +12,7 @@
   <description>eXo WCM Examples :: UIExtension Framework</description>
   <modules>
     <module>manage-wcm-cache</module>
-		<module>helloworld-optionblock</module>
+    <module>helloworld-optionblock</module>
+    <module>helloworld-sidebar</module>
   </modules>
 </project>

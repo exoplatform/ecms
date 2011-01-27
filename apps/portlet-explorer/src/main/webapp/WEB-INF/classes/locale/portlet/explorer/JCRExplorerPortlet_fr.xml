@@ -99,6 +99,7 @@
       <Close>Fermer</Close>
       <TagExplorer>Nuage de tags</TagExplorer>
       <Clipboard>Presse-papier</Clipboard>
+      <SavedSearches>Recherches Sauvées</SavedSearches>
     </label>
     <title>
       <Control>Barre latérale</Control>

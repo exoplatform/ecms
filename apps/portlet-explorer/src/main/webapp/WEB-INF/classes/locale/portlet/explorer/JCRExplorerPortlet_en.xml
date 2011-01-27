@@ -100,6 +100,7 @@
       <Close>Close sidebar</Close>
       <TagExplorer>Tag cloud</TagExplorer>
       <Clipboard>Clipboard</Clipboard>
+      <SavedSearches>Saved Searches</SavedSearches>
     </label>
     <title>
       <Control>Control sidebar</Control>
