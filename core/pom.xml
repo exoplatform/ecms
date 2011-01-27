@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <version>2.1.4-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-core</artifactId>
   <packaging>pom</packaging>
@@ -13,15 +13,16 @@
   <modules>
     <module>services</module>
     <module>viewer</module>
-		<module>parser</module>
+    <module>parser</module>
     <module>publication</module>
     <module>publication-plugins</module>
     <module>connector</module>
     <module>webui</module>
     <!-- ext module was deprecated and will be reuse by the one from commons -->
-    <!--module>ext</module-->
+	<!--module>ext</module-->
     <module>search</module>
     <module>webui-explorer</module>
     <module>webui-administration</module>
+    <module>core-configuration</module>
   </modules>
 </project>

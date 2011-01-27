@@ -28,7 +28,6 @@
       <UIBPDefinition>Điều khiển định nghĩa quá trình</UIBPDefinition>
       <UIDocumentContent>Xem nội dung</UIDocumentContent>
       <UIDocumentForm>Chỉnh sửa nội dung</UIDocumentForm>
-			<WorkflowDocumentContainer>Chỉnh sửa nội dung</WorkflowDocumentContainer>
       <UITask>Nhiệm vụ</UITask>
     </title>
   </UITabPane>

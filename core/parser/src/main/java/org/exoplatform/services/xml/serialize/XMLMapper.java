@@ -35,4 +35,3 @@ public interface XMLMapper
    public XMLDocument toXMLDocument(Object bean) throws Exception;
 
 }
-

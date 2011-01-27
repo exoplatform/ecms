@@ -108,10 +108,9 @@ public class DialogFormUtil {
           if (input instanceof UIFormUploadInput) {
         	  UploadResource uploadResource = ((UIFormUploadInput) input).getUploadResource();
         	  if (uploadResource == null) continue;
-        	  inputStream = ((UIFormUploadInput) input).getUploadDataAsStream();
-              content = new byte[inputStream.available()];
-              inputStream.read(content);
-              property.setValue(content);
+        	    inputStream = ((UIFormUploadInput) input).getUploadDataAsStream();
+              property.setValue(inputStream);
+
               mimeTypeJcrPath = property.getJcrPath().replace("jcr:data", "jcr:mimeType");
               JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
               mimeTypeInputPropertyTmp.setJcrPath(mimeTypeJcrPath);
@@ -182,9 +181,7 @@ public class DialogFormUtil {
             }
             if (inputJCRKey.endsWith("jcr:data")) {
               inputStream = formUploadInput.getUploadDataAsStream();
-              content = new byte[inputStream.available()];
-              inputStream.read(content);
-              newJcrInputProperty.setValue(content);
+              newJcrInputProperty.setValue(inputStream);
             }
             jcrPropertiesToAdd.put(newJCRPath, newJcrInputProperty);
           }

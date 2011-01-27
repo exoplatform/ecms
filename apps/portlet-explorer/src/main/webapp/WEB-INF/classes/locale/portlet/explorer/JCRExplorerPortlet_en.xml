@@ -100,7 +100,6 @@
       <Close>Close sidebar</Close>
       <TagExplorer>Tag cloud</TagExplorer>
       <Clipboard>Clipboard</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
     </label>
     <title>
       <Control>Control sidebar</Control>
@@ -1678,7 +1677,7 @@
       <action>Action</action>
     </header>
     <info>
-      <child-not-found>No selectable content</child-not-found>
+      <child-not-found>This node hasn't got any child</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -3290,10 +3289,10 @@
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>    
+  <UIJcrExplorerEditForm>   
     <msg>
-   	  <fields-saved>All field values saved!</fields-saved>
-   	  <fields-cancelled>All field values cancelled!</fields-cancelled>
+      <fields-saved>All field values saved!</fields-saved>
+      <fields-cancelled>All field values cancelled!</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
@@ -3301,6 +3300,6 @@
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
-  </UIDocumentForm>	 
+  </UIDocumentForm>	  	
 </bundle>
 

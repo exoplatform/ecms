@@ -168,10 +168,10 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       ResourceBundle resourceBundle = ResourceBundle.getBundle(FCK_RESOURCE_BUNDLE_FILE, locale);
       String message = "";
       try {
-        message = resourceBundle.getString("fckeditor.no-gadget");
-      } catch (MissingResourceException e) {
-        message = "fckeditor.no-gadget";
-      }
+				message = resourceBundle.getString("fckeditor.no-gadget");
+			} catch (MissingResourceException e) {
+				message = "fckeditor.no-gadget";
+			}
       Element rootElement = document.createElement("Message");
       document.appendChild(rootElement);
       rootElement.setAttribute("number", "555");
@@ -284,7 +284,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * @throws Exception the exception
    */
   private List<ApplicationCategory> getGadgetCategories() throws Exception {
-  List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
+	List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
     PortalContainer container = PortalContainer.getInstance();
     RequestLifeCycle.begin(container);
     try {
@@ -295,7 +295,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
         }
       }
     } finally {
-      RequestLifeCycle.end();
+    	RequestLifeCycle.end();
     }
     return gadgetCategories;
   }

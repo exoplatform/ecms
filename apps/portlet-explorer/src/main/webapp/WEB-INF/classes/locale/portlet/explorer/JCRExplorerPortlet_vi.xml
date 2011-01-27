@@ -104,8 +104,7 @@
       <Hidden>Ẩn</Hidden>
       <Trash>Thùng rác</Trash>      
       <Configuration>Thiết lập lựa chọn</Configuration>
-      <DocumentFilterConfiguration>Thiết lập kiểu hiển thị</DocumentFilterConfiguration>
-      <SavedSearches>Câu tìm kiếm</SavedSearches>      
+      <DocumentFilterConfiguration>Thiết lập kiểu hiển thị</DocumentFilterConfiguration>      
     </label>
     <title>
       <Control>Điều khiển</Control>
@@ -507,7 +506,7 @@
       <Unlock>Mở khóa</Unlock>
       <EditDocument>chỉnh sửa</EditDocument>
       <Paste>Dán</Paste>
-      <LockedBy>Bị khoá bởi</LockedBy>
+      <LockedBy>locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
@@ -1685,7 +1684,7 @@
       <action>Thao tác</action>
     </header>
     <info>
-      <child-not-found>Không có nội dung có thể chọn được</child-not-found>
+      <child-not-found>Node này không có bất kỳ node con nào</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -3343,10 +3342,10 @@
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>    
+  <UIJcrExplorerEditForm>   
     <msg>
-   	  <fields-saved>Các giá trị thiết lập đã được lưu!</fields-saved>
-   	  <fields-cancelled>Các giá trị thiết lập đã được hủy!</fields-cancelled>   	  
+      <fields-saved>Các giá trị thiết lập đã được lưu!</fields-saved>
+      <fields-cancelled>Các giá trị thiết lập đã được hủy!</fields-cancelled>        
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>

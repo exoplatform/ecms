@@ -22,7 +22,6 @@
       <UIBPDefinition>BP Beschreibungskontroller</UIBPDefinition>
       <UIDocumentContent>Inhalt anschauen</UIDocumentContent>
       <UIDocumentForm><![CDATA[Inhalt &auml;ndern]]></UIDocumentForm>
-			<WorkflowDocumentContainer><![CDATA[Inhalt &auml;ndern]]></WorkflowDocumentContainer>
       <UITask>Augabe</UITask>
     </title>
   </UITabPane>

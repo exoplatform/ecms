@@ -135,20 +135,20 @@
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>        
-        <!-- Last User -->
- 	 	 	 	<div class="ColumnAuthor Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
- 	 	 	 		<%
- 	 	 	 		if (selectedSortType.equals("LastUser")) {
- 	 	 	 		%>
- 	 	 	 			<div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">Last User</div>
- 	 	 	 		<%
- 	 	 	 		} else {
- 	 	 	 		%>Last User<%
- 	 	 	 	 }
- 	 	 	 	 %>
- 	 	 	 	</div>
- 	 	 	 	<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>        
+        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+<!-- Last User --> 
+        <div class="ColumnAuthor Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
+          <%
+            if (selectedSortType.equals("LastUser")) {
+              %>
+                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">Last User</div>
+              <%
+            } else { 
+              %>Last User<%
+            } 
+          %>
+        </div>
+        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Status -->
         <div class="ColumnStatus Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
           <%
@@ -240,13 +240,13 @@
           //   Author
           def author = uicomponent.getNodeOwner(data);
           if ("__system".equals(author) || "__anonim".equals(author)) author = "";
-          
+
           //   Last User
- 	 	 	 		 def lastUser = "";
- 	 	 	 		 if (data.hasProperty("publication:lastUser")) {
- 	 	 	 		  lastUser = data.getProperty("publication:lastUser").getValue().getString();
- 	 	 	 	  }
- 	 	 	 		          
+          def lastUser = "";
+          if (data.hasProperty("publication:lastUser")) {
+            lastUser = data.getProperty("publication:lastUser").getValue().getString();
+          }
+          
           // Content view
           
           String subName ;
@@ -302,7 +302,7 @@
           }
           
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-            String clipboardLink = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + preferenceWS + data.getPath();
+          	String clipboardLink = serverUrl + "/" + portalName + "/rest-ecmdemo/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
             strActs +=  "<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
             strActs +=  " <div class='MenuURLIcon GetURL16x16Icon'>" ;
             strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");
@@ -312,14 +312,14 @@
           strActs += "</div>";
           def rightClickMenu = "" ;
           Boolean isLocked = false;
- 	 	 	 	  String lockedLabel = "";
+          String lockedLabel = "";
           String isFavourite = "false";
           String isInTrash = "false";
           String isMediaType = "false";
           String isTrashHome = "false";
           if (data.isLocked()) {
-          	 isLocked = true;
-          	 lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
+            isLocked = true;
+            lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
           }
           if (uicomponent.isFavouriter(data)) isFavourite = "true";
           if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
@@ -330,9 +330,9 @@
             <div <%=rightClickMenu%> class="RowView Normal" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">$strActs
               <div class="ColumnIcon" style="padding: 2px 0px; border-right: none; width: 30px;">
                 <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
-                		<%if(isLocked) {%>
-                		  <div class="IconLocked"></div>
-                		<%}%>
+                  <%if(isLocked) {%>
+                    <div class="IconLocked"></div>
+                  <%}%>
                   <%
                     if(uicomponent.isSymLink(data)) {
                       %><div class="LinkSmall"></div><%
@@ -359,12 +359,12 @@
                 </div>
               </div>
 <!-- Last User -->
-														<div class="ColumnAuthor Column" style="width: 93px;">
-															 <div class="NodeLabel">
-															 	 <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%= lastUser %>"><%= lastUser %></div>
-															 </div>
-														</div> 													           
-<!-- status-->
+              <div class="ColumnAuthor Column" style="width: 93px;">
+                <div class="NodeLabel">
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="<%= lastUser %>"><%= lastUser %></div>
+                </div>
+              </div>
+<!-- Status-->
               <div class="ColumnStatus Column" style="width: 93px;">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="status"><%= status %></div>

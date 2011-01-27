@@ -344,4 +344,3 @@ public class Bean2XML implements XMLMapper
    }
 
 }
-

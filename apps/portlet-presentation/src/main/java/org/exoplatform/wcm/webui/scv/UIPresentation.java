@@ -64,7 +64,7 @@ public class UIPresentation extends UIBaseNodePresentation {
   private NodeLocation originalNodeLocation;
   
   private NodeLocation viewNodeLocation;
-  
+
   String templatePath = null;
   
   /* (non-Javadoc)
@@ -108,24 +108,21 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
    */
   public String getTemplate() {
-    try{
-      return getTemplatePath() ;
-    } catch (Exception e) {
-      return null ;
-    }
+    return templatePath;
   }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getTemplatePath()
    */
   public String getTemplatePath() throws Exception {
-    TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return templateService.getTemplatePath(getOriginalNode(), false) ;
+    return templatePath;
   }
-  
+
   public void setTemplatePath(String templatePath) {
     this.templatePath = templatePath;
   }
+
+  
     
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
@@ -163,7 +160,7 @@ public class UIPresentation extends UIBaseNodePresentation {
    */
   public UIComponent getRemoveAttach() throws Exception {
     removeChild(RemoveAttachmentComponent.class);
-    UIComponent uicomponent = addChild(RemoveAttachmentComponent.class, null, "DocumentInfoRemoveAttach");
+    UIComponent uicomponent = addChild(RemoveAttachmentComponent.class, null, "PresentationRemoveAttach");
     ((AbstractActionComponent)uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPresentationContainer.class}));
     return uicomponent;
   }
@@ -173,24 +170,24 @@ public class UIPresentation extends UIBaseNodePresentation {
    */
   public UIComponent getRemoveComment() throws Exception {
     removeChild(RemoveCommentComponent.class);
-    UIComponent uicomponent = addChild(RemoveCommentComponent.class, null, "DocumentInfoRemoveComment");
+    UIComponent uicomponent = addChild(RemoveCommentComponent.class, null, "PresentationRemoveComment");
     ((AbstractActionComponent)uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPresentationContainer.class}));
     return uicomponent;
   }
 
-	public UIComponent getUIComponent(String mimeType) throws Exception {
-	// TODO Auto-generated method stub
-		UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-		List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
-	    Map<String, Object> context = new HashMap<String, Object>();
-	    context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
-	    for (UIExtension extension : extensions) {
-	      UIComponent uiComponent = manager.addUIExtension(extension, context, this);
-	      if(uiComponent != null) return uiComponent;
-	    }
-	    return null;
-	}
-	
+  public UIComponent getUIComponent(String mimeType) throws Exception {
+  	// TODO Auto-generated method stub
+  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+  	List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
+      Map<String, Object> context = new HashMap<String, Object>();
+      context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
+      for (UIExtension extension : extensions) {
+        UIComponent uiComponent = manager.addUIExtension(extension, context, this);
+        if(uiComponent != null) return uiComponent;
+      }
+      return null;
+  }
+  
   /**
    * Gets the attachment URL.
    * 
@@ -222,5 +219,5 @@ public class UIPresentation extends UIBaseNodePresentation {
     
     return link;
   }
-	
+
 }

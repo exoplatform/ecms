@@ -411,7 +411,7 @@ PluginUtils.prototype.insertContent = function(objContent) {
 		index = temp.indexOf("%27");
  }
  url = temp;
- var name 	= encodeURIComponent(objContent.innerHTML);
+ var name 	= encodeURIComponent(objContent.innerHTML);	
 	var strHTML = '';	
 	if(window.opener.document.getElementById(getParameterValueByName("browserType"))){		
 		strHTML += url;		

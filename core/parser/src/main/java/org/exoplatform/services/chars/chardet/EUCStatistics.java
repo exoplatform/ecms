@@ -89,4 +89,3 @@ public abstract class EUCStatistics
    //public abstract float   mSecondByteWeight();
 
 }
-

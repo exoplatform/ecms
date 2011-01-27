@@ -400,7 +400,7 @@ public interface TemplateService {
    * @return
    */
   public String buildStyleSheet(String nodeTypeName, String repository) throws Exception;
-  
+    
   /**
    * Insert a new template into NodeType by giving the following params
    * @param templateType        The value which specify the type of template
@@ -427,6 +427,7 @@ public interface TemplateService {
    * @param roles               The roles of template
    * @param templateFile        The file of template
    * @param repository          The name of repository
+   * @param templatesHome       Node
    * @see                       Session
    * @see                       Node                            
    * @throws Exception
@@ -463,5 +464,4 @@ public interface TemplateService {
    */
   public String getTemplateRoles(Node template);
   
-  public void setBasePath(String basePath) throws Exception;
 }

@@ -187,17 +187,12 @@
 	margin-top:4px;
 }
 
-.UIJCRExplorerPortlet .UISideBar .UISelectContent .DefaultIcon {
-	background: url('DefaultSkin/icons/Generatal.png') no-repeat center;
-	width: 14px; height: 15px;
-}
-
-.UIJCRExplorerPortlet .UISideBar .UISelectContent .ExplorerIcon {
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .FileExplorerIcon {
 	background: url('DefaultSkin/icons/FileExplorer.gif') no-repeat center;
 	width: 14px; height: 15px;
 }
 
-.UIJCRExplorerPortlet .UISideBar .UISelectContent .RelationIcon {
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .RelationsIcon {
 	background: url('DefaultSkin/icons/Relations.gif') no-repeat center;
 	width: 14px; height: 14px;
 }
@@ -212,7 +207,7 @@
 	width: 15px; height: 15px;
 }
 
-.UIJCRExplorerPortlet .UISideBar .UISelectContent .SavedSearchesIcon {
+.UIJCRExplorerPortlet .UISideBar .UISelectContent .AdvancedSearchIcon {
   background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/SearchIcon.png') no-repeat center;
   width: 17px; height: 17px;
 }
@@ -265,7 +260,6 @@
 	_overflow-x: hidden;
 	_width: 183px;
 }
-
 
 .UIJCRExplorerPortlet .UITreeExplorer .Icon16x16 {
   float: none;

@@ -14,16 +14,18 @@ WCMBreadcrumbPortlet.prototype.getCurrentNodes = function(navigations, selectedN
 		}
 	}		
 	var parent = currentNodes[0];	
-	for(var k = 1; k<currentNodeUris.length; k++) {		
-		if(parent.children == 'null')	{		
-			break;
-		}		
-		for(var n in parent.children) {	
-			var node = parent.children[n];			
-			if(currentNodeUris[k] == node.name) {
-				currentNodes[k]=node;
-				parent = node;			
+	if (parent != null) {
+		for(var k = 1; k<currentNodeUris.length; k++) {		
+			if(parent.children == 'null')	{		
 				break;
+			}		
+			for(var n in parent.children) {	
+				var node = parent.children[n];			
+				if(currentNodeUris[k] == node.name) {
+					currentNodes[k]=node;
+					parent = node;			
+					break;
+				}
 			}
 		}
 	}

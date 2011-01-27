@@ -101,7 +101,7 @@ public class VotingServiceImpl implements VotingService {
   /**
    * {@inheritDoc}
    */
-  public void vote(Node node, double rate, String userName, String language) throws Exception {
+  public void vote(Node node, double rate, String userName, String language) throws Exception {    
   	Session session = node.getSession();
   	node = handleUser(session, node, userName);
     
@@ -109,7 +109,6 @@ public class VotingServiceImpl implements VotingService {
       if(node.canAddMixin(VOTABLE)) node.addMixin(VOTABLE) ;
       else throw new NoSuchNodeTypeException() ;
     }        
-    
     Node languageNode = handleLanguage(node, language);
     long voteTotalOfLang = languageNode.getProperty(VOTE_TOTAL_LANG_PROP).getLong() ;
     double votingRate = languageNode.getProperty(VOTING_RATE_PROP).getDouble() ;
@@ -120,7 +119,6 @@ public class VotingServiceImpl implements VotingService {
     if(languageNode.hasProperty(VOTER_PROP)) {
       voters = languageNode.getProperty(VOTER_PROP).getValues() ;        
     }
-    
     Value newVoter = session.getValueFactory().createValue(userName) ;    
     List<Value> newVoterList = new ArrayList<Value>() ;
     newVoterList.addAll(Arrays.<Value>asList(voters)) ;    
@@ -191,5 +189,4 @@ public class VotingServiceImpl implements VotingService {
     }
     return node;
   }
-
 }

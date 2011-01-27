@@ -64,4 +64,3 @@ class CharRef
       return getName().compareTo(r.getName());
    }
 }
-

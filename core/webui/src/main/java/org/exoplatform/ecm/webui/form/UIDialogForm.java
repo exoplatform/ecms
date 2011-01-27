@@ -304,13 +304,13 @@ public class UIDialogForm extends UIForm {
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
-
-    if(node != null  && !isShowingComponent && !isRemovePreference && !isRemoveActionField) {
+    
+    if(node != null && !isShowingComponent && !isRemovePreference && !isRemoveActionField) {
       if(jcrPath.equals("/node") && (!formActionField.isEditable() || formActionField.isEditableIfNull())) {
-        ((UIFormStringInput)uiInput).setEditable(false);     
+        ((UIFormStringInput)uiInput).setEditable(false);      
       }
     }
-    
+
     if(node != null && !isShowingComponent && !isRemovePreference && !isRemoveActionField && isFirstTimeRender) {
       if(jcrPath.equals("/node") && (!formActionField.isEditable() || formActionField.isEditableIfNull())) {
         ((UIFormStringInput)uiInput).setValue(node.getName());
@@ -1002,7 +1002,7 @@ public class UIDialogForm extends UIForm {
     if(jcrPath.equals("/node") && nodetype != null ) inputProperty.setNodetype(nodetype);
     properties.put(name, inputProperty);
     propertiesName.put(name, propertyName);
-    fieldNames.put(propertyName, name);
+    fieldNames.put(propertyName, name);    
     Node node = getNode();
     Node childNode = getChildNode();
     if(!isReference) {
@@ -1100,7 +1100,7 @@ public class UIDialogForm extends UIForm {
           uiMulti.setValue(valueList);
           valueListIsSet = true;
         }
-      } else {      
+      } else {
         if(childNode != null) {
           if(childNode.hasProperty(propertyName)) {
             Value[] values = childNode.getProperty(propertyName).getValues();
@@ -1166,12 +1166,11 @@ public class UIDialogForm extends UIForm {
     if(uiInput.getValue() == null) uiInput.setValue(formTextField.getDefaultValue());       
     else uiInput.setEditable(true);
 
-    if(node != null  && !isShowingComponent && !isRemovePreference) {
+    if(node != null && !isShowingComponent && !isRemovePreference) {
       if(jcrPath.equals("/node") && (!formTextField.isEditable() || formTextField.isEditableIfNull())) {
-        uiInput.setEditable(false);       
+        uiInput.setEditable(false);        
       }
-    }    
-    
+    }
     if(node != null && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
       if(jcrPath.equals("/node") && (!formTextField.isEditable() || formTextField.isEditableIfNull())) {
       	String value = uiInput.getValue();
@@ -1387,6 +1386,7 @@ public class UIDialogForm extends UIForm {
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
+
     List<UIFormInputBase<String>> richtextList = getUIFormInputList(name, richtextField, false);
     if(richtextField.isMultiValues()) {
       UIFormMultiValueInputSet uiMulti = findComponentById(name); 

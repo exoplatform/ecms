@@ -6,85 +6,29 @@
    <print>Print this page</print>
   </title>
   <label>
-   <Draft>Draft</Draft>
+   <draft>Draft</draft>
    <print>Print</print>
-   <Preferences>Preferences</Preferences>
-   <Edit>Edit</Edit>   
   </label>
   <msg>
    <no-content>There is no content to show</no-content>
   </msg>
  </UIPresentationContainer>
-
- <UIWelcomeScreen>
-  <label>
-   <WelcomeLabel>Welcome to Single Content Viewer</WelcomeLabel>
-   <WelcomeText>Make your choice</WelcomeText>
-  </label>
-  <action>
-   <Abort>Abort</Abort>
-   <CreateNewContent>Create new content</CreateNewContent>
-   <SelectContent>Select a content</SelectContent>
-  </action>
- </UIWelcomeScreen>
-
- <UINameWebContentForm>
-  <action>
-   <Save>Save</Save>
-   <Abort>Abort</Abort>
-  </action>
-  <label>
-   <name>Title</name>
-   <selectTemplate>Select a template</selectTemplate>
-   <option>
-    <exo:siteBreadcrumb>Site Breadcrumb</exo:siteBreadcrumb>
-    <exo:siteNavigationWebContent>Site Navigation</exo:siteNavigationWebContent>
-    <exo:pictureOnHeadWebcontent>Picture on head layout webcontent</exo:pictureOnHeadWebcontent>
-    <exo:siteSearchBox>Site search box webcontent</exo:siteSearchBox>
-    <exo:webContent>Free layout webcontent</exo:webContent>
-   </option>
-  </label>
- </UINameWebContentForm>
  
-
-
- <UITabPane>
-   <title>
-    <UIContentDialogConfig>Configuration for Single content viewer</UIContentDialogConfig>
-   </title>
-  </UITabPane>
-  
-  <UIContentDialogConfig>
-   <action>
-    <SaveToPortletPreference>Save</SaveToPortletPreference>
-   </action>
-   <label>
-    <ShowTitle>Show title</ShowTitle>
-    <ShowPrintAction>Show print</ShowPrintAction>
-   </label>
-   <msg>
-     <saved-successfully>Your preferences is saved</saved-successfully>
-   </msg>
-  </UIContentDialogConfig>
-  
   <CorrectContentSelectorPopupWindow>
    <title>
-    <UIWelcomeScreen>Welcome to Single content viewer</UIWelcomeScreen>
-    <UINameWebContentForm>Template form</UINameWebContentForm>
-    <UIContentDialogForm>Web content form</UIContentDialogForm>
-    <UIContentSelectorOne>Single content selector panel</UIContentSelectorOne>
+    <UIContentSelectorOne>Select content</UIContentSelectorOne>
    </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
   	 <msg>
-  	 		<AccessControlException>You don't have permission to access edit mode</AccessControlException>
+  	 		<AccessControlException>You don't have permission to access Edit mode</AccessControlException>
   	 </msg>
   </UISingleContentViewerPortlet>
   
   <UISCVContextualRadioBox>
   	<label>
-		<Enable>Enable</Enable>
-		<Disable>Disable</Disable>
+		<Enable>Enabled</Enable>
+		<Disable>Disabled</Disable>
   	</label>
   </UISCVContextualRadioBox>  
   
@@ -104,6 +48,8 @@
     <title>Content Detail Preferences</title>
     <label>
       <Back>Back to previous page</Back>
+      <Edit>Edit</Edit>
+      <Preferences>Preferences</Preferences>
    	  <Title>Content Detail Preferences</Title>
    	  <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
    	  <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
@@ -115,16 +61,16 @@
    	  <ContextCaption>Dynamic Navigation</ContextCaption>
    	  <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
    	  <UISCVParameterInputBox>by</UISCVParameterInputBox>
-   	  <PrintSettingBlock>Print viewer setting</PrintSettingBlock>
-   	  <UISCVPrintPageParameter>URL Parameter</UISCVPrintPageParameter>
-   	  <UISCVConfigPrintPageFormInputSet>Print viewer in page</UISCVConfigPrintPageFormInputSet>
-   	  <LockStatus>Lock</LockStatus>	
+   	  <PrintSettingBlock>Print settings</PrintSettingBlock>
+   	  <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+   	  <UISCVConfigPrintPageFormInputSet>Show in page</UISCVConfigPrintPageFormInputSet>
+						<LockStatus>Lock</LockStatus>						
     </label>
     <help>
-   	  <ContentPathBlock>Please select the source data to display</ContentPathBlock>
-   	  <DisplaySettingBlock>You can determine if you want to show Title/Created date of content also the Option bar to print</DisplaySettingBlock>
-   	  <ContextualHelp>This option allow you to enable/disable the contextual parameter for the shown content of portlet</ContextualHelp>
-   	  <ParameterHelp>Specify the parameter which appear on the URL</ParameterHelp>
+   	  <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic navigation (Advanced mode, see below).</ContentPathBlock>
+   	  <DisplaySettingBlock>You can choose to show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
+   	  <ContextualHelp>Activates the dynamic navigation. The content can be changed dynamically by another based on a URL parameter.</ContextualHelp>
+   	  <ParameterHelp>This parameter will be used to get the content if Dynamic Navigation is activated.</ParameterHelp>
     </help>   
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
@@ -134,20 +80,21 @@
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
   	<title>
-  		<SelectTargetPage>Print viewer in page</SelectTargetPage>
+  		<SelectTargetPage>Show in page</SelectTargetPage>
   	</title>  	
   </UISCVConfigPrintPageFormInputSet>
-		
-		<PublicationStates>
-    <archived>Archivé</archived>
-    <obsolete>Obsolète</obsolete>
-    <unpublished>Non publié</unpublished>
-    <enrolled>Créé</enrolled>
-    <draft>Brouillon</draft>
-    <pending>Rédigé</pending>
-    <approved>Validé</approved>
-    <inreview>En revue</inreview>
-    <staged>Prêt à publier</staged>
-    <published>Publié</published>
+  
+  <PublicationStates>
+    <archived>Archived</archived>
+    <obsolete>Obsolete</obsolete>
+    <unpublished>Unpublished</unpublished>
+    <enrolled>Enrolled</enrolled>
+    <draft>Draft</draft>
+    <pending>Pending</pending>
+    <approved>Approved</approved>
+    <inreview>In Review</inreview>
+    <staged>Staged</staged>
+    <published>Published</published>
   </PublicationStates>
+    
 </bundle>

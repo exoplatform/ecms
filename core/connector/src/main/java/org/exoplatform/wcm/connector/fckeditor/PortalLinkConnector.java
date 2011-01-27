@@ -339,7 +339,7 @@ public class PortalLinkConnector implements ResourceContainer {
     	fileElement.setAttribute("size", "");
     	filesElement.appendChild(fileElement);
     }
-  }
+  }  
 
   /**
    * Gets the page node.

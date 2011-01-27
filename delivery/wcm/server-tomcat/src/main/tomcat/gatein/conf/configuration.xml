@@ -63,22 +63,22 @@
 		</init-params>
 	</component>
 	<external-component-plugins>
-		<!-- The full qualified name of the PortalContainerConfig -->
-		<target-component>org.exoplatform.container.definition.PortalContainerConfig</target-component>
-		<component-plugin>
-			<!-- The name of the plugin -->
-			<name>Disable a PortalContainer</name>
-			<!-- The name of the method to call on the PortalContainerConfig in order to register the changes on the PortalContainerDefinitions -->
-			<set-method>registerDisablePlugin</set-method>
-			<!-- The full qualified name of the PortalContainerDefinitionDisablePlugin -->
-			<type>org.exoplatform.container.definition.PortalContainerDefinitionDisablePlugin</type>
-			<init-params>
-				<!-- The list of the name of the portal containers to disable -->
-				<values-param>
-					<name>names</name>
-					<value>portal</value>
-				</values-param>
-			</init-params>
-		</component-plugin>
-	</external-component-plugins>	    
+	  <!-- The full qualified name of the PortalContainerConfig -->
+	  <target-component>org.exoplatform.container.definition.PortalContainerConfig</target-component>
+	  <component-plugin>
+	  <!-- The name of the plugin -->
+	    <name>Disable a PortalContainer</name>
+		<!-- The name of the method to call on the PortalContainerConfig in order to register the changes on the PortalContainerDefinitions -->
+	    <set-method>registerDisablePlugin</set-method>
+	    <!-- The full qualified name of the PortalContainerDefinitionDisablePlugin -->
+	    <type>org.exoplatform.container.definition.PortalContainerDefinitionDisablePlugin</type>
+	    <init-params>
+	    <!-- The list of the name of the portal containers to disable -->
+	      <values-param>
+	        <name>names</name>
+	        <value>portal</value>
+	      </values-param>
+	    </init-params>
+	  </component-plugin>
+	</external-component-plugins>	
 </configuration>

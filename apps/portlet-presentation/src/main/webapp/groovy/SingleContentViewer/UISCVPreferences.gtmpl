@@ -96,7 +96,7 @@
               </table>
             </fieldset>             
           </div>
-
+          
           <div class="FormContainer">
           <fieldset class="fieldsetPreferences" maxHeight="350">
               <legend class="StyleLegend"><%= _ctx.appRes("UISCVPreferences.label.PrintSettingBlock") %></legend>

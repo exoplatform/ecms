@@ -155,13 +155,13 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
       if (rootTaxonomyName.equals(value)) {
       	taxonomyService.addCategory(currentNode, rootTaxonomyName, "");
       } else {
-      	String[] arrayCategoryPath = String.valueOf(value.toString()).split("/");
-      	StringBuffer categoryPath = new StringBuffer().append("/");
-      	for(int i = 1; i < arrayCategoryPath.length; i++ ) {
-      		categoryPath.append(arrayCategoryPath[i]);
-      		categoryPath.append("/");
-      	}
-      	taxonomyService.addCategory(currentNode, rootTaxonomyName, categoryPath.toString());
+        String[] arrayCategoryPath = String.valueOf(value.toString()).split("/");
+        StringBuffer categoryPath = new StringBuffer().append("/");
+        for(int i = 1; i < arrayCategoryPath.length; i++ ) {
+          categoryPath.append(arrayCategoryPath[i]);
+          categoryPath.append("/");
+        }
+        taxonomyService.addCategory(currentNode, rootTaxonomyName, categoryPath.toString());
       }
       uiJCRExplorer.getCurrentNode().save() ;
       uiJCRExplorer.getSession().save() ;

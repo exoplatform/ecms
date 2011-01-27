@@ -23,6 +23,7 @@ NewsletterManager.prototype.checkBeforeDelete = function(uiSubscriptionsForm, ch
 	return confirm(confirmMess);
 }
 
+
 NewsletterManager.prototype.hide = function() {
 	var ln = eXo.core.DOMUtil.hideElementList.length ;
 	if (ln > 0) {
@@ -52,6 +53,5 @@ NewsletterManager.prototype.show = function(obj, evt) {
 		}	
 		else uiPopupCategory.style.display = "none" ;
 }
-
 
 eXo.ecm.NewsletterManager = new NewsletterManager();

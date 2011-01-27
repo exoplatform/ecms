@@ -28,6 +28,7 @@
         def rowClass = null ;
   	    boolean even = true ;
   	    for (node in sharedQueries) {
+  	      def right=true;
   	      if(even) rowClass = "EvenRow" ;  
   	      else rowClass =  "OddRow" ; 
   	      even = !even ;

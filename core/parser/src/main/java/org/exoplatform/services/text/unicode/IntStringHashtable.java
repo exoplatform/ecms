@@ -54,4 +54,3 @@ public class IntStringHashtable
       return value == null ? defaultValue : value;
    }
 }
-

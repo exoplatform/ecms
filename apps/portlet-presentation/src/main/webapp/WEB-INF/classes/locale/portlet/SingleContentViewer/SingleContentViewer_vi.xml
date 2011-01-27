@@ -6,74 +6,17 @@
    <print>In trang này</print>
   </title>
   <label>
-   <Draft>Nháp</Draft>
+   <draft>Nháp</draft>
    <print>In</print>
-   <Preferences>Tùy chọn</Preferences>
-   <Edit>Hiệu chỉnh</Edit>
   </label>
   <msg>
    <no-content>Không có nội dung nào</no-content>
   </msg>
  </UIPresentationContainer>
-
- <UIWelcomeScreen>
-  <label>
-   <WelcomeLabel>Chào mừng đến với Single Content Viewer</WelcomeLabel>
-   <WelcomeText>Hãy lựa chọn</WelcomeText>
-  </label>
-  <action>
-   <Abort>Hủy</Abort>
-   <CreateNewContent>Tạo nội dung mới</CreateNewContent>
-   <SelectContent>Lựa chọn một nội dung</SelectContent>
-  </action>
- </UIWelcomeScreen>
-
- <UINameWebContentForm>
-  <action>
-   <Save>Lưu</Save>
-   <Abort>Hủy</Abort>
-   <Print>In ấn</Print>
-   <Close>Đóng</Close>
-  </action>
-  <label>
-   <name>Tiêu đề</name>
-   <Back>Trở về</Back>
-   <selectTemplate>Chọn mẫu</selectTemplate>
-   <option>
-    <exo:siteBreadcrumb>Site Breadcrumb</exo:siteBreadcrumb>
-    <exo:siteNavigationWebContent>Site Navigation</exo:siteNavigationWebContent>
-    <exo:pictureOnHeadWebcontent>Picture on head layout webcontent</exo:pictureOnHeadWebcontent>
-    <exo:siteSearchBox>Site search box webcontent</exo:siteSearchBox>
-    <exo:webContent>Free layout webcontent</exo:webContent>
-   </option>
-  </label>
- </UINameWebContentForm>
-
- <UITabPane>
-   <title>
-    <UIContentDialogConfig>Cấu hình cho Single content viewer</UIContentDialogConfig>
-   </title>
-  </UITabPane>
-  
-  <UIContentDialogConfig>
-   <action>
-    <SaveToPortletPreference>Lưu</SaveToPortletPreference>
-   </action>
-   <label>
-    <ShowTitle>Hiển thị tiêu đề</ShowTitle>
-    <ShowPrintAction>Hiển thị biểu tượng in</ShowPrintAction>
-   </label>
-   <msg>
-    <saved-successfully>Tùy chọn của bạn đã được lưu lại</saved-successfully>
-   </msg>
-  </UIContentDialogConfig>
-  
+   
   <CorrectContentSelectorPopupWindow>
    <title>
-    <UIWelcomeScreen>Chào mừng đến với Single content viewer</UIWelcomeScreen>
-    <UINameWebContentForm>Chọn mẫu</UINameWebContentForm>
-    <UIContentDialogForm>Nhập nội dung</UIContentDialogForm>
-    <UIContentSelectorOne>Nhập nội dung</UIContentSelectorOne>
+    <UIContentSelectorOne>Lựa chọn nội dung</UIContentSelectorOne>
    </title>
   </CorrectContentSelectorPopupWindow>
   
@@ -103,6 +46,8 @@
     </action>
     <title>Tùy chọn chi tiết</title>
     <label>
+      <Edit>Hiệu chỉnh</Edit>
+      <Preferences>Tùy chọn</Preferences>
    	  <Title>Tùy chọn chi tiết</Title>
    	  <UISCVShowTitleConfigurationCheckBox>Hiện tiêu đề</UISCVShowTitleConfigurationCheckBox>
    	  <UISCVShowDateConfigurationCheckBox>Hiện ngày tháng</UISCVShowDateConfigurationCheckBox>
@@ -117,7 +62,7 @@
    	  <PrintSettingBlock>Tùy chọn xem bản in</PrintSettingBlock>
    	  <UISCVPrintPageParameter>Tham số URL</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Xem bản in tại</UISCVConfigPrintPageFormInputSet>
-   	  <LockStatus>Khóa</LockStatus>
+						<LockStatus>Khóa</LockStatus>	
 	</label>
     <help>
    	  <ContentPathBlock>Vui lòng lựa chọn dữ liệu nguồn để hiển thị</ContentPathBlock>
@@ -126,7 +71,7 @@
    	  <ParameterHelp>Xác định tham số sử dụng trên URL</ParameterHelp>
     </help> 
   </UISCVPreferences>
-    <UISCVConfigItemPathFormInputSet>
+  <UISCVConfigItemPathFormInputSet>
   	<title>
   		<SelectFolderPath>Lựa chọn đường dẫn</SelectFolderPath>
   	</title>  	

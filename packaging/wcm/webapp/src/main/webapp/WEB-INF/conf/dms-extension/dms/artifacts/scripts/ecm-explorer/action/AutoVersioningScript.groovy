@@ -57,7 +57,7 @@ public class AutoVersioningScript implements CmsScript{
       for(Value value : values) {
         lifeCycleList.add(value.getString());
       }
-      if (lifeCycleList.contains("modify")) {      
+      if (lifeCycleList.contains("modify")) {
         String propertyName = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
         if(!propertyName.equals("jcr:isCheckedOut")) {
           Property changedProp = session.getItem(nodePath) ;

@@ -120,4 +120,3 @@ public class ISO2022JPVerifier extends Verifier
    }
 
 }
-

@@ -253,8 +253,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiFormTabPane = event.getSource() ;
       String nodeType = uiFormTabPane.getUIFormSelectBox(FIELD_NAME).getValue();
-      uiFormTabPane.getUIStringInput(FIELD_LABEL).setValue("");
-      uiFormTabPane.getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setChecked(false);
+      uiFormTabPane.getUIStringInput(FIELD_LABEL).setValue("");      
       uiFormTabPane.initTemplate(nodeType);
       uiFormTabPane.getUIStringInput(FIELD_PERMISSION).setValue("");
       event.getRequestContext().addUIComponentToUpdateByAjax(uiFormTabPane.getParent()) ;

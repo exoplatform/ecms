@@ -374,13 +374,19 @@ public class UICLVPresentation extends UIContainer {
     String scvWith = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
     	scvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
-    link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+    if (node.isNodeType("nt:frozenNode")){
+      String uuid = node.getProperty("jcr:frozenUuid").getString();
+      Node originalNode = node.getSession().getNodeByUUID(uuid);
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
+    } else {
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+    }
     
-	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
-	if (fullPath!=null) {
-	    String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
-		link += "&"+clvBy+"="+fullPath;
-	}
+    String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
+    if (fullPath!=null) {
+        String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+      link += "&"+clvBy+"="+fullPath;
+    }
     
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
@@ -491,14 +497,22 @@ public class UICLVPresentation extends UIContainer {
   	String header = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
   	UICLVContainer clvContainer = this.getAncestorOfType(UICLVContainer.class);
   	boolean isAutoDetect = Boolean.parseBoolean(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION));
-  	if (!isAutoDetect || !clvContainer.isModeByFolder()) return header;
+  	String contextualFolder = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER);
+  	boolean isContextualEnable = UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualFolder);
+    String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+	  String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
+
+  	if (!isAutoDetect || !clvContainer.isModeByFolder() || paramPath==null || !isContextualEnable) return header;
   	
   	try {
-  	  Node folderNode = clvContainer.getFolderNode();
+  		
+  	  Node folderNode =NodeLocation.getNodeByExpression(this.getAncestorOfType(UICLVPortlet.class).getFolderPath()); 
 			if (folderNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE)) {
 				String folderTitle = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE).getString();
 				if (folderTitle != null && folderTitle.length() > 0)
 					header = folderTitle;
+			} else {
+				header = folderNode.getName();
 			}
 		} catch (RepositoryException repositoryException) {		  
 		} catch (Exception e) {
@@ -602,6 +616,7 @@ public class UICLVPresentation extends UIContainer {
 						"&detailParam=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
   }  
   
+	
 	/**
 	 * This method will put the mandatory html code to manage QuickEdit mode
 	 * 
@@ -635,7 +650,7 @@ public class UICLVPresentation extends UIContainer {
 			} 
 
 			if(isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)){
-			   String strEditBundle="edit";
+			   String strEditBundle="Delete";
 			   try {
 			     strEditBundle = portletRequestContext.getApplicationResourceBundle().getString("UICLVPresentation.action.edit");
 			   } catch (MissingResourceException e) { }
@@ -667,7 +682,7 @@ public class UICLVPresentation extends UIContainer {
 		}
 
 		return sb.toString();
-	}
+	}		
 	
   /**
    * The listener interface for receiving refreshAction events.
@@ -677,8 +692,7 @@ public class UICLVPresentation extends UIContainer {
    * component's <code>addRefreshActionListener<code> method. When
    * the refreshAction event occurs, that object's appropriate
    * method is invoked.
-   * 
-   * @see RefreshActionEvent
+   *
    */
   public static class RefreshActionListener extends EventListener<UICLVPresentation> {
     /*

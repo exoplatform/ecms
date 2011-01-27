@@ -32,4 +32,3 @@ public interface Comparator<T, V>
    public int compareValue();
 
 }
-

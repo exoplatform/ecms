@@ -120,4 +120,3 @@ public class EUCTWVerifier extends Verifier
    }
 
 }
-

@@ -195,4 +195,3 @@ public class TidyToken extends Factory<NodeImpl>
    }
 
 }
-

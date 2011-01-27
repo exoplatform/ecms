@@ -423,6 +423,16 @@
                     </field>
                   </object>
                 </value>
+								<value>
+                  <object type="org.exoplatform.services.organization.OrganizationConfig$MembershipType">
+                    <field name="type">
+                      <string>*</string>
+                    </field>
+                    <field name="description">
+                      <string>Any membership type</string>
+                    </field>
+                  </object>
+                </value>
               </collection>
             </field>
             

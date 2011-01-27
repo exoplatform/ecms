@@ -170,25 +170,25 @@
 }
 
 .UIJCRExplorerPortlet .DriveNameInput .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid {
-  width: 100%;
+  width: auto;
 }
 
 .UIJCRExplorerPortlet .SelectNodePath .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid {
-  width: 100%;
+  width: auto;
 }
 
 .UIJCRExplorerPortlet .DriveNameInput .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td.FieldLabel {
  	padding: 4px 8px 4px 0px; /* orientation=lt */
  	padding: 4px 0px 4px 8px; /* orientation=rt */
  	_width: 120px;
-	width: 250px;
+	width: 148px;
 }
 
 .UIJCRExplorerPortlet .SelectNodePath .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td.FieldLabel {
  	padding: 4px 8px 4px 0px; /* orientation=lt */
  	padding: 4px 0px 4px 8px; /* orientation=rt */
  	_width: 120px;
-	width: 250px;
+	width: 148px;
 }
 
 
@@ -385,9 +385,9 @@
 .UIJCRExplorerPortlet .UIListGrid .IconLocked {
 	background: url('DefaultSkin/background/IconLocked.gif') no-repeat right top; /* orientation=lt */
 	background: url('DefaultSkin/background/IconLocked.gif') no-repeat left top; /* orientation=rt */
- width: 20px;
- height: 16px;
- float: left;
+  width: 20px;
+  height: 16px;
+  float: left;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .LineLeft {
@@ -1143,6 +1143,7 @@
   bottom: 0;
 }
 
+
 /*===========================================UIRightClickPopupMenu===========================================*/
 .UIRightClickPopupMenu .MenuIcon {
 	line-height:22px;
@@ -1333,8 +1334,6 @@
 .UIJCRExplorer .UIDrivesArea .UIDriversAreaContainer .ClearBoth{
 	clear: both;
 }
-
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .FileNameLabel {
-  overflow: hidden;
+ overflow: hidden;
 }
-

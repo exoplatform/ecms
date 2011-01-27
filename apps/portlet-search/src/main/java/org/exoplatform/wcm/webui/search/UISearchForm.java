@@ -128,13 +128,14 @@ public class UISearchForm extends UIForm {
 		return templatePath;
 	}
 
-	public void setKeyword() {
-		PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
-		String keyword = portalRequestContext.getRequestParameter("keyword");
-		if(keyword != null && keyword.length() > 0) {
-			getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
-		}
-	}
+	 public void setKeyword() {
+    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+    String keyword = portalRequestContext.getRequestParameter("keyword");
+    if(keyword != null && keyword.length() > 0) {
+      getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
+    }
+   }
+	
 	/*
 	 * (non-Javadoc)
 	 * @see

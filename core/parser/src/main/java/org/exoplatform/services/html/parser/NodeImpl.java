@@ -100,4 +100,3 @@ public class NodeImpl extends HTMLNode
    }
 
 }
-

@@ -98,7 +98,6 @@
 /*############################## -- End UIViewBar -- ##############################*/
 /*############################## -- Begin UIViewBar -- ##############################*/
 
-
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar {
   border-bottom: solid 1px #b7b7b7;
   background: url('DefaultSkin/background/LineDecorator1x30.gif') repeat-x center center;
@@ -482,7 +481,7 @@
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .TblAddressBar{
 	table-layout: fixed; 
 	width: 99%; 
-	_width: auto; 
+	_width: auto; 	
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .Block .IconFileExplorer{

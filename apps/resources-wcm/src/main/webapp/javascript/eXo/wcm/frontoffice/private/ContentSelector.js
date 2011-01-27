@@ -586,7 +586,7 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node)+'</a>';
+		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node+'</a>';
 		
 		if(i > 13) {
 			var numberRecords = 0;
@@ -767,7 +767,7 @@ EcmContentSelector.prototype.insertMultiContent = function(operation, currentpat
 		var nodeContent = eXo.core.DOMUtil.findFirstDescendantByClass(rowsContent[i], "a", "Item");
 		if(nodeContent) {
 			var path = nodeContent.getAttribute("path");
-			strContent +=  path+";";
+			strContent += encodeURIComponent(path) + ";";
 		}
 	}
 	var action = rws.getAttribute("action");
@@ -807,7 +807,7 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'">'+path+'</a>';
+	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'">'+decodeURIComponent(path)+'</a>';
 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 	this.insertMultiContent("SaveTemporary", path);	
 };

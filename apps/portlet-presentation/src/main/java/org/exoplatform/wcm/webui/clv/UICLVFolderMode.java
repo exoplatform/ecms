@@ -24,6 +24,7 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
+
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
@@ -116,7 +117,8 @@ public class UICLVFolderMode extends UICLVContainer {
     		(folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
     //encoding
     String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
-    return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
+    return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
+        Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
   }
   /**
 	 * Gets the bar info show.

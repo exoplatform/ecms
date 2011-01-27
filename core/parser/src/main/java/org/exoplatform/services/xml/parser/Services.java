@@ -37,4 +37,3 @@ public class Services
    static ThreadSoftRef<RefsEncoder> ENCODER = new ThreadSoftRef<RefsEncoder>(RefsEncoder.class);
 
 }
-

@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms-core</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <version>2.1.2-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-core-ext</artifactId>
   <name>eXo DMS webui ext</name>
@@ -36,14 +36,17 @@
         </includes>
       </resource>
     </resources>
-    <testResources>      
+    <testResources>
       <testResource>
-        <directory>src/test/resources</directory>
-								<includes>
+        <directory>src/test/java</directory>
+        <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
           <include>**/*.jstmpl</include>
         </includes>
+      </testResource>
+      <testResource>
+        <directory>src/test/resources</directory>
       </testResource>
     </testResources>
   </build>

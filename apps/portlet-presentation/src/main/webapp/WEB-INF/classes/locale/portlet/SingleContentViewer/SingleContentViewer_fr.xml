@@ -6,134 +6,88 @@
    <print>Imprimer cette page</print>
   </title>
   <label>
-   <Draft>brouillon</Draft>
+   <draft>brouillon</draft>
    <print>Imprimer</print>
-   <Preferences>Preferences</Preferences>   
-   <Edit>Edit</Edit>
   </label>
   <msg>
-   <no-content>Il n'ya pas de contenu à afficher</no-content>
+   <no-content>Il n'y a pas de contenu à afficher</no-content>
   </msg>
  </UIPresentationContainer>
-
- <UIWelcomeScreen>
-  <label>
-   <WelcomeLabel>Bienvenue dans Single Content Viewer</WelcomeLabel>
-   <WelcomeText>Faites votre choix</WelcomeText>
-  </label>
-  <action>
-   <Abort>Annuler</Abort>
-   <CreateNewContent>Créer un nouveau contenu</CreateNewContent>
-   <SelectContent>Sélectionnez un contenu</SelectContent>
-  </action>
- </UIWelcomeScreen>
-
- <UINameWebContentForm>
-  <action>
-   <Save>Sauver</Save>
-   <Abort>Annuler</Abort>
-  </action>
-  <label>
-   <name>Titre</name>
-   <selectTemplate>Sélectionnez un modèle</selectTemplate>
-   <option>
-    <exo:siteBreadcrumb>Site Breadcrumb</exo:siteBreadcrumb>
-    <exo:siteNavigationWebContent>Site Navigation</exo:siteNavigationWebContent>
-    <exo:pictureOnHeadWebcontent>Picture on head layout webcontent</exo:pictureOnHeadWebcontent>
-    <exo:siteSearchBox>Site search box webcontent</exo:siteSearchBox>
-    <exo:webContent>Free layout webcontent</exo:webContent>
-   </option>
-  </label>
- </UINameWebContentForm>
-
- <UITabPane>
-   <title>
-    <UIContentDialogConfig>Configuration pour Single content viewer</UIContentDialogConfig>
-   </title>
-  </UITabPane>
-  
-  <UIContentDialogConfig>
-   <action>
-    <SaveToPortletPreference>Sauver</SaveToPortletPreference>
-   </action>
-   <label>
-    <ShowTitle>Afficher le titre</ShowTitle>
-    <ShowPrintAction>Afficher l'imprimer</ShowPrintAction>
-   </label>
-   <msg>
-    <saved-successfully>Vos préférences sont enregistrées</saved-successfully>
-   </msg>
-  </UIContentDialogConfig>
-  
   <CorrectContentSelectorPopupWindow>
    <title>
-    <UIWelcomeScreen>Bienvenue dans Single content viewer</UIWelcomeScreen>
-    <UINameWebContentForm>Suivant un modèle</UINameWebContentForm>
-    <UIContentDialogForm>Web content form</UIContentDialogForm>
-    <UIContentSelectorOne>Sélectionnez un contenu</UIContentSelectorOne>
+    <UIContentSelectorOne>Choisissez un dossier</UIContentSelectorOne>
    </title>
   </CorrectContentSelectorPopupWindow>
-  
   <UISingleContentViewerPortlet>
   	 <msg>
-  	 		<AccessControlException>Vous n'avez pas la permission d'accéder à modifier le mode</AccessControlException>
+  	 		<AccessControlException>Vous n'avez pas la permission d'accéder au mode d'édition</AccessControlException>
   	 </msg>
   </UISingleContentViewerPortlet>
   <UISCVContextualRadioBox>
   	<label>
-		<Enable>Enable</Enable>
-		<Disable>Disable</Disable>
+		<Enable>Activé</Enable>
+		<Disable>Désactivé</Disable>
   	</label>
   </UISCVContextualRadioBox>  
   
   <UIPreferencesPopupWindows>
 	<title>
-		<UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+		<UISCVPreferences>Préférences du contenu</UISCVPreferences>
 	</title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-     <Save>Save</Save>
-     <Abort>Abort</Abort>
-     <Cancel>Cancel</Cancel>
-     <Print>Print</Print>
-     <Close>Close</Close>
+     <Save>Sauver</Save>
+     <Abort>Annuler</Abort>
+     <Cancel>Annuler</Cancel>
+     <Print>Imprimer</Print>
+     <Close>Fermer</Close>
     </action>
-    <title>Content Detail Preferences</title>
+    <title>Préférences du contenu</title>
     <label>
-      <Back>Back to previous page</Back>
-   	  <Title>Content Detail Preferences</Title>
-   	  <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
-   	  <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
-   	  <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
-   	  <DisplaySettingBlock>Display settings</DisplaySettingBlock>
-   	  <ContentPathBlock>Content Selection</ContentPathBlock>
-   	  <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-   	  <Advance>Advance</Advance>
-   	  <ContextCaption>Dynamic Navigation</ContextCaption>
-   	  <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
-   	  <UISCVParameterInputBox>by</UISCVParameterInputBox>
-   	  <PrintSettingBlock>Print viewer setting</PrintSettingBlock>
-   	  <UISCVPrintPageParameter>URL Parameter</UISCVPrintPageParameter>
-   	  <UISCVConfigPrintPageFormInputSet>Print viewer in page</UISCVConfigPrintPageFormInputSet>
-   	  <LockStatus>Verrouillage</LockStatus>
+      <Back>Retour à la page précédente</Back>
+      <Edit>Editer</Edit>
+      <Preferences>Préférences</Preferences>
+   	  <Title>Préférences du contenu</Title>
+   	  <UISCVShowTitleConfigurationCheckBox>Afficher le titre</UISCVShowTitleConfigurationCheckBox>
+   	  <UISCVShowDateConfigurationCheckBox>Afficher la date</UISCVShowDateConfigurationCheckBox>
+   	  <UISCVShowOptionBarConfigurationCheckBox>Afficher la barre d'options</UISCVShowOptionBarConfigurationCheckBox>
+   	  <DisplaySettingBlock>Paramètres d'affichage</DisplaySettingBlock>
+   	  <ContentPathBlock>Sélection de contenu</ContentPathBlock>
+   	  <UISCVConfigItemPathFormInputSet>Chemin du contenu</UISCVConfigItemPathFormInputSet>
+   	  <Advance>Avancé</Advance>
+   	  <ContextCaption>Navigation Dynamique</ContextCaption>
+   	  <UISCVContextualRadioBox>Contenu Contextuel</UISCVContextualRadioBox>
+   	  <UISCVParameterInputBox>par</UISCVParameterInputBox>
+   	  <PrintSettingBlock>Configuration d'impression</PrintSettingBlock>
+   	  <UISCVPrintPageParameter>Avec</UISCVPrintPageParameter>
+   	  <UISCVConfigPrintPageFormInputSet>Afficher dans la page</UISCVConfigPrintPageFormInputSet>
+						<LockStatus>Verrouillage</LockStatus>	
     </label>
     <help>
-   	  <ContentPathBlock>Please select the source data to display</ContentPathBlock>
-   	  <DisplaySettingBlock>You can determine if you want to show Title/Created date of content also the Option bar to print</DisplaySettingBlock>
-   	  <ContextualHelp>This option allow you to enable/disable the contextual parameter for the shown content of portlet</ContextualHelp>
-   	  <ParameterHelp>Specify the parameter which appear on the URL</ParameterHelp>
+      <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique (mode Avancé, voir ci-dessous)</ContentPathBlock>
+      <DisplaySettingBlock>Vous pouvez choisir d'afficher ou de cacher la barre d'options avec le lien "Imprimer". L'affichage du titre et de la date sont également optionnels.</DisplaySettingBlock>
+      <ContextualHelp>Active la navigation dynamique. Le contenu peut être changé dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
+      <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
     </help>  
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
   	<title>
-  		<SelectFolderPath>Select folder path</SelectFolderPath>
+  		<SelectFolderPath>Choisissez un dossier</SelectFolderPath>
   	</title>  	
   </UISCVConfigItemPathFormInputSet>
-  <UISCVConfigPrintPageFormInputSet>
-  	<title>
-  		<SelectTargetPage>Print viewer in page</SelectTargetPage>
-  	</title>  	
-  </UISCVConfigPrintPageFormInputSet>
-
+  
+  <PublicationStates>
+    <archived>Archivé</archived>
+    <obsolete>Obsolète</obsolete>
+    <unpublished>Non publié</unpublished>
+    <enrolled>Créé</enrolled>
+    <draft>Brouillon</draft>
+    <pending>Rédigé</pending>
+    <approved>Validé</approved>
+    <inreview>En revue</inreview>
+    <staged>Prêt à publier</staged>
+    <published>Publié</published>
+  </PublicationStates>
+  
 </bundle>

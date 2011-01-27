@@ -154,7 +154,7 @@
 										if(att != null) {
 			  							wsName = att.getSession().getWorkspace().getName();
 			  							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
-			  							def viewAttachmentLink = uicomponent.getAttachmentURL(att, params);
+			  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
 			  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
 										%>
 											<div class="AttachmentsContainer">	

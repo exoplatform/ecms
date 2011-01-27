@@ -64,4 +64,3 @@ class CharsSequence
       return newValues;
    }
 }
-

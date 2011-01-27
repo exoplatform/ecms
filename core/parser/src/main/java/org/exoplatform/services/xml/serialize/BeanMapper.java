@@ -37,4 +37,3 @@ public interface BeanMapper
 
    public <T> void toBean(Class<T> clazz, T object, XMLNode node) throws Exception;
 }
-

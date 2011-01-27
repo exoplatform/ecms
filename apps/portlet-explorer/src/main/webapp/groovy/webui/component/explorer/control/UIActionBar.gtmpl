@@ -18,6 +18,7 @@
   def uniqueId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
 	rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkAvailableSpace');
+  rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.checkTabSize');
   def tabs = uicomponent.getTabList() ;
   def actionBarStyle = "";
   def displayTabContainer = "";
@@ -53,7 +54,7 @@
 				      tabStyle = "SelectedActionBarTab";
 				    }
 				    def tabName = _ctx.appRes(uicomponent.getId() + ".obtion." + tab);
-				    def tabSize = tabName.length() * 4 + 40;
+				    def tabSize = tabName.length()*3 + 40;
 				%>
 					    <div class="UITab" style="display: block;">
 						    <div class="$tabStyle">
@@ -100,7 +101,7 @@
   		<div class="UIViewBarContainer" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
-				<a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
+  		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
   		  <%}
  			  if(uicomponent.isShowSaveSession()) {%>
   	      <a class="SaveSessionButton" href="<%=uicomponent.event("SaveSession")%>" title="<%=_ctx.appRes("UIViewBar.label.saveSession")%>"></a>

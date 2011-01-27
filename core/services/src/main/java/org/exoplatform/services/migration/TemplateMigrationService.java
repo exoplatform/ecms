@@ -16,17 +16,6 @@
  */
 package org.exoplatform.services.migration;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-
 import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -35,6 +24,18 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
+
+import javax.jcr.Item;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Migrate Templates from an old structure to a new one
@@ -55,7 +56,7 @@ public class TemplateMigrationService implements Startable {
   }
 
   public void start() {
-    if (ProductVersions.getCurrentVersionAsInt()==ProductVersions.WCM_2_2_0_NUM) {
+    if (ProductVersions.getCurrentVersionAsInt()==ProductVersions.WCM_2_1_2_NUM) {
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
       try {
         ManageableRepository repository = repositoryService.getCurrentRepository();

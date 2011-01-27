@@ -16,27 +16,15 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.sidebar ;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.ext.UIExtension;
-import org.exoplatform.webui.ext.UIExtensionManager;
-import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
  * Created by The eXo Platform SARL
@@ -47,21 +35,16 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/sidebar/UISideBar.gtmpl",
     events = {
-        @EventConfig(listeners = UISideBar.CloseActionListener.class)
+        @EventConfig(listeners = UISideBar.CloseActionListener.class),
+        @EventConfig(listeners = UISideBar.ExplorerActionListener.class),
+        @EventConfig(listeners = UISideBar.RelationActionListener.class),
+        @EventConfig(listeners = UISideBar.TagExplorerActionListener.class),
+        @EventConfig(listeners = UISideBar.ClipboardActionListener.class),
+        @EventConfig(listeners = UISideBar.SavedSearchesActionListener.class)
     }
 )
 public class UISideBar extends UIContainer {
   private String currentComp;
-  
-  private static final Log                 LOG                      = ExoLogger.getLogger("dms.UISideBar");
-  
-
-  public static final String               EXTENSION_TYPE = "org.exoplatform.ecm.dms.UISideBar";
-
-  private List<UIAbstractManagerComponent> managers       = Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
-
-  private String selectedComp;
-  
   
   public UISideBar() throws Exception {
     addChild(UITreeExplorer.class, null, null).setRendered(false);
@@ -79,16 +62,6 @@ public class UISideBar extends UIContainer {
     return currentComp; 
   }
   
-  public String getSelectedComp() {
-    if(selectedComp == null || selectedComp.length() == 0) 
-      selectedComp = "Explorer";
-    return selectedComp;
-  }
-  
-  public void setSelectedComp(String selectedComp) {
-    this.selectedComp = selectedComp;
-  }
-  
   public void updateSideBarView() throws Exception {
     boolean showFilterBar = getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar();
     getChild(UIAllItems.class).setRendered(showFilterBar);
@@ -96,15 +69,17 @@ public class UISideBar extends UIContainer {
   }
      
   
-  public void setCurrentComp(String currentComp) {
-    this.currentComp = currentComp;
-  }
+  public void setCurrentComp(String currentComp) { this.currentComp = currentComp; }
   
   public void renderSideBarChild(String[] arrId) throws Exception {
     for(String id : arrId) {
       setRenderedChild(id); // Need to remove this because we've already called updateSideBarView() but need Checking
       renderChild(id);
     }
+  }
+  
+  public boolean isSystemWorkspace() throws Exception {
+    return getAncestorOfType(UIJCRExplorer.class).isSystemWorkspace();
   }
   
   public String getRepository() { 
@@ -122,56 +97,50 @@ public class UISideBar extends UIContainer {
       uiJcrExplorerContainer.setRenderedChild(UIJCRExplorer.class);      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);      
     }
-  } 
-
-  private List<UIExtension> getUIExtensionList() {
-    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-    return manager.getUIExtensions(EXTENSION_TYPE);
-  }
-  
-  public synchronized void initialize() throws Exception {
-    List<UIExtension> extensions = getUIExtensionList();
-    if (extensions == null) {
-      return;
-    }
-    managers.clear();
-    Map<String, Object> context = new HashMap<String, Object>();
-    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
-    context.put(UIJCRExplorer.class.getName(), uiExplorer);
-    for (UIExtension extension : extensions) {
-      UIComponent component = addUIExtension(extension, context);
-      if (component != null && !managers.contains(component)) {
-        managers.add((UIAbstractManagerComponent) component);
-      }
-    }
-  }
-  
-  private synchronized UIComponent addUIExtension(UIExtension extension, Map<String, Object> context) throws Exception {
-    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-    UIComponent component = manager.addUIExtension(extension, context, this);
-    if (component instanceof UIAbstractManagerComponent) {
-      // You can access to the given extension and the extension is valid
-      UIAbstractManagerComponent uiAbstractManagerComponent = (UIAbstractManagerComponent) component;
-      uiAbstractManagerComponent.setUIExtensionName(extension.getName());
-      uiAbstractManagerComponent.setUIExtensionCategory(extension.getCategory());
-      return component;
-    } else if (component != null) {
-      // You can access to the given extension but the extension is not valid
-      LOG.warn("All the extension '" + extension.getName() + "' of type '" + EXTENSION_TYPE
-          + "' must be associated to a component of type " + UIAbstractManagerComponent.class);
-      removeChild(component.getClass());
-    }
-    return null;
-  }
-  
-  public List<UIAbstractManagerComponent> getManagers() {
-    List<UIAbstractManagerComponent> managers = new ArrayList<UIAbstractManagerComponent>();
-    managers.addAll(this.managers);
-    return managers;
   }
 
-  public void unregister(UIAbstractManagerComponent component) {
-    managers.remove(component);
+  static public class ExplorerActionListener extends EventListener<UISideBar> {
+    public void execute(Event<UISideBar> event) throws Exception {
+      UISideBar uiSideBar = event.getSource();
+      UIJCRExplorer uiExplorer = uiSideBar.getAncestorOfType(UIJCRExplorer.class);
+      uiExplorer.setSelectNode(uiExplorer.getCurrentPath());
+      uiExplorer.setIsViewTag(false);
+      uiSideBar.setCurrentComp(uiSideBar.getChild(UITreeExplorer.class).getId());
+      uiExplorer.updateAjax(event);
+    }
+  }
+
+  static public class RelationActionListener extends EventListener<UISideBar> {
+    public void execute(Event<UISideBar> event) throws Exception {
+      UISideBar uiSideBar = event.getSource();
+      uiSideBar.setCurrentComp(uiSideBar.getChild(UIViewRelationList.class).getId());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
+    }
   }
   
+  static public class TagExplorerActionListener extends EventListener<UISideBar> {
+    public void execute(Event<UISideBar> event) throws Exception {
+      UISideBar uiSideBar = event.getSource();
+      UIJCRExplorer uiExplorer = uiSideBar.getAncestorOfType(UIJCRExplorer.class);
+      uiExplorer.setCurrentState();
+      uiSideBar.setCurrentComp(uiSideBar.getChild(UITagExplorer.class).getId());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
+    }
+  }
+  
+  static public class ClipboardActionListener extends EventListener<UISideBar> {
+    public void execute(Event<UISideBar> event) throws Exception {
+      UISideBar uiSideBar = event.getSource();
+      uiSideBar.setCurrentComp(uiSideBar.getChild(UIClipboard.class).getId());      
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
+    }
+  }
+  
+  static public class SavedSearchesActionListener extends EventListener<UISideBar> {
+    public void execute(Event<UISideBar> event) throws Exception {
+      UISideBar uiSideBar = event.getSource();
+      uiSideBar.setCurrentComp(uiSideBar.getChild(UISavedSearches.class).getId());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
+    }
+  }    
 }

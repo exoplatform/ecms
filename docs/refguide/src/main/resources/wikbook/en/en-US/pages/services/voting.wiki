@@ -1,0 +1,9 @@
+This service is used to manage the vote feature in WCM
+
+Package org.exoplatform.services.cms.voting.VotingService;
+
+|| *Method* || *Return* || *Prototype* || *Description* ||
+| *{{vote}}* | {{void}} | {{vote(Node document, double rate, String userName, String language) throws Exception}} | Voting the document is specified by the node by giving the rate, username, and language params. Any language that belongs to this document can be voted. This method uses variables to store values which are voted by user for all kind languages of this document {example}{example} @param document:       The node document for voting {example}{example} @param rate:           The number rate for voting {example}{example} @param userName:       The username of current user is voting. {example}{example} @param language:        The language of this document for voting {example}{example} @see                   Node {example}{example} @throws Exception |
+| *{{getVoteTotal}}* | {{long}} | {{getVoteTotal(Node node) throws Exception}} | Gets total voting for all kind languages of this document is specified by node {example}{example} @param node:            The node document is specified to get total voting {example}{example} @see                   Node {example}{example} @return {example}{example} @throws Exception |
+| *{{isVoted}}* | {{boolean}} | {{isVoted(Node node, String userName, String language) throws Exception}} | Check the document is voted or not {example}{example} @param node: The document {example}{example} @param userName: The voted user {example}{example} @param language: the voted language |
+

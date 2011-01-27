@@ -113,7 +113,7 @@
 									} catch (Exception e) {											
 									}
 									String webDavPath = data.getPath().contains("%27") ? data.getPath().replaceAll("%27","%2527") : data.getPath();
-							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+repository+"','"+ preferenceWS+ "','" +data.getPath()+"','"+mimeType+"')";
+							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+portalName+"','"+restContextName+"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";				  					  					  	
 				        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\">" ;	        
 							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
 							  	strActs += 		"</a>" ;				  	
@@ -122,7 +122,7 @@
 							  	def dataTarget = data;
 							  	if(uicomponent.isSymLink(data)) dataTarget = Utils.getNodeSymLink(data);
 							  	if (dataTarget != null) {
-  							  	String link = serverUrl + "/rest-ecmdemo/jcr/" + repository + "/" + preferenceWS + data.getPath();
+  							  	String link = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + preferenceWS + dataTarget.getPath(); 
   				        	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\"  style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
   							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
   							  	strActs += 		"</a>" ;
@@ -142,27 +142,27 @@
                   strActs += "</a>" ;
                   }            
                 }
-              if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {  	               
-	               String clipboardLink = serverUrl + "/" + portalName + "/rest-ecmdemo/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+              if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {  
+              	String clipboardLink = serverUrl + "/" + portalName + "/rest-ecmdemo/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
 	               strActs +=	"<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
 	               strActs +=  "	<div class='MenuURLIcon GetURL16x16Icon'>" ;
 	               strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
 	               strActs +=  "	</div>" ;
 	               strActs +=  "</a>";
               }
-               strActs += "</div>" ;
+              strActs += "</div>" ;
                 
-               def rightClickMenu = "" ;
- 	 	 	 	       Boolean isLocked = false;
- 	 	 	 	       String lockedLabel = "";
- 	 	 	 	       String isFavourite = "false";
- 	 	 	 	       String isInTrash = "false";
- 	 	 	 	       String isMediaType = "false";
- 	 	 	 	       String isTrashHome = "false";
- 	 	 	 	       if (data.isLocked()) {
- 	 	 	 	         isLocked = true;
- 	 	 	 	         lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
- 	 	 	 	       }
+              def rightClickMenu = "" ;
+              Boolean isLocked = false;
+              String lockedLabel = "";
+              String isFavourite = "false";
+              String isInTrash = "false";
+              String isMediaType = "false";
+              String isTrashHome = "false";
+              if (data.isLocked()) {
+                isLocked = true;
+                lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
+              }
        				//data.getProperty("exo:favouriter");    
                if (uicomponent.isFavouriter(data)) isFavourite = "true";
                if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
@@ -186,12 +186,12 @@
 							        <%if(uicomponent.isSymLink(data)) {%>
 							          <div class="Link"></div>
 							        <%}%>
-							        <img src="$thumbnailImage" onerror='if(!eXo.ecm.UISimpleView) return; eXo.ecm.UISimpleView.errorCallback(this);' onload="this.parentNode.style.backgroundImage = 'url(' + this.src + ')';this.style.display = 'none';" />
+							        <img src="$thumbnailImage" onerror='eXo.ecm.UISimpleView.errorCallback(this);' onload="this.parentNode.style.backgroundImage = 'url(' + this.src + ')';this.style.display = 'none';" />
 							    </div>
 							    <div style="display: none;" class="Icon48x48 default48x48Icon <%=Utils.getNodeTypeIcon(data, "48x48Icon")%>">
-							      	<%if(isLocked) {%>
-							      	  <div class="IconLocked"></div>
-							      	<%}%>
+                      <%if(isLocked) {%>
+                        <div class="IconLocked"></div>
+                      <%}%>
 							      	<%if(uicomponent.isSymLink(data)) {%>
 							          <div class="Link"></div>
 							        <%}%>

@@ -158,7 +158,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       Value value = valueFactory.createValue(selectedRevision);
       Value liveRevision = null;
       if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getValue();
+      	liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+                               .getValue();
       }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
@@ -188,7 +189,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       Value value = valueFactory.createValue(selectedRevision);
       Value liveRevision = null;
       if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getValue();
+      	liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+                               .getValue();
       }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
         node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
@@ -324,7 +326,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       revisionsMap.put(liveVersion.getUUID(), liveRevisionData);
       addRevisionData(node, revisionsMap.values());
     }
-    node.setProperty("publication:lastUser", userId);
+
+    if (!"__system".equals(userId)) {
+      node.setProperty("publication:lastUser", userId);
+    }
 
     if (!node.isNew())
       node.save();
@@ -565,8 +570,6 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     if (context==null || context.get(WCMComposer.FILTER_MODE).equals(WCMComposer.MODE_EDIT) ||
         PortletMode.EDIT.toString().equals(context.get(WCMComposer.PORTLET_MODE)))
       return node;
-    
-    
 
     // if current mode is live mode
     Node liveNode = getLiveRevision(node);

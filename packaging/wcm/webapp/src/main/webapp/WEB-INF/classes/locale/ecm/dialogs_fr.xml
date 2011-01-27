@@ -806,4 +806,13 @@
      </label> 
    </dialog>
   </EnableVersioning>
+  <AutoVersioning>
+   <dialog>
+     <label>
+     		<isDeep>Récursif</isDeep>
+							<nodetypes>Types de noeuds</nodetypes> 
+							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+     </label> 
+   </dialog>
+  </AutoVersioning>
 </bundle>

@@ -28,4 +28,3 @@ public class TextConfig
 {
    public static String CHARSET = "utf-8";
 }
-

@@ -23,7 +23,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
-import org.exoplatform.services.wcm.newsletter.NewsletterConstant;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterCategoryHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterManageUserHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterSubscriptionHandler;
@@ -144,10 +143,10 @@ public class UISubscriptions extends UIForm {
    * 
    * @return the number of user
    */
-  @SuppressWarnings({ "unused", "deprecation" })
+  @SuppressWarnings({ "unused" })
   private int getNumberOfUser(String subscriptionName){
     return userHandler.getQuantityUserBySubscription(
-                                                     Utils.getSessionProvider(),
+                                                     WCMCoreUtils.getUserSessionProvider(),
                                                      portalName,
                                                      this.categoryConfig.getName(),
                                                      subscriptionName);
@@ -158,7 +157,6 @@ public class UISubscriptions extends UIForm {
    * 
    * @return the list subscription
    */
-  @SuppressWarnings("unused")
   public List<NewsletterSubscriptionConfig> getListSubscription(){    
     return listSubs;
   }   
@@ -168,7 +166,6 @@ public class UISubscriptions extends UIForm {
    * 
    * @return the list subscription
    */
-  @SuppressWarnings("unused")
   public void updateListSubscription(){    
 	listSubs = new ArrayList<NewsletterSubscriptionConfig>();
 	try{
@@ -190,10 +187,10 @@ public class UISubscriptions extends UIForm {
    * 
    * @return the number of waiting newsletter
    */
-  @SuppressWarnings({ "unused", "deprecation" })
+  @SuppressWarnings({ "unused" })
   private long getNumberOfWaitingNewsletter(String subscriptionName){
     try{
-      return subscriptionHandler.getNumberOfNewslettersWaiting(Utils.getSessionProvider(), portalName, this.categoryConfig.getName(), subscriptionName);
+      return subscriptionHandler.getNumberOfNewslettersWaiting(WCMCoreUtils.getUserSessionProvider(), portalName, this.categoryConfig.getName(), subscriptionName);
     }catch(Exception ex){
       return 0;
     }
@@ -301,13 +298,11 @@ public class UISubscriptions extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    @SuppressWarnings("deprecation")
 	public void execute(Event<UISubscriptions> event) throws Exception {
       UISubscriptions subsriptions = event.getSource();
       NewsletterManagerService newsletterManagerService = subsriptions.getApplicationComponent(NewsletterManagerService.class);
       NewsletterCategoryHandler categoryHandler = newsletterManagerService.getCategoryHandler();
-      NewsletterConstant.removeAccessPermission(subsriptions.categoryConfig.getModerator().split(","));
-      categoryHandler.delete(Utils.getSessionProvider(), NewsLetterUtil.getPortalName(), subsriptions.categoryConfig.getName());
+      categoryHandler.delete(WCMCoreUtils.getUserSessionProvider(), NewsLetterUtil.getPortalName(), subsriptions.categoryConfig.getName());
       UINewsletterManagerPortlet newsletterManagerPortlet = subsriptions.getAncestorOfType(UINewsletterManagerPortlet.class);
       UICategories categories = newsletterManagerPortlet.getChild(UICategories.class);
       categories.setRendered(true);
@@ -437,7 +432,6 @@ public class UISubscriptions extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    @SuppressWarnings("deprecation")
 	public void execute(Event<UISubscriptions> event) throws Exception {
       UISubscriptions uiSubscription = event.getSource();
       String subId = uiSubscription.getChecked();
@@ -451,7 +445,7 @@ public class UISubscriptions extends UIForm {
       UINewsletterManagerPortlet newsletterManagerPortlet = uiSubscription.getAncestorOfType(UINewsletterManagerPortlet.class);
       UINewsletterEntryManager newsletterManager = newsletterManagerPortlet.getChild(UINewsletterEntryManager.class);
       newsletterManager.setRendered(true);
-      SessionProvider sessionProvider = Utils.getSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       newsletterManager.setCategoryConfig(
                         uiSubscription.categoryHandler.getCategoryByName(
                                                                          sessionProvider, 
@@ -492,7 +486,7 @@ public class UISubscriptions extends UIForm {
       UINewsletterManagerPortlet newsletterManagerPortlet = uiSubscriptions.getAncestorOfType(UINewsletterManagerPortlet.class);
       UINewsletterEntryManager newsletterManager = newsletterManagerPortlet.getChild(UINewsletterEntryManager.class);
       newsletterManager.setRendered(true);
-      SessionProvider sessionProvider = Utils.getSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       newsletterManager.setCategoryConfig(
                         uiSubscriptions.categoryHandler.getCategoryByName(
                                                                           sessionProvider, 
@@ -538,11 +532,10 @@ public class UISubscriptions extends UIForm {
     		UIFormCheckBoxInput<Boolean> objCheckbox = (UIFormCheckBoxInput<Boolean>) subscriptionCheckbox;
     		if(objCheckbox.getName().equals("UISubscriptionsCheckAll")) {
     			continue;
-    		} else {
-    			if( objCheckbox.isChecked() == false) {
-    				checked = false;
-    			}
-    		}       	 
+    		} 
+  			if( objCheckbox.isChecked() == false) {
+  				checked = false;
+  			}
     	}    	
     	uiSubscriptions.getUIFormCheckBoxInput("UISubscriptionsCheckAll").setChecked(checked); 	
     	
@@ -567,7 +560,6 @@ public class UISubscriptions extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    @SuppressWarnings("unchecked")
 	public void execute(Event<UISubscriptions> event) throws Exception {
     	
     	UISubscriptions uiSubscriptions = event.getSource();
@@ -579,9 +571,8 @@ public class UISubscriptions extends UIForm {
     	for(UIComponent subscriptionCheckbox : listSubscriptions) {
     		if(subscriptionCheckbox.getName().equals("UISubscriptionsCheckAll")) {
     			continue;		  
-    		} else {
-    			uiSubscriptions.getUIFormCheckBoxInput(subscriptionCheckbox.getName()).setChecked(checked);
-    		}       	 
+    		} 
+   			uiSubscriptions.getUIFormCheckBoxInput(subscriptionCheckbox.getName()).setChecked(checked);
     	}    	
     	event.getRequestContext().addUIComponentToUpdateByAjax(uiSubscriptions);
     }

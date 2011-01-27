@@ -4,6 +4,7 @@ h1. Introduction
 h1. Configuration
 {include:document="xCMIS/Configure.wiki" /}
 {include:document="xCMIS/Authentication.wiki" /}
+{include:document="xCMIS/Index.wiki" /}
 
 h1. Service JARs
 {include:document="xCMIS/xCMISfiles.wiki" /}

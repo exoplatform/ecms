@@ -27,6 +27,9 @@
 						<field name="dependencies">
 							<collection type="java.util.ArrayList">
 								<value>
+                                  <string>ecm-wcm-core</string>
+                                </value>
+								<value>
 									<string>eXoResources</string>
 								</value>
 								<value>
@@ -68,6 +71,7 @@
                 <value>
                   <string>ecm-wcm-extension</string>
                 </value>  
+				
                 <value>
                   <string>ecmadmin</string>
                 </value>

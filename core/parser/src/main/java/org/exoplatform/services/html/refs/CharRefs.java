@@ -374,4 +374,3 @@ final class CharRefs
    }
 
 }
-

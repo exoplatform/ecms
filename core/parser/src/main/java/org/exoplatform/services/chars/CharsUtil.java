@@ -132,4 +132,3 @@ public final class CharsUtil
       System.out.println("|"+new String(data)+"|");
     }*/
 }
-

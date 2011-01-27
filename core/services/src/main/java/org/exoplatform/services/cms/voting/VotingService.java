@@ -51,14 +51,6 @@ public interface VotingService {
    */
   public long getVoteTotal(Node node) throws Exception;
   
-  /**
-   * Check for user's vote on a node
-   * @param node            The node document is specified to get total voting
-   * @see                   Node 
-   * @param node            The user's login name
-   * @param node            The language of specified node  
-   * @return
-   * @throws Exception
-   */
   public boolean isVoted(Node node, String userName, String language) throws Exception;
+  
 }

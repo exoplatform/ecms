@@ -182,9 +182,9 @@ public class Utils {
 	final static public String RMA_RECORD = "rma:record";
 	final static public String EXO_SYMLINK = "exo:symlink";
 	final static public String EXO_PRIMARYTYPE = "exo:primaryType";
-	
-	final static public String EXO_SORTABLE = "exo:sortable";
 
+    final static public String EXO_SORTABLE = "exo:sortable";
+	
 	final static public String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
 			EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
 

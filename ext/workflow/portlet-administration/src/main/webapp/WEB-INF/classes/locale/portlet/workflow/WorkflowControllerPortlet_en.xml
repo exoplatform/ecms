@@ -28,7 +28,6 @@
       <UIBPDefinition>BP Definition Controller</UIBPDefinition>
       <UIDocumentContent>View content</UIDocumentContent>
       <UIDocumentForm>Edit content</UIDocumentForm>
-			<WorkflowDocumentContainer>Edit content</WorkflowDocumentContainer>
       <UITask>Task</UITask>
     </title>
   </UITabPane>

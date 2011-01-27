@@ -230,4 +230,3 @@ public class EUCKRStatistics extends EUCStatistics
    }
 
 }
-

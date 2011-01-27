@@ -67,7 +67,6 @@
 
 .UIJCRExplorerPortlet .UIJcrExplorerEditContainer .UIForm .UIFormGrid td.FieldLabel {
 	vertical-align: middle;
-	width:250px;
 }
 
 .UIAnyPermission .UIForm .HorizontalLayout .UIFormGrid {
@@ -83,7 +82,7 @@
 .UIDocumentFormController .UIForm .HorizontalLayout textarea {
 	font-size: 11px;
 	border: 1px solid #b7b7b7;
-    height: auto;
+  	height: auto;
 	width: 95%;
 }
 

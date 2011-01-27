@@ -286,4 +286,3 @@ public class XML2Bean implements BeanMapper
    }
 
 }
-

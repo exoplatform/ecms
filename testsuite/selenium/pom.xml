@@ -4,8 +4,8 @@
 
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo.platform.testsuite</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+	<artifactId>exo.platform.testsuite</artifactId>
+    <version>2.1.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>selenium</artifactId>
@@ -172,12 +172,12 @@
                       <value>${selenium.timeout}</value>
                     </property>
                     <property>
-                      <name>selenium.host</name>
-                      <value>${selenium.host}</value>
+		      <name>selenium.host</name>
+		      <value>${selenium.host}</value>
                     </property>
                     <property>
-                      <name>selenium.host.port</name>
-                      <value>${selenium.host.port}</value>
+		      <name>selenium.host.port</name>
+		      <value>${selenium.host.port}</value>
                     </property>
                   </systemProperties>
                 </configuration>

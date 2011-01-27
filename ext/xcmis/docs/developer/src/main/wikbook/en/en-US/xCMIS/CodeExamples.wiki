@@ -1,1 +1,369 @@
-Examples of CMIS usage
+The following examples of CMIS usage may be useful for developers who needs to access a repository. 
+CMIS access code snippets build using Apache HTTP Client for Java or using Google gadets (gadgets.io) for JavaScript examples.
+
+h2. Login to repository.
+
+{note}
+CMIS service uses default authenticaton in general case, but it can be overriden in case of embedding CMIS into an Application Service. 
+In these examples only Basic HTTP authenticaton covered.
+{note}
+
+h3. Using java.
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.UsernamePasswordCredentials;
+ import org.apache.commons.httpclient.auth.AuthScope;
+ import org.apache.commons.httpclient.methods.GetMethod; 
+
+ HttpClient client = new HttpClient(); 
+ client.getState().setCredentials(
+     new AuthScope("localhost", 8080, "realm"),
+     new UsernamePasswordCredentials("root", "exo");
+ ....
+{code}
+
+
+h2. Listing of documents (folder, files).
+
+There are a several methods to get the documents listings, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
+The difference between them is in usage of different URL segments to get a data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
+and a different kind of results (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in responce).
+
+h3. Using java.
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.GetMethod;
+ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;  
+
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/children/";
+ url += obj_id;
+
+ HttpClient client = new HttpClient(new MultiThreadedHttpConnectionManager());
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ GetMethod get = new GetMethod(url); 
+ try {
+ int result = client.executeMethod(get);
+ final String strResponce = get.getResponseBodyAsString(); 
+ } finally {
+   get.releaseConnection();
+ }
+{code}
+
+
+h3. Using javascript.
+
+Creating an URL to make a request (consists of repository name, the method name, e.g. "/children/", and folderID to get childrens from):
+
+{code:language=java}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/children/";
+ url += obj_id;
+{code}
+
+performing request:
+
+{code:language=java}
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+ params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
+processing results (code located in the handler specified while making a request, the same way it might be used for all examples in this chapter):
+{code:language=java}
+var handler = function(resp) {
+  var data = eval(resp.data.Entry);
+   for (var i = 0; i < data.length; i++) {
+     var doc = data[i];
+     alert(doc.Title);  
+     alert(doc.Date);  
+      ...etc..
+   }
+}
+{code}
+
+h2. Read document properties and content-stream.
+
+Reading of Document properties and content stream it are two separate operations. 
+Getting of content stream is possible after the properties set have been read and the content stream ID extracted from it.
+
+h3. Using java.
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.GetMethod;
+ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;  
+
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+
+ HttpClient client = new HttpClient(new MultiThreadedHttpConnectionManager());
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ GetMethod get = new GetMethod(url); 
+ try {
+   int result = client.executeMethod(get);
+   final String strResponce = get.getResponseBodyAsString(); 
+   // use response...
+ } finally {
+   get.releaseConnection();
+ }
+{code}
+
+To get a Document's content stream, an URL must contain "/file" part, object ID, and optionally the content stream ID, which can be used, for example, to obtain 
+renditions. If no stream ID is specified, a default stream will be returned.
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.PostMethod;
+
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/file/";
+ url += obj_id;
+ //Optionally
+ url += "?";
+ url += "streamid=";
+ url += streamID;
+
+ HttpClient client = new HttpClient();
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ PostMethod post = new PostMethod(url);
+ try { 
+   int result = client.executeMethod(post);
+   final InputStream stream = post.getResponseBodyAsStream(); 
+   try { 
+   // use stream... 
+   int dataByte = stream.read(); 
+   } finally {   
+     stream.close();
+   }
+ } finally {   
+   post.releaseConnection();
+ }
+{code}
+
+h3. Using javascript.
+
+Creating an URL to make a request (consists of repository name, method name, e.g. "/children/", and folder ID to get the childrens from):
+
+{code:language=java}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+{code}
+
+performing request:
+
+{code:language=java}
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+ params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
+You can also use the ContentType.DOM parameter to parse the feed in your application (Using DOMParser for example).
+
+{note}
+Perfoming a content stream request in javascript will cause the browser dialog for a file download.
+{note}
+
+h2. Search of data and syntax examples.
+
+CMIS suports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
+GET request must contain query as a parameter named "q", in case of POST request query must be located in a request body.
+
+For more detailed instructions how to construct queries please refer to "Query examples" chapter.
+
+h3. Using java.
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.PostMethod;
+ import org.apache.commons.httpclient.methods.StringRequestEntity;
+
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/query/";
+
+ HttpClient client = new HttpClient();
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ PostMethod post = new PostMethod(url);
+ String s = "<?xml version='1.0' encoding='utf-8'?>" 
+         + "<cmis:query xmlns='http://www.w3.org/2005/Atom' xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'>"
+         + "<cmis:statement>SELECT * FROM cmis:document</cmis:statement>"
+         + "<cmis:maxItems>10</cmis:maxItems>"
+         + "<cmis:skipCount>0</cmis:skipCount>"
+         + "<cmis:searchAllVersions>true</cmis:searchAllVersions>"
+         + "<cmis:includeAllowableActions>true</cmis:includeAllowableActions>"
+         + "</cmis:query>";
+
+ RequestEntity entity = new StringRequestEntity(s, "text/xml","utf-8");
+ try { 
+   post.setRequestEntity(entity);
+   int result = client.executeMethod(post);
+   final String strResponce = post.getResponseBodyAsString(); 
+   // use response...
+ } finally {
+   post.releaseConnection();
+ }
+{code}
+
+
+h3. Using javascript.
+
+{code:language=java}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/query/";
+{code}
+
+{code:language=java}
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+ params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues(someQuery);
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
+
+h2. Modification of document properties or content.
+
+Command of property update uses PUT method. The URL is the same as for a reading of properties, the difference is only in HTTP method used.
+Body of the request must be an Atom document with the properties specified (see spec. 2.2.4.12 for details constructing document).
+
+Sending of content stream can be executed via PUT or POST requests. Content-type of the request must be an "multipart/form-data".
+
+h3. Using java.
+
+Update properties:
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.StringRequestEntity;
+ import org.apache.commons.httpclient.methods.PostMethod;
+ import org.apache.commons.httpclient.methods.RequestEntity; 
+
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+
+ HttpClient client = new HttpClient();
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+String atomDoc = "<?xml version='1.0' encoding='utf-8'?>"
+         + "<entry xmlns='http://www.w3.org/2005/Atom'"
+         + " xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'"
+         + " xmlns:cmisra='http://docs.oasis-open.org/ns/cmis/restatom/200908/'>"
+         + "<title>title</title><summary>summary</summary>"
+         + "<cmisra:object><cmis:properties>"
+         + "<cmis:propertyId queryName='cmis:objectId' localName='rep-cmis:objectId' propertyDefinitionId='cmis:objectId'>"
+         + "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>"
+         + "</cmis:propertyId>"
+         + "</cmis:properties></cmisra:object></entry>";
+
+ PostMethod post = new PostMethod(url);
+ RequestEntity entity = new StringRequestEntity(atomDoc, "text/xml", "utf-8");
+ post.setRequestEntity(entity); 
+
+ try { 
+   int result = client.executeMethod(post);
+   final String strResponce = post.getResponseBodyAsString(); 
+ } finally {
+   post.releaseConnection();
+ }
+{code}
+
+
+Set content stream:
+
+{code:language=java}
+ import org.apache.commons.httpclient.HttpClient;
+ import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
+ import org.apache.commons.httpclient.methods.PostMethod;
+ import org.apache.commons.httpclient.methods.RequestEntity; 
+
+ String url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/file/";
+ url += obj_id;
+
+ HttpClient client = new HttpClient();
+ client.getHttpConnectionManager().
+ getParams().setConnectionTimeout(10000);
+
+ PostMethod post = new PostMethod(url);
+ RequestEntity entity = new InputStreamRequestEntity(inputStream, "text/xml; charset=ISO-8859-1");
+ post.setRequestEntity(entity); 
+
+ try { 
+   int result = client.executeMethod(post);
+   final String strResponce = post.getResponseBodyAsString(); 
+ } finally {
+   post.releaseConnection();
+ }
+{code}
+
+h3. Using javascript.
+
+Update properties:
+
+{code:language=java}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/object/";
+ url += obj_id;
+{code}
+
+{code:language=java}
+//constructing document
+ String atomDoc = "<?xml version='1.0' encoding='utf-8'?>";
+       atomDoc += "<entry xmlns='http://www.w3.org/2005/Atom'";
+       atomDoc += " xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'";
+       atomDoc += " xmlns:cmisra='http://docs.oasis-open.org/ns/cmis/restatom/200908/'>";
+       atomDoc += "<title>title</title><summary>summary</summary>";
+       atomDoc += "<cmisra:object><cmis:properties>";
+       atomDoc += "<cmis:propertyId queryName='cmis:objectId' localName='rep-cmis:objectId' propertyDefinitionId='cmis:objectId'>";
+       atomDoc += "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>";
+       atomDoc += "</cmis:propertyId>";
+       atomDoc += "</cmis:properties></cmisra:object></entry>";
+
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.PUT;
+ params[gadgets.io.RequestParameters.POST_DATA] = atomDoc;
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+
+Set content stream:
+
+{code:language=java}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/file/";
+ url += obj_id;
+{code}
+
+{code:language=java}
+ var params = {};
+ params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+ params[gadgets.io.RequestParameters.CONTENT_TYPE] = "multipart/form-data";
+ params[gadgets.io.RequestParameters.POST_DATA] = contestStream;
+ gadgets.io.makeRequest(url, handler, params);
+{code}
+

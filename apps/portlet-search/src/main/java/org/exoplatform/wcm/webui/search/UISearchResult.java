@@ -140,10 +140,10 @@ public class UISearchResult extends UIContainer {
 			  portal = portal.equals(UISearchForm.ALL_OPTION)?Util.getPortalRequestContext().getPortalOwner():portal;
 			} 
 			if (searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue() != null) {
-			  keyword = searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue();		
+			  keyword = searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue();			
 			}
 			setKeyword(keyword);
-									
+			
 			SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
 			QueryCriteria queryCriteria = new QueryCriteria();			
 			
@@ -180,12 +180,10 @@ public class UISearchResult extends UIContainer {
 				setSuggestionURL(suggestionURL);
 				setPageList(paginatedQueryResult);
 				searchForm.setSubmitAction(suggestionURL);
-				porletRequestContext.addUIComponentToUpdateByAjax(searchForm);
 			} catch (Exception e) {
 				UIApplication uiApp = getAncestorOfType(UIApplication.class);
 				uiApp.addMessage(new ApplicationMessage(UISearchForm.MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
 			}
-			porletRequestContext.addUIComponentToUpdateByAjax(uiSearchPageContainer);
 		}
 		super.processRender(context);
 	}

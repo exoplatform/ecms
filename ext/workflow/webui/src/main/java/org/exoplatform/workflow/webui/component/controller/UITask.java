@@ -52,7 +52,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
@@ -239,10 +238,8 @@ public class UITask extends UIForm implements UISelectable {
           
           Task task = serviceContainer.getTask(identification_);
           form = formsService.getForm(task.getProcessId(), task.getTaskName(), locale);
-          UIContainer uiContainer = createUIComponent(UIContainer.class, null, "WorkflowDocumentContainer");
-          uiContainer.addChild(uiComponent);
-          uiTaskManager.addChild(uiContainer);
-          uiContainer.setRendered(false);
+          uiTaskManager.addChild(uiComponent);
+          uiComponent.setRendered(false);
         } catch (ClassNotFoundException e) {
         }
         

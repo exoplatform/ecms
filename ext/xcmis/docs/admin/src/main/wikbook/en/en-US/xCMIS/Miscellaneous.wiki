@@ -1,10 +1,10 @@
 Clients can be useful for CMIS repositories access:
-* CMIS Expert, available from [http://www.xcmis.org|xCMIS.org] site as Google gadget.
+* CMIS Expert, available at [http://www.xcmis.org|xCMIS.org] as a Google gadget.
 !cmis-expert.png!
 
 * IBM [CMIS Firefox Connector|http://www.ibm.com/developerworks/lotus/library/quickr-cmis/index.html#N101CC]
 {warning}
-The IBM CMIS Firefox plugin is not compatible with Firefox 3.6 
+The IBM CMIS Firefox plugin is not compatible with Firefox 3.6.
 {warning}
 !ibm-ff-cmis.png!
 

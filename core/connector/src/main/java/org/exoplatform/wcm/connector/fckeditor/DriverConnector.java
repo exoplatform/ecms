@@ -137,7 +137,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     resourceBundleNames = resourceBundleService.getSharedResourceBundleNames();
     sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, lang);
   }
-  
+	
   /**
    * Gets the drivers.
    * 
@@ -155,7 +155,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     String repositoryName = WCMCoreUtils.getRepository(null).getConfiguration().getName();
     ConversationState conversationState = ConversationState.getCurrent();
     String userId = conversationState.getIdentity().getUserId();
-    List<DriveData> listDriver = getDriversByUserId(repositoryName, userId);    
+    List<DriveData> listDriver = getDriversByUserId(repositoryName, userId);  	
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document document = builder.newDocument();
@@ -194,21 +194,21 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   @Path("/getFoldersAndFiles/")
 //  @OutputTransformer(XMLOutputTransformer.class)
   public Response getFoldersAndFiles(
-      @QueryParam("driverName") String driverName,
-      @QueryParam("currentFolder") String currentFolder,
+  		@QueryParam("driverName") String driverName,
+  		@QueryParam("currentFolder") String currentFolder,
       @QueryParam("currentPortal") String currentPortal,
-      @QueryParam("repositoryName") String repositoryName,
-      @QueryParam("workspaceName") String workspaceName,
-      @QueryParam("filterBy") String filterBy)
-      throws Exception {
+  		@QueryParam("repositoryName") String repositoryName,
+  		@QueryParam("workspaceName") String workspaceName,
+  		@QueryParam("filterBy") String filterBy)
+  		throws Exception {
     try {
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer()
-        .getComponentInstanceOfType(RepositoryService.class);
+      	.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);
       ManageDriveService manageDriveService = (ManageDriveService)ExoContainerContext.getCurrentContainer()
-        .getComponentInstanceOfType(ManageDriveService.class);
+      	.getComponentInstanceOfType(ManageDriveService.class);
       
       String driverHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName), 
           Text.escapeIllegalJcrChars(repositoryName)).getHomePath();
@@ -228,7 +228,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-  
+	
 
   /**
    * Upload file.
@@ -255,7 +255,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 //  @OutputTransformer(XMLOutputTransformer.class)
   public Response uploadFile(@Context HttpServletRequest servletRequest,
       @QueryParam("uploadId") String uploadId) throws Exception {
-    return fileUploadHandler.upload(servletRequest, uploadId, limit);
+  	return fileUploadHandler.upload(servletRequest, uploadId, limit);
   }
 
   /**
@@ -280,7 +280,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   @Path("/uploadFile/control/")
 //  @OutputTransformer(XMLOutputTransformer.class)
   public Response processUpload(
-    @QueryParam("repositoryName") String repositoryName,
+	  @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driverName") String driverName,
       @QueryParam("currentFolder") String currentFolder,
@@ -367,15 +367,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return driveList; 
   }
   
-  /**
-   * Append drivers.
-   * 
-   * @param document the document
-   * @param driversList the drivers list
-   * @param groupName the group name
-   * 
-   * @return the element
-   */
+	/**
+	 * Append drivers.
+	 * 
+	 * @param document the document
+	 * @param driversList the drivers list
+	 * @param groupName the group name
+	 * 
+	 * @return the element
+	 */
   private Element appendDrivers(Document document, List<DriveData> driversList, String groupName, String lang) throws Exception {
     Element folders = document.createElement("Folders");
     folders.setAttribute("name", resolveDriveLabel(groupName, lang));
@@ -403,16 +403,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
   
   private String resolveDriveLabel(String name, String lang) {
-    try {
-      if(!this.lang.getLanguage().equals(lang)){
-        this.lang = new Locale(lang);
-        sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
-      }
-      return sharedResourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
-    } catch (MissingResourceException e) {}
-    return name;
+	  try {
+		  if(!this.lang.getLanguage().equals(lang)){
+			  this.lang = new Locale(lang);
+			  sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
+		  }
+		  return sharedResourceBundle.getString("ContentSelector.title." + name.replaceAll(" ", ""));
+	  } catch (MissingResourceException e) {}
+	  return name;
   }
-  
+	
   /**
    * Personal drivers.
    * 
@@ -423,7 +423,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private List<DriveData> personalDrivers(List<DriveData> driveList, String userId) {
     List<DriveData> personalDrivers = new ArrayList<DriveData>();
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
+    	ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
     String userPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
     for(DriveData drive : driveList) {
       String driveHomePath = StringUtils.replaceOnce(drive.getHomePath(), "${userId}", userId);
@@ -448,7 +448,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   private List<DriveData> groupDrivers(List<DriveData> driverList, String userId) throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
+    	ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
     List<DriveData> groupDrivers = new ArrayList<DriveData>();
     String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
     List<String> groups = getGroups(userId);
@@ -478,7 +478,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private List<DriveData> generalDrivers(List<DriveData> driverList) throws Exception {
     List<DriveData> generalDrivers = new ArrayList<DriveData>();
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
-      ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
+    	ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
     String userPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
     String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
     for(DriveData drive : driverList) {
@@ -500,7 +500,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<String> getMemberships(String userId) throws Exception {
-    ((ComponentRequestLifecycle) organizationService).startRequest(manager);
+  	((ComponentRequestLifecycle) organizationService).startRequest(manager);
     List<String> userMemberships = new ArrayList<String> ();
     userMemberships.add(userId);
     Collection<?> memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
@@ -553,84 +553,84 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private Response buildXMLResponseForChildren(
-      Node node, String command, String repositoryName, String filterBy, Session session, String currentPortal) throws Exception {    
-    return buildXMLResponseForChildren(node, command, repositoryName, filterBy, session, currentPortal, null);
+  		Node node, String command, String repositoryName, String filterBy, Session session, String currentPortal) throws Exception {  	
+  	return buildXMLResponseForChildren(node, command, repositoryName, filterBy, session, currentPortal, null);
   }
   private Response buildXMLResponseForChildren(
-        Node node, String command, String repositoryName, String filterBy, Session session, String currentPortal, String nodeDriveName) throws Exception {
-      Element rootElement = FCKUtils.createRootElement(command, node, folderHandler.getFolderType(node));
-      NodeList nodeList = rootElement.getElementsByTagName("CurrentFolder");
-      Element currentFolder = (Element) nodeList.item(0);
-      currentFolder.setAttribute("isUpload", "true");
-      Document document = rootElement.getOwnerDocument();
-      Element folders = document.createElement("Folders");
-      folders.setAttribute("isUpload", "true");
-      Element files = document.createElement("Files");
-      files.setAttribute("isUpload", "true");
-      Node sourceNode = null;
-      Node checkNode = null;
+	  		Node node, String command, String repositoryName, String filterBy, Session session, String currentPortal, String nodeDriveName) throws Exception {
+	  	Element rootElement = FCKUtils.createRootElement(command, node, folderHandler.getFolderType(node));
+	  	NodeList nodeList = rootElement.getElementsByTagName("CurrentFolder");
+	  	Element currentFolder = (Element) nodeList.item(0);
+	  	currentFolder.setAttribute("isUpload", "true");
+	  	Document document = rootElement.getOwnerDocument();
+	  	Element folders = document.createElement("Folders");
+	  	folders.setAttribute("isUpload", "true");
+	  	Element files = document.createElement("Files");
+	  	files.setAttribute("isUpload", "true");
+	  	Node sourceNode = null;
+	  	Node checkNode = null;
 
-      for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
-        Node child = iterator.nextNode();
-        String fileType = null;
+	  	for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
+	  		Node child = iterator.nextNode();
+	  		String fileType = null;
 
-        if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
-          continue;
+	  		if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
+	  			continue;
 
-        if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
-          sourceNode = session.getNodeByUUID(child.getProperty("exo:uuid").getString());
-        }
+	  		if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
+	  			sourceNode = session.getNodeByUUID(child.getProperty("exo:uuid").getString());
+	  		}
 
-        checkNode = sourceNode != null ? sourceNode : child;
+	  		checkNode = sourceNode != null ? sourceNode : child;
 
-        if (isFolder(checkNode)) {          
-          Element folder = createFolderElement(
-              document, checkNode, checkNode.getPrimaryNodeType().getName(), child.getName(), nodeDriveName);
-          folders.appendChild(folder);
-        }
+	  		if (isFolder(checkNode)) {	  			
+	  			Element folder = createFolderElement(
+	  					document, checkNode, checkNode.getPrimaryNodeType().getName(), child.getName(), nodeDriveName);
+	  			folders.appendChild(folder);
+	  		}
 
-        if (FILE_TYPE_ALL.equals(filterBy) && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE) || !isFolder(checkNode))) {
-          fileType = FILE_TYPE_ALL;
-        }
-        
-        if (FILE_TYPE_WEBCONTENT.equals(filterBy)) {
-          if(checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE)) {
-            fileType = FILE_TYPE_WEBCONTENT;
-          }
-        }
+	  		if (FILE_TYPE_ALL.equals(filterBy) && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE) || !isFolder(checkNode))) {
+	  		  fileType = FILE_TYPE_ALL;
+	  		}
+	  		
+	  		if (FILE_TYPE_WEBCONTENT.equals(filterBy)) {
+	  			if(checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE)) {
+	  				fileType = FILE_TYPE_WEBCONTENT;
+	  			}
+	  		}
 
-        if (FILE_TYPE_MEDIAS.equals(filterBy) && isMediaType(checkNode, repositoryName)){
-          fileType = FILE_TYPE_MEDIAS;
-        } 
+	  		if (FILE_TYPE_MEDIAS.equals(filterBy) && isMediaType(checkNode, repositoryName)){
+	  			fileType = FILE_TYPE_MEDIAS;
+	  		} 
 
-        if (FILE_TYPE_DMSDOC.equals(filterBy) && isDMSDocument(checkNode, repositoryName)) {
-          fileType = FILE_TYPE_DMSDOC;
-        }
+	  		if (FILE_TYPE_DMSDOC.equals(filterBy) && isDMSDocument(checkNode, repositoryName)) {
+	  			fileType = FILE_TYPE_DMSDOC;
+	  		}
 
-        if (fileType != null) {
-          Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal);
-          files.appendChild(file);
-        }
-      }
-      
-      rootElement.appendChild(folders);
-      rootElement.appendChild(files);
-      return getResponse(document);
-    }
-  /**
-   * Checks if is folder and is not web content.
-   * 
-   * @param checkNode the check node
-   * 
-   * @return true, if is folder and is not web content
-   * 
-   * @throws RepositoryException the repository exception
-   */
-  private boolean isFolder(Node checkNode) throws RepositoryException {
-    return 
-        checkNode.isNodeType(FCKUtils.NT_UNSTRUCTURED)
-        || checkNode.isNodeType(FCKUtils.NT_FOLDER)
-        || checkNode.isNodeType(NodetypeConstant.EXO_TAXONOMY);
+	  		if (fileType != null) {
+	  			Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal);
+	  			files.appendChild(file);
+	  		}
+	  	}
+	  	
+	  	rootElement.appendChild(folders);
+	  	rootElement.appendChild(files);
+	  	return getResponse(document);
+	  }
+	/**
+	 * Checks if is folder and is not web content.
+	 * 
+	 * @param checkNode the check node
+	 * 
+	 * @return true, if is folder and is not web content
+	 * 
+	 * @throws RepositoryException the repository exception
+	 */
+	private boolean isFolder(Node checkNode) throws RepositoryException {
+	  return 
+	  		checkNode.isNodeType(FCKUtils.NT_UNSTRUCTURED)
+	  		|| checkNode.isNodeType(FCKUtils.NT_FOLDER)
+	  		|| checkNode.isNodeType(NodetypeConstant.EXO_TAXONOMY);
   }
   
   /**
@@ -644,20 +644,20 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private boolean isDMSDocument(Node node, String repositoryName) throws Exception {
-    TemplateService templateService = (TemplateService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(TemplateService.class);
-    List<String> dmsDocumentListTmp = templateService.getDocumentTemplates(repositoryName);
-    List<String> dmsDocumentList = new ArrayList<String>();
-    dmsDocumentList.addAll(dmsDocumentListTmp);
-    dmsDocumentList.remove(NodetypeConstant.EXO_WEBCONTENT);
-    dmsDocumentList.remove(NodetypeConstant.EXO_ARTICLE);
-    for (String documentType : dmsDocumentList) {
-      if (node.getPrimaryNodeType().isNodeType(documentType)
-          && !isMediaType(node, repositoryName)
-          && !node.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
-        return true;
-      }
+  	TemplateService templateService = (TemplateService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(TemplateService.class);
+  	List<String> dmsDocumentListTmp = templateService.getDocumentTemplates(repositoryName);
+  	List<String> dmsDocumentList = new ArrayList<String>();
+  	dmsDocumentList.addAll(dmsDocumentListTmp);
+  	dmsDocumentList.remove(NodetypeConstant.EXO_WEBCONTENT);
+  	dmsDocumentList.remove(NodetypeConstant.EXO_ARTICLE);
+  	for (String documentType : dmsDocumentList) {
+	    if (node.getPrimaryNodeType().isNodeType(documentType)
+	    		&& !isMediaType(node, repositoryName)
+	    		&& !node.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
+	    	return true;
+	    }
     }
-    return false;
+  	return false;
   }
   
 
@@ -673,9 +673,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     String mimeType = "";
 
     try {
-      mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+	    mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
     } catch (Exception e) {
-      return false;
+	    return false;
     }
     
     for(String type: MEDIA_MIMETYPE) {
@@ -687,19 +687,19 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return false;
   }
   
-  /* (non-Javadoc)
-   * @see org.exoplatform.wcm.connector.BaseConnector#getContentStorageType()
-   */
-  @Override
-  protected String getContentStorageType() throws Exception {
+	/* (non-Javadoc)
+	 * @see org.exoplatform.wcm.connector.BaseConnector#getContentStorageType()
+	 */
+	@Override
+	protected String getContentStorageType() throws Exception {
     return null;
-  }
+	}
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.wcm.connector.BaseConnector#getRootContentStorage(javax.jcr.Node)
-   */
-  @Override
-  protected Node getRootContentStorage(Node node) throws Exception {
+	/* (non-Javadoc)
+	 * @see org.exoplatform.wcm.connector.BaseConnector#getRootContentStorage(javax.jcr.Node)
+	 */
+	@Override
+	protected Node getRootContentStorage(Node node) throws Exception {
     try {
       PortalFolderSchemaHandler folderSchemaHandler = webSchemaConfigService
       .getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
@@ -709,8 +709,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       .getWebSchemaHandlerByType(WebContentSchemaHandler.class);
       return webContentSchemaHandler.getImagesFolders(node);
     }
-  }
-  
+	}
+	
 
   /**
    * Creates the upload file response.
@@ -800,22 +800,22 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private Node getParentFolderNode(
-      String repositoryName, String workspaceName, String driverName, String currentFolder) throws Exception{
+  		String repositoryName, String workspaceName, String driverName, String currentFolder) throws Exception{
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer()
-      .getComponentInstanceOfType(RepositoryService.class);
+    	.getComponentInstanceOfType(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     ManageDriveService manageDriveService = (ManageDriveService)ExoContainerContext.getCurrentContainer()
-      .getComponentInstanceOfType(ManageDriveService.class);
+    	.getComponentInstanceOfType(ManageDriveService.class);
     
     try {
-      return (Node)session.getItem(
-          manageDriveService.getDriveByName(driverName, repositoryName).getHomePath()
-          + ((currentFolder != null && currentFolder.length() != 0) ? "/" : "")
-          + currentFolder);
+	    return (Node)session.getItem(
+	    		manageDriveService.getDriveByName(driverName, repositoryName).getHomePath()
+	        + ((currentFolder != null && currentFolder.length() != 0) ? "/" : "")
+	        + currentFolder);
     } catch (Exception e) {
-      return null;
+	    return null;
     }
   }
   
@@ -832,16 +832,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private Element createFolderElement(Document document, Node child, String folderType, String childName) throws Exception {
-    return createFolderElement(document, child, folderType, childName, null);
+  	return createFolderElement(document, child, folderType, childName, null);
   }
   private Element createFolderElement(Document document, Node child, String folderType, String childName, String nodeDriveName) throws Exception {
-      Element folder = document.createElement("Folder");
-      folder.setAttribute("name", childName);
-      folder.setAttribute("url", FCKUtils.createWebdavURL(child));
-      folder.setAttribute("folderType", folderType);
-      folder.setAttribute("path", child.getPath());
-      folder.setAttribute("isUpload", "true");
-      if (nodeDriveName!=null && nodeDriveName.length()>0) folder.setAttribute("nodeDriveName", nodeDriveName);
-      return folder;
-    }
+	  	Element folder = document.createElement("Folder");
+	  	folder.setAttribute("name", childName);
+	  	folder.setAttribute("url", FCKUtils.createWebdavURL(child));
+	  	folder.setAttribute("folderType", folderType);
+	  	folder.setAttribute("path", child.getPath());
+	  	folder.setAttribute("isUpload", "true");
+	  	if (nodeDriveName!=null && nodeDriveName.length()>0) folder.setAttribute("nodeDriveName", nodeDriveName);
+	  	return folder;
+	  }
 }

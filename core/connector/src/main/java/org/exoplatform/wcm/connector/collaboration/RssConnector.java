@@ -110,7 +110,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @param container the container
    */
   public RssConnector() {
-    wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+	  wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
       wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
   }
 
@@ -143,8 +143,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       @QueryParam("lang") String lang,
       @QueryParam("detailPage") String detailPage,
       @QueryParam("detailParam") String detailParam,
-    @QueryParam("recursive") String recursive
-    ) throws Exception {
+	  @QueryParam("recursive") String recursive
+	  ) throws Exception {
     
     Map<String, String> contextRss = new HashMap<String, String>();
     contextRss.put(REPOSITORY, repositoryName);
@@ -174,7 +174,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
 
     String path=null;
     if (folderPath!=null) {
-      path = folderPath;
+    	path = folderPath;
     }
     
     
@@ -207,9 +207,9 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     String workspace = context.get(WORKSPACE) ;
     String contentUrl;
     if (!feedLink.endsWith("/") ) {
-      contentUrl= feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+    	contentUrl= feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
     }else {
-      contentUrl= feedLink + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+    	contentUrl= feedLink + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
     }
 
     if(feedTitle == null || feedTitle.length() == 0) feedTitle = "" ;

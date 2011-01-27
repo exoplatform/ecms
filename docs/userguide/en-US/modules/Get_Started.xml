@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-User_Guide-Get_Started">
+  <title>Get Started</title>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Get_Started/Account.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Get_Started/ChangeLanguage.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Get_Started/ChangeSkin.xml"/>
+</chapter>

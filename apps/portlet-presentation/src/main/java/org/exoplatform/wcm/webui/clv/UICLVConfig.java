@@ -488,7 +488,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     String repository = manageableRepository.getConfiguration().getName();
     List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(repository, portletName, category, WCMCoreUtils.getUserSessionProvider());
     for (Node templateNode : templateNodeList) {
-      if (!templateNode.isNodeType("nt:file")) continue;
       SelectItemOption<String> template = new SelectItemOption<String>();
       template.setLabel(templateNode.getName());
       template.setValue(templateNode.getPath());
@@ -514,7 +513,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         getUIStringInput(selectField).setValue(titles);
       } else if (TARGET_PAGE_FORM_STRING_INPUT.equals(selectField)){        
         getUIStringInput(selectField).setValue(sValue);
-      }else if (ITEM_PATH_FORM_STRING_INPUT.equals(selectField) && UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(displayMode)) {
+      }else {
         items = new ArrayList<String>();
         String[] values = sValue.split(":");
         if (values.length == 4) {
@@ -527,8 +526,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
             }
           }
           sValue = sValue.substring(values[0].length() + 1);
-        }        
-        // -end of init drive
+        }
         titles = getTitle(sValue);
         getUIStringInput(selectField).setValue(titles);
         savedPath = sValue;
@@ -572,7 +570,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     strRepository = itemPath.substring(0, repoIndex);
     strWorkspace = itemPath.substring(repoIndex+1, wsIndex);
     strIdentifier = itemPath.substring(wsIndex +1);
-    Node selectedNode = Utils.getRealNode(strRepository, strWorkspace, strIdentifier, false);
+    Node selectedNode = Utils.getRealNode(Text.escapeIllegalJcrChars(strRepository), Text.escapeIllegalJcrChars(strWorkspace), 
+        Text.escapeIllegalJcrChars(strIdentifier), false);
     if (selectedNode==null) return null;
     String title = null;    
     if (selectedNode.hasProperty("exo:title")) {

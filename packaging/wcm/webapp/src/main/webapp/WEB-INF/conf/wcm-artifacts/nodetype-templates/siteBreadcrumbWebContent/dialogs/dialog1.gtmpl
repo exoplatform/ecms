@@ -10,21 +10,6 @@
 	jsManager.importJavascript('eXo.wcm.backoffice.private.WCMUtils', '/eXoWCMResources/javascript/') ;
   jsManager.addOnLoadJavascript("eXo.ecm.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
 	
-  
-  private String getDisplayTab(String selectedTab) {
-		if ((uicomponent.getSelectedTab() == null && selectedTab.equals("mainWebcontent"))
-				|| selectedTab.equals(uicomponent.getSelectedTab())) {
-			return "display:block";	
-		}
-		return "display:none";
-	}
-	
-	private String getSelectedTab(String selectedTab) {
-		if (getDisplayTab(selectedTab).equals("display:block")) {
-			return "SelectedTab";
-		}
-		return "NormalTab";
-	}
 	
 	private void setUploadFields() {
 			String[] illustrationHiddenField1 = ["jcrPath=/node/medias/images/illustration", "nodetype=nt:file", "mixintype=mix:referenceable", "defaultValues=illustration"];
@@ -56,7 +41,6 @@
 	 
 </style>
 <div class="UITabPane">
-<%uiform.begin()%>
 	<div class="TabPaneContent"> 
 		<div class="WorkingAreaWithHelp">
 			<div class="UIHorizontalTabs" style="margin-top:5px;">
@@ -66,30 +50,30 @@
 							<div class="TabsContainer">
 							
 								<div class="UITab NormalTabStyle">
-									<div class="<%=getSelectedTab("mainWebcontent")%>">
+									<div class="SelectedTab">
 										<div class="LeftTab">
 											<div class="RightTab">                
-												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "mainWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></div>
+												<div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></div>
 											</div>
 										</div>
 									</div>
 								</div>  
 								
 								<div class="UITab NormalTabStyle">
-									<div class="<%=getSelectedTab("illustrationWebcontent")%>">
+									<div class="NormalTab">
 										<div class="LeftTab">
 											<div class="RightTab">                
-												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "illustrationWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></div>
+												<div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></div>
 											</div>
 										</div>
 									</div>
 								</div>
 											            
 								<div class="UITab NormalTabStyle">
-									<div class="<%= getSelectedTab("contentCSSWebcontent")%>">
+									<div class="NormalTab">
 										<div class="LeftTab">
 											<div class="RightTab">                
-												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "contentCSSWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></div>
+												<div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></div>
 											</div>
 										</div>
 									</div>
@@ -102,16 +86,16 @@
 			</div> <!-- End of UIHorizontalTabs -->
 			
 			<%/*Start UITabContentContainer*/%>
-			
+			<%uiform.begin()%>
 			<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px">	  
 				<div class="UITabContentContainer">
-					<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
+					<div class="UITabContent" style="display: block;">
 						<table class="UIFormGrid">
 		            		<tr>
 		        				<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.name")%></td>
 		          				<td class="FieldComponent">
 		            			<%
-			              	 		String[] webContentFieldName = ["jcrPath=/node", "nodetype=exo:webContent", "mixintype=mix:votable,mix:commentable", "editable=if-null","validate=name,empty"] ;
+			              	 		String[] webContentFieldName = ["jcrPath=/node", "nodetype=exo:webContent", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null","validate=name,empty"] ;
 			              	 		uicomponent.addTextField("name", webContentFieldName) ; 
 			              	 		String[] cssFolder = ["jcrPath=/node/css", "nodetype=exo:cssFolder", "defaultValues=css"] ;
 			              	 		String[] jsFolder = ["jcrPath=/node/js", "nodetype=exo:jsFolder", "defaultValues=js"] ;
@@ -137,6 +121,16 @@
 							        String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
 							        uicomponent.addTextField("title", webContentFieldTitle) ;
 							    %>
+								</td>
+							</tr>
+							<tr>
+			        	<td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+								<td class="FieldComponent">
+								<%
+								  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
+								  String[] fieldLang = ["jcrPath=/node/exo:language", "options=en,fr,es,de", lang] ;
+								  uicomponent.addSelectBoxField("lang", fieldLang) ;
+								%>
 								</td>
 							</tr>
 							<tr>
@@ -176,7 +170,7 @@
 						</table>
 					</div>  <!-- End of UITabContent -->
 					<!-- Start of Illustration tab -->
-					<div class="UITabContent" style="<%=getDisplayTab("illustrationWebcontent")%>">
+					<div class="UITabContent" style="display: none;">
 						<div class="FormHint">
 							<%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%>
 						</div>
@@ -227,7 +221,7 @@
 					</div>
 					<!-- End of Illustration tab -->		
 								
-					<div class="UITabContent" style="<%=getDisplayTab("contentCSSWebcontent")%>">
+					<div class="UITabContent" style="display: none;">
 						<table class="UIFormGrid">
 							<tr>
 								<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%></td>
@@ -388,9 +382,9 @@
 						</tr>
 					</table>
 				</div>  <!-- End of UIAction-->    	
-			</div>  		
+			</div>  
+		<%uiform.end()%>						 
 		</div>   <!-- End of WorkingAreaWithHelp -->
 	</div>  <!-- End of TabPaneContent -->
-	<%uiform.end()%>						 
 </div>  <!-- End of UITabPane -->
 

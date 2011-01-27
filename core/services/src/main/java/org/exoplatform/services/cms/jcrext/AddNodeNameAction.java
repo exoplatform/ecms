@@ -15,16 +15,13 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.services.cms.jcrext;
-
-import java.util.GregorianCalendar;
-
+ 
 import javax.jcr.Node;
 import javax.jcr.Property;
-
+ 
 import org.apache.commons.chain.Context;
 import org.exoplatform.services.command.action.Action;
-import org.exoplatform.services.security.ConversationState;
-
+ 
 /**
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
@@ -34,26 +31,25 @@ import org.exoplatform.services.security.ConversationState;
  */
 /**
  * Store node name
- * 
+ *
  */
 public class AddNodeNameAction implements Action {
-
-  public boolean execute(Context context) throws Exception {
-  	Object item = context.get("currentItem");
-  	Node node = (item instanceof Property) ?
-  							((Property)item).getParent() :
-  							(Node)item;	
-    if(node.isNodeType("nt:resource")) node = node.getParent();
-
-    if(node.canAddMixin("exo:sortable")) {
-      node.addMixin("exo:sortable");            
-    }
-    
-    if (!node.hasProperty("exo:name")) {
-    	node.setProperty("exo:name", node.getName());
-    }
-    
-    return false;
-  }
-
+ 
+ public boolean execute(Context context) throws Exception {
+   Object item = context.get("currentItem");
+   Node node = (item instanceof Property) ? ((Property)item).getParent() :
+                                            (Node)item;     
+   if(node.isNodeType("nt:resource")) node = node.getParent();
+ 
+   if(node.canAddMixin("exo:sortable")) {
+     node.addMixin("exo:sortable");            
+   }
+   
+   if (!node.hasProperty("exo:name")) {
+       node.setProperty("exo:name", node.getName());
+   }
+   
+   return false;
+ }
+ 
 }

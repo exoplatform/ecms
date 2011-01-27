@@ -181,4 +181,3 @@ public class RefsDecoder
       return false;
    }
 }
-

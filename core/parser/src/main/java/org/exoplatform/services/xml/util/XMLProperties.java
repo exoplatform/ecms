@@ -131,4 +131,3 @@ public class XMLProperties extends HashMap<String, String>
       return null;
    }
 }
-

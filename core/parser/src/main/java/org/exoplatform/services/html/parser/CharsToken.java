@@ -193,4 +193,3 @@ public class CharsToken extends Factory<NodeImpl>
    }
 
 }
-

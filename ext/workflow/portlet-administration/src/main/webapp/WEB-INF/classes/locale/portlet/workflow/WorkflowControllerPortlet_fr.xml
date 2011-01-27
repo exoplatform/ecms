@@ -28,7 +28,6 @@
       <UIBPDefinition>Definition du Processus Métier</UIBPDefinition>
       <UIDocumentContent>Visualiser le contenu</UIDocumentContent>
       <UIDocumentForm>Editer le contenu</UIDocumentForm>
-			<WorkflowDocumentContainer>Editer le contenu</WorkflowDocumentContainer>
       <UITask>Tâche</UITask>
     </title>
   </UITabPane>

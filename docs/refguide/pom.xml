@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
     <parent>
     <groupId>org.exoplatform.ecms</groupId>
-    <artifactId>exo-ecms</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <artifactId>exo-ecms-docs</artifactId>
+    <version>2.1.4-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-docs-refguide</artifactId>
   <packaging>jar</packaging>
@@ -15,9 +14,9 @@
 
   <properties>
     <wikbook.source>${project.build.directory}/wikbook-src</wikbook.source>
-    <wikbook.resources>${project.basedir}/src/main/resources</wikbook.resources>
+    <wikbook.resources>${project.basedir}/src/main/resources/wikbook/images</wikbook.resources>
     <wikbook.target>${project.build.directory}/wikbook</wikbook.target>
-    <wikbook.version>0.9.26</wikbook.version>
+    <wikbook.version>0.9.30</wikbook.version>
   </properties>
 
   <dependencies>
@@ -29,13 +28,13 @@
     
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-	  <artifactId>exo-ecms-core-services</artifactId>
-  	  <version>2.2.0-SNAPSHOT</version>
+	    <artifactId>exo-ecms-core-services</artifactId>
+  	  <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-services</artifactId>
-      <version>2.2.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <classifier>sources</classifier>
     </dependency>   
   </dependencies>
@@ -56,7 +55,7 @@
               <outputDirectory>${wikbook.source}</outputDirectory>
               <resources>
                 <resource>
-                  <directory>src/main/wikbook</directory>
+                  <directory>src/main/resources/wikbook</directory>
                   <filtering>true</filtering>
                 </resource>
               </resources>
@@ -79,10 +78,7 @@
             </executions>
             <configuration>
               <sourceDirectory>${wikbook.source}/en/en-US</sourceDirectory>
-         	  <sourceFileName>book.wiki</sourceFileName>
-<!--
-              <sourceFileName>WCM/Content Classification.wiki</sourceFileName>
--->
+         	  <sourceFileName>wcm-ref.wiki</sourceFileName>
               <destinationDirectory>${wikbook.target}/src</destinationDirectory>
               <destinationFileName>${project.artifactId}.xml</destinationFileName>
 			  <emitDoctype>false</emitDoctype>
@@ -132,7 +128,7 @@
 
                  <!-- HTML -->
                  <htmlCustomization>${wikbook.target}/src/resources/xsl/html.xsl</htmlCustomization>
-                 <htmlStylesheet>css/html.css</htmlStylesheet>
+                 <htmlStylesheet>css/ecms.css</htmlStylesheet>
 
                  <!-- PDF -->
                  <foCustomization>${wikbook.target}/src/resources/xsl/fopdf.xsl</foCustomization>
@@ -160,14 +156,23 @@
                    <!-- Images from the Stylesheets -->
                    <copy todir="${wikbook.target}/output">
                      <fileset dir="${wikbook.target}/src/resources">
-                       <include name="**/*.css"/>
-                       <include name="**/*.png"/>
-                       <include name="**/*.gif"/>
-                       <include name="**/*.jpg"/>
+                       <include name="**/*.css" />
+                       <include name="**/*.png" />
+                       <include name="**/*.gif" />
+                       <include name="**/*.jpg" />
                      </fileset>
                    </copy>
               </preProcess>
-              
+
+              <!-- Copy the css -->
+              <postProcess>
+                <copy todir="${wikbook.target}/output/css">
+									<fileset dir="${wikbook.source}/css">
+                    <include name="**/*.css" />
+                  </fileset>
+                </copy>
+              </postProcess>
+
                </configuration>
              </execution>
            </executions>
@@ -181,11 +186,42 @@
            </dependencies>
          </plugin>
 
+     <!-- html-zip packaging -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/html-zip.xml</descriptor>
+          </descriptors>
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- Attach the doc to the pom in maven repo -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
         <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/resources</source>
+              </sources>
+            </configuration>
+          </execution>
           <execution>
             <id>attach-artifacts</id>
             <phase>package</phase>
@@ -198,12 +234,15 @@
                   <file>target/wikbook/output/${project.artifactId}.pdf</file>
                   <type>pdf</type>
                 </artifact>
+                <artifact>
+                  <file>target/${project.artifactId}-${project.version}.zip</file>
+                  <type>zip</type>
+                </artifact>
               </artifacts>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
        </plugins>
    </build>
 </project>

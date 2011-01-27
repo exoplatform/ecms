@@ -109,4 +109,3 @@ final class DOMParser
    }
 
 }
-

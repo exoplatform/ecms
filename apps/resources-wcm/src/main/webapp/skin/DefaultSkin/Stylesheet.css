@@ -40,6 +40,7 @@
 }
 
 /************ UIToolbarContainer **************/
+/**
 
 .UIWorkingWorkspace .UIToolbarContainer .NormalContainerBlock .ToolbarContainer {
 	background: #343a50;
@@ -178,3 +179,5 @@
 	background: url("background/ToolbarContainer.png") no-repeat 5px -184px;
 	padding-left: 32px;
 }
+
+*/

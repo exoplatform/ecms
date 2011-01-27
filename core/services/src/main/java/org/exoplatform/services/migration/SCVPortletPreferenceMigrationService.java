@@ -57,7 +57,7 @@ public class SCVPortletPreferenceMigrationService implements Startable {
 
   @Override
   public void start() {
-    if (ProductVersions.getCurrentVersionAsInt()==ProductVersions.WCM_2_2_0_NUM) {
+    if (ProductVersions.getCurrentVersionAsInt()==ProductVersions.WCM_2_1_3_NUM) {
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
       try {
         ManageableRepository repository = repoService_.getCurrentRepository();

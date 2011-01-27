@@ -372,8 +372,8 @@ public class TestCmsService extends BaseDMSTestCase {
   
   /**
    * Test property value is binary
-   * input: data of file /conf/standalone/test-configuration.xml
-   * output: value in property jcr:data of one nt:resource node = value in file /conf/standalone/test-configuration.xml 
+   * input: data of file /conf/standalone/system-configuration.xml
+   * output: value in property jcr:data of one nt:resource node = value in file /conf/standalone/system-configuration.xml 
    * @throws RepositoryException
    * @throws Exception
    */

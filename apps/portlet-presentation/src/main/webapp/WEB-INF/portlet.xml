@@ -744,4 +744,21 @@
          <keywords>gatein_internal</keywords>
       </portlet-info>
    </portlet>
+
+   <filter>
+     <filter-name>PortletFilterCache</filter-name>
+     <filter-class>org.exoplatform.services.portletcache.PortletCacheFilter</filter-class>
+     <lifecycle>RENDER_PHASE</lifecycle>
+   </filter> 
+
+   <filter-mapping>
+     <filter-name>PortletFilterCache</filter-name>
+     <portlet-name>SingleContentViewer</portlet-name>
+   </filter-mapping>
+	
+   <filter-mapping>
+     <filter-name>PortletFilterCache</filter-name>
+     <portlet-name>ContentListViewerPortlet</portlet-name>
+   </filter-mapping>
+	
 </portlet-app>

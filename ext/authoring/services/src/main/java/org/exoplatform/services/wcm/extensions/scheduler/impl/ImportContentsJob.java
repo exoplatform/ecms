@@ -288,7 +288,7 @@ public class ImportContentsJob implements Job {
               }
               session = sessionProvider.getSession(linkSource[1], manageableRepository);
               Node targetNode = (Node) session.getItem(sourcePath);
-              LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+              LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class, containerName);
               linkManager.createLink(parentNode, obj.getLinkType(), targetNode, obj.getLinkTitle());
             }
           }

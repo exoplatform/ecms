@@ -34,4 +34,3 @@ import java.lang.annotation.Target;
 public @interface GetterMap {
    String value();
 }
-

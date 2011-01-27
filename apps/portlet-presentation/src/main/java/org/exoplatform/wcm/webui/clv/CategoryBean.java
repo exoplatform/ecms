@@ -20,7 +20,7 @@ public class CategoryBean {
 		this.url = url;
 		this.isSelected = isSelected;
 		this.depth = depth;
-		this.total  = total;
+		this.total = total;
 		this.childs = null;
 	}
 	
@@ -66,11 +66,11 @@ public class CategoryBean {
 	}
 	
 	public long getTotal() {
-    return total;
+  	return total;
   }
 
 	public void setTotal(long total) {
-    this.total = total;
+  	this.total = total;
   }
 
 	public List<CategoryBean> getChilds() {

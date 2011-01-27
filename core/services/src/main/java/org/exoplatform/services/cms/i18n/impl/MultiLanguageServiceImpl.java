@@ -44,6 +44,9 @@ import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.access.SystemIdentity;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.impl.core.value.DateValue;
 import org.exoplatform.services.jcr.impl.core.value.StringValue;
 
@@ -424,20 +427,22 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
    * {@inheritDoc}
    */
   public void addLinkedLanguage(Node node, Node translationNode) throws Exception {
-//  	String LANGUAGES = "languages"; 
-	Node languagesNode;
-	if(node.hasNode(LANGUAGES)) languagesNode = node.getNode(LANGUAGES) ;
-    else  {
-      languagesNode = node.addNode(LANGUAGES, "nt:unstructured") ;
-      if(languagesNode.canAddMixin("exo:hiddenable"))
-        languagesNode.addMixin("exo:hiddenable");
+  //  	String LANGUAGES = "languages";
+    Node languagesNode;
+    if(node.hasNode(LANGUAGES)) languagesNode = node.getNode(LANGUAGES) ;
+      else  {
+        languagesNode = node.addNode(LANGUAGES, "nt:unstructured") ;
+        if(languagesNode.canAddMixin("exo:hiddenable"))
+          languagesNode.addMixin("exo:hiddenable");
+      }
+    String lang = translationNode.getProperty("exo:language").getString();
+    if (languagesNode.hasNode(lang)) {
+      throw new ItemExistsException();
     }
-	String lang = translationNode.getProperty("exo:language").getString();
-	if (languagesNode.hasNode(lang)) {
-		throw new ItemExistsException();
-	}
-	LinkManager linkManager = (LinkManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LinkManager.class);
-	linkManager.createLink(languagesNode, "exo:symlink", translationNode, lang);
+    LinkManager linkManager = (LinkManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(LinkManager.class);
+    Node linkNode = linkManager.createLink(languagesNode, "exo:symlink", translationNode, lang);
+    ((ExtendedNode)linkNode).setPermission(SystemIdentity.ANY, new String[]{PermissionType.READ});
+    linkNode.getSession().save();
   }
   
   
@@ -915,19 +920,20 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
     while(nodeIter.hasNext()) {
       Node child = nodeIter.nextNode();
       if(child.getName().equals(LANGUAGES)) continue;
-      node.getSession().move(child.getPath(), newLang.getPath() + "/" + child.getName());
+      if(!node.getSession().itemExists(newLang.getPath() + "/" + child.getName()))
+        node.getSession().move(child.getPath(), newLang.getPath() + "/" + child.getName());
     }
     NodeIterator selectedIter = selectedLangNode.getNodes();
     while(selectedIter.hasNext()) {
       Node child = selectedIter.nextNode();
-      node.getSession().move(child.getPath(), node.getPath() + "/" + child.getName());
+      if(!node.getSession().itemExists(node.getPath() + "/" + child.getName()))
+        node.getSession().move(child.getPath(), node.getPath() + "/" + child.getName());
     }
   }
   
   /**
    * Exchange child node of current node with the default node
    * @param node
-   * @param selectedLangNode
    * @param newLang
    * @throws RepositoryException
    */
@@ -938,7 +944,8 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
     while(nodeIter.hasNext()) {
       Node child = nodeIter.nextNode();
       if(child.getName().equals(LANGUAGES)) continue;
-      node.getSession().move(child.getPath(), tempNode.getPath() + "/" + child.getName());
+      if(!node.getSession().itemExists(tempNode.getPath() + "/" + child.getName()))
+        node.getSession().move(child.getPath(), tempNode.getPath() + "/" + child.getName());
     }
     
     NodeIterator selectedIter = selectedLangNode.getNodes();
@@ -949,7 +956,8 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
     NodeIterator tempIter = tempNode.getNodes();
     while(tempIter.hasNext()) {
       Node child = tempIter.nextNode();
-      node.getSession().move(child.getPath(), selectedLangNode.getPath() + "/" + child.getName());
+      if(!node.getSession().itemExists(selectedLangNode.getPath() + "/" + child.getName()))
+        node.getSession().move(child.getPath(), selectedLangNode.getPath() + "/" + child.getName());
     }
     tempNode.remove();
   }
@@ -967,9 +975,12 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
   private void processWithDataChildNode(Node node, Node selectedLangNode, Node languagesNode, 
       String defaultLanguage, String nodeType) throws Exception {
     Node tempNode = node.addNode(TEMP_NODE, NTUNSTRUCTURED) ;
-    node.getSession().move(node.getNode(nodeType).getPath(), tempNode.getPath() + "/" + nodeType) ;
-    node.getSession().move(selectedLangNode.getNode(nodeType).getPath(), node.getPath() + "/" + nodeType) ;
-    node.getSession().move(tempNode.getNode(nodeType).getPath(), languagesNode.getPath() + "/" + defaultLanguage + "/" + nodeType) ;
+    if(!node.getSession().itemExists(tempNode.getPath() + "/" + nodeType))
+      node.getSession().move(node.getNode(nodeType).getPath(), tempNode.getPath() + "/" + nodeType) ;
+    if(!node.getSession().itemExists(node.getPath() + "/" + nodeType))
+      node.getSession().move(selectedLangNode.getNode(nodeType).getPath(), node.getPath() + "/" + nodeType) ;
+    if(!node.getSession().itemExists(languagesNode.getPath() + "/" + defaultLanguage + "/" + nodeType))
+      node.getSession().move(tempNode.getNode(nodeType).getPath(), languagesNode.getPath() + "/" + defaultLanguage + "/" + nodeType) ;
     tempNode.remove() ;
   }
   

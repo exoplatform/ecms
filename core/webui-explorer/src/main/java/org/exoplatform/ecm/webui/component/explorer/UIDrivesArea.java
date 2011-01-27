@@ -36,7 +36,6 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
-import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
@@ -265,7 +264,6 @@ public class UIDrivesArea extends UIContainer {
       uiAddressBar.setSelectedViewName(selectedView);
       explorerContainer.setRenderedChild(UIJCRExplorer.class);
       UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
-      uiWorkingArea.getChild(UISideBar.class).initialize();
       for(UIComponent uiComp : uiWorkingArea.getChildren()) {
         if(uiComp instanceof UIDrivesArea) uiComp.setRendered(false);
         else uiComp.setRendered(true);

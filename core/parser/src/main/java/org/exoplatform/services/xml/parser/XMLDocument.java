@@ -79,4 +79,3 @@ public class XMLDocument
       this.encode = encode;
    }
 }
-

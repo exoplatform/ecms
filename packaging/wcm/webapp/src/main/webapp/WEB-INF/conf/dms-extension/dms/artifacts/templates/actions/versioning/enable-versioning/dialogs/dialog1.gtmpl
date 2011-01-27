@@ -106,7 +106,7 @@
 			  }
 			%>
 			<tr>                        
-        <td class="FieldLabel"><%=_ctx.appRes("AutoVersioning.dialog.label.isDeep")%></td>
+        <td class="FieldLabel"><%=_ctx.appRes("EnableVersioning.dialog.label.isDeep")%></td>
         <td class="FieldComponent"> 
         <% 
           String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true"];         
@@ -115,7 +115,7 @@
         </td>
       </tr>
       <tr>                        
-        <td class="FieldLabel"><%=_ctx.appRes("AutoVersioning.dialog.label.nodetypes")%></td>
+        <td class="FieldLabel"><%=_ctx.appRes("EnableVersioning.dialog.label.nodetypes")%></td>
         <td class="FieldComponent"> 
         <% 
           String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];         

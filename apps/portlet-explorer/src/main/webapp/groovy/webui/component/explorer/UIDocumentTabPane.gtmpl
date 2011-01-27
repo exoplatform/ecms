@@ -57,7 +57,7 @@
 				              <div class="$style">
 				                <div class="LeftTab">
 				                  <div class="RightTab">                
-				                    <div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab" ,tabId)%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
+				                  <div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab"  ,tabId)%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
 				                  </div>
 				                </div>
 				              </div>

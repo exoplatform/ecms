@@ -170,6 +170,8 @@ public class UIJcrExplorerContainer extends UIContainer {
       uiAddressBar.setViewList(viewList);
       uiAddressBar.setSelectedViewName(viewList.get(0));
       uiAddressBar.setRendered(uiFEPortlet.isShowTopBar());
+//      uiActionbar.setTabOptions(viewList.get(0));
+//      if (viewList.size() == 1) uiAddressBar.setRendered(false);
       UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
       boolean isShowActionBar = uiFEPortlet.isShowActionBar();
       uiActionbar.setTabOptions(viewList.get(0));
@@ -187,7 +189,6 @@ public class UIJcrExplorerContainer extends UIContainer {
       	uiRightClickPopupMenu.setRendered(true);  
       UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
       uiSideBar.setRendered(true);
-      uiSideBar.initialize();
       if (uiSideBar.isRendered()) {
        uiSideBar.updateSideBarView();
       }

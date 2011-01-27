@@ -40,7 +40,7 @@
         <value-param>
           <name>default.portal</name>
           <description>The default portal for checking db is empty or not</description>
-          <value>acme</value>
+          <value>classic</value>
         </value-param> 
         <object-param>
           <name>site.templates.location</name>

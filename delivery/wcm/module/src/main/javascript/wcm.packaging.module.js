@@ -26,8 +26,7 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-publication-plugins", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-authoring-services", "jar",  module.version)). 
-    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-webui", "jar",  module.version)).
-		addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-parser", "jar",  module.version)).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-parser", "jar",  module.version)).    
     addDependency(ws.frameworks.json).
     addDependency(jcr.frameworks.command).
     addDependency(portal.webui.portal);
@@ -61,6 +60,10 @@ function getModule(params) {
   module.authoring.war.deployName = "authoring-apps";	      
   
   
+  module.core = {};
+  module.core.war = new Project("org.exoplatform.ecms", "exo-ecms-core-webapp", "war", module.version);
+  module.core.war.deployName = "ecm-wcm-core";	      	    
+
   module.extension = {};
   
   module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version);

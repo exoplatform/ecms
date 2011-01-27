@@ -16,9 +16,19 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
+import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -28,12 +38,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
-
-import org.exoplatform.services.resources.ResourceBundleService;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 /**
  * Created by The eXo Platform SAS
@@ -46,37 +50,43 @@ public class ResourceBundleConnector implements ResourceContainer {
 
   @GET
   @Path("/getBundle/")
-//  @OutputTransformer(XMLOutputTransformer.class)
   public Response getBundle (
-    @QueryParam("key") String multiKey,
-    @QueryParam("locale") String locale) {
-		try {
-			ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-			String resourceBundleNames[] = resourceBundleService.getSharedResourceBundleNames();
-			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			Element bundles = document.createElement("bundles");
-			bundles.setAttribute("locale", locale);
-			String keys[] = multiKey.split(",");
-			for (String resourceBundleName : resourceBundleNames) {
-				for (String key : keys) {
-					try {
-						ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(locale));
-						String value = resourceBundle.getString(key);
-						Element element = document.createElement(key);
-  					element.setAttribute("value", value);
-  					bundles.appendChild(element);
-					} catch (MissingResourceException e) {}
-				}
-			}
-			document.appendChild(bundles);
-			
-			CacheControl cacheControl = new CacheControl();
-	    cacheControl.setNoCache(true);
-	    cacheControl.setNoStore(true);
-		  return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
-		} catch (Exception e) {
-			return Response.serverError().build();
-		}
-	}
-	
+      @QueryParam("key") String multiKey,
+      @QueryParam("locale") String locale) {
+    try {
+      ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+      String resourceBundleNames[] = resourceBundleService.getSharedResourceBundleNames();
+      Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+      Element bundles = document.createElement("bundles");
+      bundles.setAttribute("locale", locale);
+      String keys[] = multiKey.split(",");
+      Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
+      Collections.addAll(remainingKeys, keys);
+      loop : for (String resourceBundleName : resourceBundleNames) {
+        ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(locale));
+        for (Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
+          String key = it.next();
+          try {
+            String value = resourceBundle.getString(key);
+            Element element = document.createElement(key);
+            element.setAttribute("value", value);
+            bundles.appendChild(element);
+            it.remove();
+            if (remainingKeys.isEmpty()) {
+              break loop;
+            }
+          } catch (MissingResourceException e) {}
+        }
+      }
+      document.appendChild(bundles);
+
+      CacheControl cacheControl = new CacheControl();
+      cacheControl.setNoCache(true);
+      cacheControl.setNoStore(true);
+      return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
+    } catch (Exception e) {
+      return Response.serverError().build();
+    }
+  }
+
 }

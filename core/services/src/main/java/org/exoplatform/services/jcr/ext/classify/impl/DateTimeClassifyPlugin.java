@@ -271,4 +271,4 @@ public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
     incrementType = templateDateTime.charAt(templateDateTime.indexOf("{") + 1);        
   }  
 
-}
+}

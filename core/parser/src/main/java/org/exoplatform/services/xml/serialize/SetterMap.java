@@ -34,4 +34,3 @@ import java.lang.annotation.Target;
 public @interface SetterMap {
    String value();
 }
-

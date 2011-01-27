@@ -3315,10 +3315,10 @@
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>    
+  <UIJcrExplorerEditForm>   
     <msg>
-   	  <fields-saved>All field values saved!</fields-saved>
-   	  <fields-cancelled>All field values cancelled!</fields-cancelled>
+      <fields-saved>All field values saved!</fields-saved>
+      <fields-cancelled>All field values cancelled!</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>

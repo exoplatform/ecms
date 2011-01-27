@@ -257,11 +257,11 @@ public class PDFViewerRESTService implements ResourceContainer {
   			}
   		}
   		if (content.exists()) {
-  		  if (contentNode.hasProperty("jcr:lastModified")) {
-	  			String lastModified = contentNode.getProperty("jcr:lastModified").getString();
-	  			pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
-	  			pdfCache.put(new ObjectKey(bd1.append(bd.toString()).append("/jcr:lastModified").toString()), lastModified);
-  			}
+          if (contentNode.hasProperty("jcr:lastModified")) {
+            String lastModified = contentNode.getProperty("jcr:lastModified").getString();
+            pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
+            pdfCache.put(new ObjectKey(bd1.append(bd.toString()).append("/jcr:lastModified").toString()), lastModified);
+          }   
   		}
   	}
   	return content;

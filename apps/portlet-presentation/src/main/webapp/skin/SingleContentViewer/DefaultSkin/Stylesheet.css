@@ -257,13 +257,6 @@ Title
   vertical-align:middle;
 }
 
-.UISingleContentViewerPortlet .UISCVPreferences .SelectTargetPageIcon {
-  background: url('icons/SearchIcon.png') no-repeat;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
 .UISingleContentViewerPortlet .QuickEditContainer .UIFormGrid {
   width: 99%;
 }
@@ -432,6 +425,13 @@ Title
   vertical-align: -2px;
 }
 
+.UISingleContentViewerPortlet .UISCVPreferences .SelectTargetPageIcon {
+  background: url('icons/SearchIcon.png') no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
 .UISingleContentViewerPortlet .UISCVPreferences .tdShowHelp {
   text-align: right;
   width: 30px;
@@ -454,7 +454,6 @@ Title
  overflow: hidden; 
  border: 1px solid #b7b7b7;
 }
-
 .UISingleContentViewerPortlet .UIPageSelector {
   margin: 0;
   width: auto;

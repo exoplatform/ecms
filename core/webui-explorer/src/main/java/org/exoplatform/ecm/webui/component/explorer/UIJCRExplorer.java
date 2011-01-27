@@ -42,6 +42,7 @@ import javax.portlet.PortletPreferences;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.TypeNodeComparator;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -79,7 +80,6 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -87,6 +87,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -136,7 +137,7 @@ public class UIJCRExplorer extends UIContainer {
   private DriveData driveData_ ;
     
   private boolean isFilterSave_ ;
-  private boolean isShowDocumentViewForFile_ = true;
+  private boolean  isShowDocumentViewForFile_ = true;
   private boolean preferencesSaved_ = false;
   
   private int tagScope;
@@ -154,8 +155,8 @@ public class UIJCRExplorer extends UIContainer {
   public boolean isFilterSave() { return isFilterSave_; }
   public void setFilterSave(boolean isFilterSave) { isFilterSave_ = isFilterSave; }
   
-  public boolean isShowDocumentViewForFile() { return isShowDocumentViewForFile_; }
-  public void setShowDocumentViewForFile(boolean value) { isShowDocumentViewForFile_ = value; }
+  public boolean  isShowDocumentViewForFile() { return isShowDocumentViewForFile_; }
+ 	public void setShowDocumentViewForFile(boolean value) { isShowDocumentViewForFile_ = value; }
   
   public boolean isPreferencesSaved() { return preferencesSaved_; }
   public void setPreferencesSaved(boolean value) { preferencesSaved_ = value; }
@@ -274,12 +275,12 @@ public class UIJCRExplorer extends UIContainer {
   /**
    * Sets the virtual current path
    */
-  public void setCurrentPath(String currentPath) {
-  	if (currentPath_ == null || !currentPath_.equals(currentPath)) {
-  		isShowDocumentViewForFile_ = true;
-  	}
-  	currentPath_ = currentPath;  
-	}
+  public void setCurrentPath(String  currentPath) {
+	  if (currentPath_ == null || !currentPath_.equals(currentPath)) {
+	          isShowDocumentViewForFile_ = true;
+	  }
+	  currentPath_ = currentPath; 
+  }
   
   /**
    * Indicates if the current node is a referenced node 
@@ -505,7 +506,7 @@ public class UIJCRExplorer extends UIContainer {
           uiDocumentInfo.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
-        if (isExoWebContent(getCurrentNode(), this))
+        if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED)) 
           uiDocumentWithTree.updatePageListData();
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
       }
@@ -646,7 +647,7 @@ public class UIJCRExplorer extends UIContainer {
           !uiDocWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
         UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
         UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");      
-        if(isShowViewFile() &&  !isShowDocumentViewForFile() && !getPreference().isJcrEnable()) {
+        if(isShowViewFile() &&  !(isShowDocumentViewForFile())) {
           uiDocumentWithTree.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
         } else {
@@ -654,7 +655,7 @@ public class UIJCRExplorer extends UIContainer {
           uiDocumentInfo.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
-        if(isExoWebContent(getCurrentNode(), this)) 
+        if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED)) 
           uiDocumentWithTree.updatePageListData();
         uiDocWorkspace.setRenderedChild(UIDocumentContainer.class) ;
         }
@@ -674,20 +675,6 @@ public class UIJCRExplorer extends UIContainer {
       }
     }    
     isHidePopup_ = false ;
-  }
-  
-  private boolean isExoWebContent(Item item, UIJCRExplorer uiExplorer) throws Exception {
-    if (item == null) return false;
-    Node node = (Node)item;
-    LinkManager linkManager = uiExplorer.getApplicationComponent(LinkManager.class);
-    if (node.isNodeType(Utils.EXO_WEBCONTENT)) 
-      return true;
-    if (linkManager.isLink(node)) {
-      node = linkManager.getTarget(node, true);
-      if (node.isNodeType(Utils.EXO_WEBCONTENT))        
-        return true;
-    }
-    return false;
   }
   
   public boolean isShowViewFile() throws Exception {

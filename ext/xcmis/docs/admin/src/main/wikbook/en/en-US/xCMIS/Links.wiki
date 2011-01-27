@@ -9,7 +9,7 @@ xCMIS project links:
 CMIS related links:
 * [http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cmis|CMIS specification]
 * TODO CMIS working group (list, mail, feeds etc)
-* TODO CMIS external tutorials, guides, videos. blogs, news any
+* TODO CMIS external tutorials, guides, videos, blogs, news
 * CMIS clients
 ** [CMIS Firefox Connector|http://www.ibm.com/developerworks/lotus/library/quickr-cmis/index.html]
 ** Flex+AIR and Flex+Browser CMIS clients [http://code.google.com/p/cmisspaces]

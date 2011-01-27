@@ -188,4 +188,3 @@ public class XMLNode implements Node<String>
    }
 
 }
-

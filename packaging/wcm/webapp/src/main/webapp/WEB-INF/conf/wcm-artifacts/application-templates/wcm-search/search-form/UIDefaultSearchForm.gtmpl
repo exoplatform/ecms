@@ -68,14 +68,15 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
           <table class="ActionContainer">
             <tr>
               <td>
-                <div 
-                    onclick="$link"
+                <div onclick="$link"
                     class="ActionButton LightBlueStyle SearchButton"
                     onmouseover="this.style.color = '#058ee6'"
                     onmouseout="this.style.color='black'">
                   <div class="ButtonLeft">
                     <div class="ButtonRight">
-                      <div class="ButtonMiddle"><a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();">$actionLabel</a></div>
+                      <div class="ButtonMiddle">
+                        <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();">$actionLabel</a>
+                      </div>
                     </div>
                   </div>
                 </div>

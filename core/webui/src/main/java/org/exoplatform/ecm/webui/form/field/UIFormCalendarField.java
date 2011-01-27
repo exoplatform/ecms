@@ -65,7 +65,7 @@ public class UIFormCalendarField extends DialogFormField {
       uiDateTime.setCalendar(calendar);
     } else {
       uiDateTime.setCalendar(null);
-    }    
+    }
     if(label != null) uiDateTime.setLabel(label);       
     return (T)uiDateTime;
   }

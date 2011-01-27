@@ -277,7 +277,6 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
       }
       
       if(uiComp instanceof UIOneNodePathSelector) {
-        int wsIndex=0;
         String repositoryName = explorer.getRepositoryName();
         SessionProvider provider = explorer.getSessionProvider();                
         String wsFieldName = (String)fieldPropertiesMap.get("workspaceField");
@@ -289,21 +288,16 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
         String selectorParams = (String)fieldPropertiesMap.get("selectorParams");
         if(selectorParams != null) {
           String[] arrParams = selectorParams.split(",");
-          if(arrParams.length >2) {
-            if (arrParams.length==4) 
-            {
-              wsIndex = 1;
-              repositoryName = arrParams[0];
-            }
+          if(arrParams.length == 4) {
             ((UIOneNodePathSelector)uiComp).setAcceptedNodeTypesInPathPanel(new String[] {Utils.NT_FILE, 
                 Utils.NT_FOLDER, Utils.NT_UNSTRUCTURED, Utils.EXO_TAXANOMY});
-            wsName = arrParams[wsIndex];
-            rootPath = arrParams[wsIndex+1];
+            wsName = arrParams[1];
+            rootPath = arrParams[2];
             ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true);
-            if(arrParams[wsIndex+2].indexOf(";") > -1) {
-              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(arrParams[wsIndex+2].split(";"));
+            if(arrParams[3].indexOf(";") > -1) {
+              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(arrParams[3].split(";"));
             } else {
-              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(new String[] {arrParams[wsIndex+2]});
+              ((UIOneNodePathSelector)uiComp).setAcceptedMimeTypes(new String[] {arrParams[3]});
             }
           }
         }

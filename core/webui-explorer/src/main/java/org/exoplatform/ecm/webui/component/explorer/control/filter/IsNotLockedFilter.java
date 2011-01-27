@@ -51,9 +51,9 @@ public class IsNotLockedFilter extends UIExtensionAbstractFilter {
   }
   
   public IsNotLockedFilter(boolean checkGroup, boolean checkOwner) {
-    this(null);
-    this.checkGroup = checkGroup;
-    this.checkOwner = checkOwner;
+  	this(null);
+  	this.checkGroup = checkGroup;
+  	this.checkOwner = checkOwner;
   }
   
   public boolean accept(Map<String, Object> context) throws Exception {
@@ -62,12 +62,12 @@ public class IsNotLockedFilter extends UIExtensionAbstractFilter {
     String remoteUser = currentNode.getSession().getUserID();
     String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
     if (remoteUser.equalsIgnoreCase(superUser)) {
-      return true;
+    	return true;
     }
     if(!currentNode.isLocked()) return true;  
     if (checkOwner && currentNode.isLocked()) {
-      String lockOwner = currentNode.getLock().getLockOwner();
-      if (lockOwner.equals(remoteUser)) return true;
+    	String lockOwner = currentNode.getLock().getLockOwner();
+    	if (lockOwner.equals(remoteUser)) return true;
     }
     String lockToken = checkGroup ? LockUtil.getLockToken(currentNode): LockUtil.getLockTokenOfUser(currentNode);
     if(lockToken != null) {

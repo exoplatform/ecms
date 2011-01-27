@@ -6,7 +6,6 @@ import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIComponent;
 
 /**
  * Author : TAN DUNG DANG
@@ -61,10 +60,4 @@ public class UIContentSelectorOne extends UIContentSelector {
     getChild(UIContentBrowsePanelOne.class).setInitPath(initDrive, initPath);
     this.init();
   }
-  
-  public void setSourceComponent(UIComponent uicomponent, String[] initParams) {
-    getChild(UIContentBrowsePanelOne.class).setSourceComponent(uicomponent, initParams);
-    getChild(UIContentSearchResult.class).setSourceComponent(uicomponent, initParams);
-  }
-  
 }

@@ -28,7 +28,7 @@
 		 <div class="EdittingToolBar " >
 			<div class="EdittingToolBarL">
 				<div class="EdittingToolBarR">
-					<div class="EdittingToolBarC ClearFix">
+					<div class="EdittingToolBarC clearfix">
 				
 					<%		
 						if (uicomponent.isShowPreferences()) {					

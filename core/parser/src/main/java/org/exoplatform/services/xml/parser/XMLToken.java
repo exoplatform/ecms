@@ -93,4 +93,3 @@ public class XMLToken extends Factory<XMLNode>
    }
 
 }
-

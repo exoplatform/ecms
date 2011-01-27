@@ -63,18 +63,25 @@
    </msg>
   </UIContentDialogConfig>
   
-  <CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
    <title>
     <UIWelcomeScreen>مرحبا بكم في المشاهد المحتوى واحدة</UIWelcomeScreen>
     <UINameWebContentForm>وفقا لنموذج</UINameWebContentForm>
     <UIContentDialogForm>شكل محتوى ويب</UIContentDialogForm>
     <UIContentSelectorOne>واحد محدد لوحة المحتوى</UIContentSelectorOne>
    </title>
-  </CorrectContentSelectorPopupWindow>
+  </UIContentDialogFormPopupWindow>
   
   <UISingleContentViewerPortlet>
   	 <msg>
   	 		<AccessControlException>ليس لديك إذن للوصول إلى وضع التحرير</AccessControlException>
   	 </msg>
   </UISingleContentViewerPortlet>
+  
+  <CorrectContentSelectorPopupWindow>
+  	<title>
+    	<UIContentSelectorOne>واحد محدد لوحة المحتوى</UIContentSelectorOne>
+   	</title>
+  </CorrectContentSelectorPopupWindow>
+  
 </bundle>

@@ -310,7 +310,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
     for (Iterator iterator = templates.iterator(); iterator.hasNext();) {
       TemplateConfig.Template template = (TemplateConfig.Template) iterator.next();
       String templateFileName = template.getTemplateFile();
-      String path = basePath + templateFileName;            
+      String path = basePath + templateFileName; 
       InputStream in = configManager_.getInputStream(path);
       String nodeName = templateFileName.substring(templateFileName.lastIndexOf("/") + 1, templateFileName.indexOf("."));
       Node nodeTypeHome = null;
@@ -329,8 +329,6 @@ public class TemplatePlugin extends BaseComponentPlugin {
         templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), nodeName, 
             template.getParsedRoles(), in, repository, templatesHome);
       }
-      templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), 
-          nodeName, template.getParsedRoles(), in, repository, templatesHome);
     }
   }    
   
