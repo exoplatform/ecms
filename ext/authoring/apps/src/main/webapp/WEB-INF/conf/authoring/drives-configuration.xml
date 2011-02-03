@@ -40,7 +40,6 @@
             <description>Collaboration Workspace</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>collaboration</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>collaboration</string></field>
               <field  name="permissions"><string>*:/platform/web-contributors</string></field>
               <field  name="homePath"><string>/</string></field>
@@ -60,7 +59,6 @@
             <description>Events</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>Events</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>collaboration</string></field>
               <field  name="permissions"><string>*:/platform/web-contributors</string></field>
               <field  name="homePath"><string>/sites content/live/acme/events</string></field>

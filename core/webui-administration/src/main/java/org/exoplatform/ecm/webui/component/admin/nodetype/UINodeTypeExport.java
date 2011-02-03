@@ -80,11 +80,8 @@ public class UINodeTypeExport extends UIForm {
 
   public void update() throws Exception {
     UIFormTableInputSet uiTableInputSet = createUIComponent(UIFormTableInputSet.class, null, null) ;
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    String repository = portletPref.getValue(Utils.REPOSITORY, "") ;
     NodeTypeManager ntManager = getApplicationComponent(RepositoryService.class)
-                                .getRepository(repository).getNodeTypeManager() ;
+                                .getCurrentRepository().getNodeTypeManager() ;
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     UIFormInputSet uiInputSet ;
     uiTableInputSet.setName(TABLE_NAME);

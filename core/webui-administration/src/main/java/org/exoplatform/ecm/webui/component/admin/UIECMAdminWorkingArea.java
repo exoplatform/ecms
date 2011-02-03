@@ -103,9 +103,8 @@ public class UIECMAdminWorkingArea extends UIContainer {
     PortletRequestContext pcontext = (PortletRequestContext) WebuiRequestContext
         .getCurrentInstance();
     PortletPreferences pref = pcontext.getRequest().getPreferences();
-    String repository = pref.getValue(Utils.REPOSITORY, "");
     try {
-      getApplicationComponent(RepositoryService.class).getRepository(repository);
+      getApplicationComponent(RepositoryService.class).getCurrentRepository();
     } catch (Exception e) {
       String defaultRepo = getApplicationComponent(RepositoryService.class).getDefaultRepository()
           .getConfiguration().getName();

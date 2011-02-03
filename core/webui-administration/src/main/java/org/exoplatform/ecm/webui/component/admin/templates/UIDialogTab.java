@@ -77,7 +77,7 @@ public class UIDialogTab extends UIContainer {
   
   public void updateGrid(String nodeName, String repository) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    NodeIterator iter = tempService.getAllTemplatesOfNodeType(true, nodeName, repository, 
+    NodeIterator iter = tempService.getAllTemplatesOfNodeType(true, nodeName,  
         SessionProviderFactory.createSystemProvider()) ;
     List<DialogData> data = new ArrayList<DialogData>() ;
     DialogData item  ;
@@ -139,7 +139,7 @@ public class UIDialogTab extends UIContainer {
       PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
       PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
       String repository = portletPref.getValue(Utils.REPOSITORY, "") ;
-      templateService.removeTemplate(TemplateService.DIALOGS, nodeTypeName, templateName, repository) ;
+      templateService.removeTemplate(TemplateService.DIALOGS, nodeTypeName, templateName) ;
       uiForm.update(null);
       uiForm.reset();      
       

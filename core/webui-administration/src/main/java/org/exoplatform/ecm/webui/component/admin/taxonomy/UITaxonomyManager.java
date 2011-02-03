@@ -124,7 +124,7 @@ public class UITaxonomyManager extends UIAbstractManager {
   
   private String getDmsSystemWorkspaceName(String repository) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
   
@@ -136,7 +136,7 @@ public class UITaxonomyManager extends UIAbstractManager {
   
   public ManageableRepository getRepository(String repositoryName) throws Exception{
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-    return repositoryService.getRepository(repositoryName) ;
+    return repositoryService.getCurrentRepository();
   }
   
   public void initPopup(String path) throws Exception {

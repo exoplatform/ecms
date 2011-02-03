@@ -92,13 +92,13 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
   
   public String getSystemWorkspaceName(String repository) throws RepositoryException, RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
   }
 
   public String getDmsSystemWorkspaceName(String repository) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
   

@@ -81,8 +81,7 @@ public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
     if(node.isNodeType("exo:cssFile") || node.isNodeType("exo:jsFile"))
       return false;    
     String primaryNodeType = node.getPrimaryNodeType().getName();
-    String repository = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName();
-    return templateService.isManagedNodeType(primaryNodeType,repository);    
+    return templateService.isManagedNodeType(primaryNodeType);    
   }
 
   /* (non-Javadoc)

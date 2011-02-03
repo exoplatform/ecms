@@ -102,9 +102,8 @@ public class UINodeTypeImport extends UIForm {
     } else {
       uiTableInputSet.getChildren().clear() ;
     }
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     NodeTypeManager ntManager = getApplicationComponent(RepositoryService.class).
-                                getRepository(repository).getNodeTypeManager() ;
+                                getCurrentRepository().getNodeTypeManager() ;
     UIFormInputSet uiInputSet ;
     uiTableInputSet.setName(TABLE_NAME);
     uiTableInputSet.setColumns(TABLE_COLUMNS);
@@ -192,8 +191,7 @@ public class UINodeTypeImport extends UIForm {
       UINodeTypeImport uiImport = event.getSource() ;
       RepositoryService repositoryService = 
         uiImport.getApplicationComponent(RepositoryService.class) ;
-      String repository = uiImport.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-      NodeTypeManager ntManager = repositoryService.getRepository(repository).getNodeTypeManager() ;
+      NodeTypeManager ntManager = repositoryService.getCurrentRepository().getNodeTypeManager() ;
       UINodeTypeManager uiManager = uiImport.getAncestorOfType(UINodeTypeManager.class) ;
       UINodeTypeImportPopup uiImportPopup = uiImport.getParent() ;
       uiImportPopup.setRenderedChild(UINodeTypeUpload.class) ;

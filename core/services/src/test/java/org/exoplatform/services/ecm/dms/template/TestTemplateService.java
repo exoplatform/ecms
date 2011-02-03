@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.ecm.dms.template;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -56,7 +57,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testInit() throws Exception {
-    templateService.init(REPO_NAME);
+    templateService.init();
     assertTrue(sessionDMS.itemExists(cmsTemplatesBasePath));
     assertTrue(sessionDMS.itemExists(cmsTemplatesBasePath + "/nt:file"));    
     assertTrue(sessionDMS.itemExists(cmsTemplatesBasePath + "/exo:article"));
@@ -102,8 +103,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetTemplatesHome() throws Exception {
-    assertEquals("/exo:ecm/templates", templateService.getTemplatesHome(REPO_NAME, 
-        sessionProviderService_.getSystemSessionProvider(null)).getPath());
+    assertEquals("/exo:ecm/templates", templateService.getTemplatesHome(sessionProviderService_.getSystemSessionProvider(null)).getPath());
   }
   
   /**
@@ -123,7 +123,7 @@ public class TestTemplateService extends BaseDMSTestCase {
     sessionDMS.save();
     
     assertEquals(expectedArticleDialogPath, templateService.getTemplatePath(bbb, true));
-    assertEquals(expectedArticleDialogPath, templateService.getTemplatePath(true, EXO_ARTICLE, "dialog1", REPO_NAME));    
+    assertEquals(expectedArticleDialogPath, templateService.getTemplatePath(true, EXO_ARTICLE, "dialog1"));    
     try {
       templateService.getTemplatePath(aaa, true);
       fail("The content type: nt:unstructured doesn't be supported by any template");
@@ -143,7 +143,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetTemplatePathByAnonymous() throws Exception {    
-    assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByAnonymous(true, EXO_ARTICLE, REPO_NAME));
+    assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByAnonymous(true, EXO_ARTICLE));
   }
   
   /**
@@ -153,8 +153,8 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetAllowanceFolderType() throws Exception {    
-    assertTrue(templateService.getAllowanceFolderType(REPO_NAME).contains("nt:unstructured"));
-    assertTrue(templateService.getAllowanceFolderType(REPO_NAME).contains("nt:folder"));
+    assertTrue(templateService.getAllowanceFolderType().contains("nt:unstructured"));
+    assertTrue(templateService.getAllowanceFolderType().contains("nt:folder"));
   }
   
   /**
@@ -188,7 +188,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetTemplate() throws Exception {    
-    assertNotNull(templateService.getTemplate(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1", REPO_NAME));
+    assertNotNull(templateService.getTemplate(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1"));
     assertNotNull(templateService.getTemplate(TemplateService.VIEWS, EXO_ARTICLE, "view1", REPO_NAME));
   }
   
@@ -220,8 +220,8 @@ public class TestTemplateService extends BaseDMSTestCase {
     String templateFile = "Hello";
     String[] roles = {"*"};
     assertNotNull(templateService.addTemplate(TemplateService.DIALOGS, EXO_ARTICLE, label, isDocumentTemplate, 
-        templateName, roles, templateFile, REPO_NAME));
-    assertNotNull(templateService.getTemplate(TemplateService.DIALOGS, EXO_ARTICLE, templateName, REPO_NAME));
+        templateName, roles, new ByteArrayInputStream(templateFile.getBytes())));
+    assertNotNull(templateService.getTemplate(TemplateService.DIALOGS, EXO_ARTICLE, templateName));
   }
   
   /**
@@ -244,10 +244,10 @@ public class TestTemplateService extends BaseDMSTestCase {
     String templateFile = "Remove template Unit test";
     String[] roles = {"*"};
     assertNotNull(templateService.addTemplate(TemplateService.DIALOGS, EXO_ARTICLE, label, isDocumentTemplate, 
-        templateName, roles, templateFile, REPO_NAME));
-    templateService.removeTemplate(TemplateService.DIALOGS, EXO_ARTICLE, templateName, REPO_NAME);    
+        templateName, roles, new ByteArrayInputStream(templateFile.getBytes())));
+    templateService.removeTemplate(TemplateService.DIALOGS, EXO_ARTICLE, templateName);    
     try {
-      templateService.getTemplate(TemplateService.DIALOGS, EXO_ARTICLE, templateName, REPO_NAME);
+      templateService.getTemplate(TemplateService.DIALOGS, EXO_ARTICLE, templateName);
       fail();
     } catch (Exception ex) {
     }
@@ -263,7 +263,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testIsManagedNodeType() throws Exception {    
-    assertTrue(templateService.isManagedNodeType(EXO_ARTICLE, REPO_NAME));
+    assertTrue(templateService.isManagedNodeType(EXO_ARTICLE));
   }
   
   /**
@@ -274,7 +274,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetDocumentTemplates() throws Exception {    
-    List<String> listTemplates = templateService.getDocumentTemplates(REPO_NAME);
+    List<String> listTemplates = templateService.getDocumentTemplates();
     assertTrue(listTemplates.contains("nt:file"));
     assertTrue(listTemplates.contains("exo:article"));
     assertTrue(listTemplates.contains("exo:podcast"));
@@ -297,7 +297,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetAllTemplatesOfNodeType() throws Exception {
-    assertEquals(1, templateService.getAllTemplatesOfNodeType(true, "exo:sample", REPO_NAME, 
+    assertEquals(1, templateService.getAllTemplatesOfNodeType(true, "exo:sample", 
         sessionProviderService_.getSystemSessionProvider(null)).getSize());
   }
   
@@ -311,9 +311,9 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testRemoveManagedNodeType() throws Exception {
-    assertTrue(templateService.isManagedNodeType("exo:podcast", REPO_NAME));    
-    templateService.removeManagedNodeType("exo:podcast", REPO_NAME);    
-    assertFalse(templateService.isManagedNodeType("exo:podcast", REPO_NAME));
+    assertTrue(templateService.isManagedNodeType("exo:podcast"));    
+    templateService.removeManagedNodeType("exo:podcast");    
+    assertFalse(templateService.isManagedNodeType("exo:podcast"));
   }
   
   /**
@@ -326,7 +326,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testGetTemplateLabel() throws Exception {    
-    assertEquals(expectedTemplateLabel, templateService.getTemplateLabel(EXO_ARTICLE ,REPO_NAME));
+    assertEquals(expectedTemplateLabel, templateService.getTemplateLabel(EXO_ARTICLE));
   }
   
   /**
@@ -342,8 +342,9 @@ public class TestTemplateService extends BaseDMSTestCase {
    * Expect: Return "*" is roles of the specified template
    * @throws Exception
    */
-  public void testGetTemplateRoles() throws Exception {    
-    assertEquals("*", templateService.getTemplateRoles(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1", REPO_NAME));
+  public void testGetTemplateRoles() throws Exception {
+    Node templateNode = templateService.getTemplateNode(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1", sessionProviderService_.getSystemSessionProvider(null));
+    assertEquals("*", templateService.getTemplateRoles(templateNode));
   }
   
   /**
@@ -363,7 +364,7 @@ public class TestTemplateService extends BaseDMSTestCase {
    */
   public void testGetTemplateNode() throws Exception {
     assertEquals(expectedArticleDialogPath, templateService.getTemplateNode(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1", 
-        REPO_NAME, sessionProviderService_.getSystemSessionProvider(null)).getPath());
+        sessionProviderService_.getSystemSessionProvider(null)).getPath());
   }
   
   /**

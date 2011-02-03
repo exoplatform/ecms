@@ -122,7 +122,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-      String wsName = dmsConfiguration.getConfig(getRepository()).getSystemWorkspace();
+      String wsName = dmsConfiguration.getConfig().getSystemWorkspace();
       return new JCRResourceResolver(getRepository(), wsName, Utils.EXO_TEMPLATEFILE) ;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
@@ -135,7 +135,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
       String nodeTypeName = node_.getPrimaryNodeType().getName();
       
-      return templateService.isManagedNodeType(nodeTypeName, getRepository());
+      return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
     }
@@ -198,7 +198,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     NodeType currentNodeType = currentNode.getPrimaryNodeType() ; 
     NodeDefinition[] childDefs = currentNodeType.getChildNodeDefinitions() ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    List templates = templateService.getDocumentTemplates(repository) ;
+    List templates = templateService.getDocumentTemplates() ;
     try {
       for(int i = 0; i < templates.size(); i ++){
         String nodeTypeName = templates.get(i).toString() ; 
@@ -312,17 +312,17 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     String nodeTypeName = node_.getPrimaryNodeType().getName();
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return templateService.getTemplatePathByUser(false, nodeTypeName, userName, getRepository());
+    return templateService.getTemplatePathByUser(false, nodeTypeName, userName);
   }
 
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getTemplatePath(false, nodeTypeName, templateName,getRepository()) ;
+    return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
   
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage(), getRepository()) ;
+    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
   }  
 
   public List<Node> getComments() throws Exception {

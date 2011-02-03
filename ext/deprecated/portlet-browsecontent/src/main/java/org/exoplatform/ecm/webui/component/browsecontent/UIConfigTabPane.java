@@ -65,9 +65,8 @@ public class UIConfigTabPane extends UIContainer {
   
   public List<SelectItemOption<String>> getWorkSpaceOption() throws Exception {
     List<SelectItemOption<String>> Options = new ArrayList<SelectItemOption<String>>();
-    String repository = getAncestorOfType(UIBrowseContentPortlet.class).getPreferenceRepository();
     String[] workspaceNames = getApplicationComponent(RepositoryService.class)
-    .getRepository(repository).getWorkspaceNames();
+    .getCurrentRepository().getWorkspaceNames();
     for(String workspace:workspaceNames) {
       Options.add(new SelectItemOption<String>(workspace,workspace));
     }   
@@ -205,7 +204,7 @@ public class UIConfigTabPane extends UIContainer {
     uiOneNodePathSelector.setIsDisable(workSpace, true);
     uiOneNodePathSelector.setRootNodeLocation(repo, workSpace, path);
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    List<String> documents = templateService.getDocumentTemplates(repo);
+    List<String> documents = templateService.getDocumentTemplates();
     String [] filterType = new String[documents.size()];
     documents.toArray(filterType);
     uiOneNodePathSelector.setAcceptedNodeTypesInPathPanel(filterType);

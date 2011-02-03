@@ -144,13 +144,12 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
   public String getTemplatePath(){
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    String repository = getAncestorOfType(UIBrowseContentPortlet.class).getPreferenceRepository() ;
     String template = null;
     try{
       if(SessionProviderFactory.isAnonim()) {
-        template = templateService.getTemplatePathByAnonymous(false, getNodeType(), repository);
+        template = templateService.getTemplatePathByAnonymous(false, getNodeType());
       } else {
-        template = templateService.getTemplatePathByUser(false, getNodeType(), userName, repository) ;
+        template = templateService.getTemplatePathByUser(false, getNodeType(), userName) ;
       }
       if(jcrTemplateResourceResolver_ == null) newJCRTemplateResourceResolver();
       return template;
@@ -311,8 +310,7 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
   public boolean isNodeTypeSupported() {
     try {      
       TemplateService templateService = getApplicationComponent(TemplateService.class);
-      String repository = getAncestorOfType(UIBrowseContentPortlet.class).getPreferenceRepository() ;
-      return templateService.isManagedNodeType(getNodeType(), repository);
+      return templateService.isManagedNodeType(getNodeType());
     } catch (Exception e) {
       return false;
     }
@@ -321,16 +319,14 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
   public boolean isNodeTypeSupported(String nodeTypeName) {
     try {      
       TemplateService templateService = getApplicationComponent(TemplateService.class);
-      String repository = getAncestorOfType(UIBrowseContentPortlet.class).getPreferenceRepository() ;
-      return templateService.isManagedNodeType(nodeTypeName, repository);
+      return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
     }
   }
 
   public Node getNodeByUUID(String uuid) throws Exception{ 
-    String repository = getAncestorOfType(UIBrowseContentPortlet.class).getPreferenceRepository() ;
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     SessionProvider provider = SessionProviderFactory.createSessionProvider();
     for(String ws : workspaces) {
@@ -371,8 +367,7 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
 
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    String repository = getAncestorOfType(UIBrowseContentPortlet.class).getPreferenceRepository() ;
-    return tempServ.getTemplatePath(false, nodeTypeName, templateName, repository) ;
+    return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
 
   public void activate() throws Exception {}
@@ -416,7 +411,7 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
 
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage(), getRepository()) ;
+    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
   }
 
   public UIComponent getUIComponent(String mimeType) throws Exception {
@@ -465,9 +460,8 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
       Node node = null ;
       UIBrowseContainer uiContainer = cbPortlet.findFirstComponentOfType(UIBrowseContainer.class) ;     
       if(wsName != null) {
-        String repository = uiDocument.getAncestorOfType(UIBrowseContentPortlet.class).getPreferenceRepository() ;        
         ManageableRepository manageableRepository = 
-          uiDocument.getApplicationComponent(RepositoryService.class).getRepository(repository) ;        
+          uiDocument.getApplicationComponent(RepositoryService.class).getCurrentRepository();        
         Session session = null ;
         if(path.indexOf("/jcr:system")>0) {
           session = SessionProviderFactory.createSystemProvider().getSession(wsName,manageableRepository) ;

@@ -362,12 +362,12 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
   
   /**
    * Test method MultiLanguagetService.addFileLanguage(Node node, String fileName, Value value, String mimeType, String language, String repositoryName, boolean isDefault)
-   * Input:  add child node nt:file ("/conf/standalone/test-configuration.xml") to node
+   * Input:  add child node nt:file ("/conf/standalone/system-configuration.xml") to node
    *        language fr for node with child node nt:file ("/conf/standalone/system-configuration.xml")
-   *        language vi for node with child node nt:file ("/conf/standalone/test-configuration.xml") as default language
-   * Expect: data of child node nt:file of test node is  ("/conf/standalone/test-configuration.xml")
+   *        language vi for node with child node nt:file ("/conf/standalone/system-configuration.xml") as default language
+   * Expect: data of child node nt:file of test node is  ("/conf/standalone/system-configuration.xml")
    *         data of child node nt:file of node in path: /test/languages/English/test/jcr:content is
-   *           ("/conf/standalone/test-configuration.xml")
+   *           ("/conf/standalone/system-configuration.xml")
    *        
    * @throws Exception
    */
@@ -393,8 +393,8 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("vi", defaultLanguage);
 //    assertTrue(test.hasNode("languages/en/test/jcr:content"));
-//    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/test-configuration.xml").openStream(), test.getNode("languages/en/test/jcr:content").getProperty(DATA).getStream()));
-//    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/test-configuration.xml").openStream(), test.getNode(CONTENT).getProperty(DATA).getStream()));
+//    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), test.getNode("languages/en/test/jcr:content").getProperty(DATA).getStream()));
+//    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), test.getNode(CONTENT).getProperty(DATA).getStream()));
     
   }
 

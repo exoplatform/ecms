@@ -205,44 +205,36 @@ public class TemplatePlugin extends BaseComponentPlugin {
     nodeHierarchyCreator_ = nodeHierarchyCreator;
     repositoryService_ = jcrService;
     configManager_ = configManager;
-    cmsTemplatesBasePath_ = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_TEMPLATES_PATH) ;
-    params_ = params ;    
+    cmsTemplatesBasePath_ = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_TEMPLATES_PATH);
+    params_ = params;
     ValueParam locationParam = params_.getValueParam("storedLocation") ;
-    storedLocation_ = locationParam.getValue() ;
+    storedLocation_ = locationParam.getValue();
     ValueParam param = params_.getValueParam("autoCreateInNewRepository");
     if(param!=null) {
-      autoCreateInNewRepository_ = Boolean.parseBoolean(param.getValue()) ;
+      autoCreateInNewRepository_ = Boolean.parseBoolean(param.getValue());
     }
     dmsConfiguration_ = dmsConfiguration;
     templateService = WCMCoreUtils.getService(TemplateService.class); 
   }
 
   public void init() throws Exception {               
-    if(autoCreateInNewRepository_) {
-      List<RepositoryEntry> repositories = repositoryService_.getConfig().getRepositoryConfigurations() ;      
-      for(RepositoryEntry repo:repositories) {        
-        importPredefineTemplates(repo.getName()) ;
-      }
-    }else {
-      ValueParam valueParam = params_.getValueParam("repository") ;
-      String repository = null ;
-      if(valueParam != null) {
-        repository = valueParam.getValue() ;
-      }else {
-        repository = repositoryService_.getDefaultRepository().getConfiguration().getName();
-      }      
-      importPredefineTemplates(repository) ;
-    }        
+    importPredefineTemplates() ;
   }
 
+  /**
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #init()} instead.
+   * @param repository
+   * @throws Exception
+   */
+  @Deprecated
   public void init(String repository) throws Exception {        
     if(autoCreateInNewRepository_) {
-      importPredefineTemplates(repository) ;
+      importPredefineTemplates() ;
     }          
   }
   
   @SuppressWarnings("unchecked")
-  private void addTemplate(TemplateConfig templateConfig, Node templatesHome,String storedLocation) throws Exception{
+  private void addTemplate(TemplateConfig templateConfig, Node templatesHome,String storedLocation) throws Exception {
     NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager() ;
     NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();
     List<String> listNodeTypeName = new ArrayList<String>();
@@ -253,7 +245,6 @@ public class TemplatePlugin extends BaseComponentPlugin {
     List nodetypes = templateConfig.getNodeTypes();
     TemplateConfig.NodeType nodeType = null ;       
     Iterator iter = nodetypes.iterator() ;
-    String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
     while(iter.hasNext()) {
       nodeType = (TemplateConfig.NodeType) iter.next();
       if (!listNodeTypeName.contains(nodeType.getNodetypeName())) {
@@ -261,7 +252,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
         continue;
       }
       Node nodeTypeHome = null;      
-      nodeTypeHome = Utils.makePath(templatesHome, nodeType.getNodetypeName(),NT_UNSTRUCTURED);
+      nodeTypeHome = Utils.makePath(templatesHome, nodeType.getNodetypeName(), NT_UNSTRUCTURED);
       if(nodeType.getDocumentTemplate())
         nodeTypeHome.setProperty(DOCUMENT_TEMPLATE_PROP, true) ;
       else
@@ -270,14 +261,14 @@ public class TemplatePlugin extends BaseComponentPlugin {
       nodeTypeHome.setProperty(TEMPLATE_LABEL, nodeType.getLabel()) ;
       
       List dialogs = nodeType.getReferencedDialog();
-      addNode(storedLocation, nodeType, dialogs, DIALOGS, repository, templatesHome);
+      addNode(storedLocation, nodeType, dialogs, DIALOGS, templatesHome);
       
       List views = nodeType.getReferencedView();
-      addNode(storedLocation, nodeType, views, VIEWS, repository, templatesHome);
+      addNode(storedLocation, nodeType, views, VIEWS, templatesHome);
             
       List skins = nodeType.getReferencedSkin();
       if(skins != null) {
-        addNode(storedLocation, nodeType, skins, SKINS, repository, templatesHome);
+        addNode(storedLocation, nodeType, skins, SKINS, templatesHome);
       }
     }    
   }
@@ -285,9 +276,9 @@ public class TemplatePlugin extends BaseComponentPlugin {
   public void setBasePath(String basePath) { cmsTemplatesBasePath_ = basePath ; }
 
   @SuppressWarnings("unchecked")
-  private void importPredefineTemplates(String repositoryName) throws Exception {
-    ManageableRepository repository = repositoryService_.getRepository(repositoryName) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repositoryName);
+  private void importPredefineTemplates() throws Exception {
+    ManageableRepository repository = repositoryService_.getCurrentRepository();
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     String workspace = dmsRepoConfig.getSystemWorkspace();
     Session session = repository.getSystemSession(workspace) ;
     Node templatesHome = Utils.makePath(session.getRootNode(), cmsTemplatesBasePath_, NT_UNSTRUCTURED);
@@ -306,7 +297,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
 
   @SuppressWarnings("unchecked")
   private void addNode(String basePath, TemplateConfig.NodeType nodeType, List templates, String templateType, 
-      String repository, Node templatesHome)  throws Exception {
+      Node templatesHome)  throws Exception {
     for (Iterator iterator = templates.iterator(); iterator.hasNext();) {
       TemplateConfig.Template template = (TemplateConfig.Template) iterator.next();
       String templateFileName = template.getTemplateFile();
@@ -327,7 +318,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
       }
       if(!specifiedTemplatesHome.hasNode(nodeName)) {
         templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), nodeName, 
-            template.getParsedRoles(), in, repository, templatesHome);
+            template.getParsedRoles(), in, templatesHome);
       }
     }
   }    

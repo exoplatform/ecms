@@ -276,7 +276,6 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
 	    public void execute(Event<UIShowAllHiddenResult> event) throws Exception {
 	      UIShowAllHiddenResult uiShowAllHiddenResult = event.getSource();            
 	      UIJCRExplorer uiExplorer = uiShowAllHiddenResult.getAncestorOfType(UIJCRExplorer.class);
-	      String repository = uiExplorer.getRepositoryName();
 	      String path = event.getRequestContext().getRequestParameter(OBJECTID);
 	      UIApplication uiApp = uiShowAllHiddenResult.getAncestorOfType(UIApplication.class);
 	      Node node;
@@ -289,7 +288,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
 	        return;
 	      }
 	      TemplateService templateService = uiShowAllHiddenResult.getApplicationComponent(TemplateService.class);
-	      if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName(), repository)) {
+	      if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName())) {
 	        uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.not-support", null, 
 	                                                ApplicationMessage.WARNING));
 	        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());

@@ -74,14 +74,13 @@ public class BPActionPlugin extends BaseActionPlugin implements ComponentPlugin 
   public String getActionExecutableLabel() { return "Business Processes:"; }
   public String getExecutableDefinitionName() { return "exo:businessProcess"; }
     
-  protected String getRepositoryName() { return config_.getRepository() ; }
   protected String getWorkspaceName() { return config_.getWorkspace() ; }
   
   protected List<RepositoryEntry> getRepositories() {
     return repositoryService_.getConfig().getRepositoryConfigurations() ;
   }
-  protected ManageableRepository getRepository(String repository) throws Exception {
-    return repositoryService_.getRepository(repository);
+  protected ManageableRepository getRepository() throws Exception {
+    return repositoryService_.getCurrentRepository();
   }
   
   protected String getActionType() { return ACTION_TYPE ; }

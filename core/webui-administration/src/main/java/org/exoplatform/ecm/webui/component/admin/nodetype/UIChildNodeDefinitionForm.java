@@ -110,11 +110,8 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
 
   private List<SelectItemOption<String>> getNamespaces() throws Exception {
     List<SelectItemOption<String>> namespacesOptions = new ArrayList<SelectItemOption<String>>();
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-    String repository = portletPref.getValue(Utils.REPOSITORY, "");
     String[] namespaces = getApplicationComponent(RepositoryService.class)
-                          .getRepository(repository).getNamespaceRegistry().getPrefixes();
+                          .getCurrentRepository().getNamespaceRegistry().getPrefixes();
     for( int i = 0; i < namespaces.length; i ++){
       namespacesOptions.add(new SelectItemOption<String>(namespaces[i], namespaces[i]));
     }

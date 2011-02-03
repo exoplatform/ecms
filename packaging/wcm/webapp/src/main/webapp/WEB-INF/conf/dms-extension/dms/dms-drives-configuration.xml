@@ -19,7 +19,6 @@
             <description>Document managements</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>Shared Users Space</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>collaboration</string></field>
               <field  name="permissions"><string>*:/platform/users</string></field>
               <field  name="homePath"><string>/Users</string></field>
@@ -40,7 +39,6 @@
             <description>Private drive</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>Private</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>collaboration</string></field>
               <field  name="permissions"><string>${userId}</string></field>
               <field  name="homePath"><string>/Users/${userId}/Private</string></field>
@@ -61,7 +59,6 @@
             <description>Public drive</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>Public</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>collaboration</string></field>
               <field  name="permissions"><string>*:/platform/users</string></field>
               <field  name="homePath"><string>/Users/${userId}/Public</string></field>
@@ -82,7 +79,6 @@
             <description>DMS system data area</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>DMS Administration</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>dms-system</string></field>
               <field  name="permissions"><string>*:/platform/administrators</string></field>
               <field  name="homePath"><string>/</string></field>
@@ -104,7 +100,6 @@
             <description>DMS trash area</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>Trash</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>collaboration</string></field>
               <field  name="permissions"><string>*:/platform/administrators</string></field>
               <field  name="homePath"><string>/Trash</string></field>
@@ -126,7 +121,6 @@
             <description>Document managements</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>Shared Groups Space</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>collaboration</string></field>
               <field  name="permissions"><string>*:/platform/users</string></field>
               <field  name="homePath"><string>/Groups</string></field>

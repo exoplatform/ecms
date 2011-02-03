@@ -79,7 +79,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private List<TagStylePlugin> plugin_ = new ArrayList<TagStylePlugin>();
   private List<TagPermissionPlugin> tagPermissionPlugin_ = new ArrayList<TagPermissionPlugin>();
   private Set<String> tagPermissionList = new HashSet<String>();
-  private String sitesTagPath = null;
+  private Map<String, String> sitesTagPath = new HashMap<String, String>();
   
   public NewFolksonomyServiceImpl(InitParams initParams, NodeHierarchyCreator nodeHierarchyCreator, 
       LinkManager linkManager, NodeFinder nodeFinder) throws Exception {
@@ -225,10 +225,10 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    * {@inheritDoc}
    */
   public void addSiteTag(String siteName, String[] tagsName, Node node, String repository, String workspace) throws Exception {
-  	if (sitesTagPath == null) {
+  	if (sitesTagPath.get(getRepoName()) == null) {
   		createSiteTagPath();
   	}
-		addPublicTag(sitesTagPath + "/" + siteName, tagsName, node, repository, workspace);    
+		addPublicTag(sitesTagPath.get(getRepoName()) + "/" + siteName, tagsName, node, repository, workspace);    
   }
 
   /**
@@ -307,10 +307,28 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    * {@inheritDoc}
    */
   public List<Node> getAllSiteTags(String siteName, String repository, String workspace) throws Exception {
-  	if (sitesTagPath == null) {
+  	if (sitesTagPath.get(getRepoName()) == null) {
   		createSiteTagPath();
   	}
-  	return getAllPublicTags(sitesTagPath + "/" + siteName, repository, workspace);
+  	return getAllPublicTags(sitesTagPath.get(getRepoName()) + "/" + siteName, repository, workspace);
+  }
+
+  private String getRepoName() {
+    try {
+      String repositoryName = sessionProvider.getCurrentRepository().getConfiguration().getName();
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("The repository name is: " + repositoryName);
+      }
+      return repositoryName;
+    } catch (NullPointerException e) {
+      String repositoryName = System.getProperty("gatein.tenant.repository.name");
+      if (repositoryName != null) {
+       return repositoryName;
+      } else {
+       LOG.error("Repository exception occurs:", e);
+       return null;
+      }
+    }
   }
 
   /**
@@ -391,7 +409,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();  	
 		RepositoryService repositoryService 
 				= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepository = repositoryService.getRepository(repository);
+		ManageableRepository	manageableRepository = repositoryService.getCurrentRepository();
   	
 		Session session = sessionProvider.getSession(workspace, manageableRepository);
 		session.move(tagPath, newPath.toString());
@@ -559,7 +577,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();  	
 		RepositoryService repositoryService 
 		= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepository = repositoryService.getRepository(repository);
+		ManageableRepository	manageableRepository = repositoryService.getCurrentRepository();
   	
   	return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
   }
@@ -569,7 +587,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     
 		RepositoryService repositoryService 
 		= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepository = repositoryService.getRepository(repository);
+		ManageableRepository	manageableRepository = repositoryService.getCurrentRepository();
   	
   	return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
   }
@@ -613,7 +631,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();  	
 		RepositoryService repositoryService 
 		= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepository = repositoryService.getRepository(repository);
+		ManageableRepository	manageableRepository = repositoryService.getCurrentRepository();
   	
 		QueryManager queryManager =
 			sessionProvider.getSession(workspace, manageableRepository).getWorkspace().getQueryManager();
@@ -744,13 +762,11 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 	
 	
 	private void createSiteTagPath() throws Exception {
-  	if (sitesTagPath == null) {
+  	if (sitesTagPath.get(getRepoName()) == null) {
       // init path to site tags
   		ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-  		RepositoryService repositoryService 
-  		= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-  		ManageableRepository	manageableRepository 
-  		= repositoryService.getRepository(initParams_.getValueParam("repository").getValue());
+  		RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
+  		ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       
       Session session = sessionProvider.getSession(initParams_.getValueParam("workspace").getValue(), 
       																						 manageableRepository);
@@ -759,7 +775,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       Node rootNode = session.getRootNode();
       Node currentNode = rootNode;
       int depth = 0;
-      for (String path : paths) 
+      for (String path : paths) { 
       	if (path.length() > 0) {
       		Node cnode = currentNode.hasNode(path) ? currentNode.getNode(path) :
       																						currentNode.addNode(path);
@@ -768,8 +784,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       			if (!currentNode.isNodeType(EXO_HIDDENABLE))
       				currentNode.addMixin(EXO_HIDDENABLE);
       	}
+  	  }
       session.save();
-      sitesTagPath = currentNode.getPath();    
+      sitesTagPath.put(getRepoName(), currentNode.getPath());    
   	}
 	}
 	

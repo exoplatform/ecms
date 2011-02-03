@@ -246,7 +246,7 @@ public class UIWorkspaceList extends UIForm {
       String workspaceName = uiJBrowser.getWorkspaceName();
       String repositoryName = uiJBrowser.getRepositoryName();
       RepositoryService repositoryService = uiWorkspaceList.getApplicationComponent(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       SessionProvider sessionProvider = Utils.getSessionProvider();
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);
       String value = session.getRootNode().getPath();

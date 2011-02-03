@@ -206,7 +206,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       if((path == null)||(path.trim().length() == 0)) path = "/";
       Session session = null;
       try {        
-        session = rservice.getRepository(repository).getSystemSession(workspace);
+        session = rservice.getCurrentRepository().getSystemSession(workspace);
         String userId = Util.getPortalRequestContext().getRemoteUser();
         String pathReal = path.replace("${userId}", userId);
         session.getItem(pathReal);
@@ -307,7 +307,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         try {
           if(iconPath.indexOf(":/") > -1) {
             String[] paths = iconPath.split(":/");
-            jcrSession = rservice.getRepository(repository).getSystemSession(paths[0]);
+            jcrSession = rservice.getCurrentRepository().getSystemSession(paths[0]);
             jcrSession.getItem("/" + paths[1]);
             jcrSession.logout();
           }
@@ -326,7 +326,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       String allowNodeTypesOnTree = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).getValue();
       if ((allowNodeTypesOnTree==null) || (allowNodeTypesOnTree.length()==0)) allowNodeTypesOnTree = "*";
       dservice_.addDrive(name, workspace, permissions, path, views, iconPath, viewReferences, 
-          viewNonDocument, viewSideBar, showHiddenNode, repository, foldertypes.toString(), allowNodeTypesOnTree);
+          viewNonDocument, viewSideBar, showHiddenNode, foldertypes.toString(), allowNodeTypesOnTree);
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       UIDriveList uiDriveList = uiManager.getChild(UIDriveList.class);
       uiDriveList.updateDriveListGrid(uiDriveList.getUIPageIterator().getCurrentPage());
@@ -422,7 +422,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       RepositoryService repositoryService = 
         uiDriveForm.getApplicationComponent(RepositoryService.class);
       List<WorkspaceEntry> wsEntries = 
-        repositoryService.getRepository(repository).getConfiguration().getWorkspaceEntries();
+        repositoryService.getCurrentRepository().getConfiguration().getWorkspaceEntries();
       String wsInitRootNodeType = null;
       for(WorkspaceEntry wsEntry : wsEntries) {
         if(wsEntry.getName().equals(selectedWorkspace)) {
@@ -431,7 +431,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       }
       
       TemplateService templateService = uiDriveForm.getApplicationComponent(TemplateService.class);
-      Set<String> setFoldertypes = templateService.getAllowanceFolderType(repository);
+      Set<String> setFoldertypes = templateService.getAllowanceFolderType();
       List<SelectItemOption<String>> foldertypeOptions = new ArrayList<SelectItemOption<String>>();
       RequestContext context = RequestContext.getCurrentInstance();
       ResourceBundle res = context.getApplicationResourceBundle();

@@ -48,8 +48,7 @@ public class IsDocumentFilter extends UIExtensionAbstractFilter {
     UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
     TemplateService templateService = uiExplorer.getApplicationComponent(TemplateService.class);
     NodeType nodeType = currentNode.getPrimaryNodeType();
-    String repository = uiExplorer.getRepositoryName();
-    return templateService.getDocumentTemplates(repository).contains(nodeType.getName());
+    return templateService.getDocumentTemplates().contains(nodeType.getName());
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {

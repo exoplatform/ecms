@@ -36,19 +36,16 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * 3. initNewRepo() method
  */
 
-public class TestDMSConfigurationService extends BaseDMSTestCase{
-  
+public class TestDMSConfigurationService extends BaseDMSTestCase {
+
   private DMSConfiguration dmsConfiguration = null;
-  
-  private final static String REPO_TEST = "repository-test".intern();
-  
+
   private final static String TEST_WS = "workspace-test".intern();
-  
-  
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    dmsConfiguration = (DMSConfiguration) container.getComponentInstanceOfType(DMSConfiguration.class);
+    dmsConfiguration = (DMSConfiguration)container.getComponentInstanceOfType(DMSConfiguration.class);
   }
 
   /**
@@ -58,44 +55,57 @@ public class TestDMSConfigurationService extends BaseDMSTestCase{
    *     Workspace Name:  DMSSYSTEM_WS
    *     Repository Name: REPO_NAME
    */
-  public void testGetConfig() throws Exception{
-    DMSRepositoryConfiguration dmsRepoConf = dmsConfiguration.getConfig(REPO_NAME);
-    assertEquals(REPO_NAME, dmsRepoConf.getRepositoryName());
-    assertEquals(DMSSYSTEM_WS, dmsRepoConf.getSystemWorkspace());
+  public void testGetConfig() throws Exception {
+    DMSRepositoryConfiguration oldDmsRepoConf = dmsConfiguration.getConfig();
+    try {
+      DMSRepositoryConfiguration dmsRepoConf = dmsConfiguration.getConfig();
+      assertEquals(DMSSYSTEM_WS, dmsRepoConf.getSystemWorkspace());
+    }
+    finally {
+      dmsConfiguration.addPlugin(oldDmsRepoConf);
+    }
   }
-  
+
   /**
    * Test Method: initNewRepo()
    * Input: DMSRepositoryConfiguration with new repository name and new workspace name
    * Expected:
    *        New repository is initialized
    */
-  public void testInitNewRepo() throws Exception{
-    DMSRepositoryConfiguration dmsRepoConfig = new DMSRepositoryConfiguration();
-    dmsRepoConfig.setRepositoryName(REPO_TEST);
-    dmsRepoConfig.setSystemWorkspace(TEST_WS);
-    dmsConfiguration.initNewRepo(dmsRepoConfig.getRepositoryName(), dmsRepoConfig);
-    DMSRepositoryConfiguration dmsRepoConf = dmsConfiguration.getConfig(REPO_TEST);
-    assertEquals(REPO_TEST, dmsRepoConf.getRepositoryName());
-    assertEquals(TEST_WS, dmsRepoConf.getSystemWorkspace());
+  public void testInitNewRepo() throws Exception {
+    DMSRepositoryConfiguration oldDmsRepoConf = dmsConfiguration.getConfig();
+    try {
+      DMSRepositoryConfiguration dmsRepoConfig = new DMSRepositoryConfiguration();
+      dmsRepoConfig.setSystemWorkspace(TEST_WS);
+      dmsConfiguration.initNewRepo(dmsRepoConfig);
+      DMSRepositoryConfiguration dmsRepoConf = dmsConfiguration.getConfig();
+      assertEquals(TEST_WS, dmsRepoConf.getSystemWorkspace());
+    }
+    finally {
+      dmsConfiguration.addPlugin(oldDmsRepoConf);
+    }
   }
-  
+
   /**
    * Test Method: addPlugin()
    * Input: plugin is an instance of DMSRespositoryConfig
    * Expected:
    *        plugin is added to repository
    */
-  public void testAddPlugin() throws Exception{
-    DMSRepositoryConfiguration dmsRepoConfig = new DMSRepositoryConfiguration();
-    dmsRepoConfig.setRepositoryName(REPO_TEST);
-    dmsRepoConfig.setSystemWorkspace(TEST_WS);
-    dmsConfiguration.addPlugin(dmsRepoConfig);
-    DMSRepositoryConfiguration dmsRepoConf = dmsConfiguration.getConfig(REPO_TEST);
-    assertEquals(REPO_TEST, dmsRepoConf.getRepositoryName());
-    assertEquals(TEST_WS, dmsRepoConf.getSystemWorkspace());
+  public void testAddPlugin() throws Exception {
+    DMSRepositoryConfiguration oldDmsRepoConf = dmsConfiguration.getConfig();
+    try {
+      DMSRepositoryConfiguration dmsRepoConfig = new DMSRepositoryConfiguration();
+      dmsRepoConfig.setSystemWorkspace(TEST_WS);
+      dmsConfiguration.addPlugin(dmsRepoConfig);
+      DMSRepositoryConfiguration dmsRepoConf = dmsConfiguration.getConfig();
+      assertEquals(TEST_WS, dmsRepoConf.getSystemWorkspace());
+    }
+    finally {
+      dmsConfiguration.addPlugin(oldDmsRepoConf);
+    }
   }
-  
+
   @Override
   public void tearDown() throws Exception {
     super.tearDown();

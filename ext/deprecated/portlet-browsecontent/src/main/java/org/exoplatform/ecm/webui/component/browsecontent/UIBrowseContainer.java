@@ -250,7 +250,7 @@ public class UIBrowseContainer extends UIContainer {
     String workspace = getWorkSpace();
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class);
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    List<String> documentsType = templateService.getDocumentTemplates(repository);
+    List<String> documentsType = templateService.getDocumentTemplates();
     List<Node> documentsOnTag = new ArrayList<Node>();
     WebuiRequestContext ctx = WebuiRequestContext.getCurrentInstance();
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?
@@ -329,7 +329,7 @@ public class UIBrowseContainer extends UIContainer {
     } catch(PathNotFoundException path) {
       // Target node with other workspace
       RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      String[] wsNames = repositoryService.getRepository(repository).getWorkspaceNames();
+      String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
       for(String wsName : wsNames) {
         Node targetNode = null;
         try {
@@ -490,7 +490,7 @@ public class UIBrowseContainer extends UIContainer {
   public String getKeyValue() { return keyValue_; }
 
   public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(getRepository());
+    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames();
     for(String ws : workspaces) {
       try{
@@ -534,7 +534,7 @@ public class UIBrowseContainer extends UIContainer {
   public List<Node> getNodeByQuery(String queryType, String queryString) throws Exception {
     List<Node> queryDocuments = new ArrayList<Node>();
     try {
-      ManageableRepository repository = getRepositoryService().getRepository(getRepository());
+      ManageableRepository repository = getRepositoryService().getCurrentRepository();
       String workspace = repository.getConfiguration().getDefaultWorkspaceName();
       QueryManager queryManager = null;
       Session session = getSystemProvider().getSession(workspace, repository);
@@ -569,7 +569,7 @@ public class UIBrowseContainer extends UIContainer {
   public Map getPathContent() throws Exception {
     TemplateService templateService  = getApplicationComponent(TemplateService.class);
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    List<String> templates = templateService.getDocumentTemplates(getRepository());
+    List<String> templates = templateService.getDocumentTemplates();
     List<String> tabList = new ArrayList<String>();
     List<String> subCategoryList = new ArrayList<String>();
     List<Node> subDocumentList = new ArrayList<Node>();
@@ -782,7 +782,7 @@ public class UIBrowseContainer extends UIContainer {
     } else {
       workspace = getWorkSpace();
     }
-    ManageableRepository manageableRepository = getRepositoryService().getRepository(getRepository());
+    ManageableRepository manageableRepository = getRepositoryService().getCurrentRepository();
     if(categoryPath_ != null && categoryPath_.startsWith("/jcr:system")) { 
       if(!Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_FILTER_CATEGORY, ""))){
         session = getSystemProvider().getSession(workspace,manageableRepository);
@@ -801,7 +801,7 @@ public class UIBrowseContainer extends UIContainer {
   
   public Session getSession(String repository, String workspace) throws Exception{
     Session session = null;
-    ManageableRepository manageableRepository = getRepositoryService().getRepository(repository);
+    ManageableRepository manageableRepository = getRepositoryService().getCurrentRepository();
     if(categoryPath_ != null && categoryPath_.startsWith("/jcr:system")) {
       if(!Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_FILTER_CATEGORY, ""))){
         session = getSystemProvider().getSession(workspace,manageableRepository);
@@ -828,7 +828,7 @@ public class UIBrowseContainer extends UIContainer {
       selectedNode = linkManager.getTarget(selectedNode);
     }
     TemplateService templateService  = getApplicationComponent(TemplateService.class);
-    List<String> templates = templateService.getDocumentTemplates(getRepository());
+    List<String> templates = templateService.getDocumentTemplates();
     try {
       NodeIterator item = selectedNode.getNodes();
       if (isEnableChildDocument()) {
@@ -1007,7 +1007,7 @@ public class UIBrowseContainer extends UIContainer {
   public Map getTreeContent() throws Exception {
     TemplateService templateService  = getApplicationComponent(TemplateService.class);
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    List templates = templateService.getDocumentTemplates(getRepository());
+    List templates = templateService.getDocumentTemplates();
     List<String> subCategoryList = new ArrayList<String>();
     List<Node> subDocumentList = new ArrayList<Node>();
     Node currentNode = getCurrentNode();
@@ -1071,7 +1071,7 @@ public class UIBrowseContainer extends UIContainer {
   			container.getComponentInstanceOfType(DMSConfiguration.class);
   	
     //ManageableRepository manageableRepository = repoService.getRepository(repository) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
     //return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
   }
@@ -1208,7 +1208,7 @@ public class UIBrowseContainer extends UIContainer {
     
   public String getDmsSystemWorkspace() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig(getRepository());
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
   
@@ -1223,7 +1223,7 @@ public class UIBrowseContainer extends UIContainer {
 
   public void processRender(WebuiRequestContext context) throws Exception {
     try {
-      getApplicationComponent(RepositoryService.class).getRepository(getRepository());
+      getApplicationComponent(RepositoryService.class).getCurrentRepository();
       if (getCurrentNode() != null) super.processRender(context);
     } catch (Exception e) {
       LOG.error("An error occured while displaying the content", e);      
@@ -1633,7 +1633,7 @@ public class UIBrowseContainer extends UIContainer {
       int size, List<?> templates) throws Exception {
     List<Node> refDocuments = new ArrayList<Node>();    
     String repository = getRepository();
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     SessionProvider provider = null;
     if (SessionProviderFactory.isAnonim()) {
       provider = getSystemProvider();
@@ -1700,7 +1700,7 @@ public class UIBrowseContainer extends UIContainer {
     public void execute(Event<UIBrowseContainer> event) throws Exception {
       UIBrowseContainer uiContainer = event.getSource();
       TemplateService templateService  = uiContainer.getApplicationComponent(TemplateService.class);
-      List<String> templates = templateService.getDocumentTemplates(uiContainer.getRepository());
+      List<String> templates = templateService.getDocumentTemplates();
       Node historyNode = null;
       historyNode = uiContainer.getHistory().get(UIBrowseContainer.KEY_CURRENT);
       if (historyNode == null) historyNode = uiContainer.getCurrentNode();      
@@ -1879,7 +1879,7 @@ public class UIBrowseContainer extends UIContainer {
         } 
       }
       TemplateService templateService = uiContainer.getApplicationComponent(TemplateService.class);
-      List<String> templates = templateService.getDocumentTemplates(uiContainer.getRepository());
+      List<String> templates = templateService.getDocumentTemplates();
       if (templates.contains(selectNode.getPrimaryNodeType().getName())) {
         if (catPath != null) {
           if (uiContainer.getUseCase().equals(Utils.CB_USE_FROM_PATH)) {

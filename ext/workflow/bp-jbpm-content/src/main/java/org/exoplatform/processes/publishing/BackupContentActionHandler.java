@@ -51,14 +51,13 @@ public class BackupContentActionHandler implements ActionHandler {
 
   protected void backupContent(ExecutionContext context) throws Exception {                  
     String[] currentLocation = ProcessUtil.getCurrentLocation(context);
-    String repository =currentLocation[0];
     String currentWorkspace = currentLocation[1];
     String currentPath = currentLocation[2];
     String backupWorkspace = (String)context.getVariable("exo:backupWorkspace");
     String backupPath = (String)context.getVariable("exo:backupPath");
     String realBackupPath = ProcessUtil.computeDestinationPath(context, currentPath,backupPath);                
     CmsService cmsService = ProcessUtil.getService(context, CmsService.class);
-    cmsService.moveNode(currentPath, currentWorkspace, backupWorkspace, realBackupPath, repository);
+    cmsService.moveNode(currentPath, currentWorkspace, backupWorkspace, realBackupPath);
     ProcessUtil.setCurrentLocation(context,backupWorkspace,realBackupPath);    
     ProcessUtil.backup(context);
   }

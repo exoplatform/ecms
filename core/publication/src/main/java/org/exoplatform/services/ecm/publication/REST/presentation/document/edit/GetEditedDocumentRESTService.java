@@ -127,7 +127,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     }
     ArrayList<Node>  lstNode = new ArrayList<Node>();
     StringBuffer bf = new StringBuffer(1024);
-    List<String> lstNodeType = templateService.getDocumentTemplates(repository);
+    List<String> lstNodeType = templateService.getDocumentTemplates();
     if (lstNodeType != null) {
       for (String nodeType : lstNodeType) {
         bf.append("(").append(JCR_PRIMARYTYPE).append("=").append("'").append(nodeType).append("'")

@@ -114,17 +114,16 @@ public class UINameWebContentForm extends UIForm {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();    
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    String repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
-    NodeTypeManager nodeTypeManager = repositoryService.getRepository(repositoryName).getNodeTypeManager();
-    List<String> acceptableContentTypes = templateService.getDocumentTemplates(repositoryName);
+    NodeTypeManager nodeTypeManager = repositoryService.getCurrentRepository().getNodeTypeManager();
+    List<String> acceptableContentTypes = templateService.getDocumentTemplates();
     if(acceptableContentTypes.size() == 0) return options;
     String userName = Util.getPortalRequestContext().getRemoteUser();
     for(String contentType: acceptableContentTypes) {
       NodeType nodeType = nodeTypeManager.getNodeType(contentType);
       if (nodeType.isNodeType("exo:webContent")) {
-      	String label = templateService.getTemplateLabel(contentType,repositoryName);
+      	String label = templateService.getTemplateLabel(contentType);
     		try{
-    		  String templatePath = templateService.getTemplatePathByUser(true, contentType, userName, repositoryName);
+    		  String templatePath = templateService.getTemplatePathByUser(true, contentType, userName);
     		  if ((templatePath != null) && (templatePath.length() > 0)) {
     		    options.add(new SelectItemOption<String>(label, contentType));
     		  }

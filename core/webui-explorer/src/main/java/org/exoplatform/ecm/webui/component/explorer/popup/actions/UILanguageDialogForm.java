@@ -121,7 +121,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     String userName = Util.getPortalRequestContext().getRemoteUser();
     try {      
-      return templateService.getTemplatePathByUser(true, documentType_, userName, repositoryName);
+      return templateService.getTemplatePathByUser(true, documentType_, userName);
     } catch (Exception e) {
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       Object[] arg = { documentType_ };
@@ -166,7 +166,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
   
   private String getDMSWorkspace() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    return dmsConfiguration.getConfig(repositoryName).getSystemWorkspace();   
+    return dmsConfiguration.getConfig().getSystemWorkspace();   
   }
   
   static  public class SaveActionListener extends EventListener<UILanguageDialogForm> {

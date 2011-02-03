@@ -198,7 +198,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
         destWorkspace.clone(srcWorkspace, srcTaxonomy.getPath(), destPath, true);
         
         // Remove old link taxonomy tree in definition
-        String dmsSystemWorkspaceName = dmsConfiguration.getConfig(repositoryName).getSystemWorkspace();
+        String dmsSystemWorkspaceName = dmsConfiguration.getConfig().getSystemWorkspace();
         Node taxonomyDefinition = (Node) sessionProvider.getSession(dmsSystemWorkspaceName, repository).getItem(baseTaxonomiesDefinition);
         Node srcLinkTaxonomy = taxonomyDefinition.getNode(srcTaxonomy.getName());
         srcLinkTaxonomy.remove();
@@ -226,10 +226,8 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    */
   public void init() throws Exception {
     if (autoCreateInNewRepository_) {
-      for (RepositoryEntry repositoryEntry : repositoryService.getConfig()
-          .getRepositoryConfigurations()) {
-        importPredefineTaxonomies(repositoryEntry.getName());
-      }
+      RepositoryEntry repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
+      importPredefineTaxonomies(repositoryEntry.getName());
       return;
     }
     ValueParam param = params.getValueParam("repository");
@@ -333,7 +331,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
   @SuppressWarnings("unchecked")
   private void importPredefineTaxonomies(String repository) throws Exception {
     ManageableRepository manageableRepository = this.repositoryService.getRepository(repository);
-    DMSRepositoryConfiguration dmsRepoConfig = this.dmsConfiguration.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = this.dmsConfiguration.getConfig();
     if (getWorkspace() == null) {
       setWorkspace(dmsRepoConfig.getSystemWorkspace());
     }

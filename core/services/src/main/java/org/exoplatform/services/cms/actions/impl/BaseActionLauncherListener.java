@@ -78,7 +78,8 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
       Node node = null;      
       Session jcrSession = null;
       try {
-        jcrSession = repositoryService.getRepository(repository_).getSystemSession(srcWorkspace_);
+        jcrSession = repositoryService.getCurrentRepository().getSystemSession(srcWorkspace_);
+        String repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
         node = (Node) jcrSession.getItem(srcPath_);
         String userId = event.getUserID();
         Node actionNode = actionServiceContainer.getAction(node, actionName_);
@@ -99,7 +100,7 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
         variables.put("initiator", userId);
         variables.put("actionName", actionName_);
         variables.put("nodePath", path);
-        variables.put("repository", repository_);
+        variables.put("repository", repoName);
         variables.put("srcWorkspace", srcWorkspace_);
         variables.put("srcPath", srcPath_);
         variables.putAll(actionVariables_);
@@ -114,9 +115,9 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
           }
           String nodeType = node.getPrimaryNodeType().getName();
           variables.put("document-type", nodeType);
-          triggerAction(userId, variables, repository_);
+          triggerAction(userId, variables, repoName);
         } else {
-          triggerAction(userId, variables, repository_);
+          triggerAction(userId, variables, repoName);
         }
         jcrSession.logout();
       } catch (Exception e) {
@@ -187,7 +188,7 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
   private boolean checkDocumentType(String nodeType) throws Exception {
     ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
     TemplateService templateService = (TemplateService)exoContainer.getComponentInstanceOfType(TemplateService.class);
-    if (templateService.getDocumentTemplates(repository_).contains(nodeType))
+    if (templateService.getDocumentTemplates().contains(nodeType))
       return true;
     return false;
   }

@@ -116,10 +116,9 @@ public class UITemplateContent extends UIForm implements UISelectable {
     if(templateName != null) {
       isAddNew_ = false ;
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-      String repository = getRepository() ;
-      String templateContent = templateService.getTemplate(templateType, nodeTypeName_, templateName, repository) ;
+      String templateContent = templateService.getTemplate(templateType, nodeTypeName_, templateName) ;
       Node template = 
-        templateService.getTemplateNode(templateType, nodeTypeName_, templateName, repository, 
+        templateService.getTemplateNode(templateType, nodeTypeName_, templateName, 
             SessionProviderFactory.createSystemProvider()) ;      
       getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
       String templateRole = 
@@ -227,7 +226,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       Node node = templateService.getTemplateNode(uiForm.getTemplateType(),  uiForm.nodeTypeName_, 
-          name, uiForm.getRepository(), SessionProviderFactory.createSystemProvider()) ;
+          name, SessionProviderFactory.createSystemProvider()) ;
       String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
       String baseVesion = node.getBaseVersion().getName() ;
       UIApplication app = uiForm.getAncestorOfType(UIApplication.class) ;
@@ -306,16 +305,16 @@ public class UITemplateContent extends UIForm implements UISelectable {
         uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
       if(uiForm.isAddNew_){
         templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},  
-            new ByteArrayInputStream(content.getBytes()), repository);
+            new ByteArrayInputStream(content.getBytes()));
       } else {
         Node node = 
           templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_, name, 
-              repository, SessionProviderFactory.createSystemProvider()) ;
+              SessionProviderFactory.createSystemProvider()) ;
         if(isEnableVersioning && !node.isNodeType(Utils.MIX_VERSIONABLE)) {
           node.addMixin(Utils.MIX_VERSIONABLE) ;
         } 
         templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},  
-            new ByteArrayInputStream(content.getBytes()), repository);
+            new ByteArrayInputStream(content.getBytes()));
         node.save() ;
         if(isEnableVersioning) {
           node.checkin() ;
@@ -335,7 +334,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       Node node = templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_, 
-          name, uiForm.getRepository(), SessionProviderFactory.createSystemProvider()) ;
+          name, SessionProviderFactory.createSystemProvider()) ;
       String version = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ; 
       String path = node.getVersionHistory().getVersion(version).getPath() ;           
       VersionNode versionNode = uiForm.getRootVersion(node).findVersionNode(path) ;

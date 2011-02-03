@@ -259,7 +259,7 @@ public class UIPCLVContainer extends UIContainer {
 		PortletPreferences references = portletRequestContext.getRequest().getPreferences();
 		String repository = references.getValue(UIPCLVPortlet.PREFERENCE_REPOSITORY, null);
 		DMSConfiguration dmsConfiguration = Utils.getService(DMSConfiguration.class);
-		String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
+		String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
 
 		return new JCRResourceResolver(repository, workspace, "exo:templateFile");
 	}

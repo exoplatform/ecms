@@ -236,7 +236,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
     resetProperties();
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     String userName = Util.getPortalRequestContext().getRemoteUser();
-    this.template = templateService.getTemplatePathByUser(true, contentType, userName, repositoryName);
+    this.template = templateService.getTemplatePathByUser(true, contentType, userName);
     initFieldInput();
   }
   
@@ -251,7 +251,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    */
   private void initFieldInput() throws Exception {
     TemplateService tservice = this.getApplicationComponent(TemplateService.class);
-    List<String> documentNodeType = tservice.getDocumentTemplates(this.repositoryName);
+    List<String> documentNodeType = tservice.getDocumentTemplates();
     if(!documentNodeType.contains(this.contentType)){
       return;
     }
@@ -297,7 +297,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
   	DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspace = dmsConfiguration.getConfig(this.repositoryName).getSystemWorkspace();
+    String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
     return new JCRResourceResolver(this.repositoryName, workspace);
   }
 
@@ -388,9 +388,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       	Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs, contentDialogForm.getInputProperties());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
         if (canAccessParentNode(webContentNode)) {
-          cmsService.storeNode(contentDialogForm.contentType, webContentNode.getParent(), inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
+          cmsService.storeNode(contentDialogForm.contentType, webContentNode.getParent(), inputProperties, contentDialogForm.isAddNew);
         } else {
-          cmsService.storeEditedNode(contentDialogForm.contentType, webContentNode, inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
+          cmsService.storeEditedNode(contentDialogForm.contentType, webContentNode, inputProperties, contentDialogForm.isAddNew);
         }
         
         if (Util.getUIPortalApplication().getModeState() == UIPortalApplication.NORMAL_MODE) {
@@ -508,7 +508,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
         }
       	Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(inputs, contentDialogForm.getInputProperties());
         CmsService cmsService = contentDialogForm.getApplicationComponent(CmsService.class);
-        cmsService.storeNode(contentDialogForm.contentType, contentDialogForm.getNode().getParent(), inputProperties, contentDialogForm.isAddNew, contentDialogForm.repositoryName);
+        cmsService.storeNode(contentDialogForm.contentType, contentDialogForm.getNode().getParent(), inputProperties, contentDialogForm.isAddNew);
         
         PublicationService publicationService = contentDialogForm.getApplicationComponent(PublicationService.class);
 	      PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins().get(publicationService.getNodeLifecycleName(webContentNode));
@@ -574,7 +574,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
                 contentDialogForm.getApplicationComponent(NodeHierarchyCreator.class);
               String repository = contentDialogForm.repositoryName;
               DMSConfiguration dmsConfiguration = contentDialogForm.getApplicationComponent(DMSConfiguration.class);
-              DMSRepositoryConfiguration repositoryConfiguration = dmsConfiguration.getConfig(repository);
+              DMSRepositoryConfiguration repositoryConfiguration = dmsConfiguration.getConfig();
               String workspaceName = repositoryConfiguration.getSystemWorkspace();
               UIOneTaxonomySelector uiOneTaxonomySelector = 
                 contentDialogForm.createUIComponent(UIOneTaxonomySelector.class, null, null);

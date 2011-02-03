@@ -231,9 +231,8 @@ public class UISearchForm extends UIForm {
 																																														: uiPortalSelectBox.getValue();
 			QueryCriteria queryCriteria = new QueryCriteria();
 			
-	    String repository = portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);                                                   
 	    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes(repository);
+	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
 	     
 	    queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
 			

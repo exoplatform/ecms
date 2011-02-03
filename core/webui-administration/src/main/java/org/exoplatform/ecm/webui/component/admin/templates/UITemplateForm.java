@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.templates;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -129,17 +130,17 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   
   private String getDefaultStyleSheet(String nodeType) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return Utils.encodeHTML(templateService.buildStyleSheet(nodeType, getRepository()));
+    return Utils.encodeHTML(templateService.buildStyleSheet(nodeType));
   }
 
   private String getDefaultView(String nodeType) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return Utils.encodeHTML(templateService.buildViewForm(nodeType, getRepository()));
+    return Utils.encodeHTML(templateService.buildViewForm(nodeType));
   }
 
   private String getDefaultDialog(String nodeType) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return Utils.encodeHTML(templateService.buildDialogForm(nodeType, getRepository()));
+    return Utils.encodeHTML(templateService.buildDialogForm(nodeType));
   }
   
   private String getRepository() {
@@ -163,11 +164,9 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   @SuppressWarnings("unchecked")
   public List<SelectItemOption<String>> getOption() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    String repository = getRepository() ;       
     NodeTypeManager nodeTypeManager = 
-      getApplicationComponent(RepositoryService.class).getRepository(repository).getNodeTypeManager() ; 
-    Node templatesHome = getApplicationComponent(TemplateService.class).getTemplatesHome(repository,
-        SessionProviderFactory.createSessionProvider()) ;
+      getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager() ; 
+    Node templatesHome = getApplicationComponent(TemplateService.class).getTemplatesHome(SessionProviderFactory.createSessionProvider()) ;
     if(templatesHome != null) {
       NodeIterator templateIter = templatesHome.getNodes() ;
       List<String> templates = new ArrayList<String>() ;
@@ -218,11 +217,11 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
       if(view == null) view = "" ;
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       templateService.addTemplate(TemplateService.DIALOGS, name, label, isDocumentTemplate, 
-          TemplateService.DEFAULT_DIALOG, roles, dialog, uiForm.getRepository()) ;
+          TemplateService.DEFAULT_DIALOG, roles, new ByteArrayInputStream(dialog.getBytes())) ;
       templateService.addTemplate(TemplateService.VIEWS, name, label, isDocumentTemplate,
-          TemplateService.DEFAULT_VIEW, roles, view, uiForm.getRepository()) ;
+          TemplateService.DEFAULT_VIEW, roles, new ByteArrayInputStream(view.getBytes())) ;
       templateService.addTemplate(TemplateService.SKINS, name, label, isDocumentTemplate,
-          TemplateService.DEFAULT_SKIN, roles, skin, uiForm.getRepository()) ;
+          TemplateService.DEFAULT_SKIN, roles, new ByteArrayInputStream(skin.getBytes())) ;
       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
       uiManager.refresh() ;
       uiForm.refresh() ;

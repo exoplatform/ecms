@@ -61,7 +61,10 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
   protected final String         COLLABORATION_WS = "collaboration".intern();
 
   public void setUp() throws Exception {
-//    String containerConf = BaseDMSTestCase.class.getResource("/conf/standalone/test-configuration.xml").toString();
+    
+    System.setProperty("gatein.tenant.repository.name", REPO_NAME);
+    
+//    String containerConf = BaseDMSTestCase.class.getResource("/conf/standalone/system-configuration.xml").toString();
 
 //    StandaloneContainer.addConfigurationURL(containerConf);
 //
@@ -83,10 +86,14 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
 //      ((RepositoryServiceImpl) container.getComponentInstanceOfType(RepositoryServiceImpl.class)).start();
 //    }
     sessionProviderService_ = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
-    repository = repositoryService.getRepository(REPO_NAME);
+    repositoryService.setCurrentRepositoryName(REPO_NAME);
+    repository = repositoryService.getCurrentRepository();
     session = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
     //session = (SessionImpl) repository.login(credentials, COLLABORATION_WS);
     //sessionProviderService_.setSessionProvider(null, new SessionProvider(session.getUserState()));
+    
+    
+    
   }
   
   protected void checkMixins(String[] mixins, NodeImpl node) {

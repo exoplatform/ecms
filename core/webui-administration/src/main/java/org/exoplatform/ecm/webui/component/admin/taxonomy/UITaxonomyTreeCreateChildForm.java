@@ -105,7 +105,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
       try {
         TaxonomyService taxonomyService = uiForm.getApplicationComponent(TaxonomyService.class);
         String parentPath = uiForm.getUIFormInputInfo(FIELD_PARENT).getValue();
-        taxonomyService.addTaxonomyNode(taxoTreeData.getRepository(), taxoTreeData
+        taxonomyService.addTaxonomyNode(taxoTreeData
             .getTaxoTreeWorkspace(), parentPath, name, Util.getPortalRequestContext().getRemoteUser());
         uiCreateChild.update();
       } catch (TaxonomyNodeAlreadyExistsException e) {

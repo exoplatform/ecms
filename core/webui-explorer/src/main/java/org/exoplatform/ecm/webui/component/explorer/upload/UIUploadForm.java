@@ -205,9 +205,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   
   public String getPathTaxonomy() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    String repository = uiExplorer.getRepositoryName();
     DMSConfiguration dmsConfig = getApplicationComponent(DMSConfiguration.class);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig();
     String workspaceName = dmsRepoConfig.getSystemWorkspace();    
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     Session session = uiExplorer.getSessionByWorkspace(workspaceName);
@@ -495,7 +494,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
             }
             if(!isExist || isKeepFile) {            
               newNodeUUID = cmsService.storeNodeByUUID(Utils.NT_FILE, selectedNode, 
-                  getInputProperties(name, inputStream, mimeType), true,repository) ;
+                  getInputProperties(name, inputStream, mimeType), true) ;
               selectedNode.save();
               selectedNode.getSession().save();
               if ((listTaxonomyNameNew != null) && (listTaxonomyNameNew.size() > 0)) {
@@ -837,7 +836,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         UIJCRExplorer uiExplorer = uiUploadForm.getAncestorOfType(UIJCRExplorer.class);
         String repository = uiExplorer.getRepositoryName();
         DMSConfiguration dmsConfig = uiUploadForm.getApplicationComponent(DMSConfiguration.class);
-        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repository);
+        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig();
         String workspaceName = dmsRepoConfig.getSystemWorkspace();
         
         UIPopupWindow uiPopupWindow = uiUploadManager.initPopupTaxonomy(POPUP_TAXONOMY);

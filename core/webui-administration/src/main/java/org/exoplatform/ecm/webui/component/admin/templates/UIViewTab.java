@@ -77,7 +77,7 @@ public class UIViewTab extends UIContainer {
   
   public void updateGrid(String nodeName) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    NodeIterator iter = tempService.getAllTemplatesOfNodeType(false, nodeName, getRepository(), 
+    NodeIterator iter = tempService.getAllTemplatesOfNodeType(false, nodeName, 
         SessionProviderFactory.createSystemProvider()) ;
     List<ViewData> data = new ArrayList<ViewData>() ;
     ViewData item  ;
@@ -141,7 +141,7 @@ public class UIViewTab extends UIContainer {
           return ;
         }
       }
-      templateService.removeTemplate(TemplateService.VIEWS, nodeTypeName, templateName, viewTab.getRepository()) ;
+      templateService.removeTemplate(TemplateService.VIEWS, nodeTypeName, templateName) ;
       UITemplateContent uiForm = viewTab.findFirstComponentOfType(UITemplateContent.class) ;
       uiForm.update(null);
       uiForm.reset();

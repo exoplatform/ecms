@@ -632,7 +632,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		if (templatesFilter != null) return templatesFilter;
 		else {
 			try {
-				List<String> documentTypes = templateService.getDocumentTemplates(repository);
+				List<String> documentTypes = templateService.getDocumentTemplates();
 				StringBuffer documentTypeClause = new StringBuffer("(");
 				for (int i = 0; i < documentTypes.size(); i++) {
 					String documentType = documentTypes.get(i);

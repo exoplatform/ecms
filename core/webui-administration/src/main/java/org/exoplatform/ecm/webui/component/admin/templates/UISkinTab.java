@@ -81,8 +81,7 @@ public class UISkinTab extends UIContainer {
   
   public void updateGrid(String nodeName, String repository) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    Node templateHome = tempService.getTemplatesHome(repository, 
-        SessionProviderFactory.createSystemProvider()).getNode(nodeName);
+    Node templateHome = tempService.getTemplatesHome(SessionProviderFactory.createSystemProvider()).getNode(nodeName);
     if(!templateHome.hasNode(TemplateService.SKINS)) return;
     NodeIterator iter = templateHome.getNode(TemplateService.SKINS).getNodes();
     List<SkinData> data = new ArrayList<SkinData>() ;
@@ -140,7 +139,7 @@ public class UISkinTab extends UIContainer {
       PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
       PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
       String repository = portletPref.getValue(Utils.REPOSITORY, "") ;
-      templateService.removeTemplate(TemplateService.SKINS, nodeTypeName, templateName, repository) ;
+      templateService.removeTemplate(TemplateService.SKINS, nodeTypeName, templateName) ;
       uiForm.update(null);
       uiForm.reset();
       

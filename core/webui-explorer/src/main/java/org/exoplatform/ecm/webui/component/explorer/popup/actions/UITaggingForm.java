@@ -121,10 +121,9 @@ public class UITaggingForm extends UIForm {
   public void activate() throws Exception {
   	
   	ExoContainer container = ExoContainerContext.getCurrentContainer();  	
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
 		RepositoryService repositoryService	= (RepositoryService) 
 								container.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepo = repositoryService.getRepository(repository);
+		ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();    
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
     
@@ -136,7 +135,7 @@ public class UITaggingForm extends UIForm {
     for(Node tag : folksonomyService.getLinkedTagsOfDocumentByScope(getIntValue(tagScope),
     																												 getStrValue(tagScope, currentNode),
     																												 currentNode, 
-    																												 repository, 
+    																												 null, 
     																												 workspace)) {
     	linkedTagSet.add(tag.getName());
     }

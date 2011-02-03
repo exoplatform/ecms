@@ -271,7 +271,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
 
     nodeTypeValue.setDeclaredPropertyDefinitionValues(propDefs);
     nodeTypeValue.setDeclaredChildNodeDefinitionValues(new ArrayList());
-    ExtendedNodeTypeManager ntmanager = repositoryService_.getRepository(repository).getNodeTypeManager();
+    ExtendedNodeTypeManager ntmanager = repositoryService_.getCurrentRepository().getNodeTypeManager();
     ntmanager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.IGNORE_IF_EXISTS);
   }
 
@@ -305,7 +305,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    */
   public Collection<NodeType> getCreatedActionTypes(String repository) throws Exception {
     Collection<NodeType> createsActions = new ArrayList<NodeType>();    
-    NodeTypeManager ntmanager = repositoryService_.getRepository(repository).getNodeTypeManager();
+    NodeTypeManager ntmanager = repositoryService_.getCurrentRepository().getNodeTypeManager();
     for(NodeTypeIterator iter = ntmanager.getAllNodeTypes();iter.hasNext();) {
       NodeType nt = (NodeType) iter.next();
       String name = nt.getName();
@@ -332,15 +332,14 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   
   /**
    * Get SystemSession of specific workspace and repository
-   * @param repository
-   * @param workspace
+ * @param workspace
    * @return
    * @throws RepositoryException
    * @throws RepositoryConfigurationException
    */
-  private Session getSystemSession(String repository, String workspace) throws RepositoryException,
+  private Session getSystemSession(String workspace) throws RepositoryException,
   RepositoryConfigurationException {
-    ManageableRepository jcrRepository = repositoryService_.getRepository(repository);
+    ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();
     return jcrRepository.getSystemSession(workspace);
   }
 
@@ -454,7 +453,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       storeActionNode.addMixin(ACTIONABLE);
       storeActionNode.save();
     }
-    String newActionPath = cmsService_.storeNode(actionType, actionsNode, mappings,true,repository);
+    String newActionPath = cmsService_.storeNode(actionType, actionsNode, mappings,true);
     storeActionNode.save();
     String srcWorkspace = storeActionNode.getSession().getWorkspace().getName();
 
@@ -466,7 +465,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       actionService.addAction(actionType, repository, srcWorkspace, srcPath, isDeep, uuid, nodeTypeNames, mappings);
     } catch (Exception e) {
       if (LOG.isDebugEnabled()) LOG.error(e);
-      Session session = getSystemSession(repository, storeActionNode.getSession().getWorkspace().getName());
+      Session session = getSystemSession(storeActionNode.getSession().getWorkspace().getName());
       Node actionNode = (Node) session.getItem(newActionPath);
       actionNode.remove();
       session.save();
@@ -601,10 +600,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @see {@link #initAction(QueryManager, String, String)}
    */
   private void initiateActionConfiguration() throws Exception {
-    List<RepositoryEntry> repositories = repositoryService_.getConfig().getRepositoryConfigurations() ;
     ManageableRepository jcrRepository = null ;
-    for(RepositoryEntry repository : repositories) { 
-      jcrRepository = repositoryService_.getRepository(repository.getName());
+      RepositoryEntry repository = repositoryService_.getCurrentRepository().getConfiguration();
+      jcrRepository = repositoryService_.getCurrentRepository();
       String[] workspaces = jcrRepository.getWorkspaceNames();
       for (String workspace : workspaces) {
         Session session = jcrRepository.getSystemSession(workspace);        
@@ -622,7 +620,6 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
         initAction(queryManager, repository.getName(), workspace) ;
         session.logout();
       }
-    }    
   }
 
   /**
@@ -633,7 +630,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @see {@link #initAction(QueryManager, String, String)}
    */
   private void reInitiateActionConfiguration(String repository) throws Exception {
-    ManageableRepository jcrRepository = repositoryService_.getRepository(repository);    
+    ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();    
     for (String workspace : jcrRepository.getWorkspaceNames()) {
       Session session = jcrRepository.getSystemSession(workspace);
       QueryManager queryManager = null;

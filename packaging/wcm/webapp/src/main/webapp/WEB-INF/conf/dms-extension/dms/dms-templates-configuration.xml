@@ -25,10 +25,6 @@
 	        	<name>storedLocation</name>
 	        	<value>war:/conf/dms-extension/dms/artifacts/templates</value>
 	        </value-param>
-	        <value-param>
-	        	<name>repository</name>
-	        	<value>repository</value>
-	        </value-param>	        
           <object-param>
             <name>template.configuration</name>
             <description>configuration for the localtion of templates to inject in jcr</description>
@@ -733,10 +729,6 @@
 	      <type>org.exoplatform.services.cms.templates.ContentTypeFilterPlugin</type>
 	      <description>this plugin is used to filter node type for folder</description>
 	      <init-params>	        
-	        <value-param>
-	        	<name>repository</name>
-	        	<value>repository</value>
-	        </value-param>	        
           <object-param>
             <name>nt:unstructured</name>
             <description>allow all document node type for this folder</description>

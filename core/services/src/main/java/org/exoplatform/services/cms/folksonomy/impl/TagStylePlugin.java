@@ -65,12 +65,10 @@ public class TagStylePlugin extends BaseComponentPlugin{
     while(it.hasNext()) {
       tagConfig = (TagStyleConfig)it.next().getObject() ;
       if(tagConfig.getAutoCreatedInNewRepository()) {
-        List<RepositoryEntry> repositories = repositoryService_.getConfig().getRepositoryConfigurations() ;
-        for(RepositoryEntry repo : repositories) {
-          session = getSession(repo.getName());
-          addTag(session, tagConfig) ;
-          session.logout();
-        }
+        RepositoryEntry repo = repositoryService_.getCurrentRepository().getConfiguration();
+        session = getSession(repo.getName());
+        addTag(session, tagConfig) ;
+        session.logout();
       } else {
         session = getSession(tagConfig.getRepository());
         addTag(session, tagConfig) ;
@@ -125,7 +123,7 @@ public class TagStylePlugin extends BaseComponentPlugin{
    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
    DMSConfiguration dmsConfiguration = (DMSConfiguration)
    myContainer.getComponentInstanceOfType(DMSConfiguration.class);
-   DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig(repository);   
+   DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();   
    return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
  }
 }

@@ -365,7 +365,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
     jcrEncoding.setJcrPath("/node/jcr:content/jcr:encoding") ;
     jcrEncoding.setValue("UTF-8") ;
     inputProperties.put("/node/jcr:content/jcr:encoding",jcrEncoding) ;         
-    cmsService_.storeNode(NTFILE, newLanguageNode, inputProperties, true, repositoryName) ;
+    cmsService_.storeNode(NTFILE, newLanguageNode, inputProperties, true) ;
     return newLanguageNode.getNode(fileName) ;
   }
 
@@ -1058,7 +1058,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
         newLanguageNode = languagesNode.addNode(addedLange) ;
       }
     }   
-    String nodePath = cmsService_.storeNode(nodeType, newLanguageNode, inputs, isAddNew, repositoryName);
+    String nodePath = cmsService_.storeNode(nodeType, newLanguageNode, inputs, isAddNew);
     Node selectedNode = (Node)node.getSession().getItem(nodePath);
     if(isAddNew) {
       setMixin(node, selectedNode, false);

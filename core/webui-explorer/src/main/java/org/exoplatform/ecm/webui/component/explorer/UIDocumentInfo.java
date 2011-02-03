@@ -505,7 +505,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   public boolean isNodeTypeSupported(String nodeTypeName) {
     try {      
       TemplateService templateService = getApplicationComponent(TemplateService.class);
-      return templateService.isManagedNodeType(nodeTypeName, getRepository());
+      return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
     }
@@ -601,12 +601,12 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
  
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getTemplatePath(false, nodeTypeName, templateName, getRepository()) ;
+    return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
   
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage(), getRepository()) ;
+    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
   }
 
   public String getLanguage() {

@@ -189,7 +189,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
   
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspace =  dmsConfiguration.getConfig(getTaxoTreeData().getRepository()).getSystemWorkspace();
+    String workspace =  dmsConfiguration.getConfig().getSystemWorkspace();
     return new JCRResourceResolver(getTaxoTreeData().getRepository(), workspace, "exo:templateFile");
   }
 
@@ -204,7 +204,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
     String dialogPath = null;
     if (nodeTypeName_ != null) {
       try {
-        dialogPath = templateService.getTemplatePathByUser(true, nodeTypeName_, userName, repositoryName);
+        dialogPath = templateService.getTemplatePathByUser(true, nodeTypeName_, userName);
       } catch (Exception e) {
         LOG.error("Unexpected error", e);
       }
@@ -345,7 +345,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         return;
       }      
       
-      Node currentNode = taxonomyService.getTaxonomyTree(repository, name, true);
+      Node currentNode = taxonomyService.getTaxonomyTree(name, true);
       Map<String, JcrInputProperty> sortedInputs = DialogFormUtil.prepareMap(uiActionForm
           .getChildren(), uiActionForm.getInputProperties());
       ActionServiceContainer actionServiceContainer = uiActionForm.getApplicationComponent(ActionServiceContainer.class);
@@ -365,8 +365,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         try {
           CmsService cmsService = uiActionForm.getApplicationComponent(CmsService.class);
           Node storedHomeNode = uiActionForm.getNode().getParent();
-          cmsService.storeNode(uiActionForm.nodeTypeName_, storedHomeNode, sortedInputs, false,
-              repository);
+          cmsService.storeNode(uiActionForm.nodeTypeName_, storedHomeNode, sortedInputs, false);
           storedHomeNode.getSession().save();
         } catch (Exception e) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.canotChangeActionId", null,
@@ -404,7 +403,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
               "'", "#", ";", "}", "{", "/", "|", "\""};
           if (!Utils.isNameValid(actionName,arrFilterChar)) {
             if (!isEditTree) {
-              Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(repository, name, true);
+              Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(name, true);
               actionServiceContainer.removeAction(taxonomyTreeNode, repository);
               taxonomyService.removeTaxonomyTree(name);
             }

@@ -69,8 +69,7 @@ public class UIMetadataManager extends UIAbstractManager {
     uiPopup.setWindowSize(600, 500);
     uiPopup.setRendered(true);
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    ExtendedNodeTypeManager ntManager = repositoryService.getRepository(repository).getNodeTypeManager() ;
+    ExtendedNodeTypeManager ntManager = repositoryService.getCurrentRepository().getNodeTypeManager() ;
     NodeType nodeType = ntManager.getNodeType(metadataName) ;
     UIMetadataView uiView = uiPopup.createUIComponent(UIMetadataView.class, null, null) ;
     uiView.setMetadata(nodeType) ;

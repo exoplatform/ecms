@@ -28,23 +28,21 @@ import org.exoplatform.container.xml.InitParams;
  */
 public class DMSRepositoryConfiguration extends BaseComponentPlugin {
 
-  private String     systemWorkspaceName_;
-  
-  private String     repositoryName_ ;
-  
+  private String systemWorkspaceName_;
+
   public DMSRepositoryConfiguration() throws Exception {
   }
-  
+
   public DMSRepositoryConfiguration(InitParams params) throws Exception {
     systemWorkspaceName_ = params.getValueParam("systemWorkspace").getValue();
-    repositoryName_ = params.getValueParam("repository").getValue();
   }
-  
-  public void setSystemWorkspace(String systemWorkspace) { systemWorkspaceName_ = systemWorkspace; } 
-  
-  public String getSystemWorkspace() { return systemWorkspaceName_; }
-  
-  public void setRepositoryName(String repositoryName) { repositoryName_ = repositoryName; }
-  
-  public String getRepositoryName() { return repositoryName_; }
+
+  public void setSystemWorkspace(String systemWorkspace) {
+    systemWorkspaceName_ = systemWorkspace;
+  }
+
+  public String getSystemWorkspace() {
+    return systemWorkspaceName_;
+  }
+
 }

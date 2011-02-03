@@ -25,6 +25,7 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.container.xml.InitParams;
@@ -202,7 +203,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * @throws Exception the exception
    */
   private Node getBasedApplicationTemplatesHome(SessionProvider sessionProvider, String repository) throws Exception {
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = 
       sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(),manageableRepository);
@@ -256,15 +257,20 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    */
   public void start() {
     PropertiesParam propertiesParam = params.getPropertiesParam("storedLocations");
-    for(RepositoryEntry repositoryEntry: repositoryService.getConfig().getRepositoryConfigurations()) {
-      String repoName = repositoryEntry.getName();
-      String workspaceName = propertiesParam.getProperty(repoName);
-      if(workspaceName != null) {
-        workspaceName = repositoryEntry.getSystemWorkspaceName();        
-      }
-      storedWorkspaces.put(repoName,workspaceName);
-      basedApplicationTemplatesPath = hierarchyCreator.getJcrPath(BasePath.CMS_VIEWTEMPLATES_PATH);
+    RepositoryEntry repositoryEntry = null;
+    try {
+      repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
+    } catch (RepositoryException e) {
+      log.error(e.getMessage(), e);
     }
+    
+    String repoName = repositoryEntry.getName();
+    String workspaceName = propertiesParam.getProperty(repoName);
+    if(workspaceName != null) {
+      workspaceName = repositoryEntry.getSystemWorkspaceName();        
+    }
+    storedWorkspaces.put(repoName,workspaceName);
+    basedApplicationTemplatesPath = hierarchyCreator.getJcrPath(BasePath.CMS_VIEWTEMPLATES_PATH);
     
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     for(Iterator<String> repositories = storedWorkspaces.keySet().iterator(); repositories.hasNext();) {

@@ -284,7 +284,7 @@ public class Utils {
 				.getNodeTypeManager();
 		NodeType currentNodeType = currentNode.getPrimaryNodeType();
 		NodeDefinition[] childDefs = currentNodeType.getChildNodeDefinitions();
-		List<String> templates = templateService.getDocumentTemplates(repository);
+		List<String> templates = templateService.getDocumentTemplates();
 		try {
 			for (int i = 0; i < templates.size(); i++) {
 				String nodeTypeName = templates.get(i).toString();

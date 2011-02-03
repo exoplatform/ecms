@@ -87,7 +87,7 @@ public class ManageRelationsActionComponent extends UIComponent {
       uiNodePathSelector.setIsDisable(defaultWsName, false);
       uiNodePathSelector.setRootNodeLocation(repository, defaultWsName, "/");
       TemplateService tservice = uiActionBar.getApplicationComponent(TemplateService.class);
-      List<String> documentNodeType = tservice.getDocumentTemplates(repository);
+      List<String> documentNodeType = tservice.getDocumentTemplates();
       String [] arrAcceptedNodeTypes = new String[documentNodeType.size()];
       documentNodeType.toArray(arrAcceptedNodeTypes) ;
       uiNodePathSelector.setAcceptedNodeTypesInPathPanel(arrAcceptedNodeTypes);

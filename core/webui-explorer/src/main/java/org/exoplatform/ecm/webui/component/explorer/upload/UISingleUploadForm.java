@@ -169,9 +169,8 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
   
   public String getPathTaxonomy() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    String repository = uiExplorer.getRepositoryName();
     DMSConfiguration dmsConfig = getApplicationComponent(DMSConfiguration.class);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig();
     String workspaceName = dmsRepoConfig.getSystemWorkspace();    
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     Session session = uiExplorer.getSessionByWorkspace(workspaceName);
@@ -373,7 +372,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
             jcrEncoding.setJcrPath("/node/jcr:content/jcr:encoding") ;
             jcrEncoding.setValue("UTF-8") ;
             inputProperties.put("/node/jcr:content/jcr:encoding",jcrEncoding) ;          
-            newNodeUUID = cmsService.storeNodeByUUID(Utils.NT_FILE, selectedNode, inputProperties, true,repository) ;
+            newNodeUUID = cmsService.storeNodeByUUID(Utils.NT_FILE, selectedNode, inputProperties, true) ;
             
             selectedNode.save();
             selectedNode.getSession().save();
@@ -538,7 +537,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
           uiUploadForm.getApplicationComponent(NodeHierarchyCreator.class);
         String repository = uiExplorer.getRepositoryName();
         DMSConfiguration dmsConfig = uiUploadForm.getApplicationComponent(DMSConfiguration.class);
-        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repository);
+        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig();
         String workspaceName = dmsRepoConfig.getSystemWorkspace();
         
         UIPopupWindow uiPopupWindow = uiUploadManager.initPopupTaxonomy(POPUP_TAXONOMY);

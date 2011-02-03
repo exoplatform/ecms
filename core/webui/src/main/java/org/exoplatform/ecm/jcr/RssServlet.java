@@ -89,10 +89,10 @@ public class RssServlet extends HttpServlet {
         ServletOutputStream os = response.getOutputStream();
         os.write(buf);
       } else if (file.isNodeType("exo:rss-enable")){
-        List documentNodeType = tservice.getDocumentTemplates(repositoryName) ;
+        List documentNodeType = tservice.getDocumentTemplates() ;
         String nodeType = file.getPrimaryNodeType().getName() ;
         if(documentNodeType.contains(nodeType)){
-          String templateName = tservice.getTemplatePath(false, nodeType, "view1", repositoryName) ;
+          String templateName = tservice.getTemplatePath(false, nodeType, "view1") ;
           request.setAttribute("portalName", portalName) ;
           request.setAttribute("wsName", wsName) ;
           request.setAttribute("templateName", "jcr:"+templateName) ;

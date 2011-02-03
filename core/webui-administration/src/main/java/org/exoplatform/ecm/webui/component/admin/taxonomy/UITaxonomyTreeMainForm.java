@@ -87,7 +87,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
   public void update(TaxonomyTreeData taxonomyTree) throws Exception {
     String repository = getRepository();
     String[] wsNames = getApplicationComponent(RepositoryService.class)
-                      .getRepository(repository).getWorkspaceNames();
+                      .getCurrentRepository().getWorkspaceNames();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
     String systemWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getSystemWorkspaceName(repository);
     String dmsSystemWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getDmsSystemWorkspaceName(repository);
@@ -212,7 +212,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
       }
       
       TaxonomyService taxonomyService = uiTaxonomyTreeMainForm.getApplicationComponent(TaxonomyService.class);
-      if (taxonomyService.hasTaxonomyTree(uiTaxonomyTreeMainForm.getRepository(), name) && !taxonomyTreeData.isEdit()) {
+      if (taxonomyService.hasTaxonomyTree(name) && !taxonomyTreeData.isEdit()) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeMainForm.msg.taxonomytree-existed", null, 
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());

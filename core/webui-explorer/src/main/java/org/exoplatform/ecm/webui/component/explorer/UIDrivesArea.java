@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.container.ExoContainer;
@@ -112,9 +113,12 @@ public class UIDrivesArea extends UIContainer {
   public List<String> getRepositoryList() {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     List<String> repositories = new ArrayList<String>();    
-    for(RepositoryEntry re : repositoryService.getConfig().getRepositoryConfigurations()) {
-      repositories.add(re.getName());
+    RepositoryEntry re = null;
+    try {
+      re = repositoryService.getCurrentRepository().getConfiguration();
+    } catch (RepositoryException e) {
     }
+    repositories.add(re.getName());
     return repositories;
   }
   

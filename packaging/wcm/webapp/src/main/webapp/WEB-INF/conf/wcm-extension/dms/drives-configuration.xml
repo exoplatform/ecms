@@ -41,9 +41,6 @@
             <field name="name">
               <string>Managed Sites</string>
             </field>
-            <field name="repository">
-              <string>repository</string>
-            </field>
             <field name="workspace">
               <string>collaboration</string>
             </field>
@@ -86,9 +83,6 @@
           <object type="org.exoplatform.services.cms.drives.DriveData">
             <field name="name">
               <string>Shared Site</string>
-            </field>
-            <field name="repository">
-              <string>repository</string>
             </field>
             <field name="workspace">
               <string>collaboration</string>

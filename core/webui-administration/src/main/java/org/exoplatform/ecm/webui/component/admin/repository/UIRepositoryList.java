@@ -61,20 +61,18 @@ public class UIRepositoryList extends UIGrid  implements UIPopupComponent {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
     String defaultName =  rservice.getConfig().getDefaultRepositoryName() ;
     ArrayList<RepoData> repos = new ArrayList<RepoData>() ;
-    for(Object obj : rservice.getConfig().getRepositoryConfigurations()) { 
-      RepositoryEntry repo  = (RepositoryEntry)obj ;
-      StringBuilder sb = new StringBuilder() ;
-      repo.getWorkspaceEntries() ;
-      for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
-        sb.append(ws.getName()).append(";") ;
-      }
-      String name = repo.getName() ;
-      String isDefault = String.valueOf(defaultName.equals(repo.getName())) ;
-      String accessControl = repo.getAccessControl() ;
-      String sessionTime = String.valueOf(repo.getSessionTimeOut()) ;
-      String workspace = sb.toString() ;
-      repos.add(new RepoData(name, workspace, isDefault, accessControl, sessionTime)) ;
+    RepositoryEntry repo = rservice.getCurrentRepository().getConfiguration();
+    StringBuilder sb = new StringBuilder() ;
+    repo.getWorkspaceEntries() ;
+    for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
+      sb.append(ws.getName()).append(";") ;
     }
+    String name = repo.getName() ;
+    String isDefault = String.valueOf(defaultName.equals(repo.getName())) ;
+    String accessControl = repo.getAccessControl() ;
+    String sessionTime = String.valueOf(repo.getSessionTimeOut()) ;
+    String workspace = sb.toString() ;
+    repos.add(new RepoData(name, workspace, isDefault, accessControl, sessionTime)) ;
     ObjectPageList objPageList = new ObjectPageList(repos, 10) ;
     getUIPageIterator().setPageList(objPageList) ; 
   }

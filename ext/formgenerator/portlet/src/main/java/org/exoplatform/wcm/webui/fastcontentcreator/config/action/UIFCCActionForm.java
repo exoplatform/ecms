@@ -182,7 +182,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    DMSRepositoryConfiguration repositoryConfiguration = dmsConfiguration.getConfig(repositoryName);
+    DMSRepositoryConfiguration repositoryConfiguration = dmsConfiguration.getConfig();
     return new JCRResourceResolver(repositoryName, repositoryConfiguration.getSystemWorkspace(), "exo:templateFile") ;
   }
 
@@ -203,7 +203,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
     String dialogPath = null ;
     if (nodeTypeName_ != null) {
       try {
-        dialogPath = templateService.getTemplatePathByUser(true, nodeTypeName_, userName, repositoryName);
+        dialogPath = templateService.getTemplatePathByUser(true, nodeTypeName_, userName);
       } catch (Exception e){
         Utils.createPopupMessage(this, "UIFCCForm.msg.get-dialog-path", null, ApplicationMessage.ERROR);
       }      
@@ -296,7 +296,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
       if(!fccActionForm.isAddNew) {
         CmsService cmsService = fccActionForm.getApplicationComponent(CmsService.class) ;      
         Node storedHomeNode = fccActionForm.getParentNode(currentNode).getNode("exo:actions");
-        cmsService.storeNode(fccActionForm.nodeTypeName_, storedHomeNode, sortedInputs, false, repository) ;
+        cmsService.storeNode(fccActionForm.nodeTypeName_, storedHomeNode, sortedInputs, false) ;
         storedHomeNode.getSession().save();
       } else {
         

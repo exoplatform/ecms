@@ -216,9 +216,8 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
   private List<SelectItemOption<String>> getRepoOption() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    for (RepositoryEntry repo : repositoryService.getConfig().getRepositoryConfigurations()) {
-      options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
-    }
+    RepositoryEntry repo = repositoryService.getCurrentRepository().getConfiguration();
+    options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
     return options;
   }
   

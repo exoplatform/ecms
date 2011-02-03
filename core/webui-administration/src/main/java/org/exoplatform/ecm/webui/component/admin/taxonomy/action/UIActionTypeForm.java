@@ -110,16 +110,13 @@ public class UIActionTypeForm extends UIForm {
           .getAncestorOfType(UITaxonomyTreeContainer.class);
       String actionType = uiActionType.getUIFormSelectBox(ACTION_TYPE).getValue();
       TemplateService templateService = uiActionType.getApplicationComponent(TemplateService.class);
-      String repository = uiActionType.getAncestorOfType(UIECMAdminPortlet.class)
-          .getPreferenceRepository();
       UIActionTaxonomyManager uiActionTaxonomyManager = uiActionType
       .getAncestorOfType(UIActionTaxonomyManager.class);
       String userName = Util.getPortalRequestContext().getRemoteUser();
       UIApplication uiApp = uiActionType.getAncestorOfType(UIApplication.class);
       UIActionForm uiActionForm = uiActionTaxonomyManager.getChild(UIActionForm.class);
       try {
-        String templatePath = templateService.getTemplatePathByUser(true, actionType, userName,
-            repository);
+        String templatePath = templateService.getTemplatePathByUser(true, actionType, userName);
         if (templatePath == null) {
           Object[] arg = { actionType };
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.access-denied", arg,
@@ -141,8 +138,8 @@ public class UIActionTypeForm extends UIForm {
       TaxonomyService taxonomyService = uiTaxonomyTreeContainer.getApplicationComponent(TaxonomyService.class);
       Node taxoTreeNode = null;
       try {
-        taxoTreeNode = taxonomyService.getTaxonomyTree(taxoTreeData.getRepository(),
-            taxoTreeData.getTaxoTreeName(), true);
+        taxoTreeNode = taxonomyService.getTaxonomyTree(taxoTreeData.getTaxoTreeName(),
+            true);
       } catch (RepositoryException re) {
       }
       uiActionForm.createNewAction(taxoTreeNode, actionType, true);

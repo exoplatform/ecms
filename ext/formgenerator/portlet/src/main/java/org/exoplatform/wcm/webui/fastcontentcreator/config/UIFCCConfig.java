@@ -150,9 +150,8 @@ public class UIFCCConfig extends UIForm implements UISelectable {
 		if (!"basic".equals(preferenceMode)) {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;  
     List<SelectItemOption<String>> repositories = new ArrayList<SelectItemOption<String>>() ;
-    for(RepositoryEntry repositoryEntry : repositoryService.getConfig().getRepositoryConfigurations()) {
-      repositories.add(new SelectItemOption<String>(repositoryEntry.getName())) ;
-    }
+    RepositoryEntry repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
+    repositories.add(new SelectItemOption<String>(repositoryEntry.getName())) ;
     UIFormSelectBox uiRepositoryList = getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX) ;
     uiRepositoryList.setOptions(repositories) ;
     uiRepositoryList.setValue(preferenceRepository) ;
@@ -220,7 +219,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       NodeType currentNodeType = currentNode.getPrimaryNodeType() ; 
       NodeDefinition[] childDefs = currentNodeType.getChildNodeDefinitions() ;
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-      List<String> templates = templateService.getDocumentTemplates(repositoryName) ;
+      List<String> templates = templateService.getDocumentTemplates() ;
       List<String> labels = new ArrayList<String>() ;
       try {
         for(int i = 0; i < templates.size(); i ++){
@@ -238,7 +237,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
             }
             if(nodeTypeName.equals(childDef.getName()) || isCanCreateDocument) {
               if(!hasDefaultDoc && nodeTypeName.equals(defaultValue)) hasDefaultDoc = true ;
-              String label = templateService.getTemplateLabel(nodeTypeName, repositoryName) ;
+              String label = templateService.getTemplateLabel(nodeTypeName) ;
               if(!labels.contains(label)) {
                 options.add(new SelectItemOption<String>(label, nodeTypeName));          
               }
@@ -254,7 +253,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
                     if(!hasDefaultDoc && nodeTypeName.equals(defaultValue)) {
                       hasDefaultDoc = true ;
                     }
-                    String label = templateService.getTemplateLabel(nodeTypeName, repositoryName) ;
+                    String label = templateService.getTemplateLabel(nodeTypeName) ;
                     if(!labels.contains(label)) {
                       options.add(new SelectItemOption<String>(label, nodeTypeName));                
                     }

@@ -47,7 +47,6 @@ public class MigrationConnector implements ResourceContainer {
 		    	Element driveElt = document.createElement("drive");
 		    	driveElt.setAttribute("name", drive.getName());
 		    	driveElt.setAttribute("views", drive.getViews());
-		    	driveElt.setAttribute("repository", drive.getRepository());
 		    	driveElt.setAttribute("workspace", drive.getWorkspace());
 		    	driveElt.setAttribute("allowCreateFolders", drive.getAllowCreateFolders());
 		    	driveElt.setAttribute("homePath", drive.getHomePath());

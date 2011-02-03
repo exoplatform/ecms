@@ -108,7 +108,7 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
 		ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
 		PublicationService publicationService = getApplicationComponent(PublicationService.class);
 		TemplateService templateService = getApplicationComponent(TemplateService.class);
-		List<String> templates = templateService.getDocumentTemplates(repositoryName);
+		List<String> templates = templateService.getDocumentTemplates();
 		Node rootNode;
 		if (rootTreePath.trim().equals("/")) {
 			rootNode = sessionProvider.getSession(workspaceName, manageableRepository)

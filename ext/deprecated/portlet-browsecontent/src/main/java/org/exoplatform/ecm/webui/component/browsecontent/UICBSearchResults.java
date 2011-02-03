@@ -70,8 +70,7 @@ public class UICBSearchResults extends UIContainer {
   
   private boolean isDocumentTemplate(String nodeType)throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    String repository = getAncestorOfType(UIBrowseContentPortlet.class).getPreferenceRepository();
-    return templateService.getDocumentTemplates(repository).contains(nodeType);
+    return templateService.getDocumentTemplates().contains(nodeType);
   }
   static public class CloseActionListener extends EventListener<UICBSearchResults> {
     public void execute(Event<UICBSearchResults> event) throws Exception {

@@ -59,7 +59,10 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
   public void setUp() throws Exception {
     container = PortalContainer.getInstance();
     RepositoryService repositoryService = getService(RepositoryService.class);
-    session = repositoryService.getRepository(REPO_NAME).getSystemSession(COLLABORATION_WS);
+    repositoryService.setCurrentRepositoryName(REPO_NAME);
+    session = repositoryService.getCurrentRepository().getSystemSession(COLLABORATION_WS);
+    
+    
   }
 
   /**

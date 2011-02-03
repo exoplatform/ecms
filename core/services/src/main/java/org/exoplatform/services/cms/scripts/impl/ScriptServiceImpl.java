@@ -124,27 +124,24 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
     for(ScriptPlugin plugin : plugins_) {
       String scriptsLocation = plugin.getPredefineScriptsLocation();
       if(plugin.getAutoCreateInNewRepository()) {
-        List<RepositoryEntry> repositories = repositoryService_.getConfig().getRepositoryConfigurations() ;                
         DMSRepositoryConfiguration dmsRepoConfig = null;
-        for(RepositoryEntry repo : repositories) {
-          dmsRepoConfig = dmsConfiguration_.getConfig(repo.getName());
-          session = repositoryService_.getRepository(repo.getName()).getSystemSession(dmsRepoConfig.getSystemWorkspace());          
-          Iterator<ObjectParameter> iter = plugin.getScriptIterator() ;
-          while(iter.hasNext()) {
-            init(session,(ResourceConfig) iter.next().getObject(),scriptsLocation) ;            
-          }
-          ObservationManager obsManager = session.getWorkspace().getObservationManager();
-          obsManager.addEventListener(this, Event.PROPERTY_CHANGED, scriptsPath, true, null, null, true);
-          session.save();
-          session.logout();
-        }        
+        dmsRepoConfig = dmsConfiguration_.getConfig();
+        session = repositoryService_.getCurrentRepository().getSystemSession(dmsRepoConfig.getSystemWorkspace());          
+        Iterator<ObjectParameter> iter = plugin.getScriptIterator() ;
+        while(iter.hasNext()) {
+          init(session,(ResourceConfig) iter.next().getObject(),scriptsLocation) ;            
+        }
+        ObservationManager obsManager = session.getWorkspace().getObservationManager();
+        obsManager.addEventListener(this, Event.PROPERTY_CHANGED, scriptsPath, true, null, null, true);
+        session.save();
+        session.logout();
       }
       String repository = plugin.getInitRepository() ;
       if(repository == null) {
         repository = repositoryService_.getDefaultRepository().getConfiguration().getName();
       }
-      ManageableRepository mRepository = repositoryService_.getRepository(repository) ;
-      DMSRepositoryConfiguration dmsDefaultRepoConfig = dmsConfiguration_.getConfig(repository);
+      ManageableRepository mRepository = repositoryService_.getCurrentRepository();
+      DMSRepositoryConfiguration dmsDefaultRepoConfig = dmsConfiguration_.getConfig();
       session = mRepository.getSystemSession(dmsDefaultRepoConfig.getSystemWorkspace()) ;          
       Iterator<ObjectParameter> iter = plugin.getScriptIterator() ;
       while(iter.hasNext()) {
@@ -168,9 +165,9 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    * {@inheritDoc}
    */
   public void initRepo(String repository) throws Exception {
-    ManageableRepository mRepository = repositoryService_.getRepository(repository) ;
+    ManageableRepository mRepository = repositoryService_.getCurrentRepository();
     String scriptsPath = getBasePath();
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     Session session = mRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
     for(ScriptPlugin plugin : plugins_) {
       if(!plugin.getAutoCreateInNewRepository()) continue ;
@@ -402,25 +399,22 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
       Session jcrSession = null ;
       try {
         path = event.getPath();
-        List<RepositoryEntry> repositories = repositoryService_.getConfig().getRepositoryConfigurations() ;
         DMSRepositoryConfiguration dmsRepoConfig = null;
-        for(RepositoryEntry repo : repositories) {
-          try {
-            ManageableRepository manageableRepository = repositoryService_.getRepository(repo.getName()) ;
-            dmsRepoConfig = dmsConfiguration_.getConfig(repo.getName());
-            jcrSession = manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
-            Property property = (Property) jcrSession.getItem(path);
-            if ("jcr:data".equals(property.getName())) {
-              Node node = property.getParent();
-              //TODO: Script cache need to redesign to support store scripts in diffirence repositories 
-              removeFromCache(node.getName());             
-            }
-            jcrSession.logout();
-          }catch (Exception e) { 
-            jcrSession.logout();
-            continue ;
+        try {
+          ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
+          dmsRepoConfig = dmsConfiguration_.getConfig();
+          jcrSession = manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
+          Property property = (Property) jcrSession.getItem(path);
+          if ("jcr:data".equals(property.getName())) {
+            Node node = property.getParent();
+            //TODO: Script cache need to redesign to support store scripts in diffirence repositories 
+            removeFromCache(node.getName());             
           }
-        }        
+          jcrSession.logout();
+        } catch (Exception e) { 
+          jcrSession.logout();
+          continue ;
+        }
       } catch (Exception e) {
         LOG.error("Unexpected error", e);
       }
@@ -492,8 +486,8 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    * @throws Exception
    */
   private Session getSession(String repository, SessionProvider provider) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     // String systemWokspace = manageableRepository.getConfiguration().getSystemWorkspaceName();
     return provider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);
   }

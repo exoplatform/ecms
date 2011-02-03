@@ -233,7 +233,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     
     newNodeType.setDeclaredChildNodeDefinitionValues(childNodesDefinitions);
     try {
-      ExtendedNodeTypeManager extendedNodeTypeManager = getApplicationComponent(RepositoryService.class).getRepository(repository).getNodeTypeManager(); 
+      ExtendedNodeTypeManager extendedNodeTypeManager = getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager(); 
       extendedNodeTypeManager.registerNodeType(newNodeType, ExtendedNodeTypeManager.FAIL_IF_EXISTS);
     } catch (Exception e) {
       Utils.createPopupMessage(this, "UIFormGeneratorTabPane.msg.register-failed", null, ApplicationMessage.WARNING);
@@ -581,9 +581,9 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       String newViewTemplate = formGeneratorTabPane.generateViewTemplate(templateName, forms);
       
       TemplateService templateService = Utils.getService(TemplateService.class);
-      templateService.addTemplate(TemplateService.DIALOGS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, newDialogTemplate, preferenceRepository) ;
-      templateService.addTemplate(TemplateService.VIEWS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, newViewTemplate, preferenceRepository) ;
-      templateService.addTemplate(TemplateService.SKINS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, "", preferenceRepository) ;
+      templateService.addTemplate(TemplateService.DIALOGS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream(newDialogTemplate.getBytes())) ;
+      templateService.addTemplate(TemplateService.VIEWS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream(newViewTemplate.getBytes())) ;
+      templateService.addTemplate(TemplateService.SKINS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream("".getBytes())) ;
       
       listenerService.broadcast(UIFormGeneratorConstant.POST_CREATE_NODETYPE_EVENT, null, nodetypeName);      
 

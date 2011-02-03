@@ -94,9 +94,9 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     if(acceptableContentTypes.size() == 0) return options;
     String userName = Util.getPortalRequestContext().getRemoteUser();
     for(String contentType: acceptableContentTypes) {
-      String label = templateService.getTemplateLabel(contentType,repository_);
+      String label = templateService.getTemplateLabel(contentType);
       try {
-        String templatePath = templateService.getTemplatePathByUser(true, contentType, userName, repository_);
+        String templatePath = templateService.getTemplatePathByUser(true, contentType, userName);
         if ((templatePath != null) && (templatePath.length() > 0)) {
           options.add(new SelectItemOption<String>(label, contentType));
         }

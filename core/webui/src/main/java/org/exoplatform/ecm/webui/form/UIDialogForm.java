@@ -978,7 +978,7 @@ public class UIDialogForm extends UIForm {
   public String getPathTaxonomy() throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspace = dmsConfiguration.getConfig(repositoryName).getSystemWorkspace();
+    String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
     String userName = Util.getPortalRequestContext().getRemoteUser();
     Session session;
     if (userName != null)
@@ -1466,7 +1466,7 @@ public class UIDialogForm extends UIForm {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     String userName = Util.getPortalRequestContext().getRemoteUser();
     try {      
-      return templateService.getTemplatePathByUser(true, contentType, userName, repositoryName);
+      return templateService.getTemplatePathByUser(true, contentType, userName);
     } catch (Exception e) {
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       Object[] arg = { contentType };

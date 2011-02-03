@@ -88,7 +88,7 @@ public class UIDriveList extends UIComponentDecorator {
   public List<DriveData> getDrives(String repoName) throws Exception {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
-    ManageableRepository repository = rservice.getRepository(repoName) ;  
+    ManageableRepository repository = rservice.getCurrentRepository() ;  
     List<DriveData> driveList = new ArrayList<DriveData>() ;
     Session session = null ;
     List<DriveData> drives = driveService.getAllDrives(repoName) ;

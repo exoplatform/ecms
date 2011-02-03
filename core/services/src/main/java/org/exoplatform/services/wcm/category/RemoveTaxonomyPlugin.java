@@ -70,7 +70,7 @@ public class RemoveTaxonomyPlugin extends RemovePortalPlugin {
    */
   public void invalidateFromPortal(SessionProvider sessionProvider, String portalName) throws Exception {
   	String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
-  	Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(repository, portalName, true);
+  	Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(portalName, true);
   	actionServiceContainer.removeAction(taxonomyTreeNode, repository);
     taxonomyService.removeTaxonomyTree(portalName);
   }

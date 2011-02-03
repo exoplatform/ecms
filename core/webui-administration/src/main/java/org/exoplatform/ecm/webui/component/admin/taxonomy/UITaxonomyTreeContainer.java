@@ -143,8 +143,8 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
       UITaxonomyTreeCreateChild uiTaxonomyCreateChild = addChild(UITaxonomyTreeCreateChild.class, null, null);
       TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
       ActionServiceContainer actionService = getApplicationComponent(ActionServiceContainer.class);
-      Node taxoTreeNode = taxonomyService.getTaxonomyTree(taxonomyTreeData.getRepository(),
-          taxoTreeName, true);
+      Node taxoTreeNode = taxonomyService.getTaxonomyTree(taxoTreeName,
+          true);
       if (taxoTreeNode != null) {
         loadData(taxoTreeNode);
         Node actionNode = actionService.getAction(taxoTreeNode, taxonomyTreeData
@@ -200,8 +200,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
   
   public Session getSession(String workspace) throws RepositoryException, RepositoryConfigurationException  {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class);
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
-    return rservice.getRepository(repository).getSystemSession(workspace);
+    return rservice.getCurrentRepository().getSystemSession(workspace);
   }
   
   public void doSelect(String selectField, Object value) throws Exception {
@@ -231,7 +230,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
   public void addTaxonomyTree(String name, String workspace, String homePath, List<PermissionBean> permBeans)
       throws TaxonomyAlreadyExistsException, TaxonomyNodeAlreadyExistsException, AccessControlException, Exception {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    taxonomyService.addTaxonomyNode(getRepository(), workspace, homePath, name, Util.getPortalRequestContext().getRemoteUser());
+    taxonomyService.addTaxonomyNode(workspace, homePath, name, Util.getPortalRequestContext().getRemoteUser());
     Session session = getSession(workspace);
     Node homeNode = (Node)session.getItem(homePath);
     Node taxonomyTreeNode = homeNode.getNode(name);
@@ -279,7 +278,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
       throws RepositoryException, AccessControlException, Exception {
     String repository = getRepository();
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(repository, name, true);
+    Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(name, true);
     Node homeNode = taxonomyTreeNode.getParent();
     String srcWorkspace = taxonomyTreeNode.getSession().getWorkspace().getName();
     Session session = getSession(workspace);

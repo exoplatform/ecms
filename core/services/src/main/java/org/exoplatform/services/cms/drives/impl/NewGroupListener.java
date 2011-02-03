@@ -61,7 +61,6 @@ public class NewGroupListener extends GroupEventListener {
   public void preSave(Group group, boolean isNew) throws Exception { 
     String  groupId = group.getId() ;
     String name = group.getId().replace("/", ".");
-    String repository = initParams_.getValueParam("repository").getValue();
     String workspace = initParams_.getValueParam("workspace").getValue();
     String permissions = "*:".concat(groupId);
     String extpermissions = initParams_.getValueParam("permissions").getValue();
@@ -78,7 +77,7 @@ public class NewGroupListener extends GroupEventListener {
     String allowCreateFolder = initParams_.getValueParam("allowCreateFolder").getValue();
     String allowNodeTypesOnTree = initParams_.getValueParam("allowNodeTypesOnTree").getValue();
     driveService_.addDrive(name, workspace, permissions, homePath, views, icon, viewPreferences,
-        viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder, allowNodeTypesOnTree);
+        viewNonDocument, viewSideBar, showHiddenNode, allowCreateFolder, allowNodeTypesOnTree);
   }
   
   public void preDelete(Group group) throws Exception {

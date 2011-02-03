@@ -64,11 +64,10 @@ public class UINamespaceForm extends UIForm {
   static public class SaveActionListener extends EventListener<UINamespaceForm> {
     public void execute(Event<UINamespaceForm> event) throws Exception {
       UINamespaceForm uiForm = event.getSource() ;
-      String repository = uiForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       String uri = uiForm.getUIStringInput(FIELD_URI).getValue() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       NamespaceRegistry namespaceRegistry = uiForm.getApplicationComponent(RepositoryService.class)
-      .getRepository(repository).getNamespaceRegistry() ;
+      .getCurrentRepository().getNamespaceRegistry() ;
       String prefix = uiForm.getUIStringInput(FIELD_PREFIX).getValue() ;
       if(prefix == null || prefix.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.prefix-null", null, 

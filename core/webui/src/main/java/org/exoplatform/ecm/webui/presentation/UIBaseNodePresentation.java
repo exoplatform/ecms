@@ -237,7 +237,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    */
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getTemplatePath(false, nodeTypeName, templateName, getRepositoryName()) ;
+    return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
 
   /* (non-Javadoc)
@@ -381,7 +381,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage(), getRepository()) ;
+    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
   }
   
   private String getStrValue(String scope, Node node) throws Exception {

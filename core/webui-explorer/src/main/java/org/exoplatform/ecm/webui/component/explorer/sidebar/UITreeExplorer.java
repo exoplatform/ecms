@@ -194,7 +194,7 @@ public class UITreeExplorer extends UIContainer {
   
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getTemplatePath(false, nodeTypeName, templateName, getRepository()) ;
+    return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
   
   public boolean isPaginated(TreeNode treeNode) {
@@ -254,7 +254,7 @@ public class UITreeExplorer extends UIContainer {
   
   private List<Node> getTreeWithNoDocuments(List<Node> childrenList) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    List<String> nodeTypes = templateService.getAllDocumentNodeTypes(getRepository());
+    List<String> nodeTypes = templateService.getAllDocumentNodeTypes();
     List<Node> treeList = new ArrayList<Node>();
     for(Node node : childrenList) {
       if(nodeTypes.contains(node.getPrimaryNodeType().getName())) continue;
@@ -328,7 +328,7 @@ public class UITreeExplorer extends UIContainer {
   
   public boolean isDocumentNodeType(Node node) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    return templateService.isManagedNodeType(node.getPrimaryNodeType().getName(), getRepository());
+    return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
   }    
   
   public String getSelectedPath() throws Exception {

@@ -72,9 +72,7 @@ public class UITemplateList extends UIGrid {
   @SuppressWarnings("unchecked")
   public void updateGrid(int currentPage) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    Node templatesHome = templateService.getTemplatesHome(repository, 
-        SessionProviderFactory.createSessionProvider()) ;
+    Node templatesHome = templateService.getTemplatesHome(SessionProviderFactory.createSessionProvider()) ;
     List<TemplateData> templateData = new ArrayList<TemplateData>() ;
     if(templatesHome != null) {
       NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager();
@@ -151,8 +149,7 @@ public class UITemplateList extends UIGrid {
       }
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
       TemplateService templateService = nodeTypeList.getApplicationComponent(TemplateService.class) ;
-      String repository = nodeTypeList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-      templateService.removeManagedNodeType(nodeType, repository) ;
+      templateService.removeManagedNodeType(nodeType) ;
       nodeTypeList.updateGrid(nodeTypeList.getUIPageIterator().getCurrentPage()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(nodeTypeList.getParent()) ;
     }

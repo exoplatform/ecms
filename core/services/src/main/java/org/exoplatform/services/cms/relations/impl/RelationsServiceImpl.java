@@ -53,7 +53,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
       NodeHierarchyCreator nodeHierarchyCreator, InitParams params) {
     repositoryService_ = repositoryService;
     nodeHierarchyCreator_ = nodeHierarchyCreator;
-    repositories_ = params.getValueParam("repositories").getValue();
   }
   
   /**
@@ -75,7 +74,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * @throws Exception
    */
   private Node getNodeByUUID(String uuid, String repository,SessionProvider provider) throws Exception {   
-    ManageableRepository manageRepo = repositoryService_.getRepository(repository) ;
+    ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
       try{
@@ -186,17 +185,14 @@ public class RelationsServiceImpl implements RelationsService, Startable {
     try {
       String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
       if (relationPath == null) throw new IllegalArgumentException();
-      String[] repositories = repositories_.split(",") ;
-      for(String repo : repositories) {
-        session = getSession(repo.trim());
-        relationsHome = (Node) session.getItem(relationPath);
-        for (NodeIterator iterator = relationsHome.getNodes(); iterator.hasNext();) {
-          Node rel = iterator.nextNode();
-          rel.addMixin("mix:referenceable");
-        }
-        relationsHome.save();
-        session.save();
-      }      
+      session = getSession();
+      relationsHome = (Node) session.getItem(relationPath);
+      for (NodeIterator iterator = relationsHome.getNodes(); iterator.hasNext();) {
+        Node rel = iterator.nextNode();
+        rel.addMixin("mix:referenceable");
+      }
+      relationsHome.save();
+      session.save();
     } catch (IllegalArgumentException e) {
       LOG.error("Cannot find path by alias " + BasePath.CMS_PUBLICATIONS_PATH);
     } catch (Exception e) {
@@ -216,7 +212,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * {@inheritDoc}
    */
   public void init(String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
     if (relationPath == null) throw new IllegalArgumentException();
     try {            
@@ -237,13 +233,12 @@ public class RelationsServiceImpl implements RelationsService, Startable {
   
   /**
    * Get session of respository
-   * @param repository    The name of repository
    * @see                 Session 
    * @return              Session
    * @throws Exception
    */
-  protected Session getSession(String repository) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+  protected Session getSession() throws Exception {
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     String workspaceName = manageableRepository.getConfiguration().getSystemWorkspaceName();
     return manageableRepository.getSystemSession(workspaceName);
   }
@@ -258,7 +253,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * @throws Exception
    */
   private Session getSession(String repository,String workspace,SessionProvider provider) throws Exception{
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     return provider.getSession(workspace,manageableRepository) ;
   }
 }

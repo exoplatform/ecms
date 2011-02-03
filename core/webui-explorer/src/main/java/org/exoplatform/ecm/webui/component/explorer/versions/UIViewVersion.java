@@ -102,7 +102,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
       Node node = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
       originalNode_ = node ;
       String nodeType = node.getPrimaryNodeType().getName();
-      if(isNodeTypeSupported(node)) return templateService.getTemplatePathByUser(false, nodeType, userName, getRepository()) ;
+      if(isNodeTypeSupported(node)) return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch (Exception e) {      
     }
     return null ;
@@ -139,7 +139,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     try {      
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
       String nodeTypeName = node.getPrimaryNodeType().getName();
-      return templateService.isManagedNodeType(nodeTypeName, getRepository());
+      return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
     }
@@ -293,12 +293,12 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
 
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getTemplatePath(false, nodeTypeName, templateName, getRepository()) ;
+    return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
   
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage(), getRepository()) ;
+    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
   }  
 
   public String getWebDAVServerPrefix() throws Exception {
@@ -316,7 +316,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public boolean isNodeTypeSupported() {
     try {      
       TemplateService templateService = getApplicationComponent(TemplateService.class);
-      return templateService.isManagedNodeType(getNodeType(), getRepository());
+      return templateService.isManagedNodeType(getNodeType());
     } catch (Exception e) {
       return false;
     }

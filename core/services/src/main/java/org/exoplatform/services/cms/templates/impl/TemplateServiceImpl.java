@@ -23,13 +23,13 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.nodetype.NodeType;
@@ -46,7 +46,6 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin.FolderFilterConfig;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.SystemIdentity;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -59,36 +58,45 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
  * @author benjaminmestrallet
  */
 public class TemplateServiceImpl implements TemplateService, Startable {
+  
   private RepositoryService    repositoryService_;
-  private IdentityRegistry identityRegistry_;
+  private IdentityRegistry     identityRegistry_;
   private String               cmsTemplatesBasePath_;
   private List<TemplatePlugin> plugins_ = new ArrayList<TemplatePlugin>();
 
-  private Map<String,HashMap<String,List<String>>> foldersFilterMap = new HashMap<String,HashMap<String,List<String>>> ();  
-  private Map<String,List<String>> managedDocumentTypesMap = new HashMap<String,List<String>>();
+  /**
+   * The key is a folder type, the value is the List of content types.
+   */
+  private HashMap<String, List<String>> foldersFilterMap = null;  
+  
+  /**
+   * The key is a repository name, the value is the List of template names.
+   */
+  private HashMap<String, List<String>> managedDocumentTypesMap = new HashMap<String, List<String>>();
+  
   private org.exoplatform.groovyscript.text.TemplateService templateService;
   private LocaleConfigService localeConfigService_;
   
   private static final Log LOG  = ExoLogger.getLogger(TemplateService.class.getName());
+  
   /**
    * DMS configuration which used to store informations
    */   
   private DMSConfiguration dmsConfiguration_;
   
-  private static String NODETYPE_LIST = "nodeTypeList";
+  private static final String NODETYPE_LIST = "nodeTypeList";
   
   @SuppressWarnings("unchecked")
   private ExoCache nodeTypeListCached ;
   
   /**
-   * Constructor method
+   * Constructor method.
    * Init jcrService, nodeHierarchyCreator, identityRegistry, localeConfigService, caService, 
    * dmsConfiguration
    * @param jcrService              RepositoryService
@@ -122,14 +130,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
         plugin.init();
       }
 
-      //Cached all nodetypes that is document type in the map
-      for(RepositoryEntry repositoryEntry:repositoryService_.getConfig().getRepositoryConfigurations()) {
-        String repositoryName = repositoryEntry.getName();
-        List<String> managedContentTypes = getAllDocumentNodeTypes(repositoryEntry.getName());
-        if(managedContentTypes.size() != 0) {
-          managedDocumentTypesMap.put(repositoryName,managedContentTypes);
-        }
-      }
+      // Cached all nodetypes that is document type in the map
+      getDocumentTemplates();
     } catch (Exception e) {
       LOG.error("An unexpected exception occurs when init plugins", e);
     }
@@ -143,36 +145,46 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   
   /**
    * {@inheritDoc}
+   * @throws RepositoryException 
    */
   public void addContentTypeFilterPlugin(ContentTypeFilterPlugin filterPlugin) {
-    String repository = filterPlugin.getRepository();
-    HashMap<String,List<String>> folderFilterMap = foldersFilterMap.get(repository); 
-    if(folderFilterMap == null) {
+    HashMap<String,List<String>> folderFilterMap = foldersFilterMap; 
+    if (folderFilterMap == null) {
       folderFilterMap = new HashMap<String,List<String>>();
     }    
-    for(FolderFilterConfig filterConfig: filterPlugin.getFolderFilterConfigList()) {      
+    for (FolderFilterConfig filterConfig : filterPlugin.getFolderFilterConfigList()) {      
       String folderType = filterConfig.getFolderType();
       List<String> contentTypes = filterConfig.getContentTypes();
       List<String> value = folderFilterMap.get(folderType);
-      if(value == null) {
-        folderFilterMap.put(folderType,contentTypes);
-      }else {
+      if (value == null) {
+        folderFilterMap.put(folderType, contentTypes);
+      } else {
         value.addAll(contentTypes);
-        folderFilterMap.put(folderType,value);
+        folderFilterMap.put(folderType, value);
       }
     }
-    foldersFilterMap.put(repository,folderFilterMap);
+    foldersFilterMap = folderFilterMap;
   }
   
   /**
    * {@inheritDoc}
    */
-  public Set<String> getAllowanceFolderType(String repository) {
-    Map<String,List<String>> folderFilterMap = foldersFilterMap.get(repository);
-    if (folderFilterMap == null) folderFilterMap = foldersFilterMap.get("repository");
-    return folderFilterMap.keySet();
+  public Set<String> getAllowanceFolderType() {
+    HashMap<String, List<String>> map = foldersFilterMap;
+    if (map != null)
+      return map.keySet();
+    else
+      return null;
   }
-
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public Set<String> getAllowanceFolderType(String repository) {
+    return getAllowanceFolderType();
+  }
+  
   /**
    * {@inheritDoc}
    */
@@ -184,23 +196,39 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public void init(String repository) throws Exception {
+  public void init() throws Exception {
     for (TemplatePlugin plugin : plugins_) {
-      plugin.init(repository);
+      plugin.init();
     }
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public void init(String repository) throws Exception {
+    init();
   }
 
   /**
    * {@inheritDoc}
    */
-  public Node getTemplatesHome(String repository, SessionProvider provider) throws Exception {
+  public Node getTemplatesHome(SessionProvider provider) throws Exception {
     try {
-      Session session = getSession(repository, provider);
+      Session session = getSession(provider);
       return (Node) session.getItem(cmsTemplatesBasePath_);
     } catch (AccessDeniedException ace) {
       LOG.error("Access denied. You can not access to this template");
       return null;
     }
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public Node getTemplatesHome(String repository, SessionProvider provider) throws Exception {
+    return getTemplatesHome(provider);
   }
 
   /**
@@ -208,9 +236,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public List<String> getCreationableContentTypes(Node node) throws Exception {
     String folderType = node.getPrimaryNodeType().getName();    
-    String repository = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName();
     List<String> testContentTypes = null;    
-    HashMap<String,List<String>> folderFilterMap = foldersFilterMap.get(repository);
+    HashMap<String,List<String>> folderFilterMap = foldersFilterMap;
     if(folderFilterMap != null) {
       List<String> list = folderFilterMap.get(folderType);
       if(list != null && list.size() != 0) {
@@ -218,7 +245,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       }
     }
     if(testContentTypes == null) {
-      testContentTypes = getDocumentTemplates(repository);
+      testContentTypes = getDocumentTemplates();
     }    
     List<String> result = new ArrayList<String>();
     for(String contentType: testContentTypes) {
@@ -253,20 +280,27 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public boolean isManagedNodeType(String nodeTypeName, String repository) throws Exception {
+  public boolean isManagedNodeType(String nodeTypeName) throws Exception {
     //check if the node type is document type first
-    List<String> managedDocumentTypes = managedDocumentTypesMap.get(repository);
+    List<String> managedDocumentTypes = getManagedDocumentTypesMap();
     if(managedDocumentTypes != null && managedDocumentTypes.contains(nodeTypeName)) 
       return true;
     SessionProvider provider = SessionProvider.createSystemProvider();
-    Session session = getSession(repository, provider);
-    Node systemTemplatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
-    boolean b = false;
-    if (systemTemplatesHome.hasNode(nodeTypeName)) {
-      b = true;
+    Session session = getSession(provider);
+    try {
+      Node systemTemplatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
+      return systemTemplatesHome.hasNode(nodeTypeName);
+    } finally {
+      provider.close();
     }
-    provider.close();
-    return b;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public boolean isManagedNodeType(String nodeTypeName, String repository) throws Exception {
+    return isManagedNodeType(nodeTypeName);
   }
 
   /**
@@ -274,8 +308,6 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public String getTemplatePath(Node node, boolean isDialog) throws Exception {
     String userId = node.getSession().getUserID();
-    String repository = 
-      ((ManageableRepository) node.getSession().getRepository()).getConfiguration().getName();
     String templateType = null;
     if (node.isNodeType("exo:presentationable") && node.hasProperty("exo:presentationType")) {
       templateType = node.getProperty("exo:presentationType").getString();
@@ -284,8 +316,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     } else {
       templateType = node.getPrimaryNodeType().getName();
     }
-    if (isManagedNodeType(templateType, repository))
-      return getTemplatePathByUser(isDialog, templateType, userId, repository);
+    if (isManagedNodeType(templateType))
+      return getTemplatePathByUser(isDialog, templateType, userId);
     throw new Exception("The content type: " + templateType + " isn't supported by any template");
   }
   
@@ -293,14 +325,23 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public NodeIterator getAllTemplatesOfNodeType(boolean isDialog, String nodeTypeName,
-      String repository, SessionProvider provider) throws Exception {
-    Node nodeTypeHome = getTemplatesHome(repository, provider).getNode(nodeTypeName);
+      SessionProvider provider) throws Exception {
+    Node nodeTypeHome = getTemplatesHome(provider).getNode(nodeTypeName);
     if (isDialog) {
       if(!nodeTypeHome.hasNode(DIALOGS)) return null;
       return nodeTypeHome.getNode(DIALOGS).getNodes();
     }
     if(!nodeTypeHome.hasNode(VIEWS)) return null;
     return nodeTypeHome.getNode(VIEWS).getNodes();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public NodeIterator getAllTemplatesOfNodeType(boolean isDialog, String nodeTypeName,
+      String repository, SessionProvider provider) throws Exception {
+    return getAllTemplatesOfNodeType(isDialog, nodeTypeName, provider);
   }
 
   /**
@@ -316,20 +357,28 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public Node getTemplateNode(String type, String nodeTypeName, String templateName,
-      String repository, SessionProvider provider) throws Exception {
-    Node nodeTypeNode = getTemplatesHome(repository, provider).getNode(nodeTypeName);
+      SessionProvider provider) throws Exception {
+    Node nodeTypeNode = getTemplatesHome(provider).getNode(nodeTypeName);
     return nodeTypeNode.getNode(type).getNode(templateName);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public Node getTemplateNode(String type, String nodeTypeName, String templateName,
+      String repository, SessionProvider provider) throws Exception {
+    return getTemplateNode(type, nodeTypeName, templateName, provider);
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName,
-      String repository) throws Exception {
+  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName) throws Exception {
     if(SystemIdentity.ANONIM.equals(userName) || userName == null) {
-      return getTemplatePathByAnonymous(isDialog, nodeTypeName, repository);
+      return getTemplatePathByAnonymous(isDialog, nodeTypeName);
     }
-    Session session = getSession(repository);
+    Session session = getSession();
     Node templateHomeNode = (Node) session.getItem(cmsTemplatesBasePath_);
     String type = DIALOGS;
     if (!isDialog)
@@ -348,13 +397,21 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     session.logout();
     throw new AccessControlException("You don't have permission to access any template");
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName,
+      String repository) throws Exception {
+    return getTemplatePathByUser(isDialog, nodeTypeName, userName);
+  }
 
   /**
    * {@inheritDoc}
    */
-  public String getTemplatePath(boolean isDialog, String nodeTypeName, String templateName,
-      String repository) throws Exception {
-    Session session = getSession(repository);
+  public String getTemplatePath(boolean isDialog, String nodeTypeName, String templateName) throws Exception {
+    Session session = getSession();
     String type = DIALOGS;
     if (!isDialog)
       type = VIEWS;
@@ -363,13 +420,22 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     session.logout();
     return path;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String getTemplatePath(boolean isDialog, String nodeTypeName, String templateName,
+      String repository) throws Exception {
+    return getTemplatePath(isDialog, nodeTypeName, templateName);
+  }
 
   /**
    * {@inheritDoc}
    */
-  public String getTemplateLabel(String nodeTypeName, String repository) throws Exception {
+  public String getTemplateLabel(String nodeTypeName) throws Exception {
     SessionProvider provider = SessionProvider.createSystemProvider();
-    Node templateHome = getTemplatesHome(repository, provider);
+    Node templateHome = getTemplatesHome(provider);
     Node nodeType = templateHome.getNode(nodeTypeName);
     String label = "";
     if (nodeType.hasProperty("label")) {
@@ -378,16 +444,32 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     provider.close();
     return label;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String getTemplateLabel(String nodeTypeName, String repository) throws Exception {
+    return getTemplateLabel(nodeTypeName);
+  }
 
   /**
    * {@inheritDoc}
    */
-  public String getTemplate(String type, String nodeTypeName, String templateName,
-      String repository) throws Exception {
-    Session session = getSession(repository);
+  public String getTemplate(String type, String nodeTypeName, String templateName) throws Exception {
+    Session session = getSession();
     Node templateNode = getTemplateNode(session, type, nodeTypeName, templateName);
     session.logout();
     return getTemplate(templateNode);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String getTemplate(String type, String nodeTypeName, String templateName,
+      String repository) throws Exception {
+    return getTemplate(type, nodeTypeName, templateName);
   }
 
   /**
@@ -396,7 +478,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   @Deprecated
   public String getTemplateRoles(String type, String nodeTypeName, String templateName,
       String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     Node templateNode = getTemplateNode(session, type, nodeTypeName, templateName);
     session.logout();
     return getTemplateRoles(templateNode);
@@ -405,9 +487,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public void removeTemplate(String type, String nodeTypeName, String templateName,
-      String repository) throws Exception {
-    Session session = getSession(repository);
+  public void removeTemplate(String type, String nodeTypeName, String templateName) throws Exception {
+    Session session = getSession();
     Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
     Node nodeTypeHome = templatesHome.getNode(nodeTypeName);
     Node specifiedTemplatesHome = nodeTypeHome.getNode(type);
@@ -421,17 +502,34 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public void removeManagedNodeType(String nodeTypeName, String repository) throws Exception {
-    Session session = getSession(repository);
+  @Deprecated
+  public void removeTemplate(String type, String nodeTypeName, String templateName,
+      String repository) throws Exception {
+    removeTemplate(type, nodeTypeName, templateName);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void removeManagedNodeType(String nodeTypeName) throws Exception {
+    Session session = getSession();
     Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
     Node managedNodeType = templatesHome.getNode(nodeTypeName);
     managedNodeType.remove();    
     session.save();
     session.logout();
     //Update managedDocumentTypeMap
-    List<String> managedDocumentTypes = managedDocumentTypesMap.get(repository);
+    List<String> managedDocumentTypes = getManagedDocumentTypesMap();
     managedDocumentTypes.remove(nodeTypeName);
     removeTemplateNodeTypeList();
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public void removeManagedNodeType(String nodeTypeName, String repository) throws Exception {
+    removeManagedNodeType(nodeTypeName);
   }
 
   /**
@@ -441,7 +539,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   public String addTemplate(boolean isDialog, String nodeTypeName, String label,
       boolean isDocumentTemplate, String templateName, String[] roles, String templateFile,
       String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
     String templateType = DIALOGS;
     if(!isDialog) templateType = VIEWS;
@@ -453,7 +551,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     //Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
     removeTemplateNodeTypeList();
-    updateDocumentsTemplate(isDocumentTemplate, repository, nodeTypeName);
+    updateDocumentsTemplate(isDocumentTemplate, nodeTypeName);
     return templatePath;
   }
 
@@ -464,26 +562,34 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   public String addTemplate(String templateType, String nodeTypeName, String label,
       boolean isDocumentTemplate, String templateName, String[] roles, String templateFile,
       String repository) throws Exception {
-    return addTemplate(templateType, nodeTypeName, label, isDocumentTemplate, templateName, roles, new ByteArrayInputStream(templateFile.getBytes()), repository);
+    return addTemplate(templateType, nodeTypeName, label, isDocumentTemplate, templateName, roles, new ByteArrayInputStream(templateFile.getBytes()));
   }
   
   /**
    * {@inheritDoc}
    */
-  public List<String> getDocumentTemplates(String repository) throws Exception {    
-    List<String> templates = managedDocumentTypesMap.get(repository);
-    if(templates != null) 
+  public List<String> getDocumentTemplates() throws Exception {    
+    List<String> templates = getManagedDocumentTypesMap();
+    if (templates != null) 
       return templates;
-    templates = getAllDocumentNodeTypes(repository);
-    managedDocumentTypesMap.put(repository,templates);
+    templates = getAllDocumentNodeTypes();
+    setManagedDocumentTypesMap(templates);
     return templates;    
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getTemplatePathByAnonymous(boolean isDialog, String nodeTypeName, String repository) throws Exception {
-    Session session = getSession(repository);
+  @Deprecated
+  public List<String> getDocumentTemplates(String repository) throws Exception {    
+    return getDocumentTemplates();    
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String getTemplatePathByAnonymous(boolean isDialog, String nodeTypeName) throws Exception {
+    Session session = getSession();
     String type = DIALOGS;
     if (!isDialog)
       type = VIEWS;
@@ -506,6 +612,14 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
+  public String getTemplatePathByAnonymous(boolean isDialog, String nodeTypeName, String repository) throws Exception {
+    return getTemplatePathByAnonymous(isDialog, nodeTypeName);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
   public void removeCacheTemplate(String name) throws Exception {
     templateService.reloadTemplate(name);
   }
@@ -517,16 +631,14 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     templateService.reloadTemplates();
   }
   
-  /**
-   * {@inheritDoc}
-   */
   @SuppressWarnings("unchecked")
-  public List<String> getAllDocumentNodeTypes(String repository) throws Exception {
-    List<String> nodeTypeList = (List<String>)nodeTypeListCached.get(NODETYPE_LIST);
-    if(nodeTypeList != null && nodeTypeList.size() > 0) return nodeTypeList;
+  public List<String> getAllDocumentNodeTypes() throws Exception {
+    List<String> nodeTypeList = (List<String>) nodeTypeListCached.get(NODETYPE_LIST);
+    if(nodeTypeList != null && nodeTypeList.size() > 0) 
+      return nodeTypeList;
     
     List<String> contentTypes = new ArrayList<String>();
-    Session session = getSession(repository);
+    Session session = getSession();
     Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
     for (NodeIterator templateIter = templatesHome.getNodes(); templateIter.hasNext();) {
       Node template = templateIter.nextNode();
@@ -536,13 +648,21 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     session.logout();
     nodeTypeListCached.put(NODETYPE_LIST, contentTypes);
     return contentTypes;
-  }  
+  }
   
   /**
    * {@inheritDoc}
    */
-  public String getSkinPath(String nodeTypeName, String skinName, String locale, String repository) throws Exception {
-    Session session = getSession(repository);
+  @Deprecated
+  public List<String> getAllDocumentNodeTypes(String repository) throws Exception {
+    return getAllDocumentNodeTypes();   
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String getSkinPath(String nodeTypeName, String skinName, String locale) throws Exception {
+    Session session = getSession();
     Node homeNode = (Node) session.getItem(cmsTemplatesBasePath_);
     Node nodeTypeNode = homeNode.getNode(nodeTypeName);
     Orientation orientation = getOrientation(locale);
@@ -558,37 +678,71 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     }
     session.logout();
     return skinPath;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String getSkinPath(String nodeTypeName, String skinName, String locale, String repository) throws Exception {
+    return getSkinPath(nodeTypeName, skinName, locale);
   }  
   
   /**
    * {@inheritDoc}
    */
-  public String buildDialogForm(String nodeTypeName, String repository) throws Exception {
+  public String buildDialogForm(String nodeTypeName) throws Exception {
     if (plugins_ == null && plugins_.size() == 0) throw new Exception("Cannot find plugin for template");
     TemplatePlugin templatePlugin = plugins_.get(0);
-    ManageableRepository manageRepo = repositoryService_.getRepository(repository);
+    ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
     NodeType nodeType = manageRepo.getNodeTypeManager().getNodeType(nodeTypeName);
     return templatePlugin.buildDialogForm(nodeType);
   }
-
+  
   /**
    * {@inheritDoc}
    */
-  public String buildViewForm(String nodeTypeName, String repository) throws Exception {
-    if (plugins_ == null && plugins_.size() == 0) throw new Exception("Cannot find plugin for template");
-    TemplatePlugin templatePlugin = plugins_.get(0);
-    ManageableRepository manageRepo = repositoryService_.getRepository(repository);
-    NodeType nodeType = manageRepo.getNodeTypeManager().getNodeType(nodeTypeName);
-    return templatePlugin.buildViewForm(nodeType);
+  @Deprecated
+  public String buildDialogForm(String nodeTypeName, String repository) throws Exception {
+    return buildDialogForm(nodeTypeName);
   }
 
   /**
    * {@inheritDoc}
    */
-  public String buildStyleSheet(String nodeTypeName, String repository) throws Exception {
+  public String buildViewForm(String nodeTypeName) throws Exception {
+    if (plugins_ == null && plugins_.size() == 0) throw new Exception("Cannot find plugin for template");
+    TemplatePlugin templatePlugin = plugins_.get(0);
+    ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
+    NodeType nodeType = manageRepo.getNodeTypeManager().getNodeType(nodeTypeName);
+    return templatePlugin.buildViewForm(nodeType);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String buildViewForm(String nodeTypeName, String repository) throws Exception {
+    return buildViewForm(nodeTypeName);
+  }
+  
+
+
+  /**
+   * {@inheritDoc}
+   */
+  public String buildStyleSheet(String nodeTypeName) throws Exception {
     if (plugins_ == null && plugins_.size() == 0) throw new Exception("Cannot find plugin for template");
     TemplatePlugin templatePlugin = plugins_.get(0);
     return templatePlugin.buildStyleSheet(null);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String buildStyleSheet(String nodeTypeName, String repository) throws Exception {
+    return buildDialogForm(nodeTypeName);
   }
   
   /**
@@ -660,25 +814,23 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * Update document template
    * @param isDocumentTemplate    boolean
-   * @param repository            String
-   *                              The name of repository
-   * @param nodeTypeName          String
+ * @param nodeTypeName          String
    *                              The name of NodeType
+   * @throws RepositoryException 
    * @see                         Node
    * @see                         NodeType                              
    */
-  private void updateDocumentsTemplate(boolean isDocumentTemplate, String repository, 
-      String nodeTypeName) {
+  private void updateDocumentsTemplate(boolean isDocumentTemplate, String nodeTypeName) {
     if(isDocumentTemplate) {
-      List<String> documentList = managedDocumentTypesMap.get(repository);
+      List<String> documentList = getManagedDocumentTypesMap();
       if(documentList == null) {
         documentList = new ArrayList<String>();
         documentList.add(nodeTypeName);
-        managedDocumentTypesMap.put(repository,documentList);
+        setManagedDocumentTypesMap(documentList);
       } else {
         if(!documentList.contains(nodeTypeName)) {
           documentList.add(nodeTypeName);
-          managedDocumentTypesMap.put(repository,documentList);
+          setManagedDocumentTypesMap(documentList);
         } 
       }
     }    
@@ -686,23 +838,19 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   
   /**
    * Return session of the specified repository
-   * @param repository      String
-   *                        The name of repository
    * @return
    * @see                   ManageableRepository
    * @see                   DMSRepositoryConfiguration
    * @throws Exception
    */
-  private Session getSession(String repository) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+  private Session getSession() throws Exception {
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
   }
 
   /**
    * Return session of the specified repository
-   * @param repository      String
-   *                        The name of repository
    * @param provider        SessionProvider                    
    * @return
    * @see                   SessionProvider
@@ -710,9 +858,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @see                   DMSRepositoryConfiguration
    * @throws Exception
    */
-  private Session getSession(String repository, SessionProvider provider) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+  private Session getSession(SessionProvider provider) throws Exception {
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return provider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);
   }
 
@@ -795,8 +943,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile, String repository) throws Exception {
-    Session session = getSession(repository);
+  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile) throws Exception {
+    Session session = getSession();
     Node templatesHome = (Node) session.getItem(cmsTemplatesBasePath_);
     String templatePath = null;
     try {
@@ -814,16 +962,24 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     //Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
     removeTemplateNodeTypeList();
-    updateDocumentsTemplate(isDocumentTemplate, repository, nodeTypeName);
+    updateDocumentsTemplate(isDocumentTemplate, nodeTypeName);
     return templatePath;
   }
   
   /**
    * {@inheritDoc}
    */
+  @Deprecated
+  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, String[] roles, InputStream templateFile, String repository) throws Exception {
+    return addTemplate(templateType, nodeTypeName, label, isDocumentTemplate, templateName, roles, templateFile);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
   public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, 
-      String[] roles, InputStream templateFile, String repository, Node templatesHome) throws Exception {
-    Session session = getSession(repository);
+      String[] roles, InputStream templateFile, Node templatesHome) throws Exception {
+    Session session = getSession();
     String templatePath = null;
     try {
       templatePath = templatesHome.getPath() + "/" + nodeTypeName + "/" + templateType + "/" + templateName;
@@ -837,11 +993,20 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     } finally {
       session.logout();
     }
-    //Update managedDocumentTypesMap
+    // Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
     removeTemplateNodeTypeList();
-    updateDocumentsTemplate(isDocumentTemplate, repository, nodeTypeName);
+    updateDocumentsTemplate(isDocumentTemplate, nodeTypeName);
     return templatePath;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String addTemplate(String templateType, String nodeTypeName, String label, boolean isDocumentTemplate, String templateName, 
+      String[] roles, InputStream templateFile, String repository, Node templatesHome) throws Exception {
+    return addTemplate(templateType, nodeTypeName, label, isDocumentTemplate, templateName, roles, templateFile, templatesHome);
   }
   
   /**
@@ -858,7 +1023,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
       resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
       String templatePath = contentNode.getPath();
-      session = getSession(WCMCoreUtils.getRepository(null).getConfiguration().getName());
+      session = getSession();
       session.save();
       return templatePath;
     } catch (Exception e) {
@@ -880,7 +1045,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
       String templatePath = template.getPath();
-      session = getSession(WCMCoreUtils.getRepository(null).getConfiguration().getName());
+      session = getSession();
       session.save();
       return templatePath;
     } catch (Exception e) {
@@ -922,4 +1087,31 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     }
     return null;
   }
+  
+  private String getRepoName() {
+    try {
+      String repositoryName = repositoryService_.getCurrentRepository().getConfiguration().getName();
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("The repository name is: " + repositoryName);
+      }
+      return repositoryName;
+    } catch (RepositoryException e) {
+      if (e.getMessage().equalsIgnoreCase("Repository 'null' not found.")) {
+        String repositoryName = System.getProperty("gatein.tenant.repository.name");
+        return repositoryName;
+      } else {
+        LOG.error("Repository exception occurs:", e);
+        return null;
+      }
+    }
+  }
+  
+  private List<String> getManagedDocumentTypesMap() {
+    return managedDocumentTypesMap.get(getRepoName());
+  }
+  
+  private void setManagedDocumentTypesMap(List<String> types) {
+    managedDocumentTypesMap.put(getRepoName(), types);
+  }
+  
 }

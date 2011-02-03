@@ -67,17 +67,16 @@ public class QueryPlugin extends BaseComponentPlugin {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ; 
     Session session = null ;
     if(autoCreateInNewRepository_) {      
-      for(RepositoryEntry entry:repositoryService_.getConfig().getRepositoryConfigurations()) {
-        session = getSession(entry.getName()) ;
-        Node queryHomeNode = (Node)session.getItem(basedQueriesPath);
-        while(it.hasNext()) {
-          QueryData data = (QueryData)it.next().getObject() ;
-          addQuery(queryHomeNode,data) ;
-        }
-        queryHomeNode.save();
-        session.save();
-        session.logout();
+      RepositoryEntry entry = repositoryService_.getCurrentRepository().getConfiguration();
+      session = getSession(entry.getName()) ;
+      Node queryHomeNode = (Node)session.getItem(basedQueriesPath);
+      while(it.hasNext()) {
+        QueryData data = (QueryData)it.next().getObject() ;
+        addQuery(queryHomeNode,data) ;
       }
+      queryHomeNode.save();
+      session.save();
+      session.logout();
     } else {
       session = getSession(repository_) ;
       Node queryHomeNode = (Node)session.getItem(basedQueriesPath);
@@ -107,7 +106,7 @@ public class QueryPlugin extends BaseComponentPlugin {
   
   private Session getSession(String repository) throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;    
   }
 

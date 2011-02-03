@@ -66,8 +66,7 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
     getChildren().clear() ;
     UIFormCheckBoxInput<String> uiCheckBox ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
-    List<String> templates = templateService.getDocumentTemplates(repository) ;
+    List<String> templates = templateService.getDocumentTemplates() ;
     for(String template : templates) {
       uiCheckBox = new UIFormCheckBoxInput<String>(template, template, "") ;
       if(propertiesSelected(template)) uiCheckBox.setChecked(true) ;

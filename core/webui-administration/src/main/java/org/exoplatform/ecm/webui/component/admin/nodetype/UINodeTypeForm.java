@@ -203,9 +203,8 @@ public class UINodeTypeForm extends UIFormTabPane {
   }
   public List<SelectItemOption<String>> getNamespaces() throws Exception {
     if (namespacesOptions_.size() == 0) {
-      String repository = getRepository() ;
       String[] namespaces = getApplicationComponent(RepositoryService.class)
-                            .getRepository(repository).getNamespaceRegistry().getPrefixes() ;
+                            .getCurrentRepository().getNamespaceRegistry().getPrefixes() ;
       for(int i = 0; i < namespaces.length; i ++){
         namespacesOptions_.add(new SelectItemOption<String>(namespaces[i], namespaces[i])) ;
       }
@@ -533,10 +532,9 @@ public class UINodeTypeForm extends UIFormTabPane {
   static public class SaveActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource() ;
-      String repository = uiForm.getRepository() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       NodeTypeManager ntManager = uiForm.getApplicationComponent(RepositoryService.class)
-                                 .getRepository(repository).getNodeTypeManager() ;
+                                 .getCurrentRepository().getNodeTypeManager() ;
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue() ;
       String nodeTypeName = uiForm.getUIStringInput(NODETYPE_NAME).getValue() ;
       if(nodeTypeName == null || nodeTypeName.trim().length() == 0) {
@@ -635,7 +633,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       String repository = uiForm.getRepository() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;      
       ManageableRepository mRepository = 
-        uiForm.getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+        uiForm.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
       String systemWorkspace = mRepository.getConfiguration().getDefaultWorkspaceName() ;
       Session session = mRepository.getSystemSession(systemWorkspace) ;        
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue() ;

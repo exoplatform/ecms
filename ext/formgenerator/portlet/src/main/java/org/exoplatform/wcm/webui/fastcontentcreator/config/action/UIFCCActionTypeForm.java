@@ -173,11 +173,10 @@ public class UIFCCActionTypeForm extends UIForm {
       Node currentNode = fastContentCreatorConfig.getSavedLocationNode() ;
       String actionType = fastContentCreatorActionTypeForm.getUIFormSelectBox(ACTION_TYPE).getValue() ;
       TemplateService templateService = fastContentCreatorActionTypeForm.getApplicationComponent(TemplateService.class) ;
-      String repository = UIFCCUtils.getPreferenceRepository() ;
       String userName = Util.getPortalRequestContext().getRemoteUser() ;
       UIApplication uiApp = fastContentCreatorActionTypeForm.getAncestorOfType(UIApplication.class) ;
       try {
-        String templatePath = templateService.getTemplatePathByUser(true, actionType, userName, repository) ;
+        String templatePath = templateService.getTemplatePathByUser(true, actionType, userName) ;
         if(templatePath == null) {
           Object[] arg = { actionType } ;
           uiApp.addMessage(new ApplicationMessage("UIFastContentCreatorActionTypeForm.msg.access-denied", arg, ApplicationMessage.WARNING)) ;

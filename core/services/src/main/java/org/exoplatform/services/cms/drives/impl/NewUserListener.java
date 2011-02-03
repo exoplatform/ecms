@@ -66,7 +66,6 @@ public class NewUserListener extends UserEventListener {
    */
   @SuppressWarnings({"unused", "hiding"})
   public void preSave(User user, boolean isNew) throws Exception { 
-    String repository = initParams_.getValueParam("repository").getValue();
     String workspace = initParams_.getValueParam("workspace").getValue();
     String permissions = initParams_.getValueParam("permissions").getValue();
     permissions = permissions.concat(","+ user.getUserName());
@@ -83,10 +82,10 @@ public class NewUserListener extends UserEventListener {
     String publicPath = nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS) ;
     String privatePath = nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS) ;
     driveService_.addDrive(user.getUserName() + "|" + privatePath, workspace, user.getUserName(), homePath + "/" + privatePath, views, icon, 
-        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder, allowNodeTypesOnTree);
+        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, allowCreateFolder, allowNodeTypesOnTree);
     //User and everyone can see public drive for user
     driveService_.addDrive(user.getUserName() + "|" + publicPath, workspace, permissions, homePath + "/" + publicPath, views, icon, 
-        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, repository, allowCreateFolder, allowNodeTypesOnTree);
+        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, allowCreateFolder, allowNodeTypesOnTree);
   }
   
   /**

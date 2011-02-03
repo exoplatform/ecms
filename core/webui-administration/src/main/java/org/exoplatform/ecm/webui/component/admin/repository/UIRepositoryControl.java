@@ -22,6 +22,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.services.log.Log;
@@ -68,7 +69,7 @@ public class UIRepositoryControl extends UIContainer {
     UIRepositorySelectForm uiSelectForm = createUIComponent(UIRepositorySelectForm.class, null,
         null);
     try {
-      rservice.getRepository(repository);
+      rservice.getCurrentRepository();
       uiSelectForm.setOptionValue(getRepoItem(true, rservice));
       uiSelectForm.setSelectedValue(repository);
     } catch (Exception e) {
@@ -84,10 +85,12 @@ public class UIRepositoryControl extends UIContainer {
     if (!isExists) {
       options.add(new SelectItemOption<String>("", ""));
     }
-    for (Object obj : rservice.getConfig().getRepositoryConfigurations()) {
-      RepositoryEntry repo = (RepositoryEntry) obj;
-      options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
+    RepositoryEntry repo = null;
+    try {
+      repo = rservice.getCurrentRepository().getConfiguration();
+    } catch (RepositoryException e) {
     }
+    options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
     try {
       removeElement(options);
     } catch (Exception e) {

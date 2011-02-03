@@ -224,7 +224,7 @@ public class UIPCVContainer extends UIContainer {
 	    if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true; 
 	    // check node is a document node
 	    TemplateService templateService = getApplicationComponent(TemplateService.class);
-	    List<String> documentTypes = templateService.getDocumentTemplates(this.getRepository());
+	    List<String> documentTypes = templateService.getDocumentTemplates();
 	    for (String documentType : documentTypes) {
 	      if (nodeView.isNodeType(documentType)) {
 	        isDocumentType = true;

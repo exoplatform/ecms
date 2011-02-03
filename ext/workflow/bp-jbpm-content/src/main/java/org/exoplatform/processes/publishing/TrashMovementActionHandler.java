@@ -51,14 +51,13 @@ public class TrashMovementActionHandler implements ActionHandler {
   
   private void moveTrash(ExecutionContext context) {
     String[] location = ProcessUtil.getCurrentLocation(context);
-    String repository = location[0];
     String currentWorkspace = location[1];
     String currentPath = location[2];
     String trashWorkspace = (String)context.getVariable("exo:trashWorkspace");
     String trashPath = (String)context.getVariable("exo:trashPath");
     String destPath = ProcessUtil.computeDestinationPath(context, currentPath,trashPath);          
     CmsService cmsService = ProcessUtil.getService(context, CmsService.class);
-    cmsService.moveNode(currentPath, currentWorkspace, trashWorkspace, destPath, repository);
+    cmsService.moveNode(currentPath, currentWorkspace, trashWorkspace, destPath);
     ProcessUtil.setCurrentLocation(context,trashWorkspace,destPath);    
     ProcessUtil.moveTrash(context);    
   }

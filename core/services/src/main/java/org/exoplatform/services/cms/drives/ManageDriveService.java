@@ -29,23 +29,21 @@ public interface ManageDriveService {
   /**
    * Register a new drive to workspace or update if the drive is existing
    * @param name  drive name
-   * @param workspace  the workspace name where will store the drive
-   * @param permissions  specify who can access to this drive
-   * @param homePath  specify the location of drive
-   * @param views  include all views can see in drive
-   * @param icon  the drive icon which can see in drive browser
-   * @param viewReferences  the boolean to set default for drive can view references node or not
-   * @param viewNonDocument the boolean to set default for drive can view non document node or not
-   * @param viewSideBar the boolean to set default for drive can view side bar or not
-   * @param showHiddenNode  the boolean to set default for drive can see hidden node or not
-   * @param repository the string contain repository name
-   * @param allowCreateFolder the string to specify which type of folder can add in the drive
+ * @param workspace  the workspace name where will store the drive
+ * @param permissions  specify who can access to this drive
+ * @param homePath  specify the location of drive
+ * @param views  include all views can see in drive
+ * @param icon  the drive icon which can see in drive browser
+ * @param viewReferences  the boolean to set default for drive can view references node or not
+ * @param viewNonDocument the boolean to set default for drive can view non document node or not
+ * @param viewSideBar the boolean to set default for drive can view side bar or not
+ * @param showHiddenNode  the boolean to set default for drive can see hidden node or not
+ * @param allowCreateFolder the string to specify which type of folder can add in the drive
    * @throws Exception
    */
   public void addDrive(String name, String workspace, String permissions, String homePath, 
                         String views, String icon, boolean viewReferences, boolean viewNonDocument,
-                        boolean viewSideBar, boolean showHiddenNode, String repository, String allowCreateFolder,
-                        String allowNodeTypesOnTree)throws Exception ;
+                        boolean viewSideBar, boolean showHiddenNode, String allowCreateFolder, String allowNodeTypesOnTree)throws Exception ;
   /**
    * Return an DriveData Object
    * @param driveName  the string contain the drive name 
@@ -95,6 +93,15 @@ public interface ManageDriveService {
   
   /**
    * Register all drive plugins to repository
+   * @param repository the string contain repository name
+   * @throws Exception
+   */
+  public void init() throws Exception;
+  
+  /**
+   * Register all drive plugins to repository.
+   * 
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
    * @param repository the string contain repository name
    * @throws Exception
    */

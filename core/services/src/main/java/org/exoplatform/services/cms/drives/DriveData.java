@@ -27,6 +27,9 @@ import java.util.List;
 public class DriveData implements Comparable<DriveData> {
 
   private String name ;
+  /**
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
+   */
   private String repository ;
   private String workspace ;
   private String permissions ;
@@ -55,11 +58,13 @@ public class DriveData implements Comparable<DriveData> {
 
   /**
    * @return the name of repository 
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
    */
   public String getRepository() { return repository ; }
   /**
    * Register repository to drive
    * @param rp repository name
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
    */
   public void setRepository(String rp) { repository = rp ; }
   

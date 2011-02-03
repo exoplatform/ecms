@@ -81,9 +81,8 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
   @SuppressWarnings("unchecked")
   public void update(String values) throws Exception {
     UIFormTableInputSet uiTableInputSet = createUIComponent(UIFormTableInputSet.class, null, null) ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     NodeTypeManager ntManager = getApplicationComponent(RepositoryService.class)
-                                .getRepository(repository).getNodeTypeManager() ;
+                                .getCurrentRepository().getNodeTypeManager() ;
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     List<NodeType> nodeTypeList = new ArrayList<NodeType>() ;
     while(nodeTypeIter.hasNext()) {

@@ -96,7 +96,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     String userName = Util.getPortalRequestContext().getRemoteUser();
     try{
-      return templateService.getTemplatePathByUser(true, "exo:webContent", userName, repositoryName);
+      return templateService.getTemplatePathByUser(true, "exo:webContent", userName);
     } catch(Exception e) {
       Utils.createPopupMessage(this, "UINewsletterEntryForm.msg.get-template", null, ApplicationMessage.ERROR);
     }
@@ -110,7 +110,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
     try{
       if (resourceResolver == null) {
         DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-        String workspace = dmsConfiguration.getConfig(this.repositoryName).getSystemWorkspace();
+        String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
         resourceResolver = new JCRResourceResolver(this.repositoryName, workspace);
       }
     }catch(Exception e) {
@@ -151,7 +151,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
     Session session = Utils.getSessionProvider().getSession(workspaceName, manageableRepository);
     Node storedNode = (Node)session.getItem(storedPath);
     CmsService cmsService = getApplicationComponent(CmsService.class);
-    String newsletterNodePath = cmsService.storeNode("exo:webContent", storedNode, inputProperties, isAddNew(), repositoryName);
+    String newsletterNodePath = cmsService.storeNode("exo:webContent", storedNode, inputProperties, isAddNew());
 
     // Add newsletter mixin type
     Node newsletterNode = (Node)session.getItem(newsletterNodePath);

@@ -84,9 +84,8 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
     String preferenceRepository = preferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;  
     List<SelectItemOption<String>> repositories = new ArrayList<SelectItemOption<String>>() ;
-    for(RepositoryEntry repositoryEntry : repositoryService.getConfig().getRepositoryConfigurations()) {
-      repositories.add(new SelectItemOption<String>(repositoryEntry.getName())) ;
-    }
+    RepositoryEntry repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
+    repositories.add(new SelectItemOption<String>(repositoryEntry.getName())) ;
     UIFormSelectBox repositoryFormSelectBox = new UIFormSelectBox(UICategoryNavigationConstant.REPOSITORY_FORM_SELECTBOX, UICategoryNavigationConstant.REPOSITORY_FORM_SELECTBOX, repositories);
     repositoryFormSelectBox.setValue(preferenceRepository);
     repositoryFormSelectBox.setOnChange("ChangeRepository");

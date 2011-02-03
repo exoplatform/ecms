@@ -98,10 +98,9 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public String getTemplate() {
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     try {
       String nodeType = node_.getPrimaryNodeType().getName() ;
-      return templateService.getTemplatePathByUser(false, nodeType, userName, uiExplorer.getRepositoryName()) ; 
+      return templateService.getTemplatePathByUser(false, nodeType, userName) ; 
     } catch(Exception e) {
       LOG.error(e);
     }
@@ -205,8 +204,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public boolean isNodeTypeSupported(String nodeTypeName) {
     try {      
       TemplateService templateService = getApplicationComponent(TemplateService.class);
-      String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
-      return templateService.isManagedNodeType(nodeTypeName, repository);
+      return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
     }
@@ -265,8 +263,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
-    return tempServ.getTemplatePath(false, nodeTypeName, templateName, repository) ;
+    return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
 
   public String getLanguage() { return language_; }
@@ -353,7 +350,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
  
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
-    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage(), getRepository()) ;
+    return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
   }
 
 

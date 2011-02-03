@@ -79,8 +79,7 @@ public class UINodeTypeList extends UIComponentDecorator {
   @SuppressWarnings("unchecked")
   public List getAllNodeTypes() throws Exception{
     List nodeList = new ArrayList<NodeType>();     
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    ManageableRepository mRepository = getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+    ManageableRepository mRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
     NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;    
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     while(nodeTypeIter.hasNext()) {
@@ -115,9 +114,8 @@ public class UINodeTypeList extends UIComponentDecorator {
   }
 
   public void refresh(String name, int currentPage) throws Exception {
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     ManageableRepository manaRepository = 
-      getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+      getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
     Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
     if(name != null) {
       if(session.getRootNode().hasNode(DRAFTNODETYPE)) {
@@ -168,9 +166,8 @@ public class UINodeTypeList extends UIComponentDecorator {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiList = event.getSource() ;
       String ntName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      String repository = uiList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       ManageableRepository manaRepository = 
-        uiList.getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+        uiList.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
       Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
       NodeTypeManager ntManager = session.getWorkspace().getNodeTypeManager() ;
       NodeType nodeType = ntManager.getNodeType(ntName) ;
@@ -199,9 +196,8 @@ public class UINodeTypeList extends UIComponentDecorator {
   static public class EditActionListener extends EventListener<UINodeTypeList> {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiNodeList = event.getSource() ;
-      String repository = uiNodeList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       ManageableRepository manaRepository = 
-        uiNodeList.getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+        uiNodeList.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
       Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
       String nodeName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       Node draftNodeType = session.getRootNode().getNode(DRAFTNODETYPE + "/" + nodeName) ;
@@ -225,9 +221,8 @@ public class UINodeTypeList extends UIComponentDecorator {
   static public class DeleteActionListener extends EventListener<UINodeTypeList> {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiNodeList = event.getSource() ;
-      String repository = uiNodeList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       ManageableRepository manaRepository = 
-        uiNodeList.getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+        uiNodeList.getApplicationComponent(RepositoryService.class).getCurrentRepository();
       Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
       String nodeName = event.getRequestContext().getRequestParameter(OBJECTID) ;  
       if(session.getRootNode().hasNode(DRAFTNODETYPE)) {

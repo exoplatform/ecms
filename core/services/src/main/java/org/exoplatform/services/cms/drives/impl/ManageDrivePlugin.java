@@ -71,13 +71,13 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
     while(it.hasNext()){
       DriveData data = (DriveData)it.next().getObject() ;
       try{
-        Session session  = getSession(data.getRepository());
+        Session session  = getSession();
         addDrive(data, session) ;
         session.logout();
       }catch(Exception e) {
         LOG.error("Unexpected error", e);
         System.out.println("[WARNING] ==> Can not init drive '"+ data.getName()
-            +"' in repository '" + data.getRepository()+"'");
+            +"' in repository '" + repositoryService_.getCurrentRepository().getConfiguration().getName() + "'");
       }
 
     }
@@ -96,11 +96,9 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
     while(it.hasNext()){
       data = (DriveData)it.next().getObject() ;       
       try{
-        if(data.getRepository().equals(repository)) { 
-          session = getSession(repository) ;
-          addDrive(data, session) ;
-          session.logout();
-        }
+        session = getSession() ;
+        addDrive(data, session) ;
+        session.logout();
       }catch(Exception e) {        
       }      
 
@@ -136,13 +134,12 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
 
   /**
    * Return Session object with specified repository name
-   * @param repository
    * @return Session object
    * @throws Exception
    */
-  private Session getSession(String repository)throws Exception {
-    ManageableRepository manaRepository = repositoryService_.getRepository(repository) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+  private Session getSession()throws Exception {
+    ManageableRepository manaRepository = repositoryService_.getCurrentRepository();
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manaRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
   }
 }

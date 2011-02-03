@@ -251,7 +251,6 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
 	    public void execute(Event<UIShowAllFavouriteResult> event) throws Exception {
 	      UIShowAllFavouriteResult uiShowAllFavouriteResult = event.getSource();            
 	      UIJCRExplorer uiExplorer = uiShowAllFavouriteResult.getAncestorOfType(UIJCRExplorer.class);
-	      String repository = uiExplorer.getRepositoryName();
 	      String path = event.getRequestContext().getRequestParameter(OBJECTID);
 	      UIApplication uiApp = uiShowAllFavouriteResult.getAncestorOfType(UIApplication.class);
 	      Node node;
@@ -264,7 +263,7 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
 	        return;
 	      }
 	      TemplateService templateService = uiShowAllFavouriteResult.getApplicationComponent(TemplateService.class);
-	      if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName(), repository)) {
+	      if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName())) {
 	        uiApp.addMessage(new ApplicationMessage("UIShowAllFavouriteResult.msg.not-support", null, 
 	                                                ApplicationMessage.WARNING));
 	        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());

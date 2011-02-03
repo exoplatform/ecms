@@ -140,10 +140,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   }
   
   public String getDMSWorkspace() throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    String repository = uiExplorer.getRepositoryName();
     DMSConfiguration dmsConfig = getApplicationComponent(DMSConfiguration.class);
-    return dmsConfig.getConfig(repository).getSystemWorkspace();    
+    return dmsConfig.getConfig().getSystemWorkspace();    
   }
   
   public Node getRootPathTaxonomy(Node node) throws Exception {
@@ -192,7 +190,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     String userName = Util.getPortalRequestContext().getRemoteUser();
     try {      
-      return templateService.getTemplatePathByUser(true, contentType, userName, repositoryName);
+      return templateService.getTemplatePathByUser(true, contentType, userName);
     } catch (AccessControlException e) {
       LOG.error("Unexpected error", e);
       return null;
@@ -345,7 +343,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       }       
       try {
         CmsService cmsService = documentForm.getApplicationComponent(CmsService.class);
-        String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew(),documentForm.repositoryName);
+        String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
         try {
           newNode = (Node)homeNode.getSession().getItem(addedPath);
           if(newNode.isLocked()) {
@@ -576,7 +574,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               UIJCRExplorer uiExplorer = uiDocumentForm.getAncestorOfType(UIJCRExplorer.class);
               String repository = uiExplorer.getRepositoryName();
               DMSConfiguration dmsConfig = uiDocumentForm.getApplicationComponent(DMSConfiguration.class);
-              DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repository);
+              DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig();
               String workspaceName = dmsRepoConfig.getSystemWorkspace();            
               if(uiSet.getValue().size() == 0) uiSet.setValue(new ArrayList<Value>());            
               UIOneTaxonomySelector uiOneTaxonomySelector = 

@@ -7,6 +7,8 @@ package org.exoplatform.ecm.webui.component.explorer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -91,10 +93,12 @@ public class UIRepositoryList extends UIForm {
    */
   private List<SelectItemOption<String>> getRepoItem() {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    for (Object obj : rService.getConfig().getRepositoryConfigurations()) {
-      RepositoryEntry repo = (RepositoryEntry) obj;
-      options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
+    RepositoryEntry repo = null;
+    try {
+      repo = rService.getCurrentRepository().getConfiguration();
+    } catch (RepositoryException e) {
     }
+    options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
     return options;
   }
   

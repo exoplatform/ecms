@@ -57,9 +57,8 @@ public class UINamespaceList extends UIGrid {
   
   @SuppressWarnings("unchecked")
   public void updateGrid () throws Exception {
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     NamespaceRegistry namespaceRegistry = getApplicationComponent(RepositoryService.class)
-                                          .getRepository(repository).getNamespaceRegistry() ;
+                                          .getCurrentRepository().getNamespaceRegistry() ;
     List<NamespaceBean> nspBeans = new ArrayList<NamespaceBean>();
     String[] prefixs = namespaceRegistry.getPrefixes();
     for(int i = 0; i < prefixs.length - 1; i++){      

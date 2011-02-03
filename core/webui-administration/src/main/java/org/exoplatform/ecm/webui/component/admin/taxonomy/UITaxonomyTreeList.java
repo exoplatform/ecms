@@ -107,14 +107,13 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
   private TaxonomyTreeData setData(Node node) {
     TaxonomyTreeData taxonomyTreeData = null ;
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
     try {
       if (node != null) {
         taxonomyTreeData = new TaxonomyTreeData();
         taxonomyTreeData.setTaxoTreeName(node.getName());
         taxonomyTreeData.setTaxoTreeHomePath(node.getPath());
         taxonomyTreeData.setTaxoTreeWorkspace(node.getSession().getWorkspace().getName());
-        Node realTreeNode = taxonomyService.getTaxonomyTree(repository, node.getName(), true);
+        Node realTreeNode = taxonomyService.getTaxonomyTree(node.getName(), true);
         Value[] values = realTreeNode.getProperty("exo:permissions").getValues();
         StringBuffer buffer = new StringBuffer(1024);
         try {
@@ -145,7 +144,7 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
       UIApplication uiApp = uiTaxonomyTreeList.getAncestorOfType(UIApplication.class);
       try {
         // Remove all avaiable action
-        Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(repository,taxoTreeName, true);
+        Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(taxoTreeName,true);
         actionService.removeAction(taxonomyTreeNode, repository);
         taxonomyService.removeTaxonomyTree(taxoTreeName);
       } catch(RepositoryException e) {

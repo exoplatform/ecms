@@ -94,10 +94,9 @@ public class UIActionTypeForm extends UIForm {
     Collections.sort(actionList);
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     String userName = Util.getPortalRequestContext().getRemoteUser();
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     for(String action : actionList) {
       try {
-        templateService.getTemplatePathByUser(true, action, userName, uiExplorer.getRepositoryName());
+        templateService.getTemplatePathByUser(true, action, userName);
         typeList_.add(new SelectItemOption<String>(action, action));
       } catch (Exception e){
         continue;
@@ -116,12 +115,11 @@ public class UIActionTypeForm extends UIForm {
       Node currentNode = uiExplorer.getCurrentNode() ;
       String actionType = uiActionType.getUIFormSelectBox(ACTION_TYPE).getValue() ;
       TemplateService templateService = uiActionType.getApplicationComponent(TemplateService.class) ;
-      String repository = uiExplorer.getRepositoryName() ;
       String userName = Util.getPortalRequestContext().getRemoteUser() ;
       UIApplication uiApp = uiActionType.getAncestorOfType(UIApplication.class) ;
       try {
         String templatePath = 
-          templateService.getTemplatePathByUser(true, actionType, userName, repository) ;
+          templateService.getTemplatePathByUser(true, actionType, userName) ;
         if(templatePath == null) {
           Object[] arg = { actionType } ;
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.access-denied", arg, 

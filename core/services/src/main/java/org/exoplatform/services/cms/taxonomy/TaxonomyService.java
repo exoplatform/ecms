@@ -34,14 +34,13 @@ import org.exoplatform.services.cms.taxonomy.impl.TaxonomyPlugin;
 public interface TaxonomyService {
   /**
    * Returns the root node of the given taxonomy tree
-   * 
-   * @param repository The name of repository
    * @param taxonomyName The name of the taxonomy
    * @param system Indicates whether the nodes must be retrieved using a session
    *          system or user session
+   * 
    * @throws RepositoryException if the taxonomy tree could not be found
    */
-  public Node getTaxonomyTree(String repository, String taxonomyName, boolean system)
+  public Node getTaxonomyTree(String taxonomyName, boolean system)
       throws RepositoryException;
 
   /**
@@ -55,13 +54,12 @@ public interface TaxonomyService {
 
   /**
    * Returns the list of all the root nodes of the taxonomy tree available
-   * 
-   * @param repository The name of repository
    * @param system Indicates whether the nodes must be retrieved using a session
    *          system or user session
+   * 
    * @throws RepositoryException if the taxonomy trees could not be found
    */
-  public List<Node> getAllTaxonomyTrees(String repository, boolean system)
+  public List<Node> getAllTaxonomyTrees(boolean system)
       throws RepositoryException;
 
   /**
@@ -75,12 +73,11 @@ public interface TaxonomyService {
 
   /**
    * Checks if a taxonomy tree with the given name has already been defined
-   * 
-   * @param repository The name of repository
    * @param taxonomyName The name of the taxonomy
+   * 
    * @throws RepositoryException if the taxonomy name could not be checked
    */
-  public boolean hasTaxonomyTree(String repository, String taxonomyName) throws RepositoryException;
+  public boolean hasTaxonomyTree(String taxonomyName) throws RepositoryException;
 
   /**
    * Defines a node as a new taxonomy tree
@@ -112,18 +109,17 @@ public interface TaxonomyService {
 
   /**
    * Adds a new taxonomy node at the given location
-   * 
-   * @param repository The name of the repository
    * @param workspace The name of the workspace
    * @param parentPath The place where the taxonomy node will be added
    * @param taxoNodeName The name of taxonomy node
    * @param creator The name of the user creating this node 
+   * 
    * @throws TaxonomyNodeAlreadyExistsException if a taxonomy node with the same
    *           name has already been added
    * @throws RepositoryException if the taxonomy node could not be added
    */
-  public void addTaxonomyNode(String repository, String workspace, String parentPath,
-      String taxoNodeName, String creator) throws RepositoryException, TaxonomyNodeAlreadyExistsException;
+  public void addTaxonomyNode(String workspace, String parentPath, String taxoNodeName,
+      String creator) throws RepositoryException, TaxonomyNodeAlreadyExistsException;
 
   /**
    * Removes the taxonomy node located at the given absolute path

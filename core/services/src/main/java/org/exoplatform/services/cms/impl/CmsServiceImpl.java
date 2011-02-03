@@ -85,10 +85,10 @@ public class CmsServiceImpl implements CmsService {
    * {@inheritDoc}
    */
   public String storeNode(String workspace, String nodeTypeName, String storePath, 
-      Map mappings, String repository) throws Exception {    
-    Session session = jcrService.getRepository(repository).login(workspace);
+      Map mappings) throws Exception {    
+    Session session = jcrService.getCurrentRepository().login(workspace);
     Node storeHomeNode = (Node) session.getItem(storePath);
-    String path = storeNode(nodeTypeName, storeHomeNode, mappings, true,repository);
+    String path = storeNode(nodeTypeName, storeHomeNode, mappings, true);
     storeHomeNode.save();
     session.save();
     session.logout();
@@ -99,7 +99,7 @@ public class CmsServiceImpl implements CmsService {
    * {@inheritDoc}
    */
   public String storeNode(String nodeTypeName, Node storeHomeNode, Map mappings, 
-      boolean isAddNew, String repository) throws Exception {    
+      boolean isAddNew) throws Exception {    
     Set keys = mappings.keySet();
     String nodePath = extractNodeName(keys);
     JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath); 
@@ -188,7 +188,7 @@ public class CmsServiceImpl implements CmsService {
    * {@inheritDoc}
    */
   public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings, 
-      boolean isAddNew, String repository) throws Exception {    
+      boolean isAddNew) throws Exception {    
     Set keys = mappings.keySet();
     String nodePath = extractNodeName(keys);
     JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath); 
@@ -219,7 +219,7 @@ public class CmsServiceImpl implements CmsService {
    * {@inheritDoc}
    */
   public String storeNodeByUUID(String nodeTypeName, Node storeHomeNode, Map mappings, 
-      boolean isAddNew, String repository) throws Exception {    
+      boolean isAddNew) throws Exception {    
     Set keys = mappings.keySet();
     String nodePath = extractNodeName(keys);
     JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath); 
@@ -1053,14 +1053,13 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath,
-      String repository) {
+  public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath) {
     Session srcSession = null ;
     Session destSession = null ;
     if(!srcWorkspace.equals(destWorkspace)){      
       try {        
-        srcSession = jcrService.getRepository(repository).getSystemSession(srcWorkspace);
-        destSession = jcrService.getRepository(repository).getSystemSession(destWorkspace);
+        srcSession = jcrService.getCurrentRepository().getSystemSession(srcWorkspace);
+        destSession = jcrService.getCurrentRepository().getSystemSession(destWorkspace);
         Workspace workspace = destSession.getWorkspace();
         Node srcNode = (Node) srcSession.getItem(nodePath);
         try {
@@ -1083,7 +1082,7 @@ public class CmsServiceImpl implements CmsService {
     } else {
       Session session = null ;
       try{
-        session = jcrService.getRepository(repository).getSystemSession(srcWorkspace);
+        session = jcrService.getCurrentRepository().getSystemSession(srcWorkspace);
         Workspace workspace = session.getWorkspace();
         try {
           session.getItem(destPath);        

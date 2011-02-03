@@ -63,12 +63,8 @@ private final RepositoryService repositoryService_;
       boolean giveTarget, boolean system) throws PathNotFoundException, RepositoryException {
     if (!absPath.startsWith("/"))
       throw new IllegalArgumentException(absPath + " isn't absolute path");
-    try {
-      Session session = getSession(repositoryService_.getRepository(repository), workspace);
-      return getItemTarget(session, absPath, giveTarget, system);
-    } catch (RepositoryConfigurationException e) {
-      throw new RepositoryException(e);
-    }
+    Session session = getSession(repositoryService_.getCurrentRepository(), workspace);
+    return getItemTarget(session, absPath, giveTarget, system);
   }  
 
   /**

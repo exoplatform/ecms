@@ -167,7 +167,7 @@ public class UIToolBar extends UIContainer {
         }
         
         TemplateService templateService  = uiContainer.getApplicationComponent(TemplateService.class) ;
-        List templates = templateService.getDocumentTemplates(uiContainer.getRepository()) ;
+        List templates = templateService.getDocumentTemplates() ;
         if(templates.contains(selectNode.getPrimaryNodeType().getName())) {
           ManageViewService vservice = uiContainer.getApplicationComponent(ManageViewService.class) ;
           String repoName = uiContainer.getPortletPreferences().getValue(Utils.REPOSITORY, "") ;

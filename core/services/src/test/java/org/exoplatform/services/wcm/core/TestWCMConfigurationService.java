@@ -46,7 +46,6 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
   public void testGetSiteDriveConfig() {
     DriveData driveData = configurationService.getSiteDriveConfig();
     assertEquals("{siteName}", driveData.getName());
-    assertEquals("{repository}", driveData.getRepository());
     assertEquals("{workspace}", driveData.getWorkspace());
     assertEquals("{accessPermission}", driveData.getPermissions());
     assertEquals("{sitePath}/categories/{siteName}", driveData.getHomePath());

@@ -103,11 +103,9 @@ public class UILockNodeList extends UIComponentDecorator {
   
   public List<Node> getAllLockedNodes() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-    String repository = portletPref.getValue(Utils.REPOSITORY, "");
-    RepositoryEntry repo = repositoryService.getConfig().getRepositoryConfiguration(repository);
-    ManageableRepository manageRepository = repositoryService.getRepository(repository);
+    
+    ManageableRepository manageRepository = repositoryService.getCurrentRepository();
+    RepositoryEntry repo = manageRepository.getConfiguration();
     
     List<Node> listLockedNodes = new ArrayList<Node>();
     QueryManager queryManager = null;
@@ -155,17 +153,16 @@ public class UILockNodeList extends UIComponentDecorator {
       ManageableRepository manageRepository = repositoryService.getCurrentRepository();
       Session session = null;
       Node lockedNode = null;
-      for(RepositoryEntry repo : repositoryService.getConfig().getRepositoryConfigurations() ) {
-        for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
-          session = SessionProviderFactory.createSessionProvider().getSession(ws.getName(), manageRepository);
-          try {
-            lockedNode = (Node) session.getItem(nodePath);
-            if ((lockedNode != null) && !lockedNode.isNodeType(Utils.EXO_RESTORELOCATION)) break;
-          } catch (PathNotFoundException e) {
-            continue;
-          } catch (AccessDeniedException accessDeniedException) {
-            continue;
-          }
+      RepositoryEntry repo = repositoryService.getCurrentRepository().getConfiguration();
+      for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
+        session = SessionProviderFactory.createSessionProvider().getSession(ws.getName(), manageRepository);
+        try {
+          lockedNode = (Node) session.getItem(nodePath);
+          if ((lockedNode != null) && !lockedNode.isNodeType(Utils.EXO_RESTORELOCATION)) break;
+        } catch (PathNotFoundException e) {
+          continue;
+        } catch (AccessDeniedException accessDeniedException) {
+          continue;
         }
       }
       

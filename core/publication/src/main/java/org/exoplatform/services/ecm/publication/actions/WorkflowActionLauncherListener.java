@@ -109,7 +109,7 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
         if(event.getType() == Event.NODE_ADDED) {          
           node = (Node) jcrSession.getItem(path);        
           String nodeType = node.getPrimaryNodeType().getName();
-          if (templateService.getDocumentTemplates(repository_).contains(nodeType)) {                    
+          if (templateService.getDocumentTemplates().contains(nodeType)) {                    
             variables.put("document-type", nodeType);
             triggerAction(userId, variables, repository_);
           }          

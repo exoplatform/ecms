@@ -38,10 +38,6 @@
       <type>org.exoplatform.services.cms.templates.ContentTypeFilterPlugin</type>
       <description>this plugin is used to filter wcm nodetype</description>
       <init-params>
-        <value-param>
-          <name>repository</name>
-          <value>repository</value>
-        </value-param>
         <object-param>
           <name>cssFolderFilter</name>
           <description>only exo:cssFile can be created in exo:cssFolder</description>
@@ -124,10 +120,6 @@
         <value-param>
           <name>storedLocation</name>
           <value>war:/conf/wcm-artifacts/nodetype-templates</value>
-        </value-param>
-        <value-param>
-          <name>repository</name>
-          <value>repository</value>
         </value-param>
         <object-param>
           <name>template.configuration</name>

@@ -20,7 +20,6 @@
             <description>System workspace</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>System files</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>system</string></field>
               <field  name="permissions"><string>*:/platform/administrators</string></field>
               <field  name="homePath"><string>/</string></field>
@@ -41,7 +40,6 @@
             <description>Collaboration workspace set</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>Collaboration Center</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>collaboration</string></field>
               <field  name="permissions"><string>*:/platform/administrators</string></field>
               <field  name="homePath"><string>/</string></field>
@@ -62,7 +60,6 @@
             <description>Backup workspace set</description>
             <object type="org.exoplatform.services.cms.drives.DriveData">
               <field  name="name"><string>Backup Center</string></field>
-              <field  name="repository"><string>repository</string></field>
               <field  name="workspace"><string>backup</string></field>
               <field  name="permissions"><string>*:/platform/administrators</string></field>
               <field  name="homePath"><string>/</string></field>

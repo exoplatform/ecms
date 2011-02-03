@@ -130,7 +130,7 @@ public class UIPresentation extends UIBaseNodePresentation {
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     String repository = getRepositoryName();
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
+    String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
     return new JCRResourceResolver(repository, workspace, "exo:templateFile");
   }
 

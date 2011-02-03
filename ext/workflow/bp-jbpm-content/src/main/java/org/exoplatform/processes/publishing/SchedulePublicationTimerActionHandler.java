@@ -89,14 +89,13 @@ public class SchedulePublicationTimerActionHandler extends ManagePublicationActi
   
   private void moveToPending(ExecutionContext context) throws Exception {
     String[] currentLocation = ProcessUtil.getCurrentLocation(context);
-    String repository = currentLocation[0];
     String currentWorkspace = currentLocation[1];
     String currentPath = currentLocation[2];   
     String pendingWorksapce = (String)context.getVariable("exo:pendingWorkspace");
     String pendingPath = (String)context.getVariable("exo:pendingPath");
     String destPath = ProcessUtil.computeDestinationPath(context, currentPath,pendingPath);
     CmsService cmsService = ProcessUtil.getService(context, CmsService.class);           
-    cmsService.moveNode(currentPath, currentWorkspace, pendingWorksapce, destPath, repository);    
+    cmsService.moveNode(currentPath, currentWorkspace, pendingWorksapce, destPath);    
     ProcessUtil.setCurrentLocation(context,pendingWorksapce,destPath);
     ProcessUtil.waitForPublish(context);
   }  

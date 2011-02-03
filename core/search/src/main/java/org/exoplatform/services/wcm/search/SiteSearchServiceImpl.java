@@ -377,7 +377,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       mapQuerySpecificNodeTypes(queryCriteria,queryBuilder,manager);
       return;
     }    
-    List<String> selectedNodeTypes = templateService.getDocumentTemplates(currentRepository.getConfiguration().getName());    
+    List<String> selectedNodeTypes = templateService.getDocumentTemplates();    
     queryBuilder.openGroup(LOGICAL.AND);
     queryBuilder.equal("jcr:primaryType", "nt:resource", LOGICAL.NULL);
     // query on exo:rss-enable nodetypes for title, summary field

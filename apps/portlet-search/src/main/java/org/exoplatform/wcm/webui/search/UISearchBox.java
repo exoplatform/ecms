@@ -104,7 +104,7 @@ public class UISearchBox extends UIForm {
 		try {
 			String repository = getRepository();
 			DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-			String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
+			String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
 			return new JCRResourceResolver(repository, workspace, "exo:templateFile");
 		} catch (Exception e) {
 			return null;

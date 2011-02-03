@@ -307,8 +307,8 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    * @throws Exception
    */
   private Session getSession(String repository) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository() ;
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;    
   }
   
@@ -320,8 +320,8 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    * @throws Exception
    */
   private Session getSession(String repository,SessionProvider sessionProvider) throws Exception{
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository() ;
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository) ;
   }
 

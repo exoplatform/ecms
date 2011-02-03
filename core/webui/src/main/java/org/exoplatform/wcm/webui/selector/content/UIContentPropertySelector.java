@@ -71,7 +71,7 @@ public class UIContentPropertySelector extends UIForm{
     ManageableRepository manRepository = repoService.getCurrentRepository();
     //String workspaceName = manRepository.getConfiguration().getSystemWorkspaceName();
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspaceName = dmsConfiguration.getConfig(manRepository.getConfiguration().getName()).getSystemWorkspace();
+    String workspaceName = dmsConfiguration.getConfig().getSystemWorkspace();
     Session session = sessionProvider.getSession(workspaceName, manRepository);
     String metadataPath = nodeHierarchyCreator.getJcrPath(BasePath.METADATA_PATH);
     Node homeNode = (Node) session.getItem(metadataPath);

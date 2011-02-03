@@ -125,7 +125,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   
   public ManageableRepository getRepository(String repositoryName) throws Exception{
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    return repositoryService.getRepository(repositoryName);
+    return repositoryService.getCurrentRepository();
   }
   
   public void initPopup(String path) throws Exception {

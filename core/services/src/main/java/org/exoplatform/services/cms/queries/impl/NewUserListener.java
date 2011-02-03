@@ -66,21 +66,19 @@ public class NewUserListener extends UserEventListener {
   private void prepareSystemWorkspace(String userName) throws Exception {
     Session session = null;    
     //Manage production workspace
-    List<RepositoryEntry> repositories = jcrService_.getConfig().getRepositoryConfigurations() ;
-    for(RepositoryEntry repo : repositories) {
-      try {              
-        String defaultWorkspaceName = jcrService_.getDefaultRepository().getConfiguration().getDefaultWorkspaceName() ;
-        session = jcrService_.getRepository(repo.getName()).getSystemSession(defaultWorkspaceName);
-        Node usersHome = (Node) session.getItem(
-            nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH));
-        initSystemData(usersHome, userName) ;
-        session.save();
-        session.logout();
-      } catch (RepositoryException re){
-        session.logout();
-        return;
-      }
-    }   
+    RepositoryEntry repo = jcrService_.getCurrentRepository().getConfiguration();
+    try {              
+      String defaultWorkspaceName = jcrService_.getDefaultRepository().getConfiguration().getDefaultWorkspaceName() ;
+      session = jcrService_.getRepository(repo.getName()).getSystemSession(defaultWorkspaceName);
+      Node usersHome = (Node) session.getItem(
+          nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH));
+      initSystemData(usersHome, userName) ;
+      session.save();
+      session.logout();
+    } catch (RepositoryException re){
+      session.logout();
+      return;
+    }
   }
   
   private void initSystemData(Node usersHome, String userName) throws Exception{           

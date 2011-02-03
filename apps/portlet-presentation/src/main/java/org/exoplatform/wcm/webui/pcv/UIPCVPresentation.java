@@ -173,7 +173,7 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
         DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-        String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
+        String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
         resourceResolver = new JCRResourceResolver(repository, workspace, "exo:templateFile");
     } catch (Exception e) {
       Utils.createPopupMessage(this, "UIMessageBoard.msg.get-template-resource", null, ApplicationMessage.ERROR);

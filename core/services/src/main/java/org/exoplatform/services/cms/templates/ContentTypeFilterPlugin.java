@@ -33,9 +33,7 @@ import org.exoplatform.container.xml.ObjectParameter;
 public class ContentTypeFilterPlugin extends BaseComponentPlugin {
 
   private List<FolderFilterConfig> folderFilterConfigs = new ArrayList<FolderFilterConfig>();
-  private String repository;
   public ContentTypeFilterPlugin(InitParams initParams) {
-    repository = initParams.getValueParam("repository").getValue();
     for(Iterator<ObjectParameter> iterator = initParams.getObjectParamIterator();iterator.hasNext();) {
       Object object = iterator.next().getObject();
       if(object instanceof FolderFilterConfig ) {
@@ -45,7 +43,6 @@ public class ContentTypeFilterPlugin extends BaseComponentPlugin {
   }
 
   public List<FolderFilterConfig> getFolderFilterConfigList() { return folderFilterConfigs; }
-  public String getRepository() { return this.repository; }
 
   public static class FolderFilterConfig {    
     private String folderType;

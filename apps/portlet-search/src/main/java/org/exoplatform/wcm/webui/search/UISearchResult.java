@@ -150,9 +150,8 @@ public class UISearchResult extends UIContainer {
 	    boolean isSearchDocument  = searchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING).isChecked();	   
 	    boolean isWebPage  = searchForm.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING).isChecked();
 			
-	    String repository = portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);                                                   
 	    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes(repository);
+	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
 
 	    queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
 			queryCriteria.setSiteName(portal);

@@ -188,9 +188,9 @@ public abstract class BaseResourceLoaderService implements Startable{
     if(repository == null) {
       manageableRepository = repositoryService_.getDefaultRepository();
     }else {
-      manageableRepository = repositoryService_.getRepository(repository) ;
+      manageableRepository = repositoryService_.getCurrentRepository() ;
     }
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(manageableRepository.getConfiguration().getName());
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     Session session = sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);     
     String resourcesPath = getBasePath();
     return (Node) session.getItem(resourcesPath);

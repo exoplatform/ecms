@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin;
 
+import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -70,9 +71,8 @@ public class UIECMAdminPortlet extends UIPortletApplication {
 //    addChild(UIRepositoryControl.class, null, null) ;
     UIPopupContainer uiPopupAction = addChild(UIPopupContainer.class, null, "UIECMAdminUIPopupAction");
     uiPopupAction.getChild(UIPopupWindow.class).setId("UIECMAdminUIPopupWindow") ;
-    String repo = getPreferenceRepository() ;
     try{
-      getApplicationComponent(RepositoryService.class).getRepository(repo) ;
+      getApplicationComponent(RepositoryService.class).getCurrentRepository();
       UIECMAdminControlPanel controlPanel = addChild(UIECMAdminControlPanel.class, null, null) ;
       controlPanel.initialize();
       UIECMAdminWorkingArea workingArea = addChild(UIECMAdminWorkingArea.class, null, null);
@@ -130,9 +130,11 @@ public class UIECMAdminPortlet extends UIPortletApplication {
   }
   
   public String getPreferenceRepository() {
-    PortletPreferences portletPref = getPortletPreferences() ;
-    String repository = portletPref.getValue(Utils.REPOSITORY, "") ;
-    return repository ;
+    try {
+      return getApplicationComponent(RepositoryService.class).getCurrentRepository().getConfiguration().getName();
+    } catch (RepositoryException e) {
+      return null;
+    }
   }
   
   public String getPreferenceWorkspace() {
@@ -163,7 +165,7 @@ public class UIECMAdminPortlet extends UIPortletApplication {
   			container.getComponentInstanceOfType(DMSConfiguration.class);
   	
     //ManageableRepository manageableRepository = repoService.getRepository(repository) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
     //return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
   }

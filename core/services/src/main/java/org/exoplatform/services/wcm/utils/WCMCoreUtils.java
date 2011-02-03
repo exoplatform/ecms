@@ -187,9 +187,7 @@ public class WCMCoreUtils {
   public static ManageableRepository getRepository(String repository) {
     try {
       RepositoryService repositoryService = getService(RepositoryService.class);
-      if (repository == null)
-        return repositoryService.getCurrentRepository(); 
-      return repositoryService.getRepository(repository);
+      return repositoryService.getCurrentRepository(); 
     } catch (Exception e) {
       log.error("getRepository(" + repository + ") failed because of ", e);
     }

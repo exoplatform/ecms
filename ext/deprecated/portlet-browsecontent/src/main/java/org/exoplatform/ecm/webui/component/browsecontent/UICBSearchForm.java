@@ -180,7 +180,7 @@ public class UICBSearchForm extends UIForm {
     }    
     duration_ = 0;
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    List<String> documentNodeTypes = templateService.getDocumentTemplates(repository);
+    List<String> documentNodeTypes = templateService.getDocumentTemplates();
     //TODO Why we have to add nt:resource, need to check again
     documentNodeTypes.add("nt:resource");
     //TODO need review this code to improve performance

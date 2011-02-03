@@ -6,7 +6,6 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -53,7 +52,7 @@ public class UIContentNodeTypeSelector extends UIForm {
   public void init() throws Exception {
     getChildren().clear();
     TemplateService tempService = getApplicationComponent(TemplateService.class);
-    List<String> nodeTypes = tempService.getAllDocumentNodeTypes(WCMCoreUtils.getRepository(null).getConfiguration().getName());
+    List<String> nodeTypes = tempService.getAllDocumentNodeTypes();
     UIFormCheckBoxInput<String> uiCheckBox = null;
     for(String nodeType : nodeTypes) {
       uiCheckBox = new UIFormCheckBoxInput<String>(nodeType, nodeType, "");

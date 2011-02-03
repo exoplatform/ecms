@@ -158,8 +158,8 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
 
   @SuppressWarnings("unchecked")
   private void importPredefineTaxonomies(String repository) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     if (workspace == null) {
       setWorkspace(dmsRepoConfig.getSystemWorkspace());
     } else {
@@ -254,9 +254,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     RepositoryService repositoryService = (RepositoryService) container
         .getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageRepo = repositoryService.getRepository(repository);
-    TemplateService templateService = (TemplateService) container
-        .getComponentInstanceOfType(TemplateService.class);
+    ManageableRepository manageRepo = repositoryService.getCurrentRepository();
 
     Map<String, JcrInputProperty> sortedInputs = new HashMap<String, JcrInputProperty>();
     JcrInputProperty jcrInputName = new JcrInputProperty();
@@ -352,10 +350,8 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
 
   public void init() throws Exception {
     if (autoCreateInNewRepository_) {
-      for (RepositoryEntry repositoryEntry : repositoryService_.getConfig()
-          .getRepositoryConfigurations()) {
-        importPredefineTaxonomies(repositoryEntry.getName());
-      }
+      RepositoryEntry repositoryEntry = repositoryService_.getCurrentRepository().getConfiguration();
+      importPredefineTaxonomies(repositoryEntry.getName());
       return;
     }
     ValueParam param = params_.getValueParam("repository");

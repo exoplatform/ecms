@@ -116,9 +116,18 @@ public interface MetadataService {
   
   /**
    * Call all available in list of TemplatePlugin to 
-   * add some predefine template to repository
+   * add some predefine template to repository.
+   * @throws Exception
+   */
+  public void init() throws Exception ;
+  
+  /**
+   * Call all available in list of TemplatePlugin to 
+   * add some predefine template to repository.
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #init()} instead.
    * @repository        repository name 
    * @throws Exception
    */
+  @Deprecated
   public void init(String repository) throws Exception ;
 }

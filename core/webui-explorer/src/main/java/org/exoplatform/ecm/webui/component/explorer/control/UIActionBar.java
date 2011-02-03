@@ -180,7 +180,9 @@ public class UIActionBar extends UIForm {
 
   public String[] getActionInTab(String tabName) { return actionInTabs_.get(tabName); }
   
-  public void setSelectedTab(String tabName) { selectedTabName_ = tabName; }
+  public void setSelectedTab(String tabName) { 
+	  selectedTabName_ = tabName; 
+  }
   
   public String getSelectedTab() throws Exception { 
     if(selectedTabName_ == null || selectedTabName_.length() == 0) {

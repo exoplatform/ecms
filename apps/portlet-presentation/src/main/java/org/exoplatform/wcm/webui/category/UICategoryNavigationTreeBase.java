@@ -131,7 +131,7 @@ public class UICategoryNavigationTreeBase extends UITree {
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     String repository = UICategoryNavigationUtils.getPortletPreferences().getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, null);
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
+    String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
     return new JCRResourceResolver(repository, workspace);
   }
   

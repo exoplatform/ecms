@@ -162,7 +162,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
 
   public List<NodeType> getAllNodeTypes() throws Exception{
     List<NodeType> nodeList = new ArrayList<NodeType>();     
-    ManageableRepository mRepository = getApplicationComponent(RepositoryService.class).getRepository(repositoryName) ;
+    ManageableRepository mRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
     NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;    
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     while(nodeTypeIter.hasNext()) {
@@ -181,7 +181,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
   public void init(int currentPage, List<String> values) throws Exception {
     lstNodetype = getAllNodeTypes();
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    documentNodetypes = templateService.getAllDocumentNodeTypes(getRepositoryName());
+    documentNodetypes = templateService.getAllDocumentNodeTypes();
     getChild(UINodeTypeSearch.class).init();
     init(currentPage, values, lstNodetype);
   }

@@ -186,12 +186,11 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
   public String getTemplate() {
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
-    String repository = UIFCCUtils.getPreferenceRepository() ;
-    try {      
+    try {
       if(userName == null) {
-        return templateService.getTemplatePathByAnonymous(true, documentType_, repository);
+        return templateService.getTemplatePathByAnonymous(true, documentType_);
       }
-      return templateService.getTemplatePathByUser(true, documentType_, userName, repository) ;
+      return templateService.getTemplatePathByUser(true, documentType_, userName) ;
     } catch (Exception e) {
       UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
       Object[] arg = { documentType_ } ;
@@ -279,7 +278,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    */
   private String getDMSWorkspace() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    return dmsConfiguration.getConfig(repositoryName).getSystemWorkspace();   
+    return dmsConfiguration.getConfig().getSystemWorkspace();   
   }
   
   /**
@@ -381,7 +380,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         return;
       }
       try {
-        String addedPath = cmsService.storeNode(preferenceType, homeNode, inputProperties, true, preferenceRepository);
+        String addedPath = cmsService.storeNode(preferenceType, homeNode, inputProperties, true);
         homeNode.getSession().save() ;
         int index = 0;
         if(homeNode.hasNode(addedPath.substring(addedPath.lastIndexOf("/") + 1))) {

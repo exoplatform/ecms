@@ -56,7 +56,7 @@ public class MandatoryValidator extends org.exoplatform.webui.form.validator.Man
     	}
     }
     TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class); 
-    String nodetypeLabel = templateService.getTemplateLabel(nodetypeName, "repository").trim();
+    String nodetypeLabel = templateService.getTemplateLabel(nodetypeName).trim();
     ResourceBundle res = Util.getPortalRequestContext().getApplicationResourceBundle();     
     String label = "";
     try {

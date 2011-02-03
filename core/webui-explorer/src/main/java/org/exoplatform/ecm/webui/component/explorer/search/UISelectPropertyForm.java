@@ -90,7 +90,7 @@ public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
     String metadataPath = nodeHierarchyCreator.getJcrPath(BasePath.METADATA_PATH) ;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspaceName = dmsConfiguration.getConfig(uiExplorer.getRepositoryName()).getSystemWorkspace();
+    String workspaceName = dmsConfiguration.getConfig().getSystemWorkspace();
     Session session = uiExplorer.getSystemProvider().getSession(workspaceName, uiExplorer.getRepository());
     Node homeNode = (Node) session.getItem(metadataPath) ;
     NodeIterator nodeIter = homeNode.getNodes() ;

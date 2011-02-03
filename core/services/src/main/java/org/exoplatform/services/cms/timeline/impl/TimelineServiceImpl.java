@@ -256,14 +256,22 @@ public class TimelineServiceImpl implements TimelineService {
     }          
   }
 
-  private String buildDocumentTypePattern(String repository) throws Exception {
-    List<String> documentFileTypes = templateService_.getAllDocumentNodeTypes(repository);
+  private String buildDocumentTypePattern() throws Exception {
+    List<String> documentFileTypes = templateService_.getAllDocumentNodeTypes();
     StringBuilder sb = new StringBuilder();
     for(String documentType : documentFileTypes) {
       if(sb.length() > 0) sb.append(" OR ");
       sb.append("jcr:primaryType='"+documentType+"'");
     }
     return sb.toString();
+  }
+  
+  @Deprecated
+  /**
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
+   */
+  private String buildDocumentTypePattern(String repository) throws Exception {
+    return buildDocumentTypePattern();
   }
 
   private String getStrTodayTime(Calendar time) {

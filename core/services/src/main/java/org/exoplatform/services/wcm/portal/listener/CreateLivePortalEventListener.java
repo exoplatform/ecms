@@ -86,8 +86,6 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
 
   private void createPortalDrive(Node portal, PortalConfig portalConfig, WCMConfigurationService wcmConfigService,ManageDriveService driveService) throws Exception {
     Session session = portal.getSession();      
-    String repository = ((ManageableRepository) session.getRepository())
-    .getConfiguration().getName();
     String workspace = session.getWorkspace().getName();
     DriveData mainDriveData = wcmConfigService.getSiteDriveConfig();
     String permission = portalConfig.getEditPermission();
@@ -106,8 +104,8 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     String allowCreateFolder = mainDriveData.getAllowCreateFolders();
     String allowNodeTypesOnTree = mainDriveData.getAllowNodeTypesOnTree();
     driveService.addDrive(portal.getName(), workspace, permission, homePath, views, icon,
-        viewReferences, viewNonDocument, viewSideBar, showHiddenNode, repository,
-        allowCreateFolder, allowNodeTypesOnTree);
+        viewReferences, viewNonDocument, viewSideBar, showHiddenNode, allowCreateFolder,
+        allowNodeTypesOnTree);
     log.info("Create new drive for portal: " + portalConfig.getName());
   }
 }

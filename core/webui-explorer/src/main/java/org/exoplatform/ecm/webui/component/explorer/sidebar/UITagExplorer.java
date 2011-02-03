@@ -91,7 +91,7 @@ public class UITagExplorer extends UIContainer {
   
   public Map<String ,String> getTagStyle() throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
-    String workspace = getApplicationComponent(DMSConfiguration.class).getConfig(getRepository()).getSystemWorkspace();
+    String workspace = getApplicationComponent(DMSConfiguration.class).getConfig().getSystemWorkspace();
     Map<String , String> tagStyle = new HashMap<String ,String>() ;
     for(Node tag : folksonomyService.getAllTagStyle(getRepository(), workspace)) {
       tagStyle.put(tag.getProperty("exo:styleRange").getValue().getString(),

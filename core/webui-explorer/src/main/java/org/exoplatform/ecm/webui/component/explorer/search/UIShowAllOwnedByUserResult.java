@@ -207,7 +207,6 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
 	    public void execute(Event<UIShowAllOwnedByUserResult> event) throws Exception {
 	      UIShowAllOwnedByUserResult uiShowAllOwnedByUserResult = event.getSource();            
 	      UIJCRExplorer uiExplorer = uiShowAllOwnedByUserResult.getAncestorOfType(UIJCRExplorer.class);
-	      String repository = uiExplorer.getRepositoryName();
 	      String path = event.getRequestContext().getRequestParameter(OBJECTID);
 	      UIApplication uiApp = uiShowAllOwnedByUserResult.getAncestorOfType(UIApplication.class);
 	      Node node;
@@ -220,7 +219,7 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
 	        return;
 	      }
 	      TemplateService templateService = uiShowAllOwnedByUserResult.getApplicationComponent(TemplateService.class);
-	      if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName(), repository)) {
+	      if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName())) {
 	        uiApp.addMessage(new ApplicationMessage("UIShowAllOwnedByUserResult.msg.not-support", null, 
 	                                                ApplicationMessage.WARNING));
 	        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());

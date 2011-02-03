@@ -51,9 +51,7 @@ public class FCKFolderHandler {
     // need use a service to get extended folder type for the node
     NodeType nodeType = node.getPrimaryNodeType();
     String primaryType = nodeType.getName();
-    String repository = ((ManageableRepository) node.getSession().getRepository())
-        .getConfiguration().getName();
-    if (templateService.getDocumentTemplates(repository).contains(primaryType))
+    if (templateService.getDocumentTemplates().contains(primaryType))
       return null;
     if (FCKUtils.NT_UNSTRUCTURED.equals(primaryType) || FCKUtils.NT_FOLDER.equals(primaryType))
       return primaryType;

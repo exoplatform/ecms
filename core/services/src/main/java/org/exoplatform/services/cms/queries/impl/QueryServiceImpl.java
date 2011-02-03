@@ -490,7 +490,7 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @throws Exception
    */
   private Session getSession(String repository) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     return manageableRepository.getSystemSession(manageableRepository.getConfiguration().getDefaultWorkspaceName());
         
   }
@@ -504,12 +504,12 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @throws Exception
    */
   private Session getSession(String repository,SessionProvider provider, boolean flag) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     if (!flag) {
       String workspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
       return provider.getSession(workspace, manageableRepository);
     }
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return provider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);
   }
 
@@ -522,7 +522,7 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @throws Exception
    */
   private Session getSession(String repository, String workspace, SessionProvider provider) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     return provider.getSession(workspace,manageableRepository);
   }
   

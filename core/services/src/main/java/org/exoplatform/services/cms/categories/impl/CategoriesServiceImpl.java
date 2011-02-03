@@ -238,14 +238,14 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
   }    
 
   public Session getSession(String repository) throws Exception {    
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository() ;
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
   }
   
   private Session getSession(String repository,SessionProvider provider) throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return provider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository) ;
   }
 

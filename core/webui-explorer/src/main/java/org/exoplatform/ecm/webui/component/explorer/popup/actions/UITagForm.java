@@ -84,7 +84,6 @@ public class UITagForm extends UIForm {
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       
-      String repository = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
       String workspace = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepository().getConfiguration().getDefaultWorkspaceName();
       String userName = uiExplorer.getSession().getUserID();
       int scope = uiExplorer.getTagScope();
@@ -112,7 +111,7 @@ public class UITagForm extends UIForm {
           if (scope == NewFolksonomyService.PRIVATE) { 
           	newFolksonomyService.addPrivateTag(new String[] { tagName }, 
           																		 null, 
-          																		 repository, 
+          																		 null, 
           																		 workspace, 
           																		 userName);	
           }
@@ -122,14 +121,14 @@ public class UITagForm extends UIForm {
           	newFolksonomyService.addPublicTag(publicTagNodePath, 
           																		new String[] { tagName },
           																		null, 
-          																		repository, 
+          																		null, 
           																		workspace); 
           }
       	}
       	// rename tag
       	else {
-          if (!existTag(tagName, repository, workspace, scope, uiForm, userName)) {
-          	newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, repository, workspace);
+          if (!existTag(tagName, null, workspace, scope, uiForm, userName)) {
+          	newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, null, workspace);
           } else if (!tagName.equals(uiForm.oldName_)) {
         	 uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null, 
           	              ApplicationMessage.WARNING));

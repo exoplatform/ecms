@@ -76,7 +76,7 @@ public class UISearchContainer extends UIContainer {
     /* Get repository name */
     String repository = uiExplorer.getRepositoryName();
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspaceName = dmsConfiguration.getConfig(repository).getSystemWorkspace();
+    String workspaceName = dmsConfiguration.getConfig().getSystemWorkspace();
     NodeHierarchyCreator nodeHierarchyCreator = uiExplorer.getApplicationComponent(NodeHierarchyCreator.class);
     uiExplorer.setIsHidePopup(true);
     /* Create Category panel in Search function */

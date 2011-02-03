@@ -119,8 +119,7 @@ public class FCKFileHandler {
     if (node.isNodeType("exo:presentationable"))
       return node.getProperty("exo:presentationType").getString();        
     String primaryType = node.getPrimaryNodeType().getName();
-    String repository = ((ManageableRepository) node.getSession().getRepository()).getConfiguration().getName();
-    if (templateService.getDocumentTemplates(repository).contains(primaryType)) 
+    if (templateService.getDocumentTemplates().contains(primaryType)) 
       return primaryType;  
     return null;
   }

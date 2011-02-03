@@ -396,7 +396,7 @@ public class UIJCRExplorer extends UIContainer {
     try{
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
       DMSRepositoryConfiguration dmsRepoConfig = 
-        dmsConfiguration.getConfig(currentDriveRepositoryName_);
+        dmsConfiguration.getConfig();
       String workspace =  dmsRepoConfig.getSystemWorkspace();
       jcrTemplateResourceResolver_ = new JCRResourceResolver(currentDriveRepositoryName_, workspace, "exo:templateFile") ;
     } catch(Exception e) {
@@ -411,12 +411,22 @@ public class UIJCRExplorer extends UIContainer {
   /**
    * @return the repository of the current drive
    */
-  public String getRepositoryName() { return currentDriveRepositoryName_ ; }
+  public String getRepositoryName() {
+    try {
+      return getApplicationComponent(RepositoryService.class).getCurrentRepository().getConfiguration().getName();
+    } catch (RepositoryException e) {
+      String repoName = System.getProperty("gatein.tenant.repository.name");
+      if (repoName!=null)
+        return repoName;
+      else 
+        return currentDriveRepositoryName_;
+    }
+  }
   
   /**
    * Sets the workspace of the current drive 
    */
-  public void setWorkspaceName(String workspaceName) { 
+  public void setWorkspaceName(String workspaceName) {
     currentDriveWorkspaceName_ = workspaceName ; 
     if (lastWorkspaceName_ == null) {
       setLastWorkspace(workspaceName);
@@ -446,7 +456,7 @@ public class UIJCRExplorer extends UIContainer {
 
   public ManageableRepository getRepository() throws Exception{         
     RepositoryService repositoryService  = getApplicationComponent(RepositoryService.class) ;      
-    return repositoryService.getRepository(currentDriveRepositoryName_);
+    return repositoryService.getCurrentRepository();
   }
 
   public Session getSessionByWorkspace(String wsName) throws Exception{    
@@ -687,7 +697,7 @@ public class UIJCRExplorer extends UIContainer {
         isFolder = true ;
       }
     }
-    if(isFolder && templateService.getDocumentTemplates(getRepositoryName()).contains(nodeType.getName())) {
+    if(isFolder && templateService.getDocumentTemplates().contains(nodeType.getName())) {
       return true ;
     }
     return false;
@@ -810,11 +820,11 @@ public class UIJCRExplorer extends UIContainer {
       }
     }
     if(!preferences_.isJcrEnable() && 
-        templateService.isManagedNodeType(nodeType.getName(), currentDriveRepositoryName_) && !isFolder) {
+        templateService.isManagedNodeType(nodeType.getName()) && !isFolder) {
       return childrenList ;
     } 
     if(isReferenceableNode(getCurrentNode()) && isReferences) {
-      ManageableRepository manageableRepository = repositoryService.getRepository(currentDriveRepositoryName_) ;
+      ManageableRepository manageableRepository = repositoryService.getRepository(getRepositoryName()) ;
       SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
       for(String workspace:manageableRepository.getWorkspaceNames()) {
         Session session = sessionProvider.getSession(workspace,manageableRepository) ;
@@ -832,7 +842,7 @@ public class UIJCRExplorer extends UIContainer {
       }
     }
     if(!preferences_.isShowNonDocumentType()) {
-      List<String> documentTypes = templateService.getDocumentTemplates(currentDriveRepositoryName_) ;      
+      List<String> documentTypes = templateService.getDocumentTemplates() ;      
       while(childrenIterator.hasNext()){
         Node child = (Node)childrenIterator.next() ;
         if(PermissionUtil.canRead(child)) {
@@ -955,7 +965,7 @@ public class UIJCRExplorer extends UIContainer {
   public List<Node> getDocumentByTag()throws Exception {
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    List<String> documentsType = templateService.getDocumentTemplates(getRepositoryName()) ;
+    List<String> documentsType = templateService.getDocumentTemplates() ;
     List<Node> documentsOnTag = new ArrayList<Node>() ;
     WebuiRequestContext ctx = WebuiRequestContext.getCurrentInstance();
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?

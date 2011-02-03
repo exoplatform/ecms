@@ -202,7 +202,7 @@ public class UIPresentationContainer extends UIContainer{
 	      if (viewNode.isNodeType("nt:frozenNode")) isDocumentType = true; 
 	      // check node is a document node
 	      TemplateService templateService = getApplicationComponent(TemplateService.class);
-	      List<String> documentTypes = templateService.getDocumentTemplates(repository);
+	      List<String> documentTypes = templateService.getDocumentTemplates();
 	      for (String documentType : documentTypes) {
 	        if (viewNode.isNodeType(documentType)) {
 	          isDocumentType = true;
@@ -239,7 +239,6 @@ public class UIPresentationContainer extends UIContainer{
     }
      
     if (contentParameter == null) return null;
-    String strRepository = contentParameter.substring(0, contentParameter.indexOf("/"));
     UIPresentation presentation = getChild(UIPresentation.class);
     Node nodeView = Utils.getViewableNodeByComposer(null, null, contentParameter);
     if (nodeView!=null) {
@@ -248,7 +247,7 @@ public class UIPresentationContainer extends UIContainer{
       // check node is a document node
       if (!isDocumentType) {
         TemplateService templateService = getApplicationComponent(TemplateService.class);
-        List<String> documentTypes = templateService.getDocumentTemplates(strRepository);
+        List<String> documentTypes = templateService.getDocumentTemplates();
         for (String documentType : documentTypes) {
           if (nodeView.isNodeType(documentType)) {
             isDocumentType = true;

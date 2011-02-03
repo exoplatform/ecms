@@ -181,7 +181,7 @@ public class TrashServiceImpl implements TrashService {
   
   private boolean isInTaxonomyTree(String repository, Node taxonomyNode, Node targetNode) {
     try {
-      List<Node> taxonomyTrees = taxonomyService_.getAllTaxonomyTrees(repository, true);
+      List<Node> taxonomyTrees = taxonomyService_.getAllTaxonomyTrees(true);
       for (Node tree : taxonomyTrees) 
         if (taxonomyNode.getPath().contains(tree.getPath())) {
           Node taxonomyActionNode = tree.getNode("exo:actions/taxonomyAction");

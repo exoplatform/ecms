@@ -95,10 +95,9 @@ abstract public class BaseActionPlugin implements ActionPlugin {
   protected Map<String, ECMEventListener> listeners_ = new HashMap<String, ECMEventListener>();
   private static final Log LOG  = ExoLogger.getLogger(BaseActionPlugin.class);
 
-  abstract protected String getRepositoryName();  
   abstract protected List<RepositoryEntry> getRepositories();
   abstract protected String getWorkspaceName();
-  abstract protected ManageableRepository getRepository(String repositoryName) throws Exception;
+  abstract protected ManageableRepository getRepository() throws Exception;
   abstract protected String getActionType();
   abstract protected List getActions();
   abstract protected ECMEventListener createEventListener(String actionName,
@@ -112,6 +111,9 @@ abstract public class BaseActionPlugin implements ActionPlugin {
   }
 
   public void addAction(String actionType, String repository, String srcWorkspace, String srcPath, boolean isDeep, String[] uuid, String[] nodeTypeNames, Map mappings) throws Exception {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    String repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
     String actionName = 
       (String) ((JcrInputProperty) mappings.get("/node/exo:name")).getValue();    
     mappings.remove("/node/exo:name");
@@ -122,18 +124,18 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     String actionExecutable = getActionExecutable(actionType);
     if (DMSEvent.getEventTypes(type) == DMSEvent.READ) return;
     if ((DMSEvent.getEventTypes(type) & DMSEvent.SCHEDULE) > 0) {
-      scheduleActionActivationJob(repository, srcWorkspace, srcPath, actionName, actionType,
+      scheduleActionActivationJob(repoName, srcWorkspace, srcPath, actionName, actionType,
           actionExecutable, mappings);
     }
     if (DMSEvent.getEventTypes(type) == DMSEvent.SCHEDULE)
       return;
     Map<String, Object> variables = getExecutionVariables(mappings);
-    ECMEventListener listener = createEventListener(actionName, actionExecutable, repository,
+    ECMEventListener listener = createEventListener(actionName, actionExecutable, repoName,
         srcWorkspace, srcPath, variables, actionType);
-    Session session = getSystemSession(repository, srcWorkspace);
+    Session session = getSystemSession(srcWorkspace);
     ObservationManager obsManager = session.getWorkspace().getObservationManager();
     // TODO all actions are stored at srcNode/exo:actions node
-    String listenerKey = repository + ":" + srcPath + "/exo:actions/" + actionName;
+    String listenerKey = repoName + ":" + srcPath + "/exo:actions/" + actionName;
     if (listeners_.containsKey(listenerKey)) {
       obsManager.removeEventListener(listeners_.get(listenerKey));
       listeners_.remove(listenerKey);
@@ -181,7 +183,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     String actionExecutable = getActionExecutable(actionType); 
     ECMEventListener listener = 
       createEventListener(actionName, actionExecutable, repository, srcWorkspace, srcPath, variables, actionType);
-    Session session = getSystemSession(repository, srcWorkspace);
+    Session session = getSystemSession(srcWorkspace);
     //TODO all actions are stored at srcNode/exo:actions node
     String listenerKey = repository + ":" + srcPath + "/exo:actions/" +actionName;
     ObservationManager obsManager = session.getWorkspace().getObservationManager(); 
@@ -260,13 +262,13 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     }       
   } 
 
-  protected Session getSystemSession(String repository, String workspace) throws Exception {   
-    ManageableRepository jcrRepository = getRepository(repository);      
+  protected Session getSystemSession(String workspace) throws Exception {   
+    ManageableRepository jcrRepository = getRepository();      
     return  jcrRepository.getSystemSession(workspace);            
   }
 
   public String getActionExecutable(String actionTypeName) throws Exception {    
-    NodeTypeManager ntManager = getRepository(getRepositoryName()).getNodeTypeManager();
+    NodeTypeManager ntManager = getRepository().getNodeTypeManager();
     NodeType nt = ntManager.getNodeType(actionTypeName);
     PropertyDefinition[] propDefs = nt.getDeclaredPropertyDefinitions();
     for (int i = 0; i < propDefs.length; i++) {
@@ -281,7 +283,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
 
   public boolean isActionTypeSupported(String actionType) {    
     try {      
-      NodeTypeManager ntmanager = getRepository(getRepositoryName()).getNodeTypeManager();      
+      NodeTypeManager ntmanager = getRepository().getNodeTypeManager();      
       for (NodeType type:ntmanager.getNodeType(actionType).getSupertypes()) {        
         if (getActionType().equals(type.getName())) {
           return true; 
@@ -297,7 +299,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     ECMEventListener eventListener = listeners_.get(repository + ":" + actionPath);
     if(eventListener != null){
       String srcWorkspace = eventListener.getSrcWorkspace();
-      Session session = getSystemSession(repository, srcWorkspace);
+      Session session = getSystemSession(srcWorkspace);
       ObservationManager obsManager = session.getWorkspace().getObservationManager();
       obsManager.removeEventListener(eventListener);
       session.logout();
@@ -321,7 +323,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
   }
 
   public boolean isVariable(String variable) throws Exception {    
-    NodeTypeManager ntManager = getRepository(getRepositoryName()).getNodeTypeManager();
+    NodeTypeManager ntManager = getRepository().getNodeTypeManager();
     NodeType nt = ntManager.getNodeType(getActionType());
     PropertyDefinition[] propDefs = nt.getDeclaredPropertyDefinitions();
     for (int i = 0; i < propDefs.length; i++) {
@@ -335,7 +337,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
 
   public Collection<String> getVariableNames(String actionTypeName) throws Exception {
     Collection<String> variableNames = new ArrayList<String>();    
-    NodeTypeManager ntManager = getRepository(getRepositoryName()).getNodeTypeManager() ;
+    NodeTypeManager ntManager = getRepository().getNodeTypeManager() ;
     NodeType nt = ntManager.getNodeType(actionTypeName);
     PropertyDefinition[] propDefs = nt.getDeclaredPropertyDefinitions();
     for (int i = 0; i < propDefs.length; i++) {
@@ -354,13 +356,14 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     for (Iterator iter = actions.iterator(); iter.hasNext();) {
       ActionConfig.Action action = (ActionConfig.Action) iter.next();      
       try {
-        session = getSystemSession(getRepositoryName(),action.getSrcWorkspace());
+        session = getSystemSession(action.getSrcWorkspace());
         importAction(action, session) ;
         session.logout();
       } catch (Exception e) {
         if(session != null) session.logout();
         System.out.println("[WARNING] ==> Can not init action '" + action.getName() 
-            + "' in repository '"+getRepositoryName()+"' and workspace '"+action.getSrcWorkspace()+"'") ;
+            //+ "' in repository '"+ getRepositoryName() 
+            +"' and workspace '"+action.getSrcWorkspace()+"'") ;
       }
     }
   }
@@ -371,16 +374,16 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     Session session = null ;
     for (Iterator iter = actions.iterator(); iter.hasNext();) {
       ActionConfig.Action action = (ActionConfig.Action) iter.next();
-      if(repository.equals(getRepositoryName())) {
+//      if(repository.equals(getRepositoryName())) {
         try {
-          session = getSystemSession(repository, action.getSrcWorkspace());
+          session = getSystemSession(action.getSrcWorkspace());
           importAction(action,session) ;
         } catch (Exception e) {
           if(session != null) session.logout();
           System.out.println("[WARNING] ==> Can not init action '" + action.getName() 
               + "' in repository '"+repository+"' and workspace '"+action.getSrcWorkspace()+"'") ;
         }
-      }
+//      }
     }
   }
 
@@ -396,7 +399,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     .getComponentInstanceOfType(RepositoryService.class);
     TemplateService templateService = (TemplateService) container
     .getComponentInstanceOfType(TemplateService.class);
-    ManageableRepository manageRepo = repositoryService.getRepository(getRepositoryName());
+    ManageableRepository manageRepo = repositoryService.getCurrentRepository();
     Node actionNodeName = null;
     try {
       actionNodeName = actionContainer.getAction(srcNode, action.getName()) ;
@@ -485,7 +488,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     ActionServiceContainer actionContainer = 
       (ActionServiceContainer) container.getComponentInstanceOfType(ActionServiceContainer.class) ;
 
-    Session session = getSystemSession(repository, srcWorkspace) ;
+    Session session = getSystemSession(srcWorkspace) ;
     Node srcNode = (Node)session.getItem(srcPath) ;
     Node actionNode = actionContainer.getAction(srcNode,actionName) ;
     if(!actionNode.isNodeType(SCHEDULABLE_INFO_MIXIN)) {

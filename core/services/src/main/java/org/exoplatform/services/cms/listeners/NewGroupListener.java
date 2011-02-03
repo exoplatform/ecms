@@ -67,30 +67,20 @@ public class NewGroupListener extends GroupEventListener
 
    public void preSave(Group group, boolean isNew) throws Exception
    {
-      List<RepositoryEntry> repositories = jcrService_.getConfig().getRepositoryConfigurations();
-      if (isNew)
-      {
-         for (RepositoryEntry repo : repositories)
-         {
-            buildGroupStructure(repo.getName(), group.getId());
-         }
-      }
+     RepositoryEntry repo = jcrService_.getCurrentRepository().getConfiguration();
+     buildGroupStructure(repo.getName(), group.getId());
    }
 
    public void preDelete(Group group) throws Exception
    {
-      List<RepositoryEntry> repositories = jcrService_.getConfig().getRepositoryConfigurations();
-      for (RepositoryEntry repo : repositories)
-      {
-         try
-         {
-            removeGroup(repo.getName(), group.getId());
-         }
-         catch (Exception e)
-         {
-            continue;
-         }
-      }
+     try
+     {
+       RepositoryEntry repo = jcrService_.getCurrentRepository().getConfiguration();
+        removeGroup(repo.getName(), group.getId());
+     }
+     catch (Exception e)
+     {
+     }
    }
 
    private void removeGroup(String repoName, String groupId) throws Exception

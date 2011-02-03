@@ -61,7 +61,7 @@ public class UITagList extends UIComponent {
   	ExoContainer container = ExoContainerContext.getCurrentContainer();
 		RepositoryService repositoryService 
 		= (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepo = repositoryService.getRepository(repository);
+		ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
 		
 		String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
     String userName = getUserName();
@@ -74,7 +74,7 @@ public class UITagList extends UIComponent {
   	ExoContainer container = ExoContainerContext.getCurrentContainer();
 		RepositoryService repositoryService = 
 		(RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepo = repositoryService.getRepository(repository);
+		ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
 		NodeHierarchyCreator nodeHierarchyCreator =
 		(NodeHierarchyCreator) container.getComponentInstanceOfType(NodeHierarchyCreator.class);
 		

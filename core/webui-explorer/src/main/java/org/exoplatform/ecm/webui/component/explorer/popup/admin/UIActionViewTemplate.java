@@ -51,9 +51,8 @@ public class UIActionViewTemplate extends UIContainer {
   public String getViewTemplatePath(){    
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
     try {
-      return templateService.getTemplatePathByUser(false, documentType_, userName, repository) ;
+      return templateService.getTemplatePathByUser(false, documentType_, userName) ;
     } catch (Exception e) {
       return null ;
     }         

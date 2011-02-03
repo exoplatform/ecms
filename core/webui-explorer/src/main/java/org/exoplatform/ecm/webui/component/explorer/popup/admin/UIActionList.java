@@ -111,10 +111,8 @@ public class UIActionList extends UIContainer {
       String userName = event.getRequestContext().getRemoteUser() ;
       TemplateService templateService = uiActionList.getApplicationComponent(TemplateService.class) ;
       UIApplication uiApp = uiActionList.getAncestorOfType(UIApplication.class) ;
-      String repository = 
-        uiActionList.getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
       try {
-        String path = templateService.getTemplatePathByUser(false, nodeTypeName, userName, repository);
+        String path = templateService.getTemplatePathByUser(false, nodeTypeName, userName);
         if(path == null) {
           Object[] args = {actionName} ;
           uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-null", args, 
@@ -183,7 +181,7 @@ public class UIActionList extends UIContainer {
       String nodeTypeName = selectedAction.getPrimaryNodeType().getName() ;
       UIApplication uiApp = uiActionList.getAncestorOfType(UIApplication.class) ;
       try {
-        templateService.getTemplatePathByUser(true, nodeTypeName, userName, repository);
+        templateService.getTemplatePathByUser(true, nodeTypeName, userName);
       } catch(PathNotFoundException path) {
         Object[] args = {actionName} ;
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-empty", args, 

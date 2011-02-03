@@ -77,9 +77,8 @@ public class UIContentViewer extends UIBaseNodePresentation {
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     try {
       String nodeType = getOriginalNode().getPrimaryNodeType().getName();
-      String repository = getRepository();
-      if(templateService.isManagedNodeType(nodeType, repository)) 
-        return templateService.getTemplatePathByUser(false, nodeType, userName, repository) ;
+      if(templateService.isManagedNodeType(nodeType)) 
+        return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch (PathNotFoundException e) {
     	Utils.createPopupMessage(this, TEMPLATE_NOT_SUPPORT, null, ApplicationMessage.ERROR);
 		} catch (Exception e) {
@@ -92,7 +91,7 @@ public class UIContentViewer extends UIBaseNodePresentation {
 		try {
 			DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
 			String repository = getRepository();
-			String workspace = dmsConfiguration.getConfig(repository).getSystemWorkspace();
+			String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
 			return new JCRResourceResolver(repository, workspace, "exo:templateFile");
 		} catch (Exception e) {
 			return null;

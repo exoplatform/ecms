@@ -202,13 +202,11 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
   private List<String> getDocumentNodeTypes(Node node) throws Exception {
     List<String> nodeTypeNameList = new ArrayList<String>() ;
     NodeType  primaryType = node.getPrimaryNodeType() ;
-    ManageableRepository manaRepository = (ManageableRepository)node.getSession().getRepository() ;
-    String repository = manaRepository.getConfiguration().getName() ;
-    if(templateService_.isManagedNodeType(primaryType.getName(), repository)) {
+    if(templateService_.isManagedNodeType(primaryType.getName())) {
       nodeTypeNameList.add(primaryType.getName()) ;
     }    
     for(NodeType nodeType: node.getMixinNodeTypes()) {
-      if(templateService_.isManagedNodeType(nodeType.getName(), repository)) {
+      if(templateService_.isManagedNodeType(nodeType.getName())) {
         nodeTypeNameList.add(nodeType.getName()) ;
       }
     }
@@ -220,40 +218,38 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
    * @throws Exception
    */
   private void reInitObserver() throws Exception {
-    List<RepositoryEntry> repositories = repoService_.getConfig().getRepositoryConfigurations() ;
-    for(RepositoryEntry repo : repositories) {
-      ManageableRepository repository = repoService_.getRepository(repo.getName()) ;
-      String[] workspaceNames = repository.getWorkspaceNames() ;
-      for(String workspace: workspaceNames) {
-        Session session = repository.getSystemSession(workspace) ;
-        QueryManager queryManager = null ;
-        try{
-          queryManager = session.getWorkspace().getQueryManager() ;
-        } catch (Exception e) { 
-          LOG.error("Unexpected error", e);
+    RepositoryEntry repo = repoService_.getCurrentRepository().getConfiguration();
+    ManageableRepository repository = repoService_.getRepository(repo.getName()) ;
+    String[] workspaceNames = repository.getWorkspaceNames() ;
+    for(String workspace: workspaceNames) {
+      Session session = repository.getSystemSession(workspace) ;
+      QueryManager queryManager = null ;
+      try{
+        queryManager = session.getWorkspace().getQueryManager() ;
+      } catch (Exception e) { 
+        LOG.error("Unexpected error", e);
+      }
+      if(queryManager == null) { 
+        session.logout(); 
+        continue ;
+      }
+      try {        
+        Query query = queryManager.createQuery(WATCHABLE_MIXIN_QUERY,Query.XPATH) ;
+        QueryResult queryResult = query.execute() ;
+        for(NodeIterator iter = queryResult.getNodes(); iter.hasNext(); ) {          
+          Node observedNode = iter.nextNode() ;
+          EmailNotifyListener emailNotifyListener = new EmailNotifyListener(observedNode) ;
+          ObservationManager manager = session.getWorkspace().getObservationManager() ;
+          List<String> list = getDocumentNodeTypes(observedNode) ;          
+          String[] observedNodeTypeNames = list.toArray(new String[list.size()]) ;          
+          manager.addEventListener(emailNotifyListener,Event.PROPERTY_CHANGED,
+              observedNode.getPath(),true,null,observedNodeTypeNames,false) ;          
         }
-        if(queryManager == null) { 
-          session.logout(); 
-          continue ;
-        }
-        try {        
-          Query query = queryManager.createQuery(WATCHABLE_MIXIN_QUERY,Query.XPATH) ;
-          QueryResult queryResult = query.execute() ;
-          for(NodeIterator iter = queryResult.getNodes(); iter.hasNext(); ) {          
-            Node observedNode = iter.nextNode() ;
-            EmailNotifyListener emailNotifyListener = new EmailNotifyListener(observedNode) ;
-            ObservationManager manager = session.getWorkspace().getObservationManager() ;
-            List<String> list = getDocumentNodeTypes(observedNode) ;          
-            String[] observedNodeTypeNames = list.toArray(new String[list.size()]) ;          
-            manager.addEventListener(emailNotifyListener,Event.PROPERTY_CHANGED,
-                observedNode.getPath(),true,null,observedNodeTypeNames,false) ;          
-          }
-          session.logout();
-        } catch (Exception e) {
-          System.out.println("==>>> Cannot init observer for node: " 
-              +e.getLocalizedMessage() + " in '"+repo.getName()+"' repository");
-          LOG.error("Unexpected error", e);
-        }
+        session.logout();
+      } catch (Exception e) {
+        System.out.println("==>>> Cannot init observer for node: " 
+            +e.getLocalizedMessage() + " in '"+repo.getName()+"' repository");
+        LOG.error("Unexpected error", e);
       }
     }
   }    

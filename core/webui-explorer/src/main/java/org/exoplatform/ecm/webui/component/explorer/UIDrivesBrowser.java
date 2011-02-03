@@ -22,6 +22,7 @@ import java.util.List;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.container.ExoContainer;
@@ -77,9 +78,12 @@ public class UIDrivesBrowser extends UIContainer {
   
   public List<String> getRepositoryList() {
     List<String> repositories = new ArrayList<String>();    
-    for(RepositoryEntry re : rService.getConfig().getRepositoryConfigurations()) {
-      repositories.add(re.getName());
+    RepositoryEntry re = null;
+    try {
+      re = rService.getCurrentRepository().getConfiguration();
+    } catch (RepositoryException e) {
     }
+    repositories.add(re.getName());
     return repositories;
   }
   

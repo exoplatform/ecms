@@ -77,8 +77,8 @@ public class UIJcrExplorerContainer extends UIContainer {
       PortletPreferences preference = uiFEPortlet.getPortletPreferences();
       initExplorerPreference(preference);
       String driveName = preference.getValue("driveName", "");
-      String repoName = preference.getValue(Utils.REPOSITORY, "");
       RepositoryService rservice = getApplicationComponent(RepositoryService.class);
+      String repoName = rservice.getCurrentRepository().getConfiguration().getName();
       ManageDriveService dservice = getApplicationComponent(ManageDriveService.class);
       DriveData drive = dservice.getDriveByName(driveName, repoName);
       String userId = Util.getPortalRequestContext().getRemoteUser();
@@ -129,7 +129,7 @@ public class UIJcrExplorerContainer extends UIContainer {
       uiJCRExplorer.setIsReferenceNode(false);
       
       SessionProvider provider = SessionProviderFactory.createSessionProvider();                  
-      ManageableRepository repository = rservice.getRepository(repoName);
+      ManageableRepository repository = rservice.getCurrentRepository();
       Session session = provider.getSession(drive.getWorkspace(),repository);      
       try {
         // we assume that the path is a real path

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.jcr.ItemExistsException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.log.Log;
@@ -216,10 +217,13 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
   
   protected boolean isExistWorkspace(String workspaceName){
     RepositoryService rservice = getApplicationComponent(RepositoryService.class);
-    for(RepositoryEntry repo : rservice.getConfig().getRepositoryConfigurations() ) {
-      for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
-        if( ws.getName().equals(workspaceName)) return true;
-      }
+    RepositoryEntry repo = null;
+    try {
+      repo = rservice.getCurrentRepository().getConfiguration();
+    } catch (RepositoryException e) {
+    }
+    for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
+      if( ws.getName().equals(workspaceName)) return true;
     }
     return false; 
   }
@@ -303,18 +307,18 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
     try {
       RepositoryService rService = getApplicationComponent(RepositoryService.class);
       InputStream xml = configurationManager.getURL("classpath:/conf/portal/registry-nodetypes.xml").openStream();
-      rService.getRepository(repository).getNodeTypeManager().registerNodeTypes(xml, ExtendedNodeTypeManager.IGNORE_IF_EXISTS);
+      rService.getCurrentRepository().getNodeTypeManager().registerNodeTypes(xml, ExtendedNodeTypeManager.IGNORE_IF_EXISTS);
       xml.close();
       getApplicationComponent(RegistryService.class).initStorage(false);
       getApplicationComponent(NodeHierarchyCreator.class).init(repository);
       getApplicationComponent(TaxonomyService.class).init(repository);
-      getApplicationComponent(ManageDriveService.class).init(repository);
+      getApplicationComponent(ManageDriveService.class).init();
       getApplicationComponent(NewFolksonomyService.class).init(repository);
       getApplicationComponent(MetadataService.class).init(repository);
       getApplicationComponent(QueryService.class).init(repository);
       getApplicationComponent(RelationsService.class).init(repository);
       getApplicationComponent(ScriptService.class).initRepo(repository);
-      getApplicationComponent(TemplateService.class).init(repository);
+      getApplicationComponent(TemplateService.class).init();
       getApplicationComponent(ManageViewService.class).init(repository);
       getApplicationComponent(ActionServiceContainer.class).init(repository);
     } catch(NullPointerException nullPointerException) {
@@ -496,13 +500,12 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       String repoName = uiForm.getUIStringInput(UIRepositoryForm.FIELD_NAME).getValue();
       RepositoryService rService = uiForm.getApplicationComponent(RepositoryService.class);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-      for(RepositoryEntry repo : rService.getConfig().getRepositoryConfigurations()) { 
-        if(repo.getName().equals(repoName) && uiForm.isAddnew_) {
-          Object[] args = new Object[]{repo.getName()} ;    
-          uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-exist", args));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());  
-          return;
-        }
+      RepositoryEntry repo = rService.getCurrentRepository().getConfiguration();
+      if(repo.getName().equals(repoName) && uiForm.isAddnew_) {
+        Object[] args = new Object[]{repo.getName()} ;    
+        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-exist", args));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());  
+        return;
       }
       if(!Utils.isNameValid(repoName, Utils.SPECIALCHARACTER)) {        
         Object[] args = new Object[]{repoName} ;    
@@ -557,10 +560,9 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       re.addWorkspace(uiForm.getWorkspace(uiForm.defaulWorkspace_));
       
       DMSRepositoryConfiguration newDConfiguration = new DMSRepositoryConfiguration();
-      newDConfiguration.setRepositoryName(repoName);
       newDConfiguration.setSystemWorkspace(uiForm.dmsSystemWorkspace_);
       DMSConfiguration dmsConfiguration = uiForm.getApplicationComponent(DMSConfiguration.class);
-      dmsConfiguration.initNewRepo(repoName, newDConfiguration);
+      dmsConfiguration.initNewRepo(newDConfiguration);
       
       uiForm.addNewElement(repoName, uiForm.dmsSystemWorkspace_);
       uiForm.saveRepo(re);
@@ -659,13 +661,12 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       String sessionTime = uiForm.getUIStringInput(UIRepositoryForm.FIELD_SESSIONTIME).getValue();
       RepositoryService rService = uiForm.getApplicationComponent(RepositoryService.class);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-      for(RepositoryEntry repo : rService.getConfig().getRepositoryConfigurations()) { 
-        if(repo.getName().equals(repoName) && uiForm.isAddnew_) {
-          Object[] args = new Object[]{repo.getName()} ;    
-          uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-exist", args));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());  
-          return;
-        }
+      RepositoryEntry repo = rService.getCurrentRepository().getConfiguration();
+      if(repo.getName().equals(repoName) && uiForm.isAddnew_) {
+        Object[] args = new Object[]{repo.getName()} ;    
+        uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-exist", args));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());  
+        return;
       }
       if(!Utils.isNameValid(repoName, Utils.SPECIALCHARACTER)) {      
         uiApp.addMessage(new ApplicationMessage("UIRepositoryForm.msg.repoName-not-alow", null));

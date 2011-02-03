@@ -127,17 +127,17 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public List<Node> getAllTaxonomyTrees(String repository) throws RepositoryException {
-    return getAllTaxonomyTrees(repository, false);
+    return getAllTaxonomyTrees(false);
   }
 
   /**
    * {@inheritDoc}
    */
-  public List<Node> getAllTaxonomyTrees(String repository, boolean system)
+  public List<Node> getAllTaxonomyTrees(boolean system)
       throws RepositoryException {
     List<Node> listNode = new ArrayList<Node>();
     try {
-      Node taxonomyDef = getRootTaxonomyDef(repository);
+      Node taxonomyDef = getRootTaxonomyDef();
       NodeIterator nodeIter = taxonomyDef.getNodes();
       while (nodeIter.hasNext()) {
         Node node = (Node) nodeIter.next();
@@ -160,16 +160,16 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public Node getTaxonomyTree(String repository, String taxonomyName) throws RepositoryException {
-    return getTaxonomyTree(repository, taxonomyName, false);
+    return getTaxonomyTree(taxonomyName, false);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Node getTaxonomyTree(String repository, String taxonomyName, boolean system)
+  public Node getTaxonomyTree(String taxonomyName, boolean system)
       throws RepositoryException {
     try {
-      Node taxonomyDef = getRootTaxonomyDef(repository);
+      Node taxonomyDef = getRootTaxonomyDef();
       Node taxonomyTree = taxonomyDef.getNode(taxonomyName);
       if (taxonomyTree.isNodeType(EXOSYMLINK_LINK))
         return linkManager_.getTarget(taxonomyTree, system);
@@ -184,9 +184,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   /**
    * {@inheritDoc}
    */
-  public boolean hasTaxonomyTree(String repository, String taxonomyName) throws RepositoryException {
+  public boolean hasTaxonomyTree(String taxonomyName) throws RepositoryException {
     try {
-      Node taxonomyTree = getRootTaxonomyDef(repository).getNode(taxonomyName);
+      Node taxonomyTree = getRootTaxonomyDef().getNode(taxonomyName);
       return taxonomyTree.isNodeType(EXOSYMLINK_LINK);
     } catch (RepositoryConfigurationException e1) {
       throw new RepositoryException(e1);
@@ -200,13 +200,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    */
   public void addTaxonomyTree(Node taxonomyTree) throws RepositoryException,
       TaxonomyAlreadyExistsException {
-    if (hasTaxonomyTree(((ManageableRepository) taxonomyTree.getSession().getRepository())
-        .getConfiguration().getName(), taxonomyTree.getName())) {
+    if (hasTaxonomyTree(taxonomyTree.getName())) {
       throw new TaxonomyAlreadyExistsException();
     }
     try {
-      Node taxonomyDef = getRootTaxonomyDef(((ManageableRepository) taxonomyTree.getSession()
-          .getRepository()).getConfiguration().getName());
+      Node taxonomyDef = getRootTaxonomyDef();
       linkManager_.createLink(taxonomyDef, EXOSYMLINK_LINK, taxonomyTree, taxonomyTree.getName());
     } catch (RepositoryConfigurationException e) {
       throw new RepositoryException(e);
@@ -217,11 +215,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public void updateTaxonomyTree(String taxonomyName, Node taxonomyTree) throws RepositoryException {
-    String repository = ((ManageableRepository) taxonomyTree.getSession().getRepository())
-        .getConfiguration().getName();
     try {
-      if (hasTaxonomyTree(repository, taxonomyName)) {
-        Node taxonomyTreeLink = getRootTaxonomyDef(repository).getNode(taxonomyName);
+      if (hasTaxonomyTree(taxonomyName)) {
+        Node taxonomyTreeLink = getRootTaxonomyDef().getNode(taxonomyName);
         linkManager_.updateLink(taxonomyTreeLink, taxonomyTree);
       }
     } catch (RepositoryConfigurationException e) {
@@ -235,13 +231,12 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   public void removeTaxonomyTree(String taxonomyName) throws RepositoryException {
     Session session = null;
     try {
-      String repository = repositoryService_.getDefaultRepository().getConfiguration().getName();
-      if (hasTaxonomyTree(repository, taxonomyName)) {
-        Node targetNode = getTaxonomyTree(repository, taxonomyName, true);
+      if (hasTaxonomyTree(taxonomyName)) {
+        Node targetNode = getTaxonomyTree(taxonomyName, true);
         session = targetNode.getSession();
         targetNode.remove();
         session.save();
-        Node taxonomyDef = getRootTaxonomyDef(repository);
+        Node taxonomyDef = getRootTaxonomyDef();
         Node taxonomyTree = taxonomyDef.getNode(taxonomyName);
         taxonomyTree.remove();
         taxonomyDef.getSession().save();
@@ -256,11 +251,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   /**
    * {@inheritDoc}
    */
-  public void addTaxonomyNode(String repository, String workspace, String parentPath,
-      String taxoNodeName, String creatorUser) throws RepositoryException, TaxonomyNodeAlreadyExistsException {
+  public void addTaxonomyNode(String workspace, String parentPath, String taxoNodeName,
+      String creatorUser) throws RepositoryException, TaxonomyNodeAlreadyExistsException {
     Session systemSession = null;
     try {
-      ManageableRepository manaRepo = repositoryService_.getRepository(repository);
+      ManageableRepository manaRepo = repositoryService_.getCurrentRepository();
       systemSession = getSession(manaRepo, workspace, true);
       Node parentNode = (Node) systemSession.getItem(parentPath);
       if (parentNode.hasNode(taxoNodeName))
@@ -284,8 +279,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           node.setPermission(systemUser, PermissionType.ALL);
       }
       systemSession.save();
-    } catch (RepositoryConfigurationException e1) {
-      throw new RepositoryException(e1);
     } catch (PathNotFoundException e2) {
       throw new RepositoryException(e2);
     } finally {
@@ -308,13 +301,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     Session systemSession = null;
     try {
-      ManageableRepository manaRepo = repositoryService_.getRepository(repository);
+      ManageableRepository manaRepo = repositoryService_.getCurrentRepository();
       systemSession = getSession(manaRepo, workspace, true);
       Node taxonomyNode = (Node) systemSession.getItem(absPath);
       taxonomyNode.remove();
       systemSession.save();
-    } catch (RepositoryConfigurationException e1) {
-      throw new RepositoryException(e1);
     } catch (PathNotFoundException e2) {
       throw new RepositoryException(e2);
     } finally {
@@ -337,15 +328,13 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     Session session = null;
     try {
       if (node.isNodeType("mix:referenceable")) {
-        String repository = ((ManageableRepository) node.getSession().getRepository())
-        .getConfiguration().getName();
-        Node rootNodeTaxonomy = getTaxonomyTree(repository, taxonomyName, system);
+        Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
         if (rootNodeTaxonomy != null) {
           String sql = null;
           sql = StringUtils.replace(SQL_QUERY, "$0", rootNodeTaxonomy.getPath());        
           sql = StringUtils.replace(sql, "$1", node.getUUID());
           session = 
-            repositoryService_.getRepository(repository).login(rootNodeTaxonomy.getSession().getWorkspace().getName());
+            repositoryService_.getCurrentRepository().login(rootNodeTaxonomy.getSession().getWorkspace().getName());
           QueryManager queryManager = session.getWorkspace().getQueryManager();
           Query query = queryManager.createQuery(sql, Query.SQL);
           QueryResult result = query.execute();
@@ -375,9 +364,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    */
   public List<Node> getAllCategories(Node node, boolean system) throws RepositoryException {
     List<Node> listCategories = new ArrayList<Node>();
-    String repository = ((ManageableRepository) node.getSession().getRepository())
-    .getConfiguration().getName();
-    List<Node> allTrees = getAllTaxonomyTrees(repository, system);
+    List<Node> allTrees = getAllTaxonomyTrees(system);
     for (Node tree : allTrees) {
       List<Node> categories = getCategories(node, tree.getName(), system);
       for (Node category : categories) listCategories.add(category);
@@ -416,9 +403,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     String category = "";
     try {
-      String repository = ((ManageableRepository) node.getSession().getRepository())
-      .getConfiguration().getName();
-      Node rootNodeTaxonomy = getTaxonomyTree(repository, taxonomyName, system);
+      Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
       for (String categoryPath : categoryPaths) {        
         if (rootNodeTaxonomy.getPath().equals("/")) {
           category = categoryPath;
@@ -470,7 +455,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       String destPath, String type) throws RepositoryException {
     Session systemSession = null;
     try {
-      ManageableRepository manaRepo = repositoryService_.getRepository(repository);
+      ManageableRepository manaRepo = repositoryService_.getCurrentRepository();
       systemSession = getSession(manaRepo, workspace, true);
       if ("cut".equals(type)) {
         systemSession.move(srcPath, destPath);
@@ -481,8 +466,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         systemSession.save();
       } else
         throw new UnsupportedRepositoryOperationException();
-    } catch (RepositoryConfigurationException e1) {
-      throw new RepositoryException(e1);
     } finally {
       if(systemSession != null) systemSession.logout();
     }
@@ -503,9 +486,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     try {
       String category = "";
-      String repository = ((ManageableRepository) node.getSession().getRepository())
-          .getConfiguration().getName();
-      Node rootNodeTaxonomy = getTaxonomyTree(repository, taxonomyName, system);
+      Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
       if (rootNodeTaxonomy.getPath().equals("/")) {
         category = categoryPath;
       } else if (!categoryPath.startsWith("/")) {
@@ -549,15 +530,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
 
   /**
    * Get node as root of all taxonomy in the repository that is in TAXONOMIES_TREE_DEFINITION_PATH
-   * @param repository
    * @return 
    * @throws RepositoryException
    * @throws RepositoryConfigurationException
    */
-  private Node getRootTaxonomyDef(String repository) throws RepositoryException,
+  private Node getRootTaxonomyDef() throws RepositoryException,
       RepositoryConfigurationException {
-    ManageableRepository manaRepository = repositoryService_.getRepository(repository);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+    ManageableRepository manaRepository = repositoryService_.getCurrentRepository();
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     Session systemSession = getSession(manaRepository, dmsRepoConfig.getSystemWorkspace(), true);
     String taxonomiesTreeDef = nodeHierarchyCreator_
         .getJcrPath(BasePath.TAXONOMIES_TREE_DEFINITION_PATH);

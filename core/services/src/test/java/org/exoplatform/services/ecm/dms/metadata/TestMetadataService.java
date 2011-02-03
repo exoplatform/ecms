@@ -55,7 +55,7 @@ public class TestMetadataService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testInit() throws Exception {
-    metadataService.init(REPO_NAME);
+    metadataService.init();
   }
   
   /**

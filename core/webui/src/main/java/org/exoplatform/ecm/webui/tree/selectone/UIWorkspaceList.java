@@ -98,9 +98,9 @@ public class UIWorkspaceList extends UIForm {
   public void setWorkspaceList(String repository) throws Exception {
     wsList_ = new ArrayList<String>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    String[] wsNames = repositoryService.getRepository(repository).getWorkspaceNames();
+    String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
     String systemWsName = 
-      repositoryService.getRepository(repository).getConfiguration().getSystemWorkspaceName();
+      repositoryService.getCurrentRepository().getConfiguration().getSystemWorkspaceName();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
     for(String wsName : wsNames) {
       if(!isShowSystem_) {
@@ -130,7 +130,7 @@ public class UIWorkspaceList extends UIForm {
   
   private Node getRootNode(String repositoryName, String workspaceName) throws RepositoryException, RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     SessionProvider sessionProvider =  SessionProviderFactory.createSessionProvider();
     return sessionProvider.getSession(workspaceName, manageableRepository).getRootNode(); 
   }
@@ -170,7 +170,7 @@ public class UIWorkspaceList extends UIForm {
       String workspaceName = uiJBrowser.getWorkspaceName();
       String repositoryName = uiJBrowser.getRepositoryName();
       RepositoryService repositoryService = uiWorkspaceList.getApplicationComponent(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = SessionProviderFactory.createSystemProvider().getSession(workspaceName, manageableRepository);
       String value = session.getRootNode().getPath();
       if(!uiJBrowser.isDisable()) value = uiJBrowser.getWorkspaceName() + ":" + value;

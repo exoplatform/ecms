@@ -52,14 +52,13 @@ public class ManagePublicationActionHandler implements ActionHandler {
   
   protected void publishContent(ExecutionContext context) throws Exception{    
     String[] currentLocation = ProcessUtil.getCurrentLocation(context);
-    String repository = currentLocation[0];
     String currentWorkspace = currentLocation[1];
     String currentPath = currentLocation[2];                    
     String publishWorkspace=(String)context.getVariable("exo:publishWorkspace");
     String publishPath = (String)context.getVariable("exo:publishPath");
     String realPublishPath = ProcessUtil.computeDestinationPath(context, currentPath,publishPath);
     CmsService cmsService = ProcessUtil.getService(context, CmsService.class);            
-    cmsService.moveNode(currentPath, currentWorkspace, publishWorkspace, realPublishPath, repository);    
+    cmsService.moveNode(currentPath, currentWorkspace, publishWorkspace, realPublishPath);    
     context.setVariable(ProcessUtil.CURRENT_STATE,ProcessUtil.LIVE);    
     ProcessUtil.setCurrentLocation(context,publishWorkspace,realPublishPath);
     ProcessUtil.publish(context);

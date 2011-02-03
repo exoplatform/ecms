@@ -72,7 +72,7 @@ public class ManageCategoriesActionComponent extends UIComponent {
       UIJCRExplorer uiExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);
       String repository = uiExplorer.getRepositoryName();
       DMSConfiguration dmsConfiguration = uiExplorer.getApplicationComponent(DMSConfiguration.class);
-      DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig(repository);
+      DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
       String workspaceName = dmsRepoConfig.getSystemWorkspace();
       uiExplorer.setIsHidePopup(true);
       UICategoryManager uiManager = uiExplorer.createUIComponent(UICategoryManager.class, null, null);

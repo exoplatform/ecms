@@ -16,9 +16,6 @@
  */
 package org.exoplatform.services.cms.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.exoplatform.container.component.ComponentPlugin;
 import org.picocontainer.Startable;
 
@@ -30,58 +27,42 @@ import org.picocontainer.Startable;
  * 9:14:45 AM
  */
 public class DMSConfiguration implements Startable {
-  
-  private Map<String, DMSRepositoryConfiguration> dmsConfigMap_ = 
-    new HashMap<String, DMSRepositoryConfiguration>();
-  
+
+  private DMSRepositoryConfiguration dmsConfig;
+
   /**
    * Get DMS configuration with specific repository. 
-   * @param repository repository name.
    * @return
    */
-  public DMSRepositoryConfiguration getConfig(String repository) {
-    DMSRepositoryConfiguration dmsRepositoryConfiguration= dmsConfigMap_.get(repository);
-    if (dmsRepositoryConfiguration != null) {
-      return dmsRepositoryConfiguration;
-    }
-//    DMSConfiguration rootConfig = (DMSConfiguration)RootContainer.getInstance().getComponentInstanceOfType(DMSConfiguration.class);
-//    if (rootConfig.getConfig(repository) != null) {
-    dmsConfigMap_.putAll(getDmsConfigMap());
-//    }
-    return dmsConfigMap_.get(repository);
+  public DMSRepositoryConfiguration getConfig() {
+    return dmsConfig;
+
   }
-  
+
   /**
    * This method will add more plugin.
    * @param plugin
    */
   public void addPlugin(ComponentPlugin plugin) {
-    if(plugin instanceof DMSRepositoryConfiguration) {
-      dmsConfigMap_.put(((DMSRepositoryConfiguration)plugin).getRepositoryName(), 
-          (DMSRepositoryConfiguration)plugin);
+    if (plugin instanceof DMSRepositoryConfiguration) {
+      dmsConfig = (DMSRepositoryConfiguration)plugin;
     }
   }
-  
+
   /**
    * This method will create new repository 
-   * @param repository          repository name
    * @param plugin              plugin name
    */
-  public void initNewRepo(String repository, DMSRepositoryConfiguration plugin) {
-    dmsConfigMap_.put(repository, plugin);
+  public void initNewRepo(DMSRepositoryConfiguration plugin) {
+    dmsConfig = plugin;
   }
 
   public void start() {
     // TODO Auto-generated method stub
-    
   }
 
   public void stop() {
     // TODO Auto-generated method stub
-    
   }
 
-  public Map<String, DMSRepositoryConfiguration> getDmsConfigMap() {
-    return dmsConfigMap_;
-  }
 }
