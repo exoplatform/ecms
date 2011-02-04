@@ -16,10 +16,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata width="444" align="center" scale="90" fileref="images/exoplatform.png" format="PNG"/>
+        <imagedata  align="center"  fileref="images/exoplatform.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="444" contentwidth="150mm" align="center" fileref="images/exoplatform.png" format="PNG"/>
+        <imagedata   align="center" fileref="images/exoplatform.png" format="PNG" width="124mm"/>
       </imageobject>
     </mediaobject>
     <para>

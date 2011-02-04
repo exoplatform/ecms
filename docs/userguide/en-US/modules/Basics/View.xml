@@ -4,16 +4,16 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-View_a_site">
-	<!--  This document was created with Syntext Serna Free.  --> <title>View a site</title>
+	<title>View a site</title>
 	 <para>
 		In &PRODUCT;, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
 	</para>
 	 <mediaobject>
 		<imageobject role="html">
-			<imagedata align="center" fileref="images/toolbar.png" format="PNG" scale="100" width="444" />
+			<imagedata align="center" fileref="images/toolbar.png" format="PNG"   />
 		</imageobject>
 		 <imageobject role="fo">
-			<imagedata align="center" contentwidth="70mm" fileref="images/toolbar.png" format="PNG" width="444" />
+         <imagedata align="center" fileref="images/toolbar.png" format="PNG" width="150mm" />
 		</imageobject>
 
 	</mediaobject>
@@ -28,9 +28,9 @@
 		 <area coords="" id="area-User_Guide-View_a_site-footer" />
 
 	</areaspec>
-	 <imageobject>
-		<imagedata align="center" fileref="images/acme.png" format="PNG" width="444" />
-	</imageobject>
+      <imageobject>
+         <imagedata fileref="images/acme.png" format="PNG" align="center" width="150mm"/>
+      </imageobject>
 	 <calloutlist>
 		<callout arearefs="area-User_Guide-View_a_site-admin">
 			<para>

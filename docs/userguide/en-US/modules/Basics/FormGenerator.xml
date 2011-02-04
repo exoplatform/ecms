@@ -5,7 +5,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Form_Builder">
-<!--  This document was created with Syntext Serna Free.  -->  <title>Form Builder</title>
+   <title>Form Builder</title>
   <para>
   The <emphasis role="bold">Form Builder</emphasis> portlet enables users to create and to edit template of document types. Documents are stored in the so-called node; therefore, the term “node” and node types are often applied.
  </para>
@@ -17,10 +17,10 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="" fileref="images/formgeneratorform.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/formgeneratorform.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/formgeneratorform.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/formgeneratorform.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
     </step>
@@ -40,10 +40,10 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="" fileref="images/formbuildertab.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/formbuildertab.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/formbuildertab.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/formbuildertab.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
     </step>
@@ -57,13 +57,13 @@
     Click the 
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/componentuparrow.png" format="PNG"/>
+            <imagedata fileref="images/componentuparrow.png" format="PNG" width="5mm"/>
           </imageobject>
         </inlinemediaobject>
      corresponding to the component to move this component up or the 
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/componentdownarrow.png" format="PNG"/>
+            <imagedata fileref="images/componentdownarrow.png" format="PNG" width="5mm"/>
           </imageobject>
         </inlinemediaobject>
      to move the component down.
@@ -74,17 +74,17 @@
     Click the 
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/editcomponenticon.png" format="PNG"/>
+            <imagedata fileref="images/editcomponenticon.png" format="PNG" width="6mm"/>
           </imageobject>
         </inlinemediaobject>
      that corresponds to the component to edit properties of that component. The form to edit properties appears like the illustration below:
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="" fileref="images/editcomponentpropertiesform.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/editcomponentpropertiesform.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/editcomponentpropertiesform.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/editcomponentpropertiesform.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
       <table>
@@ -105,11 +105,11 @@
               <entry> Width </entry>
               <entry>To enter the field width. If the checkbox in <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/rulesrequiredbox.png" format="PNG"/>
+                    <imagedata fileref="images/rulesrequiredbox.png" format="PNG" width="39mm"/>
                   </imageobject>
                 </inlinemediaobject> is marked, the <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/redstarasterix.png" format="PNG"/>
+                    <imagedata fileref="images/redstarasterix.png" format="PNG" width="4mm"/>
                   </imageobject>
                 </inlinemediaobject> will appear beside the text box, indicating that values in this box are required. </entry>
             </row>
@@ -132,7 +132,7 @@
     To delete the component, click the 
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/trashicon.png" format="PNG"/>
+            <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
           </imageobject>
         </inlinemediaobject>
      corresponding to the component.
@@ -151,10 +151,10 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="" fileref="images/formgenerator.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/formgenerator.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/formgenerator.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/formgenerator.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
     </step>

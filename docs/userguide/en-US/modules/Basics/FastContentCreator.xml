@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Fast_Content_Creator">
-<!--  This document was created with Syntext Serna Free.  -->  <title>Fast Content Creator</title>
+   <title>Fast Content Creator</title>
   <para>
   &PRODUCT; provides users with the <emphasis role="bold">Fast Content Creator</emphasis> portlet that enables users to create document content quickly. The Fast Content Creator portlet is applied in the <emphasis role="bold">Contact Us</emphasis> portlet on the navigation bar:
  </para>
@@ -19,10 +19,10 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="100" fileref="images/contactusform.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/contactusform.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/contactusform.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/contactusform.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
       <table>
@@ -97,10 +97,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="" fileref="images/contactusportlet.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/contactusportlet.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/contactusportlet.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/contactusportlet.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -108,10 +108,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="" fileref="images/editnodetab.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/editnodetab.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/editnodetab.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/editnodetab.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <table>
@@ -157,17 +157,17 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/previewicon.png" format="PNG"/>
+              <imagedata fileref="images/previewicon.png" format="PNG" width="7mm"/>
             </imageobject>
           </inlinemediaobject>
       to search for the location to save documents. The <emphasis role="bold">Select Location</emphasis> form appears:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="" fileref="images/selectlocationform.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/selectlocationform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/selectlocationform.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/selectlocationform.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -176,7 +176,7 @@
      Select the parent node on the left panel and click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/greentick.png" format="PNG"/>
+              <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
             </imageobject>
           </inlinemediaobject>
       in the <emphasis role="bold">Action</emphasis> column to choose the child node on the right panel. After being selected, this location will be displayed on the <emphasis role="bold">Location to save</emphasis> field. Created documents will be saved in this location.

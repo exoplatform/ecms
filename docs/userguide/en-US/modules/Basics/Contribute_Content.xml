@@ -1,20 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Contribute_Content">
-<!--  This document was created with Syntext Serna Free.  -->  <title>Contribute Content</title>
+ <title>Contribute Content</title>
   <section id="sect-User_Guide-Contribute_Content-Edit_Mode">
     <title>Edit Mode</title>
     <para>
    A site in &PRODUCT; has two modes (Published mode and Edit mode) which are specific for editing site and viewing site. You can easily switch between these modes by selecting in the drop-down list at the top left corner.
   </para>
-    <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/twomodes.png" format="PNG"/>
-      </imageobject>
-    </mediaobject>
+     <mediaobject>
+        <imageobject role="html">
+           <imagedata fileref="images/twomodes.png" format="PNG" align="center"/>
+        </imageobject>
+        <imageobject role="fo">
+           <imagedata fileref="images/twomodes.png" format="PNG" align="center" width="148mm"/>
+        </imageobject>
+     </mediaobject>
     <itemizedlist>
       <listitem>
         <para>
@@ -31,9 +35,12 @@
    When you login to a site, by default, the page is in the published mode, you cannot see any quick edit icon and cannot edit site contents at this time:
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/publishedmode.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/publishedmode.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/publishedmode.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
     </mediaobject>
     <para>
    When a page is switched to the Edit mode, you can see quick edit icons on the site contents when mousing over them.
@@ -42,17 +49,23 @@
    For Single Content Viewer (SCV), you can see the current state of the content, the Edit Content icon and References icon.
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/singlecontentviewer1.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/singlecontentviewer1.png" format="PNG" align="center" width="150mm"/>
+       </imageobject>
     </mediaobject>
     <para>
    For Content List Viewer (CLV), you can see the current state of the content, the Edit Content, References icon, the Add Content icon and the Management Content icon.
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/lcv.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata  align="center" fileref="images/lcv.png" format="PNG"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata  align="center" fileref="images/lcv.png" format="PNG" width="150mm"/>
+       </imageobject>
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Contribute_Content-InContext_Editing">
@@ -86,9 +99,12 @@
       You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with a new document form for you to write a document.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/documentform.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/documentform.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/documentform.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -96,7 +112,7 @@
       Click
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG"/>
+                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
               </imageobject>
             </inlinemediaobject>
        to open the template list and select one.
@@ -139,15 +155,18 @@
       Click 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/editicon4.png" format="PNG"/>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
               </imageobject>
             </inlinemediaobject>
       at the right corner of the content you want to edit. You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with the document form for you to edit.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/editform.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/editform.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/editform.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -155,9 +174,12 @@
       Edit the content &gt; Click <emphasis role="bold">Save as Draft</emphasis> to save the content.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/modification.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/modification.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/modification.png" format="PNG" align="center" width="138mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -165,15 +187,18 @@
       Click 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/backicon.png" format="PNG"/>
+                <imagedata fileref="images/backicon.png" format="PNG" width="9mm"/>
               </imageobject>
             </inlinemediaobject>
        to return to the site and in the <emphasis role="bold">Edit Mode</emphasis>, the content in the state &quot;draft&quot; with its modification is visible.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/draftcontent.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/draftcontent.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/draftcontent.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </step>
       </procedure>
@@ -196,17 +221,23 @@
       Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> the <emphasis role="bold">Manage Conten</emphasis>t icon of the Content List Viewer that you want to manage on the homepage.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/managecontent.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/managecontent.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/managecontent.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       The browser will redirect to <emphasis role="bold">Content Explorer</emphasis>:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/managecontent1.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/managecontent1.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/managecontent1.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -235,17 +266,23 @@
       Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> Select the <emphasis role="bold">Preferences</emphasis> icon of a Single Content Viewer.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/scvpreferences.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/scvpreferences.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/scvpreferences.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       The Content Detail Preferences dialog appears:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/scvpreferences1.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       Details:
@@ -254,7 +291,7 @@
       <emphasis role="bold">Content Selection</emphasis>: Select the path of the content that you want to show by clicking 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/plusicon.png" format="PNG"/>
+                <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
               </imageobject>
             </inlinemediaobject>
       .
@@ -302,7 +339,7 @@
        Click
        <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/questionicon.png" format="PNG"/>
+                  <imagedata fileref="images/questionicon.png" format="PNG" width="6mm"/>
                 </imageobject>
               </inlinemediaobject>
         to see a quick help pane for each section.
@@ -314,9 +351,12 @@
       Click the plus icon next to the <emphasis role="bold">Content Path</emphasis> to re-select another content. The Select Content dialog appears:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/selectcontent.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/selectcontent.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/selectcontent.png" format="PNG" align="center" width="150mm"/>
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -326,12 +366,15 @@
         </step>
         <step>
           <para>
-      Tick the checkboxes, including the <emphasis role="bold">Show Title</emphasis> box, the <emphasis role="bold">Show Date</emphasis> and the <emphasis role="bold">Show Option bar</emphasis> box if you want to display the content title, the publication date and the print button like the illustration below:
-     </para>
+            Tick the checkboxes, including the <emphasis role="bold">Show Title</emphasis> box, the <emphasis role="bold">Show Date</emphasis> and the <emphasis role="bold">Show Option bar</emphasis> box if you want to display the content title, the publication date and the print button like the illustration below:
+           </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/editedscv.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/editedscv.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/editedscv.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -339,7 +382,7 @@
       In the <emphasis role="bold">Print Setting</emphasis> part, click 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/viewresultcontent.png" format="PNG"/>
+                <imagedata fileref="images/viewresultcontent.png" format="PNG" width="7mm"/>
               </imageobject>
             </inlinemediaobject>
       to open the <emphasis role="bold">UIPageselector</emphasis> dialog, you will see <emphasis role="bold">Printviewer.</emphasis>
@@ -348,9 +391,12 @@
       Click the <emphasis role="bold">Print</emphasis> button, the content is opened in the print viewer page.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/printreview.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/printreview.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/printreview.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       <emphasis role="bold">URL</emphasis>: http://localhost:8080/ecmdemo/private/acme/<emphasis role="bold">printviewer?content-id</emphasis>=/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/Introduce&amp;isPrint=true
@@ -390,17 +436,23 @@
       Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> Select the <emphasis role="bold">Preferences</emphasis> icon of a Content List Viewer.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/clvpreferences.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/clvpreferences.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/clvpreferences.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       The Content List Preferences dialog appears:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/clvpreferences1.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/clvpreferences1.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/clvpreferences1.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       Details:
@@ -571,9 +623,12 @@
      <emphasis role="bold">Request approval</emphasis>: When a new content is created, it must be approved before publishing by clicking <emphasis role="bold">Request Approval</emphasis> on the action bar of the Content Explorer or clicking <emphasis role="bold">Pending</emphasis> in the Manage Publication form:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/managepublication.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/managepublication.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/managepublication.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </listitem>
       <listitem>
@@ -592,9 +647,12 @@
      To publish your content forever, you should not set time in the <emphasis role="bold">To</emphasis> field.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/stage.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/stage.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/stage.png" format="PNG" align="center" width="150mm"/>
+           </imageobject>
         </mediaobject>
       </listitem>
       <listitem>
@@ -607,9 +665,12 @@
      </para>
         </note>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/bottombar.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/bottombar.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/bottombar.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </listitem>
     </itemizedlist>

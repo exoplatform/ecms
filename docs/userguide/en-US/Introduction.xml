@@ -20,12 +20,11 @@
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
-				<imagedata align="center" fileref="images/sitecontent.png" format="PNG" scale="90" width="444" />
+				<imagedata align="center" fileref="images/sitecontent.png" format="PNG" />
 			</imageobject>
 			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/sitecontent.png" format="PNG" width="444" />
+            <imagedata align="center" fileref="images/sitecontent.png" format="PNG" width="150mm" />
 			</imageobject>
-
 		</mediaobject>
 		 <para>
 			The Site Content are stored in collaboration workspaces of Java Content Repository (JCR).
@@ -322,10 +321,10 @@
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
-					<imagedata align="center" fileref="images/node.png" format="PNG" scale="100" />
+					<imagedata align="center" fileref="images/node.png" format="PNG" />
 				</imageobject>
 				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="70mm" fileref="images/node.png" format="PNG" />
+               <imagedata align="center" fileref="images/node.png" format="PNG" width="47mm"/>
 				</imageobject>
 
 			</mediaobject>
@@ -402,10 +401,10 @@
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
-					<imagedata align="center" fileref="images/symlink.png" format="PNG" scale="100" />
+					<imagedata align="center" fileref="images/symlink.png" format="PNG"  />
 				</imageobject>
 				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="70mm" fileref="images/symlink.png" format="PNG" />
+               <imagedata align="center" fileref="images/symlink.png" format="PNG" width="31mm"/>
 				</imageobject>
 
 			</mediaobject>

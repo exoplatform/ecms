@@ -26,10 +26,10 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="" fileref="images/preferencesettingform.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/preferencesettingform.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/preferencesettingform.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/preferencesettingform.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
       <table>

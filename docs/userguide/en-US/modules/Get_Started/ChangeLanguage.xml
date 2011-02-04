@@ -36,10 +36,10 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="70" fileref="images/startlogo2.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/startlogo2.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/startlogo2.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/startlogo2.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
       <para>
@@ -47,10 +47,10 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="90" fileref="images/languagesetting.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/languagesetting.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/languagesetting.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/languagesetting.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
     </step>
@@ -59,7 +59,7 @@
     Select the another language in the list. The currently selected language will be marked with the 
     <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/tickicon.png" format="PNG"/>
+            <imagedata fileref="images/tickicon.png" format="PNG" width="4mm"/>
           </imageobject>
         </inlinemediaobject>
      icon.

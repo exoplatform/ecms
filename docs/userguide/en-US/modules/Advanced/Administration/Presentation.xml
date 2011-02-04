@@ -5,7 +5,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Content_Presentation_Manager">
-<!--   This document was created with Syntext Serna Free.   --><!--    This document was created with Syntext Serna Free.    -->  <title>Content Presentation Manager</title>
+ <title>Content Presentation Manager</title>
   <para>
  </para>
   <section id="sect-User_Guide-Content_Presentation_Manager-Manage_a_Template">
@@ -13,14 +13,14 @@
     <para>
    When creating a node in &PRODUCT;, you must set its properties. Thus, each node needs to have a form to enter data for their properties (called the dialog template), and display the existing values (called the view template). The template management allows users to view, delete and modify the predefined templates or to add a new template.
   </para>
-    <figure id="figu-User_Guide-Manage_a_Template-Manage_Templates_Form">
-      <title>Manage Templates Form</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata width="444" fileref="images/manage_templates_form.png" format="PNG"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
+    <mediaobject>
+       <imageobject role="html">
+          <imagedata fileref="images/manage_templates_form.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/manage_templates_form.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
+    </mediaobject>
     <procedure id="proc-User_Guide-Manage_a_Template-Add_a_New_Template">
       <title>Add a New Template</title>
       <step id="step-User_Guide-Add_a_New_Template-Go_to_the_Manage_Templates_form">
@@ -68,42 +68,42 @@
         <para>
      Select the group from the left panel and the membership from the right panel. Or you can set permission for everyone by clicking the + icon next to <emphasis role="bold">Any Permission.</emphasis>
     </para>
-        <figure id="figu-User_Guide-Assign_memberships_to_the_group-Select_Permissions_Dialog">
-          <title>Select Permissions Dialog</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" fileref="images/img-Select_Permissions_Dialog.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+       <mediaobject>
+          <imageobject role="html">
+             <imagedata fileref="images/img-Select_Permissions_Dialog.png" format="PNG" align="center"/>
+          </imageobject>
+          <imageobject role="fo">
+             <imagedata fileref="images/img-Select_Permissions_Dialog.png" format="PNG" align="center" width="146mm" />
+          </imageobject>
+       </mediaobject>
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Add_dialog_content">
         <title>Add dialog content</title>
         <para>
      Select the <guilabel>Dialog</guilabel> tab and enter the value in the <guilabel>Dialog content</guilabel> field.
     </para>
-        <figure id="figu-User_Guide-Add_dialog_content-Manage_Templates_Dialog_Tab">
-          <title>Manage Templates Dialog Tab</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" fileref="images/img-Template_Form_Dialog_Content.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+        <mediaobject>
+           <imageobject role="html">
+              <imagedata fileref="images/img-Template_Form_Dialog_Content.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/img-Template_Form_Dialog_Content.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
+        </mediaobject>
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Add_view_content">
         <title>Add view content</title>
         <para>
      Select the <guilabel>View</guilabel> tab and enter the value in the <guilabel>Dialog content</guilabel> field.
     </para>
-        <figure id="figu-User_Guide-Add_view_content-Manage_Templates_View_Tab">
-          <title>Manage Templates View Tab</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" fileref="images/img-Template_Form_View_Content.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+       <mediaobject>
+          <imageobject role="html">
+             <imagedata fileref="images/img-Template_Form_View_Content.png" format="PNG" align="center"/>
+          </imageobject>
+          <imageobject role="fo">
+             <imagedata fileref="images/img-Template_Form_View_Content.png" format="PNG" align="center" width="150mm" />
+          </imageobject>
+       </mediaobject>
       </step>
       <step performance="optional" id="step-User_Guide-Add_a_New_Template-Add_CSS_content">
         <title>Add CSS content</title>
@@ -300,7 +300,7 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
           </inlinemediaobject>
       corresponding to the template that you want to discard.
@@ -340,11 +340,14 @@
     </para>
         <figure id="figu-User_Guide-Open_the_Metadata_Information_form-Metadata_Form">
           <title>Metadata Form</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" fileref="images/img-Metadata_Form.png" format="PNG"/>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/img-Metadata_Form.png" format="PNG" align="center"/>
             </imageobject>
-          </mediaobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/img-Metadata_Form.png" format="PNG" align="center" width="150mm" />
+            </imageobject>
+         </mediaobject>
         </figure>
       </step>
     </procedure>
@@ -413,9 +416,12 @@
     <figure id="figu-User_Guide-Manage_Views-Metadata_Form">
       <title>Metadata Form</title>
       <mediaobject>
-        <imageobject>
-          <imagedata width="444" fileref="images/img-Manage_Views_Form.png" format="PNG"/>
-        </imageobject>
+         <imageobject role="html">
+            <imagedata fileref="images/img-Manage_Views_Form.png" format="PNG" align="center"/>
+         </imageobject>
+         <imageobject role="fo">
+            <imagedata fileref="images/img-Manage_Views_Form.png" format="PNG" align="center" width="150mm"/>
+         </imageobject>
       </mediaobject>
     </figure>
     <formalpara id="form-User_Guide-Manage_Views-Views_Tab">
@@ -446,14 +452,14 @@
         <para>
      Select the group from the left panel and the membership from the right panel.
     </para>
-        <figure id="figu-User_Guide-Assign_memberships_to_the_group-Select_Permission_Dialog">
-          <title>Select Permission Dialog</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" fileref="images/img-Select_Permissions_Dialog.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+        <mediaobject>
+           <imageobject role="html">
+              <imagedata fileref="images/img-Select_Permissions_Dialog.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/img-Select_Permissions_Dialog.png" format="PNG" align="center" width="146mm" />
+           </imageobject>
+        </mediaobject>
       </step>
       <step id="step-User_Guide-Add_View-Select_the_Templates_view">
         <title>Select the Templates view</title>
@@ -552,14 +558,14 @@
         <para>
      The View form opens.
     </para>
-        <figure id="figu-User_Guide-Preview_a_View-View_Dialog">
-          <title>View Dialog</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" fileref="images/img-View_Form.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+        <mediaobject>
+           <imageobject role="html">
+              <imagedata fileref="images/img-View_Form.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/img-View_Form.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
+        </mediaobject>
       </step>
       <step>
         <para>
@@ -569,14 +575,14 @@
     </procedure>
     <section id="sect-User_Guide-Manage_Views-ECM_Templates">
       <title>ECM Templates</title>
-      <figure id="figu-User_Guide-ECM_Templates-ECM_Templates">
-        <title>ECM Templates</title>
-        <mediaobject>
-          <imageobject>
-            <imagedata width="444" fileref="images/ecmtemplates.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/ecmtemplates.png" format="PNG" align="center"/>
+            </imageobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/ecmtemplates.png" format="PNG" align="center" width="150mm" />
+            </imageobject>
+         </mediaobject>
       <procedure id="proc-User_Guide-ECM_Templates-Add_a_new_ECM_Template">
         <title>Add a new ECM Template</title>
         <step>
@@ -588,14 +594,14 @@
           <para>
       Click the <guibutton>Add</guibutton> button to open the Add ECM Template form.
      </para>
-          <figure id="figu-User_Guide-Add_a_new_ECM_Template-The_Add_ECM_Template_form">
-            <title>The Add ECM Template form</title>
-            <mediaobject>
-              <imageobject>
-                <imagedata width="444" fileref="images/addecmtemplate.png" format="PNG"/>
-              </imageobject>
-            </mediaobject>
-          </figure>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/addecmtemplate.png" format="PNG" align="center"/>
+            </imageobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/addecmtemplate.png" format="PNG" align="center" width="150mm" />
+            </imageobject>
+         </mediaobject>
         </step>
         <step>
           <para>
@@ -622,16 +628,16 @@
         <title>Editing a Template</title>
         <step>
           <para>
-      Click the <guibutton>Pencil</guibutton> icon next to the template you want to edit.
-     </para>
-          <figure id="figu-User_Guide-Editing_a_Template-Editing_an_ECM_Template_Form">
-            <title>Editing an ECM Template Form</title>
+            Click the <guibutton>Pencil</guibutton> icon next to the template you want to edit.
+           </para>
             <mediaobject>
-              <imageobject>
-                <imagedata width="444" fileref="images/editecmtemplate.png" format="PNG"/>
-              </imageobject>
+               <imageobject role="html">
+                  <imagedata fileref="images/editecmtemplate.png" format="PNG" align="center"/>
+               </imageobject>
+               <imageobject role="fo">
+                  <imagedata fileref="images/editecmtemplate.png" format="PNG" align="center" width="150mm" />
+               </imageobject>
             </mediaobject>
-          </figure>
         </step>
         <step>
           <para>
@@ -671,28 +677,28 @@
     </section>
     <section id="sect-User_Guide-Manage_Views-BC_Templates">
       <title>BC Templates</title>
-      <figure id="figu-User_Guide-BC_Templates-BC_Templates_form">
-        <title>BC Templates form</title>
-        <mediaobject>
-          <imageobject>
-            <imagedata width="444" fileref="images/bctemplatesform.png" format="PNG"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
+      <mediaobject>
+         <imageobject role="html">
+            <imagedata fileref="images/bctemplatesform.png" format="PNG" align="center"/>
+         </imageobject>
+         <imageobject role="fo">
+            <imagedata fileref="images/bctemplatesform.png" format="PNG" align="center" width="150mm" />
+         </imageobject>
+      </mediaobject>
       <procedure id="proc-User_Guide-BC_Templates-Adding_a_New_Template">
         <title>Adding a New Template</title>
         <step>
           <para>
-      Click <guibutton>Add</guibutton> to open the Add BC Template form.
-     </para>
-          <figure id="figu-User_Guide-Adding_a_New_Template-The_Add_BC_Template_form">
-            <title>The Add BC Template form</title>
-            <mediaobject>
-              <imageobject>
-                <imagedata width="444" fileref="images/addbctemplateform.png" format="PNG"/>
-              </imageobject>
-            </mediaobject>
-          </figure>
+            Click <guibutton>Add</guibutton> to open the Add BC Template form.
+         </para>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/addbctemplateform.png" format="PNG" align="center"/>
+            </imageobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/addbctemplateform.png" format="PNG" align="center" width="150mm" />
+            </imageobject>
+         </mediaobject>
         </step>
         <step>
           <para>
@@ -708,14 +714,14 @@
           <para>
       Select the template type from the dropdown box in the <emphasis role="bold">Template Type</emphasis> form.
      </para>
-          <figure id="figu-User_Guide-Adding_a_New_Template-Dropdown_Box">
-            <title>Dropdown Box</title>
-            <mediaobject>
-              <imageobject>
-                <imagedata fileref="images/templatetypedropdownbox.png" format="PNG"/>
-              </imageobject>
-            </mediaobject>
-          </figure>
+          <mediaobject>
+             <imageobject role="html">
+                <imagedata fileref="images/templatetypedropdownbox.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/templatetypedropdownbox.png" format="PNG" align="center" width="63mm"/>
+             </imageobject>
+          </mediaobject>
           <note>
             <para>
        The name must be unique.
@@ -737,14 +743,14 @@
           <para>
       Click the <guibutton>Pencil</guibutton> icon on a template that you want to edit.
      </para>
-          <figure id="figu-User_Guide-Edit_a_BC_Template-The_Edit_BC_Template_Form">
-            <title>The Edit BC Template Form</title>
-            <mediaobject>
-              <imageobject>
-                <imagedata width="444" fileref="images/editbctemplateform.png" format="PNG"/>
-              </imageobject>
-            </mediaobject>
-          </figure>
+          <mediaobject>
+             <imageobject role="html">
+                <imagedata fileref="images/editbctemplateform.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/editbctemplateform.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
+          </mediaobject>
         </step>
         <step>
           <para>
@@ -795,9 +801,12 @@
    Go to <guibutton>Administration</guibutton><emphasis role="bold"> &gt; <guibutton>Content Presentation</guibutton> &gt; <guibutton>Manage Drives</guibutton>.</emphasis>
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/manage_drives.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/manage_drives.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/manage_drives.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
     </mediaobject>
     <section id="sect-User_Guide-Drives_Management-Add_a_new_drive">
       <title>Add a new drive</title>
@@ -810,9 +819,12 @@
       Click the <guibutton>Add Drive</guibutton> button in the <guibutton>Manage Drives</guibutton> form to open the <guibutton>Add Drive</guibutton> form.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/add_drive.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/add_drive.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/add_drive.png" format="PNG" align="center" width="140mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -824,26 +836,32 @@
           <para>
       Select a workspace for the drive. There are 4 available workspaces: system, collaboration, backup, and dms-system.
      </para>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="500" align="center" fileref="images/workspaces.png" format="PNG"/>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/workspaces.png" format="PNG" align="center"/>
             </imageobject>
-          </mediaobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/workspaces.png" format="PNG" align="center" width="63mm"/>
+            </imageobject>
+         </mediaobject>
         </step>
         <step>
           <para>
       Select the home path for the drive by clicking the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/deplussy.png" format="PNG"/>
+                <imagedata fileref="images/deplussy.png" format="PNG" width="7mm"/>
               </imageobject>
             </inlinemediaobject>
        icon
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/home_path.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/home_path.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/home_path.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -862,7 +880,7 @@
       Select an icon for the workspace by clicking the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/addplusicon.png" format="PNG"/>
+                <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
               </imageobject>
             </inlinemediaobject>
      </para>
@@ -872,17 +890,17 @@
       Click 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/greentick.png" format="PNG"/>
+                <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
               </imageobject>
             </inlinemediaobject>
        to select an icon file:
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="" fileref="images/addiconfileform.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/addiconfileform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/addiconfileform.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/addiconfileform.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -891,7 +909,7 @@
       Select permissions for groups that have access rights to this drive by clicking the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/pluspermissionbutton.png" format="PNG"/>
+                <imagedata fileref="images/pluspermissionbutton.png" format="PNG" width="8mm"/>
               </imageobject>
             </inlinemediaobject>
        icon.
@@ -964,24 +982,24 @@
       Click 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/versionplusicon.png" format="PNG"/>
+                <imagedata fileref="images/versionplusicon.png" format="PNG" width="9mm"/>
               </imageobject>
             </inlinemediaobject>
        to select a node type. The <emphasis role="bold">Select node types</emphasis> form will appear:
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="" fileref="images/selectnodetypesform.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/selectnodetypesform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/selectnodetypesform.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/selectnodetypesform.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
           <para>
       Enter a node name to search for in the <emphasis role="bold">Node type name</emphasis> field and click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/magnifyingglassicon.png" format="PNG"/>
+                <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
               </imageobject>
             </inlinemediaobject>
        to begin searching.
@@ -993,7 +1011,7 @@
       Check the box corresponding to the desired node type in the <emphasis role="bold">Select</emphasis> column, or click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/addplusicon.png" format="PNG"/>
+                <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
               </imageobject>
             </inlinemediaobject>
        beside <emphasis role="bold">Choose all node types</emphasis> to select all results.
@@ -1003,17 +1021,17 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="" fileref="images/requiredallowancenodetype.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/requiredallowancenodetype.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/requiredallowancenodetype.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/requiredallowancenodetype.png" format="PNG" width="125mm"/>
             </imageobject>
           </mediaobject>
           <para>
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG"/>
+                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
               </imageobject>
             </inlinemediaobject>
        if you want to remove the selected nodetype.
@@ -1025,10 +1043,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="" fileref="images/applyviewstab.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/applyviewstab.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/applyviewstab.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/applyviewstab.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -1045,17 +1063,17 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/editicon4.png" format="PNG"/>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
               </imageobject>
             </inlinemediaobject>
        icon that corresponds to the drive you want to edit. The <emphasis role="bold">Edit drive</emphasis> form will appear:
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="" fileref="images/editdriveform.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/editdriveform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/editdriveform.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/editdriveform.png" format="PNG" width="146mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -1083,7 +1101,7 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG"/>
+                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
               </imageobject>
             </inlinemediaobject>
        that corresponds to the drive you want to delete.

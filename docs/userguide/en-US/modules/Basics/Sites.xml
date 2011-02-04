@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
@@ -11,7 +12,7 @@
    </para>
     <note>
       <para>
-   In <emphasis role="bold">&PRODUCT;</emphasis>,  only Administrators have  right to  create a new site.
+   In <emphasis role="bold">&PRODUCT;</emphasis>, only Administrators have  right to  create a new site.
   </para>
     </note>
     <para>This function enables you to create a site (portal) to meet your own needs.
@@ -26,10 +27,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/site.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/site.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/site.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/site.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -39,10 +40,10 @@
         <para> In the <emphasis role="bold">Portal Setting </emphasis> tab, set some properties for this site, including the portal name, locale and skin.</para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/newportal.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/newportal.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newportal.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/newportal.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <table id="tabl-User_Guide-Create_a_new_site-Details">
@@ -105,10 +106,10 @@
         </variablelist>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/portalproperties.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/portalproperties.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/portalproperties.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/portalproperties.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -116,15 +117,16 @@
         <para>
      Select the <emphasis role="bold">Permission Setting</emphasis> tab to set access and edit permission for this portal.
     </para>
-<!--   Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                           -->        <para>
+<!--   Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                           -->
+    <para>
      The <emphasis role="bold">Permission Setting</emphasis> tab includes two subtabs: <emphasis role="bold">Access Permission Setting</emphasis> and <emphasis role="bold">Edit Permission Setting</emphasis>.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/permissionsetting.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/permissionsetting.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/accesspermission.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/accesspermission.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <variablelist>
@@ -136,10 +138,10 @@
        </para>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata width="444" align="center" scale="90" fileref="images/accesspermission.png" format="PNG"/>
+                  <imagedata  align="center"  fileref="images/accesspermission.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata width="444" contentwidth="150mm" align="center" fileref="images/accesspermission.png" format="PNG"/>
+                  <imagedata   align="center" fileref="images/accesspermission.png" format="PNG" width="150mm"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -150,17 +152,17 @@
        </para>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata width="444" align="center" scale="90" fileref="images/permissionlist.png" format="PNG"/>
+                  <imagedata  align="center"  fileref="images/permissionlist.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata width="444" contentwidth="150mm" align="center" fileref="images/permissionlist.png" format="PNG"/>
+                  <imagedata   align="center" fileref="images/permissionlist.png" format="PNG" width="150mm"/>
                 </imageobject>
               </mediaobject>
               <para>
         In which, the icon 
         <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/trashicon.png" format="PNG"/>
+                    <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
                   </imageobject>
                 </inlinemediaobject>
          is to remove its corresponding group from the Access Permission list.
@@ -175,10 +177,10 @@
        </para>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata width="444" align="center" scale="90" fileref="images/editpermission.png" format="PNG"/>
+                  <imagedata  align="center"  fileref="images/editpermission.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata width="444" contentwidth="150mm" align="center" fileref="images/editpermission.png" format="PNG"/>
+                  <imagedata   align="center" fileref="images/editpermission.png" format="PNG" width="150mm"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -186,10 +188,10 @@
        </para>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata width="444" align="center" scale="90" fileref="images/permissionselector.png" format="PNG"/>
+                  <imagedata  align="center"  fileref="images/permissionselector.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata width="444" contentwidth="150mm" align="center" fileref="images/permissionselector.png" format="PNG"/>
+                  <imagedata   align="center" fileref="images/permissionselector.png" format="PNG" width="140mm"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -200,10 +202,10 @@
        </para>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata width="444" align="center" scale="90" fileref="images/currentpermission.png" format="PNG"/>
+                  <imagedata  align="center"  fileref="images/currentpermission.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata width="444" contentwidth="150mm" align="center" fileref="images/currentpermission.png" format="PNG"/>
+                  <imagedata   align="center" fileref="images/currentpermission.png" format="PNG" width="150mm"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -227,10 +229,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata width="444" align="center" scale="100" fileref="images/sitesexplorer.png" format="PNG"/>
+        <imagedata  align="center"  fileref="images/sitesexplorer.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="444" contentwidth="150mm" align="center" fileref="images/sitesexplorer.png" format="PNG"/>
+        <imagedata   align="center" fileref="images/sitesexplorer.png" format="PNG" width="150mm"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -238,10 +240,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata width="444" align="center" scale="130" fileref="images/exosite.png" format="PNG"/>
+        <imagedata  align="center"  fileref="images/exosite.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="444" contentwidth="150mm" align="center" fileref="images/exosite.png" format="PNG"/>
+        <imagedata   align="center" fileref="images/exosite.png" format="PNG" width="150mm"/>
       </imageobject>
     </mediaobject>
   </section>
@@ -249,108 +251,6 @@
     <title>Edit a Site</title>
     <para>
    This function enables you to edit a site, inluding   the configuration (setting,  permission), the navigation and the layout components of the site.</para>
-<!-- remove
-    <para>You have two modes:</para>
-    <variablelist>
-      <varlistentry>
-        <term>View Mode:</term>
-        <listitem>
-          <para>In this mode, you only can view the current portal (site)
-          without editing the layout components of the site. When you sign in,
-          by default, the mode of your site will be the view mode. This mode
-          is the 'off' status of the edit mode.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term>Edit Mode:</term>
-        <listitem>
-          <para>In this mode, you are either view or edit layout components of
-          the current portal.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-    <section id="sect-User_Guide-Edit_a_Site-Turn_on_the_Edit_Mode_of_the_Site">
-      <title>Turn on the Edit Mode of the Site</title>
-      <para>
-After signing in, you will see  two statuses (Published/Edit) of the the site on the Administration bar. By default, the status is "Published". It means that you only view the current site without editing the layout component of the site.
-</para>
-      <para>To switch between two statuses “<emphasis role="bold">Published</emphasis>” and “Edit”, just click <inlinemediaobject>
-          <imageobject>
-            <imagedata fileref="images/droparrowicon.png" format="PNG"/>
-          </imageobject>
-        </inlinemediaobject> to open the status list and select the mode you
-      want:</para>
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata align="center" scale="60" fileref="images/modes.png" format="PNG"/>
-        </imageobject>
-      </mediaobject>
-      <para>When your site is switched to the edit mode you are able to
-      directly edit any components of your site. Moreover, you can add add content, manage content and change the preferences of the single content directly. </para>
-    </section>
- Remove this part
-    <section id="sect-User_Guide-Edit_a_Site-Web_content_structure">
-      <title>Web content structure</title>
-
-      <para>The interface of a site can be divided into five parts like the
-      illustration below and each part is a single content viewer so that it
-      also includes all default elements of a web content.</para>
-
-      <mediaobjectco>
-        <imageobjectco>
-          <areaspec>
-            <area coords=""
-                  id="area-User_Guide-Edit_a_Site-Web_content_structure-administration" />
-
-            <area coords=""
-                  id="area-User_Guide-Edit_a_Site-Web_content_structure-banner" />
-
-            <area coords=""
-                  id="area-User_Guide-Edit_a_Site-Web_content_structure-navigation" />
-
-            <area coords=""
-                  id="area-User_Guide-Edit_a_Site-Web_content_structure-content" />
-
-            <area coords=""
-                  id="area-User_Guide-Edit_a_Site-Web_content_structure-footer" />
-          </areaspec>
-
-          <imageobject>
-            <imagedata align="center" fileref="images/sitestructure.png"
-                       format="PNG" scale="110" width="444" />
-          </imageobject>
-
-          <calloutlist>
-            <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-administration">
-              <para>Administration bar which contains some administration
-              functions related to portals (websites).</para>
-            </callout>
-
-            <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-banner">
-              <para>Banner which contains organization's slogan, logo, icon
-              used in websites.</para>
-            </callout>
-
-            <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-navigation">
-              <para>Navigation bar that helps the website' s users to
-              visualize the structure of website and provide quick links to
-              different pages.</para>
-            </callout>
-
-            <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-content">
-              <para>The page content area to display the content of current
-              selecting page</para>
-            </callout>
-
-            <callout arearefs="area-User_Guide-Edit_a_Site-Web_content_structure-footer">
-              <para>The footer of the web site. It can be texts, or image that
-              is displayed at the bottom of the web site. It provides
-              information about author/institutional sponsor, revision date,
-              copyright, etc.</para>
-            </callout>
-          </calloutlist>
-        </imageobjectco>
-      </mediaobjectco>  -->    
       
       <section id="sect-User_Guide-Edit_a_Site-How_to_edit_the_current_Site">
       <title>How to edit the current site</title>
@@ -364,27 +264,27 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
       Show the form to edit the current site by clicking <emphasis role="bold">Site Editor</emphasis> on the administration bar, then select 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/editlayouticon.png" format="PNG"/>
+                <imagedata fileref="images/editlayouticon.png" format="PNG" width="38mm"/>
               </imageobject>
             </inlinemediaobject>
        .
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="100" fileref="images/editlayout.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/editlayout.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/editlayout.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/editlayout.png" format="PNG" width="138mm"/>
             </imageobject>
           </mediaobject>
           <para>The form to edit the current site will appear.
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="110" fileref="images/editportalform.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/editportalform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/editportalform.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/editportalform.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -402,42 +302,50 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
                 <row>
                   <entry>
                     <mediaobject>
-                      <imageobject role="html">
-                        <imagedata align="center" scale="100" fileref="images/site-config.png" format="PNG"/>
+                      <imageobject>
+                        <imagedata align="center"  fileref="images/site-config.png" format="PNG" width="34mm"/>
                       </imageobject>
                     </mediaobject>
                   </entry>
-                  <entry><emphasis role="bold">Site&apos;s config</emphasis>: allows editing the site&apos;s configuration. </entry>
+                  <entry>
+                     <emphasis role="bold">Site&apos;s config</emphasis>: allows editing the site&apos;s configuration. 
+                  </entry>
                 </row>
                 <row>
                   <entry>
                     <mediaobject>
-                      <imageobject role="html">
-                        <imagedata align="center" scale="100" fileref="images/switchviewbutton.png" format="PNG"/>
+                      <imageobject>
+                        <imagedata align="center"  fileref="images/switchviewbutton.png" format="PNG" width="44mm"/>
                       </imageobject>
                     </mediaobject>
                   </entry>
-                  <entry><emphasis role="bold">Switch View Mode</emphasis>: shows how the current layout looks like with real content.</entry>
+                  <entry>
+                     <emphasis role="bold">Switch View Mode</emphasis>: shows how the current layout looks like with real content.
+                  </entry>
                 </row>
                 <row>
                   <entry>
                     <mediaobject>
-                      <imageobject role="html">
-                        <imagedata align="center" scale="100" fileref="images/finishbutton.png" format="PNG"/>
+                      <imageobject>
+                        <imagedata align="center"  fileref="images/finishbutton.png" format="PNG" width="9mm"/>
                       </imageobject>
                     </mediaobject>
                   </entry>
-                  <entry><emphasis role="bold">Finish</emphasis>: allows saving all changes and escaping the Edit page </entry>
+                  <entry>
+                     <emphasis role="bold">Finish</emphasis>: allows saving all changes and escaping the Edit page
+                  </entry>
                 </row>
                 <row>
                   <entry>
                     <mediaobject>
-                      <imageobject role="html">
-                        <imagedata align="center" scale="100" fileref="images/abortbutton.png" format="PNG"/>
+                      <imageobject>
+                        <imagedata align="center"  fileref="images/abortbutton.png" format="PNG" width="7mm"/>
                       </imageobject>
                     </mediaobject>
                   </entry>
-                  <entry><emphasis role="bold">Abort</emphasis>: allows canceling all changes that have not been saved and quitting the Edit page </entry>
+                  <entry>
+                     <emphasis role="bold">Abort</emphasis>: allows canceling all changes that have not been saved and quitting the Edit page.
+                  </entry>
                 </row>
               </tbody>
             </tgroup>
@@ -452,9 +360,12 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
     </para>
       </formalpara>
       <mediaobject>
-        <imageobject role="html">
-          <imagedata width="444" align="center" scale="90" fileref="images/moveportlet.png" format="PNG"/>
-        </imageobject>
+         <imageobject role="html">
+            <imagedata fileref="images/moveportlet.png" format="PNG" align="center"/>
+         </imageobject>
+         <imageobject role="fo">
+            <imagedata fileref="images/moveportlet.png" format="PNG" align="center" width="150mm" />
+         </imageobject>
       </mediaobject>
       <para>
             Editing the banner portlet is similar to editing the Sign-in portlet and the footer portlet so in this guide, we only show how to edit the banner of the current site as an example of editng the layout.</para>
@@ -464,16 +375,16 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
           <para>
                   Show the form to edit a banner by clicking the icon <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/editicon3.png" format="PNG"/>
+                <imagedata fileref="images/editicon3.png" format="PNG" width="13mm"/>
               </imageobject>
             </inlinemediaobject> of the banner portlet in the Edit Portal form like the illustration below.
                </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center" scale="90" fileref="images/editbanner.png" format="PNG"/>
+              <imagedata align="center"  fileref="images/editbanner.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata contentwidth="150mm" align="center" fileref="images/editbanner.png" format="PNG"/>
+              <imagedata  align="center" fileref="images/editbanner.png" format="PNG" width="66mm"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -481,10 +392,10 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="110" fileref="images/editbannerform.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/editbannerform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/leftbanner.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/editbannerform.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -538,7 +449,7 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
        Click
        <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/questionicon.png" format="PNG"/>
+                  <imagedata fileref="images/questionicon.png" format="PNG" width="6mm"/>
                 </imageobject>
               </inlinemediaobject>
         to see more explanation for each section.
@@ -550,9 +461,12 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
       Select the <emphasis role="bold">Portlet Setting</emphasis> tab:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/portletsettingtab.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/portletsettingtab.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/portletsettingtab.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       Details:
@@ -632,19 +546,25 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
           <para>
       By default, all users can access the portlet:
      </para>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/accesspermission.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
+     <mediaobject>
+        <imageobject role="html">
+           <imagedata fileref="images/.png" format="PNG" align="center"/>
+        </imageobject>
+        <imageobject role="fo">
+           <imagedata fileref="images/accesspermission.png" format="PNG" align="center" width="150mm"/>
+        </imageobject>
+     </mediaobject>
           <para>
       However, you can edit the access permission by unticking the checkbox &gt; click <emphasis role="bold">Add Permission</emphasis>:
      </para>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/accesspermission1.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
+     <mediaobject>
+        <imageobject role="html">
+           <imagedata fileref="images/accesspermission1.png" format="PNG" align="center"/>
+        </imageobject>
+        <imageobject role="fo">
+           <imagedata fileref="images/accesspermission1.png" format="PNG" align="center" width="150mm"/>
+        </imageobject>
+     </mediaobject>
           <para>
       The <emphasis role="bold">ListPermissionSelector</emphasis> form appears. Select a group on the left pane and a membership on the right pane.
      </para>
@@ -676,7 +596,7 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
         <para>
     To edit the configuration (  including   language, skin and permissions) of the current site, click  <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/site-config.png" format="PNG"/>
+              <imagedata fileref="images/site-config.png" format="PNG" width="34mm"/>
             </imageobject>
           </inlinemediaobject> to open the same form as the form to add a new portal.
          </para>
@@ -696,9 +616,12 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
     You can edit any existing sites in the list of sites. Here, you can edit the layout, configuration and navigation bar of the site. Click<emphasis role="bold"> Site </emphasis>to open the list of existing sites.
    </para>
       <mediaobject>
-        <imageobject>
-          <imagedata width="444" align="center" fileref="images/existingsites.png" format="PNG"/>
-        </imageobject>
+         <imageobject role="html">
+            <imagedata fileref="images/existingsites.png" format="PNG" align="center"/>
+         </imageobject>
+         <imageobject role="fo">
+            <imagedata fileref="images/existingsites.png" format="PNG" align="center" width="150mm"/>
+         </imageobject>
       </mediaobject>
       <formalpara id="form-User_Guide-How_to_edit_an_existing_site-Edit_Layout">
         <title>Edit Layout</title>
@@ -728,11 +651,14 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
         <step>
           <para>
       Click <emphasis role="bold">Site &gt; Edit Navigation</emphasis> to open the <emphasis role="bold">Navigation Management</emphasis> form.</para>
-          <mediaobject>
-            <imageobject>
-              <imagedata align="center" fileref="images/navigationmanagement.png" format="PNG"/>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/navigationmanagement.png" format="PNG" align="center"/>
             </imageobject>
-          </mediaobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/navigationmanagement.png" format="PNG" align="center" width="104mm" />
+            </imageobject>
+         </mediaobject>
         </step>
         <step>
           <para>
@@ -744,9 +670,12 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
       In the <emphasis role="bold">Page Node Setting</emphasis> tab, enter a name for the node. It is required.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/add-editnode.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/add-editnode.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/add-editnode.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       Details:
@@ -792,9 +721,12 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
       Select the <emphasis role="bold">Page Selector</emphasis> tab:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/pageselector.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/pageselector.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/pageselector.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       Details:
@@ -894,19 +826,22 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center" scale="100" fileref="images/sitelist.png" format="PNG"/>
+            <imagedata align="center"  fileref="images/sitelist.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata contentwidth="150mm" align="center" fileref="images/sitelist.png" format="PNG"/>
+            <imagedata  align="center" fileref="images/sitelist.png" format="PNG" width="101mm"/>
           </imageobject>
         </mediaobject>
         <para>
      Your current site will be switched to the selected site, and you will see all the child pages that displays on the Navigation bar of the selected site.
     </para>
         <mediaobject>
-          <imageobject role="html">
-            <imagedata width="444" align="center" scale="100" fileref="images/switchsite.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/switchsite.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/switchsite.png" format="PNG" align="center" width="137mm"/>
+           </imageobject>
         </mediaobject>
       </step>
     </procedure>
@@ -927,10 +862,10 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="110" fileref="images/sitelistclick.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/sitelistclick.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/sitelistclick.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/sitelistclick.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -939,7 +874,7 @@ After signing in, you will see  two statuses (Published/Edit) of the the site on
      Click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/deletebutton.png" format="PNG"/>
+              <imagedata fileref="images/deletebutton.png" format="PNG" width="23mm"/>
             </imageobject>
           </inlinemediaobject>
       in the row of the portal that you want to delete.

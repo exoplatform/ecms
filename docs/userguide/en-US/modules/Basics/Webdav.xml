@@ -5,7 +5,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV">
-<!--  This document was created with Syntext Serna Free.  -->  <title>Manage Content with WebDAV</title>
+ <title>Manage Content with WebDAV</title>
   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-What_is_WebDAV">
     <title>What is WebDAV?</title>
     <para>
@@ -77,10 +77,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/mynetworkplaces.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/mynetworkplaces.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/mynetworkplaces.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/mynetworkplaces.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -90,10 +90,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="" fileref="images/networkplacewizard.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/networkplacewizard.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/networkplacewizard.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/networkplacewizard.png" format="PNG" width="149mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -103,10 +103,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="" fileref="images/networkplacelocation.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/networkplacelocation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/networkplacelocation.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/networkplacelocation.png" format="PNG" width="144mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -126,10 +126,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="" fileref="images/newnetworklocation.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/newnetworklocation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newnetworklocation.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/newnetworklocation.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -161,10 +161,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/sitesmanagementdrive.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/sitesmanagementdrive.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/sitesmanagementdrive.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/sitesmanagementdrive.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -172,10 +172,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center" scale="" fileref="images/sitesleftpane.png" format="PNG"/>
+            <imagedata align="center"  fileref="images/sitesleftpane.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata contentwidth="150mm" align="center" fileref="images/sitesleftpane.png" format="PNG"/>
+            <imagedata  align="center" fileref="images/sitesleftpane.png" format="PNG" width="64mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -185,10 +185,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/alloweditionmenu.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/alloweditionmenu.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/alloweditionmenu.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/alloweditionmenu.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -196,10 +196,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/webdavsiteview.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/webdavsiteview.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/webdavsiteview.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/webdavsiteview.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -259,10 +259,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center" scale="" fileref="images/webdavcontextdelete.png" format="PNG"/>
+              <imagedata align="center"  fileref="images/webdavcontextdelete.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata contentwidth="150mm" align="center" fileref="images/webdavcontextdelete.png" format="PNG"/>
+              <imagedata  align="center" fileref="images/webdavcontextdelete.png" format="PNG" width="76mm"/>
             </imageobject>
           </mediaobject>
           <para>
