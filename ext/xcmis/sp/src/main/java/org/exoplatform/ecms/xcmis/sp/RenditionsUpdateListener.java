@@ -30,6 +30,7 @@ import org.xcmis.spi.utils.MimeType;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.Repository;
 import javax.jcr.Session;
@@ -75,7 +76,14 @@ public class RenditionsUpdateListener implements EventListener
             // No processing of renditions for all nodes in "/xcmis:system".
             if (!path.startsWith("/xcmis:system") && path.endsWith("/jcr:data"))
             {
-               Property jcrData = (Property)session.getItem(path);
+               Property jcrData = null;
+               try {
+               jcrData = (Property)session.getItem(path);
+               } catch (PathNotFoundException ex){
+            	   // No data;
+               }
+               if (jcrData == null)
+            	   return; //No data, nothing to do;
                Node jcrContent = jcrData.getParent();
                Node fileNode = jcrContent.getParent();
                // Do nothing since 'nt:file' without mixin 'cmis:document' may
