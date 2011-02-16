@@ -13,7 +13,6 @@
   }
 	
 %>
-<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/jquery-1.3.2.js"></script>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/ZeroClipboard.js"></script>
 <div class="$uicomponent.id" id="$uicomponent.id" >
 	<div style="height: 0px;">

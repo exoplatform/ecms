@@ -4,7 +4,6 @@
 	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
 	import org.exoplatform.ecm.webui.utils.LockUtil;
 %>
-<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/jquery-1.3.2.js"></script>
 	<%
 		def rcontext = _ctx.getRequestContext() ;
     String portletId = Utils.getRealPortletId(rcontext);
