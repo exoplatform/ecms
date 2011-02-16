@@ -114,6 +114,11 @@
     <key>org.exoplatform.portal.pom.config.POMSessionManager</key>
     <type>org.exoplatform.portal.pom.config.POMSessionManager</type>
   </component>
+		
+  <component>
+      <key>org.exoplatform.portal.resource.compressor.ResourceCompressor</key>
+      <type>org.exoplatform.portal.resource.compressor.impl.ResourceCompressorService</type>
+		</component>		
 
   <component>
     <key>org.exoplatform.commons.chromattic.ChromatticManager</key>

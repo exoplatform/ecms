@@ -151,6 +151,11 @@
     <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
     <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
   </component>
+		
+		<component>
+      <key>org.exoplatform.portal.resource.compressor.ResourceCompressor</key>
+      <type>org.exoplatform.portal.resource.compressor.impl.ResourceCompressorService</type>
+		</component>
 
   <component>
     <key>org.exoplatform.services.organization.idm.PicketLinkIDMService</key>

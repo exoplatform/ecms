@@ -174,7 +174,7 @@
 		</dependency>
     <dependency>
 		  <groupId>org.exoplatform.portal</groupId>
-			<artifactId>exo.portal.component.dashboard</artifactId>
+			<artifactId>exo.portal.webui.dashboard</artifactId>
 			<version>${org.exoplatform.portal.version}</version>
 			<type>jar</type>
 		</dependency>
