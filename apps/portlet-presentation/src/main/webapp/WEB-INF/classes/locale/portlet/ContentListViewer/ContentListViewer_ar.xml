@@ -46,6 +46,9 @@
       <UICLVConfigShowDateCreatedFormCheckboxInput>إظهار تاريخ</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>إظهار رابط </UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>قرأ</UICLVConfigShowReadmoreFormCheckboxInput>
+      <ContentPath>Content path</ContentPath>
+      <Up>Up</Up>
+      <Down>Down</Down>
     </label>
     <action>
       <Save>حفظ</Save>
@@ -86,6 +89,7 @@
   <UICLVConfigTargetPageFormInputSet>
     <title>
       <SelectBasePath>حدد مسار قاعدة</SelectBasePath>
+      <SelectTargetPage>حدد مسار قاعدة</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
 

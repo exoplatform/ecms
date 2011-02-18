@@ -57,7 +57,10 @@
 	  <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
 	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Show in page</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found!</content-not-found>	  
+      <content-not-found>Content not found!</content-not-found>
+      <ContentPath>Content path</ContentPath>
+      <Up>Up</Up>
+      <Down>Down</Down>
     </label>
     <help>
     	<ModeSelectionHelp>Two modes are available to show contents. "By folder" will take all the contents available in the folder/category you choose ; "By Contents" lets you manually choose the contents you want to show</ModeSelectionHelp>
@@ -109,6 +112,7 @@
   <UICLVConfigTargetPageFormInputSet>
     <title>
       <SelectBasePath>Select base path</SelectBasePath>
+      <SelectTargetPage>Select base path</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
 

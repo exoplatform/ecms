@@ -34,7 +34,10 @@
       <UICLVConfigShowTitleFormCheckboxInput>Afficher le titre</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>Afficher la date</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Afficher le lien</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Détection automatique</UICLVConfigShowAutomaticDetectionCheckboxInput>      
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Détection automatique</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <ContentPath>Chemin de contenu</ContentPath>
+      <Up>Monter</Up>
+      <Down>Dessendre</Down>      
     </label>
     <action>
       <Save>Sauver</Save>
@@ -156,7 +159,12 @@
 		  <contextualDisable>Désactivé</contextualDisable>
   	</label>
   </UICLVConfigContextualFolderRadioBoxInput>
-    
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Afficher dans la page</SelectBasePath>
+      <SelectTargetPage>Afficher dans la page</SelectTargetPage>
+    <title>
+  </UICLVConfigTargetPageFormInputSet>
   <PublicationStates>
     <archived>Archivé</archived>
     <obsolete>Obsolète</obsolete>

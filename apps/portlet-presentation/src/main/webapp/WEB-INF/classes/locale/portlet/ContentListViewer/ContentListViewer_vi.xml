@@ -47,6 +47,9 @@
       <UICLVConfigShowLinkFormCheckboxInput>Hiển thị liên kết</UICLVConfigShowLinkFormCheckboxInput>
  			<UICLVConfigShowRssLinkFormCheckboxInput>Hiển thị liên kết RSS</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Tự động phát hiện</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <ContentPath>Nội dung</ContentPath>
+      <Up>Lên</Up>
+      <Down>Xuống</Down>
     </label>
     <action>
       <Save>Lưu</Save>
@@ -88,6 +91,7 @@
   <UICLVConfigTargetPageFormInputSet>
     <title>
       <SelectBasePath>Chọn trang đích</SelectBasePath>
+      <SelectTargetPage>Chọn trang đích</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
 

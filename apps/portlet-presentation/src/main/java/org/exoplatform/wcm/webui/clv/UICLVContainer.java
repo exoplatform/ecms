@@ -113,7 +113,7 @@ public abstract class UICLVContainer extends UIContainer {
     String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-    return new JCRResourceResolver(repository, workspace, "exo:templateFile");
+    return new JCRResourceResolver(repository, workspace);
   }
 
   /**
