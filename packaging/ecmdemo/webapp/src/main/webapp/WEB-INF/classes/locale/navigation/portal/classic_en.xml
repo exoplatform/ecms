@@ -9,6 +9,8 @@
       <newAccount>New Account</newAccount>
       <groupnavigation>Group Navigation</groupnavigation>
       <portalnavigation>Portal Navigation</portalnavigation>
+      <register>Register</register>
+      <printviewer>Print Viewer</printviewer>
     </classic>
   </portal>
 </bundle>
