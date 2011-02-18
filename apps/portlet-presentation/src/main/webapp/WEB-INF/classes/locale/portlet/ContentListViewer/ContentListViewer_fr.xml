@@ -163,7 +163,7 @@
     <title>
       <SelectBasePath>Afficher dans la page</SelectBasePath>
       <SelectTargetPage>Afficher dans la page</SelectTargetPage>
-    <title>
+    </title>
   </UICLVConfigTargetPageFormInputSet>
   <PublicationStates>
     <archived>Archivé</archived>
