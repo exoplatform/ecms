@@ -73,12 +73,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIECMAdminPortlet']//div[@class='TabIcon DefaultItemIcon TypesOfContentIcon']</td>
+	<td>//div[contains(text(),&quot;Content Types&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIECMAdminPortlet']//div[@class='TabIcon DefaultItemIcon TypesOfContentIcon']</td>
+	<td>//div[contains(text(),&quot;Content Types&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,7 +113,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -143,12 +143,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UINodeTypeForm']/div[3]/div[1]/div[1]/div/div/div/div[9]/table/tbody/tr/td/div[1]/div/div/div</td>
+	<td>//form[@id='UINodeTypeForm']//a[text()=&quot;Save&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UINodeTypeForm']/div[3]/div[1]/div[1]/div/div/div/div[9]/table/tbody/tr/td/div[1]/div/div/div</td>
+	<td>//form[@id='UINodeTypeForm']//a[text()=&quot;Save&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -158,12 +158,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[@id=&quot;UIECMAdminPortlet&quot;]//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[@id=&quot;UIECMAdminPortlet&quot;]//a[text()=&quot;OK&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>NodeTypeText</td>
 	<td></td>
 </tr>
 <tr>
@@ -172,8 +177,23 @@
 	<td>TieuHuongDuong</td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form[@id='NodeTypeSearchForm']//a[@title=&quot;Search&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//form[@id='NodeTypeSearchForm']/div[2]/div[1]/div/div/div/div/table/tbody/tr/td[3]/a</td>
+	<td>//form[@id='NodeTypeSearchForm']//a[@title=&quot;Search&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -198,12 +218,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='ListNodeType']/table/tbody/tr[1]/td[6]/a/div</td>
+	<td>//div[@id='ListNodeType']//a[contains(@href,&quot;TieuHuongDuong&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='ListNodeType']/table/tbody/tr[1]/td[6]/a/div</td>
+	<td>//div[@id='ListNodeType']//a[contains(@href,&quot;TieuHuongDuong&quot;)]</td>
 	<td></td>
 </tr>
 <tr>

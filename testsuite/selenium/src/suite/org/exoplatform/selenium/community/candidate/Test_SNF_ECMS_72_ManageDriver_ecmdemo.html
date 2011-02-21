@@ -68,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIECMAdminPortlet']//div[@class='TabIcon DefaultItemIcon ContentPresentationIcon']</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),&quot;Content Presentation&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIECMAdminPortlet']//div[@class='TabIcon DefaultItemIcon ContentPresentationIcon']</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),&quot;Content Presentation&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -333,7 +333,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -343,18 +343,18 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIDriveList']//tr[9]/td[7]/div/img[1]</td>
+	<td>//img[contains(@onclick,&quot;objectId=Test_72&quot;) and @title=&quot;Edit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIDriveList']//tr[9]/td[7]/div/img[1]</td>
+	<td>//img[contains(@onclick,&quot;objectId=Test_72&quot;) and @title=&quot;Edit&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>--&nbsp;&nbsp;Check Show referenced documents</td>
-	<td>nced</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -369,7 +369,7 @@
 <tr>
 	<td>echo</td>
 	<td>--&nbsp;&nbsp;Check Show &quot;non document&quot; nodes</td>
-	<td>nced</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -384,7 +384,7 @@
 <tr>
 	<td>echo</td>
 	<td>--&nbsp;&nbsp;Check Show hidden nodes</td>
-	<td>nced</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -408,7 +408,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -483,7 +483,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -578,47 +578,57 @@
 </tr>
 <tr>
 	<td>echo</td>
+	<td>-- Go to Content Presentation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),&quot;Content Presentation&quot;)]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),&quot;Content Presentation&quot;)]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage Drives</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Manage Drives</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
 	<td>--&nbsp;&nbsp;Delete Drive</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>//img[contains(@onclick,&quot;objectId=Test_72&quot;) and @title=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manage Drives</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Manage Drives</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[9]/td[7]/div/img[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[9]/td[7]/div/img[2]</td>
+	<td>//img[contains(@onclick,&quot;objectId=Test_72&quot;) and @title=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
