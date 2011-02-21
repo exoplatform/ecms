@@ -46,6 +46,10 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
   module.portlet.formgenerator.deployName = "formgenerator";
 
+  module.gadget = {};
+  module.gadget.favorites = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget-favorites", "war", module.version);    
+  module.gadget.favorites.deployName = "favorites";
+
   module.web = {};
   
   module.web.eXoWCMResources = new Project("org.exoplatform.ecms", "exo-ecms-apps-resources-wcm", "war", module.version).

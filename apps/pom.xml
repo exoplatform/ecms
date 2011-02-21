@@ -13,7 +13,8 @@
   <modules>
     <module>portlet-administration</module>
     <module>portlet-explorer</module>
-    <module>gadget-publication</module>        
+    <module>gadget-favorites</module> 
+    <module>gadget-publication</module>       
     <module>resources-dms</module>
     <module>portlet-presentation</module>
     <module>portlet-search</module>
