@@ -308,7 +308,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
                 }
               }
             } catch (Exception e) {
-              LOG.error("Unexpected error occurs", e);
               uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, ApplicationMessage.WARNING));
               event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;
