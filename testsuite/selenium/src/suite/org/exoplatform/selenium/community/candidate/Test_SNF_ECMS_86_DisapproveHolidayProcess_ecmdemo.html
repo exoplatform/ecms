@@ -68,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -92,28 +92,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>end</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>end</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;End (dd/mm/yyyy)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[4]/a</td>
+	<td>//input[@name=&quot;end&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[4]/a</td>
+	<td>//input[@name=&quot;end&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@title=&quot;Next Month&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=16</td>
+	<td>//a[@title=&quot;Next Month&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[text()=&quot;6&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[text()=&quot;6&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -167,18 +177,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Manage</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Manage</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Disapprove</td>
+	<td>//a[contains(text(),&quot;disapprove&quot;) or contains(text(),&quot;Disapprove&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Disapprove</td>
+	<td>//a[contains(text(),&quot;disapprove&quot;) or contains(text(),&quot;Disapprove&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,17 +248,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[2]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>//input[@name=&quot;end&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[2]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>//input[@name=&quot;end&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=29</td>
+	<td>link=20</td>
 	<td></td>
 </tr>
 <tr>
@@ -303,12 +318,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Approve</td>
+	<td>//a[contains(text(),&quot;approve&quot;) or contains(text(),&quot;Approve&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Approve</td>
+	<td>//a[contains(text(),&quot;approve&quot;) or contains(text(),&quot;Approve&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -317,38 +332,63 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Users and groups management</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Users and groups management</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[1]/div/div/div/div/div/div/a[2]/div[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[1]/div/div/div/div/div/div/a[2]/div[2]</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Group Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div/a</td>
+	<td>//div[@id='UIOrganizationPortlet']//div[text()=&quot;Group Management&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div/a</td>
+	<td>//div[@id='UIOrganizationPortlet']//div[text()=&quot;Group Management&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Management</td>
+	<td>//div[@id='UIOrganizationPortlet']//a[@title=&quot;Organization&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Management</td>
+	<td>//div[@id='UIOrganizationPortlet']//a[@title=&quot;Organization&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIOrganizationPortlet']//a[@title=&quot;Management&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIOrganizationPortlet']//a[@title=&quot;Management&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Human Resources</td>
 	<td></td>
 </tr>
 <tr>
@@ -362,17 +402,27 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Search</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIGroupMembershipForm']/div[2]/div/table/tbody/tr[1]/td[2]/a</td>
+	<td>//form[@id='UIGroupMembershipForm']//a[@title=&quot;Select User&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIGroupMembershipForm']/div[2]/div/table/tbody/tr[1]/td[2]/a</td>
+	<td>//form[@id='UIGroupMembershipForm']//a[@title=&quot;Select User&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Select James</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForNotChecked</td>
 	<td>james</td>
 	<td></td>
 </tr>
@@ -383,22 +433,32 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIUserSelector']/div[2]/div[2]/table/tbody/tr/td/a[1]/div/div/div</td>
+	<td>//form[@id='UIUserSelector']//div[contains(text(),&quot;Add&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIUserSelector']/div[2]/div[2]/table/tbody/tr/td/a[1]/div/div/div</td>
+	<td>//form[@id='UIUserSelector']//div[contains(text(),&quot;Add&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//form[@id='UIGroupMembershipForm']/div[2]/div/div/table/tbody/tr/td/div/div/div/div</td>
-	<td></td>
+	<td>waitForSelectedValue</td>
+	<td>membership</td>
+	<td>member</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>membership</td>
+	<td>label=author</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIGroupMembershipForm']/div[2]/div/div/table/tbody/tr/td/div/div/div/div</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
 	<td></td>
 </tr>
 <tr>
@@ -444,6 +504,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Manage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Read</td>
 	<td></td>
 </tr>
 <tr>
@@ -517,33 +582,53 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[1]/div/div/div/div/div/div/a[2]/div[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[1]/div/div/div/div/div/div/a[2]/div[2]</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Group Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div/a</td>
+	<td>//div[@id='UIOrganizationPortlet']//div[text()=&quot;Group Management&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div/a</td>
+	<td>//div[@id='UIOrganizationPortlet']//div[text()=&quot;Group Management&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Organization</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Management</td>
+	<td>//div[@id='UIOrganizationPortlet']//a[@title=&quot;Organization&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Management</td>
+	<td>//div[@id='UIOrganizationPortlet']//a[@title=&quot;Organization&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIOrganizationPortlet']//a[@title=&quot;Management&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIOrganizationPortlet']//a[@title=&quot;Management&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Human Resources</td>
 	<td></td>
 </tr>
 <tr>
@@ -557,8 +642,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//img[contains(@onclick,&quot;Are you sure you want to delete user james&quot;)]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//img[@alt='DeleteUser']</td>
+	<td>//img[contains(@onclick,&quot;Are you sure you want to delete user james&quot;)]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//img[contains(@onclick,&quot;Are you sure you want to delete user james&quot;)]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//img[contains(@onclick,&quot;Are you sure you want to delete user james&quot;)]</td>
 	<td></td>
 </tr>
 <tr>

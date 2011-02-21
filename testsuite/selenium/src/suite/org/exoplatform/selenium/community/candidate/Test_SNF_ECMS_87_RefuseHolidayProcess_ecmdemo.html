@@ -53,7 +53,12 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Create new holiday request</td>
+	<td>-- Open form to create request</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>link=Business Process Controller</td>
 	<td></td>
 </tr>
 <tr>
@@ -62,13 +67,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;BP Definition Controller</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Holiday process</td>
 	<td></td>
 </tr>
 <tr>
@@ -82,33 +97,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[2]/td[@class='FieldComponent']/input[@type='text']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[2]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;End (dd/mm/yyyy)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[4]/a</td>
+	<td>//input[@name=&quot;end&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[4]/a</td>
+	<td>//input[@name=&quot;end&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[5]/td[1]/a</td>
+	<td>//a[@title=&quot;Next Month&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[5]/td[1]/a</td>
+	<td>//a[@title=&quot;Next Month&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[text()=&quot;6&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[text()=&quot;6&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -172,23 +192,33 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Manage</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Refuse</td>
+	<td>//a[contains(text(),&quot;refuse&quot;) or contains(text(),&quot;Refuse&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Refuse</td>
+	<td>//a[contains(text(),&quot;refuse&quot;) or contains(text(),&quot;Refuse&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>-- Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>
