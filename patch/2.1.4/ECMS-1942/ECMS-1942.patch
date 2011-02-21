@@ -1,0 +1,676 @@
+Index: core/services/src/test/java/org/exoplatform/services/portletcache/TestFragmentCacheService.java
+===================================================================
+--- core/services/src/test/java/org/exoplatform/services/portletcache/TestFragmentCacheService.java	(revision 0)
++++ core/services/src/test/java/org/exoplatform/services/portletcache/TestFragmentCacheService.java	(revision 66127)
+@@ -0,0 +1,75 @@
++/*
++ * Copyright (C) 2003-2011 eXo Platform SAS.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Affero General Public License
++ * as published by the Free Software Foundation; either version 3
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see<http://www.gnu.org/licenses/>.
++ */
++
++package org.exoplatform.services.portletcache;
++
++import org.exoplatform.container.xml.InitParams;
++import org.exoplatform.services.log.ExoLogger;
++import org.exoplatform.services.log.Log;
++import org.exoplatform.test.BasicTestCase;
++
++public class TestFragmentCacheService extends BasicTestCase
++{
++    private static final Log log = ExoLogger.getLogger(TestFragmentCacheService.class);
++
++    /*
++     * (non-Javadoc)
++     *
++     * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
++     */
++    public void setUp() throws Exception {
++        super.setUp();
++
++    }
++
++    /**
++     * Test Cache when cleaned
++     *
++     * @throws Exception
++     *             the exception
++     */
++    public void testInvalidArgumentException() throws Exception {
++
++        InitParams params = new InitParams();
++        FragmentCacheService service = new FragmentCacheService(params);
++
++        try {
++            service.setCacheSize(1000);
++       } catch (IllegalArgumentException e) {
++           fail("Shouldn't raise an IllegalArgumentException");
++       }
++
++        try {
++            service.setCacheSize(0);
++            fail("Should raise an IllegalArgumentException");
++       } catch (IllegalArgumentException e) {
++       }
++
++
++
++    }
++
++    /*
++     * (non-Javadoc)
++     *
++     * @see junit.framework.TestCase#tearDown()
++     */
++    public void tearDown() throws Exception {
++        super.tearDown();
++    }
++
++}
+Index: core/services/src/test/java/org/exoplatform/services/portletcache/TestPortletFutureCache.java
+===================================================================
+--- core/services/src/test/java/org/exoplatform/services/portletcache/TestPortletFutureCache.java	(revision 0)
++++ core/services/src/test/java/org/exoplatform/services/portletcache/TestPortletFutureCache.java	(revision 66127)
+@@ -0,0 +1,269 @@
++/*
++ * Copyright (C) 2003-2011 eXo Platform SAS.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Affero General Public License
++ * as published by the Free Software Foundation; either version 3
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see<http://www.gnu.org/licenses/>.
++ */
++
++package org.exoplatform.services.portletcache;
++
++import java.util.HashMap;
++import java.util.Locale;
++
++import javax.portlet.PortletMode;
++import javax.portlet.WindowState;
++
++import org.exoplatform.services.log.ExoLogger;
++import org.exoplatform.services.log.Log;
++import org.exoplatform.test.BasicTestCase;
++
++/**
++ * Created by The eXo Platform SAS Author : eXoPlatform
++ * henri.gomez@exoplatform.com Jan 19, 2011
++ */
++public class TestPortletFutureCache extends BasicTestCase {
++
++    private static final Log log = ExoLogger.getLogger(TestPortletFutureCache.class);
++
++    /** The Portlet Future Cache */
++    private PortletFutureCache portletFutureCache;
++
++    private WindowKey windowKey1;
++    private MarkupFragment fragment1;
++
++    private WindowKey windowKey2;
++    private MarkupFragment fragment2;
++
++    private WindowKey windowKey3;
++    private MarkupFragment fragment3;
++
++    /*
++     * (non-Javadoc)
++     *
++     * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
++     */
++    public void setUp() throws Exception {
++        super.setUp();
++
++    }
++
++    private void injectContents(long  content1Duration, long content2Duration, long content3Duration) {
++        windowKey1 = new WindowKey("wid1", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
++        fragment1 = new MarkupFragment(System.currentTimeMillis() +  content1Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
++
++        portletFutureCache.put(windowKey1, fragment1);
++
++        if (content2Duration != -1) {
++            windowKey2 = new WindowKey("wid2", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
++            fragment2 = new MarkupFragment(System.currentTimeMillis() + content2Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
++
++            portletFutureCache.put(windowKey2, fragment2);
++        }
++
++        if (content3Duration != -1) {
++            windowKey3 = new WindowKey("wid3", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
++            fragment3 = new MarkupFragment(System.currentTimeMillis() + content3Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
++
++            portletFutureCache.put(windowKey3, fragment3);
++        }
++
++
++    }
++
++    /**
++     * Test Cache with size limits
++     *
++     * @throws Exception
++     *             the exception
++     */
++    public void testCacheFixedSize() throws Exception {
++
++        MarkupFragment nfragment;
++
++        portletFutureCache = new PortletFutureCache(log, 1, 2);
++        portletFutureCache.start();
++
++        // 900ms, 1100ms, 2100ms retentions for objects
++        injectContents(900, 1100, 2100);
++
++        // CacheSize should be 2
++        assertEquals(2, portletFutureCache.getCacheSize());
++
++        // Should get back fragment1
++        nfragment = portletFutureCache.get(windowKey1);
++        assertSame(fragment1, nfragment);
++
++        // Should get back fragment2
++        nfragment = portletFutureCache.get(windowKey2);
++        assertSame(fragment2, nfragment);
++
++        // Should get back fragment3
++        nfragment = portletFutureCache.get(windowKey3);
++        assertNull(nfragment);
++
++        portletFutureCache.stop();
++    }
++
++    /**
++     * Test Cache when cleaned
++     *
++     * @throws Exception
++     *             the exception
++     */
++    public void testCacheCleared() throws Exception {
++
++        MarkupFragment nfragment;
++
++        portletFutureCache = new PortletFutureCache(log, 1);
++        portletFutureCache.start();
++
++        // 900ms, 1100ms, 2100ms retentions for objects
++        injectContents(900, 1100, 2100);
++
++        // CacheSize should be 3
++        assertEquals(3, portletFutureCache.getCacheSize());
++
++        // Should get back fragment1
++        nfragment = portletFutureCache.get(windowKey1);
++        assertSame(fragment1, nfragment);
++
++        // Should get back fragment2
++        nfragment = portletFutureCache.get(windowKey2);
++        assertSame(fragment2, nfragment);
++
++        // Should get back fragment3
++        nfragment = portletFutureCache.get(windowKey3);
++        assertSame(fragment3, nfragment);
++
++        portletFutureCache.clearCache();
++
++        // CacheSize should be 0
++        assertEquals(0, portletFutureCache.getCacheSize());
++
++        // Should not get back  fragment1
++        nfragment = portletFutureCache.get(windowKey1);
++        assertNull( nfragment);
++
++        // Should not get back  fragment2
++        nfragment = portletFutureCache.get(windowKey2);
++        assertNull(nfragment);
++
++        // Should not get back  fragment3
++        nfragment = portletFutureCache.get(windowKey3);
++        assertNull(nfragment);
++
++        portletFutureCache.stop();
++    }
++
++    /**
++     * Test Cache Evictions during time
++     *
++     * @throws Exception
++     *             the exception
++     */
++    public void testCacheEvictions() throws Exception {
++
++        MarkupFragment nfragment;
++        int cacheSize;
++
++        portletFutureCache = new PortletFutureCache(log, 1);
++        portletFutureCache.start();
++
++        // 750ms, 1250ms, 2500ms retentions for objects
++        injectContents(750, 1250, 2500);
++
++        // CacheSize should be 3
++        assertEquals(3, portletFutureCache.getCacheSize());
++
++        // Should get back fragment1
++        nfragment = portletFutureCache.get(windowKey1);
++        assertSame(fragment1, nfragment);
++
++        // Should get back fragment2
++        nfragment = portletFutureCache.get(windowKey2);
++        assertSame(fragment2, nfragment);
++
++        // Should get back fragment3
++        nfragment = portletFutureCache.get(windowKey3);
++        assertSame(fragment3, nfragment);
++
++        // CacheSize should be 3
++        assertEquals(3, portletFutureCache.getCacheSize());
++
++        Thread.sleep(1050); // Sleep 1050ms -> time for first cleanup pass
++
++        // CacheSize should be 2 (2100 + 1100)
++        cacheSize = portletFutureCache.getCacheSize();
++        System.out.println("After first eviction pass, cacheSize=" + cacheSize);
++        assertEquals(2, cacheSize);
++
++        // fragment1 shouldn't exist anymore
++        nfragment = portletFutureCache.get(windowKey1);
++        assertNull( nfragment);
++
++        // Should get back fragment2
++        nfragment = portletFutureCache.get(windowKey2);
++        assertSame(fragment2, nfragment);
++
++        // Should get back fragment3
++        nfragment = portletFutureCache.get(windowKey3);
++        assertSame(fragment3, nfragment);
++
++        // CacheSize should be 2 (2100 + 1100)
++        cacheSize = portletFutureCache.getCacheSize();
++        System.out.println("After first eviction pass and gets, cacheSize=" + cacheSize);
++        assertEquals(2, cacheSize);
++
++        Thread.sleep(1050); // Sleep 1050ms -> time for second  cleanup pass
++
++        // CacheSize should be 1 (2100)
++        cacheSize = portletFutureCache.getCacheSize();
++        System.out.println("After second eviction pass, cacheSize=" + cacheSize);
++        assertEquals(1, cacheSize);
++
++        // fragment1 shouldn't exist anymore
++        nfragment = portletFutureCache.get(windowKey1);
++        assertNull( nfragment);
++
++        // fragment2 shouldn't exist anymore
++        nfragment = portletFutureCache.get(windowKey2);
++        assertNull(nfragment);
++
++        // Should get back fragment3
++        nfragment = portletFutureCache.get(windowKey3);
++        assertSame(fragment3, nfragment);
++
++        // CacheSize should be 1 (2100)
++        cacheSize = portletFutureCache.getCacheSize();
++        System.out.println("After second eviction pass and gets, cacheSize=" + cacheSize);
++        assertEquals(1, cacheSize);
++
++        Thread.sleep(1050); // Sleep 1050ms -> time for third  cleanup pass
++
++        // CacheSize should be 0, no more entries in cache
++        cacheSize = portletFutureCache.getCacheSize();
++        System.out.println("After third eviction pass, cacheSize=" + cacheSize);
++        assertEquals(0, cacheSize);
++
++        portletFutureCache.stop();
++    }
++
++    /*
++     * (non-Javadoc)
++     *
++     * @see junit.framework.TestCase#tearDown()
++     */
++    public void tearDown() throws Exception {
++        super.tearDown();
++    }
++}
+Index: core/services/src/main/java/org/exoplatform/services/portletcache/FragmentCacheService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/portletcache/FragmentCacheService.java	(revision 65723)
++++ core/services/src/main/java/org/exoplatform/services/portletcache/FragmentCacheService.java	(working copy)
+@@ -20,6 +20,11 @@
+ package org.exoplatform.services.portletcache;
+ 
+ import org.exoplatform.container.xml.InitParams;
++import org.exoplatform.management.annotations.Managed;
++import org.exoplatform.management.annotations.ManagedDescription;
++import org.exoplatform.management.jmx.annotations.NameTemplate;
++import org.exoplatform.management.jmx.annotations.Property;
++import org.exoplatform.management.rest.annotations.RESTEndpoint;
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
+ import org.picocontainer.Startable;
+@@ -28,9 +33,19 @@
+  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
+  * @version $Revision$
+  */
++
++@Managed
++@NameTemplate({@Property(key = "view", value = "portal"), @Property(key = "service", value = "fragmentcache"),
++   @Property(key = "type", value = "content")})
++@ManagedDescription("FragmentCache Service")
++@RESTEndpoint(path = "fragmentcacheservice")
+ public class FragmentCacheService implements Startable
+ {
+ 
++    private static final int	DEFAULT_CACHE_SIZE = 10000;	// default to 10000 entries in FutureCache
++
++    private static final int	DEFAULT_CACHE_CLEANUP = 15;	// default 15s interval for cleanup thread
++
+    /** . */
+    private static final Log log = ExoLogger.getLogger(FragmentCacheService.class);
+ 
+@@ -39,7 +54,9 @@
+ 
+    public FragmentCacheService(InitParams params)
+    {
+-      int cleanupCache = -1;
++      int cleanupCache = DEFAULT_CACHE_CLEANUP;
++      int cacheSize = DEFAULT_CACHE_SIZE;
++
+       if (params.getValueParam("cleanup-cache") != null)
+       {
+          String cleanupCacheConfig = params.getValueParam("cleanup-cache").getValue();
+@@ -53,15 +70,60 @@
+          }
+       }
+ 
+-      //
+-      this.cache = new PortletFutureCache(log, cleanupCache);
++      if (params.getValueParam("cache-size") != null)
++      {
++         String cacheSizeConfig = params.getValueParam("cache-size").getValue();
++         try
++         {
++             cacheSize = Integer.parseInt(cacheSizeConfig);
++         }
++         catch (NumberFormatException e)
++         {
++            log.warn("Invalid cache-size setting " + cacheSizeConfig);
++         }
++      }
++
++      this.cache = new PortletFutureCache(log, cleanupCache, cacheSize);
++
+    }
+ 
++   @Managed
++   @ManagedDescription("What is the Cleanup Cache period (in seconds) ?")
+    public int getCleanupCache()
+    {
+       return cache.getCleanupCache();
+    }
+ 
++   @Managed
++   @ManagedDescription("How many Entries in Cache  ?")
++   public int getCacheSize()
++   {
++      return cache.getCacheSize();
++   }
++
++   @Managed
++   @ManagedDescription("Get Maximum Entries in Cache")
++   public int getCacheMaxSize()
++   {
++      return cache.getCacheMaxSize();
++   }
++
++   @Managed
++   @ManagedDescription("Set Maximum Entries in Cache")
++   /***
++     * Set Max Cache size, ie, max entries allowed in FutureCache.
++     * An IllegalArgumentException is thrown if cacheMaxSize is less than 1.
++    */
++   public void setCacheSize(int cacheMaxSize)
++   {
++       if (cacheMaxSize < 1)
++           throw new IllegalArgumentException("invalid value for max cache size");
++
++      cache.setCacheMaxSize(cacheMaxSize);
++   }
++
++    @Managed
++    @ManagedDescription("Sets Cleanup Cache period (in seconds)")
+    public void setCleanupCache(int cleanupCache)
+    {
+       this.cache.updateCleanupCache(cleanupCache);
+@@ -76,4 +138,11 @@
+    {
+       cache.stop();
+    }
++
++   @Managed
++   @ManagedDescription("Clear the Fragment Cache")
++   public void clearCache()
++   {
++       cache.clearCache();
++   }
+ }
+Index: core/services/src/main/java/org/exoplatform/services/portletcache/PortletFutureCache.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/portletcache/PortletFutureCache.java	(revision 65723)
++++ core/services/src/main/java/org/exoplatform/services/portletcache/PortletFutureCache.java	(working copy)
+@@ -19,10 +19,6 @@
+ 
+ package org.exoplatform.services.portletcache;
+ 
+-import org.exoplatform.commons.cache.future.FutureCache;
+-import org.exoplatform.services.log.Log;
+-import org.picocontainer.Startable;
+-
+ import java.util.Iterator;
+ import java.util.Map;
+ import java.util.concurrent.ConcurrentHashMap;
+@@ -31,6 +27,9 @@
+ import java.util.concurrent.ScheduledFuture;
+ import java.util.concurrent.TimeUnit;
+ 
++import org.exoplatform.commons.cache.future.FutureCache;
++import org.exoplatform.services.log.Log;
++
+ /**
+  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
+  * @version $Revision$
+@@ -38,7 +37,10 @@
+ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletRenderContext>
+ {
+ 
+-   /** . */
++   private static final int	DEFAULT_CACHE_SIZE = 5000;	// default to 5000 entries
++
++
++    /** . */
+    private final ConcurrentHashMap<WindowKey, MarkupFragment> entries;
+ 
+    /** . */
+@@ -51,6 +53,9 @@
+    private int cleanupCache;
+ 
+    /** . */
++   private int cacheMaxSize = DEFAULT_CACHE_SIZE;
++
++   /** . */
+    private ScheduledFuture<?> scheduled;
+ 
+    PortletFutureCache(Log log, int cleanupCache)
+@@ -64,6 +69,12 @@
+       this.scheduled = null;
+    }
+ 
++   PortletFutureCache(Log log, int cleanupCache, int cacheSize)
++   {
++      this(log, cleanupCache);
++      this.cacheMaxSize = cacheSize;
++   }
++
+    private static int preventWrongCleanupCacheValue(int value)
+    {
+       // 10 mns by default
+@@ -87,26 +98,72 @@
+       }
+    }
+ 
++   /*
++    * Returns the number of entries in this cache.
++    */
++   protected int getCacheSize()
++   {
++       return (entries.size());
++   }
++
++   /*
++    * Returns the defined Max Cache Size.
++    */
++   protected int getCacheMaxSize()
++   {
++       return (cacheMaxSize);
++   }
++
++   /*
++    * Returns the defined Max Cache Size.
++    */
++   protected void setCacheMaxSize(int cacheMaxSize)
++   {
++       this.cacheMaxSize = cacheMaxSize;
++   }
++
++   /*
++    * Clear Cache (should be called by JMX in urgently mode.
++    */
++   protected void clearCache()
++   {
++          if (scheduled != null)
++          {
++             stop();
++             entries.clear();
++             start();
++          }
++          else
++              entries.clear();
++   }
++
++   /*
++    * Did Cache contains the following key (do not remove old values).
++    */
++   protected boolean containsKey(WindowKey key)
++   {
++          return (entries.containsKey(key));
++   }
++
++
+    @Override
+    protected MarkupFragment get(WindowKey key)
+    {
++      // System.out.println("get asked for key " + key);
++
+       MarkupFragment value = entries.get(key);
+       if (value != null)
+       {
+          if (value.expirationTimeMillis > System.currentTimeMillis())
+          {
+-/*
+             if (log.isTraceEnabled())
+-            {
+                log.trace("Using cached markup for portlet " + key);
+-            }
+-*/
+-            //System.out.println("Using cached markup for portlet " + key);
+             return value;
+          }
+          else
+          {
+-            //System.out.println("Expired markup for portlet " + key);
++             if (log.isTraceEnabled())
++               log.trace("Expired markup for portlet " + key);
+             entries.remove(key);
+             return null;
+          }
+@@ -120,17 +177,22 @@
+    @Override
+    protected void put(WindowKey key, MarkupFragment value)
+    {
+-      if (value.expirationTimeMillis > System.currentTimeMillis())
+-      {
+-         entries.put(key, value);
+-         //System.out.println("Cached markup for portlet " + key);
+-/*
+-         if (log.isTraceEnabled())
+-         {
+-            log.trace("Cached markup for portlet " + key);
+-         }
+-*/
+-      }
++       boolean canInsert = false;
++
++       // System.out.println("put asked for key " + key + " duration " + (value.expirationTimeMillis - System.currentTimeMillis()));
++
++        if (value.expirationTimeMillis > System.currentTimeMillis()) {
++                if ((entries.size() < cacheMaxSize))
++                    canInsert = true;
++
++                if (canInsert) {
++                    entries.put(key, value);
++                    if (log.isTraceEnabled())
++                        log.trace("Cached markup for portlet " + key);
++
++                // System.out.println("Cached markup for portlet " + key);
++            }
++        }
+    }
+ 
+    public void start()
+@@ -138,7 +200,7 @@
+       if (scheduled == null)
+       {
+          log.debug("Starting cache cleaner with a period of " + cleanupCache + " seconds");
+-         scheduler.scheduleWithFixedDelay(new Runnable()
++         scheduled = scheduler.scheduleWithFixedDelay(new Runnable()
+          {
+             public void run()
+             {
+@@ -146,10 +208,14 @@
+                for (Iterator<Map.Entry<WindowKey, MarkupFragment>> i = entries.entrySet().iterator(); i.hasNext();)
+                {
+                   Map.Entry<WindowKey, MarkupFragment> entry = i.next();
+-                  if (entry.getValue().expirationTimeMillis > now)
++                  if (entry.getValue().expirationTimeMillis < now)
+                   {
+-                     log.trace("Removing expired entry " + entry.getKey().getWindowId());
+-                     i.remove();
++                          if (log.isTraceEnabled())
++                                  log.trace("Removing expired entry " + entry.getKey().getWindowId());
++
++                          // System.out.println("Removing expired entry " + entry.getKey().getWindowId());
++
++                          i.remove();
+                   }
+                }
+             }
