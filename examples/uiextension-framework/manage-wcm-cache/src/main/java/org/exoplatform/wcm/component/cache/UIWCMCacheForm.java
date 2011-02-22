@@ -20,7 +20,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
 @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl", events = {
 		@EventConfig(listeners = UIWCMCacheForm.SaveActionListener.class),
 		@EventConfig(listeners = UIWCMCacheForm.ClearActionListener.class),
-		@EventConfig(listeners = UIWCMCacheForm.CancelActionListener.class) })
+		@EventConfig(listeners = UIWCMCacheForm.RefreshActionListener.class) })
 public class UIWCMCacheForm extends UIForm {
 
 	final static public String FIELD_LABEL_CURRENTSIZE = "currentSize";
@@ -39,6 +39,7 @@ public class UIWCMCacheForm extends UIForm {
 	public UIWCMCacheForm() throws Exception {
 		cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.composer");		
 		composer = WCMCoreUtils.getService(WCMComposer.class);		
+		
 		int hit = cache.getCacheHit();
 		long currentSize = cache.getCacheSize();
 		int missHit = cache.getCacheHit();
@@ -58,15 +59,15 @@ public class UIWCMCacheForm extends UIForm {
 				String.valueOf(livetime)));
 		addUIFormInput(new UIFormCheckBoxInput<Boolean>(CHECKBOX_ENABLE_CACHE,
 				CHECKBOX_ENABLE_CACHE, composer.isCached()));
-		setActions(new String[] { "Clear", "Save", "Cancel" });
+		setActions(new String[] { "Clear", "Save", "Refresh" });
 		update();
 	}
 	
 	public void update() throws Exception {
 		getUIStringInput(FIELD_LIVE_TIME).setValue(String.valueOf(cache.getLiveTime()));
 		getUIStringInput(FIELD_MAX_SIZE).setValue(String.valueOf(cache.getMaxSize()));
-		getUIStringInput(FIELD_LABEL_MISS).setValue(String.valueOf(cache.getCacheHit()));
-		getUIStringInput(FIELD_LABEL_HIT).setValue(String.valueOf(cache.getCacheMiss()));
+		getUIStringInput(FIELD_LABEL_MISS).setValue(String.valueOf(cache.getCacheMiss()));
+		getUIStringInput(FIELD_LABEL_HIT).setValue(String.valueOf(cache.getCacheHit()));
 		getUIStringInput(FIELD_LABEL_CURRENTSIZE).setValue(String.valueOf(cache.getCacheSize()));					
 		getUIFormCheckBoxInput(CHECKBOX_ENABLE_CACHE).setChecked(composer.isCached());
 		
@@ -79,9 +80,15 @@ public class UIWCMCacheForm extends UIForm {
 					UIWCMCachePanel.class);
 			String livetime = uiCacheForm.getUIStringInput(FIELD_LIVE_TIME)
 					.getValue();
-			String maxsize = uiCacheForm.getUIStringInput(FIELD_MAX_SIZE).getValue();											
-			uiCacheForm.cache.setLiveTime(Long.parseLong(livetime));
-			uiCacheForm.cache.setMaxSize(Integer.parseInt(maxsize));
+			Boolean isChecked = uiCacheForm.getUIFormCheckBoxInput(CHECKBOX_ENABLE_CACHE).isChecked();
+			if (isChecked){
+			  String maxsize = uiCacheForm.getUIStringInput(FIELD_MAX_SIZE).getValue();                     
+	      uiCacheForm.cache.setLiveTime(Long.parseLong(livetime));
+	      uiCacheForm.cache.setMaxSize(Integer.parseInt(maxsize));
+	      uiCacheForm.update();
+			}else {
+			  throw new Exception("cache enable is not set");
+			}
 			event.getRequestContext().addUIComponentToUpdateByAjax(cachePanel);
 		}
 	}
@@ -95,11 +102,12 @@ public class UIWCMCacheForm extends UIForm {
 		}
 	}
 
-	public static class CancelActionListener extends EventListener<UIWCMCacheForm> {
+	public static class RefreshActionListener extends EventListener<UIWCMCacheForm> {
 		public void execute(Event<UIWCMCacheForm> event) throws Exception {
 			UIWCMCacheForm uiForm = event.getSource();
 			UIWCMCachePanel wcmCachePanel = uiForm
 					.getAncestorOfType(UIWCMCachePanel.class);
+			uiForm.update();
 			event.getRequestContext().addUIComponentToUpdateByAjax(wcmCachePanel);
 		}
 	}

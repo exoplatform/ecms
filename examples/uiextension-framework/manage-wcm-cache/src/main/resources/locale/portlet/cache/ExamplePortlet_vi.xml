@@ -8,7 +8,7 @@
   
  <UIWCMCacheForm> 	 
  	 <action>
- 	 		<Cancel>Hủy</Cancel>
+ 	 		<Refresh>Refresh</Refresh>
  	 		<Save>Lưu</Save>
 					<Clear>Xóa bộ đệm</Clear> 	 		
  	 </action> 	 
@@ -16,10 +16,10 @@
 				 
 				 <maxsize>Kích cỡ tối đa :</maxsize>
 					<livetime>Thời gian lưu bộ đệm theo giây :</livetime>
-					<isCacheEnable>Cho phép lưu bộ đệm(should always be on production enviroment)</isCacheEnable>
+					<isCacheEnable>Cho phép lưu bộ đệm(nên để ở môi trường production)</isCacheEnable>
 					<hit>Số lần truy cập :</hit>				
-					<currentSize>Kích cỡ hiện thời</currentSize>
-					<miss>Miss count :</miss>
+					<currentSize>Kích cỡ hiện thời :</currentSize>
+					<miss>số lần truy cập thất bại :</miss>
 			</label>
  </UIWCMCacheForm>
 	
@@ -31,18 +31,18 @@
 	
 	<UIWCMCacheManagerForm> 	 
  	 <action>
- 	 		<Cancel>Hủy </Cancel>
+ 	 		<Refresh>Refresh </Refresh>
  	 		<Save>Lưu</Save>
 					<Clear>Xóa bộ đệm</Clear> 	 		
  	 </action> 	 
 			<label>
-				 <cacheModify>Cache to modify :</cacheModify>
+				 <cacheModify>chọn cache để thay đổi :</cacheModify>
 				 <maxsize>Kích cỡ tối đa :</maxsize>
 					<livetime>Thời gian lưu bộ đệm theo giây :</livetime>
-					<isCacheEnable>Cho phép lưu bộ đệm(should always be on production enviroment)</isCacheEnable>
+					<isCacheEnable>Cho phép lưu bộ đệm(nên để ở môi trường production)</isCacheEnable>
 					<hit>Số lần truy cập :</hit>				
-					<currentSize>Kích cỡ hiện thời</currentSize>
-					<miss>Miss count :</miss>					
+					<currentSize>Kích cỡ hiện thời :</currentSize>
+					<miss>số lần truy cập thất bại :</miss>					
 							 				 			
 			</label>
  </UIWCMCacheManagerForm>

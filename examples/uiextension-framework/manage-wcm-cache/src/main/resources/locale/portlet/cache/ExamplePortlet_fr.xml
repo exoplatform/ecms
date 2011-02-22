@@ -5,38 +5,38 @@
   #             org.exoplatform.wcm.webui.component.UIWCMCacheForm #
   ################################################################################
   -->
-  
+  <!-- Credited to Google Translate -->
  <UIWCMCacheForm> 	 
  	 <action>
- 	 		<Cancel>Cancel</Cancel>
- 	 		<Save>Save</Save>
-					<Clear>Clear the cache</Clear> 	 		
+ 	 		<Refresh>Actualiser</Refresh>
+ 	 		<Save>Enregistrer</Save>
+					<Clear>Vider le cache</Clear> 	 		
  	 </action> 	 
 			<label>
 				 
-				 <maxsize>Max size :</maxsize>
-					<livetime>Live time in sec :</livetime>
-					<isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
-					<hit>Hit count :</hit>				
-					<currentSize>Current size</currentSize>
-					<miss>Miss count :</miss>
+				 <maxsize>La taille maximale:</maxsize>
+					<livetime>Live dans le temps sec :</livetime>
+					<isCacheEnable>Cache activé (il faut toujours être sur l'environnement de production)</isCacheEnable>
+					<hit>Hit compte :</hit>				
+					<currentSize>La taille actuelle :</currentSize>
+					<miss>Miss compter :</miss>
 			</label>
  </UIWCMCacheForm>
 	
 	<UIWCMCacheManagerForm> 	 
- 	 <action>
- 	 		<Cancel>Cancel</Cancel>
- 	 		<Save>Save</Save>
-					<Clear>Clear the cache</Clear> 	 		
+ 	  <action>
+ 	 		<Refresh>Actualiser</Refresh>
+ 	 		<Save>Enregistrer</Save>
+					<Clear>Vider le cache</Clear> 	 		
  	 </action> 	 
 			<label>
-				 <cacheModify>Cache to modify :</cacheModify>
-				 <maxsize>Max size :</maxsize>
-					<livetime>Live time in sec :</livetime>
-					<isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
-					<hit>Hit count :</hit>				
-					<currentSize>Current size</currentSize>
-					<miss>Miss count :</miss>
+				 <cacheModify> Cache à modifier: </cacheModify>
+				 <maxsize>La taille maximale:</maxsize>
+					<livetime>Live dans le temps sec :</livetime>
+					<isCacheEnable>Cache activé (il faut toujours être sur l'environnement de production) :</isCacheEnable>
+					<hit>Hit compte :</hit>				
+					<currentSize>La taille actuelle :</currentSize>
+					<miss>Miss compter :</miss>
 			</label>
  </UIWCMCacheManagerForm>
 	
@@ -49,7 +49,7 @@
     <label>      						
       <CacheView>WCM Cache</CacheView>
       <UIWCMCachePanel>WCM Cache Administration</UIWCMCachePanel>
-						<UIWCMCacheManager>Managing Caches</UIWCMCacheManager>
+						<UIWCMCacheManager>Gestion des Caches</UIWCMCacheManager>
 						<UIWCMCacheManagerPanel>WCM Cache Management</UIWCMCacheManagerPanel>
     </label>        
   </UIECMAdminControlPanel>	
