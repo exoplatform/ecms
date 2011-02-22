@@ -56,6 +56,7 @@ import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -154,6 +155,19 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       node.removeMixin(nodeType.getName());
     }
   }
+  
+  private void removeAuditForNode(Node node) throws Exception {
+  	UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+  	ManageableRepository repository = uiExplorer.getRepository();
+  	SessionProvider sessionProvider = uiExplorer.getSystemProvider();
+  	Session session = null;
+		session = sessionProvider.getSession(node.getSession().getWorkspace().getName(), repository);
+		if (session.getRootNode().hasNode("exo:audit") && 
+				session.getRootNode().getNode("exo:audit").hasNode(node.getUUID())) {
+			session.getRootNode().getNode("exo:audit").getNode(node.getUUID()).remove();
+			session.save();
+		}
+  }
 
   private void processRemoveOrMoveToTrash(String nodePath, Node node, Event<?> event, boolean isMultiSelect, boolean checkToMoveToTrash)
   throws Exception {
@@ -204,7 +218,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     		node.unlock();
     	}
     	
-    	if (node.getReferences().getSize() > 0 ) {
+    	if ((node.getReferences().getSize() > 0) && !node.isNodeType(Utils.EXO_AUDITABLE)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-referentialIntegrityException", 
             null,ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -316,6 +330,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       																								 node.getSession().getUserID(),
 																											 getGroups());
       //trashService.removeRelations(node, uiExplorer.getSystemProvider(), uiExplorer.getRepositoryName());
+      if (PermissionUtil.canRemoveNode(node) && node.isNodeType(Utils.EXO_AUDITABLE)) {
+      	removeAuditForNode(node);
+      }
       node.remove();
       parentNode.save();
     } catch (VersionException ve) {
