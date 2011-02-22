@@ -403,6 +403,16 @@
         <value>content-id</value>
         <read-only>false</read-only>
       </preference>
+	  <preference>
+	    <name>PrintParameterName</name>
+		<value>content-id</value>
+		<read-only>false</read-only>
+	  </preference>
+	  <preference>
+	    <name>PrintPage</name>
+		<value>printviewer</value>
+		<read-only>false</read-only>
+	  </preference>
     </portlet-preferences>
 	</portlet>
 	
