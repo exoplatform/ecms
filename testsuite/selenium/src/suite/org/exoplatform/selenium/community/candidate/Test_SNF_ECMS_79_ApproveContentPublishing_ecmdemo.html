@@ -77,13 +77,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;collaboration Drives</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Workflow</td>
+	<td>link=collaboration</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Workflow</td>
+	<td>link=collaboration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Validation Requests</td>
 	<td></td>
 </tr>
 <tr>
@@ -276,25 +301,24 @@
 	<td>//input[@name='endDate']</td>
 	<td></td>
 </tr>
-<!--days :(-->
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
+	<td>//a[@title=&quot;Next Month&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
+	<td>//a[@title=&quot;Next Month&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[5]/td[1]/a</td>
+	<td>link=6</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[5]/td[1]/a</td>
+	<td>link=6</td>
 	<td></td>
 </tr>
 <tr>
@@ -304,12 +328,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UITask']/div[3]/div/div[1]/div/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//form[@id='UITask']//a[contains(text(),&quot;Approve&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UITask']/div[3]/div/div[1]/div/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//form[@id='UITask']//a[contains(text(),&quot;Approve&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -328,23 +352,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;collaboration Drives</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Workflow</td>
+	<td>link=collaboration</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Workflow</td>
+	<td>link=collaboration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Documents</td>
 	<td></td>
 </tr>
 <tr>
@@ -358,33 +392,48 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[2]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[2]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Year</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[2]/div/div[2]/div/div/div/div[2]/a</td>
+	<td>//div[1]/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[2]/div/div[2]/div/div/div/div[2]/a</td>
+	<td>//div[1]/div[2]/div/div/div/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Year</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
+	<td>//div[1]/div[2]/div/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
+	<td>//div[1]/div[2]/div/div[2]/div/div/div/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Form-To</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[1]/div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[1]/div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -404,87 +453,42 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Delete drive</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/private/acme/wcmAdmin']</td>
+	<td>--&nbsp;&nbsp;Delete Data</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>link=2011</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manage Drives</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Manage Drives</td>
+	<td>mouseDownRight</td>
+	<td>link=2011</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=3</td>
+	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=3</td>
+	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[7]/div/img[2]</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[7]/div/img[2]</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Do you really want to delete ?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@title='Show Drives']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@title='Show Drives']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>link=Workflow</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyElementNotPresent</td>
-	<td>link=Workflow</td>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Sign Out</td>
 	<td></td>
 </tr>
 <tr>
