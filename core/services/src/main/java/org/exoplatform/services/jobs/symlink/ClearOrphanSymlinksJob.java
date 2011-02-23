@@ -104,15 +104,14 @@ public class ClearOrphanSymlinksJob implements Job {
           }
         } catch (RepositoryException e) {
           log.error("ClearOrphanSymlinksJob: Error when deleting orphan symlinks in workspace: " + workspace, e);
+        } finally {
+          if (session != null && session.isLive())
+            session.logout();
         }
       }
     } catch (Exception e) {
       log.error("Error occurs in ClearOrphanSymlinksJob", e);
-    } finally {
-      if (session != null && session.isLive())
-        session.logout();
-    }
-    log.info("ClearOrphanSymlinksJob: Done!");
+    } 
   }
   
 }
