@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer.symlink;
 import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemExistsException;
 import javax.jcr.ItemNotFoundException;
@@ -25,17 +26,21 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.nodetype.ConstraintViolationException;
+
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
+import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.wcm.webui.selector.content.one.UIContentBrowsePanelOne;
+import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -49,6 +54,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
@@ -90,6 +96,12 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
   final static public String FIELD_PATH = "pathNode";
   final static public String FIELD_SYMLINK = "fieldPathNode";
   final static public String POPUP_SYMLINK = "UIPopupSymLink";
+  
+  final static public byte DRIVE_SELECTOR_MODE = 0;
+  final static public byte WORSPACE_SELECTOR_MODE = 1;
+  
+  private byte selectorMode=DRIVE_SELECTOR_MODE;
+  
   private boolean localizationMode = false;
   
   public UISymLinkForm() throws Exception {
@@ -114,6 +126,8 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
     
   public void doSelect(String selectField, Object value) throws Exception {
     String valueNodeName = String.valueOf(value).trim();
+    String workspaceName = valueNodeName.substring(0, valueNodeName.lastIndexOf(":/"));
+    valueNodeName = valueNodeName.substring(workspaceName.lastIndexOf(":")+1);
     List<String> listNodeName = new ArrayList<String>();
     listNodeName.add(valueNodeName);
     UIFormMultiValueInputSet uiFormMultiValueInputSet = getChild(UIFormMultiValueInputSet.class);
@@ -255,7 +269,8 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       if (uiComponent instanceof UISymLinkForm) {
         UISymLinkForm uiSymLinkForm = (UISymLinkForm)uiComponent;
         String id = event.getRequestContext().getRequestParameter(OBJECTID);
-        uiSymLinkForm.getUIStringInput(FIELD_NAME).setValue("");
+        UIFormStringInput uiInput = uiSymLinkForm.getUIStringInput(FIELD_NAME);
+        if (uiInput!=null) uiInput.setValue("");
         uiSet.removeChildById(id);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSymLinkForm);
       }
@@ -263,26 +278,57 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
   }
   
   static  public class AddActionListener extends EventListener<UIFormMultiValueInputSet> {
+  	private String fixPath(String path, String driveName, String repo, UISymLinkForm uiSymlinkForm) throws Exception {
+      if (path == null || path.length() == 0 || 
+      		driveName == null || driveName.length() == 0 ||
+      		repo == null || repo.length() == 0)
+        return "";
+      ManageDriveService managerDriveService = uiSymlinkForm.getApplicationComponent(ManageDriveService.class);
+      DriveData driveData = managerDriveService.getDriveByName(driveName, repo);
+      if (!path.startsWith(driveData.getHomePath()))
+        return "";
+      if ("/".equals(driveData.getHomePath()))
+        return path;
+      return path.substring(driveData.getHomePath().length());      
+    }
     public void execute(Event<UIFormMultiValueInputSet> event) throws Exception {
       UIFormMultiValueInputSet uiSet = event.getSource();
       UISymLinkForm uiSymLinkForm =  (UISymLinkForm) uiSet.getParent();
       UISymLinkManager uiSymLinkManager = uiSymLinkForm.getParent();
       UIJCRExplorer uiExplorer = uiSymLinkForm.getAncestorOfType(UIJCRExplorer.class);
       String workspaceName = uiExplorer.getCurrentWorkspace();
-      
-      UIPopupWindow uiPopupWindow = uiSymLinkManager.initPopupTaxonomy(POPUP_SYMLINK);
-      UIOneNodePathSelector uiNodePathSelector = uiSymLinkManager.createUIComponent(UIOneNodePathSelector.class, null, null);
-      uiPopupWindow.setUIComponent(uiNodePathSelector);
-      uiNodePathSelector.setIsDisable(workspaceName, false);
-      uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
-      uiNodePathSelector.setRootNodeLocation(uiExplorer.getRepositoryName(), workspaceName, "/");
-      uiNodePathSelector.setIsShowSystem(false);
-      uiNodePathSelector.init(uiExplorer.getSystemProvider());
-      String param = "returnField=" + FIELD_SYMLINK;
-      uiNodePathSelector.setSourceComponent(uiSymLinkForm, new String[]{param});
+    	String param = "returnField=" + FIELD_SYMLINK;
+    	UIPopupWindow uiPopupWindow = uiSymLinkManager.initPopupTaxonomy(POPUP_SYMLINK);
+
+      if (uiSymLinkForm.isUseWorkspaceSelector()) {
+      	UIOneNodePathSelector uiNodePathSelector = uiSymLinkManager.createUIComponent(UIOneNodePathSelector.class, null, null);
+      	uiPopupWindow.setUIComponent(uiNodePathSelector);
+      	uiNodePathSelector.setIsDisable(workspaceName, false);
+      	uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
+      	uiNodePathSelector.setRootNodeLocation(uiExplorer.getRepositoryName(), workspaceName, "/");
+      	uiNodePathSelector.setIsShowSystem(false);
+      	uiNodePathSelector.init(uiExplorer.getSystemProvider());
+      	uiNodePathSelector.setSourceComponent(uiSymLinkForm, new String[]{param});      	
+      }else {
+      	Node node =uiExplorer.getCurrentNode();      
+      	UIContentSelectorOne uiNodePathSelector = uiSymLinkForm.createUIComponent(UIContentSelectorOne.class, null, null);
+      	uiPopupWindow.setUIComponent(uiNodePathSelector);
+      	uiNodePathSelector.init(uiExplorer.getDriveData().getName(),
+      			fixPath(node == null ? "" : node.getPath(), uiExplorer.getDriveData().getName(), uiExplorer.getRepositoryName(), uiSymLinkForm));
+      	uiNodePathSelector.getChild(UIContentBrowsePanelOne.class).setSourceComponent(uiSymLinkForm, new String[] { param });        
+      }
       uiPopupWindow.setRendered(true);
       uiPopupWindow.setShow(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSymLinkManager);
     }
+  }
+  public void useWorkspaceSelector() {
+  	this.selectorMode = WORSPACE_SELECTOR_MODE;
+  }
+  public void useDriveSelector() {
+  	this.selectorMode = DRIVE_SELECTOR_MODE;
+  }
+  public boolean isUseWorkspaceSelector() {
+  	return this.selectorMode==WORSPACE_SELECTOR_MODE;
   }
 }

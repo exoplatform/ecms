@@ -70,4 +70,10 @@ public class UISymLinkManager extends UIContainer implements UIPopupComponent {
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
+  public void useWorkspaceSelector() {
+  	UISymLinkForm child = getChild(UISymLinkForm.class);
+  	if (child!=null)  {
+  		child.useWorkspaceSelector();
+  	}
+  }
 }

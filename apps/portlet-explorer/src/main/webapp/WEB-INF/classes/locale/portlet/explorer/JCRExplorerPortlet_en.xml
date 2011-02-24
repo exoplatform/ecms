@@ -2410,6 +2410,11 @@
       <UIOneNodePathSelector>Choose Target Node</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
   
   <ECMContextMenu>
     <event>

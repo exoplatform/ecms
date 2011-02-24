@@ -2410,6 +2410,12 @@
 		</title>
 	</UIPopupSymLink>
 	
+    <UIPopupSymLink>
+      <title>
+        <UIContentSelectorOne>Sélectionnez Document</UIContentSelectorOne>
+      </title>
+    </UIPopupSymLink>	
+	
 	<ECMContextMenu>
 		<event>
 			<AddSymLink>Ajouter un Raccourci</AddSymLink>
