@@ -8,6 +8,8 @@
       <detail>Chi tiết</detail>
       <newAccount>Đăng ký</newAccount>
       <groupnavigation>Quản lý thanh điều hướng cho nhóm</groupnavigation>
+      <register>Đăng ký</register>
+      <printviewer>Trang in</printviewer>
       <portalnavigation>Quản lý thanh điều hướng chung</portalnavigation>
     </classic>
   </portal>
