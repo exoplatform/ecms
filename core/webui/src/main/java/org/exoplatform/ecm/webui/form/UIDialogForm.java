@@ -275,9 +275,6 @@ public class UIDialogForm extends UIForm {
       if (uiInput == null) {
       	isFirstTimeRender = true;
       	uiInput = addMultiValuesInput(UIFormStringInput.class,name,label);
-      }
-      ((UIFormMultiValueInputSet)uiInput).setEditable(formActionField.isEditable());
-      if (node == null) {
         String defaultValue = formActionField.getDefaultValue();
         if (defaultValue != null) {
           if (UIFormMultiValueInputSet.class.isInstance(uiInput)) {
@@ -288,7 +285,10 @@ public class UIDialogForm extends UIForm {
             }
             ((UIFormMultiValueInputSet) uiInput).setValue(lstValues);
           }
-        }
+        }      	
+      }
+      ((UIFormMultiValueInputSet)uiInput).setEditable(formActionField.isEditable());
+      if (node == null) {
         renderField(name);
         return;
       }
@@ -697,7 +697,7 @@ public class UIDialogForm extends UIForm {
       }  
     }    
     uiSelectBox.setEditable(formSelectBoxField.isEditable());
-    addUIFormInput(uiSelectBox);
+//    addUIFormInput(uiSelectBox);
     if(isNotEditNode) {      
       Node child = getChildNode();
       if(child != null && child.hasProperty(propertyName)) {
