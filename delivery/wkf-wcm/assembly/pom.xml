@@ -291,88 +291,6 @@
       </build>
     </profile>
     <profile>
-      <id>pkg-jbossas</id>
-      <build>
-        <finalName>eXoWCM-Workflow-${project.version}</finalName>
-        <plugins>
-          <!-- Ensure your environment is correctly setup -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-enforcer-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>jbossas-check-environment-ready</id>
-                <goals>
-                  <goal>enforce</goal>
-                </goals>
-                <configuration>
-                  <rules>
-                    <requireProperty>
-                      <property>exo.projects.directory.dependencies</property>
-                      <message>"You must define the property exo.projects.directory.dependencies to give the path to the directory where you store your applications servers"</message>
-                    </requireProperty>
-                    <requireProperty>
-                      <property>exo.projects.app.jboss.version</property>
-                      <message>"You must define the property exo.projects.app.jboss.version to give the name of the directory where is stored JBossAS"</message>
-                    </requireProperty>
-                    <requireFilesExist>
-                      <files>
-                        <file>${exo.projects.directory.dependencies}/${exo.projects.app.jboss.version}/</file>
-                      </files>
-                      <message>"The following JBossAS directory doesn't exist : ${exo.projects.directory.dependencies}/${exo.projects.app.tomcat.version}"</message>
-                    </requireFilesExist>
-                  </rules>
-                  <fail>true</fail>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <!-- run exo buils -->
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>jbossas-exopackage</id>
-                <phase>package</phase>
-                <configuration>
-                  <executable>java</executable>
-                  <workingDirectory>${basedir}</workingDirectory>
-                  <arguments>
-                    <argument>-Dexo.package.home=${basedir}/target/exopackage</argument>
-                    <argument>-Dexo.current.dir=${basedir}</argument>
-                    <argument>-Dexo.base.dir=${exo.projects.directory.base}</argument>
-                    <argument>-Dexo.conf.dir=${basedir}/target/exopackage-conf</argument>
-                    <argument>-Dexo.working.dir=${gatein.working.dir}</argument>
-                    <argument>-Dexo.dep.dir=${exo.projects.directory.dependencies}</argument>
-                    <argument>-Dexo.m2.repos=file:${settings.localRepository},http:repository.exoplatform.org/all</argument>
-                    <argument>-Dclean.server=${exo.projects.app.jboss.version}</argument>
-                    <argument>-Dexo.m2.home=${maven.home}</argument>
-                    <argument>-Dorg.exoplatform.portal.version=${org.exoplatform.portal.version}</argument>
-                    <argument>-Xshare:auto</argument>
-                    <argument>-Xms64m</argument>
-                    <argument>-Xmx1024m</argument>
-                    <argument>-XX:MaxPermSize=512m</argument>
-                    <argument>-classpath</argument>
-                    <argument>${basedir}/target/exopackage/lib/js.jar</argument>
-                    <argument>org.mozilla.javascript.tools.shell.Main</argument>
-                    <argument>${basedir}/target/exopackage/javascript/eXo/eXo.js</argument>
-                    <argument>exobuild</argument>
-                    <argument>--product=wcm</argument>
-                    <argument>--deploy=jbossear</argument>
-										<argument>--enable-workflow=${workflowEngine}</argument>
-                  </arguments>
-                </configuration>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>arc-tomcat</id>
       <build>
         <plugins>
@@ -388,30 +306,6 @@
                 <configuration>
                   <descriptors>
                     <descriptor>src/main/assembly/tomcat-zip.xml</descriptor>
-                  </descriptors>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>arc-jbossas</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>jbossas-assembly</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <configuration>
-                  <descriptors>
-                    <descriptor>src/main/assembly/jbossear-zip.xml</descriptor>
                   </descriptors>
                 </configuration>
               </execution>
