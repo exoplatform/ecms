@@ -450,8 +450,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
 //      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
       documentForm.setIsUpdateSelect(false);
-      uiExplorer.setCurrentPath(newNode.getPath());      
-      uiExplorer.refreshExplorer();
+      uiExplorer.setCurrentPath(newNode.getPath());
+      uiExplorer.setWorkspaceName(newNode.getSession().getWorkspace().getName());
+      uiExplorer.refreshExplorer(newNode, true);
       uiExplorer.updateAjax(event);
       EditDocumentActionComponent.editDocument(event, null, uiExplorer, uiExplorer, uiExplorer.getCurrentNode(), uiApp);      
     }
