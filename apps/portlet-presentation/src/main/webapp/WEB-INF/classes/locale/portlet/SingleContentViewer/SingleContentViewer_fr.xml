@@ -69,7 +69,10 @@
       <DisplaySettingBlock>Vous pouvez choisir d'afficher ou de cacher la barre d'options avec le lien "Imprimer". L'affichage du titre et de la date sont également optionnels.</DisplaySettingBlock>
       <ContextualHelp>Active la navigation dynamique. Le contenu peut être changé dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
       <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
-    </help>  
+    </help>
+	<msg>
+      <not-valid-path>Ce chemin de contenu est invalide</not-valid-path>
+    </msg>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
   	<title>

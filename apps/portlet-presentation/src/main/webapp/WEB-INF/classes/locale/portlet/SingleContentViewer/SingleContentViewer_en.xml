@@ -71,7 +71,10 @@
    	  <DisplaySettingBlock>You can choose to show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
    	  <ContextualHelp>Activates the dynamic navigation. The content can be changed dynamically by another based on a URL parameter.</ContextualHelp>
    	  <ParameterHelp>This parameter will be used to get the content if Dynamic Navigation is activated.</ParameterHelp>
-    </help>   
+    </help>
+    <msg>
+    	<not-valid-path>The item path is invalid</not-valid-path>
+    </msg>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
   	<title>
