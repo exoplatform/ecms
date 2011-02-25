@@ -178,7 +178,7 @@ public class FileUploadHandler {
       Object[] args = { parent.getPath() };
       Document message = 
         fckMessage.createMessage(FCKMessage.FILE_UPLOAD_RESTRICTION,FCKMessage.ERROR,language,args);
-      return Response.ok(message, MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+      return Response.ok(new DOMSource(message), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     }
     if((fileName == null) || (fileName.length() == 0)) {
       fileName = resource.getFileName();
@@ -187,7 +187,7 @@ public class FileUploadHandler {
       Object args[] = { fileName, parent.getPath() };
       Document fileExisted = 
         fckMessage.createMessage(FCKMessage.FILE_EXISTED, FCKMessage.ERROR, language, args);
-      return Response.ok(fileExisted, MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+      return Response.ok(new DOMSource(fileExisted), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     }                
     String location = resource.getStoreLocation();
     byte[] uploadData = IOUtil.getFileContentAsBytes(location);
