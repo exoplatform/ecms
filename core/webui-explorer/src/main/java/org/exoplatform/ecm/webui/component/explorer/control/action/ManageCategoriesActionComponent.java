@@ -33,8 +33,6 @@ import org.exoplatform.ecm.webui.component.explorer.popup.admin.UICategoriesAdde
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UICategoryManager;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.impl.DMSConfiguration;
-import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -71,9 +69,7 @@ public class ManageCategoriesActionComponent extends UIComponent {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
       UIJCRExplorer uiExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);
       String repository = uiExplorer.getRepositoryName();
-      DMSConfiguration dmsConfiguration = uiExplorer.getApplicationComponent(DMSConfiguration.class);
-      DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
-      String workspaceName = dmsRepoConfig.getSystemWorkspace();
+      String workspaceName = null;
       uiExplorer.setIsHidePopup(true);
       UICategoryManager uiManager = uiExplorer.createUIComponent(UICategoryManager.class, null, null);
       UIOneTaxonomySelector uiOneTaxonomySelector = uiManager.getChild(UIOneTaxonomySelector.class);
@@ -82,6 +78,7 @@ public class ManageCategoriesActionComponent extends UIComponent {
       List<Node> lstNode = taxonomyService.getAllTaxonomyTrees(repository);
       if (lstNode != null && lstNode.size() > 0) {
         uiOneTaxonomySelector.setRootTaxonomyName(lstNode.get(0).getName());
+        workspaceName = lstNode.get(0).getSession().getWorkspace().getName();
         uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, lstNode.get(0).getPath());
         uiOneTaxonomySelector.setIsDisable(workspaceName, false);
         uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
