@@ -462,7 +462,10 @@
       <confirm-delete>Do you want to delete the node '{0}' and move all its contents?</confirm-delete>
       <confirm-delete-permanently>Do you want to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>      
       <confirm-restore>A node with the same name also exists in node '{0}' 's old location. Are you sure want to restore this node?</confirm-restore>
-      <confirm-delete-multi>Are you sure want to move these {0} items?</confirm-delete-multi>
+	  <confirm-delete-multi>Are you sure want to move these {0} items?</confirm-delete-multi>
+	  <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Do you want to delete it and all its relations?</confirm-delete-has-relations>
+	  <confirm-delete-multi-one-node-has-relations>Do you want to move these {0} items? (The node {1} has relations that refer to it, this process will remove all its relations)</confirm-delete-multi-one-node-has-relations>
+      <confirm-delete-multi-many-nodes-have-relations>Do you want to move these {0} items? (The nodes {1} have relations that refer to them, this process will remove all their relations)</confirm-delete-multi-many-nodes-have-relations>
       <confirm-delete-permanently-multi>Are you sure want to move these {0} items permanently?</confirm-delete-permanently-multi>      
       <confirm-move>Are you sure want to move?</confirm-move>
       <node-cut>The node '{0}' has been cut.</node-cut>

@@ -536,6 +536,9 @@
 			<confirm-delete>Wilt u dit verwijderen?</confirm-delete>
 			<confirm-delete-multi>Are you sure want to delete these {0} items to
 				the Rycycle Bin?</confirm-delete-multi>
+			<confirm-delete-has-relations>The node '{0}' has relations that refer to it. Do you want to delete it and all its relations?</confirm-delete-has-relations>
+			<confirm-delete-multi-one-node-has-relations>Do you want to move these {0} items? (The node {1} has relations that refer to it, this process will remove all its relations)</confirm-delete-multi-one-node-has-relations>
+			<confirm-delete-multi-many-nodes-have-relations>Do you want to move these {0} items? (The nodes {1} have relations that refer to them, this process will remove all their relations)</confirm-delete-multi-many-nodes-have-relations>
 			<confirm-move>Are you sure want to move?</confirm-move>
 			<node-cut>Node '{0}' werd geknipt.</node-cut>
 			<execute-successfully>Aangepaste actie '{0}' werd uitgevoerd.
