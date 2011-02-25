@@ -184,7 +184,11 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   	  String parentRepo = node.getSession().getRepository().toString();
   	  String parentWSpace = node.getSession().getWorkspace().getName();
 
-      wcmComposer.updateContent(parentRepo, parentWSpace, node.getPath(), new HashMap<String, String>());  	  
+      wcmComposer.updateContent(parentRepo, parentWSpace, node.getPath(), new HashMap<String, String>());  	
+      boolean isNodeReferenceable = Utils.isReferenceable(node);
+      String nodeUUID = null;
+      if(isNodeReferenceable)
+        nodeUUID = node.getUUID(); 
       boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
       if (moveOK) {
         for(Node categoryNode : categories){
@@ -192,9 +196,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   	                                 categoryNode.getSession().getWorkspace().getName(),
   	                                 categoryNode.getPath(), new HashMap<String, String>());
         }
-    	  
+        PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
+
+        PortletPreferences portletPref = pcontext.getRequest().getPreferences();    	
+
+        String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
         if (Utils.isReferenceable(node)) {
-          wcmComposer.updateContent(parentRepo, parentWSpace, node.getUUID(), new HashMap<String, String>());
+          wcmComposer.updateContent(parentRepo, trashWorkspace, nodeUUID, new HashMap<String, String>());
         }
         wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
       }
@@ -292,9 +300,6 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     Node currentNode = uiExplorer.getCurrentNode(); 
     Session session = node.getSession();
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-    
-    TrashService trashService = getApplicationComponent(TrashService.class);
-    
     try {
       uiExplorer.addLockToken(node);
     } catch (Exception e) {
