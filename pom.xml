@@ -32,7 +32,7 @@
     <org.exoplatform.ws.version>2.1.7-GA</org.exoplatform.ws.version>
     <org.exoplatform.jcr.version>1.12.7-GA</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.12.7-GA</org.exoplatform.jcr-services.version>
-    <org.exoplatform.portal.version>3.2.0-PLF-SNAPSHOT</org.exoplatform.portal.version>
+    <org.exoplatform.portal.version>3.2.0-PLF-Beta1</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>1.0.3</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
