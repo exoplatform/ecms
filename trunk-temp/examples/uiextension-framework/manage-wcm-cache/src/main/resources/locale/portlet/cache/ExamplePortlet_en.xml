@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.wcm.component.cache.UIWCMCacheForm #
+  ################################################################################
+  -->
+  
+ <UIWCMCacheForm> 	 
+ 	 <action>
+ 	 		<Refresh>Refresh</Refresh>
+ 	 		<Save>Save</Save>
+					<Clear>Clear the cache</Clear> 	 		
+ 	 </action> 	 
+			<label>
+				 
+				 <maxsize>Max size :</maxsize>
+					<livetime>Live time in sec :</livetime>
+					<isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
+					<hit>Hit count :</hit>				
+					<currentSize>Current size :</currentSize>
+					<miss>Miss count :</miss>
+			</label>
+ </UIWCMCacheForm>
+	
+	<!--
+  ################################################################################
+  #             org.exoplatform.wcm.manager.cache.UIWCMCacheManagerForm #
+  ################################################################################
+  -->
+		
+	<UIWCMCacheManagerForm> 	 
+ 	 <action>
+ 	 		<Refresh>Refresh</Refresh>
+ 	 		<Save>Save</Save>
+					<Clear>Clear the cache</Clear> 	 		
+ 	 </action> 	 
+			<label>
+				 <cacheModify>Cache to modify :</cacheModify>
+				 <maxsize>Max size :</maxsize>
+					<livetime>Live time in sec :</livetime>
+					<isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
+					<hit>Hit count :</hit>				
+					<currentSize>Current size :</currentSize>
+					<miss>Miss count :</miss>
+			</label>
+ </UIWCMCacheManagerForm>
+	
+	<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <GlobalAdministration>Global Administration</GlobalAdministration>
+      </label>
+    </tab>
+    <label>      						
+      <CacheView>WCM Cache</CacheView>
+      <UIWCMCachePanel>WCM Cache Administration</UIWCMCachePanel>
+						<UIWCMCacheManager>Managing Caches</UIWCMCacheManager>
+						<UIWCMCacheManagerPanel>WCM Cache Management</UIWCMCacheManagerPanel>
+    </label>        
+  </UIECMAdminControlPanel>	
+</bundle>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition name="holiday process">
+
+  <description>holiday process description</description>
+
+  <!-- SWIMLANES -->
+  <swimlane name="initiator" />
+  
+  <swimlane name="boss">
+    <assignment class="org.exoplatform.processes.holidays.BossAssignementHandler"/>
+  </swimlane>
+
+  <swimlane name="hr mgr">
+    <assignment class="org.exoplatform.processes.holidays.HRAssignementHandler"/>
+  </swimlane>
+
+  <!-- START-STATE -->
+  <start-state name="request">
+    <task swimlane="initiator">
+      <controller>
+        <variable name="start" />      
+        <variable name="end" />
+      </controller>
+    </task>    
+    <transition to="enough holidays left ?"/>
+  </start-state>
+
+  <!-- NODES -->
+  <decision name="enough holidays left ?">
+    <handler class="org.exoplatform.processes.holidays.MockDecisionHandler"/>
+    <transition name="enough holidays" to="evaluation"/>
+    <transition name="not enough holidays" to="end"/>
+  </decision>
+
+  <task-node name="evaluation">
+    <task swimlane="boss">        
+      <controller>
+        <variable name="initiator" />      
+        <variable name="start" />      
+        <variable name="end" />
+      </controller>
+    </task>    
+    <transition name="approve" to="fork">
+      <action class="org.exoplatform.processes.holidays.MockActionHandler"/>
+    </transition>
+    <transition name="disapprove" to="change request"/>
+    <transition name="refuse" to="end">
+      <action class="org.exoplatform.processes.holidays.MockActionHandler"/>
+    </transition>
+  </task-node>
+
+  <task-node name="change request">
+    <task swimlane="initiator"/>  
+    <transition name="submit" to="evaluation"/>
+    <transition name="cancel" to="end"/>
+  </task-node>
+
+  <fork name="fork">
+    <transition to="hr acknowledgement"/>
+    <transition to="assign replacement"/>
+  </fork>
+
+  <task-node name="hr acknowledgement">
+    <task swimlane="hr mgr"/>    
+    <transition to="join"/>
+  </task-node>
+
+  <task-node name="assign replacement">
+    <task swimlane="boss"/>    
+    <transition to="join"/>
+  </task-node>
+
+  <join name="join">
+    <transition to="end"/>
+  </join>
+
+  <!-- END-STATE -->
+  <end-state name="end"/>
+
+</process-definition>

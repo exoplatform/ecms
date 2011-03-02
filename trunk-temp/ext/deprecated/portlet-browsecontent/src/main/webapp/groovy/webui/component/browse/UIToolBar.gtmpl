@@ -1,0 +1,104 @@
+<%
+  import java.util.List ;
+  import javax.jcr.Node ;
+  String actionShowHidden = uicomponent.event("ShowHidden") ;
+  Boolean isEnablePath =  uicomponent.enablePath() ;
+  Boolean isEnableTree =  uicomponent.enableTree() ;
+  Boolean isEnableVote =  uicomponent.enableVote() ;
+  Boolean isEnableComment =  uicomponent.enableComment() ;
+  Boolean isEnableSearch = uicomponent.enableSearch() ;
+  Node root = uicomponent.getRootNode() ;
+%>
+<div class="UIToolBar" id="$uicomponent.id">
+
+    <div class="SeparatorBarLeft Separator"><span></span></div>      
+	<%
+	  if(isEnableTree) {
+	    String iconName = "GreenRightArrow24x24Icon" ;
+	    String tooltip  = _ctx.appRes(uicomponent.getName() + ".tooltip.Show") ;
+	    if(uicomponent.isShowCategoryTree()) { 
+	    	iconName = "GreenLeftArrow24x24Icon" ;
+	    	tooltip = _ctx.appRes(uicomponent.getName() + ".tooltip.Hidden") ; 
+	   	}
+  %>      
+	      <a href="$actionShowHidden" title="$tooltip">
+	        <div class="ShowHiddenIcon $iconName"><span></span></div>
+	      </a>
+  <%}%>
+   <%if(isEnablePath) {%>
+      <div class="CategoryListIcon"><span></span></div>      
+      <a class="PathLabel" href="<%=uicomponent.event('SelectPath', root.getPath())%>">      
+	      <%
+	      	String nodeName = root.getPath().substring(root.getPath().lastIndexOf("/") + 1) ;	      	
+	      	if(root.getPath().trim().equals("/")) nodeName = _ctx.appRes(uicomponent.getName() + ".label.RootNode") ;	     	      	
+	      %>
+	      <%=nodeName%>
+	    </a>
+	    <%
+	      if(!uicomponent.getCurrentNode().getPath().trim().equals(root.getPath())) {
+	        def numBreadCumb = uicomponent.getNodePaths(uicomponent.getCurrentNode()).size();
+	        int index = 1;
+		      for(node in uicomponent.getNodePaths(uicomponent.getCurrentNode())) { 
+		        String actionLink = uicomponent.event("SelectPath", node.getPath());		        
+		        String name = node.getPath().substring(node.getPath().lastIndexOf("/") + 1);		                
+		    %>
+		        <div class="PathIcon"><span></span></div>
+		        <%
+		        if (index == numBreadCumb) {
+		        %>
+		        <a class="PathChildLabel"><%=name%></a>
+		        <%
+		        } else {
+		        %>
+		        <a class="PathChildLabel" href="$actionLink"><%=name%></a>
+		        <%
+		        }
+		        %>
+	    <%	
+		      index++;
+		      }
+	      }
+	    %>
+
+    <%}%> 
+
+	<div class="CBActionContainer">
+    <%
+      String actionLabel = "" ;
+      String link = "" ;
+    %>
+    
+  		<%  
+        if(isEnableVote) {
+          actionLabel = _ctx.appRes(uicomponent.getName() + ".tooltip.Vote") 
+          link = uicomponent.event("Vote") ;
+      %>
+          <a class="Icon VoteDocumentButton" href="$link" title="$actionLabel"><span></span></a>      
+     
+      <%}
+        if(isEnableComment) {
+          actionLabel = _ctx.appRes(uicomponent.getName() + ".tooltip.Comment") 
+          link = uicomponent.event("Comment") ;
+      %>
+        <a class="Icon WriteCommentButton" href="$link" title="$actionLabel"><span></span></a>      
+      <%}%>
+      
+      <%
+      if(isEnableSearch) {
+	      actionLabel = _ctx.appRes(uicomponent.getName() + ".tooltip.showSearch") 
+	      link = uicomponent.event("Search") ;
+      %>
+	      <a class="Icon CBSearchButton" href="$link" title="$actionLabel"><span></span></a>      
+      <%}%>  
+	    <%
+	      if(!uicomponent.isClearHistory()) {
+		      actionLabel = _ctx.appRes(uicomponent.getName() + ".tooltip.Back") 
+		      link = uicomponent.event("Back") ;
+      %>
+	    	<a class="Icon Style1BackArrow24x24Icon" href="$link" title="$actionLabel"><span></span></a>   
+	    <%}%>   
+ 	 	<div class="SeparatorLine"><span></span></div>
+    <div class="ClearLeft"><span></span></div>
+  </div>
+  <div class="ClearBoth"><span></span></div>
+</div>

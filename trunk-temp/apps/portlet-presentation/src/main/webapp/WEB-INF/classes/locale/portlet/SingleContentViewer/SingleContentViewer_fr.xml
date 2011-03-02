@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <UIPresentationContainer>
+  <title>
+   <QuickEdit>Éditer rapidement</QuickEdit>
+   <print>Imprimer cette page</print>
+  </title>
+  <label>
+   <draft>brouillon</draft>
+   <print>Imprimer</print>
+  </label>
+  <msg>
+   <no-content>Il n'y a pas de contenu à afficher</no-content>
+  </msg>
+ </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+   <title>
+    <UIContentSelectorOne>Choisissez un dossier</UIContentSelectorOne>
+   </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+  	 <msg>
+  	 		<AccessControlException>Vous n'avez pas la permission d'accéder au mode d'édition</AccessControlException>
+  	 </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+  	<label>
+		<Enable>Activé</Enable>
+		<Disable>Désactivé</Disable>
+  	</label>
+  </UISCVContextualRadioBox>  
+  
+  <UIPreferencesPopupWindows>
+	<title>
+		<UISCVPreferences>Préférences du contenu</UISCVPreferences>
+	</title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+     <Save>Sauver</Save>
+     <Abort>Annuler</Abort>
+     <Cancel>Annuler</Cancel>
+     <Print>Imprimer</Print>
+     <Close>Fermer</Close>
+    </action>
+    <title>Préférences du contenu</title>
+    <label>
+      <Back>Retour à la page précédente</Back>
+      <Edit>Editer</Edit>
+      <Preferences>Préférences</Preferences>
+   	  <Title>Préférences du contenu</Title>
+   	  <UISCVShowTitleConfigurationCheckBox>Afficher le titre</UISCVShowTitleConfigurationCheckBox>
+   	  <UISCVShowDateConfigurationCheckBox>Afficher la date</UISCVShowDateConfigurationCheckBox>
+   	  <UISCVShowOptionBarConfigurationCheckBox>Afficher la barre d'options</UISCVShowOptionBarConfigurationCheckBox>
+   	  <DisplaySettingBlock>Paramètres d'affichage</DisplaySettingBlock>
+   	  <ContentPathBlock>Sélection de contenu</ContentPathBlock>
+   	  <UISCVConfigItemPathFormInputSet>Chemin du contenu</UISCVConfigItemPathFormInputSet>
+   	  <Advance>Avancé</Advance>
+   	  <ContextCaption>Navigation Dynamique</ContextCaption>
+   	  <UISCVContextualRadioBox>Contenu Contextuel</UISCVContextualRadioBox>
+   	  <UISCVParameterInputBox>par</UISCVParameterInputBox>
+   	  <PrintSettingBlock>Configuration d'impression</PrintSettingBlock>
+   	  <UISCVPrintPageParameter>Avec</UISCVPrintPageParameter>
+   	  <UISCVConfigPrintPageFormInputSet>Afficher dans la page</UISCVConfigPrintPageFormInputSet>
+						<LockStatus>Verrouillage</LockStatus>	
+    </label>
+    <help>
+      <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique (mode Avancé, voir ci-dessous)</ContentPathBlock>
+      <DisplaySettingBlock>Vous pouvez choisir d'afficher ou de cacher la barre d'options avec le lien "Imprimer". L'affichage du titre et de la date sont également optionnels.</DisplaySettingBlock>
+      <ContextualHelp>Active la navigation dynamique. Le contenu peut être changé dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
+      <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
+    </help>
+	<msg>
+      <not-valid-path>Ce chemin de contenu est invalide</not-valid-path>
+    </msg>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+  	<title>
+  		<SelectFolderPath>Choisissez un dossier</SelectFolderPath>
+  	</title>  	
+  </UISCVConfigItemPathFormInputSet>
+  
+  <PublicationStates>
+    <archived>Archivé</archived>
+    <obsolete>Obsolète</obsolete>
+    <unpublished>Non publié</unpublished>
+    <enrolled>Créé</enrolled>
+    <draft>Brouillon</draft>
+    <pending>Rédigé</pending>
+    <approved>Validé</approved>
+    <inreview>En revue</inreview>
+    <staged>Prêt à publier</staged>
+    <published>Publié</published>
+  </PublicationStates>
+  
+</bundle>

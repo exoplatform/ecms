@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <PublicationService>
+    <SimplePublicationPlugin>
+      <changeState>
+        <enrolled>Nội dung đã được đưa vào quy trình xuất bản %s</enrolled>
+        <published>Nội dung đã được xuất bản</published>
+      </changeState>
+    </SimplePublicationPlugin>
+  </PublicationService>
+</bundle>

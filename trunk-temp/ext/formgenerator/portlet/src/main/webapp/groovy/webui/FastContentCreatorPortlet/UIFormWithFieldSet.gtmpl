@@ -1,0 +1,65 @@
+<%
+	/**
+	 * Created by The eXo Platform SAS
+	 * Author : eXoPlatform
+	 *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+	 * Comment: Extends UIForm, add more condition to display fieldset better
+	 * Jun 26, 2009  
+	 */
+%>
+<div class="UIForm $uicomponent.id">
+	<%uiform.begin()%>
+		<div class="HorizontalLayout">
+			<div class="FormContainer">
+				<table class="UIFormGrid">
+					<% 
+						for(field in uiform.getChildren()) { 
+							if(field.isRendered()) {
+								%>
+									<tr>
+										<%
+											String fieldName = uicomponent.getLabel(field.getName());
+											if(!"UIFormFieldSet".equals(fieldName) && fieldName != null && fieldName.length() > 0 && !fieldName.equals(uicomponent.getId())) {
+												%>
+													<td class="FieldLabel">$fieldName</td>
+													<td class="FieldComponent"><% uiform.renderField(field) %></td>
+												<%
+											} else {
+												%><td class="FieldComponent" colspan="2"><% uiform.renderField(field) %></td><%
+											}
+										%>
+									</tr>
+								<%
+							}
+						}
+					%>
+				</table>
+				<div class="UIAction"> 
+					<table class="ActionContainer">
+						<tr>
+							<td>
+								<% 
+									for(action in uicomponent.getActions()) { 
+										String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+										String link = uicomponent.event(action);
+										%>
+											<div onclick="$link" class="ActionButton LightBlueStyle" >
+												<div class="ButtonLeft">
+													<div class="ButtonRight">
+														<div class="ButtonMiddle">
+															<a href="javascript:void(0);">$actionLabel</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										<%
+									}
+								%>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	<%uiform.end()%>
+</div>

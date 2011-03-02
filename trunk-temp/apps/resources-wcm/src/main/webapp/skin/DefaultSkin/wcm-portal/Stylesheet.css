@@ -1,0 +1,424 @@
+#DefaultPortalContainer .UIWCMColumnContainer {
+  background: white url('/portal/rest/jcr/repository/collaboration/sites content/live/classic/web contents/site artifacts/banner/Default/medias/images/BgBanner.png') repeat-x;
+}
+
+td {
+  min-width: 20px;
+}
+
+.UIWCMColumnContainer {
+  margin: auto;
+  overflow: hidden;
+}
+
+.UIWCMColumnContainer .BannerTDContainer {
+  float: left;
+  width: 50%;
+  overflow: hidden;
+}
+
+.UIWCMColumnContainer .AccessContainerTDContainer {
+  float: right;
+}
+
+#UIContainer-DefaultPortalContainer {
+  padding: 0;
+}
+
+#UIContainer-DefaultPortalContainer .UITableColumnContainer {
+  _width: 99%;
+  _position: relative;
+}
+
+#UIContainer-DefaultPortalContainer .UIContainer {
+  padding: 0;
+}
+
+.UIWorkingWorkspace {
+  zoom: 100%;
+}
+
+.WCMTRContainer .CategoryNavigationPortletContainerTDContainer {
+  float: left;
+  width: 30%;
+}
+
+.WCMTRContainer .ParameterizedContentListViewerPortletContainerTDContainer {
+  float: right;
+  width: 70%;
+}
+
+
+.UIItemSelector .Presentation {
+  height: 170px;
+  margin: auto;
+  width: 270px;
+  background: url('background/presentation.gif') no-repeat center;
+}
+
+.UIItemSelector .Search {
+  height: 170px;
+  margin: auto;
+  width: 270px;
+  background: url('background/search.gif') no-repeat center;
+}
+
+.UIItemSelector .Sitemap {
+  height: 170px;
+  margin: auto;
+  width: 270px;
+  background: url('background/sitemap.gif') no-repeat center;
+}
+
+.QuickEdit {
+  background: url('background/quickEdit.png') no-repeat scroll left top;
+  height: 30px;
+  width: 65px;
+  padding-left: 0px;
+  float: right;
+}
+
+.UIItemSelector .ItemDetailList .TemplateContainer .ClassicPortalImage {
+  background: transparent url(background/classic.png) scroll center;
+  height: 222px;
+  margin-top: 9px;
+}
+
+.UIItemSelector .ItemDetailList .TemplateContainer .ACMEPortalImage {
+  background: transparent url(background/Acme.png) no-repeat center;
+  height: 235px;
+  width: 296px;
+  margin: 3px auto;
+}
+
+.ACMECategoriesTDContainer {
+  padding: 10px;
+}
+
+.ACMEParameterizedTDContainer {
+  padding: 10px;
+  width: 730px;
+}
+
+.UIToolbarContainer  .EditingPortletTDContainer {
+  float: right;
+  width: 80px;
+  margin: 7px 0px 0px 30px;
+}
+
+.UISiteAdminToolBar {
+  height: auto;
+  padding-right: 20px;
+  float: right;
+}
+
+.UISiteAdminToolBar .Editing {
+  float:left;
+  font-weight:bold;
+  margin-top:3px;
+}
+
+.UISiteAdminToolBar .LeftSelect {
+  float:left;
+}
+
+.UIToolbarContainer .StarToolBarPortletTDContainer {
+	z-index: 3;
+	position: relative;
+}
+ 
+.UIToolbarContainer .UserToolBarSitePortletTDContainer {
+	z-index: 3;
+	position: relative;
+}
+
+.UIToolbarContainer .UserToolBarGroupPortletTDContainer {
+	z-index: 3;
+	position: relative;
+}
+
+.UIToolbarContainer .UserToolBarDashboardPortletTDContainer  {
+	z-index: 3;
+	position: relative;
+}
+
+
+.UIToolbarContainer .AdminToolBarPortletTDContainer {
+	z-index: 3;
+	position: relative;
+}
+
+.UICategoryForm .UIForm .HorizontalLayout .UIFormInputSet {
+	padding: 0px;
+}
+.UISubcriptionForm .UIForm .HorizontalLayout .UIFormInputSet {
+	padding: 0px;
+}
+
+.UIPresentationContainer a {
+  color: #0068FF;
+}
+
+.UIPresentationContainer a:hover {
+  text-decoration: underline;
+}
+
+/* Context Help CSS START */
+.ShowHelpIcon {
+background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center;
+}
+
+
+.IconInContextHelp {
+    width: 16px; height:16px;
+    float: left; margin: 0px 0px 0px 5px;
+    cursor: pointer;
+}
+
+.InContextHelpContent {
+  position: absolute;
+  display:none;
+  top: 8px;
+  left: 0px;
+  z-index: 100;
+}
+
+.InContextHelpContentData {
+    white-space:normal;
+    cursor: text;
+  position: absolute;
+  top: -35px;
+}
+
+.InContextHelpPopup .ContentPosition {
+    position: relative;
+    background: #ffffff;
+}
+
+.LeftInContextHelpPopup .InContextHelpTL {
+background: url('background/ContextHelp/TopLeftLeft13x47.png') no-repeat top left;
+    padding-left:13px;
+}
+.LeftInContextHelpPopup .InContextHelpTR {
+background: url('background/ContextHelp/TopRightLeft31x47.png') no-repeat top right;
+    padding-right:31px;
+}
+.LeftInContextHelpPopup .InContextHelpTC {
+background: #ffffff url('background/ContextHelp/TopCenterLeft1x14.png') repeat-x top;
+    height:47px;
+}
+
+.LeftInContextHelpPopup .InContextHelpML {
+background: url('background/ContextHelp/LeftMiddleLeft13x1.png') repeat-y top left;
+    padding-left:13px;
+}
+.LeftInContextHelpPopup .InContextHelpMR {
+background: url('background/ContextHelp/MiddleRightLeft31x1.png') repeat-y top right;
+    padding-right:31px;
+}
+
+.LeftInContextHelpPopup .InContextHelpBL {
+background: url('background/ContextHelp/BottomLeftLeft13x17.png') no-repeat top left;
+    padding-left:13px;
+}
+.LeftInContextHelpPopup .InContextHelpBR {
+background: url('background/ContextHelp/BottomRightLeft31x17.png') no-repeat top right;
+    padding-right:31px;
+}
+.LeftInContextHelpPopup .InContextHelpBC {
+background: url('background/ContextHelp/BottomCenterLeft1x17.png') repeat-x top;
+    height:17px;
+}
+
+
+.RightInContextHelpPopup .InContextHelpTL {
+background: url('background/ContextHelp/TopLeft28x49.png') no-repeat top left;
+    padding-left:28px;
+}
+.RightInContextHelpPopup .InContextHelpTR {
+background: url('background/ContextHelp/TopRight15x49.png') no-repeat top right;
+    padding-right:15px;
+}
+.RightInContextHelpPopup .InContextHelpTC {
+background: #ffffff url('background/ContextHelp/TopCenter1x12.png') repeat-x top;
+    height:49px;
+}
+
+.RightInContextHelpPopup .InContextHelpML {
+background: url('background/ContextHelp/MiddleLeft28x1.png') repeat-y top left;
+    padding-left:28px;
+}
+.RightInContextHelpPopup .InContextHelpMR {
+background: url('background/ContextHelp/MiddleRight15x1.png') repeat-y top right;
+    padding-right:15px;
+}
+
+.RightInContextHelpPopup .InContextHelpBL {
+background: url('background/ContextHelp/BottomLeft28x20.png') no-repeat bottom left;
+    padding-left:28px;
+}
+.RightInContextHelpPopup .InContextHelpBR {
+background: url('background/ContextHelp/BottomRight16x20.png') no-repeat bottom right;
+    padding-right:16px;
+}
+.RightInContextHelpPopup .InContextHelpBC {
+background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
+    height:20px;
+}
+
+/* Context Help CSS END */
+
+
+/* QUICK EDIT */
+
+.EdittingToolBarContainer{
+  position:relative;
+  right:0;
+  top:0;
+  z-index:1;
+  width: 90px;
+  float: right;
+  display: none;
+}
+
+.UIPresentationContainer .EdittingToolBarContainer{
+  width: 160px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar {
+  position:absolute;
+  right:0;
+  top:-20px;
+}
+
+.EdittingToolBarContainer .EdittingCurrentState {
+  padding-left: 3px;
+  color: #5E6D7B;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarL {
+  background: url('icons/EdittingToolBarL.png') no-repeat left top;
+  padding-left: 4px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarR {
+  background: url('icons/EdittingToolBarR.png') no-repeat right top;
+  padding-right: 4px;
+}
+
+.EdittingToolBarContainer .EdittingToolBar .EdittingToolBarC {
+  background: url('icons/EdittingToolBarC.png') repeat-x;
+  line-height: 18px;
+  padding:2px 0 0;
+}
+
+.AddContentIcon {
+  background: url('icons/AddContentIcon.png') no-repeat center center;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
+}
+
+.ManageContentIcon {
+  background: url('icons/ManageContentIcon.png') no-repeat center center;
+  margin-left: 6px;
+  display: block;
+  width: 16px;
+}
+
+.PreferencesIcon {
+  background: url('icons/PreferencesIcon.png') no-repeat center center;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
+}
+
+.EdittingContent{
+  position:relative;
+  right:0;
+  top:0;
+  z-index:1;
+  float: right;
+  width: 160px;
+  display: none;
+}
+
+.EdittingContent .EdittingToolBar {
+  position:absolute;
+  right:0;
+}
+
+
+.EdittingContent .EdittingToolBar .EdittingToolBarL {
+  background: url('icons/EdittingContentL.png') no-repeat left top;
+  padding-left: 3px;
+}
+
+
+.EdittingContent .EdittingToolBar .EdittingToolBarC {
+  background: url('icons/EdittingContentC.png') repeat-x;
+  line-height: 20px;
+  padding:2px 0 0;
+}
+
+.EdittingContent .EdittingCurrentState {
+  padding-left: 3px;
+  color: #5E6D7B;
+}
+
+.EditContentIcon {
+  background: url('icons/EditContentIcon.png') no-repeat left center;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
+}
+
+.CloseContentIcon {
+  background: url('icons/CloseContentIcon.png') no-repeat center center;
+  margin-left:6px;
+  width: 16px;
+  display: block;
+}
+
+
+.UISingleContentViewerPortlet .ContainerHoverClass {
+  border:1px solid #bfd5ed;
+}
+
+.UICLVPortlet .ContainerHoverClass {
+  border:1px solid #bfd5ed;
+}
+
+.ContainerHoverClass {
+  border:1px solid #bfd5ed;
+}
+
+.ContainerHoverClass .EdittingToolBarContainer{
+  display: block;
+}
+
+.OneColumnCLVTemplate .Contents .ContainerHoverClassInner {
+  border:1px solid #bfd5ed;
+}
+
+.TwoColumnsCLVTemplate .Contents .ContainerHoverClassInner {
+  border:1px solid #bfd5ed;
+}
+
+.DocumentsCLVTemplate .Contents .ContainerHoverClassInner {
+  border:1px solid #bfd5ed;
+}
+
+.ContainerHoverClassInner .EdittingContent{
+  display: block;
+}
+
+.IconLocked {
+  background: url('icons/IconLockedBig.gif') no-repeat right top; /* orientation=lt */
+		background: url('icons/IconLockedBig.gif') no-repeat left top; /* orientation=rt */
+  width: 20px;
+  height: 16px;
+  float: left;
+}
+
+/* QUICK EDIT END */

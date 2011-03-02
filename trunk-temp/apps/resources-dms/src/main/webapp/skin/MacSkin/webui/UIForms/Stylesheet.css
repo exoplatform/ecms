@@ -1,0 +1,167 @@
+/******************************* UIFormWithoutAction **************************/
+.UIFormWithoutAction {
+  margin: 0px 0px 10px 0px;
+}
+
+.UIFormWithoutAction .UIForm .HorizontalLayout {
+	padding: 10px;
+}
+
+.UIFormWithoutAction .rootNodeInfo .UIFormInputSet {
+	width: auto;
+	padding: 0px;
+}
+
+.UIFormWithoutAction .rootNodeInfo td.FieldComponent {
+	padding: 0px;
+}
+
+.HorizontalLayout .UIFormInputSet .FormContainer .UIFormGrid td{
+	padding: 4px;
+}
+
+/**************************************************************************/
+
+.UIECMAdminPortlet .UIWorkspaceList .UIFormGrid {
+	width: 95%;
+}
+
+.UIECMAdminPortlet .UIWorkspaceList .rootNodeInfo .UIFormGrid {
+	width: 100%;
+}
+
+.UIJCRExplorerPortlet .UIWorkspaceList .UIFormGrid {
+	width: 95%;
+}
+
+.UIJCRExplorerPortlet .UIWorkspaceList .rootNodeInfo .UIFormGrid {
+	width: 100%;
+}
+
+.UIBrowseContentPortlet .UIWorkspaceList .UIFormGrid {
+	width: 95%;
+}
+
+.UIBrowseContentPortlet .UIWorkspaceList .rootNodeInfo .UIFormGrid {
+	width: 100%;
+}
+
+.UIFastContentCreatorPortlet .UIWorkspaceList .UIFormGrid {
+	width: 95%;
+}
+
+.UIFastContentCreatorPortlet .UIWorkspaceList .rootNodeInfo .UIFormGrid {
+	width: 100%;
+}
+
+/*====================================UIAnyPermission==================================*/
+.UIAnyPermission {
+	margin-bottom: 2px;
+}
+
+.UIAnyPermission .UIForm .UIFormInputSetWithAction .UIFormGrid td {
+	padding: 7px 8px 4px 0;
+}
+
+.UIAnyPermission .UIForm .UIFormGrid td.FieldLabel {
+	vertical-align: middle;
+}
+
+.UIAnyPermission .UIForm .UIFormGrid {
+	width: auto;
+	margin: 0px;
+}
+
+/**************************************UIFormInputSet*******************************/
+
+.UIFormInputSet .FormContainer {
+	padding: 0px;
+}
+
+.UIJCRExplorerPortlet .UIFormWithTitle .UIFormGrid .UIFormInputSet .FormContainer{
+	padding: 0px;
+}
+
+
+.UIFormInputSet .UIFormInputSetWithAction .ActionField a {
+  color: blue;
+}
+
+.FieldComponent .UIFormInputSet .UIFormInputSetWithAction td.FieldComponent {
+	padding: 0px;
+}
+
+
+.FieldComponent .permission .UIFormInputSet .UIFormInputSetWithAction td.FieldComponent {
+	padding: 4px;
+}
+
+.UIForm .FieldComponent .FieldComponent input{
+	width: 200px;
+}
+
+.UIForm .FieldComponent .FieldComponent input.checkbox{
+	width: 16px;
+	margin: 0px;
+}
+
+.UIJCRExplorerPortlet .UIForm .HorizontalLayout .UIFormInputSet {
+	padding: 0px;
+	width: 100%;
+}
+
+.UIJCRExplorerPortlet .UIJcrExplorerEditContainer .UIForm .UIFormGrid td.FieldLabel {
+	vertical-align: middle;
+}
+
+.UIViewMetadataManager .tabNormal {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  background: url('/eXoDMSResources/skin/images/metadata/Metadata.gif') repeat-x left top;
+  height: 20px; width: 120px; line-height: 20px; text-align: center;
+  border: solid 1px #a3abb6;
+  font-size: 12px; font-weight: bold;
+}
+
+.UIViewMetadataManager .tabSelected {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  background: url('/eXoDMSResources/skin/images/metadata/Metadata.gif') repeat-x left -20px;
+  height: 20px; width: 120px; line-height: 20px; text-align: center;
+  border: solid 1px #a3abb6;
+  font-size: 12px; font-weight: bold;
+}
+
+.UIViewMetadataManager .ContentBlock {
+  margin: 15px;
+}
+
+.UIViewMetadataManager .LabelMetadata {
+	border-bottom: 1px dotted #666666;
+	padding-bottom: 5px;
+  height:14px;
+  font-weight: bold;
+  font-size: 12px;
+  font-style: Verdana;
+  text-align: left; /* orientation=lt */
+  text-align: right; /* orientation=rt */
+  color: #f68822;
+}
+
+.UIViewMetadataManager .Header {
+  font-weight: bold;
+  font-size: 14px;
+  font-style: Verdana;
+  text-align: left; /* orientation=lt */
+  text-align: right; /* orientation=rt */
+}
+
+.UIViewMetadataManager .Text {
+  text-align: left; /* orientation=lt */
+  text-align: right; /* orientation=rt */
+}
+
+.UIViewMetadataManager .MetaImage {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+}

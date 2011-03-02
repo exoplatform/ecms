@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<jboss-web>
+  <security-domain>java:/jaas/gatein-domain-ecmdemo</security-domain>
+</jboss-web>

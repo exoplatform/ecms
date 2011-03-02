@@ -1,0 +1,94 @@
+h1. ECM Migration from 2-0-x to 2-1
+
+h1. Migrate your portal to be compatible with portal 2.2
+
+Click [here|Portal:Migration from 2-1 to 2-2] for more details
+
+{note}
+This step is important: auto-init-root-nodetype and auto-init-permissions are DEPRECATED in JCR 1.9
+{note}
+
+
+h1. Add a new parameter for the AuditService
+
++In the war:/conf/jcr/jcr-configuration.xml add a new parameter to the org.exoplatform.services.jcr.ext.audit.AuditService as follow:+
+{code:xml}
+  <component>
+    <key>org.exoplatform.services.jcr.ext.audit.AuditService</key>
+    <type>org.exoplatform.services.jcr.ext.audit.AuditServiceImpl</type>
+    <init-params>
+      ...
+      <value-param>
+        <name>adminIdentity</name>
+        <value>*:/platform/administrators;exo</value>
+      </value-param>
+    </init-params>
+  </component>
+{code}
+
+1.1 Modify the web.xml
+
+* Remove the filter ~~FactoryInitializedFilter~~
+* Remove its corresponding filter mappings (see pattern /connector and /jcr/\*)
+* Add the filters *SetCurrentIdentityFilter* and *RestEncodingFilter* as follow:
+{code:xml}
+  <filter>
+    <filter-name>SetCurrentIdentityFilter</filter-name>
+    <filter-class>org.exoplatform.services.security.web.SetCurrentIdentityFilter</filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>RestEncodingFilter</filter-name>
+      <filter-class>org.exoplatform.services.rest.servlet.RestEncodingFilter</filter-class>
+      <init-param>
+        <param-name>REQUEST_ENCODING</param-name>
+        <param-value>UTF-8</param-value>
+      </init-param>
+  </filter>
+{code}
+* Modify the filter mappings as follow:
+Replace
+{code:xml}
+  <filter-mapping>
+    <filter-name>ThreadLocalSessionProviderInitializedFilter</filter-name>
+    <url-pattern>/private/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>ThreadLocalSessionProviderInitializedFilter</filter-name>
+    <url-pattern>/public/*</url-pattern>
+  </filter-mapping>
+{code}
+with
+{code:xml}
+  <filter-mapping>
+    <filter-name>SetCurrentIdentityFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>ThreadLocalSessionProviderInitializedFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>RestEncodingFilter</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+  </filter-mapping>
+{code}
+* Replace the SkinListener
+Replace
+{code:xml}
+  <listener>
+    <listener-class>org.exoplatform.portal.webui.skin.SkinListener</listener-class>
+  </listener>
+{code}
+with
+{code:xml}
+  <listener>
+    <listener-class>org.exoplatform.portal.webui.skin.SkinConfigListener</listener-class>
+  </listener>
+{code}
+Click [here|Portal:Migration from 2-1 to 2-2] for more details
+* Remove the servlet _DisplayJCRContent_
+* Remove its corresponding servlet mappings (see pattern /jcr/\*)

@@ -1,0 +1,280 @@
+
+h1. Folders
+
+
+
+h1. Overview
+
+Folders is an effective way to organize and manage your documents. eXo DMS provides you with two folder types: a content folder and a document folder.
+In default skin, icon for a content folder node is displayed in blue and icon for a document folder node is displayed in yellow. You only can create a content folder in a content folder; however you can create a document folder in a content folder or in a document folder.
+
+
+!Folder.png!
+
+
+
+h1. Create a new folder
+
+Follow these simple guides to create a new folder:
+
+1\. Select the path to create a folder from File Explorer nodes tree on your left.
+
+2. Select the *Actions* tab on the Action bar:
+
+
+!Actions.png!
+
+
+3. Click the *Add Folder* icon
+!AddFolderIcon.png!
+ . The *Add a Folder* form is displayed:
+
+
+!AddFolderForm.png!
+
+
+4. In the *Add a folder* form, click the
+!DownIcon.png!
+ to see the folder types list and select the folder type that you want to create.
+
+5. Enter a value for the *Name* field. This field is required. Some special characters are not allowed to input in the *Name* field: (@ # % & * ( ) " ' : ; \[ ] {} / !)
+
+6. Click the *Save* button to accept creating a new folder.
+
+
+h1. Upload files into a folder
+
+You easily upload files from your machine. Many file types can be uploaded. However, the uploaded file's name must not include some special characters (! @  $ % & + \[ ])
+
+1\. Select a folder that you want to upload a file into from the left/right pane
+
+2. Select the *Actions* tab on the Action bar.
+
+3. Show the *Upload a file* form by clicking the icon
+!UploadFileIcon.png!
+ on the Action bar:
+
+
+!UploadFileForm.png!
+
+
+4. Browse and select a file on your local computer by clicking the *Browse...* button. A Path of the selected file from your machine will be put into the *Select a file* field:
+
+
+!UploadFileForm1.png!
+
+
+5. Click the
+!UploadIcon.png!
+  icon next to the *Browse...* button and wait for few seconds. The uploaded time depends on the size of the selected file.
+
+6. You can change the uploaded file by clicking the icon
+!DeleteIcon.png!
+  and select *Browse...* again to select another one.
+
+7. By default, the name of the uploaded file will be kept as original but if you want to change, input a new value in the *Name* field, this field is not required. The new name must not contain some special characters: ! @  $ % & + \[ ]
+
+
+!AddCategory.png!
+
+
+8. Click
+!PlusIcon.png!
+  to open a form to add categories for this file:
+
+
+!AddCategory1.png!
+
+
+Select categories by clicking
+!TickIcon.png!
+ icon. Click on '+ ' to open child nodes of categories.
+
+9. Complete uploading a file by clicking the *Save* button.
+
+10. After being saved, the main information of the uploaded file will be displayed:
+
+
+
+!UploadFileForm2.png!
+
+
+11\. Click the
+!EditIcon.png!
+ icon to see details of its external metadata information. You can input a value for it.
+
+- Click the *Save* button to accept changes or the *Cancel* to quit without any change.
+- Click the *Add Metadata* button if you want to add more metadata. There is a list of all metadata that can be added for the uploaded file. Check the check box and then click the *Add* button or the *Cancel* button to quit without adding any thing.
+
+
+!Metadata.png!
+
+
+- A new metadata is displayed in External Metadatas list and you also can edit it by clicking !EditIcon.png!
+
+12. Click the *Close* button to quit the Uploaded information form.
+
+13. After being uploaded, the tree is in the left pane:
+
+
+!AfterUpload.png!
+
+
+
+
+h1. Overload Thumbnails
+
+{info}
+Since DMS 2.4
+{info}
+
+You easily overload a thumbnail image for a folder by following these simple guides:
+
+1\. Select a folder that you want to overload a thumbnail image.
+
+2. Click the
+!OverloadThumbnails.png!
+ on the Action bar. The *Add thumbnail image* form appears:
+
+
+!AddThumnailForm.png!
+
+
+3. Select an image used as a displaying icon for the selected folder by clicking the *Browse...* button.
+
+4. Click the
+!UploadIcon.png!
+   icon to upload the selected image.
+
+5. Complete adding a thumbnail image by clicking the *Save* button. The node will be stored in a  exo:thumbnails folder.
+Back to the parent root (Private node for above example) that contains the selected folder to see an icon used to display it:
+
+
+!AfterUploadThumbnail.png!
+
+
+
+
+h1. Add Sym Links
+
+{info}
+Since DMS 2.4
+{info}
+
+For the purpose of fast accessing to the node that you want to look for in other nodes. Adding a sym link for a node is an effective way to meet this need.
+
+Do the following steps to add a sym link for a folder:
+
+1\. Select a node that you want to add a sym link.
+
+2. Select the *Actions* tab to show some action on the Action bar.
+
+
+3. Click the
+!AddSymLinkButton.png!
+   on the Action bar. The *Sym Link Manager* form appears:
+
+
+!AddSymLinkForm.png!
+
+
+Details:
+
+|| Name   || Description ||
+| Sym Link Name   |			The name of a link. |
+| Path Node      |				The path of a link. |
+
+
+4. Click on the
+!PlusIcon.png!
+   icon to open the *Choose Target Node* form:
+
+
+!ChooseTarget.png!
+
+
+5. Choose the workspace which contains the node that you want to add a sym link.
+
+6. Click the icon in the row of the node that you want to add, the path of that node will appear in the *Path Node* field and the name of the node is set by the name of the selected node. You can edit this name.
+
+
+
+!SymLinkManagerForm.png!
+
+
+7. Click the *Save* button to add a sym link.
+
+
+
+!AfterAdd.png!
+
+
+8. Click on the sym link to view its content.
+
+
+
+h1. Basic actions on folders
+
+h2. Copy/Paste a folder
+
+h3. Copy/Paste a folder from the menu
+
+You can make a copy of a folder (including sub nodes) in other places by following these simple guides:
+
+1\. Select a folder on the left or right pane.
+
+2. Right-click on the selected folder and select the *Copy* item in the menu:
+
+
+!CopyFolder.png!
+
+
+3. Select the path to the destination node that you want to make a copy.
+
+4. Right-click on the destination node and select *Paste* item in the menu. Note that the *Paste* function is enable in the menu only after taking the *Copy/Cut* action.
+
+
+
+!PasteFolder.png!
+
+
+5. The copied folder (and its sub folders) will be pasted to the new selected path.
+
+h3. Copy/Paste a folder from the Clipboard
+
+1\. Right-click on a folder and select the *Copy* item in the menu:
+
+
+!CopyFolderClipboard.png!
+
+
+2. Select a destination node that you want to make a copy
+
+3. In the left pane, click
+!Icon.png!
+  to see the Control Sidebar, and select the *Clipboard* item:
+
+
+!Clipboard.png!
+
+
+There is a list of all copying/cutting actions and waiting for being pasted.
+
+
+!Clipboard1.png!
+
+
+Click the
+!SaveIcon.png!
+ to paste the copied node into the selected destination node at step 3.
+
+- You can click the
+!DeleteIcon.png!
+  icon to delete specific waiting statement.
+- Or you can click the *Clear All* link to delete all waiting statements in the list.
+There is a successful/unsuccessful message with the destination path or a details reason after taking the *Paste*.
+
+
+
+
+

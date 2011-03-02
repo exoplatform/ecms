@@ -1,0 +1,40 @@
+
+h1. Search Root of the Content Browser
+
+When BC portlet is configured to show a hierarchy of categories, it does not allow to retrieve plain documents. So in the preferences panel of the BC, we add a checkbox 'Enable search location':
+
+
+!111.gif!
+
+
+When a user clicks on this checkbox, there appears an explanation text 'When the path shown in Browse Content corresponds to a hierarchy of categories, it needs specifying the path where documents are actually stored, so that they can be found by the search feature of the Portlet.' and a field 'Search location' to select the location. The search will start, basing on this path :
+
+
+!222.gif!
+
+
+Two new preferences are added in the portlet.xml file.
+
+{code}
+<!--
+        Enable search root location
+      -->
+      <preference>
+        <name>enableSearch</name>
+</pre><div align="center">        <value>false</value>
+</div><pre>        <read-only>false</read-only>
+      </preference>
+      <!--
+        Specify the search root location. This preference affects only when enableSearch is true
+        Notice: Have to specify the workspace name
+      -->
+      <preference>
+        <name>searchLocation</name>
+        <value>collaboration:/Documents/Live</value>
+        <read-only>false</read-only>
+      </preference>
+
+{code}
+
+
+

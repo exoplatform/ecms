@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bundle>
+  <PublicationService>
+    <AuthoringPublicationPlugin>
+      <changeState>
+        <obsoleted>Nội dung đã bị hết hạn</obsoleted>
+        <published>Nội dung đã được xuất bản</published>
+				<unpublished>Nội dung này chưa được xuất bản</unpublished>
+				<archived>Nội dung này đã được lưu trữ</archived>
+				<staged>Nội dung này đã sẵn sàng xuất bản</staged>
+				<approved>Nội dung này đã được phê duyệt</approved>
+				<pending>Nội dung này đang chờ phê duyệt</pending>
+				<draft>Nội dung đang là bản nháp</draft>
+      </changeState>
+    </AuthoringPublicationPlugin>
+  </PublicationService>
+</bundle>

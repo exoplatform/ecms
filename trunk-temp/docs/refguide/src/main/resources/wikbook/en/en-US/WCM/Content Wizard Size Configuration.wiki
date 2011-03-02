@@ -1,0 +1,38 @@
+h1. Content Wizard Size Configuration
+
+h2. Overview
+
+*Content edition* in Single Content Viewer (SCV) portlet allows you easy to create or select a webcontent, document to present in a webpage.
+In our wcm, the content edition of SCV is wizard-oriented design and the wizard is displayed in a popup window.
+To let you choose the size of popup window to fit your content purpose and screen resolution, we defined the size of popup in configuration file as a service. 
+
+h2. Configuration
+
+The configuration file is under: ../wcmportal/.../WEB-INF/conf/wcm/webui-properties-configuration.xml(in source code) and look like following code snippet:
+
+{code}
+<configuration>
+   <component>
+    <key>org.exoplatform.wcm.webui.WebUIPropertiesConfigService</key>
+    <type>org.exoplatform.wcm.webui.WebUIPropertiesConfigService</type>
+    <init-params>
+             <properties-param>
+	      <name>SCV.popup.size.in.edit.portlet.mode</name>
+	      <description>size of popup in edit mode of portlet</description>
+	      <property name="width" value="850"/>
+	      <property name="height" value="525"/>			                             
+	     </properties-param>
+	     <properties-param>
+	        <name>SCV.popup.size.in.quickdedit</name>
+	        <description>size of popup in edit mode of portlet</description>
+	        <property name="width" value="950"/>
+		<property name="height" value="750"/>			                             
+	    </properties-param>			
+    </init-params>    
+  </component>	     
+</configuration>
+{code}
+
+* To change the size of popup window when editing content in *page creation wizard* or in edit mode of portlet, please change value of properties: *SCV.popup.size.in.edit.portlet.mode*.
+
+* To change the size of popup window when editing content by click on *quick edit action*, please change value of properties: *SCV.popup.size.in.quickdedit*

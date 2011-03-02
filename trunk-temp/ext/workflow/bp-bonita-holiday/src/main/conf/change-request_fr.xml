@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Modifier des cong\u00e9s</task-name>
+  <title>Modifier des cong\u00e9s</title>
+  <cancel>Fermer</cancel>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <label>D\u00e9but (jj/mm/aaaa) :</label>
+  </start>
+  <end>
+    <label>Fin (jj/mm/aaaa) :</label>
+  </end>
+  <ModifyRequest>
+    <submit>Modifier</submit>
+  </ModifyRequest>
+  <CancelRequest>
+    <submit>Annuler les cong\u00e9s</submit>
+  </CancelRequest>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

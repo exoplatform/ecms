@@ -1,0 +1,46 @@
+<forms>
+
+  <form>
+    <resource-bundle>request</resource-bundle>
+    <state-name>request</state-name>
+    <variable name="start" component="date"/>
+    <variable name="end" component="date"/>
+  </form>
+
+  <form>
+    <resource-bundle>evaluation</resource-bundle>
+  	<state-name>evaluation</state-name>
+    <variable name="initiator" />
+    <variable name="start" component="date"/>
+    <variable name="end" component="date"/>
+    <submitbutton name="approve" transition-name="approve" />
+    <submitbutton name="disapprove" transition-name="disapprove" />
+    <submitbutton name="refuse" transition-name="refuse" />
+  </form>
+
+  <form>
+  	  <resource-bundle>change-request</resource-bundle>
+  	  <state-name>change request</state-name>
+    <variable name="start" component="date"/>
+    <variable name="end" component="date"/>
+    <submitbutton name="submit" transition-name="submit" />
+    <submitbutton name="cancel" transition-name="cancel" />
+  </form>
+
+  <form>
+  	  <resource-bundle>hr-acknoledgement</resource-bundle>
+  	  <state-name>hr acknowledgement</state-name>
+    <variable name="initiator" />
+    <variable name="start" component="date" editable="false"/>
+    <variable name="end" component="date" editable="false"/>
+  </form>
+
+  <form>
+  	  <resource-bundle>assign-replacement</resource-bundle>
+    <state-name>assign replacement</state-name>
+    <variable name="initiator" />
+    <variable name="start" component="date" editable="false"/>
+    <variable name="end" component="date" editable="false"/>
+  </form>
+
+</forms>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPCLVContainer>
+    <title>
+      <QuickEdit>Sửa nhanh</QuickEdit>
+    </title>
+  </UIPCLVContainer>
+
+  <UIParameterizedManagerPopupWindow>
+    <title>
+      <UIPCLVConfig>Cấu hình cho Parameterized content list viewer</UIPCLVConfig>
+    </title>
+  </UIParameterizedManagerPopupWindow>
+
+  <UIPCLVConfig>
+    <label>
+      <Title>Cấu hình cho Parameterized content list viewer</Title>
+      <ContentSelectionBlock>Chọn nội dung</ContentSelectionBlock>
+      <OrderBy>Sắp xếp theo</OrderBy>
+      <option>
+        <exo:title>Tiêu đề</exo:title>
+        <exo:dateCreated>Ngày tạo</exo:dateCreated>
+        <exo:dateModified>Ngày sửa</exo:dateModified>
+        <publication:liveDate>Ngày xuất bản</publication:liveDate>
+        <exo:startEvent>Event date</exo:startEvent>
+      </option>
+      <DisplaySettingBlock>Lựa chọn hiển thị</DisplaySettingBlock>
+      <Header>Tiêu đề portlet</Header>
+      <AutomaticDetection>Tự động phát hiện</AutomaticDetection>
+      <FormViewTemplate>Viewer template</FormViewTemplate>
+      <PaginatorTemplate>Paginator template</PaginatorTemplate>
+      <UICategoryNavigationTreeNameFormSelectBox>Cây phân loại</UICategoryNavigationTreeNameFormSelectBox>
+      <ItemsPerPage>Số lượng mỗi trang</ItemsPerPage>
+      <ViewerTitle>Hiển thị tiêu đề nội dung</ViewerTitle>
+      <ViewerHeader>Hiển thị tiêu đề portlet</ViewerHeader>
+      <ViewerButtonRefresh>Hiển thị nút làm mới</ViewerButtonRefresh>
+      <ViewerThumbnailsView>Hiển thị hình minh họa</ViewerThumbnailsView>
+      <ViewerDateCreated>Hiển thị ngày tạo</ViewerDateCreated>
+      <ShowReadMore>Hiển thị Đọc thêm</ShowReadMore>
+      <ViewerSummary>Hiển thị tóm tắt</ViewerSummary>
+      <ShowRSSLink>Hiển thị liên kết RSS</ShowRSSLink>
+      <ShowLink>Hiển thị liên kết</ShowLink>
+      <LinkFormatBlock>Định dạng liên kết</LinkFormatBlock>
+      <UIParameterizedTagetPageInputSetAction>Trang đích</UIParameterizedTagetPageInputSetAction>
+      <content-not-found>Không có nội dung nào</content-not-found>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy</Cancel>
+    </action>
+  </UIPCLVConfig>
+
+  <OrderTypes>
+    <label>
+      <OrderDesc>Giảm dần</OrderDesc>
+      <OrderAsc>Tăng dần</OrderAsc>
+    </label>
+  </OrderTypes>
+
+  <UIParameterizedTagetPageInputSetAction>
+    <title>
+      <SelectTargetPage>Chọn trang đích</SelectTargetPage>
+    </title>
+  </UIParameterizedTagetPageInputSetAction>
+</bundle>

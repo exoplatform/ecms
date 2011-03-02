@@ -1,0 +1,134 @@
+.UIPCLVDefault {
+  border: 1px solid #b7b7b7;
+  margin: 10px;
+  background: #fff;
+}
+
+.UIPCLVDefault .TopBoxParameterized {
+  background: url('background/BGTopBox.gif') repeat-x left top;
+  line-height: 30px;
+  padding: 0px 10px;
+  margin-bottom: 1px;
+}
+
+.UIPCLVDefault .TopBoxParameterized .Title {
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  height: 30px;
+}
+
+.UIPCLVDefault .Header {
+  background: url(background/BgCategoryTitle1x25.gif) repeat-x;
+  line-height: 25px;
+  padding-left: 10px;
+  font-weight: bold;
+  color: #424242;
+  float: left;
+}
+
+.UIPCLVDefault .CaptionItem {
+  border-top: 1px solid #cbe2f4;
+  padding: 5px;
+}
+
+.UIPCLVDefault .CaptionItem .ContentNormalNews {
+  color: #6b6b6b;
+  font-size: 12px;
+  line-height: 16px;
+  float: left;
+}
+
+.UIPCLVDefault .CaptionItem .TitleContentNormalNews {
+  color: #3a66d8;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.UIPCLVDefault .CaptionItem .TitleContentNormalNews:hover {
+  text-decoration: underline;
+}
+
+.UIPCLVDefault .CaptionItem .LineNormalNews {
+  height: 1px;
+  background: #dbdbdb;
+}
+
+.UIPCLVDefault .CaptionItem .HotNews {
+  background: #edf5fb url('background/BGHotNews.gif') repeat-x left bottom;
+  padding: 25px;
+}
+
+.UIPCLVDefault .CaptionItem .ImageHotNews {
+  background: #fff;
+  width: 248px;
+  border: 1px solid #dbdbdb;
+  padding: 5px;
+  float: right;
+  margin-left: 10px;
+  display: block;
+}
+
+.UIPCLVDefault .CaptionItem .ContentHotNews {
+  color: #6b6b6b;
+  font-size: 12px;
+  line-height: 16px;
+  float: left;
+  width: 280px;
+}
+
+.UIPCLVDefault .CaptionItem .TitleContentHotNews {
+  color: #3a66d8;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.UIPCLVDefault .CaptionItem .TitleContentHotNews:hover {
+  text-decoration: underline;
+}
+
+.UIPCLVDefault .CaptionItem .NormalNews {
+  padding: 25px;
+}
+
+.UIPCLVDefault .CaptionItem .ImageNormalNews {
+  background: #fff;
+  width: 188px;
+  border: 1px solid #dbdbdb;
+  padding: 5px;
+  float: left;
+  display: block;
+  margin-right: 10px;
+}
+
+.UIPCLVDefault .CaptionItem .ReadLink {
+  margin-bottom: 6px;
+  text-align: right;
+}
+
+.UIPCLVDefault .CaptionItem .ReadLink  a {
+  color: #00BAEB;
+}
+
+.UIPCLVDefault .CaptionItem .ReadLink  a:hover {
+  color: #058EE6;
+}
+
+.UIPCLVDefault .CaptionItem .HotNews .ReadLink {
+  margin-bottom: 6px;
+  text-align: right;
+}
+
+.UIPCLVDefault .CaptionItem .HotNews .ReadLink  a {
+  color: #00BAEB;
+}
+
+.UIPCLVDefault .CaptionItem .HotNews .ReadLink  a:hover {
+  color: #058EE6;
+}

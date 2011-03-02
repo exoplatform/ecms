@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Đánh giá các kì nghỉ</task-name>
+  <title>Đánh giá các kì nghỉ</title>
+  <approve>
+    <submit>Đồng ý</submit>
+    <value>Đồng ý các kỳ nghỉ</value>
+  </approve>
+  <disapprove>
+    <submit>Không đồng ý</submit>
+    <value>Không đồng ý với các kì nghỉ</value>
+  </disapprove>
+  <refuse>
+    <submit>Từ chối</submit>
+    <value>Từ chối các kì nghỉ</value>
+  </refuse>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Người yêu cầu</title>
+    <label>Người khởi tạo :</label>
+  </initiator>
+  <start>
+    <title>Bắt đầu các kỳ nghỉ :</title>
+    <label>Bắt đầu (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <title>Kết thúc các kỳ nghỉ :</title>
+    <label>Kết thúc (dd/mm/yyyy) :</label>
+  </end>
+  
+  <grant>
+    <submit>Cấp phép</submit>
+    <value>Cấp phép tăng lương</value>
+  </grant>
+  <deny>
+    <submit>Từ chối</submit>
+    <value>Từ chối tăng lương</value>
+  </deny>
+  <!--
+  #variable title and label
+  -->  
+  <reason>
+    <title>Nguyên nhân đưa ra bởi người tạo</title>
+    <label>Lý do :</label>
+  </reason>
+  <amount-asked>
+    <title>Số lượng được hỏi :</title>
+    <label>Số lượng :</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Số lượng được cấp phép :</title>
+    <label>Cấp phép :</label>
+  </amount-granted>
+  <priority>
+    <title>Thiết lập ưu tiên</title>
+    <label>Ưu tiên:</label>
+  </priority>
+  <rewarded>
+    <title>Người khởi tạo được thưởng</title>
+    <label>Thưởng:</label>
+    <checkbox>Người khởi tạo được thưởng!</checkbox>
+  </rewarded>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

@@ -1,0 +1,57 @@
+<%
+  import org.exoplatform.ecm.webui.component.browsecontent.BCTreeNode ;
+  import javax.jcr.Node;
+  BCTreeNode treeNode = uicomponent.getTreeRoot() ;  
+	public void writeNodes(List nodes, int level) {	  
+	  for(node in nodes) {
+	    String actionTreeLink = "" ;
+	    String path = node.getPath() ;
+	    String name = path.substring(path.lastIndexOf("/") + 1) ;
+	    actionTreeLink = uicomponent.event("Select",node.getPath()) ;
+	    String styleTree =  "CategoryTreeLabel" ;
+	    String expandIcon = "SelectFolder" ;
+	    String icon = uicomponent.getIcons(node.getNode(),"16x16Icon") ;
+	    if(node.isExpanded()) {
+	      styleTree = "CategorySelectLabel" ;
+	      expandIcon = "NormalFolder" ;
+	    }
+	    println "<div class=\"ParentSupMenu\" style=\"margin-left: ${level * 15}px;\">" ;
+	    println "<a href=\"" + actionTreeLink + "\"><div class=\"SelectIcon ${expandIcon}16x16Icon\"><span></span></div></a>" ;
+	    println "<a href=\"" + actionTreeLink + "\"><div class=\"TreeRootIcon CBDefaultFolder16x16Icon $icon\">";
+	    if(uicomponent.isSymLink(node.getNode())) {
+	      println "<div class=\"LinkSmall\"></div>";
+	    }
+	    println "</div></a>" ;
+      println "<div class=\""+styleTree+"\"> <a href=\"" + actionTreeLink + "\">"+ name + " </a></div>" ;
+      println "</div>" ;
+      if(node.getChildrenSize() > 0) writeNodes(node.getChildren(), level + 1) ;
+    }
+  }
+  String componentName = uicomponent.getName() ;
+%>
+<div class="UICategoryTree">
+	<% 
+   		String rootNode = uicomponent.getRootNode().getPath() ;
+   		if (rootNode.equals("/"))  rootNode = "Root" ;
+   		else  rootNode =  uicomponent.getRootNode().getName() ;
+  %>
+	<div class="TitleCategoryTree">
+		<div class="CategoryTreeIcon CategoryListIcon"><span></span></div>
+		<div class="TiteLabel"><%=_ctx.appRes(uicomponent.id  + ".label.title")%></div>
+		<div class="ClearLeft"><span></span></div>
+	</div>
+	<div class="MiddleCategoryTree">
+		<a href="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>"><div class="TreeRootIcon NormalFolder16x16Icon"><span></span></div></a>
+		<a href="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>"><div class="TreeRootIcon CBDefaultFolder16x16Icon"><span></span></div></a>
+		<a class="RootTreeNode" href="<%=uicomponent.event('Select',uicomponent.getRootNode().getPath());%>">
+		    <%=rootNode%>
+		</a>
+		<div class="ClearLeft"><span></span></div>
+		
+		<div class="ListMenu">
+			<div class="SupMenu">
+				<%writeNodes(treeNode.getChildren(), 1)%>					
+			</div>
+		</div>
+	</div>					
+</div>

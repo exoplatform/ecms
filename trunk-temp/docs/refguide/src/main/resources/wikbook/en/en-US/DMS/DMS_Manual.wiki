@@ -1,0 +1,214 @@
+
+h1. Document Management System Manual
+
+
+
+
+This module depends on [eXo Portal|Portal:WebHome], therefore you should also study the [Portal:Portal Manual].
+
+
+
+h1. Terms
+
+* [Drives Concept]
+* [Folksonomy Concept]
+* [Taxonomy Concept]
+* [Metadata Concept]
+* [ECM:Actions Concept]
+* [Browsing Content Portlet|BrowseContent Portlet]
+* [File Explorer Views]
+* [JCR Hierarchy]
+* [ECM:JCR Namespaces]
+* [ECM:Node Type Management]
+
+h1. User Manual
+
+
+
+* [ECM:RTL Support of DMS Portlets]
+
+* [DMS Videos]
+
+h2. File Explorer
+
+
+* [Using the File Explorer]
+* [Using the File Explorer in DMS 26|DMS:Using the File Explorer in DMS 2-6]
+* [Drives]
+* [Folders]
+* [ECM:Upload a File]
+* [Finding a Document]
+* [ECM:Using Collaboration Features]
+* [Adding Taxonomies using the File Explorer]
+* [Finding Documents using the File Explorer]
+* [Finding Documents in Taxonomy-dependent Folders]
+* [ECM:Manage Permissions using the File Explorer]
+* [ECM:RSS feed in DMS]
+* [ECM:Version Management]
+* [ECM:Creating a Symlink]
+* [ECM:Export and Import Namespaces]
+* [ECM:Export and Import Nodes]
+* [Thumbnail view]
+* [Cover flow]
+* [Slide Show and Timeline view]
+* [Drag and Drop]
+* [Ability to separate keys from values in the select box and ability to translate the values]
+* [Schedule lifecycle|Schedule lifecycle]
+* [Managing Actions]
+* [Using Autoversioning Action]
+
+
+
+
+
+
+
+
+
+
+
+h2. Content Browser
+
+* [ECM:Configuration of the Content Browser]
+* [ Browsing in Taxonomy - dependent Folders]
+* [ECM:Search Root of the Content Browser]
+* [ECM:Publication Dependency of the Content Browser]
+
+
+h1. Administration
+
+* [ECM:Storage Location]
+* [ECM:Node Level Access Control]
+* [ECM:Version Control and Locking]
+* [ECM:Audit Trails Management]
+
+* [ECM Administration]
+* [Taxonomy Management]
+
+* [Create your own document type]
+* [ECM:Creating a View]
+* [ECM:Creating a Drive]
+* [ECM:Tags Management]
+* [Tags Management in DMS 26|ECM:Tags Management in DMS2-6]
+* [ECM:Creating a new Taxonomy Tree]
+* [ECM:Renaming a category]
+
+* [ECM:User-Defined Action Types]
+* [ECM:Fast Content Creator]
+
+* [ECM:Node Type Creation]
+* [Repository Management]
+* [Metadata Management]
+* [Namespace Registry]
+* [Query Management]
+* [Script Management]
+* [Unlock Management]
+* [Translation for Taxonomy]
+
+
+
+
+
+
+
+
+
+
+
+
+h1. Installation
+
+* [ECM:DMS Tutorial]
+
+
+h1. Configuration
+
+* [ECM:Content Browser Portlet Preferences]
+
+
+* [Metadata Extraction]
+* [ECM:WebDav Access]
+* [ECM:User-Defined Document Types]
+
+
+
+
+* [ECM:Direct Access of JCR Drives]
+* [ECM:Forcing Taxonomies at File Upload]
+* [View Service Configuration]
+* [Edit and View Mode Configuration]
+* [Predefined Taxonomies]
+
+* [Audit Trails Configuration]
+
+
+
+
+
+
+
+h1. Integration
+* [ECM:Integrating Content Validation into DMS]
+
+
+h1. Release Notes and Dependencies
+
+* [DMS:Dependencies]
+
+h1. Migration
+* [ECM:ECM Migration from 2-0 to 2-0-x]
+* [ECM:ECM Migration from 2-0-x to 2-1]
+* [ECM:ECM Migration from 2-1-x to 2-2]
+* [ECM:ECM Migration from 2-2-x to 2-2-2]
+* [ECM:ECM Migration from ECM 2-2-x to DMS 2-3]
+* [Changes in SVN and exobuild since DMS 2-3]
+* [ECM:Configuration of Publication Awareness of the Content Browser]
+* [DMS:Changes between DMS 2-3 and DMS 2-5]
+* [ECM:ECM Migration from DMS 2-3 to DMS 2-5]
+* [ECM:Taxonomy Migration from ECM 2-2-x to DMS 2-5]
+
+
+
+
+
+
+
+
+
+
+
+h1. Technical Foundations
+
+* [Main:Overall Architecture]
+* [ECM|ECM:]
+* [Portal|Portal:]
+* [Portlet Container| PC:]
+* [Java Content Repository| JCR:]
+* [Web Services| WS:]
+* [eXo Core| Core:]
+* [eXo Kernel| Kernel:]
+
+
+
+
+h1. Development
+
+* [Developers' zone| Main:Developers]
+* [eXo JavaDocs| http//docs:exoplatform.org]
+* [Products+Tech+Overview:Components Registry#ECM]
+
+* [Publication Service]
+* [ECM:ECM Action Type Management]
+* [ECM:ECM Groovy Scripts Management]
+* [ECM:ECM Template Management]
+* [UI Extension Framework]
+
+
+
+h1. Support
+
+- [Forums|http//www.exoplatform.com/portal/public/en/forum?portal:componentId=forum&portal.type=action&portal.isSecure=false&uicomponent=UIBreadcumbs&op=ChangePath&objectId=forumCategory88a712bac0a80201004998ce39c9e43f%2Fforum88a88ec4c0a802010066175a51001e4b]
+- [FAQ|http://faq.exoplatform.com]
+- [JIRA|http://jira.exoplatform.org/browse/Workflow ]
+
+eXo Platform SAS also provides [professional support|http://www.exoplatform.com/portal/public/en/services/support] for eXo DMS.

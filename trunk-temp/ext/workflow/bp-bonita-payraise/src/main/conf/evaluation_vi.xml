@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Đánh giá việc tăng lương</task-name>
+  <title>Đánh giá việc tăng lương</title>
+  <grant>
+    <submit>Cấp phép</submit>
+    <value>Cấp phép tăng lương</value>
+  </grant>
+  <deny>
+    <submit>Từ chối</submit>
+    <value>Từ chối tăng lương</value>
+  </deny>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <title>Người yêu cầu thêm tiền?</title>
+    <label>Người tạo :</label>
+  </initiator>
+  <reason>
+    <title>Nguyên nhân đưa ra bởi người tạo</title>
+    <label>Lý do :</label>
+  </reason>
+  <amount-asked>
+    <title>Số lượng được hỏi :</title>
+    <label>Số lượng :</label>
+  </amount-asked>
+  <amount-granted>
+    <title>Số lượng được cấp phép :</title>
+    <label>Cấp phép :</label>
+  </amount-granted>
+  <priority>
+    <title>Thiết lập ưu tiên</title>
+    <label>Ưu tiên:</label>
+  </priority>
+  <rewarded>
+    <title>Người khởi tạo được thưởng</title>
+    <label>Thưởng:</label>
+    <checkbox>Người khởi tạo được thưởng!</checkbox>
+  </rewarded>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

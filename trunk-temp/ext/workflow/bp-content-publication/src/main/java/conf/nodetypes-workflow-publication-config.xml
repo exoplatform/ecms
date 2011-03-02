@@ -1,0 +1,28 @@
+<nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
+  xmlns:jcr="http://www.jcp.org/jcr/1.0">
+  
+  <nodeType name="publication:workflowPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+		<supertypes>
+      <supertype>publication:publication</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="publication:validator" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>*</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="publication:businessProcess" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>content-publishing</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="publication:backupPath" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+</nodeTypes>

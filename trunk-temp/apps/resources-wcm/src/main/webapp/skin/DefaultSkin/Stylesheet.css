@@ -1,0 +1,183 @@
+@import url('category-navigation-portlet/vertical-hierachy/SimpleVerticalHierachy/Stylesheet.css');
+
+@import url('content-list-viewer-portlet/list-contents/UIContentListPresentationDefault/Stylesheet.css');
+
+@import url('content-list-viewer-portlet/list-contents/UIPCLVDefault/Stylesheet.css');
+
+@import url('content-list-viewer-portlet/list-contents/UIPCLVHotNews/Stylesheet.css');
+
+@import url('content-list-viewer-portlet/paginator/UIPaginatorDefault/Stylesheet.css');
+
+@import url('search-portlet/paginator/UIPaginatorDefault/Stylesheet.css');
+
+@import url('search-portlet/search-form/UISearchForm/Stylesheet.css');
+
+@import url('search-portlet/search-result/UIAdvanceSearchResultDefault/Stylesheet.css');
+
+@import url('wcm-content-dialog/Stylesheet.css');
+
+@import url('wcm-content-selector/Stylesheet.css');
+
+@import url('wcm-explorer/Stylesheet.css');
+
+@import url('wcm-nodetypes/16x16/Stylesheet.css');
+
+@import url('wcm-nodetypes/277x182/Stylesheet.css');
+
+@import url('wcm-nodetypes/48x48/Stylesheet.css');
+
+@import url('wcm-portal/Stylesheet.css');
+
+@import url('wcm-publication/Stylesheet.css');
+
+.cke_show_borders {
+	background:#fff;
+}
+
+.UISiteAdminToolBar {
+	height: auto;
+	padding-right: 20px;
+}
+
+/************ UIToolbarContainer **************/
+/**
+
+.UIWorkingWorkspace .UIToolbarContainer .NormalContainerBlock .ToolbarContainer {
+	background: #343a50;
+	border: none;
+	height: 30px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .ToolbarContainer .TRContainer {
+	height: 30px;
+}
+
+.UIWorkingWorkspace .UIStarToolBarPortlet {
+	background: url("background/LogoStart.gif") no-repeat 10px top;
+	height: 30px;
+	width: 64px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .UIHorizontalTabs .TabsContainer {
+	float: left;
+	height: 30px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .UIHorizontalTabs .UITab {
+	background: url("background/LineMenu.gif") no-repeat left top;
+	line-height: 30px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .UIAdminToolbarPortlet .UIHorizontalTabs .UITab {
+	background: url("background/LineMenu.gif") no-repeat left top;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .ToolbarContainer a {
+	color: #ffd400;
+	padding: 0 15px;
+	font-weight: normal;
+	background: none;
+	margin: 0px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .ToolbarContainer .Name a {
+	padding: 0px;
+	line-height: 30px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .ToolbarContainer a:hover {
+	color: #abadb0;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .ToolbarContainer a.ToolbarArrowIcon {
+	background: url("background/ToolbarArrowIcon.gif") no-repeat right center;
+	padding: 0 25px 0 15px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .EditingPortletTDContainer {
+	margin: 5px 0 0 0px;
+	width: 130px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .EditingPortletTDContainer select {
+	border: 1px solid #0d1223;
+	background: #151a30;
+	color: #ABADB0;
+	padding: 0px 0px 0px 5px;
+	line-height: 18px;
+	height: 20px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .EditingPortletTDContainer option {
+	background: none;
+}
+
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItemContainer {
+	border: 1px solid #343a50;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem {
+	background: #3E445D;
+	border-top: 1px solid #555a6e;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .ArrowIcon {
+	background:url("background/ArrowIcon.gif") no-repeat right center;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem a {
+	color: #f0f0f0;
+	padding-right: 25px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem a:hover {
+	background-color: #343a50;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .TitleBar {
+	background: #606F7D;
+	color: #20263F;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .ChangeLanguageIcon {
+	background: url("background/ToolbarContainer.png") no-repeat 5px -573px;
+	padding-left: 35px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .ChangeSkinIcon {
+	background: url("background/ToolbarContainer.png") no-repeat 5px -453px;
+	padding-left: 35px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .SignOutIcon {
+	background: url("background/ToolbarContainer.png") no-repeat 5px -603px;
+	padding-left: 35px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .DefaultPageIcon {
+	background:url("background/ToolbarContainer.png") no-repeat 5px -634px;
+	padding-left: 32px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .AddPageIcon {
+	background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIToolbarContainer/background/ToolbarContainer.gif") no-repeat 2px -320px;
+	padding-left: 32px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .EditPageIcon {
+	background: url("background/ToolbarContainer.png") no-repeat 5px -453px;
+	padding-left: 32px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .EditSiteIcon {
+	background: url("background/ToolbarContainer.png") no-repeat 5px -453px;
+	padding-left: 32px;
+}
+
+.UIWorkingWorkspace .UIToolbarContainer .MenuItem .SiteIcon {
+	background: url("background/ToolbarContainer.png") no-repeat 5px -184px;
+	padding-left: 32px;
+}
+
+*/

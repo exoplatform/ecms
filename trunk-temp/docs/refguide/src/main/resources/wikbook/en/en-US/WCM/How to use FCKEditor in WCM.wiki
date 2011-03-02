@@ -1,0 +1,153 @@
+h1. How to use FCKEditor in WCM
+
+
+h2. FCKEditor's plugins in WCM
+In WCM, we developed some new plugins to communicate media files between client and server. If you need something else, please tell us and we can discuss about that :)
+
+h3. Insert images
+
+{info}
+*Deprecate since WCM 1.2*
+{info}
+
+<div class="text-align: center"> !InsertImagesDialog.png! </div>
+
+h3. Insert documents
+
+{info}
+*Deprecate since WCM 1.2*
+{info}
+
+<div class="text-align: center"> !InsertDocumentsDialog.png! </div>
+
+h3. Insert portal links
+
+<div class="text-align: center"> !InsertPortalLinksDialog.png! </div>
+
+h3. Insert gadgets
+
+<div class="text-align: center"> !InsertGadgetsDialog.png! </div>
+
+h3. Insert contents
+
+{info}
+*Since WCM 1.2*
+{info}
+
+<div class="text-align: center"> !InsertContentsDialog.png! </div>
+
+h2. FCKEditor's toolbar in WCM
+We also provide some default toolbars for you. Of course you can customize it as you want.
+
+h3. FCKEditor plugins's icon
+
+!InsertImages.png! Insert images <br/><br/>
+!InsertDocuments.png! Insert documents <br/><br/>
+!InsertPortalLinks.png! Insert portal links <br/><br/>
+!InsertGadgets.png! Insert gadgets <br/><br/>
+!InserContents.png! Insert contents
+
+h3. CompleteWCM
+
+exoconfig.js
+{code}
+FCKConfig.ToolbarSets["CompleteWCM"] = [
+	['Source','Templates','-','FitWindow','ShowBlocks'],
+	['Cut','Copy','PasteText','-','SpellCheck','-','Undo','Redo'],
+	['WCMInsertGadget','Flash','Table','SpecialChar', 'WCMInsertContent'],
+	'/',
+	['Bold','Italic','Underline','StrikeThrough','-','JustifyLeft','JustifyCenter',
+	 'JustifyRight','JustifyFull','-','OrderedList','UnorderedList','-','TextColor','BGColor','-','RemoveFormat'],
+	['Link','WCMInsertPortalLink','Unlink','Anchor'],
+	'/',
+	['Style','FontFormat','FontName','FontSize']
+] ;
+{code}
+
+{info}
+*Before WCM 1.2*
+{info}
+
+<div class="text-align: center"> !CompleteWCM1.1.png! </div>
+
+{info}
+*Since WCM 1.2*
+{info}
+
+<div class="text-align: center"> !CompleteWCM1.2.png! </div>
+
+h3. BasicWCM
+
+exoconfig.js
+{code}
+FCKConfig.ToolbarSets["BasicWCM"] = [
+	['Source','-','Bold','Italic','Underline','StrikeThrough','-','OrderedList','UnorderedList','Outdent','Indent'],
+	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+	['Blockquote','-','Link','Unlink','WCMInsertPortalLink','WCMInsertContent','-','FitWindow','ShowBlocks'],	
+	['Style','FontFormat','FontName','FontSize']
+] ;
+{code}
+
+{info}
+*Before WCM 1.2*
+{info}
+
+<div class="text-align: center"> !BasicWCM1.1.png! </div>
+
+{info}
+*Since WCM 1.2*
+{info}
+
+<div class="text-align: center"> !BasicWCM1.2.png! </div>
+
+h3. SuperBasicWCM
+
+exoconfig.js
+{code}
+FCKConfig.ToolbarSets["SuperBasicWCM"] = [
+     ['Source','-','Bold','Italic','Underline'],
+     ['-','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+     ['-','Link','Unlink','WCMInsertPortalLink','WCMInsertGadget','WCMInsertContent'],	
+] ;
+{code}
+
+{info}
+*Before WCM 1.2*
+{info}
+
+<div class="text-align: center"> !SuperBasicWCM1.1.png! </div>
+
+{info}
+*Since WCM 1.2*
+{info}
+
+<div class="text-align: center"> !SuperBasicWCM1.2.png! </div>
+
+h2. FCKEditor and dialogs
+
+If you want to use FCKEditor in WCM's dialogs, you can do as follow: 
+{code}
+String htmlContent = "";
+String[] htmlArguments = ["jcrPath=/node/node_property", "options=toolbar:CompleteWCM", htmlContent];
+uicomponent.addWYSIWYGField(htmlWYSIWYGFormId, htmlArguments) ;
+{code}
+
+You can change somethings as you want:
+- htmlContent: the pre-defined values for FCKEditor
+- node_property: the property where the content is stored. You also can save the content in the nt:file, but you have add some new lines like this *before* the code above
+{code}
+String[] htmlHiddenField1 = ["jcrPath=/node/file.txt", "nodetype=nt:file", "defaultValues=default.html"];
+String[] htmlHiddenField2 = ["jcrPath=/node/file.txt/jcr:content", "nodetype=nt:resource", "visible=false"]; 
+String[] htmlHiddenField3 = ["jcrPath=/node/file.txt//jcr:content/jcr:encoding", "visible=false", "UTF-8"];
+String[] htmlHiddenField4 = ["jcrPath=/node/file.txt//jcr:content/jcr:lastModified", "visible=false"];
+String[] htmlHiddenField5 = ["jcrPath=/node/file.txt//jcr:content/dc:date", "visible=false"];
+String[] htmlHiddenField6 = ["jcrPath=/node/file.txt//jcr:content/jcr:mimeType", "visible=false", "text/plain"];
+uicomponent.addHiddenField("htmlHiddenField1", htmlHiddenField1);
+uicomponent.addHiddenField("htmlHiddenField2", htmlHiddenField2);
+uicomponent.addHiddenField("htmlHiddenField3", htmlHiddenField3);
+uicomponent.addCalendarField("htmlHiddenField4", htmlHiddenField4);
+uicomponent.addCalendarField("htmlHiddenField5", htmlHiddenField5);
+uicomponent.addHiddenField("htmlHiddenField6", htmlHiddenField6);
+{code}
+- CompleteWCM: You can change and use other FCKEditor's toolbar of WCM like *BasicWCM*, *SuperBasicWCM*
+*Hint:* You can learn more about the dialog here [ECM Template Management|http://wiki.exoplatform.com/xwiki/bin/view/ECM/ECM+Template+Management]

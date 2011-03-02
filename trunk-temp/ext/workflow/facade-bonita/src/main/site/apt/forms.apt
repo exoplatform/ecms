@@ -1,0 +1,109 @@
+Forms definition
+
+  The concept behind Bonita forms is to generate forms corresponding to activities
+  in the user ToDo list (ie activities runnable by the user, in ready or anticipable state).
+  The forms present widgets that enable the user to get and change values corresponding to
+  Activity properties. Project instances properties can also be taken into account. The forms.xml
+  file describes forms associated with workflow activities.
+
+  The syntax is quite simple. Between \<forms\>\</forms\> tag which surround the file,
+  you define forms one by one.
+
+  "Holiday" workflow has an activity called "evaluation". Let's take a look at
+  this form definition.
+
+
+--------------------------------------------------------------------------------
+<form>
+  <resource-bundle>evaluation</resource-bundle>
+  <activity>evaluation</activity>
+  <variable name="initiator" editable="false"/>
+  <variable name="start" component="date"/>
+  <variable name="end" component="date"/>
+  <variable name="decision" component="radiobox"/>
+  <!-- No need to specify Submit buttons in the Bonita implementation -->
+</form>  
+--------------------------------------------------------------------------------  
+ 
+  * resource-bundle: textual information associated with the activity.
+                Go to "Resource bundle" section for more details.
+
+  * activity: workflow activity name, as specified in the XPDL file
+
+  * variable: workflow attribute display
+
+     ** name: attribute name. Note that both project related  and activities's
+         attribute can be displayed. 
+
+
+     ** component: you can specify the component type associated with the attribute.
+              Possible values are: 
+              
+                 *** text
+                 
+                 *** textarea
+                 
+                 *** wysiwyg 
+                 
+                 *** date
+                 
+                 *** datetime
+                 
+                 *** select
+                 
+                 *** checkbox
+                 
+                 *** upload
+                 
+                 *** radiobox
+
+         The following screenshot illustrates all available types.
+
+[images/components.jpg]
+        
+             
+         If you don't put any component type, a text component will be used.
+              
+   ** editable: boolean, is the value editable ? 
+      
+
+
+
+
+* The first form: a particular case
+      
+  <<IMPORTANT>>: By convention, the first form's activity has to be an empty string.
+
+  Bonita workflows are actually instantiated after completing the first form.
+  So this form does not match with any activities you've defined in the 
+  XPDL file, hence the tag <activity> has to be an empty string.
+
+-----------------------------------------------------------------
+<form>
+    <!-- The Start name is an empty String in the Bonita implementation -->
+    <resource-bundle>request</resource-bundle>
+    <delegated-view>true</delegated-view>
+    <activity></activity>
+    <variable name="start" component="date"/>
+    <variable name="end" component="date"/>
+    <!-- No need to specify Submit buttons in the Bonita implementation -->
+</form>
+-----------------------------------------------------------------
+
+  The first form has also a special tag named "delegated-view". It basically 
+  determines whether the Process can be started from the Workflow User Portlet. If
+  the value is "false", then the Process is considered as a system one. This means it is
+  typically started behind the scene, by services in eXo. An example of such Process is
+  "Content Validation".  In that case, there is no need to specify variables nor a
+  resource bundle, as no instantiation panel is displayed. 
+
+* Submit button
+
+  Bonita provides one action button: "Submit". You don't have to specify it
+  in the forms.xml. All attributes are instanciated with values submitted in the
+  form when the user clicks on the "Submit" button.
+  We'll see in the next section how to handle multiple choices with one button.
+
+  The forms.xml file used in this tutorial is available in the following
+  {{{holiday-standalone.zip}archive}}.
+  

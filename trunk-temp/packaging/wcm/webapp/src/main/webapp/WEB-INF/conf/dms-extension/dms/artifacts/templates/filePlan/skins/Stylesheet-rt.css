@@ -1,0 +1,70 @@
+/**
+  RTL skin for rma:filePlan template
+*/
+.UIDivInfo {
+	margin: auto; padding: 10px;
+}
+
+.UIDivInfo .Title {
+	font-size: 13px; font-weight: bold;
+	padding-bottom: 3px;
+	height: 20px;
+	overflow: hidden;
+	padding-right:12px;
+	padding-left:12px;
+	float:right;
+} 
+
+.UIDivInfo .Title  .TextTitleFilePlan{
+	float:right;
+}
+
+.UIDivInfo .Title .LabelFielPlan {
+	padding-right: 5px;
+	font-weight: normal;
+}
+
+.UIDivInfo .FilePlanContentTable {
+	width: 96%;
+	border-collapse: collapse;
+	border-top: 1px solid #dbdbdb;
+	font-size:11px;
+	margin: auto;
+}
+
+.UIDivInfo .FilePlanContentTable td {
+	border: 1px solid #dbdbdb;
+	border-top: none;
+	height: 25px;
+	padding-right: 7px;
+	background: white;
+	line-height: 25px;
+}
+
+.UIDivInfo .UIHorizontalTabs .TabsContainer {
+	overflow-y: hidden;
+}
+
+.UIDivInfo .NavigationButtonContainer {
+	cursor: pointer;    
+	display: none;
+	float: left;
+	height: 20px;
+	padding-top: 4px;
+	z-index: 1;
+}
+
+.UIDivInfo a:hover {     
+	color: blue;
+}  
+.UIDivInfo .ColIcon{
+	padding: 5px 2px 5px 5px;
+}
+.UIDivInfo .Icon{
+	float:right;
+	margin: 0px 2px 0px 5px;
+}
+.UIDivInfo .FilePlanContentTable .RTLTitle{
+	float: right;
+	width: 30%;
+}

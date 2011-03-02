@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.wcm.webui.component.UIWCMCacheForm #
+  ################################################################################
+  -->
+  
+ <UIWCMCacheForm> 	 
+ 	 <action>
+ 	 		<Refresh>Refresh</Refresh>
+ 	 		<Save>Lưu</Save>
+					<Clear>Xóa bộ đệm</Clear> 	 		
+ 	 </action> 	 
+			<label>
+				 
+				 <maxsize>Kích cỡ tối đa :</maxsize>
+					<livetime>Thời gian lưu bộ đệm theo giây :</livetime>
+					<isCacheEnable>Cho phép lưu bộ đệm(nên để ở môi trường production)</isCacheEnable>
+					<hit>Số lần truy cập :</hit>				
+					<currentSize>Kích cỡ hiện thời :</currentSize>
+					<miss>số lần truy cập thất bại :</miss>
+			</label>
+ </UIWCMCacheForm>
+	
+	<!--
+  ################################################################################
+  #             org.exoplatform.wcm.manager.cache.UIWCMCacheManagerForm #
+  ################################################################################
+  -->
+	
+	<UIWCMCacheManagerForm> 	 
+ 	 <action>
+ 	 		<Refresh>Refresh </Refresh>
+ 	 		<Save>Lưu</Save>
+					<Clear>Xóa bộ đệm</Clear> 	 		
+ 	 </action> 	 
+			<label>
+				 <cacheModify>chọn cache để thay đổi :</cacheModify>
+				 <maxsize>Kích cỡ tối đa :</maxsize>
+					<livetime>Thời gian lưu bộ đệm theo giây :</livetime>
+					<isCacheEnable>Cho phép lưu bộ đệm(nên để ở môi trường production)</isCacheEnable>
+					<hit>Số lần truy cập :</hit>				
+					<currentSize>Kích cỡ hiện thời :</currentSize>
+					<miss>số lần truy cập thất bại :</miss>					
+							 				 			
+			</label>
+ </UIWCMCacheManagerForm>
+	
+	<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <GlobalAdministration>Quản trị chung</GlobalAdministration>
+      </label>
+    </tab>
+    <label>      						
+      <CacheView>Bộ đệm WCM</CacheView>
+      <UIWCMCachePanel>Quản trị bộ đệm WCM </UIWCMCachePanel>
+						<UIWCMCacheManager>Quản lý bộ đệm</UIWCMCacheManager>
+						<UIWCMCacheManagerPanel>Quản lý bộ đệm WCM</UIWCMCacheManagerPanel>
+    </label>        
+  </UIECMAdminControlPanel>	
+</bundle>

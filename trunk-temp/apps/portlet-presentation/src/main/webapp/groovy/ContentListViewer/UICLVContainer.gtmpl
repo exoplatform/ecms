@@ -1,0 +1,74 @@
+	<%
+		import org.exoplatform.wcm.webui.clv.UICLVPresentation;
+
+	  import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
+		import org.exoplatform.wcm.webui.Utils;
+		
+		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
+		def rcontext = _ctx.getRequestContext() ;
+%>
+<div class="$uicomponent.id " id="$uicomponent.id" 
+	onmouseover="this.className = '$uicomponent.id $hoverClass'" onmouseout="this.className = '$uicomponent.id'">
+	<%
+	
+		String portletId = Utils.getRealPortletId(rcontext);
+		def quickEditingBlockId = portletId + "-QuickEditingBlock";
+		def addContentBlockId = portletId + "-AddContentBlock";
+    def manageContentBlockId = portletId + "-ManageContentBlock";		
+    
+    def addContentLink = uicomponent.getEditLink(false, true);
+    def manageContentsLink = uicomponent.getEditLink(false, false);
+    boolean isShowInfoBar = uicomponent.isShowInfoBar();    
+    def edittingStyle = "z-index: 1";
+      if (isShowInfoBar)
+        edittingStyle = "z-index: 1; top:20px";
+    if (Utils.isShowQuickEdit()) {
+    %>
+	 <div class="EdittingToolBarContainer" style="$edittingStyle">
+		 <div class="EdittingToolBar " >
+			<div class="EdittingToolBarL">
+				<div class="EdittingToolBarR">
+					<div class="EdittingToolBarC clearfix">
+				
+					<%		
+						if (uicomponent.isShowPreferences()) {					
+					%>
+							<div style="float: right" id="<%=quickEditingBlockId%>">
+									<a class="PreferencesIcon" href="<%=uicomponent.event("Preferences")%>" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>">
+			<!--					  <div class="QuickEdit"><span></span></div>-->
+							&nbsp;
+									</a>					 
+							</div>
+					<% } 	
+					
+					if (uicomponent.isShowManageContent()) {
+					  %>
+						<div style="float: right"  id="<%=manageContentBlockId%>">
+							<a class="ManageContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
+							  &nbsp;
+							</a>           
+						</div>
+						  
+					 <% 
+					}
+					if (uicomponent.isShowAddContent()) {          
+					  %>
+						<div style="float: right" id="<%=addContentBlockId%>">
+							<a class="AddContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
+							  &nbsp;
+							</a>           
+						</div>
+					  <% }%>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<% 			
+    }
+	if (uicomponent.getChild(UICLVPresentation.class) != null)	{
+		uicomponent.renderChild(UICLVPresentation.class);
+	}
+	%>
+</div>

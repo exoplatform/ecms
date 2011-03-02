@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Cập nhật các ngày nghỉ</task-name>
+  <title>Cập nhật các ngày nghỉ</title>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <label>Bắt đầu (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <label>Kết thúc (dd/mm/yyyy) :</label>
+  </end>
+  <changedecision>
+    <label>Sự quyết định:</label>
+    <radiobox-0>Thay đổi</radiobox-0>
+    <radiobox-1>Không đồng ý</radiobox-1>
+  </changedecision>
+  <ModifyRequest>
+    <submit>Sửa yêu cầu</submit>
+  </ModifyRequest>
+  <CancelRequest>
+    <submit>Thoát yêu cầu</submit>
+  </CancelRequest>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

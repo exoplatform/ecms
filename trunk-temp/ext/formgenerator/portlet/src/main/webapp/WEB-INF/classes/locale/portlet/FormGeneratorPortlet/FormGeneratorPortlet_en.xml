@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFormGeneratorTabPane>
+    <label>
+      <UIFormGeneratorGeneralTab>General</UIFormGeneratorGeneralTab>
+      <FormGeneratorName>Name</FormGeneratorName>
+      <UIFormGeneratorNodetypeFormSelectBox>Based nodetype</UIFormGeneratorNodetypeFormSelectBox>
+      <UIFormGeneratorJsonObjectStringInput></UIFormGeneratorJsonObjectStringInput>
+      <UIFormGeneratorDescriptionFormWYSIWYGInput>Description</UIFormGeneratorDescriptionFormWYSIWYGInput>
+      <UIFormGeneratorIconFormUploadInput>Icon</UIFormGeneratorIconFormUploadInput>
+      <UIFormGeneratorDnDTab>Form builder</UIFormGeneratorDnDTab>
+      <UIFormGeneratorOptionsTab>Options</UIFormGeneratorOptionsTab>
+      <UIFormGeneratorVoteFormCheckboxInput>Allow vote</UIFormGeneratorVoteFormCheckboxInput>
+      <UIFormGeneratorCommentFormCheckboxInput>Allow comment</UIFormGeneratorCommentFormCheckboxInput>
+    </label>
+    <action>
+      <Save>Save</Save>
+      <Reset>Reset</Reset>
+    </action>
+    <msg>
+      <register-failed>NodeType registration is unsuccessfully. It is existing or Super types is invalid</register-failed>
+      <AddNewsSuccessful>Nodetype {0}'s template is generated successful</AddNewsSuccessful>
+      <duplicate-name>Field label's name is duplicated, please input difference name</duplicate-name>
+      <select-value-empty>Some field in default value of select box can not be empty, please input value for it.</select-value-empty>
+    </msg>
+  </UIFormGeneratorTabPane>
+  <FormGeneratorDialog>
+    <label>
+      <Download>Download this document</Download>
+    </label>
+  </FormGeneratorDialog>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>There are some invalid characters in field '{0}'. Type another value, please!</Invalid-char>
+    </msg>
+  </ECMNameValidator>
+</bundle>

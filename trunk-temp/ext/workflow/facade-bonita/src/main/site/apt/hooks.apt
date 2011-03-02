@@ -1,0 +1,55 @@
+Hooks
+
+  Hooks are user defined logic that can be triggered at some defined points of
+  the process life cycle. For more details about hooks please refer to 
+  {{{http://bonita.objectweb.org/}Bonita documentation}}.
+ 
+  Hook java files have to be placed in src/java/hero/hook directory.
+  Holiday business process uses one hook called "HolidayEnoughHolidaysLeftHook".
+  Here is what that hook does:
+
+   - Retrieves project instance creator login name and stores it in the "initiator"
+     property.
+  
+   - Hardcodes the value "enough" in attribute "choice". This attribute is used
+     during the next transition by the Workflow engine to work out which Activity
+     comes next. To a certain extent, this simulates a call to the information
+     system.
+
+--------------------------------------------------------------------------------
+public void beforeTerminate(Object obj, BnNodeLocal node)
+    throws HeroHookException {
+    
+  ProjectSessionLocal projectSession = null;
+  try {
+    // Initialize Project Session
+    String projectName = node.getBnProject().getName();
+    ProjectSessionLocalHome projectSessionHome = ProjectSessionUtil.getLocalHome();
+    projectSession = projectSessionHome.create();
+    projectSession.initProject(projectName);
+      
+    // Retrieve workflow session creator and set the instance property
+    // "initiator" with it
+    projectSession.setProperty(INITIATOR_PROPERTY_NAME,
+                               projectSession.getCreator());
+           
+    // set "choice" attribut to "enought"
+    String nodeName = node.getName();
+    projectSession.setNodeProperty(nodeName,
+        CHOICE_PROPERTY_NAME,
+        "enough",
+        false);
+  }
+    
+  catch (Exception e) {
+    // TODO Use logging system instead
+    e.printStackTrace();
+  }
+    
+  finally {
+    try {
+      projectSession.remove();
+    } catch (Exception ignore) {
+    }
+  }
+--------------------------------------------------------------------------------

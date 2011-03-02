@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <portal>
+    <classic>
+      <home>Trang chủ</home>
+      <sitemap>Bản đồ trang</sitemap>
+      <searchResult>Kết quả tìm kiếm</searchResult>
+      <detail>Chi tiết</detail>
+      <newAccount>Đăng ký</newAccount>
+      <groupnavigation>Quản lý thanh điều hướng cho nhóm</groupnavigation>
+      <register>Đăng ký</register>
+      <printviewer>Trang in</printviewer>
+      <portalnavigation>Quản lý thanh điều hướng chung</portalnavigation>
+    </classic>
+  </portal>
+</bundle>

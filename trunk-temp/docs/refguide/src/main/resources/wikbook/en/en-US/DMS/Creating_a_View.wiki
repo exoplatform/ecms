@@ -1,0 +1,58 @@
+
+h1. Creating a View
+
+
+Each drive has some views. Each view has some tabs and each tab contains some functions<br>
+
+Do the following guides to create a new view:
+
+1\. Go to *ECM Administration* on the navigation bar --> *Content Presentation* -> *Manage View*.
+
+2. Click on the *Add View* button. The *Add View* form appears:
+
+
+!addview!
+
+
+3. Enter a name for the new view in the *Name* field.
+
+4. Click the icon to set permission in this view. The *Select Permission* form will appear:
+
+
+!permission!
+
+
+5. Select a group in the list on the left pane and a specific membership on the right pane.
+
+6. Select a template for this view.
+
+7. Open the *Tab Form* tab by clicking the "*Add tab*" button:
+
+
+!tab.gif!
+
+
+8. Input a name for the tab in the *Name* field.
+
+9. Select functions for this tab by checking the check-boxes.
+
+10. Click *Save* to finish adding a new tab. Each tab has at least 1 function.
+
+11\. Click the *Save* button to finish adding a new view. Each view has at least 1 tab.
+
+To apply the view for the drive:
+* Go to *Manage Drive* on the left pane.
+* [Create a new drive| Creating a Drive] or click the *Edit* icon on a corresponding drive.
+* In *Apply view*, select the new view that has been created.
+
+
+!edit.gif!
+
+
+After creating a new view for the drive, go to *File Explorer* and select the drive that applied this view. If a user has permission to see this view, he/she will see it.
+
+
+!view.gif!
+
+
+

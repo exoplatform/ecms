@@ -1,0 +1,250 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Tran The Trong
+ *          trongtt@gmail.com
+ * August 01, 2006
+ * version: $Id$
+ */
+ 
+/*############################## -- Begin UIDrivesBrowser -- ##############################*/
+
+.UIJCRExplorerPortlet .UIDrivesBrowser {
+  overflow: auto;
+  padding: 0px 10px 10px;
+  *width: 97%;
+  margin: auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesRepoList .UIDrivesBrowser {
+  overflow: auto;
+  padding: 10px 10px 0px;
+  *width: 97%;
+  margin: auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDropDownControl {
+	width: 99%;
+}
+
+.UIJCRExplorerPortlet .UIRepository {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 234px;
+  border: solid 1px #d7d7d7;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryContainer {
+  border: solid 1px #ffffff;
+  background: url('MacSkin/background/BGRepositoryList1x3.gif') repeat;
+  width: 232px;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList {
+  width: 230px;
+  margin: 3px auto 1px auto;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList .RepositoryDecorater {
+  background:  url('MacSkin/background/BottomRepositoryList232x30.gif') no-repeat ;
+  height: 30px;
+  line-height: 30px;
+  margin: 70px 0px 1px 0px;
+}
+
+.UIJCRExplorerPortlet .UIRepository .RepositoryList .UIVerticalSlideTabs {
+  padding: 5px 7px 0px 7px;
+  margin: 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesTitle {
+  padding: 10px 0px 6px 0px ;
+  text-align: center;
+  color: #f9a606;
+  font-size: 12px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDrivesList  {
+  margin: 0px;
+  padding: 1px;
+  border: solid 1px #dfdfdf;
+  border-top: 0px solid #dfdfdf;
+}
+
+.UIJCRExplorerPortlet .UIDrivesRepoList .UIDrivesBrowser .UIDrivesList  {
+  margin: 0px;
+  padding: 1px;
+  border: solid 1px #dfdfdf;
+  border-bottom: 0px solid #dfdfdf; 
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UIDrivesList .EmptyDrives {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 95%;
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px 0px;
+  color: #ef5604;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle {
+  background: #c8e0f2 url('MacSkin/background/DrivesListTitle195x28.gif') no-repeat left center; /* orientation=lt */
+  background: #c8e0f2 url('MacSkin/background/DrivesListTitle195x28-rt.gif') no-repeat right center; /* orientation=rt */
+  line-height: 28px;
+  color: #333333;
+  font-weight: bold;
+  padding-left: 10px; /* orientation=lt */
+  padding-right: 10px; /* orientation=rt */
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListContainer {
+  background: #f3f3f3;
+  margin: 3px 1px 1px 1px;
+  padding: 7px;
+  background: url('MacSkin/background/BGRepositoryList1x3.gif') repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent {
+	border: 1px solid #d9d9d9;
+	padding: 1px 2px 2px 2px;
+	margin-bottom: 5px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .DrivesListTitle {
+	height: 21px;
+	line-height: 21px;
+	padding-right: 5px; /* orientation=lt */
+	padding-left: 5px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .DropDownArrow16x16Icon {
+	padding-right: 20px; /* orientation=lt */
+	padding-left: 20px; /* orientation=rt */
+	width: auto; height: 21px;
+	background-position: right center; /* orientation=lt */
+	background-position: left center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .Icon {
+	padding-left: 20px; /* orientation=lt */
+	padding-right: 20px; /* orientation=rt */
+	width: auto; height: auto;
+	margin: 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .PersonalDrivesIcon {
+	background: url('MacSkin/background/Personal.png') no-repeat left center; /* orientation=lt */
+	background: url('MacSkin/background/Personal.png') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .GroupDrivesIcon {
+	background: url('MacSkin/background/Group.png') no-repeat left center; /* orientation=lt */
+	background: url('MacSkin/background/Group.png') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesListTitle .GeneralDriveIcon {
+	background: url('MacSkin/background/Earth.gif') no-repeat left center; /* orientation=lt */
+	background: url('MacSkin/background/Earth.gif') no-repeat right center; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .BrowserDecorator {
+	border: 1px solid #d9d9d9;
+	margin-top: 1px; 
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DrivesContent .BrowserDecorator .DecoratorMiddle{
+	width: 99.5%;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Drive {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  border: solid 1px #ffffff;
+  margin: 5px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveContainer {
+  height: 85px;
+  width: 155px;
+  border: solid 1px #d1d1d1;
+  background: white;
+  padding: 8px 0px 5px 0px;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Icon {
+  cursor: pointer;
+  width: 58px; height: 50px;
+  margin: 2px auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel {
+  line-height: 14px;
+  text-align: center;
+  margin: 3px auto 0px auto;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel a {
+  color: #116eaa;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DriveLabel a:hover {
+  color: orange;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .GroupDriveIcon {
+  background: url('MacSkin/background/GroupManagement58x45.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserDriveIcon {
+  background: url('MacSkin/background/UserManagement58x45.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .DefaultDriveIcon {
+  background: url('MacSkin/background/MacDefaultDrive.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdminproductionIcon {
+  background: url('MacSkin/background/AdminProduction.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdmindraftIcon {
+  background: url('MacSkin/background/AdminDraft.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdminbackupIcon {
+  background: url('MacSkin/background/AdminBackup.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdmintaxonomyIcon {
+  background: url('MacSkin/background/AdminTaxonomy.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .Admindigital-assetsIcon {
+  background: url('MacSkin/background/AdminDigitalAssets.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .AdminsystemIcon {
+  background: url('MacSkin/background/AdminSystem.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserproductionIcon {
+  background: url('MacSkin/background/UserProduction.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserdraftIcon {
+  background: url('MacSkin/background/UserDraft.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UserbackupIcon {
+  background: url('MacSkin/background/UserBackup.gif') no-repeat;
+}
+
+.UIJCRExplorerPortlet .UIDrivesBrowser .UsertaxonomyIcon {
+  background: url('DefaultSkin/background/UserTaxonomy.gif') no-repeat;
+}
+
+/*############################## -- End UIDrivesBrowser -- ##############################*/
+

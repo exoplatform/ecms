@@ -1,0 +1,23 @@
+h1. Media Library
+
+Media Library is a place where users can manage medias such as audios, images, videos. In here, users can upload, view media in Sites Explorer.
+
+ !F9.gif! 
+
+h2. How to use media library?
+
+To use the thumbnails view, do the followings:
+
+1\. Go to *ECM* ->*File Explorer*.
+
+2. Select any drive.
+
+3. Choose media folder--> choose image node.
+
+4. On the *Select tab* --> choose *actions*
+
+5. Click on the upload file !F10.gif! icon to upload an image.
+
+If users want to upload audio files, they should choose audio node or to upload video files, they should choose video node on media folder.
+
+

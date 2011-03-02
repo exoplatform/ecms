@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-User_Guide-Next_Steps">
+  <title>Next Steps</title>
+  <para>
+  This user guide has provided a thorough explanation of features and terminologies within &PRODUCT;. You now know how to create, manage and publish web content and administrate a website based on &PRODUCT;. You may have more questions or want to get involved, the following links can connect you with resources to learn more and contribute to the open source development process.
+ </para>
+  <itemizedlist>
+    <listitem>
+      <para>
+    <ulink url="http://www.exoplatform.com/company/public/website/platform" type="http">Learn more about eXo Platform 3.0</ulink>
+   </para>
+    </listitem>
+    <listitem>
+      <para>
+    <ulink url="http://www.exoplatform.com/company/public/website/resource-center" type="http">Video demos, tutorial and more in the eXo Resource Center</ulink>
+   </para>
+    </listitem>
+    <listitem>
+      <para>
+    <ulink url="http://wiki.exoplatform.com/xwiki/bin/view/Main/WebHome/" type="http">Access another eXo documents in the eXo Wiki</ulink>
+   </para>
+    </listitem>
+    <listitem>
+      <para>
+    <ulink url="http://forums.exoplatform.org/portal/public/classic/forum" type="http">Ask question about eXo Content in the Forums</ulink>
+   </para>
+    </listitem>
+  </itemizedlist>
+</chapter>

@@ -1,0 +1,75 @@
+<%
+/**
+ * Created by The eXo Platform SARL
+ * Author : Dang Van Minh
+ *          minh.dang@exoplatform.com
+ * Dec 29, 2006
+ * 3:28:26 PM 
+ */
+%>
+<%
+		import org.exoplatform.ecm.webui.utils.Utils; 
+  def lockedNodeList = uicomponent.getLockedNodeList(); 
+  if(lockedNodeList == null) return;
+  int totalPages = uicomponent.getUIPageIterator().getAvailablePage();
+%>
+<div class="UIQueriesList" id="$uicomponent.id">
+  <table class="UIGrid">
+    <thead>
+      <tr>
+  	    <th width="25px"></th>
+  	    <th><%=_ctx.appRes("UILockNodeList.header.name")%></th>
+  	    <th><%=_ctx.appRes("UILockNodeList.header.hoderLock")%></th>  	    
+  	    <th width="35px"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+        def rowClass = null ;
+  	    boolean even = true ;
+  	    for (node in lockedNodeList) {
+  	      if(even) rowClass = "EvenRow" ;  
+  	      else rowClass =  "OddRow" ; 
+  	      even = !even ;
+      %>
+          <tr class="$rowClass">
+            <td width="25px">
+            		<div title="$node.name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>">
+					  							</div>
+					  					</td>
+            <td><div class="Text"><%= node.getPath(); %></div></td>
+            <td><div class="Text"><%= node.getLock().getLockOwner(); %></div></td>
+	          	<td width="45px">
+		          	<div class="ActionContainer">
+				          <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon">
+			          </div>
+	          	</td>	                    
+          </tr>
+      <%}%>  
+    </tbody>
+  </table>
+  <% if(totalPages>1){ %>
+  <div style="margin:1px 0px 5px 0px;">
+    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+  </div>
+  <% } %>
+	<div class="UIAction">
+    <table class="ActionContainer">
+    	<tr>
+    		<td>
+		      <% for(action in uicomponent.getActions()) { %>
+	          <div onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle">
+	  					<div class="ButtonLeft">
+	  					  <div class="ButtonRight">
+	  						  <div class="ButtonMiddle">
+	  							  <a href="javascript:void(0);"><%=_ctx.appRes("UILockNodeList.action." + action)%></a>
+	  				    </div>
+	  				   </div>
+	  			  </div>
+	  				</div>
+		      <% } %>
+    		</td>
+    	</tr>
+    </table>
+  </div>
+</div>

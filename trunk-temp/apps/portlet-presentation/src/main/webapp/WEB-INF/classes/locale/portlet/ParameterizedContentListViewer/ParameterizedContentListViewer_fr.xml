@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPCLVContainer>
+    <title>
+      <QuickEdit>Préférences</QuickEdit>
+    </title>
+  </UIPCLVContainer>
+
+  <UIParameterizedManagerPopupWindow>
+    <title>
+      <UIPCLVConfig>Configuration de Parameterized content list viewer</UIPCLVConfig>
+    </title>
+  </UIParameterizedManagerPopupWindow>
+
+  <UIPCLVConfig>
+    <label>
+      <Title>Configuration de Parameterized content list viewer</Title>
+      <ContentSelectionBlock>Sommaire de sélection</ContentSelectionBlock>
+      <OrderBy>Classement par</OrderBy>
+      <option>
+        <exo:title>Titre</exo:title>
+        <exo:dateCreated>Date de création</exo:dateCreated>
+        <exo:dateModified>Date de modification</exo:dateModified>
+        <publication:liveDate>Date de publication</publication:liveDate>
+        <exo:startEvent>Date d'événement</exo:startEvent>
+      </option>
+      <DisplaySettingBlock>L'écran de réglage</DisplaySettingBlock>
+      <Header>Header</Header>
+      <AutomaticDetection>Détection automatique</AutomaticDetection>
+      <FormViewTemplate>Modèle de vue</FormViewTemplate>
+      <PaginatorTemplate>Modèle de pagination</PaginatorTemplate>
+      <UICategoryNavigationTreeNameFormSelectBox>Arbre taxonomique</UICategoryNavigationTreeNameFormSelectBox>
+      <ItemsPerPage>Articles par page</ItemsPerPage>
+      <ViewerTitle>Afficher le titre</ViewerTitle>
+      <ViewerHeader>Afficher l'en-tête</ViewerHeader>
+      <ViewerButtonRefresh>Afficher le bouton actualiser</ViewerButtonRefresh>
+      <ViewerThumbnailsView>Afficher l'illustration</ViewerThumbnailsView>
+      <ViewerDateCreated>Afficher la date de création</ViewerDateCreated>
+      <ShowReadMore>Lire la suite</ShowReadMore>
+      <ViewerSummary>Afficher le résumé</ViewerSummary>
+      <ShowRSSLink>Show RSS link</ShowRSSLink>
+      <ShowLink>Afficher le lien</ShowLink>
+      <LinkFormatBlock>Le format de lien</LinkFormatBlock>
+      <UIParameterizedTagetPageInputSetAction>Page cible</UIParameterizedTagetPageInputSetAction>
+      <content-not-found>Il n'ya pas de contenu trouvé</content-not-found>
+    </label>
+    <action>
+      <Save>Sauver</Save>
+      <Cancel>Annuler</Cancel>
+    </action>
+  </UIPCLVConfig>
+
+  <OrderTypes>
+    <label>
+      <OrderDesc>Descendant</OrderDesc>
+      <OrderAsc>Ascendant</OrderAsc>
+    </label>
+  </OrderTypes>
+
+  <UIParameterizedTagetPageInputSetAction>
+    <title>
+      <SelectTargetPage>Sélectionnez page cible</SelectTargetPage>
+    </title>
+  </UIParameterizedTagetPageInputSetAction>
+</bundle>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ########### From version 1.0-SNAPSHOT ###########
+  ########### Add language for French   ###########
+  -->
+  <task-name>start a pay raise</task-name>
+  <title>Request a pay raise</title>
+  <submit>Let's pray</submit>
+  <!--
+  #variable title and label
+  -->
+  <amount-asked>
+    <label>Amount :</label>
+  </amount-asked>
+  <priority>
+    <label>Priority :</label>
+    <select-0>not important</select-0>
+    <valueselect-0>not_important</valueselect-0>
+    <select-1>important</select-1>
+    <valueselect-1>important</valueselect-1>
+    <select-2>critical</select-2>
+    <valueselect-2>critical</valueselect-2>
+  </priority>
+  <rewarded>
+    <label>Rewarded :</label>
+    <checkbox>Yes I was rewarded!</checkbox>
+  </rewarded>
+  <reason>
+    <label>Reason :</label>
+  </reason>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

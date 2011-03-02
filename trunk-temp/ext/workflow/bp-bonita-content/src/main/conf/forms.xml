@@ -1,0 +1,25 @@
+<forms>
+
+  <form>
+    <resource-bundle>content-publishing-evaluation</resource-bundle>
+    <state-name>evaluation</state-name>
+    <variable name="document-id" component="nodeview"/>
+    <variable name="initiator" editable="false"/>
+    <variable name="startDate" component="datetime"/>
+    <variable name="endDate" component="datetime" visiable="false"/>
+    <variable name="reason" component="textarea"/>
+    <variable name="delegator"/>
+    <submitbutton name="approve" variable="decision" />
+    <submitbutton name="disapprove" variable="decision" />
+    <submitbutton name="delegate" variable="decision" />    
+    <submitbutton name="refuse" variable="decision" />
+  </form>
+
+  <form>
+    <resource-bundle>content-publishing-change-request</resource-bundle>
+    <state-name>change-request</state-name>
+    <variable name="document-id" component="nodeedit"/>
+    <submitbutton name="submit" variable="changeDecision" />
+    <submitbutton name="cancel" variable="changeDecision" />
+  </form>
+</forms>

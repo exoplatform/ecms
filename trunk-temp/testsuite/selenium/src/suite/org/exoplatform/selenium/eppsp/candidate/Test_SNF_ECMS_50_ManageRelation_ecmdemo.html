@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>Test_SNF_ECMS_50_ManageRelation_ecmdemo</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Test_SNF_ECMS_50_ManageRelation_ecmdemo</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/ecmdemo/public/acme/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>windowMaximize</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>username</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>username</td>
+	<td>root</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>password</td>
+	<td>gtn</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Go to Sites Explorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Open&nbsp;&nbsp;driver pane</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@title='Show Drives']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@title='Show Drives']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Open Private driver</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Private</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Private</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Select Admin View</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@title='Admin View']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@title='Admin View']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Go to Action tab</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Create a Article document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Test_SNF_ECMS_50</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[@id='cke_contents_summary']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//td[@id='cke_contents_summary']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//html/body</td>
+	<td>Lam Y khue, Em yeu chi</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//td[@id='cke_contents_content']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//html/body</td>
+	<td>Tai sao chi lai tu` choi em chu', Em muon het len. EM YEU CHI. Minh bi dien mia roi</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Go to Private</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@title='Private']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@title='Private']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--create another document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>selectTemplate</td>
+	<td>label=Kofax document</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>selectTemplate</td>
+	<td>label=Kofax document</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name</td>
+	<td>Kofax</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Save as Draft &quot;Kofax document &quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save as Draft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Add Relation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Open Add relation form</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[text()='Admin']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[text()='Admin']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Manage Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Manage Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Go to &quot;Select relation tab&quot;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIRelationManager']/div/div/div[1]/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIRelationManager']/div/div/div[1]/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Select node to relation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;&nbsp;User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='Users']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='Users']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;&nbsp;root</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='root']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='root']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;&nbsp;Private</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='Private']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='Private']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;&nbsp;Choose Kofax file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>/Users/root/Private/Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>/Users/root/Private/Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--&nbsp;&nbsp;Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Go to Infor Tab</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Info</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Verify link to Kofax: Select Relation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Show/Hide Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Show/Hide Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Check in Relations List</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@class='UIViewRelationList']//a[text()='Kofax']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='UIViewRelationList']//a[text()='Kofax']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Check References List</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@class='UIViewRelationList']//a[text()='Test_SNF_ECMS_50']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementPresent</td>
+	<td>//div[@class='UIViewRelationList']//a[text()='Test_SNF_ECMS_50']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Show</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Show/Hide Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Show/Hide Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Delete Relation: Go to Admin Tab</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Admin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Access Manage Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Manage Relations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Delete icon</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Do you really want to delete this relation?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Empty data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Empty data</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Delete document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDownRight</td>
+	<td>link=Test_SNF_ECMS_50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='UIViewRelationList']//a[text()='Test_SNF_ECMS_50']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//div[@class='UIViewRelationList']//a[text()='Test_SNF_ECMS_50']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Delete Kofax document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDownRight</td>
+	<td>link=Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Ok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//div[@class='UIViewRelationList']//a[text()='Kofax']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>//div[@class='UIViewRelationList']//a[text()='Kofax']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Log out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sign out</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,752 @@
+/**
+ * Created by The eXo Platform SARL
+ * Modifile : Vu Duy Tu
+ *           duytucntt@gmail.com
+ * December 08, 2006
+ * version: $Id$
+ */
+
+.SavedQueries {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+  width: 24px; height: 24px;
+  background: url('MacSkin/SavedQueries.gif') no-repeat;
+  cursor: pointer;
+  margin: 2px 0px 0px 5px;
+}
+
+.SwitchSearch  {
+  width: 24px; height: 24px;
+  background: url('MacSkin/AdvancedSearch.gif') no-repeat;
+  cursor: pointer;
+}
+
+.CollapseFolder24x24Icon {
+  background: url('MacSkin/BlueOpenFolder.gif') no-repeat center center;
+  width: 24px; height: 24px;
+}
+
+.ExpandFolder24x24Icon {
+  width: 24px; height: 24px;
+  background: url('MacSkin/BlueClosedFolder.gif') no-repeat center center;
+}
+
+.Style1BackArrow24x24Icon {
+  width: 24px; height: 24px;
+  background: url('MacSkin/BlueCircleLeftArrow.gif') no-repeat center center;
+}
+
+.AddNodeTypeIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageNodeTypeIcon.gif') no-repeat;
+}
+
+.AddCategoryIcon {
+		height: 24px;
+  background: url('DefaultSkin/AddCategoryIcon.gif') no-repeat;
+}
+
+.SearchIcon {
+	width: 24px; height: 24px;
+  background: url('MacSkin/IconSearch.gif') no-repeat;
+}
+
+.UIFolksonomyManagerIcon {
+	width: 24px;	height: 22px;
+  background: url('MacSkin/ManageFolksonomyIcon.gif') no-repeat;
+}
+
+.UITaxonomyManagerIcon {
+	width: 24px;	height: 22px;
+  background: url('MacSkin/ManageTaxonomyIcon.gif') no-repeat;
+}
+
+.UITaxonomyManagerTreesIcon {
+	width: 24px;	height: 22px;
+  background: url('MacSkin/ManageTaxonomyIcon.gif') no-repeat;
+}
+
+.UIMetadataManagerIcon {
+	width: 24px;	height: 22px;
+  background: url('MacSkin/ManageMetadataIcon.gif') no-repeat;
+}
+
+.AddMetadataTypeIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageMetadataIcon.gif') no-repeat;
+}
+
+.UINamespaceManagerIcon {
+	width: 24px;	height: 22px;
+  background: url('MacSkin/NameSpaceRegistryIcon.gif') no-repeat;
+}
+
+.UINodeTypeManagerIcon {
+	width: 24px;	height: 22px;
+  background: url('MacSkin/ManageNodeTypeIcon.gif') no-repeat;
+}
+
+.UIActionManagerIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/CreateActionTypeIcon.gif') no-repeat;
+}
+
+.UITemplatesManagerIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageTemplateIcon.gif') no-repeat;
+}
+
+.UIScriptManagerIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageScriptIcon.gif') no-repeat;
+}
+
+.OntologiesIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageOntologies.png') no-repeat;
+}
+
+.ContentPresentationIcon {
+	width: 24px;	height:24px;
+  background: url('MacSkin/DisplayDocuments.png') no-repeat;
+}
+
+.AdvanceConfiguarationIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageDynamicContent.png') no-repeat;
+}
+
+.TypesOfContentIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/CreateDocumentTypes.png') no-repeat;
+}
+
+.UIRuleManagerIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/RuleManager.gif') no-repeat;
+}
+
+.UIViewManagerIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageViewIcon.gif') no-repeat;
+}
+
+.UIDriveManagerIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageDriveIcon.gif') no-repeat;
+}
+
+.UIQueriesManagerIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageQueriesIcon.gif') no-repeat;
+}
+
+.ManageOntologiesIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageOntologies.png') no-repeat;
+}
+
+.CreateDocumentTypesIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/CreateDocumentTypes.png') no-repeat;
+}
+
+.DisplayDocumentsIcon {
+	width: 24px;	height: 22px;
+  background: url('MacSkin/DisplayDocuments.png') no-repeat;
+}
+
+.ManageDynamicContentIcon {
+	width: 24px;	height: 24px;
+  background: url('MacSkin/ManageDynamicContent.png') no-repeat;
+}
+
+.Relations24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/RelationsIcon.gif') no-repeat center center;
+}
+
+.JCRExplorer24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/JCRExplorerIcon.gif') no-repeat center center;
+}
+
+.CloseSidebar24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/CloseSidebarIcon.gif') no-repeat center center;
+}
+
+.Style1NextArrow24x24Icon  {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/BlueCircleRightArrow.gif') no-repeat center center;
+}
+
+/* <ECM-1543>
+	* minh.js.exo 
+	* add to manage group icon 
+	*/
+
+.ShowHideBoxContainer {
+	display: none;
+}
+
+a:hover .ShowHideBoxContainer {
+	display: block;
+}
+
+/* </ECM-1543> */
+
+.EditDocumentIcon {
+	height: 24px;
+	background: url('MacSkin/EditDocument.gif') no-repeat left center; /* orientation=lt */
+	background: url('MacSkin/EditDocument.gif') no-repeat right center; /* orientation=rt */
+}
+
+.WatchDocumentIcon {
+	height: 24px;
+	background: url('DefaultSkin/WatchDocument.gif') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/WatchDocument.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ViewMetadatasIcon {
+	height: 16px;
+	background: url('MacSkin/IconActionsBar.gif') no-repeat left -144px; /* orientation=lt */
+	background: url('MacSkin/IconActionsBar.gif') no-repeat right -144px; /* orientation=rt */
+}
+
+.VoteIcon {
+	height: 24px;
+	background: url('DefaultSkin/VoteDocument.gif') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/VoteDocument.gif') no-repeat right center; /* orientation=rt */
+}
+
+.CommentIcon {
+	height: 24px;
+	background: url('DefaultSkin/Comment.gif') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/Comment.gif') no-repeat right center; /* orientation=rt */
+}
+
+.TaggingDocumentIcon {
+	height: 24px;
+  background: url('DefaultSkin/Tagging.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/Tagging.gif') no-repeat right center; /* orientation=rt */
+}
+
+.MultiLanguageIcon {
+ 	height: 24px;
+  background: url('DefaultSkin/MultiLanguages.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/MultiLanguages.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageVersionsIcon {
+	height: 24px;
+  background: url('DefaultSkin/ManageVersions.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ManageVersions.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageAuditingIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -160px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -160px; /* orientation=rt */
+}
+
+.ManagePublicationsIcon {
+	height: 24px;
+  background: url('DefaultSkin/ManagerPuplication.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ManagerPuplication.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageActionsIcon {
+	height: 24px;
+  background: url('DefaultSkin/ManageActions.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ManageActions.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageCategoriesIcon {
+	height: 24px;
+  background: url('DefaultSkin/ManageCategories.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ManageCategories.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageSimpleCategoriesIcon {
+	height: 24px;
+  background: url('DefaultSkin/ManageCategories.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/ManageCategories.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ManageRelationsIcon {
+	height: 24px;
+  background: url('DefaultSkin/ManageRelations.gif') no-repeat  left center; /* orientation=lt */
+  background: url('DefaultSkin/ManageRelations.gif') no-repeat  right center; /* orientation=rt */
+}
+
+.ImportNodeIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -32px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -32px; /* orientation=rt */
+}
+
+.ManageHiddenIcon {
+	height: 24px;
+  background: url('DefaultSkin/AddRemoveHidden.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddRemoveHidden.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ExportNodeIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -16px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -16px; /* orientation=rt */
+}
+
+.AddDocumentIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -64px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -64px; /* orientation=rt */
+}
+
+.CreateTicketIcon {
+	height: 24px;
+  background: url('DefaultSkin/AddTicket.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddTicket.gif') no-repeat right center; /* orientation=rt */
+}
+
+.AddFolderIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -48px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -48px; /* orientation=rt */
+}
+
+.UploadIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -80px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -80px; /* orientation=rt */
+}
+
+.AddSymLinkIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -96px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -96px; /* orientation=rt */
+}
+
+.ViewReferencesIcon {
+	height: 24px;
+  background: url('MacSkin/ViewReferences.gif') no-repeat left center; /* orientation=lt */
+  background: url('MacSkin/ViewReferences.gif') no-repeat right center; /* orientation=rt */
+}
+
+.OverloadThumbnailIcon {
+ 	height: 24px;
+  background: url('DefaultSkin/OverloadThumbnailIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/OverloadThumbnailIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ShowJCRStructureIcon {
+  height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -176px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -176px; /* orientation=rt */
+}
+
+.ViewNodeTypeIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -112px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -112px; /* orientation=rt */
+}
+
+.ViewPropertiesIcon {
+  height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left top; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right top; /* orientation=rt */
+}
+
+.ViewRelationsIcon {
+	height: 24px;
+  background: url('MacSkin/ViewRelations.gif') no-repeat left center; /* orientation=lt */
+  background: url('MacSkin/ViewRelations.gif') no-repeat right center; /* orientation=rt */
+}
+
+.ViewPermissionsIcon {
+	height: 16px;
+  background: url('MacSkin/IconActionsBar.gif') no-repeat left -128px; /* orientation=lt */
+  background: url('MacSkin/IconActionsBar.gif') no-repeat right -128px; /* orientation=rt */
+}
+
+.Clipboard24x24Icon {
+	height: 24px;
+  background: url('DefaultSkin/Clipboard.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/Clipboard.gif') no-repeat right center; /* orientation=rt */
+}
+
+.HardDisk24x24Icon {
+	width: 27px; height: 24px;
+  background: url('DefaultSkin/HardDisk.gif') no-repeat  left center; /* orientation=lt */
+  background: url('DefaultSkin/HardDisk.gif') no-repeat  right center; /* orientation=rt */
+}
+
+.BlueDiamond24x24Icon {
+	height: 24px;
+  background: url('DefaultSkin/BlueDiamond.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/BlueDiamond.gif') no-repeat right center; /* orientation=rt */
+}
+
+.PermissionIcon {
+	height: 24px;
+  background: url('DefaultSkin/PermissionIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/PermissionIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.Permission24x24Icon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 16px;	height: 16px;
+  background: url('DefaultSkin/PermissionSetting.gif') no-repeat;
+}
+
+.SelectPath24x24Icon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 16px;	height: 16px;
+  background: url('DefaultSkin/MagnifierIconNews.png') no-repeat;
+}
+
+.AddRepository24x24Icon {
+	width: 24px;	height: 19px;
+  background: url('DefaultSkin/AddRepositoryIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/AddRepositoryIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.EditRepository24x24Icon {
+	width: 24px;	height: 19px;
+  background: url('DefaultSkin/EditRepositoryIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/EditRepositoryIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+.RemoveRepository24x24Icon {
+	width: 24px;	height: 19px;
+  background: url('DefaultSkin/RemoveRepositoryIcon.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/RemoveRepositoryIcon.gif') no-repeat right center; /* orientation=rt */
+}
+
+/*=================================================================*/
+
+.RefreshSession24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/MetalSync.gif') no-repeat;
+}
+
+.HomeIcon {
+  width: 24px;	height: 24px;
+  background: url('DefaultSkin/HardDisk.gif') no-repeat;
+}
+
+.ViewPortlet24x24Icon {
+  width: 24px;	height: 24px;
+  background: url('DefaultSkin/DisplayDocuments.gif') no-repeat;
+}
+
+.Switch24x24Icon {
+  width: 24px;	height: 24px;
+  background: url('DefaultSkin/DisplayDocuments.gif') no-repeat;
+}
+
+.ConfigPortlet24x24Icon {
+  width: 24px;	height: 24px;
+  background: url('DefaultSkin/ManageActions.gif') no-repeat;
+}
+
+.AddNewConfig24x24Icon {
+  width: 24px;	height: 24px;
+  background: url('DefaultSkin/AddDocument.gif') no-repeat;
+}
+
+.SmallNote24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/SmallNote.gif') no-repeat;
+}
+
+.GreenLeftArrowFolder24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/GreenLeftArrowFolder.gif') no-repeat;
+}
+
+.GreenUpArrowFolder24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/GreenUpArrowFolder.gif') no-repeat;
+}
+
+.GreenLeftArrow24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/GreenLeftArrow.gif') no-repeat;
+}
+
+.GreenRightArrow24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/GreenRightArrow.gif') no-repeat;
+}
+
+.Categories24x24Icon {
+	width: 24px;	height: 24px;
+  background: url('DefaultSkin/Categories.gif') no-repeat;
+}
+
+.BlackMonitor24x24Icon {
+	width: 24px;	height: 19px;
+  background: url('DefaultSkin/BlackMonitor.gif') no-repeat;
+}
+
+/*############################## -- Begin NodeType Icon -- ########################*/
+
+.dc_elementSet24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/dc-elementSet.gif') no-repeat;  
+}
+
+.default24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/default.gif') no-repeat;  
+}
+
+.exo_accessControllable24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-accessControllable.gif') no-repeat;  
+}
+
+.exo_action24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-action.gif') no-repeat;  
+}
+
+.exo_actionable24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-actionable.gif') no-repeat;  
+}
+
+.exo_article24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-article.gif') no-repeat;  
+}
+
+.exo_article_reference24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-article-reference.gif') no-repeat;  
+}
+
+.exo_backupAction24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-backupAction.gif') no-repeat;  
+}
+
+.exo_businessProcessAction24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-businessProcessAction.gif') no-repeat;  
+}
+
+.exo_categorized24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-categorized.gif') no-repeat;  
+}
+
+.exo_mockNodeType24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-mockNodeType.gif') no-repeat;  
+}
+
+.exo_move24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-move.gif') no-repeat;  
+}
+
+.exo_namespace24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-namespace.gif') no-repeat;  
+}
+
+.exo_published24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-published.gif') no-repeat;  
+}
+
+.exo_relationable24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-relationable.gif') no-repeat;  
+}
+
+.exo_ruleAction24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-ruleAction.gif') no-repeat;  
+}
+
+.exo_scriptAction24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-scriptAction.gif') no-repeat;  
+}
+
+.exo_sendMailAction24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-sendMailAction.gif') no-repeat;  
+}
+
+.exo_tab24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-tab.gif') no-repeat;  
+}
+
+.exo_taxonomy24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-taxonomy.gif') no-repeat;  
+}
+
+.exo_template24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-template.gif') no-repeat;  
+}
+
+.exo_versionStorage24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-versionStorage.gif') no-repeat;  
+}
+
+.exo_transformBinaryToTextAction24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-transformBinaryToTextAction.gif') no-repeat;  
+}
+
+.exo_view24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-view.gif') no-repeat;  
+}
+
+.exo_workflowAction24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-workflowAction.gif') no-repeat;  
+}
+
+.exo_createRSSFeedAction24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-createRSSFeedAction.gif') no-repeat;  
+}
+
+.mix_lockable24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/mix-lockable.gif') no-repeat;  
+}
+
+.mix_referenceable24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/mix-referenceable.gif') no-repeat;  
+}
+
+.mix_versionable24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/mix-versionable.gif') no-repeat;  
+}
+
+.nt_base24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-base.gif') no-repeat;  
+}
+
+.nt_childNodeDefinition24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-childNodeDefinition.gif') no-repeat;  
+}
+
+.nt_file24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-file.gif') no-repeat;  
+}
+
+.nt_folder24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-folder.gif') no-repeat;  
+}
+
+.nt_frozenNode24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-frozenNode.gif') no-repeat;  
+}
+
+.nt_hierarchyNode24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-hierarchyNode.gif') no-repeat;  
+}
+
+.nt_linkedFile24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-linkedFile.gif') no-repeat;  
+}
+
+.nt_nodeType24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-nodeType.gif') no-repeat;  
+}
+
+.nt_propertyDefinition24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-propertyDefinition.gif') no-repeat;  
+}
+
+.nt_query24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-query.gif') no-repeat;  
+}
+
+.nt_resource24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-resource.gif') no-repeat;  
+}
+
+.nt_unstructured24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-unstructured.gif') no-repeat;  
+}
+
+.exo_trashFolder24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/exo-trashFolder.gif') no-repeat;  
+}
+
+
+.nt_version24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-version.gif') no-repeat;  
+}
+
+.nt_versionedChild24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-versionedChild.gif') no-repeat;  
+}
+
+.nt_versionHistory24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-versionHistory.gif') no-repeat;  
+}
+
+.nt_query24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-query.gif') no-repeat;  
+}
+
+.nt_versionLabels24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/nt-versionLabels.gif') no-repeat;  
+}
+
+.rma_filePlan24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/rma-filePlan.gif') no-repeat;  
+}
+
+.kfx_document24x24Icon {
+  width: 24px; height: 24px;
+  background: url('DefaultSkin/nodetype/kfx-document.gif') no-repeat;  
+}
+
+.TagExplorer24x24Icon {
+	width: 26px; height: 24px;
+  background: url('DefaultSkin/Tagging.gif') no-repeat;
+}
+
+.UIUnLockManagerIcon {
+		width: 24px;	height: 24px;
+  background: url('MacSkin/ManageUnLock.gif') no-repeat;
+}

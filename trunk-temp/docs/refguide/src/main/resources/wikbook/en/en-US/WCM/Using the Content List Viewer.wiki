@@ -1,0 +1,49 @@
+
+h1. Using the Content List Viewer
+
+CLV (Content List Viewer) allows you to publish multiple contents on a page. Following guides to publish contents for a page:
+
+1\. Select the *List Viewer* page on the Navigation bar.
+
+2. Show form to select contents by clicking the !CLV1.gif! icon:
+
+ !CLV2.gif! 
+
+|| Name    || Description ||
+| Items per page  | 	The number of items will be displayed per page. |
+| Show quick edit button  |	The option to show or hide the quick edit button on this page. |
+| Show refresh button  |	The option to show or hide the refresh button on this page. |
+| Show image   |	The option to show or hide the illustration of each published web content/document. |
+| Show title   |	The option to show or hide title of each published web content/document. |
+| Show date created   |	The option to show or hide the created date of each published web content/document. |
+| Show summary   | 	The option to show or hide summary of each web content/document. |
+| Folder path  |   the path to location of a folder that contains contents. To browse documents/ web contents of the available site, click the   !CLV3.gif!  icon next to this field: |
+
+ !CLV4.gif! 
+
+* If you select the *Automatic* radio button, you can select all content to view in the *Content List Viewer* as:
+
+3. Select the available site on the left and then select a folder that contains some contents (*documents/web contents*) on the right by clicking the !CLV5.gif! icon in the *Add* column
+
+4. Click the *Save* button to accept publishing contents of the selected folders.
+After publishing contents, contents of the selected folder will be displayed in the *List Viewer* page:
+
+ !CLV6.gif! 
+
+- Click the *Refresh* button to load new published contents.
+- To view each content in details, click on the title of that content or click *Read more>>* link under each published content:
+
+ !CLV7.gif! 
+
+- Back to the *List Viewer* page by clicking the  !CLV8.gif!  button.
+
+* If you select *Manual* and then click the !CLV3.gif! icon, you can choose one, two or some content, which want to view in Content List Viewer:
+
+ !CLV9.gif! 
+
+In here you can choose one, two or some content, which want to view by clicking on the !CLV10.gif! icon. After you choose some content and click the add icon, all contents will display:
+
+ !CLV11.gif! 
+
+ And then you can set up some options if you want. Finally click the *Save* button to finish.
+

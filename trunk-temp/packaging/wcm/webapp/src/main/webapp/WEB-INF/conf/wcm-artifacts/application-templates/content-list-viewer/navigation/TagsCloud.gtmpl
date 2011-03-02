@@ -1,0 +1,66 @@
+<%
+	 /**
+	 	* Created by The eXo Platform SAS
+	 	* Author : eXoPlatform
+	 	*          benjamin.paillereau@exoplatform.com
+	 	* Aug 3, 2010  
+	 	*/
+
+%>
+<%
+public void renderCategories(def categories) {
+    def first = true;
+    for (category in categories) {
+      def categoryTitle = category.getTitle();
+      def categoryURL = category.getUrl();
+      def cssStyle = "TagLabel";
+      if (category.isSelected()) cssStyle = "TagLabel TagSelected";
+
+      def style = "" ;
+      def tagCount = category.getTotal();
+      style = "Style = '" + uicomponent.getTagHtmlStyle(tagCount)+ "'" ;
+      %>
+
+      <a class="$cssStyle" href="$categoryURL" title="$categoryTitle" $style>$categoryTitle</a>  
+      <%
+      first=false;
+      if (category.hasChilds()) {
+        %> &nbsp;|&nbsp; <%
+        renderCategories(category.getChilds());
+      }
+    }
+}
+%>
+
+<style>
+.TagSelected {
+  color: #3366CC !important;
+}
+
+.SimpleHorizontal {
+  padding-bottom:10px;
+}
+
+.SimpleVerticalHierachy .CategoriesContainer .TagLabel {
+  display:inline !important;
+}
+
+</style>
+
+<div id="$uicomponent.id" class="SimpleVerticalHierachy">
+  <div class="CategoriesContainer">
+    <div class="TitleBarL">
+      <div class="TitleBarR">
+        <div class="TitleBarM">
+          <%= uicomponent.getHeader() %>
+        </div>
+      </div>
+    </div>
+    <div class="NewContent">
+      <%
+      def categories = uicomponent.getCategories("nt:unstructured");
+      renderCategories(categories);
+      %>
+    </div>
+  </div>
+</div>

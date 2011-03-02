@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>Sửa nhanh</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Category List Configuration</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath></SelectTargetPath>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Cây phân loại</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Tiêu đề</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTreeNameFormSelectBox>Cây phân loại</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Mẫu hiển thị cây phân loại</UICategoryNavigationTemplateFormSelectBox>
+    </label>
+    <msg>
+      <not-support-encoding>Không hỗ trợ</not-support-encoding>
+      <render>Có lỗi khi đang hiển thị</render>
+      <saving-success>Portlet đã được cập nhật</saving-success>
+    </msg>
+    <action>
+      <Save>Lưu</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>Cây phân loại này không tồn tại</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>Display settings</DisplaySettingBlock>
+      <AdvancedBlock>Advance</AdvancedBlock>
+	  <UICategoryNavigationTreePathFormInputSet>Tree Path</UICategoryNavigationTreePathFormInputSet>
+	  <UICategoryNavigationTreePathFormStringInput>Tree Path</UICategoryNavigationTreePathFormStringInput>
+	  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+	  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
+	  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+	  <UICategoryNavigationTreepathPopupWindow>Tree Path</UICategoryNavigationTreepathPopupWindow>    
+    </label>
+  </UICategoryNavigationConfig>     
+</bundle>

@@ -1,0 +1,120 @@
+<div class="UIForm FormLayout"> 
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">	  
+   <table class="UIFormGrid">
+      <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.title")%></td>
+        <td class="FieldComponent">
+        <%
+          String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
+          uicomponent.addTextField("title", fieldTitle) ;
+        %>
+        </td>
+      </tr>  
+
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.name")%></td>
+			  <td class="FieldComponent">
+			  <%
+	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,mix:versionable", "editable=if-null", "validate=empty,name"] ;
+	        uicomponent.addTextField("name", fieldName) ; 
+      	%>	      
+          <script>
+          titleField = document.getElementById("title");
+          titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
+          </script>
+        </td>
+			</tr>
+			
+      <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
+        <td class="FieldComponent">
+        <%
+          String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
+          String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+          uicomponent.addSelectBoxField("lang", fieldLang) ;
+        %>
+        </td>
+      </tr>  
+
+      <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("Event.dialog.label.location")%></td>
+        <td class="FieldComponent">
+        <%
+          String[] fieldLocation = ["jcrPath=/node/exo:location", "validate=empty"] ;
+          uicomponent.addTextField("location", fieldLocation) ;
+        %>
+        </td>
+      </tr>  
+
+      <tr>                        
+        <td class="FieldLabel">Google Maps ?</td>
+        <td class="FieldComponent"> 
+        <% 
+          String[] fieldMaps = ["jcrPath=/node/exo:maps", "defaultValues=false"];         
+          uicomponent.addCheckBoxField("withMap", fieldMaps);
+        %>
+        </td>
+      </tr>
+			
+      <tr>                        
+        <td class="FieldLabel"><%=_ctx.appRes("Event.dialog.label.start-date-time")%></td>
+        <td class="FieldComponent">
+          <%
+            String[] fieldStartEvent = ["jcrPath=/node/exo:startEvent", "validate=datetime", "visible=true"] ; 
+            uicomponent.addCalendarField("startEvent", fieldStartEvent) ;
+          %>
+        </td>
+      </tr>
+			
+      <tr>                        
+        <td class="FieldLabel"><%=_ctx.appRes("Event.dialog.label.end-date-time")%></td>
+        <td class="FieldComponent">
+          <%
+            String[] fieldEndEvent = ["jcrPath=/node/exo:endEvent", "validate=datetime", "visible=true"] ; 
+            uicomponent.addCalendarField("endEvent", fieldEndEvent) ;
+          %>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="FieldLabel">URL</td>
+        <td class="FieldComponent">
+        <%
+          String[] fieldUrl = ["jcrPath=/node/exo:url"] ;
+          uicomponent.addTextField("url", fieldUrl) ;
+        %>
+        </td>
+      </tr>  
+      
+			
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.summary")%></td>
+			  <td class="FieldComponent">
+			    <div class="UIFCKEditor">					
+						<%
+			        String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=toolbar:SuperBasicWCM", ""] ;
+			        uicomponent.addRichtextField("summary", fieldSummary) ;
+		      	%>
+		      </div>
+				</td>
+			</tr>  
+			
+			<tr>
+			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.content")%></td>
+			  <td class="FieldComponent">
+			    <div class="UIFCKEditor">
+						<%
+			        String[] fieldContent = ["jcrPath=/node/exo:text", "options=toolbar:BasicWCM", ""] ;
+			        uicomponent.addRichtextField("content", fieldContent) ;        
+			      %>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<%/* start render action*/%>
+		<%uiform.processRenderAction()%>
+		<%/* end render action*/%>		
+  </div>
+  <%uiform.end()%>
+</div>

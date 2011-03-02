@@ -1,0 +1,39 @@
+h1. ECM Administration
+
+
+
+
+
+h1. How to access?
+
+Access to *ECM Administration* on the navigation bar after having signed in
+
+
+!DCMad.png!
+
+
+{note}
+By default, this application is only available to users who are 'manager' in the group '/platform/administrators'
+{note}
+
+
+
+
+
+
+h1. ECM Administration User Interface
+
+
+!Main-UI.gif!
+
+
+
+|| \# ||*Purpose* ||
+| "1" | The list of all the "*repositories*" (Java Content Repository sense, see http://jcp.org/en/jsr/detail?id=170 and http://jcp.org/en/jsr/detail?id=283 for more details) available in the whole application |
+| 2 | This button allows you to edit the properties of the selected repository and/or to edit the properties of one of its workspaces.  |
+| 3 | This button allows you to remove the selected repository. |
+| 4 | This button allows you to create a new repository with its workspaces. |
+| 5 | This button allows you to open the corresponding section. |
+| 6 | This button allows you to hide or show the sidebar. |
+
+

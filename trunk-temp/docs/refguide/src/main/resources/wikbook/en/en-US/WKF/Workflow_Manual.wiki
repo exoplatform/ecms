@@ -1,0 +1,89 @@
+h1. Workflow Manual
+
+
+This module is part of [ECM|ECM:WebHome]. ECM depends on [eXo Portal|Portal:WebHome], therefore you should also study the [Portal:Portal Manual].
+
+
+Other articles:
+[Benefits]
+
+
+h1. Terms
+
+* [Workflow:Workflow Model]
+* [Workflow:Workflow Engine]
+
+
+
+h1. User Manual
+
+* [Workflow:Workflow Tutorial]
+* [Task Management]
+* [Holiday Process]
+* [Pay Raise Process]
+* [Upload a Process]
+* [View Process Details]
+
+* [Workflow RTL Support]
+
+* [Content Validation]
+
+h1. Administration
+
+Please refer to the [Portal:Portal Manual#Administration].
+
+h1. Installation
+
+* [Main:Tutorial Step One]
+* [Workflow:Workflow Installation]
+* [Workflow:Workflow Maven Packaging]
+
+
+h1. Configuration
+* [Workflow Publication Plugin]
+* [Process Definition (XPDL)]
+* [Bonita Forms Definition]
+* [Bonita Resource bundle]
+* [Business Process in the JCR]
+
+
+h1. Integration
+* [Bonita Overview]
+* [JBPM Configuration]
+
+
+
+h1. Release Notes and Dependencies
+
+h1. Migration
+
+No migration yet.
+
+h1. Technical Foundations
+
+* [Main:Overall Architecture]
+* [Portal|ECM:]
+* [Portal|Portal:]
+* [Portlet Container| PC:]
+* [Java Content Repository| JCR:]
+* [Web Services| WS:]
+* [eXo Core| Core:]
+* [eXo Kernel| Kernel:]
+
+
+
+h1. Development
+
+* [Developers' zone| Main:Developers]
+* [eXo JavaDocs| http//docs:exoplatform.org]
+* [Products+Tech+Overview:Components Registry#ECM]
+
+
+
+h1. Support
+
+- [Forums|http//www.exoplatform.com/portal/public/en/forum?portal:componentId=forum&portal.type=action&portal.isSecure=false&uicomponent=UIBreadcumbs&op=ChangePath&objectId=forumCategory88a712bac0a80201004998ce39c9e43f%2Fforum88a88ec4c0a802010066175a51001e4b]
+- [FAQ|http://faq.exoplatform.com]
+- [JIRA|http://jira.exoplatform.org/browse/Workflow ]
+
+eXo Platform SAS also provides [professional support|http://www.exoplatform.com/portal/public/en/services/support] for eXo Workflow.

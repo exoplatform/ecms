@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIWorkflowPublicationActionForm>
+    <label>
+      <workflow_validator>Validator</workflow_validator>
+      <workflow_destpath>With path</workflow_destpath>
+      <fieldWorkspace>To workspace</fieldWorkspace>
+      <workflow_backuppath>Backup path</workflow_backuppath>
+      <fieldBackupWorkspaceEdit>Backup Workspace</fieldBackupWorkspaceEdit>
+      <fieldValidatorEdit>Validator</fieldValidatorEdit>
+      <fieldDestPathEdit>With path</fieldDestPathEdit>
+      <fieldBackupEdit>Backup path</fieldBackupEdit>
+      <hide-process-link>Hide-process-link</hide-process-link>
+      <show-process-link>Show-process-link</show-process-link>
+    </label>
+    <action>
+      <Save>Save</Save>
+      <Back>Cancel</Back>
+      <UnsubcriberLifeCycle>Unsubcribe</UnsubcriberLifeCycle>
+    </action>
+    <msg>
+      <node-checkedin>You must check out first</node-checkedin>
+      <unsubcriber-lifecycle>The node already was unsubcribed lifecycle</unsubcriber-lifecycle>
+      <unsubcriber-lifecycle-finish>The node is unsubcribed successfully</unsubcriber-lifecycle-finish>
+      <fillfield>Don't leave the field blank</fillfield>
+    </msg>
+  </UIWorkflowPublicationActionForm>
+  <workflow_validator>
+    <title>
+      <AddPermission>Add Permission</AddPermission>
+    </title>
+  </workflow_validator>
+  <workflow_destpath>
+    <title>
+      <AddDestPath>Add Path</AddDestPath>
+    </title>
+  </workflow_destpath>
+  <UIWorkflowPublicationViewForm>
+    <label>
+      <name>Name</name>
+      <lifecycle>Lifecycle</lifecycle>
+      <validator>Validator</validator>
+      <to-workspace>To workspace</to-workspace>
+      <at-location>At location</at-location>
+      <state>State</state>
+      <by>by</by>
+      <backupWorkspace>Backup Workspace</backupWorkspace>
+      <backupPath>Backup Path</backupPath>
+      <hide-process-link>Hide-process-link</hide-process-link>
+      <show-process-link>Show-process-link</show-process-link>
+    </label>
+    <msg>
+      <unpublish-success>The document has been unpublished</unpublish-success>
+    </msg>
+    <action>
+      <Cancel>Cancel</Cancel>
+      <Unpublish>Unpublish</Unpublish>
+      <UnsubcriberLifeCycle>Unsubcriber</UnsubcriberLifeCycle>
+    </action>
+  </UIWorkflowPublicationViewForm>
+  <PublicationService>
+    <WorkflowPublicationPlugin>
+      <nodeCreated>The node has been created</nodeCreated>
+      <nodeValidationRequest>The node has been validation requested</nodeValidationRequest>
+      <nodePublished>The node has been published</nodePublished>
+      <nodeBackup>The node has been backup</nodeBackup>
+    </WorkflowPublicationPlugin>
+  </PublicationService>
+</bundle>
+

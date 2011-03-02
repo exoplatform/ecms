@@ -1,0 +1,9 @@
+Bonita tools
+  
+  Bonita bundles a Swing console that enables to monitor and design Processes. Although it does not cover
+  all functionalities, it is possible to reuse it for basic needs. eXo-Bonita provides a convenient
+  script to launch it. Windows users should execute "%JONAS_ROOT%\bin\nt\manager.bat" and Unix users should
+  execute "$JONAS_ROOT/bin/unix/manager". Appropriate settings have been brought so that you can connect
+  using your eXo account.
+
+[]

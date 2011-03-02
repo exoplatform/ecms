@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Content_Explorer">
+	<title>Content Explorer</title>
+	 <xi:include href="SitesExplorer/Access_Sites_Explorer.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="SitesExplorer/Drives.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="SitesExplorer/Views.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="SitesExplorer/Actions.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="SitesExplorer/Manage_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="SitesExplorer/Folders_and_Documents.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+</section>
+
+

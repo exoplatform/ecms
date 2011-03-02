@@ -1,0 +1,176 @@
+<%
+import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
+import org.exoplatform.services.wcm.newsletter.config.NewsletterManagerConfig;
+import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
+%>
+
+	<div class="UINewsletterPortlet">
+	<% uiform.begin() %>
+			<div class="BreadCumbs">
+				<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToCategories")%>">
+					eXo Newsletter
+				</a>
+				>
+				<a class="ItemContent" style="color:blue;" href="<%=uicomponent.event("BackToSubcriptions")%>">
+					<%=uicomponent.categoryConfig.getTitle()%>
+				</a>
+				>
+				<a class="ItemContent"><%=uicomponent.subscriptionConfig.getTitle()%></a>
+		 </div>
+		
+		 <div class="UIAction" style="float:left; margin-left: 20px; height: 35px;"> 
+				<table class="ActionContainer" style="text-align:center">
+					<tr>
+						<td>
+	        		<div onclick="javaScript:void(0);" class="ActionButton LightBlueStyle">
+		      	  	<div class="ButtonLeft">
+		        	  	<div class="ButtonRight">
+		          	  	<div class="ButtonMiddle">
+											<div class="ContentAction ActionTitle" style="float:left;">
+												<div class="Name" style="float:none; cursor:pointer;">
+				          	  		<a href="javascript:void(0);">
+				          	  			<%=_ctx.appRes("NewsletterPortlet.action.CreateLetter")%>
+				          	  		</a>
+												</div>
+		          	  		</div>
+		            		</div>
+		          		</div>
+		        		</div>
+		      		</div>
+		      	</td>
+					</tr>
+			  </table> 
+		</div>
+		<div style="clear:left"><span></span></div>
+		<div class="UICategories">
+			<div style="width:100%;">
+				<!-- Subscription infor -->
+				<div style="width:100%;height:30px;line-height:30px;">
+					<div style="float:left;">
+						<b><%=uicomponent.subscriptionConfig.getTitle() %></b>:
+						<%=uicomponent.subscriptionConfig.getDescription() %>
+					</div>
+					
+					<!-- ----------------------------------- Button -------------------------------------------------- -->
+					<div class="UIAction" style="float:right;"> 
+						<table class="ActionContainer" style="text-align:center">
+							<tr>
+								<td>
+			        		<div onclick="javaScript:void(0);" class="ActionButton LightBlueStyle">
+				      	  	<div class="ButtonLeft">
+				        	  	<div class="ButtonRight">
+				          	  	<div class="ButtonMiddle">
+				          	  	
+													<div class="ContentAction ActionTitle" style="float:right;" onclick="eXo.webui.UIPopupSelectCategory.show(this, event);">
+														<div class="Name" style="float:none; cursor:pointer;">
+						          	  		<a href="javascript:void(0);">
+						          	  			<%=_ctx.appRes("NewsletterPortlet.action.Moderation")%>
+						          	  		</a>
+														</div>
+														<!-- ----------------------------------- Menu popup -------------------------------------- -->
+														<div style="position:relative;float:left;">
+															<div class="UIPopupCategory" style="display:none;left:-40px;top:-2px; ">
+																<div class="UIRightClickPopupMenu" style="display:block;">
+																	<div class="UIContextMenuContainer">											
+																		<div class="TopLeftRightClickPopupMenu">
+																			<div class="TopRightRightClickPopupMenu">
+																				<div class="TopCenterRightClickPopupMenu"><span></span></div>
+																			</div>
+																		</div>
+																		<div class="MiddleLeftRightClickPopupMenu">
+																			<div class="MiddleRightRightClickPopupMenu">
+																				<div class="UIRightPopupMenuContainer">
+																					<!-- Detail action -->
+																					<div class="MenuItem" onclick="javaScript:void(0)">
+																						<div class="ItemIcon IconsView" style="padding-left:18px;">
+																							<a href="<%=uicomponent.event("OpenNewsletter")%>">Open</a>
+																						</div>
+																					</div>
+																					<div class="MenuItem" onclick="javaScript:void(0)">
+																						<div class="ItemIcon IconsView" style="padding-left:18px;">
+																							<a href="<%=uicomponent.event("EditSubscription")%>">Edit</a>
+																						</div>
+																					</div>
+																					<div class="MenuItem" onclick="javaScript:void(0)">
+																						<div class="ItemIcon IconsView" style="padding-left:18px;">
+																							<a href="<%=uicomponent.event("DeleteSubscription")%>">Delete</a>
+																						</div>
+																					</div>
+																					<hr style="width:90%"/>
+																					<div class="MenuItem" onclick="javaScript:void(0)">
+																						<div class="ItemIcon IconsView" style="padding-left:18px;">
+																							<a href="<%=uicomponent.event("AddCategory")%>">Manager Uers</a>
+																						</div>
+																					</div>
+																					<!-- Finish detail action -->
+																				</div>
+																			</div>
+																		</div>
+																		<div class="BottomLeftRightClickPopupMenu">
+																			<div class="BottomRightRightClickPopupMenu">
+																				<div class="BottomCenterRightClickPopupMenu"><span></span></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+				          	  		</div>
+				            		</div>
+				          		</div>
+				        		</div>
+				      		</div>
+				      	</td>
+							</tr>
+					  </table> 
+					</div>
+						
+					<!-- end action of this category -->
+					
+					<div style="clear:both;"><span></span></div>
+				</div>
+				
+				
+				<!-- All newsletter entry -->
+				<div class="Subscriptions">
+					<table cellpadding="5" cellspacing="0" border="0">
+						<tr class="Header">
+							<th class="ContentView" style="border-left:0px;">
+								Letter
+							</th>
+							<th class="ContentView">
+								Date
+							</th>
+							<th class="ContentView">
+								Status
+							</th>
+							<th class="ContentView" style="border-left:1px solid black;width:40px;">
+								<input type="checkbox">
+							</th>
+						</tr>
+						<%int count = 0;
+							String color = "";
+							for(NewsletterManagerConfig newsletter in uicomponent.listNewsletterConfig){
+								if(count % 2 == 0) color = "";
+								else color="background:white;";
+							%>
+								<tr class="SubcriptionInfor" style="$color">
+									<td class="Infor" style="border-left:0px;">
+										<a href="<%=uicomponent.event("OpenSubscription")%>">
+											<%=newsletter.getNewsletterTitle()%>
+										</a>
+									</td>
+									<td class="Infor"><%=newsletter.getNewsletterSentDate()%></td>
+									<td class="Infor"><%=newsletter.getStatus()%></td>
+									<td class="Infor">
+										<%uicomponent.renderChild(newsletter.getNewsletterName())%>
+									</td>
+								</tr>
+						<%	count ++;
+							}%>
+					</table>
+				</div>
+			</div>
+		</div>
+	<%uiform.end()%>	
+</div>

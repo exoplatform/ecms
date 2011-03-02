@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd" Id="content-publishing" Name="content-publishing">
+  <PackageHeader>
+    <XPDLVersion>1.0</XPDLVersion>
+    <Vendor>Bonita Project Team</Vendor>
+    <Created>2008-11-19 11:03:25</Created>
+  </PackageHeader>
+  <RedefinableHeader>
+    <Author>Rodrigue Le Gall</Author>
+    <Version>1.0</Version>
+  </RedefinableHeader>
+  <ConformanceClass GraphConformance="NON_BLOCKED" />
+  <WorkflowProcesses>
+    <WorkflowProcess AccessLevel="PUBLIC" Name="content-publishing" Id="content-publishing">
+      <ProcessHeader />
+      <RedefinableHeader>
+        <Version>1.0</Version>
+      </RedefinableHeader>
+      <DataFields>
+        <DataField Id="decision" Name="decision">
+          <DataType>
+            <EnumerationType>
+              <EnumerationValue Name="approve" />
+              <EnumerationValue Name="disapprove" />
+              <EnumerationValue Name="delegate" />
+              <EnumerationValue Name="refuse" />
+            </EnumerationType>
+          </DataType>
+          <InitialValue>approve</InitialValue>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="PropertyActivity" />
+          </ExtendedAttributes>
+        </DataField>
+        <DataField Id="changeDecision" Name="changeDecision">
+          <DataType>
+            <EnumerationType>
+              <EnumerationValue Name="submit" />
+              <EnumerationValue Name="cancel" />
+            </EnumerationType>
+          </DataType>
+          <InitialValue>submit</InitialValue>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="PropertyActivity" />
+          </ExtendedAttributes>
+        </DataField>
+        <DataField Id="exo:validator" Name="exo:validator">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="document-id" Name="document-id">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="initiator" Name="initiator">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="startDate" Name="startDate">
+          <DataType>
+            <BasicType Type="DATETIME" />
+          </DataType>
+          <InitialValue>2008-10-22T15:15:50.000+0000</InitialValue>
+        </DataField>
+        <DataField Id="endDate" Name="endDate">
+          <DataType>
+            <BasicType Type="DATETIME" />
+          </DataType>
+          <InitialValue>2008-10-22T15:16:21.000+0000</InitialValue>
+        </DataField>
+        <DataField Id="reason" Name="reason">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="nodePath" Name="nodePath">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="srcWorkspace" Name="srcWorkspace">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="repository" Name="repository">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:trashWorkspace" Name="exo:trashWorkspace">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:trashPath" Name="exo:trashPath">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="srcPath" Name="srcPath">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="pending" Name="pending">
+          <DataType>
+            <BasicType Type="BOOLEAN" />
+          </DataType>
+          <InitialValue>false</InitialValue>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="PropertyActivity" />
+          </ExtendedAttributes>
+        </DataField>
+        <DataField Id="actionName" Name="actionName">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:currentLocation" Name="exo:currentLocation">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:currentState" Name="exo:currentState">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="delegator" Name="delegator">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="delegate" Name="delegate">
+          <DataType>
+            <BasicType Type="BOOLEAN" />
+          </DataType>
+          <InitialValue>false</InitialValue>
+        </DataField>
+        <DataField Id="exo:actionComment" Name="exo:actionComment">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:pendingWorkspace" Name="exo:pendingWorkspace">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:pendingPath" Name="exo:pendingPath">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:publishPath" Name="exo:publishPath">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:publishWorkspace" Name="exo:publishWorkspace">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:backupPath" Name="exo:backupPath">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="exo:backupWorkspace" Name="exo:backupWorkspace">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+      </DataFields>
+      <Participants>
+        <Participant Id="SYSTEM" Name="SYSTEM">
+          <ParticipantType Type="HUMAN" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+            <ExtendedAttribute Name="XOffset" Value="0" />
+            <ExtendedAttribute Name="YOffset" Value="300" />
+          </ExtendedAttributes>
+        </Participant>
+        <Participant Id="Author" Name="Author">
+          <ParticipantType Type="ROLE" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Mapper" Value="Instance Initiator" />
+            <ExtendedAttribute Name="MapperClassName" Value="hero.mapper.ValidatorRoleMapper" />
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+            <ExtendedAttribute Name="XOffset" Value="0" />
+            <ExtendedAttribute Name="YOffset" Value="150" />
+          </ExtendedAttributes>
+        </Participant>
+        <Participant Id="Validator" Name="Validator">
+          <ParticipantType Type="ROLE" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Mapper" Value="Custom" />
+            <ExtendedAttribute Name="MapperClassName" Value="org.exoplatform.ecm.bp.bonita.validation.mapper.ValidatorRoleMapper" />
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+            <ExtendedAttribute Name="XOffset" Value="0" />
+            <ExtendedAttribute Name="YOffset" Value="450" />
+          </ExtendedAttributes>
+        </Participant>
+      </Participants>
+      <Activities>
+        <Activity Id="BonitaStart" Name="BonitaStart">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="63" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="56" />
+            <ExtendedAttribute Name="XOffset" Value="29" />
+            <ExtendedAttribute Name="YOffset" Value="46" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="BonitaEnd" Name="BonitaEnd">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="XOR" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="621" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="56" />
+            <ExtendedAttribute Name="XOffset" Value="341" />
+            <ExtendedAttribute Name="YOffset" Value="352" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="manage-backup" Name="manage-backup">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="175" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="44" />
+            <ExtendedAttribute Name="XOffset" Value="516" />
+            <ExtendedAttribute Name="YOffset" Value="281" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="116" />
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.ManageBackup">
+              <HookEventName>automatic:onEnter</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="Trash-movement" Name="Trash-movement">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="XOR" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="268" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="76" />
+            <ExtendedAttribute Name="XOffset" Value="198" />
+            <ExtendedAttribute Name="YOffset" Value="179" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="98" />
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.TrashMovement">
+              <HookEventName>automatic:onEnter</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="manage-publication" Name="manage-publication">
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>SYSTEM</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <Deadline Execution="ASYNCHR">
+            <DeadlineCondition>10000</DeadlineCondition>
+            <ExceptionName>org.exoplatform.ecm.bp.bonita.validation.hook.ExecutionActivity</ExceptionName>
+          </Deadline>
+          <Deadline Execution="ASYNCHR">
+            <DeadlineCondition>1000</DeadlineCondition>
+            <ExceptionName>org.exoplatform.ecm.bp.bonita.validation.hook.SetBackupTimer</ExceptionName>
+          </Deadline>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="XOR" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="27" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="302" />
+            <ExtendedAttribute Name="XOffset" Value="510" />
+            <ExtendedAttribute Name="YOffset" Value="174" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="139" />
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.ManagePublication">
+              <HookEventName>task:onReady</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="change-request" Name="change-request">
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>Author</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="27" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="152" />
+            <ExtendedAttribute Name="XOffset" Value="54" />
+            <ExtendedAttribute Name="YOffset" Value="181" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="98" />
+            <ExtendedAttribute Name="property" Value="changeDecision" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="evaluation" Name="evaluation">
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>Validator</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="XOR" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="27" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="452" />
+            <ExtendedAttribute Name="XOffset" Value="265" />
+            <ExtendedAttribute Name="YOffset" Value="56" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="70" />
+            <ExtendedAttribute Name="property" Value="decision" />
+            <ExtendedAttribute Name="property" Value="pending" />
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.SetInitiator">
+              <HookEventName>task:onReady</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.SetPending">
+              <HookEventName>task:onFinish</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.SetDelegator">
+              <HookEventName>task:onStart</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="initialisation" Name="initialisation">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="811" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="66" />
+            <ExtendedAttribute Name="XOffset" Value="117" />
+            <ExtendedAttribute Name="YOffset" Value="54" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="98" />
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.Initial">
+              <HookEventName>automatic:onEnter</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="delegate" Name="delegate">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="702" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="34" />
+            <ExtendedAttribute Name="XOffset" Value="314" />
+            <ExtendedAttribute Name="YOffset" Value="175" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="107" />
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.Delegate">
+              <HookEventName>automatic:onEnter</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="pending-publication" Name="pending-publication">
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>SYSTEM</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <Deadline Execution="ASYNCHR">
+            <DeadlineCondition>1000</DeadlineCondition>
+            <ExceptionName>org.exoplatform.ecm.bp.bonita.validation.hook.SetPublicationTimer</ExceptionName>
+          </Deadline>
+          <Deadline Execution="ASYNCHR">
+            <DeadlineCondition>10000</DeadlineCondition>
+            <ExceptionName>org.exoplatform.ecm.bp.bonita.validation.hook.ExecutionActivity</ExceptionName>
+          </Deadline>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="168" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="334" />
+            <ExtendedAttribute Name="XOffset" Value="503" />
+            <ExtendedAttribute Name="YOffset" Value="76" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="133" />
+            <ExtendedAttribute Name="hook" Value="org.exoplatform.ecm.bp.bonita.validation.hook.PendingPublication">
+              <HookEventName>task:onReady</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+      </Activities>
+      <Transitions>
+        <Transition Id="manage-backup_End" Name="manage-backup_End" From="manage-backup" To="BonitaEnd" />
+        <Transition Id="delegate_evaluation" Name="delegate_evaluation" From="delegate" To="evaluation">
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="BreakPoint" Value="378.0-138.0" />
+          </ExtendedAttributes>
+        </Transition>
+        <Transition Id="evaluation_Trash-movement" Name="evaluation_Trash-movement" From="evaluation" To="Trash-movement">
+          <Condition Type="CONDITION">decision.compareTo("refuse") == 0</Condition>
+        </Transition>
+        <Transition Id="change-request_evaluation" Name="change-request_evaluation" From="change-request" To="evaluation">
+          <Condition Type="CONDITION">changeDecision.compareTo("submit") == 0</Condition>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="BreakPoint" Value="102.0-126.0" />
+          </ExtendedAttributes>
+        </Transition>
+        <Transition Id="initialisation_evaluation" Name="initialisation_evaluation" From="initialisation" To="evaluation" />
+        <Transition Id="Start_initialisation" Name="Start_initialisation" From="BonitaStart" To="initialisation" />
+        <Transition Id="pending-publication_manage-publication" Name="pending-publication_manage-publication" From="pending-publication" To="manage-publication" />
+        <Transition Id="evaluation_pending-publication" Name="evaluation_pending-publication" From="evaluation" To="pending-publication">
+          <Condition Type="CONDITION">decision.compareTo("approve") == 0 &amp;&amp; pending.compareTo(Boolean.valueOf("true")) == 0</Condition>
+        </Transition>
+        <Transition Id="evaluation_change-request" Name="evaluation_change-request" From="evaluation" To="change-request">
+          <Condition Type="CONDITION">decision.compareTo("disapprove") == 0</Condition>
+        </Transition>
+        <Transition Id="evaluation_manage-publication" Name="evaluation_manage-publication" From="evaluation" To="manage-publication">
+          <Condition Type="CONDITION">decision.compareTo("approve") == 0 &amp;&amp; pending.compareTo(Boolean.valueOf("false")) == 0</Condition>
+        </Transition>
+        <Transition Id="evaluation_delegate" Name="evaluation_delegate" From="evaluation" To="delegate">
+          <Condition Type="CONDITION">decision.compareTo("delegate") == 0</Condition>
+        </Transition>
+        <Transition Id="change-request_Trash-movement" Name="change-request_Trash-movement" From="change-request" To="Trash-movement">
+          <Condition Type="CONDITION">changeDecision.compareTo("cancel") == 0</Condition>
+        </Transition>
+        <Transition Id="Trash-movement_End" Name="Trash-movement_End" From="Trash-movement" To="BonitaEnd" />
+        <Transition Id="manage-publication_manage-backup" Name="manage-publication_manage-backup" From="manage-publication" To="manage-backup" />
+      </Transitions>
+    </WorkflowProcess>
+  </WorkflowProcesses>
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="MadeBy" Value="ProEd" />
+    <ExtendedAttribute Name="View" Value="Activity" />
+  </ExtendedAttributes>
+</Package>
+

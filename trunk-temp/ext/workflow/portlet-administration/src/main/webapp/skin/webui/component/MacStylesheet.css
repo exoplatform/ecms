@@ -1,0 +1,379 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Tran The Trong
+ *          trongtt@gmail.com
+ * December 18, 2006
+ * version: $Id$
+ */
+
+.UIWindow .UIWorkflowPortlet {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.UIWorkflowPortlet {
+	overflow: auto;
+	margin: 5px;
+	background: white;
+	border: 1px solid #b7b7b7;
+	padding: 5px;
+}
+
+.UIWorkflowPortlet .UIFormGrid {
+	table-layout: fixed;
+}
+
+.UIWorkflowPortlet .UIFormGrid td.FieldLabel {
+	width: 25%;
+}
+
+.UIWorkflowPortlet .UIFormGrid td.FieldComponent {
+	width: 75%;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent{
+	padding: 10px;
+}
+
+.UIWorkflowPortlet .UIFormGrid td.FieldComponent .SelectUserIcon{
+	width: 16px; height: 16px;
+	background: url('DefaultSkin/icons/SmallUserIcon.gif') no-repeat;  
+	cursor: pointer;
+}
+
+.UIWorkflowPortlet .UITask .UIForm .UIFormGrid td.FieldComponent img {
+  width: 16px;
+}
+
+.UIWorkflowPortlet .Toolbar {
+	height: 29px;
+	padding: 0px 8px;
+	border: solid 1px #b7b7b7;
+	background-color: #ebebeb;
+}
+
+.UIWorkflowPortlet .Toolbar .Separator {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	border-left: solid 1px #fdfdfd;
+	border-right: solid 1px #b7b7b7;
+	height: 29px;
+}
+
+.UIWorkflowPortlet .Toolbar .ToolbarIcon {
+	float: left;
+	margin: 3px 6px;
+}
+
+.UIWorkflowPortlet .Toolbar .TextAdmin {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+  font-weight: bold;
+  line-height:29px;
+ padding: 0px 15px 0px 10px; /* orientation=lt */
+	padding: 0px 15px 0px 10px; /* orientation=rt */
+}
+
+.UIWorkflowPortlet .Toolbar .ButtonContainer {
+	float: left;
+	height: 29px;
+	background: url('DefaultSkin/background/ButtonContainerBG3x29.gif') repeat-x;
+}
+
+.UIWorkflowPortlet .Toolbar .ButtonContainer .TextButton {
+  color: black;
+	padding: 0px 6px;
+  font-weight: bold;
+  line-height: 29px;
+}
+
+.UIWorkflowPortlet .Toolbar .ButtonContainerSelected {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	height: 29px;
+	background: url('DefaultSkin/background/ButtonContainerSelectedBG3x29.gif') repeat-x; /* orientation=lt */
+	background: url('DefaultSkin/background/ButtonContainerSelectedBG3x29.gif') repeat-x; /* orientation=rt */
+}
+
+.UIWorkflowPortlet .Toolbar .ButtonContainerSelected .TextButton {
+	padding: 0px 6px;
+	font-weight: bold;
+  line-height: 29px;
+  float: left;
+}
+
+.UIWorkflowPortlet .Toolbar .SeparatorRight {
+	float: right;
+}
+
+.UIWorkflowPortlet .UIAdministrationManager .UITabContent .UIGrid {
+	width: 99.7%;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent #UIBPDefinition .UIGrid {
+  _width: 99.5%;
+}
+
+/*********************************************** Begin Icon16x16 ***********************************/
+
+.ManageStartIcon {
+	width: 16px; height: 16px;
+	background: url('DefaultSkin/icons/Execute.gif') no-repeat;
+}
+
+.Group16x16Icon {
+	width: 16px; height: 16px;
+	background: url('DefaultSkin/icons/group.gif') no-repeat;
+}
+
+.Transition16x16Icon , .EndOfState16x16Icon , .StartProcess16x16Icon {
+	width: 16px; height: 16px;
+	background: url('DefaultSkin/icons/Execute.gif') no-repeat;
+}
+
+/*********************************************** End Icon16x16 *****************************************/
+/*********************************************** Begin Icon24x24 ***********************************/
+.Monitor24x24Icon {
+	width: 24px; height: 24px;
+	background: url('DefaultSkin/icons/IconMonitor24x24.gif') no-repeat;
+}
+
+.Controller24x24Icon {
+	width: 24px; height: 24px;
+	background: url('DefaultSkin/icons/Controller24x24.gif') no-repeat;
+}
+/*********************************************** End Icon24x24 *****************************************/
+
+.UIWorkflowPortlet .UIDocumentContent {
+  background: white;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .TopLeftCornerDecorator {
+  background: url('DefaultSkin/background/LeftTop27x35.gif') no-repeat left;
+  height: 35px;
+  padding-left: 27px;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .TopCenterDecorator {
+  background: url('DefaultSkin/background/CenterTop1x10.gif') repeat-x top;
+  height: 35px;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .TopRightCornerDecorator {
+  background: url('DefaultSkin/background/RightTop41x35.gif') no-repeat right ;
+  height: 35px;
+  padding-right: 41px;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .MiddleLeftSideDecorator {
+  background: url('DefaultSkin/background/LeftMiddle11x1.gif') repeat-y left;
+  padding-left: 13px ;  
+}
+
+.UIWorkflowPortlet .UIDocumentContent .MiddleCenterDecorator {
+  padding: 0px 10px 25px 10px;
+  background: url('DefaultSkin/background/CenterMiddleGB.gif') repeat-x bottom;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .MiddleRightSideDecorator {
+  background: url('DefaultSkin/background/RightMiddle13x1.gif') repeat-y right;
+  padding-right: 15px ;  
+}
+
+.UIWorkflowPortlet .UIDocumentContent .BottomLeftCornerDecorator {
+  background: url('DefaultSkin/background/LeftBottom13x16.gif') no-repeat left ;
+  height: 16px;
+  padding-left: 13px;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .BottomCenterDecorator {
+  background: url('DefaultSkin/background/CenterBottom1x14.gif') repeat-x bottom;
+  height: 16px;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .BottomRightCornerDecorator {
+  background: url('DefaultSkin/background/RightBottom15x16.gif') no-repeat right ;
+  height: 16px;
+  padding-right: 15px ;  
+}
+
+/*##############################- End Decorator -################################*/
+.UIWorkflowPortlet .UIDocumentContent .Banner {
+  height: 100px;
+  background: url('DefaultSkin/background/BannerBG.gif') repeat-x bottom;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .Banner .TopLeftLabel {
+  padding-left: 10px;
+  border-bottom: solid 1px #e5e5e5;
+  font: normal bold 19px Verdana;
+  color: #ffb502;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .Banner .BannerIcon {
+  float: right;
+  width: 155px; height: 100px;
+  background: url('DefaultSkin/background/BannerIcon.gif') no-repeat right bottom;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .Banner .BannerTitle {
+  text-align: center;
+  font: normal bold 40px Verdana;
+  color: #efefef;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .EventFrame {
+  margin-top: 10px;
+  border: solid 1px #bdbdbd;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .EventFrame .TitleLabel {
+  height: 18px;
+  padding: 2px 0px 0px 15px;
+  font: normal bold 11px Verdana;
+  background: url('DefaultSkin/background/EventFrameBG.gif') repeat-x;
+}
+
+.UIWorkflowPortlet .UIDocumentContent .EventFrame .FrameContent {
+  padding: 10px;
+}
+
+.UIWorkflowPortlet .UIPopupWindow .Content {
+  padding: 10px;
+}
+
+.UIWorkflowPortlet .UIPopupWindow .Content .UIFormWithTitle {
+  margin: auto;
+  background: white;
+}
+
+.UIWorkflowPortlet .UIPopupWindow .Content .UITabPane .UIArticle{
+  margin: auto;
+  background: white;
+  border: solid 1px #b7b7b7;
+  padding: 5px 0px 5px 7px;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent .UITabPane .UITabContent .UIGrid td a{
+	color: #111caa;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent .UITabPane .UITabContent .UIGrid td a:hover{
+	color: orange;
+}
+
+.WorkflowPortletContent .UIFormGrid td.FieldLabel {
+	width: 180px;
+}
+
+.WorkflowPortletContent .UIUploadProcess .ProgressBarFrame { 
+	width: 350px;
+	overflow: hidden;
+	margin: 0px;
+}
+
+.WorkflowPortletContent .UIUploadProcess .SelectFileFrame { 
+	width: 350px;
+	overflow: hidden;
+	margin: 0px;
+}
+
+.WorkflowPortletContent .UIUploadProcess .FileNameLabel {
+	width: auto;	
+}
+
+.WorkflowPortletContent .UIUploadProcess .UIFormUploadInput .ProgressBar {
+	margin-left: 0px;
+}
+
+.WorkflowPortletContent .UIUploadProcess .UIFormUploadInput .FileNameLabel {
+	padding: 0px;
+}
+
+.WorkflowPortletContent .UITabPane .UIFormWithTitle {
+	width: auto;
+	margin: 0px auto;
+	background: #efefef;
+}
+
+.UIWorkflowPopup .UITabPane .UIFormWithTitle .TitleBar:first-letter {
+  text-transform: uppercase;
+}
+
+.UIWorkflowPortlet .UITabContent .WorkKofax .UIGrid {
+	border-top: none;
+}
+
+.UIWorkflowPortlet .UITabContent .WorkKofax .UIGrid td {
+	border-top: solid 1px #AFAEAE;
+	line-height: 26px;
+}
+
+.EmptyGrid {
+  width: 150px ;
+  padding-top: 10px;
+  font-style: italic;
+  margin: auto;
+}
+
+.UIWorkflowPortlet .UITabContent .WorkKofax .UIGrid {
+	border-top: none;
+}
+
+.UIWorkflowPortlet .UITabContent .WorkKofax .UIGrid td {
+	border-top: solid 1px #cccccc;
+	line-height: 26px;
+}
+
+.UIWorkflowPortlet .UIAdministrationManager .UIGrid {
+  background: #efefef;
+}
+
+.UIWorkflowPortlet .UIWorkflowPopup .UITabPane {
+  padding: 10px;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent .UIUploadProcess {
+	padding: 10px;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent .UIUploadProcess .HorizontalLayout {
+	padding-top: 10px;
+	background: url('MacSkin/background/Background1x4.png') repeat;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent .UIProcessDetail {
+	padding: 10px;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent .UIProcessDetail .UIGrid {
+	background: #efefef;
+}
+
+.UIWorkflowPortlet .WorkflowPortletContent .UIUploadProcess .HorizontalLayout {
+	background: url('MacSkin/background/Background1x4.png') repeat;
+	padding-top: 10px;
+}
+
+/*********************************************** UITaskManager ***********************************/
+.UIWorkflowPortlet .UITabPane .UITabContent .UIFormWithTitle {
+	width: 650px;
+}
+
+.UIWorkflowPortlet .UITabPane .UIForm .HorizontalLayout {
+	padding: 1px;
+}
+
+.UIWorkflowPortlet .Toolbar .RefreshSessionButton  {
+  width: 24px;	height: 24px;
+  background: url('DefaultSkin/icons/RefreshSessionButton.gif') no-repeat bottom; /* orientation=lt */
+   background: url('DefaultSkin/icons/RefreshSessionButton-rt.gif') no-repeat bottom; /* orientation=rt */
+  float: right; /* orientation=lt */
+  float: left; /* orientation=rt */
+  margin-top: 3px;
+}
+
+.UIWorkflowPortlet .UIForm .Hide .DefaultHide {
+	text-align: center;
+}

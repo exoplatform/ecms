@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.exoplatform.ecms</groupId>
+    <artifactId>exo-ecms</artifactId>
+    <version>2.2.0-TMP-SNAPSHOT</version>
+  </parent>
+  <artifactId>exo-ecms-core</artifactId>
+  <packaging>pom</packaging>
+  <name>eXo ECM Suite :: Core</name>
+  <description>eXo Entreprise Content Management Suite :: Core Components</description>
+  <modules>
+    <module>services</module>
+    <module>viewer</module>
+    <module>parser</module>
+    <module>publication</module>
+    <module>publication-plugins</module>
+    <module>connector</module>
+    <module>webui</module>
+    <!-- ext module was deprecated and will be reuse by the one from commons -->
+	<!--module>ext</module-->
+    <module>search</module>
+    <module>webui-explorer</module>
+    <module>webui-administration</module>
+    <module>core-configuration</module>
+  </modules>
+</project>

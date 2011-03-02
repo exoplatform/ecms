@@ -1,0 +1,84 @@
+/******************************* UIFormWithoutAction **************************/
+.UIFormWithoutAction {
+  margin: 0px 0px 10px 0px;
+}
+
+.UIFormWithoutAction .UIForm .HorizontalLayout {
+	padding: 10px;
+}
+
+.UIFormWithoutAction .rootNodeInfo .UIFormInputSet {
+	width: auto;
+	padding: 0px;
+}
+
+.UIFormWithoutAction .rootNodeInfo td.FieldComponent {
+	padding: 0px;
+}
+
+/**************************************************************************/
+
+.UIECMAdminPortlet .UIWorkspaceList .UIFormGrid {
+	width: 95%;
+}
+
+.UIECMAdminPortlet .UIWorkspaceList .rootNodeInfo .UIFormGrid {
+	width: 100%;
+}
+
+.UIJCRExplorerPortlet .UIWorkspaceList .UIFormGrid {
+	width: 95%;
+}
+
+.UIJCRExplorerPortlet .UIWorkspaceList .rootNodeInfo .UIFormGrid {
+	width: 100%;
+}
+
+.UIBrowseContentPortlet .UIWorkspaceList .UIFormGrid {
+	width: 95%;
+}
+
+.UIBrowseContentPortlet .UIWorkspaceList .rootNodeInfo .UIFormGrid {
+	width: 100%;
+}
+
+.UIFastContentCreatorPortlet .UIWorkspaceList .UIFormGrid {
+	width: 95%;
+}
+
+.UIFastContentCreatorPortlet .UIWorkspaceList .rootNodeInfo .UIFormGrid {
+	width: 100%;
+}
+
+/*====================================UIAnyPermission==================================*/
+.UIAnyPermission {
+	margin-bottom: 2px;
+	border-top: 1px solid #B7B7B7;
+}
+
+.UIAnyPermission .UIForm .UIFormInputSetWithAction .UIFormGrid td {
+	padding: 7px 8px 4px 0;
+}
+
+.UIAnyPermission .UIForm .UIFormGrid td.FieldLabel {
+	vertical-align: middle;
+}
+
+.UIAnyPermission .UIForm .UIFormGrid {
+	width: auto;
+	margin: 0px;
+}
+
+.UIAnyPermission .UIForm .UIFormGrid .UIFormInputSet {
+	padding: 0px;
+}
+
+/**************************************UIFormInputSet*******************************/
+
+.UIFormInputSet .FormContainer {
+	padding: 5px 0px;
+}
+
+.FieldComponent .UIFormInputSet .UIFormInputSetWithAction td.FieldComponent {
+	padding: 0px;
+}

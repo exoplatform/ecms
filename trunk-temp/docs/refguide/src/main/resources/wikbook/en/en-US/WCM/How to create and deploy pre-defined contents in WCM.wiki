@@ -1,0 +1,92 @@
+h1. How to create and deploy pre-defined contents in WCM
+
+
+h2. Create contents
+* Open <TOMCAT-HOME>/portal/WEB-INF/conf/configuration.xml, and replace this one
+
+{code:xml}
+<import>war:/conf/wcm/publication-configuration.xml</import>
+{code}
+
+by this one
+
+{code:xml}
+//<import>war:/conf/wcm/publication-configuration.xml</import>
+{code}
+
+* Run WCM with a clean database
+* Go to Site explorer and choose any drive but we recommend you should go to Sites management drive.
+* Click on Add content and choose Free layout web content as template.
+* Input your HTML, CSS and Javascript data then Save
+* Switch to System tab, click on Export node
+* Click Export to export content, and you will have an XML file.
+* Do these steps again and again to export all contents you want.
+* Open <TOMCAT-HOME>/portal/WEB-INF/conf/configuration.xml, and replace this one
+
+{code:xml}
+//<import>war:/conf/wcm/publication-configuration.xml</import>
+{code}
+
+by this one
+
+{code:xml}
+<import>war:/conf/wcm/publication-configuration.xml</import>
+{code}
+
+h2. Deploy contents
+* You can setup for the deployment like this
+{code:xml}
+<external-component-plugins>
+ <target-component>org.exoplatform.services.wcm.deployment.WCMContentInitializerService</target-component>    
+ <component-plugin> 
+  <name>Content Initializer Service</name>
+  <set-method>addPlugin</set-method>
+  <type>org.exoplatform.services.wcm.deployment.plugins.XMLDeploymentPlugin</type>
+  <description>XML Deployment Plugin</description>
+  <init-params>
+   <object-param>        
+    <name>ACME Logo data</name>
+    <description>Deployment Descriptor</description>
+    <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+     <field name="target">
+      <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+       <field name="repository"><string>repository</string></field>
+       <field name="workspace"><string>collaboration</string></field>
+       <field name="nodePath"><string>/sites content/live/acme/web contents/site artifacts</string></field>
+      </object>
+     </field>
+     <field  name="sourcePath"><string>war:/conf/wcm/artifacts/site-resources/acme/Logo.xml</string></field>
+    </object>
+   </object-param>
+   <object-param>        
+    <name>ACME Signin data</name>
+    <description>Deployment Descriptor</description>
+    <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+     <field name="target">
+      <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+       <field name="repository"><string>repository</string></field>
+       <field name="workspace"><string>collaboration</string></field>
+       <field name="nodePath"><string>/sites content/live/acme/web contents/site artifacts</string></field>
+      </object>
+     </field>
+     <field  name="sourcePath"><string>war:/conf/wcm/artifacts/site-resources/acme/Signin.xml</string></field>
+    </object>
+   </object-param>
+  </init-params>  
+ </component-plugin> 
+</external-component-plugins>
+{code}
+
+* *Node*:
+** target-component: always is org.exoplatform.services.wcm.deployment.WCMContentInitializerService
+** component-plugin/name: anything
+** component-plugin/set-method: always is addPlugin
+** component-plugin/type: always is org.exoplatform.services.wcm.deployment.plugins.XMLDeploymentPlugin
+** component-plugin/description: anything
+** object-param/name: the name of the content will be deployed (unique)
+** object-param/description: anything
+** object/field repository: the current repository name
+** object/field workspace: the current workspace name
+** object/field nodePath: the folder which content will be deployed inside
+** object-param/field sourcePath: the path to the XML file
+* *Hint*: You can see an example in this file <TOMCAT-HOME>/portal/WEB-INF/conf/wcm/deployment/acme-deployment-configuration.xml

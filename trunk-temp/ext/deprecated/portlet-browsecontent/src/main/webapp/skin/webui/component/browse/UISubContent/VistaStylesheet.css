@@ -1,0 +1,232 @@
+ * Created by The eXo Platform SAS
+ * Author : Vu Duy Tu
+ *          duytucntt@gmail.com
+ * DEC 20, 2006
+ * version: $Id$
+ */
+
+.UISubContent {
+	padding: 0px 5px;
+}
+
+.UISubContent .SeparatorLine{
+	margin-top: 3px;
+}
+
+.UISubContent .SubContentHolder {
+	width: 98.5%;
+	padding: 5px;
+}
+
+.UISubContent .TopSubContent {
+  margin: 5px 0px 0px 0px;
+  font-weight: bold; font-size: 11px;
+  height: 19px;
+}
+
+.UISubContent .TopSubContent a {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	height: 16px;
+	padding: 1px 5px 0px 7px; /* orientation=lt */
+	padding: 1px 7px 0px 5px; /* orientation=rt */
+	color: #058ee6;
+}
+.UISubContent .TopSubContent  a:hover{
+	text-decoration: none;
+	color: #ff9314;
+}
+/*###########################-- Begin Title --############################*/
+
+.UISubContent .SubContentTitle { 	
+	height: 27px;
+	overflow: hidden;
+	margin-bottom: 2px;
+}
+
+.UISubContent .SubContentTitle .LeftBar { 
+	background: url('VistaSkin/background/LeftHorizontalTab2x27.gif') no-repeat left;
+  padding-left: 2px;
+}
+
+.UISubContent .SubContentTitle .RightBar{ 
+	background: url('VistaSkin/background/RightHorizontalTab2x27.gif') no-repeat right;
+  padding-right: 2px;
+}
+
+.UISubContent .SubContentTitle .MiddleBar { 
+	line-height: 27px; height: 27px;
+	background: url('VistaSkin/background/CenterHorizontalTab1x27.gif') repeat-x;
+}
+
+.UISubContent .SubContentTitle .LeftIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */ 
+	height: 20px;
+	margin-left: 3px; /* orientation=lt */
+	margin-right: 3px; /* orientation=rt */
+}
+
+.UISubContent .NavigationButtonContainer {
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	height: 16px;
+	margin-top: 6px;
+}
+
+.UISubContent .NavigationButtonContainer .NavigationIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	cursor: pointer;
+	/*margin-top: 4px;*/
+}
+
+
+.UISubContent .SubContentTitle a { 
+	text-decoration: none;
+	color: #515151;
+	font-size: 11px; font-weight: bold;
+}
+
+.UISubContent .SubContentTitle a:hover { 
+	text-decoration: none;
+	color: #058ee6;
+}
+
+.UISubContent .SubContentTitle .NodeLabel { 
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	padding: 0px 8px;
+	line-height: 25px;
+	padding: 0px 5px 0px 5px;
+}
+
+.UISubContent .SubContentTitle .LinkSmall {
+	background: url('DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  right: 0; /* orientation=lt */
+  left: 0; /* orientation=rt */
+  bottom: 0px;
+}
+
+.UISubContent .SubContentTitle .RightIcon { 
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	height: 20px;
+	margin-right: 3px; /* orientation=lt */
+	margin-left: 3px; /* orientation=rt */
+}
+/*###########################-- End Title --############################*/
+
+.UISubContent .UIDocumentContentInfo {
+	border: solid 1px #e1e1e1 ;
+	padding: 5px 0px;
+	width: 98.5%;
+	margin: auto;
+}
+
+.UISubContent .UIHorizontalTabs {
+	padding: 0px;
+}
+
+.UISubContent .ItemIcon { 
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+  margin-top: 0px;
+  margin-left: 4px; /* orientation=lt */
+  margin-right: 4px; /* orientation=rt */
+  width: 16px;
+ 	height: 16px;
+}
+
+.UISubContent .UIDocumentContentInfo .DocumentInfo {
+	height: 20px;
+	line-height: 20px;
+	padding: 2px 0px 2px 10px; /* orientation=lt */
+	padding: 2px 10px 2px 0px; /* orientation=rt */
+}
+
+.UISubContent .UIDocumentContentInfo .DocumentLabel {
+	font-size: 11px;
+	margin-left: 20px; /* orientation=lt */
+	margin-right: 20px; /* orientation=rt */
+  line-height: 16px;
+}
+
+.UISubContent .UIDocumentContentInfo .DocumentLabel a {
+	color: #058ee6;
+}
+
+.UISubContent .UIDocumentContentInfo .DocumentLabel a:hover {
+	color: orange;
+}
+
+.UISubContent .UIDocumentContentInfo .AuthorNameLabel {
+	font-size: 11px;
+  line-height: 20px;
+  color: gray;
+  text-align: right; /* orientation=lt */
+  text-align: left; /* orientation=rt */
+  padding-right: 10px; /* orientation=lt */
+  padding-left: 10px; /* orientation=rt */
+}
+
+.UISubContent .UIDocumentContentInfo .DateTimeLabel {
+	font-size: 11px;
+  line-height: 20px;
+  color: gray;
+}
+
+.ViewMoreDocument{
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	height: 16px; line-height: 16px; vertical-align: middle;
+	border: 1px solid #e1e1e1;
+	margin: 3px 12px 0px 0px; /* orientation=lt */
+	margin: 3px 0px 0px 12px; /* orientation=rt */
+}
+
+.ViewMoreDocument a {
+  margin: 0px 10px 0px 3px; /* orientation=lt */
+  margin: 0px 3px 0px 10px; /* orientation=rt */
+  font-size: 11px;
+  color: #058ee6;
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+}
+
+.ViewMoreDocument a:hover{
+  color: orange;
+}
+
+.ViewMoreDocument .NextIcon{
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 16px; height: 16px;
+  background: url('DefaultSkin/background/BlackDotNextArrow.gif');
+}
+
+.UISubContent .UIDocumentContentInfo .NoneDocumentMessage {
+	padding: 5px 0px;
+	width: 250px; margin: auto;
+}
+
+.UISubContent .UIDocumentContentInfo .NoneDocumentMessage .Info16x16Icon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 24px; height: 24px;
+	margin: 3px 5px 0px 0px; /* orientation=lt */
+	margin: 3px 0px 0px 5px; /* orientation=rt */
+	background: url('VistaSkin/background/InfoIcon.png') no-repeat left top;  /* orientation=lt */
+	background: url('VistaSkin/background/InfoIcon-rt.png') no-repeat left top;  /* orientation=rt */
+}
+
+.UISubContent .UIDocumentContentInfo .NoneDocumentMessage .Message {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	color: #b7b7b7;
+	font-size: 11px;
+  line-height: 24px;
+}

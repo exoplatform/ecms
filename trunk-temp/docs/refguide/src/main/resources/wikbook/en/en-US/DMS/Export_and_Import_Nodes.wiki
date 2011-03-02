@@ -1,0 +1,115 @@
+
+h1. Export and Import Nodes
+
+{info}
+Since DMS 2.3.2
+{info}
+
+
+
+
+{info}
+In case you import a node which contains its a  namespace created by user, then you should to [ECM:Export and Import Namespaces]'
+{info}
+
+h1. Export a node
+
+You easily export a node into a *.xml* or a *.zip* file by following the simple guides below:
+
+
+1\. Select a node that you want to export.
+
+2. Select the *Admin* tab.
+
+3. Click the
+!icon1.gif!
+ icon on the action bar to show the *Export Node* form:
+
+
+!export.gif!
+
+
+Details:
+
+
+|| Field     || Description ||
+|  Path to Export  | the path of a node that will be exported |
+|  Format   | *Document View*: each node is a tag and the properties of that node are considered to be the elements of the tag.  *System view*: each node and each property of the node is included in a different tag. |
+| Zip       |   a node will be exported in the zip type. |
+
+
+4. Click the *Export* button and select the location to save the file.
+
+If the current node or one of its child nodes has versions, when this node is exported, you can also export a version history of this node.
+
+
+!version.jpg!
+
+
+5. Click on the *Export version history* button.  The content will be returned in a zip file.
+
+
+h1. Import a node
+
+You can import nodes in *xml* format into JCR Explorer system by following the guides below:
+
+1\. Select the location that users want to import a node.
+
+2. Select the *Admin* tab.
+
+3. Click the
+!icon2.gif!
+ icon to show the *Import Node* form:
+
+
+!import.jpg!
+
+
+4. Click on *Browse* to select a file that you want to import.
+
+5. Click the
+!icon3.gif!
+ icon to upload the selected file.
+
+6. Select a behavior:
+
+
+{info}
+*UUID* stands for Universal Unique Identifier that is a used to uniquely identify objects or entities on the Internet. When a node is created, that node has its own identical UUID. That is the reason why users have to select behavior to avoid the UUID collision between an existing node and an imported node
+{info}
+
+
+
+Details:
+
+|| Name    || Description ||
+| Create new   | If you select this behavior, a new node with a new UUID will be created in a location that users want to import a node.  |
+| Remove existing   | If you select this behavior, the existing node with the same UUID will be removed to the selected location.  |
+| Replace existing    | If you select this behavior, the existing node will be replaced by the imported node. |
+| Throw      | If you select this behavior, there is a message which will alert that you can not import this node in case this node has been existing in the workspace. If this node hasn't existed, a new node will be created. |
+
+
+_*Notice:*_ The existing node will be taken an effect when users are working in the same drive or the same user workspace
+
+
+{info}
+In case you import a node which contains its version history, then you should specify the UUID behaviour is 'Remove existing' or 'Replace existing'
+{info}
+
+7. Click on *Browse* to import a version history of a node, then click the
+!icon3.gif!
+ icon to upload the selected file.
+
+{info}
+This field is not mandatory
+{info}
+
+8. Select the format in the *Format* field.
+
+9. Click the *Import* button to complete importing a file.
+
+
+
+
+
+

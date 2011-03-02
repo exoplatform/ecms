@@ -1,0 +1,138 @@
+
+h1. Script Management
+
+This function allows users to manage all script codes in the ECM and Browser Content system <br>
+
+
+
+
+Go to *ECM Administration* -> *Advanced Configuration*-> *Manage Scripts*<br>
+
+In which<br>
+
+ECM Scripts: scripts are used in ECM<br>
+BC Scripts: scripts are used in Content Browser<br>
+
+h1. ECM Scripts
+
+h2. Add an ECM Scripts
+
+1\. Select the *ECM Scripts* tab in the *Manage Scripts*<br>
+
+
+!ECMScript.jpg!
+
+
+2. Click the *Add* button. The *Add/Edit script* form will appear:<br>
+
+
+!add1.jpg!
+
+
+3. Enter value for the *Script contents* field. This field is required.<br>
+
+4. Enter a name for script in the *Script Name* field. This field is required.<br>
+
+* Name of script must be unique<br>
+* Name can not contain special characters like !,@,#,$,%,&,*,(,)<br>
+
+5. Click the *Save* button to accept adding a new script.<br>
+
+
+
+
+
+h2. Edit an ECM script
+
+Do the following steps:
+
+1\. In the *ECM Scripts* tab, click the
+!icon1.jpg!
+  icon corresponding to the script that you want to edit. The *Add/Edit script* form will appear:
+
+
+!edit1.jpg!
+
+
+2. Edit the properties in this form.
+
+*Note*:
+* You can not edit a script name.
+* If you check the 'is Enable Version' check-box, this script automatically increases 1 version after you click the *Save* button. It is displayed at the *Base version* column in the 'ECM Scripts' tab.
+3. Click the *Save* button to save all changes.
+
+
+
+h2. Delete an ECM script
+
+Do the following steps:
+
+1\. In the *ECM Scripts* tab, click the
+!icon2.jpg!
+ icon on the script that you want to delete. A confirmation message will appear. <br>
+
+2. Click the *OK* button to accept deleting this action or click the *Cancel* button to discard this action.
+
+
+
+
+h1. BC Scripts
+
+h2. Add a BC Script
+
+Do the following steps:
+
+1\. In *Manage Scripts*, select the *BC Scripts* tab
+
+
+!BCScript.jpg!
+
+
+2. Click the *Add* button to open the *Add/Edit script* form:
+
+
+!add2.jpg!
+
+
+3. Input a value for script content in the 'Script contents' field. This field is required<br>
+
+4. Input a script name in the *Name* field. This field is required.
+
+* A script name must be unique
+* A script name can not contain special characters like !,@,#,$,%,&,*,(,)
+
+5. Click *Save* to finish adding a new script.
+
+
+
+h2. Add a BC Script
+
+Do the following steps:
+
+1\. In the *BC Script* tab, click the
+!icon1.jpg!
+  icon on a script that you want to edit. The *Add/Edit script* form will appear:
+
+
+!edit2.jpg!
+
+
+2. Edit the properties that you want.<br>
+
+_*Note*_:
+
+* You can not edit a script name.
+* If you check the *is Enable Version* check-box, this script automatically increases 1 version after you have clicked the *Save* button. It is displayed at the *Base version* column in the *ECM Scripts* tab.
+
+3. Click the *Save* button to accept all changes.
+
+
+h2. Delete a BC script
+
+Do the following steps:<br>
+
+1\. In the *BC Scripts* tab, click the
+!icon2.jpg!
+ icon on a script that you want to delete. A confirmation message appears.<br>
+
+2. Click the *OK* button to accept deleting this script or click the *Cancel* button to discard this action.

@@ -1,0 +1,68 @@
+<div class="UIFormWithTitle">
+  <div class="TitleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></div>
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">
+  	<table class="UIFormGrid">	  
+    <tr>		          					
+      <td class="FieldLabel"><%=_ctx.appRes("ReloadAction.dialog.label.id")%></td>
+      <td class="FieldComponent">
+	      <%
+	        String[] fieldId = ["jcrPath=/node", "editable=false", "visible=if-not-null"] ;
+	        uicomponent.addMixinField("id", fieldId) ;  
+	      %>
+	    </td>
+    </tr>
+    <tr>		          					
+      <td class="FieldLabel"><%=_ctx.appRes("ReloadAction.dialog.label.name")%></td>
+      <td class="FieldComponent">
+	      <% 
+	        String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty"];
+	        uicomponent.addTextField("actionName", fieldName);  
+	      %>
+	    </td>
+    </tr>
+    <tr>		          					
+      <td class="FieldLabel"><%=_ctx.appRes("ReloadAction.dialog.label.lifecycle")%></td>
+      <td class="FieldComponent">
+	      <% 
+	        String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", "options=read,add,remove"] ;
+	        uicomponent.addSelectBoxField("lifecycle", fieldLifecycle) 
+	      %>
+	    </td>
+    </tr>
+    <tr>		          					
+      <td class="FieldLabel"><%=_ctx.appRes("ReloadAction.dialog.label.description")%></td>
+      <td class="FieldComponent">
+	      <% 
+	        String[] fieldDescription = ["jcrPath=/node/exo:description"] ;         
+	        uicomponent.addTextAreaField("description", fieldDescription) ;
+	      %>
+	    </td>
+    </table>
+    <%/* start render action*/%>
+		<div class="UIAction"> 
+	    <table align="center" class="ActionContainer">
+	    	<tr>
+	    		<td align="center">
+			      <% for(action in uicomponent.getActions()) { 
+			      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+								 String link = uicomponent.event(action) ;
+			      %>
+		          <a href="$link" class="ActionButton LightBlueStyle">
+								<div class="ButtonLeft">
+								  <div class="ButtonRight">
+									  <div class="ButtonMiddle">
+									    $actionLabel
+							      </div>
+							    </div>
+						    </div>
+							</a>
+			      <%}%>    
+	      	</td>
+	      </tr>      
+	    </table>
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

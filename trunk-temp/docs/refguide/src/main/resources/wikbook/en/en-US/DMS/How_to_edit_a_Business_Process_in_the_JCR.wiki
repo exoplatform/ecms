@@ -1,0 +1,36 @@
+h2. How to view a Business Process in the JCR
+
+#startfloatingbox()
+*See also*
+
+* [Workflow:Process Definition (XPDL)]
+* [Workflow:Bonita Forms Definition]
+* [Workflow:Bonita Resource bundle]
+* [How to edit a Business Process in the JCR]
+* [Workflow:Workflow Maven Packaging]
+* [Workflow:Workflow Installation]
+
+[Back to 'How to create a workflow'|How to create a workflow]
+#endfloatingbox()
+
+Every business process deployed is automatically stored in the JCR and you can see it in File Explorer portlet.
+   All the information can be found in the system workspace, in the "business processes" folder.
+   The path is jcr:system/exo:ecm/business processes
+
+<h2>View business processes files</h2>
+
+* By default the business processes are hidden. This is because the ECM Explorer only shows nodes which are considered as documents in the enterprise.
+
+* You need to change the display preferences to see them.
+** Click on the icon. The preferences panel is displayed
+
+
+
+** Check "Show non document type" as above
+** Click on *Save*
+
+Now you can see every business processes stored in the JCR.
+
+* Click on any process to view files in this process. Example, view files of 'Content Publishing'
+
+!listprocess.gif!

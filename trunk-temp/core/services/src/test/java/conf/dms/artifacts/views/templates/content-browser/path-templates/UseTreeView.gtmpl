@@ -1,0 +1,219 @@
+<%
+	import org.exoplatform.ecm.webui.component.browsecontent.UIToolBar;	
+	import org.exoplatform.ecm.webui.component.browsecontent.UISearchController ;
+	import org.exoplatform.ecm.webui.component.browsecontent.UITagList ;
+	import org.exoplatform.ecm.webui.component.browsecontent.UICategoryTree ;
+  import javax.jcr.Node;
+  import org.exoplatform.ecm.webui.utils.Utils ;
+  
+  String componentName = uicomponent.getName() ;
+  def content = uicomponent.getTreeContent() ;                  
+  def subCategoryList = content.get("subCategoryList") ;
+  def subDocumentList =  uicomponent.getCurrentList() ;
+  boolean isShowTagmap = uicomponent.isShowTagmap() ;
+  boolean isShowAllDoc = uicomponent.isShowAllDocument() ;
+  boolean isShowDocByTag = uicomponent.isShowDocumentByTag() ;
+  int itemPerBlock = uicomponent.getRowPerBlock() ;  
+  if(isShowDocByTag) { isShowAllDoc = true ;}
+  int numbOfDocument = subDocumentList.size() ;
+  boolean hasNoDocument = subDocumentList.isEmpty() ;
+  int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
+%>
+<div class="UIBrowseContainer" id="$uicomponent.id">  
+	<%if(uicomponent.getCurrentNode() != null) {%>
+	<%if(uicomponent.isEnableToolBar()){uicomponent.renderChild(UIToolBar.class);}%>
+	<div class="ContentHolder">  
+	<%
+	 if(uicomponent.isShowSearchForm()) {
+	   uicomponent.renderChild(UISearchController.class); 
+	 } else {	 
+	  /*Begin TagMap*/   
+			 	String className = "" ;
+			 	if(isShowTagmap) {	
+			 		className = "RightColumn"	 ;  
+			 	 	uicomponent.renderChild(UITagList.class);
+		 		} 
+		 	/*End TagMap*/%>
+		<div class="$className">
+		<% /*Begin CategoryTree*/
+			String style = "" ;
+	 		if(uicomponent.isShowCategoryTree()){
+	   		style = "CenterColumn" ;
+	   		String rootNode = uicomponent.getRootNode().getPath() ;
+	   		if (rootNode.equals("/"))  rootNode = "Root" ;
+	   		else  rootNode =  uicomponent.getRootNode().getName() ;
+				uicomponent.renderChild(UICategoryTree.class);	
+   		}
+   		/*End CategoryTree*/ %>
+	  	<div class="$style">
+			<%/*Begin UIEventViewer*/%>
+					<div class="UIEventViewer">
+				 	<%if(hasNoDocument){%>
+			    <div class="UISubContent">
+			      <div class ="UIDocumentContentInfo">
+			        <div class="NoneDocumentMessage">
+			          <div class="MessageContainer">
+			            <div class="Info16x16Icon"><span></span></div>
+			            <div class="Message"><%=_ctx.appRes(componentName + ".label.NoDocument")%></div>
+			            <div style="clear:left;"><span></span></div>
+			          </div>
+			        </div>
+			      </div>  
+			    </div>  
+	  			<%}	else {%>
+	  				<div class="EventContent">
+			      <%
+			        for (Node doc in subDocumentList) {
+			        	String objectId = Utils.formatNodeName(doc.getPath()) + "&category=" + Utils.formatNodeName(uicomponent.getCurrentNode().getPath() + "&workspace=" + doc.getSession().getWorkspace().getName()) ;
+			          String viewAction = uicomponent.event("ChangeNode", objectId);
+			          String iconName = uicomponent.getIcons(doc,"16x16Icon") ;
+			          String docName = doc.getPath().substring(doc.getPath().lastIndexOf("/") + 1) ;
+			      %>
+			          <div class="EventContentDetail">
+			            <div class="TopEventContentDetail">
+			              <table>  
+			                 <tr>
+			                  <td>
+			                    <div class="DocNodeIcon CBDefaultDocument16x16Icon $iconName">
+	                        <%if(Utils.isSymLink(doc)) {%>
+	                          <div class="LinkSmall"></div>
+	                        <%}%>			                      
+			                    </div>
+			                    <div class="EventDocumentLabel">
+			                      <a href="$viewAction"><%=docName%></a>
+			                    </div>  
+			                  </td>
+			                  <td class="EventAuthorNameLabel">
+			                    <%=_ctx.appRes(componentName + ".label.author")%>:<%=uicomponent.getOwner(doc)%>
+			                  </td>			                  
+			                </tr>        
+			              </table>
+			            </div>
+			            <div class="MainEventContent">
+			              <div class="SummaryTitleLabel">
+											<%=_ctx.appRes(componentName + ".label.summary")%>:
+			                <%if(doc.hasProperty("exo:summary")){%>
+			                 <%=doc.getProperty("exo:summary").getString()%>
+			               <%}%>
+			              </div>
+			            </div>
+			          </div>
+			      <%
+			        }
+			      %>
+	   			</div>
+	   			 <%if(isShowAllDoc) {%>
+					    <div class="ViewPreviousDocument"> 
+					      <div class="BackIcon"><span></span></div>
+					      <a href="<%=uicomponent.event('Back')%>">
+					      	<%=_ctx.appRes(componentName + ".label.previous")%>
+					      </a>
+					      <div style="clear:left"><span></span></div>
+					    </div>
+					    <div style="clear:left"><span></span></div>
+	    		<%}%>
+	    		<% if(totalPages>1){ %>
+			    <div class="DocumentsPageIterator">
+			    	<%_ctx.renderUIComponent(uicomponent.getUIPageIterator());%>
+			    </div>
+			    <% } %>
+	   			<%}%>
+				  <%/*End UIEventViewer*/%>
+				  <%if(!isShowAllDoc) {%>			        
+	        <%/*Begin UIContentView*/%>
+		      <div class="UIContentView">
+						<%
+						  if (!subCategoryList.isEmpty()) {
+							  for (String subCat : subCategoryList) { 
+							     String catName = subCat.substring(subCat.lastIndexOf("/") + 1) ;
+	                 String actionLinkSub = uicomponent.event("Select", Utils.formatNodeName(subCat)) ; 
+	                 def child = content.get(catName) ;
+								   def docChilds = child.get("doc") ;
+								   def subCatNode = uicomponent.getNodeByPath(subCat);
+								   def iconSubCat = Utils.getNodeTypeIcon(subCatNode, "16x16Icon");
+								   int numbDocument = docChilds.size() ;
+							%>
+										<div class="TiteContentView">										  
+										  <a class="TiteLabel" href="$actionLinkSub">
+										  	<div class="TiteContentIcon CBDefaultFolder16x16Icon $iconSubCat">
+										  	<%if(Utils.isSymLink(subCatNode)) {%>
+		                      <div class="LinkSmall"></div>
+		                    <%}%>
+										  	</div>
+										  	<%=catName%>
+										  </a>
+										  <div style="clear:left"><span></span></div>
+										</div>
+										<%if(docChilds.isEmpty()) {%>
+										<div class="UISubContent">
+								      <div class ="UIDocumentContentInfo">
+								        <div class="NoneDocumentMessage">
+								          <div class="MessageContainer">
+								            <div class="Info16x16Icon"><span></span></div>
+								            <div class="Message"><%=_ctx.appRes(componentName + ".label.NoDocument")%></div>
+								            <div style="clear:left;"><span></span></div>
+								          </div>
+								        </div>
+								      </div>  
+										</div>  
+										<%} else {%>    
+										<div class="FormContentView">
+											<div class="SubFormContent">
+											 <% 
+											    boolean isRight = false ;
+			                    for(Node subChild in docChilds) {
+			                      String cssStyle = "ChildrenContentHolderLeft" ;
+									          if(isRight) cssStyle = "ChildrenContentHolderRight" ;
+									          if(numbDocument == 1) cssStyle = "ChildrenContentHolder" ;
+									          String docId = Utils.formatNodeName(subChild.getPath()) + "&category=" + Utils.formatNodeName(subCat) + "&workspace=" + subChild.getSession().getWorkspace().getName() ;
+			                      String subChildLink = uicomponent.event("ChangeNode", docId);                       
+											 %>
+														<div class="$cssStyle">
+															<div class="Icon48x48 DefaultIconImage <%=Utils.getNodeTypeIcon(subChild, "48x48Icon")%>">
+															<%if(Utils.isSymLink(subChild)) {%>
+	                               <div class="Link"></div>
+	                            <%}%>
+															</div>
+															<div class="ContentLabel">
+																<div class="UserName"><a href="$subChildLink"><%=subChild.getName()%></a></div>
+																<div class="Author">
+									                Author:<%=uicomponent.getOwner(subChild)%>
+									              </div>
+															</div>
+															<div style="clear:left;"><span></span></div>
+														</div>
+												<%
+														if(isRight) println "<div style=\"clear: both\"><span></span></div>" ;
+							              isRight = !isRight ;
+												  }
+												  println "<div style=\"clear: both\"><span></span></div>" ;									  
+				                  if(!(docChilds.size() < itemPerBlock)) {
+				                  	String label = componentName + ".label.more" ;
+				                %>
+				                     <div class="ViewMoreDocument">
+				                    	<div class="NextIcon"><span></span></div>
+				                    	<a href="<%=actionLinkSub%>">
+				                    		<%=_ctx.appRes(label)%>
+															</a>
+				                    	<div style="clear: left;"><span></span></div>                               
+				                    </div>
+				                  	<div style="clear:right"><span></span></div>										  
+				                <%}%>
+										  </div>
+										</div>
+									<%}
+									}
+								}%>
+					 </div>
+		      <%/*End UIContentView*/%>
+		      <%}%>
+			  </div>
+		  </div>
+	  	<div style="clear: both;"><span></span></div>
+	  </div>
+  <%}%>
+ </div>
+ <%} else {%>
+	<div style="text-align:center;"><%=_ctx.appRes("UIBrowseContainer.label.cannot-access")%></div>
+<%}%>
+</div>

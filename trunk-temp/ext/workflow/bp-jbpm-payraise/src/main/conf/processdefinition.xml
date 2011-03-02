@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition name="pay raise process"> 
+
+  <description>pay raise process</description>    
+
+  <swimlane name="initiator" />
+  
+  <swimlane name="boss">
+    <assignment class="org.exoplatform.processes.payraise.BossAssignementHandler"/>
+  </swimlane>
+  
+  <swimlane name="hr mgr">
+    <assignment class="org.exoplatform.processes.payraise.HRAssignementHandler"/>
+  </swimlane>
+
+  <!-- START-STATE -->
+  <start-state name="start">
+    <task swimlane="initiator">
+      <controller>
+        <variable name="amount-asked" />      
+        <variable name="priority" />
+        <variable name="rewarded" />
+        <variable name="reason" />       
+      </controller>
+    </task>  
+    <transition to="evaluation"/>
+  </start-state>
+
+  <!-- NODES -->
+  <task-node name="evaluation">
+    <task swimlane="boss">
+      <controller>
+        <variable name="requester" />      
+        <variable name="amount-granted" />      
+        <variable name="amount-asked" />      
+        <variable name="priority" />
+        <variable name="rewarded" />
+        <variable name="reason" />    
+      </controller>
+    </task>
+ 
+    <transition name="grant" to="hr update"/>
+    <transition name="deny"  to="end"/>
+  </task-node>
+
+  <task-node name="hr update">
+    <task swimlane="hr mgr">
+      <controller>
+        <variable name="requester" />      
+        <variable name="amount-granted" />      
+      </controller>
+    </task
+    >  
+    <transition to="end" />
+  </task-node>
+
+  <!-- END-STATE -->
+  <end-state name="end" />
+
+</process-definition>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="1.0" xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd"> 
+  
+  <portlet>
+    <description xml:lang="EN">ECM Admin</description>
+    <portlet-name>ECMAdminPortlet</portlet-name>
+    <display-name xml:lang="EN">ECM Admin</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>    
+    
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/ECMAdminPortlet/webui/configuration.xml</value>
+    </init-param>    
+
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>    
+    <resource-bundle>locale.portlet.administration.ECMAdminPortlet</resource-bundle>    																														
+    
+    <portlet-info>
+      <title>ECM Admin</title>
+      <short-title>ECM Admin</short-title>
+      <keywords>Admin</keywords>
+    </portlet-info>
+    <portlet-preferences>
+    	<!-- Setup the default repository name of this portlet -->
+    	<preference>
+        <name>repository</name>
+        <value>repository</value>
+        <read-only>false</read-only>
+      </preference>
+    </portlet-preferences>  
+  </portlet> 
+</portlet-app>

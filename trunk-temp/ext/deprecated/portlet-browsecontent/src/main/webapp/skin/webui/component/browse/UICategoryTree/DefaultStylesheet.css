@@ -1,0 +1,161 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : Vu Duy Tu
+ *          duytucntt@gmail.com
+ * DEC 19, 2006
+ * version: $Id$
+ */
+
+.UICategoryTree {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  padding: 1px;
+  width: 200px;
+}
+
+.UICategoryTree a {
+  text-decoration: none;
+	color: #058ee6;
+	font-size: 11px;
+}
+
+.UICategoryTree .TitleCategoryTree {
+  background: url('../DefaultSkin/background/TagmapTitleBG1x19.gif') repeat-x;
+  height: 19px; line-height: 19px;
+  border: solid 1px #e1e1e1;	
+  border-bottom: none;
+	margin: 0px;
+}
+
+.UICategoryTree .TitleCategoryTree .CategoryTreeIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+  margin-top: 2px;
+}
+
+.UICategoryTree .TiteLabel {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	font-weight: bold;
+	padding-left: 5px; /* orientation=lt */
+	padding-right: 5px; /* orientation=rt */
+}
+
+.UICategoryTree .MiddleCategoryTree {
+	border: solid 1px #e1e1e1;
+	border-top: solid 1px #cdcdcd;	
+  background: #ffffff;
+	padding: 9px 0px 10px 0px;
+	overflow: auto;
+	white-space: nowrap;
+	width: 99%;
+}
+
+.UICategoryTree .MiddleCategoryTree .TreeRootIcon{
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  margin: 2px 3px 0px 5px; /* orientation=lt */
+  margin: 2px 5px 0px 3px; /* orientation=rt */
+  width: 16px; height: 16px;
+}
+
+.UICategoryTree .MiddleCategoryTree .RootTreeNode{
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	font-weight:  bold;
+	font-size: 11px;
+	line-height: 20px; height: 20px;		
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu {
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu .ParentSupMenu {
+	margin: 5px 0px 0px 18px; /* orientation=lt */
+	margin: 5px 18px 0px 0px; /* orientation=rt */
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu .SelectIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	margin-top: 2px;
+	width: 16px; height: 16px;
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu .CategoryTreeLabel {
+	margin-left: 20px; /* orientation=lt */
+	margin-right: 20px; /* orientation=rt */
+	line-height: 20px;
+	font-size: 11px;
+}
+
+.UICategoryTree .MiddleCategoryTree .ListMenu .CategorySelectLabel {
+	margin-left: 20px; /* orientation=lt */
+	margin-right: 20px; /* orientation=rt */
+	line-height: 20px;
+	font-weight:  bold;
+	font-size: 11px;
+}
+
+
+/************************************ UICategoryTree ***********************************/
+
+.UICategoryTree .MiddleCategoryTree .HardDisk24x24Icon {
+	background-position: bottom left;
+}
+
+.UICategoryTree .MiddleCategoryTree a.LableNode {
+	font-weight: bold;
+	padding-left: 30px; /* orientation=lt */
+	padding-right: 30px; /* orientation=rt */
+}
+
+.UICategoryTree .MiddleCategoryTree .HomeNode {
+	padding-left: 10px; /* orientation=lt */
+	padding-right: 10px; /* orientation=rt */
+	line-height: 20px;
+	height: 20px;
+}
+
+.UICategoryTree .MiddleCategoryTree .Icon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  cursor: pointer;
+  padding-left: 20px; /* orientation=lt */
+  padding-right: 20px; /* orientation=rt */
+}
+
+.UICategoryTree .MiddleCategoryTree a {
+	color: #058ee6;
+	display: block;
+}
+
+.UICategoryTree .MiddleCategoryTree .Node {
+  background: url('DefaultSkin/background/Dotted.gif') repeat-y left; /* orientation=lt */
+  background: url('DefaultSkin/background/Dotted-rt.gif') repeat-y right; /* orientation=rt */
+  margin-left: 14px; /* orientation=lt */
+  margin-right: 14px; /* orientation=rt */
+  padding: 4px 0px;
+  line-height: 24px;
+}
+
+.UICategoryTree .MiddleCategoryTree .LastNode {
+  background: url('DefaultSkin/background/Dotted.gif') no-repeat left 1px; /* orientation=lt */
+  background: url('DefaultSkin/background/Dotted-rt.gif') no-repeat right 1px; /* orientation=rt */
+}
+  
+.UICategoryTree .MiddleCategoryTree .ExpandIcon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  cursor: pointer;
+}
+
+.UICategoryTree .MiddleCategoryTree .CollapseIcon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  cursor: pointer;
+}
+
+.UICategoryTree .MiddleCategoryTree a:hover {
+  color: blue;
+}

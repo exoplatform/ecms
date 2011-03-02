@@ -1,0 +1,66 @@
+h1. Translation for Taxonomy
+
+
+
+h1. Displaying taxonomy tree's name
+
+With each taxonomy tree, the name of a node is found in portal/WEB-INF/classes/locale/ecm/cms/taxonomy/...xml file. Key of the name of the node is:
+{code}
+eXoTaxonomies.$\{path to node}.label = $\{localized name}
+{code}
+
+In which:
+
+* Path to node: starts from taxonomy tree
+* Path to node: replaced all "/" with "."
+
+Example: in System taxonomy tree, we have:
+* System -->eXoTaxonomies.System.label = System name
+* System/cms --> eXoTaxonomies.System.cms.label = cms name
+
+Note:
+* If the key is not defined in .xml file, the displaying name is the name of  the taxonomy.
+
+* To add category: System/cms/sports
+** In xml, we define key/values following:
+- eXoTaxonomies.System.label = System
+- eXoTaxonomies.System.cms.label = Cms
+- eXoTaxonomies.System.cms.sports.label = Sports <br>
+** Find system name: System
+** Find cms name: Cms
+** Find the name of sports: Sports
+--> the result is System/Cms/Sports
+
+
+h1. Localize file
+To get localize, we define all key in
+portal/WEB-INF/classes/locale/ecm/cms/taxonomy/taxonomies_en.xml
+
+Examples:
+{code}
+ <eXoTaxonomies>
+    <System>
+      <label>System</label>
+      <cms>
+      		<label>Cms</label>
+			<sports>
+				<label>Sports</label>
+				<football>
+					<label>Football</label>
+					<champions-league>
+						<label>Champion League</label>
+					</champions-league>
+				</football>	
+			</sports>	
+	</cms>
+    </System>
+ </eXoTaxonomies>
+{code}
+
+
+
+h1. Add category for document
+Previous, we could add a category for a document by typing. Now, we must choose a category thanks to UIOneTaxonomySelector component. We also can not edit the category text box. The value in the text box is not a path to taxonomy, it's a value respectively getting from localize file basing on the path.
+
+
+

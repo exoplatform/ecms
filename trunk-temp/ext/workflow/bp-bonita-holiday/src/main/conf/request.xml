@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Request some holidays</task-name>
+  <title>Request some holidays</title>
+  <submit>Submit</submit>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <label>Start (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <label>End (dd/mm/yyyy) :</label>
+  </end>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

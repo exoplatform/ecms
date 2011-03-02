@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #			org.exoplatform.workflow.webui.component.controller										#
+  #############################################################################
+  -->
+  <UIWorkflowControllerPortlet>
+    <tab>
+      <label>Kontroller</label>
+      <text>Admin Arbeitsfluss Management</text>
+    </tab>
+  </UIWorkflowControllerPortlet>
+  <ControllerPopup>
+    <title>
+      <UITaskManager>UITask Manager</UITaskManager>
+    </title>
+  </ControllerPopup>
+  <UITabPane>
+    <title>
+      <UITaskList>Aufagbenkontroller</UITaskList>
+      <UIBPDefinition>BP Beschreibungskontroller</UIBPDefinition>
+      <UIDocumentContent>Inhalt anschauen</UIDocumentContent>
+      <UIDocumentForm><![CDATA[Inhalt &auml;ndern]]></UIDocumentForm>
+      <UITask>Augabe</UITask>
+    </title>
+  </UITabPane>
+  <UITaskList>
+    <header>
+      <id>Task ID</id>
+      <processName>Prozessname</processName>
+      <taskName>Aufgabenname</taskName>
+      <actor>Akteur</actor>
+      <description>Berschreibung</description>
+      <actorId>Akteur Id</actorId>
+      <taskVariables>Aufgabenvariablen</taskVariables>
+      <processDateStart>Process Date Start</processDateStart>
+      <action>Aktion</action>
+    </header>
+  </UITaskList>
+  <UITaksList>
+    <msg>
+      <no-task>Keine zugeschriebene Aufgabe</no-task>
+    </msg>
+  </UITaksList>
+  <UITask>
+    <label>
+      <hide-process-link>Hide process link</hide-process-link>
+      <show-process-link>Show process link</show-process-link>
+    </label>
+    <msg>
+      <has-not-got-delegate>You must choose any user to deletgate</has-not-got-delegate>
+    </msg>
+    <title>
+      <Delegate>Select User</Delegate>
+    </title>
+  </UITask>
+  <UIBPDefinition>
+    <header>
+      <id>Id</id>
+      <name>Name</name>
+      <version>Version</version>
+      <action>Aktion</action>
+    </header>
+    <msg>
+      <empty>Kein Businessprozess zum Starten</empty>
+    </msg>
+  </UIBPDefinition>
+  <UIControllerManager>
+    <action>
+      <title>
+        <ManageStart>Anfang managen</ManageStart>
+      </title>
+    </action>
+  </UIControllerManager>
+  <UIDocumentForm>
+    <msg>
+      <cannot-save><![CDATA[Einige Grenzen wurden w&auml;hrend dieser Aktion &uuml;berschritten.]]></cannot-save>
+      <in-versioning><![CDATA[Jetziger Knoten muss &uuml;berpr&uuml;ft werden bevor neuer hinzugef&uuml;gt werden kann.]]></in-versioning>
+      <not-support><![CDATA[Kann Vorlage f&uuml;r '{0}' nicht laden.]]></not-support>
+      <value-invalid><![CDATA['{0}' ist ein ben&ouml;tigter Wert]]></value-invalid>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #####################################################################
+  ## Need to be translated Since version ECM 2.3                      #
+  #####################################################################
+  -->
+  <PopupDelegatedSelectorId>
+    <title>
+      <UIUserSelectContainer>Select User</UIUserSelectContainer>
+    </title>
+  </PopupDelegatedSelectorId>
+
+  <!--
+  #############################################################################
+  #			     Since 2.0.0-Alpha02-SNAPSHOT tobe translate											#
+  #############################################################################
+  -->
+  <UIWorkflowControllerPortlet>
+    <msg>
+      <refresh-session-success>The session has been refreshed successfully</refresh-session-success>
+    </msg>
+    <label>
+      <refresh>Refresh</refresh>
+    </label>
+  </UIWorkflowControllerPortlet>
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+    </title>    
+  </PopupComponent>
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+      <rootNodePath>Root tree</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+</bundle>
+

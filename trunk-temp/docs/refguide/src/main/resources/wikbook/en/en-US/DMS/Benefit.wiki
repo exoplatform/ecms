@@ -1,0 +1,14 @@
+
+h2. Benefits
+#startfloatingbox()
+*See also*
+* [Feature]
+* [Benefit]
+[Back to Features and Benefits|Features and benifits]
+#endfloatingbox()
+
+First, many organizations express the need to run a flexible and unique solution to interface with their back office. This solution includes business processes. On one side, as we have seen, we have eXo which is skilled at presentation, personalization and integration. On the other, Workflows stand out with automation, modeling and collaboration. A unique tool pools all these strengths and provides an answer to the organization's expectations. Employees or customers need to authenticate only once to access all resources. In addition, the common "look and feel" of the organization are commonly applied thanks to CSS (Cascading Style Sheets) skins in eXo.
+
+Second, eXo ECM provides an infrastructure for content management. Documents are created by writers in the Portal, read over by proofreaders who plan the publication during a period of time. At the end, those documents must be archived. Workflows complement the solution devised by the eXo Platform to implement the flow of documents and organize the collaboration between humans. In exchange, eXo exposes its JCR and allows the workflow engine to invoke stored Groovy scripts or Business Rules during task executions.
+
+Wofklow engine require a user interface layer to generate online forms when interacting with humans. eXo could put its UI functionality at disposal. eXo can also be combined with AJAX (Asynchronous JavaScript and XML) to enrich the user's experience when Workflow forms are filled in.

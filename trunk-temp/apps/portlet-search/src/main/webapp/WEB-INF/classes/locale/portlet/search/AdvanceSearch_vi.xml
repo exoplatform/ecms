@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Keyword</keyword>
+      <portal>Portal</portal>
+      <Page>Page</Page>
+      <Document>Document</Document>
+    </label>
+    <action>
+      <Search>Search</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document and Page</DocumentAndPage>
+      <documentandpage>document and page</documentandpage>
+      <resutlsCaption>Results</resutlsCaption>
+      <ofAboutCaption>of about</ofAboutCaption>
+      <forCaption>for</forCaption>
+      <timeUnitCaption>seconds</timeUnitCaption>
+      <similar>Pages where the same content appears</similar>
+      <editor>Editor</editor>
+    </label>
+    <action>
+      <edit>Edit</edit>
+    </action>
+    <msg>
+      <your-search>Your search</your-search>
+      <did-not-match>did not match any</did-not-match>
+      <new-suggestion>Suggestion</new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Số bản ghi trên trang</itemsPerPageSelector>
+      <searchFormSelector>Tìm biểu mẫu tìm kiếm mẫu</searchFormSelector>
+      <searchResultSelector>Tìm mẫu kết quả</searchResultSelector>
+      <searchPaginatorSelector>Tìm Paginator mẫu</searchPaginatorSelector>
+      <searchPageLayoutSelector>Tìm mẫu bố trí trang</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Đường dẫn gốc</searchResultBasePathInputSetAction>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <UISearchForm>
+  	 <message>
+  	   <keyword-not-empty>Giá trị của khóa tìm kiếm không được rỗng hoặc trống!</keyword-not-empty>
+  	 </message>
+  </UISearchForm>
+</bundle>

@@ -1,0 +1,18 @@
+Packaging
+
+  The obtained tree needs to be similar to the one provided in this {{{holiday-standalone.zip}archive}}.
+
+  To generate the package to be deployed, simply go the root project 
+  (where you placed pom.xml file) and type:
+
+--------------------------------------------------------------------------------  
+  mvn package
+--------------------------------------------------------------------------------
+
+  You'll find the jar package in "target" directory. 
+  Refer to the Workflow portlet documentation to see how to upload and manage your 
+  workflow in eXo.
+  
+  
+  ps: you'll may see some business processes with a ".bpar" extension. The
+  extension does not matter provided the package is a zip file.

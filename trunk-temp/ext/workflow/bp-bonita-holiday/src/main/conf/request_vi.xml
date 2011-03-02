@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Yêu cầu một số ngày nghỉ lễ</task-name>
+  <title>Yêu cầu một số ngày nghỉ lễ</title>
+  <submit>Đăng kí</submit>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <label>Bắt đầu (dd/mm/yyyy) :</label>
+  </start>
+  <end>
+    <label>Kết thúc (dd/mm/yyyy) :</label>
+  </end>
+  
+  <cancel>Thoát</cancel>
+</bundle>
+

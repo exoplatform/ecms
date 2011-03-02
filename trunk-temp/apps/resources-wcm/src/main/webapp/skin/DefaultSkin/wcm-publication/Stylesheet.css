@@ -1,0 +1,312 @@
+.WCMPublication .PanelContainer {
+  margin: auto;
+}
+
+.WCMPublication .PanelContainer .PanelLeft {
+  float: left;
+  width: 40%;
+}
+
+.WCMPublication .PanelContainer .PanelRight {
+  float: right;
+  width: 40%;
+}
+
+.WCMPublication .PanelContainer .Title {
+  color: #0d5398;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.WCMPublication .PanelContainer .SubTitle {
+  font-size: 11px;
+  color: #999999;
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.WCMPublication .PanelContainer .PanelCenter {
+  text-align: center;
+  width: 125px;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.WCMPublication .PanelContainer .PanelCenter a img {
+  background: #bfd3df;
+  border: 1px solid white;
+  margin: 1px;
+  padding: 1px;
+}
+
+.WCMPublication .PanelContainer .PanelCenter .ArrowBack {
+  background: #bfd3df url('icons/16x16/arrowBack.gif') no-repeat top left;
+  height: 33px;
+  width: 62px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.WCMPublication .PanelContainer .PanelCenter .ArrowNext {
+  background: #bfd3df url('icons/16x16/arrowNext.gif') no-repeat top left;
+  height: 33px;
+  width: 62px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.WCMPublication .PanelContainer .PanelBox {
+  border: 1px solid white;
+  background: #bfd3df;
+  padding: 1px;
+}
+
+.WCMPublication .PanelContainer .PanelBox .PanelContent {
+  background: white;
+  padding: 5px;
+  margin: 0;
+  height: 180px;
+  overflow: auto;
+}
+
+/* ===== Overwrite stylesheet ===== */
+.WCMPublication .PanelContainer .UIContainerConfigOptions {
+  margin: 0;
+}
+
+.WCMPublication .PanelContainer .UIContainerConfigOptions .ScrollArea {
+  border: none;
+}
+
+.WCMPublication .PanelContainer .ContainerConfigOptions {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.WCMPublication .PanelContainer .ContainerConfigOptions {
+  border: none;
+  padding: 0;
+}
+
+/* ===== Overwrite stylesheet ===== */ /*.UISelectedPages .Container {
+  background: #f4f4f4;
+}*/
+.WCMPublication .UISelectedPages .ListPage {
+  background: #f4f4f4;
+}
+
+.WCMPublication .UISelectedPages .ListPage .OverflowContainer {
+  background: white;
+  height: 146px;
+  width: auto;
+  padding: 7px 0px;
+  overflow: auto;
+}
+
+.WCMPublication .UISelectedPages .ListPage  a:hover {
+  color: blue;
+}
+
+.WCMPublication .UISelectedPages .ListPage .ItemIcon {
+  height: 22px;
+  line-height: 22px;
+  background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/GrayNextArrow.gif') no-repeat left;
+  padding-left: 20px;
+  display: block;
+  cursor: pointer;
+}
+
+.WCMPublication .UISelectedPages .ListPage .Selected {
+  height: 22px;
+  line-height: 22px;
+  background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/BlueNextArrow.gif') no-repeat left;
+  padding-left: 20px;
+  display: block;
+  cursor: pointer;
+  color: #058EE6;
+}
+
+.WCMPublication .UISelectedPages .ListPage .NoItem {
+  font-style: italic;
+  text-align: center;
+  text-decoration: none;
+}
+
+.UIPublicationLogList .UIGrid .Text {
+  white-space: normal;
+}
+
+.UIPublicationPanel .SeeAllVersion {
+  text-align: right;
+  cursor: pointer;
+  padding-top: 5px;
+}
+
+.UIPublicationPanel .StatusTable {
+  margin: 0 0 20px;
+}
+
+.UIPublicationPanel .StatusTable .StatusAction {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.UIPublicationPanel .StatusTable .StatusTitle {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.UIPublicationPanel .StatusTable .ScheduledTitle {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.UIPublicationPanel .StatusTable .StatusLink {
+  margin-left: 80px;
+}
+
+.UIPublicationPanel .StatusTable .ActiveStatus {
+  background: url(icons/16x16/StateActive.gif) no-repeat top center;
+  width: 30px;
+  float: left;
+  display: block;
+  padding-top: 32px;
+  color: #464646;
+  text-decoration: underline;
+}
+
+.UIPublicationPanel .StatusTable .CurrentStatus {
+  background: url(icons/16x16/StateCurrent.gif) no-repeat top center;
+  width: 30px;
+  float: left;
+  display: block;
+  padding-top: 32px;
+  cursor: default;
+  color: #0127EA;
+}
+
+.UIPublicationPanel .StatusTable .DisableStatus {
+  background: url(icons/16x16/StateActive.gif) no-repeat top center;
+  width: 30px;
+  float: left;
+  display: block;
+  padding-top: 32px;
+  cursor: no-drop;
+  color: #999999;
+}
+
+.UIPublicationPanel .StatusTable .StatusArrow {
+  background: url(icons/16x16/StateArrow.gif) no-repeat top center;
+  width: 50px;
+  float: left;
+  display: block;
+  padding-top: 32px;
+  margin: 10px 7px 0;
+}
+
+.UIPublicationPanel .StatusTable .ScheduledTime {
+  margin-left: 80px;
+}
+
+.UIPublicationPanel .RevisionsTable {
+  border: 1px solid #828177;
+}
+
+.UIPublicationPanel .RevisionsTable tr {
+  line-height: 20px;
+}
+
+.UIPublicationPanel .RevisionsTable td {
+  padding-left: 3px;
+}
+
+.UIPublicationPanel .RevisionsTable .Version {
+  background: none;
+  font-weight: bold;
+  padding: 0 4px;
+}
+
+.UIPublicationPanel .RevisionsTable .Date {
+  background: none;
+  font-weight: bold;
+  padding: 0 4px;
+}
+
+.UIPublicationPanel .RevisionsTable .Author {
+  font-weight: bold;
+  padding: 0 4px;
+}
+
+.UIPublicationPanel .RevisionsTable .Status {
+  font-weight: bold;
+  padding: 0 4px;
+}
+
+.UIPublicationPanel .RevisionsTable .Action {
+  font-weight: bold;
+  width: 55px;
+  padding: 0 4px;
+}
+
+.UIPublicationPanel .RevisionsTable .None {
+  font-style: italic;
+  text-align: center;
+}
+
+.UIPublicationPanel .RevisionsTable .ActiveLink {
+  color: #0127EA;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.UIPublicationPanel .RevisionsTable .Preview {
+  background: url('icons/16x16/VersionPreview.gif') no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  float: left;
+  margin: 2px 5px 0;
+}
+
+.UIPublicationPanel .RevisionsTable .Restore {
+  background: url('icons/16x16/VersionRestore.gif') no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  float: left;
+  margin: 2px 5px 0;
+}
+
+.UIPublishClvChooser {
+  padding: 20px 20px 0;
+}
+
+.UIPublishClvChooser .ListCLVChooserLink {
+  padding: 10px;
+  border: 1px #B7B7B7 solid;
+  background: #f7f7f7;
+}
+
+.UIPublishClvChooser .ListCLVChooserLink tr {
+  line-height: 20px;
+}
+
+.UIPublishClvChooser .CLVChooserAction {
+  width: 50px;
+}
+
+.UIPublishClvChooser .CLVChooserLink {
+  background: url('icons/16x16/SelectAction.gif') no-repeat;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  margin: 2px auto;
+}
+
+.UIPublishClvChooser .CLVChooserTitle {
+  margin-left: 15px;
+}

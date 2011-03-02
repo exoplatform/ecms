@@ -1,0 +1,34 @@
+<%
+	/**
+	 * Created by The eXo Platform SARL
+	 * Author : lxchiati
+	 *          lebienthuy@gmail.com
+	 * Oct 19, 2006
+	 * 8:50:23 AM
+	 */
+%>
+
+<table class="UIGrid" id="$uicomponent.id">  
+  <tbody>
+		<tr>
+			<td><%=_ctx.appRes("UIViewVersion.label.nodeType")%></td>
+			<td><%=uicomponent.getNodeType()%></td>         
+		</tr>
+		<tr>
+			<td><%=_ctx.appRes("UIViewVersion.label.nodeName")%></td>
+			<td><%=uicomponent.getNodeName()%></td>         
+		</tr>
+		<tr>
+			<td><%=_ctx.appRes("UIViewVersion.label.VersionNumber")%></td>
+			<td><%=uicomponent.getVersionName()%></td>        
+		</tr>
+		<tr>
+			<td><%=_ctx.appRes("UIViewVersion.label.VersionLabels")%></td>
+			<td><%=uicomponent.getVersionLabels()%></td>        
+		</tr>
+		<tr>
+			<td><%=_ctx.appRes("UIViewVersion.label.VersionDate")%></td>
+			<td><%=uicomponent.getVersionCreatedDate()%></td>
+		</tr>
+	</tbody>
+</table>

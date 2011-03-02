@@ -1,0 +1,254 @@
+<environment-definition>
+
+    <environment-factory>
+      <!-- Start of command-service-->
+      <!-- Description: Service which executes commands -->
+      <command-service>
+        <retry-interceptor />
+        <environment-interceptor />
+        <standard-transaction-interceptor />
+      </command-service>
+      <!-- End of command-service-->
+
+      <!-- Start of finished-instance-handler-->
+      <!-- Description: List of services called when an instance is finished. -->
+      <chainer name='finished-instance-handler'>
+        <!-- Start of org.ow2.bonita.services.handlers.impl.DeleteFinishedInstanceHandler-->
+        <!-- Description:  -->
+        <object class='org.ow2.bonita.services.handlers.impl.DeleteFinishedInstanceHandler' />
+        <!-- End of org.ow2.bonita.services.handlers.impl.DeleteFinishedInstanceHandler-->
+        <!-- Start of org.ow2.bonita.services.handlers.impl.ArchiveFinishedInstanceHandler-->
+        <!-- Description:  -->
+        <object class='org.ow2.bonita.services.handlers.impl.ArchiveFinishedInstanceHandler' />
+        <!-- End of org.ow2.bonita.services.handlers.impl.ArchiveFinishedInstanceHandler-->
+      </chainer>
+      <!-- End of finished-instance-handler-->
+
+      <!-- Start of hibernate-configuration:core-->
+      <!-- Description: Configuration of the Hibernate session factory used by engine. -->
+      <hibernate-configuration name='hibernate-configuration:core' >
+        <properties resource='hibernate-core.properties' />
+        <mappings resource='bonita.runtime.mappings.hbm.xml' />
+        <mappings resource='bonita.querier.mappings.hbm.xml' />
+        <cache-configuration resource='bonita.querier.cache.xml' usage='read-write' />
+      </hibernate-configuration>
+      <!-- End of hibernate-configuration:core-->
+
+      <!-- Start of hibernate-configuration:history-->
+      <!-- Description: Configuration of the Hibernate session factory used by db history. -->
+      <hibernate-configuration name='hibernate-configuration:history' >
+        <properties resource='hibernate-history.properties' />
+        <mappings resource='bonita.history.mappings.hbm.xml' />
+        <mappings resource='bonita.querier.mappings.hbm.xml' />
+        <cache-configuration resource='bonita.querier.cache.xml' usage='read-write' />
+      </hibernate-configuration>
+      <!-- End of hibernate-configuration:history-->
+
+      <!-- Start of hibernate-configuration:journal-->
+      <!-- Description: Configuration of the Hibernate session factory used by journal (in a separate db). -->
+      <!--
+      <hibernate-configuration name='hibernate-configuration:journal' >
+        <properties resource='hibernate-journal.properties' />
+        <mappings resource='bonita.history.mappings.hbm.xml' />
+        <mappings resource='bonita.querier.mappings.hbm.xml' />
+        <cache-configuration resource='bonita.querier.cache.xml' usage='read-write' />
+      </hibernate-configuration>
+       -->
+      <!-- End of hibernate-configuration:journal-->
+
+      <!-- Start of hibernate-session-factory:core-->
+      <!-- Description: Hibernate session factory used by engine. -->
+      <hibernate-session-factory name='hibernate-session-factory:core' configuration='hibernate-configuration:core' init='eager'/>
+      <!-- End of hibernate-session-factory:core-->
+
+      <!-- Start of hibernate-session-factory:history-->
+      <!-- Description: Hibernate session factory used by db history. -->
+      <hibernate-session-factory name='hibernate-session-factory:history' configuration='hibernate-configuration:history' init='eager'/>
+      <!-- End of hibernate-session-factory:history-->
+
+      <!-- Start of hibernate-session-factory:journal-->
+      <!-- Description: Hibernate session factory used by journal (in a separate db). -->
+      <!--
+      <hibernate-session-factory name='hibernate-session-factory:journal' configuration='hibernate-configuration:journal' init='eager'/>
+       -->
+      <!-- End of hibernate-session-factory:journal-->
+
+      <!-- Start of hook-executor-->
+      <!-- Description: Implementation of the HookExecutor interface which will be used to execute hooks in the engine. -->
+      <object name='hook-executor' class='org.ow2.bonita.definition.activity.HookExecutorImpl' />
+      <!-- End of hook-executor-->
+
+      <!-- Start of job-executor-->
+      <!-- Description: Service which executes jobs -->
+      <job-executor threads='1' auto-start='true' />
+      <!-- End of job-executor-->
+
+      <!-- Start of type-resolver-->
+      <!-- Description: Mapping from java variable to database type -->
+      <variable-types resource='bonita.type.resolver.xml' />
+      <!-- End of type-resolver-->
+
+      <!-- Start of undeployed-package-handler-->
+      <!-- Description: List of services called when a package is undeployed. -->
+      <chainer name='undeployed-package-handler'>
+        <!-- Start of org.ow2.bonita.services.handlers.impl.ArchiveUndeployedPackageHandler-->
+        <!-- Description:  -->
+        <object class='org.ow2.bonita.services.handlers.impl.ArchiveUndeployedPackageHandler' />
+        <!-- End of org.ow2.bonita.services.handlers.impl.ArchiveUndeployedPackageHandler-->
+      </chainer>
+      <!-- End of undeployed-package-handler-->
+
+      <!-- Start of uuid-generator-->
+      <!-- Description: Service which generates UUIDs for runtime objects. -->
+      <object name='uuid-generator' class='org.ow2.bonita.services.impl.DefaultUUIDGenerator' />
+      <!-- End of uuid-generator-->
+
+    </environment-factory>
+
+    <environment>
+      <!-- Start of Db history-->
+      <!-- Description: DB Implementation of the history. This implementation is full conformant with the spec (but not optimized). -->
+      <!--
+      <history name='history' class='org.ow2.bonita.persistence.db.DbHistory'/>
+       -->
+      <!-- End of Db history-->
+
+      <!-- Start of Optimized DB history-->
+      <!-- Description: Optimized DB Implementation of the history. This implementation contains optimized methods. For example, a call to getUserTasks(final String userId, final ActivityState taskState)  looks in DB only if the state is an expected one in History (FINISHED is one, READY is not...) -->
+      <history name='history' class='org.ow2.bonita.persistence.db.OptimizedDbHistory'>
+        <arg><string value='querier-session:history' /></arg>
+      </history>
+      <!-- End of Optimized DB history-->
+
+      <!-- Start of XML history-->
+      <!-- Description: XML Implementation of the history. -->
+      <!--
+      <history name='history' class='org.ow2.bonita.persistence.xml.XMLHistory'/>
+       -->
+      <!-- End of XML history-->
+
+      <!-- Start of archiver-->
+      <!-- Description: List of archivers. -->
+      <chainer name='archiver'>
+        <!-- Start of Log archiver-->
+        <!-- Description: Archiver which writes archived data to logs. -->
+        <archiver class='org.ow2.bonita.persistence.log.LoggerArchiver' />
+        <!-- End of Log archiver-->
+        <!-- Start of history-->
+        <!-- Description: Reference to the history -->
+        <ref object='history' />
+        <!-- End of history-->
+      </chainer>
+      <!-- End of archiver-->
+
+      <!-- Start of hibernate-session:core-->
+      <!-- Description: Hibernate session used by engine. -->
+      <hibernate-session name='hibernate-session:core' factory='hibernate-session-factory:core' />
+      <!-- End of hibernate-session:core-->
+
+      <!-- Start of hibernate-session:history-->
+      <!-- Description: Hibernate session used by db history. -->
+      <hibernate-session name='hibernate-session:history' factory='hibernate-session-factory:history' />
+      <!-- End of hibernate-session:history-->
+
+      <!-- Start of hibernate-session:journal-->
+      <!-- Description: Hibernate session used by journal (in a separate db). -->
+      <!--
+      <hibernate-session name='hibernate-session:journal' factory='hibernate-session-factory:journal' />
+       -->
+      <!-- End of hibernate-session:journal-->
+
+      <!-- Start of job-session-->
+      <!-- Description: Service which stores jobs in the database. -->
+      <job-db-session session='hibernate-session:core' />
+      <!-- End of job-session-->
+
+      <!-- Start of journal-->
+      <!-- Description: Implementation of the journal. -->
+      <journal name='journal' class='org.ow2.bonita.persistence.db.DbJournal'> 
+        <arg><string value='querier-session:core' /></arg>
+      <!-- replace previous line by this line to use a separate journal -->
+      <!-- <arg><string value='querier-session:journal' /></arg> -->
+      </journal>
+      <!-- End of journal-->
+
+      <!-- Start of message_session-->
+      <!-- Description: Service which schedules messages. -->
+      <message-session />
+      <!-- End of message_session-->
+
+      <!-- Start of querier-session:core-->
+      <!-- Description: Querier used in engine. -->
+      <querier-db-session name='querier-session:core' session='hibernate-session:core'/>
+      <!-- End of querier-session:core-->
+
+      <!-- Start of querier-session:history-->
+      <!-- Description: Querier used in db history. -->
+      <querier-db-session name='querier-session:history' session='hibernate-session:history'/>
+      <!-- End of querier-session:history-->
+
+      <!-- Start of querier-session:journal-->
+      <!-- Description: Querier used in journal (in a separate db). -->
+      <!--
+      <querier-db-session name='querier-session:journal' session='hibernate-session:journal'/>
+       -->
+      <!-- End of querier-session:journal-->
+
+      <!-- Start of queryList-->
+      <!-- Description: List of Queriers to use. -->
+      <queryApi name='queryList'>
+        <!-- Start of journal-->
+        <!-- Description: Reference to the journal -->
+        <ref object='journal' />
+        <!-- End of journal-->
+        <!-- Start of history-->
+        <!-- Description: Reference to the history -->
+        <ref object='history' />
+        <!-- End of history-->
+      </queryApi>
+      <!-- End of queryList-->
+
+      <!-- Start of recorder-->
+      <!-- Description: List of recorders. -->
+      <chainer name='recorder'>
+        <!-- Start of Log recorder-->
+        <!-- Description: Recorder which writes recorded data to logs. -->
+        <recorder class='org.ow2.bonita.persistence.log.LoggerRecorder' />
+        <!-- End of Log recorder-->
+        <!-- Start of journal-->
+        <!-- Description: Reference to the journal -->
+        <ref object='journal' />
+        <!-- End of journal-->
+      </chainer>
+      <!-- End of recorder-->
+
+      <!-- Start of repository-->
+      <!-- Description: Implementation of the repository. -->
+      <repository class='org.ow2.bonita.persistence.db.DbRepository'>
+        <arg><string value='runtime-session:core' /></arg>
+      </repository>
+      <!-- End of repository-->
+
+      <!-- Start of runtime-session:core-->
+      <!-- Description: Runtime session used in engine. -->
+      <runtime-db-session name='runtime-session:core' session='hibernate-session:core'/>
+      <!-- End of runtime-session:core-->
+
+      <!-- Start of security-->
+      <!-- Description: Service used to find the user logged in. -->
+      <security class='org.ow2.bonita.facade.AutoDetectSecurityContext'/>
+      <!-- End of security-->
+
+      <!-- Start of timer_session-->
+      <!-- Description: Service which schedules timers. -->
+      <timer-session />
+      <!-- End of timer_session-->
+
+      <!-- Start of transaction-->
+      <!-- Description: DB transaction -->
+      <transaction />
+      <!-- End of transaction-->
+
+    </environment>
+
+  </environment-definition>

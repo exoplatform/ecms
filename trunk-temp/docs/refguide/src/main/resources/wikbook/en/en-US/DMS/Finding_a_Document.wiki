@@ -1,0 +1,15 @@
+h1. Finding a Document
+
+
+If you want to search documents, you can use one of these following ways:
+* [Search in JCR FE toolbar]
+* [Search in Advanced search]
+* [SQL or XPath based search]
+* [ECM:Saved Queries]
+* [Search in Content Browser|Search in BC]
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+h1. Saved Queries
+
+
+
+There are 2 ways to search documents using the saved queries.
+
+ +The 1^st^ way+:
+
+1\. Select the location that you want to search.
+
+2. Switch to the *Search* tab.
+
+3. Click on the !icon.gif
+! icon (since DMS 2.5 click on the !
+ SearchIcon.jpg!icon) and select the *Saved query* tab. This is the list of all existing queries that you have the right to use.
+
+
+!form1.gif!
+
+
+4. Click
+!icon1.gif!
+ to see the search results in the *Search Result* tab.
+<br>
+
+
++The 2^nd^ way+:
+
+1\. Select the location that you want to search.
+
+2. Switch to the *Search* tab.
+
+3. Click on the
+!icon2.gif !
+ icon(since DMS 2.5 click on the
+! SearchIcon1.jpg!
+ icon). The *Saved queries list* form appears:
+
+
+!form2.gif!
+
+
+4. Click
+!icon1.gif!
+ to see the search results in the main of drive.
+
+
+

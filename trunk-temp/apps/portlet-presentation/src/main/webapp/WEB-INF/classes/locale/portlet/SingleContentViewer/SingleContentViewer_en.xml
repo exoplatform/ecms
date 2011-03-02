@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ <UIPresentationContainer>
+  <title>
+   <QuickEdit>Quick edit</QuickEdit>
+   <print>Print this page</print>
+  </title>
+  <label>
+   <draft>Draft</draft>
+   <print>Print</print>
+  </label>
+  <msg>
+   <no-content>There is no content to show</no-content>
+  </msg>
+ </UIPresentationContainer>
+ 
+  <CorrectContentSelectorPopupWindow>
+   <title>
+    <UIContentSelectorOne>Select content</UIContentSelectorOne>
+   </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+  	 <msg>
+  	 		<AccessControlException>You don't have permission to access Edit mode</AccessControlException>
+  	 </msg>
+  </UISingleContentViewerPortlet>
+  
+  <UISCVContextualRadioBox>
+  	<label>
+		<Enable>Enabled</Enable>
+		<Disable>Disabled</Disable>
+  	</label>
+  </UISCVContextualRadioBox>  
+  
+  <UIPreferencesPopupWindows>
+	<title>
+		<UISCVPreferences>Content Detail Preferences</UISCVPreferences>
+	</title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+     <Save>Save</Save>
+     <Abort>Abort</Abort>
+     <Cancel>Cancel</Cancel>
+     <Print>Print</Print>
+     <Close>Close</Close>
+    </action>
+    <title>Content Detail Preferences</title>
+    <label>
+      <Back>Back to previous page</Back>
+      <Edit>Edit</Edit>
+      <Preferences>Preferences</Preferences>
+   	  <Title>Content Detail Preferences</Title>
+   	  <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
+   	  <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+   	  <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+   	  <DisplaySettingBlock>Display settings</DisplaySettingBlock>
+   	  <ContentPathBlock>Content Selection</ContentPathBlock>
+   	  <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
+   	  <Advance>Advanced</Advance>
+   	  <ContextCaption>Dynamic Navigation</ContextCaption>
+   	  <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+   	  <UISCVParameterInputBox>by</UISCVParameterInputBox>
+   	  <PrintSettingBlock>Print settings</PrintSettingBlock>
+   	  <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+   	  <UISCVConfigPrintPageFormInputSet>Show in page</UISCVConfigPrintPageFormInputSet>
+						<LockStatus>Lock</LockStatus>						
+    </label>
+    <help>
+   	  <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic navigation (Advanced mode, see below).</ContentPathBlock>
+   	  <DisplaySettingBlock>You can choose to show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
+   	  <ContextualHelp>Activates the dynamic navigation. The content can be changed dynamically by another based on a URL parameter.</ContextualHelp>
+   	  <ParameterHelp>This parameter will be used to get the content if Dynamic Navigation is activated.</ParameterHelp>
+    </help>
+    <msg>
+    	<not-valid-path>The item path is invalid</not-valid-path>
+    </msg>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+  	<title>
+  		<SelectFolderPath>Select folder path</SelectFolderPath>
+  	</title>  	
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+  	<title>
+  		<SelectTargetPage>Show in page</SelectTargetPage>
+  	</title>  	
+  </UISCVConfigPrintPageFormInputSet>
+  
+  <PublicationStates>
+    <archived>Archived</archived>
+    <obsolete>Obsolete</obsolete>
+    <unpublished>Unpublished</unpublished>
+    <enrolled>Enrolled</enrolled>
+    <draft>Draft</draft>
+    <pending>Pending</pending>
+    <approved>Approved</approved>
+    <inreview>In Review</inreview>
+    <staged>Staged</staged>
+    <published>Published</published>
+  </PublicationStates>
+    
+</bundle>

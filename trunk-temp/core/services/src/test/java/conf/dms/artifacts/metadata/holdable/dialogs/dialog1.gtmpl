@@ -1,0 +1,77 @@
+<div class="UIForm FormLayout">  
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">
+    <table class="UIFormGrid">
+    	<tr>	
+	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.hold-executed")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldHoldExecuted = ["jcrPath=/node/rma:holdExecuted", "false", "options=false,true"] ;
+		        uicomponent.addSelectBoxField("holdExecuted", fieldHoldExecuted) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.hold-until")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldHoldUntil = ["jcrPath=/node/rma:holdUntil", "visible=true"] ;
+		        uicomponent.addCalendarField("holdUntil", fieldHoldUntil) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.holds-discretionary")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldHoldDiscretionary = ["jcrPath=/node/rma:holdsDiscretionary", "false", "options=false,true"] ;
+		        uicomponent.addSelectBoxField("holdsDiscretionary", fieldHoldDiscretionary) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.hold-until-event")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldHoldUntilEvent = ["jcrPath=/node/rma:holdUntilEvent"] ;
+		        uicomponent.addTextField("holdUntilEvent", fieldHoldUntilEvent) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("Holdable.dialog.label.freeze")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldFreeze = ["jcrPath=/node/rma:freeze", "false", "options=false,true"] ;
+		        uicomponent.addSelectBoxField("freeze", fieldFreeze) ;
+		      %>
+		    </td>
+		  </tr>
+    </table>
+		<%/* start render action*/%>
+		<div class="UIAction"> 
+	    <table class="ActionContainer">
+	    	<tr>
+	    		<td>
+		      <% for(action in uicomponent.getActions()) {
+		      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+							 String link = uicomponent.event(action) ;
+		      %>
+	          <div onclick="$link" class="ActionButton LightBlueStyle">
+							<div class="ButtonLeft">
+							  <div class="ButtonRight">
+								  <div class="ButtonMiddle">
+								    <a href="javascript:void(0);">$actionLabel</a>
+						      </div>
+						    </div>
+					    </div>
+						</div>
+		      <%}%>          
+	      	</td>
+	      </tr>
+	    </table>
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>

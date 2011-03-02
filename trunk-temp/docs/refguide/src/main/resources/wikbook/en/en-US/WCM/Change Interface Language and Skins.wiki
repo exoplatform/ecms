@@ -1,0 +1,69 @@
+
+h1. Change Interface Language and Skins
+
+h2. Change Interface Language
+
+Following these guides to change the interface language for a site:
+
+1\. Select the *Language Setting* item in the menu of *More Actions*. The *Interface Language Setting* form will appear:
+
+ !LanguageSetting.png! 
+
+2. Select another language by clicking on the name of language.
+
+3. Click on the *Apply* button and wait for few seconds to take affect.
+
+
+{info}
+For WCM 1.1
+{info}
+
+You easily change the interface language for a site by following simple guides:
+
+1\. Select the *Language Setting* item in the menu that appears when you move your cursor to the logo at the upper left corner:
+
+
+ !LanguageSetting1.1.png! 
+
+The *Interface Language Setting* form appear:
+
+
+ !IntefaceLanguageSetting.png! 
+
+2. Select a language that you want to set by clicking on the name of that language.
+
+3. Click on the *Apply* button and wait for few seconds to take affect.
+
+
+h2. Change Skins
+
+eXo skins are attractive user interface styles used for displaying a portal(a site). Each skin has its own characteristics with different background, icons, etc ... In order to friendly and flexibly use, you are allowed to change skin of the current site.
+
+Following these simple guides to change language for your site:
+
+1\. Select the *Skin Setting* item in the menu of *More Actions*. The *Skin Setting* form will appear:
+
+ !SkinSetting.png! 
+
+2. Select one skin type by clicking on the skin's name.
+
+3. Click on the *Apply* button and wait for few seconds to take affect.
+
+
+{info}
+For WCM 1.1
+{info}
+
+1\. Select the *Skin Settings* item in the menu that appears when you move your cursor to the logo at the upper left corner: 
+
+ !SkinSetting1.1.png! 
+
+The *Skin Setting* form appear:
+
+
+ !SkinSettingForm1.1.png! 
+
+2. Select one by clicking on the skin's name.
+ 
+3. Click on the *Apply* button and wait for few seconds to take affect.
+

@@ -1,0 +1,347 @@
+.UIFormGenerator {
+  background: #fff;
+  padding: 5px;
+}
+
+.UIFormGenerator .UIFormTitlePortlet {
+  border: 1px solid #dfdddd;
+}
+
+.UIFormGenerator .TitleUIFormTitle {
+  background: url('DefaultSkin/background/TitleUIFormTitle.gif') repeat-x left top;
+  line-height: 32px;
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+.UIFormGenerator .ContentUIFormTitle {
+  padding: 12px;
+}
+
+.UIFormGenerator .UITabPane {
+  height: auto;
+}
+
+.UIFormGenerator .UITabPane .TabsContainer {
+  height: 30px;
+}
+
+.UIFormGenerator .TabsContainer .GrayTabStyle {
+  float: left;
+  text-align: center;
+  cursor: pointer;
+}
+
+.UIFormGenerator .GrayTabStyle .NormalTab .LeftTab {
+  background: url('DefaultSkin/background/TabGray.gif') no-repeat left top;
+  padding-left: 5px;
+}
+
+.UIFormGenerator .GrayTabStyle .NormalTab .RightTab {
+  background: url('DefaultSkin/background/TabGray.gif') no-repeat right top;
+  padding-right: 5px;
+}
+
+.UIFormGenerator .GrayTabStyle .NormalTab .MiddleTab {
+  background: url('DefaultSkin/background/TabGray.gif') repeat-x left -30px;
+  line-height: 30px;
+  padding: 0px 8px;
+}
+
+.UIFormGenerator .GrayTabStyle .SelectedTab .LeftTab {
+  background: url('DefaultSkin/background/TabGray.gif') no-repeat left -60px;
+  padding-left: 5px;
+}
+
+.UIFormGenerator .GrayTabStyle .SelectedTab .RightTab {
+  background: url('DefaultSkin/background/TabGray.gif') no-repeat right -60px;
+  padding-right: 5px;
+}
+
+.UIFormGenerator .GrayTabStyle .SelectedTab .MiddleTab {
+  background: url('DefaultSkin/background/TabGray.gif') repeat-x left -90px;
+  line-height: 30px;
+  padding: 0px 8px;
+}
+
+
+.UIFormGenerator .UITabPane .UITabContentContainer {
+  background: #efefef;
+  border: none;
+  padding: 6px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .UITabContent {
+  background: #fff;
+  border: 1px solid #cccaca;
+  padding: 8px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent {
+  border: 1px solid #cccaca;
+  padding: 3px;
+  width: 192px;
+  float: left;
+  background: #fff;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .UITabContentContainer {
+  padding: 20px 0px;
+  height: 523px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .LeftMenu {
+  background: url('DefaultSkin/background/MenuLeftContent.gif') no-repeat left top;
+  padding-left: 6px;
+  margin-bottom: 5px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .RightMenu {
+  background: url('DefaultSkin/background/MenuLeftContent.gif') no-repeat right top;
+  padding-right: 6px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .CenterMenu {
+  background: url('DefaultSkin/background/MenuLeftContent.gif') repeat-x left -37px;
+  line-height: 23px;
+  padding: 7px 0px 7px 25px;
+  cursor: pointer;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconMenu {
+  float: left;
+  display: block;
+  width: 25px;
+  height: 17px;
+  margin-top: 3px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconInput {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left top;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconLabel {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left -30px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconContent {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left -60px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconSelect {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left -90px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconTimeDate {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left -120px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconUpload {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left -210px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconCheckBox {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left -240px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconRadio {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left -270px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .IconTextArea {
+  background: url('DefaultSkin/background/IconMenuLeft.gif') no-repeat left -180px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .ContentMenu {
+  margin-left: 35px;
+  border-left: 1px solid #fff;
+  padding-left: 25px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .LeftContent .UITabContent {
+  padding: 0px;
+  background: none;
+  border: none;
+}
+
+
+.UIFormGenerator .UITabPane .UITabContentContainer .RightContent {
+  border: 1px solid #cccaca;
+  background: #fff;
+  margin-left: 206px;
+  padding: 9px;
+}
+
+
+.UIFormGenerator .UITabPane .UITabContentContainer .RightContent .MiddleCenterViewBoxStyle {
+  padding: 5px 10px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .RightContent .MiddleCenterViewBoxStyle .ViewBoxStyleContainer {
+  overflow: auto;
+  height: 525px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .RightContent .TopContentBoxStyle {
+  padding: 5px 0px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .RightContent .MiddleContentBoxStyle {
+  background: #f3f7fb;
+  border: 1px solid #dfdddd;
+  padding: 10px 0px;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .UIFormGrid {
+  width: 100%;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .UIFormGrid .FieldLabel {
+  width: 15%;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .UIFormGrid .FieldComponent {
+  width: 69%;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .UIFormGrid .FieldIcon {
+  padding: 0px;
+}
+
+.UIFormGenerator .UIFormEditBox input {
+  width: 98%;
+  border: 1px solid #e0dfdf;
+  height: 16px;
+}
+
+.UIFormGenerator .UIFormEditBox select {
+  border: 1px solid #e0dfdf;
+  height: 20px;
+}
+
+.UIFormGenerator .UIFormEditBox textarea {
+  border: 1px solid #e0dfdf;
+  height: 150px;
+}
+
+.UIFormGenerator .UIFormEditBox .BoxRules {
+  float: left;
+  border: 1px solid #cacaca;
+  padding: 3px 10px;
+  margin-left: 10px;
+}
+
+.UIFormGenerator .UIFormEditBox .BoxRules input {
+  width: auto;
+  margin: 0px 5px;
+  height: auto;
+}
+
+.UIFormGenerator .UIFormEditBox .InputText {
+  width: 95%;
+}
+
+.UIFormGenerator .UIFormEditBox .Label {
+  width: 95%;
+}
+
+.UIFormGenerator .UIFormEditBox .CheckBox {
+  width: auto;
+  margin: 0px;
+  float: left;
+}
+
+.UIFormGenerator .UIFormEditBox .Radio {
+  width: auto;
+  margin: 0px;
+  float: left;
+}
+
+.UIFormGenerator .UIFormEditBox .SelectBox {
+  width: 50%;
+}
+
+.UIFormGenerator .UIFormEditBox .Textarea {
+  width: 95%;
+}
+
+.UIFormGenerator .UIFormEditBox .Upload {
+  width: auto;
+  height: auto;
+}
+
+.UIFormGenerator .UITabPane .UITabContentContainer .RightContent .UIFormEditBox .FieldIcon .EditBox {
+  background: #f8fbfd;
+  border: 1px solid #edecec;
+  float: right;
+  padding: 3px 7px;
+  width: 40px;
+}
+
+.UIFormGenerator .UIFormEditBox .FieldIcon .ControlIcon {
+  float: right;
+  width: 15px;
+  height: 16px;
+  display: block;
+  cursor: pointer;
+}
+
+.UIFormGenerator .UIFormEditBox .FieldIcon .DeleteIcon {
+  background: url('DefaultSkin/background/EditIcon.gif') no-repeat left top;
+  margin-left: 5px;
+}
+
+.UIFormGenerator .UIFormEditBox .FieldIcon .EditIcon {
+  background: url('DefaultSkin/background/EditIcon.gif') no-repeat left -30px;
+}
+
+.UIFormGenerator .UIFormEditBox .FieldIcon .DownIcon {
+  background: url('DefaultSkin/background/DownIcon.gif') no-repeat left top;
+  margin: 5px 5px 0px 0px;
+}
+
+.UIFormGenerator .UIFormEditBox .FieldIcon .UpIcon {
+  background: url('DefaultSkin/background/UpIcon.gif') no-repeat left top;
+  margin: 5px 2px 0px 0px;
+}
+
+.UIFormGenerator .UIFormEditBox .FieldIcon .AddIcon {
+  background: url('DefaultSkin/background/AddIcon.gif') no-repeat left top;
+  float: left;
+  width: 15px;
+  height: 15px;
+  display: block;
+  cursor: pointer;
+}
+
+.UIFormGenerator .UIFormEditBox .FieldIcon .RemoveIcon {
+  background: url('DefaultSkin/background/AddIcon.gif') no-repeat left -20px;
+  float: left;
+  width: 15px;
+  height: 15px;
+  display: block;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.UIFormGenerator .UIAction {
+  padding: 15px 0px;
+}
+
+
+.UIFormGenerator .BoxAddNew {
+  background: #fafafa;
+  text-align: center;
+  padding: 10px;
+  margin: 5px 0px 0px 0px;
+}
+
+.UIFormGenerator .BoxAddNew .AddNewProperty {
+  background: #F3F7FB;
+  border: 1px solid #fff;
+  padding: 15px 5px;
+  line-height: 16px;
+  margin: 0px auto;
+  width: 250px;
+  color: #8a8a8c;
+}

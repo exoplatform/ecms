@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Overall_Introduction-eXo_Content">
+		<title>eXo Content</title>
+		 <para>
+			<emphasis role="bold">eXo Content</emphasis> is the technologies used to Capture, Manage, Store, Preserve, and Deliver content and documents. It especially concerns content imported into or generated from within an organization in the course of its operation, and includes the control of access to this content from outside the organization's processes.
+		</para>
+		 <para>
+			The eXo Content users can manage both structured and unstructured content, so that an organization, such as a business or a governmental agency, can more effectively meet business goals (increasing the profits or improving the organizational process with efficient use of budgets), serve its customers (as a competitive advantage, or to improve responsiveness), and protect itself (against non-compliance, law-suits, uncoordinated departments or turnover within the organization).
+		</para>
+		 <para>
+			eXo Content improves your operational productivity and efficiency. It enables you to transform unstructured content into structured content through the process of capturing, storing, managing, preserving, publishing and backing up while securely distributing it. The eXo Content portlet gives you a portal solution that can help you achieve these processes and leverage your business content across all formats for competitive gain. It also provides an environment for employees to share and collaborate on digital content and delivering a comprehensive unified solution with rich functionalities. Every component of your website can be organized, reconstructed easily, which helps you keep your website under control.
+		</para>
+		<para>
+			eXo Content consists of three parts:
+		</para>
+		 <para>
+			<emphasis role="bold">Document Management System</emphasis> (<emphasis role="bold">DMS</emphasis>) - an extension of eXo Content is used to store, manage and track electronic documents and electronic images and allows documents to be modified and managed easily and conveniently by managing versions, properties, and more.
+		</para>
+		<para>
+			<emphasis role="bold">Workflow</emphasis>: is the way of looking at and controlling the processes presented in an organization such as service provision or information processing, etc. It is an effective tool to use make certain that the processes are effective with the purpose of better and more cost efficient organization.
+		</para>
+		<para>
+			<emphasis role="bold">Web Content Management</emphasis> (<emphasis role="bold">WCM</emphasis>): helps in maintaining, controlling, changing and reassembling the content on a web-page. It also helps webmasters who handle all tasks needed to run a website, including development, design, content publication and monitoring.
+		</para>
+	</section>

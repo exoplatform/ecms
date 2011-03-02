@@ -1,0 +1,50 @@
+h1. Powerfull search: support wildcard, scoring, hilighting, excerpt, fuzzy, spell check and suggestion
+
+
+Quick Tutorial
+
+In any web content management system, search is very important feature. With powerful search, the WCM system helps users to find which contents that they want more easily and quickly.
+Built on top of Apache Lucence search engine and JSR-170 query feature, eXo WCM search is a powerful feature that helps users to find exactly which information that they want in your webcontent management system.
+
+h2. Placed search everywhere in your site
+In eXo WCM, search box is a kind of webcontent, so you can place it everywhere in your site that you want to help your users use search function more easily.
+<div style="text-align:center"> !SearchBox.png! </div>
+
+h2. Scoring, hilighting, excerptible search
+When doing a search with eXo WCM search, in search result you will see:
+- An excerpt in content that contains your keyword
+- Your keyword is highlighted
+- Score of the content will be displayed. By default, the search result will be sorted by score of the content
+
+<div style="text-align:center"> !SearchResult.png! </div>
+
+h2. Wildcard search
+
+When you forgot something in your keyword that you want to search, wildcard search will help you search every keywords that related to the keyword you want to search.
+To do this, you only need to type '*' at the end of your keyword. 
+
+<div style="text-align:center"> !WildCard.png! </div>
+
+h2. Spell checker suggestion
+
+When you type a keyword to search, our search engine will try to check spelling and suggest you the correct word
+<div style="text-align:center"> !SpellSuggestion.png! </div>
+
+h2. Fuzzy search
+
+This is an existing search feature, when you append '~' at the end of keyword, our search engine will find all documents that contain the word that is similar in spelling with your keyword
+
+<div style="text-align:center"> !FuzzySearch.png! </div>
+
+h2. How to use this feature?
+
+1.Using IE browser to access http://localhost:8080/portal
+
+2. Choose *search* on Navigation
+
+3. Type keyword on textbox which an user wants to search content of documents or web contents
+
+4. An user must check one of page and document or both of them
+
+5. An user can choose a site which he/she wants to search or all sites.
+

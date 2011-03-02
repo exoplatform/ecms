@@ -1,0 +1,27 @@
+<%
+import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.ecm.webui.component.admin.folksonomy.UITagStyleList;
+%>
+<div class="<%=uicomponent.getId()%>" id="<%=uicomponent.getId()%>">
+		<%
+			uicomponent.renderChild(UITagStyleList.class);
+		%>
+	<div class="UIAction"> 
+    <table class="ActionContainer">
+    	<tr>
+    		<td>
+		      <% String action = "AddStyle"; %>
+	          <div onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" >
+	  					<div class="ButtonLeft">
+	  					  <div class="ButtonRight">
+	  						  <div class="ButtonMiddle">
+	  							  <a href="javascript:void(0);"><%=_ctx.appRes("UITaxonomyTreeList.action." + action)%></a>
+	  				      </div>
+	  				    </div>
+	  			    </div>
+	  				</div>
+      	</td>
+      </tr>
+    </table>
+  </div>
+</div>

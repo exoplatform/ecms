@@ -1,0 +1,127 @@
+h1. ECM Groovy Scripts Management
+
+
+
+h1. Overview
+
+
+
+As you have probably already noticed, there are many different types of ECM groovy scripts. They all implement the CmsScript interface, which you can see here:
+
+{code}
+package org.exoplatform.services.cms.scripts;
+
+public interface CmsScript {
+
+  public void execute(Object context);
+
+  public void setParams(String[] params);
+
+}
+{code}
+
+Groovy scripts have been developed for different purposes. Therefore we have split the organization in several areas. You can find the scripts in the ECM Admin section dedicated to script management (_.../webapps/portal/WEB-INF/conf/ecm/artifacts/scripts/_).
+
+There are two script areas:
+- ECM File Explorer portlet scripts and
+- Browse Content portlet scripts.
+
+
+
+h1. ECM File Explorer Scripts
+
+
+ There are three different script types used in the [ECM Explorer | ECM:DMS+Manual#FileExplorer]:
+
+* *Action scripts* are launched when an ECM action triggers them (refer to [Actions Concept | ECM:Actions+Concept] section for more information).
+
+* *Interceptor scripts* are be triggered before and/or after a JCR node is saved, when a node is created or edited. They are used to either *validate* the value entered in a form or to *manipulate* the newly created node. For example to map the new node with a forum thread or any other type of discussion areas.
+
+* *Widget scripts* are used to fill widgets - such as a select box - in a dynamic way.
+
+The [ECM Admin User Interface | ECM:ECM+Administration] allows the administrator to manage all different script types through a single interface. You can edit scripts or create new ones. When creating a new script you choose one of the above-named script types that later cannot be changed.
+
+h1. Browse Content Portlet Scripts
+
+The [Browse Content Portlet | ECM:DMS+Manual#ContentBrowser] is used to provide the end user with several ways to extract the content from the JCR. One of these ways uses a Groovy script that is responsible for the extraction.
+
+Note that scripts are stored directly in the JCR tree in the production workspace at the path /jcr:system/exo:ecm/scripts. Scripts are written in Groovy and the JCR path there can be seen as the classpath as we modified the default Groovy classloader to look for the scripts directly in the relative JCR path. Whenever a script is modified the groovy classloader is reset.
+
+h1. Manage Script Service
+
+Script service that allows to manage groovy scripts. As you can see in the configuration file you define the scripts that are loaded into the JCR. Be aware that the composition of the folder name of each script defines the script type!
+
+You find the configuration at _.../portal/WEB-INF/conf/ecm/ecm-scripts-configuration.xml_.
+
+{code}
+    <component>
+      <key>org.exoplatform.services.cms.scripts.ScriptService</key>
+      <type>org.exoplatform.services.cms.scripts.ScriptServiceImpl</type>
+      .....................
+    </component>
+...
+      <init-params>
+        <object-param>
+          <name>predefined.scripts</name>
+          <description>description</description>
+          <object type="org.exoplatform.services.cms.impl.ResourceConfig">
+            <field  name="workspace"><string>production</string></field>
+            <field  name="resources">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/action/SendMailScript.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/action/RSSScript.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/widget/SetJCRBrowserForProductionWorkspaceAndRulesPath.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/widget/SetJCRBrowserForProductionWorkspaceAndScriptsPath.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithNodeChildren.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/action/TransformBinaryChildrenToTextScript.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>ecm-explorer/interceptor/PostNodeSaveInterceptor.groovy</string></field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                    <field  name="name"><string>content-browser/GetDocumentsFromWorkspaceAndPath.groovy</string></field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+{code}
+

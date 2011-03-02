@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPCVContainer>
+    <title>
+      <Back>عودة</Back>
+      <print>طباعة هذه الصفحة</print>
+      <QuickEdit>عدل بسرعة</QuickEdit>
+    </title>
+    <label>
+      <print>طباعة</print>
+    </label>
+    <action>
+      <Print>طباعة</Print>
+      <Close>أغلق</Close>
+    </action>
+  </UIPCVContainer>
+
+  <UIPCVConfigPopupWindow>
+    <title>
+      <UIPCVConfig>ترتيب العوامل لمحتوى المشاهد</UIPCVConfig>
+    </title>
+  </UIPCVConfigPopupWindow>
+
+  <UIPCVConfig>
+    <label>
+      <Title>ترتيب العوامل لمحتوى المشاهد</Title>
+      <DisplaySettingBlock>إعداد الشاشة</DisplaySettingBlock>
+      <ShowTitle>تظهر عنوان</ShowTitle>
+      <ShowDateCreated>إظهار تاريخ الإعداد </ShowDateCreated>
+      <ShowBar>عرض شريط الخيارات</ShowBar>
+    </label>
+    <action>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
+    </action>
+  </UIPCVConfig>
+
+  <UIPCVContainer>
+    <label>
+      <draft>مسودة</draft>
+      <edit>تغيير</edit>
+    </label>
+    <msg>
+      <content-not-found>لم يتم العثور على المحتوى</content-not-found>
+      <not-support>ليس لديك إذن للوصول</not-support>
+    </msg>
+  </UIPCVContainer>
+</bundle>

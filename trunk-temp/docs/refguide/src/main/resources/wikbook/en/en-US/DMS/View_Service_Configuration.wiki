@@ -1,0 +1,144 @@
+
+
+h1. View Service Configuration
+
+
+
+Manage view service allows administrators to customize many views that can affect users when exploring workspaces. Permissions, template and actions tabs are the view foundations.
+
+{code}
+  <component>
+    <key>org.exoplatform.services.cms.views.ManageViewService</key>
+    <type>org.exoplatform.services.cms.views.impl.ManageViewServiceImpl</type>
+    .......
+  </component>
+{code}
+
+The service can handle plugins
+
+{code}
+    <component-plugins>
+      <component-plugin>
+        <name>manage.view.plugin</name>
+        <set-method>setManageViewPlugin</set-method>
+        <type>org.exoplatform.services.cms.views.impl.ManageViewPlugin</type>
+        <description>this plugin manage user view</description>
+        .........
+      </component-plugin>
+    </component-plugins>
+{code}
+
+The plugin parameters are now explained
+
+{code}
+    <init-params>
+      <object-param>
+        ....
+      </object-param>
+      ......
+    </init-params>
+{code}
+
+Parameters are used to create default views, templates and actions of Manage view service. Each object-param have a type that is a class representing all properties of a view.
+
+
+View data object parameters: There are three predefined views, admin-view( view for users in admin group, that view let users have full actions when exploring workspaces, default template of this view is list view), simple-view(view for users in users group, users in this group have limited actions, default template of this view is thumbnails view), anonymous-view(view for quest user, they only have search action with thumbnails view template).
+
+{code}
+    <object-param>
+      <name>Admin-View</name>
+      <description>View configuration of Admin</description>
+      <object type="org.exoplatform.services.cms.views.ViewConfig">
+        <field  name="name"><string>admin-view</string></field>
+        <field  name="permissions"><string>member:/admin</string></field>
+        <field  name="template"><string>/jcr:system/exo:ecm/views/templates/ecm-explorer/ListView</string></field>
+        <field  name="tabList">
+          <collection type="java.util.ArrayList">
+            <value>
+              <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                <field  name="tabName"><string>Admin</string></field>
+                <field  name="buttons">
+                  <string>
+                    manageVersions; manageCategories; manageRelations; manageActions; exportNode; importNode
+                  </string>
+                </field>
+              </object>
+            </value>
+            <value>
+              <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                <field  name="tabName"><string>Info</string></field>
+                <field  name="buttons">
+                  <string>
+                    viewReferences; viewNodeType; viewPermissions; viewProperties; viewRelations
+                  </string>
+                </field>
+              </object>
+            </value>
+            <value>
+              <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+                <field  name="tabName"><string>Actions</string></field>
+                <field  name="buttons">
+                  <string>
+                    addFolder; addDocument; upload; createTicket; paste; search
+                  </string>
+                </field>
+              </object>
+            </value>
+          </collection>
+        </field>
+      </object>
+    </object-param>
+{code}
+
+
+If property type is a list of object also config value of property as collection of specify object type
+
+
+{code}
+      <field  name="tabList">
+        <collection type="java.util.ArrayList">
+          <value>
+            <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
+              <field  name="tabName"><string>Admin</string></field>
+              <field  name="buttons">
+                <string>
+                  manageVersions; manageCategories; manageRelations; manageActions; exportNode; importNode
+                </string>
+              </field>
+            </object>
+          </value>
+          .......
+        </field>
+      </collection>
+{code}
+
+Template data object parameter:
+
+{code}
+    <object-param>
+      <name>List Template</name>
+      <description>Template for display documents in list style</description>
+      <object type="org.exoplatform.services.cms.views.TemplateConfig">
+        <field  name="type"><string>ecmExplorerTemplate</string></field>
+        <field  name="name"><string>ListView</string></field>
+        <field  name="warPath"><string>/ecm-explorer/ListView.gtmpl</string></field>
+      </object>
+    </object-param>
+    ..........
+{code}
+
+Value Parameter: Configure all actions in views
+
+{code}
+    <init-params>
+      <value-param>
+        <name>buttons</name>
+        <value>
+          addFolder; addDocument; upload; createTicket; paste; search; viewReferences; viewNodeType;
+          viewPermissions; viewProperties; manageVersions; manageCategories; manageRelations;
+          manageActions; exportNode; importNode; viewRelations
+        </value>
+      </value-param>
+    </init-params>
+{code}
+

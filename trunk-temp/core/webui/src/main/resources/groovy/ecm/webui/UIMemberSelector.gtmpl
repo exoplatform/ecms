@@ -1,0 +1,61 @@
+<% 
+  import  org.exoplatform.webui.core.UIBreadcumbs; 
+  import  org.exoplatform.webui.core.UITree; 
+  import org.exoplatform.ecm.webui.selector.UIAnyPermission;
+%>
+<div class="UIGroupMembershipSelector" id="$uicomponent.id">
+  <div class="Container">
+		<div class="SelectedGroupPath"><% uicomponent.renderChild(UIBreadcumbs.class); %></div>
+		
+		<%
+		  if (uicomponent.isShowAnyPermission()) uicomponent.renderChild(UIAnyPermission.class);
+		%>
+		<div class="GroupSelector">
+			<div class="ContentContainer">
+			  <div class="MembershipTitle"><%=_ctx.appRes(uicomponent.id+".label.selectGroup")%></div>
+			  <%uicomponent.renderChild(UITree.class);%>
+			</div>
+		</div>
+	  <div class="MembershipSelector">
+	  	<div class="ContentContainer">
+		    <div class="MembershipTitle">
+		      <%
+		        String key = uicomponent.id+".label.selectUser";
+		        if(uicomponent.isSelectedMembership) key = uicomponent.id+".label.selectMembership";
+		      %>
+		      <%=_ctx.appRes(key)%></div>
+	      <div class="OverflowContainer">
+		      <%                
+		      boolean even = true ;		      
+		      if(uicomponent.getCurrentGroup() != null) {
+		        if (uicomponent.isSelectedUser) {
+				      for(user in uicomponent.getUsers()){
+				        String rowCssClass = "OddRow" ;
+				        if(even) rowCssClass = "EvenRow" ;  
+				        even = !even ;
+		      %>
+ 				        <div class="$rowCssClass">
+				          <a class="ItemIcon" href="<%=uicomponent.event('SelectMembership', user.getUserName())%>"><%=user.getUserName()%></a>	
+				        </div>
+		      <% 	
+		          }
+				    } else if (uicomponent.isSelectedMembership) {
+				 	    for(member in uicomponent.getListMemberhip()){
+				        String rowCssClass = "OddRow" ;
+				        if(even) rowCssClass = "EvenRow" ;  
+				        even = !even ;
+			  %>
+				  		  <div class="$rowCssClass">
+						       <a class="ItemIcon" href="<%=uicomponent.event("SelectMembership", member)%>" title="$member">$member</a>
+						     </div>
+			  <%					        
+					    }	        
+				    }		      	
+		      } 
+		      %>
+	      </div>
+	    </div>
+	  </div>
+		<div style="clear: left"><span></span></div>
+	</div>
+</div> 		

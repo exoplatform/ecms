@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd" Id="holyday" Name="holyday">
+  <PackageHeader>
+    <XPDLVersion>1.0</XPDLVersion>
+    <Vendor>Bonita Project Team</Vendor>
+    <Created>2008-12-09 13:37:16</Created>
+  </PackageHeader>
+  <RedefinableHeader>
+    <Author>Rodrigue Le Gall</Author>
+    <Version>1.0</Version>
+  </RedefinableHeader>
+  <ConformanceClass GraphConformance="NON_BLOCKED" />
+  <WorkflowProcesses>
+    <WorkflowProcess AccessLevel="PUBLIC" Name="holyday" Id="holyday">
+      <ProcessHeader />
+      <RedefinableHeader>
+        <Version>1.0</Version>
+      </RedefinableHeader>
+      <DataFields>
+        <DataField Id="initiator" Name="initiator">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+        </DataField>
+        <DataField Id="decision" Name="decision">
+          <DataType>
+            <EnumerationType>
+              <EnumerationValue Name="Approve" />
+              <EnumerationValue Name="Refuse" />
+              <EnumerationValue Name="Disapprove" />
+            </EnumerationType>
+          </DataType>
+          <InitialValue>Refuse</InitialValue>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="PropertyActivity" />
+          </ExtendedAttributes>
+        </DataField>
+        <DataField Id="changedecision" Name="changedecision">
+          <DataType>
+            <EnumerationType>
+              <EnumerationValue Name="ModifyRequest" />
+              <EnumerationValue Name="CancelRequest" />
+            </EnumerationType>
+          </DataType>
+          <InitialValue>CancelRequest</InitialValue>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="PropertyActivity" />
+          </ExtendedAttributes>
+        </DataField>
+        <DataField Id="start" Name="start">
+          <DataType>
+            <BasicType Type="DATETIME" />
+          </DataType>
+          <InitialValue>2008-12-09T11:04:44.000+0000</InitialValue>
+        </DataField>
+        <DataField Id="end" Name="end">
+          <DataType>
+            <BasicType Type="DATETIME" />
+          </DataType>
+          <InitialValue>2008-12-09T11:04:59.000+0000</InitialValue>
+        </DataField>
+        <DataField Id="choice" Name="choice">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="PropertyActivity" />
+          </ExtendedAttributes>
+        </DataField>
+        <DataField Id="replacement" Name="replacement">
+          <DataType>
+            <BasicType Type="STRING" />
+          </DataType>
+          <Description>who will do the job ?</Description>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="PropertyActivity" />
+          </ExtendedAttributes>
+        </DataField>
+      </DataFields>
+      <Participants>
+        <Participant Id="Initiator" Name="Initiator">
+          <ParticipantType Type="ROLE" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Mapper" Value="Instance Initiator" />
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+          </ExtendedAttributes>
+        </Participant>
+        <Participant Id="_:_organization_management_human-resources" Name="*:/organization/management/human-resources">
+          <ParticipantType Type="ROLE" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Mapper" Value="Custom" />
+            <ExtendedAttribute Name="MapperClassName" Value="hero.mapper.ExoOrganizationMapper" />
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+          </ExtendedAttributes>
+        </Participant>
+        <Participant Id="_:_organization_management_executive-board" Name="*:/organization/management/executive-board">
+          <ParticipantType Type="ROLE" />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Mapper" Value="Custom" />
+            <ExtendedAttribute Name="MapperClassName" Value="hero.mapper.ExoOrganizationMapper" />
+            <ExtendedAttribute Name="NewParticipant" Value="true" />
+          </ExtendedAttributes>
+        </Participant>
+      </Participants>
+      <Activities>
+        <Activity Id="finish" Name="finish">
+          <Route />
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="XOffset" Value="185" />
+            <ExtendedAttribute Name="YOffset" Value="347" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="BonitaStart" Name="BonitaStart">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="63" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="56" />
+            <ExtendedAttribute Name="XOffset" Value="197" />
+            <ExtendedAttribute Name="YOffset" Value="28" />
+            <ExtendedAttribute Name="CellHeight" Value="40" />
+            <ExtendedAttribute Name="CellWidth" Value="40" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="BonitaEnd" Name="BonitaEnd">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="XOR" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="621" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="56" />
+            <ExtendedAttribute Name="XOffset" Value="467" />
+            <ExtendedAttribute Name="YOffset" Value="166" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="assign_replacement" Name="assign replacement">
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>_:_organization_management_executive-board</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="XOffset" Value="180" />
+            <ExtendedAttribute Name="YOffset" Value="283" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="126" />
+            <ExtendedAttribute Name="property" Value="replacement">
+              <Propagated>No</Propagated>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="hr_acknowledgement" Name="hr acknowledgement">
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>_:_organization_management_human-resources</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="XOffset" Value="40" />
+            <ExtendedAttribute Name="YOffset" Value="284" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="change_request" Name="change request">
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>Initiator</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="XOffset" Value="337" />
+            <ExtendedAttribute Name="YOffset" Value="275" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="98" />
+            <ExtendedAttribute Name="property" Value="changedecision" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="evaluation" Name="evaluation">
+          <Implementation>
+            <No />
+          </Implementation>
+          <Performer>_:_organization_management_executive-board</Performer>
+          <StartMode>
+            <Manual />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="XOR" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="XOffset" Value="186" />
+            <ExtendedAttribute Name="YOffset" Value="195" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="70" />
+            <ExtendedAttribute Name="property" Value="decision" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="eval_enough_holiday" Name="eval enough holiday">
+          <Implementation>
+            <No />
+          </Implementation>
+          <StartMode>
+            <Automatic />
+          </StartMode>
+          <TransitionRestrictions>
+            <TransitionRestriction>
+              <Join Type="AND" />
+            </TransitionRestriction>
+          </TransitionRestrictions>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="XOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="YOffsetParticipantView" Value="0" />
+            <ExtendedAttribute Name="XOffset" Value="150" />
+            <ExtendedAttribute Name="YOffset" Value="126" />
+            <ExtendedAttribute Name="CellHeight" Value="30" />
+            <ExtendedAttribute Name="CellWidth" Value="133" />
+            <ExtendedAttribute Name="property" Value="choice" />
+            <ExtendedAttribute Name="hook" Value="hero.hook.HolidayEnoughHolidaysLeftHook">
+              <HookEventName>automatic:onEnter</HookEventName>
+              <Rollback>true</Rollback>
+            </ExtendedAttribute>
+          </ExtendedAttributes>
+        </Activity>
+      </Activities>
+      <Transitions>
+        <Transition Id="finish_End" Name="finish_End" From="finish" To="BonitaEnd">
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="BreakPoint" Value="486.0-360.0" />
+          </ExtendedAttributes>
+        </Transition>
+        <Transition Id="assign_replacement_finish" Name="assign replacement_finish" From="assign_replacement" To="finish" />
+        <Transition Id="hr_acknowledgement_finish" Name="hr acknowledgement_finish" From="hr_acknowledgement" To="finish" />
+        <Transition Id="evaluation_assign_replacement" Name="evaluation_assign replacement" From="evaluation" To="assign_replacement">
+          <Condition Type="CONDITION">decision.compareTo("Approve") == 0</Condition>
+        </Transition>
+        <Transition Id="evaluation_End" Name="evaluation_End" From="evaluation" To="BonitaEnd">
+          <Condition Type="CONDITION">decision.compareTo("Refuse") == 0</Condition>
+        </Transition>
+        <Transition Id="evaluation_hr_acknowledgement" Name="evaluation_hr acknowledgement" From="evaluation" To="hr_acknowledgement">
+          <Condition Type="CONDITION">decision.compareTo("Approve") == 0</Condition>
+        </Transition>
+        <Transition Id="change_request_End" Name="change request_End" From="change_request" To="BonitaEnd">
+          <Condition Type="CONDITION">changedecision.compareTo("CancelRequest") == 0</Condition>
+        </Transition>
+        <Transition Id="change_request_evaluation" Name="change request_evaluation" From="change_request" To="evaluation">
+          <Condition Type="CONDITION">changedecision.compareTo("ModifyRequest") == 0</Condition>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="BreakPoint" Value="330.0-222.0" />
+          </ExtendedAttributes>
+        </Transition>
+        <Transition Id="evaluation_change_request" Name="evaluation_change request" From="evaluation" To="change_request">
+          <Condition Type="CONDITION">decision.compareTo("Disapprove") == 0</Condition>
+        </Transition>
+        <Transition Id="eval_enough_holiday_evaluation" Name="eval enough holiday_evaluation" From="eval_enough_holiday" To="evaluation">
+          <Condition Type="CONDITION">choice.compareTo("enough") == 0</Condition>
+        </Transition>
+        <Transition Id="eval_enough_holiday_End" Name="eval enough holiday_End" From="eval_enough_holiday" To="BonitaEnd">
+          <Condition Type="CONDITION">choice.compareTo("not_enough") == 0</Condition>
+        </Transition>
+        <Transition Id="Start_eval_enough_holiday" Name="Start_eval enough holiday" From="BonitaStart" To="eval_enough_holiday" />
+      </Transitions>
+    </WorkflowProcess>
+  </WorkflowProcesses>
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="MadeBy" Value="ProEd" />
+    <ExtendedAttribute Name="View" Value="Activity" />
+  </ExtendedAttributes>
+</Package>
+

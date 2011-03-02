@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPCVContainer>
+    <title>
+      <Back>Quay về</Back>
+      <print>In trang này</print>
+      <QuickEdit>Sửa nhanh</QuickEdit>
+    </title>
+    <label>
+      <print>In</print>
+    </label>
+    <action>
+      <Print>In</Print>
+      <Close>Đóng</Close>
+    </action>
+  </UIPCVContainer>
+
+  <UIPCVConfigPopupWindow>
+    <title>
+      <UIPCVConfig>Cấu hình cho Parameterized content viewer</UIPCVConfig>
+    </title>
+  </UIPCVConfigPopupWindow>
+
+  <UIPCVConfig>
+    <label>
+      <Title>Cấu hình cho Parameterized content viewer</Title>
+      <DisplaySettingBlock>Lựa chọn hiển thị</DisplaySettingBlock>
+      <ShowTitle>Hiển thị tiêu đề</ShowTitle>
+      <ShowDateCreated>Hiển thị ngày tạo</ShowDateCreated>
+      <ShowBar>Hiển thị thanh tùy chọn</ShowBar>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy</Cancel>
+    </action>
+  </UIPCVConfig>
+
+  <UIPCVContainer>
+    <label>
+      <draft>Bản nháp</draft>
+      <edit>Chỉnh sửa</edit>
+    </label>
+    <msg>
+      <content-not-found>Không tìm thấy nội dung nào</content-not-found>
+      <not-support>Bạn không có quyền truy cập</not-support>
+    </msg>
+  </UIPCVContainer>
+</bundle>

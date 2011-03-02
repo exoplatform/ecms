@@ -1,0 +1,60 @@
+h1. WebDAV in WCM
+
+
+WCM supports two ways to use WebDAV in sites management:
+
+
++_*The 1st way*_:+ 
+
+This way is used when you are on a Window System and your computer has to be connected to the Internet or Intranet.
+
+1\. Go into the *My Network Places* folder on your local computer. You will see all shared files and folders:
+
+        !F24.gif! 
+
+2. To show the site list, do the following steps to use WebDAV:     
+
+
+- Click the *Add a network place* link at the left to open the *Add Network Place Wizard* form:
+
+        !F25.gif! 
+
+- Click the *Next* button to open a form to choose the location that you want to create the network place:
+
+        !F26.gif! 
+
+
+- Select *Choose another network location* to create a shortcut. Then you will be asked to enter an internet or a network address to refer.
+
+        !F27.gif! 
+
+- Enter or copy a link to view a site by WebDAV in a browser into the *Internet or network address* field. For an example, the link to view 'acme' site by WebDAV is: http://localhost:8080/portal/rest/private/jcr/repository/collaboration/sitescontent/live/acme
+
+- Click the *Next* button and wait for few minutes to take affect. A folder named 'acme on localhost' is corresponding to the inputted link will appear in the *My Network Places* folder:
+
+        !F24.gif! 
+
+- Go into the folder that corresponds to the site which you want to take actions on it.
+
++_*The 2nd way:*_+
+	
+1\. Using IE browser to access http://localhost:8080/portal 
+
+2. Go to *Sites Content Management* --> *Sites Explorer* page.
+
+3. Go into *managed sites* drive by selecting this drive. You will see all sites on the left pane.
+
+4. Right - click on a site that you want to view by WebDAV and select the *WebDAV View* function in menu:
+
+        !WebDAV5.gif! 
+
+5. The selected site will be viewed by WebDAV. In which, each web content is a folder with the default folders in it.
+
+In here, users can do with WebDAV as do with Window:
+
+        !WebDAV6.gif! 
+
+- Users can copy a HTML file and then paste in the *Web Content* Folder to create a new web content.
+- Users can copy a CSS file on the *CSS* folder to change stylesheet for site.
+- Users can copy a JS file in *JS* folder.
+- Users can copy some documents and then paste on the *Documents* folder.

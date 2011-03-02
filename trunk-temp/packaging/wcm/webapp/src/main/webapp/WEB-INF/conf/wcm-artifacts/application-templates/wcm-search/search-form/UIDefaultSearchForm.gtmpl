@@ -1,0 +1,99 @@
+<%
+import java.util.ArrayList;
+import java.util.List;
+import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.UIFormSelectBox;
+import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.wcm.webui.search.UISearchForm;
+%>
+<%
+UIFormStringInput uiKeywordInput = uicomponent.getUIStringInput(UISearchForm.KEYWORD_INPUT);
+uicomponent.setKeyword();
+UIFormSelectBox uiPortalSelectBox = uicomponent.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR);
+UIFormCheckBoxInput uiPageCheckBox = uicomponent.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING);
+UIFormCheckBoxInput uiDocumentCheckBox = uicomponent.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING);
+String actionLabel = _ctx.appRes("UIDefaultSearchForm.action.Search");
+String link = uicomponent.event("Search");
+def context = _ctx.getRequestContext();
+context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + uicomponent.id + '");');
+%>
+
+<div class="UIForm $uicomponent.id" >
+  <%uiform.begin()%>
+    <div class="SearchHorizontalLayout">
+      <div class="FormContainer">
+        <table class="UIFormGrid">
+          <tr>
+            <td class="FieldLabel">
+              <%= _ctx.appRes("UIDefaultSearchForm.label.keyword") %>
+            </td>
+            <td class="FieldComponent">
+              <%
+              uiform.renderField(uiKeywordInput)
+              %>
+            </td>
+          </tr>
+          <tr>
+            <td class="FieldLabel">
+              <%= _ctx.appRes("UIDefaultSearchForm.label.portal") %>
+            </td>
+            <td class="FieldComponent">
+              <div style="float: left;">
+                <%
+                uiform.renderField(uiPortalSelectBox)
+                %>
+              </div>
+              <div style="padding-top: 5px;">
+                <div class="CheckboxField">
+                  <%
+                  uiform.renderField(uiPageCheckBox)
+                  %>
+                </div>
+                <div class="CheckboxText">
+                  <%= _ctx.appRes("UIDefaultSearchForm.label.Page") %>
+                </div>
+                <div class="CheckboxField">
+                  <%
+                  uiform.renderField(uiDocumentCheckBox)
+                  %>
+                </div>
+                <div class="CheckboxText">
+                  <%= _ctx.appRes("UIDefaultSearchForm.label.Document") %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div class="UIAction">
+          <table class="ActionContainer">
+            <tr>
+              <td>
+                <div onclick="$link"
+                    class="ActionButton LightBlueStyle SearchButton"
+                    onmouseover="this.style.color = '#058ee6'"
+                    onmouseout="this.style.color='black'">
+                  <div class="ButtonLeft">
+                    <div class="ButtonRight">
+                      <div class="ButtonMiddle">
+                        <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();">$actionLabel</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%uiform.end()%>
+    </div>
+<script type="text/javascript">
+	onload = function() {
+		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
+	}
+	onsubmit = function() {
+		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
+	}		
+</script>
+    

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>Préférences</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>Configuration des Catégories</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath></SelectTargetPath>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>Dépôt de données</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Arbre taxonomique</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>Titre</UICategoryNavigationTreeTitleFormStringInput>
+      <UICategoryNavigationTreeNameFormSelectBox>Nom de l'arbre</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Le modèle de l'abre vue</UICategoryNavigationTemplateFormSelectBox>
+    </label>
+    <msg>
+      <not-support-encoding>L'encodage est prend pas en charge.</not-support-encoding>
+      <render> erreur lorsque processus de rendu. </render>
+      <saving-success>Ce portlet a été mis à jour</saving-success>
+    </msg>
+    <action>
+      <Save>Sauver</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>Cette catégorie n'est pas existé</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
+      <DisplaySettingBlock>Display settings</DisplaySettingBlock>
+      <AdvancedBlock>Advance</AdvancedBlock>
+	  <UICategoryNavigationTreePathFormInputSet>Tree Path</UICategoryNavigationTreePathFormInputSet>
+	  <UICategoryNavigationTreePathFormStringInput>Tree Path</UICategoryNavigationTreePathFormStringInput>
+	  <UICategoryNavigationHeaderFormStringInput>Header</UICategoryNavigationHeaderFormStringInput>
+	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>Automatic</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+	  <UICategoryNavigationDynamicNavigationLabel>Dynamic Navigation</UICategoryNavigationDynamicNavigationLabel>
+	  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+	  <UICategoryNavigationTreepathPopupWindow>Tree Path</UICategoryNavigationTreepathPopupWindow>    
+    </label>
+  </UICategoryNavigationConfig>  
+</bundle>

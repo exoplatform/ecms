@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Tên này không được chấp nhận.</name-not-allowed>
+      <in-versioning>Bạn cần check out node hiện tại trước khi thêm node con cho nó</in-versioning>
+      <cannot-save>Một vài ràng buộc bị vi phạm trong quá trình thực hiện hành động.</cannot-save>
+      <saved-successfully>Nút này đã được lưu thành công tại vị trí '{0}'</saved-successfully>
+      <not-support>Không thể tải được định dạng của '{0}'.</not-support>
+      <not-add-folder>Chỉ chấp nhận thêm kiểu nt:file trong thư mục này</not-add-folder>
+      <access-denied>Bạn không có quyền để tạo mới một node trong '{0}'</access-denied>
+      <path-not-found>Đường dẫn '{0}' đã bị xóa hoặc đó là đường dẫn không đúng.</path-not-found>
+      <node-locked>Nút '{0}' đã bị khóa. Nút phải được mở khóa trước khi tạo tài liệu.</node-locked>
+      <node-isExist>Nút này đã tồn tại trong '{0}' và tên cùng mức không được chấp nhận</node-isExist>
+      <get-dialog-path>Có lỗi khi thực hiện lấy path cho dialog.</get-dialog-path>
+      <new-jcr-template>Có lỗi khi tạo mới JCRTemplateResourceResolver</new-jcr-template>
+    </msg>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <select-repository>Chọn repository</select-repository>
+      <UIFCCSaveLocationField>Nơi lưu trữ</UIFCCSaveLocationField>
+      <UIFCCRepositoryFormSelectBox>Chọn repository</UIFCCRepositoryFormSelectBox>
+      <UIFCCWorkspaceFormSelectBox>Chọn workspace</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Chọn kiểu nội dung</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Nơi lưu trữ</UIFCCLocationFormInputAction>
+      <UIFCCLocationFormStringInput></UIFCCLocationFormStringInput>
+      <UIFCCTemplateFormSelectBox>Chọn kiểu nội dung</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Thay đổi nút Lưu</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Thay đổi thông báo</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Tự động chuyển trang</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Đường dẫn</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Các hành động</UIFCCActionField>
+      <UIFCCActionList></UIFCCActionList>
+    </label>
+    <msg>
+      <save-successfully>Tùy chọn của portlet được lưu thành công</save-successfully>
+      <item-not-found>Đường dẫn không đúng</item-not-found>
+      <fileType-empty>Bạn phải chọn kiểu nội dung trược khi lưu</fileType-empty>
+      <ws-empty>Bạn phải chọn workspace</ws-empty>
+      <action-empty>Hãy chọn một thư mục có sẵn action</action-empty>
+      <message-empty>Mục thông bào phải có giá trị khi bạn không lựa chọn chuyển trang hoặc đường dẫn bị rỗng</message-empty>
+      <get-template>Có lỗi khi lấy mẫu</get-template>
+      <set-template-option>Có lỗi khi chọn mẫu</set-template-option>
+      <do-select>Có lỗi khi chọn</do-select>
+    </msg>
+    <action>
+      <Save>Lưu</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Chọn đường dẫn</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Tên</name>
+      <description>Mô tả</description>
+      <instanceOf>Kiểu hành động</instanceOf>
+      <action>Hành động</action>
+    </header>
+    <action>
+      <Add>Thêm</Add>
+    </action>
+    <msg>
+      <empty>Không có hành động nào</empty>
+      <remove-popup-first>Bạn phải đóng popup trước khi xóa hành động.</remove-popup-first>
+      <confirm-delete-action>Bạn có thực sự muốn xóa hành động này ?</confirm-delete-action>
+      <template-empty>Mãu của kiểu nội dung '{0}' bị rỗng</template-empty>
+      <template-null>Mẫu bị rỗng hoặc bạn không có quyền sử dụng mẫu này.</template-null>
+      <access-denied>Bạn không đủ quyền để thực hiện hành động này.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Chọn vị trí</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Workspace</workspaceName>
+      <rootNodePath>Đường dẫn gốc</rootNodePath>
+      <rootNodeInfo></rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Thêm node gốc</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Node này không có nội dung nào bên trong</child-not-found>
+    </info>
+    <header>
+      <name>Tên</name>
+      <action>Hành động</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Form thêm hành động</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Thêm/Sửa hành động</title>
+    <action>
+      <Save>Lưu</Save>
+      <Close>Đóng</Close>
+    </action>
+    <msg>
+      <repository-exception>Tên hành động có ký tự đặc biệt.</repository-exception>
+      <numberformat-exception>Tên hành động khong được có ký tự ['' hoặc ''.</numberformat-exception>
+      <existed-action>Hành động '{0}' đã tồn tại!</existed-action>
+      <unable-add-action>Không thể thêm hành động này</unable-add-action>
+      <unable-add>Không thể thêm hành động này vì đây là node gốc hoặc bạn không đủ quyền</unable-add>
+      <not-support>Mẫu '{0}' không được hỗ trợ</not-support>
+      <no-permission-add>Bạn không có quyền tạo hành động ở đây</no-permission-add>
+      <access-denied>Bạn không có quyền sử dụng mẫu này</access-denied>
+    </msg>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>With path</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Tạo hành động</actionType>
+    </label>
+    <msg>
+      <not-support>Không thể mở được mẫu của '{0}'.</not-support>
+      <do-not-permission>Bạn không có quyền để mở mẫu của '{0}'.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Chọn vị trí</UIOneNodePathSelector>
+      <UIPermissionSelector>Phân quyền</UIPermissionSelector>
+      <UICategoriesSelector>Thêm thể loại</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Field '{0}' with value '{1}' is invalid</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Chọn thể loại</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Các thể loại tham chiếu</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Thêm thể loại</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>Close</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Thêm thể loại</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Cây phân loại</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Chọn cây phân loại</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

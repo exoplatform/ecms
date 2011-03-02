@@ -1,0 +1,36 @@
+h1. Link Management Concept
+
+h2. What is the "Link"
+
+In web environment, "Link" is a selectable connection from one word, picture or information object to another. Such objects can include sound and motion video sequences. The most common form of link is the highlighted word or picture that can be selected by the user (with a mouse or in some other fashion), resulting in the immediate delivery and view of another file. The highlighted object is referred to as an anchor. The anchor reference and the object referred to constitute a hypertext link.
+
+Although most links do not offer the user a choice of types of link, it would be possible for the user to be provided a choice of link types, such as: a definition of the object, an example of it, a picture of it, a smaller or larger picture of it, and so forth.
+
+Links are what make the World Wide Web a web.
+
+Formally, "Link" in World Wide Web is URI or URL or URN that be defined in [RFC3986|http://tools.ietf.org/html/rfc3986#section-1.1.3]. The generic URI syntax consists of a hierarchical sequence of components referred to as the scheme, authority, path, query, and fragment like that:
+
+{code:none}
+ http://example.com:8042/over/there?name=ferret#pineapple
+  \_/   \+++++++/\++++_/ \++++_/ \+___/
+   |           |             |            |        |
+  scheme     authority      path        query   fragment
+    |   ++++++++++_|__
+   / \ /                        
+   urn:example:animal:ferret:nose
+
+{code}
+
+
+h2. "Link Management" in Web Content Management system
+
+The primary objective of "Link Management" in a web content management system is to make sure that all links are under controlled. The administrator of the system can know exactly at a specific time which link is broken, which link is changed.. to ensure the content in sites in the system always be live for users.
+
+"Link Management" is a kind of monitoring and administration functionalities in the WCM system. So,the feature need to meet fully with administration and monitoring functionalities.
+
+eXo WCM provide a powerfull "link management" system to ensure all links in your webcontent is controllable at real time, with:
+- Robustness broken link detection engine to detect all links broken in your WCM system as fast as possible.
+The engine was introduced in eXo WCM 1.0 final version.
+- Simple and user-friendly broken links report user interface for webmaster can see all broken link, active link in your WCM system.
+The user interface will be introduced in 1.1 and later version of eXo WCM. 
+Also, in later version, eXo WCM will provide some added-value functions for link management like: broken link reports by some notification channels like email, JMX that supports broken link detection engine to allow system administrators to manage link by JMX client.

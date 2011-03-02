@@ -1,0 +1,44 @@
+<%import org.exoplatform.ecm.webui.utils.Utils ;%>
+<div class="$uicomponent.id">
+	<% if(uicomponent.getIsExternalMetadata()) {%>	
+		<div class="GridTitleBar">
+			<table>
+				<tr>
+					<td>
+					  <div class="GridTitleLeftBar">
+					    <div class="GridTitleRightBar">
+					      <div class="GridTitleMiddleBar"><%=_ctx.appRes("UIUploadContent.title.external-metadata")%></div>
+					    </div>
+					  </div>
+					</td>
+				</tr>
+			</table> 
+		</div>
+		<table class="UIGrid" cellspacing="0" borderspacing="0" style="width: 99%;">
+		  <col width="50px;"><col><col width="50px;">
+		  <thead>
+		    <tr>
+		      <th></th>
+		      <th><%=_ctx.appRes("UIUploadContent.title.metadata-name")%></th>
+		      <th><%=_ctx.appRes("UIUploadContent.title.action")%></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+	      <%for(nodeType in uicomponent.getExternalList()) {%>
+			    <tr>
+			      <td>
+			        <%String iconNodeType = nodeType.replace(":", "_") ;%>
+			        <div class="default16x16Icon ${iconNodeType}16x16Icon" style="margin:auto"><span></span></div>
+			      </td>
+			      <td><%=nodeType%></td>
+		 	      <td>
+		          <a href="<%=uicomponent.event("Edit", nodeType)%>">
+		            <div class="Icon16x16 Edit16x16Icon" style="margin-left:7px;" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>"><span></span></div>
+		          </a>
+		 	      </td>
+			    </tr>
+	      <%}%>
+		  </tbody>
+		</table>
+	<%}%>
+</div>

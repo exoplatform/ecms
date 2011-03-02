@@ -1,0 +1,81 @@
+
+h1. DMS Tutorial
+
+
+
+
+h1. Getting started
+
+Do the following steps to run DMS
+
+1\. [Install Java SE 5.0|http://java.sun.com/javase/downloads/index_jdk5.jsp] (Java Runtime)
+
+2. [Download the lastest eXo ECM version|http://forge.objectweb.org/projects/exoplatform/]
+
+3. Unzip that package on your system.
+
+{note}
+Make sure the target path does not contain any space
+{note}
+
+4. Then run the command :
+
+{code}
+
+     - Go to $EXO_BASE_DIRECTORY/exo-working/exo-tomcat/bin directory
+
+On Linux or Cygwin Environment
+
+     - Change the rights on .sh files to make them executable : chmod +x *.sh
+
+     - Run the command : eXo.sh run
+
+On Windows Environment
+
+     - Run the command : eXo.bat run
+
+{code}
+
+5. Browse URL *[http//localhost:8080-portal]*
+
+6. Click
+!Sign-In.png!
+ on the top right corner to sign in.
+
+7. Enter '*root*' as user name and '*exo*' as password.
+
+
+!Sign-In-Window.png!
+
+
+After finishing all the steps above, you should see eXo DMS homepage as the figure below:
+
+
+!dms.png!
+
+
+
+{info}
+Since DMS 2.5
+{info}
+
+The eXo DMS homepage will be like the below screenshot:
+
+
+!DMSHomepage.PNG!
+
+
+
+
+|| \# ||*Name* || *Purpose* ||
+| "1" | *Banner* | That contains organization's slogan, logo and icon... |
+| 2 | *Navigation bar* | This component is the menu of the portal. It allows you to navigate through the portal. |
+| 3 | *Breadcrumb bar* | This component displays the full path of the selected page from the Navigation tree. That can be used to quickly access to one of its parent pages. |
+| 4 | *Home page* | The home page is a main page of a site. This is a default page which is displayed firstly when you visit the site |
+| 5 | *Footer* | It provides information about author/institutional sponsor, revision date, copyright... |
+
+
+
+
+
+

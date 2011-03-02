@@ -1,0 +1,11 @@
+h1. Print Content
+
+Customers can switch any page to the Print Mode.  Print Mode, in short, removes everything from the current page except the content.  The Page Header, Footer, Left and Right Panels are removed so that all remains is the main content of the page.
+
+Most templated pages automatically have a special "Print This Page" option, but it is easy to print any page in a format that is both convenient and "tree-friendly" as possible.
+
+ !Print.jpg! 
+
+With the print mode we can see only the main content as:
+
+ !Print1.jpg! 

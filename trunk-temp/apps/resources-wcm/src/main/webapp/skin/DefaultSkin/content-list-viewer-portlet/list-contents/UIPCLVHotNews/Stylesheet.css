@@ -1,0 +1,118 @@
+.UIPCLVHotNews {
+  border: 1px solid #EDEDEE;
+  background: #fff;
+}
+
+.UIPCLVEvents {
+  background: #fff;
+}
+
+.UIPCLVHotNews .TopBoxParameterized {
+  background: url('background/BGTopBox.gif')  repeat-x left top;
+  border: 1px solid #cbe2f4;
+  line-height: 30px;
+  padding: 0px 5px;
+  margin-bottom: 1px;
+}
+
+.UIPCLVHotNews .TopBoxParameterized .Title, .UIPCLVEvents .TopBoxParameterized .Title {
+  color: #666666;
+  font-weight: normal;
+  font-size: 18px;
+  float: left;
+}
+
+.UIPCLVEvents .TopBoxParameterized .Title {
+  padding-right: 10px;
+}
+
+.UIPCLVEvents .TopBoxParameterized {
+  line-height: 30px;
+  padding: 0px 5px;
+  margin-bottom: 1px;
+  float: right;
+}
+
+.UIPCLVEvents .TopBoxParameterized .RssBar {
+  color: #666666;
+  font-weight: normal;
+  font-size: 18px;
+  float: right;
+  margin: 3px;
+}
+
+.UIPCLVHotNews .CaptionItem {
+  padding: 5px;
+}
+
+.UIPCLVHotNews .CaptionItem .ContentNormalNews, .UIPCLVEvents .CaptionItem .ContentNormalNews {
+  color: #6b6b6b;
+}
+
+.UIPCLVHotNews .CaptionItem .TitleContentNormalNews, .UIPCLVEvents .CaptionItem .TitleContentNormalNews {
+  color: #565759;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.UIPCLVHotNews .CaptionItem .TitleContentNormalNews:hover, .UIPCLVEvents .CaptionItem .TitleContentNormalNews:hover {
+  text-decoration: underline;
+}
+
+.UIPCLVHotNews .CaptionItem .LineNormalNews, .UIPCLVEvents .CaptionItem .LineNormalNews {
+  height: 1px;
+  background: #dbdbdb;
+}
+
+.UIPCLVHotNews .CaptionItem .HotNews, .UIPCLVEvents .CaptionItem .HotNews {
+  background: none;
+}
+
+.UIPCLVHotNews .CaptionItem .Date, .UIPCLVEvents .CaptionItem .Date {
+  background: none;
+  color: #999999;
+  font-weight: normal;
+  font-size: 10px;
+}
+
+.UIPCLVHotNews .CaptionItem .ImageHotNews, .UIPCLVEvents .CaptionItem .ImageHotNews {
+  float: right;
+}
+
+.UIPCLVHotNews .CaptionItem .TitleContentHotNews, .UIPCLVEvents .CaptionItem .TitleContentHotNews {
+  color: #565759;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.UIPCLVHotNews .CaptionItem .ContentHotNews {
+  width:70%;
+}
+
+.UIPCLVHotNews .CaptionItem .ReadLink, .UIPCLVEvents .CaptionItem .ReadLink {
+  margin-bottom: 6px;
+  text-align: right;
+}
+
+.UIPCLVHotNews .CaptionItem .ReadLink  a, .UIPCLVEvents .CaptionItem .ReadLink  a {
+  color: #00BAEB;
+}
+
+.UIPCLVHotNews .CaptionItem .ReadLink  a:hover, .UIPCLVEvents .CaptionItem .ReadLink  a:hover {
+  color: #058EE6;
+}
+
+.UIPCLVHotNews .CaptionItem .TitleContentHotNews:hover, .UIPCLVEvents .CaptionItem .TitleContentHotNews:hover {
+  text-decoration: underline;
+}
+
+.UIPCLVHotNews .CaptionItem .NormalNews, .UIPCLVEvents .CaptionItem .NormalNews {
+  margin-top: 25px;
+}
+
+.UIPCLVHotNews .CaptionItem .ImageNormalNews, .UIPCLVEvents .CaptionItem .ImageNormalNews {
+  float: left;
+  padding-right: 17px;
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Accus\u00e9 de r\u00e9ception RH</task-name>
+  <title>Accus\u00e9 de r\u00e9ception RH</title>
+  <submit>Valider</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <label>Initiateur :</label>
+  </initiator>
+  <start>
+    <label>D\u00e9but (jj/mm/aaaa) :</label>
+  </start>
+  <end>
+    <label>Fin (jj/mm/aaaa) :</label>
+  </end>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

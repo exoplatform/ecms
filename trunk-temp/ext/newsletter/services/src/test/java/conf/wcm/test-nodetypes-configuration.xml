@@ -1,0 +1,436 @@
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+
+<nodeTypes 
+   xmlns:nt="http://www.jcp.org/jcr/nt/1.0" 
+   xmlns:mix="http://www.jcp.org/jcr/mix/1.0" 
+   xmlns:jcr="http://www.jcp.org/jcr/1.0" 
+   xmlns:exo="http://www.exoplatform.com/jcr/exo/1.0">
+
+  <!-- nodeType name="exo:twoColumnsWebcontent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+  	<supertypes>
+      <supertype>exo:webContent</supertype>      
+    </supertypes>
+  </nodeType -->
+
+  <nodeType name="exo:pictureOnHeadWebcontent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:webContent</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:image" requiredType="Binary" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:imageWidth" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:imageHeight" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="exo:siteSearchBox" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:webContent</supertype>
+    </supertypes>
+  </nodeType>
+
+  <nodeType name="exo:siteNavigationWebContent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:webContent</supertype>
+    </supertypes>
+  </nodeType>
+
+  <nodeType name="metadata:siteMetadata" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:metadata</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="siteTitle" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="description" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="keywords" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="robots" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="exo:siteBreadcrumb" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:webContent</supertype>
+    </supertypes>
+  </nodeType>
+
+
+  <nodeType name="exo:contact_us" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:fg_p_label" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:fg_p_select_a_recipient" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:fg_p_your_name" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:fg_p_your_address" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:fg_p_your_email_address" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:fg_p_your_phone_number" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:fg_p_your_message" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="jcr:primaryType" requiredType="Name" autoCreated="true" mandatory="true" onParentVersion="COMPUTE" protected="true" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="jcr:mixinTypes" requiredType="Name" autoCreated="false" mandatory="false" onParentVersion="COMPUTE" protected="true" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+	
+<nodeType name="exo:presentationable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:presentationType" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+  <!-- DO NOT REMOVE THIS DEFINITION -->
+
+  <nodeType name="exo:portalFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
+    <supertypes>
+      <supertype>nt:unstructured</supertype>
+    </supertypes>
+  </nodeType>
+
+  <nodeType name="exo:webFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
+    <supertypes>
+      <supertype>nt:unstructured</supertype>
+    </supertypes>
+  </nodeType>
+
+  <nodeType name="exo:themeFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
+    <supertypes>
+      <supertype>nt:unstructured</supertype>
+    </supertypes>
+  </nodeType>
+
+  <nodeType name="exo:linkFolder" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
+    <supertypes>
+      <supertype>nt:unstructured</supertype>
+    </supertypes>
+  </nodeType>
+
+  <nodeType name="exo:multimediaFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:unstructured</supertype>
+    </supertypes>
+    <childNodeDefinitions>
+      <childNodeDefinition name="images" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+      <childNodeDefinition name="videos" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+      <childNodeDefinition name="audio" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>	
+	
+  <nodeType name="exo:jsFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:folder</supertype>
+    </supertypes>
+  </nodeType>
+
+  <nodeType name="exo:cssFolder" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:folder</supertype>
+    </supertypes>
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="nt:folder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+      <childNodeDefinition name="css" defaultPrimaryType="exo:cssFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>	
+	
+  <nodeType name="exo:webContent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mix:referenceable</supertype>
+      <supertype>nt:unstructured</supertype>
+      <supertype>nt:hierarchyNode</supertype>
+      <supertype>exo:rss-enable</supertype>
+    </supertypes>
+    <childNodeDefinitions>
+      <childNodeDefinition name="js" defaultPrimaryType="exo:jsFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+      <childNodeDefinition name="css" defaultPrimaryType="exo:cssFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+      <childNodeDefinition name="medias" defaultPrimaryType="exo:multimediaFolder" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+	
+	<nodeType name="exo:hiddenable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+    </propertyDefinitions>			
+  </nodeType>
+	
+  <nodeType name="exo:datetime" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:dateCreated" requiredType="Date" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>	      
+      </propertyDefinition>
+      <propertyDefinition name="exo:dateModified" requiredType="Date" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>	      
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>			
+
+  <nodeType name="exo:rss-enable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:title" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY"
+        protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:summary" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>        
+    </propertyDefinitions>
+  </nodeType>	
+
+<nodeType name="exo:musicFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName=""> 		
+  </nodeType>
+  
+  <nodeType name="exo:documentFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+ 	</nodeType>
+  
+  <nodeType name="exo:pictureFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
+  <nodeType name="exo:searchFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
+  <nodeType name="exo:videoFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
+  <nodeType name="exo:favoriteFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>  	
+	  <nodeType name="exo:trashFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+  
+  <nodeType name="exo:folksonomyFolder" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+
+  <nodeType name="exo:tagged" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  </nodeType>
+	
+<nodeType name="exo:htmlFile" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:presentationable</supertype>
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:htmlTOC" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="exo:jsFile" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:presentationable</supertype>
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:active" requiredType="Boolean" autoCreated="true" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+        <defaultValues>
+          <defaultValue>true</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="exo:priority" requiredType="Long" autoCreated="true" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+        <defaultValues>
+          <defaultValue>0</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="exo:sharedJS" requiredType="Boolean" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="exo:cssFile" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>exo:presentationable</supertype>
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:active" requiredType="Boolean" autoCreated="true" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+        <defaultValues>
+          <defaultValue>true</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="exo:priority" requiredType="Long" autoCreated="true" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+        <defaultValues>
+          <defaultValue>0</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
+      <propertyDefinition name="exo:sharedCSS" requiredType="Boolean" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>	
+	
+  <nodeType name="exo:linkable" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="exo:links" requiredType="String" autoCreated="true" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="exo:link" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mix:referenceable</supertype>
+      <supertype>nt:unstructured</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="exo:linkURL" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:linkDescription" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="exo:linkActive" requiredType="Boolean" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+	
+  <nodeType name="exo:drive" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+    	<supertype>nt:base</supertype>
+    </supertypes> 
+    <propertyDefinitions>
+      <propertyDefinition name="exo:accessPermissions" requiredType="String" autoCreated="false" mandatory="true" 
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>        
+      </propertyDefinition>      
+      <propertyDefinition name="exo:path" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:workspace" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:views" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:icon" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewPreferences" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewNonDocument" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:viewSideBar" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:showHiddenNode" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:allowCreateFolders" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="exo:allowNodeTypesOnTree" requiredType="String" autoCreated="true" mandatory="false"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <defaultValues>
+          <defaultValue>*</defaultValue>
+        </defaultValues>
+      </propertyDefinition>      
+    </propertyDefinitions>
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="" autoCreated="false" mandatory="false"
+        onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes> 
+            <requiredPrimaryType>nt:base</requiredPrimaryType>
+        </requiredPrimaryTypes>     
+      </childNodeDefinition>
+    </childNodeDefinitions>   
+  </nodeType>		
+
+</nodeTypes>

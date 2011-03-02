@@ -1,0 +1,91 @@
+h1. How to copy a WCM site
+
+In this page, we will describe steps to copy a site from a server to another.
+
+h2. Copy Sites contents
+First step is to copy Sites Contents by exporting them from the old server
+and importing them the new one using the Sites Explorer (you have to use system-view for import/export actions)
+
+This procedure will copy site between the development position, but also between different environment.
+
+
+{info}
+If you import a WCM site contains node type created by the user and uses by the site, you must follow this wiki +_[ECM:Export and Import Nodes]_+
+{info}
+
+*_From the old server_*
+
+1.+Export navigation+ 
+
+On the workspace "system" export : /exo:registry/exo:applications/MainPortalData/MySite. 
+ !exportMainPortalData.gif!  
+
+2.+Export content and history+ 
+
+{info}
+if the Export button history is displayed, the export history is important.
+{info}
+
+On the workspace "Site Management"  from /testSite, we export all the son of the root of your portal testSite one by one ( ApplicationData, css, documents, js, links, media and web content ) 
+  
+ !content-export.png! 
+
+3.+Export of Taxonomies+ 
+
+On the workspace "Site Management" :�/testSite /categories/testSite : export the xml node via the System tab in document mode (add your rights wcm-admin if you do not have still on the drive system)
+Export all the files of this folder one by one, in our case "News" and "Economy".
+ !taxonomie-export.png!  
+
+*_From the new server_* 
+
+{info}
+if there is a site with the same name, delete the taxonomy and navigation. 
+Delete the navigation :Go to the directory / exo: registry / exo: Applications / MainPortalData of drive systems or Via WebDAV, url: http://localhost:8080/rest/private/jcr/repository/system/exo:registry/exo:applications/MainPortalData.Delete the folder containing your navigation(ex: testSite)
+ 
+Delete the taxonomy : At the Drive site management positioning in /testSite/categories/testSite/ and delete all the son, in our case current news and economy
+{info}
+
+
+1.+Import navigation+ 
+ 
+On the workspace "system" import portal data into : /exo:registry/exo:applications/MainPortalData/.
+ 
+ !ImportMainPortalData.gif! 
+
+2.+Import content and history+ 
+
+On the On the drive "site management" import sites content with its version history under /testSite (import the exported content with their histories).
+{info}
+if there is a site with the same name, delete the directory corresponding to the contents previously exported (ApplicationData, css, documents, js, links, media and web content). 
+If you use jboss server, He must then proceed to reset caches via the jboss jmx console by invoking the method clearCaches () of the MBean
+the following address: http://localhost:8080/jmx-console/HtmlAdaptor?action=inspectMBean&name=exo%3Aservice%3Dcachemanager
+{info}
+ !content-import.png! 
+
+3.+Import of Taxonomies+ 
+On the workspace "Site Management" : /testSite /categories/testSite. import the previously exported son.
+ !taxonomie.png!   
+
+{style}
+
+After starting the new server, you go and check your site at  http://server:port/portal/MySite
+{note}
+ You may find the contents of your
+site not published :-( To fix this, you have to make sure that
+all imported contents are in state Live, if not, you have to republish
+them.
+{note}
+
+{info}
+Another solution is using a dedicated server for creating contents. You must disable publication-service on this server.
+
+To disable publication, you need just to comment *CmsService.event.postCreate* and *CmsService.event.postEdit* in  *war:/conf/wcm/publication-configuration.xml*? 
+{info}
+
+h2. Create Taxonomies tree 
+
+When importing data, drives and taxonomies tree informations are not imported, they must be created. Follow those steps :
+
+* Create a new folder *mySiteCategories* under Sites Explorer -> Sites Management -> MySite.
+* Create a new Taxonomy Tree in this folder using this tutorial [ECM:Creating a new Taxonomy Tree]
+* Create a new drive which points to your taxonomies folder using this tutorial : [ECM:Creating a Drive]

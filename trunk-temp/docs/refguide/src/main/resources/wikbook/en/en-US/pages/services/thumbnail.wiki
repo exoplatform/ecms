@@ -1,0 +1,59 @@
+This service is used to manage the watch document feature in WCM.
+
+Package org.exoplatform.services.cms.thumbnail.ThumnailService;
+
+|| *Method* || *Return* || *Prototype* || *Description* ||
+| *{{getAllFileInNode}}* | {{List<Node>}} | {{getAllFileInNode(Node node) throws RepositoryException}} | Return all nt:file node at current node
+{example}{example}@param node Current node
+{example}{example}@return List<Node>
+{example}{example}@throws RepositoryException |
+| *{{getFileNodesByType}}* | {{List<Node>}} | {{getFileNodesByType(Node node, String jcrMimeType) throws Exception;}} | Return the list of node in the current node with mimetype specified
+{example}{example}@param node Current node
+{example}{example}@param jcrMimeType Mime type of node will be retrieve
+{example}{example}@return List<Node>
+{example}{example}@throws RepositoryException |
+| *{{getFlowImages}}* | {{List<Node>}} | {{getFlowImages(Node node) throws Exception}} | Return a list image in node
+{example}{example}@param node Current node
+{example}{example}@return List<Node>
+{example}{example}@throws RepositoryException |
+| *{{setEnableThumbnail}}* | {{void}} | {{setEnableThumbnail(boolean isEnable)}} | To set up status of node is allow thumbnail or not
+{example}{example}@param isEnable |
+| *{{isEnableThumbnail}}* | {{boolean}} | {{isEnableThumbnail()}} | Return the status of node is enable thumbnail or not
+{example}{example}@return Boolean value |
+| *{{createThumbnailImage}}* | {{void}} | {{createThumbnailImage(Node node, BufferedImage image, String mimeType) throws Exception}} | Create thumbnail for node with default size:
+{example}{example}Small size, medium size, big size
+{example}{example}@param node Current node which will be added thumbnail
+{example}{example}@param image BufferedImage which contain the original image
+{example}{example}@param mimeType File type
+{example}{example}@throws Exception |
+| *{{getThumbnailImage}}* | {{InputStream}} | {{getThumbnailImage(Node node, String thumbnailType) throws Exception}} | Return the data of thumbnail with specified type
+{example}{example}param node Current node which will be added thumbnail
+{example}{example}param thumbnailType Type of thumbnail will be return (small, medium, big or specified if has)
+{example}{example}throws Exception|
+| *{{addThumbnailNode}}* | {{Node}} | {{addThumbnailNode(Node node) throws Exception}} | Create thumbnail node
+{example}{example}@param node Current node which included thumbnail
+{example}{example}@return Node
+{example}{example}@throws Exception |
+| *{{getThumbnailNode}}* | {Node}} | {{getThumbnailNode(Node node) throws Exception}} | Get thumbnail node
+{example}{example}@param node
+{example}{example}@return Node
+{example}{example}@throws Exception |
+| *{{createSpecifiedThumbnail}}* | {{void}} | {{createSpecifiedThumbnail(Node node, BufferedImage image, String propertyName) throws Exception}} | Create a thumbnail for node with size specified 
+{example}{example}@param node Current node which will be added thumbnail
+{example}{example}@param image BufferedImage which contain the original image
+{example}{example}@param propertyName Data will be set to this property
+{example}{example}@throws Exception |
+| *{{addThumbnailImage}}* | {{void}} | {{addThumbnailImage(Node node, BufferedImage image, String propertyName) throws Exception}} | Add a thumbnail image to node 
+{example}{example}@param node Current node which will be added thumbnail
+{example}{example}@param image BufferedImage which contain the original image
+{example}{example}@param propertyName Data will be set to this property
+{example}{example}@throws Exception |
+| *{{processThumbnailList}}* | {{void}} | {{processThumbnailList(List<Node> listNodes, String type) throws Exception}} | Process thumbnail with list nodes
+{example}{example}@param listNodes List node which will be process to add thumbnail
+{example}{example}@param type Type of thumbnail image
+{example}{example}@throws Exception |
+| *{{getMimeTypes}}* | {{List<String>}} | {{getMimeTypes()}} | Get mime types which allow to view
+{example}{example}return List<String>  |
+| *{{processRemoveThumbnail}}* | {{void}} | {{processRemoveThumbnail(Node showingNode) throws Exception}} | Process to remove thumbnail
+{example}{example}@param showingNode Node contain the thumbnail
+{example}{example}@throws Exception|

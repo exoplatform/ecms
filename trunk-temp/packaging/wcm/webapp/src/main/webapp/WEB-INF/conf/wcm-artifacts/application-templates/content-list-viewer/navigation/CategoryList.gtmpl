@@ -1,0 +1,62 @@
+<%
+	 /**
+	 	* Created by The eXo Platform SAS
+	 	* Author : eXoPlatform
+	 	*          benjamin.paillereau@exoplatform.com
+	 	* Aug 3, 2010  
+	 	*/
+
+%>
+<%
+public void renderCategories(def categories) {
+    def first = true;
+    for (category in categories) {
+      def categoryTitle = category.getTitle();
+      def categoryURL = category.getUrl();
+      def cssStyle = "CategoryLabel";
+      if (category.isSelected()) cssStyle = "CategoryLabel CategorySelected";
+      %>
+      <%if (!first) {%> &nbsp;|&nbsp; <%}%>
+      <a class="$cssStyle" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>  
+      <%
+      first=false;
+      if (category.hasChilds()) {
+        %> &nbsp;|&nbsp; <%
+        renderCategories(category.getChilds());
+      }
+    }
+}
+%>
+
+<style>
+#ACMEBody {
+  padding: 10px;
+}
+
+.CategorySelected {
+  color: #3366CC !important;
+}
+
+.SimpleHorizontal {
+  padding-bottom:10px;
+}
+
+</style>
+
+<div id="$uicomponent.id" class="SimpleHorizontal">
+  <div class="CategoriesContainer">
+    <div class="TitleBarL">
+      <div class="TitleBarR">
+        <div class="TitleBarM">
+          <div class="NewContent">
+            <%
+            def categories = uicomponent.getCategories();
+            renderCategories(categories);
+            %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

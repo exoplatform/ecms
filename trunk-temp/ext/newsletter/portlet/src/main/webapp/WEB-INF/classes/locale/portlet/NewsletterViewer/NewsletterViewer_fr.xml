@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UINewsletterViewerForm>
+    <msg>
+      <updateSuccess>Votre abonnement a été mis à jour.</updateSuccess>
+      <subcribed>Vous êtes inscrit.</subcribed>
+      <email-not-empty>L'email ne peut pas être vide</email-not-empty>
+      <checkSubscriptionToProcess>S'il vous plaît, valider un ou plusieurs abonnements avant de soumettre</checkSubscriptionToProcess>
+      <alreadyExistedEmail>Cet email est déjà inscrit. Merci d'utiliser une autre adresse.</alreadyExistedEmail>
+      <canNotSubcribed>Inscription impossible. Merci d'essayer à nouveau.</canNotSubcribed>
+      <get-checked>erreur lorsque vous effectuez obtenir d'abonnement sont contrôlés. </get-checked>
+    </msg>
+    <action>
+      <Subcribe>Je m'inscris</Subcribe>
+      <ForgetEmail>Oublier cet email</ForgetEmail>
+      <ChangeSubcribe>Modifier mon Abonnement</ChangeSubcribe>
+    </action>
+    <title>
+      <userEmail>Email</userEmail>
+      <subscription>Abonnement</subscription>
+      <yourStatus>Cochez pour vous abonner</yourStatus>
+    </title>
+    <Email>
+      <ConfirmUser>
+        <Subject>Confirmation d'abonnement aux Newsletters</Subject>
+        <Content>Cliquez #ici# pour valider votre inscription aux Newsletters.</Content>
+      </ConfirmUser>
+    </Email>
+  </UINewsletterViewerForm>
+</bundle>

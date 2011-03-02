@@ -1,0 +1,50 @@
+<div class="UIPuplicationForm">
+  <% uiform.begin() %>
+	<div class="UIForm State">
+		<div class="HorizontalLayout">
+			<div class="FormContainer">
+			  <table class="UIFormGrid">
+					<tr>
+						<td class="FieldLabel"><%=_ctx.appRes("UIPublicationForm.label.visibility")%></td>
+						<td class="FieldComponent">
+							<% uiform.renderField(uicomponent.getChildById("visibility")) %>
+						</td>
+						<td class="FieldComponent">
+						</td>
+					</tr>
+					<tr>
+						<td class="FieldLabel"><%=_ctx.appRes("UIPublicationForm.label.state")%></td>
+						<td class="FieldComponent">
+						  <% uiform.renderField(uicomponent.getChildById("state")) %>
+						</td>
+						<td class="FieldComponent">
+						</td>
+					</tr>
+  			</table>
+  		</div>
+  	</div>
+	</div>
+	<div class="UIAction"> 
+    <table class="ActionContainer">
+    	<tr>
+    		<td>
+          <% for(action in uicomponent.getActions()) { 
+          		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+               String link = uicomponent.event(action) ;
+          %>
+          <div onclick="$link" class="ActionButton LightBlueStyle" >
+            <div class="ButtonLeft">
+              <div class="ButtonRight">
+                <div class="ButtonMiddle">
+                  <a href="javascript:void(0);">$actionLabel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      		<%}%>
+      	</td>
+      </tr>          
+    </table>
+  </div>
+	<%uiform.end()%>
+</div>

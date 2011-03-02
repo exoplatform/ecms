@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #			org.exoplatform.workflow.webui.component.controller										#
+  #############################################################################
+  -->
+  <UIWorkflowControllerPortlet>
+    <tab>
+      <label>Kontroler</label>
+      <text>Admin Workflow Beheer</text>
+    </tab>
+  </UIWorkflowControllerPortlet>
+  <ControllerPopup>
+    <title>
+      <UITaskManager>UITask Manager</UITaskManager>
+    </title>
+  </ControllerPopup>
+  <UITabPane>
+    <title>
+      <UITaskList>Taak Kontroler</UITaskList>
+      <UIBPDefinition>BP Definitie Kontroler</UIBPDefinition>
+      <UIDocumentContent>Bezie inhoud</UIDocumentContent>
+      <UIDocumentForm>Wijzig inhoud</UIDocumentForm>
+      <UITask>Taak</UITask>
+    </title>
+  </UITabPane>
+  <UITaskList>
+    <header>
+      <id>Taak ID</id>
+      <processName>Proces Naam</processName>
+      <taskName>Taak Naam</taskName>
+      <actor>Acteur</actor>
+      <description>Omschrijving</description>
+      <actorId>Acteur Id</actorId>
+      <taskVariables>Taak Variabel</taskVariables>
+      <processDateStart>Proces Start Datum</processDateStart>
+      <action>Actie</action>
+    </header>
+  </UITaskList>
+  <UITaksList>
+    <msg>
+      <no-task>Geen taak toegekend</no-task>
+    </msg>
+  </UITaksList>
+  <PopupDelegatedSelectorId>
+    <title>
+      <UIUserSelectContainer>Select User</UIUserSelectContainer>
+    </title>
+  </PopupDelegatedSelectorId>
+  <UITask>
+    <label>
+      <hide-process-link>Hide process link</hide-process-link>
+      <show-process-link>Show process link</show-process-link>
+    </label>
+    <msg>
+      <has-not-got-delegate>You must choose any user to deletgate</has-not-got-delegate>
+    </msg>
+    <title>
+      <Delegate>Select User</Delegate>
+    </title>
+  </UITask>
+  <UIBPDefinition>
+    <header>
+      <id>Id</id>
+      <name>Naam</name>
+      <version>Versie</version>
+      <action>Actie</action>
+    </header>
+    <msg>
+      <empty>Geen bedrijfs proces om te beginnen</empty>
+    </msg>
+  </UIBPDefinition>
+  <UIControllerManager>
+    <action>
+      <title>
+        <ManageStart>Start beheer</ManageStart>
+      </title>
+    </action>
+  </UIControllerManager>
+  <UIDocumentForm>
+    <msg>
+      <cannot-save>Sommige beperkingen werden overtreden tijdens die actie.</cannot-save>
+      <in-versioning>gelieve huidige node te be�indigen om een nieuwe node toe te voegen</in-versioning>
+      <not-support>Kan template niet laden '{0}'.</not-support>
+      <value-invalid>'{0}' is vereiste waarde</value-invalid>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #####################################################################
+  ## Need to be translated Since version ECM 2.3                      #
+  #####################################################################
+  -->
+  
+  <PopupDelegatedSelectorId>
+    <title>
+      <UIUserSelectContainer>Select User</UIUserSelectContainer>
+    </title>
+  </PopupDelegatedSelectorId>  
+  
+ <!--
+  #############################################################################
+  #			     Since 2.0.0-Alpha02-SNAPSHOT tobe translate											#
+  #############################################################################
+  -->
+  <UIWorkflowControllerPortlet>
+    <msg>
+      <refresh-session-success>The session has been refreshed successfully</refresh-session-success>
+    </msg>
+    <label>
+      <refresh>Refesh</refresh>
+    </label>
+  </UIWorkflowControllerPortlet>
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+    </title>    
+  </PopupComponent>
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+      <rootNodePath>Root tree</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+</bundle>
+

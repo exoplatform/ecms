@@ -1,0 +1,19 @@
+
+h1. Using WebDAV
+
+
+ Accessing into a site by WebDAV view, you also normally see all default folders of a site. Manipulating on WebDAV likes
+manipulating on folders means you also can copy/paste, list, rename folders...as system directories.
+
+In here, users can take all actions with WebDAV as Window such as: copy, paste, delete files and documents:
+
+- Users can copy a HTML file and then paste in the *Web Content* Folder to create a new web content.
+- Users can copy a CSS file on *CSS* folder to change stylesheet for a site.
+- Users can copy a JS file in *JS* folder.
+- Users can copy some documents and then paste on the *Documents* folder.
+
+
+*Reference*
+
+# We can see how to use WebDAV at [WCM:WebDAV in WCM]
+

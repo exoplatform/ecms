@@ -1,0 +1,47 @@
+.exo_webContent {
+  background: url('icons/freeLayoutWebcontent.gif') no-repeat;
+  width: 277px;
+  height: 182px;
+}
+
+.exo_twoColumnsWebcontent {
+  background: url('icons/twoColumnsWebcontent.gif') no-repeat;
+  width: 277px;
+  height: 182px;
+}
+
+.exo_pictureOnHeadWebcontent {
+  background: url('icons/pictureOnHeadWebcontent.gif') no-repeat;
+  width: 277px;
+  height: 182px;
+}
+
+.exo_siteSearchBox {
+  background: url('icons/siteSearchBoxWebContent.gif') no-repeat;
+  width: 277px;
+  height: 182px;
+}
+
+.exo_siteNavigationWebContent {
+  background: url('icons/siteNavigationWebContent.gif') no-repeat;
+  width: 277px;
+  height: 182px;
+}
+
+.exo_siteBreadcrumb {
+  background: url('icons/siteBreadcrumWebContent.gif') no-repeat;
+  width: 277px;
+  height: 182px;
+}
+
+.single-content-viewer {
+  background: url('icons/SingleContentViewer.png') no-repeat;
+  width: 277px;
+  height: 182px;
+}
+
+.content-list-viewer {
+  background: url('icons/ContentListViewer.png') no-repeat;
+  width: 277px;
+  height: 182px;
+}

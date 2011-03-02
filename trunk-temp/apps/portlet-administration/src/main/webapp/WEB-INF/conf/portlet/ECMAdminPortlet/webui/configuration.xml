@@ -1,0 +1,17 @@
+<webui-configuration>
+  <annotation-classes>
+    <class>org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet</class>
+    <class>org.exoplatform.webui.core.UIPopupMessages</class> 
+    <class>org.exoplatform.ecm.webui.form.UIFormInputSetWithAction</class>
+    <class>org.exoplatform.ecm.webui.component.admin.nodetype.UIChildNodeDefinitionForm</class>
+    <class>org.exoplatform.ecm.webui.component.admin.nodetype.UIPropertyDefinitionForm</class>
+    <class>org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList</class>        
+    <class>org.exoplatform.ecm.webui.component.admin.views.UIViewForm</class>        
+    <class>org.exoplatform.ecm.webui.component.admin.views.UITabForm</class>        
+  </annotation-classes>
+
+  <application>
+    <ui-component-root>org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet</ui-component-root>
+    <state-manager>org.exoplatform.webui.application.portlet.ParentAppStateManager</state-manager>
+  </application>
+</webui-configuration>

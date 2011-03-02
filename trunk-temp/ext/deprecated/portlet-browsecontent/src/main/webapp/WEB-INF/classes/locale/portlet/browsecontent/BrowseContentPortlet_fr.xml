@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIConfigTabPane #
+  ###################################################################
+  -->
+  <UIConfigTabPane>
+    <tab>
+      <label>
+        <UIPathConfig>Configuration du répertoire</UIPathConfig>
+        <UINewConfigForm>Nouvelle configuration</UINewConfigForm>
+      </label>
+    </tab>
+  </UIConfigTabPane>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPathConfig #
+  ###################################################################
+  -->
+  <!--
+    ###################################################################
+		#	    FROM VERSION DMS 2.3-SNAPSHOT, we add filterCategory        #
+		#	    to display checkbox for filtering category tree             #
+		#	    base on permission of user                                  #
+    ###################################################################
+   -->
+  <UIPathConfig>
+    <label>
+      <categoryPath>Répertoire des catégories</categoryPath>
+      <workspace>Espace de travail</workspace>
+      <repository>Dépôt de données</repository>
+      <path>UIPathConfig</path>
+      <template>Formulaire</template>
+      <itemPerPage>Nombre d'items par page</itemPerPage>
+      <detailBoxTemp>Type d'affichage détaillé</detailBoxTemp>
+      <enableToolBar>Afficher la barre d'outils</enableToolBar>
+      <enableRefDoc>Documents référencés</enableRefDoc>
+      <filterCategory>Filtre les catégories selon les droits de l'utilisateur</filterCategory>
+      <enableChildDoc>Documents fils</enableChildDoc>
+      <enableTagMap>Carte des mots clés</enableTagMap>
+      <enableComment>Autoriser les commentaires</enableComment>
+      <enableVote>Autoriser les votes</enableVote>
+      <isAllowPublish>Afficher uniquement les documents "publiés"</isAllowPublish>
+    </label>
+    <title>Configuration du répertoire</title>
+    <action>
+      <Add>Nouvelle configuration</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Editer</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <require-path>Vous devez sélectionner le répertoire des catégories</require-path>
+      <invalid-path>Répertoire des catégories invalide</invalid-path>
+      <invalid-value>Numéro de page invalide</invalid-value>
+      <invalid-number>Vous devez insérer un nombre</invalid-number>
+      <access-denied>Accès interdit ! Vous n'avez pas les droits requis pour accéder à ce répertoire des catégories.</access-denied>
+    </msg>
+  </UIPathConfig>
+  <UIQueryConfig>
+    <msg>
+      <repostoryException>Peut-être avez vous un problème avcec votre requête. Vérifiez-la à nouveau.</repostoryException>
+      <noSuchNodeTypeException>Peut-être avez vous un problème avcec votre requête. Vérifiez-la à nouveau.</noSuchNodeTypeException>
+      <invalid-value>Nouvelle configuration</invalid-value>
+      <invalid-query>Chaîne de requête invalide</invalid-query>
+      <invalid-name>Requête introuvable, essayez un autre type, langage ou statut</invalid-name>
+    </msg>
+    <title>Configuration de requête</title>
+    <label>
+      <repository>Dépôt de données</repository>
+      <workspace>Espace de travail</workspace>
+      <queryLanguage>Langage de requête</queryLanguage>
+      <queryStatus>Statut de la requête</queryStatus>
+      <queryType>Type de requête</queryType>
+      <queryStore>Nom de la requête</queryStore>
+      <query>Requête</query>
+      <template>Formulaire</template>
+      <itemPerPage>Nombre d'items par page</itemPerPage>
+      <detailBoxTemp>Type d'affichage détaillé</detailBoxTemp>
+      <enableTagMap>Carte des mots clés</enableTagMap>
+      <enableComment>Autoriser les commentaires</enableComment>
+      <enableVote>Autoriser les votes</enableVote>
+      <isAllowPublish>Afficher uniquement les documents "publiés"</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nouvelle configuration</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Editer</Edit>
+      <Cancel>#{word.cancel}</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIQueryConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIQueryConfig #
+  ###################################################################
+  -->
+  <path>
+    <title>
+      <AddPath>Ajouter un chemin</AddPath>
+    </title>
+  </path>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Ajouter un noeud racine</AddRootNode>
+    </title>
+  </rootNodeInfo>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl		#
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Normal/Cliquer pour voter</normal>
+      <good>Bon/Cliquer pour voter</good>
+      <verygood>Très Bon/Cliquer pour voter</verygood>
+      <excellent>Excellent/Cliquer pour voter</excellent>
+      <best>Meilleur/Cliquer pour voter</best>
+    </title>
+    <button>
+      <label>
+        <cancel>#{word.cancel}</cancel>
+      </label>
+    </button>
+  </UIVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIScriptConfig #
+  ###################################################################
+  -->
+  <UIScriptConfig>
+    <title>Configuration de script</title>
+    <label>
+      <repository>Dépôt de données</repository>
+      <workspace>Espace de travail</workspace>
+      <scriptName>Nom du script</scriptName>
+      <template>Formulaire</template>
+      <detailBoxTemp>Type d'affichage détaillé</detailBoxTemp>
+      <enableTagMap>Carte des mots clés</enableTagMap>
+      <enableComment>Autoriser les commentaires</enableComment>
+      <enableVote>Autoriser les votes</enableVote>
+      <isAllowPublish>Afficher uniquement les documents "publiés"</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nouvelle configuration</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Editer</Edit>
+      <Back>#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIScriptConfig>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIDocumentConfig #
+  ###################################################################
+  -->
+  <UIDocumentConfig>
+    <title>Configuration de document</title>
+    <label>
+      <repository>Dépôt de données</repository>
+      <workspace>Espace de travail</workspace>
+      <categoryPath>Répertoire des catégories</categoryPath>
+      <path>UIDocumentConfig</path>
+      <doc>UIDocumentConfig</doc>
+      <docName>Nom du document</docName>
+      <detailBoxTemp>Type d'affichage détaillé</detailBoxTemp>
+      <enableComment>Autoriser les commentaires</enableComment>
+      <enableVote>Autoriser les votes</enableVote>
+      <isAllowPublish>Afficher uniquement les documents "publiés"</isAllowPublish>
+    </label>
+    <action>
+      <Add>Nouvelle configuration</Add>
+      <Save>#{word.save}</Save>
+      <Edit>Editer</Edit>
+      <Back>#{word.back}</Back>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <require-path>Vous devez d'abord sélectionner le répertoire des catégories</require-path>
+      <invalid-path>Répertoire des catégories invalide, veuillez en sélectionner un autre</invalid-path>
+      <require-doc>Vous devez sélectionner un document</require-doc>
+      <invalid-doc>Nom de document invalide, veuillez en sélectionner un autre</invalid-doc>
+    </msg>
+  </UIDocumentConfig>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UINewConfigForm #
+  ###################################################################
+  -->
+  <UINewConfigForm>
+    <label>
+      <repository>Sélection d'un dépot de données</repository>
+      <workspace>Espace de travail</workspace>
+      <browseType>Parcourir les contenus</browseType>
+    </label>
+    <title>Nouvelle configuration</title>
+    <action>
+      <Next>#{word.next}</Next>
+      <Back>#{word.back}</Back>
+    </action>
+  </UINewConfigForm>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UIToolBar      #
+  ###################################################################
+  -->
+  <UIToolBar>
+    <label>
+      <RootNode>Racine</RootNode>
+    </label>
+    <tooltip>
+      <Hidden>Cacher l'arborescence</Hidden>
+      <Show>Afficher l'arborescence</Show>
+      <showSearch>Afficher/Masquer le formulaire de recherche</showSearch>
+      <Back>#{word.back}</Back>
+      <Vote>Voter</Vote>
+      <Comment>Commenter</Comment>
+    </tooltip>
+    <msg>
+      <back-view-search>Retour à la vue précédente pour la recherche</back-view-search>
+      <select-doc>Aucun document sélectionné ou le document a été supprimé</select-doc>
+      <node-removed>Le document a été supprimé</node-removed>
+      <readonly-doc>Ce document est versionné. Veuillez d'abord effectuer un check out !</readonly-doc>
+      <not-support-vote>Votes non autorisés pour ce type de document</not-support-vote>
+      <not-support-comment>Commentaires non autorisés pour ce type de document</not-support-comment>
+      <node-is-locked>Le document est verrouillé ! Veuillez d'abord le déverrouiller.</node-is-locked>
+      <access-add-denied>Accès interdit. Vous n'avez pas les droits "d'ajout" sur ce document.</access-add-denied>
+    </msg>
+  </UIToolBar>
+  <!--
+  ###################################################################
+  #   org.exoplatform.ecm.webui.component.browse.UISearchController #
+  ###################################################################
+  -->
+  <UISearchController>
+    <label>
+      <nodePath>Vous êtes ici</nodePath>
+      <searchTime>Résultats</searchTime>
+      <duration>Durée</duration>
+      <nodeName>noeud(s)</nodeName>
+    </label>
+  </UISearchController>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBSearchForm #
+  ###################################################################
+  -->
+  <UICBSearchForm>
+    <label>
+      <inputValue>Rechercher</inputValue>
+      <option>Aucun label</option>
+      <search>Rechercher maintenant</search>
+      <referencesDoc>Références</referencesDoc>
+      <childDoc>Fils</childDoc>
+    </label>
+    <title>
+      <search>Rechercher maintenant</search>
+    </title>
+    <msg>
+      <not-empty>Veuillez saisir au moins un mot pour la recherche</not-empty>
+      <suggestion-keyword>Aucun résultat trouvé pour '{0}'.</suggestion-keyword>
+    </msg>
+  </UICBSearchForm>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UICBSearchResults #
+  ###################################################################
+  -->
+  <UICBSearchResults>
+    <header>
+      <name>Nom</name>
+      <path>Répertoire</path>
+      <action>Action</action>
+    </header>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <node-removed>Document introuvable (probablement déplacé ou supprimé)</node-removed>
+      <not-support>Visualisation de ce document impossible (formulaire non supporté)</not-support>
+      <not-permission>Accès interdit. Vous n'avez pas les droits privilège sur ce document.</not-permission>
+      <empty>Aucun résultat trouvé !</empty>
+    </msg>
+    <tooltip>
+      <Goto>Aller au dossier</Goto>
+      <View>Consulter</View>
+    </tooltip>
+  </UICBSearchResults>
+  <!--
+  ###################################################################
+  #    org.exoplatform.ecm.webui.component.browse.UIBrowseContainer #
+  ###################################################################
+  -->
+  <UIBrowseContainer>
+    <label>
+      <NoDocument>Aucun document dans cette catégorie</NoDocument>
+      <author>Auteur</author>
+      <summary>Sommaire</summary>
+      <more>Plus de documents</more>
+      <previous>Vue précédente</previous>
+      <path-Previous>Précédent</path-Previous>
+      <path-Root>Racine</path-Root>
+      <home>Accueil</home>
+      <cannot-access>Accès refusé. Peut-être n'avez-vous pas la permission suffisante dans la configuration de Portlet.</cannot-access>
+    </label>
+    <title>
+      <home>Accueil</home>
+      <prevTabs>Onglets Précédents</prevTabs>
+      <moreTabs>Plus d'Onglets</moreTabs>
+    </title>
+    <msg>
+      <template-notsupported>Aucun formulaire de visualisation trouvé pour ce document</template-notsupported>
+      <invalid-node>Document introuvable (probablement déplacé ou supprimé)</invalid-node>
+    </msg>
+  </UIBrowseContainer>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.JCRBrowser #
+  ###################################################################
+  -->
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Sélectionner un chemin</UIOneNodePathSelector>
+      <pathSelector>Sélection d'un répertoire</pathSelector>
+    </title>
+  </pathSelector>
+  <documentSelector>
+    <title>
+      <UIOneNodePathSelector>Sélectionner un document</UIOneNodePathSelector>
+    </title>
+  </documentSelector>
+  <UITreeList>
+    <header>
+      <name>Nom</name>
+      <action>Action</action>
+    </header>
+    <info>
+      <child-not-found>Pas de document fils</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UICBCommentForm #
+  ###################################################################
+  -->
+  <UICBCommentForm>
+    <label>
+      <title>Ajouter un commentaire</title>
+      <name>Nom</name>
+      <email>Email</email>
+      <website>Site Web</website>
+      <comment>Commentaires</comment>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+    <msg>
+      <locked-doc>Le document est verrouillé</locked-doc>
+      <versioning-doc>Le document est versionné</versioning-doc>
+      <error-vote>Erreur lors de l'ajout du commentaire</error-vote>
+      <comment-required>Un commentaire est requis</comment-required>
+    </msg>
+  </UICBCommentForm>
+  <UICBVoteForm>
+    <msg>
+      <locked-doc>Le document est verrouillé</locked-doc>
+      <versioning-doc>Le document est versionné</versioning-doc>
+      <error-vote>Erreur lors de l'enregistrement du vote</error-vote>
+    </msg>
+  </UICBVoteForm>
+  <!--
+  ###################################################################
+  #      org.exoplatform.ecm.webui.component.browse.UIPopupWindow #
+  ###################################################################
+  -->
+  <UICBPopupWindow>
+    <title>
+      <UICBCommentForm>Ajouter un commentaire</UICBCommentForm>
+      <UICBVoteForm>Voter pour ce document</UICBVoteForm>
+      <UIDocumentDetail>Visualiser ce document</UIDocumentDetail>
+    </title>
+  </UICBPopupWindow>
+  <!--
+  ###################################################################################
+  # JCR Browser																			  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Espace de travail</workspaceName>
+      <rootNodeInfo>Racine</rootNodeInfo>
+      <rootPath>Racine</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # UITagList																		  #
+  ###################################################################################
+  -->
+  <UITagList>
+    <label>
+      <tagTitle>Carte des mots clés</tagTitle>
+    </label>
+  </UITagList>
+  <UICategoryTree>
+    <label>
+      <title>Catégories</title>
+    </label>
+    <msg>
+      <invalid-node>Document introuvable (probablement déplacé ou supprimé)</invalid-node>
+    </msg>
+  </UICategoryTree>
+  <!--
+  ###################################################################################
+  #  org.exoplatform.ecm.webui.component.browse.UIBrowseContentHelp																  #
+  ###################################################################################
+  -->
+  <UIBrowseContentHelp>
+    <label>
+      <info>Vous êtes dans le mode 'Aide', Vous pouvez configurer la portlet en cliquant sur le mode 'Edition'</info>
+    </label>
+  </UIBrowseContentHelp>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator																			#
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>La valeur de ce chemin est nulle ou vide!</empty-input>
+      <Invalid-char>Il y a des caractères invalides dans ce champ. S'il vous plaît essayez une autre valeur!</Invalid-char>
+      <Invalid-char2>Des nombres doivent suivre le caractère '~'</Invalid-char2>
+      <Invalid-char1>Les nombres suivant le caractère '~' doivent être 0 ou 1</Invalid-char1>
+      <Invalid-char3>Des nombres doivent suivre le caractère '^'</Invalid-char3>
+      <Invalid-char4>Aucun espace n'est autorisé près du caractère '~'</Invalid-char4>
+      <Invalid-char5>Aucun espace n'est autorisé près du caractère '^'</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ######################################################################################
+  # Since ECM 2.3
+  ######################################################################################
+  -->
+  <UIPathConfig>
+    <label>
+      <searchEnable>Activer un emplacement de recherche</searchEnable>
+      <searchLocation>Emplacement de recherche</searchLocation>
+      <searchPath>UIPathConfig</searchPath>
+      <explain></explain>
+    </label>
+    <msg>
+      <enter-search-location>Un emplacement de recherche doit être spécifié</enter-search-location>
+      <explain>Quand la Portlet affiche une hiérarchie de catégories, il est nécessaire de spécifier l'emplacement où les documents sont en fait stockés, afin qu'ils puissent être trouvés par la fonctionnalité de recherche de la Portlet.</explain>
+    </msg>
+  </UIPathConfig>
+  
+  <UIDocumentForm>
+  	<msg>
+  		<not-support>Impossible de charger le modèle '{0}'.</not-support>
+  		<do-not-permission>Vous n'avez pas accès au modèle '{0}'.</do-not-permission>
+  	</msg>
+  </UIDocumentForm>
+  <!--
+	  ######################################################################################
+	  # Since ECM 2.6
+	  ######################################################################################
+	  -->
+  <Comments>
+	  <tooltip>
+	    <remove-comment>Remove this comment</remove-comment>
+	    <edit-comment>Edit this comment</edit-comment>
+	  </tooltip>
+		</Comments>
+		<UIDocumentDetail>
+		  <msg>
+		    <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+		  </msg>
+		</UIDocumentDetail>
+		<UIPopupWindow>
+			<title>
+				<UICBCommentForm>Input comment</UICBCommentForm>
+			</title> 
+		</UIPopupWindow>
+	<UIBrowseContainer>
+    <msg>
+			<symlinkNode-no-targetNode>Missing node : The target node has been moved or deleted or You don't have enough permission to access</symlinkNode-no-targetNode>
+    </msg>
+  </UIBrowseContainer>
+  <UIDocumentDetail>
+  	<tooltip>
+  		<remove-attachment>Delete this attached file</remove-attachment>
+  	</tooltip>
+  </UIDocumentDetail>
+  <DocumentDetail>
+  	<tooltip>
+  		<remove-attachment>Delete this attached file</remove-attachment>
+  	</tooltip>
+  </DocumentDetail>
+  
+  <UITagList>
+   <label>
+     <PublicTags>Public tags</PublicTags>
+     <PrivateTags>Private tags</PrivateTags>
+    </label>
+  </UITagList>
+  
+</bundle>

@@ -1,0 +1,63 @@
+<%
+    import org.exoplatform.wcm.webui.selector.content.one.UIContentBrowsePanelOne;
+  
+	def rcontext = _ctx.getRequestContext();
+	def jsManager = rcontext.getJavascriptManager();
+	
+	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
+	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
+	if (uicomponent instanceof UIContentBrowsePanelOne) {
+	  def uiBrowseOne = (UIContentBrowsePanelOne)uicomponent;
+      jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('one', '" +
+						  							uiBrowseOne.getInitDrive() + "', '" + 
+						  							uiBrowseOne.getInitPath()  + "', '" + 
+						  							uicomponent.id + "')");	  
+	}else 
+		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('one')");
+%>
+<div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
+	<div class="ActionBar">
+		<div class="FilterTitle">Filter</div>
+		<div class="FilterInput">
+			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter">
+				<option selected="selected" value="All">All</option>
+				<option value="Web Contents">Web Contents</option>
+				<option value="DMS Documents">DMS Documents</option>
+				<option value="Medias">Medias</option>
+			</select>
+		</div>
+		<div class="SeparatorLineL"><span></span></div>
+		<div style="clear: both;"><span></span></div>
+	</div>
+	<div class="BreadcumbsPortlet">
+		<div class="HomeIcon"><span></span></div> 
+		<div id="BreadcumbsContainer" class="BreadcumbsContainer"></div>
+	</div>
+	<div class="ListContainer">
+		<div class="LeftWorkspace" id="LeftWorkspace">
+		<div class ="LoadingProgress"><span></span></div>
+		</div>
+		<div class="RightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>">
+			<div class="MultiListContainer">
+				<div class="ListView">
+		  			<table cellspacing="0" style="table-layout: fixed; width: 100%; *width: 96%;" id="ListRecords">
+		    			<thead>
+		    				<tr>
+			    		  		<th class="THBar"> Name </th>
+			    		  		<th class="THBar"> Date Created </th>
+			    		  		<th class="THBar"> Size </th>
+			    	 		</tr>
+				    	</thead>
+				    	<body>
+			    		<tr>
+				    		<td class="Item TRNoContent" colSpan="3">There is no content</td>
+		    			</tr>
+		    			</body>
+		  			</table>
+				</div>
+				<div class="PageIterator" id="pageNavPosition"></div>
+			</div>
+		</div>
+		<div style="clear: left;"><span></span></div>
+	</div>
+</div>

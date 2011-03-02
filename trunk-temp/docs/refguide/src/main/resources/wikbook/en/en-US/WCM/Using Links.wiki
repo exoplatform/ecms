@@ -1,0 +1,45 @@
+
+h1. Using Links
+
+We can insert external links, internal links and DMS document links. 
+
+h2. How to insert External Links
+
+1\. Go to *Site Content Management*--> *Sites Explorer* page on the Navigation bar. Then just need to access to *managed sites* drive to manage all sites in a place.
+
+2. Choose *Links* folder on the portal, which a user wants to create external links -> then choose *details select view -> and choose *actions tab* 
+
+ !WCSitesE.PNG! 
+
+
+3. Click the add new document !ANew.gif! icon to create a link in this form:
+
+ !Links.gif! 
+
+4. Then click the *Save* button to finish creating the external link.
+
+
+5. Go to create the web content by *sites explorer* or by *presentation portlet*-> at main content step-> click !linkI.gif! to choose external link or type external link.
+
+ !Links1.gif! 
+
+In here, we can type the new external link or click the !Link5.gif! icon to browse the created link on sites explorer.
+
+
+
+h2. How to insert Internal Links
+
+
+
+This function helps users insert an internal link on all sites on the system as acme, classic, shared portal when users create a web content. We can do as below:
+
+1\. Go to create a web content by *sites explorer* or by *single content viewer* portlet-> at main content step-> click the !Links3.gif! icon to choose an internal link. We can see the below interface:
+
+ !Links2.gif! 
+
+
+2. Click the *Save* button to finish inserting the internal link.
+
+
+
+

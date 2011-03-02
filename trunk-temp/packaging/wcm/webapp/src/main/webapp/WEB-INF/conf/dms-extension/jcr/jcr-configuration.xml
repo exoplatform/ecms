@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
+  xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+  
+  <component>
+    <key>org.exoplatform.services.jcr.ext.audit.AuditService</key>  
+    <type>org.exoplatform.services.jcr.ext.audit.AuditServiceImpl</type>
+      <init-params>
+        <!-- Group or user who may view audit information -->
+        <value-param>
+          <name>adminIdentity</name>
+          <value>*:/Platform/Administrators</value>
+        </value-param>
+        <value-param>
+          <name>repository</name>
+          <value>repository</value>
+      </value-param>
+    </init-params>
+  </component>	
+	
+  <external-component-plugins>
+    <!-- The full qualified name of the RepositoryServiceConfiguration -->
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+		    <component-plugin>
+      <name>add.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <init-params>
+        <values-param>
+           <name>autoCreatedInNewRepository</name>
+           <description>Node types configuration file</description>
+           <value>jar:/conf/jcr-audit-nodetypes.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>		
+  </external-component-plugins>
+	
+  <external-component-plugins>
+    <!-- The full qualified name of the RepositoryServiceConfiguration -->
+    <target-component>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</target-component>
+    <component-plugin>
+      <!-- The name of the plugin -->
+      <name>Sample RepositoryServiceConfiguration Plugin</name>
+      <!-- The name of the method to call on the RepositoryServiceConfiguration in order to add the RepositoryServiceConfigurations -->
+      <set-method>addConfig</set-method>
+      <!-- The full qualified name of the RepositoryServiceConfigurationPlugin -->
+      <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationPlugin</type>
+      <init-params>
+        <value-param>
+          <name>conf-path</name>
+          <description>JCR configuration file</description>
+          <value>war:/conf/dms-extension/jcr/repository-configuration.xml</value>
+        </value-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+</configuration>

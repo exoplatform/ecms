@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Modifier les congés</task-name>
+  <title>Modifier les congés</title>
+  <submit>
+    <submit>Modifier</submit>
+    <value>Modifier les congés</value>
+  </submit>
+  <cancel>
+    <submit>Refuser</submit>
+    <value>Refuser</value>
+  </cancel>
+  <!--
+  #variable title and label
+  -->
+  <start>
+    <title>Début des congés :</title>
+    <label>Début (jj/mm/aaaa) :</label>
+  </start>
+  <end>
+    <title>Fin des congés :</title>
+    <label>Fin (jj/mm/aaaa) :</label>
+  </end>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

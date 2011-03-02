@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <task-name>Request a pay raise</task-name>
+  <title>Request a pay raise</title>
+  <submit>Submit</submit>
+  <!--
+  #variable title and label
+  -->
+  <reason>
+    <title>reason why you think you earn this payraise</title>
+    <label>Reason:</label>
+  </reason>
+  <amount-asked>
+    <title>the amount you want your salary to be increased</title>
+    <label>Amount:</label>
+  </amount-asked>
+  <rewarded>
+    <title>was the requester rewarded</title>
+    <label>Rewarded:</label>
+    <checkbox>Yes I was rewarded!</checkbox>
+  </rewarded>
+  <priority>
+    <title>the priority the request should have</title>
+    <label>Priority:</label>
+    <select-0>not important</select-0>
+    <select-1>important</select-1>
+    <select-2>critical</select-2>
+  </priority>
+  
+  <cancel>Cancel</cancel>
+</bundle>
+

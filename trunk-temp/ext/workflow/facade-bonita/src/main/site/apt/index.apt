@@ -1,0 +1,52 @@
+eXo Bonita user guide
+  
+  This guide provides an introduction to the Workflow services brought by Bonita in
+  eXo Platform. It should be helpful to read, as a supplement, information provided
+  by "Workflow portlets" and "Bonita business processes" sections.
+
+  {{{http://bonita.objectweb.org/}Bonita}} is a J2EE workflow system providing
+  out of the box workflow functionalities to define and run business processes
+  such the XPDL workflow defintion module, the J2EE based workflow engine, the
+  JMS based awareness infrastructure or the interoperability services. Bonita 
+  is Open Source and is downloadable under the LGPL License. 
+
+
+  The goal of this service is three folds:
+
+  * to enable users to manage Bonita business processes they are involved in through a
+    JSR 168 user interface,
+
+  * to enable administrators to deploy, manage and monitor Bonita business processes,
+
+  * to manage the lifecycle of documents processed by the Enterprise Content Management
+   (ECM) system.
+
+Online Demonstration
+
+  This is an online Flash demo illustrating eXo-Bonita capablities. It demonstrates a use
+  case where a document is submitted for approval before being published on the Portal.
+
+[images/demonstration.jpg]
+
+  {{{files/eXoECM-JOnAS-Bonita-content-validation.htm}Start Demo !}}
+
+Installation
+
+  JOnAS is the default J2EE 1.4 certified application server leveraged by Bonita to run.
+  eXo Bonita comes as a zip patch to apply on top of JOnAS. It bundles eXo ECM, 
+  Bonita and all required configuration settings. The Bonita Struts Web application has
+  been disabled, as its features are covered by the Portal.
+
+  You might want to download the zip file from the 
+  {{{http://forge.objectweb.org/project/showfiles.php?group_id=151}ObjectWeb forge}}. 
+  Download the most recent file called "eXoECM-JOnAS-Bonita-[version].zip". Updated information to
+  complete the install is included in the root of the zip.
+
+Credits
+
+  The corresponding code was brought in open source by {{{http://www.bull.com/}Bull S.A.S}}. It is
+  committed in the eXo source code repository. The license model is the same as the one used in eXo
+  products. The Bonita project source code is hosted as a separate project in the
+  Objectweb consortium  {{{http://bonita.objectweb.org/}http://bonita.objectweb.org}}.
+
+[]

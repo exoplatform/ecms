@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPCLVContainer>
+    <title>
+      <QuickEdit>تفضيلات</QuickEdit>
+    </title>
+  </UIPCLVContainer>
+
+  <UIParameterizedManagerPopupWindow>
+    <title>
+      <UIPCLVConfig>معلمات تكوين قائمة المحتويات المشاهد</UIPCLVConfig>
+    </title>
+  </UIParameterizedManagerPopupWindow>
+
+  <UIPCLVConfig>
+    <label>
+      <Title>معلمات تكوين قائمة المحتويات المشاهد</Title>
+      <ContentSelectionBlock>اختيار موجز</ContentSelectionBlock>
+      <OrderBy>تصنيف</OrderBy>
+      <option>
+        <exo:title>لقب</exo:title>
+        <exo:dateCreated>تاريخ الإنشاء</exo:dateCreated>
+        <exo:dateModified>تاريخ التعديل</exo:dateModified>
+        <publication:liveDate>تاريخ النشر</publication:liveDate>
+        <exo:startEvent>تاريخ الحدث</exo:startEvent>
+      </option>
+      <DisplaySettingBlock>إعداد الشاشة</DisplaySettingBlock>
+      <Header>رأس</Header>
+      <AutomaticDetection>الكشف التلقائي</AutomaticDetection>
+      <FormViewTemplate>عرض نموذج</FormViewTemplate>
+      <PaginatorTemplate>ترحيل النموذجي</PaginatorTemplate>
+      <UICategoryNavigationTreeNameFormSelectBox>شجرة التصنيف</UICategoryNavigationTreeNameFormSelectBox>
+      <ItemsPerPage>البنود لكل صفحة</ItemsPerPage>
+      <ViewerTitle>تظهر عنوان</ViewerTitle>
+      <ViewerHeader>تظهر رأس</ViewerHeader>
+      <ViewerButtonRefresh>عرض زر التحديث</ViewerButtonRefresh>
+      <ViewerThumbnailsView>عرض التوضيح</ViewerThumbnailsView>
+      <ViewerDateCreated>إظهار تاريخ الخلق </ViewerDateCreated>
+      <ShowReadMore>قرأ</ShowReadMore>
+      <ViewerSummary>عرض موجز</ViewerSummary>
+      <ShowRSSLink>RSS عرض رابط </ShowRSSLink>
+      <ShowLink>إظهارا</ShowLink>
+      <LinkFormatBlock>تنسيق الارتباط</LinkFormatBlock>
+      <UIParameterizedTagetPageInputSetAction>صفحة مستهدفة </UIParameterizedTagetPageInputSetAction>
+    </label>
+    <action>
+      <Save>حفظ</Save>
+      <Cancel>إلغاء</Cancel>
+    </action>
+  </UIPCLVConfig>
+
+  <OrderTypes>
+    <label>
+      <OrderDesc>تنازلي</OrderDesc>
+      <OrderAsc>تصاعدي</OrderAsc>
+    </label>
+  </OrderTypes>
+
+  <UIParameterizedTagetPageInputSetAction>
+    <title>
+      <SelectTargetPage>حدد هدف الصفحة</SelectTargetPage>
+    </title>
+  </UIParameterizedTagetPageInputSetAction>
+</bundle>

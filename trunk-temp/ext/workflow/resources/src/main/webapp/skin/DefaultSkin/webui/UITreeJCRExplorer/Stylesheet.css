@@ -1,0 +1,79 @@
+.UIJCRBrowser {
+	padding: 10px;
+}
+
+.ExplorerTree {
+  float: left ;
+  width: 230px ;
+  background: #f3f3f3;
+}
+
+.ExplorerTree .InnerExplorerTree {
+  border: solid 1px #b1b0b0;
+  padding: 10px;
+}
+
+.UITreeList {
+  margin-left: 240px;
+}
+
+.UITreeList table {
+	*width: 94%;
+}
+
+.UITreeList table .Icon16x16 {
+	float: none;
+	margin: 5px;
+}
+
+.Select16x16Icon {
+ width: 16px; height: 16px;
+ background-image: url('images/SelectPage.gif');
+ cursor: pointer;
+}
+
+.UITreeList .Text {
+	padding-left: 24px;
+}
+
+.UIOneNodePathSelector {
+	padding: 10px;
+}
+
+.UICategoriesSelector .UITabPane .TabPaneContent {
+  overflow: hidden;
+  padding: 8px;
+}
+
+.UICategoriesSelector .ExplorerTree {
+  float: left ;
+  width: 230px ;
+  background: #f3f3f3;
+  margin:10px;
+}
+
+.UICategoriesSelector .UIBreadcumbs {
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.UICategoriesSelector .UISelectedCategoriesGrid {
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.UICategoriesSelector .UICategoriesSelectPanel {
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 250px;
+}
+
+.UIOneNodePathSelector .UIBreadcumbs {
+	padding-bottom: 10px;
+}
+
+.UITaxonomyManager .UIBreadcumbs {
+	padding-bottom: 10px;
+}

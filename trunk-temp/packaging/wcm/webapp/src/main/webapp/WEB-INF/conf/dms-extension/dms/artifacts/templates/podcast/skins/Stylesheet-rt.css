@@ -1,0 +1,45 @@
+/**
+  RTL skin for exo:podcast template
+*/
+.PostCast {
+  padding: 8px;
+}
+
+.ContentPodcast {
+	border-bottom: 1px solid #bdbdbd; 
+	height: 25px;
+	line-height: 25px;
+	
+}
+
+.PostCast .TitleBG span.text { 
+	line-height: 20px;
+	padding-right: 5px;
+}
+
+.ContentPodcast .text  { 
+	vertical-align:bottom; 
+	text-align: right;
+	font-weight: bold;
+}
+.ContentPodcast .TextDetail{
+	text-align: right;
+	vertical-align:bottom;
+}
+
+.ContentPodcast .text span  { 
+	font-weight: normal;
+}
+
+.PostCast .summary { 
+	height: 160px ; 
+	padding: 5px 10px 5px 5px;
+	font-weight: normal;
+	overflow: auto;
+} 
+
+.PostCast .content { 
+	font-size: 11px; 
+	padding: 5px; 
+	overflow: auto;
+}

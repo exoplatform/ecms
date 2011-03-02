@@ -1,0 +1,10 @@
+LockService is used to manage lock services which enable the user to lock, unlock, assign.
+
+|| *Method* || *Return* || *Prototype* || *Desription* ||
+| *getPreSettingLockList* | {{List<String>}} | getPreSettingLockList() throws Exception; | Get predefined locked list{example}{example}@throws Exception |
+| *getAllGroupsOrUsersForLock* | {{List<String>}} | getAllGroupsOrUsersForLock() throws Exception; | This method will get collection of groups or users which are under locked status   {example}{example}@return  List of group or user        {example}{example}@throws Exception |
+| *addGroupsOrUsersForLock* | {{void}} | addGroupsOrUsersForLock(String groupsOrUsers) throws Exception; | Add group or user to lock priviledge list{example}{example}@param  {example}{example}groupsOrUsers{example}{example}Name of group or use{example}{example}@throws Exception |
+| *removeGroupsOrUsersForLock* | {{void}} | removeGroupsOrUsersForLock(String groupsOrUsers) throws Exception; | Method allow to remove a group or users from the priviledge list   {example}{example}@paramgroupsOrUsers{example}{example}Name of groups or users {example}{example}@throws Exception |
+
+
+

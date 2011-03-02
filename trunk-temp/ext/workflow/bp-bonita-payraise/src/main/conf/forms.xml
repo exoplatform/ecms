@@ -1,0 +1,37 @@
+<forms>
+
+  <form>
+    <!-- The Start name is an empty String in the Bonita implementation -->
+    <state-name></state-name>
+    <resource-bundle>start</resource-bundle>
+    <variable name="amount-asked" mandatory="true"/>  	
+    <variable name="priority" component="select" />
+    <variable name="rewarded" component="checkbox" />    
+    <variable name="reason" component="textarea"/>
+    <!-- No need to specify Submit buttons in the Bonita implementation -->
+  </form>
+
+  <form>
+    <resource-bundle>evaluation</resource-bundle>
+    <state-name>evaluation</state-name>
+    <variable name="initiator" editable="false"/>
+    <variable name="reason" component="textarea" editable="false"/>    
+    <variable name="priority" editable="false"/>
+    <variable name="rewarded" component="checkbox" editable="false"/>      
+    <variable name="amount-asked" editable="false" />
+    <variable name="amount-granted" mandatory="true"/>
+    <submitbutton name="grant" transition-name="grant" variable="decisionEvaluation" />
+    <submitbutton name="deny" transition-name="deny" variable="decisionEvaluation" />
+    <!-- No need to specify Submit buttons in the Bonita implementation -->
+  </form>
+
+  <form>
+    <resource-bundle>hr</resource-bundle>
+    <state-name>hr</state-name>
+    <customized-view>hr.gtmpl</customized-view>
+    <variable name="initiator" />
+    <variable name="amount-granted"/>
+    <!-- No need to specify Submit buttons in the Bonita implementation -->
+  </form>
+
+</forms>

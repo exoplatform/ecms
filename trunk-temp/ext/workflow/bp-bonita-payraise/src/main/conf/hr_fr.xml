@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ########### From version 1.0-SNAPSHOT ###########
+  ########### Add language for French   ###########
+  -->
+  <task-name>update the salary system</task-name>
+  <title>Update Salary</title>
+  <submit>Confirm update</submit>
+  <!--
+  #variable title and label
+  -->
+  <initiator>
+    <label>Employee :</label>
+  </initiator>
+  <amount-granted>
+    <label>Amount to be added :</label>
+  </amount-granted>
+  <my-custom-groovy-form>My custom groovy form</my-custom-groovy-form>
+  <cancel>Cancel</cancel>
+  <finish-it>Finish it</finish-it>
+</bundle>
+

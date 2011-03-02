@@ -1,0 +1,119 @@
+.UICLVPortlet .UIContentListPresentationDefault {
+  border: 1px solid #b7b7b7;
+  margin: 10px;
+  background: #fff;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption {
+  padding: 10px;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Header {
+  background: url(icons/BgCategoryTitle1x25.gif) repeat-x;
+  border-bottom: 1px solid #B7B7B7;
+  line-height: 25px;
+  padding-left: 10px;
+  font-weight: bold;
+  color: #424242;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionItem {
+  border-bottom: 1px dotted #2f2f2f;
+  padding-top: 10px;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionTitle a {
+  font-size: 14px;
+  color: #0385d9;
+  font-weight: bold;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionTitle .CaptionDraft {
+  color: gray;
+  font-size: 11px;
+  height: 16px;
+  padding: 0 3px 3px 20px;
+  width: 50px;
+  background: url(icons/DraftIcon.gif) no-repeat;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionTitle .CaptionEdit {
+  width: 16px;
+  height: 16px;
+  font-size: 11px;
+  font-weight: normal;
+  padding: 0 3px 3px 20px;
+  background: url(icons/Edit.gif) no-repeat;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionTitle .CaptionDelete {
+  width: 16px;
+  height: 16px;
+  font-size: 11px;
+  font-weight: normal;
+  padding: 0 3px 3px 20px;
+  background: url(icons/Delete.gif) no-repeat;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionDate {
+  color: #8f8f8f;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionContent {
+  overflow: auto;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionContent p {
+  padding: 5px 0;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionContent pre {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  white-space: normal;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionContent img {
+  float: left;
+  margin: 5px 10px 0 0;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionViewMore {
+  text-align: right;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionViewMore a {
+  color: #fd711c;
+  font-size: 10px;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionFunc {
+  padding: 10px 0;
+  height: 1%;
+  overflow: hidden;
+  margin: 2px 0px;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionFunc .CaptionRefresh {
+  width: 200px;
+  float: left;
+}
+
+.UICLVPortlet .UIContentListPresentationDefault .Caption .CaptionFunc .CaptionRefresh a {
+  display: block;
+  padding: 0 3px 3px 25px;
+  background: url(icons/RefreshIcon.gif) no-repeat;
+  color: #ff4200;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.OneColumnCLVTemplate .Contents .Column1 img {
+  width: 51px;
+}
+
+.UICLVPortlet .TopBox {
+  line-height: 30px;
+  padding: 0px 10px;
+  margin-bottom: 1px;
+}
+

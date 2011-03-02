@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Mot-clé</keyword>
+      <portal>Portail</portal>
+      <Page>Page</Page>
+      <Document>Document</Document>
+    </label>
+    <action>
+      <Search>Recherche</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Page</Page>
+      <Document>Document</Document>
+      <DocumentAndPage>Document et page</DocumentAndPage>
+      <documentandpage>document et page</documentandpage>
+      <resutlsCaption>Résultats</resutlsCaption>
+      <ofAboutCaption>sur</ofAboutCaption>
+      <forCaption>pour</forCaption>
+      <timeUnitCaption>seconde</timeUnitCaption>
+      <similar>Pages où apparaît le même contenu</similar>
+      <editor>Sous la direction de</editor>
+    </label>
+    <action>
+      <edit>Modifier</edit>
+    </action>
+    <msg>
+      <your-search>Votre recherche</your-search>
+      <did-not-match>ne correspond à aucun</did-not-match>
+      <new-suggestion>Suggestion</new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Articles par page</itemsPerPageSelector>
+      <searchFormSelector>Formulaire de recherche de modèle</searchFormSelector>
+      <searchResultSelector>Résultat de la recherche de modèle</searchResultSelector>
+      <searchPaginatorSelector>Paginator modèle de recherche</searchPaginatorSelector>
+      <searchPageLayoutSelector>Mise en page modèle de recherche</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base de chemin</searchResultBasePathInputSetAction>
+    </label>
+    <action>
+      <Save>Sauver</Save>
+      <Cancel>Annuler</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <UISearchForm>
+  	 <message>
+  	   <keyword-not-empty>The value of keyword is not null or empty!</keyword-not-empty>
+  	 </message>
+  </UISearchForm>
+</bundle>

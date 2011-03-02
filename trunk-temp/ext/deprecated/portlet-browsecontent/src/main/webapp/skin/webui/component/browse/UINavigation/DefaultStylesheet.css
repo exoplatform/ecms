@@ -1,0 +1,351 @@
+/**
+ * Created by The eXo Platform SARL
+ * Author : pham tuan
+ *          phamtuanchip@gmail.com
+ * DEC 14, 2006
+ * version: $Id$
+ */
+
+/*###########################-- Begin UIContextMenu --############################*/
+.UICBNavigation .UIContextMenu {
+  border: solid 1px #C0C0C0;
+  position: absolute;
+  padding:1px;
+  display: none;
+}
+
+.UIContextMenu .SubContextMenu {
+  border: solid 1px #E1E1E1; 
+  background: #ffffff;
+  width: auto; 
+}
+
+.UIContextMenu .NodeHistoryContainer {
+	white-space: nowrap;
+	margin-right: 5px; /* orientation=lt */
+	margin-left: 5px; /* orientation=rt */
+}
+
+.UIContextMenu .NodeHistoryContainer a {
+	display: block;
+}
+
+.UIContextMenu .NodeHistoryContainer .NodeNavigationIcon {
+	height: 24px;
+	margin: 4px;
+	background: url('../DefaultSkin/background/GreenLeftArrowFolder.gif') no-repeat left top; /* orientation=lt */
+	background: url('../DefaultSkin/background/GreenLeftArrowFolder-rt.gif') no-repeat right top; /* orientation=rt */
+	padding-left: 30px; /* orientation=lt */
+	padding-right: 30px; /* orientation=rt */
+	float: none;
+}
+
+.UIContextMenu .NodeHistoryContainer .NodeItemIcon {	
+	background: url('DefaultSkin/background/SmallSelect.gif') no-repeat left center; /* orientation=lt */
+	background: url('DefaultSkin/background/SmallSelect-rt.gif') no-repeat right center; /* orientation=rt */
+	margin: 2px 2px 2px 10px; /* orientation=lt */
+	margin: 2px 10px 2px 2px; /* orientation=rt */
+	padding-left: 20px; /* orientation=lt */
+	padding-right: 20px; /* orientation=rt */
+}
+
+.UIContextMenu .NodeHistoryContainer .BackButtonLabel {  
+  cursor: pointer;
+  line-height: 24px;
+  margin-top: 6px;
+  font-weight: bold;  
+}
+
+.UIContextMenu .NodeHistoryContainer .NodeLabel {
+  line-height: 16px;  
+  float: none;
+}
+
+.UIContextMenu .NodeHistoryContainer .NodeLabelSelected {
+  color: #058ee6;
+  font-weight: bold;
+  line-height: 20px;
+  float: none;
+}
+
+.UIContextMenu .NodeHistoryContainer a {
+	color: #515151;	
+}
+
+.UIContextMenu .NodeHistoryContainer a:hover { 
+	color: blue;
+}
+
+/*###########################-- End UIContextMenu --############################*/
+.UICBNavigation {
+}
+
+.UICBNavigation .CBLeftNavigation {
+  background: url('DefaultSkin/background/LeftHorizontalTabBG4x26.gif') no-repeat left;
+  padding-left: 4px;
+}
+
+.UICBNavigation .CBRightNavigation {
+  background: url('DefaultSkin/background/RightHorizontalTabBG4x26.gif') no-repeat right;
+  padding-right: 4px;
+}
+
+.UICBNavigation .CBMiddleNavigation {
+	line-height: 26px;
+  background: url('DefaultSkin/background/CenterHorizontalTabBG1x26.gif') repeat-x ;
+}
+
+.UICBNavigation .CBMiddleNavigation .FixHeight {
+	height: 26px;
+}
+
+.UICBNavigation .UICBMainNavigation {
+	height: 25px;
+  font-size: 11px;
+}
+
+.UICBNavigation .UICBMainNavigation .HomeTab {
+	height: 21px; line-height: 21px;
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 100px;
+}
+
+.UICBNavigation .HomeTab .LeftHomeTab {
+  background: url('DefaultSkin/background/LeftCBHomeTab10x21.gif') no-repeat left top;
+	padding-left: 10px;
+	height: 21px;
+}
+
+.UICBNavigation .HomeTab .RightHomeTab {
+  background: url('DefaultSkin/background/RightCBHomeTab10x21.gif') no-repeat right top;
+  padding-right: 10px;
+  height: 21px;
+}
+
+.UICBNavigation .HomeTab .MiddleHomeTab {
+	height: 21px; line-height: 21px;
+  background: url('DefaultSkin/background/CenterCBHomeTab1x21.gif') repeat-x left top;
+}
+
+.UICBNavigation .HomeTab a {
+	line-height: 21px; vertical-align: middle;
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	margin-left: 5px; /* orientation=lt */
+	margin-right: 5px; /* orientation=rt */
+	font-weight: bold;
+	color: #333333;
+}
+
+.UICBNavigation .HomeTab a:hover {
+	color: #058ee6;
+}
+
+.UICBNavigation .HomeTab .LeftIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	margin: 2px 0px 0px 0px;
+	cursor: pointer;
+}
+
+.UICBNavigation .HomeTab .RightIcon {
+  float: right; /* orientation=lt */
+  float: left; /* orientation=rt */
+  margin: 2px 0px 0px 0px;
+  cursor: pointer;
+}
+
+.UICBNavigation .UIHorizontalTabs {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+}
+
+.UICBNavigation .UIHorizontalTabs .TabsContainer {
+	width: 99.5%;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	height: 23px;
+	padding-left: 2px; /* orientation=lt */
+	padding-right: 2px; /* orientation=rt */
+}
+
+.UICBNavigation .UIHorizontalTabs .TabIcon {
+	width: 16px;
+	height: 16px;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBNormalTab {
+	margin-top: 1px;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBNormalTab .LeftTab {
+  padding-left: 4px;
+  background: url('DefaultSkin/background/LeftCBTab4x22.gif') no-repeat left;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBNormalTab .RightTab {
+  padding-right: 4px;
+  background: url('DefaultSkin/background/RightCBTab4x22.gif') no-repeat right;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBNormalTab .MiddleTab {
+  background: url('DefaultSkin/background/CenterCBTab1x22.gif') repeat-x center;
+  line-height: 22px;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBNormalTab .Icon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 16px; height: 16px;
+  margin: 3px 5px 0px 2px; /* orientation=lt */
+  margin: 3px 2px 0px 5px; /* orientation=rt */
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBNormalTab .LabelButton {
+  line-height: 22px;
+  font-weight: bold;
+  vertical-align: middle;
+  padding: 0px 5px;
+  color: black;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBNormalTab .LabelButton a { 
+	text-decoration: none;
+  color: #333333;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBNormalTab .LabelButton a:hover { 
+	text-decoration: none;
+	color: #ff9314;
+}
+/*###########################-- Selected Tabs --############################*/
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBSelectedTab {
+	margin-top: 1px;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBSelectedTab .LeftTab {
+  padding-left: 4px;
+  background: url('DefaultSkin/background/LeftSelectedCBTab4x23.gif') no-repeat left;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBSelectedTab .RightTab {
+  padding-right: 4px;
+  background: url('DefaultSkin/background/RightSelectedCBTab4x23.gif') no-repeat right;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBSelectedTab .MiddleTab {
+	line-height: 22px;
+  background: url('DefaultSkin/background/CenterSelectedCBTab1x23.gif') repeat-x  center;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBSelectedTab .Icon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  width: 16px; height: 16px;
+  margin: 3px 0px 0px 2px; /* orientation=lt */
+  margin: 3px 2px 0px 0px; /* orientation=rt */
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBSelectedTab .LabelButton {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+  line-height: 22px;
+  font-weight: bold;
+  vertical-align: middle;
+ 	padding: 0px 5px;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBSelectedTab .LabelButton a { 
+	text-decoration: none;
+  color: #058ee6;
+}
+
+.UICBNavigation .UIHorizontalTabs .UITab .CBSelectedTab .LabelButton a:hover { 
+  color: #ff9314;
+}
+
+/*###########################-- End Selected Tabs --############################*/
+
+.UICBNavigation .NavigationButtonContainer {
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	height: 16px;
+	margin-top: 3px;
+}
+
+.UICBNavigation .NavigationButtonContainer .NavigationIcon {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	cursor: pointer;
+	/*margin-top: 3px;*/
+}
+
+.UICBNavigation .CBMiddleNavigation .UICBSubNavigation { 
+  line-height: 19px;	
+	padding-left: 4px; /* orientation=lt */
+	padding-right: 4px; /* orientation=rt */
+	height: 19px;
+}
+
+.UICBNavigation .UICBSubNavigation .ItemContainer { 
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+}
+
+.UICBNavigation .UICBSubNavigation .ItemIcon {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+  margin-top: 2px;
+}
+
+.UICBNavigation .UICBSubNavigation a { 
+	text-decoration: none;
+	color: #515151; font-size: 11px; font-weight: bold;
+}
+
+.UICBNavigation .UICBSubNavigation a:hover { 
+	text-decoration: none;
+	color: #058ee6;
+}
+
+.UICBNavigation .UICBSubNavigation .NodeLabel { 
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	line-height: 18px;
+	text-decoration: none;
+	padding: 1px 5px 0px 5px;
+  position: relative;
+}
+
+.UICBNavigation .UICBSubNavigation .LinkSmall {
+	background: url('DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  right: 0; /* orientation=lt */
+  left: 0; /* orientation=rt */
+  bottom: 0px;
+}
+
+.UICBNavigation .SeparatorLine { 
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	background: url('DefaultSkin/background/SeparatorLine1x2.gif') repeat-y;  
+	margin: 3px 3px;
+	height: 18px; width: 1px;
+}
+
+.UICBNavigation .UICBSubNavigation .RightIcon { 
+	float: right; /* orientation=lt */
+	float: left; /* orientation=rt */
+	cursor: pointer;
+	margin: 2px 3px 0px 0px; /* orientation=lt */
+	margin: 2px 0px 0px 3px; /* orientation=rt */
+}
+
+/*###########################-- End UITabs --############################*/

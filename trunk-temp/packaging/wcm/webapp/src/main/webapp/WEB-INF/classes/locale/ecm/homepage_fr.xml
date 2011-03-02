@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <Homepage>
+    <ecm>
+      <label>
+        <slogan>"Donnez vie à vos documents !</slogan>
+        <productIntro>A travers des fonctionnalités collaboratives avancées."</productIntro>
+        <FE>
+			<name>Explorateur de Fichiers</name>
+			<bullet1>Interface Graphique intelligente et extensible</bullet1>
+			<bullet2>Fonctionnalitées avancées telles que le clic droit et le Glisser-Dépose</bullet2>
+			<bullet3>Arbres de taxonomies</bullet3>
+			<bullet4>Liens symboliques</bullet4>
+			<bullet5>Action, Audit, Tag et beaucoup d'autres fonctionnalités !</bullet5>
+		</FE>
+		<CB>
+			<name>Navigateur de contenu</name>
+			<bullet1>Trouver/Afficher vos documents facilement</bullet1>
+			<bullet2>Nuage de tags</bullet2>
+			<bullet3>Commentaire, Vote</bullet3>
+			<bullet4>Recherche Rapide</bullet4>
+			<bullet5>Vue Personnalisable</bullet5>
+		</CB>
+		<ECMA>
+			<name>Administration de l'ECM</name>
+			<bullet1>Interface Graphique extensible</bullet1>
+			<bullet2>Gestion des Taxonomies</bullet2>
+			<bullet3>Gestion des Vues</bullet3>
+			<bullet4>Gestion des Formulaires</bullet4>
+			<bullet5>Gestion des Scripts et beaucoup d'autres fonctionnalités !</bullet5>
+		</ECMA>        
+      </label>
+    </ecm>
+  </Homepage>
+</bundle>

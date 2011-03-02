@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.wcm.component.cache.UIWCMCacheForm #
+  ################################################################################
+  -->
+  <!-- Credited to Google Translate -->
+ <UIWCMCacheForm>
+ 	 <action>
+ 	 		<Refresh>Aktualisieren</Refresh>
+ 	 		<Save>Speichern</Save>
+					<Clear>Cache leeren</Clear> 	 		
+ 	 </action> 	 
+			<label>				 
+				 <maxsize>Max. Größe :</maxsize>
+					<livetime>Live in Sek. :</livetime>
+					<isCacheEnable>Cache aktiviert ist (sollte immer auf Produktionsumgebung werden)</isCacheEnable>
+					<hit>Trefferanzahl :</hit>
+					<currentSize>Aktuelle Größe :</currentSize>
+					<miss>Miss zählen :</miss>
+			</label>
+ </UIWCMCacheForm>
+	
+	<!--
+  ################################################################################
+  #             org.exoplatform.wcm.manager.cache.UIWCMCacheManagerForm #
+  ################################################################################
+  -->
+	<UIWCMCacheManagerForm>
+ 	 <action>
+ 	 		<Refresh>Aktualisieren</Refresh>
+ 	 		<Save>Speichern</Save>
+					<Clear>Cache leeren</Clear> 	 		
+ 	 </action> 	 
+			<label>	
+			<cacheModify>Cache zu ändern :</cacheModify>			 
+				 <maxsize>Max. Größe :</maxsize>
+					<livetime>Live in Sek. :</livetime>
+					<isCacheEnable>Cache aktiviert ist (sollte immer auf Produktionsumgebung werden)</isCacheEnable>
+					<hit>Trefferanzahl :</hit>
+					<currentSize>Aktuelle Größe :</currentSize>
+					<miss>Miss zählen :</miss>
+			</label>
+ </UIWCMCacheManagerForm>
+	
+	<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <GlobalAdministration>Globale Verwaltung</GlobalAdministration>
+      </label>
+    </tab>
+    <label>      						
+      <CacheView>WCM Cache</CacheView>
+      <UIWCMCachePanel>WCM Cache Verwaltung</UIWCMCachePanel>
+						<UIWCMCacheManager>Geschäftsführer Cache</UIWCMCacheManager>
+						<UIWCMCacheManagerPanel>WCM Cache Geschäftsführung</UIWCMCacheManagerPanel>
+    </label>        
+  </UIECMAdminControlPanel>	
+</bundle>

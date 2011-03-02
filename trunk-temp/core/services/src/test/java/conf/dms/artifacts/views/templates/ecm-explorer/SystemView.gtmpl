@@ -1,0 +1,202 @@
+<%
+  /**
+   * Created by The eXo Platform SARL
+   * Author : Dang Van Minh
+   *          minhdv@exoplatform.com
+   * July 25, 2006
+   * 8:16:23 AM
+   */
+%>
+<%
+  import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.web.application.Parameter;
+  import org.exoplatform.webui.core.UIRightClickPopupMenu;
+  
+  UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu();
+  String componentId = uicomponent.getId();
+  java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
+  
+  def viewComponentId  = new Date().getTime();
+  def rcontext = _ctx.getRequestContext();
+  rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initAllEvent('${componentId}-$viewComponentId');");
+%>
+<div id="$componentId">
+	<div id="${componentId}-$viewComponentId" class="UIListView" style="">	
+		<div class="UIListGrid">
+				<div class="TitleTable">
+				  
+			    <%
+			      String typeSort = uicomponent.getTypeSort();
+			      String sortOrder = uicomponent.getSortOrder();
+			      String typeActionLink = "";
+			      if (sortOrder.equals("BlueDownArrow")) {
+			        typeActionLink = "Descending;";
+		        } else {
+		          typeActionLink = "Ascending;";
+		        }
+			    %>
+			    <% String actionURL = uicomponent.event("Sort", typeActionLink + "Type"); %>
+			    
+			    <div class="LeftColumn" onclick="$actionURL" style="float: left; border-right: 1px solid #b7b7b7; width: 30px; height: 19px; cursor:pointer;">
+		        <%
+		          if (typeSort.equals("Type")) {
+		        %>
+			        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
+			          <span></span>
+			        </div>
+			      <%}%>
+			    </div>
+			    
+			    <div class="RightColumn" style="border: none">
+			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
+			        <%
+			          if (typeSort.equals("Auditing")) {
+			        %>
+				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
+				        	<%=_ctx.appRes("ListView.view.label.auditing")%>
+				        </div>
+				      <%} else { %>
+				        <%=_ctx.appRes("ListView.view.label.auditing")%>
+				      <%} %>
+			      </a>
+			    </div>
+			    
+			    <div class="RightColumn">
+			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
+			        <%
+			          if (typeSort.equals("Versionable")) {
+			        %>
+				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
+				        	<%=_ctx.appRes("ListView.view.label.versionable")%>
+				        </div>
+				      <%} else { %>
+				        <%=_ctx.appRes("ListView.view.label.versionable")%>
+				      <%} %>
+			      </a>
+			    </div>
+			    
+			    <div class="RightColumn" style="width: 90px;">
+			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Owner")%>">
+			        <%
+			          if (typeSort.equals("Owner")) {
+			        %>
+				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
+				        	<%=_ctx.appRes("ListView.view.label.exo_owner")%>
+				        </div>
+				      <%} else { %>
+				        <%=_ctx.appRes("ListView.view.label.exo_owner")%>
+				      <%} %>
+			      </a>
+			    </div>
+			    
+			    <div class="RightColumn" style="width: 125px;">
+			      <a href="<%=uicomponent.event("Sort", typeActionLink + "ModifiedDate")%>">
+			        <%
+			          if (typeSort.equals("ModifiedDate")) {
+			        %>
+				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
+				        	<%=_ctx.appRes("ListView.view.label.exo_dateModified")%>
+				        </div>
+				      <%} else { %>
+				        <%=_ctx.appRes("ListView.view.label.exo_dateModified")%>
+				      <%} %>
+			      </a>
+			    </div>
+			    
+			    <div class="RightColumn" style="width: 105px;">
+			      <a href="<%=uicomponent.event("Sort", typeActionLink + "CreatedDate")%>">
+			        <%
+			          if (typeSort.equals("CreatedDate")) {
+			        %>
+				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
+				        	<%=_ctx.appRes("ListView.view.label.exo_dateCreated")%>
+				        </div>
+				      <%} else { %>
+				        	<%=_ctx.appRes("ListView.view.label.exo_dateCreated")%>
+				      <%} %>
+			      </a>
+			    </div>
+			    
+			    <div class="ResizeColumn">
+			      <a href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+			        <%
+			          if (typeSort.equals("Alphabetic")) {
+			        %>
+				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
+				        	<%=_ctx.appRes("ListView.view.label.name")%>
+				        </div>
+				      <%} else { %>
+				        <%=_ctx.appRes("ListView.view.label.name")%>
+				      <%} %>
+			      </a>
+			    </div>
+			    <div style="clear: both"><span></span></div>
+				</div>
+	      <%
+	      	String serverUrl = uicomponent.getWebDAVServerPrefix();
+	      	String portalName = uicomponent.getPortalName();
+	      	String repository = uicomponent.getRepository();
+	        for(data in uicomponent.getChildrenList()) {
+	          def isPreferenceNode = uicomponent.isPreferenceNode(data);
+	          def preferenceWS = data.getSession().getWorkspace().getName();
+	          String nodePath = data.getPath();
+	          String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length());   
+	          String subName;
+	          //nodePath = nodePath + "&workspaceName=" + preferenceWS;
+	          String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
+	      %>
+	      <div class="RowView Normal" ondblclick="$actionLink">
+	        <div class="LeftColumn" style="float: left; width: 30px; height: 19px; padding: 2px 0px; 	border-right: none;">
+					  <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">					    
+						<%if(uicomponent.isSymLink(data)) {%>
+					      <div class="LinkSmall"></div>
+					    <%}%>
+					  </div>
+
+	        </div>
+	        <%
+	  	        if (name.length() < 50) subName = name;
+			        else subName = name.substring(0,50) + "...";
+		        %>
+	        <div class="RightColumn" style="border: none"><!--added CPop Bull SA -->
+	           <%= Utils.isAuditable(data)%>
+	           <% if (Utils.isAuditable(data)&& uicomponent.hasAuditHistory(data)) 
+	                println "("+ uicomponent.getNumAuditHistory(data)+")";
+	              else
+	                println ""; 
+	            %>
+	        </div>
+	        <div class="RightColumn">
+		         	<%=Utils.isVersionable(data)%>
+		          <%
+		            if(Utils.isVersionable(data) && !uicomponent.getVersionName(data).equals("jcr:rootVersion")) {
+		              println "(" + uicomponent.getVersionName(data) + ")";
+		            }
+		          %>
+	        </div>
+	        <div class="RightColumn" style="width: 90px">
+		        <%=uicomponent.getNodeOwner(data)%>
+	        </div>
+	        <div class="RightColumn" style="width: 125px">
+	    			<%=dateFormat.format(uicomponent.getDateModified(data))%>
+	 				</div>
+	       
+	        <div class="RightColumn" style="width: 105px;">
+	        	<%=dateFormat.format(uicomponent.getDateCreated(data))%>
+	        </div>
+	        <div class="ResizeColumn">
+							<div class="NodeLabel">
+								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="$name">$subName</div>
+		 					</div>
+	        </div>
+	        <div style="clear: both"><span></span></div>
+		    </div>
+	      <%}%>
+		</div>
+	</div>
+	<% if(uicomponent.getContentPageIterator().getAvailablePage()>1) { %>	
+		<div style="margin:4px 0px 4px 0px;">
+			<%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
+		</div>
+	<% } %>
+</div>	

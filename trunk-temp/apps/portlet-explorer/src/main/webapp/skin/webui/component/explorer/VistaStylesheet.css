@@ -1,0 +1,181 @@
+/**
+ * Created by The eXo Platform SARL
+ * Modifile : Vu Duy Tu
+ *           duytucntt@gmail.com
+ * December 08, 2006
+ * version: $Id$
+ */
+
+@import url("../../../icons/VistaStylesheet.css");
+@import url("control/VistaStylesheet.css");
+@import url("sidebar/VistaStylesheet.css");
+@import url("UIPopupAction/VistaStylesheet.css");
+@import url("UIDrivesBrowser/VistaStylesheet.css");
+@import url("UIJCRExplorer/VistaStylesheet.css");
+
+.UIJCRExplorerPortlet {
+}
+
+.UIWindow .UIJCRExplorerPortlet {
+	border: none;
+	margin: auto;
+}
+
+.UIJCRExplorerPortlet {
+	background: white;
+	border: 1px solid #b7b7b7;
+	margin: 5px;
+}
+
+.UIJCRExplorerPortlet .LeftCotainer {
+	float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 235px;
+}
+
+.UIJCRExplorerPortlet .RightCotainer {
+	margin-left: 224px; /* orientation=lt */
+	margin-right: 224px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIFormGrid {
+	width: 100%;
+}
+
+.UIJCRExplorerPortlet .UIPreferencesForm  {
+  width: 500px;
+  padding: 15px;
+  border: none;
+}
+
+.UIJCRExplorerPortlet .UIPreferencesForm .UIForm .HorizontalLayout {
+	border: 1px solid #BEC1C7;
+	border-top: none;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIPageIterator {
+	width: auto;
+	padding-right: 10px; /* orientation=lt */
+	padding-left: 10px; /* orientation=rt */
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin: 0px;
+}
+
+.UIVersionTreeList {
+  margin: 6px 0px 16px 0px;
+}
+
+.UIVersionTreeList .UITrees {
+	border: none;
+}
+
+.UIVersionTreeList .ItemIcon {
+  width: 16px; height: 16px;
+  margin-top: 3px;
+}
+
+.UIVersionTreeList .UIGrid .EvenRow {
+  background: #F5F5F5;
+}
+
+.UIVersionTreeList .UIGrid .OddRow {
+  background: #F0F0F0;
+}
+
+.UIVersionTreeList .UIGrid td {
+  padding: 0px 0px 0px 7px; /* orientation=lt */
+  padding: 0px 7px 0px 0px; /* orientation=rt */
+}
+
+.UIVersionTreeList .UITrees .Node {
+  padding-top: 0px;
+  height: 23px;
+}
+
+.UIVersionTreeList .UIGrid .FieldLabel {
+  width: 100px;
+}
+
+.UIVersionTreeList .UIGrid .SelectRow {
+  background: #cedeed;
+  font-weight: bold;
+}
+
+.UIVersionTreeList .UITrees .Node .ExpandIcon {
+  height: 20px;
+  background-position: left bottom; /* orientation=lt */
+  background-position: right bottom; /* orientation=rt */
+  line-height: 24px;
+}
+
+.UIVersionTreeList .UITrees .Node .CollapseIcon {
+  height: 20px;
+  background-position: left bottom; /* orientation=lt */
+  background-position: right bottom; /* orientation=rt */
+  line-height: 24px;
+}
+
+.UIPublicationContainer .State input.radio {
+	margin: 0px 7px;
+}
+
+.UIPublicationContainer .UIFormGrid .FieldLabel {
+  width: 100px;
+  padding: 6px 6px 6px 16px; /* orientation=lt */
+  padding: 6px 16px 6px 6px; /* orientation=rt */
+  text-align: left; /* orientation=lt */
+  text-align: right; /* orientation=rt */
+}
+
+/*******************************************************************************/
+/*===========================DocumentFormController=====================*/
+
+.UIDocumentFormController {
+	padding: 10px;
+}
+
+.EditFormController {
+	padding: 10px;
+}
+
+.UIFolderForm {
+	padding: 10px;
+}
+
+.UINodeTypeList {
+  padding: 10px;
+}
+
+.UINodeTypeSearh {
+		padding-bottom: 5px;
+}
+
+.UINodeTypeSearh .UIBarStyle .FieldLabel {
+  padding: 0px 0px 0px 25px;
+}
+
+.UINodeTypeSearh .UIBarStyle .GroupInput {
+  padding: 0pt 5px;
+}
+
+.UINodeTypeSearh .UIBarStyle .SearchIcon {
+		background: transparent url(/ecmexplorer/skin/icons/24x24/DefaultSkin/Search.gif) no-repeat scroll left center;
+		height: 24px;
+		width: 24px;
+		padding: 10px;
+}
+
+.UIJCRExplorer .UIActionListContainer .MultiValueContainerShow {
+		padding-bottom:5px;
+		vertical-align:bottom;
+}
+
+.UIJCRExplorer .AllDocument {
+		height: 38px;
+		line-height: 38px;
+		margin: 5px 0px 5px 0px;
+		border: 1px solid #B7B7B7;
+		background: #FBFBFB none repeat scroll 0 0;
+		padding-top: 5px;
+}

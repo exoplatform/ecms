@@ -1,0 +1,66 @@
+Maven build descriptor
+  
+  The sample process is build using Maven. 
+  The file pom.xml (Project Object Model) contains every important information about your project.
+  
+  "holiday" workflow pom.xml file is:
+
+
+--------------------------------------------------------------------------------
+<project>
+  <groupId>exo-ecm</groupId>
+  <artifactId>exo-ecm</artifactId>
+  <version>1.0</version>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>exo-ecm.business-process.holiday.bonita.standalone</artifactId>
+  <packaging>jar</packaging>
+  <name>eXo holidays BP for Bonita</name>
+  <url>http://www.exoplatform.org</url>
+  <description>eXo holidays BP for Bonita</description>
+  <developer>
+    <name>Patrick Silani</name>
+    <organization>Bull S.A.S</organization>
+    <organizationUrl>http://www.bull.com</organizationUrl>
+  </developer>
+  </developers>
+  <dependencies>  
+    <dependency>
+      <groupId>exo-ecm</groupId>
+      <artifactId>exo-ecm.services.workflow.impl.bonita.standalone</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.objectweb.bonita</groupId>
+      <artifactId>bonita</artifactId>
+      <version>1.7-2006_03_30</version>
+      <type>ejb</type>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    ...
+  </build>
+  
+</project>
+--------------------------------------------------------------------------------
+
+  It should be created in the holiday/ root directory.  
+
+  To create your own file based on this one you have to customize the following tags:
+  
+ - artifactId: replace "holiday" by your workflow name (to avoid conflict)
+ 
+ - name
+ 
+ - description
+
+
+  The most important part is the dependencies declarations. The two dependencies
+  declared in this pom.xml are mandatory.
+  The first one contains Bonita APIs, the second one is necessary to use the
+  ExoOrganizationMapper class. Refer to "Roles" section for more information.
+
+ You don't have to modify neither the build section, nor the repository.
+
+ If you customize the Business Process, be careful to add necessary dependencies in this file.

@@ -1,0 +1,17 @@
+eXo CMIS links
+
+xCMIS project links:
+* Community site [http://xcmis.org/] with CMIS Expert demo
+* Forum [http://groups.google.com/group/xcmis]
+* xCMIS latest news [http://gazarenkov.blogspot.com/]
+* eXo Platform blog [http://blog.exoplatform.org/]
+
+CMIS related links:
+* [http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cmis|CMIS specification]
+* TODO CMIS working group (list, mail, feeds etc)
+* TODO CMIS external tutorials, guides, videos, blogs, news
+* CMIS clients
+** [CMIS Firefox Connector|http://www.ibm.com/developerworks/lotus/library/quickr-cmis/index.html]
+** Flex+AIR and Flex+Browser CMIS clients [http://code.google.com/p/cmisspaces]
+
+ 

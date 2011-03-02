@@ -1,0 +1,64 @@
+<nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
+  xmlns:jcr="http://www.jcp.org/jcr/1.0">
+  
+  <nodeType name="publication:publication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+    	<propertyDefinition name="publication:lifecycleName" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="publication:currentState" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="publication:history" requiredType="String" autoCreated="false" mandatory="true"
+        onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+  
+	<nodeType name="publication:webpagesPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>publication:publication</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="publication:navigationNodeURIs" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="publication:webPageIDs" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+      <propertyDefinition name="publication:applicationIDs" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints />
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+	
+  <nodeType name="publication:simplePublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+		<supertypes>      
+      <supertype>publication:webpagesPublication</supertype>
+    </supertypes>    
+  </nodeType>
+  
+  <nodeType name="publication:stateAndVersionBasedPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+		<supertypes>      
+      <supertype>publication:publication</supertype>
+    </supertypes>
+    <propertyDefinitions>
+    	<propertyDefinition name="publication:revisionData" requiredType="String" autoCreated="false" mandatory="false"
+        onParentVersion="IGNORE" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>            
+      <propertyDefinition name="publication:liveRevision" requiredType="Reference" autoCreated="false" mandatory="false"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+      <propertyDefinition name="publication:liveDate" requiredType="Date" autoCreated="false" mandatory="false"
+        onParentVersion="IGNORE" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>      
+    </propertyDefinitions>    
+  </nodeType>
+
+</nodeTypes>

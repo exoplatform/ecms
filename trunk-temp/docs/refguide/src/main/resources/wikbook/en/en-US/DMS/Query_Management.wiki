@@ -1,0 +1,81 @@
+
+h1. Query Management
+
+
+
+
+h1. Creating a new query
+
+1\. Go to *ECM Administration* -> *Advanced Configuration* -> *Manage queries*
+
+
+!query.jpg!
+
+
+2. Show the *Add query* form by clicking the *Add Query* button in the *Manage Queries* form.
+
+
+!add.jpg!
+
+
+3. Enter a new name for the query in the *Name* field. This field is required.<br>
+
+_*Note*_:<br>
+* A query name must be unique<br>
+* The name can not contain special characters like !,@,#,$,%,&,*,(,)<br>
+
+4.Select a type of a query
+
+* Xpath:(XML Path Language) is a language for selecting nodes. Example 	/jcr:root/Documents/Live
+* Sql:(Structured Query Language) is a database computer language
+
+5. Enter the statement for query. This field is required.<br>
+
+6. Check or uncheck the *Enable cache results* option. If you check in this check-box, at the first time you use this query to search, the result will be cached. At the second time you search using this query, it will show cached result. After 45 minutes, the cache will be removed. <br>
+
+Example: You have query *Test* with statement: //element (*, nt:file). In File Explorer, you have a nt:file document named File1. Execute query Test-> the result will show only document File1. After that, create  a nt:file document named File2 and execute query Test-> the result will list only document File2. After 45 minutes, the cache will be removed. Execute query Test-> the result will list document File1 and File2<br>
+
+7. Select permission for a group that can use this query by clicking the
+!icon1.jpg!
+ icon:
+
+
+!permission.jpg!
+
+
+8. Click the *Save* button to finish adding a new query
+
+
+h1. Edit a query
+
+Do the following steps:
+
+1\. Click the
+!icon2.jpg!
+  icon that corresponds to the query you want to edit. The *Edit query* form will appear:
+
+
+!edit.jpg!
+
+
+2. Edit the properties of the selected query.<br>
+
+_*Note*_:<br>
+* You can not edit a query name<br>
+* You can change the style of query<br>
+* You can edit the statement<br>
+* You can check/uncheck in 'Enable cache results'<br>
+* You can change permission <br>
+
+3. Click the *Save* button to accept all changes.
+
+
+h1. Delete a query
+
+Do the following steps:
+
+1\. Click the
+!icon3.jpg!
+  icon corresponding to the query that you want to delete. A confirmation message  form will appear.
+
+2. Click the *OK* button to accept deleting this query or click *Cancel* to discard this action.

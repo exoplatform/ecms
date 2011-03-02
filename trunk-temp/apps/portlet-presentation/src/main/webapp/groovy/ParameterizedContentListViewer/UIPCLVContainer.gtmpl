@@ -1,0 +1,23 @@
+<%
+import org.exoplatform.wcm.webui.pclv.UIPCLVForm;
+import org.exoplatform.webui.core.UIPopupContainer;
+import	org.exoplatform.wcm.webui.Utils;
+
+def rcontext = _ctx.getRequestContext() ;
+String portletId = Utils.getRealPortletId(rcontext);
+def quickEditingBlockId = portletId + "-QuickEditingBlock";
+
+%>
+<div class="$uicomponent.id" id="$uicomponent.id">
+	<%
+		if (Utils.isShowQuickEdit()) {					
+	%>
+			<div style="position: relative; height: 0px;" id="<%=quickEditingBlockId%>">
+				<div style="position: absolute; right: 0px; top: 0px; z-index: 1">
+					<a href="<%=uicomponent.event("QuickEdit")%>" title="<%= _ctx.appRes("UIPCLVContainer.title.QuickEdit");%>"><div class="QuickEdit"><span></span></div></a>					 
+				</div>
+			</div>
+	<% }
+		uicomponent.renderChild(UIPCLVForm.class);
+	%>
+</div>

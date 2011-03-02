@@ -1,0 +1,119 @@
+
+h1. Creating a new Taxonomy Tree
+
+
+
+h1. Create a new Taxonomy
+
+Do the following guides to create a new taxonomy:
+
+1\. Go to *ECM Administration* -> *Ontologies* -> *Manage Taxonomy Tree*. You'll see the figure:
+
+
+!tree.gif!
+
+
+2. Click on the *Add Taxonomy Tree* button. A form to create a new taxonomy appears:
+
+
+!step1-1.png!
+
+
+* At step 1: You need to input a taxonomy name, choose the workspace and the taxonomy home path:
+
+** Put the name of Taxonomy Tree in the *Name* field.
+** Select the workspace that will store this taxonomy.
+** Select the home path by clicking "*+*"
+** Click the *Save* button -> next to step 2
+
+
+!step22.png!
+
+
+* At step 2: You need to select the permission for this taxonomy.
+
+** Add a permission for the taxonomy tree by clicking on a user or a group or any icon.
+** Select the permission for users or groups by clicking the check boxes.
+** Click the *Save* button -> The new permission is added for Taxonomy
+** Click the *Next* button -> next to step 3
+
+
+!step33.png!
+
+
+* At step 3:
+
+** Select the type of action you want to add for Taxonomy tree in "Extends Action Type"
+** Put the name of the action
+** Select the lifecycle.
+** Select the target workspace and the target path  	
+** Click the *Save* button -> The action is added for taxonomy . Next to step 4
+
+
+!step44.png!
+
+
+* At step 4:
+** Add taxonomies, copy/cut and paste, add permissions for taxonomies.
+** Click the *Cancel* button to finish creating a new taxonomy.
+
+The new taxonomy is created. If you want to see this taxonomy, go to *File Explorer* and select the path that set in "Home path" field at step 1. Or you can see in* Manage Taxonomy Trees*.
+h1. Add a Taxonomy to a Document in the File Explorer
+
+
+To add a taxonomy to a document in File Explorer, do the following steps:
+
+1\. Go to *File Explorer*, create a document.
+
+2. Select this document and then select the *Admin* tab.
+
+3. Click on the *Manage Categories* icon. The *Add Category* form appears.
+
+4. Select the *Select Category* tab.
+
+5. Select the name of the taxonomy in the list of the Taxonomy Tree.
+
+
+!category.gif!
+
+
+6. Click
+!icon.gif!
+ on the category you want to add for a document. All categories added for a document are listed in the *Referenced categories* tab
+
+
+
+h1. Add a Taxonomy while uploading a File in the File Explorer
+
+To add taxonomy while uploading a file, do the following steps:
+
+1\. Go to *File Explorer* -> Choose any Driver -> choose a node that you want to upload a file into -> Choose *Thumbnails* view -> choose the *Upload* tab to open a form to upload a file:
+
+
+!upload.png!
+
+
+The *Upload a file* form appears:
+
+
+!upload2.png!
+
+
+2. Select the file to upload.
+
+3. Click *Add Item* to open a form to add a category
+
+
+!cate2.gif!
+
+
+4. Select a taxonomy name.
+
+5. Click
+!icon.gif!
+ on the category that you want to add.
+
+
+
+
+

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE authorgroup PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<authorgroup>
+	<author>
+		<firstname>eXo Platform</firstname>
+		 <surname>Documentation Team</surname>
+		 <affiliation>
+			<orgdiv><emphasis role="bold"><ulink type="http" url="http://www.exoplatform.com">eXo Platform</ulink></emphasis></orgdiv>
+
+		</affiliation>
+
+	</author>
+	 <editor>
+		<firstname>Scott</firstname>
+		 <surname>Mumford</surname>
+		 <affiliation>
+			<shortaffil><emphasis role="bold"><ulink type="http" url="www.redhat.com">Red Hat</ulink></emphasis></shortaffil>
+			 <orgdiv>Engineering Content Services</orgdiv>
+
+		</affiliation>
+		 <email>smumford@redhat.com</email>
+
+	</editor>
+</authorgroup>
+

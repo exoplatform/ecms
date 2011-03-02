@@ -1,0 +1,119 @@
+<% 
+	import org.exoplatform.webui.form.UIFormInputBase;	
+
+	String FIELD_SHORTBY          = "sortBy";
+  String FIELD_ORDERBY          = "order";
+  String FIELD_SHOWSIDEBAR      = "showSideBar";
+  String FIELD_ENABLE_DRAG_AND_DROP = "enableDragAndDrop";
+  String NODES_PER_PAGE         = "nodesPerPage";
+	
+	String FIELD_SHOWNONDOCUMENT  = "showNonDocument";
+	String FIELD_SHOWREFDOCUMENTS = "showRefDocuments";
+	String FIELD_SHOW_HIDDEN_NODE = "showHiddenNode";	
+	String FIELD_ENABLESTRUCTURE  = "enableStructure";
+  String FIELD_SHOW_ITEMS_BY_USER = "showItemsByUserInTimeline"; 
+  String FIELD_QUERY_TYPE       = "queryType";   
+%>
+<div class="UIFormWithTitle $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);">
+	<% uiform.begin() %>
+		<div class="FormContainer">
+			<table class="UIFormGrid">
+			  <tr>
+			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.sortBy")%></td>
+			    <td colspan="3"><% uiform.renderField(FIELD_SHORTBY) %> &nbsp;&nbsp;&nbsp;&nbsp; <% uiform.renderField(FIELD_ORDERBY) %></td>
+			  </tr>
+			  <tr>
+			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showSideBar")%></td>
+			    <td class="FieldComponent"><% uiform.renderField(FIELD_SHOWSIDEBAR) %></td>
+			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.enableDragAndDrop")%></td>
+			    <td class="FieldComponent"><% uiform.renderField(FIELD_ENABLE_DRAG_AND_DROP) %></td>
+			  </tr>
+			  <tr>
+			    <td class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.nodesPerPage")%></td>
+			    <td class="FieldComponent"><% uiform.renderField(NODES_PER_PAGE) %></td>			    
+			    <td colspan="2" align="right"></td>
+			  </tr>
+			  <%String advanceLink = uicomponent.event("Advance");%>
+			  <% if (!uicomponent.isAdvancePreferences()) { %>
+			  <tr>
+			    <td style="margin-top: 10px;" colspan="4">			      
+         <div onclick="$advanceLink">
+           <a class="AdvancePreferences" href="javascript:window.scroll(0,0);"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%></a>
+         </div>             
+			    </td>
+			  </tr>
+			  <% } %>
+			  <% 
+			  	def advancedLinkDisplay = uicomponent.isAdvancePreferences() ? "" : "display: none;";
+			  %>
+			  <tr>
+			    <td style="margin-top: 10px; $advancedLinkDisplay" colspan="4">
+			      <fieldset>
+              <legend><a class="AdvancePreferences" style="text-decoration: underline;" href="$advanceLink"><%=_ctx.appRes("UIPreferencesForm.label.Advance")%></a></legend>
+					    <table>			  
+							  <tr>
+							    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showNonDocument")%></td>
+							    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_SHOWNONDOCUMENT) %></td>
+							    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showRefDocuments")%></td>
+							    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_SHOWREFDOCUMENTS) %></td>
+							  </tr>
+							  <tr>
+							    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.showHiddenNode")%></td>
+							    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_SHOW_HIDDEN_NODE) %></td>
+							    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.enableStructure")%></td>
+							    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_ENABLESTRUCTURE) %></td>
+							  </tr>
+							  <tr>									    
+							    <td width="35%" class="FieldLabel"><%=_ctx.appRes("UIPreferencesForm.label.queryType")%></td>
+							    <td width="15%" class="FieldComponent"><% uiform.renderField(FIELD_QUERY_TYPE) %></td>
+							    <td colspan="2"></td>
+							  </tr>
+						  </table>
+			      </fieldset>
+			    </td>
+			  </tr>
+			</table>
+			<%// start render action%>
+			<div class="UIAction"> 
+				<table class="ActionContainer">
+					<tr>
+						<td>
+						 <%String saveLink = uicomponent.event("Save");%>
+							<div onclick="$saveLink" class="ActionButton LightBlueStyle">
+								<div class="ButtonLeft">
+									<div class="ButtonRight">
+										<div class="ButtonMiddle">
+											<a href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Save")%></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<%String backLink = uicomponent.event("Back");%>
+							<div onclick="$backLink" class="ActionButton LightBlueStyle">
+								<div class="ButtonLeft">
+									<div class="ButtonRight">
+										<div class="ButtonMiddle">
+											<a href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Back")%></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>					
+				</table>
+			</div>
+			<%// end render action%>
+		</div>
+	<%uiform.end()%>
+</div>
+<script language="javascript">
+	function SubmitAction(event) {
+		var event = window.event || event;
+		var code;
+		if(event.keyCode) code = event.keyCode;
+		else if (event.which) code = event.which;
+		if(code ==13) {
+			this.onsubmit = function(){ return false; }				
+		}
+	}	
+</script>

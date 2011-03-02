@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="1.0">
+   
+  <portlet>
+    <description xml:lang="EN">Workflow Controller</description>
+    <portlet-name>WorkflowControllerPortlet</portlet-name>
+    <display-name xml:lang="EN">Workflow Controller</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>    
+    
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/workflow/WorkflowControllerPortlet/webui/configuration.xml</value>
+    </init-param>    
+
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>    
+    <resource-bundle>locale.portlet.workflow.WorkflowControllerPortlet</resource-bundle>    																														
+    
+    <portlet-info>
+      <title>Workflow Controller</title>
+      <short-title>Workflow Controller</short-title>
+      <keywords>workflow, Controller</keywords>
+    </portlet-info>
+  </portlet>
+  
+  
+  <portlet>
+    <description xml:lang="EN">Workflow Administration</description>
+    <portlet-name>WorkflowAdministrationPortlet</portlet-name>
+    <display-name xml:lang="EN">Workflow Administration</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>    
+    
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/workflow/WorkflowAdministrationPortlet/webui/configuration.xml</value>
+    </init-param>    
+
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>help</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>    
+    <resource-bundle>locale.portlet.workflow.WorkflowAdministrationPortlet</resource-bundle>    																														
+    
+    <portlet-info>
+      <title>Workflow Administration</title>
+      <short-title>Wofkflow Administration</short-title>
+      <keywords>workflow, Administration</keywords>
+    </portlet-info>
+  </portlet> 
+</portlet-app>

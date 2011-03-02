@@ -1,0 +1,68 @@
+<%
+	import java.util.List;
+	import java.util.ArrayList;
+	import javax.jcr.Node;
+	import javax.jcr.NodeIterator;
+	import org.exoplatform.services.wcm.core.NodeLocation;
+	import org.exoplatform.webui.core.UIComponent;
+  import org.exoplatform.services.jcr.util.Text;
+  import org.exoplatform.container.PortalContainer;
+  import org.exoplatform.wcm.webui.Utils;
+
+	UIComponent uiParent = uicomponent.getParent();
+	
+	public boolean isVersionable(Node node) throws Exception {
+    return node.isNodeType("mix:versionable");
+  }	
+
+	public Node getFileLangNode(Node currentNode) throws Exception {
+    if(currentNode.isNodeType("nt:unstructured")) {
+      if(currentNode.getNodes().getSize() > 0) {
+        NodeIterator nodeIter = currentNode.getNodes() ;
+        while(nodeIter.hasNext()) {
+          Node ntFile = nodeIter.nextNode() ;
+          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+            return ntFile ;
+          }
+        }
+        return currentNode ;
+      }
+    }
+    return currentNode ;
+  }
+
+  def originalNode = uiParent.getOriginalNode();
+  def currentNode = uiParent.getNode();
+  def binarySrc = Utils.getWebdavURL(currentNode);
+  def contentNode = currentNode.getNode("jcr:content") ;
+  def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  List<String> unsupportMimeTypeText = new ArrayList<String>();
+  unsupportMimeTypeText.add("text/rtf");
+    
+  
+  public String formatNodeName(String text) {
+    return text.replaceAll("'", "\\\\'") ;
+  }
+  
+  public long getFileSize(Node contentNode) throws Exception {
+    long size = contentNode.getProperty("jcr:data").getLength()/1024;      	        
+    return size;
+  }
+  
+  String rndString = String.valueOf(new Date().getTime());
+  
+	def dcTitle = "";
+	if(contentNode.hasProperty("dc:title")) {
+    StringBuilder sB = new StringBuilder();
+	  def i=0;
+	  for(title in contentNode.getProperty("dc:title").getValues()) {
+		  if (i > 0) sB.append("; ");
+			sB.append(title.getString());
+			i++;			        	    
+		}
+	  dcTitle=sB.toString();
+  }
+  
+%>
+
+  <a href="$binarySrc" title="$dcTitle" target="_new"><image src="$binarySrc" width="610"/></a>              

@@ -1,0 +1,65 @@
+
+h1. WCM Templates
+{anchor:id=WCM Templates}
+
+h2. Overview
+
+WCM provides users (Web designers) with available view templates that is used to display web-contents on a website. These templates are always improved to meet the need of flexibility.
+
+Users easily view the templates applied for different web-contents. This below screenshot is in the Edit Mode
+
+ !EditMode.png! 
+
+
+When clicking on the Edit icon. The *Content list viewer management* form that allows users to edit the properties of displaying documents or web-contents will appear:
+
+ !ViewerTemplate.png! 
+
+h2. Hot deployment
+
+{info}
+Since WCM 1.2.1
+{info}
+
+Since WCM 1.2.1, web designers easily edit the WCM view templates that are directly shown in the User Interface of a Webpage.
+
+Following guides to edit a WCM template
+
+
+1\. Go to *Groups* on the Administration bar.
+
+2. Select *Sites Explorer*  --> *DMS Administration*
+
+3. Select *exo:ecm* -> *views* -> *templates* -> *content-list-viewer* -> *list* --> select one template in list (in this guide, I choose the *TwoColumnCLVTemplate.gtmpl*)
+
+
+ !DMSAdmin.png! 
+
+
+4. Select the *Actions* tab.
+
+5. Click on the !EditDocument.png! . The *Edit Document* form will appear:
+
+ !EditDocumentForm.png! 
+
+In this form, users easily edit this template; however, in order to edit the template's structure, users need to have a knowledge about HTML.
+
+In the below screenshot, I added the *Recent News* text in the *Edit Document* form:
+
+ !EditDoc1a.png! 
+
+
+
+6. Click the *Save*  button to save changes or the *Cancel* button to quit without saving any change.
+
+7. Go to *Sites* on the Adminitration bar -> *Acme* -> *Overview*
+
+You will see the change that will be directly applied:
+
+
+ !EditDoc2.png! 
+
+
+
+
+

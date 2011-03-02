@@ -1,0 +1,159 @@
+<div class="UIFormWithTitle">
+  <div class="TitleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></div>
+	<% uiform.begin() %>
+  <div class="HorizontalLayout">
+  	<table class="UIFormGrid">	  
+  		<tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.id")%></td>
+	      <td class="FieldComponent">
+		      <%
+		        String[] fieldId = ["jcrPath=/node", "mixintype=exo:publishLocation,exo:pendingLocation,exo:backupLocation,exo:trashLocation", "editable=false", "visible=if-not-null"] ;
+		        uicomponent.addMixinField("id", fieldId) ;  
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.name")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldName = ["jcrPath=/node/exo:name", "validate=name"] ;
+		        uicomponent.addTextField("name", fieldName)  ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.lifecycle")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", "options=read,schedule,node_added,node_removed,property_added,property_removed,property_changed"] ;
+		        uiform.addSelectBoxField("lifecycle", fieldLifecycle) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.description")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldDescription = ["jcrPath=/node/exo:description"] ; 
+		        uicomponent.addTextAreaField("description", fieldDescription) 
+		      %>
+		    </td>
+		  </tr>
+		<tr>
+      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.supervisor")%></td>
+      <td class="FieldComponent">
+        <% 
+        String[] fieldSupervisor = ["jcrPath=/node/exo:supervisor", "selectorAction=selectPermission", "selectorClass=org.exoplatform.ecm.webui.selector.UIPermissionSelector", "selectorIcon=Permission24x24Icon", "validate=empty", "editable=false"] ;
+          uicomponent.addActionField("supervisor", fieldSupervisor)  ;
+        %>
+      </td>
+    </tr>	  		  
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.public-workspace")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldPublicWorkspace = ["jcrPath=/node/exo:publishWorkspace", "script=ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy", "scriptParams=repository", "onchange=true"] ;
+		        uicomponent.addSelectBoxField("publishWorkspace", fieldPublicWorkspace) ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+	      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.public-path")%></td>
+	      <td class="FieldComponent">
+		      <% 
+		        String[] fieldPublicPath = ["jcrPath=/node/exo:publishPath", "selectorAction=selectPublicLocationPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=publishWorkspace", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"] ;
+		        uicomponent.addActionField("publicPath", fieldPublicPath)  ;
+		      %>
+		    </td>
+		  </tr>
+		  <tr>
+      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.validator")%></td>
+      <td class="FieldComponent">
+        <% 
+          String[] fieldValidator = ["jcrPath=/node/exo:validator", "selectorAction=selectPermission", "selectorClass=org.exoplatform.ecm.webui.selector.UIPermissionSelector", "selectorIcon=Permission24x24Icon", "validate=empty", "editable=false"] ;
+          uicomponent.addActionField("validator", fieldValidator) ;
+        %>
+      </td>
+    </tr>
+     <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.pending-workspace")%></td>
+        <td class="FieldComponent">
+          <% 
+            String[] fieldPendingWorkspace = ["jcrPath=/node/exo:pendingWorkspace", "script=ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy", "scriptParams=repository", "onchange=true"] ;
+            uicomponent.addSelectBoxField("pendingWorkspace", fieldPendingWorkspace) ;
+          %>
+        </td>
+      </tr>
+      <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.pending-path")%></td>
+        <td class="FieldComponent">
+          <% 
+            String[] fieldPendingPath = ["jcrPath=/node/exo:pendingPath", "selectorAction=selectPendingLocationPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=pendingWorkspace", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"] ;
+            uicomponent.addActionField("pendingPath", fieldPendingPath)  ;
+          %>
+        </td>
+      </tr>
+     <tr>
+      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.backup-workspace")%></td>
+      <td class="FieldComponent">
+        <% 
+          String[] fieldBackupWorkspace = ["jcrPath=/node/exo:backupWorkspace", "script=ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy", "scriptParams=repository", "onchange=true"] ;
+          uicomponent.addSelectBoxField("backupWorkspace", fieldBackupWorkspace) ;
+        %>
+      </td>
+    </tr>
+    <tr>
+      <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.backup-path")%></td>
+      <td class="FieldComponent">
+        <% 
+          String[] fieldBackupPath = ["jcrPath=/node/exo:backupPath", "selectorAction=selectBackupLocationPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=backupWorkspace", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"] ;
+          uicomponent.addActionField("backupPath", fieldBackupPath)  ;
+        %>
+      </td>
+    </tr>
+       <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.trash-workspace")%></td>
+        <td class="FieldComponent">
+          <% 
+            String[] fieldTrashWorkspace = ["jcrPath=/node/exo:trashWorkspace", "script=ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy", "scriptParams=repository", "onchange=true"] ;
+            uicomponent.addSelectBoxField("trashWorkspace", fieldTrashWorkspace);
+          %>
+        </td>
+      </tr>
+      <tr>
+        <td class="FieldLabel"><%=_ctx.appRes("ContentPublishing.dialog.label.trash-path")%></td>
+        <td class="FieldComponent">
+          <% 
+            String[] fieldTrashPath = ["jcrPath=/node/exo:trashPath", "selectorAction=selectBackupLocationPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=trashWorkspace", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"] ;
+            uicomponent.addActionField("trashPath", fieldTrashPath)  ;
+          %>
+        </td>
+      </tr>
+    </table>       
+    <%/* start render action*/%>
+		<div class="UIAction"> 
+	    <table class="ActionContainer" align="center">
+	    	<tr>
+	    		<td align="center">
+			      <% for(action in uicomponent.getActions()) { 
+			      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+								 String link = uicomponent.event(action) ;
+			      %>
+		          <a href="$link" class="ActionButton LightBlueStyle">
+								<div class="ButtonLeft">
+								  <div class="ButtonRight">
+									  <div class="ButtonMiddle">
+									    $actionLabel
+							      </div>
+							    </div>
+						    </div>
+							</a>
+			      <%}%>    
+	      	</td>
+	      </tr>      
+	    </table>
+	  </div>
+	  <%/* end render action*/%>
+  </div>
+  <%uiform.end()%>
+</div>
