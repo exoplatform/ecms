@@ -1,4 +1,4 @@
-h1. Available preferences
+h1. Available preferences {anchor:id=CONTref.Portlets.Explorer.AvailablePreferences}
 
 || *Preference* || *Type* || *Default value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | The repository name which will be used in an instance of Site Explorer |
@@ -20,7 +20,7 @@ h1. Available preferences
 | *showSideBar* | {{Boolean}} | {{true}} | Allow to show the Side bar or not.|
 | *showFilterBar* | {{Boolean}} | {{true}} | Allow to show the Filter bar or not. |
 
-h1. Example of configuration
+h1. Example of configuration {anchor:id=CONTref.Portlets.Explorer.ExampleConfiguration}
 {code:language=xml|indent=2}
 <portlet-preferences>
   <preference>

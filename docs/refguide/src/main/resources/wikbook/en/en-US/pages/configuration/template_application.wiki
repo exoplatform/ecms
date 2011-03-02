@@ -1,36 +1,35 @@
-A template is a presentation while displaying the saved information.
+A template is a presentation to display the saved information.
 
 Template service is used to select the right template corresponding to the saved content.
 
-h1. Available configuration
+h1. Available configuration {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.AvailableConfiguration}
 
+h2. Init-params {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.Init-params}
 
-h2. Init-params
-
-|| *Configuration name* || *Data type* || *Default Value* || *Description* ||
+|| *Configuration name* || *Data type* || *Default value* || *Description* ||
 | *autoCreateInNewRepository* | {{Boolean}} | {{true}} | Enable the application to import predefined templates at the start-up of template service automatically.|
-| storedLocation | {{String}} | {{war:/conf/dms-extension/dms/artifacts/templates}} | Location of stored templates |
-| repository | {{String}} | {{repository}} | Location of stored templates |
+| storedLocation | {{String}} | {{war:/conf/dms-extension/dms/artifacts/templates}} | Location of stored templates. |
+| repository | {{String}} | {{repository}} | Location of stored templates. |
 | object-param | {{Structure}} | | Configuration for each instance. |
 
 
-h2. Object-param
+h2. Object-param {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.Objectparams}
 
 || *Configuration name* || *Data type* || *Default Value* || *Description* ||
-| *name* | {{String}} | {{template.configuration}} | The name of this configuration |
-| *description* | {{String}} | {{configuration for the location of templates to inject in jcr}} | Description of template instance |
-| *object-type* | {{Structure}} | | Details configuration for each instance type |
+| *name* | {{String}} | {{template.configuration}} | The name of this configuration. |
+| *description* | {{String}} | {{configuration for the location of templates to inject in jcr}} | Description of template instance. |
+| *object-type* | {{Structure}} | | Details configuration for each instance type. |
 
 
-*Object-type* defines all available template files, using the "collection type" configuration*
+*Object-type* defines all available template files, using the "collection type" configuration*.
 
-h2. Object
+h2. Object {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.Object}
 
 *type*: It is the name of each object type. It means the type of template, the further configurations for this type are defined by some specified fields.
 || *Field name* || *Data type* || *Description* ||
-| *nodetypeName* | {{String}} | The name of template that is saved as a node in system |
-| *documentTemplate* | {{Boolean}} | Determine if the node type is a document type |
-| *label* | {{String}} | Visual display of the title for this node |
+| *nodetypeName* | {{String}} | The name of template that is saved as a node in system. |
+| *documentTemplate* | {{Boolean}} | Determine if the node type is a document type. |
+| *label* | {{String}} | Visual display of the title for this node. |
 
 
 There are three further information related to the presentation of each template:
@@ -41,16 +40,15 @@ There are three further information related to the presentation of each template
 
 - *{{referencedSkin}}*: Determine the stylesheet for displaying.
 
-Each type includes some definitions as an ﻿{{object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template"\}} with the fields as the properties.
+Each type includes some definitions as the {{object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template"\}} with the fields as the properties.
 || *Field name* || *Data type* || *Description* ||
-| *templateFile* | {{String}} | The location of the file store for the template's presentation |
-| *roles* | {{String}} | Determine who can access this object (View/Dialog/CSS) |
+| *templateFile* | {{String}} | The location of the file store for the template's presentation. |
+| *roles* | {{String}} | Determine who can access this object (View/Dialog/CSS). |
 
-h1. Example of template configuration
+h1. Example of template configuration {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.TemplateConfigurationExample}
 
 This below example is configuration for the _nt:file_ template, any other template will be put in the same level with this template start from the line
-{{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">}}
-as the another NodeType.
+{{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">}} as the another node type.
 
 {code:language=xml|indent=2}
 <external-component-plugins>

@@ -1,36 +1,43 @@
-* All package actions in WCM start from the {{delivery}} folder, so you should go to this folder first.
+
+All package actions in eXo Content are started from the {{delivery}} folder, so you should go to this folder first.
+
 {code}
 	$ cd ecms/delivery
 {code}
 
-h1. Package WCM standalone version - Tomcat bundle
+* Package WCM standalone version - Tomcat bundle
+
 {code}
 	$ cd wcm/assembly
 	$ mvn clean install
 {code}
 
 
-h1. Package WCM with workflow enabled - Tomcat bundle
+* Package WCM with workflow enabled - Tomcat bundle
+
 {code}
 	$ cd wkf-wcm/assembly
 	$ mvn clean install
 {code}
 
-h1. Make WCM EAR packages to run with jBoss
+* Make WCM EAR packages to run with jBoss
 
-* Make WCM extension EAR
+1. Make WCM extension EAR
+
 {code}
 	$ cd packaging/wcm/ear
 	$ mvn clean install
 {code}
 
-* Make WCM demo sites EAR
+2. Make WCM demo sites EAR
+
 {code}
 	$ cd packaging/ecmdemo/ear
 	$ mvn clean install
 {code}
 
-* Make workflow EAR
+3. Make workflow EAR
+
 {code}
 	$ cd packaging/workflow/ear
 	$ mvn clean install

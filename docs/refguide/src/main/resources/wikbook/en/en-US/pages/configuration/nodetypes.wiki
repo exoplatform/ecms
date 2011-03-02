@@ -1,10 +1,10 @@
 Every node has a type. Node types can be used to define complex storage objects consisting of multiple sub-nodes and properties, possibly many deep layers.
 
-h1. Fields
+h1. Fields {anchor:id=CONTref.Configuration.Nodetypes.Fields}
 
 *{{org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager}}*
 || *Node Type*|| *Type* || *Description* ||
-| *name* | {{String}} | Name of the node type. This field is required |
+| *name* | {{String}} | The name of node type. This field is required. |
 | *isMixin* | {{boolean}} | mixin type&nbsp; |
 | *hasOrderableChildNodes* | {{boolean}} | Orderable childnodes |
 | *primaryItemName* | {{String}} | Primary item name |
@@ -12,9 +12,9 @@ h1. Fields
 | *propertyDefinition* | {{Object}} | Define properties of node type |
 
 
-h1. Examples Nodetype configuration
+h1. Examples of Nodetype configuration  {anchor:id=CONTref.Configuration.Nodetypes.NodetypeConfigurationExample}
 
-The node definition should be placed in a special XML file (see DTD below) and declared in the service's configuration file to eXo component plugin mechanism, described as follows:
+The node definition should be placed in a special XML file (see DTD below) and declared in the service's configuration file to eXo component plugin mechanism which is described as follows:
 {code}
 	<external-component-plugins>
   	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
@@ -45,7 +45,7 @@ The node definition should be placed in a special XML file (see DTD below) and d
 	</external-component-plugins>
 {code}
 
-This is a Nodetype definition file format:
+The following is the definition file format of nodetype:
 {code}
 <nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
   xmlns:jcr="http://www.jcp.org/jcr/1.0">

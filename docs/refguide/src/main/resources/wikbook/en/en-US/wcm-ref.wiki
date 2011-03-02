@@ -1,92 +1,89 @@
-h1. Preface
-h2. Getting started with eXo WCM
+h1. Preface {anchor:id=CONTref.Preface}
+h2. Getting started with eXo WCM {anchor:id=CONTref.Preface.GettingStartedWitheXoWCM}
   {include:document="pages/preface/start.wiki" /}
-h2. Packaging
+h2. Packaging {anchor:id=CONTref.Preface.Packaging}
   {include:document="pages/preface/packaging.wiki" /}
-h1. Portlets
-h2. Content Detail
+h1. Portlets {anchor:id=CONTref.Portlets}
+h2. Content Detail {anchor:id=CONTref.Portlets.ContentDetail}
   {include:document="pages/preface/portlet_contentdetail.wiki" /}
-h2. Content List
+h2. Content List {anchor:id=CONTref.Portlets.ContentList}
   {include:document="pages/preface/portlet_contentlist.wiki" /}
-h2. Search
+h2. Search {anchor:id=CONTref.Portlets.Search}
   {include:document="pages/preface/portlet_search.wiki" /}
-h2. Explorer
+h2. Explorer {anchor:id=CONTref.Portlets.Explorer}
   {include:document="pages/preface/portlet_explorer.wiki" /}
-h2. Administration
+h2. Administration {anchor:id=CONTref.Portlets.Administration}
   {include:document="pages/preface/portlet_administration.wiki" /}
-h2. Fast Content Creator
+h2. Fast Content Creator {anchor:id=CONTref.Portlets.FastContentCreator}
   {include:document="pages/preface/portlet_fastcontentcreator.wiki" /}
 
-h1. Configuration
-h2. Drives
+h1. Configuration {anchor:id=CONTref.Configuration}
+h2. Drives {anchor:id=CONTref.Configuration.Drives}
   {include:document="pages/configuration/drives.wiki" /}
-h2. Publication
+h2. Publication {anchor:id=CONTref.Configuration.Publication}
   {include:document="pages/configuration/publication.wiki" /}
-h2. Deployment
+h2. Deployment {anchor:id=CONTref.Configuration.Deployment}
   {include:document="pages/configuration/deployment.wiki" /}
-h2. Taxonomies
+h2. Taxonomies {anchor:id=CONTref.Configuration.Taxonomies}
   {include:document="pages/configuration/taxonomies.wiki" /}
-h2. Nodetypes
+h2. Nodetypes {anchor:id=CONTref.Configuration.Nodetypes}
   {include:document="pages/configuration/nodetypes.wiki" /}
-h2. Views
+h2. Views {anchor:id=CONTref.Configuration.Views}
   {include:document="pages/configuration/views.wiki" /}
-
-h2. Templates
-h3. Application template
+h2. Templates {anchor:id=CONTref.Configuration.Templates}
+h3. Application template  {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate}
   {include:document="pages/configuration/template_application.wiki" /}
-h3. Nodetype template
+h3. Nodetype template {anchor:id=CONTref.Configuration.Templates.NodetypeTemplate}
   {include:document="pages/configuration/template_nodetype.wiki" /}
-h2. Views
-  {include:document="pages/configuration/views.wiki" /}
 
-h1. Inside WCM Templates
-h2. Content types
+h1. Inside WCM Templates {anchor:id=CONTref.InsideWCMTemplates}
+h2. Content types {anchor:id=CONTref.CONTref.InsideWCMTemplates.ContentTypes}
   {include:document="pages/templates/content.wiki" /}
-h3. Dialog
+h3. Dialog {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog}
   {include:document="pages/templates/dialog.wiki" /}
-h3. View
+h3. View {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.View}
   {include:document="pages/templates/view.wiki" /}
-h2. List of Contents
+h2. List of Contents {anchor:id=CONTref.InsideWCMTemplates.ListOfContents}
   {include:document="pages/templates/clv.wiki" /}
-h3. Folder based Template
+h3. Folder based Template {anchor:id=CONTref.InsideWCMTemplates.ListOfContents.FolderbasedTemplate}
   {include:document="pages/templates/folder.wiki" /}
-h3. Category tree Template
+h3. Category tree Template {anchor:id=CONTref.InsideWCMTemplates.ListOfContents.CategoryTreeTemplate}
   {include:document="pages/templates/category.wiki" /}
 
-h1. Inside WCM Explorer
-h2. CSS
+h1. Inside WCM Explorer {anchor:id=CONTref.InsideWCMExplorer}
+h2. CSS {anchor:id=CONTref.InsideWCMExplorer.CSS}
   {include:document="pages/explorer/css.wiki" /}
-h2. Javascript
+h2. Javascript {anchor:id=CONTref.InsideWCMExplorer.Javascript}
   {include:document="pages/explorer/javascript.wiki" /}
-h2. CKEditor
+h2. CKEditor {anchor:id=CONTref.InsideWCMExplorer.CKEditor}
   {include:document="pages/explorer/ckeditor.wiki" /}
 
-h1. Extensions
-h2. REST Services
+h1. Extensions {anchor:id=CONTref.Extensions}
+h2. REST Services {anchor:id=CONTref.Extensions.RESTServices}
   {include:document="pages/extensions/rest.wiki" /}
-h2. UI Extensions
+h2. UI Extensions {anchor:id=CONTref.Extensions.UIExtensions}
   {include:document="pages/extensions/ui.wiki" /}
-h2. Authoring Extension
+h2. Authoring Extension {anchor:id=CONTref.Extensions.AuthoringExtension}
   {include:document="pages/extensions/authoring.wiki" /}
 
-h1. Java Services
-h2. TaxonomyService
+h1. Java Services {anchor:id=CONTref.JavaServices}
+h2. TaxonomyService {anchor:id=CONTref.JavaServices.TaxonomyService}
   {include:document="pages/services/taxonomy.wiki" /}
-h2. LinkManager
+h2. LinkManager {anchor:id=CONTref.JavaServices.LinkManager}
   {include:document="pages/services/link.wiki" /}
-h2. PublicationManager
+h2. PublicationManager {anchor:id=CONTref.JavaServices.PublicationManager}
   {include:document="pages/services/publication.wiki" /}
-h2. WCMComposer
+h2. WCMComposer {anchor:id=CONTref.JavaServices.WCMComposer}
   {include:document="pages/services/composer.wiki" /}
-h2. NewFolksonomy
+h2. NewFolksonomy {anchor:id=CONTref.JavaServices.NewFolksonomy}
   {include:document="pages/services/newFolksonomy.wiki" /}
-h2. ApplicationTemplateManager
+h2. ApplicationTemplateManager {anchor:id=CONTref.JavaServices.ApplicationTemplateManager}
   {include:document="pages/services/applicationTemplateManager.wiki" /}
-h2. NodeFinder
+h2. NodeFinder {anchor:id=CONTref.JavaServices.NodeFinder}
   {include:document="pages/services/nodeFinder.wiki" /}
-h2. JodConverter
+h2. JodConverter {anchor:id=CONTref.JavaServices.JodConverter}
   {include:document="pages/services/jodConverter.wiki" /}
 
-h1. FAQ
+h1. FAQ {anchor:id=CONTref.FAQ}
   {include:document="pages/faq/faq.wiki" /}
 

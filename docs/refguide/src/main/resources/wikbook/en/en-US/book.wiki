@@ -5,7 +5,7 @@ h1. WCM
 h1. Misc
 {include:document="WCM/FAQ.wiki" /}
 {include:document="WCM/Content Friendly URL.wiki" /}
-{include:document="WCM/How to create new publication in WCM.wiki" /}
+{include:document="WCM/How to create a new publication in WCM.wiki" /}
 {include:document="WCM/How to create a site template in WCM.wiki" /}
 {include:document="WCM/How to create and deploy pre-defined contents in WCM.wiki" /}
 {include:document="WCM/How to use FCKEditor in WCM.wiki" /}

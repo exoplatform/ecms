@@ -1,42 +1,42 @@
-h1. component configuration
+h1. Component configuration {anchor:id=CONTref.Configuration.Publication.ComponentConfiguration}
 
 || *Configuration name* || *Data type* || *Sample value* || *Description* ||
-| *key* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationService}} | Service class location |
-| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl}} | Service class's implementation location |
-| *component-plugins* | {{Object}} |N/A  | The plugins that are used inside the component |
-| *init-params* | {{Object}} |N/A | The intitial parameter that will be used inside the component |
+| *key* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationService}} | Service class location. |
+| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl}} | Service class's implementation location. |
+| *component-plugins* | {{Object}} |N/A  | The plugins that are used inside the component. |
+| *init-params* | {{Object}} |N/A | The initial parameter that will be used inside the component. |
 
-h2. component-plugin configuration
+h2. Component-plugin configuration {anchor:id=CONTref.Configuration.Publication.ComponentPluginConfiguration}
 * *Description*:
 
 || *Configuration name* || *Data type* || *Sample value* || *Description* ||
-| *name* | {{String}} | {{Simple publication}} | Name of component-plugin |
-| *set-method* | {{String}} | {{addPublicationPlugin}} | Set method to start using plugin |
-| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin}} | Class and location of plugin |
+| *name* | {{String}} | {{Simple publication}} | Name of component-plugin. |
+| *set-method* | {{String}} | {{addPublicationPlugin}} | Set method to start using the plugin. |
+| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin}} | Class and location of plugin. |
 
-h2. init-params configuration
+h2. Init-params configuration {anchor:id=CONTref.Configuration.Publication.InitparamsConfigurations}
 
-- parameter will be set in pair: name-value and will be placed inside the <value-param> object
+The parameter will be set in pair: name-value and will be placed inside the <value-param> object.
 || *Configuration name* || *Data type* || *Sample value* ||
-|*name* | {{String}} | {{useCache}} | 
+| *name* | {{String}} | {{useCache}} |
 | *value* | {{String}} | {{true}} |
 
 
-- parameter also can be set in an object, with further information will be the object's properties.
+Also, the parameter can be set in an object, with further information which will be the object's properties.
 || *Configuration name* || *Data type* || *Sample value* || *Description* ||
-| *name* | {{String}} | {{cache.config.wcm.composer}} |The name of the object |
-| *description* | {{String}} |N/A  |The brief description about the object |
-| *object* | {{Object}} |N/A  |  This object will be passed to component as a parameter, this object includes fieldset properties |
+| *name* | {{String}} | {{cache.config.wcm.composer}} | The name of object. |
+| *description* | {{String}} |N/A  |The brief description about the object. |
+| *object* | {{Object}} |N/A  | This object will be passed to component as a parameter, this object includes fieldset properties. |
 
-h1. external-component-plugins configuration
+h1. external-component-plugins configuration {anchor:id=CONTref.Configuration.Publication.Externalcomponentpluginsconfiguration}
 
 || *Configuration name* || *Data type* || *Sample value* || *Description* ||
-| *target-component* | {{String}} | {{org.exoplatform.services.wcm.core.WebSchemaConfigService<}} | External plugin's class location |
-| *component-plugin* | {{Object}} | N/A | Configuration of component that will be used as a plugin |
+| *target-component* | {{String}} | {{org.exoplatform.services.wcm.core.WebSchemaConfigService<}} | External plugin's class location. |
+| *component-plugin* | {{Object}} | N/A | Configuration of component that will be used as a plugin. |
 
-h1. Example
+h1. Example {anchor:id=CONTref.Configuration.Publication.Example}
 
-h2. Component that use plugins example
+h2. Component that use plugins example {anchor:id=CONTref.Configuration.Publication.ComponentUsePluginsExamples}
 {code:language=xml|indent=2}
 <component>
     <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
@@ -58,7 +58,7 @@ h2. Component that use plugins example
   </component>
 {code}
 
-h2. Component that has init-params example
+h2. Component with init-params example {anchor:id=CONTref.Configuration.Publication.ComponentInitparamExample}
 {code:language=xml|indent=2}
 <component>
     <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
@@ -72,7 +72,7 @@ h2. Component that has init-params example
   </component>
 {code}
 
-h2. external-component-plugins configuration example
+h2. External-component-plugins configuration example {anchor:id=CONTref.Configuration.Publication.Externalcomponentpluginsexample}
 {code:language=xml|indent=2}
 <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>

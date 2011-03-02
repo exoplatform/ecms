@@ -1,4 +1,4 @@
-Basically, if you want to add a rich text area into your dialogs, you can use [addRichtextField|#richtext-field] method. However, sometimes you want to add the rich text editor manually. So, first, you need to use [addTextAreaField|#textarea-field] method and some additionl javascripts like the below:
+Basically, if you want to add a rich text area to your dialogs, you can use the [addRichtextField|#richtext-field] method. However, sometimes you want to add the rich text editor manually. So, first, you need to use the [addTextAreaField|#textarea-field] method and some additional Javascripts as shown below:
 
 {code:language=java}
 <%

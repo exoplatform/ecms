@@ -1,4 +1,4 @@
-This class is used to manage dynamic groovy templates for ecm-based products.
+This class is used to manage dynamic groovy templates for ECM-based products.
 
 Package org.exoplatform.services.cms.views.ApplicationTemplateManager;
 
@@ -11,5 +11,4 @@ Package org.exoplatform.services.cms.views.ApplicationTemplateManager;
 | *getTemplateByPath* | {{Node}} | getTemplateByPath(String repository, String templatePath, SessionProvider sessionProvider){example}{example} throws Exception ; | Get the template by path: {example}{example}@param repository: the repository{example}{example}@param templatePath: the template path{example}{example}@param sessionProvider: the session provider{example}{example}@return the template by path{example}{example}@throws Exception: the exception |
 | *addTemplate* | {{void}} | addTemplate(Node portletTemplateHome, PortletTemplateConfig config){example}{example} throws Exception; | Adds the template: {example}{example} @param portletTemplateHome: the portlet template home{example}{example}@param config: the config{example}{example}@throws Exception: the exception |
 | *removeTemplate* | {{void}} | removeTemplate(String repository, String portletName, String catgory, String templateName, SessionProvider sessionProvider){example}{example} throws Exception; | Remove the template: {example}{example} @param repository: the repository{example}{example}@param portletName: the portlet name{example}{example}@param catgory: the catgory{example}{example}@param templateName: the template name{example}{example}@param sessionProvider: the session provider{example}{example}@throws Exception: the exception |
-
 
