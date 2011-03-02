@@ -159,8 +159,13 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 							<th class="thContent Title">
 								<%=_ctx.appRes("UINewsletterEntryManager.title.Status")%>
 							</th>
+							<%
+								def isDisable = "";
+								if(uicomponent.getListNewsletterEntries()==null || uicomponent.getListNewsletterEntries().size()==0) 
+									isDisable = "DISABLED";
+							%>
 							<th class="thContent Title" style="border-right:none;">
-								<input id="UIWCMNewsletterEntryManagerCheckAll" type="checkbox" onclick="eXo.ecm.NewsletterManager.checkAllSelected(this);">
+								<input id="UIWCMNewsletterEntryManagerCheckAll" type="checkbox" <%=isDisable%> onclick="eXo.ecm.NewsletterManager.checkAllSelected(this);">
 							</th>
 						</tr>
 						<%int count = 0;

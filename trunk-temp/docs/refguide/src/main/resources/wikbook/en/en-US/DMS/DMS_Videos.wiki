@@ -1,9 +1,0 @@
-
-h1. DMS Videos
-
-
-Thanks to the new user interface of eXo Portal 2.x and web 2.0 technologies, the eXo ECM also comes with a true revolutionary interface that was never seen in any ECM system today. By providing a File System environment very close to what people are used to in usual Operating System, we allow anyone in the company to feel comfortable with ECM functionality.
-
-h1. ECM 2.2
-
-<object width="400" height="300"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=2301687&server=vimeo.com&show_title=1&show_byline=1&show_portrait=0&color=&fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=2301687&server=vimeo.com&show_title=1&show_byline=1&show_portrait=0&color=&fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="300"></embed></object><br /><a href="http://vimeo.com/2301687">eXo ECM 2.2 preview</a> from <a href="http://vimeo.com/user896168">Benjamin Mestrallet</a> on <a href="http://vimeo.com">Vimeo</a>.

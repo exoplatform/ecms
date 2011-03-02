@@ -137,6 +137,12 @@
       <checkOnlyOneNewsletterToDelete>S'il vous plaît cocher une seule case pour supprimer la nouvelle lettre!</checkOnlyOneNewsletterToDelete>
       <checkOnlyOneNewsletterToOpen>S'il vous plaît cocher une seule case de nouvelle lettre à ouvrir!</checkOnlyOneNewsletterToOpen>
       <checkOnlyOneNewsletterToConvert>S'il vous plaît cocher une seule lettre d'information pour convertir!</checkOnlyOneNewsletterToConvert>
+		
+	  <checkOneNewsletterToEdit>S'il vous plaît cocher une case de nouvelle lettre à modifier!</checkOneNewsletterToEdit>      
+      <checkOneNewsletterToOpen>S'il vous plaît cocher une case de nouvelle lettre à ouvrir!</checkOneNewsletterToOpen>
+      <checkOneNewsletterToConvert>S'il vous plaît cocher une lettre d'information pour convertir!</checkOneNewsletterToConvert>
+			
+		
       <convertSuccessful>Lettre convertie en tant que modèle avec succès</convertSuccessful>
       <templateIsExist>Il existe déjà un modèle avec le même nom! Merci de modifier le titre et de réessayer.</templateIsExist>
       <get-list-subscriptions>erreur lorsque vous effectuez obtenir abonnements liste. </get-list-subscriptions>

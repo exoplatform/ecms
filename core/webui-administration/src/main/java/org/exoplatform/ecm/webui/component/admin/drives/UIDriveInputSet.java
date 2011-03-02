@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -69,7 +70,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     setComponentConfig(getClass(), null);
 
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
-                       addValidator(MandatoryValidator.class));
+                       addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class));
     addUIFormInput(new UIFormSelectBox(FIELD_WORKSPACE, FIELD_WORKSPACE, null));  
     UIFormStringInput homePathField = new UIFormStringInput(FIELD_HOMEPATH, FIELD_HOMEPATH, null);
     homePathField.setValue("/");

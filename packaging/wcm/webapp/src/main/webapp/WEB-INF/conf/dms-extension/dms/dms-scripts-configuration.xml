@@ -113,6 +113,11 @@
 		                  <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithNodeChildren.groovy</string></field>
 		                </object>  
 		              </value> 
+					  <value>
+		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+		                  <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithLanguage.groovy</string></field>
+		                </object>  
+		              </value> 
 		              <!-- ecm-explorer/interceptor -->
 		              <value>
 		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">

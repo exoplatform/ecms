@@ -217,6 +217,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
 	<td>--&nbsp;&nbsp;Next</td>
 	<td></td>
@@ -249,12 +254,7 @@
 <tr>
 	<td>addSelection</td>
 	<td>lifecycle</td>
-	<td>label=User Action</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//option[@value='read']</td>
-	<td></td>
+	<td>label=node_added</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -273,17 +273,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIActionForm']//a[contains(@onclick,&quot;objectId=targetPath&quot;)]</td>
+	<td>//form[@id='UIActionForm']/div[2]/table/tbody/tr[8]/td[2]/table/tbody/tr/td[2]/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIActionForm']//a[contains(@onclick,&quot;objectId=targetPath&quot;)]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;AddRootNode</td>
+	<td>//form[@id='UIActionForm']/div[2]/table/tbody/tr[8]/td[2]/table/tbody/tr/td[2]/a[1]/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -297,18 +292,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;Save</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIActionForm']//a[text()=&quot;Save&quot;]</td>
+	<td>//form[@id='UIActionForm']/div[2]/div/table/tbody/tr/td/div[2]/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIActionForm']//a[text()=&quot;Save&quot;]</td>
+	<td>//form[@id='UIActionForm']/div[2]/div/table/tbody/tr/td/div[2]/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -318,12 +308,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id=&quot;UITaxonomyTreeWorkingArea&quot;]//img[contains(@onclick,&quot;Test_68&quot;) and @title=&quot;Add&quot;]</td>
+	<td>//img[@title='Add']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id=&quot;UITaxonomyTreeWorkingArea&quot;]//img[contains(@onclick,&quot;Test_68&quot;) and @title=&quot;Add&quot;]</td>
+	<td>//img[@title='Add']</td>
 	<td></td>
 </tr>
 <tr>
@@ -334,7 +324,7 @@
 <tr>
 	<td>type</td>
 	<td>taxonomyName</td>
-	<td>child1</td>
+	<td>child 1</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -353,12 +343,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id=&quot;UITaxonomyTreeWorkingArea&quot;]//img[contains(@onclick,&quot;Test_68&quot;) and @title=&quot;Add&quot;]</td>
+	<td>//img[@title='Add']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id=&quot;UITaxonomyTreeWorkingArea&quot;]//img[contains(@onclick,&quot;Test_68&quot;) and @title=&quot;Add&quot;]</td>
+	<td>//img[@title='Add']</td>
 	<td></td>
 </tr>
 <tr>
@@ -369,7 +359,7 @@
 <tr>
 	<td>type</td>
 	<td>taxonomyName</td>
-	<td>child2</td>
+	<td>child 2</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -403,22 +393,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;child1&quot;) and @title=&quot;Copy&quot;]</td>
+	<td>//img[@title='Copy']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;child1&quot;) and @title=&quot;Copy&quot;]</td>
+	<td>//img[@title='Copy']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;child2&quot;) and @title=&quot;Paste&quot;]</td>
+	<td>//tr[2]/td[2]/div/img[4]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;child2&quot;) and @title=&quot;Paste&quot;]</td>
+	<td>//tr[2]/td[2]/div/img[4]</td>
 	<td></td>
 </tr>
 <tr>
@@ -428,12 +418,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UITaxonomyTreeCreateChild']//div[text()='child2']</td>
+	<td>//div[@id='UITaxonomyTreeCreateChild']//div[text()='child 2']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UITaxonomyTreeCreateChild']//div[text()='child2']</td>
+	<td>//div[@id='UITaxonomyTreeCreateChild']//div[text()='child 2']</td>
 	<td></td>
 </tr>
 <tr>
@@ -443,12 +433,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(@href,&quot;objectId=%252FTest_68%252Fchild2%252Fchild1&quot;)]</td>
+	<td>//div[@id=&quot;UITaxonomyTreeCreateChild&quot;]/div[2]/div/div/div/div/div[3]/div/div/a/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyVisible</td>
-	<td>//a[contains(@href,&quot;objectId=%252FTest_68%252Fchild2%252Fchild1&quot;)]</td>
+	<td>//div[@id=&quot;UITaxonomyTreeCreateChild&quot;]/div[2]/div/div/div/div/div[3]/div/div/a/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -458,12 +448,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@title=&quot;Up Level&quot;]</td>
+	<td>//div[@id='UITaxonomyTreeCreateChild']/div[2]/div/div/div/div/div[1]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[@title=&quot;Up Level&quot;]</td>
+	<td>//div[@id='UITaxonomyTreeCreateChild']/div[2]/div/div/div/div/div[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -473,22 +463,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;child2&quot;) and @title=&quot;Cut&quot;]</td>
+	<td>//tr[2]/td[2]/div/img[3]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;child2&quot;) and @title=&quot;Cut&quot;]</td>
+	<td>//tr[2]/td[2]/div/img[3]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;child1&quot;) and @title=&quot;Paste&quot;]</td>
+	<td>//img[@title='Paste']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;child1&quot;) and @title=&quot;Paste&quot;]</td>
+	<td>//img[@title='Paste']</td>
 	<td></td>
 </tr>
 <tr>
@@ -498,12 +488,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UITaxonomyTreeCreateChild']//div[text()=&quot;child1&quot;]</td>
+	<td>//div[@id='UITaxonomyTreeCreateChild']/div[2]/div/div/div/div/div[2]/a/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UITaxonomyTreeCreateChild']//div[text()=&quot;child1&quot;]</td>
+	<td>//div[@id='UITaxonomyTreeCreateChild']/div[2]/div/div/div/div/div[2]/a/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -513,12 +503,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id=&quot;UITaxonomyTreeCreateChild&quot;]//div[text()=&quot;child2&quot;]</td>
+	<td>//div[@id=&quot;UITaxonomyTreeCreateChild&quot;]/div[2]/div/div/div/div/div[2]/div/div/a/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyVisible</td>
-	<td>//div[@id=&quot;UITaxonomyTreeCreateChild&quot;]//div[text()=&quot;child2&quot;]</td>
+	<td>//div[@id=&quot;UITaxonomyTreeCreateChild&quot;]/div[2]/div/div/div/div/div[2]/div/div/a/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -528,12 +523,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;child1&quot;) and @title=&quot;Delete&quot;]</td>
+	<td>//img[6]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;child1&quot;) and @title=&quot;Delete&quot;]</td>
+	<td>//img[6]</td>
 	<td></td>
 </tr>
 <tr>
@@ -548,12 +543,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[contains(@onclick,&quot;ClosePopup&quot;) and @title=&quot;Close Window&quot;]</td>
+	<td>//div[2]/div[2]/div/div[1]/div/div/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[contains(@onclick,&quot;ClosePopup&quot;) and @title=&quot;Close Window&quot;]</td>
+	<td>//div[2]/div[2]/div/div[1]/div/div/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
 	<td></td>
 </tr>
 <tr>
@@ -563,12 +563,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;Test_68&quot;) and @title=&quot;Edit taxonomy Tree&quot;]</td>
+	<td>//tr[5]/td[5]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;Test_68&quot;) and @title=&quot;Edit taxonomy Tree&quot;]</td>
+	<td>//tr[5]/td[5]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
@@ -628,12 +628,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[text()=&quot;Close&quot;]</td>
+	<td>//div[2]/div[2]/div/div[1]/div/div/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[text()=&quot;Close&quot;]</td>
+	<td>//div[2]/div[2]/div/div[1]/div/div/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -643,12 +643,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;Test_68&quot;) and @title=&quot;Delete taxonomy Tree&quot;]</td>
+	<td>//tr[5]/td[5]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;Test_68&quot;) and @title=&quot;Delete taxonomy Tree&quot;]</td>
+	<td>//tr[5]/td[5]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>

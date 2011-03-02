@@ -8,7 +8,7 @@
   
  <UIWCMCacheForm> 	 
  	 <action>
- 	 		<Cancel>Cancel</Cancel>
+ 	 		<Refresh>Refresh</Refresh>
  	 		<Save>Save</Save>
 					<Clear>Clear the cache</Clear> 	 		
  	 </action> 	 
@@ -18,7 +18,7 @@
 					<livetime>Live time in sec :</livetime>
 					<isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
 					<hit>Hit count :</hit>				
-					<currentSize>Current size</currentSize>
+					<currentSize>Current size :</currentSize>
 					<miss>Miss count :</miss>
 			</label>
  </UIWCMCacheForm>
@@ -31,7 +31,7 @@
 		
 	<UIWCMCacheManagerForm> 	 
  	 <action>
- 	 		<Cancel>Cancel</Cancel>
+ 	 		<Refresh>Refresh</Refresh>
  	 		<Save>Save</Save>
 					<Clear>Clear the cache</Clear> 	 		
  	 </action> 	 
@@ -41,7 +41,7 @@
 					<livetime>Live time in sec :</livetime>
 					<isCacheEnable>Cache enabled(should always be on production enviroment)</isCacheEnable>
 					<hit>Hit count :</hit>				
-					<currentSize>Current size</currentSize>
+					<currentSize>Current size :</currentSize>
 					<miss>Miss count :</miss>
 			</label>
  </UIWCMCacheManagerForm>

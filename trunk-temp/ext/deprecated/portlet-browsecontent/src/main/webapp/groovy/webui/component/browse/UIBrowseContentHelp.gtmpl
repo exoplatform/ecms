@@ -1,2 +1,0 @@
-<div class="<%=uicomponent.getId()%>" id="<%=uicomponent.getId()%>">
-</div>

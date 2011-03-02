@@ -433,6 +433,9 @@
     <msg>
       <confirm-delete>هل أنت متأكد من الحذف?</confirm-delete>
       <confirm-delete-multi>هل أنت متأكد من حذف ال{0} عقد في سلة المهملات?</confirm-delete-multi>
+	  <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Do you want to delete it and all its relations?</confirm-delete-has-relations>
+	  <confirm-delete-multi-one-node-has-relations>Do you want to move these {0} items? (The node {1} has relations that refer to it, this process will remove all its relations)</confirm-delete-multi-one-node-has-relations>
+      <confirm-delete-multi-many-nodes-have-relations>Do you want to move these {0} items? (The nodes {1} have relations that refer to them, this process will remove all their relations)</confirm-delete-multi-many-nodes-have-relations>
       <confirm-move>هل أنت متأكد من التحويل?</confirm-move>
       <node-cut>العقدة '{0}' تم قصها.</node-cut>
       <execute-successfully>العمل '{0}' تم تأديته</execute-successfully>

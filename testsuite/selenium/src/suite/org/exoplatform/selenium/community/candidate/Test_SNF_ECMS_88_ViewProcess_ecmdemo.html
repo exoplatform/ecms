@@ -68,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
+	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
+	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -83,12 +83,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;objectId=2&quot;)]</td>
+	<td>//div[@id='UIBPDefinition']/table/tbody/tr[2]/td[4]/div/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;objectId=2&quot;)]</td>
+	<td>//div[@id='UIBPDefinition']/table/tbody/tr[2]/td[4]/div/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -163,57 +163,42 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;objectId=2&quot;) and @title=&quot;View&quot;]</td>
+	<td>//div[@id='UIMonitor']/table/tbody/tr[3]/td[4]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;objectId=2&quot;) and @title=&quot;View&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- View Prcess detail</td>
+	<td>//div[@id='UIMonitor']/table/tbody/tr[3]/td[4]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[@title=&quot;View&quot; and contains(@onclick,&quot;UIProcessDetail&quot;)]</td>
+	<td>//div[@id='UIRunningProcessGrid']/table/tbody/tr/td[6]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[@title=&quot;View&quot; and contains(@onclick,&quot;UIProcessDetail&quot;)]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Cancel</td>
+	<td>//div[@id='UIRunningProcessGrid']/table/tbody/tr/td[6]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UITaskListOfProcess']//div[contains(text(),&quot;Cancel&quot;)]</td>
+	<td>//div[@id='UITaskListOfProcess']/div/div/div[2]/table/tbody/tr/td/a/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UITaskListOfProcess']//div[contains(text(),&quot;Cancel&quot;)]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Delete</td>
+	<td>//div[@id='UITaskListOfProcess']/div/div/div[2]/table/tbody/tr/td/a/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[@title=&quot;Delete&quot; and contains(@onclick,&quot;UIProcessDetail&quot;)]</td>
+	<td>//div[@id='UIRunningProcessGrid']/table/tbody/tr/td[6]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[@title=&quot;Delete&quot; and contains(@onclick,&quot;UIProcessDetail&quot;)]</td>
+	<td>//div[@id='UIRunningProcessGrid']/table/tbody/tr/td[6]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -222,33 +207,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-- check content in Process Detail table</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>No process to view detail </td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>No process to view detail </td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>//div[@id='UIProcessDetail']//div[contains(text(),&quot;Cancel&quot;)]</td>
+	<td>//div[@id='UIProcessDetail']/div/div/div[2]/table/tbody/tr/td/a[2]/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
 	<td>-- Log out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>

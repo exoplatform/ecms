@@ -285,8 +285,11 @@ public class UINewsletterEntryManager extends UIForm {
     public void execute(Event<UINewsletterEntryManager> event) throws Exception {
       UINewsletterEntryManager uiNewsletterEntryManager = event.getSource();
       List<String> subIds = uiNewsletterEntryManager.getChecked();
-      if(subIds == null || subIds.size() != 1){
-        Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOnlyOneNewsletterToOpen", null, ApplicationMessage.WARNING);
+      if(subIds == null){
+        Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOneNewsletterToOpen", null, ApplicationMessage.WARNING);
+        return;
+      } else if (subIds.size() != 1) {
+    	Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOnlyOneNewsletterToOpen", null, ApplicationMessage.WARNING);
         return;
       }
       UINewsletterManagerPopup newsletterManagerPopup = uiNewsletterEntryManager.createUIComponent(UINewsletterManagerPopup.class, null, null);
@@ -399,9 +402,12 @@ public class UINewsletterEntryManager extends UIForm {
     public void execute(Event<UINewsletterEntryManager> event) throws Exception {
       UINewsletterEntryManager uiNewsletterEntryManager = event.getSource();
       List<String> subIds = uiNewsletterEntryManager.getChecked();
-      if(subIds == null || subIds.size() != 1){
-        Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOnlyOneNewsletterToEdit", null, ApplicationMessage.WARNING);
+      if(subIds == null || subIds.size()==0){
+        Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOneNewsletterToEdit", null, ApplicationMessage.WARNING);
         return;
+      } else if (subIds.size() != 1) {
+    	Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOnlyOneNewsletterToEdit", null, ApplicationMessage.WARNING);
+        return;   
       } else {
         NewsletterManagerConfig newsletterName = uiNewsletterEntryManager.newsletterEntryHandler.
                                                             getNewsletterEntry(Utils.getSessionProvider(), NewsLetterUtil.getPortalName(), 
@@ -456,9 +462,12 @@ public class UINewsletterEntryManager extends UIForm {
       List<String> subIds = newsletterEntryManager.getChecked();
       String message;
       int messageType;
-      if(subIds == null || subIds.size() != 1){
-        message = "UISubscription.msg.checkOnlyOneNewsletterToConvert";
+      if(subIds == null){
+        message = "UISubscription.msg.checkOneNewsletterToConvert";
         messageType = ApplicationMessage.WARNING;
+      } else if (subIds.size() != 1) {
+    	message = "UISubscription.msg.checkOnlyOneNewsletterToConvert";
+        messageType = ApplicationMessage.WARNING; 
       } else {
         try{
           String newsletterName = subIds.get(0);

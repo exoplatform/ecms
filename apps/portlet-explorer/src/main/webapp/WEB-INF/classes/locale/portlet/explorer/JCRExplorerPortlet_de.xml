@@ -436,6 +436,9 @@
     <msg>
       <confirm-delete><![CDATA[Wollen Sie wirklich l&ouml;schen?]]></confirm-delete>
       <confirm-delete-multi>Sind Sie sicher, dass verschieben möchten diese {0} Elemente in den Papierkorb verschoben werden?</confirm-delete-multi>
+	  <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Do you want to delete it and all its relations?</confirm-delete-has-relations>
+	  <confirm-delete-multi-one-node-has-relations>Do you want to move these {0} items? (The node {1} has relations that refer to it, this process will remove all its relations)</confirm-delete-multi-one-node-has-relations>
+      <confirm-delete-multi-many-nodes-have-relations>Do you want to move these {0} items? (The nodes {1} have relations that refer to them, this process will remove all their relations)</confirm-delete-multi-many-nodes-have-relations>
       <confirm-move>Sind Sie sicher, dass verschieben möchten?</confirm-move>
       <node-cut>Der Knoten '{0}' wurde ausgeschnitten.</node-cut>
       <execute-successfully><![CDATA[Die custom Aktion '{0}' wurde ausgef&uuml;hrt.]]></execute-successfully>

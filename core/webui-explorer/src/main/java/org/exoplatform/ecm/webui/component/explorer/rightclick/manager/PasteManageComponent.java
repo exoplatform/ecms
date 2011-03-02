@@ -451,7 +451,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         }        
         
         if (!session.itemExists(uiExplorer.getCurrentPath())) {
-          uiExplorer.setCurrentPath(LinkUtils.getAncestorPath(uiExplorer.getCurrentPath(), 0));
+          uiExplorer.setCurrentPath(LinkUtils.getParentPath(uiExplorer.getCurrentPath()));
         }
                 
         if (!(desNode.getPath().equals(uiExplorer.getCurrentPath())))

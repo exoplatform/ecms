@@ -18,6 +18,7 @@
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,6 +29,7 @@ import java.util.regex.Matcher;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.PropertyIterator;
 import javax.jcr.ReferentialIntegrityException;
 import javax.jcr.Session;
 import javax.jcr.lock.LockException;
@@ -54,8 +56,10 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkUtils;
+import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -154,6 +158,19 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       node.removeMixin(nodeType.getName());
     }
   }
+  
+  private void removeAuditForNode(Node node) throws Exception {
+  	UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+  	ManageableRepository repository = uiExplorer.getRepository();
+  	SessionProvider sessionProvider = uiExplorer.getSystemProvider();
+  	Session session = null;
+		session = sessionProvider.getSession(node.getSession().getWorkspace().getName(), repository);
+		if (session.getRootNode().hasNode("exo:audit") && 
+				session.getRootNode().getNode("exo:audit").hasNode(node.getUUID())) {
+			session.getRootNode().getNode("exo:audit").getNode(node.getUUID()).remove();
+			session.save();
+		}
+  }
 
   private void processRemoveOrMoveToTrash(String nodePath, Node node, Event<?> event, boolean isMultiSelect, boolean checkToMoveToTrash)
   throws Exception {
@@ -167,7 +184,11 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   	  String parentRepo = node.getSession().getRepository().toString();
   	  String parentWSpace = node.getSession().getWorkspace().getName();
 
-      wcmComposer.updateContent(parentRepo, parentWSpace, node.getPath(), new HashMap<String, String>());  	  
+      wcmComposer.updateContent(parentRepo, parentWSpace, node.getPath(), new HashMap<String, String>());  	
+      boolean isNodeReferenceable = Utils.isReferenceable(node);
+      String nodeUUID = null;
+      if(isNodeReferenceable)
+        nodeUUID = node.getUUID(); 
       boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
       if (moveOK) {
         for(Node categoryNode : categories){
@@ -175,9 +196,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   	                                 categoryNode.getSession().getWorkspace().getName(),
   	                                 categoryNode.getPath(), new HashMap<String, String>());
         }
-    	  
+        PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
+
+        PortletPreferences portletPref = pcontext.getRequest().getPreferences();    	
+
+        String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
         if (Utils.isReferenceable(node)) {
-          wcmComposer.updateContent(parentRepo, parentWSpace, node.getUUID(), new HashMap<String, String>());
+          wcmComposer.updateContent(parentRepo, trashWorkspace, nodeUUID, new HashMap<String, String>());
         }
         wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
       }
@@ -204,18 +229,18 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     		node.unlock();
     	}
     	
-    	if (node.getReferences().getSize() > 0 ) {
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-referentialIntegrityException", 
-            null,ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        uiExplorer.updateAjax(event);
-        return false;
-      }
+    	//remove all relations that refer to this node
+    	RelationsService relationService = uiApp.getApplicationComponent(RelationsService.class) ; 
+    	PropertyIterator iter = node.getReferences();
+    	while (iter.hasNext()) {
+    		Node refNode = iter.nextProperty().getParent();
+    		relationService.removeRelation(refNode, node.getPath(), uiExplorer.getRepositoryName());
+    	}
     	
-			if (!node.isCheckedOut())
-				throw new VersionException("node is locked, can't move to trash node :" + node.getPath());
-			if (!PermissionUtil.canRemoveNode(node))
-				throw new AccessDeniedException("access denied, can't move to trash node:" + node.getPath());
+		if (!node.isCheckedOut())
+			throw new VersionException("node is locked, can't move to trash node :" + node.getPath());
+		if (!PermissionUtil.canRemoveNode(node))
+			throw new AccessDeniedException("access denied, can't move to trash node:" + node.getPath());
     	PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
         PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     	String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
@@ -275,9 +300,6 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     Node currentNode = uiExplorer.getCurrentNode(); 
     Session session = node.getSession();
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-    
-    TrashService trashService = getApplicationComponent(TrashService.class);
-    
     try {
       uiExplorer.addLockToken(node);
     } catch (Exception e) {
@@ -316,6 +338,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       																								 node.getSession().getUserID(),
 																											 getGroups());
       //trashService.removeRelations(node, uiExplorer.getSystemProvider(), uiExplorer.getRepositoryName());
+      if (PermissionUtil.canRemoveNode(node) && node.isNodeType(Utils.EXO_AUDITABLE)) {
+      	removeAuditForNode(node);
+      }
       node.remove();
       parentNode.save();
     } catch (VersionException ve) {
@@ -451,20 +476,92 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
     UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-    UIConfirmMessage uiConfirmMessage = 
-      uiWorkingArea.createUIComponent(UIConfirmMessage.class, null, null);
+    UIConfirmMessage uiConfirmMessage = uiWorkingArea.createUIComponent(UIConfirmMessage.class, null, null);
+    UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     
-    if(nodePath.indexOf(";") > -1) {
-      uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-multi");
-      uiConfirmMessage.setArguments(new String[] {Integer.toString(nodePath.split(";").length)});
-    } else {
-      uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete");
-      uiConfirmMessage.setArguments(new String[] {nodePath});
+    //get nodes that have relations referring to them
+    List<String> listNodesHaveRelations = null;
+    try {
+    	listNodesHaveRelations = checkRelations(nodePath, uiExplorer);
+    } catch (PathNotFoundException pathEx) {
+    	uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
     }
+    
+    //show confirm message
+    if (listNodesHaveRelations != null && listNodesHaveRelations.size() > 0) {  //there are some nodes which have relations referring to them 
+    																			//in the deleting node list
+    	//build node list to string to add into the confirm message
+    	String strNodesHaveRelations = "";
+    	for (int i = 0; i < listNodesHaveRelations.size(); i++) {
+    		strNodesHaveRelations += "'" + listNodesHaveRelations.get(i) + "', ";
+    	}
+    	//remove "," character at the end of string
+    	strNodesHaveRelations = strNodesHaveRelations.substring(0, strNodesHaveRelations.length() - 2);
+    	
+    	//show message
+    	if (nodePath.indexOf(";") < 0) {  //in case: delete one node that has relations
+    		uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-has-relations");
+  	        uiConfirmMessage.setArguments(new String[] {nodePath});
+  	        
+    	} else if (listNodesHaveRelations.size() > 1) {  //in case: delete multiple node, there are many nodes have relations
+    		uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-multi-many-nodes-have-relations");
+  	      	uiConfirmMessage.setArguments(new String[] {Integer.toString(nodePath.split(";").length), strNodesHaveRelations});
+  	      	
+    	} else {   //in case: delete multiple node, there is only one node has relations
+    		uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-multi-one-node-has-relations");
+  	      	uiConfirmMessage.setArguments(new String[] {Integer.toString(nodePath.split(";").length), strNodesHaveRelations});
+    	}
+    } else {  //there isn't any node which has relations referring to it in the deleting node list
+    	if(nodePath.indexOf(";") > -1) {   //delete multi
+	      uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-multi");
+	      uiConfirmMessage.setArguments(new String[] {Integer.toString(nodePath.split(";").length)});
+	    } else {    //delete one
+	      uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete");
+	      uiConfirmMessage.setArguments(new String[] {nodePath});
+	    }
+    }    
+    
     uiConfirmMessage.setNodePath(nodePath);
     UIPopupContainer.activate(uiConfirmMessage, 500, 180);
     event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
   }
+  
+	/**
+	 * This function uses to get a node list that have relations referring to them in the deleting node list
+	 * 
+	 * @param nodePath The list of nodes that user wants to delete
+	 * @param uiExplorer uiExplorer
+	 * @return The list of nodes that have relations referring to them
+	 * @throws Exception
+	 */
+	private static List<String> checkRelations(String nodePath, UIJCRExplorer uiExplorer) throws Exception{
+		
+		Node node = null;
+		String wsName = null;
+		Session session = null;
+		String[] nodePaths = nodePath.split(";");
+				
+		List<String> listNodesHaveRelations = new ArrayList<String>();
+		for (int i = 0; i < nodePaths.length; i++) {
+			Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);
+			if (matcher.find()) {
+				wsName = matcher.group(1);
+				nodePath = matcher.group(2);
+				session = uiExplorer.getSessionByWorkspace(wsName);
+				node = uiExplorer.getNodeByPath(nodePath, session, false);
+				
+				//check references
+				if (node.getReferences().getSize() > 0) {
+					listNodesHaveRelations.add(nodePath);
+				}
+			} else {
+				throw new IllegalArgumentException("The ObjectId is invalid '" + nodePath + "'");
+			}
+		}
+		return listNodesHaveRelations;
+	}
   
   private String getGroups() throws Exception {
   	StringBuilder ret = new StringBuilder();

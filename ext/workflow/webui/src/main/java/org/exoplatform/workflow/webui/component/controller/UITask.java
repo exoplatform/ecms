@@ -68,6 +68,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.UIFormUploadInput;
 import org.exoplatform.webui.form.validator.DateTimeValidator;
+import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
 import org.exoplatform.workflow.webui.component.BJARResourceResolver;
 import org.exoplatform.workflow.webui.component.InputInfo;
@@ -358,6 +359,9 @@ public class UITask extends UIForm implements UISelectable {
         } catch(Exception e) {
         }
         inputInfo_.add(new InputInfo("", "", inputName, input, mandatory));
+        if (mandatory) {
+          input.addValidator(MandatoryValidator.class);
+        }
         addUIFormInput(input);
       }
     }

@@ -18,6 +18,8 @@ public class LocalizationConnector implements ResourceContainer {
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+  
+  private static final String CONTENT_TYPE = "Content-Type";
    
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
@@ -29,11 +31,11 @@ public class LocalizationConnector implements ResourceContainer {
 	) throws Exception {
 	  DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
 		try {
-			return Response.ok(cleanString(name)).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+			return Response.ok(cleanString(name)).header(CONTENT_TYPE, "text/html; charset=utf-8").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 		} catch (Exception e) {
 			Response.serverError().build();
 		}    
-		return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+		return Response.ok().header(CONTENT_TYPE, "text/html; charset=utf-8").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 	}
 
 

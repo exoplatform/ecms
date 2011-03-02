@@ -87,6 +87,8 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
+      else
+    	  name = name.trim();
 
       if (!Utils.isNameValid(name, new String[] { "&", "$", "@", ",", ":", "]", "[", "*", "%", "!" })) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-invalid",

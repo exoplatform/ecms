@@ -30,13 +30,11 @@ import java.util.Map.Entry;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -90,7 +88,7 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UICLVPresentation extends UIContainer {
 
-	private static final String defaultScvParam = "content-id";
+	public static final String defaultScvParam = "content-id";
 	
   /** The template path. */
   private String                   templatePath;

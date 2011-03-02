@@ -102,8 +102,8 @@
                     <thead>
                       <tr>
                         <th><%=_ctx.appRes("UICLVConfig.label.ContentPath")%></th>
-                        <th><%=_ctx.appRes("UISelectedContentGrid.action.Down")%></th>
-                        <th><%=_ctx.appRes("UISelectedContentGrid.action.Up")%></th>
+                        <th><%=_ctx.appRes("UICLVConfig.label.Down")%></th>
+                        <th><%=_ctx.appRes("UICLVConfig.label.Up")%></th>
                       </tr>
                     </thead>
                     <% 

@@ -112,11 +112,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>3000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Actions</td>
 	<td></td>
@@ -308,42 +303,32 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;zzNew&quot;) and @title=&quot;Execute&quot;]</td>
+	<td>//div[@id='UISavedQuery']/table/tbody/tr[4]/td[5]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;zzNew&quot;) and @title=&quot;Execute&quot;]</td>
+	<td>//div[@id='UISavedQuery']/table/tbody/tr[4]/td[5]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- View Results</td>
+	<td>-- View content of document</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;objectId=%2FUsers%2Froot%2FPrivate%2Fnhuvaynhe&quot;) and @title=&quot;View this node&quot;]</td>
+	<td>waitForTextPresent</td>
+	<td>/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//img[contains(@onclick,&quot;objectId=%2FUsers%2Froot%2FPrivate%2Fnhuvaynhe&quot;) and @title=&quot;View this node&quot;]</td>
+	<td>verifyTextPresent</td>
+	<td>/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Delete query : zzNew</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@title='Advance Search']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@title='Advance Search']</td>
+	<td>-- Delete query</td>
 	<td></td>
 </tr>
 <tr>
@@ -358,12 +343,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;objectId=%2FUsers%2Froot%2FPrivate%2FSearches%2FzzNew&quot;) and @title=&quot;Delete&quot;]</td>
+	<td>//img[@title='Delete']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;objectId=%2FUsers%2Froot%2FPrivate%2FSearches%2FzzNew&quot;) and @title=&quot;Delete&quot;]</td>
+	<td>//img[@title='Delete']</td>
 	<td></td>
 </tr>
 <tr>
@@ -378,12 +363,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPopupWindow']//div[@title=&quot;Close Window&quot;]</td>
+	<td>//div[@id='UIPopupWindow']/div/div[1]/div/div/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPopupWindow']//div[@title=&quot;Close Window&quot;]</td>
+	<td>//div[@id='UIPopupWindow']/div/div[1]/div/div/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -412,23 +397,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Do you want to delete the node 'collaboration:/Users/root/Private/nhuvaynhe' and move all its contents?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Do you want to delete the node 'collaboration:/Users/root/Private/nhuvaynhe' and move all its contents?</td>
 	<td></td>
 </tr>
 <tr>

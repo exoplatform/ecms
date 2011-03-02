@@ -48,6 +48,7 @@ import org.exoplatform.webui.form.UIFormHiddenInput;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
+import org.exoplatform.webui.form.validator.IdentifierValidator;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
 import org.exoplatform.ws.frameworks.json.JsonHandler;
@@ -92,7 +93,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     super(UIFormGeneratorConstant.FORM_GENERATOR_TABPANE);
     
     UIFormInputSet formGeneratorGeneralTab = new UIFormInputSet(UIFormGeneratorConstant.FORM_GENERATOR_GENERAL_TAB);
-    UIFormStringInput nameFormStringInput = new UIFormStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT, UIFormGeneratorConstant.NAME_FORM_STRING_INPUT, null); 
+    UIFormStringInput nameFormStringInput = new UIFormStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT, UIFormGeneratorConstant.NAME_FORM_STRING_INPUT, null);
+    nameFormStringInput.addValidator(IdentifierValidator.class);
     nameFormStringInput.addValidator(MandatoryValidator.class);
     nameFormStringInput.addValidator(ECMNameValidator.class);
     formGeneratorGeneralTab.addUIFormInput(nameFormStringInput);

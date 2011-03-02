@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms</artifactId>
-    <version>2.2.0-Beta2-SNAPSHOT</version>
+    <version>2.2.0-TMP-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-apps</artifactId>
   <packaging>pom</packaging>
@@ -13,7 +13,8 @@
   <modules>
     <module>portlet-administration</module>
     <module>portlet-explorer</module>
-    <module>gadget-publication</module>        
+    <module>gadget-favorites</module> 
+    <module>gadget-publication</module>       
     <module>resources-dms</module>
     <module>portlet-presentation</module>
     <module>portlet-search</module>

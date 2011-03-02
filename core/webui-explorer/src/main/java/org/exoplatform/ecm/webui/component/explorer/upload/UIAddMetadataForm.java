@@ -119,8 +119,12 @@ public class UIAddMetadataForm extends UIDialogForm {
               valueList.add(uiJCRExplorer.getSession().getValueFactory().createValue(uiFormDateTime.getCalendar())) ;
               node.setProperty(name, valueList.toArray(new Value[] {}));
             } else {
-              List<String> values = (List<String>) ((UIFormMultiValueInputSet)uiForm.getUIInput(inputName)).getValue() ;
-              node.setProperty(name, values.toArray(new String[values.size()]));
+            	if (((UIFormInput)uiForm.getUIInput(inputName)) instanceof UIFormSelectBox){
+            		node.setProperty(name, ((UIFormSelectBox)uiForm.getUIInput(inputName)).getSelectedValues());
+            	}else {
+            		List<String> values=(List<String>) ((UIFormMultiValueInputSet)uiForm.getUIInput(inputName)).getValue() ;
+            		node.setProperty(name, values.toArray(new String[values.size()]));
+            	}              
             }
           } else {
             if (requiredType == 6) { // boolean

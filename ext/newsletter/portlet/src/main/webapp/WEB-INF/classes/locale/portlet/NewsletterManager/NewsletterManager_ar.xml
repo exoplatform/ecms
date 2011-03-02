@@ -133,10 +133,19 @@
       <checkOnlyOneSubScriptionToDelete>يرجى وضع علامة في مربع واحد لحذف اشتراك!</checkOnlyOneSubScriptionToDelete>
       <subscriptionNotfound>هذا الاشتراك غير موجود!</subscriptionNotfound>
       <checkOnlyOneSubScriptionToOpen>يرجى وضع علامة واحدة لفتح الاكتتاب!</checkOnlyOneSubScriptionToOpen>
+		
+	  <checkOneSubScriptionToEdit>يرجى وضع علامة في مربع واحد للاكتتاب لتحرير!</checkOneSubScriptionToEdit>      
+      <checkOneSubScriptionToOpen>يرجى وضع علامة واحدة لفتح الاكتتاب!</checkOneSubScriptionToOpen>
+		
       <checkOnlyOneNewsletterToEdit>يرجى وضع علامة على رسالة واحدة جديدة لتغيير!</checkOnlyOneNewsletterToEdit>
       <checkOnlyOneNewsletterToDelete>يرجى وضع علامة في مربع واحد لإزالة رسالة جديدة!</checkOnlyOneNewsletterToDelete>
       <checkOnlyOneNewsletterToOpen>يرجى وضع علامة في مربع واحد لفتح رسالة جديدة!</checkOnlyOneNewsletterToOpen>
       <checkOnlyOneNewsletterToConvert>يرجى مراجعة واحدة فقط لتحويل الرسالة الإخبارية!</checkOnlyOneNewsletterToConvert>
+		
+	  <checkOneNewsletterToEdit>يرجى وضع على رسالة واحدة جديدة لتغيير!</checkOneNewsletterToEdit>      
+      <checkOneNewsletterToOpen>يرجى وضع في مربع واحد لفتح رسالة جديدة!</checkOneNewsletterToOpen>
+      <checkOneNewsletterToConvert>يرجى مراجعة واحدة فقط لتحويل الرسالة الإخبارية!</checkOneNewsletterToConvert>
+		
       <convertSuccessful>تحويل رسالة كنموذج بنجاح</convertSuccessful>
       <templateIsExist>وهناك بالفعل نموذج يحمل نفس الاسم! شكرا لتعديل العنوان وإعادة المحاولة.</templateIsExist>
       <get-list-subscriptions>خطأ عندما تحصل على قائمة الاشتراكات. </get-list-subscriptions>

@@ -1,3 +1,0 @@
-<div id="UISingleContentViewerPortlet_<%=_ctx.getRequestContext().getWindowId()%>" class="UISingleContentViewerPortlet">
-	<% uicomponent.renderChildren(); %>	  
-</div>     

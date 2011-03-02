@@ -8,6 +8,8 @@
       <detail>Détail</detail>
       <newAccount>Nouveau compte</newAccount>
       <groupnavigation>Navigation du Groupe</groupnavigation>
+      <register>S'inscrire</register>
+      <printviewer>Imprimer la page</printviewer>
       <portalnavigation>Navigation du Portail</portalnavigation>
     </classic>
   </portal>

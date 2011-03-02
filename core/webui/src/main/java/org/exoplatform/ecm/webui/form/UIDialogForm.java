@@ -275,9 +275,6 @@ public class UIDialogForm extends UIForm {
       if (uiInput == null) {
       	isFirstTimeRender = true;
       	uiInput = addMultiValuesInput(UIFormStringInput.class,name,label);
-      }
-      ((UIFormMultiValueInputSet)uiInput).setEditable(formActionField.isEditable());
-      if (node == null) {
         String defaultValue = formActionField.getDefaultValue();
         if (defaultValue != null) {
           if (UIFormMultiValueInputSet.class.isInstance(uiInput)) {
@@ -288,7 +285,10 @@ public class UIDialogForm extends UIForm {
             }
             ((UIFormMultiValueInputSet) uiInput).setValue(lstValues);
           }
-        }
+        }      	
+      }
+      ((UIFormMultiValueInputSet)uiInput).setEditable(formActionField.isEditable());
+      if (node == null) {
         renderField(name);
         return;
       }
@@ -482,23 +482,32 @@ public class UIDialogForm extends UIForm {
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
-    Value value = null;
-    if (getNode() != null && getNode().hasProperty(propertyName))
-      value = getNode().getProperty(propertyName).getValue();
+    Node node = getNode();
     UIFormCheckBoxInput uiCheckBoxInput = findComponentById(name);
+    boolean isFirstTimeRender = false;
+    if(uiCheckBoxInput == null || isResetForm ){
+    	isFirstTimeRender = true;
+        uiCheckBoxInput = new UIFormCheckBoxInput(name, name, null);
+        if (defaultValue != null) {
+        	uiCheckBoxInput.setValue(defaultValue);
+        	uiCheckBoxInput.setChecked(Boolean.valueOf(defaultValue));
+        }
+    }
+    
+    if (node != null && node.hasProperty(propertyName) && isFirstTimeRender) {
+    	uiCheckBoxInput.setValue(node.getProperty(propertyName).getValue());
+    	uiCheckBoxInput.setChecked(node.getProperty(propertyName).getValue().getBoolean());
+    }
     
     if (formCheckBoxField.validateType != null) {
       DialogFormUtil.addValidators(uiCheckBoxInput, formCheckBoxField.validateType);
     }
     
-    if(uiCheckBoxInput == null){
-      uiCheckBoxInput = new UIFormCheckBoxInput(name, name, null);
-      uiCheckBoxInput.setChecked(value != null?value.getBoolean() : Boolean.valueOf(defaultValue));
-    }
     if(formCheckBoxField.isOnchange()){
       uiCheckBoxInput.setOnChange("Onchange");
       uiCheckBoxInput.setValue(uiCheckBoxInput.getValue());
     }
+    removeChildById(name);
     addUIFormInput(uiCheckBoxInput);
     renderField(name);
   }
@@ -688,7 +697,7 @@ public class UIDialogForm extends UIForm {
       }  
     }    
     uiSelectBox.setEditable(formSelectBoxField.isEditable());
-    addUIFormInput(uiSelectBox);
+//    addUIFormInput(uiSelectBox);
     if(isNotEditNode) {      
       Node child = getChildNode();
       if(child != null && child.hasProperty(propertyName)) {

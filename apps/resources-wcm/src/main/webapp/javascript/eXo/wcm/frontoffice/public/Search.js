@@ -35,6 +35,15 @@ SearchPortlet.prototype.quickSearchOnEnter = function(event, resultPageURI) {
 		var searchBox = document.getElementById("siteSearchBox");
 		var keyWordInput = eXo.core.DOMUtil.findFirstDescendantByClass(searchBox, "input", "keyword");
 		var keyword = encodeURI(keyWordInput.value);
+		/*
+		Filter user input on client
+		- Escape markup on the client
+    - Remove eval(), javascript, and script from client 
+		*/
+		keyword = keyword.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    keyword.replace(/[\"\'][\s]*javascript:(.*)[\"\']/gi, "\"\"");
+    keyword = keyword.replace(/script(.*)/gi, "");    
+    keyword = keyword.replace(/eval\((.*)\)/gi, "");
 		var resultPageURIDefault = "searchResult";
 		var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
 		var baseURI = eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.accessMode + "/" + eXo.env.portal.portalName;

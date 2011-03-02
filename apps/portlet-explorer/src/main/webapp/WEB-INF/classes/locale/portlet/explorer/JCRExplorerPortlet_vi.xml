@@ -475,6 +475,9 @@
     <msg>
       <confirm-delete>Bạn có chắc là muốn xóa node '{0}' và chuyển tất các nội dung của nó đến thùng rác?</confirm-delete>
       <confirm-delete-multi>Bạn có chắc là muốn xóa những item {0} này vào thùng rác?</confirm-delete-multi>
+	  <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Do you want to delete it and all its relations?</confirm-delete-has-relations>
+	  <confirm-delete-multi-one-node-has-relations>Do you want to move these {0} items? (The node {1} has relations that refer to it, this process will remove all its relations)</confirm-delete-multi-one-node-has-relations>
+      <confirm-delete-multi-many-nodes-have-relations>Do you want to move these {0} items? (The nodes {1} have relations that refer to them, this process will remove all their relations)</confirm-delete-multi-many-nodes-have-relations>
       <confirm-move>Bạn có chắc là bạn muốn di chuyển?</confirm-move>
       <node-cut>Node'{0}' đã được cắt.</node-cut>
       <execute-successfully>Thao tác'{0}' đã được thực thi.</execute-successfully>

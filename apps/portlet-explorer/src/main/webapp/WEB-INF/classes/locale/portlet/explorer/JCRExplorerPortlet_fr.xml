@@ -463,7 +463,10 @@
       <confirm-delete-permanently> Souhaitez-vous définitivement supprimer  le noeud '{0}' et tout son contenu?</confirm-delete-permanently>      
       <confirm-restore>Un noeud du même nom existe déjà sous l'arborescence '{0}'. Souhaitez-vous réellement restaurer ce noeud ?</confirm-restore>      
       <confirm-delete-multi>Etes vous certains de vouloir déplacer ces {0} éléments vers la corbeille?</confirm-delete-multi>
-      <confirm-delete-permanently-multi>Souhaitez-vous réellement supprimer définitivement les éléments {0} ?</confirm-delete-permanently-multi>      
+      <confirm-delete-permanently-multi>Souhaitez-vous réellement supprimer définitivement les éléments {0} ?</confirm-delete-permanently-multi>
+	  <confirm-delete-has-relations>L'élément '{0}' a des relations qui y référencient. Voulez-vous supprimer l'élément et ses relations ?</confirm-delete-has-relations>
+	  <confirm-delete-multi-one-node-has-relations>Voulez-vous supprimer ces {0} élément ? (L'élément {1} a des relations qui y référencient, ce processus va supprimer toutes ses relations)</confirm-delete-multi-one-node-has-relations>
+      <confirm-delete-multi-many-nodes-have-relations>Voulez-vous supprimer ces {0} élément ? (Les éléments {1} ont des relations qui y référencient, ce processus va supprimer toutes ses relations)</confirm-delete-multi-many-nodes-have-relations>      
       <confirm-move>Souhaitez-vous vraiment déplacer ce(s) noeud(s)?</confirm-move>
       <node-cut>Le noeud '{0}' a été coupé.</node-cut>
       <execute-successfully>L'action '{0}' a été exécutée.</execute-successfully>
@@ -2409,6 +2412,12 @@
 			<UIOneNodePathSelector>Choisir un noeud cible</UIOneNodePathSelector>
 		</title>
 	</UIPopupSymLink>
+	
+    <UIPopupSymLink>
+      <title>
+        <UIContentSelectorOne>Sélectionnez Document</UIContentSelectorOne>
+      </title>
+    </UIPopupSymLink>	
 	
 	<ECMContextMenu>
 		<event>

@@ -173,7 +173,6 @@
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
-			<portlet-mode>help</portlet-mode>
 			<portlet-mode>edit</portlet-mode>
 		</supports>
 		<supported-locale>en</supported-locale>
@@ -404,6 +403,16 @@
         <value>content-id</value>
         <read-only>false</read-only>
       </preference>
+	  <preference>
+	    <name>PrintParameterName</name>
+		<value>content-id</value>
+		<read-only>false</read-only>
+	  </preference>
+	  <preference>
+	    <name>PrintPage</name>
+		<value>printviewer</value>
+		<read-only>false</read-only>
+	  </preference>
     </portlet-preferences>
 	</portlet>
 	
@@ -754,6 +763,11 @@
    <filter-mapping>
      <filter-name>PortletFilterCache</filter-name>
      <portlet-name>SingleContentViewer</portlet-name>
+   </filter-mapping>
+   
+   <filter-mapping>
+     <filter-name>PortletFilterCache</filter-name>
+     <portlet-name>ParameterizedContentViewerPortlet</portlet-name>
    </filter-mapping>
 	
    <filter-mapping>

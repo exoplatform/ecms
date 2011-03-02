@@ -83,5 +83,44 @@
     	<UIContentSelectorOne>واحد محدد لوحة المحتوى</UIContentSelectorOne>
    	</title>
   </CorrectContentSelectorPopupWindow>
+  <UISCVPreferences>
+    <action>
+     <Save>Save</Save>
+     <Abort>Abort</Abort>
+     <Cancel>Cancel</Cancel>
+     <Print>Print</Print>
+     <Close>Close</Close>
+    </action>
+    <title>Content Detail Preferences</title>
+    <label>
+      <Back>Back to previous page</Back>
+      <Edit>Edit</Edit>
+      <Preferences>Preferences</Preferences>
+   	  <Title>Content Detail Preferences</Title>
+   	  <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
+   	  <UISCVShowDateConfigurationCheckBox>Show Date</UISCVShowDateConfigurationCheckBox>
+   	  <UISCVShowOptionBarConfigurationCheckBox>Show Option Bar</UISCVShowOptionBarConfigurationCheckBox>
+   	  <DisplaySettingBlock>Display settings</DisplaySettingBlock>
+   	  <ContentPathBlock>Content Selection</ContentPathBlock>
+   	  <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
+   	  <Advance>Advanced</Advance>
+   	  <ContextCaption>Dynamic Navigation</ContextCaption>
+   	  <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
+   	  <UISCVParameterInputBox>by</UISCVParameterInputBox>
+   	  <PrintSettingBlock>Print settings</PrintSettingBlock>
+   	  <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
+   	  <UISCVConfigPrintPageFormInputSet>Show in page</UISCVConfigPrintPageFormInputSet>
+						<LockStatus>Lock</LockStatus>						
+    </label>
+    <help>
+   	  <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic navigation (Advanced mode, see below).</ContentPathBlock>
+   	  <DisplaySettingBlock>You can choose to show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
+   	  <ContextualHelp>Activates the dynamic navigation. The content can be changed dynamically by another based on a URL parameter.</ContextualHelp>
+   	  <ParameterHelp>This parameter will be used to get the content if Dynamic Navigation is activated.</ParameterHelp>
+    </help>
+    <msg>
+    	<not-valid-path>المكون مسار غير صالح</not-valid-path>
+    </msg>
+  </UISCVPreferences>
   
 </bundle>

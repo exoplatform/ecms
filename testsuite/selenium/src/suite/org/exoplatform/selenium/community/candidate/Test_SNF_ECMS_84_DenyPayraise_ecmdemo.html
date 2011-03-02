@@ -68,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
+	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
+	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -83,17 +83,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;objectId=2&quot;)]</td>
+	<td>//div[@id='UIBPDefinition']/table/tbody/tr[2]/td[4]/div/img</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;objectId=2&quot;)]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;amount-asked : 5000</td>
+	<td>//div[@id='UIBPDefinition']/table/tbody/tr[2]/td[4]/div/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -177,26 +172,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-- Verify reason</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>reason</td>
-	<td>to buy new machine</td>
-</tr>
-<tr>
-	<td>verifyValue</td>
-	<td>reason</td>
-	<td>to buy new machine</td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Deny</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Deny</td>
 	<td></td>
@@ -204,16 +179,6 @@
 <tr>
 	<td>click</td>
 	<td>link=Deny</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Sign out</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sign out</td>
 	<td></td>
 </tr>
 <tr>

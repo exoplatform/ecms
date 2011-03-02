@@ -1,5 +1,0 @@
-h1. Web Content CSS Support
-
-Web Masters can easily and directly change the style sheet of sites with CSS and JavaScript file. 
-
- !CSSSupport1.png! 

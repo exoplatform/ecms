@@ -20,6 +20,7 @@ import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentBrowsePanelOne;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
 import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -186,6 +187,17 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       String strPrintPageName = uiSCVPref.getUIStringInput(PRINT_VIEW_PAGE_INPUT).getValue();
       String strPrintParameterName  = uiSCVPref.getUIStringInput(PRINT_PAGE_PARAMETER_INPUT).getValue();
       
+      if (!Boolean.parseBoolean(strIsContextEnable) ){
+      	if (uiSCVPref.getSelectedNodeUUID()!=null) {
+      		if (uiSCVPref.getSelectedNodeUUID().length()==0) {
+            Utils.createPopupMessage(uiSCVPref, "UISCVPreferences.msg.not-valid-path", null, ApplicationMessage.WARNING);
+            return;
+      		}
+      	}else {
+      		Utils.createPopupMessage(uiSCVPref, "UISCVPreferences.msg.not-valid-path", null, ApplicationMessage.WARNING);
+      		return;
+      	}
+      }
       portletPreferences.setValue(UISingleContentViewerPortlet.REPOSITORY, uiSCVPref.getSelectedNodeRepository());    
       portletPreferences.setValue(UISingleContentViewerPortlet.WORKSPACE, uiSCVPref.getSelectedNodeWorkspace());
       portletPreferences.setValue(UISingleContentViewerPortlet.IDENTIFIER, uiSCVPref.getSelectedNodeUUID()) ;

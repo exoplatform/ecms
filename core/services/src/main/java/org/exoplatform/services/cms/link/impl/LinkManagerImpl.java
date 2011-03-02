@@ -167,8 +167,6 @@ public class LinkManagerImpl implements LinkManager {
       session.getNodeByUUID(link.getProperty(UUID).getString());
     } catch (ItemNotFoundException e) {
       return false;
-    } finally {
-      if(session != null) session.logout();
     }
     return true;
   }  

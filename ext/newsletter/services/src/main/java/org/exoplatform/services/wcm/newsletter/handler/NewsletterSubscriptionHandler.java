@@ -103,11 +103,14 @@ public class NewsletterSubscriptionHandler {
       // Set permission is all for Redactors
       String[] permissions = new String[]{PermissionType.REMOVE, PermissionType.ADD_NODE, PermissionType.SET_PROPERTY};
       ExtendedNode categoryExtend = ExtendedNode.class.cast(categoryNode);
-      for(String redactor : newRedactors){
-        extendedSubscriptionNode.setPermission(redactor, PermissionType.ALL);
+      for(String redactor : newRedactors){        
         // Set read permission in category which contain subscription for this redactor
         if(!listModerators.contains(redactor))categoryExtend.setPermission(redactor, permissions);
       }
+      categoryExtend.getSession().save();
+      
+      for(String redactor : newRedactors)
+      	extendedSubscriptionNode.setPermission(redactor, PermissionType.ALL);
       
       // Set permission is addNode, remove and setProperty for administrators
       permissions = new String[]{PermissionType.READ, PermissionType.ADD_NODE, PermissionType.REMOVE, PermissionType.SET_PROPERTY};
@@ -137,6 +140,7 @@ public class NewsletterSubscriptionHandler {
         }
       }
     }
+    extendedSubscriptionNode.save();
     return afterRemovePermisions;
   }
   
