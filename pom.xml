@@ -61,7 +61,7 @@
     <javax.transaction.version>1.0.1B</javax.transaction.version>
     <net.oauth.version>20080621</net.oauth.version>
     <net.sourceforge.nekohtml.version>1.9.9</net.sourceforge.nekohtml.version>
-    <org.gatein.shindig.version>1.0-r790473-Patch04</org.gatein.shindig.version>
+    <org.gatein.shindig.version>1.0-r790473-Patch05</org.gatein.shindig.version>
     <org.gatein.pc.version>2.2.0-GA</org.gatein.pc.version>
     <commons-lang.version>2.4</commons-lang.version>
     <javax.mail.version>1.4.2</javax.mail.version>
