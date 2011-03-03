@@ -143,15 +143,14 @@
 					<div style="width: 100%" >
 						<%
 						  for(att in attachments) {
-						  wsName = att.getSession().getWorkspace().getName();
-						  params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
-						  String actionLink3 = uicomponent.event("ChangeNode", att.getPath(), params);
+						  	wsName = att.getSession().getWorkspace().getName();
+  							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
+  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
+  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
 						%>
 							<div style="font-size: 12px; padding: 10px;">
 								<div class="RemoveNodeFloat">
-								 -<a href="$actionLink3">
-								 		<%=att.getName()%>
-								 	</a>
+								 <a $linkActionName="$viewAttachmentLink" style="cursor: pointer;">-<%=att.getName()%></a>
 								</div>
 								<div class="RemoveNodeFloat"> 	
 							 	 <% if (PermissionUtil.canRemoveNode(att)) {

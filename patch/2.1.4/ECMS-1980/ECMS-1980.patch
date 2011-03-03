@@ -1,0 +1,103 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/scv/UIPresentation.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/scv/UIPresentation.java	(revision 66092)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/scv/UIPresentation.java	(working copy)
+@@ -16,12 +16,14 @@
+  */
+ package org.exoplatform.wcm.webui.scv;
+ 
++import java.util.ArrayList;
+ import java.util.Arrays;
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
+ 
+ import javax.jcr.Node;
++import javax.jcr.NodeIterator;
+ import javax.portlet.PortletPreferences;
+ import javax.portlet.PortletRequest;
+ 
+@@ -39,7 +41,6 @@
+ import org.exoplatform.services.wcm.friendly.FriendlyService;
+ import org.exoplatform.services.wcm.publication.WCMComposer;
+ import org.exoplatform.wcm.webui.Utils;
+-import org.exoplatform.wcm.webui.clv.UICLVPortlet;
+ import org.exoplatform.web.application.Parameter;
+ import org.exoplatform.webui.application.WebuiRequestContext;
+ import org.exoplatform.webui.application.portlet.PortletRequestContext;
+@@ -219,5 +220,27 @@
+     
+     return link;
+   }
+-
++  
++  /**
++   * Gets the attachment nodes. 
++   * @param node the node that contains Attachment
++   * @return the attachment Nodes
++   * @throws Exception the exception
++   * @author vinh_nguyen
++   */
++  public List<Node> getAttachments() throws Exception {
++    List<Node> attachments = new ArrayList<Node>() ;
++    Node parent  = getOriginalNode();
++    NodeIterator childrenIterator = parent.getNodes();;
++    TemplateService templateService = getApplicationComponent(TemplateService.class) ;
++    String strRepository = getRepository();
++    while (childrenIterator.hasNext()) {
++      Node childNode = childrenIterator.nextNode();
++      String nodeType = childNode.getPrimaryNodeType().getName();
++      List<String> listCanCreateNodeType = 
++      	org.exoplatform.ecm.webui.utils.Utils.getListAllowedFileType(parent, strRepository, templateService) ;
++      if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
++    }
++    return attachments;
++  }
+ }
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/sample/views/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/sample/views/view1.gtmpl	(revision 66092)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/sample/views/view1.gtmpl	(working copy)
+@@ -143,15 +143,14 @@
+ 					<div style="width: 100%" >
+ 						<%
+ 						  for(att in attachments) {
+-						  wsName = att.getSession().getWorkspace().getName();
+-						  params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
+-						  String actionLink3 = uicomponent.event("ChangeNode", att.getPath(), params);
++						  	wsName = att.getSession().getWorkspace().getName();
++  							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
++  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
++  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
+ 						%>
+ 							<div style="font-size: 12px; padding: 10px;">
+ 								<div class="RemoveNodeFloat">
+-								 -<a href="$actionLink3">
+-								 		<%=att.getName()%>
+-								 	</a>
++								 <a $linkActionName="$viewAttachmentLink" style="cursor: pointer;">-<%=att.getName()%></a>
+ 								</div>
+ 								<div class="RemoveNodeFloat"> 	
+ 							 	 <% if (PermissionUtil.canRemoveNode(att)) {
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/event/views/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/event/views/view1.gtmpl	(revision 66092)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/event/views/view1.gtmpl	(working copy)
+@@ -175,12 +175,14 @@
+ 					        String wsName = "";
+ 													for (att in attachments) {
+ 														if(att != null) {
+-	  													wsName = att.getSession().getWorkspace().getName();
+-	  													params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
++							  							wsName = att.getSession().getWorkspace().getName();
++							  							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
++							  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
++							  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
+ 												%>
+ 												  <div class="AttachmentsContainer">	
+ 					                  <div class="AttachmentsContentIcon">
+-					                  	<a onclick="<%=uicomponent.event("ChangeNode", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;"><%=att.getName()%></a>
++					                  <a $linkActionName="$viewAttachmentLink" style="cursor: pointer;"><%=att.getName()%></a>
+ 					                  </div>
+ 					                  <% if (PermissionUtil.canRemoveNode(att)) {
+ 					                       params = [new Parameter("workspaceName", wsName), new Parameter("repository", uicomponent.getRepository())];

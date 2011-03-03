@@ -16,12 +16,14 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -39,7 +41,6 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -219,5 +220,27 @@ public class UIPresentation extends UIBaseNodePresentation {
     
     return link;
   }
-
+  
+  /**
+   * Gets the attachment nodes. 
+   * @param node the node that contains Attachment
+   * @return the attachment Nodes
+   * @throws Exception the exception
+   * @author vinh_nguyen
+   */
+  public List<Node> getAttachments() throws Exception {
+    List<Node> attachments = new ArrayList<Node>() ;
+    Node parent  = getOriginalNode();
+    NodeIterator childrenIterator = parent.getNodes();;
+    TemplateService templateService = getApplicationComponent(TemplateService.class) ;
+    String strRepository = getRepository();
+    while (childrenIterator.hasNext()) {
+      Node childNode = childrenIterator.nextNode();
+      String nodeType = childNode.getPrimaryNodeType().getName();
+      List<String> listCanCreateNodeType = 
+      	org.exoplatform.ecm.webui.utils.Utils.getListAllowedFileType(parent, strRepository, templateService) ;
+      if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
+    }
+    return attachments;
+  }
 }
