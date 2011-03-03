@@ -1,0 +1,17 @@
+Index: core/webui/src/main/java/org/exoplatform/wcm/webui/form/UIFormRichtextInput.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/wcm/webui/form/UIFormRichtextInput.java	(revision 66147)
++++ core/webui/src/main/java/org/exoplatform/wcm/webui/form/UIFormRichtextInput.java	(working copy)
+@@ -92,7 +92,11 @@
+     contentsCss.append("]");
+     
+     StringBuffer buffer = new StringBuffer();
+-    buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
++    if (value_!=null) {
++    	buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
++    }else {
++    	buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
++    }
+     buffer.append("<script type='text/javascript'>\n");
+     buffer.append("  //<![CDATA[\n");
+     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
