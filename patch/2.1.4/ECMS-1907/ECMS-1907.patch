@@ -1,0 +1,41 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/admin/UIActivePublication.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/admin/UIActivePublication.java	(revision 65139)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/admin/UIActivePublication.java	(working copy)
+@@ -32,6 +32,7 @@
+ import org.exoplatform.services.ecm.publication.plugins.webui.UIPublicationLogList;
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
++import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
+ import org.exoplatform.services.wcm.publication.WCMPublicationService;
+ import org.exoplatform.web.application.ApplicationMessage;
+ import org.exoplatform.webui.application.WebuiRequestContext;
+@@ -133,7 +134,11 @@
+       }      
+       String siteName = Util.getPortalRequestContext().getPortalOwner();
+       String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+-      wcmPublicationService.enrollNodeInLifecycle(currentNode, siteName, remoteUser);
++      if (AuthoringPublicationConstant.LIFECYCLE_NAME.equals(lifecycleName)) {
++        wcmPublicationService.enrollNodeInLifecycle(currentNode, siteName, remoteUser);
++      } else {
++        wcmPublicationService.enrollNodeInLifecycle(currentNode, lifecycleName);
++      }
+     } catch (AlreadyInPublicationLifecycleException e) {
+       uiApp.addMessage(new ApplicationMessage("UIActivePublication.msg.already-enroled", null,
+           ApplicationMessage.ERROR));
+Index: core/webui-explorer/pom.xml
+===================================================================
+--- core/webui-explorer/pom.xml	(revision 65139)
++++ core/webui-explorer/pom.xml	(working copy)
+@@ -53,5 +53,11 @@
+       <version>${project.version}</version>
+       <scope>provided</scope>
+     </dependency>
++    <dependency>
++      <groupId>org.exoplatform.ecms</groupId>
++      <artifactId>exo-ecms-ext-authoring-services</artifactId>
++      <version>${project.version}</version>
++      <scope>provided</scope>
++    </dependency>
+   </dependencies>
+ </project>
