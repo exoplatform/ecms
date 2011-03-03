@@ -176,7 +176,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     } catch (RepositoryConfigurationException e1) {
       throw new RepositoryException(e1);
     } catch (PathNotFoundException e2) {
-      return null;
+      throw new RepositoryException(e2);
     }
     return null;
   }

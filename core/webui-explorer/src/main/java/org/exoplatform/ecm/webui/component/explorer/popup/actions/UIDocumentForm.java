@@ -309,8 +309,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
                   taxonomyService.getTaxonomyTree(repository, categoryPath.substring(0, index)).getNode(categoryPath.substring(index + 1));
                 }
               }
-            } catch (Exception e) {
-              LOG.error("Unexpected error occurs", e);
+            } catch (Exception e) {             
               uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, ApplicationMessage.WARNING));
               event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;

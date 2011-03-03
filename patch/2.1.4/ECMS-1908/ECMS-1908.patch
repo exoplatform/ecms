@@ -1,0 +1,27 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/actions/UIDocumentForm.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/actions/UIDocumentForm.java	(revision 65080)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/actions/UIDocumentForm.java	(working copy)
+@@ -309,8 +309,7 @@
+                   taxonomyService.getTaxonomyTree(repository, categoryPath.substring(0, index)).getNode(categoryPath.substring(index + 1));
+                 }
+               }
+-            } catch (Exception e) {
+-              LOG.error("Unexpected error occurs", e);
++            } catch (Exception e) {             
+               uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, ApplicationMessage.WARNING));
+               event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+               return;
+Index: core/services/src/main/java/org/exoplatform/services/cms/taxonomy/impl/TaxonomyServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/taxonomy/impl/TaxonomyServiceImpl.java	(revision 65080)
++++ core/services/src/main/java/org/exoplatform/services/cms/taxonomy/impl/TaxonomyServiceImpl.java	(working copy)
+@@ -176,7 +176,7 @@
+     } catch (RepositoryConfigurationException e1) {
+       throw new RepositoryException(e1);
+     } catch (PathNotFoundException e2) {
+-      return null;
++      throw new RepositoryException(e2);
+     }
+     return null;
+   }
