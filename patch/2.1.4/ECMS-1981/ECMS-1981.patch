@@ -1,0 +1,16 @@
+Index: apps/portlet-presentation/src/main/webapp/WEB-INF/portlet.xml
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/WEB-INF/portlet.xml	(revision 66053)
++++ apps/portlet-presentation/src/main/webapp/WEB-INF/portlet.xml	(working copy)
+@@ -755,6 +755,11 @@
+      <filter-name>PortletFilterCache</filter-name>
+      <portlet-name>SingleContentViewer</portlet-name>
+    </filter-mapping>
++   
++   <filter-mapping>
++     <filter-name>PortletFilterCache</filter-name>
++     <portlet-name>ParameterizedContentViewerPortlet</portlet-name>
++   </filter-mapping>
+ 	
+    <filter-mapping>
+      <filter-name>PortletFilterCache</filter-name>
