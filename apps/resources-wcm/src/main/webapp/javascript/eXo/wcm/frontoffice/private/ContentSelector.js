@@ -488,18 +488,16 @@ EcmContentSelector.prototype.listFiles = function(list) {
 		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>';
 		newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 		newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
-		
-		if(i > 13) {
-			var numberRecords = 0;
-			if(eXo.core.Browser.isFF()) numberRecords = 14;
-			else numberRecords = 13;
-			eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
-			eXo.ecm.Pager.init(); 
-			eXo.ecm.Pager.showPageNav('pageNavPosition');
-			eXo.ecm.Pager.showPage(1);	
-		} else {
-			document.getElementById("pageNavPosition").innerHTML = "";
-		}
+	}
+	
+	if(i > 12) {
+		var numberRecords = 12;
+		eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
+		eXo.ecm.Pager.init(); 
+		eXo.ecm.Pager.showPageNav('pageNavPosition');
+		eXo.ecm.Pager.showPage(1);	
+	} else {
+		document.getElementById("pageNavPosition").innerHTML = "";
 	}
 };
 
@@ -538,18 +536,17 @@ EcmContentSelector.prototype.listFolders = function(list) {
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
 		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(label)+'</a>';
-		
-		if(i > 13) {
-			var numberRecords = 0;
-			if(eXo.core.Browser.isFF()) numberRecords = 14;
-			else numberRecords = 13;
-			eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
-			eXo.ecm.Pager.init(); 
-			eXo.ecm.Pager.showPageNav('pageNavPosition');
-			eXo.ecm.Pager.showPage(1);	
-		} else {
-			document.getElementById("pageNavPosition").innerHTML = "";
-		}
+				
+	}
+	
+	if(i > 12) {
+		var numberRecords = 12;
+		eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
+		eXo.ecm.Pager.init(); 
+		eXo.ecm.Pager.showPageNav('pageNavPosition');
+		eXo.ecm.Pager.showPage(1);	
+	} else {
+		document.getElementById("pageNavPosition").innerHTML = "";
 	}
 };
 
@@ -587,18 +584,17 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
 		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node+'</a>';
-		
-		if(i > 13) {
-			var numberRecords = 0;
-			if(eXo.core.Browser.isFF()) numberRecords = 14;
-			else numberRecords = 13;
-			eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
-			eXo.ecm.Pager.init(); 
-			eXo.ecm.Pager.showPageNav('pageNavPosition');
-			eXo.ecm.Pager.showPage(1);	
-		} else {
-			document.getElementById("pageNavPosition").innerHTML = "";
-		}
+				
+	}
+	
+	if(i > 12) {
+		var numberRecords = 12;
+		eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
+		eXo.ecm.Pager.init(); 
+		eXo.ecm.Pager.showPageNav('pageNavPosition');
+		eXo.ecm.Pager.showPage(1);	
+	} else {
+		document.getElementById("pageNavPosition").innerHTML = "";
 	}
 };
 
@@ -631,13 +627,13 @@ Pager.prototype.init = function() {
 	this.setHeightRightWS();
 	var len = 0;
 	var table = document.getElementById(eXo.ecm.Pager.tableName);
-	if(eXo.core.Browser.isFF()) {
+	if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
+		var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
+		len = tBody.childNodes.length;
+	} else {
 		var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
 		var rowsTHead = eXo.core.DOMUtil.getChildrenByTagName(tHead, "tr");
-		len = rowsTHead.length;
-	}	else {
-		var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
-		len = tBody.childNodes.length -1;
+		len = rowsTHead.length - 1;		
 	}
     var records = len; 
     this.pages = Math.ceil(records / eXo.ecm.Pager.itemsPerPage);
@@ -648,25 +644,33 @@ Pager.prototype.init = function() {
 Pager.prototype.showRecords = function(from, to) {
 	var rows = null;
 	var table = document.getElementById(eXo.ecm.Pager.tableName);
-	if(eXo.core.Browser.isFF()) {
+	var len = 0;
+	if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
+		var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
+		rows =tBody.childNodes;		
+		len = rows.length;
+		
+		for (var i = 0; i < len; i++) {
+			if (i < (from-1) || i > (to-1))  {
+			    rows[i].style.display = 'none';
+			} else {
+			    rows[i].style.display = '';
+			}
+		}
+	}	else {
 		var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
 		rows = eXo.core.DOMUtil.getChildrenByTagName(tHead ,"tr");
-	}	else {
-		var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
-		rows =tBody.childNodes;
-	}
-	var len = rows.length;
-	if(len <= 14) { document.getElementById("pageNavPosition").innerHTML = "";	return;}
-
-	// i starts from 1 to skip table header row
-
-	for (var i = 1; i < len; i++) {
-		if (i < from || i > to)  {
-		    rows[i].style.display = 'none';
-		} else {
-		    rows[i].style.display = '';
+		len = rows.length - 1;
+		
+		for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
+			if (i < from || i > to)  {
+			    rows[i].style.display = 'none';
+			} else {
+			    rows[i].style.display = '';
+			}
 		}
 	}
+	if(len <= 12) { document.getElementById("pageNavPosition").innerHTML = "";	return;}
 };
 
 Pager.prototype.showPage = function(pageNumber) {
