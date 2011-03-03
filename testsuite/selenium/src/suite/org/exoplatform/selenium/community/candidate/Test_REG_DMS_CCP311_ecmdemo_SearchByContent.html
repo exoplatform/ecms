@@ -68,12 +68,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -98,12 +98,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title=&quot;acme &quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title=&quot;acme &quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -123,7 +123,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Create document</td>
+	<td>-- Go to WCM view --</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//form[@id='UIAddressBar']//a[@title=&quot;WCM View&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='UIAddressBar']//a[@title=&quot;WCM View&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,6 +144,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Publication</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Create document</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,18 +248,18 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title=&quot;acme &quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title=&quot;acme &quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>simpleSearch</td>
-	<td>test ccp311</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -313,12 +328,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
 	<td></td>
 </tr>
 <tr>
@@ -341,7 +356,6 @@
 	<td>link=Sign out</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
