@@ -26,7 +26,7 @@
       <title>Add a new query</title>
       <step>
         <para>
-     Show the <emphasis role="bold">Add Query</emphasis> form by clicking the <guibutton>Add Query</guibutton> button in the <emphasis role="bold">Manage Queries</emphasis> form.
+     Open the <emphasis role="bold">Add Query</emphasis> form by clicking the <guibutton>Add Query</guibutton> button in the <emphasis role="bold">Manage Queries</emphasis> form.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -74,12 +74,15 @@
       </step>
       <step>
         <para>
-     Select permissions for a group that can use this query by clicking 
+     Select permissions for a group that can use this query by clicking the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/pluspermissionbutton.png" format="PNG" width="8mm"/>
             </imageobject>
-          </inlinemediaobject>
+            <textobject>
+               <phrase>green plus</phrase>
+            </textobject>
+          </inlinemediaobject> icon.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -105,6 +108,9 @@
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
           </inlinemediaobject>
       icon corresponding to the query you want to edit. The <emphasis role="bold">Edit Query</emphasis> form will appear:
     </para>
@@ -137,8 +143,11 @@
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
           </inlinemediaobject>
-      corresponding to the query you want to delete. A confirmation message will appear.
+      icon corresponding to the query you want to delete. A confirmation message will appear.
     </para>
       </step>
       <step>
@@ -242,6 +251,9 @@
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
           </inlinemediaobject>
       icon that corresponds to the script that you want to edit. The <emphasis role="bold">Add/Edit script</emphasis> form will appear:
     </para>
@@ -274,8 +286,11 @@
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
           </inlinemediaobject>
-      on the script that you want to delete. A confirmation message will appear.
+      icon on the script that you want to delete. A confirmation message will appear.
     </para>
       </step>
       <step>
@@ -341,13 +356,16 @@
    </para>
       <step>
         <para>
-     In the <emphasis role="bold">BC Script</emphasis> tab, click 
+     In the <emphasis role="bold">BC Script</emphasis> tab, click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
           </inlinemediaobject>
-      on a script that you want to edit.
+      icon on a script that you want to edit.
     </para>
         <para>
      The <emphasis role="bold">Add/Edit script</emphasis> form will appear:
@@ -379,13 +397,15 @@
    </para>
       <step>
         <para>
-     In the <emphasis role="bold">BC Scripts</emphasis> tab, click 
+     In the <emphasis role="bold">BC Scripts</emphasis> tab, click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      on the script you want to delete. A confirmation message appears.
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon on the script you want to delete. A confirmation message appears.
     </para>
       </step>
       <step>
@@ -422,13 +442,16 @@
       </step>
       <step>
         <para>
-     In the <emphasis role="bold">Locked Node</emphasis> tab on the right panel, administrators can unlock nodes by clicking 
+     In the <emphasis role="bold">Locked Node</emphasis> tab on the right panel, administrators can unlock nodes by clicking the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/unlockicon.png" format="PNG" width="8mm"/>
             </imageobject>
+            <textobject>
+               <phrase>open lock</phrase>
+            </textobject>
           </inlinemediaobject>
-      that corresponds to nodes which need to be unlocked. The unlocked nodes will disappear from the locked node list.
+      icon that corresponds to nodes which need to be unlocked. The unlocked nodes will disappear from the locked node list.
     </para>
         <para>
      Administrators can manage and add the unlock permission for another group and users in the <emphasis role="bold">Manage Lock</emphasis> tab.
@@ -441,8 +464,10 @@
             <imageobject>
               <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      if they want to allow any users to unlock nodes.
+            <textobject>
+               <phrase>plus</phrase>
+            </textobject>
+          </inlinemediaobject> icon if they want to allow any users to unlock nodes.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -460,8 +485,10 @@
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      that corresponds to the group in order to remove them form the Unlock permission list except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon that corresponds to the group in order to remove them form the Unlock permission list except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
     </para>
       </step>
     </procedure>
@@ -534,19 +561,22 @@
       </step>
       <step>
         <para>
-     The <emphasis role="bold">Variables</emphasis> field: allows creating multi-values for action. If you want to add more values for action, click 
-     <inlinemediaobject>
+     The <emphasis role="bold">Variables</emphasis> field: allows creating multi-values for action. If you want to add more values for action, click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      . Click 
-     <inlinemediaobject>
+            <textobject>
+               <phrase>plus</phrase>
+            </textobject>
+          </inlinemediaobject> icon. Click the 
+            <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to delete a value.
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon to delete a value.
     </para>
       </step>
       <step>

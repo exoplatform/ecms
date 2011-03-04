@@ -68,14 +68,15 @@
 			</step>
 			 <step>
 				<para>
-					Open the Add New Document form by clicking 
+					Open the Add New Document form by clicking the 
 					<inlinemediaobject>
 						<imageobject>
                      <imagedata fileref="images/adddocumenticon.png" format="PNG" width="28mm"/>
 						</imageobject>
-
-					</inlinemediaobject>
-					 on the Action bar.
+                  <textobject>
+                     <phrase>[ Add Document ]</phrase>
+                  </textobject>
+					</inlinemediaobject> icon on the Action bar.
 				</para>
 
 			</step>
@@ -364,14 +365,15 @@
 			</step>
 			 <step>
 				<para>
-					Click 
+					Click the 
 					<inlinemediaobject>
 						<imageobject>
                      <imagedata fileref="images/editdocumenticon.png" format="PNG" width="38mm" />
 						</imageobject>
-
-					</inlinemediaobject>
-					on the action bar to show the edit form of the selected web content as the Add New Document form.
+                  <textobject>
+                     <phrase>[ Edit Document ]</phrase>
+                  </textobject>
+					</inlinemediaobject> icon on the action bar to show the edit form of the selected web content as the Add New Document form.
 				</para>
 
 			</step>

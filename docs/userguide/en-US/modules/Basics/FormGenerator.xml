@@ -59,12 +59,18 @@
           <imageobject>
             <imagedata fileref="images/componentuparrow.png" format="PNG" width="5mm"/>
           </imageobject>
+          <textobject>
+            <phrase>up arrow</phrase>
+         </textobject>
         </inlinemediaobject>
      corresponding to the component to move this component up or the 
     <inlinemediaobject>
           <imageobject>
             <imagedata fileref="images/componentdownarrow.png" format="PNG" width="5mm"/>
           </imageobject>
+          <textobject>
+            <phrase>down arrow</phrase>
+         </textobject>
         </inlinemediaobject>
      to move the component down.
    </para>
@@ -76,8 +82,10 @@
           <imageobject>
             <imagedata fileref="images/editcomponenticon.png" format="PNG" width="6mm"/>
           </imageobject>
-        </inlinemediaobject>
-     that corresponds to the component to edit properties of that component. The form to edit properties appears like the illustration below:
+          <textobject>
+             <phrase>pencil</phrase>
+          </textobject>
+        </inlinemediaobject> icon that corresponds to the component to edit properties of that component. The form to edit properties appears like the illustration below:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -103,14 +111,20 @@
             </row>
             <row>
               <entry> Width </entry>
-              <entry>To enter the field width. If the checkbox in <inlinemediaobject>
+              <entry>To enter the field width. If the <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/rulesrequiredbox.png" format="PNG" width="39mm"/>
                   </imageobject>
-                </inlinemediaobject> is marked, the <inlinemediaobject>
+                  <textobject>
+                     <phrase>[ Rules: ]</phrase>
+                  </textobject>
+                </inlinemediaobject> checkbox is marked, the <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/redstarasterix.png" format="PNG" width="4mm"/>
                   </imageobject>
+                  <textobject>
+                     <phrase>red asterix</phrase>
+                  </textobject>
                 </inlinemediaobject> will appear beside the text box, indicating that values in this box are required. </entry>
             </row>
             <row>
@@ -134,17 +148,21 @@
           <imageobject>
             <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
           </imageobject>
-        </inlinemediaobject>
-     corresponding to the component.
+          <textobject>
+             <phrase>trash can</phrase>
+          </textobject>
+        </inlinemediaobject> corresponding to the component.
    </para>
       <para>
-    Click 
+    Click the 
     <inlinemediaobject>
           <imageobject>
             <imagedata fileref="images/editcomponenticon.png" format="PNG"/>
           </imageobject>
-        </inlinemediaobject>
-     again to hide the form to edit the properties.
+          <textobject>
+             <phrase>pencil</phrase>
+          </textobject>
+        </inlinemediaobject> icon again to hide the form to edit the properties.
    </para>
       <para>
     After editing the properties of the components, the components look like the below illustration:

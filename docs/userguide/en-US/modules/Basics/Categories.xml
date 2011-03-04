@@ -65,13 +65,15 @@
       </step>
       <step>
         <para>
-     Click 
+     Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/editicon2.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      in the <emphasis role="bold">Manage Pages</emphasis> that corresponds with the Category navigation portlet to open the page to edit this portlet.
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
+          </inlinemediaobject> icon in the <emphasis role="bold">Manage Pages</emphasis> that corresponds with the Category navigation portlet to open the page to edit this portlet.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -89,8 +91,10 @@
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to open a form with the Edit Mode to edit the portlet.
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
+          </inlinemediaobject> icon to open a form with the Edit Mode to edit the portlet.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -103,13 +107,15 @@
       </step>
       <step>
         <para>
-     Click 
+     Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to select the repository for documents in the Repository field.
+            <textobject>
+               <phrase>scroll arrows</phrase>
+            </textobject>
+          </inlinemediaobject> to select the repository for documents in the Repository field.
     </para>
       </step>
       <step>
@@ -134,8 +140,10 @@
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      icon to select the target path. The Page selector form will appear:
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
+          </inlinemediaobject> icon to select the target path. The Page selector form will appear:
     </para>
         <mediaobject>
              <imageobject role="html">
@@ -148,13 +156,15 @@
       </step>
       <step>
         <para>
-     Click 
+     Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/bluedroparrow.png" format="PNG" width="6mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to select the navigation on the left pane. The corresponding pages will be displayed on the left pane and the corresponding paths will be displayed on the right pane.
+            <textobject>
+               <phrase>down arrow</phrase>
+            </textobject>
+          </inlinemediaobject> icon to select the navigation on the left pane. The corresponding pages will be displayed on the left pane and the corresponding paths will be displayed on the right pane.
     </para>
       </step>
       <step>
@@ -162,10 +172,12 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/newsletters-tick.png" format="PNG"/>
+              <imagedata fileref="images/greentick.png" format="PNG"/>
             </imageobject>
-          </inlinemediaobject>
-      icon to select the path. This path will be displayed in the Show in page field.
+            <textobject>
+               <phrase>green tick</phrase>
+            </textobject>
+          </inlinemediaobject> icon to select the path. This path will be displayed in the Show in page field.
     </para>
       </step>
       <step>

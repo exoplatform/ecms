@@ -60,13 +60,13 @@
       <step id="step-User_Guide-Add_a_New_Template-Open_Permissions_dialog.">
         <title>Open Permissions dialog.</title>
         <para>
-     Click the <guibutton>+</guibutton> icon next to the <emphasis role="bold">Permissions</emphasis> field to open the <emphasis role="bold">Select Permission</emphasis> dialog.
+     Click the plus icon next to the <emphasis role="bold">Permissions</emphasis> field to open the <emphasis role="bold">Select Permission</emphasis> dialog.
     </para>
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Assign_memberships_to_the_group">
         <title>Assign memberships to the group</title>
         <para>
-     Select the group from the left panel and the membership from the right panel. Or you can set permission for everyone by clicking the + icon next to <emphasis role="bold">Any Permission.</emphasis>
+     Select the group from the left panel and the membership from the right panel. Or you can set permission for everyone by clicking the plus icon next to <emphasis role="bold">Any Permission.</emphasis>
     </para>
        <mediaobject>
           <imageobject role="html">
@@ -302,6 +302,9 @@
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
           </inlinemediaobject>
       corresponding to the template that you want to discard.
     </para>
@@ -810,10 +813,7 @@
     </mediaobject>
     <section id="sect-User_Guide-Drives_Management-Add_a_new_drive">
       <title>Add a new drive</title>
-<!-- Commented para out as linkend has no discernable target and breaks Publican Build as is:
-          <para>
-    Use the <xref linkend="" /> to add a new drive.
-   </para>-->      <procedure>
+    <procedure>
         <step>
           <para>
       Click the <guibutton>Add Drive</guibutton> button in the <guibutton>Manage Drives</guibutton> form to open the <guibutton>Add Drive</guibutton> form.
@@ -852,8 +852,11 @@
               <imageobject>
                 <imagedata fileref="images/deplussy.png" format="PNG" width="7mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>plus</phrase>
+              </textobject>
             </inlinemediaobject>
-       icon
+       icon beside the <guilabel>Home path</guilabel> entry.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -866,34 +869,29 @@
         </step>
         <step>
           <para>
-      Click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/deplussy.png" format="PNG"/>
-              </imageobject>
-            </inlinemediaobject>
-       icon to select the home path.
-     </para>
-        </step>
-        <step>
-          <para>
-      Select an icon for the workspace by clicking the 
+      Browse for an icon for the workspace by clicking the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
               </imageobject>
-            </inlinemediaobject>
+              <textobject>
+                 <phrase>plus</phrase>
+              </textobject>
+            </inlinemediaobject> icon beside the <guilabel>Workspace icon</guilabel> entry.
      </para>
         </step>
         <step>
           <para>
-      Click 
+      Select an icon by clicking the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>green tick</phrase>
+              </textobject>
             </inlinemediaobject>
-       to select an icon file:
+       corresponding to the desired icon file:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -911,8 +909,11 @@
               <imageobject>
                 <imagedata fileref="images/pluspermissionbutton.png" format="PNG" width="8mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>plus</phrase>
+              </textobject>
             </inlinemediaobject>
-       icon.
+       icon beside the <guilabel>Permissions</guilabel> entry.
      </para>
         </step>
         <step>
@@ -979,13 +980,16 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/versionplusicon.png" format="PNG" width="9mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>plus</phrase>
+              </textobject>
             </inlinemediaobject>
-       to select a node type. The <emphasis role="bold">Select node types</emphasis> form will appear:
+       icon beside the <guilabel>Allowance nodetype on left tree</guilabel> field to select a node type. The <emphasis role="bold">Select node types</emphasis> form will appear:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -1001,8 +1005,11 @@
               <imageobject>
                 <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>magnifying glass</phrase>
+              </textobject>
             </inlinemediaobject>
-       to begin searching.
+       icon to begin searching.
      </para>
           <para>
       All the node types matching the search string will appear in a list below.
@@ -1013,6 +1020,9 @@
               <imageobject>
                 <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>plus</phrase>
+              </textobject>
             </inlinemediaobject>
        beside <emphasis role="bold">Choose all node types</emphasis> to select all results.
      </para>
@@ -1033,6 +1043,9 @@
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>trash can</phrase>
+              </textobject>
             </inlinemediaobject>
        if you want to remove the selected nodetype.
      </para>
@@ -1065,6 +1078,9 @@
               <imageobject>
                 <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
             </inlinemediaobject>
        icon that corresponds to the drive you want to edit. The <emphasis role="bold">Edit drive</emphasis> form will appear:
      </para>
@@ -1103,6 +1119,9 @@
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
               </imageobject>
+              <textobject>
+                 <phrase>trash can</phrase>
+              </textobject>
             </inlinemediaobject>
        that corresponds to the drive you want to delete.
      </para>

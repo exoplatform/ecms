@@ -156,7 +156,10 @@
               <imageobject>
                 <imagedata fileref="images/userpermissionbutton.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject> icon to select memberships in order to add a permission for those memberships. The Select membership form will appear:
+              <textobject>
+                 <phrase>"Select user"</phrase>
+              </textobject>
+            </inlinemediaobject> icon beside the <guilabel>Memberships</guilabel> field to select memberships in order to add a permission for those memberships. The Select membership form will appear:
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -291,20 +294,29 @@
             <imageobject>
               <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
             </imageobject>
+            <textobject>
+               <phrase>"Select user"</phrase>
+            </textobject>
           </inlinemediaobject>
       icon to select a user or the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>"Select memberships"</phrase>
+            </textobject>
           </inlinemediaobject>
-      icon to select memerships or the 
+      icon to select memberships or the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/alluserpermission.png" format="PNG" width="7mm"/>
             </imageobject>
+            <textobject>
+               <phrase>"Select everyone"</phrase>
+            </textobject>
           </inlinemediaobject>
-      icon to select everyone in order to set permissions. The user or memership that you have just selected will be displayed in the <guilabel>User or Group</guilabel> field.
+      icon to select everyone in order to set permissions. The user or membership that you have just selected will be displayed in the <guilabel>User or Group</guilabel> field.
     </para>
         <para>
      Then, check at least one of these below options to set rights for the selected user to membership:
@@ -408,8 +420,11 @@
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
           </inlinemediaobject>
-     that corresponds to the taxonomy tree you want to edit.
+     icon that corresponds to the taxonomy tree you want to edit.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -427,8 +442,11 @@
             <imageobject>
               <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
             </imageobject>
+            <textobject>
+               <phrase>plus</phrase>
+            </textobject>
           </inlinemediaobject>
-      to add more taxonomy trees. The Edit taxonomy tree will appear:
+      icon in the <guilabel>Action</guilabel> field to add more taxonomy trees. The Edit taxonomy tree will appear:
     </para>
         <mediaobject>
            <imageobject role="html">

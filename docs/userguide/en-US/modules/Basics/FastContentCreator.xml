@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
@@ -159,8 +160,10 @@
             <imageobject>
               <imagedata fileref="images/previewicon.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to search for the location to save documents. The <emphasis role="bold">Select Location</emphasis> form appears:
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
+          </inlinemediaobject> to search for the location to save documents. The <emphasis role="bold">Select Location</emphasis> form appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -178,8 +181,10 @@
             <imageobject>
               <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
             </imageobject>
-          </inlinemediaobject>
-      in the <emphasis role="bold">Action</emphasis> column to choose the child node on the right panel. After being selected, this location will be displayed on the <emphasis role="bold">Location to save</emphasis> field. Created documents will be saved in this location.
+            <textobject>
+               <phrase>green tick</phrase>
+            </textobject>
+          </inlinemediaobject> in the <emphasis role="bold">Action</emphasis> column to choose the child node on the right panel. After being selected, this location will be displayed on the <emphasis role="bold">Location to save</emphasis> field. Created documents will be saved in this location.
     </para>
       </step>
       <step>

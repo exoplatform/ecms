@@ -333,14 +333,15 @@
 					<title>Method 1</title>
 					 <step>
 						<para>
-							Click 
+							Click the 
 							<inlinemediaobject>
 								<imageobject>
                            <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="10mm" />
 								</imageobject>
-
-							</inlinemediaobject>
-							 to open the <emphasis role="bold">Preferences</emphasis>:
+                        <textobject>
+                           <phrase>sprocket</phrase>
+                        </textobject>
+							</inlinemediaobject> icon to open the <emphasis role="bold">Preferences</emphasis>:
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
@@ -349,9 +350,7 @@
 							 <imageobject role="fo">
                         <imagedata align="center"  fileref="images/preferencesetting.png" format="PNG" width="143mm" />
 							</imageobject>
-
 						</mediaobject>
-
 					</step>
 					 <step>
 						<para>

@@ -98,6 +98,9 @@
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
             </imageobject>
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
           </inlinemediaobject>
       icon to search and check if the inputted user name is available or not.
     </para>
@@ -106,7 +109,6 @@
     <para>
      Input other required fields in the <emphasis role="bold">Account Settings</emphasis> tab.
     </para>
-
    </step>  -->
    <step>
         <para>
@@ -371,14 +373,7 @@
       </para>
           </listitem>
         </itemizedlist>
-<!--   Removed in eXo Content User Guide 2.1.1
-     <note>
-     <title>Temporary Credentials Validity</title>
-      <para>
-      The Username/Password that you received only takes effect for 1 day. It means that if the period is over 1 day from the receipt date, you can not use the receipt username/password, so you will need to get another email active.
-     </para>
-    </note>
-  -->      </step>
+     </step>
     </procedure>
   </section>
   <section id="sect-User_Guide-Account-Change_Account_Information">

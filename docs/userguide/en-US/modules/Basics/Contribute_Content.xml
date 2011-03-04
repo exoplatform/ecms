@@ -109,13 +109,15 @@
         </step>
         <step>
           <para>
-      Click
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-       to open the template list and select one.
+              <textobject>
+                 <phrase>scroll arrows</phrase>
+              </textobject>
+            </inlinemediaobject> icon to open the template list and select one.
      </para>
         </step>
         <step>
@@ -152,13 +154,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-      at the right corner of the content you want to edit. You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with the document form for you to edit.
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon at the right corner of the content you want to edit. You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with the document form for you to edit.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -184,13 +188,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/backicon.png" format="PNG" width="9mm"/>
               </imageobject>
-            </inlinemediaobject>
-       to return to the site and in the <emphasis role="bold">Edit Mode</emphasis>, the content in the state &quot;draft&quot; with its modification is visible.
+              <textobject>
+                 <phrase>green reverse arrow</phrase>
+              </textobject>
+            </inlinemediaobject> icon to return to the site and in the <emphasis role="bold">Edit Mode</emphasis>, the content in the state &quot;draft&quot; with its modification is visible.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -288,13 +294,15 @@
       Details:
      </para>
           <para>
-      <emphasis role="bold">Content Selection</emphasis>: Select the path of the content that you want to show by clicking 
+      <emphasis role="bold">Content Selection</emphasis>: Select the path of the content that you want to show by clicking the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
               </imageobject>
-            </inlinemediaobject>
-      .
+              <textobject>
+                 <phrase>blue plus</phrase>
+              </textobject>
+            </inlinemediaobject> icon.
      </para>
           <para>
       <emphasis role="bold">Display Settings:</emphasis> Allow configuring Title, Date and OptionBar visibility.
@@ -336,13 +344,15 @@
      </para>
           <note>
             <para>
-       Click
+       Click the 
        <inlinemediaobject>
                 <imageobject>
                   <imagedata fileref="images/questionicon.png" format="PNG" width="6mm"/>
                 </imageobject>
-              </inlinemediaobject>
-        to see a quick help pane for each section.
+                <textobject>
+                   <phrase>question mark</phrase>
+                </textobject>
+              </inlinemediaobject> icon to see a quick help pane for each section.
       </para>
           </note>
         </step>
@@ -379,13 +389,15 @@
         </step>
         <step>
           <para>
-      In the <emphasis role="bold">Print Setting</emphasis> part, click 
+      In the <emphasis role="bold">Print Setting</emphasis> part, click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/viewresultcontent.png" format="PNG" width="7mm"/>
+                <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
               </imageobject>
-            </inlinemediaobject>
-      to open the <emphasis role="bold">UIPageselector</emphasis> dialog, you will see <emphasis role="bold">Printviewer.</emphasis>
+              <textobject>
+                 <phrase>magnifying glass</phrase>
+              </textobject>
+            </inlinemediaobject> icon to open the <emphasis role="bold">UIPageselector</emphasis> dialog, you will see <emphasis role="bold">Printviewer.</emphasis>
      </para>
           <para>
       Click the <emphasis role="bold">Print</emphasis> button, the content is opened in the print viewer page.
@@ -563,13 +575,15 @@
         </step>
         <step>
           <para>
-      Browse the documents/ web content of an available site by clicking 
+      Browse the documents or web content of an available site by clicking the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/plusicon.png" format="PNG"/>
               </imageobject>
-            </inlinemediaobject>
-      next to the<emphasis role="bold"> folder path</emphasis> field.
+              <textobject>
+                 <phrase>blue plus</phrase>
+              </textobject>
+            </inlinemediaobject> icon next to the<emphasis role="bold"> folder path</emphasis> field.
      </para>
         </step>
         <step>

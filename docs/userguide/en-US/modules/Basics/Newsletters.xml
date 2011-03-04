@@ -152,21 +152,29 @@
             <title>Input values for fields</title>
             <substeps>
               <step>
-                <para>Select a moderator for a category by clicking 
-       <inlinemediaobject>
+                <para>Select a moderator for a category by clicking the 
+                     <inlinemediaobject>
                     <imageobject>
                       <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
                     </imageobject>
-                  </inlinemediaobject>
-        next to the Moderator field to select a user. The<emphasis role="bold"> User selector</emphasis> form will appear <emphasis role="bold">&gt;</emphasis> Click 
-       <inlinemediaobject>
+                    <textobject>
+                       <phrase>"Select user"</phrase>
+                    </textobject>
+                  </inlinemediaobject> icon next to the Moderator field to select a user. The <emphasis role="bold">User selector</emphasis> form will appear <emphasis role="bold">&gt;</emphasis>
+               </para>
+            </step>
+            <step>
+               <para>
+                  Click the <inlinemediaobject>
                     <imageobject>
                       <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
                     </imageobject>
-                  </inlinemediaobject>
-        corresponding to a user in the list that you want to select..
-      </para>
-            <mediaobject>
+                    <textobject>
+                       <phrase>green tick</phrase>
+                    </textobject>
+                  </inlinemediaobject>  corresponding to a user in the list that you want to select.
+               </para>
+               <mediaobject>
                <imageobject role="html">
                   <imagedata fileref="images/newsletters-user_selector_form.png" format="PNG" align="center"/>
                </imageobject>
@@ -174,16 +182,18 @@
                   <imagedata fileref="images/newsletters-user_selector_form.png" format="PNG" align="center" width="150mm"/>
                </imageobject>
             </mediaobject>
-              </step>
+            </step>
               <step>
                 <para>
-       Click 
-       <inlinemediaobject>
+                     Click the 
+                  <inlinemediaobject>
                     <imageobject>
                       <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
                     </imageobject>
-                  </inlinemediaobject>
-        to select users in a specific group. The Group selector will appear</para>
+                    <textobject>
+                       <phrase>"Select membership"</phrase>
+                    </textobject>
+                  </inlinemediaobject> icon to select users in a specific group. The Group selector will appear</para>
                 <mediaobject>
                    <imageobject role="html">
                       <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center"/>
@@ -192,8 +202,9 @@
                       <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center" width="139mm" />
                    </imageobject>
                 </mediaobject>
-                <para>Select a group from the left panel and a membership type in the right panel. The membership and group selected will be displayed in the Moderator field. After adding new categories, they will be added in the list of categories.
-      </para>
+                <para>
+                   Select a group from the left panel and a membership type in the right panel. The membership and group selected will be displayed in the Moderator field. After adding new categories, they will be added in the list of categories.
+               </para>
               </step>
             </substeps>
             <para>After creating a category, you can create new subscriptions or newsletters for this category.</para>
@@ -412,13 +423,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-       and select the category from the drop-down menu.
+              <textobject>
+                 <phrase>scroll arrows</phrase>
+              </textobject>
+            </inlinemediaobject> icon and select the category from the drop-down menu.
      </para>
         </step>
         <step>
@@ -569,8 +582,10 @@
               <imageobject>
                 <imagedata fileref="images/newsletters_moderation_icon.png" format="PNG" width="32mm"/>
               </imageobject>
-            </inlinemediaobject>
-       button, then select <emphasis role="bold">Open</emphasis> in the menu:
+              <textobject>
+                 <phrase>[ Moderation ]</phrase>
+              </textobject>
+            </inlinemediaobject> button, then select <emphasis role="bold">Open</emphasis> in the menu:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -613,13 +628,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
-            </inlinemediaobject>
-       , then select <emphasis role="bold">Edit</emphasis> in the menu.
+              <textobject>
+                 <phrase>[ Moderation ]</phrase>
+              </textobject>
+            </inlinemediaobject> button then select <emphasis role="bold">Edit</emphasis> in the menu.
      </para>
          <mediaobject>
             <imageobject role="html">
@@ -685,13 +702,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
-            </inlinemediaobject>
-       , then click <emphasis role="bold">Delete</emphasis> in the menu.
+              <textobject>
+                 <phrase>[ Moderation ]</phrase>
+              </textobject>
+            </inlinemediaobject> button then click <emphasis role="bold">Delete</emphasis> in the menu.
      </para>
           <para>
       The confirmation message will be displayed:
@@ -726,13 +745,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
-            </inlinemediaobject>
-       , then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
+              <textobject>
+                 <phrase>[ Moderation ]</phrase>
+              </textobject>
+            </inlinemediaobject> button then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
      </para>
         </step>
       </procedure>
@@ -751,13 +772,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/newletterbutton.png" format="PNG" width="35mm"/>
               </imageobject>
-            </inlinemediaobject>
-       on the action bar. The <emphasis role="bold">Newsletter entry form</emphasis>appears:
+              <textobject>
+                 <phrase>[ New Letter ]</phrase>
+              </textobject>
+            </inlinemediaobject> button on the action bar. The <emphasis role="bold">Newsletter entry form</emphasis>appears:
      </para>
           <mediaobject>
             <imageobject>
@@ -803,13 +826,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-       to select the template for the newsletter.
+              <textobject>
+                 <phrase>scroll arrows</phrase>
+              </textobject>
+            </inlinemediaobject> icon to select the template for the newsletter.
      </para>
         </step>
         <step>
@@ -827,13 +852,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-       in the category field to select the category and the subscription in list.
+              <textobject>
+                 <phrase>scroll arrows</phrase>
+              </textobject>
+            </inlinemediaobject> icon in the category field to select the category and the subscription in list.
      </para>
         </step>
         <step>

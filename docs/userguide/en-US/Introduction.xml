@@ -3,17 +3,21 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-User_Guide-Overall_Introduction">
-	 <title>Overall Introduction</title>
+<chapter id="chap-User_Guide-Product_Introduction">
+	 <title>Product Introduction</title>
     
-    <!--FOR PUBLICAN -->
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Site_Publisher.xml">
-    <!--FOR JDOCBOOK:-->
-    <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
-        <xi:include href="eXo_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
-    </xi:fallback> </xi:include>
+    <xi:include href="Site_Publisher.xml" xmlns:xi="http://www.w3.org/2001/XInclude" >
+      <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
+         <xi:include href="eXo_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+          <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
+             <xi:include href="Site_Publisher.xml" xmlns:xi="http://www.w3.org/2001/XInclude" >
+             </xi:include>
+          </xi:fallback>
+         </xi:include>
+    </xi:fallback> 
+    </xi:include>
 	
-	 <section id="sect-User_Guide-Overall_Introduction-Site_Content_Structure">
+	 <section id="sect-User_Guide-Product_Introduction-Site_Content_Structure">
 		<title>Site Content Structure</title>
 		 <para>
 			Creating a site is a quick process, but deciding what content to put in the site and how to organize it will take a lot of time. Thus, to mange a site more easily and more effectively, a site always has a specific structure as follows:
@@ -129,7 +133,7 @@
 
 	</section>
 	
-	 <section id="sect-User_Guide-Overall_Introduction-Web_Content">
+	 <section id="sect-User_Guide-Product_Introduction-Web_Content">
 		<title>Web Content</title>
 		 <section id="sect-User_Guide-Web_Content-Web_Content">
 			<title>Web Content</title>
@@ -193,7 +197,7 @@
 
 	</section>
 	
-	 <section id="sect-User_Guide-Overall_Introduction-Terminologies">
+	 <section id="sect-User_Guide-Product_Introduction-Terminologies">
 		<title>Terminologies</title>
 		 <section id="sect-User_Guide-Terminologies-Repository">
 			<title>Repository</title>

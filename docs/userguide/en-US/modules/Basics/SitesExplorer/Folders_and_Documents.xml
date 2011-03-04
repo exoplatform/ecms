@@ -48,14 +48,15 @@
       </step>
       <step>
         <para>
-     Click 
+     Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addfavorite.png" format="PNG" width="27mm"/>
             </imageobject>
-          </inlinemediaobject>
-
-    in the drop-down menu.</para>
+            <textobject>
+               <phrase>[ Add to favorite ]</phrase>
+            </textobject>
+          </inlinemediaobject> entry in the drop-down menu.</para>
       </step>
     </procedure>
     <para>
@@ -138,8 +139,10 @@
             <imageobject>
               <imagedata fileref="images/clipboardicon.png" format="PNG" width="6mm"/>
             </imageobject>
-          </inlinemediaobject>
-      in the clipboard window to paste the copied node into the selected destination node in step 3.
+            <textobject>
+               <phrase>clipboard</phrase>
+            </textobject>
+          </inlinemediaobject> icon in the clipboard window to paste the copied node into the selected destination node in step 3.
     </para>
       </step>
       <step>
@@ -149,8 +152,10 @@
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to delete a specific waiting statement.
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon to delete a specific waiting statement.
     </para>
       </step>
       <step>
@@ -177,7 +182,7 @@
         </listitem>
         <listitem>
           <para>
-      If the destination node has the same name with the copied node, after being pasted, the pasted node will be added an index with its name. For example, in this case, if “new folder” contains a node with name “Live”, then after the paste action, in “new folder” there are two nodes with name Live and Live[2].
+      If the destination node has the same name with the copied node, after being pasted, the pasted node will be added an index with its name. For example, in this case, if “new folder” contains a node with name “Live”, then after the paste action, in “new folder” there are two nodes with name <emphasis>Live</emphasis> and <emphasis>Live[2]</emphasis>.
      </para>
         </listitem>
         <listitem>
@@ -272,8 +277,10 @@
             <imageobject>
               <imagedata fileref="images/clipboardicon.png" format="PNG" width="6mm"/>
             </imageobject>
-          </inlinemediaobject>
-      in the clipboard window to paste the copied node into the selected destination node in step 3.
+            <textobject>
+               <phrase>clipboard</phrase>
+            </textobject>
+          </inlinemediaobject> icon in the clipboard window to paste the copied node into the selected destination node in step 3.
     </para>
       </step>
       <step>
@@ -283,8 +290,10 @@
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to delete a specific waiting statement.
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon to delete a specific waiting statement.
     </para>
       </step>
       <step>
@@ -329,9 +338,9 @@
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Delete_folders_and_documents">
     <title>Delete folders and documents</title>
-<!--   DOC NOTE: This section looks to have been merged with "sect-User_Guide-Manage_Documents_in_Sites_Explorer-Delete_documents" from SitesExplorer_Raw_XML   -->    <para>
-   This function helps you remove folders/documents from theirs location easily. Do the same steps as <xref linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content"/>
-  </para>
+       <para>
+      This function helps you remove folders/documents from theirs location easily. Do the same steps as <xref linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content"/>
+     </para>
     <note>
       <title>Delete Rights</title>
       <itemizedlist>
@@ -350,9 +359,9 @@
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Drag_and_drop_folders_and_documents">
     <title>Drag and drop folders and documents</title>
-<!--  DOC NOTE: This section seems to have been merged with "sect-User_Guide-Manage_Documents_in_Sites_Explorer-Drag_and_drop_documents" from SitesExplorer_Raw_XML   -->    <para>
-   This function allows you to move folders/documents from a current location to another one by using the drag and drop feature.
-  </para>
+      <para>
+      This function allows you to move folders/documents from a current location to another one by using the drag and drop feature.
+     </para>
     <procedure>
       <title/>
       <step>
@@ -362,8 +371,10 @@
             <imageobject>
               <imagedata fileref="images/handcursor.png" format="PNG" width="9mm"/>
             </imageobject>
-          </inlinemediaobject>
-      .
+            <textobject>
+               <phrase>a pointing hand</phrase>
+            </textobject>
+          </inlinemediaobject>.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -396,7 +407,7 @@
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-LockUnlock_folders_and_Documents">
     <title>Lock/Unlock folders and Documents</title>
-<!--   DOC NOTE: This section seems to have been merged with "sect-User_Guide-Manage_Documents_in_Sites_Explorer-LockUnlock_documents" from SitesExplorer_Raw_XML  -->    <para>
+    <para>
    This function enables you to avoid changes to specific folders/documents, actioned by others, during a specific time.
   </para>
     <formalpara id="form-User_Guide-LockUnlock_folders_and_Documents-Lock_foldersdocuments">
@@ -444,7 +455,7 @@
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Rename_folders_and_Documents">
     <title>Rename folders and Documents</title>
-<!--  DOC NOTE: This section seems to have been merged with "sect-User_Guide-Manage_Documents_in_Sites_Explorer-Rename_documents" from SitesPublisher_Raw_XML  -->    <para>
+    <para>
    This function is used to change the name of a folder/documents.
   </para>
     <procedure>
@@ -667,8 +678,10 @@
             <imageobject>
               <imagedata fileref="images/cloudicon.png" format="PNG" width="8mm"/>
             </imageobject>
-          </inlinemediaobject>
-      icon at the upper-right corner of the tags panel.
+            <textobject>
+               <phrase>tag</phrase>
+            </textobject>
+          </inlinemediaobject> icon at the upper-right corner of the tags panel.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -697,8 +710,10 @@
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
-          </inlinemediaobject>
-      that corresponds to the tag you want to edit.
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
+          </inlinemediaobject> icon that corresponds to the tag you want to edit.
     </para>
       </step>
       <step>
@@ -734,7 +749,10 @@
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon.
 
     </para>
         <para>
@@ -757,13 +775,15 @@
       <title>Use Created tags</title>
       <step>
         <para>
-     Select the Tag cloud 
+     Click the  
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/cloudicon.png" format="PNG" width="8mm"/>
             </imageobject>
-          </inlinemediaobject>
-      you will see all existing tags. All existing tags are listed and classified by private or public tags.
+            <textobject>
+               <phrase>tag</phrase>
+            </textobject>
+          </inlinemediaobject> icon. You will see all existing tags. All existing tags are listed and classified by private or public tags.
     </para>
         <mediaobject>
           <imageobject role="html">

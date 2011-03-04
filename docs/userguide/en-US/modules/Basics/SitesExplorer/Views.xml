@@ -38,16 +38,18 @@
 				<imageobject>
 					<imagedata fileref="images/descendingarrow.png" format="PNG" width="5mm"/>
 				</imageobject>
-
-			</inlinemediaobject>
-			 indicates that nodes are ordered in ascending order and on the contrary, the 
+            <textobject>
+               <phrase>ascending arrow</phrase>
+            </textobject>
+			</inlinemediaobject> icon indicates that nodes are ordered in ascending order and the 
 			<inlinemediaobject>
 				<imageobject>
                <imagedata fileref="images/ascendingarrow.png" format="PNG" width="5mm"/>
 				</imageobject>
-
-			</inlinemediaobject>
-			 icon means nodes are in descending order.
+            <textobject>
+               <phrase>descending arrow</phrase>
+            </textobject>
+			</inlinemediaobject> icon means nodes are in descending order.
 		</para>
 
 	</section>
@@ -107,14 +109,15 @@
 			</step>
 			 <step>
 				<para>
-					Click 
+					Click the 
 					<inlinemediaobject>
 						<imageobject>
 							<imagedata fileref="images/overloadthumbnail.png" format="PNG" />
 						</imageobject>
-
-					</inlinemediaobject>
-					 to open the <emphasis role="bold">Add thumbnail image</emphasis> form.
+                  <textobject>
+                     <phrase>[ Overload Thumbnail ]</phrase>
+                  </textobject>
+					</inlinemediaobject> icon to open the <emphasis role="bold">Add thumbnail image</emphasis> form.
 				</para>
 
 			</step>
@@ -218,9 +221,10 @@
 				<imageobject>
                <imagedata fileref="images/slideshowicon.png" format="PNG" width="7mm"/>
 				</imageobject>
-
-			</inlinemediaobject>
-			 icon:
+            <textobject>
+               <phrase>slideshow</phrase>
+            </textobject>
+			</inlinemediaobject> icon:
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -369,9 +373,10 @@
 				<imageobject>
                <imagedata fileref="images/timeline.png" format="PNG" width="5mm"/>
 				</imageobject>
-
-			</inlinemediaobject>
-			 icon.
+            <textobject>
+               <phrase>clock</phrase>
+            </textobject>
+			</inlinemediaobject> icon.
 		</para>
 		 <para>
 			All the nodes that were created and uploaded will be displayed like below:
@@ -403,16 +408,18 @@
 				<imageobject>
                <imagedata fileref="images/favestar.png" format="PNG" width="6mm"/>
 				</imageobject>
-
-			</inlinemediaobject>
-			 to mark your item as favorite or the 
+            <textobject>
+               <phrase>star</phrase>
+            </textobject>
+			</inlinemediaobject> icon to mark your item as favorite or the 
 			<inlinemediaobject>
 				<imageobject>
                <imagedata fileref="images/unfavestar.png" format="PNG" width="8mm" />
 				</imageobject>
-
-			</inlinemediaobject>
-			 icon corresponding to nodes in order to remove it from favorites.
+            <textobject>
+               <phrase>star</phrase>
+            </textobject>
+			</inlinemediaobject> icon of a favorited node again to remove it from favorites.
 		</para>
 
 	</section>

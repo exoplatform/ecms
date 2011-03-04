@@ -61,6 +61,9 @@
           <imageobject>
             <imagedata fileref="images/tickicon.png" format="PNG" width="4mm"/>
           </imageobject>
+          <textobject>
+             <phrase>blue tick</phrase>
+          </textobject>
         </inlinemediaobject>
      icon.
    </para>

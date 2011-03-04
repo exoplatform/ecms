@@ -41,8 +41,10 @@
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      icon to perform the search.
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
+          </inlinemediaobject> icon to perform the search.
     </para>
         <para>
      Search results will be displayed in the right pane.
@@ -56,7 +58,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     The search results are  empty if no document contains the search string.
+     The search results are empty if no document contains the search string.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -72,17 +74,22 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/viewdetailsbutton.png" format="PNG" width="7mm"/>
+              <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to view the content containing the search string.
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
+          </inlinemediaobject> icon to view the content containing the search string.
     </para>
         <para>
      Or click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/viewresultnode.png" format="PNG" width="7mm"/>
+              <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
             </imageobject>
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
           </inlinemediaobject>
       icon to go to the node that contains the search result.
     </para>
@@ -103,8 +110,10 @@
             <imageobject>
               <imagedata fileref="images/savedsearchicon.png" format="PNG" width="12mm"/>
             </imageobject>
-          </inlinemediaobject>
-      <emphasis role="bold">Saved Search</emphasis> icon.
+            <textobject>
+               <phrase>"Saved Search"</phrase>
+            </textobject>
+          </inlinemediaobject> icon.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -117,13 +126,15 @@
       </step>
       <step>
         <para>
-     Then click the <emphasis role="bold">Advanced Search</emphasis> icon 
+     Then click the <emphasis role="bold">Advanced Search</emphasis>  
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to open the <emphasis role="bold">Advanced Search</emphasis> form.
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
+          </inlinemediaobject> icon to open the <emphasis role="bold">Advanced Search</emphasis> form.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -361,13 +372,15 @@
             </step>
             <step>
               <para>
-        Enter the property you want to locate or click the <emphasis role="bold">Add property</emphasis> icon 
+        Enter the property you want to locate or click the  
         <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="9mm"/>
                   </imageobject>
-                </inlinemediaobject>
-         .
+                  <textobject>
+                     <phrase>"Add property"</phrase>
+                  </textobject>
+                </inlinemediaobject> icon.
        </para>
               <mediaobject>
                 <imageobject role="html">
@@ -397,13 +410,7 @@
             <step>
               <para>
         Define the property value to search for by entering a value into the <emphasis role="bold">Contain exactly</emphasis> field or click the <emphasis role="bold">Find exactly</emphasis> icon: 
-        <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG"/>
-                  </imageobject>
-                </inlinemediaobject>
-
-       </para>
+               </para>
               <mediaobject>
                 <imageobject role="html">
                   <imagedata  align="center"  fileref="images/containexactlyform.png" format="PNG"/>
@@ -434,13 +441,15 @@
                 </listitem>
                 <listitem>
                   <para>
-          If the value you require is not in the list, enter it in the <emphasis role="bold">Filter:</emphasis> field and click 
+          If the value you require is not in the list, enter it in the <emphasis role="bold">Filter:</emphasis> field and click the 
           <inlinemediaobject>
                       <imageobject>
                         <imagedata fileref="images/furtherpropertyicon.png" format="PNG"/>
                       </imageobject>
-                    </inlinemediaobject>
-           icon. The value will populate the <emphasis role="bold">Contain exactly</emphasis> field of the constraints form.
+                      <textobject>
+                         <phrase>corresponding</phrase>
+                      </textobject> 
+                    </inlinemediaobject> icon. The value will populate the <emphasis role="bold">Contain exactly</emphasis> field of the constraints form.
          </para>
                 </listitem>
               </itemizedlist>
@@ -463,13 +472,7 @@
             </step>
             <step>
               <para>
-        Enter the required property in the <emphasis role="bold">Property</emphasis> field or click the <emphasis role="bold">Add Property</emphasis> icon 
-        <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG"/>
-                  </imageobject>
-                </inlinemediaobject>
-         (refer to <emphasis role="bold">Step 2</emphasis> in <xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values"/> for more information).
+        Enter the required property in the <emphasis role="bold">Property</emphasis> field or click the <emphasis role="bold">Add Property</emphasis> icon (refer to <emphasis role="bold">Step 2</emphasis> in <xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values"/> for more information).
        </para>
             </step>
             <step>
@@ -532,8 +535,10 @@
                   <imageobject>
                     <imagedata fileref="images/addnodetypeicon.png" format="PNG" width="9mm"/>
                   </imageobject>
-                </inlinemediaobject>
-         icon to open a list of document types:
+                  <textobject>
+                     <phrase>"Add node type"</phrase>
+                  </textobject>
+                </inlinemediaobject> icon to open a list of document types:
        </para>
               <mediaobject>
                 <imageobject role="html">
@@ -575,8 +580,10 @@
                   <imageobject>
                     <imagedata fileref="images/addcategoryicon.png" format="PNG"/>
                   </imageobject>
-                </inlinemediaobject>
-         icon for a list of categories:
+                  <textobject>
+                     <phrase>"Add category"</phrase>
+                  </textobject>
+                </inlinemediaobject> icon for a list of categories:
        </para>
               <mediaobject>
                 <imageobject role="html">
@@ -594,8 +601,10 @@
                   <imageobject>
                     <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
                   </imageobject>
-                </inlinemediaobject>
-         that corresponds to the category you want.
+                  <textobject>
+                     <phrase>green tick</phrase>
+                  </textobject>
+                </inlinemediaobject> that corresponds to the category you want.
        </para>
               <para>
         The selected category will populate the <emphasis role="bold">Category</emphasis> field.
@@ -632,8 +641,10 @@
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
               </imageobject>
-            </inlinemediaobject>
-       icon.
+              <textobject>
+                 <phrase>trash can</phrase>
+              </textobject>
+            </inlinemediaobject> icon.
      </para>
         </step>
         <step>
@@ -698,35 +709,41 @@
       <itemizedlist>
         <listitem>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/searchsprocket.png" format="PNG" width="7mm"/>
               </imageobject>
-            </inlinemediaobject>
-       to perform the search and see the results in the <emphasis role="bold">Search Results</emphasis> tab.
+              <textobject>
+                 <phrase>sprocket</phrase>
+              </textobject>
+            </inlinemediaobject> icon to perform the search and see the results in the <emphasis role="bold">Search Results</emphasis> tab.
      </para>
         </listitem>
         <listitem>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-       to edit the query statement. The query form will appear like when creating a query (see <xref linkend="sect-User_Guide-Advanced_Search-Search_by_creating_a_new_query"/>); however, you cannot edit the name of the saved search.
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon to edit the query statement. The query form will appear like when creating a query (see <xref linkend="sect-User_Guide-Advanced_Search-Search_by_creating_a_new_query"/>); however, you cannot edit the name of the saved search.
      </para>
         </listitem>
         <listitem>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
               </imageobject>
-            </inlinemediaobject>
-       to delete a query (provided you have the access rights to  that query).
+              <textobject>
+                 <phrase>trash can</phrase>
+              </textobject>
+            </inlinemediaobject> to delete a query (provided you have the access rights to  that query).
      </para>
         </listitem>
       </itemizedlist>
@@ -746,8 +763,10 @@
             <imageobject>
               <imagedata fileref="images/savedsearchicon.png" format="PNG" width="12mm"/>
             </imageobject>
-          </inlinemediaobject>
-      icon to see the list of existing queries.
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
+          </inlinemediaobject> icon to see the list of existing queries.
     </para>
         <mediaobject>
           <imageobject role="html">

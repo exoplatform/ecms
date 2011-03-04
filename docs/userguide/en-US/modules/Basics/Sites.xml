@@ -159,13 +159,15 @@
                 </imageobject>
               </mediaobject>
               <para>
-        In which, the icon 
+        In which, the  
         <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
                   </imageobject>
-                </inlinemediaobject>
-         is to remove its corresponding group from the Access Permission list.
+                  <textobject>
+                     <phrase>trash can</phrase>
+                  </textobject>
+                </inlinemediaobject> icon is to remove its corresponding group from the Access Permission list.
        </para>
             </listitem>
           </varlistentry>
@@ -266,8 +268,10 @@
               <imageobject>
                 <imagedata fileref="images/editlayouticon.png" format="PNG" width="38mm"/>
               </imageobject>
-            </inlinemediaobject>
-       .
+              <textobject>
+                 <phrase>[ Edit Layout ]</phrase>
+              </textobject>
+            </inlinemediaobject>.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -373,11 +377,15 @@
         <title>Edit Banner</title>
         <step>
           <para>
-                  Show the form to edit a banner by clicking the icon <inlinemediaobject>
+                  Show the form to edit a banner by clicking the 
+            <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/editicon3.png" format="PNG" width="13mm"/>
               </imageobject>
-            </inlinemediaobject> of the banner portlet in the Edit Portal form like the illustration below.
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon of the banner portlet in the Edit Portal form like the illustration below.
                </para>
           <mediaobject>
             <imageobject role="html">
@@ -446,13 +454,15 @@
      </para>
           <note>
             <para>
-       Click
+       Click the 
        <inlinemediaobject>
                 <imageobject>
                   <imagedata fileref="images/questionicon.png" format="PNG" width="6mm"/>
                 </imageobject>
-              </inlinemediaobject>
-        to see more explanation for each section.
+                <textobject>
+                   <phrase>question mark</phrase>
+                </textobject>
+              </inlinemediaobject> icon to see more explanation for each section.
       </para>
           </note>
         </step>
@@ -581,24 +591,30 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/finishbutton.png" format="PNG"/>
               </imageobject>
-            </inlinemediaobject>
-       to quit the form to edit the current site.
+              <textobject>
+                 <phrase>disk</phrase>
+              </textobject>
+            </inlinemediaobject> icon to quit the form to edit the current site.
      </para>
         </step>
       </procedure>
       <formalpara>
         <title>Edit Configuration</title>
         <para>
-    To edit the configuration (  including   language, skin and permissions) of the current site, click  <inlinemediaobject>
+    To edit the configuration (  including   language, skin and permissions) of the current site, click the 
+         <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/site-config.png" format="PNG" width="34mm"/>
             </imageobject>
-          </inlinemediaobject> to open the same form as the form to add a new portal.
+            <textobject>
+               <phrase>[ Site's Config ]</phrase>
+            </textobject>
+          </inlinemediaobject> button to open the same form as the form to add a new portal.
          </para>
       </formalpara>
       <para>
@@ -613,7 +629,7 @@
     <section id="sect-User_Guide-Edit_a_Site-How_to_edit_an_existing_site">
       <title>How to edit an existing site</title>
       <para>
-    You can edit any existing sites in the list of sites. Here, you can edit the layout, configuration and navigation bar of the site. Click<emphasis role="bold"> Site </emphasis>to open the list of existing sites.
+    You can edit any existing sites in the list of sites. Here, you can edit the layout, configuration and navigation bar of the site. Click <emphasis role="bold"> Site </emphasis>to open the list of existing sites.
    </para>
       <mediaobject>
          <imageobject role="html">
@@ -871,13 +887,15 @@
       </step>
       <step>
         <para>
-     Click 
+     Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/deletebutton.png" format="PNG" width="23mm"/>
             </imageobject>
-          </inlinemediaobject>
-      in the row of the portal that you want to delete.
+            <textobject>
+               <phrase>[ Delete ]</phrase>
+            </textobject>
+          </inlinemediaobject> button in the row of the portal that you want to delete.
     </para>
       </step>
       <step>
