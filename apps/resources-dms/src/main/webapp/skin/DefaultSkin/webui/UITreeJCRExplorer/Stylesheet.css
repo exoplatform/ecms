@@ -41,7 +41,9 @@
 	padding-right: 24px; /* orientation=rt */
 	width: 100%;
 }
-
+.UITreeList .Truncated {
+  overflow:hidden;
+}
 .UITreeList .TextSymLink {
   background-position: left top; /* orientation=lt */
   background-position: right top; /* orientation=rt */

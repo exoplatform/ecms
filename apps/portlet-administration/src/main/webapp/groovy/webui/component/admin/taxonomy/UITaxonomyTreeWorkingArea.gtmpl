@@ -28,12 +28,12 @@
 			      even = !even ;
       %>
 			      <tr class="$rowClass">
-			        <td>
+			        <td class="Truncated">
 			          <%
 			            String path = node.getPath() ;
 			            String nodeName = path.substring(path.lastIndexOf("/") + 1, path.length()) ;
 			           %>
-			          <div class="Text">$nodeName</div>
+			          <div class="Text" title="$nodeName">$nodeName</div>
 			        </td>
 			        <td>
 			        	<div class="ActionContainer">
