@@ -122,6 +122,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
 	<td>--&nbsp;&nbsp;Contents</td>
 	<td></td>
@@ -282,6 +287,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
 	<td>Go to &quot;ASnfEcms02&quot; pages</td>
 	<td></td>
@@ -338,12 +348,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(text(),'Page Management')]</td>
+	<td>link=Page Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[contains(text(),'Page Management')]</td>
+	<td>link=Page Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -355,6 +370,11 @@
 	<td>type</td>
 	<td>searchTerm</td>
 	<td>ASnfEcms02</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>searchOption</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>

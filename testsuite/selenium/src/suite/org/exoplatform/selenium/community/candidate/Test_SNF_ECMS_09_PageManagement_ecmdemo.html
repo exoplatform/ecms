@@ -77,6 +77,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
 	<td>-- Display form to create page</td>
 	<td></td>
@@ -203,6 +208,16 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>searchTerm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>searchTerm</td>
+	<td>Test_SNF_ECMS_09</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>searchOption</td>
 	<td></td>
 </tr>
@@ -210,11 +225,6 @@
 	<td>select</td>
 	<td>searchOption</td>
 	<td>label=Title</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>searchTerm</td>
-	<td>Test_SNF_ECMS_09</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -483,12 +493,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[contains(@onclick,&quot;action=Close&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[5]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[contains(@onclick,&quot;action=Close&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
