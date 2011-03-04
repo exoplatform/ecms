@@ -20,11 +20,13 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.ValueFactory;
@@ -151,7 +153,8 @@ public class UIPublicationPanel extends UIForm {
       if (version.getName().equals("jcr:rootVersion")) continue;
       allversions.add(version);      
     }    
-    //current node is a revision
+    Collections.sort(allversions, new NodeNameComparator());
+    //current node is a revision    
     allversions.add(node);
     Collections.reverse(allversions);
     return allversions;
@@ -600,5 +603,24 @@ public class UIPublicationPanel extends UIForm {
       UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
       publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
     }
-  } 
+  }
+  
+  private class NodeNameComparator implements Comparator<Node> {
+
+    @Override
+    public int compare(Node node0, Node node1) {
+      try {
+      	String name0 = node0.getName();
+      	String name1 = node1.getName();
+      	try {
+      		int name0Int = Integer.parseInt(name0);
+      		int name1Int = Integer.parseInt(name1);
+      		return name0Int - name1Int;
+      	} catch (NumberFormatException e) {}
+        return  name0.compareTo(name1);
+      } catch (RepositoryException e) { 
+        return 0; 
+      }
+    }
+  }
 }
