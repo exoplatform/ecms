@@ -22,6 +22,9 @@ import javax.jcr.Node;
 
 import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
  * Created by The eXo Platform SARL
@@ -32,33 +35,36 @@ import org.exoplatform.services.jcr.RepositoryService;
 public class AddMetadataScript implements CmsScript {
   
   private RepositoryService repositoryService_ ;
+  private SessionProviderService seProviderService_;
   
-  public AddMetadataScript(RepositoryService repositoryService) {
+  public AddMetadataScript(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
     repositoryService_ = repositoryService ;
+    seProviderService_ = sessionProviderService;
   }
   
   public void execute(Object context) {
     Map variables = (Map) context;   
     String metadataName = (String)context.get("exo:mixinMetadata") ;
+    String repository = (String)variables.get("repository");
     String srcWorkspace = (String)context.get("srcWorkspace") ;
     String nodePath = (String)context.get("nodePath") ;
     Session session = null ;
     try {
-      session = repositoryService_.getRepository().login(srcWorkspace);
+    	ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+    	SessionProvider sessionProvider = seProviderService_.getSessionProvider(null);
+    	if (sessionProvider == null) {
+    		sessionProvider = seProviderService_.getSystemSessionProvider(null);
+    	}
+      session = sessionProvider.getSession(srcWorkspace, manageableRepository);
       Node node = (Node) session.getItem(nodePath);
       if(node.canAddMixin(metadataName)) {
         node.addMixin(metadataName) ;
         node.save() ;
         session.save() ;
-        session.logout();
       } else {
         System.out.println("\n\nCan not add mixin\n\n");
-        session.logout();
       }
     } catch(Exception e) {
-      if(session != null) {
-        session.logout();        
-      }
       e.printStackTrace() ;
     }
   }

@@ -178,7 +178,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     Node taxonomyStorageNodeSystem = Utils.makePath(taxonomyStorageNode, treeName, "exo:taxonomy",
             null);
     String systemUser = SystemIdentity.SYSTEM;    
-    session.save();
+
     while (it.hasNext()) {
       ObjectParameter objectParam = it.next();
       if (objectParam.getName().equals("permission.configuration")) {
@@ -197,6 +197,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
             ((ExtendedNode)taxonomyStorageNodeSystem).setPermission(systemUser, PermissionType.ALL);
           }    
         }
+        session.save();
       } else if (objectParam.getName().equals("taxonomy.configuration")) {
         TaxonomyConfig config = (TaxonomyConfig) objectParam.getObject();
         for (Taxonomy taxonomy : config.getTaxonomies()) {
@@ -218,12 +219,13 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
         List actions = config.getActions();
         for (Iterator iter = actions.iterator(); iter.hasNext();) {
           TaxonomyAction action = (TaxonomyAction) iter.next();
+          taxonomyStorageNodeSystem = (Node)session.getItem(taxonomyStorageNodeSystem.getPath());
           addAction(action, taxonomyStorageNodeSystem, repository);
         }
       }
 
     }
-    taxonomyStorageNode.save();
+    session.save();
     try {
       taxonomyService_.addTaxonomyTree(taxonomyStorageNodeSystem);
     } catch (TaxonomyAlreadyExistsException e) {
@@ -252,9 +254,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
   private void addAction(ActionConfig.TaxonomyAction action, Node srcNode, String repository)
       throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container
-        .getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageRepo = repositoryService.getCurrentRepository();
+    ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
 
     Map<String, JcrInputProperty> sortedInputs = new HashMap<String, JcrInputProperty>();
     JcrInputProperty jcrInputName = new JcrInputProperty();
