@@ -487,7 +487,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     if (mappings.containsKey("/node/exo:nodeTypeName")) {
       nodeTypeName = (String[]) ((JcrInputProperty) mappings.get("/node/exo:nodeTypeName"))
           .getValue();
-      if(nodeTypeName.length == 0) nodeTypeName = null;
+      if(nodeTypeName.length == 0) {
+      	nodeTypeName = null;
+      	mappings.remove("/node/exo:nodeTypeName");
+      }
     }
     addAction(storeActionNode, repository, actionType, isDeep, uuid, nodeTypeName, mappings);
   }

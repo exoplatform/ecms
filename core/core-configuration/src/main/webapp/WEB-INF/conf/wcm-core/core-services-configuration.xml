@@ -21,6 +21,10 @@
   
   <component>
     <type>org.exoplatform.services.migration.SCVPortletPreferenceMigrationService</type>
+  </component>
+  
+  <component>
+    <type>org.exoplatform.services.migration.ActionMigrationService</type>
   </component>  
 
   <component>
