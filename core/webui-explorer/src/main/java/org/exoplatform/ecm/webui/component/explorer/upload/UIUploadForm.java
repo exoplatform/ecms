@@ -836,18 +836,16 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         UIUploadManager uiUploadManager = uiUploadForm.getParent();
         UIJCRExplorer uiExplorer = uiUploadForm.getAncestorOfType(UIJCRExplorer.class);
         String repository = uiExplorer.getRepositoryName();
-        DMSConfiguration dmsConfig = uiUploadForm.getApplicationComponent(DMSConfiguration.class);
-        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repository);
-        String workspaceName = dmsRepoConfig.getSystemWorkspace();
         
         UIPopupWindow uiPopupWindow = uiUploadManager.initPopupTaxonomy(POPUP_TAXONOMY);
         UIOneTaxonomySelector uiOneTaxonomySelector = 
           uiUploadManager.createUIComponent(UIOneTaxonomySelector.class, null, null);
         uiPopupWindow.setUIComponent(uiOneTaxonomySelector);
-        uiOneTaxonomySelector.setIsDisable(workspaceName, false);
         TaxonomyService taxonomyService = uiUploadForm.getApplicationComponent(TaxonomyService.class);
         List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees(repository);
         if (lstTaxonomyTree.size() == 0) throw new AccessDeniedException();
+        String workspaceName = lstTaxonomyTree.get(0).getSession().getWorkspace().getName();
+        uiOneTaxonomySelector.setIsDisable(workspaceName, false);
         uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, lstTaxonomyTree.get(0).getPath());
         uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
         uiOneTaxonomySelector.init(uiExplorer.getSystemProvider());

@@ -1,0 +1,48 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/action/ManageCategoriesActionComponent.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/action/ManageCategoriesActionComponent.java	(revision 65962)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/action/ManageCategoriesActionComponent.java	(working copy)
+@@ -71,9 +71,7 @@
+       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
+       UIJCRExplorer uiExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);
+       String repository = uiExplorer.getRepositoryName();
+-      DMSConfiguration dmsConfiguration = uiExplorer.getApplicationComponent(DMSConfiguration.class);
+-      DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig(repository);
+-      String workspaceName = dmsRepoConfig.getSystemWorkspace();
++      String workspaceName = null;
+       uiExplorer.setIsHidePopup(true);
+       UICategoryManager uiManager = uiExplorer.createUIComponent(UICategoryManager.class, null, null);
+       UIOneTaxonomySelector uiOneTaxonomySelector = uiManager.getChild(UIOneTaxonomySelector.class);
+@@ -82,6 +80,7 @@
+       List<Node> lstNode = taxonomyService.getAllTaxonomyTrees(repository);
+       if (lstNode != null && lstNode.size() > 0) {
+         uiOneTaxonomySelector.setRootTaxonomyName(lstNode.get(0).getName());
++        workspaceName = lstNode.get(0).getSession().getWorkspace().getName();
+         uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, lstNode.get(0).getPath());
+         uiOneTaxonomySelector.setIsDisable(workspaceName, false);
+         uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java	(revision 65962)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/upload/UIUploadForm.java	(working copy)
+@@ -836,18 +836,16 @@
+         UIUploadManager uiUploadManager = uiUploadForm.getParent();
+         UIJCRExplorer uiExplorer = uiUploadForm.getAncestorOfType(UIJCRExplorer.class);
+         String repository = uiExplorer.getRepositoryName();
+-        DMSConfiguration dmsConfig = uiUploadForm.getApplicationComponent(DMSConfiguration.class);
+-        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repository);
+-        String workspaceName = dmsRepoConfig.getSystemWorkspace();
+         
+         UIPopupWindow uiPopupWindow = uiUploadManager.initPopupTaxonomy(POPUP_TAXONOMY);
+         UIOneTaxonomySelector uiOneTaxonomySelector = 
+           uiUploadManager.createUIComponent(UIOneTaxonomySelector.class, null, null);
+         uiPopupWindow.setUIComponent(uiOneTaxonomySelector);
+-        uiOneTaxonomySelector.setIsDisable(workspaceName, false);
+         TaxonomyService taxonomyService = uiUploadForm.getApplicationComponent(TaxonomyService.class);
+         List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees(repository);
+         if (lstTaxonomyTree.size() == 0) throw new AccessDeniedException();
++        String workspaceName = lstTaxonomyTree.get(0).getSession().getWorkspace().getName();
++        uiOneTaxonomySelector.setIsDisable(workspaceName, false);
+         uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, lstTaxonomyTree.get(0).getPath());
+         uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
+         uiOneTaxonomySelector.init(uiExplorer.getSystemProvider());
