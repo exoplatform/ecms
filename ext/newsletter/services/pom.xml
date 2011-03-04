@@ -45,13 +45,7 @@
       <artifactId>exo-ecms-core-parser</artifactId>
       <version>${project.version}</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.web</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
-    </dependency>
+    </dependency>    
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.component.portal</artifactId>

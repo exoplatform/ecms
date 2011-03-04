@@ -153,6 +153,11 @@
   </component>
 
   <component>
+    <key>org.exoplatform.portal.resource.compressor.ResourceCompressor</key>
+    <type>org.exoplatform.portal.resource.compressor.impl.ResourceCompressorService</type>
+  </component>
+
+  <component>
     <key>org.exoplatform.services.organization.idm.PicketLinkIDMService</key>
     <type>org.exoplatform.services.organization.idm.PicketLinkIDMServiceImpl</type>
     <init-params>
