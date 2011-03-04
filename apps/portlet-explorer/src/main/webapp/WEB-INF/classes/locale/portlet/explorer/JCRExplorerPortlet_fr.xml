@@ -3173,7 +3173,7 @@
 				</msg>
 		</UIActionBar> 	
 		
-	<UIPublicationPanel>
+  <UIPublicationPanel>
     <button>
       <Close>Fermer</Close>
     </button>
@@ -3236,6 +3236,7 @@
     </label>
     <action>
       <Save>Sauver</Save>
+      <Close>Fermer</Close>
     </action>
     <msg>
       <invalid-format>Format incorrect. S'il vous plaît vérifier à nouveau</invalid-format>
