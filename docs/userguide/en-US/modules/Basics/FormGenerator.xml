@@ -154,10 +154,9 @@
         </inlinemediaobject> corresponding to the component.
    </para>
       <para>
-    Click the 
-    <inlinemediaobject>
+    Click the <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/editcomponenticon.png" format="PNG"/>
+            <imagedata fileref="images/editcomponenticon.png" format="PNG" width="6mm"/>
           </imageobject>
           <textobject>
              <phrase>pencil</phrase>

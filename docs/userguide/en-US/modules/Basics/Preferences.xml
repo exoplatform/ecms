@@ -13,10 +13,9 @@
     <title/>
     <step>
       <para>
-    Click the 
-    <inlinemediaobject>
+    Click the <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/preferencesettingicon.png" format="PNG"/>
+            <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="10mm"/>
           </imageobject>
           <textobject>
              <phrase>sprocket</phrase>

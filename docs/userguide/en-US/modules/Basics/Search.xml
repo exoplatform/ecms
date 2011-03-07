@@ -27,8 +27,8 @@
     </listitem>
   </orderedlist>
   <section id="sect-User_Guide-Search_in_Content_Explorer-Simple_Search">
-    <title>Simple Search</title>
-    <para>With the simple search, you can directly type a search term in the search field. All documents, whose keywords are matched with the search term, are retrieved and listed in the Search results form.</para>
+    <title>Quick Search</title>
+    <para>With the quick search, you can directly type a search term in the search field. All documents, whose keywords are matched with the search term, are retrieved and listed in the Search results form.</para>
     <procedure>
       <title/>
       <step>
@@ -58,7 +58,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     The search results are empty if no document contains the search string.
+     The search results are  empty if no document contains the search string.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -71,7 +71,7 @@
       </step>
       <step>
         <para>
-     Click the 
+    Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
@@ -88,10 +88,9 @@
               <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
             </imageobject>
             <textobject>
-               <phrase>magnifying glass</phrase>
+               <phrase>preview</phrase>
             </textobject>
-          </inlinemediaobject>
-      icon to go to the node that contains the search result.
+          </inlinemediaobject> icon to go to the node that contains the search result.
     </para>
       </step>
     </procedure>
@@ -105,7 +104,7 @@
       <title/>
       <step>
         <para>
-     Click the 
+      Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/savedsearchicon.png" format="PNG" width="12mm"/>
@@ -126,7 +125,7 @@
       </step>
       <step>
         <para>
-     Then click the <emphasis role="bold">Advanced Search</emphasis>  
+     Then click the <emphasis role="bold">Advanced Search</emphasis> 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
@@ -303,7 +302,7 @@
                   <entry> 7 </entry>
                   <entry> This field allows you to add a constraint to search by categories. </entry>
                 </row>
-                <row>
+                 <row>
                   <entry>
                     <inlinemediaobject>
                       <imageobject>
@@ -409,8 +408,15 @@
             </step>
             <step>
               <para>
-        Define the property value to search for by entering a value into the <emphasis role="bold">Contain exactly</emphasis> field or click the <emphasis role="bold">Find exactly</emphasis> icon: 
-               </para>
+        Define the property value to search for by entering a value into the <emphasis role="bold">Contain exactly</emphasis> field or click the <inlinemediaobject>
+                  <imageobject>
+                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG"/>
+                  </imageobject>
+                  <textobject>
+                     <phrase>Find exactly</phrase>
+                  </textobject>
+                </inlinemediaobject> icon.
+       </para>
               <mediaobject>
                 <imageobject role="html">
                   <imagedata  align="center"  fileref="images/containexactlyform.png" format="PNG"/>
@@ -422,7 +428,7 @@
               <para>
         The <emphasis role="bold">Filter form</emphasis> will appear:
        </para>
-              <mediaobject>
+             <mediaobject>
                 <imageobject role="html">
                   <imagedata  align="center"  fileref="images/filterform.png" format="PNG"/>
                 </imageobject>
@@ -441,10 +447,9 @@
                 </listitem>
                 <listitem>
                   <para>
-          If the value you require is not in the list, enter it in the <emphasis role="bold">Filter:</emphasis> field and click the 
-          <inlinemediaobject>
+          If the value you require is not in the list, enter it in the <emphasis role="bold">Filter:</emphasis> field and click the <inlinemediaobject>
                       <imageobject>
-                        <imagedata fileref="images/furtherpropertyicon.png" format="PNG"/>
+                        <imagedata fileref="images/furtherpropertyicon.png" format="PNG" width="9mm"/>
                       </imageobject>
                       <textobject>
                          <phrase>corresponding</phrase>
@@ -472,7 +477,14 @@
             </step>
             <step>
               <para>
-        Enter the required property in the <emphasis role="bold">Property</emphasis> field or click the <emphasis role="bold">Add Property</emphasis> icon (refer to <emphasis role="bold">Step 2</emphasis> in <xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values"/> for more information).
+        Enter the required property in the <emphasis role="bold">Property</emphasis> field or click the <inlinemediaobject>
+                  <imageobject>
+                    <imagedata fileref="images/furtherpropertyicon.png" format="PNG"/>
+                  </imageobject>
+                  <textobject>
+                     <phrase>Add Property</phrase>
+                  </textobject>
+                </inlinemediaobject>  icon (refer to <emphasis role="bold">Step 2</emphasis> in <xref linkend="proc-User_Guide-Search_with_constraints-Add_a_constraint_for_exact_values"/> for more information).
        </para>
             </step>
             <step>
@@ -575,10 +587,9 @@
             </step>
             <step>
               <para>
-        Enter the category you want to search for or click the 
-        <inlinemediaobject>
+        Enter the category you want to search for or click the <inlinemediaobject>
                   <imageobject>
-                    <imagedata fileref="images/addcategoryicon.png" format="PNG"/>
+                    <imagedata fileref="images/addcategoryicon.png" format="PNG" width="6mm"/>
                   </imageobject>
                   <textobject>
                      <phrase>"Add category"</phrase>
@@ -606,7 +617,7 @@
                   </textobject>
                 </inlinemediaobject> that corresponds to the category you want.
        </para>
-              <para>
+      <para>
         The selected category will populate the <emphasis role="bold">Category</emphasis> field.
        </para>
               <mediaobject>
@@ -750,9 +761,9 @@
     </section>
   </section>
   <section id="sect-User_Guide-Search_in_Content_Explorer-Quick_Search">
-    <title>Quick Search</title>
+    <title>Search with saved queries</title>
     <para>
-   Do the following to perform a quick search:
+   Do the following to perform a  search with saved queries:
   </para>
     <procedure>
       <title/>
@@ -779,7 +790,7 @@
         <para>
      A query list will appear. It contains the sections, including <emphasis role="bold">All Articles</emphasis>, <emphasis role="bold">Created Documents</emphasis>, <emphasis role="bold">CreatedDocumentDayBefore</emphasis> and <emphasis role="bold">allArticles</emphasis>.
     </para>
-        <mediaobject>
+         <mediaobject>
           <imageobject role="html">
             <imagedata  align="center"  fileref="images/querylistsections.png" format="PNG"/>
           </imageobject>

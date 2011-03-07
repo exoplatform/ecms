@@ -1,12 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Account">
-  <title>
-    <emphasis role="bold">Account</emphasis>
-  </title>
+  <title>Account</title>
   <section id="sect-User_Guide-Account-Register_an_account">
     <title>Register an account</title>
     <para>
@@ -105,12 +104,7 @@
       icon to search and check if the inputted user name is available or not.
     </para>
       </step>
-<!--  <step>
-    <para>
-     Input other required fields in the <emphasis role="bold">Account Settings</emphasis> tab.
-    </para>
-   </step>  -->
-   <step>
+      <step>
         <para>
      Input values in the fields of<emphasis role="bold"> User Profile </emphasis>tab, including: Profile information, Home information and Business information.
     </para>
@@ -244,7 +238,7 @@
     <para>
    After signing in, you will be redirected to the authenticated homepage like the illustration.
   </para>
-    <mediaobject>
+   <mediaobject>
       <imageobject role="html">
         <imagedata  align="center"  fileref="images/authhomepage.png" format="PNG"/>
       </imageobject>
@@ -270,7 +264,10 @@
       </imageobject>
     </mediaobject>
     <para>
-   or click <emphasis role="bold">eXo</emphasis> <emphasis role="bold">&gt; Sign Out</emphasis> from the menu:
+   or click <menuchoice>
+      <guimenu>Start Logo</guimenu>
+      <guimenuitem>Sign Out</guimenuitem>
+   </menuchoice> from the menu:
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -373,11 +370,11 @@
       </para>
           </listitem>
         </itemizedlist>
-     </step>
+      </step>
     </procedure>
   </section>
   <section id="sect-User_Guide-Account-Change_Account_Information">
-    <title>Change Account Information</title>
+    <title>Change account information</title>
     <para>
    The function enables you change your account information, such as your profile and password.
   </para>
@@ -435,7 +432,7 @@
         <para>
      Select the<emphasis role="bold"> Change Password</emphasis> tab.
     </para>
-        <mediaobject>
+       <mediaobject>
           <imageobject role="html">
             <imagedata  align="center"  fileref="images/changepassword.png" format="PNG"/>
           </imageobject>

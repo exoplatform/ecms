@@ -1,5 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
@@ -15,7 +14,8 @@
    In <emphasis role="bold">&PRODUCT;</emphasis>, only Administrators have  right to  create a new site.
   </para>
     </note>
-    <para>This function enables you to create a site (portal) to meet your own needs.
+    <para>
+       This function enables you to create a site (portal) to meet your own needs.
   </para>
     <para>
    Do the following:
@@ -117,8 +117,7 @@
         <para>
      Select the <emphasis role="bold">Permission Setting</emphasis> tab to set access and edit permission for this portal.
     </para>
-<!--   Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                           -->
-    <para>
+<!--   Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                           -->        <para>
      The <emphasis role="bold">Permission Setting</emphasis> tab includes two subtabs: <emphasis role="bold">Access Permission Setting</emphasis> and <emphasis role="bold">Edit Permission Setting</emphasis>.
     </para>
         <mediaobject>
@@ -126,7 +125,7 @@
             <imagedata  align="center"  fileref="images/permissionsetting.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/accesspermission.png" format="PNG" width="150mm"/>
+            <imagedata align="center" fileref="images/accesspermission.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <variablelist>
@@ -159,7 +158,7 @@
                 </imageobject>
               </mediaobject>
               <para>
-        In which, the  
+        In which, the 
         <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -250,30 +249,23 @@
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Manage_a_site-Edit_a_Site">
-    <title>Edit a Site</title>
+    <title>Edit a site</title>
     <para>
-   This function enables you to edit a site, inluding   the configuration (setting,  permission), the navigation and the layout components of the site.</para>
-      
+   This function enables you to edit a site, including   the configuration (setting,  permission), the navigation and the layout components of the site.</para>
+    <para>There are two ways to approach a site that you want to edit:</para>
+    <itemizedlist>
+      <listitem>
+        <para>The first way: Edit the site that you are browsing by accessing to <emphasis role="bold">Site Editor</emphasis>.</para>
+      </listitem>
+      <listitem>
+        <para>The second way: Edit the site by accessing  to <emphasis role="bold">Sites.</emphasis></para>
+      </listitem>
+    </itemizedlist>
+
       <section id="sect-User_Guide-Edit_a_Site-How_to_edit_the_current_Site">
-      <title>How to edit the current site</title>
-      <para>
-    To edit the current site that you are browsing, do the following:
-   </para>
-      <procedure id="proc-User_Guide-How_to_edit_the_current_Site-Edit_the_layout_of_the_Website">
-        <title/>
-        <step>
-          <para>
-      Show the form to edit the current site by clicking <emphasis role="bold">Site Editor</emphasis> on the administration bar, then select 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/editlayouticon.png" format="PNG" width="38mm"/>
-              </imageobject>
-              <textobject>
-                 <phrase>[ Edit Layout ]</phrase>
-              </textobject>
-            </inlinemediaobject>.
-     </para>
-          <mediaobject>
+      <title>By accessing to Site Editor</title>
+      <para>Directly edit the site you are browsing by going to <emphasis role="bold">Site Editor &gt; Edit Layout</emphasis> </para>
+      <mediaobject>
             <imageobject role="html">
               <imagedata  align="center"  fileref="images/editlayout.png" format="PNG"/>
             </imageobject>
@@ -281,9 +273,10 @@
               <imagedata   align="center" fileref="images/editlayout.png" format="PNG" width="138mm"/>
             </imageobject>
           </mediaobject>
-          <para>The form to edit the current site will appear.
-     </para>
-          <mediaobject>
+      <para>
+         The form to edit the  site appears.
+      </para>
+      <mediaobject>
             <imageobject role="html">
               <imagedata  align="center"  fileref="images/editportalform.png" format="PNG"/>
             </imageobject>
@@ -291,72 +284,65 @@
               <imagedata   align="center" fileref="images/editportalform.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
-          <para>
-       Details:     </para>
-          <table>
-            <title/>
-            <tgroup cols="2">
-              <thead>
-                <row>
-                  <entry> Indicator </entry>
-                  <entry> Meaning </entry>
-                </row>
-              </thead>
-              <tbody>
-                <row>
-                  <entry>
-                    <mediaobject>
+      <para>
+       Details:
+      </para>
+      <table>
+        <title/>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry> Indicator </entry>
+              <entry> Meaning </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>
+                <mediaobject>
                       <imageobject>
                         <imagedata align="center"  fileref="images/site-config.png" format="PNG" width="34mm"/>
                       </imageobject>
                     </mediaobject>
-                  </entry>
-                  <entry>
-                     <emphasis role="bold">Site&apos;s config</emphasis>: allows editing the site&apos;s configuration. 
-                  </entry>
-                </row>
-                <row>
-                  <entry>
-                    <mediaobject>
+              </entry>
+              <entry><emphasis role="bold">Site&apos;s config</emphasis>: allows editing the site&apos;s configuration. </entry>
+            </row>
+            <row>
+              <entry>
+                <mediaobject>
                       <imageobject>
                         <imagedata align="center"  fileref="images/switchviewbutton.png" format="PNG" width="44mm"/>
                       </imageobject>
                     </mediaobject>
-                  </entry>
-                  <entry>
-                     <emphasis role="bold">Switch View Mode</emphasis>: shows how the current layout looks like with real content.
-                  </entry>
-                </row>
-                <row>
-                  <entry>
-                    <mediaobject>
+              </entry>
+              <entry><emphasis role="bold">Switch View Mode</emphasis>: shows how the current layout looks like with real content.</entry>
+            </row>
+            <row>
+              <entry>
+                <mediaobject>
                       <imageobject>
                         <imagedata align="center"  fileref="images/finishbutton.png" format="PNG" width="9mm"/>
                       </imageobject>
-                    </mediaobject>
-                  </entry>
-                  <entry>
-                     <emphasis role="bold">Finish</emphasis>: allows saving all changes and escaping the Edit page
-                  </entry>
-                </row>
-                <row>
-                  <entry>
-                    <mediaobject>
+               </mediaobject>
+              </entry>
+              <entry><emphasis role="bold">Finish</emphasis>: allows saving all changes and escaping the Edit page </entry>
+            </row>
+            <row>
+              <entry>
+                <mediaobject>
                       <imageobject>
                         <imagedata align="center"  fileref="images/abortbutton.png" format="PNG" width="7mm"/>
                       </imageobject>
                     </mediaobject>
-                  </entry>
-                  <entry>
-                     <emphasis role="bold">Abort</emphasis>: allows canceling all changes that have not been saved and quitting the Edit page.
-                  </entry>
-                </row>
-              </tbody>
-            </tgroup>
-          </table>
-        </step>
-      </procedure>
-      <para>After showing the form to edit the current site, you can edit the layout and the configuration of current site here.</para>
+              </entry>
+              <entry><emphasis role="bold">Abort</emphasis>: allows canceling all changes that have not been saved and quitting the Edit page </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para>
+         With this way, you  can only edit the layout and the configuration of site.
+      </para>
       <formalpara id="form-User_Guide-How_to_edit_the_current_Site-Edit_layout">
         <title>Edit layout</title>
         <para>
@@ -372,13 +358,12 @@
          </imageobject>
       </mediaobject>
       <para>
-            Editing the banner portlet is similar to editing the Sign-in portlet and the footer portlet so in this guide, we only show how to edit the banner of the current site as an example of editng the layout.</para>
+            Editing the banner portlet is similar to editing the Sign-in portlet and the footer portlet so in this guide, we only show how to edit the banner of the  site as an example of editing the layout.</para>
       <procedure id="proc-User_Guide-How_to_edit_the_current_Site-Edit_Banner">
         <title>Edit Banner</title>
         <step>
           <para>
-                  Show the form to edit a banner by clicking the 
-            <inlinemediaobject>
+                  Show the form to edit a banner by clicking the <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/editicon3.png" format="PNG" width="13mm"/>
               </imageobject>
@@ -412,7 +397,7 @@
       Select <emphasis role="bold">Edit Mode</emphasis> tab:
      </para>
           <para>
-      <emphasis role="bold">Content Selection</emphasis>: Select the path of the content that you want to show by clicking +.
+      <emphasis role="bold">Content Selection</emphasis>: Select the path of the content that you want to show by clicking .
      </para>
           <para>
       <emphasis role="bold">Display Settings:</emphasis>
@@ -556,7 +541,7 @@
           <para>
       By default, all users can access the portlet:
      </para>
-     <mediaobject>
+          <mediaobject>
         <imageobject role="html">
            <imagedata fileref="images/.png" format="PNG" align="center"/>
         </imageobject>
@@ -567,7 +552,7 @@
           <para>
       However, you can edit the access permission by unticking the checkbox &gt; click <emphasis role="bold">Add Permission</emphasis>:
      </para>
-     <mediaobject>
+          <mediaobject>
         <imageobject role="html">
            <imagedata fileref="images/accesspermission1.png" format="PNG" align="center"/>
         </imageobject>
@@ -591,12 +576,11 @@
         </step>
         <step>
           <para>
-      Click the 
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata fileref="images/finishbutton.png" format="PNG"/>
+     Click the <inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/finishbutton.png" format="PNG" width="9mm"/>
               </imageobject>
-              <textobject>
+              <textobject role="fo">
                  <phrase>disk</phrase>
               </textobject>
             </inlinemediaobject> icon to quit the form to edit the current site.
@@ -606,7 +590,7 @@
       <formalpara>
         <title>Edit Configuration</title>
         <para>
-    To edit the configuration (  including   language, skin and permissions) of the current site, click the 
+    To edit the configuration (  including   language, skin and permissions) of the site, click the 
          <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/site-config.png" format="PNG" width="34mm"/>
@@ -627,10 +611,9 @@
       </note>
     </section>
     <section id="sect-User_Guide-Edit_a_Site-How_to_edit_an_existing_site">
-      <title>How to edit an existing site</title>
+      <title>By accessing to Site</title>
       <para>
-    You can edit any existing sites in the list of sites. Here, you can edit the layout, configuration and navigation bar of the site. Click <emphasis role="bold"> Site </emphasis>to open the list of existing sites.
-   </para>
+    This approach way enables you to edit the layout, configuration and navigation bar of a site by going to <emphasis role="bold"><emphasis role="bold">Sites &gt; </emphasis>select the site</emphasis> in the existing site list. </para>
       <mediaobject>
          <imageobject role="html">
             <imagedata fileref="images/existingsites.png" format="PNG" align="center"/>
@@ -642,18 +625,21 @@
       <formalpara id="form-User_Guide-How_to_edit_an_existing_site-Edit_Layout">
         <title>Edit Layout</title>
         <para>
-     Do the following to edit the layout of an existing site.
-    </para>
+           Do the following to edit the layout of an existing site.
+        </para>
       </formalpara>
       <procedure>
         <step>
           <para>
-      Click<emphasis role="bold"> Site &gt; Edit Layout </emphasis>            to open a form to edit the site layout .
+      Click <menuchoice>
+         <guimenu>Site</guimenu>
+         <guimenuitem>Edit Layout</guimenuitem>
+      </menuchoice> to open a form to edit the site layout.
      </para>
         </step>
         <step>
           <para>
-      Do the same steps as the part <xref linkend="form-User_Guide-How_to_edit_the_current_Site-Edit_layout"/>of the current site.
+      Do the same steps as the part <xref linkend="form-User_Guide-How_to_edit_the_current_Site-Edit_layout"/> of the current site.
      </para>
         </step>
       </procedure>
@@ -661,13 +647,16 @@
         <title>Edit Navigation</title>
         <para>
      Do the following to edit the navigation of a site.
-    </para>
+         </para>
       </formalpara>
       <procedure>
         <step>
           <para>
-      Click <emphasis role="bold">Site &gt; Edit Navigation</emphasis> to open the <emphasis role="bold">Navigation Management</emphasis> form.</para>
-         <mediaobject>
+      Click <menuchoice>
+         <guimenu>Site</guimenu>
+         <guimenuitem>Edit Navigation</guimenuitem>
+      </menuchoice> to open the <emphasis role="bold">Navigation Management</emphasis> form.</para>
+          <mediaobject>
             <imageobject role="html">
                <imagedata fileref="images/navigationmanagement.png" format="PNG" align="center"/>
             </imageobject>
@@ -818,7 +807,10 @@
       <procedure>
         <step>
           <para>
-       Click <emphasis role="bold">Site &gt; Edit Portal&apos;s Config</emphasis> to open the same form as the form to create a site.
+       Click <menuchoice>
+          <guimenu>Site</guimenu>
+          <guimenuitem> Edit Portal's Config</guimenuitem>
+       </menuchoice> to open the same form as the form to create a site.
       </para>
         </step>
         <step>
@@ -829,7 +821,8 @@
       </procedure>
     </section>
   </section>
-<!-- </section>-->  <section id="sect-User_Guide-Manage_a_site-Switch_between_sites">
+<!-- </section>-->  
+   <section id="sect-User_Guide-Manage_a_site-Switch_between_sites">
     <title>Switch between sites</title>
     <para>
    This function is used to change the current web site by another one.

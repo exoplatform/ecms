@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. -->
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
@@ -13,7 +12,7 @@
   &PRODUCT; consists of many actions. This section shows you how to take all the actions in Content Explorer.
  </para>
   <section id="sect-User_Guide-Actions-Add_Category">
-    <title>Add Category</title>
+    <title>Add a category</title>
     <para>
    This function enables you to add a category to a node.
   </para>
@@ -37,7 +36,7 @@
             <textobject>
                <phrase>[ Add category ]</phrase>
             </textobject>
-          </inlinemediaobject> icon on the action bar and the Add Category form appears:
+          </inlinemediaobject> button on the action bar and the Add Category form appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -529,7 +528,7 @@
         </tbody>
       </tgroup>
     </table>
-    <note>
+   <note>
       <itemizedlist>
         <listitem>
           <para>
@@ -579,7 +578,7 @@
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Actions</emphasis> bar.
     </para>
-        <mediaobject>
+         <mediaobject>
           <imageobject role="html">
             <imagedata align="center"  fileref="images/actionstab.png" format="PNG"/>
           </imageobject>
@@ -597,7 +596,7 @@
     </para>
       </step>
     </procedure>
-    <procedure id="proc-User_Guide-Add_a_document-Attach_files_to_a_document">
+<!-- DOC NOTE: The procedure  below was not in the 2.1.1 .odt. It has been re-included as is it linked to in "Create a new Article"  -->    <procedure id="proc-User_Guide-Add_a_document-Attach_files_to_a_document">
       <title>Attach files to a document</title>
       <step>
         <para>
@@ -664,7 +663,7 @@
       </step>
       <step>
         <para>
-     Click the 
+    Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
@@ -725,7 +724,7 @@
                 <imagedata   align="center" fileref="images/plaintextcontentform.png" format="PNG" width="150mm"/>
               </imageobject>
             </mediaobject>
-          </listitem>
+         </listitem>
         </itemizedlist>
       </step>
       <step>
@@ -830,7 +829,7 @@
    </para>
     </note>
     <procedure id="proc-User_Guide-Add_a_document-Create_a_New_Podcast">
-      <title>Create a New Podcast</title>
+      <title>Create a new Podcast</title>
       <step>
         <para>
      Follow the steps in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> form and select <emphasis role="bold">Podcast</emphasis> from the drop-down list for the field <emphasis role="bold">Select Template.</emphasis>
@@ -872,23 +871,8 @@
                 <entry> Explicit </entry>
                 <entry>
                   <para>
-          It is used to indicate whether or not your podcast contains an explicit material.
+          It is used to indicate whether or not your Podcast episodes contain an explicit content.
          </para>
-                  <para>
-          There are two options:
-         </para>
-                  <itemizedlist>
-                    <listitem>
-                      <para>
-            <emphasis>Yes</emphasis>: an &quot;explicit&quot; parental advisory graphic will appear next to your podcast artwork
-           </para>
-                    </listitem>
-                    <listitem>
-                      <para>
-            <emphasis>No</emphasis>: you see no indicator – bank is default advisory type
-           </para>
-                    </listitem>
-                  </itemizedlist>
                 </entry>
               </row>
               <row>
@@ -897,7 +881,7 @@
               </row>
               <row>
                 <entry> Keyword </entry>
-                <entry> Keyword allows you to search your podcast files more quickly. You can use commas to separate between keywords. </entry>
+                <entry> Keyword allows you to search your Podcast files more quickly. You can use commas to separate between keywords. </entry>
               </row>
               <row>
                 <entry> Publish date </entry>
@@ -926,12 +910,11 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save as Draft</emphasis> to finish, or <emphasis role="bold">Cancel</emphasis> to quit without saving changes.
-    </para>
+     Click <emphasis role="bold">Save as Draft</emphasis> to finish.</para>
       </step>
     </procedure>
     <note>
-      <title>Exisiting Names</title>
+      <title>Existing Names</title>
       <para>
     Document name can be the same as the existing one. When a new document is created with the same name as other existing document, its name will be added an index (e.g: test [2])
    </para>
@@ -972,8 +955,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save as Draft</emphasis> to accept or <emphasis role="bold">Cancel</emphasis> to quit without saving changes.
-    </para>
+     Click <emphasis role="bold">Save as Draft</emphasis> to accept.    </para>
       </step>
     </procedure>
     <para>
@@ -1045,8 +1027,7 @@
                     </row>
                     <row>
                       <entry> Categories </entry>
-                      <entry> The categories of your file plan. Select the categories for your file plan by clicking the 
-                      <inlinemediaobject>
+                      <entry> The categories of your file plan. Select the categories for your file plan by clicking the <inlinemediaobject>
                           <imageobject>
                             <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
                           </imageobject>
@@ -1054,7 +1035,7 @@
                               <phrase>plus</phrase>
                            </textobject>
                         </inlinemediaobject> icon.
-                     </entry>
+                        </entry>
                     </row>
                     <row>
                       <entry> File Plan note </entry>
@@ -1240,7 +1221,7 @@
         <para>
      The <emphasis role="bold">Add New Kofax</emphasis> form will appear:
     </para>
-        <mediaobject>
+       <mediaobject>
           <imageobject role="html">
             <imagedata  align="center"  fileref="images/addnewkofax.png" format="PNG"/>
           </imageobject>
@@ -1269,8 +1250,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save as Draft</emphasis> to accept creating a document or <emphasis role="bold">Cancel</emphasis> to quit the form.
-    </para>
+     Click <emphasis role="bold">Save as Draft</emphasis> to accept creating a document.</para>
       </step>
     </procedure>
     <para>
@@ -1335,8 +1315,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to commit the event, or <emphasis role="bold">Cancel</emphasis> to quit without saving changes.
-    </para>
+     Click <emphasis role="bold">Save</emphasis> to commit the event.</para>
       </step>
     </procedure>
     <para>
@@ -1363,7 +1342,7 @@
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Actions-Add_Folder">
-    <title>Add Folder</title>
+    <title>Add a folder</title>
     <para>
    You can create a document immediately in a specific drive; however, adding a document into a specific folder enables you to manage documents better.
   </para>
@@ -1630,18 +1609,18 @@
     </procedure>
   </section>
   <section id="sect-User_Guide-Actions-Add_symlink">
-    <title>Add symlink</title>
+    <title>Add Symlink</title>
     <para>
-   You also easily add a symlink for a document for the purpose of fast accessing the document that you are looking for:
+   You also easily add a Symlink for a document for the purpose of fast accessing the document that you are looking for:
   </para>
     <para>
-   Do the following to add a symlink:
+   Do the following to add a Symlink:
   </para>
     <procedure>
       <title/>
       <step>
         <para>
-     Select a document that you want to add a symlink.
+     Select a document that you want to add a Symlink.
     </para>
       </step>
       <step>
@@ -1701,7 +1680,7 @@
       </step>
       <step>
         <para>
-     Choose the workspace which contains the node that you want to add a symlink:
+     Choose the workspace which contains the node that you want to add a Symlink:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -1735,7 +1714,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to add symlink.
+     Click <emphasis role="bold">Save</emphasis> to add Symlink.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -1809,7 +1788,7 @@
     <para>
    To view your comment click the <emphasis role="bold">Show Comments</emphasis> link:
   </para>
-    <mediaobject>
+     <mediaobject>
       <imageobject role="html">
         <imagedata align="center"  fileref="images/commentview.png" format="PNG"/>
       </imageobject>
@@ -1838,7 +1817,7 @@
   </para>
   </section>
   <section id="sect-User_Guide-Actions-Edit_documents">
-    <title>Edit documents</title>
+    <title>Edit a document</title>
     <para>
    There are two ways to edit a document.
   </para>
@@ -1992,7 +1971,7 @@
             <textobject>
                <phrase>[ Import Node ]</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar. The <emphasis role="bold">Import Node</emphasis> form appears.
+          </inlinemediaobject> button on the action bar . The <emphasis role="bold">Import Node</emphasis> form appears.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -2114,8 +2093,9 @@
               <textobject>
                  <phrase>scroll arrows</phrase>
               </textobject>
-            </inlinemediaobject> icon and select the type of action from the drop-down menu. 
-      <mediaobject>
+            </inlinemediaobject> icon and select the type of action from the drop-down menu.
+         </para>
+            <mediaobject>
               <imageobject role="html">
                 <imagedata align="center"  fileref="images/typeactions.png" format="PNG"/>
               </imageobject>
@@ -2123,8 +2103,6 @@
                 <imagedata  align="center" fileref="images/typeactions.png" format="PNG" width="64mm"/>
               </imageobject>
             </mediaobject>
-
-     </para>
           <table>
             <title/>
             <tgroup cols="2">
@@ -2377,8 +2355,7 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">OK</emphasis> on the confirmation dialog box to delete the action or <emphasis role="bold">Cancel</emphasis> to quit.
-     </para>
+      Click <emphasis role="bold">OK</emphasis> on the confirmation dialog box to delete the action.</para>
         </step>
       </procedure>
     </section>
@@ -2563,7 +2540,7 @@
         </step>
         <step>
           <para>
-      Click the 
+       Click the 
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/managecategoriesicon.png" format="PNG" width="33mm"/>
@@ -2596,7 +2573,7 @@
     </section>
   </section>
   <section id="sect-User_Guide-Actions-ShowHide_Content">
-    <title>Show/Hide Content</title>
+    <title>Show/Hide a content</title>
     <para>
    Nodes can be hidden or revealed as desired.
   </para>
@@ -2696,7 +2673,8 @@
             <textobject>
                <phrase>[ Restore Version ]</phrase>
             </textobject>
-            </inlinemediaobject> icon to restore a version (refer to <xref linkend="sect-User_Guide-Actions-Manage_Versions"/> for information about versioning).</para>
+            </inlinemediaobject> icon to restore a version (refer to <xref linkend="sect-User_Guide-Actions-Manage_Versions"/> for information about versioning).
+         </para>
       </step>
       <step>
         <para>
@@ -2759,10 +2737,9 @@
               <textobject>
                  <phrase>green tick</phrase>
               </textobject>
-            </inlinemediaobject>
-       that corresponds to the document(s) that relate to the document selected in the <emphasis role="bold">Step 1</emphasis>.
+            </inlinemediaobject> that corresponds to the document(s) that relate to the document selected in the <emphasis role="bold">Step 1</emphasis>.
      </para>
-          <para>
+    <para>
       Documents linked to the original via a relation will be listed in the <emphasis role="bold">Relation List</emphasis> tab.
      </para>
         </step>
@@ -3142,16 +3119,8 @@
             <textobject>
                <phrase>magnifying glass</phrase>
             </textobject>
-          </inlinemediaobject> icon while the selected node is a folder, a message to this effect will appear:
-         </para>
-         <mediaobject>
-            <imageobject role="html">
-               <imagedata fileref="images/notsupported.png" format="PNG" align="center"/>
-            </imageobject>
-            <imageobject role="fo">
-               <imagedata fileref="images/notsupported.png" format="PNG" align="center" width="108mm"/>
-            </imageobject>
-         </mediaobject>
+          </inlinemediaobject> icon while the selected node is a folder, a message to this effect will appear.
+    </para>
       </note>
     </section>
     <section id="sect-User_Guide-Manage_Versions-Restore_versions">
@@ -3174,13 +3143,8 @@
                  <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject> button.
-         </para>
-        </step>
-        <step>
-          <para>
-      Select the version that you wish to restore as the base version.
      </para>
-         <mediaobject>
+          <mediaobject>
             <imageobject role="html">
               <imagedata  align="center"  fileref="images/versionlist.png" format="PNG"/>
             </imageobject>
@@ -3188,6 +3152,11 @@
               <imagedata   align="center" fileref="images/versionlist.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
+        </step>
+        <step>
+          <para>
+      Select the version that you wish to restore as the base version.
+     </para>
         </step>
         <step>
           <para>
@@ -3199,7 +3168,7 @@
               <textobject>
                  <phrase>"Restore Version"</phrase>
               </textobject>
-            </inlinemediaobject> icon to restore the selected version.
+            </inlinemediaobject> icon to restore the selected version
      </para>
         </step>
       </procedure>
@@ -3409,10 +3378,9 @@
       </step>
       <step>
         <para>
-     Click the 
-     <inlinemediaobject>
+     Click the <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/overloadthumbnail.png" format="PNG"/>
+              <imagedata fileref="images/overloadthumbnail.png" format="PNG" width="34mm"/>
             </imageobject>
             <textobject>
                <phrase>[ Overload thumbnail ]</phrase>
@@ -3477,7 +3445,7 @@
     </procedure>
   </section>
   <section id="sect-User_Guide-Actions-Approve_Content">
-    <title>Approve Content</title>
+    <title>Approve a content</title>
     <para>
    When a content is created by users, it maybe need approved to publish if there is a approval request. To approve a content, do the following:
   </para>
@@ -3507,7 +3475,7 @@
     </procedure>
   </section>
   <section id="sect-User_Guide-Actions-Publish_Content">
-    <title>Publish Content</title>
+    <title>Publish a content</title>
     <para>
    After the content is approved, it can be published by the people who have the permission to publish contents.
   </para>
@@ -3671,7 +3639,7 @@
             <imagedata  align="center"  fileref="images/tagmanager.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/tagmanager.png" format="PNG" width="150mm"/>
+            <imagedata align="center" fileref="images/tagmanager.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <table>
@@ -3759,7 +3727,7 @@
             <textobject>
                <phrase>trash can</phrase>
             </textobject>
-          </inlinemediaobject> corresponding to the tags you want to deletes.
+          </inlinemediaobject> corresponding to the tags you want to delete.
     </para>
       </step>
       <step>
@@ -3772,7 +3740,7 @@
   <section id="sect-User_Guide-Actions-Upload_files_into_folders">
     <title>Upload files into folders</title>
     <para>
-   This function supports you to upload a file from your machine. All file types can be uploaded. The uploaded file&apos;s name must not include some special characters (! @ $ % &amp; + [ ])
+   This function supports you to upload a file from your machine. All file types can be uploaded. The uploaded file&apos;s name must not include some special characters (! @ $ % &amp;  [ ])
   </para>
     <procedure id="proc-User_Guide-Upload_files_into_folders-To_upload_file_into_folder_do_as_follows">
       <title>Do the following to upload file into folder:</title>
@@ -3852,13 +3820,12 @@
             <textobject>
                <phrase>trash can</phrase>
             </textobject>
-          </inlinemediaobject>
-      icon and select <emphasis role="bold">Browse</emphasis>... again to select another one.
+          </inlinemediaobject> icon and select <emphasis role="bold">Browse</emphasis>... again to select another one.
     </para>
       </step>
       <step>
         <para>
-     By default, the name of the uploaded file will be kept as original but if you want to change, you can type the new name in the Name field, this field is not required. The new name must not contain special characters: ! @ $ % &amp; + [ ].
+     By default, the name of the uploaded file will be kept as original but if you want to change, you can type the new name in the Name field, this field is not required. The new name must not contain special characters: ! @ $ % &amp;  [ ].
     </para>
       </step>
       <step>
@@ -3892,7 +3859,7 @@
             <textobject>
                <phrase>green tick</phrase>
             </textobject>
-          </inlinemediaobject> icon. Click &apos;+ &apos; to open child nodes of categories.
+          </inlinemediaobject> icon. Click the <emphasis role="bold">plus</emphasis> to open child nodes of categories.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -3904,16 +3871,14 @@
         </mediaobject>
         <note>
           <para>
-      You can add more categories for a file by clicking the 
-      <inlinemediaobject>
+      You can add more categories for a file by clicking the  <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
               </imageobject>
               <textobject>
                <phrase>plus</phrase>
             </textobject>
-            </inlinemediaobject>
-       icon again to open the Add Categories form.
+            </inlinemediaobject> icon again to open the Add Categories form.
      </para>
           <para>
       Click the 
@@ -3990,8 +3955,7 @@
       </step>
       <step>
         <para>
-     New metadata is displayed in the External Metadatas list and you also can edit it by clicking 
-     <inlinemediaobject>
+     New metadata is displayed in the External Metadatas list and you also can edit it by clicking the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
@@ -4067,8 +4031,7 @@
       </step>
       <step>
         <para>
-     Complete the desired fields in the <emphasis role="bold">Add/Edit Properties</emphasis> form. Click the 
-     <inlinemediaobject>
+     Complete the desired fields in the <emphasis role="bold">Add/Edit Properties</emphasis> form. Click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
             </imageobject>
@@ -4228,8 +4191,7 @@
       <step id="step-User_Guide-Add_Permissions-To_search_for_a_user">
         <title>To search for a user</title>
         <para>
-     Select an information parameter (User Name, First Name, Last Name, Email) from the drop down menu in the other field at the top of the page and enter the information into the text box. Click the 
-     <inlinemediaobject>
+     Select an information parameter (User Name, First Name, Last Name, Email) from the drop down menu in the other field at the top of the page and enter the information into the text box. Click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
             </imageobject>
@@ -4260,7 +4222,7 @@
       <step id="step-User_Guide-Add_Permissions-To_add_all_usersgroups_with_read_access">
         <title>To add all users/groups with read access</title>
         <para>
-     Click the 
+         Click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
@@ -4335,8 +4297,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> in the confirmation message to remove the permission or <emphasis role="bold">Cancel</emphasis> to quit.
-    </para>
+     Click <emphasis role="bold">OK</emphasis> in the confirmation message to remove the permission. </para>
       </step>
     </procedure>
   </section>
@@ -4488,7 +4449,6 @@
            <phrase>trash can</phrase>
         </textobject>
       </inlinemediaobject>.
-
   </para>
   </section>
   <section id="sect-User_Guide-Actions-View_Relations">
@@ -4500,7 +4460,7 @@
       <step id="step-User_Guide-View_Relations-To_View_Relations">
         <title>To View Relations</title>
         <para>
-     Select a node &gt; Click the 
+     Select a node then click the 
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/showhiderelations.png" format="PNG" width="34mm"/>
@@ -4572,7 +4532,7 @@
         <para>
      The <emphasis role="bold">Vote Document</emphasis> form will appear:
     </para>
-        <mediaobject>
+       <mediaobject>
           <imageobject role="html">
             <imagedata align="center"  fileref="images/votedocumentform.png" format="PNG"/>
           </imageobject>
@@ -4585,7 +4545,7 @@
         <para>
      Rate the document by clicking on the appropriate star level for your vote:
     </para>
-        <mediaobject>
+       <mediaobject>
           <imageobject role="html">
             <imagedata align="center"  fileref="images/votestars.png" format="PNG"/>
           </imageobject>
@@ -4634,8 +4594,7 @@
       </step>
     </procedure>
     <para>
-   To stop watching a document, select the document and click the
-   <inlinemediaobject>
+       To stop watching a document, select the document and click the <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/watchicon.png" format="PNG" width="8mm"/>
         </imageobject>
