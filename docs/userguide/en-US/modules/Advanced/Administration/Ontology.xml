@@ -62,10 +62,10 @@
               </listitem>
             </varlistentry>
             <varlistentry>
-              <term>Html style</term>
+              <term>HTML style</term>
               <listitem>
                 <para>
-         Include font-size, font-weight, colour, font-family, text-decoration. (*Required).
+         Include font-size, font-weight, color, font-family, text-decoration. (*Required).
         </para>
               </listitem>
             </varlistentry>
@@ -91,7 +91,7 @@
           </listitem>
           <listitem>
             <para>
-       The &apos;Html style&apos; text box cannot be empty: you can change values of font-size, font–weight, color, font-family, text-decoration.
+       The &apos;HTML style&apos; text box cannot be empty: you can change values of font-size, font–weight, color, font-family, text-decoration.
       </para>
           </listitem>
         </itemizedlist>
@@ -113,7 +113,7 @@
         </step>
         <step>
           <para>
-      Change values in the fields <guimenu>Document range</guimenu> and <guimenu>Html style</guimenu>, except <guimenu>Style name</guimenu>.</para>
+      Change values in the fields <guimenu>Document range</guimenu> and <guimenu>HTML style</guimenu>, except <guimenu>Style name</guimenu>.</para>
         </step>
         <step>
           <para>
@@ -376,7 +376,7 @@
       </step>
       <step>
         <para>
-     Select values for <guilabel>Lifecycle</guilabel>, <guilabel>NodeTypes</guilabel>, <guilabel>Target workspace</guilabel>, <guilabel>Target path</guilabel>, <guilabel>Affected Node Types</guilabel>. (*Required).
+     Select values for <guilabel>Life-cycle</guilabel>, <guilabel>NodeTypes</guilabel>, <guilabel>Target workspace</guilabel>, <guilabel>Target path</guilabel>, <guilabel>Affected Node Types</guilabel>. (*Required).
     </para>
       </step>
       <step>

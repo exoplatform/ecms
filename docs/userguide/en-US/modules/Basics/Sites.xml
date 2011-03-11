@@ -118,7 +118,7 @@
      Select the <emphasis role="bold">Permission Setting</emphasis> tab to set access and edit permission for this portal.
     </para>
 <!--   Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                           -->        <para>
-     The <emphasis role="bold">Permission Setting</emphasis> tab includes two subtabs: <emphasis role="bold">Access Permission Setting</emphasis> and <emphasis role="bold">Edit Permission Setting</emphasis>.
+     The <emphasis role="bold">Permission Setting</emphasis> tab includes two sub-tabs: <emphasis role="bold">Access Permission Setting</emphasis> and <emphasis role="bold">Edit Permission Setting</emphasis>.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -497,9 +497,9 @@
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold">Show infor bar </emphasis>
+                      <emphasis role="bold">Show info bar </emphasis>
                     </entry>
-                    <entry> Tick the check box if you want to show the infor bar of the portlet. </entry>
+                    <entry> Tick the check box if you want to show the info bar of the portlet. </entry>
                   </row>
                   <row>
                     <entry>

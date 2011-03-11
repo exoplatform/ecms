@@ -30,7 +30,7 @@
       </step>
       <step>
         <para>
-     Enter your email address in the <emphasis role="bold">Your Emai</emphasis>l field.
+     Enter your email address in the <emphasis role="bold">Your Email</emphasis> field.
     </para>
       </step>
       <step>
@@ -415,7 +415,7 @@
                 </row>
                 <row>
                   <entry> Redactor </entry>
-                  <entry> Select users/groups who have rights to manage this subscription This fied is required. </entry>
+                  <entry> Select users/groups who have rights to manage this subscription This field is required. </entry>
                 </row>
               </tbody>
             </tgroup>
@@ -875,7 +875,7 @@
         </step>
         <step>
           <para>
-      Create a content for a newsletter by inputting information into the <emphasis role="bold">Main content</emphasis> textbox.
+      Create a content for a newsletter by inputting information into the <emphasis role="bold">Main content</emphasis> text box.
      </para>
         </step>
         <step>

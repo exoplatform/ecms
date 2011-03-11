@@ -276,7 +276,7 @@
               <tbody>
                 <row>
                   <entry> 1 </entry>
-                  <entry> You can add more than one constrainwith either of two operators (AND and OR).</entry>
+                  <entry> You can add more than one constraint with either of two operators (AND and OR).</entry>
                 </row>
                 <row>
                   <entry> 2 </entry>
@@ -521,7 +521,7 @@
                 </imageobject>
               </mediaobject>
               <para>
-        Select the date you want to use as a contraint.
+        Select the date you want to use as a constraint.
        </para>
             </step>
             <step>

@@ -618,7 +618,7 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Copy_URL_to_Clipboard">
     <title>Copy URL to Clipboard</title>
     <para>
-   The Copy URL to Clipboard enables you to copy the Webdav URL of a selected folder or a document and then you can view it by WebDAW view on a browser.
+   The Copy URL to Clipboard enables you to copy the WebDAV URL of a selected folder or a document and then you can view it by WebDAV view on a browser.
   </para>
     <para>
    Do the following:

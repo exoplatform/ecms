@@ -630,7 +630,7 @@
         </step>
         <step>
           <para>
-      Click <guibutton>Ok</guibutton> to accept deleting this template.
+      Click <guibutton>OK</guibutton> to accept deleting this template.
      </para>
         </step>
       </procedure>
@@ -662,7 +662,7 @@
         </step>
         <step>
           <para>
-      Input the content for the template in the <emphasis role="bold">Content</emphasis> textbox. (*Required).
+      Input the content for the template in the <emphasis role="bold">Content</emphasis> text box. (*Required).
      </para>
         </step>
         <step>
@@ -672,7 +672,7 @@
         </step>
         <step>
           <para>
-      Select the template type from the dropdown box in the <emphasis role="bold">Template Type</emphasis> form.
+      Select the template type from the drop-down box in the <emphasis role="bold">Template Type</emphasis> form.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -745,7 +745,7 @@
         </step>
         <step>
           <para>
-      Click <guibutton>Ok</guibutton> to accept deleting the template, or <guibutton>Cancel</guibutton> to discard this action.
+      Click <guibutton>OK</guibutton> to accept deleting the template, or <guibutton>Cancel</guibutton> to discard this action.
      </para>
         </step>
       </procedure>

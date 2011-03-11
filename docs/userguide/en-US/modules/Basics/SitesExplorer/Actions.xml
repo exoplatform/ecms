@@ -1135,11 +1135,11 @@
                   <tbody>
                     <row>
                       <entry> Process cutoffs </entry>
-                      <entry> The boolean datatype is used to break a process. If the process cutoff flag is set in the file plan, the record is cutoff after the expiration, or after it has been obsolete or superseded, depending on the information in the file plan. </entry>
+                      <entry> The boolean data type is used to break a process. If the process cutoff flag is set in the file plan, the record is cutoff after the expiration, or after it has been obsolete or superseded, depending on the information in the file plan. </entry>
                     </row>
                     <row>
                       <entry> Event trigger </entry>
-                      <entry> The text datatype is an automatic executing code which is used to tell the event to perform some actions. </entry>
+                      <entry> The text data type is an automatic executing code which is used to tell the event to perform some actions. </entry>
                     </row>
                     <row>
                       <entry> Cutoff period </entry>
@@ -1155,7 +1155,7 @@
                     </row>
                     <row>
                       <entry> Process hold </entry>
-                      <entry> This boolean datatype is used when a record process may be held before the further disposition is handled. </entry>
+                      <entry> This boolean data type is used when a record process may be held before the further disposition is handled. </entry>
                     </row>
                     <row>
                       <entry> Hold period </entry>
@@ -1163,35 +1163,35 @@
                     </row>
                     <row>
                       <entry> Discretionary Hold </entry>
-                      <entry> The boolean datatype is used when a hold may be discretionary, such as after a command change. So, the discretionary hold flag allows the records management module to track these manual checks. </entry>
+                      <entry> The boolean data type is used when a hold may be discretionary, such as after a command change. So, the discretionary hold flag allows the records management module to track these manual checks. </entry>
                     </row>
                     <row>
                       <entry> Process transfer </entry>
-                      <entry> The boolean datatype is used to determine how a record process will be transferred. </entry>
+                      <entry> The boolean data type is used to determine how a record process will be transferred. </entry>
                     </row>
                     <row>
                       <entry> Default transfer location </entry>
-                      <entry> The text datatype is used to determine where a record is transferred by default. </entry>
+                      <entry> The text data type is used to determine where a record is transferred by default. </entry>
                     </row>
                     <row>
                       <entry> Transfer block size </entry>
-                      <entry> The float datatype is used to determine in what size blocks for organizational purposes that is normally measured in Years. </entry>
+                      <entry> The float data type is used to determine in what size blocks for organizational purposes that is normally measured in Years. </entry>
                     </row>
                     <row>
                       <entry> Process accession </entry>
-                      <entry> The boolean datatype is flagged when a record which is held permanently must be ultimately transferred to the national records authority. </entry>
+                      <entry> The boolean data type is flagged when a record which is held permanently must be ultimately transferred to the national records authority. </entry>
                     </row>
                     <row>
                       <entry> Accession location </entry>
-                      <entry> The text datatype is flagged to specify an area for the accession transfer. </entry>
+                      <entry> The text data type is flagged to specify an area for the accession transfer. </entry>
                     </row>
                     <row>
                       <entry> Accession block size </entry>
-                      <entry> The text datatype is flagged to determine the blocks size for organizational purposes which is normally measured in Years. </entry>
+                      <entry> The text data type is flagged to determine the blocks size for organizational purposes which is normally measured in Years. </entry>
                     </row>
                     <row>
                       <entry> Process destruction </entry>
-                      <entry> The boolean datatype is flagged if there is any record to be destroyed. After that, the record is marked in the Alfresco system to be permanently destroyed so that all information, metadata and physical traces are removed and cannot be recovered. </entry>
+                      <entry> The boolean data type is flagged if there is any record to be destroyed. After that, the record is marked in the Alfresco system to be permanently destroyed so that all information, metadata and physical traces are removed and cannot be recovered. </entry>
                     </row>
                   </tbody>
                 </tgroup>
@@ -1279,7 +1279,7 @@
       <title>Create new Event</title>
       <step>
         <para>
-     Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Event</emphasis> form and select <emphasis role="bold">Event</emphasis> from the drop-down list for the field <emphasis role="bold">Select Templat</emphasis>e.
+     Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Event</emphasis> form and select <emphasis role="bold">Event</emphasis> from the drop-down list for the field <emphasis role="bold">Select Template</emphasis>e.
     </para>
         <para>
      The <emphasis role="bold">Add New Event</emphasis> window will appear:
@@ -1480,7 +1480,7 @@
               <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
             </imageobject>
             <textobject>
-               <phrase>scoll arrows</phrase>
+               <phrase>scroll arrows</phrase>
             </textobject>
           </inlinemediaobject> icon to see the type list and select a folder type.
     </para>
@@ -1911,7 +1911,7 @@
             <tbody>
               <row>
                 <entry> Path to Export </entry>
-                <entry> The path of the node being exported. This field will be prepopulated. </entry>
+                <entry> The path of the node being exported. This field will be pre-populated. </entry>
               </row>
               <row>
                 <entry> Format </entry>
@@ -2180,7 +2180,7 @@
                     <entry>
                       <emphasis role="bold">Lifecycle</emphasis>
                     </entry>
-                    <entry> Select the lifecycle for this action. The action will be executed depending on the lifecycle: <itemizedlist>
+                    <entry> Select the life-cycle for this action. The action will be executed depending on the life-cycle: <itemizedlist>
                         <listitem>
                           <para>
               &apos;<emphasis role="bold">Add</emphasis>&apos;: The action will be executed to a new document, but not to a subfolder when the document or the subfolder is created in the folder in which an action has been added to. It&apos;s also applied to a new document in the subfolder of the folder.
@@ -2203,10 +2203,10 @@
                         </listitem>
                         <listitem>
                           <para>
-              &apos;<emphasis role="bold">Schedule&apos;</emphasis>: the action is done at specific time. There are 2 schedule lifecyle types: period and cron. (See more about Schedule lifecycle).
+              &apos;<emphasis role="bold">Schedule&apos;</emphasis>: the action is done at specific time. There are 2 schedule lifeless types: period and cron. (See more about Schedule life-cycle).
              </para>
                           <para>
-              If you need the same action to be executed in several lifecycles, you have to create several actions.
+              If you need the same action to be executed in several life-cycles, you have to create several actions.
              </para>
                         </listitem>
                       </itemizedlist></entry>
@@ -2229,7 +2229,7 @@
     Once an action is added to a node it is automatically added to any child nodes of the selected node.
    </para>
       <para>
-    If an action added with the lifecycle &apos;user action&apos;, it will be applied for the current node. And an action added with other lifecyles, it will be applied for the child nodes.
+    If an action added with the life-cycle &apos;user action&apos;, it will be applied for the current node. And an action added with other lifestyles, it will be applied for the child nodes.
    </para>
       <note>
         <title>Actions in menus</title>
@@ -3253,7 +3253,7 @@
               <imagedata fileref="images/localisedcontents.png" format="PNG" width="59mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add/Edit localised contents ]</phrase>
+               <phrase>[ Add/Edit localized contents ]</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Action</emphasis> bar.
     </para>
@@ -3406,7 +3406,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to commit the change. The node will be stored in an <emphasis>exo:thuumbnails</emphasis> folder.
+     Click <emphasis role="bold">Save</emphasis> to commit the change. The node will be stored in an <emphasis>exo:thumbnails</emphasis> folder.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -3777,7 +3777,7 @@
       </step>
       <step>
         <para>
-     Browse and select a file on your computer by clicking the <emphasis role="bold">Browse</emphasis>... button. The selected filename will be displayed in the <emphasis role="bold">Select a file</emphasis> field.
+     Browse and select a file on your computer by clicking the <emphasis role="bold">Browse</emphasis>... button. The selected file name will be displayed in the <emphasis role="bold">Select a file</emphasis> field.
     </para>
         <para>
      If you want to upload multi files at the same time, click the 

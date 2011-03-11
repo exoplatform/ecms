@@ -123,7 +123,7 @@
 			</step>
 			 <step>
 				<para>
-					Select an image from your machince to use as a display icon for the selected folder.
+					Select an image from your machine to use as a display icon for the selected folder.
 				</para>
 
 			</step>
@@ -189,7 +189,7 @@
 		 <itemizedlist>
 			<listitem>
 				<para>
-					Use the mousewheel.
+					Use the mouse wheel.
 				</para>
 
 			</listitem>
@@ -222,7 +222,7 @@
                <imagedata fileref="images/slideshowicon.png" format="PNG" width="7mm"/>
 				</imageobject>
             <textobject>
-               <phrase>slideshow</phrase>
+               <phrase>slide show</phrase>
             </textobject>
 			</inlinemediaobject> icon:
 		</para>

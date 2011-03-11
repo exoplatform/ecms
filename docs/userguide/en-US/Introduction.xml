@@ -248,7 +248,7 @@
 					<term>Backup workspace:</term>
 					 <listitem>
 						<para>
-							The backup process depends on the published content timestamps, each published document has a duration for which it can be published and when it exceeds the timestamps, it will be automatically archived to the backup database. This workspace is mostly used when using the Workflow based content publication lifecycle.
+							The backup process depends on the published content timestamps, each published document has a duration for which it can be published and when it exceeds the timestamps, it will be automatically archived to the backup database. This workspace is mostly used when using the Workflow based content publication life-cycle.
 						</para>
 
 					</listitem>
@@ -321,7 +321,7 @@
 		 <section id="sect-User_Guide-Terminologies-Version">
 			<title>Version</title>
 			 <para>
-				Versioning means that at any given time the node's state can be saved for possible future recovery and the action of saving called 'checking in'. A workspace may contain both versionable and non-versionable nodes. A node is versionable if it has been assigned a mixin type mixin: versionable; otherwise, it is a nonversionable node. A version exists as a part of a version history graph that describes the predecessor/successor relations among versions of a particular versionable node.
+				Versioning means that at any given time the node's state can be saved for possible future recovery and the action of saving called 'checking in'. A workspace may contain both versionable and non-versionable nodes. A node is versionable if it has been assigned a mixin type mixin: versionable; otherwise, it is a non-versionable node. A version exists as a part of a version history graph that describes the predecessor/successor relations among versions of a particular versionable node.
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
