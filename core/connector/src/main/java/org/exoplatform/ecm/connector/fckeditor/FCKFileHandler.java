@@ -23,7 +23,6 @@ import javax.jcr.Node;
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

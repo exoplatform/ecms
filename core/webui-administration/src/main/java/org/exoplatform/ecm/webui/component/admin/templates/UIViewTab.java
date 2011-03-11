@@ -22,15 +22,12 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Value;
-import javax.portlet.PortletPreferences;
 
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -105,12 +102,6 @@ public class UIViewTab extends UIContainer {
   public void setTabRendered() {
     UIViewTemplate uiViewTemplate = getAncestorOfType(UIViewTemplate.class) ;
     uiViewTemplate.setRenderedChild(UIViewTab.class) ;
-  }
-  
-  private String getRepository() {
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    return portletPref.getValue(Utils.REPOSITORY, "") ;
   }
   
   static public class EditActionListener extends EventListener<UIViewTab> {

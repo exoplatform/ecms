@@ -23,9 +23,6 @@ import java.util.ResourceBundle;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.resources.ResourceBundleService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

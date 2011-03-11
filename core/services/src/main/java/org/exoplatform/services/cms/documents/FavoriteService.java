@@ -20,8 +20,6 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-
 /**
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh

@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.connector.fckeditor;
 
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

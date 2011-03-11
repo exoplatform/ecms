@@ -16,14 +16,17 @@
  */
 package org.exoplatform.services.migration;
 
-import org.exoplatform.ecm.ProductVersions;
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
-import javax.jcr.*;
 
 /**
  * This class is here to get and update CLV portlet preferences on the fly.

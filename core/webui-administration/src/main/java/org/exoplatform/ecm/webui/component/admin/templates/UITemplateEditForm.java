@@ -17,13 +17,9 @@
 package org.exoplatform.ecm.webui.component.admin.templates;
 
 import javax.jcr.Node;
-import javax.portlet.PortletPreferences;
 
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -82,12 +78,6 @@ public class UITemplateEditForm extends UIForm {
     getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setEnable(false) ;
     getUIStringInput(FIELD_NAME).setEditable(false) ;
     nodeType_ = nodeType ;
-  }
-  
-  private String getRepository() {
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    return portletPref.getValue(Utils.REPOSITORY, "") ;
   }
   
   static public class SaveActionListener extends EventListener<UITemplateEditForm> {

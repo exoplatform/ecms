@@ -18,7 +18,6 @@ package org.exoplatform.ecm.webui.component.admin.metadata;
 
 import javax.jcr.nodetype.NodeType;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;

@@ -19,12 +19,11 @@
 
 package org.exoplatform.services.portletcache;
 
-import javax.portlet.PortletMode;
-import javax.portlet.RenderRequest;
-import javax.portlet.WindowState;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.portlet.PortletMode;
+import javax.portlet.WindowState;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>

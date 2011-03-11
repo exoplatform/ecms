@@ -21,19 +21,6 @@ package org.exoplatform.services.workflow.impl.bonita;
 //import hero.user.UserBaseException;
 //import hero.util.BonitaConfig;
 
-import org.exoplatform.commons.utils.PageList;
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.RootContainer;
-import org.exoplatform.services.organization.OrganizationService;
-import org.exoplatform.services.organization.Query;
-import org.exoplatform.services.organization.User;
-import org.exoplatform.services.organization.UserHandler;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Hashtable;
 
 /**
  * eXo User Management

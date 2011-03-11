@@ -143,8 +143,7 @@ public class UISubscriptions extends UIForm {
    * 
    * @return the number of user
    */
-  @SuppressWarnings({ "unused" })
-  private int getNumberOfUser(String subscriptionName){
+  public int getNumberOfUser(String subscriptionName){
     return userHandler.getQuantityUserBySubscription(
                                                      WCMCoreUtils.getUserSessionProvider(),
                                                      portalName,
@@ -187,8 +186,7 @@ public class UISubscriptions extends UIForm {
    * 
    * @return the number of waiting newsletter
    */
-  @SuppressWarnings({ "unused" })
-  private long getNumberOfWaitingNewsletter(String subscriptionName){
+  public long getNumberOfWaitingNewsletter(String subscriptionName){
     try{
       return subscriptionHandler.getNumberOfNewslettersWaiting(WCMCoreUtils.getUserSessionProvider(), portalName, this.categoryConfig.getName(), subscriptionName);
     }catch(Exception ex){
@@ -222,13 +220,11 @@ public class UISubscriptions extends UIForm {
     return subscriptionId;
   }
 
-  @SuppressWarnings("unused")
-  private boolean isAdministrator() {
+  public boolean isAdministrator() {
     return userHandler.isAdministrator(portalName, userId);
   }
   
-  @SuppressWarnings("unused")
-  private boolean isModerator() {
+  public boolean isModerator() {
     return userHandler.isModerator(userId, categoryConfig);
   }
   

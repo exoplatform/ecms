@@ -28,17 +28,16 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.actions.impl.ActionConfig;
+import org.exoplatform.services.cms.actions.impl.BaseActionLauncherListener;
+import org.exoplatform.services.cms.actions.impl.BaseActionPlugin;
+import org.exoplatform.services.cms.actions.impl.ECMEventListener;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.plugin.actions.activation.BPActionActivationJob;
 import org.exoplatform.services.workflow.Process;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
-import org.exoplatform.services.cms.actions.impl.BaseActionPlugin;
-import org.exoplatform.services.cms.actions.impl.ActionConfig;
-import org.exoplatform.services.cms.actions.impl.ECMEventListener;
-import org.exoplatform.services.cms.actions.impl.BaseActionLauncherListener;
-import org.exoplatform.services.ecm.publication.actions.WorkflowActionLauncherListener;
-import org.exoplatform.services.plugin.actions.activation.BPActionActivationJob;
 
 public class BPActionPlugin extends BaseActionPlugin implements ComponentPlugin {
 

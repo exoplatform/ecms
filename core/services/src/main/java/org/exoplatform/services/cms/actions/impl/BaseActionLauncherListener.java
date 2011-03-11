@@ -30,7 +30,6 @@ import javax.jcr.observation.EventIterator;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.log.ExoLogger;
@@ -71,8 +70,6 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
     ActionServiceContainer actionServiceContainer = 
       (ActionServiceContainer) exoContainer.getComponentInstanceOfType(ActionServiceContainer.class);
     IdentityRegistry identityRegistry = (IdentityRegistry) exoContainer.getComponentInstanceOfType(IdentityRegistry.class);
-    TemplateService templateService = 
-      (TemplateService) exoContainer.getComponentInstanceOfType(TemplateService.class);       
     while (events.hasNext()) {
       Event event = events.nextEvent();  
       Node node = null;      
@@ -182,14 +179,6 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
       if (((Node) item).isNodeType(nodeType.getString()))
         return true;
     }
-    return false;
-  }
-  
-  private boolean checkDocumentType(String nodeType) throws Exception {
-    ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
-    TemplateService templateService = (TemplateService)exoContainer.getComponentInstanceOfType(TemplateService.class);
-    if (templateService.getDocumentTemplates().contains(nodeType))
-      return true;
     return false;
   }
   

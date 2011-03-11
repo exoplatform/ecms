@@ -16,25 +16,25 @@
  */
 package org.exoplatform.ecm.webui.tree.selectmany ;
 
-import java.util.ArrayList ;
-import java.util.List ;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.jcr.Node ;
+import javax.jcr.Node;
 
-import org.exoplatform.ecm.webui.popup.UIPopupComponent ;
-import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector ;
+import org.exoplatform.ecm.webui.popup.UIPopupComponent;
+import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder;
-import org.exoplatform.portal.webui.util.SessionProviderFactory ;
-import org.exoplatform.services.cms.categories.CategoriesService ;
-import org.exoplatform.services.jcr.RepositoryService ;
-import org.exoplatform.webui.config.annotation.ComponentConfig ;
-import org.exoplatform.webui.config.annotation.ComponentConfigs ;
-import org.exoplatform.webui.config.annotation.EventConfig ;
-import org.exoplatform.webui.core.UIBreadcumbs ;
-import org.exoplatform.webui.core.UIPopupWindow ;
-import org.exoplatform.webui.core.UIBreadcumbs.LocalPath ;
-import org.exoplatform.webui.event.Event ;
-import org.exoplatform.webui.event.EventListener ;
+import org.exoplatform.portal.webui.util.SessionProviderFactory;
+import org.exoplatform.services.cms.categories.CategoriesService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIBreadcumbs;
+import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS

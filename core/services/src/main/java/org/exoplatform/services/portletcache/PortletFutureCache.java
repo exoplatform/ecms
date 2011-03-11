@@ -19,10 +19,6 @@
 
 package org.exoplatform.services.portletcache;
 
-import org.exoplatform.commons.cache.future.FutureCache;
-import org.exoplatform.services.log.Log;
-import org.picocontainer.Startable;
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,6 +26,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+
+import org.exoplatform.commons.cache.future.FutureCache;
+import org.exoplatform.services.log.Log;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>

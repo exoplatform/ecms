@@ -17,7 +17,6 @@
 package org.exoplatform.services.wcm.core;
 
 import javax.jcr.Node;
-import javax.portlet.CacheControl;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 

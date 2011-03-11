@@ -17,7 +17,6 @@
 package org.exoplatform.services.cms.folksonomy;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.jcr.Node;
 

@@ -23,7 +23,6 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.ReferentialIntegrityException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.info.UIPermissionForm;
@@ -31,6 +30,7 @@ import org.exoplatform.ecm.webui.component.admin.taxonomy.info.UIPermissionInfo;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.info.UIPermissionManager;
 import org.exoplatform.services.cms.categories.CategoriesService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;

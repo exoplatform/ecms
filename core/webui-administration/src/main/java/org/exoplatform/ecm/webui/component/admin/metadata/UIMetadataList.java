@@ -27,7 +27,6 @@ import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.metadata.MetadataService;
-//import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeType;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;

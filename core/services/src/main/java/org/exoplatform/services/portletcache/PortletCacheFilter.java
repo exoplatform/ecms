@@ -19,10 +19,10 @@
 
 package org.exoplatform.services.portletcache;
 
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -37,12 +37,9 @@ import javax.portlet.filter.FilterChain;
 import javax.portlet.filter.FilterConfig;
 import javax.portlet.filter.PortletFilter;
 import javax.portlet.filter.RenderFilter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.Locale;
-import java.util.Map;
+
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.portal.application.PortalRequestContext;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>

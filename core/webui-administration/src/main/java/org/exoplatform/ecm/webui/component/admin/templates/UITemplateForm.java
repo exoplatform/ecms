@@ -27,7 +27,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
-import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
@@ -36,8 +35,6 @@ import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -143,12 +140,6 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     return Utils.encodeHTML(templateService.buildDialogForm(nodeType));
   }
   
-  private String getRepository() {
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    return portletPref.getValue(Utils.REPOSITORY, "") ;
-  }
-  
   static public class TemplateNameComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       try {
@@ -185,7 +176,6 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     return options ;
   }
 
-  @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) {
     UIFormInputSetWithAction uiFormAction = getChildById(FIELD_TAB_TEMPLATE) ;
     uiFormAction.getUIStringInput(FIELD_PERMISSION).setValue(value.toString()) ;

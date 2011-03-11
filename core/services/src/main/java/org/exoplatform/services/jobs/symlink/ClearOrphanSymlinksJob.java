@@ -27,9 +27,8 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.quartz.Job;
-import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;//import org.exoplatform.services.scheduler.impl.JobSchedulerServiceImpl;
+import org.quartz.JobExecutionException;
 
 /**
  * Created by The eXo Platform SARL

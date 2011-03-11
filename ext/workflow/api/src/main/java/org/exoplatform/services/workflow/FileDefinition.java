@@ -22,8 +22,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import org.w3c.dom.Element;
-
 /**
  * Base interface of all classes that map a deployable Business Process Archive.
  * It was created to facilitate the support of other archive types in the

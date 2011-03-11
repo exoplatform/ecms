@@ -22,7 +22,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
-import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
@@ -428,21 +427,6 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     this.popupId = popupId;
   }
 
-  /**
-   * Gets the header.
-   * 
-   * @return the header
-   */
-  @SuppressWarnings("unused")
-  private String getHeader(){
-    PortletRequestContext portletRequestContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-    HttpServletRequestWrapper requestWrapper = (HttpServletRequestWrapper) portletRequestContext.getRequest();
-    String requestURI = requestWrapper.getRequestURI();
-    String[] param = requestURI.split("/");
-    String header = param[param.length - 1];
-    return header;
-  }
-  
   /**
    * The listener interface for receiving saveAction events.
    * The class that is interested in processing a saveAction

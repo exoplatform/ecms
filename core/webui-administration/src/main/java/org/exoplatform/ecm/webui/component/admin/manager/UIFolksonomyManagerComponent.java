@@ -19,7 +19,6 @@ package org.exoplatform.ecm.webui.component.admin.manager;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminWorkingArea;
 import org.exoplatform.ecm.webui.component.admin.folksonomy.UIFolksonomyManager;
-import org.exoplatform.ecm.webui.component.admin.folksonomy.UITagStyleList;
 import org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanelActionListener;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;

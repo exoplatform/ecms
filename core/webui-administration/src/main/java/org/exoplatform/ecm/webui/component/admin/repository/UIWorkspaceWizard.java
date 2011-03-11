@@ -25,7 +25,6 @@ import java.util.Map;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.component.admin.repository.UIRepositoryValueSelect.ClassData;
@@ -48,6 +47,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.StringNumberParser;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.naming.InitialContextInitializer;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -394,7 +394,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
     sb.append(swapPath.substring(0, swapPath.lastIndexOf("/")+1)).append(repoName).append("/").append(wsName) ;
     return sb.toString() ;
   }
-  @SuppressWarnings("unused")
+  
   public void doSelect(String selectField, Object value) {
     UIFormInputSetWithAction uiFormAction = getChildById(FIELD_STEP1) ;
     UIFormStringInput permissionField = uiFormAction.getUIStringInput(UIWizardStep1.FIELD_PERMISSION) ;
@@ -890,7 +890,6 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
       String maxBuffer =  uiWSFormStep2.getUIStringInput(UIWizardStep2.FIELD_MAXBUFFER).getValue() ;
       UIWizardStep3 uiWSFormStep3 = uiFormWizard.getChildById(UIWorkspaceWizard.FIELD_STEP3) ;
       String indexPath = uiWSFormStep3.getUIStringInput(UIWizardStep3.FIELD_INDEXPATH).getValue() ;
-      String maxCacheSize =  uiWSFormStep3.getUIStringInput(UIWizardStep3.FIELD_MAXSIZE).getValue() ;
       UIApplication uiApp = uiFormWizard.getAncestorOfType(UIApplication.class) ;
       if(uiFormWizard.isCheckValid_) {
         if(uiWSFormStep1.isRendered()) {

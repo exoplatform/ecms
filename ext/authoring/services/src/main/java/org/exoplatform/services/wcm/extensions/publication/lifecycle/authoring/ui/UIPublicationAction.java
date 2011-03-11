@@ -16,6 +16,12 @@
  */
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.Value;
+
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.portal.application.PortletPreferences;
 import org.exoplatform.portal.application.Preference;
@@ -32,7 +38,12 @@ import org.exoplatform.services.wcm.publication.PublicationUtil;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.*;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPortalNavigationExplorer;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationHistory;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPages;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPagesContainer;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublishClvChooser;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublishedPages;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -44,11 +55,6 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-
-import javax.jcr.Node;
-import javax.jcr.Value;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by The eXo Platform SAS Author : Phan Le Thanh Chuong

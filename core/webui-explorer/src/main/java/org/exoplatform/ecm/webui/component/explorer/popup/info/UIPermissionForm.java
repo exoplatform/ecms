@@ -38,8 +38,6 @@ import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.MembershipHandler;
-import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -152,27 +150,6 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       LOG.error("Unexpected error", e);
     }
   }
-  
-  private boolean hasMembership(String userId, String roleExpression) {
-    if ((roleExpression == null) || (roleExpression.length() == 0) || (roleExpression.indexOf(":/") < 0)) return false;
-    if("*".equals(roleExpression))
-      return true;
-    OrganizationService organizationService_ = getApplicationComponent(OrganizationService.class);
-    String membershipType = roleExpression.substring(0, roleExpression.indexOf(":"));
-    String groupName = roleExpression.substring(roleExpression.indexOf(":") + 1);
-    try {
-      MembershipHandler membershipHandler = organizationService_.getMembershipHandler();
-      if ("*".equals(membershipType)) {
-        // Determine if there exists at least one membership
-        return !membershipHandler.findMembershipsByUserAndGroup(userId,groupName).isEmpty();
-      } 
-      // Determine if there exists the membership of specified type
-      return membershipHandler.findMembershipByUserGroupAndType(userId,groupName,membershipType) != null;      
-    }
-    catch(Exception e) {            
-    }  
-    return false;
-  }   
   
   static public class ResetActionListener extends EventListener<UIPermissionForm> {
     public void execute(Event<UIPermissionForm> event) throws Exception {

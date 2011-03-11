@@ -230,8 +230,6 @@ public class RecordsServiceImpl implements RecordsService {
       if (!isFrozenRecord) {
         if (record.hasProperty("rma:holdsDiscretionary")
             && record.getProperty("rma:holdsDiscretionary").getBoolean()) {
-          // holds is discretionary
-          String eventToWaitFor = record.getProperty("rma:holdUntilEvent").getString();
           // TODO allow to plug events handler here
           record.setProperty("rma:holdExecuted", true);
           record.save();
@@ -362,29 +360,6 @@ public class RecordsServiceImpl implements RecordsService {
    */
   public List<Node> getVitalRecords(Node filePlan) throws RepositoryException {    
     return getRecordsByQuery(filePlan,BASE_STATEMENT,"rma:vitalRecord","rma:nextReviewDate",DESCENDING);
-  }
-
-  /**
-   * after holding a process can be moved to a national agency
-   * @param filePlan    filePlane node
-   * @param record      record node
-   */ 
-  private void setupAccession(Node filePlan, Node record) {
-    try {
-      boolean processAccession = filePlan.getProperty("rma:processAccession")
-      .getBoolean();
-      if (processAccession) {
-        record.addMixin("rma:accessionable");
-        // By convention the current date is set as the transfer one
-        Calendar currentDate = new GregorianCalendar();
-        currentDate.add(Calendar.MINUTE, 5);
-        record.setProperty("rma:accessionDate", currentDate);
-        record.save();
-        filePlan.save() ;
-      }
-    } catch (RepositoryException e) {
-      LOG.error("Unexpected error", e);
-    }
   }
 
   /**

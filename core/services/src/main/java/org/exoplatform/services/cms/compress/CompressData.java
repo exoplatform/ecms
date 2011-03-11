@@ -58,14 +58,25 @@ public class CompressData {
   }
 
   public CompressData(String base) {
-    base_ = base;
+    setBase(base);
   }
 
-  private String getBase() {
-    return base_;
-  }
+	/**
+	 * @param base_
+	 *            the base_ to set
+	 */
+	public void setBase(String base_) {
+		this.base_ = base_;
+	}
 
-  public void addFile(String entryName, File file) {
+	/**
+	 * @return the base_
+	 */
+	public String getBase() {
+		return base_;
+	}
+
+public void addFile(String entryName, File file) {
     try {
       InputStream is = new FileInputStream(file);
       datas_.add(new InputStreamDataInstance(entryName, is));

@@ -17,7 +17,6 @@
 package org.exoplatform.services.cms.webdav;
 
 import java.io.InputStream;
-import java.util.List;
 
 import javax.jcr.Item;
 import javax.jcr.NoSuchWorkspaceException;

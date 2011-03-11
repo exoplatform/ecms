@@ -21,8 +21,10 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
@@ -31,7 +33,6 @@ import org.exoplatform.services.wcm.newsletter.handler.NewsletterManageUserHandl
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterPublicUserHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterSubscriptionHandler;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.newsletter.manager.NewsLetterUtil;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -46,8 +47,6 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.organization.User;
 
 /**
  * Created by The eXo Platform SAS Author : Tran Nguyen Ngoc
@@ -238,8 +237,7 @@ public class UINewsletterViewerForm extends UIForm {
    * 
    * @return the list categories
    */
-  @SuppressWarnings("unused")
-  private List<NewsletterCategoryConfig> getListCategories() {
+  public List<NewsletterCategoryConfig> getListCategories() {
     try {
       return categoryHandler.getListCategories(NewsLetterUtil.getPortalName(), WCMCoreUtils.getUserSessionProvider());
     } catch (Exception e) {
@@ -254,8 +252,7 @@ public class UINewsletterViewerForm extends UIForm {
    * 
    * @return the list subscription
    */
-  @SuppressWarnings("unused")
-  private List<NewsletterSubscriptionConfig> getListSubscription(String categoryName) {
+  public List<NewsletterSubscriptionConfig> getListSubscription(String categoryName) {
     try {
       List<NewsletterSubscriptionConfig> listSubscription = 
                                           subcriptionHandler.getSubscriptionsByCategory(WCMCoreUtils.getUserSessionProvider(), NewsLetterUtil.getPortalName(), categoryName);
@@ -271,8 +268,7 @@ public class UINewsletterViewerForm extends UIForm {
    * 
    * @param url the new link
    */
-  @SuppressWarnings("unused")
-  private void setLink(String url) throws Exception {
+  public void setLink(String url) throws Exception {
     this.linkToSendMail = NewsLetterUtil.generateLink(url);
   }
 

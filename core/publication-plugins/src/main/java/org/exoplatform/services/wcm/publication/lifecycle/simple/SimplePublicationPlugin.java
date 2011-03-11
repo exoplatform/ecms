@@ -55,7 +55,6 @@ import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.util.IdGenerator;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
@@ -408,23 +407,6 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
       }
     }
     return null;
-  }
-
-  /**
-   * Checks if is shared portal.
-   * 
-   * @param portalName the portal name
-   * 
-   * @return true, if is shared portal
-   * 
-   * @throws Exception the exception
-   */
-  @SuppressWarnings("unused")
-  private boolean isSharedPortal(String portalName) throws Exception{
-    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
-    return sharedPortal.getName().equals(portalName);    
   }
 
   /* (non-Javadoc)

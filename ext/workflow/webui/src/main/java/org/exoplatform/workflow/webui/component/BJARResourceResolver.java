@@ -43,7 +43,6 @@ public class BJARResourceResolver extends ResourceResolver {
     service_ = service;
   }
 
-  @SuppressWarnings("unused")
   public URL getResource(String url) throws Exception {
     throw new Exception("This method is not  supported");  
   }
@@ -61,7 +60,6 @@ public class BJARResourceResolver extends ResourceResolver {
         + "Make sure you have a valid location");    
   }
 
-  @SuppressWarnings("unused")
   public List<URL> getResources(String url) throws Exception {
     throw new Exception("This method is not  supported");
   }
@@ -72,7 +70,6 @@ public class BJARResourceResolver extends ResourceResolver {
     return inputStreams;
   }
 
-  @SuppressWarnings("unused")
   public boolean isModified(String url, long lastAccess) { return false; }
 
   public String createResourceId(String url) { return  url; }

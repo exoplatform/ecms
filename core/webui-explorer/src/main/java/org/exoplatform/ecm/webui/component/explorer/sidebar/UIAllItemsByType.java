@@ -19,12 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.sidebar;
 import java.util.List;
 import java.util.Set;
 
-import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.services.cms.documents.DocumentTypeService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;

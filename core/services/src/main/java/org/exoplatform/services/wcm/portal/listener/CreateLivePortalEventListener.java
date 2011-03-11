@@ -25,7 +25,6 @@ import org.exoplatform.portal.config.DataStorageImpl;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.ecm.webui.component.explorer.sidebar ;
+package org.exoplatform.ecm.webui.component.explorer.sidebar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +83,7 @@ public class UIViewRelationList extends UIContainer{
     return relations ;
   }
   
-  private List<Node> getReferences() throws Exception {
+  public List<Node> getReferences() throws Exception {
 	    List<Node> refNodes = new ArrayList<Node>() ; 
 	    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
 	    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;

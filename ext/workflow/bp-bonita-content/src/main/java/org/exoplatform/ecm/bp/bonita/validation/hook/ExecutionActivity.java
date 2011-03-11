@@ -1,7 +1,5 @@
 package org.exoplatform.ecm.bp.bonita.validation.hook;
 
-import java.util.Set;
-
 import org.ow2.bonita.definition.TxHook;
 import org.ow2.bonita.facade.APIAccessor;
 import org.ow2.bonita.facade.runtime.ActivityBody;

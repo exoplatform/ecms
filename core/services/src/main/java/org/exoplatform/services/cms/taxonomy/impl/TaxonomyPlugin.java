@@ -46,7 +46,6 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Permission;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Taxonomy;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;

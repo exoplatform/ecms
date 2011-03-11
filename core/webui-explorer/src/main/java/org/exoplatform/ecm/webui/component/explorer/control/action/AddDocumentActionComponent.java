@@ -34,7 +34,6 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
-import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;

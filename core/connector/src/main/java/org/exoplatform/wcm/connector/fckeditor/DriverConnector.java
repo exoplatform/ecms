@@ -539,23 +539,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return groupList;
   }
 
-  /**
-   * Builds the xml response for children.
-   * 
-   * @param node the node
-   * @param command the command
-   * @param repositoryName the repository name
-   * @param filterBy the filter by
-   * @param session the session
-   * @param currentPortal TODO
-   * @return the response
-   * 
-   * @throws Exception the exception
-   */
-  private Response buildXMLResponseForChildren(
-  		Node node, String command, String repositoryName, String filterBy, Session session, String currentPortal) throws Exception {  	
-  	return buildXMLResponseForChildren(node, command, repositoryName, filterBy, session, currentPortal, null);
-  }
   private Response buildXMLResponseForChildren(
 	  		Node node, String command, String repositoryName, String filterBy, Session session, String currentPortal, String nodeDriveName) throws Exception {
 	  	Element rootElement = FCKUtils.createRootElement(command, node, folderHandler.getFolderType(node));
@@ -819,21 +802,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     }
   }
   
-  /**
-   * Creates the folder element.
-   * 
-   * @param document the document
-   * @param child the child
-   * @param folderType the folder type
-   * @param childName the child name
-   * 
-   * @return the element
-   * 
-   * @throws Exception the exception
-   */
-  private Element createFolderElement(Document document, Node child, String folderType, String childName) throws Exception {
-  	return createFolderElement(document, child, folderType, childName, null);
-  }
   private Element createFolderElement(Document document, Node child, String folderType, String childName, String nodeDriveName) throws Exception {
 	  	Element folder = document.createElement("Folder");
 	  	folder.setAttribute("name", childName);

@@ -24,14 +24,7 @@ import java.util.Map.Entry;
 import javax.jcr.Node;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIEditingTagsForm;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;

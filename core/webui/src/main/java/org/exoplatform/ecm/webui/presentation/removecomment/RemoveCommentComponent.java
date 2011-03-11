@@ -22,7 +22,6 @@ import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.action.UIPresentationEventListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -30,12 +29,12 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.exception.MessageException;
 
 /**
  * Created by The eXo Platform SARL

@@ -22,7 +22,6 @@ import javax.jcr.Property;
 import org.apache.commons.chain.Context;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;

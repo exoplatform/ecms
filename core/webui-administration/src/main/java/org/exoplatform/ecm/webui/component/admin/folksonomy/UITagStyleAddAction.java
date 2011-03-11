@@ -18,7 +18,6 @@ package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 
 /**
  * Created by The eXo Platform SARL

@@ -18,7 +18,6 @@ package org.exoplatform.ecm.webui.component.admin.namespace;
 
 import javax.jcr.NamespaceRegistry;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.web.application.ApplicationMessage;
