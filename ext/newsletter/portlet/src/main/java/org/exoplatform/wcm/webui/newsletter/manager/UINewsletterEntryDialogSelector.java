@@ -313,7 +313,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
         return;
       }
       if (categorySelectBox.getValue() == null || subcriptionSelectBox.getValue() == null
-      		|| categorySelectBox.getValue().toString() == "" || subcriptionSelectBox.getValue().toString() == "")
+      		|| categorySelectBox.getValue().length() == 0 || subcriptionSelectBox.getValue().length() == 0)
       {
       	Utils.createPopupMessage(newsletterEntryDialogSelector, "UINewsletterEntryDialogSelector.msg.subcriptionIsNotEmpty", null, ApplicationMessage.WARNING);
       	return;

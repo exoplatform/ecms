@@ -48,13 +48,9 @@ class CharsSequence
    void append(String string)
    {
       char[] cs = string.toCharArray();
-      for (int i = 0; i < cs.length; i++)
-      {
-         if (index >= values.length)
-            return;
-         values[index] = cs[i];
-         index++;
-      }
+      int len = Math.min(cs.length, values.length - index);
+      System.arraycopy(cs, 0, values, index, len);
+      index += len;
    }
 
    char[] getValues()

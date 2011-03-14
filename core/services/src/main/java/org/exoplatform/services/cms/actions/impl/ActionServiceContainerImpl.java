@@ -697,7 +697,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       String queryStr;
       Query query = null;
       try {
-        if (node.getPath() != "/") {
+        if (!"/".equals(node.getPath())) {
           queryStr = "/jcr:root" + node.getPath() + ACTION_QUERY;
         } else {
           queryStr = ACTION_QUERY;
@@ -705,7 +705,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
         query = queryManager.createQuery(queryStr, Query.XPATH);
       } catch(InvalidQueryException invalid) {
       // With some special character, XPath will be invalid , try SQL  
-        if (node.getPath() != "/") {
+        if (!"/".equals(node.getPath())) {
           queryStr = ACTION_SQL_QUERY + WHERE_OPERATOR + JCR_PATH + LIKE_OPERATOR 
                                         + SINGLE_QUOTE + node.getPath() + "/" + "%" + SINGLE_QUOTE;
         } else {

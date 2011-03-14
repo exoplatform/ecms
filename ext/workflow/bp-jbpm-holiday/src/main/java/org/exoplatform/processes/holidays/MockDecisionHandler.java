@@ -17,6 +17,8 @@
 
 package org.exoplatform.processes.holidays;
 
+import java.util.logging.Logger;
+
 import org.jbpm.graph.exe.ExecutionContext;
 import org.jbpm.graph.node.DecisionHandler;
 
@@ -27,9 +29,11 @@ import org.jbpm.graph.node.DecisionHandler;
  */
 public class MockDecisionHandler implements DecisionHandler {
 
+	private static Logger log = Logger.getLogger(MockDecisionHandler.class.getName());
+	
   public String decide(ExecutionContext executionContext) {
-    System.out.println( "Start Date : " + executionContext.getVariable("start"));
-    System.out.println("decide in MockDecisionHandler : " + executionContext.getNode().getName());
+    log.info("Start Date : " + executionContext.getVariable("start"));
+    log.info("decide in MockDecisionHandler : " + executionContext.getNode().getName());
     return "enough holidays";
   }
 

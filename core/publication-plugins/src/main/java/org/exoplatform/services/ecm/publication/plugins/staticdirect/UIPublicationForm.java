@@ -184,7 +184,6 @@ public class UIPublicationForm extends UIForm {
    */
   static public class UnsubcriberLifeCycleActionListener extends EventListener<UIPublicationForm> {
     public void execute(Event<UIPublicationForm> event) throws Exception {
-      System.out.println("Unsubcriber life cycle");
       UIPublicationForm uiPublicationForm = event.getSource();
       Node selectedNode = uiPublicationForm.currentNode_;
       UIApplication uiApp = uiPublicationForm.getAncestorOfType(UIApplication.class);      

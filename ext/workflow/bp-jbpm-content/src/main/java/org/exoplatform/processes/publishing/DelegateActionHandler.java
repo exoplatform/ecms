@@ -17,6 +17,8 @@
 
 package org.exoplatform.processes.publishing;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.jbpm.graph.def.ActionHandler;
 import org.jbpm.graph.exe.ExecutionContext;
 
@@ -30,16 +32,17 @@ public class DelegateActionHandler implements ActionHandler {
   
   private static final long serialVersionUID = 1L;
 
-  private boolean executed = false;
+  private static final Log LOG = ExoLogger.getLogger(DelegateActionHandler.class);
   
   public void execute(ExecutionContext context) {    
     try {
-      System.err.println("Delegate"+context.getVariable("delegator").toString());
-      System.err.println("initiator"+context.getVariable("initiator").toString());
-      System.err.println("exo:validator"+context.getVariable("exo:validator").toString());
-      context.setVariable("delegate_flg","true");                /* Set flag for delegate process */
+      LOG.info("Delegate" + context.getVariable("delegator").toString());
+      LOG.info("initiator" + context.getVariable("initiator").toString());
+      LOG.info("exo:validator" + context.getVariable("exo:validator").toString());
+      context.setVariable("delegate_flg", "true");                /* Set flag for delegate process */
       ProcessUtil.delegate(context);
-    } catch (Exception e) {      
+    } catch (Exception e) {
+    	LOG.warn(e.getMessage(), e);
     } 
   }
   

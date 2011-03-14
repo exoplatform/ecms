@@ -147,7 +147,6 @@ public class UIWCMCacheManagerForm extends UIForm {
 	public static class OnChangeActionListener extends EventListener<UIWCMCacheManagerForm> {
     public void execute(Event<UIWCMCacheManagerForm> event) throws Exception {
       UIWCMCacheManagerForm uiCacheForm = event.getSource();
-      System.out.println("Goes here on change");     
       String cacheOpt = uiCacheForm.getUIFormSelectBox(FIELD_MODIFY).getValue();  
       // get current cache
       cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance(cacheOpt);

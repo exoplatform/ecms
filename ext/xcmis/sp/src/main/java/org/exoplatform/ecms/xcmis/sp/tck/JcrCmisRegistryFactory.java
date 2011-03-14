@@ -20,6 +20,8 @@
 package org.exoplatform.ecms.xcmis.sp.tck;
 
 import org.exoplatform.container.StandaloneContainer;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.xcmis.spi.CmisRegistry;
 import org.xcmis.spi.CmisRegistryFactory;
 
@@ -34,6 +36,8 @@ public class JcrCmisRegistryFactory implements CmisRegistryFactory
 {
 
    private CmisRegistry reg;
+   
+   private static final Log LOG = ExoLogger.getLogger(JcrCmisRegistryFactory.class);
 
    public JcrCmisRegistryFactory()
    {
@@ -46,11 +50,11 @@ public class JcrCmisRegistryFactory implements CmisRegistryFactory
       }
       catch (MalformedURLException e)
       {
-         e.printStackTrace();
+    	  LOG.warn(e.getMessage(), e);
       }
       catch (Exception e)
       {
-         e.printStackTrace();
+    	  LOG.warn(e.getMessage(), e);
       }
    }
 

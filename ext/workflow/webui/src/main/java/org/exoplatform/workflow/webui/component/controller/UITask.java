@@ -40,6 +40,8 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.workflow.Form;
 import org.exoplatform.services.workflow.Process;
 import org.exoplatform.services.workflow.Task;
@@ -125,6 +127,8 @@ public class UITask extends UIForm implements UISelectable {
   private RepositoryService jcrService;
   private List<InputInfo> inputInfo_;
   
+  private static final Log LOG = ExoLogger.getExoLogger(UITask.class);
+  
   public UITask() {
     serviceContainer = getApplicationComponent(WorkflowServiceContainer.class);
     formsService = getApplicationComponent(WorkflowFormsService.class);
@@ -139,7 +143,6 @@ public class UITask extends UIForm implements UISelectable {
     return getComponentConfig().getTemplate();
   }
   
-  @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     if(isCustomizedView()) return new BJARResourceResolver(serviceContainer);
     return super.getTemplateResourceResolver(context, getComponentConfig().getTemplate());
@@ -465,7 +468,7 @@ public class UITask extends UIForm implements UISelectable {
         Map variables = maps.getWorkflowVariables();
         uiTask.serviceContainer.endTask(uiTask.identification_, variables);
       } catch (Exception ex) {
-        ex.printStackTrace();
+    	  LOG.warn(ex.getMessage(), ex);
       }
       uiTask.getAncestorOfType(UIPopupContainer.class).deActivate();
     }
@@ -536,7 +539,7 @@ public class UITask extends UIForm implements UISelectable {
             uiTask.getAncestorOfType(UIPopupContainer.class).deActivate();
             return;
           } catch (Exception e) {
-            e.printStackTrace();
+        	LOG.warn(e.getMessage(), e);
           }
         }
       }

@@ -64,15 +64,14 @@ public class UIPublicationLogList extends UIComponentDecorator {
     List<HistoryBean> list = new ArrayList<HistoryBean>();    
     for (int i = 0; i < array.length; i++) {
       HistoryBean bean = new HistoryBean();
-      String[] currentLog=array[i];
+      String[] currentLog = array[i];
       bean.setDate(bean.formatStringByDateTime(currentLog[0]));
       bean.setNewState(currentLog[1]);
       bean.setUser(currentLog[2]);
-      String[] values=new String[currentLog.length-4];
-      for (int j=4;j<currentLog.length;j++) {
-        values[j-4]=currentLog[j];
-      }
-      String description=publicationService.getLocalizedAndSubstituteLog(currentNode_, Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale(), currentLog[3], values);
+      String[] values = new String[currentLog.length - 4]; 
+      System.arraycopy(currentLog, 4, values, 0, currentLog.length);
+      String description = publicationService.getLocalizedAndSubstituteLog(currentNode_, 
+          Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale(), currentLog[3], values);
       bean.setDescription(description);
       list.add(bean); 
     }

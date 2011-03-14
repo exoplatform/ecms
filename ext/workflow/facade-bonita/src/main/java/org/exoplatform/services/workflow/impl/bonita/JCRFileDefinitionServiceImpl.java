@@ -38,6 +38,8 @@ import org.exoplatform.container.RootContainer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.workflow.FileDefinition;
 import org.exoplatform.services.workflow.WorkflowFileDefinitionService;
 
@@ -74,6 +76,8 @@ public class JCRFileDefinitionServiceImpl
    */
   private Hashtable<String, FileDefinition> fileDefinitions =
     new Hashtable<String, FileDefinition>();
+  
+  private static final Log LOG = ExoLogger.getExoLogger(JCRFileDefinitionServiceImpl.class);
 
   /**
    * Adds files to the business process model node.
@@ -142,8 +146,7 @@ public class JCRFileDefinitionServiceImpl
         return  bpNode.getNode(processName);
       }
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		LOG.warn(e.getMessage(), e);
 	}
 	  
     QueryManager qm = session.getWorkspace().getQueryManager();

@@ -27,6 +27,8 @@ import javax.jcr.Node;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.icepdf.core.exceptions.PDFException;
 import org.icepdf.core.exceptions.PDFSecurityException;
 import org.icepdf.core.pobjects.Document;
@@ -45,6 +47,7 @@ public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
   private ThumbnailType config;
   private String description;
   private String name;
+  private static final Log LOG = ExoLogger.getExoLogger(PDFThumbnailPlugin.class);
 
   public PDFThumbnailPlugin(InitParams initParams) throws Exception {
     config = initParams.getObjectParamValues(ThumbnailType.class).get(0);
@@ -72,13 +75,13 @@ public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
       InputStream input = contentNode.getProperty("jcr:data").getStream() ;      
       document.setInputStream(input, nodePath);
     } catch (PDFException ex) {
-      System.out.println("Error parsing PDF document " + ex);
+      LOG.warn("Error parsing PDF document " + ex);
     } catch (PDFSecurityException ex) {
-      System.out.println("Error encryption not supported " + ex);
+      LOG.warn("Error encryption not supported " + ex);
     } catch (FileNotFoundException ex) {
-      System.out.println("Error file not found " + ex);
+      LOG.warn("Error file not found " + ex);
     } catch (IOException ex) {
-      System.out.println("Error handling PDF document " + ex);
+      LOG.warn("Error handling PDF document " + ex);
     }
     // Paint each pages content to an image and write the image to file
     BufferedImage image = (BufferedImage) document.getPageImage(0, GraphicsRenderingHints.SCREEN, 

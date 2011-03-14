@@ -20,6 +20,8 @@
 package org.exoplatform.services.common.util;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
+
 
 /**
  *  Author : Nhu Dinh Thuan
@@ -28,7 +30,8 @@ import java.util.Comparator;
  */
 public class Arrays
 {
-
+   private static Logger log = Logger.getLogger(Arrays.class.getName());
+   
    public static <T> int search(T a[], T key, Comparator<T> compare)
    {
       int low = 0;
@@ -98,7 +101,7 @@ public class Arrays
          });
       }
       long end = System.currentTimeMillis();
-      System.out.println(" het " + (end - start));
+      log.info(" het " + (end - start));
 
       start = System.currentTimeMillis();
       for (int i = 0; i < time; i++)
@@ -114,7 +117,7 @@ public class Arrays
          });
       }
       end = System.currentTimeMillis();
-      System.out.println(" het " + (end - start));
+      log.info(" het " + (end - start));
    }
 
 }

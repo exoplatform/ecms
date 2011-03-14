@@ -247,7 +247,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
         }
         session.logout();
       } catch (Exception e) {
-        System.out.println("==>>> Cannot init observer for node: " 
+        LOG.warn("==>>> Cannot init observer for node: " 
             +e.getLocalizedMessage() + " in '"+repo.getName()+"' repository");
         LOG.error("Unexpected error", e);
       }
@@ -268,7 +268,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
     try {
       reInitObserver() ;
     }catch (Exception e) {
-      System.out.println("==>>> Exeption when startd WatchDocumentSerice!!!!");
+      LOG.warn("==>>> Exeption when startd WatchDocumentSerice!!!!");
     }
   }
 

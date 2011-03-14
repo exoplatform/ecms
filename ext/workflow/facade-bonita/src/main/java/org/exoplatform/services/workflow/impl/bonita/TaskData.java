@@ -64,8 +64,7 @@ public class TaskData implements Task {
 	  
 		  this.end = task.getBody().getEndedDate();
 	} catch (BonitaException e) {
-		
-		e.printStackTrace();
+		log.log(Level.WARNING, e.getMessage(), e);
 	}
 	if(log.isLoggable(Level.INFO)){
 		log.info("New task created [taskId,taskName,actorId,processId,instanceId,description,end]:" +

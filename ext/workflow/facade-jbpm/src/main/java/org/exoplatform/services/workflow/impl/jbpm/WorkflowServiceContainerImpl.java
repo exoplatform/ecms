@@ -182,7 +182,7 @@ public class WorkflowServiceContainerImpl implements
         }
       }
     } catch(Exception e) {
-    	e.printStackTrace();
+    	LOG.error(e);
     } finally {
       closeJbpmContext();
     }

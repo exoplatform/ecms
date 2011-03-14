@@ -258,7 +258,7 @@ public void addFile(String entryName, File file) {
     public InputStream getInputStream() {
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-      if (getType() == "Zip") {
+      if ("Zip".equalsIgnoreCase(getType())) {
         ZipOutputStream zos = new ZipOutputStream(baos);
         try {
           getZipOut(true, zos);

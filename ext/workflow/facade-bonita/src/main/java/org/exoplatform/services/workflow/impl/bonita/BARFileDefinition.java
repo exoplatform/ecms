@@ -49,6 +49,8 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import org.exoplatform.commons.utils.IOUtil;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ExoResourceBundle;
 import org.exoplatform.services.resources.XMLResourceBundleParser;
 import org.exoplatform.services.workflow.FileDefinition;
@@ -80,6 +82,8 @@ public class BARFileDefinition implements FileDefinition {
   /** URI identifying the XPDL namespace in XML documents */
   private static final String XPDL_NAMESPACE_URI =
     "http://www.wfmc.org/2002/XPDL1.0";
+  
+  private static final Log LOG = ExoLogger.getLogger(BARFileDefinition.class);
   
   
   /* (non-Javadoc)
@@ -540,7 +544,7 @@ public class BARFileDefinition implements FileDefinition {
       }
     }
     catch (Exception e) {
-      e.printStackTrace();
+    	LOG.warn(e.getMessage(), e);
     }
   }
 }

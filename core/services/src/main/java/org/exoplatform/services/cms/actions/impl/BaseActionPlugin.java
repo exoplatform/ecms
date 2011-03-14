@@ -361,7 +361,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
         session.logout();
       } catch (Exception e) {
         if(session != null) session.logout();
-        System.out.println("[WARNING] ==> Can not init action '" + action.getName() 
+        LOG.warn(" ==> Can not init action '" + action.getName() 
             //+ "' in repository '"+ getRepositoryName() 
             +"' and workspace '"+action.getSrcWorkspace()+"'") ;
       }
@@ -380,7 +380,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
           importAction(action,session) ;
         } catch (Exception e) {
           if(session != null) session.logout();
-          System.out.println("[WARNING] ==> Can not init action '" + action.getName() 
+          LOG.warn(" ==> Can not init action '" + action.getName() 
               + "' in repository '"+repository+"' and workspace '"+action.getSrcWorkspace()+"'") ;
         }
 //      }

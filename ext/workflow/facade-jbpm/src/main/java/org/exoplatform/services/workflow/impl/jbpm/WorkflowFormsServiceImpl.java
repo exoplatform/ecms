@@ -27,6 +27,8 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.workflow.Form;
 import org.exoplatform.services.workflow.WorkflowFormsService;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
@@ -45,6 +47,8 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
   private static Map                   allForms = new HashMap();
 
   private WorkflowServiceContainerImpl container;
+  
+  private static final Log LOG = ExoLogger.getLogger(WorkflowFormsServiceImpl.class);
 
   public WorkflowFormsServiceImpl(WorkflowServiceContainer workflowServiceContainer) {
     this.container = (WorkflowServiceContainerImpl) workflowServiceContainer;
@@ -91,7 +95,7 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
         }
         allForms.put(new Long(definitionId), stateNameToForms);
       } catch (DocumentException e) {
-        e.printStackTrace();
+    	  LOG.warn(e.getMessage(), e);
       }
     }
   }

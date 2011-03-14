@@ -255,11 +255,11 @@ public class UINameWebContentForm extends UIForm {
 
         	if ("nodeIdentifier".equals(preference.getName())) {
         		nodeIdentifier = preference.getValues().get(0).toString();
-        		if (nodeIdentifier == null || nodeIdentifier == "") break;
+        		if (nodeIdentifier == null || nodeIdentifier.length() == 0) break;
         	}
         }
         
-        if (isQuickCreate && (nodeIdentifier == null || nodeIdentifier == "")) {
+        if (isQuickCreate && (nodeIdentifier == null || nodeIdentifier.length() == 0)) {
         	applications.remove(applicationObject);
         }
       }

@@ -533,9 +533,7 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
 
   public Value[] addValueToArray (Value[] array, Value value2add) {
     Value[] newarray = new Value[array.length + 1];
-    for (int i = 0;i < array.length;i++){
-      newarray[i] = array[i];
-    }
+    System.arraycopy(array, 0, newarray, 0, array.length);
     newarray[array.length] = value2add;
     return newarray; 
   }
@@ -543,10 +541,10 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
   public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception{
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     ResourceBundleService resourceBundleService = (ResourceBundleService) container.getComponentInstanceOfType(ResourceBundleService.class);
-    ClassLoader cl=this.getClass().getClassLoader();
-    ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile,locale,cl);
+    ClassLoader cl = this.getClass().getClassLoader();
+    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile, locale, cl);
     String result = resourceBundle.getString(key);
-    return String.format(result,values);
+    return String.format(result, values);
   }
 
   @SuppressWarnings("unused")

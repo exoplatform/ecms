@@ -17,6 +17,8 @@
 
 package org.exoplatform.processes.holidays;
 
+import java.util.logging.Logger;
+
 import org.jbpm.graph.def.ActionHandler;
 import org.jbpm.graph.exe.ExecutionContext;
 
@@ -27,7 +29,10 @@ import org.jbpm.graph.exe.ExecutionContext;
  * Date: 12 mai 2004
  */
 public class MockActionHandler implements ActionHandler {
+	
+	private static Logger log = Logger.getLogger(MockDecisionHandler.class.getName());
+	
   public void execute(ExecutionContext executionContext) {
-    System.out.println("MockActionHandlerCalled");
+    log.info("MockActionHandlerCalled");
   }
 }

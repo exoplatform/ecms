@@ -185,8 +185,7 @@ public class ImportContentsJob implements Job {
                     }
 
                   } catch (Exception ie) {
-                    ie.printStackTrace();
-                    log.info("Error in ImportContentsJob: " + ie.getMessage());
+                    log.warn("Error in ImportContentsJob: " + ie.getMessage());
                   }
                 }
                 reader.close();

@@ -44,6 +44,8 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
@@ -89,6 +91,8 @@ import org.exoplatform.webui.event.EventListener;
 public class UICLVPresentation extends UIContainer {
 
 	public static final String defaultScvParam = "content-id";
+	
+	private static final Log LOG = ExoLogger.getLogger(UICLVPresentation.class);
 	
   /** The template path. */
   private String                   templatePath;
@@ -512,9 +516,11 @@ public class UICLVPresentation extends UIContainer {
 			} else {
 				header = folderNode.getName();
 			}
-		} catch (RepositoryException repositoryException) {		  
-		} catch (Exception e) {
-		}
+    } catch (RepositoryException repositoryException) {
+      LOG.warn(repositoryException.getMessage(), repositoryException);
+    } catch (Exception e) {
+      LOG.warn(e.getMessage(), e);
+    }
 		return header;
   }
   
@@ -567,8 +573,9 @@ public class UICLVPresentation extends UIContainer {
       uri = imagesRendererService.generateImageURI(illustrativeImage, null);
     } catch(PathNotFoundException ex) {
       // We don't do anything here because so many documents doesn't have illustration image
+      LOG.warn(ex.getMessage(), ex);
     } catch (Exception e) {
-      e.printStackTrace();
+      LOG.warn(e.getMessage(), e);
     }
     return uri;
   }

@@ -31,6 +31,8 @@ import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
 import org.exoplatform.container.RootContainer;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserHandler;
@@ -70,6 +72,8 @@ public class AutomaticFormImpl implements Form {
   
   /** Variables corresponding to this Form */
   private Hashtable<String, Map<String, Object>> variables;
+  
+  private static final Log LOG = ExoLogger.getExoLogger(AutomaticFormImpl.class);
   
   /**
    * This constructor is invoked to create a new Automatic Form.
@@ -127,7 +131,7 @@ public class AutomaticFormImpl implements Form {
     }
     catch(Exception e)
     {
-      e.printStackTrace();
+      LOG.warn(e.getMessage(), e);
     }
   }
 

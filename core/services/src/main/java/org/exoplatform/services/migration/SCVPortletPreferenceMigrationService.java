@@ -102,7 +102,7 @@ public class SCVPortletPreferenceMigrationService implements Startable {
         if (log.isInfoEnabled()) log.info("Add :: mop:portletpreference :: "+nodeName+" :-: "+value+ " ::" +stateNode.getPath());
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      log.warn(e.getMessage(), e);
     }
   }
 

@@ -23,6 +23,8 @@ import javax.jcr.Node;
 
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -36,6 +38,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  */
 public class CanValidateFilter implements UIExtensionFilter {
 
+	private static final Log LOG = ExoLogger.getLogger(CanValidateFilter.class);
 	/**
 	 * This method checks if the current node is of the right type
 	 */
@@ -80,6 +83,6 @@ public class CanValidateFilter implements UIExtensionFilter {
 	 * This is called when the filter has failed
 	 */
 	public void onDeny(Map<String, Object> context) throws Exception {
-		System.out.println("You can add a category in a exo:taxonomy node only.");
+		LOG.warn("You can add a category in a exo:taxonomy node only.");
 	}
 }

@@ -22,6 +22,9 @@ package org.exoplatform.services.common;
 import java.lang.ref.SoftReference;
 import java.lang.reflect.Constructor;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
  *  Author : Nhu Dinh Thuan
  *          Email:nhudinhthuan@yahoo.com
@@ -31,6 +34,8 @@ public class ThreadSoftRef<T> extends ThreadLocal<SoftReference<T>>
 {
 
    private Class<T> clazz;
+   
+   private static final Log LOG = ExoLogger.getLogger(ThreadSoftRef.class);
 
    @SuppressWarnings("unchecked")
    public ThreadSoftRef(Class<?> clazz)
@@ -51,7 +56,7 @@ public class ThreadSoftRef<T> extends ThreadLocal<SoftReference<T>>
          }
          catch (Exception exp)
          {
-            exp.printStackTrace();
+           LOG.warn(exp.getMessage(), exp);
          }
          set(sr);
       }

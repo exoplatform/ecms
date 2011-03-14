@@ -69,7 +69,7 @@ public class EmailNotifyListener implements EventListener {
       try {
         mailService.sendMessage(message) ; 
       }catch (Exception e) {
-        System.out.println("===> Exeption when send message to: " + message.getTo());
+        LOG.warn("===> Exeption when send message to: " + message.getTo());
         LOG.error("Unexpected error", e);        
       }      
     }

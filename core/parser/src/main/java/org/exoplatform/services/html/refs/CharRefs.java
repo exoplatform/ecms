@@ -48,9 +48,14 @@ package org.exoplatform.services.html.refs;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 final class CharRefs
 {
 
+  private static final Log LOG = ExoLogger.getLogger(CharRefs.class);
+  
    boolean sorted = false;
 
    CharRef[] charRefs = {
@@ -354,8 +359,8 @@ final class CharRefs
       }
       catch (Exception exp)
       {
-         exp.printStackTrace();
-         return null;
+        LOG.warn(exp.getMessage(), exp);
+        return null;
       }
    }
 

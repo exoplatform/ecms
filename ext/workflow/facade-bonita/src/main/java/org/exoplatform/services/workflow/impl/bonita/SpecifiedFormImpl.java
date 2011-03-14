@@ -32,6 +32,8 @@ import javax.xml.xpath.XPathFactory;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.workflow.FileDefinition;
 import org.exoplatform.services.workflow.Form;
 import org.w3c.dom.Attr;
@@ -76,6 +78,8 @@ public class SpecifiedFormImpl implements Form {
   
   /** Validation Message print after submit form */
   private String message;
+  
+  private static final Log LOG = ExoLogger.getLogger(SpecifiedFormImpl.class);
   
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.Form#getCustomizedView()
@@ -254,8 +258,7 @@ public class SpecifiedFormImpl implements Form {
           this.submitButtons.add(attributes);
       }
 	} catch (XPathExpressionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		LOG.warn(e.getMessage(), e);
 	}
     }
   }

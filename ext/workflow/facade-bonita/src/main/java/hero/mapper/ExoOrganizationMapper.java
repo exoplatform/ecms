@@ -55,16 +55,13 @@ public class ExoOrganizationMapper implements RoleMapper {
            
            participantDef = definitionAPI.getProcessParticipant(processId, roleId);
            return ExoOrganizationMapper.GetUsersFromMembershipAndGroup(participantDef.getName());
-       } catch (InstanceNotFoundException e) {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-       } catch (ProcessNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ParticipantNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		} catch (InstanceNotFoundException e) {
+          log.warn(e.getMessage(), e);
+		} catch (ProcessNotFoundException e) {
+          log.warn(e.getMessage(), e);
+		} catch (ParticipantNotFoundException e) {
+          log.warn(e.getMessage(), e);
+		}
        return null;
    }
 
@@ -125,8 +122,7 @@ public class ExoOrganizationMapper implements RoleMapper {
                }
            }
        } catch (Exception e) {
-           // TODO Use logging API instead
-           e.printStackTrace();
+    	   log.warn(e.getMessage(), e);
        }
 
        return users;

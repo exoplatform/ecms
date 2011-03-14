@@ -171,7 +171,7 @@ public class JcrConsole extends GenericPortlet {
       }
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
-      System.out.println("[ERROR] [jcr-concole] Can't execute command - " + e.getMessage());
+      LOG.error("[ERROR] [jcr-concole] Can't execute command - " + e.getMessage());
       printWriter.print("Invalid command\n");
     }
     finally {

@@ -16,6 +16,9 @@
  */
 package org.exoplatform.services.cms.taxonomy.impl;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+
 /**
  * Created by The eXo Platform SARL
  * Author : Ly Dinh Quang
@@ -24,7 +27,10 @@ package org.exoplatform.services.cms.taxonomy.impl;
  * Apr 1, 2009  
  */
 public class TaxonomyAlreadyExistsException extends Throwable {
+	
+	private static final Log LOG = ExoLogger.getLogger(TaxonomyAlreadyExistsException.class);
+	
   TaxonomyAlreadyExistsException() {
-    System.err.println("\nTaxonomy Name is existed");
+    LOG.info("\nTaxonomy Name is existed");
   }
 }

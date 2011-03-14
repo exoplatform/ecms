@@ -13,6 +13,9 @@
  **/
 package org.exoplatform.services.workflow.impl.bonita;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.security.auth.Subject;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
@@ -26,6 +29,8 @@ import org.ow2.bonita.identity.auth.BonitaPrincipal;
  */
 public class PVMSecurityManager {
 
+  private static Logger log = Logger.getLogger(PVMSecurityManager.class.getName());
+	
   public void commit(){
     Subject subject = null;
 
@@ -55,16 +60,15 @@ public class PVMSecurityManager {
       try {
         lc = new LoginContext("Bonita", s);
       } catch (LoginException le) {
-        le.printStackTrace();
+    	  log.log(Level.WARNING, le.getMessage(), le);
       } 
 
       try {
         lc.login();
         // if we return with no exception, authentication succeeded
       } catch (Exception e) {
-//      System.out.println("Login failed: " + e);
+    	  log.log(Level.WARNING, "Login failed: ", e);
       }
-//    }
     }
   }
 }
