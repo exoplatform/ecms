@@ -73,12 +73,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPageNodeSelector']/div/div/div[2]/div/div/div/div[1]/a</td>
+	<td>//a[@title='Up Level']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPageNodeSelector']/div/div/div[2]/div/div/div/div[1]/a</td>
+	<td>//a[@title='Up Level']</td>
 	<td></td>
 </tr>
 <tr>
@@ -89,7 +89,7 @@
 <tr>
 	<td>type</td>
 	<td>pageName</td>
-	<td>ASniffEcms03</td>
+	<td>Test_SNF_ECMS_03</td>
 </tr>
 <tr>
 	<td>echo</td>
@@ -303,12 +303,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div/div/div/div/div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[@id=&quot;UICLVPortlet&quot;]//a[contains(text(),&quot;OK&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div/div/div/div/div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[@id=&quot;UICLVPortlet&quot;]//a[contains(text(),&quot;OK&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -323,12 +323,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPageEditor']/div[1]/div/div/div/a[2]</td>
+	<td>//a[@title='Finish']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='UIPageEditor']/div[1]/div/div/div/a[2]</td>
+	<td>//a[@title='Finish']</td>
 	<td></td>
 </tr>
 <tr>
@@ -372,6 +372,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>searchTerm</td>
 	<td></td>
@@ -379,7 +384,7 @@
 <tr>
 	<td>type</td>
 	<td>searchTerm</td>
-	<td>ASniffEcms03</td>
+	<td>Test_SNF_ECMS_03</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -387,8 +392,13 @@
 	<td>label=Title</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@title=&quot;Quick Search&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//form[@id='UIPageSearch']/div[2]/a</td>
+	<td>//a[@title=&quot;Quick Search&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -412,13 +422,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Close popup message --</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div</td>
+	<td>//div[contains(@onclick,&quot;action=Close&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[5]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div</td>
+	<td>//div[contains(@onclick,&quot;action=Close&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -448,12 +463,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UINavigationNodeSelector']/div/div/div/div[2]/div/div/div[13]/div//a</td>
+	<td>//a[@title='Test_SNF_ECMS_03']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>//div[@id='UINavigationNodeSelector']/div/div/div/div[2]/div/div/div[13]/div//a</td>
+	<td>//a[@title='Test_SNF_ECMS_03']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete Node</td>
 	<td></td>
 </tr>
 <tr>
@@ -468,12 +488,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UINavigationManagement']/div[3]/table/tbody/tr/td[2]/div/div/div/div</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UINavigationManagement']/div[3]/table/tbody/tr/td[2]/div/div/div/div</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
