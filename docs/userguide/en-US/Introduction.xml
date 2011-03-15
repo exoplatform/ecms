@@ -3,29 +3,32 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-User_Guide-Overall_Introduction">
-	 <title>Overall Introduction</title>
+<chapter id="chap-User_Guide-Product_Introduction">
+	 <title>Product Introduction</title>
     
-    <!--FOR PUBLICAN -->
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Site_Publisher.xml">
-    <!--FOR JDOCBOOK:-->
-    <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
-        <xi:include href="eXo_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
-    </xi:fallback> </xi:include>
+    <xi:include href="Site_Publisher.xml" xmlns:xi="http://www.w3.org/2001/XInclude" >
+      <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
+         <xi:include href="eXo_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
+          <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
+             <xi:include href="Site_Publisher.xml" xmlns:xi="http://www.w3.org/2001/XInclude" >
+             </xi:include>
+          </xi:fallback>
+         </xi:include>
+    </xi:fallback> 
+    </xi:include>
 	
-	 <section id="sect-User_Guide-Overall_Introduction-Site_Content_Structure">
+	 <section id="sect-User_Guide-Product_Introduction-Site_Content_Structure">
 		<title>Site Content Structure</title>
 		 <para>
 			Creating a site is a quick process, but deciding what content to put in the site and how to organize it will take a lot of time. Thus, to mange a site more easily and more effectively, a site always has a specific structure as follows:
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
-				<imagedata align="center" fileref="images/sitecontent.png" format="PNG" scale="90" width="444" />
+				<imagedata align="center" fileref="images/sitecontent.png" format="PNG" />
 			</imageobject>
 			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/sitecontent.png" format="PNG" width="444" />
+            <imagedata align="center" fileref="images/sitecontent.png" format="PNG" width="150mm" />
 			</imageobject>
-
 		</mediaobject>
 		 <para>
 			The Site Content are stored in collaboration workspaces of Java Content Repository (JCR).
@@ -130,7 +133,7 @@
 
 	</section>
 	
-	 <section id="sect-User_Guide-Overall_Introduction-Web_Content">
+	 <section id="sect-User_Guide-Product_Introduction-Web_Content">
 		<title>Web Content</title>
 		 <section id="sect-User_Guide-Web_Content-Web_Content">
 			<title>Web Content</title>
@@ -194,7 +197,7 @@
 
 	</section>
 	
-	 <section id="sect-User_Guide-Overall_Introduction-Terminologies">
+	 <section id="sect-User_Guide-Product_Introduction-Terminologies">
 		<title>Terminologies</title>
 		 <section id="sect-User_Guide-Terminologies-Repository">
 			<title>Repository</title>
@@ -245,7 +248,7 @@
 					<term>Backup workspace:</term>
 					 <listitem>
 						<para>
-							The backup process depends on the published content timestamps, each published document has a duration for which it can be published and when it exceeds the timestamps, it will be automatically archived to the backup database. This workspace is mostly used when using the Workflow based content publication lifecycle.
+							The backup process depends on the published content timestamps, each published document has a duration for which it can be published and when it exceeds the timestamps, it will be automatically archived to the backup database. This workspace is mostly used when using the Workflow based content publication life-cycle.
 						</para>
 
 					</listitem>
@@ -318,14 +321,14 @@
 		 <section id="sect-User_Guide-Terminologies-Version">
 			<title>Version</title>
 			 <para>
-				Versioning means that at any given time the node's state can be saved for possible future recovery and the action of saving called 'checking in'. A workspace may contain both versionable and non-versionable nodes. A node is versionable if it has been assigned a mixin type mixin: versionable; otherwise, it is a nonversionable node. A version exists as a part of a version history graph that describes the predecessor/successor relations among versions of a particular versionable node.
+				Versioning means that at any given time the node's state can be saved for possible future recovery and the action of saving called 'checking in'. A workspace may contain both versionable and non-versionable nodes. A node is versionable if it has been assigned a mixin type mixin: versionable; otherwise, it is a non-versionable node. A version exists as a part of a version history graph that describes the predecessor/successor relations among versions of a particular versionable node.
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
-					<imagedata align="center" fileref="images/node.png" format="PNG" scale="100" />
+					<imagedata align="center" fileref="images/node.png" format="PNG" />
 				</imageobject>
 				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="70mm" fileref="images/node.png" format="PNG" />
+               <imagedata align="center" fileref="images/node.png" format="PNG" width="47mm"/>
 				</imageobject>
 
 			</mediaobject>
@@ -402,10 +405,10 @@
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
-					<imagedata align="center" fileref="images/symlink.png" format="PNG" scale="100" />
+					<imagedata align="center" fileref="images/symlink.png" format="PNG"  />
 				</imageobject>
 				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="70mm" fileref="images/symlink.png" format="PNG" />
+               <imagedata align="center" fileref="images/symlink.png" format="PNG" width="31mm"/>
 				</imageobject>
 
 			</mediaobject>

@@ -13,23 +13,24 @@
     <title/>
     <step>
       <para>
-    Click 
-    <inlinemediaobject>
+    Click the <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/preferencesettingicon.png" format="PNG"/>
+            <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="10mm"/>
           </imageobject>
-        </inlinemediaobject>
-     on the right side of the <emphasis role="bold">Content Explorer</emphasis> portlet.
+          <textobject>
+             <phrase>sprocket</phrase>
+          </textobject>
+        </inlinemediaobject> icon on the right side of the <emphasis role="bold">Content Explorer</emphasis> portlet.
    </para>
       <para>
     The <emphasis role="bold">Preference Setting</emphasis> window will appear:
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="" fileref="images/preferencesettingform.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/preferencesettingform.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/preferencesettingform.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/preferencesettingform.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
       <table>

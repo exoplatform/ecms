@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Dynamic_Navigation">
-	<!--  This document was created with Syntext Serna Free.  --> <title>Dynamic Navigation</title>
+	<title>Dynamic Navigation</title>
 	 <para>
 		Dynamic Navigation enables you to get a parameter to configure the portlet by URL. It means that the URL containing the content path can be dynamically changed.
 	</para>
@@ -37,12 +37,14 @@
 			</para>
 			 <para>
 				<emphasis role="bold">Dynamic Navigation in SCV</emphasis>
-				<mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/dynamicnavigationscv.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
+            <mediaobject>
+               <imageobject role="html">
+                  <imagedata fileref="images/dynamicnavigationscv.png" format="PNG" align="center"/>
+               </imageobject>
+               <imageobject role="fo">
+                  <imagedata fileref="images/dynamicnavigationscv.png" format="PNG" align="center" width="150mm" />
+               </imageobject>
+            </mediaobject>
 			</para>
 			 <para>
 				Details:
@@ -105,12 +107,14 @@
 			</para>
 			 <para>
 				<emphasis role="bold">Dynamic Navigation in CLV</emphasis>
-				<mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/dynamicnavigation-clv.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
+            <mediaobject>
+               <imageobject role="html">
+                  <imagedata fileref="images/dynamicnavigation-clv.png" format="PNG" align="center"/>
+               </imageobject>
+               <imageobject role="fo">
+                  <imagedata fileref="images/dynamicnavigation-clv.png" format="PNG" align="center" width="150mm"  />
+               </imageobject>
+            </mediaobject>
 			</para>
 			 <para>
 				Details:

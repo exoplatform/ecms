@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Drives">
-	<!--  This document was created with Syntext Serna Free.  --> <title>Drives</title>
+  <title>Drives</title>
 	 <section id="sect-User_Guide-Drives-Private_drive">
 		<title>Private drive</title>
 		 <para>
@@ -12,10 +12,10 @@
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
-				<imagedata align="center" fileref="images/privatedrive.png" format="PNG" scale="110" width="444" />
+				<imagedata align="center" fileref="images/privatedrive.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/privatedrive.png" format="PNG" width="444" />
+            <imagedata align="center"  fileref="images/privatedrive.png" format="PNG" width="150mm" />
 			</imageobject>
 
 		</mediaobject>
@@ -26,10 +26,10 @@
 			<listitem>
 				<mediaobject>
 					<imageobject role="html">
-						<imagedata align="center" fileref="images/actionstab.png" format="PNG" scale="90" />
+						<imagedata align="center" fileref="images/actionstab.png" format="PNG"  />
 					</imageobject>
 					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/actionstab.png" format="PNG" />
+                  <imagedata align="center"  fileref="images/actionstab.png" format="PNG" width="117mm"/>
 					</imageobject>
 
 				</mediaobject>
@@ -77,10 +77,10 @@
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
-						<imagedata align="center" fileref="images/collaborationtab.png" format="PNG" scale="90" width="444" />
+						<imagedata align="center" fileref="images/collaborationtab.png" format="PNG"   />
 					</imageobject>
 					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/collaborationtab.png" format="PNG" width="444" />
+                  <imagedata align="center"  fileref="images/collaborationtab.png" format="PNG" width="150mm" />
 					</imageobject>
 
 				</mediaobject>
@@ -200,10 +200,10 @@
 		<title>Public drive</title>
 		 <mediaobject>
 			<imageobject role="html">
-				<imagedata align="center" fileref="images/publicdrive.png" format="PNG" scale="110" width="444" />
+				<imagedata align="center" fileref="images/publicdrive.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/publicdrive.png" format="PNG" width="444" />
+            <imagedata align="center"  fileref="images/publicdrive.png" format="PNG" width="150mm" />
 			</imageobject>
 
 		</mediaobject>
@@ -223,10 +223,10 @@
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
-				<imagedata align="center" fileref="images/groupdrive.png" format="PNG" scale="110" width="444" />
+				<imagedata align="center" fileref="images/groupdrive.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/groupdrive.png" format="PNG" width="444" />
+            <imagedata align="center"  fileref="images/groupdrive.png" format="PNG" width="150mm" />
 			</imageobject>
 
 		</mediaobject>
@@ -237,10 +237,10 @@
 		<title>Shared Users Space drive</title>
 		 <mediaobject>
 			<imageobject role="html">
-				<imagedata align="center" fileref="images/shareddrive.png" format="PNG" scale="110" width="444" />
+				<imagedata align="center" fileref="images/shareddrive.png" format="PNG"   />
 			</imageobject>
 			 <imageobject role="fo">
-				<imagedata align="center" contentwidth="150mm" fileref="images/shareddrive.png" format="PNG" width="444" />
+            <imagedata align="center"  fileref="images/shareddrive.png" format="PNG" width="150mm" />
 			</imageobject>
 
 		</mediaobject>
@@ -333,25 +333,24 @@
 					<title>Method 1</title>
 					 <step>
 						<para>
-							Click 
+							Click the 
 							<inlinemediaobject>
 								<imageobject>
-									<imagedata fileref="images/preferencesettingicon.png" format="PNG" />
+                           <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="10mm" />
 								</imageobject>
-
-							</inlinemediaobject>
-							 to open the <emphasis role="bold">Preferences</emphasis>:
+                        <textobject>
+                           <phrase>sprocket</phrase>
+                        </textobject>
+							</inlinemediaobject> icon to open the <emphasis role="bold">Preferences</emphasis>:
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
-								<imagedata align="center" fileref="images/preferencesetting.png" format="PNG" scale="90" width="444" />
+								<imagedata align="center" fileref="images/preferencesetting.png" format="PNG"   />
 							</imageobject>
 							 <imageobject role="fo">
-								<imagedata align="center" contentwidth="150mm" fileref="images/preferencesetting.png" format="PNG" width="444" />
+                        <imagedata align="center"  fileref="images/preferencesetting.png" format="PNG" width="143mm" />
 							</imageobject>
-
 						</mediaobject>
-
 					</step>
 					 <step>
 						<para>
@@ -362,10 +361,10 @@
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
-								<imagedata align="center" fileref="images/hidesidebar.png" format="PNG" scale="110" width="444" />
+								<imagedata align="center" fileref="images/hidesidebar.png" format="PNG"   />
 							</imageobject>
 							 <imageobject role="fo">
-								<imagedata align="center" contentwidth="150mm" fileref="images/hidesidebar.png" format="PNG" width="444" />
+                        <imagedata align="center"  fileref="images/hidesidebar.png" format="PNG" width="150mm" />
 							</imageobject>
 
 						</mediaobject>
@@ -391,10 +390,10 @@
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
-								<imagedata align="center" fileref="images/sidebarborder.png" format="PNG" scale="110" width="444" />
+								<imagedata align="center" fileref="images/sidebarborder.png" format="PNG"   />
 							</imageobject>
 							 <imageobject role="fo">
-								<imagedata align="center" contentwidth="150mm" fileref="images/sidebarborder.png" format="PNG" width="444" />
+                        <imagedata align="center"  fileref="images/sidebarborder.png" format="PNG" width="150mm" />
 							</imageobject>
 
 						</mediaobject>

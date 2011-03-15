@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Change_The_Display_Language">
-  <title>Change The Display Language</title>
+  <title>Change the display language</title>
   <para>
   The priority order of display language is shown to the following order:
  </para>
@@ -29,17 +30,19 @@
   Thus, to display your preferred language, you should pay attention to this order to change the language type appropriately.
  </para>
   <procedure>
-    <title/>
     <step>
       <para>
-    Move the mouse on <emphasis role="bold">eXo &gt; Change Language </emphasis>on the top left corner of the portal:
+    Move the mouse over <menuchoice>
+       <guimenu>Start Logo</guimenu>
+       <guimenuitem>Change Language</guimenuitem>
+    </menuchoice> on the top left corner of the portal:
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="70" fileref="images/startlogo2.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/startlogo2.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/startlogo2.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/startlogo2.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
       <para>
@@ -47,23 +50,24 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="90" fileref="images/languagesetting.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/languagesetting.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/languagesetting.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/languagesetting.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
     </step>
     <step>
       <para>
-    Select the another language in the list. The currently selected language will be marked with the 
-    <inlinemediaobject>
+    Select the another language in the list. The currently selected language will be marked with the <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/tickicon.png" format="PNG"/>
+            <imagedata fileref="images/tickicon.png" format="PNG" width="4mm"/>
           </imageobject>
-        </inlinemediaobject>
-     icon.
-   </para>
+          <textobject>
+             <phrase>blue tick</phrase>
+          </textobject>
+        </inlinemediaobject> icon.
+        </para>
     </step>
     <step>
       <para>

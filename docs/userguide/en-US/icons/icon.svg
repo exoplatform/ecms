@@ -12,7 +12,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
-   width="32"
+   
    height="32"
    id="svg3017"
    sodipodi:version="0.32"
@@ -32,7 +32,7 @@
   </metadata>
   <sodipodi:namedview
      inkscape:window-height="480"
-     inkscape:window-width="858"
+     inkscape:window-
      inkscape:pageshadow="0"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -3196,7 +3196,7 @@
        patternTransform="matrix(0.592927,0,0,0.592927,78,462)"
        id="cream-spots"
        height="32"
-       width="32"
+       
        patternUnits="userSpaceOnUse">
       <g
          transform="translate(-365.3146,-513.505)"
@@ -3214,7 +3214,7 @@
        patternTransform="matrix(0.733751,0,0,0.733751,67,367)"
        id="dark-cream-spots"
        height="32"
-       width="32"
+       
        patternUnits="userSpaceOnUse">
       <g
          transform="translate(-408.0946,-513.505)"
@@ -3231,7 +3231,7 @@
        patternTransform="matrix(0.375,0,0,0.375,379,400)"
        id="white-spots"
        height="32"
-       width="32"
+       
        patternUnits="userSpaceOnUse">
       <g
          transform="translate(-484.3997,-513.505)"
@@ -3248,7 +3248,7 @@
        patternTransform="matrix(0.455007,0,0,0.455007,-5e-5,1.9e-5)"
        id="black-spots"
        height="32"
-       width="32"
+       
        patternUnits="userSpaceOnUse">
       <g
          transform="translate(-448.3997,-513.505)"

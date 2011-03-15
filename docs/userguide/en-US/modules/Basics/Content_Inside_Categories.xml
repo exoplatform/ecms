@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Content_Inside_Categories">
-	<!--  This document was created with Syntext Serna Free.  --> <title>Content Inside Categories</title>
+  <title>Content Inside Categories</title>
 	 <para>
 		You can create new contents in any folders or directly in a CLV with Incontext Editing. However, creating contents inside a category helps you easily and quickly manage and publish them.
 	</para>
@@ -36,24 +36,28 @@
 				<para>
 					Go to <emphasis role="bold">Group &gt; Content Explorer &gt; </emphasis>select a category in a drive. For example, select <emphasis role="bold">Acme </emphasis>drive as the following illustration.
 				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/selectcategory.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
+             <mediaobject>
+                <imageobject role="html">
+                   <imagedata fileref="images/selectcategory.png" format="PNG" align="center"/>
+                </imageobject>
+                <imageobject role="fo">
+                   <imagedata fileref="images/selectcategory.png" format="PNG" align="center" width="150mm" />
+                </imageobject>
+             </mediaobject>
 
 			</step>
 			 <step>
 				<para>
 					Click the <emphasis role="bold">Add Document</emphasis> button to create a new content. See <xref linkend="sect-User_Guide-Actions-Add_a_document" /> to know how to add a new content. The new content is a symlink.
 				</para>
-				 <mediaobject>
-					<imageobject>
-						<imagedata align="center" fileref="images/createdcontent.png" format="PNG" width="444" />
-					</imageobject>
-
-				</mediaobject>
+             <mediaobject>
+                <imageobject role="html">
+                   <imagedata fileref="images/createdcontent.png" format="PNG" align="center"/>
+                </imageobject>
+                <imageobject role="fo">
+                   <imagedata fileref="images/createdcontent.png" format="PNG" align="center" width="150mm" />
+                </imageobject>
+             </mediaobject>
 				 <para>
 					Click the symlink to view the content.
 				</para>
@@ -72,7 +76,7 @@
     <para>If the content is not published, you cannot see it in the Published Mode. To see it in Category Navigation, turn on the Edit Mode.</para>
     <mediaobject>
       <imageobject>
-        <imagedata width="444" align="center" fileref="images/organizecontent.png" format="PNG"/>
+        <imagedata  align="center" fileref="images/organizecontent.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>Here, you can edit and publish it. See <xref linkend="sect-User_Guide-Contribute_Content"/> the to know how to edit and publish a content.</para>

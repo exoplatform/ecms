@@ -15,20 +15,26 @@
    Go to <emphasis role="bold">Administration &gt; Advanced Configuration &gt; Manage Queries.</emphasis>
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" contentwidth="150mm" align="center" fileref="images/managequeriestable.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/managequeriestable.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/managequeriestable.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
     </mediaobject>
     <procedure id="proc-User_Guide-Manage_Queries-Add_a_new_query">
       <title>Add a new query</title>
       <step>
         <para>
-     Show the <emphasis role="bold">Add Query</emphasis> form by clicking the <guibutton>Add Query</guibutton> button in the <emphasis role="bold">Manage Queries</emphasis> form.
+     Open the <emphasis role="bold">Add Query</emphasis> form by clicking the <guibutton>Add Query</guibutton> button in the <emphasis role="bold">Manage Queries</emphasis> form.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/addqueryform.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/addqueryform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/addqueryform.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -68,17 +74,23 @@
       </step>
       <step>
         <para>
-     Select permissions for a group that can use this query by clicking 
+     Select permissions for a group that can use this query by clicking the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/pluspermissionbutton.png" format="PNG"/>
+              <imagedata fileref="images/pluspermissionbutton.png" format="PNG" width="8mm"/>
             </imageobject>
-          </inlinemediaobject>
+            <textobject>
+               <phrase>green plus</phrase>
+            </textobject>
+          </inlinemediaobject> icon.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/selectpermission.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/selectpermission.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/selectpermission.png" format="PNG" align="center" width="146mm"/>
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -94,15 +106,21 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG"/>
+              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
           </inlinemediaobject>
       icon corresponding to the query you want to edit. The <emphasis role="bold">Edit Query</emphasis> form will appear:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/editqueryform.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/editqueryform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/editqueryform.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -123,10 +141,13 @@
      Click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
           </inlinemediaobject>
-      corresponding to the query you want to delete. A confirmation message will appear.
+      icon corresponding to the query you want to delete. A confirmation message will appear.
     </para>
       </step>
       <step>
@@ -145,9 +166,12 @@
    Go to <emphasis role="bold">Administration &gt; Advanced Configuration &gt; Manage Scripts</emphasis>.
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/managescriptsform.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/managescriptsform.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/managescriptsform.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
     </mediaobject>
     <para>
    Details: 
@@ -179,9 +203,12 @@
      Click the <emphasis role="bold">Add</emphasis> button to open the <emphasis role="bold">Add/Edit script</emphasis> form:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/ecmaddeditscriptsform.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/ecmaddeditscriptsform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/ecmaddeditscriptsform.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -222,14 +249,17 @@
      In the <emphasis role="bold">ECM Scripts</emphasis> tab, click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG"/>
+              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
           </inlinemediaobject>
       icon that corresponds to the script that you want to edit. The <emphasis role="bold">Add/Edit script</emphasis> form will appear:
     </para>
         <mediaobject>
           <imageobject>
-            <imagedata width="444" align="center" fileref="images/addeditscriptsform.png" format="PNG"/>
+            <imagedata  align="center" fileref="images/addeditscriptsform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -254,10 +284,13 @@
      In the <emphasis role="bold">ECM Scripts</emphasis> tab, click 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
           </inlinemediaobject>
-      on the script that you want to delete. A confirmation message will appear.
+      icon on the script that you want to delete. A confirmation message will appear.
     </para>
       </step>
       <step>
@@ -270,9 +303,12 @@
    <emphasis role="bold">The BC Scripts tab:</emphasis>
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/bcscriptstab.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/bcscriptstab.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/bcscriptstab.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
     </mediaobject>
     <procedure id="proc-User_Guide-Manage_Scripts-Add_a_BC_script">
       <title>Add a BC script</title>
@@ -289,9 +325,12 @@
      Click <emphasis role="bold">Add</emphasis> to open the <emphasis role="bold">Add/Edit script</emphasis> form:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/bcaddeditscriptform.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/bcaddeditscriptform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/bcaddeditscriptform.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -317,21 +356,27 @@
    </para>
       <step>
         <para>
-     In the <emphasis role="bold">BC Script</emphasis> tab, click 
+     In the <emphasis role="bold">BC Script</emphasis> tab, click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG"/>
+              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
           </inlinemediaobject>
-      on a script that you want to edit.
+      icon on a script that you want to edit.
     </para>
         <para>
      The <emphasis role="bold">Add/Edit script</emphasis> form will appear:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/bceditscriptform.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/bceditscriptform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/bceditscriptform.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -352,13 +397,15 @@
    </para>
       <step>
         <para>
-     In the <emphasis role="bold">BC Scripts</emphasis> tab, click 
+     In the <emphasis role="bold">BC Scripts</emphasis> tab, click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      on the script you want to delete. A confirmation message appears.
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon on the script you want to delete. A confirmation message appears.
     </para>
       </step>
       <step>
@@ -385,20 +432,26 @@
      Select <emphasis role="bold">Advanced Configuration &gt; Manage Unlocks</emphasis> on the <emphasis role="bold">Manage the main ECM functions</emphasis> pane on the left. The locked nodes will be listed on the right panel.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/manageunlockstab.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/manageunlockstab.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/manageunlockstab.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
         <para>
-     In the <emphasis role="bold">Locked Node</emphasis> tab on the right panel, administrators can unlock nodes by clicking 
+     In the <emphasis role="bold">Locked Node</emphasis> tab on the right panel, administrators can unlock nodes by clicking the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/unlockicon.png" format="PNG"/>
+              <imagedata fileref="images/unlockicon.png" format="PNG" width="8mm"/>
             </imageobject>
+            <textobject>
+               <phrase>open lock</phrase>
+            </textobject>
           </inlinemediaobject>
-      that corresponds to nodes which need to be unlocked. The unlocked nodes will disappear from the locked node list.
+      icon that corresponds to nodes which need to be unlocked. The unlocked nodes will disappear from the locked node list.
     </para>
         <para>
      Administrators can manage and add the unlock permission for another group and users in the <emphasis role="bold">Manage Lock</emphasis> tab.
@@ -409,15 +462,20 @@
      Select the group on the <emphasis role="bold">Select group</emphasis> panel and the corresponding membership on the <emphasis role="bold">Select membership</emphasis>panel. The selected group will be listed in the <emphasis role="bold">Group and Users</emphasis> column. However, administrators can also click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG"/>
+              <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      if they want to allow any users to unlock nodes.
+            <textobject>
+               <phrase>plus</phrase>
+            </textobject>
+          </inlinemediaobject> icon if they want to allow any users to unlock nodes.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/manageunlocksform.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/manageunlocksform.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -425,10 +483,12 @@
      In case, administrators want to remove the unlock permission of groups, click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      that corresponds to the group in order to remove them form the Unlock permission list except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon that corresponds to the group in order to remove them form the Unlock permission list except the group <filename>*:/platform/administrator</filename> and <literal>root</literal>.
     </para>
       </step>
     </procedure>
@@ -450,9 +510,12 @@
      Select <emphasis role="bold">Advanced Configuration &gt; Create an Action Type</emphasis>.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/createactiontypetab.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/createactiontypetab.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/createactiontypetab.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -460,9 +523,12 @@
      Click the <emphasis role="bold">Add</emphasis> button to open the <emphasis role="bold">Action Type Form</emphasis> form:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/createactiontypeform.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/createactiontypeform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/createactiontypeform.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -485,26 +551,32 @@
      Select an execute for the <emphasis role="bold">Execute</emphasis> field.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata align="center" fileref="images/createactiontypeexecuteform.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/createactiontypeexecuteform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/createactiontypeexecuteform.png" format="PNG" align="center" width="106mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
         <para>
-     The <emphasis role="bold">Variables</emphasis> field: allows creating multi-values for action. If you want to add more values for action, click 
-     <inlinemediaobject>
+     The <emphasis role="bold">Variables</emphasis> field: allows creating multi-values for action. If you want to add more values for action, click the <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG"/>
+              <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
             </imageobject>
-          </inlinemediaobject>
-      . Click 
-     <inlinemediaobject>
+            <textobject>
+               <phrase>plus</phrase>
+            </textobject>
+          </inlinemediaobject> icon. Click the 
+            <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG"/>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
-          </inlinemediaobject>
-      to delete a value.
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon to delete a value.
     </para>
       </step>
       <step>

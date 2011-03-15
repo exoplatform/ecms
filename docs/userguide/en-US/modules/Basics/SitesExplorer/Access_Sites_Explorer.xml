@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Access_Content_Explorer">
-	<!--  This document was created with Syntext Serna Free.  --> <title>Access Content Explorer</title>
+	<title>Access Content Explorer</title>
 	 <para>
 		This page is used to manage all documents in different drives. This is really the flexible way because you can do through the Internet anytime and anywhere. By default, anyone can access Content Explorer but performing actions on Content Explorer depending on the role of each user.
 	</para>
@@ -16,10 +16,10 @@
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
-					<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG" scale="100" width="444" />
+					<imagedata align="center" fileref="images/sitesexplorer.png" format="PNG"   />
 				</imageobject>
 				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="150mm" fileref="images/sitesexplorer.png" format="PNG" width="444" />
+               <imagedata align="center"  fileref="images/sitesexplorer.png" format="PNG" width="150mm" />
 				</imageobject>
 
 			</mediaobject>
@@ -28,10 +28,10 @@
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
-					<imagedata align="center" fileref="images/alldrives.png" format="PNG" scale="90" width="444" />
+					<imagedata align="center" fileref="images/alldrives.png" format="PNG"   />
 				</imageobject>
 				 <imageobject role="fo">
-					<imagedata align="center" contentwidth="150mm" fileref="images/alldrives.png" format="PNG" width="444" />
+               <imagedata align="center"  fileref="images/alldrives.png" format="PNG" width="150mm" />
 				</imageobject>
 
 			</mediaobject>
@@ -47,10 +47,10 @@
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
-								<imagedata align="center" fileref="images/personaldrivesharing.png" format="PNG" scale="100" />
+								<imagedata align="center" fileref="images/personaldrivesharing.png" format="PNG"  />
 							</imageobject>
 							 <imageobject role="fo">
-								<imagedata align="center" contentwidth="150mm" fileref="images/personaldrivesharing.png" format="PNG" />
+                        <imagedata align="center"  fileref="images/personaldrivesharing.png" format="PNG" width="86mm"/>
 							</imageobject>
 
 						</mediaobject>
@@ -69,10 +69,10 @@
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
-								<imagedata align="center" fileref="images/groupdrives.png" format="PNG" scale="110" width="444" />
+								<imagedata align="center" fileref="images/groupdrives.png" format="PNG"   />
 							</imageobject>
 							 <imageobject role="fo">
-								<imagedata align="center" contentwidth="150mm" fileref="images/groupdrives.png" format="PNG" width="444" />
+                        <imagedata align="center"  fileref="images/groupdrives.png" format="PNG" width="150mm" />
 							</imageobject>
 
 						</mediaobject>

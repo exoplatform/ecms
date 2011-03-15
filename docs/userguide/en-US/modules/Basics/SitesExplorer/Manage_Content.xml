@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Manage_Content_In_Content_Explorer">
-	<!--  This document was created with Syntext Serna Free.  --> <title>Manage Content In Content Explorer</title>
+	<title>Manage Content In Content Explorer</title>
 	 <para>
 		A web content is a key resource to make a site. Other resources make a site more dynamic and animated by using layout, color, font, and more.This section focuses on how to manage a web content in a specific site.
 	</para>
@@ -36,10 +36,10 @@
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
-						<imagedata align="center" fileref="images/webcontentfolder.png" format="PNG" scale="90" width="444" />
+						<imagedata align="center" fileref="images/webcontentfolder.png" format="PNG"   />
 					</imageobject>
 					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/webcontentfolder.png" format="PNG" width="444" />
+                  <imagedata align="center"  fileref="images/webcontentfolder.png" format="PNG" width="150mm" />
 					</imageobject>
 
 				</mediaobject>
@@ -68,14 +68,15 @@
 			</step>
 			 <step>
 				<para>
-					Open the Add New Document form by clicking 
+					Open the Add New Document form by clicking the 
 					<inlinemediaobject>
 						<imageobject>
-							<imagedata fileref="images/adddocumenticon.png" format="PNG" />
+                     <imagedata fileref="images/adddocumenticon.png" format="PNG" width="28mm"/>
 						</imageobject>
-
-					</inlinemediaobject>
-					 on the Action bar.
+                  <textobject>
+                     <phrase>[ Add Document ]</phrase>
+                  </textobject>
+					</inlinemediaobject> icon on the Action bar.
 				</para>
 
 			</step>
@@ -85,10 +86,10 @@
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
-						<imagedata align="center" fileref="images/maincontenttab.png" format="PNG" scale="90" width="444" />
+						<imagedata align="center" fileref="images/maincontenttab.png" format="PNG"   />
 					</imageobject>
 					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/maincontenttab.png" format="PNG" width="444" />
+                  <imagedata align="center"  fileref="images/maincontenttab.png" format="PNG" width="150mm" />
 					</imageobject>
 
 				</mediaobject>
@@ -201,10 +202,10 @@
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
-						<imagedata align="center" fileref="images/illustrationtab.png" format="PNG" scale="90" width="444" />
+						<imagedata align="center" fileref="images/illustrationtab.png" format="PNG"   />
 					</imageobject>
 					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/illustrationtab.png" format="PNG" width="444" />
+                  <imagedata align="center"  fileref="images/illustrationtab.png" format="PNG" width="150mm" />
 					</imageobject>
 
 				</mediaobject>
@@ -285,10 +286,10 @@
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
-						<imagedata align="center" fileref="images/advancedtab.png" format="PNG" scale="90" width="444" />
+						<imagedata align="center" fileref="images/advancedtab.png" format="PNG"   />
 					</imageobject>
 					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/advancedtab.png" format="PNG" width="444" />
+                  <imagedata align="center"  fileref="images/advancedtab.png" format="PNG" width="150mm" />
 					</imageobject>
 
 				</mediaobject>
@@ -364,14 +365,15 @@
 			</step>
 			 <step>
 				<para>
-					Click 
+					Click the 
 					<inlinemediaobject>
 						<imageobject>
-							<imagedata fileref="images/editdocumenticon.png" format="PNG" />
+                     <imagedata fileref="images/editdocumenticon.png" format="PNG" width="38mm" />
 						</imageobject>
-
-					</inlinemediaobject>
-					on the action bar to show the edit form of the selected web content as the Add New Document form.
+                  <textobject>
+                     <phrase>[ Edit Document ]</phrase>
+                  </textobject>
+					</inlinemediaobject> icon on the action bar to show the edit form of the selected web content as the Add New Document form.
 				</para>
 
 			</step>
@@ -416,10 +418,10 @@
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
-						<imagedata align="center" fileref="images/selectdelete.png" format="PNG" scale="50" />
+						<imagedata align="center" fileref="images/selectdelete.png" format="PNG"  />
 					</imageobject>
 					 <imageobject role="fo">
-						<imagedata align="center" contentwidth="150mm" fileref="images/selectdelete.png" format="PNG" />
+                  <imagedata align="center"  fileref="images/selectdelete.png" format="PNG" width="75mm"/>
 					</imageobject>
 
 				</mediaobject>

@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
@@ -14,9 +15,12 @@
    Go to <guimenu>Administration &gt; Categories and Tags &gt; Manage Tags</guimenu>.
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/JBoss_product_and_documentation_overview.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/JBoss_product_and_documentation_overview.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/JBoss_product_and_documentation_overview.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
     </mediaobject>
     <section id="sect-User_Guide-Manage_Tags-Add_a_tag_style">
       <title>Add a tag style</title>
@@ -30,9 +34,12 @@
       Click the <guibutton>Add style</guibutton> button. The <guibutton>Add tag style configuration</guibutton> form will appear:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/editstyletagconfig.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/editstyletagconfig.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       Details:
@@ -55,10 +62,10 @@
               </listitem>
             </varlistentry>
             <varlistentry>
-              <term>Html style</term>
+              <term>HTML style</term>
               <listitem>
                 <para>
-         Include font-size, font-weight, colour, font-family, text-decoration. (*Required).
+         Include font-size, font-weight, color, font-family, text-decoration. (*Required).
         </para>
               </listitem>
             </varlistentry>
@@ -84,7 +91,7 @@
           </listitem>
           <listitem>
             <para>
-       The &apos;Html style&apos; text box cannot be empty: you can change values of font-size, font–weight, color, font-family, text-decoration.
+       The &apos;HTML style&apos; text box cannot be empty: you can change values of font-size, font–weight, color, font-family, text-decoration.
       </para>
           </listitem>
         </itemizedlist>
@@ -106,7 +113,7 @@
         </step>
         <step>
           <para>
-      Change values in the fields <guimenu>Document range</guimenu> and <guimenu>Html style</guimenu>, except <guimenu>Style name</guimenu>.</para>
+      Change values in the fields <guimenu>Document range</guimenu> and <guimenu>HTML style</guimenu>, except <guimenu>Style name</guimenu>.</para>
         </step>
         <step>
           <para>
@@ -120,9 +127,12 @@
       <para>To delete one tag style, simply click the corresponding <emphasis role="bold">Delete</emphasis> icon and select <emphasis role="bold">OK</emphasis> in the confirmation to accept your deletion. 
    </para>
       <mediaobject>
-        <imageobject>
-          <imagedata width="500" align="center" fileref="images/confirmdeletion.png" format="PNG"/>
-        </imageobject>
+         <imageobject role="html">
+            <imagedata fileref="images/confirmdeletion.png" format="PNG" align="center"/>
+         </imageobject>
+         <imageobject role="fo">
+            <imagedata fileref="images/confirmdeletion.png" format="PNG" align="center" width="101mm" />
+         </imageobject>
       </mediaobject>
     </section>
     <section id="sect-User_Guide-Manage_Tags-Tag_Permission_Manager">
@@ -131,9 +141,12 @@
     The <guilabel>Tag permission manager</guilabel> tab helps you  set permissions regarding editing and deleting public tags.
    </para>
       <mediaobject>
-        <imageobject>
-          <imagedata width="444" align="center" fileref="images/tagpermissionmanager.png" format="PNG"/>
-        </imageobject>
+         <imageobject role="html">
+            <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center"/>
+         </imageobject>
+         <imageobject role="fo">
+            <imagedata fileref="images/tagpermissionmanager.png" format="PNG" align="center" width="150mm"/>
+         </imageobject>
       </mediaobject>
       <procedure id="proc-User_Guide-Tag_Permission_Manager-Set_Permission_To_Tag_Management">
         <title>Set Permission To Tag Management</title>
@@ -141,14 +154,20 @@
           <para>
       Click the <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/userpermissionbutton.png" format="PNG"/>
+                <imagedata fileref="images/userpermissionbutton.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject> icon to select memberships in order to add a permission for those memberships. The Select membership form will appear:
+              <textobject>
+                 <phrase>"Select user"</phrase>
+              </textobject>
+            </inlinemediaobject> icon beside the <guilabel>Memberships</guilabel> field to select memberships in order to add a permission for those memberships. The Select membership form will appear:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/selectmembership.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/selectmembership.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/selectmembership.png" format="PNG" align="center" width="146mm"/>
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -156,9 +175,12 @@
       Select a group on the left and the corresponding membership on the right. The selected membership will appear in the <guilabel>Memberships</guilabel> field:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/memberships.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/memberships.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/memberships.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -166,15 +188,18 @@
       Click <guibutton>Save</guibutton> to accept adding a permission for the  membership to the <guilabel>Memberships</guilabel> column.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/managemembership.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/managemembership.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/managemembership.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       You can also delete memberships that have permissions by clicking the Delete icon relevant to that membership, and then click <emphasis role="bold">OK</emphasis> in the confirmation message.</para>
           <mediaobject>
             <imageobject>
-              <imagedata width="500" align="center" fileref="images/accept_delete.png" format="PNG"/>
+              <imagedata  align="center" fileref="images/accept_delete.png" format="PNG" width="104mm" />
             </imageobject>
           </mediaobject>
         </step>
@@ -190,9 +215,12 @@
    Go to <guilabel>Administration &gt; Categories and Tags &gt; Manage Categories</guilabel>.
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" align="center" fileref="images/manage_taxonomy_trees.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/manage_taxonomy_trees.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/manage_taxonomy_trees.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Categories_and_Tags-Add_a_Taxonomy_Tree">
@@ -207,9 +235,12 @@
      Click the <guibutton>Add Taxonomy Tree</guibutton> button to add a new taxonomy. The <guilabel>Add taxonomy tree</guilabel> form will appear.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/add_taxonomy_tree.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/add_taxonomy_tree.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -227,9 +258,12 @@
      Select the home path by clicking the plus item. The <guibutton>Select Home Path</guibutton> form will appear:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/select_home_path.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/select_home_path.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/select_home_path.png" format="PNG" align="center" width="150mm"/>
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -245,9 +279,12 @@
      Click <guimenu>Reset</guimenu> if you want to reset values that have just been selected or <guimenu>Next</guimenu> to select permissions for a taxonomy tree.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/taxonomy_permissions.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/taxonomy_permissions.png" format="PNG" align="center" width="150mm"/>
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -255,22 +292,31 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/usericon.png" format="PNG"/>
+              <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
             </imageobject>
+            <textobject>
+               <phrase>"Select user"</phrase>
+            </textobject>
           </inlinemediaobject>
       icon to select a user or the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/grouppermission.png" format="PNG"/>
+              <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>"Select memberships"</phrase>
+            </textobject>
           </inlinemediaobject>
-      icon to select memerships or the 
+      icon to select memberships or the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/alluserpermission.png" format="PNG"/>
+              <imagedata fileref="images/alluserpermission.png" format="PNG" width="7mm"/>
             </imageobject>
+            <textobject>
+               <phrase>"Select everyone"</phrase>
+            </textobject>
           </inlinemediaobject>
-      icon to select everyone in order to set permissions. The user or memership that you have just selected will be displayed in the <guilabel>User or Group</guilabel> field.
+      icon to select everyone in order to set permissions. The user or membership that you have just selected will be displayed in the <guilabel>User or Group</guilabel> field.
     </para>
         <para>
      Then, check at least one of these below options to set rights for the selected user to membership:
@@ -315,9 +361,12 @@
      Click <guibutton>Save</guibutton> to save all values, or <guibutton>Reset</guibutton> to change values that have just been set. After clicking <guibutton>Save</guibutton>, click <guibutton>Next</guibutton> to go to the next step.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/action_gimme.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/action_gimme.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/action_gimme.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -327,7 +376,7 @@
       </step>
       <step>
         <para>
-     Select values for <guilabel>Lifecycle</guilabel>, <guilabel>NodeTypes</guilabel>, <guilabel>Target workspace</guilabel>, <guilabel>Target path</guilabel>, <guilabel>Affected Node Types</guilabel>. (*Required).
+     Select values for <guilabel>Life-cycle</guilabel>, <guilabel>NodeTypes</guilabel>, <guilabel>Target workspace</guilabel>, <guilabel>Target path</guilabel>, <guilabel>Affected Node Types</guilabel>. (*Required).
     </para>
       </step>
       <step>
@@ -369,15 +418,21 @@
      Click the edit icon 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/pencil.png" format="PNG"/>
+              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
+            <textobject>
+               <phrase>pencil</phrase>
+            </textobject>
           </inlinemediaobject>
-     that corresponds to the taxonomy tree you want to edit.
+     icon that corresponds to the taxonomy tree you want to edit.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/edittaxonomytree.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/edittaxonomytree.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -385,15 +440,21 @@
      Click the icon 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/blueplusicon.png" format="PNG"/>
+              <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
             </imageobject>
+            <textobject>
+               <phrase>plus</phrase>
+            </textobject>
           </inlinemediaobject>
-      to add more taxonomy trees. The Edit taxonomy tree will appear:
+      icon in the <guilabel>Action</guilabel> field to add more taxonomy trees. The Edit taxonomy tree will appear:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" align="center" fileref="images/edittaxonomytree2.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/edittaxonomytree2.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>

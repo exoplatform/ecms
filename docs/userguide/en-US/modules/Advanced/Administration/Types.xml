@@ -12,31 +12,31 @@
 The registry helps you manage the namespaces used in the system.</para>
     <para>
    Go to <emphasis role="bold">
-        <emphasis><guimenuitem>Administration &gt; Content Types &gt; Namespace Registry</guimenuitem> to open the NamesPace Registry form.</emphasis>
+        <emphasis><guimenuitem>Administration &gt; Content Types &gt; Namespace Registry</guimenuitem> to open the Namespace Registry form.</emphasis>
       </emphasis><!--   Go to Administration | Content Types | Namespace Registry    -->
   </para>
-    <figure id="figu-User_Guide-The_Namespace_Registry-Namespace_Registry">
-      <title>Namespace Registry</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata width="444" align="center" fileref="images/namespaceregistry.png" format="PNG"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
+    <mediaobject>
+       <imageobject role="html">
+          <imagedata fileref="images/namespaceregistry.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/namespaceregistry.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
+    </mediaobject>
     <procedure id="proc-User_Guide-The_Namespace_Registry-Registering_a_Namespace">
       <title>Registering a Namespace</title>
       <step>
         <para>
      Click the <guibutton>Register</guibutton> button on the Namespace Registry form to register a new namespace.
     </para>
-        <figure id="figu-User_Guide-Registering_a_Namespace-Namespace_Registration_Form">
-          <title>Namespace Registration Form</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/namespaceregistrationform.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+        <mediaobject>
+           <imageobject role="html">
+              <imagedata fileref="images/namespaceregistrationform.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/namespaceregistrationform.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
+        </mediaobject>
       </step>
       <step>
         <para>
@@ -60,14 +60,14 @@ The registry helps you manage the namespaces used in the system.</para>
     <para>
    This function is used to control all node types in &PRODUCT;.
   </para>
-    <figure id="figu-User_Guide-Manage_Node_Types-The_Manage_Node_Type_Form">
-      <title>The Manage Node Type Form</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata width="444" align="center" fileref="images/themanagenodetypeform.png" format="PNG"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
+    <mediaobject>
+       <imageobject role="html">
+          <imagedata fileref="images/themanagenodetypeform.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/themanagenodetypeform.png" format="PNG" align="center" width="150mm"/>
+       </imageobject>
+    </mediaobject>
   </section>
   <section id="sect-User_Guide-Content_Types-View_Node_Types">
     <title>View Node Types</title>
@@ -76,14 +76,14 @@ The registry helps you manage the namespaces used in the system.</para>
         <para>
      Click the icon that corresponds to the node to be reviewed. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.
     </para>
-        <figure id="figu-User_Guide-View_Node_Types-View_Node_Type_Information_Form">
-          <title>View Node Type Information Form</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/viewnodetypeinformation.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+        <mediaobject>
+           <imageobject role="html">
+              <imagedata fileref="images/viewnodetypeinformation.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/viewnodetypeinformation.png" format="PNG" align="center" width="150mm"/>
+           </imageobject>
+        </mediaobject>
       </step>
       <step>
         <para>
@@ -100,9 +100,12 @@ The registry helps you manage the namespaces used in the system.</para>
         <figure id="figu-User_Guide-Add_Node_Type-Add_Node_Type_Form">
           <title>Add Node Type Form</title>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/addnodetype.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/addnodetype.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/addnodetype.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </figure>
       </step>
@@ -185,14 +188,19 @@ The registry helps you manage the namespaces used in the system.</para>
         <para>
      Open the Export Node Types form by clicking the <guibutton>Export</guibutton> button on the Manage Node Type Form.
     </para>
-        <figure id="figu-User_Guide-Export_Node_Types-Export_Node_Types_Form">
-          <title>Export Node Types Form</title>
+      <mediaobject>
+         <imageobject role="html">
+            <imagedata fileref="images/exportnodetypes.png" format="PNG" align="center"/>
+         </imageobject>
+         <imageobject role="fo">
+            <imagedata fileref="images/exportnodetypes.png" format="PNG" align="center" width="130mm" />
+         </imageobject>
+      </mediaobject>
           <mediaobject>
             <imageobject>
-              <imagedata width="444" align="center" fileref="images/exportnodetypes.png" format="PNG"/>
+              <imagedata  align="center" fileref="images/exportnodetypes.png" format="PNG"/>
             </imageobject>
           </mediaobject>
-        </figure>
       </step>
       <step>
         <para>
@@ -226,27 +234,27 @@ The registry helps you manage the namespaces used in the system.</para>
         <para>
      Open the Import Node Type from XML file form by clicking the <guibutton>Import</guibutton> button on the Manage Node Type Form.
     </para>
-        <figure id="figu-User_Guide-Import_Node_Types-Import_Node_Type_from_XML_file_Form">
-          <title>Import Node Type from XML file Form</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/importnodetype.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+        <mediaobject>
+           <imageobject role="html">
+              <imagedata fileref="images/importnodetype.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/importnodetype.png" format="PNG" align="center" width="130mm" />
+           </imageobject>
+        </mediaobject>
       </step>
       <step>
         <para>
      Click the <guibutton>Browse</guibutton> button to upload a file.
     </para>
-        <figure id="figu-User_Guide-Import_Node_Types-Browse_for_XML_files_containing_Node_Types">
-          <title>Browse for XML files containing Node Types</title>
-          <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/browsefornodes.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
+        <mediaobject>
+           <imageobject role="html">
+              <imagedata fileref="images/browsefornodes.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/browsefornodes.png" format="PNG" align="center" width="129mm" />
+           </imageobject>
+        </mediaobject>
         <important>
           <para>
       You must upload an XML file. This file is in the node type&apos;s format.

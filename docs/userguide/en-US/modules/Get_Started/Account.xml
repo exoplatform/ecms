@@ -1,12 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Account">
-  <title>
-    <emphasis role="bold">Account</emphasis>
-  </title>
+  <title>Account</title>
   <section id="sect-User_Guide-Account-Register_an_account">
     <title>Register an account</title>
     <para>
@@ -23,10 +22,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/homepage.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/homepage.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/homepage.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/homepage.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -36,10 +35,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/register.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/register.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/register.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/register.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -96,27 +95,25 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/magnifyingglassicon.png" format="PNG"/>
+              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
             </imageobject>
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
           </inlinemediaobject>
       icon to search and check if the inputted user name is available or not.
     </para>
       </step>
-<!--  <step>
-    <para>
-     Input other required fields in the <emphasis role="bold">Account Settings</emphasis> tab.
-    </para>
-
-   </step>  -->      <step>
+      <step>
         <para>
      Input values in the fields of<emphasis role="bold"> User Profile </emphasis>tab, including: Profile information, Home information and Business information.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/userprofile.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/userprofile.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/userprofile.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/userprofile.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -181,10 +178,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/signin.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/signin.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/signin.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/signin.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -241,12 +238,12 @@
     <para>
    After signing in, you will be redirected to the authenticated homepage like the illustration.
   </para>
-    <mediaobject>
+   <mediaobject>
       <imageobject role="html">
-        <imagedata width="444" align="center" scale="90" fileref="images/authhomepage.png" format="PNG"/>
+        <imagedata  align="center"  fileref="images/authhomepage.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="444" contentwidth="150mm" align="center" fileref="images/authhomepage.png" format="PNG"/>
+        <imagedata   align="center" fileref="images/authhomepage.png" format="PNG" width="150mm"/>
       </imageobject>
     </mediaobject>
   </section>
@@ -260,21 +257,24 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata align="center" scale="70" fileref="images/accessbanner.png" format="PNG"/>
+        <imagedata align="center"  fileref="images/accessbanner.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata contentwidth="150mm" align="center" fileref="images/accessbanner.png" format="PNG"/>
+        <imagedata  align="center" fileref="images/accessbanner.png" format="PNG" width="82mm"/>
       </imageobject>
     </mediaobject>
     <para>
-   or click <emphasis role="bold">eXo</emphasis> <emphasis role="bold">&gt; Sign Out</emphasis> from the menu:
+   or click <menuchoice>
+      <guimenu>Start Logo</guimenu>
+      <guimenuitem>Sign Out</guimenuitem>
+   </menuchoice> from the menu:
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata width="444" align="center" scale="100" fileref="images/startlogo.png" format="PNG"/>
+        <imagedata  align="center"  fileref="images/startlogo.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="444" contentwidth="150mm" align="center" fileref="images/startlogo.png" format="PNG"/>
+        <imagedata   align="center" fileref="images/startlogo.png" format="PNG" width="150mm"/>
       </imageobject>
     </mediaobject>
   </section>
@@ -294,10 +294,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/retrieve.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/retrieve.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/retrieve.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/retrieve.png" format="PNG" width="147mm"/>
           </imageobject>
         </mediaobject>
         <variablelist>
@@ -328,10 +328,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/forgotpassword.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/forgotpassword.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/forgotpassword.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/forgotpassword.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -339,10 +339,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/forgotname.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/forgotname.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/forgotname.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/forgotname.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -370,18 +370,11 @@
       </para>
           </listitem>
         </itemizedlist>
-<!--   Removed in eXo Content User Guide 2.1.1
-     <note>
-     <title>Temporary Credentials Validity</title>
-      <para>
-      The Username/Password that you received only takes effect for 1 day. It means that if the period is over 1 day from the receipt date, you can not use the receipt username/password, so you will need to get another email active.
-     </para>
-    </note>
-  -->      </step>
+      </step>
     </procedure>
   </section>
   <section id="sect-User_Guide-Account-Change_Account_Information">
-    <title>Change Account Information</title>
+    <title>Change account information</title>
     <para>
    The function enables you change your account information, such as your profile and password.
   </para>
@@ -393,10 +386,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/accountname.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/accountname.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/accountname.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/accountname.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -404,10 +397,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/accountprofile.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/accountprofile.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/accountprofile.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/accountprofile.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -439,12 +432,12 @@
         <para>
      Select the<emphasis role="bold"> Change Password</emphasis> tab.
     </para>
-        <mediaobject>
+       <mediaobject>
           <imageobject role="html">
-            <imagedata width="444" align="center" scale="90" fileref="images/changepassword.png" format="PNG"/>
+            <imagedata  align="center"  fileref="images/changepassword.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata width="444" contentwidth="150mm" align="center" fileref="images/changepassword.png" format="PNG"/>
+            <imagedata   align="center" fileref="images/changepassword.png" format="PNG" width="150mm"/>
           </imageobject>
         </mediaobject>
       </step>

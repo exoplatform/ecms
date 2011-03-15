@@ -4,9 +4,9 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<chapter id="chap-User_Guide-Preamble">
-  <title>Preamble</title>
-  <section id="sect-User_Guide-Preamble-Overview">
+<chapter id="chap-User_Guide-Overall_Introduction">
+  <title>Overall Introduction</title>
+  <section id="sect-User_Guide-Overall_Introduction-Overview">
     <title>Overview</title>
     <para>
    Beginning as an Open Source project in the year 2002, eXo is well-known as the industry&apos;s first Java portlet container. With the aim of dominating the potential portal market through robust and easy-to-use applications, eXo Project has succeeded in attracting consumers in the whole world. eXo has actually opened the floodgates to various options in many markets, and customers have been choosing eXo as the best method for their success.
@@ -16,10 +16,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata width="444" align="center" scale="90" fileref="images/exoplatform.png" format="PNG"/>
+        <imagedata  align="center"  fileref="images/exoplatform.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata width="444" contentwidth="150mm" align="center" fileref="images/exoplatform.png" format="PNG"/>
+        <imagedata   align="center" fileref="images/exoplatform.png" format="PNG" width="124mm"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -29,12 +29,12 @@
    eXo Content is one of eXo Core services. It provides a set of services to extend portal-based applications with Enterprise Content Management (ECM) capabilities. Document Management System (DMS) features make it easy to catalog and organize enterprise content and with powerful Web Content Management (WCM) services to quickly build dynamic, content-rich websites.
   </para>
   </section>
-  <section id="sect-User_Guide-Preamble-Why_Use_eXo_Content">
+  <section id="sect-User_Guide-Overall_Introduction-Why_Use_eXo_Content">
     <title>Why Use eXo Content</title>
     <para>
    If you are looking for a powerful tool and strategies in managing website and contents, eXo Content is what you need. eXo Content is designed to provide webmasters who manage websites the way to maintain, control, modify and reassemble the content of a web-page easily and effectively. All components of your website can be organized, reconstructed easily, which helps you keep your website under the control. eXo Content really brings interesting experience for all users and changes their way of thinking about website. The followings are key features of eXo Content:
   </para>
-    <variablelist id="vari-User_Guide-Why_Use_Site_Publisher-Website_Creation">
+    <variablelist id="vari-User_Guide-Why_Use_eXo_Content-Website_Creation">
       <title>Website Creation</title>
       <varlistentry>
         <term>Fast Setup:</term>
@@ -69,7 +69,7 @@
         </listitem>
       </varlistentry>
     </variablelist>
-    <variablelist id="vari-User_Guide-Why_Use_Site_Publisher-Web_Content_Organization">
+    <variablelist id="vari-User_Guide-Why_Use_eXo_Content-Web_Content_Organization">
       <title>Web Content Organization</title>
       <varlistentry>
         <term>Web-Based Administration:</term>
@@ -136,7 +136,7 @@
         </listitem>
       </varlistentry>
     </variablelist>
-    <variablelist id="vari-User_Guide-Why_Use_Site_Publisher-Capture_and_Manage_Documents">
+    <variablelist id="vari-User_Guide-Why_Use_eXo_Content-Capture_and_Manage_Documents">
       <title>Capture and Manage Documents</title>
       <varlistentry>
         <term>Kofax Plugin:</term>
@@ -166,12 +166,12 @@
         <term>Record Management:</term>
         <listitem>
           <para>
-      Track the status of content completion and control document storage lifecycles.
+      Track the status of content completion and control document storage life-cycles.
      </para>
         </listitem>
       </varlistentry>
     </variablelist>
-    <variablelist id="vari-User_Guide-Why_Use_Site_Publisher-Store_and_Access_Documents">
+    <variablelist id="vari-User_Guide-Why_Use_eXo_Content-Store_and_Access_Documents">
       <title>Store and Access Documents</title>
       <varlistentry>
         <term>JCR:</term>
@@ -206,14 +206,14 @@
         </listitem>
       </varlistentry>
     </variablelist>
-    <formalpara id="form-User_Guide-Why_Use_Site_Publisher-And_More...">
+    <formalpara id="form-User_Guide-Why_Use_eXo_Content-And_More...">
       <title>And More...</title>
       <para>
     eXo Content also provides other powerful tools to manage an build content-rich websites such as CSS, Java Script and RSS support, advanced document management tool, collaboration tools, etc. All features is to meet your requirements for the purpose of easy site management, cost reduction in managing multiple sites in only one place.
    </para>
     </formalpara>
   </section>
-  <section id="sect-User_Guide-Preamble-About_This_Document">
+  <section id="sect-User_Guide-Overall_Introduction-About_This_Document">
     <title>About This Document</title>
     <para>
    The intended reader of this user guide are users using eXo Content. This guide will explain all the basic and advanced features that eXo Content provides in managing websites and site content. It gives in-depth examples and easy explanations of the technology that allows the webmasters to create and manage a very fast and powerful website.
@@ -254,7 +254,7 @@
       </listitem>
     </itemizedlist>
   </section>
-  <section id="sect-User_Guide-Preamble-References_and_Related_Sources">
+  <section id="sect-User_Guide-Overall_Introduction-References_and_Related_Sources">
     <title>References and Related Sources</title>
     <itemizedlist id="item-User_Guide-References_and_Related_Sources-Information">
       <title>Information</title>
@@ -296,7 +296,7 @@
       </listitem>
       <listitem>
         <para>
-     <ulink url="" type="http">Gatein Portal Framework</ulink>
+     <ulink url="http://www.exoplatform.com/company/en/platform/exo-core-services/gatein-portal-framework" type="http">Gatein Portal Framework</ulink>
     </para>
       </listitem>
       <listitem>

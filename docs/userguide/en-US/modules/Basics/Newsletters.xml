@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Newsletters">
-<!--  This document was created with Syntext Serna Free.  -->  <title>Newsletters</title>
+  <title>Newsletters</title>
   <para>
   &PRODUCT; provides a newsletter service aiming at helping users quickly get the updated newsletters from a website.
  </para>
@@ -20,14 +20,17 @@
      Go to <emphasis role="bold">Newsletters</emphasis> on the navigation bar. The Newsletters page will appear:
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" fileref="images/newsletters-newsletter_viewer.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/newsletters-newsletter_viewer.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/newsletters-newsletter_viewer.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
         <para>
-     Enter your email address in the <emphasis role="bold">Your Emai</emphasis>l field.
+     Enter your email address in the <emphasis role="bold">Your Email</emphasis> field.
     </para>
       </step>
       <step>
@@ -35,9 +38,12 @@
      Select the checkbox corresponding to the subscription that you want to get newsletters.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" fileref="images/newsletters-subscription.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/newsletters-subscription.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/newsletters-subscription.png" format="PNG" align="center" width="143mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -50,9 +56,12 @@
      Click <emphasis role="bold">OK</emphasis> in the confirmation message. You can reselect the subscription that you want or do not want to receive newsletters by re-selecting the checkbox in the<emphasis role="bold"> Check to subscribe</emphasis> column.
     </para>
         <mediaobject>
-          <imageobject>
-            <imagedata width="444" fileref="images/newsletters-subscript_select.png" format="PNG"/>
-          </imageobject>
+           <imageobject role="html">
+              <imagedata fileref="images/newsletters-subscript_select.png" format="PNG" align="center"/>
+           </imageobject>
+           <imageobject role="fo">
+              <imagedata fileref="images/newsletters-subscript_select.png" format="PNG" align="center" width="150mm" />
+           </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -73,9 +82,12 @@
    &PRODUCT; facilitates administrators to easily and quickly manage newsletters. Go to<emphasis role="bold"> Group &gt; Newsletters</emphasis> on the administration bar to access Newsletters.
   </para>
     <mediaobject>
-      <imageobject>
-        <imagedata width="444" fileref="images/newsletters-newsletter_manager.png" format="PNG"/>
-      </imageobject>
+       <imageobject role="html">
+          <imagedata fileref="images/newsletters-newsletter_manager.png" format="PNG" align="center"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/newsletters-newsletter_manager.png" format="PNG" align="center" width="150mm" />
+       </imageobject>
     </mediaobject>
     <section id="sect-User_Guide-Manage_Newsletters-Category_Management">
       <title>Category Management</title>
@@ -91,9 +103,12 @@
        Click <emphasis role="bold">New Category</emphasis> on the action bar of the Newsletters page. The Category form will appear.
       </para>
             <mediaobject>
-              <imageobject>
-                <imagedata fileref="images/newsletters-category_form.png" format="PNG"/>
-              </imageobject>
+               <imageobject role="html">
+                  <imagedata fileref="images/newsletters-category_form.png" format="PNG" align="center"/>
+               </imageobject>
+               <imageobject role="fo">
+                  <imagedata fileref="images/newsletters-category_form.png" format="PNG" align="center" width="116mm" />
+               </imageobject>
             </mediaobject>
             <table id="tabl-User_Guide-Add_a_new_category-Category_Form_Field_Details">
               <title>Category Form Field Details</title>
@@ -137,42 +152,59 @@
             <title>Input values for fields</title>
             <substeps>
               <step>
-                <para>Select a moderator for a category by clicking 
-       <inlinemediaobject>
+                <para>Select a moderator for a category by clicking the 
+                     <inlinemediaobject>
                     <imageobject>
-                      <imagedata fileref="images/newsletters-user_icon.png" format="PNG"/>
+                      <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
                     </imageobject>
-                  </inlinemediaobject>
-        next to the Moderator field to select a user. The<emphasis role="bold"> User selector</emphasis> form will appear <emphasis role="bold">&gt;</emphasis> Click 
-       <inlinemediaobject>
+                    <textobject>
+                       <phrase>"Select user"</phrase>
+                    </textobject>
+                  </inlinemediaobject> icon next to the Moderator field to select a user. The <emphasis role="bold">User selector</emphasis> form will appear <emphasis role="bold">&gt;</emphasis>
+               </para>
+            </step>
+            <step>
+               <para>
+                  Click the <inlinemediaobject>
                     <imageobject>
-                      <imagedata fileref="images/newsletters-tick.png" format="PNG"/>
+                      <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
                     </imageobject>
-                  </inlinemediaobject>
-        corresponding to a user in the list that you want to select..
-      </para>
-                <mediaobject>
-                  <imageobject>
-                    <imagedata width="444" fileref="images/newsletters-user_selector_form.png" format="PNG"/>
-                  </imageobject>
-                </mediaobject>
-              </step>
+                    <textobject>
+                       <phrase>green tick</phrase>
+                    </textobject>
+                  </inlinemediaobject>  corresponding to a user in the list that you want to select.
+               </para>
+               <mediaobject>
+               <imageobject role="html">
+                  <imagedata fileref="images/newsletters-user_selector_form.png" format="PNG" align="center"/>
+               </imageobject>
+               <imageobject role="fo">
+                  <imagedata fileref="images/newsletters-user_selector_form.png" format="PNG" align="center" width="150mm"/>
+               </imageobject>
+            </mediaobject>
+            </step>
               <step>
                 <para>
-       Click 
-       <inlinemediaobject>
+                     Click the 
+                  <inlinemediaobject>
                     <imageobject>
-                      <imagedata fileref="images/newsletters-user_group.png" format="PNG"/>
+                      <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
                     </imageobject>
-                  </inlinemediaobject>
-        to select users in a specific group. The Group selector will appear</para>
+                    <textobject>
+                       <phrase>"Select membership"</phrase>
+                    </textobject>
+                  </inlinemediaobject> icon to select users in a specific group. The Group selector will appear</para>
                 <mediaobject>
-                  <imageobject>
-                    <imagedata width="444" fileref="images/newsletters-group_selector_form.png" format="PNG"/>
-                  </imageobject>
+                   <imageobject role="html">
+                      <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center"/>
+                   </imageobject>
+                   <imageobject role="fo">
+                      <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center" width="139mm" />
+                   </imageobject>
                 </mediaobject>
-                <para>Select a group from the left panel and a membership type in the right panel. The membership and group selected will be displayed in the Moderator field. After adding new categories, they will be added in the list of categories.
-      </para>
+                <para>
+                   Select a group from the left panel and a membership type in the right panel. The membership and group selected will be displayed in the Moderator field. After adding new categories, they will be added in the list of categories.
+               </para>
               </step>
             </substeps>
             <para>After creating a category, you can create new subscriptions or newsletters for this category.</para>
@@ -187,11 +219,14 @@
             <para>
        Select a category that you want to edit<emphasis role="bold"> &gt;</emphasis> Click <emphasis role="bold">Administration &gt; Edit Category</emphasis> in the drop-down menu to bring up the Category form.
       </para>
-            <mediaobject>
-              <imageobject>
-                <imagedata width="444" fileref="images/newsletters-existing_category_form.png" format="PNG"/>
-              </imageobject>
-            </mediaobject>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/newsletters-existing_category_form.png" format="PNG" align="center"/>
+            </imageobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/newsletters-existing_category_form.png" format="PNG" align="center" width="124mm" />
+            </imageobject>
+         </mediaobject>
           </step>
           <step>
             <para>
@@ -215,10 +250,10 @@
       </para>
             <mediaobject>
               <imageobject role="html">
-                <imagedata align="center" scale="" fileref="images/newsletters_category_delete_confirm.png" format="PNG"/>
+                <imagedata align="center"  fileref="images/newsletters_category_delete_confirm.png" format="PNG"/>
               </imageobject>
               <imageobject role="fo">
-                <imagedata contentwidth="150mm" align="center" fileref="images/newsletters_category_delete_confirm.png" format="PNG"/>
+                <imagedata  align="center" fileref="images/newsletters_category_delete_confirm.png" format="PNG" width="104mm"/>
               </imageobject>
             </mediaobject>
           </step>
@@ -242,10 +277,10 @@
       </para>
             <mediaobject>
               <imageobject role="html">
-                <imagedata width="444" align="center" scale="" fileref="images/newsletters_manage_users_form.png" format="PNG"/>
+                <imagedata  align="center"  fileref="images/newsletters_manage_users_form.png" format="PNG"/>
               </imageobject>
               <imageobject role="fo">
-                <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsletters_manage_users_form.png" format="PNG"/>
+                <imagedata   align="center" fileref="images/newsletters_manage_users_form.png" format="PNG" width="142mm"/>
               </imageobject>
             </mediaobject>
             <table>
@@ -292,7 +327,7 @@
                     <entry>
                       <inlinemediaobject>
                         <imageobject>
-                          <imagedata fileref="images/newsletters_ban_icon.png" format="PNG"/>
+                          <imagedata fileref="images/newsletters_ban_icon.png" format="PNG" width="8mm"/>
                         </imageobject>
                       </inlinemediaobject>
                     </entry>
@@ -302,7 +337,7 @@
                     <entry>
                       <inlinemediaobject>
                         <imageobject>
-                          <imagedata fileref="images/newsletters_unban_icon.png" format="PNG"/>
+                          <imagedata fileref="images/newsletters_unban_icon.png" format="PNG" width="7mm"/>
                         </imageobject>
                       </inlinemediaobject>
                     </entry>
@@ -312,7 +347,7 @@
                     <entry>
                       <inlinemediaobject>
                         <imageobject>
-                          <imagedata fileref="images/trashicon.png" format="PNG"/>
+                          <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
                         </imageobject>
                       </inlinemediaobject>
                     </entry>
@@ -346,10 +381,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="" fileref="images/newsletters_subscription_form.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/newsletters_subscription_form.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsletters_subscription_form.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/newsletters_subscription_form.png" format="PNG" width="128mm"/>
             </imageobject>
           </mediaobject>
           <table>
@@ -380,7 +415,7 @@
                 </row>
                 <row>
                   <entry> Redactor </entry>
-                  <entry> Select users/groups who have rights to manage this subscription This fied is required. </entry>
+                  <entry> Select users/groups who have rights to manage this subscription This field is required. </entry>
                 </row>
               </tbody>
             </tgroup>
@@ -388,13 +423,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG"/>
+                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-       and select the category from the drop-down menu.
+              <textobject>
+                 <phrase>scroll arrows</phrase>
+              </textobject>
+            </inlinemediaobject> icon and select the category from the drop-down menu.
      </para>
         </step>
         <step>
@@ -416,10 +453,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="100" fileref="images/newsletters_direct_category_subscription.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/newsletters_direct_category_subscription.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsletters_direct_category_subscription.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/newsletters_direct_category_subscription.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -432,10 +469,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="" fileref="images/newsletters_category_prepopulated.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/newsletters_category_prepopulated.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsletters_category_prepopulated.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/newsletters_category_prepopulated.png" format="PNG" width="128mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -449,10 +486,10 @@
    </para>
       <mediaobject>
         <imageobject role="html">
-          <imagedata width="444" align="center" scale="" fileref="images/newsletters_manage_subscriptions.png" format="PNG"/>
+          <imagedata  align="center"  fileref="images/newsletters_manage_subscriptions.png" format="PNG"/>
         </imageobject>
         <imageobject role="fo">
-          <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsletters_manage_subscriptions.png" format="PNG"/>
+          <imagedata   align="center" fileref="images/newsletters_manage_subscriptions.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
       <table>
@@ -518,10 +555,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="100" fileref="images/newsletters_newsletter_administration.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/newsletters_newsletter_administration.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsletters_newsletter_administration.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/newsletters_newsletter_administration.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -531,10 +568,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="100" fileref="images/newsletters_newsletter_administration2.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/newsletters_newsletter_administration2.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsletters_newsletter_administration2.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/newsletters_newsletter_administration2.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -543,17 +580,19 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/newsletters_moderation_icon.png" format="PNG"/>
+                <imagedata fileref="images/newsletters_moderation_icon.png" format="PNG" width="32mm"/>
               </imageobject>
-            </inlinemediaobject>
-       button, then select <emphasis role="bold">Open</emphasis> in the menu:
+              <textobject>
+                 <phrase>[ Moderation ]</phrase>
+              </textobject>
+            </inlinemediaobject> button, then select <emphasis role="bold">Open</emphasis> in the menu:
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center" scale="" fileref="images/newsletters_moderation_open.png" format="PNG"/>
+              <imagedata align="center"  fileref="images/newsletters_moderation_open.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata contentwidth="150mm" align="center" fileref="images/newsletters_moderation_open.png" format="PNG"/>
+              <imagedata  align="center" fileref="images/newsletters_moderation_open.png" format="PNG" width="41mm"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -561,10 +600,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata width="444" align="center" scale="" fileref="images/newsletters_newsletters_content.png" format="PNG"/>
+              <imagedata  align="center"  fileref="images/newsletters_newsletters_content.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata width="444" contentwidth="150mm" align="center" fileref="images/newsletters_newsletters_content.png" format="PNG"/>
+              <imagedata   align="center" fileref="images/newsletters_newsletters_content.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -589,26 +628,34 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/moderationbutton.png" format="PNG"/>
+                <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
-            </inlinemediaobject>
-       , then select <emphasis role="bold">Edit</emphasis> in the menu.
+              <textobject>
+                 <phrase>[ Moderation ]</phrase>
+              </textobject>
+            </inlinemediaobject> button then select <emphasis role="bold">Edit</emphasis> in the menu.
      </para>
-          <mediaobject>
-            <imageobject>
-              <imagedata align="center" fileref="images/newsletter-editmenu.png" format="PNG"/>
+         <mediaobject>
+            <imageobject role="html">
+               <imagedata fileref="images/newsletter-editmenu.png" format="PNG" align="center"/>
             </imageobject>
-          </mediaobject>
+            <imageobject role="fo">
+               <imagedata fileref="images/newsletter-editmenu.png" format="PNG" align="center" width="41mm" />
+            </imageobject>
+         </mediaobject>
           <para>
       The <emphasis role="bold">Newsletter entry form</emphasis> pops up:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/newsletterentryform.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/newsletterentryform.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/newsletterentryform.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -645,28 +692,36 @@
       In a specific subscription, select the newsletter that you want to delete by selecting the checkbox.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata align="center" fileref="images/newsletter-deletebutton.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/newsletter-deletebutton.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/newsletter-deletebutton.png" format="PNG" align="center" width="40mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/moderationbutton.png" format="PNG"/>
+                <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
-            </inlinemediaobject>
-       , then click <emphasis role="bold">Delete</emphasis> in the menu.
+              <textobject>
+                 <phrase>[ Moderation ]</phrase>
+              </textobject>
+            </inlinemediaobject> button then click <emphasis role="bold">Delete</emphasis> in the menu.
      </para>
           <para>
       The confirmation message will be displayed:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata align="center" fileref="images/newsletter-deleteconfirmdialog.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/newsletter-deleteconfirmdialog.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/newsletter-deleteconfirmdialog.png" format="PNG" align="center" width="96mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -690,13 +745,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/moderationbutton.png" format="PNG"/>
+                <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
-            </inlinemediaobject>
-       , then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
+              <textobject>
+                 <phrase>[ Moderation ]</phrase>
+              </textobject>
+            </inlinemediaobject> button then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
      </para>
         </step>
       </procedure>
@@ -715,17 +772,19 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/newletterbutton.png" format="PNG"/>
+                <imagedata fileref="images/newletterbutton.png" format="PNG" width="35mm"/>
               </imageobject>
-            </inlinemediaobject>
-       on the action bar. The <emphasis role="bold">Newsletter entry form</emphasis>appears:
+              <textobject>
+                 <phrase>[ New Letter ]</phrase>
+              </textobject>
+            </inlinemediaobject> button on the action bar. The <emphasis role="bold">Newsletter entry form</emphasis>appears:
      </para>
           <mediaobject>
             <imageobject>
-              <imagedata width="444" align="center" fileref="images/newsletterentryform.png" format="PNG"/>
+              <imagedata  align="center" fileref="images/newsletterentryform.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -767,13 +826,15 @@
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG"/>
+                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-       to select the template for the newsletter.
+              <textobject>
+                 <phrase>scroll arrows</phrase>
+              </textobject>
+            </inlinemediaobject> icon to select the template for the newsletter.
      </para>
         </step>
         <step>
@@ -781,20 +842,25 @@
       Click the <emphasis role="bold">Send Date</emphasis> field. The calendar will appear to allow you to choose the date and time when you want to send the newsletter.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="222" align="center" fileref="images/newslettercalendar.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/newslettercalendar.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/newslettercalendar.png" format="PNG" align="center" width="59mm" />
+             </imageobject>
           </mediaobject>
         </step>
         <step>
           <para>
-      Click 
+      Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG"/>
+                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
               </imageobject>
-            </inlinemediaobject>
-       in the category field to select the category and the subscription in list.
+              <textobject>
+                 <phrase>scroll arrows</phrase>
+              </textobject>
+            </inlinemediaobject> icon in the category field to select the category and the subscription in list.
      </para>
         </step>
         <step>
@@ -809,7 +875,7 @@
         </step>
         <step>
           <para>
-      Create a content for a newsletter by inputting information into the <emphasis role="bold">Main content</emphasis> textbox.
+      Create a content for a newsletter by inputting information into the <emphasis role="bold">Main content</emphasis> text box.
      </para>
         </step>
         <step>
@@ -822,17 +888,23 @@
       Select <emphasis role="bold">Contact Us</emphasis> on the navigation bar, or go to <emphasis role="bold">Site &gt; Acme &gt; Contact Us</emphasis>.
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/contactus.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/contactus.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/contactus.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <para>
       The <emphasis role="bold">Contact Us</emphasis> page  appears:
      </para>
           <mediaobject>
-            <imageobject>
-              <imagedata width="444" align="center" fileref="images/contactuspage.png" format="PNG"/>
-            </imageobject>
+             <imageobject role="html">
+                <imagedata fileref="images/contactuspage.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/contactuspage.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
           </mediaobject>
           <table>
             <title/>
