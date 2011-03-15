@@ -48,58 +48,58 @@ import org.exoplatform.portal.application.PortalRequestContext;
 public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFilter, EventFilter
 {
 
-   public PortletCacheFilter()
-   {
-   }
+  public PortletCacheFilter()
+  {
+  }
 
-   public void init(FilterConfig cfg) throws PortletException
-   {
-   }
+  public void init(FilterConfig cfg) throws PortletException
+  {
+  }
 
-   public void destroy()
-   {
-   }
+  public void destroy()
+  {
+  }
 
-   public void doFilter(ActionRequest req, ActionResponse resp, FilterChain chain) throws IOException, PortletException
-   {
+  public void doFilter(ActionRequest req, ActionResponse resp, FilterChain chain) throws IOException, PortletException
+  {
+    chain.doFilter(req, resp);
+  }
+
+  public void doFilter(EventRequest req, EventResponse resp, FilterChain chain) throws IOException, PortletException
+  {
+    chain.doFilter(req, resp);
+  }
+
+  public void doFilter(RenderRequest req, RenderResponse resp, FilterChain chain) throws IOException, PortletException
+  {
+    if (req.getRemoteUser() == null)
+    {
+      PortalRequestContext ctx = (PortalRequestContext)PortalRequestContext.getCurrentInstance();
+      Map<String, String[]> query = (Map<String, String[]>)ctx.getRequest().getParameterMap();
+
+      //
+      Locale locale = ctx.getLocale();
+
+      //
+      WindowKey key = new WindowKey(
+          req.getWindowID(),
+          req.getWindowState(),
+          req.getPortletMode(),
+          locale,
+          req.getParameterMap(),
+          query);
+
+      //
+      FragmentCacheService service = (FragmentCacheService)PortalContainer.getInstance().getComponentInstanceOfType(FragmentCacheService.class);
+      MarkupFragment value = service.cache.get(new PortletRenderContext(req, resp, chain), key);
+      OutputStream out = resp.getPortletOutputStream();
+      out.write(value.data);
+      out.close();
+    }
+    else
+    {
       chain.doFilter(req, resp);
-   }
-
-   public void doFilter(EventRequest req, EventResponse resp, FilterChain chain) throws IOException, PortletException
-   {
-      chain.doFilter(req, resp);
-   }
-
-   public void doFilter(RenderRequest req, RenderResponse resp, FilterChain chain) throws IOException, PortletException
-   {
-      if (req.getRemoteUser() == null)
-      {
-         PortalRequestContext ctx = (PortalRequestContext)PortalRequestContext.getCurrentInstance();
-         Map<String, String[]> query = (Map<String, String[]>)ctx.getRequest().getParameterMap();
-
-         //
-         Locale locale = ctx.getLocale();
-
-         //
-         WindowKey key = new WindowKey(
-            req.getWindowID(),
-            req.getWindowState(),
-            req.getPortletMode(),
-            locale,
-            req.getParameterMap(),
-            query);
-
-         //
-         FragmentCacheService service = (FragmentCacheService)PortalContainer.getInstance().getComponentInstanceOfType(FragmentCacheService.class);
-         MarkupFragment value = service.cache.get(new PortletRenderContext(req, resp, chain), key);
-         OutputStream out = resp.getPortletOutputStream();
-         out.write(value.data);
-         out.close();
-      }
-      else
-      {
-         chain.doFilter(req, resp);
-      }
-   }
+    }
+  }
 }
 

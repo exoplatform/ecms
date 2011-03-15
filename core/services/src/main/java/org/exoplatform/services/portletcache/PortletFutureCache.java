@@ -37,193 +37,193 @@ import org.exoplatform.services.log.Log;
 class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletRenderContext>
 {
 
-   private static final int	DEFAULT_CACHE_SIZE = 5000;	// default to 5000 entries
+  private static final int	DEFAULT_CACHE_SIZE = 5000;	// default to 5000 entries
 
 
-    /** . */
-   private final ConcurrentHashMap<WindowKey, MarkupFragment> entries;
+  /** . */
+  private final ConcurrentHashMap<WindowKey, MarkupFragment> entries;
 
-   /** . */
-   private final Log log;
+  /** . */
+  private final Log log;
 
-   /** . */
-   private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+  /** . */
+  private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-   /** . */
-   private int cleanupCache;
+  /** . */
+  private int cleanupCache;
 
-   /** . */
-   private int cacheMaxSize = DEFAULT_CACHE_SIZE;
+  /** . */
+  private int cacheMaxSize = DEFAULT_CACHE_SIZE;
 
-   /** . */
-   private ScheduledFuture<?> scheduled;
+  /** . */
+  private ScheduledFuture<?> scheduled;
 
-   PortletFutureCache(Log log, int cleanupCache)
-   {
-      super(new PortletRenderer(log));
+  PortletFutureCache(Log log, int cleanupCache)
+  {
+    super(new PortletRenderer(log));
 
-      //
-      this.log = log;
-      this.entries = new ConcurrentHashMap<WindowKey, MarkupFragment>();
-      this.cleanupCache = preventWrongCleanupCacheValue(cleanupCache);
-      this.scheduled = null;
-   }
+    //
+    this.log = log;
+    this.entries = new ConcurrentHashMap<WindowKey, MarkupFragment>();
+    this.cleanupCache = preventWrongCleanupCacheValue(cleanupCache);
+    this.scheduled = null;
+  }
 
-   PortletFutureCache(Log log, int cleanupCache, int cacheSize)
-   {
-      this(log, cleanupCache);
-      this.cacheMaxSize = cacheSize;
-   }
+  PortletFutureCache(Log log, int cleanupCache, int cacheSize)
+  {
+    this(log, cleanupCache);
+    this.cacheMaxSize = cacheSize;
+  }
 
-   private static int preventWrongCleanupCacheValue(int value)
-   {
-      // 10 mns by default
-      return value < 0 ? 5 * 60 : value;
-   }
+  private static int preventWrongCleanupCacheValue(int value)
+  {
+    // 10 mns by default
+    return value < 0 ? 5 * 60 : value;
+  }
 
-   public int getCleanupCache()
-   {
-      return cleanupCache;
-   }
+  public int getCleanupCache()
+  {
+    return cleanupCache;
+  }
 
-   public void updateCleanupCache(int cleanupCache)
-   {
-      this.cleanupCache = cleanupCache;
+  public void updateCleanupCache(int cleanupCache)
+  {
+    this.cleanupCache = cleanupCache;
 
-      //
-      if (scheduled != null)
+    //
+    if (scheduled != null)
+    {
+      stop();
+      start();
+    }
+  }
+
+  /*
+   * Returns the number of entries in this cache.
+   */
+  protected int getCacheSize()
+  {
+    return (entries.size());
+  }
+
+  /*
+   * Returns the defined Max Cache Size.
+   */
+  protected int getCacheMaxSize()
+  {
+    return (cacheMaxSize);
+  }
+
+  /*
+   * Returns the defined Max Cache Size.
+   */
+  protected void setCacheMaxSize(int cacheMaxSize)
+  {
+    this.cacheMaxSize = cacheMaxSize;
+  }
+
+  /*
+   * Clear Cache (should be called by JMX in urgently mode.
+   */
+  protected void clearCache()
+  {
+    if (scheduled != null)
+    {
+      stop();
+      entries.clear();
+      start();
+    }
+    else
+      entries.clear();
+  }
+
+  /*
+   * Did Cache contains the following key (do not remove old values).
+   */
+  protected boolean containsKey(WindowKey key)
+  {
+    return (entries.containsKey(key));
+  }
+
+
+  @Override
+  protected MarkupFragment get(WindowKey key)
+  {
+    // System.out.println("get asked for key " + key);
+
+    MarkupFragment value = entries.get(key);
+    if (value != null)
+    {
+      if (value.expirationTimeMillis > System.currentTimeMillis())
       {
-         stop();
-         start();
+        if (log.isTraceEnabled())
+          log.trace("Using cached markup for portlet " + key);
+        return value;
       }
-   }
+      if (log.isTraceEnabled())
+        log.trace("Expired markup for portlet " + key);
+      entries.remove(key);
+      return null;
+    }
+    return null;
+  }
 
-   /*
-    * Returns the number of entries in this cache.
-    */
-   protected int getCacheSize()
-   {
-       return (entries.size());
-   }
+  @Override
+  protected void put(WindowKey key, MarkupFragment value)
+  {
+    boolean canInsert = false;
 
-   /*
-    * Returns the defined Max Cache Size.
-    */
-   protected int getCacheMaxSize()
-   {
-       return (cacheMaxSize);
-   }
+    // System.out.println("put asked for key " + key + " duration " + (value.expirationTimeMillis - System.currentTimeMillis()));
 
-   /*
-    * Returns the defined Max Cache Size.
-    */
-   protected void setCacheMaxSize(int cacheMaxSize)
-   {
-       this.cacheMaxSize = cacheMaxSize;
-   }
+    if (value.expirationTimeMillis > System.currentTimeMillis()) {
+      if ((entries.size() < cacheMaxSize))
+        canInsert = true;
 
-   /*
-    * Clear Cache (should be called by JMX in urgently mode.
-    */
-   protected void clearCache()
-   {
-          if (scheduled != null)
+      if (canInsert) {
+        entries.put(key, value);
+        if (log.isTraceEnabled())
+          log.trace("Cached markup for portlet " + key);
+
+        // System.out.println("Cached markup for portlet " + key);
+      }
+    }
+  }
+
+  public void start()
+  {
+    if (scheduled == null)
+    {
+      log.debug("Starting cache cleaner with a period of " + cleanupCache + " seconds");
+      scheduled = scheduler.scheduleWithFixedDelay(new Runnable()
+      {
+        public void run()
+        {
+          long now = System.currentTimeMillis();
+          for (Iterator<Map.Entry<WindowKey, MarkupFragment>> i = entries.entrySet().iterator(); i.hasNext();)
           {
-             stop();
-             entries.clear();
-             start();
-          }
-          else
-              entries.clear();
-   }
-
-   /*
-    * Did Cache contains the following key (do not remove old values).
-    */
-   protected boolean containsKey(WindowKey key)
-   {
-          return (entries.containsKey(key));
-   }
-
-
-   @Override
-   protected MarkupFragment get(WindowKey key)
-   {
-     // System.out.println("get asked for key " + key);
-
-     MarkupFragment value = entries.get(key);
-     if (value != null)
-     {
-       if (value.expirationTimeMillis > System.currentTimeMillis())
-       {
-         if (log.isTraceEnabled())
-           log.trace("Using cached markup for portlet " + key);
-         return value;
-       }
-       if (log.isTraceEnabled())
-         log.trace("Expired markup for portlet " + key);
-       entries.remove(key);
-       return null;
-     }
-     return null;
-   }
-
-   @Override
-   protected void put(WindowKey key, MarkupFragment value)
-   {
-       boolean canInsert = false;
-
-       // System.out.println("put asked for key " + key + " duration " + (value.expirationTimeMillis - System.currentTimeMillis()));
-
-        if (value.expirationTimeMillis > System.currentTimeMillis()) {
-                if ((entries.size() < cacheMaxSize))
-                    canInsert = true;
-
-                if (canInsert) {
-                    entries.put(key, value);
-                    if (log.isTraceEnabled())
-                        log.trace("Cached markup for portlet " + key);
-
-                // System.out.println("Cached markup for portlet " + key);
-            }
-        }
-   }
-
-   public void start()
-   {
-      if (scheduled == null)
-      {
-         log.debug("Starting cache cleaner with a period of " + cleanupCache + " seconds");
-         scheduled = scheduler.scheduleWithFixedDelay(new Runnable()
-         {
-            public void run()
+            Map.Entry<WindowKey, MarkupFragment> entry = i.next();
+            if (entry.getValue().expirationTimeMillis < now)
             {
-               long now = System.currentTimeMillis();
-               for (Iterator<Map.Entry<WindowKey, MarkupFragment>> i = entries.entrySet().iterator(); i.hasNext();)
-               {
-                  Map.Entry<WindowKey, MarkupFragment> entry = i.next();
-                  if (entry.getValue().expirationTimeMillis < now)
-                  {
-                          if (log.isTraceEnabled())
-                                  log.trace("Removing expired entry " + entry.getKey().getWindowId());
+              if (log.isTraceEnabled())
+                log.trace("Removing expired entry " + entry.getKey().getWindowId());
 
-                          // System.out.println("Removing expired entry " + entry.getKey().getWindowId());
+              // System.out.println("Removing expired entry " + entry.getKey().getWindowId());
 
-                          i.remove();
-                  }
-               }
+              i.remove();
             }
-         }, cleanupCache, cleanupCache, TimeUnit.SECONDS);
-      }
-   }
+          }
+        }
+      }, cleanupCache, cleanupCache, TimeUnit.SECONDS);
+    }
+  }
 
-   public void stop()
-   {
-      if (scheduled != null)
-      {
-         log.debug("Stopping cache cleaner");
-         scheduled.cancel(false);
-         scheduled = null;
-      }
-   }
+  public void stop()
+  {
+    if (scheduled != null)
+    {
+      log.debug("Stopping cache cleaner");
+      scheduled.cancel(false);
+      scheduled = null;
+    }
+  }
 }

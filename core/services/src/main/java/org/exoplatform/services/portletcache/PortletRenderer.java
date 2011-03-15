@@ -29,46 +29,46 @@ import org.exoplatform.services.log.Log;
 class PortletRenderer implements Loader<WindowKey, MarkupFragment, PortletRenderContext>
 {
 
-   /** . */
-   private final Log log;
+  /** . */
+  private final Log log;
 
-   PortletRenderer(Log log)
-   {
-      this.log = log;
-   }
+  PortletRenderer(Log log)
+  {
+    this.log = log;
+  }
 
-   public MarkupFragment retrieve(PortletRenderContext context, WindowKey key) throws Exception
-   {
-      BufferedRenderResponse bufferedResp = new BufferedRenderResponse(context.resp);
-      context.chain.doFilter(context.req, bufferedResp);
+  public MarkupFragment retrieve(PortletRenderContext context, WindowKey key) throws Exception
+  {
+    BufferedRenderResponse bufferedResp = new BufferedRenderResponse(context.resp);
+    context.chain.doFilter(context.req, bufferedResp);
 
-      //
-      long now = System.currentTimeMillis();
+    //
+    long now = System.currentTimeMillis();
 
-      //
-      String expirationCache = bufferedResp.getExpirationCache();
-      long expirationCacheMillis = now;
-      if (expirationCache != null)
+    //
+    String expirationCache = bufferedResp.getExpirationCache();
+    long expirationCacheMillis = now;
+    if (expirationCache != null)
+    {
+      try
       {
-         try
-         {
-            int expirationCacheSec = Integer.parseInt(expirationCache);
-            if (expirationCacheSec == -1)
-            {
-               expirationCacheMillis = Long.MAX_VALUE;
-            }
-            else if (expirationCacheSec > 0)
-            {
-               expirationCacheMillis += 1000 * expirationCacheSec;
-            }
-         }
-         catch (NumberFormatException e)
-         {
-            log.warn("Incorrect expiration cache value " + expirationCache);
-         }
+        int expirationCacheSec = Integer.parseInt(expirationCache);
+        if (expirationCacheSec == -1)
+        {
+          expirationCacheMillis = Long.MAX_VALUE;
+        }
+        else if (expirationCacheSec > 0)
+        {
+          expirationCacheMillis += 1000 * expirationCacheSec;
+        }
       }
+      catch (NumberFormatException e)
+      {
+        log.warn("Incorrect expiration cache value " + expirationCache);
+      }
+    }
 
-      //
-      return new MarkupFragment(expirationCacheMillis, bufferedResp.getBytes());
-   }
+    //
+    return new MarkupFragment(expirationCacheMillis, bufferedResp.getBytes());
+  }
 }

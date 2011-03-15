@@ -27,15 +27,15 @@ class MarkupFragment
 {
 
 
-   /** . */
-   final long expirationTimeMillis;
+  /** . */
+  final long expirationTimeMillis;
 
-   /** . */
-   final byte[] data;
+  /** . */
+  final byte[] data;
 
-   MarkupFragment(long expirationTimeMillis, byte[] data)
-   {
-      this.expirationTimeMillis = expirationTimeMillis;
-      this.data = data;
-   }
+  MarkupFragment(long expirationTimeMillis, byte[] data)
+  {
+    this.expirationTimeMillis = expirationTimeMillis;
+    this.data = data;
+  }
 }

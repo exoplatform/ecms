@@ -33,237 +33,237 @@ import org.exoplatform.test.BasicTestCase;
  */
 public class TestPortletFutureCache extends BasicTestCase {
 
-    private static final Log log = ExoLogger.getLogger(TestPortletFutureCache.class);
+  private static final Log log = ExoLogger.getLogger(TestPortletFutureCache.class);
 
-    /** The Portlet Future Cache */
-    private PortletFutureCache portletFutureCache;
+  /** The Portlet Future Cache */
+  private PortletFutureCache portletFutureCache;
 
-    private WindowKey windowKey1;
-    private MarkupFragment fragment1;
+  private WindowKey windowKey1;
+  private MarkupFragment fragment1;
 
-    private WindowKey windowKey2;
-    private MarkupFragment fragment2;
+  private WindowKey windowKey2;
+  private MarkupFragment fragment2;
 
-    private WindowKey windowKey3;
-    private MarkupFragment fragment3;
+  private WindowKey windowKey3;
+  private MarkupFragment fragment3;
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
-     */
-    public void setUp() throws Exception {
-        super.setUp();
+  /*
+   * (non-Javadoc)
+   *
+   * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
+   */
+  public void setUp() throws Exception {
+    super.setUp();
 
+  }
+
+  private void injectContents(long  content1Duration, long content2Duration, long content3Duration) {
+    windowKey1 = new WindowKey("wid1", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
+    fragment1 = new MarkupFragment(System.currentTimeMillis() +  content1Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
+
+    portletFutureCache.put(windowKey1, fragment1);
+
+    if (content2Duration != -1) {
+      windowKey2 = new WindowKey("wid2", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
+      fragment2 = new MarkupFragment(System.currentTimeMillis() + content2Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
+
+      portletFutureCache.put(windowKey2, fragment2);
     }
 
-    private void injectContents(long  content1Duration, long content2Duration, long content3Duration) {
-        windowKey1 = new WindowKey("wid1", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
-        fragment1 = new MarkupFragment(System.currentTimeMillis() +  content1Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
+    if (content3Duration != -1) {
+      windowKey3 = new WindowKey("wid3", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
+      fragment3 = new MarkupFragment(System.currentTimeMillis() + content3Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
 
-        portletFutureCache.put(windowKey1, fragment1);
-
-        if (content2Duration != -1) {
-            windowKey2 = new WindowKey("wid2", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
-            fragment2 = new MarkupFragment(System.currentTimeMillis() + content2Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
-
-            portletFutureCache.put(windowKey2, fragment2);
-        }
-
-        if (content3Duration != -1) {
-            windowKey3 = new WindowKey("wid3", WindowState.NORMAL, PortletMode.VIEW, Locale.FRENCH, new HashMap<String, String[]>(), new HashMap<String, String[]>());
-            fragment3 = new MarkupFragment(System.currentTimeMillis() + content3Duration, new byte[10]); // New Fragment, to be kept FRAGMENT_DURATION
-
-            portletFutureCache.put(windowKey3, fragment3);
-        }
-
-
+      portletFutureCache.put(windowKey3, fragment3);
     }
 
-    /**
-     * Test Cache with size limits
-     *
-     * @throws Exception
-     *             the exception
-     */
-    public void testCacheFixedSize() throws Exception {
 
-        MarkupFragment nfragment;
+  }
 
-        portletFutureCache = new PortletFutureCache(log, 1, 2);
-        portletFutureCache.start();
+  /**
+   * Test Cache with size limits
+   *
+   * @throws Exception
+   *             the exception
+   */
+  public void testCacheFixedSize() throws Exception {
 
-        // 900ms, 1100ms, 2100ms retentions for objects
-        injectContents(900, 1100, 2100);
+    MarkupFragment nfragment;
 
-        // CacheSize should be 2
-        assertEquals(2, portletFutureCache.getCacheSize());
+    portletFutureCache = new PortletFutureCache(log, 1, 2);
+    portletFutureCache.start();
 
-        // Should get back fragment1
-        nfragment = portletFutureCache.get(windowKey1);
-        assertSame(fragment1, nfragment);
+    // 900ms, 1100ms, 2100ms retentions for objects
+    injectContents(900, 1100, 2100);
 
-        // Should get back fragment2
-        nfragment = portletFutureCache.get(windowKey2);
-        assertSame(fragment2, nfragment);
+    // CacheSize should be 2
+    assertEquals(2, portletFutureCache.getCacheSize());
 
-        // Should get back fragment3
-        nfragment = portletFutureCache.get(windowKey3);
-        assertNull(nfragment);
+    // Should get back fragment1
+    nfragment = portletFutureCache.get(windowKey1);
+    assertSame(fragment1, nfragment);
 
-        portletFutureCache.stop();
-    }
+    // Should get back fragment2
+    nfragment = portletFutureCache.get(windowKey2);
+    assertSame(fragment2, nfragment);
 
-    /**
-     * Test Cache when cleaned
-     *
-     * @throws Exception
-     *             the exception
-     */
-    public void testCacheCleared() throws Exception {
+    // Should get back fragment3
+    nfragment = portletFutureCache.get(windowKey3);
+    assertNull(nfragment);
 
-        MarkupFragment nfragment;
+    portletFutureCache.stop();
+  }
 
-        portletFutureCache = new PortletFutureCache(log, 1);
-        portletFutureCache.start();
+  /**
+   * Test Cache when cleaned
+   *
+   * @throws Exception
+   *             the exception
+   */
+  public void testCacheCleared() throws Exception {
 
-        // 900ms, 1100ms, 2100ms retentions for objects
-        injectContents(900, 1100, 2100);
+    MarkupFragment nfragment;
 
-        // CacheSize should be 3
-        assertEquals(3, portletFutureCache.getCacheSize());
+    portletFutureCache = new PortletFutureCache(log, 1);
+    portletFutureCache.start();
 
-        // Should get back fragment1
-        nfragment = portletFutureCache.get(windowKey1);
-        assertSame(fragment1, nfragment);
+    // 900ms, 1100ms, 2100ms retentions for objects
+    injectContents(900, 1100, 2100);
 
-        // Should get back fragment2
-        nfragment = portletFutureCache.get(windowKey2);
-        assertSame(fragment2, nfragment);
+    // CacheSize should be 3
+    assertEquals(3, portletFutureCache.getCacheSize());
 
-        // Should get back fragment3
-        nfragment = portletFutureCache.get(windowKey3);
-        assertSame(fragment3, nfragment);
+    // Should get back fragment1
+    nfragment = portletFutureCache.get(windowKey1);
+    assertSame(fragment1, nfragment);
 
-        portletFutureCache.clearCache();
+    // Should get back fragment2
+    nfragment = portletFutureCache.get(windowKey2);
+    assertSame(fragment2, nfragment);
 
-        // CacheSize should be 0
-        assertEquals(0, portletFutureCache.getCacheSize());
+    // Should get back fragment3
+    nfragment = portletFutureCache.get(windowKey3);
+    assertSame(fragment3, nfragment);
 
-        // Should not get back  fragment1
-        nfragment = portletFutureCache.get(windowKey1);
-        assertNull( nfragment);
+    portletFutureCache.clearCache();
 
-        // Should not get back  fragment2
-        nfragment = portletFutureCache.get(windowKey2);
-        assertNull(nfragment);
+    // CacheSize should be 0
+    assertEquals(0, portletFutureCache.getCacheSize());
 
-        // Should not get back  fragment3
-        nfragment = portletFutureCache.get(windowKey3);
-        assertNull(nfragment);
+    // Should not get back  fragment1
+    nfragment = portletFutureCache.get(windowKey1);
+    assertNull( nfragment);
 
-        portletFutureCache.stop();
-    }
+    // Should not get back  fragment2
+    nfragment = portletFutureCache.get(windowKey2);
+    assertNull(nfragment);
 
-    /**
-     * Test Cache Evictions during time
-     *
-     * @throws Exception
-     *             the exception
-     */
-    public void testCacheEvictions() throws Exception {
+    // Should not get back  fragment3
+    nfragment = portletFutureCache.get(windowKey3);
+    assertNull(nfragment);
 
-        MarkupFragment nfragment;
-        int cacheSize;
+    portletFutureCache.stop();
+  }
 
-        portletFutureCache = new PortletFutureCache(log, 1);
-        portletFutureCache.start();
+  /**
+   * Test Cache Evictions during time
+   *
+   * @throws Exception
+   *             the exception
+   */
+  public void testCacheEvictions() throws Exception {
 
-        // 750ms, 1250ms, 2500ms retentions for objects
-        injectContents(750, 1250, 2500);
+    MarkupFragment nfragment;
+    int cacheSize;
 
-        // CacheSize should be 3
-        assertEquals(3, portletFutureCache.getCacheSize());
+    portletFutureCache = new PortletFutureCache(log, 1);
+    portletFutureCache.start();
 
-        // Should get back fragment1
-        nfragment = portletFutureCache.get(windowKey1);
-        assertSame(fragment1, nfragment);
+    // 750ms, 1250ms, 2500ms retentions for objects
+    injectContents(750, 1250, 2500);
 
-        // Should get back fragment2
-        nfragment = portletFutureCache.get(windowKey2);
-        assertSame(fragment2, nfragment);
+    // CacheSize should be 3
+    assertEquals(3, portletFutureCache.getCacheSize());
 
-        // Should get back fragment3
-        nfragment = portletFutureCache.get(windowKey3);
-        assertSame(fragment3, nfragment);
+    // Should get back fragment1
+    nfragment = portletFutureCache.get(windowKey1);
+    assertSame(fragment1, nfragment);
 
-        // CacheSize should be 3
-        assertEquals(3, portletFutureCache.getCacheSize());
+    // Should get back fragment2
+    nfragment = portletFutureCache.get(windowKey2);
+    assertSame(fragment2, nfragment);
 
-        Thread.sleep(1050); // Sleep 1050ms -> time for first cleanup pass
+    // Should get back fragment3
+    nfragment = portletFutureCache.get(windowKey3);
+    assertSame(fragment3, nfragment);
 
-        // CacheSize should be 2 (2100 + 1100)
-        cacheSize = portletFutureCache.getCacheSize();
-        System.out.println("After first eviction pass, cacheSize=" + cacheSize);
-        assertEquals(2, cacheSize);
+    // CacheSize should be 3
+    assertEquals(3, portletFutureCache.getCacheSize());
 
-        // fragment1 shouldn't exist anymore
-        nfragment = portletFutureCache.get(windowKey1);
-        assertNull( nfragment);
+    Thread.sleep(1050); // Sleep 1050ms -> time for first cleanup pass
 
-        // Should get back fragment2
-        nfragment = portletFutureCache.get(windowKey2);
-        assertSame(fragment2, nfragment);
+    // CacheSize should be 2 (2100 + 1100)
+    cacheSize = portletFutureCache.getCacheSize();
+    System.out.println("After first eviction pass, cacheSize=" + cacheSize);
+    assertEquals(2, cacheSize);
 
-        // Should get back fragment3
-        nfragment = portletFutureCache.get(windowKey3);
-        assertSame(fragment3, nfragment);
+    // fragment1 shouldn't exist anymore
+    nfragment = portletFutureCache.get(windowKey1);
+    assertNull( nfragment);
 
-        // CacheSize should be 2 (2100 + 1100)
-        cacheSize = portletFutureCache.getCacheSize();
-        System.out.println("After first eviction pass and gets, cacheSize=" + cacheSize);
-        assertEquals(2, cacheSize);
+    // Should get back fragment2
+    nfragment = portletFutureCache.get(windowKey2);
+    assertSame(fragment2, nfragment);
 
-        Thread.sleep(1050); // Sleep 1050ms -> time for second  cleanup pass
+    // Should get back fragment3
+    nfragment = portletFutureCache.get(windowKey3);
+    assertSame(fragment3, nfragment);
 
-        // CacheSize should be 1 (2100)
-        cacheSize = portletFutureCache.getCacheSize();
-        System.out.println("After second eviction pass, cacheSize=" + cacheSize);
-        assertEquals(1, cacheSize);
+    // CacheSize should be 2 (2100 + 1100)
+    cacheSize = portletFutureCache.getCacheSize();
+    System.out.println("After first eviction pass and gets, cacheSize=" + cacheSize);
+    assertEquals(2, cacheSize);
 
-        // fragment1 shouldn't exist anymore
-        nfragment = portletFutureCache.get(windowKey1);
-        assertNull( nfragment);
+    Thread.sleep(1050); // Sleep 1050ms -> time for second  cleanup pass
 
-        // fragment2 shouldn't exist anymore
-        nfragment = portletFutureCache.get(windowKey2);
-        assertNull(nfragment);
+    // CacheSize should be 1 (2100)
+    cacheSize = portletFutureCache.getCacheSize();
+    System.out.println("After second eviction pass, cacheSize=" + cacheSize);
+    assertEquals(1, cacheSize);
 
-        // Should get back fragment3
-        nfragment = portletFutureCache.get(windowKey3);
-        assertSame(fragment3, nfragment);
+    // fragment1 shouldn't exist anymore
+    nfragment = portletFutureCache.get(windowKey1);
+    assertNull( nfragment);
 
-        // CacheSize should be 1 (2100)
-        cacheSize = portletFutureCache.getCacheSize();
-        System.out.println("After second eviction pass and gets, cacheSize=" + cacheSize);
-        assertEquals(1, cacheSize);
+    // fragment2 shouldn't exist anymore
+    nfragment = portletFutureCache.get(windowKey2);
+    assertNull(nfragment);
 
-        Thread.sleep(1050); // Sleep 1050ms -> time for third  cleanup pass
+    // Should get back fragment3
+    nfragment = portletFutureCache.get(windowKey3);
+    assertSame(fragment3, nfragment);
 
-        // CacheSize should be 0, no more entries in cache
-        cacheSize = portletFutureCache.getCacheSize();
-        System.out.println("After third eviction pass, cacheSize=" + cacheSize);
-        assertEquals(0, cacheSize);
+    // CacheSize should be 1 (2100)
+    cacheSize = portletFutureCache.getCacheSize();
+    System.out.println("After second eviction pass and gets, cacheSize=" + cacheSize);
+    assertEquals(1, cacheSize);
 
-        portletFutureCache.stop();
-    }
+    Thread.sleep(1050); // Sleep 1050ms -> time for third  cleanup pass
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see junit.framework.TestCase#tearDown()
-     */
-    public void tearDown() throws Exception {
-        super.tearDown();
-    }
+    // CacheSize should be 0, no more entries in cache
+    cacheSize = portletFutureCache.getCacheSize();
+    System.out.println("After third eviction pass, cacheSize=" + cacheSize);
+    assertEquals(0, cacheSize);
+
+    portletFutureCache.stop();
+  }
+
+  /*
+   * (non-Javadoc)
+   *
+   * @see junit.framework.TestCase#tearDown()
+   */
+  public void tearDown() throws Exception {
+    super.tearDown();
+  }
 }

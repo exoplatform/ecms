@@ -32,86 +32,80 @@ import java.util.Map;
 class Util
 {
 
-   static Map<String, String[]> clone(Map<String, String[]> map)
-   {
-      if (map.isEmpty())
-      {
-         return Collections.emptyMap();
-      }
-      else
-      {
-         Map<String, String[]> copy = new HashMap<String, String[]>(map);
-         for (Map.Entry<String, String[]> entry : copy.entrySet())
-         {
-            entry.setValue(entry.getValue().clone());
-         }
-         return copy;
-      }
-   }
+  static Map<String, String[]> clone(Map<String, String[]> map)
+  {
+    if (map.isEmpty())
+    {
+      return Collections.emptyMap();
+    }
+    Map<String, String[]> copy = new HashMap<String, String[]>(map);
+    for (Map.Entry<String, String[]> entry : copy.entrySet())
+    {
+      entry.setValue(entry.getValue().clone());
+    }
+    return copy;
+  }
 
-   static int hashCode(Map<String, String[]> map)
-   {
-      int hashCode = 0;
-      if (map.size() > 0)
+  static int hashCode(Map<String, String[]> map)
+  {
+    int hashCode = 0;
+    if (map.size() > 0)
+    {
+      for (Map.Entry<String, String[]> parameter : map.entrySet())
       {
-         for (Map.Entry<String, String[]> parameter : map.entrySet())
-         {
-            int parameterHashCode = parameter.getKey().hashCode();
-            for (String parameterValue : parameter.getValue())
-            {
-               parameterHashCode = parameterHashCode * 43 + parameterValue.hashCode();
-            }
-            hashCode = hashCode * 43 + parameterHashCode;
-         }
+        int parameterHashCode = parameter.getKey().hashCode();
+        for (String parameterValue : parameter.getValue())
+        {
+          parameterHashCode = parameterHashCode * 43 + parameterValue.hashCode();
+        }
+        hashCode = hashCode * 43 + parameterHashCode;
       }
-      return hashCode;
-   }
+    }
+    return hashCode;
+  }
 
-   static boolean equals(Map<String, String[]> map1, Map<String, String[]> map2)
-   {
-      if (map1.keySet().equals(map2.keySet()))
+  static boolean equals(Map<String, String[]> map1, Map<String, String[]> map2)
+  {
+    if (map1.keySet().equals(map2.keySet()))
+    {
+      for (Map.Entry<String, String[]> parameter : map1.entrySet())
       {
-         for (Map.Entry<String, String[]> parameter : map1.entrySet())
-         {
-            String[] thatParameterValues = map2.get(parameter.getKey());
-            if (thatParameterValues != null)
-            {
-               if (!Arrays.equals(parameter.getValue(), thatParameterValues))
-               {
-                  return false;
-               }
-            }
-         }
-         return true;
+        String[] thatParameterValues = map2.get(parameter.getKey());
+        if (thatParameterValues != null)
+        {
+          if (!Arrays.equals(parameter.getValue(), thatParameterValues))
+          {
+            return false;
+          }
+        }
       }
-      else
-      {
-         return false;
-      }
-   }
+      return true;
+    }
+    return false;
+  }
 
-   static void toString(Map<String, String[]> map, StringBuilder sb)
-   {
-      sb.append('{');
-      for (Iterator<Map.Entry<String, String[]>> i = map.entrySet().iterator();i.hasNext();)
+  static void toString(Map<String, String[]> map, StringBuilder sb)
+  {
+    sb.append('{');
+    for (Iterator<Map.Entry<String, String[]>> i = map.entrySet().iterator();i.hasNext();)
+    {
+      Map.Entry<String, String[]> entry = i.next();
+      sb.append(entry.getKey()).append('=').append('[');
+      String[] value = entry.getValue();
+      for (int j = 0;j < value.length;j++)
       {
-         Map.Entry<String, String[]> entry = i.next();
-         sb.append(entry.getKey()).append('=').append('[');
-         String[] value = entry.getValue();
-         for (int j = 0;j < value.length;j++)
-         {
-            if (j > 0)
-            {
-               sb.append(',');
-            }
-            sb.append(value[j]);
-         }
-         sb.append(']');
-         if (i.hasNext())
-         {
-            sb.append(',');
-         }
+        if (j > 0)
+        {
+          sb.append(',');
+        }
+        sb.append(value[j]);
       }
-      sb.append('}');
-   }
+      sb.append(']');
+      if (i.hasNext())
+      {
+        sb.append(',');
+      }
+    }
+    sb.append('}');
+  }
 }

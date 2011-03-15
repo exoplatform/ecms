@@ -30,19 +30,19 @@ import javax.portlet.filter.FilterChain;
 class PortletRenderContext
 {
 
-   /** . */
-   final RenderRequest req;
+  /** . */
+  final RenderRequest req;
 
-   /** . */
-   final RenderResponse resp;
+  /** . */
+  final RenderResponse resp;
 
-   /** . */
-   final FilterChain chain;
+  /** . */
+  final FilterChain chain;
 
-   PortletRenderContext(RenderRequest req, RenderResponse resp, FilterChain chain)
-   {
-      this.req = req;
-      this.resp = resp;
-      this.chain = chain;
-   }
+  PortletRenderContext(RenderRequest req, RenderResponse resp, FilterChain chain)
+  {
+    this.req = req;
+    this.resp = resp;
+    this.chain = chain;
+  }
 }

@@ -24,52 +24,52 @@ import org.exoplatform.test.BasicTestCase;
 
 public class TestFragmentCacheService extends BasicTestCase
 {
-    private static final Log log = ExoLogger.getLogger(TestFragmentCacheService.class);
+  private static final Log log = ExoLogger.getLogger(TestFragmentCacheService.class);
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
-     */
-    public void setUp() throws Exception {
-        super.setUp();
+  /*
+   * (non-Javadoc)
+   *
+   * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
+   */
+  public void setUp() throws Exception {
+    super.setUp();
 
+  }
+
+  /**
+   * Test Cache when cleaned
+   *
+   * @throws Exception
+   *             the exception
+   */
+  public void testInvalidArgumentException() throws Exception {
+
+    InitParams params = new InitParams();
+    FragmentCacheService service = new FragmentCacheService(params);
+
+    try {
+      service.setCacheSize(1000);
+    } catch (IllegalArgumentException e) {
+      fail("Shouldn't raise an IllegalArgumentException");
     }
 
-    /**
-     * Test Cache when cleaned
-     *
-     * @throws Exception
-     *             the exception
-     */
-    public void testInvalidArgumentException() throws Exception {
-
-        InitParams params = new InitParams();
-        FragmentCacheService service = new FragmentCacheService(params);
-
-        try {
-            service.setCacheSize(1000);
-       } catch (IllegalArgumentException e) {
-           fail("Shouldn't raise an IllegalArgumentException");
-       }
-
-        try {
-            service.setCacheSize(0);
-            fail("Should raise an IllegalArgumentException");
-       } catch (IllegalArgumentException e) {
-       }
-
-
-
+    try {
+      service.setCacheSize(0);
+      fail("Should raise an IllegalArgumentException");
+    } catch (IllegalArgumentException e) {
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see junit.framework.TestCase#tearDown()
-     */
-    public void tearDown() throws Exception {
-        super.tearDown();
-    }
+
+
+  }
+
+  /*
+   * (non-Javadoc)
+   *
+   * @see junit.framework.TestCase#tearDown()
+   */
+  public void tearDown() throws Exception {
+    super.tearDown();
+  }
 
 }

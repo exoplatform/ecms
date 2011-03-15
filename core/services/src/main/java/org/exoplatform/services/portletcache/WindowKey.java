@@ -32,98 +32,98 @@ import javax.portlet.WindowState;
 class WindowKey
 {
 
-   /** . */
-   private final String windowId;
+  /** . */
+  private final String windowId;
 
-   /** . */
-   private final WindowState windowState;
+  /** . */
+  private final WindowState windowState;
 
-   /** . */
-   private final PortletMode portletMode;
+  /** . */
+  private final PortletMode portletMode;
 
-   /** . */
-   private final Locale locale;
+  /** . */
+  private final Locale locale;
 
-   /** . */
-   private final Map<String, String[]> parameters;
+  /** . */
+  private final Map<String, String[]> parameters;
 
-   /** . */
-   private final Map<String, String[]> query;
+  /** . */
+  private final Map<String, String[]> query;
 
-   /** . */
-   private final int hashCode;
+  /** . */
+  private final int hashCode;
 
-   WindowKey(String windowId, WindowState windowState, PortletMode portletMode, Locale locale, Map<String, String[]> parameters, Map<String, String[]> query)
-   {
+  WindowKey(String windowId, WindowState windowState, PortletMode portletMode, Locale locale, Map<String, String[]> parameters, Map<String, String[]> query)
+  {
 
-      // Clone parameter map
-      parameters = Util.clone(parameters);
-      query = Util.clone(query);
+    // Clone parameter map
+    parameters = Util.clone(parameters);
+    query = Util.clone(query);
 
-      // Compute hashCode;
-      int hashCode =
-         windowId.hashCode() ^
-         windowState.hashCode() ^
-         portletMode.hashCode() ^
-         locale.hashCode() ^
-         Util.hashCode(parameters) ^
-         Util.hashCode(query);
+    // Compute hashCode;
+    int hashCode =
+      windowId.hashCode() ^
+      windowState.hashCode() ^
+      portletMode.hashCode() ^
+      locale.hashCode() ^
+      Util.hashCode(parameters) ^
+      Util.hashCode(query);
 
-      //
-      this.windowId = windowId;
-      this.windowState = windowState;
-      this.portletMode = portletMode;
-      this.parameters = parameters;
-      this.locale = locale;
-      this.hashCode = hashCode;
-      this.query = query;
-   }
+    //
+    this.windowId = windowId;
+    this.windowState = windowState;
+    this.portletMode = portletMode;
+    this.parameters = parameters;
+    this.locale = locale;
+    this.hashCode = hashCode;
+    this.query = query;
+  }
 
-   public String getWindowId()
-   {
-      return windowId;
-   }
+  public String getWindowId()
+  {
+    return windowId;
+  }
 
-   @Override
-   public boolean equals(Object obj)
-   {
-      if (obj == this)
-      {
-         return true;
-      }
-      if (obj instanceof WindowKey)
-      {
-         WindowKey that = (WindowKey)obj;
-         return windowId.equals(that.windowId) &&
-             windowState.equals(that.windowState) &&
-             portletMode.equals(that.portletMode) &&
-             locale.equals(that.locale) &&
-             Util.equals(parameters, that.parameters) &&
-             Util.equals(query, that.query);
-      }
-      return false;
-   }
+  @Override
+  public boolean equals(Object obj)
+  {
+    if (obj == this)
+    {
+      return true;
+    }
+    if (obj instanceof WindowKey)
+    {
+      WindowKey that = (WindowKey)obj;
+      return windowId.equals(that.windowId) &&
+      windowState.equals(that.windowState) &&
+      portletMode.equals(that.portletMode) &&
+      locale.equals(that.locale) &&
+      Util.equals(parameters, that.parameters) &&
+      Util.equals(query, that.query);
+    }
+    return false;
+  }
 
-   @Override
-   public int hashCode()
-   {
-      return hashCode;
-   }
+  @Override
+  public int hashCode()
+  {
+    return hashCode;
+  }
 
-   @Override
-   public String toString()
-   {
-      StringBuilder sb = new StringBuilder("WindowKey[");
-      sb.append("windowId").append('=').append(windowId).append(',');
-      sb.append("windowState").append('=').append(windowState).append(',');
-      sb.append("portletMode").append('=').append(portletMode).append(',');
-      sb.append("locale").append('=').append(locale).append(',');
-      sb.append("parameters").append('=');
-      Util.toString(parameters, sb);
-      sb.append(',');
-      sb.append("query").append('=');
-      Util.toString(query, sb);
-      sb.append(']');
-      return sb.toString();
-   }
+  @Override
+  public String toString()
+  {
+    StringBuilder sb = new StringBuilder("WindowKey[");
+    sb.append("windowId").append('=').append(windowId).append(',');
+    sb.append("windowState").append('=').append(windowState).append(',');
+    sb.append("portletMode").append('=').append(portletMode).append(',');
+    sb.append("locale").append('=').append(locale).append(',');
+    sb.append("parameters").append('=');
+    Util.toString(parameters, sb);
+    sb.append(',');
+    sb.append("query").append('=');
+    Util.toString(query, sb);
+    sb.append(']');
+    return sb.toString();
+  }
 }
